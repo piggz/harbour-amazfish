@@ -23,7 +23,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/qaesencryption.cpp \
     src/bippair.cpp \
     src/bipservice.cpp \
-    src/bipinfoservice.cpp
+    src/bipinfoservice.cpp \
+    src/mibandservice.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -54,4 +55,5 @@ HEADERS += \
     src/qaesencryption.h \
     src/bippair.h \
     src/bipservice.h \
-    src/bipinfoservice.h
+    src/bipinfoservice.h \
+    src/mibandservice.h

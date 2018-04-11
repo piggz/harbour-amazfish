@@ -31,10 +31,6 @@
         <source>Connected to watch...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Found amazfit watch, connecting..</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CoverPage</name>

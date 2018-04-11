@@ -6,6 +6,7 @@
 #include <QLowEnergyController>
 
 #include "bipinfoservice.h"
+#include "mibandservice.h"
 
 class BipInterface : public QObject
 {
@@ -26,6 +27,7 @@ public:
     QString connectionState() const;
 
     Q_INVOKABLE BipInfoService *infoService() const;
+    Q_INVOKABLE MiBandService *miBandService() const;
 
 private:
     bool m_ready = false;
@@ -36,6 +38,7 @@ private:
     void updateServiceController();
 
     BipInfoService *m_infoService = nullptr;
+    MiBandService *m_mibandService = nullptr;
     QList<BipService *>m_genericServices;
 
 Q_SIGNALS:

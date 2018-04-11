@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
     BipInterface bipInterface;
 
     qmlRegisterType<BipInfoService>();
+    qmlRegisterType<MiBandService>();
+
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BipPair", &bipPair);
     view->rootContext()->setContextProperty("BipInterface", &bipInterface);

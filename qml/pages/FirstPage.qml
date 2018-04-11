@@ -54,7 +54,8 @@ Page {
             repeat: true
             running: true
             onTriggered: {
-                //BipInterface.infoService().refreshInformation();
+                BipInterface.infoService().refreshInformation();
+                BipInterface.miBandService().requestGPSVersion();
             }
         }
 
@@ -107,6 +108,11 @@ Page {
             }
             Label {
                 text: BipInterface.infoService().softwareRevision
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeLarge
+            }
+            Label {
+                text: "GPS:" + BipInterface.miBandService().gpsVersion
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }

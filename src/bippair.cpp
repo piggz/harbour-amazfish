@@ -40,30 +40,6 @@ void BipPair::scanFinished()
     }
 }
 
-#if 0
-void BipPair::discoveredPeripheral(GatoPeripheral *peripheral, int rssi)
-{
-    qDebug() << "Found" << peripheral->address() << peripheral->name();
-
-    if (peripheral->address().toString().startsWith("CE:03")) {
-        qDebug() << "Found amazfit";
-        setStatus(tr("Found amazfit watch, connecting.."));
-
-        manager.stopScan();
-
-        m_peripheral = peripheral;
-        m_peripheral->connectPeripheral();
-
-        if (m_peripheral->state() == GatoPeripheral::StateConnected) {
-            qDebug() << "Connected!";
-            m_peripheral->discoverServices();
-        } else {
-            qDebug() << "Unable to connect";
-        }
-    }
-}
-#endif
-
 void BipPair::foundDevice(const QBluetoothDeviceInfo &device)
 {
     qDebug() << "Found" << device.address() << device.name();
