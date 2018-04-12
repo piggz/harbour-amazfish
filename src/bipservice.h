@@ -80,6 +80,9 @@ public:
     Q_INVOKABLE bool ready() const;
     Q_SIGNAL void characteristicChanged(const QLowEnergyCharacteristic &c, const QByteArray &value);
     Q_SIGNAL void characteristicRead(const QLowEnergyCharacteristic &c, const QByteArray &value);
+    Q_SIGNAL void descriptorWritten(const QLowEnergyDescriptor &d, const QByteArray &value);
+
+    Q_SIGNAL void readyChanged(bool r);
 
     void connectToService();
     void setController(QLowEnergyController *controller);
@@ -96,6 +99,9 @@ private:
     Q_SLOT void serviceStateChanged(QLowEnergyService::ServiceState s);
     Q_SLOT void characteristicChangedInt(const QLowEnergyCharacteristic &c, const QByteArray &value);
     Q_SLOT void characteristicReadInt(const QLowEnergyCharacteristic &c, const QByteArray &value);
+    Q_SLOT void characteristicWrittenInt(const QLowEnergyCharacteristic &c, const QByteArray &value);
+
+    Q_SLOT void descriptorWrittenInt(const QLowEnergyDescriptor &d, const QByteArray &value);
 
 };
 

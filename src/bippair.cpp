@@ -14,13 +14,11 @@ BipPair::BipPair()
     connect(m_deviceDiscoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this, &BipPair::scanFinished);
     connect(m_deviceDiscoveryAgent, &QBluetoothDeviceDiscoveryAgent::canceled, this, &BipPair::scanFinished);
 
-//    connect(&manager, &GatoCentralManager::discoveredPeripheral, this, &BipPair::discoveredPeripheral);
 }
 
 void BipPair::startScan()
 {
     m_deviceDiscoveryAgent->start();
-//    manager.scanForPeripherals(GatoCentralManager::PeripheralScanOptionAllowDuplicates);
     setStatus(tr("Searching for watch"));
 }
 void BipPair::scanError()

@@ -10,14 +10,14 @@ Page {
 
     ConfigurationValue {
         id: pairedAddress
-        key: "uk/co/piggz/amazfish/pairedAddress"
+        key: "/uk/co/piggz/amazfish/pairedAddress"
         defaultValue: ""
     }
 
 
     ConfigurationValue {
         id: pairedName
-        key: "uk/co/piggz/amazfish/pairedName"
+        key: "/uk/co/piggz/amazfish/pairedName"
         defaultValue: ""
     }
 

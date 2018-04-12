@@ -5,13 +5,13 @@ BipInterface::BipInterface()
     m_infoService = new BipInfoService(this);
     m_mibandService = new MiBandService(this);
 
-    //m_genericServices.append(new BipService("{0000FEE1-0000-1000-8000-00805f9b34fb}", this)); //MiBand2 Service
+    m_genericServices.append(new BipService("{0000FEE1-0000-1000-8000-00805f9b34fb}", this)); //MiBand2 Service
     //m_genericServices.append(new BipService("{00001530-0000-3512-2118-0009af100700}", this)); //Firmware Service
-    m_genericServices.append(new BipService("{00001800-0000-1000-8000-00805f9b34fb}", this)); //Generic Access
-    m_genericServices.append(new BipService("{00001801-0000-1000-8000-00805f9b34fb}", this)); //Generic Attribute
-    m_genericServices.append(new BipService("{00001802-0000-1000-8000-00805f9b34fb}", this)); //Immediate Alert
-    m_genericServices.append(new BipService("{0000180d-0000-1000-8000-00805f9b34fb}", this)); //Heart rate service
-    m_genericServices.append(new BipService("{00001811-0000-1000-8000-00805f9b34fb}", this)); //Alert notification service
+    //m_genericServices.append(new BipService("{00001800-0000-1000-8000-00805f9b34fb}", this)); //Generic Access
+    //m_genericServices.append(new BipService("{00001801-0000-1000-8000-00805f9b34fb}", this)); //Generic Attribute
+    //m_genericServices.append(new BipService("{00001802-0000-1000-8000-00805f9b34fb}", this)); //Immediate Alert
+    //m_genericServices.append(new BipService("{0000180d-0000-1000-8000-00805f9b34fb}", this)); //Heart rate service
+    //m_genericServices.append(new BipService("{00001811-0000-1000-8000-00805f9b34fb}", this)); //Alert notification service
     //m_genericServices.append(new BipService("{00003802-0000-1000-8000-00805f9b34fb}", this)); //Unknown
 
     m_connectionState = "disconnected";
