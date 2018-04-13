@@ -25,8 +25,8 @@ class MiBandService : public BipService
     Q_OBJECT
 public:
     MiBandService(QObject *parent);
-    const QString UUID_SERVICE_MIBAND = "{0000FEE0-0000-1000-8000-00805f9b34fb}";
-    const QString UUID_CHARACTERISTIC_MIBAND_CONFIGURATION = "{00000003-0000-3512-2118-0009af100700}";
+    static const char* UUID_SERVICE_MIBAND;
+    static const char* UUID_CHARACTERISTIC_MIBAND_CONFIGURATION;
 
     Q_PROPERTY(QString gpsVersion READ gpsVersion NOTIFY gpsVersionChanged())
 
@@ -35,7 +35,6 @@ public:
     const char COMMAND_REQUEST_GPS_VERSION = 0x0e;
 
     Q_INVOKABLE void requestGPSVersion();
-
     Q_INVOKABLE QString gpsVersion();
 
     Q_SIGNAL void gpsVersionChanged();

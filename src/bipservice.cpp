@@ -76,3 +76,14 @@ QLowEnergyService *BipService::service() const
 {
     return m_service;
 }
+
+void BipService::enableNotification(const QString &c)
+{
+    QLowEnergyCharacteristic characteristic = service()->characteristic(QBluetoothUuid(c));
+    QLowEnergyDescriptor notificationDesc = characteristic.descriptor(QBluetoothUuid::ClientCharacteristicConfiguration);
+    if (notificationDesc.isValid()) {
+        service()->writeDescriptor(notificationDesc, QByteArray::fromHex("0100"));
+    } else {
+        qDebug() << "notification is invalid";
+    }
+}

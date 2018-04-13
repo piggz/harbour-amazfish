@@ -7,6 +7,7 @@
 
 #include "bipinfoservice.h"
 #include "mibandservice.h"
+#include "miband2service.h"
 
 class BipInterface : public QObject
 {
@@ -28,7 +29,9 @@ public:
 
     Q_INVOKABLE BipInfoService *infoService() const;
     Q_INVOKABLE MiBandService *miBandService() const;
+    Q_INVOKABLE MiBand2Service *miBand2Service() const;
 
+    void enableNotifications();
 private:
     bool m_ready = false;
     QString m_connectionState;
@@ -39,6 +42,7 @@ private:
 
     BipInfoService *m_infoService = nullptr;
     MiBandService *m_mibandService = nullptr;
+    MiBand2Service *m_miband2Service = nullptr;
     QList<BipService *>m_genericServices;
 
 Q_SIGNALS:

@@ -82,7 +82,8 @@ public:
     Q_SIGNAL void characteristicRead(const QLowEnergyCharacteristic &c, const QByteArray &value);
 
     void connectToService();
-    void setController(QLowEnergyController *controller);
+    void setController(QLowEnergyController *controller);    
+    void enableNotification(const QString &c);
 
 protected:
     QLowEnergyService *service() const;

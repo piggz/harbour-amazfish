@@ -1,6 +1,9 @@
 #include "mibandservice.h"
 
-MiBandService::MiBandService(QObject *parent) : BipService("{0000fee0-0000-1000-8000-00805f9b34fb}", parent)
+const char* MiBandService::UUID_SERVICE_MIBAND = "{0000FEE0-0000-1000-8000-00805f9b34fb}";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION = "{00000003-0000-3512-2118-0009af100700}";
+
+MiBandService::MiBandService(QObject *parent) : BipService(UUID_SERVICE_MIBAND, parent)
 {
     connect(this, &BipService::characteristicChanged, this, &MiBandService::characteristicChanged);
 }
@@ -28,15 +31,11 @@ void MiBandService::requestGPSVersion()
 {
     qDebug() << "Ready" << ready();
     if (ready()) {
-        QLowEnergyCharacteristic c = service()->characteristic(QBluetoothUuid(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION));
-        QLowEnergyDescriptor notificationDesc = c.descriptor(QBluetoothUuid::ClientCharacteristicConfiguration);
-        if (notificationDesc.isValid()) {
-            qDebug() << "Requesting GPS";
-            service()->writeDescriptor(notificationDesc, QByteArray::fromHex("0100"));
-            service()->writeCharacteristic(c, QByteArray(&COMMAND_REQUEST_GPS_VERSION, 1), QLowEnergyService::WriteWithoutResponse);
-        }
+        QLowEnergyCharacteristic characteristic = service()->characteristic(QBluetoothUuid(QString(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION)));
+        service()->writeCharacteristic(characteristic, QByteArray(&COMMAND_REQUEST_GPS_VERSION, 1), QLowEnergyService::WriteWithoutResponse);
     }
 }
+
 
 QString MiBandService::gpsVersion()
 {
