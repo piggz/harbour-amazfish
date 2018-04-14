@@ -8,15 +8,17 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
+    property bool manualDisconnect: false
+
     ConfigurationValue {
         id: pairedAddress
-        key: "uk/co/piggz/amazfish/pairedAddress"
+        key: "/uk/co/piggz/amazfish/pairedAddress"
         defaultValue: ""
     }
 
     ConfigurationValue {
         id: pairedName
-        key: "uk/co/piggz/amazfish/pairedName"
+        key: "/uk/co/piggz/amazfish/pairedName"
         defaultValue: ""
     }
 
@@ -40,7 +42,15 @@ Page {
             MenuItem {
                 text: qsTr("Connect to watch")
                 onClicked: {
+                    manualDisconnect = false;
                     BipInterface.connectToDevice(pairedAddress.value);
+                }
+            }
+            MenuItem {
+                text: qsTr("Disconnect from watch")
+                onClicked: {
+                    manualDisconnect = true;
+                    BipInterface.disconnect();
                 }
             }
         }
@@ -54,8 +64,14 @@ Page {
             repeat: true
             running: true
             onTriggered: {
-                BipInterface.infoService().refreshInformation();
-                BipInterface.miBandService().requestGPSVersion();
+                if (BipInterface.connectionState == "disconnected" && manualDisconnect == false){
+                    BipInterface.connectToDevice(pairedAddress.value);
+                }
+
+                if (BipInterface.ready){
+                    BipInterface.infoService().refreshInformation();
+                    BipInterface.miBandService().requestGPSVersion();
+                }
             }
         }
 
@@ -116,6 +132,12 @@ Page {
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
+        }
+    }
+
+    Component.onCompleted: {
+        if (pairedAddress.value !== "") {
+            BipInterface.connectToDevice(pairedAddress.value);
         }
     }
 }

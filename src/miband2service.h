@@ -23,6 +23,22 @@ public:
     static const char* UUID_SERVICE_MIBAND2;
     static const char* UUID_CHARACTERISITIC_MIBAND2_AUTH;
 
+    const char AUTH_SEND_KEY = 0x01;
+    const char AUTH_REQUEST_RANDOM_AUTH_NUMBER = 0x02;
+    const char AUTH_SEND_ENCRYPTED_AUTH_NUMBER = 0x03;
+    const char AUTH_RESPONSE = 0x10;
+    const char AUTH_SUCCESS = 0x01;
+    const char AUTH_FAIL = 0x04;
+    const char AUTH_BYTE = 0x08;
+    const QByteArray AUTH_SECRET_KEY = "0123456789@ABCDE";
+
+    void initialise();
+
+private:
+    Q_SLOT void characteristicChanged(const QLowEnergyCharacteristic &characteristic, const QByteArray &value);
+//    Q_SLOT void serviceReady(bool r);
+
+    QByteArray handleAesAuth(QByteArray data, QByteArray secretKey);
 };
 
 #endif // MIBAND2SERVICE_H

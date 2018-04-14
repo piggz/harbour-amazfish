@@ -6,6 +6,7 @@ const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION = "{00000003
 MiBandService::MiBandService(QObject *parent) : BipService(UUID_SERVICE_MIBAND, parent)
 {
     connect(this, &BipService::characteristicChanged, this, &MiBandService::characteristicChanged);
+//    connect(this, &BipService::readyChanged, this, &MiBandService::serviceReady);
 }
 
 void MiBandService::characteristicChanged(const QLowEnergyCharacteristic &characteristic, const QByteArray &value)
@@ -41,3 +42,4 @@ QString MiBandService::gpsVersion()
 {
     return m_gpsVersion;
 }
+

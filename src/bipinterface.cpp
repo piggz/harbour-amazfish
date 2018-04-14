@@ -14,6 +14,10 @@ BipInterface::BipInterface()
     //m_genericServices.append(new BipService("{00001811-0000-1000-8000-00805f9b34fb}", this)); //Alert notification service
     //m_genericServices.append(new BipService("{00003802-0000-1000-8000-00805f9b34fb}", this)); //Unknown
 
+    connect(m_infoService, &BipService::readyChanged, this, &BipInterface::serviceReady);
+    connect(m_mibandService, &BipService::readyChanged, this, &BipInterface::serviceReady);
+    connect(m_miband2Service, &BipService::readyChanged, this, &BipInterface::serviceReady);
+
     m_connectionState = "disconnected";
 }
 
@@ -40,10 +44,6 @@ void BipInterface::connectToDevice(const QString &address)
             Q_FOREACH(BipService* s, m_genericServices) {
                 s->connectToService();
             }
-
-            m_ready = true;
-            emit readyChanged();
-
         });
 
         connect(m_controller, static_cast<void (QLowEnergyController::*)(QLowEnergyController::Error)>(&QLowEnergyController::error),
@@ -65,6 +65,13 @@ void BipInterface::connectToDevice(const QString &address)
     m_controller->connectToDevice();
     m_connectionState = "connecting";
     emit connectionStateChanged();
+}
+
+void BipInterface::disconnect()
+{
+    if (m_controller) {
+        m_controller->disconnectFromDevice();
+    }
 }
 
 bool BipInterface::ready() const
@@ -105,5 +112,23 @@ void BipInterface::updateServiceController()
 
 void BipInterface::enableNotifications()
 {
-    m_mibandService->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
+    m_miband2Service->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
+}
+
+void BipInterface::serviceReady(bool r)
+{
+    bool ready = m_infoService->ready() && m_mibandService->ready() && m_miband2Service->ready();
+    qDebug() << "A service is ready" << r << ready;
+
+    if (ready != m_ready) {
+        m_ready = ready;
+
+        if (m_ready) {
+            qDebug() << "All services ready, initialising...";
+            enableNotifications();
+            m_miband2Service->initialise();
+        }
+        emit readyChanged();
+    }
+
 }

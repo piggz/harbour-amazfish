@@ -23,6 +23,7 @@ public:
     const QString UUID_CHARACTERISTIC_ALERT_CONTROL = "{00002a44-0000-1000-8000-00805f9b34fb}";
 
     Q_INVOKABLE void connectToDevice(const QString &address);
+    Q_INVOKABLE void disconnect();
 
     bool ready() const;
     QString connectionState() const;
@@ -37,13 +38,13 @@ private:
     QString m_connectionState;
     QString m_address;
     QLowEnergyController *m_controller = nullptr;
-
-    void updateServiceController();
-
     BipInfoService *m_infoService = nullptr;
     MiBandService *m_mibandService = nullptr;
     MiBand2Service *m_miband2Service = nullptr;
     QList<BipService *>m_genericServices;
+
+    void updateServiceController();
+    Q_SLOT void serviceReady(bool r);
 
 Q_SIGNALS:
     void readyChanged();

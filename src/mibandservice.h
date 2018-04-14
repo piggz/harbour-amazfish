@@ -41,6 +41,7 @@ public:
 private:
     Q_SLOT void characteristicRead(const QLowEnergyCharacteristic &c, const QByteArray &value);
     Q_SLOT void characteristicChanged(const QLowEnergyCharacteristic &c, const QByteArray &value);
+//    Q_SLOT void serviceReady(bool r);
 
     void setGPSVersion(const QString& v);
 

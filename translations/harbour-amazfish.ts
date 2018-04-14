@@ -53,6 +53,10 @@
         <source>Connect to watch</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disconnect from watch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SecondPage</name>
