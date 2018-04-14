@@ -113,6 +113,9 @@ void BipInterface::updateServiceController()
 void BipInterface::enableNotifications()
 {
     m_miband2Service->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
+    m_mibandService->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION);
+    m_mibandService->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO);
+    m_mibandService->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT);
 }
 
 void BipInterface::serviceReady(bool r)
