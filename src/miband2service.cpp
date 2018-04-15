@@ -24,6 +24,7 @@ void MiBand2Service::characteristicChanged(const QLowEnergyCharacteristic &chara
         service()->writeCharacteristic(service()->characteristic(QBluetoothUuid(QString(UUID_CHARACTERISITIC_MIBAND2_AUTH))), QByteArray(&AUTH_SEND_ENCRYPTED_AUTH_NUMBER, 1) + QByteArray(&AUTH_BYTE, 1) + handleAesAuth(value.mid(3, 17), AUTH_SECRET_KEY), QLowEnergyService::WriteWithoutResponse);
     } else  if (value[0] == AUTH_RESPONSE && value[1] == AUTH_SEND_ENCRYPTED_AUTH_NUMBER && value[2] == AUTH_SUCCESS) {
         qDebug() << "Authenticated";
+        emit authenticated();
     }
 }
 

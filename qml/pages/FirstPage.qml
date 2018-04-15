@@ -67,11 +67,6 @@ Page {
                 if (BipInterface.connectionState == "disconnected" && manualDisconnect == false){
                     BipInterface.connectToDevice(pairedAddress.value);
                 }
-
-                if (BipInterface.ready){
-                    BipInterface.infoService().refreshInformation();
-                    BipInterface.miBandService().requestGPSVersion();
-                }
             }
         }
 
@@ -131,6 +126,22 @@ Page {
                 text: "GPS:" + BipInterface.miBandService().gpsVersion
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
+            }
+            Button {
+                text: "Test Notification"
+                onClicked: {
+                    BipInterface.miBandService().sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!", -6, 7);
+                }
+            }
+        }
+    }
+
+    Connections {
+        target: BipInterface
+        onReadyChanged: {
+            if (BipInterface.ready){
+                BipInterface.infoService().refreshInformation();
+                BipInterface.miBandService().requestGPSVersion();
             }
         }
     }

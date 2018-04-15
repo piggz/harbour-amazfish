@@ -113,6 +113,18 @@ void BipService::enableNotification(const QString &c)
     }
 }
 
+void BipService::disableNotification(const QString &c)
+{
+    qDebug() << "Disabling notification for " << c << " in " << serviceUUID();
+    QLowEnergyCharacteristic characteristic = service()->characteristic(QBluetoothUuid(c));
+    QLowEnergyDescriptor notificationDesc = characteristic.descriptor(QBluetoothUuid::ClientCharacteristicConfiguration);
+    if (notificationDesc.isValid()) {
+        service()->writeDescriptor(notificationDesc, QByteArray::fromHex("0000"));
+    } else {
+        qDebug() << "notification is invalid";
+    }
+}
+
 QString BipService::serviceUUID() const
 {
     return m_serviceUUID;

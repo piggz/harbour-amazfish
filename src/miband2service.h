@@ -17,6 +17,7 @@
 
 class MiBand2Service : public BipService
 {
+    Q_OBJECT
 public:
     MiBand2Service(QObject *parent);
 
@@ -33,6 +34,8 @@ public:
     const QByteArray AUTH_SECRET_KEY = "0123456789@ABCDE";
 
     void initialise();
+
+    Q_SIGNAL void authenticated();
 
 private:
     Q_SLOT void characteristicChanged(const QLowEnergyCharacteristic &characteristic, const QByteArray &value);

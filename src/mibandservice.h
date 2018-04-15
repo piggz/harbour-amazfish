@@ -29,6 +29,7 @@ public:
     static const char* UUID_CHARACTERISTIC_MIBAND_CONFIGURATION;
     static const char* UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO;
     static const char* UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT;
+    static const char* UUID_CHARACTERISTIC_MIBAND_NOTIFICATION;
 
     Q_PROPERTY(QString gpsVersion READ gpsVersion NOTIFY gpsVersionChanged())
 
@@ -38,6 +39,8 @@ public:
 
     Q_INVOKABLE void requestGPSVersion();
     Q_INVOKABLE QString gpsVersion();
+    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, int category, int icon);
+
 
     Q_SIGNAL void gpsVersionChanged();
 private:

@@ -11,7 +11,7 @@ BIP Services and Characteristics
 --00002a2b-0000-1000-8000-00805f9b34fb //Current time
 --00002a04-0000-1000-8000-00805f9b34fb //Peripheral Preferred Connection Parameters
 --00000001-0000-3512-2118-0009af100700 //Unknown 1
---00000002-0000-3512-2118-0009af100700 //Unknown 2
+--00000002-0000-3512-2118-0009af100700 //Unknown 2 Weather?
 --00000003-0000-3512-2118-0009af100700 //Configuration
 --00000004-0000-3512-2118-0009af100700 //Unknown 4
 --00000005-0000-3512-2118-0009af100700 //Activity data
@@ -87,6 +87,7 @@ public:
     void connectToService();
     void setController(QLowEnergyController *controller);    
     void enableNotification(const QString &c);
+    void disableNotification(const QString &c);
 
 protected:
     QLowEnergyService *service() const;

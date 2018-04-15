@@ -14,7 +14,7 @@ TARGET = harbour-amazfish
 
 CONFIG += sailfishapp
 
-QT += bluetooth
+QT += bluetooth dbus
 
 #include(libgato/libgato.pri)
 
@@ -25,7 +25,9 @@ SOURCES += src/harbour-amazfish.cpp \
     src/bipservice.cpp \
     src/bipinfoservice.cpp \
     src/mibandservice.cpp \
-    src/miband2service.cpp
+    src/miband2service.cpp \
+    src/alertnotificationservice.cpp \
+    src/notificationslistener.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -58,4 +60,6 @@ HEADERS += \
     src/bipservice.h \
     src/bipinfoservice.h \
     src/mibandservice.h \
-    src/miband2service.h
+    src/miband2service.h \
+    src/alertnotificationservice.h \
+    src/notificationslistener.h

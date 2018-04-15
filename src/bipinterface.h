@@ -8,6 +8,8 @@
 #include "bipinfoservice.h"
 #include "mibandservice.h"
 #include "miband2service.h"
+#include "alertnotificationservice.h"
+#include "notificationslistener.h"
 
 class BipInterface : public QObject
 {
@@ -31,6 +33,7 @@ public:
     Q_INVOKABLE BipInfoService *infoService() const;
     Q_INVOKABLE MiBandService *miBandService() const;
     Q_INVOKABLE MiBand2Service *miBand2Service() const;
+    Q_INVOKABLE AlertNotificationService *alertNotificationService() const;
 
     void enableNotifications();
 private:
@@ -41,10 +44,17 @@ private:
     BipInfoService *m_infoService = nullptr;
     MiBandService *m_mibandService = nullptr;
     MiBand2Service *m_miband2Service = nullptr;
+    AlertNotificationService *m_alertNotificationService = nullptr;
+
+    NotificationsListener *m_notificationListener = nullptr;
+
     QList<BipService *>m_genericServices;
 
     void updateServiceController();
     Q_SLOT void serviceReady(bool r);
+    Q_SLOT void authenticated();
+
+    Q_SLOT void notificationReceived(const QString &appName, const QString &summary, const QString &body);
 
 Q_SIGNALS:
     void readyChanged();

@@ -7,7 +7,6 @@
 #include <QQmlContext>
 
 #include <sailfishapp.h>
-//#include "btdiscoverymodel.h"
 #include "bippair.h"
 #include "bipinterface.h"
 
@@ -32,6 +31,8 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<BipInfoService>();
     qmlRegisterType<MiBandService>();
+    qmlRegisterType<MiBand2Service>();
+    qmlRegisterType<AlertNotificationService>();
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BipPair", &bipPair);
