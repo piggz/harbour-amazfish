@@ -40,5 +40,6 @@ int main(int argc, char *argv[])
 
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));
     view->show();
+
     return app->exec();
 }

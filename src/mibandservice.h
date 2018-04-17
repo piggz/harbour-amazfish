@@ -39,7 +39,6 @@ public:
 
     Q_INVOKABLE void requestGPSVersion();
     Q_INVOKABLE QString gpsVersion();
-    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, int category, int icon);
 
 
     Q_SIGNAL void gpsVersionChanged();

@@ -36,21 +36,25 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
+                text: qsTr("Debug Info")
+                onClicked: pageStack.push(Qt.resolvedUrl("DebugInfo.qml"))
+            }
+            MenuItem {
                 text: qsTr("Pair with watch")
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("PairPage.qml"))
+            }    
+            MenuItem {
+                text: qsTr("Disconnect from watch")
+                onClicked: {
+                    manualDisconnect = true;
+                    BipInterface.disconnect();
+                }
             }
             MenuItem {
                 text: qsTr("Connect to watch")
                 onClicked: {
                     manualDisconnect = false;
                     BipInterface.connectToDevice(pairedAddress.value);
-                }
-            }
-            MenuItem {
-                text: qsTr("Disconnect from watch")
-                onClicked: {
-                    manualDisconnect = true;
-                    BipInterface.disconnect();
                 }
             }
         }
@@ -98,41 +102,25 @@ Page {
                     }
                     Image {
                         source: "image://theme/icon-m-bluetooth-device"
-                        visible: BipInterface.connectionState == "connected"
+                        visible: BipInterface.connectionState == "connected" || BipInterface.connectionState == "authenticated"
                     }
                 }
-            }
-            Label {
-                text: pairedAddress.value
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeExtraLarge
-            }
-            Label {
-                text: BipInterface.infoService().serialNumber
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeLarge
-            }
-            Label {
-                text: BipInterface.infoService().hardwareRevision
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeLarge
-            }
-            Label {
-                text: BipInterface.infoService().softwareRevision
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeLarge
-            }
-            Label {
-                text: "GPS:" + BipInterface.miBandService().gpsVersion
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeLarge
-            }
-            Button {
-                text: "Test Notification"
-                onClicked: {
-                    BipInterface.miBandService().sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!", -6, 7);
+                Item {
+                    width: childrenRect.width
+                    height: childrenRect.height
+                    BusyIndicator {
+                        size: BusyIndicatorSize.Medium
+                        visible: BipInterface.connectionState == "connected"
+                        running: BipInterface.connectionState == "connected"
+                    }
+                    Image {
+                        source: "image://theme/icon-m-watch"
+                        visible: BipInterface.connectionState == "authenticated"
+                    }
                 }
+
             }
+
         }
     }
 

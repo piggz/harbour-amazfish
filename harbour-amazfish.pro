@@ -14,7 +14,7 @@ TARGET = harbour-amazfish
 
 CONFIG += sailfishapp
 
-QT += bluetooth dbus
+QT += bluetooth dbus contacts
 
 #include(libgato/libgato.pri)
 
@@ -27,18 +27,21 @@ SOURCES += src/harbour-amazfish.cpp \
     src/mibandservice.cpp \
     src/miband2service.cpp \
     src/alertnotificationservice.cpp \
-    src/notificationslistener.cpp
+    src/notificationslistener.cpp \
+    src/voicecallhandler.cpp \
+    src/voicecallmanager.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    qml/pages/SecondPage.qml \
     rpm/harbour-amazfish.changes.in \
     rpm/harbour-amazfish.changes.run.in \
     rpm/harbour-amazfish.spec \
     rpm/harbour-amazfish.yaml \
     translations/*.ts \
-    harbour-amazfish.desktop
+    harbour-amazfish.desktop \
+    qml/pages/PairPage.qml \
+    qml/pages/DebugInfo.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
@@ -62,4 +65,6 @@ HEADERS += \
     src/mibandservice.h \
     src/miband2service.h \
     src/alertnotificationservice.h \
-    src/notificationslistener.h
+    src/notificationslistener.h \
+    src/voicecallhandler.h \
+    src/voicecallmanager.h

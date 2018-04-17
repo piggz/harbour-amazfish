@@ -22,7 +22,13 @@ BipInterface::BipInterface()
     connect(m_alertNotificationService, &BipService::readyChanged, this, &BipInterface::serviceReady);
     connect(m_miband2Service, &MiBand2Service::authenticated, this, &BipInterface::authenticated);
 
+    //Notifications
     connect(m_notificationListener, &NotificationsListener::notificationReceived, this, &BipInterface::notificationReceived);
+
+
+    // Calls
+    m_voiceCallManager = new VoiceCallManager(this);
+    connect(m_voiceCallManager, &VoiceCallManager::activeVoiceCallChanged, this, &BipInterface::onActiveVoiceCallChanged);
 
     m_connectionState = "disconnected";
 }
@@ -80,6 +86,7 @@ void BipInterface::connectToDevice(const QString &address)
 void BipInterface::disconnect()
 {
     if (m_controller) {
+        qDebug() << "Disconnecting from device";
         m_controller->disconnectFromDevice();
     }
 }
@@ -150,9 +157,67 @@ void BipInterface::authenticated()
 {
     m_ready = true;
     emit readyChanged();
+
+    m_connectionState = "authenticated";
+    emit connectionStateChanged();
 }
 
 void BipInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
-    m_alertNotificationService->sendAlert(appName, summary, body, AlertNotificationService::CustomHuami, AlertNotificationService::APP_11);
+    m_alertNotificationService->sendAlert(appName, summary, body);
+}
+
+void BipInterface::onActiveVoiceCallChanged()
+{
+
+    VoiceCallHandler* handler = m_voiceCallManager->activeVoiceCall();
+    if (handler) {
+        connect(handler, SIGNAL(statusChanged()), SLOT(onActiveVoiceCallStatusChanged()));
+        connect(handler, SIGNAL(destroyed()), SLOT(onActiveVoiceCallStatusChanged()));
+        if (handler->status()) onActiveVoiceCallStatusChanged();
+    }
+}
+
+void BipInterface::onActiveVoiceCallStatusChanged()
+{
+    VoiceCallHandler* handler = m_voiceCallManager->activeVoiceCall();
+
+    if (!handler || handler->handlerId().isNull()) {
+        return;
+    }
+
+    switch ((VoiceCallHandler::VoiceCallStatus)handler->status()) {
+    case VoiceCallHandler::STATUS_ALERTING:
+    case VoiceCallHandler::STATUS_DIALING:
+        qDebug() << "Tell outgoing:" << handler->lineId();
+        //emit outgoingCall(handlerId, handler->lineId(), m_voiceCallManager->findPersonByNumber(handler->lineId()));
+        break;
+    case VoiceCallHandler::STATUS_INCOMING:
+    case VoiceCallHandler::STATUS_WAITING:
+        qDebug() << "Tell incoming:" << handler->lineId();
+        if(handler->getState() < VoiceCallHandler::StateRinging) {
+            handler->setState(VoiceCallHandler::StateRinging);
+            //emit incomingCall(qHash(handler->handlerId()), handler->lineId(), m_voiceCallManager->findPersonByNumber(handler->lineId()));
+            m_alertNotificationService->incomingCall(m_voiceCallManager->findPersonByNumber(handler->lineId()));
+        }
+        break;
+    case VoiceCallHandler::STATUS_NULL:
+    case VoiceCallHandler::STATUS_DISCONNECTED:
+        qDebug() << "Endphone " << handler->handlerId();
+        if(handler->getState() < VoiceCallHandler::StateCleanedUp) {
+            handler->setState(VoiceCallHandler::StateCleanedUp);
+            //emit callEnded(qHash(handler->handlerId()), false);
+        }
+        break;
+    case VoiceCallHandler::STATUS_ACTIVE:
+        qDebug() << "Startphone" << handler->handlerId();
+        if(handler->getState() < VoiceCallHandler::StateAnswered) {
+            handler->setState(VoiceCallHandler::StateAnswered);
+            //emit callStarted(qHash(handler->handlerId()));
+        }
+        break;
+    case VoiceCallHandler::STATUS_HELD:
+        qDebug() << "OnHold" << handler->handlerId();
+        break;
+    }
 }

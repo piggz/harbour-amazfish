@@ -33,9 +33,9 @@
     </message>
 </context>
 <context>
-    <name>CoverPage</name>
+    <name>DebugInfo</name>
     <message>
-        <source>My Cover</source>
+        <source>AmazFish</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -57,9 +57,13 @@
         <source>Disconnect from watch</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Debug Info</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>SecondPage</name>
+    <name>PairPage</name>
     <message>
         <source>Start scan</source>
         <translation type="unfinished"></translation>

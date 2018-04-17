@@ -25,7 +25,7 @@ BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
-BuildRequires:  bluez5-libs-devel
+BuildRequires:  pkgconfig(Qt5Contacts)
 BuildRequires:  desktop-file-utils
 
 %description

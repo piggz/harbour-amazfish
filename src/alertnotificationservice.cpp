@@ -9,27 +9,72 @@ AlertNotificationService::AlertNotificationService(QObject *parent) : BipService
 
 }
 
-void AlertNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message, int category, int icon)
+void AlertNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
-    qDebug() << "Alert:" << sender << subject << message << category << icon;
-    QString msg;
-    msg += sender.left(32).toLocal8Bit() + "\0";
+    qDebug() << "Alert:" << sender << subject << message;
+
+    if (message.isEmpty()) {
+        return;
+    }
+
+    QByteArray send = QByteArray::fromHex("fa01");
+    send += QByteArray(1, mapSenderToIcon(sender));
+    send += sender.left(32).toUtf8() + QByteArray(1, 0x00); //Null char indicates end of first line
 
     if (!subject.isEmpty()) {
-        msg += subject.left(128).toLocal8Bit() + "\n\n";
+        send += subject.left(128).toUtf8() + QByteArray(2, 0x0a);
     }
 
     if (!message.isEmpty()) {
-        msg += message.left(128).toLocal8Bit();
+        send += message.left(128).toUtf8();
     }
 
-    msg.truncate(230);
+    send.truncate(230); //!TODO is 230 is the max?
+    service()->writeCharacteristic(service()->characteristic(QBluetoothUuid(QString(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT))), send, QLowEnergyService::WriteWithResponse);
+}
 
-    QByteArray send = QByteArray::fromHex("fa0119");
-    send += msg.toUtf8();
+void AlertNotificationService::incomingCall(const QString &caller)
+{
+    QByteArray send = QByteArray::fromHex("0301");
+    send += caller.toUtf8();
+    service()->writeCharacteristic(service()->characteristic(QBluetoothUuid(QString(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT))), send, QLowEnergyService::WriteWithResponse);
+}
 
-    qDebug() << (-6 & 0xff) << (char)(-6 & 0xff);
-    qDebug() << send.toHex();
+int AlertNotificationService::mapSenderToIcon(const QString &sender)
+{
+    QString s = sender.toLower();
 
-    service()->writeCharacteristic(service()->characteristic(QBluetoothUuid(QString(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT))), send);
+    QRegExp mailREX("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b");
+    mailREX.setCaseSensitivity(Qt::CaseInsensitive);
+    mailREX.setPatternSyntax(QRegExp::RegExp);
+
+    if (mailREX.exactMatch(s)) {
+            return HuamiIcon::EMAIL;
+    }
+    if (s == "facebook") {
+        return HuamiIcon::FACEBOOK;
+    }
+    if (s == "twitter" || s == "tweetian") {
+        return HuamiIcon::TWITTER;
+    }
+    if (s == "messenger") {
+        return HuamiIcon::FACEBOOK_MESSENGER;
+    }
+    if (s == "snapchat") {
+        return HuamiIcon::SNAPCHAT;
+    }
+    if (s == "whatsapp") {
+        return HuamiIcon::WHATSAPP;
+    }
+    if (s == "instagram") {
+        return HuamiIcon::INSTAGRAM;
+    }
+    if (s == "telegram" || s == "sailorgram") {
+        return HuamiIcon::TELEGRAM;
+    }
+    if (s == "skype") {
+        return HuamiIcon::SKYPE;
+    }
+
+    return HuamiIcon::APP_11;
 }

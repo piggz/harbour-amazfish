@@ -11,4 +11,9 @@ ApplicationWindow
     Component.onCompleted: {
         console.log("Application started");
     }
+
+    onStateChanged: {
+        console.log("State: " + state);
+
+    }
 }

@@ -10,6 +10,8 @@
 #include "miband2service.h"
 #include "alertnotificationservice.h"
 #include "notificationslistener.h"
+#include "voicecallhandler.h"
+#include "voicecallmanager.h"
 
 class BipInterface : public QObject
 {
@@ -47,14 +49,17 @@ private:
     AlertNotificationService *m_alertNotificationService = nullptr;
 
     NotificationsListener *m_notificationListener = nullptr;
+    VoiceCallManager *m_voiceCallManager = nullptr;
 
     QList<BipService *>m_genericServices;
 
     void updateServiceController();
+
     Q_SLOT void serviceReady(bool r);
     Q_SLOT void authenticated();
-
     Q_SLOT void notificationReceived(const QString &appName, const QString &summary, const QString &body);
+    Q_SLOT void onActiveVoiceCallChanged();
+    Q_SLOT void onActiveVoiceCallStatusChanged();
 
 Q_SIGNALS:
     void readyChanged();
