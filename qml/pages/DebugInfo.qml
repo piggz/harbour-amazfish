@@ -67,6 +67,12 @@ Page {
                 }
             }
             Button {
+                text: "Test Email"
+                onClicked: {
+                    BipInterface.alertNotificationService().sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
+                }
+            }
+            Button {
                 text: "Test Call"
                 onClicked: {
                     BipInterface.alertNotificationService().incomingCall("Somebody");

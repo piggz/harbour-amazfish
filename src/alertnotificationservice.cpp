@@ -17,7 +17,19 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
         return;
     }
 
-    QByteArray send = QByteArray::fromHex("fa01");
+    int category = 0xfa;
+    int icon = mapSenderToIcon(sender);
+
+    if (sender == "Messages") { //SMS must use category, not icon
+        category = AlertCategory::SMS;
+    }
+
+    if (icon == HuamiIcon::EMAIL) { //Email icon doesnt work, so use category
+        category = AlertCategory::Email;
+    }
+
+    QByteArray send = QByteArray(1, category) + QByteArray(1, 1); //1 alert
+
     send += QByteArray(1, mapSenderToIcon(sender));
     send += sender.left(32).toUtf8() + QByteArray(1, 0x00); //Null char indicates end of first line
 
