@@ -36,12 +36,17 @@ public:
     const char CHAR_RESPONSE = 0x10;
     const char CHAR_SUCCESS = 0x01;
     const char COMMAND_REQUEST_GPS_VERSION = 0x0e;
+    const char EVENT_DECLINE_CALL = 0x07;
+    const char EVENT_IGNORE_CALL = 0x09;
 
     Q_INVOKABLE void requestGPSVersion();
     Q_INVOKABLE QString gpsVersion();
 
 
     Q_SIGNAL void gpsVersionChanged();
+    Q_SIGNAL void declineCall();
+    Q_SIGNAL void ignoreCall();
+
 private:
     Q_SLOT void characteristicRead(const QLowEnergyCharacteristic &c, const QByteArray &value);
     Q_SLOT void characteristicChanged(const QLowEnergyCharacteristic &c, const QByteArray &value);

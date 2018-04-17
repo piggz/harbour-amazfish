@@ -29,6 +29,7 @@ BipInterface::BipInterface()
     // Calls
     m_voiceCallManager = new VoiceCallManager(this);
     connect(m_voiceCallManager, &VoiceCallManager::activeVoiceCallChanged, this, &BipInterface::onActiveVoiceCallChanged);
+    connect(m_mibandService, &MiBandService::ignoreCall, m_voiceCallManager, &VoiceCallManager::silenceRingtone);
 
     m_connectionState = "disconnected";
 }
@@ -174,6 +175,8 @@ void BipInterface::onActiveVoiceCallChanged()
     if (handler) {
         connect(handler, SIGNAL(statusChanged()), SLOT(onActiveVoiceCallStatusChanged()));
         connect(handler, SIGNAL(destroyed()), SLOT(onActiveVoiceCallStatusChanged()));
+        connect(m_mibandService, &MiBandService::declineCall, handler, &VoiceCallHandler::hangup);
+
         if (handler->status()) onActiveVoiceCallStatusChanged();
     }
 }

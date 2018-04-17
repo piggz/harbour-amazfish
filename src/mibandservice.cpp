@@ -15,14 +15,20 @@ MiBandService::MiBandService(QObject *parent) : BipService(UUID_SERVICE_MIBAND, 
 void MiBandService::characteristicChanged(const QLowEnergyCharacteristic &characteristic, const QByteArray &value)
 {
     qDebug() << "MiBand Changed:" << characteristic.uuid() << "(" << characteristic.name() << "):" << value;
-    if (value.length() < 4) {
-        return;
-    }
 
     if (value[0] == CHAR_RESPONSE && value[1] == COMMAND_REQUEST_GPS_VERSION && value[2] == CHAR_SUCCESS) {
         m_gpsVersion = value.mid(3);
         qDebug() << "Got gps version = " << m_gpsVersion;
         emit gpsVersionChanged();
+    }
+
+    if (characteristic.uuid().toString() == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
+        if (value[0] == EVENT_DECLINE_CALL) {
+            emit declineCall();
+        } else if (value[0] == EVENT_IGNORE_CALL) {
+            emit ignoreCall();
+        }
+
     }
 }
 
