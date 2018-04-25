@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QBluetoothDeviceInfo>
 #include <QLowEnergyController>
+#include <mgconfitem.h>
 
 #include "bipinfoservice.h"
 #include "mibandservice.h"
@@ -52,6 +53,13 @@ private:
     VoiceCallManager *m_voiceCallManager = nullptr;
 
     QList<BipService *>m_genericServices;
+
+    //Settings
+    MGConfItem *m_settingDeviceName;
+    MGConfItem *m_settingDeviceAddress;
+    MGConfItem *m_settingMessageOnReconnect;
+
+    void createSettings();
 
     void updateServiceController();
 

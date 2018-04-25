@@ -17,7 +17,7 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
         return;
     }
 
-    int category = 0xfa;
+    int category = 0xfa; //Custom Huami icon
     int icon = mapSenderToIcon(sender);
 
     if (sender == "Messages") { //SMS must use category, not icon

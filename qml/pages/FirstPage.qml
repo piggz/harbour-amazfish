@@ -64,7 +64,7 @@ Page {
 
         Timer {
             id: tmrRefresh
-            interval: 5000
+            interval: 60000
             repeat: true
             running: true
             onTriggered: {

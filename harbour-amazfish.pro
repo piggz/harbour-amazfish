@@ -16,7 +16,7 @@ CONFIG += sailfishapp
 
 QT += bluetooth dbus contacts
 
-#include(libgato/libgato.pri)
+PKGCONFIG += mlite5
 
 SOURCES += src/harbour-amazfish.cpp \
     src/bipinterface.cpp \
@@ -29,7 +29,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/alertnotificationservice.cpp \
     src/notificationslistener.cpp \
     src/voicecallhandler.cpp \
-    src/voicecallmanager.cpp
+    src/voicecallmanager.cpp \
+    src/typeconversion.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -67,4 +68,5 @@ HEADERS += \
     src/alertnotificationservice.h \
     src/notificationslistener.h \
     src/voicecallhandler.h \
-    src/voicecallmanager.h
+    src/voicecallmanager.h \
+    src/typeconversion.h

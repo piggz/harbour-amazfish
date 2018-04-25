@@ -26,6 +26,7 @@ PkgConfigBR:
   - Qt5Qml
   - Qt5Quick
   - Qt5Contacts
+  - mlite5
 
 # Build dependencies without a pkgconfig setup can be listed here
 # PkgBR:

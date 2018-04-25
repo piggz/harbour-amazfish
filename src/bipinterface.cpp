@@ -161,6 +161,9 @@ void BipInterface::authenticated()
 
     m_connectionState = "authenticated";
     emit connectionStateChanged();
+
+    m_alertNotificationService->sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"));
+    m_mibandService->setCurrentTime();
 }
 
 void BipInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
