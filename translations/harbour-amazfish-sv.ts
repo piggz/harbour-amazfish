@@ -2,6 +2,21 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="sv">
 <context>
+    <name>BipInterface</name>
+    <message>
+        <source>Amazfish</source>
+        <translation>Amazfish</translation>
+    </message>
+    <message>
+        <source>Connected</source>
+        <translation>Ansluten</translation>
+    </message>
+    <message>
+        <source>Phone and watch are connected</source>
+        <translation>Telefon och klocka är kopplade</translation>
+    </message>
+</context>
+<context>
     <name>BipPair</name>
     <message>
         <source>Searching for watch</source>
