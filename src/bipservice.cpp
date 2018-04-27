@@ -140,3 +140,14 @@ void BipService::writeRequest(const char *CHARACTERISTIC, const QByteArray &valu
     }
 
 }
+
+void BipService::writeCommand(const char *CHARACTERISTIC, const QByteArray &value)
+{
+    if (ready()) {
+        qDebug() << "Writing to " << CHARACTERISTIC << ":" << value.toHex();
+        service()->writeCharacteristic(service()->characteristic(QBluetoothUuid(QString(CHARACTERISTIC))) , value, QLowEnergyService::WriteWithoutResponse);
+    } else {
+        qDebug() << "Write request for " << CHARACTERISTIC << " but not ready";
+    }
+
+}

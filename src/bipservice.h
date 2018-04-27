@@ -92,6 +92,7 @@ public:
 protected:
     QLowEnergyService *service() const;
     void writeRequest(const char* CHARACTERISTIC, const QByteArray &value);
+    void writeCommand(const char* CHARACTERISTIC, const QByteArray &value);
 
 private:
     QLowEnergyController *m_controller = nullptr;

@@ -30,7 +30,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/notificationslistener.cpp \
     src/voicecallhandler.cpp \
     src/voicecallmanager.cpp \
-    src/typeconversion.cpp
+    src/typeconversion.cpp \
+    src/settingsmanager.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -42,7 +43,9 @@ DISTFILES += qml/harbour-amazfish.qml \
     translations/*.ts \
     harbour-amazfish.desktop \
     qml/pages/PairPage.qml \
-    qml/pages/DebugInfo.qml
+    qml/pages/DebugInfo.qml \
+    qml/pages/Settings-profile.qml \
+    qml/pages/Settings-device.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
@@ -69,4 +72,5 @@ HEADERS += \
     src/notificationslistener.h \
     src/voicecallhandler.h \
     src/voicecallmanager.h \
-    src/typeconversion.h
+    src/typeconversion.h \
+    src/settingsmanager.h

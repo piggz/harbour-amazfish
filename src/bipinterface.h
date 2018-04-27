@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QBluetoothDeviceInfo>
 #include <QLowEnergyController>
-#include <mgconfitem.h>
 
 #include "bipinfoservice.h"
 #include "mibandservice.h"
@@ -13,6 +12,7 @@
 #include "notificationslistener.h"
 #include "voicecallhandler.h"
 #include "voicecallmanager.h"
+#include "settingsmanager.h"
 
 class BipInterface : public QObject
 {
@@ -54,10 +54,7 @@ private:
 
     QList<BipService *>m_genericServices;
 
-    //Settings
-    MGConfItem *m_settingDeviceName;
-    MGConfItem *m_settingDeviceAddress;
-    MGConfItem *m_settingMessageOnReconnect;
+    SettingsManager m_settings;
 
     void createSettings();
 

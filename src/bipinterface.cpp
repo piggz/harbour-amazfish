@@ -164,6 +164,13 @@ void BipInterface::authenticated()
 
     m_alertNotificationService->sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"));
     m_mibandService->setCurrentTime();
+    m_mibandService->setLanguage(0);
+    m_mibandService->setDateDisplay(1);
+    m_mibandService->setTimeFormat(0);
+    m_mibandService->setUserInfo();
+    m_mibandService->setDisplayCaller();
+    m_mibandService->setRotateWristToSwitchInfo(true);
+    m_mibandService->setGoalNotification(true);
 }
 
 void BipInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)

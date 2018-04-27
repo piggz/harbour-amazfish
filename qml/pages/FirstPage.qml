@@ -9,6 +9,7 @@ Page {
     allowedOrientations: Orientation.Portrait
 
     property bool manualDisconnect: false
+    property bool needsProfileSet: false
 
     ConfigurationValue {
         id: pairedAddress
@@ -19,6 +20,12 @@ Page {
     ConfigurationValue {
         id: pairedName
         key: "/uk/co/piggz/amazfish/pairedName"
+        defaultValue: ""
+    }
+
+    ConfigurationValue {
+        id: profileName
+        key: "/uk/co/piggz/amazfish/profile/name"
         defaultValue: ""
     }
 
@@ -42,7 +49,11 @@ Page {
             MenuItem {
                 text: qsTr("Pair with watch")
                 onClicked: pageStack.push(Qt.resolvedUrl("PairPage.qml"))
-            }    
+            }
+            MenuItem {
+                text: qsTr("Profile")
+                onClicked: pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
+            }
             MenuItem {
                 text: qsTr("Disconnect from watch")
                 onClicked: {
@@ -123,6 +134,17 @@ Page {
 
         }
     }
+    Timer {
+        id: tmrStartup
+        running: true
+        repeat: false
+        interval: 200
+        onTriggered: {
+            if (needsProfileSet) {
+                pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
+            }
+        }
+    }
 
     Connections {
         target: BipInterface
@@ -135,6 +157,11 @@ Page {
     }
 
     Component.onCompleted: {
+        if (profileName.value === "") {
+            needsProfileSet = true;
+            return;
+        }
+
         if (pairedAddress.value !== "") {
             BipInterface.connectToDevice(pairedAddress.value);
         }

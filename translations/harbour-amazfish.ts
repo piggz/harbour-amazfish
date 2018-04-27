@@ -76,11 +76,50 @@
         <source>Debug Info</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PairPage</name>
     <message>
         <source>Start scan</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-profile</name>
+    <message>
+        <source>Profile Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gender</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height (cm): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weight (kg): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Female</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
