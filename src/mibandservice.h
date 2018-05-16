@@ -1,8 +1,9 @@
 #ifndef MIBANDSERVICE_H
 #define MIBANDSERVICE_H
 
-#include "bipservice.h"
+#include "qble/qbleservice.h"
 #include "settingsmanager.h"
+#include "bipbatteryinfo.h"
 
 /*
 {0000FEE0-0000-1000-8000-00805f9b34fb} MiBand Service
@@ -21,7 +22,7 @@
 --00000020-0000-3512-2118-0009af100700
 */
 
-class MiBandService : public BipService
+class MiBandService : public QBLEService
 {
     Q_OBJECT
 public:
@@ -33,8 +34,11 @@ public:
     static const char* UUID_CHARACTERISTIC_MIBAND_NOTIFICATION;
     static const char* UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME;
     static const char* UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS;
+    static const char* UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS;
 
     Q_PROPERTY(QString gpsVersion READ gpsVersion NOTIFY gpsVersionChanged())
+    Q_PROPERTY(int batteryInfo READ batteryInfo NOTIFY batteryInfoChanged())
+    Q_PROPERTY(int steps READ steps NOTIFY stepsChanged())
 
     const char CHAR_RESPONSE = 0x10;
     const char CHAR_SUCCESS = 0x01;
@@ -61,16 +65,24 @@ public:
     const char COMMAND_DISTANCE_UNIT_METRIC[4] =  { ENDPOINT_DISPLAY, 0x03, 0x00, 0x00 };
     const char COMMAND_DISTANCE_UNIT_IMPERIAL[4] =  { ENDPOINT_DISPLAY, 0x03, 0x00, 0x01 };
     const char COMMAND_SET_USERINFO = 0x4f;
+    const char WEAR_LOCATION_LEFT_WRIST[4] = { 0x20, 0x00, 0x00, 0x02 };
+    const char WEAR_LOCATION_RIGHT_WRIST[4] = { 0x20, 0x00, 0x00, 0x82};
+    const char COMMAND_SET_FITNESS_GOAL_START[3] = { 0x10, 0x0, 0x0 };
+    const char COMMAND_SET_FITNESS_GOAL_END[2] = { 0, 0 };
 
+    Q_INVOKABLE void requestBatteryInfo();
     Q_INVOKABLE void requestGPSVersion();
     Q_INVOKABLE QString gpsVersion();
+    Q_INVOKABLE int batteryInfo();
+    Q_INVOKABLE int steps() const;
+
     Q_INVOKABLE void setCurrentTime();
-    Q_INVOKABLE void setLanguage(int language);
-    Q_INVOKABLE void setDateDisplay(int format);
-    Q_INVOKABLE void setTimeFormat(int format);
+    Q_INVOKABLE void setLanguage();
+    Q_INVOKABLE void setDateDisplay();
+    Q_INVOKABLE void setTimeFormat();
     Q_INVOKABLE void setUserInfo();
     Q_INVOKABLE void setDistanceUnit();
-    Q_INVOKABLE void setWearLocation();
+    void setWearLocation(); //Not invokable because should only be done on init
     Q_INVOKABLE void setFitnessGoal();
     Q_INVOKABLE void setDisplayItems();
     Q_INVOKABLE void setDoNotDisturb();
@@ -82,19 +94,25 @@ public:
     Q_INVOKABLE void setHeartrateSleepSupport();
 
     Q_SIGNAL void gpsVersionChanged();
+    Q_SIGNAL void batteryInfoChanged();
+    Q_SIGNAL void stepsChanged();
+
     Q_SIGNAL void declineCall();
     Q_SIGNAL void ignoreCall();
 
 private:
-    Q_SLOT void characteristicRead(const QLowEnergyCharacteristic &c, const QByteArray &value);
-    Q_SLOT void characteristicChanged(const QLowEnergyCharacteristic &c, const QByteArray &value);
+    Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
+    Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
 //    Q_SLOT void serviceReady(bool r);
 
     void setGPSVersion(const QString& v);
 
     QString m_gpsVersion;
+    int m_steps;
 
     SettingsManager m_settings;
+
+    BipBatteryInfo m_batteryInfo;
 };
 
 #endif // MIBANDSERVICE_H

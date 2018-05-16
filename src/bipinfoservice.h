@@ -1,19 +1,20 @@
 #ifndef BIPINFOSERVICE_H
 #define BIPINFOSERVICE_H
 
-#include "bipservice.h"
+#include "qble/qbleservice.h"
 
-class BipInfoService : public BipService
+class BipInfoService : public QBLEService
 {
     Q_OBJECT
 public:
     BipInfoService(QObject *parent);
 
-    const QString UUID_CHARACTERISTIC_INFO_SERIAL_NO = "{00002a25-0000-1000-8000-00805f9b34fb}";
-    const QString UUID_CHARACTERISTIC_INFO_HARDWARE_REV = "{00002a27-0000-1000-8000-00805f9b34fb}";
-    const QString UUID_CHARACTERISTIC_INFO_SOFTWARE_REV = "{00002a28-0000-1000-8000-00805f9b34fb}";
-    const QString UUID_CHARACTERISTIC_INFO_SYSTEM_ID = "{00002a23-0000-1000-8000-00805f9b34fb}";
-    const QString UUID_CHARACTERISTIC_INFO_PNP_ID = "{00002a50-0000-1000-8000-00805f9b34fb}";
+    static const char* UUID_SERVICE_DEVICEINFO;
+    static const char* UUID_CHARACTERISTIC_INFO_SERIAL_NO;
+    static const char* UUID_CHARACTERISTIC_INFO_HARDWARE_REV;
+    static const char* UUID_CHARACTERISTIC_INFO_SOFTWARE_REV;
+    static const char* UUID_CHARACTERISTIC_INFO_SYSTEM_ID;
+    static const char* UUID_CHARACTERISTIC_INFO_PNP_ID;
 
     Q_PROPERTY(QString serialNumber READ serialNumber NOTIFY serialNumberChanged)
     Q_PROPERTY(QString hardwareRevision READ hardwareRevision NOTIFY hardwareRevisionChanged)
@@ -42,7 +43,7 @@ private:
     QString m_systemId;
     QString m_pnpId;
 
-    Q_SLOT void characteristicRead(const QLowEnergyCharacteristic &c, const QByteArray &value);
+    Q_SLOT void characteristicRead(const QString &characteristic, const QByteArray &value);
 };
 
 #endif // BIPINFOSERVICE_H

@@ -14,6 +14,8 @@ TARGET = harbour-amazfish
 
 CONFIG += sailfishapp
 
+include(qble/qble.pri)
+
 QT += bluetooth dbus contacts
 
 PKGCONFIG += mlite5
@@ -22,7 +24,6 @@ SOURCES += src/harbour-amazfish.cpp \
     src/bipinterface.cpp \
     src/qaesencryption.cpp \
     src/bippair.cpp \
-    src/bipservice.cpp \
     src/bipinfoservice.cpp \
     src/mibandservice.cpp \
     src/miband2service.cpp \
@@ -31,7 +32,10 @@ SOURCES += src/harbour-amazfish.cpp \
     src/voicecallhandler.cpp \
     src/voicecallmanager.cpp \
     src/typeconversion.cpp \
-    src/settingsmanager.cpp
+    src/settingsmanager.cpp \
+    src/bipbatteryinfo.cpp \
+    src/hrmservice.cpp \
+    src/bipdevice.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -45,6 +49,7 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/PairPage.qml \
     qml/pages/DebugInfo.qml \
     qml/pages/Settings-profile.qml \
+    qml/pages/Settings-menu.qml \
     qml/pages/Settings-device.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
@@ -64,7 +69,6 @@ HEADERS += \
     src/bipinterface.h \
     src/qaesencryption.h \
     src/bippair.h \
-    src/bipservice.h \
     src/bipinfoservice.h \
     src/mibandservice.h \
     src/miband2service.h \
@@ -73,4 +77,7 @@ HEADERS += \
     src/voicecallhandler.h \
     src/voicecallmanager.h \
     src/typeconversion.h \
-    src/settingsmanager.h
+    src/settingsmanager.h \
+    src/bipbatteryinfo.h \
+    src/hrmservice.h \
+    src/bipdevice.h

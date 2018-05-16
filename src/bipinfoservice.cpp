@@ -1,43 +1,44 @@
 #include "bipinfoservice.h"
 
-BipInfoService::BipInfoService(QObject *parent) : BipService("{0000180a-0000-1000-8000-00805f9b34fb}", parent)
+const char* BipInfoService::UUID_SERVICE_DEVICEINFO  = "{00001811-0000-1000-8000-00805f9b34fb}";
+
+const char* BipInfoService::UUID_CHARACTERISTIC_INFO_SERIAL_NO = "{00002a25-0000-1000-8000-00805f9b34fb}";
+const char* BipInfoService::UUID_CHARACTERISTIC_INFO_HARDWARE_REV = "{00002a27-0000-1000-8000-00805f9b34fb}";
+const char* BipInfoService::UUID_CHARACTERISTIC_INFO_SOFTWARE_REV = "{00002a28-0000-1000-8000-00805f9b34fb}";
+const char* BipInfoService::UUID_CHARACTERISTIC_INFO_SYSTEM_ID = "{00002a23-0000-1000-8000-00805f9b34fb}";
+const char* BipInfoService::UUID_CHARACTERISTIC_INFO_PNP_ID = "{00002a50-0000-1000-8000-00805f9b34fb}";
+
+
+BipInfoService::BipInfoService(QObject *parent) : QBLEService(UUID_SERVICE_DEVICEINFO, parent)
 {
-    connect(this, &BipService::characteristicRead, this, &BipInfoService::characteristicRead);
+    connect(this, &QBLEService::characteristicRead, this, &BipInfoService::characteristicRead);
 }
 
 void BipInfoService::refreshInformation()
 {
-    if (ready()) {
-        QLowEnergyCharacteristic c = service()->characteristic(QBluetoothUuid(UUID_CHARACTERISTIC_INFO_SERIAL_NO));
-        service()->readCharacteristic(c);
-        c = service()->characteristic(QBluetoothUuid(UUID_CHARACTERISTIC_INFO_HARDWARE_REV));
-        service()->readCharacteristic(c);
-        c = service()->characteristic(QBluetoothUuid(UUID_CHARACTERISTIC_INFO_SOFTWARE_REV));
-        service()->readCharacteristic(c);
-        c = service()->characteristic(QBluetoothUuid(UUID_CHARACTERISTIC_INFO_SYSTEM_ID));
-        service()->readCharacteristic(c);
-        c = service()->characteristic(QBluetoothUuid(UUID_CHARACTERISTIC_INFO_PNP_ID));
-        service()->readCharacteristic(c);
-    }
-
+    readCharacteristic(UUID_CHARACTERISTIC_INFO_SERIAL_NO);
+    readCharacteristic(UUID_CHARACTERISTIC_INFO_HARDWARE_REV);
+    readCharacteristic(UUID_CHARACTERISTIC_INFO_SOFTWARE_REV);
+    readCharacteristic(UUID_CHARACTERISTIC_INFO_SYSTEM_ID);
+    readCharacteristic(UUID_CHARACTERISTIC_INFO_PNP_ID);
 }
 
-void BipInfoService::characteristicRead(const QLowEnergyCharacteristic &characteristic, const QByteArray &value)
+void BipInfoService::characteristicRead(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << "Read:" << characteristic.uuid() << "(" << characteristic.name() << "):" << value;
-    if (characteristic.uuid().toString() == UUID_CHARACTERISTIC_INFO_SERIAL_NO) {
+    qDebug() << "Read:" << characteristic << value;
+    if (characteristic == UUID_CHARACTERISTIC_INFO_SERIAL_NO) {
         m_serialNumber = value;
         emit serialNumberChanged();
-    } else if (characteristic.uuid().toString() == UUID_CHARACTERISTIC_INFO_HARDWARE_REV) {
+    } else if (characteristic == UUID_CHARACTERISTIC_INFO_HARDWARE_REV) {
         m_hardwareRevision = value;
         emit hardwareRevisionChanged();
-    } else if (characteristic.uuid().toString() == UUID_CHARACTERISTIC_INFO_SOFTWARE_REV) {
+    } else if (characteristic == UUID_CHARACTERISTIC_INFO_SOFTWARE_REV) {
         m_softwareRevision = value;
         emit softwareRevisionChanged();
-    } else if (characteristic.uuid().toString() == UUID_CHARACTERISTIC_INFO_SYSTEM_ID) {
+    } else if (characteristic  == UUID_CHARACTERISTIC_INFO_SYSTEM_ID) {
         m_systemId = value;
         emit systemIdChanged();
-    } else if (characteristic.uuid().toString() == UUID_CHARACTERISTIC_INFO_PNP_ID) {
+    } else if (characteristic == UUID_CHARACTERISTIC_INFO_PNP_ID) {
         m_pnpId = value;
         emit pnpIdChanged();
     } else {

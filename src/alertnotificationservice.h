@@ -1,7 +1,7 @@
 #ifndef ALERTNOTIFICATIONSERVICE_H
 #define ALERTNOTIFICATIONSERVICE_H
 
-#include "bipservice.h"
+#include "qble/qbleservice.h"
 
 /*
 {00001811-0000-1000-8000-00805f9b34fb} Alert notification service
@@ -9,7 +9,7 @@
 --00002a44-0000-1000-8000-00805f9b34fb //Alert notification control poiont
 */
 
-class AlertNotificationService : public BipService
+class AlertNotificationService : public QBLEService
 {
     Q_OBJECT
 public:
@@ -79,11 +79,12 @@ public:
         HR_WARNING_36 = 36
     };
 
-    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message);
+    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
 
 private:
     int mapSenderToIcon(const QString &sender);
+    int m_lastAlertHash = 0;
 };
 
 #endif // ALERTNOTIFICATIONSERVICE_H

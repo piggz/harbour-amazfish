@@ -40,6 +40,17 @@ Page {
         defaultValue: 70
     }
 
+    ConfigurationValue {
+        id: profileWearLocation
+        key: "/uk/co/piggz/amazfish/profile/wearlocation"
+        defaultValue: 0
+    }
+
+    ConfigurationValue {
+        id: profileFitnessGoal
+        key: "/uk/co/piggz/amazfish/profile/fitnessgoal"
+        defaultValue: 10000
+    }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -126,6 +137,27 @@ Page {
                 stepSize: 1
                 label: qsTr("Weight (kg): ") + value
             }
+
+            ComboBox {
+                id: cboWearLocation
+                width: parent.width
+                label: qsTr("Wear Location")
+
+                menu: ContextMenu {
+                    MenuItem { text: qsTr("Left") }
+                    MenuItem { text: qsTr("Right") }
+                }
+            }
+
+            Slider {
+                id: sldFitnessGoal
+                width: parent.width
+                minimumValue: 5000
+                maximumValue: 30000
+                stepSize: 100
+                label: qsTr("Goal (steps): ") + value
+            }
+
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Save Profile")
@@ -141,6 +173,8 @@ Page {
         cboGender.currentIndex = profileGender.value;
         sldHeight.value = profileHeight.value;
         sldWeight.value = profileWeight.value;
+        cboWearLocation.currentIndex = profileWearLocation.value;
+        sldFitnessGoal.value = profileFitnessGoal.value;
     }
     function saveProfile() {
         profileName.value = fldName.text;
@@ -148,6 +182,9 @@ Page {
         profileGender.value = cboGender.currentIndex;
         profileHeight.value = sldHeight.value;
         profileWeight.value = sldWeight.value;
+        profileWearLocation.value = cboWearLocation.currentIndex;
+        profileFitnessGoal.value = sldFitnessGoal.value;
+
         tmrSetDelay.start();
     }
 

@@ -4,18 +4,24 @@ const char* AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION  = "{00001
 const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT = "{00002a46-0000-1000-8000-00805f9b34fb}";
 const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_CONTROL = "{00002a44-0000-1000-8000-00805f9b34fb}";
 
-AlertNotificationService::AlertNotificationService(QObject *parent) : BipService(UUID_SERVICE_ALERT_NOTIFICATION, parent)
+AlertNotificationService::AlertNotificationService(QObject *parent) : QBLEService(UUID_SERVICE_ALERT_NOTIFICATION, parent)
 {
 
 }
 
-void AlertNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message)
+void AlertNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
 {
     qDebug() << "Alert:" << sender << subject << message;
 
     if (message.isEmpty()) {
         return;
     }
+    int hash = qHash(sender + subject + message);
+    if (hash == m_lastAlertHash && !allowDuplicate) {
+        qDebug() << "Discarded duplicate alert";
+        return; //Do not send duplicate alerts
+    }
+    m_lastAlertHash = hash;
 
     int category = 0xfa; //Custom Huami icon
     int icon = mapSenderToIcon(sender);
@@ -42,14 +48,14 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
     }
 
     send.truncate(230); //!TODO is 230 is the max?
-    service()->writeCharacteristic(service()->characteristic(QBluetoothUuid(QString(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT))), send, QLowEnergyService::WriteWithResponse);
+    writeCharacteristic(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT, send);
 }
 
 void AlertNotificationService::incomingCall(const QString &caller)
 {
     QByteArray send = QByteArray::fromHex("0301");
     send += caller.toUtf8();
-    service()->writeCharacteristic(service()->characteristic(QBluetoothUuid(QString(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT))), send, QLowEnergyService::WriteWithResponse);
+    writeCharacteristic(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT, send);
 }
 
 int AlertNotificationService::mapSenderToIcon(const QString &sender)

@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<MiBandService>();
     qmlRegisterType<MiBand2Service>();
     qmlRegisterType<AlertNotificationService>();
+    qmlRegisterType<HRMService>();
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BipPair", &bipPair);

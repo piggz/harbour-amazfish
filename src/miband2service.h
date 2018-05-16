@@ -1,7 +1,7 @@
 #ifndef MIBAND2SERVICE_H
 #define MIBAND2SERVICE_H
 
-#include "bipservice.h"
+#include "qble/qbleservice.h"
 
 /*
 {0000FEE1-0000-1000-8000-00805f9b34fb} MiBand2 Service
@@ -15,7 +15,7 @@
 --0000fed3-0000-1000-8000-00805f9b34fb //Unknown
 */
 
-class MiBand2Service : public BipService
+class MiBand2Service : public QBLEService
 {
     Q_OBJECT
 public:
@@ -38,7 +38,7 @@ public:
     Q_SIGNAL void authenticated();
 
 private:
-    Q_SLOT void characteristicChanged(const QLowEnergyCharacteristic &characteristic, const QByteArray &value);
+    Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 //    Q_SLOT void serviceReady(bool r);
 
     QByteArray handleAesAuth(QByteArray data, QByteArray secretKey);

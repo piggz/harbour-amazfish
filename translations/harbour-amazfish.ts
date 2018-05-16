@@ -77,7 +77,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Profile</source>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -85,6 +85,92 @@
     <name>PairPage</name>
     <message>
         <source>Start scan</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-device</name>
+    <message>
+        <source>Device Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Langage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>en_US</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>es_ES</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zh_CN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zh_TW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date Display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date/Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>12hr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>24hr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Distance Unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imperial</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-menu</name>
+    <message>
+        <source>Settings Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Device Setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Setting</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -120,6 +206,22 @@
     </message>
     <message>
         <source>Female</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wear Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goal (steps): </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

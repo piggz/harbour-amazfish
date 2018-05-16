@@ -51,8 +51,8 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("PairPage.qml"))
             }
             MenuItem {
-                text: qsTr("Profile")
-                onClicked: pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
             }
             MenuItem {
                 text: qsTr("Disconnect from watch")
@@ -73,6 +73,7 @@ Page {
         // Tell SilicaFlickable the height of its content.
         contentHeight: column.height
 
+        /*
         Timer {
             id: tmrRefresh
             interval: 60000
@@ -83,7 +84,7 @@ Page {
                     BipInterface.connectToDevice(pairedAddress.value);
                 }
             }
-        }
+        }*/
 
         // Place our content in a Column.  The PageHeader is always placed at the top
         // of the page, followed by our content.
@@ -131,7 +132,67 @@ Page {
                 }
 
             }
+            Row {
+                Image {
+                    id: imgBattery
+                    source: "image://theme/icon-m-battery"
+                    width: Theme.iconSizeMedium
+                    height: width
+                }
+                Label {
+                    id: lblBattery
+                    color: Theme.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeMedium
+                    height: Theme.iconSizeMedium
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
 
+            Row {
+                Image {
+                    id: imgSteps
+                    source: "../pics/icon-m-steps.png"
+                    width: Theme.iconSizeMedium
+                    height: width
+                }
+                Label {
+                    id: lblSteps
+                    color: Theme.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeMedium
+                    height: Theme.iconSizeMedium
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            //Heartrate
+            Row {
+                width: parent.width
+                Image {
+                    id: imgHeartrate
+                    source: "../pics/icon-m-heartrate.png"
+                    width: Theme.iconSizeMedium
+                    height: width
+                }
+                Label {
+                    id: lblHeartrate
+                    color: Theme.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeMedium
+                    height: Theme.iconSizeMedium
+                    verticalAlignment: Text.AlignVCenter
+                }
+                //Spacer
+                Item {
+                    width: parent.width -  Theme.iconSizeMedium * 3
+                    height: 1
+                }
+
+                IconButton {
+                    icon.source: "image://theme/icon-m-refresh"
+                    onClicked: {
+                        BipInterface.hrmService().enableManualHRMeasurement(true);
+                    }
+                }
+            }
         }
     }
     Timer {
@@ -152,7 +213,29 @@ Page {
             if (BipInterface.ready){
                 BipInterface.infoService().refreshInformation();
                 BipInterface.miBandService().requestGPSVersion();
+                BipInterface.miBandService().requestBatteryInfo();
+
             }
+        }
+    }
+
+    Connections {
+        target: BipInterface.miBandService()
+
+        onBatteryInfoChanged: {
+            lblBattery.text = BipInterface.miBandService().batteryInfo
+        }
+
+        onStepsChanged: {
+            lblSteps.text = BipInterface.miBandService().steps
+        }
+    }
+
+    Connections {
+        target: BipInterface.hrmService()
+
+        onHeartRateChanged: {
+            lblHeartrate.text = BipInterface.hrmService().heartRate
         }
     }
 
