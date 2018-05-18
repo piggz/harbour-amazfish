@@ -43,13 +43,14 @@ Page {
                     pageStack.push(Qt.resolvedUrl("Settings-device.qml"))
                 }
             }
+            /*
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Application Setting")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Settings-application.qml"))
                 }
-            }
+            }*/
         }
     }
 

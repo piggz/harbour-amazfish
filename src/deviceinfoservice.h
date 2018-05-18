@@ -3,11 +3,11 @@
 
 #include "qble/qbleservice.h"
 
-class BipInfoService : public QBLEService
+class DeviceInfoService : public QBLEService
 {
     Q_OBJECT
 public:
-    BipInfoService(QObject *parent);
+    DeviceInfoService(const QString &path, QObject *parent);
 
     static const char* UUID_SERVICE_DEVICEINFO;
     static const char* UUID_CHARACTERISTIC_INFO_SERIAL_NO;
@@ -43,7 +43,7 @@ private:
     QString m_systemId;
     QString m_pnpId;
 
-    Q_SLOT void characteristicRead(const QString &characteristic, const QByteArray &value);
+    Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
 };
 
 #endif // BIPINFOSERVICE_H

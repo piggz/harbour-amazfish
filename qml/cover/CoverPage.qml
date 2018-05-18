@@ -40,12 +40,12 @@ CoverBackground {
 
             BusyIndicator {
                 size: BusyIndicatorSize.Medium
-                visible: BipInterface.connectionState == "connecting"
-                running: BipInterface.connectionState == "connecting"
+                visible: DeviceInterface.connectionState == "connecting"
+                running: DeviceInterface.connectionState == "connecting"
             }
             Image {
                 source: "image://theme/icon-m-bluetooth-device"
-                visible: BipInterface.connectionState == "connected" || BipInterface.connectionState == "authenticated"
+                visible: DeviceInterface.connectionState == "connected" || DeviceInterface.connectionState == "authenticated"
             }
         }
         Item {
@@ -55,12 +55,12 @@ CoverBackground {
 
             BusyIndicator {
                 size: BusyIndicatorSize.Medium
-                visible: BipInterface.connectionState == "connected"
-                running: BipInterface.connectionState == "connected"
+                visible: DeviceInterface.connectionState == "connected"
+                running: DeviceInterface.connectionState == "connected"
             }
             Image {
                 source: "image://theme/icon-m-watch"
-                visible: BipInterface.connectionState == "authenticated"
+                visible: DeviceInterface.connectionState == "authenticated"
             }
         }
     }

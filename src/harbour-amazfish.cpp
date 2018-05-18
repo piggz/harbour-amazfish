@@ -7,8 +7,8 @@
 #include <QQmlContext>
 
 #include <sailfishapp.h>
-#include "bippair.h"
-#include "bipinterface.h"
+#include "qble/bluezadapter.h"
+#include "deviceinterface.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,18 +26,18 @@ int main(int argc, char *argv[])
 
     QGuiApplication *app = SailfishApp::application(argc, argv);
 
-    BipPair bipPair;
-    BipInterface bipInterface;
+    DeviceInterface devInterface;
+    BluezAdapter bluezAdapter;
 
-    qmlRegisterType<BipInfoService>();
+    qmlRegisterType<DeviceInfoService>();
     qmlRegisterType<MiBandService>();
     qmlRegisterType<MiBand2Service>();
     qmlRegisterType<AlertNotificationService>();
     qmlRegisterType<HRMService>();
 
     QQuickView *view = SailfishApp::createView();
-    view->rootContext()->setContextProperty("BipPair", &bipPair);
-    view->rootContext()->setContextProperty("BipInterface", &bipInterface);
+    view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);
+    view->rootContext()->setContextProperty("DeviceInterface", &devInterface);
 
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));
     view->show();

@@ -1,12 +1,12 @@
 #include "alertnotificationservice.h"
 
-const char* AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION  = "{00001811-0000-1000-8000-00805f9b34fb}";
-const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT = "{00002a46-0000-1000-8000-00805f9b34fb}";
-const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_CONTROL = "{00002a44-0000-1000-8000-00805f9b34fb}";
+const char* AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION  = "00001811-0000-1000-8000-00805f9b34fb";
+const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT = "00002a46-0000-1000-8000-00805f9b34fb";
+const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_CONTROL = "00002a44-0000-1000-8000-00805f9b34fb";
 
-AlertNotificationService::AlertNotificationService(QObject *parent) : QBLEService(UUID_SERVICE_ALERT_NOTIFICATION, parent)
+AlertNotificationService::AlertNotificationService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_ALERT_NOTIFICATION, path, parent)
 {
-
+ qDebug() << "AlertNotificationService::AlertNotificationService";
 }
 
 void AlertNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
@@ -48,14 +48,14 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
     }
 
     send.truncate(230); //!TODO is 230 is the max?
-    writeCharacteristic(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT, send);
+    writeValue(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT, send);
 }
 
 void AlertNotificationService::incomingCall(const QString &caller)
 {
     QByteArray send = QByteArray::fromHex("0301");
     send += caller.toUtf8();
-    writeCharacteristic(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT, send);
+    writeValue(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT, send);
 }
 
 int AlertNotificationService::mapSenderToIcon(const QString &sender)

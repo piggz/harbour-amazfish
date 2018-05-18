@@ -195,7 +195,7 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            BipInterface.miBandService().setUserInfo();
+            DeviceInterface.miBandService().setUserInfo();
         }
     }
 }

@@ -12,6 +12,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri May 18 2018 Adam Pigg <adam@piggz.co.uk> 0.4-1
+- New release based on re-written BLE code
+- no new features, but should stay connected
+
 * Sun Apr 13 2014 Jack Tar <jack.tar@example.com> 0.0.1-1
 - Scrubbed the deck
 - Hoisted the sails

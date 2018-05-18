@@ -4,11 +4,13 @@
 #include "qble/qbledevice.h"
 #include "qble/qbleservice.h"
 
-#include "bipinfoservice.h"
+#include "deviceinfoservice.h"
 #include "mibandservice.h"
 #include "miband2service.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
+
+#include <QTimer>
 
 class BipDevice : public QBLEDevice
 {
@@ -21,15 +23,28 @@ public:
     static const char* UUID_SERVICE_HRM;
     static const char* UUID_SERVICE_DEVICEINFO;
 
+    virtual void pair();
+    virtual void connectToDevice();
+    virtual void disconnectFromDevice();
+
+    QString connectionState() const;
+    Q_SIGNAL void connectionStateChanged();
+
+    Q_SLOT void authenticated(bool ready);
 private:
-    BipInfoService *m_infoService = nullptr;
-    MiBandService *m_mibandService = nullptr;
-    MiBand2Service *m_miband2Service = nullptr;
-    AlertNotificationService *m_alertNotificationService = nullptr;
-    HRMService *m_hrmService = nullptr;
+    void parseServices();
+    bool m_needsAuth = false;
+    bool m_pairing = false;
+    bool m_ready = false;
+    bool m_hasInitialised = false;
+    bool m_autoreconnect = true;
+    QString m_connectionState;
+    QTimer *m_reconnectTimer;
 
-    QList<QBLEService *>m_genericServices;
+    void initialise();
+    void setConnectionState(const QString &state);
 
+    Q_SLOT void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 };
 
 #endif // BIPDEVICE_H

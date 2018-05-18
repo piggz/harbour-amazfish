@@ -4,17 +4,19 @@
 
 #include "typeconversion.h"
 
-const char* MiBandService::UUID_SERVICE_MIBAND = "{0000FEE0-0000-1000-8000-00805f9b34fb}";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION = "{00000003-0000-3512-2118-0009af100700}";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO = "{00000006-0000-3512-2118-0009af100700}";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT = "{00000010-0000-3512-2118-0009af100700}";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_NOTIFICATION = "{00000002-0000-3512-2118-0009af100700)";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME = "{00002a2b-0000-1000-8000-00805f9b34fb)";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS = "{00000008-0000-3512-2118-0009af100700)";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS = "{00000007-0000-3512-2118-0009af100700)";
+const char* MiBandService::UUID_SERVICE_MIBAND = "0000fee0-0000-1000-8000-00805f9b34fb";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION = "00000003-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO = "00000006-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT = "00000010-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_NOTIFICATION = "00000002-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME = "00002a2b-0000-1000-8000-00805f9b34fb";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS = "00000008-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS = "00000007-0000-3512-2118-0009af100700";
 
-MiBandService::MiBandService(QObject *parent) : QBLEService(UUID_SERVICE_MIBAND, parent)
+MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND, path, parent)
 {
+    qDebug() << "MiBandService::MiBandService";
+
     connect(this, &QBLEService::characteristicChanged, this, &MiBandService::characteristicChanged);
     connect(this, &QBLEService::characteristicRead, this, &MiBandService::characteristicRead);
 
@@ -42,7 +44,7 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
         m_batteryInfo.setData(value);
         emit batteryInfoChanged();
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS) {
-        qDebug() << "...Got realtime steps";
+        qDebug() << "...Got realtime steps:" << value.length();
         if (value.length() == 13) {
             m_steps = TypeConversion::toUint16(value[1], value[2]);
             emit stepsChanged();
@@ -74,7 +76,7 @@ QString MiBandService::gpsVersion()
 
 void MiBandService::requestBatteryInfo()
 {
-    readCharacteristic(UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO);
+    readValue(UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO);
 }
 
 int MiBandService::batteryInfo()

@@ -1,11 +1,14 @@
 #include "hrmservice.h"
 
-const char* HRMService::UUID_CHARACTERISTIC_HRM_MEASUREMENT = "{00002a37-0000-1000-8000-00805f9b34fb}";
-const char* HRMService::UUID_CHARACTERISTIC_HRM_CONTROL = "{00002a39-0000-1000-8000-00805f9b34fb}";
+const char* HRMService::UUID_SERVICE_HRM = "0000180d-0000-1000-8000-00805f9b34fb";
+const char* HRMService::UUID_CHARACTERISTIC_HRM_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
+const char* HRMService::UUID_CHARACTERISTIC_HRM_CONTROL = "00002a39-0000-1000-8000-00805f9b34fb";
 
 
-HRMService::HRMService(QObject *parent) : QBLEService("{0000180d-0000-1000-8000-00805f9b34fb}", parent)
+HRMService::HRMService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_HRM, path, parent)
 {
+    qDebug() << "HRMService::HRMService";
+
     connect(this, &QBLEService::characteristicChanged, this, &HRMService::characteristicChanged);
 }
 

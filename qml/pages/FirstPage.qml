@@ -30,9 +30,9 @@ Page {
     }
 
     Connections {
-        target: BipInterface
+        target: DeviceInterface
         onConnectionStateChanged: {
-            console.log(BipInterface.connectionState);
+            console.log(DeviceInterface.connectionState);
         }
     }
 
@@ -58,33 +58,20 @@ Page {
                 text: qsTr("Disconnect from watch")
                 onClicked: {
                     manualDisconnect = true;
-                    BipInterface.disconnect();
+                    DeviceInterface.disconnect();
                 }
             }
             MenuItem {
                 text: qsTr("Connect to watch")
                 onClicked: {
                     manualDisconnect = false;
-                    BipInterface.connectToDevice(pairedAddress.value);
+                    DeviceInterface.connectToDevice(pairedAddress.value);
                 }
             }
         }
 
         // Tell SilicaFlickable the height of its content.
         contentHeight: column.height
-
-        /*
-        Timer {
-            id: tmrRefresh
-            interval: 60000
-            repeat: true
-            running: true
-            onTriggered: {
-                if (BipInterface.connectionState == "disconnected" && manualDisconnect == false){
-                    BipInterface.connectToDevice(pairedAddress.value);
-                }
-            }
-        }*/
 
         // Place our content in a Column.  The PageHeader is always placed at the top
         // of the page, followed by our content.
@@ -109,12 +96,12 @@ Page {
                     height: childrenRect.height
                     BusyIndicator {
                         size: BusyIndicatorSize.Medium
-                        visible: BipInterface.connectionState == "connecting"
-                        running: BipInterface.connectionState == "connecting"
+                        visible: DeviceInterface.connectionState == "connecting"
+                        running: DeviceInterface.connectionState == "connecting"
                     }
                     Image {
                         source: "image://theme/icon-m-bluetooth-device"
-                        visible: BipInterface.connectionState == "connected" || BipInterface.connectionState == "authenticated"
+                        visible: DeviceInterface.connectionState == "connected" || DeviceInterface.connectionState == "authenticated"
                     }
                 }
                 Item {
@@ -122,12 +109,12 @@ Page {
                     height: childrenRect.height
                     BusyIndicator {
                         size: BusyIndicatorSize.Medium
-                        visible: BipInterface.connectionState == "connected"
-                        running: BipInterface.connectionState == "connected"
+                        visible: DeviceInterface.connectionState == "connected"
+                        running: DeviceInterface.connectionState == "connected"
                     }
                     Image {
                         source: "image://theme/icon-m-watch"
-                        visible: BipInterface.connectionState == "authenticated"
+                        visible: DeviceInterface.connectionState == "authenticated"
                     }
                 }
 
@@ -189,7 +176,7 @@ Page {
                 IconButton {
                     icon.source: "image://theme/icon-m-refresh"
                     onClicked: {
-                        BipInterface.hrmService().enableManualHRMeasurement(true);
+                        DeviceInterface.hrmService().enableManualHRMeasurement(true);
                     }
                 }
             }
@@ -208,36 +195,32 @@ Page {
     }
 
     Connections {
-        target: BipInterface
-        onReadyChanged: {
-            if (BipInterface.ready){
-                BipInterface.infoService().refreshInformation();
-                BipInterface.miBandService().requestGPSVersion();
-                BipInterface.miBandService().requestBatteryInfo();
+        target: DeviceInterface
+        onConnectionStateChanged: {
+            if (DeviceInterface.connectionState == "authenticated") {
 
+                DeviceInterface.miBandService().onBatteryInfoChanged.connect(batteryInfoChanged);
+                DeviceInterface.miBandService().onStepsChanged.connect(stepsChanged);
+                DeviceInterface.hrmService().heartRateChanged.connect(heartRateChanged);
+
+                DeviceInterface.miBandService().requestGPSVersion();
+                DeviceInterface.miBandService().requestBatteryInfo();
             }
         }
     }
 
-    Connections {
-        target: BipInterface.miBandService()
-
-        onBatteryInfoChanged: {
-            lblBattery.text = BipInterface.miBandService().batteryInfo
-        }
-
-        onStepsChanged: {
-            lblSteps.text = BipInterface.miBandService().steps
-        }
+    function batteryInfoChanged() {
+        lblBattery.text = DeviceInterface.miBandService().batteryInfo
     }
 
-    Connections {
-        target: BipInterface.hrmService()
-
-        onHeartRateChanged: {
-            lblHeartrate.text = BipInterface.hrmService().heartRate
-        }
+    function stepsChanged() {
+        lblSteps.text = DeviceInterface.miBandService().steps
     }
+
+    function heartRateChanged() {
+        lblHeartrate.text = DeviceInterface.hrmService().heartRate
+    }
+
 
     Component.onCompleted: {
         if (profileName.value === "") {
@@ -246,7 +229,7 @@ Page {
         }
 
         if (pairedAddress.value !== "") {
-            BipInterface.connectToDevice(pairedAddress.value);
+            DeviceInterface.connectToDevice(pairedAddress.value);
         }
     }
 }

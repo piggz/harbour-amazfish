@@ -8,6 +8,8 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
+    property string devicePath: "";
+
     ConfigurationValue {
         id: pairedAddress
         key: "/uk/co/piggz/amazfish/pairedAddress"
@@ -21,6 +23,17 @@ Page {
         defaultValue: ""
     }
 
+    Timer {
+        id: tmrScan
+        interval: 30000
+        running: false
+        repeat: false
+        onTriggered: {
+            BluezAdapter.stopDiscovery();
+            pair();
+        }
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -29,32 +42,50 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Start scan")
-                onClicked: BipPair.startScan()
+                onClicked: {
+
+                    BluezAdapter.startDiscovery();
+                    tmrScan.start();
+                    lblStatus.text = "Searching...";
+                }
+
             }
         }
 
         Label {
             id: lblStatus
             anchors.centerIn: parent
-
-            text: BipPair.status
         }
         Label {
             id: lblWatch
+            text: DeviceInterface.connectionState
             anchors.top: lblStatus.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.margins: Theme.paddingMedium
         }
     }
 
-    Connections {
-        target: BipPair
+    function pair()
+    {
+        var path = BluezAdapter.matchDevice("Amazfit Bip");
+        if (path === "") {
+            lblStatus.text = "Watch not found";
+            return;
+        }
 
-        onPairComplete: {
-            console.log("Paired with", BipPair.watchName(), BipPair.watchAddress())
-            lblWatch.text = "Paired with " + BipPair.watchName() + "\n(" + BipPair.watchAddress() + ")";
-            pairedAddress.value = BipPair.watchAddress();
-            pairedName.value  = BipPair.watchName();
+        devicePath = path;
+        lblStatus.text = "Connecting to watch..." + path
+        DeviceInterface.pair(path);
+    }
+
+    Connections {
+        target: DeviceInterface
+        onConnectionStateChanged: {
+            if (DeviceInterface.connectionState == "authenticated") {
+                pairedAddress.value = devicePath;
+                pairedAddress.sync;
+            }
         }
     }
+
 }

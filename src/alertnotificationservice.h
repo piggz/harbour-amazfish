@@ -13,7 +13,7 @@ class AlertNotificationService : public QBLEService
 {
     Q_OBJECT
 public:
-    AlertNotificationService(QObject *parent);
+    AlertNotificationService(const QString &path, QObject *parent);
 
     static const char* UUID_SERVICE_ALERT_NOTIFICATION;
     static const char* UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT;

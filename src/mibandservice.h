@@ -26,7 +26,7 @@ class MiBandService : public QBLEService
 {
     Q_OBJECT
 public:
-    MiBandService(QObject *parent);
+    MiBandService(const QString &path, QObject *parent);
     static const char* UUID_SERVICE_MIBAND;
     static const char* UUID_CHARACTERISTIC_MIBAND_CONFIGURATION;
     static const char* UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO;

@@ -10,13 +10,6 @@ Page {
 
     property bool manualDisconnect: false
 
-    Connections {
-        target: BipInterface
-        onConnectionStateChanged: {
-            console.log(BipInterface.connectionState);
-        }
-    }
-
     ConfigurationValue {
         id: pairedAddress
         key: "/uk/co/piggz/amazfish/pairedAddress"
@@ -30,6 +23,15 @@ Page {
         // Tell SilicaFlickable the height of its content.
         contentHeight: column.height
 
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Refresh")
+                onClicked: {
+                    DeviceInterface.infoService().refreshInformation();
+                    DeviceInterface.miBandService().requestGPSVersion();
+                }
+            }
+        }
         // Place our content in a Column.  The PageHeader is always placed at the top
         // of the page, followed by our content.
         Column {
@@ -44,56 +46,56 @@ Page {
             Label {
                 text: "Address: " + pairedAddress.value
                 color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeExtraLarge
+                font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "Serial No: " + BipInterface.infoService().serialNumber
+                text: "Serial No: " + DeviceInterface.infoService().serialNumber
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "Hardware Rev: "+ BipInterface.infoService().hardwareRevision
+                text: "Hardware Rev: "+ DeviceInterface.infoService().hardwareRevision
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "Software Rev: " + BipInterface.infoService().softwareRevision
+                text: "Software Rev: " + DeviceInterface.infoService().softwareRevision
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "GPS Ver: " + BipInterface.miBandService().gpsVersion
+                text: "System ID: " + DeviceInterface.infoService().systemId
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeLarge
+            }
+            Label {
+                text: "GPS Ver: " + DeviceInterface.miBandService().gpsVersion
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Button {
                 text: "Test Notification"
                 onClicked: {
-                    BipInterface.alertNotificationService().sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
+                    DeviceInterface.alertNotificationService().sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
                 }
             }
             Button {
                 text: "Test Email"
                 onClicked: {
-                    BipInterface.alertNotificationService().sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
+                    DeviceInterface.alertNotificationService().sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
                 }
             }
             Button {
                 text: "Test Call"
                 onClicked: {
-                    BipInterface.alertNotificationService().incomingCall("Somebody");
+                    DeviceInterface.alertNotificationService().incomingCall("Somebody");
                 }
             }
         }
     }
 
-    Connections {
-        target: BipInterface
-        onReadyChanged: {
-            if (BipInterface.ready){
-                BipInterface.infoService().refreshInformation();
-                BipInterface.miBandService().requestGPSVersion();
-            }
-        }
+    Component.onCompleted: {
+        DeviceInterface.infoService().refreshInformation();
+        DeviceInterface.miBandService().requestGPSVersion();
     }
 }

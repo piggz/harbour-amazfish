@@ -130,10 +130,10 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            BipInterface.miBandService().setLanguage();
-            BipInterface.miBandService().setDateDisplay();
-            BipInterface.miBandService().setTimeFormat();
-            BipInterface.miBandService().setDistanceUnit();
+            DeviceInterface.miBandService().setLanguage();
+            DeviceInterface.miBandService().setDateDisplay();
+            DeviceInterface.miBandService().setTimeFormat();
+            DeviceInterface.miBandService().setDistanceUnit();
         }
     }
 }

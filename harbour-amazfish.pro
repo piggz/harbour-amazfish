@@ -11,20 +11,17 @@
 
 # The name of your application
 TARGET = harbour-amazfish
+TEMPLATE = app
 
 CONFIG += sailfishapp
-
-include(qble/qble.pri)
+LIBS += -Lqble/qble
 
 QT += bluetooth dbus contacts
 
 PKGCONFIG += mlite5
 
 SOURCES += src/harbour-amazfish.cpp \
-    src/bipinterface.cpp \
     src/qaesencryption.cpp \
-    src/bippair.cpp \
-    src/bipinfoservice.cpp \
     src/mibandservice.cpp \
     src/miband2service.cpp \
     src/alertnotificationservice.cpp \
@@ -35,7 +32,9 @@ SOURCES += src/harbour-amazfish.cpp \
     src/settingsmanager.cpp \
     src/bipbatteryinfo.cpp \
     src/hrmservice.cpp \
-    src/bipdevice.cpp
+    src/bipdevice.cpp \
+    src/deviceinterface.cpp \
+    src/deviceinfoservice.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -65,11 +64,7 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-amazfish-de.ts
 
 HEADERS += \
-    src/bipinterface.h \
-    src/bipinterface.h \
     src/qaesencryption.h \
-    src/bippair.h \
-    src/bipinfoservice.h \
     src/mibandservice.h \
     src/miband2service.h \
     src/alertnotificationservice.h \
@@ -80,4 +75,9 @@ HEADERS += \
     src/settingsmanager.h \
     src/bipbatteryinfo.h \
     src/hrmservice.h \
-    src/bipdevice.h
+    src/bipdevice.h \
+    src/deviceinterface.h \
+    src/deviceinfoservice.h
+
+
+include(qble/qble.pri)

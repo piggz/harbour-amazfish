@@ -19,7 +19,7 @@ class MiBand2Service : public QBLEService
 {
     Q_OBJECT
 public:
-    MiBand2Service(QObject *parent);
+    MiBand2Service(const QString &path, QObject *parent);
 
     static const char* UUID_SERVICE_MIBAND2;
     static const char* UUID_CHARACTERISITIC_MIBAND2_AUTH;
@@ -33,9 +33,9 @@ public:
     const char AUTH_BYTE = 0x08;
     const QByteArray AUTH_SECRET_KEY = "0123456789@ABCDE";
 
-    void initialise();
+    void initialise(bool firstTime);
 
-    Q_SIGNAL void authenticated();
+    Q_SIGNAL void authenticated(bool ready);
 
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
