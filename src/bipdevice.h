@@ -43,6 +43,7 @@ private:
 
     void initialise();
     void setConnectionState(const QString &state);
+    void reconnectionTimer();
 
     Q_SLOT void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 };

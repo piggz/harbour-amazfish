@@ -37,7 +37,7 @@ void QBLEDevice::disconnectFromDevice()
 {
     qDebug() << "QBLEDevice::disconnectFromDevice";
 
-    m_deviceInterface->asyncCall("Disconnect");
+    m_deviceInterface->call("Disconnect");
 }
 
 QBLEService* QBLEDevice::service(const QString &uuid)

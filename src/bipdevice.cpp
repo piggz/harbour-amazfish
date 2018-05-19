@@ -11,7 +11,8 @@ BipDevice::BipDevice()
 {
     setConnectionState("disconnected");
     m_reconnectTimer = new QTimer(this);
-    connect(m_reconnectTimer, &QTimer::timeout, this, &BipDevice::connectToDevice);
+    m_reconnectTimer->setInterval(60000);
+    connect(m_reconnectTimer, &QTimer::timeout, this, &BipDevice::reconnectionTimer);
 }
 
 void BipDevice::pair()
@@ -38,7 +39,7 @@ void BipDevice::connectToDevice()
     QBLEDevice::disconnectFromDevice();
     setConnectionState("connecting");
     QBLEDevice::connectToDevice();
-    m_reconnectTimer->start(60000); //Start timer to attempt to reconnect every 30 seconds
+    m_reconnectTimer->start(); //Start timer to attempt to reconnect every 60 seconds
 }
 
 void BipDevice::disconnectFromDevice()
@@ -123,15 +124,9 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
                 if (resolved) {
                     initialise();
                 }
-            } else {
-                if (m_autoreconnect) {
-                    qDebug() << "Auto reconnecting";
-                    connectToDevice();
-                }
             }
         }
         if (map.contains("ServicesResolved")) {
-            m_reconnectTimer->stop(); //Now connected, stop the timer
             bool value = map["ServicesResolved"].toBool();
 
             if (value && !m_pairing) {
@@ -207,5 +202,14 @@ void BipDevice::initialise()
         mi2->initialise(m_needsAuth);
     } else {
         qDebug() << "NOT got mi2 service!";
+    }
+}
+
+void BipDevice::reconnectionTimer()
+{
+    qDebug() << "BipDevice::reconnectionTimer";
+    if (!deviceProperty("Connected").toBool() && m_autoreconnect) {
+        qDebug() << "Lost connection";
+        QBLEDevice::connectToDevice();
     }
 }
