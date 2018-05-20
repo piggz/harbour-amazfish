@@ -23,15 +23,45 @@ QByteArray fromInt32(int val)
     return QByteArray(1, val & 0xff) + QByteArray(1, ((val >> 8) & 0xff)) + QByteArray(1, ((val >> 16) & 0xff)) + QByteArray(1, ((val >> 24) & 0xff));
 }
 
+QByteArray dateTimeToBytes(const QDateTime &dt, int format)
+{
+    QByteArray ret;
+
+    if (format == 0) {//short
+        ret += fromInt16(dt.date().year());
+        ret += fromInt8(dt.date().month());
+        ret += fromInt8(dt.date().day());
+        ret += fromInt8(dt.time().hour());
+        ret += fromInt8(dt.time().minute());
+    } else if (format == 1) { //long
+        ret += fromInt16(dt.date().year());
+        ret += fromInt8(dt.date().month());
+        ret += fromInt8(dt.date().day());
+        ret += fromInt8(dt.time().hour());
+        ret += fromInt8(dt.time().minute());
+        ret += fromInt8(dt.time().second());
+
+    }
+
+    //Tail of the data
+    ret += QByteArray(1, char(0x00));
+
+    //Timezone
+    int utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(QDateTime::currentDateTime());
+    ret += char((utcOffset / (60 * 60)) * 2);
+
+    return ret;
+}
+
 QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset) {
     if (value.length() >= 7) {
         int year = TypeConversion::toUint16(value[0], value[1]);
         QDateTime timestamp(QDate(
-                    year,
-                    (value[2] & 0xff) - 1,
-                value[3] & 0xff),
+                                year,
+                                (value[2] & 0xff) - 1,
+                            value[3] & 0xff),
                 QTime(
-                value[4] & 0xff,
+                    value[4] & 0xff,
                 value[5] & 0xff,
                 value[6] & 0xff)
                 );
@@ -56,7 +86,12 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
 }
 
 int toUint16(char val1, char val2) {
-        return (val1 & 0xff) | ((val2 & 0xff) << 8);
-    }
+    return (val1 & 0xff) | ((val2 & 0xff) << 8);
+}
+
+
+int toUint32(char val1, char val2, char val3, char val4) {
+    return (val1 & 0xff) | ((val2 & 0xff) << 8) | ((val3 & 0xff) << 16) | ((val4 & 0xff) << 24);
+}
 
 }

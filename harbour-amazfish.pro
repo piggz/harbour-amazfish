@@ -34,7 +34,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/hrmservice.cpp \
     src/bipdevice.cpp \
     src/deviceinterface.cpp \
-    src/deviceinfoservice.cpp
+    src/deviceinfoservice.cpp \
+    src/logfetchoperation.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -61,7 +62,9 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-amazfish-de.ts
+TRANSLATIONS += translations/harbour-amazfish-de.ts \
+                translations/harbour-amazfish-ru.ts \
+                translations/harbour-amazfish-sv.ts
 
 HEADERS += \
     src/qaesencryption.h \
@@ -77,7 +80,8 @@ HEADERS += \
     src/hrmservice.h \
     src/bipdevice.h \
     src/deviceinterface.h \
-    src/deviceinfoservice.h
+    src/deviceinfoservice.h \
+    src/logfetchoperation.h
 
 
 include(qble/qble.pri)

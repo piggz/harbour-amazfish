@@ -25,13 +25,13 @@ void MiBand2Service::characteristicChanged(const QString &characteristic, const 
 {
     qDebug() << "Mi2Band Changed:" << characteristic << value;
 
-    if (value[0] == AUTH_RESPONSE && value[1] == AUTH_SEND_KEY && value[2] == AUTH_SUCCESS) {
+    if (value[0] == RESPONSE && value[1] == AUTH_SEND_KEY && value[2] == SUCCESS) {
         qDebug() << "Received initial auth success, requesting random auth number";
         writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, QByteArray(&AUTH_REQUEST_RANDOM_AUTH_NUMBER, 1) + QByteArray(&AUTH_BYTE, 1));
-    } else  if (value[0] == AUTH_RESPONSE && value[1] == AUTH_REQUEST_RANDOM_AUTH_NUMBER && value[2] == AUTH_SUCCESS) {
+    } else  if (value[0] == RESPONSE && value[1] == AUTH_REQUEST_RANDOM_AUTH_NUMBER && value[2] == SUCCESS) {
         qDebug() << "Received random auth number, sending encrypted auth number";
         writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, QByteArray(&AUTH_SEND_ENCRYPTED_AUTH_NUMBER, 1) + QByteArray(&AUTH_BYTE, 1) + handleAesAuth(value.mid(3, 17), AUTH_SECRET_KEY));
-    } else  if (value[0] == AUTH_RESPONSE && value[1] == AUTH_SEND_ENCRYPTED_AUTH_NUMBER && value[2] == AUTH_SUCCESS) {
+    } else  if (value[0] == RESPONSE && value[1] == AUTH_SEND_ENCRYPTED_AUTH_NUMBER && value[2] == SUCCESS) {
         qDebug() << "Authenticated";
         emit authenticated(true);
     } else {

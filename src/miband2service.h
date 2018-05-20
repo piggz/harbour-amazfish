@@ -27,9 +27,9 @@ public:
     const char AUTH_SEND_KEY = 0x01;
     const char AUTH_REQUEST_RANDOM_AUTH_NUMBER = 0x02;
     const char AUTH_SEND_ENCRYPTED_AUTH_NUMBER = 0x03;
-    const char AUTH_RESPONSE = 0x10;
-    const char AUTH_SUCCESS = 0x01;
-    const char AUTH_FAIL = 0x04;
+    const char RESPONSE = 0x10;
+    const char SUCCESS = 0x01;
+    const char FAIL = 0x04;
     const char AUTH_BYTE = 0x08;
     const QByteArray AUTH_SECRET_KEY = "0123456789@ABCDE";
 
@@ -37,9 +37,9 @@ public:
 
     Q_SIGNAL void authenticated(bool ready);
 
+
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
-//    Q_SLOT void serviceReady(bool r);
 
     QByteArray handleAesAuth(QByteArray data, QByteArray secretKey);
 };

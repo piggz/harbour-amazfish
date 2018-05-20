@@ -91,6 +91,12 @@ Page {
                     DeviceInterface.alertNotificationService().incomingCall("Somebody");
                 }
             }
+            Button {
+                text: "Fetch debug log"
+                onClicked: {
+                    DeviceInterface.miBandService().fetchLogs();
+                }
+            }
         }
     }
 

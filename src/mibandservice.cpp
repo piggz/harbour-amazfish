@@ -5,13 +5,15 @@
 #include "typeconversion.h"
 
 const char* MiBandService::UUID_SERVICE_MIBAND = "0000fee0-0000-1000-8000-00805f9b34fb";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION = "00000003-0000-3512-2118-0009af100700";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO = "00000006-0000-3512-2118-0009af100700";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT = "00000010-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_NOTIFICATION = "00000002-0000-3512-2118-0009af100700";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME = "00002a2b-0000-1000-8000-00805f9b34fb";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS = "00000008-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION = "00000003-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA = "00000004-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA = "00000005-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO = "00000006-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS = "00000007-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS = "00000008-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT = "00000010-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME = "00002a2b-0000-1000-8000-00805f9b34fb";
 
 MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND, path, parent)
 {
@@ -19,15 +21,13 @@ MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService
 
     connect(this, &QBLEService::characteristicChanged, this, &MiBandService::characteristicChanged);
     connect(this, &QBLEService::characteristicRead, this, &MiBandService::characteristicRead);
-
-    //    connect(this, &BipService::readyChanged, this, &MiBandService::serviceReady);
 }
 
 void MiBandService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
     qDebug() << "MiBand Changed:" << characteristic << value;
 
-    if (value[0] == CHAR_RESPONSE && value[1] == COMMAND_REQUEST_GPS_VERSION && value[2] == CHAR_SUCCESS) {
+    if (value[0] == RESPONSE && value[1] == COMMAND_REQUEST_GPS_VERSION && value[2] == SUCCESS) {
         m_gpsVersion = value.mid(3);
         qDebug() << "Got gps version = " << m_gpsVersion;
         emit gpsVersionChanged();
@@ -48,6 +48,16 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
         if (value.length() == 13) {
             m_steps = TypeConversion::toUint16(value[1], value[2]);
             emit stepsChanged();
+        }
+    } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
+        qDebug() << "...got data";
+        if (m_operationRunning == 1 && m_logFetchOperation) {
+            m_logFetchOperation->newData(value);
+        }
+    } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
+        qDebug() << "...got metadata";
+        if (m_operationRunning == 1 && m_logFetchOperation) {
+            handleFetchMetaData(value);
         }
     }
 }
@@ -297,4 +307,64 @@ void MiBandService::setHeartrateSleepSupport(){
 int MiBandService::steps() const
 {
     return m_steps;
+}
+
+void MiBandService::fetchLogs()
+{
+    if (!m_logFetchOperation) {
+        m_operationRunning = 1;
+        m_logFetchOperation = new LogFetchOperation();
+
+        QDateTime fetchFrom = QDateTime::currentDateTime();
+        fetchFrom.addDays(-10);
+        QByteArray rawDate = TypeConversion::dateTimeToBytes(fetchFrom, 0);
+
+        //Send log read configuration
+        writeValue(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS) + rawDate);
+
+        enableNotification(UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
+        enableNotification(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+
+        writeValue(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, COMMAND_FETCH_DATA));
+    }
+}
+
+void MiBandService::handleFetchMetaData(const QByteArray &value)
+{
+    if (value.length() == 15) {
+        // first two bytes are whether our request was accepted
+        if (value.mid(0, 3) == QByteArray(RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS, 3)) {
+            // the third byte (0x01 on success) = ?
+            // the 4th - 7th bytes epresent the number of bytes/packets to expect, excluding the counter bytes
+            int expectedDataLength = TypeConversion::toUint32(value[3], value[4], value[5], value[6]);
+
+            // last 8 bytes are the start date
+            QDateTime startDate = TypeConversion::rawBytesToDateTime(value.mid(7, 8), false);
+
+            qDebug() << "About to transfer data from " << startDate;
+
+
+        } else {
+            qDebug() << "Unexpected activity metadata: " << value;
+            //finish
+        }
+    } else if (value.length() == 3) {
+        if (value == QByteArray(RESPONSE_FINISH_SUCCESS, 3)) {
+           qDebug() << "Finished sending data";
+           if (m_operationRunning == 1 && m_logFetchOperation) {
+                m_logFetchOperation->finished();
+                delete m_logFetchOperation;
+                m_logFetchOperation = nullptr;
+                m_operationRunning = 0;
+
+           }
+            //handleActivityFetchFinish(true);
+        } else {
+            qDebug() << "Unexpected activity metadata: " << value;
+            //handleActivityFetchFinish(false);
+        }
+    } else {
+        qDebug() << "Unexpected activity metadata: " << value;
+        //handleActivityFetchFinish(false);
+    }
 }
