@@ -97,6 +97,12 @@ Page {
                     DeviceInterface.miBandService().fetchLogs();
                 }
             }
+            Button {
+                text: "Test Popup"
+                onClicked: {
+                    app.showMessage("This is a test notification");
+                }
+            }
         }
     }
 

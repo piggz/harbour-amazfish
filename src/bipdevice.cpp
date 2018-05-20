@@ -23,7 +23,6 @@ void BipDevice::pair()
     m_pairing = true;
     m_autoreconnect = true;
     disconnectFromDevice();
-
     setConnectionState("pairing");
     emit connectionStateChanged();
 
@@ -193,6 +192,9 @@ void BipDevice::initialise()
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO);
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT);
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS);
+
+        connect(mi, &MiBandService::message, this, &BipDevice::message);
+
     }
     if (mi2) {
         qDebug() << "Got mi2 service";

@@ -29,6 +29,7 @@ public:
 
     QString connectionState() const;
     Q_SIGNAL void connectionStateChanged();
+    Q_SIGNAL void message(const QString &text);
 
     Q_SLOT void authenticated(bool ready);
 private:

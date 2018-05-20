@@ -319,12 +319,13 @@ void MiBandService::fetchLogs()
         fetchFrom.addDays(-10);
         QByteArray rawDate = TypeConversion::dateTimeToBytes(fetchFrom, 0);
 
-        //Send log read configuration
-        writeValue(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS) + rawDate);
 
         enableNotification(UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
         enableNotification(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
 
+        //Send log read configuration
+        writeValue(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS) + rawDate);
+        //Send log read command
         writeValue(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, COMMAND_FETCH_DATA));
     }
 }
@@ -342,7 +343,7 @@ void MiBandService::handleFetchMetaData(const QByteArray &value)
             QDateTime startDate = TypeConversion::rawBytesToDateTime(value.mid(7, 8), false);
 
             qDebug() << "About to transfer data from " << startDate;
-
+            emit message(tr("About to transfer data from ") + startDate.toString());
 
         } else {
             qDebug() << "Unexpected activity metadata: " << value;
@@ -358,7 +359,7 @@ void MiBandService::handleFetchMetaData(const QByteArray &value)
                 m_operationRunning = 0;
 
            }
-            //handleActivityFetchFinish(true);
+           emit message(tr("Finished transferring data"));
         } else {
             qDebug() << "Unexpected activity metadata: " << value;
             //handleActivityFetchFinish(false);

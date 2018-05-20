@@ -37,6 +37,8 @@ public:
     Q_INVOKABLE AlertNotificationService *alertNotificationService() const;
     Q_INVOKABLE HRMService *hrmService() const;
 
+    Q_SIGNAL void message(const QString &text);
+
 private:
     QString m_deviceAddress;
     QString m_deviceName;
