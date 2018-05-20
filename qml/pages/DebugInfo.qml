@@ -8,8 +8,6 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
-    property bool manualDisconnect: false
-
     ConfigurationValue {
         id: pairedAddress
         key: "/uk/co/piggz/amazfish/pairedAddress"
@@ -64,7 +62,7 @@ Page {
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "System ID: " + DeviceInterface.infoService().systemId
+                text: "Connection State: " + DeviceInterface.connectionState
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }

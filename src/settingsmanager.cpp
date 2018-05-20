@@ -2,6 +2,8 @@
 
 SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
 {
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/pairedAddress", this);
+
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/name", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/dob", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/gender", this);

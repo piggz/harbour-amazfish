@@ -53,11 +53,15 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
         qDebug() << "...got data";
         if (m_operationRunning == 1 && m_logFetchOperation) {
             m_logFetchOperation->newData(value);
+        } else if (m_operationRunning == 2 && m_activityFetchOperation) {
+            m_activityFetchOperation->newData(value);
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
         qDebug() << "...got metadata";
         if (m_operationRunning == 1 && m_logFetchOperation) {
-            handleFetchMetaData(value);
+            handleFetchLogMetaData(value);
+        } else if (m_operationRunning == 2 && m_activityFetchOperation) {
+            handleFetchActivityMetaData(value);
         }
     }
 }
@@ -311,7 +315,7 @@ int MiBandService::steps() const
 
 void MiBandService::fetchLogs()
 {
-    if (!m_logFetchOperation) {
+    if (!m_logFetchOperation && m_operationRunning == 0) {
         m_operationRunning = 1;
         m_logFetchOperation = new LogFetchOperation();
 
@@ -327,10 +331,36 @@ void MiBandService::fetchLogs()
         writeValue(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS) + rawDate);
         //Send log read command
         writeValue(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, COMMAND_FETCH_DATA));
+    } else {
+        emit message(tr("An operation is currently running, please try later"));
     }
 }
 
-void MiBandService::handleFetchMetaData(const QByteArray &value)
+void MiBandService::fetchActivityData()
+{
+    if (!m_activityFetchOperation && m_operationRunning == 0) {
+        m_operationRunning = 2;
+
+        QDateTime fetchFrom = lastActivitySync();
+
+        m_activityFetchOperation = new ActivityFetchOperation(fetchFrom);
+
+        QByteArray rawDate = TypeConversion::dateTimeToBytes(fetchFrom, 0);
+
+        enableNotification(UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
+        enableNotification(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+
+        //Send log read configuration
+        writeValue(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY) + rawDate);
+        //Send log read command
+        writeValue(UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, COMMAND_FETCH_DATA));
+    } else {
+        emit message(tr("An operation is currently running, please try later"));
+    }
+
+}
+
+void MiBandService::handleFetchLogMetaData(const QByteArray &value)
 {
     if (value.length() == 15) {
         // first two bytes are whether our request was accepted
@@ -342,8 +372,8 @@ void MiBandService::handleFetchMetaData(const QByteArray &value)
             // last 8 bytes are the start date
             QDateTime startDate = TypeConversion::rawBytesToDateTime(value.mid(7, 8), false);
 
-            qDebug() << "About to transfer data from " << startDate;
-            emit message(tr("About to transfer data from ") + startDate.toString());
+            qDebug() << "About to transfer log data from " << startDate;
+            emit message(tr("About to transfer log data from ") + startDate.toString());
 
         } else {
             qDebug() << "Unexpected activity metadata: " << value;
@@ -368,4 +398,55 @@ void MiBandService::handleFetchMetaData(const QByteArray &value)
         qDebug() << "Unexpected activity metadata: " << value;
         //handleActivityFetchFinish(false);
     }
+}
+
+void MiBandService::handleFetchActivityMetaData(const QByteArray &value)
+{
+    if (value.length() == 15) {
+        // first two bytes are whether our request was accepted
+        if (value.mid(0, 3) == QByteArray(RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS, 3)) {
+            // the third byte (0x01 on success) = ?
+            // the 4th - 7th bytes epresent the number of bytes/packets to expect, excluding the counter bytes
+            int expectedDataLength = TypeConversion::toUint32(value[3], value[4], value[5], value[6]);
+
+            // last 8 bytes are the start date
+            QDateTime startDate = TypeConversion::rawBytesToDateTime(value.mid(7, 8), false);
+            m_activityFetchOperation->setStartDate(startDate);
+
+            qDebug() << "About to transfer activity data from " << startDate;
+            emit message(tr("About to transfer activity data from ") + startDate.toString());
+
+        } else {
+            qDebug() << "Unexpected activity metadata: " << value;
+            //finish
+        }
+    } else if (value.length() == 3) {
+        if (value == QByteArray(RESPONSE_FINISH_SUCCESS, 3)) {
+           qDebug() << "Finished sending data";
+           if (m_operationRunning == 2 && m_activityFetchOperation) {
+                m_activityFetchOperation->finished(true);
+                delete m_activityFetchOperation;
+                m_activityFetchOperation = nullptr;
+                m_operationRunning = 0;
+
+           }
+           emit message(tr("Finished transferring activity data"));
+        } else {
+            qDebug() << "Unexpected activity metadata: " << value;
+            //handleActivityFetchFinish(false);
+        }
+    } else {
+        qDebug() << "Unexpected activity metadata: " << value;
+        //handleActivityFetchFinish(false);
+    }
+}
+
+QDateTime MiBandService::lastActivitySync()
+{
+    qlonglong ls = m_settings.value("/uk/co/piggz/amazfish/device/lastSyncTimeMillis").toLongLong();
+
+    if (ls == 0) {
+        return QDateTime::currentDateTime().addDays(-100);
+    }
+    return QDateTime::fromMSecsSinceEpoch(ls);
 }

@@ -35,7 +35,9 @@ SOURCES += src/harbour-amazfish.cpp \
     src/bipdevice.cpp \
     src/deviceinterface.cpp \
     src/deviceinfoservice.cpp \
-    src/logfetchoperation.cpp
+    src/logfetchoperation.cpp \
+    src/activitysample.cpp \
+    src/activityfetchoperation.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -81,7 +83,9 @@ HEADERS += \
     src/bipdevice.h \
     src/deviceinterface.h \
     src/deviceinfoservice.h \
-    src/logfetchoperation.h
+    src/logfetchoperation.h \
+    src/activitysample.h \
+    src/activityfetchoperation.h
 
 
 include(qble/qble.pri)

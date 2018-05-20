@@ -5,6 +5,7 @@
 #include "settingsmanager.h"
 #include "bipbatteryinfo.h"
 #include "logfetchoperation.h"
+#include "activityfetchoperation.h"
 
 /*
 {0000FEE0-0000-1000-8000-00805f9b34fb} MiBand Service
@@ -106,6 +107,7 @@ public:
 
     //Operations
     Q_INVOKABLE void fetchLogs();
+    Q_INVOKABLE void fetchActivityData();
     //Q_INVOKABLE void fetchActivitySummaries();
     //Q_INVOKABLE void fetchActivityDetail();
 
@@ -123,7 +125,10 @@ private:
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
     Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
     void setGPSVersion(const QString& v);
-    void handleFetchMetaData(const QByteArray &value);
+    void handleFetchLogMetaData(const QByteArray &value);
+    void handleFetchActivityMetaData(const QByteArray &value);
+
+    QDateTime lastActivitySync();
 
     QString m_gpsVersion;
     int m_steps;
@@ -132,6 +137,7 @@ private:
     SettingsManager m_settings;
     BipBatteryInfo m_batteryInfo;
     LogFetchOperation *m_logFetchOperation = nullptr;
+    ActivityFetchOperation *m_activityFetchOperation = nullptr;
 };
 
 #endif // MIBANDSERVICE_H

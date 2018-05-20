@@ -53,15 +53,31 @@
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Download activity data</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MiBandService</name>
     <message>
-        <source>About to transfer data from </source>
+        <source>Finished transferring data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Finished transferring data</source>
+        <source>An operation is currently running, please try later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About to transfer log data from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About to transfer activity data from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished transferring activity data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

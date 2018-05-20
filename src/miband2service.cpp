@@ -31,7 +31,7 @@ void MiBand2Service::characteristicChanged(const QString &characteristic, const 
     } else  if (value[0] == RESPONSE && value[1] == AUTH_REQUEST_RANDOM_AUTH_NUMBER && value[2] == SUCCESS) {
         qDebug() << "Received random auth number, sending encrypted auth number";
         writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, QByteArray(&AUTH_SEND_ENCRYPTED_AUTH_NUMBER, 1) + QByteArray(&AUTH_BYTE, 1) + handleAesAuth(value.mid(3, 17), AUTH_SECRET_KEY));
-    } else  if (value[0] == RESPONSE && value[1] == AUTH_SEND_ENCRYPTED_AUTH_NUMBER && value[2] == SUCCESS) {
+    } else  if (value[0] == RESPONSE && value[1] == AUTH_SEND_ENCRYPTED_AUTH_NUMBER && (value[2] == SUCCESS || value[2] == 0x06)) { //TODO not sure about 0x06
         qDebug() << "Authenticated";
         emit authenticated(true);
     } else {

@@ -120,6 +120,7 @@ Page {
 
             }
             Row {
+                spacing: Theme.paddingLarge
                 Image {
                     id: imgBattery
                     source: "image://theme/icon-m-battery"
@@ -136,6 +137,7 @@ Page {
             }
 
             Row {
+                spacing: Theme.paddingLarge
                 Image {
                     id: imgSteps
                     source: "../pics/icon-m-steps.png"
@@ -151,8 +153,10 @@ Page {
                 }
             }
 
+
             //Heartrate
             Row {
+                spacing: Theme.paddingLarge
                 width: parent.width
                 Image {
                     id: imgHeartrate
@@ -178,6 +182,26 @@ Page {
                     onClicked: {
                         DeviceInterface.hrmService().enableManualHRMeasurement(true);
                     }
+                }
+            }
+            Row {
+                spacing: Theme.paddingLarge
+                IconButton {
+                    id: btnSyncActivities
+                    icon.source: "image://theme/icon-m-cloud-download"
+                    width: Theme.iconSizeMedium
+                    height: width
+                    onClicked: {
+                        DeviceInterface.miBandService().fetchActivityData();
+                    }
+                    enabled: DeviceInterface.connectionState == "authenticated"
+                }
+                Label {
+                    color: Theme.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeMedium
+                    height: Theme.iconSizeMedium
+                    verticalAlignment: Text.AlignVCenter
+                    text: qsTr("Download activity data");
                 }
             }
         }
