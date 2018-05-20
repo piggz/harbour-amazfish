@@ -210,7 +210,7 @@ void BipDevice::initialise()
 void BipDevice::reconnectionTimer()
 {
     qDebug() << "BipDevice::reconnectionTimer";
-    if (!deviceProperty("Connected").toBool() && m_autoreconnect) {
+    if ((!deviceProperty("Connected").toBool() && m_autoreconnect) || connectionState() == "authfailed") {
         qDebug() << "Lost connection";
         QBLEDevice::connectToDevice();
     }

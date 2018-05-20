@@ -36,6 +36,7 @@ void MiBand2Service::characteristicChanged(const QString &characteristic, const 
         emit authenticated(true);
     } else {
         qDebug() << "Unexpected data";
+        emit authenticated(false);
     }
 
 }
