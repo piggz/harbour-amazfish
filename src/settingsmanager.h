@@ -11,6 +11,7 @@ public:
     explicit SettingsManager(QObject *parent = nullptr);
 
     Q_INVOKABLE QVariant value(const QString &key);
+    Q_INVOKABLE void setValue(const QString&key, const QVariant &value);
 
 private:
     QList<MGConfItem*> m_settings;

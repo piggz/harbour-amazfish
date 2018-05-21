@@ -343,6 +343,8 @@ void MiBandService::fetchActivityData()
 
         QDateTime fetchFrom = lastActivitySync();
 
+        qDebug() << "last activity sync was" << fetchFrom;
+        
         m_activityFetchOperation = new ActivityFetchOperation(fetchFrom);
 
         QByteArray rawDate = TypeConversion::dateTimeToBytes(fetchFrom, 0);
@@ -443,7 +445,7 @@ void MiBandService::handleFetchActivityMetaData(const QByteArray &value)
 
 QDateTime MiBandService::lastActivitySync()
 {
-    qlonglong ls = m_settings.value("/uk/co/piggz/amazfish/device/lastSyncTimeMillis").toLongLong();
+    qlonglong ls = m_settings.value("/uk/co/piggz/amazfish/device/lastActivitySyncMillis").toLongLong();
 
     if (ls == 0) {
         return QDateTime::currentDateTime().addDays(-100);

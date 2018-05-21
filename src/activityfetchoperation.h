@@ -21,6 +21,7 @@ private:
     QFile *m_logFile = nullptr;
     QTextStream *m_dataStream = nullptr;
     QDateTime m_startDate;
+    QDateTime m_sampleTime;
     QList<ActivitySample> m_samples;
     SettingsManager m_settings;
 

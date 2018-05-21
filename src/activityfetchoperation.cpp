@@ -43,6 +43,7 @@ void ActivityFetchOperation::finished(bool success)
     if (success) {
         //store the successful samples
         saveSamples();
+        m_settings.setValue("/uk/co/piggz/amazfish/device/lastActivitySyncMillis", m_sampleTime.toMSecsSinceEpoch());
     }
     if (m_logFile) {
         m_logFile->close();
@@ -53,20 +54,19 @@ void ActivityFetchOperation::saveSamples()
 {
     if (m_samples.count() > 0) {
         if (m_dataStream) {
-            QDateTime ts = m_startDate;
+            m_sampleTime = m_startDate;
 
             QString dev =  m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString();
             QString profileName = m_settings.value("/uk/co/piggz/amazfish/profile/name").toString();
 
-            qDebug() << "Profile data:" << ts << dev << profileName;
             uint id = qHash(profileName);
 
             for (int i = 0; i < m_samples.count(); ++i) {
-                *m_dataStream << dev << "," << id << "," << ts.toMSecsSinceEpoch() / 1000 << ",";
+                *m_dataStream << dev << "," << id << "," << m_sampleTime.toMSecsSinceEpoch() / 1000 << ",";
                 m_samples[i].write(*m_dataStream);
                 *m_dataStream << "\n";
 
-                ts.addSecs(60);
+                m_sampleTime.addSecs(60);
             }
         }
     }

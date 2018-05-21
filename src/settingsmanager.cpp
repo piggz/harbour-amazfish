@@ -14,6 +14,7 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/dateformat", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/timeformat", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/distanceunit", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/lastActivitySyncMillis", this);
 
 }
 
@@ -26,4 +27,14 @@ QVariant SettingsManager::value(const QString &key)
         }
     }
     return QVariant();
+}
+
+void SettingsManager::setValue(const QString&key, const QVariant &value)
+{
+        Q_FOREACH(MGConfItem* item, m_settings) {
+        item->sync();
+        if (item->key() == key) {
+            item->set(value);
+        }
+    }
 }
