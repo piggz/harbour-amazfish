@@ -47,7 +47,7 @@ QByteArray dateTimeToBytes(const QDateTime &dt, int format)
     ret += QByteArray(1, char(0x00));
 
     //Timezone
-    int utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(QDateTime::currentDateTime());
+    int utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(dt);
     ret += char((utcOffset / (60 * 60)) * 2);
 
     return ret;

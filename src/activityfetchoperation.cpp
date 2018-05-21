@@ -66,7 +66,7 @@ void ActivityFetchOperation::saveSamples()
                 m_samples[i].write(*m_dataStream);
                 *m_dataStream << "\n";
 
-                m_sampleTime.addSecs(60);
+                m_sampleTime = m_sampleTime.addSecs(60);
             }
         }
     }

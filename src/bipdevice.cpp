@@ -198,7 +198,7 @@ void BipDevice::initialise()
     }
     if (mi2) {
         qDebug() << "Got mi2 service";
-        connect(mi2, &MiBand2Service::authenticated, this, &BipDevice::authenticated);
+        connect(mi2, &MiBand2Service::authenticated, this, &BipDevice::authenticated, Qt::UniqueConnection);
 
         mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
         mi2->initialise(m_needsAuth);

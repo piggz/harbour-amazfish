@@ -96,6 +96,8 @@ public:
     Q_INVOKABLE void setDistanceUnit();
     void setWearLocation(); //Not invokable because should only be done on init
     Q_INVOKABLE void setFitnessGoal();
+    Q_INVOKABLE void setAlertFitnessGoal();
+
     Q_INVOKABLE void setDisplayItems();
     Q_INVOKABLE void setDoNotDisturb();
     Q_INVOKABLE void setRotateWristToSwitchInfo(bool enable);

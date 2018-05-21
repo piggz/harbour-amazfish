@@ -52,6 +52,12 @@ Page {
         defaultValue: 10000
     }
 
+    ConfigurationValue {
+        id: profileAlertFitnessGoal
+        key: "/uk/co/piggz/amazfish/profile/alertfitnessgoal"
+        defaultValue: true
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -149,6 +155,7 @@ Page {
                 }
             }
 
+
             Slider {
                 id: sldFitnessGoal
                 width: parent.width
@@ -156,6 +163,12 @@ Page {
                 maximumValue: 30000
                 stepSize: 100
                 label: qsTr("Goal (steps): ") + value
+            }
+
+
+            TextSwitch {
+                id: swAlertOnGoal
+                text: qsTr("Alert on fitness goal")
             }
 
             Button {
@@ -175,6 +188,7 @@ Page {
         sldWeight.value = profileWeight.value;
         cboWearLocation.currentIndex = profileWearLocation.value;
         sldFitnessGoal.value = profileFitnessGoal.value;
+        swAlertOnGoal.checked = profileAlertFitnessGoal.value;
     }
     function saveProfile() {
         profileName.value = fldName.text;
@@ -184,6 +198,7 @@ Page {
         profileWeight.value = sldWeight.value;
         profileWearLocation.value = cboWearLocation.currentIndex;
         profileFitnessGoal.value = sldFitnessGoal.value;
+        profileAlertFitnessGoal.value = swAlertOnGoal.checked;
 
         tmrSetDelay.start();
     }
@@ -196,6 +211,8 @@ Page {
         running: false
         onTriggered: {
             DeviceInterface.miBandService().setUserInfo();
+            DeviceInterface.miBandService().setFitnessGoal();
+            DeviceInterface.miBandService().setAlertFitnessGoal();
         }
     }
 }
