@@ -16,7 +16,7 @@ TEMPLATE = app
 CONFIG += sailfishapp
 LIBS += -Lqble/qble
 
-QT += bluetooth dbus contacts
+QT +=  contacts
 
 PKGCONFIG += mlite5
 
