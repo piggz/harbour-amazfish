@@ -82,17 +82,17 @@ void BipDevice::parseServices()
 
             qDebug() << "Creating service for: " << uuid;
 
-            if (uuid == UUID_SERVICE_ALERT_NOTIFICATION) {
+            if (uuid == UUID_SERVICE_ALERT_NOTIFICATION && !service(UUID_SERVICE_ALERT_NOTIFICATION)) {
                 addService(UUID_SERVICE_ALERT_NOTIFICATION, new AlertNotificationService(path, this));
-            } else if (uuid == UUID_SERVICE_DEVICEINFO) {
+            } else if (uuid == UUID_SERVICE_DEVICEINFO  && !service(UUID_SERVICE_DEVICEINFO)) {
                 addService(UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
-            } else if (uuid == UUID_SERVICE_HRM) {
+            } else if (uuid == UUID_SERVICE_HRM && !service(UUID_SERVICE_HRM)) {
                 addService(UUID_SERVICE_HRM, new HRMService(path, this));
-            } else if (uuid == UUID_SERVICE_MIBAND) {
+            } else if (uuid == UUID_SERVICE_MIBAND && !service(UUID_SERVICE_MIBAND)) {
                 addService(UUID_SERVICE_MIBAND, new MiBandService(path, this));
-            } else if (uuid == UUID_SERVICE_MIBAND2) {
+            } else if (uuid == UUID_SERVICE_MIBAND2 && !service(UUID_SERVICE_MIBAND2)) {
                 addService(UUID_SERVICE_MIBAND2, new MiBand2Service(path, this));
-            } else {
+            } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
         }
