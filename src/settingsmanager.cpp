@@ -15,7 +15,10 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/timeformat", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/distanceunit", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/lastActivitySyncMillis", this);
-
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/displayonliftwrist", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/alertfitnessgoal", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/fitnessgoal", this);
+    
 }
 
 QVariant SettingsManager::value(const QString &key)

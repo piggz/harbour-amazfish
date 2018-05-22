@@ -55,9 +55,20 @@ Page {
     ConfigurationValue {
         id: profileAlertFitnessGoal
         key: "/uk/co/piggz/amazfish/profile/alertfitnessgoal"
-        defaultValue: true
+        defaultValue: false
     }
 
+     ConfigurationValue {
+        id: profileAllDayHRM
+        key: "/uk/co/piggz/amazfish/profile/alldayhrm"
+        defaultValue: 0
+    }
+     ConfigurationValue {
+        id: profileDisplayOnLiftWrist
+        key: "/uk/co/piggz/amazfish/profile/displayonliftwrist"
+        defaultValue: false
+    }
+    
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -154,7 +165,11 @@ Page {
                     MenuItem { text: qsTr("Right") }
                 }
             }
-
+            
+            TextSwitch {
+                id: swDisplayOnLiftWrist
+                text: qsTr("Display on lift wrist")
+            }
 
             Slider {
                 id: sldFitnessGoal
@@ -170,7 +185,16 @@ Page {
                 id: swAlertOnGoal
                 text: qsTr("Alert on fitness goal")
             }
-
+            
+	Slider {
+                id: sldALLDayHRM
+                minimumValue: 0
+                maximumValue: 60
+                stepSize: 1
+                label :qsTr("All day HRM interval")    
+                
+            }
+ 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Save Profile")
@@ -189,6 +213,8 @@ Page {
         cboWearLocation.currentIndex = profileWearLocation.value;
         sldFitnessGoal.value = profileFitnessGoal.value;
         swAlertOnGoal.checked = profileAlertFitnessGoal.value;
+        //sldAllDayHRM.value = profileAllDayHRM.value;
+        swDisplayOnLiftWrist.checked = profileDisplayOnLiftWrist.value;
     }
     function saveProfile() {
         profileName.value = fldName.text;
@@ -199,7 +225,9 @@ Page {
         profileWearLocation.value = cboWearLocation.currentIndex;
         profileFitnessGoal.value = sldFitnessGoal.value;
         profileAlertFitnessGoal.value = swAlertOnGoal.checked;
-
+        //profileAllDayHRM.value = sldAllDayHRM.value;
+        profileDisplayOnLiftWrist.value = swDisplayOnLiftWrist.checked;
+        
         tmrSetDelay.start();
     }
 
@@ -213,6 +241,7 @@ Page {
             DeviceInterface.miBandService().setUserInfo();
             DeviceInterface.miBandService().setFitnessGoal();
             DeviceInterface.miBandService().setAlertFitnessGoal();
+            DeviceInterface.miBandService().setDisplayOnLiftWrist();
         }
     }
 }
