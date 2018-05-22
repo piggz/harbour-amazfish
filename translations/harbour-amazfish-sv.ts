@@ -55,30 +55,30 @@
     </message>
     <message>
         <source>Download activity data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladda ner aktivitetsdata</translation>
     </message>
 </context>
 <context>
     <name>MiBandService</name>
     <message>
         <source>Finished transferring data</source>
-        <translation type="unfinished"></translation>
+        <translation>Dataöverföring slutförd</translation>
     </message>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>En åtgärd körs redan, försök senare></translation>
     </message>
     <message>
         <source>About to transfer log data from </source>
-        <translation type="unfinished"></translation>
+        <translation>Inleder dataöverföring från </translation>
     </message>
     <message>
         <source>About to transfer activity data from </source>
-        <translation type="unfinished"></translation>
+        <translation>Inleder aktivitetsdataöverföring från </translation>
     </message>
     <message>
         <source>Finished transferring activity data</source>
-        <translation type="unfinished"></translation>
+        <translation>Överföring av aktivitetsdata slutförd</translation>
     </message>
 </context>
 <context>
