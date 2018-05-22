@@ -74,7 +74,7 @@ Page {
         }
 
         devicePath = path;
-        lblStatus.text = "Connecting to watch..." + path
+        lblStatus.text = "Connecting to watch...\n" + path
         DeviceInterface.pair(path);
     }
 

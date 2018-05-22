@@ -2,6 +2,7 @@
 #define HRMSERVICE_H
 
 #include "qble/qbleservice.h"
+#include "settingsmanager.h"
 
 /*
 {0000180d-0000-1000-8000-00805f9b34fb} Heart rate service
@@ -23,6 +24,7 @@ public:
     const char COMMAND_SET_HR_CONTINUOUS_ENABLE[3] = {0x15, 0x1, 0x01};
     const char COMMAND_SET_HR_MANUAL_DISABLE[3] = {0x15, 0x2, 0x00};
     const char COMMAND_SET_HR_MANUAL_ENABLE[3] = {0x15, 0x2, 0x01};
+    const char COMMAND_SET_PERIODIC_HR_MEASUREMENT_INTERVAL = 0x14;
 
     Q_PROPERTY(int heartRate READ heartRate NOTIFY heartRateChanged())
 
@@ -30,10 +32,12 @@ public:
     Q_INVOKABLE void enableManualHRMeasurement(bool enable);
     Q_INVOKABLE int heartRate() const;
 
+    Q_INVOKABLE void setAllDayHRM();
     Q_SIGNAL void heartRateChanged();
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 
+    SettingsManager m_settings;
     int m_heartRate = 0;
 };
 

@@ -55,3 +55,17 @@ void HRMService::enableManualHRMeasurement(bool enable)
         writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, QByteArray(COMMAND_SET_HR_MANUAL_DISABLE, 3));
     }
 }
+
+void HRMService::setAllDayHRM()
+{
+    int interval = m_settings.value("/uk/co/piggz/amazfish/profile/alldayhrm").toInt();
+
+    qDebug() << "Setting HRM monitoring to" << interval;
+
+    QByteArray cmd = QByteArray(1, COMMAND_SET_PERIODIC_HR_MEASUREMENT_INTERVAL);
+    cmd += QByteArray(1, interval);
+
+    enableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
+    writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, cmd);
+    disableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
+}

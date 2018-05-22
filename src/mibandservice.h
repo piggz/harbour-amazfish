@@ -102,12 +102,9 @@ public:
     Q_INVOKABLE void setDisplayItems();
     Q_INVOKABLE void setDoNotDisturb();
     Q_INVOKABLE void setRotateWristToSwitchInfo(bool enable);
-    Q_INVOKABLE void setActivateDisplayOnLiftWrist();
     Q_INVOKABLE void setDisplayCaller();
-    Q_INVOKABLE void setGoalNotification(bool enable);
     Q_INVOKABLE void setInactivityWarnings();
     Q_INVOKABLE void setHeartrateSleepSupport();
-    Q_INVOKABLE void setAllDayHRM();
 
     //Operations
     Q_INVOKABLE void fetchLogs();

@@ -53,10 +53,6 @@
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
-    <message>
-        <source>Download activity data</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MiBandService</name>
@@ -219,6 +215,18 @@
     <message>
         <source>Goal (steps): </source>
         <translation>Mål (steg): </translation>
+    </message>
+    <message>
+        <source>Display on lift wrist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alert on fitness goal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All day HRM interval (minutes): </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
