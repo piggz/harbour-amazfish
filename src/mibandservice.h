@@ -107,6 +107,7 @@ public:
     Q_INVOKABLE void setGoalNotification(bool enable);
     Q_INVOKABLE void setInactivityWarnings();
     Q_INVOKABLE void setHeartrateSleepSupport();
+    Q_INVOKABLE void setAllDayHRM();
 
     //Operations
     Q_INVOKABLE void fetchLogs();

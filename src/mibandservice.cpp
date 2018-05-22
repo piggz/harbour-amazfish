@@ -327,8 +327,14 @@ void MiBandService::setInactivityWarnings()
 {
 
 }
-void MiBandService::setHeartrateSleepSupport(){
+void MiBandService::setHeartrateSleepSupport()
+{
+  
+}
 
+void MiBandService::setAllDayHRM()
+{
+    
 }
 
 int MiBandService::steps() const

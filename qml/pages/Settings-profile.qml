@@ -187,10 +187,10 @@ Page {
             }
             
 	Slider {
-                id: sldALLDayHRM
+                id: sldAllDayHRM
                 minimumValue: 0
                 maximumValue: 60
-                stepSize: 1
+                stepSize: 5
                 label :qsTr("All day HRM interval")    
                 
             }
@@ -213,7 +213,7 @@ Page {
         cboWearLocation.currentIndex = profileWearLocation.value;
         sldFitnessGoal.value = profileFitnessGoal.value;
         swAlertOnGoal.checked = profileAlertFitnessGoal.value;
-        //sldAllDayHRM.value = profileAllDayHRM.value;
+        sldAllDayHRM.value = profileAllDayHRM.value;
         swDisplayOnLiftWrist.checked = profileDisplayOnLiftWrist.value;
     }
     function saveProfile() {
@@ -225,7 +225,7 @@ Page {
         profileWearLocation.value = cboWearLocation.currentIndex;
         profileFitnessGoal.value = sldFitnessGoal.value;
         profileAlertFitnessGoal.value = swAlertOnGoal.checked;
-        //profileAllDayHRM.value = sldAllDayHRM.value;
+        profileAllDayHRM.value = sldAllDayHRM.value;
         profileDisplayOnLiftWrist.value = swDisplayOnLiftWrist.checked;
         
         tmrSetDelay.start();
@@ -242,6 +242,7 @@ Page {
             DeviceInterface.miBandService().setFitnessGoal();
             DeviceInterface.miBandService().setAlertFitnessGoal();
             DeviceInterface.miBandService().setDisplayOnLiftWrist();
+            DeviceInterface.miBandService().setAllDayHRM();
         }
     }
 }
