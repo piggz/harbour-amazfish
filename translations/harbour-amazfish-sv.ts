@@ -58,23 +58,23 @@
     <name>MiBandService</name>
     <message>
         <source>Finished transferring data</source>
-        <translation type="unfinished"></translation>
+        <translation>Dataöverföring slutförd</translation>
     </message>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>En åtgärd körs redan, försök senare&gt;</translation>
     </message>
     <message>
         <source>About to transfer log data from </source>
-        <translation type="unfinished"></translation>
+        <translation>Inleder överföring av loggdata från </translation>
     </message>
     <message>
         <source>About to transfer activity data from </source>
-        <translation type="unfinished"></translation>
+        <translation>Inleder överföring av aktivitetsdata från </translation>
     </message>
     <message>
         <source>Finished transferring activity data</source>
-        <translation type="unfinished"></translation>
+        <translation>Överföring av aktivitetsdata slutförd</translation>
     </message>
 </context>
 <context>
@@ -214,19 +214,19 @@
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation>Mål (steg): </translation>
+        <translation>Träningsmål (antal steg): </translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa vid lyft handled</translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Avisera vid uppnått träningsmål</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>HRM-intervall för hela dagen (minuter): </translation>
     </message>
 </context>
 </TS>
