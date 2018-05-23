@@ -24,7 +24,7 @@ void BipDevice::pair()
     m_needsAuth = true;
     m_pairing = true;
     m_autoreconnect = true;
-    disconnectFromDevice();
+    //disconnectFromDevice();
     setConnectionState("pairing");
     emit connectionStateChanged();
 
@@ -106,6 +106,11 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
     qDebug() << "BipDevice::onPropertiesChanged:" << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
+        m_reconnectTimer->start();
+        if (deviceProperty("ServicesResolved").toBool() ) {
+            initialise();
+        }
+#if 0
         if (map.contains("Paired")) {
             bool value = map["Paired"].toBool();
 
@@ -138,6 +143,7 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
                 initialise();
             }
         }
+#endif
     }
 
 }

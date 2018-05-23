@@ -88,7 +88,9 @@ HRMService *DeviceInterface::hrmService() const
 
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
-    alertNotificationService()->sendAlert(appName, summary, body);
+    if (alertNotificationService()){
+        alertNotificationService()->sendAlert(appName, summary, body);
+    }
 }
 
 void DeviceInterface::onActiveVoiceCallChanged()

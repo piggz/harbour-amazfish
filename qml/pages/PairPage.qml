@@ -9,6 +9,7 @@ Page {
     allowedOrientations: Orientation.Portrait
 
     property string devicePath: "";
+    property string deviceName: "";
 
     ConfigurationValue {
         id: pairedAddress
@@ -67,13 +68,15 @@ Page {
 
     function pair()
     {
-        var path = BluezAdapter.matchDevice("Amazfit Bip");
+        var path = BluezAdapter.matchDevice("Amazfit");
         if (path === "") {
             lblStatus.text = "Watch not found";
             return;
         }
 
         devicePath = path;
+        deviceName = BluezAdapter.deviceName(path);
+
         lblStatus.text = "Connecting to watch...\n" + path
         DeviceInterface.pair(path);
     }
@@ -83,7 +86,9 @@ Page {
         onConnectionStateChanged: {
             if (DeviceInterface.connectionState == "authenticated") {
                 pairedAddress.value = devicePath;
-                pairedAddress.sync;
+                pairedName.value = deviceName;
+                pairedAddress.sync();
+                pairedName.sync()
             }
         }
     }
