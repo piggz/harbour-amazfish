@@ -58,12 +58,12 @@ Page {
         defaultValue: false
     }
 
-     ConfigurationValue {
+    ConfigurationValue {
         id: profileAllDayHRM
         key: "/uk/co/piggz/amazfish/profile/alldayhrm"
         defaultValue: 0
     }
-     ConfigurationValue {
+    ConfigurationValue {
         id: profileDisplayOnLiftWrist
         key: "/uk/co/piggz/amazfish/profile/displayonliftwrist"
         defaultValue: false
@@ -186,15 +186,16 @@ Page {
                 text: qsTr("Alert on fitness goal")
             }
             
-	Slider {
+            Slider {
                 id: sldAllDayHRM
+                width: parent.width
+
                 minimumValue: 0
                 maximumValue: 60
                 stepSize: 5
-                label :qsTr("All day HRM interval")    
-                
+                label: qsTr("All day HRM interval (minutes): ") + value
             }
- 
+
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Save Profile")
@@ -241,8 +242,8 @@ Page {
             DeviceInterface.miBandService().setUserInfo();
             DeviceInterface.miBandService().setFitnessGoal();
             DeviceInterface.miBandService().setAlertFitnessGoal();
-            DeviceInterface.miBandService().setDisplayOnLiftWrist();
-            DeviceInterface.miBandService().setAllDayHRM();
+            DeviceInterface.miBandService().setEnableDisplayOnLiftWrist();
+            DeviceInterface.hrmService().setAllDayHRM();
         }
     }
 }

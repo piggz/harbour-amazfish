@@ -18,7 +18,8 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/displayonliftwrist", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/alertfitnessgoal", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/fitnessgoal", this);
-    
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/alldayhrm", this);
+
 }
 
 QVariant SettingsManager::value(const QString &key)

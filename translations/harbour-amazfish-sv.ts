@@ -53,10 +53,6 @@
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
-    <message>
-        <source>Download activity data</source>
-        <translation>Ladda ner aktivitetsdata</translation>
-    </message>
 </context>
 <context>
     <name>MiBandService</name>
@@ -66,15 +62,15 @@
     </message>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation>En åtgärd körs redan, försök senare></translation>
+        <translation>En åtgärd körs redan, försök senare&gt;</translation>
     </message>
     <message>
         <source>About to transfer log data from </source>
-        <translation>Inleder dataöverföring från </translation>
+        <translation>Inleder överföring av loggdata från </translation>
     </message>
     <message>
         <source>About to transfer activity data from </source>
-        <translation>Inleder aktivitetsdataöverföring från </translation>
+        <translation>Inleder överföring av aktivitetsdata från </translation>
     </message>
     <message>
         <source>Finished transferring activity data</source>
@@ -218,7 +214,19 @@
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation>Mål (steg): </translation>
+        <translation>Träningsmål (antal steg): </translation>
+    </message>
+    <message>
+        <source>Display on lift wrist</source>
+        <translation>Visa vid lyft handled</translation>
+    </message>
+    <message>
+        <source>Alert on fitness goal</source>
+        <translation>Avisera vid uppnått träningsmål</translation>
+    </message>
+    <message>
+        <source>All day HRM interval (minutes): </source>
+        <translation>HRM-intervall för hela dagen (minuter): </translation>
     </message>
 </context>
 </TS>

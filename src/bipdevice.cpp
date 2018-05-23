@@ -13,6 +13,8 @@ BipDevice::BipDevice()
     m_reconnectTimer = new QTimer(this);
     m_reconnectTimer->setInterval(60000);
     connect(m_reconnectTimer, &QTimer::timeout, this, &BipDevice::reconnectionTimer);
+
+    connect(this, &QBLEDevice::propertiesChanged, this, &BipDevice::onPropertiesChanged);
 }
 
 void BipDevice::pair()
@@ -109,6 +111,9 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
 
             if (value) {
                 qDebug() << "Paired!";
+                if (m_connectionState == "pairing" && m_pairing) {
+                    connectToDevice();
+                }
             }
         }
         if (map.contains("Connected")) {
@@ -160,7 +165,7 @@ void BipDevice::authenticated(bool ready)
             mi->setUserInfo();
             mi->setDisplayCaller();
             mi->setRotateWristToSwitchInfo(true);
-            mi->setGoalNotification(true);
+            mi->setAlertFitnessGoal();
         }
     } else {
         setConnectionState("authfailed");

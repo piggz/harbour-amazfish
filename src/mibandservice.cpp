@@ -271,9 +271,9 @@ void MiBandService::setAlertFitnessGoal()
     bool alert = m_settings.value("/uk/co/piggz/amazfish/profile/alertfitnessgoal").toBool();
     
     if (alert) {    
-        writeValue(UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS, QByteArray(COMMAND_ENABLE_GOAL_NOTIFICATION,4));
+        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_GOAL_NOTIFICATION,4));
     } else {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS, QByteArray(COMMAND_DISABLE_GOAL_NOTIFICATION,4));
+        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_GOAL_NOTIFICATION,4));
     }   
 }
 
@@ -283,9 +283,9 @@ void MiBandService::setEnableDisplayOnLiftWrist()
     bool disp = m_settings.value("/uk/co/piggz/amazfish/profile/displayonliftwrist").toBool();
     
     if (disp) {    
-        writeValue(UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS, QByteArray(COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST,4));
+        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST,4));
     } else {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS, QByteArray(COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST,4));
+        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST,4));
     }   
 }
 
@@ -306,23 +306,12 @@ void MiBandService::setRotateWristToSwitchInfo(bool enable)
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_ROTATE_WRIST_TO_SWITCH_INFO, 4));
     }
 }
-void MiBandService::setActivateDisplayOnLiftWrist()
-{
 
-}
 void MiBandService::setDisplayCaller()
 {
     writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_DISPLAY_CALLER, 5));
 }
-void MiBandService::setGoalNotification(bool enable)
-{
-    qDebug() << "Setting goal notification to " << enable;
-    if (enable) {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_GOAL_NOTIFICATION, 4));
-    } else {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_GOAL_NOTIFICATION, 4));
-    }
-}
+
 void MiBandService::setInactivityWarnings()
 {
 
@@ -332,10 +321,7 @@ void MiBandService::setHeartrateSleepSupport()
   
 }
 
-void MiBandService::setAllDayHRM()
-{
-    
-}
+
 
 int MiBandService::steps() const
 {
