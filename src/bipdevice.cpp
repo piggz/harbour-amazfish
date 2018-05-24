@@ -17,7 +17,7 @@ BipDevice::BipDevice()
     connect(this, &QBLEDevice::propertiesChanged, this, &BipDevice::onPropertiesChanged);
 }
 
-void BipDevice::pair()
+QString BipDevice::pair()
 {
     qDebug() << "BipDevice::pair";
 
@@ -28,7 +28,21 @@ void BipDevice::pair()
     setConnectionState("pairing");
     emit connectionStateChanged();
 
-    QBLEDevice::pair();
+    return QBLEDevice::pair();
+}
+
+void BipDevice::pairAsync()
+{
+    qDebug() << "BipDevice::pairAsync";
+
+    m_needsAuth = true;
+    m_pairing = true;
+    m_autoreconnect = true;
+    //disconnectFromDevice();
+    setConnectionState("pairing");
+    emit connectionStateChanged();
+
+    QBLEDevice::pairAsync();
 }
 
 void BipDevice::connectToDevice()

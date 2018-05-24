@@ -23,7 +23,9 @@ public:
     static const char* UUID_SERVICE_HRM;
     static const char* UUID_SERVICE_DEVICEINFO;
 
-    virtual void pair();
+    virtual QString pair();
+    virtual void pairAsync();
+
     virtual void connectToDevice();
     virtual void disconnectFromDevice();
 

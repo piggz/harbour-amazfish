@@ -35,12 +35,12 @@ void DeviceInterface::connectToDevice(const QString &address)
     }
 }
 
-void DeviceInterface::pair(const QString &address)
+QString DeviceInterface::pair(const QString &address)
 {
     qDebug() << "BipInterface::pair:" << address;
     m_deviceAddress = address;
     m_bipDevice->setDevicePath(address);
-    m_bipDevice->pair();
+    return m_bipDevice->pair();
 }
 
 void DeviceInterface::disconnect()

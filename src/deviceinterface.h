@@ -24,7 +24,7 @@ public:
 
     Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
 
-    Q_INVOKABLE void pair(const QString &address);
+    Q_INVOKABLE QString pair(const QString &address);
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
 
