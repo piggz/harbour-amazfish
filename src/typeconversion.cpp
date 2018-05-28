@@ -1,5 +1,6 @@
 #include "typeconversion.h"
 #include <QTimeZone>
+#include <QDebug>
 
 namespace TypeConversion {
 
@@ -48,8 +49,12 @@ QByteArray dateTimeToBytes(const QDateTime &dt, int format)
 
     //Timezone
     int utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(dt);
-    ret += char((utcOffset / (60 * 60)) * 2);
+    qDebug() << "UTC offset it " << utcOffset;
 
+    ret += char((utcOffset / (60 * 60)) * 2);
+    //ret += char(1);
+
+    qDebug() << "converted date" << dt << "to" << ret;
     return ret;
 }
 
@@ -58,7 +63,7 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
         int year = TypeConversion::toUint16(value[0], value[1]);
         QDateTime timestamp(QDate(
                                 year,
-                                (value[2] & 0xff) - 1,
+                                (value[2] & 0xff),
                             value[3] & 0xff),
                 QTime(
                     value[4] & 0xff,
