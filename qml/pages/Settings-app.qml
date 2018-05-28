@@ -8,6 +8,13 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
+    ConfigurationValue {
+        id: appNotifyConnect
+        key: "/uk/co/piggz/amazfish/app/notifyconnect"
+        defaultValue: true
+    }
+
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -26,32 +33,32 @@ Page {
             width: page.width - 2*Theme.horizontalPageMargin
             spacing: Theme.paddingLarge
             PageHeader {
-                title: qsTr("Settings Menu")
+                title: qsTr("Device Settings")
+            }
+
+            TextSwitch {
+                id: chkNotifyConnect
+                width: parent.width
+                text: qsTr("Notify on connect")
+
+
             }
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("User Settings")
+                text: qsTr("Save Settings")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
-                }
-            }
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Device Settings")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-device.qml"))
-                }
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Application Settings")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-app.qml"))
+                    saveSettings();
                 }
             }
         }
+    }
+    Component.onCompleted: {
+        chkNotifyConnect.checked = appNotifyConnect.value;
+
+    }
+    function saveSettings() {
+        appNotifyConnect.value = chkNotifyConnect.checked
     }
 
 }

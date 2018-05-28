@@ -3,6 +3,9 @@
 SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
 {
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/pairedAddress", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/pairedName", this);
+
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/app/notifyconnect", this);
 
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/name", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/dob", this);
@@ -14,7 +17,7 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/dateformat", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/timeformat", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/distanceunit", this);
-    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/lastActivitySyncMillis", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/lastactivitysyncmillis", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/displayonliftwrist", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/alertfitnessgoal", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/fitnessgoal", this);
