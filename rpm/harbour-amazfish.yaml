@@ -1,6 +1,6 @@
 Name: harbour-amazfish
 Summary: Amazfit Bip interface application
-Version: 0.5.0
+Version: 0.5.1
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
@@ -29,12 +29,16 @@ PkgConfigBR:
   - mlite5
 
 # Build dependencies without a pkgconfig setup can be listed here
-# PkgBR:
-#   - package-needed-to-build
+PkgBR:
+  - kdb-devel >= 3.1.0
+  - kcoreaddons-devel >= 5.31.0
 
 # Runtime dependencies which are not automatically detected
 Requires:
   - sailfishsilica-qt5 >= 0.10.9 
+  - kdb-sqlite3-driver >= 3.1.0
+  - libKDb3-3 >= 3.1.0
+  - kcoreaddons >= 5.31.0
 
 # All installed files
 Files:
