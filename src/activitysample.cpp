@@ -8,7 +8,25 @@ ActivitySample::ActivitySample(int k, int i, int s, int h)
     m_heartRate = h;
 }
 
-void ActivitySample::write(QTextStream &ts)
+int ActivitySample::heartrate() const
 {
-    ts << m_kind << "," << m_intensity << "," << m_steps << "," << m_heartRate;
+    return m_heartRate;
+}
+
+
+int ActivitySample::intensity() const
+{
+    return m_intensity;
+}
+
+
+int ActivitySample::steps() const
+{
+    return m_steps;
+}
+
+
+int ActivitySample::kind() const
+{
+    return m_kind;
 }

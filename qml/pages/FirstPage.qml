@@ -184,7 +184,7 @@ Page {
                     }
                 }
             }
-            /*
+
             Row {
                 spacing: Theme.paddingLarge
                 IconButton {
@@ -205,7 +205,7 @@ Page {
                     text: qsTr("Download activity data");
                 }
             }
-            */
+
         }
     }
     Timer {

@@ -270,11 +270,11 @@ void MiBandService::setAlertFitnessGoal()
 {
     bool alert = m_settings.value("/uk/co/piggz/amazfish/profile/alertfitnessgoal").toBool();
     
-    if (alert) {    
+    if (alert) {
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_GOAL_NOTIFICATION,4));
     } else {
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_GOAL_NOTIFICATION,4));
-    }   
+    }
 }
 
 
@@ -282,11 +282,11 @@ void MiBandService::setEnableDisplayOnLiftWrist()
 {
     bool disp = m_settings.value("/uk/co/piggz/amazfish/profile/displayonliftwrist").toBool();
     
-    if (disp) {    
+    if (disp) {
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST,4));
     } else {
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST,4));
-    }   
+    }
 }
 
 void MiBandService::setDisplayItems()
@@ -318,7 +318,7 @@ void MiBandService::setInactivityWarnings()
 }
 void MiBandService::setHeartrateSleepSupport()
 {
-  
+
 }
 
 
@@ -360,7 +360,7 @@ void MiBandService::fetchActivityData()
 
         qDebug() << "last activity sync was" << fetchFrom;
         
-        m_activityFetchOperation = new ActivityFetchOperation(fetchFrom);
+        m_activityFetchOperation = new ActivityFetchOperation(fetchFrom, m_conn);
 
         QByteArray rawDate = TypeConversion::dateTimeToBytes(fetchFrom, 0);
 
@@ -398,15 +398,15 @@ void MiBandService::handleFetchLogMetaData(const QByteArray &value)
         }
     } else if (value.length() == 3) {
         if (value == QByteArray(RESPONSE_FINISH_SUCCESS, 3)) {
-           qDebug() << "Finished sending data";
-           if (m_operationRunning == 1 && m_logFetchOperation) {
+            qDebug() << "Finished sending data";
+            if (m_operationRunning == 1 && m_logFetchOperation) {
                 m_logFetchOperation->finished();
                 delete m_logFetchOperation;
                 m_logFetchOperation = nullptr;
                 m_operationRunning = 0;
 
-           }
-           emit message(tr("Finished transferring data"));
+            }
+            emit message(tr("Finished transferring data"));
         } else {
             qDebug() << "Unexpected activity metadata: " << value;
             //handleActivityFetchFinish(false);
@@ -439,31 +439,48 @@ void MiBandService::handleFetchActivityMetaData(const QByteArray &value)
         }
     } else if (value.length() == 3) {
         if (value == QByteArray(RESPONSE_FINISH_SUCCESS, 3)) {
-           qDebug() << "Finished sending data";
-           if (m_operationRunning == 2 && m_activityFetchOperation) {
-                m_activityFetchOperation->finished(true);
-                delete m_activityFetchOperation;
-                m_activityFetchOperation = nullptr;
+            qDebug() << "Finished sending data";
+            if (m_operationRunning == 2 && m_activityFetchOperation) {
+                if (m_activityFetchOperation) {
+                    m_activityFetchOperation->finished(true);
+
+                    delete m_activityFetchOperation;
+                    m_activityFetchOperation = nullptr;
+                }
                 m_operationRunning = 0;
 
-           }
-           emit message(tr("Finished transferring activity data"));
+            }
+            emit message(tr("Finished transferring activity data"));
+        } else if (value == QByteArray(RESPONSE_FINISH_FAIL, 3)) {
+            qDebug() << "No data lft to fetch";
+            if (m_activityFetchOperation) {
+                m_activityFetchOperation->finished(false);
+
+                delete m_activityFetchOperation;
+                m_activityFetchOperation = nullptr;
+            }
+            m_operationRunning = 0;
+            emit message(tr("No data to transfer"));
+
         } else {
             qDebug() << "Unexpected activity metadata: " << value;
-            //handleActivityFetchFinish(false);
         }
     } else {
         qDebug() << "Unexpected activity metadata: " << value;
-        //handleActivityFetchFinish(false);
     }
 }
 
 QDateTime MiBandService::lastActivitySync()
 {
-    qlonglong ls = m_settings.value("/uk/co/piggz/amazfish/device/lastActivitySyncMillis").toLongLong();
+    qlonglong ls = m_settings.value("/uk/co/piggz/amazfish/device/lastactivitysyncmillis").toLongLong();
 
     if (ls == 0) {
         return QDateTime::currentDateTime().addDays(-100);
     }
     return QDateTime::fromMSecsSinceEpoch(ls);
+}
+
+void MiBandService::setDatabase(KDbConnection *conn)
+{
+    m_conn = conn;
 }

@@ -2,6 +2,8 @@
 #define BIPINTERFACE_H
 
 #include <QObject>
+#include <QtSql/QtSql>
+
 
 #include "qble/bluezadapter.h"
 
@@ -10,6 +12,11 @@
 #include "voicecallhandler.h"
 #include "voicecallmanager.h"
 #include "settingsmanager.h"
+
+#include <KDb3/KDbDriver>
+#include <KDb3/KDbConnection>
+#include <KDb3/KDbConnectionData>
+
 class AlertNotificationService;
 class DeviceInfoService;
 class HRMService;
@@ -39,6 +46,8 @@ public:
 
     Q_SIGNAL void message(const QString &text);
 
+    KDbConnection *dbConnection();
+
 private:
     QString m_deviceAddress;
     QString m_deviceName;
@@ -50,6 +59,7 @@ private:
 
     SettingsManager m_settings;
 
+
     void createSettings();
 
     void updateServiceController();
@@ -57,7 +67,14 @@ private:
     Q_SLOT void notificationReceived(const QString &appName, const QString &summary, const QString &body);
     Q_SLOT void onActiveVoiceCallChanged();
     Q_SLOT void onActiveVoiceCallStatusChanged();
+    Q_SLOT void onConnectionStateChanged();
 
+    //Database
+    KDbDriver *m_dbDriver = nullptr;
+    KDbConnectionData m_connData;
+    KDbConnection *m_conn = nullptr;
+    void setupDatabase();
+    void createTables();
 Q_SIGNALS:
     void readyChanged();
     void connectionStateChanged();

@@ -46,6 +46,7 @@ public:
 
     const char RESPONSE = 0x10;
     const char SUCCESS = 0x01;
+    const char FAIL = 0x04;
     const char COMMAND_REQUEST_GPS_VERSION = 0x0e;
     const char COMMAND_SET_LANGUAGE = 0x17;
     const char EVENT_DECLINE_CALL = 0x07;
@@ -81,6 +82,7 @@ public:
     const char COMMAND_FETCH_DATA = 0x02;
     const char RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS[3] = {RESPONSE, COMMAND_ACTIVITY_DATA_START_DATE, SUCCESS};
     const char RESPONSE_FINISH_SUCCESS[3] {RESPONSE, COMMAND_FETCH_DATA, SUCCESS };
+    const char RESPONSE_FINISH_FAIL[3] {RESPONSE, COMMAND_FETCH_DATA, FAIL };
 
     Q_INVOKABLE void requestBatteryInfo();
     Q_INVOKABLE void requestGPSVersion();
@@ -122,6 +124,8 @@ public:
 
     Q_SIGNAL void message(const QString &text);
 
+    void setDatabase(KDbConnection *conn);
+
 private:
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
     Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
@@ -139,6 +143,8 @@ private:
     BipBatteryInfo m_batteryInfo;
     LogFetchOperation *m_logFetchOperation = nullptr;
     ActivityFetchOperation *m_activityFetchOperation = nullptr;
+
+    KDbConnection *m_conn = nullptr;
 };
 
 #endif // MIBANDSERVICE_H

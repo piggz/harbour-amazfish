@@ -124,6 +124,10 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
         if (deviceProperty("ServicesResolved").toBool() ) {
             initialise();
         }
+        if (map.contains("Connected")) {
+            emit connectionStateChanged();
+        }
+
 #if 0
         if (map.contains("Paired")) {
             bool value = map["Paired"].toBool();
@@ -172,7 +176,7 @@ void BipDevice::authenticated(bool ready)
 
         AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(UUID_SERVICE_ALERT_NOTIFICATION));
 
-        if (alert) {
+        if (alert && m_settings.value("/uk/co/piggz/amazfish/app/notifyconnect").toBool()) {
             alert->sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
         }
 

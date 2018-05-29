@@ -16,7 +16,7 @@ TEMPLATE = app
 CONFIG += sailfishapp
 LIBS += -Lqble/qble
 
-QT +=  contacts
+QT +=  contacts KDb3
 
 PKGCONFIG += mlite5
 
@@ -52,7 +52,8 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/DebugInfo.qml \
     qml/pages/Settings-profile.qml \
     qml/pages/Settings-menu.qml \
-    qml/pages/Settings-device.qml
+    qml/pages/Settings-device.qml \
+    qml/pages/Settings-app.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 

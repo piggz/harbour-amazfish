@@ -7,7 +7,11 @@ class ActivitySample
 {
 public:
     ActivitySample(int k, int i, int s, int h);
-    void write(QTextStream &ts);
+
+    int kind() const;
+    int intensity() const;
+    int steps() const;
+    int heartrate() const;
 
 private:
     int m_kind = 0;

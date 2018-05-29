@@ -1,26 +1,12 @@
 #include "activityfetchoperation.h"
 
-#include <QDir>
 #include <QDebug>
+#include <KDb3/KDbTransactionGuard>
 
-ActivityFetchOperation::ActivityFetchOperation(const QDateTime &sd)
+ActivityFetchOperation::ActivityFetchOperation(const QDateTime &sd, KDbConnection *conn)
 {
-    if (!QDir(QDir::homePath() + "/amazfish").exists()) {
-        qDebug() << "Creating amazfish folder";
-        if (!QDir(QDir::homePath()).mkdir("amazfish")) {
-            qDebug() << "Error creating amazfish folder!";
-            return;
-        }
-    }
-
     m_startDate = sd;
-
-    QString filename = "amazfitbip_activity.log";
-    m_logFile = new QFile(QDir::homePath() + "/amazfish/" + filename);
-
-    if(m_logFile->open(QIODevice::Append)) {
-        m_dataStream = new QTextStream(m_logFile);
-    }
+    m_conn = conn;
 }
 
 void ActivityFetchOperation::newData(const QByteArray &data)
@@ -38,38 +24,67 @@ void ActivityFetchOperation::newData(const QByteArray &data)
     }
 }
 
-void ActivityFetchOperation::finished(bool success)
+bool ActivityFetchOperation::finished(bool success)
 {
+    bool saved = true;
     if (success) {
         //store the successful samples
-        saveSamples();
-        m_settings.setValue("/uk/co/piggz/amazfish/device/lastActivitySyncMillis", m_sampleTime.toMSecsSinceEpoch());
+        saved = saveSamples();
+        m_settings.setValue("/uk/co/piggz/amazfish/device/lastactivitysyncmillis", m_sampleTime.toMSecsSinceEpoch());
+        qDebug() << "finished fetch operation, last record was " << m_sampleTime;
     }
-    if (m_logFile) {
-        m_logFile->close();
-    }
+    return saved;
 }
 
-void ActivityFetchOperation::saveSamples()
+bool ActivityFetchOperation::saveSamples()
 {
+    bool saved = true;
     if (m_samples.count() > 0) {
-        if (m_dataStream) {
+        if (m_conn && m_conn->isDatabaseUsed()) {
             m_sampleTime = m_startDate;
 
-            QString dev =  m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString();
-            QString profileName = m_settings.value("/uk/co/piggz/amazfish/profile/name").toString();
+            uint id = qHash(m_settings.value("/uk/co/piggz/amazfish/profile/name").toString());
+            uint devid = qHash(m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString());
 
-            uint id = qHash(profileName);
+            KDbTransaction transaction = m_conn->beginTransaction();
+            KDbTransactionGuard tg(transaction);
+
+            KDbFieldList fields;
+
+            fields.addField(m_conn->tableSchema("mi_band_activity")->field("timestamp"));
+            fields.addField(m_conn->tableSchema("mi_band_activity")->field("timestamp_dt"));
+            fields.addField(m_conn->tableSchema("mi_band_activity")->field("device_id"));
+            fields.addField(m_conn->tableSchema("mi_band_activity")->field("user_id"));
+            fields.addField(m_conn->tableSchema("mi_band_activity")->field("raw_intensity"));
+            fields.addField(m_conn->tableSchema("mi_band_activity")->field("steps"));
+            fields.addField(m_conn->tableSchema("mi_band_activity")->field("raw_kind"));
+            fields.addField(m_conn->tableSchema("mi_band_activity")->field("heartrate"));
 
             for (int i = 0; i < m_samples.count(); ++i) {
-                *m_dataStream << dev << "," << id << "," << m_sampleTime.toMSecsSinceEpoch() / 1000 << ",";
-                m_samples[i].write(*m_dataStream);
-                *m_dataStream << "\n";
+                QList<QVariant> values;
+                values << m_sampleTime.toMSecsSinceEpoch() / 1000;
+                values << m_sampleTime;
+                values << devid;
+                values << id;
+                values << m_samples[i].intensity();
+                values << m_samples[i].steps();
+                values << m_samples[i].kind();
+                values << m_samples[i].heartrate();
 
+                if (!m_conn->insertRecord(&fields, values)) {
+                    qDebug() << "error inserting record";
+                    saved = false;
+                    break;
+                }
                 m_sampleTime = m_sampleTime.addSecs(60);
             }
+            tg.commit();
+        } else {
+            qDebug() << "Database not connected";
+            saved = false;
         }
     }
+    return saved;
 }
 
 void ActivityFetchOperation::setStartDate(const QDateTime &sd)

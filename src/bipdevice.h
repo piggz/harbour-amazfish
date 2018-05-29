@@ -9,6 +9,7 @@
 #include "miband2service.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
+#include "settingsmanager.h"
 
 #include <QTimer>
 
@@ -43,6 +44,7 @@ private:
     bool m_autoreconnect = true;
     QString m_connectionState;
     QTimer *m_reconnectTimer;
+    SettingsManager m_settings;
 
     void initialise();
     void setConnectionState(const QString &state);

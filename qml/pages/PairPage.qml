@@ -11,6 +11,8 @@ Page {
     property string devicePath: "";
     property string deviceName: "";
 
+    property bool tryAgainAvail: false
+
     ConfigurationValue {
         id: pairedAddress
         key: "/uk/co/piggz/amazfish/pairedAddress"
@@ -48,6 +50,7 @@ Page {
                     BluezAdapter.startDiscovery();
                     tmrScan.start();
                     lblStatus.text = "Searching...";
+                    tryAgainAvail = false
                 }
 
             }
@@ -64,14 +67,30 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.margins: Theme.paddingMedium
         }
+        Button {
+            id: btnTryAgain
+            text: qsTr("Try again");
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.margins: Theme.paddingMedium
+            anchors.top: lblWatch.bottom
+            visible: tryAgainAvail
+
+            onClicked: {
+                pair();
+            }
+        }
+
     }
 
     function pair()
     {
         var path = BluezAdapter.matchDevice("Amazfit");
         if (path === "") {
-            lblStatus.text = "Watch not found";
-            return;
+            path = BluezAdapter.matchDevice("MI Band 2");
+            if (path === ""){
+                lblStatus.text = "Watch not found";
+                return;
+            }
         }
 
         devicePath = path;
@@ -81,12 +100,16 @@ Page {
         var err = DeviceInterface.pair(path);
 
         console.log(err);
+
+        if (err !== "") {
+            tryAgainAvail = true;
+        }
     }
 
     Connections {
         target: DeviceInterface
         onConnectionStateChanged: {
-            if (DeviceInterface.connectionState == "authenticated") {
+            if (DeviceInterface.connectionState === "authenticated") {
                 pairedAddress.value = devicePath;
                 pairedName.value = deviceName;
                 pairedAddress.sync();

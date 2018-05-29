@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDateTime>
+#include <KDb3/KDbConnection>
 
 #include "activitysample.h"
 #include "settingsmanager.h"
@@ -11,10 +12,10 @@
 class ActivityFetchOperation
 {
 public:
-    ActivityFetchOperation(const QDateTime &sd);
+    ActivityFetchOperation(const QDateTime &sd, KDbConnection *db);
 
     void newData(const QByteArray &data);
-    void finished(bool success);
+    bool finished(bool success);
     void setStartDate(const QDateTime &sd);
 private:
 
@@ -25,7 +26,9 @@ private:
     QList<ActivitySample> m_samples;
     SettingsManager m_settings;
 
-    void saveSamples();
+    KDbConnection *m_conn;
+
+    bool saveSamples();
 };
 
 #endif // ACTIVITYFETCHOPERATION_H

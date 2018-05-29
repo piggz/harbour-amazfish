@@ -53,6 +53,10 @@
         <source>Settings</source>
         <translation>Настройка</translation>
     </message>
+    <message>
+        <source>Download activity data</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MiBandService</name>
@@ -76,12 +80,35 @@
         <source>Finished transferring activity data</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No data to transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PairPage</name>
     <message>
         <source>Start scan</source>
         <translation>Начать поиск</translation>
+    </message>
+    <message>
+        <source>Try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-app</name>
+    <message>
+        <source>Device Settings</source>
+        <translation type="unfinished">Настройка часов</translation>
+    </message>
+    <message>
+        <source>Notify on connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation type="unfinished">Сохранить настройки</translation>
     </message>
 </context>
 <context>
@@ -158,12 +185,16 @@
         <translation>Меню настройки</translation>
     </message>
     <message>
-        <source>User Setting</source>
-        <translation>Пользователь</translation>
+        <source>User Settings</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Device Setting</source>
-        <translation>Устройство</translation>
+        <source>Device Settings</source>
+        <translation type="unfinished">Настройка часов</translation>
+    </message>
+    <message>
+        <source>Application Settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
