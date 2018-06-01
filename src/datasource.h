@@ -2,14 +2,9 @@
 #define DATASOURCE_H
 
 #include <QObject>
-#include "systemsnapshot.h"
+#include <QVariant>
 
-class ApplicationInfo {
-public:
-    QString name;
-    QString path;
-    int id;
-};
+#include <KDb3/KDbConnection>
 
 class DataSource:
     public QObject
@@ -18,36 +13,17 @@ class DataSource:
     Q_ENUMS(Type)
 public:
     enum Type {
-        CpuTotal = 100,
-        CpuUser,
-        CpuSystem,
-        CpuIO,
-        RAMUsed = 200,
-        RAMCached,
-        RAMBuffers,
-        SwapUsed = 250,
-        NetworkWlanTx = 300,
-        NetworkWlanRx,
-        NetworkCellTx,
-        NetworkCellRx,
-        BatteryPercentage = 400
+        Heartrate = 1,
+        Steps = 2,
+        Sleep = 3,
     };
+    DataSource();
+    void setConnection(KDbConnection *conn);
 
-    DataSource(SystemSnapshot *parent = 0);
-
-signals:
-    void systemDataGathered(DataSource::Type type, float value);
-    void applicationDataGathered(int appid, DataSource::Type type, float value);
-
-protected:
-    int registerSystemSource(const QString &source);
-    int registerApplicationSource(const QString &source);
-
-    const QByteArray & getSystemData(int source);
-    //const QByteArray & getSystemData(const QString &source);
+    Q_INVOKABLE QVariant data(Type type, const QDate  &day);
 
 private:
-    SystemSnapshot *m_snapshot;
+    KDbConnection *m_conn = nullptr;
 };
 
 #endif // DATASOURCE_H

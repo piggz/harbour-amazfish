@@ -1,22 +1,18 @@
 #include "datasource.h"
 
-DataSource::DataSource(SystemSnapshot *parent):
-    QObject(parent)
+DataSource::DataSource()
 {
-    m_snapshot = parent;
 }
 
-int DataSource::registerSystemSource(const QString &source)
+void DataSource::setConnection(KDbConnection *conn)
 {
-    return m_snapshot->registerSystemSource(source);
+    m_conn = conn;
 }
 
-int DataSource::registerApplicationSource(const QString &source)
+QVariant DataSource::data(Type type, const QDate &day)
 {
-    return m_snapshot->registerApplicationSource(source);
-}
+    if (m_conn && m_conn->isDatabaseUsed()) {
 
-const QByteArray & DataSource::getSystemData(int source)
-{
-    return m_snapshot->getSystemData(source);
+    }
+    return QVariant();
 }
