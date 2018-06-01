@@ -51,7 +51,7 @@ QByteArray dateTimeToBytes(const QDateTime &dt, int format)
     int utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(dt);
     qDebug() << "UTC offset it " << utcOffset;
 
-    ret += char((utcOffset / (60 * 60)) * 2);
+    ret += char((utcOffset / (60 * 60)) * 4);
     //ret += char(1);
 
     qDebug() << "converted date" << dt << "to" << ret;
@@ -60,6 +60,7 @@ QByteArray dateTimeToBytes(const QDateTime &dt, int format)
 
 QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset) {
     if (value.length() >= 7) {
+        qDebug() << "Date length is " << value.length() << value;
         int year = TypeConversion::toUint16(value[0], value[1]);
         QDateTime timestamp(QDate(
                                 year,
@@ -72,10 +73,16 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
                 );
 
 
+        qDebug() <<  timestamp;
+
         if (value.length() > 7) {
-            QTimeZone tz(value[7] * 15 * 60 * 1000);
+            QTimeZone tz(value[7] * 15 * 60);
+            qDebug() << tz;
             timestamp.setTimeZone(tz);
+        } else {
+            timestamp.setTimeSpec(Qt::LocalTime);
         }
+        qDebug() <<  timestamp;
         /*
         if (honorDeviceTimeOffset) {
             int offsetInHours = MiBandCoordinator.getDeviceTimeOffsetHours();

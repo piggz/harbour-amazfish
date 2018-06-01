@@ -113,13 +113,14 @@ void MiBandService::setCurrentTime()
     timeBytes += char(0); //fractions of seconds
     timeBytes += char(0); //timezone marker?
 
-    int utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(now);
+    QTimeZone tz = QTimeZone::systemTimeZone();
+    int utcOffset = tz.standardTimeOffset(now);
 
-    qDebug() << utcOffset << (utcOffset / (60 * 60)) * 2;
+    qDebug() << tz << utcOffset << (utcOffset / (60 * 60)) * 4;
 
-    timeBytes += char((utcOffset / (60 * 60)) * 2);
+    timeBytes += char((utcOffset / (60 * 60)) * 4);
 
-    qDebug() << "setting time to:" << timeBytes.toHex();
+    qDebug() << "setting time to:" << now << timeBytes.toHex();
     writeValue(UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME, timeBytes);
 }
 
@@ -336,6 +337,7 @@ void MiBandService::fetchLogs()
 
         QDateTime fetchFrom = QDateTime::currentDateTime();
         fetchFrom.addDays(-10);
+
         QByteArray rawDate = TypeConversion::dateTimeToBytes(fetchFrom, 0);
 
 
@@ -475,9 +477,9 @@ QDateTime MiBandService::lastActivitySync()
     qlonglong ls = m_settings.value("/uk/co/piggz/amazfish/device/lastactivitysyncmillis").toLongLong();
 
     if (ls == 0) {
-        return QDateTime::currentDateTime().addDays(-100);
+        return QDateTime::currentDateTime().addDays(-30);
     }
-    return QDateTime::fromMSecsSinceEpoch(ls);
+    return QDateTime::fromMSecsSinceEpoch(ls, Qt::TimeZone);
 }
 
 void MiBandService::setDatabase(KDbConnection *conn)
