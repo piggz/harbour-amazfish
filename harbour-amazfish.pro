@@ -53,7 +53,9 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/Settings-profile.qml \
     qml/pages/Settings-menu.qml \
     qml/pages/Settings-device.qml \
-    qml/pages/Settings-app.qml
+    qml/pages/Settings-app.qml \
+    qml/pages/AnalysisPage.qml \
+    qml/pages/Axis.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
