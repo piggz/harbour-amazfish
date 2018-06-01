@@ -62,6 +62,17 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
     if (value.length() >= 7) {
         qDebug() << "Date length is " << value.length() << value;
         int year = TypeConversion::toUint16(value[0], value[1]);
+
+        QTimeZone tz(0);
+
+        if (value.length() > 7) {
+            tz = QTimeZone(value[7] * 15 * 60);
+        } /*else {
+            timestamp.setTimeSpec(Qt::LocalTime);
+        }*/
+
+        qDebug() << tz;
+
         QDateTime timestamp(QDate(
                                 year,
                                 (value[2] & 0xff),
@@ -69,20 +80,10 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
                 QTime(
                     value[4] & 0xff,
                 value[5] & 0xff,
-                value[6] & 0xff)
-                );
+                value[6] & 0xff),
+                tz);
 
 
-        qDebug() <<  timestamp;
-
-        if (value.length() > 7) {
-            QTimeZone tz(value[7] * 15 * 60);
-            qDebug() << tz;
-            timestamp.setTimeZone(tz);
-        } else {
-            timestamp.setTimeSpec(Qt::LocalTime);
-        }
-        qDebug() <<  timestamp;
         /*
         if (honorDeviceTimeOffset) {
             int offsetInHours = MiBandCoordinator.getDeviceTimeOffsetHours();

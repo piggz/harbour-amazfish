@@ -479,7 +479,10 @@ QDateTime MiBandService::lastActivitySync()
     if (ls == 0) {
         return QDateTime::currentDateTime().addDays(-30);
     }
-    return QDateTime::fromMSecsSinceEpoch(ls, Qt::TimeZone);
+    QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime()));
+    qDebug() << tz << QTimeZone::systemTimeZone() << QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime());
+    qDebug() << "last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, tz);
+    return QDateTime::fromMSecsSinceEpoch(ls, tz);
 }
 
 void MiBandService::setDatabase(KDbConnection *conn)
