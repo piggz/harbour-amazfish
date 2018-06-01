@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import "../components/"
 
 Page {
     id: page
@@ -25,11 +26,15 @@ Page {
             PageHeader {
                 title: qsTr("Analysis")
             }
-            Row {
-                spacing: Theme.paddingLarge
+            Graph {
+                id: graphCpu
+                graphTitle: qsTr("Heartrate")
+                graphHeight: 300
 
-                GraphData {
-                	id: graHeartrate    
+                minY: 0
+                maxY: 255
+                valueConverter: function(value) {
+                    return value.toFixed(1);
                 }
             }
         }
