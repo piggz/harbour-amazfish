@@ -37,7 +37,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/deviceinfoservice.cpp \
     src/logfetchoperation.cpp \
     src/activitysample.cpp \
-    src/activityfetchoperation.cpp
+    src/activityfetchoperation.cpp \
+    src/datasource.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -55,7 +56,11 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/Settings-device.qml \
     qml/pages/Settings-app.qml \
     qml/pages/AnalysisPage.qml \
-    qml/pages/Axis.qml
+    qml/pages/Axis.qml \
+    qml/pages/GraphData.qml \
+    qml/components/Axis.qml \
+    qml/components/Graph.qml \
+    qml/components/GraphData.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
@@ -88,7 +93,8 @@ HEADERS += \
     src/deviceinfoservice.h \
     src/logfetchoperation.h \
     src/activitysample.h \
-    src/activityfetchoperation.h
+    src/activityfetchoperation.h \
+    src/datasource.h
 
 
 include(qble/qble.pri)
