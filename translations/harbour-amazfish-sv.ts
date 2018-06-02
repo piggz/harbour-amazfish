@@ -2,6 +2,17 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="sv">
 <context>
+    <name>AnalysisPage</name>
+    <message>
+        <source>Analysis</source>
+        <translation>Analys</translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation>Hjärtfrekvens</translation>
+    </message>
+</context>
+<context>
     <name>BipDevice</name>
     <message>
         <source>Amazfish</source>
@@ -59,6 +70,13 @@
     </message>
 </context>
 <context>
+    <name>GraphData</name>
+    <message>
+        <source>No data</source>
+        <translation>Ingen data</translation>
+    </message>
+</context>
+<context>
     <name>MiBandService</name>
     <message>
         <source>Finished transferring data</source>
@@ -82,7 +100,7 @@
     </message>
     <message>
         <source>No data to transfer</source>
-        <translation>Ingen data att överföra</translation>
+        <translation>Det finns ingen data att överföra</translation>
     </message>
 </context>
 <context>
@@ -100,7 +118,7 @@
     <name>Settings-app</name>
     <message>
         <source>Device Settings</source>
-        <translation>Enhetsinställningar</translation>
+        <translation type="unfinished">Enhetsinställningar</translation>
     </message>
     <message>
         <source>Notify on connect</source>
@@ -108,7 +126,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Spara inställningar</translation>
+        <translation type="unfinished">Spara inställningar</translation>
     </message>
 </context>
 <context>
@@ -190,7 +208,7 @@
     </message>
     <message>
         <source>Device Settings</source>
-        <translation>Enhetsinställningar</translation>
+        <translation type="unfinished">Enhetsinställningar</translation>
     </message>
     <message>
         <source>Application Settings</source>
