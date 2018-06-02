@@ -479,8 +479,8 @@ QDateTime MiBandService::lastActivitySync()
     if (ls == 0) {
         return QDateTime::currentDateTime().addDays(-30);
     }
-    QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime()));
-    qDebug() << tz << QTimeZone::systemTimeZone() << QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime());
+    QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime())); //Getting the timezone without DST
+
     qDebug() << "last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, tz);
     return QDateTime::fromMSecsSinceEpoch(ls, tz);
 }

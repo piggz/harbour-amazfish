@@ -9,6 +9,8 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
+    property var day: new Date()
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -26,17 +28,64 @@ Page {
             PageHeader {
                 title: qsTr("Analysis")
             }
+
+            Row {
+                spacing: Theme.paddingLarge
+                width: parent.width
+
+                IconButton {
+                    id: btnPrev
+                    icon.source: "image://theme/icon-m-back"
+                    onClicked: {
+                        day.setDate(day.getDate() - 1);
+                        lblDay.text = day.toDateString();
+                        console.log(day);
+                        graphHeartrate.updateGraph(day);
+                    }
+                }
+                Label {
+                    id: lblDay
+                    width: parent.width - btnPrev.width - btnNext.width - (2 * Theme.paddingLarge)
+                    text: day.toDateString()
+                    height: btnPrev.height
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                IconButton {
+                    id: btnNext
+                    icon.source: "image://theme/icon-m-forward"
+                    onClicked: {
+                        day.setDate(day.getDate() + 1);
+                        lblDay.text = day.toDateString();
+
+                        console.log(day);
+                        graphHeartrate.updateGraph(day);
+
+                    }
+                }
+            }
+
             Graph {
-                id: graphCpu
+                id: graphHeartrate
                 graphTitle: qsTr("Heartrate")
                 graphHeight: 300
 
+                axisY.units: "BPM"
+                type: 100
+
                 minY: 0
-                maxY: 255
+                maxY: 200
                 valueConverter: function(value) {
                     return value.toFixed(1);
                 }
+                onClicked: {
+                    updateGraph(day);
+                }
             }
         }
+    }
+
+    Component.onCompleted: {
+        graphHeartrate.updateGraph(day);
     }
 }

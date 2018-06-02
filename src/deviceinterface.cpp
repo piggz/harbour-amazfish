@@ -17,12 +17,7 @@ DeviceInterface::DeviceInterface()
     d.mkpath(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
 
     setupDatabase();
-
-    //m_db = QSqlDatabase::addDatabase("QSQLITE");
-    //m_db.setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+ "/amazfish.sqlite");
-    //qDebug() << QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/amazfish.sqlite";
-    //m_db.open();
-    //createTables();
+    m_dataSource.setConnection(m_conn);
 
     //Notifications
     connect(m_notificationListener, &NotificationsListener::notificationReceived, this, &DeviceInterface::notificationReceived);
@@ -166,33 +161,6 @@ void DeviceInterface::onActiveVoiceCallStatusChanged()
 
 void DeviceInterface::createTables()
 {
-#if 0
-    if (m_db.isOpen()) {
-        QSqlQuery qry;
-
-        qry.prepare( "CREATE TABLE \"MI_BAND_ACTIVITY_SAMPLE\" ("  //
-                     "\"TIMESTAMP\" INTEGER  NOT NULL ,"  // 0: timestamp
-                     "\"DEVICE_ID\" INTEGER  NOT NULL ,"  // 1: deviceId
-                     "\"USER_ID\" INTEGER NOT NULL ,"  // 2: userId
-                     "\"RAW_INTENSITY\" INTEGER NOT NULL ,"  // 3: rawIntensity
-                     "\"STEPS\" INTEGER NOT NULL ,"  // 4: steps
-                     "\"RAW_KIND\" INTEGER NOT NULL ,"  // 5: rawKind
-                     "\"HEART_RATE\" INTEGER NOT NULL ,"  // 6: heartRate
-                     "PRIMARY KEY ("
-                     "\"TIMESTAMP\" ,"
-                     "\"DEVICE_ID\" ) ON CONFLICT REPLACE);");
-
-        bool ret = qry.exec();
-        if(!ret) {
-            qDebug() << qry.lastError();
-        } else {
-            qDebug() << "activity table created!";
-        }
-    } else {
-        qDebug() << "Database not open";
-    }
-#endif
-
     m_conn->setAutoCommit(false);
 
 
@@ -312,4 +280,9 @@ void DeviceInterface::onConnectionStateChanged()
         }
     }
     emit connectionStateChanged();
+}
+
+DataSource *DeviceInterface::dataSource()
+{
+    return &m_dataSource;
 }

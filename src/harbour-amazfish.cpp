@@ -9,6 +9,7 @@
 #include <sailfishapp.h>
 #include "qble/bluezadapter.h"
 #include "deviceinterface.h"
+#include "datasource.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<MiBand2Service>();
     qmlRegisterType<AlertNotificationService>();
     qmlRegisterType<HRMService>();
+    qmlRegisterType<DataSource>();
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);
