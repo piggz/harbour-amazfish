@@ -77,37 +77,10 @@
     </message>
 </context>
 <context>
-    <name>GraphData</name>
-    <message>
-        <source>No data</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MiBandService</name>
-    <message>
-        <source>Finished transferring data</source>
-        <translation>Dataöverföring slutförd</translation>
-    </message>
     <message>
         <source>An operation is currently running, please try later</source>
         <translation>En åtgärd körs redan, försök senare&gt;</translation>
-    </message>
-    <message>
-        <source>About to transfer log data from </source>
-        <translation>Inleder överföring av loggdata från </translation>
-    </message>
-    <message>
-        <source>About to transfer activity data from </source>
-        <translation>Inleder överföring av aktivitetsdata från </translation>
-    </message>
-    <message>
-        <source>Finished transferring activity data</source>
-        <translation>Överföring av aktivitetsdata slutförd</translation>
-    </message>
-    <message>
-        <source>No data to transfer</source>
-        <translation>Det finns ingen data att överföra</translation>
     </message>
 </context>
 <context>
@@ -119,6 +92,29 @@
     <message>
         <source>Try again</source>
         <translation>Försök igen</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>About to transfer activity data from </source>
+        <translation type="unfinished">Inleder överföring av aktivitetsdata från </translation>
+    </message>
+    <message>
+        <source>Finished transferring activity data</source>
+        <translation type="unfinished">Överföring av aktivitetsdata slutförd</translation>
+    </message>
+    <message>
+        <source>No data to transfer</source>
+        <translation type="unfinished">Det finns ingen data att överföra</translation>
+    </message>
+    <message>
+        <source>About to transfer log data from </source>
+        <translation type="unfinished">Inleder överföring av loggdata från </translation>
+    </message>
+    <message>
+        <source>Finished transferring data</source>
+        <translation type="unfinished">Dataöverföring slutförd</translation>
     </message>
 </context>
 <context>

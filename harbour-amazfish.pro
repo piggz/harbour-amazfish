@@ -38,7 +38,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/logfetchoperation.cpp \
     src/activitysample.cpp \
     src/activityfetchoperation.cpp \
-    src/datasource.cpp
+    src/datasource.cpp \
+    src/abstractoperation.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -95,7 +96,8 @@ HEADERS += \
     src/logfetchoperation.h \
     src/activitysample.h \
     src/activityfetchoperation.h \
-    src/datasource.h
+    src/datasource.h \
+    src/abstractoperation.h
 
 
 include(qble/qble.pri)

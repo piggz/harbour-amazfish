@@ -129,18 +129,12 @@ public:
     Q_SIGNAL void declineCall();
     Q_SIGNAL void ignoreCall();
 
-    Q_SIGNAL void message(const QString &text);
-
     void setDatabase(KDbConnection *conn);
 
 private:
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
     Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
     void setGPSVersion(const QString& v);
-    void handleFetchLogMetaData(const QByteArray &value);
-    void handleFetchActivityMetaData(const QByteArray &value);
-
-    QDateTime lastActivitySync();
 
     QString m_gpsVersion;
     int m_steps;

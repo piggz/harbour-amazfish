@@ -4,11 +4,16 @@
 #include <QFile>
 #include <QDataStream>
 
-class LogFetchOperation
+#include "abstractoperation.h"
+
+class LogFetchOperation : public AbstractOperation
 {
 public:
-    LogFetchOperation();
-    void newData(const QByteArray &data);
+    LogFetchOperation(QBLEService *service);
+
+    void start() override;
+    bool handleMetaData(const QByteArray &meta) override;
+    void handleData(const QByteArray &data) override;
     void finished();
 
 private:

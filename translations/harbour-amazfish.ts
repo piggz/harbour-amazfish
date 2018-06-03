@@ -79,17 +79,23 @@
 <context>
     <name>MiBandService</name>
     <message>
-        <source>Finished transferring data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>An operation is currently running, please try later</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>PairPage</name>
     <message>
-        <source>About to transfer log data from </source>
+        <source>Start scan</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
     <message>
         <source>About to transfer activity data from </source>
         <translation type="unfinished"></translation>
@@ -102,15 +108,12 @@
         <source>No data to transfer</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>PairPage</name>
     <message>
-        <source>Start scan</source>
+        <source>About to transfer log data from </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Try again</source>
+        <source>Finished transferring data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
