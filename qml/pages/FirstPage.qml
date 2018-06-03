@@ -35,7 +35,14 @@ Page {
             console.log(DeviceInterface.connectionState);
         }
     }
-
+    
+    onStatusChanged: {
+        if (status === PageStatus.Active) {
+//            if (!pageStack._currentContainer.attachedContainer) {
+                pageStack.pushAttached(Qt.resolvedUrl("AnalysisPage.qml"))
+    //        }
+        }
+    }
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent

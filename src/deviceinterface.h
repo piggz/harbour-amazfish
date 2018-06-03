@@ -3,7 +3,9 @@
 
 #include <QObject>
 #include <QtSql/QtSql>
-
+#include <KDb3/KDbDriver>
+#include <KDb3/KDbConnection>
+#include <KDb3/KDbConnectionData>
 
 #include "qble/bluezadapter.h"
 
@@ -12,10 +14,7 @@
 #include "voicecallhandler.h"
 #include "voicecallmanager.h"
 #include "settingsmanager.h"
-
-#include <KDb3/KDbDriver>
-#include <KDb3/KDbConnection>
-#include <KDb3/KDbConnectionData>
+#include "datasource.h"
 
 class AlertNotificationService;
 class DeviceInfoService;
@@ -43,6 +42,7 @@ public:
     Q_INVOKABLE MiBand2Service *miBand2Service() const;
     Q_INVOKABLE AlertNotificationService *alertNotificationService() const;
     Q_INVOKABLE HRMService *hrmService() const;
+    Q_INVOKABLE DataSource *dataSource();
 
     Q_SIGNAL void message(const QString &text);
 
@@ -58,6 +58,7 @@ private:
     VoiceCallManager *m_voiceCallManager = nullptr;
 
     SettingsManager m_settings;
+    DataSource m_dataSource;
 
 
     void createSettings();

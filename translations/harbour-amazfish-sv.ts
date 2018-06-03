@@ -77,6 +77,13 @@
     </message>
 </context>
 <context>
+    <name>GraphData</name>
+    <message>
+        <source>No data</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MiBandService</name>
     <message>
         <source>Finished transferring data</source>
