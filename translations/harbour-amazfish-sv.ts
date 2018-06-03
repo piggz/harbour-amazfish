@@ -339,5 +339,9 @@
         <source>All day HRM interval (minutes): </source>
         <translation>HRM-intervall för hela dagen (minuter): </translation>
     </message>
+    <message>
+        <source>Use HRM for Sleep Detection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

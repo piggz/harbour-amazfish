@@ -18,10 +18,12 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/timeformat", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/distanceunit", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/lastactivitysyncmillis", this);
+
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/displayonliftwrist", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/alertfitnessgoal", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/fitnessgoal", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/alldayhrm", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/hrmsleepsupport", this);
 
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displaystatus", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displayactivity", this);

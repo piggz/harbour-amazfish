@@ -297,6 +297,7 @@ void MiBandService::setDisplayItems()
     bool sw = false;
     bool sa = false;
 
+
     if (m_settings.value("/uk/co/piggz/amazfish/device/displaystatus", QVariant(true)).toBool()) {
         items1 |= 0x02;
     }
@@ -370,10 +371,7 @@ void MiBandService::setInactivityWarnings()
 {
 
 }
-void MiBandService::setHeartrateSleepSupport()
-{
 
-}
 
 
 

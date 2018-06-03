@@ -114,7 +114,6 @@ public:
     Q_INVOKABLE void setRotateWristToSwitchInfo(bool enable);
     Q_INVOKABLE void setDisplayCaller();
     Q_INVOKABLE void setInactivityWarnings();
-    Q_INVOKABLE void setHeartrateSleepSupport();
 
     //Operations
     Q_INVOKABLE void fetchLogs();

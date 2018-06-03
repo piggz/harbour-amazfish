@@ -69,3 +69,21 @@ void HRMService::setAllDayHRM()
     writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, cmd);
     disableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
 }
+
+void HRMService::setHeartrateSleepSupport()
+{
+    bool enable = m_settings.value("/uk/co/piggz/amazfish/profile/hrmsleepsupport", QVariant(true)).toBool();
+
+    qDebug() << "Setting HRM sleept support to" << enable;
+
+    QByteArray cmd;
+    if (enable) {
+        cmd = QByteArray(COMMAND_ENABLE_HR_SLEEP_MEASUREMENT, 3);
+    } else {
+        cmd = QByteArray(COMMAND_DISABLE_HR_SLEEP_MEASUREMENT, 3);
+    }
+
+    enableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
+    writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, cmd);
+    disableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
+}

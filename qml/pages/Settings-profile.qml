@@ -63,6 +63,13 @@ Page {
         key: "/uk/co/piggz/amazfish/profile/alldayhrm"
         defaultValue: 0
     }
+
+    ConfigurationValue {
+        id: profileHRMSleepSupport
+        key: "/uk/co/piggz/amazfish/profile/hrmsleepsupport"
+        defaultValue: true
+    }
+
     ConfigurationValue {
         id: profileDisplayOnLiftWrist
         key: "/uk/co/piggz/amazfish/profile/displayonliftwrist"
@@ -185,7 +192,12 @@ Page {
                 id: swAlertOnGoal
                 text: qsTr("Alert on fitness goal")
             }
-            
+
+            TextSwitch {
+                id: swHRMSleepSupport
+                text: qsTr("Use HRM for Sleep Detection")
+            }
+
             Slider {
                 id: sldAllDayHRM
                 width: parent.width
@@ -216,6 +228,7 @@ Page {
         swAlertOnGoal.checked = profileAlertFitnessGoal.value;
         sldAllDayHRM.value = profileAllDayHRM.value;
         swDisplayOnLiftWrist.checked = profileDisplayOnLiftWrist.value;
+        swHRMSleepSupport.checked = profileHRMSleepSupport.value;
     }
     function saveProfile() {
         profileName.value = fldName.text;
@@ -228,7 +241,8 @@ Page {
         profileAlertFitnessGoal.value = swAlertOnGoal.checked;
         profileAllDayHRM.value = sldAllDayHRM.value;
         profileDisplayOnLiftWrist.value = swDisplayOnLiftWrist.checked;
-        
+        profileHRMSleepSupport.value = swHRMSleepSupport.checked;
+
         tmrSetDelay.start();
     }
 
@@ -244,6 +258,7 @@ Page {
             DeviceInterface.miBandService().setAlertFitnessGoal();
             DeviceInterface.miBandService().setEnableDisplayOnLiftWrist();
             DeviceInterface.hrmService().setAllDayHRM();
+            DeviceInterface.hrmService().setHeartrateSleepSupport();
         }
     }
 }
