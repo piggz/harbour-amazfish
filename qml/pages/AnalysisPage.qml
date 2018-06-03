@@ -39,7 +39,6 @@ Page {
                     onClicked: {
                         day.setDate(day.getDate() - 1);
                         lblDay.text = day.toDateString();
-                        console.log(day);
                         graphHeartrate.updateGraph(day);
                     }
                 }
@@ -57,10 +56,7 @@ Page {
                     onClicked: {
                         day.setDate(day.getDate() + 1);
                         lblDay.text = day.toDateString();
-
-                        console.log(day);
                         graphHeartrate.updateGraph(day);
-
                     }
                 }
             }

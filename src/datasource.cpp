@@ -34,7 +34,6 @@ QVariant DataSource::data(Type type, const QDate &day)
                     pt["y"] = h.toInt();
                     result.append(pt);
 
-                    qDebug() << "Got data" << d << h;
                     curs->moveNext();
                 }
             }

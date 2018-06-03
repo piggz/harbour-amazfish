@@ -23,6 +23,17 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/fitnessgoal", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/alldayhrm", this);
 
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displaystatus", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displayactivity", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displayweather", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displayalarm", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displaytimer", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displaycompass", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displaysettings", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displayalipay", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displayweathershortcut", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displayalipayshortcut", this);
+
 }
 
 QVariant SettingsManager::value(const QString &key)
@@ -34,6 +45,17 @@ QVariant SettingsManager::value(const QString &key)
         }
     }
     return QVariant();
+}
+
+QVariant SettingsManager::value(const QString &key, const QVariant &def)
+{
+    Q_FOREACH(MGConfItem* item, m_settings) {
+        item->sync();
+        if (item->key() == key) {
+            return item->value();
+        }
+    }
+    return def;
 }
 
 void SettingsManager::setValue(const QString&key, const QVariant &value)

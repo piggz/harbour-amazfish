@@ -292,12 +292,65 @@ void MiBandService::setEnableDisplayOnLiftWrist()
 
 void MiBandService::setDisplayItems()
 {
+    char items1 = 0x01; //Always display clock
+    char items2 = 0x10;
+    bool sw = false;
+    bool sa = false;
 
+    if (m_settings.value("/uk/co/piggz/amazfish/device/displaystatus", QVariant(true)).toBool()) {
+        items1 |= 0x02;
+    }
+    if (m_settings.value("/uk/co/piggz/amazfish/device/displayactivity", QVariant(true)).toBool()) {
+        items1 |= 0x04;
+    }
+    if (m_settings.value("/uk/co/piggz/amazfish/device/displayweather", QVariant(true)).toBool()) {
+        items1 |= 0x08;
+    }
+    if (m_settings.value("/uk/co/piggz/amazfish/device/displayalarm", QVariant(true)).toBool()) {
+        items1 |= 0x10;
+    }
+    if (m_settings.value("/uk/co/piggz/amazfish/device/displaytimer", QVariant(true)).toBool()) {
+        items1 |= 0x20;
+    }
+    if (m_settings.value("/uk/co/piggz/amazfish/device/displaycompass", QVariant(true)).toBool()) {
+        items1 |= 0x40;
+    }
+    if (m_settings.value("/uk/co/piggz/amazfish/device/displaysettings", QVariant(true)).toBool()) {
+        items1 |= 0x80;
+    }
+    if (m_settings.value("/uk/co/piggz/amazfish/device/displayalipay", QVariant(true)).toBool()) {
+        items2 |= 0x01;
+    }
+
+
+    sw = m_settings.value("/uk/co/piggz/amazfish/device/displayweathershortcut", QVariant(true)).toBool();
+    sa = m_settings.value("/uk/co/piggz/amazfish/device/displayalipayshortcut", QVariant(true)).toBool();
+
+    QByteArray cmd = QByteArray(COMMAND_CHANGE_SCREENS, 12);
+    cmd[1] = items1;
+    cmd[2] = items2;
+
+    qDebug() << "Setting display items to:" << cmd;
+
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
+
+    QByteArray shortcuts;
+    shortcuts += 0x10;
+    shortcuts += ((sa || sw) ? 0x80 : 0x00);
+    shortcuts += (sw ? 0x02 : 0x01);
+    shortcuts += ((sa && sw) ? 0x81 : 0x01);
+    shortcuts += 0x01;
+
+    qDebug() << "Setting shortcuts to:" << shortcuts;
+
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, shortcuts);
 }
+
 void MiBandService::setDoNotDisturb()
 {
 
 }
+
 void MiBandService::setRotateWristToSwitchInfo(bool enable)
 {
     qDebug() << "Setting rotate write to " << enable;

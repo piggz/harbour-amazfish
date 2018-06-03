@@ -99,8 +99,13 @@ Page {
                 }
             }
 
-
-
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("BIP Display Items")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Settings-bip-shortcuts.qml"))
+                }
+            }
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter

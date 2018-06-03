@@ -137,6 +137,57 @@
     </message>
 </context>
 <context>
+    <name>Settings-bip-shortcuts</name>
+    <message>
+        <source>BIP Display Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weather</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Inställningar</translation>
+    </message>
+    <message>
+        <source>AliPay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weather Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AliPay Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation type="unfinished">Spara inställningar</translation>
+    </message>
+</context>
+<context>
     <name>Settings-device</name>
     <message>
         <source>Device Settings</source>
@@ -201,6 +252,10 @@
     <message>
         <source>Imperial</source>
         <translation>Imperial</translation>
+    </message>
+    <message>
+        <source>BIP Display Items</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

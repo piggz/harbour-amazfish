@@ -188,8 +188,21 @@ void BipDevice::authenticated(bool ready)
             mi->setTimeFormat();
             mi->setUserInfo();
             mi->setDisplayCaller();
-            mi->setRotateWristToSwitchInfo(true);
             mi->setAlertFitnessGoal();
+            mi->setDistanceUnit();
+            mi->setWearLocation();
+            mi->setFitnessGoal();
+            mi->setDisplayItems();
+            mi->setDoNotDisturb();
+            mi->setEnableDisplayOnLiftWrist();
+            mi->setRotateWristToSwitchInfo(true);
+            mi->setInactivityWarnings();
+        }
+
+        HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));
+        if (hrm) {
+            hrm->setAllDayHRM();
+            //            setHeartrateSleepSupport(builder);
         }
     } else {
         setConnectionState("authfailed");
