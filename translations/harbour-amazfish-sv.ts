@@ -5,11 +5,11 @@
     <name>AnalysisPage</name>
     <message>
         <source>Analysis</source>
-        <translation type="unfinished"></translation>
+        <translation>Analys</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjärtfrekvens</translation>
     </message>
 </context>
 <context>
@@ -66,7 +66,14 @@
     </message>
     <message>
         <source>Download activity data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladda ner aktivitetsdata</translation>
+    </message>
+</context>
+<context>
+    <name>GraphData</name>
+    <message>
+        <source>No data</source>
+        <translation>Ingen data</translation>
     </message>
 </context>
 <context>
@@ -100,7 +107,7 @@
     </message>
     <message>
         <source>No data to transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Det finns ingen data att överföra</translation>
     </message>
 </context>
 <context>
@@ -111,7 +118,7 @@
     </message>
     <message>
         <source>Try again</source>
-        <translation type="unfinished"></translation>
+        <translation>Försök igen</translation>
     </message>
 </context>
 <context>
@@ -122,7 +129,7 @@
     </message>
     <message>
         <source>Notify on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Avisera vid anslutning</translation>
     </message>
     <message>
         <source>Save Settings</source>
@@ -204,7 +211,7 @@
     </message>
     <message>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Användarinställningar</translation>
     </message>
     <message>
         <source>Device Settings</source>
@@ -212,7 +219,7 @@
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Programinställningar</translation>
     </message>
 </context>
 <context>
