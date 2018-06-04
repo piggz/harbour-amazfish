@@ -202,8 +202,15 @@ void BipDevice::authenticated(bool ready)
         HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));
         if (hrm) {
             hrm->setAllDayHRM();
-            //            setHeartrateSleepSupport(builder);
+            hrm-> setHeartrateSleepSupport();
         }
+        
+        DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+        if (info) {
+            connect(info, &DeviceInfoService::softwareRevisionChanged, this, &BipDevice::softwareRevisionChanged);
+        }
+        
+                
     } else {
         setConnectionState("authfailed");
     }
@@ -256,4 +263,17 @@ void BipDevice::reconnectionTimer()
         qDebug() << "Lost connection";
         QBLEDevice::connectToDevice();
     }
+}
+
+void BipDevice::softwareRevisionChanged()
+{
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+    if (info) {
+        m_softwareRevision=info->softwareRevision();   
+    }
+}
+
+QString BipDevice::softwareRevision() const
+{
+    return m_softwareRevision;
 }

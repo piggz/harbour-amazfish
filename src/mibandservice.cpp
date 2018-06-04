@@ -3,6 +3,7 @@
 #include <QTimeZone>
 
 #include "typeconversion.h"
+#include "bipdevice.h"
 
 const char* MiBandService::UUID_SERVICE_MIBAND = "0000fee0-0000-1000-8000-00805f9b34fb";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_NOTIFICATION = "00000002-0000-3512-2118-0009af100700";
@@ -306,6 +307,12 @@ void MiBandService::setDisplayItems()
     bool sa = false;
 
 
+    BipDevice *device = qobject_cast<BipDevice*>(parent());
+    if (!device || device->softwareRevision().remove(".") < "01139") {
+        message(tr("Firmware is too old to set display items, 0.1.1.14 is required"));
+        return;        
+    }
+    
     if (m_settings.value("/uk/co/piggz/amazfish/device/displaystatus", QVariant(true)).toBool()) {
         items1 |= 0x02;
     }

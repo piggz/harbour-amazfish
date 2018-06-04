@@ -95,10 +95,13 @@ public:
     virtual void disconnectFromDevice();
 
     QString connectionState() const;
+    QString softwareRevision() const;
+    
+    Q_SLOT void authenticated(bool ready);
+    
     Q_SIGNAL void connectionStateChanged();
     Q_SIGNAL void message(const QString &text);
 
-    Q_SLOT void authenticated(bool ready);
 private:
     void parseServices();
     bool m_needsAuth = false;
@@ -109,10 +112,12 @@ private:
     QString m_connectionState;
     QTimer *m_reconnectTimer;
     SettingsManager m_settings;
-
+    QString m_softwareRevision;
+    
     void initialise();
     void setConnectionState(const QString &state);
     void reconnectionTimer();
+    Q_SLOT void softwareRevisionChanged();
 
     Q_SLOT void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 };
