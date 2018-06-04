@@ -78,3 +78,8 @@ QString DeviceInfoService::pnpId() const
 {
     return m_pnpId;
 }
+
+QString DeviceInfoService::readSoftwareRevisionSync()
+{
+    return readValue(UUID_CHARACTERISTIC_INFO_SOFTWARE_REV);
+}

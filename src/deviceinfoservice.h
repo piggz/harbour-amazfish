@@ -29,6 +29,7 @@ public:
     Q_INVOKABLE QString softwareRevision() const;
     Q_INVOKABLE QString systemId() const;
     Q_INVOKABLE QString pnpId() const;
+    Q_INVOKABLE QString readSoftwareRevisionSync();
 
     Q_SIGNAL void serialNumberChanged();
     Q_SIGNAL void hardwareRevisionChanged();

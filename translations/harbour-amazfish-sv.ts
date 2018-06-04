@@ -82,6 +82,10 @@
         <source>An operation is currently running, please try later</source>
         <translation>En åtgärd körs redan, försök senare&gt;</translation>
     </message>
+    <message>
+        <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PairPage</name>

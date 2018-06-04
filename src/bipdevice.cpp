@@ -204,13 +204,6 @@ void BipDevice::authenticated(bool ready)
             hrm->setAllDayHRM();
             hrm-> setHeartrateSleepSupport();
         }
-        
-        DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
-        if (info) {
-            connect(info, &DeviceInfoService::softwareRevisionChanged, this, &BipDevice::softwareRevisionChanged);
-        }
-        
-                
     } else {
         setConnectionState("authfailed");
     }
@@ -265,15 +258,15 @@ void BipDevice::reconnectionTimer()
     }
 }
 
-void BipDevice::softwareRevisionChanged()
+QString BipDevice::softwareRevision()
 {
-    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
-    if (info) {
-        m_softwareRevision=info->softwareRevision();   
+    if (m_softwareRevision.isEmpty()) {
+        DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+        if (info) {
+            m_softwareRevision = info->readSoftwareRevisionSync();
+        } else {
+            m_softwareRevision = "V0.0.0.00";
+        }
     }
-}
-
-QString BipDevice::softwareRevision() const
-{
     return m_softwareRevision;
 }

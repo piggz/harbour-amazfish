@@ -95,7 +95,7 @@ public:
     virtual void disconnectFromDevice();
 
     QString connectionState() const;
-    QString softwareRevision() const;
+    QString softwareRevision();
     
     Q_SLOT void authenticated(bool ready);
     
@@ -117,7 +117,6 @@ private:
     void initialise();
     void setConnectionState(const QString &state);
     void reconnectionTimer();
-    Q_SLOT void softwareRevisionChanged();
 
     Q_SLOT void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 };

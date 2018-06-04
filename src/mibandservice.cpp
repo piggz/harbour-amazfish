@@ -308,8 +308,9 @@ void MiBandService::setDisplayItems()
 
 
     BipDevice *device = qobject_cast<BipDevice*>(parent());
-    if (!device || device->softwareRevision().remove(".") < "01139") {
-        message(tr("Firmware is too old to set display items, 0.1.1.14 is required"));
+
+    if (!device || device->softwareRevision() < "V0.1.1.14") { //Lexical string comparison should be fine here
+        message(tr("Firmware is too old to set display items, V0.1.1.14 is required"));
         return;        
     }
     
