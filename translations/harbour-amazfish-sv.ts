@@ -176,7 +176,7 @@
     </message>
     <message>
         <source>Weather Shortcut</source>
-        <translatio>Vädergenväg</translation>
+        <translation>Vädergenväg</translation>
     </message>
     <message>
         <source>AliPay Shortcut</source>
