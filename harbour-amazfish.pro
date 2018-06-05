@@ -62,7 +62,9 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/components/Axis.qml \
     qml/components/Graph.qml \
     qml/components/GraphData.qml \
-    qml/pages/Settings-bip-shortcuts.qml
+    qml/pages/Settings-bip-shortcuts.qml \
+    qml/components/Alarm.qml \
+    qml/pages/Settings-alarms.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 

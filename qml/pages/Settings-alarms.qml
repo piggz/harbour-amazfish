@@ -1,12 +1,20 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import "../components/"
 
 Page {
     id: page
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
+
+    ConfigurationValue {
+        id: appNotifyConnect
+        key: "/uk/co/piggz/amazfish/app/notifyconnect"
+        defaultValue: true
+    }
+
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -26,40 +34,52 @@ Page {
             width: page.width - 2*Theme.horizontalPageMargin
             spacing: Theme.paddingLarge
             PageHeader {
-                title: qsTr("Settings Menu")
+                title: qsTr("Alarms")
+            }
+
+            Alarm {
+                alarmName: qsTr("Alarm 1")
+                alarmId: "alarm1"
+            }
+
+            Alarm {
+                alarmName: qsTr("Alarm 2")
+                alarmId: "alarm2"
+
+
+            }
+
+            Alarm {
+                alarmName: qsTr("Alarm 3")
+                alarmId: "alarm3"
+
+            }
+
+            Alarm {
+                alarmName: qsTr("Alarm 4")
+                alarmId: "alarm4"
+
+            }
+
+            Alarm {
+                alarmName: qsTr("Alarm 5")
+                alarmId: "alarm5"
+
             }
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("User Settings")
+                text: qsTr("Save Settings")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
-                }
-            }
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Device Settings")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-device.qml"))
-                }
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Application Settings")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-app.qml"))
-                }
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Alarms")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-alarms.qml"))
+                    saveSettings();
                 }
             }
         }
+    }
+    Component.onCompleted: {
+
+    }
+    function saveSettings() {
     }
 
 }
