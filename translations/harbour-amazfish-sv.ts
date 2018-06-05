@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation type="unfinished"></translation>
+        <translation>Mjukvaran är för gammal för att ange visningsobjekt. V0.1.1.14 krävs.</translation>
     </message>
 </context>
 <context>
@@ -140,31 +140,31 @@
     <name>Settings-bip-shortcuts</name>
     <message>
         <source>BIP Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>BIP visningsobjekt</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitet</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Väder</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Larm</translation>
     </message>
     <message>
         <source>Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidur</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompass</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -172,15 +172,15 @@
     </message>
     <message>
         <source>AliPay</source>
-        <translation type="unfinished"></translation>
+        <translation>AliPay</translation>
     </message>
     <message>
         <source>Weather Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translatio>Vädergenväg</translation>
     </message>
     <message>
         <source>AliPay Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>AliPay-genväg</translation>
     </message>
     <message>
         <source>Save Settings</source>
@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>BIP Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>BIP visningsobjekt</translation>
     </message>
 </context>
 <context>
@@ -341,7 +341,7 @@
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd HRM för att upptäcka sömn</translation>
     </message>
 </context>
 </TS>
