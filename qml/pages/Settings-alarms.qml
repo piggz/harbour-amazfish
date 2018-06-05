@@ -38,11 +38,13 @@ Page {
             }
 
             Alarm {
+                id: alarm1
                 alarmName: qsTr("Alarm 1")
                 alarmId: "alarm1"
             }
 
             Alarm {
+                id: alarm2
                 alarmName: qsTr("Alarm 2")
                 alarmId: "alarm2"
 
@@ -50,18 +52,24 @@ Page {
             }
 
             Alarm {
+                id: alarm3
+
                 alarmName: qsTr("Alarm 3")
                 alarmId: "alarm3"
 
             }
 
             Alarm {
+                id: alarm4
+
                 alarmName: qsTr("Alarm 4")
                 alarmId: "alarm4"
 
             }
 
             Alarm {
+                id: alarm5
+
                 alarmName: qsTr("Alarm 5")
                 alarmId: "alarm5"
 
@@ -77,9 +85,33 @@ Page {
         }
     }
     Component.onCompleted: {
+        alarm1.init();
+        alarm2.init();
+        alarm3.init();
+        alarm4.init();
+        alarm5.init();
 
     }
+
     function saveSettings() {
+        alarm1.save();
+        alarm2.save();
+        alarm3.save();
+        alarm4.save();
+        alarm5.save();
+        tmrSetDelay.start();
     }
+
+    Timer {
+        //Allow data to sync
+        id: tmrSetDelay
+        repeat: false
+        interval: 500
+        running: false
+        onTriggered: {
+            DeviceInterface.miBandService().setAlarms();
+        }
+    }
+
 
 }

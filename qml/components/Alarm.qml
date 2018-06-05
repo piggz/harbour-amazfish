@@ -14,6 +14,31 @@ Item {
     width: parent.width
 
 
+    ConfigurationValue {
+        id: alarmEnabled
+        key: "/uk/co/piggz/amazfish/alarms/" + alarmId + "/enabled"
+        defaultValue: false
+    }
+
+    ConfigurationValue {
+        id: alarmHour
+        key: "/uk/co/piggz/amazfish/alarms/" + alarmId + "/hour"
+        defaultValue: 0
+    }
+
+    ConfigurationValue {
+        id: alarmMinute
+        key: "/uk/co/piggz/amazfish/alarms/" + alarmId + "/minute"
+        defaultValue: 0
+    }
+
+    ConfigurationValue {
+        id: alarmRepeat
+        key: "/uk/co/piggz/amazfish/alarms/" + alarmId + "/repeat"
+        defaultValue: 0
+    }
+
+
     Column {
         width: parent.width
         height: childrenRect.height
@@ -122,6 +147,39 @@ Item {
         }
     }
 
+    function init() {
+        chkEnabled.checked = alarmEnabled.value;
+        hour = alarmHour.value;
+        minute = alarmMinute.value;
+
+        var repeat = alarmRepeat.value;
+
+        chkMo.checked = repeat & 1;
+        chkTu.checked = repeat & 2;
+        chkWe.checked = repeat & 4;
+        chkTh.checked = repeat & 8;
+        chkFr.checked = repeat & 16;
+        chkSa.checked = repeat & 32;
+        chkSu.checked = repeat & 64;
+
+    }
+
+    function save() {
+        alarmEnabled.value = chkEnabled.checked;
+        alarmHour.value = hour;
+        alarmMinute.value = minute;
+
+        var repeat = 0;
+        repeat |= chkMo.checked ? 1 : 0;
+        repeat |= chkTu.checked ? 2 : 0;
+        repeat |= chkWe.checked ? 4 : 0;
+        repeat |= chkTh.checked ? 8 : 0;
+        repeat |= chkFr.checked ? 16 : 0;
+        repeat |= chkSa.checked ? 32 : 0;
+        repeat |= chkSu.checked ? 64 : 0;
+
+        alarmRepeat.value = repeat;
+    }
 
 
     function pad(n, width, z) {

@@ -311,7 +311,7 @@ void MiBandService::setDisplayItems()
 
     if (!device || device->softwareRevision() < "V0.1.1.14") { //Lexical string comparison should be fine here
         message(tr("Firmware is too old to set display items, V0.1.1.14 is required"));
-        return;        
+        return;
     }
     
     if (m_settings.value("/uk/co/piggz/amazfish/device/displaystatus", QVariant(true)).toBool()) {
@@ -446,9 +446,25 @@ void MiBandService::setAlarms()
         int base =0;
         int repeatMask=0;
         
-        QString configBase = "/uk/co/piggz/amazfish/alarms/alarm" + (i+1) + "/";
+        QString configBase = "/uk/co/piggz/amazfish/alarms/alarm" + QString::number(i+1) + "/";
         
-            
-        
+        bool enabled = (m_settings.value(configBase + "enabled", QVariant(false)).toBool());
+        if (enabled) {
+            base = 128;
+        }
+
+        repeatMask = m_settings.value(configBase + "repeat", 0).toInt();
+        if (repeatMask == 0) {
+            repeatMask = 128;
+        }
+
+        QByteArray cmd;
+        cmd += 0x02;
+        cmd += (base + i + 1);
+        cmd += m_settings.value(configBase + "hour", 0).toInt();
+        cmd += m_settings.value(configBase + "minute", 0).toInt();
+        cmd += repeatMask;
+
+        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
     }
 }
