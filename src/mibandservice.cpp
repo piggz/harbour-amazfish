@@ -423,25 +423,6 @@ void MiBandService::setDatabase(KDbConnection *conn)
 
 void MiBandService::setAlarms()
 {
-    /*
-      int base = 0;
-        if (alarm.isEnabled()) {
-            base = 128;
-        }
-        int daysMask = alarm.getRepetitionMask();
-        if (!alarm.isRepetitive()) {
-            daysMask = 128;
-        }
-        byte[] alarmMessage = new byte[] {
-                (byte) 0x2, // TODO what is this?
-                (byte) (base + alarm.getIndex()), // 128 is the base, alarm slot is added
-                (byte) calendar.get(Calendar.HOUR_OF_DAY),
-                (byte) calendar.get(Calendar.MINUTE),
-                (byte) daysMask,
-        };
-    /
-    */
-    
     for (int i =0; i < 5; ++i) {
         int base =0;
         int repeatMask=0;
