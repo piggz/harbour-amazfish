@@ -16,6 +16,7 @@ public:
         Heartrate = 1,
         Steps = 2,
         Sleep = 3,
+        Intensity = 4
     };
     DataSource();
     void setConnection(KDbConnection *conn);

@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
 import "../components/"
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
@@ -39,7 +40,7 @@ Page {
                     onClicked: {
                         day.setDate(day.getDate() - 1);
                         lblDay.text = day.toDateString();
-                        graphHeartrate.updateGraph(day);
+                        updateGraphs();
                     }
                 }
                 Label {
@@ -56,7 +57,8 @@ Page {
                     onClicked: {
                         day.setDate(day.getDate() + 1);
                         lblDay.text = day.toDateString();
-                        graphHeartrate.updateGraph(day);
+                         updateGraphs();
+
                     }
                 }
             }
@@ -67,7 +69,7 @@ Page {
                 graphHeight: 300
 
                 axisY.units: "BPM"
-                type: 100
+                type: DataSource.Heartrate
 
                 minY: 0
                 maxY: 200
@@ -78,10 +80,50 @@ Page {
                     updateGraph(day);
                 }
             }
+            Graph {
+                id: graphSteps
+                graphTitle: qsTr("Steps")
+                graphHeight: 300
+
+                axisY.units: "Steps"
+                type: DataSource.Steps
+
+                minY: 0
+                maxY: 200
+                valueConverter: function(value) {
+                    return value.toFixed(1);
+                }
+                onClicked: {
+                    updateGraph(day);
+                }
+            }
+            Graph {
+                id: graphIntensity
+                graphTitle: qsTr("Intensity")
+                graphHeight: 300
+
+                axisY.units: "%"
+                type: DataSource.Intensity
+
+                minY: 0
+                maxY: 100
+                valueConverter: function(value) {
+                    return value.toFixed(1);
+                }
+                onClicked: {
+                    updateGraph(day);
+                }
+            }
         }
     }
 
-    Component.onCompleted: {
+    function updateGraphs() {
         graphHeartrate.updateGraph(day);
+        graphSteps.updateGraph(day);
+        graphIntensity.updateGraph(day);
+    }
+
+    Component.onCompleted: {
+        updateGraphs();
     }
 }

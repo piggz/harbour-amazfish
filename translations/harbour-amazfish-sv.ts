@@ -46,6 +46,14 @@
         <source>Heartrate</source>
         <translation>Hjärtfrekvens</translation>
     </message>
+    <message>
+        <source>Steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intensity</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BipDevice</name>
