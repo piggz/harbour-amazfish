@@ -112,37 +112,43 @@ Item {
             Label {
                 text: qsTr("Mon")
                 width: (parent.width - Theme.paddingMedium) / 8
+                horizontalAlignment: Text.AlignHCenter
 
             }
             Label {
                 text: qsTr("Tue")
                 width: (parent.width - Theme.paddingMedium) / 8
+                horizontalAlignment: Text.AlignHCenter
 
             }
             Label {
                 text: qsTr("Wed")
                 width: (parent.width - Theme.paddingMedium) / 8
+                horizontalAlignment: Text.AlignHCenter
 
             }
             Label {
                 text: qsTr("Thu")
                 width: (parent.width - Theme.paddingMedium) / 7
+                horizontalAlignment: Text.AlignHCenter
 
             }
             Label {
                 text: qsTr("Fri")
                 width: (parent.width - Theme.paddingMedium) / 7
+                horizontalAlignment: Text.AlignHCenter
 
             }
             Label {
                 text: qsTr("Sat")
                 width: (parent.width - Theme.paddingMedium) / 7
+                horizontalAlignment: Text.AlignHCenter
 
             }
             Label {
                 text: qsTr("Sun")
                 width: (parent.width - Theme.paddingMedium) / 7
-
+                horizontalAlignment: Text.AlignHCenter
             }
         }
     }
