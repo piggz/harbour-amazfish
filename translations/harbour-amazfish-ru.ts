@@ -2,6 +2,41 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>Alarm</name>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AnalysisPage</name>
     <message>
         <source>Analysis</source>
@@ -9,6 +44,14 @@
     </message>
     <message>
         <source>Heartrate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intensity</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -118,6 +161,37 @@
     </message>
     <message>
         <source>Finished transferring data</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-alarms</name>
+    <message>
+        <source>Alarms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation type="unfinished">Сохранить настройки</translation>
+    </message>
+    <message>
+        <source>Alarm 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 5</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -274,6 +348,10 @@
     </message>
     <message>
         <source>Application Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarms</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

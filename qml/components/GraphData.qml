@@ -41,7 +41,7 @@ Item {
 
     property bool scale: false
     property color lineColor: Theme.highlightColor
-    property int lineWidth: 3
+    property real lineWidth: 1
 
     property real minY: 0 //Always 0
     property real maxY: 0
@@ -237,6 +237,10 @@ Item {
                     ctx.save()
                     ctx.strokeStyle = lineColor;
                     //ctx.globalAlpha = 0.8;
+
+                    //PGZ
+                    lineWidth = width / end;
+
                     ctx.lineWidth = lineWidth;
                     ctx.beginPath();
                     var x = -stepX;

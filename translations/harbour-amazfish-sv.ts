@@ -196,6 +196,37 @@
     </message>
 </context>
 <context>
+    <name>Settings-alarms</name>
+    <message>
+        <source>Alarms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation type="unfinished">Spara inställningar</translation>
+    </message>
+    <message>
+        <source>Alarm 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Settings-app</name>
     <message>
         <source>Device Settings</source>

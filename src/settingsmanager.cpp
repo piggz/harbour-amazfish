@@ -36,6 +36,31 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displayweathershortcut", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/device/displayalipayshortcut", this);
 
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm1/enabled", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm1/repeat", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm1/hour", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm1/minute", this);
+
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm2/enabled", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm2/repeat", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm2/hour", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm2/minute", this);
+
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm3/enabled", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm3/repeat", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm3/hour", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm3/minute", this);
+
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm4/enabled", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm4/repeat", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm4/hour", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm4/minute", this);
+
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm5/enabled", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm5/repeat", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm5/hour", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm5/minute", this);
+
 }
 
 QVariant SettingsManager::value(const QString &key)

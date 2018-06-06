@@ -51,6 +51,14 @@ Page {
                     pageStack.push(Qt.resolvedUrl("Settings-app.qml"))
                 }
             }
+
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Alarms")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Settings-alarms.qml"))
+                }
+            }
         }
     }
 
