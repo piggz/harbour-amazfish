@@ -2,6 +2,41 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="sv">
 <context>
+    <name>Alarm</name>
+    <message>
+        <source>Enabled</source>
+        <translation>Aktiverad</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation>Mån</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation>Tis</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation>Ons</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation>Tor</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation>Fre</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation>Lör</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation>Sön</translation>
+    </message>
+</context>
+<context>
     <name>AnalysisPage</name>
     <message>
         <source>Analysis</source>
@@ -10,6 +45,14 @@
     <message>
         <source>Heartrate</source>
         <translation>Hjärtfrekvens</translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation>Steg</translation>
+    </message>
+    <message>
+        <source>Intensity</source>
+        <translation>Intensitet</translation>
     </message>
 </context>
 <context>
@@ -80,7 +123,7 @@
     <name>MiBandService</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation>En åtgärd körs redan, försök senare&gt;</translation>
+        <translation>En åtgärd körs redan, försök senare</translation>
     </message>
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
@@ -102,30 +145,61 @@
     <name>QObject</name>
     <message>
         <source>About to transfer activity data from </source>
-        <translation type="unfinished">Inleder överföring av aktivitetsdata från </translation>
+        <translation>Inleder överföring av aktivitetsdata från </translation>
     </message>
     <message>
         <source>Finished transferring activity data</source>
-        <translation type="unfinished">Överföring av aktivitetsdata slutförd</translation>
+        <translation>Överföring av aktivitetsdata slutförd</translation>
     </message>
     <message>
         <source>No data to transfer</source>
-        <translation type="unfinished">Det finns ingen data att överföra</translation>
+        <translation>Det finns ingen data att överföra</translation>
     </message>
     <message>
         <source>About to transfer log data from </source>
-        <translation type="unfinished">Inleder överföring av loggdata från </translation>
+        <translation>Inleder överföring av loggdata från </translation>
     </message>
     <message>
         <source>Finished transferring data</source>
-        <translation type="unfinished">Dataöverföring slutförd</translation>
+        <translation>Dataöverföring slutförd</translation>
+    </message>
+</context>
+<context>
+    <name>Settings-alarms</name>
+    <message>
+        <source>Alarms</source>
+        <translation>Larm</translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation>Spara inställningar</translation>
+    </message>
+    <message>
+        <source>Alarm 1</source>
+        <translation>Larm 1</translation>
+    </message>
+    <message>
+        <source>Alarm 2</source>
+        <translation>Larm 2</translation>
+    </message>
+    <message>
+        <source>Alarm 3</source>
+        <translation>Larm 3</translation>
+    </message>
+    <message>
+        <source>Alarm 4</source>
+        <translation>Larm 4</translation>
+    </message>
+    <message>
+        <source>Alarm 5</source>
+        <translation>Larm 5</translation>
     </message>
 </context>
 <context>
     <name>Settings-app</name>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished">Enhetsinställningar</translation>
+        <translation>Enhetsinställningar</translation>
     </message>
     <message>
         <source>Notify on connect</source>
@@ -133,7 +207,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Spara inställningar</translation>
+        <translation>Spara inställningar</translation>
     </message>
 </context>
 <context>
@@ -168,7 +242,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Inställningar</translation>
+        <translation>Inställningar</translation>
     </message>
     <message>
         <source>AliPay</source>
@@ -184,7 +258,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Spara inställningar</translation>
+        <translation>Spara inställningar</translation>
     </message>
 </context>
 <context>
@@ -270,11 +344,15 @@
     </message>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished">Enhetsinställningar</translation>
+        <translation>Enhetsinställningar</translation>
     </message>
     <message>
         <source>Application Settings</source>
         <translation>Programinställningar</translation>
+    </message>
+    <message>
+        <source>Alarms</source>
+        <translation>Larm</translation>
     </message>
 </context>
 <context>
