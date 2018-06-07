@@ -39,7 +39,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/activitysample.cpp \
     src/activityfetchoperation.cpp \
     src/datasource.cpp \
-    src/abstractoperation.cpp
+    src/abstractoperation.cpp \
+    src/updatefirmwareoperation.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -99,7 +100,8 @@ HEADERS += \
     src/activitysample.h \
     src/activityfetchoperation.h \
     src/datasource.h \
-    src/abstractoperation.h
+    src/abstractoperation.h \
+    src/updatefirmwareoperation.h
 
 
 include(qble/qble.pri)
