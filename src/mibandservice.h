@@ -4,8 +4,8 @@
 #include "qble/qbleservice.h"
 #include "settingsmanager.h"
 #include "bipbatteryinfo.h"
-#include "logfetchoperation.h"
-#include "activityfetchoperation.h"
+#include "operations/logfetchoperation.h"
+#include "operations/activityfetchoperation.h"
 
 /*
 {0000FEE0-0000-1000-8000-00805f9b34fb} MiBand Service

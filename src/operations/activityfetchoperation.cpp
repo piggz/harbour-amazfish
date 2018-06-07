@@ -3,8 +3,8 @@
 #include <QDebug>
 #include <KDb3/KDbTransactionGuard>
 
-#include "mibandservice.h"
-#include "typeconversion.h"
+#include "../mibandservice.h"
+#include "../typeconversion.h"
 
 ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn) : AbstractOperation(service)
 {

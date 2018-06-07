@@ -5,35 +5,35 @@
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiverad</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Mån</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Tis</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ons</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Tor</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Fre</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Lör</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Sön</translation>
     </message>
 </context>
 <context>
@@ -48,11 +48,11 @@
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Steg</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensitet</translation>
     </message>
 </context>
 <context>
@@ -123,11 +123,11 @@
     <name>MiBandService</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation>En åtgärd körs redan, försök senare&gt;</translation>
+        <translation>En åtgärd körs redan, försök senare</translation>
     </message>
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation type="unfinished"></translation>
+        <translation>Mjukvaran är för gammal för att ange visningsobjekt. V0.1.1.14 krävs.</translation>
     </message>
 </context>
 <context>
@@ -145,23 +145,54 @@
     <name>QObject</name>
     <message>
         <source>About to transfer activity data from </source>
-        <translation type="unfinished">Inleder överföring av aktivitetsdata från </translation>
+        <translation>Inleder överföring av aktivitetsdata från </translation>
     </message>
     <message>
         <source>Finished transferring activity data</source>
-        <translation type="unfinished">Överföring av aktivitetsdata slutförd</translation>
+        <translation>Överföring av aktivitetsdata slutförd</translation>
     </message>
     <message>
         <source>No data to transfer</source>
-        <translation type="unfinished">Det finns ingen data att överföra</translation>
+        <translation>Det finns ingen data att överföra</translation>
     </message>
     <message>
         <source>About to transfer log data from </source>
-        <translation type="unfinished">Inleder överföring av loggdata från </translation>
+        <translation>Inleder överföring av loggdata från </translation>
     </message>
     <message>
         <source>Finished transferring data</source>
-        <translation type="unfinished">Dataöverföring slutförd</translation>
+        <translation>Dataöverföring slutförd</translation>
+    </message>
+</context>
+<context>
+    <name>Settings-alarms</name>
+    <message>
+        <source>Alarms</source>
+        <translation>Larm</translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation>Spara inställningar</translation>
+    </message>
+    <message>
+        <source>Alarm 1</source>
+        <translation>Larm 1</translation>
+    </message>
+    <message>
+        <source>Alarm 2</source>
+        <translation>Larm 2</translation>
+    </message>
+    <message>
+        <source>Alarm 3</source>
+        <translation>Larm 3</translation>
+    </message>
+    <message>
+        <source>Alarm 4</source>
+        <translation>Larm 4</translation>
+    </message>
+    <message>
+        <source>Alarm 5</source>
+        <translation>Larm 5</translation>
     </message>
 </context>
 <context>
@@ -199,7 +230,7 @@
     <name>Settings-app</name>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished">Enhetsinställningar</translation>
+        <translation>Enhetsinställningar</translation>
     </message>
     <message>
         <source>Notify on connect</source>
@@ -207,58 +238,58 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Spara inställningar</translation>
+        <translation>Spara inställningar</translation>
     </message>
 </context>
 <context>
     <name>Settings-bip-shortcuts</name>
     <message>
         <source>BIP Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>BIP visningsobjekt</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitet</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Väder</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Larm</translation>
     </message>
     <message>
         <source>Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidur</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompass</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Inställningar</translation>
+        <translation>Inställningar</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation type="unfinished"></translation>
+        <translation>AliPay</translation>
     </message>
     <message>
         <source>Weather Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Vädergenväg</translation>
     </message>
     <message>
         <source>AliPay Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>AliPay-genväg</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Spara inställningar</translation>
+        <translation>Spara inställningar</translation>
     </message>
 </context>
 <context>
@@ -329,7 +360,7 @@
     </message>
     <message>
         <source>BIP Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>BIP visningsobjekt</translation>
     </message>
 </context>
 <context>
@@ -344,7 +375,7 @@
     </message>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished">Enhetsinställningar</translation>
+        <translation>Enhetsinställningar</translation>
     </message>
     <message>
         <source>Application Settings</source>
@@ -352,7 +383,7 @@
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Larm</translation>
     </message>
 </context>
 <context>
@@ -419,7 +450,7 @@
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd HRM för att upptäcka sömn</translation>
     </message>
 </context>
 </TS>

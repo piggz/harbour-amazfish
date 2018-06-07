@@ -4,8 +4,8 @@
 #include <QDateTime>
 #include <QDebug>
 
-#include "mibandservice.h"
-#include "typeconversion.h"
+#include "../mibandservice.h"
+#include "../typeconversion.h"
 
 LogFetchOperation::LogFetchOperation(QBLEService *service) : AbstractOperation(service)
 {
