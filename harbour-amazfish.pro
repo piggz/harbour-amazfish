@@ -35,12 +35,13 @@ SOURCES += src/harbour-amazfish.cpp \
     src/bipdevice.cpp \
     src/deviceinterface.cpp \
     src/deviceinfoservice.cpp \
-    src/logfetchoperation.cpp \
     src/activitysample.cpp \
-    src/activityfetchoperation.cpp \
     src/datasource.cpp \
-    src/abstractoperation.cpp
-
+    src/operations/abstractoperation.cpp \
+    src/operations/activityfetchoperation.cpp \
+    src/operations/logfetchoperation.cpp \
+    src/operations/sportssummaryoperation.cpp
+ 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
@@ -95,11 +96,11 @@ HEADERS += \
     src/bipdevice.h \
     src/deviceinterface.h \
     src/deviceinfoservice.h \
-    src/logfetchoperation.h \
     src/activitysample.h \
-    src/activityfetchoperation.h \
     src/datasource.h \
-    src/abstractoperation.h
-
+    src/operations/abstractoperation.h \
+    src/operations/activityfetchoperation.h \
+    src/operations/logfetchoperation.h \
+    src/operations/sportssummaryoperation.h
 
 include(qble/qble.pri)
