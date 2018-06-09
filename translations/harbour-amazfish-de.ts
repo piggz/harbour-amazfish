@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>Mon</source>
-        <translation type="Mon"></translation>
+        <translation type="Mo"></translation>
     </message>
     <message>
         <source>Tue</source>
