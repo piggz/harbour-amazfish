@@ -5,7 +5,23 @@
 class HuamiFirmwareInfo
 {
 public:
-    HuamiFirmwareInfo();
+    HuamiFirmwareInfo(QByteArray bytes);
+    Q_ENUMS(Type);
+    
+    enum Type {
+	Invalid = 0,
+        Firmware,
+        Font,
+        Font_Latin
+        GPS,
+        GPS_CEP,
+        GPS_ALMANAC,
+        Res,
+        Res_Compressed,
+        Watchface        
+    };
+    
+    
 
     const char RES_HEADER[5]{ // HMRES resources file (*.res)
             0x48, 0x4d, 0x52, 0x45, 0x53
@@ -59,7 +75,19 @@ public:
     const char GPS_CEP_HEADER[4]{ // probably wrong
             0x2a, 0x12, 0xa0, 0x02
     };
-
+    
+    int size();
+    QByteArray bytes();
+    QString version();
+    Type type() const;
+    int crc16() const;
+    
+    private:
+    
+    QByteArray mBytes;
+    int mCrc16;
+    void calculateCRC16;
+    void calculateFirmwareType();
 };
 
 #endif // HUAMIFIRMWAREINFO_H
