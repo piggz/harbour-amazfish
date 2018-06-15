@@ -1,18 +1,22 @@
 #ifndef HUAMIFIRMWAREINFO_H
 #define HUAMIFIRMWAREINFO_H
 
+#include <QByteArray>
+#include <QObject>
 
-class HuamiFirmwareInfo
+class HuamiFirmwareInfo : public QObject
 {
+    Q_OBJECT
+    Q_ENUMS(Type)
+    
 public:
-    HuamiFirmwareInfo(QByteArray bytes);
-    Q_ENUMS(Type);
+    HuamiFirmwareInfo(const QByteArray &bytes);
     
     enum Type {
 	Invalid = 0,
         Firmware,
         Font,
-        Font_Latin
+        Font_Latin,
         GPS,
         GPS_CEP,
         GPS_ALMANAC,
@@ -82,11 +86,11 @@ public:
     Type type() const;
     int crc16() const;
     
-    private:
+private:
     
     QByteArray mBytes;
     int mCrc16;
-    void calculateCRC16;
+    void calculateCRC16();
     void calculateFirmwareType();
 };
 

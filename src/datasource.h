@@ -6,8 +6,7 @@
 
 #include <KDb3/KDbConnection>
 
-class DataSource:
-    public QObject
+class DataSource: public QObject
 {
     Q_OBJECT
     Q_ENUMS(Type)

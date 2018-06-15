@@ -1,6 +1,6 @@
 #include "huamifirmwareinfo.h"
 
-HuamiFirmwareInfo::HuamiFirmwareInfo()
+HuamiFirmwareInfo::HuamiFirmwareInfo(const QByteArray &bytes)
 {
-
+	mBytes = bytes;
 }
