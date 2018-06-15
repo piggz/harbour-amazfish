@@ -8,7 +8,7 @@
 
 #include "abstractoperation.h"
 #include "activitysample.h"
-#include "settingsmanager.h"
+#include "../settingsmanager.h"
 
 class SportsSummaryOperation : public AbstractOperation
 {
