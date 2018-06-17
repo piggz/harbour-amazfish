@@ -91,7 +91,8 @@ private:
     QByteArray mBytes;
     int mCrc16;
     void calculateCRC16();
-    void calculateFirmwareType();
+    Type determineFirmwareType();
+    QString searchFirmwareVersion();
 };
 
 #endif // HUAMIFIRMWAREINFO_H
