@@ -20,22 +20,27 @@ QT +=  contacts KDb3
 
 PKGCONFIG += mlite5
 
+INCLUDEPATH += $$PWD/src/services/ \
+                                    $$PWD/src/operations/ \
+                                    $$PWD/src/
+
 SOURCES += src/harbour-amazfish.cpp \
     src/qaesencryption.cpp \
-    src/mibandservice.cpp \
-    src/miband2service.cpp \
-    src/alertnotificationservice.cpp \
-    src/notificationslistener.cpp \
     src/voicecallhandler.cpp \
     src/voicecallmanager.cpp \
     src/typeconversion.cpp \
     src/settingsmanager.cpp \
     src/bipbatteryinfo.cpp \
-    src/hrmservice.cpp \
     src/bipdevice.cpp \
-    src/deviceinterface.cpp \
-    src/deviceinfoservice.cpp \
     src/datasource.cpp \
+    src/notificationslistener.cpp \
+    src/services/mibandservice.cpp \
+    src/services/miband2service.cpp \
+    src/services/alertnotificationservice.cpp \
+    src/services/hrmservice.cpp \
+    src/services/deviceinfoservice.cpp \
+    src/services/bipfirmwareservice.cpp \
+    src/deviceinterface.cpp \
     src/operations/activitysample.cpp \
     src/operations/abstractoperation.cpp \
     src/operations/activityfetchoperation.cpp \
@@ -85,20 +90,21 @@ TRANSLATIONS += translations/harbour-amazfish-de.ts \
 
 HEADERS += \
     src/qaesencryption.h \
-    src/mibandservice.h \
-    src/miband2service.h \
-    src/alertnotificationservice.h \
     src/notificationslistener.h \
     src/voicecallhandler.h \
     src/voicecallmanager.h \
     src/typeconversion.h \
     src/settingsmanager.h \
     src/bipbatteryinfo.h \
-    src/hrmservice.h \
     src/bipdevice.h \
     src/deviceinterface.h \
-    src/deviceinfoservice.h \
     src/datasource.h \
+    src/services/mibandservice.h \
+    src/services/miband2service.h \
+    src/services/alertnotificationservice.h \
+    src/services/hrmservice.h \
+    src/services/deviceinfoservice.h \
+    src/services/bipfirmwareservice.h \
     src/operations/activitysample.h \
     src/operations/abstractoperation.h \
     src/operations/activityfetchoperation.h \
