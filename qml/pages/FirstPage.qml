@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import Sailfish.Pickers 1.0
 
 Page {
     id: page
@@ -10,6 +11,7 @@ Page {
 
     property bool manualDisconnect: false
     property bool needsProfileSet: false
+    property string selectedFile
 
     ConfigurationValue {
         id: pairedAddress
@@ -38,9 +40,9 @@ Page {
     
     onStatusChanged: {
         if (status === PageStatus.Active) {
-//            if (!pageStack._currentContainer.attachedContainer) {
-                pageStack.pushAttached(Qt.resolvedUrl("AnalysisPage.qml"))
-    //        }
+            //            if (!pageStack._currentContainer.attachedContainer) {
+            pageStack.pushAttached(Qt.resolvedUrl("AnalysisPage.qml"))
+            //        }
         }
     }
     // To enable PullDownMenu, place our content in a SilicaFlickable
@@ -213,6 +215,13 @@ Page {
                 }
             }
 
+
+            ValueButton {
+                label: "Download Firmware"
+                value: selectedFile ? selectedFile : "None"
+                onClicked: pageStack.push(filePickerPage)
+            }
+
         }
     }
     Timer {
@@ -223,6 +232,16 @@ Page {
         onTriggered: {
             if (needsProfileSet) {
                 pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
+            }
+        }
+    }
+
+    Component {
+        id: filePickerPage
+        FilePickerPage {
+            nameFilters: [ '*.*' ]
+            onSelectedContentPropertiesChanged: {
+                page.selectedFile = selectedContentProperties.filePath
             }
         }
     }
