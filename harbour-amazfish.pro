@@ -39,6 +39,7 @@ SOURCES += src/harbour-amazfish.cpp \
     src/services/alertnotificationservice.cpp \
     src/services/hrmservice.cpp \
     src/services/deviceinfoservice.cpp \
+    src/services/bipfirmwareservice.cpp \
     src/deviceinterface.cpp \
     src/operations/activitysample.cpp \
     src/operations/abstractoperation.cpp \
@@ -103,6 +104,7 @@ HEADERS += \
     src/services/alertnotificationservice.h \
     src/services/hrmservice.h \
     src/services/deviceinfoservice.h \
+    src/services/bipfirmwareservice.h \
     src/operations/activitysample.h \
     src/operations/abstractoperation.h \
     src/operations/activityfetchoperation.h \
