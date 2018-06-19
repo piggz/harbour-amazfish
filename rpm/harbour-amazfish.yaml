@@ -34,6 +34,8 @@ PkgConfigBR:
 PkgBR:
   - kdb-devel >= 3.1.0
   - kcoreaddons-devel >= 5.31.0
+  - qt5-qtwidgets-devel
+  - qt5-qtxml-devel
 
 # Runtime dependencies which are not automatically detected
 Requires:
