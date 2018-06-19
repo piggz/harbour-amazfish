@@ -1,5 +1,5 @@
-#ifndef ACTIVITYFETCHOPERATION_H
-#define ACTIVITYFETCHOPERATION_H
+#ifndef SPORTSSUMMARYOPERATION_H
+#define SPORTSSUMMARYOPERATION_H
 
 #include <QFile>
 #include <QTextStream>
@@ -8,7 +8,7 @@
 
 #include "abstractoperation.h"
 #include "activitysample.h"
-#include "../settingsmanager.h"
+#include "settingsmanager.h"
 
 class SportsSummaryOperation : public AbstractOperation
 {
@@ -34,4 +34,4 @@ private:
     QDateTime lastActivitySync();
 };
 
-#endif // ACTIVITYFETCHOPERATION_H
+#endif // SPORTSSUMMARYOPERATION_H

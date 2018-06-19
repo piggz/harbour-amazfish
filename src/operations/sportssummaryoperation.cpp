@@ -91,13 +91,13 @@ bool SportsSummaryOperation::finished(bool success)
     bool saved = true;
     if (success) {
         //store the successful samples
-        saved = saveSamples();
+        //saved = saveSamples();
         m_settings.setValue("/uk/co/piggz/amazfish/device/lastactivitysyncmillis", m_sampleTime.toMSecsSinceEpoch());
         qDebug() << "finished fetch operation, last record was " << m_sampleTime;
     }
     return saved;
 }
-
+#if 0
 bool SportsSummaryOperation::saveSamples()
 {
     bool saved = true;
@@ -148,6 +148,7 @@ bool SportsSummaryOperation::saveSamples()
     }
     return saved;
 }
+#endif
 
 void SportsSummaryOperation::setStartDate(const QDateTime &sd)
 {

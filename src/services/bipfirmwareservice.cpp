@@ -17,3 +17,12 @@ void BipFirmwareService::characteristicChanged(const QString &characteristic, co
 {
     qDebug() << "FW Changed:" << characteristic << value;
 }
+
+void BipFirmwareService::downloadFile(const QString &path)
+{
+    qDebug() << "Sending file " << path;
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)) return;
+    m_fwBytes = file.readAll();
+
+}
