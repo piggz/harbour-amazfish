@@ -21,6 +21,7 @@ class DeviceInfoService;
 class HRMService;
 class MiBand2Service;
 class MiBandService;
+class BipFirmwareService;
 
 class DeviceInterface : public QObject
 {
@@ -42,6 +43,8 @@ public:
     Q_INVOKABLE MiBand2Service *miBand2Service() const;
     Q_INVOKABLE AlertNotificationService *alertNotificationService() const;
     Q_INVOKABLE HRMService *hrmService() const;
+    Q_INVOKABLE BipFirmwareService *firmwareService() const;
+    
     Q_INVOKABLE DataSource *dataSource();
 
     Q_SIGNAL void message(const QString &text);

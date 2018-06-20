@@ -1,8 +1,13 @@
 #include "huamifirmwareinfo.h"
+#include <QDebug>
 
 HuamiFirmwareInfo::HuamiFirmwareInfo(const QByteArray &bytes)
 {
     mBytes = bytes;
+    m_type = determineFirmwareType();
+    m_version = searchFirmwareVersion();
+    
+    qDebug() << m_type << m_version;
 }
 
 HuamiFirmwareInfo::Type HuamiFirmwareInfo::determineFirmwareType() {

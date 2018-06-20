@@ -9,6 +9,7 @@
 #include "miband2service.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
+#include "bipfirmwareservice.h"
 #include "settingsmanager.h"
 
 #include <QTimer>
@@ -87,7 +88,8 @@ public:
     static const char* UUID_SERVICE_MIBAND;
     static const char* UUID_SERVICE_HRM;
     static const char* UUID_SERVICE_DEVICEINFO;
-
+    static const char* UUID_SERVICE_FIRMWARE;
+    
     virtual QString pair();
     virtual void pairAsync();
 

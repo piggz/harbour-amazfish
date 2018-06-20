@@ -241,7 +241,8 @@ Page {
         FilePickerPage {
             nameFilters: [ '*.*' ]
             onSelectedContentPropertiesChanged: {
-                page.selectedFile = selectedContentProperties.filePath
+                page.selectedFile = selectedContentProperties.filePath;
+                DeviceInterface.firmwareService().downloadFile(page.selectedFile);
             }
         }
     }

@@ -90,6 +90,8 @@ private:
     
     QByteArray mBytes;
     int mCrc16;
+    Type m_type;
+    QString m_version;
     void calculateCRC16();
     Type determineFirmwareType();
     QString searchFirmwareVersion();

@@ -6,6 +6,7 @@ const char* BipDevice::UUID_SERVICE_DEVICEINFO = DeviceInfoService::UUID_SERVICE
 const char* BipDevice::UUID_SERVICE_HRM = HRMService::UUID_SERVICE_HRM;
 const char* BipDevice::UUID_SERVICE_MIBAND = MiBandService::UUID_SERVICE_MIBAND;
 const char* BipDevice::UUID_SERVICE_MIBAND2 = MiBand2Service::UUID_SERVICE_MIBAND2;
+const char* BipDevice::UUID_SERVICE_FIRMWARE = BipFirmwareService::UUID_SERVICE_FIRMWARE;
 
 BipDevice::BipDevice()
 {
@@ -108,6 +109,8 @@ void BipDevice::parseServices()
                 addService(UUID_SERVICE_MIBAND, new MiBandService(path, this));
             } else if (uuid == UUID_SERVICE_MIBAND2 && !service(UUID_SERVICE_MIBAND2)) {
                 addService(UUID_SERVICE_MIBAND2, new MiBand2Service(path, this));
+            } else if (uuid == UUID_SERVICE_FIRMWARE && !service(UUID_SERVICE_FIRMWARE)) {
+                addService(UUID_SERVICE_FIRMWARE, new BipFirmwareService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }

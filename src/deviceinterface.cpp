@@ -92,7 +92,10 @@ HRMService *DeviceInterface::hrmService() const
     return qobject_cast<HRMService*>(m_bipDevice->service(BipDevice::UUID_SERVICE_HRM));
 }
 
-
+BipFirmwareService *DeviceInterface::firmwareService() const
+{
+    return qobject_cast<BipFirmwareService*>(m_bipDevice->service(BipDevice::UUID_SERVICE_FIRMWARE));
+}
 
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {

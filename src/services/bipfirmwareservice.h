@@ -16,7 +16,7 @@ class BipFirmwareService : public QBLEService
 
 public:
     BipFirmwareService(const QString &path, QObject *parent);
-    static const char *UUID_SERVICE_BIP_FIRMWARE;
+    static const char *UUID_SERVICE_FIRMWARE;
     static const char *UUID_CHARACTERISTIC_FIRMWARE;
     static const char *UUID_CHARACTERISTIC_FIRMWARE_DATA;
 
