@@ -35,6 +35,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<MiBand2Service>();
     qmlRegisterType<AlertNotificationService>();
     qmlRegisterType<HRMService>();
+    qmlRegisterType<BipFirmwareService>();
+
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
 
     QQuickView *view = SailfishApp::createView();

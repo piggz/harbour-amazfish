@@ -16,14 +16,26 @@ BipFirmwareService::BipFirmwareService(const QString &path, QObject *parent) : Q
 void BipFirmwareService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
     qDebug() << "FW Changed:" << characteristic << value;
+
+    if (characteristic == UUID_CHARACTERISTIC_FIRMWARE) {
+        qDebug() << "...got metadata";
+        if (m_operationRunning == 1 && m_updateFirmware) {
+            if (m_updateFirmware->handleMetaData(value)) {
+                delete m_updateFirmware;
+                m_updateFirmware = nullptr;
+                m_operationRunning = 0;
+            }
+        }
+    }
 }
 
 void BipFirmwareService::downloadFile(const QString &path)
 {
-    qDebug() << "Sending file " << path;
-    QFile file(path);
-    if (!file.open(QIODevice::ReadOnly)) return;
-    m_fwBytes = file.readAll();
-
-    m_info = new HuamiFirmwareInfo(m_fwBytes);
+    if (!m_updateFirmware && m_operationRunning == 0) {
+        m_operationRunning = 1;
+        m_updateFirmware = new UpdateFirmwareOperation(path, this);
+        m_updateFirmware->start();
+    } else {
+        emit message(tr("An operation is currently running, please try later"));
+    }
 }

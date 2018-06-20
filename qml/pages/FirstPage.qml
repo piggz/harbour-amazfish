@@ -250,7 +250,7 @@ Page {
     Connections {
         target: DeviceInterface
         onConnectionStateChanged: {
-            if (DeviceInterface.connectionState == "authenticated") {
+            if (DeviceInterface.connectionState === "authenticated") {
 
                 DeviceInterface.miBandService().onBatteryInfoChanged.connect(batteryInfoChanged);
                 DeviceInterface.miBandService().onStepsChanged.connect(stepsChanged);

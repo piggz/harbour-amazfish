@@ -48,7 +48,7 @@ QVariant DataSource::data(Type type, const QDate &day)
 
                     curs->moveNext();
                 }
-                qDebug() << result;
+                //qDebug() << result;
             }
             m_conn->deleteCursor(curs);
         } else {

@@ -7,11 +7,13 @@ HuamiFirmwareInfo::HuamiFirmwareInfo(const QByteArray &bytes)
     m_type = determineFirmwareType();
     m_version = searchFirmwareVersion();
     
+    qDebug() << mBytes;
     qDebug() << m_type << m_version;
 }
 
 HuamiFirmwareInfo::Type HuamiFirmwareInfo::determineFirmwareType() {
-    if (mBytes.startsWith(RES_HEADER) || mBytes.startsWith(NEWRES_HEADER)) {
+    qDebug() << "Determining firmware type";
+    if (mBytes.startsWith(QByteArray(RES_HEADER, sizeof(RES_HEADER))) || mBytes.startsWith(QByteArray(NEWRES_HEADER, sizeof(NEWRES_HEADER)))) {
         if (mBytes.length() > 700000) { // dont know how to distinguish from Cor .res
             return HuamiFirmwareInfo::Invalid;
         }
@@ -26,16 +28,17 @@ HuamiFirmwareInfo::Type HuamiFirmwareInfo::determineFirmwareType() {
     if (mBytes.startsWith(GPS_CEP_HEADER)) {
         return HuamiFirmwareInfo::GPS_CEP;
     }
-    if (mBytes.startsWith(FW_HEADER)) {
-        QString foundVersion = searchFirmwareVersion();
-        if (!foundVersion.isEmpty()) {
-            if ((foundVersion >= "0.0.8.00") && (foundVersion <= "1.0.5.00")) {
+    if (mBytes.startsWith(QByteArray(FW_HEADER, sizeof(FW_HEADER)))) {
+        m_version = searchFirmwareVersion();
+        if (!m_version.isEmpty()) {
+            if ((m_version >= "0.0.8.00") && (m_version <= "1.0.5.00")) {
                 return HuamiFirmwareInfo::Firmware;
             }
         }
         return HuamiFirmwareInfo::Invalid;
     }
-    if (mBytes.startsWith(WATCHFACE_HEADER)) {
+    qDebug() << "Checking agianst" << QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER));
+    if (mBytes.startsWith(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER)))) {
         return HuamiFirmwareInfo::Watchface;
     }
     if (mBytes.startsWith(NEWFT_HEADER)) {
@@ -71,4 +74,9 @@ QString HuamiFirmwareInfo::searchFirmwareVersion() {
     }
     */
     return QString();
+}
+
+HuamiFirmwareInfo::Type HuamiFirmwareInfo::type() const
+{
+    return m_type;
 }

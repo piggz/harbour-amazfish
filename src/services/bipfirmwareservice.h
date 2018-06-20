@@ -3,7 +3,7 @@
 
 #include "qble/qbleservice.h"
 #include "settingsmanager.h"
-#include "huamifirmwareinfo.h"
+#include "updatefirmwareoperation.h"
 
 /*
 {00001530-0000-3512-2118-0009af100700} Firmware Service
@@ -20,13 +20,26 @@ public:
     static const char *UUID_CHARACTERISTIC_FIRMWARE;
     static const char *UUID_CHARACTERISTIC_FIRMWARE_DATA;
 
+
+    const char RESPONSE = 0x10;
+    const char SUCCESS = 0x01;
+    const char FAIL = 0x04;
+
+    static const char COMMAND_FIRMWARE_INIT = 0x01; // to UUID_CHARACTERISTIC_FIRMWARE, followed by fw file size in bytes
+    static const char COMMAND_FIRMWARE_START_DATA = 0x03; // to UUID_CHARACTERISTIC_FIRMWARE
+    static const char COMMAND_FIRMWARE_UPDATE_SYNC = 0x00; // to UUID_CHARACTERISTIC_FIRMWARE
+    static const char COMMAND_FIRMWARE_CHECKSUM = 0x04; // to UUID_CHARACTERISTIC_FIRMWARE
+    static const char COMMAND_FIRMWARE_REBOOT = 0x05; // to UUID_CHARACTERISTIC_FIRMWARE
+
+
     Q_INVOKABLE void downloadFile(const QString &path);
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 
     SettingsManager m_settings;
-    QByteArray m_fwBytes;
-    HuamiFirmwareInfo *m_info = nullptr;
+    int m_operationRunning = 0;
+
+    UpdateFirmwareOperation *m_updateFirmware = nullptr;
 };
 
 #endif
