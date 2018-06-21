@@ -18,6 +18,8 @@ private:
     QByteArray m_fwBytes;
 
     bool sendFwInfo();
+    void sendFirmwareData();
+    void sendChecksum();
 };
 
 #endif // UPDATEFIRMWAREOPERATION_H

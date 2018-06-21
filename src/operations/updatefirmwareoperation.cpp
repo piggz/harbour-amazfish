@@ -28,8 +28,6 @@ void UpdateFirmwareOperation::start()
 
 bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
 {
-    BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
-
     if (value.length() != 3) {
         qDebug() << "Notifications should be 3 bytes long.";
         return true;
@@ -39,20 +37,19 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
     if (value[0] == BipFirmwareService::RESPONSE && success) {
         switch (value[1]) {
         case BipFirmwareService::COMMAND_FIRMWARE_INIT: {
-            //sendFirmwareData(getFirmwareInfo());
+            sendFirmwareData();
             break;
         }
         case BipFirmwareService::COMMAND_FIRMWARE_START_DATA: {
-            //sendChecksum(getFirmwareInfo());
+            sendChecksum();
             break;
         }
         case BipFirmwareService::COMMAND_FIRMWARE_CHECKSUM: {
             if (m_info->type() == HuamiFirmwareInfo::Firmware) {
                 //getSupport().sendReboot(builder);
             } else {
-                //GB.updateInstallNotification(getContext().getString(R.string.updatefirmwareoperation_update_complete), false, 100, getContext());
-                //done();
-                    return true;
+                m_service->message(QObject::tr("Updater operation complete"));
+                return true;
             }
             break;
         }
@@ -70,12 +67,12 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
         }
         }
 
-    } else {
-        qDebug() << "Unexpected notification during firmware update: ";
-       m_service->message(QObject::tr("Update operation failed, unexpected metadata"));
-        return true;
     }
-
+    
+     qDebug() << "Unexpected notification during firmware update: ";
+    m_service->message(QObject::tr("Update operation failed, unexpected metadata"));
+    return true;
+ 
 }
 
 void UpdateFirmwareOperation::handleData(const QByteArray &data)
@@ -106,4 +103,13 @@ bool UpdateFirmwareOperation::sendFwInfo() {
 
     m_service->writeValue(serv->UUID_CHARACTERISTIC_FIRMWARE, bytes);
     return true;
+}
+
+void UpdateFirmwareOperation::sendFirmwareData() 
+{
+}
+
+
+void UpdateFirmwareOperation::sendChecksum() 
+{
 }
