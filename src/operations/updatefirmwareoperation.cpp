@@ -34,48 +34,46 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
         qDebug() << "Notifications should be 3 bytes long.";
         return true;
     }
-    bool success = value[2] == serv->SUCCESS;
+    bool success = value[2] == BipFirmwareService::SUCCESS;
 
-    if (value[0] == serv->RESPONSE && success) {
+    if (value[0] == BipFirmwareService::RESPONSE && success) {
         switch (value[1]) {
         case BipFirmwareService::COMMAND_FIRMWARE_INIT: {
-            sendFirmwareData(getFirmwareInfo());
+            //sendFirmwareData(getFirmwareInfo());
             break;
         }
         case BipFirmwareService::COMMAND_FIRMWARE_START_DATA: {
-            sendChecksum(getFirmwareInfo());
+            //sendChecksum(getFirmwareInfo());
             break;
         }
         case BipFirmwareService::COMMAND_FIRMWARE_CHECKSUM: {
-            if (getFirmwareInfo().getFirmwareType() == HuamiFirmwareType.FIRMWARE) {
-                getSupport().sendReboot(builder);
+            if (m_info->type() == HuamiFirmwareInfo::Firmware) {
+                //getSupport().sendReboot(builder);
             } else {
-                GB.updateInstallNotification(getContext().getString(R.string.updatefirmwareoperation_update_complete), false, 100, getContext());
-                done();
+                //GB.updateInstallNotification(getContext().getString(R.string.updatefirmwareoperation_update_complete), false, 100, getContext());
+                //done();
+                    return true;
             }
             break;
         }
         case BipFirmwareService::COMMAND_FIRMWARE_REBOOT: {
             qDebug() << "Reboot command successfully sent.";
 
-            done();
+            return true;
             break;
         }
         default: {
             qDebug() << "Unexpected response during firmware update: ";
-            operationFailed();
-            displayMessage(getContext(), getContext().getString(R.string.updatefirmwareoperation_updateproblem_do_not_reboot), Toast.LENGTH_LONG, GB.ERROR);
-            done();
-            return;
+            //operationFailed();
+                m_service->message(QObject::tr("Update operation failed"));
+            return true;
         }
         }
 
     } else {
-        LOG.error("Unexpected notification during firmware update: ");
-        operationFailed();
-        getSupport().logMessageContent(value);
-        displayMessage(getContext(), getContext().getString(R.string.updatefirmwareoperation_metadata_updateproblem), Toast.LENGTH_LONG, GB.ERROR);
-        done();
+        qDebug() << "Unexpected notification during firmware update: ";
+       m_service->message(QObject::tr("Update operation failed, unexpected metadata"));
+        return true;
     }
 
 }

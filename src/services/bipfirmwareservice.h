@@ -21,9 +21,9 @@ public:
     static const char *UUID_CHARACTERISTIC_FIRMWARE_DATA;
 
 
-    const char RESPONSE = 0x10;
-    const char SUCCESS = 0x01;
-    const char FAIL = 0x04;
+    static const char RESPONSE = 0x10;
+    static const char SUCCESS = 0x01;
+    static const char FAIL = 0x04;
 
     static const char COMMAND_FIRMWARE_INIT = 0x01; // to UUID_CHARACTERISTIC_FIRMWARE, followed by fw file size in bytes
     static const char COMMAND_FIRMWARE_START_DATA = 0x03; // to UUID_CHARACTERISTIC_FIRMWARE
