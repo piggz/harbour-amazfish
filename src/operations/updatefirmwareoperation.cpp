@@ -1,6 +1,7 @@
 #include "updatefirmwareoperation.h"
 #include "bipfirmwareservice.h"
 #include "typeconversion.h"
+#include <QApplication>
 
 UpdateFirmwareOperation::UpdateFirmwareOperation(const QString &path, QBLEService *service) : AbstractOperation(service)
 {
@@ -62,17 +63,17 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
         default: {
             qDebug() << "Unexpected response during firmware update: ";
             //operationFailed();
-                m_service->message(QObject::tr("Update operation failed"));
+            m_service->message(QObject::tr("Update operation failed"));
             return true;
         }
         }
 
     }
     
-     qDebug() << "Unexpected notification during firmware update: ";
+    qDebug() << "Unexpected notification during firmware update: ";
     m_service->message(QObject::tr("Update operation failed, unexpected metadata"));
     return true;
- 
+
 }
 
 void UpdateFirmwareOperation::handleData(const QByteArray &data)
@@ -107,9 +108,44 @@ bool UpdateFirmwareOperation::sendFwInfo() {
 
 void UpdateFirmwareOperation::sendFirmwareData() 
 {
+    int len = m_fwBytes.length();
+    int packetLength = 20;
+    int packets = len / packetLength;
+
+    // going from 0 to len
+    int firmwareProgress = 0;
+
+//    if (prefs.getBoolean("mi_low_latency_fw_update", true)) {
+//        getSupport().setLowLatency(builder);
+//    }
+    m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(BipFirmwareService::COMMAND_FIRMWARE_START_DATA, sizeof(BipFirmwareService::COMMAND_FIRMWARE_START_DATA)));
+
+    for (int i = 0; i < packets; i++) {
+        QByteArray fwChunk = m_fwBytes.mid(i * packetLength, packetLength);
+
+        m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE_DATA, fwChunk);
+        firmwareProgress += packetLength;
+
+        int progressPercent = (int) ((((float) firmwareProgress) / len) * 100);
+        if ((i > 0) && (i % 100 == 0)) {
+            m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC, sizeof(BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC)));
+            m_service->message(QString("Done %1%%").arg(progressPercent));
+            QApplication::processEvents();
+        }
+    }
+
+    if (firmwareProgress < len) {
+        QByteArray lastChunk = m_fwBytes.mid(packets * packetLength);
+        m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE_DATA, lastChunk);
+        firmwareProgress = len;
+    }
+
+    m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC, sizeof(BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC)));
 }
 
 
 void UpdateFirmwareOperation::sendChecksum() 
 {
+    int crc16 = m_info->getCrc16();
+    m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(BipFirmwareService::COMMAND_FIRMWARE_CHECKSUM, 1) + TypeConversion::fromInt16(crc16));
 }
