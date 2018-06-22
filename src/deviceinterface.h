@@ -48,6 +48,7 @@ public:
     Q_INVOKABLE DataSource *dataSource();
 
     Q_SIGNAL void message(const QString &text);
+    Q_SIGNAL void downloadProgress(int percent);
 
     KDbConnection *dbConnection();
 

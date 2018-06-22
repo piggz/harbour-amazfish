@@ -71,6 +71,48 @@
     </message>
 </context>
 <context>
+    <name>BipFirmwarePage</name>
+    <message>
+        <source>Send file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a file to download.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supported files include:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firmware</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Watchface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A-GPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>and more</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BipFirmwareService</name>
+    <message>
+        <source>An operation is currently running, please try later</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DebugInfo</name>
     <message>
         <source>AmazFish</source>
@@ -109,6 +151,10 @@
     </message>
     <message>
         <source>Download activity data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -161,6 +207,18 @@
     </message>
     <message>
         <source>Finished transferring data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update operation failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update operation failed, unexpected metadata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update operation complete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

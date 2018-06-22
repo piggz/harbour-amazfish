@@ -229,9 +229,8 @@ void BipDevice::initialise()
 {
     setConnectionState("connected");
     parseServices();
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
-    MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
 
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
     if (mi) {
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION);
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO);
@@ -241,14 +240,20 @@ void BipDevice::initialise()
         connect(mi, &MiBandService::message, this, &BipDevice::message);
 
     }
+
+    MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
     if (mi2) {
         qDebug() << "Got mi2 service";
         connect(mi2, &MiBand2Service::authenticated, this, &BipDevice::authenticated, Qt::UniqueConnection);
 
         mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
         mi2->initialise(m_needsAuth);
-    } else {
-        qDebug() << "NOT got mi2 service!";
+    }
+
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    if (fw) {
+        connect(fw, &BipFirmwareService::message, this, &BipDevice::message);
+        connect(fw, &BipFirmwareService::downloadProgress, this, &BipDevice::downloadProgress);
     }
 }
 

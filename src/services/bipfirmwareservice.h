@@ -33,6 +33,8 @@ public:
 
 
     Q_INVOKABLE void downloadFile(const QString &path);
+    Q_SIGNAL void downloadProgress(int percent);
+
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 

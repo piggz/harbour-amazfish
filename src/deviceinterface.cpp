@@ -10,6 +10,7 @@ DeviceInterface::DeviceInterface()
     m_bipDevice = new BipDevice();
     connect(m_bipDevice, &BipDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged);
     connect(m_bipDevice, &BipDevice::message, this, &DeviceInterface::message);
+    connect(m_bipDevice, &BipDevice::downloadProgress, this, &DeviceInterface::downloadProgress);
 
     m_adapter.setAdapterPath("/org/bluez/hci0");
 

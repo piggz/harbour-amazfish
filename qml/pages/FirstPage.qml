@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
-import Sailfish.Pickers 1.0
 
 Page {
     id: page
@@ -11,7 +10,6 @@ Page {
 
     property bool manualDisconnect: false
     property bool needsProfileSet: false
-    property string selectedFile
 
     ConfigurationValue {
         id: pairedAddress
@@ -58,6 +56,10 @@ Page {
             MenuItem {
                 text: qsTr("Pair with watch")
                 onClicked: pageStack.push(Qt.resolvedUrl("PairPage.qml"))
+            }
+            MenuItem {
+                text: qsTr("Download File")
+                onClicked: pageStack.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
             }
             MenuItem {
                 text: qsTr("Settings")
@@ -204,7 +206,7 @@ Page {
                     onClicked: {
                         DeviceInterface.miBandService().fetchActivityData();
                     }
-                    enabled: DeviceInterface.connectionState == "authenticated"
+                    enabled: DeviceInterface.connectionState === "authenticated"
                 }
                 Label {
                     color: Theme.secondaryHighlightColor
@@ -216,11 +218,7 @@ Page {
             }
 
 
-            ValueButton {
-                label: "Download Firmware"
-                value: selectedFile ? selectedFile : "None"
-                onClicked: pageStack.push(filePickerPage)
-            }
+
 
         }
     }
@@ -232,17 +230,6 @@ Page {
         onTriggered: {
             if (needsProfileSet) {
                 pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
-            }
-        }
-    }
-
-    Component {
-        id: filePickerPage
-        FilePickerPage {
-            nameFilters: [ '*.*' ]
-            onSelectedContentPropertiesChanged: {
-                page.selectedFile = selectedContentProperties.filePath;
-                DeviceInterface.firmwareService().downloadFile(page.selectedFile);
             }
         }
     }

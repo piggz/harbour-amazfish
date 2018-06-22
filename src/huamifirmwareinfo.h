@@ -13,16 +13,16 @@ public:
     HuamiFirmwareInfo(const QByteArray &bytes);
     
     enum Type {
-	Invalid = 0,
-        Firmware,
-        Font,
-        Font_Latin,
-        GPS,
-        GPS_CEP,
-        GPS_ALMANAC,
-        Res,
-        Res_Compressed,
-        Watchface        
+    Invalid = -1,
+        Firmware = 0,
+        Font = 1,
+        Font_Latin = 11,
+        GPS = 3,
+        GPS_CEP = 4,
+        GPS_ALMANAC = 5,
+        Res = 2,
+        Res_Compressed = 130,
+        Watchface = 8
     };
     
     

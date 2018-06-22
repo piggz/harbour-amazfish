@@ -103,6 +103,7 @@ public:
     
     Q_SIGNAL void connectionStateChanged();
     Q_SIGNAL void message(const QString &text);
+    Q_SIGNAL void downloadProgress(int percent);
 
 private:
     void parseServices();
