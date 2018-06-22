@@ -6,9 +6,10 @@ HuamiFirmwareInfo::HuamiFirmwareInfo(const QByteArray &bytes)
     mBytes = bytes;
     m_type = determineFirmwareType();
     m_version = searchFirmwareVersion();
+    m_crc16 = calculateCRC16();
     
-    qDebug() << mBytes;
-    qDebug() << m_type << m_version;
+    //qDebug() << mBytes;
+    qDebug() << m_type << m_version << m_crc16;
 }
 
 HuamiFirmwareInfo::Type HuamiFirmwareInfo::determineFirmwareType() {
@@ -79,4 +80,27 @@ QString HuamiFirmwareInfo::searchFirmwareVersion() {
 HuamiFirmwareInfo::Type HuamiFirmwareInfo::type() const
 {
     return m_type;
+}
+
+uint16_t HuamiFirmwareInfo::calculateCRC16() {
+    uint16_t crc = 0xFFFF;
+
+    if (mBytes.length() > 0) {
+        int len = mBytes.length();
+        for (int i =0; i < len; ++i) {
+            char byte = mBytes[i];
+            crc = (crc >> 8) | (crc << 8);
+            crc ^= byte;
+            crc ^= ((unsigned char) crc) >> 4;
+            crc ^= crc << 12;
+            crc ^= (crc & 0xFF) << 5;
+        }
+    }
+
+    return crc;
+}
+
+uint16_t HuamiFirmwareInfo::crc16() const
+{
+     return m_crc16;   
 }

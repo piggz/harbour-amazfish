@@ -84,15 +84,15 @@ public:
     QByteArray bytes();
     QString version();
     Type type() const;
-    int crc16() const;
+    uint16_t crc16() const;
     
 private:
     
     QByteArray mBytes;
-    int mCrc16;
+    uint16_t m_crc16;
     Type m_type;
     QString m_version;
-    void calculateCRC16();
+    uint16_t calculateCRC16();
     Type determineFirmwareType();
     QString searchFirmwareVersion();
 };

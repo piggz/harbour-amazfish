@@ -146,6 +146,6 @@ void UpdateFirmwareOperation::sendFirmwareData()
 
 void UpdateFirmwareOperation::sendChecksum() 
 {
-    int crc16 = m_info->getCrc16();
+    int crc16 = m_info->crc16();
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(BipFirmwareService::COMMAND_FIRMWARE_CHECKSUM, 1) + TypeConversion::fromInt16(crc16));
 }
