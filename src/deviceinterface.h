@@ -50,6 +50,13 @@ public:
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
 
+    //Functions provided by services
+    Q_INVOKABLE void downloadFile(const QString &path);
+
+
+
+    bool operationRunning();
+
     KDbConnection *dbConnection();
 
 private:

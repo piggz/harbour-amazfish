@@ -131,6 +131,8 @@ public:
     Q_SIGNAL void declineCall();
     Q_SIGNAL void ignoreCall();
 
+    Q_INVOKABLE virtual bool operationRunning() override;
+
     void setDatabase(KDbConnection *conn);
 
 private:

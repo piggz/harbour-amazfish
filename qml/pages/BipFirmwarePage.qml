@@ -44,12 +44,12 @@ Page {
 
             Label {
                 width: parent.width
-                text: qsTr("Firmware");
+                text: qsTr("Watchface");
             }
-
+   /*
             Label {
                 width: parent.width
-                text: qsTr("Watchface");
+                text: qsTr("Firmware");
             }
 
             Label {
@@ -57,11 +57,7 @@ Page {
                 text: qsTr("GPS");
             }
 
-            Label {
-                width: parent.width
-                text: qsTr("and more");
-            }
-
+*/
             ValueButton {
                 label: "Choose File"
                 value: selectedFile ? selectedFile : "None"
@@ -75,7 +71,7 @@ Page {
                 text: qsTr("Send file")
                 enabled: selectedFile !== "None" && DeviceInterface.connectionState === "authenticated"
                 onClicked: {
-                    DeviceInterface.firmwareService().downloadFile(page.selectedFile);
+                    DeviceInterface.downloadFile(page.selectedFile);
                 }
             }
 
@@ -86,6 +82,14 @@ Page {
                 maximumValue: 100
                 value: 0
             }
+
+            Label {
+                id: lblPercent
+                width: parent.width
+                text: "0%"
+                horizontalAlignment: Text.AlignHCenter
+            }
+
 
         }
     }
@@ -105,6 +109,7 @@ Page {
         target: DeviceInterface
         onDownloadProgress: {
             progress.value = percent;
+            lblPercent.text = percent + "%";
         }
     }
 }

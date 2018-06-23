@@ -24,6 +24,8 @@ void UpdateFirmwareOperation::start()
             m_service->message("Error sending firmware info, aborting.");
             //done();
         }
+    } else {
+        m_service->message(QObject::tr("File is not a watchface and not yet supported"));
     }
 }
 
@@ -116,6 +118,7 @@ void UpdateFirmwareOperation::sendFirmwareData()
 
     // going from 0 to len
     int firmwareProgress = 0;
+    int progressPercent = 0;
 
     BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
 
@@ -131,7 +134,7 @@ void UpdateFirmwareOperation::sendFirmwareData()
         m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE_DATA, fwChunk);
         firmwareProgress += packetLength;
 
-        int progressPercent = (int) ((((float) firmwareProgress) / len) * 100);
+        progressPercent = (int) ((((float) firmwareProgress) / len) * 100);
         if ((i > 0) && (i % 100 == 0)) {
             m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC));
             serv->downloadProgress(progressPercent);
@@ -144,6 +147,8 @@ void UpdateFirmwareOperation::sendFirmwareData()
         m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE_DATA, lastChunk);
         firmwareProgress = len;
     }
+
+    serv->downloadProgress(100);
 
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC));
 }

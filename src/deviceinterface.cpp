@@ -290,3 +290,17 @@ DataSource *DeviceInterface::dataSource()
 {
     return &m_dataSource;
 }
+
+void DeviceInterface::downloadFile(const QString &path)
+{
+    if (!operationRunning()) {
+        if (firmwareService()) {
+            firmwareService()->downloadFile(path);
+        }
+    }
+}
+
+bool DeviceInterface::operationRunning()
+{
+    return m_bipDevice->operationRunning();
+}

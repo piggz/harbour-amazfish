@@ -89,19 +89,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Firmware</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Watchface</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A-GPS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>and more</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -219,6 +207,10 @@
     </message>
     <message>
         <source>Update operation complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File is not a watchface and not yet supported</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -411,6 +403,10 @@
     <message>
         <source>Alarms</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -449,3 +449,8 @@ void MiBandService::setAlarms()
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
     }
 }
+
+bool MiBandService::operationRunning()
+{
+    return m_operationRunning > 0;
+}

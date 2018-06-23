@@ -39,3 +39,8 @@ void BipFirmwareService::downloadFile(const QString &path)
         emit message(tr("An operation is currently running, please try later"));
     }
 }
+
+bool BipFirmwareService::operationRunning()
+{
+    return m_operationRunning > 0;
+}
