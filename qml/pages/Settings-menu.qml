@@ -59,6 +59,14 @@ Page {
                     pageStack.push(Qt.resolvedUrl("Settings-alarms.qml"))
                 }
             }
+
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Donate")
+                onClicked: {
+                    Qt.openUrlExternally("https://paypal.me/piggz");
+                }
+            }
         }
     }
 
