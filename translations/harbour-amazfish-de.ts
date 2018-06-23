@@ -5,475 +5,479 @@
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
-        <translation></translation>
+        <translation>Aktiviert</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation></translation>
+        <translation>Mo</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation></translation>
+        <translation>Di</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation></translation>
+        <translation>Mi</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation></translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation></translation>
+        <translation>Fr</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation></translation>
+        <translation>Sa</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation></translation>
+        <translation>So</translation>
     </message>
 </context>
 <context>
     <name>AnalysisPage</name>
     <message>
         <source>Analysis</source>
-        <translation></translation>
+        <translation>Auswertung</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation></translation>
+        <translation>Pulsrate</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation></translation>
+        <translation>Schritte</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation></translation>
+        <translation>Intensität</translation>
     </message>
 </context>
 <context>
     <name>BipDevice</name>
     <message>
         <source>Amazfish</source>
-        <translation></translation>
+        <translation>Amazfish</translation>
     </message>
     <message>
         <source>Connected</source>
-        <translation></translation>
+        <translation>Verbunden</translation>
     </message>
     <message>
         <source>Phone and watch are connected</source>
-        <translation></translation>
+        <translation>Smartphone und watch sind verbunden</translation>
     </message>
 </context>
 <context>
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei senden</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei herunterladen</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle eine Datei zum herunterladen aus.</translation>
     </message>
     <message>
         <source>Supported files include:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu den unterstützten Dateien gehören:</translation>
+    </message>
+    <message>
+        <source>Firmware</source>
+        <translation>Firmware</translation>
     </message>
     <message>
         <source>Watchface</source>
-        <translation type="unfinished"></translation>
+        <translation>Zifferblatt</translation>
+    </message>
+    <message>
+        <source>A-GPS</source>
+        <translation>A-GPS</translation>
+    </message>
+    <message>
+        <source>and more</source>
+        <translation>und mehr</translation>
     </message>
 </context>
 <context>
     <name>BipFirmwareService</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein Vorgang wird gerade ausgeführt. Bitte versuchen Sie es später erneut</translation>
     </message>
 </context>
 <context>
     <name>DebugInfo</name>
     <message>
         <source>AmazFish</source>
-        <translation></translation>
+        <translation>AmazFish</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation></translation>
+        <translation>Aktualisieren</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Pair with watch</source>
-        <translation></translation>
+        <translation>Watch paaren</translation>
     </message>
     <message>
         <source>AmazFish</source>
-        <translation></translation>
+        <translation>AmazFish</translation>
     </message>
     <message>
         <source>Connect to watch</source>
-        <translation></translation>
+        <translation>Watch verbinden</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
-        <translation></translation>
+        <translation>Watch trennen</translation>
     </message>
     <message>
         <source>Debug Info</source>
-        <translation></translation>
+        <translation>Debug-Informationen</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Download activity data</source>
-        <translation></translation>
+        <translation>Aktivitätsdaten herunterladen</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei herunterladen</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation></translation>
+        <translation>Keine Daten</translation>
     </message>
 </context>
 <context>
     <name>MiBandService</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation></translation>
+        <translation>Ein Vorgang wird gerade ausgeführt. Bitte versuchen Sie es später erneut</translation>
     </message>
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation></translation>
+        <translation>Firmware ist zu alt, um Anzeigeelemente einzustellen, V0.1.1.14 ist erforderlich</translation>
     </message>
 </context>
 <context>
     <name>PairPage</name>
     <message>
         <source>Start scan</source>
-        <translation></translation>
+        <translation>Scan starten</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation></translation>
+        <translation>Versuch es noch einmal</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>About to transfer activity data from </source>
-        <translation></translation>
+        <translation>Über die Übertragung von Aktivitätsdaten aus </translation>
     </message>
     <message>
         <source>Finished transferring activity data</source>
-        <translation></translation>
+        <translation>Übertragung der Aktivitätsdaten abgeschlossen</translation>
     </message>
     <message>
         <source>No data to transfer</source>
-        <translation></translation>
+        <translation>Keine Daten zu übertragen</translation>
     </message>
     <message>
         <source>About to transfer log data from </source>
-        <translation></translation>
+        <translation>Über die Übertragung von Aktivitätsdaten aus </translation>
     </message>
     <message>
         <source>Finished transferring data</source>
-        <translation></translation>
+        <translation>Übertragung der Daten beendet</translation>
     </message>
     <message>
         <source>Update operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisierungsvorgang ist fehlgeschlagen</translation>
     </message>
     <message>
         <source>Update operation failed, unexpected metadata</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisierungsvorgang fehlgeschlagen, unerwartete Metadaten</translation>
     </message>
     <message>
         <source>Update operation complete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File is not a watchface and not yet supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisierungsvorgang abgeschlossen</translation>
     </message>
 </context>
 <context>
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation></translation>
+        <translation>Wecker</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation></translation>
+        <translation>Einstellungen speichern</translation>
     </message>
     <message>
         <source>Alarm 1</source>
-        <translation></translation>
+        <translation>Wecker 1</translation>
     </message>
     <message>
         <source>Alarm 2</source>
-        <translation></translation>
+        <translation>Wecker 2</translation>
     </message>
     <message>
         <source>Alarm 3</source>
-        <translation></translation>
+        <translation>Wecker 3</translation>
     </message>
     <message>
         <source>Alarm 4</source>
-        <translation></translation>
+        <translation>Wecker 4</translation>
     </message>
     <message>
         <source>Alarm 5</source>
-        <translation></translation>
+        <translation>Wecker 5</translation>
     </message>
 </context>
 <context>
     <name>Settings-app</name>
     <message>
         <source>Device Settings</source>
-        <translation></translation>
+        <translation>Geräteeinstellungen</translation>
     </message>
     <message>
         <source>Notify on connect</source>
-        <translation></translation>
+        <translation>Beim Verbinden benachrichtigen</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation></translation>
+        <translation>Einstellungen speichern</translation>
     </message>
 </context>
 <context>
     <name>Settings-bip-shortcuts</name>
     <message>
         <source>BIP Display Items</source>
-        <translation></translation>
+        <translation>BIP-Anzeigeelemente</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation></translation>
+        <translation>Aktivität</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation></translation>
+        <translation>Wetter</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation></translation>
+        <translation>Wecker</translation>
     </message>
     <message>
         <source>Timer</source>
-        <translation></translation>
+        <translation>Timer</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation></translation>
+        <translation>Kompass</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation></translation>
+        <translation>AliPay</translation>
     </message>
     <message>
         <source>Weather Shortcut</source>
-        <translation></translation>
+        <translation>Wetter Abkürzung</translation>
     </message>
     <message>
         <source>AliPay Shortcut</source>
-        <translation></translation>
+        <translation>AliPay Abkürzung</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation></translation>
+        <translation>Einstellungen speichern</translation>
     </message>
 </context>
 <context>
     <name>Settings-device</name>
     <message>
         <source>Device Settings</source>
-        <translation></translation>
+        <translation>Geräteeinstellungen</translation>
     </message>
     <message>
         <source>Langage</source>
-        <translation></translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <source>en_US</source>
-        <translation></translation>
+        <translation>en_US</translation>
     </message>
     <message>
         <source>es_ES</source>
-        <translation></translation>
+        <translation>es_ES</translation>
     </message>
     <message>
         <source>zh_CN</source>
-        <translation></translation>
+        <translation>zh_CN</translation>
     </message>
     <message>
         <source>zh_TW</source>
-        <translation></translation>
+        <translation>zh_TW</translation>
     </message>
     <message>
         <source>Date Display</source>
-        <translation></translation>
+        <translation>Datumsanzeige</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation></translation>
+        <translation>Zeit</translation>
     </message>
     <message>
         <source>Date/Time</source>
-        <translation></translation>
+        <translation>Datum/Zeit</translation>
     </message>
     <message>
         <source>Time Format</source>
-        <translation></translation>
+        <translation>Zeitformat</translation>
     </message>
     <message>
         <source>12hr</source>
-        <translation></translation>
+        <translation>12 Std.</translation>
     </message>
     <message>
         <source>24hr</source>
-        <translation></translation>
+        <translation>24 Std.</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation></translation>
+        <translation>Einstellungen speichern</translation>
     </message>
     <message>
         <source>Distance Unit</source>
-        <translation></translation>
+        <translation>Distanzeinheit</translation>
     </message>
     <message>
         <source>Metric</source>
-        <translation></translation>
+        <translation>Metrisch</translation>
     </message>
     <message>
         <source>Imperial</source>
-        <translation></translation>
+        <translation>Imperial</translation>
     </message>
     <message>
         <source>BIP Display Items</source>
-        <translation></translation>
+        <translation>BIP-Anzeigeelemente</translation>
     </message>
 </context>
 <context>
     <name>Settings-menu</name>
     <message>
         <source>Settings Menu</source>
-        <translation></translation>
+        <translation>Einstellungsmenü</translation>
     </message>
     <message>
         <source>User Settings</source>
-        <translation></translation>
+        <translation>Benutzereinstellungen</translation>
     </message>
     <message>
         <source>Device Settings</source>
-        <translation></translation>
+        <translation>Geräteeinstellungen</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation></translation>
+        <translation>Anwendungseinstellungen</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Weckereinstellungen</translation>
     </message>
 </context>
 <context>
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation></translation>
+        <translation>Profileinstellungen</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation></translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation></translation>
+        <translation>Geschlecht</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation></translation>
+        <translation>Größe (cm): </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation></translation>
+        <translation>Gewicht (kg): </translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation></translation>
+        <translation>Profil speichern</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation></translation>
+        <translation>Männlich</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation></translation>
+        <translation>Weiblich</translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation></translation>
+        <translation>Trageort</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation></translation>
+        <translation>Ziel (Schritte): </translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation></translation>
+        <translation>Anzeige am Handgelenk</translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation></translation>
+        <translation>Alarm beim Fitnessziel</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation></translation>
+        <translation>Ganztägiges PRM-Intervall (Minuten): </translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation></translation>
+        <translation>Verwenden Sie PRM für die Schlaferkennung</translation>
     </message>
 </context>
 </TS>
