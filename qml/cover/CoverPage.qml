@@ -60,7 +60,7 @@ CoverBackground {
             }
             Image {
                 source: "image://theme/icon-m-watch"
-                visible: DeviceInterface.connectionState == "authenticated"
+                visible: DeviceInterface.connectionState === "authenticated"
             }
         }
     }
@@ -69,7 +69,10 @@ CoverBackground {
         id: coverAction
 
         CoverAction {
-            iconSource: "image://theme/icon-cover-sync"
+            iconSource: "image://theme/icon-m-cloud-download";
+            onTriggered: {
+                DeviceInterface.miBandService().fetchActivityData();
+            }
         }
     }
 }
