@@ -74,30 +74,30 @@
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka fil</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladda ner fil</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj filer att ladda ner</translation>
     </message>
     <message>
         <source>Supported files include:</source>
-        <translation type="unfinished"></translation>
+        <translation>Filformat som stöds:</translation>
     </message>
     <message>
         <source>Watchface</source>
-        <translation type="unfinished"></translation>
+        <translation>Urtavla</translation>
     </message>
 </context>
 <context>
     <name>BipFirmwareService</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">En åtgärd körs redan, försök senare</translation>
+        <translation>En åtgärd körs redan, försök senare</translation>
     </message>
 </context>
 <context>
@@ -143,7 +143,7 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladda ner fil</translation>
     </message>
 </context>
 <context>
@@ -199,19 +199,19 @@
     </message>
     <message>
         <source>Update operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdatering misslyckades</translation>
     </message>
     <message>
         <source>Update operation failed, unexpected metadata</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdatering misslyckades, oväntad metadata</translation>
     </message>
     <message>
         <source>Update operation complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdatering slutförd</translation>
     </message>
     <message>
         <source>File is not a watchface and not yet supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen är ingen urtavla och stöds ännu inte</translation>
     </message>
 </context>
 <context>
@@ -406,7 +406,7 @@
     </message>
     <message>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Donera</translation>
     </message>
 </context>
 <context>
