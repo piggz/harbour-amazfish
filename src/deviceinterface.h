@@ -51,7 +51,8 @@ public:
     Q_SIGNAL void downloadProgress(int percent);
 
     //Functions provided by services
-    Q_INVOKABLE void downloadFile(const QString &path);
+    Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
+    Q_INVOKABLE void startDownload();
 
 
 

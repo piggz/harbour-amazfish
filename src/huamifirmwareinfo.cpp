@@ -104,3 +104,8 @@ uint16_t HuamiFirmwareInfo::crc16() const
 {
      return m_crc16;   
 }
+
+QString HuamiFirmwareVersion::version()
+{
+    return m_version;
+}

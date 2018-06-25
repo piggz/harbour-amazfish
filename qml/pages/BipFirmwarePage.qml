@@ -7,6 +7,7 @@ Page {
     id: page
 
     property string selectedFile: "None"
+    property string fileVersion
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
@@ -66,12 +67,18 @@ Page {
 
             }
 
+            Label {
+                id: lblVersion
+                width: parent.width
+                text: qsTr("Version: " + fileVersion);
+            }
+            
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Send file")
                 enabled: selectedFile !== "None" && DeviceInterface.connectionState === "authenticated"
                 onClicked: {
-                    DeviceInterface.downloadFile(page.selectedFile);
+                    DeviceInterface.startDownload();
                 }
             }
 
@@ -100,10 +107,10 @@ Page {
             nameFilters: [ '*.*' ]
             onSelectedContentPropertiesChanged: {
                 page.selectedFile = selectedContentProperties.filePath;
+                fileVersion = DeviceInterface.prepareFirmwareDownload(page.selectedFile);
             }
         }
     }
-
 
     Connections {
         target: DeviceInterface

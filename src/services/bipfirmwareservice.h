@@ -32,7 +32,8 @@ public:
     static const char COMMAND_FIRMWARE_REBOOT = 0x05; // to UUID_CHARACTERISTIC_FIRMWARE
 
 
-    void downloadFile(const QString &path);
+   QString prepareFirmwareDownload(const QString &path);
+    void startDownload();
     Q_SIGNAL void downloadProgress(int percent);
 
     Q_INVOKABLE virtual bool operationRunning() override;
