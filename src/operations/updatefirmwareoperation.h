@@ -13,6 +13,7 @@ public:
     void handleData(const QByteArray &data) override;
     void start();
 
+    QString version();
 private:
     HuamiFirmwareInfo *m_info = nullptr;
     QByteArray m_fwBytes;

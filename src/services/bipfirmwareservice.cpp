@@ -31,19 +31,25 @@ void BipFirmwareService::characteristicChanged(const QString &characteristic, co
 
 QString BipFirmwareService::prepareFirmwareDownload(const QString &path)
 {
-    if (!m_updateFirmware && m_operationRunning == 0) {
-        m_operationRunning = 1;
+    if (!m_updateFirmware) {
         m_updateFirmware = new UpdateFirmwareOperation(path, this);
         return m_updateFirmware->version();
     } else {
-        emit message(tr("An operation is currently running, please try later"));
+        if (m_operationRunning == 1) {
+            emit message(tr("An operation is currently running, please try later"));
+        } else {
+            delete m_updateFirmware;
+            m_updateFirmware = new UpdateFirmwareOperation(path, this);
+            return m_updateFirmware->version();
+        }
     }
     return QString();
 }
 
-void BipFirmwareService::startDownoad()
+void BipFirmwareService::startDownload()
 {
-    if (m_updateFirmware && m_operationRunning == 1) {
+    if (m_updateFirmware && m_operationRunning == 0) {
+        m_operationRunning = 1;
         m_updateFirmware->start();
     } else {
         emit message(tr("No file selected"));

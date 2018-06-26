@@ -1,12 +1,18 @@
 #include "huamifirmwareinfo.h"
 #include <QDebug>
 
+
+
+
 HuamiFirmwareInfo::HuamiFirmwareInfo(const QByteArray &bytes)
 {
-    mBytes = bytes;
+    populateCrcMap();
+
+    m_bytes = bytes;
+
+    m_crc16 = calculateCRC16();
     m_type = determineFirmwareType();
     m_version = searchFirmwareVersion();
-    m_crc16 = calculateCRC16();
     
     //qDebug() << mBytes;
     qDebug() << m_type << m_version << m_crc16;
@@ -14,23 +20,23 @@ HuamiFirmwareInfo::HuamiFirmwareInfo(const QByteArray &bytes)
 
 HuamiFirmwareInfo::Type HuamiFirmwareInfo::determineFirmwareType() {
     qDebug() << "Determining firmware type";
-    if (mBytes.startsWith(QByteArray(RES_HEADER, sizeof(RES_HEADER))) || mBytes.startsWith(QByteArray(NEWRES_HEADER, sizeof(NEWRES_HEADER)))) {
-        if (mBytes.length() > 700000) { // dont know how to distinguish from Cor .res
+    if (m_bytes.startsWith(QByteArray(RES_HEADER, sizeof(RES_HEADER))) || m_bytes.startsWith(QByteArray(NEWRES_HEADER, sizeof(NEWRES_HEADER)))) {
+        if (m_bytes.length() > 700000) { // dont know how to distinguish from Cor .res
             return HuamiFirmwareInfo::Invalid;
         }
         return HuamiFirmwareInfo::Res;
     }
-    if (mBytes.startsWith(GPS_HEADER) || mBytes.startsWith(GPS_HEADER2) || mBytes.startsWith(GPS_HEADER3) || mBytes.startsWith(GPS_HEADER4)) {
+    if (m_bytes.startsWith(GPS_HEADER) || m_bytes.startsWith(GPS_HEADER2) || m_bytes.startsWith(GPS_HEADER3) || m_bytes.startsWith(GPS_HEADER4)) {
         return HuamiFirmwareInfo::GPS;
     }
-    if (mBytes.startsWith(GPS_ALMANAC_HEADER)) {
+    if (m_bytes.startsWith(GPS_ALMANAC_HEADER)) {
         return HuamiFirmwareInfo::GPS_ALMANAC;
     }
-    if (mBytes.startsWith(GPS_CEP_HEADER)) {
+    if (m_bytes.startsWith(GPS_CEP_HEADER)) {
         return HuamiFirmwareInfo::GPS_CEP;
     }
-    if (mBytes.startsWith(QByteArray(FW_HEADER, sizeof(FW_HEADER)))) {
-        m_version = searchFirmwareVersion();
+    if (m_bytes.startsWith(QByteArray(FW_HEADER, sizeof(FW_HEADER)))) {
+        m_version = m_crcMap[m_crc16];
         if (!m_version.isEmpty()) {
             if ((m_version >= "0.0.8.00") && (m_version <= "1.0.5.00")) {
                 return HuamiFirmwareInfo::Firmware;
@@ -38,14 +44,14 @@ HuamiFirmwareInfo::Type HuamiFirmwareInfo::determineFirmwareType() {
         }
         return HuamiFirmwareInfo::Invalid;
     }
-    qDebug() << "Checking agianst" << QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER));
-    if (mBytes.startsWith(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER)))) {
+
+    if (m_bytes.startsWith(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER)))) {
         return HuamiFirmwareInfo::Watchface;
     }
-    if (mBytes.startsWith(NEWFT_HEADER)) {
-        if (mBytes[10] == 0x01) {
+    if (m_bytes.startsWith(NEWFT_HEADER)) {
+        if (m_bytes[10] == 0x01) {
             return HuamiFirmwareInfo::Font;
-        } else if (mBytes[10] == 0x02) {
+        } else if (m_bytes[10] == 0x02) {
             return HuamiFirmwareInfo::Font_Latin;
         }
     }
@@ -85,10 +91,10 @@ HuamiFirmwareInfo::Type HuamiFirmwareInfo::type() const
 uint16_t HuamiFirmwareInfo::calculateCRC16() {
     uint16_t crc = 0xFFFF;
 
-    if (mBytes.length() > 0) {
-        int len = mBytes.length();
+    if (m_bytes.length() > 0) {
+        int len = m_bytes.length();
         for (int i =0; i < len; ++i) {
-            char byte = mBytes[i];
+            char byte = m_bytes[i];
             crc = (crc >> 8) | (crc << 8);
             crc ^= byte;
             crc ^= ((unsigned char) crc) >> 4;
@@ -102,10 +108,134 @@ uint16_t HuamiFirmwareInfo::calculateCRC16() {
 
 uint16_t HuamiFirmwareInfo::crc16() const
 {
-     return m_crc16;   
+    return m_crc16;
 }
 
-QString HuamiFirmwareVersion::version()
+QString HuamiFirmwareInfo::version()
 {
-    return m_version;
+    QString version = m_crcMap[m_crc16];
+
+    if (!version.isEmpty()) {
+        switch (m_type) {
+        case Firmware:
+            version = "FW " + version;
+            break;
+        case Res:
+            version = "RES " + version;
+            break;
+        case Res_Compressed:
+            version = "RES " + version;
+            break;
+        case Font:
+            version = "FONT " + version;
+            break;
+        case Font_Latin:
+            version = "FONT LATIN " + version;
+            break;
+        case GPS:
+            version = "GPS " + version;
+            break;
+        }
+    } else {
+        switch (m_type) {
+        case Firmware:
+            version = "FW (unknown)";
+            break;
+        case Res:
+            version = "RES " + QString::number(m_bytes[5]);
+            break;
+        case Res_Compressed:
+            version = "RES " + QString::number(m_bytes[14]);
+            break;
+        case Font:
+            version = "FONT " + QString::number(m_bytes[4]);
+            break;
+        case Font_Latin:
+            version = "FONT LATIN " + QString::number(m_bytes[4]);
+            break;
+        case GPS:
+            version = "GPS (unknown)";
+            break;
+        case GPS_CEP:
+            version = "CAP (unknown)";
+            break;
+        case GPS_ALMANAC:
+            version = "ALM (unknown)";
+            break;
+        case Watchface:
+            version = "Watchface (unknown)";
+            break;
+        default:
+            version = "Invalid";
+        }
+    }
+
+    return version;
+}
+
+void HuamiFirmwareInfo::populateCrcMap()
+{
+    // firmware
+    m_crcMap.insert(25257, "0.0.8.74");
+    m_crcMap.insert(57724, "0.0.8.88");
+    m_crcMap.insert(27668, "0.0.8.96");
+    m_crcMap.insert(60173, "0.0.8.97");
+    m_crcMap.insert(3462,  "0.0.8.98");
+    m_crcMap.insert(55420, "0.0.9.14");
+    m_crcMap.insert(39465, "0.0.9.26");
+    m_crcMap.insert(27394, "0.0.9.40");
+    m_crcMap.insert(24736, "0.0.9.49");
+    m_crcMap.insert(49555, "0.0.9.59");
+    m_crcMap.insert(28586, "0.1.0.08");
+    m_crcMap.insert(26714, "0.1.0.11");
+    m_crcMap.insert(64160, "0.1.0.17");
+    m_crcMap.insert(21992, "0.1.0.26");
+    m_crcMap.insert(43028, "0.1.0.27");
+    m_crcMap.insert(59462, "0.1.0.33");
+    m_crcMap.insert(55277, "0.1.0.39");
+    m_crcMap.insert(47685, "0.1.0.43");
+    m_crcMap.insert(2839,  "0.1.0.44");
+    m_crcMap.insert(30229, "0.1.0.45");
+    m_crcMap.insert(24302, "0.1.0.70");
+    m_crcMap.insert(1333,  "0.1.0.80");
+    m_crcMap.insert(12017, "0.1.0.86");
+    m_crcMap.insert(8276,  "0.1.1.14");
+    m_crcMap.insert(5914,  "0.1.1.17");
+    m_crcMap.insert(6228,  "0.1.1.29");
+    m_crcMap.insert(44223, "0.1.1.31");
+    m_crcMap.insert(39726, "0.1.1.36");
+    m_crcMap.insert(11062, "0.1.1.39");
+    m_crcMap.insert(56670, "0.1.1.41");
+    m_crcMap.insert(58736, "0.1.1.45");
+
+    // resources
+    m_crcMap.insert(12586, "0.0.8.74");
+    m_crcMap.insert(34068, "0.0.8.88");
+    m_crcMap.insert(59839, "0.0.8.96-98");
+    m_crcMap.insert(50401, "0.0.9.14-26");
+    m_crcMap.insert(22051, "0.0.9.40");
+    m_crcMap.insert(46233, "0.0.9.49-0.1.0.11");
+    m_crcMap.insert(12098, "0.1.0.17");
+    m_crcMap.insert(28696, "0.1.0.26-27");
+    m_crcMap.insert(5650,  "0.1.0.33");
+    m_crcMap.insert(16117, "0.1.0.39-45");
+    m_crcMap.insert(22506, "0.1.0.66-70");
+    m_crcMap.insert(42264, "0.1.0.77-80");
+    m_crcMap.insert(55934, "0.1.0.86-89");
+    m_crcMap.insert(26587, "0.1.1.14-25");
+    m_crcMap.insert(7446,  "0.1.1.29");
+    m_crcMap.insert(47887, "0.1.1.31-36");
+    m_crcMap.insert(14334, "0.1.1.39");
+    m_crcMap.insert(21109, "0.1.1.41");
+    m_crcMap.insert(23073, "0.1.1.45");
+
+    // gps
+    m_crcMap.insert(61520, "9367,8f79a91,0,0,");
+    m_crcMap.insert(8784,  "9565,dfbd8fa,0,0,");
+    m_crcMap.insert(16716, "9565,dfbd8faf42,0");
+    m_crcMap.insert(54154, "9567,8b05506,0,0,");
+
+    // font
+    m_crcMap.insert(61054, "8");
+    m_crcMap.insert(62291, "9 (Latin)");
 }

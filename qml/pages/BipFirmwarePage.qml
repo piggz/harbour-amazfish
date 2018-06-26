@@ -38,27 +38,6 @@ Page {
                 text: qsTr("Select a file to download.");
             }
 
-            Label {
-                width: parent.width
-                text: qsTr("Supported files include:");
-            }
-
-            Label {
-                width: parent.width
-                text: qsTr("Watchface");
-            }
-   /*
-            Label {
-                width: parent.width
-                text: qsTr("Firmware");
-            }
-
-            Label {
-                width: parent.width
-                text: qsTr("GPS");
-            }
-
-*/
             ValueButton {
                 label: "Choose File"
                 value: selectedFile ? selectedFile : "None"
@@ -70,7 +49,7 @@ Page {
             Label {
                 id: lblVersion
                 width: parent.width
-                text: qsTr("Version: " + fileVersion);
+                text: qsTr("File type/version: " + fileVersion);
             }
             
             Button {

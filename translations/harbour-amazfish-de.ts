@@ -84,32 +84,16 @@
         <source>Select a file to download.</source>
         <translation>Wähle eine Datei zum herunterladen aus.</translation>
     </message>
-    <message>
-        <source>Supported files include:</source>
-        <translation>Zu den unterstützten Dateien gehören:</translation>
-    </message>
-    <message>
-        <source>Firmware</source>
-        <translation>Firmware</translation>
-    </message>
-    <message>
-        <source>Watchface</source>
-        <translation>Zifferblatt</translation>
-    </message>
-    <message>
-        <source>A-GPS</source>
-        <translation>A-GPS</translation>
-    </message>
-    <message>
-        <source>and more</source>
-        <translation>und mehr</translation>
-    </message>
 </context>
 <context>
     <name>BipFirmwareService</name>
     <message>
         <source>An operation is currently running, please try later</source>
         <translation>Ein Vorgang wird gerade ausgeführt. Bitte versuchen Sie es später erneut</translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -220,6 +204,10 @@
     <message>
         <source>Update operation complete</source>
         <translation>Aktualisierungsvorgang abgeschlossen</translation>
+    </message>
+    <message>
+        <source>File does not seem to be supported</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -411,6 +399,10 @@
     <message>
         <source>Alarms</source>
         <translation>Weckereinstellungen</translation>
+    </message>
+    <message>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

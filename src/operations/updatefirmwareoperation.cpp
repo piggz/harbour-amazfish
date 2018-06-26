@@ -15,7 +15,7 @@ UpdateFirmwareOperation::UpdateFirmwareOperation(const QString &path, QBLEServic
 
 void UpdateFirmwareOperation::start()
 {
-    if (m_info->type() == HuamiFirmwareInfo::Watchface) {
+    if (m_info->type() != HuamiFirmwareInfo::Invalid) {
         BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
 
         m_service->enableNotification(serv->UUID_CHARACTERISTIC_FIRMWARE);
@@ -25,7 +25,7 @@ void UpdateFirmwareOperation::start()
             //done();
         }
     } else {
-        m_service->message(QObject::tr("File is not a watchface and not yet supported"));
+        m_service->message(QObject::tr("File does not seem to be supported"));
     }
 }
 
@@ -51,7 +51,7 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
         }
         case BipFirmwareService::COMMAND_FIRMWARE_CHECKSUM: {
             if (m_info->type() == HuamiFirmwareInfo::Firmware) {
-                //getSupport().sendReboot(builder);
+                m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_REBOOT));
             } else {
                 m_service->message(QObject::tr("Update operation complete"));
                 return true;
@@ -85,10 +85,8 @@ void UpdateFirmwareOperation::handleData(const QByteArray &data)
     
 }
 
-bool UpdateFirmwareOperation::sendFwInfo() {
-
-    BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
-
+bool UpdateFirmwareOperation::sendFwInfo()
+{
     int fwSize = m_fwBytes.size();
     QByteArray sizeBytes = TypeConversion::fromInt24(fwSize);
     int arraySize = 4;
@@ -98,7 +96,7 @@ bool UpdateFirmwareOperation::sendFwInfo() {
     }
     QByteArray bytes(arraySize, 0x00);
     int i = 0;
-    bytes[i++] = serv->COMMAND_FIRMWARE_INIT;
+    bytes[i++] = BipFirmwareService::COMMAND_FIRMWARE_INIT;
     bytes[i++] = sizeBytes[0];
     bytes[i++] = sizeBytes[1];
     bytes[i++] = sizeBytes[2];
@@ -106,7 +104,7 @@ bool UpdateFirmwareOperation::sendFwInfo() {
         bytes[i++] = m_info->type();
     }
 
-    m_service->writeValue(serv->UUID_CHARACTERISTIC_FIRMWARE, bytes);
+    m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, bytes);
     return true;
 }
 
@@ -158,4 +156,9 @@ void UpdateFirmwareOperation::sendChecksum()
 {
     int crc16 = m_info->crc16();
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_CHECKSUM) + TypeConversion::fromInt16(crc16));
+}
+
+QString UpdateFirmwareOperation::version()
+{
+    return m_info->version();
 }

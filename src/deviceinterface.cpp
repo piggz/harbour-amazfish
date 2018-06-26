@@ -291,13 +291,14 @@ DataSource *DeviceInterface::dataSource()
     return &m_dataSource;
 }
 
-QString DeviceInterdace::prepareFirmwareDownload(const QString &path)
+QString DeviceInterface::prepareFirmwareDownload(const QString &path)
 {
     if (!operationRunning()) {
         if (firmwareService()) {
-            firmwareService()->prepareFirmwareDownload(path);
+            return firmwareService()->prepareFirmwareDownload(path);
         }
     }
+    return QString();
 }
 
 void DeviceInterface::startDownload()

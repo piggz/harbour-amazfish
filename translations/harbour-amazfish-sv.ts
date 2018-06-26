@@ -84,20 +84,16 @@
         <source>Select a file to download.</source>
         <translation>Välj filer att ladda ner</translation>
     </message>
-    <message>
-        <source>Supported files include:</source>
-        <translation>Filformat som stöds:</translation>
-    </message>
-    <message>
-        <source>Watchface</source>
-        <translation>Urtavla</translation>
-    </message>
 </context>
 <context>
     <name>BipFirmwareService</name>
     <message>
         <source>An operation is currently running, please try later</source>
         <translation>En åtgärd körs redan, försök senare</translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -210,8 +206,8 @@
         <translation>Uppdatering slutförd</translation>
     </message>
     <message>
-        <source>File is not a watchface and not yet supported</source>
-        <translation>Filen är ingen urtavla och stöds ännu inte</translation>
+        <source>File does not seem to be supported</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

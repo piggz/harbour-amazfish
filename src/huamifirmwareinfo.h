@@ -3,6 +3,8 @@
 
 #include <QByteArray>
 #include <QObject>
+#include <QString>
+#include <QMap>
 
 class HuamiFirmwareInfo : public QObject
 {
@@ -88,10 +90,13 @@ public:
     
 private:
     
-    QByteArray mBytes;
+    QByteArray m_bytes;
     uint16_t m_crc16;
     Type m_type;
     QString m_version;
+    QMap<uint16_t, QString> m_crcMap;
+
+    void populateCrcMap();
     uint16_t calculateCRC16();
     Type determineFirmwareType();
     QString searchFirmwareVersion();
