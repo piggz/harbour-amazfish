@@ -47,7 +47,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/operations/logfetchoperation.cpp \
     src/operations/sportssummaryoperation.cpp \
     src/operations/updatefirmwareoperation.cpp \
-    src/huamifirmwareinfo.cpp
+    src/huamifirmwareinfo.cpp \
+    src/dbushrm.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -112,6 +113,7 @@ HEADERS += \
     src/operations/logfetchoperation.h \
     src/operations/sportssummaryoperation.h \
     src/operations/updatefirmwareoperation.h \
-    src/huamifirmwareinfo.h
+    src/huamifirmwareinfo.h \
+    src/dbushrm.h
 
 include(qble/qble.pri)
