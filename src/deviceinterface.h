@@ -15,6 +15,7 @@
 #include "voicecallmanager.h"
 #include "settingsmanager.h"
 #include "datasource.h"
+#include "dbushrm.h"
 
 class AlertNotificationService;
 class DeviceInfoService;
@@ -71,6 +72,7 @@ private:
 
     SettingsManager m_settings;
     DataSource m_dataSource;
+    DBusHRM *m_dbusHRM = nullptr;
 
 
     void createSettings();

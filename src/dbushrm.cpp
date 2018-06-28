@@ -3,6 +3,13 @@
 DBusHRM::DBusHRM(HRMService * hrm, QObject *parent) : QObject(parent)
 {
     m_hrm = hrm;
+    
+    if (!QDBusConnection::sessionBus().registerService("org.sailfishos.heartrate")) {
+        fprintf(stderr, "%s\n",
+                qPrintable(QDBusConnection::sessionBus().lastError().message()));
+    } else {
+        QDBusConnection::sessionBus().registerObject("/org/sailfishos/heartrate", this, QDBusConnection::ExportAllSlots);
+    }
 }
 
 void DBusHRM::start()
