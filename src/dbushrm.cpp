@@ -29,6 +29,7 @@ void DBusHRM::stop()
 int DBusHRM::heartRate()
 {
     if (m_hrm) {
+        m_hrm->keepRealtimeHRMMeasurementAlive();
         return m_hrm->heartRate();
     }
     return 0;

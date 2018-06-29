@@ -40,6 +40,7 @@ void HRMService::enableRealtimeHRMeasurement(bool enable)
         writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, QByteArray(COMMAND_SET_HR_CONTINUOUS_ENABLE, 3));
     } else {
         writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, QByteArray(COMMAND_SET_HR_CONTINUOUS_DISABLE, 3));
+        disableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
     }
 }
 
@@ -53,6 +54,7 @@ void HRMService::enableManualHRMeasurement(bool enable)
         writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, QByteArray(COMMAND_SET_HR_MANUAL_ENABLE, 3));
     } else {
         writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, QByteArray(COMMAND_SET_HR_MANUAL_DISABLE, 3));
+        disableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
     }
 }
 
@@ -86,4 +88,9 @@ void HRMService::setHeartrateSleepSupport()
     enableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
     writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, cmd);
     disableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
+}
+
+void HRMService::keepRealtimeHRMMeasurementAlive()
+{
+    writeAsync(UUID_CHARACTERISTIC_HRM_CONTROL, QByteArray(COMMAND_SET_HR_CONTINUOUS_ENABLE, 3));
 }

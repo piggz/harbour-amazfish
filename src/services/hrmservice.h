@@ -32,6 +32,7 @@ public:
 
     Q_INVOKABLE void enableRealtimeHRMeasurement(bool enable);
     Q_INVOKABLE void enableManualHRMeasurement(bool enable);
+    Q_INVOKABLE void keepRealtimeHRMMeasurementAlive();
     Q_INVOKABLE int heartRate() const;
     Q_INVOKABLE void setAllDayHRM();
     Q_INVOKABLE void setHeartrateSleepSupport();
