@@ -1,12 +1,13 @@
 #include "dbushrm.h"
+#include <QDebug>
 
-DBusHRM::DBusHRM(HRMService * hrm, QObject *parent) : QObject(parent)
+DBusHRM::DBusHRM(HRMService * hrm, MiBandService *mi, QObject *parent) : QObject(parent)
 {
     m_hrm = hrm;
-    
+    m_mi = mi;
+
     if (!QDBusConnection::sessionBus().registerService("org.sailfishos.heartrate")) {
-        fprintf(stderr, "%s\n",
-                qPrintable(QDBusConnection::sessionBus().lastError().message()));
+        qDebug() << QDBusConnection::sessionBus().lastError().message();
     } else {
         QDBusConnection::sessionBus().registerObject("/", this, QDBusConnection::ExportAllSlots);
     }
@@ -31,6 +32,14 @@ int DBusHRM::heartRate()
     if (m_hrm) {
         m_hrm->keepRealtimeHRMMeasurementAlive();
         return m_hrm->heartRate();
+    }
+    return 0;
+}
+
+int DBusHRM::batteryLevel()
+{
+    if (m_mi) {
+        return m_mi->batteryInfo();
     }
     return 0;
 }

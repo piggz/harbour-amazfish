@@ -283,7 +283,7 @@ void DeviceInterface::onConnectionStateChanged()
             miBandService()->setDatabase(dbConnection());
         }
         if (hrmService() && !m_dbusHRM) {
-            m_dbusHRM = new DBusHRM(hrmService(), this);
+            m_dbusHRM = new DBusHRM(hrmService(), miBandService(), this);
         }
     }
     emit connectionStateChanged();

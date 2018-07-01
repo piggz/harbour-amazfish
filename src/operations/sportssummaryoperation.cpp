@@ -1,6 +1,7 @@
 #include "sportssummaryoperation.h"
 
 #include <QDebug>
+#include <QDataStream>
 #include <KDb3/KDbTransactionGuard>
 
 #include "mibandservice.h"
@@ -73,16 +74,18 @@ bool SportsSummaryOperation::handleMetaData(const QByteArray &value)
 
 void SportsSummaryOperation::handleData(const QByteArray &data)
 {
-    int len = data.length();
-
-    if (len % 4 != 1) {
-        qDebug() << "Unexpected data size";
+    if (data.length() < 2) {
+        qDebug() << "unexpected sports summary data length: " << data.length();
         return;
     }
 
-    for (int i = 1; i < len; i+=4) {
-        ActivitySample sample(data[i] & 0xff, data[i + 1] & 0xff, data[i + 2] & 0xff, data[i + 3] & 0xff);
-        m_samples << (sample);
+    if ((m_lastPacketCounter + 1) == data[0] ) {
+        m_lastPacketCounter++;
+        m_buffer += data.mid(1);
+    } else {
+        qDebug() << "invalid package counter: " << data[0] << ", last was: " << m_lastPacketCounter;
+        finished(false);
+        return;
     }
 }
 
@@ -97,58 +100,90 @@ bool SportsSummaryOperation::finished(bool success)
     }
     return saved;
 }
-#if 0
-bool SportsSummaryOperation::saveSamples()
+
+ActivitySummary *SportsSummaryOperation::parseSummary()
 {
-    bool saved = true;
-    if (m_samples.count() > 0) {
-        if (m_conn && m_conn->isDatabaseUsed()) {
-            m_sampleTime = m_startDate;
+    ActivitySummary *summary = new ActivitySummary();
 
-            uint id = qHash(m_settings.value("/uk/co/piggz/amazfish/profile/name").toString());
-            uint devid = qHash(m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString());
+    QDataStream stream(m_buffer);
+    stream.setByteOrder(QDataStream::LittleEndian);
 
-            KDbTransaction transaction = m_conn->beginTransaction();
-            KDbTransactionGuard tg(transaction);
+    short version;
+    stream >> version;
+    summary->setVersion(version);
 
-            KDbFieldList fields;
-
-            fields.addField(m_conn->tableSchema("mi_band_activity")->field("timestamp"));
-            fields.addField(m_conn->tableSchema("mi_band_activity")->field("timestamp_dt"));
-            fields.addField(m_conn->tableSchema("mi_band_activity")->field("device_id"));
-            fields.addField(m_conn->tableSchema("mi_band_activity")->field("user_id"));
-            fields.addField(m_conn->tableSchema("mi_band_activity")->field("raw_intensity"));
-            fields.addField(m_conn->tableSchema("mi_band_activity")->field("steps"));
-            fields.addField(m_conn->tableSchema("mi_band_activity")->field("raw_kind"));
-            fields.addField(m_conn->tableSchema("mi_band_activity")->field("heartrate"));
-
-            for (int i = 0; i < m_samples.count(); ++i) {
-                QList<QVariant> values;
-                values << m_sampleTime.toMSecsSinceEpoch() / 1000;
-                values << m_sampleTime;
-                values << devid;
-                values << id;
-                values << m_samples[i].intensity();
-                values << m_samples[i].steps();
-                values << m_samples[i].kind();
-                values << m_samples[i].heartrate();
-
-                if (!m_conn->insertRecord(&fields, values)) {
-                    qDebug() << "error inserting record";
-                    saved = false;
-                    break;
-                }
-                m_sampleTime = m_sampleTime.addSecs(60);
-            }
-            tg.commit();
-        } else {
-            qDebug() << "Database not connected";
-            saved = false;
-        }
+#if 0
+    int activityKind = ActivityKind.TYPE_UNKNOWN;
+    try {
+        int rawKind = BLETypeConversions.toUnsigned(buffer.getShort());
+        BipActivityType activityType = BipActivityType.fromCode(rawKind);
+        activityKind = activityType.toActivityKind();
+    } catch (Exception ex) {
+        LOG.error("Error mapping acivity kind: " + ex.getMessage(), ex);
     }
-    return saved;
-}
+    summary.setActivityKind(activityKind);
+
+    // FIXME: should honor timezone we were in at that time etc
+    long timestamp_start = BLETypeConversions.toUnsigned(buffer.getInt()) * 1000;
+    long timestamp_end = BLETypeConversions.toUnsigned(buffer.getInt()) * 1000;
+
+
+    // FIXME: should be done like this but seems to return crap when in DST
+    //summary.setStartTime(new Date(timestamp_start));
+    //summary.setEndTime(new Date(timestamp_end));
+
+    // FIXME ... so do it like this
+    long duration = timestamp_end - timestamp_start;
+    summary.setStartTime(new Date(getLastStartTimestamp().getTimeInMillis()));
+    summary.setEndTime(new Date(getLastStartTimestamp().getTimeInMillis() + duration));
+
+    int baseLongitude = buffer.getInt();
+    int baseLatitude = buffer.getInt();
+    int baseAltitude = buffer.getInt();
+    summary.setBaseLongitude(baseLongitude);
+    summary.setBaseLatitude(baseLatitude);
+    summary.setBaseAltitude(baseAltitude);
+    //        summary.setBaseCoordinate(new GPSCoordinate(baseLatitude, baseLongitude, baseAltitude));
+
+    //        summary.setDistanceMeters(Float.intBitsToFloat(buffer.getInt()));
+    //        summary.setAscentMeters(Float.intBitsToFloat(buffer.getInt()));
+    //        summary.setDescentMeters(Float.intBitsToFloat(buffer.getInt()));
+    //
+    //        summary.setMinAltitude(Float.intBitsToFloat(buffer.getInt()));
+    //        summary.setMaxAltitude(Float.intBitsToFloat(buffer.getInt()));
+    //        summary.setMinLatitude(buffer.getInt());
+    //        summary.setMaxLatitude(buffer.getInt());
+    //        summary.setMinLongitude(buffer.getInt());
+    //        summary.setMaxLongitude(buffer.getInt());
+    //
+    //        summary.setSteps(BLETypeConversions.toUnsigned(buffer.getInt()));
+    //        summary.setActiveTimeSeconds(BLETypeConversions.toUnsigned(buffer.getInt()));
+    //
+    //        summary.setCaloriesBurnt(Float.intBitsToFloat(buffer.get()));
+    //        summary.setMaxSpeed(Float.intBitsToFloat(buffer.get()));
+    //        summary.setMinPace(Float.intBitsToFloat(buffer.get()));
+    //        summary.setMaxPace(Float.intBitsToFloat(buffer.get()));
+    //        summary.setTotalStride(Float.intBitsToFloat(buffer.get()));
+
+    buffer.getInt(); //
+    buffer.getInt(); //
+    buffer.getInt(); //
+
+    //        summary.setTimeAscent(BLETypeConversions.toUnsigned(buffer.getInt()));
+    //        buffer.getInt(); //
+    //        summary.setTimeDescent(BLETypeConversions.toUnsigned(buffer.getInt()));
+    //        buffer.getInt(); //
+    //        summary.setTimeFlat(BLETypeConversions.toUnsigned(buffer.getInt()));
+    //
+    //        summary.setAverageHR(BLETypeConversions.toUnsigned(buffer.getShort()));
+    //
+    //        summary.setAveragePace(BLETypeConversions.toUnsigned(buffer.getShort()));
+    //        summary.setAverageStride(BLETypeConversions.toUnsigned(buffer.getShort()));
+
+    buffer.getShort(); //
 #endif
+    return summary;
+}
 
 void SportsSummaryOperation::setStartDate(const QDateTime &sd)
 {

@@ -7,7 +7,7 @@
 #include <KDb3/KDbConnection>
 
 #include "abstractoperation.h"
-#include "activitysample.h"
+#include "activitysummary.h"
 #include "settingsmanager.h"
 
 class SportsSummaryOperation : public AbstractOperation
@@ -25,8 +25,11 @@ private:
 
     QDateTime m_startDate;
     QDateTime m_sampleTime;
-    QList<ActivitySample> m_samples;
     SettingsManager m_settings;
+    int m_lastPacketCounter = 0;
+    QByteArray m_buffer;
+
+    ActivitySummary *parseSummary();
 
     KDbConnection *m_conn;
 
