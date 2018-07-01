@@ -135,11 +135,11 @@
     </message>
     <message>
         <source>Download activity data</source>
-        <translation>Aktivitätsdaten herunterladen</translation>
+        <translation>Aktivitätsdaten abrufen</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation>Datei herunterladen</translation>
+        <translation>Datei übertragen</translation>
     </message>
 </context>
 <context>
