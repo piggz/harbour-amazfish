@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>No file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Datei ausgewählt</translation>
     </message>
 </context>
 <context>
@@ -207,7 +207,7 @@
     </message>
     <message>
         <source>File does not seem to be supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datei scheint nicht unterstützt zu werden</translation>
     </message>
 </context>
 <context>
@@ -402,7 +402,7 @@
     </message>
     <message>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Spenden</translation>
     </message>
 </context>
 <context>
