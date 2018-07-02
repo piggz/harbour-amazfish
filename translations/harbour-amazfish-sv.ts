@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>No file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen fil vald</translation>
     </message>
 </context>
 <context>
@@ -207,7 +207,7 @@
     </message>
     <message>
         <source>File does not seem to be supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen verkar sakna stöd</translation>
     </message>
 </context>
 <context>
