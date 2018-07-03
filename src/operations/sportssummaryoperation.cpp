@@ -6,6 +6,7 @@
 
 #include "mibandservice.h"
 #include "typeconversion.h"
+#include "activitykind.h"
 
 SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn) : AbstractOperation(service)
 {
@@ -112,17 +113,13 @@ ActivitySummary *SportsSummaryOperation::parseSummary()
     stream >> version;
     summary->setVersion(version);
 
-#if 0
-    int activityKind = ActivityKind.TYPE_UNKNOWN;
-    try {
-        int rawKind = BLETypeConversions.toUnsigned(buffer.getShort());
-        BipActivityType activityType = BipActivityType.fromCode(rawKind);
-        activityKind = activityType.toActivityKind();
-    } catch (Exception ex) {
-        LOG.error("Error mapping acivity kind: " + ex.getMessage(), ex);
-    }
-    summary.setActivityKind(activityKind);
+    short kind;
+    stream >> kind;
+    ActivityKind::Type  activityKind = ActivityKind::Unknown;
+    activityKind = ActivityKind::fromBipType(kind);
+    summary->setActivityKind(activityKind);
 
+#if 0
     // FIXME: should honor timezone we were in at that time etc
     long timestamp_start = BLETypeConversions.toUnsigned(buffer.getInt()) * 1000;
     long timestamp_end = BLETypeConversions.toUnsigned(buffer.getInt()) * 1000;
