@@ -23,6 +23,16 @@ public:
     void setActivityKind(ActivityKind::Type);
     ActivityKind::Type activitKind();
             
+    void setStartTime(const QDateTime& start);
+    
+    void setEndTime(const QDateTime& end);
+    
+    void setBaseLatitude(int lat);
+    
+    void setBaseLongitude(int lon);
+    
+    void setBaseAltitude(int alt);
+    
 private:
     short m_version;
     uint m_id;
