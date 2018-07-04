@@ -40,17 +40,17 @@ SOURCES += src/harbour-amazfish.cpp \
     src/services/hrmservice.cpp \
     src/services/deviceinfoservice.cpp \
     src/services/bipfirmwareservice.cpp \
-    src/deviceinterface.cpp \
-    src/operations/activitysample.cpp \
     src/operations/abstractoperation.cpp \
     src/operations/activityfetchoperation.cpp \
     src/operations/logfetchoperation.cpp \
     src/operations/sportssummaryoperation.cpp \
     src/operations/updatefirmwareoperation.cpp \
-    src/operations/activitykind.cpp \
     src/huamifirmwareinfo.cpp \
     src/dbushrm.cpp \
-    src/activitysummary.cpp
+    src/activitysummary.cpp \
+    src/deviceinterface.cpp \
+    src/activitysample.cpp \
+    src/activitykind.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -103,21 +103,22 @@ HEADERS += \
     src/bipdevice.h \
     src/deviceinterface.h \
     src/datasource.h \
+    src/activitykind.cpp \
+    src/huamifirmwareinfo.h \
+    src/dbushrm.h \
+    src/activitysummary.h \ 
+    src/activitysample.h \
     src/services/mibandservice.h \
     src/services/miband2service.h \
     src/services/alertnotificationservice.h \
     src/services/hrmservice.h \
     src/services/deviceinfoservice.h \
     src/services/bipfirmwareservice.h \
-    src/operations/activitysample.h \
     src/operations/abstractoperation.h \
     src/operations/activityfetchoperation.h \
     src/operations/logfetchoperation.h \
     src/operations/sportssummaryoperation.h \
-    src/operations/updatefirmwareoperation.h \
-    src/operations/activitykind.cpp \
-    src/huamifirmwareinfo.h \
-    src/dbushrm.h \
-    src/activitysummary.h
+    src/operations/updatefirmwareoperation.h 
+ 
 
 include(qble/qble.pri)

@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QDateTime>
-#include "operations/activitykind.h"
+#include "activitykind.h"
 
 class ActivitySummary : public QObject
 {
