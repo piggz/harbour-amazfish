@@ -94,10 +94,8 @@ bool SportsSummaryOperation::finished(bool success)
 {
     bool saved = true;
     if (success) {
-        //store the successful samples
-        //saved = saveSamples();
-        m_settings.setValue("/uk/co/piggz/amazfish/device/lastactivitysyncmillis", m_sampleTime.toMSecsSinceEpoch());
-        qDebug() << "finished fetch operation, last record was " << m_sampleTime;
+        ActivitySummary *summary = parseSummary();
+        //save summary here
     }
     return saved;
 }
