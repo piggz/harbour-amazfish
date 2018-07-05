@@ -16,6 +16,32 @@ const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS = "00000008-
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT = "00000010-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME = "00002a2b-0000-1000-8000-00805f9b34fb";
 
+constexpr char MiBandService::DATEFORMAT_TIME[];
+constexpr char MiBandService::DATEFORMAT_DATETIME[];
+constexpr char MiBandService::DATEFORMAT_TIME_12_HOURS[];
+constexpr char MiBandService::DATEFORMAT_TIME_24_HOURS[];
+constexpr char MiBandService::COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST[];
+constexpr char MiBandService::COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST[];
+constexpr char MiBandService::COMMAND_SCHEDULE_DISPLAY_ON_LIFT_WRIST[];
+constexpr char MiBandService::COMMAND_ENABLE_GOAL_NOTIFICATION[];
+constexpr char MiBandService::COMMAND_DISABLE_GOAL_NOTIFICATION[];
+constexpr char MiBandService::COMMAND_ENABLE_ROTATE_WRIST_TO_SWITCH_INFO[];
+constexpr char MiBandService::COMMAND_DISABLE_ROTATE_WRIST_TO_SWITCH_INFO[];
+constexpr char MiBandService::COMMAND_ENABLE_DISPLAY_CALLER[];
+constexpr char MiBandService::COMMAND_DISABLE_DISPLAY_CALLER[];
+constexpr char MiBandService::COMMAND_DISTANCE_UNIT_METRIC[];
+constexpr char MiBandService::COMMAND_DISTANCE_UNIT_IMPERIAL[];
+constexpr char MiBandService::COMMAND_SET_FITNESS_GOAL_START[];
+constexpr char MiBandService::COMMAND_SET_FITNESS_GOAL_END[];
+constexpr char MiBandService::COMMAND_CHANGE_SCREENS[];
+constexpr char MiBandService::DISPLAY_XXX[];
+constexpr char MiBandService::DISPLAY_YYY[];
+constexpr char MiBandService::WEAR_LOCATION_LEFT_WRIST[];
+constexpr char MiBandService::WEAR_LOCATION_RIGHT_WRIST[];
+constexpr char MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS[];
+constexpr char MiBandService::RESPONSE_FINISH_SUCCESS[];
+constexpr char MiBandService::RESPONSE_FINISH_FAIL[];
+
 MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND, path, parent)
 {
     qDebug() << "MiBandService::MiBandService";
@@ -88,7 +114,7 @@ void MiBandService::characteristicRead(const QString &characteristic, const QByt
 
 void MiBandService::requestGPSVersion()
 {
-    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(&COMMAND_REQUEST_GPS_VERSION, 1));
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_REQUEST_GPS_VERSION, 1));
 }
 
 
@@ -413,7 +439,17 @@ void MiBandService::fetchActivityData()
     } else {
         emit message(tr("An operation is currently running, please try later"));
     }
+}
 
+void MiBandService::fetchSportsSummaries()
+{
+    if (!m_sportsSummaryOperation && m_operationRunning == 0) {
+        m_operationRunning = 3;
+        m_sportsSummaryOperation = new SportsSummaryOperation(this, m_conn);
+        m_sportsSummaryOperation->start();
+    } else {
+        emit message(tr("An operation is currently running, please try later"));
+    }
 }
 
 void MiBandService::setDatabase(KDbConnection *conn)

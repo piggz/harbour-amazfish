@@ -195,31 +195,6 @@ Page {
                     }
                 }
             }
-
-            Row {
-                spacing: Theme.paddingLarge
-                IconButton {
-                    id: btnSyncActivities
-                    icon.source: "image://theme/icon-m-cloud-download"
-                    width: Theme.iconSizeMedium
-                    height: width
-                    onClicked: {
-                        DeviceInterface.miBandService().fetchActivityData();
-                    }
-                    enabled: DeviceInterface.connectionState === "authenticated"
-                }
-                Label {
-                    color: Theme.secondaryHighlightColor
-                    font.pixelSize: Theme.fontSizeMedium
-                    height: Theme.iconSizeMedium
-                    verticalAlignment: Text.AlignVCenter
-                    text: qsTr("Download activity data");
-                }
-            }
-
-
-
-
         }
     }
     Timer {

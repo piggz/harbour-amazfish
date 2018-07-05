@@ -207,6 +207,49 @@ void DeviceInterface::createTables()
         qDebug() << *t_activity;
     }
 
+
+    if (!m_conn->containsTable("mi_band_sports_summary")) {
+        KDbTableSchema *t_summary = new KDbTableSchema("mi_band_sports_summary");
+        t_summary->setCaption("Sports Summary");
+        t_summary->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_summary->addField(f = new KDbField("name", KDbField::Text));
+        f->setCaption("Name");
+
+        t_summary->addField(f = new KDbField("start_timestamp", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Start Timestamp");
+        t_summary->addField(f = new KDbField("start_timestamp_dt", KDbField::DateTime));
+        f->setCaption("Start Timestamp in Date/Time format");
+
+        t_summary->addField(f = new KDbField("end_timestamp", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("End Timestamp");
+        t_summary->addField(f = new KDbField("end_timestamp_dt", KDbField::DateTime));
+        f->setCaption("End Timestamp in Date/Time format");
+
+        t_summary->addField(f = new KDbField("kind", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Activity Kind");
+
+        t_summary->addField(f = new KDbField("base_longitute", KDbField::Integer));
+        f->setCaption("Base Longitude");
+        t_summary->addField(f = new KDbField("base_latitude", KDbField::Integer));
+        f->setCaption("Base Latitude");
+        t_summary->addField(f = new KDbField("base_altitude", KDbField::Integer));
+        f->setCaption("Base Altitude");
+
+        t_summary->addField(f = new KDbField("device_id", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Device ID");
+        t_summary->addField(f = new KDbField("user_id", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("User ID");
+
+        if (!m_conn->createTable(t_summary)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- mi_band_sports_summary created --";
+        qDebug() << *t_summary;
+    }
+
     if (!m_conn->commitTransaction(t)) {
         qDebug() << m_conn->result();
         return;
@@ -314,4 +357,11 @@ void DeviceInterface::startDownload()
 bool DeviceInterface::operationRunning()
 {
     return m_bipDevice->operationRunning();
+}
+
+void DeviceInterface::downloadSportsData()
+{
+    if (miBandService()) {
+        miBandService()->fetchSportsSummaries();
+    }
 }

@@ -54,6 +54,10 @@
         <source>Intensity</source>
         <translation>Intensität</translation>
     </message>
+    <message>
+        <source>Download Data</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BipDevice</name>
@@ -132,10 +136,6 @@
     <message>
         <source>Settings</source>
         <translation>Einstellungen</translation>
-    </message>
-    <message>
-        <source>Download activity data</source>
-        <translation>Aktivitätsdaten abrufen</translation>
     </message>
     <message>
         <source>Download File</source>
@@ -470,6 +470,17 @@
     <message>
         <source>Use HRM for Sleep Detection</source>
         <translation>Verwenden Sie PRM für die Schlaferkennung</translation>
+    </message>
+</context>
+<context>
+    <name>SportsSummaryPage</name>
+    <message>
+        <source>Download Sports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sports Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

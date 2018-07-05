@@ -29,7 +29,7 @@ private:
     int m_lastPacketCounter = 0;
     QByteArray m_buffer;
 
-    ActivitySummary *parseSummary();
+    ActivitySummary parseSummary();
 
     KDbConnection *m_conn;
 

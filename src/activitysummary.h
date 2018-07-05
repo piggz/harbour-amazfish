@@ -5,9 +5,9 @@
 #include <QDateTime>
 #include "activitykind.h"
 
-class ActivitySummary : public QObject
+class ActivitySummary
 {
-    Q_OBJECT
+
 public:
     ActivitySummary();
 

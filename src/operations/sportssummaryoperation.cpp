@@ -37,7 +37,7 @@ bool SportsSummaryOperation::handleMetaData(const QByteArray &value)
 {
     if (value.length() == 15) {
         // first two bytes are whether our request was accepted
-        if (value.mid(0, 3) == QByteArray(dynamic_cast<MiBandService*>(m_service)->RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS, 3)) {
+        if (value.mid(0, 3) == QByteArray(MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS, 3)) {
             // the third byte (0x01 on success) = ?
             // the 4th - 7th bytes epresent the number of bytes/packets to expect, excluding the counter bytes
             int expectedDataLength = TypeConversion::toUint32(value[3], value[4], value[5], value[6]);
@@ -94,28 +94,28 @@ bool SportsSummaryOperation::finished(bool success)
 {
     bool saved = true;
     if (success) {
-        ActivitySummary *summary = parseSummary();
+        ActivitySummary summary = parseSummary();
         //save summary here
     }
     return saved;
 }
 
-ActivitySummary *SportsSummaryOperation::parseSummary()
+ActivitySummary SportsSummaryOperation::parseSummary()
 {
-    ActivitySummary *summary = new ActivitySummary();
+    ActivitySummary summary;
 
     QDataStream stream(m_buffer);
     stream.setByteOrder(QDataStream::LittleEndian);
 
     short version;
     stream >> version;
-    summary->setVersion(version);
+    summary.setVersion(version);
 
     short kind;
     stream >> kind;
     ActivityKind::Type  activityKind = ActivityKind::Unknown;
     activityKind = ActivityKind::fromBipType(kind);
-    summary->setActivityKind(activityKind);
+    summary.setActivityKind(activityKind);
 
     // FIXME: should honor timezone we were in at that time etc
     int timestamp_start = 0;
@@ -132,8 +132,8 @@ ActivitySummary *SportsSummaryOperation::parseSummary()
     long duration = timestamp_end - timestamp_start;
     //summary->setStartTime(new Date(getLastStartTimestamp().getTimeInMillis()));
     //summary->setEndTime(new Date(getLastStartTimestamp().getTimeInMillis() + duration));
-    summary->setStartTime(m_startDate);
-    summary->setEndTime(m_startDate.addSecs(duration));
+    summary.setStartTime(m_startDate);
+    summary.setEndTime(m_startDate.addSecs(duration));
         
   
     int baseLongitude = 0;
@@ -141,9 +141,9 @@ ActivitySummary *SportsSummaryOperation::parseSummary()
     int baseAltitude = 0;
     stream >> baseLongitude >> baseLatitude >> baseAltitude;
    
-    summary->setBaseLongitude(baseLongitude);
-    summary->setBaseLatitude(baseLatitude);
-    summary->setBaseAltitude(baseAltitude);
+    summary.setBaseLongitude(baseLongitude);
+    summary.setBaseLatitude(baseLatitude);
+    summary.setBaseAltitude(baseAltitude);
     
 
     //        summary.setBaseCoordinate(new GPSCoordinate(baseLatitude, baseLongitude, baseAltitude));

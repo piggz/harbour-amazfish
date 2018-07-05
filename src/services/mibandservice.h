@@ -6,6 +6,7 @@
 #include "bipbatteryinfo.h"
 #include "logfetchoperation.h"
 #include "activityfetchoperation.h"
+#include "sportssummaryoperation.h"
 
 /*
 {0000FEE0-0000-1000-8000-00805f9b34fb} MiBand Service
@@ -44,53 +45,53 @@ public:
     Q_PROPERTY(int batteryInfo READ batteryInfo NOTIFY batteryInfoChanged())
     Q_PROPERTY(int steps READ steps NOTIFY stepsChanged())
 
-    const char RESPONSE = 0x10;
-    const char SUCCESS = 0x01;
-    const char FAIL = 0x04;
+    static const char RESPONSE = 0x10;
+    static const char SUCCESS = 0x01;
+    static const char FAIL = 0x04;
 
-    const char EVENT_DECLINE_CALL = 0x07;
-    const char EVENT_IGNORE_CALL = 0x09;
-    const char ENDPOINT_DISPLAY = 0x06;
-    const char ENDPOINT_DISPLAY_ITEMS = 0x0a;
+    static const char EVENT_DECLINE_CALL = 0x07;
+    static const char EVENT_IGNORE_CALL = 0x09;
+    static const char ENDPOINT_DISPLAY = 0x06;
+    static const char ENDPOINT_DISPLAY_ITEMS = 0x0a;
 
-    const char DATEFORMAT_TIME[4] = {ENDPOINT_DISPLAY, 0x0a, 0x0, 0x0 };
-    const char DATEFORMAT_DATETIME[4] = {ENDPOINT_DISPLAY, 0x0a, 0x0, 0x03 };
-    const char DATEFORMAT_TIME_12_HOURS[4] = {ENDPOINT_DISPLAY, 0x02, 0x0, 0x0 };
-    const char DATEFORMAT_TIME_24_HOURS[4] = {ENDPOINT_DISPLAY, 0x02, 0x0, 0x1 };
+    static constexpr char DATEFORMAT_TIME[4] = {ENDPOINT_DISPLAY, 0x0a, 0x0, 0x0 };
+    static constexpr char DATEFORMAT_DATETIME[4] = {ENDPOINT_DISPLAY, 0x0a, 0x0, 0x03 };
+    static constexpr char DATEFORMAT_TIME_12_HOURS[4] = {ENDPOINT_DISPLAY, 0x02, 0x0, 0x0 };
+    static constexpr char DATEFORMAT_TIME_24_HOURS[4] = {ENDPOINT_DISPLAY, 0x02, 0x0, 0x1 };
 
-    const char COMMAND_REQUEST_GPS_VERSION = 0x0e;
-    const char COMMAND_SET_LANGUAGE = 0x17;
-    const char COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST[4] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x01};
-    const char COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST[4] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x00};
-    const char COMMAND_SCHEDULE_DISPLAY_ON_LIFT_WRIST[8] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    const char COMMAND_ENABLE_GOAL_NOTIFICATION[4] = {ENDPOINT_DISPLAY, 0x06, 0x00, 0x01};
-    const char COMMAND_DISABLE_GOAL_NOTIFICATION[4] = {ENDPOINT_DISPLAY, 0x06, 0x00, 0x00};
-    const char COMMAND_ENABLE_ROTATE_WRIST_TO_SWITCH_INFO[4] = {ENDPOINT_DISPLAY, 0x0d, 0x00, 0x01};
-    const char COMMAND_DISABLE_ROTATE_WRIST_TO_SWITCH_INFO[4] = {ENDPOINT_DISPLAY, 0x0d, 0x00, 0x00};
-    const char COMMAND_ENABLE_DISPLAY_CALLER[5] = {ENDPOINT_DISPLAY, 0x10, 0x00, 0x00, 0x01};
-    const char COMMAND_DISABLE_DISPLAY_CALLER[5] = {ENDPOINT_DISPLAY, 0x10, 0x00, 0x00, 0x00};
-    const char COMMAND_DISTANCE_UNIT_METRIC[4] =  { ENDPOINT_DISPLAY, 0x03, 0x00, 0x00 };
-    const char COMMAND_DISTANCE_UNIT_IMPERIAL[4] =  { ENDPOINT_DISPLAY, 0x03, 0x00, 0x01 };
-    const char COMMAND_SET_USERINFO = 0x4f;
-    const char COMMAND_SET_FITNESS_GOAL_START[3] = { 0x10, 0x0, 0x0 };
-    const char COMMAND_SET_FITNESS_GOAL_END[2] = { 0, 0 };
-    const char COMMAND_ACTIVITY_DATA_START_DATE = 0x01;
-    const char COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY = 0x01;
-    const char COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES = 0x05;
-    const char COMMAND_ACTIVITY_DATA_TYPE_SPORTS_DETAILS = 0x06;
-    const char COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS = 0x07;
-    const char COMMAND_FETCH_DATA = 0x02;
-    const char COMMAND_CHANGE_SCREENS[12] = {ENDPOINT_DISPLAY_ITEMS, 0x01, 0x10, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
+    static const char COMMAND_REQUEST_GPS_VERSION = 0x0e;
+    static const char COMMAND_SET_LANGUAGE = 0x17;
+    static constexpr char COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST[4] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x01};
+    static constexpr char COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST[4] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x00};
+    static constexpr char COMMAND_SCHEDULE_DISPLAY_ON_LIFT_WRIST[8] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    static constexpr char COMMAND_ENABLE_GOAL_NOTIFICATION[4] = {ENDPOINT_DISPLAY, 0x06, 0x00, 0x01};
+    static constexpr char COMMAND_DISABLE_GOAL_NOTIFICATION[4] = {ENDPOINT_DISPLAY, 0x06, 0x00, 0x00};
+    static constexpr char COMMAND_ENABLE_ROTATE_WRIST_TO_SWITCH_INFO[4] = {ENDPOINT_DISPLAY, 0x0d, 0x00, 0x01};
+    static constexpr char COMMAND_DISABLE_ROTATE_WRIST_TO_SWITCH_INFO[4] = {ENDPOINT_DISPLAY, 0x0d, 0x00, 0x00};
+    static constexpr char COMMAND_ENABLE_DISPLAY_CALLER[5] = {ENDPOINT_DISPLAY, 0x10, 0x00, 0x00, 0x01};
+    static constexpr char COMMAND_DISABLE_DISPLAY_CALLER[5] = {ENDPOINT_DISPLAY, 0x10, 0x00, 0x00, 0x00};
+    static constexpr char COMMAND_DISTANCE_UNIT_METRIC[4] =  { ENDPOINT_DISPLAY, 0x03, 0x00, 0x00 };
+    static constexpr char COMMAND_DISTANCE_UNIT_IMPERIAL[4] =  { ENDPOINT_DISPLAY, 0x03, 0x00, 0x01 };
+    static const char COMMAND_SET_USERINFO = 0x4f;
+    static constexpr char COMMAND_SET_FITNESS_GOAL_START[3] = { 0x10, 0x0, 0x0 };
+    static constexpr char COMMAND_SET_FITNESS_GOAL_END[2] = { 0, 0 };
+    static const char COMMAND_ACTIVITY_DATA_START_DATE = 0x01;
+    static const char COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY = 0x01;
+    static const char COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES = 0x05;
+    static const char COMMAND_ACTIVITY_DATA_TYPE_SPORTS_DETAILS = 0x06;
+    static const char COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS = 0x07;
+    static const char COMMAND_FETCH_DATA = 0x02;
+    static constexpr char COMMAND_CHANGE_SCREENS[12] = {ENDPOINT_DISPLAY_ITEMS, 0x01, 0x10, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
 
-    const char DISPLAY_XXX[4] =  {ENDPOINT_DISPLAY, 0x03, 0x0, 0x0 };
-    const char DISPLAY_YYY[5] =  {ENDPOINT_DISPLAY, 0x10, 0x0, 0x1, 0x1 };
+    static constexpr char DISPLAY_XXX[4] =  {ENDPOINT_DISPLAY, 0x03, 0x0, 0x0 };
+    static constexpr char DISPLAY_YYY[5] =  {ENDPOINT_DISPLAY, 0x10, 0x0, 0x1, 0x1 };
 
-    const char WEAR_LOCATION_LEFT_WRIST[4] = { 0x20, 0x00, 0x00, 0x02 };
-    const char WEAR_LOCATION_RIGHT_WRIST[4] = { 0x20, 0x00, 0x00, 0x82};
+    static constexpr char WEAR_LOCATION_LEFT_WRIST[4] = { 0x20, 0x00, 0x00, 0x02 };
+    static constexpr char WEAR_LOCATION_RIGHT_WRIST[4] = { 0x20, 0x00, 0x00, 0x82};
 
-    const char RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS[3] = {RESPONSE, COMMAND_ACTIVITY_DATA_START_DATE, SUCCESS};
-    const char RESPONSE_FINISH_SUCCESS[3] {RESPONSE, COMMAND_FETCH_DATA, SUCCESS };
-    const char RESPONSE_FINISH_FAIL[3] {RESPONSE, COMMAND_FETCH_DATA, FAIL };
+    static constexpr char RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS[3] = {RESPONSE, COMMAND_ACTIVITY_DATA_START_DATE, SUCCESS};
+    static constexpr char RESPONSE_FINISH_SUCCESS[3] {RESPONSE, COMMAND_FETCH_DATA, SUCCESS };
+    static constexpr char RESPONSE_FINISH_FAIL[3] {RESPONSE, COMMAND_FETCH_DATA, FAIL };
 
     Q_INVOKABLE void requestBatteryInfo();
     Q_INVOKABLE void requestGPSVersion();
@@ -120,7 +121,7 @@ public:
     //Operations
     Q_INVOKABLE void fetchLogs();
     Q_INVOKABLE void fetchActivityData();
-    //Q_INVOKABLE void fetchActivitySummaries();
+    Q_INVOKABLE void fetchSportsSummaries();
     //Q_INVOKABLE void fetchActivityDetail();
 
 
@@ -148,6 +149,7 @@ private:
     BipBatteryInfo m_batteryInfo;
     LogFetchOperation *m_logFetchOperation = nullptr;
     ActivityFetchOperation *m_activityFetchOperation = nullptr;
+    SportsSummaryOperation *m_sportsSummaryOperation = nullptr;
 
     KDbConnection *m_conn = nullptr;
 };
