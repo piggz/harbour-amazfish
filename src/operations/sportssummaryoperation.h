@@ -30,6 +30,7 @@ private:
     QByteArray m_buffer;
 
     ActivitySummary *parseSummary();
+    bool saveSummary();
 
     KDbConnection *m_conn;
 
