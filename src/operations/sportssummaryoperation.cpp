@@ -202,6 +202,60 @@ QDateTime SportsSummaryOperation::lastActivitySync()
     }
     QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime())); //Getting the timezone without DST
 
-    qDebug() << "last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, tz);
+    qDebug() << "last sports  sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, tz);
     return QDateTime::fromMSecsSinceEpoch(ls, tz);
 }
+
+bool SportsSummaryOperation::saveSummary(const ActivitySummary &summary)
+{
+    bool saved = true;
+        if (m_conn && m_conn->isDatabaseUsed()) {
+            m_sampleTime = m_startDate;
+
+            uint id = qHash(m_settings.value("/uk/co/piggz/amazfish/profile/name").toString());
+            uint devid = qHash(m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString());
+
+            KDbTransaction transaction = m_conn->beginTransaction();
+            KDbTransactionGuard tg(transaction);
+
+            KDbFieldList fields;
+
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("id"))
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("version"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp_dt"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("end_timestamp_dt"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("device_id"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("user_id"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("kind"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_longitude"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_latitude"));
+            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_altitude"));
+
+            
+                QList<QVariant> values;
+                values << m_sampleTime.toMSecsSinceEpoch() / 1000;
+                values << m_sampleTime;
+                values << devid;
+                values << id;
+                values << m_samples[i].intensity();
+                values << m_samples[i].steps();
+                values << m_samples[i].kind();
+                values << m_samples[i].heartrate();
+
+                if (!m_conn->insertRecord(&fields, values)) {
+                    qDebug() << "error inserting record";
+                    saved = false;
+                    break;
+                }
+               
+            tg.commit();
+        } else {
+            qDebug() << "Database not connected";
+            saved = false;
+        }
+    
+    return saved;
+}
+
