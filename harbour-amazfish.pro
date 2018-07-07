@@ -104,7 +104,7 @@ HEADERS += \
     src/bipdevice.h \
     src/deviceinterface.h \
     src/datasource.h \
-    src/activitykind.cpp \
+    src/activitykind.h \
     src/huamifirmwareinfo.h \
     src/dbushrm.h \
     src/activitysummary.h \ 

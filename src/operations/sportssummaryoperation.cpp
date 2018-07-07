@@ -16,7 +16,7 @@ SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnecti
 void SportsSummaryOperation::start()
 {
     m_startDate = lastActivitySync();
-
+    m_lastPacketCounter = -1;
 
     qDebug() << "last summary sync was" << m_startDate;
 
@@ -80,6 +80,7 @@ void SportsSummaryOperation::handleData(const QByteArray &data)
         return;
     }
 
+    qDebug() << "Data counter:" << data[0];
     if ((m_lastPacketCounter + 1) == data[0] ) {
         m_lastPacketCounter++;
         m_buffer += data.mid(1);
@@ -95,7 +96,7 @@ bool SportsSummaryOperation::finished(bool success)
     bool saved = true;
     if (success) {
         ActivitySummary summary = parseSummary();
-        //save summary here
+        saved = saveSummary(summary);
     }
     return saved;
 }
@@ -103,26 +104,31 @@ bool SportsSummaryOperation::finished(bool success)
 ActivitySummary SportsSummaryOperation::parseSummary()
 {
     ActivitySummary summary;
+    qDebug() << "Buffer:" << m_buffer.toHex();
 
     QDataStream stream(m_buffer);
     stream.setByteOrder(QDataStream::LittleEndian);
 
-    short version;
+    quint16 version;
     stream >> version;
     summary.setVersion(version);
 
-    short kind;
+    quint16 kind;
     stream >> kind;
+
+    qDebug() << "raw kind" << kind;
     ActivityKind::Type  activityKind = ActivityKind::Unknown;
     activityKind = ActivityKind::fromBipType(kind);
     summary.setActivityKind(activityKind);
 
     // FIXME: should honor timezone we were in at that time etc
-    int timestamp_start = 0;
-    int timestamp_end = 0;
+    quint32 timestamp_start = 0;
+    quint32 timestamp_end = 0;
     
     stream >> timestamp_start;
     stream >> timestamp_end;
+
+    qDebug() << "Time:" << timestamp_start << timestamp_end << sizeof(int) << sizeof(short);
 
     // FIXME: should be done like this but seems to return crap when in DST
     //summary.setStartTime(new Date(timestamp_start));
@@ -134,13 +140,13 @@ ActivitySummary SportsSummaryOperation::parseSummary()
     //summary->setEndTime(new Date(getLastStartTimestamp().getTimeInMillis() + duration));
     summary.setStartTime(m_startDate);
     summary.setEndTime(m_startDate.addSecs(duration));
-        
-  
-    int baseLongitude = 0;
-    int baseLatitude = 0;
-    int baseAltitude = 0;
+
+
+    qint32 baseLongitude = 0;
+    qint32 baseLatitude = 0;
+    qint32 baseAltitude = 0;
     stream >> baseLongitude >> baseLatitude >> baseAltitude;
-   
+
     summary.setBaseLongitude(baseLongitude);
     summary.setBaseLatitude(baseLatitude);
     summary.setBaseAltitude(baseAltitude);
@@ -209,53 +215,56 @@ QDateTime SportsSummaryOperation::lastActivitySync()
 bool SportsSummaryOperation::saveSummary(const ActivitySummary &summary)
 {
     bool saved = true;
-        if (m_conn && m_conn->isDatabaseUsed()) {
-            m_sampleTime = m_startDate;
+    if (m_conn && m_conn->isDatabaseUsed()) {
+        m_sampleTime = m_startDate;
 
-            uint id = qHash(m_settings.value("/uk/co/piggz/amazfish/profile/name").toString());
-            uint devid = qHash(m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString());
+        uint id = qHash(m_settings.value("/uk/co/piggz/amazfish/profile/name").toString());
+        uint devid = qHash(m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString());
 
-            KDbTransaction transaction = m_conn->beginTransaction();
-            KDbTransactionGuard tg(transaction);
+        KDbTransaction transaction = m_conn->beginTransaction();
+        KDbTransactionGuard tg(transaction);
 
-            KDbFieldList fields;
+        KDbFieldList fields;
 
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("id"))
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("version"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp_dt"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("end_timestamp_dt"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("device_id"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("user_id"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("kind"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_longitude"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_latitude"));
-            fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_altitude"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("version"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp_dt"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("end_timestamp"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("end_timestamp_dt"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("device_id"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("user_id"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("kind"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_longitude"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_latitude"));
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_altitude"));
 
-            
-                QList<QVariant> values;
-                values << m_sampleTime.toMSecsSinceEpoch() / 1000;
-                values << m_sampleTime;
-                values << devid;
-                values << id;
-                values << m_samples[i].intensity();
-                values << m_samples[i].steps();
-                values << m_samples[i].kind();
-                values << m_samples[i].heartrate();
 
-                if (!m_conn->insertRecord(&fields, values)) {
-                    qDebug() << "error inserting record";
-                    saved = false;
-                    break;
-                }
-               
-            tg.commit();
-        } else {
-            qDebug() << "Database not connected";
+        QList<QVariant> values;
+        values << summary.version();
+        values << summary.startTime().toMSecsSinceEpoch() / 1000;
+        values << summary.startTime();
+        values << summary.endTime().toMSecsSinceEpoch() / 1000;
+        values << summary.endTime();
+        values << devid;
+        values << id;
+        values << summary.activityKind();
+        values << summary.baseLongitude() / 3000000.0;
+        values << summary.baseLatitude() / 3000000.0;
+        values << summary.baseAltitude();
+
+        qDebug() << "Saving sports data" << values;
+
+        if (!m_conn->insertRecord(&fields, values)) {
+            qDebug() << "error inserting record";
             saved = false;
         }
-    
+
+        tg.commit();
+    } else {
+        qDebug() << "Database not connected";
+        saved = false;
+    }
+
     return saved;
 }
 

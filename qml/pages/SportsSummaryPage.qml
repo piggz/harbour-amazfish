@@ -21,7 +21,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Download Sports")
-                //onClicked: DeviceInterface.miBandService().fetchActivityData();
+                onClicked: DeviceInterface.downloadSportsData();
                 enabled: DeviceInterface.connectionState === "authenticated"
             }
         }

@@ -211,11 +211,14 @@ void DeviceInterface::createTables()
     if (!m_conn->containsTable("mi_band_sports_summary")) {
         KDbTableSchema *t_summary = new KDbTableSchema("mi_band_sports_summary");
         t_summary->setCaption("Sports Summary");
-        t_summary->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey, KDbField::Unsigned));
+        t_summary->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
         f->setCaption("ID");
 
         t_summary->addField(f = new KDbField("name", KDbField::Text));
         f->setCaption("Name");
+
+        t_summary->addField(f = new KDbField("version", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Version");
 
         t_summary->addField(f = new KDbField("start_timestamp", KDbField::Integer, nullptr, KDbField::Unsigned));
         f->setCaption("Start Timestamp");
@@ -230,11 +233,11 @@ void DeviceInterface::createTables()
         t_summary->addField(f = new KDbField("kind", KDbField::Integer, nullptr, KDbField::Unsigned));
         f->setCaption("Activity Kind");
 
-        t_summary->addField(f = new KDbField("base_longitute", KDbField::Integer));
+        t_summary->addField(f = new KDbField("base_longitude", KDbField::Double));
         f->setCaption("Base Longitude");
-        t_summary->addField(f = new KDbField("base_latitude", KDbField::Integer));
+        t_summary->addField(f = new KDbField("base_latitude", KDbField::Double));
         f->setCaption("Base Latitude");
-        t_summary->addField(f = new KDbField("base_altitude", KDbField::Integer));
+        t_summary->addField(f = new KDbField("base_altitude", KDbField::Double));
         f->setCaption("Base Altitude");
 
         t_summary->addField(f = new KDbField("device_id", KDbField::Integer, nullptr, KDbField::Unsigned));

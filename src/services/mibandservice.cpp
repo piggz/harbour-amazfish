@@ -82,6 +82,8 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
             m_logFetchOperation->handleData(value);
         } else if (m_operationRunning == 2 && m_activityFetchOperation) {
             m_activityFetchOperation->handleData(value);
+        } else if (m_operationRunning == 3 && m_sportsSummaryOperation) {
+            m_sportsSummaryOperation->handleData(value);
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
         qDebug() << "...got metadata";
@@ -95,6 +97,12 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
             if (m_activityFetchOperation->handleMetaData(value)) {
                 delete m_activityFetchOperation;
                 m_activityFetchOperation = nullptr;
+                m_operationRunning = 0;
+            }
+        } else if (m_operationRunning == 3 && m_sportsSummaryOperation) {
+            if (m_sportsSummaryOperation->handleMetaData(value)) {
+                delete m_sportsSummaryOperation;
+                m_sportsSummaryOperation = nullptr;
                 m_operationRunning = 0;
             }
         }

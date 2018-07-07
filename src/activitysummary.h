@@ -12,27 +12,32 @@ public:
     ActivitySummary();
 
     void setVersion(short);
-    short version();
+    short version() const;
 
     void setId(uint);
-    uint id();
+    uint id() const;
     
     void setName(const QString& n);
-    QString name();
+    QString name() const;
 
     void setActivityKind(ActivityKind::Type);
-    ActivityKind::Type activitKind();
+    ActivityKind::Type activityKind() const;
             
     void setStartTime(const QDateTime& start);
+    QDateTime startTime() const;
     
     void setEndTime(const QDateTime& end);
-    
+    QDateTime endTime() const;
+
     void setBaseLatitude(int lat);
-    
+    int baseLatitude() const;
+
     void setBaseLongitude(int lon);
-    
+    int baseLongitude() const;
+
     void setBaseAltitude(int alt);
-    
+    int baseAltitude() const;
+
 private:
     short m_version;
     uint m_id;

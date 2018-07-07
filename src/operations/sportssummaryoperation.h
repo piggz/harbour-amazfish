@@ -29,8 +29,8 @@ private:
     int m_lastPacketCounter = 0;
     QByteArray m_buffer;
 
-    ActivitySummary summary = parseSummary();
-    bool saveSummary(summary);
+    ActivitySummary parseSummary();
+    bool saveSummary(const ActivitySummary& summary);
 
     KDbConnection *m_conn;
 
