@@ -16,10 +16,9 @@ public:
     ActivityFetchOperation(QBLEService *service, KDbConnection *db);
 
     void start() override;
-    bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
+    bool finished(bool success) override;
 
-    bool finished(bool success);
 private:
 
     QDateTime m_sampleTime;

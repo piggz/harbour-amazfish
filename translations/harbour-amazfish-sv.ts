@@ -174,10 +174,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>About to transfer activity data from </source>
-        <translation>Inleder överföring av aktivitetsdata från </translation>
-    </message>
-    <message>
         <source>Finished transferring activity data</source>
         <translation>Överföring av aktivitetsdata slutförd</translation>
     </message>
@@ -208,6 +204,10 @@
     <message>
         <source>File does not seem to be supported</source>
         <translation>Filen verkar sakna stöd</translation>
+    </message>
+    <message>
+        <source>About to transfer data from </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

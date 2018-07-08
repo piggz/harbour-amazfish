@@ -16,7 +16,6 @@ public:
     SportsSummaryOperation(QBLEService *service, KDbConnection *db);
 
     void start() override;
-    bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
 
     bool success() const;

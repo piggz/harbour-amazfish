@@ -174,10 +174,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>About to transfer activity data from </source>
-        <translation>Über die Übertragung von Aktivitätsdaten aus </translation>
-    </message>
-    <message>
         <source>Finished transferring activity data</source>
         <translation>Übertragung der Aktivitätsdaten abgeschlossen</translation>
     </message>
@@ -208,6 +204,10 @@
     <message>
         <source>File does not seem to be supported</source>
         <translation>Die Datei scheint nicht unterstützt zu werden</translation>
+    </message>
+    <message>
+        <source>About to transfer data from </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

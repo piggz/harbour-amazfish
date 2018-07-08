@@ -12,6 +12,8 @@ class AbstractFetchOperation : public AbstractOperation
 public:
     AbstractFetchOperation(QBLEService *service);
 
+    bool handleMetaData(const QByteArray &meta) override;
+
 private:
     QDateTime m_startDate;
     QString m_lastSyncKey;
