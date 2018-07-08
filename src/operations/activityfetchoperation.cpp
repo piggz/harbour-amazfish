@@ -6,19 +6,20 @@
 #include "mibandservice.h"
 #include "typeconversion.h"
 
-ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn) : AbstractOperation(service)
+ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn) : AbstractFetchOperation(service)
 {
     m_conn = conn;
+    setLastSyncKey("/uk/co/piggz/amazfish/device/lastactivitysyncmillis");
 }
 
 void ActivityFetchOperation::start()
 {
-    m_startDate = lastActivitySync();
+    setStartDate(lastActivitySync());
 
 
-    qDebug() << "last activity sync was" << m_startDate;
+    qDebug() << "last activity sync was" << startDate();
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(m_startDate, 0);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0);
 
     MiBandService *serv = dynamic_cast<MiBandService*>(m_service);
 
@@ -92,7 +93,7 @@ bool ActivityFetchOperation::finished(bool success)
     if (success) {
         //store the successful samples
         saved = saveSamples();
-        m_settings.setValue("/uk/co/piggz/amazfish/device/lastactivitysyncmillis", m_sampleTime.toMSecsSinceEpoch());
+        saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());
         qDebug() << "finished fetch operation, last record was " << m_sampleTime;
     }
     return saved;
@@ -103,7 +104,7 @@ bool ActivityFetchOperation::saveSamples()
     bool saved = true;
     if (m_samples.count() > 0) {
         if (m_conn && m_conn->isDatabaseUsed()) {
-            m_sampleTime = m_startDate;
+            m_sampleTime = startDate();
 
             uint id = qHash(m_settings.value("/uk/co/piggz/amazfish/profile/name").toString());
             uint devid = qHash(m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString());
@@ -149,20 +150,3 @@ bool ActivityFetchOperation::saveSamples()
     return saved;
 }
 
-void ActivityFetchOperation::setStartDate(const QDateTime &sd)
-{
-    m_startDate = sd;
-}
-
-QDateTime ActivityFetchOperation::lastActivitySync()
-{
-    qlonglong ls = m_settings.value("/uk/co/piggz/amazfish/device/lastactivitysyncmillis").toLongLong();
-
-    if (ls == 0) {
-        return QDateTime::currentDateTime().addDays(-30);
-    }
-    QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime())); //Getting the timezone without DST
-
-    qDebug() << "last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, tz);
-    return QDateTime::fromMSecsSinceEpoch(ls, tz);
-}

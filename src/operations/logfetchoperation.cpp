@@ -7,7 +7,7 @@
 #include "mibandservice.h"
 #include "typeconversion.h"
 
-LogFetchOperation::LogFetchOperation(QBLEService *service) : AbstractOperation(service)
+LogFetchOperation::LogFetchOperation(QBLEService *service) : AbstractFetchOperation(service)
 {
     QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     if (!cachelocation.exists()) {

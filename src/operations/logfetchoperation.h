@@ -4,9 +4,9 @@
 #include <QFile>
 #include <QDataStream>
 
-#include "abstractoperation.h"
+#include "abstractfetchoperation.h"
 
-class LogFetchOperation : public AbstractOperation
+class LogFetchOperation : public AbstractFetchOperation
 {
 public:
     LogFetchOperation(QBLEService *service);

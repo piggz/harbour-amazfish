@@ -95,8 +95,9 @@ bool SportsSummaryOperation::finished(bool success)
 {
     bool saved = true;
     if (success) {
-        ActivitySummary summary = parseSummary();
-        saved = saveSummary(summary);
+        m_summary = parseSummary();
+        saved = saveSummary();
+        m_success = saved;
     }
     return saved;
 }
@@ -212,7 +213,7 @@ QDateTime SportsSummaryOperation::lastActivitySync()
     return QDateTime::fromMSecsSinceEpoch(ls, tz);
 }
 
-bool SportsSummaryOperation::saveSummary(const ActivitySummary &summary)
+bool SportsSummaryOperation::saveSummary()
 {
     bool saved = true;
     if (m_conn && m_conn->isDatabaseUsed()) {
@@ -240,21 +241,27 @@ bool SportsSummaryOperation::saveSummary(const ActivitySummary &summary)
 
 
         QList<QVariant> values;
-        values << summary.version();
-        values << summary.startTime().toMSecsSinceEpoch() / 1000;
-        values << summary.startTime();
-        values << summary.endTime().toMSecsSinceEpoch() / 1000;
-        values << summary.endTime();
+        values << m_summary.version();
+        values << m_summary.startTime().toMSecsSinceEpoch() / 1000;
+        values << m_summary.startTime();
+        values << m_summary.endTime().toMSecsSinceEpoch() / 1000;
+        values << m_summary.endTime();
         values << devid;
         values << id;
-        values << summary.activityKind();
-        values << summary.baseLongitude() / 3000000.0;
-        values << summary.baseLatitude() / 3000000.0;
-        values << summary.baseAltitude();
+        values << m_summary.activityKind();
+        values << m_summary.baseLongitude() / 3000000.0;
+        values << m_summary.baseLatitude() / 3000000.0;
+        values << m_summary.baseAltitude();
 
         qDebug() << "Saving sports data" << values;
 
-        if (!m_conn->insertRecord(&fields, values)) {
+        QSharedPointer<KDbSqlResult> result = m_conn->insertRecord(&fields, values);
+
+        if (!result->lastResult().isError()) {
+            long lastId = result->lastInsertRecordId();
+            m_summary.setId(lastId);
+            qDebug() << "Record Id is" << m_summary.id();
+        } else {
             qDebug() << "error inserting record";
             saved = false;
         }
@@ -268,3 +275,12 @@ bool SportsSummaryOperation::saveSummary(const ActivitySummary &summary)
     return saved;
 }
 
+bool SportsSummaryOperation::success() const
+{
+    return m_success;
+}
+
+ActivitySummary SportsSummaryOperation::summary()
+{
+    return m_summary;
+}

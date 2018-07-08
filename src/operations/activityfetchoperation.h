@@ -6,11 +6,11 @@
 #include <QDateTime>
 #include <KDb3/KDbConnection>
 
-#include "abstractoperation.h"
+#include "abstractfetchoperation.h"
 #include "activitysample.h"
 #include "settingsmanager.h"
 
-class ActivityFetchOperation : public AbstractOperation
+class ActivityFetchOperation : public AbstractFetchOperation
 {
 public:
     ActivityFetchOperation(QBLEService *service, KDbConnection *db);
@@ -20,12 +20,8 @@ public:
     void handleData(const QByteArray &data) override;
 
     bool finished(bool success);
-    void setStartDate(const QDateTime &sd);
 private:
 
-    QFile *m_logFile = nullptr;
-    QTextStream *m_dataStream = nullptr;
-    QDateTime m_startDate;
     QDateTime m_sampleTime;
     QList<ActivitySample> m_samples;
     SettingsManager m_settings;
@@ -33,7 +29,7 @@ private:
     KDbConnection *m_conn;
 
     bool saveSamples();
-    QDateTime lastActivitySync();
+
 };
 
 #endif // ACTIVITYFETCHOPERATION_H

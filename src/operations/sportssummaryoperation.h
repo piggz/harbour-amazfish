@@ -19,8 +19,9 @@ public:
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
 
-    bool finished(bool success);
-    void setStartDate(const QDateTime &sd);
+    bool success() const;
+    ActivitySummary summary();
+
 private:
 
     QDateTime m_startDate;
@@ -28,13 +29,16 @@ private:
     SettingsManager m_settings;
     int m_lastPacketCounter = 0;
     QByteArray m_buffer;
+    bool m_success = false;
+    ActivitySummary m_summary;
 
     ActivitySummary parseSummary();
-    bool saveSummary(const ActivitySummary& summary);
+    bool saveSummary();
+    bool finished(bool success);
+    void setStartDate(const QDateTime &sd);
 
     KDbConnection *m_conn;
 
-    bool save();
     QDateTime lastActivitySync();
 };
 

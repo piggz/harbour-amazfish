@@ -101,6 +101,12 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
             }
         } else if (m_operationRunning == 3 && m_sportsSummaryOperation) {
             if (m_sportsSummaryOperation->handleMetaData(value)) {
+                //Now the summary is finished, need to get the detail
+                if (m_sportsSummaryOperation->success()) {
+                    ActivitySummary summary = m_sportsSummaryOperation->summary();
+
+                }
+
                 delete m_sportsSummaryOperation;
                 m_sportsSummaryOperation = nullptr;
                 m_operationRunning = 0;
