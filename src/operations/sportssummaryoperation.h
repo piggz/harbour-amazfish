@@ -6,11 +6,11 @@
 #include <QDateTime>
 #include <KDb3/KDbConnection>
 
-#include "abstractoperation.h"
+#include "abstractfetchoperation.h"
 #include "activitysummary.h"
 #include "settingsmanager.h"
 
-class SportsSummaryOperation : public AbstractOperation
+class SportsSummaryOperation : public AbstractFetchOperation
 {
 public:
     SportsSummaryOperation(QBLEService *service, KDbConnection *db);
@@ -24,7 +24,6 @@ public:
 
 private:
 
-    QDateTime m_startDate;
     QDateTime m_sampleTime;
     SettingsManager m_settings;
     int m_lastPacketCounter = 0;
@@ -35,11 +34,8 @@ private:
     ActivitySummary parseSummary();
     bool saveSummary();
     bool finished(bool success);
-    void setStartDate(const QDateTime &sd);
 
     KDbConnection *m_conn;
-
-    QDateTime lastActivitySync();
 };
 
 #endif // SPORTSSUMMARYOPERATION_H

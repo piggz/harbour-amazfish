@@ -10,7 +10,7 @@ QDateTime AbstractFetchOperation::lastActivitySync()
     qlonglong ls = m_settings.value(m_lastSyncKey).toLongLong();
 
     if (ls == 0) {
-        return QDateTime::currentDateTime().addDays(-30);
+        return QDateTime::currentDateTime().addDays(-100);
     }
     QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime())); //Getting the timezone without DST
 

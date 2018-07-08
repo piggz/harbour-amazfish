@@ -8,29 +8,28 @@
 #include "typeconversion.h"
 #include "activitykind.h"
 
-SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn) : AbstractOperation(service)
+SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn) : AbstractFetchOperation(service)
 {
     m_conn = conn;
+    setLastSyncKey("/uk/co/piggz/amazfish/device/lastsportsyncmillis");
 }
 
 void SportsSummaryOperation::start()
 {
-    m_startDate = lastActivitySync();
+    setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
 
-    qDebug() << "last summary sync was" << m_startDate;
+    qDebug() << "last summary sync was" << startDate();
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(m_startDate, 0);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0);
 
-    MiBandService *serv = dynamic_cast<MiBandService*>(m_service);
-
-    m_service->enableNotification(serv->UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    m_service->enableNotification(serv->UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+    m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
+    m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
 
     //Send log read configuration
-    m_service->writeValue(serv->UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, serv->COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, serv->COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES) + rawDate);
+    m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES) + rawDate);
     //Send log read command
-    m_service->writeValue(serv->UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, serv->COMMAND_FETCH_DATA));
+    m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
 }
 
 bool SportsSummaryOperation::handleMetaData(const QByteArray &value)
@@ -53,12 +52,12 @@ bool SportsSummaryOperation::handleMetaData(const QByteArray &value)
             qDebug() << "Unexpected activity metadata: " << value;
         }
     } else if (value.length() == 3) {
-        if (value == QByteArray(dynamic_cast<MiBandService*>(m_service)->RESPONSE_FINISH_SUCCESS, 3)) {
+        if (value == QByteArray(MiBandService::RESPONSE_FINISH_SUCCESS, 3)) {
             qDebug() << "Finished sending data";
             finished(true);
             m_service->message(QObject::tr("Finished transferring activity data"));
             return true;
-        } else if (value == QByteArray(dynamic_cast<MiBandService*>(m_service)-> RESPONSE_FINISH_FAIL, 3)) {
+        } else if (value == QByteArray(MiBandService::RESPONSE_FINISH_FAIL, 3)) {
             qDebug() << "No data left to fetch";
             m_service->message(QObject::tr("No data to transfer"));
             return true;
@@ -139,8 +138,8 @@ ActivitySummary SportsSummaryOperation::parseSummary()
     long duration = timestamp_end - timestamp_start;
     //summary->setStartTime(new Date(getLastStartTimestamp().getTimeInMillis()));
     //summary->setEndTime(new Date(getLastStartTimestamp().getTimeInMillis() + duration));
-    summary.setStartTime(m_startDate);
-    summary.setEndTime(m_startDate.addSecs(duration));
+    summary.setStartTime(startDate());
+    summary.setEndTime(startDate().addSecs(duration));
 
 
     qint32 baseLongitude = 0;
@@ -195,29 +194,11 @@ ActivitySummary SportsSummaryOperation::parseSummary()
     return summary;
 }
 
-void SportsSummaryOperation::setStartDate(const QDateTime &sd)
-{
-    m_startDate = sd;
-}
-
-QDateTime SportsSummaryOperation::lastActivitySync()
-{
-    qlonglong ls = m_settings.value("/uk/co/piggz/amazfish/device/lastsummarysyncmillis").toLongLong();
-
-    if (ls == 0) {
-        return QDateTime::currentDateTime().addDays(-30);
-    }
-    QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime())); //Getting the timezone without DST
-
-    qDebug() << "last sports  sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, tz);
-    return QDateTime::fromMSecsSinceEpoch(ls, tz);
-}
-
 bool SportsSummaryOperation::saveSummary()
 {
     bool saved = true;
     if (m_conn && m_conn->isDatabaseUsed()) {
-        m_sampleTime = m_startDate;
+        m_sampleTime = startDate();
 
         uint id = qHash(m_settings.value("/uk/co/piggz/amazfish/profile/name").toString());
         uint devid = qHash(m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString());
