@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten abrufen</translation>
     </message>
 </context>
 <context>
@@ -207,7 +207,7 @@
     </message>
     <message>
         <source>About to transfer data from </source>
-        <translation type="unfinished"></translation>
+        <translation>Über die Übertragung von Daten aus </translation>
     </message>
 </context>
 <context>
@@ -476,11 +476,11 @@
     <name>SportsSummaryPage</name>
     <message>
         <source>Download Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Sportdaten abrufen</translation>
     </message>
     <message>
         <source>Sports Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Sport Zusammenfassung</translation>
     </message>
 </context>
 </TS>
