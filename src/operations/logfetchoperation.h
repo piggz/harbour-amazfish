@@ -12,9 +12,8 @@ public:
     LogFetchOperation(QBLEService *service);
 
     void start() override;
-    bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
-    void finished();
+    bool finished(bool success) override;
 
 private:
     QFile *m_logFile = nullptr;
