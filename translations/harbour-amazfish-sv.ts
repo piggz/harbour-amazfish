@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladda ner data</translation>
     </message>
 </context>
 <context>
@@ -207,7 +207,7 @@
     </message>
     <message>
         <source>About to transfer data from </source>
-        <translation type="unfinished"></translation>
+        <translation>Kommer att ladda ner data från </translation>
     </message>
 </context>
 <context>
@@ -476,11 +476,11 @@
     <name>SportsSummaryPage</name>
     <message>
         <source>Download Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladda ner Sports</translation>
     </message>
     <message>
         <source>Sports Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Sports-sammandrag</translation>
     </message>
 </context>
 </TS>
