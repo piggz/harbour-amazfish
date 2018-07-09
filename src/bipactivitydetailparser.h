@@ -19,13 +19,13 @@ private:
     static const char TYPE_SPEED4 = 0x04;
     static const char TYPE_SPEED5 = 0x05;
     static const char TYPE_GPS_SPEED6 = 0x06;
+    static constexpr double HUAMI_TO_DECIMAL_DEGREES_DIVISOR = 3000000.0;
 
-    static double HUAMI_TO_DECIMAL_DEGREES_DIVISOR = 3000000.0;
-
-    long baseLongitude;
-    long baseLatitude;
-    int baseAltitude;
-    QPointF lastActivityPoint;
+    long m_baseLongitude;
+    long m_baseLatitude;
+    int m_baseAltitude;
+    QPointF m_lastActivityPoint;
+    ActivitySummary m_summary;
 
     bool getSkipCounterByte();
     void setSkipCounterByte(bool skip);

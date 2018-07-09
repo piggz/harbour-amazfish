@@ -1,19 +1,17 @@
 #include "bipactivitydetailparser.h"
 
-BipActivityDetailParser::ActivityDetailsParser(ActivitySummary summary) {
-    this.summary = summary;
-    //        this.version = version;
-    //        this.baseDate = baseDate;
-    //
-    this.baseLongitude = summary.getBaseLongitude();
-    this.baseLatitude = summary.getBaseLatitude();
-    this.baseAltitude = summary.getBaseAltitude();
-    this.baseDate = summary.getStartTime();
+BipActivityDetailParser::BipActivityDetailParser(ActivitySummary summary) {
+    m_summary = summary;
 
-    this.activityTrack = new ActivityTrack();
-    activityTrack.setUser(summary.getUser());
-    activityTrack.setDevice(summary.getDevice());
-    activityTrack.setName(summary.getName() + "-" + summary.getId());
+    m_baseLongitude = summary.getBaseLongitude();
+    m_baseLatitude = summary.getBaseLatitude();
+    m_baseAltitude = summary.getBaseAltitude();
+    m_baseDate = summary.getStartTime();
+
+    //this.activityTrack = new ActivityTrack();
+    //activityTrack.setUser(summary.getUser());
+    //activityTrack.setDevice(summary.getDevice());
+    //activityTrack.setName(summary.getName() + "-" + summary.getId());
 }
 
 bool BipActivityDetailParser::getSkipCounterByte()
