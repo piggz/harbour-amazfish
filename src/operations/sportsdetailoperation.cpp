@@ -20,8 +20,6 @@ void SportsDetailOperation::start()
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0);
 
-    MiBandService *serv = dynamic_cast<MiBandService*>(m_service);
-
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
 
