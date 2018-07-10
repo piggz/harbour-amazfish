@@ -29,9 +29,6 @@ void SportsDetailOperation::start()
     m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
 }
 
-
-
-
 void SportsDetailOperation::handleData(const QByteArray &data)
 {
     if (data.length() < 2) {

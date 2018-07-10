@@ -16,7 +16,7 @@ TEMPLATE = app
 CONFIG += sailfishapp
 LIBS += -Lqble/qble
 
-QT +=  contacts KDb3
+QT +=  contacts KDb3 positioning
 
 PKGCONFIG += mlite5
 
@@ -53,7 +53,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/activitykind.cpp \
     src/operations/sportsdetailoperation.cpp \
     src/operations/abstractfetchoperation.cpp \
-    src/bipactivitydetailparser.cpp
+    src/bipactivitydetailparser.cpp \
+    src/activitycoordinate.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -125,7 +126,8 @@ HEADERS += \
     src/operations/updatefirmwareoperation.h \   
     src/operations/sportsdetailoperation.h \
     src/operations/abstractfetchoperation.h \
-    src/bipactivitydetailparser.h
+    src/bipactivitydetailparser.h \
+    src/activitycoordinate.h
  
 
 include(qble/qble.pri)

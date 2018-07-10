@@ -1,15 +1,15 @@
 #ifndef BIPACTIVITYDETAILPARSER_H
 #define BIPACTIVITYDETAILPARSER_H
 
-#include <QPoint>
 #include "activitysummary.h"
+#include "activitycoordinate.h"
 
 class BipActivityDetailParser
 {
 public:
     BipActivityDetailParser(ActivitySummary summary);
 
-    void parse(const QByteArray &bytes);
+    QString parse(const QByteArray &bytes);
 
 private:
     static const char TYPE_GPS = 0x00;
@@ -21,10 +21,13 @@ private:
     static const char TYPE_GPS_SPEED6 = 0x06;
     static constexpr double HUAMI_TO_DECIMAL_DEGREES_DIVISOR = 3000000.0;
 
-    long m_baseLongitude;
-    long m_baseLatitude;
-    int m_baseAltitude;
-    QPointF m_lastActivityPoint;
+    long m_baseLongitude = 0.0;
+    long m_baseLatitude = 0.0;
+    int m_baseAltitude = 0;
+    QDateTime m_baseDate;
+    bool m_skipCounterByte = false;
+    ActivityCoordinate m_lastActivityPoint;
+    QList<ActivityCoordinate> m_activityTrack;
     ActivitySummary m_summary;
 
     bool getSkipCounterByte();
@@ -32,9 +35,9 @@ private:
     int consumeGPSAndUpdateBaseLocation(const QByteArray &bytes, int offset, long timeOffset);
     double convertHuamiValueToDecimalDegrees(long huamiValue);
     int consumeHeartRate(const QByteArray &bytes, int offset, long timeOffsetSeconds);
-    QPointF getActivityPointFor(long timeOffsetSeconds);
+    ActivityCoordinate getActivityPointFor(long timeOffsetSeconds);
     QDateTime makeAbsolute(long timeOffsetSeconds);
-    void add(QPointF ap);
+    void add(const ActivityCoordinate &ap);
     int consumeUnknown2(const QByteArray &bytes, int offset);
     int consumePause(const QByteArray &bytes, int i);
     int consumeSpeed4(const QByteArray &bytes, int offset);

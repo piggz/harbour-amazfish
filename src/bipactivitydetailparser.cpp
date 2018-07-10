@@ -1,12 +1,14 @@
 #include "bipactivitydetailparser.h"
+#include "typeconversion.h"
+#include <QDebug>
 
 BipActivityDetailParser::BipActivityDetailParser(ActivitySummary summary) {
     m_summary = summary;
 
-    m_baseLongitude = summary.getBaseLongitude();
-    m_baseLatitude = summary.getBaseLatitude();
-    m_baseAltitude = summary.getBaseAltitude();
-    m_baseDate = summary.getStartTime();
+    m_baseLongitude = summary.baseLongitude();
+    m_baseLatitude = summary.baseLatitude();
+    m_baseAltitude = summary.baseAltitude();
+    m_baseDate = summary.startTime();
 
     //this.activityTrack = new ActivityTrack();
     //activityTrack.setUser(summary.getUser());
@@ -16,27 +18,27 @@ BipActivityDetailParser::BipActivityDetailParser(ActivitySummary summary) {
 
 bool BipActivityDetailParser::getSkipCounterByte()
 {
-    return skipCounterByte;
+    return m_skipCounterByte;
 }
 
 void BipActivityDetailParser::setSkipCounterByte(bool skip)
 {
-    skipCounterByte = skip;
+    m_skipCounterByte = skip;
 }
 
-ActivityTrack BipActivityDetailParser::parse(const QByteArray &bytes)
+QString BipActivityDetailParser::parse(const QByteArray &bytes)
 {
     int i = 0;
-    try {
+ 
         long totalTimeOffset = 0;
         int lastTimeOffset = 0;
-        while (i < bytes.length) {
-            if (skipCounterByte && (i % 17) == 0) {
+        while (i < bytes.length()) {
+            if (m_skipCounterByte && (i % 17) == 0) {
                 i++;
             }
 
-            byte type = bytes[i++];
-            int timeOffset = BLETypeConversions.toUnsigned(bytes[i++]);
+            char type = bytes[i++];
+            int timeOffset = TypeConversion::toUnsigned(bytes[i++]);
             // handle timeOffset overflows (1 byte, always increasing, relative to base)
             if (lastTimeOffset <= timeOffset) {
                 timeOffset = timeOffset - lastTimeOffset;
@@ -70,31 +72,30 @@ ActivityTrack BipActivityDetailParser::parse(const QByteArray &bytes)
                 break;
             }
         }
-    } catch (IndexOutOfBoundsException ex) {
-        throw new GBException("Error parsing activity details: " + ex.getMessage(), ex);
-    }
+    
 
-    return activityTrack;
+    return QString();
 }
 
 int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &bytes, int offset, long timeOffset)
 {
     int i = 0;
-    int longitudeDelta = BLETypeConversions.toInt16(bytes[offset + i++], bytes[offset + i++]);
-    int latitudeDelta = BLETypeConversions.toInt16(bytes[offset + i++], bytes[offset + i++]);
-    int altitudeDelta = BLETypeConversions.toInt16(bytes[offset + i++], bytes[offset + i++]);
+    int longitudeDelta = TypeConversion::toInt16(bytes[offset + i++], bytes[offset + i++]);
+    int latitudeDelta = TypeConversion::toInt16(bytes[offset + i++], bytes[offset + i++]);
+    int altitudeDelta = TypeConversion::toInt16(bytes[offset + i++], bytes[offset + i++]);
 
-    baseLongitude += longitudeDelta;
-    baseLatitude += latitudeDelta;
-    baseAltitude += altitudeDelta;
+    m_baseLongitude += longitudeDelta;
+    m_baseLatitude += latitudeDelta;
+    m_baseAltitude += altitudeDelta;
 
-    GPSCoordinate coordinate = new GPSCoordinate(
-                convertHuamiValueToDecimalDegrees(baseLongitude),
-                convertHuamiValueToDecimalDegrees(baseLatitude),
-                baseAltitude);
+    QGeoCoordinate coordinate;
+    
+    coordinate.setLongitude(convertHuamiValueToDecimalDegrees(m_baseLongitude));
+    coordinate.setLatitude(convertHuamiValueToDecimalDegrees(m_baseLatitude));
+     cordinate.setAltidude(m_baseAltitude);
 
-    ActivityPoint ap = getActivityPointFor(timeOffset);
-    ap.setLocation(coordinate);
+    ActivityCoordinate ap = getActivityPointFor(timeOffset);
+    ap.setCoordinate(coordinate);
     add(ap);
 
     return i;
@@ -102,23 +103,22 @@ int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &b
 
 double BipActivityDetailParser::convertHuamiValueToDecimalDegrees(long huamiValue)
 {
-    BigDecimal result = new BigDecimal(huamiValue).divide(HUAMI_TO_DECIMAL_DEGREES_DIVISOR, GPSCoordinate.GPS_DECIMAL_DEGREES_SCALE, RoundingMode.HALF_UP);
-    return result.doubleValue();
+    return huamiValue / HUAMI_TO_DECIMAL_DEGREES_DIVISOR;
 }
 
 int BipActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offset, long timeOffsetSeconds)
 {
-    int v1 = BLETypeConversions.toUint16(bytes[offset]);
-    int v2 = BLETypeConversions.toUint16(bytes[offset + 1]);
-    int v3 = BLETypeConversions.toUint16(bytes[offset + 2]);
-    int v4 = BLETypeConversions.toUint16(bytes[offset + 3]);
-    int v5 = BLETypeConversions.toUint16(bytes[offset + 4]);
-    int v6 = BLETypeConversions.toUint16(bytes[offset + 5]);
+    int v1 = TypeConversion::toUint16(bytes[offset]);
+    int v2 = TypeConversion::toUint16(bytes[offset + 1]);
+    int v3 = TypeConversion::toUint16(bytes[offset + 2]);
+    int v4 = TypeConversion::toUint16(bytes[offset + 3]);
+    int v5 = TypeConversion::toUint16(bytes[offset + 4]);
+    int v6 = TypeConversion::toUint16(bytes[offset + 5]);
 
     if (v2 == 0 && v3 == 0 && v4 == 0 && v5 == 0 && v6 == 0) {
         // new version
         //            LOG.info("detected heart rate in 'new' version, where version is: " + summary.getVersion());
-        LOG.info("detected heart rate in 'new' version format");
+        //LOG.info("detected heart rate in 'new' version format");
         ActivityPoint ap = getActivityPointFor(timeOffsetSeconds);
         ap.setHeartRate(v1);
         add(ap);
@@ -138,27 +138,29 @@ int BipActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offse
     return 6;
 }
 
-ActivityPoint BipActivityDetailParser::getActivityPointFor(long timeOffsetSeconds)
+ActivityCoordinate BipActivityDetailParser::getActivityPointFor(long timeOffsetSeconds)
 {
-    Date time = makeAbsolute(timeOffsetSeconds);
-    if (lastActivityPoint != null) {
-        if (lastActivityPoint.getTime().equals(time)) {
-            return lastActivityPoint;
+    QDateTime time = makeAbsolute(timeOffsetSeconds);
+    if (m_lastActivityPoint != null) {
+        if (m_lastActivityPoint.getTime().equals(time)) {
+            return m_lastActivityPoint;
         }
     }
-    return new ActivityPoint(time);
+    ActivityCoordinate p;
+    p.setDateTime(time);
+    return p;
 }
 
 QDateTime BipActivityDetailParser::makeAbsolute(long timeOffsetSeconds)
 {
-    return new Date(baseDate.getTime() + timeOffsetSeconds * 1000);
+    return m_baseDate.addSecs(timeOffsetSeconds);
 }
 
-void BipActivityDetailParser::add(QPointF ap)
+void BipActivityDetailParser::add(const ActivityCoordinate &ap)
 {
-    if (ap != lastActivityPoint) {
-        lastActivityPoint = ap;
-        activityTrack.addTrackPoint(ap);
+    if (ap != m_lastActivityPoint) {
+        m_lastActivityPoint = ap;
+        m_activityTrack << ap;
     } else {
         qDebug() << "skipping point!";
     }
@@ -166,25 +168,35 @@ void BipActivityDetailParser::add(QPointF ap)
 
 int BipActivityDetailParser::consumeUnknown2(const QByteArray &bytes, int offset)
 {
+    Q_UNUSED(bytes);
+    Q_UNUSED(offset)
     return 6; // just guessing...
 }
 
-int BipActivityDetailParser::consumePause(const QByteArray &bytes, int i)
+int BipActivityDetailParser::consumePause(const QByteArray &bytes, int offset)
 {
+    Q_UNUSED(bytes);
+    Q_UNUSED(offset)
     return 6; // just guessing...
 }
 
 int BipActivityDetailParser::consumeSpeed4(const QByteArray &bytes, int offset)
 {
+    Q_UNUSED(bytes);
+    Q_UNUSED(offset)
     return 6;
 }
 
 int BipActivityDetailParser::consumeSpeed5(const QByteArray &bytes, int offset)
 {
+    Q_UNUSED(bytes);
+    Q_UNUSED(offset)
     return 6;
 }
 
 int BipActivityDetailParser::consumeSpeed6(const QByteArray &bytes, int offset)
 {
+    Q_UNUSED(bytes);
+    Q_UNUSED(offset)
     return 6;
 }
