@@ -84,6 +84,8 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
             m_activityFetchOperation->handleData(value);
         } else if (m_operationRunning == 3 && m_sportsSummaryOperation) {
             m_sportsSummaryOperation->handleData(value);
+        } else if (m_operationRunning == 4 && m_sportsDetailOperation) {
+            m_sportsDetailOperation->handleData(value);
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
         qDebug() << "...got metadata";
@@ -102,13 +104,27 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
         } else if (m_operationRunning == 3 && m_sportsSummaryOperation) {
             if (m_sportsSummaryOperation->handleMetaData(value)) {
                 //Now the summary is finished, need to get the detail
+                bool createDetail = false;
+                ActivitySummary summary;
                 if (m_sportsSummaryOperation->success()) {
-                    ActivitySummary summary = m_sportsSummaryOperation->summary();
-
+                    qDebug() << "Finished summary data, now getting track detail";
+                    summary = m_sportsSummaryOperation->summary();
+                    createDetail = true;
                 }
 
                 delete m_sportsSummaryOperation;
                 m_sportsSummaryOperation = nullptr;
+                m_operationRunning = 0;
+                if (createDetail) {
+                    m_sportsDetailOperation = new SportsDetailOperation(this, m_conn, summary);
+                    m_operationRunning = 4;
+                    m_sportsDetailOperation->start();
+                }
+            }
+        }  else if (m_operationRunning == 3 && m_sportsDetailOperation) {
+            if (m_sportsDetailOperation->handleMetaData(value)) {
+                delete m_sportsDetailOperation;
+                m_sportsDetailOperation = nullptr;
                 m_operationRunning = 0;
             }
         }
@@ -319,7 +335,7 @@ void MiBandService::setFitnessGoal()
 void MiBandService::setAlertFitnessGoal()
 {
     bool alert = m_settings.value("/uk/co/piggz/amazfish/profile/alertfitnessgoal").toBool();
-    
+
     if (alert) {
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_GOAL_NOTIFICATION,4));
     } else {
@@ -331,7 +347,7 @@ void MiBandService::setAlertFitnessGoal()
 void MiBandService::setEnableDisplayOnLiftWrist()
 {
     bool disp = m_settings.value("/uk/co/piggz/amazfish/profile/displayonliftwrist").toBool();
-    
+
     if (disp) {
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST,4));
     } else {
@@ -353,7 +369,7 @@ void MiBandService::setDisplayItems()
         message(tr("Firmware is too old to set display items, V0.1.1.14 is required"));
         return;
     }
-    
+
     if (m_settings.value("/uk/co/piggz/amazfish/device/displaystatus", QVariant(true)).toBool()) {
         items1 |= 0x02;
     }
@@ -476,9 +492,9 @@ void MiBandService::setAlarms()
     for (int i =0; i < 5; ++i) {
         int base =0;
         int repeatMask=0;
-        
+
         QString configBase = "/uk/co/piggz/amazfish/alarms/alarm" + QString::number(i+1) + "/";
-        
+
         bool enabled = (m_settings.value(configBase + "enabled", QVariant(false)).toBool());
         if (enabled) {
             base = 128;

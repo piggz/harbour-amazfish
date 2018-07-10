@@ -182,14 +182,6 @@
         <translation>Det finns ingen data att överföra</translation>
     </message>
     <message>
-        <source>About to transfer log data from </source>
-        <translation>Inleder överföring av loggdata från </translation>
-    </message>
-    <message>
-        <source>Finished transferring data</source>
-        <translation>Dataöverföring slutförd</translation>
-    </message>
-    <message>
         <source>Update operation failed</source>
         <translation>Uppdatering misslyckades</translation>
     </message>

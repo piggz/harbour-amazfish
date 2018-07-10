@@ -42,6 +42,9 @@ void SportsSummaryOperation::handleData(const QByteArray &data)
     qDebug() << "Data counter:" << data[0];
     if ((m_lastPacketCounter + 1) == data[0] ) {
         m_lastPacketCounter++;
+        if (m_lastPacketCounter > 255) {
+            m_lastPacketCounter = 0;
+        }
         m_buffer += data.mid(1);
     } else {
         qDebug() << "invalid package counter: " << data[0] << ", last was: " << m_lastPacketCounter;
@@ -55,6 +58,8 @@ bool SportsSummaryOperation::finished(bool success)
     bool saved = true;
     if (success) {
         m_summary = parseSummary();
+        m_summary.setName(activityName());
+
         saved = saveSummary();
         m_success = saved;
     }
@@ -151,7 +156,6 @@ ActivitySummary SportsSummaryOperation::parseSummary()
 
     //buffer.getShort(); //
 
-    summary.setName(activityName());
     return summary;
 }
 
@@ -231,5 +235,6 @@ ActivitySummary SportsSummaryOperation::summary()
 
 QString SportsSummaryOperation::activityName()
 {
-    return (ActivityKind::toString(m_summary.activityKind())) + "-" + m_summary.startTime().toString("YYYYMMdd-HHmm");
+    qDebug() << "Getting activity name";
+    return (ActivityKind::toString(m_summary.activityKind())) + "-" + m_summary.startTime().toString("yyyyMMdd-HHmm");
 }

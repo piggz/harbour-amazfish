@@ -7,6 +7,7 @@
 #include "logfetchoperation.h"
 #include "activityfetchoperation.h"
 #include "sportssummaryoperation.h"
+#include "sportsdetailoperation.h"
 
 /*
 {0000FEE0-0000-1000-8000-00805f9b34fb} MiBand Service
@@ -150,6 +151,7 @@ private:
     LogFetchOperation *m_logFetchOperation = nullptr;
     ActivityFetchOperation *m_activityFetchOperation = nullptr;
     SportsSummaryOperation *m_sportsSummaryOperation = nullptr;
+    SportsDetailOperation *m_sportsDetailOperation = nullptr;
 
     KDbConnection *m_conn = nullptr;
 };

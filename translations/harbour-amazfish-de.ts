@@ -182,14 +182,6 @@
         <translation>Keine Daten zu übertragen</translation>
     </message>
     <message>
-        <source>About to transfer log data from </source>
-        <translation>Über die Übertragung von Aktivitätsdaten aus </translation>
-    </message>
-    <message>
-        <source>Finished transferring data</source>
-        <translation>Übertragung der Daten beendet</translation>
-    </message>
-    <message>
         <source>Update operation failed</source>
         <translation>Aktualisierungsvorgang ist fehlgeschlagen</translation>
     </message>

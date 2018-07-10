@@ -40,6 +40,9 @@ void SportsDetailOperation::handleData(const QByteArray &data)
     qDebug() << "Data counter:" << data[0];
     if ((m_lastPacketCounter + 1) == data[0] ) {
         m_lastPacketCounter++;
+        if (m_lastPacketCounter > 255) {
+            m_lastPacketCounter = 0;
+        }
         m_buffer += data.mid(1);
     } else {
         qDebug() << "invalid package counter: " << data[0] << ", last was: " << m_lastPacketCounter;
@@ -54,7 +57,8 @@ bool SportsDetailOperation::finished(bool success)
     if (success) {
         BipActivityDetailParser parser(m_summary);
         parser.parse(m_buffer);
-
+        QString gpx = parser.toText();
+        qDebug() << gpx;
     }
     return saved;
 }

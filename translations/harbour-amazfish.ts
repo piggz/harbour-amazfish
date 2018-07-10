@@ -182,14 +182,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About to transfer log data from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Finished transferring data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Update operation failed</source>
         <translation type="unfinished"></translation>
     </message>
