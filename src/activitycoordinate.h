@@ -17,11 +17,14 @@ public:
     
     void setHeartRate(int hr);;
     int heartRate();
+    
+    bool isValid();
 private:
     
     QGeoCoordinate m_coordinate;
     QDateTime m_timeStamp;
     int m_heartRate = 0;    
+    bool m_isValid = false;
 };
 
 #endif

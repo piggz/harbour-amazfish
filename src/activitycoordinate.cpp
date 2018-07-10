@@ -33,3 +33,8 @@ int ActivityCoordinate::heartRate()
 {
     return m_heartRate;
 }
+
+bool ActivityCoordinate::isValid()
+{
+    return m_isValid;
+}

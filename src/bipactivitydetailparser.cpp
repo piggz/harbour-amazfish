@@ -92,7 +92,7 @@ int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &b
     
     coordinate.setLongitude(convertHuamiValueToDecimalDegrees(m_baseLongitude));
     coordinate.setLatitude(convertHuamiValueToDecimalDegrees(m_baseLatitude));
-     cordinate.setAltidude(m_baseAltitude);
+     coordinate.setAltidude(m_baseAltitude);
 
     ActivityCoordinate ap = getActivityPointFor(timeOffset);
     ap.setCoordinate(coordinate);
@@ -119,11 +119,11 @@ int BipActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offse
         // new version
         //            LOG.info("detected heart rate in 'new' version, where version is: " + summary.getVersion());
         //LOG.info("detected heart rate in 'new' version format");
-        ActivityPoint ap = getActivityPointFor(timeOffsetSeconds);
+        ActivityCoordiiate ap = getActivityPointFor(timeOffsetSeconds);
         ap.setHeartRate(v1);
         add(ap);
     } else {
-        ActivityPoint ap = getActivityPointFor(v1);
+        ActivityCoordinate ap = getActivityPointFor(v1);
         ap.setHeartRate(v2);
         add(ap);
 
@@ -141,8 +141,8 @@ int BipActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offse
 ActivityCoordinate BipActivityDetailParser::getActivityPointFor(long timeOffsetSeconds)
 {
     QDateTime time = makeAbsolute(timeOffsetSeconds);
-    if (m_lastActivityPoint != null) {
-        if (m_lastActivityPoint.getTime().equals(time)) {
+    if (m_lastActivityPoint.isValid()) {
+        if (m_lastActivityPoint.timeStamp() == time) {
             return m_lastActivityPoint;
         }
     }
