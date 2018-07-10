@@ -33,6 +33,7 @@ private:
     ActivitySummary parseSummary();
     bool saveSummary();
     bool finished(bool success);
+    QString activityName();
 
     KDbConnection *m_conn;
 };

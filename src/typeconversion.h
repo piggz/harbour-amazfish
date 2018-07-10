@@ -13,7 +13,11 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
 QByteArray dateTimeToBytes(const QDateTime &dt, int format);
 int toUint16(char val1, char val2);
 int toUint32(char val1, char val2, char val3, char val4);
-
+long toUnsigned(int unsignedInt);
+int toUnsigned(short value);
+int toUnsigned(char value);
+int toInt16(char val1, char val2);
+int toUint16(char value);
 }
 
 #endif // TYPECONVERSION_H

@@ -7,6 +7,7 @@
 #include "mibandservice.h"
 #include "typeconversion.h"
 #include "activitykind.h"
+#include "bipactivitydetailparser.h"
 
 SportsDetailOperation::SportsDetailOperation(QBLEService *service, KDbConnection *conn, const ActivitySummary &summary) : AbstractFetchOperation(service)
 {
@@ -51,15 +52,11 @@ bool SportsDetailOperation::finished(bool success)
 {
     bool saved = true;
     if (success) {
-//        ActivitySummary summary = parseDetail();
-//        saved = saveSummary(summary);
+        BipActivityDetailParser parser(m_summary);
+        parser.parse(m_buffer);
+
     }
     return saved;
-}
-
-ActivitySummary SportsDetailOperation::parseDetail()
-{
-
 }
 
 bool SportsDetailOperation::saveDetail()

@@ -10,15 +10,18 @@ public:
    ActivityCoordinate();
     
     void setCoordinate(const QGeoCoordinate &coordinate);
-    QGeoCoordinate coordinate();
+    QGeoCoordinate coordinate() const;
     
     void setTimeStamp(const QDateTime& timeStamp);
-    QDateTime timeStamp();
+    QDateTime timeStamp() const;
     
-    void setHeartRate(int hr);;
-    int heartRate();
+    void setHeartRate(int hr);
+    int heartRate() const;
     
-    bool isValid();
+    bool isValid() const;
+    bool operator==(const ActivityCoordinate &other) const;
+    bool operator!=(const ActivityCoordinate &other) const;
+
 private:
     
     QGeoCoordinate m_coordinate;

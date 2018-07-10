@@ -151,6 +151,7 @@ ActivitySummary SportsSummaryOperation::parseSummary()
 
     //buffer.getShort(); //
 
+    summary.setName(activityName());
     return summary;
 }
 
@@ -168,6 +169,7 @@ bool SportsSummaryOperation::saveSummary()
 
         KDbFieldList fields;
 
+        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("name"));
         fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("version"));
         fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp"));
         fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp_dt"));
@@ -182,6 +184,7 @@ bool SportsSummaryOperation::saveSummary()
 
 
         QList<QVariant> values;
+        values << m_summary.name();
         values << m_summary.version();
         values << m_summary.startTime().toMSecsSinceEpoch() / 1000;
         values << m_summary.startTime();
@@ -224,4 +227,9 @@ bool SportsSummaryOperation::success() const
 ActivitySummary SportsSummaryOperation::summary()
 {
     return m_summary;
+}
+
+QString SportsSummaryOperation::activityName()
+{
+    return (ActivityKind::toString(m_summary.activityKind())) + "-" + m_summary.startTime().toString("YYYYMMdd-HHmm");
 }

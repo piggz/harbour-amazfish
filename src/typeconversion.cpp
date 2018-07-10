@@ -107,4 +107,22 @@ int toUint32(char val1, char val2, char val3, char val4) {
     return (val1 & 0xff) | ((val2 & 0xff) << 8) | ((val3 & 0xff) << 16) | ((val4 & 0xff) << 24);
 }
 
+long toUnsigned(int unsignedInt) {
+    return ((long) unsignedInt) & 0xffffffffL;
+}
+int toUnsigned(short value) {
+    return value & 0xffff;
+}
+
+int toUnsigned(char value) {
+    return value & 0xff;
+}
+
+int toInt16(char val1, char val2) {
+    return (short) (val1 & 0xff | ((val2 & 0xff) << 8));
+}
+
+int toUint16(char value) {
+    return toUnsigned(value);
+}
 }

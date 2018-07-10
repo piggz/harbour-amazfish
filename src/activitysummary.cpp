@@ -15,6 +15,16 @@ uint ActivitySummary::id() const
     return m_id;
 }
 
+void ActivitySummary::setName(const QString &n)
+{
+    m_name = n;
+}
+
+QString ActivitySummary::name() const
+{
+    return m_name;
+}
+
 void ActivitySummary::setVersion(short v)
 {
     m_version=v;

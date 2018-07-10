@@ -26,55 +26,52 @@ void BipActivityDetailParser::setSkipCounterByte(bool skip)
     m_skipCounterByte = skip;
 }
 
-QString BipActivityDetailParser::parse(const QByteArray &bytes)
+void BipActivityDetailParser::parse(const QByteArray &bytes)
 {
     int i = 0;
- 
-        long totalTimeOffset = 0;
-        int lastTimeOffset = 0;
-        while (i < bytes.length()) {
-            if (m_skipCounterByte && (i % 17) == 0) {
-                i++;
-            }
 
-            char type = bytes[i++];
-            int timeOffset = TypeConversion::toUnsigned(bytes[i++]);
-            // handle timeOffset overflows (1 byte, always increasing, relative to base)
-            if (lastTimeOffset <= timeOffset) {
-                timeOffset = timeOffset - lastTimeOffset;
-                lastTimeOffset += timeOffset;
-            } else {
-                lastTimeOffset = timeOffset;
-            }
-            totalTimeOffset += timeOffset;
-
-            switch (type) {
-            case TYPE_GPS:
-                i += consumeGPSAndUpdateBaseLocation(bytes, i, totalTimeOffset);
-                break;
-            case TYPE_HR:
-                i += consumeHeartRate(bytes, i, totalTimeOffset);
-                break;
-            case TYPE_UNKNOWN2:
-                i += consumeUnknown2(bytes, i);
-                break;
-            case TYPE_PAUSE:
-                i += consumePause(bytes, i);
-                break;
-            case TYPE_SPEED4:
-                i += consumeSpeed4(bytes, i);
-                break;
-            case TYPE_SPEED5:
-                i += consumeSpeed5(bytes, i);
-                break;
-            case TYPE_GPS_SPEED6:
-                i += consumeSpeed6(bytes, i);
-                break;
-            }
+    long totalTimeOffset = 0;
+    int lastTimeOffset = 0;
+    while (i < bytes.length()) {
+        if (m_skipCounterByte && (i % 17) == 0) {
+            i++;
         }
-    
 
-    return QString();
+        char type = bytes[i++];
+        int timeOffset = TypeConversion::toUnsigned(bytes[i++]);
+        // handle timeOffset overflows (1 byte, always increasing, relative to base)
+        if (lastTimeOffset <= timeOffset) {
+            timeOffset = timeOffset - lastTimeOffset;
+            lastTimeOffset += timeOffset;
+        } else {
+            lastTimeOffset = timeOffset;
+        }
+        totalTimeOffset += timeOffset;
+
+        switch (type) {
+        case TYPE_GPS:
+            i += consumeGPSAndUpdateBaseLocation(bytes, i, totalTimeOffset);
+            break;
+        case TYPE_HR:
+            i += consumeHeartRate(bytes, i, totalTimeOffset);
+            break;
+        case TYPE_UNKNOWN2:
+            i += consumeUnknown2(bytes, i);
+            break;
+        case TYPE_PAUSE:
+            i += consumePause(bytes, i);
+            break;
+        case TYPE_SPEED4:
+            i += consumeSpeed4(bytes, i);
+            break;
+        case TYPE_SPEED5:
+            i += consumeSpeed5(bytes, i);
+            break;
+        case TYPE_GPS_SPEED6:
+            i += consumeSpeed6(bytes, i);
+            break;
+        }
+    }
 }
 
 int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &bytes, int offset, long timeOffset)
@@ -92,7 +89,7 @@ int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &b
     
     coordinate.setLongitude(convertHuamiValueToDecimalDegrees(m_baseLongitude));
     coordinate.setLatitude(convertHuamiValueToDecimalDegrees(m_baseLatitude));
-     coordinate.setAltidude(m_baseAltitude);
+    coordinate.setAltitude(m_baseAltitude);
 
     ActivityCoordinate ap = getActivityPointFor(timeOffset);
     ap.setCoordinate(coordinate);
@@ -119,7 +116,7 @@ int BipActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offse
         // new version
         //            LOG.info("detected heart rate in 'new' version, where version is: " + summary.getVersion());
         //LOG.info("detected heart rate in 'new' version format");
-        ActivityCoordiiate ap = getActivityPointFor(timeOffsetSeconds);
+        ActivityCoordinate ap = getActivityPointFor(timeOffsetSeconds);
         ap.setHeartRate(v1);
         add(ap);
     } else {
@@ -147,7 +144,7 @@ ActivityCoordinate BipActivityDetailParser::getActivityPointFor(long timeOffsetS
         }
     }
     ActivityCoordinate p;
-    p.setDateTime(time);
+    p.setTimeStamp(time);
     return p;
 }
 
@@ -199,4 +196,38 @@ int BipActivityDetailParser::consumeSpeed6(const QByteArray &bytes, int offset)
     Q_UNUSED(bytes);
     Q_UNUSED(offset)
     return 6;
+}
+
+QString BipActivityDetailParser::toText()
+{
+    QString str;
+    QTextStream out(&str);
+    out.setRealNumberPrecision(10);
+
+    out << "<?xml version=\"1.0\" standalone=\"yes\"?>" << endl;
+    out << "<?xml-stylesheet type=\"text/xsl\" href=\"details.xsl\"?>" << endl;
+    out << "<gpx" << endl;
+    out << "version=\"1.0\"" << endl;
+    out << "creator=\"Amazfish for SailfishOS\"" << endl;
+    out << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << endl;
+    out << "xmlns=\"http://www.topografix.com/GPX/1/0\"" << endl;
+    out << "xmlns:topografix=\"http://www.topografix.com/GPX/Private/TopoGrafix/0/1\"" << endl;
+    out << "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.topografix.com/GPX/Private/TopoGrafix/0/1 http://www.topografix.com/GPX/Private/TopoGrafix/0/1/topografix.xsd\">" << endl;
+
+    out << "<trk>" << endl;
+    out << "<trkseg>" << endl;
+
+    foreach(ActivityCoordinate pos, m_activityTrack) {
+        out << "<trkpt lat=\""<< pos.coordinate().latitude() << "\" lon=\"" << pos.coordinate().longitude() << "\">" << endl;
+        out << "<ele>" << pos.coordinate().altitude() << "</ele>" << endl;
+        out << "<time>" << pos.timeStamp().toString(Qt::ISODate) << "</time>" << endl;
+        out << "<sym>Waypoint</sym>" << endl;
+        out << "<extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>" << pos.heartRate() << "</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions>";
+        out << "</trkpt>" << endl;
+    }
+    out << "</trkseg>" << endl;
+    out << "</trk>" << endl;
+    out << "</gpx>" << endl;
+
+    return str;
 }

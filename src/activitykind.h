@@ -1,6 +1,8 @@
 #ifndef ACTIVITYKIND_H
 #define ACTIVITYKIND_H
 
+#include <QString>
+
 class ActivityKind
 {
     public:
@@ -19,6 +21,7 @@ class ActivityKind
     };
     
     static Type fromBipType(int type);
+    static QString toString(Type type);
  
  };
 

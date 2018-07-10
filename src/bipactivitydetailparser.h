@@ -9,7 +9,8 @@ class BipActivityDetailParser
 public:
     BipActivityDetailParser(ActivitySummary summary);
 
-    QString parse(const QByteArray &bytes);
+    void parse(const QByteArray &bytes);
+    QString toText();
 
 private:
     static const char TYPE_GPS = 0x00;
