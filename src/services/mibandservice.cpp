@@ -77,7 +77,7 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
             emit stepsChanged();
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
-        qDebug() << "...got data";
+        //qDebug() << "...got data";
         if (m_operationRunning == 1 && m_logFetchOperation) {
             m_logFetchOperation->handleData(value);
         } else if (m_operationRunning == 2 && m_activityFetchOperation) {

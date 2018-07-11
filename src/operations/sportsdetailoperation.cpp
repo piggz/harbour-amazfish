@@ -37,7 +37,7 @@ void SportsDetailOperation::handleData(const QByteArray &data)
         return;
     }
 
-    qDebug() << "Data counter:" << data[0];
+   // qDebug() << "Data counter:" << data[0];
    // if ((m_lastPacketCounter + 1) == data[0] ) {
    //     m_lastPacketCounter++;
    //     if (m_lastPacketCounter > 255) {
