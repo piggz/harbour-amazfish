@@ -121,7 +121,7 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
                     m_sportsDetailOperation->start();
                 }
             }
-        }  else if (m_operationRunning == 3 && m_sportsDetailOperation) {
+        }  else if (m_operationRunning == 4 && m_sportsDetailOperation) {
             if (m_sportsDetailOperation->handleMetaData(value)) {
                 delete m_sportsDetailOperation;
                 m_sportsDetailOperation = nullptr;
