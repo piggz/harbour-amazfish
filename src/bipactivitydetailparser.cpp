@@ -10,7 +10,9 @@ BipActivityDetailParser::BipActivityDetailParser(ActivitySummary summary) {
     m_baseAltitude = summary.baseAltitude();
     m_baseDate = summary.startTime();
 
-    //this.activityTrack = new ActivityTrack();
+    qDebug() << "Base data::" << m_baseLongitude << m_baseLatitude << m_baseAltitude << m_baseDate;
+    qDebug() << convertHuamiValueToDecimalDegrees(m_baseLongitude) << convertHuamiValueToDecimalDegrees(m_baseLatitude);
+    
     //activityTrack.setUser(summary.getUser());
     //activityTrack.setDevice(summary.getDevice());
     //activityTrack.setName(summary.getName() + "-" + summary.getId());
@@ -90,6 +92,8 @@ int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &b
     coordinate.setLongitude(convertHuamiValueToDecimalDegrees(m_baseLongitude));
     coordinate.setLatitude(convertHuamiValueToDecimalDegrees(m_baseLatitude));
     coordinate.setAltitude(m_baseAltitude);
+    
+    qDebug() << coordinate << timeOffset;
 
     ActivityCoordinate ap = getActivityPointFor(timeOffset);
     ap.setCoordinate(coordinate);

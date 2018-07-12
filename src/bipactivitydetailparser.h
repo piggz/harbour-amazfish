@@ -22,8 +22,8 @@ private:
     static const char TYPE_GPS_SPEED6 = 0x06;
     static constexpr double HUAMI_TO_DECIMAL_DEGREES_DIVISOR = 3000000.0;
 
-    long m_baseLongitude = 0.0;
-    long m_baseLatitude = 0.0;
+    int m_baseLongitude = 0;
+    int m_baseLatitude = 0;
     int m_baseAltitude = 0;
     QDateTime m_baseDate;
     bool m_skipCounterByte = false;
