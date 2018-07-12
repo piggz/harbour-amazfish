@@ -52,7 +52,7 @@ MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService
 
 void MiBandService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << "MiBand Changed:" << characteristic << value;
+    qDebug() << "MiBand Changed:" << characteristic << value.toHex();
 
     if (value[0] == RESPONSE && value[1] == COMMAND_REQUEST_GPS_VERSION && value[2] == SUCCESS) {
         m_gpsVersion = value.mid(3);

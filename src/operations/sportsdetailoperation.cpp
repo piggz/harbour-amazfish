@@ -58,7 +58,18 @@ bool SportsDetailOperation::finished(bool success)
         BipActivityDetailParser parser(m_summary);
         parser.parse(m_buffer);
         QString gpx = parser.toText();
-        qDebug() << gpx;
+        //qDebug() << gpx;
+
+        QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+        QString filename = m_summary.name() + ".gpx";
+        QFile logFile(cachelocation.absolutePath() + "/logs/" + filename);
+
+
+        if(logFile.open(QIODevice::WriteOnly)) {
+            QTextStream stream( &logFile );
+            stream << gpx;
+        }
+
     }
     return saved;
 }
