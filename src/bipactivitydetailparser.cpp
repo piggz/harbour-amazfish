@@ -225,8 +225,7 @@ QString BipActivityDetailParser::toText()
         out << "<trkpt lat=\""<< pos.coordinate().latitude() << "\" lon=\"" << pos.coordinate().longitude() << "\">" << endl;
         out << "<ele>" << pos.coordinate().altitude() << "</ele>" << endl;
         out << "<time>" << pos.timeStamp().toString(Qt::ISODate) << "</time>" << endl;
-        out << "<sym>Waypoint</sym>" << endl;
-        out << "<extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>" << pos.heartRate() << "</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions>";
+        out << "<extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>" << pos.heartRate() << "</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions>" << endl;
         out << "</trkpt>" << endl;
     }
     out << "</trkseg>" << endl;
