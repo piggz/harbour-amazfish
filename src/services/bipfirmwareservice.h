@@ -37,6 +37,7 @@ public:
     Q_SIGNAL void downloadProgress(int percent);
 
     Q_INVOKABLE virtual bool operationRunning() override;
+    void abortOperations();
 
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);

@@ -1,6 +1,6 @@
 Name: harbour-amazfish
 Summary: Amazfit Bip interface application
-Version: 0.6.8
+Version: 0.7.0
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
@@ -28,6 +28,7 @@ PkgConfigBR:
   - Qt5Contacts
   - Qt5Widgets
   - Qt5Xml
+  - Qt5Positioning
   - mlite5
 
 # Build dependencies without a pkgconfig setup can be listed here

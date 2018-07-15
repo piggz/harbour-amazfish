@@ -1,6 +1,7 @@
 #include "bipactivitydetailparser.h"
 #include "typeconversion.h"
 #include <QDebug>
+#include <QTimeZone>
 
 BipActivityDetailParser::BipActivityDetailParser(ActivitySummary summary) {
     m_summary = summary;
@@ -11,6 +12,7 @@ BipActivityDetailParser::BipActivityDetailParser(ActivitySummary summary) {
     m_baseDate = summary.startTime();
 
     qDebug() << "Base data::" << m_baseLongitude << m_baseLatitude << m_baseAltitude << m_baseDate;
+    qDebug() << summary.startTime() << m_summary.startTime();
     qDebug() << convertHuamiValueToDecimalDegrees(m_baseLongitude) << convertHuamiValueToDecimalDegrees(m_baseLatitude);
     
     //activityTrack.setUser(summary.getUser());
@@ -93,10 +95,9 @@ int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &b
     coordinate.setLatitude(convertHuamiValueToDecimalDegrees(m_baseLatitude));
     coordinate.setAltitude(m_baseAltitude);
     
-    qDebug() << coordinate << timeOffset;
-
     ActivityCoordinate ap = getActivityPointFor(timeOffset);
     ap.setCoordinate(coordinate);
+    ap.setHeartRate(m_lastHeartrate);
     add(ap);
 
     return i;
@@ -120,21 +121,23 @@ int BipActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offse
         // new version
         //            LOG.info("detected heart rate in 'new' version, where version is: " + summary.getVersion());
         //LOG.info("detected heart rate in 'new' version format");
-        ActivityCoordinate ap = getActivityPointFor(timeOffsetSeconds);
-        ap.setHeartRate(v1);
-        add(ap);
+        //ActivityCoordinate ap = getActivityPointFor(timeOffsetSeconds);
+        //ap.setHeartRate(v1);
+        //add(ap);
+        m_lastHeartrate = v1;
     } else {
-        ActivityCoordinate ap = getActivityPointFor(v1);
-        ap.setHeartRate(v2);
-        add(ap);
+        //ActivityCoordinate ap = getActivityPointFor(v1);
+        //ap.setHeartRate(v2);
+        //add(ap);
 
-        ap = getActivityPointFor(v3);
-        ap.setHeartRate(v4);
-        add(ap);
+        //ap = getActivityPointFor(v3);
+        //ap.setHeartRate(v4);
+        //add(ap);
 
-        ap = getActivityPointFor(v5);
-        ap.setHeartRate(v6);
-        add(ap);
+        //ap = getActivityPointFor(v5);
+        //ap.setHeartRate(v6);
+        //add(ap);
+        m_lastHeartrate = v6;
     }
     return 6;
 }
@@ -211,12 +214,22 @@ QString BipActivityDetailParser::toText()
     out << "<?xml version=\"1.0\" standalone=\"yes\"?>" << endl;
     out << "<?xml-stylesheet type=\"text/xsl\" href=\"details.xsl\"?>" << endl;
     out << "<gpx" << endl;
-    out << "version=\"1.0\"" << endl;
+    out << "version=\"1.1\"" << endl;
     out << "creator=\"Amazfish for SailfishOS\"" << endl;
     out << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << endl;
-    out << "xmlns=\"http://www.topografix.com/GPX/1/0\"" << endl;
+    out << "xmlns=\"http://www.topografix.com/GPX/1/1\"" << endl;
     out << "xmlns:topografix=\"http://www.topografix.com/GPX/Private/TopoGrafix/0/1\"" << endl;
-    out << "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.topografix.com/GPX/Private/TopoGrafix/0/1 http://www.topografix.com/GPX/Private/TopoGrafix/0/1/topografix.xsd\">" << endl;
+    out << "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd\"" << endl;
+    out << "xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v1\">" << endl;
+
+    //Laufhelden compatible metadata
+    out << "<metadata>" << endl;
+    out << "<name>" << m_summary.name() << "</name>" << endl;
+    out << "<desc></desc>" << endl;
+    out << "<extensions>" << endl;
+    out << "<meerun activity=\"" << ActivityKind::toString(m_summary.activityKind()).toLower() << "\" />" << endl;
+    out << "</extensions>" << endl;
+    out << "</metadata>" << endl;
 
     out << "<trk>" << endl;
     out << "<trkseg>" << endl;
@@ -224,7 +237,10 @@ QString BipActivityDetailParser::toText()
     foreach(ActivityCoordinate pos, m_activityTrack) {
         out << "<trkpt lat=\""<< pos.coordinate().latitude() << "\" lon=\"" << pos.coordinate().longitude() << "\">" << endl;
         out << "<ele>" << pos.coordinate().altitude() << "</ele>" << endl;
-        out << "<time>" << pos.timeStamp().toString(Qt::ISODate) << "</time>" << endl;
+        QDateTime dt = pos.timeStamp();
+        dt.setTimeZone(QTimeZone::systemTimeZone());
+        dt.setTimeSpec(Qt::OffsetFromUTC);
+        out << "<time>" << dt.toString(Qt::ISODate) << "</time>" << endl;
         out << "<extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>" << pos.heartRate() << "</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions>" << endl;
         out << "</trkpt>" << endl;
     }

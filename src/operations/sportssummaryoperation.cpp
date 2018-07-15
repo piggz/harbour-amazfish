@@ -55,20 +55,16 @@ void SportsSummaryOperation::handleData(const QByteArray &data)
 
 bool SportsSummaryOperation::finished(bool success)
 {
-    bool saved = true;
     if (success) {
-        m_summary = parseSummary();
+        parseSummary();
         m_summary.setName(activityName());
-
-        saved = saveSummary();
-        m_success = saved;
+        m_success = true;
     }
-    return saved;
+    return success;
 }
 
-ActivitySummary SportsSummaryOperation::parseSummary()
+void SportsSummaryOperation::parseSummary()
 {
-    ActivitySummary summary;
     qDebug() << "Buffer:" << m_buffer.toHex();
 
     QDataStream stream(m_buffer);
@@ -76,15 +72,14 @@ ActivitySummary SportsSummaryOperation::parseSummary()
 
     quint16 version;
     stream >> version;
-    summary.setVersion(version);
+    m_summary.setVersion(version);
 
     quint16 kind;
     stream >> kind;
 
-    qDebug() << "raw kind" << kind;
     ActivityKind::Type  activityKind = ActivityKind::Unknown;
     activityKind = ActivityKind::fromBipType(kind);
-    summary.setActivityKind(activityKind);
+    m_summary.setActivityKind(activityKind);
 
     // FIXME: should honor timezone we were in at that time etc
     quint32 timestamp_start = 0;
@@ -103,8 +98,14 @@ ActivitySummary SportsSummaryOperation::parseSummary()
     long duration = timestamp_end - timestamp_start;
     //summary->setStartTime(new Date(getLastStartTimestamp().getTimeInMillis()));
     //summary->setEndTime(new Date(getLastStartTimestamp().getTimeInMillis() + duration));
-    summary.setStartTime(startDate());
-    summary.setEndTime(startDate().addSecs(duration));
+
+    //startDate is in format that doent include DST, so we need to convert it to a real dt
+    QDateTime temp = QDateTime::fromString(startDate().toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
+    QDateTime start = temp.toTimeSpec(Qt::UTC);
+    qDebug() << "Time convertion:" << temp << start << startDate();
+
+    m_summary.setStartTime(start);
+    m_summary.setEndTime(start.addSecs(duration));
 
 
     qint32 baseLongitude = 0;
@@ -112,9 +113,9 @@ ActivitySummary SportsSummaryOperation::parseSummary()
     qint32 baseAltitude = 0;
     stream >> baseLongitude >> baseLatitude >> baseAltitude;
 
-    summary.setBaseLongitude(baseLongitude);
-    summary.setBaseLatitude(baseLatitude);
-    summary.setBaseAltitude(baseAltitude);
+    m_summary.setBaseLongitude(baseLongitude);
+    m_summary.setBaseLatitude(baseLatitude);
+    m_summary.setBaseAltitude(baseAltitude);
     
 
     //        summary.setBaseCoordinate(new GPSCoordinate(baseLatitude, baseLongitude, baseAltitude));
@@ -155,72 +156,6 @@ ActivitySummary SportsSummaryOperation::parseSummary()
     //        summary.setAverageStride(BLETypeConversions.toUnsigned(buffer.getShort()));
 
     //buffer.getShort(); //
-
-    return summary;
-}
-
-bool SportsSummaryOperation::saveSummary()
-{
-    bool saved = true;
-    if (m_conn && m_conn->isDatabaseUsed()) {
-        m_sampleTime = startDate();
-
-        uint id = qHash(m_settings.value("/uk/co/piggz/amazfish/profile/name").toString());
-        uint devid = qHash(m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString());
-
-        KDbTransaction transaction = m_conn->beginTransaction();
-        KDbTransactionGuard tg(transaction);
-
-        KDbFieldList fields;
-
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("name"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("version"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("start_timestamp_dt"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("end_timestamp"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("end_timestamp_dt"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("device_id"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("user_id"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("kind"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_longitude"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_latitude"));
-        fields.addField(m_conn->tableSchema("mi_band_sports_summary")->field("base_altitude"));
-
-
-        QList<QVariant> values;
-        values << m_summary.name();
-        values << m_summary.version();
-        values << m_summary.startTime().toMSecsSinceEpoch() / 1000;
-        values << m_summary.startTime();
-        values << m_summary.endTime().toMSecsSinceEpoch() / 1000;
-        values << m_summary.endTime();
-        values << devid;
-        values << id;
-        values << m_summary.activityKind();
-        values << m_summary.baseLongitude() / 3000000.0;
-        values << m_summary.baseLatitude() / 3000000.0;
-        values << m_summary.baseAltitude();
-
-        qDebug() << "Saving sports data" << values;
-
-        QSharedPointer<KDbSqlResult> result = m_conn->insertRecord(&fields, values);
-
-        if (!result->lastResult().isError()) {
-            long lastId = result->lastInsertRecordId();
-            m_summary.setId(lastId);
-            qDebug() << "Record Id is" << m_summary.id();
-        } else {
-            qDebug() << "error inserting record";
-            saved = false;
-        }
-
-        tg.commit();
-    } else {
-        qDebug() << "Database not connected";
-        saved = false;
-    }
-
-    return saved;
 }
 
 bool SportsSummaryOperation::success() const
@@ -236,5 +171,5 @@ ActivitySummary SportsSummaryOperation::summary()
 QString SportsSummaryOperation::activityName()
 {
     qDebug() << "Getting activity name";
-    return (ActivityKind::toString(m_summary.activityKind())) + "-" + m_summary.startTime().toString("yyyyMMdd-HHmm");
+    return (ActivityKind::toString(m_summary.activityKind())) + "-" + m_summary.startTime().toLocalTime().toString("yyyyMMdd-HHmm");
 }

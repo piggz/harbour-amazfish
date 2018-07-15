@@ -10,6 +10,7 @@
 #include "qble/bluezadapter.h"
 #include "deviceinterface.h"
 #include "datasource.h"
+#include "sportsdatamodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -29,6 +30,8 @@ int main(int argc, char *argv[])
 
     DeviceInterface devInterface;
     BluezAdapter bluezAdapter;
+    SportsDataModel sportsDataModel;
+    sportsDataModel.setConnection(devInterface.dbConnection());
 
     qmlRegisterType<DeviceInfoService>();
     qmlRegisterType<MiBandService>();
@@ -42,6 +45,7 @@ int main(int argc, char *argv[])
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);
     view->rootContext()->setContextProperty("DeviceInterface", &devInterface);
+    view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
 
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));
     view->show();

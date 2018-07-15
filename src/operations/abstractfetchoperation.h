@@ -18,6 +18,7 @@ private:
     QDateTime m_startDate;
     QString m_lastSyncKey;
     SettingsManager m_settings;
+    bool m_abort = false;
 
 protected:
     void setStartDate(const QDateTime &sd);
@@ -26,6 +27,8 @@ protected:
     void setLastSyncKey(const QString &key);
     QDateTime lastActivitySync();
     void saveLastActivitySync(qint64 millis);
+
+    void setAbort(bool abort);
 };
 
 #endif // ABSTRACTFETCHOPERATION_H

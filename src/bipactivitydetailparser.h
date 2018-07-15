@@ -27,6 +27,8 @@ private:
     int m_baseAltitude = 0;
     QDateTime m_baseDate;
     bool m_skipCounterByte = false;
+    int m_lastHeartrate = 0;
+
     ActivityCoordinate m_lastActivityPoint;
     QList<ActivityCoordinate> m_activityTrack;
     ActivitySummary m_summary;

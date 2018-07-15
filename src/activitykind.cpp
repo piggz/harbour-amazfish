@@ -9,7 +9,7 @@ ActivityKind::Type ActivityKind::fromBipType(int type)
     } else if (type == 3) {
         return Walking;
     } else if (type == 4) {
-        return Cycling;
+        return Biking;
     }
     return Activity;
 }
@@ -43,8 +43,8 @@ QString ActivityKind::toString(Type type)
     if (type == Swimming) {
         return "Swimming";
     }
-    if (type == Cycling) {
-        return "Cycling";
+    if (type == Biking) {
+        return "Biking";
     }
     if (type == Treadmill) {
         return "Treadmill";

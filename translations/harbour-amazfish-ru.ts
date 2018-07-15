@@ -467,11 +467,11 @@
 <context>
     <name>SportsSummaryPage</name>
     <message>
-        <source>Download Sports</source>
+        <source>Sports Activities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sports Summary</source>
+        <source>Download Next Activity</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

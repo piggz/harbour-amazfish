@@ -42,6 +42,10 @@ void AbstractFetchOperation::setLastSyncKey(const QString &key)
 
 bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 {
+    if (m_abort) {
+        qDebug() << "Abort signalled from operation";
+        return true;
+    }
     if (value.length() == 15) {
         // first two bytes are whether our request was accepted
         if (value.mid(0, 3) == QByteArray(MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS, 3)) {
@@ -76,4 +80,9 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
         qDebug() << "Unexpected activity metadata: " << value;
     }
     return false;
+}
+
+void AbstractFetchOperation::setAbort(bool abort)
+{
+    m_abort = abort;
 }

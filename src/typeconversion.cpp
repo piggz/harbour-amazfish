@@ -71,7 +71,8 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
             timestamp.setTimeSpec(Qt::LocalTime);
         }*/
 
-        qDebug() << tz;
+        qDebug() << "Watch timezone is:" << tz;
+        qDebug() << "System timezone is" << QTimeZone::systemTimeZone() << QTimeZone::systemTimeZoneId();
 
         QDateTime timestamp(QDate(
                                 year,
@@ -82,8 +83,28 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
                 value[5] & 0xff,
                 value[6] & 0xff),
                 tz);
+        /*
+        QDateTime temp = QDateTime::fromString(timestamp.toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
+        qDebug() << "Timestamp: " << timestamp << timestamp.toString(Qt::ISODate);
+        qDebug() << "Conveted timestamp" << temp << temp.toString(Qt::ISODate);
 
+        QDateTime temp2 = temp.toTimeSpec( Qt::OffsetFromUTC);
+        qDebug() << "Conveted timestamp" << temp2 << temp2.toString(Qt::ISODate);
+        QDateTime temp3 = temp.toTimeSpec( Qt::UTC);
+        qDebug() << "Conveted timestamp" << temp3 << temp3.toString(Qt::ISODate);
 
+        QDateTime timestamp2(QDate(
+                                 year,
+                                 (value[2] & 0xff),
+                             value[3] & 0xff),
+                QTime(
+                    value[4] & 0xff,
+                value[5] & 0xff,
+                value[6] & 0xff));
+        qDebug() << "Timestamp2: " << timestamp2 << timestamp2.toString(Qt::ISODate);
+        QDateTime temp4 = timestamp2.toTimeSpec( Qt::UTC);
+        qDebug() << "Conveted timestamp4" << temp4 << temp3.toString(Qt::ISODate);
+        */
         /*
         if (honorDeviceTimeOffset) {
             int offsetInHours = MiBandCoordinator.getDeviceTimeOffsetHours();

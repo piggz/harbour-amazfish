@@ -26,6 +26,13 @@ ApplicationWindow
         tmrHideMessage.start();
     }
 
+    BusyIndicator {
+        size: BusyIndicatorSize.Large
+        anchors.centerIn: parent
+        visible: DeviceInterface.operationRunning
+        running: DeviceInterface.operationRunning
+    }
+
     Rectangle {
         id: rectMessage
         width: parent.width - 40

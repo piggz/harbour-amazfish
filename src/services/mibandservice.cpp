@@ -94,12 +94,14 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
                 delete m_logFetchOperation;
                 m_logFetchOperation = nullptr;
                 m_operationRunning = 0;
+                emit operationRunningChanged();
             }
         } else if (m_operationRunning == 2 && m_activityFetchOperation) {
             if (m_activityFetchOperation->handleMetaData(value)) {
                 delete m_activityFetchOperation;
                 m_activityFetchOperation = nullptr;
                 m_operationRunning = 0;
+                emit operationRunningChanged();
             }
         } else if (m_operationRunning == 3 && m_sportsSummaryOperation) {
             if (m_sportsSummaryOperation->handleMetaData(value)) {
@@ -115,10 +117,12 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
                 delete m_sportsSummaryOperation;
                 m_sportsSummaryOperation = nullptr;
                 m_operationRunning = 0;
+                emit operationRunningChanged();
                 if (createDetail) {
                     m_sportsDetailOperation = new SportsDetailOperation(this, m_conn, summary);
                     m_operationRunning = 4;
                     m_sportsDetailOperation->start();
+                    emit operationRunningChanged();
                 }
             }
         }  else if (m_operationRunning == 4 && m_sportsDetailOperation) {
@@ -126,6 +130,7 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
                 delete m_sportsDetailOperation;
                 m_sportsDetailOperation = nullptr;
                 m_operationRunning = 0;
+                emit operationRunningChanged();
             }
         }
     }
@@ -455,6 +460,7 @@ void MiBandService::fetchLogs()
         m_operationRunning = 1;
         m_logFetchOperation = new LogFetchOperation(this);
         m_logFetchOperation->start();
+        emit operationRunningChanged();
     } else {
         emit message(tr("An operation is currently running, please try later"));
     }
@@ -466,6 +472,7 @@ void MiBandService::fetchActivityData()
         m_operationRunning = 2;
         m_activityFetchOperation = new ActivityFetchOperation(this, m_conn);
         m_activityFetchOperation->start();
+        emit operationRunningChanged();
     } else {
         emit message(tr("An operation is currently running, please try later"));
     }
@@ -477,6 +484,7 @@ void MiBandService::fetchSportsSummaries()
         m_operationRunning = 3;
         m_sportsSummaryOperation = new SportsSummaryOperation(this, m_conn);
         m_sportsSummaryOperation->start();
+        emit operationRunningChanged();
     } else {
         emit message(tr("An operation is currently running, please try later"));
     }
@@ -518,5 +526,28 @@ void MiBandService::setAlarms()
 
 bool MiBandService::operationRunning()
 {
+    qDebug() << "Checking if MiBand operation running";
     return m_operationRunning > 0;
+}
+
+void MiBandService::abortOperations()
+{
+    if (m_logFetchOperation) {
+        delete m_logFetchOperation;
+        m_logFetchOperation = nullptr;
+    }
+    if (m_activityFetchOperation) {
+        delete m_activityFetchOperation;
+        m_activityFetchOperation = nullptr;
+    }
+    if (m_sportsSummaryOperation) {
+        delete m_sportsSummaryOperation;
+        m_sportsSummaryOperation = nullptr;
+    }
+    if (m_sportsDetailOperation) {
+        delete m_sportsDetailOperation;
+        m_sportsDetailOperation = nullptr;
+    }
+    m_operationRunning = 0;
+    emit operationRunningChanged();
 }

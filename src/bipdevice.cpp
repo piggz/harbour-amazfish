@@ -238,13 +238,14 @@ void BipDevice::initialise()
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS);
 
         connect(mi, &MiBandService::message, this, &BipDevice::message);
-
+        connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
     if (mi2) {
         qDebug() << "Got mi2 service";
         connect(mi2, &MiBand2Service::authenticated, this, &BipDevice::authenticated, Qt::UniqueConnection);
+        connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 
         mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
         mi2->initialise(m_needsAuth);
@@ -254,6 +255,7 @@ void BipDevice::initialise()
     if (fw) {
         connect(fw, &BipFirmwareService::message, this, &BipDevice::message);
         connect(fw, &BipFirmwareService::downloadProgress, this, &BipDevice::downloadProgress);
+        connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 }
 

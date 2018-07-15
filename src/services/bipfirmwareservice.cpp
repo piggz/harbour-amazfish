@@ -60,3 +60,13 @@ bool BipFirmwareService::operationRunning()
 {
     return m_operationRunning > 0;
 }
+
+void BipFirmwareService::abortOperations()
+{
+    if (m_updateFirmware) {
+        delete m_updateFirmware;
+        m_updateFirmware = nullptr;
+    }
+    m_operationRunning = 0;
+    emit operationRunningChanged();
+}

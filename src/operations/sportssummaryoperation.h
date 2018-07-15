@@ -30,8 +30,7 @@ private:
     bool m_success = false;
     ActivitySummary m_summary;
 
-    ActivitySummary parseSummary();
-    bool saveSummary();
+    void parseSummary();
     bool finished(bool success);
     QString activityName();
 

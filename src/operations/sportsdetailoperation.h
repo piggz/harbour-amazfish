@@ -23,9 +23,10 @@ private:
     SettingsManager m_settings;
     int m_lastPacketCounter = 0;
     QByteArray m_buffer;
+    QString m_gpx;
 
     ActivitySummary parseDetail();
-    bool saveDetail();
+    bool saveSport();
     bool finished(bool success);
 
     KDbConnection *m_conn;

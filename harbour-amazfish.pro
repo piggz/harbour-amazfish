@@ -54,7 +54,8 @@ SOURCES += src/harbour-amazfish.cpp \
     src/operations/sportsdetailoperation.cpp \
     src/operations/abstractfetchoperation.cpp \
     src/bipactivitydetailparser.cpp \
-    src/activitycoordinate.cpp
+    src/activitycoordinate.cpp \
+    src/sportsdatamodel.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -127,7 +128,8 @@ HEADERS += \
     src/operations/sportsdetailoperation.h \
     src/operations/abstractfetchoperation.h \
     src/bipactivitydetailparser.h \
-    src/activitycoordinate.h
+    src/activitycoordinate.h \
+    src/sportsdatamodel.h
  
 
 include(qble/qble.pri)

@@ -467,12 +467,12 @@
 <context>
     <name>SportsSummaryPage</name>
     <message>
-        <source>Download Sports</source>
-        <translation>Ladda ner Sports</translation>
+        <source>Sports Activities</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sports Summary</source>
-        <translation>Sports-sammandrag</translation>
+        <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

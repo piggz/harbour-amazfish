@@ -16,7 +16,7 @@ class ActivityKind
         Running = 16,
         Walking = 32,
         Swimming = 64,
-        Cycling = 128,
+        Biking = 128,
         Treadmill = 256
     };
     

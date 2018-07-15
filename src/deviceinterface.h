@@ -31,6 +31,7 @@ public:
     DeviceInterface();
 
     Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
+    Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
 
     Q_INVOKABLE QString pair(const QString &address);
     Q_INVOKABLE void connectToDevice(const QString &address);
@@ -50,15 +51,15 @@ public:
 
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
+    Q_SIGNAL void operationRunningChanged();
+
+    Q_INVOKABLE bool operationRunning();
 
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
     Q_INVOKABLE void startDownload();
     Q_INVOKABLE void downloadSportsData();
 
-
-
-    bool operationRunning();
 
     KDbConnection *dbConnection();
 

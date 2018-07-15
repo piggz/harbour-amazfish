@@ -11,6 +11,8 @@ DeviceInterface::DeviceInterface()
     connect(m_bipDevice, &BipDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged);
     connect(m_bipDevice, &BipDevice::message, this, &DeviceInterface::message);
     connect(m_bipDevice, &BipDevice::downloadProgress, this, &DeviceInterface::downloadProgress);
+    connect(m_bipDevice, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
+
 
     m_adapter.setAdapterPath("/org/bluez/hci0");
 
@@ -208,9 +210,9 @@ void DeviceInterface::createTables()
     }
 
 
-    if (!m_conn->containsTable("mi_band_sports_summary")) {
-        KDbTableSchema *t_summary = new KDbTableSchema("mi_band_sports_summary");
-        t_summary->setCaption("Sports Summary");
+    if (!m_conn->containsTable("sports_data")) {
+        KDbTableSchema *t_summary = new KDbTableSchema("sports_data");
+        t_summary->setCaption("Sports Data");
         t_summary->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
         f->setCaption("ID");
 
@@ -245,11 +247,14 @@ void DeviceInterface::createTables()
         t_summary->addField(f = new KDbField("user_id", KDbField::Integer, nullptr, KDbField::Unsigned));
         f->setCaption("User ID");
 
+        t_summary->addField(f = new KDbField("gpx", KDbField::LongText));
+        f->setCaption("GPX Data");
+
         if (!m_conn->createTable(t_summary)) {
             qDebug() << m_conn->result();
             return;
         }
-        qDebug() << "-- mi_band_sports_summary created --";
+        qDebug() << "-- sports_data created --";
         qDebug() << *t_summary;
     }
 
@@ -331,6 +336,14 @@ void DeviceInterface::onConnectionStateChanged()
         if (hrmService() && !m_dbusHRM) {
             m_dbusHRM = new DBusHRM(hrmService(), miBandService(), this);
         }
+    } else {
+        //Terminate running operations
+        if (miBandService()) {
+            miBandService()->abortOperations();
+        }
+        if (firmwareService()) {
+            firmwareService()->abortOperations();
+        }
     }
     emit connectionStateChanged();
 }
@@ -359,6 +372,7 @@ void DeviceInterface::startDownload()
 
 bool DeviceInterface::operationRunning()
 {
+    qDebug() << "Checking if operation running";
     return m_bipDevice->operationRunning();
 }
 
