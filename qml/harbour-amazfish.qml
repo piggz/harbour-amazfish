@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
 import Nemo.Notifications 1.0
+import org.nemomobile.qtmpris 1.0
 
 ApplicationWindow
 {
@@ -67,6 +68,10 @@ ApplicationWindow
         }
     }
 
+    MprisManager {
+        id: mprisManager
+    }
+    
     Connections {
         target: DeviceInterface
         onMessage: {
@@ -75,6 +80,14 @@ ApplicationWindow
 
         onButtonPressed: {
             console.log("Button pressed:", presses);
+            
+            if (presses == 3 && mprisManager.canGoPrevious() {
+                mprisManager.previous();
+            }
+            
+            if (presses == 2 && mprisManager.canGoNext() {
+                mprisManager.next();
+            }
         }
     }
 }
