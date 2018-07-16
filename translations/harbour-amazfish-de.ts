@@ -468,11 +468,11 @@
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>Sportliche Aktivitäten</translation>
     </message>
     <message>
         <source>Download Next Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Weitere Aktivitäten abrufen</translation>
     </message>
 </context>
 </TS>
