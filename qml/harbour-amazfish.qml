@@ -72,5 +72,9 @@ ApplicationWindow
         onMessage: {
             showMessage(text);
         }
+
+        onButtonPressed: {
+            console.log("Button pressed:", presses);
+        }
     }
 }

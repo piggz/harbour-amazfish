@@ -12,7 +12,7 @@ DeviceInterface::DeviceInterface()
     connect(m_bipDevice, &BipDevice::message, this, &DeviceInterface::message);
     connect(m_bipDevice, &BipDevice::downloadProgress, this, &DeviceInterface::downloadProgress);
     connect(m_bipDevice, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
-
+    connect(m_bipDevice, &BipDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
 
     m_adapter.setAdapterPath("/org/bluez/hci0");
 

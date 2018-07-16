@@ -65,6 +65,8 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
             emit declineCall();
         } else if (value[0] == EVENT_IGNORE_CALL) {
             emit ignoreCall();
+        } else if (value[0] == EVENT_BUTTON) {
+            emit buttonPressed();
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO) {
         qDebug() << "...Got battery info";
@@ -515,7 +517,7 @@ void MiBandService::setAlarms()
 
         QByteArray cmd;
         cmd += 0x02;
-        cmd += (base + i + 1);
+        cmd += (base + i);
         cmd += m_settings.value(configBase + "hour", 0).toInt();
         cmd += m_settings.value(configBase + "minute", 0).toInt();
         cmd += repeatMask;

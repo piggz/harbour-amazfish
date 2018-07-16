@@ -16,6 +16,10 @@ BipDevice::BipDevice()
     connect(m_reconnectTimer, &QTimer::timeout, this, &BipDevice::reconnectionTimer);
 
     connect(this, &QBLEDevice::propertiesChanged, this, &BipDevice::onPropertiesChanged);
+
+    m_keyPressTimer = new QTimer(this);
+    m_keyPressTimer->setInterval(500);
+    connect(m_keyPressTimer, &QTimer::timeout, this, &BipDevice::buttonPressTimeout);
 }
 
 QString BipDevice::pair()
@@ -239,6 +243,7 @@ void BipDevice::initialise()
 
         connect(mi, &MiBandService::message, this, &BipDevice::message);
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
+        connect(mi, &MiBandService::buttonPressed, this, &BipDevice::handleButtonPressed, Qt::UniqueConnection);
     }
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
@@ -279,4 +284,19 @@ QString BipDevice::softwareRevision()
         }
     }
     return m_softwareRevision;
+}
+
+void BipDevice::handleButtonPressed()
+{
+    m_buttonPresses++;
+    m_keyPressTimer->stop();
+    m_keyPressTimer->start();
+}
+
+void BipDevice::buttonPressTimeout()
+{
+    int presses = m_buttonPresses;
+    m_buttonPresses = 0;
+    m_keyPressTimer->stop();
+    emit buttonPressed(presses);
 }

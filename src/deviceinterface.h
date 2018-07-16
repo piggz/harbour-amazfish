@@ -52,6 +52,7 @@ public:
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void operationRunningChanged();
+    Q_SIGNAL void buttonPressed(int presses);
 
     Q_INVOKABLE bool operationRunning();
 

@@ -105,6 +105,7 @@ public:
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
 
+    Q_SIGNAL void buttonPressed(int presses);
 private:
     void parseServices();
     bool m_needsAuth = false;
@@ -116,12 +117,16 @@ private:
     QTimer *m_reconnectTimer;
     SettingsManager m_settings;
     QString m_softwareRevision;
-    
+    int m_buttonPresses = 0;
+    QTimer *m_keyPressTimer = nullptr;
+
     void initialise();
     void setConnectionState(const QString &state);
     void reconnectionTimer();
 
     Q_SLOT void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    Q_SLOT void handleButtonPressed();
+    Q_SLOT void buttonPressTimeout();
 };
 
 #endif // BIPDEVICE_H

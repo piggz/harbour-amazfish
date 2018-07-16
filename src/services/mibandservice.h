@@ -9,6 +9,8 @@
 #include "sportssummaryoperation.h"
 #include "sportsdetailoperation.h"
 
+#include <QTimer>
+
 /*
 {0000FEE0-0000-1000-8000-00805f9b34fb} MiBand Service
 --00002a2b-0000-1000-8000-00805f9b34fb //Current time
@@ -50,6 +52,7 @@ public:
     static const char SUCCESS = 0x01;
     static const char FAIL = 0x04;
 
+    static const char EVENT_BUTTON = 0x04;
     static const char EVENT_DECLINE_CALL = 0x07;
     static const char EVENT_IGNORE_CALL = 0x09;
     static const char ENDPOINT_DISPLAY = 0x06;
@@ -133,6 +136,8 @@ public:
     Q_SIGNAL void declineCall();
     Q_SIGNAL void ignoreCall();
 
+    Q_SIGNAL void buttonPressed();
+
     Q_INVOKABLE virtual bool operationRunning() override;
     void abortOperations();
 
@@ -141,11 +146,13 @@ public:
 private:
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
     Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
+
     void setGPSVersion(const QString& v);
 
     QString m_gpsVersion;
     int m_steps;
     int m_operationRunning = 0;
+
 
     SettingsManager m_settings;
     BipBatteryInfo m_batteryInfo;
