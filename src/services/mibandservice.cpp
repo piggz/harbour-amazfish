@@ -220,6 +220,9 @@ void MiBandService::setLanguage()
     case 3:
         lang += "zh_TW";
         break;
+    case 4:
+        lang += "ru_RU";
+        break;
     default:
         lang += "en_US";
     }

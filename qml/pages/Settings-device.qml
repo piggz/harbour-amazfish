@@ -63,6 +63,7 @@ Page {
                     MenuItem { text: qsTr("es_ES") }
                     MenuItem { text: qsTr("zh_CN") }
                     MenuItem { text: qsTr("zh_TW") }
+                    MenuItem { text: qsTr("ru_RU") }
                 }
             }
 
