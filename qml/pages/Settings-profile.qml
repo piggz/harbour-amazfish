@@ -103,14 +103,10 @@ Page {
                 placeholderText: qsTr("Name:")
                 width: parent.width
             }
-            Row {
-                spacing: Theme.paddingLarge
-                width: parent.width
-                x: Theme.horizontalPageMargin
 
                 Label {
                     id: lblDOB
-                    text: "Birthday"
+                    text: qsTr("Birthday"))
                 }
                 Button {
                     id: btnDOB
@@ -132,7 +128,7 @@ Page {
                     }
                 }
 
-            }
+            
 
 
             ComboBox {

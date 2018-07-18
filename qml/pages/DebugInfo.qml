@@ -42,61 +42,61 @@ Page {
             }
 
             Label {
-                text: "Address: " + pairedAddress.value
+                text: qsTr("Address: ") + pairedAddress.value
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "Serial No: " + DeviceInterface.infoService().serialNumber
+                text: qsTr("Serial No: ") + DeviceInterface.infoService().serialNumber
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "Hardware Rev: "+ DeviceInterface.infoService().hardwareRevision
+                text: qsTr("Hardware Rev: ")+ DeviceInterface.infoService().hardwareRevision
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "Software Rev: " + DeviceInterface.infoService().softwareRevision
+                text: qsTr("Software Rev: ") + DeviceInterface.infoService().softwareRevision
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "Connection State: " + DeviceInterface.connectionState
+                text: qsTr("Connection State: ") + DeviceInterface.connectionState
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: "GPS Ver: " + DeviceInterface.miBandService().gpsVersion
+                text: qsTr("GPS Ver: ") + DeviceInterface.miBandService().gpsVersion
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Button {
-                text: "Test Notification"
+                text: qsTr("Test Notification")
                 onClicked: {
                     DeviceInterface.alertNotificationService().sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
                 }
             }
             Button {
-                text: "Test Email"
+                text: qsTr("Test Email")
                 onClicked: {
                     DeviceInterface.alertNotificationService().sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
                 }
             }
             Button {
-                text: "Test Call"
+                text: qsTr("Test Call")
                 onClicked: {
                     DeviceInterface.alertNotificationService().incomingCall("Somebody");
                 }
             }
             Button {
-                text: "Fetch debug log"
+                text: qqsTr("Fetch debug log")
                 onClicked: {
                     DeviceInterface.miBandService().fetchLogs();
                 }
             }
             Button {
-                text: "Test Popup"
+                text: qsTr("Test Popup")
                 onClicked: {
                     app.showMessage("This is a test notification");
                 }

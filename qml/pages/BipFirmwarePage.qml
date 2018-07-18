@@ -6,8 +6,9 @@ import Sailfish.Pickers 1.0
 Page {
     id: page
 
-    property string selectedFile: "None"
+    property string selectedFile: qsTr("None")
     property string fileVersion
+    property bool selectionMade: false
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
@@ -39,8 +40,8 @@ Page {
             }
 
             ValueButton {
-                label: "Choose File"
-                value: selectedFile ? selectedFile : "None"
+                label: qsTr("Choose File")
+                value: selectedFile ? selectedFile : qsTr("None")
                 onClicked: pageStack.push(filePickerPage)
                 enabled: DeviceInterface.connectionState === "authenticated"
 
@@ -49,13 +50,13 @@ Page {
             Label {
                 id: lblVersion
                 width: parent.width
-                text: qsTr("File type/version: " + fileVersion);
+                text: qsTr("File type/version: ") + fileVersion;
             }
             
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Send file")
-                enabled: selectedFile !== "None" && DeviceInterface.connectionState === "authenticated"
+                enabled: selectionMade && DeviceInterface.connectionState === "authenticated"
                 onClicked: {
                     DeviceInterface.startDownload();
                 }
@@ -86,6 +87,7 @@ Page {
             nameFilters: [ '*.*' ]
             onSelectedContentPropertiesChanged: {
                 page.selectedFile = selectedContentProperties.filePath;
+                page.selectionMade = true;
                 fileVersion = DeviceInterface.prepareFirmwareDownload(page.selectedFile);
             }
         }
