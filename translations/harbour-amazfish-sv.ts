@@ -457,11 +457,11 @@
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>Sportaktiviteter</translation>
     </message>
     <message>
         <source>Download Next Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladda ner nästa aktivitet</translation>
     </message>
 </context>
 </TS>
