@@ -90,15 +90,15 @@
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keins</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei wählen</translation>
     </message>
     <message>
         <source>File type/version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Dateityp/Version: </translation>
     </message>
 </context>
 <context>
@@ -124,43 +124,43 @@
     </message>
     <message>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>Addresse: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>Seriennr.: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Hardware Rev: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Software Rev: </translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungsstatus: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>GPS Ver: </translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Testbenachrichtigung</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Test-Email</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>Testanruf</translation>
     </message>
     <message>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Test-Popup</translation>
     </message>
 </context>
 <context>
@@ -423,7 +423,7 @@
     </message>
     <message>
         <source>ru_RU</source>
-        <translation type="unfinished"></translation>
+        <translation>ru_RU</translation>
     </message>
 </context>
 <context>
