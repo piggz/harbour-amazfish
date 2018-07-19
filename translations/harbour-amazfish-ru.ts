@@ -5,58 +5,58 @@
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Включено</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Пн</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Вт</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ср</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Чт</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Пт</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Сб</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Вс</translation>
     </message>
 </context>
 <context>
     <name>AnalysisPage</name>
     <message>
         <source>Analysis</source>
-        <translation type="unfinished"></translation>
+        <translation>Анализ</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>ЧСС</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаги</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагрузка</translation>
     </message>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить данные</translation>
     </message>
 </context>
 <context>
@@ -78,38 +78,38 @@
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить файл</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка файла</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите файл для загрузки</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Пусто</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать файл</translation>
     </message>
     <message>
         <source>File type/version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Тип/версия файла: </translation>
     </message>
 </context>
 <context>
     <name>BipFirmwareService</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполняется операция. Попробуйте позже.</translation>
     </message>
     <message>
         <source>No file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Не выбран файл</translation>
     </message>
 </context>
 <context>
@@ -124,43 +124,43 @@
     </message>
     <message>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>Серийный номер: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Версия оборудования: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Версия прошивки: </translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>Состояние подключения: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>Версия GPS: </translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить уведомления</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестовое письмо</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестовый звонок</translation>
     </message>
     <message>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестовый диалог</translation>
     </message>
 </context>
 <context>
@@ -191,25 +191,25 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить файл</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных</translation>
     </message>
 </context>
 <context>
     <name>MiBandService</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполняется операция. Попробуйте позже.</translation>
     </message>
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation type="unfinished"></translation>
+        <translation>Слишком старая прошивка для настройки циферблата. Нужна версия 0.1.1.14.</translation>
     </message>
 </context>
 <context>
@@ -220,135 +220,135 @@
     </message>
     <message>
         <source>Try again</source>
-        <translation type="unfinished"></translation>
+        <translation>Попробовать снова</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Finished transferring activity data</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача данных тренировки завершена</translation>
     </message>
     <message>
         <source>No data to transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных для передачи</translation>
     </message>
     <message>
         <source>Update operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновление не удалось</translation>
     </message>
     <message>
         <source>Update operation failed, unexpected metadata</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновление не удалось. Неверные метаданные.</translation>
     </message>
     <message>
         <source>Update operation complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновление завершено</translation>
     </message>
     <message>
         <source>File does not seem to be supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат файла не поддерживается</translation>
     </message>
     <message>
         <source>About to transfer data from </source>
-        <translation type="unfinished"></translation>
+        <translation>Готовность к передаче данных с </translation>
     </message>
 </context>
 <context>
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Будильники</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Сохранить настройки</translation>
+        <translation>Сохранить настройки</translation>
     </message>
     <message>
         <source>Alarm 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Будильник 1</translation>
     </message>
     <message>
         <source>Alarm 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Будильник 2</translation>
     </message>
     <message>
         <source>Alarm 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Будильник 3</translation>
     </message>
     <message>
         <source>Alarm 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Будильник 4</translation>
     </message>
     <message>
         <source>Alarm 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Будильник 5</translation>
     </message>
 </context>
 <context>
     <name>Settings-app</name>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished">Настройка часов</translation>
+        <translation>Настройка часов</translation>
     </message>
     <message>
         <source>Notify on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Уведомлять о подключении</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Сохранить настройки</translation>
+        <translation>Сохранить настройки</translation>
     </message>
 </context>
 <context>
     <name>Settings-bip-shortcuts</name>
     <message>
         <source>BIP Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Элементы изображения на экране BIP</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Состояние</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Тренировка</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Погода</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Будильник</translation>
     </message>
     <message>
         <source>Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Таймер</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation type="unfinished"></translation>
+        <translation>Компас</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Настройка</translation>
+        <translation>Настройка</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation type="unfinished"></translation>
+        <translation>AliPay</translation>
     </message>
     <message>
         <source>Weather Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Ссылка на погоду</translation>
     </message>
     <message>
         <source>AliPay Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Ссылка на AliPay</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Сохранить настройки</translation>
+        <translation>Сохранить настройки</translation>
     </message>
 </context>
 <context>
@@ -419,11 +419,11 @@
     </message>
     <message>
         <source>BIP Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Элементы изображения на экране BIP</translation>
     </message>
     <message>
         <source>ru_RU</source>
-        <translation type="unfinished"></translation>
+        <translation>ru_RU</translation>
     </message>
 </context>
 <context>
@@ -434,34 +434,34 @@
     </message>
     <message>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Профиль пользователя</translation>
     </message>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished">Настройка часов</translation>
+        <translation>Настройка часов</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка приложения</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Будильники</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожертвовать</translation>
     </message>
 </context>
 <context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>Тренировки</translation>
     </message>
     <message>
         <source>Download Next Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить следующую тренировку</translation>
     </message>
 </context>
 </TS>
