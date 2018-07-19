@@ -88,6 +88,18 @@
         <source>Select a file to download.</source>
         <translation>Välj filer att ladda ner</translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File type/version: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BipFirmwareService</name>
@@ -109,6 +121,46 @@
     <message>
         <source>Refresh</source>
         <translation>Uppdatera</translation>
+    </message>
+    <message>
+        <source>Address: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial No: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hardware Rev: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Software Rev: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection State: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GPS Ver: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Call</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Popup</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -369,6 +421,10 @@
         <source>BIP Display Items</source>
         <translation>BIP visningsobjekt</translation>
     </message>
+    <message>
+        <source>ru_RU</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-menu</name>
@@ -395,73 +451,6 @@
     <message>
         <source>Donate</source>
         <translation>Donera</translation>
-    </message>
-</context>
-<context>
-    <name>Settings-profile</name>
-    <message>
-        <source>Profile Settings</source>
-        <translation>Profilinställningar</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation>Namn:</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation>Kön</translation>
-    </message>
-    <message>
-        <source>Height (cm): </source>
-        <translation>Längd (cm): </translation>
-    </message>
-    <message>
-        <source>Weight (kg): </source>
-        <translation>Vikt (kg): </translation>
-    </message>
-    <message>
-        <source>Save Profile</source>
-        <translation>Spara profil</translation>
-    </message>
-    <message>
-        <source>Male</source>
-        <translation>Man</translation>
-    </message>
-    <message>
-        <source>Female</source>
-        <translation>Kvinna</translation>
-    </message>
-    <message>
-        <source>Wear Location</source>
-        <translation>Armbandsplats</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>Vänster</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>Höger</translation>
-    </message>
-    <message>
-        <source>Goal (steps): </source>
-        <translation>Träningsmål (antal steg): </translation>
-    </message>
-    <message>
-        <source>Display on lift wrist</source>
-        <translation>Visa vid lyft handled</translation>
-    </message>
-    <message>
-        <source>Alert on fitness goal</source>
-        <translation>Avisera vid uppnått träningsmål</translation>
-    </message>
-    <message>
-        <source>All day HRM interval (minutes): </source>
-        <translation>HRM-intervall för hela dagen (minuter): </translation>
-    </message>
-    <message>
-        <source>Use HRM for Sleep Detection</source>
-        <translation>Använd HRM för att upptäcka sömn</translation>
     </message>
 </context>
 <context>

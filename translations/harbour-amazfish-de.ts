@@ -88,6 +88,18 @@
         <source>Select a file to download.</source>
         <translation>Wähle eine Datei zum herunterladen aus.</translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File type/version: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BipFirmwareService</name>
@@ -109,6 +121,46 @@
     <message>
         <source>Refresh</source>
         <translation>Aktualisieren</translation>
+    </message>
+    <message>
+        <source>Address: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial No: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hardware Rev: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Software Rev: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection State: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GPS Ver: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Call</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Popup</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -369,6 +421,10 @@
         <source>BIP Display Items</source>
         <translation>BIP-Anzeigeelemente</translation>
     </message>
+    <message>
+        <source>ru_RU</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-menu</name>
@@ -395,73 +451,6 @@
     <message>
         <source>Donate</source>
         <translation>Spenden</translation>
-    </message>
-</context>
-<context>
-    <name>Settings-profile</name>
-    <message>
-        <source>Profile Settings</source>
-        <translation>Profileinstellungen</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation>Name:</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation>Geschlecht</translation>
-    </message>
-    <message>
-        <source>Height (cm): </source>
-        <translation>Größe (cm): </translation>
-    </message>
-    <message>
-        <source>Weight (kg): </source>
-        <translation>Gewicht (kg): </translation>
-    </message>
-    <message>
-        <source>Save Profile</source>
-        <translation>Profil speichern</translation>
-    </message>
-    <message>
-        <source>Male</source>
-        <translation>Männlich</translation>
-    </message>
-    <message>
-        <source>Female</source>
-        <translation>Weiblich</translation>
-    </message>
-    <message>
-        <source>Wear Location</source>
-        <translation>Trageort</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>Links</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>Rechts</translation>
-    </message>
-    <message>
-        <source>Goal (steps): </source>
-        <translation>Ziel (Schritte): </translation>
-    </message>
-    <message>
-        <source>Display on lift wrist</source>
-        <translation>Anzeige am Handgelenk</translation>
-    </message>
-    <message>
-        <source>Alert on fitness goal</source>
-        <translation>Alarm beim Fitnessziel</translation>
-    </message>
-    <message>
-        <source>All day HRM interval (minutes): </source>
-        <translation>Ganztägiges PRM-Intervall (Minuten): </translation>
-    </message>
-    <message>
-        <source>Use HRM for Sleep Detection</source>
-        <translation>Verwenden Sie PRM für die Schlaferkennung</translation>
     </message>
 </context>
 <context>

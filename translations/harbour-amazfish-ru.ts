@@ -88,6 +88,18 @@
         <source>Select a file to download.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File type/version: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BipFirmwareService</name>
@@ -109,6 +121,46 @@
     <message>
         <source>Refresh</source>
         <translation>Обновить</translation>
+    </message>
+    <message>
+        <source>Address: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial No: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hardware Rev: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Software Rev: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection State: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GPS Ver: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Call</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Popup</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -369,6 +421,10 @@
         <source>BIP Display Items</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>ru_RU</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-menu</name>
@@ -394,73 +450,6 @@
     </message>
     <message>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Settings-profile</name>
-    <message>
-        <source>Profile Settings</source>
-        <translation>Профиль</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation>Имя:</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation>Пол</translation>
-    </message>
-    <message>
-        <source>Height (cm): </source>
-        <translation>Рост (см): </translation>
-    </message>
-    <message>
-        <source>Weight (kg): </source>
-        <translation>Вес (кг): </translation>
-    </message>
-    <message>
-        <source>Save Profile</source>
-        <translation>Сохранить профиль</translation>
-    </message>
-    <message>
-        <source>Male</source>
-        <translation>Мужчина</translation>
-    </message>
-    <message>
-        <source>Female</source>
-        <translation>Женщина</translation>
-    </message>
-    <message>
-        <source>Wear Location</source>
-        <translation>Где носятся часы</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>Левая рука</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>Правая рука</translation>
-    </message>
-    <message>
-        <source>Goal (steps): </source>
-        <translation>Цель (шагов):  </translation>
-    </message>
-    <message>
-        <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use HRM for Sleep Detection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
