@@ -55,7 +55,12 @@ SOURCES += src/harbour-amazfish.cpp \
     src/operations/abstractfetchoperation.cpp \
     src/bipactivitydetailparser.cpp \
     src/activitycoordinate.cpp \
-    src/sportsdatamodel.cpp
+    src/sportsdatamodel.cpp \
+    src/weather/abstractopenweathermodel.cpp \
+    src/weather/city.cpp \
+    src/weather/citymanager.cpp \
+    src/weather/citysearchmodel.cpp \
+    src/weather/currentweathermodel.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -82,7 +87,8 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/components/Alarm.qml \
     qml/pages/Settings-alarms.qml \
     qml/pages/BipFirmwarePage.qml \
-    qml/pages/SportsSummaryPage.qml
+    qml/pages/SportsSummaryPage.qml \
+    qml/pages/AddCityDialog.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
@@ -129,7 +135,12 @@ HEADERS += \
     src/operations/abstractfetchoperation.h \
     src/bipactivitydetailparser.h \
     src/activitycoordinate.h \
-    src/sportsdatamodel.h
+    src/sportsdatamodel.h \
+    src/weather/abstractopenweathermodel.h \
+    src/weather/city.h \
+    src/weather/citymanager.h \
+    src/weather/citysearchmodel.h \
+    src/weather/currentweathermodel.h
  
 
 include(qble/qble.pri)

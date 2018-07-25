@@ -59,6 +59,14 @@ Page {
                     pageStack.push(Qt.resolvedUrl("Settings-alarms.qml"))
                 }
             }
+            
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Weather")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("AddCityDialog.qml"))
+                }
+            }
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
