@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Загрузка файла</translation>
+        <translation>Загрузка файлов</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>Choose File</source>
-        <translation>Выбрать файл</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>File type/version: </source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>Connection State: </source>
-        <translation>Состояние подключения: </translation>
+        <translation>Состояние: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
@@ -209,7 +209,7 @@
     </message>
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation>Слишком старая прошивка для настройки циферблата. Нужна версия 0.1.1.14.</translation>
+        <translation>Слишком старая прошивка для настройки главного меню. Нужна версия 0.1.1.14.</translation>
     </message>
 </context>
 <context>
@@ -304,15 +304,15 @@
     <name>Settings-bip-shortcuts</name>
     <message>
         <source>BIP Display Items</source>
-        <translation>Элементы изображения на экране BIP</translation>
+        <translation>Главное меню BIP</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Состояние</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>Тренировка</translation>
+        <translation>Активность</translation>
     </message>
     <message>
         <source>Weather</source>
@@ -332,7 +332,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>Настройка</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>AliPay</source>
@@ -419,7 +419,7 @@
     </message>
     <message>
         <source>BIP Display Items</source>
-        <translation>Элементы изображения на экране BIP</translation>
+        <translation>Главное меню BIP</translation>
     </message>
     <message>
         <source>ru_RU</source>
@@ -457,11 +457,11 @@
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>
-        <translation>Тренировки</translation>
+        <translation>Активность</translation>
     </message>
     <message>
         <source>Download Next Activity</source>
-        <translation>Загрузить следующую тренировку</translation>
+        <translation>Загрузить следующую активность</translation>
     </message>
 </context>
 </TS>
