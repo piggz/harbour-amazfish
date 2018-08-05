@@ -12,6 +12,12 @@
 #include "datasource.h"
 #include "sportsdatamodel.h"
 
+#include "weather/citysearchmodel.h"
+#include "weather/citymanager.h"
+#include "weather/city.h"
+#include "weather/currentweathermodel.h"
+
+
 int main(int argc, char *argv[])
 {
     // SailfishApp::main() will display "qml/harbour-amazfish.qml", if you need more
@@ -39,6 +45,11 @@ int main(int argc, char *argv[])
     qmlRegisterType<AlertNotificationService>();
     qmlRegisterType<HRMService>();
     qmlRegisterType<BipFirmwareService>();
+
+    qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
+    qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");
+    qmlRegisterType<City>("org.SfietKonstantin.weatherfish", 1, 0, "City");
+    qmlRegisterType<CurrentWeatherModel>("org.SfietKonstantin.weatherfish", 1, 0, "CurrentWeather");
 
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
 
