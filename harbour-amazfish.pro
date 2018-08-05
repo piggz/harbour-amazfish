@@ -102,8 +102,8 @@ CONFIG += sailfishapp_i18n
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-amazfish-de.ts \
                 translations/harbour-amazfish-ru.ts \
-                translations/harbour-amazfish-sv.ts
-
+                translations/harbour-amazfish-sv.ts \
+                translations/harbour-amazfish-es.ts
 HEADERS += \
     src/qaesencryption.h \
     src/notificationslistener.h \
