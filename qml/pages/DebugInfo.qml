@@ -90,7 +90,7 @@ Page {
                 }
             }
             Button {
-                text: qqsTr("Fetch debug log")
+                text: qsTr("Fetch debug log")
                 onClicked: {
                     DeviceInterface.miBandService().fetchLogs();
                 }

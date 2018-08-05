@@ -106,7 +106,7 @@ Page {
 
                 Label {
                     id: lblDOB
-                    text: qsTr("Birthday"))
+                    text: qsTr("Birthday")
                 }
                 Button {
                     id: btnDOB
