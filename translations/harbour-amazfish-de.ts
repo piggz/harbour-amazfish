@@ -457,71 +457,71 @@
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Profileinstellungen</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Geburtstag</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Geschlecht</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Männlich</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiblich</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>Höhe (cm): </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>Gewicht (kg): </translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Trageort</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeige am Handgelenk</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>Ziel (Schritte): </translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm beim Fitnessziel</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwenden Sie HFM für die Schlaferkennung</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>Ganztägiges HFM-Intervall (Minuten):</translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil sichern</translation>
     </message>
 </context>
 <context>
