@@ -454,6 +454,77 @@
     </message>
 </context>
 <context>
+    <name>Settings-profile</name>
+    <message>
+        <source>Profile Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gender</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Female</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height (cm): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weight (kg): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wear Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display on lift wrist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goal (steps): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alert on fitness goal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use HRM for Sleep Detection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All day HRM interval (minutes): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>

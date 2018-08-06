@@ -13,7 +13,7 @@ Name:       harbour-amazfish
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Amazfit Bip interface application
-Version:    0.7.1
+Version:    0.7.3
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE

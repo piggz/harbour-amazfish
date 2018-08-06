@@ -37,8 +37,10 @@ HuamiFirmwareInfo::Type HuamiFirmwareInfo::determineFirmwareType() {
     }
     if (m_bytes.startsWith(QByteArray(FW_HEADER, sizeof(FW_HEADER)))) {
         m_version = m_crcMap[m_crc16];
+        qDebug() << "Version:" << m_version << "CRC:" << m_crc16;
+
         if (!m_version.isEmpty()) {
-            if ((m_version >= "0.0.8.00") && (m_version <= "1.0.5.00")) {
+            if ((m_version >= "0.0.8.00") && (m_version <= "1.2.0.00")) {
                 return HuamiFirmwareInfo::Firmware;
             }
         }
@@ -207,6 +209,8 @@ void HuamiFirmwareInfo::populateCrcMap()
     m_crcMap.insert(11062, "0.1.1.39");
     m_crcMap.insert(56670, "0.1.1.41");
     m_crcMap.insert(58736, "0.1.1.45");
+    m_crcMap.insert(2602, "1.0.2.00");
+    m_crcMap.insert(36157, "1.1.2.05");
 
     // resources
     m_crcMap.insert(12586, "0.0.8.74");
@@ -228,6 +232,7 @@ void HuamiFirmwareInfo::populateCrcMap()
     m_crcMap.insert(14334, "0.1.1.39");
     m_crcMap.insert(21109, "0.1.1.41");
     m_crcMap.insert(23073, "0.1.1.45");
+    m_crcMap.insert(59245, "1.0.2.00");
 
     // gps
     m_crcMap.insert(61520, "9367,8f79a91,0,0,");
