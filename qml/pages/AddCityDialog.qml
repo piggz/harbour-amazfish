@@ -76,6 +76,12 @@ Dialog {
                                                : Theme.secondaryColor
                     text: model.state
                 }
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: background.selected ? Theme.secondaryHighlightColor
+                                               : Theme.secondaryColor
+                    text: model.country
+                }
             }
         }
 
