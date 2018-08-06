@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import "pages"
 import Nemo.Notifications 1.0
 import org.nemomobile.mpris 1.0
+import org.SfietKonstantin.weatherfish 1.0
 
 ApplicationWindow
 {
@@ -70,6 +71,10 @@ ApplicationWindow
 
     MprisManager {
         id: mprisManager
+    }
+    
+    CityManager {
+        id: cityManager
     }
     
     Connections {

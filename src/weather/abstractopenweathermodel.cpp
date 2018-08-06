@@ -30,6 +30,8 @@
  */ 
 
 #include "abstractopenweathermodel.h"
+#include "apikey.h"
+
 #include <QtCore/QUrlQuery>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -114,6 +116,7 @@ void AbstractOpenWeatherModel::request(const QString &connection, const QVariant
         query.addQueryItem(key, arguments.value(key).toString());
     }
 
+    query.addQueryItem(QLatin1String("APPID"), API_KEY);
     query.addQueryItem(QLatin1String("mode"), QLatin1String("json"));
     query.addQueryItem(QLatin1String("lang"), m_language);
     query.addQueryItem(QLatin1String("units"), unitString(m_unit));

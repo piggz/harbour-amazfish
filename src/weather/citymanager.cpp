@@ -124,6 +124,17 @@ void CityManager::removeCity(const QString &identifier)
     save();
 }
 
+void CityManager::removeAllCities()
+{    
+    m_citiesMap.clear();
+    qDeleteAll(m_cities.begin(), m_cities.end());
+    m_cities.clear();
+            
+    emit citiesChanged();
+
+    save();  
+}
+
 //void CityManager::addProperties(const QString &identifier, const QVariantMap &properties)
 //{
 //    if (!m_citiesMap.contains(identifier)) {

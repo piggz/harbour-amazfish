@@ -9,6 +9,7 @@ Dialog {
     property CityManager cityManager
     canAccept: selectedCity != ""
     onAccepted: {
+        cityManager.removeAllCities();
         cityManager.addCity(page.selectedCity, cityProperties.name, cityProperties.state,
                             cityProperties.country, cityProperties.countryCode,
                             cityProperties.longitude, cityProperties.latitude)

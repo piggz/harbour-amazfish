@@ -64,7 +64,8 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Weather")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("AddCityDialog.qml"))
+                    var dlg = pageStack.push(Qt.resolvedUrl("AddCityDialog.qml"))
+                    dlg.cityManager = cityManager;
                 }
             }
 
