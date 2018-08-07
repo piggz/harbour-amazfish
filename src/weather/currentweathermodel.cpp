@@ -116,7 +116,7 @@ AbstractOpenWeatherModel::Status CurrentWeatherModel::handleFinished(const QByte
     int id = weather.value("id").toVariant().toInt();
     QJsonObject main = object.value("main").toObject();
 
-    QString icon = QString("../icons/%1").arg(getIconFromCode(id));
+    QString icon = QString("../pics//%1").arg(getIconFromCode(id));
     if (m_icon != icon) {
         m_icon = icon;
         emit iconChanged();

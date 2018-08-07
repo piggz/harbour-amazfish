@@ -165,14 +165,20 @@ AbstractOpenWeatherModel::Status CitySearchModel::handleFinished(const QByteArra
         city->lon = coordinatesJson.value(QLatin1String("lon")).toDouble();
 
         // Create state resolving request
-        QUrl url ("http://open.mapquestapi.com/nominatim/v1/reverse");
+        //QUrl url ("http://open.mapquestapi.com/nominatim/v1/reverse");
+        QUrl url ("https://nominatim.openstreetmap.org/reverse.php");
+            
         QUrlQuery query;
         query.addQueryItem(QLatin1String("format"), QLatin1String("json"));
         query.addQueryItem(QLatin1String("zoom"), QLatin1String("6"));
         query.addQueryItem(QLatin1String("lat"), QString::number(city->lat));
         query.addQueryItem(QLatin1String("lon"), QString::number(city->lon));
+        query.addQueryItem(QLatin1String("email"), QLatin1String("amazfish@piggz.co.uk"));
+        
         url.setQuery(query);
 
+        qDebug() << url;
+        
         QNetworkReply *reply = network->get(QNetworkRequest(url));
         reply->setProperty("id", city->id);
         connect(reply, SIGNAL(finished()), this, SLOT(slotStateResolverFinished()));
@@ -204,7 +210,11 @@ void CitySearchModel::slotStateResolverFinished()
 
     QString id = reply->property("id").toString();
 
-    QJsonDocument result = QJsonDocument::fromJson(reply->readAll());
+    QByteArray doc = reply->readAll();
+    QJsonDocument result = QJsonDocument::fromJson(doc);
+    
+    qDebug() << doc;
+    
     reply->deleteLater();
     m_resolvingReplies.remove(reply);
 
