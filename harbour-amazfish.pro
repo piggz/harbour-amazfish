@@ -56,11 +56,10 @@ SOURCES += src/harbour-amazfish.cpp \
     src/bipactivitydetailparser.cpp \
     src/activitycoordinate.cpp \
     src/sportsdatamodel.cpp \
-    src/weather/abstractopenweathermodel.cpp \
     src/weather/city.cpp \
     src/weather/citymanager.cpp \
     src/weather/citysearchmodel.cpp \
-    src/weather/currentweathermodel.cpp
+    src/weather/currentweather.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/cover/CoverPage.qml \
@@ -136,11 +135,9 @@ HEADERS += \
     src/bipactivitydetailparser.h \
     src/activitycoordinate.h \
     src/sportsdatamodel.h \
-    src/weather/abstractopenweathermodel.h \
     src/weather/city.h \
     src/weather/citymanager.h \
     src/weather/citysearchmodel.h \
-    src/weather/currentweathermodel.h
+    src/weather/currentweather.h
  
-
 include(qble/qble.pri)

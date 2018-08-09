@@ -30,15 +30,23 @@
  */ 
 
 #include "currentweathermodel.h"
+#include "apikey.h"
+
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonObject>
+#include <QtCore/QUrl>
+#include <QtCore/QUrlQuery>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
 
 CurrentWeatherModel::CurrentWeatherModel(QObject *parent) :
-    AbstractOpenWeatherModel(parent)
-{
+    QObject(parent)
+{    
+    network = new QNetworkAccessManager(this);
 }
 
 City * CurrentWeatherModel::city() const
@@ -64,19 +72,6 @@ QString CurrentWeatherModel::icon() const
     return m_icon;
 }
 
-int CurrentWeatherModel::rowCount(const QModelIndex &parent) const
-{
-    Q_UNUSED(parent)
-    return 0;
-}
-
-QVariant CurrentWeatherModel::data(const QModelIndex &index, int role) const
-{
-    Q_UNUSED(index)
-    Q_UNUSED(role)
-    return QVariant();
-}
-
 void CurrentWeatherModel::refresh()
 {
     if (!m_city) {
@@ -92,22 +87,17 @@ void CurrentWeatherModel::refresh()
     request(QLatin1String("weather"), arguments);
 }
 
-QHash<int, QByteArray> CurrentWeatherModel::roleNames() const
-{
-    return QHash<int, QByteArray>();
-}
-
 void CurrentWeatherModel::clear()
 {
     m_icon.clear();
     m_temperature.clear();
 }
 
-AbstractOpenWeatherModel::Status CurrentWeatherModel::handleFinished(const QByteArray &reply)
+void CurrentWeatherModel::handleFinished(const QByteArray &reply)
 {
     QJsonDocument document = QJsonDocument::fromJson(reply);
     if (document.isNull()) {
-        return Error;
+        return;
     }
 
     QJsonObject object = document.object();
@@ -127,8 +117,6 @@ AbstractOpenWeatherModel::Status CurrentWeatherModel::handleFinished(const QByte
         m_temperature = temperature;
         emit temperatureChanged();
     }
-
-    return Idle;
 }
 
 QString CurrentWeatherModel::getIconFromCode(int code)
@@ -236,3 +224,47 @@ QString CurrentWeatherModel::getIconFromCode(int code)
         break;
     }
 }
+
+void CurrentWeatherModel::request(const QString &connection, const QVariantMap &arguments)
+{
+    if (m_reply) {
+        m_reply->disconnect();
+        m_reply->abort();
+        m_reply->deleteLater();
+        m_reply = 0;
+    }
+
+    clear();
+//    if (!checkValidity(connection, arguments)) {
+//        return;
+//    }
+
+    QUrl url (QString(QLatin1String("http://api.openweathermap.org/data/2.5/%1")).arg(connection));
+    QUrlQuery query;
+    foreach (QString key, arguments.keys()) {
+        query.addQueryItem(key, arguments.value(key).toString());
+    }
+
+    query.addQueryItem(QLatin1String("APPID"), API_KEY);
+    query.addQueryItem(QLatin1String("mode"), QLatin1String("json"));
+    query.addQueryItem(QLatin1String("lang"), m_language);
+    //query.addQueryItem(QLatin1String("units"), unitString(m_unit));
+    url.setQuery(query);
+
+    m_reply = network->get(QNetworkRequest(url));
+    connect(m_reply, SIGNAL(finished()), this, SLOT(slotFinished()));
+}
+
+QString CurrentWeatherModel::language() const
+{
+    return m_language;
+}
+
+void CurrentWeatherModel::setLanguage(const QString &language)
+{
+    if (m_language != language) {
+        m_language = language;
+        emit languageChanged();
+    }
+}
+
