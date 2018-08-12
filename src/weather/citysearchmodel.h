@@ -77,14 +77,15 @@ protected:
 private:    
     void request(const QString &connection, const QVariantMap &arguments);
     void setStatus(Status status);
+    Q_SLOT void slotFinished();
     Status handleFinished(const QByteArray &reply);
     
     QList<CityItem *> m_cities;
     QList<CityItem *> m_resolvingCities;
     QMap<QString, CityItem *> m_resolvingCitiesMap;
     QSet<QNetworkReply *> m_resolvingReplies;
-    QNetworkAccessManager *network;
-    QNetworkReply *m_reply;
+    QNetworkAccessManager *network = nullptr;
+    QNetworkReply *m_reply = nullptr;
     
     
     //static QString unitString(Unit unit);

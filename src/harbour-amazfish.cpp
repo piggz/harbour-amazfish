@@ -15,7 +15,7 @@
 #include "weather/citysearchmodel.h"
 #include "weather/citymanager.h"
 #include "weather/city.h"
-#include "weather/currentweathermodel.h"
+#include "weather/currentweather.h"
 
 
 int main(int argc, char *argv[])

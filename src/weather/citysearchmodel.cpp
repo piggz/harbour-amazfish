@@ -261,7 +261,7 @@ void CitySearchModel::request(const QString &connection, const QVariantMap &argu
         m_reply->disconnect();
         m_reply->abort();
         m_reply->deleteLater();
-        m_reply = 0;
+        m_reply = nullptr;
     }
 
     clear();
@@ -282,7 +282,7 @@ void CitySearchModel::request(const QString &connection, const QVariantMap &argu
     url.setQuery(query);
 
     m_reply = network->get(QNetworkRequest(url));
-    connect(m_reply, SIGNAL(finished()), this, SLOT(slotFinished()));
+    connect(m_reply, &QNetworkReply::finished, this, &CitySearchModel::slotFinished);
     setStatus(Loading);
 }
 
@@ -297,4 +297,18 @@ void CitySearchModel::setStatus(Status status)
         m_status = status;
         emit statusChanged();
     }
+}
+
+void CitySearchModel::slotFinished()
+{
+    if (m_reply->error() != QNetworkReply::NoError) {
+        setStatus(Error);
+        m_reply->deleteLater();
+        m_reply = 0;
+        return;
+    }
+
+    setStatus(handleFinished(m_reply->readAll()));
+    m_reply->deleteLater();
+    m_reply = 0;
 }

@@ -29,7 +29,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
  */ 
 
-#include "currentweathermodel.h"
+#include "currentweather.h"
 #include "apikey.h"
 
 #include <QtCore/QDebug>
@@ -252,7 +252,7 @@ void CurrentWeatherModel::request(const QString &connection, const QVariantMap &
     url.setQuery(query);
 
     m_reply = network->get(QNetworkRequest(url));
-    connect(m_reply, SIGNAL(finished()), this, SLOT(slotFinished()));
+    connect(m_reply, &QNetworkReply::finished, this, &CurrentWeatherModel::slotFinished);
 }
 
 QString CurrentWeatherModel::language() const
@@ -268,3 +268,15 @@ void CurrentWeatherModel::setLanguage(const QString &language)
     }
 }
 
+void CurrentWeatherModel::slotFinished()
+{
+    if (m_reply->error() != QNetworkReply::NoError) {
+        m_reply->deleteLater();
+        m_reply = 0;
+        return;
+    }
+
+    handleFinished(m_reply->readAll());
+    m_reply->deleteLater();
+    m_reply = 0;
+}

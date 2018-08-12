@@ -52,25 +52,25 @@ public:
     
     QString language() const;
     void setLanguage(const QString &language);
-    
+    Q_INVOKABLE void refresh();
+
 signals:
     void cityChanged();
     void iconChanged();
     void temperatureChanged();
     void languageChanged();
-public slots:
-    void refresh();
 
 private:
     void handleFinished(const QByteArray &reply);
+    Q_SLOT void slotFinished();    
     static QString getIconFromCode(int code);
     
     void request(const QString &connection, const QVariantMap &arguments);
     virtual void clear();
 
-    QNetworkAccessManager *network;
-    QNetworkReply *m_reply;
-    City *m_city;
+    QNetworkAccessManager *network = nullptr;
+    QNetworkReply *m_reply = nullptr;
+    City *m_city = nullptr;
     QString m_icon;
     QString m_temperature;
     QString m_language;
