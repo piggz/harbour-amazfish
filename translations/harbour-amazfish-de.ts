@@ -162,6 +162,10 @@
         <source>Test Popup</source>
         <translation>Test-Popup</translation>
     </message>
+    <message>
+        <source>Fetch debug log</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
@@ -193,6 +197,10 @@
         <source>Download File</source>
         <translation>Datei übertragen</translation>
     </message>
+    <message>
+        <source>Weather</source>
+        <translation type="unfinished">Wetter</translation>
+    </message>
 </context>
 <context>
     <name>GraphData</name>
@@ -210,6 +218,10 @@
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
         <translation>Firmware ist zu alt, um Anzeigeelemente einzustellen, V0.1.1.14 ist erforderlich</translation>
+    </message>
+    <message>
+        <source>Firmware supports weather condition string</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -451,6 +463,10 @@
     <message>
         <source>Donate</source>
         <translation>Spenden</translation>
+    </message>
+    <message>
+        <source>Weather</source>
+        <translation type="unfinished">Wetter</translation>
     </message>
 </context>
 <context>

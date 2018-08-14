@@ -162,6 +162,10 @@
         <source>Test Popup</source>
         <translation>Ventana emergente de prueba</translation>
     </message>
+    <message>
+        <source>Fetch debug log</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
@@ -193,6 +197,10 @@
         <source>Download File</source>
         <translation>Descargar archivo</translation>
     </message>
+    <message>
+        <source>Weather</source>
+        <translation type="unfinished">Clima</translation>
+    </message>
 </context>
 <context>
     <name>GraphData</name>
@@ -210,6 +218,10 @@
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
         <translation>El programa-lógico es demasiado antiguo para establecer elementos de visualización, se requiere V0.1.1.14</translation>
+    </message>
+    <message>
+        <source>Firmware supports weather condition string</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -258,7 +270,7 @@
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alarmas</translation>
     </message>
     <message>
         <source>Save Settings</source>
@@ -451,6 +463,81 @@
     <message>
         <source>Donate</source>
         <translation>Donar</translation>
+    </message>
+    <message>
+        <source>Weather</source>
+        <translation type="unfinished">Clima</translation>
+    </message>
+</context>
+<context>
+    <name>Settings-profile</name>
+    <message>
+        <source>Profile Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gender</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Female</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height (cm): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weight (kg): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wear Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display on lift wrist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goal (steps): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alert on fitness goal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use HRM for Sleep Detection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All day HRM interval (minutes): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Profile</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

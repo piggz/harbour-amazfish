@@ -162,6 +162,10 @@
         <source>Test Popup</source>
         <translation>Тестовый диалог</translation>
     </message>
+    <message>
+        <source>Fetch debug log</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
@@ -193,6 +197,10 @@
         <source>Download File</source>
         <translation>Загрузить файл</translation>
     </message>
+    <message>
+        <source>Weather</source>
+        <translation type="unfinished">Погода</translation>
+    </message>
 </context>
 <context>
     <name>GraphData</name>
@@ -210,6 +218,10 @@
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
         <translation>Слишком старая прошивка для настройки главного меню. Нужна версия 0.1.1.14.</translation>
+    </message>
+    <message>
+        <source>Firmware supports weather condition string</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -451,6 +463,10 @@
     <message>
         <source>Donate</source>
         <translation>Пожертвовать</translation>
+    </message>
+    <message>
+        <source>Weather</source>
+        <translation type="unfinished">Погода</translation>
     </message>
 </context>
 <context>

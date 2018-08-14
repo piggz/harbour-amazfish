@@ -123,6 +123,7 @@ public:
     Q_INVOKABLE void setInactivityWarnings();
     
     Q_INVOKABLE void setAlarms();
+
     void sendWeather(const QJsonDocument &weather);
 
     //Operations

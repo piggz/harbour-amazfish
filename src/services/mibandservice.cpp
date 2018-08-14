@@ -4,6 +4,7 @@
 
 #include "typeconversion.h"
 #include "bipdevice.h"
+#include "weather/huamiweathercondition.h"
 
 const char* MiBandService::UUID_SERVICE_MIBAND = "0000fee0-0000-1000-8000-00805f9b34fb";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_NOTIFICATION = "00000002-0000-3512-2118-0009af100700";
@@ -556,4 +557,101 @@ void MiBandService::abortOperations()
     }
     m_operationRunning = 0;
     emit operationRunningChanged();
+}
+
+void MiBandService::sendWeather(const QJsonDocument &weather)
+{
+    BipDevice *device = qobject_cast<BipDevice*>(parent());
+
+    bool supportsConditionString = false;
+
+    if (!device || device->softwareRevision() > "V0.0.8.74") { //Lexical string comparison should be fine here
+        message(tr("Firmware supports weather condition string"));
+        supportsConditionString = true;
+    }
+
+    char condition = HuamiWeatherConditions::mapToAmazfitBipWeatherCode(weatherSpec.currentConditionCode);
+
+    //int tz_offset_hours = SimpleTimeZone.getDefault().getOffset(weatherSpec.timestamp * 1000L) / (1000 * 60 * 60);
+
+    qDebug() << "Sending condition";
+    QByteArray buf;
+    buf += 0x02;
+    buf += TypeConversion::fromInt32(weatherSpec.timestamp);
+    buf += (char)(tz_offset_hours * 4);
+    buf += condition;
+    buf += (char)(weatherSpec.currentTemp - 273);
+
+    if (supportsConditionString) {
+        buf += weatherSpec.currentCondition.getBytes();
+        buf += 0x00;
+    }
+
+    writeValue(UUID_CHARACTERISTIC_MIBAND_WEATHER, buf);
+
+    qDebug() << "Sending aqi";
+
+    buf.clear();
+    buf += 0x04;
+    buf += TypeConversion::fromInt32(weatherSpec.timestamp);
+    buf += (char)(tz_offset_hours * 4);
+    buf += 0x00;
+    buf += 0x00;
+
+    if (supportsConditionString) {
+        buf += "(n/a)";
+        buf += 0x00;
+    }
+    writeValue(UUID_CHARACTERISTIC_MIBAND_WEATHER, buf);
+
+    qDebug() << "Sending forecast";
+
+    char NR_DAYS = (char) (1 + weatherSpec.forecasts.size());
+    int bytesPerDay = 4;
+
+    int conditionsLength = 0;
+    if (supportsConditionString) {
+        bytesPerDay = 5;
+        conditionsLength = weatherSpec.currentCondition.getBytes().length;
+        for (WeatherSpec.Forecast forecast : weatherSpec.forecasts) {
+            conditionsLength += Weather.getConditionString(forecast.conditionCode).getBytes().length;
+        }
+    }
+    int length = 7 + bytesPerDay * NR_DAYS + conditionsLength;
+
+    buf.clear();
+    buf += 0x01;
+    buf += TypeConversion::fromInt32(weatherSpec.timestamp);
+    buf += (char)(tz_offset_hours * 4);
+    buf + (char)NR_DAYS;
+
+    char condition = HuamiWeatherConditions::mapToAmazfitBipWeatherCode(weatherSpec.currentConditionCode);
+
+    buf += condition;
+    buf += condition;
+    buf += (char) (weatherSpec.todayMaxTemp - 273);
+    buf += (char) (weatherSpec.todayMinTemp - 273);
+
+    if (supportsConditionString) {
+        buf += weatherSpec.currentCondition.getBytes();
+        buf += 0x00;
+    }
+
+
+    writeValue(UUID_CHARACTERISTIC_MIBAND_WEATHER, buf);
+
+    for (int f = 0; f < NR_DAYS; f++) {
+        condition = HuamiWeatherConditions::mapToAmazfitBipWeatherCode(forecast.conditionCode);
+
+        buf += condition;
+        buf += condition;
+        buf += (char) (forecast.todayMaxTemp - 273);
+        buf += (char) (forecast.todayMinTemp - 273);
+
+        if (supportsConditionString) {
+            buf += forecast.currentCondition.getBytes();
+            buf += 0x00;
+        }
+    }
+
 }

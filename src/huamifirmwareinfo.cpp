@@ -1,9 +1,6 @@
 #include "huamifirmwareinfo.h"
 #include <QDebug>
 
-
-
-
 HuamiFirmwareInfo::HuamiFirmwareInfo(const QByteArray &bytes)
 {
     populateCrcMap();
@@ -26,13 +23,13 @@ HuamiFirmwareInfo::Type HuamiFirmwareInfo::determineFirmwareType() {
         }
         return HuamiFirmwareInfo::Res;
     }
-    if (m_bytes.startsWith(GPS_HEADER) || m_bytes.startsWith(GPS_HEADER2) || m_bytes.startsWith(GPS_HEADER3) || m_bytes.startsWith(GPS_HEADER4)) {
+    if (m_bytes.startsWith(QByteArray(GPS_HEADER, sizeof(GPS_HEADER))) || m_bytes.startsWith(QByteArray(GPS_HEADER2, sizeof(GPS_HEADER2))) || m_bytes.startsWith(QByteArray(GPS_HEADER3, sizeof(GPS_HEADER3))) || m_bytes.startsWith(QByteArray(GPS_HEADER4, sizeof(GPS_HEADER4)))) {
         return HuamiFirmwareInfo::GPS;
     }
-    if (m_bytes.startsWith(GPS_ALMANAC_HEADER)) {
+    if (m_bytes.startsWith(QByteArray(GPS_ALMANAC_HEADER, sizeof(GPS_ALMANAC_HEADER)))) {
         return HuamiFirmwareInfo::GPS_ALMANAC;
     }
-    if (m_bytes.startsWith(GPS_CEP_HEADER)) {
+    if (m_bytes.startsWith(QByteArray(GPS_CEP_HEADER, sizeof(GPS_CEP_HEADER)))) {
         return HuamiFirmwareInfo::GPS_CEP;
     }
     if (m_bytes.startsWith(QByteArray(FW_HEADER, sizeof(FW_HEADER)))) {
@@ -50,10 +47,10 @@ HuamiFirmwareInfo::Type HuamiFirmwareInfo::determineFirmwareType() {
     if (m_bytes.startsWith(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER)))) {
         return HuamiFirmwareInfo::Watchface;
     }
-    if (m_bytes.startsWith(NEWFT_HEADER)) {
-        if (m_bytes[10] == 0x01) {
+    if (m_bytes.startsWith(QByteArray(NEWFT_HEADER, sizeof(NEWFT_HEADER)))) {
+        if (m_bytes.at(10) == 0x01) {
             return HuamiFirmwareInfo::Font;
-        } else if (m_bytes[10] == 0x02) {
+        } else if (m_bytes.at(10) == 0x02) {
             return HuamiFirmwareInfo::Font_Latin;
         }
     }
@@ -210,6 +207,7 @@ void HuamiFirmwareInfo::populateCrcMap()
     m_crcMap.insert(56670, "0.1.1.41");
     m_crcMap.insert(58736, "0.1.1.45");
     m_crcMap.insert(2602, "1.0.2.00");
+    m_crcMap.insert(48207, "1.1.1.00");
     m_crcMap.insert(36157, "1.1.2.05");
 
     // resources
