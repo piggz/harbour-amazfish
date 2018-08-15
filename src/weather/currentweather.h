@@ -29,62 +29,51 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
  */ 
 
-#ifndef ABSTRACTOPENWEATHERMODEL_H
-#define ABSTRACTOPENWEATHERMODEL_H
+#ifndef CURRENTWEATHERMODEL_H
+#define CURRENTWEATHERMODEL_H
 
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QVariantMap>
+#include "city.h"
 
 class QNetworkReply;
 class QNetworkAccessManager;
 
-class AbstractOpenWeatherModel : public QAbstractListModel
+class CurrentWeatherModel : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(Status)
-    Q_ENUMS(Unit)
-    Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(Status status READ status NOTIFY statusChanged)
-    Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
-    Q_PROPERTY(Unit unit READ unit WRITE setUnit NOTIFY unitChanged)
+    Q_PROPERTY(City * city READ city WRITE setCity NOTIFY cityChanged)
+    Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)
+    Q_PROPERTY(QString temperature READ temperature NOTIFY temperatureChanged)
 public:
-    enum Status {
-        Idle,
-        Loading,
-        Error
-    };
-    enum Unit {
-        Metric,
-        Imperial
-    };
-    explicit AbstractOpenWeatherModel(QObject *parent = 0);
-    virtual ~AbstractOpenWeatherModel();
-    int count() const;
-    Status status() const;
+    explicit CurrentWeatherModel(QObject *parent=0);
+    City * city() const;
+    void setCity(City *city);
+    QString icon() const;
+    QString temperature() const;
+    
     QString language() const;
     void setLanguage(const QString &language);
-    Unit unit() const;
-    void setUnit(Unit unit);
+    Q_INVOKABLE void refresh();
+
 signals:
-    void countChanged();
-    void statusChanged();
+    void cityChanged();
+    void iconChanged();
+    void temperatureChanged();
     void languageChanged();
-    void unitChanged();
-protected:
-    void request(const QString &connection, const QVariantMap &arguments);
-    virtual void clear() = 0;
-    virtual bool checkValidity(const QString &connection, const QVariantMap &arguments);
-    virtual Status handleFinished(const QByteArray &reply) = 0;
-    void setStatus(Status status);
-    QNetworkAccessManager *network;
+
 private:
-    static QString unitString(Unit unit);
-    Status m_status;
+    void handleFinished(const QByteArray &reply);
+    Q_SLOT void slotFinished();    
+    static QString getIconFromCode(int code);
+    
+    void request(const QString &connection, const QVariantMap &arguments);
+    virtual void clear();
+
+    QNetworkAccessManager *network = nullptr;
+    QNetworkReply *m_reply = nullptr;
+    City *m_city = nullptr;
+    QString m_icon;
+    QString m_temperature;
     QString m_language;
-    Unit m_unit;
-    QNetworkReply *m_reply;
-private slots:
-    void slotFinished();
 };
 
-#endif // ABSTRACTOPENWEATHERMODEL_H
+#endif // CURRENTWEATHERMODEL_H

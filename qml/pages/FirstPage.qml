@@ -195,6 +195,15 @@ Page {
                     }
                 }
             }
+            
+            Button {
+                id: btnWeather
+                text: qsTr("Weather")
+                onClicked: {
+                    var citypage =  pageStack.push(Qt.resolvedUrl("CityPage.qml"));
+                    citypage.city = cityManager.cities[0];
+                }
+            }
         }
     }
     Timer {

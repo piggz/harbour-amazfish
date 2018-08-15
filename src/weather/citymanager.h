@@ -51,6 +51,7 @@ public slots:
                  const QString &country, const QString &countryCode,
                  float longitude, float latitude);
     void removeCity(const QString &identifier);
+    void removeAllCities();
 //    void addProperties(const QString &identifier, const QVariantMap &properties);
 //    void clearProperties(const QString &identifier);
 private:

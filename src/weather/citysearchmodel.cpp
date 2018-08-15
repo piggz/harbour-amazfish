@@ -30,6 +30,8 @@
  */ 
 
 #include "citysearchmodel.h"
+#include "apikey.h"
+
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonObject>
@@ -53,8 +55,9 @@ struct CityItem
 };
 
 CitySearchModel::CitySearchModel(QObject *parent) :
-    AbstractOpenWeatherModel(parent)
-{
+ QAbstractListModel(parent)
+{    
+    network = new QNetworkAccessManager(this);
 }
 
 int CitySearchModel::rowCount(const QModelIndex &parent) const
@@ -129,7 +132,6 @@ void CitySearchModel::clear()
         beginRemoveRows(QModelIndex(), 0, m_cities.count() - 1);
         qDeleteAll(m_cities);
         m_cities.clear();
-        emit countChanged();
         endRemoveRows();
     }
 }
@@ -143,7 +145,7 @@ bool CitySearchModel::checkValidity(const QString &connection, const QVariantMap
     return true;
 }
 
-AbstractOpenWeatherModel::Status CitySearchModel::handleFinished(const QByteArray &reply)
+CitySearchModel::Status CitySearchModel::handleFinished(const QByteArray &reply)
 {
     QJsonDocument document = QJsonDocument::fromJson(reply);
     if (document.isNull()) {
@@ -165,14 +167,20 @@ AbstractOpenWeatherModel::Status CitySearchModel::handleFinished(const QByteArra
         city->lon = coordinatesJson.value(QLatin1String("lon")).toDouble();
 
         // Create state resolving request
-        QUrl url ("http://open.mapquestapi.com/nominatim/v1/reverse");
+        //QUrl url ("http://open.mapquestapi.com/nominatim/v1/reverse");
+        QUrl url ("https://nominatim.openstreetmap.org/reverse.php");
+            
         QUrlQuery query;
         query.addQueryItem(QLatin1String("format"), QLatin1String("json"));
         query.addQueryItem(QLatin1String("zoom"), QLatin1String("6"));
         query.addQueryItem(QLatin1String("lat"), QString::number(city->lat));
         query.addQueryItem(QLatin1String("lon"), QString::number(city->lon));
+        query.addQueryItem(QLatin1String("email"), QLatin1String("amazfish@piggz.co.uk"));
+        
         url.setQuery(query);
 
+        qDebug() << url;
+        
         QNetworkReply *reply = network->get(QNetworkRequest(url));
         reply->setProperty("id", city->id);
         connect(reply, SIGNAL(finished()), this, SLOT(slotStateResolverFinished()));
@@ -204,7 +212,11 @@ void CitySearchModel::slotStateResolverFinished()
 
     QString id = reply->property("id").toString();
 
-    QJsonDocument result = QJsonDocument::fromJson(reply->readAll());
+    QByteArray doc = reply->readAll();
+    QJsonDocument result = QJsonDocument::fromJson(doc);
+    
+    qDebug() << doc;
+    
     reply->deleteLater();
     m_resolvingReplies.remove(reply);
 
@@ -238,8 +250,65 @@ void CitySearchModel::slotStateResolverFinished()
         beginInsertRows(QModelIndex(), 0, m_resolvingCities.count() - 1);
         m_cities = m_resolvingCities;
         m_resolvingCities.clear();
-        emit countChanged();
         endInsertRows();
         setStatus(Idle);
     }
+}
+
+void CitySearchModel::request(const QString &connection, const QVariantMap &arguments)
+{
+    if (m_reply) {
+        m_reply->disconnect();
+        m_reply->abort();
+        m_reply->deleteLater();
+        m_reply = nullptr;
+    }
+
+    clear();
+    if (!checkValidity(connection, arguments)) {
+        return;
+    }
+
+    QUrl url (QString(QLatin1String("http://api.openweathermap.org/data/2.5/%1")).arg(connection));
+    QUrlQuery query;
+    foreach (QString key, arguments.keys()) {
+        query.addQueryItem(key, arguments.value(key).toString());
+    }
+
+    query.addQueryItem(QLatin1String("APPID"), API_KEY);
+    query.addQueryItem(QLatin1String("mode"), QLatin1String("json"));
+    query.addQueryItem(QLatin1String("lang"), m_language);
+    //query.addQueryItem(QLatin1String("units"), unitString(m_unit));
+    url.setQuery(query);
+
+    m_reply = network->get(QNetworkRequest(url));
+    connect(m_reply, &QNetworkReply::finished, this, &CitySearchModel::slotFinished);
+    setStatus(Loading);
+}
+
+CitySearchModel::Status CitySearchModel::status() const
+{
+    return m_status;
+}
+
+void CitySearchModel::setStatus(Status status)
+{
+    if (m_status != status) {
+        m_status = status;
+        emit statusChanged();
+    }
+}
+
+void CitySearchModel::slotFinished()
+{
+    if (m_reply->error() != QNetworkReply::NoError) {
+        setStatus(Error);
+        m_reply->deleteLater();
+        m_reply = 0;
+        return;
+    }
+
+    setStatus(handleFinished(m_reply->readAll()));
+    m_reply->deleteLater();
+    m_reply = 0;
 }

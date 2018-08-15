@@ -166,6 +166,10 @@
         <source>Fetch debug log</source>
         <translation>Hämta felsökningslogg</translation>
     </message>
+    <message>
+        <source>Fetch debug log</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>

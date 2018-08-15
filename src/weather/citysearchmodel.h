@@ -32,13 +32,17 @@
 #ifndef CITYSEARCHMODEL_H
 #define CITYSEARCHMODEL_H
 
-#include "abstractopenweathermodel.h"
 #include <QtCore/QSet>
+#include <QAbstractListModel>
+
+class QNetworkReply;
+class QNetworkAccessManager;
 
 class CityItem;
-class CitySearchModel : public AbstractOpenWeatherModel
+class CitySearchModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(Status)
 public:
     enum CitySearchModelRole {
         IdRole,
@@ -49,21 +53,45 @@ public:
         LongitudeRole,
         LatitudeRole
     };
+    enum Status {
+        Idle,
+        Loading,
+        Error
+    };
     explicit CitySearchModel(QObject *parent = 0);
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
-public slots:
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
+
+    Status status() const;
+    
+    public slots:
     void search(const QString &city);
+
+signals:
+    void statusChanged();
+    
 protected:
-    QHash<int, QByteArray> roleNames() const;
     void clear();
     bool checkValidity(const QString &connection, const QVariantMap &arguments);
+private:    
+    void request(const QString &connection, const QVariantMap &arguments);
+    void setStatus(Status status);
+    Q_SLOT void slotFinished();
     Status handleFinished(const QByteArray &reply);
-private:
+    
     QList<CityItem *> m_cities;
     QList<CityItem *> m_resolvingCities;
     QMap<QString, CityItem *> m_resolvingCitiesMap;
     QSet<QNetworkReply *> m_resolvingReplies;
+    QNetworkAccessManager *network = nullptr;
+    QNetworkReply *m_reply = nullptr;
+    
+    
+    //static QString unitString(Unit unit);
+    Status m_status;
+    QString m_language;
+    //Unit m_unit;
 private slots:
     void slotStateResolverFinished();
 };
