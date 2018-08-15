@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>File type/version: </source>
-        <translation>Filtyp/version: ></translation>
+        <translation>Filtyp/version: &gt;</translation>
     </message>
 </context>
 <context>
@@ -162,6 +162,10 @@
         <source>Test Popup</source>
         <translation>Testa popup</translation>
     </message>
+    <message>
+        <source>Fetch debug log</source>
+        <translation>Hämta felsökningslogg</translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
@@ -193,6 +197,10 @@
         <source>Download File</source>
         <translation>Ladda ner fil</translation>
     </message>
+    <message>
+        <source>Weather</source>
+        <translation>Väder</translation>
+    </message>
 </context>
 <context>
     <name>GraphData</name>
@@ -210,6 +218,10 @@
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
         <translation>Mjukvaran är för gammal för att ange visningsobjekt. V0.1.1.14 krävs.</translation>
+    </message>
+    <message>
+        <source>Firmware supports weather condition string</source>
+        <translation>Mjukvaran stödjer väderförhållanderad</translation>
     </message>
 </context>
 <context>
@@ -451,6 +463,10 @@
     <message>
         <source>Donate</source>
         <translation>Donera</translation>
+    </message>
+    <message>
+        <source>Weather</source>
+        <translation>Väder</translation>
     </message>
 </context>
 <context>
