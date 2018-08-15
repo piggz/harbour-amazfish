@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar registro de depuración</translation>
     </message>
 </context>
 <context>
@@ -199,7 +199,7 @@
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished">Clima</translation>
+        <translation>Clima</translation>
     </message>
 </context>
 <context>
@@ -221,7 +221,7 @@
     </message>
     <message>
         <source>Firmware supports weather condition string</source>
-        <translation type="unfinished"></translation>
+        <translation>El programa-lógico soporta cadena de condición meteorológica</translation>
     </message>
 </context>
 <context>
@@ -239,7 +239,7 @@
     <name>QObject</name>
     <message>
         <source>Finished transferring activity data</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalizada la transferencia de datos de actividad</translation>
     </message>
     <message>
         <source>No data to transfer</source>
@@ -270,7 +270,7 @@
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished">Alarmas</translation>
+        <translation>Alarmas</translation>
     </message>
     <message>
         <source>Save Settings</source>
@@ -466,78 +466,78 @@
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished">Clima</translation>
+        <translation>Clima</translation>
     </message>
 </context>
 <context>
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de perfil</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Cumpleaños</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Género</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Masculino</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Femenino</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>Altura (cm): </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>Peso (lb): </translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubicación de desgaste</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Izquierda</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Derecha</translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualizar elevación en el reloj</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>Metas (pasos): </translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Alertas sobre metas  de gimnasio</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar HRM para detección de sueño</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalo de HRM durante todo el día (minutos): </translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar perfil</translation>
     </message>
 </context>
 <context>
