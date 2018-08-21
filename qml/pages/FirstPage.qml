@@ -182,14 +182,11 @@ Page {
                     font.pixelSize: Theme.fontSizeMedium
                     height: Theme.iconSizeMedium
                     verticalAlignment: Text.AlignVCenter
-                }
-                //Spacer
-                Item {
-                    width: parent.width -  Theme.iconSizeMedium * 3
-                    height: 1
+                    width: parent.width - imgHeartrate.width - btnHR.width - 2* Theme.paddingLarge
                 }
 
                 IconButton {
+                    id: btnHR
                     icon.source: "image://theme/icon-m-refresh"
                     onClicked: {
                         DeviceInterface.hrmService().enableManualHRMeasurement(true);
