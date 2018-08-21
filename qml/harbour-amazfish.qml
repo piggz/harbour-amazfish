@@ -14,11 +14,12 @@ ApplicationWindow
 
     Component.onCompleted: {
         console.log("Application started");
+
+        weather.setCity(cityManager.cities[0])
     }
 
     onStateChanged: {
         console.log("State: " + state);
-
     }
 
     function showMessage(msg)
@@ -75,6 +76,18 @@ ApplicationWindow
     
     CityManager {
         id: cityManager
+
+        onCitiesChanged: {
+            weather.setCity(cities[0]);
+        }
+    }
+    CurrentWeather {
+        id: weather
+
+        onReady: {
+            console.log("Weather data ready");
+            DeviceInterface.sendWeather(weather);
+        }
     }
     
     Connections {

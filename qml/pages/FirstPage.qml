@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import org.SfietKonstantin.weatherfish 1.0
 
 Page {
     id: page
@@ -200,8 +201,7 @@ Page {
                 id: btnWeather
                 text: qsTr("Weather")
                 onClicked: {
-                    var citypage =  pageStack.push(Qt.resolvedUrl("CityPage.qml"));
-                    citypage.city = cityManager.cities[0];
+                    weather.refresh();
                 }
             }
         }

@@ -8,6 +8,7 @@
 #include "activityfetchoperation.h"
 #include "sportssummaryoperation.h"
 #include "sportsdetailoperation.h"
+#include "weather/currentweather.h"
 
 #include <QTimer>
 #include <QtCore/QJsonDocument>
@@ -26,7 +27,7 @@
 --00000008-0000-3512-2118-0009af100700 //User settings
 --00000010-0000-3512-2118-0009af100700 //Device event
 --0000000e-0000-3512-2118-0009af100700 //Weather
---00000020-0000-3512-2118-0009af100700
+--00000020-0000-3512-2118-0009af100700 //Chunked transfer
 */
 
 class MiBandService : public QBLEService
@@ -45,6 +46,7 @@ public:
     static const char* UUID_CHARACTERISTIC_MIBAND_FETCH_DATA;
     static const char* UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA;
     static const char* UUID_CHARACTERISTIC_MIBAND_WEATHER;
+    static const char* UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER;
 
     Q_PROPERTY(QString gpsVersion READ gpsVersion NOTIFY gpsVersionChanged())
     Q_PROPERTY(int batteryInfo READ batteryInfo NOTIFY batteryInfoChanged())
@@ -124,7 +126,7 @@ public:
     
     Q_INVOKABLE void setAlarms();
 
-    void sendWeather(const QJsonDocument &weather);
+    void sendWeather(const CurrentWeather *weather);
 
     //Operations
     Q_INVOKABLE void fetchLogs();

@@ -37,43 +37,83 @@
 class QNetworkReply;
 class QNetworkAccessManager;
 
-class CurrentWeatherModel : public QObject
+class CurrentWeather : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(City * city READ city WRITE setCity NOTIFY cityChanged)
-    Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)
-    Q_PROPERTY(QString temperature READ temperature NOTIFY temperatureChanged)
 public:
-    explicit CurrentWeatherModel(QObject *parent=0);
+    explicit CurrentWeather(QObject *parent=0);
+
+    class Forecast {
+
+    public:
+        int minTemperature() const;
+        void setMinTemperature(int minTemperature);
+
+        int maxTemperature() const;
+        void setMaxTemperature(int maxTemperature);
+
+        int weatherCode() const;
+        void setWeatherCode(int weatherCode);
+
+        void setDescription(const QString &description);
+        QString description() const;
+
+        int dateTime() const;
+        void setDateTime(int dateTime);
+
+
+    private:
+        int m_minTemperature = 0;
+        int m_maxTemperature = 0;
+        int m_weatherCode = 0;
+        QString m_description;
+        int m_dateTime = 0;
+    };
+
+
     City * city() const;
-    void setCity(City *city);
-    QString icon() const;
-    QString temperature() const;
-    
+    Q_INVOKABLE void setCity(City *city);
     QString language() const;
     void setLanguage(const QString &language);
+
+    int temperature() const;
+    int minTemperature() const;
+    int maxTemperature() const;
+    int weatherCode() const;
+    QString description() const;
+    int dateTime() const;
+
     Q_INVOKABLE void refresh();
 
+    int forecastCount() const;
+    const Forecast& forecast(int f) const;
+
 signals:
-    void cityChanged();
-    void iconChanged();
-    void temperatureChanged();
-    void languageChanged();
+    void ready();
 
 private:
-    void handleFinished(const QByteArray &reply);
-    Q_SLOT void slotFinished();    
-    static QString getIconFromCode(int code);
-    
+    void handleCurrent(const QByteArray &reply);
+    void handleForecast(const QByteArray &reply);
+
+    Q_SLOT void slotFinishedCurrent();
+    Q_SLOT void slotFinishedForecast();
+
     void request(const QString &connection, const QVariantMap &arguments);
     virtual void clear();
 
     QNetworkAccessManager *network = nullptr;
     QNetworkReply *m_reply = nullptr;
     City *m_city = nullptr;
-    QString m_icon;
-    QString m_temperature;
     QString m_language;
+
+    int m_temperature = 0;
+    int m_minTemperature = 0;
+    int m_maxTemperature = 0;
+    int m_weatherCode = 0;
+    QString m_description;
+    int m_dateTime = 0;
+
+    QList<Forecast> m_forecasts;
 };
 
 #endif // CURRENTWEATHERMODEL_H

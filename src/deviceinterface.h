@@ -60,7 +60,7 @@ public:
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
     Q_INVOKABLE void startDownload();
     Q_INVOKABLE void downloadSportsData();
-
+    Q_INVOKABLE void sendWeather(CurrentWeather *weather);
 
     KDbConnection *dbConnection();
 
