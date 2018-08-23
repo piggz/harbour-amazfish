@@ -617,7 +617,7 @@ void MiBandService::sendWeather(const CurrentWeather *weather)
     qDebug() << "Sending forecast";
 
     buf.clear();
-    char NR_DAYS = (char) (weather->forecastCount());
+    char NR_DAYS = (char) (qMin(weather->forecastCount(), 6) + 1);
 
     buffer.open(QIODevice::WriteOnly);
 
@@ -628,18 +628,20 @@ void MiBandService::sendWeather(const CurrentWeather *weather)
     buffer.putChar(char(0x01));
     buffer.write((char*)&dt, sizeof(qint32));
     buffer.putChar(char(tz_offset_hours * 4));
-    buffer.putChar((char)NR_DAYS);
+    buffer.putChar(NR_DAYS);
     buffer.putChar(condition);
     buffer.putChar(condition);
-    buffer.putChar((char) (weather->maxTemperature()));
-    buffer.putChar((char) (weather->minTemperature()));
+    buffer.putChar((char) (weather->maxTemperature() - 273));
+    buffer.putChar((char) (weather->minTemperature() - 273));
     if (supportsConditionString) {
         buffer.write(weather->description().toLatin1());
         buffer.putChar((char)0x00);
     }
 
-    for (int f = 0; f < NR_DAYS; f++) {
+    for (int f = 0; f < NR_DAYS - 1; f++) {
         CurrentWeather::Forecast fc = weather->forecast(f);
+        qDebug() << "Forecast:" << f << fc.weatherCode() << fc.maxTemperature() << fc.minTemperature();
+
         condition = HuamiWeatherCondition::mapToAmazfitBipWeatherCode(fc.weatherCode());
 
         buffer.putChar(condition);

@@ -70,12 +70,9 @@ void CurrentWeather::refresh()
 {
     qDebug() << "Refreshing weather";
 
+    clear();
+
     if (!m_city) {
-        m_temperature = 0;
-        m_weatherCode = 0;
-        m_minTemperature = 0;
-        m_maxTemperature = 0;
-        m_description = "";
         return;
     }
 
@@ -132,26 +129,40 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
     QJsonObject object = document.object();
     QJsonArray list = object.value("list").toArray();
 
+    QDate last_day = QDate::currentDate();
     foreach (const QJsonValue & value, list) {
         QJsonObject obj = value.toObject();
 
-        int dt = obj.value("dt").toVariant().toInt();
+        qlonglong dt = obj.value("dt").toVariant().toLongLong() * 1000L;
 
-        QJsonObject weather = obj.value("weather").toArray().first().toObject();
-        int code = weather.value("id").toVariant().toInt();
-        QString desc = weather.value("description").toVariant().toString();
+        QDate d = QDateTime::fromMSecsSinceEpoch(dt).date();
+        QTime t = QDateTime::fromMSecsSinceEpoch(dt).time();
 
-        QJsonObject main = obj.value("main").toObject();
-        int min_temp = int(main.value("temp_min").toDouble());
-        int max_temp = int(main.value("temp_max").toDouble());
+        qDebug() << "Forecast on " << dt << d << t;
 
-        Forecast f;
-        f.setDateTime(dt);
-        f.setDescription(desc);
-        f.setMaxTemperature(max_temp);
-        f.setMinTemperature(min_temp);
-        f.setWeatherCode(code);
-        m_forecasts << f;
+        if (d > last_day && t >= QTime(12,0)) {
+            last_day = d;
+
+            QJsonObject weather = obj.value("weather").toArray().first().toObject();
+
+            int code = weather.value("id").toVariant().toInt();
+            QString desc = weather.value("description").toVariant().toString();
+
+            QJsonObject main = obj.value("main").toObject();
+            int min_temp = int(main.value("temp_min").toDouble());
+            int max_temp = int(main.value("temp_max").toDouble());
+
+            Forecast f;
+            f.setDateTime(dt);
+            f.setDescription(desc);
+            f.setMaxTemperature(max_temp);
+            f.setMinTemperature(min_temp);
+            f.setWeatherCode(code);
+
+            qDebug() << "Forecast:" << dt << desc << max_temp << min_temp << code;
+
+            m_forecasts << f;
+        }
     }
 
     emit ready();
@@ -166,7 +177,6 @@ void CurrentWeather::request(const QString &connection, const QVariantMap &argum
         m_reply = 0;
     }
 
-    clear();
     //    if (!checkValidity(connection, arguments)) {
     //        return;
     //    }
@@ -219,6 +229,7 @@ void CurrentWeather::slotFinishedCurrent()
     //Get forecast
     QVariantMap arguments;
     arguments.insert(QLatin1String("id"), m_city->identifier());
+
     request(QLatin1String("forecast"), arguments);
 }
 

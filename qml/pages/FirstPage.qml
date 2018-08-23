@@ -193,14 +193,6 @@ Page {
                     }
                 }
             }
-            
-            Button {
-                id: btnWeather
-                text: qsTr("Weather")
-                onClicked: {
-                    weather.refresh();
-                }
-            }
         }
     }
     Timer {

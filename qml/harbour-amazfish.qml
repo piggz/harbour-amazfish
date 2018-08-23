@@ -12,6 +12,12 @@ ApplicationWindow
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 
+    ConfigurationValue {
+        id: appRefreshWeather
+        key: "/uk/co/piggz/amazfish/app/refreshweather"
+        defaultValue: 60
+    }
+
     Component.onCompleted: {
         console.log("Application started");
 
@@ -87,6 +93,17 @@ ApplicationWindow
         onReady: {
             console.log("Weather data ready");
             DeviceInterface.sendWeather(weather);
+        }
+    }
+
+    Timer {
+        id: tmrWeatherRefresh
+        running: true
+        repeat: true
+        interval: appRefreshWeather.value * 60 * 1000
+
+        onTriggered: {
+            weather.refresh();
         }
     }
     
