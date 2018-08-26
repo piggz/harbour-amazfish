@@ -173,10 +173,6 @@
         <source>Fetch debug log</source>
         <translation>Hämta felsökningslogg</translation>
     </message>
-    <message>
-        <source>Fetch debug log</source>
-        <translation>Hämta felsökningslogg</translation>
-    </message>
 </context>
 <context>
     <name>FirstPage</name>
@@ -207,10 +203,6 @@
     <message>
         <source>Download File</source>
         <translation>Ladda ner fil</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation>Väder</translation>
     </message>
 </context>
 <context>
