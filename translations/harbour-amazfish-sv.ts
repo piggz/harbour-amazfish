@@ -5,7 +5,7 @@
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Ange plats</translation>
     </message>
 </context>
 <context>
@@ -97,15 +97,15 @@
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj fil</translation>
     </message>
     <message>
         <source>File type/version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Filtyp/version: &gt;</translation>
     </message>
 </context>
 <context>
@@ -131,47 +131,47 @@
     </message>
     <message>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>Adress: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>Serienummer: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Hårdvara rev: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Mjukvara rev: </translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>Anslutningsstatus: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>GPS-version: </translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Testa avisering</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Testa e-post</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>Testa samtal</translation>
     </message>
     <message>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Testa popup</translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>Hämta felsökningslogg</translation>
     </message>
 </context>
 <context>
@@ -224,7 +224,7 @@
     </message>
     <message>
         <source>Firmware supports weather condition string</source>
-        <translation type="unfinished"></translation>
+        <translation>Mjukvaran stödjer väderförhållanderad</translation>
     </message>
 </context>
 <context>
@@ -316,11 +316,11 @@
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdatera vädret varje </translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation> minuter</translation>
     </message>
 </context>
 <context>
@@ -446,7 +446,7 @@
     </message>
     <message>
         <source>ru_RU</source>
-        <translation type="unfinished"></translation>
+        <translation>ru_RU</translation>
     </message>
 </context>
 <context>
@@ -477,78 +477,78 @@
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished">Väder</translation>
+        <translation>Väder</translation>
     </message>
 </context>
 <context>
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Profilinställningar</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Namn:</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Födelsedag</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Kön</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Man</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvinna</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>Längd (cm): </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>Vikt (kg): </translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Klockans placering</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Vänster arm</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Höger arm</translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa vid lyft arm</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>Mål (steg): </translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Avisera vid uppnått träningsmål</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd HRM för att upptäcka sömn</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>Hela dagens HRM-intervall (minuter): </translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Spara profil</translation>
     </message>
 </context>
 <context>
