@@ -5,7 +5,7 @@
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Ort festlegen</translation>
     </message>
 </context>
 <context>
@@ -316,11 +316,11 @@
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation type="unfinished"></translation>
+        <translation>Wetteraktualisierung alle (</translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>) Minuten</translation>
     </message>
 </context>
 <context>
