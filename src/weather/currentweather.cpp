@@ -12,8 +12,8 @@
  *     notice, this list of conditions and the following disclaimer in
  *     the documentation and/or other materials provided with the
  *     distribution.
- *   * The names of its contributors may not be used to endorse or promote 
- *     products derived from this software without specific prior written 
+ *   * The names of its contributors may not be used to endorse or promote
+ *     products derived from this software without specific prior written
  *     permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -27,7 +27,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
- */ 
+ */
 
 #include "currentweather.h"
 #include "apikey.h"
@@ -43,58 +43,59 @@
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
 
-CurrentWeatherModel::CurrentWeatherModel(QObject *parent) :
+CurrentWeather::CurrentWeather(QObject *parent) :
     QObject(parent)
 {    
     network = new QNetworkAccessManager(this);
 }
 
-City * CurrentWeatherModel::city() const
+City * CurrentWeather::city() const
 {
     return m_city;
 }
 
-void CurrentWeatherModel::setCity(City *city)
+void CurrentWeather::setCity(City *city)
 {
     if (m_city != city) {
         m_city = city;
-        emit cityChanged();
     }
 }
 
-QString CurrentWeatherModel::temperature() const
+int CurrentWeather::temperature() const
 {
     return m_temperature;
 }
 
-QString CurrentWeatherModel::icon() const
+void CurrentWeather::refresh()
 {
-    return m_icon;
-}
+    qDebug() << "Refreshing weather";
 
-void CurrentWeatherModel::refresh()
-{
+    clear();
+
     if (!m_city) {
-        m_icon.clear();
-        m_temperature.clear();
-        emit iconChanged();
-        emit temperatureChanged();
         return;
     }
+
+    qDebug() << "...city is" << m_city->name();
 
     QVariantMap arguments;
     arguments.insert(QLatin1String("id"), m_city->identifier());
     request(QLatin1String("weather"), arguments);
 }
 
-void CurrentWeatherModel::clear()
+void CurrentWeather::clear()
 {
-    m_icon.clear();
-    m_temperature.clear();
+    m_temperature = 0;
+    m_weatherCode = 0;
+    m_minTemperature = 0;
+    m_maxTemperature = 0;
+    m_description = "";
 }
 
-void CurrentWeatherModel::handleFinished(const QByteArray &reply)
+void CurrentWeather::handleCurrent(const QByteArray &reply)
 {
+    qDebug() << "Current weather data:\n" << reply;
+
     QJsonDocument document = QJsonDocument::fromJson(reply);
     if (document.isNull()) {
         return;
@@ -102,130 +103,72 @@ void CurrentWeatherModel::handleFinished(const QByteArray &reply)
 
     QJsonObject object = document.object();
 
+    m_dateTime = object.value("dt").toVariant().toInt();
+
     QJsonObject weather = object.value("weather").toArray().first().toObject();
-    int id = weather.value("id").toVariant().toInt();
+    m_weatherCode = weather.value("id").toVariant().toInt();
+    m_description = weather.value("description").toVariant().toString();
+
     QJsonObject main = object.value("main").toObject();
-
-    QString icon = QString("../pics//%1").arg(getIconFromCode(id));
-    if (m_icon != icon) {
-        m_icon = icon;
-        emit iconChanged();
-    }
-
-    QString temperature = QString("%1°").arg(int (main.value("temp").toDouble()));
-    if (m_temperature != temperature) {
-        m_temperature = temperature;
-        emit temperatureChanged();
-    }
+    m_temperature = int(main.value("temp").toDouble());
+    m_minTemperature = int(main.value("temp_min").toDouble());
+    m_maxTemperature = int(main.value("temp_max").toDouble());
 }
 
-QString CurrentWeatherModel::getIconFromCode(int code)
+void CurrentWeather::handleForecast(const QByteArray &reply)
 {
-    int hour = QTime::currentTime().hour();
-    bool night = hour < 7 || hour >= 19;
-    switch (code) {
-    // Storms
-    case 200:
-    case 210:
-    case 221:
-    case 230:
-        return !night ? QString("weather-storm-day.png") : QString("weather-storm-night.png");
-        break;
-    case 201:
-    case 202:
-    case 211:
-    case 212:
-    case 231:
-    case 232:
-        return QString("weather-storm.png");
-        break;
-    // Drizzle
-    case 300:
-    case 301:
-    case 302:
-    case 310:
-    case 311:
-    case 312:
-    case 321:
-        return QString("weather-showers-scattered.png");
-        break;
-    // Rain
-    case 500:
-    case 501:
-        return !night ? QString("weather-showers-scattered-day.png")
-                      : QString("weather-showers-scattered-night.png");
-        break;
-    case 502:
-    case 503:
-    case 504:
-        return !night ? QString("weather-showers-day.png")
-                      : QString("weather-showers-night.png");
-        break;
-    case 511:
-        return QString("weather-freezing-rain");
-        break;
-    case 520:
-        return QString("weather-showers-scattered.png");
-        break;
-    case 521:
-    case 522:
-        return QString("weather-showers.png");
-        break;
-    case 600:
-        return QString("weather-snow-scattered");
-        break;
-    // Snow
-    case 601:
-    case 602:
-        return QString("weather-snow.png");
-        break;
-    case 611:
-        return QString("weather-snow-rain.png");
-        break;
-    case 621:
-        return QString("weather-snow.png");
-        break;
-    // Atmosphere
-    case 701:
-    case 711:
-    case 721:
-    case 731:
-    case 741:
-        return QString("weather-mist.png");
-        break;
-    // Clouds
-    case 800:
-        return !night ? QString("weather-clear.png") : QString("weather-clear-night.png");
-        break;
-    case 801:
-    case 802:
-        return !night ? QString("weather-few-clouds.png") : QString("weather-few-clouds-night.png");
-        break;
-    case 803:
-        return !night ? QString("weather-clouds.png") : QString("weather-clouds-night.png");
-        break;
-    case 804:
-        return QString("weather-many-clouds.png");
-        break;
-    // Extreme
-    case 900:
-    case 901:
-    case 902:
-    case 903:
-    case 904:
-    case 905:
-        return QString("weather-none-available.png");
-        break;
-    case 906:
-        return QString("weather-hail.png");
-        break;
-    default:
-        return QString("weather-none-available.png");
-        break;
+    qDebug() << "Forecast weather data:\n" << reply;
+
+    QJsonDocument document = QJsonDocument::fromJson(reply);
+    if (document.isNull()) {
+        return;
     }
+
+    m_forecasts.clear();
+
+    QJsonObject object = document.object();
+    QJsonArray list = object.value("list").toArray();
+
+    QDate last_day = QDate::currentDate();
+    foreach (const QJsonValue & value, list) {
+        QJsonObject obj = value.toObject();
+
+        qlonglong dt = obj.value("dt").toVariant().toLongLong() * 1000L;
+
+        QDate d = QDateTime::fromMSecsSinceEpoch(dt).date();
+        QTime t = QDateTime::fromMSecsSinceEpoch(dt).time();
+
+        qDebug() << "Forecast on " << dt << d << t;
+
+        if (d > last_day && t >= QTime(12,0)) {
+            last_day = d;
+
+            QJsonObject weather = obj.value("weather").toArray().first().toObject();
+
+            int code = weather.value("id").toVariant().toInt();
+            QString desc = weather.value("description").toVariant().toString();
+
+            QJsonObject main = obj.value("main").toObject();
+            int min_temp = int(main.value("temp_min").toDouble());
+            int max_temp = int(main.value("temp_max").toDouble());
+
+            Forecast f;
+            f.setDateTime(dt);
+            f.setDescription(desc);
+            f.setMaxTemperature(max_temp);
+            f.setMinTemperature(min_temp);
+            f.setWeatherCode(code);
+
+            qDebug() << "Forecast:" << dt << desc << max_temp << min_temp << code;
+
+            m_forecasts << f;
+        }
+    }
+
+    emit ready();
 }
 
-void CurrentWeatherModel::request(const QString &connection, const QVariantMap &arguments)
+void CurrentWeather::request(const QString &connection, const QVariantMap &arguments)
 {
     if (m_reply) {
         m_reply->disconnect();
@@ -234,10 +177,9 @@ void CurrentWeatherModel::request(const QString &connection, const QVariantMap &
         m_reply = 0;
     }
 
-    clear();
-//    if (!checkValidity(connection, arguments)) {
-//        return;
-//    }
+    //    if (!checkValidity(connection, arguments)) {
+    //        return;
+    //    }
 
     QUrl url (QString(QLatin1String("http://api.openweathermap.org/data/2.5/%1")).arg(connection));
     QUrlQuery query;
@@ -252,23 +194,27 @@ void CurrentWeatherModel::request(const QString &connection, const QVariantMap &
     url.setQuery(query);
 
     m_reply = network->get(QNetworkRequest(url));
-    connect(m_reply, &QNetworkReply::finished, this, &CurrentWeatherModel::slotFinished);
+
+    if (connection == "weather") {
+        connect(m_reply, &QNetworkReply::finished, this, &CurrentWeather::slotFinishedCurrent);
+    } else if (connection == "forecast") {
+        connect(m_reply, &QNetworkReply::finished, this, &CurrentWeather::slotFinishedForecast);
+    }
 }
 
-QString CurrentWeatherModel::language() const
+QString CurrentWeather::language() const
 {
     return m_language;
 }
 
-void CurrentWeatherModel::setLanguage(const QString &language)
+void CurrentWeather::setLanguage(const QString &language)
 {
     if (m_language != language) {
         m_language = language;
-        emit languageChanged();
     }
 }
 
-void CurrentWeatherModel::slotFinished()
+void CurrentWeather::slotFinishedCurrent()
 {
     if (m_reply->error() != QNetworkReply::NoError) {
         m_reply->deleteLater();
@@ -276,7 +222,111 @@ void CurrentWeatherModel::slotFinished()
         return;
     }
 
-    handleFinished(m_reply->readAll());
+    handleCurrent(m_reply->readAll());
     m_reply->deleteLater();
     m_reply = 0;
+
+    //Get forecast
+    QVariantMap arguments;
+    arguments.insert(QLatin1String("id"), m_city->identifier());
+
+    request(QLatin1String("forecast"), arguments);
+}
+
+void CurrentWeather::slotFinishedForecast()
+{
+    if (m_reply->error() != QNetworkReply::NoError) {
+        m_reply->deleteLater();
+        m_reply = 0;
+        return;
+    }
+
+    handleForecast(m_reply->readAll());
+    m_reply->deleteLater();
+    m_reply = 0;
+}
+
+int CurrentWeather::weatherCode() const
+{
+    return m_weatherCode;
+}
+
+int CurrentWeather::minTemperature() const
+{
+    return m_minTemperature;
+}
+
+int CurrentWeather::maxTemperature() const
+{
+    return m_maxTemperature;
+}
+
+int CurrentWeather::dateTime() const
+{
+    return m_dateTime;
+}
+
+QString CurrentWeather::description() const
+{
+    return m_description;
+}
+
+int CurrentWeather::Forecast::minTemperature() const
+{
+    return m_minTemperature;
+}
+
+void CurrentWeather::Forecast::setMinTemperature(int minTemperature)
+{
+    m_minTemperature = minTemperature;
+}
+
+int CurrentWeather::Forecast::maxTemperature() const
+{
+    return m_maxTemperature;
+}
+
+void CurrentWeather::Forecast::setMaxTemperature(int maxTemperature)
+{
+    m_maxTemperature = maxTemperature;
+}
+
+int CurrentWeather::Forecast::weatherCode() const
+{
+    return m_weatherCode;
+}
+
+void CurrentWeather::Forecast::setWeatherCode(int weatherCode)
+{
+    m_weatherCode = weatherCode;
+}
+
+void CurrentWeather::Forecast::setDescription(const QString &description)
+{
+    m_description = description;
+}
+
+void CurrentWeather::Forecast::setDateTime(int dateTime)
+{
+    m_dateTime = dateTime;
+}
+
+QString CurrentWeather::Forecast::description() const
+{
+    return m_description;
+}
+
+int CurrentWeather::Forecast::dateTime() const
+{
+    return m_dateTime;
+}
+
+int CurrentWeather::forecastCount() const
+{
+    return m_forecasts.size();
+}
+
+const CurrentWeather::Forecast& CurrentWeather::forecast(int f) const
+{
+    return m_forecasts.at(f);
 }

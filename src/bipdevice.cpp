@@ -132,7 +132,12 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
             initialise();
         }
         if (map.contains("Connected")) {
-            emit connectionStateChanged();
+            bool value = map["Connected"].toBool();
+
+            if (!value) {
+                qDebug() << "DisConnected!";
+                setConnectionState("disconnected");
+            }
         }
 
 #if 0

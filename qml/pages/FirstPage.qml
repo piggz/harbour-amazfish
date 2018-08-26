@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import org.SfietKonstantin.weatherfish 1.0
 
 Page {
     id: page
@@ -181,27 +182,15 @@ Page {
                     font.pixelSize: Theme.fontSizeMedium
                     height: Theme.iconSizeMedium
                     verticalAlignment: Text.AlignVCenter
-                }
-                //Spacer
-                Item {
-                    width: parent.width -  Theme.iconSizeMedium * 3
-                    height: 1
+                    width: parent.width - imgHeartrate.width - btnHR.width - 2* Theme.paddingLarge
                 }
 
                 IconButton {
+                    id: btnHR
                     icon.source: "image://theme/icon-m-refresh"
                     onClicked: {
                         DeviceInterface.hrmService().enableManualHRMeasurement(true);
                     }
-                }
-            }
-            
-            Button {
-                id: btnWeather
-                text: qsTr("Weather")
-                onClicked: {
-                    var citypage =  pageStack.push(Qt.resolvedUrl("CityPage.qml"));
-                    citypage.city = cityManager.cities[0];
                 }
             }
         }

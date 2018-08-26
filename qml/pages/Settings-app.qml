@@ -14,6 +14,11 @@ Page {
         defaultValue: true
     }
 
+    ConfigurationValue {
+        id: appRefreshWeather
+        key: "/uk/co/piggz/amazfish/app/refreshweather"
+        defaultValue: 60
+    }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -40,8 +45,15 @@ Page {
                 id: chkNotifyConnect
                 width: parent.width
                 text: qsTr("Notify on connect")
+            }
 
-
+            Slider {
+                id: sldWeatherRefresh
+                width: parent.width
+                minimumValue: 15
+                maximumValue: 120
+                stepSize: 15
+                label: qsTr("Refresh weather every (") + value + qsTr(") minutes")
             }
 
             Button {
@@ -55,10 +67,14 @@ Page {
     }
     Component.onCompleted: {
         chkNotifyConnect.checked = appNotifyConnect.value;
+        sldWeatherRefresh.value = appRefreshWeather.value;
 
     }
     function saveSettings() {
-        appNotifyConnect.value = chkNotifyConnect.checked
+        appNotifyConnect.value = chkNotifyConnect.checked;
+        appRefreshWeather.value = sldWeatherRefresh.value;
+
+        weather.refresh();
     }
 
 }

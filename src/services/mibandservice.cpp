@@ -17,6 +17,8 @@ const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS = "00000008-
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT = "00000010-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME = "00002a2b-0000-1000-8000-00805f9b34fb";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_WEATHER = "0000000e-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER = "00000020-0000-3512-2118-0009af100700";
+
 
 constexpr char MiBandService::DATEFORMAT_TIME[];
 constexpr char MiBandService::DATEFORMAT_DATETIME[];
@@ -559,7 +561,7 @@ void MiBandService::abortOperations()
     emit operationRunningChanged();
 }
 
-void MiBandService::sendWeather(const QJsonDocument &weather)
+void MiBandService::sendWeather(const CurrentWeather *weather)
 {
     BipDevice *device = qobject_cast<BipDevice*>(parent());
 
@@ -570,88 +572,87 @@ void MiBandService::sendWeather(const QJsonDocument &weather)
         supportsConditionString = true;
     }
 
-    char condition = HuamiWeatherConditions::mapToAmazfitBipWeatherCode(weatherSpec.currentConditionCode);
+    char condition = HuamiWeatherCondition::mapToAmazfitBipWeatherCode(weather->weatherCode());
 
-    //int tz_offset_hours = SimpleTimeZone.getDefault().getOffset(weatherSpec.timestamp * 1000L) / (1000 * 60 * 60);
+    //int tz_offset_hours = SimpleTimeZone.getDefault().getOffset(weather->timestamp * 1000L) / (1000 * 60 * 60);
+    int tz_offset_hours = 0; //!TODO work out what to do with this
 
     qDebug() << "Sending condition";
     QByteArray buf;
-    buf += 0x02;
-    buf += TypeConversion::fromInt32(weatherSpec.timestamp);
-    buf += (char)(tz_offset_hours * 4);
-    buf += condition;
-    buf += (char)(weatherSpec.currentTemp - 273);
+    QBuffer buffer(&buf);
+    buffer.open(QIODevice::WriteOnly);
 
+    char temp = weather->temperature() - 273;
+    qint32 dt = qToLittleEndian(weather->dateTime());
+
+    qDebug() << dt << temp << condition;
+
+    buffer.putChar(char(0x02));
+    buffer.write((char*)&dt, sizeof(qint32));
+    buffer.putChar(char(tz_offset_hours * 4));
+    buffer.putChar(condition);
+    buffer.putChar(temp);
     if (supportsConditionString) {
-        buf += weatherSpec.currentCondition.getBytes();
-        buf += 0x00;
+        buffer.write(weather->description().toLatin1());
+        buffer.putChar((char)0x00);
     }
 
-    writeValue(UUID_CHARACTERISTIC_MIBAND_WEATHER, buf);
+    writeChunked(UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 1, buf);
+    buf.clear();
+    buffer.close();
 
     qDebug() << "Sending aqi";
-
-    buf.clear();
-    buf += 0x04;
-    buf += TypeConversion::fromInt32(weatherSpec.timestamp);
-    buf += (char)(tz_offset_hours * 4);
-    buf += 0x00;
-    buf += 0x00;
-
+    buffer.open(QIODevice::WriteOnly);
+    buffer.putChar(char(0x04));
+    buffer.write((char*)&dt, sizeof(qint32));
+    buffer.putChar(char(tz_offset_hours * 4));
+    buffer.putChar(char(0x00)); //No AQI data, so just write 0
+    buffer.putChar(char(0x00));
     if (supportsConditionString) {
-        buf += "(n/a)";
-        buf += 0x00;
+        buffer.write(QString("(n/a)").toLatin1());
+        buffer.putChar((char)0x00);
     }
-    writeValue(UUID_CHARACTERISTIC_MIBAND_WEATHER, buf);
+    writeChunked(UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 1, buf);
 
     qDebug() << "Sending forecast";
 
-    char NR_DAYS = (char) (1 + weatherSpec.forecasts.size());
-    int bytesPerDay = 4;
-
-    int conditionsLength = 0;
-    if (supportsConditionString) {
-        bytesPerDay = 5;
-        conditionsLength = weatherSpec.currentCondition.getBytes().length;
-        for (WeatherSpec.Forecast forecast : weatherSpec.forecasts) {
-            conditionsLength += Weather.getConditionString(forecast.conditionCode).getBytes().length;
-        }
-    }
-    int length = 7 + bytesPerDay * NR_DAYS + conditionsLength;
-
     buf.clear();
-    buf += 0x01;
-    buf += TypeConversion::fromInt32(weatherSpec.timestamp);
-    buf += (char)(tz_offset_hours * 4);
-    buf + (char)NR_DAYS;
+    char NR_DAYS = (char) (qMin(weather->forecastCount(), 6) + 1);
 
-    char condition = HuamiWeatherConditions::mapToAmazfitBipWeatherCode(weatherSpec.currentConditionCode);
+    buffer.open(QIODevice::WriteOnly);
 
-    buf += condition;
-    buf += condition;
-    buf += (char) (weatherSpec.todayMaxTemp - 273);
-    buf += (char) (weatherSpec.todayMinTemp - 273);
+    dt = qToLittleEndian(weather->dateTime());
 
+    qDebug() << dt << temp << condition;
+
+    buffer.putChar(char(0x01));
+    buffer.write((char*)&dt, sizeof(qint32));
+    buffer.putChar(char(tz_offset_hours * 4));
+    buffer.putChar(NR_DAYS);
+    buffer.putChar(condition);
+    buffer.putChar(condition);
+    buffer.putChar((char) (weather->maxTemperature() - 273));
+    buffer.putChar((char) (weather->minTemperature() - 273));
     if (supportsConditionString) {
-        buf += weatherSpec.currentCondition.getBytes();
-        buf += 0x00;
+        buffer.write(weather->description().toLatin1());
+        buffer.putChar((char)0x00);
     }
 
+    for (int f = 0; f < NR_DAYS - 1; f++) {
+        CurrentWeather::Forecast fc = weather->forecast(f);
+        qDebug() << "Forecast:" << f << fc.weatherCode() << fc.maxTemperature() << fc.minTemperature();
 
-    writeValue(UUID_CHARACTERISTIC_MIBAND_WEATHER, buf);
+        condition = HuamiWeatherCondition::mapToAmazfitBipWeatherCode(fc.weatherCode());
 
-    for (int f = 0; f < NR_DAYS; f++) {
-        condition = HuamiWeatherConditions::mapToAmazfitBipWeatherCode(forecast.conditionCode);
-
-        buf += condition;
-        buf += condition;
-        buf += (char) (forecast.todayMaxTemp - 273);
-        buf += (char) (forecast.todayMinTemp - 273);
+        buffer.putChar(condition);
+        buffer.putChar(condition);
+        buffer.putChar((char) (fc.maxTemperature() - 273));
+        buffer.putChar((char) (fc.minTemperature() - 273));
 
         if (supportsConditionString) {
-            buf += forecast.currentCondition.getBytes();
-            buf += 0x00;
+            buffer.write(fc.description().toLatin1());
+            buffer.putChar((char)0x00);
         }
     }
-
+    writeChunked(UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 1, buf);
 }

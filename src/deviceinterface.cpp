@@ -382,3 +382,10 @@ void DeviceInterface::downloadSportsData()
         miBandService()->fetchSportsSummaries();
     }
 }
+
+void DeviceInterface::sendWeather(CurrentWeather *weather)
+{
+    if (miBandService()) {
+        miBandService()->sendWeather(weather);
+    }
+}

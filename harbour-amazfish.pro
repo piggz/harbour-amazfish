@@ -1,4 +1,4 @@
-# NOTICE:
+290# NOTICE:
 #
 # Application name defined in TARGET has a corresponding QML filename.
 # If name defined in TARGET is changed, the following needs to be done

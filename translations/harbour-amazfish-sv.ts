@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="sv">
 <context>
+    <name>AddCityDialog</name>
+    <message>
+        <source>Set Location</source>
+        <translation>Ange plats</translation>
+    </message>
+</context>
+<context>
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
@@ -168,7 +175,7 @@
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>Hämta felsökningslogg</translation>
     </message>
 </context>
 <context>
@@ -204,7 +211,6 @@
     <message>
         <source>Weather</source>
         <translation>Väder</translation>
-    </message>
 </context>
 <context>
     <name>GraphData</name>
@@ -314,6 +320,14 @@
     <message>
         <source>Save Settings</source>
         <translation>Spara inställningar</translation>
+    </message>
+    <message>
+        <source>Refresh weather every (</source>
+        <translation>Uppdatera vädret varje </translation>
+    </message>
+    <message>
+        <source>) minutes</source>
+        <translation> minuter</translation>
     </message>
 </context>
 <context>
