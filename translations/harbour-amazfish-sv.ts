@@ -211,6 +211,7 @@
     <message>
         <source>Weather</source>
         <translation>Väder</translation>
+    </message>
 </context>
 <context>
     <name>GraphData</name>
