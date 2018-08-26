@@ -4,6 +4,7 @@ import "pages"
 import Nemo.Notifications 1.0
 import org.nemomobile.mpris 1.0
 import org.SfietKonstantin.weatherfish 1.0
+import Nemo.Configuration 1.0
 
 ApplicationWindow
 {
@@ -100,10 +101,20 @@ ApplicationWindow
         id: tmrWeatherRefresh
         running: true
         repeat: true
-        interval: appRefreshWeather.value * 60 * 1000
+        interval: 60000
+        property int minutes: 0
 
         onTriggered: {
-            weather.refresh();
+            console.log("tmrWeatherRefresh", minutes);
+            minutes++;
+
+            if (minutes >= appRefreshWeather.value) {
+                minutes = 0;
+                console.log("interval reached");
+                weather.refresh();
+            }
+
+
         }
     }
     
