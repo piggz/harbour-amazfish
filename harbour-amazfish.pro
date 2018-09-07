@@ -45,6 +45,7 @@ SOURCES += src/harbour-amazfish.cpp \
     src/operations/logfetchoperation.cpp \
     src/operations/sportssummaryoperation.cpp \
     src/operations/updatefirmwareoperation.cpp \
+    src/devices/abstractdevice.cpp \
     src/huamifirmwareinfo.cpp \
     src/dbushrm.cpp \
     src/activitysummary.cpp \
@@ -133,6 +134,7 @@ HEADERS += \
     src/operations/updatefirmwareoperation.h \   
     src/operations/sportsdetailoperation.h \
     src/operations/abstractfetchoperation.h \
+    src/devices/abstractdevice.h \
     src/bipactivitydetailparser.h \
     src/activitycoordinate.h \
     src/sportsdatamodel.h \

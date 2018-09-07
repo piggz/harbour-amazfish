@@ -1,7 +1,7 @@
 
+#include "qble/qbledevice.h
 
-
-class AbstractDevice : public QObject
+class AbstractDevice : public QBleDevice
 {
     Q_OBJECT
     Q_ENUMS(Feature)
