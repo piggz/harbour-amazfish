@@ -128,6 +128,7 @@ public:
 
     void sendWeather(const CurrentWeather *weather);
 
+    void writeChunked(QString, int,  QByteArray){};
     //Operations
     Q_INVOKABLE void fetchLogs();
     Q_INVOKABLE void fetchActivityData();

@@ -22,6 +22,7 @@ PKGCONFIG += mlite5
 
 INCLUDEPATH += $$PWD/src/services/ \
                                     $$PWD/src/operations/ \
+                                    $$PWD/src/devices/ \
                                     $$PWD/src/
 
 SOURCES += src/harbour-amazfish.cpp \
@@ -31,7 +32,6 @@ SOURCES += src/harbour-amazfish.cpp \
     src/typeconversion.cpp \
     src/settingsmanager.cpp \
     src/bipbatteryinfo.cpp \
-    src/bipdevice.cpp \
     src/datasource.cpp \
     src/notificationslistener.cpp \
     src/services/mibandservice.cpp \
@@ -46,6 +46,7 @@ SOURCES += src/harbour-amazfish.cpp \
     src/operations/sportssummaryoperation.cpp \
     src/operations/updatefirmwareoperation.cpp \
     src/devices/abstractdevice.cpp \
+    src/devices/bipdevice.cpp \
     src/huamifirmwareinfo.cpp \
     src/dbushrm.cpp \
     src/activitysummary.cpp \
@@ -113,7 +114,6 @@ HEADERS += \
     src/typeconversion.h \
     src/settingsmanager.h \
     src/bipbatteryinfo.h \
-    src/bipdevice.h \
     src/deviceinterface.h \
     src/datasource.h \
     src/activitykind.h \
@@ -135,6 +135,7 @@ HEADERS += \
     src/operations/sportsdetailoperation.h \
     src/operations/abstractfetchoperation.h \
     src/devices/abstractdevice.h \
+    src/devices/bipdevice.h \
     src/bipactivitydetailparser.h \
     src/activitycoordinate.h \
     src/sportsdatamodel.h \
