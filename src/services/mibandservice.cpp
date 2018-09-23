@@ -656,3 +656,32 @@ void MiBandService::sendWeather(const CurrentWeather *weather)
     }
     writeChunked(UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 1, buf);
 }
+
+void MiBandService::writeChunked(const QString &characteristic, int type, const QByteArray &value) {
+    int MAX_CHUNKLENGTH = 17;
+    int remaining = value.length();
+    char count = 0;
+    while (remaining > 0) {
+        int copybytes = qMin(remaining, MAX_CHUNKLENGTH);
+        QByteArray chunk;
+
+        char flags = 0;
+        if (remaining <= MAX_CHUNKLENGTH) {
+            flags |= 0x80; // last chunk
+            if (count == 0) {
+                flags |= 0x40; // weird but true
+            }
+        } else if (count > 0) {
+            flags |= 0x40; // consecutive chunk
+        }
+
+        chunk += (char) 0x00;
+        chunk += (char) (flags | type);
+        chunk += (char) (count & 0xff);
+
+        chunk += value.mid(count++ * MAX_CHUNKLENGTH, copybytes);
+
+        writeValue(characteristic, chunk);
+        remaining -= copybytes;
+    }
+}

@@ -149,6 +149,8 @@ public:
 
     void setDatabase(KDbConnection *conn);
 
+    void writeChunked(const QString &characteristic, int type, const QByteArray &value);
+
 private:
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
     Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
