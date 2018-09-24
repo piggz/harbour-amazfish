@@ -9,7 +9,7 @@
 
 #include "qble/bluezadapter.h"
 
-#include "bipdevice.h"
+#include "abstractdevice.h"
 #include "notificationslistener.h"
 #include "voicecallhandler.h"
 #include "voicecallmanager.h"
@@ -69,7 +69,7 @@ private:
     QString m_deviceName;
 
     BluezAdapter m_adapter;
-    BipDevice *m_bipDevice = nullptr;
+    AbstractDevice *m_bipDevice = nullptr;
     NotificationsListener *m_notificationListener = nullptr;
     VoiceCallManager *m_voiceCallManager = nullptr;
 

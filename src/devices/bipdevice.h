@@ -1,7 +1,7 @@
 #ifndef BIPDEVICE_H
 #define BIPDEVICE_H
 
-#include "qble/qbledevice.h"
+#include "abstractdevice.h"
 #include "qble/qbleservice.h"
 
 #include "deviceinfoservice.h"
@@ -78,7 +78,7 @@ BIP Services and Characteristics
 
 */
 
-class BipDevice : public QBLEDevice
+class BipDevice : public AbstractDevice
 {
     Q_OBJECT
 public:
@@ -90,11 +90,16 @@ public:
     static const char* UUID_SERVICE_DEVICEINFO;
     static const char* UUID_SERVICE_FIRMWARE;
     
-    virtual QString pair();
-    virtual void pairAsync();
+    virtual bool supportsFeature(Feature f) override;
+    virtual QString deviceType() override;
+    virtual QString deviceName() override;
+    virtual bool operationRunning() override;
+    
+    virtual QString pair() override;
+    virtual void pairAsync() override;
 
-    virtual void connectToDevice();
-    virtual void disconnectFromDevice();
+    virtual void connectToDevice() override;
+    virtual void disconnectFromDevice() override;
 
     QString connectionState() const;
     QString softwareRevision();

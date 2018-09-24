@@ -22,6 +22,27 @@ BipDevice::BipDevice()
     connect(m_keyPressTimer, &QTimer::timeout, this, &BipDevice::buttonPressTimeout);
 }
 
+
+bool BipDevice::supportsFeature(Feature f)
+{
+    return true;
+}
+
+QString BipDevice::deviceType()
+{
+    return "amazfitbip";
+}
+
+QString BipDevice::deviceName()
+{
+    return "Amazfit Bip";
+}
+
+bool BipDevice::operationRunning()
+{
+    
+}
+    
 QString BipDevice::pair()
 {
     qDebug() << "BipDevice::pair";

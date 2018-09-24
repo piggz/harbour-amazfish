@@ -2,9 +2,15 @@
 
 #include <QString>
     
+AbstractDevice::AbstractDevice(QObject *parent) : QBLEDevice(parent)
+{
+    
+}
+
 QString AbstractDevice::prepareFirmwareDownload(const QString &path)
 {
-   Q_UNUSED(path)   
+   Q_UNUSED(path)
+    return "";
 }
 
 void AbstractDevice::startDownload()
