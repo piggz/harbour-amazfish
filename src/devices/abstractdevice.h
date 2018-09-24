@@ -13,7 +13,8 @@ class AbstractDevice : public QBLEDevice
         FEATURE_WEATHER,
         FEATURE_ACTIVITY,
         FEATURE_STEPS,
-        FEATURE_ALARMS
+        FEATURE_ALARMS,
+        FEATURE_ALERT
     };
     
     explicit AbstractDevice(QObject *parent = 0);

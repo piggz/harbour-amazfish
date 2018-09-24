@@ -39,13 +39,6 @@ public:
 
     bool ready() const;
     QString connectionState() const;
-
-    Q_INVOKABLE DeviceInfoService *infoService() const;
-    Q_INVOKABLE MiBandService *miBandService() const;
-    Q_INVOKABLE MiBand2Service *miBand2Service() const;
-    Q_INVOKABLE AlertNotificationService *alertNotificationService() const;
-    Q_INVOKABLE HRMService *hrmService() const;
-    Q_INVOKABLE BipFirmwareService *firmwareService() const;
     
     Q_INVOKABLE DataSource *dataSource();
 
@@ -77,11 +70,16 @@ private:
     DataSource m_dataSource;
     DBusHRM *m_dbusHRM = nullptr;
 
-
     void createSettings();
-
     void updateServiceController();
-
+    
+    DeviceInfoService *infoService() const;
+    MiBandService *miBandService() const;
+    MiBand2Service *miBand2Service() const;
+    AlertNotificationService *alertNotificationService() const;
+    HRMService *hrmService() const;
+    BipFirmwareService *firmwareService() const;
+    
     Q_SLOT void notificationReceived(const QString &appName, const QString &summary, const QString &body);
     Q_SLOT void onActiveVoiceCallChanged();
     Q_SLOT void onActiveVoiceCallStatusChanged();

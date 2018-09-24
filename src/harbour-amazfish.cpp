@@ -39,12 +39,12 @@ int main(int argc, char *argv[])
     SportsDataModel sportsDataModel;
     sportsDataModel.setConnection(devInterface.dbConnection());
 
-    qmlRegisterType<DeviceInfoService>();
-    qmlRegisterType<MiBandService>();
-    qmlRegisterType<MiBand2Service>();
-    qmlRegisterType<AlertNotificationService>();
-    qmlRegisterType<HRMService>();
-    qmlRegisterType<BipFirmwareService>();
+//    qmlRegisterType<DeviceInfoService>();
+//    qmlRegisterType<MiBandService>();
+//    qmlRegisterType<MiBand2Service>();
+//    qmlRegisterType<AlertNotificationService>();
+//    qmlRegisterType<HRMService>();
+//    qmlRegisterType<BipFirmwareService>();
 
     qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
     qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");

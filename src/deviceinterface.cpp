@@ -1,5 +1,12 @@
 #include "deviceinterface.h"
 
+#include "deviceinfoservice.h"
+#include "mibandservice.h"
+#include "miband2service.h"
+#include "alertnotificationservice.h"
+#include "hrmservice.h"
+#include "bipfirmwareservice.h"
+
 #include <QDir>
 #include <KDb3/KDbDriverManager>
 
@@ -102,7 +109,7 @@ BipFirmwareService *DeviceInterface::firmwareService() const
 
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
-    if (alertNotificationService()){
+    if (m_bipDevice->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
         alertNotificationService()->sendAlert(appName, summary, body);
     }
 }
