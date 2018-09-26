@@ -1,4 +1,7 @@
 
+#ifndef ABSTRACTDEVICE_H
+#define ABSTRACTDEVICE_H
+
 #include "qble/qbledevice.h"
 #include "weather/currentweather.h"
 
@@ -23,6 +26,8 @@ class AbstractDevice : public QBLEDevice
     virtual QString deviceType() = 0;
     virtual QString deviceName() = 0;
     virtual bool operationRunning() = 0;
+    virtual QString connectionState() const = 0;
+    
     virtual QString prepareFirmwareDownload(const QString &path);
     virtual void startDownload();
     virtual void downloadSportsData();
@@ -33,5 +38,8 @@ class AbstractDevice : public QBLEDevice
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
+    Q_SIGNAL void connectionStateChanged();
 
 };
+
+#endif
