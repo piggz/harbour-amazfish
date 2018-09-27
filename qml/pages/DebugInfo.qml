@@ -24,9 +24,10 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Refresh")
-                onClicked: {
-                    DeviceInterface.infoService().refreshInformation();
-                    DeviceInterface.miBandService().requestGPSVersion();
+                onClicked: {                    
+                    DeviceInterface.refreshInformation();
+                    //DeviceInterface.infoService().refreshInformation();
+                    //DeviceInterface.miBandService().requestGPSVersion();
                 }
             }
         }

@@ -32,6 +32,7 @@ class AbstractDevice : public QBLEDevice
     virtual void startDownload();
     virtual void downloadSportsData();
     virtual void sendWeather(CurrentWeather *weather);
+    virtual void refreshInformation();
     
     //signals    
     Q_SIGNAL void message(const QString &text);

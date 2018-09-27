@@ -103,6 +103,9 @@ public:
     virtual void disconnectFromDevice() override;
 
     virtual QString connectionState() const override;
+    
+    virtual void refreshInformation() override;
+    
     QString softwareRevision();
     
     Q_SLOT void authenticated(bool ready);

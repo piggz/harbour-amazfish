@@ -326,3 +326,16 @@ void BipDevice::buttonPressTimeout()
     m_keyPressTimer->stop();
     emit buttonPressed(presses);
 }
+
+void BipDevice::refreshInformation()
+{
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+    if (info) {
+         info->refreshInformation();
+    }
+    
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->requestGPSVersion();
+    }
+}
