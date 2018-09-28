@@ -339,3 +339,41 @@ void BipDevice::refreshInformation()
         mi->requestGPSVersion();
     }
 }
+
+QString BipDevice::information(Info i)
+{
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+     if (!info) {
+        return QString();
+    }
+    
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return QString();
+    }
+    
+    switch(i) {
+        case INFO_SWVER:
+        return info->softwareRevision();
+        break;
+        case INFO_HWVER:
+        return info->hardwareRevision();
+        break;
+        case INFO_SERIAL:
+        return info->serialNumber();
+        break;
+        case INFO_SYSTEMID:
+        return info->systemId();
+        break;
+        case INFO_PNPID:
+        return info->pnpId();
+        break;
+        case INFO_GPSVER:
+        return mi->gpsVersion();
+        break;
+        case INFO_BATTERY:
+        return QString::number(mi->batteryInfo());
+        break;
+    }    
+    return QString();
+}    

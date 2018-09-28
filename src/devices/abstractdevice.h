@@ -9,6 +9,7 @@ class AbstractDevice : public QBLEDevice
 {
     Q_OBJECT
     Q_ENUMS(Feature)
+    Q_ENUMS(Info)
     
     public:
     enum Feature{
@@ -18,6 +19,17 @@ class AbstractDevice : public QBLEDevice
         FEATURE_STEPS,
         FEATURE_ALARMS,
         FEATURE_ALERT
+        FEATURE_NOTIFIATION
+    };
+    
+    enum Info {
+        INFO_SWVER = 1,
+        INFO_HWVER,
+        INFO_SERIAL,
+        INFO_SYSTEMID,
+        INFO_PNPID,
+        INFO_GPSVER,
+        INFO_BATTERY
     };
     
     explicit AbstractDevice(QObject *parent = 0);
@@ -33,6 +45,7 @@ class AbstractDevice : public QBLEDevice
     virtual void downloadSportsData();
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
+    virtual QString information(Info i);
     
     //signals    
     Q_SIGNAL void message(const QString &text);

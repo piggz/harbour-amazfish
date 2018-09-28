@@ -105,6 +105,7 @@ public:
     virtual QString connectionState() const override;
     
     virtual void refreshInformation() override;
+    virtual QString information(Info i) override;
     
     QString softwareRevision();
     

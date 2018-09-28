@@ -32,3 +32,8 @@ void AbstractDevice::refreshInformation()
 {
     
 }
+
+QString AbstractDevice::information(Info i)
+{
+    Q_UNUSED(i)
+}
