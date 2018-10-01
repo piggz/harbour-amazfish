@@ -41,6 +41,7 @@ public:
     QString connectionState() const;
     
     Q_INVOKABLE DataSource *dataSource();
+    KDbConnection *dbConnection();
 
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
@@ -54,8 +55,10 @@ public:
     Q_INVOKABLE void startDownload();
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void sendWeather(CurrentWeather *weather);
+    Q_INVOKABLE QString information(AbstractDevice::Info i);
+    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
+    Q_INVOKABLE void incomingCall(const QString &caller);
 
-    KDbConnection *dbConnection();
 
 private:
     QString m_deviceAddress;

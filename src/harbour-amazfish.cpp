@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<CurrentWeather>("org.SfietKonstantin.weatherfish", 1, 0, "CurrentWeather");
 
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
+    qmlRegisterUncreatableType<AbstractDevice>("uk.co.piggz.amazfish", 1, 0, "AbstractDevice", "Abstract Device type available only for enum datatypes"
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);

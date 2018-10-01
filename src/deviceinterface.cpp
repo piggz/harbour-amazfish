@@ -400,3 +400,25 @@ void DeviceInterface::sendWeather(CurrentWeather *weather)
         miBandService()->sendWeather(weather);
     }
 }
+
+QString DeviceInterface::information(AbstractDevice::Info i)
+{
+    if (m_bipDevice) {
+        return m_bipDevice->information(i);
+    }
+    return QString();
+}
+
+void DeviceInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
+{
+    if (alertNotificationService()) {
+            alertNotificationService->sendAlert(sender, subject, message, allowDuplicate);
+    }
+}
+
+void DeviceInterface::incomingCall(const QString &caller)
+{
+    if (alertNotificationService()) {
+            alertNotificationService->incmingCall(caller);
+    }
+}

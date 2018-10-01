@@ -48,17 +48,17 @@ Page {
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("Serial No: ") + DeviceInterface.infoService().serialNumber
+                text: qsTr("Serial No: ") + DeviceInterface.information(AbstractDevice.INFO_SERIAL);
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("Hardware Rev: ")+ DeviceInterface.infoService().hardwareRevision
+                text: qsTr("Hardware Rev: ")+ DeviceInterface.information(AbstractDevice.INFO_HWREV);
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("Software Rev: ") + DeviceInterface.infoService().softwareRevision
+                text: qsTr("Software Rev: ") + DeviceInterface.infoSrmation(AbstractDevice.INFO_SWREV)
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
@@ -68,26 +68,26 @@ Page {
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("GPS Ver: ") + DeviceInterface.miBandService().gpsVersion
+                text: qsTr("GPS Ver: ") + DeviceInterface.information(AbstractDevice.INFO_GPSVER);
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Button {
                 text: qsTr("Test Notification")
                 onClicked: {
-                    DeviceInterface.alertNotificationService().sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
+                    DeviceInterface.sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
                 }
             }
             Button {
                 text: qsTr("Test Email")
                 onClicked: {
-                    DeviceInterface.alertNotificationService().sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
+                    DeviceInterface..sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
                 }
             }
             Button {
                 text: qsTr("Test Call")
                 onClicked: {
-                    DeviceInterface.alertNotificationService().incomingCall("Somebody");
+                    DeviceInterface..incomingCall("Somebody");
                 }
             }
             Button {
@@ -106,7 +106,6 @@ Page {
     }
 
     Component.onCompleted: {
-        DeviceInterface.infoService().refreshInformation();
-        DeviceInterface.miBandService().requestGPSVersion();
+        DeviceInterface.refreshInformation();
     }
 }
