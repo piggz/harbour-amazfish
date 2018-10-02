@@ -220,6 +220,14 @@ Page {
                 DeviceInterface.miBandService().requestBatteryInfo();
             }
         }
+        onInformationChanged: {
+            switch (key) {
+                case AbstractDevice.INFO_BATTERY:
+                
+                
+                break;
+            }
+        }
     }
 
     function batteryInfoChanged() {

@@ -1,3 +1,4 @@
+
 #ifndef BIPINTERFACE_H
 #define BIPINTERFACE_H
 
@@ -47,6 +48,7 @@ public:
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
+    Q_SIGNAl void informationChanged(AbstractDevice::Info key, const QString& val);
 
     Q_INVOKABLE bool operationRunning();
 
