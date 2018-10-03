@@ -412,13 +412,13 @@ QString DeviceInterface::information(AbstractDevice::Info i)
 void DeviceInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
 {
     if (alertNotificationService()) {
-            alertNotificationService->sendAlert(sender, subject, message, allowDuplicate);
+            alertNotificationService()->sendAlert(sender, subject, message, allowDuplicate);
     }
 }
 
 void DeviceInterface::incomingCall(const QString &caller)
 {
     if (alertNotificationService()) {
-            alertNotificationService->incmingCall(caller);
+            alertNotificationService()->incomingCall(caller);
     }
 }
