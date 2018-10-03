@@ -211,21 +211,20 @@ Page {
         target: DeviceInterface
         onConnectionStateChanged: {
             if (DeviceInterface.connectionState === "authenticated") {
-
-                DeviceInterface.miBandService().onBatteryInfoChanged.connect(batteryInfoChanged);
-                DeviceInterface.miBandService().onStepsChanged.connect(stepsChanged);
-                DeviceInterface.hrmService().heartRateChanged.connect(heartRateChanged);
-
-                DeviceInterface.miBandService().requestGPSVersion();
-                DeviceInterface.miBandService().requestBatteryInfo();
+                DeviceInterface.refreshInformation();
             }
         }
         onInformationChanged: {
             switch (key) {
                 case AbstractDevice.INFO_BATTERY:
-                
-                
-                break;
+                	batteryInfoChanged();
+               	 break;
+                case AbstractDevice.INFO_STEPS:
+                    stepshanged();
+                    break;
+                case AbstractDevice.INFO_HEARTRATE:
+                    heartRateChanged();
+                    break;
             }
         }
     }

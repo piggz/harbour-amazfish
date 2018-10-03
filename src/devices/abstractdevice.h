@@ -29,7 +29,9 @@ class AbstractDevice : public QBLEDevice
         INFO_SYSTEMID,
         INFO_PNPID,
         INFO_GPSVER,
-        INFO_BATTERY
+        INFO_BATTERY,
+        INFO_STEPS,
+        INFO_HEARTRATE
     };
     
     explicit AbstractDevice(QObject *parent = 0);
