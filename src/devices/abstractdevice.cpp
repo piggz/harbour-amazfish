@@ -37,3 +37,8 @@ QString AbstractDevice::information(Info i)
 {
     Q_UNUSED(i)
 }
+
+void AbstractDevice::setAlarms()
+{
+    emit message(tr("Device doen not support alarms"));
+}

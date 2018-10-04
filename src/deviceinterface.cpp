@@ -422,3 +422,10 @@ void DeviceInterface::incomingCall(const QString &caller)
             alertNotificationService()->incomingCall(caller);
     }
 }
+
+void DeviceInterface::setAlarms()
+{
+    if (m_bipDevice) {
+            m_bipDevice->setAlarms();
+    }
+}
