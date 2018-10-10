@@ -38,7 +38,8 @@ QString AbstractDevice::information(Info i)
     Q_UNUSED(i)
 }
 
-void AbstractDevice::setAlarms()
+void AbstractDevice::applyDeviceSettings(Settings s)
 {
-    emit message(tr("Device doen not support alarms"));
+    Q_UNUSED(s)
+    emit message(tr("Device doen not support settings"));
 }

@@ -377,3 +377,9 @@ QString BipDevice::information(Info i)
     }    
     return QString();
 }    
+
+void BipDevice::applyDeviceSettings(Setting s)
+{
+    
+}
+

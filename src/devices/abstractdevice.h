@@ -34,6 +34,12 @@ class AbstractDevice : public QBLEDevice
         INFO_HEARTRATE
     };
     
+    enum Settings {
+        SETTING_PROFILE,
+        SETTING_ALARMS,
+        SETTING_DEVICE
+    };
+    
     explicit AbstractDevice(QObject *parent = 0);
     
     virtual bool supportsFeature(Feature f) = 0;
@@ -48,7 +54,7 @@ class AbstractDevice : public QBLEDevice
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
     virtual QString information(Info i);
-    virtual void setAlarms();
+    virtual void applyDeviceSettings(Settings);
     
     //signals    
     Q_SIGNAL void message(const QString &text);

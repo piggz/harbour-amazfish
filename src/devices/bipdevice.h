@@ -107,6 +107,8 @@ public:
     virtual void refreshInformation() override;
     virtual QString information(Info i) override;
     
+    virtual void applyDeviceSetting(Setting s) override;
+    
     QString softwareRevision();
     
     Q_SLOT void authenticated(bool ready);
