@@ -54,7 +54,7 @@ class AbstractDevice : public QBLEDevice
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
     virtual QString information(Info i);
-    virtual void applyDeviceSettings(Settings);
+    virtual void applyDeviceSettings(Settings s);
     
     //signals    
     Q_SIGNAL void message(const QString &text);

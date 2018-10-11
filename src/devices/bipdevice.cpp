@@ -378,8 +378,14 @@ QString BipDevice::information(Info i)
     return QString();
 }    
 
-void BipDevice::applyDeviceSettings(Setting s)
+void BipDevice::applyDeviceSettings(Settings s)
 {
-    
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return;
+    }
+    if (s == SETTING_ALARMS) {
+        mi->setAlarms();
+    }
 }
 

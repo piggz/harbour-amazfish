@@ -423,9 +423,9 @@ void DeviceInterface::incomingCall(const QString &caller)
     }
 }
 
-void DeviceInterface::setAlarms()
+void DeviceInterface::applyDeviceSettings(AbstractDevice::Settings s)
 {
     if (m_bipDevice) {
-            m_bipDevice->setAlarms();
+            m_bipDevice->applyDeviceSettings(s);
     }
 }

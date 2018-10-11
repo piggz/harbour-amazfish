@@ -107,7 +107,7 @@ public:
     virtual void refreshInformation() override;
     virtual QString information(Info i) override;
     
-    virtual void applyDeviceSetting(Setting s) override;
+    virtual void applyDeviceSettings(Settings s) override;
     
     QString softwareRevision();
     
