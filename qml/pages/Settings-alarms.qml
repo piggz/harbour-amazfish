@@ -109,7 +109,7 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterface.setAlarms();
+            DeviceInterface.applyDeviceSettings(AbstractDevice.SETTING_ALARMS);
         }
     }
 

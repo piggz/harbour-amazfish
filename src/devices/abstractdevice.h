@@ -35,9 +35,18 @@ class AbstractDevice : public QBLEDevice
     };
     
     enum Settings {
-        SETTING_PROFILE,
+        SETTING_USER_PROFILE,
+        SETTING_USER_GOAL,
+        SETTING_USER_ALERT_GOAL,
+        SETTING_USER_ALL_DAY_HRM,
+        SETTING_USER_HRM_SLEEP_DETECTION,
+        SETTING_USER_DISPLAY_ON_LIFT,
         SETTING_ALARMS,
-        SETTING_DEVICE
+        SETTING_DEVICE_DISPLAY_ITEMS,
+        SETTING_DEVICE_LANGUAGE,
+        SETTING_DEVICE_DATE,
+        SETTING_DEVICE_TIME,
+        SETTING_DEVICE_UNIT
     };
     
     explicit AbstractDevice(QObject *parent = 0);
