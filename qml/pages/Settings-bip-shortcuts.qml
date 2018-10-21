@@ -193,7 +193,7 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterface.miBandService().setDisplayItems();
+            DeviceInterface.applyDeviceSettings(AbstractDevice.SETTING_DISPLAY_ITEMS);
         }
     }
 

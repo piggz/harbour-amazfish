@@ -1,5 +1,16 @@
 #include "deviceinterface.h"
 
+#include "deviceinfoservice.h"
+#include "mibandservice.h"
+#include "miband2service.h"
+#include "alertnotificationservice.h"
+#include "hrmservice.h"
+#include "bipfirmwareservice.h"
+
+
+//TODO have a factory create the device
+#include "bipdevice.h"
+
 #include <QDir>
 #include <KDb3/KDbDriverManager>
 
@@ -8,11 +19,11 @@ DeviceInterface::DeviceInterface()
     m_notificationListener = new NotificationsListener(this);
 
     m_bipDevice = new BipDevice();
-    connect(m_bipDevice, &BipDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged);
-    connect(m_bipDevice, &BipDevice::message, this, &DeviceInterface::message);
-    connect(m_bipDevice, &BipDevice::downloadProgress, this, &DeviceInterface::downloadProgress);
+    connect(m_bipDevice, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged);
+    connect(m_bipDevice, &AbstractDevice::message, this, &DeviceInterface::message);
+    connect(m_bipDevice, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress);
     connect(m_bipDevice, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
-    connect(m_bipDevice, &BipDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
+    connect(m_bipDevice, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
 
     m_adapter.setAdapterPath("/org/bluez/hci0");
 
@@ -72,37 +83,37 @@ QString DeviceInterface::connectionState() const
 
 DeviceInfoService *DeviceInterface::infoService() const
 {
-    return qobject_cast<DeviceInfoService*>(m_bipDevice->service(BipDevice::UUID_SERVICE_DEVICEINFO));
+    return qobject_cast<DeviceInfoService*>(m_bipDevice->service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
 }
 
 MiBandService *DeviceInterface::miBandService() const
 {
-    return qobject_cast<MiBandService*>(m_bipDevice->service(BipDevice::UUID_SERVICE_MIBAND));
+    return qobject_cast<MiBandService*>(m_bipDevice->service(MiBandService::UUID_SERVICE_MIBAND));
 }
 
 MiBand2Service *DeviceInterface::miBand2Service() const
 {
-    return qobject_cast<MiBand2Service*>(m_bipDevice->service(BipDevice::UUID_SERVICE_MIBAND2));
+    return qobject_cast<MiBand2Service*>(m_bipDevice->service(MiBand2Service::UUID_SERVICE_MIBAND2));
 }
 
 AlertNotificationService *DeviceInterface::alertNotificationService() const
 {
-    return qobject_cast<AlertNotificationService*>(m_bipDevice->service(BipDevice::UUID_SERVICE_ALERT_NOTIFICATION));
+    return qobject_cast<AlertNotificationService*>(m_bipDevice->service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
 }
 
 HRMService *DeviceInterface::hrmService() const
 {
-    return qobject_cast<HRMService*>(m_bipDevice->service(BipDevice::UUID_SERVICE_HRM));
+    return qobject_cast<HRMService*>(m_bipDevice->service(HRMService::UUID_SERVICE_HRM));
 }
 
 BipFirmwareService *DeviceInterface::firmwareService() const
 {
-    return qobject_cast<BipFirmwareService*>(m_bipDevice->service(BipDevice::UUID_SERVICE_FIRMWARE));
+    return qobject_cast<BipFirmwareService*>(m_bipDevice->service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
 }
 
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
-    if (alertNotificationService()){
+    if (m_bipDevice->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
         alertNotificationService()->sendAlert(appName, summary, body);
     }
 }
@@ -380,5 +391,41 @@ void DeviceInterface::downloadSportsData()
 {
     if (miBandService()) {
         miBandService()->fetchSportsSummaries();
+    }
+}
+
+void DeviceInterface::sendWeather(CurrentWeather *weather)
+{
+    if (miBandService()) {
+        miBandService()->sendWeather(weather);
+    }
+}
+
+QString DeviceInterface::information(AbstractDevice::Info i)
+{
+    if (m_bipDevice) {
+        return m_bipDevice->information(i);
+    }
+    return QString();
+}
+
+void DeviceInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
+{
+    if (alertNotificationService()) {
+            alertNotificationService()->sendAlert(sender, subject, message, allowDuplicate);
+    }
+}
+
+void DeviceInterface::incomingCall(const QString &caller)
+{
+    if (alertNotificationService()) {
+            alertNotificationService()->incomingCall(caller);
+    }
+}
+
+void DeviceInterface::applyDeviceSettings(AbstractDevice::Settings s)
+{
+    if (m_bipDevice) {
+            m_bipDevice->applyDeviceSettings(s);
     }
 }

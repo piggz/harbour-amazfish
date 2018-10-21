@@ -39,19 +39,20 @@ int main(int argc, char *argv[])
     SportsDataModel sportsDataModel;
     sportsDataModel.setConnection(devInterface.dbConnection());
 
-    qmlRegisterType<DeviceInfoService>();
-    qmlRegisterType<MiBandService>();
-    qmlRegisterType<MiBand2Service>();
-    qmlRegisterType<AlertNotificationService>();
-    qmlRegisterType<HRMService>();
-    qmlRegisterType<BipFirmwareService>();
+//    qmlRegisterType<DeviceInfoService>();
+//    qmlRegisterType<MiBandService>();
+//    qmlRegisterType<MiBand2Service>();
+//    qmlRegisterType<AlertNotificationService>();
+//    qmlRegisterType<HRMService>();
+//    qmlRegisterType<BipFirmwareService>();
 
     qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
     qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");
     qmlRegisterType<City>("org.SfietKonstantin.weatherfish", 1, 0, "City");
-    qmlRegisterType<CurrentWeatherModel>("org.SfietKonstantin.weatherfish", 1, 0, "CurrentWeather");
+    qmlRegisterType<CurrentWeather>("org.SfietKonstantin.weatherfish", 1, 0, "CurrentWeather");
 
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
+    qmlRegisterUncreatableType<AbstractDevice>("uk.co.piggz.amazfish", 1, 0, "AbstractDevice", "Abstract Device type available only for enum datatypes");
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);

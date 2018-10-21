@@ -1,7 +1,7 @@
 #ifndef BIPDEVICE_H
 #define BIPDEVICE_H
 
-#include "qble/qbledevice.h"
+#include "abstractdevice.h"
 #include "qble/qbleservice.h"
 
 #include "deviceinfoservice.h"
@@ -78,11 +78,12 @@ BIP Services and Characteristics
 
 */
 
-class BipDevice : public QBLEDevice
+class BipDevice : public AbstractDevice
 {
     Q_OBJECT
 public:
     BipDevice();
+    
     static const char* UUID_SERVICE_ALERT_NOTIFICATION;
     static const char* UUID_SERVICE_MIBAND2;
     static const char* UUID_SERVICE_MIBAND;
@@ -90,22 +91,29 @@ public:
     static const char* UUID_SERVICE_DEVICEINFO;
     static const char* UUID_SERVICE_FIRMWARE;
     
-    virtual QString pair();
-    virtual void pairAsync();
+    virtual bool supportsFeature(Feature f) override;
+    virtual QString deviceType() override;
+    virtual QString deviceName() override;
+    virtual bool operationRunning() override;
+    
+    virtual QString pair() override;
+    virtual void pairAsync() override;
 
-    virtual void connectToDevice();
-    virtual void disconnectFromDevice();
+    virtual void connectToDevice() override;
+    virtual void disconnectFromDevice() override;
 
-    QString connectionState() const;
+    virtual QString connectionState() const override;
+    
+    virtual void refreshInformation() override;
+    virtual QString information(Info i) override;
+    
+    virtual void applyDeviceSettings(Settings s) override;
+    
     QString softwareRevision();
     
     Q_SLOT void authenticated(bool ready);
     
-    Q_SIGNAL void connectionStateChanged();
-    Q_SIGNAL void message(const QString &text);
-    Q_SIGNAL void downloadProgress(int percent);
-
-    Q_SIGNAL void buttonPressed(int presses);
+    
 private:
     void parseServices();
     bool m_needsAuth = false;

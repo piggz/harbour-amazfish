@@ -87,7 +87,7 @@ int AlertNotificationService::mapSenderToIcon(const QString &sender)
     if (s == "instagram") {
         return HuamiIcon::INSTAGRAM;
     }
-    if (s == "telegram" || s == "sailorgram") {
+    if (s == "telegram" || s == "sailorgram" || s == "depecher") {
         return HuamiIcon::TELEGRAM;
     }
     if (s == "skype") {

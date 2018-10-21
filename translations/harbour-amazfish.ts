@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AddCityDialog</name>
+    <message>
+        <source>Set Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
@@ -197,10 +204,6 @@
         <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Weather</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>GraphData</name>
@@ -309,6 +312,14 @@
     </message>
     <message>
         <source>Save Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh weather every (</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>) minutes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

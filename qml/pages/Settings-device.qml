@@ -136,10 +136,10 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterface.miBandService().setLanguage();
-            DeviceInterface.miBandService().setDateDisplay();
-            DeviceInterface.miBandService().setTimeFormat();
-            DeviceInterface.miBandService().setDistanceUnit();
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_LANGUAGE);
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_DATE);
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_TIME);
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_UNIT);
         }
     }
 }

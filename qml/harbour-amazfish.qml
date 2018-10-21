@@ -4,6 +4,7 @@ import "pages"
 import Nemo.Notifications 1.0
 import org.nemomobile.mpris 1.0
 import org.SfietKonstantin.weatherfish 1.0
+import Nemo.Configuration 1.0
 
 ApplicationWindow
 {
@@ -12,13 +13,20 @@ ApplicationWindow
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 
+    ConfigurationValue {
+        id: appRefreshWeather
+        key: "/uk/co/piggz/amazfish/app/refreshweather"
+        defaultValue: 60
+    }
+
     Component.onCompleted: {
         console.log("Application started");
+
+        weather.setCity(cityManager.cities[0])
     }
 
     onStateChanged: {
         console.log("State: " + state);
-
     }
 
     function showMessage(msg)
@@ -75,6 +83,39 @@ ApplicationWindow
     
     CityManager {
         id: cityManager
+
+        onCitiesChanged: {
+            weather.setCity(cities[0]);
+        }
+    }
+    CurrentWeather {
+        id: weather
+
+        onReady: {
+            console.log("Weather data ready");
+            DeviceInterface.sendWeather(weather);
+        }
+    }
+
+    Timer {
+        id: tmrWeatherRefresh
+        running: true
+        repeat: true
+        interval: 60000
+        property int minutes: 0
+
+        onTriggered: {
+            console.log("tmrWeatherRefresh", minutes);
+            minutes++;
+
+            if (minutes >= appRefreshWeather.value) {
+                minutes = 0;
+                console.log("interval reached");
+                weather.refresh();
+            }
+
+
+        }
     }
     
     Connections {

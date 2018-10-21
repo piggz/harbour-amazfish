@@ -22,6 +22,27 @@ BipDevice::BipDevice()
     connect(m_keyPressTimer, &QTimer::timeout, this, &BipDevice::buttonPressTimeout);
 }
 
+
+bool BipDevice::supportsFeature(Feature f)
+{
+    return true;
+}
+
+QString BipDevice::deviceType()
+{
+    return "amazfitbip";
+}
+
+QString BipDevice::deviceName()
+{
+    return "Amazfit Bip";
+}
+
+bool BipDevice::operationRunning()
+{
+    
+}
+    
 QString BipDevice::pair()
 {
     qDebug() << "BipDevice::pair";
@@ -132,7 +153,12 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
             initialise();
         }
         if (map.contains("Connected")) {
-            emit connectionStateChanged();
+            bool value = map["Connected"].toBool();
+
+            if (!value) {
+                qDebug() << "DisConnected!";
+                setConnectionState("disconnected");
+            }
         }
 
 #if 0
@@ -300,3 +326,66 @@ void BipDevice::buttonPressTimeout()
     m_keyPressTimer->stop();
     emit buttonPressed(presses);
 }
+
+void BipDevice::refreshInformation()
+{
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+    if (info) {
+         info->refreshInformation();
+    }
+    
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->requestGPSVersion();
+    }
+}
+
+QString BipDevice::information(Info i)
+{
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+     if (!info) {
+        return QString();
+    }
+    
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return QString();
+    }
+    
+    switch(i) {
+        case INFO_SWVER:
+        return info->softwareRevision();
+        break;
+        case INFO_HWVER:
+        return info->hardwareRevision();
+        break;
+        case INFO_SERIAL:
+        return info->serialNumber();
+        break;
+        case INFO_SYSTEMID:
+        return info->systemId();
+        break;
+        case INFO_PNPID:
+        return info->pnpId();
+        break;
+        case INFO_GPSVER:
+        return mi->gpsVersion();
+        break;
+        case INFO_BATTERY:
+        return QString::number(mi->batteryInfo());
+        break;
+    }    
+    return QString();
+}    
+
+void BipDevice::applyDeviceSettings(Settings s)
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return;
+    }
+    if (s == SETTING_ALARMS) {
+        mi->setAlarms();
+    }
+}
+

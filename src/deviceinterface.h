@@ -1,3 +1,4 @@
+
 #ifndef BIPINTERFACE_H
 #define BIPINTERFACE_H
 
@@ -9,7 +10,7 @@
 
 #include "qble/bluezadapter.h"
 
-#include "bipdevice.h"
+#include "abstractdevice.h"
 #include "notificationslistener.h"
 #include "voicecallhandler.h"
 #include "voicecallmanager.h"
@@ -39,20 +40,15 @@ public:
 
     bool ready() const;
     QString connectionState() const;
-
-    Q_INVOKABLE DeviceInfoService *infoService() const;
-    Q_INVOKABLE MiBandService *miBandService() const;
-    Q_INVOKABLE MiBand2Service *miBand2Service() const;
-    Q_INVOKABLE AlertNotificationService *alertNotificationService() const;
-    Q_INVOKABLE HRMService *hrmService() const;
-    Q_INVOKABLE BipFirmwareService *firmwareService() const;
     
     Q_INVOKABLE DataSource *dataSource();
+    KDbConnection *dbConnection();
 
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
+    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString& val);
 
     Q_INVOKABLE bool operationRunning();
 
@@ -60,16 +56,19 @@ public:
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
     Q_INVOKABLE void startDownload();
     Q_INVOKABLE void downloadSportsData();
+    Q_INVOKABLE void sendWeather(CurrentWeather *weather);
+    Q_INVOKABLE QString information(AbstractDevice::Info i);
+    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
+    Q_INVOKABLE void incomingCall(const QString &caller);
+    Q_INVOKABLE void applyDeviceSettings(AbstractDevice::Settings s);
 
-
-    KDbConnection *dbConnection();
 
 private:
     QString m_deviceAddress;
     QString m_deviceName;
 
     BluezAdapter m_adapter;
-    BipDevice *m_bipDevice = nullptr;
+    AbstractDevice *m_bipDevice = nullptr;
     NotificationsListener *m_notificationListener = nullptr;
     VoiceCallManager *m_voiceCallManager = nullptr;
 
@@ -77,11 +76,16 @@ private:
     DataSource m_dataSource;
     DBusHRM *m_dbusHRM = nullptr;
 
-
     void createSettings();
-
     void updateServiceController();
-
+    
+    DeviceInfoService *infoService() const;
+    MiBandService *miBandService() const;
+    MiBand2Service *miBand2Service() const;
+    AlertNotificationService *alertNotificationService() const;
+    HRMService *hrmService() const;
+    BipFirmwareService *firmwareService() const;
+    
     Q_SLOT void notificationReceived(const QString &appName, const QString &summary, const QString &body);
     Q_SLOT void onActiveVoiceCallChanged();
     Q_SLOT void onActiveVoiceCallStatusChanged();

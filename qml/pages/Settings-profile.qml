@@ -249,12 +249,12 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterface.miBandService().setUserInfo();
-            DeviceInterface.miBandService().setFitnessGoal();
-            DeviceInterface.miBandService().setAlertFitnessGoal();
-            DeviceInterface.miBandService().setEnableDisplayOnLiftWrist();
-            DeviceInterface.hrmService().setAllDayHRM();
-            DeviceInterface.hrmService().setHeartrateSleepSupport();
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_PROFILE);
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_GOAL);
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_ALERT_GOAL.);
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_DISPLY_ON_LIFT);
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_ALL_DAY_HRM;
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_HRM_SLEEP_SUPPORT
         }
     }
 }
