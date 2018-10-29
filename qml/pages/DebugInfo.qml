@@ -81,13 +81,13 @@ Page {
             Button {
                 text: qsTr("Test Email")
                 onClicked: {
-                    DeviceInterface..sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
+                    DeviceInterface.sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
                 }
             }
             Button {
                 text: qsTr("Test Call")
                 onClicked: {
-                    DeviceInterface..incomingCall("Somebody");
+                    DeviceInterface.incomingCall("Somebody");
                 }
             }
             Button {

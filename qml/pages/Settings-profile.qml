@@ -251,10 +251,10 @@ Page {
         onTriggered: {
             DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_PROFILE);
             DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_GOAL);
-            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_ALERT_GOAL.);
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_ALERT_GOAL);
             DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_DISPLY_ON_LIFT);
-            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_ALL_DAY_HRM;
-            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_HRM_SLEEP_SUPPORT
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_ALL_DAY_HRM);
+            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_USER_HRM_SLEEP_SUPPORT)
         }
     }
 }

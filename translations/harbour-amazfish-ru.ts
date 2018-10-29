@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AbstractDevice</name>
+    <message>
+        <source>Device doen not support settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
@@ -122,55 +129,55 @@
 <context>
     <name>DebugInfo</name>
     <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation>Обновить</translation>
+        <source>AmazFish</source>
+        <translation type="unfinished">AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
-        <translation>Адрес: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation>Серийный номер: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation>Версия оборудования: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation>Версия прошивки: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation>Состояние: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation>Версия GPS: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation>Проверить уведомления</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation>Тестовое письмо</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation>Тестовый звонок</translation>
-    </message>
-    <message>
-        <source>Test Popup</source>
-        <translation>Тестовый диалог</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fetch debug log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Popup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="sv">
 <context>
+    <name>AbstractDevice</name>
+    <message>
+        <source>Device doen not support settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
@@ -122,56 +129,56 @@
 <context>
     <name>DebugInfo</name>
     <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation>Uppdatera</translation>
+        <source>AmazFish</source>
+        <translation type="unfinished">AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
-        <translation>Adress: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation>Serienummer: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation>Hårdvara rev: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation>Mjukvara rev: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation>Anslutningsstatus: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation>GPS-version: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation>Testa avisering</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation>Testa e-post</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation>Testa samtal</translation>
-    </message>
-    <message>
-        <source>Test Popup</source>
-        <translation>Testa popup</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation>Hämta felsökningslogg</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Popup</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -484,71 +491,71 @@
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation>Profilinställningar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Namn:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Födelsedag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Kön</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Man</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Kvinna</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation>Längd (cm): </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation>Vikt (kg): </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation>Klockans placering</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Vänster arm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Höger arm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation>Visa vid lyft arm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation>Mål (steg): </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation>Avisera vid uppnått träningsmål</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation>Använd HRM för att upptäcka sömn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation>Hela dagens HRM-intervall (minuter): </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation>Spara profil</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

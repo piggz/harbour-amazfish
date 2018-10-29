@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="es">
 <context>
+    <name>AbstractDevice</name>
+    <message>
+        <source>Device doen not support settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
@@ -122,55 +129,55 @@
 <context>
     <name>DebugInfo</name>
     <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation>Refrescar</translation>
+        <source>AmazFish</source>
+        <translation type="unfinished">AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
-        <translation>Dirección: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation>Serial #: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation>Aparato rev: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation>Programa rev: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation>Estado de conexión: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation>SPG ver: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation>Notificación de prueba</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation>Correo-E de prueba</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation>Llamada de prueba</translation>
-    </message>
-    <message>
-        <source>Test Popup</source>
-        <translation>Ventana emergente de prueba</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fetch debug log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Popup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
 import org.SfietKonstantin.weatherfish 1.0
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
@@ -215,32 +216,23 @@ Page {
             }
         }
         onInformationChanged: {
-            switch (key) {
+            console.log("Information changed", infoKey, infoValue);
+
+            switch (infoKey) {
                 case AbstractDevice.INFO_BATTERY:
-                	batteryInfoChanged();
+                    lblBattery.text = infoValue
                	 break;
                 case AbstractDevice.INFO_STEPS:
-                    stepshanged();
+                    lblSteps.text = infoValue
                     break;
                 case AbstractDevice.INFO_HEARTRATE:
-                    heartRateChanged();
+                    lblHeartrate.text = infoValue
                     break;
+                default:
+                    console.log("Unknown info key:", infoKey);
             }
         }
     }
-
-    function batteryInfoChanged() {
-        lblBattery.text = DeviceInterface.miBandService().batteryInfo
-    }
-
-    function stepsChanged() {
-        lblSteps.text = DeviceInterface.miBandService().steps
-    }
-
-    function heartRateChanged() {
-        lblHeartrate.text = DeviceInterface.hrmService().heartRate
-    }
-
 
     Component.onCompleted: {
         if (profileName.value === "") {

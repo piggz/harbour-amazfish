@@ -40,7 +40,7 @@ QString BipDevice::deviceName()
 
 bool BipDevice::operationRunning()
 {
-    
+    return QBLEDevice::operationRunning();
 }
     
 QString BipDevice::pair()
@@ -270,6 +270,9 @@ void BipDevice::initialise()
         connect(mi, &MiBandService::message, this, &BipDevice::message);
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &BipDevice::handleButtonPressed, Qt::UniqueConnection);
+        connect(mi, &MiBandService::stepsChanged, this, &BipDevice::stepsChanged, Qt::UniqueConnection);
+        connect(mi, &MiBandService::batteryInfoChanged, this, &BipDevice::batteryInfoChanged, Qt::UniqueConnection);
+
     }
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
@@ -337,6 +340,7 @@ void BipDevice::refreshInformation()
     MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
     if (mi) {
         mi->requestGPSVersion();
+        mi->requestBatteryInfo();
     }
 }
 
@@ -389,3 +393,22 @@ void BipDevice::applyDeviceSettings(Settings s)
     }
 }
 
+void BipDevice::stepsChanged()
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return;
+    }
+
+    emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(mi->steps()));
+}
+
+void BipDevice::batteryInfoChanged()
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return;
+    }
+
+    emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(mi->batteryInfo()));
+}

@@ -48,7 +48,7 @@ public:
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
-    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString& val);
+    Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
 
     Q_INVOKABLE bool operationRunning();
 
@@ -57,6 +57,7 @@ public:
     Q_INVOKABLE void startDownload();
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void sendWeather(CurrentWeather *weather);
+    Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(AbstractDevice::Info i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
@@ -90,6 +91,7 @@ private:
     Q_SLOT void onActiveVoiceCallChanged();
     Q_SLOT void onActiveVoiceCallStatusChanged();
     Q_SLOT void onConnectionStateChanged();
+    Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
 
     //Database
     KDbDriver *m_dbDriver = nullptr;

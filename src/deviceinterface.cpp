@@ -24,6 +24,7 @@ DeviceInterface::DeviceInterface()
     connect(m_bipDevice, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress);
     connect(m_bipDevice, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
     connect(m_bipDevice, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
+    connect(m_bipDevice, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
 
     m_adapter.setAdapterPath("/org/bluez/hci0");
 
@@ -359,6 +360,12 @@ void DeviceInterface::onConnectionStateChanged()
     emit connectionStateChanged();
 }
 
+void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QString &val)
+{
+    qDebug() << "slot_informationChanged" << key << val;
+    emit informationChanged(key, val);
+}
+
 DataSource *DeviceInterface::dataSource()
 {
     return &m_dataSource;
@@ -383,8 +390,10 @@ void DeviceInterface::startDownload()
 
 bool DeviceInterface::operationRunning()
 {
-    qDebug() << "Checking if operation running";
-    return m_bipDevice->operationRunning();
+    if (m_bipDevice) {
+        return m_bipDevice->operationRunning();
+    }
+    return false;
 }
 
 void DeviceInterface::downloadSportsData()
@@ -398,6 +407,14 @@ void DeviceInterface::sendWeather(CurrentWeather *weather)
 {
     if (miBandService()) {
         miBandService()->sendWeather(weather);
+    }
+}
+
+void DeviceInterface::refreshInformation()
+{
+    qDebug() << "Refreshing device information";
+    if (m_bipDevice) {
+        return m_bipDevice->refreshInformation();
     }
 }
 

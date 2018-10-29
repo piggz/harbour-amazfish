@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AbstractDevice</name>
+    <message>
+        <source>Device doen not support settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
@@ -122,11 +129,11 @@
 <context>
     <name>DebugInfo</name>
     <message>
-        <source>AmazFish</source>
+        <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Refresh</source>
+        <source>AmazFish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -166,11 +173,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Test Popup</source>
+        <source>Fetch debug log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fetch debug log</source>
+        <source>Test Popup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
