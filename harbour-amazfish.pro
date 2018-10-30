@@ -34,6 +34,7 @@ SOURCES += src/harbour-amazfish.cpp \
     src/bipbatteryinfo.cpp \
     src/datasource.cpp \
     src/notificationslistener.cpp \
+    src/devicefactory.cpp \
     src/services/mibandservice.cpp \
     src/services/miband2service.cpp \
     src/services/alertnotificationservice.cpp \
@@ -121,6 +122,7 @@ HEADERS += \
     src/dbushrm.h \
     src/activitysummary.h \ 
     src/activitysample.h \
+    src/devicefactory.cpp \
     src/services/mibandservice.h \
     src/services/miband2service.h \
     src/services/alertnotificationservice.h \
