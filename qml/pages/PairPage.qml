@@ -97,7 +97,7 @@ Page {
         deviceName = BluezAdapter.deviceName(path);
 
         lblStatus.text = "Connecting to watch...\n" + path
-        var err = DeviceInterface.pair(path);
+        var err = DeviceInterface.pair(deviceName, path);
 
         console.log(err);
 

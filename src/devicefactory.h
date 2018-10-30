@@ -6,8 +6,7 @@
 
 class DeviceFactory
 {
-    DeviceFactory();
-    
+public:
     static AbstractDevice* createDevice(const QString &deviceName);
 };
 

@@ -122,7 +122,7 @@ HEADERS += \
     src/dbushrm.h \
     src/activitysummary.h \ 
     src/activitysample.h \
-    src/devicefactory.cpp \
+    src/devicefactory.h \
     src/services/mibandservice.h \
     src/services/miband2service.h \
     src/services/alertnotificationservice.h \
