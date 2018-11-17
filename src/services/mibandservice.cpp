@@ -535,7 +535,7 @@ void MiBandService::setAlarms()
 
 bool MiBandService::operationRunning()
 {
-    qDebug() << "Checking if MiBand operation running";
+    qDebug() << "is miband operation running:" << m_operationRunning;
     return m_operationRunning > 0;
 }
 

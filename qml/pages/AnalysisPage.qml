@@ -22,7 +22,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Download Data")
-                onClicked: DeviceInterface.miBandService().fetchActivityData();
+                onClicked: DeviceInterface.downloadActivityData();
                 enabled: DeviceInterface.connectionState === "authenticated"
             }
         }

@@ -135,6 +135,8 @@ private:
     Q_SLOT void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     Q_SLOT void handleButtonPressed();
     Q_SLOT void buttonPressTimeout();
+    Q_SLOT void stepsChanged();
+    Q_SLOT void batteryInfoChanged();
 };
 
 #endif // BIPDEVICE_H

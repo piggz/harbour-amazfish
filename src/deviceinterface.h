@@ -34,13 +34,14 @@ public:
     Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
     Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
 
-    Q_INVOKABLE QString pair(const QString &address);
+    Q_INVOKABLE QString pair(const QString &name, const QString &address);
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
 
     bool ready() const;
     QString connectionState() const;
-    
+    bool operationRunning();
+
     Q_INVOKABLE DataSource *dataSource();
     KDbConnection *dbConnection();
 
@@ -48,15 +49,15 @@ public:
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
-    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString& val);
-
-    Q_INVOKABLE bool operationRunning();
+    Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
 
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
     Q_INVOKABLE void startDownload();
     Q_INVOKABLE void downloadSportsData();
+    Q_INVOKABLE void downloadActivityData();
     Q_INVOKABLE void sendWeather(CurrentWeather *weather);
+    Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(AbstractDevice::Info i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
@@ -68,7 +69,7 @@ private:
     QString m_deviceName;
 
     BluezAdapter m_adapter;
-    AbstractDevice *m_bipDevice = nullptr;
+    AbstractDevice *m_device = nullptr;
     NotificationsListener *m_notificationListener = nullptr;
     VoiceCallManager *m_voiceCallManager = nullptr;
 
@@ -90,6 +91,7 @@ private:
     Q_SLOT void onActiveVoiceCallChanged();
     Q_SLOT void onActiveVoiceCallStatusChanged();
     Q_SLOT void onConnectionStateChanged();
+    Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
 
     //Database
     KDbDriver *m_dbDriver = nullptr;

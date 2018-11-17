@@ -2,10 +2,17 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="es">
 <context>
+    <name>AbstractDevice</name>
+    <message>
+        <source>Device doen not support settings</source>
+        <translation>El dispositivo no admite configuraciones</translation>
+    </message>
+</context>
+<context>
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Escoger localización</translation>
     </message>
 </context>
 <context>
@@ -122,12 +129,12 @@
 <context>
     <name>DebugInfo</name>
     <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
+        <source>Refresh</source>
+        <translation>Actualizar</translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation>Refrescar</translation>
+        <source>AmazFish</source>
+        <translation>AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
@@ -135,15 +142,15 @@
     </message>
     <message>
         <source>Serial No: </source>
-        <translation>Serial #: </translation>
+        <translation>Serial No: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation>Aparato rev: </translation>
+        <translation>Rev de equipo: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation>Programa rev: </translation>
+        <translation>Rev de programa: </translation>
     </message>
     <message>
         <source>Connection State: </source>
@@ -151,32 +158,32 @@
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation>SPG ver: </translation>
+        <translation>Ver: GPS </translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation>Notificación de prueba</translation>
+        <translation>Prueba de notificación</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation>Correo-E de prueba</translation>
+        <translation>Prueba de correo.e</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation>Llamada de prueba</translation>
-    </message>
-    <message>
-        <source>Test Popup</source>
-        <translation>Ventana emergente de prueba</translation>
+        <translation>Prueba de llamada</translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation>Buscar registro de depuración</translation>
+        <translation>Obtener registro de depuración</translation>
+    </message>
+    <message>
+          <source>Test Popup</source>
+        <translation>Prueba emergente</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
-    <message>
+<message>
         <source>Pair with watch</source>
         <translation>Aparear con el reloj</translation>
     </message>
@@ -320,11 +327,11 @@
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar el tiempo cada (</translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>) minutos</translation>
     </message>
 </context>
 <context>

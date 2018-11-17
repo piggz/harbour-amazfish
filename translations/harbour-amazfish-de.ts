@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AbstractDevice</name>
+    <message>
+        <source>Device doen not support settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
@@ -122,56 +129,56 @@
 <context>
     <name>DebugInfo</name>
     <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation>Aktualisieren</translation>
+        <source>AmazFish</source>
+        <translation type="unfinished">AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
-        <translation>Addresse: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation>Seriennr.: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation>Hardware Rev: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation>Software Rev: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation>Verbindungsstatus: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation>GPS Ver: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation>Testbenachrichtigung</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation>Test-Email</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation>Testanruf</translation>
-    </message>
-    <message>
-        <source>Test Popup</source>
-        <translation>Test-Popup</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation>Debug-Protokoll holen</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Popup</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -484,71 +491,71 @@
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation>Profileinstellungen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Geburtstag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Geschlecht</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Männlich</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Weiblich</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation>Höhe (cm): </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation>Gewicht (kg): </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation>Trageort</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Links</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Rechts</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation>Anzeige am Handgelenk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation>Ziel (Schritte): </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation>Alarm beim Fitnessziel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation>Verwenden Sie HFM für die Schlaferkennung</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation>Ganztägiges HFM-Intervall (Minuten):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation>Profil sichern</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

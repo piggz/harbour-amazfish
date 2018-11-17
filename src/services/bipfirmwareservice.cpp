@@ -58,6 +58,7 @@ void BipFirmwareService::startDownload()
 
 bool BipFirmwareService::operationRunning()
 {
+    qDebug() << "is firmware operation running:" << m_operationRunning;
     return m_operationRunning > 0;
 }
 

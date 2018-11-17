@@ -8,9 +8,7 @@
 class AbstractDevice : public QBLEDevice
 {
     Q_OBJECT
-    Q_ENUMS(Feature)
-    Q_ENUMS(Info)
-    
+
     public:
     enum Feature{
         FEATURE_HRM = 1,
@@ -21,7 +19,8 @@ class AbstractDevice : public QBLEDevice
         FEATURE_ALERT,
         FEATURE_NOTIFIATION
     };
-    
+    Q_ENUM(Feature);
+
     enum Info {
         INFO_SWVER = 1,
         INFO_HWVER,
@@ -33,7 +32,8 @@ class AbstractDevice : public QBLEDevice
         INFO_STEPS,
         INFO_HEARTRATE
     };
-    
+    Q_ENUM(Info);
+
     enum Settings {
         SETTING_USER_PROFILE,
         SETTING_USER_GOAL,
@@ -48,7 +48,8 @@ class AbstractDevice : public QBLEDevice
         SETTING_DEVICE_TIME,
         SETTING_DEVICE_UNIT
     };
-    
+    Q_ENUM(Settings);
+
     explicit AbstractDevice(QObject *parent = 0);
     
     virtual bool supportsFeature(Feature f) = 0;
@@ -71,6 +72,7 @@ class AbstractDevice : public QBLEDevice
     Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void connectionStateChanged();
+    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString& val);
 
 };
 
