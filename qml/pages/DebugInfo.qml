@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
@@ -16,7 +17,7 @@ Page {
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
-        anchors.fill: parent        
+        anchors.fill: parent
 
         // Tell SilicaFlickable the height of its content.
         contentHeight: column.height
@@ -24,7 +25,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Refresh")
-                onClicked: {                    
+                onClicked: {
                     DeviceInterface.refreshInformation();
                     //DeviceInterface.infoService().refreshInformation();
                     //DeviceInterface.miBandService().requestGPSVersion();
@@ -48,17 +49,20 @@ Page {
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("Serial No: ") + DeviceInterface.information(AbstractDevice.INFO_SERIAL);
+                id: lblSerial
+                text: qsTr("Serial No: ")
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("Hardware Rev: ")+ DeviceInterface.information(AbstractDevice.INFO_HWREV);
+                id: lblHWRev
+                text: qsTr("Hardware Rev: ")
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("Software Rev: ") + DeviceInterface.infoSrmation(AbstractDevice.INFO_SWREV)
+                id: lblSWRev
+                text: qsTr("Software Rev: ")
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
@@ -68,7 +72,8 @@ Page {
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("GPS Ver: ") + DeviceInterface.information(AbstractDevice.INFO_GPSVER);
+                id: lblGPSVer
+                text: qsTr("GPS Ver: ")
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
@@ -107,5 +112,25 @@ Page {
 
     Component.onCompleted: {
         DeviceInterface.refreshInformation();
+    }
+
+    Connections {
+        target: DeviceInterface
+        onInformationChanged: {
+            switch (infoKey) {
+            case AbstractDevice.INFO_SERIAL:
+                lblSerial.text = qsTr("Serial No: ") + infoValue;
+                break;
+            case AbstractDevice.INFO_HWVER:
+                lblHWRev.text = qsTr("Hardware Rev: ") + infoValue;
+                break;
+            case AbstractDevice.INFO_SWVER:
+                lblSWRev.text = qsTr("Software Rev: ")+ infoValue;
+                break;
+            case AbstractDevice.INFO_GPSVER:
+                lblGPSVer.text = qsTr("GPS Ver: ") +infoValue;
+                break;
+            }
+        }
     }
 }

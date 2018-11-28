@@ -2,6 +2,7 @@
 #define BIPINFOSERVICE_H
 
 #include "qble/qbleservice.h"
+#include "devices/abstractdevice.h"
 
 class DeviceInfoService : public QBLEService
 {
@@ -16,26 +17,16 @@ public:
     static const char* UUID_CHARACTERISTIC_INFO_SYSTEM_ID;
     static const char* UUID_CHARACTERISTIC_INFO_PNP_ID;
 
-    Q_PROPERTY(QString serialNumber READ serialNumber NOTIFY serialNumberChanged)
-    Q_PROPERTY(QString hardwareRevision READ hardwareRevision NOTIFY hardwareRevisionChanged)
-    Q_PROPERTY(QString softwareRevision READ softwareRevision NOTIFY softwareRevisionChanged)
-    Q_PROPERTY(QString systemId READ systemId NOTIFY systemIdChanged)
-    Q_PROPERTY(QString pnpId READ pnpId NOTIFY pnpIdChanged)
-
     Q_INVOKABLE void refreshInformation();
 
-    Q_INVOKABLE QString serialNumber() const;
-    Q_INVOKABLE QString hardwareRevision() const;
-    Q_INVOKABLE QString softwareRevision() const;
-    Q_INVOKABLE QString systemId() const;
-    Q_INVOKABLE QString pnpId() const;
-    Q_INVOKABLE QString readSoftwareRevisionSync();
+    QString serialNumber() const;
+    QString hardwareRevision() const;
+    QString softwareRevision() const;
+    QString systemId() const;
+    QString pnpId() const;
+    QString readSoftwareRevisionSync();
 
-    Q_SIGNAL void serialNumberChanged();
-    Q_SIGNAL void hardwareRevisionChanged();
-    Q_SIGNAL void softwareRevisionChanged();
-    Q_SIGNAL void systemIdChanged();
-    Q_SIGNAL void pnpIdChanged();
+    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
 
 private:
     QString m_serialNumber;

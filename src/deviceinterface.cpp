@@ -57,6 +57,7 @@ void DeviceInterface::connectToDevice(const QString &address)
     }
     else {
         qDebug() << "BipInterface::connectToDevice:device was not valid";
+        message(tr("Device is not valid, it may not be supported"));
     }
 }
 
@@ -87,16 +88,24 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
 void DeviceInterface::disconnect()
 {
     qDebug() << "BipInterface::disconnect";
-    m_device->disconnectFromDevice();
+    if (m_device) {
+        m_device->disconnectFromDevice();
+    }
 }
 
 bool DeviceInterface::ready() const
 {
+    if (!m_device) {
+        return false;
+    }
     return m_device->connectionState() == "authenticated";
 }
 
 QString DeviceInterface::connectionState() const
 {
+    if (!m_device) {
+        return QString();
+    }
     return m_device->connectionState();
 }
 
@@ -132,6 +141,9 @@ BipFirmwareService *DeviceInterface::firmwareService() const
 
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
+    if (!m_device) {
+        return;
+    }
     if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
         alertNotificationService()->sendAlert(appName, summary, body);
     }
@@ -198,7 +210,6 @@ void DeviceInterface::onActiveVoiceCallStatusChanged()
 void DeviceInterface::createTables()
 {
     m_conn->setAutoCommit(false);
-
 
     KDbTransaction t = m_conn->beginTransaction();
     if (m_conn->result().isError()) {
@@ -443,10 +454,10 @@ void DeviceInterface::refreshInformation()
     }
 }
 
-QString DeviceInterface::information(AbstractDevice::Info i)
+QString DeviceInterface::information(Info i)
 {
     if (m_device) {
-        return m_device->information(i);
+        return m_device->information((AbstractDevice::Info)i);
     }
     return QString();
 }
@@ -465,9 +476,16 @@ void DeviceInterface::incomingCall(const QString &caller)
     }
 }
 
-void DeviceInterface::applyDeviceSettings(AbstractDevice::Settings s)
+void DeviceInterface::applyDeviceSetting(DeviceInterface::Settings s)
 {
     if (m_device) {
-        m_device->applyDeviceSettings(s);
+        m_device->applyDeviceSetting((AbstractDevice::Settings)s);
+    }
+}
+
+void DeviceInterface::requestManualHeartrate()
+{
+    if (hrmService()) {
+        hrmService()->enableManualHRMeasurement(true);
     }
 }

@@ -31,6 +31,37 @@ class DeviceInterface : public QObject
 public:
     DeviceInterface();
 
+    //Copied from Abstract device due to QML
+    enum Info {
+        INFO_SWVER = 1,
+        INFO_HWVER,
+        INFO_SERIAL,
+        INFO_SYSTEMID,
+        INFO_PNPID,
+        INFO_GPSVER,
+        INFO_BATTERY,
+        INFO_STEPS,
+        INFO_HEARTRATE
+    };
+    Q_ENUM(Info);
+
+    enum Settings {
+        SETTING_USER_PROFILE,
+        SETTING_USER_GOAL,
+        SETTING_USER_ALERT_GOAL,
+        SETTING_USER_ALL_DAY_HRM,
+        SETTING_USER_HRM_SLEEP_DETECTION,
+        SETTING_USER_DISPLAY_ON_LIFT,
+        SETTING_ALARMS,
+        SETTING_DEVICE_DISPLAY_ITEMS,
+        SETTING_DEVICE_LANGUAGE,
+        SETTING_DEVICE_DATE,
+        SETTING_DEVICE_TIME,
+        SETTING_DEVICE_UNIT
+    };
+    Q_ENUM(Settings);
+
+
     Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
     Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
 
@@ -58,11 +89,11 @@ public:
     Q_INVOKABLE void downloadActivityData();
     Q_INVOKABLE void sendWeather(CurrentWeather *weather);
     Q_INVOKABLE void refreshInformation();
-    Q_INVOKABLE QString information(AbstractDevice::Info i);
+    Q_INVOKABLE QString information(Info i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
-    Q_INVOKABLE void applyDeviceSettings(AbstractDevice::Settings s);
-
+    Q_INVOKABLE void applyDeviceSetting(DeviceInterface::Settings s);
+    Q_INVOKABLE void requestManualHeartrate();
 
 private:
     QString m_deviceAddress;

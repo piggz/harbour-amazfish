@@ -182,6 +182,13 @@
     </message>
 </context>
 <context>
+    <name>DeviceInterface</name>
+    <message>
+        <source>Device is not valid, it may not be supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FirstPage</name>
     <message>
         <source>Pair with watch</source>

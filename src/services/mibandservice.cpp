@@ -61,7 +61,7 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
     if (value[0] == RESPONSE && value[1] == COMMAND_REQUEST_GPS_VERSION && value[2] == SUCCESS) {
         m_gpsVersion = value.mid(3);
         qDebug() << "Got gps version = " << m_gpsVersion;
-        emit gpsVersionChanged();
+        emit informationChanged(AbstractDevice::INFO_GPSVER, m_gpsVersion);
     }
 
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
@@ -75,12 +75,13 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO) {
         qDebug() << "...Got battery info";
         m_batteryInfo.setData(value);
-        emit batteryInfoChanged();
+        emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(m_batteryInfo.currentChargeLevelPercent()));
+
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS) {
         qDebug() << "...Got realtime steps:" << value.length();
         if (value.length() == 13) {
             m_steps = TypeConversion::toUint16(value[1], value[2]);
-            emit stepsChanged();
+            emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(m_steps));
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         //qDebug() << "...got data";
@@ -149,13 +150,13 @@ void MiBandService::characteristicRead(const QString &characteristic, const QByt
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO) {
         qDebug() << "...Got battery info";
         m_batteryInfo.setData(value);
-        emit batteryInfoChanged();
+        emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(m_batteryInfo.currentChargeLevelPercent()));
     }
 }
 
 void MiBandService::requestGPSVersion()
 {
-    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_REQUEST_GPS_VERSION, 1));
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(1, COMMAND_REQUEST_GPS_VERSION));
 }
 
 

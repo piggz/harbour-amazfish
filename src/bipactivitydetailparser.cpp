@@ -74,6 +74,9 @@ void BipActivityDetailParser::parse(const QByteArray &bytes)
         case TYPE_GPS_SPEED6:
             i += consumeSpeed6(bytes, i);
             break;
+        default:
+            qDebug() << "unknown packet type" + type;
+            i+=6;
         }
     }
 }

@@ -193,7 +193,7 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterface.applyDeviceSettings(AbstractDevice.SETTING_DISPLAY_ITEMS);
+            DeviceInterface.applyDeviceSettings(DeviceInterface.SETTING_DISPLAY_ITEMS);
         }
     }
 

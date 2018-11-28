@@ -21,7 +21,7 @@ void HRMService::characteristicChanged(const QString &characteristic, const QByt
         qDebug() << "..got HR measurement";
         if (value.length() == 2 && value[0] == 0) {
             m_heartRate = (value[1] & 0xff);
-            emit heartRateChanged();
+            emit informationChanged(AbstractDevice::INFO_HEARTRATE, QString::number(m_heartRate));
         }
     }
 }

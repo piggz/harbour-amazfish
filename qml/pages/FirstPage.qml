@@ -190,7 +190,7 @@ Page {
                     id: btnHR
                     icon.source: "image://theme/icon-m-refresh"
                     onClicked: {
-                        DeviceInterface.hrmService().enableManualHRMeasurement(true);
+                        DeviceInterface.requestManualHeartrate();
                     }
                 }
             }
@@ -228,8 +228,6 @@ Page {
                 case AbstractDevice.INFO_HEARTRATE:
                     lblHeartrate.text = infoValue
                     break;
-                default:
-                    console.log("Unknown info key:", infoKey);
             }
         }
     }

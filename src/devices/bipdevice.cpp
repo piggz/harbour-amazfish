@@ -10,11 +10,6 @@ const char* BipDevice::UUID_SERVICE_FIRMWARE = BipFirmwareService::UUID_SERVICE_
 
 BipDevice::BipDevice()
 {
-    setConnectionState("disconnected");
-    m_reconnectTimer = new QTimer(this);
-    m_reconnectTimer->setInterval(60000);
-    connect(m_reconnectTimer, &QTimer::timeout, this, &BipDevice::reconnectionTimer);
-
     connect(this, &QBLEDevice::propertiesChanged, this, &BipDevice::onPropertiesChanged);
 
     m_keyPressTimer = new QTimer(this);
@@ -43,56 +38,6 @@ bool BipDevice::operationRunning()
     return QBLEDevice::operationRunning();
 }
     
-QString BipDevice::pair()
-{
-    qDebug() << "BipDevice::pair";
-
-    m_needsAuth = true;
-    m_pairing = true;
-    m_autoreconnect = true;
-    //disconnectFromDevice();
-    setConnectionState("pairing");
-    emit connectionStateChanged();
-
-    return QBLEDevice::pair();
-}
-
-void BipDevice::pairAsync()
-{
-    qDebug() << "BipDevice::pairAsync";
-
-    m_needsAuth = true;
-    m_pairing = true;
-    m_autoreconnect = true;
-    //disconnectFromDevice();
-    setConnectionState("pairing");
-    emit connectionStateChanged();
-
-    QBLEDevice::pairAsync();
-}
-
-void BipDevice::connectToDevice()
-{
-    qDebug() << "BipDevice::connectToDevice";
-
-    m_pairing = false;
-    m_autoreconnect = true;
-    QBLEDevice::disconnectFromDevice();
-    setConnectionState("connecting");
-    QBLEDevice::connectToDevice();
-    m_reconnectTimer->start(); //Start timer to attempt to reconnect every 60 seconds
-}
-
-void BipDevice::disconnectFromDevice()
-{
-    qDebug() << "BipDevice::disconnectFromDevice";
-
-    m_autoreconnect = false;
-    setConnectionState("disconnected");
-
-    QBLEDevice::disconnectFromDevice();
-}
-
 void BipDevice::parseServices()
 {
     qDebug() << "BipDevice::parseServices";
@@ -242,19 +187,6 @@ void BipDevice::authenticated(bool ready)
     }
 }
 
-void BipDevice::setConnectionState(const QString &state)
-{
-    if (state != m_connectionState) {
-        m_connectionState = state;
-        emit connectionStateChanged();
-    }
-}
-
-QString BipDevice::connectionState() const
-{
-    return m_connectionState;
-}
-
 void BipDevice::initialise()
 {
     setConnectionState("connected");
@@ -270,9 +202,7 @@ void BipDevice::initialise()
         connect(mi, &MiBandService::message, this, &BipDevice::message);
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &BipDevice::handleButtonPressed, Qt::UniqueConnection);
-        connect(mi, &MiBandService::stepsChanged, this, &BipDevice::stepsChanged, Qt::UniqueConnection);
-        connect(mi, &MiBandService::batteryInfoChanged, this, &BipDevice::batteryInfoChanged, Qt::UniqueConnection);
-
+        connect(mi, &MiBandService::informationChanged, this, &BipDevice::informationChanged);
     }
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
@@ -291,14 +221,15 @@ void BipDevice::initialise()
         connect(fw, &BipFirmwareService::downloadProgress, this, &BipDevice::downloadProgress);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
     }
-}
 
-void BipDevice::reconnectionTimer()
-{
-    qDebug() << "BipDevice::reconnectionTimer";
-    if ((!deviceProperty("Connected").toBool() && m_autoreconnect) || connectionState() == "authfailed") {
-        qDebug() << "Lost connection";
-        QBLEDevice::connectToDevice();
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+    if (info) {
+        connect(info, &DeviceInfoService::informationChanged, this, &BipDevice::informationChanged);
+    }
+
+    HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));
+    if (hrm) {
+        connect(hrm, &HRMService::informationChanged, this, &BipDevice::informationChanged);
     }
 }
 
@@ -382,15 +313,56 @@ QString BipDevice::information(Info i)
     return QString();
 }    
 
-void BipDevice::applyDeviceSettings(Settings s)
+void BipDevice::applyDeviceSetting(Settings s)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
     if (!mi) {
         return;
     }
-    if (s == SETTING_ALARMS) {
-        mi->setAlarms();
+
+    HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));
+    if (!hrm) {
+        return;
     }
+    switch(s) {
+    case SETTING_ALARMS:
+        mi->setAlarms();
+        break;
+    case SETTING_DEVICE_DATE:
+        mi->setDateDisplay();
+        break;
+    case SETTING_DEVICE_DISPLAY_ITEMS:
+        mi->setDisplayItems();
+        break;
+    case SETTING_DEVICE_LANGUAGE:
+        mi->setLanguage();
+        break;
+    case SETTING_DEVICE_TIME:
+        mi->setCurrentTime();
+        break;
+    case SETTING_DEVICE_UNIT:
+        mi->setDistanceUnit();
+        break;
+    case SETTING_USER_ALERT_GOAL:
+        mi->setAlertFitnessGoal();
+        break;
+    case SETTING_USER_ALL_DAY_HRM:
+        hrm->setAllDayHRM();
+        break;
+    case SETTING_USER_DISPLAY_ON_LIFT:
+        mi->setEnableDisplayOnLiftWrist();
+        break;
+    case SETTING_USER_GOAL:
+        mi->setFitnessGoal();
+        break;
+    case SETTING_USER_HRM_SLEEP_DETECTION:
+        hrm->setHeartrateSleepSupport();
+        break;
+    case SETTING_USER_PROFILE:
+        mi->setUserInfo();
+        break;
+    }
+
 }
 
 void BipDevice::stepsChanged()

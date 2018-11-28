@@ -32,19 +32,19 @@ void DeviceInfoService::characteristicRead(const QString &characteristic, const 
     qDebug() << "Read:" << characteristic << value;
     if (characteristic == UUID_CHARACTERISTIC_INFO_SERIAL_NO) {
         m_serialNumber = value;
-        emit serialNumberChanged();
+        emit informationChanged(AbstractDevice::INFO_SERIAL, m_serialNumber);
     } else if (characteristic == UUID_CHARACTERISTIC_INFO_HARDWARE_REV) {
         m_hardwareRevision = value;
-        emit hardwareRevisionChanged();
+        emit informationChanged(AbstractDevice::INFO_HWVER, m_hardwareRevision);
     } else if (characteristic == UUID_CHARACTERISTIC_INFO_SOFTWARE_REV) {
         m_softwareRevision = value;
-        emit softwareRevisionChanged();
+        emit informationChanged(AbstractDevice::INFO_SWVER, m_softwareRevision);
     } else if (characteristic  == UUID_CHARACTERISTIC_INFO_SYSTEM_ID) {
         m_systemId = value;
-        emit systemIdChanged();
+        emit informationChanged(AbstractDevice::INFO_SYSTEMID, m_systemId);
     } else if (characteristic == UUID_CHARACTERISTIC_INFO_PNP_ID) {
         m_pnpId = value;
-        emit pnpIdChanged();
+        emit informationChanged(AbstractDevice::INFO_PNPID, m_pnpId);
     } else {
         qDebug() << "Unknown value";
     }

@@ -95,19 +95,11 @@ public:
     virtual QString deviceType() override;
     virtual QString deviceName() override;
     virtual bool operationRunning() override;
-    
-    virtual QString pair() override;
-    virtual void pairAsync() override;
 
-    virtual void connectToDevice() override;
-    virtual void disconnectFromDevice() override;
-
-    virtual QString connectionState() const override;
-    
     virtual void refreshInformation() override;
     virtual QString information(Info i) override;
     
-    virtual void applyDeviceSettings(Settings s) override;
+    virtual void applyDeviceSetting(Settings s) override;
     
     QString softwareRevision();
     
@@ -116,21 +108,13 @@ public:
     
 private:
     void parseServices();
-    bool m_needsAuth = false;
-    bool m_pairing = false;
-    bool m_ready = false;
-    bool m_hasInitialised = false;
-    bool m_autoreconnect = true;
-    QString m_connectionState;
-    QTimer *m_reconnectTimer;
+
     SettingsManager m_settings;
     QString m_softwareRevision;
     int m_buttonPresses = 0;
     QTimer *m_keyPressTimer = nullptr;
 
     void initialise();
-    void setConnectionState(const QString &state);
-    void reconnectionTimer();
 
     Q_SLOT void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     Q_SLOT void handleButtonPressed();

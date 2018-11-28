@@ -136,10 +136,10 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_LANGUAGE);
-            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_DATE);
-            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_TIME);
-            DeviceInterface.applyDeviceSetting(AbstractDevice.SETTING_UNIT);
+            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_LANGUAGE);
+            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_DATE);
+            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_TIME);
+            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_UNIT);
         }
     }
 }

@@ -9,6 +9,7 @@
 #include "sportssummaryoperation.h"
 #include "sportsdetailoperation.h"
 #include "weather/currentweather.h"
+#include "devices/abstractdevice.h"
 
 #include <QTimer>
 #include <QtCore/QJsonDocument>
@@ -47,10 +48,6 @@ public:
     static const char* UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA;
     static const char* UUID_CHARACTERISTIC_MIBAND_WEATHER;
     static const char* UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER;
-
-    Q_PROPERTY(QString gpsVersion READ gpsVersion NOTIFY gpsVersionChanged())
-    Q_PROPERTY(int batteryInfo READ batteryInfo NOTIFY batteryInfoChanged())
-    Q_PROPERTY(int steps READ steps NOTIFY stepsChanged())
 
     static const char RESPONSE = 0x10;
     static const char SUCCESS = 0x01;
@@ -101,30 +98,28 @@ public:
     static constexpr char RESPONSE_FINISH_SUCCESS[3] {RESPONSE, COMMAND_FETCH_DATA, SUCCESS };
     static constexpr char RESPONSE_FINISH_FAIL[3] {RESPONSE, COMMAND_FETCH_DATA, FAIL };
 
-    Q_INVOKABLE void requestBatteryInfo();
-    Q_INVOKABLE void requestGPSVersion();
-    Q_INVOKABLE QString gpsVersion();
-    Q_INVOKABLE int batteryInfo();
-    Q_INVOKABLE int steps() const;
+    void requestBatteryInfo();
+    void requestGPSVersion();
+    QString gpsVersion();
+    int batteryInfo();
+    int steps() const;
 
-    Q_INVOKABLE void setCurrentTime();
-    Q_INVOKABLE void setLanguage();
-    Q_INVOKABLE void setDateDisplay();
-    Q_INVOKABLE void setTimeFormat();
-    Q_INVOKABLE void setUserInfo();
-    Q_INVOKABLE void setDistanceUnit();
-    void setWearLocation(); //Not invokable because should only be done on init
-    Q_INVOKABLE void setFitnessGoal();
-    Q_INVOKABLE void setAlertFitnessGoal();
-    Q_INVOKABLE void setEnableDisplayOnLiftWrist();
-
-    Q_INVOKABLE void setDisplayItems();
-    Q_INVOKABLE void setDoNotDisturb();
-    Q_INVOKABLE void setRotateWristToSwitchInfo(bool enable);
-    Q_INVOKABLE void setDisplayCaller();
-    Q_INVOKABLE void setInactivityWarnings();
-    
-    Q_INVOKABLE void setAlarms();
+    void setCurrentTime();
+    void setLanguage();
+    void setDateDisplay();
+    void setTimeFormat();
+    void setUserInfo();
+    void setDistanceUnit();
+    void setWearLocation();
+    void setFitnessGoal();
+    void setAlertFitnessGoal();
+    void setEnableDisplayOnLiftWrist();
+    void setDisplayItems();
+    void setDoNotDisturb();
+    void setRotateWristToSwitchInfo(bool enable);
+    void setDisplayCaller();
+    void setInactivityWarnings();
+    void setAlarms();
 
     void sendWeather(const CurrentWeather *weather);
 
@@ -134,14 +129,9 @@ public:
     Q_INVOKABLE void fetchSportsSummaries();
     //Q_INVOKABLE void fetchActivityDetail();
 
-
-    Q_SIGNAL void gpsVersionChanged();
-    Q_SIGNAL void batteryInfoChanged();
-    Q_SIGNAL void stepsChanged();
-
+    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
     Q_SIGNAL void declineCall();
     Q_SIGNAL void ignoreCall();
-
     Q_SIGNAL void buttonPressed();
 
     Q_INVOKABLE virtual bool operationRunning() override;

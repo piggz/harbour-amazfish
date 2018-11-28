@@ -3,6 +3,7 @@
 
 #include "qble/qbleservice.h"
 #include "settingsmanager.h"
+#include "devices/abstractdevice.h"
 
 /*
 {0000180d-0000-1000-8000-00805f9b34fb} Heart rate service
@@ -28,16 +29,15 @@ public:
     const char COMMAND_ENABLE_HR_SLEEP_MEASUREMENT[3] = {0x15, 0x00, 0x01};
     const char COMMAND_DISABLE_HR_SLEEP_MEASUREMENT[3] = {0x15, 0x00, 0x00};
 
-    Q_PROPERTY(int heartRate READ heartRate NOTIFY heartRateChanged())
+    void enableRealtimeHRMeasurement(bool enable);
+    void enableManualHRMeasurement(bool enable);
+    void keepRealtimeHRMMeasurementAlive();
+    int heartRate() const;
+    void setAllDayHRM();
+    void setHeartrateSleepSupport();
 
-    Q_INVOKABLE void enableRealtimeHRMeasurement(bool enable);
-    Q_INVOKABLE void enableManualHRMeasurement(bool enable);
-    Q_INVOKABLE void keepRealtimeHRMMeasurementAlive();
-    Q_INVOKABLE int heartRate() const;
-    Q_INVOKABLE void setAllDayHRM();
-    Q_INVOKABLE void setHeartrateSleepSupport();
+    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
 
-    Q_SIGNAL void heartRateChanged();
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 
