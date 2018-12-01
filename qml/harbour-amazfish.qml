@@ -39,8 +39,8 @@ ApplicationWindow
     BusyIndicator {
         size: BusyIndicatorSize.Large
         anchors.centerIn: parent
-        visible: DeviceInterface.operationRunning
-        running: DeviceInterface.operationRunning
+        visible: DeviceInterfaceInstance.operationRunning
+        running: DeviceInterfaceInstance.operationRunning
     }
 
     Rectangle {
@@ -93,7 +93,7 @@ ApplicationWindow
 
         onReady: {
             console.log("Weather data ready");
-            DeviceInterface.sendWeather(weather);
+            DeviceInterfaceInstance.sendWeather(weather);
         }
     }
 
@@ -119,7 +119,7 @@ ApplicationWindow
     }
     
     Connections {
-        target: DeviceInterface
+        target: DeviceInterfaceInstance
         onMessage: {
             showMessage(text);
         }

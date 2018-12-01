@@ -53,10 +53,11 @@ int main(int argc, char *argv[])
 
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
     qmlRegisterUncreatableType<AbstractDevice>("uk.co.piggz.amazfish", 1, 0, "AbstractDevice", "Abstract Device type available only for enum datatypes");
+    qmlRegisterUncreatableType<DeviceInterface>("uk.co.piggz.amazfish", 1, 0, "DeviceInterface", "DeviceInterface type available only for enum datatypes");
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);
-    view->rootContext()->setContextProperty("DeviceInterface", &devInterface);
+    view->rootContext()->setContextProperty("DeviceInterfaceInstance", &devInterface);
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
 
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));

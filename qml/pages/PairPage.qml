@@ -62,7 +62,7 @@ Page {
         }
         Label {
             id: lblWatch
-            text: DeviceInterface.connectionState
+            text: DeviceInterfaceInstance.connectionState
             anchors.top: lblStatus.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.margins: Theme.paddingMedium
@@ -97,7 +97,7 @@ Page {
         deviceName = BluezAdapter.deviceName(path);
 
         lblStatus.text = "Connecting to watch...\n" + path
-        var err = DeviceInterface.pair(deviceName, path);
+        var err = DeviceInterfaceInstance.pair(deviceName, path);
 
         console.log(err);
 
@@ -107,9 +107,9 @@ Page {
     }
 
     Connections {
-        target: DeviceInterface
+        target: DeviceInterfaceInstance
         onConnectionStateChanged: {
-            if (DeviceInterface.connectionState === "authenticated") {
+            if (DeviceInterfaceInstance.connectionState === "authenticated") {
                 pairedAddress.value = devicePath;
                 pairedName.value = deviceName;
                 pairedAddress.sync();

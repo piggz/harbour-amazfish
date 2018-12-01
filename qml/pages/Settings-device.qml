@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
@@ -136,10 +137,10 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_LANGUAGE);
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_DATE);
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_TIME);
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_UNIT);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTIMG_DEVICE_LANGUAGE);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_DATE);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_TIME);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_UNIT);
         }
     }
 }

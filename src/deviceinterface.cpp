@@ -478,6 +478,7 @@ void DeviceInterface::incomingCall(const QString &caller)
 
 void DeviceInterface::applyDeviceSetting(DeviceInterface::Settings s)
 {
+    qDebug() << "Apply setting:" << s << (int)s;
     if (m_device) {
         m_device->applyDeviceSetting((AbstractDevice::Settings)s);
     }

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
@@ -249,12 +250,12 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_USER_PROFILE);
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_USER_GOAL);
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_USER_ALERT_GOAL);
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_USER_DISPLY_ON_LIFT);
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_USER_ALL_DAY_HRM);
-            DeviceInterface.applyDeviceSetting(DeviceInterface.SETTING_USER_HRM_SLEEP_SUPPORT)
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_PROFILE);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_GOAL);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_ALERT_GOAL);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_DISPLAY_ON_LIFT);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_ALL_DAY_HRM);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_HRM_SLEEP_DETECTION)
         }
     }
 }

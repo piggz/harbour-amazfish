@@ -32,9 +32,9 @@ Page {
     }
 
     Connections {
-        target: DeviceInterface
+        target: DeviceInterfaceInstance
         onConnectionStateChanged: {
-            console.log(DeviceInterface.connectionState);
+            console.log(DeviceInterfaceInstance.connectionState);
         }
     }
     
@@ -71,14 +71,14 @@ Page {
                 text: qsTr("Disconnect from watch")
                 onClicked: {
                     manualDisconnect = true;
-                    DeviceInterface.disconnect();
+                    DeviceInterfaceInstance.disconnect();
                 }
             }
             MenuItem {
                 text: qsTr("Connect to watch")
                 onClicked: {
                     manualDisconnect = false;
-                    DeviceInterface.connectToDevice(pairedAddress.value);
+                    DeviceInterfaceInstance.connectToDevice(pairedAddress.value);
                 }
             }
         }
@@ -109,12 +109,12 @@ Page {
                     height: childrenRect.height
                     BusyIndicator {
                         size: BusyIndicatorSize.Medium
-                        visible: DeviceInterface.connectionState === "connecting"
-                        running: DeviceInterface.connectionState === "connecting"
+                        visible: DeviceInterfaceInstance.connectionState === "connecting"
+                        running: DeviceInterfaceInstance.connectionState === "connecting"
                     }
                     Image {
                         source: "image://theme/icon-m-bluetooth-device"
-                        visible: DeviceInterface.connectionState === "connected" || DeviceInterface.connectionState === "authenticated"
+                        visible: DeviceInterfaceInstance.connectionState === "connected" || DeviceInterfaceInstance.connectionState === "authenticated"
                     }
                 }
                 Item {
@@ -122,12 +122,12 @@ Page {
                     height: childrenRect.height
                     BusyIndicator {
                         size: BusyIndicatorSize.Medium
-                        visible: DeviceInterface.connectionState === "connected"
-                        running: DeviceInterface.connectionState === "connected"
+                        visible: DeviceInterfaceInstance.connectionState === "connected"
+                        running: DeviceInterfaceInstance.connectionState === "connected"
                     }
                     Image {
                         source: "image://theme/icon-m-watch"
-                        visible: DeviceInterface.connectionState === "authenticated"
+                        visible: DeviceInterfaceInstance.connectionState === "authenticated"
                     }
                 }
 
@@ -190,7 +190,7 @@ Page {
                     id: btnHR
                     icon.source: "image://theme/icon-m-refresh"
                     onClicked: {
-                        DeviceInterface.requestManualHeartrate();
+                        DeviceInterfaceInstance.requestManualHeartrate();
                     }
                 }
             }
@@ -209,10 +209,10 @@ Page {
     }
 
     Connections {
-        target: DeviceInterface
+        target: DeviceInterfaceInstance
         onConnectionStateChanged: {
-            if (DeviceInterface.connectionState === "authenticated") {
-                DeviceInterface.refreshInformation();
+            if (DeviceInterfaceInstance.connectionState === "authenticated") {
+                DeviceInterfaceInstance.refreshInformation();
             }
         }
         onInformationChanged: {
@@ -239,7 +239,7 @@ Page {
         }
 
         if (pairedAddress.value !== "") {
-            DeviceInterface.connectToDevice(pairedAddress.value);
+            DeviceInterfaceInstance.connectToDevice(pairedAddress.value);
         }
     }
 }

@@ -25,8 +25,8 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Download Next Activity")
-                onClicked: DeviceInterface.downloadSportsData();
-                enabled: DeviceInterface.connectionState === "authenticated"
+                onClicked: DeviceInterfaceInstance.downloadSportsData();
+                enabled: DeviceInterfaceInstance.connectionState === "authenticated"
             }
         }
 
@@ -148,7 +148,7 @@ Page {
     }
 
     Connections {
-        target: DeviceInterface
+        target: DeviceInterfaceInstance
 
         onOperationRunningChanged: {
             SportsModel.update();

@@ -26,9 +26,9 @@ Page {
             MenuItem {
                 text: qsTr("Refresh")
                 onClicked: {
-                    DeviceInterface.refreshInformation();
-                    //DeviceInterface.infoService().refreshInformation();
-                    //DeviceInterface.miBandService().requestGPSVersion();
+                    DeviceInterfaceInstance.refreshInformation();
+                    //DeviceInterfaceInstance.infoService().refreshInformation();
+                    //DeviceInterfaceInstance.miBandService().requestGPSVersion();
                 }
             }
         }
@@ -67,7 +67,7 @@ Page {
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("Connection State: ") + DeviceInterface.connectionState
+                text: qsTr("Connection State: ") + DeviceInterfaceInstance.connectionState
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
@@ -80,25 +80,25 @@ Page {
             Button {
                 text: qsTr("Test Notification")
                 onClicked: {
-                    DeviceInterface.sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
+                    DeviceInterfaceInstance.sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
                 }
             }
             Button {
                 text: qsTr("Test Email")
                 onClicked: {
-                    DeviceInterface.sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
+                    DeviceInterfaceInstance.sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
                 }
             }
             Button {
                 text: qsTr("Test Call")
                 onClicked: {
-                    DeviceInterface.incomingCall("Somebody");
+                    DeviceInterfaceInstance.incomingCall("Somebody");
                 }
             }
             Button {
                 text: qsTr("Fetch debug log")
                 onClicked: {
-                    DeviceInterface.miBandService().fetchLogs();
+                    DeviceInterfaceInstanceterface.miBandService().fetchLogs();
                 }
             }
             Button {
@@ -111,11 +111,11 @@ Page {
     }
 
     Component.onCompleted: {
-        DeviceInterface.refreshInformation();
+        DeviceInterfaceInstance.refreshInformation();
     }
 
     Connections {
-        target: DeviceInterface
+        target: DeviceInterfaceInstance
         onInformationChanged: {
             switch (infoKey) {
             case AbstractDevice.INFO_SERIAL:

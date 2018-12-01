@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
@@ -193,7 +194,7 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterface.applyDeviceSettings(DeviceInterface.SETTING_DISPLAY_ITEMS);
+            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_DISPLAY_ITEMS);
         }
     }
 

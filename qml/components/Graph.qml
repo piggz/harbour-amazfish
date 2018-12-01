@@ -2,7 +2,7 @@ import QtQuick 2.0
 import "."
 
 GraphData {
-    property QtObject dataSource: DeviceInterface.dataSource()
+    property QtObject dataSource: DeviceInterfaceInstance.dataSource()
 
     property int type: 0
 
