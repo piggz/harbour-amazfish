@@ -20,6 +20,12 @@ Page {
         defaultValue: 60
     }
 
+    ConfigurationValue {
+        id: appAutoSyncData
+        key: "/uk/co/piggz/amazfish/app/autosyncdata"
+        defaultValue: true
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -56,6 +62,12 @@ Page {
                 label: qsTr("Refresh weather every (") + value + qsTr(") minutes")
             }
 
+            TextSwitch {
+                id: chkAutoSyncData
+                width: parent.width
+                text: qsTr("Sync activity data each hour")
+            }
+
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Save Settings")
@@ -68,11 +80,13 @@ Page {
     Component.onCompleted: {
         chkNotifyConnect.checked = appNotifyConnect.value;
         sldWeatherRefresh.value = appRefreshWeather.value;
-
+        chkAutoSyncData.checked = appAutoSyncData.value;
     }
+
     function saveSettings() {
         appNotifyConnect.value = chkNotifyConnect.checked;
         appRefreshWeather.value = sldWeatherRefresh.value;
+        appAutoSyncData.value = chkAutoSyncData.checked;
 
         weather.refresh();
     }

@@ -25,6 +25,12 @@ ApplicationWindow
         weather.setCity(cityManager.cities[0])
     }
 
+    ConfigurationValue {
+        id: appAutoSyncData
+        key: "/uk/co/piggz/amazfish/app/autosyncdata"
+        defaultValue: true
+    }
+
     onStateChanged: {
         console.log("State: " + state);
     }
@@ -98,11 +104,12 @@ ApplicationWindow
     }
 
     Timer {
-        id: tmrWeatherRefresh
+        id: tmrRefresh
         running: true
         repeat: true
         interval: 60000
         property int minutes: 0
+        property int autosynctime: 0
 
         onTriggered: {
             console.log("tmrWeatherRefresh", minutes);
@@ -110,10 +117,19 @@ ApplicationWindow
 
             if (minutes >= appRefreshWeather.value) {
                 minutes = 0;
-                console.log("interval reached");
+                console.log("weather interval reached");
                 weather.refresh();
             }
 
+            if (appAutoSyncData.value) {
+                autosynctime++;
+
+                if (autosynctime > 1) {
+                    console.log("Auto syncing activity data");
+                    autosynctime = 0;
+                    DeviceInterfaceInstance.downloadActivityData();
+                }
+            }
 
         }
     }
