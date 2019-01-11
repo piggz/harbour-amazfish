@@ -144,6 +144,7 @@ public:
 private:
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
     Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
+    Q_SLOT void operationTimeout();
 
     void setGPSVersion(const QString& v);
 
@@ -160,6 +161,7 @@ private:
     SportsDetailOperation *m_sportsDetailOperation = nullptr;
 
     KDbConnection *m_conn = nullptr;
+    QTimer *m_operationTimeout = nullptr;
 };
 
 #endif // MIBANDSERVICE_H
