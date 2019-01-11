@@ -72,6 +72,10 @@
         <source>Download Data</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Step Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BipDevice</name>
@@ -334,6 +338,10 @@
     </message>
     <message>
         <source>) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync activity data each hour</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
