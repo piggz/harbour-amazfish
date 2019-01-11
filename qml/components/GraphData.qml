@@ -16,6 +16,9 @@ Item {
 
     property alias clickEnabled: backgroundArea.enabled
     property string graphTitle: ""
+    property int line: 1
+    property int bar: 2
+    property int graphType: line
 
     property alias axisX: _axisXobject
     Axis {
@@ -243,16 +246,27 @@ Item {
 
                     ctx.lineWidth = lineWidth;
                     ctx.beginPath();
-                    var x = -stepX;
+                    var x = stepX / 2;
+                    if (graphType == line) {
+                        x = -stepX;
+                    }
                     var valueSum = 0;
                     for (var i = 0; i < end; i++) {
                         valueSum += points[i].y;
                         var y = height - Math.floor(points[i].y / stepY) - 1;
-                        if (i == 0) {
+                        if (graphType == line) {
+                            if (i == 0) {
+                                ctx.moveTo(x, y);
+                            } else {
+                                ctx.lineTo(x, y);
+                            }
+                        } else if (graphType == bar) {
                             ctx.moveTo(x, y);
-                        } else {
-                            ctx.lineTo(x, y);
+                            ctx.lineTo(x, height);
                         }
+
+
+
                         x+=stepX; //point[i].x can be used for grid title
                     }
                     ctx.stroke();
