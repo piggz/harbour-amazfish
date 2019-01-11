@@ -28,6 +28,10 @@ QVariant DataSource::data(Type type, const QDate &day)
         qry = "SELECT timestamp_dt, ((raw_intensity / 255.0) * 100) FROM mi_band_activity WHERE timestamp_dt >= '" +
             day.toString("yyyy-MM-ddT00:00:00") +  "' AND timestamp_dt <= '" +
             day.toString("yyyy-MM-ddT23:59:59") +  "' ORDER BY timestamp_dt ASC";
+    } else if (type == DataSource::StepSummary) {
+        qry = "SELECT date(timestamp_dt), sum(steps) FROM mi_band_activity WHERE date(timestamp_dt) >= date('" +
+              day.toString("yyyy-MM-ddT00:00:00") + "','-20 day') AND timestamp_dt <= '" +
+              day.toString("yyyy-MM-ddT23:59:59") +  "' GROUP BY date(timestamp_dt) ORDER BY timestamp_dt ASC";
     }
 
     qDebug() << qry;

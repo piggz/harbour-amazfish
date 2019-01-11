@@ -82,7 +82,7 @@ Page {
                 minY: 0
                 maxY: 200
                 valueConverter: function(value) {
-                    return value.toFixed(1);
+                    return value.toFixed(0);
                 }
                 onClicked: {
                     updateGraph(day);
@@ -99,7 +99,25 @@ Page {
                 minY: 0
                 maxY: 200
                 valueConverter: function(value) {
-                    return value.toFixed(1);
+                    return value.toFixed(0);
+                }
+                onClicked: {
+                    updateGraph(day);
+                }
+            }
+            Graph {
+                id: graphStepSummary
+                graphTitle: qsTr("Step Summary")
+                graphHeight: 300
+
+                axisY.units: "Steps"
+                type: DataSource.StepSummary
+                graphType: 2
+
+                minY: 0
+                maxY: 20000
+                valueConverter: function(value) {
+                    return value.toFixed(0);
                 }
                 onClicked: {
                     updateGraph(day);
@@ -116,7 +134,7 @@ Page {
                 minY: 0
                 maxY: 100
                 valueConverter: function(value) {
-                    return value.toFixed(1);
+                    return value.toFixed(0);
                 }
                 onClicked: {
                     updateGraph(day);
@@ -128,6 +146,7 @@ Page {
     function updateGraphs() {
         graphHeartrate.updateGraph(day);
         graphSteps.updateGraph(day);
+        graphStepSummary.updateGraph(day);
         graphIntensity.updateGraph(day);
     }
 
