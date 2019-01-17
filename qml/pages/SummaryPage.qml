@@ -35,7 +35,7 @@ Page {
             width: page.width - 2*Theme.horizontalPageMargin
             spacing: Theme.paddingLarge
             PageHeader {
-                title: qsTr("Analysis")
+                title: qsTr("Step and Sleep Summary")
             }
 
             Row {
@@ -72,32 +72,16 @@ Page {
             }
 
             Graph {
-                id: graphHeartrate
-                graphTitle: qsTr("Heartrate")
-                graphHeight: 300
-
-                axisY.units: "BPM"
-                type: DataSource.Heartrate
-
-                minY: 0
-                maxY: 200
-                valueConverter: function(value) {
-                    return value.toFixed(0);
-                }
-                onClicked: {
-                    updateGraph(day);
-                }
-            }
-            Graph {
-                id: graphSteps
-                graphTitle: qsTr("Steps")
+                id: graphStepSummary
+                graphTitle: qsTr("Step Summary")
                 graphHeight: 300
 
                 axisY.units: "Steps"
-                type: DataSource.Steps
+                type: DataSource.StepSummary
+                graphType: 2
 
                 minY: 0
-                maxY: 200
+                maxY: 20000
                 valueConverter: function(value) {
                     return value.toFixed(0);
                 }
@@ -106,17 +90,18 @@ Page {
                 }
             }
             Graph {
-                id: graphIntensity
-                graphTitle: qsTr("Intensity")
+                id: graphSleepSummary
+                graphTitle: qsTr("Sleep Summary")
                 graphHeight: 300
 
-                axisY.units: "%"
-                type: DataSource.Intensity
+                axisY.units: "Hours"
+                type: DataSource.SleepSummary
+                graphType: 2
 
                 minY: 0
-                maxY: 100
+                maxY: 12
                 valueConverter: function(value) {
-                    return value.toFixed(0);
+                    return value.toFixed(1);
                 }
                 onClicked: {
                     updateGraph(day);
@@ -126,15 +111,14 @@ Page {
     }
 
     function updateGraphs() {
-        graphHeartrate.updateGraph(day);
-        graphSteps.updateGraph(day);
-        graphIntensity.updateGraph(day);
+        graphStepSummary.updateGraph(day);
+        graphSleepSummary.updateGraph(day);
     }
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
             //            if (!pageStack._currentContainer.attachedContainer) {
-            pageStack.pushAttached(Qt.resolvedUrl("SportsSummaryPage.qml"))
+            pageStack.pushAttached(Qt.resolvedUrl("AnalysisPage.qml"))
             //        }
         }
     }
