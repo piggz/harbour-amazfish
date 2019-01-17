@@ -16,7 +16,8 @@ public:
         Steps = 2,
         Sleep = 3,
         Intensity = 4,
-        StepSummary = 5
+        StepSummary = 5,
+        SleepSummary = 6
     };
     DataSource();
     void setConnection(KDbConnection *conn);
