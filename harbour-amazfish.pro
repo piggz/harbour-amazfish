@@ -80,7 +80,6 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/Settings-menu.qml \
     qml/pages/Settings-device.qml \
     qml/pages/Settings-app.qml \
-    qml/pages/AnalysisPage.qml \
     qml/pages/Axis.qml \
     qml/pages/GraphData.qml \
     qml/components/Axis.qml \
@@ -91,7 +90,9 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/Settings-alarms.qml \
     qml/pages/BipFirmwarePage.qml \
     qml/pages/SportsSummaryPage.qml \
-    qml/pages/AddCityDialog.qml
+    qml/pages/AddCityDialog.qml \
+    qml/pages/SummaryPage.qml \
+    qml/pages/AnalysisPage.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
