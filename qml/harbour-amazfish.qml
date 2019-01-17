@@ -124,7 +124,7 @@ ApplicationWindow
             if (appAutoSyncData.value) {
                 autosynctime++;
 
-                if (autosynctime > 1) {
+                if (autosynctime > 60) {
                     console.log("Auto syncing activity data");
                     autosynctime = 0;
                     DeviceInterfaceInstance.downloadActivityData();
