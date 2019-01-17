@@ -263,9 +263,21 @@ Item {
                         } else if (graphType == bar) {
                             ctx.moveTo(x, y);
                             ctx.lineTo(x, height);
+
+                            if (typeof points[i].z !== 'undefined') {
+                                var z = height - Math.floor((points[i].z + points[i].y)  / stepY) - 1;
+
+                                ctx.stroke();
+                                ctx.strokeStyle = Theme.secondaryHighlightColor;
+                                ctx.beginPath();
+                                ctx.moveTo(x, z);
+                                ctx.lineTo(x, y);
+                                ctx.stroke();
+                                ctx.strokeStyle = lineColor;
+                                ctx.beginPath();
+
+                            }
                         }
-
-
 
                         x+=stepX; //point[i].x can be used for grid title
                     }
@@ -276,6 +288,9 @@ Item {
                         var lastValue = valueSum;
                         if (!root.valueTotal) {
                             lastValue = points[end-1].y;
+                            if (typeof points[end-1].z !== 'undefined') {
+                                lastValue += points[end-1].z
+                            }
                         }
                         if (lastValue) {
                             labelLastValue.text = root.createYLabel(lastValue)+root.axisY.units;
