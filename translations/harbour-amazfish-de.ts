@@ -53,28 +53,24 @@
 <context>
     <name>AnalysisPage</name>
     <message>
-        <source>Analysis</source>
-        <translation>Auswertung</translation>
-    </message>
-    <message>
-        <source>Heartrate</source>
-        <translation>Pulsrate</translation>
-    </message>
-    <message>
-        <source>Steps</source>
-        <translation>Schritte</translation>
-    </message>
-    <message>
-        <source>Intensity</source>
-        <translation>Intensität</translation>
-    </message>
-    <message>
         <source>Download Data</source>
         <translation>Daten abrufen</translation>
     </message>
     <message>
-        <source>Step Summary</source>
-        <translation type="unfinished"></translation>
+        <source>Analysis</source>
+        <translation type="unfinished">Auswertung</translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation type="unfinished">Pulsrate</translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation type="unfinished">Schritte</translation>
+    </message>
+    <message>
+        <source>Intensity</source>
+        <translation type="unfinished">Intensität</translation>
     </message>
 </context>
 <context>
@@ -227,7 +223,7 @@
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation>Keine Daten</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -582,6 +578,25 @@
     <message>
         <source>Download Next Activity</source>
         <translation>Weitere Aktivitäten abrufen</translation>
+    </message>
+</context>
+<context>
+    <name>SummaryPage</name>
+    <message>
+        <source>Download Data</source>
+        <translation type="unfinished">Daten abrufen</translation>
+    </message>
+    <message>
+        <source>Step Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sleep Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Step and Sleep Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -53,6 +53,10 @@
 <context>
     <name>AnalysisPage</name>
     <message>
+        <source>Download Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Analysis</source>
         <translation type="unfinished"></translation>
     </message>
@@ -66,14 +70,6 @@
     </message>
     <message>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Download Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Step Summary</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -581,6 +577,25 @@
     </message>
     <message>
         <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SummaryPage</name>
+    <message>
+        <source>Download Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Step Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sleep Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Step and Sleep Summary</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
