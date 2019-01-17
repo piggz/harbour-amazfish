@@ -41,7 +41,7 @@ Page {
     onStatusChanged: {
         if (status === PageStatus.Active) {
             //            if (!pageStack._currentContainer.attachedContainer) {
-            pageStack.pushAttached(Qt.resolvedUrl("AnalysisPage.qml"))
+            pageStack.pushAttached(Qt.resolvedUrl("SummaryPage.qml"))
             //        }
         }
     }
