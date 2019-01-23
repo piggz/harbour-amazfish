@@ -53,6 +53,10 @@
 <context>
     <name>AnalysisPage</name>
     <message>
+        <source>Download Data</source>
+        <translation>Ladda ner data</translation>
+    </message>
+    <message>
         <source>Analysis</source>
         <translation>Analys</translation>
     </message>
@@ -67,10 +71,6 @@
     <message>
         <source>Intensity</source>
         <translation>Intensitet</translation>
-    </message>
-    <message>
-        <source>Download Data</source>
-        <translation>Ladda ner data</translation>
     </message>
 </context>
 <context>
@@ -336,6 +336,10 @@
         <source>) minutes</source>
         <translation>) minuter</translation>
     </message>
+    <message>
+        <source>Sync activity data each hour</source>
+        <translation>Synkronisera aktivitetsdata varje timma</translation>
+    </message>
 </context>
 <context>
     <name>Settings-bip-shortcuts</name>
@@ -574,6 +578,25 @@
     <message>
         <source>Download Next Activity</source>
         <translation>Ladda ner nästa aktivitet</translation>
+    </message>
+</context>
+<context>
+    <name>SummaryPage</name>
+    <message>
+        <source>Download Data</source>
+        <translation>Ladda ner data</translation>
+    </message>
+    <message>
+        <source>Step Summary</source>
+        <translation>Stegsammandrag</translation>
+    </message>
+    <message>
+        <source>Sleep Summary</source>
+        <translation>Sömnsammandrag</translation>
+    </message>
+    <message>
+        <source>Step and Sleep Summary</source>
+        <translation>Steg- och sömnsammandrag</translation>
     </message>
 </context>
 </TS>
