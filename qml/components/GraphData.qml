@@ -35,6 +35,8 @@ Item {
         grid: 4
     }
 
+    property real lastValue: 0.0
+
     property var valueConverter
     property bool valueTotal: false
 
@@ -285,7 +287,7 @@ Item {
                     ctx.restore();
 
                     if (end > 0) {
-                        var lastValue = valueSum;
+                        lastValue = valueSum;
                         if (!root.valueTotal) {
                             lastValue = points[end-1].y;
                             if (typeof points[end-1].z !== 'undefined') {

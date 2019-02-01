@@ -91,8 +91,9 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/BipFirmwarePage.qml \
     qml/pages/SportsSummaryPage.qml \
     qml/pages/AddCityDialog.qml \
-    qml/pages/SummaryPage.qml \
-    qml/pages/AnalysisPage.qml
+    qml/pages/AnalysisPage.qml \
+    qml/pages/StepsPage.qml \
+    qml/pages/SleepPage.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 

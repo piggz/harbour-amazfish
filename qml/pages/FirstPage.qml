@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
 import org.SfietKonstantin.weatherfish 1.0
 import uk.co.piggz.amazfish 1.0
+import "../components/"
 
 Page {
     id: page
@@ -12,6 +13,7 @@ Page {
 
     property bool manualDisconnect: false
     property bool needsProfileSet: false
+    property var day: new Date()
 
     ConfigurationValue {
         id: pairedAddress
@@ -41,7 +43,7 @@ Page {
     onStatusChanged: {
         if (status === PageStatus.Active) {
             //            if (!pageStack._currentContainer.attachedContainer) {
-            pageStack.pushAttached(Qt.resolvedUrl("SummaryPage.qml"))
+            pageStack.pushAttached(Qt.resolvedUrl("StepsPage.qml"))
             //        }
         }
     }
@@ -149,24 +151,6 @@ Page {
                 }
             }
 
-            Row {
-                spacing: Theme.paddingLarge
-                Image {
-                    id: imgSteps
-                    source: "../pics/icon-m-steps.png"
-                    width: Theme.iconSizeMedium
-                    height: width
-                }
-                Label {
-                    id: lblSteps
-                    color: Theme.secondaryHighlightColor
-                    font.pixelSize: Theme.fontSizeMedium
-                    height: Theme.iconSizeMedium
-                    verticalAlignment: Text.AlignVCenter
-                }
-            }
-
-
             //Heartrate
             Row {
                 spacing: Theme.paddingLarge
@@ -196,6 +180,7 @@ Page {
             }
         }
     }
+
     Timer {
         id: tmrStartup
         running: true
@@ -219,15 +204,12 @@ Page {
             console.log("Information changed", infoKey, infoValue);
 
             switch (infoKey) {
-                case AbstractDevice.INFO_BATTERY:
-                    lblBattery.text = infoValue
-               	 break;
-                case AbstractDevice.INFO_STEPS:
-                    lblSteps.text = infoValue
-                    break;
-                case AbstractDevice.INFO_HEARTRATE:
-                    lblHeartrate.text = infoValue
-                    break;
+            case AbstractDevice.INFO_BATTERY:
+                lblBattery.text = infoValue
+                break;
+            case AbstractDevice.INFO_HEARTRATE:
+                lblHeartrate.text = infoValue
+                break;
             }
         }
     }

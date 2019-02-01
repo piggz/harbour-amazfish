@@ -490,3 +490,11 @@ void DeviceInterface::requestManualHeartrate()
         hrmService()->enableManualHRMeasurement(true);
     }
 }
+
+void DeviceInterface::rebootWatch()
+{
+    qDebug() << "Rebooting watch";
+    if (m_device) {
+        m_device->rebootWatch();
+    }
+}

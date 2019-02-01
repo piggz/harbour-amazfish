@@ -180,6 +180,10 @@
         <source>Test Popup</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reboot watch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DeviceInterface</name>
@@ -191,23 +195,15 @@
 <context>
     <name>FirstPage</name>
     <message>
+        <source>Debug Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Pair with watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>AmazFish</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Connect to watch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Disconnect from watch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Debug Info</source>
+        <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -215,7 +211,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Download File</source>
+        <source>Disconnect from watch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connect to watch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AmazFish</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -570,6 +574,25 @@
     </message>
 </context>
 <context>
+    <name>SleepPage</name>
+    <message>
+        <source>Download Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sleep Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sleep</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hrs</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>
@@ -581,21 +604,13 @@
     </message>
 </context>
 <context>
-    <name>SummaryPage</name>
+    <name>StepsPage</name>
     <message>
         <source>Download Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Step Summary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sleep Summary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Step and Sleep Summary</source>
+        <source>Steps</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

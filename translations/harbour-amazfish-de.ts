@@ -180,6 +180,10 @@
         <source>Test Popup</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reboot watch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DeviceInterface</name>
@@ -191,32 +195,32 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <source>Pair with watch</source>
-        <translation>Watch paaren</translation>
-    </message>
-    <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
-    </message>
-    <message>
-        <source>Connect to watch</source>
-        <translation>Watch verbinden</translation>
-    </message>
-    <message>
-        <source>Disconnect from watch</source>
-        <translation>Watch trennen</translation>
-    </message>
-    <message>
         <source>Debug Info</source>
-        <translation>Debug-Informationen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <source>Pair with watch</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation>Datei übertragen</translation>
+        <translation type="unfinished">Datei herunterladen</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Einstellungen</translation>
+    </message>
+    <message>
+        <source>Disconnect from watch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connect to watch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AmazFish</source>
+        <translation type="unfinished">AmazFish</translation>
     </message>
 </context>
 <context>
@@ -570,6 +574,25 @@
     </message>
 </context>
 <context>
+    <name>SleepPage</name>
+    <message>
+        <source>Download Data</source>
+        <translation type="unfinished">Daten abrufen</translation>
+    </message>
+    <message>
+        <source>Sleep Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sleep</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hrs</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>
@@ -581,22 +604,14 @@
     </message>
 </context>
 <context>
-    <name>SummaryPage</name>
+    <name>StepsPage</name>
     <message>
         <source>Download Data</source>
         <translation type="unfinished">Daten abrufen</translation>
     </message>
     <message>
-        <source>Step Summary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sleep Summary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Step and Sleep Summary</source>
-        <translation type="unfinished"></translation>
+        <source>Steps</source>
+        <translation type="unfinished">Schritte</translation>
     </message>
 </context>
 </TS>

@@ -100,6 +100,7 @@ public:
     virtual QString information(Info i) override;
     
     virtual void applyDeviceSetting(Settings s) override;
+    virtual void rebootWatch() override;
     
     QString softwareRevision();
     

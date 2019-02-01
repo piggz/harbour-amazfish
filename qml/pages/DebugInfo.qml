@@ -98,13 +98,19 @@ Page {
             Button {
                 text: qsTr("Fetch debug log")
                 onClicked: {
-                    DeviceInterfaceInstanceterface.miBandService().fetchLogs();
+                    DeviceInterfaceInstance.miBandService().fetchLogs();
                 }
             }
             Button {
                 text: qsTr("Test Popup")
                 onClicked: {
                     app.showMessage("This is a test notification");
+                }
+            }
+            Button {
+                text: qsTr("Reboot watch")
+                onClicked: {
+                    DeviceInterfaceInstance.rebootWatch();
                 }
             }
         }

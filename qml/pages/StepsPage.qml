@@ -6,6 +6,7 @@ import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
+    property int stepCount: 0
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
@@ -35,7 +36,16 @@ Page {
             width: page.width - 2*Theme.horizontalPageMargin
             spacing: Theme.paddingLarge
             PageHeader {
-                title: qsTr("Step and Sleep Summary")
+                title: qsTr("Steps")
+            }
+
+            Label {
+                id: lblStepsToday
+                font.pixelSize: Theme.fontSizeExtraLarge * 3
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width
+                text: stepCount > 0 ? stepCount : graphStepSummary.lastValue
+                horizontalAlignment: Text.AlignHCenter
             }
 
             Row {
@@ -65,7 +75,7 @@ Page {
                     onClicked: {
                         day.setDate(day.getDate() + 1);
                         lblDay.text = day.toDateString();
-                         updateGraphs();
+                        updateGraphs();
 
                     }
                 }
@@ -73,7 +83,7 @@ Page {
 
             Graph {
                 id: graphStepSummary
-                graphTitle: qsTr("Step Summary")
+                graphTitle: qsTr("Steps")
                 graphHeight: 300
 
                 axisY.units: "Steps"
@@ -89,41 +99,40 @@ Page {
                     updateGraph(day);
                 }
             }
-            Graph {
-                id: graphSleepSummary
-                graphTitle: qsTr("Sleep Summary")
-                graphHeight: 300
-
-                axisY.units: "Hours"
-                type: DataSource.SleepSummary
-                graphType: 2
-
-                minY: 0
-                maxY: 12
-                valueConverter: function(value) {
-                    return value.toFixed(1);
-                }
-                onClicked: {
-                    updateGraph(day);
-                }
-            }
         }
     }
 
     function updateGraphs() {
         graphStepSummary.updateGraph(day);
-        graphSleepSummary.updateGraph(day);
     }
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
             //            if (!pageStack._currentContainer.attachedContainer) {
-            pageStack.pushAttached(Qt.resolvedUrl("AnalysisPage.qml"))
+            pageStack.pushAttached(Qt.resolvedUrl("SleepPage.qml"))
             //        }
         }
     }
 
     Component.onCompleted: {
         updateGraphs();
+        stepCount = DeviceInterfaceInstance.information(AbstractDevice.INFO_STEPS);
+    }
+
+
+    Connections {
+        target: DeviceInterfaceInstance
+        onConnectionStateChanged: {
+            if (DeviceInterfaceInstance.connectionState === "authenticated") {
+                DeviceInterfaceInstance.refreshInformation();
+            }
+        }
+        onInformationChanged: {
+            switch (infoKey) {
+            case AbstractDevice.INFO_STEPS:
+                stepCount = infoValue
+                break;
+            }
+        }
     }
 }

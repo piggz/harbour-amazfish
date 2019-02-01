@@ -94,6 +94,7 @@ public:
     Q_INVOKABLE void incomingCall(const QString &caller);
     Q_INVOKABLE void applyDeviceSetting(DeviceInterface::Settings s);
     Q_INVOKABLE void requestManualHeartrate();
+    Q_INVOKABLE void rebootWatch();
 
 private:
     QString m_deviceAddress;

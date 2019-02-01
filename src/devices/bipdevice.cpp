@@ -384,3 +384,13 @@ void BipDevice::batteryInfoChanged()
 
     emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(mi->batteryInfo()));
 }
+
+void BipDevice::rebootWatch()
+{
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    if (!fw) {
+        return;
+    }
+    fw->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_REBOOT));
+
+}
