@@ -1,4 +1,4 @@
-290# NOTICE:
+# NOTICE:
 #
 # Application name defined in TARGET has a corresponding QML filename.
 # If name defined in TARGET is changed, the following needs to be done
@@ -11,12 +11,11 @@
 
 # The name of your application
 TARGET = harbour-amazfish
-TEMPLATE = app
 
 CONFIG += sailfishapp
 LIBS += -Lqble/qble
 
-QT +=  contacts KDb3 positioning
+QT +=  contacts positioning KDb3
 
 PKGCONFIG += mlite5
 
@@ -24,6 +23,8 @@ INCLUDEPATH += $$PWD/src/services/ \
                                     $$PWD/src/operations/ \
                                     $$PWD/src/devices/ \
                                     $$PWD/src/
+
+include(qble/qble.pri)
 
 SOURCES += src/harbour-amazfish.cpp \
     src/qaesencryption.cpp \
@@ -148,5 +149,4 @@ HEADERS += \
     src/weather/citysearchmodel.h \
     src/weather/currentweather.h \
     src/weather/huamiweathercondition.h
- 
-include(qble/qble.pri)
+
