@@ -55,6 +55,10 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<AbstractDevice>("uk.co.piggz.amazfish", 1, 0, "AbstractDevice", "Abstract Device type available only for enum datatypes");
     qmlRegisterUncreatableType<DeviceInterface>("uk.co.piggz.amazfish", 1, 0, "DeviceInterface", "DeviceInterface type available only for enum datatypes");
 
+    QDir d;
+    d.mkpath(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    d.mkpath(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
+
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);
     view->rootContext()->setContextProperty("DeviceInterfaceInstance", &devInterface);

@@ -60,7 +60,7 @@ bool SportsDetailOperation::finished(bool success)
         parser.parse(m_buffer);
         m_gpx = parser.toText();
 
-        QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+        QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
         QString filename = m_summary.name() + ".gpx";
         QFile logFile;
 
@@ -71,7 +71,7 @@ bool SportsDetailOperation::finished(bool success)
         if (laufhelden.exists()) {
             logFile.setFileName(laufhelden.absolutePath() + "/" + filename);
         } else {
-            logFile.setFileName(cachelocation.absolutePath() + "/logs/" + filename);
+            logFile.setFileName(cachelocation.absolutePath() + "/" + filename);
         }
 
         if(logFile.open(QIODevice::WriteOnly)) {

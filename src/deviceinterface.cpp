@@ -30,8 +30,6 @@ DeviceInterface::DeviceInterface()
 
     m_adapter.setAdapterPath("/org/bluez/hci0");
 
-    QDir d;
-    d.mkpath(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
 
     setupDatabase();
     m_dataSource.setConnection(m_conn);
