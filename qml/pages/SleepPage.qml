@@ -39,11 +39,20 @@ Page {
             }
 
             Label {
-                id: lblStepsToday
+                id: lblSleepLastnight
                 font.pixelSize: Theme.fontSizeExtraLarge * 3
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
                 text: parseFloat(Math.round(graphSleepSummary.lastValue * 100) / 100).toFixed(2) + " " + qsTr("hrs")
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Label {
+                id: lblDeepSleepLastnight
+                font.pixelSize: Theme.fontSizeExtraLarge
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width
+                text: parseFloat(Math.round(graphSleepSummary.lastZ * 100) / 100).toFixed(2) + " " + qsTr("hrs (deep)")
                 horizontalAlignment: Text.AlignHCenter
             }
 

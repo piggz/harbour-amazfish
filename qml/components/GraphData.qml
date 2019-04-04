@@ -36,6 +36,8 @@ Item {
     }
 
     property real lastValue: 0.0
+    property real lastY: 0.0
+    property real lastZ: 0.0
 
     property var valueConverter
     property bool valueTotal: false
@@ -255,6 +257,8 @@ Item {
                     var valueSum = 0;
                     for (var i = 0; i < end; i++) {
                         valueSum += points[i].y;
+                        lastY = points[i].y;
+
                         var y = height - Math.floor(points[i].y / stepY) - 1;
                         if (graphType == line) {
                             if (i == 0) {
@@ -268,6 +272,7 @@ Item {
 
                             if (typeof points[i].z !== 'undefined') {
                                 var z = height - Math.floor((points[i].z + points[i].y)  / stepY) - 1;
+                                lastZ = points[i].z;
 
                                 ctx.stroke();
                                 ctx.strokeStyle = Theme.secondaryHighlightColor;

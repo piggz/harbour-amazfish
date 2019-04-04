@@ -591,6 +591,10 @@
         <source>hrs</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>hrs (deep)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SportsSummaryPage</name>
