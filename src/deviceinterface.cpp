@@ -144,6 +144,16 @@ void DeviceInterface::notificationReceived(const QString &appName, const QString
     }
     if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
         alertNotificationService()->sendAlert(appName, summary, body);
+    } else {
+        qDebug() << "no notification service, buffering notification";
+        WatchNotification n;
+        n.appName = appName;
+        n.summary = summary;
+        n.body = body;
+        m_notificationBuffer.enqueue(n);
+        if (m_notificationBuffer.count() > 10) {
+            m_notificationBuffer.dequeue();
+        }
     }
 }
 
@@ -375,6 +385,7 @@ void DeviceInterface::onConnectionStateChanged()
         if (hrmService() && !m_dbusHRM) {
             m_dbusHRM = new DBusHRM(hrmService(), miBandService(), this);
         }
+        sendBufferedNotifications();
     } else {
         //Terminate running operations
         if (miBandService()) {
@@ -391,6 +402,18 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
 {
     qDebug() << "slot_informationChanged" << key << val;
     emit informationChanged(key, val);
+}
+
+void DeviceInterface::sendBufferedNotifications()
+{
+    qDebug() << "Sending buffered notifications";
+    while (m_notificationBuffer.count() > 0) {
+        WatchNotification n = m_notificationBuffer.dequeue();
+        if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
+            qDebug() << "Sending notification";
+            alertNotificationService()->sendAlert(n.appName, n.summary, n.body);
+        }
+    }
 }
 
 DataSource *DeviceInterface::dataSource()
@@ -462,9 +485,10 @@ QString DeviceInterface::information(Info i)
 
 void DeviceInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
 {
-    if (alertNotificationService()) {
-        alertNotificationService()->sendAlert(sender, subject, message, allowDuplicate);
-    }
+    notificationReceived(sender, subject, message);
+    //if (alertNotificationService()) {
+    //    alertNotificationService()->sendAlert(sender, subject, message, allowDuplicate);
+    //}
 }
 
 void DeviceInterface::incomingCall(const QString &caller)

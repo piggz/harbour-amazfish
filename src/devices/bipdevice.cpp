@@ -150,13 +150,6 @@ void BipDevice::authenticated(bool ready)
 
     if (ready) {
         m_needsAuth = false;
-        setConnectionState("authenticated");
-
-        AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(UUID_SERVICE_ALERT_NOTIFICATION));
-
-        if (alert && m_settings.value("/uk/co/piggz/amazfish/app/notifyconnect").toBool()) {
-            alert->sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
-        }
 
         MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
         if (mi){
@@ -182,6 +175,14 @@ void BipDevice::authenticated(bool ready)
             hrm->setAllDayHRM();
             hrm-> setHeartrateSleepSupport();
         }
+
+
+        AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(UUID_SERVICE_ALERT_NOTIFICATION));
+        if (alert && m_settings.value("/uk/co/piggz/amazfish/app/notifyconnect").toBool()) {
+            alert->sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
+        }
+
+        setConnectionState("authenticated");
     } else {
         setConnectionState("authfailed");
     }

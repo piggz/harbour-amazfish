@@ -4,6 +4,7 @@
 
 #include <QObject>
 #include <QtSql/QtSql>
+#include <QQueue>
 #include <KDb3/KDbDriver>
 #include <KDb3/KDbConnection>
 #include <KDb3/KDbConnectionData>
@@ -61,6 +62,12 @@ public:
     };
     Q_ENUM(Settings);
 
+    struct WatchNotification
+    {
+        QString appName;
+        QString summary;
+        QString body;
+    };
 
     Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
     Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
@@ -124,6 +131,9 @@ private:
     Q_SLOT void onActiveVoiceCallStatusChanged();
     Q_SLOT void onConnectionStateChanged();
     Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
+    void sendBufferedNotifications();
+
+    QQueue<WatchNotification> m_notificationBuffer;
 
     //Database
     KDbDriver *m_dbDriver = nullptr;
