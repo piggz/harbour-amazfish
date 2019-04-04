@@ -211,6 +211,8 @@ void HuamiFirmwareInfo::populateCrcMap()
     m_crcMap.insert(36157, "1.1.2.05");
     m_crcMap.insert(26444, "1.1.5.02");
     m_crcMap.insert(60002, "1.1.5.04");
+    m_crcMap.insert(32576, "1.1.5.16");
+    m_crcMap.insert(43876, "1.1.5.16latin");
 
     // resources
     m_crcMap.insert(12586, "0.0.8.74");
