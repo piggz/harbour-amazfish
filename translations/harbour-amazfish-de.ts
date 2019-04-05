@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.0" language="de_DE">
 <context>
     <name>AbstractDevice</name>
     <message>
         <source>Device doen not support settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät unterstützt keine Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -58,19 +58,19 @@
     </message>
     <message>
         <source>Analysis</source>
-        <translation type="unfinished">Auswertung</translation>
+        <translation>Auswertung</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Pulsrate</translation>
+        <translation>Pulsrate</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Schritte</translation>
+        <translation>Schritte</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation type="unfinished">Intensität</translation>
+        <translation>Intensität</translation>
     </message>
 </context>
 <context>
@@ -130,104 +130,104 @@
     <name>DebugInfo</name>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <source>AmazFish</source>
-        <translation type="unfinished">AmazFish</translation>
+        <translation>AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>Serien Nr:</translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Hardware Rev:</translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Software Rev:</translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungsstatus:</translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>GPS Ver:</translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Test Benachrichtigung</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Test E-Mail</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>Testanruf</translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>Debugprotokoll abrufen</translation>
     </message>
     <message>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Test Popup</translation>
     </message>
     <message>
         <source>Reboot watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhr neustarten</translation>
     </message>
 </context>
 <context>
     <name>DeviceInterface</name>
     <message>
         <source>Device is not valid, it may not be supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät ist nicht gültig, es wird eventuell nicht unterstützt </translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Debug Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Debuginfo</translation>
     </message>
     <message>
         <source>Pair with watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhr koppeln</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished">Datei herunterladen</translation>
+        <translation>Datei herunterladen</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Von Uhr trennen</translation>
     </message>
     <message>
         <source>Connect to watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit Uhr verbinden</translation>
     </message>
     <message>
         <source>AmazFish</source>
-        <translation type="unfinished">AmazFish</translation>
+        <translation>AmazFish</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Daten</translation>
     </message>
 </context>
 <context>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>Sync activity data each hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchronisiere Aktivitätsdaten jede Stunde</translation>
     </message>
 </context>
 <context>
@@ -440,11 +440,11 @@
     </message>
     <message>
         <source>12hr</source>
-        <translation>12 Std.</translation>
+        <translation>12 Std</translation>
     </message>
     <message>
         <source>24hr</source>
-        <translation>24 Std.</translation>
+        <translation>24 Std</translation>
     </message>
     <message>
         <source>Save Settings</source>
@@ -506,90 +506,90 @@
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Profileinstellungen</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Geburtstag</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Geschlecht</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>männlich</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>weiblich</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>Größe (cm):</translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>Gewicht (kg):</translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Trageseite</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>links</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>rechts</translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>Beleuchtung an bei anheben des Handgelenks</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>Ziel (Schritte):</translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmierung bei Zielerreichung</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutze HFM zur Schlaferkennung</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>Ganztägiges HRM (Intervall in Minuten):</translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil speichern</translation>
     </message>
 </context>
 <context>
     <name>SleepPage</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Daten abrufen</translation>
+        <translation>Daten abrufen</translation>
     </message>
     <message>
         <source>Sleep Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlaf Zusammenfassung</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlaf</translation>
     </message>
     <message>
         <source>hrs</source>
-        <translation type="unfinished"></translation>
+        <translation>Std</translation>
     </message>
     <message>
         <source>hrs (deep)</source>
@@ -611,11 +611,11 @@
     <name>StepsPage</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Daten abrufen</translation>
+        <translation>Daten abrufen</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Schritte</translation>
+        <translation>Schritte</translation>
     </message>
 </context>
 </TS>
