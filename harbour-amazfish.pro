@@ -109,6 +109,7 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-amazfish-de.ts \
                 translations/harbour-amazfish-ru.ts \
                 translations/harbour-amazfish-sv.ts \
+				translations/harbour-amazfish-nl.ts \
                 translations/harbour-amazfish-es.ts
 HEADERS += \
     src/qaesencryption.h \
