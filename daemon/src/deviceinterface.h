@@ -16,7 +16,6 @@
 #include "voicecallhandler.h"
 #include "voicecallmanager.h"
 #include "settingsmanager.h"
-#include "datasource.h"
 #include "dbushrm.h"
 
 class AlertNotificationService;
@@ -26,9 +25,12 @@ class MiBand2Service;
 class MiBandService;
 class BipFirmwareService;
 
+#define SERVICE_NAME "uk.co.piggz.amazfish"
+
 class DeviceInterface : public QObject
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", SERVICE_NAME)
 public:
     DeviceInterface();
 
@@ -72,6 +74,8 @@ public:
     Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
     Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
 
+    void registerDBus();
+
     Q_INVOKABLE QString pair(const QString &name, const QString &address);
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
@@ -80,7 +84,7 @@ public:
     QString connectionState() const;
     bool operationRunning();
 
-    Q_INVOKABLE DataSource *dataSource();
+    //Q_INVOKABLE DataSource *dataSource();
     KDbConnection *dbConnection();
 
     Q_SIGNAL void message(const QString &text);
@@ -106,6 +110,7 @@ public:
 private:
     QString m_deviceAddress;
     QString m_deviceName;
+    bool m_dbusRegistered = false;
 
     BluezAdapter m_adapter;
     AbstractDevice *m_device = nullptr;
@@ -113,7 +118,7 @@ private:
     VoiceCallManager *m_voiceCallManager = nullptr;
 
     SettingsManager m_settings;
-    DataSource m_dataSource;
+    //DataSource m_dataSource;
     DBusHRM *m_dbusHRM = nullptr;
 
     void createSettings();

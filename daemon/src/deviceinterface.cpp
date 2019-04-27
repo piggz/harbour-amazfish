@@ -6,12 +6,13 @@
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
 #include "bipfirmwareservice.h"
-
-
 #include "devicefactory.h"
 
 #include <QDir>
 #include <KDb3/KDbDriverManager>
+
+static const char *SERVICE = SERVICE_NAME;
+static const char *PATH = "/";
 
 DeviceInterface::DeviceInterface()
 {
@@ -32,7 +33,7 @@ DeviceInterface::DeviceInterface()
 
 
     setupDatabase();
-    m_dataSource.setConnection(m_conn);
+    //m_dataSource.setConnection(m_conn);
 
     //Notifications
     connect(m_notificationListener, &NotificationsListener::notificationReceived, this, &DeviceInterface::notificationReceived);
@@ -416,10 +417,10 @@ void DeviceInterface::sendBufferedNotifications()
     }
 }
 
-DataSource *DeviceInterface::dataSource()
-{
-    return &m_dataSource;
-}
+//DataSource *DeviceInterface::dataSource()
+//{
+//    return &m_dataSource;
+//}
 
 QString DeviceInterface::prepareFirmwareDownload(const QString &path)
 {
@@ -518,5 +519,28 @@ void DeviceInterface::rebootWatch()
     qDebug() << "Rebooting watch";
     if (m_device) {
         m_device->rebootWatch();
+    }
+}
+
+void DeviceInterface::registerDBus()
+{
+    if (!m_dbusRegistered)
+    {
+        // DBus
+        QDBusConnection connection = QDBusConnection::sessionBus();
+        if (!connection.registerService(SERVICE))
+        {
+            QCoreApplication::quit();
+            return;
+        }
+
+        if (!connection.registerObject(PATH, this, QDBusConnection::ExportAllSlots))
+        {
+            QCoreApplication::quit();
+            return;
+        }
+         m_dbusRegistered = true;
+
+        qDebug() << "amazfish-daemon: succesfully registered to dbus sessionBus";
     }
 }

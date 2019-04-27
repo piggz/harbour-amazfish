@@ -1,5 +1,5 @@
 #include "sportsdatamodel.h"
-#include "activitykind.h"
+#include "daemoninterface.h"
 
 SportsDataModel::SportsDataModel()
 {
@@ -45,7 +45,7 @@ QVariant SportsDataModel::data(const QModelIndex &index, int role) const
         } else if (role == SportKind) {
             return m_data.at(index.row()).kind;
         } else if (role == SportKindString) {
-            return ActivityKind::toString((ActivityKind::Type)m_data.at(index.row()).kind);
+            return DaemonInterface::activityToString((DaemonInterface::ActivityType)m_data.at(index.row()).kind);
         } else if (role == SportBaseLongitude) {
             return m_data.at(index.row()).baseLongitude;
         } else if (role == SportBaseLatitude) {
