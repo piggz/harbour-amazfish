@@ -92,14 +92,6 @@ void DeviceInterface::disconnect()
     }
 }
 
-bool DeviceInterface::ready() const
-{
-    if (!m_device) {
-        return false;
-    }
-    return m_device->connectionState() == "authenticated";
-}
-
 QString DeviceInterface::connectionState() const
 {
     if (!m_device) {
@@ -514,14 +506,6 @@ void DeviceInterface::requestManualHeartrate()
     }
 }
 
-void DeviceInterface::rebootWatch()
-{
-    qDebug() << "Rebooting watch";
-    if (m_device) {
-        m_device->rebootWatch();
-    }
-}
-
 void DeviceInterface::registerDBus()
 {
     if (!m_dbusRegistered)
@@ -534,7 +518,7 @@ void DeviceInterface::registerDBus()
             return;
         }
 
-        if (!connection.registerObject(PATH, this, QDBusConnection::ExportAllSlots))
+        if (!connection.registerObject(PATH, this, QDBusConnection::ExportAllInvokables | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties))
         {
             QCoreApplication::quit();
             return;

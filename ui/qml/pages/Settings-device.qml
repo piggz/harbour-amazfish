@@ -137,10 +137,10 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTIMG_DEVICE_LANGUAGE);
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_DATE);
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_TIME);
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_UNIT);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTIMG_DEVICE_LANGUAGE);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_DATE);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_TIME);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_UNIT);
         }
     }
 }

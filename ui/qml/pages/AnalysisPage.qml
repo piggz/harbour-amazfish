@@ -22,8 +22,8 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Download Data")
-                onClicked: DeviceInterfaceInstance.downloadActivityData();
-                enabled: DeviceInterfaceInstance.connectionState === "authenticated"
+                onClicked: DaemonInterfaceInstance.downloadActivityData();
+                enabled: DaemonInterfaceInstance.connectionState === "authenticated"
             }
         }
 

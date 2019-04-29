@@ -45,8 +45,8 @@ ApplicationWindow
     BusyIndicator {
         size: BusyIndicatorSize.Large
         anchors.centerIn: parent
-        visible: DeviceInterfaceInstance.operationRunning
-        running: DeviceInterfaceInstance.operationRunning
+        visible: DaemonInterfaceInstance.operationRunning
+        running: DaemonInterfaceInstance.operationRunning
     }
 
     Rectangle {
@@ -99,7 +99,7 @@ ApplicationWindow
 
         onReady: {
             console.log("Weather data ready");
-            DeviceInterfaceInstance.sendWeather(weather);
+            DaemonInterfaceInstance.sendWeather(weather);
         }
     }
 
@@ -127,7 +127,7 @@ ApplicationWindow
                 if (autosynctime > 60) {
                     console.log("Auto syncing activity data");
                     autosynctime = 0;
-                    DeviceInterfaceInstance.downloadActivityData();
+                    DaemonInterfaceInstance.downloadActivityData();
                 }
             }
 
@@ -135,7 +135,7 @@ ApplicationWindow
     }
     
     Connections {
-        target: DeviceInterfaceInstance
+        target: DaemonInterfaceInstance
         onMessage: {
             showMessage(text);
         }

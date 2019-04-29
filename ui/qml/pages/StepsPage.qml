@@ -23,8 +23,8 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Download Data")
-                onClicked: DeviceInterfaceInstance.downloadActivityData();
-                enabled: DeviceInterfaceInstance.connectionState === "authenticated"
+                onClicked: DaemonInterfaceInstance.downloadActivityData();
+                enabled: DaemonInterfaceInstance.connectionState === "authenticated"
             }
         }
 
@@ -116,15 +116,15 @@ Page {
 
     Component.onCompleted: {
         updateGraphs();
-        stepCount = DeviceInterfaceInstance.information(AbstractDevice.INFO_STEPS);
+        stepCount = DaemonInterfaceInstance.information(AbstractDevice.INFO_STEPS);
     }
 
 
     Connections {
-        target: DeviceInterfaceInstance
+        target: DaemonInterfaceInstance
         onConnectionStateChanged: {
-            if (DeviceInterfaceInstance.connectionState === "authenticated") {
-                DeviceInterfaceInstance.refreshInformation();
+            if (DaemonInterfaceInstance.connectionState === "authenticated") {
+                DaemonInterfaceInstance.refreshInformation();
             }
         }
         onInformationChanged: {

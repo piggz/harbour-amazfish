@@ -3,7 +3,7 @@ import "."
 
 GraphData {
     id: graphData
-    property QtObject dataSource: DeviceInterfaceInstance.dataSource()
+    property QtObject dataSource: DaemonInterfaceInstance.dataSource()
 
     property int type: 0
     property alias graphType: graphData.graphType

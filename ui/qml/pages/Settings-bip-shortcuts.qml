@@ -194,7 +194,7 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_DISPLAY_ITEMS);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_DEVICE_DISPLAY_ITEMS);
         }
     }
 

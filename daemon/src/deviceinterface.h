@@ -80,7 +80,6 @@ public:
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
 
-    bool ready() const;
     QString connectionState() const;
     bool operationRunning();
 
@@ -92,6 +91,7 @@ public:
     Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
+    Q_SIGNAL void connectionStateChanged();
 
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
@@ -105,7 +105,6 @@ public:
     Q_INVOKABLE void incomingCall(const QString &caller);
     Q_INVOKABLE void applyDeviceSetting(DeviceInterface::Settings s);
     Q_INVOKABLE void requestManualHeartrate();
-    Q_INVOKABLE void rebootWatch();
 
 private:
     QString m_deviceAddress;
@@ -146,9 +145,6 @@ private:
     KDbConnection *m_conn = nullptr;
     void setupDatabase();
     void createTables();
-Q_SIGNALS:
-    void readyChanged();
-    void connectionStateChanged();
 };
 
 #endif // BIPINTERFACE_H

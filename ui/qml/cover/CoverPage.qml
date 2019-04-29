@@ -40,12 +40,12 @@ CoverBackground {
 
             BusyIndicator {
                 size: BusyIndicatorSize.Medium
-                visible: DeviceInterfaceInstance.connectionState === "connecting"
-                running: DeviceInterfaceInstance.connectionState === "connecting"
+                visible: DaemonInterfaceInstance.connectionState === "connecting"
+                running: DaemonInterfaceInstance.connectionState === "connecting"
             }
             Image {
                 source: "image://theme/icon-m-bluetooth-device"
-                visible: DeviceInterfaceInstance.connectionState === "connected" || DeviceInterfaceInstance.connectionState === "authenticated"
+                visible: DaemonInterfaceInstance.connectionState === "connected" || DaemonInterfaceInstance.connectionState === "authenticated"
             }
         }
         Item {
@@ -55,12 +55,12 @@ CoverBackground {
 
             BusyIndicator {
                 size: BusyIndicatorSize.Medium
-                visible: DeviceInterfaceInstance.connectionState === "connected"
-                running: DeviceInterfaceInstance.connectionState === "connected"
+                visible: DaemonInterfaceInstance.connectionState === "connected"
+                running: DaemonInterfaceInstance.connectionState === "connected"
             }
             Image {
                 source: "image://theme/icon-m-watch"
-                visible: DeviceInterfaceInstance.connectionState === "authenticated"
+                visible: DaemonInterfaceInstance.connectionState === "authenticated"
             }
         }
     }
@@ -71,7 +71,7 @@ CoverBackground {
         CoverAction {
             iconSource: "image://theme/icon-m-cloud-download";
             onTriggered: {
-                DeviceInterfaceInstance.miBandService().fetchActivityData();
+                DaemonInterfaceInstance.miBandService().fetchActivityData();
             }
         }
     }

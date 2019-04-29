@@ -250,12 +250,12 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_PROFILE);
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_GOAL);
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_ALERT_GOAL);
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_DISPLAY_ON_LIFT);
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_ALL_DAY_HRM);
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_HRM_SLEEP_DETECTION)
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_PROFILE);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_GOAL);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_ALERT_GOAL);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_DISPLAY_ON_LIFT);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_ALL_DAY_HRM);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_USER_HRM_SLEEP_DETECTION)
         }
     }
 }

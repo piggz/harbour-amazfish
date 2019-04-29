@@ -44,7 +44,6 @@ DISTFILES += qml/harbour-amazfish.qml \
     rpm/harbour-amazfish.spec \
     rpm/harbour-amazfish.yaml \
     translations/*.ts \
-    harbour-amazfish.desktop \
     qml/pages/PairPage.qml \
     qml/pages/DebugInfo.qml \
     qml/pages/Settings-profile.qml \
@@ -64,7 +63,8 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/AddCityDialog.qml \
     qml/pages/AnalysisPage.qml \
     qml/pages/StepsPage.qml \
-    qml/pages/SleepPage.qml
+    qml/pages/SleepPage.qml \
+    harbour-amazfish-ui.desktop
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
@@ -76,10 +76,10 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-amazfish-de.ts \
-                translations/harbour-amazfish-ru.ts \
-                translations/harbour-amazfish-sv.ts \
-                translations/harbour-amazfish-es.ts
+TRANSLATIONS += translations/harbour-amazfish-ui-de.ts \
+                translations/harbour-amazfish-ui-ru.ts \
+                translations/harbour-amazfish-ui-sv.ts \
+                translations/harbour-amazfish-ui-es.ts
 HEADERS += \
     src/datasource.h \
     src/sportsdatamodel.h \

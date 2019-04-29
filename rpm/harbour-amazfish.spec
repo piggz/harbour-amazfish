@@ -13,7 +13,7 @@ Name:       harbour-amazfish
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Amazfit Bip interface application
-Version:    0.8.9
+Version:    0.9.0
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
@@ -77,8 +77,8 @@ desktop-file-install --delete-original       \
 %files
 %defattr(-,root,root,-)
 %{_bindir}
-%{_datadir}/%{name}
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/*/apps/%{name}.png
+%{_datadir}/%{name}-ui
+%{_datadir}/applications/%{name}-ui.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
 # >> files
 # << files

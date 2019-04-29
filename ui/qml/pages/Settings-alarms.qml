@@ -110,7 +110,7 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DeviceInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_ALARMS);
+            DaemonInterfaceInstance.applyDeviceSetting(DeviceInterface.SETTING_ALARMS);
         }
     }
 

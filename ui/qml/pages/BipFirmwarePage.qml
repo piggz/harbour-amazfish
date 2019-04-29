@@ -43,7 +43,7 @@ Page {
                 label: qsTr("Choose File")
                 value: selectedFile ? selectedFile : qsTr("None")
                 onClicked: pageStack.push(filePickerPage)
-                enabled: DeviceInterfaceInstance.connectionState === "authenticated"
+                enabled: DaemonInterfaceInstance.connectionState === "authenticated"
 
             }
 
@@ -56,9 +56,9 @@ Page {
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Send file")
-                enabled: selectionMade && DeviceInterfaceInstance.connectionState === "authenticated"
+                enabled: selectionMade && DaemonInterfaceInstance.connectionState === "authenticated"
                 onClicked: {
-                    DeviceInterfaceInstance.startDownload();
+                    DaemonInterfaceInstance.startDownload();
                 }
             }
 
@@ -88,13 +88,13 @@ Page {
             onSelectedContentPropertiesChanged: {
                 page.selectedFile = selectedContentProperties.filePath;
                 page.selectionMade = true;
-                fileVersion = DeviceInterfaceInstance.prepareFirmwareDownload(page.selectedFile);
+                fileVersion = DaemonInterfaceInstance.prepareFirmwareDownload(page.selectedFile);
             }
         }
     }
 
     Connections {
-        target: DeviceInterfaceInstance
+        target: DaemonInterfaceInstance
         onDownloadProgress: {
             progress.value = percent;
             lblPercent.text = percent + "%";

@@ -26,9 +26,9 @@ Page {
             MenuItem {
                 text: qsTr("Refresh")
                 onClicked: {
-                    DeviceInterfaceInstance.refreshInformation();
-                    //DeviceInterfaceInstance.infoService().refreshInformation();
-                    //DeviceInterfaceInstance.miBandService().requestGPSVersion();
+                    DaemonInterfaceInstance.refreshInformation();
+                    //DaemonInterfaceInstance.infoService().refreshInformation();
+                    //DaemonInterfaceInstance.miBandService().requestGPSVersion();
                 }
             }
         }
@@ -67,7 +67,7 @@ Page {
                 font.pixelSize: Theme.fontSizeLarge
             }
             Label {
-                text: qsTr("Connection State: ") + DeviceInterfaceInstance.connectionState
+                text: qsTr("Connection State: ") + DaemonInterfaceInstance.connectionState
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
@@ -80,25 +80,25 @@ Page {
             Button {
                 text: qsTr("Test Notification")
                 onClicked: {
-                    DeviceInterfaceInstance.sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
+                    DaemonInterfaceInstance.sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
                 }
             }
             Button {
                 text: qsTr("Test Email")
                 onClicked: {
-                    DeviceInterfaceInstance.sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
+                    DaemonInterfaceInstance.sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
                 }
             }
             Button {
                 text: qsTr("Test Call")
                 onClicked: {
-                    DeviceInterfaceInstance.incomingCall("Somebody");
+                    DaemonInterfaceInstance.incomingCall("Somebody");
                 }
             }
             Button {
                 text: qsTr("Fetch debug log")
                 onClicked: {
-                    DeviceInterfaceInstance.miBandService().fetchLogs();
+                    DaemonInterfaceInstance.miBandService().fetchLogs();
                 }
             }
             Button {
@@ -110,18 +110,18 @@ Page {
             Button {
                 text: qsTr("Reboot watch")
                 onClicked: {
-                    DeviceInterfaceInstance.rebootWatch();
+                    DaemonInterfaceInstance.rebootWatch();
                 }
             }
         }
     }
 
     Component.onCompleted: {
-        DeviceInterfaceInstance.refreshInformation();
+        DaemonInterfaceInstance.refreshInformation();
     }
 
     Connections {
-        target: DeviceInterfaceInstance
+        target: DaemonInterfaceInstance
         onInformationChanged: {
             switch (infoKey) {
             case AbstractDevice.INFO_SERIAL:

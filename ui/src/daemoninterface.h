@@ -2,12 +2,21 @@
 #define DAEMONINTERFACE_H
 
 #include <QObject>
+#include <QDBusConnection>
+#include <QDBusError>
+#include <QDBusInterface>
+
+#include "datasource.h"
+#include "weather/currentweather.h"
+
+#define SERVICE_NAME "uk.co.piggz.amazfish"
 
 class DaemonInterface : public QObject
 {
     Q_OBJECT
 public:
     explicit DaemonInterface(QObject *parent = nullptr);
+    ~DaemonInterface();
 
     enum ActivityType {
         NotMeasured = -1,
@@ -65,10 +74,44 @@ public:
     Q_ENUM(Settings)
 
     static QString activityToString(ActivityType type);
+    void registerDBus();
 
-signals:
+    //Device Interface
+    Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
+    Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
 
-public slots:
+    Q_INVOKABLE QString pair(const QString &name, const QString &address);
+    Q_INVOKABLE void connectToDevice(const QString &address);
+    Q_INVOKABLE void disconnect();
+
+    QString connectionState() const;
+    bool operationRunning();
+
+    Q_INVOKABLE DataSource *dataSource();
+    KDbConnection *dbConnection();
+
+    Q_SIGNAL void message(const QString &text);
+    Q_SIGNAL void downloadProgress(int percent);
+    Q_SIGNAL void operationRunningChanged();
+    Q_SIGNAL void buttonPressed(int presses);
+    Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
+
+    //Functions provided by services
+    Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
+    Q_INVOKABLE void startDownload();
+    Q_INVOKABLE void downloadSportsData();
+    Q_INVOKABLE void downloadActivityData();
+    Q_INVOKABLE void sendWeather(CurrentWeather *weather);
+    Q_INVOKABLE void refreshInformation();
+    Q_INVOKABLE QString information(Info i);
+    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
+    Q_INVOKABLE void incomingCall(const QString &caller);
+    Q_INVOKABLE void applyDeviceSetting(Settings s);
+    Q_INVOKABLE void requestManualHeartrate();
+
+private:
+    QDBusInterface *iface = nullptr;
+    Q_SIGNAL void connectionStateChanged();
 };
 
 #endif // DAEMONINTERFACE_H

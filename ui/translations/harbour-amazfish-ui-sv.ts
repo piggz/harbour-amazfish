@@ -2,13 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="sv">
 <context>
-    <name>AbstractDevice</name>
-    <message>
-        <source>Device doen not support settings</source>
-        <translation>Enheten stödjer inte inställningar</translation>
-    </message>
-</context>
-<context>
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
@@ -74,21 +67,6 @@
     </message>
 </context>
 <context>
-    <name>BipDevice</name>
-    <message>
-        <source>Amazfish</source>
-        <translation>Amazfish</translation>
-    </message>
-    <message>
-        <source>Connected</source>
-        <translation>Ansluten</translation>
-    </message>
-    <message>
-        <source>Phone and watch are connected</source>
-        <translation>Telefon och klocka är kopplade</translation>
-    </message>
-</context>
-<context>
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
@@ -113,17 +91,6 @@
     <message>
         <source>File type/version: </source>
         <translation>Filtyp/version: </translation>
-    </message>
-</context>
-<context>
-    <name>BipFirmwareService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation>En åtgärd körs redan, försök senare</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation>Ingen fil vald</translation>
     </message>
 </context>
 <context>
@@ -186,13 +153,6 @@
     </message>
 </context>
 <context>
-    <name>DeviceInterface</name>
-    <message>
-        <source>Device is not valid, it may not be supported</source>
-        <translation>Enheten är inte giltig, den kanske inte stöds</translation>
-    </message>
-</context>
-<context>
     <name>FirstPage</name>
     <message>
         <source>Debug Info</source>
@@ -231,21 +191,6 @@
     </message>
 </context>
 <context>
-    <name>MiBandService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation>En åtgärd körs redan, försök senare</translation>
-    </message>
-    <message>
-        <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation>Mjukvaran är för gammal för att ange visningsobjekt. V0.1.1.14 krävs.</translation>
-    </message>
-    <message>
-        <source>Firmware supports weather condition string</source>
-        <translation>Mjukvaran stödjer väderförhållanderad</translation>
-    </message>
-</context>
-<context>
     <name>PairPage</name>
     <message>
         <source>Start scan</source>
@@ -254,37 +199,6 @@
     <message>
         <source>Try again</source>
         <translation>Försök igen</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Finished transferring activity data</source>
-        <translation>Överföring av aktivitetsdata slutförd</translation>
-    </message>
-    <message>
-        <source>No data to transfer</source>
-        <translation>Det finns ingen data att överföra</translation>
-    </message>
-    <message>
-        <source>Update operation failed</source>
-        <translation>Uppdatering misslyckades</translation>
-    </message>
-    <message>
-        <source>Update operation failed, unexpected metadata</source>
-        <translation>Uppdatering misslyckades, oväntad metadata</translation>
-    </message>
-    <message>
-        <source>Update operation complete</source>
-        <translation>Uppdatering slutförd</translation>
-    </message>
-    <message>
-        <source>File does not seem to be supported</source>
-        <translation>Filen verkar sakna stöd</translation>
-    </message>
-    <message>
-        <source>About to transfer data from </source>
-        <translation>Kommer att ladda ner data från </translation>
     </message>
 </context>
 <context>

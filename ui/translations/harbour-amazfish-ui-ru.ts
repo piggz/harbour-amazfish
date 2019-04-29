@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es">
-<context>
-    <name>AbstractDevice</name>
-    <message>
-        <source>Device doen not support settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
+<TS version="2.1">
 <context>
     <name>AddCityDialog</name>
     <message>
@@ -19,111 +12,85 @@
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
-        <translation>Habilitado</translation>
+        <translation>Включено</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation>Lun</translation>
+        <translation>Пн</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation>Mar</translation>
+        <translation>Вт</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation>Mié</translation>
+        <translation>Ср</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation>Jue</translation>
+        <translation>Чт</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation>Vie</translation>
+        <translation>Пт</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation>Sáb</translation>
+        <translation>Сб</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation>Dom</translation>
+        <translation>Вс</translation>
     </message>
 </context>
 <context>
     <name>AnalysisPage</name>
     <message>
         <source>Download Data</source>
-        <translation>Descargar datos</translation>
+        <translation>Загрузить данные</translation>
     </message>
     <message>
         <source>Analysis</source>
-        <translation type="unfinished">Análisis</translation>
+        <translation type="unfinished">Анализ</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Ritmo cardiaco</translation>
+        <translation type="unfinished">ЧСС</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Pasos</translation>
+        <translation type="unfinished">Шаги</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation type="unfinished">Intensidad</translation>
-    </message>
-</context>
-<context>
-    <name>BipDevice</name>
-    <message>
-        <source>Amazfish</source>
-        <translation>Amazfish</translation>
-    </message>
-    <message>
-        <source>Connected</source>
-        <translation>Conectado</translation>
-    </message>
-    <message>
-        <source>Phone and watch are connected</source>
-        <translation>El teléfono y reloj están conectados</translation>
+        <translation type="unfinished">Нагрузка</translation>
     </message>
 </context>
 <context>
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation>Enviar archivo</translation>
+        <translation>Отправить файл</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation>Descargar archivo</translation>
+        <translation>Загрузка файлов</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Elegir un archivo a descargar.</translation>
+        <translation>Выберите файл для загрузки</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Ninguno</translation>
+        <translation>Пусто</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation>Escoger archivo</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>File type/version: </source>
-        <translation>Tipo de archivo/versión: </translation>
-    </message>
-</context>
-<context>
-    <name>BipFirmwareService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation>Una operación se está ejecutando, por favor intentar más tarde</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation>No se ah elegido ningún archivo</translation>
+        <translation>Тип/версия файла: </translation>
     </message>
 </context>
 <context>
@@ -186,13 +153,6 @@
     </message>
 </context>
 <context>
-    <name>DeviceInterface</name>
-    <message>
-        <source>Device is not valid, it may not be supported</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>FirstPage</name>
     <message>
         <source>Debug Info</source>
@@ -204,11 +164,11 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished">Descargar archivo</translation>
+        <translation type="unfinished">Загрузка файлов</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Ajustes</translation>
+        <translation type="unfinished">Настройки</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
@@ -231,106 +191,60 @@
     </message>
 </context>
 <context>
-    <name>MiBandService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation>Una operación se está ejecutando, por favor intentar más tarde</translation>
-    </message>
-    <message>
-        <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation>El programa-lógico es demasiado antiguo para establecer elementos de visualización, se requiere V0.1.1.14</translation>
-    </message>
-    <message>
-        <source>Firmware supports weather condition string</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>PairPage</name>
     <message>
         <source>Start scan</source>
-        <translation>Iniciar escaneo</translation>
+        <translation>Начать поиск</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation>Intentar de nuevo</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Finished transferring activity data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No data to transfer</source>
-        <translation>No hay datos a transferir</translation>
-    </message>
-    <message>
-        <source>Update operation failed</source>
-        <translation>La operación de actualización falló</translation>
-    </message>
-    <message>
-        <source>Update operation failed, unexpected metadata</source>
-        <translation>La operación de actualización falló, metadatos inesperados</translation>
-    </message>
-    <message>
-        <source>Update operation complete</source>
-        <translation>Operación de actualización completa</translation>
-    </message>
-    <message>
-        <source>File does not seem to be supported</source>
-        <translation>El archivo no parece ser compatible</translation>
-    </message>
-    <message>
-        <source>About to transfer data from </source>
-        <translation>Acerca de transferir datos desde</translation>
+        <translation>Попробовать снова</translation>
     </message>
 </context>
 <context>
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished">Alarmas</translation>
+        <translation>Будильники</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Сохранить настройки</translation>
     </message>
     <message>
         <source>Alarm 1</source>
-        <translation>Alarma 1</translation>
+        <translation>Будильник 1</translation>
     </message>
     <message>
         <source>Alarm 2</source>
-        <translation>Alarma 2</translation>
+        <translation>Будильник 2</translation>
     </message>
     <message>
         <source>Alarm 3</source>
-        <translation>Alarma 3</translation>
+        <translation>Будильник 3</translation>
     </message>
     <message>
         <source>Alarm 4</source>
-        <translation>Alarma 4</translation>
+        <translation>Будильник 4</translation>
     </message>
     <message>
         <source>Alarm 5</source>
-        <translation>Alarma 5</translation>
+        <translation>Будильник 5</translation>
     </message>
 </context>
 <context>
     <name>Settings-app</name>
     <message>
         <source>Device Settings</source>
-        <translation>Ajustes de dispositivo</translation>
+        <translation>Настройка часов</translation>
     </message>
     <message>
         <source>Notify on connect</source>
-        <translation>Notificar al conectar</translation>
+        <translation>Уведомлять о подключении</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Сохранить настройки</translation>
     </message>
     <message>
         <source>Refresh weather every (</source>
@@ -349,66 +263,66 @@
     <name>Settings-bip-shortcuts</name>
     <message>
         <source>BIP Display Items</source>
-        <translation>Elementos de visualización BIP</translation>
+        <translation>Главное меню BIP</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Estado</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>Actividad</translation>
+        <translation>Активность</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation>Clima</translation>
+        <translation>Погода</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation>Alarma</translation>
+        <translation>Будильник</translation>
     </message>
     <message>
         <source>Timer</source>
-        <translation>Temporizador</translation>
+        <translation>Таймер</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation>Brújula</translation>
+        <translation>Компас</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ajustes</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation>Alipay</translation>
+        <translation>AliPay</translation>
     </message>
     <message>
         <source>Weather Shortcut</source>
-        <translation>Atajo a clima</translation>
+        <translation>Ссылка на погоду</translation>
     </message>
     <message>
         <source>AliPay Shortcut</source>
-        <translation>Atajo a AliPay</translation>
+        <translation>Ссылка на AliPay</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Сохранить настройки</translation>
     </message>
 </context>
 <context>
     <name>Settings-device</name>
     <message>
         <source>Device Settings</source>
-        <translation>Ajustes del dispositivo</translation>
+        <translation>Настройка часов</translation>
     </message>
     <message>
         <source>Langage</source>
-        <translation>Lenguaje</translation>
+        <translation>Язык</translation>
     </message>
     <message>
         <source>en_US</source>
-        <translation>in_US</translation>
+        <translation>en_US</translation>
     </message>
     <message>
         <source>es_ES</source>
@@ -416,55 +330,55 @@
     </message>
     <message>
         <source>zh_CN</source>
-        <translation>cs_CN</translation>
+        <translation>zh_CN</translation>
     </message>
     <message>
         <source>zh_TW</source>
-        <translation>cs_TW</translation>
+        <translation>zh_TW</translation>
     </message>
     <message>
         <source>Date Display</source>
-        <translation>Visualizar datos</translation>
+        <translation>Отображение даты</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Tiempo</translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source>Date/Time</source>
-        <translation>Datos/Tiempo</translation>
+        <translation>Дата/Время</translation>
     </message>
     <message>
         <source>Time Format</source>
-        <translation>Formato de hora</translation>
+        <translation>Формат времени</translation>
     </message>
     <message>
         <source>12hr</source>
-        <translation>12hr</translation>
+        <translation>12ч</translation>
     </message>
     <message>
         <source>24hr</source>
-        <translation>24hr</translation>
+        <translation>24ч</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Сохранить настройки</translation>
     </message>
     <message>
         <source>Distance Unit</source>
-        <translation>Unidad de distancia</translation>
+        <translation>Единицы</translation>
     </message>
     <message>
         <source>Metric</source>
-        <translation>Métrico</translation>
+        <translation>Метрические</translation>
     </message>
     <message>
         <source>Imperial</source>
-        <translation>Imperial</translation>
+        <translation>Имперские</translation>
     </message>
     <message>
         <source>BIP Display Items</source>
-        <translation>Elementos de visualización BIP</translation>
+        <translation>Главное меню BIP</translation>
     </message>
     <message>
         <source>ru_RU</source>
@@ -475,31 +389,31 @@
     <name>Settings-menu</name>
     <message>
         <source>Settings Menu</source>
-        <translation>Menú de ajustes</translation>
+        <translation>Меню настройки</translation>
     </message>
     <message>
         <source>User Settings</source>
-        <translation>Ajustes de usuario</translation>
+        <translation>Профиль пользователя</translation>
     </message>
     <message>
         <source>Device Settings</source>
-        <translation>Ajustes de dispositivo</translation>
+        <translation>Настройка часов</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation>Ajustes de aplicación</translation>
+        <translation>Настройка приложения</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation>Alarmas</translation>
+        <translation>Будильники</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation>Donar</translation>
+        <translation>Пожертвовать</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished">Clima</translation>
+        <translation type="unfinished">Погода</translation>
     </message>
 </context>
 <context>
@@ -577,7 +491,7 @@
     <name>SleepPage</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Descargar datos</translation>
+        <translation type="unfinished">Загрузить данные</translation>
     </message>
     <message>
         <source>Sleep Summary</source>
@@ -600,22 +514,22 @@
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>
-        <translation>Actividades deportivas</translation>
+        <translation>Активность</translation>
     </message>
     <message>
         <source>Download Next Activity</source>
-        <translation>Descargar Siguiente Actividad</translation>
+        <translation>Загрузить следующую активность</translation>
     </message>
 </context>
 <context>
     <name>StepsPage</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Descargar datos</translation>
+        <translation type="unfinished">Загрузить данные</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Pasos</translation>
+        <translation type="unfinished">Шаги</translation>
     </message>
 </context>
 </TS>

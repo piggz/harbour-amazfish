@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);
-    view->rootContext()->setContextProperty("DaemonInterface", &daemonInterface);
+    view->rootContext()->setContextProperty("DaemonInterfaceInstance", &daemonInterface);
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
 
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));

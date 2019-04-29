@@ -25,6 +25,12 @@ INCLUDEPATH += $$PWD/src/services/ \
                $$PWD/src/ \
                $$PWD/../
 
+systemd_services.path = /usr/lib/systemd/user/
+systemd_services.files = harbour-amazfish-daemon.service
+
+INSTALLS += target \
+            systemd_services
+
 
 include(../qble/qble.pri)
 
@@ -66,50 +72,11 @@ SOURCES += \
     src/weather/currentweather.cpp \
     src/weather/huamiweathercondition.cpp
 
-DISTFILES += qml/harbour-amazfish.qml \
-    qml/cover/CoverPage.qml \
-    qml/pages/FirstPage.qml \
-    rpm/harbour-amazfish.changes.in \
-    rpm/harbour-amazfish.changes.run.in \
-    rpm/harbour-amazfish.spec \
-    rpm/harbour-amazfish.yaml \
-    translations/*.ts \
-    harbour-amazfish.desktop \
-    qml/pages/PairPage.qml \
-    qml/pages/DebugInfo.qml \
-    qml/pages/Settings-profile.qml \
-    qml/pages/Settings-menu.qml \
-    qml/pages/Settings-device.qml \
-    qml/pages/Settings-app.qml \
-    qml/pages/Axis.qml \
-    qml/pages/GraphData.qml \
-    qml/components/Axis.qml \
-    qml/components/Graph.qml \
-    qml/components/GraphData.qml \
-    qml/pages/Settings-bip-shortcuts.qml \
-    qml/components/Alarm.qml \
-    qml/pages/Settings-alarms.qml \
-    qml/pages/BipFirmwarePage.qml \
-    qml/pages/SportsSummaryPage.qml \
-    qml/pages/AddCityDialog.qml \
-    qml/pages/AnalysisPage.qml \
-    qml/pages/StepsPage.qml \
-    qml/pages/SleepPage.qml
+DISTFILES += \
+    harbour-amazfish.service
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
-# to disable building translations every time, comment out the
-# following CONFIG line
-CONFIG += sailfishapp_i18n
-
-# German translation is enabled as an example. If you aren't
-# planning to localize your app, remember to comment out the
-# following TRANSLATIONS line. And also do not forget to
-# modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-amazfish-de.ts \
-                translations/harbour-amazfish-ru.ts \
-                translations/harbour-amazfish-sv.ts \
-                translations/harbour-amazfish-es.ts
 HEADERS += \
     src/qaesencryption.h \
     src/notificationslistener.h \
