@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Välj filer att ladda ner</translation>
+        <translation>Välj en fil att ladda ner</translation>
     </message>
     <message>
         <source>None</source>
@@ -593,7 +593,7 @@
     </message>
     <message>
         <source>hrs (deep)</source>
-        <translation type="unfinished"></translation>
+        <translation>tim (djup)</translation>
     </message>
 </context>
 <context>
