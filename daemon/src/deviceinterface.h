@@ -71,17 +71,13 @@ public:
         QString body;
     };
 
-    Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
-    Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
-
     void registerDBus();
 
     Q_INVOKABLE QString pair(const QString &name, const QString &address);
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
-
-    QString connectionState() const;
-    bool operationRunning();
+    Q_INVOKABLE QString connectionState() const;
+    Q_INVOKABLE bool operationRunning();
 
     //Q_INVOKABLE DataSource *dataSource();
     KDbConnection *dbConnection();

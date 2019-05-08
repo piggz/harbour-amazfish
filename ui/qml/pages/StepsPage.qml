@@ -129,7 +129,7 @@ Page {
         }
         onInformationChanged: {
             switch (infoKey) {
-            case AbstractDevice.INFO_STEPS:
+            case DaemonInterface.INFO_STEPS:
                 stepCount = infoValue
                 break;
             }

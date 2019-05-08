@@ -32,13 +32,6 @@ Page {
         key: "/uk/co/piggz/amazfish/profile/name"
         defaultValue: ""
     }
-
-    Connections {
-        target: DaemonInterfaceInstance
-        onConnectionStateChanged: {
-            console.log(DaemonInterfaceInstance.connectionState);
-        }
-    }
     
     onStatusChanged: {
         if (status === PageStatus.Active) {
@@ -196,6 +189,7 @@ Page {
     Connections {
         target: DaemonInterfaceInstance
         onConnectionStateChanged: {
+            console.log(DaemonInterfaceInstance.connectionState);
             if (DaemonInterfaceInstance.connectionState === "authenticated") {
                 DaemonInterfaceInstance.refreshInformation();
             }
@@ -204,10 +198,10 @@ Page {
             console.log("Information changed", infoKey, infoValue);
 
             switch (infoKey) {
-            case AbstractDevice.INFO_BATTERY:
+            case DaemonInterface.INFO_BATTERY:
                 lblBattery.text = infoValue
                 break;
-            case AbstractDevice.INFO_HEARTRATE:
+            case DaemonInterface.INFO_HEARTRATE:
                 lblHeartrate.text = infoValue
                 break;
             }

@@ -5,6 +5,7 @@
 #include <QDBusConnection>
 #include <QDBusError>
 #include <QDBusInterface>
+#include <QDBusServiceWatcher>
 
 #include "datasource.h"
 #include "weather/currentweather.h"
@@ -74,7 +75,6 @@ public:
     Q_ENUM(Settings)
 
     static QString activityToString(ActivityType type);
-    void registerDBus();
 
     //Device Interface
     Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
@@ -84,9 +84,6 @@ public:
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
 
-    QString connectionState() const;
-    bool operationRunning();
-
     Q_INVOKABLE DataSource *dataSource();
     KDbConnection *dbConnection();
 
@@ -95,6 +92,7 @@ public:
     Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
+    Q_SIGNAL void connectionStateChanged();
 
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
@@ -111,7 +109,15 @@ public:
 
 private:
     QDBusInterface *iface = nullptr;
-    Q_SIGNAL void connectionStateChanged();
+    void connectDaemon();
+    QDBusServiceWatcher *m_serviceWatcher = nullptr;
+
+    QString m_connectionState;
+    QString connectionState() const;
+    Q_SLOT void slot_connectionStateChanged();
+
+    bool operationRunning();
+
 };
 
 #endif // DAEMONINTERFACE_H
