@@ -79,7 +79,6 @@ public:
     Q_INVOKABLE QString connectionState() const;
     Q_INVOKABLE bool operationRunning();
 
-    //Q_INVOKABLE DataSource *dataSource();
     KDbConnection *dbConnection();
 
     Q_SIGNAL void message(const QString &text);
@@ -113,7 +112,6 @@ private:
     VoiceCallManager *m_voiceCallManager = nullptr;
 
     SettingsManager m_settings;
-    //DataSource m_dataSource;
     DBusHRM *m_dbusHRM = nullptr;
 
     void createSettings();

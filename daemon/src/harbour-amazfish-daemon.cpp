@@ -25,6 +25,8 @@ static void signalHandler(int sig);
 int main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
+    QCoreApplication::setOrganizationName("harbour-amazfish");
+    QCoreApplication::setApplicationName("harbour-amazfish");
 
     daemonize();
 

@@ -7,6 +7,10 @@
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
 
+#include <KDb3/KDbDriver>
+#include <KDb3/KDbConnection>
+#include <KDb3/KDbConnectionData>
+
 #include "datasource.h"
 #include "weather/currentweather.h"
 
@@ -109,8 +113,16 @@ public:
 
 private:
     QDBusInterface *iface = nullptr;
-    void connectDaemon();
     QDBusServiceWatcher *m_serviceWatcher = nullptr;
+    DataSource m_dataSource;
+
+    //Database
+    KDbDriver *m_dbDriver = nullptr;
+    KDbConnectionData m_connData;
+    KDbConnection *m_conn = nullptr;
+
+    void connectDaemon();
+    void connectDatabase();
 
     QString m_connectionState;
     QString connectionState() const;

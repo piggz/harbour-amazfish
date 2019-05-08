@@ -23,10 +23,12 @@ int main(int argc, char *argv[])
 {
     QGuiApplication *app = SailfishApp::application(argc, argv);
 
+    QCoreApplication::setOrganizationName("harbour-amazfish");
+    QCoreApplication::setApplicationName("harbour-amazfish");
     BluezAdapter bluezAdapter;
     SportsDataModel sportsDataModel;
     DaemonInterface daemonInterface;
-    //sportsDataModel.setConnection(devInterface.dbConnection());
+    sportsDataModel.setConnection(daemonInterface.dbConnection());
 
     qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
     qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");

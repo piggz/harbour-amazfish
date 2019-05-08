@@ -116,7 +116,7 @@ Page {
 
     Component.onCompleted: {
         updateGraphs();
-        stepCount = DaemonInterfaceInstance.information(AbstractDevice.INFO_STEPS);
+        stepCount = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
     }
 
 

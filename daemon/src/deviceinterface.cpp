@@ -33,7 +33,6 @@ DeviceInterface::DeviceInterface()
 
 
     setupDatabase();
-    //m_dataSource.setConnection(m_conn);
 
     //Notifications
     connect(m_notificationListener, &NotificationsListener::notificationReceived, this, &DeviceInterface::notificationReceived);
@@ -408,11 +407,6 @@ void DeviceInterface::sendBufferedNotifications()
         }
     }
 }
-
-//DataSource *DeviceInterface::dataSource()
-//{
-//    return &m_dataSource;
-//}
 
 QString DeviceInterface::prepareFirmwareDownload(const QString &path)
 {

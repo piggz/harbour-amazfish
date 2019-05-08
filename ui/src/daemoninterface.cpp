@@ -1,6 +1,9 @@
 #include "daemoninterface.h"
 
 #include <QDBusReply>
+#include <QStandardPaths>
+
+#include <KDb3/KDbDriverManager>
 
 DaemonInterface::DaemonInterface(QObject *parent) : QObject(parent)
 {
@@ -12,6 +15,9 @@ DaemonInterface::DaemonInterface(QObject *parent) : QObject(parent)
     if (iface->isValid()){
         connectDaemon();
     }
+
+    connectDatabase();
+    m_dataSource.setConnection(dbConnection());
 }
 
 DaemonInterface::~DaemonInterface()
@@ -99,11 +105,14 @@ void DaemonInterface::disconnect()
 
 DataSource *DaemonInterface::dataSource()
 {
-    return nullptr;
+    return &m_dataSource;
 }
 
 KDbConnection *DaemonInterface::dbConnection()
 {
+    if (m_conn && m_conn->isDatabaseUsed()) {
+        return m_conn;
+    }
     return nullptr;
 }
 
@@ -217,4 +226,54 @@ bool DaemonInterface::operationRunning()
     }
     QDBusReply<bool> reply = iface->call("operationRunning");
     return reply;
+}
+
+void DaemonInterface::connectDatabase()
+{
+    KDbDriverManager manager;
+    const QStringList driverIds = manager.driverIds();
+    qDebug() << "DRIVERS: " << driverIds;
+    if (driverIds.isEmpty()) {
+        qWarning() << "No drivers found";
+        return;
+    }
+    if (manager.result().isError()) {
+        qDebug() << manager.result();
+        return;
+    }
+
+    //get driver
+    m_dbDriver = manager.driver("org.kde.kdb.sqlite");
+    if (!m_dbDriver || manager.result().isError()) {
+        qDebug() << manager.result();
+        return;
+    }
+
+    m_connData.setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+ "/amazfish.kexi");
+
+    m_conn = m_dbDriver->createConnection(m_connData);
+
+    if (!m_conn || m_dbDriver->result().isError()) {
+        qDebug() << m_dbDriver->result();
+        return;
+    }
+    qDebug() << "KDbConnection object created.";
+    if (!m_conn->connect()) {
+        qDebug() << m_conn->result();
+        return;
+    }
+    qDebug() << "KDbConnection::connect() OK.";
+
+    if (!m_conn->databaseExists(m_connData.databaseName())) {
+        if (!m_conn->createDatabase(m_connData.databaseName())) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "DB" << m_connData.databaseName() << "created";
+    }
+
+    if (!m_conn->useDatabase()) {
+        qDebug() << m_conn->result();
+        return;
+    }
 }
