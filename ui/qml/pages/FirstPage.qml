@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
 import org.SfietKonstantin.weatherfish 1.0
 import uk.co.piggz.amazfish 1.0
+import org.nemomobile.dbus 2.0
 import "../components/"
 
 Page {
@@ -14,6 +15,9 @@ Page {
     property bool manualDisconnect: false
     property bool needsProfileSet: false
     property var day: new Date()
+
+    property bool serviceActiveState: false
+    property bool serviceEnabledState: false
 
     ConfigurationValue {
         id: pairedAddress
@@ -171,6 +175,27 @@ Page {
                     }
                 }
             }
+
+            Button {
+                text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
+
+                onClicked: {
+                    systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
+            }
+
+            Button {
+                text: serviceEnabledState == false ? qsTr("Enable Service") : qsTr("Disable Service")
+
+                onClicked: {
+                    if (serviceEnabledState) {
+                        systemdManager.disableService();
+                     } else {
+                        systemdManager.enableService();
+                    }
+                }
+            }
+
+
         }
     }
 
@@ -218,4 +243,74 @@ Page {
             DaemonInterfaceInstance.connectToDevice(pairedAddress.value);
         }
     }
+
+    //SystemD Service
+    Timer {
+        id: checkState
+        interval: 5000
+        repeat: true
+        running: true
+        onTriggered: {
+            systemdServiceIface.updateProperties()
+        }
+    }
+
+    DBusInterface {
+        id: systemdServiceIface
+        bus: DBus.SessionBus
+        service: 'org.freedesktop.systemd1'
+        path: '/org/freedesktop/systemd1/unit/harbour_2damazfish_2eservice'
+        iface: 'org.freedesktop.systemd1.Unit'
+
+        signalsEnabled: true
+        function updateProperties() {
+            var activeProperty = systemdServiceIface.getProperty("ActiveState");
+            console.log("ActiveState:", activeProperty);
+            if (activeProperty === "active") {
+                serviceActiveState = true;
+            } else {
+                serviceActiveState = false;
+            }
+
+            var serviceEnabledProperty = systemdServiceIface.getProperty("UnitFileState");
+            console.log("UnitFileState:", serviceEnabledProperty);
+
+            if (serviceEnabledProperty === "enabled") {
+                serviceEnabledState = true;
+            }
+            else {
+                serviceEnabledState = false;
+            }
+
+        }
+
+        onPropertiesChanged: updateProperties()
+        Component.onCompleted: updateProperties()
+    }
+
+    DBusInterface {
+        id: systemdManager
+        bus: DBus.SessionBus
+        service: "org.freedesktop.systemd1"
+        path: "/org/freedesktop/systemd1"
+        iface: "org.freedesktop.systemd1.Manager"
+        signalsEnabled: true
+
+        signal unitNew(string name)
+        onUnitNew: {
+            if (name == "harbour-amazfish.service") {
+                systemdServiceIface.updateProperties()
+            }
+        }
+
+        function enableService() {
+            systemdManager.typedCall("EnableUnitFiles", [{"type":"as", "value":["harbour-amazfish.service"]}, {"type":"b", "value":false}, {"type":"b", "value":true}])
+        }
+
+        function disableService() {
+            systemdManager.typedCall("DisableUnitFiles", [{"type":"as", "value":["harbour-amazfish.service"]}, {"type":"b", "value":false}])
+
+        }
+    }
+
 }

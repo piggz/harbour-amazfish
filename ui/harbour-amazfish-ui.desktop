@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 X-Nemo-Application-Type=silica-qt5
-Icon=harbour-amazfish
-Exec=harbour-amazfish
+Icon=harbour-amazfish-ui
+Exec=harbour-amazfish-ui
 Name=Amazfish
 # translation example:
 # your app name in German locale (de)

@@ -1,6 +1,7 @@
 [Unit]
 Description=Amazfish daemon
 After=pre-user-session.target
+After=bluetooth.service
 
 [Service]
 ExecStart=/usr/bin/harbour-amazfish-daemon

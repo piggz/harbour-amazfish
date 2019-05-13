@@ -182,6 +182,22 @@
         <source>AmazFish</source>
         <translation type="unfinished">AmazFish</translation>
     </message>
+    <message>
+        <source>Start Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Service</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GraphData</name>

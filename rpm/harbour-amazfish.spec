@@ -24,7 +24,7 @@ Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   kdb-sqlite3-driver >= 3.1.0
 Requires:   libKDb3-3 >= 3.1.0
 Requires:   kcoreaddons >= 5.31.0
-Requires:   libicu52
+Requires:   libicu
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -80,5 +80,6 @@ desktop-file-install --delete-original       \
 %{_datadir}/%{name}-ui
 %{_datadir}/applications/%{name}-ui.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
+/usr/lib/systemd/user/harbour-amazfish.service
 # >> files
 # << files

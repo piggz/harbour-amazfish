@@ -25,8 +25,9 @@ INCLUDEPATH += $$PWD/src/services/ \
                $$PWD/src/ \
                $$PWD/../
 
+target.path = /usr/bin/
 systemd_services.path = /usr/lib/systemd/user/
-systemd_services.files = harbour-amazfish-daemon.service
+systemd_services.files = harbour-amazfish.service
 
 INSTALLS += target \
             systemd_services

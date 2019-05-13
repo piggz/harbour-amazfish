@@ -194,38 +194,58 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="50"/>
+        <location filename="../qml/pages/FirstPage.qml" line="54"/>
         <source>Debug Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="54"/>
+        <location filename="../qml/pages/FirstPage.qml" line="58"/>
         <source>Pair with watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="58"/>
+        <location filename="../qml/pages/FirstPage.qml" line="62"/>
         <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="62"/>
+        <location filename="../qml/pages/FirstPage.qml" line="66"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="66"/>
+        <location filename="../qml/pages/FirstPage.qml" line="70"/>
         <source>Disconnect from watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="73"/>
+        <location filename="../qml/pages/FirstPage.qml" line="77"/>
         <source>Connect to watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="92"/>
+        <location filename="../qml/pages/FirstPage.qml" line="96"/>
         <source>AmazFish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="180"/>
+        <source>Start Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="180"/>
+        <source>Stop Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="187"/>
+        <source>Disable Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="187"/>
+        <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
