@@ -176,26 +176,29 @@ Page {
                 }
             }
 
-            Button {
-                text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
+            Row {
+                spacing: Theme.paddingLarge
+                width: parent.width
 
-                onClicked: {
-                    systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
-            }
+                Button {
+                    text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
 
-            Button {
-                text: serviceEnabledState == false ? qsTr("Enable Service") : qsTr("Disable Service")
+                    onClicked: {
+                        systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
+                }
 
-                onClicked: {
-                    if (serviceEnabledState) {
-                        systemdManager.disableService();
-                     } else {
-                        systemdManager.enableService();
+                Button {
+                    text: serviceEnabledState == false ? qsTr("Enable Service") : qsTr("Disable Service")
+
+                    onClicked: {
+                        if (serviceEnabledState) {
+                            systemdManager.disableService();
+                        } else {
+                            systemdManager.enableService();
+                        }
                     }
                 }
             }
-
-
         }
     }
 
@@ -265,7 +268,6 @@ Page {
         signalsEnabled: true
         function updateProperties() {
             var activeProperty = systemdServiceIface.getProperty("ActiveState");
-            console.log("ActiveState:", activeProperty);
             if (activeProperty === "active") {
                 serviceActiveState = true;
             } else {
@@ -273,8 +275,6 @@ Page {
             }
 
             var serviceEnabledProperty = systemdServiceIface.getProperty("UnitFileState");
-            console.log("UnitFileState:", serviceEnabledProperty);
-
             if (serviceEnabledProperty === "enabled") {
                 serviceEnabledState = true;
             }

@@ -19,12 +19,6 @@ ApplicationWindow
         defaultValue: 60
     }
 
-    Component.onCompleted: {
-        console.log("Application started");
-
-        weather.setCity(cityManager.cities[0])
-    }
-
     ConfigurationValue {
         id: appAutoSyncData
         key: "/uk/co/piggz/amazfish/app/autosyncdata"
@@ -85,53 +79,6 @@ ApplicationWindow
 
     MprisManager {
         id: mprisManager
-    }
-    
-    CityManager {
-        id: cityManager
-
-        onCitiesChanged: {
-            weather.setCity(cities[0]);
-        }
-    }
-    CurrentWeather {
-        id: weather
-
-        onReady: {
-            console.log("Weather data ready");
-            DaemonInterfaceInstance.sendWeather(weather);
-        }
-    }
-
-    Timer {
-        id: tmrRefresh
-        running: true
-        repeat: true
-        interval: 60000
-        property int minutes: 0
-        property int autosynctime: 0
-
-        onTriggered: {
-            console.log("tmrWeatherRefresh", minutes);
-            minutes++;
-
-            if (minutes >= appRefreshWeather.value) {
-                minutes = 0;
-                console.log("weather interval reached");
-                weather.refresh();
-            }
-
-            if (appAutoSyncData.value) {
-                autosynctime++;
-
-                if (autosynctime > 60) {
-                    console.log("Auto syncing activity data");
-                    autosynctime = 0;
-                    DaemonInterfaceInstance.downloadActivityData();
-                }
-            }
-
-        }
     }
     
     Connections {

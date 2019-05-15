@@ -187,7 +187,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="111"/>
-        <source>Reboot watch</source>
+        <source>Send Weather</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -229,22 +229,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="180"/>
+        <location filename="../qml/pages/FirstPage.qml" line="184"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="180"/>
+        <location filename="../qml/pages/FirstPage.qml" line="184"/>
         <source>Stop Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="187"/>
+        <location filename="../qml/pages/FirstPage.qml" line="191"/>
         <source>Disable Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="187"/>
+        <location filename="../qml/pages/FirstPage.qml" line="191"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>

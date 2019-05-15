@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QtSql/QtSql>
 #include <QQueue>
+#include <QTimer>
+
 #include <KDb3/KDbDriver>
 #include <KDb3/KDbConnection>
 #include <KDb3/KDbConnectionData>
@@ -17,6 +19,8 @@
 #include "voicecallmanager.h"
 #include "settingsmanager.h"
 #include "dbushrm.h"
+#include "weather/citymanager.h"
+#include "weather/currentweather.h"
 
 class AlertNotificationService;
 class DeviceInfoService;
@@ -93,13 +97,13 @@ public:
     Q_INVOKABLE void startDownload();
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void downloadActivityData();
-    Q_INVOKABLE void sendWeather(CurrentWeather *weather);
     Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(Info i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
     Q_INVOKABLE void applyDeviceSetting(DeviceInterface::Settings s);
     Q_INVOKABLE void requestManualHeartrate();
+    Q_INVOKABLE void triggerSendWeather();
 
 private:
     QString m_deviceAddress;
@@ -113,6 +117,11 @@ private:
 
     SettingsManager m_settings;
     DBusHRM *m_dbusHRM = nullptr;
+
+    QTimer *m_refreshTimer = nullptr;
+    Q_SLOT void onRefreshTimer();
+    int m_syncWeatherMinutes = 0;
+    int m_syncActivitiesMinutes = 0;
 
     void createSettings();
     void updateServiceController();
@@ -139,6 +148,14 @@ private:
     KDbConnection *m_conn = nullptr;
     void setupDatabase();
     void createTables();
+
+    //Weather
+    CityManager m_cityManager;
+    CurrentWeather m_currentWeather;
+    void sendWeather(CurrentWeather *weather);
+    Q_SLOT void onCitiesChanged();
+    Q_SLOT void onWeatherReady();
+
 };
 
 #endif // BIPINTERFACE_H

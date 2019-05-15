@@ -41,12 +41,23 @@ DeviceInterface::DeviceInterface()
     m_voiceCallManager = new VoiceCallManager(this);
     connect(m_voiceCallManager, &VoiceCallManager::activeVoiceCallChanged, this, &DeviceInterface::onActiveVoiceCallChanged);
 
+    //Weather
+    connect(&m_cityManager, &CityManager::citiesChanged, this, &DeviceInterface::onCitiesChanged);
+    connect(&m_currentWeather, &CurrentWeather::ready, this, &DeviceInterface::onWeatherReady);
+    m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
+
+    //Refresh timer
+    m_refreshTimer = new QTimer();
+    connect(m_refreshTimer, &QTimer::timeout, this, &DeviceInterface::onRefreshTimer);
+    m_refreshTimer->start(60000);
+
+
     emit connectionStateChanged();
 }
 
 void DeviceInterface::connectToDevice(const QString &address)
 {
-    qDebug() << "BipInterface::connectToDevice:" << address;
+    qDebug() << "DeviceInterface::connectToDevice:" << address;
 
     if (m_device && m_adapter.deviceIsValid(address)) {
         m_deviceAddress = address;
@@ -54,14 +65,14 @@ void DeviceInterface::connectToDevice(const QString &address)
         m_device->connectToDevice();
     }
     else {
-        qDebug() << "BipInterface::connectToDevice:device was not valid";
+        qDebug() << "DeviceInterface::connectToDevice:device was not valid";
         message(tr("Device is not valid, it may not be supported"));
     }
 }
 
 QString DeviceInterface::pair(const QString &name, const QString &address)
 {
-    qDebug() << "BipInterface::pair:" << name << address;
+    qDebug() << "DeviceInterface::pair:" << name << address;
     m_deviceAddress = address;
 
     if (m_device) {
@@ -85,7 +96,7 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
 
 void DeviceInterface::disconnect()
 {
-    qDebug() << "BipInterface::disconnect";
+    qDebug() << "DeviceInterface::disconnect";
     if (m_device) {
         m_device->disconnectFromDevice();
     }
@@ -454,6 +465,16 @@ void DeviceInterface::sendWeather(CurrentWeather *weather)
     }
 }
 
+void DeviceInterface::onCitiesChanged()
+{
+    m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
+}
+
+void DeviceInterface::onWeatherReady()
+{
+    sendWeather(&m_currentWeather);
+}
+
 void DeviceInterface::refreshInformation()
 {
     qDebug() << "Refreshing device information";
@@ -500,6 +521,27 @@ void DeviceInterface::requestManualHeartrate()
     }
 }
 
+void DeviceInterface::onRefreshTimer()
+{
+    qDebug() << "DeviceInterface::onRefresthTimer";
+    m_syncActivitiesMinutes++;
+    if (m_syncActivitiesMinutes >= m_settings.value("/uk/co/piggz/amazfish/app/refreshweather").toInt()) {
+        m_syncActivitiesMinutes = 0;
+        qDebug() << "weather interval reached";
+        m_currentWeather.refresh();
+    }
+
+    if (m_settings.value("/uk/co/piggz/amazfish/app/autosyncdata").toBool()) {
+        m_syncActivitiesMinutes++;
+
+        if (m_syncActivitiesMinutes > 60) {
+            qDebug() << "Auto syncing activity data";
+            m_syncActivitiesMinutes = 0;
+            downloadActivityData();
+        }
+    }
+}
+
 void DeviceInterface::registerDBus()
 {
     if (!m_dbusRegistered)
@@ -521,4 +563,9 @@ void DeviceInterface::registerDBus()
 
         qDebug() << "amazfish-daemon: succesfully registered to dbus sessionBus";
     }
+}
+
+void DeviceInterface::triggerSendWeather()
+{
+    m_currentWeather.refresh();
 }

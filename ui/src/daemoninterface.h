@@ -103,13 +103,13 @@ public:
     Q_INVOKABLE void startDownload();
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void downloadActivityData();
-    Q_INVOKABLE void sendWeather(CurrentWeather *weather);
     Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(Info i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
     Q_INVOKABLE void applyDeviceSetting(Settings s);
     Q_INVOKABLE void requestManualHeartrate();
+    Q_INVOKABLE void triggerSendWeather();
 
 private:
     QDBusInterface *iface = nullptr;

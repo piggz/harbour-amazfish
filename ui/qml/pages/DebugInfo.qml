@@ -108,9 +108,9 @@ Page {
                 }
             }
             Button {
-                text: qsTr("Reboot watch")
+                text: qsTr("Send Weather")
                 onClicked: {
-                    DaemonInterfaceInstance.rebootWatch();
+                    DaemonInterfaceInstance.triggerSendWeather();
                 }
             }
         }
@@ -124,16 +124,16 @@ Page {
         target: DaemonInterfaceInstance
         onInformationChanged: {
             switch (infoKey) {
-            case AbstractDevice.INFO_SERIAL:
+            case DaemonInterface.INFO_SERIAL:
                 lblSerial.text = qsTr("Serial No: ") + infoValue;
                 break;
-            case AbstractDevice.INFO_HWVER:
+            case DaemonInterface.INFO_HWVER:
                 lblHWRev.text = qsTr("Hardware Rev: ") + infoValue;
                 break;
-            case AbstractDevice.INFO_SWVER:
+            case DaemonInterface.INFO_SWVER:
                 lblSWRev.text = qsTr("Software Rev: ")+ infoValue;
                 break;
-            case AbstractDevice.INFO_GPSVER:
+            case DaemonInterface.INFO_GPSVER:
                 lblGPSVer.text = qsTr("GPS Ver: ") +infoValue;
                 break;
             }

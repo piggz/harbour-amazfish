@@ -149,11 +149,6 @@ void DaemonInterface::downloadActivityData()
     iface->call("downloadActivityData");
 }
 
-void DaemonInterface::sendWeather(CurrentWeather *weather)
-{
-    //iface->call("downloadActivityData");
-}
-
 void DaemonInterface::refreshInformation()
 {
     if (!iface->isValid()) {
@@ -201,6 +196,14 @@ void DaemonInterface::requestManualHeartrate()
         return;
     }
     iface->call("requestManualHeartrate");
+}
+
+void DaemonInterface::triggerSendWeather()
+{
+    if (!iface->isValid()) {
+        return;
+    }
+    iface->call("triggerSendWeather");
 }
 
 void DaemonInterface::slot_connectionStateChanged()

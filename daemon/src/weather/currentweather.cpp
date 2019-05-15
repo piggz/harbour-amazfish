@@ -73,6 +73,7 @@ void CurrentWeather::refresh()
     clear();
 
     if (!m_city) {
+        qDebug() << "No city set!";
         return;
     }
 

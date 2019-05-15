@@ -148,7 +148,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reboot watch</source>
+        <source>Send Weather</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

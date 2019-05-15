@@ -6,6 +6,8 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/pairedName", this);
 
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/app/notifyconnect", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/app/refreshweather", this);
+    m_settings << new MGConfItem("/uk/co/piggz/amazfish/app/autosyncdata", this);
 
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/name", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/profile/dob", this);

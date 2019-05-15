@@ -148,8 +148,8 @@
         <translation>Test Popup</translation>
     </message>
     <message>
-        <source>Reboot watch</source>
-        <translation>Uhr neustarten</translation>
+        <source>Send Weather</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

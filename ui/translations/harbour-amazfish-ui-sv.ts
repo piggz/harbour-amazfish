@@ -148,8 +148,8 @@
         <translation>Testa popup</translation>
     </message>
     <message>
-        <source>Reboot watch</source>
-        <translation>Starta om klockan</translation>
+        <source>Send Weather</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
