@@ -76,6 +76,7 @@ void DaemonInterface::connectDaemon()
 
     //Property proxying
     connect(iface, SIGNAL(connectionStateChanged()), this, SLOT(slot_connectionStateChanged()), Qt::UniqueConnection);
+    slot_connectionStateChanged();
 }
 
 QString DaemonInterface::pair(const QString &name, const QString &address)

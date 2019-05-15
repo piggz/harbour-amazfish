@@ -51,8 +51,11 @@ DeviceInterface::DeviceInterface()
     connect(m_refreshTimer, &QTimer::timeout, this, &DeviceInterface::onRefreshTimer);
     m_refreshTimer->start(60000);
 
-
-    emit connectionStateChanged();
+    //Finally, connect to device if it is defined
+    QString pairedAddress = m_settings.value("/uk/co/piggz/amazfish/pairedName").toString();
+    if (!pairedAddress.isEmpty()) {
+        connectToDevice(pairedAddress);
+    }
 }
 
 void DeviceInterface::connectToDevice(const QString &address)

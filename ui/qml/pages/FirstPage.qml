@@ -241,10 +241,6 @@ Page {
             needsProfileSet = true;
             return;
         }
-
-        if (pairedAddress.value !== "") {
-            DaemonInterfaceInstance.connectToDevice(pairedAddress.value);
-        }
     }
 
     //SystemD Service
