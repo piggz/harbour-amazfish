@@ -16,10 +16,14 @@ static const char *PATH = "/";
 
 DeviceInterface::DeviceInterface()
 {
+    //Start by registering on DBUS
+    registerDBus();
+
+    //Intercept notificaions
     m_notificationListener = new NotificationsListener(this);
 
+    //Create a device object
     m_device = DeviceFactory::createDevice(m_settings.value("/uk/co/piggz/amazfish/pairedName").toString());
-
     if (m_device) {
         connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged);
         connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message);
@@ -30,7 +34,6 @@ DeviceInterface::DeviceInterface()
     }
 
     m_adapter.setAdapterPath("/org/bluez/hci0");
-
 
     setupDatabase();
 
@@ -58,11 +61,17 @@ DeviceInterface::DeviceInterface()
     }
 }
 
+DeviceInterface::~DeviceInterface()
+{
+    disconnect();
+
+}
+
 void DeviceInterface::connectToDevice(const QString &address)
 {
     qDebug() << "DeviceInterface::connectToDevice:" << address;
 
-    if (m_device && m_adapter.deviceIsValid(address)) {
+    if (m_device /* && m_adapter.deviceIsValid(address)*/) {
         m_deviceAddress = address;
         m_device->setDevicePath(address);
         m_device->connectToDevice();
@@ -384,6 +393,8 @@ KDbConnection *DeviceInterface::dbConnection()
 
 void DeviceInterface::onConnectionStateChanged()
 {
+    qDebug() << "DeviceInterface::onConnectionStateChanged" << connectionState();
+
     if (connectionState() == "authenticated") {
         if (miBandService()) {
             miBandService()->setDatabase(dbConnection());
@@ -486,7 +497,7 @@ void DeviceInterface::refreshInformation()
     }
 }
 
-QString DeviceInterface::information(Info i)
+QString DeviceInterface::information(int i)
 {
     if (m_device) {
         return m_device->information((AbstractDevice::Info)i);
@@ -509,7 +520,7 @@ void DeviceInterface::incomingCall(const QString &caller)
     }
 }
 
-void DeviceInterface::applyDeviceSetting(DeviceInterface::Settings s)
+void DeviceInterface::applyDeviceSetting(int s)
 {
     qDebug() << "Apply setting:" << s << (int)s;
     if (m_device) {

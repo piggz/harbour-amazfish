@@ -122,6 +122,8 @@ private:
     KDbConnection *m_conn = nullptr;
 
     void connectDaemon();
+    void disconnectDaemon();
+
     void connectDatabase();
 
     QString m_connectionState;

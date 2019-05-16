@@ -40,7 +40,6 @@ int main(int argc, char **argv)
     d.mkpath(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
 
     DeviceInterface devInterface;
-    devInterface.registerDBus();
 
     return app.exec();
 }

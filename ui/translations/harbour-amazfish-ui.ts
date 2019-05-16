@@ -194,57 +194,47 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="53"/>
+        <location filename="../qml/pages/FirstPage.qml" line="49"/>
         <source>Debug Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="57"/>
+        <location filename="../qml/pages/FirstPage.qml" line="53"/>
         <source>Pair with watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="61"/>
+        <location filename="../qml/pages/FirstPage.qml" line="57"/>
         <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="65"/>
+        <location filename="../qml/pages/FirstPage.qml" line="61"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="69"/>
+        <location filename="../qml/pages/FirstPage.qml" line="65"/>
         <source>Disconnect from watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="69"/>
+        <location filename="../qml/pages/FirstPage.qml" line="65"/>
         <source>Connect to watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="91"/>
+        <location filename="../qml/pages/FirstPage.qml" line="87"/>
         <source>AmazFish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="179"/>
+        <location filename="../qml/pages/FirstPage.qml" line="171"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="179"/>
-        <source>Stop Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="186"/>
-        <source>Disable Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="186"/>
+        <location filename="../qml/pages/FirstPage.qml" line="180"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
@@ -530,27 +520,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="77"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="77"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
         <source>Stop Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="84"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="82"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="84"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="82"/>
         <source>Disable Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="98"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="96"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>

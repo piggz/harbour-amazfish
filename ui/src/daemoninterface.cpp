@@ -9,8 +9,9 @@ DaemonInterface::DaemonInterface(QObject *parent) : QObject(parent)
 {
     iface = new QDBusInterface(SERVICE_NAME, "/", "", QDBusConnection::sessionBus());
 
-    m_serviceWatcher = new QDBusServiceWatcher(SERVICE_NAME, QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForRegistration);
+    m_serviceWatcher = new QDBusServiceWatcher(SERVICE_NAME, QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
     QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered, this, &DaemonInterface::connectDaemon);
+    QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, &DaemonInterface::disconnectDaemon);
 
     if (iface->isValid()){
         connectDaemon();
@@ -76,6 +77,11 @@ void DaemonInterface::connectDaemon()
 
     //Property proxying
     connect(iface, SIGNAL(connectionStateChanged()), this, SLOT(slot_connectionStateChanged()), Qt::UniqueConnection);
+    slot_connectionStateChanged();
+}
+
+void DaemonInterface::disconnectDaemon()
+{
     slot_connectionStateChanged();
 }
 
@@ -210,10 +216,11 @@ void DaemonInterface::triggerSendWeather()
 void DaemonInterface::slot_connectionStateChanged()
 {
     if (!iface->isValid()) {
-        return;
+        m_connectionState = "disconnected";
+    } else {
+        QDBusReply<QString> reply = iface->call("connectionState");
+        m_connectionState = reply;
     }
-    QDBusReply<QString> reply = iface->call("connectionState");
-    m_connectionState = reply;
 
     emit connectionStateChanged();
 }

@@ -10,7 +10,7 @@
 #   - translation filenames have to be changed
 
 # The name of your application
-TARGET = harbour-amazfish-daemon
+TARGET = harbour-amazfishd
 
 CONFIG += sailfishapp
 LIBS += -Lqble/qble

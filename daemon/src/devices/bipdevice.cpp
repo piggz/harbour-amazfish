@@ -103,6 +103,8 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
             if (!value) {
                 qDebug() << "DisConnected!";
                 setConnectionState("disconnected");
+            } else {
+                setConnectionState("connected");
             }
         }
 

@@ -69,29 +69,27 @@ Page {
                 }
             }
 
-            Row {
-                spacing: Theme.paddingLarge
-                width: parent.width
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
 
-                Button {
-                    text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
+                onClicked: {
+                    systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
+            }
 
-                    onClicked: {
-                        systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
-                }
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: serviceEnabledState == false ? qsTr("Enable Service") : qsTr("Disable Service")
 
-                Button {
-                    text: serviceEnabledState == false ? qsTr("Enable Service") : qsTr("Disable Service")
-
-                    onClicked: {
-                        if (serviceEnabledState) {
-                            systemdManager.disableService();
-                        } else {
-                            systemdManager.enableService();
-                        }
+                onClicked: {
+                    if (serviceEnabledState) {
+                        systemdManager.disableService();
+                    } else {
+                        systemdManager.enableService();
                     }
                 }
             }
+
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter

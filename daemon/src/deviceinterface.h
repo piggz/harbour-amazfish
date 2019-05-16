@@ -37,6 +37,7 @@ class DeviceInterface : public QObject
     Q_CLASSINFO("D-Bus Interface", SERVICE_NAME)
 public:
     DeviceInterface();
+    ~DeviceInterface();
 
     //Copied from Abstract device due to QML
     enum Info {
@@ -98,10 +99,10 @@ public:
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void downloadActivityData();
     Q_INVOKABLE void refreshInformation();
-    Q_INVOKABLE QString information(Info i);
+    Q_INVOKABLE QString information(int i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
-    Q_INVOKABLE void applyDeviceSetting(DeviceInterface::Settings s);
+    Q_INVOKABLE void applyDeviceSetting(int s);
     Q_INVOKABLE void requestManualHeartrate();
     Q_INVOKABLE void triggerSendWeather();
 
