@@ -194,57 +194,57 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="54"/>
+        <location filename="../qml/pages/FirstPage.qml" line="53"/>
         <source>Debug Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="58"/>
+        <location filename="../qml/pages/FirstPage.qml" line="57"/>
         <source>Pair with watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="62"/>
+        <location filename="../qml/pages/FirstPage.qml" line="61"/>
         <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="66"/>
+        <location filename="../qml/pages/FirstPage.qml" line="65"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="70"/>
+        <location filename="../qml/pages/FirstPage.qml" line="69"/>
         <source>Disconnect from watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="77"/>
+        <location filename="../qml/pages/FirstPage.qml" line="69"/>
         <source>Connect to watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="96"/>
+        <location filename="../qml/pages/FirstPage.qml" line="91"/>
         <source>AmazFish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="184"/>
+        <location filename="../qml/pages/FirstPage.qml" line="179"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="184"/>
+        <location filename="../qml/pages/FirstPage.qml" line="179"/>
         <source>Stop Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="191"/>
+        <location filename="../qml/pages/FirstPage.qml" line="186"/>
         <source>Disable Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="191"/>
+        <location filename="../qml/pages/FirstPage.qml" line="186"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
@@ -530,7 +530,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="77"/>
+        <source>Start Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="77"/>
+        <source>Stop Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="84"/>
+        <source>Enable Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="84"/>
+        <source>Disable Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="98"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>

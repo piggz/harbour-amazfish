@@ -69,6 +69,30 @@ Page {
                 }
             }
 
+            Row {
+                spacing: Theme.paddingLarge
+                width: parent.width
+
+                Button {
+                    text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
+
+                    onClicked: {
+                        systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
+                }
+
+                Button {
+                    text: serviceEnabledState == false ? qsTr("Enable Service") : qsTr("Disable Service")
+
+                    onClicked: {
+                        if (serviceEnabledState) {
+                            systemdManager.disableService();
+                        } else {
+                            systemdManager.enableService();
+                        }
+                    }
+                }
+            }
+
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Donate")

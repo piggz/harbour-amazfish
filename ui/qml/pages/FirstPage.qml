@@ -12,7 +12,6 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
-    property bool manualDisconnect: false
     property bool needsProfileSet: false
     property var day: new Date()
 
@@ -67,17 +66,13 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
             }
             MenuItem {
-                text: qsTr("Disconnect from watch")
+                text: DaemonInterfaceInstance.connectionState == "disconnected" ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
                 onClicked: {
-                    manualDisconnect = true;
-                    DaemonInterfaceInstance.disconnect();
-                }
-            }
-            MenuItem {
-                text: qsTr("Connect to watch")
-                onClicked: {
-                    manualDisconnect = false;
-                    DaemonInterfaceInstance.connectToDevice(pairedAddress.value);
+                    if (DaemonInterfaceInstance.connectionState == "disconnected") {
+                        DaemonInterfaceInstance.connectToDevice(pairedAddress.value);
+                    } else {
+                        DaemonInterfaceInstance.disconnect();
+                    }
                 }
             }
         }

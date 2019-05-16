@@ -52,7 +52,7 @@ DeviceInterface::DeviceInterface()
     m_refreshTimer->start(60000);
 
     //Finally, connect to device if it is defined
-    QString pairedAddress = m_settings.value("/uk/co/piggz/amazfish/pairedName").toString();
+    QString pairedAddress = m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString();
     if (!pairedAddress.isEmpty()) {
         connectToDevice(pairedAddress);
     }
