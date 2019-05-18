@@ -5,14 +5,14 @@
     <name>AbstractDevice</name>
     <message>
         <source>Device doen not support settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство не поддерживает настройку</translation>
     </message>
 </context>
 <context>
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Задать местоположение</translation>
     </message>
 </context>
 <context>
@@ -58,19 +58,19 @@
     </message>
     <message>
         <source>Analysis</source>
-        <translation type="unfinished">Анализ</translation>
+        <translation>Анализ</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">ЧСС</translation>
+        <translation>ЧСС</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Шаги</translation>
+        <translation>Шаги</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation type="unfinished">Нагрузка</translation>
+        <translation>Нагрузка</translation>
     </message>
 </context>
 <context>
@@ -130,104 +130,104 @@
     <name>DebugInfo</name>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить</translation>
     </message>
     <message>
         <source>AmazFish</source>
-        <translation type="unfinished">AmazFish</translation>
+        <translation>AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>Серийный №: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Версия аппаратуры: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Версия ПО: </translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>Подключение: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>Версия GPS: </translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить уведомления</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить отправку почты</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить вызовы</translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить журнал отладки</translation>
     </message>
     <message>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить всплывающие уведомления</translation>
     </message>
     <message>
         <source>Reboot watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезапуск часов</translation>
     </message>
 </context>
 <context>
     <name>DeviceInterface</name>
     <message>
         <source>Device is not valid, it may not be supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство не поддерживается. Неизвестная модель.</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Debug Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Отладочная информация</translation>
     </message>
     <message>
         <source>Pair with watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Запомнить часы</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished">Загрузка файлов</translation>
+        <translation>Загрузка файлов</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Настройки</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключиться от часов</translation>
     </message>
     <message>
         <source>Connect to watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключить часы</translation>
     </message>
     <message>
         <source>AmazFish</source>
-        <translation type="unfinished">AmazFish</translation>
+        <translation>AmazFish</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных</translation>
     </message>
 </context>
 <context>
@@ -242,7 +242,7 @@
     </message>
     <message>
         <source>Firmware supports weather condition string</source>
-        <translation type="unfinished"></translation>
+        <translation>Прошивка поддерживает строку состояния погоды</translation>
     </message>
 </context>
 <context>
@@ -334,15 +334,15 @@
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновлять сведения о погоде через (</translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>) минут</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Синхронизировать данные об активности каждый час.</translation>
     </message>
 </context>
 <context>
@@ -499,101 +499,101 @@
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished">Погода</translation>
+        <translation>Погода</translation>
     </message>
 </context>
 <context>
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Профиль</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя: </translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>День рождения</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Пол</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>мужской</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>женский</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>Рост (см): </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>Вес (кг): </translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Где носятся часы</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Левая рука</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Правая рука</translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>Включать экран поворотом запястья</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>Цель (шагов): </translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщать о достижении целевой нагрузки</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать пульс для определения сна</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>Интервал замеров пульса (минут): </translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить профиль</translation>
     </message>
 </context>
 <context>
     <name>SleepPage</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Загрузить данные</translation>
+        <translation>Загрузить данные</translation>
     </message>
     <message>
         <source>Sleep Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Сведения о сне</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Сон</translation>
     </message>
     <message>
         <source>hrs</source>
-        <translation type="unfinished"></translation>
+        <translation>часов</translation>
     </message>
     <message>
         <source>hrs (deep)</source>
-        <translation type="unfinished"></translation>
+        <translation>часов (глубокий сон)</translation>
     </message>
 </context>
 <context>
@@ -611,11 +611,11 @@
     <name>StepsPage</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Загрузить данные</translation>
+        <translation>Загрузить данные</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Шаги</translation>
+        <translation>Шаги</translation>
     </message>
 </context>
 </TS>
