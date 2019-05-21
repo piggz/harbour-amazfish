@@ -2,16 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-<<<<<<< HEAD:translations/harbour-amazfish-ru.ts
-    <name>AbstractDevice</name>
-    <message>
-        <source>Device doen not support settings</source>
-        <translation>Устройство не поддерживает настройку</translation>
-    </message>
-</context>
-<context>
-=======
->>>>>>> daemon:ui/translations/harbour-amazfish-ui-ru.ts
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
@@ -158,32 +148,13 @@
         <translation>Проверить всплывающие уведомления</translation>
     </message>
     <message>
-<<<<<<< HEAD:translations/harbour-amazfish-ru.ts
-        <source>Reboot watch</source>
-        <translation>Перезапуск часов</translation>
-    </message>
-</context>
-<context>
-    <name>DeviceInterface</name>
-    <message>
-        <source>Device is not valid, it may not be supported</source>
-        <translation>Устройство не поддерживается. Неизвестная модель.</translation>
-=======
         <source>Send Weather</source>
         <translation type="unfinished"></translation>
->>>>>>> daemon:ui/translations/harbour-amazfish-ui-ru.ts
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
-<<<<<<< HEAD:translations/harbour-amazfish-ru.ts
-        <source>Debug Info</source>
-        <translation>Отладочная информация</translation>
-    </message>
-    <message>
-=======
->>>>>>> daemon:ui/translations/harbour-amazfish-ui-ru.ts
         <source>Pair with watch</source>
         <translation>Запомнить часы</translation>
     </message>
@@ -208,13 +179,8 @@
         <translation>AmazFish</translation>
     </message>
     <message>
-<<<<<<< HEAD:translations/harbour-amazfish-ru.ts
-        <source>No data</source>
-        <translation>Нет данных</translation>
-=======
         <source>Start Service</source>
         <translation type="unfinished"></translation>
->>>>>>> daemon:ui/translations/harbour-amazfish-ui-ru.ts
     </message>
     <message>
         <source>Enable Service</source>
@@ -224,13 +190,8 @@
 <context>
     <name>GraphData</name>
     <message>
-<<<<<<< HEAD:translations/harbour-amazfish-ru.ts
-        <source>Firmware supports weather condition string</source>
-        <translation>Прошивка поддерживает строку состояния погоды</translation>
-=======
         <source>No data</source>
         <translation type="unfinished"></translation>
->>>>>>> daemon:ui/translations/harbour-amazfish-ui-ru.ts
     </message>
 </context>
 <context>
