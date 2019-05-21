@@ -1,77 +1,16 @@
-# NOTICE:
 #
-# Application name defined in TARGET has a corresponding QML filename.
-# If name defined in TARGET is changed, the following needs to be done
-# to match new name:
-#   - corresponding QML filename must be changed
-#   - desktop icon filename must be changed
-#   - desktop filename must be changed
-#   - icon definition filename in desktop file must be changed
-#   - translation filenames have to be changed
+# tohkbd2 top level project file
+#
+TEMPLATE = subdirs
+CONFIG = ordered
+SUBDIRS = daemon ui
+OTHER_FILES =
 
-# The name of your application
-TARGET = harbour-amazfish
-
-CONFIG += sailfishapp
-LIBS += -Lqble/qble
-
-QT +=  contacts positioning KDb3
-
-PKGCONFIG += mlite5
-
-INCLUDEPATH += $$PWD/src/services/ \
-                                    $$PWD/src/operations/ \
-                                    $$PWD/src/devices/ \
-                                    $$PWD/src/
-
-include(qble/qble.pri)
-
-SOURCES += src/harbour-amazfish.cpp \
-    src/qaesencryption.cpp \
-    src/voicecallhandler.cpp \
-    src/voicecallmanager.cpp \
-    src/typeconversion.cpp \
-    src/settingsmanager.cpp \
-    src/bipbatteryinfo.cpp \
-    src/datasource.cpp \
-    src/notificationslistener.cpp \
-    src/devicefactory.cpp \
-    src/services/mibandservice.cpp \
-    src/services/miband2service.cpp \
-    src/services/alertnotificationservice.cpp \
-    src/services/hrmservice.cpp \
-    src/services/deviceinfoservice.cpp \
-    src/services/bipfirmwareservice.cpp \
-    src/operations/abstractoperation.cpp \
-    src/operations/activityfetchoperation.cpp \
-    src/operations/logfetchoperation.cpp \
-    src/operations/sportssummaryoperation.cpp \
-    src/operations/updatefirmwareoperation.cpp \
-    src/devices/abstractdevice.cpp \
-    src/devices/bipdevice.cpp \
-    src/huamifirmwareinfo.cpp \
-    src/dbushrm.cpp \
-    src/activitysummary.cpp \
-    src/deviceinterface.cpp \
-    src/activitysample.cpp \
-    src/activitykind.cpp \
-    src/operations/sportsdetailoperation.cpp \
-    src/operations/abstractfetchoperation.cpp \
-    src/bipactivitydetailparser.cpp \
-    src/activitycoordinate.cpp \
-    src/sportsdatamodel.cpp \
-    src/weather/city.cpp \
-    src/weather/citymanager.cpp \
-    src/weather/citysearchmodel.cpp \
-    src/weather/currentweather.cpp \
-    src/weather/huamiweathercondition.cpp
-
-DISTFILES += qml/harbour-amazfish.qml \
-    qml/cover/CoverPage.qml \
-    qml/pages/FirstPage.qml \
+DISTFILES += \
     rpm/harbour-amazfish.changes.in \
     rpm/harbour-amazfish.changes.run.in \
     rpm/harbour-amazfish.spec \
+<<<<<<< HEAD
     rpm/harbour-amazfish.yaml \
     translations/*.ts \
     harbour-amazfish.desktop \
@@ -151,3 +90,6 @@ HEADERS += \
     src/weather/currentweather.h \
     src/weather/huamiweathercondition.h
 
+=======
+    rpm/harbour-amazfish.yaml \
+>>>>>>> daemon
