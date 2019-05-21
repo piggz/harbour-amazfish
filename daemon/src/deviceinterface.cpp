@@ -47,8 +47,9 @@ DeviceInterface::DeviceInterface()
     //Weather
     connect(&m_cityManager, &CityManager::citiesChanged, this, &DeviceInterface::onCitiesChanged);
     connect(&m_currentWeather, &CurrentWeather::ready, this, &DeviceInterface::onWeatherReady);
-    m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
-
+    if (m_cityManager.cities().count() > 0) {
+        m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
+    }
     //Refresh timer
     m_refreshTimer = new QTimer();
     connect(m_refreshTimer, &QTimer::timeout, this, &DeviceInterface::onRefreshTimer);
@@ -102,6 +103,8 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
         return m_device->pair();
     }
+    
+    qDebug() << "DeviceInterface::pair:device not created";
 
     return QString();
 }
@@ -481,7 +484,9 @@ void DeviceInterface::sendWeather(CurrentWeather *weather)
 
 void DeviceInterface::onCitiesChanged()
 {
-    m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
+    if (m_cityManager.cities().count() > 0) {
+        m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
+    }
 }
 
 void DeviceInterface::onWeatherReady()

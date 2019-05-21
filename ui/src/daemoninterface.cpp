@@ -69,6 +69,12 @@ void DaemonInterface::connectDaemon()
 {
     qDebug() << "Connecting to daemon signals";
 
+    if (iface) {
+        delete iface;
+    }
+
+    iface = new QDBusInterface(SERVICE_NAME, "/", "", QDBusConnection::sessionBus());
+
     connect(iface, SIGNAL(message(QString)), this, SIGNAL(message(QString)), Qt::UniqueConnection);
     connect(iface, SIGNAL(downloadProgress(int)), this, SIGNAL(downloadProgress(int)), Qt::UniqueConnection);
     connect(iface, SIGNAL(operationRunningChanged()), this, SIGNAL(operationRunningChanged()), Qt::UniqueConnection);

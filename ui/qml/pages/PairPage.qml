@@ -99,7 +99,7 @@ Page {
         lblStatus.text = "Connecting to watch...\n" + path
         var err = DaemonInterfaceInstance.pair(deviceName, path);
 
-        console.log(err);
+        console.log("Pair result:", err);
 
         if (err !== "") {
             tryAgainAvail = true;

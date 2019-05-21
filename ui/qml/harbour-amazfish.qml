@@ -81,6 +81,10 @@ ApplicationWindow
         }
     }
 
+    CityManager {
+            id: cityManager
+    }
+
     MprisManager {
         id: mprisManager
     }

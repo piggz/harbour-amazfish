@@ -155,10 +155,6 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <source>Debug Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pair with watch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -437,6 +433,10 @@
     </message>
     <message>
         <source>Disable Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debug Info</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

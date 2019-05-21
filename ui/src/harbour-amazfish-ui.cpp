@@ -15,7 +15,6 @@
 #include "weather/citysearchmodel.h"
 #include "weather/citymanager.h"
 #include "weather/city.h"
-#include "weather/currentweather.h"
 
 #include "qble/bluezadapter.h"
 
@@ -33,7 +32,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
     qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");
     qmlRegisterType<City>("org.SfietKonstantin.weatherfish", 1, 0, "City");
-    qmlRegisterType<CurrentWeather>("org.SfietKonstantin.weatherfish", 1, 0, "CurrentWeather");
 
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
     qmlRegisterUncreatableType<DaemonInterface>("uk.co.piggz.amazfish", 1, 0, "DaemonInterface", "DaemonInterface type available only for enum datatypes");

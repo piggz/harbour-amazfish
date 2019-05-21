@@ -4,7 +4,7 @@
 <context>
     <name>AddCityDialog</name>
     <message>
-        <location filename="../qml/pages/AddCityDialog.qml" line="42"/>
+        <location filename="../qml/pages/AddCityDialog.qml" line="40"/>
         <source>Set Location</source>
         <translation type="unfinished"></translation>
     </message>
@@ -195,46 +195,41 @@
     <name>FirstPage</name>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="49"/>
-        <source>Debug Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="53"/>
         <source>Pair with watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="57"/>
+        <location filename="../qml/pages/FirstPage.qml" line="53"/>
         <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="61"/>
+        <location filename="../qml/pages/FirstPage.qml" line="57"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="65"/>
+        <location filename="../qml/pages/FirstPage.qml" line="61"/>
         <source>Disconnect from watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="65"/>
+        <location filename="../qml/pages/FirstPage.qml" line="61"/>
         <source>Connect to watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="87"/>
+        <location filename="../qml/pages/FirstPage.qml" line="83"/>
         <source>AmazFish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="171"/>
+        <location filename="../qml/pages/FirstPage.qml" line="167"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="180"/>
+        <location filename="../qml/pages/FirstPage.qml" line="176"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
@@ -540,7 +535,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="96"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="95"/>
+        <source>Debug Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="103"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>

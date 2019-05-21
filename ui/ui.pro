@@ -33,7 +33,6 @@ SOURCES += src/harbour-amazfish-ui.cpp \
     src/weather/citysearchmodel.cpp \
     src/weather/city.cpp \
     src/weather/citymanager.cpp \
-    src/weather/currentweather.cpp \
     src/daemoninterface.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
@@ -86,7 +85,6 @@ HEADERS += \
     src/weather/city.h \
     src/weather/citymanager.h \
     src/weather/citysearchmodel.h \
-    src/weather/currentweather.h \
     src/weather/huamiweathercondition.h \
     src/daemoninterface.h
 

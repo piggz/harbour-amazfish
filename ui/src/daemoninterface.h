@@ -12,7 +12,6 @@
 #include <KDb3/KDbConnectionData>
 
 #include "datasource.h"
-#include "weather/currentweather.h"
 
 #define SERVICE_NAME "uk.co.piggz.amazfish"
 

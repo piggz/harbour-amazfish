@@ -90,6 +90,13 @@ Page {
                 }
             }
 
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Debug Info")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("DebugInfo.qml"))
+                }
+            }
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
