@@ -213,6 +213,8 @@ void HuamiFirmwareInfo::populateCrcMap()
     m_crcMap.insert(60002, "1.1.5.04");
     m_crcMap.insert(32576, "1.1.5.16");
     m_crcMap.insert(43876, "1.1.5.16latin");
+    m_crcMap.insert(28893, "1.1.5.24");
+    m_crcMap.insert(52828, "1.1.5.36latin");
 
     // resources
     m_crcMap.insert(12586, "0.0.8.74");
@@ -237,6 +239,7 @@ void HuamiFirmwareInfo::populateCrcMap()
     m_crcMap.insert(59245, "1.0.2.00");
     m_crcMap.insert(20591, "1.1.2.05");
     m_crcMap.insert(5341,  "1.1.5.02-04");
+    m_crcMap.insert(22662, "1.1.5.36");
 
     // gps
     m_crcMap.insert(61520, "9367,8f79a91,0,0,");
