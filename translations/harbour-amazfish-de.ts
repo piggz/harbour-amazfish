@@ -593,7 +593,7 @@
     </message>
     <message>
         <source>hrs (deep)</source>
-        <translation type="unfinished"></translation>
+        <translation>Std. (tief)</translation>
     </message>
 </context>
 <context>
