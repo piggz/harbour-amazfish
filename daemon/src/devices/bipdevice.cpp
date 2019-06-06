@@ -202,10 +202,10 @@ void BipDevice::initialise()
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT);
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS);
 
-        connect(mi, &MiBandService::message, this, &BipDevice::message);
+        connect(mi, &MiBandService::message, this, &BipDevice::message, Qt::UniqueConnection);
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &BipDevice::handleButtonPressed, Qt::UniqueConnection);
-        connect(mi, &MiBandService::informationChanged, this, &BipDevice::informationChanged);
+        connect(mi, &MiBandService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
     }
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
@@ -220,19 +220,19 @@ void BipDevice::initialise()
 
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
     if (fw) {
-        connect(fw, &BipFirmwareService::message, this, &BipDevice::message);
-        connect(fw, &BipFirmwareService::downloadProgress, this, &BipDevice::downloadProgress);
+        connect(fw, &BipFirmwareService::message, this, &BipDevice::message, Qt::UniqueConnection);
+        connect(fw, &BipFirmwareService::downloadProgress, this, &BipDevice::downloadProgress, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
     if (info) {
-        connect(info, &DeviceInfoService::informationChanged, this, &BipDevice::informationChanged);
+        connect(info, &DeviceInfoService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
     }
 
     HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));
     if (hrm) {
-        connect(hrm, &HRMService::informationChanged, this, &BipDevice::informationChanged);
+        connect(hrm, &HRMService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
     }
 }
 

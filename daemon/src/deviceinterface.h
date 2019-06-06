@@ -121,8 +121,6 @@ private:
 
     QTimer *m_refreshTimer = nullptr;
     Q_SLOT void onRefreshTimer();
-    int m_syncWeatherMinutes = 0;
-    int m_syncActivitiesMinutes = 0;
 
     void createSettings();
     void updateServiceController();

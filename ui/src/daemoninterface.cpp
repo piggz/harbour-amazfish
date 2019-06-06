@@ -268,6 +268,8 @@ void DaemonInterface::connectDatabase()
 
     m_connData.setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+ "/amazfish.kexi");
 
+    qDebug() << "Database is: " << m_connData.databaseName();
+
     m_conn = m_dbDriver->createConnection(m_connData);
 
     if (!m_conn || m_dbDriver->result().isError()) {

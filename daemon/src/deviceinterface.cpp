@@ -356,6 +356,8 @@ void DeviceInterface::setupDatabase()
 
     m_connData.setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+ "/amazfish.kexi");
 
+    qDebug() << "Database is: " << m_connData.databaseName();
+
     m_conn = m_dbDriver->createConnection(m_connData);
 
     if (!m_conn || m_dbDriver->result().isError()) {
@@ -543,19 +545,21 @@ void DeviceInterface::requestManualHeartrate()
 void DeviceInterface::onRefreshTimer()
 {
     qDebug() << "DeviceInterface::onRefresthTimer";
-    m_syncActivitiesMinutes++;
-    if (m_syncActivitiesMinutes >= m_settings.value("/uk/co/piggz/amazfish/app/refreshweather").toInt()) {
-        m_syncActivitiesMinutes = 0;
+    static int syncActivitiesMinutes = 0;
+    static int syncWeatherMinutes = 0;
+
+    if (syncWeatherMinutes >= m_settings.value("/uk/co/piggz/amazfish/app/refreshweather").toInt()) {
+        syncWeatherMinutes = 0;
         qDebug() << "weather interval reached";
         m_currentWeather.refresh();
     }
 
     if (m_settings.value("/uk/co/piggz/amazfish/app/autosyncdata").toBool()) {
-        m_syncActivitiesMinutes++;
+        syncActivitiesMinutes++;
 
-        if (m_syncActivitiesMinutes > 60) {
+        if (syncActivitiesMinutes > 60) {
             qDebug() << "Auto syncing activity data";
-            m_syncActivitiesMinutes = 0;
+            syncActivitiesMinutes = 0;
             downloadActivityData();
         }
     }
