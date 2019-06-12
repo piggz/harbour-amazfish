@@ -227,6 +227,7 @@ void MiBandService::setLanguage()
     lang += QByteArray(1, ENDPOINT_DISPLAY);
     lang += QByteArray(1, COMMAND_SET_LANGUAGE);
     lang += char(0);
+    //"zh_CN", "zh_TW", "en_US", "es_ES", "ru_RU", "de_DE", "it_IT", "fr_FR", "tr_TR"
 
     switch (format) {
     case 0:
@@ -243,6 +244,18 @@ void MiBandService::setLanguage()
         break;
     case 4:
         lang += "ru_RU";
+        break;
+    case 5:
+        lang += "de_DE";
+        break;
+    case 6:
+        lang += "it_IT";
+        break;
+    case 7:
+        lang += "fr_FR";
+        break;
+    case 8:
+        lang += "tr_TR";
         break;
     default:
         lang += "en_US";

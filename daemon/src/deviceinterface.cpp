@@ -178,6 +178,8 @@ void DeviceInterface::notificationReceived(const QString &appName, const QString
 void DeviceInterface::onActiveVoiceCallChanged()
 {
 
+    qDebug() << "onActiveVoiceCallChanged";
+
     VoiceCallHandler* handler = m_voiceCallManager->activeVoiceCall();
     if (handler) {
         connect(handler, SIGNAL(statusChanged()), SLOT(onActiveVoiceCallStatusChanged()));
@@ -192,6 +194,8 @@ void DeviceInterface::onActiveVoiceCallChanged()
 
 void DeviceInterface::onActiveVoiceCallStatusChanged()
 {
+    qDebug() << "onActiveVoiceCallStatusChanged";
+
     VoiceCallHandler* handler = m_voiceCallManager->activeVoiceCall();
 
     if (!handler || handler->handlerId().isNull()) {
@@ -217,15 +221,18 @@ void DeviceInterface::onActiveVoiceCallStatusChanged()
         qDebug() << "Endphone " << handler->handlerId();
         if(handler->getState() < VoiceCallHandler::StateCleanedUp) {
             handler->setState(VoiceCallHandler::StateCleanedUp);
-            //emit callEnded(qHash(handler->handlerId()), false);
+            if (m_device->service("00001802-0000-1000-8000-00805f9b34fb")){
+                m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
+            }
         }
         break;
     case VoiceCallHandler::STATUS_ACTIVE:
         qDebug() << "Startphone" << handler->handlerId();
         if(handler->getState() < VoiceCallHandler::StateAnswered) {
             handler->setState(VoiceCallHandler::StateAnswered);
-            //emit callStarted(qHash(handler->handlerId()));
-        }
+            if (m_device->service("00001802-0000-1000-8000-00805f9b34fb")){
+                m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
+            }        }
         break;
     case VoiceCallHandler::STATUS_HELD:
         qDebug() << "OnHold" << handler->handlerId();
@@ -544,10 +551,11 @@ void DeviceInterface::requestManualHeartrate()
 
 void DeviceInterface::onRefreshTimer()
 {
-    qDebug() << "DeviceInterface::onRefresthTimer";
+    qDebug() << "DeviceInterface::onRefreshTimer";
     static int syncActivitiesMinutes = 0;
     static int syncWeatherMinutes = 0;
 
+    syncWeatherMinutes++;
     if (syncWeatherMinutes >= m_settings.value("/uk/co/piggz/amazfish/app/refreshweather").toInt()) {
         syncWeatherMinutes = 0;
         qDebug() << "weather interval reached";
