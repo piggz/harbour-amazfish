@@ -143,7 +143,7 @@ Page {
         interval: 500
         running: false
         onTriggered: {
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTIMG_DEVICE_LANGUAGE);
+            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_LANGUAGE);
             DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_DATE);
             DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_TIME);
             DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_UNIT);
