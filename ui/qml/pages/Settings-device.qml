@@ -57,7 +57,9 @@ Page {
             ComboBox {
                 id: cboLanguage
                 width: parent.width
-                label: qsTr("Langage")
+                label: qsTr("Language")
+
+                //"zh_CN", "zh_TW", "en_US", "es_ES", "ru_RU", "de_DE", "it_IT", "fr_FR", "tr_TR"
 
                 menu: ContextMenu {
                     MenuItem { text: qsTr("en_US") }
@@ -65,6 +67,10 @@ Page {
                     MenuItem { text: qsTr("zh_CN") }
                     MenuItem { text: qsTr("zh_TW") }
                     MenuItem { text: qsTr("ru_RU") }
+                    MenuItem { text: qsTr("de_DE") }
+                    MenuItem { text: qsTr("it_IT") }
+                    MenuItem { text: qsTr("fr_FR") }
+                    MenuItem { text: qsTr("tr_TR") }
                 }
             }
 
