@@ -398,86 +398,106 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="60"/>
-        <source>Langage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-device.qml" line="63"/>
-        <source>en_US</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-device.qml" line="64"/>
-        <source>es_ES</source>
+        <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="65"/>
-        <source>zh_CN</source>
+        <source>en_US</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="66"/>
-        <source>zh_TW</source>
+        <source>es_ES</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="67"/>
+        <source>zh_CN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-device.qml" line="68"/>
+        <source>zh_TW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-device.qml" line="69"/>
         <source>ru_RU</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="74"/>
+        <location filename="../qml/pages/Settings-device.qml" line="70"/>
+        <source>de_DE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-device.qml" line="71"/>
+        <source>it_IT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-device.qml" line="72"/>
+        <source>fr_FR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-device.qml" line="73"/>
+        <source>tr_TR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-device.qml" line="80"/>
         <source>Date Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="77"/>
+        <location filename="../qml/pages/Settings-device.qml" line="83"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="78"/>
+        <location filename="../qml/pages/Settings-device.qml" line="84"/>
         <source>Date/Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="85"/>
+        <location filename="../qml/pages/Settings-device.qml" line="91"/>
         <source>Time Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="88"/>
+        <location filename="../qml/pages/Settings-device.qml" line="94"/>
         <source>12hr</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="89"/>
+        <location filename="../qml/pages/Settings-device.qml" line="95"/>
         <source>24hr</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="96"/>
+        <location filename="../qml/pages/Settings-device.qml" line="102"/>
         <source>Distance Unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="99"/>
+        <location filename="../qml/pages/Settings-device.qml" line="105"/>
         <source>Metric</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="100"/>
+        <location filename="../qml/pages/Settings-device.qml" line="106"/>
         <source>Imperial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="106"/>
+        <location filename="../qml/pages/Settings-device.qml" line="112"/>
         <source>BIP Display Items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="114"/>
+        <location filename="../qml/pages/Settings-device.qml" line="120"/>
         <source>Save Settings</source>
         <translation type="unfinished"></translation>
     </message>

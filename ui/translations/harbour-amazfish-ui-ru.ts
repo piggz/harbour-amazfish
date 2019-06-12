@@ -321,10 +321,6 @@
         <translation>Настройка часов</translation>
     </message>
     <message>
-        <source>Langage</source>
-        <translation>Язык</translation>
-    </message>
-    <message>
         <source>en_US</source>
         <translation>en_US</translation>
     </message>
@@ -387,6 +383,26 @@
     <message>
         <source>ru_RU</source>
         <translation>ru_RU</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>de_DE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>it_IT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fr_FR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tr_TR</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
