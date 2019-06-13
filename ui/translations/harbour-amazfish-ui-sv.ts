@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>Send Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka väder</translation>
     </message>
 </context>
 <context>
@@ -180,11 +180,11 @@
     </message>
     <message>
         <source>Start Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta tjänst</translation>
     </message>
     <message>
         <source>Enable Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera tjänst</translation>
     </message>
 </context>
 <context>
@@ -421,23 +421,23 @@
     </message>
     <message>
         <source>Start Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta tjänst</translation>
     </message>
     <message>
         <source>Stop Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppa tjänst</translation>
     </message>
     <message>
         <source>Enable Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera tjänst</translation>
     </message>
     <message>
         <source>Disable Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Inaktivera tjänst</translation>
     </message>
     <message>
         <source>Debug Info</source>
-        <translation type="unfinished">Felsökningsinfo</translation>
+        <translation>Felsökningsinfo</translation>
     </message>
 </context>
 <context>
@@ -531,7 +531,7 @@
     </message>
     <message>
         <source>hrs (deep)</source>
-        <translation type="unfinished"></translation>
+        <translation>tim. (djup)</translation>
     </message>
 </context>
 <context>
