@@ -22,7 +22,7 @@ QVariant DataSource::data(Type type, const QDate &day)
                 day.toString("yyyy-MM-ddT11:59:00") + "','-10 day') AND timestamp_dt <= '" +
                 day.toString("yyyy-MM-ddT12:01:00") +  "' ORDER BY timestamp_dt ASC";
 
-        qDebug() << qry;
+        // qDebug() << qry;
         if (m_conn && m_conn->isDatabaseUsed()) {
             KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
 
@@ -32,9 +32,10 @@ QVariant DataSource::data(Type type, const QDate &day)
                     int light = 0; //minutes in light sleep
                     int deep = 0; //mintes in deep sleep
                     QDate curDate = curs->value(0).toDateTime().date();
+                    QTime sleepStartTime;
 
                     QVariantMap pt;
-                    int temp_sleep = 0;
+
                     bool in_sleep = false;
 
                     while (!curs->eof()) {
@@ -47,7 +48,7 @@ QVariant DataSource::data(Type type, const QDate &day)
 
                         if (curDate != d && t.toDateTime().time() > QTime(12, 00)) { //date change
 
-                            //qDebug() << "Date changed:" << curDate << light << deep;
+                            // qDebug() << "Date changed:" << curDate << light << deep;
                             //Save current values
                             pt["x"] = QDateTime(d).toMSecsSinceEpoch() / 1000;
                             pt["y"] = light / 60.0;
@@ -64,50 +65,46 @@ QVariant DataSource::data(Type type, const QDate &day)
                         int activity = k.toInt();
                         int intensity = i.toInt();
 
-                        if (activity == 123 || (in_sleep == false && activity)) {
-                            //qDebug() << "Starting sleep tracking";
+                        if (activity == 123) {
                             in_sleep = true;
-                        }
-
-                        if (activity == 124 || (in_sleep && ((activity & 112) != 112))) {
-                            //qDebug() << "Stopping sleep tracking";
-
-                            in_sleep = false;
-                            //qDebug() << "Adding " << temp_sleep << " minutes of sleep";
-
-                            if (temp_sleep > 10) { //add to deep
-                                deep += temp_sleep;
-                            } else {
-                                light += temp_sleep;
-                            }
-                            temp_sleep = 0;
-                        }
-
-                        if (in_sleep && (activity == 112 && activity != 115 || activity == 121 || activity == 122)) {
-                            //qDebug() << "Data:" << t << k << i;
-
-                            if (intensity > 0) { //Not deep so just add to light
-                                //qDebug() << "Adding " << temp_sleep << " minutes of sleep";
-
-                                if (temp_sleep > 10) { //add to deep
-                                    deep += temp_sleep;
+                            sleepStartTime = t.toDateTime().time();
+                            // qDebug() << "Fell asleep at " << sleepStartTime;
+                        } else if (in_sleep) {
+                            int minutes = sleepStartTime.secsTo(t.toDateTime().time())/60;
+                            if (minutes < 0) minutes += 24*60; // roll over at midnight
+                            if ((activity == 124) || (((activity & 112) != 112) && (activity != 80) && (activity != 89) && (activity != 90))) {
+                                // stop sleep tracking
+                                if (minutes > 10) {
+                                    deep+=minutes;
                                 } else {
-                                    light += temp_sleep;
+                                    light+=minutes;
                                 }
-                                temp_sleep = 0;
-                                light++;
-                            } else {
-                                temp_sleep++;
+
+                                in_sleep = false;
+                                // qDebug() << "Woke up at " << t.toDateTime().time();
+                                // qDebug() << "activity = " << activity << ", intensity = " << intensity;
+                            } else if ((activity & 3) != 3) {
+                                if (intensity > 0) {
+                                    if (minutes > 10) {
+                                        deep+=minutes;
+                                    } else {
+                                        light+=minutes;
+                                    }
+
+                                    sleepStartTime = t.toDateTime().time();
+                                    // qDebug() << "Sleep activity at " << sleepStartTime << ", activity = " << activity << ", intensity = " << intensity;
+                                }
                             }
                         }
+
                         curs->moveNext();
                     }
                 }
-                //qDebug() << result;
+                //// qDebug() << result;
             }
             m_conn->deleteCursor(curs);
         } else {
-            qDebug() << "Error executing query";
+            // qDebug() << "Error executing query";
         }
     } else {
         if (type == DataSource::Heartrate) {
@@ -128,7 +125,7 @@ QVariant DataSource::data(Type type, const QDate &day)
                     day.toString("yyyy-MM-ddT23:59:59") +  "' GROUP BY date(timestamp_dt) ORDER BY timestamp_dt ASC";
         }
 
-        qDebug() << qry;
+        // qDebug() << qry;
         if (m_conn && m_conn->isDatabaseUsed()) {
             KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
 
@@ -146,11 +143,11 @@ QVariant DataSource::data(Type type, const QDate &day)
 
                         curs->moveNext();
                     }
-                    //qDebug() << result;
+                    //// qDebug() << result;
                 }
                 m_conn->deleteCursor(curs);
             } else {
-                qDebug() << "Error executing query";
+                // qDebug() << "Error executing query";
             }
         }
     }
