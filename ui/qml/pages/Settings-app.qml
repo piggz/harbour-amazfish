@@ -50,7 +50,7 @@ Page {
             width: page.width - 2*Theme.horizontalPageMargin
             spacing: Theme.paddingLarge
             PageHeader {
-                title: qsTr("Device Settings")
+                title: qsTr("Application Settings")
             }
 
             TextSwitch {
