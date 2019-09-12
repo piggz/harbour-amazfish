@@ -37,6 +37,7 @@ PkgBR:
   - kcoreaddons-devel >= 5.31.0
   - qt5-qtwidgets-devel
   - qt5-qtxml-devel
+  - qt5-qttools-linguist
 
 # Runtime dependencies which are not automatically detected
 Requires:
