@@ -56,6 +56,8 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/components/Axis.qml \
     qml/components/Graph.qml \
     qml/components/GraphData.qml \
+    qml/components/MoreButtonqml \
+    qml/components/SettingsPageButton.qml \
     qml/pages/Settings-bip-shortcuts.qml \
     qml/components/Alarm.qml \
     qml/pages/Settings-alarms.qml \

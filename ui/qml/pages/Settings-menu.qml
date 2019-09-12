@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import "../components/"
 
 Page {
     id: page
@@ -29,39 +30,34 @@ Page {
                 title: qsTr("Settings Menu")
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
+            SettingsPageButton {
                 text: qsTr("User Settings")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
                 }
             }
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
+            SettingsPageButton {
                 text: qsTr("Device Settings")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Settings-device.qml"))
                 }
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
+            SettingsPageButton {
                 text: qsTr("Application Settings")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Settings-app.qml"))
                 }
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
+            SettingsPageButton {
                 text: qsTr("Alarms")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Settings-alarms.qml"))
                 }
             }
             
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
+            SettingsPageButton {
                 text: qsTr("Weather")
                 onClicked: {
                     var dlg = pageStack.push(Qt.resolvedUrl("AddCityDialog.qml"))
@@ -69,16 +65,14 @@ Page {
                 }
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
+            SettingsPageButton {
                 text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
 
                 onClicked: {
                     systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
+            SettingsPageButton {
                 text: serviceEnabledState == false ? qsTr("Enable Service") : qsTr("Disable Service")
 
                 onClicked: {
@@ -90,16 +84,14 @@ Page {
                 }
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
+            SettingsPageButton {
                 text: qsTr("Debug Info")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("DebugInfo.qml"))
                 }
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
+            SettingsPageButton {
                 text: qsTr("Donate")
                 onClicked: {
                     Qt.openUrlExternally("https://paypal.me/piggz");
