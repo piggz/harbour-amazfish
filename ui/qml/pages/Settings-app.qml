@@ -88,25 +88,27 @@ Page {
                 }
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
-
-                onClicked: {
-                    systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: serviceEnabledState == false ? qsTr("Enable Service") : qsTr("Disable Service")
-
+            TextSwitch {
+                id: autostart
+                //% "Start Daemon on bootup"
+                text: qsTr("Start Daemon on bootup")
+                description: qsTr("When this is off, the app won't work without starting the daemon first")
+                automaticCheck: false
+                checked: serviceEnabledState
                 onClicked: {
                     if (serviceEnabledState) {
                         systemdManager.disableService();
                     } else {
                         systemdManager.enableService();
                     }
-                }
+                 }
+            }
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
+
+                onClicked: {
+                    systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
             }
 
         }
