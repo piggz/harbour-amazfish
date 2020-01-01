@@ -16,7 +16,8 @@ public:
     Q_INVOKABLE void setValue(const QString&key, const QVariant &value);
 
 private:
-    QList<MGConfItem*> m_settings;
+    //QList<MGConfItem*> m_settings;
+    QHash<QString, MGConfItem*> m_settings;
 };
 
 #endif // SETTINGSMANAGER_H

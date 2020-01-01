@@ -2,6 +2,7 @@
 
 SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
 {
+#if 0
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/pairedAddress", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/pairedName", this);
 
@@ -63,11 +64,17 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm5/repeat", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm5/hour", this);
     m_settings << new MGConfItem("/uk/co/piggz/amazfish/alarms/alarm5/minute", this);
-
+#endif
 }
 
 QVariant SettingsManager::value(const QString &key)
 {
+    if (!m_settings.contains(key)) {
+        m_settings[key] = new MGConfItem(key, this);
+    }
+
+    return m_settings[key]->value();
+#if 0
     Q_FOREACH(MGConfItem* item, m_settings) {
         item->sync();
         if (item->key() == key) {
@@ -75,10 +82,17 @@ QVariant SettingsManager::value(const QString &key)
         }
     }
     return QVariant();
+#endif
 }
 
 QVariant SettingsManager::value(const QString &key, const QVariant &def)
 {
+    if (!m_settings.contains(key)) {
+        m_settings[key] = new MGConfItem(key, this);
+    }
+
+    return m_settings[key]->value(def);
+#if 0
     Q_FOREACH(MGConfItem* item, m_settings) {
         item->sync();
         if (item->key() == key) {
@@ -86,14 +100,22 @@ QVariant SettingsManager::value(const QString &key, const QVariant &def)
         }
     }
     return def;
+#endif
 }
 
 void SettingsManager::setValue(const QString&key, const QVariant &value)
 {
+    if (!m_settings.contains(key)) {
+        m_settings[key] = new MGConfItem(key, this);
+    }
+
+    m_settings[key]->set(value);
+#if 0
         Q_FOREACH(MGConfItem* item, m_settings) {
         item->sync();
         if (item->key() == key) {
             item->set(value);
         }
     }
+#endif
 }
