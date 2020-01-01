@@ -170,6 +170,8 @@ void BipDevice::authenticated(bool ready)
             mi->setEnableDisplayOnLiftWrist();
             mi->setRotateWristToSwitchInfo(true);
             mi->setInactivityWarnings();
+            mi->setAlarms();
+            mi->setDisconnectNotification();
         }
 
         HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));
@@ -363,6 +365,9 @@ void BipDevice::applyDeviceSetting(Settings s)
         break;
     case SETTING_USER_PROFILE:
         mi->setUserInfo();
+        break;
+    case SETTING_DISCONNECT_NOTIFICATION:
+        mi->setDisconnectNotification();
         break;
     }
 

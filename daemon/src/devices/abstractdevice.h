@@ -46,7 +46,8 @@ class AbstractDevice : public QBLEDevice
         SETTING_DEVICE_LANGUAGE,
         SETTING_DEVICE_DATE,
         SETTING_DEVICE_TIME,
-        SETTING_DEVICE_UNIT
+        SETTING_DEVICE_UNIT,
+        SETTING_DISCONNECT_NOTIFICATION
     };
     Q_ENUM(Settings);
 

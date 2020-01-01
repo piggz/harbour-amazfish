@@ -19,7 +19,6 @@ const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME = "00002a2b-0
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_WEATHER = "0000000e-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER = "00000020-0000-3512-2118-0009af100700";
 
-
 constexpr char MiBandService::DATEFORMAT_TIME[];
 constexpr char MiBandService::DATEFORMAT_DATETIME[];
 constexpr char MiBandService::DATEFORMAT_TIME_12_HOURS[];
@@ -38,6 +37,9 @@ constexpr char MiBandService::COMMAND_DISTANCE_UNIT_IMPERIAL[];
 constexpr char MiBandService::COMMAND_SET_FITNESS_GOAL_START[];
 constexpr char MiBandService::COMMAND_SET_FITNESS_GOAL_END[];
 constexpr char MiBandService::COMMAND_CHANGE_SCREENS[];
+constexpr char MiBandService::COMMAND_ENABLE_DISCONNECT_NOTIFICATION[];
+constexpr char MiBandService::COMMAND_DISABLE_DISCONNECT_NOTIFICATION[];
+
 constexpr char MiBandService::DISPLAY_XXX[];
 constexpr char MiBandService::DISPLAY_YYY[];
 constexpr char MiBandService::WEAR_LOCATION_LEFT_WRIST[];
@@ -563,6 +565,17 @@ void MiBandService::setAlarms()
         cmd += repeatMask;
 
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
+    }
+}
+
+void MiBandService::setDisconnectNotification()
+{
+    bool notif = m_settings.value("/uk/co/piggz/amazfish/device/disconnectnotification").toBool();
+
+    if (notif) {
+        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_DISCONNECT_NOTIFICATION,8));
+    } else {
+        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_DISCONNECT_NOTIFICATION,8));
     }
 }
 

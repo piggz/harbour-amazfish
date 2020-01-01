@@ -404,6 +404,10 @@
         <source>tr_TR</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disconnect Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-menu</name>

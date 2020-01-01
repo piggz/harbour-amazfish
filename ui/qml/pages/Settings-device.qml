@@ -33,6 +33,12 @@ Page {
         defaultValue: 0
     }
 
+    ConfigurationValue {
+        id: deviceDisconnectNotification
+        key: "/uk/co/piggz/amazfish/device/disconnectnotification"
+        defaultValue: false
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -107,6 +113,12 @@ Page {
                 }
             }
 
+            TextSwitch {
+                id: chkDisconnectNotification
+                width: parent.width
+                text: qsTr("Disconnect Notification")
+            }
+
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("BIP Display Items")
@@ -128,11 +140,13 @@ Page {
         cboLanguage.currentIndex = deviceLanguage.value;
         cboDateDisplay.currentIndex = deviceDateFormat.value;
         cboTimeFormat.currentIndex = deviceTimeFormat.value;
+        chkDisconnectNotification.checked = deviceDisconnectNotification.value
     }
     function saveSettings() {
         deviceLanguage.value = cboLanguage.currentIndex;
         deviceDateFormat.value = cboDateDisplay.currentIndex;
         deviceTimeFormat.value = cboTimeFormat.currentIndex;
+        deviceDisconnectNotification.value = chkDisconnectNotification.checked
         tmrSetDelay.start();
     }
 
@@ -147,6 +161,7 @@ Page {
             DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_DATE);
             DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_TIME);
             DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_UNIT);
+            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DISCONNECT_NOTIFICATION);
         }
     }
 }
