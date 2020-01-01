@@ -212,9 +212,15 @@ void HuamiFirmwareInfo::populateCrcMap()
     m_crcMap.insert(26444, "1.1.5.02");
     m_crcMap.insert(60002, "1.1.5.04");
     m_crcMap.insert(32576, "1.1.5.16");
-    m_crcMap.insert(43876, "1.1.5.16latin");
     m_crcMap.insert(28893, "1.1.5.24");
-    m_crcMap.insert(52828, "1.1.5.36latin");
+    m_crcMap.insert(61710, "1.1.5.56");
+    m_crcMap.insert(23387, "1.1.6.34");
+
+    // Latin Firmware
+    m_crcMap.insert(43876, "1.1.5.16 (latin)");
+    m_crcMap.insert(52828, "1.1.5.36 (latin)");
+    m_crcMap.insert(60625, "1.1.6.30 (Latin)");
+    m_crcMap.insert(17913, "1.1.6.32 (Latin)");
 
     // resources
     m_crcMap.insert(12586, "0.0.8.74");
@@ -240,6 +246,9 @@ void HuamiFirmwareInfo::populateCrcMap()
     m_crcMap.insert(20591, "1.1.2.05");
     m_crcMap.insert(5341,  "1.1.5.02-04");
     m_crcMap.insert(22662, "1.1.5.36");
+    m_crcMap.insert(24045, "1.1.5.56");
+    m_crcMap.insert(37677, "1.1.6.30-32");
+    m_crcMap.insert(26735, "1.1.6.34");
 
     // gps
     m_crcMap.insert(61520, "9367,8f79a91,0,0,");
@@ -247,8 +256,19 @@ void HuamiFirmwareInfo::populateCrcMap()
     m_crcMap.insert(16716, "9565,dfbd8faf42,0");
     m_crcMap.insert(54154, "9567,8b05506,0,0,");
     m_crcMap.insert(15717, "15974,e61dd16,126");
+    m_crcMap.insert(62532, "18344,eb2f43f,126");
 
     // font
     m_crcMap.insert(61054, "8");
-    m_crcMap.insert(62291, "9 (Latin)");
+    m_crcMap.insert(62291, "9 (old Latin)");
+    m_crcMap.insert(59577, "9 (Latin)");
+
+    // BipOS FW
+    m_crcMap.insert(28373, "1.1.2.05 (BipOS 0.5)");
+    m_crcMap.insert(62977, "1.1.2.05 (BipOS 0.5.1)");
+
+    // BipOS RES
+    m_crcMap.insert(16303, "1.1.2.05 (BipOS 0.5)");
+    m_crcMap.insert(61135, "1.1.2.05 (BipOS 0.5.1)");
+
 }
