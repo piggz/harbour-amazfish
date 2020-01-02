@@ -7,7 +7,7 @@
 
 DaemonInterface::DaemonInterface(QObject *parent) : QObject(parent)
 {
-    iface = new QDBusInterface(SERVICE_NAME, "/", "", QDBusConnection::sessionBus());
+    iface = new QDBusInterface(SERVICE_NAME, "/application", "", QDBusConnection::sessionBus());
 
     m_serviceWatcher = new QDBusServiceWatcher(SERVICE_NAME, QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
     QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered, this, &DaemonInterface::connectDaemon);
@@ -73,7 +73,7 @@ void DaemonInterface::connectDaemon()
         delete iface;
     }
 
-    iface = new QDBusInterface(SERVICE_NAME, "/", "", QDBusConnection::sessionBus());
+    iface = new QDBusInterface(SERVICE_NAME, "/application", "", QDBusConnection::sessionBus());
 
     connect(iface, SIGNAL(message(QString)), this, SIGNAL(message(QString)), Qt::UniqueConnection);
     connect(iface, SIGNAL(downloadProgress(int)), this, SIGNAL(downloadProgress(int)), Qt::UniqueConnection);

@@ -1,10 +1,9 @@
 #include "dbushrm.h"
 #include <QDebug>
 
-DBusHRM::DBusHRM(HRMService * hrm, MiBandService *mi, QObject *parent) : QObject(parent)
+DBusHRM::DBusHRM(QObject *parent) : QObject(parent)
 {
-    m_hrm = hrm;
-    m_mi = mi;
+    qDebug() << "Creating DBUS HRM";
 
     if (!QDBusConnection::sessionBus().registerService("org.sailfishos.heartrate")) {
         qDebug() << QDBusConnection::sessionBus().lastError().message();
@@ -13,8 +12,24 @@ DBusHRM::DBusHRM(HRMService * hrm, MiBandService *mi, QObject *parent) : QObject
     }
 }
 
+void DBusHRM::setHRMService(HRMService *hrm)
+{
+    qDebug() << "Assigning HRM";
+
+    m_hrm = hrm;
+}
+
+void DBusHRM::setMiBandService(MiBandService *mi)
+{
+    qDebug() << "Assigning MI";
+
+    m_mi = mi;
+}
+
 void DBusHRM::start()
 {
+    qDebug() << "Starting DBUS HRM" << m_hrm;
+
     if (m_hrm) {
         return m_hrm->enableRealtimeHRMeasurement(true);
     }
@@ -22,6 +37,8 @@ void DBusHRM::start()
 
 void DBusHRM::stop()
 {
+    qDebug() << "Stopping DBUS HRM" << m_hrm;
+
     if (m_hrm) {
         return m_hrm->enableRealtimeHRMeasurement(false);
     }
@@ -29,6 +46,8 @@ void DBusHRM::stop()
 
 int DBusHRM::heartRate()
 {
+    qDebug() << "Getting heartrate" << m_hrm->heartRate();
+
     if (m_hrm) {
         m_hrm->keepRealtimeHRMMeasurementAlive();
         return m_hrm->heartRate();

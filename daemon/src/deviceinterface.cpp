@@ -12,7 +12,7 @@
 #include <KDb3/KDbDriverManager>
 
 static const char *SERVICE = SERVICE_NAME;
-static const char *PATH = "/";
+static const char *PATH = "/application";
 
 DeviceInterface::DeviceInterface()
 {
@@ -34,6 +34,9 @@ DeviceInterface::DeviceInterface()
     }
 
     m_adapter.setAdapterPath("/org/bluez/hci0");
+
+    //Create the DBUS HRM Interface
+    m_dbusHRM = new DBusHRM(this);
 
     setupDatabase();
 
@@ -410,9 +413,10 @@ void DeviceInterface::onConnectionStateChanged()
     if (connectionState() == "authenticated") {
         if (miBandService()) {
             miBandService()->setDatabase(dbConnection());
+            m_dbusHRM->setMiBandService(miBandService());
         }
-        if (hrmService() && !m_dbusHRM) {
-            m_dbusHRM = new DBusHRM(hrmService(), miBandService(), this);
+        if (hrmService()) {
+            m_dbusHRM->setHRMService(hrmService());
         }
         sendBufferedNotifications();
     } else {
@@ -579,6 +583,7 @@ void DeviceInterface::registerDBus()
     {
         // DBus
         QDBusConnection connection = QDBusConnection::sessionBus();
+        qDebug() << "Registering service on dbus" << SERVICE;
         if (!connection.registerService(SERVICE))
         {
             QCoreApplication::quit();
