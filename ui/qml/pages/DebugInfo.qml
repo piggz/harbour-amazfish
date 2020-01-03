@@ -9,10 +9,23 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
+    property date activityDate
+    property date sportDate
+
     ConfigurationValue {
         id: pairedAddress
         key: "/uk/co/piggz/amazfish/pairedAddress"
         defaultValue: ""
+    }
+
+    ConfigurationValue {
+        id: lastActivitySync
+        key: "/uk/co/piggz/amazfish/device/lastactivitysyncmillis"
+    }
+
+    ConfigurationValue {
+        id: lastSportSync
+        key: "/uk/co/piggz/amazfish/device/lastsportsyncmillis"
     }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
@@ -77,6 +90,62 @@ Page {
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
+
+            Row {
+                width: parent.width
+                Label {
+                    id: lblActivitySync
+                    width: parent.width * 0.66
+                    text: qsTr("A:" ) + activityDate.toISOString()
+                }
+                Button {
+                    id: btnMinusActivitySync
+                    width: parent.width * 0.16
+                    text: "-"
+                    onClicked: {
+                        lastActivitySync.value -= 3600000
+                        activityDate = new Date(lastActivitySync.value);
+                    }
+                }
+                Button {
+                    id: btnAddActivitySync
+                    width: parent.width * 0.16
+                    text: "+"
+                    onClicked: {
+                        lastActivitySync.value += 3600000
+                        activityDate = new Date(lastActivitySync.value);
+                    }
+                }
+            }
+
+            Row {
+                width: parent.width
+
+                Label {
+                    id: lblSportSync
+                    width: parent.width * 0.66
+                    text: qsTr("S:" ) + sportDate.toISOString()
+                }
+                Button {
+                    id: btnMinusSportSync
+                    width: parent.width * 0.16
+                    text: "-"
+                    onClicked: {
+                        lastSportSync.value -= 3600000
+                        sportDate = new Date(lastSportSync.value);
+                    }
+                }
+                Button {
+                    id: btnAddSportSync
+                    width: parent.width * 0.16
+                    text: "+"
+                    onClicked: {
+                        lastSportSync.value += 3600000
+                        sportDate = new Date(lastSportSync.value);
+                    }
+                }
+            }
+
             Button {
                 text: qsTr("Test Notification")
                 onClicked: {
@@ -118,6 +187,11 @@ Page {
 
     Component.onCompleted: {
         DaemonInterfaceInstance.refreshInformation();
+        activityDate = new Date(lastActivitySync.value);
+        sportDate = new Date(lastSportSync.value);
+
+        //console.log(lastActivitySync.value, activityDate.value);
+        //console.log(lastSportSync, sportDate);
     }
 
     Connections {
