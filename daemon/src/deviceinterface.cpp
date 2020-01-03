@@ -160,10 +160,7 @@ BipFirmwareService *DeviceInterface::firmwareService() const
 
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
-    if (!m_device) {
-        return;
-    }
-    if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
+    if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
         alertNotificationService()->sendAlert(appName, summary, body);
     } else {
         qDebug() << "no notification service, buffering notification";
