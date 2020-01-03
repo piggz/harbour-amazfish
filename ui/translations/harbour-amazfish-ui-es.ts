@@ -151,6 +151,14 @@
         <source>Send Weather</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>A:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
