@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Välj filer att ladda ner</translation>
+        <translation>Välj en fil att ladda ner.</translation>
     </message>
     <message>
         <source>None</source>
@@ -149,15 +149,15 @@
     </message>
     <message>
         <source>Send Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka väder</translation>
     </message>
     <message>
         <source>A:</source>
-        <translation type="unfinished"></translation>
+        <translation>A:</translation>
     </message>
     <message>
         <source>S:</source>
-        <translation type="unfinished"></translation>
+        <translation>S:</translation>
     </message>
 </context>
 <context>
@@ -188,11 +188,11 @@
     </message>
     <message>
         <source>Start Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Strata tjänsten</translation>
     </message>
     <message>
         <source>Enable Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera tjänsten</translation>
     </message>
 </context>
 <context>
@@ -272,7 +272,7 @@
     </message>
     <message>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Avisering för låg batterinivå</translation>
     </message>
 </context>
 <context>
@@ -398,27 +398,27 @@
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Språk</translation>
     </message>
     <message>
         <source>de_DE</source>
-        <translation type="unfinished"></translation>
+        <translation>de_DE</translation>
     </message>
     <message>
         <source>it_IT</source>
-        <translation type="unfinished"></translation>
+        <translation>it_IT</translation>
     </message>
     <message>
         <source>fr_FR</source>
-        <translation type="unfinished"></translation>
+        <translation>fr_FR</translation>
     </message>
     <message>
         <source>tr_TR</source>
-        <translation type="unfinished"></translation>
+        <translation>tr_TR</translation>
     </message>
     <message>
         <source>Disconnect Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Avisering för nerkoppling</translation>
     </message>
 </context>
 <context>
@@ -453,23 +453,23 @@
     </message>
     <message>
         <source>Start Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta tjänsten</translation>
     </message>
     <message>
         <source>Stop Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppa tjänsten</translation>
     </message>
     <message>
         <source>Enable Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera tjänsten</translation>
     </message>
     <message>
         <source>Disable Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Avaktivera tjänsten</translation>
     </message>
     <message>
         <source>Debug Info</source>
-        <translation type="unfinished">Felsökningsinfo</translation>
+        <translation>Felsökningsinfo</translation>
     </message>
 </context>
 <context>
@@ -563,7 +563,7 @@
     </message>
     <message>
         <source>hrs (deep)</source>
-        <translation type="unfinished"></translation>
+        <translation>tim (djup)</translation>
     </message>
 </context>
 <context>
