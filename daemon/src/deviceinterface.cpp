@@ -431,6 +431,17 @@ void DeviceInterface::onConnectionStateChanged()
 void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QString &val)
 {
     qDebug() << "slot_informationChanged" << key << val;
+
+    //Handle notification of low battery
+    if (key == AbstractDevice::INFO_BATTERY) {
+        if (val.toInt() != m_lastBatteryLevel) {
+            m_lastBatteryLevel = val.toInt();
+            if (m_lastBatteryLevel <= 10 && m_settings.value("/uk/co/piggz/amazfish/app/notifylowbattery").toBool()) {
+                sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(m_lastBatteryLevel) + "%");
+            }
+        }
+    }
+
     emit informationChanged(key, val);
 }
 

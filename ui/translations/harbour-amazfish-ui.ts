@@ -306,32 +306,37 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="47"/>
+        <location filename="../qml/pages/Settings-app.qml" line="53"/>
         <source>Device Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="53"/>
+        <location filename="../qml/pages/Settings-app.qml" line="59"/>
         <source>Notify on connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="62"/>
+        <location filename="../qml/pages/Settings-app.qml" line="68"/>
         <source>Refresh weather every (</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="62"/>
+        <location filename="../qml/pages/Settings-app.qml" line="68"/>
         <source>) minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="68"/>
+        <location filename="../qml/pages/Settings-app.qml" line="74"/>
         <source>Sync activity data each hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="73"/>
+        <location filename="../qml/pages/Settings-app.qml" line="80"/>
+        <source>Low battery notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="85"/>
         <source>Save Settings</source>
         <translation type="unfinished"></translation>
     </message>

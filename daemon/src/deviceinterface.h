@@ -110,6 +110,7 @@ private:
     QString m_deviceAddress;
     QString m_deviceName;
     bool m_dbusRegistered = false;
+    int m_lastBatteryLevel = 0;
 
     BluezAdapter m_adapter;
     AbstractDevice *m_device = nullptr;

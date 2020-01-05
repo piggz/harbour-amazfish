@@ -270,6 +270,10 @@
         <source>Sync activity data each hour</source>
         <translation>Synchronisiere Aktivitätsdaten jede Stunde</translation>
     </message>
+    <message>
+        <source>Low battery notification</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-bip-shortcuts</name>

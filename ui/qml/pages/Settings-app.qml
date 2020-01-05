@@ -26,6 +26,12 @@ Page {
         defaultValue: true
     }
 
+    ConfigurationValue {
+        id: appNotifyLowBattery
+        key: "/uk/co/piggz/amazfish/app/notifylowbattery"
+        defaultValue: false
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -68,6 +74,12 @@ Page {
                 text: qsTr("Sync activity data each hour")
             }
 
+            TextSwitch {
+                id: chkNotifyLowBattery
+                width: parent.width
+                text: qsTr("Low battery notification")
+            }
+
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Save Settings")
@@ -81,12 +93,14 @@ Page {
         chkNotifyConnect.checked = appNotifyConnect.value;
         sldWeatherRefresh.value = appRefreshWeather.value;
         chkAutoSyncData.checked = appAutoSyncData.value;
+        chkNotifyLowBattery.checked = appNotifyLowBattery.value;
     }
 
     function saveSettings() {
         appNotifyConnect.value = chkNotifyConnect.checked;
         appRefreshWeather.value = sldWeatherRefresh.value;
         appAutoSyncData.value = chkAutoSyncData.checked;
+        appNotifyLowBattery.value = chkNotifyLowBattery.checked;
 
         weather.refresh();
     }
