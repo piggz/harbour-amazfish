@@ -56,6 +56,7 @@ public:
     static const char EVENT_BUTTON = 0x04;
     static const char EVENT_DECLINE_CALL = 0x07;
     static const char EVENT_IGNORE_CALL = 0x09;
+    static const char EVENT_FIND_PHONE = 0x08;
     static const char ENDPOINT_DISPLAY = 0x06;
     static const char ENDPOINT_DISPLAY_ITEMS = 0x0a;
 
@@ -145,6 +146,8 @@ public:
 
     void writeChunked(const QString &characteristic, int type, const QByteArray &value);
 
+    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message);
+
 private:
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
     Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
@@ -155,7 +158,6 @@ private:
     QString m_gpsVersion;
     int m_steps;
     int m_operationRunning = 0;
-
 
     SettingsManager m_settings;
     BipBatteryInfo m_batteryInfo;

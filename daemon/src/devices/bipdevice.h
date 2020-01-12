@@ -101,27 +101,28 @@ public:
     
     virtual void applyDeviceSetting(Settings s) override;
     virtual void rebootWatch() override;
-    
+
+    virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
+
     QString softwareRevision();
     
     Q_SLOT void authenticated(bool ready);
-    
-    
+
+protected:
+    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    Q_SLOT void handleButtonPressed();
+    Q_SLOT void buttonPressTimeout();
+    Q_SLOT void stepsChanged();
+    Q_SLOT void batteryInfoChanged();
+
 private:
     void parseServices();
+    void initialise();
 
     SettingsManager m_settings;
     QString m_softwareRevision;
     int m_buttonPresses = 0;
     QTimer *m_keyPressTimer = nullptr;
-
-    void initialise();
-
-    Q_SLOT void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
-    Q_SLOT void handleButtonPressed();
-    Q_SLOT void buttonPressTimeout();
-    Q_SLOT void stepsChanged();
-    Q_SLOT void batteryInfoChanged();
 };
 
 #endif // BIPDEVICE_H

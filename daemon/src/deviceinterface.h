@@ -111,6 +111,7 @@ private:
     QString m_deviceName;
     bool m_dbusRegistered = false;
     int m_lastBatteryLevel = 0;
+    int m_lastAlertHash = 0;
 
     BluezAdapter m_adapter;
     AbstractDevice *m_device = nullptr;
@@ -125,10 +126,9 @@ private:
 
     void createSettings();
     void updateServiceController();
-    
-    DeviceInfoService *infoService() const;
+
+    //TODO Minimise use of these funcitons
     MiBandService *miBandService() const;
-    MiBand2Service *miBand2Service() const;
     AlertNotificationService *alertNotificationService() const;
     HRMService *hrmService() const;
     BipFirmwareService *firmwareService() const;

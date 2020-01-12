@@ -73,6 +73,7 @@ class AbstractDevice : public QBLEDevice
     virtual QString information(Info i);
     virtual void applyDeviceSetting(Settings s);
     virtual void rebootWatch();
+    virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) = 0;
     
     //signals    
     Q_SIGNAL void message(const QString &text);

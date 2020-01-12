@@ -104,12 +104,13 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
         connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
         connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
-        return m_device->pair();
+        m_device->connectToDevice();
+        return "";
     }
     
     qDebug() << "DeviceInterface::pair:device not created";
 
-    return QString();
+    return QString("no device found");
 }
 
 void DeviceInterface::disconnect()
@@ -128,19 +129,9 @@ QString DeviceInterface::connectionState() const
     return m_device->connectionState();
 }
 
-DeviceInfoService *DeviceInterface::infoService() const
-{
-    return qobject_cast<DeviceInfoService*>(m_device->service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
-}
-
 MiBandService *DeviceInterface::miBandService() const
 {
     return qobject_cast<MiBandService*>(m_device->service(MiBandService::UUID_SERVICE_MIBAND));
-}
-
-MiBand2Service *DeviceInterface::miBand2Service() const
-{
-    return qobject_cast<MiBand2Service*>(m_device->service(MiBand2Service::UUID_SERVICE_MIBAND2));
 }
 
 AlertNotificationService *DeviceInterface::alertNotificationService() const
@@ -161,7 +152,7 @@ BipFirmwareService *DeviceInterface::firmwareService() const
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
-        alertNotificationService()->sendAlert(appName, summary, body);
+        m_device->sendAlert(appName, summary, body);
     } else {
         qDebug() << "no notification service, buffering notification";
         WatchNotification n;
@@ -415,6 +406,10 @@ void DeviceInterface::onConnectionStateChanged()
         if (hrmService()) {
             m_dbusHRM->setHRMService(hrmService());
         }
+        if (m_settings.value("/uk/co/piggz/amazfish/app/notifyconnect").toBool()) {
+            sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
+        }
+
         sendBufferedNotifications();
     } else {
         //Terminate running operations
@@ -533,10 +528,14 @@ QString DeviceInterface::information(int i)
 
 void DeviceInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
 {
+    int hash = qHash(sender + subject + message);
+    if (hash == m_lastAlertHash && !allowDuplicate) {
+        qDebug() << "Discarded duplicate alert";
+        return; //Do not send duplicate alerts
+    }
+    m_lastAlertHash = hash;
+
     notificationReceived(sender, subject, message);
-    //if (alertNotificationService()) {
-    //    alertNotificationService()->sendAlert(sender, subject, message, allowDuplicate);
-    //}
 }
 
 void DeviceInterface::incomingCall(const QString &caller)

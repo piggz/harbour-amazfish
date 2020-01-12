@@ -708,6 +708,8 @@ void MiBandService::writeChunked(const QString &characteristic, int type, const 
     int MAX_CHUNKLENGTH = 17;
     int remaining = value.length();
     char count = 0;
+
+    qDebug() << "Writing chunked: " << value;
     while (remaining > 0) {
         int copybytes = qMin(remaining, MAX_CHUNKLENGTH);
         QByteArray chunk;
@@ -731,4 +733,46 @@ void MiBandService::writeChunked(const QString &characteristic, int type, const 
         writeValue(characteristic, chunk);
         remaining -= copybytes;
     }
+}
+
+void MiBandService::sendAlert(const QString &sender, const QString &subject, const QString &message)
+{
+    qDebug() << "Alert:" << sender << subject << message;
+
+    if (message.isEmpty()) {
+        return;
+    }
+
+    //Prefix
+    int category = 0xfa; //Custom Huami icon
+    int icon = AlertNotificationService::mapSenderToIcon(sender);
+
+    if (sender == "Messages") { //SMS must use category, not icon
+        category = AlertNotificationService::AlertCategory::SMS;
+    }
+
+    if (icon == AlertNotificationService::HuamiIcon::EMAIL) { //Email icon doesnt work, so use category
+        category = AlertNotificationService::AlertCategory::Email;
+    }
+
+    QByteArray prefix = QByteArray(1, category) + QByteArray(4, 0x00) + QByteArray(1, 0x01); //1 alert
+    prefix += QByteArray(1, AlertNotificationService::mapSenderToIcon(sender));
+
+    //Message
+    QByteArray msg = sender.left(32).toUtf8() + QByteArray(1, 0x00); //Null char indicates end of first line
+    if (!subject.isEmpty()) {
+        msg += subject.left(128).toUtf8() + QByteArray(2, 0x0a);
+    }
+
+    if (!message.isEmpty()) {
+        msg += message.left(128).toUtf8();
+    }
+
+    //Suffix
+    QByteArray suffix;
+    suffix += (char)0x00;
+    suffix += (char)' ';
+    suffix += (char)0x00;
+
+    writeChunked(UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 0, prefix + msg + suffix);
 }

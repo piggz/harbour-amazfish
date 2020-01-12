@@ -9,19 +9,13 @@ AlertNotificationService::AlertNotificationService(const QString &path, QObject 
  qDebug() << "AlertNotificationService::AlertNotificationService";
 }
 
-void AlertNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
+void AlertNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
     qDebug() << "Alert:" << sender << subject << message;
 
     if (message.isEmpty()) {
         return;
     }
-    int hash = qHash(sender + subject + message);
-    if (hash == m_lastAlertHash && !allowDuplicate) {
-        qDebug() << "Discarded duplicate alert";
-        return; //Do not send duplicate alerts
-    }
-    m_lastAlertHash = hash;
 
     int category = 0xfa; //Custom Huami icon
     int icon = mapSenderToIcon(sender);

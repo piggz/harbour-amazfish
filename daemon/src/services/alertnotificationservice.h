@@ -79,12 +79,11 @@ public:
         HR_WARNING_36 = 36
     };
 
-    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
+    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message);
     Q_INVOKABLE void incomingCall(const QString &caller);
+    static int mapSenderToIcon(const QString &sender);
 
 private:
-    int mapSenderToIcon(const QString &sender);
-    int m_lastAlertHash = 0;
 };
 
 #endif // ALERTNOTIFICATIONSERVICE_H

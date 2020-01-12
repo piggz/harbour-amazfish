@@ -2,6 +2,7 @@
 #define MIBAND2SERVICE_H
 
 #include "qble/qbleservice.h"
+#include "settingsmanager.h"
 
 /*
 {0000FEE1-0000-1000-8000-00805f9b34fb} MiBand2 Service
@@ -19,7 +20,7 @@ class MiBand2Service : public QBLEService
 {
     Q_OBJECT
 public:
-    MiBand2Service(const QString &path, QObject *parent);
+    MiBand2Service(const QString &path, char authByte, QObject *parent);
 
     static const char* UUID_SERVICE_MIBAND2;
     static const char* UUID_CHARACTERISITIC_MIBAND2_AUTH;
@@ -30,7 +31,7 @@ public:
     const char RESPONSE = 0x10;
     const char SUCCESS = 0x01;
     const char FAIL = 0x04;
-    const char AUTH_BYTE = 0x08;
+    const char AUTH_BYTE = 0x00; //0x08;
     const QByteArray AUTH_SECRET_KEY = "0123456789@ABCDE";
 
     void initialise(bool firstTime);
@@ -42,6 +43,11 @@ private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 
     QByteArray handleAesAuth(QByteArray data, QByteArray secretKey);
+
+    SettingsManager m_settings;
+    QByteArray getSecretKey();
+
+    char m_authByte = 0x08; //0x08 = Bip, 0x00 = GTS
 };
 
 #endif // MIBAND2SERVICE_H

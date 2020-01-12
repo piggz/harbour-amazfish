@@ -36,6 +36,7 @@ INSTALLS += target \
 include(../qble/qble.pri)
 
 SOURCES += \
+    src/devices/gtsdevice.cpp \
     src/qaesencryption.cpp \
     src/voicecallhandler.cpp \
     src/voicecallmanager.cpp \
@@ -79,6 +80,7 @@ DISTFILES += \
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
+    src/devices/gtsdevice.h \
     src/qaesencryption.h \
     src/notificationslistener.h \
     src/voicecallhandler.h \

@@ -78,7 +78,7 @@ void BipDevice::parseServices()
             } else if (uuid == UUID_SERVICE_MIBAND && !service(UUID_SERVICE_MIBAND)) {
                 addService(UUID_SERVICE_MIBAND, new MiBandService(path, this));
             } else if (uuid == UUID_SERVICE_MIBAND2 && !service(UUID_SERVICE_MIBAND2)) {
-                addService(UUID_SERVICE_MIBAND2, new MiBand2Service(path, this));
+                addService(UUID_SERVICE_MIBAND2, new MiBand2Service(path, 0x08, this));
             } else if (uuid == UUID_SERVICE_FIRMWARE && !service(UUID_SERVICE_FIRMWARE)) {
                 addService(UUID_SERVICE_FIRMWARE, new BipFirmwareService(path, this));
             } else if ( !service(uuid)) {
@@ -178,12 +178,6 @@ void BipDevice::authenticated(bool ready)
         if (hrm) {
             hrm->setAllDayHRM();
             hrm-> setHeartrateSleepSupport();
-        }
-
-
-        AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(UUID_SERVICE_ALERT_NOTIFICATION));
-        if (alert && m_settings.value("/uk/co/piggz/amazfish/app/notifyconnect").toBool()) {
-            alert->sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
         }
 
         setConnectionState("authenticated");
@@ -401,4 +395,12 @@ void BipDevice::rebootWatch()
     }
     fw->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_REBOOT));
 
+}
+
+void BipDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
+{
+    AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(UUID_SERVICE_ALERT_NOTIFICATION));
+    if (alert) {
+        alert->sendAlert(sender, subject, message);
+    }
 }
