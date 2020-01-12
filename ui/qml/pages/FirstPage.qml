@@ -47,7 +47,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Pair with watch")
-                onClicked: pageStack.push(Qt.resolvedUrl("PairPage.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("PairSelectDeviceType.qml"))
             }
             MenuItem {
                 text: qsTr("Download File")

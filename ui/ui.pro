@@ -36,8 +36,10 @@ SOURCES += src/harbour-amazfish-ui.cpp \
     src/daemoninterface.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
+    qml/components/DeviceButton.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
+    qml/pages/PairSelectDeviceType.qml \
     rpm/harbour-amazfish.changes.in \
     rpm/harbour-amazfish.changes.run.in \
     rpm/harbour-amazfish.spec \
