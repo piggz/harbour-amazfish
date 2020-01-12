@@ -255,13 +255,51 @@
 <context>
     <name>PairPage</name>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="47"/>
+        <location filename="../qml/pages/PairPage.qml" line="54"/>
         <source>Start scan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="72"/>
+        <location filename="../qml/pages/PairPage.qml" line="71"/>
+        <source>Pair Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairPage.qml" line="86"/>
+        <source>Save Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairPage.qml" line="97"/>
+        <source>Pull down to start scan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairPage.qml" line="108"/>
         <source>Try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PairSelectDeviceType</name>
+    <message>
+        <location filename="../qml/pages/PairSelectDeviceType.qml" line="27"/>
+        <source>Select Device Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairSelectDeviceType.qml" line="31"/>
+        <source>Amazfit Bip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairSelectDeviceType.qml" line="40"/>
+        <source>Amazfit GTS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairSelectDeviceType.qml" line="49"/>
+        <source>MI Band 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

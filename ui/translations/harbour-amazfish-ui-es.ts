@@ -212,6 +212,37 @@
         <source>Try again</source>
         <translation>Intentar de nuevo</translation>
     </message>
+    <message>
+        <source>Pull down to start scan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pair Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PairSelectDeviceType</name>
+    <message>
+        <source>Select Device Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amazfit Bip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amazfit GTS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MI Band 2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-alarms</name>
