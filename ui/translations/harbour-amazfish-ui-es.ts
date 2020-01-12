@@ -5,7 +5,7 @@
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer ubicación</translation>
     </message>
 </context>
 <context>
@@ -51,19 +51,19 @@
     </message>
     <message>
         <source>Analysis</source>
-        <translation type="unfinished">Análisis</translation>
+        <translation>Análisis</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Ritmo cardiaco</translation>
+        <translation>Frecuencia cardiaca</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Pasos</translation>
+        <translation>Pasos</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation type="unfinished">Intensidad</translation>
+        <translation>Intensidad</translation>
     </message>
 </context>
 <context>
@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Elegir un archivo a descargar.</translation>
+        <translation>Selecciona archivo a descargar.</translation>
     </message>
     <message>
         <source>None</source>
@@ -86,7 +86,7 @@
     </message>
     <message>
         <source>Choose File</source>
-        <translation>Escoger archivo</translation>
+        <translation>Elige archivo</translation>
     </message>
     <message>
         <source>File type/version: </source>
@@ -97,109 +97,109 @@
     <name>DebugInfo</name>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>AmazFish</source>
-        <translation type="unfinished">AmazFish</translation>
+        <translation>AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>Dirección: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nº Serie: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Rev. hardware: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Rev. software: </translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>Estado de conexión: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ver. GPS: </translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Test de notificación</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Test de email</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>Test de llamada</translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>Obtener registro de depuración</translation>
     </message>
     <message>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Test de ventana emergente</translation>
     </message>
     <message>
         <source>Send Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar Tiempo</translation>
     </message>
     <message>
         <source>A:</source>
-        <translation type="unfinished"></translation>
+        <translation>A:</translation>
     </message>
     <message>
         <source>S:</source>
-        <translation type="unfinished"></translation>
+        <translation>S:</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Pair with watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Vincular reloj</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished">Descargar archivo</translation>
+        <translation>Descargar archivo</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Ajustes</translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconectar reloj</translation>
     </message>
     <message>
         <source>Connect to watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar reloj</translation>
     </message>
     <message>
         <source>AmazFish</source>
-        <translation type="unfinished">AmazFish</translation>
+        <translation>AmazFish</translation>
     </message>
     <message>
         <source>Start Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar servicio</translation>
     </message>
     <message>
         <source>Enable Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar servicio</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay datos</translation>
     </message>
 </context>
 <context>
@@ -248,11 +248,11 @@
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished">Alarmas</translation>
+        <translation>Alarmas</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <source>Alarm 1</source>
@@ -287,23 +287,23 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar Tiempo cada (</translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>) minutos</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Sincronizar datos de actividad cada hora</translation>
     </message>
     <message>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificación de batería baja</translation>
     </message>
 </context>
 <context>
@@ -429,27 +429,27 @@
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <source>de_DE</source>
-        <translation type="unfinished"></translation>
+        <translation>de_DE</translation>
     </message>
     <message>
         <source>it_IT</source>
-        <translation type="unfinished"></translation>
+        <translation>it_IT</translation>
     </message>
     <message>
         <source>fr_FR</source>
-        <translation type="unfinished"></translation>
+        <translation>fr_FR</translation>
     </message>
     <message>
         <source>tr_TR</source>
-        <translation type="unfinished"></translation>
+        <translation>tr_TR</translation>
     </message>
     <message>
         <source>Disconnect Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificación al desconectar</translation>
     </message>
 </context>
 <context>
@@ -480,121 +480,121 @@
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished">Clima</translation>
+        <translation>Tiempo</translation>
     </message>
     <message>
         <source>Start Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar servicio</translation>
     </message>
     <message>
         <source>Stop Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Detener servicio</translation>
     </message>
     <message>
         <source>Enable Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar servicio</translation>
     </message>
     <message>
         <source>Disable Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitar servicio</translation>
     </message>
     <message>
         <source>Debug Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info depuración</translation>
     </message>
 </context>
 <context>
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes de perfil</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha de nacimiento</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexo</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Hombre</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Mujer</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>Altura (cm): </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>Peso(Kg): </translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Mano donde se ubica</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Izquierda</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Derecha</translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar al levantar muñeca</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>Meta (pasos): </translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Alerta al alcanzar meta</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar HRM para detección del sueño</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalo (minutos) HRM: </translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar perfil</translation>
     </message>
 </context>
 <context>
     <name>SleepPage</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Descargar datos</translation>
+        <translation>Descargar datos</translation>
     </message>
     <message>
         <source>Sleep Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Resumen de sueño</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Sueño</translation>
     </message>
     <message>
         <source>hrs</source>
-        <translation type="unfinished"></translation>
+        <translation>hrs</translation>
     </message>
     <message>
         <source>hrs (deep)</source>
-        <translation type="unfinished"></translation>
+        <translation>hrs (profundo)</translation>
     </message>
 </context>
 <context>
@@ -612,11 +612,11 @@
     <name>StepsPage</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Descargar datos</translation>
+        <translation>Descargar datos</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Pasos</translation>
+        <translation>Pasos</translation>
     </message>
 </context>
 </TS>
