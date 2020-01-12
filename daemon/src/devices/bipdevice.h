@@ -103,6 +103,7 @@ public:
     virtual void rebootWatch() override;
 
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
+    virtual void incomingCall(const QString &caller) override;
 
     QString softwareRevision();
     

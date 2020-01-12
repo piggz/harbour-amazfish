@@ -74,7 +74,8 @@ class AbstractDevice : public QBLEDevice
     virtual void applyDeviceSetting(Settings s);
     virtual void rebootWatch();
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) = 0;
-    
+    virtual void incomingCall(const QString &caller) = 0;
+
     //signals    
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);

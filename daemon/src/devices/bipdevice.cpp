@@ -404,3 +404,11 @@ void BipDevice::sendAlert(const QString &sender, const QString &subject, const Q
         alert->sendAlert(sender, subject, message);
     }
 }
+
+void BipDevice::incomingCall(const QString &caller)
+{
+    AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(UUID_SERVICE_ALERT_NOTIFICATION));
+    if (alert) {
+        alert->incomingCall(caller);
+    }
+}

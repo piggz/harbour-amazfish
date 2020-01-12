@@ -134,11 +134,6 @@ MiBandService *DeviceInterface::miBandService() const
     return qobject_cast<MiBandService*>(m_device->service(MiBandService::UUID_SERVICE_MIBAND));
 }
 
-AlertNotificationService *DeviceInterface::alertNotificationService() const
-{
-    return qobject_cast<AlertNotificationService*>(m_device->service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
-}
-
 HRMService *DeviceInterface::hrmService() const
 {
     return qobject_cast<HRMService*>(m_device->service(HRMService::UUID_SERVICE_HRM));
@@ -151,7 +146,7 @@ BipFirmwareService *DeviceInterface::firmwareService() const
 
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
-    if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
+    if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
         m_device->sendAlert(appName, summary, body);
     } else {
         qDebug() << "no notification service, buffering notification";
@@ -189,7 +184,7 @@ void DeviceInterface::onActiveVoiceCallStatusChanged()
 
     VoiceCallHandler* handler = m_voiceCallManager->activeVoiceCall();
 
-    if (!handler || handler->handlerId().isNull()) {
+    if (!handler || handler->handlerId().isNull() || !m_device) {
         return;
     }
 
@@ -204,7 +199,7 @@ void DeviceInterface::onActiveVoiceCallStatusChanged()
         qDebug() << "Tell incoming:" << handler->lineId();
         if(handler->getState() < VoiceCallHandler::StateRinging) {
             handler->setState(VoiceCallHandler::StateRinging);
-            alertNotificationService()->incomingCall(m_voiceCallManager->findPersonByNumber(handler->lineId()));
+            m_device->incomingCall(m_voiceCallManager->findPersonByNumber(handler->lineId()));
         }
         break;
     case VoiceCallHandler::STATUS_NULL:
@@ -445,9 +440,9 @@ void DeviceInterface::sendBufferedNotifications()
     qDebug() << "Sending buffered notifications";
     while (m_notificationBuffer.count() > 0) {
         WatchNotification n = m_notificationBuffer.dequeue();
-        if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)  && alertNotificationService()){
+        if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
             qDebug() << "Sending notification";
-            alertNotificationService()->sendAlert(n.appName, n.summary, n.body);
+            sendAlert(n.appName, n.summary, n.body);
         }
     }
 }
@@ -540,8 +535,8 @@ void DeviceInterface::sendAlert(const QString &sender, const QString &subject, c
 
 void DeviceInterface::incomingCall(const QString &caller)
 {
-    if (alertNotificationService()) {
-        alertNotificationService()->incomingCall(caller);
+    if (m_device) {
+        m_device->incomingCall(caller);
     }
 }
 

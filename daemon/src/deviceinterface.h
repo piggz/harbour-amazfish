@@ -129,7 +129,6 @@ private:
 
     //TODO Minimise use of these funcitons
     MiBandService *miBandService() const;
-    AlertNotificationService *alertNotificationService() const;
     HRMService *hrmService() const;
     BipFirmwareService *firmwareService() const;
     
