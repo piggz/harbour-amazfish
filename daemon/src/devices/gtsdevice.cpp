@@ -133,7 +133,7 @@ void GtsDevice::parseServices()
             } else if (uuid == UUID_SERVICE_MIBAND && !service(UUID_SERVICE_MIBAND)) {
                 addService(UUID_SERVICE_MIBAND, new MiBandService(path, this));
             } else if (uuid == UUID_SERVICE_MIBAND2 && !service(UUID_SERVICE_MIBAND2)) {
-                addService(UUID_SERVICE_MIBAND2, new MiBand2Service(path, 0x00, this));
+                addService(UUID_SERVICE_MIBAND2, new MiBand2Service(path, 0x00, true, this));
             } else if (uuid == UUID_SERVICE_FIRMWARE && !service(UUID_SERVICE_FIRMWARE)) {
                 addService(UUID_SERVICE_FIRMWARE, new BipFirmwareService(path, this));
             } else if ( !service(uuid)) {

@@ -20,7 +20,7 @@ class MiBand2Service : public QBLEService
 {
     Q_OBJECT
 public:
-    MiBand2Service(const QString &path, char authByte, QObject *parent);
+    MiBand2Service(const QString &path, char authByte, bool requireAuthKey, QObject *parent);
 
     static const char* UUID_SERVICE_MIBAND2;
     static const char* UUID_CHARACTERISITIC_MIBAND2_AUTH;
@@ -48,6 +48,7 @@ private:
     QByteArray getSecretKey();
 
     char m_authByte = 0x08; //0x08 = Bip, 0x00 = GTS
+    bool m_requiresAuthKey = false;
 };
 
 #endif // MIBAND2SERVICE_H

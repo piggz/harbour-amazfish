@@ -4,11 +4,12 @@
 const char* MiBand2Service::UUID_SERVICE_MIBAND2  = "0000fee1-0000-1000-8000-00805f9b34fb";
 const char* MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH = "00000009-0000-3512-2118-0009af100700";
 
-MiBand2Service::MiBand2Service(const QString &path, char authByte, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND2, path, parent)
+MiBand2Service::MiBand2Service(const QString &path, char authByte, bool requireAuthKey, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND2, path, parent)
 {
     qDebug() << "MiBand2Service::MiBand2Service";
 
     m_authByte = authByte;
+    m_requiresAuthKey = requireAuthKey;
 
     connect(this, &QBLEService::characteristicChanged, this, &MiBand2Service::characteristicChanged);
 //    connect(this, &BipService::readyChanged, this, &MiBand2Service::serviceReady);
@@ -53,7 +54,7 @@ QByteArray MiBand2Service::handleAesAuth(QByteArray data, QByteArray secretKey)
 QByteArray MiBand2Service::getSecretKey()
 {
     QByteArray authKey = AUTH_SECRET_KEY;
-    if (!m_settings.value("/uk/co/piggz/amazfish/device/authkey").toString().isEmpty()) {
+    if (m_requiresAuthKey && !m_settings.value("/uk/co/piggz/amazfish/device/authkey").toString().isEmpty()) {
         authKey = QByteArray::fromHex(m_settings.value("/uk/co/piggz/amazfish/device/authkey").toString().toLocal8Bit());
     }
     return authKey;
