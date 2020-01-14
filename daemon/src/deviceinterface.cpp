@@ -406,6 +406,7 @@ void DeviceInterface::onConnectionStateChanged()
         }
 
         sendBufferedNotifications();
+        miBandService()->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, QByteArray("\x01\x00\x01\x00\x00\x00\x01\x00", 8));
     } else {
         //Terminate running operations
         if (miBandService()) {
