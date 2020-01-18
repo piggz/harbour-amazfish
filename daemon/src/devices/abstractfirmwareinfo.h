@@ -34,9 +34,7 @@ protected:
     uint16_t m_crc16;
     Type m_type;
     QString m_version;
-    QMap<uint16_t, QString> m_crcMap;
 
-    virtual void populateCrcMap() = 0;
     virtual void determineFirmwareType() = 0;
     virtual void determineFirmwareVersion() = 0;
 

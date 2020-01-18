@@ -6,7 +6,7 @@
 #include <QMap>
 #include "abstractfirmwareinfo.h"
 
-class BipFirmwareInfo : public AbstractFirmwareInfo
+class BipFirmwareInfo final : public AbstractFirmwareInfo
 {
 public:
     BipFirmwareInfo(const QByteArray &bytes);
@@ -14,10 +14,10 @@ public:
     virtual bool supportedOnDevice(const QString &device) const override;
 
 protected:
-    virtual void populateCrcMap() override;
     virtual void determineFirmwareType() override;
     virtual void determineFirmwareVersion() override;
 
+private:
     const char RES_HEADER[5]{ // HMRES resources file (*.res)
             0x48, 0x4d, 0x52, 0x45, 0x53
     };
@@ -59,17 +59,21 @@ protected:
     };
 
     // this is the same as Cor
-   const char FW_HEADER[16] = {
+    const char FW_HEADER[16] = {
             0x00, 0x98, 0x00, 0x20, 0xA5, 0x04, 0x00, 0x20, 0xAD, 0x04, 0x00, 0x20, 0xC5, 0x04, 0x00, 0x20
     };
 
-   const char GPS_ALMANAC_HEADER[6] = { // probably wrong
+    const char GPS_ALMANAC_HEADER[6] = { // probably wrong
             0xa0, 0x80, 0x08, 0x00, 0x8b, 0x07
     };
 
     const char GPS_CEP_HEADER[4]{ // probably wrong
             0x2a, 0x12, 0xa0, 0x02
     };
+
+    QMap<uint16_t, QString> m_crcMap;
+
+    void populateCrcMap();
 };
 
 #endif // BipFirmwareInfo_H

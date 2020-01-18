@@ -60,7 +60,7 @@ void BipFirmwareInfo::determineFirmwareType() {
 
 bool BipFirmwareInfo::supportedOnDevice(const QString &device) const
 {
-    return device == "Amazfit Bip Watch";
+    return device == "Amazfit Bip Watch" && m_type != Invalid;
 }
 
 void BipFirmwareInfo::determineFirmwareVersion()
