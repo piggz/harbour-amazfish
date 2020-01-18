@@ -451,11 +451,8 @@ QString DeviceInterface::prepareFirmwareDownload(const QString &path)
             return QString();
         }
         m_firmwareInfo = m_device->firmwareInfo(file.readAll());
+        m_device->prepareFirmwareDownload(m_firmwareInfo);
         return m_firmwareInfo->version();
-
-        //if (firmwareService()) {
-        //   return firmwareService()->prepareFirmwareDownload(path);
-        //}
     }
     return QString();
 }
@@ -465,7 +462,7 @@ bool DeviceInterface::startDownload()
     if (!m_firmwareInfo->supportedOnDevice(m_device->deviceName())) {
         return false;
     }
-    m_device->startDownload(m_firmwareInfo);
+    m_device->startDownload();
     return true;
 }
 

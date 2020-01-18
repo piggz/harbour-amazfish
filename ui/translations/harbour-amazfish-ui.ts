@@ -84,33 +84,38 @@
     <name>BipFirmwarePage</name>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="9"/>
-        <location filename="../qml/pages/BipFirmwarePage.qml" line="44"/>
+        <location filename="../qml/pages/BipFirmwarePage.qml" line="41"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/BipFirmwarePage.qml" line="34"/>
+        <location filename="../qml/pages/BipFirmwarePage.qml" line="31"/>
         <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/BipFirmwarePage.qml" line="39"/>
+        <location filename="../qml/pages/BipFirmwarePage.qml" line="36"/>
         <source>Select a file to download.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/BipFirmwarePage.qml" line="43"/>
+        <location filename="../qml/pages/BipFirmwarePage.qml" line="40"/>
         <source>Choose File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/BipFirmwarePage.qml" line="53"/>
+        <location filename="../qml/pages/BipFirmwarePage.qml" line="49"/>
         <source>File type/version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/BipFirmwarePage.qml" line="58"/>
+        <location filename="../qml/pages/BipFirmwarePage.qml" line="54"/>
         <source>Send file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BipFirmwarePage.qml" line="58"/>
+        <source>File not supported on this device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -5,7 +5,7 @@ AbstractFirmwareInfo::AbstractFirmwareInfo()
     m_type = Invalid;
 }
 
-QString AbstractFirmwareInfo::version()
+QString AbstractFirmwareInfo::version() const
 {
     return m_version;
 }

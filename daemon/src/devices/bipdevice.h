@@ -95,6 +95,7 @@ public:
     virtual QString deviceType() override;
     virtual QString deviceName() override;
     virtual bool operationRunning() override;
+    virtual void abortOperations() override;
 
     virtual void refreshInformation() override;
     virtual QString information(Info i) override;
@@ -107,10 +108,11 @@ public:
 
     QString softwareRevision();
     
-    Q_SLOT void authenticated(bool ready);
-
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
-    virtual void abortOperations() override;
+    virtual void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
+    virtual void startDownload() override;
+
+    Q_SLOT void authenticated(bool ready);
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);

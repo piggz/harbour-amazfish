@@ -83,16 +83,13 @@ QString AbstractDevice::connectionState() const
     return m_connectionState;
 }
 
-QString AbstractDevice::prepareFirmwareDownload(const QString &path)
+void AbstractDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
-   Q_UNUSED(path)
-   return "";
+   Q_UNUSED(info)
 }
 
-void AbstractDevice::startDownload(AbstractFirmwareInfo *info
-                                   )
+void AbstractDevice::startDownload()
 {
-    
 }
 
 void AbstractDevice::downloadSportsData()

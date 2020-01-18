@@ -65,9 +65,13 @@ public:
     virtual QString deviceType() = 0;
     virtual QString deviceName() = 0;
     virtual bool operationRunning() = 0;
-    
-    virtual QString prepareFirmwareDownload(const QString &path);
-    virtual void startDownload(AbstractFirmwareInfo *info);
+    virtual void abortOperations();
+
+    //Firmware handling
+    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) = 0; //Caller owns the pointer and should delete it
+    virtual void prepareFirmwareDownload(const AbstractFirmwareInfo* info);
+    virtual void startDownload();
+
     virtual void downloadSportsData();
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
@@ -76,10 +80,7 @@ public:
     virtual void rebootWatch();
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) = 0;
     virtual void incomingCall(const QString &caller) = 0;
-    virtual void abortOperations();
 
-    //Firmware handling
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) = 0; //Caller owns the pointer and should delete it
 
     //signals    
     Q_SIGNAL void message(const QString &text);

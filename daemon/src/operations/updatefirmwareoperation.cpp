@@ -3,14 +3,9 @@
 #include "typeconversion.h"
 #include <QApplication>
 
-UpdateFirmwareOperation::UpdateFirmwareOperation(const QString &path, QBLEService *service) : AbstractOperation(service)
+UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info)
 {
-    qDebug() << "Sending file " << path;
-    QFile file(path);
-    if (!file.open(QIODevice::ReadOnly)) return;
-    m_fwBytes = file.readAll();
-
-    m_info = new BipFirmwareInfo(m_fwBytes);
+    qDebug() << "Sending file";
 }
 
 void UpdateFirmwareOperation::start()

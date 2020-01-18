@@ -29,21 +29,18 @@ void BipFirmwareService::characteristicChanged(const QString &characteristic, co
     }
 }
 
-QString BipFirmwareService::prepareFirmwareDownload(const QString &path)
+void BipFirmwareService::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
     if (!m_updateFirmware) {
-        m_updateFirmware = new UpdateFirmwareOperation(path, this);
-        return m_updateFirmware->version();
+        m_updateFirmware = new UpdateFirmwareOperation(info, this);
     } else {
         if (m_operationRunning == 1) {
             emit message(tr("An operation is currently running, please try later"));
         } else {
             delete m_updateFirmware;
-            m_updateFirmware = new UpdateFirmwareOperation(path, this);
-            return m_updateFirmware->version();
+            m_updateFirmware = new UpdateFirmwareOperation(info, this);
         }
     }
-    return QString();
 }
 
 void BipFirmwareService::startDownload()

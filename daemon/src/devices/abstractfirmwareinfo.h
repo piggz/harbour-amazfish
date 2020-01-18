@@ -24,7 +24,7 @@ public:
         Watchface = 8
     };
 
-    QString version();
+    QString version() const;
     Type type() const;
     uint16_t crc16() const;
     virtual bool supportedOnDevice(const QString &device) const = 0;

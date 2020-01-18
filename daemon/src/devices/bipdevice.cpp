@@ -193,6 +193,22 @@ AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes)
     return new BipFirmwareInfo(bytes);
 }
 
+void BipDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
+{
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    if (fw){
+        fw->prepareFirmwareDownload(info);
+    }
+}
+
+void BipDevice::startDownload()
+{
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    if (fw){
+        fw->startDownload();
+    }
+}
+
 void BipDevice::abortOperations()
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));

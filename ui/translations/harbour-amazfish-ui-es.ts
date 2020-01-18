@@ -92,6 +92,10 @@
         <source>File type/version: </source>
         <translation>Tipo de archivo/versión: </translation>
     </message>
+    <message>
+        <source>File not supported on this device</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DebugInfo</name>
