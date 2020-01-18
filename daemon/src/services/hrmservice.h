@@ -3,7 +3,7 @@
 
 #include "qble/qbleservice.h"
 #include "settingsmanager.h"
-#include "devices/abstractdevice.h"
+#include "abstractdevice.h"
 
 /*
 {0000180d-0000-1000-8000-00805f9b34fb} Heart rate service

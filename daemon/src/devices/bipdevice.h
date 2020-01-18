@@ -109,6 +109,9 @@ public:
     
     Q_SLOT void authenticated(bool ready);
 
+    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    virtual void abortOperations() override;
+
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     Q_SLOT void handleButtonPressed();

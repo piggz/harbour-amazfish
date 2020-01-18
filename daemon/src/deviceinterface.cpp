@@ -139,11 +139,6 @@ HRMService *DeviceInterface::hrmService() const
     return qobject_cast<HRMService*>(m_device->service(HRMService::UUID_SERVICE_HRM));
 }
 
-BipFirmwareService *DeviceInterface::firmwareService() const
-{
-    return qobject_cast<BipFirmwareService*>(m_device->service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-}
-
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
@@ -406,15 +401,12 @@ void DeviceInterface::onConnectionStateChanged()
         }
 
         sendBufferedNotifications();
+
+        //TODO this enables music controls
         miBandService()->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, QByteArray("\x01\x00\x01\x00\x00\x00\x01\x00", 8));
     } else {
         //Terminate running operations
-        if (miBandService()) {
-            miBandService()->abortOperations();
-        }
-        if (firmwareService()) {
-            firmwareService()->abortOperations();
-        }
+        m_device->abortOperations();
     }
     emit connectionStateChanged();
 }
@@ -451,18 +443,30 @@ void DeviceInterface::sendBufferedNotifications()
 QString DeviceInterface::prepareFirmwareDownload(const QString &path)
 {
     if (!operationRunning()) {
-        if (firmwareService()) {
-            return firmwareService()->prepareFirmwareDownload(path);
+        if (m_firmwareInfo) {
+            delete m_firmwareInfo;
         }
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly)) {
+            return QString();
+        }
+        m_firmwareInfo = m_device->firmwareInfo(file.readAll());
+        return m_firmwareInfo->version();
+
+        //if (firmwareService()) {
+        //   return firmwareService()->prepareFirmwareDownload(path);
+        //}
     }
     return QString();
 }
 
-void DeviceInterface::startDownload()
+bool DeviceInterface::startDownload()
 {
-    if (firmwareService()) {
-        firmwareService()->startDownload();
+    if (!m_firmwareInfo->supportedOnDevice(m_device->deviceName())) {
+        return false;
     }
+    m_device->startDownload(m_firmwareInfo);
+    return true;
 }
 
 bool DeviceInterface::operationRunning()

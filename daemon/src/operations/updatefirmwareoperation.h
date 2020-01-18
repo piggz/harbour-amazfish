@@ -2,7 +2,7 @@
 #define UPDATEFIRMWAREOPERATION_H
 
 #include "abstractoperation.h"
-#include "huamifirmwareinfo.h"
+#include "bipfirmwareinfo.h"
 
 class UpdateFirmwareOperation : public AbstractOperation
 {
@@ -15,7 +15,7 @@ public:
 
     QString version();
 private:
-    HuamiFirmwareInfo *m_info = nullptr;
+    BipFirmwareInfo *m_info = nullptr;
     QByteArray m_fwBytes;
 
     bool sendFwInfo();

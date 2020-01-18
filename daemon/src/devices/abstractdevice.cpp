@@ -89,7 +89,8 @@ QString AbstractDevice::prepareFirmwareDownload(const QString &path)
    return "";
 }
 
-void AbstractDevice::startDownload()
+void AbstractDevice::startDownload(AbstractFirmwareInfo *info
+                                   )
 {
     
 }
@@ -121,6 +122,11 @@ void AbstractDevice::applyDeviceSetting(Settings s)
 }
 
 void AbstractDevice::rebootWatch()
+{
+
+}
+
+void AbstractDevice::abortOperations()
 {
 
 }

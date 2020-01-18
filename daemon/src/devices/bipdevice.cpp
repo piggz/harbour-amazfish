@@ -1,4 +1,6 @@
 #include "bipdevice.h"
+#include "bipfirmwareinfo.h"
+
 #include <QtXml/QtXml>
 
 const char* BipDevice::UUID_SERVICE_ALERT_NOTIFICATION = AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION;
@@ -186,6 +188,23 @@ void BipDevice::authenticated(bool ready)
     }
 }
 
+AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes)
+{
+    return new BipFirmwareInfo(bytes);
+}
+
+void BipDevice::abortOperations()
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (mi){
+        mi->abortOperations();
+    }
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    if (fw){
+        fw->abortOperations();
+    }
+}
+
 void BipDevice::initialise()
 {
     setConnectionState("connected");
@@ -287,26 +306,29 @@ QString BipDevice::information(Info i)
     }
     
     switch(i) {
-        case INFO_SWVER:
+    case INFO_SWVER:
         return info->softwareRevision();
         break;
-        case INFO_HWVER:
+    case INFO_HWVER:
         return info->hardwareRevision();
         break;
-        case INFO_SERIAL:
+    case INFO_SERIAL:
         return info->serialNumber();
         break;
-        case INFO_SYSTEMID:
+    case INFO_SYSTEMID:
         return info->systemId();
         break;
-        case INFO_PNPID:
+    case INFO_PNPID:
         return info->pnpId();
         break;
-        case INFO_GPSVER:
+    case INFO_GPSVER:
         return mi->gpsVersion();
         break;
-        case INFO_BATTERY:
+    case INFO_BATTERY:
         return QString::number(mi->batteryInfo());
+        break;
+    case INFO_STEPS:
+        return QString::number(mi->steps());
         break;
     }    
     return QString();

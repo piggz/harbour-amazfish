@@ -1,33 +1,22 @@
-#ifndef HUAMIFIRMWAREINFO_H
-#define HUAMIFIRMWAREINFO_H
+#ifndef BipFirmwareInfo_H
+#define BipFirmwareInfo_H
 
 #include <QByteArray>
-#include <QObject>
 #include <QString>
 #include <QMap>
+#include "abstractfirmwareinfo.h"
 
-class HuamiFirmwareInfo : public QObject
+class BipFirmwareInfo : public AbstractFirmwareInfo
 {
-    Q_OBJECT
-    Q_ENUMS(Type)
-    
 public:
-    HuamiFirmwareInfo(const QByteArray &bytes);
+    BipFirmwareInfo(const QByteArray &bytes);
     
-    enum Type {
-    Invalid = -1,
-        Firmware = 0,
-        Font = 1,
-        Font_Latin = 11,
-        GPS = 3,
-        GPS_CEP = 4,
-        GPS_ALMANAC = 5,
-        Res = 2,
-        Res_Compressed = 130,
-        Watchface = 8
-    };
-    
-    
+    virtual bool supportedOnDevice(const QString &device) const override;
+
+protected:
+    virtual void populateCrcMap() override;
+    virtual void determineFirmwareType() override;
+    virtual void determineFirmwareVersion() override;
 
     const char RES_HEADER[5]{ // HMRES resources file (*.res)
             0x48, 0x4d, 0x52, 0x45, 0x53
@@ -81,25 +70,6 @@ public:
     const char GPS_CEP_HEADER[4]{ // probably wrong
             0x2a, 0x12, 0xa0, 0x02
     };
-    
-    int size();
-    QByteArray bytes();
-    QString version();
-    Type type() const;
-    uint16_t crc16() const;
-    
-private:
-    
-    QByteArray m_bytes;
-    uint16_t m_crc16;
-    Type m_type;
-    QString m_version;
-    QMap<uint16_t, QString> m_crcMap;
-
-    void populateCrcMap();
-    uint16_t calculateCRC16();
-    Type determineFirmwareType();
-    QString searchFirmwareVersion();
 };
 
-#endif // HUAMIFIRMWAREINFO_H
+#endif // BipFirmwareInfo_H

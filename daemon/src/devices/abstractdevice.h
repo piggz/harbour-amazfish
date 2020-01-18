@@ -4,12 +4,13 @@
 
 #include "qble/qbledevice.h"
 #include "weather/currentweather.h"
+#include "abstractfirmwareinfo.h"
 
 class AbstractDevice : public QBLEDevice
 {
     Q_OBJECT
 
-    public:
+public:
     enum Feature{
         FEATURE_HRM = 1,
         FEATURE_WEATHER,
@@ -66,7 +67,7 @@ class AbstractDevice : public QBLEDevice
     virtual bool operationRunning() = 0;
     
     virtual QString prepareFirmwareDownload(const QString &path);
-    virtual void startDownload();
+    virtual void startDownload(AbstractFirmwareInfo *info);
     virtual void downloadSportsData();
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
@@ -75,6 +76,10 @@ class AbstractDevice : public QBLEDevice
     virtual void rebootWatch();
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) = 0;
     virtual void incomingCall(const QString &caller) = 0;
+    virtual void abortOperations();
+
+    //Firmware handling
+    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) = 0; //Caller owns the pointer and should delete it
 
     //signals    
     Q_SIGNAL void message(const QString &text);

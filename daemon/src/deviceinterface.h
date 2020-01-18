@@ -1,6 +1,6 @@
 
-#ifndef BIPINTERFACE_H
-#define BIPINTERFACE_H
+#ifndef DEVICEINTERFACE_H
+#define DEVICEINTERFACE_H
 
 #include <QObject>
 #include <QtSql/QtSql>
@@ -14,6 +14,7 @@
 #include "qble/bluezadapter.h"
 
 #include "abstractdevice.h"
+#include "abstractfirmwareinfo.h"
 #include "notificationslistener.h"
 #include "voicecallhandler.h"
 #include "voicecallmanager.h"
@@ -38,36 +39,6 @@ class DeviceInterface : public QObject
 public:
     DeviceInterface();
     ~DeviceInterface();
-
-    //Copied from Abstract device due to QML
-    enum Info {
-        INFO_SWVER = 1,
-        INFO_HWVER,
-        INFO_SERIAL,
-        INFO_SYSTEMID,
-        INFO_PNPID,
-        INFO_GPSVER,
-        INFO_BATTERY,
-        INFO_STEPS,
-        INFO_HEARTRATE
-    };
-    Q_ENUM(Info);
-
-    enum Settings {
-        SETTING_USER_PROFILE,
-        SETTING_USER_GOAL,
-        SETTING_USER_ALERT_GOAL,
-        SETTING_USER_ALL_DAY_HRM,
-        SETTING_USER_HRM_SLEEP_DETECTION,
-        SETTING_USER_DISPLAY_ON_LIFT,
-        SETTING_ALARMS,
-        SETTING_DEVICE_DISPLAY_ITEMS,
-        SETTING_DEVICE_LANGUAGE,
-        SETTING_DEVICE_DATE,
-        SETTING_DEVICE_TIME,
-        SETTING_DEVICE_UNIT
-    };
-    Q_ENUM(Settings);
 
     struct WatchNotification
     {
@@ -95,7 +66,7 @@ public:
 
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
-    Q_INVOKABLE void startDownload();
+    Q_INVOKABLE bool startDownload();
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void downloadActivityData();
     Q_INVOKABLE void refreshInformation();
@@ -112,6 +83,7 @@ private:
     bool m_dbusRegistered = false;
     int m_lastBatteryLevel = 0;
     int m_lastAlertHash = 0;
+    AbstractFirmwareInfo *m_firmwareInfo = nullptr;
 
     BluezAdapter m_adapter;
     AbstractDevice *m_device = nullptr;
@@ -130,7 +102,6 @@ private:
     //TODO Minimise use of these funcitons
     MiBandService *miBandService() const;
     HRMService *hrmService() const;
-    BipFirmwareService *firmwareService() const;
     
     Q_SLOT void notificationReceived(const QString &appName, const QString &summary, const QString &body);
     Q_SLOT void onActiveVoiceCallChanged();

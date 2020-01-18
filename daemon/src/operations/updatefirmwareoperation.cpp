@@ -10,12 +10,12 @@ UpdateFirmwareOperation::UpdateFirmwareOperation(const QString &path, QBLEServic
     if (!file.open(QIODevice::ReadOnly)) return;
     m_fwBytes = file.readAll();
 
-    m_info = new HuamiFirmwareInfo(m_fwBytes);
+    m_info = new BipFirmwareInfo(m_fwBytes);
 }
 
 void UpdateFirmwareOperation::start()
 {
-    if (m_info->type() != HuamiFirmwareInfo::Invalid) {
+    if (m_info->type() != AbstractFirmwareInfo::Invalid) {
         BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
 
         m_service->enableNotification(serv->UUID_CHARACTERISTIC_FIRMWARE);
@@ -50,7 +50,7 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
             break;
         }
         case BipFirmwareService::COMMAND_FIRMWARE_CHECKSUM: {
-            if (m_info->type() == HuamiFirmwareInfo::Firmware) {
+            if (m_info->type() == AbstractFirmwareInfo::Firmware) {
                 m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_REBOOT));
             } else {
                 m_service->message(QObject::tr("Update operation complete"));
@@ -90,7 +90,7 @@ bool UpdateFirmwareOperation::sendFwInfo()
     int fwSize = m_fwBytes.size();
     QByteArray sizeBytes = TypeConversion::fromInt24(fwSize);
     int arraySize = 4;
-    bool isFirmwareCode = m_info->type() == HuamiFirmwareInfo::Firmware;
+    bool isFirmwareCode = m_info->type() == AbstractFirmwareInfo::Firmware;
     if (!isFirmwareCode) {
         arraySize++;
     }

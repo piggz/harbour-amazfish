@@ -36,6 +36,7 @@ INSTALLS += target \
 include(../qble/qble.pri)
 
 SOURCES += \
+    src/devices/abstractfirmwareinfo.cpp \
     src/devices/gtsdevice.cpp \
     src/qaesencryption.cpp \
     src/voicecallhandler.cpp \
@@ -58,7 +59,7 @@ SOURCES += \
     src/operations/updatefirmwareoperation.cpp \
     src/devices/abstractdevice.cpp \
     src/devices/bipdevice.cpp \
-    src/huamifirmwareinfo.cpp \
+    src/devices/bipfirmwareinfo.cpp \
     src/dbushrm.cpp \
     src/activitysummary.cpp \
     src/deviceinterface.cpp \
@@ -80,6 +81,7 @@ DISTFILES += \
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
+    src/devices/abstractfirmwareinfo.h \
     src/devices/gtsdevice.h \
     src/qaesencryption.h \
     src/notificationslistener.h \
@@ -91,7 +93,7 @@ HEADERS += \
     src/deviceinterface.h \
     src/datasource.h \
     src/activitykind.h \
-    src/huamifirmwareinfo.h \
+    src/devices/bipfirmwareinfo.h \
     src/dbushrm.h \
     src/activitysummary.h \ 
     src/activitysample.h \
