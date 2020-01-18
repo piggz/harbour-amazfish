@@ -100,7 +100,7 @@ public:
 
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
-    Q_INVOKABLE void startDownload();
+    Q_INVOKABLE bool startDownload();
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void downloadActivityData();
     Q_INVOKABLE void refreshInformation();

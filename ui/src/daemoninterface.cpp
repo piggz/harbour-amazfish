@@ -138,12 +138,13 @@ QString DaemonInterface::prepareFirmwareDownload(const QString &path)
     return reply;
 }
 
-void DaemonInterface::startDownload()
+bool DaemonInterface::startDownload()
 {
     if (!iface->isValid()) {
-        return;
+        return false;
     }
-    iface->call("startDownload");
+    QDBusReply<bool> reply = iface->call("startDownload");
+    return reply;
 }
 
 void DaemonInterface::downloadSportsData()

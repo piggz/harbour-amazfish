@@ -17,9 +17,6 @@ Page {
     SilicaFlickable {
         anchors.fill: parent
 
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-
-
         // Tell SilicaFlickable the height of its content.
         contentHeight: column.height
 
@@ -44,7 +41,6 @@ Page {
                 value: selectedFile ? selectedFile : qsTr("None")
                 onClicked: pageStack.push(filePickerPage)
                 enabled: DaemonInterfaceInstance.connectionState === "authenticated"
-
             }
 
             Label {
@@ -58,7 +54,9 @@ Page {
                 text: qsTr("Send file")
                 enabled: selectionMade && DaemonInterfaceInstance.connectionState === "authenticated"
                 onClicked: {
-                    DaemonInterfaceInstance.startDownload();
+                    if (!DaemonInterfaceInstance.startDownload()) {
+                        fileVersion = qsTr("File not supported on this device");
+                    }
                 }
             }
 
@@ -76,8 +74,6 @@ Page {
                 text: "0%"
                 horizontalAlignment: Text.AlignHCenter
             }
-
-
         }
     }
 
