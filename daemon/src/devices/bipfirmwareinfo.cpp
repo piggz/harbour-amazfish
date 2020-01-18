@@ -17,6 +17,8 @@ BipFirmwareInfo::BipFirmwareInfo(const QByteArray &bytes)
 
 void BipFirmwareInfo::determineFirmwareType() {
     qDebug() << "Determining firmware type";
+    m_type = Invalid;
+
     if (m_bytes.startsWith(QByteArray(RES_HEADER, sizeof(RES_HEADER))) || m_bytes.startsWith(QByteArray(NEWRES_HEADER, sizeof(NEWRES_HEADER)))) {
         if (m_bytes.length() > 700000) { // dont know how to distinguish from Cor .res
             m_type = Invalid;
@@ -54,7 +56,6 @@ void BipFirmwareInfo::determineFirmwareType() {
             m_type = Font_Latin;
         }
     }
-    m_type = Invalid;
 }
 
 bool BipFirmwareInfo::supportedOnDevice(const QString &device) const
