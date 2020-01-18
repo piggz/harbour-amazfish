@@ -5,7 +5,6 @@
 
 UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info)
 {
-    qDebug() << "Sending file";
 }
 
 void UpdateFirmwareOperation::start()

@@ -10,7 +10,7 @@ const char* BipDevice::UUID_SERVICE_MIBAND = MiBandService::UUID_SERVICE_MIBAND;
 const char* BipDevice::UUID_SERVICE_MIBAND2 = MiBand2Service::UUID_SERVICE_MIBAND2;
 const char* BipDevice::UUID_SERVICE_FIRMWARE = BipFirmwareService::UUID_SERVICE_FIRMWARE;
 
-BipDevice::BipDevice()
+BipDevice::BipDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
     connect(this, &QBLEDevice::propertiesChanged, this, &BipDevice::onPropertiesChanged);
 
@@ -28,11 +28,6 @@ bool BipDevice::supportsFeature(Feature f)
 QString BipDevice::deviceType()
 {
     return "amazfitbip";
-}
-
-QString BipDevice::deviceName()
-{
-    return "Amazfit Bip";
 }
 
 bool BipDevice::operationRunning()

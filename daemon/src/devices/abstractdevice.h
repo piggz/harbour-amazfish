@@ -52,7 +52,7 @@ public:
     };
     Q_ENUM(Settings);
 
-    explicit AbstractDevice(QObject *parent = 0);
+    explicit AbstractDevice(const QString &pairedName, QObject *parent = 0);
     
     virtual QString pair() override;
     virtual void pairAsync() override;
@@ -63,7 +63,7 @@ public:
 
     virtual bool supportsFeature(Feature f) = 0;
     virtual QString deviceType() = 0;
-    virtual QString deviceName() = 0;
+    QString deviceName();
     virtual bool operationRunning() = 0;
     virtual void abortOperations();
 
@@ -103,7 +103,7 @@ protected:
 
 private:
     void reconnectionTimer();
-
+    QString m_pairedName;
 };
 
 #endif

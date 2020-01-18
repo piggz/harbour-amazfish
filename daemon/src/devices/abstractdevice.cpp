@@ -2,9 +2,10 @@
 
 #include <QString>
     
-AbstractDevice::AbstractDevice(QObject *parent) : QBLEDevice(parent)
+AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBLEDevice(parent)
 {
     setConnectionState("disconnected");
+    m_pairedName = pairedName;
     m_reconnectTimer = new QTimer(this);
     m_reconnectTimer->setInterval(60000);
     connect(m_reconnectTimer, &QTimer::timeout, this, &AbstractDevice::reconnectionTimer);
@@ -81,6 +82,11 @@ void AbstractDevice::setConnectionState(const QString &state)
 QString AbstractDevice::connectionState() const
 {
     return m_connectionState;
+}
+
+QString AbstractDevice::deviceName()
+{
+    return m_pairedName;
 }
 
 void AbstractDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)

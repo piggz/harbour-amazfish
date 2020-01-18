@@ -82,7 +82,7 @@ class BipDevice : public AbstractDevice
 {
     Q_OBJECT
 public:
-    BipDevice();
+    BipDevice(const QString &pairedName, QObject *parent = 0);
     
     static const char* UUID_SERVICE_ALERT_NOTIFICATION;
     static const char* UUID_SERVICE_MIBAND2;
@@ -93,7 +93,6 @@ public:
     
     virtual bool supportsFeature(Feature f) override;
     virtual QString deviceType() override;
-    virtual QString deviceName() override;
     virtual bool operationRunning() override;
     virtual void abortOperations() override;
 
@@ -129,6 +128,7 @@ private:
     QString m_softwareRevision;
     int m_buttonPresses = 0;
     QTimer *m_keyPressTimer = nullptr;
+    QString pairedName;
 };
 
 #endif // BIPDEVICE_H

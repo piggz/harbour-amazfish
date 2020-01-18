@@ -7,8 +7,12 @@
 class GtsDevice : public BipDevice
 {
 public:
-    GtsDevice();
+    GtsDevice(const QString &pairedName, QObject *parent = 0);
+
+    virtual QString deviceType() override;
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
+
+    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
 private:
     void initialise();
@@ -16,6 +20,8 @@ private:
 
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 
+private:
+    QString pairedName;
 };
 
 #endif // GTSDEVICE_H

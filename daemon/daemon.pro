@@ -38,6 +38,7 @@ include(../qble/qble.pri)
 SOURCES += \
     src/devices/abstractfirmwareinfo.cpp \
     src/devices/gtsdevice.cpp \
+    src/devices/gtsfirmwareinfo.cpp \
     src/qaesencryption.cpp \
     src/voicecallhandler.cpp \
     src/voicecallmanager.cpp \
@@ -83,6 +84,7 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 HEADERS += \
     src/devices/abstractfirmwareinfo.h \
     src/devices/gtsdevice.h \
+    src/devices/gtsfirmwareinfo.h \
     src/qaesencryption.h \
     src/notificationslistener.h \
     src/voicecallhandler.h \

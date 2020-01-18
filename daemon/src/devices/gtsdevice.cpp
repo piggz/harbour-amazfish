@@ -1,9 +1,15 @@
 #include "gtsdevice.h"
+#include "gtsfirmwareinfo.h"
 #include <QtXml/QtXml>
 
-GtsDevice::GtsDevice()
+GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
 {
     qDebug() << "Creating GTS Device";
+}
+
+QString GtsDevice::deviceType()
+{
+    return "amazfitgts";
 }
 
 void GtsDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
@@ -141,4 +147,9 @@ void GtsDevice::parseServices()
             }
         }
     }
+}
+
+AbstractFirmwareInfo *GtsDevice::firmwareInfo(const QByteArray &bytes)
+{
+    return new GtsFirmwareInfo(bytes);
 }
