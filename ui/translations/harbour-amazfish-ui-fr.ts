@@ -12,7 +12,7 @@
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
-        <translation>Activé</translation>
+        <translation>Activée</translation>
     </message>
     <message>
         <source>Mon</source>
