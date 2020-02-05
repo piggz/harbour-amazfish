@@ -46,6 +46,7 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
         qDebug() << "Abort signalled from operation";
         return true;
     }
+    qDebug() << "AbstractFetchOperation::handleMetaData:" << value;
     if (value.length() == 15) {
         // first two bytes are whether our request was accepted
         if (value.mid(0, 3) == QByteArray(MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS, 3)) {
@@ -59,6 +60,8 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 
             qDebug() << "About to transfer data from " << startDate;
             m_service->message(QObject::tr("About to transfer data from ") + startDate.toString());
+            //Send log read command
+            m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
 
         } else {
             qDebug() << "Unexpected activity metadata: " << value;
@@ -73,6 +76,10 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
             qDebug() << "No data left to fetch";
             m_service->message(QObject::tr("No data to transfer"));
             return true;
+        } else if (value == QByteArray(MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS, 3)) {
+            qDebug() << "Activity start date success";
+            //Send log read command
+            m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
         } else {
             qDebug() << "Unexpected activity metadata: " << value;
         }
