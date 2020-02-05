@@ -167,7 +167,6 @@ void BipDevice::authenticated(bool ready)
             mi->setEnableDisplayOnLiftWrist();
             mi->setRotateWristToSwitchInfo(true);
             mi->setInactivityWarnings();
-            mi->setAlarms();
             mi->setDisconnectNotification();
         }
 
