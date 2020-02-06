@@ -37,6 +37,15 @@ Page {
             }
 
             DeviceButton {
+                txt: qsTr("Amazfit Bip Lite")
+                icn: "../pics/devices/amazfit-bip.png"
+
+                onClicked: {
+                    pushPairPage("Amazfit Bip Lite", true);
+                }
+            }
+
+            DeviceButton {
                 txt: qsTr("Amazfit GTS")
                 icn: "../pics/devices/amazfit-gts.png"
 

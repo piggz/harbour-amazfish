@@ -1,6 +1,7 @@
 #include "devicefactory.h"
 #include "bipdevice.h"
 #include "gtsdevice.h"
+#include "biplitedevice.h"
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 {
@@ -11,6 +12,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 
     if (deviceName == "Amazfit GTS") {
         return new GtsDevice(deviceName);
+    }
+
+    if (deviceName == "Amazfit Bip Lite") {
+        return new BipLiteDevice(deviceName);
     }
 
     qDebug() << "DeviceFactory::createDevice: no suitable devices found, creating a Bip device as default";

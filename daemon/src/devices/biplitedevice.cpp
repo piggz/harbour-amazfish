@@ -1,28 +1,20 @@
-#include "gtsdevice.h"
-#include "gtsfirmwareinfo.h"
+#include "biplitedevice.h"
+#include "biplitefirmwareinfo.h"
 #include <QtXml/QtXml>
 
-GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
+BipLiteDevice::BipLiteDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
 {
-    qDebug() << "Creating GTS Device";
+    qDebug() << "Creating Bip Lite Device";
 }
 
-QString GtsDevice::deviceType()
+QString BipLiteDevice::deviceType()
 {
-    return "amazfitgts";
+    return "amazfitbiplite";
 }
 
-void GtsDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
+void BipLiteDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
-    if (mi) {
-        mi->sendAlert(sender, subject, message);
-    }
-}
-
-void GtsDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
-{
-    qDebug() << "GtsDevice::onPropertiesChanged:" << interface << map << list;
+    qDebug() << "BipLiteDevice::onPropertiesChanged:" << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
         m_reconnectTimer->start();
@@ -52,7 +44,7 @@ void GtsDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
 
 }
 
-void GtsDevice::initialise()
+void BipLiteDevice::initialise()
 {
     setConnectionState("connected");
     parseServices();
@@ -66,7 +58,7 @@ void GtsDevice::initialise()
 
         connect(mi, &MiBandService::message, this, &BipDevice::message, Qt::UniqueConnection);
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
-        connect(mi, &MiBandService::buttonPressed, this, &GtsDevice::handleButtonPressed, Qt::UniqueConnection);
+        connect(mi, &MiBandService::buttonPressed, this, &BipLiteDevice::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
     }
 
@@ -99,9 +91,9 @@ void GtsDevice::initialise()
 }
 
 
-void GtsDevice::parseServices()
+void BipLiteDevice::parseServices()
 {
-    qDebug() << "GtsDevice::parseServices";
+    qDebug() << "BipLiteDevice::parseServices";
 
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
@@ -149,7 +141,7 @@ void GtsDevice::parseServices()
     }
 }
 
-AbstractFirmwareInfo *GtsDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *BipLiteDevice::firmwareInfo(const QByteArray &bytes)
 {
-    return new GtsFirmwareInfo(bytes);
+    return new BipLiteFirmwareInfo(bytes);
 }

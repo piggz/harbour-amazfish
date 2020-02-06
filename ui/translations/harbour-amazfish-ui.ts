@@ -299,11 +299,16 @@
     </message>
     <message>
         <location filename="../qml/pages/PairSelectDeviceType.qml" line="40"/>
-        <source>Amazfit GTS</source>
+        <source>Amazfit Bip Lite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/PairSelectDeviceType.qml" line="49"/>
+        <source>Amazfit GTS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairSelectDeviceType.qml" line="58"/>
         <source>MI Band 2</source>
         <translation type="unfinished"></translation>
     </message>

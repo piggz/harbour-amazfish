@@ -37,6 +37,8 @@ include(../qble/qble.pri)
 
 SOURCES += \
     src/devices/abstractfirmwareinfo.cpp \
+    src/devices/biplitedevice.cpp \
+    src/devices/biplitefirmwareinfo.cpp \
     src/devices/gtsdevice.cpp \
     src/devices/gtsfirmwareinfo.cpp \
     src/qaesencryption.cpp \
@@ -83,6 +85,8 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
     src/devices/abstractfirmwareinfo.h \
+    src/devices/biplitedevice.h \
+    src/devices/biplitefirmwareinfo.h \
     src/devices/gtsdevice.h \
     src/devices/gtsfirmwareinfo.h \
     src/qaesencryption.h \

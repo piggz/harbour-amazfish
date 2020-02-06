@@ -247,6 +247,10 @@
         <source>MI Band 2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Amazfit Bip Lite</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-alarms</name>
