@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>File not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Filformatet stöds inte på denna enhet</translation>
     </message>
 </context>
 <context>
@@ -218,34 +218,34 @@
     </message>
     <message>
         <source>Pull down to start scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Dra neråt för att starta skanning</translation>
     </message>
     <message>
         <source>Pair Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Parkoppla enhet</translation>
     </message>
     <message>
         <source>Save Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Spara nyckel</translation>
     </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
     <message>
         <source>Select Device Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj enhetstyp</translation>
     </message>
     <message>
         <source>Amazfit Bip</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfit Bip</translation>
     </message>
     <message>
         <source>Amazfit GTS</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfit GTS</translation>
     </message>
     <message>
         <source>MI Band 2</source>
-        <translation type="unfinished"></translation>
+        <translation>MI Band 2</translation>
     </message>
 </context>
 <context>
