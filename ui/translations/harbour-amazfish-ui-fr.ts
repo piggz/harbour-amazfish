@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es">
+<TS version="2.1" language="fr_FR">
 <context>
     <name>AddCityDialog</name>
     <message>
         <source>Set Location</source>
-        <translation>Establecer ubicación</translation>
+        <translation>Définir la localisation</translation>
     </message>
 </context>
 <context>
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
-        <translation>Habilitado</translation>
+        <translation>Activée</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -24,84 +24,84 @@
     </message>
     <message>
         <source>Wed</source>
-        <translation>Mié</translation>
+        <translation>Mer</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation>Jue</translation>
+        <translation>Jeu</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation>Vie</translation>
+        <translation>Ven</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation>Sáb</translation>
+        <translation>Sam</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation>Dom</translation>
+        <translation>Dim</translation>
     </message>
 </context>
 <context>
     <name>AnalysisPage</name>
     <message>
         <source>Download Data</source>
-        <translation>Descargar datos</translation>
+        <translation>Télécharges les données</translation>
     </message>
     <message>
         <source>Analysis</source>
-        <translation>Análisis</translation>
+        <translation>Analyse</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation>Frecuencia cardiaca</translation>
+        <translation>Rythme cardiaque</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation>Pasos</translation>
+        <translation>Pas</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation>Intensidad</translation>
+        <translation>Intensité</translation>
     </message>
 </context>
 <context>
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation>Enviar archivo</translation>
+        <translation>Envoyer un fichier</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation>Descargar archivo</translation>
+        <translation>Télécharger un fichier</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Selecciona archivo a descargar.</translation>
+        <translation>Sélectionner un fichier à télécharger.</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Ninguno</translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation>Elige archivo</translation>
+        <translation>Choisir fichier</translation>
     </message>
     <message>
         <source>File type/version: </source>
-        <translation>Tipo de archivo/versión: </translation>
+        <translation>Type/version du fichier: </translation>
     </message>
     <message>
         <source>File not supported on this device</source>
-        <translation>Archivo no soportado en este dispositivo</translation>
+        <translation>Fichier non supporté sur cet appareil</translation>
     </message>
 </context>
 <context>
     <name>DebugInfo</name>
     <message>
         <source>Refresh</source>
-        <translation>Actualizar</translation>
+        <translation>Actualiser</translation>
     </message>
     <message>
         <source>AmazFish</source>
@@ -109,55 +109,55 @@
     </message>
     <message>
         <source>Address: </source>
-        <translation>Dirección: </translation>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation>Nº Serie: </translation>
+        <translation>Numéro de série:</translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation>Rev. hardware: </translation>
+        <translation>Révision matérielle:</translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation>Rev. software: </translation>
+        <translation>Révision logicielle:</translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation>Estado de conexión: </translation>
+        <translation>Status de la connexion:</translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation>Ver. GPS: </translation>
+        <translation>GPS Ver:</translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation>Test de notificación</translation>
+        <translation>Notification de test</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation>Test de email</translation>
+        <translation>Courriel de test</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation>Test de llamada</translation>
+        <translation>Appel de test</translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation>Obtener registro de depuración</translation>
+        <translation>Récupérer le fichier de débogage</translation>
     </message>
     <message>
         <source>Test Popup</source>
-        <translation>Test de ventana emergente</translation>
+        <translation>Popup de test</translation>
     </message>
     <message>
         <source>Send Weather</source>
-        <translation>Enviar Tiempo</translation>
+        <translation">Envoyer la météo</translation>
     </message>
     <message>
         <source>A:</source>
-        <translation>A:</translation>
+        <translation">A:</translation>
     </message>
     <message>
         <source>S:</source>
@@ -168,23 +168,23 @@
     <name>FirstPage</name>
     <message>
         <source>Pair with watch</source>
-        <translation>Vincular reloj</translation>
+        <translation>Appairer avec la montre</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation>Descargar archivo</translation>
+        <translation>Télécharger fichier</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ajustes</translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
-        <translation>Desconectar reloj</translation>
+        <translation>Déconnexion de la montre</translation>
     </message>
     <message>
         <source>Connect to watch</source>
-        <translation>Conectar reloj</translation>
+        <translation>Connexion à la montre</translation>
     </message>
     <message>
         <source>AmazFish</source>
@@ -192,48 +192,48 @@
     </message>
     <message>
         <source>Start Service</source>
-        <translation>Iniciar servicio</translation>
+        <translation>Démarrer le service</translation>
     </message>
     <message>
         <source>Enable Service</source>
-        <translation>Habilitar servicio</translation>
+        <translation type>Activer le service</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation>No hay datos</translation>
+        <translation>Aucune donnée</translation>
     </message>
 </context>
 <context>
     <name>PairPage</name>
     <message>
         <source>Start scan</source>
-        <translation>Iniciar escaneo</translation>
+        <translation>Démarrer le scan</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation>Intentar de nuevo</translation>
+        <translation>Essayer encore</translation>
     </message>
     <message>
         <source>Pull down to start scan</source>
-        <translation>Tira hacia abajo para iniciar escaneo</translation>
+        <translation>Glisser vers le bas pour démarrer le scan</translation>
     </message>
     <message>
         <source>Pair Device</source>
-        <translation>Vincular dispositivo</translation>
+        <translation>Appairer un appareil</translation>
     </message>
     <message>
         <source>Save Key</source>
-        <translation>Guardar clave</translation>
+        <translation>Sauvegarder la clé</translation>
     </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
     <message>
         <source>Select Device Type</source>
-        <translation>Selecciona tipo de dispositivo</translation>
+        <translation>Sélectionner le type d'appareil</translation>
     </message>
     <message>
         <source>Amazfit Bip</source>
@@ -247,133 +247,129 @@
         <source>MI Band 2</source>
         <translation>MI Band 2</translation>
     </message>
-    <message>
-        <source>Amazfit Bip Lite</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation>Alarmas</translation>
+        <translation>Alarmes</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Guardar</translation>
+        <translation>Sauvegarder les paramètres</translation>
     </message>
     <message>
         <source>Alarm 1</source>
-        <translation>Alarma 1</translation>
+        <translation>Alarme 1</translation>
     </message>
     <message>
         <source>Alarm 2</source>
-        <translation>Alarma 2</translation>
+        <translation>Alarme 2</translation>
     </message>
     <message>
         <source>Alarm 3</source>
-        <translation>Alarma 3</translation>
+        <translation>Alarme 3</translation>
     </message>
     <message>
         <source>Alarm 4</source>
-        <translation>Alarma 4</translation>
+        <translation>Alarme 4</translation>
     </message>
     <message>
         <source>Alarm 5</source>
-        <translation>Alarma 5</translation>
+        <translation>Alarme 5</translation>
     </message>
 </context>
 <context>
     <name>Settings-app</name>
     <message>
         <source>Device Settings</source>
-        <translation>Ajustes de dispositivo</translation>
+        <translation>Paramètres de l'appareil</translation>
     </message>
     <message>
         <source>Notify on connect</source>
-        <translation>Notificar al conectar</translation>
+        <translation>Notification lors de la connexion</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Guardar</translation>
+        <translation>Sauvegarder les paramètres</translation>
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation>Actualizar Tiempo cada (</translation>
+        <translation>Rafraicher la météo toutes les (</translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation>) minutos</translation>
+        <translation>) minutes</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
-        <translation>Sincronizar datos de actividad cada hora</translation>
+        <translation>Synchroniser les données d'activité toutes les heures</translation>
     </message>
     <message>
         <source>Low battery notification</source>
-        <translation>Notificación de batería baja</translation>
+        <translation>Notification de batterie faible</translation>
     </message>
 </context>
 <context>
     <name>Settings-bip-shortcuts</name>
     <message>
         <source>BIP Display Items</source>
-        <translation>Elementos de visualización BIP</translation>
+        <translation>Items affichés sur la BIP</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Estado</translation>
+        <translation>Statut</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>Actividad</translation>
+        <translation>Activité</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation>Clima</translation>
+        <translation>Météo</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation>Alarma</translation>
+        <translation>Alarme</translation>
     </message>
     <message>
         <source>Timer</source>
-        <translation>Temporizador</translation>
+        <translation>Minuteur</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation>Brújula</translation>
+        <translation>Compas</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ajustes</translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation>Alipay</translation>
+        <translation>AliPay</translation>
     </message>
     <message>
         <source>Weather Shortcut</source>
-        <translation>Atajo a clima</translation>
+        <translation>Raccourci météo</translation>
     </message>
     <message>
         <source>AliPay Shortcut</source>
-        <translation>Atajo a AliPay</translation>
+        <translation>Raccourci AliPay</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Sauvegarder les paramètres</translation>
     </message>
 </context>
 <context>
     <name>Settings-device</name>
     <message>
         <source>Device Settings</source>
-        <translation>Ajustes del dispositivo</translation>
+        <translation>Paramètres de l'appareil</translation>
     </message>
     <message>
         <source>en_US</source>
-        <translation>in_US</translation>
+        <translation>en_US</translation>
     </message>
     <message>
         <source>es_ES</source>
@@ -381,55 +377,59 @@
     </message>
     <message>
         <source>zh_CN</source>
-        <translation>cs_CN</translation>
+        <translation>zh_CN</translation>
     </message>
     <message>
         <source>zh_TW</source>
-        <translation>cs_TW</translation>
+        <translation>zh_TW</translation>
+    </message>
+    <message>
+        <source>fr_FR/source>
+        <translation>fr_FR</translation>
     </message>
     <message>
         <source>Date Display</source>
-        <translation>Visualizar datos</translation>
+        <translation>Affichage de la date</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Tiempo</translation>
+        <translation>Heure</translation>
     </message>
     <message>
         <source>Date/Time</source>
-        <translation>Datos/Tiempo</translation>
+        <translation>Date/Heure</translation>
     </message>
     <message>
         <source>Time Format</source>
-        <translation>Formato de hora</translation>
+        <translation>Format de l'heure</translation>
     </message>
     <message>
         <source>12hr</source>
-        <translation>12hr</translation>
+        <translation>12 heures</translation>
     </message>
     <message>
         <source>24hr</source>
-        <translation>24hr</translation>
+        <translation>24 heures</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Sauvegarder les paramètres</translation>
     </message>
     <message>
         <source>Distance Unit</source>
-        <translation>Unidad de distancia</translation>
+        <translation>Unité de distance</translation>
     </message>
     <message>
         <source>Metric</source>
-        <translation>Métrico</translation>
+        <translation>Métrique</translation>
     </message>
     <message>
         <source>Imperial</source>
-        <translation>Imperial</translation>
+        <translation>Impérial</translation>
     </message>
     <message>
         <source>BIP Display Items</source>
-        <translation>Elementos de visualización BIP</translation>
+        <translation>Items BIP à afficher</translation>
     </message>
     <message>
         <source>ru_RU</source>
@@ -437,7 +437,7 @@
     </message>
     <message>
         <source>Language</source>
-        <translation>Idioma</translation>
+        <translation>Langue</translation>
     </message>
     <message>
         <source>de_DE</source>
@@ -457,174 +457,174 @@
     </message>
     <message>
         <source>Disconnect Notification</source>
-        <translation>Notificación al desconectar</translation>
+        <translation>Notification de déconnexion</translation>
     </message>
 </context>
 <context>
     <name>Settings-menu</name>
     <message>
         <source>Settings Menu</source>
-        <translation>Menú de ajustes</translation>
+        <translation>Menu de paramètres</translation>
     </message>
     <message>
         <source>User Settings</source>
-        <translation>Ajustes de usuario</translation>
+        <translation>Paramètres utilisateur</translation>
     </message>
     <message>
         <source>Device Settings</source>
-        <translation>Ajustes de dispositivo</translation>
+        <translation>Paramètre de l'appareil</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation>Ajustes de aplicación</translation>
+        <translation>Paramètres de l'application</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation>Alarmas</translation>
+        <translation>Alarmes</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation>Donar</translation>
+        <translation>Faire un don</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation>Tiempo</translation>
+        <translation>Météo</translation>
     </message>
     <message>
         <source>Start Service</source>
-        <translation>Iniciar servicio</translation>
+        <translation>Démarrer le service</translation>
     </message>
     <message>
         <source>Stop Service</source>
-        <translation>Detener servicio</translation>
+        <translation>Arrêter le service</translation>
     </message>
     <message>
         <source>Enable Service</source>
-        <translation>Habilitar servicio</translation>
+        <translation>Activer le service</translation>
     </message>
     <message>
         <source>Disable Service</source>
-        <translation>Deshabilitar servicio</translation>
+        <translation>Désactiver le service</translation>
     </message>
     <message>
         <source>Debug Info</source>
-        <translation>Info depuración</translation>
+        <translation>Information de débogage</translation>
     </message>
 </context>
 <context>
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation>Ajustes de perfil</translation>
+        <translation>Paramètres du profil</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nombre:</translation>
+        <translation>Nom:</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Fecha de nacimiento</translation>
+        <translation>Date de naissance</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Sexo</translation>
+        <translation>Sexe</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Hombre</translation>
+        <translation>Homme</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Mujer</translation>
+        <translation>Femme</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation>Altura (cm): </translation>
+        <translation>Taille (cm):</translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation>Peso(Kg): </translation>
+        <translation>Poids (kg):</translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation>Mano donde se ubica</translation>
+        <translation>Poignet où la montre est portée</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Izquierda</translation>
+        <translation>Gauche</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Derecha</translation>
+        <translation>Droit</translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation>Mostrar al levantar muñeca</translation>
+        <translation>Activer l'affichage quand le poignet est levé</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation>Meta (pasos): </translation>
+        <translation>Cible (pas):</translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation>Alerta al alcanzar meta</translation>
+        <translation>Alerte lorsque la cible est atteinte</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation>Usar HRM para detección del sueño</translation>
+        <translation>Utiliser le capteur cardiaque pour la détection de sommeil</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation>Intervalo (minutos) HRM: </translation>
+        <translation>Capteur cardiaque en continu (Intervale en minutes, 0 signifie désactivé):</translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation>Guardar perfil</translation>
+        <translation>Sauvegarder profil>/translation>
     </message>
 </context>
 <context>
     <name>SleepPage</name>
     <message>
         <source>Download Data</source>
-        <translation>Descargar datos</translation>
+        <translation>Télécharger les données</translation>
     </message>
     <message>
         <source>Sleep Summary</source>
-        <translation>Resumen de sueño</translation>
+        <translation>Résumé de sommeil</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation>Sueño</translation>
+        <translation>Sommeil</translation>
     </message>
     <message>
         <source>hrs</source>
-        <translation>hrs</translation>
+        <translation>heures</translation>
     </message>
     <message>
         <source>hrs (deep)</source>
-        <translation>hrs (profundo)</translation>
+        <translation>heures (sommeil profond)</translation>
     </message>
 </context>
 <context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>
-        <translation>Actividades deportivas</translation>
+        <translation>Activités sportives</translation>
     </message>
     <message>
         <source>Download Next Activity</source>
-        <translation>Descargar Siguiente Actividad</translation>
+        <translation>Télécharger la prochaine activité</translation>
     </message>
 </context>
 <context>
     <name>StepsPage</name>
     <message>
         <source>Download Data</source>
-        <translation>Descargar datos</translation>
+        <translation>Télécharger les données</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation>Pasos</translation>
+        <translation>Pas</translation>
     </message>
 </context>
 </TS>
