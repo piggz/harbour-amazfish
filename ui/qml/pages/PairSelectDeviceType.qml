@@ -28,11 +28,11 @@ Page {
             }
 
             DeviceButton {
-                txt: qsTr("Amazfit Bip")
+                txt: qsTr("Amazfit Bip Watch")
                 icn: "../pics/devices/amazfit-bip.png"
 
                 onClicked: {
-                    pushPairPage("Amazfit Bip", false);
+                    pushPairPage("Amazfit Bip Watch", false);
                 }
             }
 
@@ -55,6 +55,15 @@ Page {
             }
 
             DeviceButton {
+                txt: qsTr("Amazfit Cor")
+                icn: "../pics/devices/amazfit-cor.png"
+
+                onClicked: {
+                    pushPairPage("Amazfit Cor", false);
+                }
+            }
+
+            DeviceButton {
                 txt: qsTr("MI Band 2")
                 icn: "../pics/devices/miband2.png"
 
@@ -62,26 +71,15 @@ Page {
                     pushPairPage("MI Band 2", false);
                 }
             }
-            /*
-            Button {
-                text: qsTr("Amazfit Bip")
+
+            DeviceButton {
+                txt: qsTr("MI Band 3")
+                icn: "../pics/devices/miband3.png"
+
                 onClicked: {
-                    pushPairPage("Amazfit Bip");
+                    pushPairPage("MI Band 3", false);
                 }
             }
-            Button {
-                text: qsTr("Amazfit GTS")
-                onClicked: {
-                    pushPairPage("Amazfit GTS");
-                }
-            }
-            Button {
-                text: qsTr("MI Band 2")
-                onClicked: {
-                    pushPairPage("MI Band 2");
-                }
-            }
-            */
         }
     }
 

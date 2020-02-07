@@ -294,7 +294,7 @@
     </message>
     <message>
         <location filename="../qml/pages/PairSelectDeviceType.qml" line="31"/>
-        <source>Amazfit Bip</source>
+        <source>Amazfit Bip Watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -309,7 +309,17 @@
     </message>
     <message>
         <location filename="../qml/pages/PairSelectDeviceType.qml" line="58"/>
+        <source>Amazfit Cor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairSelectDeviceType.qml" line="67"/>
         <source>MI Band 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairSelectDeviceType.qml" line="76"/>
+        <source>MI Band 3</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

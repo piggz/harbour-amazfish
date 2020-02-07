@@ -236,10 +236,6 @@
         <translation>Selecciona tipo de dispositivo</translation>
     </message>
     <message>
-        <source>Amazfit Bip</source>
-        <translation>Amazfit Bip</translation>
-    </message>
-    <message>
         <source>Amazfit GTS</source>
         <translation>Amazfit GTS</translation>
     </message>
@@ -250,6 +246,18 @@
     <message>
         <source>Amazfit Bip Lite</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amazfit Bip Watch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amazfit Cor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MI Band 3</source>
+        <translation type="unfinished">MI Band 3</translation>
     </message>
 </context>
 <context>

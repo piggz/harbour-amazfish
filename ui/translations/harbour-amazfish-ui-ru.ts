@@ -236,10 +236,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Amazfit Bip</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Amazfit GTS</source>
         <translation type="unfinished"></translation>
     </message>
@@ -249,6 +245,18 @@
     </message>
     <message>
         <source>Amazfit Bip Lite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amazfit Bip Watch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amazfit Cor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MI Band 3</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
