@@ -65,6 +65,7 @@ public:
     static constexpr char DATEFORMAT_TIME_12_HOURS[4] = {ENDPOINT_DISPLAY, 0x02, 0x0, 0x0 };
     static constexpr char DATEFORMAT_TIME_24_HOURS[4] = {ENDPOINT_DISPLAY, 0x02, 0x0, 0x1 };
 
+    static const char COMMAND_REQUEST_ALARMS = 0x0d;
     static const char COMMAND_REQUEST_GPS_VERSION = 0x0e;
     static const char COMMAND_SET_LANGUAGE = 0x17;
     static constexpr char COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST[4] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x01};
@@ -124,14 +125,15 @@ public:
     void setDisplayCaller();
     void setInactivityWarnings();
     void setAlarms();
+    void requestAlarms();
     void setDisconnectNotification();
 
     void sendWeather(const CurrentWeather *weather);
 
     //Operations
-    Q_INVOKABLE void fetchLogs();
-    Q_INVOKABLE void fetchActivityData();
-    Q_INVOKABLE void fetchSportsSummaries();
+    void fetchLogs();
+    void fetchActivityData();
+    void fetchSportsSummaries();
     //Q_INVOKABLE void fetchActivityDetail();
 
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
@@ -139,21 +141,22 @@ public:
     Q_SIGNAL void ignoreCall();
     Q_SIGNAL void buttonPressed();
 
-    Q_INVOKABLE virtual bool operationRunning() override;
+    virtual bool operationRunning() override;
     void abortOperations();
 
     void setDatabase(KDbConnection *conn);
 
     void writeChunked(const QString &characteristic, int type, const QByteArray &value);
 
-    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message);
+    void sendAlert(const QString &sender, const QString &subject, const QString &message);
 
 private:
-    Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
-    Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
-    Q_SLOT void operationTimeout();
+    void characteristicRead(const QString &c, const QByteArray &value);
+    void characteristicChanged(const QString &c, const QByteArray &value);
+    void operationTimeout();
 
     void setGPSVersion(const QString& v);
+    void decodeAlarms(const QByteArray &data);
 
     QString m_gpsVersion;
     int m_steps = 0;

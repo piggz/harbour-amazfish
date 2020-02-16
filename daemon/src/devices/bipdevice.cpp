@@ -168,6 +168,7 @@ void BipDevice::authenticated(bool ready)
             mi->setRotateWristToSwitchInfo(true);
             mi->setInactivityWarnings();
             mi->setDisconnectNotification();
+            mi->requestAlarms();
         }
 
         HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));

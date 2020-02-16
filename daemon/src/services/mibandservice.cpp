@@ -63,12 +63,6 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
 {
     qDebug() << "MiBand Changed:" << characteristic << value.toHex();
 
-    if (value[0] == RESPONSE && value[1] == COMMAND_REQUEST_GPS_VERSION && value[2] == SUCCESS) {
-        m_gpsVersion = value.mid(3);
-        qDebug() << "Got gps version = " << m_gpsVersion;
-        emit informationChanged(AbstractDevice::INFO_GPSVER, m_gpsVersion);
-    }
-
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
         if (value[0] == EVENT_DECLINE_CALL) {
             emit declineCall();
@@ -87,6 +81,17 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
         if (value.length() == 13) {
             m_steps = TypeConversion::toUint16(value[1], value[2]);
             emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(m_steps));
+        }
+    } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_CONFIGURATION) {
+        if (value[0] == RESPONSE && value[1] == COMMAND_REQUEST_GPS_VERSION && value[2] == SUCCESS) {
+            m_gpsVersion = value.mid(3);
+            qDebug() << "Got gps version = " << m_gpsVersion;
+            emit informationChanged(AbstractDevice::INFO_GPSVER, m_gpsVersion);
+        } else if (value[0] == RESPONSE && value[1] == COMMAND_REQUEST_ALARMS && value[2] == SUCCESS) {
+            qDebug() << "Got alarm info = " << value.mid(3);
+            decodeAlarms(value.mid(3));
+        } else {
+            qDebug() << "Unknown configuration info: " << value;
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         //qDebug() << "...got data";
@@ -159,6 +164,27 @@ void MiBandService::operationTimeout()
 {
     qDebug() << "Timeout while waiting for operation data";
     abortOperations();
+}
+
+void MiBandService::decodeAlarms(const QByteArray &data)
+{
+    //Smaple Data 03 17 80 00 02 05 20 01 12 03 04
+
+    bool alarmsInUse[10] = {false};
+    bool alarmsEnabled[10] = {false};
+    int numAlarms = data.at(5);
+
+    for (int i = 0; i < numAlarms; i++) {
+        QString configBase = "/uk/co/piggz/amazfish/alarms/alarm" + QString::number(i+1) + "/";
+
+        char alarm_data = data.at(6 + i);
+        int index = alarm_data & 0xf;
+        alarmsInUse[index] = true;
+        bool enabled = (alarm_data & 0x10) == 0x10;
+        alarmsEnabled[index] = enabled;
+        qDebug() << "alarm " << index << " is enabled:" << enabled;
+        m_settings.setValue(configBase + "enabled", enabled);
+    }
 }
 
 void MiBandService::characteristicRead(const QString &characteristic, const QByteArray &value)
@@ -566,6 +592,11 @@ void MiBandService::setAlarms()
 
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
     }
+}
+
+void MiBandService::requestAlarms()
+{
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(1,COMMAND_REQUEST_ALARMS));
 }
 
 void MiBandService::setDisconnectNotification()
