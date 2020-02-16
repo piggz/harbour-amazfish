@@ -235,7 +235,7 @@ void BipDevice::initialise()
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
     if (mi2) {
-        qDebug() << "Got mi2 service";
+        qDebug() << "Got mi2 service" << m_pairing << m_needsAuth;
         connect(mi2, &MiBand2Service::authenticated, this, &BipDevice::authenticated, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 

@@ -104,7 +104,7 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
         connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
         connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
-        m_device->connectToDevice();
+        m_device->pair();
         return "";
     }
     

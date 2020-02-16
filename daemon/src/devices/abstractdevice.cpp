@@ -22,7 +22,8 @@ QString AbstractDevice::pair()
     setConnectionState("pairing");
     emit connectionStateChanged();
 
-    return QBLEDevice::pair();
+    QBLEDevice::pair();
+    QBLEDevice::connectToDevice();
 }
 
 void AbstractDevice::pairAsync()
