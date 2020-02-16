@@ -156,7 +156,7 @@ private:
     void setGPSVersion(const QString& v);
 
     QString m_gpsVersion;
-    int m_steps;
+    int m_steps = 0;
     int m_operationRunning = 0;
 
     SettingsManager m_settings;

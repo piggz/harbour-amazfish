@@ -92,7 +92,7 @@ QString AbstractDevice::deviceName()
 
 void AbstractDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
-   Q_UNUSED(info)
+   Q_UNUSED(info);
 }
 
 void AbstractDevice::startDownload()
@@ -106,7 +106,7 @@ void AbstractDevice::downloadSportsData()
 
 void AbstractDevice::sendWeather(CurrentWeather *weather)
 {
-    Q_UNUSED(weather)
+    Q_UNUSED(weather);
 }
 
 void AbstractDevice::refreshInformation()
@@ -116,12 +116,13 @@ void AbstractDevice::refreshInformation()
 
 QString AbstractDevice::information(Info i)
 {
-    Q_UNUSED(i)
+    Q_UNUSED(i);
+    return QString();
 }
 
 void AbstractDevice::applyDeviceSetting(Settings s)
 {
-    Q_UNUSED(s)
+    Q_UNUSED(s);
     emit message(tr("Device doen not support settings"));
 }
 
