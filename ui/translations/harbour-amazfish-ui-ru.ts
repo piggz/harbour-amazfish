@@ -240,10 +240,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MI Band 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Amazfit Bip Lite</source>
         <translation type="unfinished"></translation>
     </message>
@@ -256,7 +252,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MI Band 3</source>
+        <source>Mi Band 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mi Band 3</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
