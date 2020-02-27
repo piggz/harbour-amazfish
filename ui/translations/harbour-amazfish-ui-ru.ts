@@ -163,6 +163,10 @@
         <source>S:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Send Reminder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
@@ -252,11 +256,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Mi Band 2</source>
+        <source>Mi Band 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Mi Band 3</source>
+        <source>MI Band 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mi Smart Band 4</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

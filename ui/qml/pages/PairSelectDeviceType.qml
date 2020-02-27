@@ -64,11 +64,11 @@ Page {
             }
 
             DeviceButton {
-                txt: qsTr("Mi Band 2")
+                txt: qsTr("MI Band 2")
                 icn: "../pics/devices/miband2.png"
 
                 onClicked: {
-                    pushPairPage("Mi Band 2", false);
+                    pushPairPage("MI Band 2", false);
                 }
             }
 
@@ -78,6 +78,15 @@ Page {
 
                 onClicked: {
                     pushPairPage("Mi Band 3", false);
+                }
+            }
+
+            DeviceButton {
+                txt: qsTr("Mi Smart Band 4")
+                icn: "../pics/devices/miband4.png"
+
+                onClicked: {
+                    pushPairPage("Mi Smart Band 4", true);
                 }
             }
         }

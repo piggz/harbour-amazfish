@@ -138,19 +138,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Serial No: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="72"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="205"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="214"/>
         <source>Hardware Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="78"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="208"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="217"/>
         <source>Software Rev: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -161,7 +161,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="89"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="220"/>
         <source>GPS Ver: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -203,6 +203,11 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="180"/>
         <source>Send Weather</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="186"/>
+        <source>Send Reminder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -314,7 +319,12 @@
     </message>
     <message>
         <location filename="../qml/pages/PairSelectDeviceType.qml" line="67"/>
-        <source>Mi Band 2</source>
+        <source>MI Band 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairSelectDeviceType.qml" line="85"/>
+        <source>Mi Smart Band 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

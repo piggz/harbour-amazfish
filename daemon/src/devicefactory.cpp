@@ -18,6 +18,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new BipLiteDevice(deviceName);
     }
 
+    if (deviceName == "Mi Smart Band 4") {
+        return new BipLiteDevice(deviceName);
+    }
+
     qDebug() << "DeviceFactory::createDevice: no suitable devices found, creating a Bip device as default";
     return new BipDevice(deviceName);
 
