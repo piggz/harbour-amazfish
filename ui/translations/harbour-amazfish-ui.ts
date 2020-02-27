@@ -556,12 +556,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="100"/>
+        <location filename="../qml/pages/Settings-device.qml" line="101"/>
         <source>12hr</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="101"/>
+        <location filename="../qml/pages/Settings-device.qml" line="100"/>
         <source>24hr</source>
         <translation type="unfinished"></translation>
     </message>
