@@ -182,6 +182,15 @@ Page {
                     DaemonInterfaceInstance.triggerSendWeather();
                 }
             }
+            Button {
+                text: qsTr("Update Calendar")
+                onClicked: {
+                    var dt = new Date();
+                    dt.setHours(dt.getHours() + 4);
+
+                    DaemonInterfaceInstance.updateCalendar();
+                }
+            }
         }
     }
 

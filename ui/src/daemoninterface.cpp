@@ -297,3 +297,11 @@ void DaemonInterface::connectDatabase()
         return;
     }
 }
+
+void DaemonInterface::updateCalendar()
+{
+    if (!iface->isValid()) {
+        return;
+    }
+    iface->call("updateCalendar");
+}

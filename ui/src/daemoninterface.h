@@ -110,6 +110,7 @@ public:
     Q_INVOKABLE void applyDeviceSetting(Settings s);
     Q_INVOKABLE void requestManualHeartrate();
     Q_INVOKABLE void triggerSendWeather();
+    Q_INVOKABLE void updateCalendar();
 
 private:
     QDBusInterface *iface = nullptr;
