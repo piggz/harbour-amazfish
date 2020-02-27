@@ -22,6 +22,7 @@
 #include "dbushrm.h"
 #include "weather/citymanager.h"
 #include "weather/currentweather.h"
+#include "calendarreader.h"
 
 class AlertNotificationService;
 class DeviceInfoService;
@@ -110,6 +111,11 @@ private:
     Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
     void sendBufferedNotifications();
 
+    //Calendar
+    Q_SLOT void updateCalendar();
+    CalendarReader m_calendarReader;
+
+    //Notifications
     QQueue<WatchNotification> m_notificationBuffer;
 
     //Database

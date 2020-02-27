@@ -131,6 +131,19 @@ void AbstractDevice::rebootWatch()
 
 }
 
+//!
+//! \brief AbstractDevice::sendEventReminder
+//! \param id Optional identifer if required by the device
+//! \param dt Date/time of event
+//! \param event Event text
+//!
+void AbstractDevice::sendEventReminder(int id, const QDateTime &dt, const QString &event)
+{
+    Q_UNUSED(id);
+    Q_UNUSED(dt);
+    Q_UNUSED(event);
+}
+
 void AbstractDevice::abortOperations()
 {
 

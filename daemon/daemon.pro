@@ -18,6 +18,8 @@ LIBS += -Lqble/qble
 QT +=  contacts positioning KDb3
 
 PKGCONFIG += mlite5
+PKGCONFIG += libmkcal-qt5 libkcalcoren-qt5
+INCLUDEPATH += /usr/include/mkcal-qt5 /usr/include/kcalcoren-qt5
 
 INCLUDEPATH += $$PWD/src/services/ \
                $$PWD/src/operations/ \
@@ -36,6 +38,7 @@ INSTALLS += target \
 include(../qble/qble.pri)
 
 SOURCES += \
+    src/calendarreader.cpp \
     src/devices/abstractfirmwareinfo.cpp \
     src/devices/biplitedevice.cpp \
     src/devices/biplitefirmwareinfo.cpp \
@@ -84,6 +87,7 @@ DISTFILES += \
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
+    src/calendarreader.h \
     src/devices/abstractfirmwareinfo.h \
     src/devices/biplitedevice.h \
     src/devices/biplitefirmwareinfo.h \

@@ -1,6 +1,8 @@
 #include "gtsdevice.h"
 #include "gtsfirmwareinfo.h"
 #include <QtXml/QtXml>
+#include <QDateTime>
+#include "typeconversion.h"
 
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
 {
@@ -152,4 +154,38 @@ void GtsDevice::parseServices()
 AbstractFirmwareInfo *GtsDevice::firmwareInfo(const QByteArray &bytes)
 {
     return new GtsFirmwareInfo(bytes);
+}
+
+void GtsDevice::sendEventReminder(int id, const QDateTime &dt, const QString &event)
+{
+    //Send event reminder
+    //Type: 02
+    //00 0b Always 0b
+    //01 01 ID
+    //02 09 Flags 0x01 = Enable, 0x04 = End Date Preset, 0x08 = Text Present
+    //03 00
+    //04 00
+    //05 00
+    //06 Date/Time (6)
+    //00
+    //MESSAGE
+    qDebug() << dt << event;
+
+    QByteArray cmd;
+    cmd += (char)0x0b;
+    cmd += (char)id;
+    cmd += (char)0x09;
+    cmd += (char)0x00;
+    cmd += (char)0x00;
+    cmd += (char)0x00;
+    cmd += TypeConversion::dateTimeToBytes(dt, 0).left(5);
+    cmd += (char)0x00;
+    cmd += (char)0x00;
+    cmd += event.toLocal8Bit();
+    cmd += (char)0x00;
+
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 2, cmd);
+    }
 }

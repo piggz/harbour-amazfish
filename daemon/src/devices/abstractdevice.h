@@ -18,7 +18,8 @@ public:
         FEATURE_STEPS,
         FEATURE_ALARMS,
         FEATURE_ALERT,
-        FEATURE_NOTIFIATION
+        FEATURE_NOTIFIATION,
+        FEATURE_EVENT_REMINDER
     };
     Q_ENUM(Feature);
 
@@ -80,7 +81,7 @@ public:
     virtual void rebootWatch();
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) = 0;
     virtual void incomingCall(const QString &caller) = 0;
-
+    virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);
 
     //signals    
     Q_SIGNAL void message(const QString &text);
