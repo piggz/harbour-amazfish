@@ -40,6 +40,8 @@ BuildRequires:  qt5-qtwidgets-devel
 BuildRequires:  qt5-qtxml-devel
 BuildRequires:  qt5-qttools-linguist
 BuildRequires:  desktop-file-utils
+BuildRequires:  pkgconfig(libmkcal-qt5)
+BuildRequires:  pkgconfig(libkcalcoren-qt5)
 
 %description
 Short description of my Sailfish OS Application
