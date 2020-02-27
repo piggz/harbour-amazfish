@@ -97,8 +97,8 @@ Page {
                 label: qsTr("Time Format")
 
                 menu: ContextMenu {
-                    MenuItem { text: qsTr("12hr") }
                     MenuItem { text: qsTr("24hr") }
+                    MenuItem { text: qsTr("12hr") }
                 }
             }
 
