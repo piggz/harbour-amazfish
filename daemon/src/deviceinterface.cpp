@@ -406,6 +406,7 @@ void DeviceInterface::onConnectionStateChanged()
         }
 
         sendBufferedNotifications();
+        updateCalendar();
 
         //TODO this enables music controls
         miBandService()->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, QByteArray("\x01\x00\x01\x00\x00\x00\x01\x00", 8));
@@ -567,12 +568,19 @@ void DeviceInterface::onRefreshTimer()
     qDebug() << "DeviceInterface::onRefreshTimer";
     static int syncActivitiesMinutes = 0;
     static int syncWeatherMinutes = 0;
+    static int syncCalendarMinutes = 0;
 
     syncWeatherMinutes++;
     if (syncWeatherMinutes >= m_settings.value("/uk/co/piggz/amazfish/app/refreshweather").toInt()) {
         syncWeatherMinutes = 0;
         qDebug() << "weather interval reached";
         m_currentWeather.refresh();
+    }
+    syncCalendarMinutes++;
+    if (syncCalendarMinutes >= m_settings.value("/uk/co/piggz/amazfish/app/refreshcalendar").toInt()) {
+        syncCalendarMinutes = 0;
+        qDebug() << "calendar interval reached";
+        updateCalendar();
     }
 
     if (m_settings.value("/uk/co/piggz/amazfish/app/autosyncdata").toBool()) {

@@ -32,6 +32,12 @@ Page {
         defaultValue: false
     }
 
+    ConfigurationValue {
+        id: appRefreshCalendar
+        key: "/uk/co/piggz/amazfish/app/refreshcalendar"
+        defaultValue: 60
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -68,6 +74,15 @@ Page {
                 label: qsTr("Refresh weather every (") + value + qsTr(") minutes")
             }
 
+            Slider {
+                id: sldCalendarRefresh
+                width: parent.width
+                minimumValue: 15
+                maximumValue: 240
+                stepSize: 15
+                label: qsTr("Refresh calendar every (") + value + qsTr(") minutes")
+            }
+
             TextSwitch {
                 id: chkAutoSyncData
                 width: parent.width
@@ -92,6 +107,7 @@ Page {
     Component.onCompleted: {
         chkNotifyConnect.checked = appNotifyConnect.value;
         sldWeatherRefresh.value = appRefreshWeather.value;
+        sldCalendarRefresh.value = appRefreshCalendar.value;
         chkAutoSyncData.checked = appAutoSyncData.value;
         chkNotifyLowBattery.checked = appNotifyLowBattery.value;
     }
@@ -99,6 +115,7 @@ Page {
     function saveSettings() {
         appNotifyConnect.value = chkNotifyConnect.checked;
         appRefreshWeather.value = sldWeatherRefresh.value;
+        appRefreshCalendar.value = sldCalendarRefresh.value;
         appAutoSyncData.value = chkAutoSyncData.checked;
         appNotifyLowBattery.value = chkNotifyLowBattery.checked;
 

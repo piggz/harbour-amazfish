@@ -164,7 +164,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send Reminder</source>
+        <source>Update Calendar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -327,6 +327,10 @@
     </message>
     <message>
         <source>Low battery notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh calendar every (</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

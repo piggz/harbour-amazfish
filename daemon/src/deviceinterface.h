@@ -77,6 +77,7 @@ public:
     Q_INVOKABLE void applyDeviceSetting(int s);
     Q_INVOKABLE void requestManualHeartrate();
     Q_INVOKABLE void triggerSendWeather();
+    Q_INVOKABLE void updateCalendar();
 
 private:
     QString m_deviceAddress;
@@ -112,7 +113,6 @@ private:
     void sendBufferedNotifications();
 
     //Calendar
-    Q_SLOT void updateCalendar();
     CalendarReader m_calendarReader;
 
     //Notifications
