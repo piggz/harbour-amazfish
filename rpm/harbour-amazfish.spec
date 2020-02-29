@@ -13,7 +13,7 @@ Name:       harbour-amazfish
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Amazfit Bip interface application
-Version:    1.1.2
+Version:    1.1.3
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
@@ -34,14 +34,14 @@ BuildRequires:  pkgconfig(Qt5Widgets)
 BuildRequires:  pkgconfig(Qt5Xml)
 BuildRequires:  pkgconfig(Qt5Positioning)
 BuildRequires:  pkgconfig(mlite5)
+BuildRequires:  pkgconfig(libmkcal-qt5)
+BuildRequires:  pkgconfig(libkcalcoren-qt5)
 BuildRequires:  kdb-devel >= 3.1.0
 BuildRequires:  kcoreaddons-devel >= 5.31.0
 BuildRequires:  qt5-qtwidgets-devel
 BuildRequires:  qt5-qtxml-devel
 BuildRequires:  qt5-qttools-linguist
 BuildRequires:  desktop-file-utils
-BuildRequires:  pkgconfig(libmkcal-qt5)
-BuildRequires:  pkgconfig(libkcalcoren-qt5)
 
 %description
 Short description of my Sailfish OS Application
