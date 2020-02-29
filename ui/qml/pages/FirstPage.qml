@@ -223,5 +223,8 @@ Page {
             needsProfileSet = true;
             return;
         }
+        if (DaemonInterfaceInstance.connectionState === "authenticated") {
+            DaemonInterfaceInstance.refreshInformation();
+        }
     }
 }
