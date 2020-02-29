@@ -39,12 +39,13 @@ public:
 
     enum Feature{
         FEATURE_HRM = 1,
-        FEATURE_WEATHER,
-        FEATURE_ACTIVITY,
-        FEATURE_STEPS,
-        FEATURE_ALARMS,
-        FEATURE_ALERT,
-        FEATURE_NOTIFIATION
+        FEATURE_WEATHER = 2,
+        FEATURE_ACTIVITY = 4,
+        FEATURE_STEPS = 8,
+        FEATURE_ALARMS = 16,
+        FEATURE_ALERT = 32,
+        FEATURE_NOTIFIATION = 64,
+        FEATURE_EVENT_REMINDER = 128
     };
     Q_ENUM(Feature)
 
@@ -87,6 +88,8 @@ public:
     Q_INVOKABLE QString pair(const QString &name, const QString &address);
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
+    Q_INVOKABLE bool supportsFeature(Feature f);
+    Q_INVOKABLE int supportedFeatures();
 
     Q_INVOKABLE DataSource *dataSource();
     KDbConnection *dbConnection();

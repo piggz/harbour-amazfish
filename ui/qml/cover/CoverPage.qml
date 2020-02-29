@@ -141,14 +141,11 @@ CoverBackground {
     Connections {
         target: DaemonInterfaceInstance
         onConnectionStateChanged: {
-            console.log(DaemonInterfaceInstance.connectionState);
             if (DaemonInterfaceInstance.connectionState === "authenticated") {
                 DaemonInterfaceInstance.refreshInformation();
             }
         }
         onInformationChanged: {
-            console.log("Cover Information changed", infoKey, infoValue);
-
             switch (infoKey) {
             case DaemonInterface.INFO_BATTERY:
                 lblBattery.text = infoValue

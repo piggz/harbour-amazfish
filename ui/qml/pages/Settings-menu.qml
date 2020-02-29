@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
@@ -13,7 +14,6 @@ Page {
         anchors.fill: parent
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-
 
         // Tell SilicaFlickable the height of its content.
         contentHeight: column.height
@@ -54,6 +54,7 @@ Page {
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
+                visible: supportsFeature(DaemonInterface.FEATURE_ALARMS)
                 text: qsTr("Alarms")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Settings-alarms.qml"))
@@ -62,6 +63,7 @@ Page {
             
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
+                visible: supportsFeature(DaemonInterface.FEATURE_WEATHER)
                 text: qsTr("Weather")
                 onClicked: {
                     var dlg = pageStack.push(Qt.resolvedUrl("AddCityDialog.qml"))

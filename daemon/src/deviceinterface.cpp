@@ -637,3 +637,15 @@ void DeviceInterface::updateCalendar()
     }
 }
 
+bool DeviceInterface::supportsFeature(int f){
+    return (supportedFeatures() & f) == f;
+}
+
+int DeviceInterface::supportedFeatures()
+{
+    if (m_device) {
+        return m_device->supportedFeatures();
+    }
+    return 0;
+}
+

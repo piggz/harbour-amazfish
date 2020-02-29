@@ -14,6 +14,18 @@ QString GtsDevice::deviceType()
     return "amazfitgts";
 }
 
+int GtsDevice::supportedFeatures()
+{
+    return FEATURE_HRM |
+            FEATURE_WEATHER |
+            FEATURE_ACTIVITY |
+            FEATURE_STEPS |
+            FEATURE_ALARMS |
+            FEATURE_ALERT |
+            FEATURE_NOTIFIATION |
+            FEATURE_EVENT_REMINDER;
+}
+
 void GtsDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));

@@ -6,6 +6,7 @@ import org.nemomobile.mpris 1.0
 import org.SfietKonstantin.weatherfish 1.0
 import Nemo.Configuration 1.0
 import org.nemomobile.dbus 2.0
+import uk.co.piggz.amazfish 1.0
 
 ApplicationWindow
 {
@@ -16,6 +17,7 @@ ApplicationWindow
 
     property bool serviceActiveState: false
     property bool serviceEnabledState: false
+    property int supportedFeatures: 0
 
     ConfigurationValue {
         id: appRefreshWeather
@@ -38,6 +40,11 @@ ApplicationWindow
         txtMessage.text = msg;
         rectMessage.y = app.height - rectMessage.height - 20;
         tmrHideMessage.start();
+    }
+
+    function supportsFeature(feature) {
+        console.log("Checking if feature is supported:", feature, (supportedFeatures & feature) === feature);
+        return (supportedFeatures & feature) === feature;
     }
 
     BusyIndicator {
@@ -175,4 +182,7 @@ ApplicationWindow
         }
     }
 
+    onSupportedFeaturesChanged: {
+        console.log("Supported features:", supportedFeatures);
+    }
 }

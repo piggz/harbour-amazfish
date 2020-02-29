@@ -20,9 +20,15 @@ BipDevice::BipDevice(const QString &pairedName, QObject *parent) : AbstractDevic
 }
 
 
-bool BipDevice::supportsFeature(Feature f)
+int BipDevice::supportedFeatures()
 {
-    return true;
+    return FEATURE_HRM |
+            FEATURE_WEATHER |
+            FEATURE_ACTIVITY |
+            FEATURE_STEPS |
+            FEATURE_ALARMS |
+            FEATURE_ALERT |
+            FEATURE_NOTIFIATION;
 }
 
 QString BipDevice::deviceType()

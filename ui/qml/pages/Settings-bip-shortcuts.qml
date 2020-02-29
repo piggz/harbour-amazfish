@@ -15,7 +15,6 @@ Page {
         defaultValue: true
     }
 
-
     ConfigurationValue {
         id: deviceDisplayActivity
         key: "/uk/co/piggz/amazfish/device/displayactivity"
@@ -29,7 +28,6 @@ Page {
         defaultValue: true
     }
 
-
     ConfigurationValue {
         id: deviceDisplayAlarm
         key: "/uk/co/piggz/amazfish/device/displayalarm"
@@ -41,7 +39,6 @@ Page {
         key: "/uk/co/piggz/amazfish/device/displaytimer"
         defaultValue: true
     }
-
 
     ConfigurationValue {
         id: deviceDisplayCompass
@@ -68,13 +65,11 @@ Page {
         defaultValue: true
     }
 
-
     ConfigurationValue {
         id: deviceDisplayAliPayShortcut
         key: "/uk/co/piggz/amazfish/device/displayalipayshortcut"
         defaultValue: true
     }
-
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {

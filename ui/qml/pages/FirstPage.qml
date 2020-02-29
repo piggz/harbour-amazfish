@@ -201,6 +201,9 @@ Page {
         onConnectionStateChanged: {
             console.log(DaemonInterfaceInstance.connectionState);
             if (DaemonInterfaceInstance.connectionState === "authenticated") {
+                supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
+                console.log(supportedFeatures);
+
                 DaemonInterfaceInstance.refreshInformation();
             }
         }
@@ -225,6 +228,7 @@ Page {
         }
         if (DaemonInterfaceInstance.connectionState === "authenticated") {
             DaemonInterfaceInstance.refreshInformation();
+            supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
         }
     }
 }

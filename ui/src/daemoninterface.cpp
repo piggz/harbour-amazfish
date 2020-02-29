@@ -116,6 +116,24 @@ void DaemonInterface::disconnect()
     iface->call("disconnect");
 }
 
+bool DaemonInterface::supportsFeature(DaemonInterface::Feature f)
+{
+    if (!iface->isValid()) {
+        return false;
+    }
+    QDBusReply<bool> reply = iface->call("supportsFeature", f);
+    return reply;
+}
+
+int DaemonInterface::supportedFeatures()
+{
+    if (!iface->isValid()) {
+        return 0;
+    }
+    QDBusReply<int> reply = iface->call("supportedFeatures");
+    return reply;
+}
+
 DataSource *DaemonInterface::dataSource()
 {
     return &m_dataSource;

@@ -55,6 +55,8 @@ public:
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE QString connectionState() const;
     Q_INVOKABLE bool operationRunning();
+    Q_INVOKABLE bool supportsFeature(int f);
+    Q_INVOKABLE int supportedFeatures();
 
     KDbConnection *dbConnection();
 

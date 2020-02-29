@@ -91,7 +91,7 @@ public:
     static const char* UUID_SERVICE_DEVICEINFO;
     static const char* UUID_SERVICE_FIRMWARE;
     
-    virtual bool supportsFeature(Feature f) override;
+    virtual int supportedFeatures() override;
     virtual QString deviceType() override;
     virtual bool operationRunning() override;
     virtual void abortOperations() override;

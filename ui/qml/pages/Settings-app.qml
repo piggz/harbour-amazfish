@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
@@ -61,12 +62,16 @@ Page {
 
             TextSwitch {
                 id: chkNotifyConnect
+                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
+
                 width: parent.width
                 text: qsTr("Notify on connect")
             }
 
             Slider {
                 id: sldWeatherRefresh
+                visible: supportsFeature(DaemonInterface.FEATURE_WEATHER)
+
                 width: parent.width
                 minimumValue: 15
                 maximumValue: 120
@@ -76,6 +81,7 @@ Page {
 
             Slider {
                 id: sldCalendarRefresh
+                visible: supportsFeature(DaemonInterface.FEATURE_EVENT_REMINDER)
                 width: parent.width
                 minimumValue: 15
                 maximumValue: 240
@@ -91,6 +97,8 @@ Page {
 
             TextSwitch {
                 id: chkNotifyLowBattery
+                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
+
                 width: parent.width
                 text: qsTr("Low battery notification")
             }
@@ -119,7 +127,9 @@ Page {
         appAutoSyncData.value = chkAutoSyncData.checked;
         appNotifyLowBattery.value = chkNotifyLowBattery.checked;
 
-        weather.refresh();
+        if (supportsFeature(DaemonInterface.FEATURE_WEATHER)) {
+            weather.refresh();
+        }
     }
 
 }

@@ -374,43 +374,43 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="59"/>
+        <location filename="../qml/pages/Settings-app.qml" line="60"/>
         <source>Device Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="65"/>
+        <location filename="../qml/pages/Settings-app.qml" line="66"/>
         <source>Notify on connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="74"/>
+        <location filename="../qml/pages/Settings-app.qml" line="75"/>
         <source>Refresh weather every (</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="74"/>
-        <location filename="../qml/pages/Settings-app.qml" line="83"/>
+        <location filename="../qml/pages/Settings-app.qml" line="75"/>
+        <location filename="../qml/pages/Settings-app.qml" line="85"/>
         <source>) minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="83"/>
+        <location filename="../qml/pages/Settings-app.qml" line="85"/>
         <source>Refresh calendar every (</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="89"/>
+        <location filename="../qml/pages/Settings-app.qml" line="91"/>
         <source>Sync activity data each hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="95"/>
+        <location filename="../qml/pages/Settings-app.qml" line="97"/>
         <source>Low battery notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="100"/>
+        <location filename="../qml/pages/Settings-app.qml" line="102"/>
         <source>Save Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -619,42 +619,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="57"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="58"/>
         <source>Alarms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="65"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="67"/>
         <source>Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="76"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="76"/>
         <source>Stop Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="82"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="84"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="82"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="84"/>
         <source>Disable Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="95"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="97"/>
         <source>Debug Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="103"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="105"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
