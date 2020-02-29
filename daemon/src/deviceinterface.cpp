@@ -625,14 +625,16 @@ void DeviceInterface::triggerSendWeather()
 
 void DeviceInterface::updateCalendar()
 {
-    if (m_device) {
-        QList<CalendarReader::EventData> eventlist = m_calendarReader.getEvents();
+    if (supportsFeature(AbstractDevice::FEATURE_EVENT_REMINDER)) {
+        if (m_device) {
+            QList<CalendarReader::EventData> eventlist = m_calendarReader.getEvents();
 
-        int id=0;
-        foreach (CalendarReader::EventData event, eventlist) {
-            qDebug() << event.uniqueId << event.displayLabel << event.description << event.startTime;
-            m_device->sendEventReminder(id, event.startTime, event.displayLabel);
-            id++;
+            int id=0;
+            foreach (CalendarReader::EventData event, eventlist) {
+                qDebug() << event.uniqueId << event.displayLabel << event.description << event.startTime;
+                m_device->sendEventReminder(id, event.startTime, event.displayLabel);
+                id++;
+            }
         }
     }
 }

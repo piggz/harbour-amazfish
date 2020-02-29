@@ -79,6 +79,7 @@ CoverBackground {
             spacing: Theme.paddingLarge
             width: childrenRect.width
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
 
             Image {
                 id: imgSteps
@@ -102,6 +103,8 @@ CoverBackground {
             spacing: Theme.paddingLarge
             width: childrenRect.width
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: supportsFeature(DaemonInterface.FEATURE_HRM)
+
             Image {
                 id: imgHeartrate
                 source: "../pics/icon-m-heartrate.png"
@@ -125,8 +128,11 @@ CoverBackground {
 
         CoverAction {
             iconSource: "image://theme/icon-m-refresh";
+
             onTriggered: {
-                DaemonInterfaceInstance.requestManualHeartrate();
+                if (supportsFeature(DaemonInterface.FEATURE_HRM)) {
+                    DaemonInterfaceInstance.requestManualHeartrate();
+                }
             }
         }
 

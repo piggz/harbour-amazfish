@@ -244,12 +244,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="167"/>
+        <location filename="../qml/pages/FirstPage.qml" line="168"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="176"/>
+        <location filename="../qml/pages/FirstPage.qml" line="177"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
@@ -379,38 +379,38 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="66"/>
+        <location filename="../qml/pages/Settings-app.qml" line="68"/>
         <source>Notify on connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="75"/>
+        <location filename="../qml/pages/Settings-app.qml" line="79"/>
         <source>Refresh weather every (</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="75"/>
-        <location filename="../qml/pages/Settings-app.qml" line="85"/>
+        <location filename="../qml/pages/Settings-app.qml" line="79"/>
+        <location filename="../qml/pages/Settings-app.qml" line="89"/>
         <source>) minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="85"/>
+        <location filename="../qml/pages/Settings-app.qml" line="89"/>
         <source>Refresh calendar every (</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="91"/>
+        <location filename="../qml/pages/Settings-app.qml" line="95"/>
         <source>Sync activity data each hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="97"/>
+        <location filename="../qml/pages/Settings-app.qml" line="103"/>
         <source>Low battery notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="102"/>
+        <location filename="../qml/pages/Settings-app.qml" line="108"/>
         <source>Save Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -418,62 +418,62 @@
 <context>
     <name>Settings-bip-shortcuts</name>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="97"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="92"/>
         <source>BIP Display Items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="103"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="98"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="108"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="103"/>
         <source>Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="113"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="108"/>
         <source>Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="118"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="113"/>
         <source>Alarm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="123"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="118"/>
         <source>Timer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="128"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="123"/>
         <source>Compass</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="133"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="128"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="138"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="133"/>
         <source>AliPay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="144"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="139"/>
         <source>Weather Shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="149"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="144"/>
         <source>AliPay Shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="154"/>
+        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="149"/>
         <source>Save Settings</source>
         <translation type="unfinished"></translation>
     </message>

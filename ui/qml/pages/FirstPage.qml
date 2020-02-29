@@ -139,6 +139,7 @@ Page {
             Row {
                 spacing: Theme.paddingLarge
                 width: parent.width
+                visible: supportsFeature(DaemonInterface.FEATURE_HRM)
                 Image {
                     id: imgHeartrate
                     source: "../pics/icon-m-heartrate.png"
