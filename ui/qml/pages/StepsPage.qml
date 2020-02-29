@@ -86,6 +86,7 @@ Page {
                 graphTitle: qsTr("Steps")
                 graphHeight: 300
 
+                axisX.mask: "MM/dd"
                 axisY.units: "Steps"
                 type: DataSource.StepSummary
                 graphType: 2

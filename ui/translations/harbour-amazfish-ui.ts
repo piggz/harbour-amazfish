@@ -257,7 +257,7 @@
 <context>
     <name>GraphData</name>
     <message>
-        <location filename="../qml/components/GraphData.qml" line="313"/>
+        <location filename="../qml/components/GraphData.qml" line="314"/>
         <source>No data</source>
         <translation type="unfinished"></translation>
     </message>

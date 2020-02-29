@@ -207,7 +207,7 @@
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation>Keine Daten</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -94,6 +94,7 @@ Page {
                 graphTitle: qsTr("Sleep Summary")
                 graphHeight: 300
 
+                axisX.mask: "MM/dd"
                 axisY.units: "Hours"
                 type: DataSource.SleepSummary
                 graphType: 2

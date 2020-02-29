@@ -94,7 +94,7 @@ Item {
 
     function createXLabel(value) {
         var d = new Date(value*1000);
-        return Qt.formatTime(d, axisX.mask);
+        return Qt.formatDateTime(d, axisX.mask);
     }
 
     Column {
@@ -160,7 +160,8 @@ Item {
                 delegate: Label {
                     color: Theme.primaryColor
                     font.pixelSize: Theme.fontSizeLarge / 2
-                    text: createXLabel( (maxX-minX)/axisX.grid * index + minX )
+                    text: createXLabel(points[Math.round((index / axisX.grid ) * (points.length - 1))].x)
+
                     anchors {
                         top: parent.bottom
                         topMargin: Theme.paddingSmall
@@ -175,7 +176,7 @@ Item {
                             top: parent.bottom
                             horizontalCenter: parent.horizontalCenter
                         }
-                        text: Qt.formatDate(new Date( ((maxX-minX)/axisX.grid * index + minX) * 1000), "ddd");
+                        text: Qt.formatDate(new Date(points[Math.round((index / axisX.grid ) * (points.length - 1))].x * 1000), "ddd");
                         visible: doubleAxisXLables
                     }
                 }
@@ -261,7 +262,7 @@ Item {
 
                         var y = height - Math.floor(points[i].y / stepY) - 1;
                         if (graphType == line) {
-                            if (i == 0) {
+                            if (i === 0) {
                                 ctx.moveTo(x, y);
                             } else {
                                 ctx.lineTo(x, y);

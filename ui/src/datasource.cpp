@@ -17,7 +17,6 @@ QVariant DataSource::data(Type type, const QDate &day)
     QString qry;
 
     if (type == DataSource::SleepSummary) {
-        QDate day2(2018, 6, 6);
         qry = "SELECT timestamp_dt, raw_kind, raw_intensity FROM mi_band_activity WHERE timestamp_dt >= date('" +
                 day.toString("yyyy-MM-ddT11:59:00") + "','-10 day') AND timestamp_dt <= '" +
                 day.toString("yyyy-MM-ddT12:01:00") +  "' ORDER BY timestamp_dt ASC";
@@ -32,6 +31,7 @@ QVariant DataSource::data(Type type, const QDate &day)
                     int light = 0; //minutes in light sleep
                     int deep = 0; //mintes in deep sleep
                     QDate curDate = curs->value(0).toDateTime().date();
+                    d = curDate.addDays(-1);
 
                     QVariantMap pt;
                     int temp_sleep = 0;
