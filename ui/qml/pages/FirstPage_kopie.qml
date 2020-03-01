@@ -125,55 +125,17 @@ Page {
 
             }
 
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
-            }
-
             // battery
             Row {
-                width: parent.width
-
+                spacing: Theme.paddingLarge
                 Image {
                     id: imgBattery
                     source: "image://theme/icon-m-battery"
                     width: Theme.iconSizeMedium
                     height: width
                 }
-
-                ProgressBar {
-                    id: btryProgress
-                    width: parent.width - imgBattery.width
-                    minimumValue: 0
-                    maximumValue: 100
-                }
-            }
-
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
-            }
-
-            // steps
-            Image {
-                id: imgSteps
-                source: "../pics/icon-m-steps.png"
-                height: Theme.iconSizeMedium
-                width: height
-            }
-
-            PercentCircle {
-                id: stpsCircle
-
-                anchors.horizontalCenter: parent.horizontalCenter
-                size: parent.width / 2.5
-                percent: 0.06
-
                 Label {
-                    id: lblSteps
-                    anchors.centerIn: parent
+                    id: lblBattery
                     color: Theme.primaryColor
                     font.pixelSize: Theme.fontSizeMedium
                     height: Theme.iconSizeMedium
@@ -181,15 +143,42 @@ Page {
                 }
             }
 
+            Separator {
+                width: parent.width
+                horizontalAlignment: Qt.AlignHCenter
+                color: Theme.highlightColor
+            }
+
+            //Steps
+            Row {
+                spacing: Theme.paddingLarge
+
+                Image {
+                    id: imgSteps
+                    source: "../pics/icon-m-steps.png"
+                    height: Theme.iconSizeMedium
+                    width: height
+                }
+
+                Label {
+                    id: lblSteps
+                    color: Theme.primaryColor
+                    font.pixelSize: Theme.fontSizeLarge
+                    height: Theme.iconSizeMedium
+                    verticalAlignment: Text.AlignVCenter
+                    width: height
+                }
+            }
+
+
             Label {
                 id: lblGoal
-                anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.highlightColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 height: Theme.iconSizeMedium
                 verticalAlignment: Text.AlignVCenter
-                width: parent.width
-                text: qsTr("Goal: ") + fitnessGoal.value + qsTr(" Steps")
+                width: height
+                text: qsTr("Ziel") + fitnessGoal.value + qsTr(" Schritte")
             }
 
             Separator {
@@ -202,8 +191,6 @@ Page {
             Row {
                 spacing: Theme.paddingLarge
                 width: parent.width
-                visible: supportsFeature(DaemonInterface.FEATURE_HRM)
-
                 Image {
                     id: imgHeartrate
                     source: "../pics/icon-m-heartrate.png"
@@ -213,7 +200,7 @@ Page {
                 Label {
                     id: lblHeartrate
                     color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeLarge
+                    font.pixelSize: Theme.fontSizeMedium
                     height: Theme.iconSizeMedium
                     verticalAlignment: Text.AlignVCenter
                     width: parent.width - imgHeartrate.width - btnHR.width - 2* Theme.paddingLarge
@@ -266,9 +253,6 @@ Page {
         onConnectionStateChanged: {
             console.log(DaemonInterfaceInstance.connectionState);
             if (DaemonInterfaceInstance.connectionState === "authenticated") {
-                supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
-                console.log(supportedFeatures);
-
                 DaemonInterfaceInstance.refreshInformation();
             }
         }
@@ -277,17 +261,13 @@ Page {
 
             switch (infoKey) {
             case DaemonInterface.INFO_BATTERY:
-                //lblBattery.text = infoValue + " %"
-                //btryCircle.percent = infoValue / 100
-                btryProgress.label = infoValue + "%"
-                btryProgress.value = infoValue
+                lblBattery.text = infoValue + " %"
                 break;
             case DaemonInterface.INFO_HEARTRATE:
                 lblHeartrate.text = infoValue + " bpm"
                 break;
             case DaemonInterface.INFO_STEPS:
                 lblSteps.text = infoValue
-                stpsCircle.percent = infoValue / fitnessGoal.value
                 break;
             }
         }
@@ -300,7 +280,6 @@ Page {
         }
         if (DaemonInterfaceInstance.connectionState === "authenticated") {
             DaemonInterfaceInstance.refreshInformation();
-            supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
         }
     }
 }

@@ -60,12 +60,34 @@ Page {
                 title: qsTr("Device Settings")
             }
 
+            SectionHeader {
+                text: qsTr("Notifications")
+            }
+
             TextSwitch {
                 id: chkNotifyConnect
                 visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
 
                 width: parent.width
                 text: qsTr("Notify on connect")
+            }
+
+            TextSwitch {
+                id: chkNotifyLowBattery
+                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
+
+                width: parent.width
+                text: qsTr("Low battery notification")
+            }
+
+            SectionHeader {
+                text: qsTr("Refresh rates")
+            }
+
+            TextSwitch {
+                id: chkAutoSyncData
+                width: parent.width
+                text: qsTr("Sync activity data each hour")
             }
 
             Slider {
@@ -81,7 +103,6 @@ Page {
 
             Slider {
                 id: sldCalendarRefresh
-                visible: supportsFeature(DaemonInterface.FEATURE_EVENT_REMINDER)
                 width: parent.width
                 minimumValue: 15
                 maximumValue: 240
@@ -89,18 +110,61 @@ Page {
                 label: qsTr("Refresh calendar every (") + value + qsTr(") minutes")
             }
 
-            TextSwitch {
-                id: chkAutoSyncData
-                width: parent.width
-                text: qsTr("Sync activity data each hour")
+            SectionHeader {
+                text: "Amazfish Service"
             }
 
             TextSwitch {
-                id: chkNotifyLowBattery
-                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
+                id: chkServiceEnabled
+                checked: serviceEnabledState === false ? false : true
+                text: qsTr("Start service on boot")
+                onClicked: {
+                    if (serviceEnabledState) {
+                        systemdManager.disableService();
+                    } else {
+                        systemdManager.enableService();
+                    }
+                }
+            }
 
+            Label {
                 width: parent.width
-                text: qsTr("Low battery notification")
+                text: qsTr("Start/Stop the Amazfish Background Service")
+                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeSmall
+            }
+
+            Row {
+                id: serviceButtonRow
+
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width
+                spacing: 10
+
+                Button {
+                    id: start
+                    text: qsTr("Start")
+                    enabled: serviceActiveState == false
+                    onClicked: {
+                        systemdServiceIface.call("Start", ["replace"])
+                        enabled = serviceActiveState ? false : true
+                    }
+                }
+
+                Button {
+                    id: stop
+                    text: qsTr("Stop")
+                    enabled: serviceActiveState == true
+                    onClicked: {
+                        systemdServiceIface.call("Stop", ["replace"])
+                    }
+                }
+            }
+
+            Separator {
+                width: parent.width
+                horizontalAlignment: Qt.AlignHCenter
+                color: Theme.highlightColor
             }
 
             Button {
