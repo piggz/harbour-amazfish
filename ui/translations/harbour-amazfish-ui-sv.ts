@@ -165,7 +165,7 @@
     </message>
     <message>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdatera kalender</translation>
     </message>
 </context>
 <context>
@@ -207,7 +207,7 @@
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen data</translation>
     </message>
 </context>
 <context>
@@ -245,27 +245,27 @@
     </message>
     <message>
         <source>Amazfit Bip Lite</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfit Bip Lite</translation>
     </message>
     <message>
         <source>Amazfit Bip Watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfit Bip Watch</translation>
     </message>
     <message>
         <source>Amazfit Cor</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfit Cor</translation>
     </message>
     <message>
         <source>Mi Band 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Mi Band 3</translation>
     </message>
     <message>
         <source>MI Band 2</source>
-        <translation type="unfinished"></translation>
+        <translation>MI Band 2</translation>
     </message>
     <message>
         <source>Mi Smart Band 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Mi Smart Band 4</translation>
     </message>
 </context>
 <context>
@@ -331,7 +331,7 @@
     </message>
     <message>
         <source>Refresh calendar every (</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdatera kalendern varje (</translation>
     </message>
 </context>
 <context>
