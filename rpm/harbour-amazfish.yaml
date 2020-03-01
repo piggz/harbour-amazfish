@@ -1,6 +1,6 @@
 Name: harbour-amazfish
 Summary: Amazfit Bip interface application
-Version: 1.1.3
+Version: 1.2.0
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
@@ -58,6 +58,7 @@ Files:
   - '%{_datadir}/applications/%{name}-ui.desktop'
   - '%{_datadir}/icons/hicolor/*/apps/%{name}-ui.png'
   - '/usr/lib/systemd/user/harbour-amazfish.service'
+  - '/usr/share/mapplauncherd/privileges.d/harbour-amazfishd.privileges'
 
 # For more information about yaml and what's supported in Sailfish OS
 # build system, please see https://wiki.merproject.org/wiki/Spectacle

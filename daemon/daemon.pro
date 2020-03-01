@@ -31,8 +31,12 @@ target.path = /usr/bin/
 systemd_services.path = /usr/lib/systemd/user/
 systemd_services.files = harbour-amazfish.service
 
+privilege.files = $${TARGET}.privileges
+privilege.path = /usr/share/mapplauncherd/privileges.d/
+
 INSTALLS += target \
-            systemd_services
+            systemd_services \
+            privilege
 
 
 include(../qble/qble.pri)
@@ -82,7 +86,8 @@ SOURCES += \
     src/weather/huamiweathercondition.cpp
 
 DISTFILES += \
-    harbour-amazfish.service
+    harbour-amazfish.service \
+    harbour-amazfishd.privileges
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
