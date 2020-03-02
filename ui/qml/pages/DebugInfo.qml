@@ -56,43 +56,39 @@ Page {
                 title: qsTr("AmazFish")
             }
 
-            SectionHeader {
-                text: qsTr("Informations")
-            }
-
             Label {
                 text: qsTr("Address: ") + pairedAddress.value
                 color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeMedium
+                font.pixelSize: Theme.fontSizeLarge
             }
             Label {
                 id: lblSerial
                 text: qsTr("Serial No: ")
                 color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeMedium
+                font.pixelSize: Theme.fontSizeLarge
             }
             Label {
                 id: lblHWRev
                 text: qsTr("Hardware Rev: ")
                 color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeMedium
+                font.pixelSize: Theme.fontSizeLarge
             }
             Label {
                 id: lblSWRev
                 text: qsTr("Software Rev: ")
                 color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeMedium
+                font.pixelSize: Theme.fontSizeLarge
             }
             Label {
                 text: qsTr("Connection State: ") + DaemonInterfaceInstance.connectionState
                 color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeMedium
+                font.pixelSize: Theme.fontSizeLarge
             }
             Label {
                 id: lblGPSVer
                 text: qsTr("GPS Ver: ")
                 color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeMedium
+                font.pixelSize: Theme.fontSizeLarge
             }
 
             Row {
@@ -150,62 +146,44 @@ Page {
                 }
             }
 
-            SectionHeader {
-                text: qsTr("function tests")
-            }
-
             Button {
                 text: qsTr("Test Notification")
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width * 0.8
                 onClicked: {
                     DaemonInterfaceInstance.sendAlert("Somebody", "Title", "Hello from SailfishOS.  This is a long message sent over BLE!");
                 }
             }
             Button {
                 text: qsTr("Test Email")
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width * 0.8
                 onClicked: {
                     DaemonInterfaceInstance.sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
                 }
             }
             Button {
                 text: qsTr("Test Call")
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width * 0.8
                 onClicked: {
                     DaemonInterfaceInstance.incomingCall("Somebody");
                 }
             }
             Button {
                 text: qsTr("Fetch debug log")
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width * 0.8
                 onClicked: {
                     DaemonInterfaceInstance.miBandService().fetchLogs();
                 }
             }
             Button {
                 text: qsTr("Test Popup")
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width * 0.8
                 onClicked: {
                     app.showMessage("This is a test notification");
                 }
             }
             Button {
                 text: qsTr("Send Weather")
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width * 0.8
                 onClicked: {
                     DaemonInterfaceInstance.triggerSendWeather();
                 }
             }
             Button {
                 text: qsTr("Update Calendar")
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width * 0.8
                 onClicked: {
                     var dt = new Date();
                     dt.setHours(dt.getHours() + 4);
@@ -220,6 +198,9 @@ Page {
         DaemonInterfaceInstance.refreshInformation();
         activityDate = new Date(lastActivitySync.value);
         sportDate = new Date(lastSportSync.value);
+
+        //console.log(lastActivitySync.value, activityDate.value);
+        //console.log(lastSportSync, sportDate);
     }
 
     Connections {

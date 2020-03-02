@@ -130,7 +130,6 @@ CoverBackground {
             iconSource: "image://theme/icon-m-refresh";
 
             onTriggered: {
-                DaemonInterfaceInstance.requestManualHeartrate();
                 if (supportsFeature(DaemonInterface.FEATURE_HRM)) {
                     DaemonInterfaceInstance.requestManualHeartrate();
                 }

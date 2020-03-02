@@ -98,10 +98,6 @@ Page {
                 title: qsTr("Profile Settings")
             }
 
-            SectionHeader {
-                text: qsTr("Personal data")
-            }
-
             TextField {
                 id: fldName
                 label: qsTr("Name:")
@@ -111,14 +107,10 @@ Page {
 
                 Label {
                     id: lblDOB
-                    anchors.horizontalCenter: parent.horizontalCenter
                     text: qsTr("Birthday")
-                    color: Theme.highlightColor
-                    font.pixelSize: Theme.fontSizeExtraSmall
                 }
                 Button {
                     id: btnDOB
-                    anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - lblDOB - Theme.paddingLarge
                     text: new Date(page.dob).toLocaleDateString();
 
@@ -136,6 +128,9 @@ Page {
                         DatePickerDialog {}
                     }
                 }
+
+            
+
 
             ComboBox {
                 id: cboGender
@@ -164,10 +159,6 @@ Page {
                 label: qsTr("Weight (kg): ") + value
             }
 
-            SectionHeader {
-                text: qsTr("Personal preferences")
-            }
-
             ComboBox {
                 id: cboWearLocation
                 width: parent.width
@@ -181,7 +172,6 @@ Page {
             
             TextSwitch {
                 id: swDisplayOnLiftWrist
-                width: parent.width
                 text: qsTr("Display on lift wrist")
             }
 
@@ -197,17 +187,11 @@ Page {
 
             TextSwitch {
                 id: swAlertOnGoal
-                width: parent.width
                 text: qsTr("Alert on fitness goal")
-            }
-
-            SectionHeader {
-                text: "Heartrate usage"
             }
 
             TextSwitch {
                 id: swHRMSleepSupport
-                width: parent.width
                 text: qsTr("Use HRM for Sleep Detection")
             }
 
@@ -219,12 +203,6 @@ Page {
                 maximumValue: 60
                 stepSize: 5
                 label: qsTr("All day HRM interval (minutes): ") + value
-            }
-
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
             }
 
             Button {

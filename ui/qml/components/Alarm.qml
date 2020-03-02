@@ -44,7 +44,7 @@ Item {
         height: childrenRect.height
 
         spacing: Theme.paddingLarge
-        SectionHeader {
+        Label {
             text: alarmName
         }
 

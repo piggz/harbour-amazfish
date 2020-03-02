@@ -43,9 +43,9 @@ ApplicationWindow
     }
 
     function supportsFeature(feature) {
-            console.log("Checking if feature is supported:", feature, (supportedFeatures & feature) === feature);
-            return (supportedFeatures & feature) === feature;
-        }
+        console.log("Checking if feature is supported:", feature, (supportedFeatures & feature) === feature);
+        return (supportedFeatures & feature) === feature;
+    }
 
     BusyIndicator {
         size: BusyIndicatorSize.Large
@@ -183,6 +183,6 @@ ApplicationWindow
     }
 
     onSupportedFeaturesChanged: {
-            console.log("Supported features:", supportedFeatures);
-        }
+        console.log("Supported features:", supportedFeatures);
+    }
 }

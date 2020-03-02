@@ -31,12 +31,6 @@ Page {
         key: "/uk/co/piggz/amazfish/profile/name"
         defaultValue: ""
     }
-
-    ConfigurationValue {
-        id: fitnessGoal
-        key: "/uk/co/piggz/amazfish/profile/fitnessgoal"
-        defaultValue: "10000"
-    }
     
     onStatusChanged: {
         if (status === PageStatus.Active) {
@@ -86,7 +80,7 @@ Page {
             width: page.width - 2*Theme.horizontalPageMargin
             spacing: Theme.paddingLarge
             PageHeader {
-                title: qsTr("Amazfish")
+                title: qsTr("AmazFish")
             }
             Row {
                 spacing: Theme.paddingLarge
@@ -124,78 +118,21 @@ Page {
                 }
 
             }
-
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
-            }
-
-            // battery
             Row {
-                width: parent.width
-
+                spacing: Theme.paddingLarge
                 Image {
                     id: imgBattery
                     source: "image://theme/icon-m-battery"
                     width: Theme.iconSizeMedium
                     height: width
                 }
-
-                ProgressBar {
-                    id: btryProgress
-                    width: parent.width - imgBattery.width
-                    minimumValue: 0
-                    maximumValue: 100
-                }
-            }
-
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
-            }
-
-            // steps
-            Image {
-                id: imgSteps
-                source: "../pics/icon-m-steps.png"
-                height: Theme.iconSizeMedium
-                width: height
-            }
-
-            PercentCircle {
-                id: stpsCircle
-
-                anchors.horizontalCenter: parent.horizontalCenter
-                size: parent.width / 2.5
-                percent: 0.06
-
                 Label {
-                    id: lblSteps
-                    anchors.centerIn: parent
-                    color: Theme.primaryColor
+                    id: lblBattery
+                    color: Theme.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeMedium
                     height: Theme.iconSizeMedium
                     verticalAlignment: Text.AlignVCenter
                 }
-            }
-
-            Label {
-                id: lblGoal
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeExtraSmall
-                height: Theme.iconSizeMedium
-                verticalAlignment: Text.AlignVCenter
-                width: parent.width
-                text: qsTr("Goal: ") + fitnessGoal.value + qsTr(" Steps")
-            }
-
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
             }
 
             //Heartrate
@@ -203,7 +140,6 @@ Page {
                 spacing: Theme.paddingLarge
                 width: parent.width
                 visible: supportsFeature(DaemonInterface.FEATURE_HRM)
-
                 Image {
                     id: imgHeartrate
                     source: "../pics/icon-m-heartrate.png"
@@ -212,8 +148,8 @@ Page {
                 }
                 Label {
                     id: lblHeartrate
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeLarge
+                    color: Theme.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeMedium
                     height: Theme.iconSizeMedium
                     verticalAlignment: Text.AlignVCenter
                     width: parent.width - imgHeartrate.width - btnHR.width - 2* Theme.paddingLarge
@@ -277,17 +213,10 @@ Page {
 
             switch (infoKey) {
             case DaemonInterface.INFO_BATTERY:
-                //lblBattery.text = infoValue + " %"
-                //btryCircle.percent = infoValue / 100
-                btryProgress.label = infoValue + "%"
-                btryProgress.value = infoValue
+                lblBattery.text = infoValue
                 break;
             case DaemonInterface.INFO_HEARTRATE:
-                lblHeartrate.text = infoValue + " bpm"
-                break;
-            case DaemonInterface.INFO_STEPS:
-                lblSteps.text = infoValue
-                stpsCircle.percent = infoValue / fitnessGoal.value
+                lblHeartrate.text = infoValue
                 break;
             }
         }
