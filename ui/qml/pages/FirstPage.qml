@@ -40,9 +40,7 @@ Page {
     
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            //            if (!pageStack._currentContainer.attachedContainer) {
             pageStack.pushAttached(Qt.resolvedUrl("StepsPage.qml"))
-            //        }
         }
     }
     // To enable PullDownMenu, place our content in a SilicaFlickable
@@ -277,8 +275,6 @@ Page {
 
             switch (infoKey) {
             case DaemonInterface.INFO_BATTERY:
-                //lblBattery.text = infoValue + " %"
-                //btryCircle.percent = infoValue / 100
                 btryProgress.label = infoValue + "%"
                 btryProgress.value = infoValue
                 break;

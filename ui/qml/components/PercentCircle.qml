@@ -46,12 +46,4 @@ Rectangle {
             }
         }
     }
-
-//    Text
-//    {
-//        id: progressLabel
-//        anchors.centerIn: parent
-//        color: Theme.highlightColor
-//        text: (percent * 100).toFixed() + "%"
-//    }
 }
