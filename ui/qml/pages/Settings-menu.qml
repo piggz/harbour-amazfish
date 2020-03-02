@@ -13,6 +13,7 @@ Page {
     SilicaListView {
         id: column
 
+        anchors.horizontalCenter: parent.horizontalCenter
         width: page.width - 2*Theme.horizontalPageMargin
         height: parent.height
 
