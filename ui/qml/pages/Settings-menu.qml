@@ -9,105 +9,105 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
-        anchors.fill: parent
+    // Place our content in a Column.  The PageHeader is always placed at the top
+    // of the page, followed by our content.
+    SilicaListView {
+        id: column
 
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: page.width - 2*Theme.horizontalPageMargin
+        height: parent.height
 
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
+        header: PageHeader {
+            title: qsTr("Settings Menu")
+        }
 
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-            x: Theme.horizontalPageMargin
-            width: page.width - 2*Theme.horizontalPageMargin
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: qsTr("Settings Menu")
+        model: settingsPages
+
+        delegate: ListItem {
+
+            visible: checkFeature()
+            contentHeight: visible ? Theme.itemSizeMedium : 0
+
+            Icon {
+                id: settingsIcon
+                anchors.verticalCenter: parent.verticalCenter
+                source: icon
+                height: Theme.iconSizeMedium
+                width: Theme.iconSizeMedium
+            }
+            Label {
+                id: settingsName
+                anchors.verticalCenter: settingsIcon.verticalCenter
+                anchors.left: settingsIcon.right
+                anchors.leftMargin: 20
+                text: name
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("User Settings")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
-                }
-            }
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Device Settings")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-device.qml"))
-                }
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Application Settings")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-app.qml"))
-                }
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                visible: supportsFeature(DaemonInterface.FEATURE_ALARMS)
-                text: qsTr("Alarms")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-alarms.qml"))
-                }
-            }
-            
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                visible: supportsFeature(DaemonInterface.FEATURE_WEATHER)
-                text: qsTr("Weather")
-                onClicked: {
-                    var dlg = pageStack.push(Qt.resolvedUrl("AddCityDialog.qml"))
+            onClicked: {
+                if(name === qsTr("Weather")) {
+                    var dlg = pageStack.push(Qt.resolvedUrl(url))
                     dlg.cityManager = cityManager;
                 }
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: serviceActiveState == false ? qsTr("Start Service") : qsTr("Stop Service")
-
-                onClicked: {
-                    systemdServiceIface.call(serviceActiveState ? "Stop" : "Start", ["replace"])                }
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: serviceEnabledState == false ? qsTr("Enable Service") : qsTr("Disable Service")
-
-                onClicked: {
-                    if (serviceEnabledState) {
-                        systemdManager.disableService();
-                    } else {
-                        systemdManager.enableService();
-                    }
+                else if (name === qsTr("Donate")) {
+                    Qt.openUrlExternally("https://paypal.me/piggz")
+                }
+                else {
+                    pageStack.push(Qt.resolvedUrl(url))
                 }
             }
 
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Debug Info")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("DebugInfo.qml"))
+            function checkFeature() {
+                if(name === qsTr("Alarms")) {
+                    return supportsFeature(DaemonInterface.FEATURE_WEATHER)
                 }
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Donate")
-                onClicked: {
-                    Qt.openUrlExternally("https://paypal.me/piggz");
+                else if (name === qsTr("Weather")) {
+                    return supportsFeature(DaemonInterface.FEATURE_ALARMS)
+                }
+                else {
+                    return true
                 }
             }
         }
     }
 
+    ListModel {
+        id: settingsPages
+
+        ListElement {
+            icon: "image://theme/icon-m-contact"
+            name: qsTr("User Settings")
+            url: "Settings-profile.qml"
+        }
+        ListElement {
+            icon: "image://theme/icon-m-watch"
+            name: qsTr("Device Settings")
+            url: "Settings-device.qml"
+        }
+        ListElement {
+            icon: "image://theme/icon-m-levels"
+            name: qsTr("Application Settings")
+            url: "Settings-app.qml"
+        }
+        ListElement {
+            icon: "image://theme/icon-m-alarm"
+            name: qsTr("Alarms")
+            url: "Settings-alarms.qml"
+        }
+        ListElement {
+            icon: "image://theme/graphic-weather-cloud-day-1"
+            name: qsTr("Weather")
+            url: "AddCityDialog.qml"
+        }
+        ListElement {
+            icon: "image://theme/icon-m-diagnostic"
+            name: qsTr("Debug Info")
+            url: "DebugInfo.qml"
+        }
+        ListElement {
+            icon: "image://theme/icon-m-favorite-selected"
+            name: qsTr("Donate")
+            url: "https://paypal.me/piggz"
+        }
+    }
 }
