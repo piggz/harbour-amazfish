@@ -254,22 +254,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="190"/>
+        <location filename="../qml/pages/FirstPage.qml" line="191"/>
         <source>Goal: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="190"/>
+        <location filename="../qml/pages/FirstPage.qml" line="191"/>
         <source> Steps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="230"/>
+        <location filename="../qml/pages/FirstPage.qml" line="231"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="239"/>
+        <location filename="../qml/pages/FirstPage.qml" line="240"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
@@ -822,6 +822,11 @@
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="94"/>
         <source>Sleep Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SleepPage.qml" line="119"/>
+        <source>Note: last nights sleep is updated at mid-day</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

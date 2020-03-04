@@ -660,6 +660,10 @@
         <source>hrs (deep)</source>
         <translation>tim (djup)</translation>
     </message>
+    <message>
+        <source>Note: last nights sleep is updated at mid-day</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SportsSummaryPage</name>
