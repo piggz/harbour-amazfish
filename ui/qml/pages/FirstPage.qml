@@ -168,6 +168,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 size: parent.width / 2.5
                 percent: 0.06
+                widthRatio: 0.08
 
                 Label {
                     id: lblSteps
