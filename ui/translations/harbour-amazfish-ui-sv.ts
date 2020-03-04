@@ -169,18 +169,18 @@
     </message>
     <message>
         <source>Informations</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>function tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Funktionstest</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Pair with watch</source>
-        <translation>Para ihop med klocka</translation>
+        <translation>Parkoppla klocka</translation>
     </message>
     <message>
         <source>Download File</source>
@@ -200,7 +200,7 @@
     </message>
     <message>
         <source>Start Service</source>
-        <translation>Strata tjänsten</translation>
+        <translation>Starta tjänsten</translation>
     </message>
     <message>
         <source>Enable Service</source>
@@ -208,15 +208,15 @@
     </message>
     <message>
         <source>Amazfish</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfish</translation>
     </message>
     <message>
         <source>Goal: </source>
-        <translation type="unfinished"></translation>
+        <translation>Mål: </translation>
     </message>
     <message>
         <source> Steps</source>
-        <translation type="unfinished"></translation>
+        <translation> Steg</translation>
     </message>
 </context>
 <context>
@@ -351,27 +351,27 @@
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviseringar</translation>
     </message>
     <message>
         <source>Refresh rates</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdateringsintervall</translation>
     </message>
     <message>
         <source>Start service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta tjänsten vid systemstart</translation>
     </message>
     <message>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta/Stoppa Amazfish bakgrundstjänst</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppa</translation>
     </message>
 </context>
 <context>
@@ -627,15 +627,15 @@
     </message>
     <message>
         <source>Personal data</source>
-        <translation type="unfinished"></translation>
+        <translation>Personlig data</translation>
     </message>
     <message>
         <source>Personal preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Personliga inställningar</translation>
     </message>
     <message>
         <source>Heartrate usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjärtfrekvensanvändning</translation>
     </message>
 </context>
 <context>
@@ -662,7 +662,7 @@
     </message>
     <message>
         <source>Note: last nights sleep is updated at mid-day</source>
-        <translation type="unfinished"></translation>
+        <translation>Notis: Senaste nattens sömn uppdateras mitt på dagen</translation>
     </message>
 </context>
 <context>
