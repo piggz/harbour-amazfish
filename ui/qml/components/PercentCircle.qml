@@ -40,8 +40,8 @@ Rectangle {
             anchors.fill: parent
             gradient: Gradient
             {
-                GradientStop { position: 0.00; color: Theme.highlightColor }
-                GradientStop { position: percent; color: Theme.highlightColor }
+                GradientStop { position: 0.00; color: Theme.highlightDimmerColor }
+                GradientStop { position: percent; color: Theme.highlightDimmerColor }
                 GradientStop { position: percent + 0.01; color: "transparent" }
                 GradientStop { position: 1.00; color: "transparent" }
             }

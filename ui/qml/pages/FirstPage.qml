@@ -269,6 +269,10 @@ Page {
                 console.log(supportedFeatures);
 
                 DaemonInterfaceInstance.refreshInformation();
+
+                var steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
+                lblSteps.text = steps
+                stpsCircle.percent = steps / fitnessGoal.value
             }
         }
         onInformationChanged: {
@@ -298,6 +302,10 @@ Page {
         if (DaemonInterfaceInstance.connectionState === "authenticated") {
             DaemonInterfaceInstance.refreshInformation();
             supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
+
+            var steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
+            lblSteps.text = steps
+            stpsCircle.percent = steps / fitnessGoal.value
         }
     }
 }
