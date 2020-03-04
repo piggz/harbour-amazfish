@@ -108,6 +108,7 @@ Page {
                 maximumValue: 240
                 stepSize: 15
                 label: qsTr("Refresh calendar every (") + value + qsTr(") minutes")
+                visible: supportsFeature(DaemonInterface.FEATURE_EVENT_REMINDER)
             }
 
             SectionHeader {

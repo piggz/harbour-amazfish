@@ -156,6 +156,7 @@ Page {
 
             Button {
                 text: qsTr("Test Notification")
+                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width * 0.8
                 onClicked: {
@@ -164,6 +165,7 @@ Page {
             }
             Button {
                 text: qsTr("Test Email")
+                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width * 0.8
                 onClicked: {
@@ -196,6 +198,8 @@ Page {
             }
             Button {
                 text: qsTr("Send Weather")
+                visible: supportsFeature(DaemonInterface.FEATURE_WEATHER)
+
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width * 0.8
                 onClicked: {
@@ -204,6 +208,7 @@ Page {
             }
             Button {
                 text: qsTr("Update Calendar")
+                visible: supportsFeature(DaemonInterface.FEATURE_EVENT_REMINDER)
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width * 0.8
                 onClicked: {
