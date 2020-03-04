@@ -155,7 +155,7 @@ Page {
                     text: qsTr("Stop")
                     enabled: serviceActiveState ? true : false
                     onClicked: {
-                        systemdServiceIface.call("Stop")
+                        systemdServiceIface.call("Stop", ["replace"])
                     }
                 }
             }
