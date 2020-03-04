@@ -108,6 +108,16 @@ Page {
                     updateGraph(day);
                 }
             }
+            Label {
+                id: lblUpdate
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeExtraSmall
+                height: Theme.iconSizeMedium
+                verticalAlignment: Text.AlignVCenter
+                width: parent.width
+                text: qsTr("Note: last nights sleep is updated at mid-day")
+            }
         }
     }
 
