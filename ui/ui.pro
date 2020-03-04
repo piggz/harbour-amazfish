@@ -37,6 +37,7 @@ SOURCES += src/harbour-amazfish-ui.cpp \
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/components/DeviceButton.qml \
+    qml/components/PercentCircle.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
     qml/pages/PairSelectDeviceType.qml \
