@@ -133,80 +133,90 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="60"/>
+        <source>Informations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="64"/>
         <source>Address: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="66"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="70"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="230"/>
         <source>Serial No: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="72"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="214"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="76"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="233"/>
         <source>Hardware Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="78"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="217"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="82"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="236"/>
         <source>Software Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="83"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="87"/>
         <source>Connection State: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="89"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="220"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="93"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="239"/>
         <source>GPS Ver: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="99"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="103"/>
         <source>A:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="127"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="131"/>
         <source>S:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="150"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="154"/>
+        <source>function tests</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="158"/>
         <source>Test Notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="156"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="166"/>
         <source>Test Email</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="162"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="174"/>
         <source>Test Call</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="168"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="182"/>
         <source>Fetch debug log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="174"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="190"/>
         <source>Test Popup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="180"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="198"/>
         <source>Send Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="186"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Update Calendar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -214,42 +224,52 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="49"/>
+        <location filename="../qml/pages/FirstPage.qml" line="53"/>
         <source>Pair with watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="53"/>
+        <location filename="../qml/pages/FirstPage.qml" line="57"/>
         <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="57"/>
+        <location filename="../qml/pages/FirstPage.qml" line="61"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="61"/>
+        <location filename="../qml/pages/FirstPage.qml" line="65"/>
         <source>Disconnect from watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="61"/>
+        <location filename="../qml/pages/FirstPage.qml" line="65"/>
         <source>Connect to watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="83"/>
-        <source>AmazFish</source>
+        <location filename="../qml/pages/FirstPage.qml" line="87"/>
+        <source>Amazfish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="168"/>
+        <location filename="../qml/pages/FirstPage.qml" line="190"/>
+        <source>Goal: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="190"/>
+        <source> Steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="230"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="177"/>
+        <location filename="../qml/pages/FirstPage.qml" line="239"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
@@ -366,7 +386,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-alarms.qml" line="81"/>
+        <location filename="../qml/pages/Settings-alarms.qml" line="87"/>
         <source>Save Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -379,38 +399,68 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="68"/>
+        <location filename="../qml/pages/Settings-app.qml" line="64"/>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="72"/>
         <source>Notify on connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="79"/>
+        <location filename="../qml/pages/Settings-app.qml" line="84"/>
+        <source>Refresh rates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="101"/>
         <source>Refresh weather every (</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="79"/>
-        <location filename="../qml/pages/Settings-app.qml" line="89"/>
+        <location filename="../qml/pages/Settings-app.qml" line="101"/>
+        <location filename="../qml/pages/Settings-app.qml" line="110"/>
         <source>) minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="89"/>
+        <location filename="../qml/pages/Settings-app.qml" line="110"/>
         <source>Refresh calendar every (</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="95"/>
+        <location filename="../qml/pages/Settings-app.qml" line="90"/>
         <source>Sync activity data each hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="103"/>
+        <location filename="../qml/pages/Settings-app.qml" line="80"/>
         <source>Low battery notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="108"/>
+        <location filename="../qml/pages/Settings-app.qml" line="120"/>
+        <source>Start service on boot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="132"/>
+        <source>Start/Stop the Amazfish Background Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="146"/>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="155"/>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="171"/>
         <source>Save Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -591,7 +641,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="132"/>
+        <location filename="../qml/pages/Settings-device.qml" line="138"/>
         <source>Save Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -599,62 +649,46 @@
 <context>
     <name>Settings-menu</name>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="29"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="22"/>
         <source>Settings Menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="34"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="79"/>
         <source>User Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="41"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="84"/>
         <source>Device Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="49"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="89"/>
         <source>Application Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="58"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="61"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="94"/>
         <source>Alarms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="67"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="48"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="64"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="99"/>
         <source>Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="76"/>
-        <source>Start Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="76"/>
-        <source>Stop Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="84"/>
-        <source>Enable Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="84"/>
-        <source>Disable Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="97"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="104"/>
         <source>Debug Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="105"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="52"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="109"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -667,83 +701,98 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="103"/>
-        <location filename="../qml/pages/Settings-profile.qml" line="104"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="102"/>
+        <source>Personal data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-profile.qml" line="107"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="108"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="110"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="115"/>
         <source>Birthday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="138"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="143"/>
         <source>Gender</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="141"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="146"/>
         <source>Male</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="142"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="147"/>
         <source>Female</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="151"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="156"/>
         <source>Height (cm): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="159"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="164"/>
         <source>Weight (kg): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="165"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="168"/>
+        <source>Personal preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-profile.qml" line="174"/>
         <source>Wear Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="168"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="177"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="169"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="178"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="175"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="185"/>
         <source>Display on lift wrist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="184"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="194"/>
         <source>Goal (steps): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="190"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="201"/>
         <source>Alert on fitness goal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="195"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="205"/>
+        <source>Heartrate usage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-profile.qml" line="211"/>
         <source>Use HRM for Sleep Detection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="205"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="221"/>
         <source>All day HRM interval (minutes): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="210"/>
+        <location filename="../qml/pages/Settings-profile.qml" line="232"/>
         <source>Save Profile</source>
         <translation type="unfinished"></translation>
     </message>

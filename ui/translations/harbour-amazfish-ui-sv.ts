@@ -167,6 +167,14 @@
         <source>Update Calendar</source>
         <translation>Uppdatera kalender</translation>
     </message>
+    <message>
+        <source>Informations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>function tests</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
@@ -191,16 +199,24 @@
         <translation>Anslut till klocka</translation>
     </message>
     <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
-    </message>
-    <message>
         <source>Start Service</source>
         <translation>Strata tjänsten</translation>
     </message>
     <message>
         <source>Enable Service</source>
         <translation>Aktivera tjänsten</translation>
+    </message>
+    <message>
+        <source>Amazfish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goal: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Steps</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -332,6 +348,30 @@
     <message>
         <source>Refresh calendar every (</source>
         <translation>Uppdatera kalendern varje (</translation>
+    </message>
+    <message>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh rates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start service on boot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start/Stop the Amazfish Background Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -511,22 +551,6 @@
         <translation>Väder</translation>
     </message>
     <message>
-        <source>Start Service</source>
-        <translation>Starta tjänsten</translation>
-    </message>
-    <message>
-        <source>Stop Service</source>
-        <translation>Stoppa tjänsten</translation>
-    </message>
-    <message>
-        <source>Enable Service</source>
-        <translation>Aktivera tjänsten</translation>
-    </message>
-    <message>
-        <source>Disable Service</source>
-        <translation>Avaktivera tjänsten</translation>
-    </message>
-    <message>
         <source>Debug Info</source>
         <translation>Felsökningsinfo</translation>
     </message>
@@ -600,6 +624,18 @@
     <message>
         <source>Save Profile</source>
         <translation>Spara profil</translation>
+    </message>
+    <message>
+        <source>Personal data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Personal preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heartrate usage</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
