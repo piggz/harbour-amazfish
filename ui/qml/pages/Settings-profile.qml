@@ -202,7 +202,7 @@ Page {
             }
 
             SectionHeader {
-                text: "Heartrate usage"
+                text: qsTr("Heartrate usage")
             }
 
             TextSwitch {
