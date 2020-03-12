@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>File type/version: </source>
-        <translation>Tipo de archivo/versión: </translation>
+        <translation>Tipo de archivo/ver.: </translation>
     </message>
     <message>
         <source>File not supported on this device</source>
@@ -165,15 +165,15 @@
     </message>
     <message>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar calendario</translation>
     </message>
     <message>
         <source>Informations</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos</translation>
     </message>
     <message>
         <source>function tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Pruebas de funcionamiento</translation>
     </message>
 </context>
 <context>
@@ -208,22 +208,22 @@
     </message>
     <message>
         <source>Amazfish</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfish</translation>
     </message>
     <message>
         <source>Goal: </source>
-        <translation type="unfinished"></translation>
+        <translation>Objetivo: </translation>
     </message>
     <message>
         <source> Steps</source>
-        <translation type="unfinished"></translation>
+        <translation> pasos</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay datos</translation>
     </message>
 </context>
 <context>
@@ -261,27 +261,27 @@
     </message>
     <message>
         <source>Amazfit Bip Lite</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfit Bip Lite</translation>
     </message>
     <message>
         <source>Amazfit Bip Watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfit Bip</translation>
     </message>
     <message>
         <source>Amazfit Cor</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfit Cor</translation>
     </message>
     <message>
         <source>Mi Band 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Mi Band 3</translation>
     </message>
     <message>
         <source>MI Band 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Mi Band 2</translation>
     </message>
     <message>
         <source>Mi Smart Band 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Mi Smart Band 4</translation>
     </message>
 </context>
 <context>
@@ -347,31 +347,31 @@
     </message>
     <message>
         <source>Refresh calendar every (</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar calendario cada (</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificaciones</translation>
     </message>
     <message>
         <source>Refresh rates</source>
-        <translation type="unfinished"></translation>
+        <translation>Frecuencia de actualización</translation>
     </message>
     <message>
         <source>Start service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar servicio en el arranque</translation>
     </message>
     <message>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar/Detener servicio Amazfish</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Detener</translation>
     </message>
 </context>
 <context>
@@ -422,7 +422,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Guardar</translation>
     </message>
 </context>
 <context>
@@ -473,7 +473,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Aceptar</translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <source>Distance Unit</source>
@@ -607,11 +607,11 @@
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation>Meta (pasos): </translation>
+        <translation>Objetivo (pasos): </translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation>Alerta al alcanzar meta</translation>
+        <translation>Alerta al lograr objetivo</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
@@ -623,19 +623,19 @@
     </message>
     <message>
         <source>Save Profile</source>
-        <translation>Guardar perfil</translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <source>Personal data</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos personales</translation>
     </message>
     <message>
         <source>Personal preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferencias personales</translation>
     </message>
     <message>
         <source>Heartrate usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Uso de frecuencia cardiaca</translation>
     </message>
 </context>
 <context>
@@ -662,7 +662,7 @@
     </message>
     <message>
         <source>Note: last nights sleep is updated at mid-day</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota: el sueño de la noche anterior se actuliza a medio día</translation>
     </message>
 </context>
 <context>
