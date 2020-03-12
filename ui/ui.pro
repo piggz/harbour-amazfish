@@ -66,6 +66,7 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/AnalysisPage.qml \
     qml/pages/StepsPage.qml \
     qml/pages/SleepPage.qml \
+    qml/components/DownloadDataMenuItem.qml \
     harbour-amazfish-ui.desktop
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172

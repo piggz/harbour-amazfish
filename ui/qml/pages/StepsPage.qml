@@ -21,11 +21,7 @@ Page {
         contentHeight: column.height
 
         PullDownMenu {
-            MenuItem {
-                text: qsTr("Download Data")
-                onClicked: DaemonInterfaceInstance.downloadActivityData();
-                enabled: DaemonInterfaceInstance.connectionState === "authenticated"
-            }
+            DownloadDataMenuItem {}
         }
 
         // Place our content in a Column.  The PageHeader is always placed at the top
