@@ -14,6 +14,27 @@ Page {
     property bool needsProfileSet: false
     property var day: new Date()
 
+    readonly property string _connectionState: DaemonInterfaceInstance.connectionState
+    readonly property bool _disconnected: _connectionState === "disconnected"
+    readonly property bool _connecting: _connectionState === "connecting"
+    readonly property bool _connected: _connectionState === "connected"
+    readonly property bool _authenticated: _connectionState === "authenticated"
+
+    on_ConnectionStateChanged: console.log(_connectionState)
+
+    on_AuthenticatedChanged: {
+        if (_authenticated) {
+            supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
+            console.log(supportedFeatures);
+
+            DaemonInterfaceInstance.refreshInformation();
+
+            var steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
+            lblSteps.text = steps
+            stpsCircle.percent = steps / fitnessGoal.value
+        }
+    }
+
     ConfigurationValue {
         id: pairedAddress
         key: "/uk/co/piggz/amazfish/pairedAddress"
@@ -62,9 +83,10 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
             }
             MenuItem {
-                text: DaemonInterfaceInstance.connectionState == "disconnected" ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
+                enabled: !_connecting
+                text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
                 onClicked: {
-                    if (DaemonInterfaceInstance.connectionState == "disconnected") {
+                    if (_disconnected) {
                         DaemonInterfaceInstance.connectToDevice(pairedAddress.value);
                     } else {
                         DaemonInterfaceInstance.disconnect();
@@ -99,12 +121,12 @@ Page {
                     height: childrenRect.height
                     BusyIndicator {
                         size: BusyIndicatorSize.Medium
-                        visible: DaemonInterfaceInstance.connectionState === "connecting"
-                        running: DaemonInterfaceInstance.connectionState === "connecting"
+                        visible: _connecting
+                        running: _connecting
                     }
                     Image {
                         source: "image://theme/icon-m-bluetooth-device"
-                        visible: DaemonInterfaceInstance.connectionState === "connected" || DaemonInterfaceInstance.connectionState === "authenticated"
+                        visible: _connected || _authenticated
                     }
                 }
                 Item {
@@ -112,12 +134,12 @@ Page {
                     height: childrenRect.height
                     BusyIndicator {
                         size: BusyIndicatorSize.Medium
-                        visible: DaemonInterfaceInstance.connectionState === "connected"
-                        running: DaemonInterfaceInstance.connectionState === "connected"
+                        visible: _connected
+                        running: _connected
                     }
                     Image {
                         source: "image://theme/icon-m-watch"
-                        visible: DaemonInterfaceInstance.connectionState === "authenticated"
+                        visible: _authenticated
                     }
                 }
 
@@ -262,19 +284,6 @@ Page {
 
     Connections {
         target: DaemonInterfaceInstance
-        onConnectionStateChanged: {
-            console.log(DaemonInterfaceInstance.connectionState);
-            if (DaemonInterfaceInstance.connectionState === "authenticated") {
-                supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
-                console.log(supportedFeatures);
-
-                DaemonInterfaceInstance.refreshInformation();
-
-                var steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
-                lblSteps.text = steps
-                stpsCircle.percent = steps / fitnessGoal.value
-            }
-        }
         onInformationChanged: {
             console.log("Information changed", infoKey, infoValue);
 
@@ -299,7 +308,7 @@ Page {
             needsProfileSet = true;
             return;
         }
-        if (DaemonInterfaceInstance.connectionState === "authenticated") {
+        if (_authenticated) {
             DaemonInterfaceInstance.refreshInformation();
             supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
 
