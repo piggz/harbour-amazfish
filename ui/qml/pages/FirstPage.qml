@@ -11,7 +11,6 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
-    property bool needsProfileSet: false
     property var day: new Date()
 
     readonly property string _connectionState: DaemonInterfaceInstance.connectionState
@@ -19,21 +18,24 @@ Page {
     readonly property bool _connecting: _connectionState === "connecting"
     readonly property bool _connected: _connectionState === "connected"
     readonly property bool _authenticated: _connectionState === "authenticated"
+    property int _steps: 0
+
+    function _refreshInformation() {
+        if (!_authenticated) {
+            return
+        }
+
+        supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
+        console.log("Supported features", supportedFeatures);
+
+        DaemonInterfaceInstance.refreshInformation();
+
+        _steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
+    }
 
     on_ConnectionStateChanged: console.log(_connectionState)
 
-    on_AuthenticatedChanged: {
-        if (_authenticated) {
-            supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
-            console.log(supportedFeatures);
-
-            DaemonInterfaceInstance.refreshInformation();
-
-            var steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
-            lblSteps.text = steps
-            stpsCircle.percent = steps / fitnessGoal.value
-        }
-    }
+    on_AuthenticatedChanged: _refreshInformation()
 
     ConfigurationValue {
         id: pairedAddress
@@ -167,6 +169,7 @@ Page {
                     width: parent.width - imgBattery.width
                     minimumValue: 0
                     maximumValue: 100
+                    label: qsTr("%1 %").arg(value)
                 }
             }
 
@@ -189,7 +192,7 @@ Page {
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 size: parent.width / 2.5
-                percent: 0.06
+                percent: _steps ? _steps / fitnessGoal.value : 0.06
                 widthRatio: 0.08
 
                 Label {
@@ -199,6 +202,7 @@ Page {
                     font.pixelSize: Theme.fontSizeMedium
                     height: Theme.iconSizeMedium
                     verticalAlignment: Text.AlignVCenter
+                    text: _steps
                 }
             }
 
@@ -276,7 +280,7 @@ Page {
         repeat: false
         interval: 200
         onTriggered: {
-            if (needsProfileSet) {
+            if (!profileName.value) {
                 pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
             }
         }
@@ -289,32 +293,21 @@ Page {
 
             switch (infoKey) {
             case DaemonInterface.INFO_BATTERY:
-                btryProgress.label = infoValue + "%"
                 btryProgress.value = infoValue
                 break;
             case DaemonInterface.INFO_HEARTRATE:
-                lblHeartrate.text = infoValue + " bpm"
+                lblHeartrate.text = qsTr("%1 bpm").arg(infoValue)
                 break;
             case DaemonInterface.INFO_STEPS:
-                lblSteps.text = infoValue
-                stpsCircle.percent = infoValue / fitnessGoal.value
+                _steps = infoValue
                 break;
             }
         }
     }
 
     Component.onCompleted: {
-        if (profileName.value === "") {
-            needsProfileSet = true;
-            return;
-        }
-        if (_authenticated) {
-            DaemonInterfaceInstance.refreshInformation();
-            supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
-
-            var steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
-            lblSteps.text = steps
-            stpsCircle.percent = steps / fitnessGoal.value
+        if (profileName.value) {
+            _refreshInformation();
         }
     }
 }
