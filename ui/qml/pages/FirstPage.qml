@@ -107,69 +107,65 @@ Page {
             x: Theme.horizontalPageMargin
             width: page.width - 2*Theme.horizontalPageMargin
             spacing: Theme.paddingLarge
+
             PageHeader {
                 title: qsTr("Amazfish")
             }
-            Row {
-                spacing: Theme.paddingLarge
+
+            Item {
+                height: Theme.itemSizeMedium
+                width: parent.width
 
                 Label {
+                    id: pairedNameLabel
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: {
+                        var dif = column.width - parent.width;
+                        return dif < 0 ? implicitWidth + dif : implicitWidth;
+                    }
                     text: pairedName.value
                     color: Theme.secondaryHighlightColor
-                    font.pixelSize: Theme.fontSizeExtraLarge
+                    font.pixelSize: Theme.fontSizeLarge
+                    truncationMode: TruncationMode.Fade
                 }
-                Item {
-                    width: childrenRect.width
-                    height: childrenRect.height
-                    BusyIndicator {
-                        size: BusyIndicatorSize.Medium
-                        visible: _connecting
-                        running: _connecting
+
+                Row {
+                    id: statusRow
+                    anchors {
+                        left: pairedNameLabel.right
+                        leftMargin: Theme.paddingMedium
+                        verticalCenter: parent.verticalCenter
                     }
+                    spacing: Theme.paddingSmall
+
                     Image {
                         source: "image://theme/icon-m-bluetooth-device"
                         visible: _connected || _authenticated
                     }
-                }
-                Item {
-                    width: childrenRect.width
-                    height: childrenRect.height
-                    BusyIndicator {
-                        size: BusyIndicatorSize.Medium
-                        visible: _connected
-                        running: _connected
-                    }
+
                     Image {
                         source: "image://theme/icon-m-watch"
                         visible: _authenticated
                     }
-                }
 
-            }
+                    Image {
+                        id: btryImage
+                        source: "image://theme/icon-m-battery"
+                        visible: _authenticated
+                    }
 
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
-            }
+                    Label {
+                        id: btryPercent
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: _authenticated
+                        font.pixelSize: Theme.fontSizeMedium
+                    }
 
-            // battery
-            Row {
-                width: parent.width
-
-                Image {
-                    id: imgBattery
-                    source: "image://theme/icon-m-battery"
-                    width: Theme.iconSizeMedium
-                    height: width
-                }
-
-                ProgressBar {
-                    id: btryProgress
-                    width: parent.width - imgBattery.width
-                    minimumValue: 0
-                    maximumValue: 100
-                    label: qsTr("%1 %").arg(value)
+                    BusyIndicator {
+                        size: BusyIndicatorSize.Medium
+                        visible: _connecting || _connected
+                        running: visible
+                    }
                 }
             }
 
@@ -191,30 +187,37 @@ Page {
                 id: stpsCircle
 
                 anchors.horizontalCenter: parent.horizontalCenter
-                size: parent.width / 2.5
+                size: parent.width - Theme.horizontalPageMargin * 4
                 percent: _steps ? _steps / fitnessGoal.value : 0.06
                 widthRatio: 0.08
 
-                Label {
-                    id: lblSteps
+                Item {
                     anchors.centerIn: parent
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeMedium
-                    height: Theme.iconSizeMedium
-                    verticalAlignment: Text.AlignVCenter
-                    text: _steps
-                }
-            }
+                    height: lblSteps.height + lblGoal.height + Theme.paddingSmall
+                    width: Math.max(lblSteps.width, lblGoal.width)
 
-            Label {
-                id: lblGoal
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeExtraSmall
-                height: Theme.iconSizeMedium
-                verticalAlignment: Text.AlignVCenter
-                width: parent.width
-                text: qsTr("Goal: ") + fitnessGoal.value + qsTr(" Steps")
+                    Label {
+                        id: lblSteps
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        color: Theme.highlightColor
+                        font.pixelSize: Theme.fontSizeExtraLarge
+                        verticalAlignment: Text.AlignVCenter
+                        text: _steps.toLocaleString()
+                    }
+
+                    Label {
+                        id: lblGoal
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                            top: lblSteps.bottom
+                            topMargin: Theme.paddingSmall
+                        }
+                        color: Theme.secondaryHighlightColor
+                        font.pixelSize: Theme.fontSizeLarge
+                        verticalAlignment: Text.AlignVCenter
+                        text: fitnessGoal.value.toLocaleString()
+                    }
+                }
             }
 
             Separator {
@@ -293,7 +296,7 @@ Page {
 
             switch (infoKey) {
             case DaemonInterface.INFO_BATTERY:
-                btryProgress.value = infoValue
+                btryPercent.text = qsTr("%1%").arg(infoValue)
                 break;
             case DaemonInterface.INFO_HEARTRATE:
                 lblHeartrate.text = qsTr("%1 bpm").arg(infoValue)
