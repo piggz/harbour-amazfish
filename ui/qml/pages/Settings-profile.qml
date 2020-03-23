@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import uk.co.piggz.amazfish 1.0
 
 Page {
@@ -10,72 +9,6 @@ Page {
     allowedOrientations: Orientation.Portrait
 
     property string dob
-
-    ConfigurationValue {
-        id: profileName
-        key: "/uk/co/piggz/amazfish/profile/name"
-        defaultValue: ""
-    }
-
-    ConfigurationValue {
-        id: profileDOB
-        key: "/uk/co/piggz/amazfish/profile/dob"
-        defaultValue: new Date().toString()
-    }
-
-    ConfigurationValue {
-        id: profileGender
-        key: "/uk/co/piggz/amazfish/profile/gender"
-        defaultValue: 0
-    }
-
-    ConfigurationValue {
-        id: profileHeight
-        key: "/uk/co/piggz/amazfish/profile/height"
-        defaultValue: 200
-    }
-
-    ConfigurationValue {
-        id: profileWeight
-        key: "/uk/co/piggz/amazfish/profile/weight"
-        defaultValue: 70
-    }
-
-    ConfigurationValue {
-        id: profileWearLocation
-        key: "/uk/co/piggz/amazfish/profile/wearlocation"
-        defaultValue: 0
-    }
-
-    ConfigurationValue {
-        id: profileFitnessGoal
-        key: "/uk/co/piggz/amazfish/profile/fitnessgoal"
-        defaultValue: 10000
-    }
-
-    ConfigurationValue {
-        id: profileAlertFitnessGoal
-        key: "/uk/co/piggz/amazfish/profile/alertfitnessgoal"
-        defaultValue: false
-    }
-
-    ConfigurationValue {
-        id: profileAllDayHRM
-        key: "/uk/co/piggz/amazfish/profile/alldayhrm"
-        defaultValue: 0
-    }
-
-    ConfigurationValue {
-        id: profileHRMSleepSupport
-        key: "/uk/co/piggz/amazfish/profile/hrmsleepsupport"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: profileDisplayOnLiftWrist
-        key: "/uk/co/piggz/amazfish/profile/displayonliftwrist"
-        defaultValue: false
-    }
     
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -124,7 +57,7 @@ Page {
 
                     onClicked: {
                         var dialog = pageStack.push(pickerComponent, {
-                                                        date: new Date(profileDOB.value)
+                                                        date: new Date(AmazfishConfig.profileDOB)
                                                     })
                         dialog.accepted.connect(function() {
                             page.dob = dialog.date;
@@ -237,30 +170,30 @@ Page {
         }
     }
     Component.onCompleted: {
-        fldName.text = profileName.value;
-        dob = profileDOB.value
-        cboGender.currentIndex = profileGender.value;
-        sldHeight.value = profileHeight.value;
-        sldWeight.value = profileWeight.value;
-        cboWearLocation.currentIndex = profileWearLocation.value;
-        sldFitnessGoal.value = profileFitnessGoal.value;
-        swAlertOnGoal.checked = profileAlertFitnessGoal.value;
-        sldAllDayHRM.value = profileAllDayHRM.value;
-        swDisplayOnLiftWrist.checked = profileDisplayOnLiftWrist.value;
-        swHRMSleepSupport.checked = profileHRMSleepSupport.value;
+        fldName.text = AmazfishConfig.profileName;
+        dob = AmazfishConfig.profileDOB;
+        cboGender.currentIndex = AmazfishConfig.profileGender;
+        sldHeight.value = AmazfishConfig.profileHeight;
+        sldWeight.value = AmazfishConfig.profileWeight;
+        cboWearLocation.currentIndex = AmazfishConfig.profileWearLocation;
+        sldFitnessGoal.value = AmazfishConfig.profileFitnessGoal;
+        swAlertOnGoal.checked = AmazfishConfig.profileAlertFitnessGoal;
+        sldAllDayHRM.value = AmazfishConfig.profileAllDayHRM;
+        swDisplayOnLiftWrist.checked = AmazfishConfig.profileDisplayOnLiftWrist;
+        swHRMSleepSupport.checked = AmazfishConfig.profileHRMSleepSupport;
     }
     function saveProfile() {
-        profileName.value = fldName.text;
-        profileDOB.value = dob;
-        profileGender.value = cboGender.currentIndex;
-        profileHeight.value = sldHeight.value;
-        profileWeight.value = sldWeight.value;
-        profileWearLocation.value = cboWearLocation.currentIndex;
-        profileFitnessGoal.value = sldFitnessGoal.value;
-        profileAlertFitnessGoal.value = swAlertOnGoal.checked;
-        profileAllDayHRM.value = sldAllDayHRM.value;
-        profileDisplayOnLiftWrist.value = swDisplayOnLiftWrist.checked;
-        profileHRMSleepSupport.value = swHRMSleepSupport.checked;
+        AmazfishConfig.profileName = fldName.text;
+        AmazfishConfig.profileDOB = dob;
+        AmazfishConfig.profileGender = cboGender.currentIndex;
+        AmazfishConfig.profileHeight = sldHeight.value;
+        AmazfishConfig.profileWeight = sldWeight.value;
+        AmazfishConfig.profileWearLocation = cboWearLocation.currentIndex;
+        AmazfishConfig.profileFitnessGoal = sldFitnessGoal.value;
+        AmazfishConfig.profileAlertFitnessGoal = swAlertOnGoal.checked;
+        AmazfishConfig.profileAllDayHRM = sldAllDayHRM.value;
+        AmazfishConfig.profileDisplayOnLiftWrist = swDisplayOnLiftWrist.checked;
+        AmazfishConfig.profileHRMSleepSupport = swHRMSleepSupport.checked;
 
         tmrSetDelay.start();
     }

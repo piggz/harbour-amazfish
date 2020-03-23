@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import org.SfietKonstantin.weatherfish 1.0
 import uk.co.piggz.amazfish 1.0
 import "../components/"
@@ -36,30 +35,6 @@ Page {
     on_ConnectionStateChanged: console.log(_connectionState)
 
     on_AuthenticatedChanged: _refreshInformation()
-
-    ConfigurationValue {
-        id: pairedAddress
-        key: "/uk/co/piggz/amazfish/pairedAddress"
-        defaultValue: ""
-    }
-
-    ConfigurationValue {
-        id: pairedName
-        key: "/uk/co/piggz/amazfish/pairedName"
-        defaultValue: ""
-    }
-
-    ConfigurationValue {
-        id: profileName
-        key: "/uk/co/piggz/amazfish/profile/name"
-        defaultValue: ""
-    }
-
-    ConfigurationValue {
-        id: fitnessGoal
-        key: "/uk/co/piggz/amazfish/profile/fitnessgoal"
-        defaultValue: "10000"
-    }
     
     onStatusChanged: {
         if (status === PageStatus.Active) {
@@ -89,7 +64,7 @@ Page {
                 text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
                 onClicked: {
                     if (_disconnected) {
-                        DaemonInterfaceInstance.connectToDevice(pairedAddress.value);
+                        DaemonInterfaceInstance.connectToDevice(AmazfishConfig.pairedAddress);
                     } else {
                         DaemonInterfaceInstance.disconnect();
                     }
@@ -123,7 +98,7 @@ Page {
                         var dif = column.width - parent.width;
                         return dif < 0 ? implicitWidth + dif : implicitWidth;
                     }
-                    text: pairedName.value
+                    text: AmazfishConfig.pairedName
                     color: Theme.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeLarge
                     truncationMode: TruncationMode.Fade
@@ -188,7 +163,7 @@ Page {
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 size: parent.width - Theme.horizontalPageMargin * 4
-                percent: _steps ? _steps / fitnessGoal.value : 0.06
+                percent: _steps ? _steps / AmazfishConfig.profileFitnessGoal : 0.06
                 widthRatio: 0.08
 
                 Item {
@@ -215,7 +190,7 @@ Page {
                         color: Theme.secondaryHighlightColor
                         font.pixelSize: Theme.fontSizeLarge
                         verticalAlignment: Text.AlignVCenter
-                        text: fitnessGoal.value.toLocaleString()
+                        text: AmazfishConfig.profileFitnessGoal.toLocaleString()
                     }
                 }
             }
@@ -283,7 +258,7 @@ Page {
         repeat: false
         interval: 200
         onTriggered: {
-            if (!profileName.value) {
+            if (!AmazfishConfig.profileName) {
                 pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
             }
         }
@@ -309,7 +284,7 @@ Page {
     }
 
     Component.onCompleted: {
-        if (profileName.value) {
+        if (AmazfishConfig.profileName) {
             _refreshInformation();
         }
     }

@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import uk.co.piggz.amazfish 1.0
 import "../components/"
 
@@ -9,12 +8,6 @@ Page {
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
-
-    ConfigurationValue {
-        id: appNotifyConnect
-        key: "/uk/co/piggz/amazfish/app/notifyconnect"
-        defaultValue: true
-    }
 
 
     // To enable PullDownMenu, place our content in a SilicaFlickable

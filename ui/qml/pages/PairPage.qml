@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
@@ -14,24 +14,6 @@ Page {
     property bool deviceRequiresAuthKey: false
 
     property bool tryAgainAvail: false
-
-    ConfigurationValue {
-        id: pairedAddress
-        key: "/uk/co/piggz/amazfish/pairedAddress"
-        defaultValue: ""
-    }
-
-    ConfigurationValue {
-        id: pairedName
-        key: "/uk/co/piggz/amazfish/pairedName"
-        defaultValue: ""
-    }
-
-    ConfigurationValue {
-        id: authKey
-        key: "/uk/co/piggz/amazfish/device/authkey"
-        defaultValue: ""
-    }
 
     Timer {
         id: tmrScan
@@ -88,7 +70,7 @@ Page {
                 visible: deviceRequiresAuthKey
 
                 onClicked: {
-                   authKey.value = fldAuthKey.text;
+                    AmazfishConfig.authKey = fldAuthKey.text;
                 }
             }
 
@@ -145,17 +127,15 @@ Page {
         target: DaemonInterfaceInstance
         onConnectionStateChanged: {
             if (DaemonInterfaceInstance.connectionState === "authenticated") {
-                pairedAddress.value = devicePath;
-                pairedName.value = deviceName;
-                pairedAddress.sync();
-                pairedName.sync()
+                AmazfishConfig.pairedAddress = devicePath;
+                AmazfishConfig.pairedName = deviceName;
                 pageStack.pop(previousPage(previousPage()));
             }
         }
     }
 
     Component.onCompleted: {
-        fldAuthKey.text = authKey.value;
+        fldAuthKey.text = AmazfishConfig.authKey;
     }
 
 }

@@ -1,43 +1,12 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
- import uk.co.piggz.amazfish 1.0
+import uk.co.piggz.amazfish 1.0
 
 Page {
     id: page
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
-
-    ConfigurationValue {
-        id: appNotifyConnect
-        key: "/uk/co/piggz/amazfish/app/notifyconnect"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: appRefreshWeather
-        key: "/uk/co/piggz/amazfish/app/refreshweather"
-        defaultValue: 60
-    }
-
-    ConfigurationValue {
-        id: appAutoSyncData
-        key: "/uk/co/piggz/amazfish/app/autosyncdata"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: appNotifyLowBattery
-        key: "/uk/co/piggz/amazfish/app/notifylowbattery"
-        defaultValue: false
-    }
-
-    ConfigurationValue {
-        id: appRefreshCalendar
-        key: "/uk/co/piggz/amazfish/app/refreshcalendar"
-        defaultValue: 60
-    }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -177,19 +146,19 @@ Page {
         }
     }
     Component.onCompleted: {
-        chkNotifyConnect.checked = appNotifyConnect.value;
-        sldWeatherRefresh.value = appRefreshWeather.value;
-        sldCalendarRefresh.value = appRefreshCalendar.value;
-        chkAutoSyncData.checked = appAutoSyncData.value;
-        chkNotifyLowBattery.checked = appNotifyLowBattery.value;
+        chkNotifyConnect.checked = AmazfishConfig.appNotifyConnect;
+        sldWeatherRefresh.value = AmazfishConfig.appRefreshWeather;
+        sldCalendarRefresh.value = AmazfishConfig.appRefreshCalendar;
+        chkAutoSyncData.checked = AmazfishConfig.appAutoSyncData;
+        chkNotifyLowBattery.checked = AmazfishConfig.appNotifyLowBattery;
     }
 
     function saveSettings() {
-        appNotifyConnect.value = chkNotifyConnect.checked;
-        appRefreshWeather.value = sldWeatherRefresh.value;
-        appRefreshCalendar.value = sldCalendarRefresh.value;
-        appAutoSyncData.value = chkAutoSyncData.checked;
-        appNotifyLowBattery.value = chkNotifyLowBattery.checked;
+        AmazfishConfig.appNotifyConnect = chkNotifyConnect.checked;
+        AmazfishConfig.appRefreshWeather = sldWeatherRefresh.value;
+        AmazfishConfig.appRefreshCalendar = sldCalendarRefresh.value;
+        AmazfishConfig.appAutoSyncData = chkAutoSyncData.checked;
+        AmazfishConfig.appNotifyLowBattery = chkNotifyLowBattery.checked;
 
         if (supportsFeature(DaemonInterface.FEATURE_WEATHER)) {
             weather.refresh();

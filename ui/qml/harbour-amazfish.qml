@@ -4,7 +4,6 @@ import "pages"
 import Nemo.Notifications 1.0
 import org.nemomobile.mpris 1.0
 import org.SfietKonstantin.weatherfish 1.0
-import Nemo.Configuration 1.0
 import org.nemomobile.dbus 2.0
 import uk.co.piggz.amazfish 1.0
 
@@ -19,18 +18,6 @@ ApplicationWindow
     property bool serviceActiveState: false
     property bool serviceEnabledState: false
     property int supportedFeatures: 0
-
-    ConfigurationValue {
-        id: appRefreshWeather
-        key: "/uk/co/piggz/amazfish/app/refreshweather"
-        defaultValue: 60
-    }
-
-    ConfigurationValue {
-        id: appAutoSyncData
-        key: "/uk/co/piggz/amazfish/app/autosyncdata"
-        defaultValue: true
-    }
 
     onStateChanged: {
         console.log("State: " + state);

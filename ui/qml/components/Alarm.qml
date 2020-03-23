@@ -1,9 +1,12 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
+import uk.co.piggz.amazfish 1.0
 
 Item {
     id: itmAlarm
+
+    readonly property string _configGroup: AmazfishConfig.group + "alarms/"
     property alias enabled: chkEnabled.checked
     property int hour: 0
     property int minute: 0
@@ -13,28 +16,27 @@ Item {
     height: childrenRect.height + Theme.paddingLarge
     width: parent.width
 
-
     ConfigurationValue {
         id: alarmEnabled
-        key: "/uk/co/piggz/amazfish/alarms/" + alarmId + "/enabled"
+        key: _configGroup + alarmId + "/enabled"
         defaultValue: false
     }
 
     ConfigurationValue {
         id: alarmHour
-        key: "/uk/co/piggz/amazfish/alarms/" + alarmId + "/hour"
+        key: _configGroup + alarmId + "/hour"
         defaultValue: 0
     }
 
     ConfigurationValue {
         id: alarmMinute
-        key: "/uk/co/piggz/amazfish/alarms/" + alarmId + "/minute"
+        key: _configGroup + alarmId + "/minute"
         defaultValue: 0
     }
 
     ConfigurationValue {
         id: alarmRepeat
-        key: "/uk/co/piggz/amazfish/alarms/" + alarmId + "/repeat"
+        key: _configGroup + alarmId + "/repeat"
         defaultValue: 0
     }
 

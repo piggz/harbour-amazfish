@@ -1,22 +1,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import uk.co.piggz.amazfish 1.0
 
 CoverBackground {
     property int stepCount: 0
-
-    ConfigurationValue {
-        id: pairedAddress
-        key: "/uk/co/piggz/amazfish/pairedAddress"
-        defaultValue: ""
-    }
-
-    ConfigurationValue {
-        id: pairedName
-        key: "/uk/co/piggz/amazfish/pairedName"
-        defaultValue: ""
-    }
 
     Column {
         anchors.fill: parent
@@ -24,7 +11,7 @@ CoverBackground {
         anchors.margins: Theme.paddingMedium
 
         Label {
-            text: pairedName.value
+            text: AmazfishConfig.pairedName
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
             font.pixelSize: Theme.fontSizeLarge

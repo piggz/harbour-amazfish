@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import uk.co.piggz.amazfish 1.0
 
 Page {
@@ -11,22 +10,6 @@ Page {
 
     property date activityDate
     property date sportDate
-
-    ConfigurationValue {
-        id: pairedAddress
-        key: "/uk/co/piggz/amazfish/pairedAddress"
-        defaultValue: ""
-    }
-
-    ConfigurationValue {
-        id: lastActivitySync
-        key: "/uk/co/piggz/amazfish/device/lastactivitysyncmillis"
-    }
-
-    ConfigurationValue {
-        id: lastSportSync
-        key: "/uk/co/piggz/amazfish/device/lastsportsyncmillis"
-    }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -61,7 +44,7 @@ Page {
             }
 
             Label {
-                text: qsTr("Address: ") + pairedAddress.value
+                text: qsTr("Address: ") + AmazfishConfig.pairedAddress
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeMedium
             }
@@ -107,8 +90,8 @@ Page {
                     width: parent.width * 0.16
                     text: "-"
                     onClicked: {
-                        lastActivitySync.value -= 3600000
-                        activityDate = new Date(lastActivitySync.value);
+                        AmazfishConfig.lastActivitySync -= 3600000
+                        activityDate = new Date(AmazfishConfig.lastActivitySync);
                     }
                 }
                 Button {
@@ -116,8 +99,8 @@ Page {
                     width: parent.width * 0.16
                     text: "+"
                     onClicked: {
-                        lastActivitySync.value += 3600000
-                        activityDate = new Date(lastActivitySync.value);
+                        AmazfishConfig.lastActivitySync += 3600000
+                        activityDate = new Date(AmazfishConfig.lastActivitySync);
                     }
                 }
             }
@@ -135,8 +118,8 @@ Page {
                     width: parent.width * 0.16
                     text: "-"
                     onClicked: {
-                        lastSportSync.value -= 3600000
-                        sportDate = new Date(lastSportSync.value);
+                        AmazfishConfig.lastSportSync -= 3600000
+                        sportDate = new Date(AmazfishConfig.lastSportSync);
                     }
                 }
                 Button {
@@ -144,8 +127,8 @@ Page {
                     width: parent.width * 0.16
                     text: "+"
                     onClicked: {
-                        lastSportSync.value += 3600000
-                        sportDate = new Date(lastSportSync.value);
+                        AmazfishConfig.lastSportSync += 3600000
+                        sportDate = new Date(AmazfishConfig.lastSportSync);
                     }
                 }
             }
@@ -223,8 +206,8 @@ Page {
 
     Component.onCompleted: {
         DaemonInterfaceInstance.refreshInformation();
-        activityDate = new Date(lastActivitySync.value);
-        sportDate = new Date(lastSportSync.value);
+        activityDate = new Date(AmazfishConfig.lastActivitySync);
+        sportDate = new Date(AmazfishConfig.lastSportSync);
     }
 
     Connections {

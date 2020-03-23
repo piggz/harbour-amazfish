@@ -36,6 +36,7 @@ SOURCES += src/harbour-amazfish-ui.cpp \
     src/daemoninterface.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
+    qml/AmazfishConfig.qml \
     qml/components/DeviceButton.qml \
     qml/components/PercentCircle.qml \
     qml/cover/CoverPage.qml \

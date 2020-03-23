@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import uk.co.piggz.amazfish 1.0
 
 Page {
@@ -8,36 +7,6 @@ Page {
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
-
-    ConfigurationValue {
-        id: deviceLanguage
-        key: "/uk/co/piggz/amazfish/device/language"
-        defaultValue: 0
-    }
-
-    ConfigurationValue {
-        id: deviceDateFormat
-        key: "/uk/co/piggz/amazfish/device/dateformat"
-        defaultValue: 0
-    }
-
-    ConfigurationValue {
-        id: deviceTimeFormat
-        key: "/uk/co/piggz/amazfish/device/timeformat"
-        defaultValue: 0
-    }
-
-    ConfigurationValue {
-        id: deviceDistanceUnit
-        key: "/uk/co/piggz/amazfish/device/distanceunit"
-        defaultValue: 0
-    }
-
-    ConfigurationValue {
-        id: deviceDisconnectNotification
-        key: "/uk/co/piggz/amazfish/device/disconnectnotification"
-        defaultValue: false
-    }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -143,16 +112,16 @@ Page {
         }
     }
     Component.onCompleted: {
-        cboLanguage.currentIndex = deviceLanguage.value;
-        cboDateDisplay.currentIndex = deviceDateFormat.value;
-        cboTimeFormat.currentIndex = deviceTimeFormat.value;
-        chkDisconnectNotification.checked = deviceDisconnectNotification.value
+        cboLanguage.currentIndex = AmazfishConfig.deviceLanguage;
+        cboDateDisplay.currentIndex = AmazfishConfig.deviceDateFormat;
+        cboTimeFormat.currentIndex = AmazfishConfig.deviceTimeFormat;
+        chkDisconnectNotification.checked = AmazfishConfig.deviceDisconnectNotification;
     }
     function saveSettings() {
-        deviceLanguage.value = cboLanguage.currentIndex;
-        deviceDateFormat.value = cboDateDisplay.currentIndex;
-        deviceTimeFormat.value = cboTimeFormat.currentIndex;
-        deviceDisconnectNotification.value = chkDisconnectNotification.checked
+        AmazfishConfig.deviceLanguage = cboLanguage.currentIndex;
+        AmazfishConfig.deviceDateFormat = cboDateDisplay.currentIndex;
+        AmazfishConfig.deviceTimeFormat = cboTimeFormat.currentIndex;
+        AmazfishConfig.deviceDisconnectNotification = chkDisconnectNotification.checked;
         tmrSetDelay.start();
     }
 
