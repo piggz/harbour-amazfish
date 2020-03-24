@@ -2,7 +2,6 @@
 #define BIPFIRMWARESERVICE_H
 
 #include "qble/qbleservice.h"
-#include "settingsmanager.h"
 #include "updatefirmwareoperation.h"
 
 /*
@@ -42,7 +41,6 @@ public:
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 
-    SettingsManager m_settings;
     int m_operationRunning = 0;
 
     UpdateFirmwareOperation *m_updateFirmware = nullptr;

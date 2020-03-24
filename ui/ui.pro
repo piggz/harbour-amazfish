@@ -15,15 +15,17 @@ TARGET = harbour-amazfish-ui
 CONFIG += sailfishapp
 
 QT +=  contacts positioning KDb3
-LIBS += -Lqble/qble
+LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish
 
 PKGCONFIG += mlite5
 
-INCLUDEPATH += $$PWD/src/services/ \
-                                    $$PWD/src/operations/ \
-                                    $$PWD/src/devices/ \
-                                    $$PWD/src/ \
-                                    $$PWD/../
+INCLUDEPATH += \
+    $$PWD/src/services/ \
+    $$PWD/src/operations/ \
+    $$PWD/src/devices/ \
+    $$PWD/src/ \
+    $$PWD/../ \
+    ../lib/src
 
 include(../qble/qble.pri)
 
@@ -36,7 +38,6 @@ SOURCES += src/harbour-amazfish-ui.cpp \
     src/daemoninterface.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
-    qml/AmazfishConfig.qml \
     qml/components/DeviceButton.qml \
     qml/components/PercentCircle.qml \
     qml/cover/CoverPage.qml \

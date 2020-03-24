@@ -10,7 +10,6 @@
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
 #include "bipfirmwareservice.h"
-#include "settingsmanager.h"
 
 #include <QTimer>
 
@@ -124,7 +123,6 @@ private:
     void parseServices();
     void initialise();
 
-    SettingsManager m_settings;
     QString m_softwareRevision;
     int m_buttonPresses = 0;
     QTimer *m_keyPressTimer = nullptr;

@@ -2,7 +2,6 @@
 #define HRMSERVICE_H
 
 #include "qble/qbleservice.h"
-#include "settingsmanager.h"
 #include "abstractdevice.h"
 
 /*
@@ -41,7 +40,6 @@ public:
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 
-    SettingsManager m_settings;
     int m_heartRate = 0;
 };
 

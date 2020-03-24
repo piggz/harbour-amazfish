@@ -7,6 +7,7 @@
 #include "hrmservice.h"
 #include "bipfirmwareservice.h"
 #include "devicefactory.h"
+#include "amazfishconfig.h"
 
 #include <QDir>
 #include <KDb3/KDbDriverManager>
@@ -22,8 +23,10 @@ DeviceInterface::DeviceInterface()
     //Intercept notificaions
     m_notificationListener = new NotificationsListener(this);
 
+    auto config = AmazfishConfig::instance();
+
     //Create a device object
-    m_device = DeviceFactory::createDevice(m_settings.value("/uk/co/piggz/amazfish/pairedName").toString());
+    m_device = DeviceFactory::createDevice(config->pairedName());
     if (m_device) {
         connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged);
         connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message);
@@ -32,8 +35,6 @@ DeviceInterface::DeviceInterface()
         connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
     }
-
-    m_adapter.setAdapterPath("/org/bluez/hci0");
 
     //Create the DBUS HRM Interface
     m_dbusHRM = new DBusHRM(this);
@@ -64,7 +65,7 @@ DeviceInterface::DeviceInterface()
     m_refreshTimer->start(60000);
 
     //Finally, connect to device if it is defined
-    QString pairedAddress = m_settings.value("/uk/co/piggz/amazfish/pairedAddress").toString();
+    QString pairedAddress = config->pairedAddress();
     if (!pairedAddress.isEmpty()) {
         connectToDevice(pairedAddress);
     }
@@ -80,7 +81,7 @@ void DeviceInterface::connectToDevice(const QString &address)
 {
     qDebug() << "DeviceInterface::connectToDevice:" << address;
 
-    if (m_device /* && m_adapter.deviceIsValid(address)*/) {
+    if (m_device) {
         m_deviceAddress = address;
         m_device->setDevicePath(address);
         m_device->connectToDevice();
@@ -401,7 +402,7 @@ void DeviceInterface::onConnectionStateChanged()
         if (hrmService()) {
             m_dbusHRM->setHRMService(hrmService());
         }
-        if (m_settings.value("/uk/co/piggz/amazfish/app/notifyconnect").toBool()) {
+        if (AmazfishConfig::instance()->appNotifyConnect()) {
             sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
         }
 
@@ -424,7 +425,7 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
     //Handle notification of low battery
     if (key == AbstractDevice::INFO_BATTERY) {
         if (val.toInt() != m_lastBatteryLevel) {
-            if (val.toInt() <= 10 && val.toInt() < m_lastBatteryLevel && m_settings.value("/uk/co/piggz/amazfish/app/notifylowbattery").toBool()) {
+            if (val.toInt() <= 10 && val.toInt() < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
                 sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(m_lastBatteryLevel) + "%");
             }
             m_lastBatteryLevel = val.toInt();
@@ -570,20 +571,22 @@ void DeviceInterface::onRefreshTimer()
     static int syncWeatherMinutes = 0;
     static int syncCalendarMinutes = 0;
 
+    auto config = AmazfishConfig::instance();
+
     syncWeatherMinutes++;
-    if (syncWeatherMinutes >= m_settings.value("/uk/co/piggz/amazfish/app/refreshweather").toInt()) {
+    if (syncWeatherMinutes >= config->appRefreshWeather()) {
         syncWeatherMinutes = 0;
         qDebug() << "weather interval reached";
         m_currentWeather.refresh();
     }
     syncCalendarMinutes++;
-    if (syncCalendarMinutes >= m_settings.value("/uk/co/piggz/amazfish/app/refreshcalendar").toInt()) {
+    if (syncCalendarMinutes >= config->appRefreshCalendar()) {
         syncCalendarMinutes = 0;
         qDebug() << "calendar interval reached";
         updateCalendar();
     }
 
-    if (m_settings.value("/uk/co/piggz/amazfish/app/autosyncdata").toBool()) {
+    if (config->appAutoSyncData()) {
         syncActivitiesMinutes++;
 
         if (syncActivitiesMinutes > 60) {

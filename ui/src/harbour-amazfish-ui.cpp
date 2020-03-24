@@ -17,6 +17,7 @@
 #include "weather/city.h"
 
 #include "qble/bluezadapter.h"
+#include "amazfishconfig.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,7 +37,7 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
     qmlRegisterUncreatableType<DaemonInterface>("uk.co.piggz.amazfish", 1, 0, "DaemonInterface", "DaemonInterface type available only for enum datatypes");
 
-    qmlRegisterSingletonType(SailfishApp::pathTo("qml/AmazfishConfig.qml"), "uk.co.piggz.amazfish", 1, 0, "AmazfishConfig");
+    qmlRegisterSingletonType<AmazfishConfig>("uk.co.piggz.amazfish", 1, 0, "AmazfishConfig", AmazfishConfig::qmlInstance);
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);

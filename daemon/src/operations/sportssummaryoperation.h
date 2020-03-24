@@ -8,7 +8,6 @@
 
 #include "abstractfetchoperation.h"
 #include "activitysummary.h"
-#include "settingsmanager.h"
 
 class SportsSummaryOperation : public AbstractFetchOperation
 {
@@ -24,7 +23,6 @@ public:
 private:
 
     QDateTime m_sampleTime;
-    SettingsManager m_settings;
     int m_lastPacketCounter = 0;
     QByteArray m_buffer;
     bool m_success = false;

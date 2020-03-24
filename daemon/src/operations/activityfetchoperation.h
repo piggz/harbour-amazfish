@@ -8,7 +8,6 @@
 
 #include "abstractfetchoperation.h"
 #include "activitysample.h"
-#include "settingsmanager.h"
 
 class ActivityFetchOperation : public AbstractFetchOperation
 {
@@ -23,7 +22,6 @@ private:
 
     QDateTime m_sampleTime;
     QList<ActivitySample> m_samples;
-    SettingsManager m_settings;
 
     KDbConnection *m_conn;
 

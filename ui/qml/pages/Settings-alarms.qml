@@ -34,38 +34,35 @@ Page {
             Alarm {
                 id: alarm1
                 alarmName: qsTr("Alarm 1")
-                alarmId: "alarm1"
+                alarmId: 1
             }
 
             Alarm {
                 id: alarm2
                 alarmName: qsTr("Alarm 2")
-                alarmId: "alarm2"
+                alarmId: 2
 
 
             }
 
             Alarm {
                 id: alarm3
-
                 alarmName: qsTr("Alarm 3")
-                alarmId: "alarm3"
+                alarmId: 3
 
             }
 
             Alarm {
                 id: alarm4
-
                 alarmName: qsTr("Alarm 4")
-                alarmId: "alarm4"
+                alarmId: 4
 
             }
 
             Alarm {
                 id: alarm5
-
                 alarmName: qsTr("Alarm 5")
-                alarmId: "alarm5"
+                alarmId: 5
 
             }
 

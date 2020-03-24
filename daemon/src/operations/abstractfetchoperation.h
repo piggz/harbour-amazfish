@@ -5,7 +5,6 @@
 
 #include <QDateTime>
 #include <QString>
-#include "settingsmanager.h"
 
 class AbstractFetchOperation : public AbstractOperation
 {
@@ -17,7 +16,6 @@ public:
 private:
     QDateTime m_startDate;
     QString m_lastSyncKey;
-    SettingsManager m_settings;
     bool m_abort = false;
 
 protected:

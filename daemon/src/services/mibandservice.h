@@ -2,7 +2,6 @@
 #define MIBANDSERVICE_H
 
 #include "qble/qbleservice.h"
-#include "settingsmanager.h"
 #include "bipbatteryinfo.h"
 #include "logfetchoperation.h"
 #include "activityfetchoperation.h"
@@ -162,7 +161,6 @@ private:
     int m_steps = 0;
     int m_operationRunning = 0;
 
-    SettingsManager m_settings;
     BipBatteryInfo m_batteryInfo;
     LogFetchOperation *m_logFetchOperation = nullptr;
     ActivityFetchOperation *m_activityFetchOperation = nullptr;

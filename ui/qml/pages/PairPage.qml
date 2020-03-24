@@ -70,7 +70,7 @@ Page {
                 visible: deviceRequiresAuthKey
 
                 onClicked: {
-                    AmazfishConfig.authKey = fldAuthKey.text;
+                    AmazfishConfig.deviceAuthKey = fldAuthKey.text;
                 }
             }
 
@@ -135,7 +135,7 @@ Page {
     }
 
     Component.onCompleted: {
-        fldAuthKey.text = AmazfishConfig.authKey;
+        fldAuthKey.text = AmazfishConfig.deviceAuthKey;
     }
 
 }

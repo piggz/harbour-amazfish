@@ -2,7 +2,6 @@
 #define MIBAND2SERVICE_H
 
 #include "qble/qbleservice.h"
-#include "settingsmanager.h"
 
 /*
 {0000FEE1-0000-1000-8000-00805f9b34fb} MiBand2 Service
@@ -44,7 +43,6 @@ private:
 
     QByteArray handleAesAuth(QByteArray data, QByteArray secretKey);
 
-    SettingsManager m_settings;
     QByteArray getSecretKey();
     QByteArray requestAuthNumber();
 

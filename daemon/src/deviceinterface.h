@@ -11,14 +11,11 @@
 #include <KDb3/KDbConnection>
 #include <KDb3/KDbConnectionData>
 
-#include "qble/bluezadapter.h"
-
 #include "abstractdevice.h"
 #include "abstractfirmwareinfo.h"
 #include "notificationslistener.h"
 #include "voicecallhandler.h"
 #include "voicecallmanager.h"
-#include "settingsmanager.h"
 #include "dbushrm.h"
 #include "weather/citymanager.h"
 #include "weather/currentweather.h"
@@ -89,12 +86,10 @@ private:
     int m_lastAlertHash = 0;
     AbstractFirmwareInfo *m_firmwareInfo = nullptr;
 
-    BluezAdapter m_adapter;
     AbstractDevice *m_device = nullptr;
     NotificationsListener *m_notificationListener = nullptr;
     VoiceCallManager *m_voiceCallManager = nullptr;
 
-    SettingsManager m_settings;
     DBusHRM *m_dbusHRM = nullptr;
 
     QTimer *m_refreshTimer = nullptr;

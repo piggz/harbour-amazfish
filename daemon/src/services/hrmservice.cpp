@@ -1,4 +1,5 @@
 #include "hrmservice.h"
+#include "amazfishconfig.h"
 
 const char* HRMService::UUID_SERVICE_HRM = "0000180d-0000-1000-8000-00805f9b34fb";
 const char* HRMService::UUID_CHARACTERISTIC_HRM_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
@@ -60,7 +61,7 @@ void HRMService::enableManualHRMeasurement(bool enable)
 
 void HRMService::setAllDayHRM()
 {
-    int interval = m_settings.value("/uk/co/piggz/amazfish/profile/alldayhrm").toInt();
+    auto interval = AmazfishConfig::instance()->profileAllDayHRM();
 
     qDebug() << "Setting HRM monitoring to" << interval;
 
@@ -74,7 +75,7 @@ void HRMService::setAllDayHRM()
 
 void HRMService::setHeartrateSleepSupport()
 {
-    bool enable = m_settings.value("/uk/co/piggz/amazfish/profile/hrmsleepsupport", QVariant(true)).toBool();
+    auto enable = AmazfishConfig::instance()->profileHRMSleepSupport();
 
     qDebug() << "Setting HRM sleept support to" << enable;
 

@@ -1,45 +1,18 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import uk.co.piggz.amazfish 1.0
 
 Item {
     id: itmAlarm
 
-    readonly property string _configGroup: AmazfishConfig.group + "alarms/"
     property alias enabled: chkEnabled.checked
     property int hour: 0
     property int minute: 0
     property string alarmName: "Alarm 1"
-    property string alarmId: "alarm1"
+    property int alarmId: 1
 
     height: childrenRect.height + Theme.paddingLarge
     width: parent.width
-
-    ConfigurationValue {
-        id: alarmEnabled
-        key: _configGroup + alarmId + "/enabled"
-        defaultValue: false
-    }
-
-    ConfigurationValue {
-        id: alarmHour
-        key: _configGroup + alarmId + "/hour"
-        defaultValue: 0
-    }
-
-    ConfigurationValue {
-        id: alarmMinute
-        key: _configGroup + alarmId + "/minute"
-        defaultValue: 0
-    }
-
-    ConfigurationValue {
-        id: alarmRepeat
-        key: _configGroup + alarmId + "/repeat"
-        defaultValue: 0
-    }
-
 
     Column {
         width: parent.width
@@ -156,11 +129,11 @@ Item {
     }
 
     function init() {
-        chkEnabled.checked = alarmEnabled.value;
-        hour = alarmHour.value;
-        minute = alarmMinute.value;
+        chkEnabled.checked = AmazfishConfig.alarmEnabled(alarmId);
+        hour = AmazfishConfig.alarmHour(alarmId);
+        minute = AmazfishConfig.alarmMinute(alarmId);
 
-        var repeat = alarmRepeat.value;
+        var repeat = AmazfishConfig.alarmRepeatMask(alarmId);
 
         chkMo.checked = repeat & 1;
         chkTu.checked = repeat & 2;
@@ -173,9 +146,9 @@ Item {
     }
 
     function save() {
-        alarmEnabled.value = chkEnabled.checked;
-        alarmHour.value = hour;
-        alarmMinute.value = minute;
+        AmazfishConfig.setAlarmEnabled(alarmId, chkEnabled.checked)
+        AmazfishConfig.setAlarmHour(alarmId, hour);
+        AmazfishConfig.setAlarmMinute(alarmId, minute);
 
         var repeat = 0;
         repeat |= chkMo.checked ? 1 : 0;
@@ -186,7 +159,7 @@ Item {
         repeat |= chkSa.checked ? 32 : 0;
         repeat |= chkSu.checked ? 64 : 0;
 
-        alarmRepeat.value = repeat;
+        AmazfishConfig.setAlarmRepeatMask(alarmId, repeat);
     }
 
 
