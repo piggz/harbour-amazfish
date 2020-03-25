@@ -6,10 +6,18 @@ ListItem {
     width: parent.width
     contentHeight: Theme.itemSizeHuge
 
-    onClicked: pageStack.push(Qt.resolvedUrl("../pages/PairPage.qml"), {
-                                  deviceType: model.deviceType,
-                                  deviceRequiresAuthKey: model.auth
-                              });
+    onClicked: {
+        var props = {deviceType: model.deviceType}
+
+        if (model.auth) {
+            pageStack.push(Qt.resolvedUrl("../pages/AuthKeyDialog.qml"), {
+                               acceptDestination: Qt.resolvedUrl("../pages/PairPage.qml"),
+                               acceptDestinationProperties: props
+                           })
+        } else {
+            pageStack.push(Qt.resolvedUrl("../pages/PairPage.qml"), props)
+        }
+    }
 
     Image {
         id: icon
@@ -35,6 +43,6 @@ ListItem {
         }
         font.pixelSize: Theme.fontSizeLarge
         color: item.down ? Theme.highlightColor : Theme.primaryColor
-        text: model.label
+        text: model.deviceType
     }
 }

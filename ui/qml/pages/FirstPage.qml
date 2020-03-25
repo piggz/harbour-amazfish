@@ -49,7 +49,12 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Pair with watch")
-                onClicked: pageStack.push(Qt.resolvedUrl("PairSelectDeviceType.qml"))
+                onClicked: {
+                    var page = AmazfishConfig.pairedAddress
+                        ? "UnpairDeviceDialog.qml"
+                        : "PairSelectDeviceType.qml"
+                    pageStack.push(Qt.resolvedUrl(page))
+                }
             }
             MenuItem {
                 text: qsTr("Download File")
@@ -60,6 +65,7 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
             }
             MenuItem {
+                visible: AmazfishConfig.pairedAddress
                 enabled: !_connecting
                 text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
                 onClicked: {

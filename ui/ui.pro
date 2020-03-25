@@ -14,7 +14,7 @@ TARGET = harbour-amazfish-ui
 
 CONFIG += sailfishapp
 
-QT +=  contacts positioning KDb3
+QT +=  contacts positioning KDb3 bluetooth
 LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish
 
 PKGCONFIG += mlite5
@@ -69,6 +69,8 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/StepsPage.qml \
     qml/pages/SleepPage.qml \
     qml/components/DownloadDataMenuItem.qml \
+    qml/pages/AuthKeyDialog.qml \
+    qml/pages/UnpairDeviceDialog.qml \
     harbour-amazfish-ui.desktop
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172

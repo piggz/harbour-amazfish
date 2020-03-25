@@ -18,6 +18,13 @@
 class DaemonInterface : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(bool pairing MEMBER m_pairing NOTIFY pairingChanged)
+
+    //Device Interface
+    Q_PROPERTY(QString connectionState MEMBER m_connectionState NOTIFY connectionStateChanged)
+    Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
+
 public:
     explicit DaemonInterface(QObject *parent = nullptr);
     ~DaemonInterface();
@@ -81,11 +88,6 @@ public:
 
     static QString activityToString(ActivityType type);
 
-    //Device Interface
-    Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
-    Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
-
-    Q_INVOKABLE QString pair(const QString &name, const QString &address);
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE bool supportsFeature(Feature f);
@@ -93,13 +95,6 @@ public:
 
     Q_INVOKABLE DataSource *dataSource();
     KDbConnection *dbConnection();
-
-    Q_SIGNAL void message(const QString &text);
-    Q_SIGNAL void downloadProgress(int percent);
-    Q_SIGNAL void operationRunningChanged();
-    Q_SIGNAL void buttonPressed(int presses);
-    Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
-    Q_SIGNAL void connectionStateChanged();
 
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
@@ -115,10 +110,27 @@ public:
     Q_INVOKABLE void triggerSendWeather();
     Q_INVOKABLE void updateCalendar();
 
+public slots:
+    void pair(const QString &name, QString address);
+
+signals:
+    void paired(const QString &name, const QString &address, const QString &error);
+    void pairingChanged();
+    void message(const QString &text);
+    void downloadProgress(int percent);
+    void operationRunningChanged();
+    void buttonPressed(int presses);
+    void informationChanged(int infoKey, const QString& infoValue);
+    void connectionStateChanged();
+
+private slots:
+    void changeConnectionState();
+
 private:
     QDBusInterface *iface = nullptr;
     QDBusServiceWatcher *m_serviceWatcher = nullptr;
     DataSource m_dataSource;
+    bool m_pairing = false;
 
     //Database
     KDbDriver *m_dbDriver = nullptr;
@@ -126,13 +138,12 @@ private:
     KDbConnection *m_conn = nullptr;
 
     void connectDaemon();
-    void disconnectDaemon();
+    void disconnectDaemon()
+    { changeConnectionState(); }
 
     void connectDatabase();
 
     QString m_connectionState;
-    QString connectionState() const;
-    Q_SLOT void slot_connectionStateChanged();
 
     bool operationRunning();
 

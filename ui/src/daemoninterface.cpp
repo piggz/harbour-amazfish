@@ -5,25 +5,23 @@
 
 #include <KDb3/KDbDriverManager>
 
-DaemonInterface::DaemonInterface(QObject *parent) : QObject(parent)
+DaemonInterface::DaemonInterface(QObject *parent)
+    : QObject(parent)
+    , m_serviceWatcher(new QDBusServiceWatcher(
+                           QStringLiteral(SERVICE_NAME), QDBusConnection::sessionBus(),
+                           QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration))
 {
-    iface = new QDBusInterface(SERVICE_NAME, "/application", "", QDBusConnection::sessionBus());
-
-    m_serviceWatcher = new QDBusServiceWatcher(SERVICE_NAME, QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
-    QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered, this, &DaemonInterface::connectDaemon);
+    QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered,   this, &DaemonInterface::connectDaemon);
     QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, &DaemonInterface::disconnectDaemon);
 
-    if (iface->isValid()){
-        connectDaemon();
-    }
-
+    connectDaemon();
     connectDatabase();
     m_dataSource.setConnection(dbConnection());
 }
 
 DaemonInterface::~DaemonInterface()
 {
-    delete iface;
+    iface->deleteLater();
 }
 
 QString DaemonInterface::activityToString(ActivityType type)
@@ -70,10 +68,15 @@ void DaemonInterface::connectDaemon()
     qDebug() << "Connecting to daemon signals";
 
     if (iface) {
-        delete iface;
+        iface->deleteLater();
     }
 
-    iface = new QDBusInterface(SERVICE_NAME, "/application", "", QDBusConnection::sessionBus());
+    iface = new QDBusInterface(QStringLiteral(SERVICE_NAME), QStringLiteral("/application"), QString(), QDBusConnection::sessionBus());
+
+    if (!iface->isValid()) {
+        iface->deleteLater();
+        return;
+    }
 
     connect(iface, SIGNAL(message(QString)), this, SIGNAL(message(QString)), Qt::UniqueConnection);
     connect(iface, SIGNAL(downloadProgress(int)), this, SIGNAL(downloadProgress(int)), Qt::UniqueConnection);
@@ -82,22 +85,58 @@ void DaemonInterface::connectDaemon()
     connect(iface, SIGNAL(informationChanged(int, QString)), this, SIGNAL(informationChanged(int,QString)), Qt::UniqueConnection);
 
     //Property proxying
-    connect(iface, SIGNAL(connectionStateChanged()), this, SLOT(slot_connectionStateChanged()), Qt::UniqueConnection);
-    slot_connectionStateChanged();
+    connect(iface, SIGNAL(connectionStateChanged()), this, SLOT(changeConnectionState()), Qt::UniqueConnection);
+    changeConnectionState();
 }
 
-void DaemonInterface::disconnectDaemon()
+void DaemonInterface::pair(const QString &name, QString address)
 {
-    slot_connectionStateChanged();
-}
+    qDebug(Q_FUNC_INFO);
 
-QString DaemonInterface::pair(const QString &name, const QString &address)
-{
-    if (!iface->isValid()) {
-        return QString();
+    if (m_pairing) {
+        return;
     }
-    QDBusReply<QString> reply = iface->call("pair", name, address);
-    return reply;
+
+    if (!iface->isValid()) {
+        emit paired(name, address, tr("Unexpected error"));
+        return;
+    }
+
+    m_pairing = true;
+    emit pairingChanged();
+    address.replace(QChar(':'), QChar('_')).prepend("/org/bluez/hci0/dev_");
+    auto watcher = new QDBusPendingCallWatcher(iface->asyncCall(QStringLiteral("pair"), name, address));
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, name, address]() {
+        m_pairing = false;
+        pairingChanged();
+        emit paired(name, address, watcher->error().name());
+        watcher->deleteLater();
+    });
+}
+
+void DaemonInterface::changeConnectionState()
+{
+    qDebug(Q_FUNC_INFO);
+
+    if (!iface->isValid()) {
+        QString state(QStringLiteral("disconnected"));
+        if (m_connectionState != state) {
+            m_connectionState.swap(state);
+            emit connectionStateChanged();
+        }
+        return;
+    }
+
+    auto watcher = new QDBusPendingCallWatcher(iface->asyncCall(QStringLiteral("connectionState")));
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
+        QDBusReply<QString> reply(watcher->reply());
+        auto state = reply.value();
+        if (m_connectionState != state) {
+            m_connectionState.swap(state);
+            emit connectionStateChanged();
+        }
+        watcher->deleteLater();
+    });
 }
 
 void DaemonInterface::connectToDevice(const QString &address)
@@ -105,7 +144,7 @@ void DaemonInterface::connectToDevice(const QString &address)
     if (!iface->isValid()) {
         return;
     }
-    iface->call("connectToDevice", address);
+    iface->call(QStringLiteral("connectToDevice"), address);
 }
 
 void DaemonInterface::disconnect()
@@ -113,7 +152,7 @@ void DaemonInterface::disconnect()
     if (!iface->isValid()) {
         return;
     }
-    iface->call("disconnect");
+    iface->call(QStringLiteral("disconnect"));
 }
 
 bool DaemonInterface::supportsFeature(DaemonInterface::Feature f)
@@ -121,7 +160,7 @@ bool DaemonInterface::supportsFeature(DaemonInterface::Feature f)
     if (!iface->isValid()) {
         return false;
     }
-    QDBusReply<bool> reply = iface->call("supportsFeature", f);
+    QDBusReply<bool> reply = iface->call(QStringLiteral("supportsFeature"), f);
     return reply;
 }
 
@@ -130,7 +169,7 @@ int DaemonInterface::supportedFeatures()
     if (!iface->isValid()) {
         return 0;
     }
-    QDBusReply<int> reply = iface->call("supportedFeatures");
+    QDBusReply<int> reply = iface->call(QStringLiteral("supportedFeatures"));
     return reply;
 }
 
@@ -152,7 +191,7 @@ QString DaemonInterface::prepareFirmwareDownload(const QString &path)
     if (!iface->isValid()) {
         return QString();
     }
-    QDBusReply<QString> reply = iface->call("prepareFirmwareDownload", path);
+    QDBusReply<QString> reply = iface->call(QStringLiteral("prepareFirmwareDownload"), path);
     return reply;
 }
 
@@ -161,7 +200,7 @@ bool DaemonInterface::startDownload()
     if (!iface->isValid()) {
         return false;
     }
-    QDBusReply<bool> reply = iface->call("startDownload");
+    QDBusReply<bool> reply = iface->call(QStringLiteral("startDownload"));
     return reply;
 }
 
@@ -178,7 +217,7 @@ void DaemonInterface::downloadActivityData()
     if (!iface->isValid()) {
         return;
     }
-    iface->call("downloadActivityData");
+    iface->call(QStringLiteral("downloadActivityData"));
 }
 
 void DaemonInterface::refreshInformation()
@@ -186,7 +225,7 @@ void DaemonInterface::refreshInformation()
     if (!iface->isValid()) {
         return;
     }
-    iface->call("refreshInformation");
+    iface->call(QStringLiteral("refreshInformation"));
 }
 
 QString DaemonInterface::information(DaemonInterface::Info i)
@@ -194,7 +233,7 @@ QString DaemonInterface::information(DaemonInterface::Info i)
     if (!iface->isValid()) {
         return QString();
     }
-    QDBusReply<QString> reply = iface->call("information", i);
+    QDBusReply<QString> reply = iface->call(QStringLiteral("information"), i);
     return reply;
 }
 
@@ -203,7 +242,7 @@ void DaemonInterface::sendAlert(const QString &sender, const QString &subject, c
     if (!iface->isValid()) {
         return;
     }
-    iface->call("sendAlert", sender, subject, message, allowDuplicate);
+    iface->call(QStringLiteral("sendAlert"), sender, subject, message, allowDuplicate);
 }
 
 void DaemonInterface::incomingCall(const QString &caller)
@@ -211,7 +250,7 @@ void DaemonInterface::incomingCall(const QString &caller)
     if (!iface->isValid()) {
         return;
     }
-    iface->call("incomingCall", caller);
+    iface->call(QStringLiteral("incomingCall"), caller);
 }
 
 void DaemonInterface::applyDeviceSetting(Settings s)
@@ -219,7 +258,7 @@ void DaemonInterface::applyDeviceSetting(Settings s)
     if (!iface->isValid()) {
         return;
     }
-    iface->call("applyDeviceSetting", s);
+    iface->call(QStringLiteral("applyDeviceSetting"), s);
 }
 
 void DaemonInterface::requestManualHeartrate()
@@ -227,7 +266,7 @@ void DaemonInterface::requestManualHeartrate()
     if (!iface->isValid()) {
         return;
     }
-    iface->call("requestManualHeartrate");
+    iface->call(QStringLiteral("requestManualHeartrate"));
 }
 
 void DaemonInterface::triggerSendWeather()
@@ -235,24 +274,7 @@ void DaemonInterface::triggerSendWeather()
     if (!iface->isValid()) {
         return;
     }
-    iface->call("triggerSendWeather");
-}
-
-void DaemonInterface::slot_connectionStateChanged()
-{
-    if (!iface->isValid()) {
-        m_connectionState = "disconnected";
-    } else {
-        QDBusReply<QString> reply = iface->call("connectionState");
-        m_connectionState = reply;
-    }
-
-    emit connectionStateChanged();
-}
-
-QString DaemonInterface::connectionState() const
-{
-    return m_connectionState;
+    iface->call(QStringLiteral("triggerSendWeather"));
 }
 
 bool DaemonInterface::operationRunning()
@@ -260,32 +282,34 @@ bool DaemonInterface::operationRunning()
     if (!iface->isValid()) {
         return false;
     }
-    QDBusReply<bool> reply = iface->call("operationRunning");
+    QDBusReply<bool> reply = iface->call(QStringLiteral("operationRunning"));
     return reply;
 }
 
 void DaemonInterface::connectDatabase()
 {
     KDbDriverManager manager;
+
     const QStringList driverIds = manager.driverIds();
-    qDebug() << "DRIVERS: " << driverIds;
     if (driverIds.isEmpty()) {
         qWarning() << "No drivers found";
         return;
     }
+    qDebug() << "DRIVERS: " << driverIds;
+
     if (manager.result().isError()) {
         qDebug() << manager.result();
         return;
     }
 
     //get driver
-    m_dbDriver = manager.driver("org.kde.kdb.sqlite");
+    m_dbDriver = manager.driver(QStringLiteral("org.kde.kdb.sqlite"));
     if (!m_dbDriver || manager.result().isError()) {
         qDebug() << manager.result();
         return;
     }
 
-    m_connData.setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+ "/amazfish.kexi");
+    m_connData.setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).append("/amazfish.kexi"));
 
     qDebug() << "Database is: " << m_connData.databaseName();
 
@@ -294,8 +318,9 @@ void DaemonInterface::connectDatabase()
     if (!m_conn || m_dbDriver->result().isError()) {
         qDebug() << m_dbDriver->result();
         return;
-    }
+    }    
     qDebug() << "KDbConnection object created.";
+
     if (!m_conn->connect()) {
         qDebug() << m_conn->result();
         return;
@@ -321,5 +346,5 @@ void DaemonInterface::updateCalendar()
     if (!iface->isValid()) {
         return;
     }
-    iface->call("updateCalendar");
+    iface->call(QStringLiteral("updateCalendar"));
 }
