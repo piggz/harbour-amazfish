@@ -8,9 +8,6 @@ Dialog {
 
     onAccepted: {
         DaemonInterfaceInstance.disconnect()
-        AmazfishConfig.pairedAddress = ""
-        AmazfishConfig.pairedName = ""
-        AmazfishConfig.deviceAuthKey = ""
     }
 
     Column {

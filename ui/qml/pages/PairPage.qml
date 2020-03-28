@@ -61,6 +61,8 @@ Page {
             id: listItem
             contentHeight: Theme.itemSizeMedium
             onClicked: {
+                AmazfishConfig.pairedAddress = ""
+                AmazfishConfig.pairedName = ""
                 discoveryModel.running = false
                 DaemonInterfaceInstance.pair(model.deviceName, model.remoteAddress)
             }

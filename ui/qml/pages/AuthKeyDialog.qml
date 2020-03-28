@@ -17,6 +17,7 @@ Dialog {
             width: parent.width
             label: qsTr("Enter auth key")
             placeholderText: label
+            Component.onCompleted: text = AmazfishConfig.deviceAuthKey
         }
     }
 }
