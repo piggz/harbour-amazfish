@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import "../components"
 
 Page {
@@ -9,92 +8,53 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
+    SilicaListView {
         anchors.fill: parent
 
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
+        header: PageHeader {
+            title: qsTr("Select Device Type")
+        }
 
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-            x: Theme.horizontalPageMargin
-            width: page.width - 2*Theme.horizontalPageMargin
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: qsTr("Select Device Type")
+        delegate: DeviceButton {}
+
+        model: ListModel {
+            ListElement {
+                deviceType: "Amazfit Bip Watch"
+                icon: "../pics/devices/amazfit-bip.png"
             }
 
-            DeviceButton {
-                txt: qsTr("Amazfit Bip Watch")
-                icn: "../pics/devices/amazfit-bip.png"
-
-                onClicked: {
-                    pushPairPage("Amazfit Bip Watch", false);
-                }
+            ListElement {
+                deviceType: "Amazfit Bip Lite"
+                icon: "../pics/devices/amazfit-bip.png"
+                auth: true
             }
 
-            DeviceButton {
-                txt: qsTr("Amazfit Bip Lite")
-                icn: "../pics/devices/amazfit-bip.png"
-
-                onClicked: {
-                    pushPairPage("Amazfit Bip Lite", true);
-                }
+            ListElement {
+                deviceType: "Amazfit GTS"
+                icon: "../pics/devices/amazfit-gts.png"
+                auth: true
             }
 
-            DeviceButton {
-                txt: qsTr("Amazfit GTS")
-                icn: "../pics/devices/amazfit-gts.png"
-
-                onClicked: {
-                    pushPairPage("Amazfit GTS", true);
-                }
+            ListElement {
+                deviceType: "Amazfit Cor"
+                icon: "../pics/devices/amazfit-cor.png"
             }
 
-            DeviceButton {
-                txt: qsTr("Amazfit Cor")
-                icn: "../pics/devices/amazfit-cor.png"
-
-                onClicked: {
-                    pushPairPage("Amazfit Cor", false);
-                }
+            ListElement {
+                deviceType: "MI Band 2"
+                icon: "../pics/devices/miband2.png"
             }
 
-            DeviceButton {
-                txt: qsTr("MI Band 2")
-                icn: "../pics/devices/miband2.png"
-
-                onClicked: {
-                    pushPairPage("MI Band 2", false);
-                }
+            ListElement {
+                deviceType: "Mi Band 3"
+                icon: "../pics/devices/miband3.png"
             }
 
-            DeviceButton {
-                txt: qsTr("Mi Band 3")
-                icn: "../pics/devices/miband3.png"
-
-                onClicked: {
-                    pushPairPage("Mi Band 3", false);
-                }
-            }
-
-            DeviceButton {
-                txt: qsTr("Mi Smart Band 4")
-                icn: "../pics/devices/miband4.png"
-
-                onClicked: {
-                    pushPairPage("Mi Smart Band 4", true);
-                }
+            ListElement {
+                deviceType: "Mi Smart Band 4"
+                icon: "../pics/devices/miband4.png"
+                auth: true
             }
         }
-    }
-
-    function pushPairPage(deviceType, auth) {
-        var pairPage = pageStack.push(Qt.resolvedUrl("PairPage.qml"));
-        pairPage.deviceType = deviceType;
-        pairPage.deviceRequiresAuthKey = auth;
     }
 }

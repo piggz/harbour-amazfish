@@ -3,8 +3,7 @@
 #
 TEMPLATE = subdirs
 CONFIG = ordered
-SUBDIRS = daemon ui
-OTHER_FILES =
+SUBDIRS = lib daemon ui
 
 DISTFILES += \
     rpm/harbour-amazfish.changes.in \

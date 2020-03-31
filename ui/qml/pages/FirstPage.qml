@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import org.SfietKonstantin.weatherfish 1.0
 import uk.co.piggz.amazfish 1.0
 import "../components/"
@@ -11,32 +10,31 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
 
-    property bool needsProfileSet: false
     property var day: new Date()
 
-    ConfigurationValue {
-        id: pairedAddress
-        key: "/uk/co/piggz/amazfish/pairedAddress"
-        defaultValue: ""
+    readonly property string _connectionState: DaemonInterfaceInstance.connectionState
+    readonly property bool _disconnected: _connectionState === "disconnected"
+    readonly property bool _connecting: _connectionState === "connecting"
+    readonly property bool _connected: _connectionState === "connected"
+    readonly property bool _authenticated: _connectionState === "authenticated"
+    property int _steps: 0
+
+    function _refreshInformation() {
+        if (!_authenticated) {
+            return
+        }
+
+        supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
+        console.log("Supported features", supportedFeatures);
+
+        DaemonInterfaceInstance.refreshInformation();
+
+        _steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
     }
 
-    ConfigurationValue {
-        id: pairedName
-        key: "/uk/co/piggz/amazfish/pairedName"
-        defaultValue: ""
-    }
+    on_ConnectionStateChanged: console.log(_connectionState)
 
-    ConfigurationValue {
-        id: profileName
-        key: "/uk/co/piggz/amazfish/profile/name"
-        defaultValue: ""
-    }
-
-    ConfigurationValue {
-        id: fitnessGoal
-        key: "/uk/co/piggz/amazfish/profile/fitnessgoal"
-        defaultValue: "10000"
-    }
+    on_AuthenticatedChanged: _refreshInformation()
     
     onStatusChanged: {
         if (status === PageStatus.Active) {
@@ -51,7 +49,12 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Pair with watch")
-                onClicked: pageStack.push(Qt.resolvedUrl("PairSelectDeviceType.qml"))
+                onClicked: {
+                    var page = AmazfishConfig.pairedAddress
+                        ? "UnpairDeviceDialog.qml"
+                        : "PairSelectDeviceType.qml"
+                    pageStack.push(Qt.resolvedUrl(page))
+                }
             }
             MenuItem {
                 text: qsTr("Download File")
@@ -62,10 +65,12 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
             }
             MenuItem {
-                text: DaemonInterfaceInstance.connectionState == "disconnected" ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
+                visible: AmazfishConfig.pairedAddress
+                enabled: !_connecting
+                text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
                 onClicked: {
-                    if (DaemonInterfaceInstance.connectionState == "disconnected") {
-                        DaemonInterfaceInstance.connectToDevice(pairedAddress.value);
+                    if (_disconnected) {
+                        DaemonInterfaceInstance.connectToDevice(AmazfishConfig.pairedAddress);
                     } else {
                         DaemonInterfaceInstance.disconnect();
                     }
@@ -83,68 +88,65 @@ Page {
             x: Theme.horizontalPageMargin
             width: page.width - 2*Theme.horizontalPageMargin
             spacing: Theme.paddingLarge
+
             PageHeader {
                 title: qsTr("Amazfish")
             }
-            Row {
-                spacing: Theme.paddingLarge
+
+            Item {
+                height: Theme.itemSizeMedium
+                width: parent.width
 
                 Label {
-                    text: pairedName.value
-                    color: Theme.secondaryHighlightColor
-                    font.pixelSize: Theme.fontSizeExtraLarge
-                }
-                Item {
-                    width: childrenRect.width
-                    height: childrenRect.height
-                    BusyIndicator {
-                        size: BusyIndicatorSize.Medium
-                        visible: DaemonInterfaceInstance.connectionState === "connecting"
-                        running: DaemonInterfaceInstance.connectionState === "connecting"
+                    id: pairedNameLabel
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: {
+                        var dif = column.width - parent.width;
+                        return dif < 0 ? implicitWidth + dif : implicitWidth;
                     }
+                    text: AmazfishConfig.pairedName
+                    color: Theme.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeLarge
+                    truncationMode: TruncationMode.Fade
+                }
+
+                Row {
+                    id: statusRow
+                    anchors {
+                        left: pairedNameLabel.right
+                        leftMargin: Theme.paddingMedium
+                        verticalCenter: parent.verticalCenter
+                    }
+                    spacing: Theme.paddingSmall
+
                     Image {
                         source: "image://theme/icon-m-bluetooth-device"
-                        visible: DaemonInterfaceInstance.connectionState === "connected" || DaemonInterfaceInstance.connectionState === "authenticated"
+                        visible: _connected || _authenticated
                     }
-                }
-                Item {
-                    width: childrenRect.width
-                    height: childrenRect.height
-                    BusyIndicator {
-                        size: BusyIndicatorSize.Medium
-                        visible: DaemonInterfaceInstance.connectionState === "connected"
-                        running: DaemonInterfaceInstance.connectionState === "connected"
-                    }
+
                     Image {
                         source: "image://theme/icon-m-watch"
-                        visible: DaemonInterfaceInstance.connectionState === "authenticated"
+                        visible: _authenticated
                     }
-                }
 
-            }
+                    Image {
+                        id: btryImage
+                        source: "image://theme/icon-m-battery"
+                        visible: _authenticated
+                    }
 
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
-            }
+                    Label {
+                        id: btryPercent
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: _authenticated
+                        font.pixelSize: Theme.fontSizeMedium
+                    }
 
-            // battery
-            Row {
-                width: parent.width
-
-                Image {
-                    id: imgBattery
-                    source: "image://theme/icon-m-battery"
-                    width: Theme.iconSizeMedium
-                    height: width
-                }
-
-                ProgressBar {
-                    id: btryProgress
-                    width: parent.width - imgBattery.width
-                    minimumValue: 0
-                    maximumValue: 100
+                    BusyIndicator {
+                        size: BusyIndicatorSize.Medium
+                        visible: _connecting || _connected
+                        running: visible
+                    }
                 }
             }
 
@@ -166,29 +168,37 @@ Page {
                 id: stpsCircle
 
                 anchors.horizontalCenter: parent.horizontalCenter
-                size: parent.width / 2.5
-                percent: 0.06
+                size: parent.width - Theme.horizontalPageMargin * 4
+                percent: _steps ? _steps / AmazfishConfig.profileFitnessGoal : 0.06
                 widthRatio: 0.08
 
-                Label {
-                    id: lblSteps
+                Item {
                     anchors.centerIn: parent
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeMedium
-                    height: Theme.iconSizeMedium
-                    verticalAlignment: Text.AlignVCenter
-                }
-            }
+                    height: lblSteps.height + lblGoal.height + Theme.paddingSmall
+                    width: Math.max(lblSteps.width, lblGoal.width)
 
-            Label {
-                id: lblGoal
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeExtraSmall
-                height: Theme.iconSizeMedium
-                verticalAlignment: Text.AlignVCenter
-                width: parent.width
-                text: qsTr("Goal: ") + fitnessGoal.value + qsTr(" Steps")
+                    Label {
+                        id: lblSteps
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        color: Theme.highlightColor
+                        font.pixelSize: Theme.fontSizeExtraLarge
+                        verticalAlignment: Text.AlignVCenter
+                        text: _steps.toLocaleString()
+                    }
+
+                    Label {
+                        id: lblGoal
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                            top: lblSteps.bottom
+                            topMargin: Theme.paddingSmall
+                        }
+                        color: Theme.secondaryHighlightColor
+                        font.pixelSize: Theme.fontSizeLarge
+                        verticalAlignment: Text.AlignVCenter
+                        text: AmazfishConfig.profileFitnessGoal.toLocaleString()
+                    }
+                }
             }
 
             Separator {
@@ -254,7 +264,7 @@ Page {
         repeat: false
         interval: 200
         onTriggered: {
-            if (needsProfileSet) {
+            if (!AmazfishConfig.profileName) {
                 pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
             }
         }
@@ -262,50 +272,26 @@ Page {
 
     Connections {
         target: DaemonInterfaceInstance
-        onConnectionStateChanged: {
-            console.log(DaemonInterfaceInstance.connectionState);
-            if (DaemonInterfaceInstance.connectionState === "authenticated") {
-                supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
-                console.log(supportedFeatures);
-
-                DaemonInterfaceInstance.refreshInformation();
-
-                var steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
-                lblSteps.text = steps
-                stpsCircle.percent = steps / fitnessGoal.value
-            }
-        }
         onInformationChanged: {
             console.log("Information changed", infoKey, infoValue);
 
             switch (infoKey) {
             case DaemonInterface.INFO_BATTERY:
-                btryProgress.label = infoValue + "%"
-                btryProgress.value = infoValue
+                btryPercent.text = qsTr("%1%").arg(infoValue)
                 break;
             case DaemonInterface.INFO_HEARTRATE:
-                lblHeartrate.text = infoValue + " bpm"
+                lblHeartrate.text = qsTr("%1 bpm").arg(infoValue)
                 break;
             case DaemonInterface.INFO_STEPS:
-                lblSteps.text = infoValue
-                stpsCircle.percent = infoValue / fitnessGoal.value
+                _steps = infoValue
                 break;
             }
         }
     }
 
     Component.onCompleted: {
-        if (profileName.value === "") {
-            needsProfileSet = true;
-            return;
-        }
-        if (DaemonInterfaceInstance.connectionState === "authenticated") {
-            DaemonInterfaceInstance.refreshInformation();
-            supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
-
-            var steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
-            lblSteps.text = steps
-            stpsCircle.percent = steps / fitnessGoal.value
+        if (AmazfishConfig.profileName) {
+            _refreshInformation();
         }
     }
 }

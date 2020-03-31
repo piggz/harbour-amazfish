@@ -11,7 +11,7 @@
 SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn) : AbstractFetchOperation(service)
 {
     m_conn = conn;
-    setLastSyncKey("/uk/co/piggz/amazfish/device/lastsportsyncmillis");
+    setLastSyncKey("device/lastsportsyncmillis");
 }
 
 void SportsSummaryOperation::start()

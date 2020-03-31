@@ -5,6 +5,7 @@
 #include "typeconversion.h"
 #include "bipdevice.h"
 #include "weather/huamiweathercondition.h"
+#include "amazfishconfig.h"
 
 const char* MiBandService::UUID_SERVICE_MIBAND = "0000fee0-0000-1000-8000-00805f9b34fb";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_NOTIFICATION = "00000002-0000-3512-2118-0009af100700";
@@ -173,17 +174,16 @@ void MiBandService::decodeAlarms(const QByteArray &data)
     bool alarmsInUse[10] = {false};
     bool alarmsEnabled[10] = {false};
     int numAlarms = data.at(5);
+    auto config = AmazfishConfig::instance();
 
     for (int i = 0; i < numAlarms; i++) {
-        QString configBase = "/uk/co/piggz/amazfish/alarms/alarm" + QString::number(i+1) + "/";
-
         char alarm_data = data.at(6 + i);
         int index = alarm_data & 0xf;
         alarmsInUse[index] = true;
         bool enabled = (alarm_data & 0x10) == 0x10;
         alarmsEnabled[index] = enabled;
         qDebug() << "alarm " << index << " is enabled:" << enabled;
-        m_settings.setValue(configBase + "enabled", enabled);
+        config->setAlarmEnabled(i + 1, enabled);
     }
 }
 
@@ -247,7 +247,7 @@ void MiBandService::setCurrentTime()
 
 void MiBandService::setLanguage()
 {
-    uint format = m_settings.value("/uk/co/piggz/amazfish/device/language").toUInt();
+    auto format = AmazfishConfig::instance()->deviceLanguage();
 
     qDebug() << "Setting language to " << format;
 
@@ -258,31 +258,28 @@ void MiBandService::setLanguage()
     //"zh_CN", "zh_TW", "en_US", "es_ES", "ru_RU", "de_DE", "it_IT", "fr_FR", "tr_TR"
 
     switch (format) {
-    case 0:
-        lang += "en_US";
-        break;
-    case 1:
+    case AmazfishConfig::DeviceLanguageEsEs:
         lang += "es_ES";
         break;
-    case 2:
+    case AmazfishConfig::DeviceLanguageZhCn:
         lang += "zh_CN";
         break;
-    case 3:
+    case AmazfishConfig::DeviceLanguageZhTw:
         lang += "zh_TW";
         break;
-    case 4:
+    case AmazfishConfig::DeviceLanguageRuRu:
         lang += "ru_RU";
         break;
-    case 5:
+    case AmazfishConfig::DeviceLanguageDeDe:
         lang += "de_DE";
         break;
-    case 6:
+    case AmazfishConfig::DeviceLanguageItIt:
         lang += "it_IT";
         break;
-    case 7:
+    case AmazfishConfig::DeviceLanguageFrFr:
         lang += "fr_FR";
         break;
-    case 8:
+    case AmazfishConfig::DeviceLanguageTrTr:
         lang += "tr_TR";
         break;
     default:
@@ -294,14 +291,14 @@ void MiBandService::setLanguage()
 
 void MiBandService::setDateDisplay()
 {
-    uint format = m_settings.value("/uk/co/piggz/amazfish/device/dateformat").toUInt();
+    auto format = AmazfishConfig::instance()->deviceDateFormat();
 
     qDebug() << "Setting date display to " << format;
     switch (format) {
-    case 0:
+    case AmazfishConfig::DeviceDateFormatTime:
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(DATEFORMAT_TIME, 4));
         break;
-    case 1:
+    case AmazfishConfig::DeviceDateFormatDateTime:
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(DATEFORMAT_DATETIME, 4));
         break;
     }
@@ -309,14 +306,14 @@ void MiBandService::setDateDisplay()
 }
 void MiBandService::setTimeFormat()
 {
-    uint format = m_settings.value("/uk/co/piggz/amazfish/device/timeformat").toUInt();
+    auto format = AmazfishConfig::instance()->deviceTimeFormat();
 
     qDebug() << "Setting time format to " << format;
     switch (format) {
-    case 0:
+    case AmazfishConfig::DeviceTimeFormat24H:
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(DATEFORMAT_TIME_24_HOURS, 4));
         break;
-    case 1:
+    case AmazfishConfig::DeviceTimeFormat12H:
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(DATEFORMAT_TIME_12_HOURS, 4));
         break;
     }
@@ -324,12 +321,13 @@ void MiBandService::setTimeFormat()
 void MiBandService::setUserInfo()
 {
     QByteArray userInfo;
-    QString profileName = m_settings.value("/uk/co/piggz/amazfish/profile/name").toString();
+    auto config = AmazfishConfig::instance();
+    auto profileName = config->profileName();
     uint id = qHash(profileName);
-    uint gender = m_settings.value("/uk/co/piggz/amazfish/profile/gender").toUInt();
-    uint height = m_settings.value("/uk/co/piggz/amazfish/profile/height").toUInt();
-    uint weight = m_settings.value("/uk/co/piggz/amazfish/profile/weight").toUInt();
-    QDate dob = m_settings.value("/uk/co/piggz/amazfish/profile/dob").toDateTime().date();
+    auto gender = config->profileGender();
+    auto height = config->profileHeight();
+    auto weight = config->profileWeight();
+    auto dob = config->profileDOB().date();
 
     qDebug() << "Setting profile" << profileName << id << gender << height << weight << dob;
 
@@ -363,14 +361,14 @@ void MiBandService::setUserInfo()
 }
 void MiBandService::setDistanceUnit()
 {
-    uint format = m_settings.value("/uk/co/piggz/amazfish/device/distanceunit").toUInt();
+    auto format = AmazfishConfig::instance()->deviceDistanceUnit();
 
     qDebug() << "Setting distance unit to " << format;
     switch (format) {
-    case 0:
+    case AmazfishConfig::DeviceDistanceUnitMetric:
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISTANCE_UNIT_METRIC, 4));
         break;
-    case 1:
+    case AmazfishConfig::DeviceDistanceUnitImperial:
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISTANCE_UNIT_IMPERIAL, 4));
         break;
     }
@@ -380,14 +378,14 @@ void MiBandService::setDistanceUnit()
 //Only use during device init
 void MiBandService::setWearLocation()
 {
-    uint location = m_settings.value("/uk/co/piggz/amazfish/profile/wearlocation").toUInt();
+    auto location = AmazfishConfig::instance()->profileWearLocation();
 
     qDebug() << "Setting wear location to " << location;
     switch (location) {
-    case 0:
+    case AmazfishConfig::WearLocationLeftWrist:
         writeValue(UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS, QByteArray(WEAR_LOCATION_LEFT_WRIST, 4));
         break;
-    case 1:
+    case AmazfishConfig::WearLocationRightWrist:
         writeValue(UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS, QByteArray(WEAR_LOCATION_RIGHT_WRIST, 4));
         break;
     }
@@ -395,7 +393,7 @@ void MiBandService::setWearLocation()
 
 void MiBandService::setFitnessGoal()
 {
-    uint goal = m_settings.value("/uk/co/piggz/amazfish/profile/fitnessgoal").toUInt();
+    auto goal = AmazfishConfig::instance()->profileFitnessGoal();
 
     QByteArray cmd = QByteArray(COMMAND_SET_FITNESS_GOAL_START, 3);
     cmd += TypeConversion::fromInt24(goal);
@@ -406,33 +404,27 @@ void MiBandService::setFitnessGoal()
 
 void MiBandService::setAlertFitnessGoal()
 {
-    bool alert = m_settings.value("/uk/co/piggz/amazfish/profile/alertfitnessgoal").toBool();
+    auto value = AmazfishConfig::instance()->profileAlertFitnessGoal()
+            ? COMMAND_ENABLE_GOAL_NOTIFICATION
+            : COMMAND_DISABLE_GOAL_NOTIFICATION;
 
-    if (alert) {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_GOAL_NOTIFICATION,4));
-    } else {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_GOAL_NOTIFICATION,4));
-    }
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(value, 4));
 }
 
 
 void MiBandService::setEnableDisplayOnLiftWrist()
 {
-    bool disp = m_settings.value("/uk/co/piggz/amazfish/profile/displayonliftwrist").toBool();
+    auto value = AmazfishConfig::instance()->profileDisplayOnLiftWrist()
+            ? COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST
+            : COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST;
 
-    if (disp) {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST,4));
-    } else {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST,4));
-    }
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(value, 4));
 }
 
 void MiBandService::setDisplayItems()
 {
     char items1 = 0x01; //Always display clock
     char items2 = 0x10;
-    bool sw = false;
-    bool sa = false;
 
 
     BipDevice *device = qobject_cast<BipDevice*>(parent());
@@ -442,34 +434,35 @@ void MiBandService::setDisplayItems()
         return;
     }
 
-    if (m_settings.value("/uk/co/piggz/amazfish/device/displaystatus", QVariant(true)).toBool()) {
+    auto config = AmazfishConfig::instance();
+
+    if (config->deviceDisplayStatus()) {
         items1 |= 0x02;
     }
-    if (m_settings.value("/uk/co/piggz/amazfish/device/displayactivity", QVariant(true)).toBool()) {
+    if (config->deviceDisplayActivity()) {
         items1 |= 0x04;
     }
-    if (m_settings.value("/uk/co/piggz/amazfish/device/displayweather", QVariant(true)).toBool()) {
+    if (config->deviceDisplayWeather()) {
         items1 |= 0x08;
     }
-    if (m_settings.value("/uk/co/piggz/amazfish/device/displayalarm", QVariant(true)).toBool()) {
+    if (config->deviceDisplayAlarm()) {
         items1 |= 0x10;
     }
-    if (m_settings.value("/uk/co/piggz/amazfish/device/displaytimer", QVariant(true)).toBool()) {
+    if (config->deviceDisplayTimer()) {
         items1 |= 0x20;
     }
-    if (m_settings.value("/uk/co/piggz/amazfish/device/displaycompass", QVariant(true)).toBool()) {
+    if (config->deviceDisplayCompass()) {
         items1 |= 0x40;
     }
-    if (m_settings.value("/uk/co/piggz/amazfish/device/displaysettings", QVariant(true)).toBool()) {
+    if (config->deviceDisplaySettings()) {
         items1 |= 0x80;
     }
-    if (m_settings.value("/uk/co/piggz/amazfish/device/displayalipay", QVariant(true)).toBool()) {
+    if (config->deviceDisplayAliPay()) {
         items2 |= 0x01;
     }
 
-
-    sw = m_settings.value("/uk/co/piggz/amazfish/device/displayweathershortcut", QVariant(true)).toBool();
-    sa = m_settings.value("/uk/co/piggz/amazfish/device/displayalipayshortcut", QVariant(true)).toBool();
+    auto sw = config->deviceDisplayWeatherShortcut();
+    auto sa = config->deviceDisplayAliPayShortcut();
 
     QByteArray cmd = QByteArray(COMMAND_CHANGE_SCREENS, 12);
     cmd[1] = items1;
@@ -499,11 +492,12 @@ void MiBandService::setDoNotDisturb()
 void MiBandService::setRotateWristToSwitchInfo(bool enable)
 {
     qDebug() << "Setting rotate write to " << enable;
-    if (enable) {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_ROTATE_WRIST_TO_SWITCH_INFO, 4));
-    } else {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_ROTATE_WRIST_TO_SWITCH_INFO, 4));
-    }
+
+    auto value = enable
+            ? COMMAND_ENABLE_ROTATE_WRIST_TO_SWITCH_INFO
+            : COMMAND_DISABLE_ROTATE_WRIST_TO_SWITCH_INFO;
+
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(value, 4));
 }
 
 void MiBandService::setDisplayCaller()
@@ -567,27 +561,16 @@ void MiBandService::setDatabase(KDbConnection *conn)
 
 void MiBandService::setAlarms()
 {
-    for (int i =0; i < 5; ++i) {
-        int base =0;
-        int repeatMask=0;
-
-        QString configBase = "/uk/co/piggz/amazfish/alarms/alarm" + QString::number(i+1) + "/";
-
-        bool enabled = (m_settings.value(configBase + "enabled", QVariant(false)).toBool());
-        if (enabled) {
-            base = 128;
-        }
-
-        repeatMask = m_settings.value(configBase + "repeat", 0).toInt();
-        if (repeatMask == 0) {
-            repeatMask = 128;
-        }
+    auto config = AmazfishConfig::instance();
+    for (int i = 0, n = 1; i < 5; ++i, ++n) {
+        int base       = config->alarmEnabled(n)    ? 128 : 0;
+        int repeatMask = config->alarmRepeatMask(n) ? 128 : 0;
 
         QByteArray cmd;
         cmd += 0x02;
         cmd += (base + i);
-        cmd += m_settings.value(configBase + "hour", 0).toInt();
-        cmd += m_settings.value(configBase + "minute", 0).toInt();
+        cmd += config->alarmHour(n);
+        cmd += config->alarmMinute(n);
         cmd += repeatMask;
 
         writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
@@ -601,13 +584,11 @@ void MiBandService::requestAlarms()
 
 void MiBandService::setDisconnectNotification()
 {
-    bool notif = m_settings.value("/uk/co/piggz/amazfish/device/disconnectnotification").toBool();
+    auto value = AmazfishConfig::instance()->deviceDisconnectNotification()
+            ? COMMAND_ENABLE_DISCONNECT_NOTIFICATION
+            : COMMAND_DISABLE_DISCONNECT_NOTIFICATION;
 
-    if (notif) {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_ENABLE_DISCONNECT_NOTIFICATION,8));
-    } else {
-        writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(COMMAND_DISABLE_DISCONNECT_NOTIFICATION,8));
-    }
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, QByteArray(value, 8));
 }
 
 bool MiBandService::operationRunning()

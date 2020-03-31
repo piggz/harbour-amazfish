@@ -4,7 +4,6 @@ import "pages"
 import Nemo.Notifications 1.0
 import org.nemomobile.mpris 1.0
 import org.SfietKonstantin.weatherfish 1.0
-import Nemo.Configuration 1.0
 import org.nemomobile.dbus 2.0
 import uk.co.piggz.amazfish 1.0
 
@@ -15,31 +14,26 @@ ApplicationWindow
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 
+    property int _lastNotificationId: 0
     property bool serviceActiveState: false
     property bool serviceEnabledState: false
     property int supportedFeatures: 0
-
-    ConfigurationValue {
-        id: appRefreshWeather
-        key: "/uk/co/piggz/amazfish/app/refreshweather"
-        defaultValue: 60
-    }
-
-    ConfigurationValue {
-        id: appAutoSyncData
-        key: "/uk/co/piggz/amazfish/app/autosyncdata"
-        defaultValue: true
-    }
 
     onStateChanged: {
         console.log("State: " + state);
     }
 
+    Notification {
+        id: notification
+        expireTimeout: 5000
+    }
+
     function showMessage(msg)
     {
-        txtMessage.text = msg;
-        rectMessage.y = app.height - rectMessage.height - 20;
-        tmrHideMessage.start();
+        notification.replacesId = _lastNotificationId
+        notification.previewBody = msg
+        notification.publish()
+        _lastNotificationId = notification.replacesId
     }
 
     function supportsFeature(feature) {
@@ -52,40 +46,6 @@ ApplicationWindow
         anchors.centerIn: parent
         visible: DaemonInterfaceInstance.operationRunning
         running: DaemonInterfaceInstance.operationRunning
-    }
-
-    Rectangle {
-        id: rectMessage
-        width: parent.width - 40
-        anchors.horizontalCenter: parent.horizontalCenter
-        height: childrenRect.height + 20
-        radius: 5
-        color: Theme.highlightBackgroundColor
-        y: parent.height + 10
-
-        Behavior on y {
-                NumberAnimation { duration: 100 }
-            }
-
-        Text {
-            id: txtMessage
-            x: 10
-            y: 10
-            width: parent.width - 20
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.Wrap
-            color: Theme.highlightColor
-            font.pixelSize: Theme.fontSizeMedium
-        }
-        Timer {
-            id: tmrHideMessage
-            interval: 5000
-            running: false
-            repeat: false
-            onTriggered: {
-                rectMessage.y = app.height + 10
-            }
-        }
     }
 
     CityManager {

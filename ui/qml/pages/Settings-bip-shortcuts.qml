@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import uk.co.piggz.amazfish 1.0
 
 Page {
@@ -8,68 +7,6 @@ Page {
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.Portrait
-
-    ConfigurationValue {
-        id: deviceDisplayStatus
-        key: "/uk/co/piggz/amazfish/device/displaystatus"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: deviceDisplayActivity
-        key: "/uk/co/piggz/amazfish/device/displayactivity"
-        defaultValue: true
-    }
-
-
-    ConfigurationValue {
-        id: deviceDisplayWeather
-        key: "/uk/co/piggz/amazfish/device/displayweather"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: deviceDisplayAlarm
-        key: "/uk/co/piggz/amazfish/device/displayalarm"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: deviceDisplayTimer
-        key: "/uk/co/piggz/amazfish/device/displaytimer"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: deviceDisplayCompass
-        key: "/uk/co/piggz/amazfish/device/displaycompass"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: deviceDisplaySettings
-        key: "/uk/co/piggz/amazfish/device/displaysettings"
-        defaultValue: true
-    }
-
-
-    ConfigurationValue {
-        id: deviceDisplayAliPay
-        key: "/uk/co/piggz/amazfish/device/displayalipay"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: deviceDisplayWeathershortcut
-        key: "/uk/co/piggz/amazfish/device/displayweathershortcut"
-        defaultValue: true
-    }
-
-    ConfigurationValue {
-        id: deviceDisplayAliPayShortcut
-        key: "/uk/co/piggz/amazfish/device/displayalipayshortcut"
-        defaultValue: true
-    }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -155,29 +92,29 @@ Page {
     }
 
     Component.onCompleted: {
-        chkDisplayStatus.checked = deviceDisplayStatus.value;
-        chkDisplayActivity.checked = deviceDisplayActivity.value;
-        chkDisplayWeather.checked = deviceDisplayWeather.value;
-        chkDisplayAlarm.checked = deviceDisplayAlarm.value;
-        chkDisplayTimer.checked = deviceDisplayTimer.value;
-        chkDisplayCompass.checked = deviceDisplayCompass.value;
-        chkDisplaySettings.checked = deviceDisplaySettings.value;
-        chkDisplayAliPay.checked = deviceDisplayAliPay.value;
-        chkDisplayWeatherShortcut.checked = deviceDisplayWeathershortcut.value;
-        chkDisplayAliPayShortcut.checked = deviceDisplayAliPayShortcut.value;
+        chkDisplayStatus.checked = AmazfishConfig.deviceDisplayStatus;
+        chkDisplayActivity.checked = AmazfishConfig.deviceDisplayActivity;
+        chkDisplayWeather.checked = AmazfishConfig.deviceDisplayWeather;
+        chkDisplayAlarm.checked = AmazfishConfig.deviceDisplayAlarm;
+        chkDisplayTimer.checked = AmazfishConfig.deviceDisplayTimer;
+        chkDisplayCompass.checked = AmazfishConfig.deviceDisplayCompass;
+        chkDisplaySettings.checked = AmazfishConfig.deviceDisplaySettings;
+        chkDisplayAliPay.checked = AmazfishConfig.deviceDisplayAliPay;
+        chkDisplayWeatherShortcut.checked = AmazfishConfig.deviceDisplayWeathershortcut;
+        chkDisplayAliPayShortcut.checked = AmazfishConfig.deviceDisplayAliPayShortcut;
     }
 
     function saveSettings() {
-        deviceDisplayStatus.value = chkDisplayStatus.checked;
-        deviceDisplayActivity.value = chkDisplayActivity.checked;
-        deviceDisplayWeather.value = chkDisplayWeather.checked;
-        deviceDisplayAlarm.value = chkDisplayAlarm.checked;
-        deviceDisplayTimer.value = chkDisplayTimer.checked;
-        deviceDisplayCompass.value = chkDisplayCompass.checked;
-        deviceDisplaySettings.value = chkDisplaySettings.checked;
-        deviceDisplayAliPay.value = chkDisplayAliPay.checked;
-        deviceDisplayWeathershortcut.value = chkDisplayWeatherShortcut.checked;
-        deviceDisplayAliPayShortcut.value = chkDisplayAliPayShortcut.checked;
+        AmazfishConfig.deviceDisplayStatus = chkDisplayStatus.checked;
+        AmazfishConfig.deviceDisplayActivity = chkDisplayActivity.checked;
+        AmazfishConfig.deviceDisplayWeather = chkDisplayWeather.checked;
+        AmazfishConfig.deviceDisplayAlarm = chkDisplayAlarm.checked;
+        AmazfishConfig.deviceDisplayTimer = chkDisplayTimer.checked;
+        AmazfishConfig.deviceDisplayCompass = chkDisplayCompass.checked;
+        AmazfishConfig.deviceDisplaySettings = chkDisplaySettings.checked;
+        AmazfishConfig.deviceDisplayAliPay = chkDisplayAliPay.checked;
+        AmazfishConfig.deviceDisplayWeathershortcut = chkDisplayWeatherShortcut.checked;
+        AmazfishConfig.deviceDisplayAliPayShortcut = chkDisplayAliPayShortcut.checked;
 
         tmrSetDelay.start();
     }

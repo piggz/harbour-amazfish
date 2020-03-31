@@ -1,5 +1,6 @@
 #include "miband2service.h"
 #include "qaesencryption.h"
+#include "amazfishconfig.h"
 
 const char* MiBand2Service::UUID_SERVICE_MIBAND2  = "0000fee1-0000-1000-8000-00805f9b34fb";
 const char* MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH = "00000009-0000-3512-2118-0009af100700";
@@ -53,11 +54,11 @@ QByteArray MiBand2Service::handleAesAuth(QByteArray data, QByteArray secretKey)
 
 QByteArray MiBand2Service::getSecretKey()
 {
-    QByteArray authKey = AUTH_SECRET_KEY;
-    if (m_requiresAuthKey && !m_settings.value("/uk/co/piggz/amazfish/device/authkey").toString().isEmpty()) {
-        authKey = QByteArray::fromHex(m_settings.value("/uk/co/piggz/amazfish/device/authkey").toString().toLocal8Bit());
+    auto deviceAuthKey = AmazfishConfig::instance()->deviceAuthKey();
+    if (m_requiresAuthKey && !deviceAuthKey.isEmpty()) {
+        return QByteArray::fromHex(deviceAuthKey.toLocal8Bit());
     }
-    return authKey;
+    return AUTH_SECRET_KEY;
 }
 
 QByteArray MiBand2Service::requestAuthNumber() {

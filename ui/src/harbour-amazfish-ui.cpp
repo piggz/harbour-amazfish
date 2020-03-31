@@ -16,7 +16,7 @@
 #include "weather/citymanager.h"
 #include "weather/city.h"
 
-#include "qble/bluezadapter.h"
+#include "amazfishconfig.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,7 +24,6 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setApplicationName("harbour-amazfish");
-    BluezAdapter bluezAdapter;
     SportsDataModel sportsDataModel;
     DaemonInterface daemonInterface;
     sportsDataModel.setConnection(daemonInterface.dbConnection());
@@ -36,8 +35,9 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
     qmlRegisterUncreatableType<DaemonInterface>("uk.co.piggz.amazfish", 1, 0, "DaemonInterface", "DaemonInterface type available only for enum datatypes");
 
+    qmlRegisterSingletonType<AmazfishConfig>("uk.co.piggz.amazfish", 1, 0, "AmazfishConfig", AmazfishConfig::qmlInstance);
+
     QQuickView *view = SailfishApp::createView();
-    view->rootContext()->setContextProperty("BluezAdapter", &bluezAdapter);
     view->rootContext()->setContextProperty("DaemonInterfaceInstance", &daemonInterface);
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
 

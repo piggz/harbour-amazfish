@@ -8,7 +8,6 @@
 
 #include "abstractfetchoperation.h"
 #include "activitysummary.h"
-#include "settingsmanager.h"
 
 class SportsDetailOperation : public AbstractFetchOperation
 {
@@ -20,7 +19,6 @@ public:
 
 private:
     ActivitySummary m_summary;
-    SettingsManager m_settings;
     int m_lastPacketCounter = 0;
     QByteArray m_buffer;
     QString m_gpx;

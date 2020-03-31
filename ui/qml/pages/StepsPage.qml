@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Nemo.Configuration 1.0
 import "../components/"
 import uk.co.piggz.amazfish 1.0
 
@@ -21,11 +20,7 @@ Page {
         contentHeight: column.height
 
         PullDownMenu {
-            MenuItem {
-                text: qsTr("Download Data")
-                onClicked: DaemonInterfaceInstance.downloadActivityData();
-                enabled: DaemonInterfaceInstance.connectionState === "authenticated"
-            }
+            DownloadDataMenuItem {}
         }
 
         // Place our content in a Column.  The PageHeader is always placed at the top

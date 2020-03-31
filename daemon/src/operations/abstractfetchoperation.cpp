@@ -1,6 +1,7 @@
 #include "abstractfetchoperation.h"
 #include "mibandservice.h"
 #include "typeconversion.h"
+#include "amazfishconfig.h"
 
 AbstractFetchOperation::AbstractFetchOperation(QBLEService *service) : AbstractOperation(service)
 {
@@ -9,7 +10,7 @@ AbstractFetchOperation::AbstractFetchOperation(QBLEService *service) : AbstractO
 
 QDateTime AbstractFetchOperation::lastActivitySync()
 {
-    qlonglong ls = m_settings.value(m_lastSyncKey).toLongLong();
+    qlonglong ls = AmazfishConfig::instance()->value(m_lastSyncKey).toLongLong();
 
     if (ls == 0) {
         return QDateTime::currentDateTime().addDays(-100);
@@ -22,7 +23,7 @@ QDateTime AbstractFetchOperation::lastActivitySync()
 
 void AbstractFetchOperation::saveLastActivitySync(qint64 millis)
 {
-    m_settings.setValue(m_lastSyncKey, millis);
+    AmazfishConfig::instance()->setValue(m_lastSyncKey, millis);
 }
 
 void AbstractFetchOperation::setStartDate(const QDateTime &sd)

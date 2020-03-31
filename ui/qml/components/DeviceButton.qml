@@ -1,38 +1,48 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Rectangle {
+ListItem {
     id: item
-    signal clicked
-    property string icn: ""
-    property string txt: ""
-    radius: 10
-    color: Theme.highlightDimmerColor
-    border.color: Theme.secondaryColor
-    border.width: 5
     width: parent.width
-    height: width / 3
+    contentHeight: Theme.itemSizeHuge
+
+    onClicked: {
+        var props = {deviceType: model.deviceType}
+
+        if (model.auth) {
+            pageStack.push(Qt.resolvedUrl("../pages/AuthKeyDialog.qml"), {
+                               acceptDestination: Qt.resolvedUrl("../pages/PairPage.qml"),
+                               acceptDestinationProperties: props
+                           })
+        } else {
+            pageStack.push(Qt.resolvedUrl("../pages/PairPage.qml"), props)
+        }
+    }
 
     Image {
         id: icon
-        source: icn
-        x: Theme.paddingMedium
-        y: Theme.paddingMedium
-        height: parent.height - Theme.paddingMedium * 2
-        width: height
-    }
-    Text {
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: icon.right
-        anchors.leftMargin: Theme.paddingMedium
-        font.pixelSize: Theme.fontSizeLarge
-        color: Theme.primaryColor
-        text: txt
-    }
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            item.clicked()
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: parent.left
+            leftMargin: Theme.horizontalPageMargin
         }
+        height: Theme.iconSizeExtraLarge
+        width: Theme.iconSizeExtraLarge
+        fillMode: Image.PreserveAspectFit
+        source: model.icon
+    }
+
+    Text {
+        id: text
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: icon.right
+            leftMargin: Theme.paddingMedium
+            right: parent.right
+            rightMargin: Theme.horizontalPageMargin
+        }
+        font.pixelSize: Theme.fontSizeLarge
+        color: item.down ? Theme.highlightColor : Theme.primaryColor
+        text: model.deviceType
     }
 }
