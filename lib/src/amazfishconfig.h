@@ -138,7 +138,7 @@ public:
     INT64_OPTION(QStringLiteral("device/lastactivitysyncmillis"), lastActivitySync, setLastActivitySync, 0)
     INT64_OPTION(QStringLiteral("device/lastsportsyncmillis"),    lastSportSync,    setLastSportSync,    0)
 
-    STRING_OPTION(QStringLiteral("device/authKey"), deviceAuthKey, setDeviceAuthKey, QString())
+    STRING_OPTION(QStringLiteral("device/authkey"), deviceAuthKey, setDeviceAuthKey, QString())
 
     STRING_OPTION(QStringLiteral("profile/name"), profileName, setProfileName, QString())
     OPTION(QStringLiteral("profile/dob"), profileDOB, setProfileDOB, QDateTime(), QDateTime, toDateTime, const QDateTime &)
