@@ -10,7 +10,7 @@ QByteArray fromInt16(int val);
 QByteArray fromInt24(int val);
 QByteArray fromInt32(int val);
 QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset);
-QByteArray dateTimeToBytes(const QDateTime &dt, int format);
+QByteArray dateTimeToBytes(const QDateTime &dt, int format, bool adjustForTZ = true);
 int toUint16(char val1, char val2);
 int toUint32(char val1, char val2, char val3, char val4);
 long toUnsigned(int unsignedInt);

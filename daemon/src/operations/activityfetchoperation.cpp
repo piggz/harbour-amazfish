@@ -20,7 +20,7 @@ void ActivityFetchOperation::start()
 
     qDebug() << "last activity sync was" << startDate();
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0, false);
 
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
@@ -50,6 +50,10 @@ bool ActivityFetchOperation::finished(bool success)
     if (success) {
         //store the successful samples
         saved = saveSamples();
+        if (m_sampleTime.isDaylightTime()) {
+            qDebug() << "Adding DST compensation to last sample time";
+            m_sampleTime = m_sampleTime.addSecs(3600);
+        }
         saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());
         qDebug() << "finished fetch operation, last record was " << m_sampleTime;
     }
@@ -68,6 +72,7 @@ bool ActivityFetchOperation::saveSamples()
     }
 
     m_sampleTime = startDate();
+    qDebug() << "Start sample time" << m_sampleTime;
 
     auto config = AmazfishConfig::instance();
     uint id = qHash(config->profileName());
@@ -88,10 +93,18 @@ bool ActivityFetchOperation::saveSamples()
     fields.addField(mibandActivity->field("raw_kind"));
     fields.addField(mibandActivity->field("heartrate"));
 
+    QDateTime saveTime;
+
     for (int i = 0; i < m_samples.count(); ++i) {
         QList<QVariant> values;
-        values << m_sampleTime.toMSecsSinceEpoch() / 1000;
-        values << m_sampleTime;
+        if (m_sampleTime.isDaylightTime()) {
+            saveTime = m_sampleTime.addSecs(3600);
+        } else {
+            saveTime = m_sampleTime;
+        }
+
+        values << saveTime.toMSecsSinceEpoch() / 1000;
+        values << saveTime;
         values << devid;
         values << id;
         values << m_samples[i].intensity();

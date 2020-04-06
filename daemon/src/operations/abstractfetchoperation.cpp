@@ -57,6 +57,7 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 
             // last 8 bytes are the start date
             QDateTime startDate = TypeConversion::rawBytesToDateTime(value.mid(7, 8), false);
+            startDate.setTimeZone(QTimeZone::systemTimeZone());
             setStartDate(startDate);
 
             qDebug() << "About to transfer data from " << startDate;
