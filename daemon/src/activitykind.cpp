@@ -1,7 +1,8 @@
 #include "activitykind.h"
-
+#include <QDebug>
 ActivityKind::Type ActivityKind::fromBipType(int type)
 {
+    qDebug() << "Checking for bip activity type: " << type;
     if (type == 1) {
         return Running;
     } else if (type == 2) {
@@ -10,6 +11,8 @@ ActivityKind::Type ActivityKind::fromBipType(int type)
         return Walking;
     } else if (type == 4) {
         return Biking;
+    } else if (type == 8) {
+        return IndoorBiking;
     }
     return Activity;
 }
@@ -49,5 +52,7 @@ QString ActivityKind::toString(Type type)
     if (type == Treadmill) {
         return "Treadmill";
     }
-
+    if (type == IndoorBiking) {
+        return "Indoor Biking";
+    }
 }

@@ -17,7 +17,8 @@ class ActivityKind
         Walking = 32,
         Swimming = 64,
         Biking = 128,
-        Treadmill = 256
+        Treadmill = 256,
+        IndoorBiking = 512
     };
     
     static Type fromBipType(int type);
