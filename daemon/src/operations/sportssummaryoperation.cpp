@@ -21,7 +21,7 @@ void SportsSummaryOperation::start()
 
     qDebug() << "last summary sync was" << startDate();
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0, false);
 
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
@@ -98,13 +98,15 @@ void SportsSummaryOperation::parseSummary()
     //summary->setEndTime(new Date(getLastStartTimestamp().getTimeInMillis() + duration));
 
     //startDate is in format that doent include DST, so we need to convert it to a real dt
-    QDateTime temp = QDateTime::fromString(startDate().toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
-    QDateTime start = temp.toTimeSpec(Qt::UTC);
-    qDebug() << "Time convertion:" << temp << start << startDate();
+    //QDateTime temp = QDateTime::fromString(startDate().toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
 
-    m_summary.setStartTime(start);
-    m_summary.setEndTime(start.addSecs(duration));
+    qDebug() << "Sport start time is " << startDate();
 
+    //QDateTime start = temp.toTimeSpec(Qt::UTC);
+    //qDebug() << "Time convertion:" << temp << start << startDate();
+
+    m_summary.setStartTime(startDate());
+    m_summary.setEndTime(startDate().addSecs(duration));
 
     qint32 baseLongitude = 0;
     qint32 baseLatitude = 0;

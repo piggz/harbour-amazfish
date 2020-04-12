@@ -97,14 +97,10 @@ bool ActivityFetchOperation::saveSamples()
 
     for (int i = 0; i < m_samples.count(); ++i) {
         QList<QVariant> values;
-        if (m_sampleTime.isDaylightTime()) {
-            saveTime = m_sampleTime.addSecs(3600);
-        } else {
-            saveTime = m_sampleTime;
-        }
 
-        values << saveTime.toMSecsSinceEpoch() / 1000;
-        values << saveTime;
+
+        values << m_sampleTime.toMSecsSinceEpoch() / 1000;
+        values << m_sampleTime;
         values << devid;
         values << id;
         values << m_samples[i].intensity();

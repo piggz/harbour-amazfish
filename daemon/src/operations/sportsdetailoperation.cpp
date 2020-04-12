@@ -22,7 +22,7 @@ void SportsDetailOperation::start()
     setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0, false);
 
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
@@ -81,9 +81,15 @@ bool SportsDetailOperation::finished(bool success)
 
         saved = saveSport();
         //Convert local to UTC (without offsetting) to save as the last sync time
-        QDateTime temp = QDateTime::fromString(m_summary.endTime().toLocalTime().toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
-        temp.setTimeSpec(Qt::UTC);
-        saveLastActivitySync(temp.toMSecsSinceEpoch());
+        //QDateTime temp = QDateTime::fromString(m_summary.endTime().toLocalTime().toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
+        //temp.setTimeSpec(Qt::UTC);
+        qDebug() << "End sport time is:" << m_summary.endTime() << m_summary.endTime().toMSecsSinceEpoch();
+        if (m_summary.endTime().isDaylightTime()) {
+            qDebug() << "Adding DST offset to last save time";
+            m_summary.setEndTime(m_summary.endTime().addSecs(3600));
+            qDebug() << "End sport time is:" << m_summary.endTime() << m_summary.endTime().toMSecsSinceEpoch();
+        }
+        saveLastActivitySync(m_summary.endTime().toMSecsSinceEpoch());
     } else {
         setAbort(true);
     }

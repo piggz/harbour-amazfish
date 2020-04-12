@@ -68,7 +68,7 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
 
         QTimeZone tz(0);
 
-        if (value.length() > 7) {
+        if (value.length() > 7 && honorDeviceTimeOffset) {
             tz = QTimeZone(value[7] * 15 * 60);
         } /*else {
             timestamp.setTimeSpec(Qt::LocalTime);

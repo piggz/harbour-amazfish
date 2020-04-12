@@ -62,7 +62,7 @@ MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService
 
 void MiBandService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << "MiBand Changed:" << characteristic << value.toHex();
+    //qDebug() << "MiBand Changed:" << characteristic << value.toHex();
 
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
         if (value[0] == EVENT_DECLINE_CALL) {
