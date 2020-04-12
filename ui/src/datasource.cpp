@@ -1,5 +1,6 @@
 #include "datasource.h"
 #include <QVariant>
+#include <QTimeZone>
 
 DataSource::DataSource()
 {
@@ -15,6 +16,11 @@ QVariant DataSource::data(Type type, const QDate &day)
     QList<QVariant> result;
 
     QString qry;
+
+    QDateTime sd;
+    sd.setDate(day);
+    sd.setTime(QTime(0,0));
+    sd.setTimeZone(QTimeZone::systemTimeZone());
 
     if (type == DataSource::SleepSummary) {
         qry = "SELECT timestamp_dt, raw_kind, raw_intensity FROM mi_band_activity WHERE timestamp_dt >= date('" +
@@ -111,17 +117,17 @@ QVariant DataSource::data(Type type, const QDate &day)
         }
     } else {
         if (type == DataSource::Heartrate) {
-            qry = "SELECT timestamp_dt, heartrate FROM mi_band_activity WHERE heartrate < 255 AND timestamp_dt >= '" +
-                    day.toString("yyyy-MM-ddT00:00:00") +  "' AND timestamp_dt <= '" +
-                    day.toString("yyyy-MM-ddT23:59:59") +  "' ORDER BY timestamp_dt ASC";
+            qry = "SELECT timestamp_dt, heartrate, timestamp FROM mi_band_activity WHERE heartrate < 255 AND timestamp >= '" +
+                    QString::number(sd.toMSecsSinceEpoch() / 1000) +  "' AND timestamp <= '" +
+                    QString::number((sd.toMSecsSinceEpoch() / 1000) + 86400)  + "' ORDER BY timestamp ASC";
         } else if (type == DataSource::Steps) {
-            qry = "SELECT timestamp_dt, steps FROM mi_band_activity WHERE timestamp_dt >= '" +
-                    day.toString("yyyy-MM-ddT00:00:00") +  "' AND timestamp_dt <= '" +
-                    day.toString("yyyy-MM-ddT23:59:59") +  "' ORDER BY timestamp_dt ASC";
+            qry = "SELECT timestamp_dt, steps, timestamp FROM mi_band_activity WHERE timestamp >= '" +
+                    QString::number(sd.toMSecsSinceEpoch() / 1000) +  "' AND timestamp <= '" +
+                    QString::number((sd.toMSecsSinceEpoch() / 1000) + 86400) +  "' ORDER BY timestamp ASC";
         } else if (type == DataSource::Intensity) {
-            qry = "SELECT timestamp_dt, ((raw_intensity / 255.0) * 100) FROM mi_band_activity WHERE timestamp_dt >= '" +
-                    day.toString("yyyy-MM-ddT00:00:00") +  "' AND timestamp_dt <= '" +
-                    day.toString("yyyy-MM-ddT23:59:59") +  "' ORDER BY timestamp_dt ASC";
+            qry = "SELECT timestamp_dt, ((raw_intensity / 255.0) * 100), timestamp FROM mi_band_activity WHERE timestamp >= '" +
+                    QString::number(sd.toMSecsSinceEpoch() / 1000) +  "' AND timestamp <= '" +
+                    QString::number((sd.toMSecsSinceEpoch() / 1000) + 86400) +  "' ORDER BY timestamp ASC";
         } else if (type == DataSource::StepSummary) {
             qry = "SELECT date(timestamp_dt), sum(steps) FROM mi_band_activity WHERE date(timestamp_dt) >= date('" +
                     day.toString("yyyy-MM-ddT00:00:00") + "','-10 day') AND timestamp_dt <= '" +
