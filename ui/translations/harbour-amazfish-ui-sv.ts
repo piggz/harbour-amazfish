@@ -66,7 +66,7 @@
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation>Ange autentiseringsnyckel</translation>
     </message>
 </context>
 <context>
@@ -104,7 +104,7 @@
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>Oväntat fel</translation>
     </message>
 </context>
 <context>
@@ -190,7 +190,7 @@
     <name>DownloadDataMenuItem</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Ladda ner data</translation>
+        <translation>Ladda ner data</translation>
     </message>
 </context>
 <context>
@@ -229,15 +229,15 @@
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <source>Data Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>Datadiagram</translation>
     </message>
 </context>
 <context>
@@ -251,35 +251,35 @@
     <name>HeartratePage</name>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Hjärtfrekvens</translation>
+        <translation>Hjärtfrekvens</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Viloläge</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Lätt</translation>
     </message>
     <message>
         <source>Intensive</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensiv</translation>
     </message>
     <message>
         <source>Aerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Aerobisk</translation>
     </message>
     <message>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Anerobisk</translation>
     </message>
     <message>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -290,27 +290,27 @@
     </message>
     <message>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppa sökning</translation>
     </message>
     <message>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök efter enheter</translation>
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>Söker efter enheter...</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>Parkopplar...</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga enheter hittades</translation>
     </message>
     <message>
         <source>Pull down to scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Dra neråt för att söka efter enheter</translation>
     </message>
 </context>
 <context>
@@ -691,20 +691,20 @@
     <message>
         <source>h:mm</source>
         <extracomment>Format of sleep hours</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>hh:mm</translation>
     </message>
     <message>
         <source>Deep %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Djup %1</translation>
     </message>
     <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>dd/MM</translation>
     </message>
     <message>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Timmar</translation>
     </message>
 </context>
 <context>
@@ -729,11 +729,11 @@
     <name>UnpairDeviceDialog</name>
     <message>
         <source>Unpair</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort parkoppling</translation>
     </message>
     <message>
         <source>Before proceeding you need to unpair your current device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Innan du fortsätter, måste du ta bort parkopplingen för aktuell enhet.</translation>
     </message>
 </context>
 </TS>
