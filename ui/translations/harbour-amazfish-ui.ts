@@ -258,37 +258,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="70"/>
+        <location filename="../qml/pages/FirstPage.qml" line="68"/>
+        <source>Data Graphs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="74"/>
         <source>Disconnect from watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="70"/>
+        <location filename="../qml/pages/FirstPage.qml" line="74"/>
         <source>Connect to watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="93"/>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
         <source>Amazfish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="280"/>
+        <location filename="../qml/pages/FirstPage.qml" line="284"/>
         <source>%1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="283"/>
+        <location filename="../qml/pages/FirstPage.qml" line="287"/>
         <source>%1 bpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="241"/>
+        <location filename="../qml/pages/FirstPage.qml" line="245"/>
         <source>Start Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="250"/>
+        <location filename="../qml/pages/FirstPage.qml" line="254"/>
         <source>Enable Service</source>
         <translation type="unfinished"></translation>
     </message>
@@ -298,6 +303,49 @@
     <message>
         <location filename="../qml/components/GraphData.qml" line="314"/>
         <source>No data</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HeartratePage</name>
+    <message>
+        <location filename="../qml/pages/HeartratePage.qml" line="43"/>
+        <source>Heartrate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HeartratePage.qml" line="101"/>
+        <source>BPM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HeartratePage.qml" line="123"/>
+        <source>Relaxed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HeartratePage.qml" line="128"/>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HeartratePage.qml" line="133"/>
+        <source>Intensive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HeartratePage.qml" line="138"/>
+        <source>Aerobic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HeartratePage.qml" line="144"/>
+        <source>Anerobic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HeartratePage.qml" line="150"/>
+        <source>VO2 Max</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

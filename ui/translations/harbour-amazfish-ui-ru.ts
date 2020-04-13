@@ -235,11 +235,50 @@
         <source>%1 bpm</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Data Graphs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HeartratePage</name>
+    <message>
+        <source>Heartrate</source>
+        <translation type="unfinished">ЧСС</translation>
+    </message>
+    <message>
+        <source>BPM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Relaxed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intensive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aerobic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anerobic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VO2 Max</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

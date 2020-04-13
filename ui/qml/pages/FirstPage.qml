@@ -65,6 +65,10 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
             }
             MenuItem {
+                text: qsTr("Data Graphs")
+                onClicked: pageStack.push(Qt.resolvedUrl("AnalysisPage.qml"))
+            }
+            MenuItem {
                 visible: AmazfishConfig.pairedAddress
                 enabled: !_connecting
                 text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")

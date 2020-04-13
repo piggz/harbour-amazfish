@@ -127,11 +127,11 @@ Page {
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Active) {
+        //if (status === PageStatus.Active) {
             //            if (!pageStack._currentContainer.attachedContainer) {
-            pageStack.pushAttached(Qt.resolvedUrl("SportsSummaryPage.qml"))
+        //    pageStack.pushAttached(Qt.resolvedUrl("SportsSummaryPage.qml"))
             //        }
-        }
+        //}
     }
 
     Component.onCompleted: {

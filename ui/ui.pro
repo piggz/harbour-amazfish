@@ -42,6 +42,7 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/components/PercentCircle.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
+    qml/pages/HeartratePage.qml \
     qml/pages/PairSelectDeviceType.qml \
     rpm/harbour-amazfish.changes.in \
     rpm/harbour-amazfish.changes.run.in \
