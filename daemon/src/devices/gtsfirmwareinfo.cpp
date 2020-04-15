@@ -37,7 +37,7 @@ void GtsFirmwareInfo::determineFirmwareType() {
         m_type = Firmware;
     }
 
-    if (m_bytes.contains(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER)))) {
+    if (m_bytes.startsWith(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER))) || m_bytes.indexOf(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER))) == COMPRESSED_RES_HEADER_OFFSET || m_bytes.indexOf(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER))) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
         m_type = Watchface;
     }
     if (m_bytes.startsWith(QByteArray(NEWFT_HEADER, sizeof(NEWFT_HEADER)))) {

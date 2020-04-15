@@ -49,6 +49,7 @@ SOURCES += \
     src/devices/biplitefirmwareinfo.cpp \
     src/devices/gtsdevice.cpp \
     src/devices/gtsfirmwareinfo.cpp \
+    src/operations/updatefirmwareoperationnew.cpp \
     src/qaesencryption.cpp \
     src/voicecallhandler.cpp \
     src/voicecallmanager.cpp \
@@ -98,6 +99,7 @@ HEADERS += \
     src/devices/biplitefirmwareinfo.h \
     src/devices/gtsdevice.h \
     src/devices/gtsfirmwareinfo.h \
+    src/operations/updatefirmwareoperationnew.h \
     src/qaesencryption.h \
     src/notificationslistener.h \
     src/voicecallhandler.h \
