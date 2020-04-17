@@ -31,7 +31,7 @@ public:
     static const char COMMAND_FIRMWARE_REBOOT = 0x05; // to UUID_CHARACTERISTIC_FIRMWARE
 
 
-    void prepareFirmwareDownload(const AbstractFirmwareInfo *info);
+    void prepareFirmwareDownload(const AbstractFirmwareInfo *info, UpdateFirmwareOperation* operation);
     void startDownload();
     Q_SIGNAL void downloadProgress(int percent);
 

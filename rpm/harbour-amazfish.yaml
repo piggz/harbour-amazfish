@@ -32,6 +32,7 @@ PkgConfigBR:
   - mlite5
   - libmkcal-qt5
   - libkcalcoren-qt5
+  - zlib
 
 
 # Build dependencies without a pkgconfig setup can be listed here

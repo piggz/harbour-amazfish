@@ -1,5 +1,6 @@
 #include "bipdevice.h"
 #include "bipfirmwareinfo.h"
+#include "updatefirmwareoperation.h"
 
 #include <QtXml/QtXml>
 
@@ -198,7 +199,7 @@ void BipDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
     if (fw){
-        fw->prepareFirmwareDownload(info);
+        fw->prepareFirmwareDownload(info, new UpdateFirmwareOperation(info, fw));
     }
 }
 

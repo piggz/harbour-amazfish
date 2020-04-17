@@ -15,6 +15,11 @@ protected:
     virtual void determineFirmwareVersion() override;
 
 private:
+    const int FW_OFFSET = 0x3;
+    const int FONT_TYPE_OFFSET = 0x9;
+    const int COMPRESSED_RES_HEADER_OFFSET = 0x9;
+    const int COMPRESSED_RES_HEADER_OFFSET_NEW = 0xd;
+
     const char RES_HEADER[5]{ // HMRES resources file (*.res)
             0x48, 0x4d, 0x52, 0x45, 0x53
     };
@@ -55,9 +60,8 @@ private:
             0x8c, 0x36, 0x2e, 0x8c, 0x9c, 0x08, 0x54, 0xa6
     };
 
-    // this is the same as Cor
-    const char FW_HEADER[16] = {
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    const char FW_HEADER[5] = {
+            0x20, 0x99, 0x12, 0x01, 0x08 //probably nonsense
     };
 
     const char GPS_ALMANAC_HEADER[6] = { // probably wrong

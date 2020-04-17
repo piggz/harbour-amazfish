@@ -3,6 +3,7 @@
 #include <QtXml/QtXml>
 #include <QDateTime>
 #include "typeconversion.h"
+#include "updatefirmwareoperationnew.h"
 
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
 {
@@ -199,5 +200,13 @@ void GtsDevice::sendEventReminder(int id, const QDateTime &dt, const QString &ev
     MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
     if (mi) {
         mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 2, cmd);
+    }
+}
+
+void GtsDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
+{
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    if (fw){
+        fw->prepareFirmwareDownload(info, new UpdateFirmwareOperationNew(info, fw));
     }
 }

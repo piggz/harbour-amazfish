@@ -29,10 +29,10 @@ void BipFirmwareService::characteristicChanged(const QString &characteristic, co
     }
 }
 
-void BipFirmwareService::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
+void BipFirmwareService::prepareFirmwareDownload(const AbstractFirmwareInfo *info, UpdateFirmwareOperation* operation)
 {
     if (!m_updateFirmware) {
-        m_updateFirmware = new UpdateFirmwareOperation(info, this);
+        m_updateFirmware = operation;
     } else {
         if (m_operationRunning == 1) {
             emit message(tr("An operation is currently running, please try later"));

@@ -13,7 +13,7 @@
 TARGET = harbour-amazfishd
 
 CONFIG += sailfishapp
-LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish
+LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 
 QT +=  contacts positioning KDb3
 

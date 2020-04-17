@@ -36,6 +36,7 @@ BuildRequires:  pkgconfig(Qt5Positioning)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(libmkcal-qt5)
 BuildRequires:  pkgconfig(libkcalcoren-qt5)
+BuildRequires:  pkgconfig(zlib)
 BuildRequires:  kdb-devel >= 3.1.0
 BuildRequires:  kcoreaddons-devel >= 5.31.0
 BuildRequires:  qt5-qtwidgets-devel

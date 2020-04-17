@@ -13,6 +13,7 @@ public:
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event) override;
     virtual int supportedFeatures() override;
+    void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
 
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
