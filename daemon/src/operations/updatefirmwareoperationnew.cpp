@@ -4,7 +4,7 @@
 
 UpdateFirmwareOperationNew::UpdateFirmwareOperationNew(const AbstractFirmwareInfo *info, QBLEService *service) : UpdateFirmwareOperation(info, service)
 {
-
+    m_startWithFWInfo = false;
 }
 
 bool UpdateFirmwareOperationNew::sendFwInfo()

@@ -15,9 +15,15 @@ void UpdateFirmwareOperation::start()
 
         m_service->enableNotification(serv->UUID_CHARACTERISTIC_FIRMWARE);
 
-        if (!sendFwInfo()) {
-            m_service->message("Error sending firmware info, aborting.");
-            //done();
+        if (m_startWithFWInfo) {
+            sendFwInfo();
+        } else {
+            //Sending inital 01ff
+            QByteArray bytes(2, char(0x00));
+            bytes[0] = BipFirmwareService::COMMAND_FIRMWARE_INIT;
+            bytes[1] = (char)0xff;
+
+            m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, bytes);
         }
     } else {
         m_service->message(QObject::tr("File does not seem to be supported"));
@@ -37,7 +43,15 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
     if (value[0] == BipFirmwareService::RESPONSE && success) {
         switch (value[1]) {
         case BipFirmwareService::COMMAND_FIRMWARE_INIT: {
-            sendFirmwareData();
+            if (m_needToSendFwInfo) {
+                m_needToSendFwInfo = false;
+                if (!sendFwInfo()) {
+                    m_service->message("Error sending firmware info, aborting.");
+                    //done();
+                }
+            } else {
+                sendFirmwareData();
+            }
             break;
         }
         case BipFirmwareService::COMMAND_FIRMWARE_START_DATA: {
@@ -132,7 +146,9 @@ void UpdateFirmwareOperation::sendFirmwareData()
             m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC));
             serv->downloadProgress(progressPercent);
             //QApplication::processEvents();
+
         }
+        QThread::msleep(2);
     }
 
     if (firmwareProgress < len) {

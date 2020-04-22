@@ -12,7 +12,6 @@ protected:
     bool sendFwInfo() override;
     void sendChecksum() override;
     QByteArray getFirmwareStartCommand() override;
-
 };
 
 #endif // UPDATEFIRMWAREOPERATIONNEW_H

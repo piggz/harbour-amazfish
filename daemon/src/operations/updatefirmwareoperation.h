@@ -24,6 +24,10 @@ protected:
     virtual void sendFirmwareData();
     virtual void sendChecksum();
     virtual QByteArray getFirmwareStartCommand();
+    bool m_startWithFWInfo = true;
+
+private:
+    bool m_needToSendFwInfo = true;
 };
 
 #endif // UPDATEFIRMWAREOPERATION_H
