@@ -37,13 +37,7 @@ void BipFirmwareInfo::determineFirmwareType() {
     if (m_bytes.startsWith(QByteArray(FW_HEADER, sizeof(FW_HEADER)))) {
         m_version = m_crcMap[m_crc16];
         qDebug() << "Version:" << m_version << "CRC:" << m_crc16;
-
-        if (!m_version.isEmpty()) {
-            if ((m_version >= "0.0.8.00") && (m_version <= "1.2.0.00")) {
-                m_type = Firmware;
-            }
-        }
-        m_type = Invalid;
+        m_type = Firmware;
     }
 
     if (m_bytes.startsWith(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER)))) {
@@ -221,9 +215,11 @@ void BipFirmwareInfo::populateCrcMap()
     // BipOS FW
     m_crcMap.insert(28373, "1.1.2.05 (BipOS 0.5)");
     m_crcMap.insert(62977, "1.1.2.05 (BipOS 0.5.1)");
+    m_crcMap.insert(7677, "1.1.5.36 (BipOS 0.5.2)");
 
     // BipOS RES
     m_crcMap.insert(16303, "1.1.2.05 (BipOS 0.5)");
     m_crcMap.insert(61135, "1.1.2.05 (BipOS 0.5.1)");
+    m_crcMap.insert(52051, "1.1.5.36 (BipOS 0.5.2)");
 
 }
