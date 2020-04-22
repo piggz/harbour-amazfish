@@ -62,7 +62,7 @@ MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService
 
 void MiBandService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    //qDebug() << "MiBand Changed:" << characteristic << value.toHex();
+    qDebug() << "MiBand Changed:" << characteristic << value.toHex();
 
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
         if (value[0] == EVENT_DECLINE_CALL) {
@@ -71,6 +71,11 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
             emit ignoreCall();
         } else if (value[0] == EVENT_BUTTON) {
             emit buttonPressed();
+        } else {
+            qDebug() << "device event " << value[0];
+            if (value[0] == MTU_REQUEST) {
+                qDebug() << "mtu event";
+            }
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO) {
         qDebug() << "...Got battery info";

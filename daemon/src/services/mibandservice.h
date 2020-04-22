@@ -56,6 +56,7 @@ public:
     static const char EVENT_DECLINE_CALL = 0x07;
     static const char EVENT_IGNORE_CALL = 0x09;
     static const char EVENT_FIND_PHONE = 0x08;
+    static const char MTU_REQUEST = 0x16;
     static const char ENDPOINT_DISPLAY = 0x06;
     static const char ENDPOINT_DISPLAY_ITEMS = 0x0a;
 
