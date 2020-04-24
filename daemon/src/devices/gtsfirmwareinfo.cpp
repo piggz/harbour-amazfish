@@ -53,7 +53,7 @@ void GtsFirmwareInfo::determineFirmwareType() {
 bool GtsFirmwareInfo::supportedOnDevice(const QString &device) const
 {
     qDebug() << "Checking if device suppoerted: " << device;
-    return device == "Amazfit GTS" && m_type != Invalid;
+    return device == "Amazfit GTS" && m_type != Invalid && !m_version.contains("unknown");
 }
 
 void GtsFirmwareInfo::determineFirmwareVersion()
@@ -89,16 +89,16 @@ void GtsFirmwareInfo::determineFirmwareVersion()
             version = "FW (unknown)";
             break;
         case Res:
-            version = "RES " + QString::number(m_bytes[5]);
+            version = "RES (unknown)";
             break;
         case Res_Compressed:
-            version = "RES_COMPRESSED " + QString::number(m_bytes[14]);
+            version = "RES_COMPRESSED (unknown)";
             break;
         case Font:
-            version = "FONT " + QString::number(m_bytes[4]);
+            version = "FONT (unknown)";
             break;
         case Font_Latin:
-            version = "FONT LATIN " + QString::number(m_bytes[4]);
+            version = "FONT LATIN (unknown)";
             break;
         case GPS:
             version = "GPS (unknown)";
@@ -110,10 +110,10 @@ void GtsFirmwareInfo::determineFirmwareVersion()
             version = "ALM (unknown)";
             break;
         case Watchface:
-            version = "Watchface (unknown)";
+            version = "Watchface";
             break;
         default:
-            version = "Invalid";
+            version = "(unknown)";
         }
     }
 

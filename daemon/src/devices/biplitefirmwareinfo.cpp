@@ -61,7 +61,7 @@ void BipLiteFirmwareInfo::determineFirmwareType() {
 
 bool BipLiteFirmwareInfo::supportedOnDevice(const QString &device) const
 {
-    return device == "Amazfit Bip Lite" && m_type != Invalid;
+    return device == "Amazfit Bip Lite" && m_type != Invalid && !m_version.contains("unknown");;
 }
 
 void BipLiteFirmwareInfo::determineFirmwareVersion()
@@ -97,16 +97,16 @@ void BipLiteFirmwareInfo::determineFirmwareVersion()
             version = "FW (unknown)";
             break;
         case Res:
-            version = "RES " + QString::number(m_bytes[5]);
+            version = "RES (unknown)" + QString::number(m_bytes[5]);
             break;
         case Res_Compressed:
-            version = "RES " + QString::number(m_bytes[14]);
+            version = "RES (unknown)" + QString::number(m_bytes[14]);
             break;
         case Font:
-            version = "FONT " + QString::number(m_bytes[4]);
+            version = "FONT (unknown)" + QString::number(m_bytes[4]);
             break;
         case Font_Latin:
-            version = "FONT LATIN " + QString::number(m_bytes[4]);
+            version = "FONT LATIN (unknown)" + QString::number(m_bytes[4]);
             break;
         case GPS:
             version = "GPS (unknown)";
@@ -118,7 +118,7 @@ void BipLiteFirmwareInfo::determineFirmwareVersion()
             version = "ALM (unknown)";
             break;
         case Watchface:
-            version = "Watchface (unknown)";
+            version = "Watchface";
             break;
         default:
             version = "Invalid";
