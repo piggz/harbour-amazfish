@@ -458,19 +458,23 @@ QString DeviceInterface::prepareFirmwareDownload(const QString &path)
             return QString();
         }
         m_firmwareInfo = m_device->firmwareInfo(file.readAll());
-        m_device->prepareFirmwareDownload(m_firmwareInfo);
-        return m_firmwareInfo->version();
+        if (m_firmwareInfo->type() != AbstractFirmwareInfo::Invalid) {
+            m_device->prepareFirmwareDownload(m_firmwareInfo);
+            return m_firmwareInfo->version();
+        }
     }
     return QString();
 }
 
 bool DeviceInterface::startDownload()
 {
-    if (!m_firmwareInfo->supportedOnDevice(m_device->deviceName())) {
-        return false;
+    auto config = AmazfishConfig::instance();
+
+    if (m_firmwareInfo->supportedOnDevice(m_device->deviceName()) || config->appOverrideFwCheck()) {
+        m_device->startDownload();
+        return true;
     }
-    m_device->startDownload();
-    return true;
+    return false;
 }
 
 bool DeviceInterface::operationRunning()

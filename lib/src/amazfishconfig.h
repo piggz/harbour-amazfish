@@ -114,6 +114,7 @@ public:
     BOOL_OPTION(QStringLiteral("app/notifyconnect"),    appNotifyConnect,    setAppNotifyConnect,    true)
     BOOL_OPTION(QStringLiteral("app/autosyncdata"),     appAutoSyncData,     setAppAutoSyncData,     true)
     BOOL_OPTION(QStringLiteral("app/notifylowbattery"), appNotifyLowBattery, setAppNotifyLowBattery, true)
+    BOOL_OPTION(QStringLiteral("app/overridefwcheck"),  appOverrideFwCheck,  setAppOverrideFwCheck,  false)
 
     INT_OPTION(QStringLiteral("app/refreshweather"),    appRefreshWeather,   setAppRefreshWeather,   80)
     INT_OPTION(QStringLiteral("app/refreshcalendar"),   appRefreshCalendar,  setAppRefreshCalendar,  60)
