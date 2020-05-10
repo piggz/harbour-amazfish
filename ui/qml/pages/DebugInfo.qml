@@ -67,6 +67,24 @@ Page {
                 font.pixelSize: Theme.fontSizeMedium
             }
             Label {
+                id: lblModel
+                text: qsTr("Model: ")
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeMedium
+            }
+            Label {
+                id: lblFWRev
+                text: qsTr("Firmware Rev: ")
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeMedium
+            }
+            Label {
+                id: lblManufacturer
+                text: qsTr("Manufacturer: ")
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeMedium
+            }
+            Label {
                 text: qsTr("Connection State: ") + DaemonInterfaceInstance.connectionState
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeMedium
@@ -152,7 +170,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width * 0.8
                 onClicked: {
-                    DaemonInterfaceInstance.sendAlert("someone@somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!");
+                    DaemonInterfaceInstance.sendAlert("someone-somewhere.com", "Donald Duck", "Hello, this is an email from Sailfish OS!X");
                 }
             }
             Button {
@@ -225,6 +243,15 @@ Page {
                 break;
             case DaemonInterface.INFO_GPSVER:
                 lblGPSVer.text = qsTr("GPS Ver: ") +infoValue;
+                break;
+            case DaemonInterface.INFO_MODEL:
+                lblModel.text = qsTr("Model: ") +infoValue;
+                break;
+            case DaemonInterface.INFO_MANUFACTURER:
+                lblManufacturer.text = qsTr("Manufacturer: ") +infoValue;
+                break;
+            case DaemonInterface.INFO_FW_REVISION:
+                lblFWRev.text = qsTr("Firmware Rev: ") +infoValue;
                 break;
             }
         }

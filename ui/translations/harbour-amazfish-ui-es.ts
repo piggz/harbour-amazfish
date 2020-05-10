@@ -185,6 +185,18 @@
         <source>function tests</source>
         <translation>Pruebas de funcionamiento</translation>
     </message>
+    <message>
+        <source>Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firmware Rev: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manufacturer: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>

@@ -2,6 +2,7 @@
 #include "bipdevice.h"
 #include "gtsdevice.h"
 #include "biplitedevice.h"
+#include "pinetimejfdevice.h"
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 {
@@ -20,6 +21,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 
     if (deviceName == "Mi Smart Band 4") {
         return new BipLiteDevice(deviceName);
+    }
+
+    if (deviceName == "Pinetime-JF") {
+        return new PinetimeJFDevice(deviceName);
     }
 
     qDebug() << "DeviceFactory::createDevice: no suitable devices found, creating a Bip device as default";

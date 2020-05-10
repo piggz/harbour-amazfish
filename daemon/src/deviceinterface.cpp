@@ -148,6 +148,7 @@ HRMService *DeviceInterface::hrmService() const
 void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
 {
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
+        qDebug() << "Sending alert to device";
         m_device->sendAlert(appName, summary, body);
     } else {
         qDebug() << "no notification service, buffering notification";
@@ -410,7 +411,7 @@ void DeviceInterface::onConnectionStateChanged()
         updateCalendar();
 
         //TODO this enables music controls
-        miBandService()->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, QByteArray("\x01\x00\x01\x00\x00\x00\x01\x00", 8));
+        //miBandService()->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, QByteArray("\x01\x00\x01\x00\x00\x00\x01\x00", 8));
     } else {
         //Terminate running operations
         m_device->abortOperations();

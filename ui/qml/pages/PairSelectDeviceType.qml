@@ -55,6 +55,11 @@ Page {
                 icon: "../pics/devices/miband4.png"
                 auth: true
             }
+            ListElement {
+                deviceType: "Pinetime-JF"
+                icon: "../pics/devices/pinetime.png"
+                auth: false
+            }
         }
     }
 }

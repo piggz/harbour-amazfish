@@ -94,7 +94,7 @@ Page {
             url: "Settings-alarms.qml"
         }
         ListElement {
-            icon: "image://theme/graphic-weather-cloud-day-1"
+            icon: "image://theme/icon-m-weather-d212-light"
             name: qsTr("Weather")
             url: "AddCityDialog.qml"
         }
