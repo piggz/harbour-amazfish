@@ -13,7 +13,7 @@ Name:       harbour-amazfish
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Amazfit Bip interface application
-Version:    1.5.1
+Version:    1.5.5
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
@@ -25,6 +25,7 @@ Requires:   kdb-sqlite3-driver >= 3.1.0
 Requires:   libKDb3-3 >= 3.1.0
 Requires:   kcoreaddons >= 5.31.0
 Requires:   libicu
+Requires:   qt5-qtconnectivity-qtbluetooth
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -39,8 +40,6 @@ BuildRequires:  pkgconfig(libkcalcoren-qt5)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  kdb-devel >= 3.1.0
 BuildRequires:  kcoreaddons-devel >= 5.31.0
-BuildRequires:  qt5-qtwidgets-devel
-BuildRequires:  qt5-qtxml-devel
 BuildRequires:  qt5-qttools-linguist
 BuildRequires:  desktop-file-utils
 
@@ -85,7 +84,7 @@ desktop-file-install --delete-original       \
 %{_datadir}/%{name}-ui
 %{_datadir}/applications/%{name}-ui.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
-/usr/lib/systemd/user/harbour-amazfish.service
-/usr/share/mapplauncherd/privileges.d/harbour-amazfishd.privileges
+%{_libdir}/systemd/user/harbour-amazfish.service
+%{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges
 # >> files
 # << files

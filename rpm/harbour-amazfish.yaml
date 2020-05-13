@@ -1,6 +1,6 @@
 Name: harbour-amazfish
 Summary: Amazfit Bip interface application
-Version: 1.5.1
+Version: 1.5.5
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
@@ -39,8 +39,6 @@ PkgConfigBR:
 PkgBR:
   - kdb-devel >= 3.1.0
   - kcoreaddons-devel >= 5.31.0
-  - qt5-qtwidgets-devel
-  - qt5-qtxml-devel
   - qt5-qttools-linguist
 
 # Runtime dependencies which are not automatically detected
@@ -50,6 +48,7 @@ Requires:
   - libKDb3-3 >= 3.1.0
   - kcoreaddons >= 5.31.0
   - libicu
+  - qt5-qtconnectivity-qtbluetooth
 
 # All installed files
 Files:
@@ -58,8 +57,8 @@ Files:
   - '%{_datadir}/%{name}-ui'
   - '%{_datadir}/applications/%{name}-ui.desktop'
   - '%{_datadir}/icons/hicolor/*/apps/%{name}-ui.png'
-  - '/usr/lib/systemd/user/harbour-amazfish.service'
-  - '/usr/share/mapplauncherd/privileges.d/harbour-amazfishd.privileges'
+  - '%{_libdir}/systemd/user/harbour-amazfish.service'
+  - '%{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges'
 
 # For more information about yaml and what's supported in Sailfish OS
 # build system, please see https://wiki.merproject.org/wiki/Spectacle
