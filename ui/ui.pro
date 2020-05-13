@@ -44,6 +44,45 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/FirstPage.qml \
     qml/pages/HeartratePage.qml \
     qml/pages/PairSelectDeviceType.qml \
+    qml/pics/devices/amazfit-bip.png \
+    qml/pics/devices/amazfit-cor.png \
+    qml/pics/devices/amazfit-gts.png \
+    qml/pics/devices/miband2.png \
+    qml/pics/devices/miband3.png \
+    qml/pics/devices/miband4.png \
+    qml/pics/devices/pinetime.png \
+    qml/pics/icon-m-biking.png \
+    qml/pics/icon-m-heartrate.png \
+    qml/pics/icon-m-running.png \
+    qml/pics/icon-m-steps.png \
+    qml/pics/icon-m-treadmill.png \
+    qml/pics/icon-m-walk.png \
+    qml/pics/icon-m-walking.png \
+    qml/pics/weather-clear-night.png \
+    qml/pics/weather-clear.png \
+    qml/pics/weather-clouds-night.png \
+    qml/pics/weather-clouds.png \
+    qml/pics/weather-few-clouds-night.png \
+    qml/pics/weather-few-clouds.png \
+    qml/pics/weather-freezing-rain.png \
+    qml/pics/weather-hail.png \
+    qml/pics/weather-many-clouds.png \
+    qml/pics/weather-mist.png \
+    qml/pics/weather-none-available.png \
+    qml/pics/weather-showers-day.png \
+    qml/pics/weather-showers-night.png \
+    qml/pics/weather-showers-scattered-day.png \
+    qml/pics/weather-showers-scattered-night.png \
+    qml/pics/weather-showers-scattered.png \
+    qml/pics/weather-showers.png \
+    qml/pics/weather-snow-rain.png \
+    qml/pics/weather-snow-scattered-day.png \
+    qml/pics/weather-snow-scattered-night.png \
+    qml/pics/weather-snow-scattered.png \
+    qml/pics/weather-snow.png \
+    qml/pics/weather-storm-day.png \
+    qml/pics/weather-storm-night.png \
+    qml/pics/weather-storm.png \
     rpm/harbour-amazfish.changes.in \
     rpm/harbour-amazfish.changes.run.in \
     rpm/harbour-amazfish.spec \
@@ -91,6 +130,7 @@ TRANSLATIONS += translations/harbour-amazfish-ui-de.ts \
 HEADERS += \
     src/datasource.h \
     src/sportsdatamodel.h \
+    src/weather/apikey.h \
     src/weather/city.h \
     src/weather/citymanager.h \
     src/weather/citysearchmodel.h \
