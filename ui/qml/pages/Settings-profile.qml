@@ -150,7 +150,7 @@ Page {
 
                 minimumValue: 0
                 maximumValue: 60
-                stepSize: 5
+                stepSize: 1
                 label: qsTr("All day HRM interval (minutes): ") + value
             }
 
