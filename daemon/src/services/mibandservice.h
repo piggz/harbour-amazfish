@@ -128,7 +128,7 @@ public:
     void requestAlarms();
     void setDisconnectNotification();
 
-    void sendWeather(const CurrentWeather *weather);
+    void sendWeather(const CurrentWeather *weather, bool supportsConditionString);
 
     //Operations
     void fetchLogs();

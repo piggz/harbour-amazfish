@@ -194,7 +194,8 @@ void BipDevice::sendWeather(CurrentWeather *weather)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
     if (mi){
-        mi->sendWeather(weather);
+        bool supportsConditionString = (softwareRevision() > "V0.0.8.74");
+        mi->sendWeather(weather, supportsConditionString);
     }
 }
 

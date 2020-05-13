@@ -210,3 +210,11 @@ void GtsDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
         fw->prepareFirmwareDownload(info, new UpdateFirmwareOperationNew(info, fw));
     }
 }
+
+void GtsDevice::sendWeather(CurrentWeather *weather)
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (mi){
+        mi->sendWeather(weather, true);
+    }
+}

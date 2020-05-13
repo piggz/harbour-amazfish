@@ -625,11 +625,9 @@ void MiBandService::abortOperations()
     m_operationTimeout->stop();
 }
 
-void MiBandService::sendWeather(const CurrentWeather *weather)
+void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsConditionString)
 {
     BipDevice *device = qobject_cast<BipDevice*>(parent());
-
-    bool supportsConditionString = false;
 
     if (!device || device->softwareRevision() > "V0.0.8.74") { //Lexical string comparison should be fine here
         message(tr("Firmware supports weather condition string"));
