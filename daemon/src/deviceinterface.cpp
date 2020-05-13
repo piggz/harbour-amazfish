@@ -501,8 +501,8 @@ void DeviceInterface::downloadActivityData()
 
 void DeviceInterface::sendWeather(CurrentWeather *weather)
 {
-    if (miBandService()) {
-        miBandService()->sendWeather(weather);
+    if (m_device) {
+        m_device->sendWeather(weather);
     }
 }
 

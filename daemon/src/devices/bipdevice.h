@@ -112,6 +112,8 @@ public:
 
     Q_SLOT void authenticated(bool ready);
 
+    virtual void sendWeather(CurrentWeather *weather) override;
+
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     Q_SLOT void handleButtonPressed();

@@ -190,6 +190,14 @@ void BipDevice::authenticated(bool ready)
     }
 }
 
+void BipDevice::sendWeather(CurrentWeather *weather)
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (mi){
+        mi->sendWeather(weather);
+    }
+}
+
 AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes)
 {
     return new BipFirmwareInfo(bytes);
