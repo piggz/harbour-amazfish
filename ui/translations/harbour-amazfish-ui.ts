@@ -154,80 +154,98 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="218"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="236"/>
         <source>Serial No: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="59"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="221"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="239"/>
         <source>Hardware Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="65"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="224"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="242"/>
         <source>Software Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="70"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="71"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="248"/>
+        <source>Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="77"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="254"/>
+        <source>Firmware Rev: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="83"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="251"/>
+        <source>Manufacturer: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="88"/>
         <source>Connection State: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="76"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="227"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="94"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="245"/>
         <source>GPS Ver: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="86"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="104"/>
         <source>A:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="114"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="132"/>
         <source>S:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="137"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="155"/>
         <source>function tests</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="141"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="159"/>
         <source>Test Notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="150"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="168"/>
         <source>Test Email</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="159"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="177"/>
         <source>Test Call</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="167"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="185"/>
         <source>Fetch debug log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="175"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="193"/>
         <source>Test Popup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="183"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="201"/>
         <source>Send Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="193"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Update Calendar</source>
         <translation type="unfinished"></translation>
     </message>

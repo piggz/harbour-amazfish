@@ -2,9 +2,12 @@
 
 const char* DeviceInfoService::UUID_SERVICE_DEVICEINFO  = "0000180a-0000-1000-8000-00805f9b34fb";
 
+const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_MODEL_NO = "00002a24-0000-1000-8000-00805f9b34fb";
 const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_SERIAL_NO = "00002a25-0000-1000-8000-00805f9b34fb";
+const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_FW_REVISION = "00002a26-0000-1000-8000-00805f9b34fb";
 const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_HARDWARE_REV = "00002a27-0000-1000-8000-00805f9b34fb";
 const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_SOFTWARE_REV = "00002a28-0000-1000-8000-00805f9b34fb";
+const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_MANUFACTURER_NAME = "00002a29-0000-1000-8000-00805f9b34fb";
 const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_SYSTEM_ID = "00002a23-0000-1000-8000-00805f9b34fb";
 const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_PNP_ID = "00002a50-0000-1000-8000-00805f9b34fb";
 
@@ -25,6 +28,9 @@ void DeviceInfoService::refreshInformation()
     readAsync(UUID_CHARACTERISTIC_INFO_SOFTWARE_REV);
     readAsync(UUID_CHARACTERISTIC_INFO_SYSTEM_ID);
     readAsync(UUID_CHARACTERISTIC_INFO_PNP_ID);
+    readAsync(UUID_CHARACTERISTIC_INFO_MODEL_NO);
+    readAsync(UUID_CHARACTERISTIC_INFO_FW_REVISION);
+    readAsync(UUID_CHARACTERISTIC_INFO_MANUFACTURER_NAME);
 }
 
 void DeviceInfoService::characteristicRead(const QString &characteristic, const QByteArray &value)
@@ -45,6 +51,15 @@ void DeviceInfoService::characteristicRead(const QString &characteristic, const 
     } else if (characteristic == UUID_CHARACTERISTIC_INFO_PNP_ID) {
         m_pnpId = value;
         emit informationChanged(AbstractDevice::INFO_PNPID, m_pnpId);
+    }  else if (characteristic == UUID_CHARACTERISTIC_INFO_MODEL_NO) {
+        m_model = value;
+        emit informationChanged(AbstractDevice::INFO_MODEL, m_model);
+    } else if (characteristic  == UUID_CHARACTERISTIC_INFO_FW_REVISION) {
+        m_fwRevision = value;
+        emit informationChanged(AbstractDevice::INFO_FW_REVISION, m_fwRevision);
+    } else if (characteristic == UUID_CHARACTERISTIC_INFO_MANUFACTURER_NAME) {
+        m_manufacturer = value;
+        emit informationChanged(AbstractDevice::INFO_MANUFACTURER, m_manufacturer);
     } else {
         qDebug() << "Unknown value";
     }
@@ -82,4 +97,19 @@ QString DeviceInfoService::pnpId() const
 QString DeviceInfoService::readSoftwareRevisionSync()
 {
     return readValue(UUID_CHARACTERISTIC_INFO_SOFTWARE_REV);
+}
+
+QString DeviceInfoService::modelNumber() const
+{
+    return m_model;
+}
+
+QString DeviceInfoService::fwRevision() const
+{
+    return m_fwRevision;
+}
+
+QString DeviceInfoService::manufacturerName() const
+{
+    return m_manufacturer;
 }

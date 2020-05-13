@@ -49,8 +49,10 @@ SOURCES += \
     src/devices/biplitefirmwareinfo.cpp \
     src/devices/gtsdevice.cpp \
     src/devices/gtsfirmwareinfo.cpp \
+    src/devices/pinetimejfdevice.cpp \
     src/operations/updatefirmwareoperationnew.cpp \
     src/qaesencryption.cpp \
+    src/services/currenttimeservice.cpp \
     src/voicecallhandler.cpp \
     src/voicecallmanager.cpp \
     src/typeconversion.cpp \
@@ -99,9 +101,11 @@ HEADERS += \
     src/devices/biplitefirmwareinfo.h \
     src/devices/gtsdevice.h \
     src/devices/gtsfirmwareinfo.h \
+    src/devices/pinetimejfdevice.h \
     src/operations/updatefirmwareoperationnew.h \
     src/qaesencryption.h \
     src/notificationslistener.h \
+    src/services/currenttimeservice.h \
     src/voicecallhandler.h \
     src/voicecallmanager.h \
     src/typeconversion.h \

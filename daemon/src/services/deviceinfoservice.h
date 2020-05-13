@@ -16,6 +16,9 @@ public:
     static const char* UUID_CHARACTERISTIC_INFO_SOFTWARE_REV;
     static const char* UUID_CHARACTERISTIC_INFO_SYSTEM_ID;
     static const char* UUID_CHARACTERISTIC_INFO_PNP_ID;
+    static const char* UUID_CHARACTERISTIC_INFO_MODEL_NO;
+    static const char* UUID_CHARACTERISTIC_INFO_FW_REVISION;
+    static const char* UUID_CHARACTERISTIC_INFO_MANUFACTURER_NAME;
 
     Q_INVOKABLE void refreshInformation();
 
@@ -26,6 +29,11 @@ public:
     QString pnpId() const;
     QString readSoftwareRevisionSync();
 
+    //Pinetime
+    QString modelNumber() const;
+    QString fwRevision() const;
+    QString manufacturerName() const;
+
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
 
 private:
@@ -34,6 +42,9 @@ private:
     QString m_softwareRevision;
     QString m_systemId;
     QString m_pnpId;
+    QString m_model;
+    QString m_fwRevision;
+    QString m_manufacturer;
 
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
 };

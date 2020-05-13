@@ -65,7 +65,10 @@ public:
         INFO_GPSVER,
         INFO_BATTERY,
         INFO_STEPS,
-        INFO_HEARTRATE
+        INFO_HEARTRATE,
+        INFO_MODEL,
+        INFO_FW_REVISION,
+        INFO_MANUFACTURER
     };
     Q_ENUM(Info)
 
