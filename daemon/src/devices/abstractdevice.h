@@ -56,7 +56,7 @@ public:
     };
     Q_ENUM(Settings)
 
-    explicit AbstractDevice(const QString &pairedName, QObject *parent = 0);
+    explicit AbstractDevice(const QString &pairedName, QObject *parent = nullptr);
     
     virtual QString pair() override;
     virtual void pairAsync() override;

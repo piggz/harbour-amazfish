@@ -81,7 +81,7 @@ class BipDevice : public AbstractDevice
 {
     Q_OBJECT
 public:
-    BipDevice(const QString &pairedName, QObject *parent = 0);
+    BipDevice(const QString &pairedName, QObject *parent = nullptr);
     
     static const char* UUID_SERVICE_ALERT_NOTIFICATION;
     static const char* UUID_SERVICE_MIBAND2;
