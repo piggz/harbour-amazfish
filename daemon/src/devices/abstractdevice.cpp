@@ -20,10 +20,10 @@ QString AbstractDevice::pair()
     m_autoreconnect = true;
     //disconnectFromDevice();
     setConnectionState("pairing");
-    emit connectionStateChanged();
 
     QBLEDevice::pair();
     QBLEDevice::connectToDevice();
+    return "pairing";
 }
 
 void AbstractDevice::pairAsync()
@@ -35,7 +35,6 @@ void AbstractDevice::pairAsync()
     m_autoreconnect = true;
     //disconnectFromDevice();
     setConnectionState("pairing");
-    emit connectionStateChanged();
 
     QBLEDevice::pairAsync();
 }
@@ -87,7 +86,7 @@ QString AbstractDevice::connectionState() const
 
 bool AbstractDevice::supportsFeature(AbstractDevice::Feature f)
 {
-    return supportedFeatures() & f == f;
+    return (supportedFeatures() & f) == f;
 }
 
 QString AbstractDevice::deviceName()
