@@ -44,16 +44,18 @@ public:
     explicit CityManager(QObject *parent = 0);
     QList<QObject *> cities() const;
     Q_INVOKABLE QVariantMap properties(const QString &identifier);
+
 signals:
     void citiesChanged();
+
 public slots:
     void addCity(const QString &identifier, const QString &name, const QString &state,
                  const QString &country, const QString &countryCode,
                  float longitude, float latitude);
     void removeCity(const QString &identifier);
     void removeAllCities();
-//    void addProperties(const QString &identifier, const QVariantMap &properties);
-//    void clearProperties(const QString &identifier);
+    void loadCities();
+
 private:
     static QString configFilePath();
     void save();

@@ -112,6 +112,7 @@ public:
     Q_INVOKABLE void requestManualHeartrate();
     Q_INVOKABLE void triggerSendWeather();
     Q_INVOKABLE void updateCalendar();
+    Q_INVOKABLE void reloadCities();
 
 public slots:
     void pair(const QString &name, QString address);

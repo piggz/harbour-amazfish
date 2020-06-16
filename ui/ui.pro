@@ -32,9 +32,6 @@ include(../qble/qble.pri)
 SOURCES += src/harbour-amazfish-ui.cpp \
     src/datasource.cpp \
     src/sportsdatamodel.cpp \
-    src/weather/citysearchmodel.cpp \
-    src/weather/city.cpp \
-    src/weather/citymanager.cpp \
     src/daemoninterface.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
@@ -130,10 +127,5 @@ TRANSLATIONS += translations/harbour-amazfish-ui-de.ts \
 HEADERS += \
     src/datasource.h \
     src/sportsdatamodel.h \
-    src/weather/apikey.h \
-    src/weather/city.h \
-    src/weather/citymanager.h \
-    src/weather/citysearchmodel.h \
-    src/weather/huamiweathercondition.h \
     src/daemoninterface.h
 

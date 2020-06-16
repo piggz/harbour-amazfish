@@ -51,34 +51,7 @@ static const char *PROPERTIES = "properties";
 CityManager::CityManager(QObject *parent) :
     QObject(parent)
 {
-    QFile file (configFilePath());
-    if (!file.open(QIODevice::ReadOnly)) {
-        return;
-    }
-
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
-    file.close();
-
-    QJsonArray jsonArray = jsonDocument.array();
-    foreach (QJsonValue value, jsonArray) {
-        QJsonObject jsonCity = value.toObject();
-        City *city = City::create(jsonCity.value(IDENTIFIER).toString(),
-                                  jsonCity.value(NAME).toString(),
-                                  jsonCity.value(STATE).toString(),
-                                  jsonCity.value(COUNTRY).toString(),
-                                  jsonCity.value(COUNTRY_CODE).toString(),
-                                  jsonCity.value(LONGITUDE).toDouble(),
-                                  jsonCity.value(LATITUDE).toDouble(), this);
-        QJsonObject cityProperties = jsonCity.value(PROPERTIES).toObject();
-        QVariantMap properties;
-        foreach (QString key, cityProperties.keys()) {
-            properties.insert(key, cityProperties.value(key).toVariant());
-        }
-        city->setProperties(properties);
-
-        m_cities.append(city);
-        m_citiesMap.insert(city->identifier(), city);
-    }
+    loadCities();
 }
 
 QList<QObject *> CityManager::cities() const
@@ -132,7 +105,43 @@ void CityManager::removeAllCities()
             
     emit citiesChanged();
 
-    save();  
+    save();
+}
+
+void CityManager::loadCities()
+{
+    m_citiesMap.clear();
+    qDeleteAll(m_cities.begin(), m_cities.end());
+    m_cities.clear();
+
+    QFile file (configFilePath());
+    if (!file.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
+    file.close();
+
+    QJsonArray jsonArray = jsonDocument.array();
+    foreach (QJsonValue value, jsonArray) {
+        QJsonObject jsonCity = value.toObject();
+        City *city = City::create(jsonCity.value(IDENTIFIER).toString(),
+                                  jsonCity.value(NAME).toString(),
+                                  jsonCity.value(STATE).toString(),
+                                  jsonCity.value(COUNTRY).toString(),
+                                  jsonCity.value(COUNTRY_CODE).toString(),
+                                  jsonCity.value(LONGITUDE).toDouble(),
+                                  jsonCity.value(LATITUDE).toDouble(), this);
+        QJsonObject cityProperties = jsonCity.value(PROPERTIES).toObject();
+        QVariantMap properties;
+        foreach (QString key, cityProperties.keys()) {
+            properties.insert(key, cityProperties.value(key).toVariant());
+        }
+        city->setProperties(properties);
+
+        m_cities.append(city);
+        m_citiesMap.insert(city->identifier(), city);
+    }
 }
 
 //void CityManager::addProperties(const QString &identifier, const QVariantMap &properties)

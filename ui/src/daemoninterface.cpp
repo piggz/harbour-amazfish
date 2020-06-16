@@ -348,3 +348,11 @@ void DaemonInterface::updateCalendar()
     }
     iface->call(QStringLiteral("updateCalendar"));
 }
+
+void DaemonInterface::reloadCities()
+{
+    if (!iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("reloadCities"));
+}

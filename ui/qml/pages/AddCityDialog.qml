@@ -13,6 +13,7 @@ Dialog {
         cityManager.addCity(page.selectedCity, cityProperties.name, cityProperties.state,
                             cityProperties.country, cityProperties.countryCode,
                             cityProperties.longitude, cityProperties.latitude)
+        DaemonInterfaceInstance.reloadCities();
     }
 
     QtObject {

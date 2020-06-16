@@ -77,6 +77,7 @@ public:
     Q_INVOKABLE void requestManualHeartrate();
     Q_INVOKABLE void triggerSendWeather();
     Q_INVOKABLE void updateCalendar();
+    Q_INVOKABLE void reloadCities();
 
 private:
     QString m_deviceAddress;

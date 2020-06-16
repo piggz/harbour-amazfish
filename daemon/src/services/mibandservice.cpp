@@ -4,7 +4,7 @@
 
 #include "typeconversion.h"
 #include "bipdevice.h"
-#include "weather/huamiweathercondition.h"
+#include "huamiweathercondition.h"
 #include "amazfishconfig.h"
 
 const char* MiBandService::UUID_SERVICE_MIBAND = "0000fee0-0000-1000-8000-00805f9b34fb";
@@ -717,6 +717,13 @@ void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsCond
         }
     }
     writeChunked(UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 1, buf);
+
+    //Send forecast location
+    QByteArray location;
+    location += (char)(0x08);
+    location += weather->city()->name().toLocal8Bit();
+    location += (char)(0x00);
+    writeChunked(UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 1, location);
 }
 
 void MiBandService::writeChunked(const QString &characteristic, int type, const QByteArray &value) {

@@ -647,6 +647,14 @@ void DeviceInterface::updateCalendar()
     }
 }
 
+void DeviceInterface::reloadCities()
+{
+    m_cityManager.loadCities();
+    if (m_cityManager.cities().count() > 0) {
+        m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
+    }
+}
+
 bool DeviceInterface::supportsFeature(int f){
     return (supportedFeatures() & f) == f;
 }

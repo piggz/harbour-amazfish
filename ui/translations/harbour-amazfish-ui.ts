@@ -4,7 +4,7 @@
 <context>
     <name>AddCityDialog</name>
     <message>
-        <location filename="../qml/pages/AddCityDialog.qml" line="40"/>
+        <location filename="../qml/pages/AddCityDialog.qml" line="41"/>
         <source>Set Location</source>
         <translation type="unfinished"></translation>
     </message>

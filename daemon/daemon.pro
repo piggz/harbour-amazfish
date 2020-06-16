@@ -83,10 +83,7 @@ SOURCES += \
     src/bipactivitydetailparser.cpp \
     src/activitycoordinate.cpp \
     src/harbour-amazfish-daemon.cpp \
-    src/weather/city.cpp \
-    src/weather/citymanager.cpp \
-    src/weather/currentweather.cpp \
-    src/weather/huamiweathercondition.cpp
+    src/huamiweathercondition.cpp
 
 DISTFILES += \
     harbour-amazfish.service \
