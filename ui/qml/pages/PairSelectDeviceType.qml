@@ -36,6 +36,12 @@ Page {
             }
 
             ListElement {
+                deviceType: "Amazfit GTR"
+                icon: "../pics/devices/amazfit-gtr.png"
+                auth: true
+            }
+
+            ListElement {
                 deviceType: "Amazfit Cor"
                 icon: "../pics/devices/amazfit-cor.png"
             }

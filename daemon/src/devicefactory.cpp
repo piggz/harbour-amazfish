@@ -11,7 +11,7 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new BipDevice(deviceName);
     }
 
-    if (deviceName == "Amazfit GTS") {
+    if (deviceName == "Amazfit GTS" || deviceName == "Amazfit GTR") {
         return new GtsDevice(deviceName);
     }
 
