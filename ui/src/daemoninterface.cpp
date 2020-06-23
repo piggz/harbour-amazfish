@@ -356,3 +356,11 @@ void DaemonInterface::reloadCities()
     }
     iface->call(QStringLiteral("reloadCities"));
 }
+
+void DaemonInterface::enableFeature(DaemonInterface::Feature feature)
+{
+    if (!iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("enableFeature"), feature);
+}

@@ -57,6 +57,14 @@ public:
     static const char EVENT_IGNORE_CALL = 0x09;
     static const char EVENT_FIND_PHONE = 0x08;
     static const char MTU_REQUEST = 0x16;
+    static const char EVENT_MUSIC = 0xfe;
+    static const char EVENT_MUSIC_OPEN = 0xe0;
+    static const char EVENT_MUSIC_PLAY = 0x00;
+    static const char EVENT_MUSIC_NEXT = 0x03;
+    static const char EVENT_MUSIC_PREV = 0x04;
+    static const char EVENT_MUSIC_VOLUP = 0x05;
+    static const char EVENT_MUSIC_VOLDOWN = 0x06;
+
     static const char ENDPOINT_DISPLAY = 0x06;
     static const char ENDPOINT_DISPLAY_ITEMS = 0x0a;
 

@@ -18,7 +18,8 @@ public:
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
     virtual void sendWeather(CurrentWeather *weather) override;
-    
+    virtual void enableFeature(AbstractDevice::Feature feature) override;
+
 private:
     void initialise();
     void parseServices();

@@ -148,6 +148,11 @@ void AbstractDevice::sendEventReminder(int id, const QDateTime &dt, const QStrin
     Q_UNUSED(event);
 }
 
+void AbstractDevice::enableFeature(AbstractDevice::Feature feature)
+{
+    Q_UNUSED(feature);
+}
+
 void AbstractDevice::abortOperations()
 {
 

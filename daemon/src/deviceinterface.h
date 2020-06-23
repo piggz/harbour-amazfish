@@ -78,6 +78,7 @@ public:
     Q_INVOKABLE void triggerSendWeather();
     Q_INVOKABLE void updateCalendar();
     Q_INVOKABLE void reloadCities();
+    Q_INVOKABLE void enableFeature(int feature);
 
 private:
     QString m_deviceAddress;

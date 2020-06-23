@@ -154,37 +154,37 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="236"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="246"/>
         <source>Serial No: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="59"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="239"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="249"/>
         <source>Hardware Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="65"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="242"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="252"/>
         <source>Software Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="71"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="248"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="258"/>
         <source>Model: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="254"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="264"/>
         <source>Firmware Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="83"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="251"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="261"/>
         <source>Manufacturer: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -195,7 +195,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="94"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="245"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="255"/>
         <source>GPS Ver: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -247,6 +247,11 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Update Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="224"/>
+        <source>Music Control</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

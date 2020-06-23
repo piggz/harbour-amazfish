@@ -654,6 +654,14 @@ void DeviceInterface::reloadCities()
     }
 }
 
+void DeviceInterface::enableFeature(int feature)
+{
+    qDebug() << Q_FUNC_INFO << feature;
+    if (m_device) {
+        m_device->enableFeature(AbstractDevice::Feature(feature));
+    }
+}
+
 bool DeviceInterface::supportsFeature(int f){
     return (supportedFeatures() & f) == f;
 }

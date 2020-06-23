@@ -24,7 +24,8 @@ int GtsDevice::supportedFeatures()
             FEATURE_ALARMS |
             FEATURE_ALERT |
             FEATURE_NOTIFIATION |
-            FEATURE_EVENT_REMINDER;
+            FEATURE_EVENT_REMINDER |
+            FEATURE_MUSIC_CONTROL;
 }
 
 void GtsDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
@@ -118,7 +119,7 @@ void GtsDevice::parseServices()
 {
     qDebug() << "GtsDevice::parseServices";
 
-    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
+    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), nullptr);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
 
     qDebug() << "Resolved services...";
@@ -140,7 +141,7 @@ void GtsDevice::parseServices()
         if (nodeName.startsWith("service")) {
             QString path = devicePath() + "/" + nodeName;
 
-            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
+            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), nullptr);
             QString uuid = devInterface.property("UUID").toString();
 
             qDebug() << "Creating service for: " << uuid;
@@ -216,5 +217,69 @@ void GtsDevice::sendWeather(CurrentWeather *weather)
     MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
     if (mi){
         mi->sendWeather(weather, true);
+    }
+}
+
+void GtsDevice::enableFeature(AbstractDevice::Feature feature)
+{
+    qDebug() << Q_FUNC_INFO << feature;
+    if (feature == AbstractDevice::FEATURE_MUSIC_CONTROL) {
+        QByteArray cmd;
+
+        cmd += (char)0x01;
+        cmd += (char)0x00;
+        cmd += (char)0x01;
+        cmd += (char)0x00;
+        cmd += (char)0x00;
+        cmd += (char)0x00;
+        cmd += (char)0x01;
+        cmd += (char)0x00;
+        MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+        if (mi){
+            mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
+        }
+
+        QString track = "Test track";
+        QString album = "Awesome Album";
+        QString artist = "An Artist";
+
+        char flags = 0x00;
+        flags |= 0x01;
+
+        if (track.length() > 0) {
+            flags |= 0x02;
+        }
+        if (album.length() > 0) {
+            flags |= 0x04;
+        }
+        if (artist.length() > 0) {
+            flags |= 0x08;
+        }
+
+        char state = 0x00; //Not playing
+        cmd.clear();
+        cmd += flags;
+        cmd += state;
+
+        //Unknown
+        cmd += (char)0x01;
+        cmd += (char)0x00;
+        cmd += (char)0x00;
+        cmd += (char)0x00;
+
+        //Show Track
+        cmd += (char)0x01;
+        cmd += (char)0x00;
+
+        cmd += track.toLocal8Bit();
+        cmd += char(0x00);
+        cmd += album.toLocal8Bit();
+        cmd += char(0x00);
+        cmd += artist.toLocal8Bit();
+        cmd += char(0x00);
+
+        if (mi){
+            mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
+        }
     }
 }

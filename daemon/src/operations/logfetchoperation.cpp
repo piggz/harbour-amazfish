@@ -29,7 +29,7 @@ LogFetchOperation::LogFetchOperation(QBLEService *service) : AbstractFetchOperat
 void LogFetchOperation::start()
 {
     QDateTime fetchFrom = QDateTime::currentDateTime();
-    fetchFrom.addDays(-10);
+    fetchFrom = fetchFrom.addDays(-10);
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(fetchFrom, 0);
 

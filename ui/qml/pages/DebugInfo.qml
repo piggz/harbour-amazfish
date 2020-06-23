@@ -219,6 +219,16 @@ Page {
                     DaemonInterfaceInstance.updateCalendar();
                 }
             }
+
+            Button {
+                text: qsTr("Music Control")
+                visible: supportsFeature(DaemonInterface.FEATURE_MUSIC_CONTROL)
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width * 0.8
+                onClicked: {
+                    DaemonInterfaceInstance.enableFeature(DaemonInterface.FEATURE_MUSIC_CONTROL);
+                }
+            }
         }
     }
 

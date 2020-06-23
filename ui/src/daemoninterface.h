@@ -52,7 +52,8 @@ public:
         FEATURE_ALARMS = 16,
         FEATURE_ALERT = 32,
         FEATURE_NOTIFIATION = 64,
-        FEATURE_EVENT_REMINDER = 128
+        FEATURE_EVENT_REMINDER = 128,
+        FEATURE_MUSIC_CONTROL = 256
     };
     Q_ENUM(Feature)
 
@@ -113,6 +114,7 @@ public:
     Q_INVOKABLE void triggerSendWeather();
     Q_INVOKABLE void updateCalendar();
     Q_INVOKABLE void reloadCities();
+    Q_INVOKABLE void enableFeature(Feature feature);
 
 public slots:
     void pair(const QString &name, QString address);

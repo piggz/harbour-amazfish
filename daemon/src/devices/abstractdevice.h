@@ -19,7 +19,8 @@ public:
         FEATURE_ALARMS = 16,
         FEATURE_ALERT = 32,
         FEATURE_NOTIFIATION = 64,
-        FEATURE_EVENT_REMINDER = 128
+        FEATURE_EVENT_REMINDER = 128,
+        FEATURE_MUSIC_CONTROL = 256
     };
     Q_ENUM(Feature)
 
@@ -87,6 +88,7 @@ public:
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) = 0;
     virtual void incomingCall(const QString &caller) = 0;
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);
+    virtual void enableFeature(AbstractDevice::Feature feature);
 
     //signals    
     Q_SIGNAL void message(const QString &text);

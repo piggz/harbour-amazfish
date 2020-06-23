@@ -23,6 +23,7 @@ QString PinetimeJFDevice::pair()
     emit connectionStateChanged();
 
     QBLEDevice::connectToDevice();
+    return "pairing";
 }
 
 int PinetimeJFDevice::supportedFeatures()
