@@ -409,7 +409,7 @@ void DeviceInterface::onConnectionStateChanged()
         if (hrmService()) {
             m_dbusHRM->setHRMService(hrmService());
         }
-        if (AmazfishConfig::instance()->appNotifyConnect()) {
+        if (AmazfishConfig::instance()->appNotifyConnect() && m_notificationBuffer.isEmpty()) {
             sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
         }
 
