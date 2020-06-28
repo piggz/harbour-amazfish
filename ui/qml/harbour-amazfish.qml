@@ -2,7 +2,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
 import Nemo.Notifications 1.0
-import org.nemomobile.mpris 1.0
 import org.SfietKonstantin.weatherfish 1.0
 import org.nemomobile.dbus 2.0
 import uk.co.piggz.amazfish 1.0
@@ -51,30 +50,13 @@ ApplicationWindow
     CityManager {
             id: cityManager
     }
-
-    MprisManager {
-        id: mprisManager
-    }
     
     Connections {
         target: DaemonInterfaceInstance
         onMessage: {
             showMessage(text);
         }
-
-        onButtonPressed: {
-            console.log("Button pressed:", presses);
-            
-            if (presses == 3 && mprisManager.canGoPrevious) {
-                mprisManager.previous();
-            }
-            
-            if (presses == 2 && mprisManager.canGoNext) {
-                mprisManager.next();
-            }
-        }
     }
-
 
     //SystemD Service
     Timer {

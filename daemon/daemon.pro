@@ -40,6 +40,8 @@ INSTALLS += target \
             privilege
 
 
+WATCHFISH_FEATURES += music
+include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
 
 SOURCES += \

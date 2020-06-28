@@ -71,6 +71,8 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
             emit ignoreCall();
         } else if (value[0] == EVENT_BUTTON) {
             emit buttonPressed();
+        } else if (value[0] == EVENT_MUSIC) {
+            emit serviceEvent(value[1]);
         } else {
             qDebug() << "device event " << value[0];
             if (value[0] == MTU_REQUEST) {

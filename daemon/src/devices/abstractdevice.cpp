@@ -153,6 +153,11 @@ void AbstractDevice::enableFeature(AbstractDevice::Feature feature)
     Q_UNUSED(feature);
 }
 
+void AbstractDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album)
+{
+
+}
+
 void AbstractDevice::abortOperations()
 {
 

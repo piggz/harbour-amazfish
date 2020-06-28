@@ -68,6 +68,35 @@ void GtsDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
 
 }
 
+void GtsDevice::serviceEvent(char event)
+{
+    switch(event) {
+    case MiBandService::EVENT_MUSIC_PLAY:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAY);
+        break;
+    case MiBandService::EVENT_MUSIC_PAUSE:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PAUSE);
+        break;
+    case MiBandService::EVENT_MUSIC_NEXT:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
+        break;
+    case MiBandService::EVENT_MUSIC_PREV:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PREV);
+        break;
+    case MiBandService::EVENT_MUSIC_VOLUP:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
+        break;
+    case MiBandService::EVENT_MUSIC_VOLDOWN:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
+        break;
+    case MiBandService::EVENT_MUSIC_OPEN:
+        emit deviceEvent(AbstractDevice::EVENT_APP_MUSIC);
+        break;
+    default:
+        break;
+    }
+}
+
 void GtsDevice::initialise()
 {
     setConnectionState("connected");
@@ -84,6 +113,7 @@ void GtsDevice::initialise()
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &GtsDevice::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
+        connect(mi, &MiBandService::serviceEvent, this, &GtsDevice::serviceEvent, Qt::UniqueConnection);
     }
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
@@ -281,5 +311,62 @@ void GtsDevice::enableFeature(AbstractDevice::Feature feature)
         if (mi){
             mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
         }
+    }
+}
+
+void GtsDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album)
+{
+    QByteArray cmd;
+
+    cmd += (char)0x01;
+    cmd += (char)0x00;
+    cmd += (char)0x01;
+    cmd += (char)0x00;
+    cmd += (char)0x00;
+    cmd += (char)0x00;
+    cmd += (char)0x01;
+    cmd += (char)0x00;
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (mi){
+        mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
+    }
+
+    char flags = 0x00;
+    flags |= 0x01;
+
+    if (title.length() > 0) {
+        flags |= 0x02;
+    }
+    if (album.length() > 0) {
+        flags |= 0x04;
+    }
+    if (artist.length() > 0) {
+        flags |= 0x08;
+    }
+
+    char state = playing ? 0x01 : 0x00; //Not playing
+    cmd.clear();
+    cmd += flags;
+    cmd += state;
+
+    //Unknown
+    cmd += (char)0x01;
+    cmd += (char)0x00;
+    cmd += (char)0x00;
+    cmd += (char)0x00;
+
+    //Show Track
+    cmd += (char)0x01;
+    cmd += (char)0x00;
+
+    cmd += title.toLocal8Bit();
+    cmd += char(0x00);
+    cmd += album.toLocal8Bit();
+    cmd += char(0x00);
+    cmd += artist.toLocal8Bit();
+    cmd += char(0x00);
+
+    if (mi){
+        mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
     }
 }

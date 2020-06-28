@@ -34,6 +34,7 @@ DeviceInterface::DeviceInterface()
         connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
         connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
+        connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent);
     }
 
     //Create the DBUS HRM Interface
@@ -56,13 +57,18 @@ DeviceInterface::DeviceInterface()
     }
 
     //Calendar
-
     updateCalendar();
 
     //Refresh timer
     m_refreshTimer = new QTimer();
     connect(m_refreshTimer, &QTimer::timeout, this, &DeviceInterface::onRefreshTimer);
     m_refreshTimer->start(60000);
+
+    //Music
+    connect(&m_musicController, &watchfish::MusicController::statusChanged, this, &DeviceInterface::musicChanged);
+    connect(&m_musicController, &watchfish::MusicController::titleChanged, this, &DeviceInterface::musicChanged);
+    connect(&m_musicController, &watchfish::MusicController::artistChanged, this, &DeviceInterface::musicChanged);
+    connect(&m_musicController, &watchfish::MusicController::albumChanged, this, &DeviceInterface::musicChanged);
 
     //Finally, connect to device if it is defined
     QString pairedAddress = config->pairedAddress();
@@ -110,6 +116,7 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
         connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
         connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
+        connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent);
         return m_device->pair();
     }
     
@@ -408,9 +415,6 @@ void DeviceInterface::onConnectionStateChanged()
 
         sendBufferedNotifications();
         updateCalendar();
-
-        //TODO this enables music controls
-        //miBandService()->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, QByteArray("\x01\x00\x01\x00\x00\x00\x01\x00", 8));
     } else {
         //Terminate running operations
         m_device->abortOperations();
@@ -420,7 +424,7 @@ void DeviceInterface::onConnectionStateChanged()
 
 void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QString &val)
 {
-    qDebug() << "slot_informationChanged" << key << val;
+    qDebug() << Q_FUNC_INFO << key << val;
 
     //Handle notification of low battery
     if (key == AbstractDevice::INFO_BATTERY) {
@@ -435,9 +439,57 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
     emit informationChanged(key, val);
 }
 
+void DeviceInterface::musicChanged()
+{
+    qDebug() << Q_FUNC_INFO;
+    if (m_device) {
+        m_device->setMusicStatus(m_musicController.status() == watchfish::MusicController::StatusPlaying, m_musicController.title(), m_musicController.artist(), m_musicController.album());
+    }
+}
+
+void DeviceInterface::deviceEvent(AbstractDevice::Events event)
+{
+    qDebug() << Q_FUNC_INFO << event;
+    switch(event) {
+    case AbstractDevice::EVENT_MUSIC_STOP:
+        m_musicController.pause();
+        break;
+    case AbstractDevice::EVENT_MUSIC_PLAY:
+        m_musicController.play();
+        break;
+    case AbstractDevice::EVENT_MUSIC_PAUSE:
+        m_musicController.pause();
+        break;
+    case AbstractDevice::EVENT_MUSIC_NEXT:
+        m_musicController.next();
+        break;
+    case AbstractDevice::EVENT_MUSIC_PREV:
+        m_musicController.previous();
+        break;
+    case AbstractDevice::EVENT_MUSIC_VOLUP:
+        m_musicController.volumeUp();
+        break;
+    case AbstractDevice::EVENT_MUSIC_VOLDOWN:
+        m_musicController.volumeDown();
+        break;
+    case AbstractDevice::EVENT_APP_MUSIC:
+            musicChanged();
+            break;
+    }
+}
+
+void DeviceInterface::buttonPressed(int presses)
+{
+    if (presses == 2) {
+        m_musicController.next();
+    } else if (presses == 3) {
+        m_musicController.previous();
+    }
+}
+
 void DeviceInterface::sendBufferedNotifications()
 {
-    qDebug() << "Sending buffered notifications";
+    qDebug() << Q_FUNC_INFO;
     while (m_notificationBuffer.count() > 0) {
         WatchNotification n = m_notificationBuffer.dequeue();
         if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){

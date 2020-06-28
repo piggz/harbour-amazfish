@@ -19,12 +19,14 @@ public:
 
     virtual void sendWeather(CurrentWeather *weather) override;
     virtual void enableFeature(AbstractDevice::Feature feature) override;
+    virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album) override;
 
 private:
     void initialise();
     void parseServices();
 
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
+    Q_SLOT void serviceEvent(char event);
 
 private:
     QString pairedName;

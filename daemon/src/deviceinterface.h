@@ -20,6 +20,7 @@
 #include "weather/citymanager.h"
 #include "weather/currentweather.h"
 #include "calendarreader.h"
+#include "libwatchfish/musiccontroller.h"
 
 class AlertNotificationService;
 class DeviceInfoService;
@@ -60,7 +61,6 @@ public:
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void operationRunningChanged();
-    Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
     Q_SIGNAL void connectionStateChanged();
 
@@ -109,7 +109,14 @@ private:
     Q_SLOT void onActiveVoiceCallStatusChanged();
     Q_SLOT void onConnectionStateChanged();
     Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
+    Q_SLOT void musicChanged();
+    Q_SLOT void deviceEvent(AbstractDevice::Events event);
+    Q_SLOT void buttonPressed(int presses);
+
     void sendBufferedNotifications();
+
+    //Watchfish
+    watchfish::MusicController m_musicController;
 
     //Calendar
     CalendarReader m_calendarReader;
@@ -130,7 +137,6 @@ private:
     void sendWeather(CurrentWeather *weather);
     Q_SLOT void onCitiesChanged();
     Q_SLOT void onWeatherReady();
-
 };
 
 #endif // BIPINTERFACE_H

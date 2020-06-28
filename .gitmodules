@@ -3,4 +3,4 @@
 	url = https://github.com/piggz/qble
 [submodule "daemon/libwatchfish"]
 	path = daemon/libwatchfish
-	url = https://git.javispedro.com/libwatchfish.git
+	url = https://github.com/piggz/libwatchfish.git

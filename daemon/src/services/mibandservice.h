@@ -60,6 +60,7 @@ public:
     static const char EVENT_MUSIC = 0xfe;
     static const char EVENT_MUSIC_OPEN = 0xe0;
     static const char EVENT_MUSIC_PLAY = 0x00;
+    static const char EVENT_MUSIC_PAUSE = 0x01;
     static const char EVENT_MUSIC_NEXT = 0x03;
     static const char EVENT_MUSIC_PREV = 0x04;
     static const char EVENT_MUSIC_VOLUP = 0x05;
@@ -148,6 +149,7 @@ public:
     Q_SIGNAL void declineCall();
     Q_SIGNAL void ignoreCall();
     Q_SIGNAL void buttonPressed();
+    Q_SIGNAL void serviceEvent(char event);
 
     virtual bool operationRunning() override;
     void abortOperations();

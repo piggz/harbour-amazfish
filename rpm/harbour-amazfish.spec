@@ -38,6 +38,7 @@ BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(libmkcal-qt5)
 BuildRequires:  pkgconfig(libkcalcoren-qt5)
 BuildRequires:  pkgconfig(zlib)
+BuildRequires:  pkgconfig(mpris-qt5)
 BuildRequires:  kdb-devel >= 3.1.0
 BuildRequires:  kcoreaddons-devel >= 5.31.0
 BuildRequires:  qt5-qttools-linguist

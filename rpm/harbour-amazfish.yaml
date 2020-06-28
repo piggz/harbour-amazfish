@@ -33,6 +33,7 @@ PkgConfigBR:
   - libmkcal-qt5
   - libkcalcoren-qt5
   - zlib
+  - mpris-qt5
 
 
 # Build dependencies without a pkgconfig setup can be listed here

@@ -57,6 +57,18 @@ public:
     };
     Q_ENUM(Settings)
 
+    enum Events {
+        EVENT_MUSIC_STOP,
+        EVENT_MUSIC_PLAY,
+        EVENT_MUSIC_PAUSE,
+        EVENT_MUSIC_NEXT,
+        EVENT_MUSIC_PREV,
+        EVENT_MUSIC_VOLUP,
+        EVENT_MUSIC_VOLDOWN,
+        EVENT_APP_MUSIC
+    };
+    Q_ENUM(Events)
+
     explicit AbstractDevice(const QString &pairedName, QObject *parent = nullptr);
     
     virtual QString pair() override;
@@ -89,6 +101,7 @@ public:
     virtual void incomingCall(const QString &caller) = 0;
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);
     virtual void enableFeature(AbstractDevice::Feature feature);
+    virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album);
 
     //signals    
     Q_SIGNAL void message(const QString &text);
@@ -97,6 +110,7 @@ public:
     Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void connectionStateChanged();
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString& val);
+    Q_SIGNAL void deviceEvent(Events event);
 
 protected:
     bool m_needsAuth = false;
