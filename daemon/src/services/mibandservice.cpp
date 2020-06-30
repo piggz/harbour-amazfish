@@ -571,7 +571,7 @@ void MiBandService::setAlarms()
     auto config = AmazfishConfig::instance();
     for (int i = 0, n = 1; i < 5; ++i, ++n) {
         int base       = config->alarmEnabled(n)    ? 128 : 0;
-        int repeatMask = config->alarmRepeatMask(n) ? 128 : 0;
+        int repeatMask = config->alarmRepeatMask(n) == 0 ? 128 : config->alarmRepeatMask(n);
 
         QByteArray cmd;
         cmd += 0x02;
