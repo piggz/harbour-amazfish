@@ -65,7 +65,10 @@ public:
         EVENT_MUSIC_PREV,
         EVENT_MUSIC_VOLUP,
         EVENT_MUSIC_VOLDOWN,
-        EVENT_APP_MUSIC
+        EVENT_APP_MUSIC,
+        EVENT_DECLINE_CALL,
+        EVENT_ANSWER_CALL,
+        EVENT_IGNORE_CALL
     };
     Q_ENUM(Events)
 

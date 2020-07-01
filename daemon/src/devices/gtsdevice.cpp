@@ -92,6 +92,12 @@ void GtsDevice::serviceEvent(char event)
     case MiBandService::EVENT_MUSIC_OPEN:
         emit deviceEvent(AbstractDevice::EVENT_APP_MUSIC);
         break;
+    case MiBandService::EVENT_DECLINE_CALL:
+        emit deviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
+        break;
+    case MiBandService::EVENT_IGNORE_CALL:
+        emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
+        break;
     default:
         break;
     }
