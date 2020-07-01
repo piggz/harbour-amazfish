@@ -46,8 +46,7 @@ DeviceInterface::DeviceInterface()
     connect(m_notificationListener, &NotificationsListener::notificationReceived, this, &DeviceInterface::notificationReceived);
 
     // Calls
-    m_voiceCallManager = new VoiceCallManager(this);
-    connect(m_voiceCallManager, &VoiceCallManager::activeVoiceCallChanged, this, &DeviceInterface::onActiveVoiceCallChanged);
+    connect(&m_voiceCallController, &watchfish::VoiceCallController::ringingChanged, this, &DeviceInterface::onRingingChanged);
 
     //Weather
     connect(&m_cityManager, &CityManager::citiesChanged, this, &DeviceInterface::onCitiesChanged);
@@ -169,68 +168,20 @@ void DeviceInterface::notificationReceived(const QString &appName, const QString
     }
 }
 
-void DeviceInterface::onActiveVoiceCallChanged()
+void DeviceInterface::onRingingChanged()
 {
+    qDebug() << Q_FUNC_INFO << m_voiceCallController.ringing();
 
-    qDebug() << "onActiveVoiceCallChanged";
-
-    VoiceCallHandler* handler = m_voiceCallManager->activeVoiceCall();
-    if (handler) {
-        connect(handler, SIGNAL(statusChanged()), SLOT(onActiveVoiceCallStatusChanged()));
-        connect(handler, SIGNAL(destroyed()), SLOT(onActiveVoiceCallStatusChanged()));
-        connect(miBandService(), &MiBandService::declineCall, handler, &VoiceCallHandler::hangup, Qt::UniqueConnection);
-        connect(miBandService(), &MiBandService::ignoreCall, m_voiceCallManager, &VoiceCallManager::silenceRingtone, Qt::UniqueConnection);
-
-
-        if (handler->status()) onActiveVoiceCallStatusChanged();
-    }
-}
-
-void DeviceInterface::onActiveVoiceCallStatusChanged()
-{
-    qDebug() << "onActiveVoiceCallStatusChanged";
-
-    VoiceCallHandler* handler = m_voiceCallManager->activeVoiceCall();
-
-    if (!handler || handler->handlerId().isNull() || !m_device) {
+    if (!m_device) {
         return;
     }
 
-    switch ((VoiceCallHandler::VoiceCallStatus)handler->status()) {
-    case VoiceCallHandler::STATUS_ALERTING:
-    case VoiceCallHandler::STATUS_DIALING:
-        qDebug() << "Tell outgoing:" << handler->lineId();
-        //emit outgoingCall(handlerId, handler->lineId(), m_voiceCallManager->findPersonByNumber(handler->lineId()));
-        break;
-    case VoiceCallHandler::STATUS_INCOMING:
-    case VoiceCallHandler::STATUS_WAITING:
-        qDebug() << "Tell incoming:" << handler->lineId();
-        if(handler->getState() < VoiceCallHandler::StateRinging) {
-            handler->setState(VoiceCallHandler::StateRinging);
-            m_device->incomingCall(m_voiceCallManager->findPersonByNumber(handler->lineId()));
+    if (m_voiceCallController.ringing()) {
+        m_device->incomingCall(m_voiceCallController.findPersonByNumber(m_voiceCallController.callerId()));
+    } else {
+        if (m_device->service("00001802-0000-1000-8000-00805f9b34fb")){
+            m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
         }
-        break;
-    case VoiceCallHandler::STATUS_NULL:
-    case VoiceCallHandler::STATUS_DISCONNECTED:
-        qDebug() << "Endphone " << handler->handlerId();
-        if(handler->getState() < VoiceCallHandler::StateCleanedUp) {
-            handler->setState(VoiceCallHandler::StateCleanedUp);
-            if (m_device->service("00001802-0000-1000-8000-00805f9b34fb")){
-                m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
-            }
-        }
-        break;
-    case VoiceCallHandler::STATUS_ACTIVE:
-        qDebug() << "Startphone" << handler->handlerId();
-        if(handler->getState() < VoiceCallHandler::StateAnswered) {
-            handler->setState(VoiceCallHandler::StateAnswered);
-            if (m_device->service("00001802-0000-1000-8000-00805f9b34fb")){
-                m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
-            }        }
-        break;
-    case VoiceCallHandler::STATUS_HELD:
-        qDebug() << "OnHold" << handler->handlerId();
-        break;
     }
 }
 
@@ -473,8 +424,14 @@ void DeviceInterface::deviceEvent(AbstractDevice::Events event)
         m_musicController.volumeDown();
         break;
     case AbstractDevice::EVENT_APP_MUSIC:
-            musicChanged();
-            break;
+        musicChanged();
+        break;
+    case AbstractDevice::EVENT_IGNORE_CALL:
+        m_voiceCallController.silence();
+        break;
+    case AbstractDevice::EVENT_DECLINE_CALL:
+        m_voiceCallController.hangup();
+        break;
     }
 }
 

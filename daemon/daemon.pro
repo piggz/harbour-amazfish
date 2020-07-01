@@ -40,7 +40,9 @@ INSTALLS += target \
             privilege
 
 
-WATCHFISH_FEATURES += music
+WATCHFISH_FEATURES += music \
+                      voicecall
+
 include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
 

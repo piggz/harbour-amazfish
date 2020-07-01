@@ -21,6 +21,7 @@
 #include "weather/currentweather.h"
 #include "calendarreader.h"
 #include "libwatchfish/musiccontroller.h"
+#include "libwatchfish/voicecallcontroller.h"
 
 class AlertNotificationService;
 class DeviceInfoService;
@@ -90,7 +91,6 @@ private:
 
     AbstractDevice *m_device = nullptr;
     NotificationsListener *m_notificationListener = nullptr;
-    VoiceCallManager *m_voiceCallManager = nullptr;
 
     DBusHRM *m_dbusHRM = nullptr;
 
@@ -105,8 +105,7 @@ private:
     HRMService *hrmService() const;
     
     Q_SLOT void notificationReceived(const QString &appName, const QString &summary, const QString &body);
-    Q_SLOT void onActiveVoiceCallChanged();
-    Q_SLOT void onActiveVoiceCallStatusChanged();
+    Q_SLOT void onRingingChanged();
     Q_SLOT void onConnectionStateChanged();
     Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
     Q_SLOT void musicChanged();
@@ -117,6 +116,7 @@ private:
 
     //Watchfish
     watchfish::MusicController m_musicController;
+    watchfish::VoiceCallController m_voiceCallController;
 
     //Calendar
     CalendarReader m_calendarReader;
