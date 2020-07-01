@@ -42,13 +42,13 @@ INSTALLS += target \
 
 WATCHFISH_FEATURES += music \
                       voicecall \
-                      notificationmonitor
+                      notificationmonitor \
+                      calendar
 
 include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
 
 SOURCES += \
-    src/calendarreader.cpp \
     src/devices/abstractfirmwareinfo.cpp \
     src/devices/biplitedevice.cpp \
     src/devices/biplitefirmwareinfo.cpp \
@@ -94,7 +94,6 @@ DISTFILES += \
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
-    src/calendarreader.h \
     src/devices/abstractfirmwareinfo.h \
     src/devices/biplitedevice.h \
     src/devices/biplitefirmwareinfo.h \

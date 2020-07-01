@@ -52,9 +52,6 @@ DeviceInterface::DeviceInterface()
         m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
     }
 
-    //Calendar
-    updateCalendar();
-
     //Refresh timer
     m_refreshTimer = new QTimer();
     connect(m_refreshTimer, &QTimer::timeout, this, &DeviceInterface::onRefreshTimer);
@@ -539,6 +536,8 @@ QString DeviceInterface::information(int i)
 
 void DeviceInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
 {
+    qDebug() << Q_FUNC_INFO;
+
     int hash = qHash(sender + subject + message);
     if (hash == m_lastAlertHash && !allowDuplicate) {
         qDebug() << "Discarded duplicate alert";
@@ -640,12 +639,12 @@ void DeviceInterface::updateCalendar()
 {
     if (supportsFeature(AbstractDevice::FEATURE_EVENT_REMINDER)) {
         if (m_device) {
-            QList<CalendarReader::EventData> eventlist = m_calendarReader.getEvents();
+            QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
 
             int id=0;
-            foreach (CalendarReader::EventData event, eventlist) {
-                qDebug() << event.uniqueId << event.displayLabel << event.description << event.startTime;
-                m_device->sendEventReminder(id, event.startTime, event.displayLabel);
+            foreach (watchfish::CalendarEvent event, eventlist) {
+                qDebug() << event.uid() << event.title() << event.start();
+                m_device->sendEventReminder(id, event.start(), event.title());
                 id++;
             }
         }

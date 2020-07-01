@@ -16,11 +16,11 @@
 #include "dbushrm.h"
 #include "weather/citymanager.h"
 #include "weather/currentweather.h"
-#include "calendarreader.h"
 #include "libwatchfish/musiccontroller.h"
 #include "libwatchfish/voicecallcontroller.h"
 #include "libwatchfish/notificationmonitor.h"
 #include "libwatchfish/notification.h"
+#include "libwatchfish/calendarsource.h"
 
 class HRMService;
 class MiBand2Service;
@@ -106,9 +106,7 @@ private:
     watchfish::MusicController m_musicController;
     watchfish::VoiceCallController m_voiceCallController;
     watchfish::NotificationMonitor m_notificationMonitor;
-
-    //Calendar
-    CalendarReader m_calendarReader;
+    watchfish::CalendarSource m_calendarSource;
 
     //Notifications
     QQueue<watchfish::Notification*> m_notificationBuffer;
