@@ -146,8 +146,6 @@ public:
     //Q_INVOKABLE void fetchActivityDetail();
 
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
-    Q_SIGNAL void declineCall();
-    Q_SIGNAL void ignoreCall();
     Q_SIGNAL void buttonPressed();
     Q_SIGNAL void serviceEvent(char event);
 
