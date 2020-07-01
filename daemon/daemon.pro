@@ -57,8 +57,6 @@ SOURCES += \
     src/operations/updatefirmwareoperationnew.cpp \
     src/qaesencryption.cpp \
     src/services/currenttimeservice.cpp \
-    src/voicecallhandler.cpp \
-    src/voicecallmanager.cpp \
     src/typeconversion.cpp \
     src/bipbatteryinfo.cpp \
     src/notificationslistener.cpp \
@@ -107,8 +105,6 @@ HEADERS += \
     src/qaesencryption.h \
     src/notificationslistener.h \
     src/services/currenttimeservice.h \
-    src/voicecallhandler.h \
-    src/voicecallmanager.h \
     src/typeconversion.h \
     src/bipbatteryinfo.h \
     src/deviceinterface.h \
