@@ -14,8 +14,6 @@
 #include "abstractdevice.h"
 #include "abstractfirmwareinfo.h"
 #include "notificationslistener.h"
-#include "voicecallhandler.h"
-#include "voicecallmanager.h"
 #include "dbushrm.h"
 #include "weather/citymanager.h"
 #include "weather/currentweather.h"
