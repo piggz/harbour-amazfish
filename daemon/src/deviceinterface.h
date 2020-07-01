@@ -13,20 +13,18 @@
 
 #include "abstractdevice.h"
 #include "abstractfirmwareinfo.h"
-#include "notificationslistener.h"
 #include "dbushrm.h"
 #include "weather/citymanager.h"
 #include "weather/currentweather.h"
 #include "calendarreader.h"
 #include "libwatchfish/musiccontroller.h"
 #include "libwatchfish/voicecallcontroller.h"
+#include "libwatchfish/notificationmonitor.h"
+#include "libwatchfish/notification.h"
 
-class AlertNotificationService;
-class DeviceInfoService;
 class HRMService;
 class MiBand2Service;
 class MiBandService;
-class BipFirmwareService;
 
 #define SERVICE_NAME "uk.co.piggz.amazfish"
 
@@ -37,13 +35,6 @@ class DeviceInterface : public QObject
 public:
     DeviceInterface();
     ~DeviceInterface();
-
-    struct WatchNotification
-    {
-        QString appName;
-        QString summary;
-        QString body;
-    };
 
     void registerDBus();
 
@@ -88,7 +79,6 @@ private:
     AbstractFirmwareInfo *m_firmwareInfo = nullptr;
 
     AbstractDevice *m_device = nullptr;
-    NotificationsListener *m_notificationListener = nullptr;
 
     DBusHRM *m_dbusHRM = nullptr;
 
@@ -102,7 +92,7 @@ private:
     MiBandService *miBandService() const;
     HRMService *hrmService() const;
     
-    Q_SLOT void notificationReceived(const QString &appName, const QString &summary, const QString &body);
+    Q_SLOT void onNotification(watchfish::Notification *notification);
     Q_SLOT void onRingingChanged();
     Q_SLOT void onConnectionStateChanged();
     Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
@@ -115,12 +105,13 @@ private:
     //Watchfish
     watchfish::MusicController m_musicController;
     watchfish::VoiceCallController m_voiceCallController;
+    watchfish::NotificationMonitor m_notificationMonitor;
 
     //Calendar
     CalendarReader m_calendarReader;
 
     //Notifications
-    QQueue<WatchNotification> m_notificationBuffer;
+    QQueue<watchfish::Notification*> m_notificationBuffer;
 
     //Database
     KDbDriver *m_dbDriver = nullptr;

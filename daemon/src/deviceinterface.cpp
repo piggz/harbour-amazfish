@@ -20,9 +20,6 @@ DeviceInterface::DeviceInterface()
     //Start by registering on DBUS
     registerDBus();
 
-    //Intercept notificaions
-    m_notificationListener = new NotificationsListener(this);
-
     auto config = AmazfishConfig::instance();
 
     //Create a device object
@@ -43,7 +40,7 @@ DeviceInterface::DeviceInterface()
     setupDatabase();
 
     //Notifications
-    connect(m_notificationListener, &NotificationsListener::notificationReceived, this, &DeviceInterface::notificationReceived);
+    connect(&m_notificationMonitor, &watchfish::NotificationMonitor::notification, this, &DeviceInterface::onNotification);
 
     // Calls
     connect(&m_voiceCallController, &watchfish::VoiceCallController::ringingChanged, this, &DeviceInterface::onRingingChanged);
@@ -150,18 +147,15 @@ HRMService *DeviceInterface::hrmService() const
     return qobject_cast<HRMService*>(m_device->service(HRMService::UUID_SERVICE_HRM));
 }
 
-void DeviceInterface::notificationReceived(const QString &appName, const QString &summary, const QString &body)
+void DeviceInterface::onNotification(watchfish::Notification *notification)
 {
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
         qDebug() << "Sending alert to device";
-        m_device->sendAlert(appName, summary, body);
+        m_device->sendAlert(notification->appName(), notification->summary(), notification->body());
     } else {
         qDebug() << "no notification service, buffering notification";
-        WatchNotification n;
-        n.appName = appName;
-        n.summary = summary;
-        n.body = body;
-        m_notificationBuffer.enqueue(n);
+
+        m_notificationBuffer.enqueue(notification);
         if (m_notificationBuffer.count() > 10) {
             m_notificationBuffer.dequeue();
         }
@@ -448,10 +442,10 @@ void DeviceInterface::sendBufferedNotifications()
 {
     qDebug() << Q_FUNC_INFO;
     while (m_notificationBuffer.count() > 0) {
-        WatchNotification n = m_notificationBuffer.dequeue();
+        watchfish::Notification *n = m_notificationBuffer.dequeue();
         if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
             qDebug() << "Sending notification";
-            sendAlert(n.appName, n.summary, n.body);
+            sendAlert(n->appName(), n->summary(), n->body());
         }
     }
 }
@@ -552,7 +546,10 @@ void DeviceInterface::sendAlert(const QString &sender, const QString &subject, c
     }
     m_lastAlertHash = hash;
 
-    notificationReceived(sender, subject, message);
+    if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
+        qDebug() << "Sending alert to device";
+        m_device->sendAlert(sender, subject, message);
+    }
 }
 
 void DeviceInterface::incomingCall(const QString &caller)

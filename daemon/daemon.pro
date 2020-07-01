@@ -41,7 +41,8 @@ INSTALLS += target \
 
 
 WATCHFISH_FEATURES += music \
-                      voicecall
+                      voicecall \
+                      notificationmonitor
 
 include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
@@ -59,7 +60,6 @@ SOURCES += \
     src/services/currenttimeservice.cpp \
     src/typeconversion.cpp \
     src/bipbatteryinfo.cpp \
-    src/notificationslistener.cpp \
     src/devicefactory.cpp \
     src/services/mibandservice.cpp \
     src/services/miband2service.cpp \
@@ -103,7 +103,6 @@ HEADERS += \
     src/devices/pinetimejfdevice.h \
     src/operations/updatefirmwareoperationnew.h \
     src/qaesencryption.h \
-    src/notificationslistener.h \
     src/services/currenttimeservice.h \
     src/typeconversion.h \
     src/bipbatteryinfo.h \
