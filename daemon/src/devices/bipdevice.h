@@ -128,7 +128,7 @@ private:
     QString m_softwareRevision;
     int m_buttonPresses = 0;
     QTimer *m_keyPressTimer = nullptr;
-    //QString pairedName;
+    Q_SLOT void serviceEvent(char event);
 };
 
 #endif // BIPDEVICE_H
