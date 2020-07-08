@@ -58,6 +58,7 @@ SOURCES += \
     src/operations/updatefirmwareoperationnew.cpp \
     src/qaesencryption.cpp \
     src/services/currenttimeservice.cpp \
+    src/services/pinetimemusicservice.cpp \
     src/typeconversion.cpp \
     src/bipbatteryinfo.cpp \
     src/devicefactory.cpp \
@@ -103,6 +104,7 @@ HEADERS += \
     src/operations/updatefirmwareoperationnew.h \
     src/qaesencryption.h \
     src/services/currenttimeservice.h \
+    src/services/pinetimemusicservice.h \
     src/typeconversion.h \
     src/bipbatteryinfo.h \
     src/deviceinterface.h \
