@@ -66,6 +66,6 @@ QByteArray MiBand2Service::requestAuthNumber() {
     if (m_cryptByte == 0x00) {
         return QByteArray(&AUTH_REQUEST_RANDOM_AUTH_NUMBER, 1) + QByteArray(&m_authByte, 1);
     } else {
-        return QByteArray(1, (char)(m_cryptByte | AUTH_REQUEST_RANDOM_AUTH_NUMBER)) + QByteArray(&m_authByte, 1) + QByteArray(1, 0x02);
+        return QByteArray(1, (char)(m_cryptByte | AUTH_REQUEST_RANDOM_AUTH_NUMBER)) + QByteArray(&m_authByte, 1) + QByteArray(1, 0x02)+ QByteArray(1, 0x01)+ QByteArray(1, 0x00);
     }
 }
