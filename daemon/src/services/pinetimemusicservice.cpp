@@ -10,4 +10,27 @@ const char* PineTimeMusicService::UUID_CHARACTERISTIC_MUSIC_ALBUM = "c7e50006-00
 PineTimeMusicService::PineTimeMusicService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_MUSIC, path, parent)
 {
     qDebug() << Q_FUNC_INFO;
+    connect(this, &QBLEService::characteristicChanged, this, &PineTimeMusicService::characteristicChanged);
 }
+
+void PineTimeMusicService::setArtist(const QString &artist)
+{
+    writeValue(UUID_CHARACTERISTIC_MUSIC_ARTIST, artist.toLocal8Bit());
+}
+
+void PineTimeMusicService::setTrack(const QString &track)
+{
+    writeValue(UUID_CHARACTERISTIC_MUSIC_TRACK, track.toLocal8Bit());
+}
+
+void PineTimeMusicService::setAlbum(const QString &album)
+{
+    writeValue(UUID_CHARACTERISTIC_MUSIC_ALBUM, album.toLocal8Bit());
+}
+
+void PineTimeMusicService::characteristicChanged(const QString &c, const QByteArray &value)
+{
+    qDebug() << Q_FUNC_INFO << c << value;
+
+}
+

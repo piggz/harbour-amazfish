@@ -23,6 +23,7 @@ public:
     Q_SLOT void authenticated(bool ready);
 
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album) override;
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);

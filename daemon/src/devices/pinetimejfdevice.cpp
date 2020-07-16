@@ -2,6 +2,7 @@
 #include "deviceinfoservice.h"
 #include "currenttimeservice.h"
 #include "alertnotificationservice.h"
+#include "pinetimemusicservice.h"
 
 #include <QtXml/QtXml>
 
@@ -29,7 +30,7 @@ QString PinetimeJFDevice::pair()
 int PinetimeJFDevice::supportedFeatures()
 {
     return FEATURE_HRM |
-            FEATURE_NOTIFIATION;
+            FEATURE_ALERT;
 }
 
 QString PinetimeJFDevice::deviceType()
@@ -93,6 +94,8 @@ void PinetimeJFDevice::parseServices()
                 addService(CurrentTimeService::UUID_SERVICE_CURRENT_TIME, new CurrentTimeService(path, this));
             } else if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION  && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
                 addService(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION, new AlertNotificationService(path, this));
+            } else if (uuid == PineTimeMusicService::UUID_SERVICE_MUSIC  && !service(PineTimeMusicService::UUID_SERVICE_MUSIC  )) {
+                addService(PineTimeMusicService::UUID_SERVICE_MUSIC  , new PineTimeMusicService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -115,6 +118,11 @@ void PinetimeJFDevice::initialise()
     if (cts) {
         cts->currentTime();
         cts->setCurrentTime();
+    }
+
+    PineTimeMusicService *ms = qobject_cast<PineTimeMusicService*>(service(PineTimeMusicService::UUID_SERVICE_MUSIC));
+    if (ms) {
+        ms->enableNotification(PineTimeMusicService::UUID_CHARACTERISTIC_MUSIC_EVENT);
     }
 }
 
@@ -155,6 +163,16 @@ void PinetimeJFDevice::authenticated(bool ready)
 AbstractFirmwareInfo *PinetimeJFDevice::firmwareInfo(const QByteArray &bytes)
 {
     return nullptr;
+}
+
+void PinetimeJFDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album)
+{
+    PineTimeMusicService *music = qobject_cast<PineTimeMusicService*>(service(PineTimeMusicService::UUID_SERVICE_MUSIC));
+    if (music) {
+         music->setAlbum(album);
+         music->setTrack(title);
+         music->setArtist(artist);
+    }
 }
 
 void PinetimeJFDevice::refreshInformation()
