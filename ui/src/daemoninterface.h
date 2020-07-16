@@ -51,9 +51,8 @@ public:
         FEATURE_STEPS = 8,
         FEATURE_ALARMS = 16,
         FEATURE_ALERT = 32,
-        FEATURE_NOTIFIATION = 64,
-        FEATURE_EVENT_REMINDER = 128,
-        FEATURE_MUSIC_CONTROL = 256
+        FEATURE_EVENT_REMINDER = 64,
+        FEATURE_MUSIC_CONTROL = 128
     };
     Q_ENUM(Feature)
 

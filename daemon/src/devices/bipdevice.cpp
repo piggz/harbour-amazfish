@@ -28,8 +28,7 @@ int BipDevice::supportedFeatures()
             FEATURE_ACTIVITY |
             FEATURE_STEPS |
             FEATURE_ALARMS |
-            FEATURE_ALERT |
-            FEATURE_NOTIFIATION;
+            FEATURE_ALERT;
 }
 
 QString BipDevice::deviceType()
