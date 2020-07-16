@@ -29,7 +29,7 @@ QString PinetimeJFDevice::pair()
 int PinetimeJFDevice::supportedFeatures()
 {
     return FEATURE_HRM |
-            FEATURE_NOTIFIATION;
+            FEATURE_ALERT;
 }
 
 QString PinetimeJFDevice::deviceType()
