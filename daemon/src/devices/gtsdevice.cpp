@@ -23,7 +23,6 @@ int GtsDevice::supportedFeatures()
             FEATURE_STEPS |
             FEATURE_ALARMS |
             FEATURE_ALERT |
-            FEATURE_NOTIFIATION |
             FEATURE_EVENT_REMINDER |
             FEATURE_MUSIC_CONTROL;
 }

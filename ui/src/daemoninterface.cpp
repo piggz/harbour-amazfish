@@ -75,6 +75,7 @@ void DaemonInterface::connectDaemon()
 
     if (!iface->isValid()) {
         iface->deleteLater();
+        iface = nullptr;
         return;
     }
 
@@ -97,7 +98,7 @@ void DaemonInterface::pair(const QString &name, QString address)
         return;
     }
 
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         emit paired(name, address, tr("Unexpected error"));
         return;
     }
@@ -118,7 +119,7 @@ void DaemonInterface::changeConnectionState()
 {
     qDebug(Q_FUNC_INFO);
 
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         QString state(QStringLiteral("disconnected"));
         if (m_connectionState != state) {
             m_connectionState.swap(state);
@@ -141,7 +142,7 @@ void DaemonInterface::changeConnectionState()
 
 void DaemonInterface::connectToDevice(const QString &address)
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("connectToDevice"), address);
@@ -149,7 +150,7 @@ void DaemonInterface::connectToDevice(const QString &address)
 
 void DaemonInterface::disconnect()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("disconnect"));
@@ -157,7 +158,7 @@ void DaemonInterface::disconnect()
 
 bool DaemonInterface::supportsFeature(DaemonInterface::Feature f)
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return false;
     }
     QDBusReply<bool> reply = iface->call(QStringLiteral("supportsFeature"), f);
@@ -166,7 +167,7 @@ bool DaemonInterface::supportsFeature(DaemonInterface::Feature f)
 
 int DaemonInterface::supportedFeatures()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return 0;
     }
     QDBusReply<int> reply = iface->call(QStringLiteral("supportedFeatures"));
@@ -188,7 +189,7 @@ KDbConnection *DaemonInterface::dbConnection()
 
 QString DaemonInterface::prepareFirmwareDownload(const QString &path)
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return QString();
     }
     QDBusReply<QString> reply = iface->call(QStringLiteral("prepareFirmwareDownload"), path);
@@ -197,7 +198,7 @@ QString DaemonInterface::prepareFirmwareDownload(const QString &path)
 
 bool DaemonInterface::startDownload()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return false;
     }
     QDBusReply<bool> reply = iface->call(QStringLiteral("startDownload"));
@@ -206,7 +207,7 @@ bool DaemonInterface::startDownload()
 
 void DaemonInterface::downloadSportsData()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call("downloadSportsData");
@@ -214,7 +215,7 @@ void DaemonInterface::downloadSportsData()
 
 void DaemonInterface::downloadActivityData()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("downloadActivityData"));
@@ -222,7 +223,7 @@ void DaemonInterface::downloadActivityData()
 
 void DaemonInterface::refreshInformation()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("refreshInformation"));
@@ -230,7 +231,7 @@ void DaemonInterface::refreshInformation()
 
 QString DaemonInterface::information(DaemonInterface::Info i)
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return QString();
     }
     QDBusReply<QString> reply = iface->call(QStringLiteral("information"), i);
@@ -239,7 +240,7 @@ QString DaemonInterface::information(DaemonInterface::Info i)
 
 void DaemonInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("sendAlert"), sender, subject, message, allowDuplicate);
@@ -247,7 +248,7 @@ void DaemonInterface::sendAlert(const QString &sender, const QString &subject, c
 
 void DaemonInterface::incomingCall(const QString &caller)
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("incomingCall"), caller);
@@ -255,7 +256,7 @@ void DaemonInterface::incomingCall(const QString &caller)
 
 void DaemonInterface::applyDeviceSetting(Settings s)
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("applyDeviceSetting"), s);
@@ -263,7 +264,7 @@ void DaemonInterface::applyDeviceSetting(Settings s)
 
 void DaemonInterface::requestManualHeartrate()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("requestManualHeartrate"));
@@ -271,7 +272,7 @@ void DaemonInterface::requestManualHeartrate()
 
 void DaemonInterface::triggerSendWeather()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("triggerSendWeather"));
@@ -279,7 +280,7 @@ void DaemonInterface::triggerSendWeather()
 
 bool DaemonInterface::operationRunning()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return false;
     }
     QDBusReply<bool> reply = iface->call(QStringLiteral("operationRunning"));
@@ -343,7 +344,7 @@ void DaemonInterface::connectDatabase()
 
 void DaemonInterface::updateCalendar()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("updateCalendar"));
@@ -351,7 +352,7 @@ void DaemonInterface::updateCalendar()
 
 void DaemonInterface::reloadCities()
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("reloadCities"));
@@ -359,7 +360,7 @@ void DaemonInterface::reloadCities()
 
 void DaemonInterface::enableFeature(DaemonInterface::Feature feature)
 {
-    if (!iface->isValid()) {
+    if (!iface || !iface->isValid()) {
         return;
     }
     iface->call(QStringLiteral("enableFeature"), feature);

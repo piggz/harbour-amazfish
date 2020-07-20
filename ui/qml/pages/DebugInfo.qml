@@ -157,7 +157,7 @@ Page {
 
             Button {
                 text: qsTr("Test Notification")
-                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
+                visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width * 0.8
                 onClicked: {
@@ -166,7 +166,7 @@ Page {
             }
             Button {
                 text: qsTr("Test Email")
-                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
+                visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width * 0.8
                 onClicked: {
