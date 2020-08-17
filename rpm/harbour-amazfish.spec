@@ -34,6 +34,7 @@ BuildRequires:  pkgconfig(Qt5Contacts)
 BuildRequires:  pkgconfig(Qt5Widgets)
 BuildRequires:  pkgconfig(Qt5Xml)
 BuildRequires:  pkgconfig(Qt5Positioning)
+BuildRequires:  pkgconfig(Qt5Bluetooth)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(libmkcal-qt5)
 BuildRequires:  pkgconfig(libkcalcoren-qt5)
@@ -43,6 +44,7 @@ BuildRequires:  kdb-devel >= 3.1.0
 BuildRequires:  kcoreaddons-devel >= 5.31.0
 BuildRequires:  qt5-qttools-linguist
 BuildRequires:  desktop-file-utils
+BuildRequires:  qt5-qtconnectivity-qtbluetooth-devel
 
 %description
 Short description of my Sailfish OS Application
