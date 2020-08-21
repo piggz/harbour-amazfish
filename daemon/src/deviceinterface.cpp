@@ -29,7 +29,7 @@ DeviceInterface::DeviceInterface()
         connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message);
         connect(m_device, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress);
         connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
-        connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
+        connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::handleButtonPressed);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent);
     }
@@ -426,13 +426,14 @@ void DeviceInterface::deviceEvent(AbstractDevice::Events event)
     }
 }
 
-void DeviceInterface::buttonPressed(int presses)
+void DeviceInterface::handleButtonPressed(int presses)
 {
     if (presses == 2) {
         m_musicController.next();
     } else if (presses == 3) {
         m_musicController.previous();
     }
+    emit buttonPressed(presses);
 }
 
 void DeviceInterface::sendBufferedNotifications()

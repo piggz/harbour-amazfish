@@ -51,6 +51,7 @@ public:
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void operationRunningChanged();
+    Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
     Q_SIGNAL void connectionStateChanged();
 
@@ -98,7 +99,7 @@ private:
     Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
     Q_SLOT void musicChanged();
     Q_SLOT void deviceEvent(AbstractDevice::Events event);
-    Q_SLOT void buttonPressed(int presses);
+    Q_SLOT void handleButtonPressed(int presses);
 
     void sendBufferedNotifications();
 
