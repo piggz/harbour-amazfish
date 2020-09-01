@@ -31,6 +31,8 @@ protected:
 private:
     void parseServices();
     void initialise();
+    Q_SLOT void serviceEvent(char event);
+
 };
 
 #endif // PINETIMEJFDEVICE_H

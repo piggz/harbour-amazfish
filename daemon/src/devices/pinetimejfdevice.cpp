@@ -9,7 +9,7 @@
 PinetimeJFDevice::PinetimeJFDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
     qDebug() << "PinetimeJFDevice:: " << pairedName;
-    connect(this, &QBLEDevice::propertiesChanged, this, &PinetimeJFDevice::onPropertiesChanged);
+    connect(this, &QBLEDevice::propertiesChanged, this, &PinetimeJFDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 QString PinetimeJFDevice::pair()
@@ -123,6 +123,7 @@ void PinetimeJFDevice::initialise()
     PineTimeMusicService *ms = qobject_cast<PineTimeMusicService*>(service(PineTimeMusicService::UUID_SERVICE_MUSIC));
     if (ms) {
         ms->enableNotification(PineTimeMusicService::UUID_CHARACTERISTIC_MUSIC_EVENT);
+        connect(ms, &PineTimeMusicService::serviceEvent, this, &PinetimeJFDevice::serviceEvent, Qt::UniqueConnection);
     }
 }
 
@@ -169,9 +170,10 @@ void PinetimeJFDevice::setMusicStatus(bool playing, const QString &title, const 
 {
     PineTimeMusicService *music = qobject_cast<PineTimeMusicService*>(service(PineTimeMusicService::UUID_SERVICE_MUSIC));
     if (music) {
-         music->setAlbum(album);
-         music->setTrack(title);
-         music->setArtist(artist);
+        music->setStatus(playing);
+        music->setAlbum(album);
+        music->setTrack(title);
+        music->setArtist(artist);
     }
 }
 
@@ -208,4 +210,34 @@ QString PinetimeJFDevice::information(Info i)
         break;
     }
     return QString();
+}
+
+void PinetimeJFDevice::serviceEvent(char event)
+{
+    switch(event) {
+    case PineTimeMusicService::EVENT_MUSIC_PLAY:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAY);
+        break;
+    case PineTimeMusicService::EVENT_MUSIC_PAUSE:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PAUSE);
+        break;
+    case PineTimeMusicService::EVENT_MUSIC_NEXT:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
+        break;
+    case PineTimeMusicService::EVENT_MUSIC_PREV:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PREV);
+        break;
+    case PineTimeMusicService::EVENT_MUSIC_VOLUP:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
+        break;
+    case PineTimeMusicService::EVENT_MUSIC_VOLDOWN:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
+        break;
+    case PineTimeMusicService::EVENT_MUSIC_OPEN:
+        emit deviceEvent(AbstractDevice::EVENT_APP_MUSIC);
+        break;
+
+    default:
+        break;
+    }
 }
