@@ -144,7 +144,7 @@ int toUnsigned(char value) {
 }
 
 int toInt16(char val1, char val2) {
-    return (short) (val1 & 0xff | ((val2 & 0xff) << 8));
+    return (short) ((val1 & 0xff) | ((val2 & 0xff) << 8));
 }
 
 int toUint16(char value) {

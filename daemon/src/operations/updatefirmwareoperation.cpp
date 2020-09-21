@@ -91,7 +91,7 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
 
 void UpdateFirmwareOperation::handleData(const QByteArray &data)
 {
-    
+    Q_UNUSED(data);
 }
 
 bool UpdateFirmwareOperation::sendFwInfo()

@@ -75,7 +75,7 @@ void BipActivityDetailParser::parse(const QByteArray &bytes)
             i += consumeSpeed6(bytes, i);
             break;
         default:
-            qDebug() << "unknown packet type" + type;
+            qDebug() << "unknown packet type" << type;
             i+=6;
         }
     }

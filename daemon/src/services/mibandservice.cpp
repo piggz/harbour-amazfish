@@ -178,17 +178,13 @@ void MiBandService::decodeAlarms(const QByteArray &data)
 {
     //Smaple Data 03 17 80 00 02 05 20 01 12 03 04
 
-    bool alarmsInUse[10] = {false};
-    bool alarmsEnabled[10] = {false};
     int numAlarms = data.at(5);
     auto config = AmazfishConfig::instance();
 
     for (int i = 0; i < numAlarms; i++) {
         char alarm_data = data.at(6 + i);
         int index = alarm_data & 0xf;
-        alarmsInUse[index] = true;
         bool enabled = (alarm_data & 0x10) == 0x10;
-        alarmsEnabled[index] = enabled;
         qDebug() << "alarm " << index << " is enabled:" << enabled;
         config->setAlarmEnabled(i + 1, enabled);
     }

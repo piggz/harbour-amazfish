@@ -51,6 +51,7 @@ void LogFetchOperation::handleData(const QByteArray &data)
 
 bool LogFetchOperation::finished(bool success)
 {
+    Q_UNUSED(success);
     if (m_logFile) {
         m_logFile->close();
     }

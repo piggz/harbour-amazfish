@@ -53,12 +53,13 @@ QVariant SportsDataModel::data(const QModelIndex &index, int role) const
         } else if (role == SportBaseAltitude) {
             return m_data.at(index.row()).baseAltitude;
         }
-        return QVariant();
     }
+    return QVariant();
 }
 
 int SportsDataModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return m_data.length();
 }
 

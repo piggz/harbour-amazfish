@@ -62,7 +62,7 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
             startDate.setTimeZone(QTimeZone::systemTimeZone());
             setStartDate(startDate);
 
-            qDebug() << "About to transfer data from " << startDate;
+            qDebug() << "About to transfer data from " << startDate << "expected length:" << expectedDataLength; //TODO use expectedDataLength
             m_service->message(QObject::tr("About to transfer data from ") + startDate.toString());
             //Send log read command
             m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
