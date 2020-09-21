@@ -403,7 +403,7 @@ void MiBandService::setFitnessGoal()
     auto goal = AmazfishConfig::instance()->profileFitnessGoal();
 
     QByteArray cmd = QByteArray(COMMAND_SET_FITNESS_GOAL_START, 3);
-    cmd += TypeConversion::fromInt24(goal);
+    cmd += TypeConversion::fromInt16(goal);
     cmd += QByteArray(COMMAND_SET_FITNESS_GOAL_END, 2);
 
     writeValue(UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS, cmd);
