@@ -127,5 +127,6 @@ TRANSLATIONS += translations/harbour-amazfish-ui-de.ts \
 HEADERS += \
     src/datasource.h \
     src/sportsdatamodel.h \
-    src/daemoninterface.h
+    src/daemoninterface.h \
+
 

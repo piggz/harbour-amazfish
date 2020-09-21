@@ -12,7 +12,7 @@
 class ActivityFetchOperation : public AbstractFetchOperation
 {
 public:
-    ActivityFetchOperation(QBLEService *service, KDbConnection *db);
+    ActivityFetchOperation(QBLEService *service, KDbConnection *db, int sampleSize = 4);
 
     void start() override;
     void handleData(const QByteArray &data) override;
@@ -26,7 +26,7 @@ private:
     KDbConnection *m_conn;
 
     bool saveSamples();
-
+    int m_sampleSize = 4;
 };
 
 #endif // ACTIVITYFETCHOPERATION_H

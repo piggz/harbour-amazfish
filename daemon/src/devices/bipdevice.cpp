@@ -198,6 +198,11 @@ void BipDevice::sendWeather(CurrentWeather *weather)
     }
 }
 
+int BipDevice::activitySampleSize()
+{
+    return m_ActivitySampleSize;
+}
+
 AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes)
 {
     return new BipFirmwareInfo(bytes);

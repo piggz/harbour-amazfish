@@ -114,12 +114,14 @@ public:
 
     virtual void sendWeather(CurrentWeather *weather) override;
 
+    virtual int activitySampleSize();
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     Q_SLOT void handleButtonPressed();
     Q_SLOT void buttonPressTimeout();
     Q_SLOT void stepsChanged();
     Q_SLOT void batteryInfoChanged();
+    int m_ActivitySampleSize = 4;
 
 private:
     void parseServices();

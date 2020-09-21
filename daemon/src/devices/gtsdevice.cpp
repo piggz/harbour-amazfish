@@ -147,6 +147,12 @@ void GtsDevice::initialise()
     if (hrm) {
         connect(hrm, &HRMService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
     }
+
+    QString revision = softwareRevision();
+    if (revision > "0.0.9.0") {
+        qDebug() << "GTS with new FW";
+        m_ActivitySampleSize = 8;
+    }
 }
 
 

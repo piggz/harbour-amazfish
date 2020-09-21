@@ -108,7 +108,6 @@ HEADERS += \
     src/typeconversion.h \
     src/bipbatteryinfo.h \
     src/deviceinterface.h \
-    src/datasource.h \
     src/activitykind.h \
     src/devices/bipfirmwareinfo.h \
     src/dbushrm.h \
@@ -133,9 +132,5 @@ HEADERS += \
     src/bipactivitydetailparser.h \
     src/activitycoordinate.h \
     src/sportsdatamodel.h \
-    src/weather/city.h \
-    src/weather/citymanager.h \
-    src/weather/citysearchmodel.h \
-    src/weather/currentweather.h \
     src/weather/huamiweathercondition.h
 

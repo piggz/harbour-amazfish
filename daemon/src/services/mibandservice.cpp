@@ -539,7 +539,14 @@ void MiBandService::fetchActivityData()
 {
     if (!m_activityFetchOperation && m_operationRunning == 0) {
         m_operationRunning = 2;
-        m_activityFetchOperation = new ActivityFetchOperation(this, m_conn);
+        int sampleSize = 4;
+        BipDevice *device = qobject_cast<BipDevice*>(parent());
+
+        if (device) {
+            sampleSize = device->activitySampleSize();
+        }
+
+        m_activityFetchOperation = new ActivityFetchOperation(this, m_conn, sampleSize);
         m_activityFetchOperation->start();
         emit operationRunningChanged();
         m_operationTimeout->start(10000);

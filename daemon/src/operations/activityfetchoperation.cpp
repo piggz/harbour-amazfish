@@ -7,9 +7,8 @@
 #include "typeconversion.h"
 #include "amazfishconfig.h"
 
-ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn) : AbstractFetchOperation(service)
+ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn, int sampleSize) : AbstractFetchOperation(service), m_conn(conn), m_sampleSize(sampleSize)
 {
-    m_conn = conn;
     setLastSyncKey("device/lastactivitysyncmillis");
 }
 
@@ -33,13 +32,16 @@ void ActivityFetchOperation::handleData(const QByteArray &data)
 {
     int len = data.length();
 
-    if (len % 4 != 1) {
+    if (len % m_sampleSize != 1) {
         qDebug() << "Unexpected data size";
         return;
     }
 
-    for (int i = 1; i < len; i+=4) {
+    for (int i = 1; i < len; i+=m_sampleSize) {
         ActivitySample sample(data[i] & 0xff, data[i + 1] & 0xff, data[i + 2] & 0xff, data[i + 3] & 0xff);
+        if (m_sampleSize == 8) {
+            qDebug() << "Sample data missed:" << (data[i + 4] & 0xff) << (data[i + 5] & 0xff) << (data[i + 6] & 0xff) << (data[i + 7] & 0xff);
+        }
         m_samples << (sample);
     }
 }
