@@ -62,7 +62,7 @@ Page {
                 auth: true
             }
             ListElement {
-                deviceType: "Pinetime-JF"
+                deviceType: "InfiniTime"
                 icon: "../pics/devices/pinetime.png"
                 auth: false
             }
