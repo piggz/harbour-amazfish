@@ -1,10 +1,10 @@
 Name: harbour-amazfish
 Summary: Amazfit Bip interface application
-Version: 1.6.7
+Version: 1.6.8
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
-Group: Qt/Qt
+Group: QtQt
 URL: http://example.org/
 License: LICENSE
 # This must be generated before uploading a package to a remote build service.
