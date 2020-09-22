@@ -35,7 +35,7 @@ Page {
 
             TextSwitch {
                 id: chkNotifyConnect
-                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
+                visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
 
                 width: parent.width
                 text: qsTr("Notify on connect")
@@ -43,7 +43,7 @@ Page {
 
             TextSwitch {
                 id: chkNotifyLowBattery
-                visible: supportsFeature(DaemonInterface.FEATURE_NOTIFIATION)
+                visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
 
                 width: parent.width
                 text: qsTr("Low battery notification")
