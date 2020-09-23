@@ -10,9 +10,21 @@ ActivityKind::Type ActivityKind::fromBipType(int type)
     } else if (type == 3) {
         return Walking;
     } else if (type == 4) {
-        return Biking;
+        return Cycling;
+    } else if (type == 5) {
+        return Exercise;
+    } else if (type == 6) {
+        return Swimming;
+    } else if (type == 7) {
+        return OpenSwimming;
     } else if (type == 8) {
-        return IndoorBiking;
+        return IndoorCycling;
+    } else if (type == 9) {
+        return EllipticalTrainer;
+    } else if (type == 21) {
+        return JumpRope;
+    } else if (type == 60) {
+        return Yoga;
     }
     return Activity;
 }
@@ -46,13 +58,30 @@ QString ActivityKind::toString(Type type)
     if (type == Swimming) {
         return "Swimming";
     }
-    if (type == Biking) {
-        return "Biking";
+    if (type == Cycling) {
+        return "Cycling";
     }
     if (type == Treadmill) {
         return "Treadmill";
     }
-    if (type == IndoorBiking) {
-        return "Indoor Biking";
+    if (type == Exercise) {
+        return "Exercise";
     }
+    if (type == OpenSwimming) {
+        return "Open Swimming";
+    }
+    if (type == IndoorCycling) {
+        return "Indoor Cycling";
+    }
+    if (type == EllipticalTrainer) {
+        return "Eliptical Trainer";
+    }
+    if (type == JumpRope) {
+        return "Jump Rope";
+    }
+    if (type == Yoga) {
+        return "Yoga";
+    }
+
+    return "Unknown";
 }
