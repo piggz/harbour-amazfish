@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include <QDateTime>
+#include <QList>
+#include <KDb3/KDbConnection>
+
 #include "activitykind.h"
 
 class ActivitySummary
@@ -38,6 +41,13 @@ public:
     void setBaseAltitude(int alt);
     int baseAltitude() const;
 
+    void setProfileId(uint profileId);
+    void setDeviceId(uint deviceId);
+    void setGPX(const QString &gpx);
+
+    void addMetaData(const QString &key, const QString &value, const QString &unit);
+
+    bool saveToDatabase(KDbConnection *conn);
 private:
     short m_version;
     uint m_id;
@@ -51,6 +61,14 @@ private:
     QString m_gpxTrack;
     uint m_deviceId;
     uint m_userId;
+
+    struct meta {
+        QString key;
+        QString value;
+        QString unit;
+    };
+
+    QList<meta> m_metaData;
 };
 
 #endif // ACTIVITYSUMMARY_H

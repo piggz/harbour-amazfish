@@ -23,9 +23,8 @@ private:
     QByteArray m_buffer;
     QString m_gpx;
 
-    ActivitySummary parseDetail();
     bool saveSport();
-    bool finished(bool success);
+    bool finished(bool success) override;
 
     KDbConnection *m_conn;
 

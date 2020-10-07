@@ -242,7 +242,7 @@ void DeviceInterface::createTables()
         t_summary->addField(f = new KDbField("end_timestamp_dt", KDbField::DateTime));
         f->setCaption("End Timestamp in Date/Time format");
 
-        t_summary->addField(f = new KDbField("kind", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_summary->addField(f = new KDbField("kind", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Activity Kind");
 
         t_summary->addField(f = new KDbField("base_longitude", KDbField::Double));
@@ -252,9 +252,9 @@ void DeviceInterface::createTables()
         t_summary->addField(f = new KDbField("base_altitude", KDbField::Double));
         f->setCaption("Base Altitude");
 
-        t_summary->addField(f = new KDbField("device_id", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_summary->addField(f = new KDbField("device_id", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Device ID");
-        t_summary->addField(f = new KDbField("user_id", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_summary->addField(f = new KDbField("user_id", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("User ID");
 
         t_summary->addField(f = new KDbField("gpx", KDbField::LongText));
@@ -266,6 +266,32 @@ void DeviceInterface::createTables()
         }
         qDebug() << "-- sports_data created --";
         qDebug() << *t_summary;
+    }
+
+    if (!m_conn->containsTable("sports_meta")) {
+        KDbTableSchema *t_meta = new KDbTableSchema("sports_meta");
+        t_meta->setCaption("Sports Meta-Data");
+        t_meta->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_meta->addField(f = new KDbField("sport_id", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
+        f->setCaption("Sport ID");
+
+        t_meta->addField(f = new KDbField("key", KDbField::Text));
+        f->setCaption("Key");
+
+        t_meta->addField(f = new KDbField("value", KDbField::Text));
+        f->setCaption("Value");
+
+        t_meta->addField(f = new KDbField("unit", KDbField::Text));
+        f->setCaption("Unit");
+
+        if (!m_conn->createTable(t_meta)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- sports_meta created --";
+        qDebug() << *t_meta;
     }
 
     if (!m_conn->commitTransaction(t)) {

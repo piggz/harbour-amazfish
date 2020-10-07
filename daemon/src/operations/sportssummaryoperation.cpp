@@ -8,6 +8,128 @@
 #include "typeconversion.h"
 #include "activitykind.h"
 
+#pragma pack(push, 1)
+struct summary_t {
+    qint16 version;
+    qint16 kind;
+    quint32 timestamp_start;
+    quint32 timestamp_end;
+    qint32 baseLongitude;
+    qint32 baseLatitude;
+    qint32 baseAltitude;
+
+    union {
+        struct format512_t {
+            qint32 steps;
+            qint32 activeSeconds;
+            qint32 unknown1;
+            qint32 unknown2;
+            qint32 unknown3;
+            qint32 unknown4;
+            float caloriesBurnt;
+            float distanceMeters;
+            float ascentMeters;
+            float descentMeters;
+            float maxAltitude;
+            float minAltitude;
+            qint32 unknown5;
+            qint32 unknown6;
+            qint32 unknown7;
+            qint32 unknown8;
+            float minPace;
+            float maxPace;
+            qint32 unknown9;
+            qint32 unknown10;
+            qint32 unknown11;
+            qint32 unknown12;
+            qint32 unknown13;
+            qint32 unknown14;
+            qint32 unknown15;
+            qint32 unknown16;
+            qint32 unknown17;
+            qint16 averageHR;
+            qint16 averageKMPaceSeconds;
+            qint16 averageStride;
+            qint16 maxHR;
+
+            union {
+                struct runcycle_t {
+                    qint32 unknown1;
+                    qint32 unknown2;
+                    qint32 ascentSeconds;
+                    qint32 unknown3;
+                    qint32 descentSeconds;
+                    qint32 unknown4;
+                    qint32 flatSeconds;
+                } runcycle;
+                struct swimming_t {
+                    float averageStrokeDistance;
+                    qint32 unknown1;
+                    qint32 unknown2;
+                    qint32 unknown3;
+                    qint32 unknown4;
+                    qint32 unknown5;
+                    float averageStrokesPerSecond;
+                    float averageLapPace;
+                    qint16 strokes;
+                    qint16 swolfIndex; // this is called SWOLF score on bip s, SWOLF index on mi band 4
+                    qint8 swimStyle;
+                    qint8 laps;
+                    qint8 unknown6;
+                    qint8 unknwonw7;
+                } swimming;
+            } activity_u;
+        } format512;
+        struct format256_t {
+            float distanceMeters;
+            float ascentMeters;
+            float descentMeters;
+            float minAltitude;
+            float maxAltitude;
+            float maxLatitude;
+            float minLatitude;
+            float maxLongitude;
+            float minLongitude;
+            qint32 steps;
+            qint32 activeSeconds;
+            float caloriesBurnt;
+            float maxSpeed;
+            float maxPace;
+            float minPace;
+            float totalStride;
+            qint32 unknown1;
+
+            union {
+                struct runcycle_t {
+                    qint32 unknown1;
+                    qint32 unknown2;
+                    qint32 ascentSeconds;
+                    qint32 unknown3;
+                    qint32 descentSeconds;
+                    qint32 unknown4;
+                    qint32 flatSeconds;
+                } runcycle;
+                struct swimming_t {
+                    float averageStrokeDistance;
+                    float averageStrokesPerSecond;
+                    float averageLapPace;
+                    qint16 strokes;
+                    qint16 swolfIndex; // this is called SWOLF score on bip s, SWOLF index on mi band 4
+                    qint8 swimStyle;
+                    qint8 laps;
+                    qint16 unknown1;
+                    qint32 unknown2;
+                    qint32 unknown3;
+                } swimming;
+            } activity_u;
+            qint16 averageHR;
+            qint16 averageKMPaceSeconds;
+            qint16 averageStride;
+        } format256;
+    } format_u;
+};
+#pragma pack(pop)
+
 SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn) : AbstractFetchOperation(service)
 {
     m_conn = conn;
@@ -65,97 +187,133 @@ void SportsSummaryOperation::parseSummary()
 {
     qDebug() << "Buffer:" << m_buffer.toHex();
 
-    QDataStream stream(m_buffer);
-    stream.setByteOrder(QDataStream::LittleEndian);
+    summary_t summaryData;
+    memcpy(&summaryData, m_buffer.data(), sizeof(summary_t));
 
-    quint16 version;
-    stream >> version;
-    m_summary.setVersion(version);
+    ActivityKind::Type activityKind = ActivityKind::fromBipType(ActivityKind::Type(summaryData.kind));
+    qDebug() << summaryData.version << summaryData.kind << summaryData.timestamp_start << summaryData.timestamp_end;
 
-    quint16 kind;
-    stream >> kind;
-
-    ActivityKind::Type  activityKind = ActivityKind::Unknown;
-    activityKind = ActivityKind::fromBipType(kind);
-    m_summary.setActivityKind(activityKind);
-
-    // FIXME: should honor timezone we were in at that time etc
-    quint32 timestamp_start = 0;
-    quint32 timestamp_end = 0;
-    
-    stream >> timestamp_start;
-    stream >> timestamp_end;
-
-    qDebug() << "Time:" << timestamp_start << timestamp_end << sizeof(int) << sizeof(short);
-
-    // FIXME: should be done like this but seems to return crap when in DST
-    //summary.setStartTime(new Date(timestamp_start));
-    //summary.setEndTime(new Date(timestamp_end));
-
-    // FIXME ... so do it like this
-    long duration = timestamp_end - timestamp_start;
-    //summary->setStartTime(new Date(getLastStartTimestamp().getTimeInMillis()));
-    //summary->setEndTime(new Date(getLastStartTimestamp().getTimeInMillis() + duration));
-
-    //startDate is in format that doent include DST, so we need to convert it to a real dt
-    //QDateTime temp = QDateTime::fromString(startDate().toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
-
-    qDebug() << "Sport start time is " << startDate();
-
-    //QDateTime start = temp.toTimeSpec(Qt::UTC);
-    //qDebug() << "Time convertion:" << temp << start << startDate();
-
+    long duration = summaryData.timestamp_end - summaryData.timestamp_start;
     m_summary.setStartTime(startDate());
     m_summary.setEndTime(startDate().addSecs(duration));
+    m_summary.setActivityKind(activityKind);
+    m_summary.setBaseLongitude(summaryData.baseLongitude);
+    m_summary.setBaseLatitude(summaryData.baseLatitude);
+    m_summary.setBaseAltitude(summaryData.baseAltitude);
 
-    qint32 baseLongitude = 0;
-    qint32 baseLatitude = 0;
-    qint32 baseAltitude = 0;
-    stream >> baseLongitude >> baseLatitude >> baseAltitude;
+    if (summaryData.version >= 512) {
+        m_summary.addMetaData("steps", QString::number(summaryData.format_u.format512.steps), "steps_unit");
+        m_summary.addMetaData("activeSeconds", QString::number(summaryData.format_u.format512.activeSeconds), "seconds");
+        m_summary.addMetaData("caloriesBurnt", QString::number(summaryData.format_u.format512.caloriesBurnt), "calories_unit");
+        m_summary.addMetaData("distanceMeters", QString::number(summaryData.format_u.format512.distanceMeters), "meters");
+        m_summary.addMetaData("ascentMeters", QString::number(summaryData.format_u.format512.ascentMeters), "meters");
+        m_summary.addMetaData("descentMeters", QString::number(summaryData.format_u.format512.descentMeters), "meters");
+        if (summaryData.format_u.format512.maxAltitude != -100000) {
+            m_summary.addMetaData("maxAltitude", QString::number(summaryData.format_u.format512.maxAltitude), "meters");
+        }
+        if (summaryData.format_u.format512.minAltitude != 100000) {
+            m_summary.addMetaData("minAltitude", QString::number(summaryData.format_u.format512.minAltitude), "meters");
+        }
 
-    m_summary.setBaseLongitude(baseLongitude);
-    m_summary.setBaseLatitude(baseLatitude);
-    m_summary.setBaseAltitude(baseAltitude);
-    
+        if (!(activityKind == ActivityKind::EllipticalTrainer ||
+                activityKind == ActivityKind::JumpRope ||
+                activityKind == ActivityKind::Exercise ||
+                activityKind == ActivityKind::Yoga ||
+                activityKind == ActivityKind::IndoorCycling)) {
+            m_summary.addMetaData("minPace", QString::number(summaryData.format_u.format512.minPace), "seconds_m");
+            m_summary.addMetaData("maxPace", QString::number(summaryData.format_u.format512.maxPace), "seconds_m");
+        }
 
-    //        summary.setBaseCoordinate(new GPSCoordinate(baseLatitude, baseLongitude, baseAltitude));
+        m_summary.addMetaData("averageHR", QString::number(summaryData.format_u.format512.averageHR), "bpm");
+        m_summary.addMetaData("maxHR", QString::number(summaryData.format_u.format512.maxHR), "bpm");
+        m_summary.addMetaData("averageKMPaceSeconds", QString::number(summaryData.format_u.format512.averageKMPaceSeconds), "seconds/km");
+        m_summary.addMetaData("averageStride", QString::number(summaryData.format_u.format512.averageStride), "cm");
 
-    //        summary.setDistanceMeters(Float.intBitsToFloat(buffer.getInt()));
-    //        summary.setAscentMeters(Float.intBitsToFloat(buffer.getInt()));
-    //        summary.setDescentMeters(Float.intBitsToFloat(buffer.getInt()));
-    //
-    //        summary.setMinAltitude(Float.intBitsToFloat(buffer.getInt()));
-    //        summary.setMaxAltitude(Float.intBitsToFloat(buffer.getInt()));
-    //        summary.setMinLatitude(buffer.getInt());
-    //        summary.setMaxLatitude(buffer.getInt());
-    //        summary.setMinLongitude(buffer.getInt());
-    //        summary.setMaxLongitude(buffer.getInt());
-    //
-    //        summary.setSteps(BLETypeConversions.toUnsigned(buffer.getInt()));
-    //        summary.setActiveTimeSeconds(BLETypeConversions.toUnsigned(buffer.getInt()));
-    //
-    //        summary.setCaloriesBurnt(Float.intBitsToFloat(buffer.get()));
-    //        summary.setMaxSpeed(Float.intBitsToFloat(buffer.get()));
-    //        summary.setMinPace(Float.intBitsToFloat(buffer.get()));
-    //        summary.setMaxPace(Float.intBitsToFloat(buffer.get()));
-    //        summary.setTotalStride(Float.intBitsToFloat(buffer.get()));
+        if (summaryData.kind == ActivityKind::Cycling || summaryData.kind == ActivityKind::Running) {
+            m_summary.addMetaData("ascentSeconds", QString::number(summaryData.format_u.format512.activity_u.runcycle.ascentSeconds / 1000), "seconds");
+            m_summary.addMetaData("descentSeconds", QString::number(summaryData.format_u.format512.activity_u.runcycle.descentSeconds / 1000), "seconds");
+            m_summary.addMetaData("flatSeconds", QString::number(summaryData.format_u.format512.activity_u.runcycle.flatSeconds / 1000), "seconds");
+        } else if (activityKind == ActivityKind::Swimming || activityKind == ActivityKind::OpenSwimming) {
+            m_summary.addMetaData("averageStrokeDistance", QString::number(summaryData.format_u.format512.activity_u.swimming.averageStrokeDistance), "meters");
+            m_summary.addMetaData("averageStrokesPerSecond", QString::number(summaryData.format_u.format512.activity_u.swimming.averageStrokesPerSecond), "strokes/second");
+            m_summary.addMetaData("averageLapPace", QString::number(summaryData.format_u.format512.activity_u.swimming.averageLapPace), "second");
+            m_summary.addMetaData("strokes", QString::number(summaryData.format_u.format512.activity_u.swimming.strokes), "strokes");
+            m_summary.addMetaData("swolfIndex", QString::number(summaryData.format_u.format512.activity_u.swimming.swolfIndex), "swolf_index");
+            QString swimStyleName = "unknown"; // TODO: translate here or keep as string identifier here?
+            switch (summaryData.format_u.format512.activity_u.swimming.swimStyle) {
+                case 1:
+                    swimStyleName = "breaststroke";
+                    break;
+                case 2:
+                    swimStyleName = "freestyle";
+                    break;
+                case 3:
+                    swimStyleName = "backstroke";
+                    break;
+                case 4:
+                    swimStyleName = "medley";
+                    break;
+            }
+            m_summary.addMetaData("swimStyle", swimStyleName, "style");
+            m_summary.addMetaData("laps", QString::number(summaryData.format_u.format512.activity_u.swimming.laps), "laps");
+        }
+    } else {
+        m_summary.addMetaData("distanceMeters", QString::number(summaryData.format_u.format256.distanceMeters), "meters");
+        m_summary.addMetaData("ascentMeters", QString::number(summaryData.format_u.format256.ascentMeters), "meters");
+        m_summary.addMetaData("descentMeters", QString::number(summaryData.format_u.format256.descentMeters), "meters");
+        m_summary.addMetaData("minAltitude", QString::number(summaryData.format_u.format256.minAltitude), "meters");
+        m_summary.addMetaData("maxAltitude", QString::number(summaryData.format_u.format256.maxAltitude), "meters");
+        m_summary.addMetaData("maxLatitude", QString::number(summaryData.format_u.format256.minLatitude), "meters");
+        m_summary.addMetaData("minLatitude", QString::number(summaryData.format_u.format256.maxLatitude), "meters");
+        m_summary.addMetaData("maxLongitude", QString::number(summaryData.format_u.format256.minLongitude), "meters");
+        m_summary.addMetaData("minLongitude", QString::number(summaryData.format_u.format256.maxLongitude), "meters");
+        m_summary.addMetaData("steps", QString::number(summaryData.format_u.format256.steps), "steps_unit");
+        m_summary.addMetaData("activeSeconds", QString::number(summaryData.format_u.format256.activeSeconds), "seconds");
+        m_summary.addMetaData("caloriesBurnt", QString::number(summaryData.format_u.format256.caloriesBurnt), "calories_unit");
+        m_summary.addMetaData("maxSpeed", QString::number(summaryData.format_u.format256.maxSpeed), "meters_second");
+        m_summary.addMetaData("averageHR", QString::number(summaryData.format_u.format256.averageHR), "bpm");
+        m_summary.addMetaData("averageKMPaceSeconds", QString::number(summaryData.format_u.format256.averageKMPaceSeconds), "seconds/km");
+        m_summary.addMetaData("averageStride", QString::number(summaryData.format_u.format256.averageStride), "seconds/km");
 
-    //buffer.getInt(); //
-    //buffer.getInt(); //
-    //buffer.getInt(); //
+        if (!(activityKind == ActivityKind::EllipticalTrainer ||
+                activityKind == ActivityKind::JumpRope ||
+                activityKind == ActivityKind::Exercise ||
+                activityKind == ActivityKind::Yoga ||
+                activityKind == ActivityKind::IndoorCycling)) {
+            m_summary.addMetaData("minPace", QString::number(summaryData.format_u.format256.minPace), "seconds_m");
+            m_summary.addMetaData("maxPace", QString::number(summaryData.format_u.format256.maxPace), "seconds_m");
+        }
+        m_summary.addMetaData("totalStride", QString::number(summaryData.format_u.format256.totalStride), "meters");
 
-    //        summary.setTimeAscent(BLETypeConversions.toUnsigned(buffer.getInt()));
-    //        buffer.getInt(); //
-    //        summary.setTimeDescent(BLETypeConversions.toUnsigned(buffer.getInt()));
-    //        buffer.getInt(); //
-    //        summary.setTimeFlat(BLETypeConversions.toUnsigned(buffer.getInt()));
-    //
-    //        summary.setAverageHR(BLETypeConversions.toUnsigned(buffer.getShort()));
-    //
-    //        summary.setAveragePace(BLETypeConversions.toUnsigned(buffer.getShort()));
-    //        summary.setAverageStride(BLETypeConversions.toUnsigned(buffer.getShort()));
-
-    //buffer.getShort(); //
+        if (summaryData.kind == ActivityKind::Cycling || summaryData.kind == ActivityKind::Running) {
+            m_summary.addMetaData("ascentSeconds", QString::number(summaryData.format_u.format256.activity_u.runcycle.ascentSeconds / 1000), "seconds");
+            m_summary.addMetaData("descentSeconds", QString::number(summaryData.format_u.format256.activity_u.runcycle.descentSeconds / 1000), "seconds");
+            m_summary.addMetaData("flatSeconds", QString::number(summaryData.format_u.format256.activity_u.runcycle.flatSeconds / 1000), "seconds");
+        } else if (activityKind == ActivityKind::Swimming || activityKind == ActivityKind::OpenSwimming) {
+            m_summary.addMetaData("averageStrokeDistance", QString::number(summaryData.format_u.format256.activity_u.swimming.averageStrokeDistance), "meters");
+            m_summary.addMetaData("averageStrokesPerSecond", QString::number(summaryData.format_u.format256.activity_u.swimming.averageStrokesPerSecond), "strokes/second");
+            m_summary.addMetaData("averageLapPace", QString::number(summaryData.format_u.format256.activity_u.swimming.averageLapPace), "second");
+            m_summary.addMetaData("strokes", QString::number(summaryData.format_u.format256.activity_u.swimming.strokes), "strokes");
+            m_summary.addMetaData("swolfIndex", QString::number(summaryData.format_u.format256.activity_u.swimming.swolfIndex), "swolf_index");
+            QString swimStyleName = "unknown"; // TODO: translate here or keep as string identifier here?
+            switch (summaryData.format_u.format512.activity_u.swimming.swimStyle) {
+                case 1:
+                    swimStyleName = "breaststroke";
+                    break;
+                case 2:
+                    swimStyleName = "freestyle";
+                    break;
+                case 3:
+                    swimStyleName = "backstroke";
+                    break;
+                case 4:
+                    swimStyleName = "medley";
+                    break;
+            }
+            m_summary.addMetaData("swimStyle", swimStyleName, "style");
+            m_summary.addMetaData("laps", QString::number(summaryData.format_u.format256.activity_u.swimming.laps), "laps");
+        }
+    }
 }
 
 bool SportsSummaryOperation::success() const
