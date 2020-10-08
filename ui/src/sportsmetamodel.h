@@ -1,5 +1,5 @@
-#ifndef SPORTSDATAMODEL_H
-#define SPORTSDATAMODEL_H
+#ifndef SPORTSMETAMODEL_H
+#define SPORTSMETAMODEL_H
 
 #include <QAbstractListModel>
 #include <QVariant>
@@ -42,4 +42,4 @@ private:
     QList<SportsMeta> m_data;
 };
 
-#endif // SPORTSDATAMODEL_H
+#endif // SPORTSMETAMODEL_H

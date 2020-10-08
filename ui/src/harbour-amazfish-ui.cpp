@@ -10,6 +10,7 @@
 
 #include "datasource.h"
 #include "sportsdatamodel.h"
+#include "sportsmetamodel.h"
 #include "daemoninterface.h"
 
 #include "weather/citysearchmodel.h"
@@ -25,6 +26,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setApplicationName("harbour-amazfish");
     SportsDataModel sportsDataModel;
+    SportsMetaModel sportsMetaModel;
     DaemonInterface daemonInterface;
     sportsDataModel.setConnection(daemonInterface.dbConnection());
 
@@ -40,6 +42,7 @@ int main(int argc, char *argv[])
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("DaemonInterfaceInstance", &daemonInterface);
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
+    view->rootContext()->setContextProperty("SportsMeta", &sportsMetaModel);
 
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));
     view->show();
