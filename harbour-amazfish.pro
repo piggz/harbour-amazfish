@@ -9,4 +9,5 @@ DISTFILES += \
     rpm/harbour-amazfish.changes.in \
     rpm/harbour-amazfish.changes.run.in \
     rpm/harbour-amazfish.spec \
-    rpm/harbour-amazfish.yaml
+    rpm/harbour-amazfish.yaml \
+    ui/qml/pages/SportPage.qml

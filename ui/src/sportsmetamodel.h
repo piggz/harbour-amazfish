@@ -7,7 +7,7 @@
 #include <KDb3/KDbConnection>
 
 typedef struct {
-    int id;
+    int meta_id;
     int sport_id;
     QString key;
     QString value;
@@ -35,7 +35,7 @@ public:
 
     void setConnection(KDbConnection *conn);
 
-    Q_INVOKABLE void update();
+    Q_INVOKABLE void update(uint sportid);
 
 private:
     KDbConnection *m_connection;

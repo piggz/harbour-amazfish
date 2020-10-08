@@ -32,7 +32,8 @@ include(../qble/qble.pri)
 SOURCES += src/harbour-amazfish-ui.cpp \
     src/datasource.cpp \
     src/sportsdatamodel.cpp \
-    src/daemoninterface.cpp
+    src/daemoninterface.cpp \
+    src/sportsmetamodel.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/components/DeviceButton.qml \
@@ -126,7 +127,8 @@ TRANSLATIONS += translations/harbour-amazfish-ui-de.ts \
                 translations/harbour-amazfish-ui-es.ts
 HEADERS += \
     src/datasource.h \
+    src/daemoninterface.h \ \
     src/sportsdatamodel.h \
-    src/daemoninterface.h \
+    src/sportsmetamodel.h
 
 
