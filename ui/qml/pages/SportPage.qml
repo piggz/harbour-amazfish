@@ -99,7 +99,7 @@ Page {
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingMedium
                 truncationMode: TruncationMode.Fade
-                text: key
+                text: translateSportKey(key)
             }
 
             Label
@@ -109,9 +109,8 @@ Page {
                 anchors.top: parent.top
                 anchors.left: keyLabel.right
                 anchors.leftMargin: Theme.paddingMedium
-                text: value + " " + unit
+                text: value + " " + translateSportUnit(unit)
             }
-
         }
     }
 
@@ -335,5 +334,59 @@ Page {
             return "unknown";
         }
         return kind.toLowerCase();
+    }
+
+    function translateSportKey(key) {
+        if (key === "steps") return qsTr("Steps");
+        if (key === "activeSeconds") return qsTr("Active Seconds");
+        if (key === "caloriesBurnt") return qsTr("Calories");
+        if (key === "distanceMeters") return qsTr("Distance");
+        if (key === "ascentMeters") return qsTr("Ascent");
+        if (key === "descentMeters") return qsTr("Descent");
+        if (key === "maxAltitude") return qsTr("Max Altitude");
+        if (key === "minAltitude") return qsTr("Min Altitude");
+        if (key === "minPace") return qsTr("Min Pace");
+        if (key === "maxPace") return qsTr("Max Pace");
+        if (key === "averageHR") return qsTr("Average HR");
+        if (key === "averageKMPaceSeconds") return qsTr("Average Pace");
+        if (key === "averageStride") return qsTr("Average Stride");
+        if (key === "maxHR") return qsTr("Max HR");
+        if (key === "ascentSeconds") return qsTr("Time Ascending");
+        if (key === "descentSeconds") return qsTr("Time Descending");
+        if (key === "flatSeconds") return qsTr("Time Flat");
+        if (key === "averageStrokeDistance") return qsTr("Average Stroke");
+        if (key === "averageStrokesPerSecond") return qsTr("Average Stroke/s");
+        if (key === "averageLapPace") return qsTr("Average Lap Pace");
+        if (key === "strokes") return qsTr("Strokes");
+        if (key === "swolfIndex") return qsTr("SWOLF Index");
+        if (key === "swimStyle") return qsTr("Swim Style");
+        if (key === "laps") return qsTr("Laps");
+        if (key === "maxLatitude") return qsTr("Max Latitude");
+        if (key === "minLatitude") return qsTr("Min Latitude");
+        if (key === "maxLongitude") return qsTr("Max Longitude");
+        if (key === "minLongitude") return qsTr("Min Longitude");
+        if (key === "maxSpeed") return qsTr("Max Speed");
+        if (key === "totalStride") return qsTr("Total Stride");
+
+        return key;
+    }
+
+    function translateSportUnit(unit) {
+        if (unit === "steps_unit") return qsTr("steps");
+        if (unit === "seconds") return qsTr("seconds");
+        if (unit === "calories_unit") return qsTr("kcal");
+        if (unit === "meters") return qsTr("meters");
+        if (unit === "seconds_m") return qsTr("seconds/m");
+        if (unit === "bpm") return qsTr("bpm");
+        if (unit === "seconds_km") return qsTr("seconds/km");
+        if (unit === "cm") return qsTr("cm");
+        if (unit === "strokes_second") return qsTr("strokes/s");
+        if (unit === "strokes") return qsTr("strokes");
+        if (unit === "swolf_index") return qsTr("swolf");
+        if (unit === "style") return "";
+        if (unit === "laps") return "";
+        if (unit === "swolf_index") return qsTr("swolf");
+
+        return unit;
     }
 }

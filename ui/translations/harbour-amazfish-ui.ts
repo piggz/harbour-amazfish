@@ -983,6 +983,212 @@
         <source>Data:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="340"/>
+        <source>Steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="341"/>
+        <source>Active Seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="342"/>
+        <source>Calories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="343"/>
+        <source>Distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="344"/>
+        <source>Ascent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="345"/>
+        <source>Descent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="346"/>
+        <source>Max Altitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="347"/>
+        <source>Min Altitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="348"/>
+        <source>Min Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="349"/>
+        <source>Max Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="350"/>
+        <source>Average HR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="351"/>
+        <source>Average Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="352"/>
+        <source>Average Stride</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="353"/>
+        <source>Max HR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="354"/>
+        <source>Time Ascending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="355"/>
+        <source>Time Descending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="356"/>
+        <source>Time Flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="357"/>
+        <source>Average Stroke</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="358"/>
+        <source>Average Stroke/s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="359"/>
+        <source>Average Lap Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="360"/>
+        <source>Strokes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="361"/>
+        <source>SWOLF Index</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="362"/>
+        <source>Swim Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="363"/>
+        <source>Laps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="364"/>
+        <source>Max Latitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="365"/>
+        <source>Min Latitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="366"/>
+        <source>Max Longitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="367"/>
+        <source>Min Longitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="368"/>
+        <source>Max Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="369"/>
+        <source>Total Stride</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="375"/>
+        <source>steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="376"/>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="377"/>
+        <source>kcal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="378"/>
+        <source>meters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="379"/>
+        <source>seconds/m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="380"/>
+        <source>bpm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="381"/>
+        <source>seconds/km</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="382"/>
+        <source>cm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="383"/>
+        <source>strokes/s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="384"/>
+        <source>strokes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="385"/>
+        <location filename="../qml/pages/SportPage.qml" line="388"/>
+        <source>swolf</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SportsSummaryPage</name>

@@ -236,7 +236,7 @@ void SportsSummaryOperation::parseSummary()
         } else if (activityKind == ActivityKind::Swimming || activityKind == ActivityKind::OpenSwimming) {
             m_summary.addMetaData("averageStrokeDistance", QString::number(summaryData.format512.swimming.averageStrokeDistance), "meters");
             m_summary.addMetaData("averageStrokesPerSecond", QString::number(summaryData.format512.swimming.averageStrokesPerSecond), "strokes_second");
-            m_summary.addMetaData("averageLapPace", QString::number(summaryData.format512.swimming.averageLapPace), "second");
+            m_summary.addMetaData("averageLapPace", QString::number(summaryData.format512.swimming.averageLapPace), "seconds");
             m_summary.addMetaData("strokes", QString::number(summaryData.format512.swimming.strokes), "strokes");
             m_summary.addMetaData("swolfIndex", QString::number(summaryData.format512.swimming.swolfIndex), "swolf_index");
             QString swimStyleName = "unknown"; // TODO: translate here or keep as string identifier here?
@@ -292,7 +292,7 @@ void SportsSummaryOperation::parseSummary()
         } else if (activityKind == ActivityKind::Swimming || activityKind == ActivityKind::OpenSwimming) {
             m_summary.addMetaData("averageStrokeDistance", QString::number(summaryData.format256.swimming.averageStrokeDistance), "meters");
             m_summary.addMetaData("averageStrokesPerSecond", QString::number(summaryData.format256.swimming.averageStrokesPerSecond), "strokes_second");
-            m_summary.addMetaData("averageLapPace", QString::number(summaryData.format256.swimming.averageLapPace), "second");
+            m_summary.addMetaData("averageLapPace", QString::number(summaryData.format256.swimming.averageLapPace), "seconds");
             m_summary.addMetaData("strokes", QString::number(summaryData.format256.swimming.strokes), "strokes");
             m_summary.addMetaData("swolfIndex", QString::number(summaryData.format256.swimming.swolfIndex), "swolf_index");
             QString swimStyleName = "unknown"; // TODO: translate here or keep as string identifier here?

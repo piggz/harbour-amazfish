@@ -779,6 +779,170 @@
         <source>Data:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Steps</source>
+        <translation type="unfinished">Шаги</translation>
+    </message>
+    <message>
+        <source>Active Seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ascent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Descent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max Altitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min Altitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average HR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average Stride</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max HR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Ascending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Descending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average Stroke</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average Stroke/s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average Lap Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strokes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SWOLF Index</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swim Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Laps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max Latitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min Latitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max Longitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min Longitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total Stride</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>kcal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>meters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seconds/m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bpm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seconds/km</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>strokes/s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>strokes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>swolf</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SportsSummaryPage</name>
