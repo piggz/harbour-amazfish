@@ -30,6 +30,12 @@ Page {
             }
 
             ListElement {
+                deviceType: "Amazfit Bip S"
+                icon: "../pics/devices/amazfit-bips.png"
+                auth: true
+            }
+
+            ListElement {
                 deviceType: "Amazfit GTS"
                 icon: "../pics/devices/amazfit-gts.png"
                 auth: true

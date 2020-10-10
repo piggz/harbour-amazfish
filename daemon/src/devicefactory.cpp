@@ -19,6 +19,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new BipLiteDevice(deviceName);
     }
 
+    if (deviceName == "Amazfit Bip S") {
+        return new GtsDevice(deviceName);
+    }
+
     if (deviceName == "Mi Smart Band 4") {
         return new BipLiteDevice(deviceName);
     }
