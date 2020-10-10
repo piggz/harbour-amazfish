@@ -3,6 +3,7 @@
 
 #include <QAbstractListModel>
 #include <QVariant>
+#include <QGeoCoordinate>
 
 #include <KDb3/KDbConnection>
 
@@ -34,7 +35,7 @@ public:
         SportKindString,
         SportBaseLongitude,
         SportBaseLatitude,
-        SportBaseAltitude,
+        SportBaseAltitude
     };
 
 
@@ -45,10 +46,12 @@ public:
     void setConnection(KDbConnection *conn);
 
     Q_INVOKABLE void update();
+    Q_INVOKABLE QString gpx(uint id);
 
 private:
-    KDbConnection *m_connection;
+    KDbConnection *m_connection = nullptr;
     QList<SportsData> m_data;
+    QList<QGeoCoordinate> m_points;
 };
 
 #endif // SPORTSDATAMODEL_H

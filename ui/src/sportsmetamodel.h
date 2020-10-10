@@ -38,7 +38,7 @@ public:
     Q_INVOKABLE void update(uint sportid);
 
 private:
-    KDbConnection *m_connection;
+    KDbConnection *m_connection = nullptr;
     QList<SportsMeta> m_data;
 };
 

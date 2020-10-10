@@ -33,7 +33,9 @@ SOURCES += src/harbour-amazfish-ui.cpp \
     src/datasource.cpp \
     src/sportsdatamodel.cpp \
     src/daemoninterface.cpp \
-    src/sportsmetamodel.cpp
+    src/sportsmetamodel.cpp \
+    src/timeformatter.cpp \
+    src/trackloader.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
     qml/components/DeviceButton.qml \
@@ -129,6 +131,8 @@ HEADERS += \
     src/datasource.h \
     src/daemoninterface.h \ \
     src/sportsdatamodel.h \
-    src/sportsmetamodel.h
+    src/sportsmetamodel.h \
+    src/timeformatter.h \
+    src/trackloader.h
 
 

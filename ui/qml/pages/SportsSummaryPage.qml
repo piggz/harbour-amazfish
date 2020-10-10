@@ -129,6 +129,15 @@ Page {
             onClicked: {
                 //var activityPage = pageStack.push(Qt.resolvedUrl("StravaActivityPage.qml"));
                 //activityPage.loadActivity(stravaList.model[index]["id"]);
+                var sportpage = pageStack.push(Qt.resolvedUrl("SportPage.qml"));
+                sportpage.title = name;
+                sportpage.date = startdate;
+                sportpage.location = baselatitude.toFixed(3) + "," + baselongitude.toFixed(3) + " " + basealtitude + "m";
+                sportpage.startdate = startdate;
+                sportpage.duration = fncCovertSecondsToString((enddate - startdate) / 1000);
+                sportpage.kindstring = kindstring;
+                SportsMeta.update(id);
+                sportpage.loader.loadString(SportsModel.gpx(id));
             }
         }
     }

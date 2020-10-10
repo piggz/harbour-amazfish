@@ -17,6 +17,7 @@
 #include "weather/citymanager.h"
 #include "weather/city.h"
 
+#include "trackloader.h"
 #include "amazfishconfig.h"
 
 int main(int argc, char *argv[])
@@ -29,10 +30,12 @@ int main(int argc, char *argv[])
     SportsMetaModel sportsMetaModel;
     DaemonInterface daemonInterface;
     sportsDataModel.setConnection(daemonInterface.dbConnection());
+    sportsMetaModel.setConnection(daemonInterface.dbConnection());
 
     qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
     qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");
     qmlRegisterType<City>("org.SfietKonstantin.weatherfish", 1, 0, "City");
+    qmlRegisterType<TrackLoader>("uk.co.piggz.amazfish", 1, 0, "TrackLoader");
 
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
     qmlRegisterUncreatableType<DaemonInterface>("uk.co.piggz.amazfish", 1, 0, "DaemonInterface", "DaemonInterface type available only for enum datatypes");
