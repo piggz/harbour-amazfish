@@ -373,6 +373,62 @@
     </message>
 </context>
 <context>
+    <name>JSTools</name>
+    <message>
+        <location filename="../qml/tools/JSTools.js" line="87"/>
+        <location filename="../qml/tools/JSTools.js" line="252"/>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/tools/JSTools.js" line="88"/>
+        <location filename="../qml/tools/JSTools.js" line="89"/>
+        <location filename="../qml/tools/JSTools.js" line="253"/>
+        <location filename="../qml/tools/JSTools.js" line="254"/>
+        <source>Heartrate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/tools/JSTools.js" line="90"/>
+        <location filename="../qml/tools/JSTools.js" line="91"/>
+        <location filename="../qml/tools/JSTools.js" line="255"/>
+        <location filename="../qml/tools/JSTools.js" line="256"/>
+        <source>Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/tools/JSTools.js" line="92"/>
+        <location filename="../qml/tools/JSTools.js" line="93"/>
+        <location filename="../qml/tools/JSTools.js" line="257"/>
+        <location filename="../qml/tools/JSTools.js" line="258"/>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/tools/JSTools.js" line="94"/>
+        <location filename="../qml/tools/JSTools.js" line="259"/>
+        <source>Altitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/tools/JSTools.js" line="95"/>
+        <location filename="../qml/tools/JSTools.js" line="260"/>
+        <source>Distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/tools/JSTools.js" line="96"/>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/tools/JSTools.js" line="97"/>
+        <location filename="../qml/tools/JSTools.js" line="261"/>
+        <source>Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PairPage</name>
     <message>
         <location filename="../qml/pages/PairPage.qml" line="113"/>
@@ -415,6 +471,24 @@
     <message>
         <location filename="../qml/pages/PairSelectDeviceType.qml" line="15"/>
         <source>Select Device Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/timeformatter.cpp" line="33"/>
+        <source>%1s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/timeformatter.cpp" line="35"/>
+        <source>%1m %2s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/timeformatter.cpp" line="39"/>
+        <source>%1h %2m %3s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -899,6 +973,14 @@
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="121"/>
         <source>Note: last nights sleep is updated at mid-day</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SportPage</name>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="73"/>
+        <source>Data:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

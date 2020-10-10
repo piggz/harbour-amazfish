@@ -299,6 +299,41 @@
     </message>
 </context>
 <context>
+    <name>JSTools</name>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation type="unfinished">Pulsrate</translation>
+    </message>
+    <message>
+        <source>Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Altitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PairPage</name>
     <message>
         <source>Pair Device</source>
@@ -333,6 +368,21 @@
     <name>PairSelectDeviceType</name>
     <message>
         <source>Select Device Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>%1s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1m %2s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1h %2m %3s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -720,6 +770,13 @@
     </message>
     <message>
         <source>Hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SportPage</name>
+    <message>
+        <source>Data:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
