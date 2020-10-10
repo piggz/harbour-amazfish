@@ -226,7 +226,7 @@ void SportsSummaryOperation::parseSummary()
 
         m_summary.addMetaData("averageHR", QString::number(summaryData.format512.averageHR), "bpm");
         m_summary.addMetaData("maxHR", QString::number(summaryData.format512.maxHR), "bpm");
-        m_summary.addMetaData("averageKMPaceSeconds", QString::number(summaryData.format512.averageKMPaceSeconds), "seconds/km");
+        m_summary.addMetaData("averageKMPaceSeconds", QString::number(summaryData.format512.averageKMPaceSeconds), "seconds_km");
         m_summary.addMetaData("averageStride", QString::number(summaryData.format512.averageStride), "cm");
 
         if (summaryData.kind == ActivityKind::Cycling || summaryData.kind == ActivityKind::Running) {
@@ -235,7 +235,7 @@ void SportsSummaryOperation::parseSummary()
             m_summary.addMetaData("flatSeconds", QString::number(summaryData.format512.runcycle.flatSeconds / 1000), "seconds");
         } else if (activityKind == ActivityKind::Swimming || activityKind == ActivityKind::OpenSwimming) {
             m_summary.addMetaData("averageStrokeDistance", QString::number(summaryData.format512.swimming.averageStrokeDistance), "meters");
-            m_summary.addMetaData("averageStrokesPerSecond", QString::number(summaryData.format512.swimming.averageStrokesPerSecond), "strokes/second");
+            m_summary.addMetaData("averageStrokesPerSecond", QString::number(summaryData.format512.swimming.averageStrokesPerSecond), "strokes_second");
             m_summary.addMetaData("averageLapPace", QString::number(summaryData.format512.swimming.averageLapPace), "second");
             m_summary.addMetaData("strokes", QString::number(summaryData.format512.swimming.strokes), "strokes");
             m_summary.addMetaData("swolfIndex", QString::number(summaryData.format512.swimming.swolfIndex), "swolf_index");
@@ -272,8 +272,8 @@ void SportsSummaryOperation::parseSummary()
         m_summary.addMetaData("caloriesBurnt", QString::number(summaryData.format256.caloriesBurnt), "calories_unit");
         m_summary.addMetaData("maxSpeed", QString::number(summaryData.format256.maxSpeed), "meters_second");
         m_summary.addMetaData("averageHR", QString::number(summaryData.format256.averageHR), "bpm");
-        m_summary.addMetaData("averageKMPaceSeconds", QString::number(summaryData.format256.averageKMPaceSeconds), "seconds/km");
-        m_summary.addMetaData("averageStride", QString::number(summaryData.format256.averageStride), "seconds/km");
+        m_summary.addMetaData("averageKMPaceSeconds", QString::number(summaryData.format256.averageKMPaceSeconds), "seconds_km");
+        m_summary.addMetaData("averageStride", QString::number(summaryData.format256.averageStride), "seconds_km");
 
         if (!(activityKind == ActivityKind::EllipticalTrainer ||
                 activityKind == ActivityKind::JumpRope ||
@@ -291,7 +291,7 @@ void SportsSummaryOperation::parseSummary()
             m_summary.addMetaData("flatSeconds", QString::number(summaryData.format256.runcycle.flatSeconds / 1000), "seconds");
         } else if (activityKind == ActivityKind::Swimming || activityKind == ActivityKind::OpenSwimming) {
             m_summary.addMetaData("averageStrokeDistance", QString::number(summaryData.format256.swimming.averageStrokeDistance), "meters");
-            m_summary.addMetaData("averageStrokesPerSecond", QString::number(summaryData.format256.swimming.averageStrokesPerSecond), "strokes/second");
+            m_summary.addMetaData("averageStrokesPerSecond", QString::number(summaryData.format256.swimming.averageStrokesPerSecond), "strokes_second");
             m_summary.addMetaData("averageLapPace", QString::number(summaryData.format256.swimming.averageLapPace), "second");
             m_summary.addMetaData("strokes", QString::number(summaryData.format256.swimming.strokes), "strokes");
             m_summary.addMetaData("swolfIndex", QString::number(summaryData.format256.swimming.swolfIndex), "swolf_index");
