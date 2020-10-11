@@ -66,22 +66,22 @@
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduce clave</translation>
     </message>
 </context>
 <context>
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation>Enviar archivo</translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation>Descargar archivo</translation>
+        <translation>Enviar archivo</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Selecciona archivo a descargar.</translation>
+        <translation>Selecciona archivo para enviar.</translation>
     </message>
     <message>
         <source>None</source>
@@ -104,7 +104,7 @@
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error inesperado</translation>
     </message>
 </context>
 <context>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation>Obtener registro de depuración</translation>
+        <translation>Registro de depuración</translation>
     </message>
     <message>
         <source>Test Popup</source>
@@ -206,7 +206,7 @@
     <name>DownloadDataMenuItem</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Descargar datos</translation>
+        <translation>Descargar datos</translation>
     </message>
 </context>
 <context>
@@ -217,7 +217,7 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Descargar archivo</translation>
+        <translation>Enviar archivo</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -245,15 +245,15 @@
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <source>Data Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>Gráficos de datos</translation>
     </message>
 </context>
 <context>
@@ -267,35 +267,35 @@
     <name>HeartratePage</name>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Frecuencia cardiaca</translation>
+        <translation>Frecuencia cardiaca</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Relajado</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligero</translation>
     </message>
     <message>
         <source>Intensive</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensivo</translation>
     </message>
     <message>
         <source>Aerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Aeróbico</translation>
     </message>
     <message>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Anaeróbico</translation>
     </message>
     <message>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation>VO2 Máx</translation>
     </message>
 </context>
 <context>
@@ -341,27 +341,27 @@
     </message>
     <message>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>Detener búsqueda</translation>
     </message>
     <message>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar dispositivos</translation>
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscando dispositivos...</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>Vinculando...</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ningún dispositivo encontrado</translation>
     </message>
     <message>
         <source>Pull down to scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Desliza hacia abajo para buscar dispositivos</translation>
     </message>
 </context>
 <context>
@@ -744,7 +744,7 @@
     <name>SleepPage</name>
     <message>
         <source>Sleep Summary</source>
-        <translation>Resumen de sueño</translation>
+        <translation>Resumen del sueño</translation>
     </message>
     <message>
         <source>Sleep</source>
@@ -752,25 +752,25 @@
     </message>
     <message>
         <source>Note: last nights sleep is updated at mid-day</source>
-        <translation>Nota: el sueño de la noche anterior se actuliza a medio día</translation>
+        <translation>Nota: el sueño de la última noche se actualiza a medio día</translation>
     </message>
     <message>
         <source>h:mm</source>
         <extracomment>Format of sleep hours</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>h:mm</translation>
     </message>
     <message>
         <source>Deep %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Profundo %1</translation>
     </message>
     <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>dd/MM</translation>
     </message>
     <message>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Horas</translation>
     </message>
 </context>
 <context>
@@ -966,11 +966,11 @@
     <name>UnpairDeviceDialog</name>
     <message>
         <source>Unpair</source>
-        <translation type="unfinished"></translation>
+        <translation>Desvincular</translation>
     </message>
     <message>
         <source>Before proceeding you need to unpair your current device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Antes de continuar, debes desvincular tu dispositivo actual.</translation>
     </message>
 </context>
 </TS>
