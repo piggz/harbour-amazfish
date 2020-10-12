@@ -64,8 +64,8 @@ private:
             0x20, 0x99, 0x12, 0x01, 0x08 //probably nonsense
     };
 
-    const char GPS_ALMANAC_HEADER[6] = { // probably wrong
-            0xa0, 0x80, 0x08, 0x00, 0x8b, 0x07
+    const char GPS_ALMANAC_HEADER[5] = { // probably wrong
+            0xa0, 0x80, 0x08, 0x00, 0x8b
     };
 
     const char GPS_CEP_HEADER[4]{ // probably wrong
