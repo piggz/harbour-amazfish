@@ -105,10 +105,10 @@ void BipFirmwareInfo::determineFirmwareVersion()
             version = "GPS (unknown)";
             break;
         case GPS_CEP:
-            version = "CAP (unknown)";
+            version = "CAP";
             break;
         case GPS_ALMANAC:
-            version = "ALM (unknown)";
+            version = "ALM";
             break;
         case Watchface:
             version = "Watchface";
