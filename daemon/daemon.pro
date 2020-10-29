@@ -12,13 +12,21 @@
 # The name of your application
 TARGET = harbour-amazfishd
 
-CONFIG += sailfishapp
 LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 
-QT +=  contacts positioning KDb3
+QT +=  positioning KDb3
 
-PKGCONFIG += mlite5
-PKGCONFIG += libmkcal-qt5 libkcalcoren-qt5
+exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
+    message(SailfishOS daemon build)
+    CONFIG += sailfishapp
+    PKGCONFIG += mlite5
+
+    WATCHFISH_FEATURES += music \
+                      voicecall \
+                      notificationmonitor \
+                      calendar
+}
+
 INCLUDEPATH += /usr/include/mkcal-qt5 /usr/include/kcalcoren-qt5
 
 INCLUDEPATH += $$PWD/src/services/ \
@@ -38,12 +46,6 @@ privilege.path = /usr/share/mapplauncherd/privileges.d/
 INSTALLS += target \
             systemd_services \
             privilege
-
-
-WATCHFISH_FEATURES += music \
-                      voicecall \
-                      notificationmonitor \
-                      calendar
 
 include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)

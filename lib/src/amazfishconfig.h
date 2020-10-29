@@ -166,7 +166,9 @@ private:
 
     void setValue(const QString &key, const QVariant &value, signal_ptr signal);
 
+#ifdef MER_EDITION_SAILFISH
     MDConfGroup *m_group;
+#endif
 };
 
 #undef ALARM_OPTION
