@@ -54,7 +54,7 @@ void PinetimeJFDevice::sendAlert(const QString &sender, const QString &subject, 
 
 void PinetimeJFDevice::incomingCall(const QString &caller)
 {
-
+    Q_UNUSED(caller);
 }
 
 void PinetimeJFDevice::parseServices()
@@ -163,6 +163,7 @@ void PinetimeJFDevice::authenticated(bool ready)
 
 AbstractFirmwareInfo *PinetimeJFDevice::firmwareInfo(const QByteArray &bytes)
 {
+    Q_UNUSED(bytes);
     return nullptr;
 }
 

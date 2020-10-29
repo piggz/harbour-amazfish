@@ -6,9 +6,12 @@ CONFIG += staticlib
 
 QT += core
 
-PKGCONFIG += mlite5
-
-INCLUDEPATH += /usr/include/mlite5
+exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
+    message(SailfishOS lib build)
+    DEFINES += MER_EDITION_SAILFISH
+    PKGCONFIG += mlite5
+    INCLUDEPATH += /usr/include/mlite5
+}
 
 HEADERS = \
     src/amazfishconfig.h \

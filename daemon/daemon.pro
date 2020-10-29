@@ -18,6 +18,8 @@ QT +=  positioning KDb3
 
 exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     message(SailfishOS daemon build)
+    DEFINES += MER_EDITION_SAILFISH
+
     CONFIG += sailfishapp
     PKGCONFIG += mlite5
 

@@ -6,7 +6,7 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     DEFINES += MER_EDITION_SAILFISH
     SUBDIRS = lib daemon ui
 } else {
-    SUBDIRS = lib daemon
+    SUBDIRS = lib daemon ui
 }
 DISTFILES += \
     rpm/harbour-amazfish.changes.in \

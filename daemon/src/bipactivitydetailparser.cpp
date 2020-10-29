@@ -113,6 +113,7 @@ double BipActivityDetailParser::convertHuamiValueToDecimalDegrees(long huamiValu
 
 int BipActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offset, long timeOffsetSeconds)
 {
+    Q_UNUSED(timeOffsetSeconds);
     int v1 = TypeConversion::toUint16(bytes[offset]);
     int v2 = TypeConversion::toUint16(bytes[offset + 1]);
     int v3 = TypeConversion::toUint16(bytes[offset + 2]);
