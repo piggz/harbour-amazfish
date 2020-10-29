@@ -20,28 +20,28 @@ void GtsFirmwareInfo::determineFirmwareType() {
     qDebug() << "Determining firmware type";
     m_type = Invalid;
 
-    if (m_bytes.indexOf(QByteArray(NEWRES_HEADER, sizeof(NEWRES_HEADER))) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
+    if (m_bytes.indexOf(UCHAR_TO_BYTEARRAY(NEWRES_HEADER)) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
         m_type = Res_Compressed;
     }
-    if (m_bytes.startsWith(QByteArray(GPS_HEADER, sizeof(GPS_HEADER))) || m_bytes.startsWith(QByteArray(GPS_HEADER2, sizeof(GPS_HEADER2))) || m_bytes.startsWith(QByteArray(GPS_HEADER3, sizeof(GPS_HEADER3))) || m_bytes.startsWith(QByteArray(GPS_HEADER4, sizeof(GPS_HEADER4)))) {
+    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_HEADER)) || m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_HEADER2)) || m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_HEADER3)) || m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_HEADER4))) {
         m_type = GPS;
     }
-    if (m_bytes.startsWith(QByteArray(GPS_ALMANAC_HEADER, sizeof(GPS_ALMANAC_HEADER)))) {
+    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_ALMANAC_HEADER))) {
         m_type = GPS_ALMANAC;
     }
-    if (m_bytes.startsWith(QByteArray(GPS_CEP_HEADER, sizeof(GPS_CEP_HEADER)))) {
+    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_CEP_HEADER))) {
         m_type = GPS_CEP;
     }
-    if (m_bytes.indexOf(QByteArray(FW_HEADER, sizeof(FW_HEADER))) == FW_OFFSET) {
+    if (m_bytes.indexOf(UCHAR_TO_BYTEARRAY(FW_HEADER)) == FW_OFFSET) {
         m_version = m_crcMap[m_crc16];
         qDebug() << "Version:" << m_version << "CRC:" << m_crc16;
         m_type = Firmware;
     }
 
-    if (m_bytes.startsWith(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER))) || m_bytes.indexOf(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER))) == COMPRESSED_RES_HEADER_OFFSET || m_bytes.indexOf(QByteArray(WATCHFACE_HEADER, sizeof(WATCHFACE_HEADER))) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
+    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(WATCHFACE_HEADER)) || m_bytes.indexOf(UCHAR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET || m_bytes.indexOf(UCHAR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
         m_type = Watchface;
     }
-    if (m_bytes.startsWith(QByteArray(NEWFT_HEADER, sizeof(NEWFT_HEADER)))) {
+    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(NEWFT_HEADER))) {
         if (m_bytes.at(10) == 0x01) {
             m_type = Font;
         } else if (m_bytes.at(10) == 0x02) {

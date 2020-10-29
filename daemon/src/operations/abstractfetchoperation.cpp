@@ -50,7 +50,7 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
     qDebug() << "AbstractFetchOperation::handleMetaData:" << value;
     if (value.length() == 15) {
         // first two bytes are whether our request was accepted
-        if (value.mid(0, 3) == QByteArray(MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS, 3)) {
+        if (value.mid(0, 3) == UCHAR_TO_BYTEARRAY(MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS)) {
             // the third byte (0x01 on success) = ?
             // the 4th - 7th bytes epresent the number of bytes/packets to expect, excluding the counter bytes
             int expectedDataLength = TypeConversion::toUint32(value[3], value[4], value[5], value[6]);
@@ -71,16 +71,16 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
             qDebug() << "Unexpected activity metadata: " << value;
         }
     } else if (value.length() == 3) {
-        if (value == QByteArray(MiBandService::RESPONSE_FINISH_SUCCESS, 3)) {
+        if (value == UCHAR_TO_BYTEARRAY(MiBandService::RESPONSE_FINISH_SUCCESS)) {
             qDebug() << "Finished sending data";
             finished(true);
             m_service->message(QObject::tr("Finished transferring activity data"));
             return true;
-        } else if (value == QByteArray(MiBandService::RESPONSE_FINISH_FAIL, 3)) {
+        } else if (value == UCHAR_TO_BYTEARRAY(MiBandService::RESPONSE_FINISH_FAIL)) {
             qDebug() << "No data left to fetch";
             m_service->message(QObject::tr("No data to transfer"));
             return true;
-        } else if (value == QByteArray(MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS, 3)) {
+        } else if (value == UCHAR_TO_BYTEARRAY(MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS)) {
             qDebug() << "Activity start date success";
             //Send log read command
             m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));

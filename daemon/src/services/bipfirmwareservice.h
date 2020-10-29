@@ -20,15 +20,15 @@ public:
     static const char *UUID_CHARACTERISTIC_FIRMWARE_DATA;
 
 
-    static const char RESPONSE = 0x10;
-    static const char SUCCESS = 0x01;
-    static const char FAIL = 0x04;
+    static const uint8_t RESPONSE = 0x10;
+    static const uint8_t SUCCESS = 0x01;
+    static const uint8_t FAIL = 0x04;
 
-    static const char COMMAND_FIRMWARE_INIT = 0x01; // to UUID_CHARACTERISTIC_FIRMWARE, followed by fw file size in bytes
-    static const char COMMAND_FIRMWARE_START_DATA = 0x03; // to UUID_CHARACTERISTIC_FIRMWARE
-    static const char COMMAND_FIRMWARE_UPDATE_SYNC = 0x00; // to UUID_CHARACTERISTIC_FIRMWARE
-    static const char COMMAND_FIRMWARE_CHECKSUM = 0x04; // to UUID_CHARACTERISTIC_FIRMWARE
-    static const char COMMAND_FIRMWARE_REBOOT = 0x05; // to UUID_CHARACTERISTIC_FIRMWARE
+    static const uint8_t COMMAND_FIRMWARE_INIT = 0x01; // to UUID_CHARACTERISTIC_FIRMWARE, followed by fw file size in bytes
+    static const uint8_t COMMAND_FIRMWARE_START_DATA = 0x03; // to UUID_CHARACTERISTIC_FIRMWARE
+    static const uint8_t COMMAND_FIRMWARE_UPDATE_SYNC = 0x00; // to UUID_CHARACTERISTIC_FIRMWARE
+    static const uint8_t COMMAND_FIRMWARE_CHECKSUM = 0x04; // to UUID_CHARACTERISTIC_FIRMWARE
+    static const uint8_t COMMAND_FIRMWARE_REBOOT = 0x05; // to UUID_CHARACTERISTIC_FIRMWARE
 
 
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info, UpdateFirmwareOperation* operation);

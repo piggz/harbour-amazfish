@@ -19,14 +19,14 @@ public:
     static const char *UUID_CHARACTERISTIC_HRM_MEASUREMENT;
     static const char *UUID_CHARACTERISTIC_HRM_CONTROL;
 
-    const char COMMAND_SET_HR_SLEEP = 0x0;
-    const char COMMAND_SET_HR_CONTINUOUS_DISABLE[3] = {0x15, 0x1, 0x00};
-    const char COMMAND_SET_HR_CONTINUOUS_ENABLE[3] = {0x15, 0x1, 0x01};
-    const char COMMAND_SET_HR_MANUAL_DISABLE[3] = {0x15, 0x2, 0x00};
-    const char COMMAND_SET_HR_MANUAL_ENABLE[3] = {0x15, 0x2, 0x01};
-    const char COMMAND_SET_PERIODIC_HR_MEASUREMENT_INTERVAL = 0x14;
-    const char COMMAND_ENABLE_HR_SLEEP_MEASUREMENT[3] = {0x15, 0x00, 0x01};
-    const char COMMAND_DISABLE_HR_SLEEP_MEASUREMENT[3] = {0x15, 0x00, 0x00};
+    const uint8_t COMMAND_SET_HR_SLEEP = 0x0;
+    const uint8_t COMMAND_SET_HR_CONTINUOUS_DISABLE[3] = {0x15, 0x1, 0x00};
+    const uint8_t COMMAND_SET_HR_CONTINUOUS_ENABLE[3] = {0x15, 0x1, 0x01};
+    const uint8_t COMMAND_SET_HR_MANUAL_DISABLE[3] = {0x15, 0x2, 0x00};
+    const uint8_t COMMAND_SET_HR_MANUAL_ENABLE[3] = {0x15, 0x2, 0x01};
+    const uint8_t COMMAND_SET_PERIODIC_HR_MEASUREMENT_INTERVAL = 0x14;
+    const uint8_t COMMAND_ENABLE_HR_SLEEP_MEASUREMENT[3] = {0x15, 0x00, 0x01};
+    const uint8_t COMMAND_DISABLE_HR_SLEEP_MEASUREMENT[3] = {0x15, 0x00, 0x00};
 
     void enableRealtimeHRMeasurement(bool enable);
     void enableManualHRMeasurement(bool enable);

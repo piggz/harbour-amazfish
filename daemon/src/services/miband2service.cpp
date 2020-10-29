@@ -12,6 +12,8 @@ MiBand2Service::MiBand2Service(const QString &path, char authByte, char cryptByt
     m_authByte = authByte;
     m_cryptByte = cryptByte;
     m_requiresAuthKey = requireAuthKey;
+    qDebug() << "auth:" << (int)m_authByte << "crypt:" << (int)m_cryptByte << "req:" << m_requiresAuthKey;
+
     connect(this, &QBLEService::characteristicChanged, this, &MiBand2Service::characteristicChanged);
 }
 
@@ -19,7 +21,7 @@ void MiBand2Service::initialise(bool firstTime)
 {
     if (firstTime) {
         qDebug() << "Sending auth key";
-        writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, QByteArray(&AUTH_SEND_KEY, 1) + QByteArray(&m_authByte, 1) + getSecretKey());
+        writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, UCHAR_TO_BYTEARRAY(&AUTH_SEND_KEY) + UCHAR_TO_BYTEARRAY(&m_authByte)/* + getSecretKey()*/);
     } else {
         qDebug() << "Writing request for auth number";
         writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH , requestAuthNumber());
@@ -30,9 +32,9 @@ void MiBand2Service::characteristicChanged(const QString &characteristic, const 
 {
     qDebug() << "Mi2Band Changed:" << characteristic << value;
 
-    if (value[0] == RESPONSE && value[1] == AUTH_SEND_KEY && (value[2] & SUCCESS) == SUCCESS) {
+    if (value[0] == RESPONSE && value[1] == AUTH_SEND_KEY && ((value[2] & SUCCESS) == SUCCESS || value[2] == 0x06) ) {
         qDebug() << "Received initial auth success, requesting random auth number";
-        writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, QByteArray(&AUTH_REQUEST_RANDOM_AUTH_NUMBER, 1) + QByteArray(&m_authByte, 1));
+        writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, UCHAR_TO_BYTEARRAY(&AUTH_REQUEST_RANDOM_AUTH_NUMBER) + UCHAR_TO_BYTEARRAY(&m_authByte) + UCHAR_TO_BYTEARRAY(&AUTH_REQUEST_RANDOM_AUTH_NUMBER));
     } else  if (value[0] == RESPONSE && (value[1] & 0x0f) == AUTH_REQUEST_RANDOM_AUTH_NUMBER && value[2] == SUCCESS) {
         qDebug() << "Received random auth number, sending encrypted auth number";
         //writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, QByteArray(&AUTH_SEND_ENCRYPTED_AUTH_NUMBER, 1) + QByteArray(&m_authByte, 1) + handleAesAuth(value.mid(3, 17), getSecretKey()));
@@ -64,7 +66,7 @@ QByteArray MiBand2Service::getSecretKey()
 QByteArray MiBand2Service::requestAuthNumber() {
     qDebug() << "Crypt Byte:" << m_cryptByte;
     if (m_cryptByte == 0x00) {
-        return QByteArray(&AUTH_REQUEST_RANDOM_AUTH_NUMBER, 1) + QByteArray(&m_authByte, 1);
+        return UCHAR_TO_BYTEARRAY(&AUTH_REQUEST_RANDOM_AUTH_NUMBER) + UCHAR_TO_BYTEARRAY(&m_authByte);
     } else {
         return QByteArray(1, (char)(m_cryptByte | AUTH_REQUEST_RANDOM_AUTH_NUMBER)) + QByteArray(&m_authByte, 1) + QByteArray(1, 0x02)+ QByteArray(1, 0x01)+ QByteArray(1, 0x00);
     }

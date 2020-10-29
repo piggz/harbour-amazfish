@@ -25,13 +25,13 @@ public:
     static const char *UUID_CHARACTERISTIC_MUSIC_TRACK;
     static const char *UUID_CHARACTERISTIC_MUSIC_ALBUM;
 
-    static const char EVENT_MUSIC_OPEN = 0xe0;
-    static const char EVENT_MUSIC_PLAY = 0x00;
-    static const char EVENT_MUSIC_PAUSE = 0x01;
-    static const char EVENT_MUSIC_NEXT = 0x03;
-    static const char EVENT_MUSIC_PREV = 0x04;
-    static const char EVENT_MUSIC_VOLUP = 0x05;
-    static const char EVENT_MUSIC_VOLDOWN = 0x06;
+    static const uint8_t EVENT_MUSIC_OPEN = 0xe0;
+    static const uint8_t EVENT_MUSIC_PLAY = 0x00;
+    static const uint8_t EVENT_MUSIC_PAUSE = 0x01;
+    static const uint8_t EVENT_MUSIC_NEXT = 0x03;
+    static const uint8_t EVENT_MUSIC_PREV = 0x04;
+    static const uint8_t EVENT_MUSIC_VOLUP = 0x05;
+    static const uint8_t EVENT_MUSIC_VOLDOWN = 0x06;
 
     void setStatus(bool playing);
     void setArtist(const QString &artist);
