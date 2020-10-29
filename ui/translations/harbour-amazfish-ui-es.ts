@@ -375,7 +375,7 @@
     <name>QObject</name>
     <message>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1% {1s?}</translation>
     </message>
     <message>
         <source>%1m %2s</source>

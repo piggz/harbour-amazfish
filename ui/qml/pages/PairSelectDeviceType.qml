@@ -67,6 +67,13 @@ Page {
                 icon: "../pics/devices/miband4.png"
                 auth: true
             }
+
+            ListElement {
+                deviceType: "Amazfit Stratos 3"
+                icon: "../pics/devices/miband4.png"
+                auth: true
+            }
+
             ListElement {
                 deviceType: "InfiniTime"
                 icon: "../pics/devices/pinetime.png"

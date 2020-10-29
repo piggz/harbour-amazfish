@@ -23,6 +23,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new GtsDevice(deviceName);
     }
 
+    if (deviceName == "Amazfit Stratos 3") {
+        return new GtsDevice(deviceName);
+    }
+
     if (deviceName == "Mi Smart Band 4") {
         return new BipLiteDevice(deviceName);
     }
