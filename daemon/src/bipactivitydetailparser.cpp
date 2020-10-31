@@ -215,42 +215,42 @@ QString BipActivityDetailParser::toText()
     QTextStream out(&str);
     out.setRealNumberPrecision(10);
 
-    out << "<?xml version=\"1.0\" standalone=\"yes\"?>" << endl;
-    out << "<?xml-stylesheet type=\"text/xsl\" href=\"details.xsl\"?>" << endl;
-    out << "<gpx" << endl;
-    out << "version=\"1.1\"" << endl;
-    out << "creator=\"Amazfish for SailfishOS\"" << endl;
-    out << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << endl;
-    out << "xmlns=\"http://www.topografix.com/GPX/1/1\"" << endl;
-    out << "xmlns:topografix=\"http://www.topografix.com/GPX/Private/TopoGrafix/0/1\"" << endl;
-    out << "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd\"" << endl;
-    out << "xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v1\">" << endl;
+    out << "<?xml version=\"1.0\" standalone=\"yes\"?>" << Qt::endl;
+    out << "<?xml-stylesheet type=\"text/xsl\" href=\"details.xsl\"?>" << Qt::endl;
+    out << "<gpx" << Qt::endl;
+    out << "version=\"1.1\"" << Qt::endl;
+    out << "creator=\"Amazfish for SailfishOS\"" << Qt::endl;
+    out << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << Qt::endl;
+    out << "xmlns=\"http://www.topografix.com/GPX/1/1\"" << Qt::endl;
+    out << "xmlns:topografix=\"http://www.topografix.com/GPX/Private/TopoGrafix/0/1\"" << Qt::endl;
+    out << "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd\"" << Qt::endl;
+    out << "xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v1\">" << Qt::endl;
 
     //Laufhelden compatible metadata
-    out << "<metadata>" << endl;
-    out << "<name>" << m_summary.name() << "</name>" << endl;
-    out << "<desc></desc>" << endl;
-    out << "<extensions>" << endl;
-    out << "<meerun activity=\"" << ActivityKind::toString(m_summary.activityKind()).toLower() << "\" />" << endl;
-    out << "</extensions>" << endl;
-    out << "</metadata>" << endl;
+    out << "<metadata>" << Qt::endl;
+    out << "<name>" << m_summary.name() << "</name>" << Qt::endl;
+    out << "<desc></desc>" << Qt::endl;
+    out << "<extensions>" << Qt::endl;
+    out << "<meerun activity=\"" << ActivityKind::toString(m_summary.activityKind()).toLower() << "\" />" << Qt::endl;
+    out << "</extensions>" << Qt::endl;
+    out << "</metadata>" << Qt::endl;
 
-    out << "<trk>" << endl;
-    out << "<trkseg>" << endl;
+    out << "<trk>" << Qt::endl;
+    out << "<trkseg>" << Qt::endl;
 
     foreach(ActivityCoordinate pos, m_activityTrack) {
-        out << "<trkpt lat=\""<< pos.coordinate().latitude() << "\" lon=\"" << pos.coordinate().longitude() << "\">" << endl;
-        out << "<ele>" << pos.coordinate().altitude() << "</ele>" << endl;
+        out << "<trkpt lat=\""<< pos.coordinate().latitude() << "\" lon=\"" << pos.coordinate().longitude() << "\">" << Qt::endl;
+        out << "<ele>" << pos.coordinate().altitude() << "</ele>" << Qt::endl;
         QDateTime dt = pos.timeStamp();
         //dt.setTimeZone(QTimeZone::systemTimeZone());
         //dt.setTimeSpec(Qt::OffsetFromUTC);
-        out << "<time>" << dt.toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "</time>" << endl;
-        out << "<extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>" << pos.heartRate() << "</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions>" << endl;
-        out << "</trkpt>" << endl;
+        out << "<time>" << dt.toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "</time>" << Qt::endl;
+        out << "<extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>" << pos.heartRate() << "</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions>" << Qt::endl;
+        out << "</trkpt>" << Qt::endl;
     }
-    out << "</trkseg>" << endl;
-    out << "</trk>" << endl;
-    out << "</gpx>" << endl;
+    out << "</trkseg>" << Qt::endl;
+    out << "</trk>" << Qt::endl;
+    out << "</gpx>" << Qt::endl;
 
     return str;
 }
