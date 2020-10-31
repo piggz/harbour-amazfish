@@ -14,7 +14,7 @@ TARGET = harbour-amazfish-ui
 
 CONFIG += sailfishapp
 
-QT +=  positioning KDb3 bluetooth
+QT +=  positioning KDb3 bluetooth quick
 LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish
 
 PKGCONFIG += mlite5

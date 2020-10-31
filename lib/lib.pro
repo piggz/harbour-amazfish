@@ -4,7 +4,7 @@ TEMPLATE = lib
 
 CONFIG += staticlib
 
-QT += core
+QT += core network
 
 exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     message(SailfishOS lib build)

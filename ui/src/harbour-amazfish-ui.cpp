@@ -6,7 +6,9 @@
 #include <QGuiApplication>
 #include <QQmlContext>
 
+#ifdef MER_EDITION_SAILFISH
 #include <sailfishapp.h>
+#endif
 
 #include "datasource.h"
 #include "sportsdatamodel.h"
@@ -22,7 +24,10 @@
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication *app = SailfishApp::application(argc, argv);
+    QGuiApplication *app;
+#ifdef MER_EDITION_SAILFISH
+    app = SailfishApp::application(argc, argv);
+#endif
 
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setApplicationName("harbour-amazfish");
@@ -41,13 +46,18 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<DaemonInterface>("uk.co.piggz.amazfish", 1, 0, "DaemonInterface", "DaemonInterface type available only for enum datatypes");
 
     qmlRegisterSingletonType<AmazfishConfig>("uk.co.piggz.amazfish", 1, 0, "AmazfishConfig", AmazfishConfig::qmlInstance);
+    QQuickView *view;
 
-    QQuickView *view = SailfishApp::createView();
+#ifdef MER_EDITION_SAILFISH
+    view = SailfishApp::createView();
+#endif
     view->rootContext()->setContextProperty("DaemonInterfaceInstance", &daemonInterface);
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
     view->rootContext()->setContextProperty("SportsMeta", &sportsMetaModel);
 
+#ifdef MER_EDITION_SAILFISH
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));
+#endif
     view->show();
 
     return app->exec();

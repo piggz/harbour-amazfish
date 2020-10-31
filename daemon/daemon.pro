@@ -14,7 +14,7 @@ TARGET = harbour-amazfishd
 
 LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 
-QT +=  positioning KDb3
+QT +=  positioning KDb3 network
 
 exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     message(SailfishOS daemon build)
@@ -22,11 +22,14 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
 
     CONFIG += sailfishapp
     PKGCONFIG += mlite5
-
     WATCHFISH_FEATURES += music \
                       voicecall \
                       notificationmonitor \
                       calendar
+} else {
+WATCHFISH_FEATURES += music \
+                  notificationmonitor \
+                  calendar
 }
 
 INCLUDEPATH += /usr/include/mkcal-qt5 /usr/include/kcalcoren-qt5

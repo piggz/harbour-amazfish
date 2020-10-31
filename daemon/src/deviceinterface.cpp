@@ -43,8 +43,9 @@ DeviceInterface::DeviceInterface()
     connect(&m_notificationMonitor, &watchfish::NotificationMonitor::notification, this, &DeviceInterface::onNotification);
 
     // Calls
+#ifdef MER_EDITION_SAILFISH
     connect(&m_voiceCallController, &watchfish::VoiceCallController::ringingChanged, this, &DeviceInterface::onRingingChanged);
-
+#endif
     //Weather
     connect(&m_cityManager, &CityManager::citiesChanged, this, &DeviceInterface::onCitiesChanged);
     connect(&m_currentWeather, &CurrentWeather::ready, this, &DeviceInterface::onWeatherReady);
@@ -161,6 +162,7 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
 
 void DeviceInterface::onRingingChanged()
 {
+#ifdef MER_EDITION_SAILFISH
     qDebug() << Q_FUNC_INFO << m_voiceCallController.ringing();
 
     if (!m_device) {
@@ -174,6 +176,7 @@ void DeviceInterface::onRingingChanged()
             m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
         }
     }
+#endif
 }
 
 void DeviceInterface::createTables()
@@ -443,12 +446,14 @@ void DeviceInterface::deviceEvent(AbstractDevice::Events event)
     case AbstractDevice::EVENT_APP_MUSIC:
         musicChanged();
         break;
+#ifdef MER_EDITION_SAILFISH
     case AbstractDevice::EVENT_IGNORE_CALL:
         m_voiceCallController.silence();
         break;
     case AbstractDevice::EVENT_DECLINE_CALL:
         m_voiceCallController.hangup();
         break;
+#endif
     }
 }
 
