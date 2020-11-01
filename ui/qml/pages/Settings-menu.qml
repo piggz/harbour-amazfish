@@ -1,74 +1,62 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
+import "../components"
+import "../components/platform"
 import uk.co.piggz.amazfish 1.0
 
-Page {
+PageListPL {
     id: page
 
-    // The effective value will be restricted by ApplicationWindow.allowedOrientations
-    allowedOrientations: Orientation.Portrait
+    title: qsTr("Settings Menu")
 
-    // Place our content in a Column.  The PageHeader is always placed at the top
-    // of the page, followed by our content.
-    SilicaListView {
-        id: column
 
-        anchors.horizontalCenter: parent.horizontalCenter
-        width: page.width - 2*Theme.horizontalPageMargin
-        height: parent.height
+    model: settingsPages
 
-        header: PageHeader {
-            title: qsTr("Settings Menu")
+    delegate: ListItemPL {
+
+        visible: checkFeature()
+        contentHeight: visible ? styler.themeItemSizeLarge : 0
+
+        IconPL {
+            id: settingsIcon
+            anchors.verticalCenter: parent.verticalCenter
+            source: icon
+            height: styler.themeItemSizeLarge
+            width: height
+        }
+        LabelPL {
+            id: settingsName
+            anchors.verticalCenter: settingsIcon.verticalCenter
+            anchors.left: settingsIcon.right
+            anchors.leftMargin: 20
+            text: name
         }
 
-        model: settingsPages
-
-        delegate: ListItem {
-
-            visible: checkFeature()
-            contentHeight: visible ? Theme.itemSizeMedium : 0
-
-            Icon {
-                id: settingsIcon
-                anchors.verticalCenter: parent.verticalCenter
-                source: icon
-                height: Theme.iconSizeMedium
-                width: Theme.iconSizeMedium
+        onClicked: {
+            if(name === qsTr("Weather")) {
+                var dlg = pageStack.push(Qt.resolvedUrl(url))
+                dlg.cityManager = cityManager;
             }
-            Label {
-                id: settingsName
-                anchors.verticalCenter: settingsIcon.verticalCenter
-                anchors.left: settingsIcon.right
-                anchors.leftMargin: 20
-                text: name
+            else if (name === qsTr("Donate")) {
+                Qt.openUrlExternally("https://paypal.me/piggz")
             }
-
-            onClicked: {
-                if(name === qsTr("Weather")) {
-                    var dlg = pageStack.push(Qt.resolvedUrl(url))
-                    dlg.cityManager = cityManager;
-                }
-                else if (name === qsTr("Donate")) {
-                    Qt.openUrlExternally("https://paypal.me/piggz")
-                }
-                else {
-                    pageStack.push(Qt.resolvedUrl(url))
-                }
+            else {
+                pageStack.push(Qt.resolvedUrl(url))
             }
+        }
 
-            function checkFeature() {
-                if(name === qsTr("Alarms")) {
-                    return supportsFeature(DaemonInterface.FEATURE_WEATHER)
-                }
-                else if (name === qsTr("Weather")) {
-                    return supportsFeature(DaemonInterface.FEATURE_ALARMS)
-                }
-                else {
-                    return true
-                }
+        function checkFeature() {
+            if(name === qsTr("Alarms")) {
+                return supportsFeature(DaemonInterface.FEATURE_WEATHER)
+            }
+            else if (name === qsTr("Weather")) {
+                return supportsFeature(DaemonInterface.FEATURE_ALARMS)
+            }
+            else {
+                return true
             }
         }
     }
+
 
     ListModel {
         id: settingsPages
