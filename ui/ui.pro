@@ -13,6 +13,7 @@
 TARGET = harbour-amazfish-ui
 
 CONFIG += sailfishapp
+CONFIG-=qtquickcompiler
 
 QT +=  positioning KDb3 bluetooth quick
 LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish
@@ -40,6 +41,7 @@ SOURCES += src/harbour-amazfish-ui.cpp \
 DISTFILES += qml/harbour-amazfish.qml \
     qml/components/DeviceButton.qml \
     qml/components/PercentCircle.qml \
+    qml/components/TruncationModes.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
     qml/pages/HeartratePage.qml \

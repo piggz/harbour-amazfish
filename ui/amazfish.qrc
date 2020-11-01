@@ -41,7 +41,6 @@
         <file alias="qml/components/platform/TimePickerDialogPL.qml">qml/components/platform.kirigami/TimePickerDialogPL.qml</file>
         <file alias="qml/components/platform/ToolItemPL.qml">qml/components/platform.kirigami/ToolItemPL.qml</file>
         <file alias="qml/components/platform/ValueButtonPL.qml">qml/components/platform.kirigami/ValueButtonPL.qml</file>
-
         <file>qml/components/Alarm.qml</file>
         <file>qml/components/Axis.qml</file>
         <file>qml/components/DeviceButton.qml</file>
@@ -117,5 +116,6 @@
         <file>qml/pics/weather-storm.png</file>
         <file>qml/tools/JSTools.js</file>
         <file>qml/harbour-amazfish.qml</file>
+        <file>qml/components/TruncationModes.qml</file>
     </qresource>
 </RCC>
