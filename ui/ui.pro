@@ -135,4 +135,5 @@ HEADERS += \
     src/timeformatter.h \
     src/trackloader.h
 
-
+RESOURCES += \
+    amazfish.qrc

@@ -27,6 +27,8 @@ int main(int argc, char *argv[])
     QGuiApplication *app;
 #ifdef MER_EDITION_SAILFISH
     app = SailfishApp::application(argc, argv);
+#else
+    app = new QGuiApplication(argc, argv);
 #endif
 
     QCoreApplication::setOrganizationName("harbour-amazfish");
@@ -50,6 +52,8 @@ int main(int argc, char *argv[])
 
 #ifdef MER_EDITION_SAILFISH
     view = SailfishApp::createView();
+#else
+    view = new QQuickView();
 #endif
     view->rootContext()->setContextProperty("DaemonInterfaceInstance", &daemonInterface);
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
@@ -57,6 +61,8 @@ int main(int argc, char *argv[])
 
 #ifdef MER_EDITION_SAILFISH
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));
+#else
+    view->setSource(QUrl("qrc:/qml/harbour-amazfish.qml"));
 #endif
     view->show();
 
