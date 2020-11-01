@@ -1,12 +1,13 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
 import "pages"
-import Nemo.Notifications 1.0
+//import Nemo.Notifications 1.0
 import org.SfietKonstantin.weatherfish 1.0
-import org.nemomobile.dbus 2.0
+//import org.nemomobile.dbus 2.0
 import uk.co.piggz.amazfish 1.0
+import "./components/"
+import "./components/platform"
 
-ApplicationWindow
+ApplicationWindowPL
 {
     id: app
     initialPage: Component { FirstPage { } }
