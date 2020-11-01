@@ -1,6 +1,5 @@
 import QtQuick 2.3
 import QtGraphicalEffects 1.0
-import Sailfish.Silica 1.0
 
 Rectangle {
 
@@ -19,7 +18,7 @@ Rectangle {
         anchors.fill: parent
         radius: Math.max(width, height) / 2
         color: "transparent"
-        border.color: Theme.secondaryColor
+        border.color: styler.themeSecondaryColor
         border.width: width * widthRatio
     }
 
@@ -31,7 +30,7 @@ Rectangle {
         anchors.margins: (outerRing.border.width - border.width) / 2
         radius: outerRing.radius
         color: "transparent"
-        border.color: Theme.secondaryColor
+        border.color: styler.themeSecondaryColor
         border.width: width * (widthRatio * 0.6)
 
         ConicalGradient
@@ -40,8 +39,8 @@ Rectangle {
             anchors.fill: parent
             gradient: Gradient
             {
-                GradientStop { position: 0.00; color: Theme.highlightDimmerColor }
-                GradientStop { position: percent; color: Theme.highlightDimmerColor }
+                GradientStop { position: 0.00; color: styler.themeSecondaryHighlightColor }
+                GradientStop { position: percent; color: styler.themeSecondaryHighlightColor }
                 GradientStop { position: percent + 0.01; color: "transparent" }
                 GradientStop { position: 1.00; color: "transparent" }
             }

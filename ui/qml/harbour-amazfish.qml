@@ -2,7 +2,7 @@ import QtQuick 2.0
 import "pages"
 //import Nemo.Notifications 1.0
 import org.SfietKonstantin.weatherfish 1.0
-//import org.nemomobile.dbus 2.0
+import Nemo.DBus 2.0
 import uk.co.piggz.amazfish 1.0
 import "./components/"
 import "./components/platform"
@@ -11,29 +11,30 @@ ApplicationWindowPL
 {
     id: app
     initialPage: Component { FirstPage { } }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
-    allowedOrientations: defaultAllowedOrientations
+    //cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    //allowedOrientations: defaultAllowedOrientations
 
     property int _lastNotificationId: 0
     property bool serviceActiveState: false
     property bool serviceEnabledState: false
     property int supportedFeatures: 0
 
-    onStateChanged: {
-        console.log("State: " + state);
+    StylerPL {
+        id: styler
     }
+    TruncationModes { id: truncModes }
 
-    Notification {
-        id: notification
-        expireTimeout: 5000
-    }
+//    Notification {
+//        id: notification
+//        expireTimeout: 5000
+//    }
 
     function showMessage(msg)
     {
-        notification.replacesId = _lastNotificationId
-        notification.previewBody = msg
-        notification.publish()
-        _lastNotificationId = notification.replacesId
+//        notification.replacesId = _lastNotificationId
+//        notification.previewBody = msg
+//        notification.publish()
+//        _lastNotificationId = notification.replacesId
     }
 
     function supportsFeature(feature) {
@@ -41,8 +42,7 @@ ApplicationWindowPL
         return (supportedFeatures & feature) === feature;
     }
 
-    BusyIndicator {
-        size: BusyIndicatorSize.Large
+    BusyIndicatorPL {
         anchors.centerIn: parent
         visible: DaemonInterfaceInstance.operationRunning
         running: DaemonInterfaceInstance.operationRunning

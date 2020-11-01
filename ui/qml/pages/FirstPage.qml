@@ -1,16 +1,17 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
 import org.SfietKonstantin.weatherfish 1.0
 import uk.co.piggz.amazfish 1.0
 import "../components/"
+import "../components/platform"
 
-Page {
+PagePL {
     id: page
+    title: "Amazfish"
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
-    allowedOrientations: Orientation.Portrait
+    //allowedOrientations: Orientation.Portrait
 
-    property var day: new Date()
+    //property var day: new Date()
 
     readonly property string _connectionState: DaemonInterfaceInstance.connectionState
     readonly property bool _disconnected: _connectionState === "disconnected"
@@ -36,18 +37,18 @@ Page {
 
     on_AuthenticatedChanged: _refreshInformation()
     
-    onStatusChanged: {
-        if (status === PageStatus.Active) {
-            pageStack.pushAttached(Qt.resolvedUrl("StepsPage.qml"))
-        }
-    }
+    //onStatusChanged: {
+    //    if (status === PageStatus.Active) {
+    //        pageStack.pushAttached(Qt.resolvedUrl("StepsPage.qml"))
+    //    }
+    //}
     // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
-        anchors.fill: parent
+   // SilicaFlickable {
+   //     anchors.fill: parent
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-        PullDownMenu {
-            MenuItem {
+        pageMenu: PageMenuPL {
+            PageMenuItemPL {
                 text: qsTr("Pair with watch")
                 onClicked: {
                     var page = AmazfishConfig.pairedAddress
@@ -56,19 +57,19 @@ Page {
                     pageStack.push(Qt.resolvedUrl(page))
                 }
             }
-            MenuItem {
+            PageMenuItemPL {
                 text: qsTr("Download File")
                 onClicked: pageStack.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
             }
-            MenuItem {
+            PageMenuItemPL {
                 text: qsTr("Settings")
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
             }
-            MenuItem {
+            PageMenuItemPL {
                 text: qsTr("Data Graphs")
                 onClicked: pageStack.push(Qt.resolvedUrl("AnalysisPage.qml"))
             }
-            MenuItem {
+            PageMenuItemPL {
                 visible: AmazfishConfig.pairedAddress
                 enabled: !_connecting
                 text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
@@ -83,25 +84,21 @@ Page {
         }
 
         // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
+       // contentHeight: column.height
 
         // Place our content in a Column.  The PageHeader is always placed at the top
         // of the page, followed by our content.
         Column {
             id: column
-            x: Theme.horizontalPageMargin
-            width: page.width - 2*Theme.horizontalPageMargin
-            spacing: Theme.paddingLarge
-
-            PageHeader {
-                title: qsTr("Amazfish")
-            }
+            x: styler.themeHorizontalPageMargin
+            width: page.width - 2*styler.themeHorizontalPageMargin
+            spacing: styler.themePaddingLarge
 
             Item {
-                height: Theme.itemSizeMedium
+                height: styler.itemSizeMedium
                 width: parent.width
 
-                Label {
+                LabelPL {
                     id: pairedNameLabel
                     anchors.verticalCenter: parent.verticalCenter
                     width: {
@@ -109,19 +106,19 @@ Page {
                         return dif < 0 ? implicitWidth + dif : implicitWidth;
                     }
                     text: AmazfishConfig.pairedName
-                    color: Theme.secondaryHighlightColor
-                    font.pixelSize: Theme.fontSizeLarge
-                    truncationMode: TruncationMode.Fade
+                    color: styler.themeSecondaryHighlightColor
+                    font.pixelSize: styler.themeFontSizeLarge
+                    truncMode: truncModes.fade
                 }
 
                 Row {
                     id: statusRow
                     anchors {
                         left: pairedNameLabel.right
-                        leftMargin: Theme.paddingMedium
+                        leftMargin: styler.themePaddingMedium
                         verticalCenter: parent.verticalCenter
                     }
-                    spacing: Theme.paddingSmall
+                    spacing: styler.themePaddingSmall
 
                     Image {
                         source: "image://theme/icon-m-bluetooth-device"
@@ -139,32 +136,29 @@ Page {
                         visible: _authenticated
                     }
 
-                    Label {
+                    LabelPL {
                         id: btryPercent
                         anchors.verticalCenter: parent.verticalCenter
                         visible: _authenticated
-                        font.pixelSize: Theme.fontSizeMedium
+                        font.pixelSize: styler.themeFontSizeMedium
                     }
 
-                    BusyIndicator {
-                        size: BusyIndicatorSize.Medium
+                    BusyIndicatorPL {
                         visible: _connecting || _connected
                         running: visible
                     }
                 }
             }
 
-            Separator {
+            SectionHeaderPL {
                 width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
             }
 
             // steps
             Image {
                 id: imgSteps
                 source: "../pics/icon-m-steps.png"
-                height: Theme.iconSizeMedium
+                height: styler.themeIconSizeMedium
                 width: height
             }
 
@@ -172,76 +166,74 @@ Page {
                 id: stpsCircle
 
                 anchors.horizontalCenter: parent.horizontalCenter
-                size: parent.width - Theme.horizontalPageMargin * 4
+                size: parent.width - styler.horizontalPageMargin * 4
                 percent: _steps ? _steps / AmazfishConfig.profileFitnessGoal : 0.06
                 widthRatio: 0.08
 
                 Item {
                     anchors.centerIn: parent
-                    height: lblSteps.height + lblGoal.height + Theme.paddingSmall
+                    height: lblSteps.height + lblGoal.height + styler.paddingSmall
                     width: Math.max(lblSteps.width, lblGoal.width)
 
-                    Label {
+                    LabelPL {
                         id: lblSteps
                         anchors.horizontalCenter: parent.horizontalCenter
-                        color: Theme.highlightColor
-                        font.pixelSize: Theme.fontSizeExtraLarge
+                        color: styler.themeHighlightColor
+                        font.pixelSize: styler.themeFontSizeExtraLarge
                         verticalAlignment: Text.AlignVCenter
                         text: _steps.toLocaleString()
                     }
 
-                    Label {
+                    LabelPL {
                         id: lblGoal
                         anchors {
                             horizontalCenter: parent.horizontalCenter
                             top: lblSteps.bottom
-                            topMargin: Theme.paddingSmall
+                            topMargin: styler.themePaddingSmall
                         }
-                        color: Theme.secondaryHighlightColor
-                        font.pixelSize: Theme.fontSizeLarge
+                        color: styler.themeSecondaryHighlightColor
+                        font.pixelSize: styler.themeFontSizeLarge
                         verticalAlignment: Text.AlignVCenter
                         text: AmazfishConfig.profileFitnessGoal.toLocaleString()
                     }
                 }
             }
 
-            Separator {
+            SectionHeaderPL {
                 width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
             }
 
             //Heartrate
             Row {
-                spacing: Theme.paddingLarge
+                spacing: styler.themePaddingLarge
                 width: parent.width
                 visible: supportsFeature(DaemonInterface.FEATURE_HRM)
 
                 Image {
                     id: imgHeartrate
                     source: "../pics/icon-m-heartrate.png"
-                    width: Theme.iconSizeMedium
+                    width: styler.themeIconSizeMedium
                     height: width
                 }
-                Label {
+                LabelPL {
                     id: lblHeartrate
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeLarge
-                    height: Theme.iconSizeMedium
+                    color: styler.themePrimaryColor
+                    font.pixelSize: styler.themeFontSizeLarge
+                    height: styler.iconSizeMedium
                     verticalAlignment: Text.AlignVCenter
-                    width: parent.width - imgHeartrate.width - btnHR.width - 2* Theme.paddingLarge
+                    width: parent.width - imgHeartrate.width - btnHR.width - 2* styler.paddingLarge
                 }
 
-                IconButton {
+                IconButtonPL {
                     id: btnHR
-                    icon.source: "image://theme/icon-m-refresh"
+                    iconSource: "image://styler/icon-m-refresh"
                     onClicked: {
                         DaemonInterfaceInstance.requestManualHeartrate();
                     }
                 }
             }
 
-            Button {
+            ButtonPL {
                 text: qsTr("Start Service")
                 visible: serviceActiveState == false
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -250,7 +242,7 @@ Page {
                 }
             }
 
-            Button {
+            ButtonPL {
                 text: qsTr("Enable Service")
                 visible: serviceEnabledState == false
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -260,7 +252,7 @@ Page {
                 }
             }
         }
-    }
+    //}
 
     Timer {
         id: tmrStartup
