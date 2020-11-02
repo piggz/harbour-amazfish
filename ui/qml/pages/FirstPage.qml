@@ -110,15 +110,24 @@ PagePL {
                     verticalCenter: parent.verticalCenter
                 }
                 spacing: styler.themePaddingSmall
+                height: parent.height
 
                 Image {
                     source: "image://theme/icon-m-bluetooth-device"
                     visible: _connected || _authenticated
+                    BusyIndicatorSmallPL {
+                        visible: _connecting
+                        running: visible
+                    }
                 }
 
                 Image {
                     source: "image://theme/icon-m-watch"
                     visible: _authenticated
+                    BusyIndicatorSmallPL {
+                        visible: _connected
+                        running: visible
+                    }
                 }
 
                 Image {
@@ -132,11 +141,6 @@ PagePL {
                     anchors.verticalCenter: parent.verticalCenter
                     visible: _authenticated
                     font.pixelSize: styler.themeFontSizeMedium
-                }
-
-                BusyIndicatorPL {
-                    visible: _connecting || _connected
-                    running: visible
                 }
             }
         }

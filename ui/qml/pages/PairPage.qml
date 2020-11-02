@@ -10,6 +10,9 @@ PageListPL {
     //backNavigation: !DaemonInterfaceInstance.pairing
     title: qsTr("Pair Device")
 
+    placeholderText: _placeholderText || qsTr("No devices found")
+    placeholderEnabled: discoveryModel.rowCount() > 0
+
     property string deviceType
     property string _placeholderText
 
@@ -21,7 +24,7 @@ PageListPL {
                 // Set values from the signal
                 AmazfishConfig.pairedAddress = address
                 AmazfishConfig.pairedName = name
-                pageStack.pop(previousPage(previousPage()))
+                app.clearPages();
             } else {
                 _placeholderText = error
             }
@@ -133,14 +136,7 @@ PageListPL {
 
     BusyIndicatorPL {
         id: busyIndicator
-        anchors.centerIn: parent
         running: (discoveryModel.running && !page.count) || DaemonInterfaceInstance.pairing
     }
-
-    //ViewPlaceholder {
-    //    enabled: !busyIndicator.running && !page.count
-    //    text: _placeholderText || qsTr("No devices found")
-    //    hintText: qsTr("Pull down to scan for devices")
-    //}
 }
 
