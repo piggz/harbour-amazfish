@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
 #endif
 
     QCoreApplication::setOrganizationName("harbour-amazfish");
+    QCoreApplication::setOrganizationDomain("piggz.co.uk");
     QCoreApplication::setApplicationName("harbour-amazfish");
     SportsDataModel sportsDataModel;
     SportsMetaModel sportsMetaModel;
