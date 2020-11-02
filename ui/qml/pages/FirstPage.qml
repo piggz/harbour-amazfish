@@ -245,35 +245,35 @@ PagePL {
                 systemdManager.enableService();
             }
         }
-    }
 
-    Timer {
-        id: tmrStartup
-        running: true
-        repeat: false
-        interval: 200
-        onTriggered: {
-            if (!AmazfishConfig.profileName) {
-                pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
+        Timer {
+            id: tmrStartup
+            running: true
+            repeat: false
+            interval: 200
+            onTriggered: {
+                if (!AmazfishConfig.profileName) {
+                    pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
+                }
             }
         }
-    }
 
-    Connections {
-        target: DaemonInterfaceInstance
-        onInformationChanged: {
-            console.log("Information changed", infoKey, infoValue);
+        Connections {
+            target: DaemonInterfaceInstance
+            onInformationChanged: {
+                console.log("Information changed", infoKey, infoValue);
 
-            switch (infoKey) {
-            case DaemonInterface.INFO_BATTERY:
-                btryPercent.text = qsTr("%1%").arg(infoValue)
-                break;
-            case DaemonInterface.INFO_HEARTRATE:
-                lblHeartrate.text = qsTr("%1 bpm").arg(infoValue)
-                break;
-            case DaemonInterface.INFO_STEPS:
-                _steps = parseInt(infoValue);
-                break;
+                switch (infoKey) {
+                case DaemonInterface.INFO_BATTERY:
+                    btryPercent.text = qsTr("%1%").arg(infoValue)
+                    break;
+                case DaemonInterface.INFO_HEARTRATE:
+                    lblHeartrate.text = qsTr("%1 bpm").arg(infoValue)
+                    break;
+                case DaemonInterface.INFO_STEPS:
+                    _steps = parseInt(infoValue);
+                    break;
+                }
             }
         }
     }

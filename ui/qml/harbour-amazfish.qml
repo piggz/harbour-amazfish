@@ -24,17 +24,17 @@ ApplicationWindowPL
     }
     TruncationModes { id: truncModes }
 
-//    Notification {
-//        id: notification
-//        expireTimeout: 5000
-//    }
+    //    Notification {
+    //        id: notification
+    //        expireTimeout: 5000
+    //    }
 
     function showMessage(msg)
     {
-//        notification.replacesId = _lastNotificationId
-//        notification.previewBody = msg
-//        notification.publish()
-//        _lastNotificationId = notification.replacesId
+        //        notification.replacesId = _lastNotificationId
+        //        notification.previewBody = msg
+        //        notification.publish()
+        //        _lastNotificationId = notification.replacesId
     }
 
     function supportsFeature(feature) {
@@ -49,7 +49,7 @@ ApplicationWindowPL
     }
 
     CityManager {
-            id: cityManager
+        id: cityManager
     }
     
     Connections {
@@ -127,5 +127,16 @@ ApplicationWindowPL
 
     onSupportedFeaturesChanged: {
         console.log("Supported features:", supportedFeatures);
+    }
+
+    function tr(message) {
+        return qsTr(message);
+        // Return translated message.
+        // In addition to the message, string formatting arguments can be passed
+        // as well as short-hand for message.arg(arg1).arg(arg2)...
+        //message = qsTranslate("", message);
+        //for (var i = 1; i < arguments.length; i++)
+        //    message = message.arg(arguments[i]);
+        //return message;
     }
 }

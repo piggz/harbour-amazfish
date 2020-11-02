@@ -27,7 +27,7 @@ Rectangle {
         id: innerRing
         z: 1
         anchors.fill: parent
-        anchors.margins: (outerRing.border.width - border.width) / 2
+        //anchors.margins: (outerRing.border.width - border.width) / 2
         radius: outerRing.radius
         color: "transparent"
         border.color: styler.themeSecondaryColor
