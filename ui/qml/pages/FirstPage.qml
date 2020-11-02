@@ -42,217 +42,207 @@ PagePL {
     //        pageStack.pushAttached(Qt.resolvedUrl("StepsPage.qml"))
     //    }
     //}
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-   // SilicaFlickable {
-   //     anchors.fill: parent
 
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-        pageMenu: PageMenuPL {
-            PageMenuItemPL {
-                text: qsTr("Pair with watch")
-                onClicked: {
-                    var page = AmazfishConfig.pairedAddress
+    pageMenu: PageMenuPL {
+        PageMenuItemPL {
+            text: qsTr("Pair with watch")
+            onClicked: {
+                var page = AmazfishConfig.pairedAddress
                         ? "UnpairDeviceDialog.qml"
                         : "PairSelectDeviceType.qml"
-                    pageStack.push(Qt.resolvedUrl(page))
-                }
+                pageStack.push(Qt.resolvedUrl(page))
             }
-            PageMenuItemPL {
-                text: qsTr("Download File")
-                onClicked: pageStack.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
-            }
-            PageMenuItemPL {
-                text: qsTr("Settings")
-                onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
-            }
-            PageMenuItemPL {
-                text: qsTr("Data Graphs")
-                onClicked: pageStack.push(Qt.resolvedUrl("AnalysisPage.qml"))
-            }
-            PageMenuItemPL {
-                visible: AmazfishConfig.pairedAddress
-                enabled: !_connecting
-                text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
-                onClicked: {
-                    if (_disconnected) {
-                        DaemonInterfaceInstance.connectToDevice(AmazfishConfig.pairedAddress);
-                    } else {
-                        DaemonInterfaceInstance.disconnect();
-                    }
+        }
+        PageMenuItemPL {
+            text: qsTr("Download File")
+            onClicked: pageStack.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
+        }
+        PageMenuItemPL {
+            text: qsTr("Settings")
+            onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
+        }
+        PageMenuItemPL {
+            text: qsTr("Data Graphs")
+            onClicked: pageStack.push(Qt.resolvedUrl("AnalysisPage.qml"))
+        }
+        PageMenuItemPL {
+            visible: AmazfishConfig.pairedAddress
+            enabled: !_connecting
+            text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
+            onClicked: {
+                if (_disconnected) {
+                    DaemonInterfaceInstance.connectToDevice(AmazfishConfig.pairedAddress);
+                } else {
+                    DaemonInterfaceInstance.disconnect();
                 }
             }
         }
+    }
 
-        // Tell SilicaFlickable the height of its content.
-       // contentHeight: column.height
+    Column {
+        id: column
+        x: styler.themeHorizontalPageMargin
+        width: page.width - 2*styler.themeHorizontalPageMargin
+        spacing: styler.themePaddingLarge
 
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-            x: styler.themeHorizontalPageMargin
-            width: page.width - 2*styler.themeHorizontalPageMargin
-            spacing: styler.themePaddingLarge
+        Item {
+            height: styler.itemSizeMedium
+            width: parent.width
 
-            Item {
-                height: styler.itemSizeMedium
-                width: parent.width
-
-                LabelPL {
-                    id: pairedNameLabel
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: {
-                        var dif = column.width - parent.width;
-                        return dif < 0 ? implicitWidth + dif : implicitWidth;
-                    }
-                    text: AmazfishConfig.pairedName
-                    color: styler.themeSecondaryHighlightColor
-                    font.pixelSize: styler.themeFontSizeLarge
-                    truncMode: truncModes.fade
+            LabelPL {
+                id: pairedNameLabel
+                anchors.verticalCenter: parent.verticalCenter
+                width: {
+                    var dif = column.width - parent.width;
+                    return dif < 0 ? implicitWidth + dif : implicitWidth;
                 }
-
-                Row {
-                    id: statusRow
-                    anchors {
-                        left: pairedNameLabel.right
-                        leftMargin: styler.themePaddingMedium
-                        verticalCenter: parent.verticalCenter
-                    }
-                    spacing: styler.themePaddingSmall
-
-                    Image {
-                        source: "image://theme/icon-m-bluetooth-device"
-                        visible: _connected || _authenticated
-                    }
-
-                    Image {
-                        source: "image://theme/icon-m-watch"
-                        visible: _authenticated
-                    }
-
-                    Image {
-                        id: btryImage
-                        source: "image://theme/icon-m-battery"
-                        visible: _authenticated
-                    }
-
-                    LabelPL {
-                        id: btryPercent
-                        anchors.verticalCenter: parent.verticalCenter
-                        visible: _authenticated
-                        font.pixelSize: styler.themeFontSizeMedium
-                    }
-
-                    BusyIndicatorPL {
-                        visible: _connecting || _connected
-                        running: visible
-                    }
-                }
+                text: AmazfishConfig.pairedName
+                color: styler.themeSecondaryHighlightColor
+                font.pixelSize: styler.themeFontSizeLarge
+                truncMode: truncModes.fade
             }
 
-            SectionHeaderPL {
-                width: parent.width
-            }
-
-            // steps
-            Image {
-                id: imgSteps
-                source: "../pics/icon-m-steps.png"
-                height: styler.themeIconSizeMedium
-                width: height
-            }
-
-            PercentCircle {
-                id: stpsCircle
-
-                anchors.horizontalCenter: parent.horizontalCenter
-                size: parent.width - styler.horizontalPageMargin * 4
-                percent: _steps ? _steps / AmazfishConfig.profileFitnessGoal : 0.06
-                widthRatio: 0.08
-
-                Item {
-                    anchors.centerIn: parent
-                    height: lblSteps.height + lblGoal.height + styler.paddingSmall
-                    width: Math.max(lblSteps.width, lblGoal.width)
-
-                    LabelPL {
-                        id: lblSteps
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        color: styler.themeHighlightColor
-                        font.pixelSize: styler.themeFontSizeExtraLarge
-                        verticalAlignment: Text.AlignVCenter
-                        text: _steps.toLocaleString()
-                    }
-
-                    LabelPL {
-                        id: lblGoal
-                        anchors {
-                            horizontalCenter: parent.horizontalCenter
-                            top: lblSteps.bottom
-                            topMargin: styler.themePaddingSmall
-                        }
-                        color: styler.themeSecondaryHighlightColor
-                        font.pixelSize: styler.themeFontSizeLarge
-                        verticalAlignment: Text.AlignVCenter
-                        text: AmazfishConfig.profileFitnessGoal.toLocaleString()
-                    }
-                }
-            }
-
-            SectionHeaderPL {
-                width: parent.width
-            }
-
-            //Heartrate
             Row {
-                spacing: styler.themePaddingLarge
-                width: parent.width
-                visible: supportsFeature(DaemonInterface.FEATURE_HRM)
+                id: statusRow
+                anchors {
+                    left: pairedNameLabel.right
+                    leftMargin: styler.themePaddingMedium
+                    verticalCenter: parent.verticalCenter
+                }
+                spacing: styler.themePaddingSmall
 
                 Image {
-                    id: imgHeartrate
-                    source: "../pics/icon-m-heartrate.png"
-                    width: styler.themeIconSizeMedium
-                    height: width
+                    source: "image://theme/icon-m-bluetooth-device"
+                    visible: _connected || _authenticated
                 }
+
+                Image {
+                    source: "image://theme/icon-m-watch"
+                    visible: _authenticated
+                }
+
+                Image {
+                    id: btryImage
+                    source: "image://theme/icon-m-battery"
+                    visible: _authenticated
+                }
+
                 LabelPL {
-                    id: lblHeartrate
-                    color: styler.themePrimaryColor
-                    font.pixelSize: styler.themeFontSizeLarge
-                    height: styler.iconSizeMedium
-                    verticalAlignment: Text.AlignVCenter
-                    width: parent.width - imgHeartrate.width - btnHR.width - 2* styler.paddingLarge
+                    id: btryPercent
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: _authenticated
+                    font.pixelSize: styler.themeFontSizeMedium
                 }
 
-                IconButtonPL {
-                    id: btnHR
-                    iconSource: "image://styler/icon-m-refresh"
-                    onClicked: {
-                        DaemonInterfaceInstance.requestManualHeartrate();
-                    }
-                }
-            }
-
-            ButtonPL {
-                text: qsTr("Start Service")
-                visible: serviceActiveState == false
-                anchors.horizontalCenter: parent.horizontalCenter
-                onClicked: {
-                    systemdServiceIface.call("Start", ["replace"])
-                }
-            }
-
-            ButtonPL {
-                text: qsTr("Enable Service")
-                visible: serviceEnabledState == false
-                anchors.horizontalCenter: parent.horizontalCenter
-
-                onClicked: {
-                    systemdManager.enableService();
+                BusyIndicatorPL {
+                    visible: _connecting || _connected
+                    running: visible
                 }
             }
         }
-    //}
+
+        SectionHeaderPL {
+            width: parent.width
+        }
+
+        // steps
+        Image {
+            id: imgSteps
+            source: "../pics/icon-m-steps.png"
+            height: styler.themeIconSizeMedium
+            width: height
+        }
+
+        PercentCircle {
+            id: stpsCircle
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            size: parent.width - styler.horizontalPageMargin * 4
+            percent: _steps ? _steps / AmazfishConfig.profileFitnessGoal : 0.06
+            widthRatio: 0.08
+
+            Item {
+                anchors.centerIn: parent
+                height: lblSteps.height + lblGoal.height + styler.paddingSmall
+                width: Math.max(lblSteps.width, lblGoal.width)
+
+                LabelPL {
+                    id: lblSteps
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: styler.themeHighlightColor
+                    font.pixelSize: styler.themeFontSizeExtraLarge
+                    verticalAlignment: Text.AlignVCenter
+                    text: _steps.toLocaleString()
+                }
+
+                LabelPL {
+                    id: lblGoal
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: lblSteps.bottom
+                        topMargin: styler.themePaddingSmall
+                    }
+                    color: styler.themeSecondaryHighlightColor
+                    font.pixelSize: styler.themeFontSizeLarge
+                    verticalAlignment: Text.AlignVCenter
+                    text: AmazfishConfig.profileFitnessGoal.toLocaleString()
+                }
+            }
+        }
+
+        SectionHeaderPL {
+            width: parent.width
+        }
+
+        //Heartrate
+        Row {
+            spacing: styler.themePaddingLarge
+            width: parent.width
+            visible: supportsFeature(DaemonInterface.FEATURE_HRM)
+
+            Image {
+                id: imgHeartrate
+                source: "../pics/icon-m-heartrate.png"
+                width: styler.themeIconSizeMedium
+                height: width
+            }
+            LabelPL {
+                id: lblHeartrate
+                color: styler.themePrimaryColor
+                font.pixelSize: styler.themeFontSizeLarge
+                height: styler.iconSizeMedium
+                verticalAlignment: Text.AlignVCenter
+                width: parent.width - imgHeartrate.width - btnHR.width - 2* styler.paddingLarge
+            }
+
+            IconButtonPL {
+                id: btnHR
+                iconSource: "image://styler/icon-m-refresh"
+                onClicked: {
+                    DaemonInterfaceInstance.requestManualHeartrate();
+                }
+            }
+        }
+
+        ButtonPL {
+            text: qsTr("Start Service")
+            visible: serviceActiveState == false
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                systemdServiceIface.call("Start", ["replace"])
+            }
+        }
+
+        ButtonPL {
+            text: qsTr("Enable Service")
+            visible: serviceEnabledState == false
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            onClicked: {
+                systemdManager.enableService();
+            }
+        }
+    }
 
     Timer {
         id: tmrStartup
