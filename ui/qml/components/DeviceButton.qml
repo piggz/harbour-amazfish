@@ -5,18 +5,10 @@ import "../components/platform"
 ListItemPL {
     id: item
     contentHeight: styler.themeItemSizeLarge
+    signal selected(bool needsAuth, string deviceType)
 
     onClicked: {
-        var props = {deviceType: model.deviceType}
-
-        if (model.auth) {
-            pageStack.push(Qt.resolvedUrl("../pages/AuthKeyDialog.qml"), {
-                               acceptDestination: Qt.resolvedUrl("../pages/PairPage.qml"),
-                               acceptDestinationProperties: props
-                           })
-        } else {
-            pageStack.push(Qt.resolvedUrl("../pages/PairPage.qml"), props)
-        }
+        selected(model.auth, model.deviceType);
     }
 
     Image {

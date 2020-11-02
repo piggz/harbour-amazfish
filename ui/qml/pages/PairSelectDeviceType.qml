@@ -7,7 +7,19 @@ PageListPL {
 
     title: qsTr("Select Device Type")
 
-    delegate: DeviceButton {}
+    delegate: DeviceButton {
+        onSelected: {
+            if (needsAuth) {
+                var authdialog = pageStack.push(Qt.resolvedUrl("./AuthKeyDialog.qml"));
+                authdialog.accepted.connect(function() {
+                    var pairpage = pageStack.push(Qt.resolvedUrl("./PairPage.qml"));
+                    pairpage.deviceType = deviceType;})
+            } else {
+                var pairpage = pageStack.push(Qt.resolvedUrl("./PairPage.qml"));
+                pairpage.deviceType = deviceType;
+            }
+        }
+    }
 
     model: ListModel {
         ListElement {
