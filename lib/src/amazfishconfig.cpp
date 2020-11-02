@@ -31,14 +31,17 @@ QVariant AmazfishConfig::value(const QString &key, const QVariant &def) const
 {
 #ifdef MER_EDITION_SAILFISH
     return m_group->value(key, def);
+#else
+    return m_settings.value(key, def);
 #endif
-    return QVariant();
 }
 
 void AmazfishConfig::setValue(const QString &key, const QVariant &value)
 {
 #ifdef MER_EDITION_SAILFISH
     m_group->setValue(key, value);
+#else
+    m_settings.setValue(key, value);
 #endif
 }
 
@@ -46,9 +49,16 @@ void AmazfishConfig::setValue(const QString &key, const QVariant &value, signal_
 {
 #ifdef MER_EDITION_SAILFISH
     auto prev = m_group->value(key);
+#else
+    auto prev = m_settings.value(key);
+#endif
+
     if (value != prev) {
+#ifdef MER_EDITION_SAILFISH
         m_group->setValue(key, value);
+#else
+        m_settings.setValue(key, value);
+#endif
         emit std::bind(signal, this)();
     }
-#endif
 }

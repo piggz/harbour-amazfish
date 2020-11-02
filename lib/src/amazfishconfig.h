@@ -5,7 +5,11 @@
 #include <QVariant>
 #include <QDate>
 
+#ifdef MER_EDITION_SAILFISH
 class MDConfGroup;
+#else
+#include <QSettings>
+#endif
 class QQmlEngine;
 class QJSEngine;
 
@@ -168,6 +172,8 @@ private:
 
 #ifdef MER_EDITION_SAILFISH
     MDConfGroup *m_group;
+#else
+    QSettings m_settings;
 #endif
 };
 
