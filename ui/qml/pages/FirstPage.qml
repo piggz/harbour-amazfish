@@ -30,7 +30,7 @@ PagePL {
 
         DaemonInterfaceInstance.refreshInformation();
 
-        _steps = DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS);
+        _steps = parseInt(DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS));
     }
 
     on_ConnectionStateChanged: console.log(_connectionState)
@@ -81,12 +81,11 @@ PagePL {
 
     Column {
         id: column
-        x: styler.themeHorizontalPageMargin
-        width: page.width - 2*styler.themeHorizontalPageMargin
+        width: parent.width
         spacing: styler.themePaddingLarge
 
         Item {
-            height: styler.itemSizeMedium
+            height: styler.themeItemSizeSmall
             width: parent.width
 
             LabelPL {
@@ -161,7 +160,7 @@ PagePL {
             id: stpsCircle
 
             anchors.horizontalCenter: parent.horizontalCenter
-            size: parent.width - styler.horizontalPageMargin * 4
+            size: parent.width - styler.themeHorizontalPageMargin * 4
             percent: _steps ? _steps / AmazfishConfig.profileFitnessGoal : 0.06
             widthRatio: 0.08
 
@@ -273,7 +272,7 @@ PagePL {
                 lblHeartrate.text = qsTr("%1 bpm").arg(infoValue)
                 break;
             case DaemonInterface.INFO_STEPS:
-                _steps = infoValue
+                _steps = parseInt(infoValue);
                 break;
             }
         }
