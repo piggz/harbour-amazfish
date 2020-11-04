@@ -111,27 +111,32 @@ PagePL {
                 spacing: styler.themePaddingSmall
                 height: parent.height
 
-                Image {
-                    source: "image://theme/icon-m-bluetooth-device"
-                    visible: _connected || _authenticated
+                IconPL {
+                    iconName: "icon-m-bluetooth-device"
+                    iconHeight: styler.themeIconSizeMedium
+                    visible: _connected || _authenticated || _connecting
                     BusyIndicatorSmallPL {
+                        height: parent.height
                         visible: _connecting
                         running: visible
                     }
                 }
 
-                Image {
-                    source: "image://theme/icon-m-watch"
-                    visible: _authenticated
+                IconPL {
+                    iconName: "icon-m-watch"
+                    iconHeight: styler.themeIconSizeMedium
+                    visible: _authenticated || _connected
                     BusyIndicatorSmallPL {
+                        height: parent.height
                         visible: _connected
                         running: visible
                     }
                 }
 
-                Image {
+                IconPL {
                     id: btryImage
-                    source: "image://theme/icon-m-battery"
+                    iconName: "icon-m-battery"
+                    iconHeight: styler.themeIconSizeMedium
                     visible: _authenticated
                 }
 
@@ -149,9 +154,9 @@ PagePL {
         }
 
         // steps
-        Image {
+        IconPL {
             id: imgSteps
-            source: "../pics/icon-m-steps.png"
+            iconName: "icon-m-steps"
             height: styler.themeIconSizeMedium
             width: height
         }
@@ -203,9 +208,9 @@ PagePL {
             width: parent.width
             visible: supportsFeature(DaemonInterface.FEATURE_HRM)
 
-            Image {
+            IconPL {
                 id: imgHeartrate
-                source: "../pics/icon-m-heartrate.png"
+                iconName: "icon-m-heartrate"
                 width: styler.themeIconSizeMedium
                 height: width
             }
@@ -220,7 +225,7 @@ PagePL {
 
             IconButtonPL {
                 id: btnHR
-                iconSource: "image://styler/icon-m-refresh"
+                iconSource: "icon-m-refresh"
                 onClicked: {
                     DaemonInterfaceInstance.requestManualHeartrate();
                 }

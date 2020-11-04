@@ -36,6 +36,14 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setOrganizationDomain("piggz.co.uk");
     QCoreApplication::setApplicationName("harbour-amazfish");
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+    // add fallback icon path
+    QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << ":custom-icons");
+
+    qDebug() << QIcon::themeSearchPaths() << QIcon::fallbackSearchPaths();
+#endif
+
     SportsDataModel sportsDataModel;
     SportsMetaModel sportsMetaModel;
     DaemonInterface daemonInterface;

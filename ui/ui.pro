@@ -138,4 +138,5 @@ HEADERS += \
     src/trackloader.h
 
 RESOURCES += \
-    amazfish.qrc
+    amazfish.qrc \
+    icons.qrc

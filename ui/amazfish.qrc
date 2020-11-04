@@ -79,13 +79,6 @@
         <file>qml/pics/devices/miband3.png</file>
         <file>qml/pics/devices/miband4.png</file>
         <file>qml/pics/devices/pinetime.png</file>
-        <file>qml/pics/icon-m-biking.png</file>
-        <file>qml/pics/icon-m-heartrate.png</file>
-        <file>qml/pics/icon-m-running.png</file>
-        <file>qml/pics/icon-m-steps.png</file>
-        <file>qml/pics/icon-m-treadmill.png</file>
-        <file>qml/pics/icon-m-unknown.png</file>
-        <file>qml/pics/icon-m-walking.png</file>
         <file>qml/pics/map_btn_center.png</file>
         <file>qml/pics/map_btn_max.png</file>
         <file>qml/pics/map_btn_min.png</file>

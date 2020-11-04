@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>custom-icons/icon-m-battery.png</file>
+        <file>custom-icons/icon-m-biking.png</file>
+        <file>custom-icons/icon-m-bluetooth-device.png</file>
+        <file>custom-icons/icon-m-heartrate.png</file>
+        <file>custom-icons/icon-m-running.png</file>
+        <file>custom-icons/icon-m-steps.png</file>
+        <file>custom-icons/icon-m-treadmill.png</file>
+        <file>custom-icons/icon-m-unknown.png</file>
+        <file>custom-icons/icon-m-walking.png</file>
+        <file>custom-icons/icon-m-watch.png</file>
+    </qresource>
+</RCC>
