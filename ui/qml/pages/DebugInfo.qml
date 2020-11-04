@@ -12,13 +12,9 @@ PagePL {
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
-
-
             text: qsTr("Refresh")
             onClicked: {
                 DaemonInterfaceInstance.refreshInformation();
-                //DaemonInterfaceInstance.infoService().refreshInformation();
-                //DaemonInterfaceInstance.miBandService().requestGPSVersion();
             }
         }
     }
@@ -209,7 +205,6 @@ PagePL {
                 DaemonInterfaceInstance.enableFeature(DaemonInterface.FEATURE_MUSIC_CONTROL);
             }
         }
-
         Connections {
             target: DaemonInterfaceInstance
             onInformationChanged: {
@@ -238,6 +233,7 @@ PagePL {
                 }
             }
         }
+
     }
 
 

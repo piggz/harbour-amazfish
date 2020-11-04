@@ -11,7 +11,7 @@ PagePL {
     // of the page, followed by our content.
     Column {
         id: column
-        spacing: Theme.paddingLarge
+        spacing: styler.themePaddingLarge
 
         SectionHeaderPL {
             text: qsTr("Notifications")
@@ -84,8 +84,6 @@ PagePL {
         LabelPL {
             width: parent.width
             text: qsTr("Start/Stop the Amazfish Background Service")
-            color: Theme.highlightColor
-            font.pixelSize: Theme.fontSizeSmall
         }
 
         Row {
