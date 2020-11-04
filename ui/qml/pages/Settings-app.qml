@@ -1,150 +1,131 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
 import uk.co.piggz.amazfish 1.0
+import "../components"
+import "../components/platform"
 
-Page {
+PagePL {
     id: page
+    title: qsTr("Device Settings")
 
-    // The effective value will be restricted by ApplicationWindow.allowedOrientations
-    allowedOrientations: Orientation.Portrait
+    // Place our content in a Column.  The PageHeader is always placed at the top
+    // of the page, followed by our content.
+    Column {
+        id: column
+        spacing: Theme.paddingLarge
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
-        anchors.fill: parent
+        SectionHeaderPL {
+            text: qsTr("Notifications")
+        }
 
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
+        TextSwitchPL {
+            id: chkNotifyConnect
+            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
 
+            width: parent.width
+            text: qsTr("Notify on connect")
+        }
 
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
+        TextSwitchPL {
+            id: chkNotifyLowBattery
+            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
 
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-            x: Theme.horizontalPageMargin
-            width: page.width - 2*Theme.horizontalPageMargin
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: qsTr("Device Settings")
-            }
+            width: parent.width
+            text: qsTr("Low battery notification")
+        }
 
-            SectionHeader {
-                text: qsTr("Notifications")
-            }
+        SectionHeaderPL {
+            text: qsTr("Refresh rates")
+        }
 
-            TextSwitch {
-                id: chkNotifyConnect
-                visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
+        TextSwitchPL {
+            id: chkAutoSyncData
+            width: parent.width
+            text: qsTr("Sync activity data each hour")
+        }
 
-                width: parent.width
-                text: qsTr("Notify on connect")
-            }
+        SliderPL {
+            id: sldWeatherRefresh
+            visible: supportsFeature(DaemonInterface.FEATURE_WEATHER)
 
-            TextSwitch {
-                id: chkNotifyLowBattery
-                visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
+            width: parent.width
+            minimumValue: 15
+            maximumValue: 120
+            stepSize: 15
+            label: qsTr("Refresh weather every (") + value + qsTr(") minutes")
+        }
 
-                width: parent.width
-                text: qsTr("Low battery notification")
-            }
+        SliderPL {
+            id: sldCalendarRefresh
+            width: parent.width
+            minimumValue: 15
+            maximumValue: 240
+            stepSize: 15
+            label: qsTr("Refresh calendar every (") + value + qsTr(") minutes")
+            visible: supportsFeature(DaemonInterface.FEATURE_EVENT_REMINDER)
+        }
 
-            SectionHeader {
-                text: qsTr("Refresh rates")
-            }
+        SectionHeaderPL {
+            text: qsTr("Amazfish Service")
+        }
 
-            TextSwitch {
-                id: chkAutoSyncData
-                width: parent.width
-                text: qsTr("Sync activity data each hour")
-            }
-
-            Slider {
-                id: sldWeatherRefresh
-                visible: supportsFeature(DaemonInterface.FEATURE_WEATHER)
-
-                width: parent.width
-                minimumValue: 15
-                maximumValue: 120
-                stepSize: 15
-                label: qsTr("Refresh weather every (") + value + qsTr(") minutes")
-            }
-
-            Slider {
-                id: sldCalendarRefresh
-                width: parent.width
-                minimumValue: 15
-                maximumValue: 240
-                stepSize: 15
-                label: qsTr("Refresh calendar every (") + value + qsTr(") minutes")
-                visible: supportsFeature(DaemonInterface.FEATURE_EVENT_REMINDER)
-            }
-
-            SectionHeader {
-                text: "Amazfish Service"
-            }
-
-            TextSwitch {
-                id: chkServiceEnabled
-                checked: serviceEnabledState === false ? false : true
-                text: qsTr("Start service on boot")
-                onClicked: {
-                    if (serviceEnabledState) {
-                        systemdManager.disableService();
-                    } else {
-                        systemdManager.enableService();
-                    }
-                }
-            }
-
-            Label {
-                width: parent.width
-                text: qsTr("Start/Stop the Amazfish Background Service")
-                color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeSmall
-            }
-
-            Row {
-                id: serviceButtonRow
-
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width
-                spacing: 10
-
-                Button {
-                    id: start
-                    text: qsTr("Start")
-                    enabled: serviceActiveState ? false : true
-                    onClicked: {
-                        systemdServiceIface.call("Start", ["replace"])
-                    }
-                }
-
-                Button {
-                    id: stop
-                    text: qsTr("Stop")
-                    enabled: serviceActiveState ? true : false
-                    onClicked: {
-                        systemdServiceIface.call("Stop", ["replace"])
-                    }
-                }
-            }
-
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Save Settings")
-                onClicked: {
-                    saveSettings();
+        TextSwitchPL {
+            id: chkServiceEnabled
+            checked: serviceEnabledState === false ? false : true
+            text: qsTr("Start service on boot")
+            onChecked: {
+                if (serviceEnabledState) {
+                    systemdManager.disableService();
+                } else {
+                    systemdManager.enableService();
                 }
             }
         }
+
+        LabelPL {
+            width: parent.width
+            text: qsTr("Start/Stop the Amazfish Background Service")
+            color: Theme.highlightColor
+            font.pixelSize: Theme.fontSizeSmall
+        }
+
+        Row {
+            id: serviceButtonRow
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            spacing: 10
+
+            ButtonPL {
+                id: start
+                text: qsTr("Start")
+                enabled: serviceActiveState ? false : true
+                onClicked: {
+                    systemdServiceIface.call("Start", ["replace"])
+                }
+            }
+
+            ButtonPL {
+                id: stop
+                text: qsTr("Stop")
+                enabled: serviceActiveState ? true : false
+                onClicked: {
+                    systemdServiceIface.call("Stop", ["replace"])
+                }
+            }
+        }
+
+        SectionHeaderPL {
+        }
+
+        ButtonPL {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Save Settings")
+            onClicked: {
+                saveSettings();
+            }
+        }
     }
+
     Component.onCompleted: {
         chkNotifyConnect.checked = AmazfishConfig.appNotifyConnect;
         sldWeatherRefresh.value = AmazfishConfig.appRefreshWeather;
