@@ -72,7 +72,7 @@ PagePL {
             id: chkServiceEnabled
             checked: serviceEnabledState === false ? false : true
             text: qsTr("Start service on boot")
-            onChecked: {
+            onCheckedChanged: {
                 if (serviceEnabledState) {
                     systemdManager.disableService();
                 } else {
