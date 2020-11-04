@@ -10,5 +10,11 @@
         <file>custom-icons/icon-m-unknown.png</file>
         <file>custom-icons/icon-m-walking.png</file>
         <file>custom-icons/icon-m-watch.png</file>
+        <file>custom-icons/icon-m-contact.png</file>
+        <file>custom-icons/icon-m-diagnostic.png</file>
+        <file>custom-icons/icon-m-levels.png</file>
+        <file>custom-icons/icon-m-alarm.png</file>
+        <file>custom-icons/icon-m-weather-d212-light.png</file>
+        <file>custom-icons/icon-m-favorite-selected.png</file>
     </qresource>
 </RCC>

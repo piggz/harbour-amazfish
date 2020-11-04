@@ -19,7 +19,7 @@ PageListPL {
         IconPL {
             id: settingsIcon
             anchors.verticalCenter: parent.verticalCenter
-            source: icon
+            iconName: icon
             height: styler.themeItemSizeLarge
             width: height
         }
@@ -62,37 +62,37 @@ PageListPL {
         id: settingsPages
 
         ListElement {
-            icon: "image://theme/icon-m-contact"
+            icon: "icon-m-contact"
             name: qsTr("User Settings")
             url: "Settings-profile.qml"
         }
         ListElement {
-            icon: "image://theme/icon-m-watch"
+            icon: "icon-m-watch"
             name: qsTr("Device Settings")
             url: "Settings-device.qml"
         }
         ListElement {
-            icon: "image://theme/icon-m-levels"
+            icon: "icon-m-levels"
             name: qsTr("Application Settings")
             url: "Settings-app.qml"
         }
         ListElement {
-            icon: "image://theme/icon-m-alarm"
+            icon: "icon-m-alarm"
             name: qsTr("Alarms")
             url: "Settings-alarms.qml"
         }
         ListElement {
-            icon: "image://theme/icon-m-weather-d212-light"
+            icon: "icon-m-weather-d212-light"
             name: qsTr("Weather")
             url: "AddCityDialog.qml"
         }
         ListElement {
-            icon: "image://theme/icon-m-diagnostic"
+            icon: "icon-m-diagnostic"
             name: qsTr("Debug Info")
             url: "DebugInfo.qml"
         }
         ListElement {
-            icon: "image://theme/icon-m-favorite-selected"
+            icon: "icon-m-favorite-selected"
             name: qsTr("Donate")
             url: "https://paypal.me/piggz"
         }

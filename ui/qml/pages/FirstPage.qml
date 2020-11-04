@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import org.SfietKonstantin.weatherfish 1.0
 import uk.co.piggz.amazfish 1.0
+import QtQuick.Layouts 1.1
 import "../components/"
 import "../components/platform"
 
@@ -84,13 +85,12 @@ PagePL {
         width: parent.width
         spacing: styler.themePaddingLarge
 
-        Item {
+        RowLayout {
             height: styler.themeItemSizeSmall
             width: parent.width
 
             LabelPL {
                 id: pairedNameLabel
-                anchors.verticalCenter: parent.verticalCenter
                 width: {
                     var dif = column.width - parent.width;
                     return dif < 0 ? implicitWidth + dif : implicitWidth;
@@ -101,56 +101,52 @@ PagePL {
                 truncMode: truncModes.fade
             }
 
-            Row {
-                id: statusRow
-                anchors {
-                    left: pairedNameLabel.right
-                    leftMargin: styler.themePaddingMedium
-                    verticalCenter: parent.verticalCenter
-                }
-                spacing: styler.themePaddingSmall
-                height: parent.height
+            Item {
+                Layout.fillWidth: true
+            }
 
-                IconPL {
-                    iconName: "icon-m-bluetooth-device"
-                    iconHeight: styler.themeIconSizeMedium
-                    visible: _connected || _authenticated || _connecting
-                    BusyIndicatorSmallPL {
-                        height: parent.height
-                        visible: _connecting
-                        running: visible
-                    }
+            IconPL {
+                iconName: "icon-m-bluetooth-device"
+                iconHeight: styler.themeIconSizeMedium
+                visible: _connected || _authenticated || _connecting
+                BusyIndicatorSmallPL {
+                    height: parent.height
+                    visible: _connecting
+                    running: visible
                 }
+            }
 
-                IconPL {
-                    iconName: "icon-m-watch"
-                    iconHeight: styler.themeIconSizeMedium
-                    visible: _authenticated || _connected
-                    BusyIndicatorSmallPL {
-                        height: parent.height
-                        visible: _connected
-                        running: visible
-                    }
+            IconPL {
+                iconName: "icon-m-watch"
+                iconHeight: styler.themeIconSizeMedium
+                visible: _authenticated || _connected
+                BusyIndicatorSmallPL {
+                    height: parent.height
+                    visible: _connected
+                    running: visible
                 }
+            }
 
-                IconPL {
-                    id: btryImage
-                    iconName: "icon-m-battery"
-                    iconHeight: styler.themeIconSizeMedium
-                    visible: _authenticated
-                }
+            IconPL {
+                id: btryImage
+                iconName: "icon-m-battery"
+                iconHeight: styler.themeIconSizeMedium
+                visible: _authenticated
+            }
 
-                LabelPL {
-                    id: btryPercent
-                    anchors.verticalCenter: parent.verticalCenter
-                    visible: _authenticated
-                    font.pixelSize: styler.themeFontSizeMedium
-                }
+            LabelPL {
+                id: btryPercent
+                visible: _authenticated
+                font.pixelSize: styler.themeFontSizeMedium
+                width: styler.themeIconSizeMedium
             }
         }
 
+
         SectionHeaderPL {
+            text: qsTr("Steps")
             width: parent.width
+            visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
         }
 
         // steps
@@ -159,11 +155,12 @@ PagePL {
             iconName: "icon-m-steps"
             height: styler.themeIconSizeMedium
             width: height
+            visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
         }
 
         PercentCircle {
             id: stpsCircle
-
+            visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
             anchors.horizontalCenter: parent.horizontalCenter
             size: parent.width - styler.themeHorizontalPageMargin * 4
             percent: _steps ? _steps / AmazfishConfig.profileFitnessGoal : 0.06
@@ -199,11 +196,13 @@ PagePL {
         }
 
         SectionHeaderPL {
+            text: qsTr("Heartrate")
             width: parent.width
+            visible: supportsFeature(DaemonInterface.FEATURE_HRM)
         }
 
         //Heartrate
-        Row {
+        RowLayout {
             spacing: styler.themePaddingLarge
             width: parent.width
             visible: supportsFeature(DaemonInterface.FEATURE_HRM)
@@ -220,20 +219,31 @@ PagePL {
                 font.pixelSize: styler.themeFontSizeLarge
                 height: styler.iconSizeMedium
                 verticalAlignment: Text.AlignVCenter
-                width: parent.width - imgHeartrate.width - btnHR.width - 2* styler.paddingLarge
+            }
+
+            Item {
+            Layout.fillWidth: true
             }
 
             IconButtonPL {
                 id: btnHR
-                iconSource: "icon-m-refresh"
+                iconName: "view-refresh"
+                iconHeight: styler.themeIconSizeMedium
+                iconWidth: iconHeight
                 onClicked: {
                     DaemonInterfaceInstance.requestManualHeartrate();
                 }
             }
         }
 
+        SectionHeaderPL {
+            text: qsTr("Service")
+            width: parent.width
+            visible: !serviceActiveState || !serviceEnabledState
+        }
+
         ButtonPL {
-            text: qsTr("Start Service")
+            text: qsTr("Start")
             visible: serviceActiveState == false
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
@@ -242,7 +252,7 @@ PagePL {
         }
 
         ButtonPL {
-            text: qsTr("Enable Service")
+            text: qsTr("Enable")
             visible: serviceEnabledState == false
             anchors.horizontalCenter: parent.horizontalCenter
 
