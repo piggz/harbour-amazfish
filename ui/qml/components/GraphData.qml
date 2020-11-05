@@ -1,8 +1,7 @@
 import QtQuick 2.0
 import QtQml 2.1
-import Sailfish.Silica 1.0
-
 import "."
+import "platform"
 
 Item {
     id: root
@@ -10,7 +9,7 @@ Item {
         left: (parent)? parent.left : undefined
         right: (parent)? parent.right : undefined
     }
-    height: graphHeight + (doubleAxisXLables ? Theme.itemSizeMedium : Theme.itemSizeSmall)
+    height: graphHeight + (doubleAxisXLables ? styler.themeItemSizeLarge : styler.themeItemSizeSmall)
 
     signal clicked
 
@@ -47,7 +46,7 @@ Item {
     property bool doubleAxisXLables: false
 
     property bool scale: false
-    property color lineColor: Theme.highlightColor
+    property color lineColor: styler.themeHighlightColor
     property real lineWidth: 1
 
     property real minY: 0 //Always 0
@@ -101,25 +100,19 @@ Item {
         anchors {
             top: parent.top
             left: parent.left
-            leftMargin: 3*Theme.paddingLarge
             right: parent.right
-            rightMargin: Theme.paddingLarge
         }
 
-        Label {
+        LabelPL {
             width: parent.width
-            color: Theme.highlightColor
-            font.pixelSize: Theme.fontSizeSmall
             text: graphTitle
             wrapMode: Text.Wrap
 
-            Label {
+            LabelPL {
                 id: labelLastValue
                 anchors {
                     right: parent.right
                 }
-                color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeSmall
                 wrapMode: Text.Wrap
                 visible: !noData
             }
@@ -128,10 +121,10 @@ Item {
         Rectangle {
             width: parent.width
             height: graphHeight
-            border.color: Theme.secondaryHighlightColor
+            border.color: styler.themeSecondaryHighlightColor
             color: "transparent"
 
-            BackgroundItem {
+            MouseArea {
                 id: backgroundArea
                 anchors.fill: parent
                 onClicked: {
@@ -141,9 +134,7 @@ Item {
 
             Repeater {
                 model: noData ? 0 : (axisY.grid + 1)
-                delegate: Label {
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeLarge / 2
+                delegate: LabelPL {
                     text: createYLabel( (maxY-minY)/axisY.grid * index + minY)
                     anchors {
                         top: (index == axisY.grid) ? parent.top : undefined
@@ -157,21 +148,17 @@ Item {
 
             Repeater {
                 model: noData ? 0 : (axisX.grid + 1)
-                delegate: Label {
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeLarge / 2
+                delegate: LabelPL {
                     text: createXLabel(points[Math.round((index / axisX.grid ) * (points.length - 1))].x)
 
                     anchors {
                         top: parent.bottom
-                        topMargin: Theme.paddingSmall
+                        topMargin: styler.themePaddingSmall
                         left: (index == axisX.grid) ? undefined : parent.left
                         right: (index == axisX.grid) ? parent.right : undefined
                         leftMargin: (index) ? (parent.width / axisX.grid * index - width/2): 0
                     }
-                    Label {
-                        color: Theme.primaryColor
-                        font.pixelSize: Theme.fontSizeLarge / 2
+                    LabelPL {
                         anchors {
                             top: parent.bottom
                             horizontalCenter: parent.horizontalCenter
@@ -182,14 +169,11 @@ Item {
                 }
             }
 
-            Label {
-                color: Theme.primaryColor
-                font.pixelSize: Theme.fontSizeLarge / 2
+            LabelPL {
                 text: axisY.units
                 anchors {
                     top: parent.top
                     left: parent.left
-                    leftMargin: Theme.paddingSmall
                 }
                 visible: !noData
             }
