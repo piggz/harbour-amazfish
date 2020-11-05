@@ -70,6 +70,18 @@ ApplicationWindowPL
         }
     }
 
+    Timer {
+        id: tmrStartup
+        running: true
+        repeat: false
+        interval:300
+        onTriggered: {
+            app.pages.processCurrentItem();
+        }
+    }
+
+
+
     DBusInterface {
         id: systemdServiceIface
         bus: DBus.SessionBus
@@ -139,4 +151,19 @@ ApplicationWindowPL
         //    message = message.arg(arguments[i]);
         //return message;
     }
+
+    function pushAttached(pagefile, options) {
+        return app.pages.pushAttached(pagefile, options);
+    }
+
+    function createObject(page, options, parent) {
+        var pc = Qt.createComponent(page);
+        if (pc.status === Component.Error) {
+            console.log('Error while creating component');
+            console.log(pc.errorString());
+            return null;
+        }
+        return pc.createObject(parent ? parent : app, options ? options : {})
+    }
+
 }

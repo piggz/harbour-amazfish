@@ -9,11 +9,6 @@ PagePL {
     id: page
     title: "Amazfish"
 
-    // The effective value will be restricted by ApplicationWindow.allowedOrientations
-    //allowedOrientations: Orientation.Portrait
-
-    //property var day: new Date()
-
     readonly property string _connectionState: DaemonInterfaceInstance.connectionState
     readonly property bool _disconnected: _connectionState === "disconnected"
     readonly property bool _connecting: _connectionState === "connecting"
@@ -37,12 +32,6 @@ PagePL {
     on_ConnectionStateChanged: console.log(_connectionState)
 
     on_AuthenticatedChanged: _refreshInformation()
-    
-    //onStatusChanged: {
-    //    if (status === PageStatus.Active) {
-    //        pageStack.pushAttached(Qt.resolvedUrl("StepsPage.qml"))
-    //    }
-    //}
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
@@ -265,7 +254,7 @@ PagePL {
             id: tmrStartup
             running: true
             repeat: false
-            interval: 200
+            interval: 500
             onTriggered: {
                 if (!AmazfishConfig.profileName) {
                     pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
@@ -291,6 +280,10 @@ PagePL {
                 }
             }
         }
+    }
+
+    onPageStatusActive: {
+        pushAttached(Qt.resolvedUrl("StepsPage.qml"))
     }
 
     Component.onCompleted: {
