@@ -16,5 +16,9 @@
         <file>custom-icons/icon-m-alarm.png</file>
         <file>custom-icons/icon-m-weather-d212-light.png</file>
         <file>custom-icons/icon-m-favorite-selected.png</file>
+        <file>custom-icons/icon-m-forward.png</file>
+        <file>custom-icons/icon-m-back.png</file>
+        <file>custom-icons/icon-m-down.png</file>
+        <file>custom-icons/icon-m-up.png</file>
     </qresource>
 </RCC>
