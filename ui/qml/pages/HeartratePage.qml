@@ -1,14 +1,14 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
-import "../components/"
 import uk.co.piggz.amazfish 1.0
+import QtQuick.Layouts 1.1
+import "../components/"
+import "../components/platform"
 
-Page {
+PagePL {
     id: page
-    property int currentHeartRate: 0
+    title: qsTr("Heartrate")
 
-    // The effective value will be restricted by ApplicationWindow.allowedOrientations
-    allowedOrientations: Orientation.Portrait
+    property int currentHeartRate: 0
 
     property var day: new Date()
     property var relaxed: 0
@@ -21,140 +21,141 @@ Page {
     property var minhr: 0
     property var maxhr: 0
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
-        anchors.fill: parent
+    pageMenu: PageMenuPL {
+        DownloadDataMenuItem{}
+    }
 
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
+    Column {
+        id: column
+        width: page.width
+        spacing: styler.themePaddingLarge
 
-        PullDownMenu {
-            DownloadDataMenuItem {}
+        LabelPL {
+            id: lblCurrentHeartrate
+            font.pixelSize: styler.themeFontSizeExtraLarge * 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: currentHeartRate
+            horizontalAlignment: Text.AlignHCenter
         }
 
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-            x: Theme.horizontalPageMargin
-            width: page.width - 2*Theme.horizontalPageMargin
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: qsTr("Heartrate")
+        Row { //Min and Max HR
+            //height: childrenRect.height
+            anchors.horizontalCenter: parent.horizontalCenter
+            IconPL { source: "image://theme/icon-m-down" }
+            LabelPL { text: minhr; anchors.verticalCenter: parent.verticalCenter
             }
-
-            Label {
-                id: lblCurrentHeartrate
-                font.pixelSize: Theme.fontSizeExtraLarge * 3
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width
-                text: currentHeartRate
-                horizontalAlignment: Text.AlignHCenter
+            IconPL { source: "image://theme/icon-m-up" }
+            LabelPL { text: maxhr; anchors.verticalCenter: parent.verticalCenter
             }
+        }
 
-            Row { //Min and Max HR
-                //height: childrenRect.height
-                anchors.horizontalCenter: parent.horizontalCenter
-                Icon { source: "image://theme/icon-m-down" }
-                Label { text: minhr; anchors.verticalCenter: parent.verticalCenter
- }
-                Icon { source: "image://theme/icon-m-up" }
-                Label { text: maxhr; anchors.verticalCenter: parent.verticalCenter
- }
-            }
+        RowLayout {
+            spacing: styler.themePaddingLarge
+            width: parent.width
 
-            Row{
-                spacing: Theme.paddingLarge
-                width: parent.width
-
-                IconButton {
-                    id: btnPrev
-                    icon.source: "image://theme/icon-m-back"
-                    onClicked: {
-                        day.setDate(day.getDate() - 1);
-                        lblDay.text = day.toDateString();
-                        updateGraphs();
-                    }
-                }
-                Label {
-                    id: lblDay
-                    width: parent.width - btnPrev.width - btnNext.width - (2 * Theme.paddingLarge)
-                    text: day.toDateString()
-                    height: btnPrev.height
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-                IconButton {
-                    id: btnNext
-                    icon.source: "image://theme/icon-m-forward"
-                    onClicked: {
-                        day.setDate(day.getDate() + 1);
-                        lblDay.text = day.toDateString();
-                        updateGraphs();
-
-                    }
-                }
-            }
-
-            Graph {
-                id: graphHR
-                graphTitle: qsTr("BPM")
-                graphHeight: 300
-
-                axisY.units: "BPM"
-                type: DataSource.Heartrate
-                graphType: 2
-
-                minY: 0
-                maxY: 200
-                valueConverter: function(value) {
-                    return value.toFixed(0);
-                }
+            IconButtonPL {
+                id: btnPrev
+                iconName: "image://theme/icon-m-back"
                 onClicked: {
-                    updateGraph(day);
+                    day.setDate(day.getDate() - 1);
+                    lblDay.text = day.toDateString();
+                    updateGraphs();
                 }
             }
+            LabelPL {
+                id: lblDay
+                Layout.fillWidth: true
+                text: day.toDateString()
+                height: btnPrev.height
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+            IconButtonPL {
+                id: btnNext
+                iconName: "image://theme/icon-m-forward"
+                onClicked: {
+                    day.setDate(day.getDate() + 1);
+                    lblDay.text = day.toDateString();
+                    updateGraphs();
 
-            //Type summary
-            Grid {
-                columns: 2
-                spacing: Theme.paddingMedium
-                width: parent.width
-                Label { text: qsTr("Relaxed") }
-                Item { width: parent.width * 0.5; height: 50
-                    Rectangle { color: "grey"; width: parent.width * (relaxed  / total) ; height: parent.height }
-                    Label { text: Math.floor((relaxed / total) * 100) + "%"; anchors.centerIn: parent}
                 }
-                Label { text: qsTr("Light") }
-                Item { width: parent.width * 0.5; height: 50
-                    Rectangle { color: "lightblue"; width: parent.width * (light  / total) ; height: parent.height }
-                    Label { text: Math.floor((light / total) * 100) + "%"; anchors.centerIn: parent}
-                }
-                Label { text: qsTr("Intensive")}
-                Item { width: parent.width * 0.5; height: 50
-                    Rectangle { color: "green"; width: parent.width * (intensive  / total) ; height: parent.height }
-                    Label { text: Math.floor((intensive / total) * 100) + "%"; anchors.centerIn: parent}
-                }
-                Label { text: qsTr("Aerobic")}
-                Item { width: parent.width * 0.5; height: 50
-                    Rectangle { color: "yellow"; width: parent.width * (aerobic  / total) ; height: parent.height }
-                    Label { text: Math.floor((aerobic / total) * 100) + "%"; anchors.centerIn: parent}
-                }
+            }
+        }
 
-                Label { text: qsTr("Anerobic")}
-                Item { width: parent.width * 0.5; height: 50
-                    Rectangle { color: "orange"; width: parent.width * (anerobic  / total) ; height: parent.height }
-                    Label { text: Math.floor((anerobic / total) * 100) + "%"; anchors.centerIn: parent}
-                }
+        Graph {
+            id: graphHR
+            graphTitle: qsTr("BPM")
+            graphHeight: 300
 
-                Label { text: qsTr("VO2 Max") }
-                Item { width: parent.width * 0.5; height: 50
-                    Rectangle { color: "red"; width: parent.width * (vo2max  / total) ; height: parent.height }
-                    Label { text: Math.floor((vo2max / total) * 100) + "%"; anchors.centerIn: parent}
+            axisY.units: "BPM"
+            type: DataSource.Heartrate
+            graphType: 2
+
+            minY: 0
+            maxY: 200
+            valueConverter: function(value) {
+                return value.toFixed(0);
+            }
+            onClicked: {
+                updateGraph(day);
+            }
+        }
+
+        //Type summary
+        Grid {
+            columns: 2
+            spacing: styler.themePaddingMedium
+            width: parent.width
+            LabelPL { text: qsTr("Relaxed") }
+            Item { width: parent.width * 0.5; height: 50
+                Rectangle { color: "grey"; width: parent.width * (relaxed  / total) ; height: parent.height }
+                LabelPL { text: Math.floor((relaxed / total) * 100) + "%"; anchors.centerIn: parent}
+            }
+            LabelPL { text: qsTr("Light") }
+            Item { width: parent.width * 0.5; height: 50
+                Rectangle { color: "lightblue"; width: parent.width * (light  / total) ; height: parent.height }
+                LabelPL { text: Math.floor((light / total) * 100) + "%"; anchors.centerIn: parent}
+            }
+            LabelPL { text: qsTr("Intensive")}
+            Item { width: parent.width * 0.5; height: 50
+                Rectangle { color: "green"; width: parent.width * (intensive  / total) ; height: parent.height }
+                LabelPL { text: Math.floor((intensive / total) * 100) + "%"; anchors.centerIn: parent}
+            }
+            LabelPL { text: qsTr("Aerobic")}
+            Item { width: parent.width * 0.5; height: 50
+                Rectangle { color: "yellow"; width: parent.width * (aerobic  / total) ; height: parent.height }
+                LabelPL { text: Math.floor((aerobic / total) * 100) + "%"; anchors.centerIn: parent}
+            }
+
+            LabelPL { text: qsTr("Anerobic")}
+            Item { width: parent.width * 0.5; height: 50
+                Rectangle { color: "orange"; width: parent.width * (anerobic  / total) ; height: parent.height }
+                LabelPL { text: Math.floor((anerobic / total) * 100) + "%"; anchors.centerIn: parent}
+            }
+
+            LabelPL { text: qsTr("VO2 Max") }
+            Item { width: parent.width * 0.5; height: 50
+                Rectangle { color: "red"; width: parent.width * (vo2max  / total) ; height: parent.height }
+                LabelPL { text: Math.floor((vo2max / total) * 100) + "%"; anchors.centerIn: parent}
+            }
+        }
+
+        Connections {
+            target: DaemonInterfaceInstance
+            onConnectionStateChanged: {
+                if (DaemonInterfaceInstance.connectionState === "authenticated") {
+                    DaemonInterfaceInstance.refreshInformation();
+                }
+            }
+            onInformationChanged: {
+                if (infoKey === DaemonInterface.INFO_HEARTRATE) {
+                    currentHeartRate = parseInt(infoValue, 10) || 0;
                 }
             }
         }
     }
+
 
     function updateGraphs() {
         graphHR.updateGraph(day);
@@ -242,33 +243,11 @@ Page {
 
         console.log("Age is", age, "max hr is", max_hr);
 
-    return max_hr;
-    }
-
-    onStatusChanged: {
-        if (status === PageStatus.Active) {
-            //            if (!pageStack._currentContainer.attachedContainer) {
-            pageStack.pushAttached(Qt.resolvedUrl("SportsSummaryPage.qml"))
-            //        }
-        }
+        return max_hr;
     }
 
     Component.onCompleted: {
         updateGraphs();
         DaemonInterfaceInstance.requestManualHeartrate();
-    }
-
-    Connections {
-        target: DaemonInterfaceInstance
-        onConnectionStateChanged: {
-            if (DaemonInterfaceInstance.connectionState === "authenticated") {
-                DaemonInterfaceInstance.refreshInformation();
-            }
-        }
-        onInformationChanged: {
-            if (infoKey === DaemonInterface.INFO_HEARTRATE) {
-                currentHeartRate = parseInt(infoValue, 10) || 0;
-            }
-        }
     }
 }

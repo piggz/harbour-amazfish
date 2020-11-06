@@ -16,12 +16,10 @@ PagePL {
         return new Date((hours * 60 + offset) * 60000).toLocaleTimeString(Qt.locale(), qsTr("h:mm"))
     }
 
-    //PullDownMenu {
-    //    DownloadDataMenuItem {}
-    //}
+    pageMenu: PageMenuPL {
+        DownloadDataMenuItem{}
+    }
 
-    // Place our content in a Column.  The PageHeader is always placed at the top
-    // of the page, followed by our content.
     Column {
         id: column
         width: page.width
@@ -38,7 +36,7 @@ PagePL {
 
         LabelPL {
             id: lblDeepSleepLastnight
-            font.pixelSize:styler.themeFontSizeExtraLarge * 3
+            font.pixelSize:styler.themeFontSizeExtraLarge
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
             text: qsTr("Deep %1").arg(_formatHours(graphSleepSummary.lastZ))
@@ -113,13 +111,9 @@ PagePL {
         graphSleepSummary.updateGraph(day);
     }
 
-    //onStatusChanged: {
-    //    if (status === PageStatus.Active) {
-            //            if (!pageStack._currentContainer.attachedContainer) {
-    //        pageStack.pushAttached(Qt.resolvedUrl("HeartratePage.qml"))
-            //        }
-    //    }
-    //}
+    onPageStatusActive: {
+        pushAttached(Qt.resolvedUrl("HeartratePage.qml"))
+    }
 
     Component.onCompleted: {
         updateGraphs();
