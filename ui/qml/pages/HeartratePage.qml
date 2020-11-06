@@ -42,10 +42,10 @@ PagePL {
         Row { //Min and Max HR
             //height: childrenRect.height
             anchors.horizontalCenter: parent.horizontalCenter
-            IconPL { source: "image://theme/icon-m-down" }
+            IconPL { iconName: "icon-m-down" }
             LabelPL { text: minhr; anchors.verticalCenter: parent.verticalCenter
             }
-            IconPL { source: "image://theme/icon-m-up" }
+            IconPL { iconName: "icon-m-up" }
             LabelPL { text: maxhr; anchors.verticalCenter: parent.verticalCenter
             }
         }
@@ -56,7 +56,7 @@ PagePL {
 
             IconButtonPL {
                 id: btnPrev
-                iconName: "image://theme/icon-m-back"
+                iconName: "icon-m-back"
                 onClicked: {
                     day.setDate(day.getDate() - 1);
                     lblDay.text = day.toDateString();
@@ -73,7 +73,7 @@ PagePL {
             }
             IconButtonPL {
                 id: btnNext
-                iconName: "image://theme/icon-m-forward"
+                iconName: "icon-m-forward"
                 onClicked: {
                     day.setDate(day.getDate() + 1);
                     lblDay.text = day.toDateString();
@@ -249,5 +249,9 @@ PagePL {
     Component.onCompleted: {
         updateGraphs();
         DaemonInterfaceInstance.requestManualHeartrate();
+    }
+
+    onPageStatusActive: {
+        pushAttached(Qt.resolvedUrl("SportsSummaryPage.qml"))
     }
 }
