@@ -19,31 +19,31 @@ void BipFirmwareInfo::determineFirmwareType() {
     qDebug() << "Determining firmware type";
     m_type = Invalid;
 
-    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(RES_HEADER)) || m_bytes.startsWith(UCHAR_TO_BYTEARRAY(NEWRES_HEADER))) {
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(RES_HEADER)) || m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(NEWRES_HEADER))) {
         if (m_bytes.length() > 700000) { // dont know how to distinguish from Cor .res
             m_type = Invalid;
         }
         m_type = Res;
     }
-    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_HEADER)) || m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_HEADER2)) || m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_HEADER3)) || m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_HEADER4))) {
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_HEADER)) || m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_HEADER2)) || m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_HEADER3)) || m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_HEADER4))) {
         m_type = GPS;
     }
-    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_ALMANAC_HEADER))) {
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_ALMANAC_HEADER))) {
         m_type = GPS_ALMANAC;
     }
-    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(GPS_CEP_HEADER))) {
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_CEP_HEADER))) {
         m_type = GPS_CEP;
     }
-    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(FW_HEADER))) {
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(FW_HEADER))) {
         m_version = m_crcMap[m_crc16];
         qDebug() << "Version:" << m_version << "CRC:" << m_crc16;
         m_type = Firmware;
     }
 
-    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(WATCHFACE_HEADER))) {
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER))) {
         m_type = Watchface;
     }
-    if (m_bytes.startsWith(UCHAR_TO_BYTEARRAY(NEWFT_HEADER))) {
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(NEWFT_HEADER))) {
         if (m_bytes.at(10) == 0x01) {
             m_type = Font;
         } else if (m_bytes.at(10) == 0x02) {

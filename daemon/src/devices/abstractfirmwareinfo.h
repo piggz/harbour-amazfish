@@ -4,9 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <QMap>
-
-#define UCHAR_TO_BYTEARRAY(uarray) \
-    QByteArray(reinterpret_cast<const char*>(uarray), sizeof(uarray))
+#include <qble/qbleservice.h> //for macros
 
 class AbstractFirmwareInfo : public QObject
 {
