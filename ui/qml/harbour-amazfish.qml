@@ -11,6 +11,7 @@ ApplicationWindowPL
 {
     id: app
     initialPage: Component { FirstPage { } }
+    property var    rootPage: null
     //cover: Qt.resolvedUrl("cover/CoverPage.qml")
     //allowedOrientations: defaultAllowedOrientations
 

@@ -211,7 +211,7 @@ PagePL {
             }
 
             Item {
-            Layout.fillWidth: true
+                Layout.fillWidth: true
             }
 
             IconButtonPL {
@@ -290,5 +290,11 @@ PagePL {
         if (AmazfishConfig.profileName) {
             _refreshInformation();
         }
+        start();
+    }
+
+    function start() {
+        app.rootPage = app.pages.replace(Qt.resolvedUrl("FirstPage.qml"));
+        app.initialize();
     }
 }

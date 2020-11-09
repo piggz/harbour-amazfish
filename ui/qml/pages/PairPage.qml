@@ -24,7 +24,7 @@ PageListPL {
                 // Set values from the signal
                 AmazfishConfig.pairedAddress = address
                 AmazfishConfig.pairedName = name
-                app.clearPages();
+                app.pages.pop(app.rootPage);
             } else {
                 _placeholderText = error
             }
