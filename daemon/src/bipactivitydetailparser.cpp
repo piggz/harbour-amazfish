@@ -83,10 +83,9 @@ void BipActivityDetailParser::parse(const QByteArray &bytes)
 
 int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &bytes, int offset, long timeOffset)
 {
-    int i = 0;
-    int longitudeDelta = TypeConversion::toInt16(bytes[offset + i++], bytes[offset + i++]);
-    int latitudeDelta = TypeConversion::toInt16(bytes[offset + i++], bytes[offset + i++]);
-    int altitudeDelta = TypeConversion::toInt16(bytes[offset + i++], bytes[offset + i++]);
+    int16_t longitudeDelta = TypeConversion::toInt16(bytes[offset + 0], bytes[offset + 1]);
+    int16_t latitudeDelta = TypeConversion::toInt16(bytes[offset + 2], bytes[offset + 3]);
+    int16_t altitudeDelta = TypeConversion::toInt16(bytes[offset + 4], bytes[offset + 5]);
 
     m_baseLongitude += longitudeDelta;
     m_baseLatitude += latitudeDelta;
@@ -103,7 +102,7 @@ int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &b
     ap.setHeartRate(m_lastHeartrate);
     add(ap);
 
-    return i;
+    return 6;
 }
 
 double BipActivityDetailParser::convertHuamiValueToDecimalDegrees(long huamiValue)

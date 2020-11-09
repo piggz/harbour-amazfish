@@ -37,14 +37,14 @@ void SportsDetailOperation::handleData(const QByteArray &data)
         return;
     }
 
-    if ((m_lastPacketCounter + 1) == (int)data[0] ) {
+    if ((m_lastPacketCounter + 1) == (uint8_t)data[0] ) {
         m_lastPacketCounter++;
         if (m_lastPacketCounter >= 255) {
             m_lastPacketCounter =-1;
         }
         m_buffer += data.mid(1);
     } else {
-        qDebug() << "invalid package counter: " << (int)data[0] << ", last was: " << m_lastPacketCounter;
+        qDebug() << "invalid package counter: " << (uint8_t)data[0] << ", last was: " << m_lastPacketCounter;
         finished(false);
         return;
     }

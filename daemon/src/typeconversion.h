@@ -17,8 +17,8 @@ int toUint32(char val1, char val2, char val3, char val4);
 long toUnsigned(int unsignedInt);
 int toUnsigned(short value);
 int toUnsigned(char value);
-int toInt16(char val1, char val2);
-int toUint16(char value);
+int16_t toInt16(uint8_t val1, uint8_t val2);
+uint16_t toUint16(char value);
 }
 
 #endif // TYPECONVERSION_H

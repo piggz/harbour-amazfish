@@ -143,11 +143,11 @@ int toUnsigned(char value) {
     return value & 0xff;
 }
 
-int toInt16(char val1, char val2) {
-    return (short) ((val1 & 0xff) | ((val2 & 0xff) << 8));
+int16_t toInt16(uint8_t val1, uint8_t val2) {
+    return (int16_t)((val1 & 0xff) | ((val2 & 0xff) << 8));
 }
 
-int toUint16(char value) {
+uint16_t toUint16(char value) {
     return toUnsigned(value);
 }
 }
