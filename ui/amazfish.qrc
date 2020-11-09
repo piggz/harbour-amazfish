@@ -19,6 +19,7 @@
         <file alias="qml/components/platform/IconButtonPL.qml">qml/components/platform.kirigami/IconButtonPL.qml</file>
         <file alias="qml/components/platform/IconPL.qml">qml/components/platform.kirigami/IconPL.qml</file>
         <file alias="qml/components/platform/LabelPL.qml">qml/components/platform.kirigami/LabelPL.qml</file>
+        <file alias="qml/components/platform/ListViewPL.qml">qml/components/platform.kirigami/ListViewPL.qml</file>
         <file alias="qml/components/platform/ListItemPL.qml">qml/components/platform.kirigami/ListItemPL.qml</file>
         <file alias="qml/components/platform/MenuDrawerItemPL.qml">qml/components/platform.kirigami/MenuDrawerItemPL.qml</file>
         <file alias="qml/components/platform/MenuDrawerPL.qml">qml/components/platform.kirigami/MenuDrawerPL.qml</file>
