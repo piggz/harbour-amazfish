@@ -18,17 +18,17 @@ PageListPL {
 
     delegate: ListItemPL {
         id: listItem
-        contentHeight: distLabel.y + distLabel.height + styler.themePaddingMedium
+        contentHeight: styler.themeItemSizeSmall + (styler.themePaddingMedium * 2)
 
-        Image
+        IconPL
         {
             id: workoutImage
             anchors.top: parent.top
             anchors.topMargin: styler.themePaddingMedium
             x: styler.themePaddingMedium
-            width: styler.themePaddingMedium * 3
-            height: styler.themePaddingMedium * 3
-            source: "../pics/icon-m-" + kindstring.toLowerCase() + ".png"
+            width: styler.themeItemSizeSmall
+            height: width
+            iconName: "icon-m-" + kindstring.toLowerCase()
         }
         LabelPL
         {
@@ -46,15 +46,15 @@ PageListPL {
             anchors.top: parent.top
             anchors.topMargin: styler.themePaddingMedium
             anchors.right: parent.right
-            anchors.rightMargin: Theme.paddingSmall
+            anchors.rightMargin: styler.themePaddingSmall
             text: startdate
         }
-        Image {
+        IconPL {
             id: distangeImage
             anchors.top: nameLabel.bottom
             anchors.left: workoutImage.right
             anchors.leftMargin: styler.themePaddingMedium
-            source: "image://theme/icon-m-location"
+            iconName: "icon-m-location"
             height: distLabel.height
             width: height
         }
@@ -68,11 +68,11 @@ PageListPL {
             text: baselatitude.toFixed(3) + "," + baselongitude.toFixed(3) + " " + basealtitude + "m"
             //text: (settings.measureSystem === 0) ? (stravaList.model[index]["distance"]/1000).toFixed(2) + "km" : JSTools.fncConvertDistanceToImperial(stravaList.model[index]["distance"]/1000).toFixed(2) + "mi"
         }
-        Image {
+        IconPL {
             id: timeImage
             anchors.top: timeLabel.top
             anchors.right: timeLabel.left
-            source: "image://theme/icon-m-clock"
+            iconName: "icon-m-clock"
             height: timeLabel.height
             width: height
         }
