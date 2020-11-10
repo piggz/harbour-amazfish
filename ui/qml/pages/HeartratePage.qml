@@ -50,36 +50,15 @@ PagePL {
             }
         }
 
-        RowLayout {
-            spacing: styler.themePaddingLarge
-            width: parent.width
-
-            IconButtonPL {
-                id: btnPrev
-                iconName: "icon-m-back"
-                onClicked: {
-                    day.setDate(day.getDate() - 1);
-                    lblDay.text = day.toDateString();
-                    updateGraphs();
-                }
+        DateNavigation {
+            text: day.toDateString();
+            onBackward: {
+                day.setDate(day.getDate() - 1);
+                updateGraphs();
             }
-            LabelPL {
-                id: lblDay
-                Layout.fillWidth: true
-                text: day.toDateString()
-                height: btnPrev.height
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
-            IconButtonPL {
-                id: btnNext
-                iconName: "icon-m-forward"
-                onClicked: {
-                    day.setDate(day.getDate() + 1);
-                    lblDay.text = day.toDateString();
-                    updateGraphs();
-
-                }
+            onForward: {
+                day.setDate(day.getDate() + 1);
+                updateGraphs();
             }
         }
 

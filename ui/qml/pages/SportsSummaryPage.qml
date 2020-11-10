@@ -33,7 +33,8 @@ PageListPL {
         LabelPL
         {
             id: nameLabel
-            width: parent.width - dateLabel.width - 2*styler.themePaddingLarge
+            width: listItem
+            .width - dateLabel.width - 2*styler.themePaddingLarge
             anchors.top: parent.top
             anchors.topMargin: styler.themePaddingMedium
             anchors.left: workoutImage.right
