@@ -20,5 +20,7 @@
         <file>custom-icons/icon-m-back.png</file>
         <file>custom-icons/icon-m-down.png</file>
         <file>custom-icons/icon-m-up.png</file>
+        <file>custom-icons/icon-m-location.png</file>
+        <file>custom-icons/icon-m-clock.png</file>
     </qresource>
 </RCC>
