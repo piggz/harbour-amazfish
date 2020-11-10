@@ -111,5 +111,6 @@
         <file>qml/tools/JSTools.js</file>
         <file>qml/harbour-amazfish.qml</file>
         <file>qml/components/TruncationModes.qml</file>
+        <file>qml/components/DateNavigation.qml</file>
     </qresource>
 </RCC>
