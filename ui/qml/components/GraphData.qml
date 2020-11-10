@@ -141,7 +141,7 @@ Item {
                         bottom: (index == axisY.grid) ? undefined : parent.bottom
                         bottomMargin: (index) ? parent.height / axisY.grid * index - height/2 : 0
                         right: parent.left
-                        rightMargin: Theme.paddingSmall
+                        rightMargin: styler.themePaddingSmall
                     }
                 }
             }
@@ -260,7 +260,7 @@ Item {
                                 lastZ = points[i].z;
 
                                 ctx.stroke();
-                                ctx.strokeStyle = Theme.secondaryHighlightColor;
+                                ctx.strokeStyle = styler.themeSecondaryHighlightColor;
                                 ctx.beginPath();
                                 ctx.moveTo(x, z);
                                 ctx.lineTo(x, y);
