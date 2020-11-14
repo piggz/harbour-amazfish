@@ -114,10 +114,6 @@
         <translation>Обновить</translation>
     </message>
     <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
-    </message>
-    <message>
         <source>Address: </source>
         <translation>Адрес: </translation>
     </message>
@@ -178,14 +174,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Informations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>function tests</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Model: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -199,6 +187,18 @@
     </message>
     <message>
         <source>Music Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debugging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function Tests</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -232,18 +232,6 @@
         <translation>Подключить часы</translation>
     </message>
     <message>
-        <source>Start Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Amazfish</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1%</source>
         <translation type="unfinished"></translation>
     </message>
@@ -253,6 +241,26 @@
     </message>
     <message>
         <source>Data Graphs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation type="unfinished">Шаги</translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation type="unfinished">ЧСС</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -357,10 +365,6 @@
     </message>
     <message>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pull down to scan for devices</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -473,6 +477,10 @@
     </message>
     <message>
         <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amazfish Service</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -114,10 +114,6 @@
         <translation>Uppdatera</translation>
     </message>
     <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
-    </message>
-    <message>
         <source>Address: </source>
         <translation>Adress: </translation>
     </message>
@@ -178,14 +174,6 @@
         <translation>Uppdatera kalender</translation>
     </message>
     <message>
-        <source>Informations</source>
-        <translation>Information</translation>
-    </message>
-    <message>
-        <source>function tests</source>
-        <translation>Funktionstest</translation>
-    </message>
-    <message>
         <source>Model: </source>
         <translation>Modell: </translation>
     </message>
@@ -200,6 +188,18 @@
     <message>
         <source>Music Control</source>
         <translation>Musikkontroll</translation>
+    </message>
+    <message>
+        <source>Debugging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function Tests</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -232,18 +232,6 @@
         <translation>Anslut till klocka</translation>
     </message>
     <message>
-        <source>Start Service</source>
-        <translation>Starta tjänsten</translation>
-    </message>
-    <message>
-        <source>Enable Service</source>
-        <translation>Aktivera tjänsten</translation>
-    </message>
-    <message>
-        <source>Amazfish</source>
-        <translation>Amazfish</translation>
-    </message>
-    <message>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
@@ -254,6 +242,26 @@
     <message>
         <source>Data Graphs</source>
         <translation>Datadiagram</translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation type="unfinished">Steg</translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation type="unfinished">Hjärtfrekvens</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Starta</translation>
+    </message>
+    <message>
+        <source>Enable</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -358,10 +366,6 @@
     <message>
         <source>No devices found</source>
         <translation>Inga enheter hittades</translation>
-    </message>
-    <message>
-        <source>Pull down to scan for devices</source>
-        <translation>Dra neråt för att söka efter enheter</translation>
     </message>
 </context>
 <context>
@@ -474,6 +478,10 @@
     <message>
         <source>Stop</source>
         <translation>Stoppa</translation>
+    </message>
+    <message>
+        <source>Amazfish Service</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

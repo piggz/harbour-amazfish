@@ -95,7 +95,7 @@ PagePL {
             }
 
             IconPL {
-                iconName: "icon-m-bluetooth-device"
+                iconName: styler.iconBluetooth
                 iconHeight: styler.themeIconSizeMedium
                 visible: _connected || _authenticated || _connecting
                 BusyIndicatorSmallPL {
@@ -106,7 +106,7 @@ PagePL {
             }
 
             IconPL {
-                iconName: "icon-m-watch"
+                iconName: styler.iconWatch
                 iconHeight: styler.themeIconSizeMedium
                 visible: _authenticated || _connected
                 BusyIndicatorSmallPL {
@@ -118,7 +118,7 @@ PagePL {
 
             IconPL {
                 id: btryImage
-                iconName: "icon-m-battery"
+                iconName: styler.iconBattery
                 iconHeight: styler.themeIconSizeMedium
                 visible: _authenticated
             }
@@ -134,14 +134,13 @@ PagePL {
 
         SectionHeaderPL {
             text: qsTr("Steps")
-            width: parent.width
             visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
         }
 
         // steps
         IconPL {
             id: imgSteps
-            iconName: "icon-m-steps"
+            iconName: styler.iconSteps
             height: styler.themeIconSizeMedium
             width: height
             visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
@@ -186,7 +185,6 @@ PagePL {
 
         SectionHeaderPL {
             text: qsTr("Heartrate")
-            width: parent.width
             visible: supportsFeature(DaemonInterface.FEATURE_HRM)
         }
 
@@ -198,7 +196,7 @@ PagePL {
 
             IconPL {
                 id: imgHeartrate
-                iconName: "icon-m-heartrate"
+                iconName: styler.iconHeartrate
                 width: styler.themeIconSizeMedium
                 height: width
             }
@@ -227,7 +225,6 @@ PagePL {
 
         SectionHeaderPL {
             text: qsTr("Service")
-            width: parent.width
             visible: !serviceActiveState || !serviceEnabledState
         }
 

@@ -12,7 +12,6 @@
 # The name of your application
 TARGET = harbour-amazfish-ui
 
-CONFIG += sailfishapp
 CONFIG-=qtquickcompiler
 
 QT +=  positioning KDb3 bluetooth quick
@@ -39,9 +38,52 @@ SOURCES += src/harbour-amazfish-ui.cpp \
     src/trackloader.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
+    qml/components/DateNavigation.qml \
     qml/components/DeviceButton.qml \
     qml/components/PercentCircle.qml \
     qml/components/TruncationModes.qml \
+    qml/components/platform.silica/ApplicationWindowPL.qml \
+    qml/components/platform.silica/BusyIndicatorPL.qml \
+    qml/components/platform.silica/BusyIndicatorSmallPL.qml \
+    qml/components/platform.silica/ButtonPL.qml \
+    qml/components/platform.silica/ClipboardPL.qml \
+    qml/components/platform.silica/ComboBoxPL.qml \
+    qml/components/platform.silica/ContextMenuItemPL.qml \
+    qml/components/platform.silica/ContextMenuPL.qml \
+    qml/components/platform.silica/Cover.qml \
+    qml/components/platform.silica/DatePickerDialogPL.qml \
+    qml/components/platform.silica/DialogAutoPL.qml \
+    qml/components/platform.silica/DialogListPL.qml \
+    qml/components/platform.silica/DialogPL.qml \
+    qml/components/platform.silica/ExpandingSectionGroupPL.qml \
+    qml/components/platform.silica/ExpandingSectionPL.qml \
+    qml/components/platform.silica/FileSelectorPL.qml \
+    qml/components/platform.silica/FormLayoutPL.qml \
+    qml/components/platform.silica/IconButtonPL.qml \
+    qml/components/platform.silica/IconPL.qml \
+    qml/components/platform.silica/LabelPL.qml \
+    qml/components/platform.silica/ListItemPL.qml \
+    qml/components/platform.silica/MenuDrawerItemPL.qml \
+    qml/components/platform.silica/MenuDrawerPL.qml \
+    qml/components/platform.silica/MenuDrawerSubmenuItemPL.qml \
+    qml/components/platform.silica/MenuDrawerSubmenuPL.qml \
+    qml/components/platform.silica/PageEmptyPL.qml \
+    qml/components/platform.silica/PageListPL.qml \
+    qml/components/platform.silica/PageMenuItemPL.qml \
+    qml/components/platform.silica/PageMenuPL.qml \
+    qml/components/platform.silica/PagePL.qml \
+    qml/components/platform.silica/RemorsePopupPL.qml \
+    qml/components/platform.silica/SearchFieldPL.qml \
+    qml/components/platform.silica/SectionHeaderPL.qml \
+    qml/components/platform.silica/SliderPL.qml \
+    qml/components/platform.silica/StackPL.qml \
+    qml/components/platform.silica/StylerPL.qml \
+    qml/components/platform.silica/TextAreaPL.qml \
+    qml/components/platform.silica/TextFieldPL.qml \
+    qml/components/platform.silica/TextSwitchPL.qml \
+    qml/components/platform.silica/TimePickerDialogPL.qml \
+    qml/components/platform.silica/ToolItemPL.qml \
+    qml/components/platform.silica/ValueButtonPL.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
     qml/pages/HeartratePage.qml \
@@ -117,10 +159,6 @@ DISTFILES += qml/harbour-amazfish.qml \
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
-# to disable building translations every time, comment out the
-# following CONFIG line
-CONFIG += sailfishapp_i18n
-
 # German translation is enabled as an example. If you aren't
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
@@ -140,3 +178,62 @@ HEADERS += \
 RESOURCES += \
     amazfish.qrc \
     icons.qrc
+
+equals(FLAVOR, "silica") {
+    CONFIG += flavor_silica
+} else:equals(FLAVOR, "kirigami") {
+    CONFIG += flavor_kirigami
+} else:equals(FLAVOR, "qtcontrols") {
+    CONFIG += flavor_qtcontrols
+} else:equals(FLAVOR, "ubports") {
+    CONFIG += flavor_ubports
+} else {
+    error("Please specify platform using FLAVOR=platform as qmake option. Supported platforms: kirigami, silica, qtcontrols, ubports.")
+}
+
+flavor_silica {
+    message(SailfishOS build)
+    CONFIG += sailfishapp sailfishapp_no_deploy_qml
+    DEFINES += MER_EDITION_SAILFISH
+}
+
+# PREFIX
+isEmpty(PREFIX) {
+    flavor_silica {
+        PREFIX = /usr
+    } else:flavor_ubports {
+        PREFIX = /
+    } else {
+        PREFIX = /usr/local
+    }
+}
+
+# PREFIX_RUNNING
+isEmpty(PREFIX_RUNNING) {
+    flavor_ubports {
+        PREFIX_RUNNING = .
+    } else {
+        PREFIX_RUNNING = $$PREFIX
+    }
+}
+
+DATADIR = $$PREFIX/share/$${TARGET}
+
+qml.files = qml/*.qml \
+            qml/pages \
+            qml/cover \
+            qml/components
+qml.path = $$DATADIR/qml
+
+js.files = qml/tools/*.js
+js.path = $$DATADIR/qml/tools
+
+icons.files = qml/pics/*/png qml/pics/devices/*.png
+icons.path = $$DATADIR/qml/pics
+
+qmlplatform.extra = mkdir -p ${INSTALL_ROOT}$$DATADIR/qml/components/platform && cp -L -v $$PWD/qml/components/platform.$$FLAVOR/*.qml -t ${INSTALL_ROOT}$$DATADIR/qml/components/platform
+qmlplatform.path = $$DATADIR/qml/platform
+
+INSTALLS += qmlplatform qml js icons
+
+#End install config

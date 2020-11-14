@@ -12,7 +12,7 @@ RowLayout {
 
     IconButtonPL {
         id: btnPrev
-        iconName: "icon-m-back"
+        iconName: styler.iconBackward
         onClicked: {
             backward();
         }
@@ -27,7 +27,7 @@ RowLayout {
     }
     IconButtonPL {
         id: btnNext
-        iconName: "icon-m-forward"
+        iconName: styler.iconForward
         onClicked: {
             forward();
         }

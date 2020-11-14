@@ -67,7 +67,6 @@ QtObject {
     property string iconEdit: "image://theme/icon-m-edit"
     property string iconEditClear: "image://theme/icon-m-clear"
     property string iconFavorite: "image://theme/icon-m-favorite"
-    property string iconFavoriteSelected: "image://theme/icon-m-favorite-selected"
     property string iconManeuvers: "image://theme/icon-m-shuffle"
     property string iconMaps: "image://theme/icon-m-levels"
     property string iconMenu: "image://theme/icon-m-menu"
@@ -90,6 +89,20 @@ QtObject {
     property string iconStart: "image://theme/icon-m-play"
     property string iconStop: "image://theme/icon-m-clear"
     property string iconWebLink: "image://theme/icon-m-link"
+
+    property string iconForward: "image://theme/icon-m-forward"
+    property string iconBackward: "image://theme/icon-m-back"
+    property string iconContact: "image://theme/icon-m-contact"
+    property string iconWatch: "image://theme/icon-m-watch"
+    property string iconLevels: "image://theme/icon-m-levels"
+    property string iconAlarm: "image://theme/icon-m-alarm"
+    property string iconWeather: "image://theme/icon-m-weather-d212-light"
+    property string iconDiagnostic: "image://theme/icon-m-diagnostic"
+    property string iconFavoriteSelected: "image://theme/icon-m-favorite-selected"
+    property string iconBattery: "image://theme/icon-m-battery"
+    property string iconBluetooth: "image://theme/icon-m-bluetooth-device"
+    property string iconSteps: "../pics/icon-m-steps.png"
+    property string iconHeartrate: "../pics/icon-m-heartrate.png"
 
     // item sizes
     property real themeItemSizeLarge: Theme.itemSizeLarge

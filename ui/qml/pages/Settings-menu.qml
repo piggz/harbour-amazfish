@@ -61,40 +61,16 @@ PageListPL {
     ListModel {
         id: settingsPages
 
-        ListElement {
-            icon: "icon-m-contact"
-            name: qsTr("User Settings")
-            url: "Settings-profile.qml"
-        }
-        ListElement {
-            icon: "icon-m-watch"
-            name: qsTr("Device Settings")
-            url: "Settings-device.qml"
-        }
-        ListElement {
-            icon: "icon-m-levels"
-            name: qsTr("Application Settings")
-            url: "Settings-app.qml"
-        }
-        ListElement {
-            icon: "icon-m-alarm"
-            name: qsTr("Alarms")
-            url: "Settings-alarms.qml"
-        }
-        ListElement {
-            icon: "icon-m-weather-d212-light"
-            name: qsTr("Weather")
-            url: "AddCityDialog.qml"
-        }
-        ListElement {
-            icon: "icon-m-diagnostic"
-            name: qsTr("Debug Info")
-            url: "DebugInfo.qml"
-        }
-        ListElement {
-            icon: "icon-m-favorite-selected"
-            name: qsTr("Donate")
-            url: "https://paypal.me/piggz"
+        property bool completed: false
+        Component.onCompleted: {
+            append({"icon": styler.iconContact, "name": qsTr("User Settings"), "url": "Settings-profile.qml"});
+            append({"icon": styler.iconWatch, "name": qsTr("Device Settings"), "url": "Settings-device.qml"});
+            append({"icon": styler.iconLevels, "name": qsTr("Application Settings"), "url": "Settings-app.qml"});
+            append({"icon": styler.iconAlarm, "name": qsTr("Alarms"), "url": "Settings-alarms.qml"});
+            append({"icon": styler.iconWeather, "name": qsTr("Weather"), "url": "AddCityDialog.qml"});
+            append({"icon": styler.iconDiagnostic, "name": qsTr("Debug Info"), "url": "DebugInfo.qml"});
+            append({"icon": styler.iconFavoriteSelected, "name": qsTr("Donate"), "url": "https://paypal.me/piggz"});
+            completed = true;
         }
     }
 }

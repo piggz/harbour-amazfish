@@ -114,10 +114,6 @@
         <translation>Actualizar</translation>
     </message>
     <message>
-        <source>AmazFish</source>
-        <translation>AmazFish</translation>
-    </message>
-    <message>
         <source>Address: </source>
         <translation>Dirección: </translation>
     </message>
@@ -178,14 +174,6 @@
         <translation>Actualizar calendario</translation>
     </message>
     <message>
-        <source>Informations</source>
-        <translation>Datos</translation>
-    </message>
-    <message>
-        <source>function tests</source>
-        <translation>Pruebas de funcionamiento</translation>
-    </message>
-    <message>
         <source>Model: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -199,6 +187,18 @@
     </message>
     <message>
         <source>Music Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debugging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function Tests</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -232,18 +232,6 @@
         <translation>Conectar reloj</translation>
     </message>
     <message>
-        <source>Start Service</source>
-        <translation>Iniciar servicio</translation>
-    </message>
-    <message>
-        <source>Enable Service</source>
-        <translation>Habilitar servicio</translation>
-    </message>
-    <message>
-        <source>Amazfish</source>
-        <translation>Amazfish</translation>
-    </message>
-    <message>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
@@ -254,6 +242,26 @@
     <message>
         <source>Data Graphs</source>
         <translation>Gráficos de datos</translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation type="unfinished">Pasos</translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation type="unfinished">Frecuencia cardiaca</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Iniciar</translation>
+    </message>
+    <message>
+        <source>Enable</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -358,10 +366,6 @@
     <message>
         <source>No devices found</source>
         <translation>Ningún dispositivo encontrado</translation>
-    </message>
-    <message>
-        <source>Pull down to scan for devices</source>
-        <translation>Desliza hacia abajo para buscar dispositivos</translation>
     </message>
 </context>
 <context>
@@ -474,6 +478,10 @@
     <message>
         <source>Stop</source>
         <translation>Detener</translation>
+    </message>
+    <message>
+        <source>Amazfish Service</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
