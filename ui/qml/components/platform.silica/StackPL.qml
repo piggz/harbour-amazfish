@@ -67,4 +67,7 @@ QtObject {
     function showRoot() {
         ps.currentIndex = 0;
     }
+
+    function processCurrentItem() {
+    }
 }
