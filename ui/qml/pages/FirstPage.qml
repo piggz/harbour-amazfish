@@ -253,6 +253,7 @@ PagePL {
             repeat: false
             interval: 500
             onTriggered: {
+                pushAttached(Qt.resolvedUrl("StepsPage.qml"))
                 if (!AmazfishConfig.profileName) {
                     pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
                 }
@@ -280,7 +281,7 @@ PagePL {
     }
 
     onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("StepsPage.qml"))
+
     }
 
     Component.onCompleted: {
