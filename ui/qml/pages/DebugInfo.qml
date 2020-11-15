@@ -22,6 +22,10 @@ PagePL {
     // of the page, followed by our content.
     Column {
         id: column
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: styler.themePaddingMedium
         spacing: styler.themePaddingLarge
 
         SectionHeaderPL {

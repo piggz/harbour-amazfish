@@ -5,9 +5,7 @@ import "../components/platform"
 
 PageListPL {
     id: page
-
     title: qsTr("Settings Menu")
-
 
     model: settingsPages
 

@@ -19,7 +19,10 @@ PagePL {
     Column {
         id: column
         width: page.width
-        spacing: styler.themePaddingLarge
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: styler.themePaddingMedium
 
         LabelPL {
             id: lblStepsToday

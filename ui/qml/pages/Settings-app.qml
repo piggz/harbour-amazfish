@@ -12,6 +12,10 @@ PagePL {
     Column {
         id: column
         spacing: styler.themePaddingLarge
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: styler.themePaddingMedium
 
         SectionHeaderPL {
             text: qsTr("Notifications")

@@ -23,8 +23,10 @@ Page {
         // of the page, followed by our content.
         Column {
             id: column
-            x: Theme.horizontalPageMargin
-            width: page.width - 2*Theme.horizontalPageMargin
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: styler.themePaddingMedium
             spacing: Theme.paddingLarge
             PageHeader {
                 title: qsTr("Download File")
