@@ -101,8 +101,8 @@ QtObject {
     property string iconFavoriteSelected: "image://theme/icon-m-favorite-selected"
     property string iconBattery: "image://theme/icon-m-battery"
     property string iconBluetooth: "image://theme/icon-m-bluetooth-device"
-    property string iconSteps: "../pics/icon-m-steps.png"
-    property string iconHeartrate: "../pics/icon-m-heartrate.png"
+    property string iconSteps: "../../pics/custom-icons/icon-m-steps.png"
+    property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate.png"
 
     // item sizes
     property real themeItemSizeLarge: Theme.itemSizeLarge

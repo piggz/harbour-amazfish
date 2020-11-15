@@ -214,7 +214,7 @@ PagePL {
 
             IconButtonPL {
                 id: btnHR
-                iconName: "view-refresh"
+                iconName: styler.iconRefresh
                 iconHeight: styler.themeIconSizeMedium
                 iconWidth: iconHeight
                 onClicked: {

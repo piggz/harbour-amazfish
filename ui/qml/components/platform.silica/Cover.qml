@@ -34,7 +34,7 @@ CoverBackground {
         height: width/sourceSize.width * sourceSize.height
         opacity: 0.1
         smooth: true
-        source: "../icons/cover.png"
+        source: "image://theme/icon-m-watch"
         visible: !cover.showNarrative
         width: 1.5 * parent.width
     }
@@ -50,81 +50,11 @@ CoverBackground {
         font.pixelSize: Theme.fontSizeLarge
         horizontalAlignment: Text.AlignHCenter
         lineHeight: 1.25
-        text: "Pure\nMaps"
+        text: "Amazfish"
         visible: !cover.showNarrative
     }
 
-    /*
-     * Navigation narrative cover
-     */
-
-    CoverActionList {
-        enabled: app.initialized && app.conf.showNarrative && app.navigator.hasRoute
-
-        CoverAction {
-            iconSource: app.mode === modes.navigate ? "image://theme/icon-cover-pause" :
-                                                      "image://theme/icon-cover-play"
-            onTriggered: {
-                app.hideNavigationPages();
-                if (app.mode === modes.navigate) app.setModeExploreRoute();
-                else app.setModeNavigate();
-            }
-        }
-
-        CoverAction {
-            iconSource: "image://theme/icon-cover-cancel"
-            onTriggered: {
-                app.setModeExplore();
-                navigator.clearRoute();
-                app.showMap();
-            }
-        }
-    }
-
-    Image {
-        // Maneuver icon
-        anchors.bottom: parent.verticalCenter
-        anchors.bottomMargin: Theme.paddingMedium
-        anchors.horizontalCenter: parent.horizontalCenter
-        opacity: 0.9
-        smooth: true
-        source: "../icons/navigation/%1-%2.svg".arg(app.navigator.icon || "flag").arg(styler.navigationIconsVariant)
-        sourceSize.height: cover.width / 2
-        sourceSize.width: cover.width / 2
-        visible: cover.showNarrative
-    }
-
-    Label {
-        // Distance remaining to next maneuver
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.verticalCenter
-        font.family: Theme.fontFamilyHeading
-        font.pixelSize: Theme.fontSizeExtraLarge
-        text: app.navigator.manDist
-        visible: cover.showNarrative
-    }
-
-    Label {
-        // Distance remaining to destination
-        anchors.bottom: parent.coverActionArea.top
-        anchors.bottomMargin: Theme.paddingLarge
-        anchors.left: parent.left
-        anchors.leftMargin: Theme.paddingLarge
-        font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSizeExtraSmall
-        text: app.navigator.destDist
-        visible: cover.showNarrative
-    }
-
-    Label {
-        // Time remaining to destination
-        anchors.bottom: parent.coverActionArea.top
-        anchors.bottomMargin: Theme.paddingLarge
-        anchors.right: parent.right
-        anchors.rightMargin: Theme.paddingLarge
-        font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSizeExtraSmall
-        text: app.navigator.destTime
-        visible: cover.showNarrative
-    }
+//    CoverActionList {
+//        enabled: app.initialized && app.conf.showNarrative && app.navigator.hasRoute
+//    }
 }
