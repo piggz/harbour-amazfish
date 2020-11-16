@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
     // add fallback icon path
-    QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << ":custom-icons");
+    QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << ":qml/custom-icons");
 
     qDebug() << QIcon::themeSearchPaths() << QIcon::fallbackSearchPaths();
 #endif
