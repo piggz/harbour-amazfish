@@ -18,6 +18,7 @@ PagePL {
         anchors.margins: styler.themePaddingMedium
 
         SectionHeaderPL {
+            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
             text: qsTr("Notifications")
         }
 
