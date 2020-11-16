@@ -1,6 +1,7 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
 import uk.co.piggz.amazfish 1.0
+import "."
+import "./platform"
 
 Item {
     id: itmAlarm
@@ -28,12 +29,12 @@ Item {
             width: parent.width
             height: childrenRect.height
 
-            TextSwitch {
+            TextSwitchPL {
                 id: chkEnabled
                 text: qsTr("Enabled")
                 width: parent.width / 2
             }
-            Button {
+            ButtonPL {
                 id: button
                 text: "Time: " + pad(hour, 2) + ":" + pad(minute, 2)
 
@@ -56,41 +57,41 @@ Item {
             width: parent.width
             height: childrenRect.height
 
-            TextSwitch {
+            TextSwitchPL {
                 id: chkMo
                 width: (parent.width - Theme.paddingMedium) / 8
             }
-            TextSwitch {
+            TextSwitchPL {
                 id: chkTu
                 width: (parent.width - Theme.paddingMedium) / 8
             }
-            TextSwitch {
+            TextSwitchPL {
                 id: chkWe
                 width: (parent.width - Theme.paddingMedium) / 8
             }
-            TextSwitch {
+            TextSwitchPL {
                 id: chkTh
                 width: (parent.width - Theme.paddingMedium) / 8
             }
-            TextSwitch {
+            TextSwitchPL {
                 id: chkFr
                 width: (parent.width - Theme.paddingMedium) / 8
             }
-            TextSwitch {
+            TextSwitchPL {
                 id: chkSa
                 width: (parent.width - Theme.paddingMedium) / 8
             }
-            TextSwitch {
+            TextSwitchPL {
                 id: chkSu
                 width: (parent.width - Theme.paddingMedium) / 8
             }
-            Label {
+            LabelPL {
                 text: qsTr("Mon")
                 width: (parent.width - Theme.paddingMedium) / 8
                 horizontalAlignment: Text.AlignHCenter
 
             }
-            Label {
+            LabelPL {
                 text: qsTr("Tue")
                 width: (parent.width - Theme.paddingMedium) / 8
                 horizontalAlignment: Text.AlignHCenter
@@ -102,25 +103,25 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
 
             }
-            Label {
+            LabelPL {
                 text: qsTr("Thu")
                 width: (parent.width - Theme.paddingMedium) / 7
                 horizontalAlignment: Text.AlignHCenter
 
             }
-            Label {
+            LabelPL {
                 text: qsTr("Fri")
                 width: (parent.width - Theme.paddingMedium) / 7
                 horizontalAlignment: Text.AlignHCenter
 
             }
-            Label {
+            LabelPL {
                 text: qsTr("Sat")
                 width: (parent.width - Theme.paddingMedium) / 7
                 horizontalAlignment: Text.AlignHCenter
 
             }
-            Label {
+            LabelPL {
                 text: qsTr("Sun")
                 width: (parent.width - Theme.paddingMedium) / 7
                 horizontalAlignment: Text.AlignHCenter
