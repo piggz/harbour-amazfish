@@ -1,97 +1,72 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
 import uk.co.piggz.amazfish 1.0
+import "../components"
+import "../components/platform"
 
-Page {
+PagePL {
     id: page
-
-    // The effective value will be restricted by ApplicationWindow.allowedOrientations
-    allowedOrientations: Orientation.Portrait
-
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
-        anchors.fill: parent
-
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
+    title: qsTr("BIP Display Items")
 
 
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
+    Column {
+        id: column
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: styler.themePaddingMedium
+        spacing: styler.themePaddingLarge
 
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: styler.themePaddingMedium
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: qsTr("BIP Display Items")
-            }
+        TextSwitchPL {
+            id: chkDisplayStatus
+            text: qsTr("Status")
+        }
+        TextSwitchPL {
+            id: chkDisplayActivity
+            text: qsTr("Activity")
+        }
+        TextSwitchPL {
+            id: chkDisplayWeather
+            text: qsTr("Weather")
+        }
+        TextSwitchPL {
+            id: chkDisplayAlarm
+            text: qsTr("Alarm")
+        }
+        TextSwitchPL {
+            id: chkDisplayTimer
+            text: qsTr("Timer")
+        }
+        TextSwitchPL {
+            id: chkDisplayCompass
+            text: qsTr("Compass")
+        }
+        TextSwitchPL {
+            id: chkDisplaySettings
+            text: qsTr("Settings")
+        }
+        TextSwitchPL {
+            id: chkDisplayAliPay
+            text: qsTr("AliPay")
+        }
 
-            TextSwitch {
-                id: chkDisplayStatus
-                width: parent.width
-                text: qsTr("Status")
-            }
-            TextSwitch {
-                id: chkDisplayActivity
-                width: parent.width
-                text: qsTr("Activity")
-            }
-            TextSwitch {
-                id: chkDisplayWeather
-                width: parent.width
-                text: qsTr("Weather")
-            }
-            TextSwitch {
-                id: chkDisplayAlarm
-                width: parent.width
-                text: qsTr("Alarm")
-            }
-            TextSwitch {
-                id: chkDisplayTimer
-                width: parent.width
-                text: qsTr("Timer")
-            }
-            TextSwitch {
-                id: chkDisplayCompass
-                width: parent.width
-                text: qsTr("Compass")
-            }
-            TextSwitch {
-                id: chkDisplaySettings
-                width: parent.width
-                text: qsTr("Settings")
-            }
-            TextSwitch {
-                id: chkDisplayAliPay
-                width: parent.width
-                text: qsTr("AliPay")
-            }
+        TextSwitchPL {
+            id: chkDisplayWeatherShortcut
+            text: qsTr("Weather Shortcut")
+        }
+        TextSwitchPL {
+            id: chkDisplayAliPayShortcut
+            text: qsTr("AliPay Shortcut")
+        }
 
-            TextSwitch {
-                id: chkDisplayWeatherShortcut
-                width: parent.width
-                text: qsTr("Weather Shortcut")
-            }
-            TextSwitch {
-                id: chkDisplayAliPayShortcut
-                width: parent.width
-                text: qsTr("AliPay Shortcut")
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Save Settings")
-                onClicked: {
-                    saveSettings();
-                }
+        ButtonPL {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Save Settings")
+            onClicked: {
+                saveSettings();
             }
         }
     }
+
 
     Component.onCompleted: {
         chkDisplayStatus.checked = AmazfishConfig.deviceDisplayStatus;
@@ -102,7 +77,7 @@ Page {
         chkDisplayCompass.checked = AmazfishConfig.deviceDisplayCompass;
         chkDisplaySettings.checked = AmazfishConfig.deviceDisplaySettings;
         chkDisplayAliPay.checked = AmazfishConfig.deviceDisplayAliPay;
-        chkDisplayWeatherShortcut.checked = AmazfishConfig.deviceDisplayWeathershortcut;
+        chkDisplayWeatherShortcut.checked = AmazfishConfig.deviceDisplayWeatherShortcut;
         chkDisplayAliPayShortcut.checked = AmazfishConfig.deviceDisplayAliPayShortcut;
     }
 
@@ -131,5 +106,4 @@ Page {
             DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_DISPLAY_ITEMS);
         }
     }
-
 }
