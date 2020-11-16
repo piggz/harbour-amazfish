@@ -1,96 +1,96 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
 import uk.co.piggz.amazfish 1.0
+import "../components"
+import "../components/platform"
 
-Page {
+PagePL {
     id: page
+    title: qsTr("Device Settings")
 
-    // The effective value will be restricted by ApplicationWindow.allowedOrientations
-    allowedOrientations: Orientation.Portrait
+    Column {
+        id: column
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: styler.themePaddingMedium
+        spacing: styler.themePaddingLarge
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
-        anchors.fill: parent
-
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-
-
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
-
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: styler.themePaddingMedium
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: qsTr("Device Settings")
-            }
-
-            ComboBox {
+        FormLayoutPL {
+            ComboBoxPL {
                 id: cboLanguage
-                width: parent.width
                 label: qsTr("Language")
 
                 //"zh_CN", "zh_TW", "en_US", "es_ES", "ru_RU", "de_DE", "it_IT", "fr_FR", "tr_TR"
+                model: ListModel {
+                    ListElement { text: qsTr("en_US") }
+                    ListElement { text: qsTr("es_ES") }
+                    ListElement { text: qsTr("zh_CN") }
+                    ListElement { text: qsTr("zh_TW") }
+                    ListElement { text: qsTr("ru_RU") }
+                    ListElement { text: qsTr("de_DE") }
+                    ListElement { text: qsTr("it_IT") }
+                    ListElement { text: qsTr("fr_FR") }
+                    ListElement { text: qsTr("tr_TR") }
+                }
 
-                menu: ContextMenu {
-                    MenuItem { text: qsTr("en_US") }
-                    MenuItem { text: qsTr("es_ES") }
-                    MenuItem { text: qsTr("zh_CN") }
-                    MenuItem { text: qsTr("zh_TW") }
-                    MenuItem { text: qsTr("ru_RU") }
-                    MenuItem { text: qsTr("de_DE") }
-                    MenuItem { text: qsTr("it_IT") }
-                    MenuItem { text: qsTr("fr_FR") }
-                    MenuItem { text: qsTr("tr_TR") }
+                Component.onCompleted: {
+                    cboLanguage.currentIndex = AmazfishConfig.deviceLanguage;
                 }
             }
 
-            ComboBox {
+            ComboBoxPL {
                 id: cboDateDisplay
-                width: parent.width
                 label: qsTr("Date Display")
 
-                menu: ContextMenu {
-                    MenuItem { text: qsTr("Time") }
-                    MenuItem { text: qsTr("Date/Time") }
+                model: ListModel {
+                    ListElement { text: qsTr("Time") }
+                    ListElement { text: qsTr("Date/Time") }
+                }
+
+                Component.onCompleted: {
+                    cboDateDisplay.currentIndex = AmazfishConfig.deviceDateFormat;
                 }
             }
 
-            ComboBox {
+            ComboBoxPL {
                 id: cboTimeFormat
-                width: parent.width
                 label: qsTr("Time Format")
 
-                menu: ContextMenu {
-                    MenuItem { text: qsTr("24hr") }
-                    MenuItem { text: qsTr("12hr") }
+                model: ListModel {
+                    ListElement { text: qsTr("24hr") }
+                    ListElement { text: qsTr("12hr") }
+                }
+
+                Component.onCompleted: {
+                    cboTimeFormat.currentIndex = AmazfishConfig.deviceTimeFormat;
                 }
             }
 
-            ComboBox {
+            ComboBoxPL {
                 id: cboDistanceUnit
-                width: parent.width
                 label: qsTr("Distance Unit")
 
-                menu: ContextMenu {
-                    MenuItem { text: qsTr("Metric") }
-                    MenuItem { text: qsTr("Imperial") }
+                model: ListModel {
+                    ListElement { text: qsTr("Metric") }
+                    ListElement { text: qsTr("Imperial") }
+                }
+
+                Component.onCompleted: {
+                    cboDistanceUnit.currentIndex = AmazfishConfig.deviceDistanceUnit;
                 }
             }
 
-            TextSwitch {
+            TextSwitchPL {
                 id: chkDisconnectNotification
                 width: parent.width
                 text: qsTr("Disconnect Notification")
+
+                Component.onCompleted: {
+                    chkDisconnectNotification.checked = AmazfishConfig.deviceDisconnectNotification;
+                }
             }
 
-            Button {
+            ButtonPL {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("BIP Display Items")
                 onClicked: {
@@ -98,13 +98,10 @@ Page {
                 }
             }
 
-            Separator {
-                width: parent.width
-                horizontalAlignment: Qt.AlignHCenter
-                color: Theme.highlightColor
+            SectionHeaderPL {
             }
 
-            Button {
+            ButtonPL {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Save Settings")
                 onClicked: {
@@ -112,33 +109,28 @@ Page {
                 }
             }
         }
+        Timer {
+            //Allow data to sync
+            id: tmrSetDelay
+            repeat: false
+            interval: 500
+            running: false
+            onTriggered: {
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_LANGUAGE);
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_DATE);
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_TIME);
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_UNIT);
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DISCONNECT_NOTIFICATION);
+            }
+        }
     }
-    Component.onCompleted: {
-        cboLanguage.currentIndex = AmazfishConfig.deviceLanguage;
-        cboDateDisplay.currentIndex = AmazfishConfig.deviceDateFormat;
-        cboTimeFormat.currentIndex = AmazfishConfig.deviceTimeFormat;
-        chkDisconnectNotification.checked = AmazfishConfig.deviceDisconnectNotification;
-    }
+
     function saveSettings() {
         AmazfishConfig.deviceLanguage = cboLanguage.currentIndex;
         AmazfishConfig.deviceDateFormat = cboDateDisplay.currentIndex;
         AmazfishConfig.deviceTimeFormat = cboTimeFormat.currentIndex;
+        AmazfishConfig.deviceDistanceUnit = cboDistanceUnit.currentIndex;
         AmazfishConfig.deviceDisconnectNotification = chkDisconnectNotification.checked;
         tmrSetDelay.start();
-    }
-
-    Timer {
-        //Allow data to sync
-        id: tmrSetDelay
-        repeat: false
-        interval: 500
-        running: false
-        onTriggered: {
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_LANGUAGE);
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_DATE);
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_TIME);
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_UNIT);
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DISCONNECT_NOTIFICATION);
-        }
     }
 }
