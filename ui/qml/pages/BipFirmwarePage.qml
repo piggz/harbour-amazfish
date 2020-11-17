@@ -1,89 +1,75 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
-import Sailfish.Pickers 1.0
+import "../components"
+import "../components/platform"
 
-Page {
+PagePL {
     id: page
+    title: qsTr("Download File")
 
     property string selectedFile: qsTr("None")
     property string fileVersion
     property bool selectionMade: false
 
-    // The effective value will be restricted by ApplicationWindow.allowedOrientations
-    allowedOrientations: Orientation.Portrait
+    Column {
+        id: column
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: styler.themePaddingMedium
+        spacing: styler.themePaddingLarge
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
-        anchors.fill: parent
+        LabelPL {
+            width: parent.width
+            text: qsTr("Select a file to download.");
+        }
 
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
+        ValueButtonPL {
+            label: qsTr("Choose File")
+            value: selectedFile ? selectedFile : qsTr("None")
+            onClicked: pageStack.push(filePickerPage)
+            enabled: DaemonInterfaceInstance.connectionState === "authenticated"
+        }
 
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: styler.themePaddingMedium
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: qsTr("Download File")
-            }
+        LabelPL {
+            id: lblVersion
+            width: parent.width
+            text: qsTr("File type/version: ") + fileVersion;
+        }
 
-            Label {
-                width: parent.width
-                text: qsTr("Select a file to download.");
-            }
-
-            ValueButton {
-                label: qsTr("Choose File")
-                value: selectedFile ? selectedFile : qsTr("None")
-                onClicked: pageStack.push(filePickerPage)
-                enabled: DaemonInterfaceInstance.connectionState === "authenticated"
-            }
-
-            Label {
-                id: lblVersion
-                width: parent.width
-                text: qsTr("File type/version: ") + fileVersion;
-            }
-            
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Send file")
-                enabled: selectionMade && DaemonInterfaceInstance.connectionState === "authenticated"
-                onClicked: {
-                    if (!DaemonInterfaceInstance.startDownload()) {
-                        fileVersion = qsTr("File not supported on this device");
-                    }
+        ButtonPL {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Send file")
+            enabled: selectionMade && DaemonInterfaceInstance.connectionState === "authenticated"
+            onClicked: {
+                if (!DaemonInterfaceInstance.startDownload()) {
+                    fileVersion = qsTr("File not supported on this device");
                 }
             }
+        }
 
-            ProgressBar {
-                id: progress
-                width: parent.width
-                minimumValue: 0
-                maximumValue: 100
-                value: 0
-            }
+        //ProgressBar {
+        //    id: progress
+        //    width: parent.width
+        //    minimumValue: 0
+        //    maximumValue: 100
+        //    value: 0
+        //}
 
-            Label {
-                id: lblPercent
-                width: parent.width
-                text: "0%"
-                horizontalAlignment: Text.AlignHCenter
-            }
+        LabelPL {
+            id: lblPercent
+            width: parent.width
+            text: "0%"
+            horizontalAlignment: Text.AlignHCenter
         }
     }
 
+
     Component {
         id: filePickerPage
-        FilePickerPage {
+        FileSelectorPL {
             nameFilters: [ '*.*' ]
-            onSelectedContentPropertiesChanged: {
-                page.selectedFile = selectedContentProperties.filePath;
+            onSelected: {
+                page.selectedFile = selectedContentProperties.selectedFilePath;
                 page.selectionMade = true;
                 fileVersion = DaemonInterfaceInstance.prepareFirmwareDownload(page.selectedFile);
             }
