@@ -3,7 +3,7 @@
 #endif
 
 #include <QQuickView>
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlContext>
 
 #ifdef MER_EDITION_SAILFISH
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 #ifdef MER_EDITION_SAILFISH
     app = SailfishApp::application(argc, argv);
 #else
-    app = new QGuiApplication(argc, argv);
+    app = new QApplication(argc, argv);
 #endif
 
     QCoreApplication::setOrganizationName("harbour-amazfish");
