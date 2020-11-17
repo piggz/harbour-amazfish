@@ -26,7 +26,16 @@ PagePL {
         ValueButtonPL {
             label: qsTr("Choose File")
             value: selectedFile ? selectedFile : qsTr("None")
-            onClicked: pageStack.push(filePickerPage)
+            onClicked:{
+                var dialog = app.pages.push(Qt.resolvedUrl("../components/platform/FileSelectorPL.qml"),
+                                                        {"nameFilters": [ '*.gpx' ]});
+                            dialog.selected.connect(function() {
+                                page.selectedFile = dialog.selectedFilepath;
+                                page.selectionMade = true;
+                                fileVersion = DaemonInterfaceInstance.prepareFirmwareDownload(page.selectedFile);
+                            });
+
+            }
             enabled: DaemonInterfaceInstance.connectionState === "authenticated"
         }
 
@@ -69,9 +78,7 @@ PagePL {
         FileSelectorPL {
             nameFilters: [ '*.*' ]
             onSelected: {
-                page.selectedFile = selectedContentProperties.selectedFilePath;
-                page.selectionMade = true;
-                fileVersion = DaemonInterfaceInstance.prepareFirmwareDownload(page.selectedFile);
+
             }
         }
     }
