@@ -1,10 +1,12 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
-import Sailfish.Silica.theme 1.0
 import org.SfietKonstantin.weatherfish 1.0
+import "../components"
+import "../components/platform"
 
-Dialog {
+DialogPL {
     id: page
+    acceptText: qsTr("Set Location")
+
     property string selectedCity
     property CityManager cityManager
     canAccept: selectedCity != ""
@@ -30,18 +32,15 @@ Dialog {
         id: model
     }
 
-    SilicaListView {
+    ListViewPL {
         id: view
         currentIndex: -1
         anchors.fill: parent
         model: model
         header: Column {
             width: page.width
-            DialogHeader {
-                acceptText: qsTr("Set Location")
-            }
 
-            SearchField {
+            SearchFieldPL {
                 width: parent.width
                 onTextChanged: {
                     model.search(text)
@@ -49,8 +48,11 @@ Dialog {
                 }
             }
         }
-        delegate: BackgroundItem {
+        delegate: MouseArea {
             id: background
+            width: parent ? parent.width : Screen.width
+            implicitHeight: styler.themeItemSizeSmall
+
             property bool selected: page.selectedCity == model.identifier
             onClicked: {
                 page.selectedCity = model.identifier
@@ -61,39 +63,45 @@ Dialog {
                 cityProperties.longitude = model.longitude
                 cityProperties.latitude = model.latitude
             }
-            Row {
-                anchors.left: parent.left; anchors.leftMargin: Theme.paddingMedium
-                anchors.top: parent.top; anchors.bottom: parent.bottom
-                spacing: Theme.paddingMedium
-                Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: background.selected ? Theme.highlightColor : Theme.primaryColor
-                    text: model.name
+            Rectangle {
+                id: content
+                width: parent.width
+                height: parent.height
+                color: selected ? Qt.darker(styler.blockBg, 2) : "transparent"
+
+                Row {
+                    anchors.left: parent.left; anchors.leftMargin: styler.themePaddingMedium
+                    anchors.top: parent.top; anchors.bottom: parent.bottom
+                    spacing: styler.themePaddingMedium
+                    LabelPL {
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: background.selected ? styler.themeHighlightColor : styler.themePrimaryColor
+                        text: model.name
+                    }
+
+                    LabelPL {
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: background.selected ? styler.themeSecondaryHighlightColor
+                                                   : styler.themeSecondaryColor
+                        text: model.state
+                    }
+                    LabelPL {
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: background.selected ? styler.themeSecondaryHighlightColor
+                                                   : styler.themeSecondaryColor
+                        text: model.country
+                    }
                 }
 
-                Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: background.selected ? Theme.secondaryHighlightColor
-                                               : Theme.secondaryColor
-                    text: model.state
-                }
-                Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: background.selected ? Theme.secondaryHighlightColor
-                                               : Theme.secondaryColor
-                    text: model.country
-                }
             }
+
+
         }
 
-        BusyIndicator {
+        BusyIndicatorPL {
             running: opacity != 0
             anchors.centerIn: parent
             opacity: model.status == CitySearchModel.Loading ? 1 : 0
-
-            Behavior on opacity {
-                FadeAnimation {}
-            }
         }
     }
 }
