@@ -31,7 +31,7 @@ protected:
 private:
     void parseServices();
     void initialise();
-    Q_SLOT void serviceEvent(char event);
+    Q_SLOT void serviceEvent(uint8_t event);
 
 };
 

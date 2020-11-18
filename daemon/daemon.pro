@@ -137,7 +137,4 @@ HEADERS += \
     src/devices/abstractdevice.h \
     src/devices/bipdevice.h \
     src/bipactivitydetailparser.h \
-    src/activitycoordinate.h \
-    src/sportsdatamodel.h \
-    src/weather/huamiweathercondition.h
-
+    src/activitycoordinate.h

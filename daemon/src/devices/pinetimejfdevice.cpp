@@ -213,7 +213,7 @@ QString PinetimeJFDevice::information(Info i)
     return QString();
 }
 
-void PinetimeJFDevice::serviceEvent(char event)
+void PinetimeJFDevice::serviceEvent(uint8_t event)
 {
     switch(event) {
     case PineTimeMusicService::EVENT_MUSIC_PLAY:

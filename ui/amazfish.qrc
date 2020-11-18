@@ -54,7 +54,6 @@
         <file>qml/pages/AnalysisPage.qml</file>
         <file>qml/pages/AuthKeyDialog.qml</file>
         <file>qml/pages/BipFirmwarePage.qml</file>
-        <file>qml/pages/CityPage.qml</file>
         <file>qml/pages/DebugInfo.qml</file>
         <file>qml/pages/FirstPage.qml</file>
         <file>qml/pages/HeartratePage.qml</file>
