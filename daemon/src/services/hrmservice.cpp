@@ -65,8 +65,8 @@ void HRMService::setAllDayHRM()
 
     qDebug() << "Setting HRM monitoring to" << interval;
 
-    QByteArray cmd = QByteArray(1, COMMAND_SET_PERIODIC_HR_MEASUREMENT_INTERVAL);
-    cmd += QByteArray(1, interval);
+    QByteArray cmd = UCHAR_TO_BYTEARRAY(COMMAND_SET_PERIODIC_HR_MEASUREMENT_INTERVAL);
+    cmd += UCHAR_TO_BYTEARRAY(interval);
 
     enableNotification(UUID_CHARACTERISTIC_HRM_CONTROL);
     writeValue(UUID_CHARACTERISTIC_HRM_CONTROL, cmd);
