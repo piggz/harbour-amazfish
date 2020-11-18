@@ -228,7 +228,7 @@ qml.path = $$DATADIR/qml
 js.files = qml/tools/*.js
 js.path = $$DATADIR/qml/tools
 
-icons.files = qml/pics/*.png qml/pics/devices/*.png  qml/custom-icons
+icons.files = qml/pics/*.png qml/pics/devices  qml/custom-icons
 icons.path = $$DATADIR/qml/pics
 
 qmlplatform.extra = mkdir -p ${INSTALL_ROOT}$$DATADIR/qml/components/platform && cp -L -v $$PWD/qml/components/platform.$$FLAVOR/*.qml -t ${INSTALL_ROOT}$$DATADIR/qml/components/platform
