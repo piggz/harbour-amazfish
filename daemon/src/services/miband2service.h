@@ -46,8 +46,8 @@ private:
     QByteArray getSecretKey();
     QByteArray requestAuthNumber();
 
-    char m_authByte = 0x08; //0x08 = Bip, 0x00 = GTS
-    char m_cryptByte = 0x00; //0x00 = Bip, 0x80 = GTS/BipLite
+    uint8_t m_authByte = 0x08; //0x08 = Bip, 0x00 = GTS
+    uint8_t m_cryptByte = 0x00; //0x00 = Bip, 0x80 = GTS/BipLite
     bool m_requiresAuthKey = false;
 };
 
