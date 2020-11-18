@@ -83,18 +83,12 @@ PagePL {
 
             LabelPL {
                 id: pairedNameLabel
-                width: {
-                    var dif = column.width - parent.width;
-                    return dif < 0 ? implicitWidth + dif : implicitWidth;
-                }
                 text: AmazfishConfig.pairedName
                 color: styler.themeSecondaryHighlightColor
                 font.pixelSize: styler.themeFontSizeLarge
                 truncMode: truncModes.fade
-            }
-
-            Item {
                 Layout.fillWidth: true
+
             }
 
             IconPL {
@@ -102,9 +96,9 @@ PagePL {
                 iconHeight: styler.themeIconSizeMedium
                 visible: _connected || _authenticated || _connecting
                 BusyIndicatorSmallPL {
-                    height: parent.height
                     visible: _connecting
                     running: visible
+                    anchors.centerIn: parent
                 }
             }
 
@@ -113,9 +107,9 @@ PagePL {
                 iconHeight: styler.themeIconSizeMedium
                 visible: _authenticated || _connected
                 BusyIndicatorSmallPL {
-                    height: parent.height
                     visible: _connected
                     running: visible
+                    anchors.centerIn: parent
                 }
             }
 
