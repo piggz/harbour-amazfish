@@ -105,8 +105,8 @@ QtObject {
     property string iconClock: "icon-m-clock"
     property string iconLocation: "icon-m-location"
 
-    property string customIconPrefix: "../../pics/custom-icons/"
-    property string customIconSuffix: ".png"
+    property string customIconPrefix: ""
+    property string customIconSuffix: ""
 
     // item sizes
     property real themeItemSizeLarge: themeItemSizeSmall * 2
