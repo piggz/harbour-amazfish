@@ -28,7 +28,7 @@ PageListPL {
             x: styler.themePaddingMedium
             width: styler.themeItemSizeSmall
             height: width
-            iconName: "icon-m-" + kindstring.toLowerCase()
+            iconName: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
         }
         LabelPL
         {
@@ -55,7 +55,7 @@ PageListPL {
             anchors.top: nameLabel.bottom
             anchors.left: workoutImage.right
             anchors.leftMargin: styler.themePaddingMedium
-            iconName: "icon-m-location"
+            iconName: styler.iconLocation
             height: distLabel.height
             width: height
         }
@@ -73,7 +73,7 @@ PageListPL {
             id: timeImage
             anchors.top: timeLabel.top
             anchors.right: timeLabel.left
-            iconName: "icon-m-clock"
+            iconName: styler.iconClock
             height: timeLabel.height
             width: height
         }

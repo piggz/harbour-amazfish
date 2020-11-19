@@ -41,7 +41,7 @@ PagePL {
                 Layout.rowSpan: 3
                 Layout.preferredWidth: styler.themeItemSizeLarge
                 Layout.preferredHeight: styler.themeItemSizeLarge
-                iconName: "icon-m-" + getKindString(kindstring)
+                iconName: styler.customIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
             }
 
             LabelPL

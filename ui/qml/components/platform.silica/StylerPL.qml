@@ -104,6 +104,11 @@ QtObject {
     property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate.png"
     property string iconUp: "image://theme/icon-m-up"
     property string iconDown: "image://theme/icon-m-down"
+    property string iconClock: "image://theme/icon-m-clock"
+    property string iconLocation: "image://theme/icon-m-location"
+
+    property string customIconPrefix: "../../pics/custom-icons/"
+    property string customIconSuffix: ".png"
 
     // item sizes
     property real themeItemSizeLarge: Theme.itemSizeLarge
