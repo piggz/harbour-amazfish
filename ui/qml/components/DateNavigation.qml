@@ -6,7 +6,7 @@ RowLayout {
     id: dateNavigation
     spacing: styler.themePaddingLarge
     width: parent.width
-    property string text: ""
+    property alias text: lblDay.text
     signal backward
     signal forward
 

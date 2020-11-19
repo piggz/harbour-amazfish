@@ -26,10 +26,12 @@ PagePL {
             text: day.toDateString();
             onBackward: {
                 day.setDate(day.getDate() - 1);
+                text = day.toDateString();
                 updateGraphs();
             }
             onForward: {
                 day.setDate(day.getDate() + 1);
+                text = day.toDateString();
                 updateGraphs();
             }
         }

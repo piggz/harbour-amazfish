@@ -119,7 +119,8 @@ Item {
         }
 
         Rectangle {
-            width: parent.width
+            width: parent.width - styler.themeItemSizeLarge
+            x: styler.themeItemSizeLarge
             height: graphHeight
             border.color: styler.themeSecondaryHighlightColor
             color: "transparent"
@@ -136,6 +137,7 @@ Item {
                 model: noData ? 0 : (axisY.grid + 1)
                 delegate: LabelPL {
                     text: createYLabel( (maxY-minY)/axisY.grid * index + minY)
+                    width: styler.themeItemSizeLarge - 2*styler.themePaddingSmall
                     anchors {
                         top: (index == axisY.grid) ? parent.top : undefined
                         bottom: (index == axisY.grid) ? undefined : parent.bottom
