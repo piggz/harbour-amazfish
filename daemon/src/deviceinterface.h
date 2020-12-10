@@ -21,6 +21,7 @@
 #include "libwatchfish/notificationmonitor.h"
 #include "libwatchfish/notification.h"
 #include "libwatchfish/calendarsource.h"
+#include "navigationinterface.h"
 
 class HRMService;
 class MiBand2Service;
@@ -127,6 +128,11 @@ private:
     void sendWeather(CurrentWeather *weather);
     Q_SLOT void onCitiesChanged();
     Q_SLOT void onWeatherReady();
+
+    //Navigation
+    NavigationInterface m_navigationInterface;
+    Q_SLOT void navigationRunningChanged(bool running);
+    Q_SLOT void navigationChanged(const QString &icon, const QString &narrative, const QString &manDist, int progress);
 };
 
 #endif // BIPINTERFACE_H

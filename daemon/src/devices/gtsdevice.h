@@ -19,7 +19,11 @@ public:
 
     virtual void sendWeather(CurrentWeather *weather) override;
     virtual void enableFeature(AbstractDevice::Feature feature) override;
-    virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album) override;
+    virtual void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration = 0, int position = 0) override;
+
+    //Navigation
+    virtual void navigationRunning(bool running) override;
+    virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
 private:
     void initialise();
@@ -30,6 +34,7 @@ private:
 
 private:
     QString pairedName;
+    bool m_navigationRunning = false;
 };
 
 #endif // GTSDEVICE_H

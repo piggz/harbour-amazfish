@@ -325,59 +325,65 @@ void GtsDevice::enableFeature(AbstractDevice::Feature feature)
     }
 }
 
-void GtsDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album)
+void GtsDevice::setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration, int position)
 {
     QByteArray cmd;
-
-    cmd += (char)0x01;
-    cmd += (char)0x00;
-    cmd += (char)0x01;
-    cmd += (char)0x00;
-    cmd += (char)0x00;
-    cmd += (char)0x00;
-    cmd += (char)0x01;
-    cmd += (char)0x00;
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
-    if (mi){
-        mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
-    }
 
     char flags = 0x00;
     flags |= 0x01;
 
-    if (title.length() > 0) {
+    if (artist.length() > 0) {
         flags |= 0x02;
     }
     if (album.length() > 0) {
         flags |= 0x04;
     }
-    if (artist.length() > 0) {
+    if (track.length() > 0) {
         flags |= 0x08;
+    }
+    if (duration != 0) {
+        flags |= 0x10;
     }
 
     char state = playing ? 0x01 : 0x00; //Not playing
-    cmd.clear();
     cmd += flags;
     cmd += state;
-
-    //Unknown
-    cmd += (char)0x01;
-    cmd += (char)0x00;
-    cmd += (char)0x00;
     cmd += (char)0x00;
 
-    //Show Track
-    cmd += (char)0x01;
-    cmd += (char)0x00;
+    //Position
+    cmd += TypeConversion::fromInt16(position);
 
-    cmd += title.toLocal8Bit();
-    cmd += char(0x00);
-    cmd += album.toLocal8Bit();
-    cmd += char(0x00);
-    cmd += artist.toLocal8Bit();
-    cmd += char(0x00);
+    if (artist.length() > 0) {
+        cmd += artist.toLocal8Bit();
+        cmd += char(0x00);
+    }
+    if (album.length() > 0) {
+        cmd += album.toLocal8Bit();
+        cmd += char(0x00);
+    }
+    if (track.length() > 0) {
+        cmd += track.toLocal8Bit();
+        cmd += char(0x00);
+    }
+    if (duration != 0) {
+        cmd += TypeConversion::fromInt32(duration);
+    }
 
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
     if (mi){
         mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
     }
+}
+
+void GtsDevice::navigationRunning(bool running)
+{
+    m_navigationRunning = running;
+    if (m_navigationRunning) {
+        setMusicStatus(m_navigationRunning,"", "", "");
+    }
+}
+
+void GtsDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
+{
+    setMusicStatus(m_navigationRunning, narrative, "", manDist, 100, progress);
 }

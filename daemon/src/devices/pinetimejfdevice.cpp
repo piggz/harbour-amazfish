@@ -167,7 +167,7 @@ AbstractFirmwareInfo *PinetimeJFDevice::firmwareInfo(const QByteArray &bytes)
     return nullptr;
 }
 
-void PinetimeJFDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album)
+void PinetimeJFDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration, int position)
 {
     PineTimeMusicService *music = qobject_cast<PineTimeMusicService*>(service(PineTimeMusicService::UUID_SERVICE_MUSIC));
     if (music) {

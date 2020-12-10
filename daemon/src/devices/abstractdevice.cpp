@@ -153,7 +153,7 @@ void AbstractDevice::enableFeature(AbstractDevice::Feature feature)
     Q_UNUSED(feature);
 }
 
-void AbstractDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album)
+void AbstractDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration, int position)
 {
     Q_UNUSED(playing);
     Q_UNUSED(title);
@@ -164,4 +164,15 @@ void AbstractDevice::setMusicStatus(bool playing, const QString &title, const QS
 void AbstractDevice::abortOperations()
 {
 
+}
+
+void AbstractDevice::navigationRunning(bool running)
+{
+    Q_UNUSED(running);
+}
+
+void AbstractDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
+{
+    Q_UNUSED(flag)
+    Q_UNUSED(narrative)
 }

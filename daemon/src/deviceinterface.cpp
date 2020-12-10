@@ -64,6 +64,10 @@ DeviceInterface::DeviceInterface()
     connect(&m_musicController, &watchfish::MusicController::artistChanged, this, &DeviceInterface::musicChanged);
     connect(&m_musicController, &watchfish::MusicController::albumChanged, this, &DeviceInterface::musicChanged);
 
+    //Navigation
+    connect(&m_navigationInterface, &NavigationInterface::runningChanged, this, &DeviceInterface::navigationRunningChanged);
+    connect(&m_navigationInterface, &NavigationInterface::navigationChanged, this, &DeviceInterface::navigationChanged);
+
     //Finally, connect to device if it is defined
     QString pairedAddress = config->pairedAddress();
     if (!pairedAddress.isEmpty()) {
@@ -548,6 +552,22 @@ void DeviceInterface::onCitiesChanged()
 void DeviceInterface::onWeatherReady()
 {
     sendWeather(&m_currentWeather);
+}
+
+void DeviceInterface::navigationRunningChanged(bool running)
+{
+    qDebug() << Q_FUNC_INFO << running;
+    if (m_device) {
+        m_device->navigationRunning(running);
+    }
+}
+
+void DeviceInterface::navigationChanged(const QString &icon, const QString &narrative, const QString &manDist, int progress)
+{
+    qDebug() << Q_FUNC_INFO << icon << narrative;
+    if (m_device) {
+        m_device->navigationNarrative(icon, narrative, manDist, progress);
+    }
 }
 
 void DeviceInterface::refreshInformation()
