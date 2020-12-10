@@ -31,6 +31,7 @@ private:
 
     ActivityCoordinate m_lastActivityPoint;
     QList<ActivityCoordinate> m_activityTrack;
+    QList<ActivityCoordinate> m_tempTrack;
     ActivitySummary m_summary;
 
     bool getSkipCounterByte();

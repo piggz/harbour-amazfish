@@ -170,8 +170,24 @@ QDateTime BipActivityDetailParser::makeAbsolute(long timeOffsetSeconds)
 void BipActivityDetailParser::add(const ActivityCoordinate &ap)
 {
     if (ap != m_lastActivityPoint) {
+        if (ap.timeStamp() == m_lastActivityPoint.timeStamp() || m_tempTrack.isEmpty()) {
+            m_tempTrack << ap;
+        } else {
+            //Timestamp changed, process temp points
+            int duration = ap.timeStamp().toMSecsSinceEpoch() - m_tempTrack.first().timeStamp().toMSecsSinceEpoch();
+            int interval = duration / m_tempTrack.size();
+            qDebug() << "int:" << interval << "dur:" << duration << "count:" << m_tempTrack.size();
+            //Loop over the previous count of entries and add seconds to them
+            for (int i = 0; i < m_tempTrack.size(); i++) {
+                m_tempTrack[i].setTimeStamp(m_tempTrack[i].timeStamp().addMSecs(i * interval));
+            }
+
+            m_activityTrack << m_tempTrack;
+            m_tempTrack.clear();
+            m_tempTrack << ap;
+
+        }
         m_lastActivityPoint = ap;
-        m_activityTrack << ap;
     } else {
         qDebug() << "skipping point!";
     }
