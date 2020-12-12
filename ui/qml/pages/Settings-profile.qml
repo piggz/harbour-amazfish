@@ -154,6 +154,21 @@ PagePL {
                 saveProfile();
             }
         }
+        Timer {
+            //Allow data to sync
+            id: tmrSetDelay
+            repeat: false
+            interval: 500
+            running: false
+            onTriggered: {
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_PROFILE);
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_GOAL);
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_ALERT_GOAL);
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_DISPLAY_ON_LIFT);
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_ALL_DAY_HRM);
+                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_HRM_SLEEP_DETECTION)
+            }
+        }
     }
 
     Component.onCompleted: {
@@ -183,21 +198,5 @@ PagePL {
         AmazfishConfig.profileHRMSleepSupport = swHRMSleepSupport.checked;
 
         tmrSetDelay.start();
-    }
-
-    Timer {
-        //Allow data to sync
-        id: tmrSetDelay
-        repeat: false
-        interval: 500
-        running: false
-        onTriggered: {
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_PROFILE);
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_GOAL);
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_ALERT_GOAL);
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_DISPLAY_ON_LIFT);
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_ALL_DAY_HRM);
-            DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_HRM_SLEEP_DETECTION)
-        }
     }
 }
