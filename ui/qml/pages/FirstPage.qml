@@ -289,7 +289,7 @@ PagePL {
     }
 
     function start() {
-        app.rootPage = app.pages.replace(Qt.resolvedUrl("FirstPage.qml"));
+        app.rootPage = page;
         app.initialize();
     }
 }
