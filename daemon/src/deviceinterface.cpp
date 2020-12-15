@@ -557,7 +557,7 @@ void DeviceInterface::onWeatherReady()
 void DeviceInterface::navigationRunningChanged(bool running)
 {
     qDebug() << Q_FUNC_INFO << running;
-    if (m_device) {
+    if (m_device && AmazfishConfig::instance()->appNavigationNotification()) {
         m_device->navigationRunning(running);
     }
 }
@@ -565,7 +565,7 @@ void DeviceInterface::navigationRunningChanged(bool running)
 void DeviceInterface::navigationChanged(const QString &icon, const QString &narrative, const QString &manDist, int progress)
 {
     qDebug() << Q_FUNC_INFO << icon << narrative;
-    if (m_device) {
+    if (m_device && AmazfishConfig::instance()->appNavigationNotification()) {
         m_device->navigationNarrative(icon, narrative, manDist, progress);
     }
 }

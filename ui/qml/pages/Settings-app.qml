@@ -5,7 +5,7 @@ import "../components/platform"
 
 PagePL {
     id: page
-    title: qsTr("Device Settings")
+    title: qsTr("Application Settings")
 
     // Place our content in a Column.  The PageHeader is always placed at the top
     // of the page, followed by our content.
@@ -36,6 +36,14 @@ PagePL {
 
             width: parent.width
             text: qsTr("Low battery notification")
+        }
+
+        TextSwitchPL {
+            id: chkNavigationNotification
+            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
+
+            width: parent.width
+            text: qsTr("Navigation notifications")
         }
 
         SectionHeaderPL {
@@ -135,6 +143,7 @@ PagePL {
         sldCalendarRefresh.value = AmazfishConfig.appRefreshCalendar;
         chkAutoSyncData.checked = AmazfishConfig.appAutoSyncData;
         chkNotifyLowBattery.checked = AmazfishConfig.appNotifyLowBattery;
+        chkNavigationNotification.checked = AmazfishConfig.appNavigationNotification;
     }
 
     function saveSettings() {
@@ -143,6 +152,7 @@ PagePL {
         AmazfishConfig.appRefreshCalendar = sldCalendarRefresh.value;
         AmazfishConfig.appAutoSyncData = chkAutoSyncData.checked;
         AmazfishConfig.appNotifyLowBattery = chkNotifyLowBattery.checked;
+        AmazfishConfig.appNavigationNotification = chkNavigationNotification.checked;
 
         if (supportsFeature(DaemonInterface.FEATURE_WEATHER)) {
             weather.refresh();
