@@ -120,6 +120,7 @@ public:
     BOOL_OPTION(QStringLiteral("app/notifylowbattery"), appNotifyLowBattery, setAppNotifyLowBattery, true)
     BOOL_OPTION(QStringLiteral("app/overridefwcheck"),  appOverrideFwCheck,  setAppOverrideFwCheck,  false)
     BOOL_OPTION(QStringLiteral("app/navigationnotification"),  appNavigationNotification,  setAppNavigationNotification,  false)
+    STRING_OPTION(QStringLiteral("localAdapter"),    localAdapter,    setLocalAdapter,    "/org/bluez/hci0")
 
     INT_OPTION(QStringLiteral("app/refreshweather"),    appRefreshWeather,   setAppRefreshWeather,   80)
     INT_OPTION(QStringLiteral("app/refreshcalendar"),   appRefreshCalendar,  setAppRefreshCalendar,  60)

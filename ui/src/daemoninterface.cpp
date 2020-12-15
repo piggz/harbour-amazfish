@@ -4,6 +4,7 @@
 #include <QStandardPaths>
 
 #include <KDb3/KDbDriverManager>
+#include <amazfishconfig.h>
 
 DaemonInterface::DaemonInterface(QObject *parent)
     : QObject(parent)
@@ -105,7 +106,7 @@ void DaemonInterface::pair(const QString &name, QString address)
 
     m_pairing = true;
     emit pairingChanged();
-    address.replace(QChar(':'), QChar('_')).prepend("/org/bluez/hci0/dev_");
+    address.replace(QChar(':'), QChar('_')).prepend(AmazfishConfig::instance()->localAdapter() + "/dev_");
     auto watcher = new QDBusPendingCallWatcher(iface->asyncCall(QStringLiteral("pair"), name, address));
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, name, address]() {
         m_pairing = false;

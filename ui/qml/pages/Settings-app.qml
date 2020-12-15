@@ -17,6 +17,20 @@ PagePL {
         anchors.right: parent.right
         anchors.margins: styler.themePaddingMedium
 
+        AdapterModel {
+            id: adapters
+        }
+
+        ComboBoxPL {
+            id: cboLocalAdapter
+            model: adapters
+            textRole: "path"
+            label: qsTr("BT Adapter")
+            Component.onCompleted: {
+                cboLocalAdapter.value =  AmazfishConfig.localAdapter;
+            }
+        }
+
         SectionHeaderPL {
             visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
             text: qsTr("Notifications")
@@ -153,6 +167,7 @@ PagePL {
         AmazfishConfig.appAutoSyncData = chkAutoSyncData.checked;
         AmazfishConfig.appNotifyLowBattery = chkNotifyLowBattery.checked;
         AmazfishConfig.appNavigationNotification = chkNavigationNotification.checked;
+        AmazfishConfig.localAdapter = cboLocalAdapter.value;
 
         if (supportsFeature(DaemonInterface.FEATURE_WEATHER)) {
             weather.refresh();
