@@ -22,15 +22,15 @@ PagePL {
 
                 //"zh_CN", "zh_TW", "en_US", "es_ES", "ru_RU", "de_DE", "it_IT", "fr_FR", "tr_TR"
                 model: ListModel {
-                    ListElement { text: qsTr("en_US") }
-                    ListElement { text: qsTr("es_ES") }
-                    ListElement { text: qsTr("zh_CN") }
-                    ListElement { text: qsTr("zh_TW") }
-                    ListElement { text: qsTr("ru_RU") }
-                    ListElement { text: qsTr("de_DE") }
-                    ListElement { text: qsTr("it_IT") }
-                    ListElement { text: qsTr("fr_FR") }
-                    ListElement { text: qsTr("tr_TR") }
+                    ListElement { itemText: qsTr("en_US") }
+                    ListElement { itemText: qsTr("es_ES") }
+                    ListElement { itemText: qsTr("zh_CN") }
+                    ListElement { itemText: qsTr("zh_TW") }
+                    ListElement { itemText: qsTr("ru_RU") }
+                    ListElement { itemText: qsTr("de_DE") }
+                    ListElement { itemText: qsTr("it_IT") }
+                    ListElement { itemText: qsTr("fr_FR") }
+                    ListElement { itemText: qsTr("tr_TR") }
                 }
 
                 Component.onCompleted: {
@@ -43,8 +43,8 @@ PagePL {
                 label: qsTr("Date Display")
 
                 model: ListModel {
-                    ListElement { text: qsTr("Time") }
-                    ListElement { text: qsTr("Date/Time") }
+                    ListElement { itemText: qsTr("Time") }
+                    ListElement { itemText: qsTr("Date/Time") }
                 }
 
                 Component.onCompleted: {
@@ -57,8 +57,8 @@ PagePL {
                 label: qsTr("Time Format")
 
                 model: ListModel {
-                    ListElement { text: qsTr("24hr") }
-                    ListElement { text: qsTr("12hr") }
+                    ListElement { itemText: qsTr("24hr") }
+                    ListElement { itemText: qsTr("12hr") }
                 }
 
                 Component.onCompleted: {
@@ -71,8 +71,8 @@ PagePL {
                 label: qsTr("Distance Unit")
 
                 model: ListModel {
-                    ListElement { text: qsTr("Metric") }
-                    ListElement { text: qsTr("Imperial") }
+                    ListElement { itemText: qsTr("Metric") }
+                    ListElement { itemText: qsTr("Imperial") }
                 }
 
                 Component.onCompleted: {

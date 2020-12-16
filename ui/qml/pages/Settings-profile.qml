@@ -61,12 +61,8 @@ PagePL {
             label: qsTr("Gender")
 
             model: ListModel {
-                ListElement {
-                    text: qsTr("Male")
-                }
-                ListElement {
-                    text: qsTr("Female")
-                }
+                ListElement { itemText: qsTr("Male") }
+                ListElement { itemText: qsTr("Female")}
             }
         }
         SliderPL {
@@ -96,12 +92,8 @@ PagePL {
             label: qsTr("Wear Location")
 
             model: ListModel {
-                ListElement {
-                    text: qsTr("Left")
-                }
-                ListElement {
-                    text: qsTr("Right")
-                }
+                ListElement { itemText: qsTr("Left") }
+                ListElement { itemText: qsTr("Right")}
             }
         }
 

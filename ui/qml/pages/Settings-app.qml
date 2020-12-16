@@ -168,10 +168,6 @@ PagePL {
         AmazfishConfig.appNotifyLowBattery = chkNotifyLowBattery.checked;
         AmazfishConfig.appNavigationNotification = chkNavigationNotification.checked;
         AmazfishConfig.localAdapter = cboLocalAdapter.value;
-
-        if (supportsFeature(DaemonInterface.FEATURE_WEATHER)) {
-            weather.refresh();
-        }
     }
 
 }
