@@ -50,7 +50,7 @@
         <file>qml/components/GraphData.qml</file>
         <file>qml/components/PercentCircle.qml</file>
         <file>qml/cover/CoverPage.qml</file>
-        <file>qml/pages/AddCityDialog.qml</file>
+        <file>qml/pages/AddCityPage.qml</file>
         <file>qml/pages/AnalysisPage.qml</file>
         <file>qml/pages/AuthKeyDialog.qml</file>
         <file>qml/pages/BipFirmwarePage.qml</file>

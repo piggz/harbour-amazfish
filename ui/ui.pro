@@ -85,6 +85,7 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/components/platform.silica/ToolItemPL.qml \
     qml/components/platform.silica/ValueButtonPL.qml \
     qml/cover/CoverPage.qml \
+    qml/pages/AddCityPage.qml \
     qml/pages/FirstPage.qml \
     qml/pages/HeartratePage.qml \
     qml/pages/PairSelectDeviceType.qml \
@@ -148,7 +149,6 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/Settings-alarms.qml \
     qml/pages/BipFirmwarePage.qml \
     qml/pages/SportsSummaryPage.qml \
-    qml/pages/AddCityDialog.qml \
     qml/pages/AnalysisPage.qml \
     qml/pages/StepsPage.qml \
     qml/pages/SleepPage.qml \
