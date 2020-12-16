@@ -385,5 +385,5 @@ void GtsDevice::navigationRunning(bool running)
 
 void GtsDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
 {
-    setMusicStatus(m_navigationRunning, narrative, "", manDist, 100, progress);
+    setMusicStatus(m_navigationRunning, narrative, "", manDist, 1000, progress * 10);
 }
