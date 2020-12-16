@@ -131,7 +131,6 @@ DISTFILES += qml/harbour-amazfish.qml \
     rpm/harbour-amazfish.changes.in \
     rpm/harbour-amazfish.changes.run.in \
     rpm/harbour-amazfish.spec \
-    rpm/harbour-amazfish.yaml \
     translations/*.ts \
     qml/pages/PairPage.qml \
     qml/pages/DebugInfo.qml \

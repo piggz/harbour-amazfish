@@ -20,14 +20,13 @@ Name:       harbour-amazfish
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
-Summary:    Amazfit Bip interface application
-Version:    1.8.0
+Summary:    Watch interface application
+Version:    1.8.1
 Release:    1
 Group:      QtQt
 License:    LICENSE
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
-Source100:  harbour-amazfish.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   kdb-sqlite3-driver >= 3.1.0
 Requires:   libKDb3-3 >= 3.1.0
