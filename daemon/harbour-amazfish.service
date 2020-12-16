@@ -7,7 +7,7 @@ After=lipstick.service
 ExecStart=/usr/bin/invoker --type=generic /usr/bin/harbour-amazfishd
 Restart=always
 RestartSec=5
-Environment=HOME=/home/nemo XDG_CONFIG_HOME=/home/nemo/.config DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/100000/dbus/user_bus_socket XDG_RUNTIME_DIR=/run/user/100000
+Environment=HOME=%h XDG_CONFIG_HOME=/home/%u/.config DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/dbus/user_bus_socket XDG_RUNTIME_DIR=/run/user/%U
 
 [Install]
 WantedBy=user-session.target
