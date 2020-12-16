@@ -58,6 +58,7 @@ public:
         Loading,
         Error
     };
+    Q_PROPERTY(Status status READ status WRITE setStatus NOTIFY statusChanged)
     explicit CitySearchModel(QObject *parent = 0);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;
