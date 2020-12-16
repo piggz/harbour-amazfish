@@ -21,11 +21,12 @@ import Sailfish.Silica 1.0
 
 ComboBox {
     id: box
+    property string textRole: ""
 
     menu: ContextMenu {
         Repeater {
-            model: box.model.length
-            MenuItem { text: box.model[index] }
+            model: box.model
+            MenuItem { text: itemText }
         }
     }
 
