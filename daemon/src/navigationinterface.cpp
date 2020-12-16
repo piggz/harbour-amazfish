@@ -17,7 +17,6 @@ NavigationInterface::NavigationInterface(QObject *parent) : QObject(parent)
 void NavigationInterface::connectDaemon()
 {
     qDebug() << Q_FUNC_INFO;
-    sleep(3);
 
     if (iface) {
         iface->deleteLater();
