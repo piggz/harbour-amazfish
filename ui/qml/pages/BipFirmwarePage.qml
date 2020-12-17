@@ -28,7 +28,7 @@ PagePL {
             value: selectedFile ? selectedFile : qsTr("None")
             onClicked:{
                 var dialog = app.pages.push(Qt.resolvedUrl("../components/platform/FileSelectorPL.qml"),
-                                                        {"nameFilters": [ '*.gpx' ]});
+                                                        {"nameFilters": [ '*.*' ]});
                             dialog.selected.connect(function() {
                                 page.selectedFile = dialog.selectedFilepath;
                                 page.selectionMade = true;
