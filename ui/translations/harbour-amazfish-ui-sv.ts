@@ -191,15 +191,15 @@
     </message>
     <message>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>Felsökning</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Funktionstester</translation>
     </message>
 </context>
 <context>
@@ -245,23 +245,23 @@
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Steg</translation>
+        <translation>Steg</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Hjärtfrekvens</translation>
+        <translation>Hjärtfrekvens</translation>
     </message>
     <message>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjänst</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Starta</translation>
+        <translation>Starta</translation>
     </message>
     <message>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera</translation>
     </message>
 </context>
 <context>
@@ -481,7 +481,7 @@
     </message>
     <message>
         <source>Amazfish Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfish-tjänst</translation>
     </message>
 </context>
 <context>
