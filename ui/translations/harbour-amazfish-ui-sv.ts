@@ -2,10 +2,10 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="sv">
 <context>
-    <name>AddCityDialog</name>
+    <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
-        <translation>Ange plats</translation>
+        <translation type="unfinished">Ange plats</translation>
     </message>
 </context>
 <context>
@@ -424,10 +424,6 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <source>Device Settings</source>
-        <translation>Enhetsinställningar</translation>
-    </message>
-    <message>
         <source>Notify on connect</source>
         <translation>Avisera vid anslutning</translation>
     </message>
@@ -482,6 +478,18 @@
     <message>
         <source>Amazfish Service</source>
         <translation>Amazfish-tjänst</translation>
+    </message>
+    <message>
+        <source>Application Settings</source>
+        <translation type="unfinished">Programinställningar</translation>
+    </message>
+    <message>
+        <source>BT Adapter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigation notifications</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
