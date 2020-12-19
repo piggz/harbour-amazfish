@@ -2,7 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="es">
 <context>
-    <name>AddCityDialog</name>
+    <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
         <translation>Establecer ubicación</translation>
@@ -175,31 +175,31 @@
     </message>
     <message>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>Modelo: </translation>
     </message>
     <message>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Rev. firmware: </translation>
     </message>
     <message>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fabricante: </translation>
     </message>
     <message>
         <source>Music Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Control de música</translation>
     </message>
     <message>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>Depuración</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Información</translation>
     </message>
     <message>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Pruebas de funcionamiento</translation>
     </message>
 </context>
 <context>
@@ -245,23 +245,23 @@
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Pasos</translation>
+        <translation>Pasos</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Frecuencia cardiaca</translation>
+        <translation>Frecuencia cardiaca</translation>
     </message>
     <message>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Servicio</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Iniciar</translation>
+        <translation>Iniciar</translation>
     </message>
     <message>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar</translation>
     </message>
 </context>
 <context>
@@ -310,35 +310,35 @@
     <name>JSTools</name>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Vacío</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Frecuencia cardiaca</translation>
+        <translation>Frecuencia cardiaca</translation>
     </message>
     <message>
         <source>Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad</translation>
     </message>
     <message>
         <source>Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitud</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distancia</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Duración</translation>
     </message>
 </context>
 <context>
@@ -379,15 +379,15 @@
     <name>QObject</name>
     <message>
         <source>%1s</source>
-        <translation type="unfinished">%1% {1s?}</translation>
+        <translation>%1s</translation>
     </message>
     <message>
         <source>%1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1m %2s</translation>
     </message>
     <message>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1h %2m %3s</translation>
     </message>
 </context>
 <context>
@@ -423,10 +423,6 @@
 </context>
 <context>
     <name>Settings-app</name>
-    <message>
-        <source>Device Settings</source>
-        <translation>Ajustes de dispositivo</translation>
-    </message>
     <message>
         <source>Notify on connect</source>
         <translation>Notificar al conectar</translation>
@@ -481,7 +477,19 @@
     </message>
     <message>
         <source>Amazfish Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Servicio Amazfish</translation>
+    </message>
+    <message>
+        <source>Application Settings</source>
+        <translation>Ajustes de aplicación</translation>
+    </message>
+    <message>
+        <source>BT Adapter</source>
+        <translation>Adaptador BT</translation>
+    </message>
+    <message>
+        <source>Navigation notifications</source>
+        <translation>Notificaciones de navegación</translation>
     </message>
 </context>
 <context>
@@ -785,171 +793,171 @@
     <name>SportPage</name>
     <message>
         <source>Data:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos:</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Pasos</translation>
+        <translation>Pasos</translation>
     </message>
     <message>
         <source>Active Seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Segundos activo</translation>
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation>Calorías</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distancia</translation>
     </message>
     <message>
         <source>Ascent</source>
-        <translation type="unfinished"></translation>
+        <translation>Ascenso</translation>
     </message>
     <message>
         <source>Descent</source>
-        <translation type="unfinished"></translation>
+        <translation>Descenso</translation>
     </message>
     <message>
         <source>Max Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitud máx</translation>
     </message>
     <message>
         <source>Min Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitud mín</translation>
     </message>
     <message>
         <source>Min Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo mín</translation>
     </message>
     <message>
         <source>Max Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo máx</translation>
     </message>
     <message>
         <source>Average HR</source>
-        <translation type="unfinished"></translation>
+        <translation>FC media</translation>
     </message>
     <message>
         <source>Average Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo medio</translation>
     </message>
     <message>
         <source>Average Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>Zancada media</translation>
     </message>
     <message>
         <source>Max HR</source>
-        <translation type="unfinished"></translation>
+        <translation>FC máx</translation>
     </message>
     <message>
         <source>Time Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de ascenso</translation>
     </message>
     <message>
         <source>Time Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de descenso</translation>
     </message>
     <message>
         <source>Time Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo en llano</translation>
     </message>
     <message>
         <source>Average Stroke</source>
-        <translation type="unfinished"></translation>
+        <translation>Promedio de brazadas</translation>
     </message>
     <message>
         <source>Average Stroke/s</source>
-        <translation type="unfinished"></translation>
+        <translation>Frecuencia de brazadas</translation>
     </message>
     <message>
         <source>Average Lap Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo medio de vuelta</translation>
     </message>
     <message>
         <source>Strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>Brazadas</translation>
     </message>
     <message>
         <source>SWOLF Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Índice SWOLF</translation>
     </message>
     <message>
         <source>Swim Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo de natación</translation>
     </message>
     <message>
         <source>Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>Vueltas</translation>
     </message>
     <message>
         <source>Max Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Latitud máx</translation>
     </message>
     <message>
         <source>Min Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Latitud mín</translation>
     </message>
     <message>
         <source>Max Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud máx</translation>
     </message>
     <message>
         <source>Min Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud mín</translation>
     </message>
     <message>
         <source>Max Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad máx</translation>
     </message>
     <message>
         <source>Total Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>Total de zancadas</translation>
     </message>
     <message>
         <source>steps</source>
-        <translation type="unfinished"></translation>
+        <translation>pasos</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>segundos</translation>
     </message>
     <message>
         <source>kcal</source>
-        <translation type="unfinished"></translation>
+        <translation>kcal</translation>
     </message>
     <message>
         <source>meters</source>
-        <translation type="unfinished"></translation>
+        <translation>metros</translation>
     </message>
     <message>
         <source>seconds/m</source>
-        <translation type="unfinished"></translation>
+        <translation>segundos/m</translation>
     </message>
     <message>
         <source>bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>bpm</translation>
     </message>
     <message>
         <source>seconds/km</source>
-        <translation type="unfinished"></translation>
+        <translation>segundos/km</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>strokes/s</source>
-        <translation type="unfinished"></translation>
+        <translation>brazadas/s</translation>
     </message>
     <message>
         <source>strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>brazadas</translation>
     </message>
     <message>
         <source>swolf</source>
-        <translation type="unfinished"></translation>
+        <translation>swolf</translation>
     </message>
 </context>
 <context>

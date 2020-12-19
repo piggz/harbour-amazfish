@@ -2,10 +2,10 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>AddCityDialog</name>
+    <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
-        <translation>Задать местоположение</translation>
+        <translation type="unfinished">Задать местоположение</translation>
     </message>
 </context>
 <context>
@@ -424,10 +424,6 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <source>Device Settings</source>
-        <translation>Настройка часов</translation>
-    </message>
-    <message>
         <source>Notify on connect</source>
         <translation>Уведомлять о подключении</translation>
     </message>
@@ -481,6 +477,18 @@
     </message>
     <message>
         <source>Amazfish Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Settings</source>
+        <translation type="unfinished">Настройка приложения</translation>
+    </message>
+    <message>
+        <source>BT Adapter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigation notifications</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
