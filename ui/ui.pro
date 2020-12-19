@@ -192,7 +192,7 @@ equals(FLAVOR, "silica") {
 
 flavor_silica {
     message(SailfishOS build)
-    CONFIG += sailfishapp sailfishapp_no_deploy_qml
+    CONFIG += sailfishapp sailfishapp_no_deploy_qml sailfishapp_i18n
     DEFINES += MER_EDITION_SAILFISH
 }
 
