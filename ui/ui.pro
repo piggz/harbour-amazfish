@@ -184,10 +184,10 @@ equals(FLAVOR, "silica") {
     CONFIG += flavor_kirigami
 } else:equals(FLAVOR, "qtcontrols") {
     CONFIG += flavor_qtcontrols
-} else:equals(FLAVOR, "ubports") {
-    CONFIG += flavor_ubports
+} else:equals(FLAVOR, "uuitk") {
+    CONFIG += flavor_uuitk
 } else {
-    error("Please specify platform using FLAVOR=platform as qmake option. Supported platforms: kirigami, silica, qtcontrols, ubports.")
+    error("Please specify platform using FLAVOR=platform as qmake option. Supported platforms: kirigami, silica, qtcontrols, uuitk.")
 }
 
 flavor_silica {
@@ -200,7 +200,7 @@ flavor_silica {
 isEmpty(PREFIX) {
     flavor_silica {
         PREFIX = /usr
-    } else:flavor_ubports {
+    } else:flavor_uuitk {
         PREFIX = /
     } else {
         PREFIX = /usr/local
@@ -209,7 +209,7 @@ isEmpty(PREFIX) {
 
 # PREFIX_RUNNING
 isEmpty(PREFIX_RUNNING) {
-    flavor_ubports {
+    flavor_uuitk {
         PREFIX_RUNNING = .
     } else {
         PREFIX_RUNNING = $$PREFIX
