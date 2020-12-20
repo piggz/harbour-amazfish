@@ -5,7 +5,7 @@
     <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished">Ange plats</translation>
+        <translation>Ange plats</translation>
     </message>
 </context>
 <context>
@@ -481,15 +481,15 @@
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished">Programinställningar</translation>
+        <translation>Programinställningar</translation>
     </message>
     <message>
         <source>BT Adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>BT-adapter</translation>
     </message>
     <message>
         <source>Navigation notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigationsavisering</translation>
     </message>
 </context>
 <context>
