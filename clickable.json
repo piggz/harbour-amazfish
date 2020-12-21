@@ -3,5 +3,16 @@
   "builder": "qmake",
   "build_args": [
     "FLAVOR=uuitk"
-  ]
+  ],
+  "env_vars": {
+    "PKG_CONFIG_PATH": "${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig"
+  },
+  "scripts": {
+    "prepare-deps": "git clone https://git.sailfishos.org/mer-core/qtmpris.git libs/qtmpris"
+  },
+  "libraries": {
+    "qtmpris": {
+      "builder": "qmake"
+    }
+  }
 }

@@ -1,1 +1,6 @@
 harbour-amazfish.pro.user
+
+# Clickable
+/.clickable/
+/build/
+/libs/
