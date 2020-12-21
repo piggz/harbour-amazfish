@@ -12,42 +12,42 @@
 <context>
     <name>Alarm</name>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="34"/>
+        <location filename="../qml/components/Alarm.qml" line="35"/>
         <source>Enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="89"/>
+        <location filename="../qml/components/Alarm.qml" line="90"/>
         <source>Mon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="95"/>
+        <location filename="../qml/components/Alarm.qml" line="96"/>
         <source>Tue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="101"/>
+        <location filename="../qml/components/Alarm.qml" line="102"/>
         <source>Wed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="107"/>
+        <location filename="../qml/components/Alarm.qml" line="108"/>
         <source>Thu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="113"/>
+        <location filename="../qml/components/Alarm.qml" line="114"/>
         <source>Fri</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="119"/>
+        <location filename="../qml/components/Alarm.qml" line="120"/>
         <source>Sat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="125"/>
+        <location filename="../qml/components/Alarm.qml" line="126"/>
         <source>Sun</source>
         <translation type="unfinished"></translation>
     </message>
