@@ -86,7 +86,7 @@ PagePL {
     Connections {
         target: DaemonInterfaceInstance
         onDownloadProgress: {
-            progress.value = percent;
+            //progress.value = percent;
             lblPercent.text = percent + "%";
         }
     }

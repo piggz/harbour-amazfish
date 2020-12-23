@@ -130,6 +130,13 @@ void PinetimeJFDevice::initialise()
         ms->enableNotification(PineTimeMusicService::UUID_CHARACTERISTIC_MUSIC_EVENT);
         connect(ms, &PineTimeMusicService::serviceEvent, this, &PinetimeJFDevice::serviceEvent, Qt::UniqueConnection);
     }
+
+    DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
+    if (fw) {
+        connect(fw, &DfuService::message, this, &PinetimeJFDevice::message, Qt::UniqueConnection);
+        connect(fw, &DfuService::downloadProgress, this, &PinetimeJFDevice::downloadProgress, Qt::UniqueConnection);
+        connect(fw, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
+    }
 }
 
 void PinetimeJFDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
