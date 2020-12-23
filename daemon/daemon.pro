@@ -56,6 +56,7 @@ include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
 
 SOURCES += \
+    src/devices/infinitimefirmwareinfo.cpp \
     src/navigationinterface.cpp \
     src/devices/abstractfirmwareinfo.cpp \
     src/devices/biplitedevice.cpp \
@@ -63,9 +64,11 @@ SOURCES += \
     src/devices/gtsdevice.cpp \
     src/devices/gtsfirmwareinfo.cpp \
     src/devices/pinetimejfdevice.cpp \
+    src/operations/dfuoperation.cpp \
     src/operations/updatefirmwareoperationnew.cpp \
     src/qaesencryption.cpp \
     src/services/currenttimeservice.cpp \
+    src/services/dfuservice.cpp \
     src/services/pinetimemusicservice.cpp \
     src/typeconversion.cpp \
     src/bipbatteryinfo.cpp \
@@ -103,6 +106,7 @@ DISTFILES += \
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
+    src/devices/infinitimefirmwareinfo.h \
     src/navigationinterface.h \
     src/devices/abstractfirmwareinfo.h \
     src/devices/biplitedevice.h \
@@ -110,9 +114,11 @@ HEADERS += \
     src/devices/gtsdevice.h \
     src/devices/gtsfirmwareinfo.h \
     src/devices/pinetimejfdevice.h \
+    src/operations/dfuoperation.h \
     src/operations/updatefirmwareoperationnew.h \
     src/qaesencryption.h \
     src/services/currenttimeservice.h \
+    src/services/dfuservice.h \
     src/services/pinetimemusicservice.h \
     src/typeconversion.h \
     src/bipbatteryinfo.h \
