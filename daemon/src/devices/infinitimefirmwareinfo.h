@@ -14,8 +14,8 @@ protected:
     virtual void determineFirmwareVersion() override;
 
 private:
-    const uint8_t FW_HEADER[8]{ // ELF FW image
-            0x7F, 0x45, 0x4C, 0x46, 0x01, 0x01, 0x01, 0x00
+    const uint8_t FW_HEADER[4]{ // DFU Zip file
+            0x3D, 0xB8, 0xF3, 0x96
     };
 };
 

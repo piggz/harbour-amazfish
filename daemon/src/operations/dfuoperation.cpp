@@ -10,13 +10,14 @@ DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *servic
 
 void DfuOperation::start()
 {
+    qDebug() << Q_FUNC_INFO;
     if (m_info->type() != AbstractFirmwareInfo::Invalid) {
         DfuService *serv = dynamic_cast<DfuService*>(m_service);
 
         m_service->enableNotification(serv->UUID_CHARACTERISTIC_DFU_CONTROL);
 
         //Send Start command to control point
-        m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, UCHAR_TO_BYTEARRAY(DfuService::COMMAND_STARTDFU));
+        m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, UCHAR_TO_BYTEARRAY(DfuService::COMMAND_STARTDFU) + QByteArray(1, 0x04));
 
         //Send byte count to packet point <Length of SoftDevice><Length of bootloader><Length of application> each uint32
         QByteArray lengths;
@@ -43,10 +44,12 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
         switch (value[1]) {
         case DfuService::COMMAND_STARTDFU: {
             //Send Init packet to control point
-            m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, UCHAR_TO_BYTEARRAY(DfuService::COMMAND_INITDFUPARAMETERS));
+            m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, UCHAR_TO_BYTEARRAY(DfuService::COMMAND_INITDFUPARAMETERS) + QByteArray(1, 0x00));
 
             //Send safety info to packets point
             sendFwInfo();
+            m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, UCHAR_TO_BYTEARRAY(DfuService::COMMAND_INITDFUPARAMETERS) + QByteArray(1, 0x01));
+
             break;
         }
         case DfuService::COMMAND_INITDFUPARAMETERS: {
@@ -103,7 +106,6 @@ bool DfuOperation::sendFwInfo()
     info += TypeConversion::fromInt16(0);
     info += TypeConversion::fromInt16(0);
     info += TypeConversion::fromInt32(0);
-    info += TypeConversion::fromInt16(1);
     info += TypeConversion::fromInt16(0);
     info += TypeConversion::fromInt16(m_info->getCrc16());
     m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, info);
@@ -132,10 +134,9 @@ void DfuOperation::sendFirmwareData()
         if ((i > 0) && (i % 100 == 0)) {
             //m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, QByteArray(1, DfuService::COMMAND_FIRMWARE_UPDATE_SYNC));
             serv->downloadProgress(progressPercent);
-            //QApplication::processEvents();
-
+            QApplication::processEvents();
+            QThread::msleep(500);
         }
-        QThread::msleep(2);
     }
 
     if (firmwareProgress < len) {

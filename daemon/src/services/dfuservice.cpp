@@ -1,9 +1,9 @@
 #include "dfuservice.h"
 
-const char* DfuService::UUID_SERVICE_DFU = "00001530-1212-EFDE-1523-785FEABCD123";
-const char* DfuService::UUID_CHARACTERISTIC_DFU_CONTROL = "00001531-1212-EFDE-1523-785FEABCD123";
-const char* DfuService::UUID_CHARACTERISTIC_DFU_PACKET = "00001532-1212-EFDE-1523-785FEABCD123";
-const char* DfuService::UUID_CHARACTERISTIC_DFU_REVISION = "00001534-1212-EFDE-1523-785FEABCD123";
+const char* DfuService::UUID_SERVICE_DFU = "00001530-1212-efde-1523-785feabcd123";
+const char* DfuService::UUID_CHARACTERISTIC_DFU_CONTROL = "00001531-1212-efde-1523-785feabcd123";
+const char* DfuService::UUID_CHARACTERISTIC_DFU_PACKET = "00001532-1212-efde-1523-785feabcd123";
+const char* DfuService::UUID_CHARACTERISTIC_DFU_REVISION = "00001534-1212-efde-1523-785feabcd123";
 
 constexpr uint8_t DfuService::COMMAND_STARTDFU;
 constexpr uint8_t DfuService::COMMAND_RESPONSE;
@@ -53,6 +53,7 @@ void DfuService::prepareFirmwareDownload(const AbstractFirmwareInfo *info, DfuOp
 
 void DfuService::startDownload()
 {
+    qDebug() << Q_FUNC_INFO;
     if (m_updateFirmware && m_operationRunning == 0) {
         m_operationRunning = 1;
         m_updateFirmware->start();

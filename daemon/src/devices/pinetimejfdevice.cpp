@@ -190,6 +190,15 @@ void PinetimeJFDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
     }
 }
 
+void PinetimeJFDevice::startDownload()
+{
+    qDebug() << Q_FUNC_INFO;
+    DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
+    if (fw){
+        fw->startDownload();
+    }
+}
+
 void PinetimeJFDevice::refreshInformation()
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));

@@ -504,6 +504,7 @@ QString DeviceInterface::prepareFirmwareDownload(const QString &path)
 
 bool DeviceInterface::startDownload()
 {
+    qDebug() << Q_FUNC_INFO;
     auto config = AmazfishConfig::instance();
 
     if (m_firmwareInfo->supportedOnDevice(m_device->deviceName()) || config->appOverrideFwCheck()) {

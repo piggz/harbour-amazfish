@@ -9,12 +9,12 @@ InfinitimeFirmwareInfo::InfinitimeFirmwareInfo(const QByteArray &bytes)
     determineFirmwareVersion();
 
     //qDebug() << mBytes;
-    qDebug() << m_type << m_version << m_crc16;
+    qDebug() << m_type << m_version << m_crc16 << m_crc16x;
 }
 
 bool InfinitimeFirmwareInfo::supportedOnDevice(const QString &device) const
 {
-    return device == "Infinitime" && m_type != Invalid && !m_version.contains("unknown");;
+    return device == "InfiniTime" && m_type != Invalid && !m_version.contains("unknown");;
 }
 
 void InfinitimeFirmwareInfo::determineFirmwareType()

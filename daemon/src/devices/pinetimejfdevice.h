@@ -25,6 +25,7 @@ public:
     virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0) override;
 
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
+    virtual void startDownload() override;
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
 protected:
