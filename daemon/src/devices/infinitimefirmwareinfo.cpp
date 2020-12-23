@@ -9,7 +9,7 @@ InfinitimeFirmwareInfo::InfinitimeFirmwareInfo(const QByteArray &bytes)
     determineFirmwareVersion();
 
     //qDebug() << mBytes;
-    qDebug() << m_type << m_version << m_crc16 << m_crc16x;
+    qDebug() << m_type << m_version << m_crc16;
 }
 
 bool InfinitimeFirmwareInfo::supportedOnDevice(const QString &device) const

@@ -34,33 +34,9 @@ void AbstractFirmwareInfo::calculateCRC16() {
     m_crc16 = crc;
 }
 
-void AbstractFirmwareInfo::calculateCRC16x()
-{
-    uint16_t crc = 0xFFFF;
-
-    if (m_bytes.length() > 0) {
-        int len = m_bytes.length();
-        for (int i =0; i < len; ++i) {
-            char byte = m_bytes[i];
-            crc = (uint8_t) (crc >> 8) | (crc << 8);
-            crc ^= byte;
-            crc ^= (uint8_t) (crc & 0xFF) >> 4;
-            crc ^= (crc << 8) << 4;
-            crc ^= ((crc & 0xFF) << 4) << 1;
-        }
-    }
-
-    m_crc16x = crc;
-}
-
 uint16_t AbstractFirmwareInfo::getCrc16() const
 {
     return m_crc16;
-}
-
-uint16_t AbstractFirmwareInfo::getCrc16c() const
-{
-    return m_crc16x;
 }
 
 uint32_t AbstractFirmwareInfo::getCrc32() const

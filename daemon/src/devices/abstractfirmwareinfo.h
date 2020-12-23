@@ -28,7 +28,6 @@ public:
     QString version() const;
     Type type() const;
     uint16_t getCrc16() const;
-    uint16_t getCrc16c() const;
     uint32_t getCrc32() const;
     virtual bool supportedOnDevice(const QString &device) const = 0;
     QByteArray bytes() const;
@@ -36,7 +35,6 @@ public:
 protected:
     QByteArray m_bytes;
     uint16_t m_crc16;
-    uint16_t m_crc16x;
     uint32_t m_crc32;
     Type m_type;
     QString m_version;
@@ -45,7 +43,6 @@ protected:
     virtual void determineFirmwareVersion() = 0;
 
     void calculateCRC16();
-    void calculateCRC16x();
 
     void calculateCRC32();
 
