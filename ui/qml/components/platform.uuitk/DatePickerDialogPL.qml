@@ -1,6 +1,6 @@
 /* -*- coding: utf-8-unix -*-
  *
- * Copyright (C) 2018 Rinigus
+ * Copyright (C) 2019 Rinigus, 2019 Purism SPC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,17 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 2.2 as Controls
+import QtQuick 2.9
+import "."
 
-Item {
-    // skipping context menu in UBPorts for now
-    // TODO: fix
-    // otherwise was getting all kind of errors on absence of
-    // "enabled" property on UBPorts setup and complains regarding FINAL property on
-    // desktop
-    function open() { console.log("Not implemented") }
+DialogPL {
+    id: dialog
+
+    property var date
+
+    Component.onCompleted: console.log("DatePickerDialog is not implemented for UUITK")
 }
-
-//Controls.Menu {
-//}
