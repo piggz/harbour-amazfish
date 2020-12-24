@@ -21,10 +21,10 @@ protected:
     virtual bool sendFwInfo();
     virtual void sendFirmwareData();
 
-    bool m_startWithFWInfo = true;
-
 private:
-    bool m_needToSendFwInfo = true;
+    int m_outstandingPacketNotifications = 0;
+    int m_notificationPackets = 40;
+    bool m_transferError = false;
 };
 
 #endif // DFUOPERATION_H

@@ -25,6 +25,10 @@ void DfuOperation::start()
         lengths += TypeConversion::fromInt32(0);
         lengths += TypeConversion::fromInt32(m_fwBytes.length());
         m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, lengths);
+
+        //Send packet request command to control point
+        m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, UCHAR_TO_BYTEARRAY(DfuService::COMMAND_PACKET_RECEIPT_NOTIFICATION_REQUEST) + QByteArray(1, m_notificationPackets));
+
     } else {
         m_service->message(QObject::tr("File does not seem to be supported"));
     }
@@ -34,9 +38,9 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO << value;
 
-    if (!(value.length() == 3 || value.length() == 11)) {
-        qDebug() << "Notifications should be 3 or 11 bytes long.";
-        return true;
+    if (!(value.length() == 3 || value.length() == 5)) {
+        qDebug() << "Notifications should be 3 or 5 bytes long.";
+        return false;
     }
     bool success = value[2] == DfuService::ERROR_NO_ERROR;
 
@@ -58,6 +62,10 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
 
             //Send the firmware
             sendFirmwareData();
+            if (m_transferError) {
+                m_service->message(QObject::tr("Update operation failed"));
+                return true;
+            }
             break;
         }
         case DfuService::COMMAND_RECEIVE_FIRMWARE_IMAGE: {
@@ -79,6 +87,11 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
             return true;
         }
         }
+        return false;
+    } else  if (value[0] == DfuService::COMMAND_PACKET_RECEIPT_NOTIFICATION) {
+        int bytesReceived = TypeConversion::toUint32(value[1], value[2], value[3], value[4]);
+        qDebug() << "Bytes received by watch: " << bytesReceived;
+        m_outstandingPacketNotifications--;
         return false;
     }
 
@@ -124,28 +137,40 @@ void DfuOperation::sendFirmwareData()
 
     DfuService *serv = dynamic_cast<DfuService*>(m_service);
 
+    m_busy = true;
     for (int i = 0; i < packets; i++) {
         QByteArray fwChunk = m_fwBytes.mid(i * packetLength, packetLength);
 
-        m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, fwChunk);
-        firmwareProgress += packetLength;
-
+        if (m_service && !m_transferError) {
+            m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, fwChunk);
+            firmwareProgress += packetLength;
+        } else {
+            qDebug() << "Service has gone!!";
+            m_transferError = true;
+            break;
+        }
         progressPercent = (int) ((((float) firmwareProgress) / len) * 100);
-        if ((i > 0) && (i % 100 == 0)) {
-            //m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, QByteArray(1, DfuService::COMMAND_FIRMWARE_UPDATE_SYNC));
+        if ((i > 0) && (i % m_notificationPackets == 0)) {
+            m_outstandingPacketNotifications++;
             serv->downloadProgress(progressPercent);
-            QApplication::processEvents();
             QThread::msleep(500);
+            QApplication::processEvents();
+
+            if (m_outstandingPacketNotifications > 3) { //Device stopped responding
+                m_transferError = true;
+                break;
+            }
         }
     }
+    m_busy = false;
 
-    if (firmwareProgress < len) {
-        QByteArray lastChunk = m_fwBytes.mid(packets * packetLength);
-        m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, lastChunk);
+    if (!m_transferError) {
+        if (firmwareProgress < len) {
+            QByteArray lastChunk = m_fwBytes.mid(packets * packetLength);
+            m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, lastChunk);
+        }
+
+        qDebug() << "Finished sending firmware";
+        serv->downloadProgress(100);
     }
-
-    qDebug() << "Finished sending firmware";
-    serv->downloadProgress(100);
-
-    //m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, QByteArray(1, DfuService::COMMAND_FIRMWARE_UPDATE_SYNC));
 }

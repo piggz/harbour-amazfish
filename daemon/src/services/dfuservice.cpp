@@ -70,7 +70,7 @@ bool DfuService::operationRunning()
 
 void DfuService::abortOperations()
 {
-    if (m_updateFirmware) {
+    if (m_updateFirmware && !m_updateFirmware->busy()) {
         delete m_updateFirmware;
         m_updateFirmware = nullptr;
     }

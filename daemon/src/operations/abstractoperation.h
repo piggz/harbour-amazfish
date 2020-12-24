@@ -13,9 +13,10 @@ public:
     virtual bool handleMetaData(const QByteArray &meta) = 0;
     virtual void handleData(const QByteArray &data) = 0;
     virtual bool finished(bool success);
-
+    bool busy();
 protected:
     QBLEService *m_service;
+    bool m_busy = false;
 };
 
 #endif // ABSTRACTOPERATION_H
