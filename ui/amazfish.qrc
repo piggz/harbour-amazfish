@@ -30,6 +30,7 @@
         <file alias="qml/components/platform/PageMenuItemPL.qml">qml/components/platform.kirigami/PageMenuItemPL.qml</file>
         <file alias="qml/components/platform/PageMenuPL.qml">qml/components/platform.kirigami/PageMenuPL.qml</file>
         <file alias="qml/components/platform/PagePL.qml">qml/components/platform.kirigami/PagePL.qml</file>
+        <file alias="qml/components/platform/PopupPL.qml">qml/components/platform.kirigami/PopupPL.qml</file>
         <file alias="qml/components/platform/RemorsePopupPL.qml">qml/components/platform.kirigami/RemorsePopupPL.qml</file>
         <file alias="qml/components/platform/SearchFieldPL.qml">qml/components/platform.kirigami/SearchFieldPL.qml</file>
         <file alias="qml/components/platform/SectionHeaderPL.qml">qml/components/platform.kirigami/SectionHeaderPL.qml</file>
