@@ -290,6 +290,5 @@ PagePL {
 
     function start() {
         app.rootPage = page;
-        app.initialize();
     }
 }
