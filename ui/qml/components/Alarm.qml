@@ -12,20 +12,20 @@ Item {
     property string alarmName: "Alarm 1"
     property int alarmId: 1
 
-    height: childrenRect.height + Theme.paddingLarge
+    height: childrenRect.height + styler.themePaddingLarge
     width: parent.width
 
     Column {
         width: parent.width
         height: childrenRect.height
 
-        spacing: Theme.paddingLarge
-        SectionHeader {
+        spacing: styler.themePaddingLarge
+        SectionHeaderPL {
             text: alarmName
         }
 
         Row {
-            spacing: Theme.paddingMedium
+            spacing: styler.themePaddingMedium
             width: parent.width
             height: childrenRect.height
 
@@ -53,77 +53,77 @@ Item {
         }
         Grid {
             columns: 7
-            spacing: Theme.paddingSmall
+            spacing: styler.themePaddingSmall
             width: parent.width
             height: childrenRect.height
 
             TextSwitchPL {
                 id: chkMo
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
             }
             TextSwitchPL {
                 id: chkTu
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
             }
             TextSwitchPL {
                 id: chkWe
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
             }
             TextSwitchPL {
                 id: chkTh
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
             }
             TextSwitchPL {
                 id: chkFr
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
             }
             TextSwitchPL {
                 id: chkSa
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
             }
             TextSwitchPL {
                 id: chkSu
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
             }
             LabelPL {
                 text: qsTr("Mon")
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
                 horizontalAlignment: Text.AlignHCenter
 
             }
             LabelPL {
                 text: qsTr("Tue")
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
                 horizontalAlignment: Text.AlignHCenter
 
             }
-            Label {
+            LabelPL {
                 text: qsTr("Wed")
-                width: (parent.width - Theme.paddingMedium) / 8
+                width: (parent.width - styler.themePaddingMedium) / 8
                 horizontalAlignment: Text.AlignHCenter
 
             }
             LabelPL {
                 text: qsTr("Thu")
-                width: (parent.width - Theme.paddingMedium) / 7
+                width: (parent.width - styler.themePaddingMedium) / 7
                 horizontalAlignment: Text.AlignHCenter
 
             }
             LabelPL {
                 text: qsTr("Fri")
-                width: (parent.width - Theme.paddingMedium) / 7
+                width: (parent.width - styler.themePaddingMedium) / 7
                 horizontalAlignment: Text.AlignHCenter
 
             }
             LabelPL {
                 text: qsTr("Sat")
-                width: (parent.width - Theme.paddingMedium) / 7
+                width: (parent.width - styler.themePaddingMedium) / 7
                 horizontalAlignment: Text.AlignHCenter
 
             }
             LabelPL {
                 text: qsTr("Sun")
-                width: (parent.width - Theme.paddingMedium) / 7
+                width: (parent.width - styler.themePaddingMedium) / 7
                 horizontalAlignment: Text.AlignHCenter
             }
         }
