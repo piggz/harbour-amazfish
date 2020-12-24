@@ -30,12 +30,17 @@ ApplicationWindowPL
     //        expireTimeout: 5000
     //    }
 
+    PopupPL {
+        id: popup
+    }
+
     function showMessage(msg)
     {
         //        notification.replacesId = _lastNotificationId
         //        notification.previewBody = msg
         //        notification.publish()
         //        _lastNotificationId = notification.replacesId
+        popup.showMessage(msg)
     }
 
     function supportsFeature(feature) {
