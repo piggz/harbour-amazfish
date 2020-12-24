@@ -46,6 +46,15 @@ bool PinetimeJFDevice::operationRunning()
     return QBLEDevice::operationRunning();
 }
 
+void PinetimeJFDevice::abortOperations()
+{
+    qDebug() << Q_FUNC_INFO;
+    DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
+    if (fw){
+        fw->abortOperations();
+    }
+}
+
 void PinetimeJFDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));

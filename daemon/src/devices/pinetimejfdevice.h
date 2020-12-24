@@ -13,6 +13,7 @@ public:
     virtual int supportedFeatures() override;
     virtual QString deviceType() override;
     virtual bool operationRunning() override;
+    virtual void abortOperations() override;
 
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     virtual void incomingCall(const QString &caller) override;
