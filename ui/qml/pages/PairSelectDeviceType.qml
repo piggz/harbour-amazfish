@@ -71,6 +71,12 @@ PageListPL {
             icon: "../pics/devices/miband4.png"
             auth: true
         }
+        
+        ListElement {
+            deviceType: "Mi Smart Band 5"
+            icon: "../pics/devices/miband5.png"
+            auth: true
+        }
 
         ListElement {
             deviceType: "Amazfit Stratos 3"
