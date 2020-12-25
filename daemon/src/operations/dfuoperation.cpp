@@ -11,7 +11,11 @@ DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *servic
 DfuOperation::~DfuOperation()
 {
     if (m_workerThread.isRunning()) {
-        m_workerThread.terminate(); //Not much else can be done at this point
+        m_workerThread.requestInterruption();
+        qDebug() << "Waiting for thread to finish";
+        m_workerThread.quit();
+        m_workerThread.wait();
+        qDebug() << Q_FUNC_INFO << "Done";
     }
 }
 
