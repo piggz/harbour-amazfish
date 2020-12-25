@@ -2,7 +2,7 @@
 #define DFUSERVICE_H
 
 #include "qble/qbleservice.h"
-#include "dfuoperation.h"
+#include "abstractfirmwareinfo.h"
 
 /*
 {00001530-1212-EFDE-1523-785FEABCD123} DFU Service
@@ -10,6 +10,8 @@
 --00001532-1212-EFDE-1523-785FEABCD123 //Firmware data
 --00001534-1212-EFDE-1523-785FEABCD123 //Revision
 */
+
+class DfuOperation;
 
 class DfuService : public QBLEService
 {

@@ -1,4 +1,5 @@
 #include "dfuservice.h"
+#include "dfuoperation.h"
 
 const char* DfuService::UUID_SERVICE_DFU = "00001530-1212-efde-1523-785feabcd123";
 const char* DfuService::UUID_CHARACTERISTIC_DFU_CONTROL = "00001531-1212-efde-1523-785feabcd123";
@@ -70,7 +71,7 @@ bool DfuService::operationRunning()
 
 void DfuService::abortOperations()
 {
-    if (m_updateFirmware && !m_updateFirmware->busy()) {
+    if (m_updateFirmware) {
         delete m_updateFirmware;
         m_updateFirmware = nullptr;
     }

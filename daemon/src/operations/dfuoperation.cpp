@@ -8,6 +8,13 @@ DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *servic
     m_fwBytes = info->bytes();
 }
 
+DfuOperation::~DfuOperation()
+{
+    if (m_workerThread.isRunning()) {
+        m_workerThread.terminate(); //Not much else can be done at this point
+    }
+}
+
 void DfuOperation::start()
 {
     qDebug() << Q_FUNC_INFO;
@@ -92,6 +99,11 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
         int bytesReceived = TypeConversion::toUint32(value[1], value[2], value[3], value[4]);
         qDebug() << "Bytes received by watch: " << bytesReceived;
         m_outstandingPacketNotifications--;
+
+        //Use the data from the notification to inform the UI on progress
+        int progressPercent = (int) ((((float) bytesReceived) / m_fwBytes.length()) * 100);
+        DfuService *serv = qobject_cast<DfuService*>(m_service);
+        serv->downloadProgress(progressPercent);
         return false;
     }
 
@@ -127,50 +139,21 @@ bool DfuOperation::sendFwInfo()
 
 void DfuOperation::sendFirmwareData()
 {
-    int len = m_fwBytes.length();
-    int packetLength = 20;
-    int packets = len / packetLength;
+    m_worker = new DfuWorker();
+    m_worker->moveToThread(&m_workerThread);
+    QObject::connect(&m_workerThread, &QThread::finished, m_worker, &QObject::deleteLater);
+    QObject::connect(this, &DfuOperation::sendFirmware, m_worker, &DfuWorker::sendFirmware);
+    //connect(m_worker, &DfuWorker::done, this, &Controller::handleResults);
+    m_workerThread.start();
+    DfuService *serv = qobject_cast<DfuService*>(m_service);
+    emit sendFirmware(serv, m_fwBytes, m_notificationPackets);
+}
 
-    // going from 0 to len
-    int firmwareProgress = 0;
-    int progressPercent = 0;
-
-    DfuService *serv = dynamic_cast<DfuService*>(m_service);
-
-    m_busy = true;
-    for (int i = 0; i < packets; i++) {
-        QByteArray fwChunk = m_fwBytes.mid(i * packetLength, packetLength);
-
-        if (m_service && !m_transferError) {
-            m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, fwChunk);
-            firmwareProgress += packetLength;
-        } else {
-            qDebug() << "Service has gone!!";
-            m_transferError = true;
-            break;
-        }
-        progressPercent = (int) ((((float) firmwareProgress) / len) * 100);
-        if ((i > 0) && (i % m_notificationPackets == 0)) {
-            m_outstandingPacketNotifications++;
-            serv->downloadProgress(progressPercent);
-            QThread::msleep(500);
-            QApplication::processEvents();
-
-            if (m_outstandingPacketNotifications > 3) { //Device stopped responding
-                m_transferError = true;
-                break;
-            }
-        }
-    }
-    m_busy = false;
-
-    if (!m_transferError) {
-        if (firmwareProgress < len) {
-            QByteArray lastChunk = m_fwBytes.mid(packets * packetLength);
-            m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, lastChunk);
-        }
-
-        qDebug() << "Finished sending firmware";
-        serv->downloadProgress(100);
+void DfuOperation::packetNotification()
+{
+    m_outstandingPacketNotifications++;
+    if (m_outstandingPacketNotifications > 3) { //Watch hasnt responded
+        qDebug() << "Watch has missed 3 response packets, aborting";
+        m_workerThread.requestInterruption();
     }
 }

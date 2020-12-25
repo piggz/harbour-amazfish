@@ -65,6 +65,7 @@ SOURCES += \
     src/devices/gtsfirmwareinfo.cpp \
     src/devices/pinetimejfdevice.cpp \
     src/operations/dfuoperation.cpp \
+    src/operations/dfuworker.cpp \
     src/operations/updatefirmwareoperationnew.cpp \
     src/qaesencryption.cpp \
     src/services/currenttimeservice.cpp \
@@ -115,6 +116,7 @@ HEADERS += \
     src/devices/gtsfirmwareinfo.h \
     src/devices/pinetimejfdevice.h \
     src/operations/dfuoperation.h \
+    src/operations/dfuworker.h \
     src/operations/updatefirmwareoperationnew.h \
     src/qaesencryption.h \
     src/services/currenttimeservice.h \
