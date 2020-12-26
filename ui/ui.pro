@@ -95,6 +95,7 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pics/devices/miband2.png \
     qml/pics/devices/miband3.png \
     qml/pics/devices/miband4.png \
+    qml/pics/devices/miband5.png \
     qml/pics/devices/pinetime.png \
     qml/pics/icon-m-biking.png \
     qml/pics/icon-m-heartrate.png \
