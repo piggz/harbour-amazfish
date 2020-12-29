@@ -44,7 +44,7 @@ WATCHFISH_FEATURES += music \
                   calendar
 }
 
-INCLUDEPATH += /usr/include/mkcal-qt5 /usr/include/kcalcoren-qt5
+INCLUDEPATH += /usr/include/mkcal-qt5 /usr/include/kcalcoren-qt5 /usr/include/KF5/KCalendarCore
 
 INCLUDEPATH += $$PWD/src/services/ \
                $$PWD/src/operations/ \
