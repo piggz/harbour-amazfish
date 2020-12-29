@@ -54,11 +54,15 @@ public:
     Q_INVOKABLE virtual bool operationRunning() override;
     void abortOperations();
 
+    void setWaitForWatch(bool wait);
+    bool waitForWatch();
+
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 
     int m_operationRunning = 0;
     DfuOperation *m_updateFirmware = nullptr;
+    std::atomic<bool> m_waitForWatch;
 };
 
 #endif // DFUSERVICE_H

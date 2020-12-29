@@ -18,6 +18,7 @@ constexpr uint8_t DfuService::COMMAND_PACKET_RECEIPT_NOTIFICATION_REQUEST;
 DfuService::DfuService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_DFU, path, parent)
 {
     qDebug() << Q_FUNC_INFO;
+    m_waitForWatch.store(false);
 
     connect(this, &QBLEService::characteristicChanged, this, &DfuService::characteristicChanged);
 }
@@ -77,4 +78,14 @@ void DfuService::abortOperations()
     }
     m_operationRunning = 0;
     emit operationRunningChanged();
+}
+
+void DfuService::setWaitForWatch(bool wait)
+{
+    m_waitForWatch.store(wait);
+}
+
+bool DfuService::waitForWatch()
+{
+    return m_waitForWatch.load();
 }

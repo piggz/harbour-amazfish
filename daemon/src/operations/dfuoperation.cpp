@@ -108,6 +108,7 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
         int progressPercent = (int) ((((float) bytesReceived) / m_fwBytes.length()) * 100);
         DfuService *serv = qobject_cast<DfuService*>(m_service);
         serv->downloadProgress(progressPercent);
+        serv->setWaitForWatch(false);
         return false;
     }
 

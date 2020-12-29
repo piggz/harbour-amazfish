@@ -25,7 +25,7 @@ protected:
 
 private:
     int m_outstandingPacketNotifications = 0;
-    int m_notificationPackets = 40;
+    int m_notificationPackets = 10;
     bool m_transferError = false;
     QThread m_workerThread;
     DfuWorker *m_worker;

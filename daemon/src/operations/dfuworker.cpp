@@ -27,8 +27,20 @@ void DfuWorker::sendFirmware(DfuService *service, const QByteArray &fwBytes, int
         firmwareProgress += packetLength;
 
         if ((i > 0) && (i % notificationPackets == 0)) {
+            service->setWaitForWatch(true);
             emit packetNotification();
-            QThread::msleep(500);
+            int waitCount = 0;
+            while(service->waitForWatch() && !m_interupted) {
+                QThread::msleep(50);
+                waitCount++;
+                if (waitCount > 100) { //5 seconds
+                    qDebug() << "Timeout waiting for reply from watch!";
+                    m_interupted = true;
+                }
+            }
+        }
+        if (m_interupted) {
+            break;
         }
     }
 
@@ -39,5 +51,6 @@ void DfuWorker::sendFirmware(DfuService *service, const QByteArray &fwBytes, int
         }
         qDebug() << "Finished sending firmware";
     }
+    qDebug() << "Finished worker";
     emit done();
 }
