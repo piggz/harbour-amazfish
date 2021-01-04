@@ -223,7 +223,7 @@ void PinetimeJFDevice::refreshInformation()
     }
 }
 
-QString PinetimeJFDevice::information(Info i)
+QString PinetimeJFDevice::information(Info i) const
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
      if (!info) {

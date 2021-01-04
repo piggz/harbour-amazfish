@@ -89,6 +89,7 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/FirstPage.qml \
     qml/pages/HeartratePage.qml \
     qml/pages/PairSelectDeviceType.qml \
+    qml/pages/Settings-huami-shortcuts.qml \
     qml/pics/devices/amazfit-bip.png \
     qml/pics/devices/amazfit-cor.png \
     qml/pics/devices/amazfit-gts.png \
@@ -143,7 +144,6 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/components/Axis.qml \
     qml/components/Graph.qml \
     qml/components/GraphData.qml \
-    qml/pages/Settings-bip-shortcuts.qml \
     qml/components/Alarm.qml \
     qml/pages/Settings-alarms.qml \
     qml/pages/BipFirmwarePage.qml \

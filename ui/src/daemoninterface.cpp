@@ -366,3 +366,12 @@ void DaemonInterface::enableFeature(DaemonInterface::Feature feature)
     }
     iface->call(QStringLiteral("enableFeature"), feature);
 }
+
+QStringList DaemonInterface::supportedDisplayItems()
+{
+    if (!iface || !iface->isValid()) {
+        return QStringList();
+    }
+    QDBusReply<QStringList> reply = iface->call(QStringLiteral("supportedDisplayItems"));
+    return reply;
+}

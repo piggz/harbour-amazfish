@@ -118,7 +118,7 @@ void AbstractDevice::refreshInformation()
     
 }
 
-QString AbstractDevice::information(Info i)
+QString AbstractDevice::information(Info i) const
 {
     Q_UNUSED(i);
     return QString();
@@ -175,4 +175,9 @@ void AbstractDevice::navigationNarrative(const QString &flag, const QString &nar
 {
     Q_UNUSED(flag)
     Q_UNUSED(narrative)
+}
+
+QStringList AbstractDevice::supportedDisplayItems() const
+{
+    return QStringList();
 }

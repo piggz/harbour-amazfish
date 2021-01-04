@@ -136,6 +136,7 @@ public:
     BOOL_OPTION(QStringLiteral("device/displayalipay"),          deviceDisplayAliPay,          setDeviceDisplayAliPayChanged,   true)
     BOOL_OPTION(QStringLiteral("device/displayweathershortcut"), deviceDisplayWeatherShortcut, setDeviceDisplayWeatherShortcut, true)
     BOOL_OPTION(QStringLiteral("device/displayalipayshortcut"),  deviceDisplayAliPayShortcut,  setDeviceDisplayAliPayShortcut,  true)
+    STRING_OPTION(QStringLiteral("device/displayitems"),         deviceDisplayItems,           setDeviceDisplayItems,           "")
 
     ENUM_OPTION(QStringLiteral("device/language"),     deviceLanguage,     setDeviceLanguage,     DeviceLanguage,     DeviceLanguageEnUs)
     ENUM_OPTION(QStringLiteral("device/dateformat"),   deviceDateFormat,   setDeviceDateFormat,   DeviceDateFormat,   DeviceDateFormatTime)

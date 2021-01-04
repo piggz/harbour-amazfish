@@ -19,7 +19,7 @@ public:
     virtual void incomingCall(const QString &caller) override;
 
     virtual void refreshInformation() override;
-    virtual QString information(Info i) override;
+    virtual QString information(Info i) const override;
 
     Q_SLOT void authenticated(bool ready);
 

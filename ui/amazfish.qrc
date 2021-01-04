@@ -43,6 +43,8 @@
         <file alias="qml/components/platform/TimePickerDialogPL.qml">qml/components/platform.kirigami/TimePickerDialogPL.qml</file>
         <file alias="qml/components/platform/ToolItemPL.qml">qml/components/platform.kirigami/ToolItemPL.qml</file>
         <file alias="qml/components/platform/ValueButtonPL.qml">qml/components/platform.kirigami/ValueButtonPL.qml</file>
+        <file>qml/components/DraggableItemDropArea.qml</file>
+        <file>qml/components/DraggableItem.qml</file>
         <file>qml/components/Alarm.qml</file>
         <file>qml/components/Axis.qml</file>
         <file>qml/components/DeviceButton.qml</file>
@@ -62,7 +64,7 @@
         <file>qml/pages/PairSelectDeviceType.qml</file>
         <file>qml/pages/Settings-alarms.qml</file>
         <file>qml/pages/Settings-app.qml</file>
-        <file>qml/pages/Settings-bip-shortcuts.qml</file>
+        <file>qml/pages/Settings-huami-shortcuts.qml</file>
         <file>qml/pages/Settings-device.qml</file>
         <file>qml/pages/Settings-menu.qml</file>
         <file>qml/pages/Settings-profile.qml</file>

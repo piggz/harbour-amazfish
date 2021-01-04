@@ -114,6 +114,7 @@ public:
     Q_INVOKABLE void updateCalendar();
     Q_INVOKABLE void reloadCities();
     Q_INVOKABLE void enableFeature(Feature feature);
+    Q_INVOKABLE QStringList supportedDisplayItems();
 
 public slots:
     void pair(const QString &name, QString address);

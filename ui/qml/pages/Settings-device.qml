@@ -92,9 +92,9 @@ PagePL {
 
             ButtonPL {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("BIP Display Items")
+                text: qsTr("Huami Display Items")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-bip-shortcuts.qml"))
+                    pageStack.push(Qt.resolvedUrl("Settings-huami-shortcuts.qml"))
                 }
             }
 

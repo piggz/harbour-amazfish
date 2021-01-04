@@ -339,7 +339,7 @@ void BipDevice::refreshInformation()
     }
 }
 
-QString BipDevice::information(Info i)
+QString BipDevice::information(Info i) const
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
      if (!info) {

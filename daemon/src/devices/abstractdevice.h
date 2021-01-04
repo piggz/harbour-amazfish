@@ -96,7 +96,7 @@ public:
     virtual void downloadSportsData();
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
-    virtual QString information(Info i);
+    virtual QString information(Info i) const;
     virtual void applyDeviceSetting(Settings s);
     virtual void rebootWatch();
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) = 0;
@@ -106,6 +106,7 @@ public:
     virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0);
     virtual void navigationRunning(bool running);
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress);
+    virtual QStringList supportedDisplayItems() const;
 
     //signals    
     Q_SIGNAL void message(const QString &text);

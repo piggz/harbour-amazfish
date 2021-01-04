@@ -4,6 +4,7 @@
 #include <QDateTime>
 #include "typeconversion.h"
 #include "updatefirmwareoperationnew.h"
+#include "amazfishconfig.h"
 
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
 {
@@ -206,6 +207,53 @@ void GtsDevice::parseServices()
     }
 }
 
+void GtsDevice::setDisplayItemsNew()
+{
+    QStringList enabledList;
+    QStringList allList;
+    QByteArray command;
+    uint8_t menuType = 0xff; //0xfd for shortcuts
+
+    enabledList = AmazfishConfig::instance()->deviceDisplayItems().split(",");
+    qDebug() << "Enabled List:" << enabledList;
+
+    command += QByteArray(1, (char)0x1e);
+    // it seem that we first have to put all ENABLED items into the array, oder does matter
+    int index = 0;
+
+    command += QByteArray(1, (char)index++);
+    command += QByteArray(1, (char)0x00);
+    command += QByteArray(1, (char)menuType);
+    command += QByteArray(1, (char)0x12);
+
+    for (QString key : enabledList) {
+        uint8_t id = keyIdMap[key];
+        if (id != 0) {
+            command += QByteArray(1, (char)index++);
+            command += QByteArray(1, (char)0x00);
+            command += QByteArray(1, (char)menuType);
+            command += QByteArray(1, (char)id);
+        }
+    }
+    // And then all DISABLED ones, order does not matter
+    allList = supportedDisplayItems();
+    for (QString key : allList) {
+        uint8_t id = keyIdMap[key];
+
+        if (!enabledList.contains(key)) {
+            command += QByteArray(1, (char)index++);
+            command += QByteArray(1, (char)0x01);
+            command += QByteArray(1, (char)menuType);
+            command += QByteArray(1, (char)id);
+        }
+    }
+
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 2, command);
+    }
+}
+
 AbstractFirmwareInfo *GtsDevice::firmwareInfo(const QByteArray &bytes)
 {
     return new GtsFirmwareInfo(bytes);
@@ -250,6 +298,20 @@ void GtsDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
     if (fw){
         fw->prepareFirmwareDownload(info, new UpdateFirmwareOperationNew(info, fw));
+    }
+}
+
+void GtsDevice::applyDeviceSetting(AbstractDevice::Settings s)
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return;
+    }
+
+    if (s == SETTING_DEVICE_DISPLAY_ITEMS) {
+        setDisplayItemsNew();
+    } else {
+        BipDevice::applyDeviceSetting(s);
     }
 }
 
@@ -386,4 +448,24 @@ void GtsDevice::navigationRunning(bool running)
 void GtsDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
 {
     setMusicStatus(m_navigationRunning, narrative, "", manDist, 1000, progress * 10);
+}
+
+QStringList GtsDevice::supportedDisplayItems() const
+{
+    QStringList items;
+
+    items << "status";
+    items << "pai";
+    items << "hr";
+    items << "workout";
+    items << "activity";
+    items << "weather";
+    items << "music";
+    items << "notifications";
+    items << "alarm";
+    items << "eventreminder";
+    items << "more";
+    items << "settings";
+
+    return items;
 }

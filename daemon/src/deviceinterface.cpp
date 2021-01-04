@@ -720,6 +720,15 @@ void DeviceInterface::enableFeature(int feature)
     }
 }
 
+QStringList DeviceInterface::supportedDisplayItems()
+{
+    qDebug() << Q_FUNC_INFO;
+    if (m_device) {
+        return m_device->supportedDisplayItems();
+    }
+    return QStringList();
+}
+
 bool DeviceInterface::supportsFeature(int f){
     return (supportedFeatures() & f) == f;
 }

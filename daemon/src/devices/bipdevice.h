@@ -96,7 +96,7 @@ public:
     virtual void abortOperations() override;
 
     virtual void refreshInformation() override;
-    virtual QString information(Info i) override;
+    virtual QString information(Info i) const override;
     
     virtual void applyDeviceSetting(Settings s) override;
     virtual void rebootWatch() override;

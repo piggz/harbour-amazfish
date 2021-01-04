@@ -14,6 +14,7 @@ public:
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event) override;
     virtual int supportedFeatures() override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
+    virtual void applyDeviceSetting(Settings s) override;
 
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
@@ -25,9 +26,11 @@ public:
     virtual void navigationRunning(bool running) override;
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
+    virtual QStringList supportedDisplayItems() const override;
 private:
     void initialise();
     void parseServices();
+    void setDisplayItemsNew();
 
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
     Q_SLOT void serviceEvent(char event);
@@ -35,6 +38,7 @@ private:
 private:
     QString pairedName;
     bool m_navigationRunning = false;
+    QMap<QString, uint8_t> keyIdMap;
 };
 
 #endif // GTSDEVICE_H
