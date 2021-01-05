@@ -625,69 +625,6 @@
     </message>
 </context>
 <context>
-    <name>Settings-bip-shortcuts</name>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="8"/>
-        <source>BIP Display Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="21"/>
-        <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="25"/>
-        <source>Activity</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="29"/>
-        <source>Weather</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="33"/>
-        <source>Alarm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="37"/>
-        <source>Timer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="41"/>
-        <source>Compass</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="45"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="49"/>
-        <source>AliPay</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="54"/>
-        <source>Weather Shortcut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="58"/>
-        <source>AliPay Shortcut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-bip-shortcuts.qml" line="63"/>
-        <source>Save Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Settings-device</name>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="8"/>
@@ -770,6 +707,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/Settings-device.qml" line="95"/>
+        <source>Huami Display Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/Settings-device.qml" line="60"/>
         <source>24hr</source>
         <translation type="unfinished"></translation>
@@ -795,13 +737,131 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="95"/>
-        <source>BIP Display Items</source>
+        <location filename="../qml/pages/Settings-device.qml" line="106"/>
+        <source>Save Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-huami-shortcuts</name>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="10"/>
+        <source>Huami Display Items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="106"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="59"/>
         <source>Save Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="88"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="89"/>
+        <source>Heartrate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="90"/>
+        <source>Workout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="91"/>
+        <source>Weather</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="92"/>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="93"/>
+        <source>More</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="94"/>
+        <source>Do Not Disturb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="95"/>
+        <source>Alarms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="96"/>
+        <source>Music</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="97"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="98"/>
+        <source>Mute Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="99"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="100"/>
+        <source>Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="101"/>
+        <source>Event Reminder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="102"/>
+        <source>PAI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="103"/>
+        <source>World Clock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="104"/>
+        <source>Stress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="105"/>
+        <source>Period</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="106"/>
+        <source>SPO2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="107"/>
+        <source>Alexa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="108"/>
+        <source>Compass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="109"/>
+        <source>AliPay</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

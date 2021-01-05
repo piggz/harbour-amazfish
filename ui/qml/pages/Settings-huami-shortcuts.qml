@@ -35,6 +35,7 @@ PagePL {
                     height: textSwitch.height * 1.5
                     width: view.width
                     color: styler.blockBg
+
                     TextSwitchPL {
                         id: textSwitch
                         text: itemText

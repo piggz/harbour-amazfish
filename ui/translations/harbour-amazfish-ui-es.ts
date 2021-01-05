@@ -493,57 +493,6 @@
     </message>
 </context>
 <context>
-    <name>Settings-bip-shortcuts</name>
-    <message>
-        <source>BIP Display Items</source>
-        <translation>Elementos de visualización BIP</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Estado</translation>
-    </message>
-    <message>
-        <source>Activity</source>
-        <translation>Actividad</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation>Clima</translation>
-    </message>
-    <message>
-        <source>Alarm</source>
-        <translation>Alarma</translation>
-    </message>
-    <message>
-        <source>Timer</source>
-        <translation>Temporizador</translation>
-    </message>
-    <message>
-        <source>Compass</source>
-        <translation>Brújula</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Ajustes</translation>
-    </message>
-    <message>
-        <source>AliPay</source>
-        <translation>Alipay</translation>
-    </message>
-    <message>
-        <source>Weather Shortcut</source>
-        <translation>Atajo a clima</translation>
-    </message>
-    <message>
-        <source>AliPay Shortcut</source>
-        <translation>Atajo a AliPay</translation>
-    </message>
-    <message>
-        <source>Save Settings</source>
-        <translation>Guardar</translation>
-    </message>
-</context>
-<context>
     <name>Settings-device</name>
     <message>
         <source>Device Settings</source>
@@ -606,10 +555,6 @@
         <translation>Imperial</translation>
     </message>
     <message>
-        <source>BIP Display Items</source>
-        <translation>Elementos de visualización BIP</translation>
-    </message>
-    <message>
         <source>ru_RU</source>
         <translation>ru_RU</translation>
     </message>
@@ -636,6 +581,109 @@
     <message>
         <source>Disconnect Notification</source>
         <translation>Notificación al desconectar</translation>
+    </message>
+    <message>
+        <source>Huami Display Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-huami-shortcuts</name>
+    <message>
+        <source>Huami Display Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation type="unfinished">Guardar</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Estado</translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation type="unfinished">Frecuencia cardiaca</translation>
+    </message>
+    <message>
+        <source>Workout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weather</source>
+        <translation type="unfinished">Tiempo</translation>
+    </message>
+    <message>
+        <source>Notifications</source>
+        <translation type="unfinished">Notificaciones</translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do Not Disturb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarms</source>
+        <translation type="unfinished">Alarmas</translation>
+    </message>
+    <message>
+        <source>Music</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished">Tiempo</translation>
+    </message>
+    <message>
+        <source>Mute Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Ajustes</translation>
+    </message>
+    <message>
+        <source>Activity</source>
+        <translation type="unfinished">Actividad</translation>
+    </message>
+    <message>
+        <source>Event Reminder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PAI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>World Clock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SPO2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alexa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compass</source>
+        <translation type="unfinished">Brújula</translation>
+    </message>
+    <message>
+        <source>AliPay</source>
+        <translation type="unfinished">Alipay</translation>
     </message>
 </context>
 <context>
