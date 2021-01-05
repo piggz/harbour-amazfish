@@ -104,6 +104,8 @@ PagePL {
         if (name === "period") return qsTr("Period");
         if (name === "spo2") return qsTr("SPO2");
         if (name === "alexa") return qsTr("Alexa");
+        if (name === "compass") return qsTr("Compass");
+        if (name === "alipay") return qsTr("AliPay");
     }
 
     function buildDisplayItemsModel() {

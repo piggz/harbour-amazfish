@@ -38,7 +38,7 @@ private:
 private:
     QString pairedName;
     bool m_navigationRunning = false;
-    QMap<QString, uint8_t> keyIdMap;
+    QMap<QString, uint8_t> displayItmesIdMap;
 };
 
 #endif // GTSDEVICE_H

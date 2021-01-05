@@ -433,47 +433,48 @@ void MiBandService::setDisplayItems()
     BipDevice *device = qobject_cast<BipDevice*>(parent());
 
     if (device && device->deviceType() == "amazfitbip" && device->softwareRevision() < "V0.1.1.14") { //Lexical string comparison should be fine here
-        message(tr("Firmware is too old to set display items, V0.1.1.14 is required"));
+        emit message(tr("Firmware is too old to set display items, V0.1.1.14 is required"));
         return;
     }
 
-    auto config = AmazfishConfig::instance();
+    auto items = AmazfishConfig::instance()->deviceDisplayItems().split(",");
 
-    if (config->deviceDisplayStatus()) {
+    if (items.contains("status")) {
         items1 |= 0x02;
     }
-    if (config->deviceDisplayActivity()) {
+    if (items.contains("activity")) {
         items1 |= 0x04;
     }
-    if (config->deviceDisplayWeather()) {
+    if (items.contains("weather")) {
         items1 |= 0x08;
     }
-    if (config->deviceDisplayAlarm()) {
+    if (items.contains("alarm")) {
         items1 |= 0x10;
     }
-    if (config->deviceDisplayTimer()) {
+    if (items.contains("timer")) {
         items1 |= 0x20;
     }
-    if (config->deviceDisplayCompass()) {
+    if (items.contains("compass")) {
         items1 |= 0x40;
     }
-    if (config->deviceDisplaySettings()) {
+    if (items.contains("settings")) {
         items1 |= 0x80;
     }
-    if (config->deviceDisplayAliPay()) {
+    if (items.contains("alipay")) {
         items2 |= 0x01;
     }
-
-    auto sw = config->deviceDisplayWeatherShortcut();
-    auto sa = config->deviceDisplayAliPayShortcut();
 
     QByteArray cmd = UCHARARR_TO_BYTEARRAY(COMMAND_CHANGE_SCREENS);
     cmd[1] = items1;
     cmd[2] = items2;
 
     qDebug() << "Setting display items to:" << cmd;
-
     writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
+
+    //Shortcuts
+    auto config = AmazfishConfig::instance();
+    auto sw = config->deviceDisplayWeatherShortcut();
+    auto sa = config->deviceDisplayAliPayShortcut();
 
     QByteArray shortcuts;
     shortcuts += 0x10;

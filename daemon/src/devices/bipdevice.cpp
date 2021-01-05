@@ -496,3 +496,19 @@ void BipDevice::navigationNarrative(const QString &flag, const QString &narrativ
 {
     sendAlert("navigation", tr("Progress") + ":" + QString::number(progress), narrative + "\n" + manDist);
 }
+
+QStringList BipDevice::supportedDisplayItems() const
+{
+    QStringList items;
+
+    items << "status";
+    items << "activity";
+    items << "weather";
+    items << "alarm";
+    items << "timer";
+    items << "compass";
+    items << "settings";
+    items << "alipay";
+
+    return items;
+}
