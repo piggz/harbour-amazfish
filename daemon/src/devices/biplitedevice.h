@@ -17,7 +17,7 @@ private:
     void initialise();
     void parseServices();
 
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
 
 private:
     QString pairedName;
