@@ -267,14 +267,16 @@ QString BipActivityDetailParser::toText()
     out << "<trkseg>" << endl;
 
     foreach(ActivityCoordinate pos, m_activityTrack) {
-        out << "<trkpt lat=\""<< pos.coordinate().latitude() << "\" lon=\"" << pos.coordinate().longitude() << "\">" << endl;
-        out << "<ele>" << pos.coordinate().altitude() << "</ele>" << endl;
-        QDateTime dt = pos.timeStamp();
-        //dt.setTimeZone(QTimeZone::systemTimeZone());
-        //dt.setTimeSpec(Qt::OffsetFromUTC);
-        out << "<time>" << dt.toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "</time>" << endl;
-        out << "<extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>" << pos.heartRate() << "</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions>" << endl;
-        out << "</trkpt>" << endl;
+        if (pos.coordinate().isValid()) {
+            out << "<trkpt lat=\""<< pos.coordinate().latitude() << "\" lon=\"" << pos.coordinate().longitude() << "\">" << endl;
+            out << "<ele>" << pos.coordinate().altitude() << "</ele>" << endl;
+            QDateTime dt = pos.timeStamp();
+            //dt.setTimeZone(QTimeZone::systemTimeZone());
+            //dt.setTimeSpec(Qt::OffsetFromUTC);
+            out << "<time>" << dt.toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "</time>" << endl;
+            out << "<extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>" << pos.heartRate() << "</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions>" << endl;
+            out << "</trkpt>" << endl;
+        }
     }
     out << "</trkseg>" << endl;
     out << "</trk>" << endl;
