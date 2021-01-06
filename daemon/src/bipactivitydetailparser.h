@@ -11,6 +11,7 @@ public:
 
     void parse(const QByteArray &bytes);
     QString toText();
+    QString toTCX();
 
 private:
     static const char TYPE_GPS = 0x00;
@@ -28,6 +29,7 @@ private:
     QDateTime m_baseDate;
     bool m_skipCounterByte = false;
     int m_lastHeartrate = 0;
+    QGeoCoordinate m_lastCoordinate;
 
     ActivityCoordinate m_lastActivityPoint;
     QList<ActivityCoordinate> m_activityTrack;

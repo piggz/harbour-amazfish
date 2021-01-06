@@ -60,6 +60,7 @@ bool SportsDetailOperation::finished(bool success)
 
         QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
         QString filename = m_summary.name() + ".gpx";
+        QString tcx = m_summary.name() + ".tcx";
         QFile logFile;
 
         QDir laufhelden(QDir::homePath() + "/Laufhelden/");
@@ -77,6 +78,21 @@ bool SportsDetailOperation::finished(bool success)
             QTextStream stream( &logFile );
             stream << m_gpx;
         }
+        logFile.close();
+
+        //Saving TCX
+        if (laufhelden.exists()) {
+            logFile.setFileName(laufhelden.absolutePath() + "/" + tcx);
+        } else {
+            logFile.setFileName(cachelocation.absolutePath() + "/" + tcx);
+        }
+
+        if(logFile.open(QIODevice::WriteOnly)) {
+            qDebug() << "Saving to" << logFile.fileName();
+            QTextStream stream( &logFile );
+            stream << parser.toTCX();
+        }
+        logFile.close();
 
         saved = saveSport();
         //Convert local to UTC (without offsetting) to save as the last sync time
@@ -108,7 +124,7 @@ bool SportsDetailOperation::saveSport()
 
     m_summary.setProfileId(id);
     m_summary.setDeviceId(devid);
-    m_summary.setGPX(m_gpx);
+    //m_summary.setGPX(m_gpx);
 
     return m_summary.saveToDatabase(m_conn);
 }

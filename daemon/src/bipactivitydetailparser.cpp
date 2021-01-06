@@ -82,6 +82,11 @@ void BipActivityDetailParser::parse(const QByteArray &bytes)
             qDebug() << "unknown packet type" << type;
             i+=6;
         }
+
+        ActivityCoordinate ap = getActivityPointFor(totalTimeOffset);
+        ap.setCoordinate(m_lastCoordinate);
+        ap.setHeartRate(m_lastHeartrate);
+        add(ap);
     }
 }
 
@@ -94,17 +99,10 @@ int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &b
     m_baseLongitude += longitudeDelta;
     m_baseLatitude += latitudeDelta;
     m_baseAltitude += altitudeDelta;
-
-    QGeoCoordinate coordinate;
     
-    coordinate.setLongitude(convertHuamiValueToDecimalDegrees(m_baseLongitude));
-    coordinate.setLatitude(convertHuamiValueToDecimalDegrees(m_baseLatitude));
-    coordinate.setAltitude(m_baseAltitude);
-    
-    ActivityCoordinate ap = getActivityPointFor(timeOffset);
-    ap.setCoordinate(coordinate);
-    ap.setHeartRate(m_lastHeartrate);
-    add(ap);
+    m_lastCoordinate.setLongitude(convertHuamiValueToDecimalDegrees(m_baseLongitude));
+    m_lastCoordinate.setLatitude(convertHuamiValueToDecimalDegrees(m_baseLatitude));
+    m_lastCoordinate.setAltitude(m_baseAltitude);
 
     return 6;
 }
@@ -174,12 +172,14 @@ void BipActivityDetailParser::add(const ActivityCoordinate &ap)
             m_tempTrack << ap;
         } else {
             //Timestamp changed, process temp points
-            int duration = ap.timeStamp().toMSecsSinceEpoch() - m_tempTrack.first().timeStamp().toMSecsSinceEpoch();
+            int duration = abs(ap.timeStamp().toMSecsSinceEpoch() - m_tempTrack.first().timeStamp().toMSecsSinceEpoch());
             int interval = duration / m_tempTrack.size();
-            qDebug() << "int:" << interval << "dur:" << duration << "count:" << m_tempTrack.size();
+
             //Loop over the previous count of entries and add seconds to them
-            for (int i = 0; i < m_tempTrack.size(); i++) {
-                m_tempTrack[i].setTimeStamp(m_tempTrack[i].timeStamp().addMSecs(i * interval));
+            if (m_tempTrack.size() > 1) {
+                for (int i = 0; i < m_tempTrack.size(); i++) {
+                    m_tempTrack[i].setTimeStamp(m_tempTrack[i].timeStamp().addMSecs(i * interval));
+                }
             }
 
             m_activityTrack << m_tempTrack;
@@ -270,6 +270,54 @@ QString BipActivityDetailParser::toText()
     out << "</trkseg>" << endl;
     out << "</trk>" << endl;
     out << "</gpx>" << endl;
+
+    return str;
+}
+
+QString BipActivityDetailParser::toTCX()
+{
+    QString str;
+    QTextStream out(&str);
+    out.setRealNumberPrecision(10);
+
+    out << "<?xml version=\"1.0\" standalone=\"yes\"?>" << endl;
+    out << "<TrainingCenterDatabase" << endl;
+    out << "xmlns=\"http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2\"" << endl;
+    out << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << endl;
+    out << "xsi:schemaLocation=\"http://www.garmin.com/xmlschemas/ActivityExtension/v2" << endl;
+    out << "http://www.garmin.com/xmlschemas/ActivityExtensionv2.xsd" << endl;
+    out << "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" << endl;
+    out << "http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd\">" << endl;
+
+    out << "<Activities>" << endl;
+    out << "<Activity Sport=\"" + ActivityKind::toString(m_summary.activityKind()) + "\">" << endl;
+    out << "<Id>" << m_summary.name() << "</Id>" << endl;
+
+    out << "<Lap StartTime=\"" << m_summary.startTime().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "\">" << endl;
+    out << "<Track>" << endl;
+
+    foreach(ActivityCoordinate pos, m_activityTrack) {
+        out << "<Trackpoint>" << endl;
+        QDateTime dt = pos.timeStamp();
+        //dt.setTimeZone(QTimeZone::systemTimeZone());
+        //dt.setTimeSpec(Qt::OffsetFromUTC);
+        out << "<Time>" << dt.toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "</Time>" << endl;
+
+        if (pos.coordinate().isValid()) {
+            out << "  <Position>" << endl;
+            out << "    <LatitudeDegrees>" << pos.coordinate().latitude() << "</LatitudeDegrees>" << endl;
+            out << "    <LongitudeDegrees>" << pos.coordinate().longitude() << "</LongitudeDegrees>" << endl;
+            out << "  </Position>" << endl;
+            out << "  <AltitudeMeters>" << pos.coordinate().altitude() << "</AltitudeMeters>" << endl;
+        }
+        out << "<HeartRateBpm xsi:type=\"HeartRateInBeatsPerMinute_t\"><Value>" << pos.heartRate() << "</Value></HeartRateBpm>" << endl;
+        out << "</Trackpoint>" << endl;
+    }
+    out << "</Track>" << endl;
+    out << "</Lap>" << endl;
+    out << "</Activity>" << endl;
+    out << "</Activities>" << endl;
+    out << "</TrainingCenterDatabase>" << endl;
 
     return str;
 }
