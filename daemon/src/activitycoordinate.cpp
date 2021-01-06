@@ -35,14 +35,9 @@ int ActivityCoordinate::heartRate() const
     return m_heartRate;
 }
 
-bool ActivityCoordinate::isValid() const
-{
-    return m_isValid;
-}
-
 bool ActivityCoordinate::operator ==(const ActivityCoordinate &other) const
 {
-    return heartRate() == other.heartRate() && timeStamp() == other.timeStamp() && coordinate() == other.coordinate() && isValid() == other.isValid();
+    return heartRate() == other.heartRate() && timeStamp() == other.timeStamp() && coordinate() == other.coordinate();
 }
 
 bool ActivityCoordinate::operator !=(const ActivityCoordinate &other) const

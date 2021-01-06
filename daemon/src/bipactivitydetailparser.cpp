@@ -4,7 +4,7 @@
 #include <QTimeZone>
 
 #if QT_VERSION >= 0x051400
-    #define endl Qt::endl
+#define endl Qt::endl
 #endif
 
 BipActivityDetailParser::BipActivityDetailParser(ActivitySummary summary) {
@@ -40,6 +40,7 @@ void BipActivityDetailParser::parse(const QByteArray &bytes)
 
     long totalTimeOffset = 0;
     int lastTimeOffset = 0;
+    bool have_gps = false;
     while (i < bytes.length()) {
         if (m_skipCounterByte && (i % 17) == 0) {
             i++;
@@ -56,12 +57,21 @@ void BipActivityDetailParser::parse(const QByteArray &bytes)
         }
         totalTimeOffset += timeOffset;
 
+        qDebug() << "timeOffset:" << timeOffset << totalTimeOffset << (int)type;
+
+        ActivityCoordinate ap;
         switch (type) {
         case TYPE_GPS:
+            have_gps = true;
             i += consumeGPSAndUpdateBaseLocation(bytes, i, totalTimeOffset);
             break;
         case TYPE_HR:
             i += consumeHeartRate(bytes, i, totalTimeOffset);
+            if (!have_gps) {
+                ap.setHeartRate(m_lastHeartrate);
+                ap.setTimeStamp(makeAbsolute(totalTimeOffset));
+                m_activityTrack << ap;
+            }
             break;
         case TYPE_UNKNOWN2:
             i += consumeUnknown2(bytes, i);
@@ -83,10 +93,9 @@ void BipActivityDetailParser::parse(const QByteArray &bytes)
             i+=6;
         }
 
-        ActivityCoordinate ap = getActivityPointFor(totalTimeOffset);
-        ap.setCoordinate(m_lastCoordinate);
-        ap.setHeartRate(m_lastHeartrate);
-        add(ap);
+        if (type == TYPE_GPS || type == TYPE_HR) {
+
+        }
     }
 }
 
@@ -104,6 +113,10 @@ int BipActivityDetailParser::consumeGPSAndUpdateBaseLocation(const QByteArray &b
     m_lastCoordinate.setLatitude(convertHuamiValueToDecimalDegrees(m_baseLatitude));
     m_lastCoordinate.setAltitude(m_baseAltitude);
 
+    ActivityCoordinate ap = getActivityPointFor(timeOffset);
+    ap.setCoordinate(m_lastCoordinate);
+    ap.setHeartRate(m_lastHeartrate);
+    add(ap);
     return 6;
 }
 
@@ -150,11 +163,10 @@ int BipActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offse
 ActivityCoordinate BipActivityDetailParser::getActivityPointFor(long timeOffsetSeconds)
 {
     QDateTime time = makeAbsolute(timeOffsetSeconds);
-    if (m_lastActivityPoint.isValid()) {
-        if (m_lastActivityPoint.timeStamp() == time) {
-            return m_lastActivityPoint;
-        }
+    if (m_lastActivityPoint.timeStamp() == time) {
+        return m_lastActivityPoint;
     }
+
     ActivityCoordinate p;
     p.setTimeStamp(time);
     return p;
@@ -167,25 +179,22 @@ QDateTime BipActivityDetailParser::makeAbsolute(long timeOffsetSeconds)
 
 void BipActivityDetailParser::add(const ActivityCoordinate &ap)
 {
-    if (ap != m_lastActivityPoint) {
+    if (ap.coordinate() != m_lastActivityPoint.coordinate()) {
         if (ap.timeStamp() == m_lastActivityPoint.timeStamp() || m_tempTrack.isEmpty()) {
             m_tempTrack << ap;
         } else {
             //Timestamp changed, process temp points
-            int duration = abs(ap.timeStamp().toMSecsSinceEpoch() - m_tempTrack.first().timeStamp().toMSecsSinceEpoch());
+            int duration = ap.timeStamp().toMSecsSinceEpoch() - m_tempTrack.first().timeStamp().toMSecsSinceEpoch();
             int interval = duration / m_tempTrack.size();
 
             //Loop over the previous count of entries and add seconds to them
-            if (m_tempTrack.size() > 1) {
-                for (int i = 0; i < m_tempTrack.size(); i++) {
-                    m_tempTrack[i].setTimeStamp(m_tempTrack[i].timeStamp().addMSecs(i * interval));
-                }
+            for (int i = 0; i < m_tempTrack.size(); i++) {
+                m_tempTrack[i].setTimeStamp(m_tempTrack[i].timeStamp().addMSecs(i * interval));
             }
 
             m_activityTrack << m_tempTrack;
             m_tempTrack.clear();
             m_tempTrack << ap;
-
         }
         m_lastActivityPoint = ap;
     } else {

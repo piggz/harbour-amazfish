@@ -18,7 +18,6 @@ public:
     void setHeartRate(int hr);
     int heartRate() const;
     
-    bool isValid() const;
     bool operator==(const ActivityCoordinate &other) const;
     bool operator!=(const ActivityCoordinate &other) const;
 
@@ -27,7 +26,6 @@ private:
     QGeoCoordinate m_coordinate;
     QDateTime m_timeStamp;
     int m_heartRate = 0;    
-    bool m_isValid = false;
 };
 
 #endif
