@@ -1,5 +1,6 @@
 #include "sportsdatamodel.h"
 #include "daemoninterface.h"
+#include <QFile>
 
 SportsDataModel::SportsDataModel()
 {
@@ -114,5 +115,15 @@ QString SportsDataModel::gpx(uint id)
             qDebug() << "Error executing query";
         }
     }
-    return gpx;
+
+    QFile file(gpx);
+    if(!file.open(QIODevice::ReadOnly)) {
+        return gpx;
+    }
+
+    QTextStream in(&file);
+    QString line = in.readAll();
+
+    file.close();
+    return line;
 }
