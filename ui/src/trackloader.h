@@ -152,6 +152,7 @@ private:
     void load();
     QString paceToStr(qreal pace);
     void parseXmlStream(QXmlStreamReader &xml);
+    void parseXmlTcxStream(QXmlStreamReader &xml);
 
     QList<TrackPoint> m_points;
     QList<int> m_pause_positions;

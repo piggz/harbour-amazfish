@@ -191,13 +191,18 @@ void TrackLoader::load()
         qDebug()<<"Error opening"<<fullFilename;
         m_error = true;
         return;
-    }    
+    }
 }
 
 void TrackLoader::loadString(const QString &gpx)
 {
     QXmlStreamReader xml(gpx);
-    parseXmlStream(xml);
+
+    if (gpx.contains("TrainingCenterDatabase")) {
+        parseXmlTcxStream(xml);
+    } else {
+        parseXmlStream(xml);
+    }
 }
 
 void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
@@ -304,7 +309,7 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
                                 point.distance = 0;
                                 point.speed = 0;
                                 point.pace = 0;
-                                point.duration = 0;                                
+                                point.duration = 0;
 
                                 while(xml.readNextStartElement())
                                 {
@@ -444,7 +449,7 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
                         point.distance = 0;
                         point.speed = 0;
                         point.pace = 0;
-                        point.duration = 0;                      
+                        point.duration = 0;
 
                         while(xml.readNextStartElement())
                         {
@@ -571,6 +576,301 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
             else
             {
                 xml.skipCurrentElement();
+            }
+        }
+    }
+
+    //qDebug()<<"Segments found: "<<QString::number(iSegments);
+
+    if(m_points.size() > 1)
+    {
+        QDateTime firstTime(m_points.at(0).time);
+        QDateTime secondTime(m_points.at(m_points.size()-1).time);
+        m_duration = firstTime.secsTo(secondTime);
+
+        m_time = firstTime.toLocalTime();
+
+        qDebug()<<"m_distance first calculated: "<<QString::number(m_distance);
+
+        m_distance = 0;
+
+        int iPausePositionsIndex = 0;
+
+        qreal rElevationLastValue = 0;
+
+        for(int i=1;i<m_points.size();i++)
+        {
+            //We need to find out if this point is the end of a pause
+            if (this->pausePositionsCount() > 0 && i==(this->pausePositionAt(iPausePositionsIndex) + 1))
+            {
+                qDebug()<<"Pause point: "<<QString::number(i);
+
+                //Here we are at a point where a pause ends. We can calculate the pause duration here
+                QDateTime firstTime(m_points.at(i-1).time);
+                QDateTime secondTime(m_points.at(i).time);
+                m_pause_duration = m_pause_duration + firstTime.secsTo(secondTime);
+
+                if ((iPausePositionsIndex + 1) < this->pausePositionsCount())
+                {
+                    iPausePositionsIndex++;
+                }
+            }
+            else
+            {
+                QGeoCoordinate first(m_points.at(i-1).latitude,m_points.at(i-1).longitude);
+                QGeoCoordinate second(m_points.at(i).latitude,m_points.at(i).longitude);
+
+                m_distance += first.distanceTo(second);
+            }
+
+            if(m_points.at(i).groundSpeed > m_maxSpeed)
+            {
+                m_maxSpeed = m_points.at(i).groundSpeed;
+            }
+            //If this point has a heart rate
+            if (m_points.at(i).heartrate > 0)
+            {
+                m_heartRatePoints++;
+                m_heartRate += m_points.at(i).heartrate;
+
+                if (m_points.at(i).heartrate > m_heartRateMax)
+                    m_heartRateMax = m_points.at(i).heartrate;
+                if (m_points.at(i).heartrate < m_heartRateMin)
+                    m_heartRateMin = m_points.at(i).heartrate;
+            }
+
+            //Elevation Up/Down
+            if (i > 1)
+            {
+                if (m_points.at(i).elevation > rElevationLastValue)
+                    m_elevationUp = m_elevationUp + (m_points.at(i).elevation - rElevationLastValue);
+
+                if (m_points.at(i).elevation < rElevationLastValue)
+                    m_elevationDown = m_elevationDown + (rElevationLastValue - m_points.at(i).elevation);
+            }
+
+            //Save this elevation value for next iteration
+            rElevationLastValue = m_points.at(i).elevation;
+        }
+
+        //We need to substract the pause duration from the overall duration
+        m_duration = m_duration - m_pause_duration;
+
+        m_speed = m_distance / m_duration;
+        m_pace = m_duration / m_distance * 1000 / 60;
+        m_heartRate = m_heartRate / m_heartRatePoints;
+
+        qDebug()<<"m_distance second calculated: "<<QString::number(m_distance);
+
+        emit paceChanged();
+        emit heartRateChanged();
+        emit speedChanged();
+        emit heartRateMinChanged();
+        emit heartRateMaxChanged();
+        emit distanceChanged();
+        emit maxSpeedChanged();
+        emit durationChanged();
+        emit timeChanged();
+        emit elevationChanged();
+    }
+    else
+    {
+        qDebug()<<"Not enough trackpoints to calculate duration, distance and speed";
+        if(m_points.size() > 0)
+        {
+            QDateTime firstTime(m_points.at(0).time);
+            m_time = firstTime.toLocalTime();
+            emit timeChanged();
+        }
+    }
+    emit trackChanged();
+}
+
+
+void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
+{
+    if(!xml.readNextStartElement())
+    {
+        qDebug()<<m_filename<<"is not xml file?";
+        m_error = true;
+        return;
+    }
+    if( !(xml.name() == "TrainingCenterDatabase" && xml.namespaceUri() == "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2") )
+    {
+        qDebug()<<m_filename<<"is not TCX V2 file";
+        m_error = true;
+        return;
+    }
+
+    //count track segments
+    int iSegments = 0;
+    bool bPauseFound = false;
+
+
+    // Loading considered succeeded at this point
+    m_loaded = true;
+    emit loadedChanged();
+
+    while(!xml.atEnd())
+    {
+        while(xml.readNextStartElement())
+        {
+            if(xml.name() == "Activities")
+            {
+                while(xml.readNextStartElement())
+                {
+                    if(xml.name() == "Activity")
+                    {
+                        while(xml.readNextStartElement())
+                        {
+                            if(xml.name() == "Lap")
+                            {
+                                while(xml.readNextStartElement())
+                                {
+                                    if(xml.name() == "Track")
+                                    {
+                                        //Count segments
+                                        iSegments++;
+
+                                        //If this is NOT the first segment, we are here after a pause in the track
+                                        if (iSegments > 1)
+                                        {
+                                            //mark that we have found a pause
+                                            bPauseFound = true;
+                                        }
+
+                                        while(xml.readNextStartElement())
+                                        {
+                                            if(xml.name() == "Trackpoint")
+                                            {
+                                                TrackPoint point;
+
+                                                point.elevation = 0;
+                                                point.direction = 0;
+                                                point.groundSpeed = 0;
+                                                point.verticalSpeed = 0;
+                                                point.magneticVariation = 0;
+                                                point.horizontalAccuracy = 0;
+                                                point.verticalAccuracy = 0;
+                                                point.heartrate = 0;
+                                                point.latitude = 0;
+                                                point.longitude = 0;
+                                                point.distance = 0;
+                                                point.speed = 0;
+                                                point.pace = 0;
+                                                point.duration = 0;
+
+                                                while(xml.readNextStartElement())
+                                                {
+                                                    if(xml.name() == "Time") {
+                                                        point.time = QDateTime::fromString(xml.readElementText(),Qt::ISODate);
+                                                    } else if(xml.name() == "AltitudeMeters") {
+                                                        point.elevation = xml.readElementText().toDouble();
+                                                    } else if(xml.name() == "HeartRateBpm") {
+                                                        while(xml.readNextStartElement())
+                                                        {
+                                                            if(xml.name() == "Value") {
+                                                                point.heartrate = xml.readElementText().toInt();
+                                                            } else {
+                                                                xml.skipCurrentElement();
+                                                            }
+                                                        }
+                                                    } else if(xml.name() == "Position") {
+                                                        while(xml.readNextStartElement())
+                                                        {
+                                                            if(xml.name() == "LatitudeDegrees") {
+                                                                point.latitude = xml.readElementText().toDouble();
+                                                            } else if (xml.name() == "LongitudeDegrees") {
+                                                                point.longitude = xml.readElementText().toDouble();
+                                                            } else {
+                                                                xml.skipCurrentElement();
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                //Before the point is appended we need to calculate a few more things.
+                                                //We need at least 2 points for that.
+                                                if(m_points.size() > 0)
+                                                {
+                                                    QDateTime firstTime(m_points.at(0).time);
+                                                    QDateTime secondTime(point.time);
+                                                    point.duration = firstTime.secsTo(secondTime);
+
+                                                    //If there was a pause before this trackpoint, do not calculate distance
+                                                    if (bPauseFound)
+                                                    {
+                                                        point.speed = 0;
+                                                        point.pace = 99;
+                                                        m_distancearray.clear();
+                                                        m_durationarray.clear();
+                                                    }
+                                                    else
+                                                    {
+                                                        //Fill distance array. Save the last few values to have a better speed/pace calculation.
+
+                                                        //Calculate distance in meter [m] between last and this point
+                                                        QGeoCoordinate first(m_points.at(m_points.size() - 1).latitude,m_points.at(m_points.size() - 1).longitude);
+                                                        QGeoCoordinate second(point.latitude,point.longitude);
+                                                        qreal rCurrentDistance = first.distanceTo(second);
+                                                        m_distance += rCurrentDistance;
+
+                                                        //Calculate time in seconds [s] between last and this point
+                                                        qreal rCurrentDuration = 0;
+                                                        QDateTime lastTime(m_points.at(m_points.size() - 1).time);
+                                                        rCurrentDuration = lastTime.secsTo(secondTime);
+
+                                                        //Fill distance array. Save the last few values to have a better speed/pace calculation.
+                                                        if (m_distancearray.length() == 10)
+                                                        {
+                                                            m_distancearray.removeFirst();
+                                                            m_durationarray.removeFirst();
+                                                        }
+                                                        m_distancearray.append(rCurrentDistance);
+                                                        m_durationarray.append(rCurrentDuration);
+
+                                                        rCurrentDistance = 0.0;
+                                                        rCurrentDuration = 0;
+                                                        //Calculate distance over the last few gps points
+                                                        for(int i=0 ; i < m_distancearray.length(); i++)
+                                                        {
+                                                            rCurrentDistance += m_distancearray[i];
+                                                            rCurrentDuration += m_durationarray[i];
+                                                        }
+
+                                                        //Calculate speed in [km/h]
+                                                        point.speed = (rCurrentDistance / 1000.0) / (rCurrentDuration / 3600.0);
+
+                                                        //Calculate pace in [min/km]
+                                                        point.pace = (rCurrentDuration / 60.0) / (rCurrentDistance / 1000.0);
+                                                    }
+                                                    point.distance = m_distance;
+                                                }
+
+                                                //if a pause is right before this track point, we have to save the index of this track point
+                                                if (bPauseFound)
+                                                {
+                                                    qDebug()<<"Pause found: "<<QString::number(m_points.length());
+
+                                                    m_pause_positions.append(m_points.length()-1);
+                                                    bPauseFound = false;
+                                                }
+                                                if (!(point.latitude == 0 && point.longitude == 0)) {
+                                                    m_points.append(point);
+                                                }
+                                            } else {
+                                                xml.skipCurrentElement();
+                                            }
+                                        }
+                                    }
+                                }
+                            } else if (xml.name() == "Id") {
+                                qDebug() << "ID:" << xml.readElementText();
+                            } else {
+                                xml.skipCurrentElement();
+                            }
+                        }
+                    }
+                }
             }
         }
     }
