@@ -23,7 +23,7 @@ private:
     QByteArray m_buffer;
     QString m_gpx;
 
-    bool saveSport();
+    bool saveSport(const QString &filename);
     bool finished(bool success) override;
 
     KDbConnection *m_conn;

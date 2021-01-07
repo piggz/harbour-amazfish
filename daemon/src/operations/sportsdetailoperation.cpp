@@ -94,7 +94,8 @@ bool SportsDetailOperation::finished(bool success)
         }
         logFile.close();
 
-        saved = saveSport();
+        saved = saveSport(logFile.fileName());
+
         //Convert local to UTC (without offsetting) to save as the last sync time
         //QDateTime temp = QDateTime::fromString(m_summary.endTime().toLocalTime().toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
         //temp.setTimeSpec(Qt::UTC);
@@ -111,7 +112,7 @@ bool SportsDetailOperation::finished(bool success)
     return saved;
 }
 
-bool SportsDetailOperation::saveSport()
+bool SportsDetailOperation::saveSport(const QString &filename)
 {
     if (!m_conn || !m_conn->isDatabaseUsed()) {
         qDebug() << "Database not connected";
@@ -124,7 +125,7 @@ bool SportsDetailOperation::saveSport()
 
     m_summary.setProfileId(id);
     m_summary.setDeviceId(devid);
-    //m_summary.setGPX(m_gpx);
+    m_summary.setGPX(filename);
 
     return m_summary.saveToDatabase(m_conn);
 }
