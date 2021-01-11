@@ -584,106 +584,106 @@
     </message>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Huami skärmenheter</translation>
     </message>
 </context>
 <context>
     <name>Settings-huami-shortcuts</name>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Huami skärmenheter</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Spara inställningar</translation>
+        <translation>Spara inställningar</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Hjärtfrekvens</translation>
+        <translation>Hjärtfrekvens</translation>
     </message>
     <message>
         <source>Workout</source>
-        <translation type="unfinished"></translation>
+        <translation>Träningspass</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished">Väder</translation>
+        <translation>Väder</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished">Aviseringar</translation>
+        <translation>Aviseringar</translation>
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Mer</translation>
     </message>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Stör inte</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished">Larm</translation>
+        <translation>Larm</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Musik</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished">Tid</translation>
+        <translation>Tid</translation>
     </message>
     <message>
         <source>Mute Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Mjuta telefonen</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Inställningar</translation>
+        <translation>Inställningar</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished">Aktivitet</translation>
+        <translation>Aktivitet</translation>
     </message>
     <message>
         <source>Event Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Händelsepåminnare</translation>
     </message>
     <message>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <source>World Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Världsklocka</translation>
     </message>
     <message>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation>Stress</translation>
     </message>
     <message>
         <source>Period</source>
-        <translation type="unfinished"></translation>
+        <translation>Period</translation>
     </message>
     <message>
         <source>SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SPO2</translation>
     </message>
     <message>
         <source>Alexa</source>
-        <translation type="unfinished"></translation>
+        <translation>Alexa</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation type="unfinished">Kompass</translation>
+        <translation>Kompass</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation type="unfinished">AliPay</translation>
+        <translation>AliPay</translation>
     </message>
 </context>
 <context>

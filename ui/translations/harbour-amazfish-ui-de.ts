@@ -5,7 +5,7 @@
     <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished">Ort festlegen</translation>
+        <translation>Ort festlegen</translation>
     </message>
 </context>
 <context>
@@ -66,7 +66,7 @@
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation>Auth-Key Eingeben</translation>
     </message>
 </context>
 <context>
@@ -97,14 +97,14 @@
     </message>
     <message>
         <source>File not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei für dieses Gerät nicht unterstützt</translation>
     </message>
 </context>
 <context>
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>Unerwarteter Fehler</translation>
     </message>
 </context>
 <context>
@@ -159,54 +159,54 @@
     </message>
     <message>
         <source>Send Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Sende Wetterdaten</translation>
     </message>
     <message>
         <source>A:</source>
-        <translation type="unfinished"></translation>
+        <translation>A:</translation>
     </message>
     <message>
         <source>S:</source>
-        <translation type="unfinished"></translation>
+        <translation>S:</translation>
     </message>
     <message>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalender updaten</translation>
     </message>
     <message>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>Modell: </translation>
     </message>
     <message>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Firmware: </translation>
     </message>
     <message>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>Hersteller: </translation>
     </message>
     <message>
         <source>Music Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Musik kontrollieren</translation>
     </message>
     <message>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>Debugging</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Funktionstest</translation>
     </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished">Daten abrufen</translation>
+        <translation>Daten abrufen</translation>
     </message>
 </context>
 <context>
@@ -233,161 +233,161 @@
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <source>Data Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagramme</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Schritte</translation>
+        <translation>Schritte</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Pulsrate</translation>
+        <translation>Pulsrate</translation>
     </message>
     <message>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Service</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivieren</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Daten vorhanden</translation>
     </message>
 </context>
 <context>
     <name>HeartratePage</name>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Pulsrate</translation>
+        <translation>Pulsrate</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Entspannt</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Leicht</translation>
     </message>
     <message>
         <source>Intensive</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensiv</translation>
     </message>
     <message>
         <source>Aerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Aerob</translation>
     </message>
     <message>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Anaerob</translation>
     </message>
     <message>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation>VO2 Max</translation>
     </message>
 </context>
 <context>
     <name>JSTools</name>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Leer</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Pulsrate</translation>
+        <translation>Pulsrate</translation>
     </message>
     <message>
         <source>Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Geschwindigkeit</translation>
     </message>
     <message>
         <source>Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Höhe</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distanz</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Pause</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Dauer</translation>
     </message>
 </context>
 <context>
     <name>PairPage</name>
     <message>
         <source>Pair Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät koppeln</translation>
     </message>
     <message>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche stoppen</translation>
     </message>
     <message>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach Geräten suchen</translation>
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach Geräten...</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>Koppeln...</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Gerät gefunden</translation>
     </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
     <message>
         <source>Select Device Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät auswählen</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1s</translation>
     </message>
     <message>
         <source>%1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1m %2s</translation>
     </message>
     <message>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1h %2m %3s</translation>
     </message>
 </context>
 <context>
@@ -445,51 +445,51 @@
     </message>
     <message>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrige Batteriestanderinnerung</translation>
     </message>
     <message>
         <source>Refresh calendar every (</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiere Kalender alle (</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen</translation>
     </message>
     <message>
         <source>Refresh rates</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisierungsraten</translation>
     </message>
     <message>
         <source>Start service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Service beim Hochfahren starten</translation>
     </message>
     <message>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Start/Stopp Amazfish-Hintergrundservice</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Starten</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppen</translation>
     </message>
     <message>
         <source>Amazfish Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfish Service</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished">Anwendungseinstellungen</translation>
+        <translation>Anwendungseinstellungen</translation>
     </message>
     <message>
         <source>BT Adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>BT-Adapter</translation>
     </message>
     <message>
         <source>Navigation notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigationsbenachrichtigungen</translation>
     </message>
 </context>
 <context>
@@ -560,27 +560,27 @@
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <source>de_DE</source>
-        <translation type="unfinished"></translation>
+        <translation>de_DE</translation>
     </message>
     <message>
         <source>it_IT</source>
-        <translation type="unfinished"></translation>
+        <translation>it_IT</translation>
     </message>
     <message>
         <source>fr_FR</source>
-        <translation type="unfinished"></translation>
+        <translation>fr_FR</translation>
     </message>
     <message>
         <source>tr_TR</source>
-        <translation type="unfinished"></translation>
+        <translation>tr_TR</translation>
     </message>
     <message>
         <source>Disconnect Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen deaktivieren</translation>
     </message>
     <message>
         <source>Huami Display Items</source>
@@ -595,95 +595,95 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Einstellungen speichern</translation>
+        <translation>Einstellungen speichern</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Pulsrate</translation>
+        <translation>Pulsrate</translation>
     </message>
     <message>
         <source>Workout</source>
-        <translation type="unfinished"></translation>
+        <translation>Workout</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished">Wetter</translation>
+        <translation>Wetter</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen</translation>
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehr</translation>
     </message>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht stören</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Wecker</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Musik</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished">Zeit</translation>
+        <translation>Zeit</translation>
     </message>
     <message>
         <source>Mute Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Stummschalten</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished">Aktivität</translation>
+        <translation>Aktivität</translation>
     </message>
     <message>
         <source>Event Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalendererinnerung</translation>
     </message>
     <message>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <source>World Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Weltzeituhr</translation>
     </message>
     <message>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation>Stress</translation>
     </message>
     <message>
         <source>Period</source>
-        <translation type="unfinished"></translation>
+        <translation>Periode</translation>
     </message>
     <message>
         <source>SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SPO2</translation>
     </message>
     <message>
         <source>Alexa</source>
-        <translation type="unfinished"></translation>
+        <translation>Alexa</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation type="unfinished">Kompass</translation>
+        <translation>Kompass</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation type="unfinished">AliPay</translation>
+        <translation>AliPay</translation>
     </message>
 </context>
 <context>
@@ -718,7 +718,7 @@
     </message>
     <message>
         <source>Debug Info</source>
-        <translation type="unfinished">Debuginfo</translation>
+        <translation>Debuginfo</translation>
     </message>
 </context>
 <context>
@@ -749,11 +749,11 @@
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation>Größe (cm):</translation>
+        <translation>Größe (cm): </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation>Gewicht (kg):</translation>
+        <translation>Gewicht (kg): </translation>
     </message>
     <message>
         <source>Wear Location</source>
@@ -773,7 +773,7 @@
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation>Ziel (Schritte):</translation>
+        <translation>Ziel (Schritte): </translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
@@ -785,7 +785,7 @@
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation>Ganztägiges HRM (Intervall in Minuten):</translation>
+        <translation>Ganztägiges HRM (Intervall in Minuten): </translation>
     </message>
     <message>
         <source>Save Profile</source>
@@ -793,15 +793,15 @@
     </message>
     <message>
         <source>Personal data</source>
-        <translation type="unfinished"></translation>
+        <translation>Persönliche Daten</translation>
     </message>
     <message>
         <source>Personal preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Persönliche Einstellungen</translation>
     </message>
     <message>
         <source>Heartrate usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Herzfrequenz verwenden</translation>
     </message>
 </context>
 <context>
@@ -816,100 +816,100 @@
     </message>
     <message>
         <source>Note: last nights sleep is updated at mid-day</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz: Schlafdaten werden mittags aktualisiert</translation>
     </message>
     <message>
         <source>h:mm</source>
         <extracomment>Format of sleep hours</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Format der Schlafdaten</translation>
     </message>
     <message>
         <source>Deep %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiefschlaf</translation>
     </message>
     <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Format für die Schlafdatenzusammenfassung</translation>
     </message>
     <message>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Stunden</translation>
     </message>
 </context>
 <context>
     <name>SportPage</name>
     <message>
         <source>Data:</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten:</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Schritte</translation>
+        <translation>Schritte</translation>
     </message>
     <message>
         <source>Active Seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktive Sekunden</translation>
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalorien</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distanz</translation>
     </message>
     <message>
         <source>Ascent</source>
-        <translation type="unfinished"></translation>
+        <translation>Anstieg</translation>
     </message>
     <message>
         <source>Descent</source>
-        <translation type="unfinished"></translation>
+        <translation>Abstieg</translation>
     </message>
     <message>
         <source>Max Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation">Max. Höhe</translation>
     </message>
     <message>
         <source>Min Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. Höhe</translation>
     </message>
     <message>
         <source>Min Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. Geschwindigkeit</translation>
     </message>
     <message>
         <source>Max Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. Geschwindigkeit</translation>
     </message>
     <message>
         <source>Average HR</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnitt HF</translation>
     </message>
     <message>
         <source>Average Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittsgeschwindigkeit</translation>
     </message>
     <message>
         <source>Average Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittliche Schritte</translation>
     </message>
     <message>
         <source>Max HR</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. HF</translation>
     </message>
     <message>
         <source>Time Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit Aufstieg</translation>
     </message>
     <message>
         <source>Time Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit Abstieg</translation>
     </message>
     <message>
         <source>Time Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit Flach</translation>
     </message>
     <message>
         <source>Average Stroke</source>
@@ -933,7 +933,7 @@
     </message>
     <message>
         <source>Swim Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwimmstil</translation>
     </message>
     <message>
         <source>Laps</source>
@@ -965,7 +965,7 @@
     </message>
     <message>
         <source>steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Schritte</translation>
     </message>
     <message>
         <source>seconds</source>
@@ -973,7 +973,7 @@
     </message>
     <message>
         <source>kcal</source>
-        <translation type="unfinished"></translation>
+        <translation>kcal</translation>
     </message>
     <message>
         <source>meters</source>
@@ -1030,11 +1030,11 @@
     <name>UnpairDeviceDialog</name>
     <message>
         <source>Unpair</source>
-        <translation type="unfinished"></translation>
+        <translation>Entkoppeln</translation>
     </message>
     <message>
         <source>Before proceeding you need to unpair your current device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevor Sie fortfahren, müssen Sie Ihr aktuelles Gerät entkoppeln.</translation>
     </message>
 </context>
 </TS>
