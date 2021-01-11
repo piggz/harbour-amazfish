@@ -29,6 +29,10 @@ public:
     virtual void startDownload() override;
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
+    //Navigation
+    virtual void navigationRunning(bool running) override;
+    virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
+
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 
