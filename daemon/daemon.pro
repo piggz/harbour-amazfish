@@ -16,7 +16,19 @@ LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 
 QT +=  positioning KDb3 network
 
-exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
+equals(FLAVOR, "silica") {
+    CONFIG += flavor_silica
+} else:equals(FLAVOR, "kirigami") {
+    CONFIG += flavor_kirigami
+} else:equals(FLAVOR, "qtcontrols") {
+    CONFIG += flavor_qtcontrols
+} else:equals(FLAVOR, "uuitk") {
+    CONFIG += flavor_uuitk
+} else {
+    error("Please specify platform using FLAVOR=platform as qmake option. Supported platforms: kirigami, silica, qtcontrols, uuitk.")
+}
+
+flavor_silica {
     message(SailfishOS daemon build)
     DEFINES += MER_EDITION_SAILFISH
 
@@ -41,16 +53,36 @@ INCLUDEPATH += $$PWD/src/services/ \
                $$PWD/../ \
                ../lib/src
 
-target.path = /usr/bin/
-systemd_services.path = /usr/lib/systemd/user/
+# PREFIX
+message(The project will be installed in $$DESTDIR)
+
+isEmpty(PREFIX) {
+    flavor_silica {
+        PREFIX = /usr
+    } else:flavor_uuitk {
+        PREFIX = /
+    } else {
+        PREFIX = /usr/local
+    }
+}
+
+!isEmpty(DESTDIR) {
+    PREFIX = $$DESTDIR/$$PREFIX
+}
+
+target.path = $$PREFIX/bin
+systemd_services.path = $$PREFIX/lib/systemd/user/
 systemd_services.files = harbour-amazfish.service
 
 privilege.files = $${TARGET}.privileges
 privilege.path = /usr/share/mapplauncherd/privileges.d/
 
 INSTALLS += target \
-            systemd_services \
-            privilege
+            systemd_services
+
+equals(FLAVOR, "silica") {
+    INSTALLS += privilege
+}
 
 include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)

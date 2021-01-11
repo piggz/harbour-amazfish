@@ -216,6 +216,10 @@ isEmpty(PREFIX_RUNNING) {
     }
 }
 
+!isEmpty(DESTDIR) {
+    PREFIX = $$DESTDIR/$$PREFIX
+}
+
 DATADIR = $$PREFIX/share/$${TARGET}
 
 qml.files = qml/*.qml \
