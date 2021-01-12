@@ -216,11 +216,9 @@ isEmpty(PREFIX_RUNNING) {
     }
 }
 
-!isEmpty(DESTDIR) {
-    PREFIX = $$DESTDIR/$$PREFIX
-}
-
 DATADIR = $$PREFIX/share/$${TARGET}
+
+target.path = $$PREFIX/bin
 
 qml.files = qml/*.qml \
             qml/pages \
@@ -237,6 +235,12 @@ icons.path = $$DATADIR/qml/pics
 qmlplatform.extra = mkdir -p ${INSTALL_ROOT}$$DATADIR/qml/components/platform && cp -L -v $$PWD/qml/components/platform.$$FLAVOR/*.qml ${INSTALL_ROOT}$$DATADIR/qml/components/platform
 qmlplatform.path = $$DATADIR/qml/platform
 
-INSTALLS += qmlplatform qml js icons
+desktopfile.files = harbour-amazfish-ui.desktop
+desktopfile.path = $$PREFIX/share/applications
+
+appicon.files = ../harbour-amazfish.svg
+appicon.path = $$PREFIX/share/icons/hicolor/scalable/apps
+
+INSTALLS += qmlplatform qml js icons target desktopfile appicon
 
 #End install config

@@ -54,7 +54,6 @@ INCLUDEPATH += $$PWD/src/services/ \
                ../lib/src
 
 # PREFIX
-message(The project will be installed in $$DESTDIR)
 
 isEmpty(PREFIX) {
     flavor_silica {
@@ -65,10 +64,7 @@ isEmpty(PREFIX) {
         PREFIX = /usr/local
     }
 }
-
-!isEmpty(DESTDIR) {
-    PREFIX = $$DESTDIR/$$PREFIX
-}
+message(The project will be installed in $$PREFIX)
 
 target.path = $$PREFIX/bin
 systemd_services.path = $$PREFIX/lib/systemd/user/
