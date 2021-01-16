@@ -1,7 +1,7 @@
 #ifndef BIPDEVICE_H
 #define BIPDEVICE_H
 
-#include "abstractdevice.h"
+#include "huamidevice.h"
 #include "qble/qbleservice.h"
 
 #include "deviceinfoservice.h"
@@ -77,7 +77,7 @@ BIP Services and Characteristics
 
 */
 
-class BipDevice : public AbstractDevice
+class BipDevice : public HuamiDevice
 {
     Q_OBJECT
 public:

@@ -84,6 +84,8 @@ include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
 
 SOURCES += \
+    src/devices/bipdevice.cpp \
+    src/devices/huamidevice.cpp \
     src/devices/infinitimefirmwareinfo.cpp \
     src/navigationinterface.cpp \
     src/devices/abstractfirmwareinfo.cpp \
@@ -114,7 +116,6 @@ SOURCES += \
     src/operations/sportssummaryoperation.cpp \
     src/operations/updatefirmwareoperation.cpp \
     src/devices/abstractdevice.cpp \
-    src/devices/bipdevice.cpp \
     src/devices/bipfirmwareinfo.cpp \
     src/dbushrm.cpp \
     src/activitysummary.cpp \
@@ -135,6 +136,8 @@ DISTFILES += \
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
+    src/devices/bipdevice.h \
+    src/devices/huamidevice.h \
     src/devices/infinitimefirmwareinfo.h \
     src/navigationinterface.h \
     src/devices/abstractfirmwareinfo.h \
@@ -173,6 +176,5 @@ HEADERS += \
     src/operations/sportsdetailoperation.h \
     src/operations/abstractfetchoperation.h \
     src/devices/abstractdevice.h \
-    src/devices/bipdevice.h \
     src/bipactivitydetailparser.h \
     src/activitycoordinate.h

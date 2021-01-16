@@ -11,7 +11,7 @@ const char* BipDevice::UUID_SERVICE_MIBAND = MiBandService::UUID_SERVICE_MIBAND;
 const char* BipDevice::UUID_SERVICE_MIBAND2 = MiBand2Service::UUID_SERVICE_MIBAND2;
 const char* BipDevice::UUID_SERVICE_FIRMWARE = BipFirmwareService::UUID_SERVICE_FIRMWARE;
 
-BipDevice::BipDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
+BipDevice::BipDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
     connect(this, &QBLEDevice::propertiesChanged, this, &BipDevice::onPropertiesChanged);
 

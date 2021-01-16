@@ -2,9 +2,9 @@
 #define GTSDEVICE_H
 
 #include <QObject>
-#include "bipdevice.h"
+#include "huamidevice.h"
 
-class GtsDevice : public BipDevice
+class GtsDevice : public HuamiDevice
 {
 public:
     explicit GtsDevice(const QString &pairedName, QObject *parent = nullptr);

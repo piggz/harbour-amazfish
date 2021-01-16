@@ -3,7 +3,7 @@
 #include <QTimeZone>
 
 #include "typeconversion.h"
-#include "bipdevice.h"
+#include "huamidevice.h"
 #include "huamiweathercondition.h"
 #include "amazfishconfig.h"
 
@@ -430,7 +430,7 @@ void MiBandService::setDisplayItems()
     char items2 = 0x10;
 
 
-    BipDevice *device = qobject_cast<BipDevice*>(parent());
+    HuamiDevice *device = qobject_cast<HuamiDevice*>(parent());
 
     if (device && device->deviceType() == "amazfitbip" && device->softwareRevision() < "V0.1.1.14") { //Lexical string comparison should be fine here
         emit message(tr("Firmware is too old to set display items, V0.1.1.14 is required"));
@@ -537,7 +537,7 @@ void MiBandService::fetchActivityData()
     if (!m_activityFetchOperation && m_operationRunning == 0) {
         m_operationRunning = 2;
         int sampleSize = 4;
-        BipDevice *device = qobject_cast<BipDevice*>(parent());
+        HuamiDevice *device = qobject_cast<HuamiDevice*>(parent());
 
         if (device) {
             sampleSize = device->activitySampleSize();
@@ -633,7 +633,7 @@ void MiBandService::abortOperations()
 
 void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsConditionString)
 {
-    BipDevice *device = qobject_cast<BipDevice*>(parent());
+    HuamiDevice *device = qobject_cast<HuamiDevice*>(parent());
 
     if (!device || device->softwareRevision() > "V0.0.8.74") { //Lexical string comparison should be fine here
         message(tr("Firmware supports weather condition string"));

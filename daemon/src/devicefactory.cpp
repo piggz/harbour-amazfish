@@ -1,5 +1,5 @@
 #include "devicefactory.h"
-#include "bipdevice.h"
+#include "huamidevice.h"
 #include "gtsdevice.h"
 #include "biplitedevice.h"
 #include "pinetimejfdevice.h"
