@@ -3,11 +3,11 @@
 
 #include <QDebug>
 
-const char* InfiniTimeNavService::UUID_SERVICE_NAVIGATION = "c7e60001-00fc-48fe-8e23-433b3a1942d0";
-const char* InfiniTimeNavService::UUID_CHARACTERISTIC_NAV_FLAG = "c7e60002-00fc-48fe-8e23-433b3a1942d0";
-const char* InfiniTimeNavService::UUID_CHARACTERISTIC_NAV_NARRATIVE = "c7e60003-00fc-48fe-8e23-433b3a1942d0";
-const char* InfiniTimeNavService::UUID_CHARACTERISTIC_NAV_MAN_DIST = "c7e60004-00fc-48fe-8e23-433b3a1942d0";
-const char* InfiniTimeNavService::UUID_CHARACTERISTIC_NAV_PROGRESS = "c7e60005-00fc-48fe-8e23-433b3a1942d0";
+const char* InfiniTimeNavService::UUID_SERVICE_NAVIGATION = "00010000-78fc-48fe-8e23-433b3a1942d0";
+const char* InfiniTimeNavService::UUID_CHARACTERISTIC_NAV_FLAG = "00010001-78fc-48fe-8e23-433b3a1942d0";
+const char* InfiniTimeNavService::UUID_CHARACTERISTIC_NAV_NARRATIVE = "00010002-78fc-48fe-8e23-433b3a1942d0";
+const char* InfiniTimeNavService::UUID_CHARACTERISTIC_NAV_MAN_DIST = "00010003-78fc-48fe-8e23-433b3a1942d0";
+const char* InfiniTimeNavService::UUID_CHARACTERISTIC_NAV_PROGRESS = "00010004-78fc-48fe-8e23-433b3a1942d0";
 
 InfiniTimeNavService::InfiniTimeNavService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_NAVIGATION, path, parent)
 {
