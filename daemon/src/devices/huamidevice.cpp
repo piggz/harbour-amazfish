@@ -11,11 +11,6 @@ HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractD
     connect(m_keyPressTimer, &QTimer::timeout, this, &HuamiDevice::buttonPressTimeout);
 }
 
-bool HuamiDevice::operationRunning()
-{
-    return QBLEDevice::operationRunning();
-}
-
 void HuamiDevice::sendWeather(CurrentWeather *weather)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
@@ -216,3 +211,104 @@ void HuamiDevice::authenticated(bool ready)
     }
 }
 
+
+void HuamiDevice::applyDeviceSetting(Settings s)
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return;
+    }
+
+    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
+    if (!hrm) {
+        return;
+    }
+    switch(s) {
+    case SETTING_ALARMS:
+        mi->setAlarms();
+        break;
+    case SETTING_DEVICE_DATE:
+        mi->setDateDisplay();
+        break;
+    case SETTING_DEVICE_DISPLAY_ITEMS:
+        mi->setDisplayItems();
+        break;
+    case SETTING_DEVICE_LANGUAGE:
+        mi->setLanguage();
+        break;
+    case SETTING_DEVICE_TIME:
+        mi->setCurrentTime();
+        break;
+    case SETTING_DEVICE_UNIT:
+        mi->setDistanceUnit();
+        break;
+    case SETTING_USER_ALERT_GOAL:
+        mi->setAlertFitnessGoal();
+        break;
+    case SETTING_USER_ALL_DAY_HRM:
+        hrm->setAllDayHRM();
+        break;
+    case SETTING_USER_DISPLAY_ON_LIFT:
+        mi->setEnableDisplayOnLiftWrist();
+        break;
+    case SETTING_USER_GOAL:
+        mi->setFitnessGoal();
+        break;
+    case SETTING_USER_HRM_SLEEP_DETECTION:
+        hrm->setHeartrateSleepSupport();
+        break;
+    case SETTING_USER_PROFILE:
+        mi->setUserInfo();
+        break;
+    case SETTING_DISCONNECT_NOTIFICATION:
+        mi->setDisconnectNotification();
+        break;
+    }
+}
+
+void HuamiDevice::startDownload()
+{
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
+    if (fw){
+        fw->startDownload();
+    }
+}
+
+bool HuamiDevice::operationRunning()
+{
+    return QBLEDevice::operationRunning();
+}
+
+void HuamiDevice::abortOperations()
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi){
+        mi->abortOperations();
+    }
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
+    if (fw){
+        fw->abortOperations();
+    }
+}
+
+void HuamiDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
+{
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
+    if (fw){
+        fw->prepareFirmwareDownload(info, new UpdateFirmwareOperation(info, fw));
+    }
+}
+
+void HuamiDevice::serviceEvent(char event)
+{
+    switch(event) {
+    case MiBandService::EVENT_DECLINE_CALL:
+        emit deviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
+        break;
+    case MiBandService::EVENT_IGNORE_CALL:
+        emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
+        break;
+    default:
+        break;
+    }
+}

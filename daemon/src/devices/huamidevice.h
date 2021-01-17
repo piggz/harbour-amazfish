@@ -33,7 +33,6 @@ public:
 
     QString softwareRevision();
     
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
     virtual void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     virtual void startDownload() override;
 
@@ -45,21 +44,19 @@ public:
     virtual void navigationRunning(bool running) override;
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
-    virtual QStringList supportedDisplayItems() const override;
-
 protected:
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     Q_SLOT void handleButtonPressed();
     Q_SLOT void buttonPressTimeout();
     Q_SLOT void stepsChanged();
     Q_SLOT void batteryInfoChanged();
+    Q_SLOT void serviceEvent(char event);
+
     int m_ActivitySampleSize = 4;
 
 private:
     QString m_softwareRevision;
     int m_buttonPresses = 0;
     QTimer *m_keyPressTimer = nullptr;
-    Q_SLOT void serviceEvent(char event);
 };
 
 #endif // BIPDEVICE_H

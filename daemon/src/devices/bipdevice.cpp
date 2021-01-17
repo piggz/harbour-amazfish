@@ -24,11 +24,6 @@ QString BipDevice::deviceType()
 {
     return "amazfitbip";
 }
-
-bool BipDevice::operationRunning()
-{
-    return QBLEDevice::operationRunning();
-}
     
 void BipDevice::parseServices()
 {
@@ -157,34 +152,6 @@ AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes)
     return new BipFirmwareInfo(bytes);
 }
 
-void BipDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
-{
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (fw){
-        fw->prepareFirmwareDownload(info, new UpdateFirmwareOperation(info, fw));
-    }
-}
-
-void BipDevice::startDownload()
-{
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (fw){
-        fw->startDownload();
-    }
-}
-
-void BipDevice::abortOperations()
-{
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi){
-        mi->abortOperations();
-    }
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (fw){
-        fw->abortOperations();
-    }
-}
-
 void BipDevice::initialise()
 {
     setConnectionState("connected");
@@ -207,7 +174,7 @@ void BipDevice::initialise()
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
     if (mi2) {
         qDebug() << "Got mi2 service" << m_pairing << m_needsAuth;
-        connect(mi2, &MiBand2Service::authenticated, this, &BipDevice::authenticated, Qt::UniqueConnection);
+        connect(mi2, &MiBand2Service::authenticated, this, &HuamiDevice::authenticated, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 
         mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
@@ -229,20 +196,6 @@ void BipDevice::initialise()
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     if (hrm) {
         connect(hrm, &HRMService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
-    }
-}
-
-void BipDevice::serviceEvent(char event)
-{
-    switch(event) {
-    case MiBandService::EVENT_DECLINE_CALL:
-        emit deviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
-        break;
-    case MiBandService::EVENT_IGNORE_CALL:
-        emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
-        break;
-    default:
-        break;
     }
 }
 
@@ -313,81 +266,6 @@ QString BipDevice::information(Info i) const
     }    
     return QString();
 }    
-
-void BipDevice::applyDeviceSetting(Settings s)
-{
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (!mi) {
-        return;
-    }
-
-    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
-    if (!hrm) {
-        return;
-    }
-    switch(s) {
-    case SETTING_ALARMS:
-        mi->setAlarms();
-        break;
-    case SETTING_DEVICE_DATE:
-        mi->setDateDisplay();
-        break;
-    case SETTING_DEVICE_DISPLAY_ITEMS:
-        mi->setDisplayItems();
-        break;
-    case SETTING_DEVICE_LANGUAGE:
-        mi->setLanguage();
-        break;
-    case SETTING_DEVICE_TIME:
-        mi->setCurrentTime();
-        break;
-    case SETTING_DEVICE_UNIT:
-        mi->setDistanceUnit();
-        break;
-    case SETTING_USER_ALERT_GOAL:
-        mi->setAlertFitnessGoal();
-        break;
-    case SETTING_USER_ALL_DAY_HRM:
-        hrm->setAllDayHRM();
-        break;
-    case SETTING_USER_DISPLAY_ON_LIFT:
-        mi->setEnableDisplayOnLiftWrist();
-        break;
-    case SETTING_USER_GOAL:
-        mi->setFitnessGoal();
-        break;
-    case SETTING_USER_HRM_SLEEP_DETECTION:
-        hrm->setHeartrateSleepSupport();
-        break;
-    case SETTING_USER_PROFILE:
-        mi->setUserInfo();
-        break;
-    case SETTING_DISCONNECT_NOTIFICATION:
-        mi->setDisconnectNotification();
-        break;
-    }
-
-}
-
-void BipDevice::stepsChanged()
-{
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (!mi) {
-        return;
-    }
-
-    emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(mi->steps()));
-}
-
-void BipDevice::batteryInfoChanged()
-{
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (!mi) {
-        return;
-    }
-
-    emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(mi->batteryInfo()));
-}
 
 void BipDevice::rebootWatch()
 {

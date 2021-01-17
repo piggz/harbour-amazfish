@@ -32,7 +32,7 @@ private:
     void parseServices();
     void setDisplayItemsNew();
 
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
+    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     Q_SLOT void serviceEvent(char event);
 
 private:
