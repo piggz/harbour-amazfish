@@ -339,10 +339,7 @@ void GtsDevice::applyDeviceSetting(AbstractDevice::Settings s)
 
 void GtsDevice::sendWeather(CurrentWeather *weather)
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi){
-        mi->sendWeather(weather, true);
-    }
+    sendWeatherHuami(weather, true);
 }
 
 void GtsDevice::enableFeature(AbstractDevice::Feature feature)

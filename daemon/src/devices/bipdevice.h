@@ -86,11 +86,6 @@ public:
     virtual int supportedFeatures() override;
     virtual QString deviceType() override;
 
-    virtual void refreshInformation() override;
-    virtual QString information(Info i) const override;
-    
-    virtual void rebootWatch() override;
-
     QString softwareRevision();
     
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;

@@ -11,12 +11,11 @@ HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractD
     connect(m_keyPressTimer, &QTimer::timeout, this, &HuamiDevice::buttonPressTimeout);
 }
 
-void HuamiDevice::sendWeather(CurrentWeather *weather)
+void HuamiDevice::sendWeatherHuami(CurrentWeather *weather, bool sendConditionString)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi){
-        bool supportsConditionString = (softwareRevision() > "V0.0.8.74");
-        mi->sendWeather(weather, supportsConditionString);
+        mi->sendWeather(weather, sendConditionString);
     }
 }
 

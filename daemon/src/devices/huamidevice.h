@@ -24,9 +24,9 @@ public:
 
     virtual void refreshInformation() override;
     virtual QString information(Info i) const override;
-    
-    virtual void applyDeviceSetting(Settings s) override;
     virtual void rebootWatch() override;
+
+    virtual void applyDeviceSetting(Settings s) override;
 
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     virtual void incomingCall(const QString &caller) override;
@@ -38,7 +38,7 @@ public:
 
     Q_SLOT void authenticated(bool ready);
 
-    virtual void sendWeather(CurrentWeather *weather) override;
+    void sendWeatherHuami(CurrentWeather *weather, bool sendConditionString);
 
     virtual int activitySampleSize();
     virtual void navigationRunning(bool running) override;

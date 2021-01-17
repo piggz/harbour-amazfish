@@ -94,52 +94,13 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
                 setConnectionState("connected");
             }
         }
-
-#if 0
-        if (map.contains("Paired")) {
-            bool value = map["Paired"].toBool();
-
-            if (value) {
-                qDebug() << "Paired!";
-                if (m_connectionState == "pairing" && m_pairing) {
-                    connectToDevice();
-                }
-            }
-        }
-        if (map.contains("Connected")) {
-            bool value = map["Connected"].toBool();
-
-            if (value) {
-                qDebug() << "Connected!";
-                //Check if services are resolved
-                bool resolved = deviceProperty("ServicesResolved").toBool();
-                qDebug() << "Resolved:" << resolved;
-
-                if (resolved) {
-                    initialise();
-                }
-            }
-        }
-        if (map.contains("ServicesResolved")) {
-            bool value = map["ServicesResolved"].toBool();
-
-            if (value && !m_pairing) {
-                qDebug() << "ServicesResolved!";
-                initialise();
-            }
-        }
-#endif
     }
 
 }
 
 void BipDevice::sendWeather(CurrentWeather *weather)
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi){
-        bool supportsConditionString = (softwareRevision() > "V0.0.8.74");
-        mi->sendWeather(weather, supportsConditionString);
-    }
+    sendWeatherHuami(weather, (softwareRevision() > "V0.0.8.74"));
 }
 
 int BipDevice::activitySampleSize()
@@ -210,71 +171,6 @@ QString BipDevice::softwareRevision()
         }
     }
     return m_softwareRevision;
-}
-
-void BipDevice::refreshInformation()
-{
-    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
-    if (info) {
-         info->refreshInformation();
-    }
-    
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        mi->requestGPSVersion();
-        mi->requestBatteryInfo();
-    }
-}
-
-QString BipDevice::information(Info i) const
-{
-    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
-     if (!info) {
-        return QString();
-    }
-    
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (!mi) {
-        return QString();
-    }
-    
-    switch(i) {
-    case INFO_SWVER:
-        return info->softwareRevision();
-        break;
-    case INFO_HWVER:
-        return info->hardwareRevision();
-        break;
-    case INFO_SERIAL:
-        return info->serialNumber();
-        break;
-    case INFO_SYSTEMID:
-        return info->systemId();
-        break;
-    case INFO_PNPID:
-        return info->pnpId();
-        break;
-    case INFO_GPSVER:
-        return mi->gpsVersion();
-        break;
-    case INFO_BATTERY:
-        return QString::number(mi->batteryInfo());
-        break;
-    case INFO_STEPS:
-        return QString::number(mi->steps());
-        break;
-    }    
-    return QString();
-}    
-
-void BipDevice::rebootWatch()
-{
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (!fw) {
-        return;
-    }
-    fw->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_REBOOT));
-
 }
 
 void BipDevice::navigationRunning(bool running)
