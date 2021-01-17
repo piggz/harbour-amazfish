@@ -85,16 +85,14 @@ public:
 
     virtual int supportedFeatures() override;
     virtual QString deviceType() override;
-    
+    virtual QStringList supportedDisplayItems() const override;
+
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
     virtual void sendWeather(CurrentWeather *weather) override;
 
-    virtual int activitySampleSize() override;
     virtual void navigationRunning(bool running) override;
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
-
-    virtual QStringList supportedDisplayItems() const override;
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
