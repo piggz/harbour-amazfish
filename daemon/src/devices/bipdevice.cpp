@@ -4,20 +4,9 @@
 
 #include <QtXml/QtXml>
 
-const char* BipDevice::UUID_SERVICE_ALERT_NOTIFICATION = AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION;
-const char* BipDevice::UUID_SERVICE_DEVICEINFO = DeviceInfoService::UUID_SERVICE_DEVICEINFO;
-const char* BipDevice::UUID_SERVICE_HRM = HRMService::UUID_SERVICE_HRM;
-const char* BipDevice::UUID_SERVICE_MIBAND = MiBandService::UUID_SERVICE_MIBAND;
-const char* BipDevice::UUID_SERVICE_MIBAND2 = MiBand2Service::UUID_SERVICE_MIBAND2;
-const char* BipDevice::UUID_SERVICE_FIRMWARE = BipFirmwareService::UUID_SERVICE_FIRMWARE;
-
 BipDevice::BipDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
     connect(this, &QBLEDevice::propertiesChanged, this, &BipDevice::onPropertiesChanged);
-
-    m_keyPressTimer = new QTimer(this);
-    m_keyPressTimer->setInterval(500);
-    connect(m_keyPressTimer, &QTimer::timeout, this, &BipDevice::buttonPressTimeout);
 }
 
 
@@ -72,18 +61,18 @@ void BipDevice::parseServices()
 
             qDebug() << "Creating service for: " << uuid;
 
-            if (uuid == UUID_SERVICE_ALERT_NOTIFICATION && !service(UUID_SERVICE_ALERT_NOTIFICATION)) {
-                addService(UUID_SERVICE_ALERT_NOTIFICATION, new AlertNotificationService(path, this));
-            } else if (uuid == UUID_SERVICE_DEVICEINFO  && !service(UUID_SERVICE_DEVICEINFO)) {
-                addService(UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
-            } else if (uuid == UUID_SERVICE_HRM && !service(UUID_SERVICE_HRM)) {
-                addService(UUID_SERVICE_HRM, new HRMService(path, this));
-            } else if (uuid == UUID_SERVICE_MIBAND && !service(UUID_SERVICE_MIBAND)) {
-                addService(UUID_SERVICE_MIBAND, new MiBandService(path, this));
-            } else if (uuid == UUID_SERVICE_MIBAND2 && !service(UUID_SERVICE_MIBAND2)) {
-                addService(UUID_SERVICE_MIBAND2, new MiBand2Service(path, 0x08, 0x00, false, this));
-            } else if (uuid == UUID_SERVICE_FIRMWARE && !service(UUID_SERVICE_FIRMWARE)) {
-                addService(UUID_SERVICE_FIRMWARE, new BipFirmwareService(path, this));
+            if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
+                addService(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION, new AlertNotificationService(path, this));
+            } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
+                addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
+            } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
+                addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
+            } else if (uuid == MiBandService::UUID_SERVICE_MIBAND && !service(MiBandService::UUID_SERVICE_MIBAND)) {
+                addService(MiBandService::UUID_SERVICE_MIBAND, new MiBandService(path, this));
+            } else if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2 && !service(MiBand2Service::UUID_SERVICE_MIBAND2)) {
+                addService(MiBand2Service::UUID_SERVICE_MIBAND2, new MiBand2Service(path, 0x08, 0x00, false, this));
+            } else if (uuid == BipFirmwareService::UUID_SERVICE_FIRMWARE && !service(BipFirmwareService::UUID_SERVICE_FIRMWARE)) {
+                addService(BipFirmwareService::UUID_SERVICE_FIRMWARE, new BipFirmwareService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -149,49 +138,9 @@ void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
 
 }
 
-void BipDevice::authenticated(bool ready)
-{
-    qDebug() << "BipInterface::authenticated:" << ready;
-
-    if (ready) {
-        m_needsAuth = false;
-
-        MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
-        if (mi){
-            mi->setCurrentTime();
-            mi->setLanguage();
-            mi->setDateDisplay();
-            mi->setTimeFormat();
-            mi->setUserInfo();
-            mi->setDisplayCaller();
-            mi->setAlertFitnessGoal();
-            mi->setDistanceUnit();
-            mi->setWearLocation();
-            mi->setFitnessGoal();
-            mi->setDisplayItems();
-            mi->setDoNotDisturb();
-            mi->setEnableDisplayOnLiftWrist();
-            mi->setRotateWristToSwitchInfo(true);
-            mi->setInactivityWarnings();
-            mi->setDisconnectNotification();
-            mi->requestAlarms();
-        }
-
-        HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));
-        if (hrm) {
-            hrm->setAllDayHRM();
-            hrm-> setHeartrateSleepSupport();
-        }
-
-        setConnectionState("authenticated");
-    } else {
-        setConnectionState("authfailed");
-    }
-}
-
 void BipDevice::sendWeather(CurrentWeather *weather)
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi){
         bool supportsConditionString = (softwareRevision() > "V0.0.8.74");
         mi->sendWeather(weather, supportsConditionString);
@@ -210,7 +159,7 @@ AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes)
 
 void BipDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw){
         fw->prepareFirmwareDownload(info, new UpdateFirmwareOperation(info, fw));
     }
@@ -218,7 +167,7 @@ void BipDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 
 void BipDevice::startDownload()
 {
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw){
         fw->startDownload();
     }
@@ -226,11 +175,11 @@ void BipDevice::startDownload()
 
 void BipDevice::abortOperations()
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi){
         mi->abortOperations();
     }
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw){
         fw->abortOperations();
     }
@@ -241,21 +190,21 @@ void BipDevice::initialise()
     setConnectionState("connected");
     parseServices();
 
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION);
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO);
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT);
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS);
 
-        connect(mi, &MiBandService::message, this, &BipDevice::message, Qt::UniqueConnection);
+        connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &BipDevice::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &BipDevice::serviceEvent, Qt::UniqueConnection);
     }
 
-    MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(UUID_SERVICE_MIBAND2));
+    MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
     if (mi2) {
         qDebug() << "Got mi2 service" << m_pairing << m_needsAuth;
         connect(mi2, &MiBand2Service::authenticated, this, &BipDevice::authenticated, Qt::UniqueConnection);
@@ -265,19 +214,19 @@ void BipDevice::initialise()
         mi2->initialise(m_needsAuth);
     }
 
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw) {
         connect(fw, &BipFirmwareService::message, this, &BipDevice::message, Qt::UniqueConnection);
         connect(fw, &BipFirmwareService::downloadProgress, this, &BipDevice::downloadProgress, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 
-    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (info) {
         connect(info, &DeviceInfoService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
     }
 
-    HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));
+    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     if (hrm) {
         connect(hrm, &HRMService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
     }
@@ -300,7 +249,7 @@ void BipDevice::serviceEvent(char event)
 QString BipDevice::softwareRevision()
 {
     if (m_softwareRevision.isEmpty()) {
-        DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+        DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
         if (info) {
             m_softwareRevision = info->readSoftwareRevisionSync();
         } else {
@@ -310,29 +259,14 @@ QString BipDevice::softwareRevision()
     return m_softwareRevision;
 }
 
-void BipDevice::handleButtonPressed()
-{
-    m_buttonPresses++;
-    m_keyPressTimer->stop();
-    m_keyPressTimer->start();
-}
-
-void BipDevice::buttonPressTimeout()
-{
-    int presses = m_buttonPresses;
-    m_buttonPresses = 0;
-    m_keyPressTimer->stop();
-    emit buttonPressed(presses);
-}
-
 void BipDevice::refreshInformation()
 {
-    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (info) {
          info->refreshInformation();
     }
     
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
         mi->requestGPSVersion();
         mi->requestBatteryInfo();
@@ -341,12 +275,12 @@ void BipDevice::refreshInformation()
 
 QString BipDevice::information(Info i) const
 {
-    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(UUID_SERVICE_DEVICEINFO));
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
      if (!info) {
         return QString();
     }
     
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (!mi) {
         return QString();
     }
@@ -382,12 +316,12 @@ QString BipDevice::information(Info i) const
 
 void BipDevice::applyDeviceSetting(Settings s)
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (!mi) {
         return;
     }
 
-    HRMService *hrm = qobject_cast<HRMService*>(service(UUID_SERVICE_HRM));
+    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     if (!hrm) {
         return;
     }
@@ -437,7 +371,7 @@ void BipDevice::applyDeviceSetting(Settings s)
 
 void BipDevice::stepsChanged()
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (!mi) {
         return;
     }
@@ -447,7 +381,7 @@ void BipDevice::stepsChanged()
 
 void BipDevice::batteryInfoChanged()
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(UUID_SERVICE_MIBAND));
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (!mi) {
         return;
     }
@@ -457,28 +391,12 @@ void BipDevice::batteryInfoChanged()
 
 void BipDevice::rebootWatch()
 {
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(UUID_SERVICE_FIRMWARE));
+    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (!fw) {
         return;
     }
     fw->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_REBOOT));
 
-}
-
-void BipDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
-{
-    AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(UUID_SERVICE_ALERT_NOTIFICATION));
-    if (alert) {
-        alert->sendAlert(sender, subject, message);
-    }
-}
-
-void BipDevice::incomingCall(const QString &caller)
-{
-    AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(UUID_SERVICE_ALERT_NOTIFICATION));
-    if (alert) {
-        alert->incomingCall(caller);
-    }
 }
 
 void BipDevice::navigationRunning(bool running)

@@ -6,6 +6,9 @@
 
 HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
+    m_keyPressTimer = new QTimer(this);
+    m_keyPressTimer->setInterval(500);
+    connect(m_keyPressTimer, &QTimer::timeout, this, &HuamiDevice::buttonPressTimeout);
 }
 
 bool HuamiDevice::operationRunning()
@@ -156,3 +159,60 @@ void HuamiDevice::navigationNarrative(const QString &flag, const QString &narrat
 {
     sendAlert("navigation", tr("Progress") + ":" + QString::number(progress), narrative + "\n" + manDist);
 }
+
+void HuamiDevice::handleButtonPressed()
+{
+    m_buttonPresses++;
+    m_keyPressTimer->stop();
+    m_keyPressTimer->start();
+}
+
+void HuamiDevice::buttonPressTimeout()
+{
+    int presses = m_buttonPresses;
+    m_buttonPresses = 0;
+    m_keyPressTimer->stop();
+    emit buttonPressed(presses);
+}
+
+
+void HuamiDevice::authenticated(bool ready)
+{
+    qDebug() << "BipInterface::authenticated:" << ready;
+
+    if (ready) {
+        m_needsAuth = false;
+
+        MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+        if (mi){
+            mi->setCurrentTime();
+            mi->setLanguage();
+            mi->setDateDisplay();
+            mi->setTimeFormat();
+            mi->setUserInfo();
+            mi->setDisplayCaller();
+            mi->setAlertFitnessGoal();
+            mi->setDistanceUnit();
+            mi->setWearLocation();
+            mi->setFitnessGoal();
+            mi->setDisplayItems();
+            mi->setDoNotDisturb();
+            mi->setEnableDisplayOnLiftWrist();
+            mi->setRotateWristToSwitchInfo(true);
+            mi->setInactivityWarnings();
+            mi->setDisconnectNotification();
+            mi->requestAlarms();
+        }
+
+        HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
+        if (hrm) {
+            hrm->setAllDayHRM();
+            hrm-> setHeartrateSleepSupport();
+        }
+
+        setConnectionState("authenticated");
+    } else {
+        setConnectionState("authfailed");
+    }
+}
+

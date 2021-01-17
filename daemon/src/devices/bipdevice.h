@@ -82,14 +82,7 @@ class BipDevice : public HuamiDevice
     Q_OBJECT
 public:
     BipDevice(const QString &pairedName, QObject *parent = nullptr);
-    
-    static const char* UUID_SERVICE_ALERT_NOTIFICATION;
-    static const char* UUID_SERVICE_MIBAND2;
-    static const char* UUID_SERVICE_MIBAND;
-    static const char* UUID_SERVICE_HRM;
-    static const char* UUID_SERVICE_DEVICEINFO;
-    static const char* UUID_SERVICE_FIRMWARE;
-    
+
     virtual int supportedFeatures() override;
     virtual QString deviceType() override;
     virtual bool operationRunning() override;
@@ -122,8 +115,6 @@ public:
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
-    Q_SLOT void handleButtonPressed();
-    Q_SLOT void buttonPressTimeout();
     Q_SLOT void stepsChanged();
     Q_SLOT void batteryInfoChanged();
     int m_ActivitySampleSize = 4;
@@ -133,8 +124,6 @@ private:
     void initialise();
 
     QString m_softwareRevision;
-    int m_buttonPresses = 0;
-    QTimer *m_keyPressTimer = nullptr;
     Q_SLOT void serviceEvent(char event);
 };
 
