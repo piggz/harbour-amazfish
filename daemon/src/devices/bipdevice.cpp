@@ -160,19 +160,6 @@ void BipDevice::initialise()
     }
 }
 
-QString BipDevice::softwareRevision()
-{
-    if (m_softwareRevision.isEmpty()) {
-        DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
-        if (info) {
-            m_softwareRevision = info->readSoftwareRevisionSync();
-        } else {
-            m_softwareRevision = "V0.0.0.00";
-        }
-    }
-    return m_softwareRevision;
-}
-
 void BipDevice::navigationRunning(bool running)
 {
     QString msg;

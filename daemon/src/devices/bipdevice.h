@@ -85,8 +85,6 @@ public:
 
     virtual int supportedFeatures() override;
     virtual QString deviceType() override;
-
-    QString softwareRevision();
     
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
@@ -104,8 +102,6 @@ protected:
 private:
     void parseServices();
     void initialise();
-
-    QString m_softwareRevision;
 };
 
 #endif // BIPDEVICE_H
