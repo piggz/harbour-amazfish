@@ -107,6 +107,10 @@ PagePL {
         if (name === "alexa") return qsTr("Alexa");
         if (name === "compass") return qsTr("Compass");
         if (name === "alipay") return qsTr("AliPay");
+        if (name === "timer") return qsTr("Timer");
+
+        //If all else fails, use original name
+        return name;
     }
 
     function buildDisplayItemsModel() {
