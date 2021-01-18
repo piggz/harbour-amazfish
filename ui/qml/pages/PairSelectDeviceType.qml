@@ -83,6 +83,11 @@ PageListPL {
             icon: "../pics/devices/pinetime.png"
             auth: false
         }
+        ListElement {
+            deviceType: "Pinetime"
+            icon: "../pics/devices/pinetime.png"
+            auth: false
+        }
     }
 
 }

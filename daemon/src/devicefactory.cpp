@@ -31,7 +31,7 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new BipLiteDevice(deviceName);
     }
 
-    if (deviceName == "InfiniTime") {
+    if (deviceName == "InfiniTime" || deviceName == "Pinetime-JF") {
         return new PinetimeJFDevice(deviceName);
     }
 

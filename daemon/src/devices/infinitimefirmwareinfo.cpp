@@ -14,7 +14,7 @@ InfinitimeFirmwareInfo::InfinitimeFirmwareInfo(const QByteArray &bytes)
 
 bool InfinitimeFirmwareInfo::supportedOnDevice(const QString &device) const
 {
-    return device == "InfiniTime" && m_type != Invalid && !m_version.contains("unknown");;
+    return (device == "InfiniTime" || device == "Pinetime-JF") && m_type != Invalid && !m_version.contains("unknown");;
 }
 
 void InfinitimeFirmwareInfo::determineFirmwareType()
