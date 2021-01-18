@@ -9,6 +9,7 @@
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
     qDebug() << "Creating GTS Device";
+    connect(this, &QBLEDevice::propertiesChanged, this, &GtsDevice::onPropertiesChanged);
 
     displayItmesIdMap["status"] = 0x01;
     displayItmesIdMap["hr"] = 0x02;

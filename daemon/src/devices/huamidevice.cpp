@@ -5,7 +5,7 @@
 #include <QtXml/QtXml>
 
 HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
-{
+{    
     m_keyPressTimer = new QTimer(this);
     m_keyPressTimer->setInterval(500);
     connect(m_keyPressTimer, &QTimer::timeout, this, &HuamiDevice::buttonPressTimeout);
@@ -132,6 +132,7 @@ void HuamiDevice::sendAlert(const QString &sender, const QString &subject, const
 
 void HuamiDevice::incomingCall(const QString &caller)
 {
+    qDebug() << Q_FUNC_INFO << caller;
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
     if (alert) {
         alert->incomingCall(caller);
