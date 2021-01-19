@@ -167,8 +167,6 @@ private:
 
 #ifdef MER_EDITION_SAILFISH
     MDConfGroup *m_group;
-#else
-    QSettings m_settings;
 #endif
 };
 
