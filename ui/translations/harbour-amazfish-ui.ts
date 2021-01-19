@@ -17,37 +17,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="89"/>
+        <location filename="../qml/components/Alarm.qml" line="92"/>
         <source>Mon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="95"/>
+        <location filename="../qml/components/Alarm.qml" line="98"/>
         <source>Tue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="101"/>
+        <location filename="../qml/components/Alarm.qml" line="104"/>
         <source>Wed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="107"/>
+        <location filename="../qml/components/Alarm.qml" line="110"/>
         <source>Thu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="113"/>
+        <location filename="../qml/components/Alarm.qml" line="116"/>
         <source>Fri</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="119"/>
+        <location filename="../qml/components/Alarm.qml" line="122"/>
         <source>Sat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/Alarm.qml" line="125"/>
+        <location filename="../qml/components/Alarm.qml" line="128"/>
         <source>Sun</source>
         <translation type="unfinished"></translation>
     </message>
