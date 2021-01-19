@@ -190,7 +190,7 @@ void HuamiDevice::authenticated(bool ready)
             mi->setDistanceUnit();
             mi->setWearLocation();
             mi->setFitnessGoal();
-            mi->setDisplayItems();
+            applyDeviceSetting(SETTING_DEVICE_DISPLAY_ITEMS);
             mi->setDoNotDisturb();
             mi->setEnableDisplayOnLiftWrist();
             mi->setRotateWristToSwitchInfo(true);
