@@ -22,7 +22,7 @@ DfuOperation::~DfuOperation()
 void DfuOperation::start()
 {
     qDebug() << Q_FUNC_INFO;
-    if (m_info->type() != AbstractFirmwareInfo::Invalid) {
+    if (m_info->type() == AbstractFirmwareInfo::Firmware) {
         DfuService *serv = dynamic_cast<DfuService*>(m_service);
 
         m_service->enableNotification(serv->UUID_CHARACTERISTIC_DFU_CONTROL);
