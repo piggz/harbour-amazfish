@@ -168,6 +168,7 @@ void BipDevice::navigationRunning(bool running)
 
 void BipDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
 {
+    Q_UNUSED(flag)
     sendAlert("navigation", tr("Progress") + ":" + QString::number(progress), narrative + "\n" + manDist);
 }
 

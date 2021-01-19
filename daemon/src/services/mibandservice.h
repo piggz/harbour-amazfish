@@ -149,7 +149,7 @@ public:
 
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
     Q_SIGNAL void buttonPressed();
-    Q_SIGNAL void serviceEvent(char event);
+    Q_SIGNAL void serviceEvent(uint8_t event);
 
     virtual bool operationRunning() override;
     void abortOperations();

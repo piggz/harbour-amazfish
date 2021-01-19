@@ -32,7 +32,7 @@ private:
     void parseServices();
 
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
-    Q_SLOT void serviceEvent(char event);
+    Q_SLOT void serviceEvent(uint8_t event);
 
 private:
     QString pairedName;

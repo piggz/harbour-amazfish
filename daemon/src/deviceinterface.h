@@ -27,7 +27,7 @@ class HRMService;
 class MiBand2Service;
 class MiBandService;
 
-#define SERVICE_NAME "uk.co.piggz.amazfish"
+#define SERVICE_NAME_AMAZFISH "uk.co.piggz.amazfish"
 
 class DeviceInterface : public QObject
 {

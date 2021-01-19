@@ -12,7 +12,7 @@
 #include <QDir>
 #include <KDb3/KDbDriverManager>
 
-static const char *SERVICE = SERVICE_NAME;
+static const char *SERVICE = SERVICE_NAME_AMAZFISH;
 static const char *PATH = "/application";
 
 DeviceInterface::DeviceInterface()

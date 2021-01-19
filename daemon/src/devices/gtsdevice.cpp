@@ -69,7 +69,7 @@ void GtsDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringL
 
 }
 
-void GtsDevice::serviceEvent(char event)
+void GtsDevice::serviceEvent(uint8_t event)
 {
     switch(event) {
     case MiBandService::EVENT_MUSIC_PLAY:
@@ -400,6 +400,7 @@ void GtsDevice::navigationRunning(bool running)
 
 void GtsDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
 {
+    Q_UNUSED(flag)
     setMusicStatus(m_navigationRunning, narrative, "", manDist, 1000, progress * 10);
 }
 
