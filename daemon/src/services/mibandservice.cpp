@@ -487,6 +487,49 @@ void MiBandService::setDisplayItems()
     writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, shortcuts);
 }
 
+void MiBandService::setDisplayItemsOld(QMap<QString, uint8_t> keyPosMap)
+{
+    HuamiDevice *device = qobject_cast<HuamiDevice*>(parent());
+
+    if (device && device->deviceType() == "amazfitbip" && device->softwareRevision() < "V0.1.1.14") { //Lexical string comparison should be fine here
+        emit message(tr("Firmware is too old to set display items, V0.1.1.14 is required"));
+        return;
+    }
+
+    auto items = AmazfishConfig::instance()->deviceDisplayItems().split(",");
+
+    QByteArray command(keyPosMap.size() + 4, 0x00);
+    command[0] = ENDPOINT_DISPLAY_ITEMS;
+    uint8_t index = 1;
+    uint16_t enabled_mask = 0x01; //clock
+
+     // it seem that we first have to put all ENABLED items into the array, oder does matter
+     foreach (QString key, items) {
+         uint8_t id = keyPosMap[key];
+         if (id != 0) {
+             qDebug() << "enabling:" << key;
+             enabled_mask |= (1 << id);
+             command[3 + id] = index++;
+         }
+     }
+
+     qDebug() << command.toHex();
+
+     // And then all DISABLED ones, order does not matter
+     for (int i = 0; i < keyPosMap.size(); i++) {
+         QString key = keyPosMap.key(i);
+         int id = keyPosMap.value(key);
+         if (!items.contains(key)) {
+             command[3 + id] = index++;
+         }
+     }
+
+     command[1] = (uint8_t) (enabled_mask & 0xff);
+     command[2] = (uint8_t) ((enabled_mask >> 8 & 0xff));
+
+     writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, command);
+}
+
 void MiBandService::setDoNotDisturb()
 {
 

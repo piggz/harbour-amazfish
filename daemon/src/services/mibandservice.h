@@ -129,6 +129,7 @@ public:
     void setAlertFitnessGoal();
     void setEnableDisplayOnLiftWrist();
     void setDisplayItems();
+    void setDisplayItemsOld(QMap<QString, uint8_t> keyPosMap);
     void setDoNotDisturb();
     void setRotateWristToSwitchInfo(bool enable);
     void setDisplayCaller();

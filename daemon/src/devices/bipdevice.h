@@ -86,6 +86,7 @@ public:
     virtual int supportedFeatures() override;
     virtual QString deviceType() override;
     virtual QStringList supportedDisplayItems() const override;
+    virtual void applyDeviceSetting(AbstractDevice::Settings s) override;
 
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 

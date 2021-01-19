@@ -186,3 +186,26 @@ QStringList BipDevice::supportedDisplayItems() const
 
     return items;
 }
+
+void BipDevice::applyDeviceSetting(AbstractDevice::Settings s)
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return;
+    }
+    QMap<QString, uint8_t> keyPosMap;
+    keyPosMap["status"] = 1;
+    keyPosMap["activity"] = 2;
+    keyPosMap["weather"] = 3;
+    keyPosMap["alarm"] = 4;
+    keyPosMap["timer"] = 5;
+    keyPosMap["compass"] = 6;
+    keyPosMap["settings"] = 7;
+    keyPosMap["alipay"] = 8;
+
+    if (s == SETTING_DEVICE_DISPLAY_ITEMS) {
+        mi->setDisplayItemsOld(keyPosMap);
+    } else {
+        HuamiDevice::applyDeviceSetting(s);
+    }
+}
