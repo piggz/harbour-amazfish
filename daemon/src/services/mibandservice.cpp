@@ -426,9 +426,8 @@ void MiBandService::setEnableDisplayOnLiftWrist()
 
 void MiBandService::setDisplayItems()
 {
-    char items1 = 0x01; //Always display clock
-    char items2 = 0x10;
-
+    uint8_t items1 = 0x01; //Always display clock
+    uint8_t items2 = 0x10;
 
     HuamiDevice *device = qobject_cast<HuamiDevice*>(parent());
 

@@ -20,6 +20,7 @@
         <file>qml/custom-icons/icon-m-back.png</file>
         <file>qml/custom-icons/icon-m-down.png</file>
         <file>qml/custom-icons/icon-m-up.png</file>
+        <file>qml/custom-icons/icon-m-up-down.png</file>
         <file>qml/custom-icons/icon-m-location.png</file>
         <file>qml/custom-icons/icon-m-clock.png</file>
     </qresource>

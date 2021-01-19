@@ -7,6 +7,7 @@
  * License: BSD
  */
 import QtQuick 2.0
+import "platform"
 
 Item {
     id: root
@@ -26,31 +27,42 @@ Item {
         contentItem.parent = contentItemWrapper;
     }
 
-    Rectangle {
+    Item {
         id: contentItemWrapper
         anchors.fill: parent
         Drag.active: dragArea.drag.active
+
         Drag.hotSpot {
             x: contentItem.width / 2
             y: contentItem.height / 2
         }
 
-        MouseArea {
-            id: dragArea
-            anchors.fill: parent
-            drag.target: parent
-            // Keep the dragged item at the same X position. Nice for lists, but not mandatory
-            drag.axis: Drag.YAxis
-            // Disable smoothed so that the Item pixel from where we started the drag remains under the mouse cursor
-            drag.smoothed: false
+        IconPL {
+            height: parent.height - 4
+            width: height
+            iconName: styler.iconUpDown
+            iconHeight: styler.themeIconSizeMedium
+            anchors.right: parent.right
+            anchors.rightMargin: 2
 
-            onReleased: {
-                if (drag.active) {
-                    emitMoveItemRequested();
+            MouseArea {
+                id: dragArea
+                anchors.fill: parent
+                drag.target: contentItemWrapper
+                // Keep the dragged item at the same X position. Nice for lists, but not mandatory
+                drag.axis: Drag.YAxis
+                // Disable smoothed so that the Item pixel from where we started the drag remains under the mouse cursor
+                drag.smoothed: false
+
+                onReleased: {
+                    if (drag.active) {
+                        emitMoveItemRequested();
+                    }
                 }
             }
         }
     }
+
 
     states: [
         State {

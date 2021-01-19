@@ -685,6 +685,10 @@
         <source>AliPay</source>
         <translation type="unfinished">AliPay</translation>
     </message>
+    <message>
+        <source>Timer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-menu</name>
