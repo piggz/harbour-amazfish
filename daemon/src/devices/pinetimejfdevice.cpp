@@ -7,6 +7,7 @@
 #include "dfuservice.h"
 #include "dfuoperation.h"
 #include "infinitimenavservice.h"
+#include "hrmservice.h"
 
 #include <QtXml/QtXml>
 
@@ -113,6 +114,8 @@ void PinetimeJFDevice::parseServices()
                 addService(DfuService::UUID_SERVICE_DFU, new DfuService(path, this));
             } else if (uuid == InfiniTimeNavService::UUID_SERVICE_NAVIGATION && !service(InfiniTimeNavService::UUID_SERVICE_NAVIGATION)) {
                 addService(InfiniTimeNavService::UUID_SERVICE_NAVIGATION, new InfiniTimeNavService(path, this));
+            } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
+                addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -148,6 +151,11 @@ void PinetimeJFDevice::initialise()
         connect(fw, &DfuService::message, this, &PinetimeJFDevice::message, Qt::UniqueConnection);
         connect(fw, &DfuService::downloadProgress, this, &PinetimeJFDevice::downloadProgress, Qt::UniqueConnection);
         connect(fw, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
+    }
+
+    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
+    if (hrm) {
+        connect(hrm, &HRMService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
     }
 }
 
