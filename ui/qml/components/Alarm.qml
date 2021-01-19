@@ -39,15 +39,18 @@ Item {
                 text: "Time: " + pad(hour, 2) + ":" + pad(minute, 2)
 
                 onClicked: {
-                    var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                    var dialog = pageStack.push(pickerComponent, {
                                                     hour: itmAlarm.hour,
                                                     minute:itmAlarm.minute,
-                                                    hourMode: DateTime.TwentyFourHours
                                                 })
                     dialog.accepted.connect(function() {
                         itmAlarm.hour = dialog.hour;
                         itmAlarm.minute = dialog.minute;
                     })
+                }
+                Component {
+                    id: pickerComponent
+                    TimePickerDialogPL {}
                 }
             }
         }
