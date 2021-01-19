@@ -58,6 +58,28 @@ MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService
 
     m_operationTimeout = new QTimer();
     connect(m_operationTimeout, &QTimer::timeout, this, &MiBandService::operationTimeout);
+
+    displayItmesIdMap["status"] = 0x01;
+    displayItmesIdMap["hr"] = 0x02;
+    displayItmesIdMap["workout"] = 0x03;
+    displayItmesIdMap["weather"] = 0x04;
+    displayItmesIdMap["notifications"] = 0x06;
+    displayItmesIdMap["more"] = 0x07;
+    displayItmesIdMap["dnd"] = 0x08;
+    displayItmesIdMap["alarm"] = 0x09;
+    displayItmesIdMap["music"] = 0x0b;
+    displayItmesIdMap["timer"] = 0x0d;
+    displayItmesIdMap["mutephone"] = 0x0f;
+    displayItmesIdMap["settings"] = 0x13;
+    displayItmesIdMap["activity"] = 0x14;
+    displayItmesIdMap["status"] = 0x01;
+    displayItmesIdMap["eventreminder"] = 0x15;
+    displayItmesIdMap["pai"] = 0x19;
+    displayItmesIdMap["worldclock"] = 0x1a;
+    displayItmesIdMap["stress"] = 0x1c;
+    displayItmesIdMap["period"] = 0x1d;
+    displayItmesIdMap["spo2"] = 0x24;
+    displayItmesIdMap["alexa"] = 0x39;
 }
 
 void MiBandService::characteristicChanged(const QString &characteristic, const QByteArray &value)
@@ -503,31 +525,78 @@ void MiBandService::setDisplayItemsOld(QMap<QString, uint8_t> keyPosMap)
     uint8_t index = 1;
     uint16_t enabled_mask = 0x01; //clock
 
-     // it seem that we first have to put all ENABLED items into the array, oder does matter
-     foreach (QString key, items) {
-         uint8_t id = keyPosMap[key];
-         if (id != 0) {
-             qDebug() << "enabling:" << key;
-             enabled_mask |= (1 << id);
-             command[3 + id] = index++;
-         }
-     }
+    // it seem that we first have to put all ENABLED items into the array, oder does matter
+    foreach (QString key, items) {
+        uint8_t id = keyPosMap[key];
+        if (id != 0) {
+            qDebug() << "enabling:" << key;
+            enabled_mask |= (1 << id);
+            command[3 + id] = index++;
+        }
+    }
 
-     qDebug() << command.toHex();
+    qDebug() << command.toHex();
 
-     // And then all DISABLED ones, order does not matter
-     for (int i = 0; i < keyPosMap.size(); i++) {
-         QString key = keyPosMap.key(i);
-         int id = keyPosMap.value(key);
-         if (!items.contains(key)) {
-             command[3 + id] = index++;
-         }
-     }
+    // And then all DISABLED ones, order does not matter
+    for (int i = 0; i < keyPosMap.size(); i++) {
+        QString key = keyPosMap.key(i);
+        int id = keyPosMap.value(key);
+        if (!items.contains(key)) {
+            command[3 + id] = index++;
+        }
+    }
 
-     command[1] = (uint8_t) (enabled_mask & 0xff);
-     command[2] = (uint8_t) ((enabled_mask >> 8 & 0xff));
+    command[1] = (uint8_t) (enabled_mask & 0xff);
+    command[2] = (uint8_t) ((enabled_mask >> 8 & 0xff));
 
-     writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, command);
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, command);
+}
+
+void MiBandService::setDisplayItemsNew()
+{
+    QStringList enabledList;
+    QStringList allList;
+    QByteArray command;
+    uint8_t menuType = 0xff; //0xfd for shortcuts
+
+    enabledList = AmazfishConfig::instance()->deviceDisplayItems().split(",");
+    qDebug() << "Enabled List:" << enabledList;
+
+    command += QByteArray(1, (char)0x1e);
+    // it seem that we first have to put all ENABLED items into the array, oder does matter
+    int index = 0;
+
+    command += QByteArray(1, (char)index++);
+    command += QByteArray(1, (char)0x00);
+    command += QByteArray(1, (char)menuType);
+    command += QByteArray(1, (char)0x12);
+
+    for (QString &key : enabledList) {
+        uint8_t id = displayItmesIdMap[key];
+        if (id != 0) {
+            command += QByteArray(1, (char)index++);
+            command += QByteArray(1, (char)0x00);
+            command += QByteArray(1, (char)menuType);
+            command += QByteArray(1, (char)id);
+        }
+    }
+    // And then all DISABLED ones, order does not matter
+    AbstractDevice *device = qobject_cast<AbstractDevice*>(parent());
+    if (device) {
+        allList = device->supportedDisplayItems();
+        for (QString &key : allList) {
+            uint8_t id = displayItmesIdMap[key];
+
+            if (!enabledList.contains(key)) {
+                command += QByteArray(1, (char)index++);
+                command += QByteArray(1, (char)0x01);
+                command += QByteArray(1, (char)menuType);
+                command += QByteArray(1, (char)id);
+            }
+        }
+    }
+
+    writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 2, command);
 }
 
 void MiBandService::setDoNotDisturb()

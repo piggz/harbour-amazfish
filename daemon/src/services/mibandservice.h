@@ -130,6 +130,7 @@ public:
     void setEnableDisplayOnLiftWrist();
     void setDisplayItems();
     void setDisplayItemsOld(QMap<QString, uint8_t> keyPosMap);
+    void setDisplayItemsNew();
     void setDoNotDisturb();
     void setRotateWristToSwitchInfo(bool enable);
     void setDisplayCaller();
@@ -179,6 +180,7 @@ private:
 
     KDbConnection *m_conn = nullptr;
     QTimer *m_operationTimeout = nullptr;
+    QMap<QString, uint8_t> displayItmesIdMap;
 };
 
 #endif // MIBANDSERVICE_H

@@ -10,28 +10,6 @@ GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(p
 {
     qDebug() << "Creating GTS Device";
     connect(this, &QBLEDevice::propertiesChanged, this, &GtsDevice::onPropertiesChanged);
-
-    displayItmesIdMap["status"] = 0x01;
-    displayItmesIdMap["hr"] = 0x02;
-    displayItmesIdMap["workout"] = 0x03;
-    displayItmesIdMap["weather"] = 0x04;
-    displayItmesIdMap["notifications"] = 0x06;
-    displayItmesIdMap["more"] = 0x07;
-    displayItmesIdMap["dnd"] = 0x08;
-    displayItmesIdMap["alarm"] = 0x09;
-    displayItmesIdMap["music"] = 0x0b;
-    displayItmesIdMap["timer"] = 0x0d;
-    displayItmesIdMap["mutephone"] = 0x0f;
-    displayItmesIdMap["settings"] = 0x13;
-    displayItmesIdMap["activity"] = 0x14;
-    displayItmesIdMap["status"] = 0x01;
-    displayItmesIdMap["eventreminder"] = 0x15;
-    displayItmesIdMap["pai"] = 0x19;
-    displayItmesIdMap["worldclock"] = 0x1a;
-    displayItmesIdMap["stress"] = 0x1c;
-    displayItmesIdMap["period"] = 0x1d;
-    displayItmesIdMap["spo2"] = 0x24;
-    displayItmesIdMap["alexa"] = 0x39;
 }
 
 QString GtsDevice::deviceType()
@@ -230,52 +208,7 @@ void GtsDevice::parseServices()
     }
 }
 
-void GtsDevice::setDisplayItemsNew()
-{
-    QStringList enabledList;
-    QStringList allList;
-    QByteArray command;
-    uint8_t menuType = 0xff; //0xfd for shortcuts
 
-    enabledList = AmazfishConfig::instance()->deviceDisplayItems().split(",");
-    qDebug() << "Enabled List:" << enabledList;
-
-    command += QByteArray(1, (char)0x1e);
-    // it seem that we first have to put all ENABLED items into the array, oder does matter
-    int index = 0;
-
-    command += QByteArray(1, (char)index++);
-    command += QByteArray(1, (char)0x00);
-    command += QByteArray(1, (char)menuType);
-    command += QByteArray(1, (char)0x12);
-
-    for (QString &key : enabledList) {
-        uint8_t id = displayItmesIdMap[key];
-        if (id != 0) {
-            command += QByteArray(1, (char)index++);
-            command += QByteArray(1, (char)0x00);
-            command += QByteArray(1, (char)menuType);
-            command += QByteArray(1, (char)id);
-        }
-    }
-    // And then all DISABLED ones, order does not matter
-    allList = supportedDisplayItems();
-    for (QString &key : allList) {
-        uint8_t id = displayItmesIdMap[key];
-
-        if (!enabledList.contains(key)) {
-            command += QByteArray(1, (char)index++);
-            command += QByteArray(1, (char)0x01);
-            command += QByteArray(1, (char)menuType);
-            command += QByteArray(1, (char)id);
-        }
-    }
-
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 2, command);
-    }
-}
 
 AbstractFirmwareInfo *GtsDevice::firmwareInfo(const QByteArray &bytes)
 {
@@ -332,7 +265,7 @@ void GtsDevice::applyDeviceSetting(AbstractDevice::Settings s)
     }
 
     if (s == SETTING_DEVICE_DISPLAY_ITEMS) {
-        setDisplayItemsNew();
+        mi->setDisplayItemsNew();
     } else {
         HuamiDevice::applyDeviceSetting(s);
     }
