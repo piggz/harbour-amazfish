@@ -25,6 +25,19 @@
 #include "amazfishconfig.h"
 #include "qble/adaptermodel.h"
 
+#include "o2/src/o2.h"
+
+QByteArray encryptDecrypt(QByteArray toEncrypt) {
+    char       key    = 'K';
+    QByteArray output = toEncrypt;
+
+    for (int i = 0; i < toEncrypt.size(); i++) {
+        output[i] = toEncrypt.at(i) ^ key;
+    }
+
+    return output;
+}
+
 int main(int argc, char *argv[])
 {
     QGuiApplication *app;
@@ -56,6 +69,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<City>("org.SfietKonstantin.weatherfish", 1, 0, "City");
     qmlRegisterType<TrackLoader>("uk.co.piggz.amazfish", 1, 0, "TrackLoader");
     qmlRegisterType<AdapterModel>("uk.co.piggz.amazfish", 1, 0, "AdapterModel");
+    qmlRegisterType<O2>("com.pipacs.o2", 1, 0, "O2");
 
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
     qmlRegisterUncreatableType<DaemonInterface>("uk.co.piggz.amazfish", 1, 0, "DaemonInterface", "DaemonInterface type available only for enum datatypes");
@@ -71,6 +85,9 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("DaemonInterfaceInstance", &daemonInterface);
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
     view->rootContext()->setContextProperty("SportsMeta", &sportsMetaModel);
+
+    view->rootContext()->setContextProperty("STRAVA_CLIENT_SECRET", encryptDecrypt("}{s{--z*.x{y{ss///x/x){*xz{(|yy/{syr-/})"));
+    view->rootContext()->setContextProperty("STRAVA_CLIENT_ID", "13707");
 
 #ifdef MER_EDITION_SAILFISH
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));

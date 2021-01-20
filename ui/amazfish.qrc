@@ -71,6 +71,7 @@
         <file>qml/pages/SleepPage.qml</file>
         <file>qml/pages/SportPage.qml</file>
         <file>qml/pages/SportsSummaryPage.qml</file>
+        <file>qml/pages/StravaSettingsPage.qml</file>
         <file>qml/pages/StepsPage.qml</file>
         <file>qml/pages/UnpairDeviceDialog.qml</file>
         <file>qml/pics/devices/amazfit-bip.png</file>

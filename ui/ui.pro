@@ -28,6 +28,7 @@ INCLUDEPATH += \
     ../lib/src
 
 include(../qble/qble.pri)
+include (o2/src/src.pri)
 
 SOURCES += src/harbour-amazfish-ui.cpp \
     src/datasource.cpp \
@@ -154,6 +155,8 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/components/DownloadDataMenuItem.qml \
     qml/pages/AuthKeyDialog.qml \
     qml/pages/UnpairDeviceDialog.qml \
+    qml/pages/StravaSettingsPage.qml \
+    qml/pages/BrowserPage.qml \
     harbour-amazfish-ui.desktop
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
