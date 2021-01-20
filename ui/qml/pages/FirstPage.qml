@@ -246,10 +246,11 @@ PagePL {
 
         Timer {
             id: tmrStartup
-            running: true
+            running: false
             repeat: false
             interval: 500
             onTriggered: {
+                console.log("Start timer triggered");
                 pushAttached(Qt.resolvedUrl("StepsPage.qml"))
                 if (!AmazfishConfig.profileName) {
                     pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
@@ -278,7 +279,7 @@ PagePL {
     }
 
     onPageStatusActive: {
-
+        tmrStartup.start();
     }
 
     Component.onCompleted: {
