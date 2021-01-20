@@ -67,7 +67,6 @@ PageListPL {
             anchors.left: distangeImage.right
             anchors.leftMargin: styler.themePaddingMedium
             text: baselatitude.toFixed(3) + "," + baselongitude.toFixed(3) + " " + basealtitude + "m"
-            //text: (settings.measureSystem === 0) ? (stravaList.model[index]["distance"]/1000).toFixed(2) + "km" : JSTools.fncConvertDistanceToImperial(stravaList.model[index]["distance"]/1000).toFixed(2) + "mi"
         }
         IconPL {
             id: timeImage
@@ -110,14 +109,15 @@ PageListPL {
             //var activityPage = pageStack.push(Qt.resolvedUrl("StravaActivityPage.qml"));
             //activityPage.loadActivity(stravaList.model[index]["id"]);
             var sportpage = pageStack.push(Qt.resolvedUrl("SportPage.qml"));
-            sportpage.title = name;
+            sportpage.activitytitle = name;
             sportpage.date = startdate;
             sportpage.location = baselatitude.toFixed(3) + "," + baselongitude.toFixed(3) + " " + basealtitude + "m";
             sportpage.startdate = startdate;
             sportpage.duration = fncCovertSecondsToString((enddate - startdate) / 1000);
             sportpage.kindstring = kindstring;
             SportsMeta.update(id);
-            sportpage.loader.loadString(SportsModel.gpx(id));
+            sportpage.tcx = SportsModel.gpx(id);
+            sportpage.update();
         }
 
         menu: ContextMenuPL {

@@ -24,8 +24,6 @@ PagePL {
     id: page
     title: qsTr("Strava settings")
 
-    property bool stravaLinked: false
-    property bool downloadingGPX: false
     property variant athlete
     property string username: ""
     property string country: ""
@@ -62,26 +60,7 @@ PagePL {
         stravaLinked = o2strava.linked
     }
 
-    O2 {
-        id: o2strava
-        clientId: STRAVA_CLIENT_ID
-        clientSecret: STRAVA_CLIENT_SECRET
-        scope: "activity:write,activity:read_all"
-        requestUrl: "https://www.strava.com/oauth/authorize"
-        tokenUrl: "https://www.strava.com/oauth/token"
-        refreshTokenUrl: "https://www.strava.com/api/v3/oauth/token"
 
-        onOpenBrowser: {
-            Qt.openUrlExternally(url);
-        }
-
-        onCloseBrowser: {
-        }
-
-        onLinkedChanged: {
-            stravaLinked = linked
-        }
-    }
 
     Column
     {

@@ -386,43 +386,43 @@
     <name>JSTools</name>
     <message>
         <location filename="../qml/tools/JSTools.js" line="87"/>
-        <location filename="../qml/tools/JSTools.js" line="252"/>
+        <location filename="../qml/tools/JSTools.js" line="295"/>
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="88"/>
         <location filename="../qml/tools/JSTools.js" line="89"/>
-        <location filename="../qml/tools/JSTools.js" line="253"/>
-        <location filename="../qml/tools/JSTools.js" line="254"/>
+        <location filename="../qml/tools/JSTools.js" line="296"/>
+        <location filename="../qml/tools/JSTools.js" line="297"/>
         <source>Heartrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="90"/>
         <location filename="../qml/tools/JSTools.js" line="91"/>
-        <location filename="../qml/tools/JSTools.js" line="255"/>
-        <location filename="../qml/tools/JSTools.js" line="256"/>
+        <location filename="../qml/tools/JSTools.js" line="298"/>
+        <location filename="../qml/tools/JSTools.js" line="299"/>
         <source>Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="92"/>
         <location filename="../qml/tools/JSTools.js" line="93"/>
-        <location filename="../qml/tools/JSTools.js" line="257"/>
-        <location filename="../qml/tools/JSTools.js" line="258"/>
+        <location filename="../qml/tools/JSTools.js" line="300"/>
+        <location filename="../qml/tools/JSTools.js" line="301"/>
         <source>Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="94"/>
-        <location filename="../qml/tools/JSTools.js" line="259"/>
+        <location filename="../qml/tools/JSTools.js" line="302"/>
         <source>Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="95"/>
-        <location filename="../qml/tools/JSTools.js" line="260"/>
+        <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
@@ -433,7 +433,7 @@
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="97"/>
-        <location filename="../qml/tools/JSTools.js" line="261"/>
+        <location filename="../qml/tools/JSTools.js" line="304"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
@@ -907,12 +907,17 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="69"/>
+        <source>Strava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="70"/>
         <source>Debug Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="70"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="71"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1064,213 +1069,218 @@
 <context>
     <name>SportPage</name>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="68"/>
+        <location filename="../qml/pages/SportPage.qml" line="29"/>
+        <source>Send to Strava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>Data:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="336"/>
+        <location filename="../qml/pages/SportPage.qml" line="356"/>
         <source>Steps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="337"/>
+        <location filename="../qml/pages/SportPage.qml" line="357"/>
         <source>Active Seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="338"/>
+        <location filename="../qml/pages/SportPage.qml" line="358"/>
         <source>Calories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="339"/>
+        <location filename="../qml/pages/SportPage.qml" line="359"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="340"/>
+        <location filename="../qml/pages/SportPage.qml" line="360"/>
         <source>Ascent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="341"/>
+        <location filename="../qml/pages/SportPage.qml" line="361"/>
         <source>Descent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="342"/>
+        <location filename="../qml/pages/SportPage.qml" line="362"/>
         <source>Max Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="343"/>
+        <location filename="../qml/pages/SportPage.qml" line="363"/>
         <source>Min Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="344"/>
+        <location filename="../qml/pages/SportPage.qml" line="364"/>
         <source>Min Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="345"/>
+        <location filename="../qml/pages/SportPage.qml" line="365"/>
         <source>Max Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="346"/>
+        <location filename="../qml/pages/SportPage.qml" line="366"/>
         <source>Average HR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="347"/>
+        <location filename="../qml/pages/SportPage.qml" line="367"/>
         <source>Average Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="348"/>
+        <location filename="../qml/pages/SportPage.qml" line="368"/>
         <source>Average Stride</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="349"/>
+        <location filename="../qml/pages/SportPage.qml" line="369"/>
         <source>Max HR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="350"/>
+        <location filename="../qml/pages/SportPage.qml" line="370"/>
         <source>Time Ascending</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="351"/>
+        <location filename="../qml/pages/SportPage.qml" line="371"/>
         <source>Time Descending</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="352"/>
+        <location filename="../qml/pages/SportPage.qml" line="372"/>
         <source>Time Flat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="353"/>
+        <location filename="../qml/pages/SportPage.qml" line="373"/>
         <source>Average Stroke</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="354"/>
+        <location filename="../qml/pages/SportPage.qml" line="374"/>
         <source>Average Stroke/s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="355"/>
+        <location filename="../qml/pages/SportPage.qml" line="375"/>
         <source>Average Lap Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="356"/>
+        <location filename="../qml/pages/SportPage.qml" line="376"/>
         <source>Strokes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="357"/>
+        <location filename="../qml/pages/SportPage.qml" line="377"/>
         <source>SWOLF Index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="358"/>
+        <location filename="../qml/pages/SportPage.qml" line="378"/>
         <source>Swim Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="359"/>
+        <location filename="../qml/pages/SportPage.qml" line="379"/>
         <source>Laps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="360"/>
+        <location filename="../qml/pages/SportPage.qml" line="380"/>
         <source>Max Latitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="361"/>
+        <location filename="../qml/pages/SportPage.qml" line="381"/>
         <source>Min Latitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="362"/>
+        <location filename="../qml/pages/SportPage.qml" line="382"/>
         <source>Max Longitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="363"/>
+        <location filename="../qml/pages/SportPage.qml" line="383"/>
         <source>Min Longitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="364"/>
+        <location filename="../qml/pages/SportPage.qml" line="384"/>
         <source>Max Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="365"/>
+        <location filename="../qml/pages/SportPage.qml" line="385"/>
         <source>Total Stride</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="371"/>
+        <location filename="../qml/pages/SportPage.qml" line="391"/>
         <source>steps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="372"/>
+        <location filename="../qml/pages/SportPage.qml" line="392"/>
         <source>seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="373"/>
+        <location filename="../qml/pages/SportPage.qml" line="393"/>
         <source>kcal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="374"/>
+        <location filename="../qml/pages/SportPage.qml" line="394"/>
         <source>meters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="375"/>
+        <location filename="../qml/pages/SportPage.qml" line="395"/>
         <source>seconds/m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="376"/>
+        <location filename="../qml/pages/SportPage.qml" line="396"/>
         <source>bpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="377"/>
+        <location filename="../qml/pages/SportPage.qml" line="397"/>
         <source>seconds/km</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="378"/>
+        <location filename="../qml/pages/SportPage.qml" line="398"/>
         <source>cm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="379"/>
+        <location filename="../qml/pages/SportPage.qml" line="399"/>
         <source>strokes/s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="380"/>
+        <location filename="../qml/pages/SportPage.qml" line="400"/>
         <source>strokes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="381"/>
-        <location filename="../qml/pages/SportPage.qml" line="384"/>
+        <location filename="../qml/pages/SportPage.qml" line="401"/>
+        <location filename="../qml/pages/SportPage.qml" line="404"/>
         <source>swolf</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1287,6 +1297,11 @@
         <source>Download Next Activity</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="128"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StepsPage</name>
@@ -1294,6 +1309,107 @@
         <location filename="../qml/pages/StepsPage.qml" line="9"/>
         <location filename="../qml/pages/StepsPage.qml" line="52"/>
         <source>Steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StravaSettingsPage</name>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="25"/>
+        <source>Strava settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="35"/>
+        <source>Logout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="35"/>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="79"/>
+        <source>User Name: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="85"/>
+        <source>Country: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StravaUploadPage</name>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="26"/>
+        <source>Strava Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="43"/>
+        <source>Activity name for Strava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="44"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="48"/>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="55"/>
+        <source>Activity description for Strava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="63"/>
+        <source>Type (Strava)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="68"/>
+        <source>Private</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="72"/>
+        <source>Commute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="76"/>
+        <source>Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="128"/>
+        <source>Uploading data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="145"/>
+        <source>Checking upload...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="208"/>
+        <source>TCX uploaded...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="243"/>
+        <source>Activity upload complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="289"/>
+        <source>An unknown error occurred</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -4,6 +4,7 @@ import "pages"
 import org.SfietKonstantin.weatherfish 1.0
 import Nemo.DBus 2.0
 import uk.co.piggz.amazfish 1.0
+import com.pipacs.o2 1.0
 import "./components/"
 import "./components/platform"
 
@@ -19,6 +20,7 @@ ApplicationWindowPL
     property bool serviceActiveState: false
     property bool serviceEnabledState: false
     property int supportedFeatures: 0
+    property bool stravaLinked: false
 
     StylerPL {
         id: styler
@@ -77,6 +79,26 @@ ApplicationWindowPL
         }
     }
 
+    O2 {
+        id: o2strava
+        clientId: STRAVA_CLIENT_ID
+        clientSecret: STRAVA_CLIENT_SECRET
+        scope: "activity:write,activity:read_all"
+        requestUrl: "https://www.strava.com/oauth/authorize"
+        tokenUrl: "https://www.strava.com/oauth/token"
+        refreshTokenUrl: "https://www.strava.com/api/v3/oauth/token"
+
+        onOpenBrowser: {
+            Qt.openUrlExternally(url);
+        }
+
+        onCloseBrowser: {
+        }
+
+        onLinkedChanged: {
+            stravaLinked = linked
+        }
+    }
 
 
     DBusInterface {

@@ -218,6 +218,49 @@ function fncConvertArrayToSaveStringCoverPage()
 
 //*************** Strava functions *****************
 
+
+
+var arrayStravaWorkoutTypes =
+[
+    { name: "running", stravaType: "Run" },
+    { name: "cycling", stravaType: "Ride" },
+    { name: "mountainBiking", stravaType: "Ride" },
+    { name: "walking", stravaType: "Walk" },
+    { name: "inlineSkating", stravaType: "InlineSkate" },
+    { name: "skiing", stravaType: "AlpineSki" },
+    { name: "hiking", stravaType: "Hike" },
+    { name: "indoor cycling", stravaType: "VirtualRide" },
+    { name: "treadmill", stravaType: "VirtualRun" }
+]
+
+function toStravaType(t)
+{
+    var ret = "";
+    for (var i = 0; i < arrayStravaWorkoutTypes.length; i++)
+    {
+        if (arrayStravaWorkoutTypes[i].name === t.toLowerCase()) {
+            ret = arrayStravaWorkoutTypes[i].stravaType;
+            break;
+        }
+    }
+    return ret;
+}
+
+
+function fromStravaType(t)
+{
+    console.log("looking for type ", t);
+    var ret = "";
+    for (var i = 0; i < arrayStravaWorkoutTypes.length; i++)
+    {
+        if (arrayStravaWorkoutTypes[i].stravaType === t.toLowerCase()) {
+            ret = arrayStravaWorkoutTypes[i].name;
+            break;
+        }
+    }
+    return ret;
+}
+
 function stravaGet(xmlhttp, url, token, onready)
 {
     console.log("Loading from ", url);

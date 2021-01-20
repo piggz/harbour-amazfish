@@ -15,9 +15,29 @@ PagePL {
     property string location: ""
     property string startdate: ""
     property string kindstring: ""
+    property string activitytitle: ""
+    property string tcx: ""
 
     property bool bMapMaximized: false
     property alias loader: trackLoader
+
+    title: activitytitle
+
+    pageMenu: PageMenuPL {
+        PageMenuItemPL
+        {
+            text: qsTr("Send to Strava")
+            visible: o2strava.linked
+            onClicked: {
+                var dialog = pageStack.push(Qt.resolvedUrl("StravaUploadPage.qml"));
+                dialog.activityID = activitytitle.replace(/\s/g, '');
+                dialog.tcx = tcx;
+                dialog.activityName = activitytitle;
+                dialog.activityDescription = trackLoader.description;
+                dialog.activityType = kindstring
+            }
+        }
+    }
 
     Item {
         id: pageItem
@@ -384,5 +404,9 @@ PagePL {
         if (unit === "swolf_index") return qsTr("swolf");
 
         return unit;
+    }
+
+    function update() {
+        loader.loadString(tcx);
     }
 }
