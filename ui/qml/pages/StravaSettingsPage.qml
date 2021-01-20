@@ -36,7 +36,6 @@ PagePL {
             id: btnAuth
             text: stravaLinked ? qsTr("Logout") : qsTr("Login")
             onClicked: {
-                enabled = false
                 if (o2strava.linked) {
                     o2strava.unlink();
                 } else {
@@ -80,7 +79,6 @@ PagePL {
         }
 
         onLinkedChanged: {
-            btnAuth.enabled = true;
             stravaLinked = linked
         }
     }
