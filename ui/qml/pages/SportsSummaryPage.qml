@@ -119,6 +119,17 @@ PageListPL {
             SportsMeta.update(id);
             sportpage.loader.loadString(SportsModel.gpx(id));
         }
+
+        menu: ContextMenuPL {
+            id: contextMenu
+            ContextMenuItemPL {
+                iconName: styler.iconDelete
+                text: qsTr("Remove")
+                onClicked: {
+                    SportsModel.deleteRecord(id);
+                }
+            }
+        }
     }
 
 

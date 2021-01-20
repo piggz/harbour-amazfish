@@ -127,3 +127,20 @@ QString SportsDataModel::gpx(uint id)
     file.close();
     return line;
 }
+
+void SportsDataModel::deleteRecord(uint id)
+{
+    QString qry = QString("DELETE FROM sports_meta WHERE sport_id = %1").arg(id);
+
+    if (m_connection && m_connection->isDatabaseUsed()) {
+        if (!m_connection->executeSql(KDbEscapedString(qry))) {
+            qDebug() << "Error deleting from sports_meta";
+        } else {
+            qry = QString("DELETE FROM sports_data WHERE id = %1").arg(id);
+            if (!m_connection->executeSql(KDbEscapedString(qry))) {
+                qDebug() << "Error deleting from sports_data";
+            }
+        }
+    }
+    update();
+}

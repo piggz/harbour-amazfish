@@ -47,6 +47,7 @@ public:
 
     Q_INVOKABLE void update();
     Q_INVOKABLE QString gpx(uint id);
+    Q_INVOKABLE void deleteRecord(uint id);
 
 private:
     KDbConnection *m_connection = nullptr;
