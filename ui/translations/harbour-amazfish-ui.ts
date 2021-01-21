@@ -1330,12 +1330,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaSettingsPage.qml" line="82"/>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="88"/>
         <source>User Name: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaSettingsPage.qml" line="88"/>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="94"/>
         <source>Country: </source>
         <translation type="unfinished"></translation>
     </message>
