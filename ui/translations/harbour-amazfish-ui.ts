@@ -321,12 +321,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="267"/>
+        <location filename="../qml/pages/FirstPage.qml" line="268"/>
         <source>%1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="270"/>
+        <location filename="../qml/pages/FirstPage.qml" line="271"/>
         <source>%1 bpm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1298,7 +1298,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="128"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="127"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>

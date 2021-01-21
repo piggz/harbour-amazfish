@@ -7,7 +7,7 @@
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
 
-#define SERVICE_NAME "io.github.rinigus.PureMaps"
+#define SERVICE_NAME_MAPS "io.github.rinigus.PureMaps"
 #define INTERFACE_NAME "io.github.rinigus.PureMaps.navigator"
 #define OBJECT_PATH "/io/github/rinigus/PureMaps/navigator"
 

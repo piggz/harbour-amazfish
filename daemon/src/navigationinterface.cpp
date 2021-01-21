@@ -5,7 +5,7 @@
 
 NavigationInterface::NavigationInterface(QObject *parent) : QObject(parent)
   , m_serviceWatcher(new QDBusServiceWatcher(
-                         QStringLiteral(SERVICE_NAME), QDBusConnection::sessionBus(),
+                         QStringLiteral(SERVICE_NAME_MAPS), QDBusConnection::sessionBus(),
                          QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration))
 {
   QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered,   this, &NavigationInterface::connectDaemon);
@@ -22,7 +22,7 @@ void NavigationInterface::connectDaemon()
         iface->deleteLater();
     }
 
-    iface = new QDBusInterface(QStringLiteral(SERVICE_NAME), QStringLiteral(OBJECT_PATH), QStringLiteral(INTERFACE_NAME), QDBusConnection::sessionBus());
+    iface = new QDBusInterface(QStringLiteral(SERVICE_NAME_MAPS), QStringLiteral(OBJECT_PATH), QStringLiteral(INTERFACE_NAME), QDBusConnection::sessionBus());
 
     if (!iface->isValid()) {
         qDebug() << "Interface is not valid";

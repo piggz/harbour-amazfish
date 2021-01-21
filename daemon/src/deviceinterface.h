@@ -32,7 +32,7 @@ class MiBandService;
 class DeviceInterface : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", SERVICE_NAME)
+    Q_CLASSINFO("D-Bus Interface", SERVICE_NAME_AMAZFISH)
 public:
     DeviceInterface();
     ~DeviceInterface();
