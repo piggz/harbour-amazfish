@@ -87,6 +87,7 @@ ApplicationWindowPL
         requestUrl: "https://www.strava.com/oauth/authorize"
         tokenUrl: "https://www.strava.com/oauth/token"
         refreshTokenUrl: "https://www.strava.com/api/v3/oauth/token"
+        replyContent: "<html><head><body><h1>You can now close this window</h1></body></head></html>"
 
         onOpenBrowser: {
             Qt.openUrlExternally(url);
