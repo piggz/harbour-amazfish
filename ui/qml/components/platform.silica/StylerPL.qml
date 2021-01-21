@@ -107,7 +107,7 @@ QtObject {
     property string iconUpDown: "../../pics/custom-icons/icon-m-up-down.png"
     property string iconClock: "image://theme/icon-m-clock"
     property string iconLocation: "image://theme/icon-m-location"
-
+    property string iconStrava: "../../pics/custom-icons/icon-strava.png"
     property string customIconPrefix: "../../pics/custom-icons/"
     property string customIconSuffix: ".png"
 

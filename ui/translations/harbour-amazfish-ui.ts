@@ -1330,12 +1330,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaSettingsPage.qml" line="79"/>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="82"/>
         <source>User Name: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaSettingsPage.qml" line="85"/>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="88"/>
         <source>Country: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -1388,27 +1388,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="128"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="133"/>
         <source>Uploading data...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="145"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="150"/>
         <source>Checking upload...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="208"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="213"/>
         <source>TCX uploaded...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="243"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="248"/>
         <source>Activity upload complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="289"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
         <source>An unknown error occurred</source>
         <translation type="unfinished"></translation>
     </message>

@@ -23,5 +23,6 @@
         <file>qml/custom-icons/icon-m-up-down.png</file>
         <file>qml/custom-icons/icon-m-location.png</file>
         <file>qml/custom-icons/icon-m-clock.png</file>
+        <file>qml/custom-icons/icon-strava.png</file>
     </qresource>
 </RCC>

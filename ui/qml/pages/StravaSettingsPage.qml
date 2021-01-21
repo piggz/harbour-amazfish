@@ -43,8 +43,24 @@ PagePL {
         }
     }
 
-    onStravaLinkedChanged: {
-        if (stravaLinked) {
+    Connections {
+        target: o2strava
+        onLinkedChanged: {
+            if (linked) {
+                var tokens = o2strava.extraTokens;
+                athlete = tokens["athlete"];
+                username = (athlete["username"] !== undefined) ? athlete["username"] : athlete["firstname"] + " " + athlete["lastname"];
+                country = athlete["country"];
+            } else {
+                username = "not logged in";
+                country = "";
+            }
+        }
+    }
+
+    onPageStatusActivating:
+    {
+        if (o2strava.linked) {
             var tokens = o2strava.extraTokens;
             athlete = tokens["athlete"];
             username = (athlete["username"] !== undefined) ? athlete["username"] : athlete["firstname"] + " " + athlete["lastname"];
@@ -54,13 +70,6 @@ PagePL {
             country = "";
         }
     }
-
-    onPageStatusActivating:
-    {
-        stravaLinked = o2strava.linked
-    }
-
-
 
     Column
     {
@@ -86,5 +95,4 @@ PagePL {
             }
         }
     }
-
 }
