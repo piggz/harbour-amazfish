@@ -124,6 +124,11 @@ PagePL {
             return;
         }
 
+        var isGPX = false;
+        if (tcx.indexOf("<gpx") > 0) {
+            isGPX = true;
+        }
+
         console.log("Upload TCX...");
         statusMessage(qsTr("Uploading data..."));
 
@@ -166,7 +171,7 @@ PagePL {
         part += 'Content-Disposition: form-data; name="description"\r\n\r\n' + st_description.text + '\r\n--' + boundary + '\r\n';
         part += 'Content-Disposition: form-data; name="private"\r\n\r\n' + (chkPrivate.checked ? "1" : "0") + '\r\n--' + boundary + '\r\n';
         part += 'Content-Disposition: form-data; name="commute""\r\n\r\n' + (chkCommute.checked ? "1" : "0") + '\r\n--' + boundary + '\r\n';
-        part += 'Content-Disposition: form-data; name="data_type"\r\n\r\n' + "tcx" + '\r\n--' + boundary + '\r\n';
+        part += 'Content-Disposition: form-data; name="data_type"\r\n\r\n' + (isGPX ? "gpx": "tcx") + '\r\n--' + boundary + '\r\n';
         part += 'Content-Disposition: form-data; name="external_id"\r\n\r\n' + activityID + '\r\n--' + boundary + '\r\n';
         part += 'Content-Disposition: form-data; name="file"; filename="' + activityID + '"\r\n';
         part += "Content-Type: text/plain";
