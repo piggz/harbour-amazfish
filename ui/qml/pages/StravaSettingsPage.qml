@@ -32,7 +32,7 @@ PagePL {
         PageMenuItemPL
         {
             id: btnAuth
-            text: stravaLinked ? qsTr("Logout") : qsTr("Login")
+            text: o2strava.linked ? qsTr("Logout") : qsTr("Login")
             onClicked: {
                 if (o2strava.linked) {
                     o2strava.unlink();
