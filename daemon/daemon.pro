@@ -100,6 +100,7 @@ SOURCES += \
     src/qaesencryption.cpp \
     src/services/currenttimeservice.cpp \
     src/services/dfuservice.cpp \
+    src/services/infinitimenavservice.cpp \
     src/services/pinetimemusicservice.cpp \
     src/typeconversion.cpp \
     src/bipbatteryinfo.cpp \
@@ -152,6 +153,7 @@ HEADERS += \
     src/qaesencryption.h \
     src/services/currenttimeservice.h \
     src/services/dfuservice.h \
+    src/services/infinitimenavservice.h \
     src/services/pinetimemusicservice.h \
     src/typeconversion.h \
     src/bipbatteryinfo.h \

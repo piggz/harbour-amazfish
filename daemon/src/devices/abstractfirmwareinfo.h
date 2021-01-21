@@ -22,7 +22,8 @@ public:
         GPS_ALMANAC = 5,
         Res = 2,
         Res_Compressed = 130,
-        Watchface = 8
+        Watchface = 8,
+        Bootloader = 100
     };
 
     QString version() const;

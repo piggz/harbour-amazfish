@@ -6,6 +6,8 @@
 #include "infinitimefirmwareinfo.h"
 #include "dfuservice.h"
 #include "dfuoperation.h"
+#include "infinitimenavservice.h"
+#include "hrmservice.h"
 
 #include <QtXml/QtXml>
 
@@ -110,6 +112,10 @@ void PinetimeJFDevice::parseServices()
                 addService(PineTimeMusicService::UUID_SERVICE_MUSIC  , new PineTimeMusicService(path, this));
             } else if (uuid == DfuService::UUID_SERVICE_DFU && !service(DfuService::UUID_SERVICE_DFU)) {
                 addService(DfuService::UUID_SERVICE_DFU, new DfuService(path, this));
+            } else if (uuid == InfiniTimeNavService::UUID_SERVICE_NAVIGATION && !service(InfiniTimeNavService::UUID_SERVICE_NAVIGATION)) {
+                addService(InfiniTimeNavService::UUID_SERVICE_NAVIGATION, new InfiniTimeNavService(path, this));
+            } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
+                addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -145,6 +151,11 @@ void PinetimeJFDevice::initialise()
         connect(fw, &DfuService::message, this, &PinetimeJFDevice::message, Qt::UniqueConnection);
         connect(fw, &DfuService::downloadProgress, this, &PinetimeJFDevice::downloadProgress, Qt::UniqueConnection);
         connect(fw, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
+    }
+
+    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
+    if (hrm) {
+        connect(hrm, &HRMService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
     }
 }
 
@@ -185,6 +196,23 @@ void PinetimeJFDevice::authenticated(bool ready)
 AbstractFirmwareInfo *PinetimeJFDevice::firmwareInfo(const QByteArray &bytes)
 {
     return new InfinitimeFirmwareInfo(bytes);
+}
+
+void PinetimeJFDevice::navigationRunning(bool running)
+{
+
+}
+
+void PinetimeJFDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
+{
+    qDebug() << Q_FUNC_INFO;
+    InfiniTimeNavService *nav = qobject_cast<InfiniTimeNavService*>(service(InfiniTimeNavService::UUID_SERVICE_NAVIGATION));
+    if (nav) {
+        nav->setFlag(flag);
+        nav->setNarrative(narrative);
+        nav->setManDist(manDist);
+        nav->setProgress(progress);
+    }
 }
 
 void PinetimeJFDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration, int position)
