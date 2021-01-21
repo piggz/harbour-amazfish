@@ -24,8 +24,6 @@ void InfinitimeFirmwareInfo::determineFirmwareType()
 
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(FW_HEADER))) {
         m_type = Firmware;
-    } else if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(BOOTLOADER_HEADER))) {
-        m_type = Bootloader;
     }
 }
 
@@ -34,9 +32,6 @@ void InfinitimeFirmwareInfo::determineFirmwareVersion()
     switch (m_type) {
     case Firmware:
         m_version = "FW ()";
-        break;
-    case Bootloader:
-        m_version = "BL ()";
         break;
     default:
         m_version = "unknown";
