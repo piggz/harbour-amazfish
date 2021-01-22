@@ -31,7 +31,7 @@ PagePL {
 
     function unpairAccepted() {
         DaemonInterfaceInstance.disconnect();
-        pageStack.push(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
+        pageStack.replace(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
     }
 
     on_ConnectionStateChanged: console.log(_connectionState)
@@ -47,6 +47,7 @@ PagePL {
                         : "PairSelectDeviceType.qml"
 
                 var obj = pageStack.push(Qt.resolvedUrl(page));
+
                 if (AmazfishConfig.pairedAddress) {
                     obj.accepted.connect(unpairAccepted);
                 }

@@ -39,8 +39,8 @@ PagePL {
                 app.pages.pop(acceptDestination);
             else
                 app.push(acceptDestination);
-        } else
-            app.pages.pop();
+        } //else
+            //app.pages.pop();
     }
 
     function accept() {
