@@ -266,67 +266,67 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="38"/>
+        <location filename="../qml/pages/FirstPage.qml" line="43"/>
         <source>Pair with watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="47"/>
+        <location filename="../qml/pages/FirstPage.qml" line="57"/>
         <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="51"/>
+        <location filename="../qml/pages/FirstPage.qml" line="61"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="55"/>
+        <location filename="../qml/pages/FirstPage.qml" line="65"/>
         <source>Data Graphs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="61"/>
+        <location filename="../qml/pages/FirstPage.qml" line="71"/>
         <source>Disconnect from watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="61"/>
+        <location filename="../qml/pages/FirstPage.qml" line="71"/>
         <source>Connect to watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="133"/>
+        <location filename="../qml/pages/FirstPage.qml" line="143"/>
         <source>Steps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="184"/>
+        <location filename="../qml/pages/FirstPage.qml" line="194"/>
         <source>Heartrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="224"/>
+        <location filename="../qml/pages/FirstPage.qml" line="234"/>
         <source>Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="229"/>
+        <location filename="../qml/pages/FirstPage.qml" line="239"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="238"/>
+        <location filename="../qml/pages/FirstPage.qml" line="248"/>
         <source>Enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="268"/>
+        <location filename="../qml/pages/FirstPage.qml" line="278"/>
         <source>%1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="271"/>
+        <location filename="../qml/pages/FirstPage.qml" line="281"/>
         <source>%1 bpm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1416,12 +1416,12 @@
 <context>
     <name>UnpairDeviceDialog</name>
     <message>
-        <location filename="../qml/pages/UnpairDeviceDialog.qml" line="25"/>
+        <location filename="../qml/pages/UnpairDeviceDialog.qml" line="22"/>
         <source>Unpair</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/UnpairDeviceDialog.qml" line="36"/>
+        <location filename="../qml/pages/UnpairDeviceDialog.qml" line="33"/>
         <source>Before proceeding you need to unpair your current device.</source>
         <translation type="unfinished"></translation>
     </message>
