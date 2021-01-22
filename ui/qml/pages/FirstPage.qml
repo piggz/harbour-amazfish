@@ -29,6 +29,11 @@ PagePL {
         _steps = parseInt(DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS));
     }
 
+    function unpairAccepted() {
+        DaemonInterfaceInstance.disconnect();
+        pageStack.push(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
+    }
+
     on_ConnectionStateChanged: console.log(_connectionState)
 
     on_AuthenticatedChanged: _refreshInformation()
@@ -40,7 +45,11 @@ PagePL {
                 var page = AmazfishConfig.pairedAddress
                         ? "UnpairDeviceDialog.qml"
                         : "PairSelectDeviceType.qml"
-                pageStack.push(Qt.resolvedUrl(page))
+
+                var obj = pageStack.push(Qt.resolvedUrl(page));
+                if (AmazfishConfig.pairedAddress) {
+                    obj.accepted.connect(unpairAccepted);
+                }
             }
         }
         PageMenuItemPL {

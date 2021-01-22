@@ -4,10 +4,6 @@ import "../components"
 import "../components/platform"
 
 DialogPL {
-    onAccepted: {
-        DaemonInterfaceInstance.disconnect();
-        pageStack.replace(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
-    }
 
     Column {
         anchors.top: parent.top
