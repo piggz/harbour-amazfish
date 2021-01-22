@@ -4,7 +4,7 @@ After=pre-user-session.target
 After=lipstick.service
 
 [Service]
-ExecStart=/usr/bin/invoker --type=generic /usr/bin/harbour-amazfishd
+ExecStart=/usr/bin/harbour-amazfishd
 Restart=always
 RestartSec=5
 Environment=HOME=%h XDG_CONFIG_HOME=/home/%u/.config DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/dbus/user_bus_socket XDG_RUNTIME_DIR=/run/user/%U
