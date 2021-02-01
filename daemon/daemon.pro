@@ -68,17 +68,23 @@ message(The project will be installed in $$PREFIX)
 
 target.path = $$PREFIX/bin
 systemd_services.path = $$PREFIX/lib/systemd/user/
-systemd_services.files = harbour-amazfish.service
+systemd_services.files = $$OUT_PWD/harbour-amazfish.service
 
-privilege.files = $${TARGET}.privileges
-privilege.path = /usr/share/mapplauncherd/privileges.d/
+#Install appropriate files for each system
+flavor_silica {
+systemd_services.commands =  cp $$PWD/harbour-amazfish-sailfish.service.in $$OUT_PWD/harbour-amazfish.service
+
+    privilege.files = $${TARGET}.privileges
+    privilege.path = /usr/share/mapplauncherd/privileges.d/
+    INSTALLS += privilege
+} else {
+    message(Configuring service file for regular linux))
+    systemd_services.commands = sed \'s PREFIX $$PREFIX g\' $$PWD/harbour-amazfish.service.in > $$OUT_PWD/harbour-amazfish.service
+    #systemd_services.commands =  cp $$PWD/harbour-amazfish.service.in $$OUT_PWD/harbour-amazfish.service; sed -i \'s PREFIX $$PREFIX g\' $$OUT_PWD/harbour-amazfish.service
+}
 
 INSTALLS += target \
             systemd_services
-
-equals(FLAVOR, "silica") {
-    INSTALLS += privilege
-}
 
 include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
@@ -131,7 +137,8 @@ SOURCES += \
     src/huamiweathercondition.cpp
 
 DISTFILES += \
-    harbour-amazfish.service \
+    harbour-amazfish-sailfish.service.in \
+    harbour-amazfish.service.in \
     harbour-amazfishd.privileges
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
