@@ -1416,12 +1416,12 @@
 <context>
     <name>UnpairDeviceDialog</name>
     <message>
-        <location filename="../qml/pages/UnpairDeviceDialog.qml" line="22"/>
+        <location filename="../qml/pages/UnpairDeviceDialog.qml" line="21"/>
         <source>Unpair</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/UnpairDeviceDialog.qml" line="33"/>
+        <location filename="../qml/pages/UnpairDeviceDialog.qml" line="32"/>
         <source>Before proceeding you need to unpair your current device.</source>
         <translation type="unfinished"></translation>
     </message>

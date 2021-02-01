@@ -72,7 +72,7 @@ systemd_services.files = $$OUT_PWD/harbour-amazfish.service
 
 #Install appropriate files for each system
 flavor_silica {
-systemd_services.commands =  cp $$PWD/harbour-amazfish-sailfish.service.in $$OUT_PWD/harbour-amazfish.service
+    systemd_services.commands =  cp $$PWD/harbour-amazfish-sailfish.service.in $$OUT_PWD/harbour-amazfish.service
 
     privilege.files = $${TARGET}.privileges
     privilege.path = /usr/share/mapplauncherd/privileges.d/
