@@ -56,7 +56,7 @@ with
 `QT.KContacts.depends = KCoreAddons`
 
 This can be done with the following command:
-`sed 's/QT.KContacts.depends = CoreAddons/QT.KContacts.depends = KCoreAddons/' /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KContacts.pri`
+`sudo sed -i 's/QT.KContacts.depends = CoreAddons/QT.KContacts.depends = KCoreAddons/' /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KContacts.pri`
 
 You can now enter again `make` command, and build process should end successfully.
 Then `sudo make install`
