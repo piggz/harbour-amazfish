@@ -19,7 +19,7 @@ and
 https://git.sailfishos.org/mer-core/qtmpris
 
 ```
-git clone git clone https://git.sailfishos.org/mer-core/qtmpris.git
+git clone https://git.sailfishos.org/mer-core/qtmpris.git
 cd qtmpris
 qmake
 make
