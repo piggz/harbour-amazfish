@@ -9,8 +9,7 @@ Clone amazfish repository
 `git clone https://github.com/piggz/harbour-amazfish.git`
 
 sync submodule
-`git submodule init
-git submodule update`
+`git submodule init && git submodule update`
 
 # manages dependencies
 
@@ -56,7 +55,10 @@ and change
 with 
 `QT.KContacts.depends = KCoreAddons`
 
-you can now enter again `make` command, and build process should end successfully.
+This can be done with the following command:
+`sed 's/QT.KContacts.depends = CoreAddons/QT.KContacts.depends = KCoreAddons/' /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KContacts.pri`
+
+You can now enter again `make` command, and build process should end successfully.
 Then `sudo make install`
 
 Amazfish is now located here `/usr/local/share/harbour-amazfish-ui`
