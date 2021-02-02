@@ -28,6 +28,7 @@ sudo make install
 
 ```
 git clone https://git.sailfishos.org/mer-core/nemo-qml-plugin-dbus.git
+cd nemo-qml-plugin-dbus
 qmake
 make
 sudo make install
