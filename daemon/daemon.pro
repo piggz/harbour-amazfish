@@ -69,6 +69,7 @@ message(The project will be installed in $$PREFIX)
 target.path = $$PREFIX/bin
 systemd_services.path = $$PREFIX/lib/systemd/user/
 systemd_services.files = $$OUT_PWD/harbour-amazfish.service
+systemd_services.CONFIG += no_check_exist
 
 #Install appropriate files for each system
 flavor_silica {
