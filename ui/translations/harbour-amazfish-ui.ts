@@ -125,7 +125,7 @@
 <context>
     <name>DaemonInterface</name>
     <message>
-        <location filename="../src/daemoninterface.cpp" line="103"/>
+        <location filename="../src/daemoninterface.cpp" line="121"/>
         <source>Unexpected error</source>
         <translation type="unfinished"></translation>
     </message>

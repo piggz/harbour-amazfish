@@ -54,11 +54,29 @@ QString DaemonInterface::activityToString(ActivityType type)
     if (type == Swimming) {
         return "Swimming";
     }
-    if (type == Biking) {
-        return "Biking";
+    if (type == Cycling) {
+        return "Cycling";
     }
     if (type == Treadmill) {
         return "Treadmill";
+    }
+    if (type == Exercise) {
+        return "Exercise";
+    }
+    if (type == OpenSwimming) {
+        return "Open Swimming";
+    }
+    if (type == IndoorCycling) {
+        return "Indoor Cycling";
+    }
+    if (type == EllipticalTrainer) {
+        return "Eliptical Trainer";
+    }
+    if (type == JumpRope) {
+        return "Jump Rope";
+    }
+    if (type == Yoga) {
+        return "Yoga";
     }
 
     return "Unknown";

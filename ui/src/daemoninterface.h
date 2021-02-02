@@ -31,16 +31,22 @@ public:
 
     enum ActivityType {
         NotMeasured = -1,
-        Unknown = 0,
-        Activity = 1,
-        LightSleep = 2,
-        DeepSleep = 4,
-        NotWorn = 8,
-        Running = 16,
-        Walking = 32,
-        Swimming = 64,
-        Biking = 128,
-        Treadmill = 256
+        Unknown = 0x00000000,
+        Activity = 0x00000001,
+        LightSleep = 0x00000002,
+        DeepSleep = 0x00000004,
+        NotWorn = 0x00000008,
+        Running = 0x00000010,
+        Walking = 0x00000020,
+        Swimming = 0x00000040,
+        Cycling = 0x00000080,
+        Treadmill = 0x00000100,
+        Exercise = 0x00000200,
+        OpenSwimming = 0x00000400,
+        IndoorCycling = 0x00000800,
+        EllipticalTrainer = 0x00001000,
+        JumpRope = 0x00002000,
+        Yoga = 0x00004000
     };
     Q_ENUM(ActivityType)
 
