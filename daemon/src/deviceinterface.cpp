@@ -25,13 +25,13 @@ DeviceInterface::DeviceInterface()
     //Create a device object
     m_device = DeviceFactory::createDevice(config->pairedName());
     if (m_device) {
-        connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged);
-        connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message);
-        connect(m_device, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress);
-        connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
-        connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::handleButtonPressed);
-        connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
-        connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent);
+        connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress, Qt::UniqueConnection);
+        connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::handleButtonPressed, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
     }
 
     //Create the DBUS HRM Interface
@@ -108,13 +108,13 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
 
     if (m_device) {
         m_device->setDevicePath(address);
-        connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged);
-        connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message);
-        connect(m_device, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress);
-        connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged);
-        connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed);
-        connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged);
-        connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent);
+        connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress, Qt::UniqueConnection);
+        connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
         return m_device->pair();
     }
     

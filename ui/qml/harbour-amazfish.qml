@@ -22,6 +22,18 @@ ApplicationWindowPL
     property int supportedFeatures: 0
     property bool stravaLinked: false
 
+    //Device State
+    readonly property string _connectionState: DaemonInterfaceInstance.connectionState
+    readonly property bool _disconnected: _connectionState === "disconnected"
+    readonly property bool _connecting: _connectionState === "connecting"
+    readonly property bool _connected: _connectionState === "connected"
+    readonly property bool _authenticated: _connectionState === "authenticated"
+
+    //Device Informatino
+    property int _InfoSteps: 0
+    property int _InfoBatteryPercent: 0
+    property int _InfoHeartrate: 0
+
     StylerPL {
         id: styler
     }
@@ -29,16 +41,6 @@ ApplicationWindowPL
 
     PopupPL {
         id: popup
-    }
-
-    function showMessage(msg)
-    {
-        popup.showMessage(msg)
-    }
-
-    function supportsFeature(feature) {
-        console.log("Checking if feature is supported:", feature, (supportedFeatures & feature) === feature);
-        return (supportedFeatures & feature) === feature;
     }
 
     BusyIndicatorPL {
@@ -101,7 +103,6 @@ ApplicationWindowPL
         }
     }
 
-
     DBusInterface {
         id: systemdServiceIface
         bus: DBus.SessionBus
@@ -161,6 +162,56 @@ ApplicationWindowPL
         console.log("Supported features:", supportedFeatures);
     }
 
+    on_ConnectionStateChanged: console.log(_connectionState)
+
+    on_AuthenticatedChanged: {
+        if (_authenticated) {
+            _refreshInformation()
+        }
+    }
+
+    Connections {
+        target: DaemonInterfaceInstance
+        onInformationChanged: {
+            console.log("Information changed", infoKey, infoValue);
+
+            switch (infoKey) {
+            case DaemonInterface.INFO_BATTERY:
+                _InfoBatteryPercent = parseInt(infoValue, 10) || 0;
+                break;
+            case DaemonInterface.INFO_HEARTRATE:
+                _InfoHeartrate = parseInt(infoValue, 10) || 0;
+                break;
+            case DaemonInterface.INFO_STEPS:
+                _InfoSteps = parseInt(infoValue, 10) || 0;
+                break;
+            }
+        }
+    }
+
+    //======================Application Global Functions========================
+
+    function showMessage(msg)
+    {
+        popup.showMessage(msg)
+    }
+
+    function supportsFeature(feature) {
+        console.log("Checking if feature is supported:", feature, (supportedFeatures & feature) === feature);
+        return (supportedFeatures & feature) === feature;
+    }
+
+    function _refreshInformation() {
+        if (!_authenticated) {
+            return
+        }
+
+        supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
+        console.log("Supported features", supportedFeatures);
+
+        DaemonInterfaceInstance.refreshInformation();
+    }
+
     function tr(message) {
         return qsTr(message);
         // Return translated message.
@@ -185,5 +236,7 @@ ApplicationWindowPL
         }
         return pc.createObject(parent ? parent : app, options ? options : {})
     }
+
+
 
 }

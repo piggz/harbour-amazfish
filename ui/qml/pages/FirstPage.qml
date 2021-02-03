@@ -9,34 +9,10 @@ PagePL {
     id: page
     title: "Amazfish"
 
-    readonly property string _connectionState: DaemonInterfaceInstance.connectionState
-    readonly property bool _disconnected: _connectionState === "disconnected"
-    readonly property bool _connecting: _connectionState === "connecting"
-    readonly property bool _connected: _connectionState === "connected"
-    readonly property bool _authenticated: _connectionState === "authenticated"
-    property int _steps: 0
-
-    function _refreshInformation() {
-        if (!_authenticated) {
-            return
-        }
-
-        supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
-        console.log("Supported features", supportedFeatures);
-
-        DaemonInterfaceInstance.refreshInformation();
-
-        _steps = parseInt(DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS));
-    }
-
     function unpairAccepted() {
         DaemonInterfaceInstance.disconnect();
         pageStack.replace(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
     }
-
-    on_ConnectionStateChanged: console.log(_connectionState)
-
-    on_AuthenticatedChanged: _refreshInformation()
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
@@ -135,6 +111,7 @@ PagePL {
                 visible: _authenticated
                 font.pixelSize: styler.themeFontSizeMedium
                 width: styler.themeIconSizeMedium
+                text: qsTr("%1%").arg(_InfoBatteryPercent)
             }
         }
 
@@ -158,7 +135,7 @@ PagePL {
             visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
             anchors.horizontalCenter: parent.horizontalCenter
             size: parent.width - styler.themeHorizontalPageMargin * 4
-            percent: _steps ? _steps / AmazfishConfig.profileFitnessGoal : 0.06
+            percent: _InfoSteps ? _InfoSteps / AmazfishConfig.profileFitnessGoal : 0.06
             widthRatio: 0.08
 
             Item {
@@ -172,7 +149,7 @@ PagePL {
                     color: styler.themeHighlightColor
                     font.pixelSize: styler.themeFontSizeExtraLarge
                     verticalAlignment: Text.AlignVCenter
-                    text: _steps.toLocaleString()
+                    text: _InfoSteps.toLocaleString()
                 }
 
                 LabelPL {
@@ -213,6 +190,7 @@ PagePL {
                 font.pixelSize: styler.themeFontSizeLarge
                 height: styler.iconSizeMedium
                 verticalAlignment: Text.AlignVCenter
+                text: qsTr("%1 bpm").arg(_InfoHeartrate)
             }
 
             Item {
@@ -268,24 +246,7 @@ PagePL {
             }
         }
 
-        Connections {
-            target: DaemonInterfaceInstance
-            onInformationChanged: {
-                console.log("Information changed", infoKey, infoValue);
 
-                switch (infoKey) {
-                case DaemonInterface.INFO_BATTERY:
-                    btryPercent.text = qsTr("%1%").arg(infoValue)
-                    break;
-                case DaemonInterface.INFO_HEARTRATE:
-                    lblHeartrate.text = qsTr("%1 bpm").arg(infoValue)
-                    break;
-                case DaemonInterface.INFO_STEPS:
-                    _steps = parseInt(infoValue);
-                    break;
-                }
-            }
-        }
     }
 
     onPageStatusActive: {

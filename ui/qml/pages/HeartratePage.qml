@@ -8,8 +8,6 @@ PagePL {
     id: page
     title: qsTr("Heartrate")
 
-    property int currentHeartRate: 0
-
     property var day: new Date()
     property var relaxed: 0
     property var light: 0
@@ -38,7 +36,7 @@ PagePL {
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: currentHeartRate
+            text: qsTr("%1 bpm").arg(_InfoHeartrate)
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -122,20 +120,6 @@ PagePL {
             Item { width: parent.width * 0.5; height: 50
                 Rectangle { color: "red"; width: parent.width * (vo2max  / total) ; height: parent.height }
                 LabelPL { text: Math.floor((vo2max / total) * 100) + "%"; anchors.centerIn: parent}
-            }
-        }
-
-        Connections {
-            target: DaemonInterfaceInstance
-            onConnectionStateChanged: {
-                if (DaemonInterfaceInstance.connectionState === "authenticated") {
-                    DaemonInterfaceInstance.refreshInformation();
-                }
-            }
-            onInformationChanged: {
-                if (infoKey === DaemonInterface.INFO_HEARTRATE) {
-                    currentHeartRate = parseInt(infoValue, 10) || 0;
-                }
             }
         }
     }

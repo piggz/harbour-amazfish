@@ -8,7 +8,6 @@ PagePL {
     id: page
     title: qsTr("Steps")
 
-    property int stepCount: 0
     property var day: new Date()
 
     pageMenu: PageMenuPL {
@@ -28,7 +27,7 @@ PagePL {
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: stepCount > 0 ? stepCount : graphStepSummary.lastValue
+            text: _InfoSteps > 0 ? _InfoSteps : graphStepSummary.lastValue
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -66,20 +65,6 @@ PagePL {
                 updateGraph(day);
             }
         }
-
-        Connections {
-            target: DaemonInterfaceInstance
-            onConnectionStateChanged: {
-                if (DaemonInterfaceInstance.connectionState === "authenticated") {
-                    DaemonInterfaceInstance.refreshInformation();
-                }
-            }
-            onInformationChanged: {
-                if (infoKey === DaemonInterface.INFO_STEPS) {
-                    stepCount = parseInt(infoValue, 10) || 0;
-                }
-            }
-        }
     }
 
     function updateGraphs() {
@@ -88,7 +73,7 @@ PagePL {
 
     Component.onCompleted: {
         updateGraphs();
-        stepCount = parseInt(DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS), 10) || 0;
+        _InfoSteps = parseInt(DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS), 10) || 0;
     }
 
     onPageStatusActive: {
