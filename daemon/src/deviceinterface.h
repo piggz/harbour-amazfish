@@ -53,6 +53,7 @@ public:
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
+    Q_SIGNAL void deviceEventTriggered(const QString& event);
     Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
     Q_SIGNAL void connectionStateChanged();
 

@@ -425,6 +425,7 @@ void DeviceInterface::musicChanged()
 void DeviceInterface::deviceEvent(AbstractDevice::Events event)
 {
     qDebug() << Q_FUNC_INFO << event;
+    emit deviceEventTriggered(QMetaEnum::fromType<AbstractDevice::Events>().valueToKey(event));
     switch(event) {
     case AbstractDevice::EVENT_MUSIC_STOP:
         m_musicController.pause();
