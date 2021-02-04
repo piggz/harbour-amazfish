@@ -1,5 +1,4 @@
-This instruction guide is available for Ubuntu 20.04 LTS
-It may be also available for other Linux distributions, with some changes.
+This instruction guide is written for Ubuntu 20.04 LTS, but may be also available for other Linux distributions, with some changes. 
 
 In Ubuntu 20.04, with default Ubuntu repository, QT is in version 5.12.8
 
