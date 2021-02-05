@@ -1,6 +1,6 @@
 # Amazfish
 
-Companion application for the Huami Amazfit Bip, Cor, MiBand2/3 and GTS
+Companion application for Huami Devices (such as Amazfit Bip, Cor, MiBand2/3 and GTS and GTS) and the Pinetime Infinitime
 
 Requires sailfish version 3.0.3.8 or above due to changes in the base sailfish image
 
@@ -14,7 +14,7 @@ Read this for info about which files to flash https://codeberg.org/Freeyourgadge
 
 File download has been tested using an Amazfit Bip and GTS.
 
-The firmware is split into multiple files on these devices.  With the official MiFit app, all are downloaded automatically in the correct oder.  With this app, you have to send each file individually.  The firmwares are available by extracting the MiFit apk, and looking in the assets/ folder for files named Mili_chaohu.* for the Bip.  GTS firmware files can be found online, the device name is kestrelw, but be sure the files your arw downloadling are legitimate.  When you select a file, its type and version will be determined, and you will be prevented from sending invalid files.
+The firmware is split into multiple files on these devices.  With the official MiFit app, all are downloaded automatically in the correct oder.  With this app, you have to send each file individually.  The firmwares are available by extracting the Zepp apk, and looking in the assets/ folder for files named Mili_chaohu.* for the Bip.  GTS firmware files can be found online, the device name is kestrelw, but be sure the files your arw downloadling are legitimate.  When you select a file, its type and version will be determined, and you will be prevented from sending invalid files.
 
 The firmware (.fw) requires a matching font (.ft) and resource (.res).  Send the firmware first, the app will send a reboot command at the end of the transfer, and the watch will boot up into a mode where it needs the matching font and resource sent.  Just wait for the app to connect again, then send the font and resource. 
 
