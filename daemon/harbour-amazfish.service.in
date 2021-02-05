@@ -7,3 +7,6 @@ ExecStart=PREFIX/bin/harbour-amazfishd
 Restart=always
 RestartSec=5
 Environment=HOME=%h XDG_CONFIG_HOME=/home/%u/.config DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus XDG_RUNTIME_DIR=/run/user/%U
+
+[Install]
+WantedBy=default.target
