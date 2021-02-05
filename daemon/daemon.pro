@@ -91,6 +91,7 @@ include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
 
 SOURCES += \
+    src/devices/banglejsdevice.cpp \
     src/devices/bipdevice.cpp \
     src/devices/huamidevice.cpp \
     src/devices/infinitimefirmwareinfo.cpp \
@@ -145,6 +146,7 @@ DISTFILES += \
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
+    src/devices/banglejsdevice.h \
     src/devices/bipdevice.h \
     src/devices/huamidevice.h \
     src/devices/infinitimefirmwareinfo.h \

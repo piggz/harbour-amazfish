@@ -3,6 +3,7 @@
 #include "gtsdevice.h"
 #include "biplitedevice.h"
 #include "pinetimejfdevice.h"
+#include "banglejsdevice.h"
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 {
@@ -33,6 +34,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 
     if (deviceName == "InfiniTime" || deviceName == "Pinetime-JF") {
         return new PinetimeJFDevice(deviceName);
+    }
+
+    if (deviceName.startsWith("Bangle.js")) {
+        return new BangleJSDevice(deviceName);
     }
 
     qDebug() << "DeviceFactory::createDevice: no suitable devices found, creating a Bip device as default";

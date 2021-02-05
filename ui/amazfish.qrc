@@ -84,6 +84,7 @@
         <file>qml/pics/devices/miband3.png</file>
         <file>qml/pics/devices/miband4.png</file>
         <file>qml/pics/devices/pinetime.png</file>
+        <file>qml/pics/devices/banglejs.png</file>
         <file>qml/pics/map_btn_center.png</file>
         <file>qml/pics/map_btn_max.png</file>
         <file>qml/pics/map_btn_min.png</file>
