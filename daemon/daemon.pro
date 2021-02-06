@@ -110,6 +110,7 @@ SOURCES += \
     src/services/dfuservice.cpp \
     src/services/infinitimenavservice.cpp \
     src/services/pinetimemusicservice.cpp \
+    src/services/uartservice.cpp \
     src/typeconversion.cpp \
     src/bipbatteryinfo.cpp \
     src/devicefactory.cpp \
@@ -165,6 +166,7 @@ HEADERS += \
     src/services/dfuservice.h \
     src/services/infinitimenavservice.h \
     src/services/pinetimemusicservice.h \
+    src/services/uartservice.h \
     src/typeconversion.h \
     src/bipbatteryinfo.h \
     src/deviceinterface.h \

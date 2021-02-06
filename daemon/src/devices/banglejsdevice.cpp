@@ -1,10 +1,11 @@
 #include "banglejsdevice.h"
+#include "uartservice.h"
 
 #include <QtXml/QtXml>
 
 BangleJSDevice::BangleJSDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
-    qDebug() << "PinetimeJFDevice:: " << pairedName;
+    qDebug() << "BangleJSDevice:: " << pairedName;
     connect(this, &QBLEDevice::propertiesChanged, this, &BangleJSDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
@@ -48,6 +49,22 @@ void BangleJSDevice::abortOperations()
 void BangleJSDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
     qDebug() << Q_FUNC_INFO;
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+
+    QJsonObject o;
+    o.insert("t", "notify");
+    o.insert("id", "");
+    o.insert("src", "");
+    o.insert("title", "");
+    o.insert("subject", subject);
+    o.insert("body", message);
+    o.insert("sender", sender);
+    o.insert("tel", "");
+    uart->txJson(o);
 }
 
 void BangleJSDevice::incomingCall(const QString &caller)
@@ -88,18 +105,28 @@ void BangleJSDevice::parseServices()
 
             qDebug() << "Creating service for: " << uuid;
 
-            if ( !service(uuid)) {
+            if (uuid == UARTService::UUID_SERVICE_UART && !service(UARTService::UUID_SERVICE_UART)) {
+                addService(UARTService::UUID_SERVICE_UART, new UARTService(path, this));
+            } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
         }
     }
-    setConnectionState("authenticated");
 }
 
 void BangleJSDevice::initialise()
 {
+    qDebug() << Q_FUNC_INFO;
     setConnectionState("connected");
     parseServices();
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (uart){
+        uart->enableNotification(UARTService::UUID_CHARACTERISTIC_UART_RX);
+        uart->tx(QByteArray(1, 0x03)); //Clear line)
+    }
+
+    setConnectionState("authenticated");
 }
 
 void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
