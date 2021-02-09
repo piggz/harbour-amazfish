@@ -27,7 +27,8 @@ QString BangleJSDevice::pair()
 int BangleJSDevice::supportedFeatures()
 {
     return FEATURE_HRM |
-            FEATURE_ALERT;
+            FEATURE_ALERT |
+            FEATURE_MUSIC_CONTROL;
 }
 
 QString BangleJSDevice::deviceType()
@@ -71,7 +72,17 @@ void BangleJSDevice::incomingCall(const QString &caller)
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_UNUSED(caller);
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+
+    QJsonObject o;
+    o.insert("t", "call");
+    o.insert("cmd", "accept");
+    o.insert("name", caller);
+    o.insert("number", "0123456789");
+    uart->txJson(o);
 }
 
 void BangleJSDevice::parseServices()
@@ -181,6 +192,29 @@ void BangleJSDevice::navigationNarrative(const QString &flag, const QString &nar
 void BangleJSDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration, int position)
 {
     qDebug() << Q_FUNC_INFO;
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+
+    QJsonObject o;
+    o.insert("t", "musicinfo");
+    o.insert("artist", artist);
+    o.insert("album", album);
+    o.insert("track", title);
+    o.insert("dur", duration);
+    o.insert("c", 0);
+    o.insert("n", 0);
+    uart->txJson(o);
+
+    QJsonObject p;
+    p.insert("t", "musicstate");
+    p.insert("state", playing? "play" : "pause");
+    p.insert("position", position);
+    p.insert("shuffle", 0);
+    p.insert("repeat", 0);
+    uart->txJson(p);
 
 }
 
