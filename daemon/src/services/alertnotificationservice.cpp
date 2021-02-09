@@ -67,7 +67,7 @@ int AlertNotificationService::mapSenderToIcon(const QString &sender)
     if (s == "facebook") {
         return HuamiIcon::FACEBOOK;
     }
-    if (s == "twitter" || s == "tweetian") {
+    if (s == "twitter" || s == "tweetian" || s == "piepmatz") {
         return HuamiIcon::TWITTER;
     }
     if (s == "messenger") {
@@ -82,7 +82,7 @@ int AlertNotificationService::mapSenderToIcon(const QString &sender)
     if (s == "instagram") {
         return HuamiIcon::INSTAGRAM;
     }
-    if (s == "telegram" || s == "sailorgram" || s == "depecher") {
+    if (s == "telegram" || s == "fernschreiber" || s == "yottagram" || s == "sailorgram" || s == "depecher") {
         return HuamiIcon::TELEGRAM;
     }
     if (s == "skype") {
