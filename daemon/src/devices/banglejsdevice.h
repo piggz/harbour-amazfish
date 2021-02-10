@@ -43,7 +43,7 @@ private:
     Q_SLOT void handleRxJson(const QJsonObject &json);
 
     int m_infoBatteryLevel = 0;
-
+    QString m_firmwareVersion;
 };
 
 #endif // BANGLEJSDEVICE_H

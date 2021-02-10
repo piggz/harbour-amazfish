@@ -63,8 +63,6 @@ void UARTService::handleRx(const QString &json)
     }
 }
 
-
-
 QJsonObject UARTService::ObjectFromString(const QString& in)
 {
     QJsonObject obj;

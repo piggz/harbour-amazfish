@@ -245,6 +245,9 @@ QString BangleJSDevice::information(Info i) const
     if (i == INFO_BATTERY) {
         return QString::number(m_infoBatteryLevel);
     }
+    if (i == INFO_SWVER) {
+        return m_firmwareVersion;
+    }
 
     return QString();
 }
@@ -261,17 +264,19 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 
     QString t = json.value("t").toString();
     if (t == "info") {
-
-
+        emit message(json.value("msg").toString());
     } else if (t == "warn") {
-
-
+        emit message(json.value("msg").toString());
     } else if (t == "error") {
-
-
+        emit message(json.value("msg").toString());
     } else if (t == "ver") {
-
-
+        if (json.keys().contains("fw1")) {
+            m_firmwareVersion = json.value("fw1").toString();
+        }
+        if (json.keys().contains("fw2")) {
+            m_firmwareVersion = json.value("fw2").toString();
+        }
+        emit informationChanged(INFO_SWVER, m_firmwareVersion);
     } else if (t == "status") {
         m_infoBatteryLevel = json.value("bat").toInt();
         emit informationChanged(INFO_BATTERY, QString::number(m_infoBatteryLevel));
@@ -294,37 +299,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 
     }
 #if 0
-    switch (json.getString("t")) {
-    case "info":
-        GB.toast(getContext(), "Bangle.js: " + json.getString("msg"), Toast.LENGTH_LONG, GB.INFO);
-        break;
-    case "warn":
-        GB.toast(getContext(), "Bangle.js: " + json.getString("msg"), Toast.LENGTH_LONG, GB.WARN);
-        break;
-    case "error":
-        GB.toast(getContext(), "Bangle.js: " + json.getString("msg"), Toast.LENGTH_LONG, GB.ERROR);
-        break;
-    case "ver": {
-        if (json.has("fw1"))
-            getDevice().setFirmwareVersion(json.getString("fw1"));
-        if (json.has("fw2"))
-            getDevice().setFirmwareVersion2(json.getString("fw2"));
-    } break;
     case "status": {
-        Context context = getContext();
-        if (json.has("bat")) {
-            int b = json.getInt("bat");
-            if (b<0) b=0;
-            if (b>100) b=100;
-            gbDevice.setBatteryLevel((short)b);
-            if (b < 30) {
-                gbDevice.setBatteryState(BatteryState.BATTERY_LOW);
-                GB.updateBatteryNotification(context.getString(R.string.notif_battery_low_percent, gbDevice.getName(), String.valueOf(b)), "", context);
-            } else {
-                gbDevice.setBatteryState(BatteryState.BATTERY_NORMAL);
-                GB.removeBatteryNotification(context);
-            }
-        }
         if (json.has("volt"))
             gbDevice.setBatteryVoltage((float)json.getDouble("volt"));
         gbDevice.sendDeviceUpdateIntent(context);
