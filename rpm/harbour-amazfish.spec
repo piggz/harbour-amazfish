@@ -21,7 +21,7 @@ Name:       harbour-amazfish
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Watch interface application
-Version:    1.9.4
+Version:    1.9.5
 Release:    1
 Group:      QtQt
 License:    LICENSE
