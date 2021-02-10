@@ -23,9 +23,14 @@ public:
     void txJson(const QJsonObject &json);
 
     Q_SIGNAL void serviceEvent(char event);
+    Q_SIGNAL void jsonRx(const QJsonObject &json);
 
 private:
     void characteristicChanged(const QString &c, const QByteArray &value);
+    void handleRx(const QString &json);
+    QJsonObject ObjectFromString(const QString& in);
+
+    QByteArray m_incomingJson;
 };
 
 #endif // UARTSERVICE_H

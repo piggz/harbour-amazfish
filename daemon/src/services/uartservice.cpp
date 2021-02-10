@@ -38,5 +38,55 @@ void UARTService::txJson(const QJsonObject &json)
 void UARTService::characteristicChanged(const QString &c, const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO << c << value;
+
+    if (c == UUID_CHARACTERISTIC_UART_RX) {
+        m_incomingJson += value;
+        while (m_incomingJson.contains("\n")) {
+            int p = m_incomingJson.indexOf("\n");
+            QString json =  m_incomingJson.mid(0,p-1);
+            m_incomingJson = m_incomingJson.mid(p+1);
+            handleRx(json);
+        }
+    }
 }
 
+void UARTService::handleRx(const QString &json)
+{
+    qDebug() << Q_FUNC_INFO << json;
+
+    if (json.contains( "Uncaught ReferenceError: \"gb\" is not defined")) {
+        emit message("Gadgetbridge plugin not installed on Bangle.js");
+    } else if (json.at(0)=='{') {
+        // JSON - we hope!
+        QJsonObject obj = ObjectFromString(json);
+        emit jsonRx(obj);
+    }
+}
+
+
+
+QJsonObject UARTService::ObjectFromString(const QString& in)
+{
+    QJsonObject obj;
+
+    QJsonDocument doc = QJsonDocument::fromJson(in.toUtf8());
+
+    // check validity of the document
+    if(!doc.isNull())
+    {
+        if(doc.isObject())
+        {
+            obj = doc.object();
+        }
+        else
+        {
+            qDebug() << "Document is not an object";
+        }
+    }
+    else
+    {
+        qDebug() << "Invalid JSON.";
+    }
+
+    return obj;
+}

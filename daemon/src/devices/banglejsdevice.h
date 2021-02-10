@@ -40,6 +40,9 @@ private:
     void parseServices();
     void initialise();
     Q_SLOT void serviceEvent(uint8_t event);
+    Q_SLOT void handleRxJson(const QJsonObject &json);
+
+    int m_infoBatteryLevel = 0;
 
 };
 

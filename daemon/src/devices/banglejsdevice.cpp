@@ -133,6 +133,9 @@ void BangleJSDevice::initialise()
 
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (uart){
+        connect(uart, &UARTService::message, this, &BangleJSDevice::message, Qt::UniqueConnection);
+        connect(uart, &UARTService::jsonRx, this, &BangleJSDevice::handleRxJson, Qt::UniqueConnection);
+
         uart->enableNotification(UARTService::UUID_CHARACTERISTIC_UART_RX);
         uart->tx(QByteArray(1, 0x03)); //Clear line)
     }
@@ -239,6 +242,10 @@ QString BangleJSDevice::information(Info i) const
 {
     qDebug() << Q_FUNC_INFO;
 
+    if (i == INFO_BATTERY) {
+        return QString::number(m_infoBatteryLevel);
+    }
+
     return QString();
 }
 
@@ -247,3 +254,143 @@ void BangleJSDevice::serviceEvent(uint8_t event)
     qDebug() << Q_FUNC_INFO;
 
 }
+
+void BangleJSDevice::handleRxJson(const QJsonObject &json)
+{
+    qDebug() << Q_FUNC_INFO << json;
+
+    QString t = json.value("t").toString();
+    if (t == "info") {
+
+
+    } else if (t == "warn") {
+
+
+    } else if (t == "error") {
+
+
+    } else if (t == "ver") {
+
+
+    } else if (t == "status") {
+        m_infoBatteryLevel = json.value("bat").toInt();
+        emit informationChanged(INFO_BATTERY, QString::number(m_infoBatteryLevel));
+    } else if (t == "findPhone") {
+
+
+    } else if (t == "music") {
+
+
+    } else if (t == "call") {
+
+
+    } else if (t == "notify") {
+
+
+    } else if (t == "act") {
+
+
+    } else {
+
+    }
+#if 0
+    switch (json.getString("t")) {
+    case "info":
+        GB.toast(getContext(), "Bangle.js: " + json.getString("msg"), Toast.LENGTH_LONG, GB.INFO);
+        break;
+    case "warn":
+        GB.toast(getContext(), "Bangle.js: " + json.getString("msg"), Toast.LENGTH_LONG, GB.WARN);
+        break;
+    case "error":
+        GB.toast(getContext(), "Bangle.js: " + json.getString("msg"), Toast.LENGTH_LONG, GB.ERROR);
+        break;
+    case "ver": {
+        if (json.has("fw1"))
+            getDevice().setFirmwareVersion(json.getString("fw1"));
+        if (json.has("fw2"))
+            getDevice().setFirmwareVersion2(json.getString("fw2"));
+    } break;
+    case "status": {
+        Context context = getContext();
+        if (json.has("bat")) {
+            int b = json.getInt("bat");
+            if (b<0) b=0;
+            if (b>100) b=100;
+            gbDevice.setBatteryLevel((short)b);
+            if (b < 30) {
+                gbDevice.setBatteryState(BatteryState.BATTERY_LOW);
+                GB.updateBatteryNotification(context.getString(R.string.notif_battery_low_percent, gbDevice.getName(), String.valueOf(b)), "", context);
+            } else {
+                gbDevice.setBatteryState(BatteryState.BATTERY_NORMAL);
+                GB.removeBatteryNotification(context);
+            }
+        }
+        if (json.has("volt"))
+            gbDevice.setBatteryVoltage((float)json.getDouble("volt"));
+        gbDevice.sendDeviceUpdateIntent(context);
+    } break;
+    case "findPhone": {
+        boolean start = json.has("n") && json.getBoolean("n");
+        GBDeviceEventFindPhone deviceEventFindPhone = new GBDeviceEventFindPhone();
+        deviceEventFindPhone.event = start ? GBDeviceEventFindPhone.Event.START : GBDeviceEventFindPhone.Event.STOP;
+        evaluateGBDeviceEvent(deviceEventFindPhone);
+    } break;
+    case "music": {
+        GBDeviceEventMusicControl deviceEventMusicControl = new GBDeviceEventMusicControl();
+        deviceEventMusicControl.event = GBDeviceEventMusicControl.Event.valueOf(json.getString("n").toUpperCase());
+        evaluateGBDeviceEvent(deviceEventMusicControl);
+    } break;
+    case "call": {
+        GBDeviceEventCallControl deviceEventCallControl = new GBDeviceEventCallControl();
+        deviceEventCallControl.event = GBDeviceEventCallControl.Event.valueOf(json.getString("n").toUpperCase());
+        evaluateGBDeviceEvent(deviceEventCallControl);
+    } break;
+    case "notify" : {
+        GBDeviceEventNotificationControl deviceEvtNotificationControl = new GBDeviceEventNotificationControl();
+        // .title appears unused
+        deviceEvtNotificationControl.event = GBDeviceEventNotificationControl.Event.valueOf(json.getString("n").toUpperCase());
+        if (json.has("id"))
+            deviceEvtNotificationControl.handle = json.getInt("id");
+        if (json.has("tel"))
+            deviceEvtNotificationControl.phoneNumber = json.getString("tel");
+        if (json.has("msg"))
+            deviceEvtNotificationControl.reply = json.getString("msg");
+        evaluateGBDeviceEvent(deviceEvtNotificationControl);
+    } break;
+    case "act": {
+        BangleJSActivitySample sample = new BangleJSActivitySample();
+        sample.setTimestamp((int) (GregorianCalendar.getInstance().getTimeInMillis() / 1000L));
+        int hrm = 0;
+        int steps = 0;
+        if (json.has("hrm")) hrm = json.getInt("hrm");
+        if (json.has("stp")) steps = json.getInt("stp");
+        int activity = ActivityKind.TYPE_UNKNOWN;
+        if (json.has("act")) {
+            String actName = "TYPE_" + json.getString("act").toUpperCase();
+            try {
+                Field f = ActivityKind.class.getField(actName);
+                try {
+                    activity = f.getInt(null);
+                } catch (IllegalAccessException e) {
+                    LOG.info("JSON activity '"+actName+"' not readable");
+                }
+            } catch (NoSuchFieldException e) {
+                LOG.info("JSON activity '"+actName+"' not found");
+            }
+        }
+        sample.setRawKind(activity);
+        sample.setHeartRate(hrm);
+        sample.setSteps(steps);
+        try (DBHandler dbHandler = GBApplication.acquireDB()) {
+            Long userId = getUser(dbHandler.getDaoSession()).getId();
+            Long deviceId = DBHelper.getDevice(getDevice(), dbHandler.getDaoSession()).getId();
+            BangleJSSampleProvider provider = new BangleJSSampleProvider(getDevice(), dbHandler.getDaoSession());
+            sample.setDeviceId(deviceId);
+            sample.setUserId(userId);
+            provider.addGBActivitySample(sample);
+        } catch (Exception ex) {
+            LOG.warn("Error saving activity: " + ex.getLocalizedMessage());
+        }
+    } break;
+#endif
+    }
