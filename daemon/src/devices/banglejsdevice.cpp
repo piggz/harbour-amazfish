@@ -28,7 +28,8 @@ int BangleJSDevice::supportedFeatures()
 {
     return FEATURE_HRM |
             FEATURE_ALERT |
-            FEATURE_MUSIC_CONTROL;
+            FEATURE_MUSIC_CONTROL |
+            FEATURE_WEATHER;
 }
 
 QString BangleJSDevice::deviceType()
@@ -190,6 +191,23 @@ void BangleJSDevice::navigationRunning(bool running)
 void BangleJSDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
 {
     qDebug() << Q_FUNC_INFO;
+}
+
+void BangleJSDevice::sendWeather(CurrentWeather *weather)
+{
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (uart){
+        QJsonObject o;
+        o.insert("t", "weather");
+        o.insert("temp", weather->temperature());
+        o.insert("hum", 0); //TODO we dont have this
+        o.insert("txt", weather->description());
+        o.insert("wind", 0); //TODO we dont have this
+        o.insert("wdir", ""); // TODO we dont have this
+        o.insert("loc", weather->city()->name());
+
+        uart->txJson(o);
+    }
 }
 
 void BangleJSDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration, int position)
@@ -368,4 +386,4 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         }
     } break;
 #endif
-    }
+}
