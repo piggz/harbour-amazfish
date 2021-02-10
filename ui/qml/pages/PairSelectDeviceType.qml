@@ -88,6 +88,11 @@ PageListPL {
             icon: "../pics/devices/pinetime.png"
             auth: false
         }
+        ListElement {
+            deviceType: "Bangle.js"
+            icon: "../pics/devices/banglejs.png"
+            auth: false
+        }
     }
 
 }
