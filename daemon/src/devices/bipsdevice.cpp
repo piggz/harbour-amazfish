@@ -1,7 +1,7 @@
 #include "bipsdevice.h"
 #include <QtXml/QtXml>
 
-BipSDevice::BipSDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
+BipSDevice::BipSDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO;
     connect(this, &QBLEDevice::propertiesChanged, this, &BipSDevice::onPropertiesChanged);
@@ -10,6 +10,16 @@ BipSDevice::BipSDevice(const QString &pairedName, QObject *parent) : BipDevice(p
 QString BipSDevice::deviceType()
 {
     return "amazfitbips";
+}
+
+int BipSDevice::supportedFeatures()
+{
+    return FEATURE_HRM |
+            FEATURE_WEATHER |
+            FEATURE_ACTIVITY |
+            FEATURE_STEPS |
+            FEATURE_ALARMS |
+            FEATURE_ALERT;
 }
 
 void BipSDevice::initialise()
@@ -28,7 +38,7 @@ void BipSDevice::initialise()
 
         connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
-        connect(mi, &MiBandService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
+        connect(mi, &MiBandService::informationChanged, this, &BipSDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &BipSDevice::serviceEvent, Qt::UniqueConnection);
     }
 
@@ -44,19 +54,19 @@ void BipSDevice::initialise()
 
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw) {
-        connect(fw, &BipFirmwareService::message, this, &BipDevice::message, Qt::UniqueConnection);
-        connect(fw, &BipFirmwareService::downloadProgress, this, &BipDevice::downloadProgress, Qt::UniqueConnection);
+        connect(fw, &BipFirmwareService::message, this, &BipSDevice::message, Qt::UniqueConnection);
+        connect(fw, &BipFirmwareService::downloadProgress, this, &BipSDevice::downloadProgress, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (info) {
-        connect(info, &DeviceInfoService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
+        connect(info, &DeviceInfoService::informationChanged, this, &BipSDevice::informationChanged, Qt::UniqueConnection);
     }
 
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     if (hrm) {
-        connect(hrm, &HRMService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
+        connect(hrm, &HRMService::informationChanged, this, &BipSDevice::informationChanged, Qt::UniqueConnection);
     }
 }
 
@@ -131,4 +141,65 @@ void BipSDevice::onPropertiesChanged(QString interface, QVariantMap map, QString
         }
     }
 
+}
+
+void BipSDevice::sendWeather(CurrentWeather *weather)
+{
+    sendWeatherHuami(weather, (softwareRevision() > "V0.0.8.74"));
+}
+
+void BipSDevice::navigationRunning(bool running)
+{
+    QString msg;
+    if (running) {
+        msg = tr("Navigation Started");
+    } else {
+        msg = tr("Navigation Stopped");
+    }
+    sendAlert("navigation", msg, "");
+}
+
+void BipSDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
+{
+    Q_UNUSED(flag)
+    sendAlert("navigation", tr("Progress") + ":" + QString::number(progress), narrative + "\n" + manDist);
+}
+
+QStringList BipSDevice::supportedDisplayItems() const
+{
+    QStringList items;
+
+    items << "status";
+    items << "activity";
+    items << "weather";
+    items << "alarm";
+    items << "timer";
+    items << "compass";
+    items << "settings";
+    items << "alipay";
+
+    return items;
+}
+
+void BipSDevice::applyDeviceSetting(AbstractDevice::Settings s)
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (!mi) {
+        return;
+    }
+    QMap<QString, uint8_t> keyPosMap;
+    keyPosMap["status"] = 1;
+    keyPosMap["activity"] = 2;
+    keyPosMap["weather"] = 3;
+    keyPosMap["alarm"] = 4;
+    keyPosMap["timer"] = 5;
+    keyPosMap["compass"] = 6;
+    keyPosMap["settings"] = 7;
+    keyPosMap["alipay"] = 8;
+
+    if (s == SETTING_DEVICE_DISPLAY_ITEMS) {
+        mi->setDisplayItemsOld(keyPosMap);
+    } else {
+        HuamiDevice::applyDeviceSetting(s);
+    }
 }
