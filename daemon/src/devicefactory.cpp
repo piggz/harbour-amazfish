@@ -4,6 +4,7 @@
 #include "biplitedevice.h"
 #include "pinetimejfdevice.h"
 #include "banglejsdevice.h"
+#include "bipsdevice.h"
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 {
@@ -21,7 +22,7 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
     }
 
     if (deviceName == "Amazfit Bip S") {
-        return new GtsDevice(deviceName);
+        return new BipSDevice(deviceName);
     }
 
     if (deviceName == "Amazfit Stratos 3") {

@@ -93,6 +93,7 @@ include(../qble/qble.pri)
 SOURCES += \
     src/devices/banglejsdevice.cpp \
     src/devices/bipdevice.cpp \
+    src/devices/bipsdevice.cpp \
     src/devices/huamidevice.cpp \
     src/devices/infinitimefirmwareinfo.cpp \
     src/navigationinterface.cpp \
@@ -149,6 +150,7 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 HEADERS += \
     src/devices/banglejsdevice.h \
     src/devices/bipdevice.h \
+    src/devices/bipsdevice.h \
     src/devices/huamidevice.h \
     src/devices/infinitimefirmwareinfo.h \
     src/navigationinterface.h \
