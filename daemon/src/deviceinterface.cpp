@@ -157,7 +157,13 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
     } else {
         qDebug() << "no notification service, buffering notification";
 
-        m_notificationBuffer.enqueue(notification);
+        WatchNotification n;
+        n.id = notification->id();
+        n.appName = notification->appName();
+        n.summary = notification->summary();
+        n.body = notification->body();
+
+        m_notificationBuffer.enqueue(n);
         if (m_notificationBuffer.count() > 10) {
             m_notificationBuffer.dequeue();
         }
@@ -476,10 +482,10 @@ void DeviceInterface::sendBufferedNotifications()
 {
     qDebug() << Q_FUNC_INFO;
     while (m_notificationBuffer.count() > 0) {
-        watchfish::Notification *n = m_notificationBuffer.dequeue();
+        WatchNotification n = m_notificationBuffer.dequeue();
         if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
             qDebug() << "Sending notification";
-            sendAlert(n->appName(), n->summary(), n->body());
+            sendAlert(n.appName, n.summary, n.body);
         }
     }
 }

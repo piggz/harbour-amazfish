@@ -75,6 +75,14 @@ public:
     Q_INVOKABLE QStringList supportedDisplayItems();
 
 private:
+    struct WatchNotification
+    {
+        int id;
+        QString appName;
+        QString summary;
+        QString body;
+    };
+
     QString m_deviceAddress;
     QString m_deviceName;
     bool m_dbusRegistered = false;
@@ -115,7 +123,7 @@ private:
     watchfish::CalendarSource m_calendarSource;
 
     //Notifications
-    QQueue<watchfish::Notification*> m_notificationBuffer;
+    QQueue<WatchNotification> m_notificationBuffer;
 
     //Database
     KDbDriver *m_dbDriver = nullptr;
