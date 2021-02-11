@@ -203,3 +203,8 @@ void BipSDevice::applyDeviceSetting(AbstractDevice::Settings s)
         HuamiDevice::applyDeviceSetting(s);
     }
 }
+
+AbstractFirmwareInfo *BipSDevice::firmwareInfo(const QByteArray &bytes)
+{
+    return nullptr;
+}

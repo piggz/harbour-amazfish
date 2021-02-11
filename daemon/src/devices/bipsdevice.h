@@ -15,6 +15,8 @@ public:
     virtual QStringList supportedDisplayItems() const override;
     virtual void applyDeviceSetting(AbstractDevice::Settings s) override;
 
+    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+
     virtual void sendWeather(CurrentWeather *weather) override;
 
     virtual void navigationRunning(bool running) override;
