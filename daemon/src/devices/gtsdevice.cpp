@@ -342,51 +342,9 @@ void GtsDevice::enableFeature(AbstractDevice::Feature feature)
 
 void GtsDevice::setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration, int position)
 {
-    QByteArray cmd;
-
-    char flags = 0x00;
-    flags |= 0x01;
-
-    if (artist.length() > 0) {
-        flags |= 0x02;
-    }
-    if (album.length() > 0) {
-        flags |= 0x04;
-    }
-    if (track.length() > 0) {
-        flags |= 0x08;
-    }
-    if (duration != 0) {
-        flags |= 0x10;
-    }
-
-    char state = playing ? 0x01 : 0x00; //Not playing
-    cmd += flags;
-    cmd += state;
-    cmd += (char)0x00;
-
-    //Position
-    cmd += TypeConversion::fromInt16(position);
-
-    if (artist.length() > 0) {
-        cmd += artist.toLocal8Bit();
-        cmd += char(0x00);
-    }
-    if (album.length() > 0) {
-        cmd += album.toLocal8Bit();
-        cmd += char(0x00);
-    }
-    if (track.length() > 0) {
-        cmd += track.toLocal8Bit();
-        cmd += char(0x00);
-    }
-    if (duration != 0) {
-        cmd += TypeConversion::fromInt32(duration);
-    }
-
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi){
-        mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
+        mi->setMusicStatus(playing, artist, album, track, duration, position);
     }
 }
 

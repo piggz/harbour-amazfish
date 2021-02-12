@@ -160,6 +160,8 @@ public:
 
     void sendAlert(const QString &sender, const QString &subject, const QString &message);
 
+    void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration, int position);
+
 private:
     void characteristicRead(const QString &c, const QByteArray &value);
     void characteristicChanged(const QString &c, const QByteArray &value);

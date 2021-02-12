@@ -11,6 +11,7 @@ public:
 
     virtual QString deviceType() override;
     virtual int supportedFeatures() override;
+    virtual QStringList supportedDisplayItems() const override;
 
     virtual void applyDeviceSetting(Settings s) override;
 
