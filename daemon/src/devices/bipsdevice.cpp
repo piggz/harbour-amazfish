@@ -1,25 +1,14 @@
 #include "bipsdevice.h"
 #include <QtXml/QtXml>
 
-BipSDevice::BipSDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
+BipSDevice::BipSDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO;
-    connect(this, &QBLEDevice::propertiesChanged, this, &BipSDevice::onPropertiesChanged);
 }
 
 QString BipSDevice::deviceType()
 {
     return "amazfitbips";
-}
-
-int BipSDevice::supportedFeatures()
-{
-    return FEATURE_HRM |
-            FEATURE_WEATHER |
-            FEATURE_ACTIVITY |
-            FEATURE_STEPS |
-            FEATURE_ALARMS |
-            FEATURE_ALERT;
 }
 
 void BipSDevice::initialise()
@@ -143,62 +132,15 @@ void BipSDevice::onPropertiesChanged(QString interface, QVariantMap map, QString
 
 }
 
-void BipSDevice::sendWeather(CurrentWeather *weather)
-{
-    sendWeatherHuami(weather, (softwareRevision() > "V0.0.8.74"));
-}
-
-void BipSDevice::navigationRunning(bool running)
-{
-    QString msg;
-    if (running) {
-        msg = tr("Navigation Started");
-    } else {
-        msg = tr("Navigation Stopped");
-    }
-    sendAlert("navigation", msg, "");
-}
-
-void BipSDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
-{
-    Q_UNUSED(flag)
-    sendAlert("navigation", tr("Progress") + ":" + QString::number(progress), narrative + "\n" + manDist);
-}
-
-QStringList BipSDevice::supportedDisplayItems() const
-{
-    QStringList items;
-
-    items << "status";
-    items << "activity";
-    items << "weather";
-    items << "alarm";
-    items << "timer";
-    items << "compass";
-    items << "settings";
-    items << "alipay";
-
-    return items;
-}
-
 void BipSDevice::applyDeviceSetting(AbstractDevice::Settings s)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (!mi) {
         return;
     }
-    QMap<QString, uint8_t> keyPosMap;
-    keyPosMap["status"] = 1;
-    keyPosMap["activity"] = 2;
-    keyPosMap["weather"] = 3;
-    keyPosMap["alarm"] = 4;
-    keyPosMap["timer"] = 5;
-    keyPosMap["compass"] = 6;
-    keyPosMap["settings"] = 7;
-    keyPosMap["alipay"] = 8;
 
     if (s == SETTING_DEVICE_DISPLAY_ITEMS) {
-        mi->setDisplayItemsOld(keyPosMap);
+        mi->setDisplayItemsNew();
     } else {
         HuamiDevice::applyDeviceSetting(s);
     }
