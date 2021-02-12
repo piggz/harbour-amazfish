@@ -1,5 +1,6 @@
 #include "bipsdevice.h"
 #include <QtXml/QtXml>
+#include "typeconversion.h"
 
 BipSDevice::BipSDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
 {
@@ -9,6 +10,18 @@ BipSDevice::BipSDevice(const QString &pairedName, QObject *parent) : BipDevice(p
 QString BipSDevice::deviceType()
 {
     return "amazfitbips";
+}
+
+int BipSDevice::supportedFeatures()
+{
+    return FEATURE_HRM |
+            FEATURE_WEATHER |
+            FEATURE_ACTIVITY |
+            FEATURE_STEPS |
+            FEATURE_ALARMS |
+            FEATURE_ALERT |
+            FEATURE_EVENT_REMINDER |
+            FEATURE_MUSIC_CONTROL;
 }
 
 void BipSDevice::initialise()
@@ -149,4 +162,89 @@ void BipSDevice::applyDeviceSetting(AbstractDevice::Settings s)
 AbstractFirmwareInfo *BipSDevice::firmwareInfo(const QByteArray &bytes)
 {
     return nullptr;
+}
+
+void BipSDevice::setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration, int position)
+{
+    QByteArray cmd;
+
+    char flags = 0x00;
+    flags |= 0x01;
+
+    if (artist.length() > 0) {
+        flags |= 0x02;
+    }
+    if (album.length() > 0) {
+        flags |= 0x04;
+    }
+    if (track.length() > 0) {
+        flags |= 0x08;
+    }
+    if (duration != 0) {
+        flags |= 0x10;
+    }
+
+    char state = playing ? 0x01 : 0x00; //Not playing
+    cmd += flags;
+    cmd += state;
+    cmd += (char)0x00;
+
+    //Position
+    cmd += TypeConversion::fromInt16(position);
+
+    if (artist.length() > 0) {
+        cmd += artist.toLocal8Bit();
+        cmd += char(0x00);
+    }
+    if (album.length() > 0) {
+        cmd += album.toLocal8Bit();
+        cmd += char(0x00);
+    }
+    if (track.length() > 0) {
+        cmd += track.toLocal8Bit();
+        cmd += char(0x00);
+    }
+    if (duration != 0) {
+        cmd += TypeConversion::fromInt32(duration);
+    }
+
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi){
+        mi->writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
+    }
+}
+
+void BipSDevice::serviceEvent(uint8_t event)
+{
+    switch(event) {
+    case MiBandService::EVENT_MUSIC_PLAY:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAY);
+        break;
+    case MiBandService::EVENT_MUSIC_PAUSE:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PAUSE);
+        break;
+    case MiBandService::EVENT_MUSIC_NEXT:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
+        break;
+    case MiBandService::EVENT_MUSIC_PREV:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PREV);
+        break;
+    case MiBandService::EVENT_MUSIC_VOLUP:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
+        break;
+    case MiBandService::EVENT_MUSIC_VOLDOWN:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
+        break;
+    case MiBandService::EVENT_MUSIC_OPEN:
+        emit deviceEvent(AbstractDevice::EVENT_APP_MUSIC);
+        break;
+    case MiBandService::EVENT_DECLINE_CALL:
+        emit deviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
+        break;
+    case MiBandService::EVENT_IGNORE_CALL:
+        emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
+        break;
+    default:
+        break;
+    }
 }
