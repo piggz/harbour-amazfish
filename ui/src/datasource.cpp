@@ -41,6 +41,7 @@ QVariant DataSource::data(Type type, const QDate &day)
 
                     QVariantMap pt;
                     int temp_sleep = 0;
+                    uint temp_sleep_ts = 0;
                     bool in_sleep = false;
 
                     while (!curs->eof()) {
@@ -73,38 +74,40 @@ QVariant DataSource::data(Type type, const QDate &day)
                         if (activity == 123 || (in_sleep == false && activity)) {
                             //qDebug() << "Starting sleep tracking";
                             in_sleep = true;
+                            temp_sleep_ts = t.toDateTime().toTime_t();
                         }
 
-                        if (activity == 124 || (in_sleep && ((activity & 112) != 112))) {
+                        if (in_sleep && (activity == 124 || (in_sleep && ((activity & 112) != 112)))) {
                             //qDebug() << "Stopping sleep tracking";
 
                             in_sleep = false;
                             //qDebug() << "Adding " << temp_sleep << " minutes of sleep";
 
-                            if (temp_sleep > 10) { //add to deep
-                                deep += temp_sleep;
-                            } else {
+                            auto delta_seconds = t.toDateTime().toTime_t() - temp_sleep_ts;
+                            temp_sleep = delta_seconds/60;
+
+                            if (intensity > 0 || temp_sleep > 1) { //add to light
                                 light += temp_sleep;
+                            } else {
+                                deep += temp_sleep;
                             }
+                            temp_sleep_ts = t.toDateTime().toTime_t();
                             temp_sleep = 0;
                         }
 
                         if (in_sleep && ((activity == 112 && activity != 115) || activity == 121 || activity == 122)) {
                             //qDebug() << "Data:" << t << k << i;
 
-                            if (intensity > 0) { //Not deep so just add to light
+                            auto delta_seconds = t.toDateTime().toTime_t() - temp_sleep_ts;
+                            temp_sleep = delta_seconds/60;
+                            if (intensity > 0 || temp_sleep > 1) { //Not deep so just add to light
                                 //qDebug() << "Adding " << temp_sleep << " minutes of sleep";
-
-                                if (temp_sleep > 10) { //add to deep
-                                    deep += temp_sleep;
-                                } else {
                                     light += temp_sleep;
-                                }
-                                temp_sleep = 0;
-                                light++;
                             } else {
-                                temp_sleep++;
-                            }
+                                deep += temp_sleep;
+                                }
+                            temp_sleep_ts = t.toDateTime().toTime_t();
+                                temp_sleep = 0;
                         }
                         curs->moveNext();
                     }

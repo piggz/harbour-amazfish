@@ -1,1 +1,8 @@
 harbour-amazfish.pro.user*
+
+.qmake.conf
+.qmake.stash
+Makefile
+qmake_variables.*
+lib/
+**/*.pro.user

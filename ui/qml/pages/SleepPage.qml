@@ -11,9 +11,10 @@ PagePL {
     property var day: new Date()
 
     function _formatHours(hours) {
-        var offset = new Date().getTimezoneOffset()
-        //: Format of sleep hours
-        return new Date((hours * 60 + offset) * 60000).toLocaleTimeString(Qt.locale(), qsTr("h:mm"))
+        var hour = ("00" + Math.floor(hours)).slice(-2),
+            minute = ("00" + Math.floor((hours - Math.floor(hours))*60)).slice(-2);
+
+        return hour + ":" + minute;
     }
 
     pageMenu: PageMenuPL {
