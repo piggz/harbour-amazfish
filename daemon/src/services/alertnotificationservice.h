@@ -7,6 +7,7 @@
 {00001811-0000-1000-8000-00805f9b34fb} Alert notification service
 --00002a46-0000-1000-8000-00805f9b34fb //New alert
 --00002a44-0000-1000-8000-00805f9b34fb //Alert notification control poiont
+--00020001-78fc-48fe-8e23-433b3a1942d0 //Notification UUID used on Infinitime
 */
 
 class AlertNotificationService : public QBLEService
@@ -18,6 +19,7 @@ public:
     static const char* UUID_SERVICE_ALERT_NOTIFICATION;
     static const char* UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT;
     static const char* UUID_CHARACTERISTIC_ALERT_NOTIFICATION_CONTROL;
+    static const char* UUID_CHARACTERISTIC_ALERT_NOTIFICATION_EVENT;
 
     Q_ENUMS(AlertCategory)
     enum AlertCategory {
@@ -79,11 +81,21 @@ public:
         HR_WARNING_36 = 36
     };
 
+    Q_ENUMS(AlertEvent)
+    enum AlertEvent {
+        CALL_REJECT = 0,
+        CALL_ANSWER = 1,
+        CALL_IGNORE = 2
+    };
+
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message);
     Q_INVOKABLE void incomingCall(const QString &caller);
     static int mapSenderToIcon(const QString &sender);
 
+    Q_SIGNAL void serviceEvent(const QString &c, uint8_t event);
+
 private:
+    void characteristicChanged(const QString &c, const QByteArray &value);
 };
 
 #endif // ALERTNOTIFICATIONSERVICE_H

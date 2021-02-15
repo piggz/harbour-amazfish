@@ -36,6 +36,6 @@ void PineTimeMusicService::setAlbum(const QString &album)
 void PineTimeMusicService::characteristicChanged(const QString &c, const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO << c << value;
-    emit serviceEvent(value[0]);
+    emit serviceEvent(c, value[0]);
 }
 

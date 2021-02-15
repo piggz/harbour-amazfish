@@ -3,10 +3,13 @@
 const char* AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION  = "00001811-0000-1000-8000-00805f9b34fb";
 const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT = "00002a46-0000-1000-8000-00805f9b34fb";
 const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_CONTROL = "00002a44-0000-1000-8000-00805f9b34fb";
+const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_EVENT = "00020001-78fc-48fe-8e23-433b3a1942d0";
 
 AlertNotificationService::AlertNotificationService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_ALERT_NOTIFICATION, path, parent)
 {
- qDebug() << "AlertNotificationService::AlertNotificationService";
+ qDebug() << Q_FUNC_INFO;
+ connect(this, &QBLEService::characteristicChanged, this, &AlertNotificationService::characteristicChanged);
+
 }
 
 void AlertNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message)
@@ -90,4 +93,10 @@ int AlertNotificationService::mapSenderToIcon(const QString &sender)
     }
 
     return HuamiIcon::APP_11;
+}
+
+void AlertNotificationService::characteristicChanged(const QString &c, const QByteArray &value)
+{
+    qDebug() << Q_FUNC_INFO << c << value;
+    emit serviceEvent(c, value[0]);
 }

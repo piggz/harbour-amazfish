@@ -68,7 +68,11 @@ void PinetimeJFDevice::sendAlert(const QString &sender, const QString &subject, 
 
 void PinetimeJFDevice::incomingCall(const QString &caller)
 {
-    Q_UNUSED(caller);
+    qDebug() << Q_FUNC_INFO << caller;
+    AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
+    if (alert) {
+        alert->incomingCall(caller);
+    }
 }
 
 void PinetimeJFDevice::parseServices()
@@ -128,6 +132,12 @@ void PinetimeJFDevice::initialise()
 {
     setConnectionState("connected");
     parseServices();
+
+    AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
+    if (alert) {
+        alert->enableNotification(AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_EVENT);
+        connect(alert, &AlertNotificationService::serviceEvent, this, &PinetimeJFDevice::serviceEvent, Qt::UniqueConnection);
+    }
 
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (info) {
@@ -247,14 +257,14 @@ void PinetimeJFDevice::refreshInformation()
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (info) {
-         info->refreshInformation();
+        info->refreshInformation();
     }
 }
 
 QString PinetimeJFDevice::information(Info i) const
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
-     if (!info) {
+    if (!info) {
         return QString();
     }
 
@@ -278,32 +288,48 @@ QString PinetimeJFDevice::information(Info i) const
     return QString();
 }
 
-void PinetimeJFDevice::serviceEvent(uint8_t event)
+void PinetimeJFDevice::serviceEvent(const QString &characteristic, uint8_t event)
 {
-    switch(event) {
-    case PineTimeMusicService::EVENT_MUSIC_PLAY:
-        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAY);
-        break;
-    case PineTimeMusicService::EVENT_MUSIC_PAUSE:
-        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PAUSE);
-        break;
-    case PineTimeMusicService::EVENT_MUSIC_NEXT:
-        emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
-        break;
-    case PineTimeMusicService::EVENT_MUSIC_PREV:
-        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PREV);
-        break;
-    case PineTimeMusicService::EVENT_MUSIC_VOLUP:
-        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
-        break;
-    case PineTimeMusicService::EVENT_MUSIC_VOLDOWN:
-        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
-        break;
-    case PineTimeMusicService::EVENT_MUSIC_OPEN:
-        emit deviceEvent(AbstractDevice::EVENT_APP_MUSIC);
-        break;
+    qDebug() << Q_FUNC_INFO << characteristic << event;
 
-    default:
-        break;
+    if (characteristic == PineTimeMusicService::UUID_CHARACTERISTIC_MUSIC_EVENT) {
+        switch(event) {
+        case PineTimeMusicService::EVENT_MUSIC_PLAY:
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAY);
+            break;
+        case PineTimeMusicService::EVENT_MUSIC_PAUSE:
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_PAUSE);
+            break;
+        case PineTimeMusicService::EVENT_MUSIC_NEXT:
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
+            break;
+        case PineTimeMusicService::EVENT_MUSIC_PREV:
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_PREV);
+            break;
+        case PineTimeMusicService::EVENT_MUSIC_VOLUP:
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
+            break;
+        case PineTimeMusicService::EVENT_MUSIC_VOLDOWN:
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
+            break;
+        case PineTimeMusicService::EVENT_MUSIC_OPEN:
+            emit deviceEvent(AbstractDevice::EVENT_APP_MUSIC);
+            break;
+
+        default:
+            break;
+        }
+    } else if (characteristic == AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_EVENT) {
+        switch(event) {
+        case AlertNotificationService::CALL_REJECT:
+            emit deviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
+            break;
+        case AlertNotificationService::CALL_ANSWER:
+            emit deviceEvent(AbstractDevice::EVENT_ANSWER_CALL);
+            break;
+        case AlertNotificationService::CALL_IGNORE:
+            emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
+            break;
+        }
     }
 }

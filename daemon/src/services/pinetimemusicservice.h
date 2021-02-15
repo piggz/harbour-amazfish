@@ -38,8 +38,7 @@ public:
     void setTrack(const QString &track);
     void setAlbum(const QString &album);
 
-    Q_SIGNAL void serviceEvent(char event);
-
+    Q_SIGNAL void serviceEvent(const QString &c, uint8_t event);
 
 private:
     void characteristicChanged(const QString &c, const QByteArray &value);
