@@ -31,7 +31,7 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
     QByteArray send = QByteArray(1, category) + QByteArray(1, 1); //1 alert
 
     send += QByteArray(1, mapSenderToIcon(sender));
-    send += sender.left(32).toUtf8() + QByteArray(1, 0x00); //Null char indicates end of first line
+    send += sender.left(32).toUtf8() + QByteArray(1, 0x0a); //BLE NewAlert spec is a single message, so send newline as a separtor
 
     if (!subject.isEmpty()) {
         send += subject.left(128).toUtf8() + QByteArray(2, 0x0a);
