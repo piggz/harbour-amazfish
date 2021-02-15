@@ -31,7 +31,7 @@ git clone https://github.com/piggz/harbour-amazfish.git`
 Initialise and sync submodules:
 ```
 git submodule init 
-git submodule update`
+git submodule update
 ```
 
 ### Install dependencies
@@ -102,7 +102,7 @@ The service will be installed to : `/usr/local/lib/systemd/user/`
 Lastly, the service needs to be enabled and then started, as follows:
 
 ```
-systemctl --user damoon-reload
+systemctl --user daemon-reload
 systemctl --user enable harbour-amazfish
 systemctl --user start harbour-amazfish
 ```
