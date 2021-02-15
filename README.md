@@ -4,11 +4,37 @@ Companion application for Huami Devices (such as Amazfit Bip, Cor, MiBand2/3 and
 
 Requires sailfish version 3.0.3.8 or above due to changes in the base sailfish image
 
-# Powered by KEXI
+## Supported Devices
+
+There are 3 tiers of supported devices:
+
+### Gold
+
+These are devices I have, have tested and will try not to break any functioanlity for an include:
+ * Amazfit Bip
+ * Amazfit GTS
+ * Pinetime Infinitme
+ * Bangle.js
+
+### Silver
+
+These are devices which are properly implemented in the application, but I do not have and are tested by the commuity, and include:
+ * Amazfit BipS
+ * Amazfit Bip Lite
+I do not promise not to break funcaionality in these, but will fix where I can
+
+### Bronze
+
+These are devices which use a protocol that is close to another suppored device, and so is treated like that device.  Your mileage may vary with these devices.
+ * MiBand 2/3/4
+ * AMzfit Cor
+ * Amazfit GTR
+
+## Powered by KEXI
 
 As of version 0.5.1, actiivity data is retrieved into an sqlite database.  Becuase I think it is important to allow individuals to be in control of their own data, and that they should have the ability to analyse it themsleves, I have chosen to store data in a KEXI compatible database.  This will allow you to copy the database from the phone, and open it up inside KEXI on Linux/Windows/Mac and perform queries and reports on it.  This added ability means i link to a couple of KDE libraries, which should be installed automatically.
 
-# Firmware Download - READ FIRST - I am not liable if you brick your watch ;)
+## Firmware Download - READ FIRST - I am not liable if you brick your watch ;)
 
 Read this for info about which files to flash https://codeberg.org/Freeyourgadget/Gadgetbridge/wiki/Amazfit-Bip
 
@@ -28,15 +54,11 @@ So, to re-iterate, the firmware flashing order is:
     .ft
     .res
 
-# Amazfit GTS
+# Server Side Pairing Code
 
-GTS requires a server-side pairing key which requires inital pairing with an android device.  To get the key, follow the instructions here and enter into Amzafish when prompted, WITHOUT 0x at the beginning.
+The newer devices (GTS, BipS etc) requires a server-side pairing key which requires inital pairing with an android device.  To get the key, follow the instructions here and enter into Amzafish when prompted, WITHOUT 0x at the beginning.
 
 See https://codeberg.org/Freeyourgadget/Gadgetbridge/wiki/Amazfit-GTS
-
-*MiBand 2/3/Cor*
-
-These devices are untested and use the Bip backend.  Should be safe to try and FW download should not be allowed.
 
 *Pairing Issues*
 
@@ -47,7 +69,7 @@ Pairing works for myself, sometimes I have to try twice.  If pairing doesnt work
     turn off/on BT on the phone
     factory reset the watch
 
-Check if after all this, pairing works from the sailfish BT settings page.  It should pair and connect just fine from there.  f that doesnt work, my app wont either.
+Check if after all this, pairing works from the sailfish BT settings page.  It should pair and connect just fine from there.  If that doesnt work, my app wont either.
 
 Not all features currently implemented
 
@@ -56,7 +78,6 @@ Not all features currently implemented
 Uses Bluetooth Low Energy to communicate with the watch, this is known to be problematic on some devices.  it is known to work on the Xiaomi Mido.  Probably also works on the FP2 and is tested ont he XA2.
 
 Implemented
-
     Pairing
     Notifications
     Calls
@@ -70,11 +91,9 @@ Implemented
     Basic music control
 
 Todo
-
     More Settings
     Support other devices (maybe eg MiBand2, as it is similar)
 
-The Cor is also claimed to be working, but as i dont have that device, i cant test it.
 
 Tip:
 On your device, create a symlink in /home/nemo to /home/nemo/.local/share/harbour-amazfish
@@ -84,6 +103,5 @@ Source: https://github.com/piggz/harbour-amazfish
 
 Credits to:
 
-    The rockpool devs, as i borrowed the call handling code handling code from them
     The gadgetbridge devs, which gave me a lot of hints and inspiration from their device code.
     https://codeberg.org/Freeyourgadget/Gadgetbridge

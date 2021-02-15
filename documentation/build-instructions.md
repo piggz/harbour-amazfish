@@ -1,9 +1,27 @@
-This instruction guide is written for Ubuntu 20.04 LTS, but may be also available for other Linux distributions, with some changes. 
+# This instruction guide is written for the SailfishOS SDK and Ubuntu 20.04 LTS, but may be also available for other Linux distributions, with some changes.
 
-In Ubuntu 20.04, with default Ubuntu repository, QT is in version 5.12.8
+## SailfishOS SDK
+
+The application can be built and deployed like any normal Sailfish application using the SDK, once some additional dependencies have been installed in the
+build target which are not available by default.
+
+To get into the build machine (if started by Sailifsh IDE)
+`ssh -l mersdk localhost -p 2222 -i ~/SailfishOS/vmshare/ssh/private_keys/engine/mersdk`
+
+Use the sb2 command to make your ARM target the default
+
+Add this repo which provides KF5 packages
+`sb2 -R zypper ar http://repo.merproject.org/obs/home:/piggz:/kf5/sailfishos_3.4.0.24/ piggz
+and
+`sb2 -R zypper refresh`
 
 
-# Prepare git repo
+To install missing packages, as pointed out by build errors, use
+`sb2 -R zypper in mkcal-qt5-devel`
+
+## In Ubuntu 20.04, with default Ubuntu repository, QT is in version 5.12.8
+
+### Prepare git repo
 Clone amazfish repository:
 
 ```
@@ -16,7 +34,7 @@ git submodule init
 git submodule update`
 ```
 
-# Install dependencies
+### Install dependencies
 
 Two depedencies can be found on git repos
 https://git.sailfishos.org/mer-core/nemo-qml-plugin-dbus
@@ -43,7 +61,7 @@ Other dependencies can be installed from the Ubuntu package repositories:
 sudo apt install qt5-default libkdb3-dev libkf5contacts-dev libkf5coreaddons-dev qtlocation5-dev qtconnectivity5-dev qtpositioning5-dev qml-module-qtbluetooth
 ```
 
-# Build process
+### Build process
 
 ```
 cd harbour-amazfish
@@ -74,7 +92,7 @@ This can be done with the following command or an text editor of your choice:
 
 You can now run the `make` command again, and the build process should end successfully.
 
-# Installing Amazfish and enabling background service. 
+### Installing Amazfish and enabling background service.
 Once you have built the project, run `sudo make install` to install the service daemon and program files. 
 
 Amazfish will be installed to: `/usr/local/share/harbour-amazfish-ui`
