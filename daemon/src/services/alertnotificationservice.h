@@ -14,7 +14,7 @@ class AlertNotificationService : public QBLEService
 {
     Q_OBJECT
 public:
-    AlertNotificationService(const QString &path, QObject *parent);
+    AlertNotificationService(const QString &path, QObject *parent, uint8_t seperatorChar = 0x00);
 
     static const char* UUID_SERVICE_ALERT_NOTIFICATION;
     static const char* UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT;
@@ -96,6 +96,7 @@ public:
 
 private:
     void characteristicChanged(const QString &c, const QByteArray &value);
+    uint8_t m_seperatorChar = 0x00;
 };
 
 #endif // ALERTNOTIFICATIONSERVICE_H

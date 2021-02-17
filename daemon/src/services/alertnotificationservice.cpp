@@ -5,9 +5,10 @@ const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW
 const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_CONTROL = "00002a44-0000-1000-8000-00805f9b34fb";
 const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_EVENT = "00020001-78fc-48fe-8e23-433b3a1942d0";
 
-AlertNotificationService::AlertNotificationService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_ALERT_NOTIFICATION, path, parent)
+AlertNotificationService::AlertNotificationService(const QString &path, QObject *parent, uint8_t seperatorChar) : QBLEService(UUID_SERVICE_ALERT_NOTIFICATION, path, parent)
 {
  qDebug() << Q_FUNC_INFO;
+ m_seperatorChar = seperatorChar;
  connect(this, &QBLEService::characteristicChanged, this, &AlertNotificationService::characteristicChanged);
 
 }
@@ -34,7 +35,7 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
     QByteArray send = QByteArray(1, category) + QByteArray(1, 1); //1 alert
 
     send += QByteArray(1, mapSenderToIcon(sender));
-    send += sender.left(32).toUtf8() + QByteArray(1, 0x0a); //BLE NewAlert spec is a single message, so send newline as a separtor
+    send += sender.left(32).toUtf8() + QByteArray(1, m_seperatorChar); //Bip needs 0x00 for seperator, others may be different
 
     if (!subject.isEmpty()) {
         send += subject.left(128).toUtf8() + QByteArray(2, 0x0a);
