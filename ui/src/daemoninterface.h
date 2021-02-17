@@ -58,7 +58,8 @@ public:
         FEATURE_ALARMS = 16,
         FEATURE_ALERT = 32,
         FEATURE_EVENT_REMINDER = 64,
-        FEATURE_MUSIC_CONTROL = 128
+        FEATURE_MUSIC_CONTROL = 128,
+        FEATURE_BUTTON_ACTION = 256
     };
     Q_ENUM(Feature)
 

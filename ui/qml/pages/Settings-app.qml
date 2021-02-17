@@ -142,7 +142,7 @@ PagePL {
         ButtonPL {
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("Button Actions")
-            visible: true
+            visible: supportsFeature(DaemonInterface.FEATURE_BUTTON_ACTION)
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("Settings-button-action.qml"))
             }
