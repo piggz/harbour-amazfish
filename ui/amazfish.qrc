@@ -65,6 +65,7 @@
         <file>qml/pages/Settings-alarms.qml</file>
         <file>qml/pages/Settings-app.qml</file>
         <file>qml/pages/Settings-huami-shortcuts.qml</file>
+        <file>qml/pages/Settings-button-action.qml</file>
         <file>qml/pages/Settings-device.qml</file>
         <file>qml/pages/Settings-menu.qml</file>
         <file>qml/pages/Settings-profile.qml</file>

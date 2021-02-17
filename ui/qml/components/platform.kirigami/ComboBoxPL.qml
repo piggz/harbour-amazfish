@@ -33,13 +33,14 @@ Item {
     Layout.fillWidth: true
     Layout.preferredWidth: parent.width
 
-    property int    currentIndex
+    property alias    currentIndex: val.currentIndex
     property alias  description: desc.text
     property bool   inForm: parent.isFormLayout ? true : false
     property alias  model: val.model
     property string label
     property alias  value: val.currentText
     property alias  textRole: val.textRole
+
 
     Label {
         id: lab
@@ -60,14 +61,14 @@ Item {
         anchors.top: parent.top
         font.pixelSize: styler.themeFontSizeMedium
         property bool initialized: false
-        onCurrentIndexChanged: {
-            if (initialized && currentIndex != item.currentIndex)
-                item.currentIndex = currentIndex;
-        }
-        Component.onCompleted: {
-            currentIndex = item.currentIndex;
-            initialized = true;
-        }
+        //onCurrentIndexChanged: {
+        //    if (initialized && currentIndex != item.currentIndex)
+        //        item.currentIndex = currentIndex;
+        //}
+        //Component.onCompleted: {
+        //    currentIndex = item.currentIndex;
+        //    initialized = true;
+        //}
     }
 
     Label {

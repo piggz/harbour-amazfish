@@ -10,6 +10,9 @@
 #include "amazfishconfig.h"
 
 #include <QDir>
+#include <QFile>
+#include <QProcess>
+
 #include <KDb3/KDbDriverManager>
 
 static const char *SERVICE = SERVICE_NAME_AMAZFISH;
@@ -470,10 +473,40 @@ void DeviceInterface::deviceEvent(AbstractDevice::Events event)
 
 void DeviceInterface::handleButtonPressed(int presses)
 {
+    qDebug() << Q_FUNC_INFO << presses;
+
+    QString action = "action-none";
+
     if (presses == 2) {
-        m_musicController.next();
+        action = AmazfishConfig::instance()->appButtonDoublePressAction();
     } else if (presses == 3) {
+        action = AmazfishConfig::instance()->appButtonTriplePressAction();
+    } else if (presses == 4) {
+        action = AmazfishConfig::instance()->appButtonQuadPressAction();
+    }
+
+    qDebug() << action;
+
+    if (action == "action-music-next"){
+        m_musicController.next();
+    } else if (action == "action-music-next"){
+        m_musicController.next();
+    } else if (action == "action-music-prev"){
         m_musicController.previous();
+    } else if (action == "action-vol-up"){
+        m_musicController.volumeUp();
+    } else if (action == "action-vol-down"){
+        m_musicController.volumeDown();
+    } else if (action == "action-custom"){
+        //Run custom script in ~/harbour-amazfish-scirpt.sh and pass in press count
+        QString fileName = QDir::homePath() + "/harbour-amazfish-script.sh";
+        if (QFile::exists(fileName)) {
+            if (!QProcess::startDetached("/bin/sh", QStringList{fileName,QString::number(presses)})) {
+                qDebug() << "Failed to run" << fileName;
+            }
+        } else {
+            qDebug() << fileName <<  "does not exist";
+        }
     }
     emit buttonPressed(presses);
 }

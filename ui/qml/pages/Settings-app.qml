@@ -139,6 +139,15 @@ PagePL {
             }
         }
 
+        ButtonPL {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Button Actions")
+            visible: true
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("Settings-button-action.qml"))
+            }
+        }
+
         SectionHeaderPL {
         }
 

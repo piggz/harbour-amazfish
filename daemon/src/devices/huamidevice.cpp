@@ -157,6 +157,7 @@ void HuamiDevice::navigationNarrative(const QString &flag, const QString &narrat
 
 void HuamiDevice::handleButtonPressed()
 {
+    qDebug() << Q_FUNC_INFO;
     m_buttonPresses++;
     m_keyPressTimer->stop();
     m_keyPressTimer->start();
@@ -164,6 +165,7 @@ void HuamiDevice::handleButtonPressed()
 
 void HuamiDevice::buttonPressTimeout()
 {
+    qDebug() << Q_FUNC_INFO;
     int presses = m_buttonPresses;
     m_buttonPresses = 0;
     m_keyPressTimer->stop();
