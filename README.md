@@ -106,6 +106,7 @@ To confiure the actions, goto Settings > Application > Button Actions.
 
 A custom script can be used, the script must be called harbour-amazfish-script.sh and be in the home folder.
 Example which sends a OTP code to the watch as a message:
+
     #!/bin/sh
     if [ "$1" == "4" ]; then
         CODE=`python3 -c 'import pyotp;totp = pyotp.TOTP("XXXX Authenticator code here XXXX");print(totp.now())'`
