@@ -115,7 +115,7 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
         connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress, Qt::UniqueConnection);
         connect(m_device, &QBLEDevice::operationRunningChanged, this, &DeviceInterface::operationRunningChanged, Qt::UniqueConnection);
-        connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::buttonPressed, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::handleButtonPressed, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
         return m_device->pair();
@@ -475,40 +475,42 @@ void DeviceInterface::handleButtonPressed(int presses)
 {
     qDebug() << Q_FUNC_INFO << presses;
 
-    QString action = "action-none";
+    if (m_device && m_device->supportsFeature(AbstractDevice::FEATURE_BUTTON_ACTION)) {
+        QString action = "action-none";
 
-    if (presses == 2) {
-        action = AmazfishConfig::instance()->appButtonDoublePressAction();
-    } else if (presses == 3) {
-        action = AmazfishConfig::instance()->appButtonTriplePressAction();
-    } else if (presses == 4) {
-        action = AmazfishConfig::instance()->appButtonQuadPressAction();
-    }
-
-    qDebug() << action;
-
-    if (action == "action-music-next"){
-        m_musicController.next();
-    } else if (action == "action-music-next"){
-        m_musicController.next();
-    } else if (action == "action-music-prev"){
-        m_musicController.previous();
-    } else if (action == "action-vol-up"){
-        m_musicController.volumeUp();
-    } else if (action == "action-vol-down"){
-        m_musicController.volumeDown();
-    } else if (action == "action-custom"){
-        //Run custom script in ~/harbour-amazfish-scirpt.sh and pass in press count
-        QString fileName = QDir::homePath() + "/harbour-amazfish-script.sh";
-        if (QFile::exists(fileName)) {
-            if (!QProcess::startDetached("/bin/sh", QStringList{fileName,QString::number(presses)})) {
-                qDebug() << "Failed to run" << fileName;
-            }
-        } else {
-            qDebug() << fileName <<  "does not exist";
+        if (presses == 2) {
+            action = AmazfishConfig::instance()->appButtonDoublePressAction();
+        } else if (presses == 3) {
+            action = AmazfishConfig::instance()->appButtonTriplePressAction();
+        } else if (presses == 4) {
+            action = AmazfishConfig::instance()->appButtonQuadPressAction();
         }
+
+        qDebug() << action;
+
+        if (action == "action-music-next"){
+            m_musicController.next();
+        } else if (action == "action-music-next"){
+            m_musicController.next();
+        } else if (action == "action-music-prev"){
+            m_musicController.previous();
+        } else if (action == "action-vol-up"){
+            m_musicController.volumeUp();
+        } else if (action == "action-vol-down"){
+            m_musicController.volumeDown();
+        } else if (action == "action-custom"){
+            //Run custom script in ~/harbour-amazfish-scirpt.sh and pass in press count
+            QString fileName = QDir::homePath() + "/harbour-amazfish-script.sh";
+            if (QFile::exists(fileName)) {
+                if (!QProcess::startDetached("/bin/sh", QStringList{fileName,QString::number(presses)})) {
+                    qDebug() << "Failed to run" << fileName;
+                }
+            } else {
+                qDebug() << fileName <<  "does not exist";
+            }
+        }
+        emit buttonPressed(presses);
     }
-    emit buttonPressed(presses);
 }
 
 void DeviceInterface::sendBufferedNotifications()

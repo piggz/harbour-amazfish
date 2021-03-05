@@ -305,6 +305,10 @@
         <source>VO2 Max</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 bpm</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JSTools</name>
@@ -489,6 +493,57 @@
     </message>
     <message>
         <source>Navigation notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Button Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-button-action</name>
+    <message>
+        <source>Button Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double Press Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triple Press Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quad Press Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation type="unfinished">Сохранить настройки</translation>
+    </message>
+    <message>
+        <source>No Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Volume Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Volume Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Script</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

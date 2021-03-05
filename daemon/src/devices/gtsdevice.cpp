@@ -26,7 +26,8 @@ int GtsDevice::supportedFeatures()
             FEATURE_ALARMS |
             FEATURE_ALERT |
             FEATURE_EVENT_REMINDER |
-            FEATURE_MUSIC_CONTROL;
+            FEATURE_MUSIC_CONTROL |
+            FEATURE_BUTTON_ACTION;
 }
 
 void GtsDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)

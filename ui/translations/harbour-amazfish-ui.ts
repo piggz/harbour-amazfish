@@ -266,67 +266,67 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="43"/>
+        <location filename="../qml/pages/FirstPage.qml" line="19"/>
         <source>Pair with watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="57"/>
+        <location filename="../qml/pages/FirstPage.qml" line="33"/>
         <source>Download File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="61"/>
+        <location filename="../qml/pages/FirstPage.qml" line="37"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="65"/>
+        <location filename="../qml/pages/FirstPage.qml" line="41"/>
         <source>Data Graphs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="71"/>
+        <location filename="../qml/pages/FirstPage.qml" line="47"/>
         <source>Disconnect from watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="71"/>
+        <location filename="../qml/pages/FirstPage.qml" line="47"/>
         <source>Connect to watch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="143"/>
+        <location filename="../qml/pages/FirstPage.qml" line="121"/>
         <source>Steps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="194"/>
+        <location filename="../qml/pages/FirstPage.qml" line="172"/>
         <source>Heartrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="234"/>
+        <location filename="../qml/pages/FirstPage.qml" line="213"/>
         <source>Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="239"/>
+        <location filename="../qml/pages/FirstPage.qml" line="218"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="248"/>
+        <location filename="../qml/pages/FirstPage.qml" line="227"/>
         <source>Enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="278"/>
+        <location filename="../qml/pages/FirstPage.qml" line="115"/>
         <source>%1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="281"/>
+        <location filename="../qml/pages/FirstPage.qml" line="194"/>
         <source>%1 bpm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -347,37 +347,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="72"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="39"/>
+        <source>%1 bpm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HeartratePage.qml" line="70"/>
         <source>BPM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="94"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="92"/>
         <source>Relaxed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="99"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="97"/>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="104"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="102"/>
         <source>Intensive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="109"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="107"/>
         <source>Aerobic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="115"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="113"/>
         <source>Anerobic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="121"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="119"/>
         <source>VO2 Max</source>
         <translation type="unfinished"></translation>
     </message>
@@ -619,8 +624,71 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="147"/>
+        <location filename="../qml/pages/Settings-app.qml" line="144"/>
+        <source>Button Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="156"/>
         <source>Save Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-button-action</name>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="10"/>
+        <source>Button Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="28"/>
+        <source>Double Press Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="38"/>
+        <source>Triple Press Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="48"/>
+        <source>Quad Press Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="57"/>
+        <source>Save Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="79"/>
+        <source>No Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="80"/>
+        <source>Next Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="81"/>
+        <source>Previous Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="82"/>
+        <source>Volume Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="83"/>
+        <source>Volume Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-button-action.qml" line="84"/>
+        <source>Custom Script</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1307,7 +1375,7 @@
     <name>StepsPage</name>
     <message>
         <location filename="../qml/pages/StepsPage.qml" line="9"/>
-        <location filename="../qml/pages/StepsPage.qml" line="52"/>
+        <location filename="../qml/pages/StepsPage.qml" line="51"/>
         <source>Steps</source>
         <translation type="unfinished"></translation>
     </message>
