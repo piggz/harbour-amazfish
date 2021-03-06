@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished">%1 bpm</translation>
+        <translation>%1 bpm</translation>
     </message>
 </context>
 <context>
@@ -497,54 +497,54 @@
     </message>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Knappåtgärder</translation>
     </message>
 </context>
 <context>
     <name>Settings-button-action</name>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Knappåtgärder</translation>
     </message>
     <message>
         <source>Double Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Dubbeltrycksåtgärd</translation>
     </message>
     <message>
         <source>Triple Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Trippeltrycksåtgärd</translation>
     </message>
     <message>
         <source>Quad Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Fyrtrycksåtgärd</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Spara inställningar</translation>
+        <translation>Spara inställningar</translation>
     </message>
     <message>
         <source>No Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen åtgärd</translation>
     </message>
     <message>
         <source>Next Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Nästa spår</translation>
     </message>
     <message>
         <source>Previous Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Föregående spår</translation>
     </message>
     <message>
         <source>Volume Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Volym upp</translation>
     </message>
     <message>
         <source>Volume Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Volym ner</translation>
     </message>
     <message>
         <source>Custom Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Anpassat skript</translation>
     </message>
 </context>
 <context>
