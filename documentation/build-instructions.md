@@ -8,16 +8,26 @@ build target which are not available by default.
 To get into the build machine (if started by Sailifsh IDE)
 `ssh -l mersdk localhost -p 2222 -i ~/SailfishOS/vmshare/ssh/private_keys/engine/mersdk`
 
-Use the sb2 command to make your ARM target the default
+Use the `sb2-config` command to make your ARM target the default
 
 Add this repo which provides KF5 packages
-`sb2 -R zypper ar http://repo.merproject.org/obs/home:/piggz:/kf5/sailfishos_3.4.0.24/ piggz
+`sb2 -R zypper ar http://repo.merproject.org/obs/home:/piggz:/kf5/sailfishos_3.4.0.24/ piggz`
 and
 `sb2 -R zypper refresh`
 
+In the .pro file, you can set `FLAVOR = silica` (or `FLAVOR = $$FLAVOR` and in the Sailfish IDE select Project and for Build Settings, add the env variable FLAVOR=silica)
 
-To install missing packages, as pointed out by build errors, use
-`sb2 -R zypper in mkcal-qt5-devel`
+To install missing packages, as pointed out by build errors, use:
+
+```
+sb2 -R zypper in kcoreaddons-devel
+sb2 -R zypper in kdb-devel
+sb2 -R zypper in libKDb3-3
+sb2 -R zypper in mkcal-qt5-devel
+```
+
+etc as pointed out by build errors.
+(although ctrl-B should offer to install them)
 
 ## In Ubuntu 20.04, with default Ubuntu repository, QT is in version 5.12.8
 
