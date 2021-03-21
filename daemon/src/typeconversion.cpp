@@ -21,7 +21,7 @@ QByteArray fromInt24(int val)
 
 QByteArray fromInt32(int val)
 {
-    qDebug() << "COnverting int32 to char" << val;
+    qDebug() << "Converting int32 to char" << val;
     return QByteArray(1, val & 0xff) + QByteArray(1, ((val >> 8) & 0xff)) + QByteArray(1, ((val >> 16) & 0xff)) + QByteArray(1, ((val >> 24) & 0xff));
 }
 
