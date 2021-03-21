@@ -6,11 +6,22 @@ CONFIG += staticlib
 
 QT += core network
 
-exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
-    message(SailfishOS lib build)
+equals(FLAVOR, "silica") {
+    CONFIG += flavor_silica
+} else:equals(FLAVOR, "kirigami") {
+    CONFIG += flavor_kirigami
+} else:equals(FLAVOR, "qtcontrols") {
+    CONFIG += flavor_qtcontrols
+} else:equals(FLAVOR, "uuitk") {
+    CONFIG += flavor_uuitk
+} else {
+    error("Please specify platform using FLAVOR=platform as qmake option. Supported platforms: kirigami, silica, qtcontrols, uuitk.")
+}
+
+flavor_silica {
+    message(SailfishOS daemon build)
     DEFINES += MER_EDITION_SAILFISH
     PKGCONFIG += mlite5
-    INCLUDEPATH += /usr/include/mlite5
 }
 
 HEADERS = \
