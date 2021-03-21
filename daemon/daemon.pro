@@ -106,6 +106,7 @@ SOURCES += \
     src/operations/dfuoperation.cpp \
     src/operations/dfuworker.cpp \
     src/operations/updatefirmwareoperationnew.cpp \
+    src/operations/huamiupdatefirmwareoperation2020.cpp \
     src/qaesencryption.cpp \
     src/services/currenttimeservice.cpp \
     src/services/dfuservice.cpp \
@@ -163,6 +164,7 @@ HEADERS += \
     src/operations/dfuoperation.h \
     src/operations/dfuworker.h \
     src/operations/updatefirmwareoperationnew.h \
+    src/operations/huamiupdatefirmwareoperation2020.h \
     src/qaesencryption.h \
     src/services/currenttimeservice.h \
     src/services/dfuservice.h \
