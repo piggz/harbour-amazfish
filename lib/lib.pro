@@ -19,7 +19,7 @@ equals(FLAVOR, "silica") {
 }
 
 flavor_silica {
-    message(SailfishOS daemon build)
+    message(SailfishOS lib build)
     DEFINES += MER_EDITION_SAILFISH
     PKGCONFIG += mlite5
 }

@@ -31,8 +31,8 @@ equals(FLAVOR, "silica") {
 flavor_silica {
     message(SailfishOS daemon build)
     DEFINES += MER_EDITION_SAILFISH
-
     CONFIG += sailfishapp
+    CONFIG += link_pkgconfig
     PKGCONFIG += mlite5
     WATCHFISH_FEATURES += music \
                       voicecall \
@@ -43,8 +43,6 @@ WATCHFISH_FEATURES += music \
                   notificationmonitor \
                   calendar
 }
-
-INCLUDEPATH += /usr/include/mkcal-qt5 /usr/include/kcalcoren-qt5
 
 INCLUDEPATH += $$PWD/src/services/ \
                $$PWD/src/operations/ \

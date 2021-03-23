@@ -16,6 +16,7 @@ protected:
 
 private:
     static constexpr uint8_t COMMAND_REQUEST_PARAMETERS = 0xd0;
+    static constexpr uint8_t COMMAND_START_FILE = 0xd1;
     static constexpr uint8_t COMMAND_SEND_FIRMWARE_INFO = 0xd2;
     static constexpr uint8_t COMMAND_START_TRANSFER = 0xd3;
     static constexpr uint8_t REPLY_UPDATE_PROGRESS = 0xd4;

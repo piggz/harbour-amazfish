@@ -3,6 +3,7 @@
 #include "bipfirmwareservice.h"
 
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_REQUEST_PARAMETERS;
+constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_START_FILE;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_SEND_FIRMWARE_INFO;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_START_TRANSFER;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::REPLY_UPDATE_PROGRESS;
@@ -19,7 +20,7 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO << value.toHex();
 
-    if (!(value.length() == 3 || value.length() == 6 || value.length() == 11)) {
+    if (!(value.length() == 3 || value.length() == 4 || value.length() == 6 || value.length() == 11)) {
         qDebug() << "Notifications should be 3, 6 or 11 bytes long.";
         return true;
     }
@@ -30,6 +31,10 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
         case COMMAND_REQUEST_PARAMETERS: {
             mChunkLength = TypeConversion::toInt16(value[4], value[5]);
             qDebug() << "got chunk length of " << mChunkLength;
+            m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, UCHAR_TO_BYTEARRAY(COMMAND_START_FILE));
+            break;
+        }
+        case COMMAND_START_FILE: {
             sendFwInfo();
             break;
         }
@@ -92,8 +97,6 @@ void HuamiUpdateFirmwareOperation2020::start()
     } else {
         m_service->message(QObject::tr("File does not seem to be supported"));
     }
-
-
 }
 
 bool HuamiUpdateFirmwareOperation2020::sendFwInfo()
@@ -104,7 +107,7 @@ bool HuamiUpdateFirmwareOperation2020::sendFwInfo()
     QByteArray crcBytes = TypeConversion::fromInt32(crc32);
     QByteArray chunkSizeBytes = TypeConversion::fromInt16(mChunkLength);
 
-    int arraySize = 19;
+    int arraySize = 14;
     QByteArray bytes(arraySize, char(0x00));
 
     int i = 0;
@@ -160,25 +163,22 @@ bool HuamiUpdateFirmwareOperation2020::sendFirmwareDataChunk(int offset) {
     }
 
     for (int i = 0; i < packets; i++) {
-        QByteArray fwChunk = m_fwBytes.mid(i * packetLength, packetLength);
+        QByteArray fwChunk = m_fwBytes.mid(offset + i * packetLength, packetLength);
 
         m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE_DATA, fwChunk);
         chunkProgress += packetLength;
-
-        progressPercent = (int) ((((float) chunkProgress) / len) * 100);
-        if ((i > 0) && (i % 100 == 0)) {
-            serv->downloadProgress(progressPercent);
-        }
         QThread::msleep(2);
     }
 
-    if (chunkProgress < len) {
-        QByteArray lastChunk = m_fwBytes.mid(packets * packetLength);
+    if (chunkProgress < chunkLength) {
+        QByteArray lastChunk = m_fwBytes.mid(offset + packets * packetLength, chunkLength - chunkProgress);
         m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE_DATA, lastChunk);
     }
 
-    qDebug() << "Finished sending firmware";
-    serv->downloadProgress(100);
+    progressPercent = (int) ((((float) (offset + chunkLength)) / len) * 100);
+    serv->downloadProgress(progressPercent);
+
+    qDebug() << "Finished sending chunk";
 
     return true;
 }
@@ -190,7 +190,6 @@ void HuamiUpdateFirmwareOperation2020::sendTransferStart() {
 
 void HuamiUpdateFirmwareOperation2020::sendTransferComplete() {
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, UCHAR_TO_BYTEARRAY(COMMAND_COMPLETE_TRANSFER));
-
 }
 
 void HuamiUpdateFirmwareOperation2020::sendFinalize() {
