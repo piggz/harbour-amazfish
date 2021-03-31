@@ -96,7 +96,7 @@ desktop-file-install --delete-original       \
 %{_datadir}/applications/%{name}-ui.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
-%{_libdir}/systemd/user/harbour-amazfish.service
+%{_userunitdir}/harbour-amazfish.service
 %{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges
 # >> files
 # << files
