@@ -42,11 +42,7 @@ protected:
     Type m_type;
     QString m_version;
 
-    virtual void determineFirmwareType() = 0;
-    virtual void determineFirmwareVersion() = 0;
-
     void calculateCRC16();
-
     void calculateCRC32();
 
 };

@@ -10,11 +10,10 @@ public:
 
     virtual bool supportedOnDevice(const QString &device) const override;
 
-protected:
-    virtual void determineFirmwareType() override;
-    virtual void determineFirmwareVersion() override;
-
 private:
+    void determineFirmwareType();
+    void determineFirmwareVersion();
+
     const int FW_OFFSET = 0x3;
     const int FONT_TYPE_OFFSET = 0x9;
     const int COMPRESSED_RES_HEADER_OFFSET = 0x9;

@@ -10,12 +10,10 @@ public:
 
     virtual bool supportedOnDevice(const QString &device) const override;
 
-protected:
-    virtual void determineFirmwareType() override;
-    virtual void determineFirmwareVersion() override;
-
-
 private:
+    void determineFirmwareType();
+    void determineFirmwareVersion();
+
     const uint8_t RES_HEADER[5]{ // HMRES resources file (*.res)
             0x48, 0x4d, 0x52, 0x45, 0x53
     };

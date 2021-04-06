@@ -53,7 +53,7 @@ DeviceInterface::DeviceInterface()
     connect(&m_cityManager, &CityManager::citiesChanged, this, &DeviceInterface::onCitiesChanged);
     connect(&m_currentWeather, &CurrentWeather::ready, this, &DeviceInterface::onWeatherReady);
     if (m_cityManager.cities().count() > 0) {
-        m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
+        m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities().at(0)));
     }
 
     //Refresh timer
@@ -586,7 +586,7 @@ void DeviceInterface::sendWeather(CurrentWeather *weather)
 void DeviceInterface::onCitiesChanged()
 {
     if (m_cityManager.cities().count() > 0) {
-        m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
+        m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities().at(0)));
     }
 }
 
@@ -748,7 +748,7 @@ void DeviceInterface::reloadCities()
 {
     m_cityManager.loadCities();
     if (m_cityManager.cities().count() > 0) {
-        m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities()[0]));
+        m_currentWeather.setCity(qobject_cast<City*>(m_cityManager.cities().at(0)));
     }
 }
 

@@ -9,11 +9,10 @@ public:;
     explicit InfinitimeFirmwareInfo(const QByteArray &bytes);
     virtual bool supportedOnDevice(const QString &device) const override;
 
-protected:
-    virtual void determineFirmwareType() override;
-    virtual void determineFirmwareVersion() override;
-
 private:
+    void determineFirmwareType();
+    void determineFirmwareVersion();
+
     const uint8_t FW_HEADER[4]{ // DFU Zip file
             0x3D, 0xB8, 0xF3, 0x96
     };
