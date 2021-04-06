@@ -7,7 +7,7 @@
 class BangleJSDevice : public AbstractDevice
 {
 public:
-    BangleJSDevice(const QString &pairedName, QObject *parent = 0);
+    explicit BangleJSDevice(const QString &pairedName, QObject *parent = 0);
 
     virtual QString pair() override;
     virtual int supportedFeatures() override;

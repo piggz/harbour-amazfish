@@ -309,15 +309,9 @@ void GtsDevice::enableFeature(AbstractDevice::Feature feature)
         char flags = 0x00;
         flags |= 0x01;
 
-        if (track.length() > 0) {
-            flags |= 0x02;
-        }
-        if (album.length() > 0) {
-            flags |= 0x04;
-        }
-        if (artist.length() > 0) {
-            flags |= 0x08;
-        }
+        flags |= 0x02;
+        flags |= 0x04;
+        flags |= 0x08;
 
         char state = 0x00; //Not playing
         cmd.clear();

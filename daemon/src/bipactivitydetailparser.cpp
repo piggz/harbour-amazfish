@@ -7,9 +7,8 @@
 #define endl Qt::endl
 #endif
 
-BipActivityDetailParser::BipActivityDetailParser(ActivitySummary summary) {
-    m_summary = summary;
-
+BipActivityDetailParser::BipActivityDetailParser(const ActivitySummary &summary) : m_summary(summary)
+{
     m_baseLongitude = summary.baseLongitude();
     m_baseLatitude = summary.baseLatitude();
     m_baseAltitude = summary.baseAltitude();

@@ -81,7 +81,7 @@ class BipDevice : public HuamiDevice
 {
     Q_OBJECT
 public:
-    BipDevice(const QString &pairedName, QObject *parent = nullptr);
+    explicit BipDevice(const QString &pairedName, QObject *parent = nullptr);
 
     virtual int supportedFeatures() override;
     virtual QString deviceType() override;

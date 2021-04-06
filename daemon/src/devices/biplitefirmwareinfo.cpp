@@ -23,6 +23,7 @@ void BipLiteFirmwareInfo::determineFirmwareType() {
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(RES_HEADER)) || m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(NEWRES_HEADER))) {
         if (m_bytes.length() > 700000) { // dont know how to distinguish from Cor .res
             m_type = Invalid;
+            return;
         }
         m_type = Res;
     }
@@ -42,6 +43,7 @@ void BipLiteFirmwareInfo::determineFirmwareType() {
         if (!m_version.isEmpty()) {
             if ((m_version >= "0.0.8.00") && (m_version <= "1.2.0.00")) {
                 m_type = Firmware;
+                return;
             }
         }
         m_type = Invalid;

@@ -3,9 +3,8 @@
 #include "typeconversion.h"
 #include <QApplication>
 
-UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info)
+UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info), m_fwBytes(info->bytes())
 {
-    m_fwBytes = info->bytes();
 }
 
 void UpdateFirmwareOperation::start()
@@ -71,7 +70,6 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
             qDebug() << "Reboot command successfully sent.";
 
             return true;
-            break;
         }
         default: {
             qDebug() << "Unexpected response during firmware update: ";

@@ -6,7 +6,7 @@
 class BipLiteFirmwareInfo : public AbstractFirmwareInfo
 {
 public:
-    BipLiteFirmwareInfo(const QByteArray &bytes);
+    explicit BipLiteFirmwareInfo(const QByteArray &bytes);
 
     virtual bool supportedOnDevice(const QString &device) const override;
 

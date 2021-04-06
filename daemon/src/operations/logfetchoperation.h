@@ -9,7 +9,7 @@
 class LogFetchOperation : public AbstractFetchOperation
 {
 public:
-    LogFetchOperation(QBLEService *service);
+    explicit LogFetchOperation(QBLEService *service);
 
     void start() override;
     void handleData(const QByteArray &data) override;

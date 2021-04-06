@@ -490,8 +490,6 @@ void DeviceInterface::handleButtonPressed(int presses)
 
         if (action == "action-music-next"){
             m_musicController.next();
-        } else if (action == "action-music-next"){
-            m_musicController.next();
         } else if (action == "action-music-prev"){
             m_musicController.previous();
         } else if (action == "action-vol-up"){

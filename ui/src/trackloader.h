@@ -121,9 +121,9 @@ public:
     Q_INVOKABLE int fitZoomLevel(int width, int height);
     Q_INVOKABLE QGeoCoordinate center();
 
-    Q_INVOKABLE void vReadFile(QString sFilename);
-    Q_INVOKABLE void vSetNewProperties(QString sOldName, QString sOldDesc, QString sOldWorkout, QString sName, QString sDesc, QString sWorkout);
-    Q_INVOKABLE void vWriteFile(QString sFilename);
+    Q_INVOKABLE void vReadFile(const QString &sFilename);
+    Q_INVOKABLE void vSetNewProperties(const QString &sOldName, const QString &sOldDesc, const QString &sOldWorkout, const QString &sName, const QString &sDesc, const QString &sWorkout);
+    Q_INVOKABLE void vWriteFile(const QString &sFilename);
 
     Q_INVOKABLE bool hasHeartRateData() const;
     Q_INVOKABLE bool paceRelevantForWorkoutType() const;
@@ -157,27 +157,27 @@ private:
     QList<TrackPoint> m_points;
     QList<int> m_pause_positions;
     QList<QString> sFileStringArray;
-    bool m_loaded;
-    bool m_error;
+    bool m_loaded = false;
+    bool m_error = false;
     QString m_filename;
     QString m_name;
     QString m_workout;
     QString m_description;
     QDateTime m_time;
-    uint m_duration;
-    uint m_pause_duration;
-    qreal m_distance;
-    qreal m_speed;
-    qreal m_maxSpeed;
-    qreal m_pace;
-    qreal m_heartRate;
-    qreal m_heartRatePoints;
-    uint m_heartRateMin;
-    uint m_heartRateMax;
+    uint m_duration = 0;
+    uint m_pause_duration = 0;
+    qreal m_distance = 0;
+    qreal m_speed = 0;
+    qreal m_maxSpeed = 0;
+    qreal m_pace = 0;
+    qreal m_heartRate = 0;
+    qreal m_heartRatePoints= 0;
+    uint m_heartRateMin = HEARTRATE_MIN_INIT;
+    uint m_heartRateMax = HEARTRATE_MAX_INIT;
     QString m_sTkey; //Sports-Tracker.com workout key
     QGeoCoordinate m_center;
-    qreal m_elevationUp;
-    qreal m_elevationDown;
+    qreal m_elevationUp = 0;
+    qreal m_elevationDown = 0;
     QList<qreal> m_distancearray;
     QList<qreal> m_durationarray;
 };

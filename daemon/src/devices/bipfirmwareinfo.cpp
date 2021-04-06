@@ -22,6 +22,7 @@ void BipFirmwareInfo::determineFirmwareType() {
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(RES_HEADER)) || m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(NEWRES_HEADER))) {
         if (m_bytes.length() > 700000) { // dont know how to distinguish from Cor .res
             m_type = Invalid;
+            return;
         }
         m_type = Res;
     }

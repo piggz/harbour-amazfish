@@ -6,7 +6,7 @@
 class GtsFirmwareInfo : public AbstractFirmwareInfo
 {
 public:
-    GtsFirmwareInfo(const QByteArray &bytes);
+    explicit GtsFirmwareInfo(const QByteArray &bytes);
 
     virtual bool supportedOnDevice(const QString &device) const override;
 

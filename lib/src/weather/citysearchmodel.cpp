@@ -181,9 +181,9 @@ CitySearchModel::Status CitySearchModel::handleFinished(const QByteArray &reply)
 
         qDebug() << url;
         
-        QNetworkReply *reply = network->get(QNetworkRequest(url));
-        reply->setProperty("id", city->id);
-        connect(reply, SIGNAL(finished()), this, SLOT(slotStateResolverFinished()));
+        QNetworkReply *rep = network->get(QNetworkRequest(url));
+        rep->setProperty("id", city->id);
+        connect(rep, SIGNAL(finished()), this, SLOT(slotStateResolverFinished()));
 
         // Add to the resolving
         m_resolvingCities.append(city);

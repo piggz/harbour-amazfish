@@ -29,23 +29,6 @@
 TrackLoader::TrackLoader(QObject *parent) :
     QObject(parent)
 {
-    m_loaded = false;
-    m_error = false;
-    m_name = "";
-    m_workout = "";
-    m_speed = 0;
-    m_maxSpeed = 0;
-    m_pace = 0;
-    m_duration = 0;
-    m_pause_duration = 0;
-    m_distance = 0;
-    m_heartRate = 0;
-    m_heartRatePoints = 0;
-    m_heartRateMin = HEARTRATE_MIN_INIT;
-    m_heartRateMax = HEARTRATE_MAX_INIT;
-    m_sTkey = "";
-    m_elevationUp = 0;
-    m_elevationDown = 0;
 }
 
 QString TrackLoader::readGpx(){
@@ -64,7 +47,7 @@ QString TrackLoader::sTworkoutKey(){
     return m_sTkey;
 }
 
-void TrackLoader::vReadFile(QString sFilename)
+void TrackLoader::vReadFile(const QString &sFilename)
 {
     this->sFileStringArray.clear();
 
@@ -84,7 +67,7 @@ void TrackLoader::vReadFile(QString sFilename)
     f.close();
 }
 
-void TrackLoader::vSetNewProperties(QString sOldName, QString sOldDesc, QString sOldWorkout, QString sName, QString sDesc, QString sWorkout)
+void TrackLoader::vSetNewProperties(const QString &sOldName, const QString &sOldDesc, const QString &sOldWorkout, const QString &sName, const QString &sDesc, const QString &sWorkout)
 {
     //Search for a line
     bool bNameFound = false;
@@ -138,7 +121,7 @@ void TrackLoader::vSetNewProperties(QString sOldName, QString sOldDesc, QString 
     }
 }
 
-void TrackLoader::vWriteFile(QString sFilename)
+void TrackLoader::vWriteFile(const QString &sFilename)
 {
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/Laufhelden";
     QString fullFilename = dirName + "/" + sFilename;

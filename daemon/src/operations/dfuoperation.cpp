@@ -3,9 +3,8 @@
 #include "typeconversion.h"
 #include <QApplication>
 
-DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info)
+DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info), m_fwBytes(info->bytes())
 {
-    m_fwBytes = info->bytes();
 }
 
 DfuOperation::~DfuOperation()
@@ -89,7 +88,6 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
             m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, UCHAR_TO_BYTEARRAY(DfuService::COMMAND_ACTIVATE_IMAGE_AND_RESET));
             //Finish operation
             return true;
-            break;
         }
         default: {
             qDebug() << "Unexpected response during firmware update: ";

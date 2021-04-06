@@ -7,7 +7,7 @@
 class BipActivityDetailParser
 {
 public:
-    BipActivityDetailParser(ActivitySummary summary);
+    explicit BipActivityDetailParser(const ActivitySummary &summary);
 
     void parse(const QByteArray &bytes);
     QString toText();

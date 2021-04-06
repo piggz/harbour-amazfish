@@ -28,7 +28,7 @@ private:
     int m_notificationPackets = 10;
     bool m_transferError = false;
     QThread m_workerThread;
-    DfuWorker *m_worker;
+    DfuWorker *m_worker = nullptr;
 
     Q_SIGNAL void sendFirmware(DfuService* service, const QByteArray &data, int notificationPackets);
     Q_SLOT void packetNotification();

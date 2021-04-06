@@ -89,7 +89,7 @@ QVariant DataSource::data(Type type, const QDate &day)
                             temp_sleep = 0;
                         }
 
-                        if (in_sleep && ((activity == 112 && activity != 115) || activity == 121 || activity == 122)) {
+                        if (in_sleep && (activity == 112 || activity == 121 || activity == 122)) {
                             //qDebug() << "Data:" << t << k << i;
 
                             if (intensity > 0) { //Not deep so just add to light

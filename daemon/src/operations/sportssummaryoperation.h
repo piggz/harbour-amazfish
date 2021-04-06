@@ -29,7 +29,7 @@ private:
     ActivitySummary m_summary;
 
     void parseSummary();
-    bool finished(bool success);
+    bool finished(bool success) override;
     QString activityName();
 
     KDbConnection *m_conn;

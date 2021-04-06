@@ -9,10 +9,9 @@
 #include "bipactivitydetailparser.h"
 #include "amazfishconfig.h"
 
-SportsDetailOperation::SportsDetailOperation(QBLEService *service, KDbConnection *conn, const ActivitySummary &summary) : AbstractFetchOperation(service)
+SportsDetailOperation::SportsDetailOperation(QBLEService *service, KDbConnection *conn, const ActivitySummary &summary) : AbstractFetchOperation(service), m_summary(summary)
 {
     m_conn = conn;
-    m_summary = summary;
     setLastSyncKey("device/lastsportsyncmillis");
 }
 

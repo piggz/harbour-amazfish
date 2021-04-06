@@ -60,7 +60,6 @@ void AmazfishConfig::setValue(const QString &key, const QVariant &value, signal_
 #ifdef MER_EDITION_SAILFISH
         m_group->setValue(key, value);
 #else
-        QSettings settings;
         settings.setValue(key, value);
 #endif
         emit std::bind(signal, this)();

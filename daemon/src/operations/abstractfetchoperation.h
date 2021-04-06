@@ -9,7 +9,7 @@
 class AbstractFetchOperation : public AbstractOperation
 {
 public:
-    AbstractFetchOperation(QBLEService *service);
+    explicit AbstractFetchOperation(QBLEService *service);
 
     bool handleMetaData(const QByteArray &meta) override;
 
