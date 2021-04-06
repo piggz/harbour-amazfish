@@ -21,7 +21,7 @@ public:
     static const char* UUID_CHARACTERISTIC_ALERT_NOTIFICATION_CONTROL;
     static const char* UUID_CHARACTERISTIC_ALERT_NOTIFICATION_EVENT;
 
-    Q_ENUMS(AlertCategory)
+
     enum AlertCategory {
         Simple = 0,
         Email = 1,
@@ -39,8 +39,8 @@ public:
         Custom = -1,
         CustomHuami = 250
     };
+    Q_ENUM(AlertCategory)
 
-    Q_ENUMS(HuamiIcon)
     enum HuamiIcon {
         WECHAT = 0,
         PENGUIN_1 = 1,
@@ -80,13 +80,14 @@ public:
         WEATHER = 35,
         HR_WARNING_36 = 36
     };
+    Q_ENUM(HuamiIcon)
 
-    Q_ENUMS(AlertEvent)
     enum AlertEvent {
         CALL_REJECT = 0,
         CALL_ANSWER = 1,
         CALL_IGNORE = 2
     };
+    Q_ENUM(AlertEvent)
 
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message);
     Q_INVOKABLE void incomingCall(const QString &caller);

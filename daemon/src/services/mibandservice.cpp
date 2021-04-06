@@ -526,7 +526,7 @@ void MiBandService::setDisplayItemsOld(QMap<QString, uint8_t> keyPosMap)
     uint16_t enabled_mask = 0x01; //clock
 
     // it seem that we first have to put all ENABLED items into the array, oder does matter
-    foreach (QString key, items) {
+    foreach (const QString &key, items) {
         uint8_t id = keyPosMap[key];
         if (id != 0) {
             qDebug() << "enabling:" << key;

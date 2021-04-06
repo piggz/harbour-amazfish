@@ -9,7 +9,7 @@
 class AbstractFirmwareInfo : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(Type)
+
 public:
     AbstractFirmwareInfo();
     enum Type {
@@ -19,12 +19,14 @@ public:
         Font_Latin = 11,
         GPS = 3,
         GPS_CEP = 4,
+        GPS_BATCH = -4,
         GPS_ALMANAC = 5,
         Res = 2,
         Res_Compressed = 130,
         Watchface = 8,
         Bootloader = 100
     };
+    Q_ENUM(Type)
 
     QString version() const;
     Type type() const;

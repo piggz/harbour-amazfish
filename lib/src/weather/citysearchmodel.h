@@ -42,7 +42,7 @@ class CityItem;
 class CitySearchModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_ENUMS(Status)
+
 public:
     enum CitySearchModelRole {
         IdRole,
@@ -58,6 +58,8 @@ public:
         Loading,
         Error
     };
+    Q_ENUM(Status)
+
     Q_PROPERTY(Status status READ status WRITE setStatus NOTIFY statusChanged)
     explicit CitySearchModel(QObject *parent = 0);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

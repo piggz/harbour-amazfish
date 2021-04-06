@@ -24,7 +24,7 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
         qDebug() << "Notifications should be 3, 6 or 11 bytes long.";
         return true;
     }
-    bool success = ((value[2] & 0x0f) == BipFirmwareService::SUCCESS) || ((value[1] == REPLY_UPDATE_PROGRESS) && value.length() == 6); // ugly
+    bool success = (value[2] == BipFirmwareService::SUCCESS) || ((value[1] == REPLY_UPDATE_PROGRESS) && value.length() == 6); // ugly
 
     if (value[0] == BipFirmwareService::RESPONSE && success) {
         switch (value[1]) {
@@ -84,7 +84,12 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
     }
 
     qDebug() << "Unexpected notification during firmware update: ";
-    m_service->message(QObject::tr("Update operation failed, unexpected metadata"));
+
+    if (value[2] == 0x51) {
+        m_service->message(QObject::tr("Update operation failed, filetype not supported"));
+    } else {
+        m_service->message(QObject::tr("Update operation failed, unexpected metadata"));
+    }
 
     return true;
 }

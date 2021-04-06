@@ -173,7 +173,7 @@ bool ActivitySummary::saveToDatabase(KDbConnection *conn)
     qDebug() << "Record Id is" << id();
 
     //Save meta data
-    for(auto m : m_metaData) {
+    foreach(const auto &m, m_metaData) {
         KDbFieldList metaFields;
         auto metaData = conn->tableSchema("sports_meta");
 

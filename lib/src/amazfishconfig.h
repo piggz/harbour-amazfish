@@ -69,37 +69,37 @@ public:
         DeviceLanguageFrFr,
         DeviceLanguageTrTr,
     };
-    Q_ENUMS(DeviceLanguage)
+    Q_ENUM(DeviceLanguage)
 
     enum DeviceDateFormat {
         DeviceDateFormatTime,
         DeviceDateFormatDateTime,
     };
-    Q_ENUMS(DeviceDateFormat)
+    Q_ENUM(DeviceDateFormat)
 
     enum DeviceTimeFormat {
         DeviceTimeFormat24H,
         DeviceTimeFormat12H,
     };
-    Q_ENUMS(DeviceTimeFormat)
+    Q_ENUM(DeviceTimeFormat)
 
     enum DeviceDistanceUnit {
         DeviceDistanceUnitMetric,
         DeviceDistanceUnitImperial,
     };
-    Q_ENUMS(DeviceDistanceUnit)
+    Q_ENUM(DeviceDistanceUnit)
 
     enum ProfileGender {
         ProfileGenderMale,
         ProfileGenderFemale,
     };
-    Q_ENUMS(ProfileGender)
+    Q_ENUM(ProfileGender)
 
     enum WearLocation {
         WearLocationLeftWrist,
         WearLocationRightWrist,
     };
-    Q_ENUMS(WearLocation)
+    Q_ENUM(WearLocation)
 
     static AmazfishConfig *instance();
     static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)

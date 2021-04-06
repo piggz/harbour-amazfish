@@ -3,6 +3,7 @@ TARGET = amazfish
 TEMPLATE = lib
 
 CONFIG += staticlib
+CONFIG += link_pkgconfig
 
 QT += core network
 

@@ -128,7 +128,7 @@ void DaemonInterface::pair(const QString &name, QString address)
     auto watcher = new QDBusPendingCallWatcher(iface->asyncCall(QStringLiteral("pair"), name, address));
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, name, address]() {
         m_pairing = false;
-        pairingChanged();
+        emit pairingChanged();
         emit paired(name, address, watcher->error().name());
         watcher->deleteLater();
     });

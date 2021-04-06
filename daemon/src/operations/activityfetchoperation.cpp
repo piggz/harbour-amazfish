@@ -68,7 +68,7 @@ bool ActivityFetchOperation::saveSamples()
         return true;
     }
 
-    if (!m_conn && !m_conn->isDatabaseUsed()) {
+    if (!m_conn || !(m_conn->isDatabaseUsed())) {
         qDebug() << "Database not connected";
         return false;
     }
@@ -95,11 +95,8 @@ bool ActivityFetchOperation::saveSamples()
     fields.addField(mibandActivity->field("raw_kind"));
     fields.addField(mibandActivity->field("heartrate"));
 
-    QDateTime saveTime;
-
     for (int i = 0; i < m_samples.count(); ++i) {
         QList<QVariant> values;
-
 
         values << m_sampleTime.toMSecsSinceEpoch() / 1000;
         values << m_sampleTime;

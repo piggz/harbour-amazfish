@@ -203,7 +203,7 @@ void CurrentWeather::request(const QString &connection, const QVariantMap &argum
 
     QUrl url (QString(QLatin1String("http://api.openweathermap.org/data/2.5/%1")).arg(connection));
     QUrlQuery query;
-    foreach (QString key, arguments.keys()) {
+    foreach (const QString &key, arguments.keys()) {
         query.addQueryItem(key, arguments.value(key).toString());
     }
 

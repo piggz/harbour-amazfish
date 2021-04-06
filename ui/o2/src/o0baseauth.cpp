@@ -129,7 +129,7 @@ void O0BaseAuth::setExtraTokens(QVariantMap extraTokens) {
 QByteArray O0BaseAuth::createQueryParameters(const QList<O0RequestParameter> &parameters) {
     QByteArray ret;
     bool first = true;
-    foreach (O0RequestParameter h, parameters) {
+    foreach (const O0RequestParameter &h, parameters) {
         if (first) {
             first = false;
         } else {

@@ -100,7 +100,7 @@ public:
 
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
-    Q_INVOKABLE bool supportsFeature(Feature f);
+    Q_INVOKABLE bool supportsFeature(DaemonInterface::Feature f);
     Q_INVOKABLE int supportedFeatures();
 
     Q_INVOKABLE DataSource *dataSource();
@@ -112,15 +112,15 @@ public:
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void downloadActivityData();
     Q_INVOKABLE void refreshInformation();
-    Q_INVOKABLE QString information(Info i);
+    Q_INVOKABLE QString information(DaemonInterface::Info i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
-    Q_INVOKABLE void applyDeviceSetting(Settings s);
+    Q_INVOKABLE void applyDeviceSetting(DaemonInterface::Settings s);
     Q_INVOKABLE void requestManualHeartrate();
     Q_INVOKABLE void triggerSendWeather();
     Q_INVOKABLE void updateCalendar();
     Q_INVOKABLE void reloadCities();
-    Q_INVOKABLE void enableFeature(Feature feature);
+    Q_INVOKABLE void enableFeature(DaemonInterface::Feature feature);
     Q_INVOKABLE QStringList supportedDisplayItems();
 
 public slots:

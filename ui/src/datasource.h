@@ -9,7 +9,7 @@
 class DataSource: public QObject
 {
     Q_OBJECT
-    Q_ENUMS(Type)
+
 public:
     enum Type {
         Heartrate = 1,
@@ -19,10 +19,12 @@ public:
         StepSummary = 5,
         SleepSummary = 6
     };
+    Q_ENUM(Type)
+
     DataSource();
     void setConnection(KDbConnection *conn);
 
-    Q_INVOKABLE QVariant data(Type type, const QDate  &day);
+    Q_INVOKABLE QVariant data(DataSource::Type type, const QDate  &day);
 
 private:
     KDbConnection *m_conn = nullptr;

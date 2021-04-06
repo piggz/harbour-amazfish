@@ -123,7 +123,7 @@ void CityManager::loadCities()
     file.close();
 
     QJsonArray jsonArray = jsonDocument.array();
-    foreach (QJsonValue value, jsonArray) {
+    foreach (const QJsonValue &value, jsonArray) {
         QJsonObject jsonCity = value.toObject();
         City *city = City::create(jsonCity.value(IDENTIFIER).toString(),
                                   jsonCity.value(NAME).toString(),
@@ -134,7 +134,7 @@ void CityManager::loadCities()
                                   jsonCity.value(LATITUDE).toDouble(), this);
         QJsonObject cityProperties = jsonCity.value(PROPERTIES).toObject();
         QVariantMap properties;
-        foreach (QString key, cityProperties.keys()) {
+        foreach (const QString &key, cityProperties.keys()) {
             properties.insert(key, cityProperties.value(key).toVariant());
         }
         city->setProperties(properties);
@@ -196,7 +196,7 @@ void CityManager::save()
 
         if (!cityEntry->properties().isEmpty()) {
             QJsonObject jsonCityProperties;
-            foreach (QString key, cityEntry->properties().keys()) {
+            foreach (const QString &key, cityEntry->properties().keys()) {
                 jsonCityProperties.insert(key,
                                           QJsonValue::fromVariant(cityEntry->properties().value(key)));
             }

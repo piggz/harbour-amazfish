@@ -157,7 +157,7 @@ CitySearchModel::Status CitySearchModel::handleFinished(const QByteArray &reply)
     m_resolvingCities.clear();
     m_resolvingCitiesMap.clear();
 
-    foreach (QJsonValue value, list) {
+    foreach (const QJsonValue &value, list) {
         QJsonObject cityJson = value.toObject();
         QJsonObject coordinatesJson = cityJson.value(QLatin1String("coord")).toObject();
         CityItem *city = new CityItem;
@@ -271,7 +271,7 @@ void CitySearchModel::request(const QString &connection, const QVariantMap &argu
 
     QUrl url (QString(QLatin1String("http://api.openweathermap.org/data/2.5/%1")).arg(connection));
     QUrlQuery query;
-    foreach (QString key, arguments.keys()) {
+    foreach (const QString &key, arguments.keys()) {
         query.addQueryItem(key, arguments.value(key).toString());
     }
 
