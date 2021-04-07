@@ -92,7 +92,7 @@ private:
     
     
     //static QString unitString(Unit unit);
-    Status m_status;
+    Status m_status = Idle;
     QString m_language;
     //Unit m_unit;
 private slots:

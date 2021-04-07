@@ -99,14 +99,14 @@ public:
 
 public Q_SLOTS:
     /// Authenticate.
-    Q_INVOKABLE virtual void link();
+    Q_INVOKABLE void link() override;
 
     /// De-authenticate.
-    Q_INVOKABLE virtual void unlink();
+    Q_INVOKABLE void unlink() override;
 
     /// Refresh token.
-    Q_INVOKABLE virtual void refresh();
-    Q_INVOKABLE virtual bool isExpired();
+    Q_INVOKABLE void refresh() override;
+    Q_INVOKABLE bool isExpired() override;
 
     /// Handle situation where reply server has opted to close its connection
     void serverHasClosed(bool paramsfound = false);

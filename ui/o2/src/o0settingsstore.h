@@ -25,10 +25,10 @@ public:
     void setGroupKey(const QString &groupKey);
 
     /// Get a string value for a key
-    QString value(const QString &key, const QString &defaultValue = QString());
+    QString value(const QString &key, const QString &defaultValue = QString()) override;
 
     /// Set a string value for a key
-    void setValue(const QString &key, const QString &value);
+    void setValue(const QString &key, const QString &value) override;
 
 Q_SIGNALS:
     // Property change signals

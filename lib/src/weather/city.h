@@ -65,8 +65,8 @@ private:
     QString m_state;
     QString m_country;
     QString m_countryCode;
-    float m_longitude;
-    float m_latitude;
+    float m_longitude = 0;
+    float m_latitude = 0;
     QVariantMap m_properties;
 };
 
