@@ -12,9 +12,8 @@ PagePL {
     Column {
         id: column
         spacing: styler.themePaddingLarge
+        width: parent.width
         anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.margins: styler.themePaddingMedium
 
         AdapterModel {

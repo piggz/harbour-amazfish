@@ -59,8 +59,6 @@ PagePL {
         id: column
         spacing: styler.themePaddingLarge
         anchors.top: parent.top
-        //anchors.left: parent.left
-        //anchors.right: parent.right
         width: parent.width
         anchors.margins: styler.themePaddingMedium
 

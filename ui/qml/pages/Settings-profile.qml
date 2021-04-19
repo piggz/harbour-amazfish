@@ -11,9 +11,8 @@ PagePL {
 
     Column {
         id: column
+        width: parent.width
         anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.margins: styler.themePaddingMedium
         spacing: styler.themePaddingLarge
 

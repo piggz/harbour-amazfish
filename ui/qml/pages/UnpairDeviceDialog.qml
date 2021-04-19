@@ -6,9 +6,8 @@ import "../components/platform"
 DialogPL {
 
     Column {
+        width: parent.width
         anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.margins: styler.themePaddingMedium
 
         LabelPL {
