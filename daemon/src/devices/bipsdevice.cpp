@@ -214,14 +214,16 @@ QStringList BipSDevice::supportedDisplayItems() const
     items << "status";
     items << "pai";
     items << "hr";
-    //items << "workout";
+    items << "workout";
+    items << "alipay";
+    items << "nfc";
     items << "activity";
     items << "weather";
     items << "music";
-    //items << "notifications";
+    items << "compass";
     items << "alarm";
-    //items << "eventreminder";
-    //items << "more";
+    items << "worldclock";
+    items << "timer_stopwatch";
     items << "settings";
     items << "compass";
 

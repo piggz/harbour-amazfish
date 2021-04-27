@@ -67,17 +67,26 @@ MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService
     displayItmesIdMap["more"] = 0x07;
     displayItmesIdMap["dnd"] = 0x08;
     displayItmesIdMap["alarm"] = 0x09;
+    displayItmesIdMap["takephoto"] = 0x0a;
     displayItmesIdMap["music"] = 0x0b;
+    displayItmesIdMap["stopwatch"] = 0x0c;
     displayItmesIdMap["timer"] = 0x0d;
+    displayItmesIdMap["findphone"] = 0x0e;
     displayItmesIdMap["mutephone"] = 0x0f;
+    displayItmesIdMap["nfc"] = 0x10;
+    displayItmesIdMap["alipay"] = 0x11;
+    displayItmesIdMap["watchface"] = 0x12;
     displayItmesIdMap["settings"] = 0x13;
     displayItmesIdMap["activity"] = 0x14;
-    displayItmesIdMap["status"] = 0x01;
     displayItmesIdMap["eventreminder"] = 0x15;
+    displayItmesIdMap["compass"] = 0x16;
     displayItmesIdMap["pai"] = 0x19;
     displayItmesIdMap["worldclock"] = 0x1a;
+    displayItmesIdMap["timer_stopwatch"] = 0x1b;
     displayItmesIdMap["stress"] = 0x1c;
     displayItmesIdMap["period"] = 0x1d;
+    displayItmesIdMap["goal"] = 0x21;
+    displayItmesIdMap["sleep"] = 0x23;
     displayItmesIdMap["spo2"] = 0x24;
     displayItmesIdMap["alexa"] = 0x39;
 }
