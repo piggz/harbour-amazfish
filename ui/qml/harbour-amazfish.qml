@@ -176,13 +176,13 @@ ApplicationWindowPL
             console.log("Information changed", infoKey, infoValue);
 
             switch (infoKey) {
-            case DaemonInterface.INFO_BATTERY:
+            case Amazfish.INFO_BATTERY:
                 _InfoBatteryPercent = parseInt(infoValue, 10) || 0;
                 break;
-            case DaemonInterface.INFO_HEARTRATE:
+            case Amazfish.INFO_HEARTRATE:
                 _InfoHeartrate = parseInt(infoValue, 10) || 0;
                 break;
-            case DaemonInterface.INFO_STEPS:
+            case Amazfish.INFO_STEPS:
                 _InfoSteps = parseInt(infoValue, 10) || 0;
                 break;
             }

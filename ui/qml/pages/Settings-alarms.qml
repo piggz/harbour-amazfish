@@ -67,7 +67,7 @@ PagePL {
             interval: 500
             running: false
             onTriggered: {
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_ALARMS);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_ALARMS);
             }
         }
     }

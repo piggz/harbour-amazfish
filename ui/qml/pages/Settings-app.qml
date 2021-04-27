@@ -31,13 +31,13 @@ PagePL {
         }
 
         SectionHeaderPL {
-            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
             text: qsTr("Notifications")
         }
 
         TextSwitchPL {
             id: chkNotifyConnect
-            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
 
             width: parent.width
             text: qsTr("Notify on connect")
@@ -45,7 +45,7 @@ PagePL {
 
         TextSwitchPL {
             id: chkNotifyLowBattery
-            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
 
             width: parent.width
             text: qsTr("Low battery notification")
@@ -53,7 +53,7 @@ PagePL {
 
         TextSwitchPL {
             id: chkNavigationNotification
-            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
 
             width: parent.width
             text: qsTr("Navigation notifications")
@@ -71,7 +71,7 @@ PagePL {
 
         SliderPL {
             id: sldWeatherRefresh
-            visible: supportsFeature(DaemonInterface.FEATURE_WEATHER)
+            visible: supportsFeature(Amazfish.FEATURE_WEATHER)
 
             width: parent.width
             minimumValue: 15
@@ -87,7 +87,7 @@ PagePL {
             maximumValue: 240
             stepSize: 15
             label: qsTr("Refresh calendar every (") + value + qsTr(") minutes")
-            visible: supportsFeature(DaemonInterface.FEATURE_EVENT_REMINDER)
+            visible: supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
         }
 
         SectionHeaderPL {
@@ -141,7 +141,7 @@ PagePL {
         ButtonPL {
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("Button Actions")
-            visible: supportsFeature(DaemonInterface.FEATURE_BUTTON_ACTION)
+            visible: supportsFeature(Amazfish.FEATURE_BUTTON_ACTION)
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("Settings-button-action.qml"))
             }

@@ -878,19 +878,6 @@
         <translation>Sueño</translation>
     </message>
     <message>
-        <source>Note: last nights sleep is updated at mid-day</source>
-        <translation>Nota: el sueño de la última noche se actualiza a medio día</translation>
-    </message>
-    <message>
-        <source>h:mm</source>
-        <extracomment>Format of sleep hours</extracomment>
-        <translation>h:mm</translation>
-    </message>
-    <message>
-        <source>Deep %1</source>
-        <translation>Profundo %1</translation>
-    </message>
-    <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
         <translation>dd/MM</translation>
@@ -898,6 +885,14 @@
     <message>
         <source>Hours</source>
         <translation>Horas</translation>
+    </message>
+    <message>
+        <source>%1 hrs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1 hrs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

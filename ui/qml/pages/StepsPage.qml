@@ -71,7 +71,7 @@ PagePL {
 
     Component.onCompleted: {
         updateGraphs();
-        _InfoSteps = parseInt(DaemonInterfaceInstance.information(DaemonInterface.INFO_STEPS), 10) || 0;
+        _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
     }
 
     onPageStatusActive: {

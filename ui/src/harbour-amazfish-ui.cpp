@@ -16,6 +16,7 @@
 #include "sportsdatamodel.h"
 #include "sportsmetamodel.h"
 #include "daemoninterface.h"
+#include "amazfish.h"
 
 #include "weather/citysearchmodel.h"
 #include "weather/citymanager.h"
@@ -72,7 +73,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<O2>("com.pipacs.o2", 1, 0, "O2");
 
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");
-    qmlRegisterUncreatableType<DaemonInterface>("uk.co.piggz.amazfish", 1, 0, "DaemonInterface", "DaemonInterface type available only for enum datatypes");
+    qmlRegisterUncreatableType<Amazfish>("uk.co.piggz.amazfish", 1, 0, "Amazfish", "Amazfish type available only for enum datatypes");
 
     qmlRegisterSingletonType<AmazfishConfig>("uk.co.piggz.amazfish", 1, 0, "AmazfishConfig", AmazfishConfig::qmlInstance);
 

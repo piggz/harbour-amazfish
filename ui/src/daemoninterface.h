@@ -12,6 +12,7 @@
 #include <KDb3/KDbConnectionData>
 
 #include "datasource.h"
+#include "amazfish.h"
 
 #define SERVICE_NAME "uk.co.piggz.amazfish"
 
@@ -29,78 +30,9 @@ public:
     explicit DaemonInterface(QObject *parent = nullptr);
     ~DaemonInterface();
 
-    enum ActivityType {
-        NotMeasured = -1,
-        Unknown = 0x00000000,
-        Activity = 0x00000001,
-        LightSleep = 0x00000002,
-        DeepSleep = 0x00000004,
-        NotWorn = 0x00000008,
-        Running = 0x00000010,
-        Walking = 0x00000020,
-        Swimming = 0x00000040,
-        Cycling = 0x00000080,
-        Treadmill = 0x00000100,
-        Exercise = 0x00000200,
-        OpenSwimming = 0x00000400,
-        IndoorCycling = 0x00000800,
-        EllipticalTrainer = 0x00001000,
-        JumpRope = 0x00002000,
-        Yoga = 0x00004000
-    };
-    Q_ENUM(ActivityType)
-
-    enum Feature{
-        FEATURE_HRM = 1,
-        FEATURE_WEATHER = 2,
-        FEATURE_ACTIVITY = 4,
-        FEATURE_STEPS = 8,
-        FEATURE_ALARMS = 16,
-        FEATURE_ALERT = 32,
-        FEATURE_EVENT_REMINDER = 64,
-        FEATURE_MUSIC_CONTROL = 128,
-        FEATURE_BUTTON_ACTION = 256
-    };
-    Q_ENUM(Feature)
-
-    enum Info {
-        INFO_SWVER = 1,
-        INFO_HWVER,
-        INFO_SERIAL,
-        INFO_SYSTEMID,
-        INFO_PNPID,
-        INFO_GPSVER,
-        INFO_BATTERY,
-        INFO_STEPS,
-        INFO_HEARTRATE,
-        INFO_MODEL,
-        INFO_FW_REVISION,
-        INFO_MANUFACTURER
-    };
-    Q_ENUM(Info)
-
-    enum Settings {
-        SETTING_USER_PROFILE,
-        SETTING_USER_GOAL,
-        SETTING_USER_ALERT_GOAL,
-        SETTING_USER_ALL_DAY_HRM,
-        SETTING_USER_HRM_SLEEP_DETECTION,
-        SETTING_USER_DISPLAY_ON_LIFT,
-        SETTING_ALARMS,
-        SETTING_DEVICE_DISPLAY_ITEMS,
-        SETTING_DEVICE_LANGUAGE,
-        SETTING_DEVICE_DATE,
-        SETTING_DEVICE_TIME,
-        SETTING_DEVICE_UNIT,
-        SETTING_DISCONNECT_NOTIFICATION
-    };
-    Q_ENUM(Settings)
-
-    static QString activityToString(ActivityType type);
-
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
-    Q_INVOKABLE bool supportsFeature(DaemonInterface::Feature f);
+    Q_INVOKABLE bool supportsFeature(Amazfish::Feature f);
     Q_INVOKABLE int supportedFeatures();
 
     Q_INVOKABLE DataSource *dataSource();
@@ -112,15 +44,15 @@ public:
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void downloadActivityData();
     Q_INVOKABLE void refreshInformation();
-    Q_INVOKABLE QString information(DaemonInterface::Info i);
+    Q_INVOKABLE QString information(Amazfish::Info i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
-    Q_INVOKABLE void applyDeviceSetting(DaemonInterface::Settings s);
+    Q_INVOKABLE void applyDeviceSetting(Amazfish::Settings s);
     Q_INVOKABLE void requestManualHeartrate();
     Q_INVOKABLE void triggerSendWeather();
     Q_INVOKABLE void updateCalendar();
     Q_INVOKABLE void reloadCities();
-    Q_INVOKABLE void enableFeature(DaemonInterface::Feature feature);
+    Q_INVOKABLE void enableFeature(Amazfish::Feature feature);
     Q_INVOKABLE QStringList supportedDisplayItems();
 
 public slots:

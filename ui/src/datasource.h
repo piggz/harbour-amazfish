@@ -5,6 +5,7 @@
 #include <QVariant>
 
 #include <KDb3/KDbConnection>
+#include "amazfish.h"
 
 class DataSource: public QObject
 {
@@ -28,6 +29,15 @@ public:
 
 private:
     KDbConnection *m_conn = nullptr;
+    
+    struct SleepSession {
+        QDateTime sleepStart;
+        QDateTime sleepEnd;
+        long lightSleepDuration;
+        long deepSleepDuration;
+    };
+    QList<SleepSession> calculateSleep(const QDate &day);
+    bool isSleep(int kind);
 };
 
 #endif // DATASOURCE_H

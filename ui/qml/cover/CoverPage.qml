@@ -66,7 +66,7 @@ CoverBackground {
             spacing: Theme.paddingLarge
             width: childrenRect.width
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
+            visible: supportsFeature(Amazfish.FEATURE_STEPS)
 
             Image {
                 id: imgSteps
@@ -90,7 +90,7 @@ CoverBackground {
             spacing: Theme.paddingLarge
             width: childrenRect.width
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: supportsFeature(DaemonInterface.FEATURE_HRM)
+            visible: supportsFeature(Amazfish.FEATURE_HRM)
 
             Image {
                 id: imgHeartrate
@@ -117,7 +117,7 @@ CoverBackground {
             iconSource: "image://theme/icon-m-refresh";
 
             onTriggered: {
-                if (supportsFeature(DaemonInterface.FEATURE_HRM)) {
+                if (supportsFeature(Amazfish.FEATURE_HRM)) {
                     DaemonInterfaceInstance.requestManualHeartrate();
                 }
             }
@@ -140,13 +140,13 @@ CoverBackground {
         }
         onInformationChanged: {
             switch (infoKey) {
-            case DaemonInterface.INFO_BATTERY:
+            case Amazfish.INFO_BATTERY:
                 lblBattery.text = infoValue
                 break;
-            case DaemonInterface.INFO_HEARTRATE:
+            case Amazfish.INFO_HEARTRATE:
                 lblHeartrate.text = infoValue
                 break;
-            case DaemonInterface.INFO_STEPS:
+            case Amazfish.INFO_STEPS:
                 stepCount = parseInt(infoValue, 10) || 0;
                 break
             }

@@ -115,11 +115,11 @@ PagePL {
             interval: 500
             running: false
             onTriggered: {
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_LANGUAGE);
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_DATE);
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_TIME);
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_UNIT);
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DISCONNECT_NOTIFICATION);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_LANGUAGE);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_DATE);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_TIME);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_UNIT);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DISCONNECT_NOTIFICATION);
             }
         }
     }

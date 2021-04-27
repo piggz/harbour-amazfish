@@ -10,12 +10,6 @@ PagePL {
 
     property var day: new Date()
 
-    function _formatHours(hours) {
-        var offset = new Date().getTimezoneOffset()
-        //: Format of sleep hours
-        return new Date((hours * 60 + offset) * 60000).toLocaleTimeString(Qt.locale(), qsTr("h:mm"))
-    }
-
     pageMenu: PageMenuPL {
         DownloadDataMenuItem{}
     }
@@ -32,7 +26,7 @@ PagePL {
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: _formatHours(graphSleepSummary.lastValue)
+            text: qsTr("%1 hrs").arg(parseFloat(Math.round(graphSleepSummary.lastY * 100) / 100).toFixed(2))
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -41,7 +35,7 @@ PagePL {
             font.pixelSize:styler.themeFontSizeExtraLarge
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: qsTr("Deep %1").arg(_formatHours(graphSleepSummary.lastZ))
+            text: qsTr("Deep %1 hrs").arg(parseFloat(Math.round(graphSleepSummary.lastZ * 100) / 100).toFixed(2))
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -79,16 +73,7 @@ PagePL {
                 updateGraph(day);
             }
         }
-
-        LabelPL {
-            id: lblUpdate
-            anchors.horizontalCenter: parent.horizontalCenter
-            verticalAlignment: Text.AlignVCenter
-            width: parent.width
-            text: qsTr("Note: last nights sleep is updated at mid-day")
-        }
     }
-
 
     function updateGraphs() {
         graphSleepSummary.updateGraph(day);

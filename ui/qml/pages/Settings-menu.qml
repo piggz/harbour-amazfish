@@ -44,10 +44,10 @@ PageListPL {
 
         function checkFeature() {
             if(name === qsTr("Alarms")) {
-                return supportsFeature(DaemonInterface.FEATURE_WEATHER)
+                return supportsFeature(Amazfish.FEATURE_WEATHER)
             }
             else if (name === qsTr("Weather")) {
-                return supportsFeature(DaemonInterface.FEATURE_ALARMS)
+                return supportsFeature(Amazfish.FEATURE_ALARMS)
             }
             else {
                 return true

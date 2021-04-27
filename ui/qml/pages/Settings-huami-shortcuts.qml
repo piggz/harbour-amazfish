@@ -68,7 +68,7 @@ PagePL {
             interval: 500
             running: false
             onTriggered: {
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_DEVICE_DISPLAY_ITEMS);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_DISPLAY_ITEMS);
             }
         }
     }

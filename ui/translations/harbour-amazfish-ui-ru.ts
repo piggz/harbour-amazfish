@@ -878,25 +878,20 @@
         <translation>Сон</translation>
     </message>
     <message>
-        <source>Note: last nights sleep is updated at mid-day</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>h:mm</source>
-        <extracomment>Format of sleep hours</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deep %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 hrs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1 hrs</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

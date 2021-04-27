@@ -152,12 +152,12 @@ PagePL {
             interval: 500
             running: false
             onTriggered: {
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_PROFILE);
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_GOAL);
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_ALERT_GOAL);
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_DISPLAY_ON_LIFT);
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_ALL_DAY_HRM);
-                DaemonInterfaceInstance.applyDeviceSetting(DaemonInterface.SETTING_USER_HRM_SLEEP_DETECTION)
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_USER_PROFILE);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_USER_GOAL);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_USER_ALERT_GOAL);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_USER_DISPLAY_ON_LIFT);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_USER_ALL_DAY_HRM);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_USER_HRM_SLEEP_DETECTION)
             }
         }
     }

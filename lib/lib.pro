@@ -27,13 +27,16 @@ flavor_silica {
 
 HEADERS = \
     src/amazfishconfig.h \
+    src/amazfish.h \
     src/weather/apikey.h \
     src/weather/city.h \
     src/weather/citymanager.h \
     src/weather/citysearchmodel.h \
     src/weather/currentweather.h
 
+
 SOURCES = \
+    src/amazfish.cpp \
     src/amazfishconfig.cpp \
     src/weather/city.cpp \
     src/weather/citymanager.cpp \

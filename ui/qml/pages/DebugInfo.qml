@@ -136,7 +136,7 @@ PagePL {
 
         ButtonPL {
             text: qsTr("Test Notification")
-            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
@@ -145,7 +145,7 @@ PagePL {
         }
         ButtonPL {
             text: qsTr("Test Email")
-            visible: supportsFeature(DaemonInterface.FEATURE_ALERT)
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
@@ -178,7 +178,7 @@ PagePL {
         }
         ButtonPL {
             text: qsTr("Send Weather")
-            visible: supportsFeature(DaemonInterface.FEATURE_WEATHER)
+            visible: supportsFeature(Amazfish.FEATURE_WEATHER)
 
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
@@ -188,7 +188,7 @@ PagePL {
         }
         ButtonPL {
             text: qsTr("Update Calendar")
-            visible: supportsFeature(DaemonInterface.FEATURE_EVENT_REMINDER)
+            visible: supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
@@ -201,36 +201,36 @@ PagePL {
 
         ButtonPL {
             text: qsTr("Music Control")
-            visible: supportsFeature(DaemonInterface.FEATURE_MUSIC_CONTROL)
+            visible: supportsFeature(Amazfish.FEATURE_MUSIC_CONTROL)
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                DaemonInterfaceInstance.enableFeature(DaemonInterface.FEATURE_MUSIC_CONTROL);
+                DaemonInterfaceInstance.enableFeature(Amazfish.FEATURE_MUSIC_CONTROL);
             }
         }
         Connections {
             target: DaemonInterfaceInstance
             onInformationChanged: {
                 switch (infoKey) {
-                    case DaemonInterface.INFO_SERIAL:
+                    case Amazfish.INFO_SERIAL:
                     lblSerial.text = qsTr("Serial No: ") + infoValue;
                     break;
-                    case DaemonInterface.INFO_HWVER:
+                    case Amazfish.INFO_HWVER:
                     lblHWRev.text = qsTr("Hardware Rev: ") + infoValue;
                     break;
-                    case DaemonInterface.INFO_SWVER:
+                    case Amazfish.INFO_SWVER:
                     lblSWRev.text = qsTr("Software Rev: ")+ infoValue;
                     break;
-                    case DaemonInterface.INFO_GPSVER:
+                    case Amazfish.INFO_GPSVER:
                     lblGPSVer.text = qsTr("GPS Ver: ") +infoValue;
                     break;
-                    case DaemonInterface.INFO_MODEL:
+                    case Amazfish.INFO_MODEL:
                     lblModel.text = qsTr("Model: ") +infoValue;
                     break;
-                    case DaemonInterface.INFO_MANUFACTURER:
+                    case Amazfish.INFO_MANUFACTURER:
                     lblManufacturer.text = qsTr("Manufacturer: ") +infoValue;
                     break;
-                    case DaemonInterface.INFO_FW_REVISION:
+                    case Amazfish.INFO_FW_REVISION:
                     lblFWRev.text = qsTr("Firmware Rev: ") +infoValue;
                     break;
                 }

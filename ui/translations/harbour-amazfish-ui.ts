@@ -125,7 +125,7 @@
 <context>
     <name>DaemonInterface</name>
     <message>
-        <location filename="../src/daemoninterface.cpp" line="121"/>
+        <location filename="../src/daemoninterface.cpp" line="65"/>
         <source>Unexpected error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1102,35 +1102,29 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="16"/>
-        <source>h:mm</source>
-        <extracomment>Format of sleep hours</extracomment>
+        <location filename="../qml/pages/SleepPage.qml" line="29"/>
+        <source>%1 hrs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="44"/>
-        <source>Deep %1</source>
+        <location filename="../qml/pages/SleepPage.qml" line="38"/>
+        <source>Deep %1 hrs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="64"/>
+        <location filename="../qml/pages/SleepPage.qml" line="58"/>
         <source>Sleep Summary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="68"/>
+        <location filename="../qml/pages/SleepPage.qml" line="62"/>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="69"/>
+        <location filename="../qml/pages/SleepPage.qml" line="63"/>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SleepPage.qml" line="88"/>
-        <source>Note: last nights sleep is updated at mid-day</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

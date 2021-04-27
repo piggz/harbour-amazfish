@@ -117,7 +117,7 @@ PagePL {
 
         SectionHeaderPL {
             text: qsTr("Steps")
-            visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
+            visible: supportsFeature(Amazfish.FEATURE_STEPS)
         }
 
         // steps
@@ -126,12 +126,12 @@ PagePL {
             iconName: styler.iconSteps
             height: styler.themeIconSizeMedium
             width: height
-            visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
+            visible: supportsFeature(Amazfish.FEATURE_STEPS)
         }
 
         PercentCircle {
             id: stpsCircle
-            visible: supportsFeature(DaemonInterface.FEATURE_STEPS)
+            visible: supportsFeature(Amazfish.FEATURE_STEPS)
             anchors.horizontalCenter: parent.horizontalCenter
             size: parent.width - styler.themeHorizontalPageMargin * 4
             percent: _InfoSteps ? _InfoSteps / AmazfishConfig.profileFitnessGoal : 0.06
@@ -168,14 +168,14 @@ PagePL {
 
         SectionHeaderPL {
             text: qsTr("Heartrate")
-            visible: supportsFeature(DaemonInterface.FEATURE_HRM)
+            visible: supportsFeature(Amazfish.FEATURE_HRM)
         }
 
         //Heartrate
         RowLayout {
             spacing: styler.themePaddingLarge
             width: parent.width
-            visible: supportsFeature(DaemonInterface.FEATURE_HRM)
+            visible: supportsFeature(Amazfish.FEATURE_HRM)
 
             IconPL {
                 id: imgHeartrate

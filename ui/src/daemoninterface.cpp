@@ -25,62 +25,6 @@ DaemonInterface::~DaemonInterface()
     iface->deleteLater();
 }
 
-QString DaemonInterface::activityToString(ActivityType type)
-{
-    if (type == NotMeasured) {
-        return "NotMeasured";
-    }
-    if (type == Unknown) {
-        return "Unknown";
-    }
-    if (type == Activity) {
-        return "Activity";
-    }
-    if (type == LightSleep) {
-        return "LightSleep";
-    }
-    if (type == DeepSleep) {
-        return "DeepSleep";
-    }
-    if (type == NotWorn) {
-        return "NotWorn";
-    }
-    if (type == Running) {
-        return "Running";
-    }
-    if (type == Walking) {
-        return "Walking";
-    }
-    if (type == Swimming) {
-        return "Swimming";
-    }
-    if (type == Cycling) {
-        return "Cycling";
-    }
-    if (type == Treadmill) {
-        return "Treadmill";
-    }
-    if (type == Exercise) {
-        return "Exercise";
-    }
-    if (type == OpenSwimming) {
-        return "Open Swimming";
-    }
-    if (type == IndoorCycling) {
-        return "Indoor Cycling";
-    }
-    if (type == EllipticalTrainer) {
-        return "Eliptical Trainer";
-    }
-    if (type == JumpRope) {
-        return "Jump Rope";
-    }
-    if (type == Yoga) {
-        return "Yoga";
-    }
-
-    return "Unknown";
-}
 
 void DaemonInterface::connectDaemon()
 {
@@ -175,12 +119,12 @@ void DaemonInterface::disconnect()
     iface->call(QStringLiteral("disconnect"));
 }
 
-bool DaemonInterface::supportsFeature(DaemonInterface::Feature f)
+bool DaemonInterface::supportsFeature(Amazfish::Feature f)
 {
     if (!iface || !iface->isValid()) {
         return false;
     }
-    QDBusReply<bool> reply = iface->call(QStringLiteral("supportsFeature"), f);
+    QDBusReply<bool> reply = iface->call(QStringLiteral("supportsFeature"), (int)f);
     return reply;
 }
 
@@ -248,12 +192,12 @@ void DaemonInterface::refreshInformation()
     iface->call(QStringLiteral("refreshInformation"));
 }
 
-QString DaemonInterface::information(DaemonInterface::Info i)
+QString DaemonInterface::information(Amazfish::Info i)
 {
     if (!iface || !iface->isValid()) {
         return QString();
     }
-    QDBusReply<QString> reply = iface->call(QStringLiteral("information"), i);
+    QDBusReply<QString> reply = iface->call(QStringLiteral("information"), (int)i);
     return reply;
 }
 
@@ -273,12 +217,12 @@ void DaemonInterface::incomingCall(const QString &caller)
     iface->call(QStringLiteral("incomingCall"), caller);
 }
 
-void DaemonInterface::applyDeviceSetting(Settings s)
+void DaemonInterface::applyDeviceSetting(Amazfish::Settings s)
 {
     if (!iface || !iface->isValid()) {
         return;
     }
-    iface->call(QStringLiteral("applyDeviceSetting"), s);
+    iface->call(QStringLiteral("applyDeviceSetting"), (int)s);
 }
 
 void DaemonInterface::requestManualHeartrate()
@@ -377,12 +321,12 @@ void DaemonInterface::reloadCities()
     iface->call(QStringLiteral("reloadCities"));
 }
 
-void DaemonInterface::enableFeature(DaemonInterface::Feature feature)
+void DaemonInterface::enableFeature(Amazfish::Feature feature)
 {
     if (!iface || !iface->isValid()) {
         return;
     }
-    iface->call(QStringLiteral("enableFeature"), feature);
+    iface->call(QStringLiteral("enableFeature"), (int)feature);
 }
 
 QStringList DaemonInterface::supportedDisplayItems()
