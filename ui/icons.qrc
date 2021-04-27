@@ -24,5 +24,7 @@
         <file>qml/custom-icons/icon-m-location.png</file>
         <file>qml/custom-icons/icon-m-clock.png</file>
         <file>qml/custom-icons/icon-strava.png</file>
+        <file>qml/custom-icons/icon-m-cycling.png</file>
+        <file>qml/custom-icons/icon-m-indoor cycling.png</file>
     </qresource>
 </RCC>

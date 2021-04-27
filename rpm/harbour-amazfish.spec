@@ -25,7 +25,7 @@ Name:       harbour-amazfish
 %define sailfish_minor %(grep VERSION_ID /etc/sailfish-release |cut -d = -f 2|cut -d . -f 2)
 
 Summary:    Watch interface application
-Version:    1.9.8
+Version:    1.9.9
 Release:    1
 Group:      QtQt
 License:    LICENSE
