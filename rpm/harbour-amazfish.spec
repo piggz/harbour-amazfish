@@ -58,7 +58,6 @@ BuildRequires:  kcoreaddons-devel >= 5.31.0
 BuildRequires:  qt5-qttools-linguist
 BuildRequires:  qt5-qtconnectivity-qtbluetooth-devel
 BuildRequires:  desktop-file-utils
-BuildRequires:  sailfish-version
 
 %description
 Short description of my Sailfish OS Application
