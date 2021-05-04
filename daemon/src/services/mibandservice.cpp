@@ -756,7 +756,6 @@ void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsCond
     HuamiDevice *device = qobject_cast<HuamiDevice*>(parent());
 
     if (!device || device->softwareRevision() > "V0.0.8.74") { //Lexical string comparison should be fine here
-        message(tr("Firmware supports weather condition string"));
         supportsConditionString = true;
     }
 
