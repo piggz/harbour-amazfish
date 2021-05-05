@@ -68,6 +68,10 @@ ApplicationWindowPL
         running: true
         onTriggered: {
             systemdServiceIface.updateProperties()
+
+            if (serviceActiveState == false) {
+                systemdServiceIface.call("Start", ["replace"])
+            }
         }
     }
 

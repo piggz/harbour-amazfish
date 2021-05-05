@@ -213,16 +213,7 @@ PagePL {
         }
 
         ButtonPL {
-            text: qsTr("Start")
-            visible: serviceActiveState == false
-            anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                systemdServiceIface.call("Start", ["replace"])
-            }
-        }
-
-        ButtonPL {
-            text: qsTr("Enable")
+            text: qsTr("Enable on boot")
             visible: serviceEnabledState == false
             anchors.horizontalCenter: parent.horizontalCenter
 
