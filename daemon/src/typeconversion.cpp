@@ -50,9 +50,10 @@ QByteArray dateTimeToBytes(const QDateTime &dt, int format, bool adjustForTZ)
 
     //Timezone
     int utcOffset = 0;
-    if (adjustForTZ) {
-        utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(dt);
-    }
+    //Keep watch on UTC and convert when reading back
+    //if (adjustForTZ) {
+    //    utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(dt);
+    //}
     qDebug() << "UTC offset it " << utcOffset;
 
     ret += char((utcOffset / (60 * 60)) * 4);
@@ -69,11 +70,12 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
 
         QTimeZone tz(0);
 
-        if (value.length() > 7 && honorDeviceTimeOffset) {
-            tz = QTimeZone(value[7] * 15 * 60);
-        } /*else {
-            timestamp.setTimeSpec(Qt::LocalTime);
-        }*/
+        //force timezone to UTC always
+        //if (value.length() > 7 && honorDeviceTimeOffset) {
+        //    tz = QTimeZone(value[7] * 15 * 60);
+        //} /*else {
+        //    timestamp.setTimeSpec(Qt::LocalTime);
+        //}*/
 
         qDebug() << "Watch timezone is:" << tz;
         qDebug() << "System timezone is" << QTimeZone::systemTimeZone() << QTimeZone::systemTimeZoneId();

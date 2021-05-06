@@ -15,10 +15,12 @@ QDateTime AbstractFetchOperation::lastActivitySync()
     if (ls == 0) {
         return QDateTime::currentDateTime().addDays(-100);
     }
-    QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime())); //Getting the timezone without DST
 
-    qDebug() << "last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, tz);
-    return QDateTime::fromMSecsSinceEpoch(ls, tz);
+    //QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime())); //Getting the timezone without DST
+
+    //Convert the last sync time, which is seconds since epoch, to a qdatetime in the local timezone
+    qDebug() << "last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, Qt::LocalTime);
+    return QDateTime::fromMSecsSinceEpoch(ls, Qt::LocalTime);
 }
 
 void AbstractFetchOperation::saveLastActivitySync(qint64 millis)
