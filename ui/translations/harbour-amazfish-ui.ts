@@ -312,12 +312,7 @@
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="216"/>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="225"/>
-        <source>Enable</source>
+        <source>Enable on boot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

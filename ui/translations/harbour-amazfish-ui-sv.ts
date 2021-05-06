@@ -256,12 +256,8 @@
         <translation>Tjänst</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation>Starta</translation>
-    </message>
-    <message>
-        <source>Enable</source>
-        <translation>Aktivera</translation>
+        <source>Enable on boot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

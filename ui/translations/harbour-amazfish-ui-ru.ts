@@ -256,11 +256,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable</source>
+        <source>Enable on boot</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

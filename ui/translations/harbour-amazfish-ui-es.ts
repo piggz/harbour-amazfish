@@ -256,12 +256,8 @@
         <translation>Servicio</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation>Iniciar</translation>
-    </message>
-    <message>
-        <source>Enable</source>
-        <translation>Habilitar</translation>
+        <source>Enable on boot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
