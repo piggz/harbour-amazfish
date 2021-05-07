@@ -21,6 +21,7 @@ ApplicationWindowPL
     property bool serviceEnabledState: false
     property int supportedFeatures: 0
     property bool stravaLinked: false
+    property bool firstPass: true
 
     //Device State
     readonly property string _connectionState: DaemonInterfaceInstance.connectionState
@@ -69,8 +70,9 @@ ApplicationWindowPL
         onTriggered: {
             systemdServiceIface.updateProperties()
 
-            if (serviceActiveState == false) {
+            if (serviceActiveState == false && firstPass) {
                 systemdServiceIface.call("Start", ["replace"])
+                firstPass = false;
             }
         }
     }
