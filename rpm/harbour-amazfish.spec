@@ -25,11 +25,11 @@ Name:       harbour-amazfish
 %define sailfish_minor %(grep VERSION_ID /etc/sailfish-release |cut -d = -f 2|cut -d . -f 2)
 
 Summary:    Watch interface application
-Version:    1.9.9
+Version:    2.0.0
 Release:    1
 Group:      QtQt
 License:    LICENSE
-URL:        http://example.org/
+URL:        https://piggz.co.uk
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   kdb-sqlite3-driver >= 3.1.0
@@ -60,7 +60,7 @@ BuildRequires:  qt5-qtconnectivity-qtbluetooth-devel
 BuildRequires:  desktop-file-utils
 
 %description
-Short description of my Sailfish OS Application
+Watch companion application for SalfishOS
 
 
 %prep
