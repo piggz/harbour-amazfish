@@ -550,7 +550,7 @@
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz ekran przy ruchu nadgarstkiem</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
