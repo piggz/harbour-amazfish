@@ -64,6 +64,10 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
             if (m_info->type() == AbstractFirmwareInfo::Firmware) {
                 m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_REBOOT));
             } else {
+                BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
+                if (serv) {
+                    serv->downloadProgress(0);
+                }
                 m_service->message(QObject::tr("Update operation complete"));
             }
             return true;
