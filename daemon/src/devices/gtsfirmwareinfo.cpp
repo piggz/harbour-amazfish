@@ -29,8 +29,8 @@ void GtsFirmwareInfo::determineFirmwareType() {
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_ALMANAC_HEADER))) {
         m_type = GPS_ALMANAC;
     }
-    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_CEP_HEADER))) {
-        m_type = GPS_BATCH;
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(AGPS_UIHH_HEADER))) {
+        m_type = GPS_UIHH;
     }
     if (m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(FW_HEADER)) == FW_OFFSET) {
         m_version = m_crcMap[m_crc16];
@@ -106,8 +106,8 @@ void GtsFirmwareInfo::determineFirmwareVersion()
         case GPS_CEP:
             version = "CEP";
             break;
-        case GPS_BATCH:
-            version = "CEP_BATCH";
+        case GPS_UIHH:
+            version = "GPS_UIHH";
             break;
         case GPS_ALMANAC:
             version = "ALM";

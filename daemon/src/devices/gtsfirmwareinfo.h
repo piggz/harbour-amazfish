@@ -71,6 +71,10 @@ private:
             0x2a, 0x12, 0xa0, 0x02
     };
 
+    const uint8_t AGPS_UIHH_HEADER[5]{ // probably wrong
+            'U', 'I', 'H', 'H', 0x04
+    };
+
     QMap<uint16_t, QString> m_crcMap;
 
     void populateCrcMap();

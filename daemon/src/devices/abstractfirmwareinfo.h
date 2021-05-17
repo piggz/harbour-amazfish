@@ -19,7 +19,7 @@ public:
         Font_Latin = 11,
         GPS = 3,
         GPS_CEP = 4,
-        GPS_BATCH = -4,
+        GPS_UIHH = -4,
         GPS_ALMANAC = 5,
         Res = 2,
         Res_Compressed = 130,
