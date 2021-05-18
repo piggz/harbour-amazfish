@@ -143,6 +143,10 @@ private:
     NavigationInterface m_navigationInterface;
     Q_SLOT void navigationRunningChanged(bool running);
     Q_SLOT void navigationChanged(const QString &icon, const QString &narrative, const QString &manDist, int progress);
+
+    QDateTime m_lastWeatherSync;
+    QDateTime m_lastCalendarSync;
+    QDateTime m_lastActivitySync;
 };
 
 #endif // BIPINTERFACE_H
