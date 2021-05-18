@@ -22,6 +22,8 @@ ApplicationWindowPL
     property int supportedFeatures: 0
     property bool stravaLinked: false
     property bool firstPass: true
+    property string _lastMessage: ""
+    property string _percentText: ""
 
     //Device State
     readonly property string _connectionState: DaemonInterfaceInstance.connectionState
@@ -42,12 +44,6 @@ ApplicationWindowPL
 
     PopupPL {
         id: popup
-    }
-
-    BusyIndicatorPL {
-        anchors.centerIn: parent
-        visible: DaemonInterfaceInstance.operationRunning
-        running: DaemonInterfaceInstance.operationRunning
     }
 
     CityManager {
@@ -193,12 +189,16 @@ ApplicationWindowPL
                 break;
             }
         }
+        onDownloadProgress: {
+            _percentText = percent + "%";
+        }
     }
 
     //======================Application Global Functions========================
 
     function showMessage(msg)
     {
+        _lastMessage = msg
         popup.showMessage(msg)
     }
 
@@ -242,7 +242,4 @@ ApplicationWindowPL
         }
         return pc.createObject(parent ? parent : app, options ? options : {})
     }
-
-
-
 }

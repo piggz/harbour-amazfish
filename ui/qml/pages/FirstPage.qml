@@ -63,6 +63,41 @@ PagePL {
         anchors.margins: styler.themePaddingMedium
 
         RowLayout {
+            id: rowUpdateOperation
+            height: styler.themeItemSizeSmall
+            width: parent.width
+            visible: DaemonInterfaceInstance.operationRunning
+            LabelPL {
+                id: lblLastMessage
+                text: _lastMessage
+                color: styler.themeSecondaryHighlightColor
+                font.pixelSize: styler.themeFontSizeMedium
+                truncMode: truncModes.fade
+                Layout.fillWidth: true
+                width: parent.width *0.6
+            }
+            LabelPL {
+                id: lblProgress
+                x: 10
+                anchors.left: txtMessage.right
+                anchors.leftMargin: 5
+                horizontalAlignment: Text.AlignLeft
+                color: styler.themeSecondaryHighlightColor
+                font.pixelSize: styler.themeFontSizeMedium
+                text: _percentText
+            }
+
+            BusyIndicatorSmallPL {
+                y: 2
+                running: DaemonInterfaceInstance.operationRunning
+                anchors.right: parent.right
+                anchors.rightMargin: 2
+                height: parent.height - 4
+            }
+
+
+        }
+        RowLayout {
             height: styler.themeItemSizeSmall
             width: parent.width
 
