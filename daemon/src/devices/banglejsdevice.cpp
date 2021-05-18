@@ -37,11 +37,6 @@ QString BangleJSDevice::deviceType()
     return "pinetimejf";
 }
 
-bool BangleJSDevice::operationRunning()
-{
-    return QBLEDevice::operationRunning();
-}
-
 void BangleJSDevice::abortOperations()
 {
     qDebug() << Q_FUNC_INFO;
@@ -180,6 +175,7 @@ void BangleJSDevice::authenticated(bool ready)
 AbstractFirmwareInfo *BangleJSDevice::firmwareInfo(const QByteArray &bytes)
 {
     qDebug() << Q_FUNC_INFO;
+    return nullptr;
 }
 
 void BangleJSDevice::navigationRunning(bool running)

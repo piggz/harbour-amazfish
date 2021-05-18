@@ -12,7 +12,6 @@ public:
     virtual QString pair() override;
     virtual int supportedFeatures() override;
     virtual QString deviceType() override;
-    virtual bool operationRunning() override;
     virtual void abortOperations() override;
 
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;

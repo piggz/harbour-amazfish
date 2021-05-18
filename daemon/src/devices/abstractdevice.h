@@ -86,7 +86,6 @@ public:
 
     virtual QString deviceType() = 0;
     QString deviceName();
-    virtual bool operationRunning() = 0;
     virtual void abortOperations();
 
     //Firmware handling
@@ -112,7 +111,6 @@ public:
     //signals    
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
-    Q_SIGNAL void operationRunningChanged();
     Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void connectionStateChanged();
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString& val);

@@ -24,6 +24,7 @@ void BipFirmwareService::characteristicChanged(const QString &characteristic, co
                 delete m_updateFirmware;
                 m_updateFirmware = nullptr;
                 m_operationRunning = 0;
+                emit operationRunningChanged();
             }
         }
     }
@@ -47,6 +48,8 @@ void BipFirmwareService::startDownload()
 {
     if (m_updateFirmware && m_operationRunning == 0) {
         m_operationRunning = 1;
+        emit operationRunningChanged();
+        emit message(tr("Sending %1...").arg(m_updateFirmware->version()));
         m_updateFirmware->start();
     } else {
         emit message(tr("No file selected"));

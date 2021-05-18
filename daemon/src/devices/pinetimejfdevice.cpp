@@ -43,11 +43,6 @@ QString PinetimeJFDevice::deviceType()
     return "pinetimejf";
 }
 
-bool PinetimeJFDevice::operationRunning()
-{
-    return QBLEDevice::operationRunning();
-}
-
 void PinetimeJFDevice::abortOperations()
 {
     qDebug() << Q_FUNC_INFO;

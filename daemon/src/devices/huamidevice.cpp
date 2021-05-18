@@ -276,11 +276,6 @@ void HuamiDevice::startDownload()
     }
 }
 
-bool HuamiDevice::operationRunning()
-{
-    return QBLEDevice::operationRunning();
-}
-
 void HuamiDevice::abortOperations()
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));

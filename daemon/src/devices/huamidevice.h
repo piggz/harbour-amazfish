@@ -19,7 +19,6 @@ class HuamiDevice : public AbstractDevice
 public:
     explicit HuamiDevice(const QString &pairedName, QObject *parent = nullptr);
     
-    virtual bool operationRunning() override;
     virtual void abortOperations() override;
 
     virtual void refreshInformation() override;

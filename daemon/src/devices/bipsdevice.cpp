@@ -58,7 +58,7 @@ void BipSDevice::initialise()
     if (fw) {
         connect(fw, &BipFirmwareService::message, this, &BipSDevice::message, Qt::UniqueConnection);
         connect(fw, &BipFirmwareService::downloadProgress, this, &BipSDevice::downloadProgress, Qt::UniqueConnection);
-        connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
+        connect(fw, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
