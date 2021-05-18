@@ -76,9 +76,9 @@ public:
 
     static QString activityToString(Amazfish::ActivityType type);
 };
-//Q_DECLARE_METATYPE(Amazfish::ActivityType)
-//Q_DECLARE_METATYPE(Amazfish::Feature)
-//Q_DECLARE_METATYPE(Amazfish::Info)
-//Q_DECLARE_METATYPE(Amazfish::Settings)
+Q_DECLARE_METATYPE(Amazfish::ActivityType)
+Q_DECLARE_METATYPE(Amazfish::Feature)
+Q_DECLARE_METATYPE(Amazfish::Info)
+Q_DECLARE_METATYPE(Amazfish::Settings)
 
 #endif // AMAZFISH_H
