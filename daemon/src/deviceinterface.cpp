@@ -60,6 +60,7 @@ DeviceInterface::DeviceInterface()
     m_refreshTimer = new QTimer();
     connect(m_refreshTimer, &QTimer::timeout, this, &DeviceInterface::onRefreshTimer);
     m_refreshTimer->start(60000);
+    m_lastWeatherSync = m_lastCalendarSync = m_lastActivitySync = QDateTime::currentDateTime();
 
     //Music
     connect(&m_musicController, &watchfish::MusicController::statusChanged, this, &DeviceInterface::musicChanged);
@@ -669,31 +670,27 @@ void DeviceInterface::requestManualHeartrate()
 void DeviceInterface::onRefreshTimer()
 {
     qDebug() << "DeviceInterface::onRefreshTimer";
-    static int syncActivitiesMinutes = 0;
-    static int syncWeatherMinutes = 0;
-    static int syncCalendarMinutes = 0;
 
     auto config = AmazfishConfig::instance();
 
-    syncWeatherMinutes++;
-    if (syncWeatherMinutes >= config->appRefreshWeather()) {
-        syncWeatherMinutes = 0;
+    QDateTime currentDate = QDateTime::currentDateTime();
+
+    if (m_lastWeatherSync.secsTo(currentDate) >= (config->appRefreshWeather() * 60)) {
         qDebug() << "weather interval reached";
+        m_lastWeatherSync = currentDate;
         m_currentWeather.refresh();
     }
-    syncCalendarMinutes++;
-    if (syncCalendarMinutes >= config->appRefreshCalendar()) {
-        syncCalendarMinutes = 0;
+
+    if (m_lastCalendarSync.secsTo(currentDate) >= (config->appRefreshCalendar() * 60)) {
         qDebug() << "calendar interval reached";
+        m_lastCalendarSync = currentDate;
         updateCalendar();
     }
 
     if (config->appAutoSyncData()) {
-        syncActivitiesMinutes++;
-
-        if (syncActivitiesMinutes > 60) {
+        if (m_lastActivitySync.secsTo(currentDate) >= (60*60)) {
             qDebug() << "Auto syncing activity data";
-            syncActivitiesMinutes = 0;
+            m_lastActivitySync = currentDate;
             downloadActivityData();
         }
     }
