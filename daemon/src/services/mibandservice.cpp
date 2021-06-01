@@ -266,18 +266,13 @@ void MiBandService::setCurrentTime()
     timeBytes += TypeConversion::fromInt8(now.time().second());
     timeBytes += TypeConversion::fromInt8(now.date().dayOfWeek());
     timeBytes += char(0); //fractions of seconds
-    timeBytes += char(0); //timezone marker?
+    timeBytes += char(0); //could be adjust reason or DST offset. In both cases 0 is safe.
 
-    //QTimeZone tz = QTimeZone::systemTimeZone();
-    //int utcOffset = tz.standardTimeOffset(now);
+    // calculate timezone
+    int offsetInSec = now.offsetFromUtc();
+    timeBytes += char(offsetInSec/(15*60));
 
-    //qDebug() << tz << utcOffset << (utcOffset / (60 * 60)) * 4;
-
-    //timeBytes += char((utcOffset / (60 * 60)) * 4);
-
-    timeBytes += char(0); //Dont set any timezone data, watch will assume UTC, and we convert as needed
-
-    qDebug() << "setting time to:" << now << timeBytes.toHex();
+    qDebug() << "setting time to:" << now << ", tz: " << offsetInSec << timeBytes.toHex();
     writeValue(UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME, timeBytes);
 }
 
