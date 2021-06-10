@@ -143,7 +143,7 @@ void SportsSummaryOperation::start()
 
     qDebug() << "last summary sync was" << startDate();
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate(), 0, false);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
 
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
     m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);

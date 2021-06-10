@@ -52,14 +52,9 @@ bool ActivityFetchOperation::finished(bool success)
     if (success) {
         //store the successful samples
         saved = saveSamples();
-        qDebug() << "Last sample time is as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
         m_sampleTime.setTimeSpec(Qt::LocalTime);
         qDebug() << "Last sample time saved as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
 
-        //if (m_sampleTime.isDaylightTime()) {
-        //    qDebug() << "Adding DST compensation to last sample time";
-        //    m_sampleTime = m_sampleTime.addSecs(3600);
-        //}
         saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());
         qDebug() << "finished fetch operation, last record was " << m_sampleTime;
     }
