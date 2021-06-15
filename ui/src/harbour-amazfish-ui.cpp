@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setOrganizationDomain("piggz.co.uk");
     QCoreApplication::setApplicationName("harbour-amazfish");
+    QGuiApplication::setApplicationDisplayName("Amazfish");
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
     // add fallback icon path
