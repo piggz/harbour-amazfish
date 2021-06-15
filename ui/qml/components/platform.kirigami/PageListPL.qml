@@ -24,10 +24,6 @@ import "."
 
 Kirigami.ScrollablePage {
     id: page
-    flickable: listView
-    mainItem: listView
-    Kirigami.ColumnView.fillWidth: false
-    Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
     property string acceptIconName: styler.iconForward
     property alias  acceptText: mainAction.text
@@ -43,10 +39,6 @@ Kirigami.ScrollablePage {
     property var    pageMenu
     property bool   placeholderEnabled: true
     property string placeholderText
-
-    // hide all other items in this list
-    // to avoid interference with Kirigami Page
-    default property var _content
 
     signal pageStatusActivating
     signal pageStatusActive
@@ -72,7 +64,6 @@ Kirigami.ScrollablePage {
         id: listView
 
         currentIndex: -1
-        ScrollBar.vertical: ScrollBar {}
         header: Column {
             height: styler.themePaddingLarge +
                     (headerExtraLoader.height > 0 ? headerExtraLoader.height + styler.themePaddingLarge : 0)
