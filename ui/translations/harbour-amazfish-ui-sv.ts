@@ -257,7 +257,7 @@
     </message>
     <message>
         <source>Enable on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera vid systemstart</translation>
     </message>
 </context>
 <context>
@@ -884,11 +884,11 @@
     </message>
     <message>
         <source>%1 hrs</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tim</translation>
     </message>
     <message>
         <source>Deep %1 hrs</source>
-        <translation type="unfinished"></translation>
+        <translation>Djup %1 tim</translation>
     </message>
 </context>
 <context>
