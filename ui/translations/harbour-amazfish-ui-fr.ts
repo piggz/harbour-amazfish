@@ -47,7 +47,7 @@
     <name>AnalysisPage</name>
     <message>
         <source>Download Data</source>
-        <translation>Télécharges les données</translation>
+        <translation>Télécharger les données</translation>
     </message>
     <message>
         <source>Analysis</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>Test Email</source>
-        <translation>Courriel de test</translation>
+        <translation>Email de test</translation>
     </message>
     <message>
         <source>Test Call</source>
