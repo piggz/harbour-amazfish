@@ -196,8 +196,9 @@ void CityManager::save()
 
         if (!cityEntry->properties().isEmpty()) {
             QJsonObject jsonCityProperties;
-            auto end = cityEntry->properties().cend();
-            for (auto it = cityEntry->properties().cbegin(); it != end; ++it)
+            auto properties = cityEntry->properties();
+
+            for (auto it = properties.cbegin(); it != properties.cend(); ++it)
             {
                 jsonCityProperties.insert(it.key(), QJsonValue::fromVariant(it.value()));
             }

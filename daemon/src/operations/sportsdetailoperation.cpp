@@ -96,8 +96,9 @@ bool SportsDetailOperation::finished(bool success)
         saved = saveSport(logFile.fileName());
 
         qDebug() << "End sport time is:" << m_summary.endTime() << m_summary.endTime().toMSecsSinceEpoch();
-        m_summary.endTime().setTimeSpec(Qt::LocalTime);
-        saveLastActivitySync(m_summary.endTime().toMSecsSinceEpoch());
+        QDateTime end = m_summary.endTime();
+        end.setTimeSpec(Qt::LocalTime);
+        saveLastActivitySync(end.toMSecsSinceEpoch());
     } else {
         setAbort(true);
     }

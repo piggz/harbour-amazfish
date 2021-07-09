@@ -52,7 +52,7 @@ public:
 
     /// Page content on local host after successful oauth.
     /// Provide it in case you do not want to close the browser, but display something
-    Q_PROPERTY(QByteArray replyContent READ replyContent WRITE setReplyContent)
+    Q_PROPERTY(QByteArray replyContent READ replyContent WRITE setReplyContent NOTIFY replyContentChanged)
     QByteArray replyContent() const;
     void setReplyContent(const QByteArray &value);
 
@@ -98,6 +98,7 @@ Q_SIGNALS:
     void linkedChanged();
     void clientIdChanged();
     void clientSecretChanged();
+    void replyContentChanged();
     void localPortChanged();
     void tokenChanged();
     void tokenSecretChanged();

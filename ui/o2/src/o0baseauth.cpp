@@ -95,6 +95,7 @@ QByteArray O0BaseAuth::replyContent() const {
 
 void O0BaseAuth::setReplyContent(const QByteArray &value) {
     replyServer_->setReplyContent(value);
+    emit replyContentChanged();
 }
 
 int O0BaseAuth::localPort() {

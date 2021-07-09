@@ -67,8 +67,8 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
                 BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
                 if (serv) {
                     serv->downloadProgress(0);
+                    m_service->message(QObject::tr("Update operation complete"));
                 }
-                m_service->message(QObject::tr("Update operation complete"));
             }
             return true;
         }
