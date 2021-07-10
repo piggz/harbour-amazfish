@@ -11,8 +11,6 @@
 %define __provides_exclude_from ^%{_datadir}/.*$
 %endif
 
-%global kf5calendarcore_found %{lua: if posix.access("/usr/include/KF5/KCalendarCore", "r") then print(1) end}
-
 Name:       harbour-amazfish
 
 # >> macros
@@ -46,9 +44,7 @@ BuildRequires:  pkgconfig(Qt5Xml)
 BuildRequires:  pkgconfig(Qt5Positioning)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(libmkcal-qt5)
-%if 0%{?kf5calendarcore_found:1}
-BuildRequires:  pkgconfig(KF5CalendarCore)
-%endif
+%{lua: if posix.access("/usr/include/KF5/KCalendarCore", "r") then print("BuildRequires: pkgconfig(KF5CalendarCore)") end}
 BuildRequires:  pkgconfig(libkcalcoren-qt5)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(mpris-qt5)
