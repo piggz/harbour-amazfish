@@ -44,7 +44,8 @@ BuildRequires:  pkgconfig(Qt5Xml)
 BuildRequires:  pkgconfig(Qt5Positioning)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(libmkcal-qt5)
-%{lua: if posix.access("/usr/include/KF5/KCalendarCore", "r") then print("BuildRequires: pkgconfig(KF5CalendarCore)") end}
+BuildRequires:  sailfish-version
+BuildRequires:  (kf5-calendarcore-devel if sailfish-version >= 4.1.0).
 BuildRequires:  pkgconfig(libkcalcoren-qt5)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(mpris-qt5)
