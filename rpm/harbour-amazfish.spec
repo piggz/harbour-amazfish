@@ -11,6 +11,8 @@
 %define __provides_exclude_from ^%{_datadir}/.*$
 %endif
 
+%global kf5calendarcore_found %{lua: if posix.access("/usr/include/KF5/KCalendarCore", "r") then print(1) end}
+
 Name:       harbour-amazfish
 
 # >> macros
@@ -20,9 +22,6 @@ Name:       harbour-amazfish
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
-
-%define sailfish_major %(grep VERSION_ID /etc/sailfish-release |cut -d = -f 2|cut -d . -f 1)
-%define sailfish_minor %(grep VERSION_ID /etc/sailfish-release |cut -d = -f 2|cut -d . -f 2)
 
 Summary:    Watch interface application
 Version:    2.0.0
@@ -47,7 +46,7 @@ BuildRequires:  pkgconfig(Qt5Xml)
 BuildRequires:  pkgconfig(Qt5Positioning)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(libmkcal-qt5)
-%if %{sailfish_major} > 4 || ( %{sailfish_major} == 4 && %{sailfish_minor} > 0 )
+%if 0%{?kf5calendarcore_found:1}
 BuildRequires:  pkgconfig(KF5CalendarCore)
 %endif
 BuildRequires:  pkgconfig(libkcalcoren-qt5)
