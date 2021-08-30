@@ -192,7 +192,9 @@ void BangleJSDevice::navigationNarrative(const QString &flag, const QString &nar
 void BangleJSDevice::sendWeather(CurrentWeather *weather)
 {
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
-    if (uart){
+    if (!uart){
+        return;
+    }
         QJsonObject o;
         o.insert("t", "weather");
         o.insert("temp", weather->temperature());
