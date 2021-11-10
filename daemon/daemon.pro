@@ -13,8 +13,8 @@
 TARGET = harbour-amazfishd
 
 LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
-
-QT +=  positioning KDb3 network
+PKGCONFIG += dbus-1
+QT +=  positioning KDb3 network dbus
 
 equals(FLAVOR, "silica") {
     CONFIG += flavor_silica
@@ -110,6 +110,7 @@ SOURCES += \
     src/qaesencryption.cpp \
     src/services/currenttimeservice.cpp \
     src/services/dfuservice.cpp \
+    src/services/infinitimemotionservice.cpp \
     src/services/infinitimenavservice.cpp \
     src/services/pinetimemusicservice.cpp \
     src/services/uartservice.cpp \
@@ -168,6 +169,7 @@ HEADERS += \
     src/qaesencryption.h \
     src/services/currenttimeservice.h \
     src/services/dfuservice.h \
+    src/services/infinitimemotionservice.h \
     src/services/infinitimenavservice.h \
     src/services/pinetimemusicservice.h \
     src/services/uartservice.h \

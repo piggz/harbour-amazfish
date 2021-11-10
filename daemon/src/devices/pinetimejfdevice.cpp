@@ -8,6 +8,7 @@
 #include "dfuoperation.h"
 #include "infinitimenavservice.h"
 #include "hrmservice.h"
+#include "infinitimemotionservice.h"
 
 #include <QtXml/QtXml>
 
@@ -35,7 +36,8 @@ QString PinetimeJFDevice::pair()
 int PinetimeJFDevice::supportedFeatures()
 {
     return FEATURE_HRM |
-            FEATURE_ALERT;
+            FEATURE_ALERT |
+            FEATURE_STEPS;
 }
 
 QString PinetimeJFDevice::deviceType()
@@ -115,6 +117,8 @@ void PinetimeJFDevice::parseServices()
                 addService(InfiniTimeNavService::UUID_SERVICE_NAVIGATION, new InfiniTimeNavService(path, this));
             } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
                 addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
+            } else if (uuid == InfiniTimeMotionService::UUID_SERVICE_MOTION && !service(InfiniTimeMotionService::UUID_SERVICE_MOTION)) {
+                addService(InfiniTimeMotionService::UUID_SERVICE_MOTION, new InfiniTimeMotionService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -161,6 +165,13 @@ void PinetimeJFDevice::initialise()
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     if (hrm) {
         connect(hrm, &HRMService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
+    }
+
+    InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_SERVICE_MOTION));
+    if (motion) {
+        motion->enableNotification(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_STEPS);
+        //motion->enableNotification(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_MOTION);
+        connect(motion, &InfiniTimeMotionService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
     }
 }
 
@@ -263,6 +274,11 @@ QString PinetimeJFDevice::information(Info i) const
         return QString();
     }
 
+    InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_STEPS));
+    if (!motion) {
+        return QString();
+    }
+
     switch(i) {
     case INFO_MODEL:
         return info->modelNumber();
@@ -278,6 +294,9 @@ QString PinetimeJFDevice::information(Info i) const
         break;
     case INFO_MANUFACTURER:
         return info->manufacturerName();
+        break;
+    case INFO_STEPS:
+        return QString::number(motion->steps());
         break;
     }
     return QString();
