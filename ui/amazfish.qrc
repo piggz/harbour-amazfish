@@ -119,5 +119,6 @@
         <file>qml/components/TruncationModes.qml</file>
         <file>qml/components/DateNavigation.qml</file>
         <file>qml/pics/devices/amazfit-gts2.png</file>
+        <file>qml/pics/devices/amazfit-gtr2.png</file>
     </qresource>
 </RCC>

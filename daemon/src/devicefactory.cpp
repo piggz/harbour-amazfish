@@ -6,6 +6,8 @@
 #include "banglejsdevice.h"
 #include "bipsdevice.h"
 #include "gts2device.h"
+#include "gtrdevice.h"
+#include "gtr2device.h"
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 {
@@ -14,12 +16,20 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new BipDevice(deviceName);
     }
 
-    if (deviceName == "Amazfit GTS" || deviceName == "Amazfit GTR") {
+    if (deviceName == "Amazfit GTS") {
         return new GtsDevice(deviceName);
     }
 
     if (deviceName == "Amazfit GTS2") {
         return new Gts2Device(deviceName);
+    }
+
+    if (deviceName == "Amazfit GTR") {
+        return new GtrDevice(deviceName);
+    }
+
+    if (deviceName == "Amazfit GTR2") {
+        return new Gtr2Device(deviceName);
     }
 
     if (deviceName == "Amazfit Bip Lite") {
