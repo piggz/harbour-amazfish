@@ -118,5 +118,6 @@
         <file>qml/harbour-amazfish.qml</file>
         <file>qml/components/TruncationModes.qml</file>
         <file>qml/components/DateNavigation.qml</file>
+        <file>qml/pics/devices/amazfit-gts2.png</file>
     </qresource>
 </RCC>

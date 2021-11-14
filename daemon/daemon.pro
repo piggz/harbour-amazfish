@@ -94,6 +94,7 @@ SOURCES += \
     src/devices/banglejsdevice.cpp \
     src/devices/bipdevice.cpp \
     src/devices/bipsdevice.cpp \
+    src/devices/gts2device.cpp \
     src/devices/huamidevice.cpp \
     src/devices/infinitimefirmwareinfo.cpp \
     src/navigationinterface.cpp \
@@ -153,6 +154,7 @@ HEADERS += \
     src/devices/banglejsdevice.h \
     src/devices/bipdevice.h \
     src/devices/bipsdevice.h \
+    src/devices/gts2device.h \
     src/devices/huamidevice.h \
     src/devices/infinitimefirmwareinfo.h \
     src/navigationinterface.h \

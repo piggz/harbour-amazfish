@@ -46,6 +46,12 @@ PageListPL {
         }
 
         ListElement {
+            deviceType: "Amazfit GTS2"
+            icon: "../pics/devices/amazfit-gts2.png"
+            auth: true
+        }
+
+        ListElement {
             deviceType: "Amazfit GTR"
             icon: "../pics/devices/amazfit-gtr.png"
             auth: true
