@@ -22,10 +22,10 @@ Name:       harbour-amazfish
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Watch interface application
-Version:    2.0.2
+Version:    2.0.3
 Release:    1
 Group:      QtQt
-License:    LICENSE
+License:    GPLv3
 URL:        https://piggz.co.uk
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9

@@ -8,6 +8,7 @@ DISTFILES += \
     rpm/harbour-amazfish.changes.run.in \
     rpm/harbour-amazfish.spec \
     README.md \
+    LICENSE \
     documentation/build-instructions.md
 
 
