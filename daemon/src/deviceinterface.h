@@ -111,9 +111,11 @@ private:
     Q_SLOT void musicChanged();
     Q_SLOT void deviceEvent(AbstractDevice::Events event);
     Q_SLOT void handleButtonPressed(int presses);
+    Q_SLOT void onEventTimer();
 
     void sendBufferedNotifications();
-
+    void scheduleNextEvent();
+    
     //Watchfish
     watchfish::MusicController m_musicController;
 #ifdef MER_EDITION_SAILFISH
@@ -147,6 +149,10 @@ private:
     QDateTime m_lastWeatherSync;
     QDateTime m_lastCalendarSync;
     QDateTime m_lastActivitySync;
+
+    //Event list for simulated event support
+    QList<watchfish::CalendarEvent> m_eventlist;
+    QTimer *m_eventTimer = nullptr;
 };
 
 #endif // BIPINTERFACE_H
