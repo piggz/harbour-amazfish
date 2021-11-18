@@ -4,6 +4,11 @@ Companion application for Huami Devices (such as Amazfit Bip, Cor, MiBand2/3 and
 
 Requires sailfish version 3.0.3.8 or above due to changes in the base sailfish image
 
+## Installation
+* Install the ["chum" repository](https://chumrpm.netlify.app/) (by downloading the RPM file and running `devel-su pkcon install-local RPM_FILENAME` )
+* Run `devel-su pkcon refresh`
+* Run `devel-su pkcon install harbour-amazfish`
+
 ## Supported Devices
 
 There are 3 tiers of supported devices:
