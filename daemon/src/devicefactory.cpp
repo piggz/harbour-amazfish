@@ -20,7 +20,7 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new GtsDevice(deviceName);
     }
 
-    if (deviceName == "Amazfit GTS2") {
+    if (deviceName == "Amazfit GTS 2") {
         return new Gts2Device(deviceName);
     }
 
@@ -28,7 +28,7 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new GtrDevice(deviceName);
     }
 
-    if (deviceName == "Amazfit GTR2") {
+    if (deviceName == "Amazfit GTR 2") {
         return new Gtr2Device(deviceName);
     }
 
