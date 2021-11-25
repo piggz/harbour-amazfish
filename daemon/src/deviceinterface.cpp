@@ -781,7 +781,7 @@ void DeviceInterface::updateCalendar()
                 id++;
             }
         }
-    } else {
+    } else if (AmazfishConfig::instance()->appSimulateEventSupport()){
         QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
         if (!eventlist.isEmpty()) {
             std::sort(eventlist.begin(), eventlist.end(), [](watchfish::CalendarEvent a, watchfish::CalendarEvent b) {
