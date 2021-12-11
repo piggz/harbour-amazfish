@@ -32,6 +32,9 @@ public:
     virtual void navigationRunning(bool running) override;
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
+    //Weather
+    virtual void sendWeather(CurrentWeather *weather) override;
+
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 

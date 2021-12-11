@@ -9,6 +9,7 @@
 #include "infinitimenavservice.h"
 #include "hrmservice.h"
 #include "infinitimemotionservice.h"
+#include "infinitimeweatherservice.h"
 
 #include <QtXml/QtXml>
 
@@ -119,6 +120,8 @@ void PinetimeJFDevice::parseServices()
                 addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
             } else if (uuid == InfiniTimeMotionService::UUID_SERVICE_MOTION && !service(InfiniTimeMotionService::UUID_SERVICE_MOTION)) {
                 addService(InfiniTimeMotionService::UUID_SERVICE_MOTION, new InfiniTimeMotionService(path, this));
+            } else if (uuid == InfiniTimeWeatherService::UUID_SERVICE_WEATHER && !service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER)) {
+                addService(InfiniTimeWeatherService::UUID_SERVICE_WEATHER, new InfiniTimeWeatherService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -345,5 +348,13 @@ void PinetimeJFDevice::serviceEvent(const QString &characteristic, uint8_t event
             emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
             break;
         }
+    }
+}
+
+void PinetimeJFDevice::sendWeather(CurrentWeather *weather)
+{
+    InfiniTimeWeatherService *w = qobject_cast<InfiniTimeWeatherService*>(service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER));
+    if (w){
+        w->sendWeather(weather);
     }
 }
