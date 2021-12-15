@@ -19,7 +19,7 @@ PagePL {
                 id: cboLanguage
                 label: qsTr("Language")
 
-                //"zh_CN", "zh_TW", "en_US", "es_ES", "ru_RU", "de_DE", "it_IT", "fr_FR", "tr_TR"
+                //"zh_CN", "zh_TW", "en_US", "es_ES", "ru_RU", "de_DE", "it_IT", "fr_FR", "tr_TR", "nl_NL"
                 model: ListModel {
                     ListElement { itemText: qsTr("en_US") }
                     ListElement { itemText: qsTr("es_ES") }
@@ -30,6 +30,7 @@ PagePL {
                     ListElement { itemText: qsTr("it_IT") }
                     ListElement { itemText: qsTr("fr_FR") }
                     ListElement { itemText: qsTr("tr_TR") }
+                    ListElement { itemText: qsTr("nl_NL") }
                 }
 
                 Component.onCompleted: {
