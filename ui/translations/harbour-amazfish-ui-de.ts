@@ -869,7 +869,7 @@
     </message>
     <message>
         <source>Max Altitude</source>
-        <translation">Max. Höhe</translation>
+        <translation>Max. Höhe</translation>
     </message>
     <message>
         <source>Min Altitude</source>
