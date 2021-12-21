@@ -15,6 +15,7 @@ TARGET = harbour-amazfishd
 LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 PKGCONFIG += dbus-1
 QT +=  positioning KDb3 network dbus
+CONFIG += c++14
 
 equals(FLAVOR, "silica") {
     CONFIG += flavor_silica
@@ -154,6 +155,7 @@ DISTFILES += \
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
+    src/codec.h \
     src/devices/banglejsdevice.h \
     src/devices/bipdevice.h \
     src/devices/bipsdevice.h \

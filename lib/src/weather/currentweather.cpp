@@ -135,16 +135,20 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
     Forecast f;
     f.setMaxTemperature(0);
     f.setMinTemperature(500);
+    f.setWindMaxSpeed(0);
+    f.setWindMinSpeed(255);
 
     qDebug() << object;
+    int total_rain = 0;
+    int total_snow = 0;
 
     foreach (const QJsonValue & value, list) {
         QJsonObject obj = value.toObject();
 
-        qlonglong dt = obj.value("dt").toVariant().toLongLong() * 1000L;
+        qlonglong dt = obj.value("dt").toVariant().toLongLong();
 
-        QDate d = QDateTime::fromMSecsSinceEpoch(dt).date();
-        QTime t = QDateTime::fromMSecsSinceEpoch(dt).time();
+        QDate d = QDateTime::fromMSecsSinceEpoch(dt * 1000L).date();
+        QTime t = QDateTime::fromMSecsSinceEpoch(dt * 1000L).time();
 
         QJsonObject weather = obj.value("weather").toArray().first().toObject();
 
@@ -154,28 +158,59 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
         QJsonObject main = obj.value("main").toObject();
         int min_temp = int(main.value("temp_min").toDouble());
         int max_temp = int(main.value("temp_max").toDouble());
+        int wind_speed = 0;
+        f.setWindMaxSpeed(0);
+        f.setWindMinSpeed(255);
+        if (obj.contains("rain")) {
+            QJsonObject rain = obj.value("rain").toObject();
+            total_rain += int(rain.value("3h").toDouble());
+        }
+        if (obj.contains("snow")) {
+            QJsonObject snow = obj.value("snow").toObject();
+            total_snow += int(snow.value("3h").toDouble());
+        }
 
-        qDebug() << "Forecast on " << dt << d << t << min_temp << max_temp << desc << code;
+        if (obj.contains("wind")) {
+            QJsonObject wind = obj.value("wind").toObject();
+            wind_speed += int(wind.value("speed").toDouble());
+        }
+
+        qDebug() << "Forecast on " << dt << d << t << min_temp << max_temp << desc << code << "Hour:" << t.hour();
 
         if (d > last_day) {
             if (last_day != QDate::currentDate()) {
+                f.setRainMMDay(total_rain);
+                f.setSnowMMDay(total_snow);
                 m_forecasts << f;
             }
             last_day = d;
             f.setMaxTemperature(0);
             f.setMinTemperature(500);
+            f.setWindMaxSpeed(0);
+            f.setWindMinSpeed(255);
+            total_rain = 0;
+            total_snow = 0;
         }
 
-        if (t.hour() >12 && t.hour() <= 13) { //Set the general weather description for that around mid-day
+        if (t.hour() >=12 && t.hour() < 15) { //Set the general weather description for that around mid-day
+            qDebug() << "Midday" << main.value("pressure") << main.value("pressure").toDouble();
             f.setDateTime(dt);
             f.setDescription(desc);
             f.setWeatherCode(code);
+            f.setPressure(int(main.value("pressure").toDouble()));
+            f.setHumidity(int(main.value("humidity").toDouble()));
         }
         if (max_temp > f.maxTemperature()){
             f.setMaxTemperature(max_temp);
         }
         if (min_temp < f.minTemperature()) {
             f.setMinTemperature(min_temp);
+        }
+        if (wind_speed > f.windMaxSpeed()) {
+            f.setWindMaxSpeed(wind_speed);
+        }
+        if (wind_speed < f.windMinSpeed()) {
+            f.setWindMinSpeed(wind_speed);
         }
     }
 
@@ -283,7 +318,7 @@ int CurrentWeather::maxTemperature() const
     return m_maxTemperature;
 }
 
-int CurrentWeather::dateTime() const
+qlonglong CurrentWeather::dateTime() const
 {
     return m_dateTime;
 }
@@ -328,9 +363,89 @@ void CurrentWeather::Forecast::setDescription(const QString &description)
     m_description = description;
 }
 
-void CurrentWeather::Forecast::setDateTime(int dateTime)
+void CurrentWeather::Forecast::setDateTime(qlonglong dateTime)
 {
     m_dateTime = dateTime;
+}
+
+uint8_t CurrentWeather::Forecast::rainMMDay() const
+{
+    return m_rainMMDay;
+}
+
+void CurrentWeather::Forecast::setRainMMDay(uint8_t newRainMMDay)
+{
+    m_rainMMDay = newRainMMDay;
+}
+
+uint8_t CurrentWeather::Forecast::snowMMDay() const
+{
+    return m_snowMMDay;
+}
+
+void CurrentWeather::Forecast::setSnowMMDay(uint8_t newSnowMMDay)
+{
+    m_snowMMDay = newSnowMMDay;
+}
+
+uint8_t CurrentWeather::Forecast::clouds() const
+{
+    return m_clouds;
+}
+
+void CurrentWeather::Forecast::setClouds(uint8_t newClouds)
+{
+    m_clouds = newClouds;
+}
+
+uint8_t CurrentWeather::Forecast::humidity() const
+{
+    return m_humidity;
+}
+
+void CurrentWeather::Forecast::setHumidity(uint8_t newHumidity)
+{
+    m_humidity = newHumidity;
+}
+
+uint8_t CurrentWeather::Forecast::pressure() const
+{
+    return m_pressure;
+}
+
+void CurrentWeather::Forecast::setPressure(uint8_t newPressure)
+{
+    m_pressure = newPressure;
+}
+
+uint8_t CurrentWeather::Forecast::windDirection() const
+{
+    return m_windDirection;
+}
+
+void CurrentWeather::Forecast::setWindDirection(uint8_t newWindDirection)
+{
+    m_windDirection = newWindDirection;
+}
+
+uint8_t CurrentWeather::Forecast::windMaxSpeed() const
+{
+    return m_windMaxSpeed;
+}
+
+void CurrentWeather::Forecast::setWindMaxSpeed(uint8_t newWindMaxSpeed)
+{
+    m_windMaxSpeed = newWindMaxSpeed;
+}
+
+uint8_t CurrentWeather::Forecast::windMinSpeed() const
+{
+    return m_windMinSpeed;
+}
+
+void CurrentWeather::Forecast::setWindMinSpeed(uint8_t newWindMinSpeed)
+{
+    m_windMinSpeed = newWindMinSpeed;
 }
 
 QString CurrentWeather::Forecast::description() const
@@ -338,7 +453,7 @@ QString CurrentWeather::Forecast::description() const
     return m_description;
 }
 
-int CurrentWeather::Forecast::dateTime() const
+qlonglong CurrentWeather::Forecast::dateTime() const
 {
     return m_dateTime;
 }

@@ -38,6 +38,7 @@ int PinetimeJFDevice::supportedFeatures()
 {
     return FEATURE_HRM |
             FEATURE_ALERT |
+            FEATURE_WEATHER |
             FEATURE_STEPS;
 }
 

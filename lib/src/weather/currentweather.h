@@ -58,16 +58,49 @@ public:
         void setDescription(const QString &description);
         QString description() const;
 
-        int dateTime() const;
-        void setDateTime(int dateTime);
+        qlonglong dateTime() const;
+        void setDateTime(qlonglong dateTime);
 
+        uint8_t rainMMDay() const;
+        void setRainMMDay(uint8_t newRainMMDay);
+
+        uint8_t snowMMDay() const;
+        void setSnowMMDay(uint8_t newSnowMMDay);
+
+        uint8_t clouds() const;
+        void setClouds(uint8_t newClouds);
+
+        uint8_t humidity() const;
+        void setHumidity(uint8_t newHumidity);
+
+        uint8_t pressure() const;
+        void setPressure(uint8_t newPressure);
+
+        uint8_t windMinSpeed() const;
+        void setWindMinSpeed(uint8_t newWindMinSpeed);
+
+        uint8_t windMaxSpeed() const;
+        void setWindMaxSpeed(uint8_t newWindMaxSpeed);
+
+        uint8_t windDirection() const;
+        void setWindDirection(uint8_t newWindDirection);
 
     private:
+        int m_temperature = 0;
         int m_minTemperature = 0;
         int m_maxTemperature = 0;
         int m_weatherCode = 0;
         QString m_description;
-        int m_dateTime = 0;
+        qlonglong m_dateTime = 0;
+        uint8_t m_clouds = 0;
+        uint8_t m_windMinSpeed = 0;
+        uint8_t m_windMaxSpeed = 0;
+        uint8_t m_windDirection = 0;
+        uint8_t m_rainMMDay = 0;
+        uint8_t m_snowMMDay = 0;
+        uint8_t m_humidity = 0;
+        uint8_t m_pressure = 0;
+       
     };
 
 
@@ -81,7 +114,7 @@ public:
     int maxTemperature() const;
     int weatherCode() const;
     QString description() const;
-    int dateTime() const;
+    qlonglong dateTime() const;
 
     Q_INVOKABLE void refresh();
 
@@ -111,7 +144,7 @@ private:
     int m_maxTemperature = 0;
     int m_weatherCode = 0;
     QString m_description;
-    int m_dateTime = 0;
+    qlonglong m_dateTime = 0;
 
     QList<Forecast> m_forecasts;
 };

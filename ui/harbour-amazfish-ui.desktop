@@ -4,6 +4,10 @@ X-Nemo-Application-Type=silica-qt5
 Icon=harbour-amazfish-ui
 Exec=harbour-amazfish-ui
 Name=Amazfish
+
+[X-Sailjail]
+Sandboxing=Disabled
+
 # translation example:
 # your app name in German locale (de)
 #
