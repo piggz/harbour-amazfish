@@ -22,7 +22,7 @@ Name:       harbour-amazfish
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Watch interface application
-Version:    2.0.3
+Version:    2.0.4
 Release:    1
 Group:      QtQt
 License:    GPLv3
@@ -57,6 +57,25 @@ BuildRequires:  desktop-file-utils
 %description
 Watch companion application for SalfishOS
 
+%if "%{?vendor}" == "chum"
+PackageName: Amazfish
+Type: desktop-application
+DeveloperName: Adam Pigg
+Categories:
+ - Utility
+Custom:
+  Repo: https://github.com/piggz/harbour-amazfish
+Icon: https://raw.githubusercontent.com/piggz/harbour-amazfish/master/harbour-amazfish.svg
+Screenshots:
+ - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_main.png
+ - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_sleep.png
+ - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_activity.png
+Url:
+  Homepage: https://github.com/piggz/harbour-amazfish
+  Help: https://github.com/piggz/harbour-amazfish/discussions
+  Bugtracker: https://github.com/piggz/harbour-amazfish/issues
+  Donation: https://www.paypal.me/piggz
+%endif
 
 %prep
 %setup -q -n %{name}-%{version}
