@@ -27,14 +27,13 @@ public:
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
     virtual QStringList supportedDisplayItems() const override;
-private:
-    void initialise();
-    void parseServices();
-
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 
 protected:
     Q_SLOT void serviceEvent(uint8_t event);
+    virtual void initialise();
+    virtual void parseServices();
+
+    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 
 private:
     QString pairedName;

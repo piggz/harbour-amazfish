@@ -10,7 +10,7 @@
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
     qDebug() << "Creating GTS Device";
-    connect(this, &QBLEDevice::propertiesChanged, this, &GtsDevice::onPropertiesChanged);
+    connect(this, &QBLEDevice::propertiesChanged, this, &GtsDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 QString GtsDevice::deviceType()
@@ -41,7 +41,7 @@ void GtsDevice::sendAlert(const QString &sender, const QString &subject, const Q
 
 void GtsDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
-    qDebug() << "GtsDevice::onPropertiesChanged:" << interface << map << list;
+    qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
         m_reconnectTimer->start();
@@ -108,6 +108,7 @@ void GtsDevice::serviceEvent(uint8_t event)
 
 void GtsDevice::initialise()
 {
+    qDebug() << Q_FUNC_INFO;
     setConnectionState("connected");
     parseServices();
 
@@ -162,7 +163,7 @@ void GtsDevice::initialise()
 
 void GtsDevice::parseServices()
 {
-    qDebug() << "GtsDevice::parseServices";
+    qDebug() << Q_FUNC_INFO;
 
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), nullptr);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
@@ -192,7 +193,6 @@ void GtsDevice::parseServices()
             qDebug() << "Creating service for: " << uuid;
 
             if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
-                void parseServices();
                 addService(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION, new AlertNotificationService(path, this));
             } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
                 addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));

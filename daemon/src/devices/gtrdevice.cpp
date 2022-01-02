@@ -3,12 +3,13 @@
 
 GtrDevice::GtrDevice(const QString &pairedName, QObject *parent) : GtsDevice(pairedName, parent)
 {
-
+    qDebug() << Q_FUNC_INFO;
+    connect(this, &QBLEDevice::propertiesChanged, this, &GtrDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 void GtrDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
-    qDebug() << "GtsDevice::onPropertiesChanged:" << interface << map << list;
+    qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
         m_reconnectTimer->start();
@@ -44,6 +45,7 @@ bool GtrDevice::is47mm(const QString &version) const
 
 void GtrDevice::initialise()
 {
+    qDebug() << Q_FUNC_INFO;
     setConnectionState("connected");
     parseServices();
 
@@ -98,8 +100,7 @@ void GtrDevice::initialise()
 
 void GtrDevice::parseServices()
 {
-    qDebug() << "GtsDevice::parseServices";
-
+    qDebug() << Q_FUNC_INFO;
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), nullptr);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
 
@@ -128,7 +129,6 @@ void GtrDevice::parseServices()
             qDebug() << "Creating service for: " << uuid;
 
             if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
-                void parseServices();
                 addService(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION, new AlertNotificationService(path, this));
             } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
                 addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));

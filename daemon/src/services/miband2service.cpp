@@ -14,7 +14,7 @@ MiBand2Service::MiBand2Service(const QString &path, char authByte, char cryptByt
     m_requiresAuthKey = requireAuthKey;
     qDebug() << "auth:" << (int)m_authByte << "crypt:" << (int)m_cryptByte << "req:" << m_requiresAuthKey;
 
-    connect(this, &QBLEService::characteristicChanged, this, &MiBand2Service::characteristicChanged);
+    connect(this, &QBLEService::characteristicChanged, this, &MiBand2Service::characteristicChanged, Qt::UniqueConnection);
 }
 
 void MiBand2Service::initialise(bool firstTime)
