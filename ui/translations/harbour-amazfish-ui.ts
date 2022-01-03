@@ -386,43 +386,43 @@
     <name>JSTools</name>
     <message>
         <location filename="../qml/tools/JSTools.js" line="87"/>
-        <location filename="../qml/tools/JSTools.js" line="295"/>
+        <location filename="../qml/tools/JSTools.js" line="297"/>
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="88"/>
         <location filename="../qml/tools/JSTools.js" line="89"/>
-        <location filename="../qml/tools/JSTools.js" line="296"/>
-        <location filename="../qml/tools/JSTools.js" line="297"/>
+        <location filename="../qml/tools/JSTools.js" line="298"/>
+        <location filename="../qml/tools/JSTools.js" line="299"/>
         <source>Heartrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="90"/>
         <location filename="../qml/tools/JSTools.js" line="91"/>
-        <location filename="../qml/tools/JSTools.js" line="298"/>
-        <location filename="../qml/tools/JSTools.js" line="299"/>
+        <location filename="../qml/tools/JSTools.js" line="300"/>
+        <location filename="../qml/tools/JSTools.js" line="301"/>
         <source>Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="92"/>
         <location filename="../qml/tools/JSTools.js" line="93"/>
-        <location filename="../qml/tools/JSTools.js" line="300"/>
-        <location filename="../qml/tools/JSTools.js" line="301"/>
+        <location filename="../qml/tools/JSTools.js" line="302"/>
+        <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="94"/>
-        <location filename="../qml/tools/JSTools.js" line="302"/>
+        <location filename="../qml/tools/JSTools.js" line="304"/>
         <source>Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="95"/>
-        <location filename="../qml/tools/JSTools.js" line="303"/>
+        <location filename="../qml/tools/JSTools.js" line="305"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
@@ -433,7 +433,7 @@
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="97"/>
-        <location filename="../qml/tools/JSTools.js" line="304"/>
+        <location filename="../qml/tools/JSTools.js" line="306"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>

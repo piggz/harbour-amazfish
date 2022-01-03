@@ -224,13 +224,15 @@ var arrayStravaWorkoutTypes =
 [
     { name: "running", stravaType: "Run" },
     { name: "cycling", stravaType: "Ride" },
-    { name: "mountainBiking", stravaType: "Ride" },
+    { name: "mountainbiking", stravaType: "Ride" },
     { name: "walking", stravaType: "Walk" },
-    { name: "inlineSkating", stravaType: "InlineSkate" },
+    { name: "inlineskating", stravaType: "InlineSkate" },
     { name: "skiing", stravaType: "AlpineSki" },
     { name: "hiking", stravaType: "Hike" },
     { name: "indoor cycling", stravaType: "VirtualRide" },
-    { name: "treadmill", stravaType: "VirtualRun" }
+    { name: "treadmill", stravaType: "VirtualRun" },
+    { name: "swimming", stravaType: "Swim" },
+    { name: "open swimming", stravaType: "Swim" }
 ]
 
 function toStravaType(t)
