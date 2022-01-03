@@ -120,6 +120,7 @@ public:
     BOOL_OPTION(QStringLiteral("app/notifylowbattery"), appNotifyLowBattery, setAppNotifyLowBattery, true)
     BOOL_OPTION(QStringLiteral("app/overridefwcheck"),  appOverrideFwCheck,  setAppOverrideFwCheck,  false)
     BOOL_OPTION(QStringLiteral("app/navigationnotification"),  appNavigationNotification,  setAppNavigationNotification,  false)
+    BOOL_OPTION(QStringLiteral("app/simulateevents"),  appSimulateEventSupport,  setSimulateEventSupport,  false)
 
     STRING_OPTION(QStringLiteral("app/button-double-action"),    appButtonDoublePressAction,    setAppButtonDoublePressAction,    "action-none")
     STRING_OPTION(QStringLiteral("app/button-triple-action"),    appButtonTriplePressAction,    setAppButtonTriplePressAction,    "action-none")

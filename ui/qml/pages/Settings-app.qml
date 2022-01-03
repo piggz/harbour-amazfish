@@ -59,6 +59,14 @@ PagePL {
             text: qsTr("Navigation notifications")
         }
 
+        TextSwitchPL {
+            id: chkSimulateEventSupport
+            visible: supportsFeature(Amazfish.FEATURE_ALERT) && !supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
+
+            width: parent.width
+            text: qsTr("Simulate event reminder support")
+        }
+
         SectionHeaderPL {
             text: qsTr("Refresh rates")
         }
@@ -166,6 +174,7 @@ PagePL {
         chkAutoSyncData.checked = AmazfishConfig.appAutoSyncData;
         chkNotifyLowBattery.checked = AmazfishConfig.appNotifyLowBattery;
         chkNavigationNotification.checked = AmazfishConfig.appNavigationNotification;
+        chkSimulateEventSupport.checked = AmazfishConfig.appSimulateEventSupport;
     }
 
     function saveSettings() {
@@ -175,6 +184,7 @@ PagePL {
         AmazfishConfig.appAutoSyncData = chkAutoSyncData.checked;
         AmazfishConfig.appNotifyLowBattery = chkNotifyLowBattery.checked;
         AmazfishConfig.appNavigationNotification = chkNavigationNotification.checked;
+        AmazfishConfig.appSimulateEventSupport = chkSimulateEventSupport.checked;
         AmazfishConfig.localAdapter = cboLocalAdapter.value;
     }
 

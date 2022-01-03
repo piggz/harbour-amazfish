@@ -12,7 +12,7 @@
 # The name of your application
 TARGET = harbour-amazfishd
 
-LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
+LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz -lkeepalive
 PKGCONFIG += dbus-1
 QT +=  positioning KDb3 network dbus
 CONFIG += c++14

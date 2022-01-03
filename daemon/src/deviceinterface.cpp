@@ -512,6 +512,23 @@ void DeviceInterface::handleButtonPressed(int presses)
     }
 }
 
+void DeviceInterface::onEventTimer()
+{
+    qDebug() << "DeviceInterface::onEventTimer";
+    if (m_eventlist.isEmpty())
+        return;
+    watchfish::CalendarEvent event = m_eventlist.takeFirst();
+    if (m_device)
+        m_device->sendAlert("calendar", event.title(), event.description().isEmpty()?" ":event.description());
+    scheduleNextEvent();
+}
+
+void DeviceInterface::backgroundActivityStateChanged()
+{
+    if (m_backgroundActivity->isRunning())
+        onEventTimer();
+}
+
 void DeviceInterface::sendBufferedNotifications()
 {
     qDebug() << Q_FUNC_INFO;
@@ -522,6 +539,31 @@ void DeviceInterface::sendBufferedNotifications()
             sendAlert(n.appName, n.summary, n.body);
         }
     }
+}
+
+void DeviceInterface::scheduleNextEvent()
+{
+    qDebug() << "DeviceInterface::scheduleNextEvent";
+    if (m_eventlist.isEmpty())
+        return;
+    if (!m_backgroundActivity) {
+        m_backgroundActivity = new BackgroundActivity(this);
+        connect(m_backgroundActivity, &BackgroundActivity::stateChanged,
+            this, &DeviceInterface::backgroundActivityStateChanged);
+    }
+    watchfish::CalendarEvent nextEvent = m_eventlist.first();
+    int secsToNextEvent = QDateTime::currentDateTime().secsTo(nextEvent.alertTime());
+    while (secsToNextEvent < 30) {
+        m_eventlist.takeFirst();
+        if (m_eventlist.isEmpty())
+            return;
+        nextEvent = m_eventlist.first();
+        secsToNextEvent = QDateTime::currentDateTime().secsTo(nextEvent.alertTime());
+    }
+    qDebug() << "seconds until next event: " << secsToNextEvent;
+    qDebug() << "event title: " << nextEvent.title();
+    m_backgroundActivity->setWakeupRange(secsToNextEvent-30, secsToNextEvent+30);
+    m_backgroundActivity->wait();
 }
 
 QString DeviceInterface::prepareFirmwareDownload(const QString &path)
@@ -727,6 +769,7 @@ void DeviceInterface::triggerSendWeather()
 
 void DeviceInterface::updateCalendar()
 {
+    qDebug() << "DeviceInterface::updateCalendar";    
     if (supportsFeature(AbstractDevice::FEATURE_EVENT_REMINDER)) {
         if (m_device) {
             QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
@@ -737,6 +780,14 @@ void DeviceInterface::updateCalendar()
                 m_device->sendEventReminder(id, event.start(), event.title());
                 id++;
             }
+        }
+    } else if (AmazfishConfig::instance()->appSimulateEventSupport()){
+        QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
+        if (!eventlist.isEmpty()) {
+            std::sort(eventlist.begin(), eventlist.end(), [](watchfish::CalendarEvent a, watchfish::CalendarEvent b) {
+                    return (a.alertTime().isValid() && (a.alertTime() < b.alertTime())) || !b.alertTime().isValid(); });
+            m_eventlist = eventlist;
+            scheduleNextEvent();
         }
     }
 }
