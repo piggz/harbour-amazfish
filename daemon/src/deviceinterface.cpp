@@ -552,12 +552,16 @@ void DeviceInterface::scheduleNextEvent()
             this, &DeviceInterface::backgroundActivityStateChanged);
     }
     watchfish::CalendarEvent nextEvent = m_eventlist.first();
+    if (!nextEvent.alertTime().isValid())
+        return;
     int secsToNextEvent = QDateTime::currentDateTime().secsTo(nextEvent.alertTime());
     while (secsToNextEvent < 30) {
         m_eventlist.takeFirst();
         if (m_eventlist.isEmpty())
             return;
         nextEvent = m_eventlist.first();
+        if (!nextEvent.alertTime().isValid())
+            return;
         secsToNextEvent = QDateTime::currentDateTime().secsTo(nextEvent.alertTime());
     }
     qDebug() << "seconds until next event: " << secsToNextEvent;
@@ -783,10 +787,24 @@ void DeviceInterface::updateCalendar()
         }
     } else if (AmazfishConfig::instance()->appSimulateEventSupport()){
         QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
-        if (!eventlist.isEmpty()) {
-            std::sort(eventlist.begin(), eventlist.end(), [](watchfish::CalendarEvent a, watchfish::CalendarEvent b) {
-                    return (a.alertTime().isValid() && (a.alertTime() < b.alertTime())) || !b.alertTime().isValid(); });
-            m_eventlist = eventlist;
+        QList<watchfish::CalendarEvent> filteredEventList;
+        foreach (const watchfish::CalendarEvent &event, eventlist) {
+            if (!event.alertTime().isValid())
+                continue;
+            if (filteredEventList.isEmpty()) {
+                filteredEventList.append(event);
+            } else {
+                auto i = filteredEventList.begin();
+                while (i != filteredEventList.end() && i->alertTime() < event.alertTime())
+                    i++;
+                filteredEventList.insert(i, event);
+            }
+        }
+        foreach (const watchfish::CalendarEvent &event, filteredEventList) {
+                qDebug() << event.title() << event.alertTime();
+        }
+        if (!filteredEventList.isEmpty()) {
+            m_eventlist = filteredEventList;
             scheduleNextEvent();
         }
     }
