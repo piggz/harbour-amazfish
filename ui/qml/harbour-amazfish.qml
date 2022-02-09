@@ -52,7 +52,7 @@ ApplicationWindowPL
     
     Connections {
         target: DaemonInterfaceInstance
-        onMessage: {
+        function onMessage(text) {
             showMessage(text);
         }
     }
@@ -174,7 +174,7 @@ ApplicationWindowPL
 
     Connections {
         target: DaemonInterfaceInstance
-        onInformationChanged: {
+        function onInformationChanged(infoKey, infoValue) {
             console.log("Information changed", infoKey, infoValue);
 
             switch (infoKey) {
@@ -189,7 +189,7 @@ ApplicationWindowPL
                 break;
             }
         }
-        onDownloadProgress: {
+        function onDownloadProgress(percent) {
             _percentText = percent + "%";
         }
     }

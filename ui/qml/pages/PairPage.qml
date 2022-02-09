@@ -19,7 +19,7 @@ PageListPL {
     Connections {
         target: DaemonInterfaceInstance
 
-        onPaired: {
+        function onPaired(name, address, error) {
             if (!error) {
                 // Set values from the signal
                 AmazfishConfig.pairedAddress = address

@@ -210,7 +210,7 @@ PagePL {
         }
         Connections {
             target: DaemonInterfaceInstance
-            onInformationChanged: {
+            function onInformationChanged(infoKey, infoValue) {
                 switch (infoKey) {
                     case Amazfish.INFO_SERIAL:
                     lblSerial.text = qsTr("Serial No: ") + infoValue;

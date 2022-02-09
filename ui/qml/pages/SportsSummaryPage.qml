@@ -149,7 +149,7 @@ PageListPL {
     Connections {
         target: DaemonInterfaceInstance
 
-        onOperationRunningChanged: {
+        function onOperationRunningChanged() {
             SportsModel.update();
         }
     }

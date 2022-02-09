@@ -32,13 +32,19 @@ Item {
 
     Connections {
         target: app
-        onInfoActiveChanged: stack.processCurrentIndex()
+        function onInfoActiveChanged() {
+            stack.processCurrentIndex()
+        }
     }
 
     Connections {
         target: ps
-        onCurrentIndexChanged: stack.processCurrentIndex()
-        onCurrentItemChanged: stack.processCurrentItem()
+        function onCurrentIndexChanged() {
+            stack.processCurrentIndex()
+        }
+        function onCurrentItemChanged() {
+            stack.processCurrentItem()
+        }
     }
 
     on_LockedChanged: stack.processCurrentItem()

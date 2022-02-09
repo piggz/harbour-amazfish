@@ -133,12 +133,12 @@ CoverBackground {
 
     Connections {
         target: DaemonInterfaceInstance
-        onConnectionStateChanged: {
+        function onConnectionStateChanged() {
             if (DaemonInterfaceInstance.connectionState === "authenticated") {
                 DaemonInterfaceInstance.refreshInformation();
             }
         }
-        onInformationChanged: {
+        function onInformationChanged(infoKey, infoValue) {
             switch (infoKey) {
             case Amazfish.INFO_BATTERY:
                 lblBattery.text = infoValue

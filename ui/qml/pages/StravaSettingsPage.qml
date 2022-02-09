@@ -45,7 +45,7 @@ PagePL {
 
     Connections {
         target: o2strava
-        onLinkedChanged: {
+        function onLinkedChanged() {
             if (linked) {
                 var tokens = o2strava.extraTokens;
                 athlete = tokens["athlete"];
