@@ -175,13 +175,18 @@ void HuamiDevice::buttonPressTimeout()
 
 void HuamiDevice::authenticated(bool ready)
 {
-    qDebug() << "BipInterface::authenticated:" << ready;
+    qDebug() << Q_FUNC_INFO << ready;
 
     if (ready) {
         m_needsAuth = false;
 
         MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
         if (mi){
+            mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION);
+            mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO);
+            mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT);
+            mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS);
+
             mi->setCurrentTime();
             mi->setLanguage();
             mi->setDateDisplay();

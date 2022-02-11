@@ -4,6 +4,7 @@
 
 const char* MiBand2Service::UUID_SERVICE_MIBAND2  = "0000fee1-0000-1000-8000-00805f9b34fb";
 const char* MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH = "00000009-0000-3512-2118-0009af100700";
+const char* MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_2021_CHUNKED_CHAR_READ = "00000017-0000-3512-2118-0009af100700";
 
 MiBand2Service::MiBand2Service(const QString &path, char authByte, char cryptByte, bool requireAuthKey, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND2, path, parent)
 {

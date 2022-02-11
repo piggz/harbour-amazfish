@@ -124,7 +124,7 @@ void BipSDevice::parseServices()
 
 void BipSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
-    qDebug() << Q_FUNC_INFO<< interface << map << list;
+    qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
         m_reconnectTimer->start();

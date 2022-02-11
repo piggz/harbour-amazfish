@@ -97,10 +97,11 @@ public:
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    virtual void initialise();
 
 private:
     void parseServices();
-    void initialise();
+
 };
 
 #endif // BIPDEVICE_H

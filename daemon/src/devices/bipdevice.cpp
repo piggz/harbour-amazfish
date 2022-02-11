@@ -6,6 +6,7 @@
 
 BipDevice::BipDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
+    qDebug() << Q_FUNC_INFO;
     connect(this, &QBLEDevice::propertiesChanged, this, &BipDevice::onPropertiesChanged);
 }
 
@@ -28,7 +29,7 @@ QString BipDevice::deviceType()
     
 void BipDevice::parseServices()
 {
-    qDebug() << "BipDevice::parseServices";
+    qDebug() << Q_FUNC_INFO;
 
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
@@ -78,7 +79,7 @@ void BipDevice::parseServices()
 
 void BipDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
-    qDebug() << "BipDevice::onPropertiesChanged:" << interface << map << list;
+    qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
         m_reconnectTimer->start();
@@ -111,6 +112,7 @@ AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes)
 
 void BipDevice::initialise()
 {
+    qDebug() << Q_FUNC_INFO;
     setConnectionState("connected");
     parseServices();
 

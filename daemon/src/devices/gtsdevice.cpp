@@ -10,7 +10,7 @@
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
     qDebug() << "Creating GTS Device";
-    connect(this, &QBLEDevice::propertiesChanged, this, &GtsDevice::onPropertiesChanged, Qt::UniqueConnection);
+    //connect(this, &QBLEDevice::propertiesChanged, this, &GtsDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 QString GtsDevice::deviceType()
@@ -114,11 +114,6 @@ void GtsDevice::initialise()
 
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
-        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION);
-        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO);
-        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT);
-        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS);
-
         connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &GtsDevice::handleButtonPressed, Qt::UniqueConnection);
@@ -133,6 +128,8 @@ void GtsDevice::initialise()
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 
         mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
+        mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_2021_CHUNKED_CHAR_READ);
+
         mi2->initialise(false);
     }
 
@@ -153,11 +150,11 @@ void GtsDevice::initialise()
         connect(hrm, &HRMService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
     }
 
-    QString revision = softwareRevision();
-    if (revision > "0.0.9.0") {
-        qDebug() << "GTS with new FW";
-        m_ActivitySampleSize = 8;
-    }
+    //QString revision = softwareRevision();
+    //if (revision > "0.0.9.0") {
+    //    qDebug() << "GTS with new FW";
+    //    m_ActivitySampleSize = 8;
+    //}
 }
 
 

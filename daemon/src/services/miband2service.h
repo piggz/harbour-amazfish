@@ -6,6 +6,7 @@
 /*
 {0000FEE1-0000-1000-8000-00805f9b34fb} MiBand2 Service
 --00000009-0000-3512-2118-0009af100700 //Auth
+--00000017-0000-3512-2118-0009af100700 //2021 Chunked Char Read
 --0000fedd-0000-1000-8000-00805f9b34fb //Unknown
 --0000fede-0000-1000-8000-00805f9b34fb //Unknown
 --0000fedf-0000-1000-8000-00805f9b34fb //Unknown
@@ -23,6 +24,7 @@ public:
 
     static const char* UUID_SERVICE_MIBAND2;
     static const char* UUID_CHARACTERISITIC_MIBAND2_AUTH;
+    static const char* UUID_CHARACTERISITIC_MIBAND2_2021_CHUNKED_CHAR_READ;
 
     const uint8_t AUTH_SEND_KEY = 0x01;
     const uint8_t AUTH_REQUEST_RANDOM_AUTH_NUMBER = 0x02;

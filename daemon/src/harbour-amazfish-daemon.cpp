@@ -22,8 +22,16 @@
 static void daemonize();
 static void signalHandler(int sig);
 
+void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QByteArray localMsg = msg.toLocal8Bit();
+    const char* time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toLocal8Bit();
+    fprintf(stderr, "%s : %s\n", time, localMsg.constData());
+}
+
 int main(int argc, char **argv)
 {
+    qInstallMessageHandler(myMessageOutput);
     QCoreApplication app(argc, argv);
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setApplicationName("harbour-amazfish");
