@@ -167,6 +167,7 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-amazfish-ui-de.ts \
+                translations/harbour-amazfish-ui-nl.ts \
                 translations/harbour-amazfish-ui-ru.ts \
                 translations/harbour-amazfish-ui-sv.ts \
                 translations/harbour-amazfish-ui-es.ts
