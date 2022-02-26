@@ -10,7 +10,7 @@
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
     qDebug() << "Creating GTS Device";
-    //connect(this, &QBLEDevice::propertiesChanged, this, &GtsDevice::onPropertiesChanged, Qt::UniqueConnection);
+    connect(this, &QBLEDevice::propertiesChanged, this, &GtsDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 QString GtsDevice::deviceType()
