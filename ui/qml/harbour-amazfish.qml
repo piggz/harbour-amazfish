@@ -62,7 +62,7 @@ ApplicationWindowPL
         id: checkState
         interval: 5000
         repeat: true
-        running: true
+        running: ENABLE_SYSTEMD === "YES"
         onTriggered: {
             systemdServiceIface.updateProperties()
 
@@ -114,21 +114,22 @@ ApplicationWindowPL
 
         signalsEnabled: true
         function updateProperties() {
-            var activeProperty = systemdServiceIface.getProperty("ActiveState");
-            if (activeProperty === "active") {
-                serviceActiveState = true;
-            } else {
-                serviceActiveState = false;
-            }
+            if (ENABLE_SYSTEMD === "YES"){
+                var activeProperty = systemdServiceIface.getProperty("ActiveState");
+                if (activeProperty === "active") {
+                    serviceActiveState = true;
+                } else {
+                    serviceActiveState = false;
+                }
 
-            var serviceEnabledProperty = systemdServiceIface.getProperty("UnitFileState");
-            if (serviceEnabledProperty === "enabled") {
-                serviceEnabledState = true;
+                var serviceEnabledProperty = systemdServiceIface.getProperty("UnitFileState");
+                if (serviceEnabledProperty === "enabled") {
+                    serviceEnabledState = true;
+                }
+                else {
+                    serviceEnabledState = false;
+                }
             }
-            else {
-                serviceEnabledState = false;
-            }
-
         }
 
         onPropertiesChanged: updateProperties()
@@ -145,18 +146,21 @@ ApplicationWindowPL
 
         signal unitNew(string name)
         onUnitNew: {
-            if (name == "harbour-amazfish.service") {
+            if (name == "harbour-amazfish.service" && ENABLE_SYSTEMD === "YES") {
                 systemdServiceIface.updateProperties()
             }
         }
 
         function enableService() {
-            systemdManager.typedCall("EnableUnitFiles", [{"type":"as", "value":["harbour-amazfish.service"]}, {"type":"b", "value":false}, {"type":"b", "value":true}])
+            if(ENABLE_SYSTEMD === "YES") {
+                systemdManager.typedCall("EnableUnitFiles", [{"type":"as", "value":["harbour-amazfish.service"]}, {"type":"b", "value":false}, {"type":"b", "value":true}])
+            }
         }
 
         function disableService() {
-            systemdManager.typedCall("DisableUnitFiles", [{"type":"as", "value":["harbour-amazfish.service"]}, {"type":"b", "value":false}])
-
+            if (ENABLE_SYSTEMD === "YES") {
+                systemdManager.typedCall("DisableUnitFiles", [{"type":"as", "value":["harbour-amazfish.service"]}, {"type":"b", "value":false}])
+            }
         }
     }
 

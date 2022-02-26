@@ -195,6 +195,10 @@ equals(FLAVOR, "silica") {
     error("Please specify platform using FLAVOR=platform as qmake option. Supported platforms: kirigami, silica, qtcontrols, uuitk.")
 }
 
+equals(DISABLE_SYSTEMD, "yes") {
+    DEFINES += DISABLE_SYSTEMD
+}
+
 flavor_silica {
     message(SailfishOS build)
     CONFIG += sailfishapp sailfishapp_no_deploy_qml sailfishapp_i18n

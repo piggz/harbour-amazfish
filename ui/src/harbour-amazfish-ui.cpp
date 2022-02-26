@@ -91,6 +91,12 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("STRAVA_CLIENT_SECRET", encryptDecrypt("}{s{--z*.x{y{ss///x/x){*xz{(|yy/{syr-/})"));
     view->rootContext()->setContextProperty("STRAVA_CLIENT_ID", "13707");
 
+#ifdef DISABLE_SYSTEMD
+    view->rootContext()->setContextProperty("ENABLE_SYSTEMD", "NO");
+#else
+    view->rootContext()->setContextProperty("ENABLE_SYSTEMD", "YES");
+#endif
+
 #ifdef MER_EDITION_SAILFISH
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));
     view->show();
