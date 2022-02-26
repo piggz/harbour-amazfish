@@ -53,6 +53,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("harbour-amazfish");
     QGuiApplication::setApplicationDisplayName("Amazfish");
 
+    // disable new QML connection syntax debug messages for as long as
+    // older Qt versions (5.12 and older) are supported
+    QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.connections=false"));
+
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
     // add fallback icon path
     QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << ":qml/custom-icons");
