@@ -145,6 +145,7 @@ PagePL {
 
             accessToken: "pk.eyJ1IjoiamRyZXNjaGVyIiwiYSI6ImNqYmVta256YTJsdjUzMm1yOXU0cmxibGoifQ.JiMiONJkWdr0mVIjajIFZQ"
             cacheDatabaseDefaultPath: true
+            styleUrl: "mapbox://styles/mapbox/outdoors-v11"
 
             visible: true
 
