@@ -256,12 +256,8 @@
         <translation>Service</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation>Start</translation>
-    </message>
-    <message>
-        <source>Enable</source>
-        <translation>Aktivieren</translation>
+        <source>Enable on boot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -304,6 +300,10 @@
     <message>
         <source>VO2 Max</source>
         <translation>VO2 Max</translation>
+    </message>
+    <message>
+        <source>%1 bpm</source>
+        <translation type="unfinished">%1 bpm</translation>
     </message>
 </context>
 <context>
@@ -491,6 +491,61 @@
         <source>Navigation notifications</source>
         <translation>Navigationsbenachrichtigungen</translation>
     </message>
+    <message>
+        <source>Simulate event reminder support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Button Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings-button-action</name>
+    <message>
+        <source>Button Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double Press Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triple Press Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quad Press Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation type="unfinished">Einstellungen speichern</translation>
+    </message>
+    <message>
+        <source>No Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Volume Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Volume Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Script</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-device</name>
@@ -584,6 +639,10 @@
     </message>
     <message>
         <source>Huami Display Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>nl_NL</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -685,6 +744,10 @@
         <source>AliPay</source>
         <translation>AliPay</translation>
     </message>
+    <message>
+        <source>Timer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-menu</name>
@@ -719,6 +782,10 @@
     <message>
         <source>Debug Info</source>
         <translation>Debuginfo</translation>
+    </message>
+    <message>
+        <source>Strava</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -815,19 +882,6 @@
         <translation>Schlaf</translation>
     </message>
     <message>
-        <source>Note: last nights sleep is updated at mid-day</source>
-        <translation>Notiz: Schlafdaten werden mittags aktualisiert</translation>
-    </message>
-    <message>
-        <source>h:mm</source>
-        <extracomment>Format of sleep hours</extracomment>
-        <translation>Format der Schlafdaten</translation>
-    </message>
-    <message>
-        <source>Deep %1</source>
-        <translation>Tiefschlaf</translation>
-    </message>
-    <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
         <translation>Format für die Schlafdatenzusammenfassung</translation>
@@ -835,6 +889,14 @@
     <message>
         <source>Hours</source>
         <translation>Stunden</translation>
+    </message>
+    <message>
+        <source>%1 hrs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1 hrs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1007,6 +1069,10 @@
         <source>swolf</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Send to Strava</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SportsSummaryPage</name>
@@ -1018,12 +1084,98 @@
         <source>Download Next Activity</source>
         <translation>Weitere Aktivitäten abrufen</translation>
     </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StepsPage</name>
     <message>
         <source>Steps</source>
         <translation>Schritte</translation>
+    </message>
+</context>
+<context>
+    <name>StravaSettingsPage</name>
+    <message>
+        <source>Strava settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Name: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StravaUploadPage</name>
+    <message>
+        <source>Strava Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activity name for Strava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activity description for Strava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type (Strava)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Private</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Commute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploading data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Checking upload...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TCX uploaded...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activity upload complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unknown error occurred</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

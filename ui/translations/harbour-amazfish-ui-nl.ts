@@ -2,20 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="nl_NL">
 <context>
-    <name>AbstractDevice</name>
-    <message>
-        <source>Device doen not support settings</source>
-        <translation type="vanished">Apparaat ondersteunt geen instellingen</translation>
-    </message>
-</context>
-<context>
-    <name>AddCityDialog</name>
-    <message>
-        <source>Set Location</source>
-        <translation type="vanished">Locatie instellen</translation>
-    </message>
-</context>
-<context>
     <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
@@ -60,10 +46,6 @@
 <context>
     <name>AnalysisPage</name>
     <message>
-        <source>Download Data</source>
-        <translation type="vanished">Gegevens downloaden</translation>
-    </message>
-    <message>
         <source>Analysis</source>
         <translation>Analyse</translation>
     </message>
@@ -85,21 +67,6 @@
     <message>
         <source>Enter auth key</source>
         <translation>Auth-sleutel invoeren</translation>
-    </message>
-</context>
-<context>
-    <name>BipDevice</name>
-    <message>
-        <source>Amazfish</source>
-        <translation type="vanished">Amazfish</translation>
-    </message>
-    <message>
-        <source>Connected</source>
-        <translation type="vanished">Verbonden</translation>
-    </message>
-    <message>
-        <source>Phone and watch are connected</source>
-        <translation type="vanished">Telefoon en horloge zijn verbonden</translation>
     </message>
 </context>
 <context>
@@ -134,17 +101,6 @@
     </message>
 </context>
 <context>
-    <name>BipFirmwareService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation type="vanished">Er is momenteel een bewerking actief. Probeer het later opnieuw.</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation type="vanished">Geen bestand geselecteerd</translation>
-    </message>
-</context>
-<context>
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
@@ -156,10 +112,6 @@
     <message>
         <source>Refresh</source>
         <translation>Verversen</translation>
-    </message>
-    <message>
-        <source>AmazFish</source>
-        <translation type="vanished">AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
@@ -204,10 +156,6 @@
     <message>
         <source>Test Popup</source>
         <translation>Test melding</translation>
-    </message>
-    <message>
-        <source>Reboot watch</source>
-        <translation type="vanished">Horloge herstarten</translation>
     </message>
     <message>
         <source>Debugging</source>
@@ -255,13 +203,6 @@
     </message>
 </context>
 <context>
-    <name>DeviceInterface</name>
-    <message>
-        <source>Device is not valid, it may not be supported</source>
-        <translation type="vanished">Apparaat is niet geldig, mogelijk wordt het niet ondersteund.</translation>
-    </message>
-</context>
-<context>
     <name>DownloadDataMenuItem</name>
     <message>
         <source>Download Data</source>
@@ -270,10 +211,6 @@
 </context>
 <context>
     <name>FirstPage</name>
-    <message>
-        <source>Debug Info</source>
-        <translation type="vanished">Debug-informatie</translation>
-    </message>
     <message>
         <source>Pair with watch</source>
         <translation>Koppel met horloge</translation>
@@ -293,10 +230,6 @@
     <message>
         <source>Connect to watch</source>
         <translation>Verbind met het horloge</translation>
-    </message>
-    <message>
-        <source>AmazFish</source>
-        <translation type="vanished">AmazFish</translation>
     </message>
     <message>
         <source>Data Graphs</source>
@@ -409,30 +342,7 @@
     </message>
 </context>
 <context>
-    <name>MiBandService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation type="vanished">Er is momenteel een bewerking actief. Probeer het later opnieuw.</translation>
-    </message>
-    <message>
-        <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation type="vanished">Firmware is te oud om weergave-items in te stellen, V0.1.1.14 is vereist.</translation>
-    </message>
-    <message>
-        <source>Firmware supports weather condition string</source>
-        <translation type="vanished">Firmware ondersteunt de tekenreeks voor weersomstandigheden.</translation>
-    </message>
-</context>
-<context>
     <name>PairPage</name>
-    <message>
-        <source>Start scan</source>
-        <translation type="vanished">Start scan</translation>
-    </message>
-    <message>
-        <source>Try again</source>
-        <translation type="vanished">Probeer opnieuw</translation>
-    </message>
     <message>
         <source>Pair Device</source>
         <translation>Koppel met apparaat</translation>
@@ -467,30 +377,6 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>No data to transfer</source>
-        <translation type="vanished">Geen gegevens om over te zetten</translation>
-    </message>
-    <message>
-        <source>Update operation failed</source>
-        <translation type="vanished">Update bewerking mislukt</translation>
-    </message>
-    <message>
-        <source>Update operation failed, unexpected metadata</source>
-        <translation type="vanished">Update bewerking mislukt, onverwachte metadata</translation>
-    </message>
-    <message>
-        <source>Update operation complete</source>
-        <translation type="vanished">Update bewerking voltooid</translation>
-    </message>
-    <message>
-        <source>File does not seem to be supported</source>
-        <translation type="vanished">Bestand lijkt niet te worden ondersteund</translation>
-    </message>
-    <message>
-        <source>About to transfer data from </source>
-        <translation type="vanished">Gegevens overzetten van </translation>
-    </message>
     <message>
         <source>%1s</source>
         <translation>%1s</translation>
@@ -537,10 +423,6 @@
 </context>
 <context>
     <name>Settings-app</name>
-    <message>
-        <source>Device Settings</source>
-        <translation type="vanished">Apparaat instellingen</translation>
-    </message>
     <message>
         <source>Notify on connect</source>
         <translation>Melden bij verbinden</translation>
@@ -613,56 +495,9 @@
         <source>Button Actions</source>
         <translation>Knopacties</translation>
     </message>
-</context>
-<context>
-    <name>Settings-bip-shortcuts</name>
     <message>
-        <source>BIP Display Items</source>
-        <translation type="vanished">BIP Weergave-items</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="vanished">Status</translation>
-    </message>
-    <message>
-        <source>Activity</source>
-        <translation type="vanished">Activiteit</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Weer</translation>
-    </message>
-    <message>
-        <source>Alarm</source>
-        <translation type="vanished">Alarm</translation>
-    </message>
-    <message>
-        <source>Timer</source>
-        <translation type="vanished">Wekker</translation>
-    </message>
-    <message>
-        <source>Compass</source>
-        <translation type="vanished">Kompas</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Instellingen</translation>
-    </message>
-    <message>
-        <source>AliPay</source>
-        <translation type="vanished">AliPay</translation>
-    </message>
-    <message>
-        <source>Weather Shortcut</source>
-        <translation type="vanished">Weer snelkoppeling</translation>
-    </message>
-    <message>
-        <source>AliPay Shortcut</source>
-        <translation type="vanished">AliPay snelkoppeling</translation>
-    </message>
-    <message>
-        <source>Save Settings</source>
-        <translation type="vanished">Instellingen opslaan</translation>
+        <source>Simulate event reminder support</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -719,10 +554,6 @@
         <translation>Apparaat instellingen</translation>
     </message>
     <message>
-        <source>Langage</source>
-        <translation type="vanished">Taal</translation>
-    </message>
-    <message>
         <source>en_US</source>
         <translation>Engels (US)</translation>
     </message>
@@ -747,16 +578,8 @@
         <translation>Nederlands</translation>
     </message>
     <message>
-        <source>cs_CZ</source>
-        <translation type="vanished">Tsjechisch</translation>
-    </message>
-    <message>
         <source>ru_RU</source>
         <translation>Russisch</translation>
-    </message>
-    <message>
-        <source>sv_SV</source>
-        <translation type="vanished">Zweeds</translation>
     </message>
     <message>
         <source>fr_FR</source>
@@ -801,10 +624,6 @@
     <message>
         <source>Imperial</source>
         <translation>Imperiaal</translation>
-    </message>
-    <message>
-        <source>BIP Display Items</source>
-        <translation type="vanished">BIP Weergave-items</translation>
     </message>
     <message>
         <source>Language</source>
@@ -1055,20 +874,12 @@
 <context>
     <name>SleepPage</name>
     <message>
-        <source>Download Data</source>
-        <translation type="vanished">Download gegevens</translation>
-    </message>
-    <message>
         <source>Sleep Summary</source>
         <translation>Slaap samenvatting</translation>
     </message>
     <message>
         <source>Sleep</source>
         <translation>Slaap</translation>
-    </message>
-    <message>
-        <source>hrs</source>
-        <translation type="vanished">uren</translation>
     </message>
     <message>
         <source>%1 hrs</source>
@@ -1280,10 +1091,6 @@
 </context>
 <context>
     <name>StepsPage</name>
-    <message>
-        <source>Download Data</source>
-        <translation type="vanished">Download gegevens</translation>
-    </message>
     <message>
         <source>Steps</source>
         <translation>Stappen</translation>

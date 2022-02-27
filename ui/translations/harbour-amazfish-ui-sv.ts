@@ -495,6 +495,10 @@
         <source>Button Actions</source>
         <translation>Knappåtgärder</translation>
     </message>
+    <message>
+        <source>Simulate event reminder support</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings-button-action</name>
@@ -636,6 +640,10 @@
     <message>
         <source>Huami Display Items</source>
         <translation>Huami skärmenheter</translation>
+    </message>
+    <message>
+        <source>nl_NL</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
