@@ -100,10 +100,12 @@ PagePL {
 
         SectionHeaderPL {
             text: qsTr("Amazfish Service")
+            visible: (ENABLE_SYSTEMD === "YES")
         }
 
         TextSwitchPL {
             id: chkServiceEnabled
+            visible: (ENABLE_SYSTEMD === "YES")
             checked: serviceEnabledState === false ? false : true
             text: qsTr("Start service on boot")
             onCheckedChanged: {
@@ -118,11 +120,12 @@ PagePL {
         LabelPL {
             width: parent.width
             text: qsTr("Start/Stop the Amazfish Background Service")
+            visible: (ENABLE_SYSTEMD === "YES")
         }
 
         Row {
             id: serviceButtonRow
-
+            visible: (ENABLE_SYSTEMD === "YES")
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
             spacing: 10

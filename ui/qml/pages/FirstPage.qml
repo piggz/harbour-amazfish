@@ -249,7 +249,7 @@ PagePL {
 
         ButtonPL {
             text: qsTr("Enable on boot")
-            visible: serviceEnabledState == false
+            visible: serviceEnabledState == false && (ENABLE_SYSTEMD === "YES")
             anchors.horizontalCenter: parent.horizontalCenter
 
             onClicked: {
