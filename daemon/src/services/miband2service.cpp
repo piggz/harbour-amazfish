@@ -4,7 +4,6 @@
 
 const char* MiBand2Service::UUID_SERVICE_MIBAND2  = "0000fee1-0000-1000-8000-00805f9b34fb";
 const char* MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH = "00000009-0000-3512-2118-0009af100700";
-const char* MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_2021_CHUNKED_CHAR_READ = "00000017-0000-3512-2118-0009af100700";
 
 MiBand2Service::MiBand2Service(const QString &path, char authByte, char cryptByte, bool requireAuthKey, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND2, path, parent)
 {
@@ -26,6 +25,8 @@ void MiBand2Service::initialise(bool firstTime)
         writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, UCHAR_TO_BYTEARRAY(AUTH_SEND_KEY) + UCHAR_TO_BYTEARRAY(m_authByte) + getSecretKey());
     } else {
         qDebug() << "Writing request for auth number";
+        //uint8_t start[2] = {0x01, 0x00};
+        //writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, UCHARARR_TO_BYTEARRAY(start));
         writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH , requestAuthNumber());
     }
 }
@@ -72,6 +73,7 @@ QByteArray MiBand2Service::requestAuthNumber() {
     } else {
         uint8_t req = (m_cryptByte | AUTH_REQUEST_RANDOM_AUTH_NUMBER);
         uint8_t suffix[3] = {0x02,0x01, 0x00};
+        //uint8_t suffix[1] = {0x02};
 
         return UCHAR_TO_BYTEARRAY(req) + UCHAR_TO_BYTEARRAY(m_authByte) + UCHARARR_TO_BYTEARRAY(suffix);
     }
