@@ -22,7 +22,7 @@ Name:       harbour-amazfish
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Watch interface application
-Version:    2.0.4
+Version:    2.0.5
 Release:    1
 Group:      QtQt
 License:    GPLv3
@@ -53,6 +53,7 @@ BuildRequires:  kcoreaddons-devel >= 5.31.0
 BuildRequires:  qt5-qttools-linguist
 BuildRequires:  qt5-qtconnectivity-qtbluetooth-devel
 BuildRequires:  desktop-file-utils
+BuildRequires:  libkeepalive-devel
 
 %description
 Watch companion application for SalfishOS
