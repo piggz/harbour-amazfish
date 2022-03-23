@@ -12,7 +12,7 @@
 # The name of your application
 TARGET = harbour-amazfishd
 
-LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz -lkeepalive
+LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 PKGCONFIG += dbus-1
 QT +=  positioning KDb3 network dbus
 CONFIG += c++14
@@ -32,6 +32,7 @@ equals(FLAVOR, "silica") {
 flavor_silica {
     message(SailfishOS daemon build)
     DEFINES += MER_EDITION_SAILFISH
+    LIBS += -lkeepalive
     CONFIG += sailfishapp
     CONFIG += link_pkgconfig
     PKGCONFIG += mlite5
