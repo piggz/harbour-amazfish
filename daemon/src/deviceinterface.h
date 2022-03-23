@@ -11,7 +11,9 @@
 #include <KDb3/KDbConnection>
 #include <KDb3/KDbConnectionData>
 
+#ifdef MER_EDITION_SAILFISH
 #include <keepalive/backgroundactivity.h>
+#endif
 
 #include "abstractdevice.h"
 #include "abstractfirmwareinfo.h"
@@ -155,7 +157,9 @@ private:
 
     //Event list for simulated event support
     QList<watchfish::CalendarEvent> m_eventlist;
+#ifdef MER_EDITION_SAILFISH
     BackgroundActivity *m_backgroundActivity = nullptr;
+#endif
 };
 
 #endif // BIPINTERFACE_H

@@ -525,8 +525,10 @@ void DeviceInterface::onEventTimer()
 
 void DeviceInterface::backgroundActivityStateChanged()
 {
+#ifdef MER_EDITION_SAILFISH
     if (m_backgroundActivity->isRunning())
         onEventTimer();
+#endif
 }
 
 void DeviceInterface::sendBufferedNotifications()
@@ -546,11 +548,14 @@ void DeviceInterface::scheduleNextEvent()
     qDebug() << "DeviceInterface::scheduleNextEvent";
     if (m_eventlist.isEmpty())
         return;
+#ifdef MER_EDITION_SAILFISH
     if (!m_backgroundActivity) {
         m_backgroundActivity = new BackgroundActivity(this);
         connect(m_backgroundActivity, &BackgroundActivity::stateChanged,
             this, &DeviceInterface::backgroundActivityStateChanged);
     }
+#endif
+
     watchfish::CalendarEvent nextEvent = m_eventlist.first();
     if (!nextEvent.alertTime().isValid())
         return;
@@ -566,8 +571,10 @@ void DeviceInterface::scheduleNextEvent()
     }
     qDebug() << "seconds until next event: " << secsToNextEvent;
     qDebug() << "event title: " << nextEvent.title();
+#ifdef MER_EDITION_SAILFISH
     m_backgroundActivity->setWakeupRange(secsToNextEvent-30, secsToNextEvent+30);
     m_backgroundActivity->wait();
+#endif
 }
 
 QString DeviceInterface::prepareFirmwareDownload(const QString &path)
