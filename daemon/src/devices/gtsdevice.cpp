@@ -128,8 +128,6 @@ void GtsDevice::initialise()
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 
         mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
-        mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_2021_CHUNKED_CHAR_READ);
-
         mi2->initialise(false);
     }
 

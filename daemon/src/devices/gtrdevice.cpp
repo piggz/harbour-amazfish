@@ -1,5 +1,6 @@
 #include "gtrdevice.h"
 #include <QtXml/QtXml>
+#include <QTimer>
 
 GtrDevice::GtrDevice(const QString &pairedName, QObject *parent) : GtsDevice(pairedName, parent)
 {
@@ -46,8 +47,29 @@ bool GtrDevice::is47mm(const QString &version) const
 void GtrDevice::initialise()
 {
     qDebug() << Q_FUNC_INFO;
-    setConnectionState("connected");
     parseServices();
+
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ);
+        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER);
+        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE);
+
+        /*
+        qDebug() << "Read first";
+        QByteArray a = mi->readValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER);
+        qDebug() << a;
+
+        qDebug() << "Write something";
+        uint8_t start[1] = {0x01};
+        mi->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE, UCHARARR_TO_BYTEARRAY(start));
+        */
+        connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
+        connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
+        connect(mi, &MiBandService::buttonPressed, this, &GtrDevice::handleButtonPressed, Qt::UniqueConnection);
+        connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
+        connect(mi, &MiBandService::serviceEvent, this, &GtrDevice::serviceEvent, Qt::UniqueConnection);
+    }
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
     if (mi2) {
@@ -58,21 +80,7 @@ void GtrDevice::initialise()
         mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
     }
 
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        mi->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_2021_CHUNKED_CHAR_READ);
-
-        connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
-        connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
-        connect(mi, &MiBandService::buttonPressed, this, &GtrDevice::handleButtonPressed, Qt::UniqueConnection);
-        connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
-        connect(mi, &MiBandService::serviceEvent, this, &GtrDevice::serviceEvent, Qt::UniqueConnection);
-    }
-
     if (mi2) {
-        qDebug() << "Sleep 300";
-        QThread::msleep(300);
-        qDebug() << "Done";
         mi2->initialise(false);
     }
 
@@ -93,12 +101,12 @@ void GtrDevice::initialise()
         connect(hrm, &HRMService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
     }
 
-    //QString revision = softwareRevision();
-    //if (revision > "1.3.5.79" || // For GTR 47mm
-    //        (!is47mm(revision) && revision >= "0.1.1.15")) { // for GTR 32mm with a different version scheme
-    //    qDebug() << "GTR with new FW";
-    //    m_ActivitySampleSize = 8;
-    //}
+    QString revision = softwareRevision();
+    if (revision > "1.3.5.79" || // For GTR 47mm
+            (!is47mm(revision) && revision >= "0.1.1.15")) { // for GTR 32mm with a different version scheme
+        qDebug() << "GTR with new FW";
+        m_ActivitySampleSize = 8;
+    }
 }
 
 void GtrDevice::parseServices()
