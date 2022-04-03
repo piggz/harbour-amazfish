@@ -44,25 +44,25 @@ PageListPL {
             icon: "../pics/devices/amazfit-gts.png"
             auth: true
         }
-/*
+
         ListElement {
             deviceType: "Amazfit GTS 2"
             icon: "../pics/devices/amazfit-gts2.png"
             auth: true
         }
-*/
+
         ListElement {
             deviceType: "Amazfit GTR"
             icon: "../pics/devices/amazfit-gtr.png"
             auth: true
         }
-/*
+
         ListElement {
             deviceType: "Amazfit GTR 2"
             icon: "../pics/devices/amazfit-gtr2.png"
             auth: true
         }
-*/
+
         ListElement {
             deviceType: "Amazfit Cor"
             icon: "../pics/devices/amazfit-cor.png"
