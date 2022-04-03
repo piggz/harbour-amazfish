@@ -4,16 +4,19 @@
     
 AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBLEDevice(parent)
 {
+    qDebug() << Q_FUNC_INFO;
+
     setConnectionState("disconnected");
     m_pairedName = pairedName;
     m_reconnectTimer = new QTimer(this);
     m_reconnectTimer->setInterval(60000);
     connect(m_reconnectTimer, &QTimer::timeout, this, &AbstractDevice::reconnectionTimer);
+    connect(this, &QBLEDevice::pairFinished, this, &AbstractDevice::devicePairFinished);
 }
 
 QString AbstractDevice::pair()
 {
-    qDebug() << "AbstractDevice::pair";
+    qDebug() << Q_FUNC_INFO;
 
     m_needsAuth = true;
     m_pairing = true;
@@ -21,14 +24,13 @@ QString AbstractDevice::pair()
     //disconnectFromDevice();
     setConnectionState("pairing");
 
-    QBLEDevice::pair();
-    QBLEDevice::connectToDevice();
+    QBLEDevice::pairAsync();
     return "pairing";
 }
 
 void AbstractDevice::pairAsync()
 {
-    qDebug() << "AbstractDevice::pairAsync";
+    qDebug() << Q_FUNC_INFO;
 
     m_needsAuth = true;
     m_pairing = true;
@@ -71,8 +73,17 @@ void AbstractDevice::reconnectionTimer()
     }
 }
 
+void AbstractDevice::devicePairFinished(const QString &status)
+{
+    qDebug() << Q_FUNC_INFO;
+    if (status == "paired") {
+        setConnectionState("paired");
+    }
+}
+
 void AbstractDevice::setConnectionState(const QString &state)
 {
+    qDebug() << Q_FUNC_INFO << state;
     if (state != m_connectionState) {
         m_connectionState = state;
         emit connectionStateChanged();

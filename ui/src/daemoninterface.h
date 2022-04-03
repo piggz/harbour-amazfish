@@ -20,8 +20,6 @@ class DaemonInterface : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool pairing MEMBER m_pairing NOTIFY pairingChanged)
-
     //Device Interface
     Q_PROPERTY(QString connectionState MEMBER m_connectionState NOTIFY connectionStateChanged)
     Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)

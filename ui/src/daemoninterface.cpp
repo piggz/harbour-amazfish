@@ -57,7 +57,7 @@ void DaemonInterface::pair(const QString &name, QString address)
 {
     qDebug(Q_FUNC_INFO);
 
-    if (m_pairing) {
+    if (m_connectionState == "pairing") {
         return;
     }
 
@@ -66,14 +66,8 @@ void DaemonInterface::pair(const QString &name, QString address)
         return;
     }
 
-    m_pairing = true;
-    emit pairingChanged();
-    address.replace(QChar(':'), QChar('_')).prepend(AmazfishConfig::instance()->localAdapter() + "/dev_");
     auto watcher = new QDBusPendingCallWatcher(iface->asyncCall(QStringLiteral("pair"), name, address));
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, name, address]() {
-        m_pairing = false;
-        emit pairingChanged();
-        emit paired(name, address, watcher->error().name());
         watcher->deleteLater();
     });
 }

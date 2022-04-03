@@ -15,18 +15,18 @@ PageListPL {
 
     property string deviceType
     property string _placeholderText
+    property string _deviceName
+    property string _deviceAddress
 
     Connections {
         target: DaemonInterfaceInstance
 
-        onPaired: {
-            if (!error) {
-                // Set values from the signal
-                AmazfishConfig.pairedAddress = address
-                AmazfishConfig.pairedName = name
+        onConnectionStateChanged: {
+            if (DaemonInterfaceInstance.connectionState == "paired" || DaemonInterfaceInstance.connectionState == "connected") {
+                AmazfishConfig.pairedAddress = _deviceAddress
+                AmazfishConfig.pairedName = _deviceName
+                console.log("Paired with", AmazfishConfig.pairedName, AmazfishConfig.pairedAddress, _deviceName, _deviceAddress);
                 app.pages.pop(app.rootPage);
-            } else {
-                _placeholderText = error
             }
         }
     }
@@ -65,10 +65,13 @@ PageListPL {
             id: listItem
             contentHeight: styler.themeItemSizeLarge
             onClicked: {
-                AmazfishConfig.pairedAddress = ""
-                AmazfishConfig.pairedName = ""
-                discoveryModel.running = false
-                DaemonInterfaceInstance.pair(model.deviceName, model.remoteAddress)
+                AmazfishConfig.pairedAddress = "";
+                AmazfishConfig.pairedName = "";
+                discoveryModel.running = false;
+                _deviceName = model.deviceName;
+                _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.remoteAddress.replace(/:/g, '_');
+
+                DaemonInterfaceInstance.pair(_deviceName, _deviceAddress)
             }
 
             Item {
@@ -136,7 +139,7 @@ PageListPL {
 
     BusyIndicatorPL {
         id: busyIndicator
-        running: (discoveryModel.running && !page.count) || DaemonInterfaceInstance.pairing
+        running: (discoveryModel.running && !page.count) || DaemonInterfaceInstance.connectionState == "pairing"
     }
 }
 

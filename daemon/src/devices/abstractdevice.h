@@ -129,6 +129,7 @@ protected:
 
 private:
     void reconnectionTimer();
+    void devicePairFinished(const QString& status);
     QString m_pairedName;
 };
 
