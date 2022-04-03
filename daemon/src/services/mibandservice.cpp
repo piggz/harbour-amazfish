@@ -662,6 +662,8 @@ void MiBandService::fetchActivityData()
             sampleSize = device->activitySampleSize();
         }
 
+        qDebug() << "Sample size is " << sampleSize;
+
         m_activityFetchOperation = new ActivityFetchOperation(this, m_conn, sampleSize);
         m_activityFetchOperation->start();
         emit operationRunningChanged();
