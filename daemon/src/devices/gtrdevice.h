@@ -9,9 +9,11 @@ class GtrDevice : public GtsDevice
 public:
     explicit GtrDevice(const QString &pairedName, QObject *parent = nullptr);
 
-private:
+protected:
     void initialise() override;
     void parseServices() override;
+
+private:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
 
     bool is47mm(const QString &version) const;
