@@ -14,10 +14,9 @@ public:
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
 private:
-    void initialise();
+    void initialise() override;
     void parseServices();
 
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
 
 private:
     QString pairedName;

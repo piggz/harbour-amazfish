@@ -9,7 +9,7 @@ class PinetimeJFDevice : public AbstractDevice
 public:
     explicit PinetimeJFDevice(const QString &pairedName, QObject *parent = 0);
 
-    virtual QString pair() override;
+    virtual void pair() override;
     virtual int supportedFeatures() override;
     virtual QString deviceType() override;
     virtual void abortOperations() override;

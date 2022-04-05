@@ -20,13 +20,11 @@ public:
     virtual void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration = 0, int position = 0) override;
 
 protected:
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
+    void initialise() override;
 
 private:
     Q_SLOT void serviceEvent(uint8_t event);
-
     void parseServices();
-    void initialise();
 };
 
 #endif // BIPSDEVICE_H

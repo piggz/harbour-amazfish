@@ -96,8 +96,7 @@ public:
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
 protected:
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
-    virtual void initialise();
+    void initialise() override;
 
 private:
     void parseServices();

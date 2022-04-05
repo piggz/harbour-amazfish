@@ -61,36 +61,47 @@ MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService
     m_operationTimeout = new QTimer();
     connect(m_operationTimeout, &QTimer::timeout, this, &MiBandService::operationTimeout);
 
-    displayItmesIdMap["status"] = 0x01;
-    displayItmesIdMap["hr"] = 0x02;
-    displayItmesIdMap["workout"] = 0x03;
-    displayItmesIdMap["weather"] = 0x04;
-    displayItmesIdMap["notifications"] = 0x06;
-    displayItmesIdMap["more"] = 0x07;
-    displayItmesIdMap["dnd"] = 0x08;
-    displayItmesIdMap["alarm"] = 0x09;
-    displayItmesIdMap["takephoto"] = 0x0a;
-    displayItmesIdMap["music"] = 0x0b;
-    displayItmesIdMap["stopwatch"] = 0x0c;
-    displayItmesIdMap["timer"] = 0x0d;
-    displayItmesIdMap["findphone"] = 0x0e;
-    displayItmesIdMap["mutephone"] = 0x0f;
-    displayItmesIdMap["nfc"] = 0x10;
-    displayItmesIdMap["alipay"] = 0x11;
-    displayItmesIdMap["watchface"] = 0x12;
-    displayItmesIdMap["settings"] = 0x13;
-    displayItmesIdMap["activity"] = 0x14;
-    displayItmesIdMap["eventreminder"] = 0x15;
-    displayItmesIdMap["compass"] = 0x16;
-    displayItmesIdMap["pai"] = 0x19;
-    displayItmesIdMap["worldclock"] = 0x1a;
-    displayItmesIdMap["timer_stopwatch"] = 0x1b;
-    displayItmesIdMap["stress"] = 0x1c;
-    displayItmesIdMap["period"] = 0x1d;
-    displayItmesIdMap["goal"] = 0x21;
-    displayItmesIdMap["sleep"] = 0x23;
-    displayItmesIdMap["spo2"] = 0x24;
-    displayItmesIdMap["alexa"] = 0x39;
+    displayItemsIdMap["status"] = 0x01;
+    displayItemsIdMap["hr"] = 0x02;
+    displayItemsIdMap["workout"] = 0x03;
+    displayItemsIdMap["weather"] = 0x04;
+    displayItemsIdMap["notifications"] = 0x06;
+    displayItemsIdMap["more"] = 0x07;
+    displayItemsIdMap["dnd"] = 0x08;
+    displayItemsIdMap["alarm"] = 0x09;
+    displayItemsIdMap["takephoto"] = 0x0a;
+    displayItemsIdMap["music"] = 0x0b;
+    displayItemsIdMap["stopwatch"] = 0x0c;
+    displayItemsIdMap["timer"] = 0x0d;
+    displayItemsIdMap["findphone"] = 0x0e;
+    displayItemsIdMap["mutephone"] = 0x0f;
+    displayItemsIdMap["nfc"] = 0x10;
+    displayItemsIdMap["alipay"] = 0x11;
+    displayItemsIdMap["watchface"] = 0x12;
+    displayItemsIdMap["settings"] = 0x13;
+    displayItemsIdMap["activity"] = 0x14;
+    displayItemsIdMap["eventreminder"] = 0x15;
+    displayItemsIdMap["compass"] = 0x16;
+    displayItemsIdMap["pai"] = 0x19;
+    displayItemsIdMap["worldclock"] = 0x1a;
+    displayItemsIdMap["timer_stopwatch"] = 0x1b;
+    displayItemsIdMap["stress"] = 0x1c;
+    displayItemsIdMap["period"] = 0x1d;
+    displayItemsIdMap["goal"] = 0x21;
+    displayItemsIdMap["sleep"] = 0x23;
+    displayItemsIdMap["spo2"] = 0x24;
+    displayItemsIdMap["events"] = 0x26;
+    displayItemsIdMap["widgets"] = 0x28;
+    displayItemsIdMap["breathing"] = 0x33;
+    displayItemsIdMap["steps"] = 0x34;
+    displayItemsIdMap["distance"] = 0x35;
+    displayItemsIdMap["calories"] = 0x36;
+    displayItemsIdMap["pomodoro"] = 0x38;
+    displayItemsIdMap["alexa"] = 0x39;
+    displayItemsIdMap["battery"] = 0x3a;
+    displayItemsIdMap["temperature"] = 0x40;
+    displayItemsIdMap["barometer"] = 0x41;
+    displayItemsIdMap["flashlight"] = 0x43;
 }
 
 void MiBandService::characteristicChanged(const QString &characteristic, const QByteArray &value)
@@ -580,7 +591,7 @@ void MiBandService::setDisplayItemsNew()
     command += QByteArray(1, (char)0x12);
 
     for (QString &key : enabledList) {
-        uint8_t id = displayItmesIdMap[key];
+        uint8_t id = displayItemsIdMap[key];
         if (id != 0) {
             command += QByteArray(1, (char)index++);
             command += QByteArray(1, (char)0x00);
@@ -593,7 +604,7 @@ void MiBandService::setDisplayItemsNew()
     if (device) {
         allList = device->supportedDisplayItems();
         for (QString &key : allList) {
-            uint8_t id = displayItmesIdMap[key];
+            uint8_t id = displayItemsIdMap[key];
 
             if (!enabledList.contains(key)) {
                 command += QByteArray(1, (char)index++);

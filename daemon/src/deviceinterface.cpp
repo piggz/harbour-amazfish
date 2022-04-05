@@ -119,7 +119,8 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
         connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::handleButtonPressed, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
-        return m_device->pair();
+        m_device->pair();
+        return "pairing";
     }
     
     qDebug() << "DeviceInterface::pair:device not created";

@@ -9,7 +9,7 @@ BangleJSDevice::BangleJSDevice(const QString &pairedName, QObject *parent) : Abs
     connect(this, &QBLEDevice::propertiesChanged, this, &BangleJSDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
-QString BangleJSDevice::pair()
+void BangleJSDevice::pair()
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -21,7 +21,6 @@ QString BangleJSDevice::pair()
     emit connectionStateChanged();
 
     QBLEDevice::connectToDevice();
-    return "pairing";
 }
 
 int BangleJSDevice::supportedFeatures()

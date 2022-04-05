@@ -11,10 +11,10 @@ AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBL
     m_reconnectTimer = new QTimer(this);
     m_reconnectTimer->setInterval(60000);
     connect(m_reconnectTimer, &QTimer::timeout, this, &AbstractDevice::reconnectionTimer);
-    connect(this, &QBLEDevice::pairFinished, this, &AbstractDevice::devicePairFinished);
+    //connect(this, &QBLEDevice::pairFinished, this, &AbstractDevice::devicePairFinished);
 }
 
-QString AbstractDevice::pair()
+void AbstractDevice::pair()
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -24,21 +24,7 @@ QString AbstractDevice::pair()
     //disconnectFromDevice();
     setConnectionState("pairing");
 
-    QBLEDevice::pairAsync();
-    return "pairing";
-}
-
-void AbstractDevice::pairAsync()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    m_needsAuth = true;
-    m_pairing = true;
-    m_autoreconnect = true;
-    //disconnectFromDevice();
-    setConnectionState("pairing");
-
-    QBLEDevice::pairAsync();
+    QBLEDevice::pair();
 }
 
 void AbstractDevice::connectToDevice()

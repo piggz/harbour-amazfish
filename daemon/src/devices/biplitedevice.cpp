@@ -12,38 +12,6 @@ QString BipLiteDevice::deviceType()
     return "amazfitbiplite";
 }
 
-void BipLiteDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
-{
-    qDebug() << "BipLiteDevice::onPropertiesChanged:" << interface << map << list;
-
-    if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
-        if (deviceProperty("ServicesResolved").toBool() ) {
-            initialise();
-        }
-        if (map.contains("Connected")) {
-            bool value = map["Connected"].toBool();
-
-            if (!value) {
-                qDebug() << "DisConnected!";
-                setConnectionState("disconnected");
-            } else {
-                setConnectionState("connected");
-            }
-        } else if (map.contains("Paired")) {
-            bool value = map["Paired"].toBool();
-
-            if (value) {
-                qDebug() << "Paired!";
-                if (m_connectionState == "pairing" && m_pairing) {
-                    connectToDevice();
-                }
-            }
-        }
-    }
-
-}
-
 void BipLiteDevice::initialise()
 {
     setConnectionState("connected");

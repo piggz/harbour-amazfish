@@ -74,8 +74,7 @@ public:
 
     explicit AbstractDevice(const QString &pairedName, QObject *parent = nullptr);
     
-    virtual QString pair() override;
-    virtual void pairAsync() override;
+    virtual void pair() override;
 
     virtual void connectToDevice() override;
     virtual void disconnectFromDevice() override;

@@ -186,7 +186,7 @@ private:
 
     KDbConnection *m_conn = nullptr;
     QTimer *m_operationTimeout = nullptr;
-    QMap<QString, uint8_t> displayItmesIdMap;
+    QMap<QString, uint8_t> displayItemsIdMap;
 };
 
 #endif // MIBANDSERVICE_H

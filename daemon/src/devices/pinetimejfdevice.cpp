@@ -19,7 +19,7 @@ PinetimeJFDevice::PinetimeJFDevice(const QString &pairedName, QObject *parent) :
     connect(this, &QBLEDevice::propertiesChanged, this, &PinetimeJFDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
-QString PinetimeJFDevice::pair()
+void PinetimeJFDevice::pair()
 {
     qDebug() << "AbstractDevice::pair";
 
@@ -31,7 +31,6 @@ QString PinetimeJFDevice::pair()
     emit connectionStateChanged();
 
     QBLEDevice::connectToDevice();
-    return "pairing";
 }
 
 int PinetimeJFDevice::supportedFeatures()

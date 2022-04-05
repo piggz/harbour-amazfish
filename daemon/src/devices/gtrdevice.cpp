@@ -8,32 +8,9 @@ GtrDevice::GtrDevice(const QString &pairedName, QObject *parent) : GtsDevice(pai
     connect(this, &QBLEDevice::propertiesChanged, this, &GtrDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
-void GtrDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
+QString GtrDevice::deviceType()
 {
-    qDebug() << Q_FUNC_INFO << interface << map << list;
-
-    if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
-        if (map.contains("Paired")) {
-            bool value = map["Paired"].toBool();
-
-            if (value) {
-                setConnectionState("paired");
-            }
-        }
-        if (map.contains("Connected")) {
-            bool value = map["Connected"].toBool();
-
-            if (!value) {
-                setConnectionState("disconnected");
-            } else {
-                setConnectionState("connected");
-            }
-        }
-        if (deviceProperty("ServicesResolved").toBool() ) {
-            initialise();
-        }
-    }
+    return "amazfitgtr";
 }
 
 bool GtrDevice::is47mm(const QString &version) const
@@ -52,15 +29,6 @@ void GtrDevice::initialise()
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER);
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE);
 
-        /*
-        qDebug() << "Read first";
-        QByteArray a = mi->readValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER);
-        qDebug() << a;
-
-        qDebug() << "Write something";
-        uint8_t start[1] = {0x01};
-        mi->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE, UCHARARR_TO_BYTEARRAY(start));
-        */
         connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
         connect(mi, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &GtrDevice::handleButtonPressed, Qt::UniqueConnection);

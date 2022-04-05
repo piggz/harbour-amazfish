@@ -5,9 +5,11 @@
 #include <QtXml/QtXml>
 
 HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
-{    
+{
+    qDebug() << Q_FUNC_INFO;
     m_keyPressTimer = new QTimer(this);
     m_keyPressTimer->setInterval(500);
+    connect(this, &QBLEDevice::propertiesChanged, this, &HuamiDevice::onPropertiesChanged);
     connect(m_keyPressTimer, &QTimer::timeout, this, &HuamiDevice::buttonPressTimeout);
 }
 
@@ -312,5 +314,33 @@ void HuamiDevice::serviceEvent(char event)
         break;
     default:
         break;
+    }
+}
+
+void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
+{
+    qDebug() << Q_FUNC_INFO << interface << map << list;
+
+    if (interface == "org.bluez.Device1") {
+        m_reconnectTimer->start();
+        if (map.contains("Paired")) {
+            bool value = map["Paired"].toBool();
+
+            if (value) {
+                setConnectionState("paired");
+            }
+        }
+        if (map.contains("Connected")) {
+            bool value = map["Connected"].toBool();
+
+            if (!value) {
+                setConnectionState("disconnected");
+            } else {
+                setConnectionState("connected");
+            }
+        }
+        if (deviceProperty("ServicesResolved").toBool() ) {
+            initialise();
+        }
     }
 }

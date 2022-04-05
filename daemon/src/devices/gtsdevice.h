@@ -9,7 +9,7 @@ class GtsDevice : public HuamiDevice
 public:
     explicit GtsDevice(const QString &pairedName, QObject *parent = nullptr);
 
-    virtual QString deviceType() override;
+    QString deviceType() override;
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event) override;
     virtual int supportedFeatures() override;
@@ -30,10 +30,8 @@ public:
 
 protected:
     Q_SLOT void serviceEvent(uint8_t event);
-    virtual void initialise();
-    virtual void parseServices();
-
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    void initialise() override;
+    void parseServices();
 
 private:
     QString pairedName;

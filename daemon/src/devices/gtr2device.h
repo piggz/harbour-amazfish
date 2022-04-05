@@ -1,16 +1,15 @@
 #ifndef GTR2DEVICE_H
 #define GTR2DEVICE_H
 
-#include "gtrdevice.h"
+#include "gts2device.h"
 #include <QObject>
 
-class Gtr2Device : public GtrDevice
+class Gtr2Device : public Gts2Device
 {
 public:
     explicit Gtr2Device(const QString &pairedName, QObject *parent = nullptr);
+    QString deviceType() override;
 
-protected:
-    void initialise() override;
 };
 
 #endif // GTR2DEVICE_H

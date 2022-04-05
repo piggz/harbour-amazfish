@@ -122,29 +122,6 @@ void BipSDevice::parseServices()
     }
 }
 
-void BipSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
-{
-    qDebug() << Q_FUNC_INFO << interface << map << list;
-
-    if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
-        if (deviceProperty("ServicesResolved").toBool() ) {
-            initialise();
-        }
-        if (map.contains("Connected")) {
-            bool value = map["Connected"].toBool();
-
-            if (!value) {
-                qDebug() << "DisConnected!";
-                setConnectionState("disconnected");
-            } else {
-                setConnectionState("connected");
-            }
-        }
-    }
-
-}
-
 void BipSDevice::applyDeviceSetting(AbstractDevice::Settings s)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));

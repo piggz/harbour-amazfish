@@ -50,6 +50,9 @@ protected:
     Q_SLOT void batteryInfoChanged();
     Q_SLOT void serviceEvent(char event);
 
+    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    virtual void initialise() = 0;
+
     int m_ActivitySampleSize = 4;
 
 private:

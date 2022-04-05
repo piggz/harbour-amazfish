@@ -10,7 +10,6 @@
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
     qDebug() << "Creating GTS Device";
-    connect(this, &QBLEDevice::propertiesChanged, this, &GtsDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 QString GtsDevice::deviceType()
@@ -37,38 +36,6 @@ void GtsDevice::sendAlert(const QString &sender, const QString &subject, const Q
     if (mi) {
         mi->sendAlert(sender, subject, message);
     }
-}
-
-void GtsDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
-{
-    qDebug() << Q_FUNC_INFO << interface << map << list;
-
-    if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
-        if (deviceProperty("ServicesResolved").toBool() ) {
-            initialise();
-        }
-        if (map.contains("Connected")) {
-            bool value = map["Connected"].toBool();
-
-            if (!value) {
-                qDebug() << "DisConnected!";
-                setConnectionState("disconnected");
-            } else {
-                setConnectionState("connected");
-            }
-        } else if (map.contains("Paired")) {
-            bool value = map["Paired"].toBool();
-
-            if (value) {
-                qDebug() << "Paired!";
-                if (m_connectionState == "pairing" && m_pairing) {
-                    connectToDevice();
-                }
-            }
-        }
-    }
-
 }
 
 void GtsDevice::serviceEvent(uint8_t event)
@@ -148,11 +115,11 @@ void GtsDevice::initialise()
         connect(hrm, &HRMService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
     }
 
-    //QString revision = softwareRevision();
-    //if (revision > "0.0.9.0") {
-    //    qDebug() << "GTS with new FW";
-    //    m_ActivitySampleSize = 8;
-    //}
+    QString revision = softwareRevision();
+    if (revision > "0.0.9.0") {
+        qDebug() << "GTS with new FW";
+        m_ActivitySampleSize = 8;
+    }
 }
 
 
