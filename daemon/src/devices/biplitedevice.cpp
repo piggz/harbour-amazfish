@@ -7,7 +7,7 @@ BipLiteDevice::BipLiteDevice(const QString &pairedName, QObject *parent) : BipDe
     qDebug() << "Creating Bip Lite Device";
 }
 
-QString BipLiteDevice::deviceType()
+QString BipLiteDevice::deviceType() const
 {
     return "amazfitbiplite";
 }

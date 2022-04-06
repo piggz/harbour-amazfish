@@ -7,12 +7,12 @@ BipSDevice::BipSDevice(const QString &pairedName, QObject *parent) : BipDevice(p
     qDebug() << Q_FUNC_INFO;
 }
 
-QString BipSDevice::deviceType()
+QString BipSDevice::deviceType() const
 {
     return "amazfitbips";
 }
 
-int BipSDevice::supportedFeatures()
+int BipSDevice::supportedFeatures() const
 {
     return FEATURE_HRM |
             FEATURE_WEATHER |

@@ -4,7 +4,7 @@ Gtr2Device::Gtr2Device(const QString &pairedName, QObject *parent) : Gts2Device(
 {
 }
 
-QString Gtr2Device::deviceType()
+QString Gtr2Device::deviceType() const
 {
     return "amazfitgtr2";
 }

@@ -12,12 +12,12 @@ GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(p
     qDebug() << "Creating GTS Device";
 }
 
-QString GtsDevice::deviceType()
+QString GtsDevice::deviceType() const
 {
     return "amazfitgts";
 }
 
-int GtsDevice::supportedFeatures()
+int GtsDevice::supportedFeatures() const
 {
     return FEATURE_HRM |
             FEATURE_WEATHER |

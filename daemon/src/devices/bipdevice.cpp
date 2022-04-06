@@ -10,7 +10,7 @@ BipDevice::BipDevice(const QString &pairedName, QObject *parent) : HuamiDevice(p
 }
 
 
-int BipDevice::supportedFeatures()
+int BipDevice::supportedFeatures() const
 {
     return FEATURE_HRM |
             FEATURE_WEATHER |
@@ -21,7 +21,7 @@ int BipDevice::supportedFeatures()
             FEATURE_BUTTON_ACTION;
 }
 
-QString BipDevice::deviceType()
+QString BipDevice::deviceType() const
 {
     return "amazfitbip";
 }

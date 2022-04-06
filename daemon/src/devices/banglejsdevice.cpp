@@ -23,7 +23,7 @@ void BangleJSDevice::pair()
     QBLEDevice::connectToDevice();
 }
 
-int BangleJSDevice::supportedFeatures()
+int BangleJSDevice::supportedFeatures() const
 {
     return FEATURE_HRM |
             FEATURE_ALERT |
@@ -31,7 +31,7 @@ int BangleJSDevice::supportedFeatures()
             FEATURE_WEATHER;
 }
 
-QString BangleJSDevice::deviceType()
+QString BangleJSDevice::deviceType() const
 {
     return "pinetimejf";
 }

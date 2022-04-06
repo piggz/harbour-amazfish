@@ -13,7 +13,7 @@ class Gts2Device : public GtsDevice
     Q_OBJECT
 public:
     explicit Gts2Device(const QString &pairedName, QObject *parent = nullptr);
-    QString deviceType() override;
+    QString deviceType() const override;
     QStringList supportedDisplayItems() const override;
 
 protected:

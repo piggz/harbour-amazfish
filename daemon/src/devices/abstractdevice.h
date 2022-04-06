@@ -80,11 +80,11 @@ public:
     virtual void disconnectFromDevice() override;
     virtual QString connectionState() const;
 
-    bool supportsFeature(Feature f);
-    virtual int supportedFeatures() = 0;
+    bool supportsFeature(Feature f) const;
+    virtual int supportedFeatures() const = 0;
 
-    virtual QString deviceType() = 0;
-    QString deviceName();
+    virtual QString deviceType() const = 0;
+    QString deviceName() const;
     virtual void abortOperations();
 
     //Firmware handling

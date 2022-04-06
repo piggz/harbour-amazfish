@@ -10,8 +10,8 @@ public:
     explicit PinetimeJFDevice(const QString &pairedName, QObject *parent = 0);
 
     virtual void pair() override;
-    virtual int supportedFeatures() override;
-    virtual QString deviceType() override;
+    virtual int supportedFeatures() const override;
+    virtual QString deviceType() const override;
     virtual void abortOperations() override;
 
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;

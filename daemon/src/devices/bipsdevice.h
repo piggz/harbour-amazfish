@@ -9,8 +9,8 @@ class BipSDevice : public BipDevice
 public:
     explicit BipSDevice(const QString &pairedName, QObject *parent = nullptr);
 
-    virtual QString deviceType() override;
-    virtual int supportedFeatures() override;
+    virtual QString deviceType() const override;
+    virtual int supportedFeatures() const override;
     virtual QStringList supportedDisplayItems() const override;
 
     virtual void applyDeviceSetting(Settings s) override;

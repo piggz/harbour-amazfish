@@ -6,7 +6,7 @@ Gts2Device::Gts2Device(const QString &pairedName, QObject *parent) : GtsDevice(p
     m_ActivitySampleSize = 8;
 }
 
-QString Gts2Device::deviceType()
+QString Gts2Device::deviceType() const
 {
     return "amazfitgts2";
 }

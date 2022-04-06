@@ -8,7 +8,7 @@ class Gtr2Device : public Gts2Device
 {
 public:
     explicit Gtr2Device(const QString &pairedName, QObject *parent = nullptr);
-    QString deviceType() override;
+    QString deviceType() const override;
 
 };
 

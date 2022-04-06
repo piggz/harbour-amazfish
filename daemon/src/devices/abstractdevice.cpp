@@ -81,12 +81,12 @@ QString AbstractDevice::connectionState() const
     return m_connectionState;
 }
 
-bool AbstractDevice::supportsFeature(AbstractDevice::Feature f)
+bool AbstractDevice::supportsFeature(AbstractDevice::Feature f) const
 {
     return (supportedFeatures() & f) == f;
 }
 
-QString AbstractDevice::deviceName()
+QString AbstractDevice::deviceName() const
 {
     return m_pairedName;
 }

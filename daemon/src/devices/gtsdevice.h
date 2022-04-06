@@ -9,10 +9,10 @@ class GtsDevice : public HuamiDevice
 public:
     explicit GtsDevice(const QString &pairedName, QObject *parent = nullptr);
 
-    QString deviceType() override;
+    QString deviceType() const override;
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event) override;
-    virtual int supportedFeatures() override;
+    virtual int supportedFeatures() const override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     virtual void applyDeviceSetting(Settings s) override;
 

@@ -8,7 +8,7 @@ class GtrDevice : public GtsDevice
 {
 public:
     explicit GtrDevice(const QString &pairedName, QObject *parent = nullptr);
-    QString deviceType() override;
+    QString deviceType() const override;
 
 protected:
     void initialise() override;

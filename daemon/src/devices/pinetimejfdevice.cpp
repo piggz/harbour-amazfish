@@ -33,7 +33,7 @@ void PinetimeJFDevice::pair()
     QBLEDevice::connectToDevice();
 }
 
-int PinetimeJFDevice::supportedFeatures()
+int PinetimeJFDevice::supportedFeatures() const
 {
     return FEATURE_HRM |
             FEATURE_ALERT |
@@ -41,7 +41,7 @@ int PinetimeJFDevice::supportedFeatures()
             FEATURE_STEPS;
 }
 
-QString PinetimeJFDevice::deviceType()
+QString PinetimeJFDevice::deviceType() const
 {
     return "pinetimejf";
 }

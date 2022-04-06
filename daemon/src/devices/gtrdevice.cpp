@@ -8,7 +8,7 @@ GtrDevice::GtrDevice(const QString &pairedName, QObject *parent) : GtsDevice(pai
     connect(this, &QBLEDevice::propertiesChanged, this, &GtrDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
-QString GtrDevice::deviceType()
+QString GtrDevice::deviceType() const
 {
     return "amazfitgtr";
 }
