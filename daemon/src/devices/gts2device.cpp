@@ -15,31 +15,19 @@ QStringList Gts2Device::supportedDisplayItems() const
 {
     QStringList items;
 
-    items << "status";
     items << "goal";
     items << "pai";
     items << "hr";
     items << "workout";
     items << "activity";
-    items << "sleep";
     items << "weather";
     items << "alarm";
-    items << "events";
-    items << "stopwatch";
-    items << "timer";
-    items << "breathing";
+    items << "events"; //schedule?
     items << "stress";
     items << "spo2";
-    items << "worldclock";
-    items << "pomodoro";
     items << "music";
-    items << "cycles";
-    items << "compass";
-    items << "temperature";
     items << "widgets";
     items << "settings";
-    items << "alexa";
-    items << "more";
 
     return items;
 }
