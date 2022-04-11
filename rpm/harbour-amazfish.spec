@@ -66,7 +66,7 @@ Categories:
  - Utility
 Custom:
   Repo: https://github.com/piggz/harbour-amazfish
-Icon: https://raw.githubusercontent.com/piggz/harbour-amazfish/master/harbour-amazfish.svg
+Icon: https://raw.githubusercontent.com/piggz/harbour-amazfish/master/harbour-amazfish-ui.svg
 Screenshots:
  - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_main.png
  - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_sleep.png
@@ -116,7 +116,7 @@ desktop-file-install --delete-original       \
 %{_datadir}/%{name}-ui
 %{_datadir}/applications/%{name}-ui.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
-%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
+%{_datadir}/icons/hicolor/scalable/apps/%{name}-ui.svg
 %{_userunitdir}/harbour-amazfish.service
 %{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges
 # >> files

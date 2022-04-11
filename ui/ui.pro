@@ -247,7 +247,7 @@ qmlplatform.path = $$DATADIR/qml/platform
 desktopfile.files = harbour-amazfish-ui.desktop
 desktopfile.path = $$PREFIX/share/applications
 
-appicon.files = ../harbour-amazfish.svg
+appicon.files = ../harbour-amazfish-ui.svg
 appicon.path = $$PREFIX/share/icons/hicolor/scalable/apps
 
 INSTALLS += qmlplatform qml js icons target desktopfile appicon
