@@ -31,20 +31,13 @@ etc as pointed out by build errors.
 
 ## In Ubuntu 20.04, with default Ubuntu repository, QT is in version 5.12.8
 
-### Prepare git repo
-Clone amazfish repository:
-
-```
-git clone https://github.com/piggz/harbour-amazfish.git`
-```
-
-Initialise and sync submodules:
-```
-git submodule init 
-git submodule update
-```
-
 ### Install dependencies
+
+Most dependencies can be installed from the Ubuntu package repositories:
+```
+sudo apt update
+sudo apt install -y qt5-default libkdb3-dev libkf5contacts-dev libkf5coreaddons-dev qtlocation5-dev qtconnectivity5-dev qtpositioning5-dev qml-module-qtbluetooth
+```
 
 Two depedencies can be found on git repos
 https://git.sailfishos.org/mer-core/nemo-qml-plugin-dbus
@@ -60,21 +53,39 @@ sudo make install
 ```
 
 ```
+cd ..
+```
+
+```
 git clone https://git.sailfishos.org/mer-core/nemo-qml-plugin-dbus.git
 cd nemo-qml-plugin-dbus
 qmake
 make
 sudo make install
 ```
-Other dependencies can be installed from the Ubuntu package repositories:
+
 ```
-sudo apt install qt5-default libkdb3-dev libkf5contacts-dev libkf5coreaddons-dev qtlocation5-dev qtconnectivity5-dev qtpositioning5-dev qml-module-qtbluetooth
+cd ..
+```
+
+### Prepare git repo
+
+Clone amazfish repository:
+```
+git clone https://github.com/piggz/harbour-amazfish.git
+cd harbour-amazfish
+```
+
+Initialise and sync submodules:
+
+```
+git submodule init
+git submodule update
 ```
 
 ### Build process
 
 ```
-cd harbour-amazfish
 mkdir build
 cd build
 qmake FLAVOR=kirigami  ..
@@ -82,7 +93,6 @@ make
 ```
 
 Here, you may get an error like this:
-
 ```
 Project ERROR: Unknown module(s) in QT: CoreAddons
 ```
