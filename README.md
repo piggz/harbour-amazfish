@@ -18,6 +18,7 @@ There are 3 tiers of supported devices:
 These are devices I have, have tested and will try not to break any functioanlity for an include:
  * Amazfit Bip
  * Amazfit GTS
+ * Amazfit GTR2
  * Pinetime Infinitme
  * Bangle.js
 
@@ -26,14 +27,31 @@ These are devices I have, have tested and will try not to break any functioanlit
 These are devices which are properly implemented in the application, but I do not have and are tested by the commuity, and include:
  * Amazfit BipS
  * Amazfit Bip Lite
+ * Amazfit GTS2
+ 
 I do not promise not to break funcaionality in these, but will fix where I can
 
 ### Bronze
 
 These are devices which use a protocol that is close to another suppored device, and so is treated like that device.  Your mileage may vary with these devices.
  * MiBand 2/3/4
- * AMzfit Cor
- * Amazfit GTR
+ * Amazfit Cor
+ 
+## Note for GTR2 / GTS2 owners
+
+These watches fail to follow the bluetooth specification, which states that the "Appearance" characterstic should be readable without auth/encryption.  Infact, it seems this
+characterstic is not readnable at all, even though it is available, and this causes a failure in Bluez.  It seems like Android/iOS are less strict in this regard.
+
+A patch has been added to Bluez which makes it not read the characteristic if it has previously been read and cached, and this allows us to work around the issue.
+
+The device cache is in /var/lib/bluetooth/[host mac address]/[watch mac address/info.
+
+As root, add the line
+Appearance=0x0192
+under the [General] heading and restart bluetooth with
+systemctl restart bluetooth
+
+Do this after pairing the watch in Amazfish.
 
 ## Powered by KEXI
 
