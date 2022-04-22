@@ -97,9 +97,11 @@ SOURCES += \
     src/devices/bipdevice.cpp \
     src/devices/bipsdevice.cpp \
     src/devices/gtr2device.cpp \
+    src/devices/gtr2firmwareinfo.cpp \
     src/devices/gtrdevice.cpp \
     src/devices/gts2device.cpp \
     src/devices/huamidevice.cpp \
+    src/devices/huamifirmwareinfo.cpp \
     src/devices/infinitimefirmwareinfo.cpp \
     src/navigationinterface.cpp \
     src/devices/abstractfirmwareinfo.cpp \
@@ -161,9 +163,11 @@ HEADERS += \
     src/devices/bipdevice.h \
     src/devices/bipsdevice.h \
     src/devices/gtr2device.h \
+    src/devices/gtr2firmwareinfo.h \
     src/devices/gtrdevice.h \
     src/devices/gts2device.h \
     src/devices/huamidevice.h \
+    src/devices/huamifirmwareinfo.h \
     src/devices/infinitimefirmwareinfo.h \
     src/navigationinterface.h \
     src/devices/abstractfirmwareinfo.h \

@@ -32,7 +32,7 @@ void GtsFirmwareInfo::determineFirmwareType() {
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(AGPS_UIHH_HEADER))) {
         m_type = GPS_UIHH;
     }
-    if (m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(FW_HEADER)) == FW_OFFSET) {
+    if (m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(FW_HEADER2)) == FW_OFFSET) {
         m_version = m_crcMap[m_crc16];
         qDebug() << "Version:" << m_version << "CRC:" << m_crc16;
         m_type = Firmware;
