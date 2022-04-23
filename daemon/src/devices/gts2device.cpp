@@ -1,4 +1,5 @@
 #include "gts2device.h"
+#include "gts2firmwareinfo.h"
 
 Gts2Device::Gts2Device(const QString &pairedName, QObject *parent) : GtsDevice(pairedName, parent)
 {
@@ -30,6 +31,11 @@ QStringList Gts2Device::supportedDisplayItems() const
     items << "settings";
 
     return items;
+}
+
+AbstractFirmwareInfo *Gts2Device::firmwareInfo(const QByteArray &bytes)
+{
+    return new Gts2FirmwareInfo(bytes);
 }
 
 void Gts2Device::initialise()

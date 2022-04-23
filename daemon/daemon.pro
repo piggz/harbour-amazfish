@@ -100,6 +100,7 @@ SOURCES += \
     src/devices/gtr2firmwareinfo.cpp \
     src/devices/gtrdevice.cpp \
     src/devices/gts2device.cpp \
+    src/devices/gts2firmwareinfo.cpp \
     src/devices/huamidevice.cpp \
     src/devices/huamifirmwareinfo.cpp \
     src/devices/infinitimefirmwareinfo.cpp \
@@ -166,6 +167,7 @@ HEADERS += \
     src/devices/gtr2firmwareinfo.h \
     src/devices/gtrdevice.h \
     src/devices/gts2device.h \
+    src/devices/gts2firmwareinfo.h \
     src/devices/huamidevice.h \
     src/devices/huamifirmwareinfo.h \
     src/devices/infinitimefirmwareinfo.h \
