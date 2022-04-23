@@ -53,6 +53,12 @@ QString Amazfish::activityToString(Amazfish::ActivityType type)
     if (type == Amazfish::ActivityType::Yoga) {
         return "Yoga";
     }
+    if (type == Amazfish::ActivityType::TrailRunning) {
+        return "Trail Running";
+    }
+    if (type == Amazfish::ActivityType::Skiing) {
+        return "Skiing";
+    }
 
     return "Unknown";
 }

@@ -232,7 +232,9 @@ var arrayStravaWorkoutTypes =
     { name: "indoor cycling", stravaType: "VirtualRide" },
     { name: "treadmill", stravaType: "VirtualRun" },
     { name: "swimming", stravaType: "Swim" },
-    { name: "open swimming", stravaType: "Swim" }
+    { name: "open swimming", stravaType: "Swim" },
+    { name: "trail running", stravaType: "Run" },
+    { name: "yoga", stravaType: "Yoga" }
 ]
 
 function toStravaType(t)

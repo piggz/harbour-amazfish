@@ -23,7 +23,9 @@ class ActivityKind
         IndoorCycling = 0x00000800,
         EllipticalTrainer = 0x00001000,
         JumpRope = 0x00002000,
-        Yoga = 0x00004000
+        Yoga = 0x00004000,
+        TrailRunning = 0x00008000,
+        Skiing = 0x00010000
     };
     
     static Type fromBipType(int type);

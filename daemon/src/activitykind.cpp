@@ -25,6 +25,10 @@ ActivityKind::Type ActivityKind::fromBipType(int type)
         return JumpRope;
     } else if (type == 60) {
         return Yoga;
+    } else if (type == 11) {
+        return TrailRunning;
+    } else if (type == 105) {
+        return Skiing;
     }
     return Activity;
 }
@@ -81,6 +85,12 @@ QString ActivityKind::toString(Type type)
     }
     if (type == Yoga) {
         return "Yoga";
+    }
+    if (type == TrailRunning) {
+        return "Trail Running";
+    }
+    if (type == Skiing) {
+        return "Skiing";
     }
 
     return "Unknown";

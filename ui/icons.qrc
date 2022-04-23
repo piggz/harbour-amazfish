@@ -28,5 +28,7 @@
         <file>qml/custom-icons/icon-m-indoor cycling.png</file>
         <file>qml/custom-icons/icon-m-swimming.png</file>
         <file>qml/custom-icons/icon-m-open swimming.png</file>
+        <file>qml/custom-icons/icon-m-skiing.png</file>
+        <file>qml/custom-icons/icon-m-trail running.png</file>
     </qresource>
 </RCC>
