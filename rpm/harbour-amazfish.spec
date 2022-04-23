@@ -22,7 +22,7 @@ Name:       harbour-amazfish
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Watch interface application
-Version:    2.0.6
+Version:    2.0.7
 Release:    1
 Group:      QtQt
 License:    GPLv3
@@ -45,7 +45,6 @@ BuildRequires:  pkgconfig(Qt5Positioning)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(libmkcal-qt5)
 BuildRequires:  (kf5-calendarcore-devel if kf5-calendarcore)
-BuildRequires:  pkgconfig(libkcalcoren-qt5)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(mpris-qt5)
 BuildRequires:  kdb-devel >= 3.1.0
