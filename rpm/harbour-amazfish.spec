@@ -33,7 +33,7 @@ Requires:   kdb-sqlite3-driver >= 3.1.0
 Requires:   libKDb3-3 >= 3.1.0
 Requires:   kcoreaddons >= 5.31.0
 Requires:   libicu
-Requires:   qt5-qtconnectivity-qtbluetooth
+Requires:   kf5bluezqt
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -50,7 +50,6 @@ BuildRequires:  pkgconfig(mpris-qt5)
 BuildRequires:  kdb-devel >= 3.1.0
 BuildRequires:  kcoreaddons-devel >= 5.31.0
 BuildRequires:  qt5-qttools-linguist
-BuildRequires:  qt5-qtconnectivity-qtbluetooth-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  libkeepalive-devel
 
