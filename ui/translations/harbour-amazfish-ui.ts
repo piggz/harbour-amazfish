@@ -446,22 +446,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="122"/>
+        <location filename="../qml/pages/PairPage.qml" line="151"/>
         <source>Stop scanning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="123"/>
+        <location filename="../qml/pages/PairPage.qml" line="152"/>
         <source>Scan for devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="133"/>
+        <location filename="../qml/pages/PairPage.qml" line="167"/>
         <source>Scanning for devices…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="135"/>
+        <location filename="../qml/pages/PairPage.qml" line="169"/>
         <source>Pairing…</source>
         <translation type="unfinished"></translation>
     </message>
