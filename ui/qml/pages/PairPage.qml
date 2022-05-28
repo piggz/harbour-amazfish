@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtBluetooth 5.2
+import org.kde.bluezqt 1.0 as BluezQt
 import QtQml.Models 2.2
 import uk.co.piggz.amazfish 1.0
 import "../components"
@@ -11,12 +11,42 @@ PageListPL {
     title: qsTr("Pair Device")
 
     placeholderText: _placeholderText || qsTr("No devices found")
-    placeholderEnabled: discoveryModel.rowCount() > 0
+    placeholderEnabled: devicesModel.rowCount() > 0
 
     property string deviceType
     property string _placeholderText
     property string _deviceName
     property string _deviceAddress
+    property QtObject adapter: _bluetoothManager ? _bluetoothManager.usableAdapter : null
+    property QtObject _bluetoothManager : BluezQt.Manager
+
+    function startDiscovery() {
+        if (!adapter || adapter.discovering) {
+            return
+        }
+        adapter.startDiscovery()
+    }
+
+    function stopDiscovery() {
+        if (adapter && adapter.discovering) {
+            adapter.stopDiscovery()
+        }
+    }
+
+    Timer {
+        id: delayedATimer
+        repeat: false
+        running: true
+        interval: 100
+        onTriggered: {
+            console.log("Delayed Manager operational:", _bluetoothManager.operational, _bluetoothManager.usableAdapter);
+
+        }
+    }
+
+    Component.onCompleted: {
+        console.log("Manager operational:", _bluetoothManager.operational, _bluetoothManager.usableAdapter);
+    }
 
     Connections {
         target: DaemonInterfaceInstance
@@ -31,15 +61,14 @@ PageListPL {
         }
     }
 
-    BluetoothDiscoveryModel {
-        id: discoveryModel
-        running: true
-        discoveryMode: BluetoothDiscoveryModel.DeviceDiscovery
+    BluezQt.DevicesModel {
+        id: devicesModel
+        filters: BluezQt.DevicesModelPrivate.AllDevices
     }
 
     DelegateModel {
         id: delegateModel
-        model: discoveryModel
+        model: devicesModel
 
         groups: DelegateModelGroup {
             id: visibleItems
@@ -57,7 +86,7 @@ PageListPL {
 
             for (var i = 0; i < itemsCount; ++i) {
                 var item = items.get(i)
-                item.inVisible = item.model.deviceName.indexOf(deviceType) !== -1
+                item.inVisible = item.model.FriendlyName.indexOf(deviceType) !== -1
             }
         }
 
@@ -67,9 +96,9 @@ PageListPL {
             onClicked: {
                 AmazfishConfig.pairedAddress = "";
                 AmazfishConfig.pairedName = "";
-                discoveryModel.running = false;
-                _deviceName = model.deviceName;
-                _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.remoteAddress.replace(/:/g, '_');
+                stopDiscovery();
+                _deviceName = model.FriendlyName;
+                _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
 
                 DaemonInterfaceInstance.pair(_deviceName, _deviceAddress)
             }
@@ -87,7 +116,7 @@ PageListPL {
                     id: nameLabel
                     //truncationMode: TruncationMode.Fade
                     width: parent.width
-                    text: model.deviceName
+                    text: model.FriendlyName
                     color: listItem.pressed ? styler.themeHighlightColor : styler.themePrimaryColor
                 }
 
@@ -99,7 +128,7 @@ PageListPL {
                     }
                     //truncationMode: TruncationMode.Fade
                     width: parent.width
-                    text: model.remoteAddress
+                    text: model.Address
                     //font.pixelSize: Theme.fontSizeSmall
                     color: listItem.pressed ? styler.themeSecondaryHighlightColor : styler.themeSecondaryColor
                 }
@@ -118,18 +147,23 @@ PageListPL {
 
         PageMenuItemPL {
             enabled: !DaemonInterfaceInstance.pairing
-            text: discoveryModel.running
+            text: adapter.discovering
                   ? qsTr("Stop scanning")
                   : qsTr("Scan for devices")
             onClicked: {
                 _placeholderText = ""
-                discoveryModel.running = !discoveryModel.running
+                if (adapter.discovering) {
+                    stopDiscovery();
+                } else {
+                    startDiscovery();
+                    console.log(devicesModel.rowCount());
+                }
             }
         }
 
         PageMenuItemPL {
             visible: text
-            text: discoveryModel.running
+            text: adapter.discovering
                   ? qsTr("Scanning for devices…")
                   : DaemonInterfaceInstance.pairing
                     ? qsTr("Pairing…")
@@ -139,7 +173,7 @@ PageListPL {
 
     BusyIndicatorPL {
         id: busyIndicator
-        running: (discoveryModel.running && !page.count) || DaemonInterfaceInstance.connectionState == "pairing"
+        running: (adapter.discovering && !page.count) || DaemonInterfaceInstance.connectionState == "pairing"
     }
 }
 
