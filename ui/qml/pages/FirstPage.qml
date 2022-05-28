@@ -79,7 +79,7 @@ PagePL {
             LabelPL {
                 id: lblProgress
                 x: 10
-                anchors.left: txtMessage.right
+                anchors.left: lblLastMessage.right
                 anchors.leftMargin: 5
                 horizontalAlignment: Text.AlignLeft
                 color: styler.themeSecondaryHighlightColor
