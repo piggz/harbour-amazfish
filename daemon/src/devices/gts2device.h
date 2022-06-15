@@ -15,7 +15,8 @@ public:
     explicit Gts2Device(const QString &pairedName, QObject *parent = nullptr);
     QString deviceType() const override;
     QStringList supportedDisplayItems() const override;
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    void incomingCall(const QString &caller) override;
 
 protected:
     void initialise() override;

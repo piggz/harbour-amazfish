@@ -38,6 +38,13 @@ AbstractFirmwareInfo *Gts2Device::firmwareInfo(const QByteArray &bytes)
     return new Gts2FirmwareInfo(bytes);
 }
 
+void Gts2Device::incomingCall(const QString &caller)
+{
+    //GTS2 handles call notificaion as a BT headset type device
+    //using a seperate BT connection
+    return;
+}
+
 void Gts2Device::initialise()
 {
     qDebug() << Q_FUNC_INFO;
