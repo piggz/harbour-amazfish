@@ -39,6 +39,12 @@ void InfinitimeFirmwareInfo::determineFirmwareType()
                 qDebug() << "DFU file detected";
                 m_type = Firmware;
             }
+            else if(root->entry("resources.json") != nullptr)
+            {
+                qDebug() << "Resource file detected";
+                m_type = Res_Compressed;
+            }
+
         }
     }
 }
@@ -50,6 +56,6 @@ void InfinitimeFirmwareInfo::determineFirmwareVersion()
         m_version = "FW ()";
         break;
     default:
-        m_version = "unknown";
+        m_version = "Ressource ()";
     }
 }
