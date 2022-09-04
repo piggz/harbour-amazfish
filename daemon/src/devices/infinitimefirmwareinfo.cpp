@@ -1,5 +1,9 @@
 #include "infinitimefirmwareinfo.h"
 
+#include <KArchive>
+#include <kzip.h>
+#include <KCompressionDevice>
+
 InfinitimeFirmwareInfo::InfinitimeFirmwareInfo(const QByteArray &bytes)
 {
     m_bytes = bytes;
@@ -22,8 +26,20 @@ void InfinitimeFirmwareInfo::determineFirmwareType()
     qDebug() << "Determining firmware type";
     m_type = Invalid;
 
-    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(FW_HEADER))) {
-        m_type = Firmware;
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(ZIP_HEADER))) {
+        QDataStream in(&m_bytes, QIODevice::ReadOnly);
+        KCompressionDevice dev(in.device(), false, KCompressionDevice::CompressionType::None);
+        KZip zip(&dev);
+
+        if(zip.open(QIODevice::ReadOnly))
+        {
+            auto* root = zip.directory();
+            if(root->entry("manifest.json") != nullptr)
+            {
+                qDebug() << "DFU file detected";
+                m_type = Firmware;
+            }
+        }
     }
 }
 
