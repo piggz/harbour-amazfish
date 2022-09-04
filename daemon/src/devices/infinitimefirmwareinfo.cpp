@@ -55,7 +55,10 @@ void InfinitimeFirmwareInfo::determineFirmwareVersion()
     case Firmware:
         m_version = "FW ()";
         break;
-    default:
+    case Res_Compressed:
         m_version = "Ressource ()";
+        break;
+    default:
+        m_version = "unknown";
     }
 }
