@@ -9,46 +9,50 @@
 namespace {
 QString getFirmwareFileName(QByteArray& manifestData) {
     QJsonDocument manifestDocument = QJsonDocument::fromJson(manifestData);
+
+    if(manifestDocument.isNull() || !manifestDocument.isObject()) return {};
     QJsonObject manifestJson = manifestDocument.object();
-    auto manifestObject = manifestJson["manifest"].toObject();
-    auto applicationObject = manifestObject["application"].toObject();
-    auto binFile = applicationObject["bin_file"].toString();
+
+    if(manifestJson["manifest"].isUndefined() || !manifestJson["manifest"].isObject())  return {};
+    QJsonObject manifestObject = manifestJson["manifest"].toObject();
+
+    if(manifestObject["application"].isUndefined() || !manifestObject["application"].isObject()) return {};
+    QJsonObject applicationObject = manifestObject["application"].toObject();
+
+    if(applicationObject["bin_file"].isUndefined() || !applicationObject["bin_file"].isString()) return {};
+
+    QString binFile = applicationObject["bin_file"].toString();
     return binFile;
 }
 
-uint16_t getFirmwareCrc(QByteArray& manifestData) {
+uint16_t getFirmwareCrc(QByteArray& manifestData, bool& valid) {
+    valid = false;
     QJsonDocument manifestDocument = QJsonDocument::fromJson(manifestData);
+
+    if(manifestDocument.isNull() || !manifestDocument.isObject()) return 0;
     QJsonObject manifestJson = manifestDocument.object();
+
+    if(manifestJson["manifest"].isUndefined() || !manifestJson["manifest"].isObject())  return 0;
     auto manifestObject = manifestJson["manifest"].toObject();
+
+    if(manifestObject["application"].isUndefined() || !manifestObject["application"].isObject()) return 0;
     auto applicationObject = manifestObject["application"].toObject();
+
+    if(applicationObject["init_packet_data"].isUndefined() || !applicationObject["init_packet_data"].isObject()) return 0;
     auto initPacketDataObject = applicationObject["init_packet_data"].toObject();
+
+
+    if(applicationObject["firmware_crc16"].isUndefined()) return 0;
+
     uint16_t crc = initPacketDataObject["firmware_crc16"].toInt(0);
+    valid = true;
     return crc;
 }
 }
 
 DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info)
 {
-    QByteArray zippedFwBytes = info->bytes();
-    QDataStream in(&zippedFwBytes, QIODevice::ReadOnly);
-    KCompressionDevice dev(in.device(), false, KCompressionDevice::CompressionType::None);
-    KZip zip(&dev);
 
-    if(!zip.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "Cannot open the firmware archive";
-    }
-
-    const auto* root = zip.directory();
-    const auto* manifestEntry = dynamic_cast<const KZipFileEntry*>(root->entry("manifest.json"));
-    auto manifestData = manifestEntry->data();
-    QString firmwareFileName = getFirmwareFileName(manifestData);
-
-    const auto* firmwareEntry = dynamic_cast<const KZipFileEntry*>(root->entry(firmwareFileName));
-    m_uncompressedFwBytes = firmwareEntry->data();
-
-    m_crc16 = getFirmwareCrc(manifestData);
-    qDebug() << "Firmware file name : " << firmwareFileName << " (CRC : " << m_crc16 <<")";
 }
 
 DfuOperation::~DfuOperation()
@@ -62,10 +66,60 @@ DfuOperation::~DfuOperation()
     }
 }
 
+bool DfuOperation::probeArchive()
+{
+    QByteArray zippedFwBytes = m_info->bytes();
+    QDataStream in(&zippedFwBytes, QIODevice::ReadOnly);
+    KCompressionDevice dev(in.device(), false, KCompressionDevice::CompressionType::None);
+    KZip zip(&dev);
+
+    if(!zip.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Cannot open the firmware archive";
+        return false;
+    }
+
+    const auto* root = zip.directory();
+    const auto* manifestEntry = dynamic_cast<const KZipFileEntry*>(root->entry("manifest.json"));
+    if(manifestEntry == nullptr)
+    {
+        qDebug() << "Invalid firmware archive, cannot find manifest.json";
+    }
+
+    auto manifestData = manifestEntry->data();
+    QString firmwareFileName = getFirmwareFileName(manifestData);
+    if(firmwareFileName.isEmpty())
+    {
+        qDebug() << "Invalid firmware archive, cannot read manifest.json";
+        return false;
+    }
+
+    const auto* firmwareEntry = dynamic_cast<const KZipFileEntry*>(root->entry(firmwareFileName));
+    if(firmwareEntry == nullptr)
+    {
+        qDebug() << "Invalid firmware archive, cannot open firmware file";
+        return false;
+    }
+    m_uncompressedFwBytes = firmwareEntry->data();
+
+    bool isCrcValid = false;
+    m_crc16 = getFirmwareCrc(manifestData, isCrcValid);
+    if(!isCrcValid)
+    {
+        qDebug() << "Invalid firmware archive, cannot read CRC";
+        return false;
+    }
+    qDebug() << "Firmware file name : " << firmwareFileName << " (CRC : " << m_crc16 <<")";
+
+    return true;
+}
+
 void DfuOperation::start()
 {
     qDebug() << Q_FUNC_INFO;
-    if (m_info->type() == AbstractFirmwareInfo::Firmware && m_uncompressedFwBytes.size() > 0) {
+    bool probeOk = probeArchive();
+
+    if (m_info->type() == AbstractFirmwareInfo::Firmware && probeOk && m_uncompressedFwBytes.size() > 0) {
         DfuService *serv = dynamic_cast<DfuService*>(m_service);
 
         m_service->enableNotification(serv->UUID_CHARACTERISTIC_DFU_CONTROL);

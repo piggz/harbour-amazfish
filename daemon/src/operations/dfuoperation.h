@@ -33,6 +33,7 @@ private:
 
     Q_SIGNAL void sendFirmware(DfuService* service, const QByteArray &data, int notificationPackets);
     Q_SLOT void packetNotification();
+    bool probeArchive();
 };
 
 #endif // DFUOPERATION_H
