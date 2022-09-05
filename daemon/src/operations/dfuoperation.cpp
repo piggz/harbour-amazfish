@@ -138,7 +138,7 @@ void DfuOperation::start()
         m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, UCHAR_TO_BYTEARRAY(DfuService::COMMAND_PACKET_RECEIPT_NOTIFICATION_REQUEST) + QByteArray(1, m_notificationPackets));
 
     } else {
-        m_service->message(QObject::tr("File does not seem to be supported"));
+        emit transferError("File does not seem to be supported");
     }
 }
 

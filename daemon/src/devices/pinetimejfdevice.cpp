@@ -249,7 +249,7 @@ void PinetimeJFDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
     DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
     if (fw){
-        fw->prepareFirmwareDownload(info, new DfuOperation(info, fw));
+        fw->prepareFirmwareDownload(info);
     }
 }
 

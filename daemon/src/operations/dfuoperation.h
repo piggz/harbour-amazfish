@@ -2,9 +2,10 @@
 #define DFUOPERATION_H
 
 #include "abstractoperation.h"
-#include "bipfirmwareinfo.h"
 #include "dfuworker.h"
 
+class DfuService;
+class AbstractFirmwareInfo;
 class DfuOperation : public QObject, public AbstractOperation
 {
     Q_OBJECT
@@ -15,8 +16,8 @@ public:
     void handleData(const QByteArray &data) override;
     void start() override;
 
+    Q_SIGNAL void transferError(const QString error);
 protected:
-
     const AbstractFirmwareInfo *m_info = nullptr;
     QByteArray m_uncompressedFwBytes;
 
@@ -32,6 +33,7 @@ private:
     uint16_t m_crc16;
 
     Q_SIGNAL void sendFirmware(DfuService* service, const QByteArray &data, int notificationPackets);
+
     Q_SLOT void packetNotification();
     bool probeArchive();
 };

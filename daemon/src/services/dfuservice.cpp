@@ -31,25 +31,19 @@ void DfuService::characteristicChanged(const QString &characteristic, const QByt
         qDebug() << "...got metadata";
         if (m_operationRunning == 1 && m_updateFirmware) {
             if (m_updateFirmware->handleMetaData(value)) {
-                delete m_updateFirmware;
-                m_updateFirmware = nullptr;
+                m_updateFirmware.release();
                 m_operationRunning = 0;
             }
         }
     }
 }
 
-void DfuService::prepareFirmwareDownload(const AbstractFirmwareInfo *info, DfuOperation* operation)
+void DfuService::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
-    if (!m_updateFirmware) {
-        m_updateFirmware = operation;
+    if (m_operationRunning == 1) {
+        emit message(tr("An operation is currently running, please try later"));
     } else {
-        if (m_operationRunning == 1) {
-            emit message(tr("An operation is currently running, please try later"));
-        } else {
-            delete m_updateFirmware;
-            m_updateFirmware = new DfuOperation(info, this);
-        }
+        m_updateFirmware.reset(new DfuOperation(info, this));
     }
 }
 
@@ -58,6 +52,7 @@ void DfuService::startDownload()
     qDebug() << Q_FUNC_INFO;
     if (m_updateFirmware && m_operationRunning == 0) {
         m_operationRunning = 1;
+        connect(m_updateFirmware.get(), &DfuOperation::transferError, this, &DfuService::onTransferError);
         m_updateFirmware->start();
     } else {
         emit message(tr("No file selected"));
@@ -73,8 +68,7 @@ bool DfuService::operationRunning()
 void DfuService::abortOperations()
 {
     if (m_updateFirmware) {
-        delete m_updateFirmware;
-        m_updateFirmware = nullptr;
+        m_updateFirmware.release();
     }
     m_operationRunning = 0;
     emit operationRunningChanged();
@@ -88,4 +82,10 @@ void DfuService::setWaitForWatch(bool wait)
 bool DfuService::waitForWatch()
 {
     return m_waitForWatch.load();
+}
+
+void DfuService::onTransferError(const QString error) {
+    m_operationRunning = 0;
+    qDebug() << "Transfer error : " << error;
+    emit message(error);
 }
