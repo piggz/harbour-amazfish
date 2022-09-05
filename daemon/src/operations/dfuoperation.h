@@ -18,7 +18,7 @@ public:
 protected:
 
     const AbstractFirmwareInfo *m_info = nullptr;
-    QByteArray m_fwBytes;
+    QByteArray m_uncompressedFwBytes;
 
     virtual bool sendFwInfo();
     virtual void sendFirmwareData();
@@ -29,9 +29,11 @@ private:
     bool m_transferError = false;
     QThread m_workerThread;
     DfuWorker *m_worker = nullptr;
+    uint16_t m_crc16;
 
     Q_SIGNAL void sendFirmware(DfuService* service, const QByteArray &data, int notificationPackets);
     Q_SLOT void packetNotification();
+    bool probeArchive();
 };
 
 #endif // DFUOPERATION_H

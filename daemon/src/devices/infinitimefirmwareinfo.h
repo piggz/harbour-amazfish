@@ -13,8 +13,8 @@ private:
     void determineFirmwareType();
     void determineFirmwareVersion();
 
-    const uint8_t FW_HEADER[4]{ // DFU Zip file
-            0x3D, 0xB8, 0xF3, 0x96
+    const uint8_t ZIP_HEADER[4]{ // Zip file
+            0x50, 0x4b, 0x03, 0x04
     };
 };
 

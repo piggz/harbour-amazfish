@@ -2,9 +2,57 @@
 #include "dfuservice.h"
 #include "typeconversion.h"
 #include <QApplication>
+#include <KArchive>
+#include <kzip.h>
+#include <KCompressionDevice>
 
-DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info), m_fwBytes(info->bytes())
+namespace {
+QString getFirmwareFileName(QByteArray& manifestData) {
+    QJsonDocument manifestDocument = QJsonDocument::fromJson(manifestData);
+
+    if(manifestDocument.isNull() || !manifestDocument.isObject()) return {};
+    QJsonObject manifestJson = manifestDocument.object();
+
+    if(manifestJson["manifest"].isUndefined() || !manifestJson["manifest"].isObject())  return {};
+    QJsonObject manifestObject = manifestJson["manifest"].toObject();
+
+    if(manifestObject["application"].isUndefined() || !manifestObject["application"].isObject()) return {};
+    QJsonObject applicationObject = manifestObject["application"].toObject();
+
+    if(applicationObject["bin_file"].isUndefined() || !applicationObject["bin_file"].isString()) return {};
+
+    QString binFile = applicationObject["bin_file"].toString();
+    return binFile;
+}
+
+uint16_t getFirmwareCrc(QByteArray& manifestData, bool& valid) {
+    valid = false;
+    QJsonDocument manifestDocument = QJsonDocument::fromJson(manifestData);
+
+    if(manifestDocument.isNull() || !manifestDocument.isObject()) return 0;
+    QJsonObject manifestJson = manifestDocument.object();
+
+    if(manifestJson["manifest"].isUndefined() || !manifestJson["manifest"].isObject())  return 0;
+    auto manifestObject = manifestJson["manifest"].toObject();
+
+    if(manifestObject["application"].isUndefined() || !manifestObject["application"].isObject()) return 0;
+    auto applicationObject = manifestObject["application"].toObject();
+
+    if(applicationObject["init_packet_data"].isUndefined() || !applicationObject["init_packet_data"].isObject()) return 0;
+    auto initPacketDataObject = applicationObject["init_packet_data"].toObject();
+
+
+    if(applicationObject["firmware_crc16"].isUndefined()) return 0;
+
+    uint16_t crc = initPacketDataObject["firmware_crc16"].toInt(0);
+    valid = true;
+    return crc;
+}
+}
+
+DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info)
 {
+
 }
 
 DfuOperation::~DfuOperation()
@@ -18,10 +66,60 @@ DfuOperation::~DfuOperation()
     }
 }
 
+bool DfuOperation::probeArchive()
+{
+    QByteArray zippedFwBytes = m_info->bytes();
+    QDataStream in(&zippedFwBytes, QIODevice::ReadOnly);
+    KCompressionDevice dev(in.device(), false, KCompressionDevice::CompressionType::None);
+    KZip zip(&dev);
+
+    if(!zip.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Cannot open the firmware archive";
+        return false;
+    }
+
+    const auto* root = zip.directory();
+    const auto* manifestEntry = dynamic_cast<const KZipFileEntry*>(root->entry("manifest.json"));
+    if(manifestEntry == nullptr)
+    {
+        qDebug() << "Invalid firmware archive, cannot find manifest.json";
+    }
+
+    auto manifestData = manifestEntry->data();
+    QString firmwareFileName = getFirmwareFileName(manifestData);
+    if(firmwareFileName.isEmpty())
+    {
+        qDebug() << "Invalid firmware archive, cannot read manifest.json";
+        return false;
+    }
+
+    const auto* firmwareEntry = dynamic_cast<const KZipFileEntry*>(root->entry(firmwareFileName));
+    if(firmwareEntry == nullptr)
+    {
+        qDebug() << "Invalid firmware archive, cannot open firmware file";
+        return false;
+    }
+    m_uncompressedFwBytes = firmwareEntry->data();
+
+    bool isCrcValid = false;
+    m_crc16 = getFirmwareCrc(manifestData, isCrcValid);
+    if(!isCrcValid)
+    {
+        qDebug() << "Invalid firmware archive, cannot read CRC";
+        return false;
+    }
+    qDebug() << "Firmware file name : " << firmwareFileName << " (CRC : " << m_crc16 <<")";
+
+    return true;
+}
+
 void DfuOperation::start()
 {
     qDebug() << Q_FUNC_INFO;
-    if (m_info->type() == AbstractFirmwareInfo::Firmware) {
+    bool probeOk = probeArchive();
+
+    if (m_info->type() == AbstractFirmwareInfo::Firmware && probeOk && m_uncompressedFwBytes.size() > 0) {
         DfuService *serv = dynamic_cast<DfuService*>(m_service);
 
         m_service->enableNotification(serv->UUID_CHARACTERISTIC_DFU_CONTROL);
@@ -33,7 +131,7 @@ void DfuOperation::start()
         QByteArray lengths;
         lengths += TypeConversion::fromInt32(0);
         lengths += TypeConversion::fromInt32(0);
-        lengths += TypeConversion::fromInt32(m_fwBytes.length());
+        lengths += TypeConversion::fromInt32(m_uncompressedFwBytes.length());
         m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, lengths);
 
         //Send packet request command to control point
@@ -103,7 +201,7 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
         m_outstandingPacketNotifications--;
 
         //Use the data from the notification to inform the UI on progress
-        int progressPercent = (int) ((((float) bytesReceived) / m_fwBytes.length()) * 100);
+        int progressPercent = (int) ((((float) bytesReceived) / m_uncompressedFwBytes.length()) * 100);
         DfuService *serv = qobject_cast<DfuService*>(m_service);
         serv->downloadProgress(progressPercent);
         serv->setWaitForWatch(false);
@@ -135,7 +233,7 @@ bool DfuOperation::sendFwInfo()
     info += TypeConversion::fromInt16(0);
     info += TypeConversion::fromInt32(0);
     info += TypeConversion::fromInt16(0);
-    info += TypeConversion::fromInt16(m_info->getCrc16());
+    info += TypeConversion::fromInt16(m_crc16);
     m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, info);
     return true;
 }
@@ -149,7 +247,7 @@ void DfuOperation::sendFirmwareData()
     //connect(m_worker, &DfuWorker::done, this, &Controller::handleResults);
     m_workerThread.start();
     DfuService *serv = qobject_cast<DfuService*>(m_service);
-    emit sendFirmware(serv, m_fwBytes, m_notificationPackets);
+    emit sendFirmware(serv, m_uncompressedFwBytes, m_notificationPackets);
 }
 
 void DfuOperation::packetNotification()
