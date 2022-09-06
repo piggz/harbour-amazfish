@@ -497,7 +497,7 @@
     </message>
     <message>
         <source>Simulate event reminder support</source>
-        <translation type="unfinished"></translation>
+        <translation>Stöd för simulerad händelsepåminnelse</translation>
     </message>
 </context>
 <context>
@@ -643,7 +643,7 @@
     </message>
     <message>
         <source>nl_NL</source>
-        <translation type="unfinished"></translation>
+        <translation>nl_NL</translation>
     </message>
 </context>
 <context>
