@@ -1,4 +1,8 @@
 #include "dfuworker.h"
+#include "qdebug.h"
+
+#include <QThread>
+#include "dfuservice.h"
 
 DfuWorker::DfuWorker(QObject *parent) : QObject(parent)
 {

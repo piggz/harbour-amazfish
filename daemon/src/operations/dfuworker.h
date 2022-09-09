@@ -2,8 +2,8 @@
 #define DFUWORKER_H
 
 #include <QObject>
-#include "dfuservice.h"
 
+class DfuService;
 class DfuWorker : public QObject
 {
     Q_OBJECT
