@@ -15,7 +15,7 @@ public:
     ~BleFsWorker();
 
 private:
-    std::vector<AdafruitBleFsOperation::File> getRemoteFileList(AdafruitBleFsOperation* service);
+    std::vector<AdafruitBleFsOperation::File> getRemoteFileList(AdafruitBleFsOperation* service, QString path);
     void eraseRemoteFile(AdafruitBleFsOperation* service, QString file);
 
     bool m_interupted = false;

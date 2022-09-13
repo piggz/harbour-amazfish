@@ -83,33 +83,68 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
 
     // Get manifest file data from the archive
     auto* manifestEntry = dynamic_cast<const KZipFileEntry*>(archiveRoot->entry("resources.json"));
+    if(manifestEntry == nullptr)
+        return;
+
     auto manifestData = manifestEntry->data();
 
     // Open manifest file and parse JSON
     QJsonDocument manifestDocument = QJsonDocument::fromJson(manifestData);
+    if(manifestDocument.isNull() || !manifestDocument.isObject())
+        return;
+
     QJsonObject manifestObject = manifestDocument.object();
+    if(manifestObject["resources"].isUndefined() || !manifestObject["resources"].isArray())
+        return;
+
     auto resourceList = manifestObject["resources"].toArray();
+
+    if(manifestObject["obsolete_files"].isUndefined() || !manifestObject["obsolete_files"].isArray())
+        return;
+
+    auto obsoleteFileList = manifestObject["obsolete_files"].toArray();
+
+    // Remove obsolete files
+    for(const QJsonValue& file : obsoleteFileList)
+    {
+        if(file["path"].isUndefined() || !file["path"].isString())
+            continue;
+
+        auto path = file["path"];
+        eraseRemoteFile(service, path.toString());
+    }
 
     // Get total size to be uploaded
     auto totalSize = getTotalSize(resourceList, archiveRoot);
-
-    // List directory from the watch
-    auto fileList = getRemoteFileList(service);
-
 
     // Upload the resources
     int progressSize = 0;
     for(const QJsonValue& resource : resourceList)
     {
+        if(resource["filename"].isUndefined() || !resource["filename"].isString())
+            continue;
+
+        if(resource["path"].isUndefined() || !resource["path"].isString())
+            continue;
+
         auto sourceFile = resource["filename"].toString();
         auto destinationFile = resource["path"].toString();
 
-        if(fileExists(fileList, destinationFile))
+        // Remove the destination file if it already exists on the target
+        QStringList folderList = destinationFile.split('/');
+        QString file = folderList.last();
+        folderList.removeLast();
+        QString folder = folderList.join('/');
+        auto fileList = getRemoteFileList(service, folder);
+
+        if(fileExists(fileList, file))
         {
             eraseRemoteFile(service, destinationFile);
         }
 
         auto* resourceEntry = dynamic_cast<const KZipFileEntry*>(archiveRoot->entry(sourceFile));
+        if(resourceEntry == nullptr)
+            continue;
         auto resourceData = resourceEntry->data();
 
         auto writeFileFuture = service->writeFileStart(destinationFile.toStdString(), resourceData.size(), 0);
@@ -138,9 +173,9 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
     }
 }
 
-std::vector<AdafruitBleFsOperation::File> BleFsWorker::getRemoteFileList(AdafruitBleFsOperation* service)
+std::vector<AdafruitBleFsOperation::File> BleFsWorker::getRemoteFileList(AdafruitBleFsOperation* service, QString path)
 {
-    auto listDirectoryFuture = service->listDirectory();
+    auto listDirectoryFuture = service->listDirectory(path.toStdString());
     listDirectoryFuture.wait();
     return listDirectoryFuture.get();
 

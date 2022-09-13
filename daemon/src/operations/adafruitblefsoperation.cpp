@@ -54,7 +54,6 @@ void AdafruitBleFsOperation::handleListDirectory(const QByteArray &value)
             + + ((uint64_t)value[20] << 32) + + ((uint64_t)value[21] << 40) + + ((uint64_t)value[22] << 48) + + ((uint64_t)value[23] << 56);
     uint32_t fileSize = value[24] + (value[25] << 8) + (value[26] << 16) + (value[27] << 24);
     std::string filename;
-    filename += '/';
     for(int i = 0; i < pathSize; i++) {
         filename += (char)value[28+i];
     }
@@ -88,16 +87,18 @@ void AdafruitBleFsOperation::handleWriteFile(const QByteArray &value)
     writeFilePromise.set_value(freeSpace);
 }
 
-std::future<std::vector<AdafruitBleFsOperation::File>> AdafruitBleFsOperation::listDirectory()
+std::future<std::vector<AdafruitBleFsOperation::File>> AdafruitBleFsOperation::listDirectory(const std::string& path)
 {
     this->listDirectoryPromise = std::promise<std::vector<File>>();
 
     QByteArray cmd;
     cmd += REQUEST_LIST_DIR;
     cmd += PADDING_BYTE;
-    cmd += (uint8_t)1;
-    cmd += (uint8_t)0;
-    cmd += (uint8_t)'/';
+    cmd += (uint8_t)(path.size() & 0xff);
+    cmd += (uint8_t)((path.size() >> 8) & 0xff);
+    for(int i = 0; i < path.size(); i++) {
+        cmd += path[i];
+    }
     m_service->writeValue(AdafruitBleFsService::UUID_CHARACTERISTIC_FS_TRANSFER, cmd);
 
     return listDirectoryPromise.get_future();

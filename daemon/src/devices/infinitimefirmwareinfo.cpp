@@ -44,7 +44,6 @@ void InfinitimeFirmwareInfo::determineFirmwareType()
                 qDebug() << "Resource file detected";
                 m_type = Res_Compressed;
             }
-
         }
     }
 }

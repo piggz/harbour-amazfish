@@ -23,7 +23,7 @@ public:
         bool isDirectory;
     };
 
-    std::future<std::vector<File>> listDirectory();
+    std::future<std::vector<File>> listDirectory(const std::string& path);
     std::future<void> eraseFile(const std::string& file);
     std::future<size_t> writeFileStart(const std::string& filePath, size_t fileSize, size_t offset);
     std::future<size_t> writeFileData(const std::vector<uint8_t> data, size_t offset);
