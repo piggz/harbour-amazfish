@@ -142,6 +142,9 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
             eraseRemoteFile(service, destinationFile);
         }
 
+        if(!createParentFolder(service, folderList))
+            continue;
+
         auto* resourceEntry = dynamic_cast<const KZipFileEntry*>(archiveRoot->entry(sourceFile));
         if(resourceEntry == nullptr)
             continue;
@@ -149,6 +152,8 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
 
         auto writeFileFuture = service->writeFileStart(destinationFile.toStdString(), resourceData.size(), 0);
         writeFileFuture.wait();
+        bool success = writeFileFuture.get();
+        if(!success) continue;
 
         const size_t chunkSize = transferMtu-20;
         size_t written = 0;
@@ -164,7 +169,8 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
 
             auto writeFileDataFuture = service->writeFileData(chunk, written);
             writeFileDataFuture.wait();
-            writeFileDataFuture.get();
+            success = writeFileDataFuture.get();
+            if(!success) break;
 
             written += toWrite;
             progressSize += toWrite;
@@ -185,4 +191,21 @@ void BleFsWorker::eraseRemoteFile(AdafruitBleFsOperation* service, QString file)
 {
     auto eraseFileFuture = service->eraseFile(file.toStdString());
     eraseFileFuture.wait();
+}
+
+bool BleFsWorker::createParentFolder(AdafruitBleFsOperation* service, QStringList folderList)
+{
+    if(folderList.size() <= 1)
+        return true;
+
+    auto folderName = folderList.join('/');
+
+    folderList.removeLast();
+    bool success = createParentFolder(service, folderList);
+    if(!success)
+        return false;
+
+    auto createDirectoryFuture = service->createDirectory(folderName.toStdString());
+    createDirectoryFuture.wait();
+    return createDirectoryFuture.get();
 }

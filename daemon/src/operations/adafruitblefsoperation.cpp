@@ -37,6 +37,9 @@ void AdafruitBleFsOperation::handleData(const QByteArray &data)
     case RESPONSE_WRITE_FILE:
         handleWriteFile(data);
         break;
+    case RESPONSE_CREATE_DIR:
+        handleCreateDirectory(data);
+        break;
     default:
         break;
     }
@@ -63,8 +66,12 @@ void AdafruitBleFsOperation::handleListDirectory(const QByteArray &value)
     {
         listDirectoryEntries.clear();
     }
-    File f {filename, timestamp, isDirectory};
-    listDirectoryEntries.push_back(f);
+
+    if(status == static_cast<uint8_t>(Status::Success))
+    {
+        File f {filename, timestamp, isDirectory};
+        listDirectoryEntries.push_back(f);
+    }
 
     if(entryNr == entryTotal)
     {
@@ -84,7 +91,7 @@ void AdafruitBleFsOperation::handleWriteFile(const QByteArray &value)
     uint64_t timestamp = value[8] + (value[9] << 8) + (value[10] << 16) + (value[11] << 24) + ((uint64_t)value[12] << 32) + ((uint64_t)value[13] << 40) + ((uint64_t)value[14] << 48) + ((uint64_t)value[15] << 56);
     uint32_t freeSpace = value[16] + (value[17] << 8) + (value[18] << 16) + (value[19] << 24);
 
-    writeFilePromise.set_value(freeSpace);
+    writeFilePromise.set_value(status == static_cast<uint8_t>(Status::Success));
 }
 
 std::future<std::vector<AdafruitBleFsOperation::File>> AdafruitBleFsOperation::listDirectory(const std::string& path)
@@ -121,9 +128,10 @@ std::future<void> AdafruitBleFsOperation::eraseFile(const std::string& filename)
     return deleteFilePromise.get_future();
 }
 
-std::future<size_t> AdafruitBleFsOperation::writeFileStart(const std::string& filePath, size_t fileSize, size_t offset)
+
+std::future<bool> AdafruitBleFsOperation::writeFileStart(const std::string& filePath, size_t fileSize, size_t offset)
 {
-    writeFilePromise = std::promise<size_t>();
+    writeFilePromise = std::promise<bool>();
 
     QByteArray cmd;
     cmd += REQUEST_WRITE_FILE_START;
@@ -155,9 +163,9 @@ std::future<size_t> AdafruitBleFsOperation::writeFileStart(const std::string& fi
     return writeFilePromise.get_future();
 }
 
-std::future<size_t> AdafruitBleFsOperation::writeFileData(const std::vector<uint8_t> data, size_t offset)
+std::future<bool> AdafruitBleFsOperation::writeFileData(const std::vector<uint8_t> data, size_t offset)
 {
-    writeFilePromise = std::promise<size_t>();
+    writeFilePromise = std::promise<bool>();
 
     QByteArray cmd;
     cmd += REQUEST_WRITE_FILE_DATA;
@@ -197,4 +205,40 @@ void AdafruitBleFsOperation::updateFiles(const int mtu)
 
 void AdafruitBleFsOperation::downloadProgress(int percent) {
     emit dynamic_cast<AdafruitBleFsService*>(m_service)->downloadProgress(percent);
+}
+
+
+std::future<bool> AdafruitBleFsOperation::createDirectory(const std::string& path) {
+    createDirectoryPromise = std::promise<bool>();
+
+    QByteArray cmd;
+    cmd += REQUEST_CREATE_DIR;
+    cmd += PADDING_BYTE;
+    cmd += (path.size()) & 0xff; // Path size
+    cmd += (path.size() >> 8) & 0xff;
+    cmd += PADDING_BYTE;
+    cmd += PADDING_BYTE;
+    cmd += PADDING_BYTE;
+    cmd += PADDING_BYTE;
+    cmd += (uint8_t)0;  // Time
+    cmd += (uint8_t)0;
+    cmd += (uint8_t)0;
+    cmd += (uint8_t)0;
+    cmd += (uint8_t)0;
+    cmd += (uint8_t)0;
+    cmd += (uint8_t)0;
+    cmd += (uint8_t)0;
+    for(int i = 0; i < path.size(); i++)
+    {
+        cmd += path[i];
+    }
+
+    m_service->writeValue(AdafruitBleFsService::UUID_CHARACTERISTIC_FS_TRANSFER, cmd);
+
+    return createDirectoryPromise.get_future();
+}
+
+void AdafruitBleFsOperation::handleCreateDirectory(const QByteArray &value) {
+    uint8_t status = value[1];
+    createDirectoryPromise.set_value(status != static_cast<uint8_t>(Status::ReadOnly)); // In this case, ERROR means that the directory already existst
 }

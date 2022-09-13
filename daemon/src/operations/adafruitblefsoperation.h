@@ -23,10 +23,12 @@ public:
         bool isDirectory;
     };
 
+
     std::future<std::vector<File>> listDirectory(const std::string& path);
     std::future<void> eraseFile(const std::string& file);
-    std::future<size_t> writeFileStart(const std::string& filePath, size_t fileSize, size_t offset);
-    std::future<size_t> writeFileData(const std::vector<uint8_t> data, size_t offset);
+    std::future<bool> writeFileStart(const std::string& filePath, size_t fileSize, size_t offset);
+    std::future<bool> writeFileData(const std::vector<uint8_t> data, size_t offset);
+    std::future<bool> createDirectory(const std::string& path);
 
     void updateFiles(const int mtu);
     void downloadProgress(int percent);
@@ -40,10 +42,19 @@ private:
     static const uint8_t RESPONSE_DELETE_FILE = 0x31;
     static const uint8_t REQUEST_LIST_DIR = 0x50;
     static const uint8_t RESPONSE_LIST_DIR = 0x51;
+    static const uint8_t REQUEST_CREATE_DIR = 0x40;
+    static const uint8_t RESPONSE_CREATE_DIR = 0x41;
+
+    enum class Status : uint8_t {
+        Success = 0x01,
+        Error = 0x02,
+        ReadOnly = 0x05
+    };
 
     void handleListDirectory(const QByteArray &data);
     void handleDeleteFile(const QByteArray &data);
     void handleWriteFile(const QByteArray &data);
+    void handleCreateDirectory(const QByteArray &data);
 
     const AbstractFirmwareInfo *info;
 
@@ -51,7 +62,8 @@ private:
 
     std::promise<std::vector<File>> listDirectoryPromise;
     std::promise<void> deleteFilePromise;
-    std::promise<size_t> writeFilePromise;
+    std::promise<bool> writeFilePromise;
+    std::promise<bool> createDirectoryPromise;
 
     QThread m_workerThread;
     BleFsWorker* m_worker = nullptr;
