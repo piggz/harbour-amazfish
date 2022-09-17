@@ -40,12 +40,15 @@ PageListPL {
         interval: 100
         onTriggered: {
             console.log("Delayed Manager operational:", _bluetoothManager.operational, _bluetoothManager.usableAdapter);
-
+            if (typeof(devicesModel.filters) == 'number') {
+                devicesModel.filters = BluezQt.DevicesModelPrivate.AllDevices;
+            }
         }
     }
 
     Component.onCompleted: {
         console.log("Manager operational:", _bluetoothManager.operational, _bluetoothManager.usableAdapter);
+
     }
 
     Connections {
@@ -63,7 +66,6 @@ PageListPL {
 
     BluezQt.DevicesModel {
         id: devicesModel
-        filters: BluezQt.DevicesModelPrivate.AllDevices
     }
 
     DelegateModel {
@@ -93,6 +95,7 @@ PageListPL {
         delegate: ListItemPL {
             id: listItem
             contentHeight: styler.themeItemSizeLarge
+//            visible: model.FriendlyName.indexOf(deviceType) >= 0
             onClicked: {
                 AmazfishConfig.pairedAddress = "";
                 AmazfishConfig.pairedName = "";
