@@ -15,7 +15,7 @@ PageListPL {
                     var pairpage = pageStack.push(Qt.resolvedUrl("./PairPage.qml"));
                     pairpage.deviceType = deviceType;})
             } else {
-                var pairpage = pageStack.push(Qt.resolvedUrl("/home/jf/git/harbour-amazfish/ui/qml/pages/PairPage.qml"));
+                var pairpage = pageStack.push(Qt.resolvedUrl("./PairPage.qml"));
                 pairpage.deviceType = deviceType;
             }
         }
