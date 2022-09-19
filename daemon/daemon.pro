@@ -46,7 +46,7 @@ WATCHFISH_FEATURES += music \
                   calendar
 }
 
-INCLUDEPATH += /usr/include/mkcal-qt5 /usr/include/KF5/KCalendarCore
+INCLUDEPATH += /usr/include/mkcal-qt5 /usr/include/KF5/KCalendarCore /usr/include/KF5/KArchive
 
 INCLUDEPATH += $$PWD/src/services/ \
                $$PWD/src/operations/ \
@@ -111,11 +111,14 @@ SOURCES += \
     src/devices/gtsdevice.cpp \
     src/devices/gtsfirmwareinfo.cpp \
     src/devices/pinetimejfdevice.cpp \
+    src/operations/adafruitblefsoperation.cpp \
+    src/operations/adafruitblefsworker.cpp \
     src/operations/dfuoperation.cpp \
     src/operations/dfuworker.cpp \
     src/operations/updatefirmwareoperationnew.cpp \
     src/operations/huamiupdatefirmwareoperation2020.cpp \
     src/qaesencryption.cpp \
+    src/services/adafruitblefsservice.cpp \
     src/services/currenttimeservice.cpp \
     src/services/dfuservice.cpp \
     src/services/infinitimemotionservice.cpp \
@@ -178,11 +181,14 @@ HEADERS += \
     src/devices/gtsdevice.h \
     src/devices/gtsfirmwareinfo.h \
     src/devices/pinetimejfdevice.h \
+    src/operations/adafruitblefsoperation.h \
+    src/operations/adafruitblefsworker.h \
     src/operations/dfuoperation.h \
     src/operations/dfuworker.h \
     src/operations/updatefirmwareoperationnew.h \
     src/operations/huamiupdatefirmwareoperation2020.h \
     src/qaesencryption.h \
+    src/services/adafruitblefsservice.h \
     src/services/currenttimeservice.h \
     src/services/dfuservice.h \
     src/services/infinitimemotionservice.h \

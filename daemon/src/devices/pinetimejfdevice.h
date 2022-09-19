@@ -42,6 +42,7 @@ private:
     void parseServices();
     void initialise();
     Q_SLOT void serviceEvent(const QString &characteristic, uint8_t event);
+    AbstractFirmwareInfo::Type firmwareType;
 
 };
 

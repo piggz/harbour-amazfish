@@ -10,8 +10,38 @@
 #include "hrmservice.h"
 #include "infinitimemotionservice.h"
 #include "infinitimeweatherservice.h"
-
+#include "adafruitblefsservice.h"
 #include <QtXml/QtXml>
+
+namespace {
+    size_t GetMtuForCharacteristic(QString path, const char* characteristicUUID)
+    {
+        size_t transferMtu = 20;
+        QDBusInterface adapterIntro("org.bluez", path, "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
+        QDBusReply<QString> adapterXml = adapterIntro.call("Introspect");
+        QDomDocument adapterDoc;
+        adapterDoc.setContent(adapterXml.value());
+        QDomNodeList adapterNodes = adapterDoc.elementsByTagName("node");
+
+        for (int x = 0; x < adapterNodes.count(); x++)
+        {
+            QDomElement node = adapterNodes.at(x).toElement();
+            QString nodeName = node.attribute("name");
+            if (nodeName.startsWith("char")) {
+                QString nodePath = path + "/" + nodeName;
+                QDBusInterface characteristicInterface("org.bluez", nodePath, "org.bluez.GattCharacteristic1", QDBusConnection::systemBus(), 0);
+                QString currentCharacteristicUUID = characteristicInterface.property("UUID").toString();
+                if(currentCharacteristicUUID == characteristicUUID){
+                    QDBusInterface mtuInterface("org.bluez", nodePath, "org.bluez.GattCharacteristic1", QDBusConnection::systemBus(), 0);
+                    QString mtu = mtuInterface.property("MTU").toString();
+                    transferMtu = mtu.toInt();
+                }
+
+            }
+        }
+        return transferMtu;
+    }
+}
 
 PinetimeJFDevice::PinetimeJFDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
@@ -122,6 +152,9 @@ void PinetimeJFDevice::parseServices()
                 addService(InfiniTimeMotionService::UUID_SERVICE_MOTION, new InfiniTimeMotionService(path, this));
             } else if (uuid == InfiniTimeWeatherService::UUID_SERVICE_WEATHER && !service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER)) {
                 addService(InfiniTimeWeatherService::UUID_SERVICE_WEATHER, new InfiniTimeWeatherService(path, this));
+            } else if (uuid == AdafruitBleFsService::UUID_SERVICE_FS && !service(AdafruitBleFsService::UUID_SERVICE_FS)) {
+                size_t transferMtu = GetMtuForCharacteristic(path, AdafruitBleFsService::UUID_CHARACTERISTIC_FS_TRANSFER);
+                addService(AdafruitBleFsService::UUID_SERVICE_FS, new AdafruitBleFsService(path, this, transferMtu));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -175,6 +208,11 @@ void PinetimeJFDevice::initialise()
         motion->enableNotification(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_STEPS);
         //motion->enableNotification(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_MOTION);
         connect(motion, &InfiniTimeMotionService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
+    }
+
+    AdafruitBleFsService *bleFs = qobject_cast<AdafruitBleFsService*>(service(AdafruitBleFsService::UUID_SERVICE_FS));
+    if (bleFs) {
+        connect(bleFs, &AdafruitBleFsService::downloadProgress, this, &PinetimeJFDevice::downloadProgress, Qt::UniqueConnection);
     }
 }
 
@@ -247,18 +285,39 @@ void PinetimeJFDevice::setMusicStatus(bool playing, const QString &title, const 
 
 void PinetimeJFDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
-    DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
-    if (fw){
-        fw->prepareFirmwareDownload(info);
+    firmwareType = info->type();
+    if(info->type() == AbstractFirmwareInfo::Type::Firmware) {
+        DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
+        if (fw){
+            fw->prepareFirmwareDownload(info);
+        }
+    } else if (info->type() == AbstractFirmwareInfo::Type::Res_Compressed) {
+        AdafruitBleFsService* s = qobject_cast<AdafruitBleFsService*>(service(AdafruitBleFsService::UUID_SERVICE_FS));
+        if(s) {
+            s->prepareDownload(new AdafruitBleFsOperation(s, info));
+        }
     }
 }
 
 void PinetimeJFDevice::startDownload()
 {
     qDebug() << Q_FUNC_INFO;
-    DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
-    if (fw){
-        fw->startDownload();
+
+    if(firmwareType == AbstractFirmwareInfo::Type::Firmware)
+    {
+        DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
+        if (fw)
+        {
+            fw->startDownload();
+        }
+    }
+    else if(firmwareType == AbstractFirmwareInfo::Type::Res_Compressed)
+    {
+        AdafruitBleFsService* s = qobject_cast<AdafruitBleFsService*>(service(AdafruitBleFsService::UUID_SERVICE_FS));
+        if(s)
+        {
+            s->updateFiles();
+        }
     }
 }
 
