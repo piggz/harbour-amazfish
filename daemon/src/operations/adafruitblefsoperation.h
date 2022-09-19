@@ -3,6 +3,7 @@
 
 #include "abstractoperation.h"
 #include "abstractfirmwareinfo.h"
+#include <future>
 
 class AdafruitBleFsService;
 class BleFsWorker;

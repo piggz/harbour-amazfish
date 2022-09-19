@@ -31,7 +31,7 @@ namespace
     {
         size_t totalSize = 0;
         for(const QJsonValue& resource : resourceList) {
-            auto sourceFile = resource["filename"].toString();
+            auto sourceFile = resource.toObject().value("filename").toString();// resource["filename"].toString();
             auto* resourceEntry = dynamic_cast<const KZipFileEntry*>(root->entry(sourceFile));
             totalSize += resourceEntry->size();
         }
@@ -107,10 +107,10 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
     // Remove obsolete files
     for(const QJsonValue& file : obsoleteFileList)
     {
-        if(file["path"].isUndefined() || !file["path"].isString())
+        if(file.toObject().value("path").isUndefined() || !file.toObject().value("path").isString())
             continue;
 
-        auto path = file["path"];
+        auto path = file.toObject().value("path");
         eraseRemoteFile(service, path.toString());
     }
 
@@ -121,14 +121,14 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
     int progressSize = 0;
     for(const QJsonValue& resource : resourceList)
     {
-        if(resource["filename"].isUndefined() || !resource["filename"].isString())
+        if(resource.toObject().value("filename").isUndefined() || !resource.toObject().value("filename").isString())
             continue;
 
-        if(resource["path"].isUndefined() || !resource["path"].isString())
+        if(resource.toObject().value("path").isUndefined() || !resource.toObject().value("path").isString())
             continue;
 
-        auto sourceFile = resource["filename"].toString();
-        auto destinationFile = resource["path"].toString();
+        auto sourceFile = resource.toObject().value("filename").toString();
+        auto destinationFile = resource.toObject().value("path").toString();
 
         // Remove the destination file if it already exists on the target
         QStringList folderList = destinationFile.split('/');
