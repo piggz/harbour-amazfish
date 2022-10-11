@@ -5,7 +5,7 @@
 The application can be built and deployed like any normal Sailfish application using the SDK, once some additional dependencies have been installed in the
 build target which are not available by default.
 
-To get into the build machine (if started by Sailifsh IDE)
+To get into the build machine (if started by Sailfish IDE)
 `ssh -l mersdk localhost -p 2222 -i ~/SailfishOS/vmshare/ssh/private_keys/engine/mersdk`
 
 Use the `sb2-config` command to make your ARM target the default
@@ -29,17 +29,19 @@ sb2 -R zypper in mkcal-qt5-devel
 etc as pointed out by build errors.
 (although ctrl-B should offer to install them)
 
-## In Ubuntu 20.04, with default Ubuntu repository, QT is in version 5.12.8
+## Debian based distributions
+
+In Ubuntu 20.04, with default Ubuntu repository, QT is in version 5.12.8. Tested with Mobian (Debian bookworm/sid) and Phosh on the PinePhone Pro.
 
 ### Install dependencies
 
-Most dependencies can be installed from the Ubuntu package repositories:
+Most dependencies can be installed from the system's package repositories:
 ```
 sudo apt update
-sudo apt install -y qt5-default libkdb3-dev libkf5contacts-dev libkf5coreaddons-dev qtlocation5-dev qtconnectivity5-dev qtpositioning5-dev qml-module-qtbluetooth
+sudo apt install -y qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libkdb3-dev libkf5contacts-dev libkf5archive-dev libkf5coreaddons-dev qtlocation5-dev qtconnectivity5-dev qtpositioning5-dev qml-module-qtbluetooth qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qt-labs-settings qml-module-org-kde-kirigami2 qml-module-org-kde-bluezqt
 ```
 
-Two depedencies can be found on git repos
+Two dependencies can be found on git repos
 https://git.sailfishos.org/mer-core/nemo-qml-plugin-dbus
 and
 https://git.sailfishos.org/mer-core/qtmpris
@@ -70,13 +72,13 @@ cd ..
 
 ### Prepare git repo
 
-Clone amazfish repository:
+Clone Amazfish repository:
 ```
 git clone https://github.com/piggz/harbour-amazfish.git
 cd harbour-amazfish
 ```
 
-Initialise and sync submodules:
+Initialize and sync submodules:
 
 ```
 git submodule init
@@ -113,7 +115,11 @@ This can be done with the following command or an text editor of your choice:
 You can now run the `make` command again, and the build process should end successfully.
 
 ### Installing Amazfish and enabling background service.
-Once you have built the project, run `sudo make install` to install the service daemon and program files. 
+Once you have built the project, run this command to install the service daemon and program files:
+
+```
+sudo make install
+```
 
 Amazfish will be installed to: `/usr/local/share/harbour-amazfish-ui`
 
