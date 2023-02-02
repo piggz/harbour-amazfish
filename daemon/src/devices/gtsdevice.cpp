@@ -202,7 +202,7 @@ void GtsDevice::sendEventReminder(int id, const QDateTime &dt, const QString &ev
     cmd += (char)0x00;
     cmd += (char)0x00;
     cmd += (char)0x00;
-    cmd += TypeConversion::dateTimeToBytes(dt, 0).left(5);
+    cmd += TypeConversion::dateTimeToBytes(dt, 0).left(6);
     cmd += (char)0x00;
     cmd += (char)0x00;
     cmd += event.toLocal8Bit();
