@@ -19,7 +19,7 @@ These are devices I have, have tested and will try not to break any functioanlit
  * Amazfit Bip
  * Amazfit GTS
  * Amazfit GTR2
- * Pinetime Infinitme
+ * Pinetime InfiniTime
  * Bangle.js
 
 ### Silver
