@@ -68,32 +68,13 @@ int AlertNotificationService::mapSenderToIcon(const QString &sender)
     if (mailREX.exactMatch(s)) {
             return HuamiIcon::EMAIL;
     }
-    if (s == "facebook") {
-        return HuamiIcon::FACEBOOK;
-    }
-    if (s == "twitter" || s == "tweetian" || s == "piepmatz") {
-        return HuamiIcon::TWITTER;
-    }
-    if (s == "messenger") {
-        return HuamiIcon::FACEBOOK_MESSENGER;
-    }
-    if (s == "snapchat") {
-        return HuamiIcon::SNAPCHAT;
-    }
-    if (s == "whatsapp") {
-        return HuamiIcon::WHATSAPP;
-    }
-    if (s == "instagram") {
-        return HuamiIcon::INSTAGRAM;
-    }
-    if (s == "telegram" || s == "fernschreiber" || s == "yottagram" || s == "sailorgram" || s == "depecher") {
-        return HuamiIcon::TELEGRAM;
-    }
-    if (s == "skype") {
-        return HuamiIcon::SKYPE;
-    }
 
-    return HuamiIcon::APP_11;
+    auto icon = AppToIconMap.find(s);
+
+    if ( icon == AppToIconMap.end() )
+        return HuamiIcon::APP_11;
+
+    return icon->second;
 }
 
 void AlertNotificationService::characteristicChanged(const QString &c, const QByteArray &value)

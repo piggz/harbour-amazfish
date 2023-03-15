@@ -15,7 +15,7 @@ TARGET = harbour-amazfishd
 LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 PKGCONFIG += dbus-1
 QT +=  positioning KDb3 network dbus KArchive
-CONFIG += c++14
+CONFIG += c++17
 
 equals(FLAVOR, "silica") {
     CONFIG += flavor_silica
