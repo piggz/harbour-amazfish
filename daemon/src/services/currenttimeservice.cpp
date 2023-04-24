@@ -20,7 +20,8 @@ void CurrentTimeService::setCurrentTime()
     timeBytes += TypeConversion::fromInt8(now.time().hour());
     timeBytes += TypeConversion::fromInt8(now.time().minute());
     timeBytes += TypeConversion::fromInt8(now.time().second());
-    timeBytes += char(0); //fractions of seconds
+    timeBytes += char(0); //day of week
+    timeBytes += char(0); //fractions256
     timeBytes += char(0); //reason
 
     qDebug() << "setting time to:" << now << timeBytes.toHex();
