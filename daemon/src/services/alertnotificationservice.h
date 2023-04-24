@@ -89,6 +89,31 @@ public:
     };
     Q_ENUM(AlertEvent)
 
+    static inline std::map<QString, HuamiIcon> AppToIconMap = {
+        /* Facebook */
+        {"facebook", HuamiIcon::FACEBOOK},
+        /* Facebook Messenger */
+        {"messenger", HuamiIcon::FACEBOOK_MESSENGER},
+        /* Instagram */
+        {"instagram", HuamiIcon::INSTAGRAM},
+        /* Telegram clients */
+        {"depecher", HuamiIcon::TELEGRAM},
+        {"fernschreiber", HuamiIcon::TELEGRAM},
+        {"sailorgram", HuamiIcon::TELEGRAM},
+        {"telegram", HuamiIcon::TELEGRAM},
+        {"yottogram", HuamiIcon::TELEGRAM},
+        /* Twitter Clients */
+        {"piepmatz", HuamiIcon::TWITTER},
+        {"tweetian", HuamiIcon::TWITTER},
+        {"twitter", HuamiIcon::TWITTER},
+        /* Snapchat */
+        {"snapchat", HuamiIcon::SNAPCHAT},
+        /* Skype */
+        {"skype", HuamiIcon::SKYPE},
+        /* WhatsApp */
+        {"whatsapp", HuamiIcon::WHATSAPP},
+    };
+
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message);
     Q_INVOKABLE void incomingCall(const QString &caller);
     static int mapSenderToIcon(const QString &sender);
