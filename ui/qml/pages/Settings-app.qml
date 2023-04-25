@@ -7,6 +7,7 @@ PagePL {
     id: page
     title: qsTr("Application Settings")
 
+    property bool _ready: false
     // Place our content in a Column.  The PageHeader is always placed at the top
     // of the page, followed by our content.
     Column {
@@ -106,13 +107,15 @@ PagePL {
         TextSwitchPL {
             id: chkServiceEnabled
             visible: (ENABLE_SYSTEMD === "YES")
-            checked: serviceEnabledState === false ? false : true
             text: qsTr("Start service on boot")
             onCheckedChanged: {
-                if (serviceEnabledState) {
-                    systemdManager.disableService();
-                } else {
-                    systemdManager.enableService();
+                if (_ready) {
+                    console.log("service enabled:", serviceEnabledState);
+                    if (serviceEnabledState) {
+                        systemdManager.disableService();
+                    } else {
+                        systemdManager.enableService();
+                    }
                 }
             }
         }
@@ -178,6 +181,9 @@ PagePL {
         chkNotifyLowBattery.checked = AmazfishConfig.appNotifyLowBattery;
         chkNavigationNotification.checked = AmazfishConfig.appNavigationNotification;
         chkSimulateEventSupport.checked = AmazfishConfig.appSimulateEventSupport;
+
+        chkServiceEnabled.checked = serviceEnabledState;
+        _ready = true;
     }
 
     function saveSettings() {

@@ -154,12 +154,20 @@ ApplicationWindowPL
         function enableService() {
             if(ENABLE_SYSTEMD === "YES") {
                 systemdManager.typedCall("EnableUnitFiles", [{"type":"as", "value":["harbour-amazfish.service"]}, {"type":"b", "value":false}, {"type":"b", "value":true}])
+                reload();
             }
         }
 
         function disableService() {
             if (ENABLE_SYSTEMD === "YES") {
                 systemdManager.typedCall("DisableUnitFiles", [{"type":"as", "value":["harbour-amazfish.service"]}, {"type":"b", "value":false}])
+                reload();
+            }
+        }
+
+        function reload() {
+            if (ENABLE_SYSTEMD === "YES") {
+                systemdManager.call("Reload");
             }
         }
     }
