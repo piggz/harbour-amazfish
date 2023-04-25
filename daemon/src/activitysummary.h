@@ -14,6 +14,12 @@ class ActivitySummary
 public:
     ActivitySummary();
 
+    struct meta {
+        QString key;
+        QString value;
+        QString unit;
+    };
+
     void setVersion(short);
     short version() const;
 
@@ -46,6 +52,7 @@ public:
     void setGPX(const QString &gpx);
 
     void addMetaData(const QString &key, const QString &value, const QString &unit);
+    ActivitySummary::meta metaData(const QString &key);
 
     bool saveToDatabase(KDbConnection *conn);
 private:
@@ -62,11 +69,7 @@ private:
     uint m_deviceId;
     uint m_userId;
 
-    struct meta {
-        QString key;
-        QString value;
-        QString unit;
-    };
+
 
     QList<meta> m_metaData;
 };

@@ -120,6 +120,19 @@ void ActivitySummary::addMetaData(const QString &key, const QString &value, cons
     m_metaData << m;
 }
 
+ActivitySummary::meta ActivitySummary::metaData(const QString &key)
+{
+    ActivitySummary::meta m;
+
+    for(auto i:m_metaData) {
+        if (i.key == key) {
+            m = i;
+            break;
+        }
+    }
+    return m;
+}
+
 bool ActivitySummary::saveToDatabase(KDbConnection *conn)
 {
 

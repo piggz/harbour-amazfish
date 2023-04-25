@@ -2,6 +2,7 @@
 #include "typeconversion.h"
 #include <QDebug>
 #include <QTimeZone>
+#include "amazfishconfig.h"
 
 #if QT_VERSION >= 0x051400
 #define endl Qt::endl
@@ -303,6 +304,11 @@ QString BipActivityDetailParser::toTCX()
     out << "<Activity Sport=\"" + ActivityKind::toString(m_summary.activityKind()) + "\">" << endl;
     out << "<Id>" << m_summary.name() << "</Id>" << endl;
 
+    ActivitySummary::meta m = m_summary.metaData("caloriesBurnt");
+    if (m.key == "caloriesBurnt") {
+        out << "<Calories>" << m.value << "</Calories>" << endl;
+    }
+
     out << "<Lap StartTime=\"" << m_summary.startTime().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "\">" << endl;
     out << "<Track>" << endl;
 
@@ -325,8 +331,16 @@ QString BipActivityDetailParser::toTCX()
     }
     out << "</Track>" << endl;
     out << "</Lap>" << endl;
+
+    //Creator
+    out << "<Creator xsi:type=\"Device_t\"><Name>" << AmazfishConfig::instance()->pairedName() << "</Name><UnitId>0000000000</UnitId><ProductId>0000</ProductId><Version><VersionMajor>1</VersionMajor><VersionMinor>0</VersionMinor><BuildMajor>1</BuildMajor><BuildMinor>0</BuildMinor></Version></Creator>" << endl;
+
     out << "</Activity>" << endl;
     out << "</Activities>" << endl;
+
+    //Author
+    out << "<Author xsi:type=\"Application_t\"><Name>Amazfish</Name><Build><Version><VersionMajor>1</VersionMajor><VersionMinor>0</VersionMinor><BuildMajor>1</BuildMajor><BuildMinor>0</BuildMinor></Version></Build><LangID>en</LangID><PartNumber>000-00000-00</PartNumber></Author>" << endl;
+
     out << "</TrainingCenterDatabase>" << endl;
 
     return str;
