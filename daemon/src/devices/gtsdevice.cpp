@@ -203,7 +203,8 @@ void GtsDevice::sendEventReminder(int id, const QDateTime &dt, const QString &ev
     cmd += (char)0x00;
     cmd += (char)0x00;
     cmd += TypeConversion::dateTimeToBytes(dt, 0).left(6);
-    cmd += (char)0x00;
+    //This doesnt match GadgetBridge, however, without removing one of the null characters, the evetn text doesnt appear
+    //cmd += (char)0x00;
     cmd += (char)0x00;
     cmd += event.toLocal8Bit();
     cmd += (char)0x00;
