@@ -1,0 +1,34 @@
+clickable_minimum_required: 7.1.2
+framework: ubuntu-sdk-20.04
+builder: qmake
+build_args: 
+  - "FLAVOR=uuitk"
+  - "INCLUDEPATH+=${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt"
+  - "INCLUDEPATH+=${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5"
+  - "LIBS+=-L${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/x86_64-linux-gnu"
+env_vars:
+  PKG_CONFIG_PATH: "${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig:${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig"
+  QMAKE_CXXFLAGS: "-I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5 -I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt"
+#  QMAKE_CPPFLAGS: "-I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5 -I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt"
+prebuild:
+- git submodule update --init
+dependencies_target:
+- libkdb3-dev
+- libkf5contacts-dev
+- libkf5archive-dev
+- libkf5coreaddons-dev
+kill: harbour-amazfish
+libraries:
+    qtmpris:
+        prebuild: mkdir -p ${ROOT}/3rdparty; git -C ${ROOT}/3rdparty/qtmpris pull ||  git clone https://github.com/sailfishos/qtmpris ${ROOT}/3rdparty/qtmpris
+        src_dir: 3rdparty/qtmpris
+        builder: qmake
+    nemo-qml-plugin-dbus:
+        prebuild: mkdir -p ${ROOT}/3rdparty; git -C ${ROOT}/3rdparty/nemo-qml-plugin-dbus pull ||  git clone https://github.com/sailfishos/nemo-qml-plugin-dbus ${ROOT}/3rdparty/nemo-qml-plugin-dbus
+        src_dir: 3rdparty/nemo-qml-plugin-dbus
+        builder: qmake
+
+install_root_data:
+- manifest.json
+- ui/harbour-amazfish-ui.desktop
+- harbour-amazfish.apparmor
