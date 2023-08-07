@@ -10,7 +10,6 @@ build_args:
 env_vars:
   PKG_CONFIG_PATH: "${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig:${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig"
   QMAKE_CXXFLAGS: "-I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5 -I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt"
-#  QMAKE_CPPFLAGS: "-I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5 -I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt"
 prebuild:
 - git submodule update --init
 dependencies_target:
@@ -28,3 +27,9 @@ libraries:
         prebuild: mkdir -p ${ROOT}/3rdparty; git -C ${ROOT}/3rdparty/nemo-qml-plugin-dbus pull ||  git clone https://github.com/sailfishos/nemo-qml-plugin-dbus ${ROOT}/3rdparty/nemo-qml-plugin-dbus
         src_dir: 3rdparty/nemo-qml-plugin-dbus
         builder: qmake
+install_lib:
+    - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libnemodbus.so*
+    - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libmpris-qt5.so*
+install_qml:
+    - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Nemo/DBus
+    - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/org/nemomobile/mpris
