@@ -1,8 +1,9 @@
 clickable_minimum_required: 7.1.2
 framework: ubuntu-sdk-20.04
 builder: qmake
-build_args: 
+build_args:
   - "FLAVOR=uuitk"
+  - "CONFIG+=click"
   - "INCLUDEPATH+=${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt"
   - "INCLUDEPATH+=${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5"
   - "LIBS+=-L${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/x86_64-linux-gnu"
@@ -27,8 +28,3 @@ libraries:
         prebuild: mkdir -p ${ROOT}/3rdparty; git -C ${ROOT}/3rdparty/nemo-qml-plugin-dbus pull ||  git clone https://github.com/sailfishos/nemo-qml-plugin-dbus ${ROOT}/3rdparty/nemo-qml-plugin-dbus
         src_dir: 3rdparty/nemo-qml-plugin-dbus
         builder: qmake
-
-install_root_data:
-- manifest.json
-- ui/harbour-amazfish-ui.desktop
-- harbour-amazfish.apparmor

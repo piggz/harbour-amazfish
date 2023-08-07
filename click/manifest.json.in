@@ -2,7 +2,7 @@
     "name": "harbour-amazfish",
     "description": "Smart watch sync app",
     "architecture": "@CLICK_ARCH@",
-    "title": "@APP_TITLE@",
+    "title": "Amazfish",
     "hooks": {
         "harbour-amazfish": {
             "apparmor": "harbour-amazfish.apparmor",
@@ -11,5 +11,5 @@
     },
     "version": "2.1.3",
     "maintainer": "Adam Pigg <adam@piggz.co.uk>",
-    "framework" : "@CLICK_FRAMEWORK@"
+    "framework" : "ubuntu-sdk-20.04"
 }

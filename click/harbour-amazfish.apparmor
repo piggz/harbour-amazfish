@@ -1,8 +1,5 @@
 {
     "policy_groups": [
-        "bluetooth",
-        "contacts",
-        "audio"
     ],
     "policy_version": 20.04
 }
