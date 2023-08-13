@@ -18,8 +18,8 @@
 
 import QtQuick 2.0
 import QtQuick.Window 2.2
-import Ubuntu.Components 1.3
-import Ubuntu.Components.Themes 1.3
+import Lomiri.Components 1.3
+import Lomiri.Components.Themes 1.3
 
 QtObject {
     // font sizes and family
@@ -59,13 +59,14 @@ QtObject {
     // used icons
     property string iconAbout: "image://theme/info" //Qt.resolvedUrl("../../icons/help-about-symbolic.svg")
     property string iconBack: "image://theme/back" //Qt.resolvedUrl("../../icons/go-previous-symbolic.svg")
-    property string iconClear: "image://theme/edit-delete" //Qt.resolvedUrl("../../icons/edit-clear-all-symbolic.svg")
+    property string iconClear: "image://theme/edit-delete" //Qt.resolvedUrl("../../icons/edit-delete-symbolic.svg")
     property string iconClose: "image://theme/close" //Qt.resolvedUrl("../../icons/window-close-symbolic.svg")
     property string iconDelete: "image://theme/delete" //Qt.resolvedUrl("../../icons/edit-delete-symbolic.svg")
     property string iconDot: "image://theme/gps" //Qt.resolvedUrl("../../icons/find-location-symbolic.svg")
     property string iconDown: "image://theme/down" //Qt.resolvedUrl("../../icons/go-down-symbolic.svg")
     property string iconEdit: "image://theme/edit" //Qt.resolvedUrl("../../icons/document-edit-symbolic.svg")
     property string iconEditClear: "image://theme/edit-clear" //Qt.resolvedUrl("../../icons/edit-clear-symbolic.svg")
+    property string iconEmail: "image://theme/mail"
     property string iconFavorite: Qt.resolvedUrl("../icons/uuitk/bookmark-new-symbolic.svg")
     property string iconFavoriteSelected: Qt.resolvedUrl("../icons/uuitk/user-bookmarks-symbolic.svg")
     property string iconForward: "image://theme/next" //Qt.resolvedUrl("../../icons/go-next-symbolic.svg")
@@ -90,6 +91,7 @@ QtObject {
     property string iconShortlistedSelected: "image://theme/select" //Qt.resolvedUrl("../../icons/shortlist-selected-symbolic.svg")
     property string iconStart: "image://theme/media-playback-start" //Qt.resolvedUrl("../../icons/media-playback-start-symbolic.svg")
     property string iconStop: "image://theme/media-playback-stop" //Qt.resolvedUrl("../../icons/media-playback-stop-symbolic.svg")
+    property string iconUp: "image://theme/up"
     property string iconWebLink: "image://theme/stock_website" //Qt.resolvedUrl("../../icons/web-browser-symbolic.svg")
 
     // item sizes
