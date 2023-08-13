@@ -86,7 +86,7 @@ PagePL {
             minimumValue: 15
             maximumValue: 120
             stepSize: 15
-            label: qsTr("Refresh weather every (") + value + qsTr(") minutes")
+            label: qsTr("Refresh weather every (%1) minutes").arg(value)
         }
 
         SliderPL {
@@ -95,7 +95,7 @@ PagePL {
             minimumValue: 15
             maximumValue: 240
             stepSize: 15
-            label: qsTr("Refresh calendar every (") + value + qsTr(") minutes")
+            label: qsTr("Refresh calendar every (%1) minutes").arg(value)
             visible: supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
         }
 
