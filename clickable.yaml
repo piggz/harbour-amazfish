@@ -13,6 +13,7 @@ env_vars:
 prebuild:
 - git submodule update --init
 dependencies_target:
+- qml-module-org-kde-bluezqt
 - libkdb3-dev
 - libkf5contacts-dev
 - libkf5archive-dev
