@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="cs">
+<context>
+    <name>AddCityPage</name>
+    <message>
+        <source>Set Location</source>
+        <translation>Nastavit polohu</translation>
+    </message>
+</context>
 <context>
     <name>Alarm</name>
     <message>
@@ -56,22 +63,29 @@
     </message>
     <message>
         <source>Download Data</source>
-        <translation>Stažení dat</translation>
+        <translation type="vanished">Stažení dat</translation>
+    </message>
+</context>
+<context>
+    <name>AuthKeyDialog</name>
+    <message>
+        <source>Enter auth key</source>
+        <translation>Vložte autentizační klíč</translation>
     </message>
 </context>
 <context>
     <name>BipDevice</name>
     <message>
         <source>Amazfish</source>
-        <translation>Amazfish</translation>
+        <translation type="vanished">Amazfish</translation>
     </message>
     <message>
         <source>Connected</source>
-        <translation>Připojeno</translation>
+        <translation type="vanished">Připojeno</translation>
     </message>
     <message>
         <source>Phone and watch are connected</source>
-        <translation>Telefon a hodinky spárovány</translation>
+        <translation type="vanished">Telefon a hodinky spárovány</translation>
     </message>
 </context>
 <context>
@@ -88,27 +102,145 @@
         <source>Select a file to download.</source>
         <translation>Vybrat soubor k stažení</translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation>Žádný</translation>
+    </message>
+    <message>
+        <source>Choose File</source>
+        <translation>Vyberte soubor</translation>
+    </message>
+    <message>
+        <source>File type/version: </source>
+        <translation>Typ souboru/verze: </translation>
+    </message>
+    <message>
+        <source>File not supported on this device</source>
+        <translation>Soubor není podporavný na tomto zařízení</translation>
+    </message>
 </context>
 <context>
     <name>BipFirmwareService</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation>Běžící operace, opakujte později</translation>
+        <translation type="vanished">Běžící operace, opakujte později</translation>
     </message>
     <message>
         <source>No file selected</source>
-        <translation>Nebyl vybrán soubor</translation>
+        <translation type="vanished">Nebyl vybrán soubor</translation>
+    </message>
+</context>
+<context>
+    <name>DaemonInterface</name>
+    <message>
+        <source>Unexpected error</source>
+        <translation>Neočekávaná chyba</translation>
     </message>
 </context>
 <context>
     <name>DebugInfo</name>
     <message>
         <source>AmazFish</source>
-        <translation>AmazFish</translation>
+        <translation type="vanished">AmazFish</translation>
     </message>
     <message>
         <source>Refresh</source>
         <translation>Оbnovit</translation>
+    </message>
+    <message>
+        <source>Debugging</source>
+        <translation>Ladění</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Informace</translation>
+    </message>
+    <message>
+        <source>Address: </source>
+        <translation>Adresa: </translation>
+    </message>
+    <message>
+        <source>Serial No: </source>
+        <translation>Sériové číslo: </translation>
+    </message>
+    <message>
+        <source>Hardware Rev: </source>
+        <translation>Revize hardware: </translation>
+    </message>
+    <message>
+        <source>Software Rev: </source>
+        <translation>Revize software: </translation>
+    </message>
+    <message>
+        <source>Model: </source>
+        <translation>Model: </translation>
+    </message>
+    <message>
+        <source>Firmware Rev: </source>
+        <translation>Revize firmware: </translation>
+    </message>
+    <message>
+        <source>Manufacturer: </source>
+        <translation>Výrobce: </translation>
+    </message>
+    <message>
+        <source>Connection State: </source>
+        <translation>Stav připojení: </translation>
+    </message>
+    <message>
+        <source>GPS Ver: </source>
+        <translation>Verze GPS: </translation>
+    </message>
+    <message>
+        <source>A:</source>
+        <translation>A:</translation>
+    </message>
+    <message>
+        <source>S:</source>
+        <translation>S:</translation>
+    </message>
+    <message>
+        <source>Function Tests</source>
+        <translation>Testování funkcí</translation>
+    </message>
+    <message>
+        <source>Test Notification</source>
+        <translation>Test oznámení</translation>
+    </message>
+    <message>
+        <source>Test Email</source>
+        <translation>Test Emailu</translation>
+    </message>
+    <message>
+        <source>Test Call</source>
+        <translation>Test Volání</translation>
+    </message>
+    <message>
+        <source>Fetch debug log</source>
+        <translation>Stáhnout logy pro ladění</translation>
+    </message>
+    <message>
+        <source>Test Popup</source>
+        <translation>Test upozornění</translation>
+    </message>
+    <message>
+        <source>Send Weather</source>
+        <translation>Odeslat počasí</translation>
+    </message>
+    <message>
+        <source>Update Calendar</source>
+        <translation>Aktualizovat kalendář</translation>
+    </message>
+    <message>
+        <source>Music Control</source>
+        <translation>Ovládání hudby</translation>
+    </message>
+</context>
+<context>
+    <name>DownloadDataMenuItem</name>
+    <message>
+        <source>Download Data</source>
+        <translation>Stažení dat</translation>
     </message>
 </context>
 <context>
@@ -119,7 +251,7 @@
     </message>
     <message>
         <source>AmazFish</source>
-        <translation>AmazFish</translation>
+        <translation type="vanished">AmazFish</translation>
     </message>
     <message>
         <source>Connect to watch</source>
@@ -131,7 +263,7 @@
     </message>
     <message>
         <source>Debug Info</source>
-        <translation>Ladění</translation>
+        <translation type="vanished">Ladění</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -140,6 +272,34 @@
     <message>
         <source>Download File</source>
         <translation>Stáhnout soubor</translation>
+    </message>
+    <message>
+        <source>Data Graphs</source>
+        <translation>Datové grafy</translation>
+    </message>
+    <message>
+        <source>%1%</source>
+        <translation>%1%</translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation>Kroky</translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation>Puls</translation>
+    </message>
+    <message>
+        <source>%1 bpm</source>
+        <translation>%1 tep/min</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Služba</translation>
+    </message>
+    <message>
+        <source>Enable on boot</source>
+        <translation>Povolit při startu</translation>
     </message>
 </context>
 <context>
@@ -150,56 +310,173 @@
     </message>
 </context>
 <context>
+    <name>HeartratePage</name>
+    <message>
+        <source>Heartrate</source>
+        <translation>Puls</translation>
+    </message>
+    <message>
+        <source>%1 bpm</source>
+        <translation>%1 tep/min</translation>
+    </message>
+    <message>
+        <source>BPM</source>
+        <translation>TEP/MIN</translation>
+    </message>
+    <message>
+        <source>Relaxed</source>
+        <translation>Uvolněný</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>Lehká</translation>
+    </message>
+    <message>
+        <source>Intensive</source>
+        <translation>Intensivní</translation>
+    </message>
+    <message>
+        <source>Aerobic</source>
+        <translation>Aerobic</translation>
+    </message>
+    <message>
+        <source>Anerobic</source>
+        <translation>Anerobic</translation>
+    </message>
+    <message>
+        <source>VO2 Max</source>
+        <translation>VO2 Max</translation>
+    </message>
+</context>
+<context>
+    <name>JSTools</name>
+    <message>
+        <source>Empty</source>
+        <translation>Prázdné</translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation>Puls</translation>
+    </message>
+    <message>
+        <source>Pace</source>
+        <translation>Tempo</translation>
+    </message>
+    <message>
+        <source>Speed</source>
+        <translation>Rychlost</translation>
+    </message>
+    <message>
+        <source>Altitude</source>
+        <translation>Převýšení</translation>
+    </message>
+    <message>
+        <source>Distance</source>
+        <translation>Vzdálenost</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>Zastavení</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation>Doba</translation>
+    </message>
+</context>
+<context>
     <name>MiBandService</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation>Běžící operace, opakujte později</translation>
+        <translation type="vanished">Běžící operace, opakujte později</translation>
     </message>
     <message>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation>Zastaralý firmware, použijte v0.1.1.14 a vyšší</translation>
+        <translation type="vanished">Zastaralý firmware, použijte v0.1.1.14 a vyšší</translation>
     </message>
 </context>
 <context>
     <name>PairPage</name>
     <message>
         <source>Start scan</source>
-        <translation>Spustit hledání</translation>
+        <translation type="vanished">Spustit hledání</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation>Zkuste znova</translation>
+        <translation type="vanished">Zkuste znova</translation>
+    </message>
+    <message>
+        <source>Pair Device</source>
+        <translation>Párování zařízení</translation>
+    </message>
+    <message>
+        <source>No devices found</source>
+        <translation>Nebylo nelezeno žádné zařízení</translation>
+    </message>
+    <message>
+        <source>Stop scanning</source>
+        <translation>Zastavit hledání</translation>
+    </message>
+    <message>
+        <source>Scan for devices</source>
+        <translation>Hledání zařízení</translation>
+    </message>
+    <message>
+        <source>Scanning for devices…</source>
+        <translation>Hledání zařízení...</translation>
+    </message>
+    <message>
+        <source>Pairing…</source>
+        <translation>Párování...</translation>
+    </message>
+</context>
+<context>
+    <name>PairSelectDeviceType</name>
+    <message>
+        <source>Select Device Type</source>
+        <translation>Vybrat typ zařízení</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Finished transferring activity data</source>
-        <translation>Přenos dat aktivity ukončen</translation>
+        <translation type="vanished">Přenos dat aktivity ukončen</translation>
     </message>
     <message>
         <source>No data to transfer</source>
-        <translation>Žádná data k přenosu</translation>
+        <translation type="vanished">Žádná data k přenosu</translation>
     </message>
     <message>
         <source>Update operation failed</source>
-        <translation>Aktualizace neúspěšná</translation>
+        <translation type="vanished">Aktualizace neúspěšná</translation>
     </message>
     <message>
         <source>Update operation failed, unexpected metadata</source>
-        <translation>Aktualizace neúspěšná, vadná metadata</translation>
+        <translation type="vanished">Aktualizace neúspěšná, vadná metadata</translation>
     </message>
     <message>
         <source>Update operation complete</source>
-        <translation>Aktualizace úspěšná</translation>
+        <translation type="vanished">Aktualizace úspěšná</translation>
     </message>
     <message>
         <source>File does not seem to be supported</source>
-        <translation>Nepodporovaný typ souboru</translation>
+        <translation type="vanished">Nepodporovaný typ souboru</translation>
     </message>
     <message>
         <source>About to transfer data from </source>
-        <translation>O přenosu dat z</translation>
+        <translation type="vanished">O přenosu dat z</translation>
+    </message>
+    <message>
+        <source>%1s</source>
+        <translation>%1s</translation>
+    </message>
+    <message>
+        <source>%1m %2s</source>
+        <translation>%1m %2s</translation>
+    </message>
+    <message>
+        <source>%1h %2m %3s</source>
+        <translation>%1h %2m %3s</translation>
     </message>
 </context>
 <context>
@@ -237,7 +514,7 @@
     <name>Settings-app</name>
     <message>
         <source>Device Settings</source>
-        <translation>Nastavení hodin</translation>
+        <translation type="vanished">Nastavení hodin</translation>
     </message>
     <message>
         <source>Notify on connect</source>
@@ -247,56 +524,155 @@
         <source>Save Settings</source>
         <translation>Uložit nastavení</translation>
     </message>
+    <message>
+        <source>Application Settings</source>
+        <translation>Nastavení aplikace</translation>
+    </message>
+    <message>
+        <source>BT Adapter</source>
+        <translation>BT zařízení</translation>
+    </message>
+    <message>
+        <source>Notifications</source>
+        <translation>Upozornění</translation>
+    </message>
+    <message>
+        <source>Low battery notification</source>
+        <translation>Upozornění na slabou baterii</translation>
+    </message>
+    <message>
+        <source>Navigation notifications</source>
+        <translation>Navigační upozornění</translation>
+    </message>
+    <message>
+        <source>Simulate event reminder support</source>
+        <translation>Simulace podpory připomínek událostí</translation>
+    </message>
+    <message>
+        <source>Refresh rates</source>
+        <translation>Intervaly obnovení</translation>
+    </message>
+    <message>
+        <source>Sync activity data each hour</source>
+        <translation>Synchronizovat data aktivit každou hodinu</translation>
+    </message>
+    <message>
+        <source>Amazfish Service</source>
+        <translation>Služba Amazfish</translation>
+    </message>
+    <message>
+        <source>Start service on boot</source>
+        <translation>Spustit službu při startu zařízení</translation>
+    </message>
+    <message>
+        <source>Start/Stop the Amazfish Background Service</source>
+        <translation>Spustit/Zastavit běh Amazfish na pozadí</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Spustit</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Zastavit</translation>
+    </message>
+    <message>
+        <source>Button Actions</source>
+        <translation>Akce tlačítek</translation>
+    </message>
+    <message>
+        <source>Refresh weather every (%1) minutes</source>
+        <translation>Obnovit počasí každých %1 minut</translation>
+    </message>
+    <message>
+        <source>Refresh calendar every (%1) minutes</source>
+        <translation>Obnovit kalendář každých (%1) minut</translation>
+    </message>
 </context>
 <context>
     <name>Settings-bip-shortcuts</name>
     <message>
-        <source>BIP Display Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Status</source>
-        <translation>Stav</translation>
+        <translation type="vanished">Stav</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation>Aktivita</translation>
+        <translation type="vanished">Aktivita</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation>Počasí</translation>
+        <translation type="vanished">Počasí</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation>Budík</translation>
+        <translation type="vanished">Budík</translation>
     </message>
     <message>
         <source>Timer</source>
-        <translation>Časovač</translation>
+        <translation type="vanished">Časovač</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation>Kompas</translation>
+        <translation type="vanished">Kompas</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Nastavení</translation>
-    </message>
-    <message>
-        <source>AliPay</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Nastavení</translation>
     </message>
     <message>
         <source>Weather Shortcut</source>
-        <translation>Zkratka Počasí</translation>
+        <translation type="vanished">Zkratka Počasí</translation>
     </message>
     <message>
-        <source>AliPay Shortcut</source>
-        <translation type="unfinished"></translation>
+        <source>Save Settings</source>
+        <translation type="vanished">Uložit nastavení</translation>
+    </message>
+</context>
+<context>
+    <name>Settings-button-action</name>
+    <message>
+        <source>Button Actions</source>
+        <translation>Akce tlačítek</translation>
+    </message>
+    <message>
+        <source>Double Press Action</source>
+        <translation>Akce na dvojklik</translation>
+    </message>
+    <message>
+        <source>Triple Press Action</source>
+        <translation>Akce na trojklik</translation>
+    </message>
+    <message>
+        <source>Quad Press Action</source>
+        <translation>Akce na čtyřklik</translation>
     </message>
     <message>
         <source>Save Settings</source>
         <translation>Uložit nastavení</translation>
+    </message>
+    <message>
+        <source>No Action</source>
+        <translation>Žádná akce</translation>
+    </message>
+    <message>
+        <source>Next Track</source>
+        <translation>Další skladba</translation>
+    </message>
+    <message>
+        <source>Previous Track</source>
+        <translation>Předchozí skladba</translation>
+    </message>
+    <message>
+        <source>Volume Up</source>
+        <translation>Zvýšit hlasitost</translation>
+    </message>
+    <message>
+        <source>Volume Down</source>
+        <translation>Snížit hlasitost</translation>
+    </message>
+    <message>
+        <source>Custom Script</source>
+        <translation>Vlastní skript</translation>
     </message>
 </context>
 <context>
@@ -307,7 +683,7 @@
     </message>
     <message>
         <source>Langage</source>
-        <translation>Jazyk</translation>
+        <translation type="vanished">Jazyk</translation>
     </message>
     <message>
         <source>en_US</source>
@@ -366,8 +742,143 @@
         <translation>Anglosaské</translation>
     </message>
     <message>
-        <source>BIP Display Items</source>
-        <translation type="unfinished"></translation>
+        <source>Language</source>
+        <translation>Jazyk</translation>
+    </message>
+    <message>
+        <source>ru_RU</source>
+        <translation>ru_RU</translation>
+    </message>
+    <message>
+        <source>de_DE</source>
+        <translation>de_DE</translation>
+    </message>
+    <message>
+        <source>it_IT</source>
+        <translation>it_IT</translation>
+    </message>
+    <message>
+        <source>fr_FR</source>
+        <translation>fr_FR</translation>
+    </message>
+    <message>
+        <source>tr_TR</source>
+        <translation>tr_TR</translation>
+    </message>
+    <message>
+        <source>nl_NL</source>
+        <translation>nl_NL</translation>
+    </message>
+    <message>
+        <source>Disconnect Notification</source>
+        <translation>Odpojit oznámení</translation>
+    </message>
+    <message>
+        <source>Huami Display Items</source>
+        <translation>Zobrazovat položky Huami</translation>
+    </message>
+</context>
+<context>
+    <name>Settings-huami-shortcuts</name>
+    <message>
+        <source>Huami Display Items</source>
+        <translation>Zobrazení položek Huami</translation>
+    </message>
+    <message>
+        <source>Save Settings</source>
+        <translation>Uložit nastavení</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>Stav</translation>
+    </message>
+    <message>
+        <source>Heartrate</source>
+        <translation>Puls</translation>
+    </message>
+    <message>
+        <source>Workout</source>
+        <translation>Cvičení</translation>
+    </message>
+    <message>
+        <source>Weather</source>
+        <translation>Počasí</translation>
+    </message>
+    <message>
+        <source>Notifications</source>
+        <translation>Upozornění</translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation>Více</translation>
+    </message>
+    <message>
+        <source>Do Not Disturb</source>
+        <translation>Nevyrušovat</translation>
+    </message>
+    <message>
+        <source>Alarms</source>
+        <translation>Budíky</translation>
+    </message>
+    <message>
+        <source>Music</source>
+        <translation>Hudba</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Čas</translation>
+    </message>
+    <message>
+        <source>Mute Phone</source>
+        <translation>Ztišit telefon</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Nastavení</translation>
+    </message>
+    <message>
+        <source>Activity</source>
+        <translation>Aktivita</translation>
+    </message>
+    <message>
+        <source>Event Reminder</source>
+        <translation>Připomínaní událostí</translation>
+    </message>
+    <message>
+        <source>PAI</source>
+        <translation>PAI</translation>
+    </message>
+    <message>
+        <source>World Clock</source>
+        <translation>Světový čas</translation>
+    </message>
+    <message>
+        <source>Stress</source>
+        <translation>Stres</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>Doba</translation>
+    </message>
+    <message>
+        <source>SPO2</source>
+        <translation>SPO2</translation>
+    </message>
+    <message>
+        <source>Alexa</source>
+        <translation>Alexa</translation>
+    </message>
+    <message>
+        <source>Compass</source>
+        <translation>Kompas</translation>
+    </message>
+    <message>
+        <source>AliPay</source>
+        <translation>AliPay</translation>
+    </message>
+    <message>
+        <source>Timer</source>
+        <translation>Časovač</translation>
     </message>
 </context>
 <context>
@@ -395,6 +906,18 @@
     <message>
         <source>Donate</source>
         <translation>Dar vývojáři</translation>
+    </message>
+    <message>
+        <source>Weather</source>
+        <translation>Počasí</translation>
+    </message>
+    <message>
+        <source>Strava</source>
+        <translation>Strava</translation>
+    </message>
+    <message>
+        <source>Debug Info</source>
+        <translation>Ladění</translation>
     </message>
 </context>
 <context>
@@ -463,6 +986,225 @@
         <source>Use HRM for Sleep Detection</source>
         <translation>Použij pulsometr pro detekci spánku</translation>
     </message>
+    <message>
+        <source>Personal data</source>
+        <translation>Osobní údaje</translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation>Narozeniny</translation>
+    </message>
+    <message>
+        <source>Personal preferences</source>
+        <translation>Osobní nastavení</translation>
+    </message>
+    <message>
+        <source>Heartrate usage</source>
+        <translation>Použití tepu</translation>
+    </message>
+</context>
+<context>
+    <name>SleepPage</name>
+    <message>
+        <source>Sleep</source>
+        <translation>Spánek</translation>
+    </message>
+    <message>
+        <source>%1 hrs</source>
+        <translation>%1 hodin</translation>
+    </message>
+    <message>
+        <source>Deep %1 hrs</source>
+        <translation>Hluboký spánek %1 hodin</translation>
+    </message>
+    <message>
+        <source>Sleep Summary</source>
+        <translation>Shrnutí spánku</translation>
+    </message>
+    <message>
+        <source>MM/dd</source>
+        <extracomment>Format for day on the sleep summary graph</extracomment>
+        <translation>MM/dd</translation>
+    </message>
+    <message>
+        <source>Hours</source>
+        <translation>Hodin</translation>
+    </message>
+</context>
+<context>
+    <name>SportPage</name>
+    <message>
+        <source>Send to Strava</source>
+        <translation>Odeslat na Stravu</translation>
+    </message>
+    <message>
+        <source>Data:</source>
+        <translation>Data:</translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation>Kroky</translation>
+    </message>
+    <message>
+        <source>Active Seconds</source>
+        <translation>Aktivních sekund</translation>
+    </message>
+    <message>
+        <source>Calories</source>
+        <translation>Kalorie</translation>
+    </message>
+    <message>
+        <source>Distance</source>
+        <translation>Vzdálenost</translation>
+    </message>
+    <message>
+        <source>Ascent</source>
+        <translation>Stoupání</translation>
+    </message>
+    <message>
+        <source>Descent</source>
+        <translation>Klesání</translation>
+    </message>
+    <message>
+        <source>Max Altitude</source>
+        <translation>Maximální výška</translation>
+    </message>
+    <message>
+        <source>Min Altitude</source>
+        <translation>Minimální výška</translation>
+    </message>
+    <message>
+        <source>Min Pace</source>
+        <translation>Minimální tempo</translation>
+    </message>
+    <message>
+        <source>Max Pace</source>
+        <translation>Maximální tempo</translation>
+    </message>
+    <message>
+        <source>Average HR</source>
+        <translation>Průměrný tep</translation>
+    </message>
+    <message>
+        <source>Average Pace</source>
+        <translation>Průměrné tempo</translation>
+    </message>
+    <message>
+        <source>Average Stride</source>
+        <translation>Průměrný krok</translation>
+    </message>
+    <message>
+        <source>Max HR</source>
+        <translation>Maximální tep</translation>
+    </message>
+    <message>
+        <source>Time Ascending</source>
+        <translation>Čas stoupání</translation>
+    </message>
+    <message>
+        <source>Time Descending</source>
+        <translation>Čas klesání</translation>
+    </message>
+    <message>
+        <source>Time Flat</source>
+        <translation>Čas po rovině</translation>
+    </message>
+    <message>
+        <source>Average Stroke</source>
+        <translation>Průměrně zdvihů</translation>
+    </message>
+    <message>
+        <source>Average Stroke/s</source>
+        <translation>Průměrně zdvihů/s</translation>
+    </message>
+    <message>
+        <source>Average Lap Pace</source>
+        <translation>Průměrné tempo na kolo</translation>
+    </message>
+    <message>
+        <source>Strokes</source>
+        <translation>Zdvihů</translation>
+    </message>
+    <message>
+        <source>SWOLF Index</source>
+        <translation>SWOLF Index</translation>
+    </message>
+    <message>
+        <source>Swim Style</source>
+        <translation>Styl plavání</translation>
+    </message>
+    <message>
+        <source>Laps</source>
+        <translation>Koleček</translation>
+    </message>
+    <message>
+        <source>Max Latitude</source>
+        <translation>Max z. š.</translation>
+    </message>
+    <message>
+        <source>Min Latitude</source>
+        <translation>Min z. š.</translation>
+    </message>
+    <message>
+        <source>Max Longitude</source>
+        <translation>Max z.d.</translation>
+    </message>
+    <message>
+        <source>Min Longitude</source>
+        <translation>Min z.d.</translation>
+    </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>Max. rychlost</translation>
+    </message>
+    <message>
+        <source>Total Stride</source>
+        <translation>Celkově kroků</translation>
+    </message>
+    <message>
+        <source>steps</source>
+        <translation>kroků</translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation>sekund</translation>
+    </message>
+    <message>
+        <source>kcal</source>
+        <translation>kcal</translation>
+    </message>
+    <message>
+        <source>meters</source>
+        <translation>metrů</translation>
+    </message>
+    <message>
+        <source>seconds/m</source>
+        <translation>sec/m</translation>
+    </message>
+    <message>
+        <source>bpm</source>
+        <translation>tep/min</translation>
+    </message>
+    <message>
+        <source>seconds/km</source>
+        <translation>sec/km</translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <translation>cm</translation>
+    </message>
+    <message>
+        <source>strokes/s</source>
+        <translation>zdvihů/s</translation>
+    </message>
+    <message>
+        <source>strokes</source>
+        <translation>zdvihů</translation>
+    </message>
+    <message>
+        <source>swolf</source>
+        <translation>swolf</translation>
+    </message>
 </context>
 <context>
     <name>SportsSummaryPage</name>
@@ -473,6 +1215,110 @@
     <message>
         <source>Download Next Activity</source>
         <translation>Stáhni další aktivity</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Odstranit</translation>
+    </message>
+</context>
+<context>
+    <name>StepsPage</name>
+    <message>
+        <source>Steps</source>
+        <translation>Kroky</translation>
+    </message>
+</context>
+<context>
+    <name>StravaSettingsPage</name>
+    <message>
+        <source>Strava settings</source>
+        <translation>Nastavení Strava</translation>
+    </message>
+    <message>
+        <source>Logout</source>
+        <translation>Odhlásit</translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation>Přihlásit</translation>
+    </message>
+    <message>
+        <source>User Name: </source>
+        <translation>Uživatelské jméno: </translation>
+    </message>
+    <message>
+        <source>Country: </source>
+        <translation>Země: </translation>
+    </message>
+</context>
+<context>
+    <name>StravaUploadPage</name>
+    <message>
+        <source>Strava Upload</source>
+        <translation>Nahrát na Stravu</translation>
+    </message>
+    <message>
+        <source>Activity name for Strava</source>
+        <translation>Jméno aktivity pro Stravu</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Jméno</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation>Popis</translation>
+    </message>
+    <message>
+        <source>Activity description for Strava</source>
+        <translation>Popis aktivity pro Stravu</translation>
+    </message>
+    <message>
+        <source>Type (Strava)</source>
+        <translation>Typ (Strava)</translation>
+    </message>
+    <message>
+        <source>Private</source>
+        <translation>Soukromé</translation>
+    </message>
+    <message>
+        <source>Commute</source>
+        <translation>Dojíždění</translation>
+    </message>
+    <message>
+        <source>Upload</source>
+        <translation>Odeslat</translation>
+    </message>
+    <message>
+        <source>Uploading data...</source>
+        <translation>Odesílají se data...</translation>
+    </message>
+    <message>
+        <source>Checking upload...</source>
+        <translation>Kontrolují se nahrané...</translation>
+    </message>
+    <message>
+        <source>TCX uploaded...</source>
+        <translation>TCX nahráno...</translation>
+    </message>
+    <message>
+        <source>Activity upload complete</source>
+        <translation>Odesílání aktivity je dokončené</translation>
+    </message>
+    <message>
+        <source>An unknown error occurred</source>
+        <translation>Došlo k neznámé chybě</translation>
+    </message>
+</context>
+<context>
+    <name>UnpairDeviceDialog</name>
+    <message>
+        <source>Unpair</source>
+        <translation>Zrušit párování</translation>
+    </message>
+    <message>
+        <source>Before proceeding you need to unpair your current device.</source>
+        <translation>Před tím než budete pokračovat musíte zrušit párování s akutální zařízením.</translation>
     </message>
 </context>
 </TS>
