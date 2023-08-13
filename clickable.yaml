@@ -4,6 +4,7 @@ builder: qmake
 build_args:
   - "FLAVOR=uuitk"
   - "CONFIG+=click"
+  - "DISABLE_SYSTEMD=yes"
   - "INCLUDEPATH+=${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt"
   - "INCLUDEPATH+=${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5"
   - "LIBS+=-L${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/x86_64-linux-gnu"
