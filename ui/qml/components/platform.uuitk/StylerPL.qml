@@ -68,7 +68,7 @@ QtObject {
     property string iconEditClear: "image://theme/edit-clear" //Qt.resolvedUrl("../../icons/edit-clear-symbolic.svg")
     property string iconEmail: "image://theme/mail"
     property string iconFavorite: Qt.resolvedUrl("../icons/uuitk/bookmark-new-symbolic.svg")
-    property string iconFavoriteSelected: Qt.resolvedUrl("../icons/uuitk/user-bookmarks-symbolic.svg")
+//    property string iconFavoriteSelected: Qt.resolvedUrl("../icons/uuitk/user-bookmarks-symbolic.svg")
     property string iconForward: "image://theme/next" //Qt.resolvedUrl("../../icons/go-next-symbolic.svg")
     property string iconManeuvers: "image://theme/media-playlist-shuffle" //Qt.resolvedUrl("../../icons/maneuvers-symbolic.svg")
     property string iconMaps: Qt.resolvedUrl("../icons/uuitk/map-layers-symbolic.svg")
@@ -93,6 +93,17 @@ QtObject {
     property string iconStop: "image://theme/media-playback-stop" //Qt.resolvedUrl("../../icons/media-playback-stop-symbolic.svg")
     property string iconUp: "image://theme/up"
     property string iconWebLink: "image://theme/stock_website" //Qt.resolvedUrl("../../icons/web-browser-symbolic.svg")
+
+    property string iconContact: "image://theme/preferences-desktop-accounts-symbolic"    // "User Settings"
+    property string iconWatch: "image://theme/smartwatch-symbolic"                        // "Device settings"
+    property string iconLevels: "image://theme/settings"                                  // "Application settings"
+    property string iconAlarm: "image://theme/alarm"                                      // "Alarms"
+    property string iconWeather: "image://theme/weather-app-symbolic"                     // "Weather"
+    property string iconStrava: Qt.resolvedUrl("../../pics/custom-icons/icon-strava.png") // "Strava"
+    property string iconDiagnostic: "image://theme/info"                                  // "Debug Info"
+    property string iconFavoriteSelected: "image://theme/bookmark"                        // "Donate"
+
+
 
     // item sizes
     property real themeItemSizeLarge: themeFontSizeLarge * 3
