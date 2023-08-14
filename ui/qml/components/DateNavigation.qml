@@ -13,6 +13,8 @@ RowLayout {
     IconButtonPL {
         id: btnPrev
         iconName: styler.iconBackward
+        iconHeight: dateNavigation.height
+
         onClicked: {
             backward();
         }
@@ -28,6 +30,7 @@ RowLayout {
     IconButtonPL {
         id: btnNext
         iconName: styler.iconForward
+        iconHeight: dateNavigation.height
         onClicked: {
             forward();
         }
