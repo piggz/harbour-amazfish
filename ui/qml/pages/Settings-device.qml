@@ -94,7 +94,7 @@ PagePL {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Huami Display Items")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Settings-huami-shortcuts.qml"))
+                    app.pages.push(Qt.resolvedUrl("Settings-huami-shortcuts.qml"))
                 }
             }
 

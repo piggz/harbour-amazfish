@@ -205,6 +205,11 @@ flavor_silica {
     DEFINES += MER_EDITION_SAILFISH
 }
 
+flavor_uuitk {
+    message(UUITK build)
+    DEFINES += UUITK_EDITION
+}
+
 # PREFIX
 isEmpty(PREFIX) {
     flavor_silica {

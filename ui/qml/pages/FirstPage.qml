@@ -11,7 +11,7 @@ PagePL {
 
     function unpairAccepted() {
         DaemonInterfaceInstance.disconnect();
-        pageStack.replace(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
+        app.pages.replace(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
     }
 
     pageMenu: PageMenuPL {
@@ -22,7 +22,7 @@ PagePL {
                         ? "UnpairDeviceDialog.qml"
                         : "PairSelectDeviceType.qml"
 
-                var obj = pageStack.push(Qt.resolvedUrl(page));
+                var obj = app.pages.push(Qt.resolvedUrl(page));
 
                 if (AmazfishConfig.pairedAddress) {
                     obj.accepted.connect(unpairAccepted);
@@ -31,15 +31,15 @@ PagePL {
         }
         PageMenuItemPL {
             text: qsTr("Download File")
-            onClicked: pageStack.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
+            onClicked: app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
         }
         PageMenuItemPL {
             text: qsTr("Settings")
-            onClicked: pageStack.push(Qt.resolvedUrl("Settings-menu.qml"))
+            onClicked: app.pages.push(Qt.resolvedUrl("Settings-menu.qml"))
         }
         PageMenuItemPL {
             text: qsTr("Data Graphs")
-            onClicked: pageStack.push(Qt.resolvedUrl("AnalysisPage.qml"))
+            onClicked: app.pages.push(Qt.resolvedUrl("AnalysisPage.qml"))
         }
         PageMenuItemPL {
             visible: AmazfishConfig.pairedAddress
@@ -266,7 +266,7 @@ PagePL {
                 console.log("Start timer triggered");
                 pushAttached(Qt.resolvedUrl("StepsPage.qml"))
                 if (!AmazfishConfig.profileName) {
-                    pageStack.push(Qt.resolvedUrl("Settings-profile.qml"))
+                    app.pages.push(Qt.resolvedUrl("Settings-profile.qml"))
                 }
             }
         }
