@@ -13,12 +13,14 @@ RowLayout {
     IconButtonPL {
         id: btnPrev
         iconName: styler.iconBackward
-        iconHeight: dateNavigation.height
+        iconHeight: styler.themeIconSizeSmall
+        iconWidth: styler.themeIconSizeSmall
 
         onClicked: {
             backward();
         }
     }
+
     LabelPL {
         id: lblDay
         Layout.fillWidth: true
@@ -30,7 +32,8 @@ RowLayout {
     IconButtonPL {
         id: btnNext
         iconName: styler.iconForward
-        iconHeight: dateNavigation.height
+        iconHeight: styler.themeIconSizeSmall
+        iconWidth: styler.themeIconSizeSmall
         onClicked: {
             forward();
         }
