@@ -33,6 +33,7 @@ DialogPL {
 
         DatePicker {
             id: datePicker
+            minimum: new Date(1900, 0)
             anchors.horizontalCenter: parent.horizontalCenter
             width: Math.min(parent.width - 2*styler.themeHorizontalPageMargin, implicitWidth)
         }
