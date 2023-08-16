@@ -19,6 +19,7 @@ dependencies_target:
 - libkf5contacts-dev
 - libkf5archive-dev
 - libkf5coreaddons-dev
+- libdbus-1-dev
 kill: harbour-amazfish
 libraries:
     qtmpris:
