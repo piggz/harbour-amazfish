@@ -36,3 +36,4 @@ install_lib:
 install_qml:
     - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Nemo/DBus
     - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/org/nemomobile/mpris
+skip_review: true
