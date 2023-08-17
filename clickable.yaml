@@ -34,7 +34,9 @@ install_lib:
     - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libnemodbus.so*
     - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libmpris-qt5.so*
     - /usr/lib/${ARCH_TRIPLET}/libKDb3.so*
+    - /usr/lib/${ARCH_TRIPLET}/libKF5BluezQt.so*
 install_qml:
     - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Nemo/DBus
     - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/org/nemomobile/mpris
+    - /usr/lib/${ARCH_TRIPLET}/qt5/qml/org/kde/bluezqt
 skip_review: true
