@@ -55,8 +55,15 @@ QtObject {
     property real themeIconSizeLarge: units.gridUnit*7
     property real themeIconSizeMedium: units.gridUnit*5
     property real themeIconSizeSmall: units.gridUnit*4
+
     // used icons
     // used icons
+    property string iconBluetooth: "image://theme/bluetooth-active"
+    property string iconBattery: "image://theme/battery-good-symbolic"
+    property string iconSteps: "../../pics/custom-icons/icon-m-steps.png"
+    property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate.png"
+
+
     property string iconAbout: "image://theme/info" //Qt.resolvedUrl("../../icons/help-about-symbolic.svg")
     property string iconBack: "image://theme/back" //Qt.resolvedUrl("../../icons/go-previous-symbolic.svg")
     property string iconBackward: "image://theme/back"
