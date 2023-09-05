@@ -209,6 +209,7 @@ flavor_silica {
     message(SailfishOS build)
     CONFIG += sailfishapp sailfishapp_no_deploy_qml sailfishapp_i18n
     DEFINES += MER_EDITION_SAILFISH
+    DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
 
     qtPrepareTool(LRELEASE, lrelease)
     for(tsfile, TRANSLATIONS) {
@@ -224,7 +225,7 @@ flavor_silica {
     }
 
     translations_files.files = $${TRANSLATIONS_FILES}
-    translations_files.path = $${PREFIX}/share/$${APP_NAME}/translations
+    translations_files.path = $${PREFIX}/share/$${TARGET}/translations
     INSTALLS += translations_files
 }
 
