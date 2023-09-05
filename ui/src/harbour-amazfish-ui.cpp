@@ -56,12 +56,13 @@ int main(int argc, char *argv[])
         QString locale = QLocale::system().name();
         QTranslator *translator = new QTranslator();
 
-        if ( !translator->load(QLocale(),"harbour-amazfish", "-", tr_path) ) {
+        if ( !translator->load(QLocale(), "harbour-amazfish-ui", "-", tr_path) ) {
             qWarning() << "Failed to load translation for " << locale << " " << tr_path;
         }
 
         app->installTranslator(translator);
       }
+
   }
 
     QCoreApplication::setOrganizationName("harbour-amazfish");
