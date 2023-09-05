@@ -12,6 +12,8 @@
 #include <QQmlApplicationEngine>
 #endif
 
+#include <QTranslator>
+
 #include "datasource.h"
 #include "sportsdatamodel.h"
 #include "sportsmetamodel.h"
@@ -47,6 +49,20 @@ int main(int argc, char *argv[])
 #else
     app = new QApplication(argc, argv);
 #endif
+
+  {
+    QString tr_path(TRANSLATION_FOLDER);
+    if ( !tr_path.isEmpty() ) {
+        QString locale = QLocale::system().name();
+        QTranslator *translator = new QTranslator();
+
+        if ( !translator->load(QLocale(),"harbour-amazfish", "-", tr_path) ) {
+            qWarning() << "Failed to load translation for " << locale << " " << tr_path;
+        }
+
+        app->installTranslator(translator);
+      }
+  }
 
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setOrganizationDomain("piggz.co.uk");
