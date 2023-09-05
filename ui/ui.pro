@@ -170,7 +170,12 @@ TRANSLATIONS += translations/harbour-amazfish-ui-de.ts \
                 translations/harbour-amazfish-ui-nl.ts \
                 translations/harbour-amazfish-ui-ru.ts \
                 translations/harbour-amazfish-ui-sv.ts \
-                translations/harbour-amazfish-ui-es.ts
+                translations/harbour-amazfish-ui-es.ts \
+                translations/harbour-amazfish-ui-fr.ts \
+                translations/harbour-amazfish-ui-cz.ts \
+                translations/harbour-amazfish-ui-pl.ts \
+                translations/harbour-amazfish-ui-zh_CN.ts
+
 HEADERS += \
     src/datasource.h \
     src/daemoninterface.h \ \
