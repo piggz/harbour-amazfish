@@ -153,11 +153,11 @@
     </message>
     <message>
         <source>Send Weather</source>
-        <translation">Envoyer la météo</translation>
+        <translation>Envoyer la météo</translation>
     </message>
     <message>
         <source>A:</source>
-        <translation">A:</translation>
+        <translation>A:</translation>
     </message>
     <message>
         <source>S:</source>
@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>Enable Service</source>
-        <translation type>Activer le service</translation>
+        <translation>Activer le service</translation>
     </message>
 </context>
 <context>
@@ -384,7 +384,7 @@
         <translation>zh_TW</translation>
     </message>
     <message>
-        <source>fr_FR/source>
+        <source>fr_FR</source>
         <translation>fr_FR</translation>
     </message>
     <message>
@@ -579,7 +579,7 @@
     </message>
     <message>
         <source>Save Profile</source>
-        <translation>Sauvegarder profil>/translation>
+        <translation>Sauvegarder profil</translation>
     </message>
 </context>
 <context>
