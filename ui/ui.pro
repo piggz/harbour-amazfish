@@ -166,15 +166,16 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-amazfish-ui-de.ts \
-                translations/harbour-amazfish-ui-nl.ts \
-                translations/harbour-amazfish-ui-ru.ts \
-                translations/harbour-amazfish-ui-sv.ts \
-                translations/harbour-amazfish-ui-es.ts \
-                translations/harbour-amazfish-ui-fr.ts \
-                translations/harbour-amazfish-ui-cz.ts \
-                translations/harbour-amazfish-ui-pl.ts \
-                translations/harbour-amazfish-ui-zh_CN.ts
+TRANSLATIONS += \
+    translations/harbour-amazfish-ui-cz.ts \
+    translations/harbour-amazfish-ui-de.ts \
+    translations/harbour-amazfish-ui-es.ts \
+    translations/harbour-amazfish-ui-fr.ts \
+    translations/harbour-amazfish-ui-nl.ts \
+    translations/harbour-amazfish-ui-pl.ts \
+    translations/harbour-amazfish-ui-ru.ts \
+    translations/harbour-amazfish-ui-sv.ts \
+    translations/harbour-amazfish-ui-zh_CN.ts
 
 HEADERS += \
     src/datasource.h \
@@ -208,6 +209,23 @@ flavor_silica {
     message(SailfishOS build)
     CONFIG += sailfishapp sailfishapp_no_deploy_qml sailfishapp_i18n
     DEFINES += MER_EDITION_SAILFISH
+
+    qtPrepareTool(LRELEASE, lrelease)
+    for(tsfile, TRANSLATIONS) {
+        qmfile = $$shadowed($$tsfile)
+        qmfile ~= s,.ts$,.qm,
+        qmdir = $$dirname(qmfile)
+        !exists($$qmdir) {
+            mkpath($$qmdir)|error("Aborting.")
+        }
+        command = $$LRELEASE -removeidentical $$tsfile -qm $$qmfile
+        system($$command)|error("Failed to run: $$command")
+        TRANSLATIONS_FILES += $$qmfile
+    }
+
+    translations_files.files = $${TRANSLATIONS_FILES}
+    translations_files.path = $${PREFIX}/share/$${APP_NAME}/translations
+    INSTALLS += translations_files
 }
 
 # PREFIX
