@@ -247,10 +247,8 @@ flavor_uuitk {
         TRANSLATIONS_FILES += $$qmfile
     }
     translations_files.files = $${TRANSLATIONS_FILES}
-    translations_files.path = $${PWD}/translations
+    translations_files.path = /translations
     INSTALLS += translations_files
-
-
 }
 
 # PREFIX
