@@ -433,11 +433,11 @@
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation>Actualizar Tiempo cada (</translation>
+        <translation type="vanished">Actualizar Tiempo cada (</translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation>) minutos</translation>
+        <translation type="vanished">) minutos</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
@@ -449,7 +449,7 @@
     </message>
     <message>
         <source>Refresh calendar every (</source>
-        <translation>Actualizar calendario cada (</translation>
+        <translation type="vanished">Actualizar calendario cada (</translation>
     </message>
     <message>
         <source>Notifications</source>
@@ -497,6 +497,14 @@
     </message>
     <message>
         <source>Simulate event reminder support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh weather every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh calendar every (%1) minutes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

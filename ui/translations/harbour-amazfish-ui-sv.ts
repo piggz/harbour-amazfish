@@ -433,11 +433,11 @@
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation>Uppdatera vädret varje (</translation>
+        <translation type="vanished">Uppdatera vädret varje (</translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation>) minuter</translation>
+        <translation type="vanished">) minuter</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
@@ -449,7 +449,7 @@
     </message>
     <message>
         <source>Refresh calendar every (</source>
-        <translation>Uppdatera kalendern varje (</translation>
+        <translation type="vanished">Uppdatera kalendern varje (</translation>
     </message>
     <message>
         <source>Notifications</source>
@@ -498,6 +498,14 @@
     <message>
         <source>Simulate event reminder support</source>
         <translation>Stöd för simulerad händelsepåminnelse</translation>
+    </message>
+    <message>
+        <source>Refresh weather every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh calendar every (%1) minutes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
