@@ -32,7 +32,7 @@ Item {
     property alias model: val.model
     property alias label: lab.text
     property alias value: val.currentText
-    property string textRole
+    property alias textRole: val.textRole
 
     Label {
         id: lab
