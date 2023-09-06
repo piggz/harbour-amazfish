@@ -433,11 +433,11 @@
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation>Wetteraktualisierung alle (</translation>
+        <translation type="vanished">Wetteraktualisierung alle (</translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation>) Minuten</translation>
+        <translation type="vanished">) Minuten</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
@@ -449,7 +449,7 @@
     </message>
     <message>
         <source>Refresh calendar every (</source>
-        <translation>Aktualisiere Kalender alle (</translation>
+        <translation type="vanished">Aktualisiere Kalender alle (</translation>
     </message>
     <message>
         <source>Notifications</source>
@@ -497,6 +497,14 @@
     </message>
     <message>
         <source>Button Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh weather every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh calendar every (%1) minutes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -433,11 +433,11 @@
     </message>
     <message>
         <source>Refresh weather every (</source>
-        <translation>Ververs het weer elke (</translation>
+        <translation type="vanished">Ververs het weer elke (</translation>
     </message>
     <message>
         <source>) minutes</source>
-        <translation>) minuten</translation>
+        <translation type="vanished">) minuten</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
@@ -469,7 +469,7 @@
     </message>
     <message>
         <source>Refresh calendar every (</source>
-        <translation>Agenda bijwerken iedere (</translation>
+        <translation type="vanished">Agenda bijwerken iedere (</translation>
     </message>
     <message>
         <source>Amazfish Service</source>
@@ -497,6 +497,14 @@
     </message>
     <message>
         <source>Simulate event reminder support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh weather every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh calendar every (%1) minutes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
