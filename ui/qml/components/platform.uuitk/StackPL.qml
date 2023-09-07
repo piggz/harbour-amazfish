@@ -95,4 +95,8 @@ QtObject {
     function showRoot() {
         ps.currentIndex = 0;
     }
+
+    function processCurrentItem() {
+        console.log("function processCurrentItem() dummy implementation")
+    }
 }

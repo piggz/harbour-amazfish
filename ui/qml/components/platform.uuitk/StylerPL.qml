@@ -107,7 +107,7 @@ QtObject {
     property string iconLevels: "image://theme/settings"                                  // "Application settings"
     property string iconAlarm: "image://theme/alarm"                                      // "Alarms"
     property string iconWeather: "image://theme/weather-app-symbolic"                     // "Weather"
-    property string iconStrava: Qt.resolvedUrl("../../pics/custom-icons/icon-strava.png") // "Strava"
+    property string iconStrava: "image://theme/transfer-progress"                         // "Strava"
     property string iconDiagnostic: "image://theme/info"                                  // "Debug Info"
     property string iconFavoriteSelected: "image://theme/bookmark"                        // "Donate"
 
