@@ -244,7 +244,7 @@ PagePL {
 
         SectionHeaderPL {
             text: qsTr("Service")
-            visible: !serviceActiveState || !serviceEnabledState
+            visible: (ENABLE_SYSTEMD === "YES") && (!serviceActiveState || !serviceEnabledState)
         }
 
         ButtonPL {
