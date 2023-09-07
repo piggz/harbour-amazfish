@@ -23,6 +23,9 @@ EOF
     /usr/bin/systemctl --user enable harbour-amazfish.service
     /usr/bin/systemctl --user start harbour-amazfish.service
 
+else
+    /usr/bin/systemctl --user restart harbour-amazfish.service
+
 fi
 
 export LD_LIBRARY_PATH=$PWD/lib:$PWD/lib/aarch64-linux-gnu:$LD_LIBRARY_PATH
