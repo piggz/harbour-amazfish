@@ -20,10 +20,12 @@ Environment=HOME=%h XDG_CONFIG_HOME=/home/%u/.config DBUS_SESSION_BUS_ADDRESS=un
 
 EOF
 
+    /usr/bin/systemctl daemon-reload
     /usr/bin/systemctl --user enable harbour-amazfish.service
     /usr/bin/systemctl --user start harbour-amazfish.service
 
 else
+
     /usr/bin/systemctl --user restart harbour-amazfish.service
 
 fi

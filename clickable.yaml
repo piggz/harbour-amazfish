@@ -14,6 +14,7 @@ env_vars:
 prebuild:
 - git submodule update --init
 dependencies_target:
+- libkdb3-driver-sqlite
 - qml-module-org-kde-bluezqt
 - libkdb3-dev
 - libkf5contacts-dev
@@ -35,6 +36,9 @@ install_lib:
     - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libmpris-qt5.so*
     - /usr/lib/${ARCH_TRIPLET}/libKDb3.so*
     - /usr/lib/${ARCH_TRIPLET}/libKF5BluezQt.so*
+install_data:
+    /usr/lib/${ARCH_TRIPLET}/qt5/plugins/kdb3/kdb_sqlitedriver.so: bin/kdb3
+    /usr/lib/${ARCH_TRIPLET}/qt5/plugins/kdb3/sqlite3/kdb_sqlite_icu.so: bin/kdb3/sqlite3
 install_qml:
     - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Nemo/DBus
     - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/org/nemomobile/mpris
