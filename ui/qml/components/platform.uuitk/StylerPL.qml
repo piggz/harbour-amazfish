@@ -45,7 +45,7 @@ QtObject {
     // navigation items, secondary
     property color themeSecondaryColor: theme.palette.normal.baseText
     // descriptive items, secondary
-    property color themeSecondaryHighlightColor: theme.palette.normal.backgroundSecondaryText
+    property color themeSecondaryHighlightColor: theme.palette.normal.activity;
 
     // button sizes
     property real themeButtonWidthLarge: units.gridUnit*32
