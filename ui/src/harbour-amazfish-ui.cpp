@@ -48,7 +48,6 @@ int main(int argc, char *argv[])
     app = SailfishApp::application(argc, argv);
 #else
     app = new QApplication(argc, argv);
-#endif
 
   {
     QString tr_path(TRANSLATION_FOLDER);
@@ -64,6 +63,9 @@ int main(int argc, char *argv[])
       }
 
   }
+
+#endif
+
 
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setOrganizationDomain("piggz.co.uk");
