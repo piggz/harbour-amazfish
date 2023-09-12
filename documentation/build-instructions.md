@@ -132,3 +132,30 @@ systemctl --user daemon-reload
 systemctl --user enable harbour-amazfish
 systemctl --user start harbour-amazfish
 ```
+
+## Ubuntu Touch
+
+Ubuntu 20.04 is the preferred base system for installing the SDK because the current version of UBports also runs on Ubuntu 20.04. The steps to install the SDK are as follows:
+
+```
+sudo add apt-repository ppa:bhdouglass/clickable
+sudo apt update
+sudo apt install clickable
+clickable setup
+```
+
+To build and develop applications on x86 architecture, use the following commands:
+
+```
+clickable build --libs
+clickable build
+clickable desktop
+```
+
+To build the application for ARM architecture and install it on your device, follow these steps:
+
+```
+clickable build --libs --arch arm64
+clickable build --arch arm64
+clickable install --arch arm64
+```
