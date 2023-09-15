@@ -26,7 +26,13 @@ EOF
 
 else
 
-    /usr/bin/systemctl --user restart harbour-amazfish.service
+    # restart just after reinstall
+
+    mod_time=$(stat --format="%Y" ./bin/harbour-amazfishd)
+    enter_active=$(date -d "$(systemctl show -p ActiveEnterTimestamp --value --user harbour-amazfish)" +%s) #"
+    if [ "$mod_time" -gt "$enter_active" ]; then
+        /usr/bin/systemctl --user restart harbour-amazfish.service
+    fi
 
 fi
 
