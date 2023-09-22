@@ -135,6 +135,7 @@ SOURCES += \
     src/services/hrmservice.cpp \
     src/services/deviceinfoservice.cpp \
     src/services/bipfirmwareservice.cpp \
+    src/services/batteryservice.cpp \
     src/operations/abstractoperation.cpp \
     src/operations/activityfetchoperation.cpp \
     src/operations/logfetchoperation.cpp \
@@ -218,6 +219,7 @@ HEADERS += \
     src/operations/updatefirmwareoperation.h \   
     src/operations/sportsdetailoperation.h \
     src/operations/abstractfetchoperation.h \
+    src/services/batteryservice.h \
     src/devices/abstractdevice.h \
     src/bipactivitydetailparser.h \
     src/activitycoordinate.h

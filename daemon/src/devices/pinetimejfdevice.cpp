@@ -11,6 +11,7 @@
 #include "infinitimemotionservice.h"
 #include "infinitimeweatherservice.h"
 #include "adafruitblefsservice.h"
+#include "batteryservice.h"
 #include <QtXml/QtXml>
 
 namespace {
@@ -155,6 +156,8 @@ void PinetimeJFDevice::parseServices()
             } else if (uuid == AdafruitBleFsService::UUID_SERVICE_FS && !service(AdafruitBleFsService::UUID_SERVICE_FS)) {
                 size_t transferMtu = GetMtuForCharacteristic(path, AdafruitBleFsService::UUID_CHARACTERISTIC_FS_TRANSFER);
                 addService(AdafruitBleFsService::UUID_SERVICE_FS, new AdafruitBleFsService(path, this, transferMtu));
+            } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
+                addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -177,6 +180,11 @@ void PinetimeJFDevice::initialise()
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (info) {
         connect(info, &DeviceInfoService::informationChanged, this, &PinetimeJFDevice::informationChanged, Qt::UniqueConnection);
+    }
+
+    BatteryService *battery = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
+    if (battery) {
+        connect(battery, &BatteryService::informationChanged, this, &PinetimeJFDevice::informationChanged, Qt::UniqueConnection);
     }
 
     CurrentTimeService *cts = qobject_cast<CurrentTimeService*>(service(CurrentTimeService::UUID_SERVICE_CURRENT_TIME));
@@ -327,6 +335,13 @@ void PinetimeJFDevice::refreshInformation()
     if (info) {
         info->refreshInformation();
     }
+
+
+    BatteryService *bat = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
+    if (bat) {
+        bat->refreshInformation();
+    }
+
 }
 
 QString PinetimeJFDevice::information(Info i) const
