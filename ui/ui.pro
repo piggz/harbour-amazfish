@@ -205,11 +205,12 @@ equals(DISABLE_SYSTEMD, "yes") {
     DEFINES += DISABLE_SYSTEMD
 }
 
+DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
+
 flavor_silica {
     message(SailfishOS build)
     CONFIG += sailfishapp sailfishapp_no_deploy_qml sailfishapp_i18n
     DEFINES += MER_EDITION_SAILFISH
-    DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
 
     qtPrepareTool(LRELEASE, lrelease)
     for(tsfile, TRANSLATIONS) {
