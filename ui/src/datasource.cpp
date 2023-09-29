@@ -170,6 +170,10 @@ QVariant DataSource::data(Type type, const QDate &day)
             qry = "SELECT date(timestamp_dt), sum(steps) FROM mi_band_activity WHERE date(timestamp_dt) >= date('" +
                     day.toString("yyyy-MM-ddT00:00:00") + "','-10 day') AND timestamp_dt <= '" +
                     day.toString("yyyy-MM-ddT23:59:59") +  "' GROUP BY date(timestamp_dt) ORDER BY timestamp_dt ASC";
+        } else if (type == DataSource::BatteryLog) {
+            qry = "SELECT date(timestamp_dt), battery_level FROM battery_log WHERE date(timestamp_dt) >= date('" +
+                    day.toString("yyyy-MM-ddT00:00:00") + "','-10 day') AND timestamp_dt <= '" +
+                    day.toString("yyyy-MM-ddT23:59:59") +  "' ORDER BY timestamp_dt ASC";
         }
 
         qDebug() << qry;

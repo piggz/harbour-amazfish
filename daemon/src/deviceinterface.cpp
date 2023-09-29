@@ -14,6 +14,7 @@
 #include <QProcess>
 
 #include <KDb3/KDbDriverManager>
+#include <KDb3/KDbTransactionGuard>
 
 static const char *SERVICE = SERVICE_NAME_AMAZFISH;
 static const char *PATH = "/application";
@@ -238,6 +239,27 @@ void DeviceInterface::createTables()
     }
 
 
+    if (!m_conn->containsTable("battery_log")) {
+        KDbTableSchema *t_battery = new KDbTableSchema("battery_log");
+        t_battery->setCaption("Battery log");
+        t_battery->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+        t_battery->addField(f = new KDbField("timestamp", KDbField::Integer, nullptr));
+        f->setCaption("Timestamp");
+        t_battery->addField(f = new KDbField("timestamp_dt", KDbField::DateTime));
+        f->setCaption("Timestamp in Date/Time format");
+        t_battery->addField(f = new KDbField("battery_level", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Battery level [%]");
+
+        if (!m_conn->createTable(t_battery)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- mi_band_activity created --";
+        qDebug() << *t_battery;
+
+    }
+
     if (!m_conn->containsTable("sports_data")) {
         KDbTableSchema *t_summary = new KDbTableSchema("sports_data");
         t_summary->setCaption("Sports Data");
@@ -408,17 +430,55 @@ void DeviceInterface::onConnectionStateChanged()
     emit connectionStateChanged();
 }
 
+void DeviceInterface::log_battery_level(int level) {
+
+    if (!m_conn || !(m_conn->isDatabaseUsed())) {
+        qDebug() << "Database not connected";
+        return;
+    }
+
+    QDateTime m_sampleTime = QDateTime::currentDateTime();
+    qDebug() << "Start time" << m_sampleTime;
+
+    KDbTransaction transaction = m_conn->beginTransaction();
+    KDbTransactionGuard tg(transaction);
+
+    KDbFieldList fields;
+    auto s_battery = m_conn->tableSchema("battery_log");
+
+    fields.addField(s_battery->field("timestamp"));
+    fields.addField(s_battery->field("timestamp_dt"));
+    fields.addField(s_battery->field("battery_level"));
+
+    QList<QVariant> values;
+
+    values << m_sampleTime.toMSecsSinceEpoch() / 1000;
+    values << m_sampleTime;
+    values << level;
+
+    if (!m_conn->insertRecord(&fields, values)) {
+        qDebug() << "error inserting record";
+        return;
+    }
+    tg.commit();
+
+}
+
 void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QString &val)
 {
     qDebug() << Q_FUNC_INFO << key << val;
 
     //Handle notification of low battery
     if (key == AbstractDevice::INFO_BATTERY) {
-        if (val.toInt() != m_lastBatteryLevel) {
-            if (val.toInt() <= 10 && val.toInt() < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
+        int battery_level = val.toInt();
+        if (battery_level != m_lastBatteryLevel) {
+
+            log_battery_level(battery_level);
+
+            if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
                 sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(m_lastBatteryLevel) + "%");
             }
-            m_lastBatteryLevel = val.toInt();
+            m_lastBatteryLevel = battery_level;
         }
     }
 

@@ -104,6 +104,8 @@ private:
     void createSettings();
     void updateServiceController();
 
+    void log_battery_level(int level);
+
     //TODO Minimise use of these funcitons
     MiBandService *miBandService() const;
     HRMService *hrmService() const;
