@@ -235,6 +235,8 @@ Item {
                     //PGZ
                     if (graphType == bar) {
                         lineWidth = width / end;
+                    } else {
+                        stepX = width / end;
                     }
 
                     ctx.lineWidth = lineWidth;
