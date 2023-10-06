@@ -255,7 +255,7 @@ void DeviceInterface::createTables()
             qDebug() << m_conn->result();
             return;
         }
-        qDebug() << "-- mi_band_activity created --";
+        qDebug() << "-- battery_log created --";
         qDebug() << *t_battery;
 
     }
