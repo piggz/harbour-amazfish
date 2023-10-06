@@ -18,8 +18,8 @@
 
 import QtQuick 2.0
 import QtQuick.Window 2.2
-import Ubuntu.Components 1.3
-import Ubuntu.Components.Themes 1.3
+import Lomiri.Components 1.3
+import Lomiri.Components.Themes 1.3
 
 QtObject {
     // font sizes and family
@@ -45,7 +45,7 @@ QtObject {
     // navigation items, secondary
     property color themeSecondaryColor: theme.palette.normal.baseText
     // descriptive items, secondary
-    property color themeSecondaryHighlightColor: theme.palette.normal.backgroundSecondaryText
+    property color themeSecondaryHighlightColor: theme.palette.normal.activity;
 
     // button sizes
     property real themeButtonWidthLarge: units.gridUnit*32
@@ -55,19 +55,28 @@ QtObject {
     property real themeIconSizeLarge: units.gridUnit*7
     property real themeIconSizeMedium: units.gridUnit*5
     property real themeIconSizeSmall: units.gridUnit*4
+
     // used icons
     // used icons
+    property string iconBluetooth: "image://theme/bluetooth-active"
+    property string iconBattery: "image://theme/battery-good-symbolic"
+    property string iconSteps: "../../pics/custom-icons/icon-m-steps.png"
+    property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate.png"
+
+
     property string iconAbout: "image://theme/info" //Qt.resolvedUrl("../../icons/help-about-symbolic.svg")
     property string iconBack: "image://theme/back" //Qt.resolvedUrl("../../icons/go-previous-symbolic.svg")
-    property string iconClear: "image://theme/edit-delete" //Qt.resolvedUrl("../../icons/edit-clear-all-symbolic.svg")
+    property string iconBackward: "image://theme/back"
+    property string iconClear: "image://theme/edit-delete" //Qt.resolvedUrl("../../icons/edit-delete-symbolic.svg")
     property string iconClose: "image://theme/close" //Qt.resolvedUrl("../../icons/window-close-symbolic.svg")
     property string iconDelete: "image://theme/delete" //Qt.resolvedUrl("../../icons/edit-delete-symbolic.svg")
     property string iconDot: "image://theme/gps" //Qt.resolvedUrl("../../icons/find-location-symbolic.svg")
     property string iconDown: "image://theme/down" //Qt.resolvedUrl("../../icons/go-down-symbolic.svg")
     property string iconEdit: "image://theme/edit" //Qt.resolvedUrl("../../icons/document-edit-symbolic.svg")
     property string iconEditClear: "image://theme/edit-clear" //Qt.resolvedUrl("../../icons/edit-clear-symbolic.svg")
+    property string iconEmail: "image://theme/mail"
     property string iconFavorite: Qt.resolvedUrl("../icons/uuitk/bookmark-new-symbolic.svg")
-    property string iconFavoriteSelected: Qt.resolvedUrl("../icons/uuitk/user-bookmarks-symbolic.svg")
+//    property string iconFavoriteSelected: Qt.resolvedUrl("../icons/uuitk/user-bookmarks-symbolic.svg")
     property string iconForward: "image://theme/next" //Qt.resolvedUrl("../../icons/go-next-symbolic.svg")
     property string iconManeuvers: "image://theme/media-playlist-shuffle" //Qt.resolvedUrl("../../icons/maneuvers-symbolic.svg")
     property string iconMaps: Qt.resolvedUrl("../icons/uuitk/map-layers-symbolic.svg")
@@ -90,7 +99,19 @@ QtObject {
     property string iconShortlistedSelected: "image://theme/select" //Qt.resolvedUrl("../../icons/shortlist-selected-symbolic.svg")
     property string iconStart: "image://theme/media-playback-start" //Qt.resolvedUrl("../../icons/media-playback-start-symbolic.svg")
     property string iconStop: "image://theme/media-playback-stop" //Qt.resolvedUrl("../../icons/media-playback-stop-symbolic.svg")
+    property string iconUp: "image://theme/up"
     property string iconWebLink: "image://theme/stock_website" //Qt.resolvedUrl("../../icons/web-browser-symbolic.svg")
+
+    property string iconContact: "image://theme/preferences-desktop-accounts-symbolic"    // "User Settings"
+    property string iconWatch: "image://theme/smartwatch-symbolic"                        // "Device settings"
+    property string iconLevels: "image://theme/settings"                                  // "Application settings"
+    property string iconAlarm: "image://theme/alarm"                                      // "Alarms"
+    property string iconWeather: "image://theme/weather-app-symbolic"                     // "Weather"
+    property string iconStrava: "image://theme/transfer-progress"                         // "Strava"
+    property string iconDiagnostic: "image://theme/info"                                  // "Debug Info"
+    property string iconFavoriteSelected: "image://theme/bookmark"                        // "Donate"
+
+
 
     // item sizes
     property real themeItemSizeLarge: themeFontSizeLarge * 3

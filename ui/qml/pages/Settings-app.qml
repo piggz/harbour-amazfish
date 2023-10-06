@@ -157,7 +157,7 @@ PagePL {
             text: qsTr("Button Actions")
             visible: supportsFeature(Amazfish.FEATURE_BUTTON_ACTION)
             onClicked: {
-                pageStack.push(Qt.resolvedUrl("Settings-button-action.qml"))
+                app.pages.push(Qt.resolvedUrl("Settings-button-action.qml"))
             }
         }
 

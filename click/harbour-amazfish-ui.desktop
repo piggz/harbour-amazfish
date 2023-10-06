@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Icon=harbour-amazfish-ui.png
+Exec=run.sh
+Name=Amazfish
+X-Ubuntu-Touch=true
+X-Ubuntu-Splash-Color=#F5F5F5

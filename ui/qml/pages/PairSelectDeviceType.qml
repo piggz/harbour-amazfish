@@ -10,12 +10,12 @@ PageListPL {
     delegate: DeviceButton {
         onSelected: {
             if (needsAuth) {
-                var authdialog = pageStack.push(Qt.resolvedUrl("./AuthKeyDialog.qml"));
+                var authdialog = app.pages.push(Qt.resolvedUrl("./AuthKeyDialog.qml"));
                 authdialog.accepted.connect(function() {
-                    var pairpage = pageStack.push(Qt.resolvedUrl("./PairPage.qml"));
+                    var pairpage = app.pages.push(Qt.resolvedUrl("./PairPage.qml"));
                     pairpage.deviceType = deviceType;})
             } else {
-                var pairpage = pageStack.push(Qt.resolvedUrl("./PairPage.qml"));
+                var pairpage = app.pages.push(Qt.resolvedUrl("./PairPage.qml"));
                 pairpage.deviceType = deviceType;
             }
         }
