@@ -40,7 +40,7 @@ PagePL {
             text: new Date(page.dob).toLocaleDateString();
 
             onClicked: {
-                var dialog = pageStack.push(pickerComponent, {
+                var dialog = app.pages.push(pickerComponent, {
                                                 date: new Date(AmazfishConfig.profileDOB)
                                             })
                 dialog.accepted.connect(function() {

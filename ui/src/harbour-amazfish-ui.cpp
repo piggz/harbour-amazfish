@@ -123,6 +123,8 @@ int main(int argc, char *argv[])
 #ifdef MER_EDITION_SAILFISH
     view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));
     view->show();
+#elif UUITK_EDITION
+    view->load("./share/harbour-amazfish-ui/qml/harbour-amazfish.qml");
 #else
     view->load(QUrl("qrc:/qml/harbour-amazfish.qml"));
 #endif

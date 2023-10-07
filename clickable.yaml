@@ -1,0 +1,46 @@
+clickable_minimum_required: 8.0.0
+framework: ubuntu-sdk-20.04
+builder: qmake
+build_args:
+  - "FLAVOR=uuitk"
+  - "CONFIG+=click"
+  - "DISABLE_SYSTEMD=yes"
+  - "INCLUDEPATH+=${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt"
+  - "INCLUDEPATH+=${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5"
+  - "LIBS+=-L${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}"
+env_vars:
+  PKG_CONFIG_PATH: "${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig:${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig"
+  QMAKE_CXXFLAGS: "-I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5 -I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt"
+prebuild:
+- git submodule update --init
+dependencies_target:
+- libkdb3-driver-sqlite
+- qml-module-org-kde-bluezqt
+- libkdb3-dev
+- libkf5contacts-dev
+- libkf5archive-dev
+- libkf5coreaddons-dev
+- libdbus-1-dev
+kill: harbour-amazfish
+libraries:
+    qtmpris:
+        prebuild: mkdir -p ${ROOT}/3rdparty; git -C ${ROOT}/3rdparty/qtmpris pull ||  git clone https://github.com/sailfishos/qtmpris ${ROOT}/3rdparty/qtmpris
+        src_dir: 3rdparty/qtmpris
+        builder: qmake
+    nemo-qml-plugin-dbus:
+        prebuild: mkdir -p ${ROOT}/3rdparty; git -C ${ROOT}/3rdparty/nemo-qml-plugin-dbus pull ||  git clone https://github.com/sailfishos/nemo-qml-plugin-dbus ${ROOT}/3rdparty/nemo-qml-plugin-dbus
+        src_dir: 3rdparty/nemo-qml-plugin-dbus
+        builder: qmake
+install_lib:
+    - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libnemodbus.so*
+    - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libmpris-qt5.so*
+    - /usr/lib/${ARCH_TRIPLET}/libKDb3.so*
+    - /usr/lib/${ARCH_TRIPLET}/libKF5BluezQt.so*
+install_data:
+    /usr/lib/${ARCH_TRIPLET}/qt5/plugins/kdb3/kdb_sqlitedriver.so: bin/kdb3
+    /usr/lib/${ARCH_TRIPLET}/qt5/plugins/kdb3/sqlite3/kdb_sqlite_icu.so: bin/kdb3/sqlite3
+install_qml:
+    - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Nemo/DBus
+    - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/org/nemomobile/mpris
+    - /usr/lib/${ARCH_TRIPLET}/qt5/qml/org/kde/bluezqt
+skip_review: true

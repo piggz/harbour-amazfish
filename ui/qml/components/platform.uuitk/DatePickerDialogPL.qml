@@ -17,12 +17,27 @@
  */
 
 import QtQuick 2.9
+import QtQuick.Controls 2.2
+import Lomiri.Components 1.3
+import Lomiri.Components.Pickers 1.3
 import "."
 
 DialogPL {
     id: dialog
 
-    property var date
+    property alias date: datePicker.date
 
-    Component.onCompleted: console.log("DatePickerDialog is not implemented for UUITK")
+    Item {
+        height: childrenRect.height
+        width: parent.width
+
+        DatePicker {
+            id: datePicker
+            minimum: new Date(1900, 0)
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: Math.min(parent.width - 2*styler.themeHorizontalPageMargin, implicitWidth)
+        }
+
+    }
+
 }

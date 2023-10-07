@@ -106,9 +106,9 @@ PageListPL {
                 text: stravaList.model[index]["total_elevation_gain"] + "m"
             }*/
         onClicked: {
-            //var activityPage = pageStack.push(Qt.resolvedUrl("StravaActivityPage.qml"));
+            //var activityPage = app.pages.push(Qt.resolvedUrl("StravaActivityPage.qml"));
             //activityPage.loadActivity(stravaList.model[index]["id"]);
-            var sportpage = pageStack.push(Qt.resolvedUrl("SportPage.qml"));
+            var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"));
             sportpage.activitytitle = name;
             sportpage.date = startdate;
             sportpage.location = baselatitude.toFixed(3) + "," + baselongitude.toFixed(3) + " " + basealtitude + "m";

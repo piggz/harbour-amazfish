@@ -150,12 +150,12 @@ PageListPL {
 
         PageMenuItemPL {
             enabled: !DaemonInterfaceInstance.pairing
-            text: adapter.discovering
+            text: adapter && adapter.discovering
                   ? qsTr("Stop scanning")
                   : qsTr("Scan for devices")
             onClicked: {
                 _placeholderText = ""
-                if (adapter.discovering) {
+                if (adapter && adapter.discovering) {
                     stopDiscovery();
                 } else {
                     startDiscovery();
@@ -166,7 +166,7 @@ PageListPL {
 
         PageMenuItemPL {
             visible: text
-            text: adapter.discovering
+            text: adapter && adapter.discovering
                   ? qsTr("Scanning for devices…")
                   : DaemonInterfaceInstance.pairing
                     ? qsTr("Pairing…")
@@ -176,7 +176,7 @@ PageListPL {
 
     BusyIndicatorPL {
         id: busyIndicator
-        running: (adapter.discovering && !page.count) || DaemonInterfaceInstance.connectionState == "pairing"
+        running: (adapter && adapter.discovering && !page.count) || DaemonInterfaceInstance.connectionState == "pairing"
     }
 }
 

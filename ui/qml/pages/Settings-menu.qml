@@ -31,14 +31,14 @@ PageListPL {
 
         onClicked: {
             if(name === qsTr("Weather")) {
-                var dlg = pageStack.push(Qt.resolvedUrl(url))
+                var dlg = app.pages.push(Qt.resolvedUrl(url))
                 dlg.cityManager = cityManager;
             }
             else if (name === qsTr("Donate")) {
                 Qt.openUrlExternally("https://paypal.me/piggz")
             }
             else {
-                pageStack.push(Qt.resolvedUrl(url))
+                app.pages.push(Qt.resolvedUrl(url))
             }
         }
 
