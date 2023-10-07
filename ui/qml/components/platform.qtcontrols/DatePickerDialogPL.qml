@@ -17,7 +17,7 @@
  */
 
 import QtQuick 2.9
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.2
 import "."
 
 DialogPL {
@@ -29,10 +29,22 @@ DialogPL {
         height: childrenRect.height
         width: parent.width
 
-        Calendar {
+        TextField {
             id: cal
+            property date selectedDate: new Date()
+
             anchors.horizontalCenter: parent.horizontalCenter
             width: Math.min(parent.width - 2*styler.themeHorizontalPageMargin, implicitWidth)
+            inputMethodHints: Qt.ImhDate
+            text: selectedDate.toISOString().split('T')[0]
+            inputMask:"0000-00-00;_"
+            onTextChanged: {
+                var d = new Date(text)
+                if (!isNaN(d)) {
+                    selectedDate = d
+                }
+            }
+
         }
     }
 }

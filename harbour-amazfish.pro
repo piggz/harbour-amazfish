@@ -1,7 +1,11 @@
 TEMPLATE = subdirs
-CONFIG = ordered
+CONFIG += ordered
 
 SUBDIRS = lib daemon ui
+
+CONFIG(click) {
+    SUBDIRS += click
+}
 
 DISTFILES += \
     rpm/harbour-amazfish.changes.in \

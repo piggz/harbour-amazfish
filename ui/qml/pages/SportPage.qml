@@ -29,7 +29,7 @@ PagePL {
             text: qsTr("Send to Strava")
             visible: o2strava.linked
             onClicked: {
-                var dialog = pageStack.push(Qt.resolvedUrl("StravaUploadPage.qml"));
+                var dialog = app.pages.push(Qt.resolvedUrl("StravaUploadPage.qml"));
                 dialog.activityID = activitytitle.replace(/\s/g, '');
                 dialog.tcx = tcx;
                 dialog.activityName = activitytitle;

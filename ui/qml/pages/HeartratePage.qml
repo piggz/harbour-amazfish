@@ -42,10 +42,10 @@ PagePL {
         Row { //Min and Max HR
             //height: childrenRect.height
             anchors.horizontalCenter: parent.horizontalCenter
-            IconPL { iconName: styler.iconDown }
+            IconPL { iconName: styler.iconDown; iconHeight: styler.themeIconSizeSmall; iconWidth: styler.themeIconSizeSmall }
             LabelPL { text: minhr; anchors.verticalCenter: parent.verticalCenter
             }
-            IconPL { iconName: styler.iconUp }
+            IconPL { iconName: styler.iconUp; iconHeight: styler.themeIconSizeSmall; iconWidth: styler.themeIconSizeSmall }
             LabelPL { text: maxhr; anchors.verticalCenter: parent.verticalCenter
             }
         }

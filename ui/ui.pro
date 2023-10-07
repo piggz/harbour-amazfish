@@ -205,11 +205,12 @@ equals(DISABLE_SYSTEMD, "yes") {
     DEFINES += DISABLE_SYSTEMD
 }
 
+DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
+
 flavor_silica {
     message(SailfishOS build)
     CONFIG += sailfishapp sailfishapp_no_deploy_qml sailfishapp_i18n
     DEFINES += MER_EDITION_SAILFISH
-    DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
 
     qtPrepareTool(LRELEASE, lrelease)
     for(tsfile, TRANSLATIONS) {
@@ -226,6 +227,28 @@ flavor_silica {
 
     translations_files.files = $${TRANSLATIONS_FILES}
     translations_files.path = $${PREFIX}/share/$${TARGET}/translations
+    INSTALLS += translations_files
+}
+
+flavor_uuitk {
+    message(UUITK build)
+    DEFINES += UUITK_EDITION
+    DEFINES += TRANSLATION_FOLDER=\\\"./translations\\\"
+
+    qtPrepareTool(LRELEASE, lrelease)
+    for(tsfile, TRANSLATIONS) {
+        qmfile = $$shadowed($$tsfile)
+        qmfile ~= s,.ts$,.qm,
+        qmdir = $$dirname(qmfile)
+        !exists($$qmdir) {
+            mkpath($$qmdir)|error("Aborting.")
+        }
+        command = $$LRELEASE -removeidentical $$tsfile -qm $$qmfile
+        system($$command)|error("Failed to run: $$command")
+        TRANSLATIONS_FILES += $$qmfile
+    }
+    translations_files.files = $${TRANSLATIONS_FILES}
+    translations_files.path = /translations
     INSTALLS += translations_files
 }
 
