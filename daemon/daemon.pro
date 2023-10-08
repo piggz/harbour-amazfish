@@ -14,6 +14,7 @@ TARGET = harbour-amazfishd
 
 LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 PKGCONFIG += dbus-1
+PKGCONFIG += icu-uc icu-io icu-i18n # transliteration
 QT +=  positioning KDb3 network dbus KArchive
 CONFIG += c++17
 
@@ -153,6 +154,7 @@ SOURCES += \
     src/bipactivitydetailparser.cpp \
     src/activitycoordinate.cpp \
     src/harbour-amazfish-daemon.cpp \
+    src/transliterator.cpp \
     src/huamiweathercondition.cpp
 
 DISTFILES += \
@@ -222,4 +224,5 @@ HEADERS += \
     src/services/batteryservice.h \
     src/devices/abstractdevice.h \
     src/bipactivitydetailparser.h \
+    src/transliterator.h \
     src/activitycoordinate.h
