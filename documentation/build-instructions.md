@@ -1,4 +1,6 @@
-# This instruction guide is written for the SailfishOS SDK and Ubuntu 20.04 LTS, but may be also available for other Linux distributions, with some changes.
+# Build Instructions
+
+This instruction guide is written for the SailfishOS SDK and Debian based distributions including Ubuntu Touch, but may be also available for other Linux distributions, with some changes.
 
 ## SailfishOS SDK
 
@@ -135,27 +137,20 @@ systemctl --user start harbour-amazfish
 
 ## Ubuntu Touch
 
-Ubuntu 20.04 is the preferred base system for installing the SDK because the current version of UBports also runs on Ubuntu 20.04. The steps to install the SDK are as follows:
-
-```
-sudo add apt-repository ppa:bhdouglass/clickable
-sudo apt update
-sudo apt install clickable
-clickable setup
-```
-
-To build and develop applications on x86 architecture, use the following commands:
+Clickable is used to build this app for Ubuntu Touch, see [install instructions](https://clickable-ut.dev/en/latest/install.html).
+To build and run the application in Desktop Mode for testing the UI, use the following commands:
 
 ```
 clickable build --libs
-clickable build
 clickable desktop
 ```
 
 To build the application for ARM architecture and install it on your device, follow these steps:
 
 ```
-clickable build --libs --arch arm64
-clickable build --arch arm64
-clickable install --arch arm64
+clickable build --libs --arch detect
+clickable build --arch detect
+clickable install
 ```
+
+If you do not have a device connected, you can specify the target architecture as `--arch arm64` or `--arch armhf` instead.
