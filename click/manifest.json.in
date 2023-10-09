@@ -1,5 +1,5 @@
 {
-    "name": "harbour-amazfish",
+    "name": "uk.co.piggz.amazfish",
     "description": "Smart watch sync app",
     "architecture": "@CLICK_ARCH@",
     "title": "Amazfish",

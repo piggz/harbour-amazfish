@@ -9,6 +9,9 @@ Requires Sailfish version 3.0.3.8 or above due to changes in the base Sailfish i
 * Run `devel-su pkcon refresh`
 * Run `devel-su pkcon install harbour-amazfish`
 
+
+[![OpenStore](https://open-store.io/badges/en_US.svg)](https://open-store.io/app/uk.co.piggz.amazfish)
+
 ## Supported Devices
 
 There are 3 tiers of supported devices:
