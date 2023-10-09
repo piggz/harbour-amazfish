@@ -205,7 +205,11 @@ equals(DISABLE_SYSTEMD, "yes") {
     DEFINES += DISABLE_SYSTEMD
 }
 
-DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
+flavor_uuitk {
+    DEFINES += TRANSLATION_FOLDER=\\\"./translations\\\"
+} else {
+    DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
+}
 
 flavor_silica {
     message(SailfishOS build)
@@ -233,7 +237,6 @@ flavor_silica {
 flavor_uuitk {
     message(UUITK build)
     DEFINES += UUITK_EDITION
-    DEFINES += TRANSLATION_FOLDER=\\\"./translations\\\"
 
     qtPrepareTool(LRELEASE, lrelease)
     for(tsfile, TRANSLATIONS) {
