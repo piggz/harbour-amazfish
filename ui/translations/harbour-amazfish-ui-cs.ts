@@ -255,11 +255,11 @@
     </message>
     <message>
         <source>Connect to watch</source>
-        <translation>Spárovat</translation>
+        <translation>Připojit k hodinkám</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
-        <translation>Zrušit párování</translation>
+        <translation>Odpojit od hodinek</translation>
     </message>
     <message>
         <source>Debug Info</source>
