@@ -12,10 +12,10 @@ Description=Amazfish daemon
 After=graphical.target
 
 [Service]
-ExecStart=/opt/click.ubuntu.com/harbour-amazfish/current/bin/harbour-amazfishd
+ExecStart=/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/bin/harbour-amazfishd
 Restart=always
 RestartSec=5
-Environment=LD_LIBRARY_PATH=/opt/click.ubuntu.com/harbour-amazfish/current/lib:/opt/click.ubuntu.com/harbour-amazfish/current/lib/aarch64-linux-gnu:$LD_LIBRARY_PATH
+Environment=LD_LIBRARY_PATH=/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/lib:/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/lib/aarch64-linux-gnu:$LD_LIBRARY_PATH
 Environment=HOME=%h XDG_CONFIG_HOME=/home/%u/.config DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus XDG_RUNTIME_DIR=/run/user/%U
 
 [Install]
