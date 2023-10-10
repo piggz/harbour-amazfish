@@ -61,6 +61,14 @@ PagePL {
         }
 
         TextSwitchPL {
+            id: chkTransliterate
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+
+            width: parent.width
+            text: qsTr("Transliterate notifications")
+        }
+
+        TextSwitchPL {
             id: chkSimulateEventSupport
             visible: supportsFeature(Amazfish.FEATURE_ALERT) && !supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
 
@@ -169,6 +177,7 @@ PagePL {
             text: qsTr("Save Settings")
             onClicked: {
                 saveSettings();
+                app.pages.pop();
             }
         }
     }
@@ -181,6 +190,7 @@ PagePL {
         chkNotifyLowBattery.checked = AmazfishConfig.appNotifyLowBattery;
         chkNavigationNotification.checked = AmazfishConfig.appNavigationNotification;
         chkSimulateEventSupport.checked = AmazfishConfig.appSimulateEventSupport;
+        chkTransliterate.checked = AmazfishConfig.appTransliterate;
 
         chkServiceEnabled.checked = serviceEnabledState;
         _ready = true;
@@ -195,6 +205,7 @@ PagePL {
         AmazfishConfig.appNavigationNotification = chkNavigationNotification.checked;
         AmazfishConfig.appSimulateEventSupport = chkSimulateEventSupport.checked;
         AmazfishConfig.localAdapter = cboLocalAdapter.value;
+        AmazfishConfig.appTransliterate = chkTransliterate.checked ;
     }
 
 }

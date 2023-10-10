@@ -8,6 +8,7 @@
 #include "bipfirmwareservice.h"
 #include "devicefactory.h"
 #include "amazfishconfig.h"
+#include "transliterator.h"
 
 #include <QDir>
 #include <QFile>
@@ -158,7 +159,7 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
 {
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
         qDebug() << "Sending alert to device";
-        m_device->sendAlert(notification->appName(), notification->summary(), notification->body());
+        sendAlert(notification->appName(), notification->summary(), notification->body());
     } else {
         qDebug() << "no notification service, buffering notification";
 
@@ -519,8 +520,7 @@ void DeviceInterface::onEventTimer()
     if (m_eventlist.isEmpty())
         return;
     watchfish::CalendarEvent event = m_eventlist.takeFirst();
-    if (m_device)
-        m_device->sendAlert("calendar", event.title(), event.description().isEmpty()?" ":event.description());
+    sendAlert("calendar", event.title(), event.description().isEmpty()?" ":event.description());
     scheduleNextEvent();
 }
 
@@ -694,8 +694,17 @@ void DeviceInterface::sendAlert(const QString &sender, const QString &subject, c
     m_lastAlertHash = hash;
 
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
-        qDebug() << "Sending alert to device";
-        m_device->sendAlert(sender, subject, message);
+        qDebug() << "Snding alert to device";
+
+        if (AmazfishConfig::instance()->appTransliterate()) {
+            m_device->sendAlert(
+                Transliterator::convert(sender),
+                Transliterator::convert(subject),
+                Transliterator::convert(message)
+            );
+        } else {
+            m_device->sendAlert(sender, subject, message);
+        }
     }
 }
 
