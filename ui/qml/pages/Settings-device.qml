@@ -106,6 +106,7 @@ PagePL {
                 text: qsTr("Save Settings")
                 onClicked: {
                     saveSettings();
+                    app.pages.pop();
                 }
             }
         }
