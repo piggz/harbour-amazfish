@@ -31,13 +31,14 @@ void InfiniTimeWeatherService::sendWeather(CurrentWeather *weather)
     
     for (int f = 0; f < weather->forecastCount(); f++) {
         CurrentWeather::Forecast fc = weather->forecast(f);
-        qDebug() << "Forecast:" << f << fc.dateTime()<< fc.weatherCode() << fc.maxTemperature() << fc.minTemperature() << fc.humidity() << fc.pressure() << fc.windMaxSpeed() << fc.clouds();
+        qDebug() << "Forecast:" << f << fc.dateTime()<< fc.weatherCode() <<  (fc.maxTemperature() - 273) <<  (fc.minTemperature() - 273) << fc.humidity() << fc.pressure() << fc.windMaxSpeed() << fc.clouds();
     
         Temperature t;
         t.eventType = eventtype::Temperature;
         t.timestamp = fc.dateTime();
         t.expires = 86400; //1 day
-        t.temperature = fc.maxTemperature();
+        t.temperature = (fc.maxTemperature() - 273.15) * 100;
+        t.dewPoint = fc.maxTemperature() - ((100 - fc.humidity())/5);
         writeValue(UUID_CHARACTERISTIC_WEATHER_DATA, t.toCBOR());
     
         Clouds c;
