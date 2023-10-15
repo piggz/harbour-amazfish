@@ -23,6 +23,7 @@
 #include "weather/citysearchmodel.h"
 #include "weather/citymanager.h"
 #include "weather/city.h"
+#include "weather/currentweather.h"
 
 #include "trackloader.h"
 #include "amazfishconfig.h"
@@ -92,6 +93,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
     qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");
     qmlRegisterType<City>("org.SfietKonstantin.weatherfish", 1, 0, "City");
+    qmlRegisterType<CurrentWeather>("org.SfietKonstantin.weatherfish", 1, 0, "CurrentWeather");
     qmlRegisterType<TrackLoader>("uk.co.piggz.amazfish", 1, 0, "TrackLoader");
     qmlRegisterType<AdapterModel>("uk.co.piggz.amazfish", 1, 0, "AdapterModel");
     qmlRegisterType<O2>("com.pipacs.o2", 1, 0, "O2");

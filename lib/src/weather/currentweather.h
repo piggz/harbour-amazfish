@@ -109,6 +109,8 @@ public:
     QString language() const;
     void setLanguage(const QString &language);
 
+    Q_PROPERTY(int temperature READ temperature NOTIFY ready)
+
     int temperature() const;
     int minTemperature() const;
     int maxTemperature() const;
