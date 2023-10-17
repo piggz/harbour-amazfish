@@ -12,7 +12,6 @@
 #include "infinitimeweatherservice.h"
 #include "adafruitblefsservice.h"
 #include "batteryservice.h"
-#include "transliterator.h"
 #include <QtXml/QtXml>
 
 namespace {
@@ -92,11 +91,7 @@ void PinetimeJFDevice::sendAlert(const QString &sender, const QString &subject, 
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
     if (alert) {
         qDebug() << "PT Have an alert service";
-        alert->sendAlert(
-            Transliterator::convert(sender),
-            Transliterator::convert(subject),
-            Transliterator::convert(message)
-        );
+        alert->sendAlert(sender, subject, message);
     }
 }
 
