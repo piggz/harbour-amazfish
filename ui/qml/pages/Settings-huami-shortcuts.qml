@@ -58,6 +58,7 @@ PagePL {
             onClicked: {
                 saveDisplayItems();
                 saveSettings();
+                app.pages.pop();
             }
         }
 

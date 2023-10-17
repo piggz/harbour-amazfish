@@ -143,6 +143,7 @@ PagePL {
             text: qsTr("Save Profile")
             onClicked: {
                 saveProfile();
+                app.pages.pop();
             }
         }
         Timer {
