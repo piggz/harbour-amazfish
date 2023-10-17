@@ -9,6 +9,21 @@ PagePL {
 
     property CityManager cityManager
 
+    property string currentCity: (cityManager !== null) &&
+        (cityManager.cities.length > 0) ? (cityManager.cities[0].name + ", " +  cityManager.cities[0].country ) : '' 
+
+    CurrentWeather {
+        id: weather
+    }
+
+    onCurrentCityChanged: {
+        if ((cityManager == null) || (cityManager.cities.length <= 0)) {
+            return
+        }
+        weather.setCity(cityManager.cities[0])
+        weather.refresh()
+    }
+
     Column {
         id: column
         anchors.fill: parent
@@ -17,6 +32,13 @@ PagePL {
 
         CitySearchModel {
             id: citymodel
+        }
+
+        LabelPL {
+            text: page.currentCity + (
+                (weather.temperature !== 0) ? " " + (weather.temperature-273) + "˚C" : ""
+            )
+            visible: page.currentCity !== ""
         }
 
         SearchFieldPL {
