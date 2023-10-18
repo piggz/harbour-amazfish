@@ -55,7 +55,7 @@ void DaemonInterface::connectDaemon()
 
 void DaemonInterface::pair(const QString &name, QString address)
 {
-    qDebug(Q_FUNC_INFO);
+    qDebug() << Q_FUNC_INFO;
 
     if (m_connectionState == "pairing") {
         return;
@@ -74,7 +74,7 @@ void DaemonInterface::pair(const QString &name, QString address)
 
 void DaemonInterface::changeConnectionState()
 {
-    qDebug(Q_FUNC_INFO);
+    qDebug() << Q_FUNC_INFO;
 
     if (!iface || !iface->isValid()) {
         QString state(QStringLiteral("disconnected"));
