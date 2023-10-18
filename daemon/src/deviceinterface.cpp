@@ -413,6 +413,11 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
 {
     qDebug() << Q_FUNC_INFO << key << val;
 
+
+    if (key == AbstractDevice::INFO_IMMEDIATE_ALERT) {
+        qWarning() << "Not implemented: Immediate Alert Service" << val;
+    }
+
     //Handle notification of low battery
     if (key == AbstractDevice::INFO_BATTERY) {
         if (val.toInt() != m_lastBatteryLevel) {

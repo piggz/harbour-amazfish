@@ -36,7 +36,8 @@ public:
         INFO_HEARTRATE,
         INFO_MODEL,
         INFO_FW_REVISION,
-        INFO_MANUFACTURER
+        INFO_MANUFACTURER,
+        INFO_IMMEDIATE_ALERT
     };
     Q_ENUM(Info)
 

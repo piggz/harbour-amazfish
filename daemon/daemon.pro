@@ -143,6 +143,7 @@ SOURCES += \
     src/services/deviceinfoservice.cpp \
     src/services/bipfirmwareservice.cpp \
     src/services/batteryservice.cpp \
+    src/services/immediatealertservice.cpp \
     src/operations/abstractoperation.cpp \
     src/operations/activityfetchoperation.cpp \
     src/operations/logfetchoperation.cpp \
@@ -205,6 +206,7 @@ HEADERS += \
     src/services/infinitimeweatherservice.h \
     src/services/pinetimemusicservice.h \
     src/services/uartservice.h \
+    src/services/immediatealertservice.h \
     src/typeconversion.h \
     src/bipbatteryinfo.h \
     src/deviceinterface.h \
