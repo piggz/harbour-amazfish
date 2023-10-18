@@ -47,7 +47,7 @@ DeviceInterface::DeviceInterface()
     connect(&m_notificationMonitor, &watchfish::NotificationMonitor::notification, this, &DeviceInterface::onNotification);
 
     // Calls
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     connect(&m_voiceCallController, &watchfish::VoiceCallController::ringingChanged, this, &DeviceInterface::onRingingChanged);
 #endif
     //Weather
@@ -178,7 +178,7 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
 
 void DeviceInterface::onRingingChanged()
 {
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     qDebug() << Q_FUNC_INFO << m_voiceCallController.ringing();
 
     if (!m_device) {
@@ -463,12 +463,15 @@ void DeviceInterface::deviceEvent(AbstractDevice::Events event)
     case AbstractDevice::EVENT_APP_MUSIC:
         musicChanged();
         break;
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     case AbstractDevice::EVENT_IGNORE_CALL:
         m_voiceCallController.silence();
         break;
     case AbstractDevice::EVENT_DECLINE_CALL:
         m_voiceCallController.hangup();
+        break;
+    case AbstractDevice::EVENT_ANSWER_CALL:
+        m_voiceCallController.answer();
         break;
 #endif
     }

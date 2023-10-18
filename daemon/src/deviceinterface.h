@@ -123,7 +123,7 @@ private:
     
     //Watchfish
     watchfish::MusicController m_musicController;
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     watchfish::VoiceCallController m_voiceCallController;
 #endif
     watchfish::NotificationMonitor m_notificationMonitor;

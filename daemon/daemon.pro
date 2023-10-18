@@ -41,6 +41,12 @@ flavor_silica {
                       voicecall \
                       notificationmonitor \
                       calendar
+} else:flavor_uuitk {
+    DEFINES += UUITK_EDITION
+    WATCHFISH_FEATURES += music \
+                      voicecall \
+                      notificationmonitor \
+                      calendar
 } else {
 WATCHFISH_FEATURES += music \
                   notificationmonitor \
