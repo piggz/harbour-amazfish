@@ -186,7 +186,15 @@ void DeviceInterface::onRingingChanged()
     }
 
     if (m_voiceCallController.ringing()) {
-        m_device->incomingCall(m_voiceCallController.findPersonByNumber(m_voiceCallController.callerId()));
+
+        QString caller = m_voiceCallController.findPersonByNumber(m_voiceCallController.callerId());
+
+        if (AmazfishConfig::instance()->appTransliterate()) {
+            m_device->incomingCall( Transliterator::convert( caller ) );
+        } else {
+            m_device->incomingCall(caller);
+        }
+
     } else {
         if (m_device->service("00001802-0000-1000-8000-00805f9b34fb")){
             m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
@@ -716,7 +724,11 @@ void DeviceInterface::sendAlert(const QString &sender, const QString &subject, c
 void DeviceInterface::incomingCall(const QString &caller)
 {
     if (m_device) {
-        m_device->incomingCall(caller);
+        if (AmazfishConfig::instance()->appTransliterate()) {
+            m_device->incomingCall( Transliterator::convert( caller ) );
+        } else {
+            m_device->incomingCall(caller);
+        }
     }
 }
 
