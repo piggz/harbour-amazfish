@@ -7,6 +7,7 @@
 #include "dfuservice.h"
 #include "dfuoperation.h"
 #include "infinitimenavservice.h"
+#include "immediatealertservice.h"
 #include "hrmservice.h"
 #include "infinitimemotionservice.h"
 #include "infinitimeweatherservice.h"
@@ -158,6 +159,8 @@ void PinetimeJFDevice::parseServices()
                 addService(AdafruitBleFsService::UUID_SERVICE_FS, new AdafruitBleFsService(path, this, transferMtu));
             } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
                 addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
+            } else if (uuid == ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT && !service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT)) {
+                addService(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT, new ImmediateAlertService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
