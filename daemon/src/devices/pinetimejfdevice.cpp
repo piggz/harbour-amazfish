@@ -190,6 +190,11 @@ void PinetimeJFDevice::initialise()
         connect(battery, &BatteryService::informationChanged, this, &PinetimeJFDevice::informationChanged, Qt::UniqueConnection);
     }
 
+    ImmediateAlertService *immediateAlerts = qobject_cast<ImmediateAlertService*>(service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT));
+    if (immediateAlerts) {
+        connect(immediateAlerts, &ImmediateAlertService::informationChanged, this, &PinetimeJFDevice::informationChanged, Qt::UniqueConnection);
+    }
+
     CurrentTimeService *cts = qobject_cast<CurrentTimeService*>(service(CurrentTimeService::UUID_SERVICE_CURRENT_TIME));
     if (cts) {
         cts->currentTime();
