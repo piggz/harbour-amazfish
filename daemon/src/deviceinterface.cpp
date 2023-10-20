@@ -196,9 +196,7 @@ void DeviceInterface::onRingingChanged()
         }
 
     } else {
-        if (m_device->service("00001802-0000-1000-8000-00805f9b34fb")){
-            m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
-        }
+        m_device->immediateAlert(0);
     }
 #endif
 }
