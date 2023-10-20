@@ -423,7 +423,7 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
 
 
     if (key == AbstractDevice::INFO_IMMEDIATE_ALERT) {
-        qWarning() << "Not implemented: Immediate Alert Service" << val;
+        message(QString("Immediate Alert Service: %1").arg(val)); // FIXME should trigger phone ringing
     }
 
     //Handle notification of low battery
@@ -881,3 +881,9 @@ int DeviceInterface::supportedFeatures()
     return 0;
 }
 
+void DeviceInterface::immediateAlert(int level)
+{
+    if (m_device) {
+        m_device->immediateAlert(level);
+    }
+}

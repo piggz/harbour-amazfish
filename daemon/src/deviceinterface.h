@@ -77,6 +77,7 @@ public:
     Q_INVOKABLE void reloadCities();
     Q_INVOKABLE void enableFeature(int feature);
     Q_INVOKABLE QStringList supportedDisplayItems();
+    Q_INVOKABLE void immediateAlert(int level);
 
 private:
     struct WatchNotification

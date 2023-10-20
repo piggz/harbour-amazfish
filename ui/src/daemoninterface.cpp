@@ -331,3 +331,10 @@ QStringList DaemonInterface::supportedDisplayItems()
     QDBusReply<QStringList> reply = iface->call(QStringLiteral("supportedDisplayItems"));
     return reply;
 }
+
+void DaemonInterface::immediateAlert(int level) {
+    if (!iface || !iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("immediateAlert"), level);
+}

@@ -35,6 +35,8 @@ public:
     //Weather
     virtual void sendWeather(CurrentWeather *weather) override;
 
+    virtual void immediateAlert(int level) override;
+
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 
