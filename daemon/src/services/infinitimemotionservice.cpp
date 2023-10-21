@@ -11,7 +11,16 @@ InfiniTimeMotionService::InfiniTimeMotionService(const QString &path, QObject *p
 {
     qDebug() << Q_FUNC_INFO;
     connect(this, &QBLEService::characteristicChanged, this, &InfiniTimeMotionService::characteristicChanged);
+}
 
+void InfiniTimeMotionService::refreshSteps()
+{
+    readAsync(UUID_CHARACTERISTIC_MOTION_STEPS);
+}
+
+void InfiniTimeMotionService::refreshMotion()
+{
+    readAsync(UUID_CHARACTERISTIC_MOTION_MOTION);
 }
 
 int InfiniTimeMotionService::steps() const
@@ -21,13 +30,21 @@ int InfiniTimeMotionService::steps() const
 
 void InfiniTimeMotionService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << "MiBand Changed:" << characteristic << value.toHex();
+    qDebug() << Q_FUNC_INFO << characteristic << value.toHex();
 
     if (characteristic == UUID_CHARACTERISTIC_MOTION_STEPS) {
         qDebug() << "...Got realtime steps:" << value.length();
         if (value.length() == 4) {
             m_steps = TypeConversion::toUint32(value[0], value[1], value[2], value[3]);
             emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(m_steps));
+        }
+    } else if (characteristic == UUID_CHARACTERISTIC_MOTION_MOTION) {
+        if (value.length() == 6) {
+            double x = (double) TypeConversion::toInt16(value[0], value[1]) * 0.01;
+            double y = (double) TypeConversion::toInt16(value[2], value[3]) * 0.01;
+            double z = (double) TypeConversion::toInt16(value[4], value[5]) * 0.01;
+            emit motionChanged(x, y, z);
+            qDebug() << "...Got realtime motion: x = " << x << " y = " << y << " z = " << z;
         }
     }
 }

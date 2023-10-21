@@ -336,10 +336,15 @@ void PinetimeJFDevice::refreshInformation()
         info->refreshInformation();
     }
 
-
     BatteryService *bat = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
     if (bat) {
         bat->refreshInformation();
+    }
+
+    InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_SERVICE_MOTION));
+    if (motion) {
+        motion->refreshSteps();
+//        motion->refreshMotion();
     }
 
 }
