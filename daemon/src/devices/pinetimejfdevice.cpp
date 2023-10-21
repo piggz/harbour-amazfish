@@ -192,6 +192,7 @@ void PinetimeJFDevice::initialise()
 
     ImmediateAlertService *immediateAlerts = qobject_cast<ImmediateAlertService*>(service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT));
     if (immediateAlerts) {
+        immediateAlerts->enableNotification(ImmediateAlertService::UUID_CHARACTERISTIC_IMMEDIATE_ALERT_LEVEL);
         connect(immediateAlerts, &ImmediateAlertService::informationChanged, this, &PinetimeJFDevice::informationChanged, Qt::UniqueConnection);
     }
 
