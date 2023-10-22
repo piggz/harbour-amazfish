@@ -115,7 +115,7 @@ public:
     };
 
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message);
-    Q_INVOKABLE void incomingCall(const QString &caller);
+    Q_INVOKABLE void incomingCall(const QByteArray header, const QString &caller);
     static int mapSenderToIcon(const QString &sender);
 
     Q_SIGNAL void serviceEvent(const QString &c, uint8_t event);
