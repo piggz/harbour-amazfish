@@ -137,7 +137,7 @@ void HuamiDevice::incomingCall(const QString &caller)
     qDebug() << Q_FUNC_INFO << caller;
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
     if (alert) {
-        alert->incomingCall(caller);
+        alert->incomingCall(QByteArray::fromHex("0301"), caller);
     }
 }
 

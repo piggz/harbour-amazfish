@@ -37,12 +37,6 @@ else
         /usr/bin/systemctl --user restart harbour-amazfish.service
     fi
 
-    # start if not running
-
-    if ! systemctl is-active --user harbour-amazfish; then
-        /usr/bin/systemctl --user start harbour-amazfish.service
-    fi
-
 fi
 
 export LD_LIBRARY_PATH=$PWD/lib:$PWD/lib/aarch64-linux-gnu:$LD_LIBRARY_PATH
