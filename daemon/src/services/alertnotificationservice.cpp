@@ -49,11 +49,10 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
     writeValue(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT, send);
 }
 
-void AlertNotificationService::incomingCall(const QString &caller)
+void AlertNotificationService::incomingCall(const QByteArray header, const QString &caller)
 {
     qDebug() << Q_FUNC_INFO << caller;
-    QByteArray send = QByteArray::fromHex("0301");
-    send += caller.toUtf8();
+    QByteArray send = header + caller.toUtf8();
     writeValue(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT, send);
 }
 
