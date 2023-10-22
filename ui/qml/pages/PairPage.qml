@@ -159,13 +159,13 @@ PageListPL {
                     stopDiscovery();
                 } else {
                     startDiscovery();
-                    console.log(devicesModel.rowCount());
+                    console.log("devicesModel.rowCount:" + devicesModel.rowCount() );
                 }
             }
         }
 
         PageMenuItemPL {
-            visible: text
+            visible: text != ""
             text: adapter && adapter.discovering
                   ? qsTr("Scanning for devices…")
                   : DaemonInterfaceInstance.pairing
@@ -176,6 +176,7 @@ PageListPL {
 
     BusyIndicatorPL {
         id: busyIndicator
+        anchors.centerIn: parent
         running: (adapter && adapter.discovering && !page.count) || DaemonInterfaceInstance.connectionState == "pairing"
     }
 }
