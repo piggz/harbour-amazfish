@@ -52,7 +52,7 @@ PagePL {
                 username = (athlete["username"] !== undefined) ? athlete["username"] : athlete["firstname"] + " " + athlete["lastname"];
                 country = athlete["country"];
             } else {
-                username = "not logged in";
+                username = qsTr("not logged in");
                 country = "";
             }
         }
@@ -66,7 +66,7 @@ PagePL {
             username = (athlete["username"] !== undefined) ? athlete["username"] : athlete["firstname"] + " " + athlete["lastname"];
             country = athlete["country"];
         } else {
-            username = "not logged in";
+            username = qsTr("not logged in");
             country = "";
         }
     }
