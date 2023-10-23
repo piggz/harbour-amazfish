@@ -26,6 +26,7 @@ PagePL {
     pageMenu: PageMenuPL {
         PageMenuItemPL
         {
+            iconSource: styler.iconUploadToStrava !== undefined ? styler.iconUploadToStrava : ""
             text: qsTr("Send to Strava")
             visible: o2strava.linked
             onClicked: {
