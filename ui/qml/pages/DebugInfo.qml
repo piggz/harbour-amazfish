@@ -12,6 +12,7 @@ PagePL {
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
+            iconSource: styler.iconRefresh !== undefined ? styler.iconRefresh : ""
             text: qsTr("Refresh")
             onClicked: {
                 DaemonInterfaceInstance.refreshInformation();

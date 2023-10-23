@@ -64,6 +64,9 @@ QtObject {
     property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate.png"
 
 
+    property string iconStravaLogin: "image://theme/user-admin"
+    property string iconUploadToStrava: "image://theme/share"
+    property string iconDownloadData: "image://theme/transfer-progress-download"
     property string iconAbout: "image://theme/info" //Qt.resolvedUrl("../../icons/help-about-symbolic.svg")
     property string iconBack: "image://theme/back" //Qt.resolvedUrl("../../icons/go-previous-symbolic.svg")
     property string iconBackward: "image://theme/back"

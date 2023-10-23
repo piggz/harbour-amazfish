@@ -32,6 +32,7 @@ PagePL {
         PageMenuItemPL
         {
             id: btnAuth
+            iconSource: styler.iconStravaLogin !== undefined ? styler.iconStravaLogin : ""
             text: o2strava.linked ? qsTr("Logout") : qsTr("Login")
             onClicked: {
                 if (o2strava.linked) {
