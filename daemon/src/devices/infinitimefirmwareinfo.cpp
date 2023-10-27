@@ -52,7 +52,27 @@ void InfinitimeFirmwareInfo::determineFirmwareVersion()
 {
     switch (m_type) {
     case Firmware:
-        m_version = "FW ()";
+        {
+            m_version = "FW ()";
+
+            QRegularExpression binNameVersionPattern(".*-((\\d+\\.){2}\\d+)\\.bin$");
+            if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(ZIP_HEADER))) {
+                QDataStream in(&m_bytes, QIODevice::ReadOnly);
+                KCompressionDevice dev(in.device(), false, KCompressionDevice::CompressionType::None);
+                KZip zip(&dev);
+
+                if(zip.open(QIODevice::ReadOnly)) {
+                    auto* root = zip.directory();
+                    foreach (const QString &entryName, root->entries()) {
+                        QRegularExpressionMatch match = binNameVersionPattern.match(entryName);
+                        if (match.hasMatch()) {
+                            m_version = QString("FW (%1)").arg(match.captured(1));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
         break;
     case Res_Compressed:
         m_version = "Ressource ()";
