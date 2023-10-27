@@ -166,7 +166,7 @@ PagePL {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                DaemonInterfaceInstance.miBandService().fetchLogs();
+                DaemonInterfaceInstance.fetchLogs();
             }
         }
         ButtonPL {
