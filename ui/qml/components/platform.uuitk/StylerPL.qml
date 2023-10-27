@@ -60,8 +60,8 @@ QtObject {
     // used icons
     property string iconBluetooth: "image://theme/bluetooth-active"
     property string iconBattery: "image://theme/battery-good-symbolic"
-    property string iconSteps: "../../pics/custom-icons/icon-m-steps.png"
-    property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate.png"
+    property string iconSteps: "../../pics/custom-icons/icon-m-steps2.png"
+    property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate2.png"
 
 
     property string iconStravaLogin: "image://theme/user-admin"
