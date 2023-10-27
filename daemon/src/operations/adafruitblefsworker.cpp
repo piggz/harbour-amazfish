@@ -177,6 +177,7 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
             service->downloadProgress((100.0f / totalSize) * progressSize);
         }
     }
+    service->downloadProgress(100.0f);
 }
 
 std::vector<AdafruitBleFsOperation::File> BleFsWorker::getRemoteFileList(AdafruitBleFsOperation* service, QString path)
