@@ -41,32 +41,43 @@ void RealtimeActivitySample::setHeartrate(int _heartrate) {
 void RealtimeActivitySample::sampleUpdated() {
     QDateTime now = QDateTime::currentDateTime();
 
+
+    int steps_diff = 0;
+    int avg_heartrate = 0;
+
+    if (m_steps_previous == 0) {
+        m_steps_previous = m_steps;
+    }
+
+
+
     // send old data
     if (m_lastSync.secsTo(now) > m_interval) {
-        int steps_diff = 0;
+
         if ((m_steps_previous != 0) && (m_steps > m_steps_previous)) {
             steps_diff = m_steps - m_steps_previous;
         }
-        int avg_heartrate = 0;
+
         if (!m_heartrate_samples.isEmpty()) {
             for (int value : m_heartrate_samples) {
                 avg_heartrate += value;
             }
             avg_heartrate = avg_heartrate / m_heartrate_samples.size();
         }
-
         if ((m_intensity != 0) || (steps_diff != 0) || (avg_heartrate != 0)) {
             emit samplesReady(m_lastSync, m_kind, m_intensity, steps_diff, avg_heartrate);
+
+            // prepare for new data
+            m_kind = 0;
+            m_intensity = 0;
+            m_steps_previous = m_steps;
+            m_steps = 0;
+            m_heartrate_samples.clear();
+            m_lastSync = now;
+
         }
     }
 
-    // prepare for new data
-    m_kind = 0;
-    m_intensity = 0;
-    m_steps_previous = m_steps;
-    m_steps = 0;
-    m_heartrate_samples.clear();
-    m_lastSync = now;
 
 }
 
