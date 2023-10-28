@@ -86,6 +86,11 @@ bool AbstractDevice::supportsFeature(AbstractDevice::Feature f) const
     return (supportedFeatures() & f) == f;
 }
 
+void AbstractDevice::setDatabase(KDbConnection *conn)
+{
+    m_conn = conn;
+}
+
 QString AbstractDevice::deviceName() const
 {
     return m_pairedName;
