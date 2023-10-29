@@ -150,6 +150,7 @@ PageListPL {
 
         PageMenuItemPL {
             enabled: !DaemonInterfaceInstance.pairing
+            iconSource: adapter && adapter.discovering ? "" : (styler.iconDeviceScan !== undefined ? styler.iconDeviceScan : "")
             text: adapter && adapter.discovering
                   ? qsTr("Stop scanning")
                   : qsTr("Scan for devices")
