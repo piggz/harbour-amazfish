@@ -208,6 +208,7 @@ void PinetimeJFDevice::initialise()
 
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     if (hrm) {
+        hrm->enableNotification(HRMService::UUID_CHARACTERISTIC_HRM_MEASUREMENT);
         connect(hrm, &HRMService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
     }
 
