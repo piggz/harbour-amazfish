@@ -855,6 +855,13 @@ void DeviceInterface::enableFeature(int feature)
     }
 }
 
+void DeviceInterface::fetchLogs()
+{
+    if (miBandService()) {
+        miBandService()->fetchLogs();
+    }
+}
+
 QStringList DeviceInterface::supportedDisplayItems()
 {
     qDebug() << Q_FUNC_INFO;
