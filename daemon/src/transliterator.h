@@ -6,6 +6,7 @@
 class Transliterator {
 public:
     static QString convert(const QString& input);
+    static QString replaceEmojis(const QString& input);
     static void test();
 };
 
