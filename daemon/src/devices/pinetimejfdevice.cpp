@@ -353,11 +353,13 @@ QString PinetimeJFDevice::information(Info i) const
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (!info) {
+        qWarning() << "Device info service doesn't exists";
         return QString();
     }
 
-    InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_STEPS));
+    InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_SERVICE_MOTION));
     if (!motion) {
+        qWarning() << "Motion service doesn't exists";
         return QString();
     }
 
