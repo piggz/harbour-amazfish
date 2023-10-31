@@ -266,7 +266,17 @@ void DeviceInterface::createTables()
         }
         qDebug() << "-- battery_log created --";
         qDebug() << *t_battery;
+    }
 
+    int batteryLevel = 0;
+
+    if (m_conn->querySingleNumber(
+            KDbEscapedString("SELECT battery_level FROM battery_log ORDER BY id DESC"), // automatically adds LIMIT 1 into query
+            &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
+        m_lastBatteryLevel = batteryLevel;
+        qDebug() << "Last Battery Level: " << m_lastBatteryLevel;
+    } else {
+        qWarning() << "Cannot get battery level";
     }
 
     if (!m_conn->containsTable("sports_data")) {
