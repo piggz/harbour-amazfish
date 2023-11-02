@@ -10,6 +10,7 @@
 #include "hrmservice.h"
 #include "infinitimemotionservice.h"
 #include "infinitimeweatherservice.h"
+#include "simpleweatherservice.h"
 #include "adafruitblefsservice.h"
 #include "batteryservice.h"
 #include <QtXml/QtXml>
@@ -153,6 +154,8 @@ void PinetimeJFDevice::parseServices()
                 addService(InfiniTimeMotionService::UUID_SERVICE_MOTION, new InfiniTimeMotionService(path, this));
             } else if (uuid == InfiniTimeWeatherService::UUID_SERVICE_WEATHER && !service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER)) {
                 addService(InfiniTimeWeatherService::UUID_SERVICE_WEATHER, new InfiniTimeWeatherService(path, this));
+            } else if (uuid == SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER && !service(SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER)) {
+                addService(SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER, new SimpleWeatherService(path, this));
             } else if (uuid == AdafruitBleFsService::UUID_SERVICE_FS && !service(AdafruitBleFsService::UUID_SERVICE_FS)) {
                 size_t transferMtu = GetMtuForCharacteristic(path, AdafruitBleFsService::UUID_CHARACTERISTIC_FS_TRANSFER);
                 addService(AdafruitBleFsService::UUID_SERVICE_FS, new AdafruitBleFsService(path, this, transferMtu));
@@ -434,8 +437,16 @@ void PinetimeJFDevice::serviceEvent(const QString &characteristic, uint8_t event
 
 void PinetimeJFDevice::sendWeather(CurrentWeather *weather)
 {
-    InfiniTimeWeatherService *w = qobject_cast<InfiniTimeWeatherService*>(service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER));
-    if (w){
-        w->sendWeather(weather);
+//    InfiniTimeWeatherService *w = qobject_cast<InfiniTimeWeatherService*>(service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER));
+//    if (w){
+//        w->sendWeather(weather);
+//    }
+
+qDebug() << Q_FUNC_INFO << "========================";
+
+    SimpleWeatherService *sw = qobject_cast<SimpleWeatherService*>(service(SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER));
+
+    if (sw){
+        sw->sendWeather(weather);
     }
 }

@@ -61,7 +61,7 @@ void CurrentWeather::setCity(City *city)
     }
 }
 
-int CurrentWeather::temperature() const
+qreal CurrentWeather::temperature() const
 {
     return m_temperature;
 }
@@ -109,11 +109,21 @@ void CurrentWeather::handleCurrent(const QByteArray &reply)
     QJsonObject weather = object.value("weather").toArray().first().toObject();
     m_weatherCode = weather.value("id").toVariant().toInt();
     m_description = weather.value("description").toVariant().toString();
+    m_weatherIcon = weather.value("icon").toVariant().toString();
+
+    QJsonObject wind = object.value("wind").toArray().first().toObject();
+    m_windDeg = wind.value("wind_deg").toVariant().toInt();
+    m_windSpeed = wind.value("wind_speed").toVariant().toInt();
+    m_windGusts = wind.value("wind_gusts").toVariant().toInt();
+
+    QJsonObject clouds = object.value("clouds").toArray().first().toObject();
+    m_clouds = clouds.value("all").toVariant().toInt();
 
     QJsonObject main = object.value("main").toObject();
     m_temperature = int(main.value("temp").toDouble());
     m_minTemperature = int(main.value("temp_min").toDouble());
     m_maxTemperature = int(main.value("temp_max").toDouble());
+    m_humidity = int(main.value("humidity").toDouble());
 }
 
 void CurrentWeather::handleForecast(const QByteArray &reply)
@@ -308,12 +318,42 @@ int CurrentWeather::weatherCode() const
     return m_weatherCode;
 }
 
-int CurrentWeather::minTemperature() const
+QString CurrentWeather::weatherIcon() const
+{
+    return m_weatherIcon;
+}
+
+qreal CurrentWeather::windDeg() const
+{
+    return m_windDeg;
+}
+
+qreal CurrentWeather::windSpeed() const
+{
+    return m_windSpeed;
+}
+
+qreal CurrentWeather::windGusts() const
+{
+    return m_windGusts;
+}
+
+int CurrentWeather::humidity() const
+{
+    return m_humidity;
+}
+
+int CurrentWeather::clouds() const
+{
+    return m_clouds;
+}
+
+qreal CurrentWeather::minTemperature() const
 {
     return m_minTemperature;
 }
 
-int CurrentWeather::maxTemperature() const
+qreal CurrentWeather::maxTemperature() const
 {
     return m_maxTemperature;
 }
