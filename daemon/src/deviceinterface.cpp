@@ -248,30 +248,32 @@ void DeviceInterface::createTables()
     }
 
 
-    if (!m_conn->containsTable("battery_log")) {
-        KDbTableSchema *t_battery = new KDbTableSchema("battery_log");
-        t_battery->setCaption("Battery log");
-        t_battery->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+    if (!m_conn->containsTable("info_log")) {
+        KDbTableSchema *t_info = new KDbTableSchema("info_log");
+        t_info->setCaption("Info log");
+        t_info->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
         f->setCaption("ID");
-        t_battery->addField(f = new KDbField("timestamp", KDbField::Integer, nullptr));
+        t_info->addField(f = new KDbField("timestamp", KDbField::Integer, nullptr));
         f->setCaption("Timestamp");
-        t_battery->addField(f = new KDbField("timestamp_dt", KDbField::DateTime));
+        t_info->addField(f = new KDbField("timestamp_dt", KDbField::DateTime));
         f->setCaption("Timestamp in Date/Time format");
-        t_battery->addField(f = new KDbField("battery_level", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Battery level [%]");
+        t_info->addField(f = new KDbField("key", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Key based on AbstractDevice::Info");
+        t_info->addField(f = new KDbField("value", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Value");
 
-        if (!m_conn->createTable(t_battery)) {
+        if (!m_conn->createTable(t_info)) {
             qDebug() << m_conn->result();
             return;
         }
-        qDebug() << "-- battery_log created --";
-        qDebug() << *t_battery;
+        qDebug() << "-- info_log created --";
+        qDebug() << *t_info;
     }
 
     int batteryLevel = 0;
 
     if (m_conn->querySingleNumber(
-            KDbEscapedString("SELECT battery_level FROM battery_log ORDER BY id DESC"), // automatically adds LIMIT 1 into query
+            KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg(AbstractDevice::INFO_BATTERY), // automatically adds LIMIT 1 into query
             &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
         m_lastBatteryLevel = batteryLevel;
         qDebug() << "Last Battery Level: " << m_lastBatteryLevel;
@@ -463,16 +465,18 @@ void DeviceInterface::log_battery_level(int level) {
     KDbTransactionGuard tg(transaction);
 
     KDbFieldList fields;
-    auto s_battery = m_conn->tableSchema("battery_log");
+    auto s_battery = m_conn->tableSchema("info_log");
 
     fields.addField(s_battery->field("timestamp"));
     fields.addField(s_battery->field("timestamp_dt"));
-    fields.addField(s_battery->field("battery_level"));
+    fields.addField(s_battery->field("key"));
+    fields.addField(s_battery->field("value"));
 
     QList<QVariant> values;
 
     values << m_sampleTime.toMSecsSinceEpoch() / 1000;
     values << m_sampleTime;
+    values << AbstractDevice::INFO_BATTERY;
     values << level;
 
     if (!m_conn->insertRecord(&fields, values)) {
