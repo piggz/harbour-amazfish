@@ -112,9 +112,9 @@ void CurrentWeather::handleCurrent(const QByteArray &reply)
     m_weatherIcon = weather.value("icon").toVariant().toString();
 
     QJsonObject wind = object.value("wind").toArray().first().toObject();
-    m_windDeg = wind.value("wind_deg").toVariant().toInt();
-    m_windSpeed = wind.value("wind_speed").toVariant().toInt();
-    m_windGusts = wind.value("wind_gusts").toVariant().toInt();
+    m_windDeg = wind.value("wind_deg").toVariant().toDouble();
+    m_windSpeed = wind.value("wind_speed").toVariant().toDouble();
+    m_windGusts = wind.value("wind_gusts").toVariant().toDouble();
 
     QJsonObject clouds = object.value("clouds").toArray().first().toObject();
     m_clouds = clouds.value("all").toVariant().toInt();
