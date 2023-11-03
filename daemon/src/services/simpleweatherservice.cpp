@@ -6,8 +6,8 @@
 #include <QDebug>
 #include <math.h>
 
-const char* SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER = "00090000-78fc-48fe-8e23-433b3a1942d0";
-const char* SimpleWeatherService::UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA = "00090001-78fc-48fe-8e23-433b3a1942d0";
+const char* SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER = "00040000-78fc-48fe-8e23-433b3a1942d0";
+const char* SimpleWeatherService::UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA = "00040001-78fc-48fe-8e23-433b3a1942d0";
 
 SimpleWeatherService::SimpleWeatherService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_SIMPLE_WEATHER, path, parent)
 {
@@ -18,20 +18,51 @@ SimpleWeatherService::SimpleWeatherService(const QString &path, QObject *parent)
 void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 {
 
-    qDebug() << "WEATHER"
+    qDebug() << "Weather data"
         << weather->temperature()
         << weather->minTemperature()
         << weather->maxTemperature()
         << (int)iconToEnum(weather->weatherIcon())
+        << weather->clouds()
+        << weather->humidity()
         << weather->windDeg()
         << weather->windSpeed()
         << weather->windGusts()
-        << weather->humidity()
-        << weather->clouds()
         << weather->dateTime()
     ;
 
-//    writeValue(UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA, l.toCBOR());
+    QByteArray weatherBytes;
+
+    weatherBytes += TypeConversion::fromInt8(0); // version information
+
+    weatherBytes += TypeConversion::fromInt16( (int)(weather->temperature()*100) );
+    weatherBytes += TypeConversion::fromInt16( (int)(weather->minTemperature()*100) );
+    weatherBytes += TypeConversion::fromInt16( (int)(weather->maxTemperature()*100) );
+
+    weatherBytes += TypeConversion::fromInt8( (int)iconToEnum(weather->weatherIcon()) );
+
+    weatherBytes += TypeConversion::fromInt8( weather->clouds() );
+    weatherBytes += TypeConversion::fromInt8( weather->humidity() );
+
+    weatherBytes += TypeConversion::fromInt16( (int)(100 * weather->windDeg()));
+    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windSpeed()));
+    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windGusts()));
+
+    QDateTime now = QDateTime::fromTime_t(weather->dateTime());
+    weatherBytes += TypeConversion::fromInt16(now.date().year());
+    weatherBytes += TypeConversion::fromInt8(now.date().month());
+    weatherBytes += TypeConversion::fromInt8(now.date().day());
+    weatherBytes += TypeConversion::fromInt8(now.time().hour());
+    weatherBytes += TypeConversion::fromInt8(now.time().minute());
+    weatherBytes += TypeConversion::fromInt8(now.time().second());
+    weatherBytes += char(0); //day of week
+    weatherBytes += char(0); //fractions256
+    weatherBytes += char(0); //reason
+
+    qDebug() << "Weather bytes" << weatherBytes.toHex();
+
+
+//    writeValue(UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA, weatherBytes);
 
 }
 

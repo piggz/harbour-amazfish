@@ -9,7 +9,7 @@
 #include "infinitimenavservice.h"
 #include "hrmservice.h"
 #include "infinitimemotionservice.h"
-#include "infinitimeweatherservice.h"
+//#include "infinitimeweatherservice.h"
 #include "simpleweatherservice.h"
 #include "adafruitblefsservice.h"
 #include "batteryservice.h"
@@ -152,10 +152,10 @@ void PinetimeJFDevice::parseServices()
                 addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
             } else if (uuid == InfiniTimeMotionService::UUID_SERVICE_MOTION && !service(InfiniTimeMotionService::UUID_SERVICE_MOTION)) {
                 addService(InfiniTimeMotionService::UUID_SERVICE_MOTION, new InfiniTimeMotionService(path, this));
-            } else if (uuid == InfiniTimeWeatherService::UUID_SERVICE_WEATHER && !service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER)) {
-                addService(InfiniTimeWeatherService::UUID_SERVICE_WEATHER, new InfiniTimeWeatherService(path, this));
             } else if (uuid == SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER && !service(SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER)) {
                 addService(SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER, new SimpleWeatherService(path, this));
+//            } else if (uuid == InfiniTimeWeatherService::UUID_SERVICE_WEATHER && !service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER)) {
+//                addService(InfiniTimeWeatherService::UUID_SERVICE_WEATHER, new InfiniTimeWeatherService(path, this));
             } else if (uuid == AdafruitBleFsService::UUID_SERVICE_FS && !service(AdafruitBleFsService::UUID_SERVICE_FS)) {
                 size_t transferMtu = GetMtuForCharacteristic(path, AdafruitBleFsService::UUID_CHARACTERISTIC_FS_TRANSFER);
                 addService(AdafruitBleFsService::UUID_SERVICE_FS, new AdafruitBleFsService(path, this, transferMtu));
@@ -442,7 +442,6 @@ void PinetimeJFDevice::sendWeather(CurrentWeather *weather)
 //        w->sendWeather(weather);
 //    }
 
-qDebug() << Q_FUNC_INFO << "========================";
 
     SimpleWeatherService *sw = qobject_cast<SimpleWeatherService*>(service(SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER));
 
