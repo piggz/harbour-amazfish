@@ -48,16 +48,7 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
     weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windSpeed()));
     weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windGusts()));
 
-    QDateTime now = QDateTime::fromTime_t(weather->dateTime());
-    weatherBytes += TypeConversion::fromInt16(now.date().year());
-    weatherBytes += TypeConversion::fromInt8(now.date().month());
-    weatherBytes += TypeConversion::fromInt8(now.date().day());
-    weatherBytes += TypeConversion::fromInt8(now.time().hour());
-    weatherBytes += TypeConversion::fromInt8(now.time().minute());
-    weatherBytes += TypeConversion::fromInt8(now.time().second());
-    weatherBytes += char(0); //day of week
-    weatherBytes += char(0); //fractions256
-    weatherBytes += char(0); //reason
+    weatherBytes += TypeConversion::fromInt64(weather->dateTime());
 
     qDebug() << "Weather bytes" << weatherBytes.toHex();
 
