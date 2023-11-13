@@ -55,6 +55,9 @@ public:
         int weatherCode() const;
         void setWeatherCode(int weatherCode);
 
+        QString weatherIcon() const;
+        void setWeatherIcon(QString weatherIcon);
+
         void setDescription(const QString &description);
         QString description() const;
 
@@ -100,6 +103,7 @@ public:
         uint8_t m_snowMMDay = 0;
         uint8_t m_humidity = 0;
         uint8_t m_pressure = 0;
+        QString m_weatherIcon;
        
     };
 

@@ -162,6 +162,8 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
 
         QJsonObject weather = obj.value("weather").toArray().first().toObject();
 
+        m_weatherIcon = weather.value("icon").toVariant().toString();
+
         int code = weather.value("id").toVariant().toInt();
         QString desc = weather.value("description").toVariant().toString();
 
@@ -207,6 +209,7 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
             f.setDateTime(dt);
             f.setDescription(desc);
             f.setWeatherCode(code);
+            f.setWeatherIcon(m_weatherIcon);
             f.setPressure(int(main.value("pressure").toDouble()));
             f.setHumidity(int(main.value("humidity").toDouble()));
         }
@@ -382,6 +385,17 @@ int CurrentWeather::Forecast::maxTemperature() const
 {
     return m_maxTemperature;
 }
+
+void CurrentWeather::Forecast::setWeatherIcon(QString _weatherIcon)
+{
+    m_weatherIcon = _weatherIcon;
+}
+
+QString CurrentWeather::Forecast::weatherIcon() const
+{
+    return m_weatherIcon;
+}
+
 
 void CurrentWeather::Forecast::setMaxTemperature(int maxTemperature)
 {
