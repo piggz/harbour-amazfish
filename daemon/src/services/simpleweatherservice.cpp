@@ -18,63 +18,107 @@ SimpleWeatherService::SimpleWeatherService(const QString &path, QObject *parent)
 void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 {
 
-    qDebug() << "Weather data"
-        << weather->temperature()
-        << weather->minTemperature()
-        << weather->maxTemperature()
-        << (int)iconToEnum(weather->weatherIcon())
-        << weather->clouds()
-        << weather->humidity()
-        << weather->windDeg()
-        << weather->windSpeed()
-        << weather->windGusts()
+    qDebug() << "Current weather data"
+        << QDateTime::fromSecsSinceEpoch(weather->dateTime())
         << weather->dateTime()
+        << weather->temperature() - 273.15
+        << weather->minTemperature() - 273.15
+        << weather->maxTemperature() - 273.15
+        << weather->city()->name()
+        << weather->weatherIcon() 
+        << QMetaEnum::fromType<SimpleWeatherService::WeatherIcons>().valueToKey(
+                (int)iconToEnum(weather->weatherIcon())
+           )
+//        << weather->clouds()
+//        << weather->humidity()
+//        << weather->windDeg()
+//        << weather->windSpeed()
+//        << weather->windGusts()
     ;
+
+    QByteArray cityNameBytes(32, 0x00);
+    QString cityNameStr = weather->city()->name().left(32).toUtf8();
+    memcpy(cityNameBytes.data(), cityNameStr.constData(), cityNameStr.length());
 
     QByteArray weatherBytes;
 
+    weatherBytes += TypeConversion::fromInt8(0); // message type
     weatherBytes += TypeConversion::fromInt8(0); // version information
-
-    weatherBytes += TypeConversion::fromInt16( (int)(weather->temperature()*100) );
-    weatherBytes += TypeConversion::fromInt16( (int)(weather->minTemperature()*100) );
-    weatherBytes += TypeConversion::fromInt16( (int)(weather->maxTemperature()*100) );
-
+    weatherBytes += TypeConversion::fromInt64(weather->dateTime());
+    weatherBytes += TypeConversion::fromInt8( weather->temperature() - 273.15 );
+    weatherBytes += TypeConversion::fromInt8( weather->minTemperature() - 237.15 );
+    weatherBytes += TypeConversion::fromInt8( weather->maxTemperature() - 273.15 );
+    weatherBytes += cityNameBytes;
     weatherBytes += TypeConversion::fromInt8( (int)iconToEnum(weather->weatherIcon()) );
 
-    weatherBytes += TypeConversion::fromInt8( weather->clouds() );
-    weatherBytes += TypeConversion::fromInt8( weather->humidity() );
+//    weatherBytes += TypeConversion::fromInt8( weather->clouds() );
+//    weatherBytes += TypeConversion::fromInt8( weather->humidity() );
 
-    weatherBytes += TypeConversion::fromInt16( (int)(100 * weather->windDeg()));
-    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windSpeed()));
-    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windGusts()));
-
-    weatherBytes += TypeConversion::fromInt64(weather->dateTime());
+//    weatherBytes += TypeConversion::fromInt16( (int)(100 * weather->windDeg()));
+//    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windSpeed()));
+//    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windGusts()));
 
     qDebug() << "Weather bytes" << weatherBytes.toHex();
 
-
 //    writeValue(UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA, weatherBytes);
+
+
+    int fcDays = std::min(weather->forecastCount(), 5);
+
+    QByteArray forecastBytes;
+    weatherBytes += TypeConversion::fromInt8(1); // message type
+    weatherBytes += TypeConversion::fromInt8(0); // version information
+    forecastBytes += TypeConversion::fromInt64(weather->dateTime());
+    forecastBytes += cityNameBytes;
+    weatherBytes += TypeConversion::fromInt8(fcDays);
+
+
+
+    for (int f = 0; (f < fcDays); f++) {
+        CurrentWeather::Forecast fc = weather->forecast(f);
+//        qDebug() << "Forecast:" << f << fc.dateTime()<< fc.weatherCode() <<  (fc.maxTemperature() - 273) <<  (fc.minTemperature() - 273) << fc.humidity() << fc.pressure() << fc.windMaxSpeed() << fc.clouds();
+
+
+    qDebug() << "Forecast Day" << f
+        << QDateTime::fromSecsSinceEpoch(fc.dateTime())
+        << fc.dateTime()
+        << fc.minTemperature() - 273.15
+        << fc.maxTemperature() - 273.15
+        << fc.weatherIcon()
+        << QMetaEnum::fromType<SimpleWeatherService::WeatherIcons>().valueToKey(
+                (int)iconToEnum(fc.weatherIcon())
+           )
+    ;
+
+        forecastBytes += TypeConversion::fromInt8( fc.minTemperature() - 237.15 );
+        forecastBytes += TypeConversion::fromInt8( fc.maxTemperature() - 273.15 );
+
+    }
+
+    qDebug() << "Forecast bytes" << weatherBytes.toHex();
+
+
 
 }
 
 SimpleWeatherService::WeatherIcons SimpleWeatherService::iconToEnum(const QString& iconName) {
-    if (iconName == "01d.png") return WeatherIcons::ClearSkyDay;
-    if (iconName == "01n.png") return WeatherIcons::ClearSkyNight;
-    if (iconName == "02d.png") return WeatherIcons::FewCloudsDay;
-    if (iconName == "02n.png") return WeatherIcons::FewCloudsNight;
-    if (iconName == "03d.png") return WeatherIcons::ScatteredCloudsDay;
-    if (iconName == "03n.png") return WeatherIcons::ScatteredCloudsNight;
-    if (iconName == "04d.png") return WeatherIcons::BrokenCloudsDay;
-    if (iconName == "04n.png") return WeatherIcons::BrokenCloudsNight;
-    if (iconName == "09d.png") return WeatherIcons::ShowerRainDay;
-    if (iconName == "09n.png") return WeatherIcons::ShowerRainNight;
-    if (iconName == "10d.png") return WeatherIcons::RainDay;
-    if (iconName == "10n.png") return WeatherIcons::RainNight;
-    if (iconName == "11d.png") return WeatherIcons::ThunderstormDay;
-    if (iconName == "11n.png") return WeatherIcons::ThunderstormNight;
-    if (iconName == "13d.png") return WeatherIcons::SnowDay;
-    if (iconName == "13n.png") return WeatherIcons::SnowNight;
-    if (iconName == "50d.png") return WeatherIcons::MistDay;
-    if (iconName == "50n.png") return WeatherIcons::MistNight;
+    if (iconName == "01d") return WeatherIcons::ClearSkyDay;
+    if (iconName == "01n") return WeatherIcons::ClearSkyNight;
+    if (iconName == "02d") return WeatherIcons::FewCloudsDay;
+    if (iconName == "02n") return WeatherIcons::FewCloudsNight;
+    if (iconName == "03d") return WeatherIcons::ScatteredCloudsDay;
+    if (iconName == "03n") return WeatherIcons::ScatteredCloudsNight;
+    if (iconName == "04d") return WeatherIcons::BrokenCloudsDay;
+    if (iconName == "04n") return WeatherIcons::BrokenCloudsNight;
+    if (iconName == "09d") return WeatherIcons::ShowerRainDay;
+    if (iconName == "09n") return WeatherIcons::ShowerRainNight;
+    if (iconName == "10d") return WeatherIcons::RainDay;
+    if (iconName == "10n") return WeatherIcons::RainNight;
+    if (iconName == "11d") return WeatherIcons::ThunderstormDay;
+    if (iconName == "11n") return WeatherIcons::ThunderstormNight;
+    if (iconName == "13d") return WeatherIcons::SnowDay;
+    if (iconName == "13n") return WeatherIcons::SnowNight;
+    if (iconName == "50d") return WeatherIcons::MistDay;
+    if (iconName == "50n") return WeatherIcons::MistNight;
     return WeatherIcons::Unknown;
 }

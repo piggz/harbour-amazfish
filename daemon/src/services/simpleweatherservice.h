@@ -19,25 +19,27 @@ public:
 
     enum class WeatherIcons {
         ClearSkyDay,
-        ClearSkyNight,
         FewCloudsDay,
-        FewCloudsNight,
         ScatteredCloudsDay,
-        ScatteredCloudsNight,
         BrokenCloudsDay,
-        BrokenCloudsNight,
         ShowerRainDay,
-        ShowerRainNight,
         RainDay,
-        RainNight,
         ThunderstormDay,
-        ThunderstormNight,
         SnowDay,
-        SnowNight,
         MistDay,
+        ClearSkyNight,
+        FewCloudsNight,
+        ScatteredCloudsNight,
+        BrokenCloudsNight,
+        ShowerRainNight,
+        RainNight,
+        ThunderstormNight,
+        SnowNight,
         MistNight,
         Unknown // for any icon not listed above
     };
+
+    Q_ENUM(WeatherIcons)
 
     WeatherIcons iconToEnum(const QString& iconName);
 
