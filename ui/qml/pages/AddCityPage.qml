@@ -78,29 +78,6 @@ PagePL {
                 height: temperatureLabel.height
             }
 
-            LabelPL {
-                id: lblActivitySync
-                width: parent.width * 0.66
-                text: qsTr("A:" ) + activityDate.toISOString()
-            }
-            ButtonPL {
-                id: btnMinusActivitySync
-                width: parent.width * 0.16
-                text: "-"
-                onClicked: {
-                    AmazfishConfig.lastActivitySync -= 3600000
-                    activityDate = new Date(AmazfishConfig.lastActivitySync);
-                }
-            }
-            ButtonPL {
-                id: btnAddActivitySync
-                width: parent.width * 0.16
-                text: "+"
-                onClicked: {
-                    AmazfishConfig.lastActivitySync += 3600000
-                    activityDate = new Date(AmazfishConfig.lastActivitySync);
-                }
-            }
         }
 
         SearchFieldPL {
