@@ -120,10 +120,10 @@ void CurrentWeather::handleCurrent(const QByteArray &reply)
     m_clouds = clouds.value("all").toVariant().toInt();
 
     QJsonObject main = object.value("main").toObject();
-    m_temperature = int(main.value("temp").toDouble());
-    m_minTemperature = int(main.value("temp_min").toDouble());
-    m_maxTemperature = int(main.value("temp_max").toDouble());
-    m_humidity = int(main.value("humidity").toDouble());
+    m_temperature = main.value("temp").toDouble();
+    m_minTemperature = main.value("temp_min").toDouble();
+    m_maxTemperature = main.value("temp_max").toDouble();
+    m_humidity = main.value("humidity").toDouble();
 }
 
 void CurrentWeather::handleForecast(const QByteArray &reply)
@@ -168,23 +168,23 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
         QString desc = weather.value("description").toVariant().toString();
 
         QJsonObject main = obj.value("main").toObject();
-        int min_temp = int(main.value("temp_min").toDouble());
-        int max_temp = int(main.value("temp_max").toDouble());
+        int min_temp = main.value("temp_min").toDouble();
+        int max_temp = main.value("temp_max").toDouble();
         int wind_speed = 0;
         f.setWindMaxSpeed(0);
         f.setWindMinSpeed(255);
         if (obj.contains("rain")) {
             QJsonObject rain = obj.value("rain").toObject();
-            total_rain += int(rain.value("3h").toDouble());
+            total_rain += rain.value("3h").toDouble();
         }
         if (obj.contains("snow")) {
             QJsonObject snow = obj.value("snow").toObject();
-            total_snow += int(snow.value("3h").toDouble());
+            total_snow += snow.value("3h").toDouble();
         }
 
         if (obj.contains("wind")) {
             QJsonObject wind = obj.value("wind").toObject();
-            wind_speed += int(wind.value("speed").toDouble());
+            wind_speed += wind.value("speed").toDouble();
         }
 
         qDebug() << "Forecast on " << dt << d << t << min_temp << max_temp << desc << code << "Hour:" << t.hour();
@@ -210,8 +210,8 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
             f.setDescription(desc);
             f.setWeatherCode(code);
             f.setWeatherIcon(m_weatherIcon);
-            f.setPressure(int(main.value("pressure").toDouble()));
-            f.setHumidity(int(main.value("humidity").toDouble()));
+            f.setPressure(main.value("pressure").toDouble());
+            f.setHumidity(main.value("humidity").toDouble());
         }
         if (max_temp > f.maxTemperature()){
             f.setMaxTemperature(max_temp);
