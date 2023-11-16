@@ -66,11 +66,11 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
     int fcDays = std::min(weather->forecastCount(), 5);
 
     QByteArray forecastBytes;
-    weatherBytes += TypeConversion::fromInt8(1); // message type
-    weatherBytes += TypeConversion::fromInt8(0); // version information
+    forecastBytes += TypeConversion::fromInt8(1); // message type
+    forecastBytes += TypeConversion::fromInt8(0); // version information
     forecastBytes += TypeConversion::fromInt64(weather->dateTime());
     forecastBytes += cityNameBytes;
-    weatherBytes += TypeConversion::fromInt8(fcDays);
+    forecastBytes += TypeConversion::fromInt8(fcDays);
 
 
 
@@ -92,10 +92,11 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 
         forecastBytes += TypeConversion::fromInt8( fc.minTemperature() - 237.15 );
         forecastBytes += TypeConversion::fromInt8( fc.maxTemperature() - 273.15 );
+        forecastBytes += TypeConversion::fromInt8( (int)iconToEnum(fc.weatherIcon()) );
 
     }
 
-    qDebug() << "Forecast bytes" << weatherBytes.toHex();
+    qDebug() << "Forecast bytes" << forecastBytes.toHex();
 
 
 

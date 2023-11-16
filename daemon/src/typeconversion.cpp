@@ -27,8 +27,7 @@ QByteArray fromInt32(int val)
 
 QByteArray fromInt64(long long int val)
 {
-    qDebug() << "Converting int64 to char" << val;
-    return QByteArray(1, val & 0xff)
+    QByteArray ret = QByteArray(1, val & 0xff)
      + QByteArray(1, ((val >> 8) & 0xff))
      + QByteArray(1, ((val >> 16) & 0xff))
      + QByteArray(1, ((val >> 24) & 0xff))
@@ -36,6 +35,10 @@ QByteArray fromInt64(long long int val)
      + QByteArray(1, ((val >> 40) & 0xff))
      + QByteArray(1, ((val >> 48) & 0xff))
      + QByteArray(1, ((val >> 56) & 0xff));
+
+    qDebug() << "Converting int64 to char" << val << " " << ret.toHex();
+
+    return ret;
 }
 
 
