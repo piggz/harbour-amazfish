@@ -106,7 +106,7 @@ PagePL {
         SliderPL {
             id: sldFitnessGoal
             width: parent.width
-            minimumValue: 5000
+            minimumValue: 1000
             maximumValue: 30000
             stepSize: 100
             label: qsTr("Goal (steps): ") + value

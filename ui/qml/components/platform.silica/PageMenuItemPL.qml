@@ -21,4 +21,5 @@ import Sailfish.Silica 1.0
 
 MenuItem {
     property string iconName  // compatibility with other platforms
+    property string iconSource  // compatibility with other platforms
 }
