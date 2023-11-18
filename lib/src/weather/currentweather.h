@@ -46,11 +46,11 @@ public:
     class Forecast {
 
     public:
-        int minTemperature() const;
-        void setMinTemperature(int minTemperature);
+        qreal minTemperature() const;
+        void setMinTemperature(qreal minTemperature);
 
-        int maxTemperature() const;
-        void setMaxTemperature(int maxTemperature);
+        qreal maxTemperature() const;
+        void setMaxTemperature(qreal maxTemperature);
 
         int weatherCode() const;
         void setWeatherCode(int weatherCode);
@@ -89,9 +89,9 @@ public:
         void setWindDirection(uint8_t newWindDirection);
 
     private:
-        int m_temperature = 0;
-        int m_minTemperature = 0;
-        int m_maxTemperature = 0;
+        qreal m_temperature = 0;
+        qreal m_minTemperature = 0;
+        qreal m_maxTemperature = 0;
         int m_weatherCode = 0;
         QString m_description;
         qlonglong m_dateTime = 0;

@@ -371,17 +371,17 @@ QString CurrentWeather::description() const
     return m_description;
 }
 
-int CurrentWeather::Forecast::minTemperature() const
+qreal CurrentWeather::Forecast::minTemperature() const
 {
     return m_minTemperature;
 }
 
-void CurrentWeather::Forecast::setMinTemperature(int minTemperature)
+void CurrentWeather::Forecast::setMinTemperature(qreal minTemperature)
 {
     m_minTemperature = minTemperature;
 }
 
-int CurrentWeather::Forecast::maxTemperature() const
+qreal CurrentWeather::Forecast::maxTemperature() const
 {
     return m_maxTemperature;
 }
@@ -397,7 +397,7 @@ QString CurrentWeather::Forecast::weatherIcon() const
 }
 
 
-void CurrentWeather::Forecast::setMaxTemperature(int maxTemperature)
+void CurrentWeather::Forecast::setMaxTemperature(qreal maxTemperature)
 {
     m_maxTemperature = maxTemperature;
 }
