@@ -36,9 +36,10 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 //        << weather->windGusts()
     ;
 
-    QByteArray cityNameBytes(32, 0x00);
-    QString cityNameStr = weather->city()->name().left(32).toUtf8();
-    memcpy(cityNameBytes.data(), cityNameStr.constData(), cityNameStr.length());
+    QByteArray cityNameBytes = weather->city()->name().toLocal8Bit().left(32);
+    if(cityNameBytes.size() < 32) {
+        cityNameBytes.append(32-cityNameBytes.size(), 0x00);
+    }
 
     QByteArray weatherBytes;
 
@@ -46,7 +47,7 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
     weatherBytes += TypeConversion::fromInt8(0); // version information
     weatherBytes += TypeConversion::fromInt64(weather->dateTime());
     weatherBytes += TypeConversion::fromInt8( weather->temperature() - 273.15 );
-    weatherBytes += TypeConversion::fromInt8( weather->minTemperature() - 237.15 );
+    weatherBytes += TypeConversion::fromInt8( weather->minTemperature() - 273.15 );
     weatherBytes += TypeConversion::fromInt8( weather->maxTemperature() - 273.15 );
     weatherBytes += cityNameBytes;
     weatherBytes += TypeConversion::fromInt8( (int)iconToEnum(weather->weatherIcon()) );
@@ -60,7 +61,7 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 
     qDebug() << "Weather bytes" << weatherBytes.toHex();
 
-//    writeValue(UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA, weatherBytes);
+    writeValue(UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA, weatherBytes);
 
 
     int fcDays = std::min(weather->forecastCount(), 5);
@@ -90,7 +91,7 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
            )
     ;
 
-        forecastBytes += TypeConversion::fromInt8( fc.minTemperature() - 237.15 );
+        forecastBytes += TypeConversion::fromInt8( fc.minTemperature() - 273.15 );
         forecastBytes += TypeConversion::fromInt8( fc.maxTemperature() - 273.15 );
         forecastBytes += TypeConversion::fromInt8( (int)iconToEnum(fc.weatherIcon()) );
 
@@ -98,7 +99,7 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 
     qDebug() << "Forecast bytes" << forecastBytes.toHex();
 
-
+    writeValue(UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA, forecastBytes);
 
 }
 
