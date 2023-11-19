@@ -23,6 +23,10 @@ PageListPL {
 
     model: ListModel {
         ListElement {
+            deviceType: "AsteroidOS"
+            icon: "../pics/devices/asteroidos.png"
+        }
+        ListElement {
             deviceType: "Amazfit Bip Watch"
             icon: "../pics/devices/amazfit-bip.png"
         }
