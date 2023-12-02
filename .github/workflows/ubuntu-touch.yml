@@ -1,0 +1,32 @@
+name: Ubuntu Touch build
+on: [push,pull_request]
+jobs:
+  ubuntu-touch:
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [armhf, arm64, amd64]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        submodules: recursive
+    - name: avoid git submodule update step in clickable.yaml
+      run: sed 's/^prebuild/#prebuild/' -i clickable.yaml
+    - name: build package
+      uses: tuxecure/clickable@v1
+      with:
+        image: clickable/ci-20.04-${{ matrix.arch }}
+        run: clickable build --all --skip-review
+    - name: Upload .click package
+      uses: actions/upload-artifact@v4
+      with:
+        name: click-${{ matrix.arch }}
+        path: build/*/app/*.click
+#    - name: Publish to Open Store
+#      if: startsWith( github.ref, 'refs/tags/')
+#      env:
+#        OPENSTORE_KEY: ${{ secrets.OPENSTORE_KEY }}
+#      run: clickable publish "* $(git log -1 --pretty=%B | head -1)" --apikey ${OPENSTORE_KEY}
