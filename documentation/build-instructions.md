@@ -13,7 +13,7 @@ To get into the build machine (if started by Sailfish IDE)
 Use the `sb2-config` command to make your ARM target the default
 
 Add this repo which provides KF5 packages
-`sb2 -R zypper ar http://repo.merproject.org/obs/home:/piggz:/kf5/sailfishos_3.4.0.24/ piggz`
+`sb2 -R zypper ar http://repo.merproject.org/obs/home:/piggz:/kf5/sailfish_latest_aarch64/ piggz`
 and
 `sb2 -R zypper refresh`
 
@@ -148,8 +148,7 @@ clickable desktop
 To build the application for ARM architecture and install it on your device, follow these steps:
 
 ```
-clickable build --libs --arch detect
-clickable build --arch detect
+clickable build --libs --app --arch detect --skip-review
 clickable install
 ```
 
