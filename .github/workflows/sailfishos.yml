@@ -1,0 +1,38 @@
+name: SailfishOS Build
+
+on: [push, pull_request]
+
+env:
+  OS_VERSION: 4.5.0.16
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build App
+    strategy:
+      matrix:
+        arch: ['armv7hl', 'aarch64', 'i486']
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Prepare
+      run: docker pull coderus/sailfishos-platform-sdk:$OS_VERSION && mkdir output
+
+    - name: Build ${{ matrix.arch }}
+      run: docker run --rm --privileged -v $PWD:/share coderus/sailfishos-platform-sdk:$OS_VERSION /bin/bash -c "
+            mkdir -p build ;
+            cd build ;
+            cp -r /share/* . ;
+            sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive ar --no-gpgcheck http://repo.merproject.org/obs/home:/piggz:/kf5/sailfish_latest_${{ matrix.arch }}/ piggz ;
+            sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive refresh ;
+            sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive in -y mpris-qt5-devel libkf5archive-devel kcoreaddons-devel kdb-devel libKDb3-3 mkcal-qt5-devel libicu-devel;
+            mb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} build ;
+            sudo cp -r RPMS/*.rpm /share/output"
+      
+    - name: Upload RPM (${{ matrix.arch }})
+      uses: actions/upload-artifact@v3
+      with:
+        name: rpm-${{ matrix.arch }}
+        path: output
