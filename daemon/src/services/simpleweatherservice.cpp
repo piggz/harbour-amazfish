@@ -19,7 +19,11 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 {
 
     qDebug() << "Current weather data"
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
         << QDateTime::fromSecsSinceEpoch(weather->dateTime())
+#else
+        << QDateTime::fromTime_t(weather->dateTime())
+#endif
         << weather->dateTime()
         << weather->temperature() - 273.15
         << weather->minTemperature() - 273.15
@@ -80,7 +84,11 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 
 
     qDebug() << "Forecast Day" << f
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
         << QDateTime::fromSecsSinceEpoch(fc.dateTime())
+#else
+        << QDateTime::fromTime_t(fc.dateTime())
+#endif
         << fc.dateTime()
         << fc.minTemperature() - 273.15
         << fc.maxTemperature() - 273.15
