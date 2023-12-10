@@ -18,24 +18,15 @@ public:
     void sendWeather(CurrentWeather *weather);
 
     enum class WeatherIcons {
-        ClearSkyDay,
-        FewCloudsDay,
-        ScatteredCloudsDay,
-        BrokenCloudsDay,
-        ShowerRainDay,
-        RainDay,
-        ThunderstormDay,
-        SnowDay,
-        MistDay,
-        ClearSkyNight,
-        FewCloudsNight,
-        ScatteredCloudsNight,
-        BrokenCloudsNight,
-        ShowerRainNight,
-        RainNight,
-        ThunderstormNight,
-        SnowNight,
-        MistNight,
+        ClearSky,
+        FewClouds,
+        ScatteredClouds,
+        BrokenClouds,
+        ShowerRain,
+        Rain,
+        Thunderstorm,
+        Snow,
+        Mist,
         Unknown // for any icon not listed above
     };
 

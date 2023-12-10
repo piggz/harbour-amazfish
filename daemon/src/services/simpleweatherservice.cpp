@@ -103,23 +103,23 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 }
 
 SimpleWeatherService::WeatherIcons SimpleWeatherService::iconToEnum(const QString& iconName) {
-    if (iconName == "01d") return WeatherIcons::ClearSkyDay;
-    if (iconName == "01n") return WeatherIcons::ClearSkyDay;
-    if (iconName == "02d") return WeatherIcons::FewCloudsDay;
-    if (iconName == "02n") return WeatherIcons::FewCloudsDay;
-    if (iconName == "03d") return WeatherIcons::ScatteredCloudsDay;
-    if (iconName == "03n") return WeatherIcons::ScatteredCloudsDay;
-    if (iconName == "04d") return WeatherIcons::BrokenCloudsDay;
-    if (iconName == "04n") return WeatherIcons::BrokenCloudsDay;
-    if (iconName == "09d") return WeatherIcons::ShowerRainDay;
-    if (iconName == "09n") return WeatherIcons::ShowerRainDay;
-    if (iconName == "10d") return WeatherIcons::RainDay;
-    if (iconName == "10n") return WeatherIcons::RainDay;
-    if (iconName == "11d") return WeatherIcons::ThunderstormDay;
-    if (iconName == "11n") return WeatherIcons::ThunderstormDay;
-    if (iconName == "13d") return WeatherIcons::SnowDay;
-    if (iconName == "13n") return WeatherIcons::SnowDay;
-    if (iconName == "50d") return WeatherIcons::MistDay;
-    if (iconName == "50n") return WeatherIcons::MistDay;
+    if (iconName == "01d") return WeatherIcons::ClearSky;
+    if (iconName == "01n") return WeatherIcons::ClearSky;
+    if (iconName == "02d") return WeatherIcons::FewClouds;
+    if (iconName == "02n") return WeatherIcons::FewClouds;
+    if (iconName == "03d") return WeatherIcons::ScatteredClouds;
+    if (iconName == "03n") return WeatherIcons::ScatteredClouds;
+    if (iconName == "04d") return WeatherIcons::BrokenClouds;
+    if (iconName == "04n") return WeatherIcons::BrokenClouds;
+    if (iconName == "09d") return WeatherIcons::ShowerRain;
+    if (iconName == "09n") return WeatherIcons::ShowerRain;
+    if (iconName == "10d") return WeatherIcons::Rain;
+    if (iconName == "10n") return WeatherIcons::Rain;
+    if (iconName == "11d") return WeatherIcons::Thunderstorm;
+    if (iconName == "11n") return WeatherIcons::Thunderstorm;
+    if (iconName == "13d") return WeatherIcons::Snow;
+    if (iconName == "13n") return WeatherIcons::Snow;
+    if (iconName == "50d") return WeatherIcons::Mist;
+    if (iconName == "50n") return WeatherIcons::Mist;
     return WeatherIcons::Unknown;
 }
