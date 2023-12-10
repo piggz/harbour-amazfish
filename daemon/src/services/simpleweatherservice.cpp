@@ -42,7 +42,13 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 
     QByteArray cityNameBytes = weather->city()->name().toLocal8Bit().left(32);
     if(cityNameBytes.size() < 32) {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
         cityNameBytes.append(32-cityNameBytes.size(), 0x00);
+#else
+        for (int i = 0; i < (32 - cityNameBytes.size()); i++) {
+            cityNameBytes.append( '\0' );
+        }
+#endif
     }
 
     QByteArray weatherBytes;
