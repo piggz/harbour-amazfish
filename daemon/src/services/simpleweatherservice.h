@@ -18,16 +18,16 @@ public:
     void sendWeather(CurrentWeather *weather);
 
     enum class WeatherIcons {
-        ClearSky,
-        FewClouds,
-        ScatteredClouds,
-        BrokenClouds,
-        ShowerRain,
-        Rain,
-        Thunderstorm,
-        Snow,
-        Mist,
-        Unknown // for any icon not listed above
+        ClearSky = 0,
+        FewClouds = 1,
+        ScatteredClouds = 2,
+        BrokenClouds = 3,
+        ShowerRain = 4,
+        Rain = 5,
+        Thunderstorm = 6,
+        Snow = 7,
+        Mist = 8,
+        Unknown = 255 // for any icon not listed above
     };
 
     Q_ENUM(WeatherIcons)

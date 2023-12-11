@@ -33,6 +33,7 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
         << QMetaEnum::fromType<SimpleWeatherService::WeatherIcons>().valueToKey(
                 (int)iconToEnum(weather->weatherIcon())
            )
+        << (int)iconToEnum(weather->weatherIcon())
 //        << weather->clouds()
 //        << weather->humidity()
 //        << weather->windDeg()
@@ -56,9 +57,9 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
     weatherBytes += TypeConversion::fromInt8(0); // message type
     weatherBytes += TypeConversion::fromInt8(0); // version information
     weatherBytes += TypeConversion::fromInt64(weather->dateTime());
-    weatherBytes += TypeConversion::fromInt8( weather->temperature() - 273.15 );
-    weatherBytes += TypeConversion::fromInt8( weather->minTemperature() - 273.15 );
-    weatherBytes += TypeConversion::fromInt8( weather->maxTemperature() - 273.15 );
+    weatherBytes += TypeConversion::fromInt8( round(weather->temperature() - 273.15) );
+    weatherBytes += TypeConversion::fromInt8( round(weather->minTemperature() - 273.15) );
+    weatherBytes += TypeConversion::fromInt8( round(weather->maxTemperature() - 273.15) );
     weatherBytes += cityNameBytes;
     weatherBytes += TypeConversion::fromInt8( (int)iconToEnum(weather->weatherIcon()) );
 
@@ -102,10 +103,11 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
         << QMetaEnum::fromType<SimpleWeatherService::WeatherIcons>().valueToKey(
                 (int)iconToEnum(fc.weatherIcon())
            )
+        << (int)iconToEnum(fc.weatherIcon())
     ;
 
-        forecastBytes += TypeConversion::fromInt8( fc.minTemperature() - 273.15 );
-        forecastBytes += TypeConversion::fromInt8( fc.maxTemperature() - 273.15 );
+        forecastBytes += TypeConversion::fromInt8( round(fc.minTemperature() - 273.15) );
+        forecastBytes += TypeConversion::fromInt8( round(fc.maxTemperature() - 273.15) );
         forecastBytes += TypeConversion::fromInt8( (int)iconToEnum(fc.weatherIcon()) );
 
     }
