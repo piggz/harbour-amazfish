@@ -162,7 +162,7 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
 
         QJsonObject weather = obj.value("weather").toArray().first().toObject();
 
-        m_weatherIcon = weather.value("icon").toVariant().toString();
+        QString weatherIcon = weather.value("icon").toVariant().toString();
 
         int code = weather.value("id").toVariant().toInt();
         QString desc = weather.value("description").toVariant().toString();
@@ -209,7 +209,7 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
             f.setDateTime(dt);
             f.setDescription(desc);
             f.setWeatherCode(code);
-            f.setWeatherIcon(m_weatherIcon);
+            f.setWeatherIcon(weatherIcon);
             f.setPressure(main.value("pressure").toDouble());
             f.setHumidity(main.value("humidity").toDouble());
         }
