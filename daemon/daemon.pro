@@ -136,6 +136,7 @@ SOURCES += \
     src/typeconversion.cpp \
     src/bipbatteryinfo.cpp \
     src/devicefactory.cpp \
+    src/realtimeactivitysample.cpp \
     src/services/mibandservice.cpp \
     src/services/miband2service.cpp \
     src/services/alertnotificationservice.cpp \
@@ -216,6 +217,7 @@ HEADERS += \
     src/activitysummary.h \ 
     src/activitysample.h \
     src/devicefactory.h \
+    src/realtimeactivitysample.h \
     src/services/mibandservice.h \
     src/services/miband2service.h \
     src/services/alertnotificationservice.h \

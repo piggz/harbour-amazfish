@@ -397,6 +397,7 @@ void DeviceInterface::onConnectionStateChanged()
     qDebug() << "DeviceInterface::onConnectionStateChanged" << connectionState();
 
     if (connectionState() == "authenticated") {
+        m_device->setDatabase(dbConnection());
         if (miBandService()) {
             miBandService()->setDatabase(dbConnection());
             m_dbusHRM->setMiBandService(miBandService());
