@@ -97,6 +97,7 @@ public:
         /* Instagram */
         {"instagram", HuamiIcon::INSTAGRAM},
         /* Telegram clients */
+        {"teleports.ubports_teleports", HuamiIcon::TELEGRAM},
         {"depecher", HuamiIcon::TELEGRAM},
         {"fernschreiber", HuamiIcon::TELEGRAM},
         {"sailorgram", HuamiIcon::TELEGRAM},

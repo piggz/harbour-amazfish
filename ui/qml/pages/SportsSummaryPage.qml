@@ -154,4 +154,9 @@ PageListPL {
             SportsModel.update();
         }
     }
+
+    onPageStatusActive: {
+        pushAttached(Qt.resolvedUrl("BatteryPage.qml"))
+    }
+
 }
