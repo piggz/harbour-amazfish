@@ -22,6 +22,7 @@ dependencies_target:
 - libkf5archive-dev
 - libkf5coreaddons-dev
 - libdbus-1-dev
+- libtelepathy-qt5-dev
 
 libraries:
   qtmpris:

@@ -15,6 +15,7 @@
 #include <QProcess>
 
 #include <KDb3/KDbDriverManager>
+#include <KDb3/KDbTransactionGuard>
 
 static const char *SERVICE = SERVICE_NAME_AMAZFISH;
 static const char *PATH = "/application";
@@ -47,7 +48,7 @@ DeviceInterface::DeviceInterface()
     connect(&m_notificationMonitor, &watchfish::NotificationMonitor::notification, this, &DeviceInterface::onNotification);
 
     // Calls
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     connect(&m_voiceCallController, &watchfish::VoiceCallController::ringingChanged, this, &DeviceInterface::onRingingChanged);
 #endif
     //Weather
@@ -178,7 +179,7 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
 
 void DeviceInterface::onRingingChanged()
 {
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     qDebug() << Q_FUNC_INFO << m_voiceCallController.ringing();
 
     if (!m_device) {
@@ -246,6 +247,39 @@ void DeviceInterface::createTables()
         qDebug() << *t_activity;
     }
 
+
+    if (!m_conn->containsTable("info_log")) {
+        KDbTableSchema *t_info = new KDbTableSchema("info_log");
+        t_info->setCaption("Info log");
+        t_info->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+        t_info->addField(f = new KDbField("timestamp", KDbField::Integer, nullptr));
+        f->setCaption("Timestamp");
+        t_info->addField(f = new KDbField("timestamp_dt", KDbField::DateTime));
+        f->setCaption("Timestamp in Date/Time format");
+        t_info->addField(f = new KDbField("key", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Key based on AbstractDevice::Info");
+        t_info->addField(f = new KDbField("value", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Value");
+
+        if (!m_conn->createTable(t_info)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- info_log created --";
+        qDebug() << *t_info;
+    }
+
+    int batteryLevel = 0;
+
+    if (m_conn->querySingleNumber(
+            KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg(AbstractDevice::INFO_BATTERY), // automatically adds LIMIT 1 into query
+            &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
+        m_lastBatteryLevel = batteryLevel;
+        qDebug() << "Last Battery Level: " << m_lastBatteryLevel;
+    } else {
+        qWarning() << "Cannot get battery level";
+    }
 
     if (!m_conn->containsTable("sports_data")) {
         KDbTableSchema *t_summary = new KDbTableSchema("sports_data");
@@ -397,6 +431,7 @@ void DeviceInterface::onConnectionStateChanged()
     qDebug() << "DeviceInterface::onConnectionStateChanged" << connectionState();
 
     if (connectionState() == "authenticated") {
+        m_device->setDatabase(dbConnection());
         if (miBandService()) {
             miBandService()->setDatabase(dbConnection());
             m_dbusHRM->setMiBandService(miBandService());
@@ -417,17 +452,62 @@ void DeviceInterface::onConnectionStateChanged()
     emit connectionStateChanged();
 }
 
+void DeviceInterface::log_battery_level(int level) {
+
+    if (!m_conn || !(m_conn->isDatabaseUsed())) {
+        qDebug() << "Database not connected";
+        return;
+    }
+
+    QDateTime m_sampleTime = QDateTime::currentDateTime();
+    qDebug() << "Start time" << m_sampleTime;
+
+    KDbTransaction transaction = m_conn->beginTransaction();
+    KDbTransactionGuard tg(transaction);
+
+    KDbFieldList fields;
+    auto s_battery = m_conn->tableSchema("info_log");
+
+    fields.addField(s_battery->field("timestamp"));
+    fields.addField(s_battery->field("timestamp_dt"));
+    fields.addField(s_battery->field("key"));
+    fields.addField(s_battery->field("value"));
+
+    QList<QVariant> values;
+
+    values << m_sampleTime.toMSecsSinceEpoch() / 1000;
+    values << m_sampleTime;
+    values << AbstractDevice::INFO_BATTERY;
+    values << level;
+
+    if (!m_conn->insertRecord(&fields, values)) {
+        qDebug() << "error inserting record";
+        return;
+    }
+    tg.commit();
+
+}
+
 void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QString &val)
 {
     qDebug() << Q_FUNC_INFO << key << val;
 
+
+    if (key == AbstractDevice::INFO_IMMEDIATE_ALERT) {
+        qWarning() << "Not implemented: Immediate Alert Service" << val;
+    }
+
     //Handle notification of low battery
     if (key == AbstractDevice::INFO_BATTERY) {
-        if (val.toInt() != m_lastBatteryLevel) {
-            if (val.toInt() <= 10 && val.toInt() < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
+        int battery_level = val.toInt();
+        if (battery_level != m_lastBatteryLevel) {
+
+            log_battery_level(battery_level);
+
+            if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
                 sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(m_lastBatteryLevel) + "%");
             }
-            m_lastBatteryLevel = val.toInt();
+            m_lastBatteryLevel = battery_level;
         }
     }
 
@@ -471,12 +551,15 @@ void DeviceInterface::deviceEvent(AbstractDevice::Events event)
     case AbstractDevice::EVENT_APP_MUSIC:
         musicChanged();
         break;
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     case AbstractDevice::EVENT_IGNORE_CALL:
         m_voiceCallController.silence();
         break;
     case AbstractDevice::EVENT_DECLINE_CALL:
         m_voiceCallController.hangup();
+        break;
+    case AbstractDevice::EVENT_ANSWER_CALL:
+        m_voiceCallController.answer();
         break;
 #endif
     }
