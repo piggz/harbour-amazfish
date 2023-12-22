@@ -1,6 +1,6 @@
 #include "asteroidosdevice.h"
-#include "currenttimeservice.h"
 #include "batteryservice.h"
+#include "asteroidtimeservice.h"
 
 #include <QtXml/QtXml>
 
@@ -143,8 +143,9 @@ void AsteroidOSDevice::parseServices()
 
             if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
                 addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
-//            } else if (uuid == CurrentTimeService::UUID_SERVICE_CURRENT_TIME  && !service(CurrentTimeService::UUID_SERVICE_CURRENT_TIME)) {
-//                addService(CurrentTimeService::UUID_SERVICE_CURRENT_TIME, new CurrentTimeService(path, this));
+            } else if (uuid == AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME && !service(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME)) {
+                addService(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME, new AsteroidTimeService(path, this));
+
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -166,11 +167,13 @@ qDebug() << "connect(battery, &BatteryService::informationChanged, this, &Astero
         connect(battery, &BatteryService::informationChanged, this, &AsteroidOSDevice::informationChanged, Qt::UniqueConnection);
     }
 
-//    CurrentTimeService *cts = qobject_cast<CurrentTimeService*>(service(CurrentTimeService::UUID_SERVICE_CURRENT_TIME));
-//    if (cts) {
-//        cts->currentTime();
-//        cts->setCurrentTime();
-//    }
+
+    AsteroidTimeService *ats = qobject_cast<AsteroidTimeService*>(service(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME));
+    if (ats) {
+        ats->setCurrentTime();
+    }
+
+
 /*
     PineTimeMusicService *ms = qobject_cast<PineTimeMusicService*>(service(PineTimeMusicService::UUID_SERVICE_MUSIC));
     if (ms) {
