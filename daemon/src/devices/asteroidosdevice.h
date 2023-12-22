@@ -23,8 +23,14 @@ private:
     void parseServices();
     void initialise();
 
-/*
     virtual void pair() override;
+
+    Q_SLOT void authenticated(bool ready);
+
+    virtual void refreshInformation() override;
+
+
+/*
 
     virtual void connectToDevice() override;
     virtual void disconnectFromDevice() override;
@@ -40,7 +46,6 @@ private:
 
     virtual void downloadSportsData();
     virtual void sendWeather(CurrentWeather *weather);
-    virtual void refreshInformation();
     virtual QString information(Info i) const;
     virtual void applyDeviceSetting(Settings s);
     virtual void rebootWatch();

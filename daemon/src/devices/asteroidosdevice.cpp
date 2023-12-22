@@ -8,7 +8,7 @@
 AsteroidOSDevice::AsteroidOSDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO << pairedName;
-//    connect(this, &QBLEDevice::propertiesChanged, this, &AsteroidOSDevice::onPropertiesChanged, Qt::UniqueConnection);
+    connect(this, &QBLEDevice::propertiesChanged, this, &AsteroidOSDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 int AsteroidOSDevice::supportedFeatures() const
@@ -36,6 +36,21 @@ void AsteroidOSDevice::sendAlert(const QString &sender, const QString &subject, 
 void AsteroidOSDevice::incomingCall(const QString &caller)
 {
     qDebug() << Q_FUNC_INFO << caller;
+}
+
+
+void AsteroidOSDevice::pair()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    m_needsAuth = true;
+    m_pairing = true;
+    m_autoreconnect = true;
+    //disconnectFromDevice();
+    setConnectionState("pairing");
+    emit connectionStateChanged();
+
+    QBLEDevice::connectToDevice();
 }
 
 
@@ -140,12 +155,14 @@ void AsteroidOSDevice::parseServices()
 
 void AsteroidOSDevice::initialise()
 {
+    qDebug() << Q_FUNC_INFO;
     setConnectionState("connected");
     parseServices();
 
 
     BatteryService *battery = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
     if (battery) {
+qDebug() << "connect(battery, &BatteryService::informationChanged, this, &AsteroidOSDevice::informationChanged, Qt::UniqueConnection);";
         connect(battery, &BatteryService::informationChanged, this, &AsteroidOSDevice::informationChanged, Qt::UniqueConnection);
     }
 
@@ -162,4 +179,26 @@ void AsteroidOSDevice::initialise()
     }
 */
 }
-    
+
+
+void AsteroidOSDevice::authenticated(bool ready)
+{
+    qDebug() << Q_FUNC_INFO << ready;
+
+    if (ready) {
+        setConnectionState("authenticated");
+    } else {
+        setConnectionState("authfailed");
+    }
+}
+
+void AsteroidOSDevice::refreshInformation()
+{
+
+    BatteryService *bat = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
+    if (bat) {
+        bat->refreshInformation();
+    }
+
+}
+

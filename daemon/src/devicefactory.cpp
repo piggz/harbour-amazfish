@@ -57,8 +57,19 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new BangleJSDevice(deviceName);
     }
 
-    if (deviceName == "AsteroidOS") {
-        return new AsteroidOSDevice(deviceName);
+    QList<QString> asteroidDevices = {
+        "AsteroidOS",
+        "bass", "sturgeon", "narwhal", "sparrow", "dory",
+        "lenok", "catfish", "carp", "smelt", "anthias",
+        "pike", "sawfish", "ray", "firefish", "beluga", "skipjack",
+        "koi", "mooneye", "swift", "nemo", "hoki",
+        "minnow", "tetra", "sprat", "kingyo", "medaka"
+    };
+
+    for (auto iterator = asteroidDevices.begin(); iterator != asteroidDevices.end(); ++iterator) {
+        if (deviceName == *iterator) {
+            return new AsteroidOSDevice(deviceName);
+        }
     }
 
     qDebug() << "DeviceFactory::createDevice: no suitable devices found, creating a Bip device as default";

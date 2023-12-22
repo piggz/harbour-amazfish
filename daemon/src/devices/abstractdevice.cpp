@@ -27,6 +27,7 @@ void AbstractDevice::pair()
     QBLEDevice::pair();
 }
 
+
 void AbstractDevice::connectToDevice()
 {
     qDebug() << "AbstractDevice::connectToDevice";
