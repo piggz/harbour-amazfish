@@ -41,6 +41,12 @@ flavor_silica {
                       voicecall \
                       notificationmonitor \
                       calendar
+} else:flavor_uuitk {
+    DEFINES += UUITK_EDITION
+    WATCHFISH_FEATURES += music \
+                      voicecall \
+                      notificationmonitor \
+                      calendar
 } else {
 WATCHFISH_FEATURES += music \
                   notificationmonitor \
@@ -131,6 +137,7 @@ SOURCES += \
     src/typeconversion.cpp \
     src/bipbatteryinfo.cpp \
     src/devicefactory.cpp \
+    src/realtimeactivitysample.cpp \
     src/services/mibandservice.cpp \
     src/services/miband2service.cpp \
     src/services/alertnotificationservice.cpp \
@@ -138,6 +145,7 @@ SOURCES += \
     src/services/deviceinfoservice.cpp \
     src/services/bipfirmwareservice.cpp \
     src/services/batteryservice.cpp \
+    src/services/immediatealertservice.cpp \
     src/operations/abstractoperation.cpp \
     src/operations/activityfetchoperation.cpp \
     src/operations/logfetchoperation.cpp \
@@ -201,6 +209,7 @@ HEADERS += \
     src/services/simpleweatherservice.h \
     src/services/pinetimemusicservice.h \
     src/services/uartservice.h \
+    src/services/immediatealertservice.h \
     src/typeconversion.h \
     src/bipbatteryinfo.h \
     src/deviceinterface.h \
@@ -210,6 +219,7 @@ HEADERS += \
     src/activitysummary.h \ 
     src/activitysample.h \
     src/devicefactory.h \
+    src/realtimeactivitysample.h \
     src/services/mibandservice.h \
     src/services/miband2service.h \
     src/services/alertnotificationservice.h \
