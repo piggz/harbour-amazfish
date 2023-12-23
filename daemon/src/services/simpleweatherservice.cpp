@@ -57,9 +57,9 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
     weatherBytes += TypeConversion::fromInt8(0); // message type
     weatherBytes += TypeConversion::fromInt8(0); // version information
     weatherBytes += TypeConversion::fromInt64(weather->dateTime());
-    weatherBytes += TypeConversion::fromInt8( round(weather->temperature() - 273.15) );
-    weatherBytes += TypeConversion::fromInt8( round(weather->minTemperature() - 273.15) );
-    weatherBytes += TypeConversion::fromInt8( round(weather->maxTemperature() - 273.15) );
+    weatherBytes += TypeConversion::fromInt16( round((weather->temperature() - 273.15) * 100) );
+    weatherBytes += TypeConversion::fromInt16( round((weather->minTemperature() - 273.15) * 100) );
+    weatherBytes += TypeConversion::fromInt16( round((weather->maxTemperature() - 273.15) * 100) );
     weatherBytes += cityNameBytes;
     weatherBytes += TypeConversion::fromInt8( (int)iconToEnum(weather->weatherIcon()) );
 
@@ -106,8 +106,8 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
         << (int)iconToEnum(fc.weatherIcon())
     ;
 
-        forecastBytes += TypeConversion::fromInt8( round(fc.minTemperature() - 273.15) );
-        forecastBytes += TypeConversion::fromInt8( round(fc.maxTemperature() - 273.15) );
+        forecastBytes += TypeConversion::fromInt16( round((fc.minTemperature() - 273.15) * 100) );
+        forecastBytes += TypeConversion::fromInt16( round((fc.maxTemperature() - 273.15) * 100) );
         forecastBytes += TypeConversion::fromInt8( (int)iconToEnum(fc.weatherIcon()) );
 
     }
