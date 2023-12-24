@@ -1,4 +1,4 @@
-#include "simpleweatherservice.h"
+#include "pinetimesimpleweatherservice.h"
 #include "typeconversion.h"
 #include "codec.h"
 
@@ -6,16 +6,16 @@
 #include <QDebug>
 #include <math.h>
 
-const char* SimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER = "00050000-78fc-48fe-8e23-433b3a1942d0";
-const char* SimpleWeatherService::UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA = "00050001-78fc-48fe-8e23-433b3a1942d0";
+const char* PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER = "00050000-78fc-48fe-8e23-433b3a1942d0";
+const char* PineTimeSimpleWeatherService::UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA = "00050001-78fc-48fe-8e23-433b3a1942d0";
 
-SimpleWeatherService::SimpleWeatherService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_SIMPLE_WEATHER, path, parent)
+PineTimeSimpleWeatherService::PineTimeSimpleWeatherService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_SIMPLE_WEATHER, path, parent)
 {
     qDebug() << Q_FUNC_INFO;
 }
 
 
-void SimpleWeatherService::sendWeather(CurrentWeather *weather)
+void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
 {
 
     qDebug() << "Current weather data"
@@ -30,7 +30,7 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
         << weather->maxTemperature() - 273.15
         << weather->city()->name()
         << weather->weatherIcon() 
-        << QMetaEnum::fromType<SimpleWeatherService::WeatherIcons>().valueToKey(
+        << QMetaEnum::fromType<PineTimeSimpleWeatherService::WeatherIcons>().valueToKey(
                 (int)iconToEnum(weather->weatherIcon())
            )
         << (int)iconToEnum(weather->weatherIcon())
@@ -100,7 +100,7 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
         << fc.minTemperature() - 273.15
         << fc.maxTemperature() - 273.15
         << fc.weatherIcon()
-        << QMetaEnum::fromType<SimpleWeatherService::WeatherIcons>().valueToKey(
+        << QMetaEnum::fromType<PineTimeSimpleWeatherService::WeatherIcons>().valueToKey(
                 (int)iconToEnum(fc.weatherIcon())
            )
         << (int)iconToEnum(fc.weatherIcon())
@@ -118,7 +118,7 @@ void SimpleWeatherService::sendWeather(CurrentWeather *weather)
 
 }
 
-SimpleWeatherService::WeatherIcons SimpleWeatherService::iconToEnum(const QString& iconName) {
+PineTimeSimpleWeatherService::WeatherIcons PineTimeSimpleWeatherService::iconToEnum(const QString& iconName) {
     if (iconName == "01d") return WeatherIcons::ClearSky;
     if (iconName == "01n") return WeatherIcons::ClearSky;
     if (iconName == "02d") return WeatherIcons::FewClouds;

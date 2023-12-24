@@ -1,18 +1,18 @@
-#ifndef SIMPLEWEATHERSERVICE_H
-#define SIMPLEWEATHERSERVICE_H
+#ifndef PINETIMESIMPLEWEATHERSERVICE_H
+#define PINETIMESIMPLEWEATHERSERVICE_H
 
 #include <QObject>
 #include "qble/qbleservice.h"
 #include "devices/abstractdevice.h"
 
-class SimpleWeatherService : public QBLEService
+class PineTimeSimpleWeatherService : public QBLEService
 {
     Q_OBJECT
 public:
     static const char *UUID_SERVICE_SIMPLE_WEATHER;
     static const char *UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA;
 
-    explicit SimpleWeatherService(const QString &path, QObject *parent);
+    explicit PineTimeSimpleWeatherService(const QString &path, QObject *parent);
 
 
     void sendWeather(CurrentWeather *weather);
@@ -36,4 +36,4 @@ public:
 
 };
 
-#endif // #define SIMPLEWEATHERSERVICE_H
+#endif // #define PINETIMESIMPLEWEATHERSERVICE_H
