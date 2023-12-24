@@ -145,7 +145,6 @@ void AsteroidOSDevice::parseServices()
                 addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
             } else if (uuid == AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME && !service(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME)) {
                 addService(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME, new AsteroidTimeService(path, this));
-
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }

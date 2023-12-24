@@ -2,9 +2,8 @@
 #include "typeconversion.h"
 
 
-const char* AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME = "00005071-0000-0000-0000-00A57E401D05";
-const char* AsteroidTimeService::UUID_CHARACTERISTIC_ASTEROID_TIME_SET = "00005001-0000-0000-0000-00A57E401D05";
-
+const char* AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME = "00005071-0000-0000-0000-00a57e401d05";
+const char* AsteroidTimeService::UUID_CHARACTERISTIC_ASTEROID_TIME_SET = "00005001-0000-0000-0000-00a57e401d05";
 
 AsteroidTimeService::AsteroidTimeService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_ASTEROID_TIME, path, parent)
 {
