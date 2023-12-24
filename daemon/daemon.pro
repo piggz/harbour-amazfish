@@ -128,6 +128,7 @@ SOURCES += \
     src/qaesencryption.cpp \
     src/services/adafruitblefsservice.cpp \
     src/services/asteroidtimeservice.cpp \
+    src/services/asteroidweatherservice.cpp \
     src/services/currenttimeservice.cpp \
     src/services/dfuservice.cpp \
     src/services/infinitimemotionservice.cpp \
@@ -204,6 +205,7 @@ HEADERS += \
     src/qaesencryption.h \
     src/services/adafruitblefsservice.h \
     src/services/asteroidtimeservice.h \
+    src/services/asteroidweatherservice.h \
     src/services/currenttimeservice.h \
     src/services/dfuservice.h \
     src/services/infinitimemotionservice.h \

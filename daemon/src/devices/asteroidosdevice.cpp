@@ -1,6 +1,7 @@
 #include "asteroidosdevice.h"
 #include "batteryservice.h"
 #include "asteroidtimeservice.h"
+#include "asteroidweatherservice.h"
 
 #include <QtXml/QtXml>
 
@@ -13,7 +14,7 @@ AsteroidOSDevice::AsteroidOSDevice(const QString &pairedName, QObject *parent) :
 
 int AsteroidOSDevice::supportedFeatures() const
 {
-    return 0;
+    return FEATURE_WEATHER ;
 //FEATURE_HRM | FEATURE_ALERT | FEATURE_WEATHER | FEATURE_STEPS;
 }
 
@@ -145,6 +146,8 @@ void AsteroidOSDevice::parseServices()
                 addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
             } else if (uuid == AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME && !service(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME)) {
                 addService(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME, new AsteroidTimeService(path, this));
+            } else if (uuid == AsteroidWeatherService::UUID_SERVICE_WEATHER && !service(AsteroidWeatherService::UUID_SERVICE_WEATHER)) {
+                addService(AsteroidWeatherService::UUID_SERVICE_WEATHER, new AsteroidWeatherService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -162,7 +165,6 @@ void AsteroidOSDevice::initialise()
 
     BatteryService *battery = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
     if (battery) {
-qDebug() << "connect(battery, &BatteryService::informationChanged, this, &AsteroidOSDevice::informationChanged, Qt::UniqueConnection);";
         connect(battery, &BatteryService::informationChanged, this, &AsteroidOSDevice::informationChanged, Qt::UniqueConnection);
     }
 
@@ -202,5 +204,13 @@ void AsteroidOSDevice::refreshInformation()
         bat->refreshInformation();
     }
 
+}
+
+void AsteroidOSDevice::sendWeather(CurrentWeather *weather)
+{
+    AsteroidWeatherService *w = qobject_cast<AsteroidWeatherService*>(service(AsteroidWeatherService::UUID_SERVICE_WEATHER));
+    if (w){
+        w->sendWeather(weather);
+    }
 }
 

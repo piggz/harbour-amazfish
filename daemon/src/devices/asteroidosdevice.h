@@ -28,6 +28,7 @@ private:
     Q_SLOT void authenticated(bool ready);
 
     virtual void refreshInformation() override;
+    virtual void sendWeather(CurrentWeather *weather) override;
 
 
 /*
@@ -45,7 +46,6 @@ private:
     virtual void startDownload();
 
     virtual void downloadSportsData();
-    virtual void sendWeather(CurrentWeather *weather);
     virtual QString information(Info i) const;
     virtual void applyDeviceSetting(Settings s);
     virtual void rebootWatch();
