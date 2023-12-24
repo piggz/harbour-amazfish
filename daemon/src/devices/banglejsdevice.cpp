@@ -195,10 +195,10 @@ void BangleJSDevice::sendWeather(CurrentWeather *weather)
         QJsonObject o;
         o.insert("t", "weather");
         o.insert("temp", weather->temperature());
-        o.insert("hum", 0); //TODO we dont have this
+	o.insert("hum", weather->humidity());
         o.insert("txt", weather->description());
-        o.insert("wind", 0); //TODO we dont have this
-        o.insert("wdir", ""); // TODO we dont have this
+	o.insert("wind", weather->windSpeed());
+	o.insert("wdir", weather->windDeg());
         o.insert("loc", weather->city()->name());
 
         uart->txJson(o);
