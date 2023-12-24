@@ -133,10 +133,10 @@ PageListPL {
         }
 
         ListElement {
-            deviceType: "Pinetime"
+            deviceType: "InfiniTime"
             icon: "../pics/devices/pinetime.png"
             auth: false
-            aliases: [ ListElement { name: "InfiniTime" } ]
+            aliases: [ ListElement { name: "Pinetime" } ]
         }
         ListElement {
             deviceType: "Bangle.js"
