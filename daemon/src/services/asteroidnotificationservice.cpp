@@ -13,30 +13,32 @@ AsteroidNotificationService::AsteroidNotificationService(const QString &path, QO
 
 void AsteroidNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
+//    qDebug() << Q_FUNC_INFO << sender << subject << message;
 
-    unsigned int id = 0;
-    QString icon = sender;
+    QString icon = mapSenderToIcon(sender);
 
     // for vibrate, valid options are { "ringtone", "strong", "normal", "none" }
     QString vibrate = "normal";
 
     QByteArray data = QString("<insert><pn>%1</pn><id>%2</id><an>%3</an><ai>%4</ai><su>%5</su><bo>%6</bo><vb>%7</vb></insert>")
-                .arg(sender, QString::number(id), sender, icon, subject, message, vibrate).toUtf8();
+                .arg(sender, QString::number(m_lastNotificationId), sender, icon, subject, message, vibrate).toUtf8();
 
-
-    qDebug() << Q_FUNC_INFO << sender << subject << message << data;
+    m_lastNotificationId++;
 
     writeValue(UUID_CHARACTERISTIC_NOTIFICATION_UPDATE, data);
 }
 
-//void AlertNotificationService::incomingCall(const QByteArray header, const QString &caller)
-//{
-//    qDebug() << Q_FUNC_INFO << caller;
-//    QByteArray send = header + caller.toUtf8();
-//    writeValue(UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT, send);
-//}
+void AsteroidNotificationService::incomingCall(const QString &caller)
+{
+    qDebug() << Q_FUNC_INFO << caller;
+    m_lastVoiceCallNotification = m_lastNotificationId;
+    sendAlert("incoming-call", caller, "");
+}
 
-
+void AsteroidNotificationService::incomingCallEnded()
+{
+    removeNotification(m_lastVoiceCallNotification);
+}
 
 void AsteroidNotificationService::removeNotification(unsigned int id)
 {
@@ -49,4 +51,24 @@ void AsteroidNotificationService::characteristicChanged(const QString &c, const 
 {
     qDebug() << Q_FUNC_INFO << c << value;
     emit serviceEvent(c, value[0]);
+}
+
+QString AsteroidNotificationService::mapSenderToIcon(const QString &sender) {
+
+    // see https://github.com/AsteroidOS/asteroid-icons-ion
+    const QMap<QString, QString> iconMapping = {
+        {"Dekko", "ios-mail"},
+        {"TELEports", "ios-paper-plane"},
+        {"Cinny", "ios-paper-plane"},
+        {"indicator-datetime", "ios-alarm"},
+        {"incoming-call", "ios-call"},
+    };
+
+    for (auto it = iconMapping.begin(); it != iconMapping.end(); ++it) {
+        if (sender == it.key()) {
+            return it.value();
+        }
+    }
+
+    return "ios-mail-open-outline";
 }

@@ -15,14 +15,16 @@ public:
 
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message);
     Q_INVOKABLE void removeNotification(unsigned int id);
-//    Q_INVOKABLE void incomingCall(const QByteArray header, const QString &caller);
-//    static int mapSenderToIcon(const QString &sender);
+    Q_INVOKABLE void incomingCall(const QString &caller);
+    Q_INVOKABLE void incomingCallEnded();
+    static QString mapSenderToIcon(const QString &sender);
 
     Q_SIGNAL void serviceEvent(const QString &c, uint8_t event);
 
 private:
     void characteristicChanged(const QString &c, const QByteArray &value);
-//    uint8_t m_seperatorChar = 0x00;
+    unsigned int m_lastNotificationId = 0;
+    unsigned int m_lastVoiceCallNotification = 0;
 };
 
 #endif // ASTEROIDNOTIFICATIONSERVICE_H

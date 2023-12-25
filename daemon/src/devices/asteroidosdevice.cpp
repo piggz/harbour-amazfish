@@ -48,8 +48,7 @@ void AsteroidOSDevice::incomingCall(const QString &caller)
 
     AsteroidNotificationService *notification = qobject_cast<AsteroidNotificationService*>(service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION));
     if (notification) {
-        qDebug() << "Have an notification service";
-//        notification->incomingCall(QByteArray::fromHex("030100"), caller);
+        notification->incomingCall(caller);
     }
 
 }
