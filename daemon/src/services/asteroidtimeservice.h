@@ -15,7 +15,6 @@ public:
     static const char *UUID_CHARACTERISTIC_ASTEROID_TIME_SET;
 
     void setCurrentTime();
-//    QDateTime currentTime();
 };
 
 #endif // ASTEROID_TIME_SERVICE__H
