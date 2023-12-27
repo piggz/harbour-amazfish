@@ -781,7 +781,7 @@ void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsCond
     QBuffer buffer(&buf);
     buffer.open(QIODevice::WriteOnly);
 
-    char temp = weather->temperature() - 273;
+    char temp = weather->temperature() - 273.15;
     qint32 dt = qToLittleEndian(weather->dateTime());
 
     qDebug() << dt << temp << condition;
@@ -830,8 +830,8 @@ void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsCond
     buffer.putChar(NR_DAYS);
     buffer.putChar(condition);
     buffer.putChar(condition);
-    buffer.putChar((char) (weather->maxTemperature() - 273));
-    buffer.putChar((char) (weather->minTemperature() - 273));
+    buffer.putChar((char) (weather->maxTemperature() - 273.15));
+    buffer.putChar((char) (weather->minTemperature() - 273.15));
     if (supportsConditionString) {
         buffer.write(weather->description().toLatin1());
         buffer.putChar((char)0x00);
@@ -845,8 +845,8 @@ void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsCond
 
         buffer.putChar(condition);
         buffer.putChar(condition);
-        buffer.putChar((char) (fc.maxTemperature() - 273));
-        buffer.putChar((char) (fc.minTemperature() - 273));
+        buffer.putChar((char) (fc.maxTemperature() - 273.15));
+        buffer.putChar((char) (fc.minTemperature() - 273.15));
 
         if (supportsConditionString) {
             buffer.write(fc.description().toLatin1());

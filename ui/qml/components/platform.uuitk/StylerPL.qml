@@ -115,7 +115,7 @@ QtObject {
     property string iconDiagnostic: "image://theme/info"                                  // "Debug Info"
     property string iconFavoriteSelected: "image://theme/bookmark"                        // "Donate"
 
-
+    property string customIconPrefix: "../../pics/custom-icons/"
 
     // item sizes
     property real themeItemSizeLarge: themeFontSizeLarge * 3

@@ -46,14 +46,17 @@ public:
     class Forecast {
 
     public:
-        int minTemperature() const;
-        void setMinTemperature(int minTemperature);
+        qreal minTemperature() const;
+        void setMinTemperature(qreal minTemperature);
 
-        int maxTemperature() const;
-        void setMaxTemperature(int maxTemperature);
+        qreal maxTemperature() const;
+        void setMaxTemperature(qreal maxTemperature);
 
         int weatherCode() const;
         void setWeatherCode(int weatherCode);
+
+        QString weatherIcon() const;
+        void setWeatherIcon(QString weatherIcon);
 
         void setDescription(const QString &description);
         QString description() const;
@@ -86,9 +89,9 @@ public:
         void setWindDirection(uint8_t newWindDirection);
 
     private:
-        int m_temperature = 0;
-        int m_minTemperature = 0;
-        int m_maxTemperature = 0;
+        qreal m_temperature = 0;
+        qreal m_minTemperature = 0;
+        qreal m_maxTemperature = 0;
         int m_weatherCode = 0;
         QString m_description;
         qlonglong m_dateTime = 0;
@@ -100,6 +103,7 @@ public:
         uint8_t m_snowMMDay = 0;
         uint8_t m_humidity = 0;
         uint8_t m_pressure = 0;
+        QString m_weatherIcon;
        
     };
 
@@ -109,12 +113,29 @@ public:
     QString language() const;
     void setLanguage(const QString &language);
 
-    Q_PROPERTY(int temperature READ temperature NOTIFY ready)
+    Q_PROPERTY(qreal temperature READ temperature NOTIFY ready)
+    Q_PROPERTY(qreal minTemperature READ minTemperature NOTIFY ready)
+    Q_PROPERTY(qreal maxTemperature READ maxTemperature NOTIFY ready)
+    Q_PROPERTY(int weatherCode READ weatherCode NOTIFY ready)
+    Q_PROPERTY(QString weatherIcon READ weatherIcon NOTIFY ready)
+    Q_PROPERTY(qreal windDeg READ windDeg NOTIFY ready)
+    Q_PROPERTY(qreal windSpeed READ windSpeed NOTIFY ready)
+    Q_PROPERTY(qreal windGusts READ windGusts NOTIFY ready)
+    Q_PROPERTY(int humidity READ humidity NOTIFY ready)
+    Q_PROPERTY(int clouds READ clouds NOTIFY ready)
 
-    int temperature() const;
-    int minTemperature() const;
-    int maxTemperature() const;
+
+    qreal temperature() const;
+    qreal minTemperature() const;
+    qreal maxTemperature() const;
     int weatherCode() const;
+    QString weatherIcon() const;
+    qreal windDeg() const;
+    qreal windSpeed() const;
+    qreal windGusts() const;
+    int humidity() const;
+    int clouds() const;
+
     QString description() const;
     qlonglong dateTime() const;
 
@@ -141,10 +162,18 @@ private:
     City *m_city = nullptr;
     QString m_language;
 
-    int m_temperature = 0;
-    int m_minTemperature = 0;
-    int m_maxTemperature = 0;
+    qreal m_temperature = 0;
+    qreal m_minTemperature = 0;
+    qreal m_maxTemperature = 0;
     int m_weatherCode = 0;
+    QString m_weatherIcon;
+
+    qreal m_windDeg = 0;
+    qreal m_windSpeed = 0;
+    qreal m_windGusts = 0;
+    int m_humidity = 0;
+    int m_clouds = 0;
+
     QString m_description;
     qlonglong m_dateTime = 0;
 

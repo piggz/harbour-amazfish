@@ -131,6 +131,7 @@ SOURCES += \
     src/services/infinitimemotionservice.cpp \
     src/services/infinitimenavservice.cpp \
     src/services/infinitimeweatherservice.cpp \
+    src/services/pinetimesimpleweatherservice.cpp \
     src/services/pinetimemusicservice.cpp \
     src/services/uartservice.cpp \
     src/typeconversion.cpp \
@@ -205,6 +206,7 @@ HEADERS += \
     src/services/infinitimemotionservice.h \
     src/services/infinitimenavservice.h \
     src/services/infinitimeweatherservice.h \
+    src/services/pinetimesimpleweatherservice.h \
     src/services/pinetimemusicservice.h \
     src/services/uartservice.h \
     src/services/immediatealertservice.h \
