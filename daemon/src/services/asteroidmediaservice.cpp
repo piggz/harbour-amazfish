@@ -1,4 +1,5 @@
 #include "asteroidmediaservice.h"
+#include "typeconversion.h"
 
 const char* AsteroidMediaService::UUID_SERVICE_MEDIA                = "00007071-0000-0000-0000-00a57e401d05";
 const char* AsteroidMediaService::UUID_CHARACTERISTIC_MEDIA_TITLE   = "00007001-0000-0000-0000-00a57e401d05";
@@ -11,6 +12,7 @@ const char* AsteroidMediaService::UUID_CHARACTERISTIC_MEDIA_VOLUME  = "00007006-
 AsteroidMediaService::AsteroidMediaService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_MEDIA, path, parent)
 {
     qDebug() << Q_FUNC_INFO;
+    setVolume(50);
     connect(this, &QBLEService::characteristicChanged, this, &AsteroidMediaService::characteristicChanged);
 }
 
@@ -32,6 +34,11 @@ void AsteroidMediaService::setTrack(const QString &track)
 void AsteroidMediaService::setAlbum(const QString &album)
 {
     writeValue(UUID_CHARACTERISTIC_MEDIA_ALBUM, album.toLocal8Bit());
+}
+
+void AsteroidMediaService::setVolume(const int volume)
+{
+    writeValue(UUID_CHARACTERISTIC_MEDIA_VOLUME, TypeConversion::fromInt8(volume));
 }
 
 void AsteroidMediaService::characteristicChanged(const QString &c, const QByteArray &value)

@@ -259,9 +259,17 @@ void AsteroidOSDevice::serviceEvent(const QString &characteristic, uint8_t event
             break;
             case AsteroidMediaService::EVENT_MEDIA_VOL:
         qDebug() << Q_FUNC_INFO << "Command volume" << characteristic << event << data;
+                if (data < m_prevVolume) {
+                    emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
+                } else {
+                    emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
+                }
+                m_prevVolume = data;
+                AsteroidMediaService *media = qobject_cast<AsteroidMediaService*>(service(AsteroidMediaService::UUID_SERVICE_MEDIA));
+                if (media) {
+                    media->setVolume(data);
+                }
 
-//            emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
-//            emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
             break;
 
 

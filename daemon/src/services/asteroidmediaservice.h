@@ -29,6 +29,7 @@ public:
     void setArtist(const QString &artist);
     void setTrack(const QString &track);
     void setAlbum(const QString &album);
+    void setVolume(const int volume);
 
     Q_SIGNAL void serviceEvent(const QString &c, uint8_t event, uint8_t data);
 

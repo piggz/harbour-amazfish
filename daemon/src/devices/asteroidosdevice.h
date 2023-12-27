@@ -33,6 +33,8 @@ private:
 
     Q_SLOT void serviceEvent(const QString &characteristic, uint8_t event, uint8_t data);
 
+    int m_prevVolume = 50;
+
 
 /*
 
