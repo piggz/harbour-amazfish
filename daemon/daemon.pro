@@ -130,6 +130,7 @@ SOURCES += \
     src/services/asteroidtimeservice.cpp \
     src/services/asteroidweatherservice.cpp \
     src/services/asteroidnotificationservice.cpp \
+    src/services/asteroidmediaservice.cpp \
     src/services/currenttimeservice.cpp \
     src/services/dfuservice.cpp \
     src/services/infinitimemotionservice.cpp \
@@ -208,6 +209,7 @@ HEADERS += \
     src/services/asteroidtimeservice.h \
     src/services/asteroidweatherservice.h \
     src/services/asteroidnotificationservice.h \
+    src/services/asteroidmediaservice.h \
     src/services/currenttimeservice.h \
     src/services/dfuservice.h \
     src/services/infinitimemotionservice.h \

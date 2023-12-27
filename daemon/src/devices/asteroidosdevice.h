@@ -15,6 +15,7 @@ public:
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     virtual void incomingCall(const QString &caller) override;
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0) override;
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
@@ -29,6 +30,8 @@ private:
 
     virtual void refreshInformation() override;
     virtual void sendWeather(CurrentWeather *weather) override;
+
+    Q_SLOT void serviceEvent(const QString &characteristic, uint8_t event, uint8_t data);
 
 
 /*
@@ -51,7 +54,6 @@ private:
     virtual void rebootWatch();
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);
     virtual void enableFeature(AbstractDevice::Feature feature);
-    virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0);
     virtual void navigationRunning(bool running);
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress);
     virtual QStringList supportedDisplayItems() const;

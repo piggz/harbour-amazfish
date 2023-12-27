@@ -4,6 +4,7 @@
 #include "asteroidtimeservice.h"
 #include "asteroidweatherservice.h"
 #include "asteroidnotificationservice.h"
+#include "asteroidmediaservice.h"
 
 #include <QtXml/QtXml>
 
@@ -70,22 +71,12 @@ void AsteroidOSDevice::pair()
 
 
 /*
-void AsteroidOSDevice::pair() override;
-
-void AsteroidOSDevice::connectToDevice() override;
-void AsteroidOSDevice::disconnectFromDevice() override;
-QString AsteroidOSDevice::connectionState() const;
-int AsteroidOSDevice::supportedFeatures() const = 0;
-QString AsteroidOSDevice::deviceType() const = 0;
-void AsteroidOSDevice::abortOperations();
-
 //Firmware handling
 AbstractFirmwareInfo * AsteroidOSDevice::firmwareInfo(const QByteArray &bytes) = 0; //Caller owns the pointer and should delete it
 void AsteroidOSDevice::prepareFirmwareDownload(const AbstractFirmwareInfo* info);
 void AsteroidOSDevice::startDownload();
 
 void AsteroidOSDevice::downloadSportsData();
-void AsteroidOSDevice::sendWeather(CurrentWeather *weather);
 void AsteroidOSDevice::refreshInformation();
 QString AsteroidOSDevice::information(Info i) const;
 void AsteroidOSDevice::applyDeviceSetting(Settings s);
@@ -162,6 +153,8 @@ void AsteroidOSDevice::parseServices()
                 addService(AsteroidWeatherService::UUID_SERVICE_WEATHER, new AsteroidWeatherService(path, this));
             } else if (uuid == AsteroidNotificationService::UUID_SERVICE_NOTIFICATION && !service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION)) {
                 addService(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION, new AsteroidNotificationService(path, this));
+            } else if (uuid == AsteroidMediaService::UUID_SERVICE_MEDIA  && !service(AsteroidMediaService::UUID_SERVICE_MEDIA  )) {
+                addService(AsteroidMediaService::UUID_SERVICE_MEDIA  , new AsteroidMediaService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -195,13 +188,13 @@ void AsteroidOSDevice::initialise()
     }
 
 
-/*
-    AsteroidMusicService *ms = qobject_cast<AsteroidMusicService*>(service(AsteroidMusicService::UUID_SERVICE_MUSIC));
+    AsteroidMediaService *ms = qobject_cast<AsteroidMediaService*>(service(AsteroidMediaService::UUID_SERVICE_MEDIA));
     if (ms) {
-        ms->enableNotification(AsteroidMusicService::UUID_CHARACTERISTIC_MUSIC_EVENT);
-        connect(ms, &AsteroidMusicService::serviceEvent, this, &AsteroidOSDevice::serviceEvent, Qt::UniqueConnection);
+        ms->enableNotification(AsteroidMediaService::UUID_CHARACTERISTIC_MEDIA_COMMAND);
+        ms->enableNotification(AsteroidMediaService::UUID_CHARACTERISTIC_MEDIA_VOLUME);
+        connect(ms, &AsteroidMediaService::serviceEvent, this, &AsteroidOSDevice::serviceEvent, Qt::UniqueConnection);
     }
-*/
+
 }
 
 
@@ -234,3 +227,47 @@ void AsteroidOSDevice::sendWeather(CurrentWeather *weather)
     }
 }
 
+void AsteroidOSDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration, int position)
+{
+    Q_UNUSED(duration)
+    Q_UNUSED(position)
+
+    AsteroidMediaService *media = qobject_cast<AsteroidMediaService*>(service(AsteroidMediaService::UUID_SERVICE_MEDIA));
+    if (media) {
+        media->setStatus(playing);
+        media->setAlbum(album);
+        media->setTrack(title);
+        media->setArtist(artist);
+    }
+}
+
+void AsteroidOSDevice::serviceEvent(const QString &characteristic, uint8_t event, uint8_t data)
+{
+    if (characteristic == AsteroidMediaService::UUID_CHARACTERISTIC_MEDIA_COMMAND) {
+        switch(event) {
+            case AsteroidMediaService::EVENT_MEDIA_PREV:
+                emit deviceEvent(AbstractDevice::EVENT_MUSIC_PREV);
+            break;
+            case AsteroidMediaService::EVENT_MEDIA_NEXT:
+                emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
+            break;
+            case AsteroidMediaService::EVENT_MEDIA_PLAY:
+                emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAY);
+            break;
+            case AsteroidMediaService::EVENT_MEDIA_PAUSE:
+                emit deviceEvent(AbstractDevice::EVENT_MUSIC_PAUSE);
+            break;
+            case AsteroidMediaService::EVENT_MEDIA_VOL:
+        qDebug() << Q_FUNC_INFO << "Command volume" << characteristic << event << data;
+
+//            emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
+//            emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
+            break;
+
+
+        }
+    } else {
+        qDebug() << Q_FUNC_INFO << characteristic << event << data;
+    }
+
+}
