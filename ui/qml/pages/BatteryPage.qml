@@ -6,31 +6,27 @@ import "../components/platform"
 
 PagePL {
     id: page
-    title: qsTr("Steps")
+    title: qsTr("Battery")
 
     property var day: new Date()
-
-    pageMenu: PageMenuPL {
-        DownloadDataMenuItem{}
-    }
 
     Column {
         id: column
         width: parent.width
         anchors.top: parent.top
         anchors.margins: styler.themePaddingMedium
+        spacing: styler.themePaddingLarge
 
         LabelPL {
-            id: lblStepsToday
+            id: lblCurrentHeartrate
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: _InfoSteps > 0 ? _InfoSteps : graphStepSummary.lastValue
+            text: qsTr("%1 %").arg(_InfoBatteryPercent)
             horizontalAlignment: Text.AlignHCenter
         }
 
         DateNavigation {
-            id: nav
             text: day.toDateString();
             onBackward: {
                 day.setDate(day.getDate() - 1);
@@ -45,17 +41,16 @@ PagePL {
         }
 
         Graph {
-            id: graphStepSummary
-            graphTitle: qsTr("Steps")
-            graphHeight: 300
+            id: graphBat
+            graphTitle: qsTr("Battery")
+            graphHeight: 500
 
-            axisX.mask: "MM/dd"
-            axisY.units: "Steps"
-            type: DataSource.StepSummary
-            graphType: 2
+            axisY.units: "%"
+            type: DataSource.BatteryLog
+            graphType: 1
 
             minY: 0
-            maxY: 2 * AmazfishConfig.profileFitnessGoal
+            maxY: 100
             valueConverter: function(value) {
                 return value.toFixed(0);
             }
@@ -63,18 +58,17 @@ PagePL {
                 updateGraph(day);
             }
         }
+
     }
 
+
     function updateGraphs() {
-        graphStepSummary.updateGraph(day);
+        graphBat.updateGraph(day);
     }
 
     Component.onCompleted: {
         updateGraphs();
-        _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
+//        DaemonInterfaceInstance.requestManualHeartrate();
     }
 
-    onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("SleepPage.qml"))
-    }
 }

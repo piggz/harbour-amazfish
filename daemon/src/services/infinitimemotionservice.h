@@ -19,7 +19,11 @@ public:
     static const char *UUID_CHARACTERISTIC_MOTION_STEPS;
     static const char *UUID_CHARACTERISTIC_MOTION_MOTION;
 
+    Q_INVOKABLE void refreshMotion();
+    Q_INVOKABLE void refreshSteps();
+
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
+    Q_SIGNAL void motionChanged(double x, double y, double z);
 
     int steps() const;
 

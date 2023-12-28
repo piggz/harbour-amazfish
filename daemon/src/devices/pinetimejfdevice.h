@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "abstractdevice.h"
+#include "realtimeactivitysample.h"
 
 class PinetimeJFDevice : public AbstractDevice
 {
@@ -45,6 +46,11 @@ private:
     void initialise();
     Q_SLOT void serviceEvent(const QString &characteristic, uint8_t event);
     AbstractFirmwareInfo::Type firmwareType;
+
+    RealtimeActivitySample realtimeActivitySample;
+
+    Q_SLOT void sampledActivity(QDateTime dt, int kind, int intensity, int steps, int heartrate);
+
 
 };
 

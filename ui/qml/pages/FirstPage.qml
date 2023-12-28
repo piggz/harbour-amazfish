@@ -11,7 +11,7 @@ PagePL {
 
     function unpairAccepted() {
         DaemonInterfaceInstance.disconnect();
-        app.pages.replace(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
+        app.pages.push(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
     }
 
     pageMenu: PageMenuPL {

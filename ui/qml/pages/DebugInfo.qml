@@ -12,6 +12,7 @@ PagePL {
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
+            iconSource: styler.iconRefresh !== undefined ? styler.iconRefresh : ""
             text: qsTr("Refresh")
             onClicked: {
                 DaemonInterfaceInstance.refreshInformation();
@@ -175,7 +176,7 @@ PagePL {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                DaemonInterfaceInstance.miBandService().fetchLogs();
+                DaemonInterfaceInstance.fetchLogs();
             }
         }
         ButtonPL {

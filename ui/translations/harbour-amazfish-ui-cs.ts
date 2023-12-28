@@ -65,12 +65,27 @@
         <source>Download Data</source>
         <translation type="vanished">Stažení dat</translation>
     </message>
+    <message>
+        <source>Battery</source>
+        <translation>Baterie</translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
         <translation>Vložte autentizační klíč</translation>
+    </message>
+</context>
+<context>
+    <name>BatteryPage</name>
+    <message>
+        <source>Battery</source>
+        <translation>Baterie</translation>
+    </message>
+    <message>
+        <source>%1 %</source>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -428,6 +443,10 @@
         <source>Pairing…</source>
         <translation>Párování...</translation>
     </message>
+    <message>
+        <source>Bluetooth adapter is not available</source>
+        <translation>Adaptér bluetooth není k dispozici</translation>
+    </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
@@ -587,6 +606,10 @@
     <message>
         <source>Refresh calendar every (%1) minutes</source>
         <translation>Obnovit kalendář každých (%1) minut</translation>
+    </message>
+    <message>
+        <source>Transliterate notifications</source>
+        <translation>Přepsat diakritiku oznámení</translation>
     </message>
 </context>
 <context>
@@ -1249,6 +1272,10 @@
     <message>
         <source>Country: </source>
         <translation>Země: </translation>
+    </message>
+    <message>
+        <source>not logged in</source>
+        <translation>nepříhlášen</translation>
     </message>
 </context>
 <context>

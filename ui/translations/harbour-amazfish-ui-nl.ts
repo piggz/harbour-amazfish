@@ -61,12 +61,27 @@
         <source>Intensity</source>
         <translation>Intensiteit</translation>
     </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
         <translation>Auth-sleutel invoeren</translation>
+    </message>
+</context>
+<context>
+    <name>BatteryPage</name>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -367,6 +382,10 @@
         <source>Pairing…</source>
         <translation>Koppelen...</translation>
     </message>
+    <message>
+        <source>Bluetooth adapter is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
@@ -505,6 +524,10 @@
     </message>
     <message>
         <source>Refresh calendar every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transliterate notifications</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1125,6 +1148,10 @@
     <message>
         <source>Country: </source>
         <translation>Land: </translation>
+    </message>
+    <message>
+        <source>not logged in</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

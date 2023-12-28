@@ -6,6 +6,11 @@
 #include "weather/currentweather.h"
 #include "abstractfirmwareinfo.h"
 
+#include <KDb3/KDbDriver>
+#include <KDb3/KDbConnection>
+#include <KDb3/KDbConnectionData>
+#include <KDb3/KDbTransactionGuard>
+
 class AbstractDevice : public QBLEDevice
 {
     Q_OBJECT
@@ -84,6 +89,8 @@ public:
     bool supportsFeature(Feature f) const;
     virtual int supportedFeatures() const = 0;
 
+    void setDatabase(KDbConnection *conn);
+
     virtual QString deviceType() const = 0;
     QString deviceName() const;
     virtual void abortOperations();
@@ -127,11 +134,13 @@ protected:
     QTimer *m_reconnectTimer;
 
     void setConnectionState(const QString &state);
+    KDbConnection *m_conn = nullptr;
 
 private:
     void reconnectionTimer();
     void devicePairFinished(const QString& status);
     QString m_pairedName;
+
 };
 
 #endif

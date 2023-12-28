@@ -60,10 +60,14 @@ QtObject {
     // used icons
     property string iconBluetooth: "image://theme/bluetooth-active"
     property string iconBattery: "image://theme/battery-good-symbolic"
-    property string iconSteps: "../../pics/custom-icons/icon-m-steps.png"
-    property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate.png"
+    property string iconSteps: "../../pics/custom-icons/icon-m-steps2.png"
+    property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate2.png"
+    property string iconDeviceScan: "image://theme/toolkit_input-search"
 
 
+    property string iconStravaLogin: "image://theme/user-admin"
+    property string iconUploadToStrava: "image://theme/share"
+    property string iconDownloadData: "image://theme/transfer-progress-download"
     property string iconAbout: "image://theme/info" //Qt.resolvedUrl("../../icons/help-about-symbolic.svg")
     property string iconBack: "image://theme/back" //Qt.resolvedUrl("../../icons/go-previous-symbolic.svg")
     property string iconBackward: "image://theme/back"
@@ -111,7 +115,7 @@ QtObject {
     property string iconDiagnostic: "image://theme/info"                                  // "Debug Info"
     property string iconFavoriteSelected: "image://theme/bookmark"                        // "Donate"
 
-
+    property string customIconPrefix: "../../pics/custom-icons/"
 
     // item sizes
     property real themeItemSizeLarge: themeFontSizeLarge * 3

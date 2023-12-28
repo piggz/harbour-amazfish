@@ -32,6 +32,7 @@ PagePL {
         PageMenuItemPL
         {
             id: btnAuth
+            iconSource: styler.iconStravaLogin !== undefined ? styler.iconStravaLogin : ""
             text: o2strava.linked ? qsTr("Logout") : qsTr("Login")
             onClicked: {
                 if (o2strava.linked) {
@@ -52,7 +53,7 @@ PagePL {
                 username = (athlete["username"] !== undefined) ? athlete["username"] : athlete["firstname"] + " " + athlete["lastname"];
                 country = athlete["country"];
             } else {
-                username = "not logged in";
+                username = qsTr("not logged in");
                 country = "";
             }
         }
@@ -66,7 +67,7 @@ PagePL {
             username = (athlete["username"] !== undefined) ? athlete["username"] : athlete["firstname"] + " " + athlete["lastname"];
             country = athlete["country"];
         } else {
-            username = "not logged in";
+            username = qsTr("not logged in");
             country = "";
         }
     }

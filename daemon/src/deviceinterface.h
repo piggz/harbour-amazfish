@@ -76,6 +76,7 @@ public:
     Q_INVOKABLE void updateCalendar();
     Q_INVOKABLE void reloadCities();
     Q_INVOKABLE void enableFeature(int feature);
+    Q_INVOKABLE void fetchLogs();
     Q_INVOKABLE QStringList supportedDisplayItems();
     Q_INVOKABLE void immediateAlert(int level);
 
@@ -105,6 +106,8 @@ private:
     void createSettings();
     void updateServiceController();
 
+    void log_battery_level(int level);
+
     //TODO Minimise use of these funcitons
     MiBandService *miBandService() const;
     HRMService *hrmService() const;
@@ -124,7 +127,7 @@ private:
     
     //Watchfish
     watchfish::MusicController m_musicController;
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     watchfish::VoiceCallController m_voiceCallController;
 #endif
     watchfish::NotificationMonitor m_notificationMonitor;

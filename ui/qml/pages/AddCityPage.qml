@@ -16,6 +16,30 @@ PagePL {
         id: weather
     }
 
+    function owmIconToLocal(omw) {
+        const weatherIcons = {
+          '01d': 'weather-clear.png',
+          '01n': 'weather-clear-night.png',
+          '02d': 'weather-few-clouds.png',
+          '02n': 'weather-few-clouds-night.png',
+          '03d': 'weather-clouds.png',
+          '03n': 'weather-clouds-night.png',
+          '04d': 'weather-many-clouds.png',
+          '04n': 'weather-many-clouds.png', // Assuming night uses the same icon for "many clouds"
+          '09d': 'weather-showers.png',
+          '09n': 'weather-showers-night.png',
+          '10d': 'weather-showers-scattered-day.png',
+          '10n': 'weather-showers-scattered-night.png',
+          '11d': 'weather-storm-day.png',
+          '11n': 'weather-storm-night.png',
+          '13d': 'weather-snow.png',
+          '13n': 'weather-snow-scattered-night.png', // Assuming scattered snow at night for 13n
+          '50d': 'weather-mist.png',
+          '50n': 'weather-mist.png' // Assuming night uses the same icon for "mist"
+        };
+        return "../pics/" + weatherIcons[omw];
+    }
+
     onCurrentCityChanged: {
         if ((cityManager == null) || (cityManager.cities.length <= 0)) {
             return
@@ -34,11 +58,26 @@ PagePL {
             id: citymodel
         }
 
-        LabelPL {
-            text: page.currentCity + (
-                (weather.temperature !== 0) ? " " + (weather.temperature-273) + "˚C" : ""
-            )
-            visible: page.currentCity !== ""
+
+        Row {
+            width: parent.width - (2 * anchors.margins)
+            LabelPL {
+                text: page.currentCity
+                width: parent.width * 0.75
+            }
+
+            LabelPL {
+                id: temperatureLabel
+                text: (weather.weatherIcon !== "") ? (Math.round(weather.temperature-273.15) + "˚C") : ""
+                width: parent.width * 0.15
+
+            }
+
+            IconPL {
+                source: (weather.weatherIcon !== "") ? owmIconToLocal(weather.weatherIcon) : ""
+                height: temperatureLabel.height
+            }
+
         }
 
         SearchFieldPL {

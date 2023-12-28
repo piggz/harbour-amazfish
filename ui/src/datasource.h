@@ -18,7 +18,8 @@ public:
         Sleep = 3,
         Intensity = 4,
         StepSummary = 5,
-        SleepSummary = 6
+        SleepSummary = 6,
+        BatteryLog = 7,
     };
     Q_ENUM(Type)
 

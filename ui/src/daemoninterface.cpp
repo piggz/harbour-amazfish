@@ -323,6 +323,13 @@ void DaemonInterface::enableFeature(Amazfish::Feature feature)
     iface->call(QStringLiteral("enableFeature"), (int)feature);
 }
 
+void DaemonInterface::fetchLogs() {
+    if (!iface || !iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("fetchLogs"));
+}
+
 QStringList DaemonInterface::supportedDisplayItems()
 {
     if (!iface || !iface->isValid()) {

@@ -10,6 +10,7 @@ PageListPL {
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
+            iconSource: styler.iconDownloadData !== undefined ? styler.iconDownloadData : ""
             text: qsTr("Download Next Activity")
             onClicked: DaemonInterfaceInstance.downloadSportsData();
             enabled: DaemonInterfaceInstance.connectionState === "authenticated"
@@ -153,4 +154,9 @@ PageListPL {
             SportsModel.update();
         }
     }
+
+    onPageStatusActive: {
+        pushAttached(Qt.resolvedUrl("BatteryPage.qml"))
+    }
+
 }

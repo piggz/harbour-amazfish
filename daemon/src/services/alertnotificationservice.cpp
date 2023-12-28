@@ -17,10 +17,6 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
 {
     qDebug() << "Alert:" << sender << subject << message;
 
-    if (message.isEmpty()) {
-        return;
-    }
-
     int category = 0xfa; //Custom Huami icon
     int icon = mapSenderToIcon(sender);
 

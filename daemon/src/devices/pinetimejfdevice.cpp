@@ -11,8 +11,11 @@
 #include "hrmservice.h"
 #include "infinitimemotionservice.h"
 #include "infinitimeweatherservice.h"
+#include "pinetimesimpleweatherservice.h"
 #include "adafruitblefsservice.h"
 #include "batteryservice.h"
+#include "amazfishconfig.h"
+#include "realtimeactivitysample.h"
 #include <QtXml/QtXml>
 
 namespace {
@@ -152,6 +155,8 @@ void PinetimeJFDevice::parseServices()
                 addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
             } else if (uuid == InfiniTimeMotionService::UUID_SERVICE_MOTION && !service(InfiniTimeMotionService::UUID_SERVICE_MOTION)) {
                 addService(InfiniTimeMotionService::UUID_SERVICE_MOTION, new InfiniTimeMotionService(path, this));
+            } else if (uuid == PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER && !service(PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER)) {
+                addService(PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER, new PineTimeSimpleWeatherService(path, this));
             } else if (uuid == InfiniTimeWeatherService::UUID_SERVICE_WEATHER && !service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER)) {
                 addService(InfiniTimeWeatherService::UUID_SERVICE_WEATHER, new InfiniTimeWeatherService(path, this));
             } else if (uuid == AdafruitBleFsService::UUID_SERVICE_FS && !service(AdafruitBleFsService::UUID_SERVICE_FS)) {
@@ -218,6 +223,7 @@ void PinetimeJFDevice::initialise()
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     if (hrm) {
         connect(hrm, &HRMService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
+        connect(hrm, &HRMService::informationChanged, &realtimeActivitySample, &RealtimeActivitySample::slot_informationChanged, Qt::UniqueConnection);
     }
 
     InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_SERVICE_MOTION));
@@ -225,13 +231,65 @@ void PinetimeJFDevice::initialise()
         motion->enableNotification(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_STEPS);
         //motion->enableNotification(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_MOTION);
         connect(motion, &InfiniTimeMotionService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
+        connect(motion, &InfiniTimeMotionService::informationChanged, &realtimeActivitySample, &RealtimeActivitySample::slot_informationChanged, Qt::UniqueConnection);
     }
 
     AdafruitBleFsService *bleFs = qobject_cast<AdafruitBleFsService*>(service(AdafruitBleFsService::UUID_SERVICE_FS));
     if (bleFs) {
         connect(bleFs, &AdafruitBleFsService::downloadProgress, this, &PinetimeJFDevice::downloadProgress, Qt::UniqueConnection);
     }
+
+    connect(&realtimeActivitySample, &RealtimeActivitySample::samplesReady, this, &PinetimeJFDevice::sampledActivity, Qt::UniqueConnection);
 }
+
+void PinetimeJFDevice::sampledActivity(QDateTime dt, int kind, int intensity, int steps, int heartrate) {
+    qDebug() << Q_FUNC_INFO << dt << kind << intensity << steps << heartrate;
+
+
+    if (!m_conn || !(m_conn->isDatabaseUsed())) {
+        qDebug() << "Database not connected";
+        return;
+    }
+
+    auto config = AmazfishConfig::instance();
+    uint id = qHash(config->profileName());
+    uint devid = qHash(config->pairedAddress());
+
+    KDbTransaction transaction = m_conn->beginTransaction();
+    KDbTransactionGuard tg(transaction);
+
+    KDbFieldList fields;
+    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
+
+    fields.addField(mibandActivity->field("timestamp"));
+    fields.addField(mibandActivity->field("timestamp_dt"));
+    fields.addField(mibandActivity->field("device_id"));
+    fields.addField(mibandActivity->field("user_id"));
+    fields.addField(mibandActivity->field("raw_intensity"));
+    fields.addField(mibandActivity->field("steps"));
+    fields.addField(mibandActivity->field("raw_kind"));
+    fields.addField(mibandActivity->field("heartrate"));
+
+    QList<QVariant> values;
+
+    values << dt.toMSecsSinceEpoch() / 1000;
+    values << dt;
+    values << devid;
+    values << id;
+    values << intensity;
+    values << steps;
+    values << kind;
+    values << heartrate;
+
+    if (!m_conn->insertRecord(&fields, values)) {
+        qWarning() << "error inserting record";
+        tg.rollback();
+        return;
+    }
+    tg.commit();
+
+}
+
 
 void PinetimeJFDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
@@ -345,10 +403,15 @@ void PinetimeJFDevice::refreshInformation()
         info->refreshInformation();
     }
 
-
     BatteryService *bat = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
     if (bat) {
         bat->refreshInformation();
+    }
+
+    InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_SERVICE_MOTION));
+    if (motion) {
+        motion->refreshSteps();
+//        motion->refreshMotion();
     }
 
 }
@@ -357,11 +420,13 @@ QString PinetimeJFDevice::information(Info i) const
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (!info) {
+        qWarning() << "Device info service doesn't exists";
         return QString();
     }
 
-    InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_STEPS));
+    InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_SERVICE_MOTION));
     if (!motion) {
+        qWarning() << "Motion service doesn't exists";
         return QString();
     }
 
@@ -439,6 +504,12 @@ void PinetimeJFDevice::sendWeather(CurrentWeather *weather)
     InfiniTimeWeatherService *w = qobject_cast<InfiniTimeWeatherService*>(service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER));
     if (w){
         w->sendWeather(weather);
+    }
+
+    PineTimeSimpleWeatherService *sw = qobject_cast<PineTimeSimpleWeatherService*>(service(PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER));
+
+    if (sw){
+        sw->sendWeather(weather);
     }
 }
 

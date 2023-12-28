@@ -21,7 +21,7 @@ import QtQuick.Controls 2.2
 import Lomiri.Components 1.3 as UC
 
 UC.Action {
-    iconSource: iconName
+    iconName: iconSource
     signal clicked
     onTriggered: clicked()
 }
