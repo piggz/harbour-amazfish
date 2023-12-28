@@ -1,4 +1,5 @@
 #include "gtrdevice.h"
+#include "gtrfirmwareinfo.h"
 #include <QtXml/QtXml>
 #include <QTimer>
 
@@ -16,6 +17,11 @@ QString GtrDevice::deviceType() const
 bool GtrDevice::is47mm(const QString &version) const
 {
     return version >= "1.0.0.00" && version < "1.6.0.00";
+}
+
+AbstractFirmwareInfo *GtrDevice::firmwareInfo(const QByteArray &bytes)
+{
+    return new GtrFirmwareInfo(bytes);
 }
 
 void GtrDevice::initialise()
