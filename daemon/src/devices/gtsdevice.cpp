@@ -216,10 +216,12 @@ void GtsDevice::sendEventReminder(int id, const QDateTime &dt, const QString &ev
 void GtsDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (fw){
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+
+    if (fw && mi){
         QString revision = softwareRevision();
         if (revision > "0.1.1.16") {
-            fw->prepareFirmwareDownload(info, new HuamiUpdateFirmwareOperation2020(info, fw));
+            fw->prepareFirmwareDownload(info, new HuamiUpdateFirmwareOperation2020(info, fw, *mi));
         } else {
             fw->prepareFirmwareDownload(info, new UpdateFirmwareOperationNew(info, fw));
         }

@@ -16,7 +16,7 @@ LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 PKGCONFIG += dbus-1
 PKGCONFIG += icu-uc icu-io icu-i18n # transliteration
 QT +=  positioning KDb3 network dbus KArchive
-CONFIG += c++17
+CONFIG += c++17 c++1z
 
 equals(FLAVOR, "silica") {
     CONFIG += flavor_silica
