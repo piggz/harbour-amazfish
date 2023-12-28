@@ -61,7 +61,7 @@ void CurrentWeather::setCity(City *city)
     }
 }
 
-int CurrentWeather::temperature() const
+qreal CurrentWeather::temperature() const
 {
     return m_temperature;
 }
@@ -109,11 +109,21 @@ void CurrentWeather::handleCurrent(const QByteArray &reply)
     QJsonObject weather = object.value("weather").toArray().first().toObject();
     m_weatherCode = weather.value("id").toVariant().toInt();
     m_description = weather.value("description").toVariant().toString();
+    m_weatherIcon = weather.value("icon").toVariant().toString();
+
+    QJsonObject wind = object.value("wind").toArray().first().toObject();
+    m_windDeg = wind.value("wind_deg").toVariant().toDouble();
+    m_windSpeed = wind.value("wind_speed").toVariant().toDouble();
+    m_windGusts = wind.value("wind_gusts").toVariant().toDouble();
+
+    QJsonObject clouds = object.value("clouds").toArray().first().toObject();
+    m_clouds = clouds.value("all").toVariant().toInt();
 
     QJsonObject main = object.value("main").toObject();
-    m_temperature = int(main.value("temp").toDouble());
-    m_minTemperature = int(main.value("temp_min").toDouble());
-    m_maxTemperature = int(main.value("temp_max").toDouble());
+    m_temperature = main.value("temp").toDouble();
+    m_minTemperature = main.value("temp_min").toDouble();
+    m_maxTemperature = main.value("temp_max").toDouble();
+    m_humidity = main.value("humidity").toDouble();
 }
 
 void CurrentWeather::handleForecast(const QByteArray &reply)
@@ -152,27 +162,29 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
 
         QJsonObject weather = obj.value("weather").toArray().first().toObject();
 
+        QString weatherIcon = weather.value("icon").toVariant().toString();
+
         int code = weather.value("id").toVariant().toInt();
         QString desc = weather.value("description").toVariant().toString();
 
         QJsonObject main = obj.value("main").toObject();
-        int min_temp = int(main.value("temp_min").toDouble());
-        int max_temp = int(main.value("temp_max").toDouble());
+        int min_temp = main.value("temp_min").toDouble();
+        int max_temp = main.value("temp_max").toDouble();
         int wind_speed = 0;
         f.setWindMaxSpeed(0);
         f.setWindMinSpeed(255);
         if (obj.contains("rain")) {
             QJsonObject rain = obj.value("rain").toObject();
-            total_rain += int(rain.value("3h").toDouble());
+            total_rain += rain.value("3h").toDouble();
         }
         if (obj.contains("snow")) {
             QJsonObject snow = obj.value("snow").toObject();
-            total_snow += int(snow.value("3h").toDouble());
+            total_snow += snow.value("3h").toDouble();
         }
 
         if (obj.contains("wind")) {
             QJsonObject wind = obj.value("wind").toObject();
-            wind_speed += int(wind.value("speed").toDouble());
+            wind_speed += wind.value("speed").toDouble();
         }
 
         qDebug() << "Forecast on " << dt << d << t << min_temp << max_temp << desc << code << "Hour:" << t.hour();
@@ -197,8 +209,9 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
             f.setDateTime(dt);
             f.setDescription(desc);
             f.setWeatherCode(code);
-            f.setPressure(int(main.value("pressure").toDouble()));
-            f.setHumidity(int(main.value("humidity").toDouble()));
+            f.setWeatherIcon(weatherIcon);
+            f.setPressure(main.value("pressure").toDouble());
+            f.setHumidity(main.value("humidity").toDouble());
         }
         if (max_temp > f.maxTemperature()){
             f.setMaxTemperature(max_temp);
@@ -308,12 +321,42 @@ int CurrentWeather::weatherCode() const
     return m_weatherCode;
 }
 
-int CurrentWeather::minTemperature() const
+QString CurrentWeather::weatherIcon() const
+{
+    return m_weatherIcon;
+}
+
+qreal CurrentWeather::windDeg() const
+{
+    return m_windDeg;
+}
+
+qreal CurrentWeather::windSpeed() const
+{
+    return m_windSpeed;
+}
+
+qreal CurrentWeather::windGusts() const
+{
+    return m_windGusts;
+}
+
+int CurrentWeather::humidity() const
+{
+    return m_humidity;
+}
+
+int CurrentWeather::clouds() const
+{
+    return m_clouds;
+}
+
+qreal CurrentWeather::minTemperature() const
 {
     return m_minTemperature;
 }
 
-int CurrentWeather::maxTemperature() const
+qreal CurrentWeather::maxTemperature() const
 {
     return m_maxTemperature;
 }
@@ -328,22 +371,33 @@ QString CurrentWeather::description() const
     return m_description;
 }
 
-int CurrentWeather::Forecast::minTemperature() const
+qreal CurrentWeather::Forecast::minTemperature() const
 {
     return m_minTemperature;
 }
 
-void CurrentWeather::Forecast::setMinTemperature(int minTemperature)
+void CurrentWeather::Forecast::setMinTemperature(qreal minTemperature)
 {
     m_minTemperature = minTemperature;
 }
 
-int CurrentWeather::Forecast::maxTemperature() const
+qreal CurrentWeather::Forecast::maxTemperature() const
 {
     return m_maxTemperature;
 }
 
-void CurrentWeather::Forecast::setMaxTemperature(int maxTemperature)
+void CurrentWeather::Forecast::setWeatherIcon(QString _weatherIcon)
+{
+    m_weatherIcon = _weatherIcon;
+}
+
+QString CurrentWeather::Forecast::weatherIcon() const
+{
+    return m_weatherIcon;
+}
+
+
+void CurrentWeather::Forecast::setMaxTemperature(qreal maxTemperature)
 {
     m_maxTemperature = maxTemperature;
 }
