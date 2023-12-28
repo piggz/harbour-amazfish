@@ -3,7 +3,6 @@
 const char* BatteryService::UUID_SERVICE_BATTERY  = "0000180f-0000-1000-8000-00805f9b34fb";
 const char* BatteryService::UUID_CHARACTERISTIC_BATTERY_LEVEL = "00002a19-0000-1000-8000-00805f9b34fb";
 
-
 BatteryService::BatteryService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_BATTERY, path, parent)
 {
     qDebug() << Q_FUNC_INFO;

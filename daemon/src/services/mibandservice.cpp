@@ -22,35 +22,6 @@ const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER = "000000
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE = "00000016-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ = "00000017-0000-3512-2118-0009af100700";
 
-constexpr uint8_t MiBandService::DATEFORMAT_TIME[];
-constexpr uint8_t MiBandService::DATEFORMAT_DATETIME[];
-constexpr uint8_t MiBandService::DATEFORMAT_TIME_12_HOURS[];
-constexpr uint8_t MiBandService::DATEFORMAT_TIME_24_HOURS[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST[];
-constexpr uint8_t MiBandService::COMMAND_SCHEDULE_DISPLAY_ON_LIFT_WRIST[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_GOAL_NOTIFICATION[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_GOAL_NOTIFICATION[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_ROTATE_WRIST_TO_SWITCH_INFO[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_ROTATE_WRIST_TO_SWITCH_INFO[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_DISPLAY_CALLER[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_DISPLAY_CALLER[];
-constexpr uint8_t MiBandService::COMMAND_DISTANCE_UNIT_METRIC[];
-constexpr uint8_t MiBandService::COMMAND_DISTANCE_UNIT_IMPERIAL[];
-constexpr uint8_t MiBandService::COMMAND_SET_FITNESS_GOAL_START[];
-constexpr uint8_t MiBandService::COMMAND_SET_FITNESS_GOAL_END[];
-constexpr uint8_t MiBandService::COMMAND_CHANGE_SCREENS[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_DISCONNECT_NOTIFICATION[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_DISCONNECT_NOTIFICATION[];
-
-constexpr uint8_t MiBandService::DISPLAY_XXX[];
-constexpr uint8_t MiBandService::DISPLAY_YYY[];
-constexpr uint8_t MiBandService::WEAR_LOCATION_LEFT_WRIST[];
-constexpr uint8_t MiBandService::WEAR_LOCATION_RIGHT_WRIST[];
-constexpr uint8_t MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS[];
-constexpr uint8_t MiBandService::RESPONSE_FINISH_SUCCESS[];
-constexpr uint8_t MiBandService::RESPONSE_FINISH_FAIL[];
-
 MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND, path, parent)
 {
     qDebug() << "MiBandService::MiBandService";

@@ -11,7 +11,6 @@ const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_MANUFACTURER_NAME = "000
 const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_SYSTEM_ID = "00002a23-0000-1000-8000-00805f9b34fb";
 const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_PNP_ID = "00002a50-0000-1000-8000-00805f9b34fb";
 
-
 DeviceInfoService::DeviceInfoService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_DEVICEINFO, path, parent)
 {
     qDebug() << "BipInfoService::BipInfoService";
