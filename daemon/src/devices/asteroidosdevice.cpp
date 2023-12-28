@@ -5,6 +5,7 @@
 #include "asteroidweatherservice.h"
 #include "asteroidnotificationservice.h"
 #include "asteroidmediaservice.h"
+#include "asteroidscreenshotservice.h"
 
 #include <QtXml/QtXml>
 
@@ -155,6 +156,8 @@ void AsteroidOSDevice::parseServices()
                 addService(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION, new AsteroidNotificationService(path, this));
             } else if (uuid == AsteroidMediaService::UUID_SERVICE_MEDIA  && !service(AsteroidMediaService::UUID_SERVICE_MEDIA  )) {
                 addService(AsteroidMediaService::UUID_SERVICE_MEDIA  , new AsteroidMediaService(path, this));
+            } else if (uuid == AsteroidScreenshotService::UUID_SERVICE_SCREENSHOT  && !service(AsteroidScreenshotService::UUID_SERVICE_SCREENSHOT  )) {
+                addService(AsteroidScreenshotService::UUID_SERVICE_SCREENSHOT, new AsteroidScreenshotService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -191,8 +194,12 @@ void AsteroidOSDevice::initialise()
     AsteroidMediaService *ms = qobject_cast<AsteroidMediaService*>(service(AsteroidMediaService::UUID_SERVICE_MEDIA));
     if (ms) {
         ms->enableNotification(AsteroidMediaService::UUID_CHARACTERISTIC_MEDIA_COMMAND);
-        ms->enableNotification(AsteroidMediaService::UUID_CHARACTERISTIC_MEDIA_VOLUME);
         connect(ms, &AsteroidMediaService::serviceEvent, this, &AsteroidOSDevice::serviceEvent, Qt::UniqueConnection);
+    }
+
+    AsteroidScreenshotService *screenshot = qobject_cast<AsteroidScreenshotService*>(service(AsteroidScreenshotService::UUID_SERVICE_SCREENSHOT));
+    if (screenshot) {
+        connect(screenshot, &AsteroidScreenshotService::screenshotReceived, this, &AsteroidOSDevice::screenshotReceived, Qt::UniqueConnection);
     }
 
 }
@@ -276,6 +283,37 @@ void AsteroidOSDevice::serviceEvent(const QString &characteristic, uint8_t event
         }
     } else {
         qDebug() << Q_FUNC_INFO << characteristic << event << data;
+    }
+
+}
+
+void AsteroidOSDevice::screenshotReceived(QByteArray data) {
+
+    QString filename = "screenshot_" + QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss") + ".png";
+    QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    QFile *screenshotFile = new QFile(cachelocation.absolutePath() + "/logs/" + filename);
+    QDataStream *dataStream = nullptr;
+
+    if(screenshotFile->open(QIODevice::WriteOnly)) {
+        dataStream = new QDataStream(screenshotFile);
+        if (dataStream) {
+            *dataStream << data;
+        }
+        screenshotFile->close();
+    }
+
+    delete dataStream;
+    delete screenshotFile;
+    emit message(tr("Stored %1...").arg(filename));
+
+}
+
+void AsteroidOSDevice::requestScreenshot() {
+    qDebug() << Q_FUNC_INFO;
+
+    AsteroidScreenshotService *screenshot = qobject_cast<AsteroidScreenshotService*>(service(AsteroidScreenshotService::UUID_SERVICE_SCREENSHOT));
+    if (screenshot) {
+        screenshot->requestScreenshot();
     }
 
 }

@@ -113,6 +113,7 @@ public:
     virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0);
     virtual void navigationRunning(bool running);
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress);
+    virtual void requestScreenshot();
     virtual QStringList supportedDisplayItems() const;
 
     //signals    
