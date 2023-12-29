@@ -706,7 +706,7 @@ void DeviceInterface::findDevice()
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        qDebug() << "Unable to open chirm sound";
+        qDebug() << "Unable to open chirp sound";
         return;
     }
 
