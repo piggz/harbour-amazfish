@@ -312,6 +312,12 @@ void HuamiDevice::serviceEvent(char event)
     case MiBandService::EVENT_IGNORE_CALL:
         emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
         break;
+    case MiBandService::EVENT_FIND_PHONE:
+        emit deviceEvent(AbstractDevice::EVENT_FIND_PHONE);
+        break;
+    case MiBandService::EVENT_CANCEL_FIND_PHONE:
+        emit deviceEvent(AbstractDevice::EVENT_CANCEL_FIND_PHONE);
+        break;
     default:
         break;
     }
