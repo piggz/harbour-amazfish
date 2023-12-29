@@ -60,6 +60,7 @@ public:
     static const uint8_t EVENT_DECLINE_CALL = 0x07;
     static const uint8_t EVENT_IGNORE_CALL = 0x09;
     static const uint8_t EVENT_FIND_PHONE = 0x08;
+    static const uint8_t EVENT_CANCEL_FIND_PHONE = 0x0f;
     static const uint8_t MTU_REQUEST = 0x16;
     static const uint8_t EVENT_MUSIC = 0xfe;
     static const uint8_t EVENT_MUSIC_OPEN = 0xe0;

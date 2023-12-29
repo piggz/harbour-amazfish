@@ -63,7 +63,7 @@ public:
     };
     Q_ENUM(Settings)
 
-    enum Events {
+    enum Event {
         EVENT_MUSIC_STOP,
         EVENT_MUSIC_PLAY,
         EVENT_MUSIC_PAUSE,
@@ -74,9 +74,11 @@ public:
         EVENT_APP_MUSIC,
         EVENT_DECLINE_CALL,
         EVENT_ANSWER_CALL,
-        EVENT_IGNORE_CALL
+        EVENT_IGNORE_CALL,
+        EVENT_FIND_PHONE,
+        EVENT_CANCEL_FIND_PHONE
     };
-    Q_ENUM(Events)
+    Q_ENUM(Event)
 
     explicit AbstractDevice(const QString &pairedName, QObject *parent = nullptr);
     
@@ -121,7 +123,7 @@ public:
     Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void connectionStateChanged();
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString& val);
-    Q_SIGNAL void deviceEvent(Events event);
+    Q_SIGNAL void deviceEvent(Event event);
 
 protected:
     bool m_needsAuth = false;

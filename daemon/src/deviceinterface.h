@@ -100,7 +100,10 @@ private:
     DBusHRM *m_dbusHRM = nullptr;
 
     QTimer *m_refreshTimer = nullptr;
+    QTimer *m_findDeviceTimer = nullptr;
     Q_SLOT void onRefreshTimer();
+    void findDevice();
+    int m_playedSounds = 0;
 
     void createSettings();
     void updateServiceController();
@@ -116,14 +119,14 @@ private:
     Q_SLOT void onConnectionStateChanged();
     Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
     Q_SLOT void musicChanged();
-    Q_SLOT void deviceEvent(AbstractDevice::Events event);
+    Q_SLOT void deviceEvent(AbstractDevice::Event event);
     Q_SLOT void handleButtonPressed(int presses);
     Q_SLOT void onEventTimer();
     Q_SLOT void backgroundActivityStateChanged();
 
     void sendBufferedNotifications();
     void scheduleNextEvent();
-    
+
     //Watchfish
     watchfish::MusicController m_musicController;
 #if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)

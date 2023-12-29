@@ -81,13 +81,17 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
 
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
         if (value[0] == EVENT_DECLINE_CALL) {
-            emit serviceEvent(EVENT_DECLINE_CALL);
+            emit serviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
         } else if (value[0] == EVENT_IGNORE_CALL) {
-            emit serviceEvent(EVENT_IGNORE_CALL);
+            emit serviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
         } else if (value[0] == EVENT_BUTTON) {
             emit buttonPressed();
         } else if (value[0] == EVENT_MUSIC) {
             emit serviceEvent(value[1]);
+        } else if (value[0] == EVENT_FIND_PHONE) {
+            emit serviceEvent(EVENT_FIND_PHONE);
+        } else if (value[0] == EVENT_CANCEL_FIND_PHONE) {
+            emit serviceEvent(EVENT_CANCEL_FIND_PHONE);
         } else {
             qDebug() << "device event " << value[0];
             if (value[0] == MTU_REQUEST) {

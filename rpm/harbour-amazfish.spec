@@ -54,6 +54,7 @@ BuildRequires:  qt5-qttools-linguist
 BuildRequires:  desktop-file-utils
 BuildRequires:  libkeepalive-devel
 BuildRequires:  libkf5archive-devel
+BuildRequires:  pulseaudio-devel
 
 %description
 Watch companion application for SalfishOS
@@ -119,5 +120,6 @@ desktop-file-install --delete-original       \
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-ui.svg
 %{_userunitdir}/harbour-amazfish.service
 %{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges
+%{_datadir}/harbour-amazfish/chirp.raw
 # >> files
 # << files

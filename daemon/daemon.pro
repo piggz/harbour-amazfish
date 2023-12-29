@@ -33,10 +33,10 @@ equals(FLAVOR, "silica") {
 flavor_silica {
     message(SailfishOS daemon build)
     DEFINES += MER_EDITION_SAILFISH
-    LIBS += -lkeepalive
+    LIBS += -lkeepalive -lpulse-simple
     CONFIG += sailfishapp
     CONFIG += link_pkgconfig
-    PKGCONFIG += mlite5
+    PKGCONFIG += mlite5 libpulse
     WATCHFISH_FEATURES += music \
                       voicecall \
                       notificationmonitor \
@@ -80,6 +80,9 @@ systemd_services.path = $$PREFIX/lib/systemd/user/
 systemd_services.files = $$OUT_PWD/harbour-amazfish.service
 systemd_services.CONFIG += no_check_exist
 
+chirp.path = $$PREFIX/share/harbour-amazfish/
+chirp.files = chirp.raw
+
 #Install appropriate files for each system
 flavor_silica {
     systemd_services.commands =  cp $$PWD/harbour-amazfish-sailfish.service.in $$OUT_PWD/harbour-amazfish.service
@@ -94,7 +97,8 @@ flavor_silica {
 }
 
 INSTALLS += target \
-            systemd_services
+            systemd_services \
+            chirp
 
 include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
@@ -168,6 +172,7 @@ SOURCES += \
     src/huamiweathercondition.cpp
 
 DISTFILES += \
+    chirp.raw \
     harbour-amazfish-sailfish.service.in \
     harbour-amazfish.service.in \
     harbour-amazfishd.privileges
