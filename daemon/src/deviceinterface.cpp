@@ -17,7 +17,7 @@
 #include <KDb3/KDbDriverManager>
 #include <KDb3/KDbTransactionGuard>
 
-#if MER_EDITION_SAILFISH
+#ifdef MER_EDITION_SAILFISH
 #include <pulse/simple.h>
 #include <pulse/error.h>
 #endif
@@ -690,7 +690,7 @@ void DeviceInterface::findDevice()
 
     m_playedSounds++;
 
-#if MER_EDITION_SAILFISH
+#ifdef MER_EDITION_SAILFISH
 
     /* The Sample format to use */
     static const pa_sample_spec ss = {
