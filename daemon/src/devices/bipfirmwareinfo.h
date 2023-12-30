@@ -11,7 +11,7 @@ class BipFirmwareInfo final : public HuamiFirmwareInfo
 public:
     explicit BipFirmwareInfo(const QByteArray &bytes);
     
-    virtual bool supportedOnDevice(const QString &device) const override;
+    bool supportedOnDevice(const QString &device) const override;
 
 private:
     void determineFirmwareType();

@@ -7,7 +7,7 @@ class InfinitimeFirmwareInfo : public AbstractFirmwareInfo
 {
 public:;
     explicit InfinitimeFirmwareInfo(const QByteArray &bytes);
-    virtual bool supportedOnDevice(const QString &device) const override;
+    bool supportedOnDevice(const QString &device) const override;
 
 private:
     void determineFirmwareType();

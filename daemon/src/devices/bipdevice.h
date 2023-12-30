@@ -83,17 +83,17 @@ class BipDevice : public HuamiDevice
 public:
     explicit BipDevice(const QString &pairedName, QObject *parent = nullptr);
 
-    virtual int supportedFeatures() const override;
-    virtual QString deviceType() const override;
-    virtual QStringList supportedDisplayItems() const override;
-    virtual void applyDeviceSetting(AbstractDevice::Settings s) override;
+    int supportedFeatures() const override;
+    QString deviceType() const override;
+    QStringList supportedDisplayItems() const override;
+    void applyDeviceSetting(AbstractDevice::Settings s) override;
 
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
-    virtual void sendWeather(CurrentWeather *weather) override;
+    void sendWeather(CurrentWeather *weather) override;
 
-    virtual void navigationRunning(bool running) override;
-    virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
+    void navigationRunning(bool running) override;
+    void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
 protected:
     void initialise() override;

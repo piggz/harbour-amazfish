@@ -19,16 +19,16 @@ class HuamiDevice : public AbstractDevice
 public:
     explicit HuamiDevice(const QString &pairedName, QObject *parent = nullptr);
     
-    virtual void abortOperations() override;
+    void abortOperations() override;
 
-    virtual void refreshInformation() override;
-    virtual QString information(Info i) const override;
-    virtual void rebootWatch() override;
+    void refreshInformation() override;
+    QString information(Info i) const override;
+    void rebootWatch() override;
 
-    virtual void applyDeviceSetting(Settings s) override;
+    void applyDeviceSetting(Settings s) override;
 
-    virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
-    virtual void incomingCall(const QString &caller) override;
+    void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
+    void incomingCall(const QString &caller) override;
 
     QString softwareRevision();
     
@@ -36,16 +36,16 @@ public:
     void downloadActivityData() override;
     void fetchLogs() override;
 
-    virtual void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
-    virtual void startDownload() override;
+    void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
+    void startDownload() override;
 
     Q_SLOT void authenticated(bool ready);
 
     void sendWeatherHuami(CurrentWeather *weather, bool sendConditionString);
 
-    virtual int activitySampleSize();
-    virtual void navigationRunning(bool running) override;
-    virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
+    int activitySampleSize();
+    void navigationRunning(bool running) override;
+    void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
     void setDatabase(KDbConnection *conn) override;
 
