@@ -106,8 +106,15 @@ void AbstractDevice::startDownload()
 }
 
 void AbstractDevice::downloadSportsData()
+{   
+}
+
+void AbstractDevice::downloadActivityData()
 {
-    
+}
+
+void AbstractDevice::fetchLogs()
+{
 }
 
 void AbstractDevice::sendWeather(CurrentWeather *weather)

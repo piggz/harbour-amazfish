@@ -91,7 +91,7 @@ public:
     bool supportsFeature(Feature f) const;
     virtual int supportedFeatures() const = 0;
 
-    void setDatabase(KDbConnection *conn);
+    virtual void setDatabase(KDbConnection *conn);
 
     virtual QString deviceType() const = 0;
     QString deviceName() const;
@@ -103,6 +103,8 @@ public:
     virtual void startDownload();
 
     virtual void downloadSportsData();
+    virtual void downloadActivityData();
+    virtual void fetchLogs();
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
     virtual QString information(Info i) const;

@@ -1,8 +1,6 @@
 #include "deviceinterface.h"
 
 #include "deviceinfoservice.h"
-#include "mibandservice.h"
-#include "miband2service.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
 #include "bipfirmwareservice.h"
@@ -153,11 +151,6 @@ QString DeviceInterface::connectionState() const
         return QString();
     }
     return m_device->connectionState();
-}
-
-MiBandService *DeviceInterface::miBandService() const
-{
-    return qobject_cast<MiBandService*>(m_device->service(MiBandService::UUID_SERVICE_MIBAND));
 }
 
 HRMService *DeviceInterface::hrmService() const
@@ -441,9 +434,8 @@ void DeviceInterface::onConnectionStateChanged()
 
     if (connectionState() == "authenticated") {
         m_device->setDatabase(dbConnection());
-        if (miBandService()) {
-            miBandService()->setDatabase(dbConnection());
-            m_dbusHRM->setMiBandService(miBandService());
+        if (m_device) {
+            m_dbusHRM->setDevice(m_device);
         }
         if (hrmService()) {
             m_dbusHRM->setHRMService(hrmService());
@@ -778,15 +770,15 @@ bool DeviceInterface::operationRunning()
 
 void DeviceInterface::downloadSportsData()
 {
-    if (miBandService()) {
-        miBandService()->fetchSportsSummaries();
+    if (m_device) {
+        m_device->downloadSportsData();
     }
 }
 
 void DeviceInterface::downloadActivityData()
 {
-    if (miBandService()) {
-        miBandService()->fetchActivityData();
+    if (m_device) {
+        m_device->downloadActivityData();
     }
 }
 
@@ -1008,8 +1000,8 @@ void DeviceInterface::enableFeature(int feature)
 
 void DeviceInterface::fetchLogs()
 {
-    if (miBandService()) {
-        miBandService()->fetchLogs();
+    if (m_device) {
+        m_device->fetchLogs();
     }
 }
 
