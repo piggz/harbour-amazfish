@@ -451,24 +451,12 @@
         <translation>Guardar</translation>
     </message>
     <message>
-        <source>Refresh weather every (</source>
-        <translation type="vanished">Actualizar Tiempo cada (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation type="vanished">) minutos</translation>
-    </message>
-    <message>
         <source>Sync activity data each hour</source>
         <translation>Sincronizar datos de actividad cada hora</translation>
     </message>
     <message>
         <source>Low battery notification</source>
         <translation>Notificación de batería baja</translation>
-    </message>
-    <message>
-        <source>Refresh calendar every (</source>
-        <translation type="vanished">Actualizar calendario cada (</translation>
     </message>
     <message>
         <source>Notifications</source>
@@ -900,6 +888,18 @@
     <message>
         <source>Heartrate usage</source>
         <translation>Uso de frecuencia cardiaca</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -61,11 +61,26 @@
         <source>Intensity</source>
         <translation>Нагрузка</translation>
     </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BatteryPage</name>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -367,6 +382,10 @@
         <source>No devices found</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bluetooth adapter is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
@@ -432,23 +451,11 @@
         <translation>Сохранить настройки</translation>
     </message>
     <message>
-        <source>Refresh weather every (</source>
-        <translation>Обновлять сведения о погоде через (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation>) минут</translation>
-    </message>
-    <message>
         <source>Sync activity data each hour</source>
         <translation>Синхронизировать данные об активности каждый час.</translation>
     </message>
     <message>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Refresh calendar every (</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -497,6 +504,18 @@
     </message>
     <message>
         <source>Simulate event reminder support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transliterate notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh weather every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh calendar every (%1) minutes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -870,6 +889,18 @@
         <source>Heartrate usage</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SleepPage</name>
@@ -1116,6 +1147,10 @@
     </message>
     <message>
         <source>Country: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not logged in</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -451,14 +451,6 @@
         <translation>Instellingen opslaan</translation>
     </message>
     <message>
-        <source>Refresh weather every (</source>
-        <translation type="vanished">Ververs het weer elke (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation type="vanished">) minuten</translation>
-    </message>
-    <message>
         <source>Sync activity data each hour</source>
         <translation>Synchroniseer activiteitsgegevens elk uur</translation>
     </message>
@@ -485,10 +477,6 @@
     <message>
         <source>Refresh rates</source>
         <translation>Verversingssnelheid</translation>
-    </message>
-    <message>
-        <source>Refresh calendar every (</source>
-        <translation type="vanished">Agenda bijwerken iedere (</translation>
     </message>
     <message>
         <source>Amazfish Service</source>
@@ -900,6 +888,18 @@
     <message>
         <source>Heartrate usage</source>
         <translation>Hartslag-gebruik</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
