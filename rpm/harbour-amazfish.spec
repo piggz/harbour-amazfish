@@ -55,6 +55,7 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  libkeepalive-devel
 BuildRequires:  libkf5archive-devel
 BuildRequires:  pulseaudio-devel
+BuildRequires:  libicu-devel
 
 %description
 Watch companion application for SalfishOS
