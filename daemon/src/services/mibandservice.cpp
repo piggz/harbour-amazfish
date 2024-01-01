@@ -433,11 +433,21 @@ void MiBandService::setAlertFitnessGoal()
 
 void MiBandService::setEnableDisplayOnLiftWrist()
 {
-    auto value = AmazfishConfig::instance()->profileDisplayOnLiftWrist()
-            ? COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST
-            : COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST;
+    QByteArray cmd;
 
-    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, UCHARARR_TO_BYTEARRAY(value));
+    if (AmazfishConfig::instance()->profileDisplayOnLiftWrist() == AmazfishConfig::DisplayLiftWristOff) {
+        cmd = UCHARARR_TO_BYTEARRAY(COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST);
+    } else  if (AmazfishConfig::instance()->profileDisplayOnLiftWrist() == AmazfishConfig::DisplayLiftWristOn) {
+        cmd = UCHARARR_TO_BYTEARRAY(COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST);
+    } else {
+        cmd = UCHARARR_TO_BYTEARRAY(COMMAND_SCHEDULE_DISPLAY_ON_LIFT_WRIST);
+        cmd[4] = AmazfishConfig::instance()->profileWristScheduleStart().time().hour();
+        cmd[5] = AmazfishConfig::instance()->profileWristScheduleStart().time().minute();
+        cmd[6] = AmazfishConfig::instance()->profileWristScheduleEnd().time().hour();
+        cmd[7] = AmazfishConfig::instance()->profileWristScheduleEnd().time().minute();
+    }
+
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
 }
 
 void MiBandService::setDisplayItems()
