@@ -168,8 +168,8 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
         QString desc = weather.value("description").toVariant().toString();
 
         QJsonObject main = obj.value("main").toObject();
-        int min_temp = main.value("temp_min").toDouble();
-        int max_temp = main.value("temp_max").toDouble();
+        qreal min_temp = main.value("temp_min").toDouble();
+        qreal max_temp = main.value("temp_max").toDouble();
         int wind_speed = 0;
         f.setWindMaxSpeed(0);
         f.setWindMinSpeed(255);
