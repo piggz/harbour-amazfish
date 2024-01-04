@@ -13,14 +13,14 @@ const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_PNP_ID = "00002a50-0000-
 
 DeviceInfoService::DeviceInfoService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_DEVICEINFO, path, parent)
 {
-    qDebug() << "BipInfoService::BipInfoService";
+    qDebug() << "DeviceInfoService::DeviceInfoService";
 
     connect(this, &QBLEService::characteristicRead, this, &DeviceInfoService::characteristicRead);
 }
 
 void DeviceInfoService::refreshInformation()
 {
-    qDebug() << "BipInfoService::refreshInformation";
+    qDebug() << "DeviceInfoService::refreshInformation";
 
     readAsync(UUID_CHARACTERISTIC_INFO_SERIAL_NO);
     readAsync(UUID_CHARACTERISTIC_INFO_HARDWARE_REV);
