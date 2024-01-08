@@ -60,20 +60,20 @@ BuildRequires:  libicu-devel
 %description
 Watch companion application for SalfishOS
 
-%if "%{?vendor}" == "chum"
-PackageName: Amazfish
+%if 0%{?_chum}
+Title: Amazfish
 Type: desktop-application
 DeveloperName: Adam Pigg
 Categories:
  - Utility
 Custom:
   Repo: https://github.com/piggz/harbour-amazfish
-Icon: https://raw.githubusercontent.com/piggz/harbour-amazfish/master/harbour-amazfish-ui.svg
+PackageIcon: https://raw.githubusercontent.com/piggz/harbour-amazfish/master/harbour-amazfish-ui.svg
 Screenshots:
  - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot1.png
  - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot2.png
  - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot3.png
-Url:
+Links:
   Homepage: https://github.com/piggz/harbour-amazfish
   Help: https://github.com/piggz/harbour-amazfish/discussions
   Bugtracker: https://github.com/piggz/harbour-amazfish/issues
