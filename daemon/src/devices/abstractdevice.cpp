@@ -136,7 +136,7 @@ QString AbstractDevice::information(Info i) const
 void AbstractDevice::applyDeviceSetting(Settings s)
 {
     Q_UNUSED(s);
-    emit message(tr("Device doen not support settings"));
+    emit message(tr("Device does not support settings"));
 }
 
 void AbstractDevice::rebootWatch()
