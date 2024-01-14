@@ -30,7 +30,9 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
 
     QByteArray send = QByteArray(1, category) + QByteArray(1, 1); //1 alert
 
-    send += QByteArray(1, mapSenderToIcon(sender));
+    if (category == 0xfa) {
+        send += QByteArray(1, icon);
+    }
     send += sender.left(32).toUtf8() + QByteArray(1, m_seperatorChar); //Bip needs 0x00 for seperator, others may be different
 
     if (!subject.isEmpty()) {
