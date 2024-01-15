@@ -17,7 +17,7 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
 {
     qDebug() << "Alert:" << sender << subject << message;
 
-    int category = 0xfa; //Custom Huami icon
+    int category = AlertCategory::CustomHuami;
     int icon = mapSenderToIcon(sender);
 
     if (sender == "Messages") { //SMS must use category, not icon
@@ -30,7 +30,7 @@ void AlertNotificationService::sendAlert(const QString &sender, const QString &s
 
     QByteArray send = QByteArray(1, category) + QByteArray(1, 1); //1 alert
 
-    if (category == 0xfa) {
+    if (category == AlertCategory::CustomHuami) {
         send += QByteArray(1, icon);
     }
     send += sender.left(32).toUtf8() + QByteArray(1, m_seperatorChar); //Bip needs 0x00 for seperator, others may be different
