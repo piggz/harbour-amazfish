@@ -289,9 +289,21 @@ void AsteroidOSDevice::serviceEvent(const QString &characteristic, uint8_t event
 
 void AsteroidOSDevice::screenshotReceived(QByteArray data) {
 
-    QString filename = "screenshot_" + QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss") + ".png";
+    QString filename = "screenshot_" + QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss") + ".jpg";
     QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
-    QFile *screenshotFile = new QFile(cachelocation.absolutePath() + "/logs/" + filename);
+    if (!cachelocation.exists()) {
+        qDebug() << "Creating cahe amazfish folder";
+        if (!cachelocation.mkpath("logs")) {
+            qDebug() << "Error creating amazfish logs folder!";
+            return;
+        }
+    }
+
+    QString fullpath = cachelocation.absolutePath() + "/logs/" + filename;
+    QFile *screenshotFile = new QFile(fullpath);
+
+    qDebug() << fullpath;
+
     QDataStream *dataStream = nullptr;
 
     if(screenshotFile->open(QIODevice::WriteOnly)) {

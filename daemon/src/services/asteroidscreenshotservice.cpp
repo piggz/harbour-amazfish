@@ -11,7 +11,7 @@ AsteroidScreenshotService::AsteroidScreenshotService(const QString &path, QObjec
     qDebug() << Q_FUNC_INFO;
     connect(this, &QBLEService::characteristicChanged, this, &AsteroidScreenshotService::characteristicChanged);
     enableNotification(UUID_CHARACTERISTIC_SCREENSHOT_CONTENT);
-    descriptorWrittenInt(UUID_CHARACTERISTIC_SCREENSHOT_CONTENT , QByteArray::fromHex("0100"));
+    writeDescriptorAsync(UUID_CHARACTERISTIC_SCREENSHOT_CONTENT, "00002902-0000-1000-8000-00805f9b34fb", QByteArray::fromHex("0100"));
 }
 
 void AsteroidScreenshotService::requestScreenshot()
