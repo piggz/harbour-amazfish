@@ -1,4 +1,5 @@
 #include "devicefactory.h"
+#include "asteroidosdevice.h"
 #include "huamidevice.h"
 #include "gtsdevice.h"
 #include "biplitedevice.h"
@@ -54,6 +55,21 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 
     if (deviceName.startsWith("Bangle.js")) {
         return new BangleJSDevice(deviceName);
+    }
+
+    QList<QString> asteroidDevices = {
+        "AsteroidOS",
+        "bass", "sturgeon", "narwhal", "sparrow", "dory",
+        "lenok", "catfish", "carp", "smelt", "anthias",
+        "pike", "sawfish", "ray", "firefish", "beluga", "skipjack",
+        "koi", "mooneye", "swift", "nemo", "hoki",
+        "minnow", "tetra", "sprat", "kingyo", "medaka"
+    };
+
+    for (auto iterator = asteroidDevices.begin(); iterator != asteroidDevices.end(); ++iterator) {
+        if (deviceName == *iterator) {
+            return new AsteroidOSDevice(deviceName);
+        }
     }
 
     qDebug() << "DeviceFactory::createDevice: no suitable devices found, creating a Bip device as default";

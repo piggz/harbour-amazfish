@@ -104,6 +104,7 @@ include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
 
 SOURCES += \
+    src/devices/asteroidosdevice.cpp \
     src/devices/banglejsdevice.cpp \
     src/devices/bipdevice.cpp \
     src/devices/bipsdevice.cpp \
@@ -131,6 +132,10 @@ SOURCES += \
     src/operations/huamiupdatefirmwareoperation2020.cpp \
     src/qaesencryption.cpp \
     src/services/adafruitblefsservice.cpp \
+    src/services/asteroidtimeservice.cpp \
+    src/services/asteroidweatherservice.cpp \
+    src/services/asteroidnotificationservice.cpp \
+    src/services/asteroidmediaservice.cpp \
     src/services/currenttimeservice.cpp \
     src/services/dfuservice.cpp \
     src/services/infinitimemotionservice.cpp \
@@ -181,6 +186,7 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
     src/codec.h \
+    src/devices/asteroidosdevice.h \
     src/devices/banglejsdevice.h \
     src/devices/bipdevice.h \
     src/devices/bipsdevice.h \
@@ -208,6 +214,10 @@ HEADERS += \
     src/operations/huamiupdatefirmwareoperation2020.h \
     src/qaesencryption.h \
     src/services/adafruitblefsservice.h \
+    src/services/asteroidtimeservice.h \
+    src/services/asteroidweatherservice.h \
+    src/services/asteroidnotificationservice.h \
+    src/services/asteroidmediaservice.h \
     src/services/currenttimeservice.h \
     src/services/dfuservice.h \
     src/services/infinitimemotionservice.h \
