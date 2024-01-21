@@ -506,7 +506,7 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
             log_battery_level(battery_level);
 
             if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
-                sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(m_lastBatteryLevel) + "%");
+                sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(battery_level) + "%");
             }
             m_lastBatteryLevel = battery_level;
         }
