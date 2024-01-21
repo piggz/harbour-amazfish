@@ -15,6 +15,7 @@ public:
     static const char *UUID_SERVICE_SCREENSHOT;
     static const char *UUID_CHARACTERISTIC_SCREENSHOT_REQUEST;
     static const char *UUID_CHARACTERISTIC_SCREENSHOT_CONTENT;
+    static const char *UUID_DESCRIPTOR_CLIENT_CHARACTERISTIC_CONFIGURATION;
 
     void requestScreenshot();
 
