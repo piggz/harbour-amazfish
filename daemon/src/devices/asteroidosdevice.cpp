@@ -300,22 +300,19 @@ void AsteroidOSDevice::screenshotReceived(QByteArray data) {
     }
 
     QString fullpath = picturelocation.absolutePath() + "/" + filename;
-    QFile *screenshotFile = new QFile(fullpath);
+    QFile screenshotFile(fullpath);
 
-    qDebug() << fullpath;
+    qDebug() << fullpath << data.size();
 
     QDataStream *dataStream = nullptr;
 
-    if(screenshotFile->open(QIODevice::WriteOnly)) {
-        dataStream = new QDataStream(screenshotFile);
-        if (dataStream) {
-            *dataStream << data;
-        }
-        screenshotFile->close();
+    if (!screenshotFile.open(QIODevice::WriteOnly)) {
+        qWarning() << "cannot open " << fullpath;
     }
 
-    delete dataStream;
-    delete screenshotFile;
+    screenshotFile.write(data);
+    screenshotFile.close();
+
     emit message(tr("Stored %1...").arg(filename));
 
 }

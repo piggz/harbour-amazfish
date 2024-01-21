@@ -45,8 +45,14 @@ void AsteroidScreenshotService::characteristicChanged(const QString &c, const QB
                 emit screenshotReceived(m_totalData);
                 m_downloading = false;
             } else {
-                qDebug() << Q_FUNC_INFO << m_progress << "/" << m_totalSize;
-                emit progressChanged((m_progress * 100)/m_totalSize);
+
+                unsigned int progressPct = (m_progress * 100)/m_totalSize;
+                if (m_lastProgressPct != progressPct) {
+                    m_lastProgressPct = progressPct;
+                    qDebug() << Q_FUNC_INFO << m_progress << "/" << m_totalSize << " => " << progressPct << "%";
+                    emit progressChanged(progressPct);
+                }
+
             }
         }
     }

@@ -31,6 +31,7 @@ private:
     QByteArray m_totalData;
     unsigned int m_progress;
     unsigned int m_totalSize;
+    unsigned int m_lastProgressPct = 101;
 
 };
 
