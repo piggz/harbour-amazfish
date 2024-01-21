@@ -1,12 +1,12 @@
-#ifndef GTSFIRMWAREINFO_H
-#define GTSFIRMWAREINFO_H
+#ifndef GTRFIRMWAREINFO_H
+#define GTRFIRMWAREINFO_H
 
 #include "huamifirmwareinfo.h"
 
-class GtsFirmwareInfo : public HuamiFirmwareInfo
+class GtrFirmwareInfo : public HuamiFirmwareInfo
 {
 public:
-    explicit GtsFirmwareInfo(const QByteArray &bytes);
+    explicit GtrFirmwareInfo(const QByteArray &bytes);
 
     bool supportedOnDevice(const QString &device) const override;
 
@@ -16,7 +16,6 @@ private:
 
     QMap<uint16_t, QString> m_crcMap;
 
-    void populateCrcMap();
 };
 
 #endif // GTSFIRMWAREINFO_H

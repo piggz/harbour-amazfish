@@ -39,6 +39,30 @@ QString HuamiDevice::softwareRevision()
     return m_softwareRevision;
 }
 
+void HuamiDevice::downloadSportsData()
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->fetchSportsSummaries();
+    }
+}
+
+void HuamiDevice::downloadActivityData()
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->fetchActivityData();
+    }
+}
+
+void HuamiDevice::fetchLogs()
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->fetchLogs();
+    }
+}
+
 void HuamiDevice::refreshInformation()
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
@@ -155,6 +179,15 @@ void HuamiDevice::navigationRunning(bool running)
 void HuamiDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
 {
     sendAlert("navigation", tr("Progress") + ":" + QString::number(progress), narrative + "\n" + manDist);
+}
+
+void HuamiDevice::setDatabase(KDbConnection *conn)
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi){
+        mi->setDatabase(conn);
+    }
+    AbstractDevice::setDatabase(conn);
 }
 
 void HuamiDevice::handleButtonPressed()
@@ -311,6 +344,12 @@ void HuamiDevice::serviceEvent(char event)
         break;
     case MiBandService::EVENT_IGNORE_CALL:
         emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
+        break;
+    case MiBandService::EVENT_FIND_PHONE:
+        emit deviceEvent(AbstractDevice::EVENT_FIND_PHONE);
+        break;
+    case MiBandService::EVENT_CANCEL_FIND_PHONE:
+        emit deviceEvent(AbstractDevice::EVENT_CANCEL_FIND_PHONE);
         break;
     default:
         break;

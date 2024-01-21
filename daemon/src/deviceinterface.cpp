@@ -1,8 +1,6 @@
 #include "deviceinterface.h"
 
 #include "deviceinfoservice.h"
-#include "mibandservice.h"
-#include "miband2service.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
 #include "bipfirmwareservice.h"
@@ -16,6 +14,11 @@
 
 #include <KDb3/KDbDriverManager>
 #include <KDb3/KDbTransactionGuard>
+
+#ifdef MER_EDITION_SAILFISH
+#include <pulse/simple.h>
+#include <pulse/error.h>
+#endif
 
 static const char *SERVICE = SERVICE_NAME_AMAZFISH;
 static const char *PATH = "/application";
@@ -63,6 +66,10 @@ DeviceInterface::DeviceInterface()
     connect(m_refreshTimer, &QTimer::timeout, this, &DeviceInterface::onRefreshTimer);
     m_refreshTimer->start(60000);
     m_lastWeatherSync = m_lastCalendarSync = m_lastActivitySync = QDateTime::currentDateTime();
+
+    //Find device playback timer
+    m_findDeviceTimer = new QTimer();
+    connect(m_findDeviceTimer, &QTimer::timeout, this, &DeviceInterface::findDevice);
 
     //Music
     connect(&m_musicController, &watchfish::MusicController::statusChanged, this, &DeviceInterface::musicChanged);
@@ -144,11 +151,6 @@ QString DeviceInterface::connectionState() const
         return QString();
     }
     return m_device->connectionState();
-}
-
-MiBandService *DeviceInterface::miBandService() const
-{
-    return qobject_cast<MiBandService*>(m_device->service(MiBandService::UUID_SERVICE_MIBAND));
 }
 
 HRMService *DeviceInterface::hrmService() const
@@ -273,8 +275,8 @@ void DeviceInterface::createTables()
     int batteryLevel = 0;
 
     if (m_conn->querySingleNumber(
-            KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg(AbstractDevice::INFO_BATTERY), // automatically adds LIMIT 1 into query
-            &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
+                KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg(AbstractDevice::INFO_BATTERY), // automatically adds LIMIT 1 into query
+                &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
         m_lastBatteryLevel = batteryLevel;
         qDebug() << "Last Battery Level: " << m_lastBatteryLevel;
     } else {
@@ -432,9 +434,8 @@ void DeviceInterface::onConnectionStateChanged()
 
     if (connectionState() == "authenticated") {
         m_device->setDatabase(dbConnection());
-        if (miBandService()) {
-            miBandService()->setDatabase(dbConnection());
-            m_dbusHRM->setMiBandService(miBandService());
+        if (m_device) {
+            m_dbusHRM->setDevice(m_device);
         }
         if (hrmService()) {
             m_dbusHRM->setHRMService(hrmService());
@@ -505,7 +506,7 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
             log_battery_level(battery_level);
 
             if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
-                sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(m_lastBatteryLevel) + "%");
+                sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(battery_level) + "%");
             }
             m_lastBatteryLevel = battery_level;
         }
@@ -522,10 +523,10 @@ void DeviceInterface::musicChanged()
     }
 }
 
-void DeviceInterface::deviceEvent(AbstractDevice::Events event)
+void DeviceInterface::deviceEvent(AbstractDevice::Event event)
 {
     qDebug() << Q_FUNC_INFO << event;
-    emit deviceEventTriggered(QMetaEnum::fromType<AbstractDevice::Events>().valueToKey(event));
+    emit deviceEventTriggered(QMetaEnum::fromType<AbstractDevice::Event>().valueToKey(event));
     switch(event) {
     case AbstractDevice::EVENT_MUSIC_STOP:
         m_musicController.pause();
@@ -562,6 +563,12 @@ void DeviceInterface::deviceEvent(AbstractDevice::Events event)
         m_voiceCallController.answer();
         break;
 #endif
+    case AbstractDevice::EVENT_FIND_PHONE:
+        m_findDeviceTimer->start(5000);
+        break;
+    case AbstractDevice::EVENT_CANCEL_FIND_PHONE:
+        m_findDeviceTimer->stop();
+        break;
     }
 }
 
@@ -644,7 +651,7 @@ void DeviceInterface::scheduleNextEvent()
     if (!m_backgroundActivity) {
         m_backgroundActivity = new BackgroundActivity(this);
         connect(m_backgroundActivity, &BackgroundActivity::stateChanged,
-            this, &DeviceInterface::backgroundActivityStateChanged);
+                this, &DeviceInterface::backgroundActivityStateChanged);
     }
 #endif
 
@@ -667,6 +674,59 @@ void DeviceInterface::scheduleNextEvent()
     m_backgroundActivity->setWakeupRange(secsToNextEvent-30, secsToNextEvent+30);
     m_backgroundActivity->wait();
 #endif
+}
+
+void DeviceInterface::findDevice()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    m_playedSounds++;
+
+#ifdef MER_EDITION_SAILFISH
+
+    /* The Sample format to use */
+    static const pa_sample_spec ss = {
+        .format = PA_SAMPLE_S16LE,
+        .rate = 44100,
+        .channels = 2
+    };
+
+    pa_simple *s = NULL;
+    int error;
+
+    QFile file("/usr/share/harbour-amazfish/chirp.raw");
+
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Unable to open chirp sound";
+        return;
+    }
+
+    QByteArray bytes = file.readAll();
+    file.close();
+
+    if (!(s = pa_simple_new(NULL, "amazfish-daemon", PA_STREAM_PLAYBACK, NULL, "playback", &ss, NULL, NULL, &error))) {
+        qDebug() << ": pa_simple_new() failed: " << pa_strerror(error);
+        return;
+    }
+
+    /* ... and play it */
+    if (pa_simple_write(s, bytes.data(), (size_t) bytes.size(), &error) < 0) {
+        qDebug() << ": pa_simple_write() failed: " << pa_strerror(error);
+        return;
+    }
+
+    /* Make sure that every single sample was played */
+    if (pa_simple_drain(s, &error) < 0) {
+        qDebug() << ": pa_simple_drain() failed: " << pa_strerror(error);
+    }
+
+#endif
+
+    if (m_playedSounds >= 10) {
+        m_findDeviceTimer->stop();
+        m_playedSounds = 0;
+    }
 }
 
 QString DeviceInterface::prepareFirmwareDownload(const QString &path)
@@ -710,15 +770,15 @@ bool DeviceInterface::operationRunning()
 
 void DeviceInterface::downloadSportsData()
 {
-    if (miBandService()) {
-        miBandService()->fetchSportsSummaries();
+    if (m_device) {
+        m_device->downloadSportsData();
     }
 }
 
 void DeviceInterface::downloadActivityData()
 {
-    if (miBandService()) {
-        miBandService()->fetchActivityData();
+    if (m_device) {
+        m_device->downloadActivityData();
     }
 }
 
@@ -789,10 +849,10 @@ void DeviceInterface::sendAlert(const QString &sender, const QString &subject, c
 
         if (AmazfishConfig::instance()->appTransliterate()) {
             m_device->sendAlert(
-                Transliterator::convert(sender),
-                Transliterator::convert(subject),
-                Transliterator::convert(message)
-            );
+                        Transliterator::convert(sender),
+                        Transliterator::convert(subject),
+                        Transliterator::convert(message)
+                        );
         } else {
             m_device->sendAlert(sender, subject, message);
         }
@@ -885,7 +945,7 @@ void DeviceInterface::triggerSendWeather()
 
 void DeviceInterface::updateCalendar()
 {
-    qDebug() << "DeviceInterface::updateCalendar";    
+    qDebug() << "DeviceInterface::updateCalendar";
     if (supportsFeature(AbstractDevice::FEATURE_EVENT_REMINDER)) {
         if (m_device) {
             QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
@@ -913,7 +973,7 @@ void DeviceInterface::updateCalendar()
             }
         }
         foreach (const watchfish::CalendarEvent &event, filteredEventList) {
-                qDebug() << event.title() << event.alertTime();
+            qDebug() << event.title() << event.alertTime();
         }
         if (!filteredEventList.isEmpty()) {
             m_eventlist = filteredEventList;
@@ -940,8 +1000,8 @@ void DeviceInterface::enableFeature(int feature)
 
 void DeviceInterface::fetchLogs()
 {
-    if (miBandService()) {
-        miBandService()->fetchLogs();
+    if (m_device) {
+        m_device->fetchLogs();
     }
 }
 

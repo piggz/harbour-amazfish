@@ -37,7 +37,7 @@ public:
         // 251-255 defined by service specification
         Any = 255,
         Custom = -1,
-        CustomHuami = 250
+        CustomHuami = 250 // 0xfa
     };
     Q_ENUM(AlertCategory)
 

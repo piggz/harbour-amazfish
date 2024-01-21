@@ -2,13 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
-    <name>AddCityDialog</name>
-    <message>
-        <source>Set Location</source>
-        <translation type="vanished">Définir la localisation</translation>
-    </message>
-</context>
-<context>
     <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
@@ -52,10 +45,6 @@
 </context>
 <context>
     <name>AnalysisPage</name>
-    <message>
-        <source>Download Data</source>
-        <translation type="vanished">Télécharger les données</translation>
-    </message>
     <message>
         <source>Analysis</source>
         <translation>Analyse</translation>
@@ -138,10 +127,6 @@
     <message>
         <source>Refresh</source>
         <translation>Actualiser</translation>
-    </message>
-    <message>
-        <source>AmazFish</source>
-        <translation type="vanished">AmazFish</translation>
     </message>
     <message>
         <source>Address: </source>
@@ -262,18 +247,6 @@
         <translation>Connexion à la montre</translation>
     </message>
     <message>
-        <source>AmazFish</source>
-        <translation type="vanished">AmazFish</translation>
-    </message>
-    <message>
-        <source>Start Service</source>
-        <translation type="vanished">Démarrer le service</translation>
-    </message>
-    <message>
-        <source>Enable Service</source>
-        <translation type="vanished">Activer le service</translation>
-    </message>
-    <message>
         <source>Data Graphs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -386,24 +359,8 @@
 <context>
     <name>PairPage</name>
     <message>
-        <source>Start scan</source>
-        <translation type="vanished">Démarrer le scan</translation>
-    </message>
-    <message>
-        <source>Try again</source>
-        <translation type="vanished">Essayer encore</translation>
-    </message>
-    <message>
-        <source>Pull down to start scan</source>
-        <translation type="vanished">Glisser vers le bas pour démarrer le scan</translation>
-    </message>
-    <message>
         <source>Pair Device</source>
         <translation>Appairer un appareil</translation>
-    </message>
-    <message>
-        <source>Save Key</source>
-        <translation type="vanished">Sauvegarder la clé</translation>
     </message>
     <message>
         <source>No devices found</source>
@@ -435,18 +392,6 @@
     <message>
         <source>Select Device Type</source>
         <translation>Sélectionner le type d&apos;appareil</translation>
-    </message>
-    <message>
-        <source>Amazfit Bip</source>
-        <translation type="vanished">Amazfit Bip</translation>
-    </message>
-    <message>
-        <source>Amazfit GTS</source>
-        <translation type="vanished">Amazfit GTS</translation>
-    </message>
-    <message>
-        <source>MI Band 2</source>
-        <translation type="vanished">MI Band 2</translation>
     </message>
 </context>
 <context>
@@ -498,24 +443,12 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <source>Device Settings</source>
-        <translation type="vanished">Paramètres de l&apos;appareil</translation>
-    </message>
-    <message>
         <source>Notify on connect</source>
         <translation>Notification lors de la connexion</translation>
     </message>
     <message>
         <source>Save Settings</source>
         <translation>Sauvegarder les paramètres</translation>
-    </message>
-    <message>
-        <source>Refresh weather every (</source>
-        <translation type="vanished">Rafraicher la météo toutes les (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation type="vanished">) minutes</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
@@ -584,57 +517,6 @@
     <message>
         <source>Transliterate notifications</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Settings-bip-shortcuts</name>
-    <message>
-        <source>BIP Display Items</source>
-        <translation type="vanished">Items affichés sur la BIP</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="vanished">Statut</translation>
-    </message>
-    <message>
-        <source>Activity</source>
-        <translation type="vanished">Activité</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Météo</translation>
-    </message>
-    <message>
-        <source>Alarm</source>
-        <translation type="vanished">Alarme</translation>
-    </message>
-    <message>
-        <source>Timer</source>
-        <translation type="vanished">Minuteur</translation>
-    </message>
-    <message>
-        <source>Compass</source>
-        <translation type="vanished">Compas</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Paramètres</translation>
-    </message>
-    <message>
-        <source>AliPay</source>
-        <translation type="vanished">AliPay</translation>
-    </message>
-    <message>
-        <source>Weather Shortcut</source>
-        <translation type="vanished">Raccourci météo</translation>
-    </message>
-    <message>
-        <source>AliPay Shortcut</source>
-        <translation type="vanished">Raccourci AliPay</translation>
-    </message>
-    <message>
-        <source>Save Settings</source>
-        <translation type="vanished">Sauvegarder les paramètres</translation>
     </message>
 </context>
 <context>
@@ -749,10 +631,6 @@
     <message>
         <source>Imperial</source>
         <translation>Impérial</translation>
-    </message>
-    <message>
-        <source>BIP Display Items</source>
-        <translation type="vanished">Items BIP à afficher</translation>
     </message>
     <message>
         <source>ru_RU</source>
@@ -921,22 +799,6 @@
         <translation>Météo</translation>
     </message>
     <message>
-        <source>Start Service</source>
-        <translation type="vanished">Démarrer le service</translation>
-    </message>
-    <message>
-        <source>Stop Service</source>
-        <translation type="vanished">Arrêter le service</translation>
-    </message>
-    <message>
-        <source>Enable Service</source>
-        <translation type="vanished">Activer le service</translation>
-    </message>
-    <message>
-        <source>Disable Service</source>
-        <translation type="vanished">Désactiver le service</translation>
-    </message>
-    <message>
         <source>Debug Info</source>
         <translation>Information de débogage</translation>
     </message>
@@ -1027,13 +889,21 @@
         <source>Heartrate usage</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SleepPage</name>
-    <message>
-        <source>Download Data</source>
-        <translation type="vanished">Télécharger les données</translation>
-    </message>
     <message>
         <source>Sleep Summary</source>
         <translation>Résumé de sommeil</translation>
@@ -1041,14 +911,6 @@
     <message>
         <source>Sleep</source>
         <translation>Sommeil</translation>
-    </message>
-    <message>
-        <source>hrs</source>
-        <translation type="vanished">heures</translation>
-    </message>
-    <message>
-        <source>hrs (deep)</source>
-        <translation type="vanished">heures (sommeil profond)</translation>
     </message>
     <message>
         <source>%1 hrs</source>
@@ -1260,10 +1122,6 @@
 </context>
 <context>
     <name>StepsPage</name>
-    <message>
-        <source>Download Data</source>
-        <translation type="vanished">Télécharger les données</translation>
-    </message>
     <message>
         <source>Steps</source>
         <translation>Pas</translation>

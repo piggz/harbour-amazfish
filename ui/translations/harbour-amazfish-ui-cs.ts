@@ -62,10 +62,6 @@
         <translation>Intensita</translation>
     </message>
     <message>
-        <source>Download Data</source>
-        <translation type="vanished">Stažení dat</translation>
-    </message>
-    <message>
         <source>Battery</source>
         <translation>Baterie</translation>
     </message>
@@ -86,21 +82,6 @@
     <message>
         <source>%1 %</source>
         <translation>%1 %</translation>
-    </message>
-</context>
-<context>
-    <name>BipDevice</name>
-    <message>
-        <source>Amazfish</source>
-        <translation type="vanished">Amazfish</translation>
-    </message>
-    <message>
-        <source>Connected</source>
-        <translation type="vanished">Připojeno</translation>
-    </message>
-    <message>
-        <source>Phone and watch are connected</source>
-        <translation type="vanished">Telefon a hodinky spárovány</translation>
     </message>
 </context>
 <context>
@@ -135,17 +116,6 @@
     </message>
 </context>
 <context>
-    <name>BipFirmwareService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation type="vanished">Běžící operace, opakujte později</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation type="vanished">Nebyl vybrán soubor</translation>
-    </message>
-</context>
-<context>
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
@@ -154,10 +124,6 @@
 </context>
 <context>
     <name>DebugInfo</name>
-    <message>
-        <source>AmazFish</source>
-        <translation type="vanished">AmazFish</translation>
-    </message>
     <message>
         <source>Refresh</source>
         <translation>Оbnovit</translation>
@@ -265,20 +231,12 @@
         <translation>Párovat s hodinkami</translation>
     </message>
     <message>
-        <source>AmazFish</source>
-        <translation type="vanished">AmazFish</translation>
-    </message>
-    <message>
         <source>Connect to watch</source>
         <translation>Připojit k hodinkám</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
         <translation>Odpojit od hodinek</translation>
-    </message>
-    <message>
-        <source>Debug Info</source>
-        <translation type="vanished">Ladění</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -399,26 +357,7 @@
     </message>
 </context>
 <context>
-    <name>MiBandService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation type="vanished">Běžící operace, opakujte později</translation>
-    </message>
-    <message>
-        <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation type="vanished">Zastaralý firmware, použijte v0.1.1.14 a vyšší</translation>
-    </message>
-</context>
-<context>
     <name>PairPage</name>
-    <message>
-        <source>Start scan</source>
-        <translation type="vanished">Spustit hledání</translation>
-    </message>
-    <message>
-        <source>Try again</source>
-        <translation type="vanished">Zkuste znova</translation>
-    </message>
     <message>
         <source>Pair Device</source>
         <translation>Párování zařízení</translation>
@@ -457,34 +396,6 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Finished transferring activity data</source>
-        <translation type="vanished">Přenos dat aktivity ukončen</translation>
-    </message>
-    <message>
-        <source>No data to transfer</source>
-        <translation type="vanished">Žádná data k přenosu</translation>
-    </message>
-    <message>
-        <source>Update operation failed</source>
-        <translation type="vanished">Aktualizace neúspěšná</translation>
-    </message>
-    <message>
-        <source>Update operation failed, unexpected metadata</source>
-        <translation type="vanished">Aktualizace neúspěšná, vadná metadata</translation>
-    </message>
-    <message>
-        <source>Update operation complete</source>
-        <translation type="vanished">Aktualizace úspěšná</translation>
-    </message>
-    <message>
-        <source>File does not seem to be supported</source>
-        <translation type="vanished">Nepodporovaný typ souboru</translation>
-    </message>
-    <message>
-        <source>About to transfer data from </source>
-        <translation type="vanished">O přenosu dat z</translation>
-    </message>
     <message>
         <source>%1s</source>
         <translation>%1s</translation>
@@ -531,10 +442,6 @@
 </context>
 <context>
     <name>Settings-app</name>
-    <message>
-        <source>Device Settings</source>
-        <translation type="vanished">Nastavení hodin</translation>
-    </message>
     <message>
         <source>Notify on connect</source>
         <translation>Notifikace připojení</translation>
@@ -613,45 +520,6 @@
     </message>
 </context>
 <context>
-    <name>Settings-bip-shortcuts</name>
-    <message>
-        <source>Status</source>
-        <translation type="vanished">Stav</translation>
-    </message>
-    <message>
-        <source>Activity</source>
-        <translation type="vanished">Aktivita</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Počasí</translation>
-    </message>
-    <message>
-        <source>Alarm</source>
-        <translation type="vanished">Budík</translation>
-    </message>
-    <message>
-        <source>Timer</source>
-        <translation type="vanished">Časovač</translation>
-    </message>
-    <message>
-        <source>Compass</source>
-        <translation type="vanished">Kompas</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Nastavení</translation>
-    </message>
-    <message>
-        <source>Weather Shortcut</source>
-        <translation type="vanished">Zkratka Počasí</translation>
-    </message>
-    <message>
-        <source>Save Settings</source>
-        <translation type="vanished">Uložit nastavení</translation>
-    </message>
-</context>
-<context>
     <name>Settings-button-action</name>
     <message>
         <source>Button Actions</source>
@@ -703,10 +571,6 @@
     <message>
         <source>Device Settings</source>
         <translation>Nastavení zařízení</translation>
-    </message>
-    <message>
-        <source>Langage</source>
-        <translation type="vanished">Jazyk</translation>
     </message>
     <message>
         <source>en_US</source>
@@ -1024,6 +888,18 @@
     <message>
         <source>Heartrate usage</source>
         <translation>Použití tepu</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -101,6 +101,13 @@ public:
     };
     Q_ENUM(WearLocation)
 
+    enum DisplayLiftWrist {
+        DisplayLiftWristOff,
+        DisplayLiftWristOn,
+        DisplayLiftWristSchedule
+    };
+    Q_ENUM(DisplayLiftWrist)
+
     static AmazfishConfig *instance();
     static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
     {
@@ -160,7 +167,9 @@ public:
 
     BOOL_OPTION(QStringLiteral("profile/alertfitnessgoal"),   profileAlertFitnessGoal,   setProfileAlertFitnessGoal,   false)
     BOOL_OPTION(QStringLiteral("profile/hrmsleepsupport"),    profileHRMSleepSupport,    setProfileHRMSleepSupport,    true)
-    BOOL_OPTION(QStringLiteral("profile/displayonliftwrist"), profileDisplayOnLiftWrist, setProfileDisplayOnLiftWrist, false)
+    ENUM_OPTION(QStringLiteral("profile/displayonliftwrist"), profileDisplayOnLiftWrist, setProfileDisplayOnLiftWrist, DisplayLiftWrist, DisplayLiftWristOn)
+    OPTION(QStringLiteral("profile/wristScheduleStart"), profileWristScheduleStart, setProfileWristScheduleStart, QTime(), QDateTime, toDateTime, const QDateTime &)
+    OPTION(QStringLiteral("profile/wristScheduleEnd"), profileWristScheduleEnd, setProfileWristScheduleEnd, QTime(), QDateTime, toDateTime, const QDateTime &)
 
     ALARM_OPTION(QStringLiteral("alarms/alarm%1/enabled"), alarmEnabled,    setAlarmEnabled,    bool, false, toBool)
     ALARM_OPTION(QStringLiteral("alarms/alarm%1/repeat"),  alarmRepeatMask, setAlarmRepeatMask, int,  0,     toInt)

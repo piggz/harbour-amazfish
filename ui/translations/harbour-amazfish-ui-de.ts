@@ -451,24 +451,12 @@
         <translation>Einstellungen speichern</translation>
     </message>
     <message>
-        <source>Refresh weather every (</source>
-        <translation type="vanished">Wetteraktualisierung alle (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation type="vanished">) Minuten</translation>
-    </message>
-    <message>
         <source>Sync activity data each hour</source>
         <translation>Synchronisiere Aktivitätsdaten jede Stunde</translation>
     </message>
     <message>
         <source>Low battery notification</source>
         <translation>Niedrige Batteriestanderinnerung</translation>
-    </message>
-    <message>
-        <source>Refresh calendar every (</source>
-        <translation type="vanished">Aktualisiere Kalender alle (</translation>
     </message>
     <message>
         <source>Notifications</source>
@@ -900,6 +888,18 @@
     <message>
         <source>Heartrate usage</source>
         <translation>Herzfrequenz verwenden</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

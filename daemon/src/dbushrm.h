@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "services/hrmservice.h"
-#include "services/mibandservice.h"
+#include "abstractdevice.h"
 
 class DBusHRM : public QObject
 {
@@ -12,7 +12,7 @@ class DBusHRM : public QObject
 public:
     explicit DBusHRM(QObject *parent = nullptr);
     void setHRMService(HRMService *hrm);
-    void setMiBandService(MiBandService *mi);
+    void setDevice(AbstractDevice *dev);
 
 public Q_SLOTS:
     void start();
@@ -22,7 +22,7 @@ public Q_SLOTS:
 
 private:
     HRMService *m_hrm = nullptr;
-    MiBandService *m_mi = nullptr;
+    AbstractDevice *m_device = nullptr;
 };
 
 #endif // DBUSHRM_H

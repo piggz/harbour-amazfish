@@ -41,7 +41,7 @@ void Gtr2FirmwareInfo::determineFirmwareType() {
 //        m_type = Firmware;
 //    }
 
-    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) || m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET || m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
+    if ((m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(UIHH_HEADER)) && (m_bytes.at(4) == 0x01 || m_bytes.at(4) == 0x02)) || m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) || m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET || m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
         m_type = Watchface;
     }
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(NEWFT_HEADER))) {

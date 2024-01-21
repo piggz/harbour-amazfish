@@ -9,15 +9,15 @@ class BipSDevice : public BipDevice
 public:
     explicit BipSDevice(const QString &pairedName, QObject *parent = nullptr);
 
-    virtual QString deviceType() const override;
-    virtual int supportedFeatures() const override;
-    virtual QStringList supportedDisplayItems() const override;
+    QString deviceType() const override;
+    int supportedFeatures() const override;
+    QStringList supportedDisplayItems() const override;
 
-    virtual void applyDeviceSetting(Settings s) override;
+    void applyDeviceSetting(Settings s) override;
 
     AbstractFirmwareInfo* firmwareInfo(const QByteArray &bytes) override;
 
-    virtual void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration = 0, int position = 0) override;
+    void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration = 0, int position = 0) override;
 
 protected:
     void initialise() override;

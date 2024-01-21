@@ -8,6 +8,8 @@ PagePL {
     title: qsTr("Profile Settings")
 
     property string dob
+    property date wristScheduleStart
+    property date wristScheduleEnd
 
     Column {
         id: column
@@ -97,10 +99,73 @@ PagePL {
             }
         }
 
+        /*
         TextSwitchPL {
             id: swDisplayOnLiftWrist
             width: parent.width
             text: qsTr("Display on lift wrist")
+        }
+        */
+
+        ComboBoxPL {
+            id: cboDisplayLiftWrist
+            width: parent.width
+            label: qsTr("Display on lift wrist")
+
+            model: ListModel {
+                ListElement { itemText: qsTr("Off") }
+                ListElement { itemText: qsTr("On")}
+                ListElement { itemText: qsTr("Schedule")}
+            }
+        }
+
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: styler.themePaddingSmall
+            ButtonPL {
+                id: btnLiftWristScheduleStart
+                text: new Date(page.wristScheduleStart).toTimeString();
+                enabled: cboDisplayLiftWrist.currentIndex === 2
+
+                onClicked: {
+                    var profile_lift_start = new Date(AmazfishConfig.profileWristScheduleStart);
+                    var dialog = app.pages.push(pickerComponentScheduleStart, {
+                                                hour: profile_lift_start.getHours(),
+                                                minute: profile_lift_start.getMinutes()
+                                                });
+                    dialog.accepted.connect(function() {
+                        console.log(dialog.timeText, dialog.time, dialog.hour, dialog.minute);
+                        page.wristScheduleStart = dialog.time;
+                    })
+                }
+
+                Component {
+                    id: pickerComponentScheduleStart
+                    TimePickerDialogPL {}
+                }
+            }
+
+            ButtonPL {
+                id: btnLiftWristScheduleEnd
+                text: new Date(page.wristScheduleEnd).toTimeString();
+                enabled: cboDisplayLiftWrist.currentIndex === 2
+
+                onClicked: {
+                    var profile_lift_end = new Date(AmazfishConfig.profileWristScheduleEnd);
+                    var dialog = app.pages.push(pickerComponentScheduleEnd, {
+                                                    hour: profile_lift_end.getHours(),
+                                                    minute: profile_lift_end.getMinutes()
+                                                    });
+                    dialog.accepted.connect(function() {
+                        page.wristScheduleEnd = dialog.time;
+                    })
+                }
+
+                Component {
+                    id: pickerComponentScheduleEnd
+                    TimePickerDialogPL {}
+                }
+            }
         }
 
         SliderPL {
@@ -174,8 +239,10 @@ PagePL {
         sldFitnessGoal.value = AmazfishConfig.profileFitnessGoal;
         swAlertOnGoal.checked = AmazfishConfig.profileAlertFitnessGoal;
         sldAllDayHRM.value = AmazfishConfig.profileAllDayHRM;
-        swDisplayOnLiftWrist.checked = AmazfishConfig.profileDisplayOnLiftWrist;
+        cboDisplayLiftWrist.currentIndex = AmazfishConfig.profileDisplayOnLiftWrist;
         swHRMSleepSupport.checked = AmazfishConfig.profileHRMSleepSupport;
+        wristScheduleStart = AmazfishConfig.profileWristScheduleStart;
+        wristScheduleEnd = AmazfishConfig.profileWristScheduleEnd;
     }
     function saveProfile() {
         AmazfishConfig.profileName = fldName.text;
@@ -187,7 +254,9 @@ PagePL {
         AmazfishConfig.profileFitnessGoal = sldFitnessGoal.value;
         AmazfishConfig.profileAlertFitnessGoal = swAlertOnGoal.checked;
         AmazfishConfig.profileAllDayHRM = sldAllDayHRM.value;
-        AmazfishConfig.profileDisplayOnLiftWrist = swDisplayOnLiftWrist.checked;
+        AmazfishConfig.profileDisplayOnLiftWrist = cboDisplayLiftWrist.currentIndex;
+        AmazfishConfig.profileWristScheduleStart = wristScheduleStart;
+        AmazfishConfig.profileWristScheduleEnd = wristScheduleEnd;
         AmazfishConfig.profileHRMSleepSupport = swHRMSleepSupport.checked;
 
         tmrSetDelay.start();

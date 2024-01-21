@@ -60,6 +60,7 @@ public:
     static const uint8_t EVENT_DECLINE_CALL = 0x07;
     static const uint8_t EVENT_IGNORE_CALL = 0x09;
     static const uint8_t EVENT_FIND_PHONE = 0x08;
+    static const uint8_t EVENT_CANCEL_FIND_PHONE = 0x0f;
     static const uint8_t MTU_REQUEST = 0x16;
     static const uint8_t EVENT_MUSIC = 0xfe;
     static const uint8_t EVENT_MUSIC_OPEN = 0xe0;
@@ -83,7 +84,7 @@ public:
     static const uint8_t COMMAND_SET_LANGUAGE = 0x17;
     static constexpr uint8_t COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST[4] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x01};
     static constexpr uint8_t COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST[4] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x00};
-    static constexpr uint8_t COMMAND_SCHEDULE_DISPLAY_ON_LIFT_WRIST[8] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    static constexpr uint8_t COMMAND_SCHEDULE_DISPLAY_ON_LIFT_WRIST[8] = {ENDPOINT_DISPLAY, 0x05, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00};
     static constexpr uint8_t COMMAND_ENABLE_GOAL_NOTIFICATION[4] = {ENDPOINT_DISPLAY, 0x06, 0x00, 0x01};
     static constexpr uint8_t COMMAND_DISABLE_GOAL_NOTIFICATION[4] = {ENDPOINT_DISPLAY, 0x06, 0x00, 0x00};
     static constexpr uint8_t COMMAND_ENABLE_ROTATE_WRIST_TO_SWITCH_INFO[4] = {ENDPOINT_DISPLAY, 0x0d, 0x00, 0x01};

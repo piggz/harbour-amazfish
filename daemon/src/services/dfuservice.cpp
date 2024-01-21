@@ -6,15 +6,6 @@ const char* DfuService::UUID_CHARACTERISTIC_DFU_CONTROL = "00001531-1212-efde-15
 const char* DfuService::UUID_CHARACTERISTIC_DFU_PACKET = "00001532-1212-efde-1523-785feabcd123";
 const char* DfuService::UUID_CHARACTERISTIC_DFU_REVISION = "00001534-1212-efde-1523-785feabcd123";
 
-constexpr uint8_t DfuService::COMMAND_STARTDFU;
-constexpr uint8_t DfuService::COMMAND_RESPONSE;
-constexpr uint8_t DfuService::COMMAND_INITDFUPARAMETERS;
-constexpr uint8_t DfuService::COMMAND_VALIDATE_FIRMWARE;
-constexpr uint8_t DfuService::COMMAND_RECEIVE_FIRMWARE_IMAGE;
-constexpr uint8_t DfuService::COMMAND_ACTIVATE_IMAGE_AND_RESET;
-constexpr uint8_t DfuService::COMMAND_PACKET_RECEIPT_NOTIFICATION;
-constexpr uint8_t DfuService::COMMAND_PACKET_RECEIPT_NOTIFICATION_REQUEST;
-
 DfuService::DfuService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_DFU, path, parent)
 {
     qDebug() << Q_FUNC_INFO;

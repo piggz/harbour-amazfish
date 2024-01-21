@@ -22,35 +22,6 @@ const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER = "000000
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE = "00000016-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ = "00000017-0000-3512-2118-0009af100700";
 
-constexpr uint8_t MiBandService::DATEFORMAT_TIME[];
-constexpr uint8_t MiBandService::DATEFORMAT_DATETIME[];
-constexpr uint8_t MiBandService::DATEFORMAT_TIME_12_HOURS[];
-constexpr uint8_t MiBandService::DATEFORMAT_TIME_24_HOURS[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST[];
-constexpr uint8_t MiBandService::COMMAND_SCHEDULE_DISPLAY_ON_LIFT_WRIST[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_GOAL_NOTIFICATION[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_GOAL_NOTIFICATION[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_ROTATE_WRIST_TO_SWITCH_INFO[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_ROTATE_WRIST_TO_SWITCH_INFO[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_DISPLAY_CALLER[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_DISPLAY_CALLER[];
-constexpr uint8_t MiBandService::COMMAND_DISTANCE_UNIT_METRIC[];
-constexpr uint8_t MiBandService::COMMAND_DISTANCE_UNIT_IMPERIAL[];
-constexpr uint8_t MiBandService::COMMAND_SET_FITNESS_GOAL_START[];
-constexpr uint8_t MiBandService::COMMAND_SET_FITNESS_GOAL_END[];
-constexpr uint8_t MiBandService::COMMAND_CHANGE_SCREENS[];
-constexpr uint8_t MiBandService::COMMAND_ENABLE_DISCONNECT_NOTIFICATION[];
-constexpr uint8_t MiBandService::COMMAND_DISABLE_DISCONNECT_NOTIFICATION[];
-
-constexpr uint8_t MiBandService::DISPLAY_XXX[];
-constexpr uint8_t MiBandService::DISPLAY_YYY[];
-constexpr uint8_t MiBandService::WEAR_LOCATION_LEFT_WRIST[];
-constexpr uint8_t MiBandService::WEAR_LOCATION_RIGHT_WRIST[];
-constexpr uint8_t MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS[];
-constexpr uint8_t MiBandService::RESPONSE_FINISH_SUCCESS[];
-constexpr uint8_t MiBandService::RESPONSE_FINISH_FAIL[];
-
 MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND, path, parent)
 {
     qDebug() << "MiBandService::MiBandService";
@@ -110,13 +81,17 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
 
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
         if (value[0] == EVENT_DECLINE_CALL) {
-            emit serviceEvent(EVENT_DECLINE_CALL);
+            emit serviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
         } else if (value[0] == EVENT_IGNORE_CALL) {
-            emit serviceEvent(EVENT_IGNORE_CALL);
+            emit serviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
         } else if (value[0] == EVENT_BUTTON) {
             emit buttonPressed();
         } else if (value[0] == EVENT_MUSIC) {
             emit serviceEvent(value[1]);
+        } else if (value[0] == EVENT_FIND_PHONE) {
+            emit serviceEvent(EVENT_FIND_PHONE);
+        } else if (value[0] == EVENT_CANCEL_FIND_PHONE) {
+            emit serviceEvent(EVENT_CANCEL_FIND_PHONE);
         } else {
             qDebug() << "device event " << value[0];
             if (value[0] == MTU_REQUEST) {
@@ -458,11 +433,21 @@ void MiBandService::setAlertFitnessGoal()
 
 void MiBandService::setEnableDisplayOnLiftWrist()
 {
-    auto value = AmazfishConfig::instance()->profileDisplayOnLiftWrist()
-            ? COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST
-            : COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST;
+    QByteArray cmd;
 
-    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, UCHARARR_TO_BYTEARRAY(value));
+    if (AmazfishConfig::instance()->profileDisplayOnLiftWrist() == AmazfishConfig::DisplayLiftWristOff) {
+        cmd = UCHARARR_TO_BYTEARRAY(COMMAND_DISABLE_DISPLAY_ON_LIFT_WRIST);
+    } else  if (AmazfishConfig::instance()->profileDisplayOnLiftWrist() == AmazfishConfig::DisplayLiftWristOn) {
+        cmd = UCHARARR_TO_BYTEARRAY(COMMAND_ENABLE_DISPLAY_ON_LIFT_WRIST);
+    } else {
+        cmd = UCHARARR_TO_BYTEARRAY(COMMAND_SCHEDULE_DISPLAY_ON_LIFT_WRIST);
+        cmd[4] = AmazfishConfig::instance()->profileWristScheduleStart().time().hour();
+        cmd[5] = AmazfishConfig::instance()->profileWristScheduleStart().time().minute();
+        cmd[6] = AmazfishConfig::instance()->profileWristScheduleEnd().time().hour();
+        cmd[7] = AmazfishConfig::instance()->profileWristScheduleEnd().time().minute();
+    }
+
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
 }
 
 void MiBandService::setDisplayItems()
@@ -781,7 +766,7 @@ void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsCond
     QBuffer buffer(&buf);
     buffer.open(QIODevice::WriteOnly);
 
-    char temp = weather->temperature() - 273.15;
+    int8_t temp = int8_t(weather->temperature() - 273.15);
     qint32 dt = qToLittleEndian(weather->dateTime());
 
     qDebug() << dt << temp << condition;
@@ -830,8 +815,8 @@ void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsCond
     buffer.putChar(NR_DAYS);
     buffer.putChar(condition);
     buffer.putChar(condition);
-    buffer.putChar((char) (weather->maxTemperature() - 273.15));
-    buffer.putChar((char) (weather->minTemperature() - 273.15));
+    buffer.putChar(int8_t(weather->maxTemperature() - 273.15));
+    buffer.putChar(int8_t(weather->minTemperature() - 273.15));
     if (supportsConditionString) {
         buffer.write(weather->description().toLatin1());
         buffer.putChar((char)0x00);
@@ -845,8 +830,8 @@ void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsCond
 
         buffer.putChar(condition);
         buffer.putChar(condition);
-        buffer.putChar((char) (fc.maxTemperature() - 273.15));
-        buffer.putChar((char) (fc.minTemperature() - 273.15));
+        buffer.putChar(int8_t(fc.maxTemperature() - 273.15));
+        buffer.putChar(int8_t(fc.minTemperature() - 273.15));
 
         if (supportsConditionString) {
             buffer.write(fc.description().toLatin1());

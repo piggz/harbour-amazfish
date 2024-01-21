@@ -68,6 +68,12 @@ void GtsDevice::serviceEvent(uint8_t event)
     case MiBandService::EVENT_IGNORE_CALL:
         emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
         break;
+    case MiBandService::EVENT_FIND_PHONE:
+        emit deviceEvent(AbstractDevice::EVENT_FIND_PHONE);
+        break;
+    case MiBandService::EVENT_CANCEL_FIND_PHONE:
+        emit deviceEvent(AbstractDevice::EVENT_CANCEL_FIND_PHONE);
+        break;
     default:
         break;
     }
@@ -216,10 +222,12 @@ void GtsDevice::sendEventReminder(int id, const QDateTime &dt, const QString &ev
 void GtsDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (fw){
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+
+    if (fw && mi){
         QString revision = softwareRevision();
         if (revision > "0.1.1.16") {
-            fw->prepareFirmwareDownload(info, new HuamiUpdateFirmwareOperation2020(info, fw));
+            fw->prepareFirmwareDownload(info, new HuamiUpdateFirmwareOperation2020(info, fw, *mi));
         } else {
             fw->prepareFirmwareDownload(info, new UpdateFirmwareOperationNew(info, fw));
         }
