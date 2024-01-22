@@ -304,8 +304,6 @@ void AsteroidOSDevice::screenshotReceived(QByteArray data) {
 
     qDebug() << fullpath << data.size();
 
-    QDataStream *dataStream = nullptr;
-
     if (!screenshotFile.open(QIODevice::WriteOnly)) {
         qWarning() << "cannot open " << fullpath;
     }
