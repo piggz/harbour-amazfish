@@ -8,7 +8,7 @@ const char* HRMService::UUID_CHARACTERISTIC_HRM_CONTROL = "00002a39-0000-1000-80
 
 HRMService::HRMService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_HRM, path, parent)
 {
-    qDebug() << "HRMService::HRMService";
+    qDebug() << Q_FUNC_INFO;
 
     connect(this, &QBLEService::characteristicChanged, this, &HRMService::characteristicChanged);
 }
@@ -16,7 +16,7 @@ HRMService::HRMService(const QString &path, QObject *parent) : QBLEService(UUID_
 
 void HRMService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << "HRM Changed:" << characteristic << value;
+    qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value;
 
     if (characteristic == UUID_CHARACTERISTIC_HRM_MEASUREMENT) {
         qDebug() << "..got HR measurement";
