@@ -22,7 +22,7 @@ void AsteroidWeatherService::sendWeather(CurrentWeather *weather)
     qDebug() << Q_FUNC_INFO;
 
     if (weather->forecastCount() < 5) {
-        qWarning() << "needs at least 5 days forecast " << weather->forecastCount() ;
+        qWarning() << "WeatherService: need at least 5 days forecast, got" << weather->forecastCount();
         return;
     }
     QByteArray ids;
@@ -38,9 +38,9 @@ void AsteroidWeatherService::sendWeather(CurrentWeather *weather)
     }
 
 
-    qDebug() << "weather ids:" << ids.toHex();
-    qDebug() << "weather mint:" << minTemps.toHex();
-    qDebug() << "weather maxt:" << maxTemps.toHex();
+    qDebug() << Q_FUNC_INFO << "weather ids:" << ids.toHex();
+    qDebug() << Q_FUNC_INFO << "weather mint:" << minTemps.toHex();
+    qDebug() << Q_FUNC_INFO << "weather maxt:" << maxTemps.toHex();
 
 
     writeValue(UUID_CHARACTERISTIC_WEAT_CITY_UUID, weather->city()->name().toLocal8Bit());
