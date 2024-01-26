@@ -31,7 +31,7 @@ void UpdateFirmwareOperation::start()
 
 bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
 {
-    qDebug() << "UpdateFirmwareOperation::handleMetaData:" << value;
+    qDebug() << Q_FUNC_INFO << value;
 
     if (!(value.length() == 3 || value.length() == 11)) {
         qDebug() << "Notifications should be 3 or 11 bytes long.";
@@ -81,7 +81,7 @@ bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
         return false;
     }
     
-    qDebug() << "Unexpected notification during firmware update: ";
+    qDebug() << Q_FUNC_INFO << "Unexpected notification during firmware update: ";
     m_service->message(QObject::tr("Update operation failed, unexpected metadata"));
     return true;
 
@@ -154,7 +154,7 @@ void UpdateFirmwareOperation::sendFirmwareData()
         m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE_DATA, lastChunk);
     }
 
-    qDebug() << "Finished sending firmware";
+    qDebug() << Q_FUNC_INFO << "Finished sending firmware";
     serv->downloadProgress(100);
 
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC));
