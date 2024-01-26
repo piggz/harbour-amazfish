@@ -5,7 +5,7 @@
 
 BangleJSDevice::BangleJSDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
-    qDebug() << "BangleJSDevice:: " << pairedName;
+    qDebug() << Q_FUNC_INFO << pairedName;
     connect(this, &QBLEDevice::propertiesChanged, this, &BangleJSDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
