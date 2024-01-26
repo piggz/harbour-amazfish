@@ -31,7 +31,7 @@ void InfiniTimeWeatherService::sendWeather(CurrentWeather *weather)
     
     for (int f = 0; f < weather->forecastCount(); f++) {
         CurrentWeather::Forecast fc = weather->forecast(f);
-        qDebug() << "Forecast:" << f << fc.dateTime()<< fc.weatherCode() <<  (fc.maxTemperature() - 273) <<  (fc.minTemperature() - 273) << fc.humidity() << fc.pressure() << fc.windMaxSpeed() << fc.clouds();
+        qDebug() << Q_FUNC_INFO << "Forecast:" << f << fc.dateTime()<< fc.weatherCode() <<  (fc.maxTemperature() - 273) <<  (fc.minTemperature() - 273) << fc.humidity() << fc.pressure() << fc.windMaxSpeed() << fc.clouds();
     
         Temperature t;
         t.eventType = eventtype::Temperature;
