@@ -96,7 +96,8 @@ DeviceInterface::~DeviceInterface()
 
 void DeviceInterface::connectToDevice(const QString &address)
 {
-    qDebug() << "DeviceInterface::connectToDevice:" << address;
+    qDebug() << Q_FUNC_INFO << ": address:" << address;
+
 
     if (m_device) {
         m_deviceAddress = address;
@@ -104,14 +105,15 @@ void DeviceInterface::connectToDevice(const QString &address)
         m_device->connectToDevice();
     }
     else {
-        qDebug() << "DeviceInterface::connectToDevice:device was not valid";
+        qDebug() << Q_FUNC_INFO << ": device was not valid";
         message(tr("Device is not valid, it may not be supported"));
     }
 }
 
 QString DeviceInterface::pair(const QString &name, const QString &address)
 {
-    qDebug() << "DeviceInterface::pair:" << name << address;
+    qDebug() << Q_FUNC_INFO << name << address;
+
     m_deviceAddress = address;
 
     if (m_device) {
@@ -132,14 +134,14 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
         return "pairing";
     }
     
-    qDebug() << "DeviceInterface::pair:device not created";
+    qDebug() << Q_FUNC_INFO << ": device not created";
 
     return QString("no device found");
 }
 
 void DeviceInterface::disconnect()
 {
-    qDebug() << "DeviceInterface::disconnect";
+    qDebug() << Q_FUNC_INFO;
     if (m_device) {
         m_device->disconnectFromDevice();
     }
@@ -161,10 +163,10 @@ HRMService *DeviceInterface::hrmService() const
 void DeviceInterface::onNotification(watchfish::Notification *notification)
 {
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
-        qDebug() << "Sending alert to device";
+        qDebug() << Q_FUNC_INFO << "Sending alert to device";
         sendAlert(notification->appName(), notification->summary(), notification->body());
     } else {
-        qDebug() << "no notification service, buffering notification";
+        qDebug() << Q_FUNC_INFO << "no notification service, buffering notification";
 
         WatchNotification n;
         n.id = notification->id();
@@ -430,7 +432,7 @@ KDbConnection *DeviceInterface::dbConnection()
 
 void DeviceInterface::onConnectionStateChanged()
 {
-    qDebug() << "DeviceInterface::onConnectionStateChanged" << connectionState();
+    qDebug() << Q_FUNC_INFO << connectionState();
 
     if (connectionState() == "authenticated") {
         m_device->setDatabase(dbConnection());
@@ -456,12 +458,12 @@ void DeviceInterface::onConnectionStateChanged()
 void DeviceInterface::log_battery_level(int level) {
 
     if (!m_conn || !(m_conn->isDatabaseUsed())) {
-        qDebug() << "Database not connected";
+        qDebug() << Q_FUNC_INFO  << "Database not connected";
         return;
     }
 
     QDateTime m_sampleTime = QDateTime::currentDateTime();
-    qDebug() << "Start time" << m_sampleTime;
+    qDebug() << Q_FUNC_INFO << "Start time" << m_sampleTime;
 
     KDbTransaction transaction = m_conn->beginTransaction();
     KDbTransactionGuard tg(transaction);
@@ -482,7 +484,7 @@ void DeviceInterface::log_battery_level(int level) {
     values << level;
 
     if (!m_conn->insertRecord(&fields, values)) {
-        qDebug() << "error inserting record";
+        qDebug() << Q_FUNC_INFO << "error inserting record";
         return;
     }
     tg.commit();
@@ -614,7 +616,7 @@ void DeviceInterface::handleButtonPressed(int presses)
 
 void DeviceInterface::onEventTimer()
 {
-    qDebug() << "DeviceInterface::onEventTimer";
+    qDebug() << Q_FUNC_INFO;
     if (m_eventlist.isEmpty())
         return;
     watchfish::CalendarEvent event = m_eventlist.takeFirst();
@@ -644,7 +646,7 @@ void DeviceInterface::sendBufferedNotifications()
 
 void DeviceInterface::scheduleNextEvent()
 {
-    qDebug() << "DeviceInterface::scheduleNextEvent";
+    qDebug() << Q_FUNC_INFO;
     if (m_eventlist.isEmpty())
         return;
 #ifdef MER_EDITION_SAILFISH
@@ -819,7 +821,8 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
 
 void DeviceInterface::refreshInformation()
 {
-    qDebug() << "Refreshing device information";
+    qDebug() << Q_FUNC_INFO << "Refreshing device information";
+
     if (m_device) {
         return m_device->refreshInformation();
     }
@@ -872,7 +875,8 @@ void DeviceInterface::incomingCall(const QString &caller)
 
 void DeviceInterface::applyDeviceSetting(int s)
 {
-    qDebug() << "Apply setting:" << s << (int)s;
+    qDebug() << Q_FUNC_INFO << "Setting:" << s << (int)s;
+
     if (m_device) {
         m_device->applyDeviceSetting((AbstractDevice::Settings)s);
     }
@@ -880,6 +884,8 @@ void DeviceInterface::applyDeviceSetting(int s)
 
 void DeviceInterface::requestManualHeartrate()
 {
+    qDebug() << Q_FUNC_INFO;
+
     if (hrmService()) {
         hrmService()->enableManualHRMeasurement(true);
     }
@@ -894,20 +900,20 @@ void DeviceInterface::onRefreshTimer()
     QDateTime currentDate = QDateTime::currentDateTime();
 
     if (m_lastWeatherSync.secsTo(currentDate) >= (config->appRefreshWeather() * 60)) {
-        qDebug() << "weather interval reached";
+        qDebug() << Q_FUNC_INFO << "weather interval reached";
         m_lastWeatherSync = currentDate;
         m_currentWeather.refresh();
     }
 
     if (m_lastCalendarSync.secsTo(currentDate) >= (config->appRefreshCalendar() * 60)) {
-        qDebug() << "calendar interval reached";
+        qDebug() << Q_FUNC_INFO << "calendar interval reached";
         m_lastCalendarSync = currentDate;
         updateCalendar();
     }
 
     if (config->appAutoSyncData()) {
         if (m_lastActivitySync.secsTo(currentDate) >= (60*60)) {
-            qDebug() << "Auto syncing activity data";
+            qDebug() << Q_FUNC_INFO << "Auto syncing activity data";
             m_lastActivitySync = currentDate;
             downloadActivityData();
         }
@@ -916,6 +922,8 @@ void DeviceInterface::onRefreshTimer()
 
 void DeviceInterface::registerDBus()
 {
+    qDebug() << Q_FUNC_INFO;
+
     if (!m_dbusRegistered)
     {
         // DBus
@@ -945,7 +953,7 @@ void DeviceInterface::triggerSendWeather()
 
 void DeviceInterface::updateCalendar()
 {
-    qDebug() << "DeviceInterface::updateCalendar";
+    qDebug() << Q_FUNC_INFO;
     if (supportsFeature(AbstractDevice::FEATURE_EVENT_REMINDER)) {
         if (m_device) {
             QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
