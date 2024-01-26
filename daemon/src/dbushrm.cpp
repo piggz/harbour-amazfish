@@ -6,7 +6,7 @@ DBusHRM::DBusHRM(QObject *parent) : QObject(parent)
     qDebug() << Q_FUNC_INFO;
 
     if (!QDBusConnection::sessionBus().registerService("org.sailfishos.heartrate")) {
-        qDebug() << QDBusConnection::sessionBus().lastError().message();
+        qDebug() << Q_FUNC_INFO << "Unable to register service:" << QDBusConnection::sessionBus().lastError().message();
     } else {
         QDBusConnection::sessionBus().registerObject("/", this, QDBusConnection::ExportAllSlots);
     }
