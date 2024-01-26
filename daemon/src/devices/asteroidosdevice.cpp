@@ -103,7 +103,6 @@ void AsteroidOSDevice::onPropertiesChanged(QString interface, QVariantMap map, Q
             bool value = map["Connected"].toBool();
 
             if (!value) {
-                qDebug() << "DisConnected!";
                 setConnectionState("disconnected");
             } else {
                 setConnectionState("connected");

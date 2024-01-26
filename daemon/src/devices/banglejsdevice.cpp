@@ -151,7 +151,6 @@ void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QSt
             bool value = map["Connected"].toBool();
 
             if (!value) {
-                qDebug() << "DisConnected!";
                 setConnectionState("disconnected");
             } else {
                 setConnectionState("connected");
