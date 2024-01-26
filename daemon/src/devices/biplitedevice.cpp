@@ -34,7 +34,7 @@ void BipLiteDevice::initialise()
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
     if (mi2) {
-        qDebug() << "Got mi2 service";
+        qDebug() << "Got MiBand2 service";
         connect(mi2, &MiBand2Service::authenticated, this, &BipDevice::authenticated, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 

@@ -9,18 +9,17 @@ Gts2FirmwareInfo::Gts2FirmwareInfo(const QByteArray &bytes) : HuamiFirmwareInfo(
     determineFirmwareType();
     determineFirmwareVersion();
 
-    //qDebug() << mBytes;
-    qDebug() << m_type << m_version << m_crc16 << m_crc32;
+    qDebug() << Q_FUNC_INFO << m_type << m_version << m_crc16 << m_crc32;
 }
 
 bool Gts2FirmwareInfo::supportedOnDevice(const QString &device) const
 {
-    qDebug() << "Checking if device suppoerted: " << device;
+    qDebug() << "Checking if device is supported: " << device;
     return device == "Amazfit GTS 2" && m_type != Invalid && !m_version.contains("unknown");
 }
 
 void Gts2FirmwareInfo::determineFirmwareType() {
-    qDebug() << "Determining firmware type";
+    qDebug() << Q_FUNC_INFO << "Determining firmware type";
     m_type = Invalid;
 
     if (m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(NEWRES_HEADER)) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
@@ -37,7 +36,7 @@ void Gts2FirmwareInfo::determineFirmwareType() {
     }
 //    if (m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(FW_HEADER2)) == FW_OFFSET) {
 //        m_version = m_crcMap[m_crc16];
-//        qDebug() << "Version:" << m_version << "CRC:" << m_crc16;
+//        qDebug() << Q_FUNC_INFO << "Version:" << m_version << "CRC:" << m_crc16;
 //        m_type = Firmware;
 //    }
 
