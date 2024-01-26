@@ -931,18 +931,20 @@ void DeviceInterface::registerDBus()
         qDebug() << "Registering service on dbus" << SERVICE;
         if (!connection.registerService(SERVICE))
         {
+            qCritical() << Q_FUNC_INFO << "Unable to register service. Quit.;
             QCoreApplication::quit();
             return;
         }
 
         if (!connection.registerObject(PATH, this, QDBusConnection::ExportAllInvokables | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties))
         {
+            qCritical() << Q_FUNC_INFO << "Unable to register objects. Quit.;
             QCoreApplication::quit();
             return;
         }
         m_dbusRegistered = true;
 
-        qDebug() << "amazfish-daemon: succesfully registered to dbus sessionBus";
+        qInfo() << "Succesfully registered to dbus sessionBus";
     }
 }
 
