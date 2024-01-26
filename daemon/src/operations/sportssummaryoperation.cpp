@@ -141,7 +141,7 @@ void SportsSummaryOperation::start()
     setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
 
-    qDebug() << "last summary sync was" << startDate();
+    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDate();
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
 
@@ -155,11 +155,11 @@ void SportsSummaryOperation::start()
 void SportsSummaryOperation::handleData(const QByteArray &data)
 {
     if (data.length() < 2) {
-        qDebug() << "unexpected sports summary data length: " << data.length();
+        qDebug() << Q_FUNC_INFO << "unexpected sports summary data length: " << data.length();
         return;
     }
 
-    qDebug() << "Data counter:" << data[0];
+    qDebug() << Q_FUNC_INFO << "Data counter:" << data[0];
     if ((m_lastPacketCounter + 1) == data[0] ) {
         m_lastPacketCounter++;
         if (m_lastPacketCounter > 255) {
@@ -167,7 +167,7 @@ void SportsSummaryOperation::handleData(const QByteArray &data)
         }
         m_buffer += data.mid(1);
     } else {
-        qDebug() << "invalid package counter: " << data[0] << ", last was: " << m_lastPacketCounter;
+        qDebug() << Q_FUNC_INFO << "invalid package counter: " << data[0] << ", last was: " << m_lastPacketCounter;
         finished(false);
         return;
     }
@@ -185,13 +185,13 @@ bool SportsSummaryOperation::finished(bool success)
 
 void SportsSummaryOperation::parseSummary()
 {
-    qDebug() << "Buffer:" << m_buffer.toHex();
+    qDebug() << Q_FUNC_INFO << "Buffer:" << m_buffer.toHex();
 
     summary_t summaryData;
     memcpy(&summaryData, m_buffer.data(), sizeof(summary_t));
 
     ActivityKind::Type activityKind = ActivityKind::fromBipType(ActivityKind::Type(summaryData.kind));
-    qDebug() << summaryData.version << summaryData.kind << summaryData.timestamp_start << summaryData.timestamp_end;
+    qDebug() << Q_FUNC_INFO << summaryData.version << summaryData.kind << summaryData.timestamp_start << summaryData.timestamp_end;
 
     long duration = summaryData.timestamp_end - summaryData.timestamp_start;
     m_summary.setStartTime(startDate());
@@ -328,6 +328,6 @@ ActivitySummary SportsSummaryOperation::summary()
 
 QString SportsSummaryOperation::activityName()
 {
-    qDebug() << "Getting activity name";
+    qDebug() << Q_FUNC_INFO << "Getting activity name";
     return (ActivityKind::toString(m_summary.activityKind())) + "-" + m_summary.startTime().toLocalTime().toString("yyyyMMdd-HHmm");
 }
