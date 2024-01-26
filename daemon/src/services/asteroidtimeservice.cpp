@@ -24,7 +24,7 @@ void AsteroidTimeService::setCurrentTime()
     data[5] = t.time().second();
 
 
-    qDebug() << "setting time to:" << t << data.toHex();
+    qDebug() << Q_FUNC_INFO << "Setting time to:" << t << data.toHex();
     writeValue(UUID_CHARACTERISTIC_ASTEROID_TIME_SET, data);
 
 }
