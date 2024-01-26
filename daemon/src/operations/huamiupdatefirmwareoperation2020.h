@@ -34,4 +34,4 @@ private:
     int mChunkLength = -1;
 };
 
-#endif // UPDATEFIRMWAREOPERATIONNEW_H
+#endif // HUAMIUPDATEFIRMWAREOPERATION2020_H
