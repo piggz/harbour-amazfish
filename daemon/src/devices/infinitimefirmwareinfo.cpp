@@ -40,7 +40,7 @@ void InfinitimeFirmwareInfo::determineFirmwareType()
             }
             else if(root->entry("resources.json") != nullptr)
             {
-                qDebug() << << Q_FUNC_INFO << "Resource file detected";
+                qDebug() << Q_FUNC_INFO << "Resource file detected";
                 m_type = Res_Compressed;
             }
         }
