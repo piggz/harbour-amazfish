@@ -4,7 +4,7 @@
 
 BipLiteDevice::BipLiteDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
 {
-    qDebug() << "Creating Bip Lite Device";
+    qDebug() << Q_FUNC_INFO;
 }
 
 QString BipLiteDevice::deviceType() const
@@ -14,6 +14,8 @@ QString BipLiteDevice::deviceType() const
 
 void BipLiteDevice::initialise()
 {
+    qDebug() << Q_FUNC_INFO;
+
     setConnectionState("connected");
     parseServices();
 
@@ -61,7 +63,7 @@ void BipLiteDevice::initialise()
 
 void BipLiteDevice::parseServices()
 {
-    qDebug() << "BipLiteDevice::parseServices";
+    qDebug() << Q_FUNC_INFO;
 
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
