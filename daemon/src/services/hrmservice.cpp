@@ -63,7 +63,7 @@ void HRMService::setAllDayHRM()
 {
     auto interval = AmazfishConfig::instance()->profileAllDayHRM();
 
-    qDebug() << "Setting HRM monitoring to" << interval;
+    qDebug() << Q_FUNC_INFO << "Setting HRM monitoring to" << interval;
 
     QByteArray cmd = UCHAR_TO_BYTEARRAY(COMMAND_SET_PERIODIC_HR_MEASUREMENT_INTERVAL);
     cmd += UCHAR_TO_BYTEARRAY(interval);
@@ -77,7 +77,7 @@ void HRMService::setHeartrateSleepSupport()
 {
     auto enable = AmazfishConfig::instance()->profileHRMSleepSupport();
 
-    qDebug() << "Setting HRM sleept support to" << enable;
+    qDebug() << Q_FUNC_INFO << "Setting HRM sleep support to" << enable;
 
     QByteArray cmd;
     if (enable) {
