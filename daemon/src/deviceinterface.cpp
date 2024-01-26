@@ -280,7 +280,7 @@ void DeviceInterface::createTables()
                 KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg(AbstractDevice::INFO_BATTERY), // automatically adds LIMIT 1 into query
                 &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
         m_lastBatteryLevel = batteryLevel;
-        qDebug() << "Last Battery Level: " << m_lastBatteryLevel;
+        qDebug() << Q_FUNC_INFO << "Last Battery Level: " << m_lastBatteryLevel;
     } else {
         qWarning() << "Cannot get battery level";
     }
@@ -589,7 +589,7 @@ void DeviceInterface::handleButtonPressed(int presses)
             action = AmazfishConfig::instance()->appButtonQuadPressAction();
         }
 
-        qDebug() << action;
+        qDebug() << Q_FUNC_INFO << "Action:" << action;
 
         if (action == "action-music-next"){
             m_musicController.next();
