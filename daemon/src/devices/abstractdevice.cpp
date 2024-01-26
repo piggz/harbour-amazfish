@@ -52,7 +52,8 @@ void AbstractDevice::disconnectFromDevice()
 
 void AbstractDevice::reconnectionTimer()
 {
-    qDebug() << "AbstractDevice::reconnectionTimer";
+    //qDebug() << Q_FUNC_INFO;
+
     if ((!deviceProperty("Connected").toBool() && m_autoreconnect) || connectionState() == "authfailed") {
         qDebug() << "Lost connection";
         QBLEDevice::disconnectFromDevice();

@@ -887,7 +887,7 @@ void DeviceInterface::requestManualHeartrate()
 
 void DeviceInterface::onRefreshTimer()
 {
-    qDebug() << "DeviceInterface::onRefreshTimer";
+    //qDebug() << Q_FUNC_INFO;
 
     auto config = AmazfishConfig::instance();
 
