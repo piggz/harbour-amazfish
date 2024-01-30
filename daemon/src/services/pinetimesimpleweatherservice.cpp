@@ -18,7 +18,7 @@ PineTimeSimpleWeatherService::PineTimeSimpleWeatherService(const QString &path, 
 void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
 {
 
-    qDebug() << "Current weather data"
+    qDebug() << Q_FUNC_INFO << ": Current weather data"
 #if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
         << QDateTime::fromSecsSinceEpoch(weather->dateTime())
 #else
@@ -70,7 +70,7 @@ void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
 //    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windSpeed()));
 //    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windGusts()));
 
-    qDebug() << "Weather bytes" << weatherBytes.toHex();
+    qDebug() << Q_FUNC_INFO << "Weather bytes" << weatherBytes.toHex();
 
     writeValue(UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA, weatherBytes);
 
@@ -90,7 +90,7 @@ void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
 //        qDebug() << "Forecast:" << f << fc.dateTime()<< fc.weatherCode() <<  (fc.maxTemperature() - 273) <<  (fc.minTemperature() - 273) << fc.humidity() << fc.pressure() << fc.windMaxSpeed() << fc.clouds();
 
 
-    qDebug() << "Forecast Day" << f
+    qDebug() << Q_FUNC_INFO << ": Forecast Day" << f
 #if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
         << QDateTime::fromSecsSinceEpoch(fc.dateTime())
 #else
@@ -112,7 +112,7 @@ void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
 
     }
 
-    qDebug() << "Forecast bytes" << forecastBytes.toHex();
+    qDebug() << Q_FUNC_INFO << ": Forecast bytes" << forecastBytes.toHex();
 
     writeValue(UUID_CHARACTERISTIC_SIMPLE_WEATHER_DATA, forecastBytes);
 

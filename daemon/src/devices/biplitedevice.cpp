@@ -4,7 +4,7 @@
 
 BipLiteDevice::BipLiteDevice(const QString &pairedName, QObject *parent) : BipDevice(pairedName, parent)
 {
-    qDebug() << "Creating Bip Lite Device";
+    qDebug() << Q_FUNC_INFO;
 }
 
 QString BipLiteDevice::deviceType() const
@@ -14,6 +14,8 @@ QString BipLiteDevice::deviceType() const
 
 void BipLiteDevice::initialise()
 {
+    qDebug() << Q_FUNC_INFO;
+
     setConnectionState("connected");
     parseServices();
 
@@ -32,7 +34,7 @@ void BipLiteDevice::initialise()
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
     if (mi2) {
-        qDebug() << "Got mi2 service";
+        qDebug() << "Got MiBand2 service";
         connect(mi2, &MiBand2Service::authenticated, this, &BipDevice::authenticated, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 
@@ -61,7 +63,7 @@ void BipLiteDevice::initialise()
 
 void BipLiteDevice::parseServices()
 {
-    qDebug() << "BipLiteDevice::parseServices";
+    qDebug() << Q_FUNC_INFO;
 
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");

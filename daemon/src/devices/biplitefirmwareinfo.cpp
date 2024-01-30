@@ -11,13 +11,12 @@ BipLiteFirmwareInfo::BipLiteFirmwareInfo(const QByteArray &bytes)
     determineFirmwareType();
     determineFirmwareVersion();
 
-    //qDebug() << mBytes;
-    qDebug() << m_type << m_version << m_crc16;
+    qDebug() << Q_FUNC_INFO << m_type << m_version << m_crc16;
 }
 
 
 void BipLiteFirmwareInfo::determineFirmwareType() {
-    qDebug() << "Determining firmware type";
+    qDebug() << Q_FUNC_INFO << "Determining firmware type";
     m_type = Invalid;
 
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(RES_HEADER)) || m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(NEWRES_HEADER))) {
@@ -38,7 +37,7 @@ void BipLiteFirmwareInfo::determineFirmwareType() {
     }
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(FW_HEADER))) {
         m_version = m_crcMap[m_crc16];
-        qDebug() << "Version:" << m_version << "CRC:" << m_crc16;
+        qDebug() << Q_FUNC_INFO << "Version:" << m_version << "CRC:" << m_crc16;
 
         if (!m_version.isEmpty()) {
             if ((m_version >= "0.0.8.00") && (m_version <= "1.2.0.00")) {

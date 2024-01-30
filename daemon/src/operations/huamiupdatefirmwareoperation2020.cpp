@@ -158,7 +158,7 @@ bool HuamiUpdateFirmwareOperation2020::sendFwInfo()
     bytes[i++] = sizeBytes[1];
     bytes[i++] = sizeBytes[2];
     bytes[i]   = sizeBytes[3];
-    qDebug() << "Sending FW info" <<bytes;
+    qDebug() << Q_FUNC_INFO << "Sending FW info" <<bytes;
 
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, bytes);
     return true;
@@ -206,7 +206,7 @@ bool HuamiUpdateFirmwareOperation2020::sendFirmwareDataChunk(int offset) {
     progressPercent = (int) ((((float) (offset + chunkLength)) / len) * 100);
     serv->downloadProgress(progressPercent);
 
-    qDebug() << "Finished sending chunk";
+    qDebug() << Q_FUNC_INFO << "Finished sending chunk";
 
     return true;
 }

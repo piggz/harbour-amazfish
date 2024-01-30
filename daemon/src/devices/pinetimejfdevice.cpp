@@ -50,13 +50,13 @@ namespace {
 
 PinetimeJFDevice::PinetimeJFDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
-    qDebug() << "PinetimeJFDevice:: " << pairedName;
+    qDebug() << Q_FUNC_INFO << pairedName;
     connect(this, &QBLEDevice::propertiesChanged, this, &PinetimeJFDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 void PinetimeJFDevice::pair()
 {
-    qDebug() << "AbstractDevice::pair";
+    qDebug() << Q_FUNC_INFO;
 
     m_needsAuth = false;
     m_pairing = true;
@@ -94,7 +94,7 @@ void PinetimeJFDevice::sendAlert(const QString &sender, const QString &subject, 
 {
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
     if (alert) {
-        qDebug() << "PT Have an alert service";
+        qDebug() << Q_FUNC_INFO << "Have an alert service";
         alert->sendAlert(sender, subject, message);
     }
 }
@@ -110,7 +110,7 @@ void PinetimeJFDevice::incomingCall(const QString &caller)
 
 void PinetimeJFDevice::parseServices()
 {
-    qDebug() << "PinetimeJFDevice::parseServices";
+    qDebug() << Q_FUNC_INFO;
 
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
@@ -241,7 +241,7 @@ void PinetimeJFDevice::sampledActivity(QDateTime dt, int kind, int intensity, in
 
 
     if (!m_conn || !(m_conn->isDatabaseUsed())) {
-        qDebug() << "Database not connected";
+        qDebug() << Q_FUNC_INFO << "Database not connected";
         return;
     }
 
@@ -287,7 +287,7 @@ void PinetimeJFDevice::sampledActivity(QDateTime dt, int kind, int intensity, in
 
 void PinetimeJFDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
-    qDebug() << "PinetimeJFDevice::onPropertiesChanged:" << interface << map << list;
+    qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
         m_reconnectTimer->start();
@@ -298,7 +298,6 @@ void PinetimeJFDevice::onPropertiesChanged(QString interface, QVariantMap map, Q
             bool value = map["Connected"].toBool();
 
             if (!value) {
-                qDebug() << "DisConnected!";
                 setConnectionState("disconnected");
             } else {
                 setConnectionState("connected");
@@ -310,7 +309,7 @@ void PinetimeJFDevice::onPropertiesChanged(QString interface, QVariantMap map, Q
 
 void PinetimeJFDevice::authenticated(bool ready)
 {
-    qDebug() << "PinetimeJFDevice::authenticated:" << ready;
+    qDebug() << Q_FUNC_INFO << ready;
 
     if (ready) {
         setConnectionState("authenticated");

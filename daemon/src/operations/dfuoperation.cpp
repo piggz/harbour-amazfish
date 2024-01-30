@@ -59,7 +59,7 @@ DfuOperation::~DfuOperation()
 {
     if (m_workerThread.isRunning()) {
         m_workerThread.requestInterruption();
-        qDebug() << "Waiting for thread to finish";
+        qDebug() << Q_FUNC_INFO << "Waiting for thread to finish";
         m_workerThread.quit();
         m_workerThread.wait();
         qDebug() << Q_FUNC_INFO << "Done";
@@ -72,6 +72,8 @@ bool DfuOperation::probeArchive()
     QDataStream in(&zippedFwBytes, QIODevice::ReadOnly);
     KCompressionDevice dev(in.device(), false, KCompressionDevice::CompressionType::None);
     KZip zip(&dev);
+
+    qDebug() << Q_FUNC_INFO;
 
     if(!zip.open(QIODevice::ReadOnly))
     {
@@ -147,7 +149,7 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
     qDebug() << Q_FUNC_INFO << value;
 
     if (!(value.length() == 3 || value.length() == 5)) {
-        qDebug() << "Notifications should be 3 or 5 bytes long.";
+        qDebug() << Q_FUNC_INFO << "Notifications should be 3 or 5 bytes long.";
         return false;
     }
     bool success = value[2] == DfuService::ERROR_NO_ERROR;
@@ -254,7 +256,7 @@ void DfuOperation::packetNotification()
 {
     m_outstandingPacketNotifications++;
     if (m_outstandingPacketNotifications > 3) { //Watch hasnt responded
-        qDebug() << "Watch has missed 3 response packets, aborting";
+        qDebug() << Q_FUNC_INFO << "Watch has missed 3 response packets, aborting";
         m_workerThread.requestInterruption();
     }
 }

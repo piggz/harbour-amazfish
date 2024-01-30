@@ -30,7 +30,7 @@ void AbstractDevice::pair()
 
 void AbstractDevice::connectToDevice()
 {
-    qDebug() << "AbstractDevice::connectToDevice";
+    qDebug() << Q_FUNC_INFO;
 
     m_pairing = false;
     m_autoreconnect = true;
@@ -42,7 +42,7 @@ void AbstractDevice::connectToDevice()
 
 void AbstractDevice::disconnectFromDevice()
 {
-    qDebug() << "AbstractDevice::disconnectFromDevice";
+    qDebug() << Q_FUNC_INFO;
 
     m_autoreconnect = false;
     setConnectionState("disconnected");
@@ -52,9 +52,10 @@ void AbstractDevice::disconnectFromDevice()
 
 void AbstractDevice::reconnectionTimer()
 {
-    qDebug() << "AbstractDevice::reconnectionTimer";
+    //qDebug() << Q_FUNC_INFO;
+
     if ((!deviceProperty("Connected").toBool() && m_autoreconnect) || connectionState() == "authfailed") {
-        qDebug() << "Lost connection";
+        qDebug() << Q_FUNC_INFO << "Lost connection";
         QBLEDevice::disconnectFromDevice();
         QBLEDevice::connectToDevice();
     }
@@ -70,7 +71,7 @@ void AbstractDevice::devicePairFinished(const QString &status)
 
 void AbstractDevice::setConnectionState(const QString &state)
 {
-    qDebug() << Q_FUNC_INFO << state;
+    qDebug() << Q_FUNC_INFO << "Connection state:" << state;
     if (state != m_connectionState) {
         m_connectionState = state;
         emit connectionStateChanged();
