@@ -330,6 +330,13 @@ void DaemonInterface::fetchLogs() {
     iface->call(QStringLiteral("fetchLogs"));
 }
 
+void DaemonInterface::requestScreenshot() {
+    if (!iface || !iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("requestScreenshot"));
+}
+
 QStringList DaemonInterface::supportedDisplayItems()
 {
     if (!iface || !iface->isValid()) {

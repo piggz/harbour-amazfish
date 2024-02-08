@@ -188,6 +188,11 @@ void AbstractDevice::navigationNarrative(const QString &flag, const QString &nar
     Q_UNUSED(narrative)
 }
 
+void AbstractDevice::requestScreenshot()
+{
+    qDebug() << Q_FUNC_INFO;
+}
+
 QStringList AbstractDevice::supportedDisplayItems() const
 {
     return QStringList();

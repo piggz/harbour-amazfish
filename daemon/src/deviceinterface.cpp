@@ -1015,6 +1015,12 @@ void DeviceInterface::fetchLogs()
     }
 }
 
+void DeviceInterface::requestScreenshot() {
+    if (m_device) {
+        m_device->requestScreenshot();
+    }
+}
+
 QStringList DeviceInterface::supportedDisplayItems()
 {
     qDebug() << Q_FUNC_INFO;
