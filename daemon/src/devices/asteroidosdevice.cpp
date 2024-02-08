@@ -18,7 +18,7 @@ AsteroidOSDevice::AsteroidOSDevice(const QString &pairedName, QObject *parent) :
 
 int AsteroidOSDevice::supportedFeatures() const
 {
-    return FEATURE_WEATHER | FEATURE_WEATHER | FEATURE_ALERT ;
+    return FEATURE_WEATHER | FEATURE_WEATHER | FEATURE_ALERT | FEATURE_SCREENSHOT;
 //FEATURE_HRM  | FEATURE_STEPS;
 }
 
