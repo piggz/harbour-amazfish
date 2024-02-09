@@ -61,12 +61,27 @@
         <source>Intensity</source>
         <translation>Intensitet</translation>
     </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
         <translation>Ange autentiseringsnyckel</translation>
+    </message>
+</context>
+<context>
+    <name>BatteryPage</name>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -367,6 +382,10 @@
         <source>No devices found</source>
         <translation>Inga enheter hittades</translation>
     </message>
+    <message>
+        <source>Bluetooth adapter is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
@@ -432,24 +451,12 @@
         <translation>Spara inställningar</translation>
     </message>
     <message>
-        <source>Refresh weather every (</source>
-        <translation type="vanished">Uppdatera vädret varje (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation type="vanished">) minuter</translation>
-    </message>
-    <message>
         <source>Sync activity data each hour</source>
         <translation>Synkronisera aktivitetsdata varje timma</translation>
     </message>
     <message>
         <source>Low battery notification</source>
         <translation>Avisering för låg batterinivå</translation>
-    </message>
-    <message>
-        <source>Refresh calendar every (</source>
-        <translation type="vanished">Uppdatera kalendern varje (</translation>
     </message>
     <message>
         <source>Notifications</source>
@@ -505,6 +512,10 @@
     </message>
     <message>
         <source>Refresh calendar every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transliterate notifications</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -878,6 +889,18 @@
         <source>Heartrate usage</source>
         <translation>Hjärtfrekvensanvändning</translation>
     </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SleepPage</name>
@@ -1125,6 +1148,10 @@
     <message>
         <source>Country: </source>
         <translation>Land: </translation>
+    </message>
+    <message>
+        <source>not logged in</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

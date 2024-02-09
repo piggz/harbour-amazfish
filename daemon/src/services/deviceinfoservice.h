@@ -1,5 +1,5 @@
-#ifndef BIPINFOSERVICE_H
-#define BIPINFOSERVICE_H
+#ifndef DEVICEINFOSERVICE_H
+#define DEVICEINFOSERVICE_H
 
 #include "qble/qbleservice.h"
 #include "devices/abstractdevice.h"
@@ -49,4 +49,4 @@ private:
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
 };
 
-#endif // BIPINFOSERVICE_H
+#endif // DEVICEINFOSERVICE_H

@@ -61,12 +61,27 @@
         <source>Intensity</source>
         <translation>Intensität</translation>
     </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
         <translation>Auth-Key Eingeben</translation>
+    </message>
+</context>
+<context>
+    <name>BatteryPage</name>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -367,6 +382,10 @@
         <source>No devices found</source>
         <translation>Kein Gerät gefunden</translation>
     </message>
+    <message>
+        <source>Bluetooth adapter is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
@@ -432,24 +451,12 @@
         <translation>Einstellungen speichern</translation>
     </message>
     <message>
-        <source>Refresh weather every (</source>
-        <translation type="vanished">Wetteraktualisierung alle (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation type="vanished">) Minuten</translation>
-    </message>
-    <message>
         <source>Sync activity data each hour</source>
         <translation>Synchronisiere Aktivitätsdaten jede Stunde</translation>
     </message>
     <message>
         <source>Low battery notification</source>
         <translation>Niedrige Batteriestanderinnerung</translation>
-    </message>
-    <message>
-        <source>Refresh calendar every (</source>
-        <translation type="vanished">Aktualisiere Kalender alle (</translation>
     </message>
     <message>
         <source>Notifications</source>
@@ -505,6 +512,10 @@
     </message>
     <message>
         <source>Refresh calendar every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transliterate notifications</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -878,6 +889,18 @@
         <source>Heartrate usage</source>
         <translation>Herzfrequenz verwenden</translation>
     </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SleepPage</name>
@@ -1124,6 +1147,10 @@
     </message>
     <message>
         <source>Country: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not logged in</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

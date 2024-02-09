@@ -77,6 +77,7 @@ public:
     Q_INVOKABLE void reloadCities();
     Q_INVOKABLE void enableFeature(int feature);
     Q_INVOKABLE void fetchLogs();
+    Q_INVOKABLE void requestScreenshot();
     Q_INVOKABLE QStringList supportedDisplayItems();
 
 private:
@@ -100,13 +101,16 @@ private:
     DBusHRM *m_dbusHRM = nullptr;
 
     QTimer *m_refreshTimer = nullptr;
+    QTimer *m_findDeviceTimer = nullptr;
     Q_SLOT void onRefreshTimer();
+    void findDevice();
+    int m_playedSounds = 0;
 
     void createSettings();
     void updateServiceController();
 
-    //TODO Minimise use of these funcitons
-    MiBandService *miBandService() const;
+    void log_battery_level(int level);
+
     HRMService *hrmService() const;
     
     Q_SLOT void onNotification(watchfish::Notification *notification);
@@ -114,17 +118,17 @@ private:
     Q_SLOT void onConnectionStateChanged();
     Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
     Q_SLOT void musicChanged();
-    Q_SLOT void deviceEvent(AbstractDevice::Events event);
+    Q_SLOT void deviceEvent(AbstractDevice::Event event);
     Q_SLOT void handleButtonPressed(int presses);
     Q_SLOT void onEventTimer();
     Q_SLOT void backgroundActivityStateChanged();
 
     void sendBufferedNotifications();
     void scheduleNextEvent();
-    
+
     //Watchfish
     watchfish::MusicController m_musicController;
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     watchfish::VoiceCallController m_voiceCallController;
 #endif
     watchfish::NotificationMonitor m_notificationMonitor;

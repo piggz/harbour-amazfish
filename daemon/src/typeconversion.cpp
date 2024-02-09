@@ -14,6 +14,12 @@ QByteArray fromInt16(int val)
     return QByteArray(1, val & 0xff) + QByteArray(1, ((val >> 8) & 0xff));
 }
 
+QByteArray BEfromInt16(int val)
+{
+    return QByteArray(1, (val >> 8) & 0xff) + QByteArray(1, (val & 0xff));
+}
+
+
 QByteArray fromInt24(int val)
 {
     return QByteArray(1, val & 0xff) + QByteArray(1, ((val >> 8) & 0xff)) + QByteArray(1, ((val >> 16) & 0xff));
@@ -24,6 +30,23 @@ QByteArray fromInt32(int val)
     qDebug() << "Converting int32 to char" << val;
     return QByteArray(1, val & 0xff) + QByteArray(1, ((val >> 8) & 0xff)) + QByteArray(1, ((val >> 16) & 0xff)) + QByteArray(1, ((val >> 24) & 0xff));
 }
+
+QByteArray fromInt64(long long int val)
+{
+    QByteArray ret = QByteArray(1, val & 0xff)
+     + QByteArray(1, ((val >> 8) & 0xff))
+     + QByteArray(1, ((val >> 16) & 0xff))
+     + QByteArray(1, ((val >> 24) & 0xff))
+     + QByteArray(1, ((val >> 32) & 0xff))
+     + QByteArray(1, ((val >> 40) & 0xff))
+     + QByteArray(1, ((val >> 48) & 0xff))
+     + QByteArray(1, ((val >> 56) & 0xff));
+
+    qDebug() << "Converting int64 to char" << val << " " << ret.toHex();
+
+    return ret;
+}
+
 
 QByteArray dateTimeToBytes(const QDateTime &dt, int format, bool adjustForTZ)
 {
@@ -128,7 +151,6 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
 int toUint16(char val1, char val2) {
     return (val1 & 0xff) | ((val2 & 0xff) << 8);
 }
-
 
 int toUint32(char val1, char val2, char val3, char val4) {
     return (val1 & 0xff) | ((val2 & 0xff) << 8) | ((val3 & 0xff) << 16) | ((val4 & 0xff) << 24);

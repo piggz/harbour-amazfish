@@ -11,17 +11,16 @@ const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_MANUFACTURER_NAME = "000
 const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_SYSTEM_ID = "00002a23-0000-1000-8000-00805f9b34fb";
 const char* DeviceInfoService::UUID_CHARACTERISTIC_INFO_PNP_ID = "00002a50-0000-1000-8000-00805f9b34fb";
 
-
 DeviceInfoService::DeviceInfoService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_DEVICEINFO, path, parent)
 {
-    qDebug() << "BipInfoService::BipInfoService";
+    qDebug() << Q_FUNC_INFO;
 
     connect(this, &QBLEService::characteristicRead, this, &DeviceInfoService::characteristicRead);
 }
 
 void DeviceInfoService::refreshInformation()
 {
-    qDebug() << "BipInfoService::refreshInformation";
+    qDebug() << Q_FUNC_INFO;
 
     readAsync(UUID_CHARACTERISTIC_INFO_SERIAL_NO);
     readAsync(UUID_CHARACTERISTIC_INFO_HARDWARE_REV);
@@ -35,7 +34,8 @@ void DeviceInfoService::refreshInformation()
 
 void DeviceInfoService::characteristicRead(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << "Read:" << characteristic << value;
+    qDebug() << Q_FUNC_INFO << "Read:" << characteristic << value;
+
     if (characteristic == UUID_CHARACTERISTIC_INFO_SERIAL_NO) {
         m_serialNumber = value;
         emit informationChanged(AbstractDevice::INFO_SERIAL, m_serialNumber);
@@ -61,7 +61,7 @@ void DeviceInfoService::characteristicRead(const QString &characteristic, const 
         m_manufacturer = value;
         emit informationChanged(AbstractDevice::INFO_MANUFACTURER, m_manufacturer);
     } else {
-        qDebug() << "Unknown value";
+        qDebug() << Q_FUNC_INFO << "Unknown value";
     }
 }
 

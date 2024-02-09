@@ -6,7 +6,7 @@
 class HuamiUpdateFirmwareOperation2020 : public UpdateFirmwareOperation
 {
 public:
-    HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service);
+    HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service, QBLEService &mibandService);
 
     bool handleMetaData(const QByteArray &meta) override;
     void start() override;
@@ -29,7 +29,9 @@ private:
     void sendTransferComplete();
     void sendFinalize();
 
+    QBLEService &m_mibandService;
+
     int mChunkLength = -1;
 };
 
-#endif // UPDATEFIRMWAREOPERATIONNEW_H
+#endif // HUAMIUPDATEFIRMWAREOPERATION2020_H

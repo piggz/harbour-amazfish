@@ -3,10 +3,10 @@
 
 DBusHRM::DBusHRM(QObject *parent) : QObject(parent)
 {
-    qDebug() << "Creating DBUS HRM";
+    qDebug() << Q_FUNC_INFO;
 
     if (!QDBusConnection::sessionBus().registerService("org.sailfishos.heartrate")) {
-        qDebug() << QDBusConnection::sessionBus().lastError().message();
+        qDebug() << Q_FUNC_INFO << "Unable to register service:" << QDBusConnection::sessionBus().lastError().message();
     } else {
         QDBusConnection::sessionBus().registerObject("/", this, QDBusConnection::ExportAllSlots);
     }
@@ -14,22 +14,19 @@ DBusHRM::DBusHRM(QObject *parent) : QObject(parent)
 
 void DBusHRM::setHRMService(HRMService *hrm)
 {
-    qDebug() << "Assigning HRM";
-
+    qDebug() << Q_FUNC_INFO;
     m_hrm = hrm;
 }
 
-void DBusHRM::setMiBandService(MiBandService *mi)
+void DBusHRM::setDevice(AbstractDevice *dev)
 {
-    qDebug() << "Assigning MI";
-
-    m_mi = mi;
+    qDebug() << Q_FUNC_INFO;
+    m_device = dev;
 }
 
 void DBusHRM::start()
 {
-    qDebug() << "Starting DBUS HRM" << m_hrm;
-
+    qDebug() << Q_FUNC_INFO;
     if (m_hrm) {
         return m_hrm->enableRealtimeHRMeasurement(true);
     }
@@ -37,8 +34,7 @@ void DBusHRM::start()
 
 void DBusHRM::stop()
 {
-    qDebug() << "Stopping DBUS HRM" << m_hrm;
-
+    qDebug() << Q_FUNC_INFO;
     if (m_hrm) {
         return m_hrm->enableRealtimeHRMeasurement(false);
     }
@@ -46,7 +42,7 @@ void DBusHRM::stop()
 
 int DBusHRM::heartRate()
 {
-    qDebug() << "Getting heartrate" << m_hrm->heartRate();
+    qDebug() << Q_FUNC_INFO << m_hrm->heartRate();
 
     if (m_hrm) {
         m_hrm->keepRealtimeHRMMeasurementAlive();
@@ -57,8 +53,8 @@ int DBusHRM::heartRate()
 
 int DBusHRM::batteryLevel()
 {
-    if (m_mi) {
-        return m_mi->batteryInfo();
+    if (m_device) {
+        return m_device->information(AbstractDevice::INFO_BATTERY).toInt();
     }
     return 0;
 }

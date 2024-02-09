@@ -68,6 +68,12 @@ void GtsDevice::serviceEvent(uint8_t event)
     case MiBandService::EVENT_IGNORE_CALL:
         emit deviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
         break;
+    case MiBandService::EVENT_FIND_PHONE:
+        emit deviceEvent(AbstractDevice::EVENT_FIND_PHONE);
+        break;
+    case MiBandService::EVENT_CANCEL_FIND_PHONE:
+        emit deviceEvent(AbstractDevice::EVENT_CANCEL_FIND_PHONE);
+        break;
     default:
         break;
     }
@@ -90,7 +96,7 @@ void GtsDevice::initialise()
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
     if (mi2) {
-        qDebug() << "Got mi2 service";
+        qDebug() << "Got MiBand2 service";
         connect(mi2, &MiBand2Service::authenticated, this, &HuamiDevice::authenticated, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 
@@ -117,7 +123,7 @@ void GtsDevice::initialise()
 
     QString revision = softwareRevision();
     if (revision > "0.0.9.0") {
-        qDebug() << "GTS with new FW";
+        qDebug() << Q_FUNC_INFO << "GTS with new FW";
         m_ActivitySampleSize = 8;
     }
 }
@@ -193,7 +199,7 @@ void GtsDevice::sendEventReminder(int id, const QDateTime &dt, const QString &ev
     //06 Date/Time (6)
     //00
     //MESSAGE
-    qDebug() << dt << event;
+    qDebug() << Q_FUNC_INFO << dt << event;
 
     QByteArray cmd;
     cmd += (char)0x0b;
@@ -216,10 +222,12 @@ void GtsDevice::sendEventReminder(int id, const QDateTime &dt, const QString &ev
 void GtsDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (fw){
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+
+    if (fw && mi){
         QString revision = softwareRevision();
         if (revision > "0.1.1.16") {
-            fw->prepareFirmwareDownload(info, new HuamiUpdateFirmwareOperation2020(info, fw));
+            fw->prepareFirmwareDownload(info, new HuamiUpdateFirmwareOperation2020(info, fw, *mi));
         } else {
             fw->prepareFirmwareDownload(info, new UpdateFirmwareOperationNew(info, fw));
         }

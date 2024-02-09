@@ -9,9 +9,9 @@ class BipLiteDevice : public BipDevice
 public:
     explicit BipLiteDevice(const QString &pairedName, QObject *parent = 0);
 
-    virtual QString deviceType() const override;
+    QString deviceType() const override;
 
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
 private:
     void initialise() override;

@@ -6,6 +6,11 @@
 #include "weather/currentweather.h"
 #include "abstractfirmwareinfo.h"
 
+#include <KDb3/KDbDriver>
+#include <KDb3/KDbConnection>
+#include <KDb3/KDbConnectionData>
+#include <KDb3/KDbTransactionGuard>
+
 class AbstractDevice : public QBLEDevice
 {
     Q_OBJECT
@@ -20,7 +25,8 @@ public:
         FEATURE_ALERT = 32,
         FEATURE_EVENT_REMINDER = 64,
         FEATURE_MUSIC_CONTROL = 128,
-        FEATURE_BUTTON_ACTION = 256
+        FEATURE_BUTTON_ACTION = 256,
+        FEATURE_SCREENSHOT = 512,
     };
     Q_ENUM(Feature)
 
@@ -36,7 +42,8 @@ public:
         INFO_HEARTRATE,
         INFO_MODEL,
         INFO_FW_REVISION,
-        INFO_MANUFACTURER
+        INFO_MANUFACTURER,
+        INFO_IMMEDIATE_ALERT
     };
     Q_ENUM(Info)
 
@@ -57,7 +64,7 @@ public:
     };
     Q_ENUM(Settings)
 
-    enum Events {
+    enum Event {
         EVENT_MUSIC_STOP,
         EVENT_MUSIC_PLAY,
         EVENT_MUSIC_PAUSE,
@@ -68,9 +75,11 @@ public:
         EVENT_APP_MUSIC,
         EVENT_DECLINE_CALL,
         EVENT_ANSWER_CALL,
-        EVENT_IGNORE_CALL
+        EVENT_IGNORE_CALL,
+        EVENT_FIND_PHONE,
+        EVENT_CANCEL_FIND_PHONE
     };
-    Q_ENUM(Events)
+    Q_ENUM(Event)
 
     explicit AbstractDevice(const QString &pairedName, QObject *parent = nullptr);
     
@@ -83,6 +92,8 @@ public:
     bool supportsFeature(Feature f) const;
     virtual int supportedFeatures() const = 0;
 
+    virtual void setDatabase(KDbConnection *conn);
+
     virtual QString deviceType() const = 0;
     QString deviceName() const;
     virtual void abortOperations();
@@ -93,6 +104,8 @@ public:
     virtual void startDownload();
 
     virtual void downloadSportsData();
+    virtual void downloadActivityData();
+    virtual void fetchLogs();
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
     virtual QString information(Info i) const;
@@ -105,6 +118,7 @@ public:
     virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0);
     virtual void navigationRunning(bool running);
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress);
+    virtual void requestScreenshot();
     virtual QStringList supportedDisplayItems() const;
 
     //signals    
@@ -113,7 +127,7 @@ public:
     Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void connectionStateChanged();
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString& val);
-    Q_SIGNAL void deviceEvent(Events event);
+    Q_SIGNAL void deviceEvent(Event event);
 
 protected:
     bool m_needsAuth = false;
@@ -125,11 +139,13 @@ protected:
     QTimer *m_reconnectTimer;
 
     void setConnectionState(const QString &state);
+    KDbConnection *m_conn = nullptr;
 
 private:
     void reconnectionTimer();
     void devicePairFinished(const QString& status);
     QString m_pairedName;
+
 };
 
 #endif

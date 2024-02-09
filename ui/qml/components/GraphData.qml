@@ -47,7 +47,7 @@ Item {
 
     property bool scale: false
     property color lineColor: styler.themeHighlightColor
-    property real lineWidth: 1
+    property real lineWidth: 3
 
     property real minY: 0 //Always 0
     property real maxY: 0
@@ -233,7 +233,11 @@ Item {
                     //ctx.globalAlpha = 0.8;
 
                     //PGZ
-                    lineWidth = width / end;
+                    if (graphType == bar) {
+                        lineWidth = width / end;
+                    } else {
+                        stepX = width / end;
+                    }
 
                     ctx.lineWidth = lineWidth;
                     ctx.beginPath();

@@ -16,7 +16,7 @@ LIBS += -Lqble/qble -L$$OUT_PWD/../lib -lamazfish -lz
 PKGCONFIG += dbus-1
 PKGCONFIG += icu-uc icu-io icu-i18n # transliteration
 QT +=  positioning KDb3 network dbus KArchive
-CONFIG += c++17
+CONFIG += c++17 c++1z
 
 equals(FLAVOR, "silica") {
     CONFIG += flavor_silica
@@ -33,10 +33,16 @@ equals(FLAVOR, "silica") {
 flavor_silica {
     message(SailfishOS daemon build)
     DEFINES += MER_EDITION_SAILFISH
-    LIBS += -lkeepalive
+    LIBS += -lkeepalive -lpulse-simple
     CONFIG += sailfishapp
     CONFIG += link_pkgconfig
-    PKGCONFIG += mlite5
+    PKGCONFIG += mlite5 libpulse
+    WATCHFISH_FEATURES += music \
+                      voicecall \
+                      notificationmonitor \
+                      calendar
+} else:flavor_uuitk {
+    DEFINES += UUITK_EDITION
     WATCHFISH_FEATURES += music \
                       voicecall \
                       notificationmonitor \
@@ -74,6 +80,9 @@ systemd_services.path = $$PREFIX/lib/systemd/user/
 systemd_services.files = $$OUT_PWD/harbour-amazfish.service
 systemd_services.CONFIG += no_check_exist
 
+chirp.path = $$PREFIX/share/harbour-amazfish/
+chirp.files = chirp.raw
+
 #Install appropriate files for each system
 flavor_silica {
     systemd_services.commands =  cp $$PWD/harbour-amazfish-sailfish.service.in $$OUT_PWD/harbour-amazfish.service
@@ -88,18 +97,21 @@ flavor_silica {
 }
 
 INSTALLS += target \
-            systemd_services
+            systemd_services \
+            chirp
 
 include(libwatchfish/libwatchfish.pri)
 include(../qble/qble.pri)
 
 SOURCES += \
+    src/devices/asteroidosdevice.cpp \
     src/devices/banglejsdevice.cpp \
     src/devices/bipdevice.cpp \
     src/devices/bipsdevice.cpp \
     src/devices/gtr2device.cpp \
     src/devices/gtr2firmwareinfo.cpp \
     src/devices/gtrdevice.cpp \
+    src/devices/gtrfirmwareinfo.cpp \
     src/devices/gts2device.cpp \
     src/devices/gts2firmwareinfo.cpp \
     src/devices/huamidevice.cpp \
@@ -120,16 +132,23 @@ SOURCES += \
     src/operations/huamiupdatefirmwareoperation2020.cpp \
     src/qaesencryption.cpp \
     src/services/adafruitblefsservice.cpp \
+    src/services/asteroidtimeservice.cpp \
+    src/services/asteroidweatherservice.cpp \
+    src/services/asteroidnotificationservice.cpp \
+    src/services/asteroidmediaservice.cpp \
+    src/services/asteroidscreenshotservice.cpp \
     src/services/currenttimeservice.cpp \
     src/services/dfuservice.cpp \
     src/services/infinitimemotionservice.cpp \
     src/services/infinitimenavservice.cpp \
     src/services/infinitimeweatherservice.cpp \
+    src/services/pinetimesimpleweatherservice.cpp \
     src/services/pinetimemusicservice.cpp \
     src/services/uartservice.cpp \
     src/typeconversion.cpp \
     src/bipbatteryinfo.cpp \
     src/devicefactory.cpp \
+    src/realtimeactivitysample.cpp \
     src/services/mibandservice.cpp \
     src/services/miband2service.cpp \
     src/services/alertnotificationservice.cpp \
@@ -137,6 +156,7 @@ SOURCES += \
     src/services/deviceinfoservice.cpp \
     src/services/bipfirmwareservice.cpp \
     src/services/batteryservice.cpp \
+    src/services/immediatealertservice.cpp \
     src/operations/abstractoperation.cpp \
     src/operations/activityfetchoperation.cpp \
     src/operations/logfetchoperation.cpp \
@@ -158,6 +178,7 @@ SOURCES += \
     src/huamiweathercondition.cpp
 
 DISTFILES += \
+    chirp.raw \
     harbour-amazfish-sailfish.service.in \
     harbour-amazfish.service.in \
     harbour-amazfishd.privileges
@@ -166,12 +187,14 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 HEADERS += \
     src/codec.h \
+    src/devices/asteroidosdevice.h \
     src/devices/banglejsdevice.h \
     src/devices/bipdevice.h \
     src/devices/bipsdevice.h \
     src/devices/gtr2device.h \
     src/devices/gtr2firmwareinfo.h \
     src/devices/gtrdevice.h \
+    src/devices/gtrfirmwareinfo.h \
     src/devices/gts2device.h \
     src/devices/gts2firmwareinfo.h \
     src/devices/huamidevice.h \
@@ -192,13 +215,20 @@ HEADERS += \
     src/operations/huamiupdatefirmwareoperation2020.h \
     src/qaesencryption.h \
     src/services/adafruitblefsservice.h \
+    src/services/asteroidtimeservice.h \
+    src/services/asteroidweatherservice.h \
+    src/services/asteroidnotificationservice.h \
+    src/services/asteroidmediaservice.h \
+    src/services/asteroidscreenshotservice.h \
     src/services/currenttimeservice.h \
     src/services/dfuservice.h \
     src/services/infinitimemotionservice.h \
     src/services/infinitimenavservice.h \
     src/services/infinitimeweatherservice.h \
+    src/services/pinetimesimpleweatherservice.h \
     src/services/pinetimemusicservice.h \
     src/services/uartservice.h \
+    src/services/immediatealertservice.h \
     src/typeconversion.h \
     src/bipbatteryinfo.h \
     src/deviceinterface.h \
@@ -208,6 +238,7 @@ HEADERS += \
     src/activitysummary.h \ 
     src/activitysample.h \
     src/devicefactory.h \
+    src/realtimeactivitysample.h \
     src/services/mibandservice.h \
     src/services/miband2service.h \
     src/services/alertnotificationservice.h \

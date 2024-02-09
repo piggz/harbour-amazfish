@@ -1,8 +1,6 @@
 #include "deviceinterface.h"
 
 #include "deviceinfoservice.h"
-#include "mibandservice.h"
-#include "miband2service.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
 #include "bipfirmwareservice.h"
@@ -15,6 +13,12 @@
 #include <QProcess>
 
 #include <KDb3/KDbDriverManager>
+#include <KDb3/KDbTransactionGuard>
+
+#ifdef MER_EDITION_SAILFISH
+#include <pulse/simple.h>
+#include <pulse/error.h>
+#endif
 
 static const char *SERVICE = SERVICE_NAME_AMAZFISH;
 static const char *PATH = "/application";
@@ -47,7 +51,7 @@ DeviceInterface::DeviceInterface()
     connect(&m_notificationMonitor, &watchfish::NotificationMonitor::notification, this, &DeviceInterface::onNotification);
 
     // Calls
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     connect(&m_voiceCallController, &watchfish::VoiceCallController::ringingChanged, this, &DeviceInterface::onRingingChanged);
 #endif
     //Weather
@@ -62,6 +66,10 @@ DeviceInterface::DeviceInterface()
     connect(m_refreshTimer, &QTimer::timeout, this, &DeviceInterface::onRefreshTimer);
     m_refreshTimer->start(60000);
     m_lastWeatherSync = m_lastCalendarSync = m_lastActivitySync = QDateTime::currentDateTime();
+
+    //Find device playback timer
+    m_findDeviceTimer = new QTimer();
+    connect(m_findDeviceTimer, &QTimer::timeout, this, &DeviceInterface::findDevice);
 
     //Music
     connect(&m_musicController, &watchfish::MusicController::statusChanged, this, &DeviceInterface::musicChanged);
@@ -88,7 +96,8 @@ DeviceInterface::~DeviceInterface()
 
 void DeviceInterface::connectToDevice(const QString &address)
 {
-    qDebug() << "DeviceInterface::connectToDevice:" << address;
+    qDebug() << Q_FUNC_INFO << ": address:" << address;
+
 
     if (m_device) {
         m_deviceAddress = address;
@@ -96,14 +105,15 @@ void DeviceInterface::connectToDevice(const QString &address)
         m_device->connectToDevice();
     }
     else {
-        qDebug() << "DeviceInterface::connectToDevice:device was not valid";
+        qDebug() << Q_FUNC_INFO << ": device was not valid";
         message(tr("Device is not valid, it may not be supported"));
     }
 }
 
 QString DeviceInterface::pair(const QString &name, const QString &address)
 {
-    qDebug() << "DeviceInterface::pair:" << name << address;
+    qDebug() << Q_FUNC_INFO << name << address;
+
     m_deviceAddress = address;
 
     if (m_device) {
@@ -124,14 +134,14 @@ QString DeviceInterface::pair(const QString &name, const QString &address)
         return "pairing";
     }
     
-    qDebug() << "DeviceInterface::pair:device not created";
+    qDebug() << Q_FUNC_INFO << ": device not created";
 
     return QString("no device found");
 }
 
 void DeviceInterface::disconnect()
 {
-    qDebug() << "DeviceInterface::disconnect";
+    qDebug() << Q_FUNC_INFO;
     if (m_device) {
         m_device->disconnectFromDevice();
     }
@@ -145,11 +155,6 @@ QString DeviceInterface::connectionState() const
     return m_device->connectionState();
 }
 
-MiBandService *DeviceInterface::miBandService() const
-{
-    return qobject_cast<MiBandService*>(m_device->service(MiBandService::UUID_SERVICE_MIBAND));
-}
-
 HRMService *DeviceInterface::hrmService() const
 {
     return qobject_cast<HRMService*>(m_device->service(HRMService::UUID_SERVICE_HRM));
@@ -158,10 +163,10 @@ HRMService *DeviceInterface::hrmService() const
 void DeviceInterface::onNotification(watchfish::Notification *notification)
 {
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
-        qDebug() << "Sending alert to device";
+        qDebug() << Q_FUNC_INFO << "Sending alert to device";
         sendAlert(notification->appName(), notification->summary(), notification->body());
     } else {
-        qDebug() << "no notification service, buffering notification";
+        qDebug() << Q_FUNC_INFO << "no notification service, buffering notification";
 
         WatchNotification n;
         n.id = notification->id();
@@ -178,7 +183,7 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
 
 void DeviceInterface::onRingingChanged()
 {
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     qDebug() << Q_FUNC_INFO << m_voiceCallController.ringing();
 
     if (!m_device) {
@@ -246,6 +251,39 @@ void DeviceInterface::createTables()
         qDebug() << *t_activity;
     }
 
+
+    if (!m_conn->containsTable("info_log")) {
+        KDbTableSchema *t_info = new KDbTableSchema("info_log");
+        t_info->setCaption("Info log");
+        t_info->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+        t_info->addField(f = new KDbField("timestamp", KDbField::Integer, nullptr));
+        f->setCaption("Timestamp");
+        t_info->addField(f = new KDbField("timestamp_dt", KDbField::DateTime));
+        f->setCaption("Timestamp in Date/Time format");
+        t_info->addField(f = new KDbField("key", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Key based on AbstractDevice::Info");
+        t_info->addField(f = new KDbField("value", KDbField::Integer, nullptr, KDbField::Unsigned));
+        f->setCaption("Value");
+
+        if (!m_conn->createTable(t_info)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- info_log created --";
+        qDebug() << *t_info;
+    }
+
+    int batteryLevel = 0;
+
+    if (m_conn->querySingleNumber(
+                KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg(AbstractDevice::INFO_BATTERY), // automatically adds LIMIT 1 into query
+                &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
+        m_lastBatteryLevel = batteryLevel;
+        qDebug() << Q_FUNC_INFO << "Last Battery Level: " << m_lastBatteryLevel;
+    } else {
+        qWarning() << "Cannot get battery level";
+    }
 
     if (!m_conn->containsTable("sports_data")) {
         KDbTableSchema *t_summary = new KDbTableSchema("sports_data");
@@ -333,50 +371,50 @@ void DeviceInterface::setupDatabase()
 {
     KDbDriverManager manager;
     const QStringList driverIds = manager.driverIds();
-    qDebug() << "DRIVERS: " << driverIds;
+    qDebug() << Q_FUNC_INFO << "DRIVERS: " << driverIds;
     if (driverIds.isEmpty()) {
-        qWarning() << "No drivers found";
+        qWarning() << Q_FUNC_INFO << ": No drivers found";
         return;
     }
     if (manager.result().isError()) {
-        qDebug() << manager.result();
+        qDebug() << Q_FUNC_INFO << manager.result();
         return;
     }
 
     //get driver
     m_dbDriver = manager.driver("org.kde.kdb.sqlite");
     if (!m_dbDriver || manager.result().isError()) {
-        qDebug() << manager.result();
+        qDebug() << Q_FUNC_INFO << manager.result();
         return;
     }
 
     m_connData.setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+ "/amazfish.kexi");
 
-    qDebug() << "Database is: " << m_connData.databaseName();
+    qDebug() << Q_FUNC_INFO << ": Database is: " << m_connData.databaseName();
 
     m_conn = m_dbDriver->createConnection(m_connData);
 
     if (!m_conn || m_dbDriver->result().isError()) {
-        qDebug() << m_dbDriver->result();
+        qDebug() << Q_FUNC_INFO << ": Could not create connection:" << m_dbDriver->result();
         return;
     }
-    qDebug() << "KDbConnection object created.";
+    qDebug() << Q_FUNC_INFO << ": KDbConnection object created.";
     if (!m_conn->connect()) {
-        qDebug() << m_conn->result();
+        qDebug() << Q_FUNC_INFO << ": Could not connect: " << m_conn->result();
         return;
     }
-    qDebug() << "KDbConnection::connect() OK.";
+    qDebug() << Q_FUNC_INFO << ": KDbConnection::connect() OK.";
 
     if (!m_conn->databaseExists(m_connData.databaseName())) {
         if (!m_conn->createDatabase(m_connData.databaseName())) {
-            qDebug() << m_conn->result();
+            qDebug() << Q_FUNC_INFO << ": Could not create Database: " << m_conn->result();
             return;
         }
-        qDebug() << "DB" << m_connData.databaseName() << "created";
+        qDebug() << Q_FUNC_INFO << ": Database" << m_connData.databaseName() << "created";
     }
 
     if (!m_conn->useDatabase()) {
-        qDebug() << m_conn->result();
+        qDebug() << Q_FUNC_INFO << ": Could not use Database: " << m_conn->result();
         return;
     }
 
@@ -394,12 +432,12 @@ KDbConnection *DeviceInterface::dbConnection()
 
 void DeviceInterface::onConnectionStateChanged()
 {
-    qDebug() << "DeviceInterface::onConnectionStateChanged" << connectionState();
+    qDebug() << Q_FUNC_INFO << connectionState();
 
     if (connectionState() == "authenticated") {
-        if (miBandService()) {
-            miBandService()->setDatabase(dbConnection());
-            m_dbusHRM->setMiBandService(miBandService());
+        m_device->setDatabase(dbConnection());
+        if (m_device) {
+            m_dbusHRM->setDevice(m_device);
         }
         if (hrmService()) {
             m_dbusHRM->setHRMService(hrmService());
@@ -417,17 +455,62 @@ void DeviceInterface::onConnectionStateChanged()
     emit connectionStateChanged();
 }
 
+void DeviceInterface::log_battery_level(int level) {
+
+    if (!m_conn || !(m_conn->isDatabaseUsed())) {
+        qDebug() << Q_FUNC_INFO  << "Database not connected";
+        return;
+    }
+
+    QDateTime m_sampleTime = QDateTime::currentDateTime();
+    qDebug() << Q_FUNC_INFO << "Start time" << m_sampleTime;
+
+    KDbTransaction transaction = m_conn->beginTransaction();
+    KDbTransactionGuard tg(transaction);
+
+    KDbFieldList fields;
+    auto s_battery = m_conn->tableSchema("info_log");
+
+    fields.addField(s_battery->field("timestamp"));
+    fields.addField(s_battery->field("timestamp_dt"));
+    fields.addField(s_battery->field("key"));
+    fields.addField(s_battery->field("value"));
+
+    QList<QVariant> values;
+
+    values << m_sampleTime.toMSecsSinceEpoch() / 1000;
+    values << m_sampleTime;
+    values << AbstractDevice::INFO_BATTERY;
+    values << level;
+
+    if (!m_conn->insertRecord(&fields, values)) {
+        qDebug() << Q_FUNC_INFO << "error inserting record";
+        return;
+    }
+    tg.commit();
+
+}
+
 void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QString &val)
 {
     qDebug() << Q_FUNC_INFO << key << val;
 
+
+    if (key == AbstractDevice::INFO_IMMEDIATE_ALERT) {
+        qWarning() << "Not implemented: Immediate Alert Service" << val;
+    }
+
     //Handle notification of low battery
     if (key == AbstractDevice::INFO_BATTERY) {
-        if (val.toInt() != m_lastBatteryLevel) {
-            if (val.toInt() <= 10 && val.toInt() < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
-                sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(m_lastBatteryLevel) + "%");
+        int battery_level = val.toInt();
+        if (battery_level != m_lastBatteryLevel) {
+
+            log_battery_level(battery_level);
+
+            if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
+                sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(battery_level) + "%");
             }
-            m_lastBatteryLevel = val.toInt();
+            m_lastBatteryLevel = battery_level;
         }
     }
 
@@ -442,10 +525,10 @@ void DeviceInterface::musicChanged()
     }
 }
 
-void DeviceInterface::deviceEvent(AbstractDevice::Events event)
+void DeviceInterface::deviceEvent(AbstractDevice::Event event)
 {
     qDebug() << Q_FUNC_INFO << event;
-    emit deviceEventTriggered(QMetaEnum::fromType<AbstractDevice::Events>().valueToKey(event));
+    emit deviceEventTriggered(QMetaEnum::fromType<AbstractDevice::Event>().valueToKey(event));
     switch(event) {
     case AbstractDevice::EVENT_MUSIC_STOP:
         m_musicController.pause();
@@ -471,14 +554,23 @@ void DeviceInterface::deviceEvent(AbstractDevice::Events event)
     case AbstractDevice::EVENT_APP_MUSIC:
         musicChanged();
         break;
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
     case AbstractDevice::EVENT_IGNORE_CALL:
         m_voiceCallController.silence();
         break;
     case AbstractDevice::EVENT_DECLINE_CALL:
         m_voiceCallController.hangup();
         break;
+    case AbstractDevice::EVENT_ANSWER_CALL:
+        m_voiceCallController.answer();
+        break;
 #endif
+    case AbstractDevice::EVENT_FIND_PHONE:
+        m_findDeviceTimer->start(5000);
+        break;
+    case AbstractDevice::EVENT_CANCEL_FIND_PHONE:
+        m_findDeviceTimer->stop();
+        break;
     }
 }
 
@@ -497,7 +589,7 @@ void DeviceInterface::handleButtonPressed(int presses)
             action = AmazfishConfig::instance()->appButtonQuadPressAction();
         }
 
-        qDebug() << action;
+        qDebug() << Q_FUNC_INFO << "Action:" << action;
 
         if (action == "action-music-next"){
             m_musicController.next();
@@ -524,7 +616,7 @@ void DeviceInterface::handleButtonPressed(int presses)
 
 void DeviceInterface::onEventTimer()
 {
-    qDebug() << "DeviceInterface::onEventTimer";
+    qDebug() << Q_FUNC_INFO;
     if (m_eventlist.isEmpty())
         return;
     watchfish::CalendarEvent event = m_eventlist.takeFirst();
@@ -554,14 +646,14 @@ void DeviceInterface::sendBufferedNotifications()
 
 void DeviceInterface::scheduleNextEvent()
 {
-    qDebug() << "DeviceInterface::scheduleNextEvent";
+    qDebug() << Q_FUNC_INFO;
     if (m_eventlist.isEmpty())
         return;
 #ifdef MER_EDITION_SAILFISH
     if (!m_backgroundActivity) {
         m_backgroundActivity = new BackgroundActivity(this);
         connect(m_backgroundActivity, &BackgroundActivity::stateChanged,
-            this, &DeviceInterface::backgroundActivityStateChanged);
+                this, &DeviceInterface::backgroundActivityStateChanged);
     }
 #endif
 
@@ -584,6 +676,59 @@ void DeviceInterface::scheduleNextEvent()
     m_backgroundActivity->setWakeupRange(secsToNextEvent-30, secsToNextEvent+30);
     m_backgroundActivity->wait();
 #endif
+}
+
+void DeviceInterface::findDevice()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    m_playedSounds++;
+
+#ifdef MER_EDITION_SAILFISH
+
+    /* The Sample format to use */
+    static const pa_sample_spec ss = {
+        .format = PA_SAMPLE_S16LE,
+        .rate = 44100,
+        .channels = 2
+    };
+
+    pa_simple *s = NULL;
+    int error;
+
+    QFile file("/usr/share/harbour-amazfish/chirp.raw");
+
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Unable to open chirp sound";
+        return;
+    }
+
+    QByteArray bytes = file.readAll();
+    file.close();
+
+    if (!(s = pa_simple_new(NULL, "amazfish-daemon", PA_STREAM_PLAYBACK, NULL, "playback", &ss, NULL, NULL, &error))) {
+        qDebug() << ": pa_simple_new() failed: " << pa_strerror(error);
+        return;
+    }
+
+    /* ... and play it */
+    if (pa_simple_write(s, bytes.data(), (size_t) bytes.size(), &error) < 0) {
+        qDebug() << ": pa_simple_write() failed: " << pa_strerror(error);
+        return;
+    }
+
+    /* Make sure that every single sample was played */
+    if (pa_simple_drain(s, &error) < 0) {
+        qDebug() << ": pa_simple_drain() failed: " << pa_strerror(error);
+    }
+
+#endif
+
+    if (m_playedSounds >= 10) {
+        m_findDeviceTimer->stop();
+        m_playedSounds = 0;
+    }
 }
 
 QString DeviceInterface::prepareFirmwareDownload(const QString &path)
@@ -627,15 +772,15 @@ bool DeviceInterface::operationRunning()
 
 void DeviceInterface::downloadSportsData()
 {
-    if (miBandService()) {
-        miBandService()->fetchSportsSummaries();
+    if (m_device) {
+        m_device->downloadSportsData();
     }
 }
 
 void DeviceInterface::downloadActivityData()
 {
-    if (miBandService()) {
-        miBandService()->fetchActivityData();
+    if (m_device) {
+        m_device->downloadActivityData();
     }
 }
 
@@ -676,7 +821,8 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
 
 void DeviceInterface::refreshInformation()
 {
-    qDebug() << "Refreshing device information";
+    qDebug() << Q_FUNC_INFO << "Refreshing device information";
+
     if (m_device) {
         return m_device->refreshInformation();
     }
@@ -706,10 +852,10 @@ void DeviceInterface::sendAlert(const QString &sender, const QString &subject, c
 
         if (AmazfishConfig::instance()->appTransliterate()) {
             m_device->sendAlert(
-                Transliterator::convert(sender),
-                Transliterator::convert(subject),
-                Transliterator::convert(message)
-            );
+                        Transliterator::convert(sender),
+                        Transliterator::convert(subject),
+                        Transliterator::convert(message)
+                        );
         } else {
             m_device->sendAlert(sender, subject, message);
         }
@@ -729,7 +875,8 @@ void DeviceInterface::incomingCall(const QString &caller)
 
 void DeviceInterface::applyDeviceSetting(int s)
 {
-    qDebug() << "Apply setting:" << s << (int)s;
+    qDebug() << Q_FUNC_INFO << "Setting:" << s << (int)s;
+
     if (m_device) {
         m_device->applyDeviceSetting((AbstractDevice::Settings)s);
     }
@@ -737,6 +884,8 @@ void DeviceInterface::applyDeviceSetting(int s)
 
 void DeviceInterface::requestManualHeartrate()
 {
+    qDebug() << Q_FUNC_INFO;
+
     if (hrmService()) {
         hrmService()->enableManualHRMeasurement(true);
     }
@@ -744,27 +893,27 @@ void DeviceInterface::requestManualHeartrate()
 
 void DeviceInterface::onRefreshTimer()
 {
-    qDebug() << "DeviceInterface::onRefreshTimer";
+    //qDebug() << Q_FUNC_INFO;
 
     auto config = AmazfishConfig::instance();
 
     QDateTime currentDate = QDateTime::currentDateTime();
 
     if (m_lastWeatherSync.secsTo(currentDate) >= (config->appRefreshWeather() * 60)) {
-        qDebug() << "weather interval reached";
+        qDebug() << Q_FUNC_INFO << "weather interval reached";
         m_lastWeatherSync = currentDate;
         m_currentWeather.refresh();
     }
 
     if (m_lastCalendarSync.secsTo(currentDate) >= (config->appRefreshCalendar() * 60)) {
-        qDebug() << "calendar interval reached";
+        qDebug() << Q_FUNC_INFO << "calendar interval reached";
         m_lastCalendarSync = currentDate;
         updateCalendar();
     }
 
     if (config->appAutoSyncData()) {
         if (m_lastActivitySync.secsTo(currentDate) >= (60*60)) {
-            qDebug() << "Auto syncing activity data";
+            qDebug() << Q_FUNC_INFO << "Auto syncing activity data";
             m_lastActivitySync = currentDate;
             downloadActivityData();
         }
@@ -773,6 +922,8 @@ void DeviceInterface::onRefreshTimer()
 
 void DeviceInterface::registerDBus()
 {
+    qDebug() << Q_FUNC_INFO;
+
     if (!m_dbusRegistered)
     {
         // DBus
@@ -780,18 +931,20 @@ void DeviceInterface::registerDBus()
         qDebug() << "Registering service on dbus" << SERVICE;
         if (!connection.registerService(SERVICE))
         {
+            qCritical() << Q_FUNC_INFO << "Unable to register service. Quit.";
             QCoreApplication::quit();
             return;
         }
 
         if (!connection.registerObject(PATH, this, QDBusConnection::ExportAllInvokables | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties))
         {
+            qCritical() << Q_FUNC_INFO << "Unable to register objects. Quit.";
             QCoreApplication::quit();
             return;
         }
         m_dbusRegistered = true;
 
-        qDebug() << "amazfish-daemon: succesfully registered to dbus sessionBus";
+        qInfo() << "Succesfully registered to dbus sessionBus";
     }
 }
 
@@ -802,7 +955,7 @@ void DeviceInterface::triggerSendWeather()
 
 void DeviceInterface::updateCalendar()
 {
-    qDebug() << "DeviceInterface::updateCalendar";    
+    qDebug() << Q_FUNC_INFO;
     if (supportsFeature(AbstractDevice::FEATURE_EVENT_REMINDER)) {
         if (m_device) {
             QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
@@ -830,7 +983,7 @@ void DeviceInterface::updateCalendar()
             }
         }
         foreach (const watchfish::CalendarEvent &event, filteredEventList) {
-                qDebug() << event.title() << event.alertTime();
+            qDebug() << event.title() << event.alertTime();
         }
         if (!filteredEventList.isEmpty()) {
             m_eventlist = filteredEventList;
@@ -857,8 +1010,14 @@ void DeviceInterface::enableFeature(int feature)
 
 void DeviceInterface::fetchLogs()
 {
-    if (miBandService()) {
-        miBandService()->fetchLogs();
+    if (m_device) {
+        m_device->fetchLogs();
+    }
+}
+
+void DeviceInterface::requestScreenshot() {
+    if (m_device) {
+        m_device->requestScreenshot();
     }
 }
 

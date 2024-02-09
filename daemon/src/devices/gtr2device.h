@@ -9,7 +9,7 @@ class Gtr2Device : public Gts2Device
 public:
     explicit Gtr2Device(const QString &pairedName, QObject *parent = nullptr);
     QString deviceType() const override;
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
 };
 

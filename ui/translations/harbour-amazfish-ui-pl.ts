@@ -2,20 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pl">
 <context>
-    <name>AbstractDevice</name>
-    <message>
-        <source>Device doen not support settings</source>
-        <translation type="vanished">Urządzenie nie obsługuje ustawień</translation>
-    </message>
-</context>
-<context>
-    <name>AddCityDialog</name>
-    <message>
-        <source>Set Location</source>
-        <translation type="vanished">Ustaw lokalizację</translation>
-    </message>
-</context>
-<context>
     <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
@@ -60,10 +46,6 @@
 <context>
     <name>AnalysisPage</name>
     <message>
-        <source>Download Data</source>
-        <translation type="vanished">Pobierz dane</translation>
-    </message>
-    <message>
         <source>Analysis</source>
         <translation>Analiza</translation>
     </message>
@@ -79,6 +61,10 @@
         <source>Intensity</source>
         <translation>Intensywność</translation>
     </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -88,18 +74,14 @@
     </message>
 </context>
 <context>
-    <name>BipDevice</name>
+    <name>BatteryPage</name>
     <message>
-        <source>Amazfish</source>
-        <translation type="vanished">Amazfish</translation>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connected</source>
-        <translation type="vanished">Połączony</translation>
-    </message>
-    <message>
-        <source>Phone and watch are connected</source>
-        <translation type="vanished">Telefon i zegarek są połączone</translation>
+        <source>%1 %</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -134,17 +116,6 @@
     </message>
 </context>
 <context>
-    <name>BipFirmwareService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation type="vanished">Operacja jest aktualnie uruchomiona, spróbuj później</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation type="vanished">Brak wybranego pliku</translation>
-    </message>
-</context>
-<context>
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
@@ -156,10 +127,6 @@
     <message>
         <source>Refresh</source>
         <translation>Odśwież</translation>
-    </message>
-    <message>
-        <source>AmazFish</source>
-        <translation type="vanished">Amazfish</translation>
     </message>
     <message>
         <source>Address: </source>
@@ -204,10 +171,6 @@
     <message>
         <source>Test Popup</source>
         <translation>Testowe powiadomienie</translation>
-    </message>
-    <message>
-        <source>Reboot watch</source>
-        <translation type="vanished">Restart zegarka</translation>
     </message>
     <message>
         <source>Debugging</source>
@@ -255,13 +218,6 @@
     </message>
 </context>
 <context>
-    <name>DeviceInterface</name>
-    <message>
-        <source>Device is not valid, it may not be supported</source>
-        <translation type="vanished">Urządzenie jest nieprawidłowe, może nie być obsługiwane</translation>
-    </message>
-</context>
-<context>
     <name>DownloadDataMenuItem</name>
     <message>
         <source>Download Data</source>
@@ -270,10 +226,6 @@
 </context>
 <context>
     <name>FirstPage</name>
-    <message>
-        <source>Debug Info</source>
-        <translation type="vanished">Informacje debuggowania</translation>
-    </message>
     <message>
         <source>Pair with watch</source>
         <translation>Połącz z zegarkiem</translation>
@@ -293,10 +245,6 @@
     <message>
         <source>Connect to watch</source>
         <translation>Połącz z zegarkiem</translation>
-    </message>
-    <message>
-        <source>AmazFish</source>
-        <translation type="vanished">AmazFish</translation>
     </message>
     <message>
         <source>Data Graphs</source>
@@ -409,30 +357,7 @@
     </message>
 </context>
 <context>
-    <name>MiBandService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation type="vanished">Operacja jest aktualnie uruchomiona, spróbuj później</translation>
-    </message>
-    <message>
-        <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation type="vanished">Oprogramowanie układowe jest za stare, aby ustawić elementy wyświetlania, wymagany jest V0.1.1.14</translation>
-    </message>
-    <message>
-        <source>Firmware supports weather condition string</source>
-        <translation type="vanished">Oprogramowanie układowe obsługuje ciąg warunków pogodowych</translation>
-    </message>
-</context>
-<context>
     <name>PairPage</name>
-    <message>
-        <source>Start scan</source>
-        <translation type="vanished">Rozpocznij skanowanie</translation>
-    </message>
-    <message>
-        <source>Try again</source>
-        <translation type="vanished">Spróbuj ponownie</translation>
-    </message>
     <message>
         <source>Pair Device</source>
         <translation type="unfinished"></translation>
@@ -457,6 +382,10 @@
         <source>Pairing…</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bluetooth adapter is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
@@ -467,34 +396,6 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Finished transferring activity data</source>
-        <translation type="vanished">Zakończono przesyłanie danych o aktywności</translation>
-    </message>
-    <message>
-        <source>No data to transfer</source>
-        <translation type="vanished">Brak danych do przesłania</translation>
-    </message>
-    <message>
-        <source>Update operation failed</source>
-        <translation type="vanished">Operacja aktualizacji nie powiodła się</translation>
-    </message>
-    <message>
-        <source>Update operation failed, unexpected metadata</source>
-        <translation type="vanished">Operacja aktualizacji nie powiodła się, nieoczekiwane metadane</translation>
-    </message>
-    <message>
-        <source>Update operation complete</source>
-        <translation type="vanished">Operacja aktualizacji zakończona</translation>
-    </message>
-    <message>
-        <source>File does not seem to be supported</source>
-        <translation type="vanished">Plik wydaje się być nieobsługiwany</translation>
-    </message>
-    <message>
-        <source>About to transfer data from </source>
-        <translation type="vanished">O przesyłaniu danych z </translation>
-    </message>
     <message>
         <source>%1s</source>
         <translation type="unfinished"></translation>
@@ -542,24 +443,12 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <source>Device Settings</source>
-        <translation type="vanished">Ustawienia urządzenia</translation>
-    </message>
-    <message>
         <source>Notify on connect</source>
         <translation>Powiadom o połączeniu</translation>
     </message>
     <message>
         <source>Save Settings</source>
         <translation>Zapisz ustawienia</translation>
-    </message>
-    <message>
-        <source>Refresh weather every (</source>
-        <translation type="vanished">Odśwież pogodę co (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation type="vanished">) minut</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
@@ -625,56 +514,9 @@
         <source>Button Actions</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Settings-bip-shortcuts</name>
     <message>
-        <source>BIP Display Items</source>
-        <translation type="vanished">Obiekty BIP wyświetlacza</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="vanished">Status</translation>
-    </message>
-    <message>
-        <source>Activity</source>
-        <translation type="vanished">Aktywność</translation>
-    </message>
-    <message>
-        <source>Weather</source>
-        <translation type="vanished">Pogoda</translation>
-    </message>
-    <message>
-        <source>Alarm</source>
-        <translation type="vanished">Alarm</translation>
-    </message>
-    <message>
-        <source>Timer</source>
-        <translation type="vanished">Minutnik</translation>
-    </message>
-    <message>
-        <source>Compass</source>
-        <translation type="vanished">Kompas</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Ustawienia</translation>
-    </message>
-    <message>
-        <source>AliPay</source>
-        <translation type="vanished">AliPay</translation>
-    </message>
-    <message>
-        <source>Weather Shortcut</source>
-        <translation type="vanished">Srót pogody</translation>
-    </message>
-    <message>
-        <source>AliPay Shortcut</source>
-        <translation type="vanished">Skrót AliPay</translation>
-    </message>
-    <message>
-        <source>Save Settings</source>
-        <translation type="vanished">Zapisz ustawienia</translation>
+        <source>Transliterate notifications</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -731,10 +573,6 @@
         <translation>Ustawienia urządzenia</translation>
     </message>
     <message>
-        <source>Langage</source>
-        <translation type="vanished">Język</translation>
-    </message>
-    <message>
         <source>en_US</source>
         <translation>en_US</translation>
     </message>
@@ -789,10 +627,6 @@
     <message>
         <source>Imperial</source>
         <translation>Imperialna</translation>
-    </message>
-    <message>
-        <source>BIP Display Items</source>
-        <translation type="vanished">Obiekty BIP wyświetlacza</translation>
     </message>
     <message>
         <source>ru_RU</source>
@@ -1055,13 +889,21 @@
         <source>Heartrate usage</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SleepPage</name>
-    <message>
-        <source>Download Data</source>
-        <translation type="vanished">Pobierz dane</translation>
-    </message>
     <message>
         <source>Sleep Summary</source>
         <translation>Podsumowanie snu</translation>
@@ -1069,14 +911,6 @@
     <message>
         <source>Sleep</source>
         <translation>Sen</translation>
-    </message>
-    <message>
-        <source>hrs</source>
-        <translation type="vanished">g</translation>
-    </message>
-    <message>
-        <source>hrs (deep)</source>
-        <translation type="vanished">g (głęboki)</translation>
     </message>
     <message>
         <source>%1 hrs</source>
@@ -1289,10 +1123,6 @@
 <context>
     <name>StepsPage</name>
     <message>
-        <source>Download Data</source>
-        <translation type="vanished">Pobierz dane</translation>
-    </message>
-    <message>
         <source>Steps</source>
         <translation>Kroki</translation>
     </message>
@@ -1317,6 +1147,10 @@
     </message>
     <message>
         <source>Country: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not logged in</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

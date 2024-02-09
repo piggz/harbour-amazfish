@@ -61,12 +61,27 @@
         <source>Intensity</source>
         <translation>Intensiteit</translation>
     </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
         <translation>Auth-sleutel invoeren</translation>
+    </message>
+</context>
+<context>
+    <name>BatteryPage</name>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -367,6 +382,10 @@
         <source>Pairing…</source>
         <translation>Koppelen...</translation>
     </message>
+    <message>
+        <source>Bluetooth adapter is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
@@ -432,14 +451,6 @@
         <translation>Instellingen opslaan</translation>
     </message>
     <message>
-        <source>Refresh weather every (</source>
-        <translation type="vanished">Ververs het weer elke (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation type="vanished">) minuten</translation>
-    </message>
-    <message>
         <source>Sync activity data each hour</source>
         <translation>Synchroniseer activiteitsgegevens elk uur</translation>
     </message>
@@ -466,10 +477,6 @@
     <message>
         <source>Refresh rates</source>
         <translation>Verversingssnelheid</translation>
-    </message>
-    <message>
-        <source>Refresh calendar every (</source>
-        <translation type="vanished">Agenda bijwerken iedere (</translation>
     </message>
     <message>
         <source>Amazfish Service</source>
@@ -505,6 +512,10 @@
     </message>
     <message>
         <source>Refresh calendar every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transliterate notifications</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -878,6 +889,18 @@
         <source>Heartrate usage</source>
         <translation>Hartslag-gebruik</translation>
     </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SleepPage</name>
@@ -1125,6 +1148,10 @@
     <message>
         <source>Country: </source>
         <translation>Land: </translation>
+    </message>
+    <message>
+        <source>not logged in</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -55,7 +55,7 @@ PagePL {
             graphType: 2
 
             minY: 0
-            maxY: 20000
+            maxY: 2 * AmazfishConfig.profileFitnessGoal
             valueConverter: function(value) {
                 return value.toFixed(0);
             }

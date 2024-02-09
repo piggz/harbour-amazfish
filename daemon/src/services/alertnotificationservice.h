@@ -37,7 +37,7 @@ public:
         // 251-255 defined by service specification
         Any = 255,
         Custom = -1,
-        CustomHuami = 250
+        CustomHuami = 250 // 0xfa
     };
     Q_ENUM(AlertCategory)
 
@@ -97,6 +97,7 @@ public:
         /* Instagram */
         {"instagram", HuamiIcon::INSTAGRAM},
         /* Telegram clients */
+        {"teleports.ubports_teleports", HuamiIcon::TELEGRAM},
         {"depecher", HuamiIcon::TELEGRAM},
         {"fernschreiber", HuamiIcon::TELEGRAM},
         {"sailorgram", HuamiIcon::TELEGRAM},

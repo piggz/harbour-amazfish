@@ -22,7 +22,7 @@ Name:       harbour-amazfish
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Watch interface application
-Version:    2.1.3
+Version:    2.2.2
 Release:    1
 Group:      QtQt
 License:    GPLv3
@@ -54,24 +54,26 @@ BuildRequires:  qt5-qttools-linguist
 BuildRequires:  desktop-file-utils
 BuildRequires:  libkeepalive-devel
 BuildRequires:  libkf5archive-devel
+BuildRequires:  pulseaudio-devel
+BuildRequires:  libicu-devel
 
 %description
 Watch companion application for SalfishOS
 
-%if "%{?vendor}" == "chum"
-PackageName: Amazfish
+%if 0%{?_chum}
+Title: Amazfish
 Type: desktop-application
 DeveloperName: Adam Pigg
 Categories:
  - Utility
 Custom:
   Repo: https://github.com/piggz/harbour-amazfish
-Icon: https://raw.githubusercontent.com/piggz/harbour-amazfish/master/harbour-amazfish-ui.svg
+PackageIcon: https://raw.githubusercontent.com/piggz/harbour-amazfish/master/harbour-amazfish-ui.svg
 Screenshots:
- - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_main.png
- - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_sleep.png
- - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_activity.png
-Url:
+ - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot1.png
+ - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot2.png
+ - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot3.png
+Links:
   Homepage: https://github.com/piggz/harbour-amazfish
   Help: https://github.com/piggz/harbour-amazfish/discussions
   Bugtracker: https://github.com/piggz/harbour-amazfish/issues
@@ -119,5 +121,6 @@ desktop-file-install --delete-original       \
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-ui.svg
 %{_userunitdir}/harbour-amazfish.service
 %{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges
+%{_datadir}/harbour-amazfish/chirp.raw
 # >> files
 # << files
