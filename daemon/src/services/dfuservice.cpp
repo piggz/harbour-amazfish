@@ -52,7 +52,9 @@ void DfuService::startDownload()
 
 bool DfuService::operationRunning()
 {
-    qDebug() << "is firmware operation running:" << m_operationRunning;
+    if (m_operationRunning > 0)
+        qDebug() << Q_FUNC_INFO << "Firmware operation running:" << m_operationRunning;
+
     return m_operationRunning > 0;
 }
 
@@ -77,6 +79,6 @@ bool DfuService::waitForWatch()
 
 void DfuService::onTransferError(const QString error) {
     m_operationRunning = 0;
-    qDebug() << "Transfer error : " << error;
+    qDebug() << Q_FUNC_INFO << "Transfer error:" << error;
     emit message(error);
 }

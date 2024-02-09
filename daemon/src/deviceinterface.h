@@ -77,6 +77,7 @@ public:
     Q_INVOKABLE void reloadCities();
     Q_INVOKABLE void enableFeature(int feature);
     Q_INVOKABLE void fetchLogs();
+    Q_INVOKABLE void requestScreenshot();
     Q_INVOKABLE QStringList supportedDisplayItems();
 
 private:

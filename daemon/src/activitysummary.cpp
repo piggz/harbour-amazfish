@@ -172,18 +172,18 @@ bool ActivitySummary::saveToDatabase(KDbConnection *conn)
     values << baseAltitude();
     values << m_gpxTrack;
 
-    qDebug() << "Saving Sport:" << name()  << startTime() << startTime().toString(Qt::ISODate);
+    qDebug() << Q_FUNC_INFO << "Saving Sport:" << name()  << startTime() << startTime().toString(Qt::ISODate);
 
     QSharedPointer<KDbSqlResult> result = conn->insertRecord(&fields, values);
 
     if (result->lastResult().isError()) {
-        qDebug() << "error inserting record";
+        qDebug() << Q_FUNC_INFO << "Error inserting record";
         return false;
     }
 
     long lastId = result->lastInsertRecordId();
     setId(lastId);
-    qDebug() << "Record Id is" << id();
+    qDebug() << Q_FUNC_INFO << "Record Id is" << id();
 
     //Save meta data
     foreach(const auto &m, m_metaData) {
@@ -204,7 +204,7 @@ bool ActivitySummary::saveToDatabase(KDbConnection *conn)
         result = conn->insertRecord(&metaFields, metaValues);
 
         if (result->lastResult().isError()) {
-            qDebug() << "error inserting meta record";
+            qDebug() << Q_FUNC_INFO << "Error inserting meta record";
             return false;
         }
     }

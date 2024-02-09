@@ -6,7 +6,7 @@ const char* BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE_DATA = "00001532-00
 
 BipFirmwareService::BipFirmwareService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_FIRMWARE, path, parent)
 {
-    qDebug() << "BipFirmwareService::BipFirmwareService";
+    qDebug() << Q_FUNC_INFO;
 
     connect(this, &QBLEService::characteristicChanged, this, &BipFirmwareService::characteristicChanged);
 }
@@ -14,7 +14,7 @@ BipFirmwareService::BipFirmwareService(const QString &path, QObject *parent) : Q
 
 void BipFirmwareService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << "FW Changed:" << characteristic << value;
+    qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value;
 
     if (characteristic == UUID_CHARACTERISTIC_FIRMWARE) {
         qDebug() << "...got metadata";
@@ -57,7 +57,8 @@ void BipFirmwareService::startDownload()
 
 bool BipFirmwareService::operationRunning()
 {
-    qDebug() << "is firmware operation running:" << m_operationRunning;
+    if (m_operationRunning > 0)
+        qDebug() << Q_FUNC_INFO << "Firmware operation running:" << m_operationRunning;
     return m_operationRunning > 0;
 }
 

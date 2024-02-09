@@ -66,25 +66,17 @@ void UARTService::handleRx(const QString &json)
 QJsonObject UARTService::ObjectFromString(const QString& in)
 {
     QJsonObject obj;
-
     QJsonDocument doc = QJsonDocument::fromJson(in.toUtf8());
 
     // check validity of the document
-    if(!doc.isNull())
-    {
-        if(doc.isObject())
-        {
+    if(!doc.isNull()) {
+        if(doc.isObject()) {
             obj = doc.object();
+        } else {
+            qDebug() << Q_FUNC_INFO << "Document is not an object";
         }
-        else
-        {
-            qDebug() << "Document is not an object";
-        }
+    } else {
+        qDebug() << Q_FUNC_INFO << "Invalid JSON.";
     }
-    else
-    {
-        qDebug() << "Invalid JSON.";
-    }
-
     return obj;
 }

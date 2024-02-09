@@ -53,8 +53,8 @@ void DfuWorker::sendFirmware(DfuService *service, const QByteArray &fwBytes, int
             QByteArray lastChunk = fwBytes.mid(packets * packetLength);
             service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_PACKET, lastChunk);
         }
-        qDebug() << "Finished sending firmware";
+        qDebug() << Q_FUNC_INFO << "Finished sending firmware";
     }
-    qDebug() << "Finished worker";
+    qDebug() << Q_FUNC_INFO << "Finished worker";
     emit done();
 }

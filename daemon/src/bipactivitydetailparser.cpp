@@ -15,7 +15,8 @@ BipActivityDetailParser::BipActivityDetailParser(const ActivitySummary &summary)
     m_baseAltitude = summary.baseAltitude();
     m_baseDate = summary.startTime();
 
-    qDebug() << "Base data::" << m_baseLongitude << m_baseLatitude << m_baseAltitude << m_baseDate;
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "Base data:" << m_baseLongitude << m_baseLatitude << m_baseAltitude << m_baseDate;
     qDebug() << summary.startTime() << m_summary.startTime();
     qDebug() << convertHuamiValueToDecimalDegrees(m_baseLongitude) << convertHuamiValueToDecimalDegrees(m_baseLatitude);
     
@@ -89,7 +90,7 @@ void BipActivityDetailParser::parse(const QByteArray &bytes)
             i += consumeSpeed6(bytes, i);
             break;
         default:
-            qDebug() << "unknown packet type" << type;
+            qDebug() << Q_FUNC_INFO << "unknown packet type" << type;
             i+=6;
         }
 
@@ -198,7 +199,7 @@ void BipActivityDetailParser::add(const ActivityCoordinate &ap)
         }
         m_lastActivityPoint = ap;
     } else {
-        qDebug() << "skipping point!";
+        qDebug() << Q_FUNC_INFO << "skipping point!";
     }
 }
 

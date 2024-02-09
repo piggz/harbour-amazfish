@@ -44,7 +44,7 @@ void GtrDevice::initialise()
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
     if (mi2) {
-        qDebug() << "Got mi2 service";
+        qDebug() << "Got MiBand2 service";
         connect(mi2, &MiBand2Service::authenticated, this, &HuamiDevice::authenticated, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 
@@ -75,7 +75,7 @@ void GtrDevice::initialise()
     QString revision = softwareRevision();
     if (revision > "1.3.5.79" || // For GTR 47mm
             (!is47mm(revision) && revision >= "0.1.1.15")) { // for GTR 32mm with a different version scheme
-        qDebug() << "GTR with new FW";
+        qDebug() << Q_FUNC_INFO << "GTR with new FW";
         m_ActivitySampleSize = 8;
     }
 }

@@ -16,6 +16,7 @@ public:
     void incomingCall(const QString &caller) override;
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
     void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0) override;
+    void requestScreenshot() override;
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
@@ -34,6 +35,9 @@ private:
     void sendWeather(CurrentWeather *weather) override;
 
     Q_SLOT void serviceEvent(const QString &characteristic, uint8_t event, uint8_t data);
+
+    Q_SLOT void screenshotReceived(QByteArray data);
+
 
     int m_prevVolume = 50;
 

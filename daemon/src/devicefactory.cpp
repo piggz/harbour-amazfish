@@ -12,7 +12,8 @@
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 {
-    qDebug() << "DeviceFactory::createDevice: requested device of type:" << deviceName;
+    qDebug() << Q_FUNC_INFO <<": requested device of type:" << deviceName;
+
     if (deviceName == "Amazfit Bip Watch") {
         return new BipDevice(deviceName);
     }
@@ -72,7 +73,7 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         }
     }
 
-    qDebug() << "DeviceFactory::createDevice: no suitable devices found, creating a Bip device as default";
+    qDebug() << Q_FUNC_INFO << ": no suitable devices found, creating a Bip device as default";
     return new BipDevice(deviceName);
 
     //!TODO allow the user to choose the device type

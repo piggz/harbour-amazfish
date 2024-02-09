@@ -6,6 +6,7 @@ InfiniTimeResourceService::InfiniTimeResourceService(AdafruitBleFsService* fsSer
 }
 
 void InfiniTimeResourceService::listDirectory() {
+    qDebug() << Q_FUNC_INFO;
     qDebug() << "TEST4";
     auto p = fsService->listDirectory();
 

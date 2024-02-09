@@ -7,7 +7,7 @@ const char* MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH = "00000009-0000-3
 
 MiBand2Service::MiBand2Service(const QString &path, char authByte, char cryptByte, bool requireAuthKey, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND2, path, parent)
 {
-    qDebug() << "MiBand2Service::MiBand2Service";
+    qDebug() << Q_FUNC_INFO;
 
     m_authByte = authByte;
     m_cryptByte = cryptByte;
@@ -20,11 +20,11 @@ MiBand2Service::MiBand2Service(const QString &path, char authByte, char cryptByt
 void MiBand2Service::initialise(bool firstTime)
 {
     if (firstTime) {
-        qDebug() << "Sending auth key";
+        qDebug() << Q_FUNC_INFO << "Sending auth key";
         qDebug() << AUTH_SEND_KEY <<  sizeof(AUTH_SEND_KEY) << sizeof(&AUTH_SEND_KEY) << UCHAR_TO_BYTEARRAY(AUTH_SEND_KEY);
         writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, UCHAR_TO_BYTEARRAY(AUTH_SEND_KEY) + UCHAR_TO_BYTEARRAY(m_authByte) + getSecretKey());
     } else {
-        qDebug() << "Writing request for auth number";
+        qDebug() << Q_FUNC_INFO << "Writing request for auth number";
         //uint8_t start[2] = {0x01, 0x00};
         //writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH, UCHARARR_TO_BYTEARRAY(start));
         writeValue(UUID_CHARACTERISITIC_MIBAND2_AUTH , requestAuthNumber());
@@ -33,7 +33,7 @@ void MiBand2Service::initialise(bool firstTime)
 
 void MiBand2Service::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << "Mi2Band Changed:" << characteristic << value;
+    qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value;
 
     if (value[0] == RESPONSE && value[1] == AUTH_SEND_KEY && ((value[2] & SUCCESS) == SUCCESS || value[2] == 0x06) ) {
         qDebug() << "Received initial auth success, requesting random auth number";
@@ -67,7 +67,7 @@ QByteArray MiBand2Service::getSecretKey()
 }
 
 QByteArray MiBand2Service::requestAuthNumber() {
-    qDebug() << "Crypt Byte:" << m_cryptByte;
+    qDebug() << Q_FUNC_INFO << "Crypt Byte:" << m_cryptByte;
     if (m_cryptByte == 0x00) {
         return UCHAR_TO_BYTEARRAY(AUTH_REQUEST_RANDOM_AUTH_NUMBER) + UCHAR_TO_BYTEARRAY(m_authByte);
     } else {

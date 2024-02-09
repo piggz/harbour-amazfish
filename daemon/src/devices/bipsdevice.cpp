@@ -46,7 +46,7 @@ void BipSDevice::initialise()
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
     if (mi2) {
-        qDebug() << "Got mi2 service" << m_pairing << m_needsAuth;
+        qDebug() << "Got MiBand2 service" << m_pairing << m_needsAuth;
         connect(mi2, &MiBand2Service::authenticated, this, &HuamiDevice::authenticated, Qt::UniqueConnection);
         connect(mi2, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
 

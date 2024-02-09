@@ -15,7 +15,7 @@ AlertNotificationService::AlertNotificationService(const QString &path, QObject 
 
 void AlertNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
-    qDebug() << "Alert:" << sender << subject << message;
+    qDebug() << Q_FUNC_INFO << "Alert:" << sender << subject << message;
 
     int category = AlertCategory::CustomHuami;
     int icon = mapSenderToIcon(sender);

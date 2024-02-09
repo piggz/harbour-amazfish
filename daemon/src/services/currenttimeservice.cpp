@@ -6,7 +6,7 @@ const char* CurrentTimeService::UUID_CHARACTERISTIC_CURRENT_TIME = "00002a2b-000
 
 CurrentTimeService::CurrentTimeService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_CURRENT_TIME, path, parent)
 {
-    qDebug() << "PinetimeService";
+    qDebug() << Q_FUNC_INFO;
 }
 
 void CurrentTimeService::setCurrentTime()
@@ -24,7 +24,7 @@ void CurrentTimeService::setCurrentTime()
     timeBytes += char(0); //fractions256
     timeBytes += char(0); //reason
 
-    qDebug() << "setting time to:" << now << timeBytes.toHex();
+    qDebug() << Q_FUNC_INFO << "Setting time to:" << now << timeBytes.toHex();
     writeValue(UUID_CHARACTERISTIC_CURRENT_TIME, timeBytes);
 }
 
@@ -33,6 +33,6 @@ QDateTime CurrentTimeService::currentTime()
     QByteArray dateTime = readValue(UUID_CHARACTERISTIC_CURRENT_TIME);
     QDateTime dt = TypeConversion::rawBytesToDateTime(dateTime, false);
 
-    qDebug() << "Read the watch date/time as" << dt;
+    qDebug() << Q_FUNC_INFO << "Read the watch date/time as" << dt;
     return dt;
 }

@@ -22,4 +22,4 @@ public:
     QDateTime currentTime();
 };
 
-#endif // PINETIMESERVICE_H
+#endif // CURRENTTIMESERVICE_H

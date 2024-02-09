@@ -31,4 +31,4 @@ private:
     bool save();
 };
 
-#endif // SPORTSSUMMARYOPERATION_H
+#endif // SPORTSDETAILOPERATION_H
