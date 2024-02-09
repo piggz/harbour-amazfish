@@ -27,9 +27,10 @@ void AbstractDevice::pair()
     QBLEDevice::pair();
 }
 
+
 void AbstractDevice::connectToDevice()
 {
-    qDebug() << "AbstractDevice::connectToDevice";
+    qDebug() << Q_FUNC_INFO;
 
     m_pairing = false;
     m_autoreconnect = true;
@@ -41,7 +42,7 @@ void AbstractDevice::connectToDevice()
 
 void AbstractDevice::disconnectFromDevice()
 {
-    qDebug() << "AbstractDevice::disconnectFromDevice";
+    qDebug() << Q_FUNC_INFO;
 
     m_autoreconnect = false;
     setConnectionState("disconnected");
@@ -51,9 +52,10 @@ void AbstractDevice::disconnectFromDevice()
 
 void AbstractDevice::reconnectionTimer()
 {
-    qDebug() << "AbstractDevice::reconnectionTimer";
+    //qDebug() << Q_FUNC_INFO;
+
     if ((!deviceProperty("Connected").toBool() && m_autoreconnect) || connectionState() == "authfailed") {
-        qDebug() << "Lost connection";
+        qDebug() << Q_FUNC_INFO << "Lost connection";
         QBLEDevice::disconnectFromDevice();
         QBLEDevice::connectToDevice();
     }
@@ -69,7 +71,7 @@ void AbstractDevice::devicePairFinished(const QString &status)
 
 void AbstractDevice::setConnectionState(const QString &state)
 {
-    qDebug() << Q_FUNC_INFO << state;
+    qDebug() << Q_FUNC_INFO << "Connection state:" << state;
     if (state != m_connectionState) {
         m_connectionState = state;
         emit connectionStateChanged();
@@ -106,8 +108,15 @@ void AbstractDevice::startDownload()
 }
 
 void AbstractDevice::downloadSportsData()
+{   
+}
+
+void AbstractDevice::downloadActivityData()
 {
-    
+}
+
+void AbstractDevice::fetchLogs()
+{
 }
 
 void AbstractDevice::sendWeather(CurrentWeather *weather)
@@ -129,7 +138,7 @@ QString AbstractDevice::information(Info i) const
 void AbstractDevice::applyDeviceSetting(Settings s)
 {
     Q_UNUSED(s);
-    emit message(tr("Device doen not support settings"));
+    emit message(tr("Device does not support settings"));
 }
 
 void AbstractDevice::rebootWatch()
@@ -177,6 +186,11 @@ void AbstractDevice::navigationNarrative(const QString &flag, const QString &nar
 {
     Q_UNUSED(flag)
     Q_UNUSED(narrative)
+}
+
+void AbstractDevice::requestScreenshot()
+{
+    qDebug() << Q_FUNC_INFO;
 }
 
 QStringList AbstractDevice::supportedDisplayItems() const

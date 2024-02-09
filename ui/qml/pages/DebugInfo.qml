@@ -180,6 +180,15 @@ PagePL {
             }
         }
         ButtonPL {
+            text: qsTr("Request Screenshot")
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width * 0.8
+            visible: supportsFeature(Amazfish.FEATURE_SCREENSHOT)
+            onClicked: {
+                DaemonInterfaceInstance.requestScreenshot();
+            }
+        }
+        ButtonPL {
             text: qsTr("Test Popup")
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8

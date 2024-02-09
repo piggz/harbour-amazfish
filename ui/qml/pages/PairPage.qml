@@ -14,6 +14,7 @@ PageListPL {
     placeholderEnabled: devicesModel.rowCount() > 0
 
     property string deviceType
+    property variant aliases
     property string _placeholderText
     property string _deviceName
     property string _deviceAddress
@@ -92,7 +93,18 @@ PageListPL {
 
             for (var i = 0; i < itemsCount; ++i) {
                 var item = items.get(i)
-                item.inVisible = item.model.FriendlyName.indexOf(deviceType) !== -1
+                var visible = false;
+                if (item.model.FriendlyName.indexOf(deviceType) !== -1) {
+                    visible = true;
+                }
+                for (var j = 0; j < aliases.count; j++) {
+                    var aliasitem = aliases.get(j);
+                    if (item.model.FriendlyName.indexOf(aliasitem.name) !== -1) {
+                        visible = true;
+                    }
+
+                }
+                item.inVisible = visible
             }
         }
 

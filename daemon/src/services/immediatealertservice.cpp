@@ -31,7 +31,7 @@ void ImmediateAlertService::characteristicRead(const QString &characteristic, co
         m_alertLevel = (ImmediateAlertService::Levels)value[0];
         emit informationChanged(AbstractDevice::INFO_IMMEDIATE_ALERT, QString::number(static_cast<int>(m_alertLevel)));
     } else {
-        qWarning() << "Unknown value";
+        qWarning() << Q_FUNC_INFO << "Unknown value";
     }
 }
 

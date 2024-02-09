@@ -9,18 +9,17 @@ Gtr2FirmwareInfo::Gtr2FirmwareInfo(const QByteArray &bytes) : HuamiFirmwareInfo(
     determineFirmwareType();
     determineFirmwareVersion();
 
-    //qDebug() << mBytes;
-    qDebug() << m_type << m_version << m_crc16 << m_crc32;
+    qDebug() << Q_FUNC_INFO << m_type << m_version << m_crc16 << m_crc32;
 }
 
 bool Gtr2FirmwareInfo::supportedOnDevice(const QString &device) const
 {
-    qDebug() << "Checking if device suppoerted: " << device;
+    qDebug() << "Checking if device is supported: " << device;
     return device == "Amazfit GTR 2" && m_type != Invalid && !m_version.contains("unknown");
 }
 
 void Gtr2FirmwareInfo::determineFirmwareType() {
-    qDebug() << "Determining firmware type";
+    qDebug() << Q_FUNC_INFO << "Determining firmware type";
     m_type = Invalid;
 
     if (m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(NEWRES_HEADER)) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
@@ -37,11 +36,11 @@ void Gtr2FirmwareInfo::determineFirmwareType() {
     }
 //    if (m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(FW_HEADER2)) == FW_OFFSET) {
 //        m_version = m_crcMap[m_crc16];
-//        qDebug() << "Version:" << m_version << "CRC:" << m_crc16;
+//        qDebug() << Q_FUNC_INFO << "Version:" << m_version << "CRC:" << m_crc16;
 //        m_type = Firmware;
 //    }
 
-    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) || m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET || m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
+    if ((m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(UIHH_HEADER)) && (m_bytes.at(4) == 0x01 || m_bytes.at(4) == 0x02)) || m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) || m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET || m_bytes.indexOf(UCHARARR_TO_BYTEARRAY(WATCHFACE_HEADER)) == COMPRESSED_RES_HEADER_OFFSET_NEW) {
         m_type = Watchface;
     }
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(NEWFT_HEADER))) {

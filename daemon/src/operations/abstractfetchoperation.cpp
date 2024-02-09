@@ -19,7 +19,7 @@ QDateTime AbstractFetchOperation::lastActivitySync()
     //QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime())); //Getting the timezone without DST
 
     //Convert the last sync time, which is seconds since epoch, to a qdatetime in the local timezone
-    qDebug() << "last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, Qt::LocalTime);
+    qDebug() << Q_FUNC_INFO << ": Last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, Qt::LocalTime);
     return QDateTime::fromMSecsSinceEpoch(ls, Qt::LocalTime);
 }
 
@@ -46,10 +46,10 @@ void AbstractFetchOperation::setLastSyncKey(const QString &key)
 bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 {
     if (m_abort) {
-        qDebug() << "Abort signalled from operation";
+        qDebug() << Q_FUNC_INFO << ": Abort signalled from operation";
         return true;
     }
-    qDebug() << "AbstractFetchOperation::handleMetaData:" << value;
+    qDebug() << Q_FUNC_INFO << value;
     if (value.length() == 15) {
         // first two bytes are whether our request was accepted
         if (value.mid(0, 3) == UCHARARR_TO_BYTEARRAY(MiBandService::RESPONSE_ACTIVITY_DATA_START_DATE_SUCCESS)) {

@@ -8,7 +8,7 @@ const char* HRMService::UUID_CHARACTERISTIC_HRM_CONTROL = "00002a39-0000-1000-80
 
 HRMService::HRMService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_HRM, path, parent)
 {
-    qDebug() << "HRMService::HRMService";
+    qDebug() << Q_FUNC_INFO;
 
     connect(this, &QBLEService::characteristicChanged, this, &HRMService::characteristicChanged);
 }
@@ -16,7 +16,7 @@ HRMService::HRMService(const QString &path, QObject *parent) : QBLEService(UUID_
 
 void HRMService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << "HRM Changed:" << characteristic << value;
+    qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value;
 
     if (characteristic == UUID_CHARACTERISTIC_HRM_MEASUREMENT) {
         qDebug() << "..got HR measurement";
@@ -63,7 +63,7 @@ void HRMService::setAllDayHRM()
 {
     auto interval = AmazfishConfig::instance()->profileAllDayHRM();
 
-    qDebug() << "Setting HRM monitoring to" << interval;
+    qDebug() << Q_FUNC_INFO << "Setting HRM monitoring to" << interval;
 
     QByteArray cmd = UCHAR_TO_BYTEARRAY(COMMAND_SET_PERIODIC_HR_MEASUREMENT_INTERVAL);
     cmd += UCHAR_TO_BYTEARRAY(interval);
@@ -77,7 +77,7 @@ void HRMService::setHeartrateSleepSupport()
 {
     auto enable = AmazfishConfig::instance()->profileHRMSleepSupport();
 
-    qDebug() << "Setting HRM sleept support to" << enable;
+    qDebug() << Q_FUNC_INFO << "Setting HRM sleep support to" << enable;
 
     QByteArray cmd;
     if (enable) {

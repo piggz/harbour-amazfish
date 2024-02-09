@@ -451,24 +451,12 @@
         <translation>Spara inställningar</translation>
     </message>
     <message>
-        <source>Refresh weather every (</source>
-        <translation type="vanished">Uppdatera vädret varje (</translation>
-    </message>
-    <message>
-        <source>) minutes</source>
-        <translation type="vanished">) minuter</translation>
-    </message>
-    <message>
         <source>Sync activity data each hour</source>
         <translation>Synkronisera aktivitetsdata varje timma</translation>
     </message>
     <message>
         <source>Low battery notification</source>
         <translation>Avisering för låg batterinivå</translation>
-    </message>
-    <message>
-        <source>Refresh calendar every (</source>
-        <translation type="vanished">Uppdatera kalendern varje (</translation>
     </message>
     <message>
         <source>Notifications</source>
@@ -900,6 +888,18 @@
     <message>
         <source>Heartrate usage</source>
         <translation>Hjärtfrekvensanvändning</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

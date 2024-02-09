@@ -16,8 +16,7 @@ void ActivityFetchOperation::start()
 {
     setStartDate(lastActivitySync());
 
-
-    qDebug() << "last activity sync was" << startDate();
+    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDate();
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
 
@@ -33,14 +32,14 @@ void ActivityFetchOperation::handleData(const QByteArray &data)
     int len = data.length();
 
     if (len % m_sampleSize != 1) {
-        qDebug() << "Unexpected data size";
+        qDebug() << Q_FUNC_INFO << "Unexpected data size";
         return;
     }
 
     for (int i = 1; i < len; i+=m_sampleSize) {
         ActivitySample sample(data[i] & 0xff, data[i + 1] & 0xff, data[i + 2] & 0xff, data[i + 3] & 0xff);
         if (m_sampleSize == 8) {
-            qDebug() << "Sample data missed:" << (data[i + 4] & 0xff) << (data[i + 5] & 0xff) << (data[i + 6] & 0xff) << (data[i + 7] & 0xff);
+            qDebug() << Q_FUNC_INFO << "Sample data missed:" << (data[i + 4] & 0xff) << (data[i + 5] & 0xff) << (data[i + 6] & 0xff) << (data[i + 7] & 0xff);
         }
         m_samples << (sample);
     }
@@ -53,10 +52,10 @@ bool ActivityFetchOperation::finished(bool success)
         //store the successful samples
         saved = saveSamples();
         m_sampleTime.setTimeSpec(Qt::LocalTime);
-        qDebug() << "Last sample time saved as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
+        qDebug() << Q_FUNC_INFO << "Last sample time saved as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
 
         saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());
-        qDebug() << "finished fetch operation, last record was " << m_sampleTime;
+        qDebug() << Q_FUNC_INFO << "Last record was " << m_sampleTime;
     }
     return saved;
 }
@@ -68,12 +67,12 @@ bool ActivityFetchOperation::saveSamples()
     }
 
     if (!m_conn || !(m_conn->isDatabaseUsed())) {
-        qDebug() << "Database not connected";
+        qDebug() << Q_FUNC_INFO << "Database not connected";
         return false;
     }
 
     m_sampleTime = startDate();
-    qDebug() << "Start sample time" << m_sampleTime;
+    qDebug() << Q_FUNC_INFO << "Start sample time" << m_sampleTime;
 
     auto config = AmazfishConfig::instance();
     uint id = qHash(config->profileName());
@@ -107,7 +106,7 @@ bool ActivityFetchOperation::saveSamples()
         values << m_samples[i].heartrate();
 
         if (!m_conn->insertRecord(&fields, values)) {
-            qDebug() << "error inserting record";
+            qDebug() << Q_FUNC_INFO << "error inserting record";
             return false;
         }
         m_sampleTime = m_sampleTime.addSecs(60);

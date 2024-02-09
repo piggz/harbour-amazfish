@@ -1,6 +1,7 @@
 #include "huamiupdatefirmwareoperation2020.h"
 #include"typeconversion.h"
 #include "bipfirmwareservice.h"
+#include "mibandservice.h"
 
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_REQUEST_PARAMETERS;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_START_FILE;
@@ -11,7 +12,7 @@ constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_COMPLETE_TRANSFER;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_FINALIZE_UPDATE;
 
 
-HuamiUpdateFirmwareOperation2020::HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service) : UpdateFirmwareOperation(info, service)
+HuamiUpdateFirmwareOperation2020::HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service, QBLEService &mibandService) : UpdateFirmwareOperation(info, service), m_mibandService(mibandService)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -119,6 +120,24 @@ bool HuamiUpdateFirmwareOperation2020::sendFwInfo()
     int arraySize = 14;
     QByteArray bytes(arraySize, char(0x00));
 
+    //Special command for watchface
+    if (m_info->type() == AbstractFirmwareInfo::Watchface) {
+        if (m_fwBytes.startsWith(UCHARARR_TO_BYTEARRAY(HuamiFirmwareInfo::UIHH_HEADER))) {
+
+            uint8_t watchfaceConfig[10] = {0x39, 0x00,
+                sizeBytes[0],
+                sizeBytes[1],
+                sizeBytes[2],
+                sizeBytes[3],
+                m_fwBytes[18],
+                m_fwBytes[19],
+                m_fwBytes[20],
+                m_fwBytes[21]
+            };
+            m_mibandService.writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, UCHARARR_TO_BYTEARRAY(watchfaceConfig));
+        }
+    }
+
     int i = 0;
     bytes[i++] = COMMAND_SEND_FIRMWARE_INFO;
     bytes[i++] = m_info->type();
@@ -139,7 +158,7 @@ bool HuamiUpdateFirmwareOperation2020::sendFwInfo()
     bytes[i++] = sizeBytes[1];
     bytes[i++] = sizeBytes[2];
     bytes[i]   = sizeBytes[3];
-    qDebug() << "Sending FW info" <<bytes;
+    qDebug() << Q_FUNC_INFO << "Sending FW info" <<bytes;
 
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, bytes);
     return true;
@@ -187,7 +206,7 @@ bool HuamiUpdateFirmwareOperation2020::sendFirmwareDataChunk(int offset) {
     progressPercent = (int) ((((float) (offset + chunkLength)) / len) * 100);
     serv->downloadProgress(progressPercent);
 
-    qDebug() << "Finished sending chunk";
+    qDebug() << Q_FUNC_INFO << "Finished sending chunk";
 
     return true;
 }

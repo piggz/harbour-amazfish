@@ -11,9 +11,9 @@ LogFetchOperation::LogFetchOperation(QBLEService *service) : AbstractFetchOperat
 {
     QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     if (!cachelocation.exists()) {
-        qDebug() << "Creating cahe amazfish folder";
+        qDebug() << Q_FUNC_INFO << "Creating amazfish cache folder";
         if (!cachelocation.mkpath("logs")) {
-            qDebug() << "Error creating amazfish logs folder!";
+            qDebug() << Q_FUNC_INFO <<  "Error creating amazfish logs folder!";
             return;
         }
     }
