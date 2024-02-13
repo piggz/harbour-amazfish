@@ -113,7 +113,6 @@ desktop-file-install --delete-original       \
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/%{name}-ui
 %attr(2755,root,privileged) %{_bindir}/%{name}d
 %{_datadir}/%{name}-ui
 %{_datadir}/applications/%{name}-ui.desktop
