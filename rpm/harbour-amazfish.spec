@@ -13,9 +13,6 @@
 
 Name:       harbour-amazfish
 
-# >> macros
-# << macros
-
 %{!?qtc_qmake:%define qtc_qmake %qmake}
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
@@ -83,9 +80,6 @@ Links:
 %prep
 %setup -q -n %{name}-%{version}
 
-# >> setup
-# << setup
-
 %build
 %if 0%{?sailfishos}
 %qmake5 VERSION='%{version}-%{release}' FLAVOR=silica
@@ -95,17 +89,8 @@ Links:
 
 %qtc_make %{?_smp_mflags}
 
-# >> build post
-# << build post
-
 %install
-rm -rf %{buildroot}
-# >> install pre
-# << install pre
 %qmake5_install
-
-# >> install post
-# << install post
 
 desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
@@ -121,5 +106,3 @@ desktop-file-install --delete-original       \
 %{_userunitdir}/harbour-amazfish.service
 %{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges
 %{_datadir}/harbour-amazfish/chirp.raw
-# >> files
-# << files
