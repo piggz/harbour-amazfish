@@ -74,7 +74,7 @@ void BangleJSDevice::incomingCall(const QString &caller)
 
     QJsonObject o;
     o.insert("t", "call");
-    o.insert("cmd", "accept");
+    o.insert("cmd", "incoming");
     o.insert("name", caller);
     o.insert("number", "");
     uart->txJson(o);
