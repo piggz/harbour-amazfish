@@ -304,13 +304,12 @@ QString BipActivityDetailParser::toTCX()
     out << "<Activities>" << endl;
     out << "<Activity Sport=\"" + ActivityKind::toString(m_summary.activityKind()) + "\">" << endl;
     out << "<Id>" << m_summary.name() << "</Id>" << endl;
+    out << "<Lap StartTime=\"" << m_summary.startTime().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "\">" << endl;
 
     ActivitySummary::meta m = m_summary.metaData("caloriesBurnt");
     if (m.key == "caloriesBurnt") {
         out << "<Calories>" << m.value << "</Calories>" << endl;
     }
-
-    out << "<Lap StartTime=\"" << m_summary.startTime().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "\">" << endl;
     out << "<Track>" << endl;
 
     foreach(ActivityCoordinate pos, m_activityTrack) {
