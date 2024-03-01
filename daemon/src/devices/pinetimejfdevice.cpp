@@ -195,6 +195,12 @@ void PinetimeJFDevice::initialise()
         connect(battery, &BatteryService::informationChanged, this, &PinetimeJFDevice::informationChanged, Qt::UniqueConnection);
     }
 
+    ImmediateAlertService *immediateAlerts = qobject_cast<ImmediateAlertService*>(service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT));
+    if (immediateAlerts) {
+        immediateAlerts->enableNotification(ImmediateAlertService::UUID_CHARACTERISTIC_IMMEDIATE_ALERT_LEVEL);
+        connect(immediateAlerts, &ImmediateAlertService::informationChanged, this, &PinetimeJFDevice::informationChanged, Qt::UniqueConnection);
+    }
+
     CurrentTimeService *cts = qobject_cast<CurrentTimeService*>(service(CurrentTimeService::UUID_SERVICE_CURRENT_TIME));
     if (cts) {
         cts->currentTime();
@@ -503,5 +509,13 @@ void PinetimeJFDevice::sendWeather(CurrentWeather *weather)
 
     if (sw){
         sw->sendWeather(weather);
+    }
+}
+
+void PinetimeJFDevice::immediateAlert(int level)
+{
+    ImmediateAlertService *ias = qobject_cast<ImmediateAlertService*>(service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT));
+    if (ias) {
+        ias->sendAlert((ImmediateAlertService::Levels)level);
     }
 }

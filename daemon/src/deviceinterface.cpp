@@ -201,9 +201,7 @@ void DeviceInterface::onRingingChanged()
         }
 
     } else {
-        if (m_device->service("00001802-0000-1000-8000-00805f9b34fb")){
-            m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
-        }
+        m_device->immediateAlert(0);
     }
 #endif
 }
@@ -497,7 +495,7 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
 
 
     if (key == AbstractDevice::INFO_IMMEDIATE_ALERT) {
-        qWarning() << "Not implemented: Immediate Alert Service" << val;
+        message(QString("Immediate Alert Service: %1").arg(val)); // FIXME should trigger phone ringing
     }
 
     //Handle notification of low battery
@@ -1042,3 +1040,9 @@ int DeviceInterface::supportedFeatures()
     return 0;
 }
 
+void DeviceInterface::immediateAlert(int level)
+{
+    if (m_device) {
+        m_device->immediateAlert(level);
+    }
+}

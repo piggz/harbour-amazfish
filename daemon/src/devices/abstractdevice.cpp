@@ -197,3 +197,7 @@ QStringList AbstractDevice::supportedDisplayItems() const
 {
     return QStringList();
 }
+
+void AbstractDevice::immediateAlert(int level) {
+    qDebug() << Q_FUNC_INFO << level;
+}

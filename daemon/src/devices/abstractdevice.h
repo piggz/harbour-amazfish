@@ -120,6 +120,7 @@ public:
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress);
     virtual void requestScreenshot();
     virtual QStringList supportedDisplayItems() const;
+    virtual void immediateAlert(int level);
 
     //signals    
     Q_SIGNAL void message(const QString &text);
