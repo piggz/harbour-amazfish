@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AddCityPage</name>
     <message>
@@ -173,37 +173,37 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="41"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="217"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="226"/>
         <source>Serial No: </source>
         <translation>序列号:</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="46"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="220"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="229"/>
         <source>Hardware Rev: </source>
         <translation>硬件版本:</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="51"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="223"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="232"/>
         <source>Software Rev: </source>
         <translation>软件版本:</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="56"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="229"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="238"/>
         <source>Model: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="61"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="235"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="244"/>
         <source>Firmware Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="232"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="241"/>
         <source>Manufacturer: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -214,7 +214,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="75"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="226"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="235"/>
         <source>GPS Ver: </source>
         <translation>GPS 版本:</translation>
     </message>
@@ -234,7 +234,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="204"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="173"/>
+        <source>Request Screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="213"/>
         <source>Music Control</source>
         <translation type="unfinished"></translation>
     </message>
@@ -259,17 +264,17 @@
         <translation>获取测试日志</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="173"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="182"/>
         <source>Test Popup</source>
         <translation>测试弹出</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="181"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="190"/>
         <source>Send Weather</source>
         <translation>发送天气</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="191"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Update Calendar</source>
         <translation>更新日历</translation>
     </message>
@@ -470,27 +475,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="25"/>
+        <location filename="../qml/pages/PairPage.qml" line="26"/>
         <source>Bluetooth adapter is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="159"/>
+        <location filename="../qml/pages/PairPage.qml" line="171"/>
         <source>Stop scanning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="160"/>
+        <location filename="../qml/pages/PairPage.qml" line="172"/>
         <source>Scan for devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="175"/>
+        <location filename="../qml/pages/PairPage.qml" line="187"/>
         <source>Scanning for devices…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="177"/>
+        <location filename="../qml/pages/PairPage.qml" line="189"/>
         <source>Pairing…</source>
         <translation type="unfinished"></translation>
     </message>
