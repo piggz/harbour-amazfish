@@ -209,7 +209,6 @@ PagePL {
             text: qsTr("Save Profile")
             onClicked: {
                 saveProfile();
-                app.pages.pop();
             }
         }
         Timer {
@@ -225,6 +224,7 @@ PagePL {
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_USER_DISPLAY_ON_LIFT);
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_USER_ALL_DAY_HRM);
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_USER_HRM_SLEEP_DETECTION)
+                app.pages.pop();
             }
         }
     }
