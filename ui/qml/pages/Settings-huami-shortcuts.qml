@@ -58,7 +58,6 @@ PagePL {
             onClicked: {
                 saveDisplayItems();
                 saveSettings();
-                app.pages.pop();
             }
         }
 
@@ -70,6 +69,7 @@ PagePL {
             running: false
             onTriggered: {
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_DISPLAY_ITEMS);
+                app.pages.pop();
             }
         }
     }

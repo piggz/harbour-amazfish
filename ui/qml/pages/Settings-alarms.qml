@@ -57,7 +57,6 @@ PagePL {
             text: qsTr("Save Settings")
             onClicked: {
                 saveSettings();
-                app.pages.pop();
             }
         }
 
@@ -69,6 +68,7 @@ PagePL {
             running: false
             onTriggered: {
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_ALARMS);
+                app.pages.pop();
             }
         }
     }
