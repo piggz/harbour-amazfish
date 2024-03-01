@@ -330,6 +330,17 @@ QString BipActivityDetailParser::toTCX()
         out << "</Trackpoint>" << endl;
     }
     out << "</Track>" << endl;
+
+    //Steps
+    m = m_summary.metaData("steps");
+    if (m.key == "steps") {
+        out << "<Extensions>" << endl;
+        out << "  <LX xmlns=\"http://www.garmin.com/xmlschemas/ActivityExtension/v2\">" << endl;
+        out << "    <Steps>" << m.value << "</Steps>" << endl;
+        out << "  </LX>" << endl;
+        out << "</Extensions>" << endl;
+    }
+
     out << "</Lap>" << endl;
 
     //Creator
