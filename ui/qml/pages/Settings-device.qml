@@ -115,7 +115,6 @@ PagePL {
                 text: qsTr("Save Settings")
                 onClicked: {
                     saveSettings();
-                    app.pages.pop();
                 }
             }
         }
@@ -132,6 +131,7 @@ PagePL {
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_UNIT);
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DISCONNECT_NOTIFICATION);
                 DaemonInterfaceInstance.applyDeviceSetting(SETTING_DEVICE_REALTIME_HRM_MEASUREMENT);
+                app.pages.pop();
             }
         }
     }
