@@ -90,6 +90,15 @@ PagePL {
                 }
             }
 
+            TextSwitchPL {
+                id: chkRealtimeHRMMeasuerement
+                width: parent.width
+                text: qsTr("Realtime HRM measurement")
+                Component.onCompleted: {
+                    chkRealtimeHRMMeasuerement.checked = AmazfishConfig.deviceRealtimeHRMMeasurement
+                }
+            }
+
             ButtonPL {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Huami Display Items")
@@ -122,6 +131,7 @@ PagePL {
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_TIME);
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_UNIT);
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DISCONNECT_NOTIFICATION);
+                DaemonInterfaceInstance.applyDeviceSetting(SETTING_DEVICE_REALTIME_HRM_MEASUREMENT);
             }
         }
     }
@@ -132,6 +142,8 @@ PagePL {
         AmazfishConfig.deviceTimeFormat = cboTimeFormat.currentIndex;
         AmazfishConfig.deviceDistanceUnit = cboDistanceUnit.currentIndex;
         AmazfishConfig.deviceDisconnectNotification = chkDisconnectNotification.checked;
+        AmazfishConfig.deviceRealtimeHRMMeasurement = chkRealtimeHRMMeasuerement.checked;
+
         tmrSetDelay.start();
     }
 }

@@ -19,7 +19,6 @@ void HRMService::characteristicChanged(const QString &characteristic, const QByt
     qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value;
 
     if (characteristic == UUID_CHARACTERISTIC_HRM_MEASUREMENT) {
-        qDebug() << "..got HR measurement";
         if (value.length() == 2 && value[0] == 0) {
             m_heartRate = (value[1] & 0xff);
             emit informationChanged(AbstractDevice::INFO_HEARTRATE, QString::number(m_heartRate));
