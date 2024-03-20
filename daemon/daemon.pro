@@ -123,6 +123,8 @@ SOURCES += \
     src/devices/biplitefirmwareinfo.cpp \
     src/devices/gtsdevice.cpp \
     src/devices/gtsfirmwareinfo.cpp \
+    src/devices/neodevice.cpp \
+    src/devices/neofirmwareinfo.cpp \
     src/devices/pinetimejfdevice.cpp \
     src/operations/adafruitblefsoperation.cpp \
     src/operations/adafruitblefsworker.cpp \
@@ -206,6 +208,8 @@ HEADERS += \
     src/devices/biplitefirmwareinfo.h \
     src/devices/gtsdevice.h \
     src/devices/gtsfirmwareinfo.h \
+    src/devices/neodevice.h \
+    src/devices/neofirmwareinfo.h \
     src/devices/pinetimejfdevice.h \
     src/operations/adafruitblefsoperation.h \
     src/operations/adafruitblefsworker.h \
