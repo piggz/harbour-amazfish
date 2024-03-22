@@ -2,6 +2,7 @@
 #include "asteroidosdevice.h"
 #include "huamidevice.h"
 #include "gtsdevice.h"
+#include "neodevice.h"
 #include "biplitedevice.h"
 #include "pinetimejfdevice.h"
 #include "banglejsdevice.h"
@@ -20,6 +21,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 
     if (deviceName == "Amazfit GTS") {
         return new GtsDevice(deviceName);
+    }
+
+    if (deviceName == "Amazfit Neo") {
+        return new NeoDevice(deviceName);
     }
 
     if (deviceName == "Amazfit GTS 2") {
