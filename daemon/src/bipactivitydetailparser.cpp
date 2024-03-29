@@ -306,10 +306,36 @@ QString BipActivityDetailParser::toTCX()
     out << "<Id>" << m_summary.name() << "</Id>" << endl;
     out << "<Lap StartTime=\"" << m_summary.startTime().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "\">" << endl;
 
-    ActivitySummary::meta m = m_summary.metaData("caloriesBurnt");
+    //TotalTimeSeconds
+    ActivitySummary::meta m = m_summary.metaData("activeSeconds");
+    if (m.key == "activeSeconds") {
+        out << "<TotalTimeSeconds>" << m.value << "</TotalTimeSeconds>" << endl;
+    }
+
+    //DistanceMeters
+    m = m_summary.metaData("distanceMeters");
+    if (m.key == "distanceMeters") {
+        out << "<DistanceMeters>" << m.value << "</DistanceMeters>" << endl;
+    }
+
+    //Calories
+    m = m_summary.metaData("caloriesBurnt");
     if (m.key == "caloriesBurnt") {
         out << "<Calories>" << m.value << "</Calories>" << endl;
     }
+
+    //AverageHeartRateBpm
+    m = m_summary.metaData("averageHR");
+    if (m.key == "averageHR") {
+        out << "<AverageHeartRateBpm><Value>" << m.value << "</Value></AverageHeartRateBpm>" << endl;
+    }
+
+    //MaximumHeartRateBpm
+    m = m_summary.metaData("maxHR");
+    if (m.key == "maxHR") {
+        out << "<MaximumHeartRateBpm><Value>" << m.value << "</Value></MaximumHeartRateBpm>" << endl;
+    }
+
     out << "<Track>" << endl;
 
     foreach(ActivityCoordinate pos, m_activityTrack) {
@@ -329,6 +355,7 @@ QString BipActivityDetailParser::toTCX()
         out << "<HeartRateBpm xsi:type=\"HeartRateInBeatsPerMinute_t\"><Value>" << pos.heartRate() << "</Value></HeartRateBpm>" << endl;
         out << "</Trackpoint>" << endl;
     }
+
     out << "</Track>" << endl;
 
     //Steps
