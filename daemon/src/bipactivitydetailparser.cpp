@@ -304,13 +304,12 @@ QString BipActivityDetailParser::toTCX()
     out << "<Activities>" << endl;
     out << "<Activity Sport=\"" + ActivityKind::toString(m_summary.activityKind()) + "\">" << endl;
     out << "<Id>" << m_summary.name() << "</Id>" << endl;
+    out << "<Lap StartTime=\"" << m_summary.startTime().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "\">" << endl;
 
     ActivitySummary::meta m = m_summary.metaData("caloriesBurnt");
     if (m.key == "caloriesBurnt") {
         out << "<Calories>" << m.value << "</Calories>" << endl;
     }
-
-    out << "<Lap StartTime=\"" << m_summary.startTime().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "\">" << endl;
     out << "<Track>" << endl;
 
     foreach(ActivityCoordinate pos, m_activityTrack) {
@@ -331,6 +330,17 @@ QString BipActivityDetailParser::toTCX()
         out << "</Trackpoint>" << endl;
     }
     out << "</Track>" << endl;
+
+    //Steps
+    m = m_summary.metaData("steps");
+    if (m.key == "steps") {
+        out << "<Extensions>" << endl;
+        out << "  <LX xmlns=\"http://www.garmin.com/xmlschemas/ActivityExtension/v2\">" << endl;
+        out << "    <Steps>" << m.value << "</Steps>" << endl;
+        out << "  </LX>" << endl;
+        out << "</Extensions>" << endl;
+    }
+
     out << "</Lap>" << endl;
 
     //Creator
