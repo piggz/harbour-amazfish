@@ -27,7 +27,7 @@ public:
 
     void applyDeviceSetting(Settings s) override;
 
-    void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
+    virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     void incomingCall(const QString &caller) override;
 
     QString softwareRevision();
