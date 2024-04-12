@@ -43,6 +43,8 @@ flavor_silica {
                       calendar
 } else:flavor_uuitk {
     DEFINES += UUITK_EDITION
+    LIBS += -lpulse-simple
+    PKGCONFIG += libpulse
     WATCHFISH_FEATURES += music \
                       voicecall \
                       notificationmonitor \
