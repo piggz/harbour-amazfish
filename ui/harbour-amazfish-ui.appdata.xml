@@ -55,6 +55,17 @@
   </keywords>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="2.2.5" timestamp="1714300696">
+      <description>
+        <p>Added appdata.xml for improved app metadata. and Implemented category feature for better organization. </p>
+        <p>Included missing pictures into the resource file.</p>
+        <p>Enabled 'Find my phone' feature on Ubuntu Touch.</p>
+        <p>Added essential workout metrics like TotalTimeSeconds, DistanceMeters, AverageHeartRateBpm, and MaximumHeartRateBpm to tcx file.</p>
+        <p>Updated Strava format for better compatibility.</p>
+        <p>Integrated Amazfit Neo initial support. Kudos to @kirbylife</p>
+        <p>Fixed TimePickerDialog to expose hour and minute for proper functioning of alarms.</p>
+      </description>
+    </release>
     <release version="2.2.4" timestamp="1709471020">
       <description>
         <p>Fix schedule display on lift wrist</p>
