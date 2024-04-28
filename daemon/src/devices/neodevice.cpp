@@ -28,10 +28,15 @@ int NeoDevice::supportedFeatures() const
 
 void NeoDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        mi->sendAlert(sender, subject, message);
+
+    AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
+
+    qDebug() << Q_FUNC_INFO << alert;
+
+    if (alert) {
+        alert->sendAlert(sender.left(10), subject.left(6), "");
     }
+
 }
 
 void NeoDevice::serviceEvent(uint8_t event)
