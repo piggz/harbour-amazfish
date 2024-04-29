@@ -57,7 +57,7 @@
   <releases>
     <release version="2.2.5" timestamp="1714372454">
       <description>
-        <p>Fix appstream metadata<p>
+        <p>Fix appstream metadata</p>
       </description>
     </release>
     <release version="2.2.5" timestamp="1714300696">
