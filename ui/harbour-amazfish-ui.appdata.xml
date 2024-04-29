@@ -15,7 +15,7 @@
   <url type="bugtracker">https://github.com/piggz/harbour-amazfish/issues</url>
   <url type="donation">https://paypal.me/piggz</url>
   <requires>
-    <display_length compare="ge">small</display_length>
+    <display_length compare="ge">300</display_length>
   </requires>
   <recommends>
     <control>keyboard</control>
@@ -28,15 +28,15 @@
   <screenshots>
     <screenshot type="default">
       <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot1.png</image>
-      <caption/>
+      <caption>Main screen with step counter and heart rate</caption>
     </screenshot>
     <screenshot>
       <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot2.png</image>
-      <caption/>
+      <caption>Application settings</caption>
     </screenshot>
     <screenshot>
       <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot3.png</image>
-      <caption/>
+      <caption>Analysis screen</caption>
     </screenshot>
   </screenshots>
   <categories>
