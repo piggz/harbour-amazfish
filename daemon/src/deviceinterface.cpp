@@ -15,7 +15,7 @@
 #include <KDb3/KDbDriverManager>
 #include <KDb3/KDbTransactionGuard>
 
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
 #include <pulse/simple.h>
 #include <pulse/error.h>
 #endif
@@ -682,7 +682,7 @@ void DeviceInterface::findDevice()
 
     m_playedSounds++;
 
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
 
     /* The Sample format to use */
     static const pa_sample_spec ss = {
@@ -694,11 +694,16 @@ void DeviceInterface::findDevice()
     pa_simple *s = NULL;
     int error;
 
+
+#ifdef MER_EDITION_SAILFISH
     QFile file("/usr/share/harbour-amazfish/chirp.raw");
+#else // elif defined(UUITK_EDITION)
+    QFile file("/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/share/harbour-amazfish/chirp.raw");
+#endif
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        qDebug() << "Unable to open chirp sound";
+        qWarning() << Q_FUNC_INFO << "Unable to open chirp sound";
         return;
     }
 

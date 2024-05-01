@@ -216,6 +216,10 @@
         <source>Music Control</source>
         <translation>Ovládání hudby</translation>
     </message>
+    <message>
+        <source>Request Screenshot</source>
+        <translation>Vyžádat snímek obrazovky</translation>
+    </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>
@@ -891,15 +895,15 @@
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypnuto</translation>
     </message>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnuto</translation>
     </message>
     <message>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>Plán</translation>
     </message>
 </context>
 <context>

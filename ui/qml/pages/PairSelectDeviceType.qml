@@ -80,6 +80,13 @@ PageListPL {
         }
 
         ListElement {
+            deviceType: "Amazfit Neo"
+            icon: "../pics/devices/amazfit-neo.png"
+            auth: true
+            aliases: []
+        }
+
+        ListElement {
             deviceType: "Amazfit GTS 2"
             icon: "../pics/devices/amazfit-gts2.png"
             auth: true
