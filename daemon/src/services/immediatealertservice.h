@@ -24,7 +24,7 @@ public:
 
 private:
     Levels m_alertLevel;
-    Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
+    Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
 };
 
 #endif // IMMEDIATE_ALERT_SERVICE_H

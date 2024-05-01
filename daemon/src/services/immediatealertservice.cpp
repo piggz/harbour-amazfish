@@ -7,7 +7,8 @@ ImmediateAlertService::ImmediateAlertService(const QString &path, QObject *paren
 {
     qDebug() << Q_FUNC_INFO;
 
-    connect(this, &QBLEService::characteristicRead, this, &ImmediateAlertService::characteristicRead);
+    connect(this, &QBLEService::characteristicChanged, this, &ImmediateAlertService::characteristicChanged);
+    enableNotification(UUID_CHARACTERISTIC_IMMEDIATE_ALERT_LEVEL);
 }
 
 QString ImmediateAlertService::levelToString(const ImmediateAlertService::Levels level)
@@ -24,7 +25,7 @@ QString ImmediateAlertService::levelToString(const ImmediateAlertService::Levels
     }
 }
 
-void ImmediateAlertService::characteristicRead(const QString &characteristic, const QByteArray &value)
+void ImmediateAlertService::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO << "Read:" << characteristic << value;
     if (characteristic == UUID_CHARACTERISTIC_IMMEDIATE_ALERT_LEVEL) {
