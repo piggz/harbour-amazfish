@@ -9,8 +9,8 @@ Requires Sailfish version 3.0.3.8 or above due to changes in the base Sailfish i
 * Run `devel-su pkcon refresh`
 * Run `devel-su pkcon install harbour-amazfish`
 
-
-[![OpenStore](https://open-store.io/badges/en_US.svg)](https://open-store.io/app/uk.co.piggz.amazfish)
+<a href='https://open-store.io/app/uk.co.piggz.amazfish'><img width='240' alt='Download on OpenStore' src='https://open-store.io/badges/en_US.svg'/></a>
+<a href='https://flathub.org/apps/details/uk.co.piggz.amazfish'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
 ## Supported Devices
 
