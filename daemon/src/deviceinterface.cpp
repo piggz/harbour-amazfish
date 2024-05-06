@@ -493,11 +493,6 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
 {
     qDebug() << Q_FUNC_INFO << key << val;
 
-
-    if (key == AbstractDevice::INFO_IMMEDIATE_ALERT) {
-        message(QString("Immediate Alert Service: %1").arg(val)); // FIXME should trigger phone ringing
-    }
-
     //Handle notification of low battery
     if (key == AbstractDevice::INFO_BATTERY) {
         int battery_level = val.toInt();

@@ -6,9 +6,6 @@ const char* ImmediateAlertService::UUID_CHARACTERISTIC_IMMEDIATE_ALERT_LEVEL = "
 ImmediateAlertService::ImmediateAlertService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_IMMEDIATE_ALERT, path, parent)
 {
     qDebug() << Q_FUNC_INFO;
-
-    connect(this, &QBLEService::characteristicChanged, this, &ImmediateAlertService::characteristicChanged);
-    enableNotification(UUID_CHARACTERISTIC_IMMEDIATE_ALERT_LEVEL);
 }
 
 QString ImmediateAlertService::levelToString(const ImmediateAlertService::Levels level)
@@ -22,17 +19,6 @@ QString ImmediateAlertService::levelToString(const ImmediateAlertService::Levels
         return QStringLiteral("HighAlert");
     default:
         return QStringLiteral("Unknown");
-    }
-}
-
-void ImmediateAlertService::characteristicChanged(const QString &characteristic, const QByteArray &value)
-{
-    qDebug() << Q_FUNC_INFO << "Read:" << characteristic << value;
-    if (characteristic == UUID_CHARACTERISTIC_IMMEDIATE_ALERT_LEVEL) {
-        m_alertLevel = (ImmediateAlertService::Levels)value[0];
-        emit informationChanged(AbstractDevice::INFO_IMMEDIATE_ALERT, QString::number(static_cast<int>(m_alertLevel)));
-    } else {
-        qWarning() << Q_FUNC_INFO << "Unknown value";
     }
 }
 
