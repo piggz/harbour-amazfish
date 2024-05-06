@@ -20,8 +20,11 @@ public:
     void sendAlert(ImmediateAlertService::Levels level);
     QString levelToString(const ImmediateAlertService::Levels level);
 
+    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
+
 private:
     Levels m_alertLevel;
+    Q_SLOT void characteristicChanged(const QString &c, const QByteArray &value);
 };
 
 #endif // IMMEDIATE_ALERT_SERVICE_H
