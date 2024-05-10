@@ -39,9 +39,33 @@ libraries:
     - git -C ${SRC_DIR} pull || git clone https://github.com/sailfishos/nemo-qml-plugin-dbus ${SRC_DIR}
     builder: qmake
 
+  maplibre-gl-native:
+    src_dir: 3rdparty/maplibre-gl-native
+    prebuild:
+    - mkdir -p ${ROOT}/3rdparty
+    - git -C ${SRC_DIR} pull || git clone -b qt-v2.0.1 --recursive --shallow-submodules --depth 1 https://github.com/maplibre/maplibre-gl-native.git ${SRC_DIR}
+    - git apply --directory ${SRC_DIR} ${ROOT}/click/fix-compilation-with-clickable.patch || /bin/true
+    builder: cmake
+    build_args:
+    - -DMBGL_WITH_QT=ON
+    - -DMBGL_WITH_WERROR=OFF
+    - -DMBGL_WITH_QT_HEADLESS=OFF
+    - -DMBGL_QT_LIBRARY_ONLY=ON
+    - -DMBGL_QT_STATIC=OFF
+
+  mapbox-gl-qml:
+    src_dir: 3rdparty/mapbox-gl-qml
+    prebuild:
+    - mkdir -p ${ROOT}/3rdparty
+    - git -C ${SRC_DIR} pull || git clone -b 2.1.1 --recursive --shallow-submodules --depth 1 https://github.com/rinigus/mapbox-gl-qml.git ${SRC_DIR}
+    builder: cmake
+    build_args:
+    - -DCMAKE_CXX_STANDARD=14
+
 install_lib:
 - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libnemodbus.so*
 - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libmpris-qt5.so*
+- ${MAPLIBRE_GL_NATIVE_LIB_INSTALL_DIR}/lib/libQMapLibreGL.so*
 - /usr/lib/${ARCH_TRIPLET}/libKDb3.so*
 - /usr/lib/${ARCH_TRIPLET}/libKF5BluezQt.so*
 install_data:
@@ -49,4 +73,5 @@ install_data:
 install_qml:
 - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Nemo/DBus
 - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/org/nemomobile/mpris
+- ${MAPBOX_GL_QML_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/MapboxMap
 - /usr/lib/${ARCH_TRIPLET}/qt5/qml/org/kde/bluezqt
