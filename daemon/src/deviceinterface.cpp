@@ -747,6 +747,10 @@ QString DeviceInterface::prepareFirmwareDownload(const QString &path)
             return QString();
         }
         m_firmwareInfo = m_device->firmwareInfo(file.readAll());
+        if (m_firmwareInfo == nullptr) {
+            qWarning() << "m_firmwareInfo is NULL";
+            return QString();
+        }
         if (m_firmwareInfo->type() != AbstractFirmwareInfo::Invalid) {
             m_device->prepareFirmwareDownload(m_firmwareInfo);
             return m_firmwareInfo->version();
@@ -759,6 +763,11 @@ bool DeviceInterface::startDownload()
 {
     qDebug() << Q_FUNC_INFO;
     auto config = AmazfishConfig::instance();
+
+    if (m_firmwareInfo == nullptr) {
+        qWarning() << "m_firmwareInfo is NULL";
+        return false;
+    }
 
     if (m_firmwareInfo->supportedOnDevice(m_device->deviceName()) || config->appOverrideFwCheck()) {
         m_device->startDownload();
