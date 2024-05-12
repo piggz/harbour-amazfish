@@ -220,6 +220,26 @@
         <source>Request Screenshot</source>
         <translation>Vyžádat snímek obrazovky</translation>
     </message>
+    <message>
+        <source>Somebody</source>
+        <translation>Někdo</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>Nadpis</translation>
+    </message>
+    <message>
+        <source>Donald Duck</source>
+        <translation>Kačer Donald</translation>
+    </message>
+    <message>
+        <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
+        <translation>Ahoj z Sailfish OS. Toto je dlouhá zpráva odeslaná přes BLE!</translation>
+    </message>
+    <message>
+        <source>Hello, this is an email from Sailfish OS!</source>
+        <translation>Ahoj, toto je e-mail ze Sailfish OS!</translation>
+    </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>
