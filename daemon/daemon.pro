@@ -268,7 +268,7 @@ TRANSLATIONS += \
     translations/harbour-amazfishd-cs.ts
 
 flavor_uuitk {
-    DEFINES += TRANSLATION_FOLDER=\\\"./translations\\\"
+    DEFINES += TRANSLATION_FOLDER=\\\"/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/translations\\\"
     translations_files.path = /translations
 } else {
     DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
