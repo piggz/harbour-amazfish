@@ -36,6 +36,21 @@ int main(int argc, char **argv)
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setApplicationName("harbour-amazfish");
 
+    {
+        QString tr_path(TRANSLATION_FOLDER);
+        if ( !tr_path.isEmpty() ) {
+            QString locale = QLocale::system().name();
+            QTranslator *translator = new QTranslator();
+
+            if ( !translator->load(QLocale(), "harbour-amazfishd", "-", tr_path) ) {
+                qWarning() << "Failed to load translation for " << locale << " " << tr_path;
+            }
+
+            app.installTranslator(translator);
+        }
+
+    }
+
     daemonize();
 
     setlinebuf(stdout);
