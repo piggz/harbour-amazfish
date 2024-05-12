@@ -116,6 +116,7 @@ desktop-file-install --delete-original       \
 %{_bindir}/%{name}-ui
 %attr(2755,root,privileged) %{_bindir}/%{name}d
 %{_datadir}/%{name}-ui
+%{_datadir}/%{name}d
 %{_datadir}/applications/%{name}-ui.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-ui.svg
