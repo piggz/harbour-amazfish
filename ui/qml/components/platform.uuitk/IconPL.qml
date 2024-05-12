@@ -31,6 +31,7 @@ Icon {
     property string iconName
     property string iconSource
     property int    iconWidth: 0
+    keyColor: "#ffffff"
 
     Component.onCompleted: {
         if (iconColorize) color = styler.themeHighlightColor;
