@@ -10,6 +10,7 @@
 #include <sailfishapp.h>
 #else
 #include <QQmlApplicationEngine>
+#include <QQuickWindow>
 #endif
 
 #include <QTranslator>
@@ -129,8 +130,12 @@ int main(int argc, char *argv[])
     view->load("./share/harbour-amazfish-ui/qml/harbour-amazfish.qml");
 #else
     view->load(QUrl("qrc:/qml/harbour-amazfish.qml"));
-#endif
 
+    if (QQuickWindow* window = qobject_cast<QQuickWindow*>(view->rootObjects().at(0))) {
+        window->setIcon(QIcon(":/icons/172x172/harbour-amazfish-ui.png"));
+    }
+
+#endif
 
     return app->exec();
 }
