@@ -215,7 +215,7 @@ ApplicationWindowPL
     }
 
     function supportsFeature(feature) {
-        console.log("Checking if feature is supported:", feature, (supportedFeatures & feature) === feature);
+        // console.log("Checking if feature is supported:", feature, (supportedFeatures & feature) === feature);
         return (supportedFeatures & feature) === feature;
     }
 
