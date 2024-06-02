@@ -263,3 +263,30 @@ HEADERS += \
     src/bipactivitydetailparser.h \
     src/transliterator.h \
     src/activitycoordinate.h
+
+TRANSLATIONS += \
+    translations/harbour-amazfishd-cs.ts
+
+flavor_uuitk {
+    DEFINES += TRANSLATION_FOLDER=\\\"/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/translations\\\"
+    translations_files.path = /translations
+} else {
+    DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
+    translations_files.path = $${PREFIX}/share/$${TARGET}/translations
+}
+
+qtPrepareTool(LRELEASE, lrelease)
+for(tsfile, TRANSLATIONS) {
+    qmfile = $$shadowed($$tsfile)
+    qmfile ~= s,.ts$,.qm,
+    qmdir = $$dirname(qmfile)
+    !exists($$qmdir) {
+        mkpath($$qmdir)|error("Aborting.")
+    }
+    command = $$LRELEASE -removeidentical $$tsfile -qm $$qmfile
+    system($$command)|error("Failed to run: $$command")
+    TRANSLATIONS_FILES += $$qmfile
+    translations_files.files = $${TRANSLATIONS_FILES}
+}
+
+INSTALLS += translations_files
