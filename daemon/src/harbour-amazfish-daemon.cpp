@@ -26,7 +26,11 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 {
     QByteArray localMsg = msg.toLocal8Bit();
     const char* time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toLocal8Bit();
+#ifdef QT_MESSAGELOGCONTEXT
+    fprintf(stderr,"%s %s:%d: %s\n", time, context.file, context.line, localMsg.constData());
+#else
     fprintf(stderr, "%s : %s\n", time, localMsg.constData());
+#endif
 }
 
 int main(int argc, char **argv)

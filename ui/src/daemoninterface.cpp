@@ -55,7 +55,7 @@ void DaemonInterface::connectDaemon()
 
 void DaemonInterface::pair(const QString &name, QString address)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << name << address;
 
     if (m_connectionState == "pairing") {
         return;
