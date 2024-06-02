@@ -123,5 +123,6 @@
         <file>qml/harbour-amazfish.qml</file>
         <file>qml/components/TruncationModes.qml</file>
         <file>qml/components/DateNavigation.qml</file>
+        <file>icons/172x172/harbour-amazfish-ui.png</file>
     </qresource>
 </RCC>
