@@ -505,3 +505,11 @@ void PinetimeJFDevice::sendWeather(CurrentWeather *weather)
         sw->sendWeather(weather);
     }
 }
+
+void PinetimeJFDevice::immediateAlert(int level)
+{
+    ImmediateAlertService *ias = qobject_cast<ImmediateAlertService*>(service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT));
+    if (ias) {
+        ias->sendAlert((ImmediateAlertService::Levels)level);
+    }
+}
