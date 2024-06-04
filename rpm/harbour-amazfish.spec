@@ -22,7 +22,7 @@ Name:       harbour-amazfish
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Watch interface application
-Version:    2.2.2
+Version:    2.2.6
 Release:    1
 Group:      QtQt
 License:    GPLv3
@@ -116,6 +116,7 @@ desktop-file-install --delete-original       \
 %{_bindir}/%{name}-ui
 %attr(2755,root,privileged) %{_bindir}/%{name}d
 %{_datadir}/%{name}-ui
+%{_datadir}/%{name}d
 %{_datadir}/applications/%{name}-ui.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-ui.svg

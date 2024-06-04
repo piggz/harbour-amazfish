@@ -216,6 +216,30 @@
         <source>Music Control</source>
         <translation>Ovládání hudby</translation>
     </message>
+    <message>
+        <source>Request Screenshot</source>
+        <translation>Vyžádat snímek obrazovky</translation>
+    </message>
+    <message>
+        <source>Somebody</source>
+        <translation>Někdo</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>Nadpis</translation>
+    </message>
+    <message>
+        <source>Donald Duck</source>
+        <translation>Kačer Donald</translation>
+    </message>
+    <message>
+        <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
+        <translation>Ahoj z Sailfish OS. Toto je dlouhá zpráva odeslaná přes BLE!</translation>
+    </message>
+    <message>
+        <source>Hello, this is an email from Sailfish OS!</source>
+        <translation>Ahoj, toto je e-mail ze Sailfish OS!</translation>
+    </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>
@@ -891,15 +915,15 @@
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypnuto</translation>
     </message>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnuto</translation>
     </message>
     <message>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>Plán</translation>
     </message>
 </context>
 <context>

@@ -216,6 +216,10 @@
         <source>Music Control</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Request Screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>

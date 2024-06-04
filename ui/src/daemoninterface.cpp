@@ -55,7 +55,7 @@ void DaemonInterface::connectDaemon()
 
 void DaemonInterface::pair(const QString &name, QString address)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << name << address;
 
     if (m_connectionState == "pairing") {
         return;
@@ -344,4 +344,11 @@ QStringList DaemonInterface::supportedDisplayItems()
     }
     QDBusReply<QStringList> reply = iface->call(QStringLiteral("supportedDisplayItems"));
     return reply;
+}
+
+void DaemonInterface::immediateAlert(int level) {
+    if (!iface || !iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("immediateAlert"), level);
 }

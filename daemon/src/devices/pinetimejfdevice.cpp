@@ -521,3 +521,11 @@ void PinetimeJFDevice::applyDeviceSetting(Settings s)
     }
 
 }
+
+void PinetimeJFDevice::immediateAlert(int level)
+{
+    ImmediateAlertService *ias = qobject_cast<ImmediateAlertService*>(service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT));
+    if (ias) {
+        ias->sendAlert((ImmediateAlertService::Levels)level);
+    }
+}
