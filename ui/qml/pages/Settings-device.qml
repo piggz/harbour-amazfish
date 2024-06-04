@@ -130,7 +130,7 @@ PagePL {
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_TIME);
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_UNIT);
                 DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DISCONNECT_NOTIFICATION);
-                DaemonInterfaceInstance.applyDeviceSetting(SETTING_DEVICE_REALTIME_HRM_MEASUREMENT);
+                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_REALTIME_HRM_MEASUREMENT);
                 app.pages.pop();
             }
         }
