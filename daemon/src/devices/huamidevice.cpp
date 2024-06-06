@@ -1,6 +1,7 @@
 #include "huamidevice.h"
 #include "bipfirmwareinfo.h"
 #include "updatefirmwareoperation.h"
+#include "amazfishconfig.h"
 
 #include <QtXml/QtXml>
 
@@ -304,6 +305,9 @@ void HuamiDevice::applyDeviceSetting(Settings s)
         break;
     case SETTING_DISCONNECT_NOTIFICATION:
         mi->setDisconnectNotification();
+        break;
+    case SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
+        hrm->enableRealtimeHRMeasurement(AmazfishConfig::instance()->deviceRealtimeHRMMeasurement());
         break;
     }
 }

@@ -36,6 +36,7 @@ public:
     //Weather
     void sendWeather(CurrentWeather *weather) override;
 
+    virtual void applyDeviceSetting(Settings s);
     virtual void immediateAlert(int level) override;
 
 protected:

@@ -139,6 +139,7 @@ public:
     INT_OPTION(QStringLiteral("app/refreshweather"),    appRefreshWeather,   setAppRefreshWeather,   80)
     INT_OPTION(QStringLiteral("app/refreshcalendar"),   appRefreshCalendar,  setAppRefreshCalendar,  60)
 
+    BOOL_OPTION(QStringLiteral("device/realtimehrmmeasurement"), deviceRealtimeHRMMeasurement, setdeviceRealtimeHRMMeasurement, false)
     BOOL_OPTION(QStringLiteral("device/disconnectnotification"), deviceDisconnectNotification, setDeviceDisconnectNotification, false)
     BOOL_OPTION(QStringLiteral("device/displayweathershortcut"), deviceDisplayWeatherShortcut, setDeviceDisplayWeatherShortcut, true)
     BOOL_OPTION(QStringLiteral("device/displayalipayshortcut"),  deviceDisplayAliPayShortcut,  setDeviceDisplayAliPayShortcut,  true)

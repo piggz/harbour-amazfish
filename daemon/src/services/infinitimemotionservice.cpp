@@ -33,7 +33,6 @@ void InfiniTimeMotionService::characteristicChanged(const QString &characteristi
     qDebug() << Q_FUNC_INFO << characteristic << value.toHex();
 
     if (characteristic == UUID_CHARACTERISTIC_MOTION_STEPS) {
-        qDebug() << "...Got realtime steps:" << value.length();
         if (value.length() == 4) {
             m_steps = TypeConversion::toUint32(value[0], value[1], value[2], value[3]);
             emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(m_steps));
