@@ -55,9 +55,32 @@
   </keywords>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="2.3.0" timestamp="1718467463">
+      <description>
+        <p>Fix for Sailfish 4.6</p>
+        <p>Infinitime HRM workaround</p>
+        <p>Implement immediate alert service for infinitime<p>
+        <p>Kirigam improvements</p>
+        <p>Dont display battery info twice</p>
+        <p>Battery page title</p>
+        <p>Daemon translations</p>
+        <p>Dont crash if there is no firmware info</p>
+      </description>
+    </release>
     <release version="2.2.5" timestamp="1714372454">
       <description>
         <p>Fix appstream metadata</p>
+      </description>
+    </release>
+    <release version="2.2.5" timestamp="1714300696">
+      <description>
+        <p>Added appdata.xml for improved app metadata. and Implemented category feature for better organization. </p>
+        <p>Included missing pictures into the resource file.</p>
+        <p>Enabled 'Find my phone' feature on Ubuntu Touch.</p>
+        <p>Added essential workout metrics like TotalTimeSeconds, DistanceMeters, AverageHeartRateBpm, and MaximumHeartRateBpm to tcx file.</p>
+        <p>Updated Strava format for better compatibility.</p>
+        <p>Integrated Amazfit Neo initial support. Kudos to @kirbylife</p>
+        <p>Fixed TimePickerDialog to expose hour and minute for proper functioning of alarms.</p>
       </description>
     </release>
     <release version="2.2.5" timestamp="1714300696">
