@@ -13,7 +13,7 @@ To get into the build machine (if started by Sailfish IDE)
 Use the `sb2-config` command to make your ARM target the default
 
 Add this repo which provides KF5 packages
-`sb2 -R zypper ar http://repo.merproject.org/obs/home:/piggz:/kf5/sailfish_latest_aarch64/ piggz`
+`sb2 -R zypper ar https://repo.sailfishos.org/obs/sailfishos:/chum/4.6_aarch64/ sailfishos_chum`
 and
 `sb2 -R zypper refresh`
 
