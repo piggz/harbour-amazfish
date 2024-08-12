@@ -4,7 +4,8 @@ on: [push, pull_request]
 
 jobs:
   build-linux-flatpak-dev:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
+    continue-on-error: true
 
     steps:
     - uses: actions/checkout@v4
@@ -17,12 +18,8 @@ jobs:
         path: uk.co.piggz.amazfish
         repository: flathub/uk.co.piggz.amazfish
 
-    - name: Set up Ubuntu 20.04 runner
+    - name: Set up Ubuntu runner
       run: sudo apt-get --quiet update --yes
-
-    - name: Use dir instead of git tag in flatpak json
-      run: |
-        jq 'walk(if type == "object" and .url == "https://github.com/piggz/harbour-amazfish.git" and .branch == "master" then .type = "git" | .dir = "../harbour-amazfish" | del(.url, .branch) else . end)' ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish.json > ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish-ci.json
 
     - name: Install Flatpak and flatpak-builder
       run: sudo apt-get --quiet install --yes flatpak flatpak-builder
@@ -32,6 +29,10 @@ jobs:
 
     - name: Install KDE SDK
       run: sudo flatpak install -y flathub org.kde.Platform//5.15-23.08 org.kde.Sdk//5.15-23.08
+
+    - name: Use dir instead of git tag in flatpak json
+      run: |
+        jq 'walk(if type == "object" and .url == "https://github.com/piggz/harbour-amazfish.git" then .type = "dir" | .path = "../harbour-amazfish" | del(.url, .branch, .commit, .tag) else . end)' ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish.json > ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish-ci.json
 
     - name: Build development snapshot and package as Flatpak
       run: |
