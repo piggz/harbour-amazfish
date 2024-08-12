@@ -26,6 +26,8 @@ DialogPL {
     id: dialog
 
     property alias time: datePicker.date
+    property alias hour: datePicker.hours
+    property alias minute: datePicker.minutes
 
     Item {
         height: childrenRect.height

@@ -15,7 +15,7 @@
 #include <KDb3/KDbDriverManager>
 #include <KDb3/KDbTransactionGuard>
 
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
 #include <pulse/simple.h>
 #include <pulse/error.h>
 #endif
@@ -201,9 +201,7 @@ void DeviceInterface::onRingingChanged()
         }
 
     } else {
-        if (m_device->service("00001802-0000-1000-8000-00805f9b34fb")){
-            m_device->service("00001802-0000-1000-8000-00805f9b34fb")->writeValue("00002a06-0000-1000-8000-00805f9b34fb", QByteArray(1, 0x00)); //TODO properly abstract immediate notification service
-        }
+        m_device->immediateAlert(0);
     }
 #endif
 }
@@ -495,11 +493,6 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
 {
     qDebug() << Q_FUNC_INFO << key << val;
 
-
-    if (key == AbstractDevice::INFO_IMMEDIATE_ALERT) {
-        qWarning() << "Not implemented: Immediate Alert Service" << val;
-    }
-
     //Handle notification of low battery
     if (key == AbstractDevice::INFO_BATTERY) {
         int battery_level = val.toInt();
@@ -684,7 +677,7 @@ void DeviceInterface::findDevice()
 
     m_playedSounds++;
 
-#ifdef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
 
     /* The Sample format to use */
     static const pa_sample_spec ss = {
@@ -696,11 +689,16 @@ void DeviceInterface::findDevice()
     pa_simple *s = NULL;
     int error;
 
+
+#ifdef MER_EDITION_SAILFISH
     QFile file("/usr/share/harbour-amazfish/chirp.raw");
+#else // elif defined(UUITK_EDITION)
+    QFile file("/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/share/harbour-amazfish/chirp.raw");
+#endif
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        qDebug() << "Unable to open chirp sound";
+        qWarning() << Q_FUNC_INFO << "Unable to open chirp sound";
         return;
     }
 
@@ -742,6 +740,10 @@ QString DeviceInterface::prepareFirmwareDownload(const QString &path)
             return QString();
         }
         m_firmwareInfo = m_device->firmwareInfo(file.readAll());
+        if (m_firmwareInfo == nullptr) {
+            qWarning() << "m_firmwareInfo is NULL";
+            return QString();
+        }
         if (m_firmwareInfo->type() != AbstractFirmwareInfo::Invalid) {
             m_device->prepareFirmwareDownload(m_firmwareInfo);
             return m_firmwareInfo->version();
@@ -754,6 +756,11 @@ bool DeviceInterface::startDownload()
 {
     qDebug() << Q_FUNC_INFO;
     auto config = AmazfishConfig::instance();
+
+    if (m_firmwareInfo == nullptr) {
+        qWarning() << "m_firmwareInfo is NULL";
+        return false;
+    }
 
     if (m_firmwareInfo->supportedOnDevice(m_device->deviceName()) || config->appOverrideFwCheck()) {
         m_device->startDownload();
@@ -1042,3 +1049,9 @@ int DeviceInterface::supportedFeatures()
     return 0;
 }
 
+void DeviceInterface::immediateAlert(int level)
+{
+    if (m_device) {
+        m_device->immediateAlert(level);
+    }
+}

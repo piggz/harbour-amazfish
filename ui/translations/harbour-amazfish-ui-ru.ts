@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="ru">
 <context>
     <name>AddCityPage</name>
     <message>
@@ -214,6 +214,10 @@
     </message>
     <message>
         <source>Function Tests</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Request Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -87,30 +87,12 @@ PagePL {
             }
         }
 
-        Graph {
-            id: graphBat
-            graphTitle: qsTr("Battery")
-            graphHeight: 300
-
-            axisY.units: "%"
-            type: DataSource.BatteryLog
-
-            minY: 0
-            maxY: 100
-            valueConverter: function(value) {
-                return value.toFixed(0);
-            }
-            onClicked: {
-                updateGraph(day);
-            }
-        }
     }
 
     function updateGraphs() {
         graphHeartrate.updateGraph(day);
         graphSteps.updateGraph(day);
         graphIntensity.updateGraph(day);
-        graphBat.updateGraph(day);
     }
 
     Component.onCompleted: {

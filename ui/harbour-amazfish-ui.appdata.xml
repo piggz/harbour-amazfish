@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <name>Amazfish</name>
+  <summary>Smart watch sync app</summary>
+  <id>uk.co.piggz.amazfish</id>
+  <launchable type="desktop-id">harbour-amazfish-ui.desktop</launchable>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <description>
+    <p>
+        Companion application for Huami Devices (such as Amazfit Bip, Cor, MiBand2/3 and GTS and GTS) and the Pinetime Infinitime.
+    </p>
+  </description>
+  <url type="homepage">https://github.com/piggz/harbour-amazfish</url>
+  <url type="bugtracker">https://github.com/piggz/harbour-amazfish/issues</url>
+  <url type="donation">https://paypal.me/piggz</url>
+  <requires>
+    <display_length compare="ge">300</display_length>
+  </requires>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </recommends>
+  <developer id="@piggz@fosstodon.org">
+    <name>Adam Pigg</name>
+  </developer>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot1.png</image>
+      <caption>Main screen with step counter and heart rate</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot2.png</image>
+      <caption>Application settings</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot3.png</image>
+      <caption>Analysis screen</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Sports</category>
+    <category>Utility</category>
+  </categories>
+  <keywords>
+    <keyword>Smartwatch</keyword>
+    <keyword>Bluetooth</keyword>
+    <keyword>Amazfit Bip</keyword>
+    <keyword>Amazfit GTS</keyword>
+    <keyword>Amazfit GTR2</keyword>
+    <keyword>Pinetime InfiniTime</keyword>
+    <keyword>Bangle.js</keyword>
+    <keyword>AsteroidOS</keyword>
+  </keywords>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="2.3.0" timestamp="1718467463">
+      <description>
+        <p>Fix for Sailfish 4.6</p>
+        <p>Infinitime HRM workaround</p>
+        <p>Implement immediate alert service for infinitime</p>
+        <p>Kirigam improvements</p>
+        <p>Dont display battery info twice</p>
+        <p>Battery page title</p>
+        <p>Daemon translations</p>
+        <p>Dont crash if there is no firmware info</p>
+      </description>
+    </release>
+    <release version="2.2.5" timestamp="1714372454">
+      <description>
+        <p>Fix appstream metadata</p>
+      </description>
+    </release>
+    <release version="2.2.5" timestamp="1714300696">
+      <description>
+        <p>Added appdata.xml for improved app metadata. and Implemented category feature for better organization. </p>
+        <p>Included missing pictures into the resource file.</p>
+        <p>Enabled 'Find my phone' feature on Ubuntu Touch.</p>
+        <p>Added essential workout metrics like TotalTimeSeconds, DistanceMeters, AverageHeartRateBpm, and MaximumHeartRateBpm to tcx file.</p>
+        <p>Updated Strava format for better compatibility.</p>
+        <p>Integrated Amazfit Neo initial support. Kudos to @kirbylife</p>
+        <p>Fixed TimePickerDialog to expose hour and minute for proper functioning of alarms.</p>
+      </description>
+    </release>
+    <release version="2.2.5" timestamp="1714300696">
+      <description>
+        <p>Added appdata.xml for improved app metadata. and Implemented category feature for better organization. </p>
+        <p>Included missing pictures into the resource file.</p>
+        <p>Enabled 'Find my phone' feature on Ubuntu Touch.</p>
+        <p>Added essential workout metrics like TotalTimeSeconds, DistanceMeters, AverageHeartRateBpm, and MaximumHeartRateBpm to tcx file.</p>
+        <p>Updated Strava format for better compatibility.</p>
+        <p>Integrated Amazfit Neo initial support. Kudos to @kirbylife</p>
+        <p>Fixed TimePickerDialog to expose hour and minute for proper functioning of alarms.</p>
+      </description>
+    </release>
+    <release version="2.2.4" timestamp="1709471020">
+      <description>
+        <p>Fix schedule display on lift wrist</p>
+        <p>Misc Ubuntu Touch fixes</p>
+        <p>Fix alert icon handling</p>
+        <p>AsteroidOS Screenshot support</p>
+        <p>Fix setting-save bug</p>
+        <p>Thanks to @jmlich and @nephros</p>
+      </description>
+    </release>
+    <release version="2.2.0" timestamp="1704114220">
+      <description>
+        <p>Implement Scheduled Display on Lift Wrist</p>
+        <p>Implement find-my-phone feature</p>
+        <p>Add file download for Amazfit GTR</p>
+        <p>Support watchfaces for GTS2/GTR2</p>
+        <p>Support new weather service on Pinetime</p>
+        <p>Pinetime steps logging</p>
+        <p>Log battery level</p>
+        <p>Support phone calls on Ubuntu Touch (UT)</p>
+        <p>UT UI fixes</p>
+        <p>Weather fixes</p>
+        <p>Fix for messages that contain Emoji chcaracters</p>
+        <p>Thanks to Jozef Mlich for the Pinetime, UBPortsand weather updates</p>
+      </description>
+    </release>
+  </releases>
+</component>

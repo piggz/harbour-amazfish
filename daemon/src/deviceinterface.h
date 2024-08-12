@@ -79,6 +79,7 @@ public:
     Q_INVOKABLE void fetchLogs();
     Q_INVOKABLE void requestScreenshot();
     Q_INVOKABLE QStringList supportedDisplayItems();
+    Q_INVOKABLE void immediateAlert(int level);
 
 private:
     struct WatchNotification

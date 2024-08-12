@@ -51,9 +51,30 @@ void BangleJSDevice::sendAlert(const QString &sender, const QString &subject, co
         return;
     }
 
+    //For mails, there is a double notification which is empty except for sender
+    if(message.isEmpty() && subject.isEmpty())
+    {
+        return;
+    }
+
+    //This should provide a unique identifier and thread safe, which stays in an js int for now
+    class IdentifierGenerator
+    {
+    public :
+        qint64 getNewId() const
+        {
+            static qint64 id = QDateTime::currentMSecsSinceEpoch();
+            QMutexLocker locker(&mutex);
+            return id++;
+        }
+    private:
+        mutable QMutex mutex;
+
+    };
+
     QJsonObject o;
     o.insert("t", "notify");
-    o.insert("id", "");
+    o.insert("id", QString::number(IdentifierGenerator().getNewId())); //id is necessary for some apps like messageui, and should be unique
     o.insert("src", "");
     o.insert("title", "");
     o.insert("subject", subject);
@@ -74,7 +95,7 @@ void BangleJSDevice::incomingCall(const QString &caller)
 
     QJsonObject o;
     o.insert("t", "call");
-    o.insert("cmd", "accept");
+    o.insert("cmd", "incoming");
     o.insert("name", caller);
     o.insert("number", "");
     uart->txJson(o);

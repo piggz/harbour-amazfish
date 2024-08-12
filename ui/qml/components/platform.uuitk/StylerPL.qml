@@ -116,6 +116,10 @@ QtObject {
     property string iconFavoriteSelected: "image://theme/bookmark"                        // "Donate"
 
     property string customIconPrefix: "../../pics/custom-icons/"
+    property string customIconSuffix: ".png"
+
+    property string iconLocation: "image://theme/location"
+    property string iconClock: "image://theme/clock"
 
     // item sizes
     property real themeItemSizeLarge: themeFontSizeLarge * 3

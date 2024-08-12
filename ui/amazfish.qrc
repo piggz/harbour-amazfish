@@ -71,6 +71,7 @@
         <file>qml/pages/Settings-profile.qml</file>
         <file>qml/pages/SleepPage.qml</file>
         <file>qml/pages/SportPage.qml</file>
+        <file>qml/pages/BatteryPage.qml</file>
         <file>qml/pages/SportsSummaryPage.qml</file>
         <file>qml/pages/StravaSettingsPage.qml</file>
         <file>qml/pages/StravaUploadPage.qml</file>
@@ -79,13 +80,17 @@
         <file>qml/pics/devices/amazfit-bip.png</file>
         <file>qml/pics/devices/amazfit-bips.png</file>
         <file>qml/pics/devices/amazfit-cor.png</file>
+        <file>qml/pics/devices/amazfit-gtr2.png</file>
         <file>qml/pics/devices/amazfit-gtr.png</file>
+        <file>qml/pics/devices/amazfit-gts2.png</file>
         <file>qml/pics/devices/amazfit-gts.png</file>
+        <file>qml/pics/devices/amazfit-neo.png</file>
+        <file>qml/pics/devices/asteroidos.png</file>
+        <file>qml/pics/devices/banglejs.png</file>
         <file>qml/pics/devices/miband2.png</file>
         <file>qml/pics/devices/miband3.png</file>
         <file>qml/pics/devices/miband4.png</file>
         <file>qml/pics/devices/pinetime.png</file>
-        <file>qml/pics/devices/banglejs.png</file>
         <file>qml/pics/map_btn_center.png</file>
         <file>qml/pics/map_btn_max.png</file>
         <file>qml/pics/map_btn_min.png</file>
@@ -118,7 +123,6 @@
         <file>qml/harbour-amazfish.qml</file>
         <file>qml/components/TruncationModes.qml</file>
         <file>qml/components/DateNavigation.qml</file>
-        <file>qml/pics/devices/amazfit-gts2.png</file>
-        <file>qml/pics/devices/amazfit-gtr2.png</file>
+        <file>icons/172x172/harbour-amazfish-ui.png</file>
     </qresource>
 </RCC>

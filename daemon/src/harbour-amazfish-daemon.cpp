@@ -26,7 +26,11 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 {
     QByteArray localMsg = msg.toLocal8Bit();
     const char* time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toLocal8Bit();
+#ifdef QT_MESSAGELOGCONTEXT
+    fprintf(stderr,"%s %s:%d: %s\n", time, context.file, context.line, localMsg.constData());
+#else
     fprintf(stderr, "%s : %s\n", time, localMsg.constData());
+#endif
 }
 
 int main(int argc, char **argv)
@@ -35,6 +39,21 @@ int main(int argc, char **argv)
     QCoreApplication app(argc, argv);
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setApplicationName("harbour-amazfish");
+
+    {
+        QString tr_path(TRANSLATION_FOLDER);
+        if ( !tr_path.isEmpty() ) {
+            QString locale = QLocale::system().name();
+            QTranslator *translator = new QTranslator();
+
+            if ( !translator->load(QLocale(), "harbour-amazfishd", "-", tr_path) ) {
+                qWarning() << "Failed to load translation for " << locale << " " << tr_path;
+            }
+
+            app.installTranslator(translator);
+        }
+
+    }
 
     daemonize();
 

@@ -43,6 +43,8 @@ flavor_silica {
                       calendar
 } else:flavor_uuitk {
     DEFINES += UUITK_EDITION
+    LIBS += -lpulse-simple
+    PKGCONFIG += libpulse
     WATCHFISH_FEATURES += music \
                       voicecall \
                       notificationmonitor \
@@ -123,6 +125,8 @@ SOURCES += \
     src/devices/biplitefirmwareinfo.cpp \
     src/devices/gtsdevice.cpp \
     src/devices/gtsfirmwareinfo.cpp \
+    src/devices/neodevice.cpp \
+    src/devices/neofirmwareinfo.cpp \
     src/devices/pinetimejfdevice.cpp \
     src/operations/adafruitblefsoperation.cpp \
     src/operations/adafruitblefsworker.cpp \
@@ -206,6 +210,8 @@ HEADERS += \
     src/devices/biplitefirmwareinfo.h \
     src/devices/gtsdevice.h \
     src/devices/gtsfirmwareinfo.h \
+    src/devices/neodevice.h \
+    src/devices/neofirmwareinfo.h \
     src/devices/pinetimejfdevice.h \
     src/operations/adafruitblefsoperation.h \
     src/operations/adafruitblefsworker.h \
@@ -257,3 +263,30 @@ HEADERS += \
     src/bipactivitydetailparser.h \
     src/transliterator.h \
     src/activitycoordinate.h
+
+TRANSLATIONS += \
+    translations/harbour-amazfishd-cs.ts
+
+flavor_uuitk {
+    DEFINES += TRANSLATION_FOLDER=\\\"/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/translations\\\"
+    translations_files.path = /translations
+} else {
+    DEFINES += TRANSLATION_FOLDER=\\\"$${PREFIX}/share/$${TARGET}/translations\\\"
+    translations_files.path = $${PREFIX}/share/$${TARGET}/translations
+}
+
+qtPrepareTool(LRELEASE, lrelease)
+for(tsfile, TRANSLATIONS) {
+    qmfile = $$shadowed($$tsfile)
+    qmfile ~= s,.ts$,.qm,
+    qmdir = $$dirname(qmfile)
+    !exists($$qmdir) {
+        mkpath($$qmdir)|error("Aborting.")
+    }
+    command = $$LRELEASE -removeidentical $$tsfile -qm $$qmfile
+    system($$command)|error("Failed to run: $$command")
+    TRANSLATIONS_FILES += $$qmfile
+    translations_files.files = $${TRANSLATIONS_FILES}
+}
+
+INSTALLS += translations_files
