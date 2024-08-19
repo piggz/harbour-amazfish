@@ -55,6 +55,12 @@
   </keywords>
   <content_rating type="oars-1.1"/>
   <releases>
+  <release version="2.4.0" timestamp="1724083380">
+    <description>
+      <p>Fix Sports page not displaying routes</p>
+      <p>Add missing mapbox components for Ubuntu Touch</p>
+    </description>
+  </release>
     <release version="2.3.0" timestamp="1718467463">
       <description>
         <p>Fix for Sailfish 4.6</p>
