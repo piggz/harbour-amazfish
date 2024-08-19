@@ -61,10 +61,6 @@
         <source>Intensity</source>
         <translation>Intensita</translation>
     </message>
-    <message>
-        <source>Battery</source>
-        <translation>Baterie</translation>
-    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -239,6 +235,10 @@
     <message>
         <source>Hello, this is an email from Sailfish OS!</source>
         <translation>Ahoj, toto je e-mail ze Sailfish OS!</translation>
+    </message>
+    <message>
+        <source>Test Immediate Alert Service</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -687,6 +687,10 @@
     <message>
         <source>Huami Display Items</source>
         <translation>Zobrazovat položky Huami</translation>
+    </message>
+    <message>
+        <source>Realtime HRM measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
