@@ -92,6 +92,7 @@ DISTFILES += qml/harbour-amazfish.qml \
     qml/pages/PairSelectDeviceType.qml \
     qml/pages/Settings-button-action.qml \
     qml/pages/Settings-huami-shortcuts.qml \
+    qml/pages/SportPage.qml \
     qml/pics/devices/amazfit-bip.png \
     qml/pics/devices/amazfit-cor.png \
     qml/pics/devices/amazfit-gts.png \
