@@ -14,6 +14,7 @@
   <url type="homepage">https://github.com/piggz/harbour-amazfish</url>
   <url type="bugtracker">https://github.com/piggz/harbour-amazfish/issues</url>
   <url type="donation">https://paypal.me/piggz</url>
+  <url type="translate">https://hosted.weblate.org/projects/harbour-amazfish/</url>
   <requires>
     <display_length compare="ge">300</display_length>
   </requires>
