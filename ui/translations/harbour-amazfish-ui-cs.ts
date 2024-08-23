@@ -238,7 +238,7 @@
     </message>
     <message>
         <source>Test Immediate Alert Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Test služby okamžitého upozornění</translation>
     </message>
 </context>
 <context>
@@ -690,7 +690,7 @@
     </message>
     <message>
         <source>Realtime HRM measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Měření tepu v reálném čase</translation>
     </message>
 </context>
 <context>
