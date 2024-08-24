@@ -70,6 +70,7 @@ public:
     Q_INVOKABLE QString information(int i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
+    Q_INVOKABLE void incomingCallEnded();
     Q_INVOKABLE void applyDeviceSetting(int s);
     Q_INVOKABLE void requestManualHeartrate();
     Q_INVOKABLE void triggerSendWeather();
