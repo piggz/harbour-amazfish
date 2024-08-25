@@ -73,7 +73,7 @@
     <name>BatteryPage</name>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batteri</translation>
     </message>
     <message>
         <source>%1 %</source>
@@ -84,23 +84,23 @@
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>Send fil</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished"></translation>
+        <translation>Last ned fil</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg fil å laste ned</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg fil</translation>
     </message>
     <message>
         <source>File type/version: </source>
