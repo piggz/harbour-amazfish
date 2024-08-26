@@ -55,6 +55,17 @@ void AsteroidOSDevice::incomingCall(const QString &caller)
 
 }
 
+void AsteroidOSDevice::incomingCallEnded()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    AsteroidNotificationService *notification = qobject_cast<AsteroidNotificationService*>(service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION));
+    if (notification) {
+        notification->incomingCallEnded();
+    }
+
+}
+
 
 void AsteroidOSDevice::pair()
 {

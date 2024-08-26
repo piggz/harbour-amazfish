@@ -17,6 +17,7 @@ public:
 
     void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     void incomingCall(const QString &caller) override;
+    void incomingCallEnded() override;
 
     void refreshInformation() override;
     QString information(Info i) const override;
