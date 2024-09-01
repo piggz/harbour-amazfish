@@ -73,11 +73,11 @@
     <name>BatteryPage</name>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie</translation>
     </message>
     <message>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -226,19 +226,19 @@
     </message>
     <message>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallo von Sailfish OS. Dies ist eine lange Nachricht, die über BLE gesendet wurde!</translation>
     </message>
     <message>
         <source>Donald Duck</source>
-        <translation type="unfinished"></translation>
+        <translation>Donald Duck</translation>
     </message>
     <message>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallo, dies ist eine E-Mail von Sailfish OS!</translation>
     </message>
     <message>
         <source>Test Immediate Alert Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Testen des Sofortwarndienstes</translation>
     </message>
 </context>
 <context>
@@ -296,7 +296,7 @@
     </message>
     <message>
         <source>Enable on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Booten aktivieren</translation>
     </message>
 </context>
 <context>
@@ -408,7 +408,7 @@
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth-Adapter ist nicht verfügbar</translation>
     </message>
 </context>
 <context>
@@ -524,42 +524,42 @@
     </message>
     <message>
         <source>Simulate event reminder support</source>
-        <translation type="unfinished"></translation>
+        <translation>Simulieren der Unterstützung von Ereigniserinnerungen</translation>
     </message>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasten-Aktionen</translation>
     </message>
     <message>
         <source>Refresh weather every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Wetter alle (%1) Minuten aktualisieren</translation>
     </message>
     <message>
         <source>Refresh calendar every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisieren des Kalenders alle (%1) Minuten</translation>
     </message>
     <message>
         <source>Transliterate notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Transkribieren von Benachrichtigungen</translation>
     </message>
 </context>
 <context>
     <name>Settings-button-action</name>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasten-Aktionen</translation>
     </message>
     <message>
         <source>Double Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktion mit doppelter Pressung</translation>
     </message>
     <message>
         <source>Triple Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Dreifache Druckaktion</translation>
     </message>
     <message>
         <source>Quad Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Quad-Presse-Aktion</translation>
     </message>
     <message>
         <source>Save Settings</source>
@@ -567,27 +567,27 @@
     </message>
     <message>
         <source>No Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Aktion</translation>
     </message>
     <message>
         <source>Next Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Nächster Titel</translation>
     </message>
     <message>
         <source>Previous Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorheriger Track</translation>
     </message>
     <message>
         <source>Volume Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Lautstärke erhöhen</translation>
     </message>
     <message>
         <source>Volume Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Lautstärke verringern</translation>
     </message>
     <message>
         <source>Custom Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefiniertes Skript</translation>
     </message>
 </context>
 <context>
@@ -682,22 +682,22 @@
     </message>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Huami-Ausstellungsstücke</translation>
     </message>
     <message>
         <source>nl_NL</source>
-        <translation type="unfinished"></translation>
+        <translation>nl_NL</translation>
     </message>
     <message>
         <source>Realtime HRM measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>HRM-Messung in Echtzeit</translation>
     </message>
 </context>
 <context>
     <name>Settings-huami-shortcuts</name>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Huami-Ausstellungsstücke</translation>
     </message>
     <message>
         <source>Save Settings</source>
@@ -793,7 +793,7 @@
     </message>
     <message>
         <source>Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitschaltuhr</translation>
     </message>
 </context>
 <context>
@@ -832,7 +832,7 @@
     </message>
     <message>
         <source>Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava</translation>
     </message>
 </context>
 <context>
@@ -919,15 +919,15 @@
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Aus</translation>
     </message>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf</translation>
     </message>
     <message>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitplan</translation>
     </message>
 </context>
 <context>
@@ -951,11 +951,11 @@
     </message>
     <message>
         <source>%1 hrs</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Std</translation>
     </message>
     <message>
         <source>Deep %1 hrs</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiefe %1 Std</translation>
     </message>
 </context>
 <context>
@@ -1034,23 +1034,23 @@
     </message>
     <message>
         <source>Average Stroke</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittlicher Hub</translation>
     </message>
     <message>
         <source>Average Stroke/s</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittlicher Hub/s</translation>
     </message>
     <message>
         <source>Average Lap Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittliche Rundenpace</translation>
     </message>
     <message>
         <source>Strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>Schläge</translation>
     </message>
     <message>
         <source>SWOLF Index</source>
-        <translation type="unfinished"></translation>
+        <translation>SWOLF Index</translation>
     </message>
     <message>
         <source>Swim Style</source>
@@ -1058,31 +1058,31 @@
     </message>
     <message>
         <source>Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>Schöße</translation>
     </message>
     <message>
         <source>Max Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximaler Breitengrad</translation>
     </message>
     <message>
         <source>Min Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Min Breitengrad</translation>
     </message>
     <message>
         <source>Max Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. Längengrad</translation>
     </message>
     <message>
         <source>Min Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. Längengrad</translation>
     </message>
     <message>
         <source>Max Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximale Geschwindigkeit</translation>
     </message>
     <message>
         <source>Total Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamtschritt</translation>
     </message>
     <message>
         <source>steps</source>
@@ -1090,7 +1090,7 @@
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachschlag</translation>
     </message>
     <message>
         <source>kcal</source>
@@ -1098,39 +1098,39 @@
     </message>
     <message>
         <source>meters</source>
-        <translation type="unfinished"></translation>
+        <translation>Meter</translation>
     </message>
     <message>
         <source>seconds/m</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden/m</translation>
     </message>
     <message>
         <source>bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>bpm</translation>
     </message>
     <message>
         <source>seconds/km</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden/km</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>strokes/s</source>
-        <translation type="unfinished"></translation>
+        <translation>Hübe/s</translation>
     </message>
     <message>
         <source>strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>Schläge</translation>
     </message>
     <message>
         <source>swolf</source>
-        <translation type="unfinished"></translation>
+        <translation>Swolf</translation>
     </message>
     <message>
         <source>Send to Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>An Strava senden</translation>
     </message>
 </context>
 <context>
@@ -1145,7 +1145,7 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
 </context>
 <context>
@@ -1159,86 +1159,86 @@
     <name>StravaSettingsPage</name>
     <message>
         <source>Strava settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava-Einstellungen</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Abmeldung</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Login</translation>
     </message>
     <message>
         <source>User Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzername: </translation>
     </message>
     <message>
         <source>Country: </source>
-        <translation type="unfinished"></translation>
+        <translation>Land: </translation>
     </message>
     <message>
         <source>not logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>nicht eingeloggt</translation>
     </message>
 </context>
 <context>
     <name>StravaUploadPage</name>
     <message>
         <source>Strava Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava-Hochladen</translation>
     </message>
     <message>
         <source>Activity name for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Name der Aktivität für Strava</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <source>Activity description for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsbeschreibung für Strava</translation>
     </message>
     <message>
         <source>Type (Strava)</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ (Strava)</translation>
     </message>
     <message>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>Privat</translation>
     </message>
     <message>
         <source>Commute</source>
-        <translation type="unfinished"></translation>
+        <translation>Pendeln</translation>
     </message>
     <message>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochladen</translation>
     </message>
     <message>
         <source>Uploading data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten werden hochgeladen...</translation>
     </message>
     <message>
         <source>Checking upload...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochladen wird überprüft...</translation>
     </message>
     <message>
         <source>TCX uploaded...</source>
-        <translation type="unfinished"></translation>
+        <translation>TCX hochgeladen...</translation>
     </message>
     <message>
         <source>Activity upload complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochladen der Aktivität abgeschlossen</translation>
     </message>
     <message>
         <source>An unknown error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten</translation>
     </message>
 </context>
 <context>
