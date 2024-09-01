@@ -214,15 +214,15 @@
     </message>
     <message>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildschirmfoto anfordern</translation>
     </message>
     <message>
         <source>Somebody</source>
-        <translation type="unfinished"></translation>
+        <translation>Jemand</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
