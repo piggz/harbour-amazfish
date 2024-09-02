@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished">%1 bpm</translation>
+        <translation>%1 bpm</translation>
     </message>
 </context>
 <context>
@@ -563,7 +563,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Einstellungen speichern</translation>
+        <translation>Einstellungen speichern</translation>
     </message>
     <message>
         <source>No Action</source>
