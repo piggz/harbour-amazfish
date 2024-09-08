@@ -265,7 +265,9 @@ HEADERS += \
     src/activitycoordinate.h
 
 TRANSLATIONS += \
-    translations/harbour-amazfishd-cs.ts
+    translations/harbour-amazfishd-cs.ts \
+    translations/harbour-amazfishd-es.ts \
+    translations/harbour-amazfishd-pl.ts
 
 flavor_uuitk {
     DEFINES += TRANSLATION_FOLDER=\\\"/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/translations\\\"
