@@ -162,6 +162,16 @@ PagePL {
             }
         }
         ButtonPL {
+            property int immediateAlertLevel: 2
+            text: qsTr("Test Immediate Alert Service")
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width * 0.8
+            onClicked: {
+                DaemonInterfaceInstance.immediateAlert(immediateAlertLevel);
+                immediateAlertLevel = (immediateAlertLevel + 1) % 2;
+            }
+        }
+        ButtonPL {
             text: qsTr("Fetch debug log")
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8

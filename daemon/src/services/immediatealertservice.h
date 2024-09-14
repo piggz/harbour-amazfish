@@ -16,15 +16,12 @@ public:
     static const char* UUID_CHARACTERISTIC_IMMEDIATE_ALERT_LEVEL;
     enum class Levels : uint8_t { NoAlert = 0, MildAlert = 1, HighAlert = 2 };
 
-    Q_INVOKABLE void refreshInformation();
-
-    int alertLevel() const;
-
-    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
+    Levels alertLevel();
+    void sendAlert(ImmediateAlertService::Levels level);
+    QString levelToString(const ImmediateAlertService::Levels level);
 
 private:
-    int m_alertLevel;
-    Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
+    Levels m_alertLevel;
 };
 
 #endif // IMMEDIATE_ALERT_SERVICE_H

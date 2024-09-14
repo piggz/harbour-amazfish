@@ -43,8 +43,11 @@ libraries:
     src_dir: 3rdparty/maplibre-gl-native
     prebuild:
     - mkdir -p ${ROOT}/3rdparty
-    - git -C ${SRC_DIR} pull || git clone -b qt-v2.0.1 --recursive --shallow-submodules --depth 1 https://github.com/maplibre/maplibre-gl-native.git ${SRC_DIR}
-    - git apply --directory ${SRC_DIR} ${ROOT}/click/fix-compilation-with-clickable.patch || /bin/true
+    - rm -rf ${ROOT}/3rdparty/maplibre-gl-native
+    - git clone -b qt-v2.0.1 --recursive --shallow-submodules --depth 1 https://github.com/maplibre/maplibre-gl-native.git ${SRC_DIR}
+    - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/disable-armhf-version-check.patch
+    - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/enable-clang-cross-compiling.patch
+    - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/fix-compilation-with-clickable.patch
     builder: cmake
     build_args:
     - -DMBGL_WITH_QT=ON
@@ -57,7 +60,8 @@ libraries:
     src_dir: 3rdparty/mapbox-gl-qml
     prebuild:
     - mkdir -p ${ROOT}/3rdparty
-    - git -C ${SRC_DIR} pull || git clone -b 2.1.1 --recursive --shallow-submodules --depth 1 https://github.com/rinigus/mapbox-gl-qml.git ${SRC_DIR}
+    - rm -rf ${ROOT}/3rdparty/mapbox-gl-qml
+    - git clone -b 2.1.1 --recursive --shallow-submodules --depth 1  https://github.com/rinigus/mapbox-gl-qml.git ${SRC_DIR}
     builder: cmake
     build_args:
     - -DCMAKE_CXX_STANDARD=14

@@ -60,7 +60,8 @@ public:
         SETTING_DEVICE_DATE,
         SETTING_DEVICE_TIME,
         SETTING_DEVICE_UNIT,
-        SETTING_DISCONNECT_NOTIFICATION
+        SETTING_DISCONNECT_NOTIFICATION,
+        SETTING_DEVICE_REALTIME_HRM_MEASUREMENT
     };
     Q_ENUM(Settings)
 
@@ -113,6 +114,7 @@ public:
     virtual void rebootWatch();
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) = 0;
     virtual void incomingCall(const QString &caller) = 0;
+    virtual void incomingCallEnded() = 0;
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);
     virtual void enableFeature(AbstractDevice::Feature feature);
     virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0);
@@ -120,6 +122,7 @@ public:
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress);
     virtual void requestScreenshot();
     virtual QStringList supportedDisplayItems() const;
+    virtual void immediateAlert(int level);
 
     //signals    
     Q_SIGNAL void message(const QString &text);

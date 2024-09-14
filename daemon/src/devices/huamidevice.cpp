@@ -1,6 +1,8 @@
 #include "huamidevice.h"
 #include "bipfirmwareinfo.h"
 #include "updatefirmwareoperation.h"
+#include "immediatealertservice.h"
+#include "amazfishconfig.h"
 
 #include <QtXml/QtXml>
 
@@ -165,6 +167,15 @@ void HuamiDevice::incomingCall(const QString &caller)
     }
 }
 
+void HuamiDevice::incomingCallEnded()
+{
+    ImmediateAlertService *ias = qobject_cast<ImmediateAlertService*>(service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT));
+    if (ias) {
+        ias->sendAlert(ImmediateAlertService::Levels::NoAlert);
+    }
+}
+
+
 void HuamiDevice::navigationRunning(bool running)
 {
     QString msg;
@@ -304,6 +315,9 @@ void HuamiDevice::applyDeviceSetting(Settings s)
         break;
     case SETTING_DISCONNECT_NOTIFICATION:
         mi->setDisconnectNotification();
+        break;
+    case SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
+        hrm->enableRealtimeHRMeasurement(AmazfishConfig::instance()->deviceRealtimeHRMMeasurement());
         break;
     }
 }

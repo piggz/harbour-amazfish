@@ -61,10 +61,6 @@
         <source>Intensity</source>
         <translation>Intensita</translation>
     </message>
-    <message>
-        <source>Battery</source>
-        <translation>Baterie</translation>
-    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -96,7 +92,7 @@
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Vybrat soubor k stažení</translation>
+        <translation>Vybrat soubor ke stažení.</translation>
     </message>
     <message>
         <source>None</source>
@@ -240,6 +236,10 @@
         <source>Hello, this is an email from Sailfish OS!</source>
         <translation>Ahoj, toto je e-mail ze Sailfish OS!</translation>
     </message>
+    <message>
+        <source>Test Immediate Alert Service</source>
+        <translation>Test služby okamžitého upozornění</translation>
+    </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>
@@ -334,11 +334,11 @@
     </message>
     <message>
         <source>Aerobic</source>
-        <translation>Aerobic</translation>
+        <translation>Aerobní</translation>
     </message>
     <message>
         <source>Anerobic</source>
-        <translation>Anerobic</translation>
+        <translation>Anaerobní</translation>
     </message>
     <message>
         <source>VO2 Max</source>
@@ -377,7 +377,7 @@
     </message>
     <message>
         <source>Duration</source>
-        <translation>Doba</translation>
+        <translation>Doba trvání</translation>
     </message>
 </context>
 <context>
@@ -400,11 +400,11 @@
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation>Hledání zařízení...</translation>
+        <translation>Hledání zařízení…</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation>Párování...</translation>
+        <translation>Párování…</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
@@ -688,6 +688,10 @@
         <source>Huami Display Items</source>
         <translation>Zobrazovat položky Huami</translation>
     </message>
+    <message>
+        <source>Realtime HRM measurement</source>
+        <translation>Měření tepu v reálném čase</translation>
+    </message>
 </context>
 <context>
     <name>Settings-huami-shortcuts</name>
@@ -828,7 +832,7 @@
     </message>
     <message>
         <source>Debug Info</source>
-        <translation>Ladění</translation>
+        <translation>Ladící informace</translation>
     </message>
 </context>
 <context>
@@ -879,7 +883,7 @@
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation>Cíl (kroků):  </translation>
+        <translation>Cíl (kroků): </translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
@@ -887,11 +891,11 @@
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation>Upozornit na dosažení denního cíle </translation>
+        <translation>Upozornit na dosažení denního cíle</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation>Interval pro celodenní měření pulsu</translation>
+        <translation>Interval pro celodenní měření pulsu: </translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
@@ -1062,19 +1066,19 @@
     </message>
     <message>
         <source>Max Latitude</source>
-        <translation>Max z. š.</translation>
+        <translation>Max zem. šíř.</translation>
     </message>
     <message>
         <source>Min Latitude</source>
-        <translation>Min z. š.</translation>
+        <translation>Min zem. šíř.</translation>
     </message>
     <message>
         <source>Max Longitude</source>
-        <translation>Max z.d.</translation>
+        <translation>Max zem. délka</translation>
     </message>
     <message>
         <source>Min Longitude</source>
-        <translation>Min z.d.</translation>
+        <translation>Min zem. délka</translation>
     </message>
     <message>
         <source>Max Speed</source>

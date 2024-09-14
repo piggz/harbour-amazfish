@@ -17,6 +17,7 @@ public:
 
     void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     void incomingCall(const QString &caller) override;
+    void incomingCallEnded() override;
 
     void refreshInformation() override;
     QString information(Info i) const override;
@@ -35,6 +36,9 @@ public:
 
     //Weather
     void sendWeather(CurrentWeather *weather) override;
+
+    virtual void applyDeviceSetting(Settings s);
+    virtual void immediateAlert(int level) override;
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);

@@ -61,10 +61,6 @@
         <source>Intensity</source>
         <translation>Intensitet</translation>
     </message>
-    <message>
-        <source>Battery</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -218,6 +214,30 @@
     </message>
     <message>
         <source>Request Screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Somebody</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Donald Duck</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hello, this is an email from Sailfish OS!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Immediate Alert Service</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -667,6 +687,10 @@
     <message>
         <source>nl_NL</source>
         <translation>nl_NL</translation>
+    </message>
+    <message>
+        <source>Realtime HRM measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
