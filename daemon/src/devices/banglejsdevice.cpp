@@ -101,6 +101,24 @@ void BangleJSDevice::incomingCall(const QString &caller)
     uart->txJson(o);
 }
 
+void BangleJSDevice::incomingCallEnded()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+
+    QJsonObject o;
+    o.insert("t", "call");
+    o.insert("cmd", "end");
+    o.insert("name", "");
+    o.insert("number", "");
+    uart->txJson(o);
+}
+
+
 void BangleJSDevice::parseServices()
 {
     qDebug() << Q_FUNC_INFO;

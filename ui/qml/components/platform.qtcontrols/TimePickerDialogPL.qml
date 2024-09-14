@@ -45,7 +45,7 @@ DialogPL {
                 maximumLength: 2
                 validator: IntValidator { bottom: 0;  top: 23 }
                 Keys.onReturnPressed: gM.focus = true
-                onTextChanged: hours = parseInt(text)
+                onTextChanged: hour = parseInt(text)
             }
 
             LabelPL {
@@ -70,8 +70,9 @@ DialogPL {
             hour = time.getHours();
             minute = time.getMinutes();
         }
-        gH.text = ("00" + hour).substr(-2);
-        gM.text = ("00" + minute).substr(-2);
+        // NaN value is converted to -2147483648
+        gH.text = (hour >= 0) ? ("00" + hour).substr(-2) : "00";
+        gM.text = (minute >= 0) ? ("00" + minute).substr(-2) : "00";
         gH.forceActiveFocus();
     }
 

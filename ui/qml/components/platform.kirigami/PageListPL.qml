@@ -50,7 +50,9 @@ Kirigami.ScrollablePage {
             enabled: page.canNavigateForward === true
             icon.name: page.acceptIconName
             visible: !page.hideAcceptButton && (page.isDialog || app.pages.hasAttached(page))
-            text: app.tr("Accept")
+            text: "" + (page.isDialog || app.pages.nextPage() == undefined
+                        ? app.tr("Accept")
+                        : app.pages.nextPage().title)
             onTriggered: {
                 if (acceptCallback) acceptCallback();
                 else app.pages.navigateForward();

@@ -108,6 +108,12 @@ void PinetimeJFDevice::incomingCall(const QString &caller)
     }
 }
 
+void PinetimeJFDevice::incomingCallEnded()
+{
+    qDebug() << Q_FUNC_INFO << "not available";
+}
+
+
 void PinetimeJFDevice::parseServices()
 {
     qDebug() << Q_FUNC_INFO;
@@ -222,6 +228,8 @@ void PinetimeJFDevice::initialise()
 
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     if (hrm) {
+        hrm->enableRealtimeHRMeasurement(AmazfishConfig::instance()->deviceRealtimeHRMMeasurement());
+
         connect(hrm, &HRMService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
         connect(hrm, &HRMService::informationChanged, &realtimeActivitySample, &RealtimeActivitySample::slot_informationChanged, Qt::UniqueConnection);
     }
@@ -510,6 +518,20 @@ void PinetimeJFDevice::sendWeather(CurrentWeather *weather)
     if (sw){
         sw->sendWeather(weather);
     }
+}
+
+void PinetimeJFDevice::applyDeviceSetting(Settings s)
+{
+
+    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
+    switch(s) {
+        case SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
+            if (hrm) {
+                hrm->enableRealtimeHRMeasurement(AmazfishConfig::instance()->deviceRealtimeHRMMeasurement());
+            }
+            break;
+    }
+
 }
 
 void PinetimeJFDevice::immediateAlert(int level)

@@ -563,7 +563,7 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
         }
     }
 
-    //qDebug()<<"Segments found: "<<QString::number(iSegments);
+    qDebug()<<"Segments found: "<<QString::number(iSegments);
 
     if(m_points.size() > 1)
     {
@@ -844,6 +844,8 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
                                                 xml.skipCurrentElement();
                                             }
                                         }
+                                    } else {
+                                        xml.skipCurrentElement();
                                     }
                                 }
                             } else if (xml.name() == "Id") {

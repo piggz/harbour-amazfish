@@ -33,7 +33,7 @@ import "."
 Item {
     id: root
     height: item.height
-    width: parent.width
+    width: parent !== null ? parent.width : undefined
 
     default property alias content: itemData.data
     property real  contentHeight

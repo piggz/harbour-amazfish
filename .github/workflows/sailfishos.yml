@@ -3,11 +3,12 @@ name: SailfishOS Build
 on: [push, pull_request]
 
 env:
-  OS_VERSION: 4.5.0.16
+  OS_VERSION: 4.6.0.13
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    continue-on-error: true
     name: Build App
     strategy:
       matrix:
@@ -25,7 +26,7 @@ jobs:
             mkdir -p build ;
             cd build ;
             cp -r /share/* . ;
-            sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive ar --no-gpgcheck http://repo.merproject.org/obs/home:/piggz:/kf5/sailfish_latest_${{ matrix.arch }}/ piggz ;
+            sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive ar --no-gpgcheck https://repo.sailfishos.org/obs/sailfishos:/chum/4.6_${{ matrix.arch }}/ sailfishos_chum ;
             sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive refresh ;
             sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive in -y mpris-qt5-devel libkf5archive-devel kcoreaddons-devel kdb-devel libKDb3-3 mkcal-qt5-devel libicu-devel pulseaudio-devel;
             mb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} build ;
