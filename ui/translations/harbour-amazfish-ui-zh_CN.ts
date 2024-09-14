@@ -74,11 +74,6 @@
         <source>Intensity</source>
         <translation>强度</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="92"/>
-        <source>Battery</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -173,37 +168,37 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="41"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="226"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="236"/>
         <source>Serial No: </source>
         <translation>序列号:</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="46"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="229"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="239"/>
         <source>Hardware Rev: </source>
         <translation>硬件版本:</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="51"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="232"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="242"/>
         <source>Software Rev: </source>
         <translation>软件版本:</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="56"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="238"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="248"/>
         <source>Model: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="61"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="244"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="254"/>
         <source>Firmware Rev: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="241"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="251"/>
         <source>Manufacturer: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -214,7 +209,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="75"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="235"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="245"/>
         <source>GPS Ver: </source>
         <translation>GPS 版本:</translation>
     </message>
@@ -234,12 +229,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="173"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="144"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="161"/>
+        <source>Somebody</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="144"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="144"/>
+        <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="153"/>
+        <source>Donald Duck</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="153"/>
+        <source>Hello, this is an email from Sailfish OS!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="166"/>
+        <source>Test Immediate Alert Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="183"/>
         <source>Request Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="213"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="223"/>
         <source>Music Control</source>
         <translation type="unfinished"></translation>
     </message>
@@ -259,22 +285,22 @@
         <translation>测试拨号</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="165"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="175"/>
         <source>Fetch debug log</source>
         <translation>获取测试日志</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="182"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="192"/>
         <source>Test Popup</source>
         <translation>测试弹出</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="190"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Send Weather</source>
         <translation>发送天气</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="200"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="210"/>
         <source>Update Calendar</source>
         <translation>更新日历</translation>
     </message>
@@ -808,7 +834,12 @@
         <translation>12小时制</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="95"/>
+        <location filename="../qml/pages/Settings-device.qml" line="96"/>
+        <source>Realtime HRM measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-device.qml" line="104"/>
         <source>Huami Display Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -838,7 +869,7 @@
         <translation>断开连接通知</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="106"/>
+        <location filename="../qml/pages/Settings-device.qml" line="115"/>
         <source>Save Settings</source>
         <translation>保存设置</translation>
     </message>

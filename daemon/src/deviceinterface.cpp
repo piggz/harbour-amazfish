@@ -201,7 +201,7 @@ void DeviceInterface::onRingingChanged()
         }
 
     } else {
-        m_device->immediateAlert(0);
+        m_device->incomingCallEnded();
     }
 #endif
 }
@@ -877,6 +877,12 @@ void DeviceInterface::incomingCall(const QString &caller)
         } else {
             m_device->incomingCall(caller);
         }
+    }
+}
+
+void DeviceInterface::incomingCallEnded() {
+    if (m_device) {
+        m_device->incomingCallEnded();
     }
 }
 

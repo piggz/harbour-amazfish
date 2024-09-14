@@ -114,6 +114,7 @@ public:
     virtual void rebootWatch();
     virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) = 0;
     virtual void incomingCall(const QString &caller) = 0;
+    virtual void incomingCallEnded() = 0;
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);
     virtual void enableFeature(AbstractDevice::Feature feature);
     virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0);

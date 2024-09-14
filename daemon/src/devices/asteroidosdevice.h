@@ -10,13 +10,14 @@ class AsteroidOSDevice : public AbstractDevice
 public:
     explicit AsteroidOSDevice(const QString &pairedName, QObject *parent = nullptr);
 
-    int supportedFeatures() const override;
-    QString deviceType() const override;
-    void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
-    void incomingCall(const QString &caller) override;
-    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
-    void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0) override;
-    void requestScreenshot() override;
+    virtual int supportedFeatures() const override;
+    virtual QString deviceType() const override;
+    virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
+    virtual void incomingCall(const QString &caller) override;
+    virtual void incomingCallEnded() override;
+    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0) override;
+    virtual void requestScreenshot() override;
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);

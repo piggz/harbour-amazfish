@@ -108,6 +108,12 @@ void PinetimeJFDevice::incomingCall(const QString &caller)
     }
 }
 
+void PinetimeJFDevice::incomingCallEnded()
+{
+    qDebug() << Q_FUNC_INFO << "not available";
+}
+
+
 void PinetimeJFDevice::parseServices()
 {
     qDebug() << Q_FUNC_INFO;

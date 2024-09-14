@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="nb_NO">
 <context>
     <name>AddCityPage</name>
     <message>
@@ -73,7 +73,7 @@
     <name>BatteryPage</name>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batteri</translation>
     </message>
     <message>
         <source>%1 %</source>
@@ -84,27 +84,27 @@
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>Send fil</translation>
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished"></translation>
+        <translation>Last ned fil</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg fil å laste ned</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg fil</translation>
     </message>
     <message>
         <source>File type/version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Filtype/versjon: </translation>
     </message>
     <message>
         <source>File not supported on this device</source>
@@ -126,11 +126,11 @@
     </message>
     <message>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>Serienr: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
@@ -142,11 +142,11 @@
     </message>
     <message>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tilkoblingsstatus: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>GPS-ver: </translation>
     </message>
     <message>
         <source>Test Notification</source>
@@ -174,15 +174,15 @@
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>Modell: </translation>
     </message>
     <message>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fastvare-rev: </translation>
     </message>
     <message>
         <source>Manufacturer: </source>
@@ -202,23 +202,23 @@
     </message>
     <message>
         <source>Send Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Send værdata</translation>
     </message>
     <message>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater kalender</translation>
     </message>
     <message>
         <source>Music Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Musikk-kontroll</translation>
     </message>
     <message>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Forespør skjermavbildning</translation>
     </message>
     <message>
         <source>Somebody</source>
-        <translation type="unfinished"></translation>
+        <translation>Noen</translation>
     </message>
     <message>
         <source>Title</source>
@@ -245,7 +245,7 @@
     <name>DownloadDataMenuItem</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Last ned data</translation>
     </message>
 </context>
 <context>
@@ -256,19 +256,19 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation type="unfinished"></translation>
+        <translation>Last ned fil</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Innstillinger</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Koble fra klokke</translation>
     </message>
     <message>
         <source>Connect to watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Koble til klokke</translation>
     </message>
     <message>
         <source>Data Graphs</source>
@@ -276,11 +276,11 @@
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Skritt</translation>
     </message>
     <message>
         <source>Heartrate</source>
@@ -292,7 +292,7 @@
     </message>
     <message>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjeneste</translation>
     </message>
     <message>
         <source>Enable on boot</source>
@@ -303,7 +303,7 @@
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen data</translation>
     </message>
 </context>
 <context>
@@ -349,7 +349,7 @@
     <name>JSTools</name>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Tom</translation>
     </message>
     <message>
         <source>Heartrate</source>
@@ -361,15 +361,15 @@
     </message>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Hastighet</translation>
     </message>
     <message>
         <source>Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyde</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Avstand</translation>
     </message>
     <message>
         <source>Pause</source>
@@ -377,7 +377,7 @@
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Varighet</translation>
     </message>
 </context>
 <context>
@@ -441,27 +441,27 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre innstillinger</translation>
     </message>
     <message>
         <source>Alarm 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm 1</translation>
     </message>
     <message>
         <source>Alarm 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm 2</translation>
     </message>
     <message>
         <source>Alarm 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm 3</translation>
     </message>
     <message>
         <source>Alarm 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm 4</translation>
     </message>
     <message>
         <source>Alarm 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm 5</translation>
     </message>
 </context>
 <context>
@@ -472,7 +472,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre innstillinger</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
@@ -480,7 +480,7 @@
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Programinnstillinger</translation>
     </message>
     <message>
         <source>BT Adapter</source>
@@ -488,7 +488,7 @@
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Merknader</translation>
     </message>
     <message>
         <source>Low battery notification</source>
@@ -528,15 +528,15 @@
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stopp</translation>
     </message>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Knappehandlinger</translation>
     </message>
     <message>
         <source>Transliterate notifications</source>
@@ -571,30 +571,30 @@
     </message>
     <message>
         <source>Next Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Neste spor</translation>
     </message>
     <message>
         <source>Previous Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Forrige spor</translation>
     </message>
     <message>
         <source>Volume Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Øk lydstyrke</translation>
     </message>
     <message>
         <source>Volume Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Senk lydstyrke</translation>
     </message>
     <message>
         <source>Custom Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Egendefinert skript</translation>
     </message>
 </context>
 <context>
     <name>Settings-device</name>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Enhetsinnstillinger</translation>
     </message>
     <message>
         <source>en_US</source>
@@ -618,15 +618,15 @@
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tid</translation>
     </message>
     <message>
         <source>Date/Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Dato/tid</translation>
     </message>
     <message>
         <source>Time Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidsformat</translation>
     </message>
     <message>
         <source>12hr</source>
@@ -638,7 +638,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre innstillinger</translation>
     </message>
     <message>
         <source>Distance Unit</source>
@@ -658,7 +658,7 @@
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Språk</translation>
     </message>
     <message>
         <source>de_DE</source>
@@ -701,11 +701,11 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre innstillinger</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Heartrate</source>
@@ -717,15 +717,15 @@
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Vær</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Merknader</translation>
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Mer</translation>
     </message>
     <message>
         <source>Do Not Disturb</source>
@@ -733,15 +733,15 @@
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmer</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Musikk</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tid</translation>
     </message>
     <message>
         <source>Mute Phone</source>
@@ -749,15 +749,15 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Innstillinger</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitet</translation>
     </message>
     <message>
         <source>Event Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Begivenhetspåminnelse</translation>
     </message>
     <message>
         <source>PAI</source>
@@ -793,57 +793,57 @@
     </message>
     <message>
         <source>Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidsur</translation>
     </message>
 </context>
 <context>
     <name>Settings-menu</name>
     <message>
         <source>Settings Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Innstillingsmeny</translation>
     </message>
     <message>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Brukerinnstillinger</translation>
     </message>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Enhetsinnstillinger</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Programinnstillinger</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmer</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Doner</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Vær</translation>
     </message>
     <message>
         <source>Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava</translation>
     </message>
     <message>
         <source>Debug Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Avlusningsinfo</translation>
     </message>
 </context>
 <context>
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Profilinnstillinger</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn:</translation>
     </message>
     <message>
         <source>Birthday</source>
@@ -851,23 +851,23 @@
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Kjønn</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Mann</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvinne</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>Høyde (cm): </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>Vekt (kg): </translation>
     </message>
     <message>
         <source>Wear Location</source>
@@ -903,7 +903,7 @@
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre profil</translation>
     </message>
     <message>
         <source>Personal data</source>
@@ -919,11 +919,11 @@
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Av</translation>
     </message>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>På</translation>
     </message>
     <message>
         <source>Schedule</source>
@@ -955,22 +955,22 @@
     </message>
     <message>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Timer</translation>
     </message>
 </context>
 <context>
     <name>SportPage</name>
     <message>
         <source>Send to Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Send til Strava</translation>
     </message>
     <message>
         <source>Data:</source>
-        <translation type="unfinished"></translation>
+        <translation>Data:</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Skritt</translation>
     </message>
     <message>
         <source>Active Seconds</source>
@@ -978,27 +978,27 @@
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalorier</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Avstand</translation>
     </message>
     <message>
         <source>Ascent</source>
-        <translation type="unfinished"></translation>
+        <translation>Stigning</translation>
     </message>
     <message>
         <source>Descent</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedstigning</translation>
     </message>
     <message>
         <source>Max Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks. høyde</translation>
     </message>
     <message>
         <source>Min Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. høyde</translation>
     </message>
     <message>
         <source>Min Pace</source>
@@ -1062,7 +1062,7 @@
     </message>
     <message>
         <source>Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>Runder</translation>
     </message>
     <message>
         <source>Max Latitude</source>
@@ -1094,7 +1094,7 @@
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>sekunder</translation>
     </message>
     <message>
         <source>kcal</source>
@@ -1102,7 +1102,7 @@
     </message>
     <message>
         <source>meters</source>
-        <translation type="unfinished"></translation>
+        <translation>meter</translation>
     </message>
     <message>
         <source>seconds/m</source>
@@ -1145,29 +1145,29 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern</translation>
     </message>
 </context>
 <context>
     <name>StepsPage</name>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Skritt</translation>
     </message>
 </context>
 <context>
     <name>StravaSettingsPage</name>
     <message>
         <source>Strava settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava-innstillinger</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Logg ut</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Logg inn</translation>
     </message>
     <message>
         <source>User Name: </source>
@@ -1175,18 +1175,18 @@
     </message>
     <message>
         <source>Country: </source>
-        <translation type="unfinished"></translation>
+        <translation>Land: </translation>
     </message>
     <message>
         <source>not logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>ikke innlogget</translation>
     </message>
 </context>
 <context>
     <name>StravaUploadPage</name>
     <message>
         <source>Strava Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava-opplastning</translation>
     </message>
     <message>
         <source>Activity name for Strava</source>
@@ -1194,11 +1194,11 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Beskrivelse</translation>
     </message>
     <message>
         <source>Activity description for Strava</source>
@@ -1206,11 +1206,11 @@
     </message>
     <message>
         <source>Type (Strava)</source>
-        <translation type="unfinished"></translation>
+        <translation>Type (Strava)</translation>
     </message>
     <message>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>Privat</translation>
     </message>
     <message>
         <source>Commute</source>
@@ -1218,11 +1218,11 @@
     </message>
     <message>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Last opp</translation>
     </message>
     <message>
         <source>Uploading data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laster opp data …</translation>
     </message>
     <message>
         <source>Checking upload...</source>
@@ -1238,7 +1238,7 @@
     </message>
     <message>
         <source>An unknown error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ukjent feil</translation>
     </message>
 </context>
 <context>

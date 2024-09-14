@@ -61,10 +61,6 @@
         <source>Intensity</source>
         <translation>Intensidad</translation>
     </message>
-    <message>
-        <source>Battery</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -77,11 +73,11 @@
     <name>BatteryPage</name>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batería</translation>
     </message>
     <message>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -218,7 +214,31 @@
     </message>
     <message>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Solicitar captura de pantalla</translation>
+    </message>
+    <message>
+        <source>Somebody</source>
+        <translation>Alguien</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>Título</translation>
+    </message>
+    <message>
+        <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
+        <translation>Hola desde Sailfish OS. ¡Este es un mensaje largo enviado a través de BLE!</translation>
+    </message>
+    <message>
+        <source>Donald Duck</source>
+        <translation>Pato Donald</translation>
+    </message>
+    <message>
+        <source>Hello, this is an email from Sailfish OS!</source>
+        <translation>¡Hola, este es un correo electrónico de Sailfish OS!</translation>
+    </message>
+    <message>
+        <source>Test Immediate Alert Service</source>
+        <translation>Probar el servicio de alerta inmediata</translation>
     </message>
 </context>
 <context>
@@ -256,7 +276,7 @@
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation>%1 bpm</translation>
+        <translation>%1 lpm</translation>
     </message>
     <message>
         <source>Data Graphs</source>
@@ -276,7 +296,7 @@
     </message>
     <message>
         <source>Enable on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar al arrancar</translation>
     </message>
 </context>
 <context>
@@ -322,7 +342,7 @@
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished">%1 bpm</translation>
+        <translation>%1 lpm</translation>
     </message>
 </context>
 <context>
@@ -376,11 +396,11 @@
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation>Buscando dispositivos...</translation>
+        <translation>Buscando dispositivos..…</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation>Vinculando...</translation>
+        <translation>Vinculando…</translation>
     </message>
     <message>
         <source>No devices found</source>
@@ -388,7 +408,7 @@
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>El adaptador Bluetooth no está disponible</translation>
     </message>
 </context>
 <context>
@@ -421,7 +441,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Guardar</translation>
+        <translation>Guardar la configuración</translation>
     </message>
     <message>
         <source>Alarm 1</source>
@@ -452,7 +472,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Guardar</translation>
+        <translation>Guardar la configuración</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
@@ -504,70 +524,70 @@
     </message>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Acciones de los botones</translation>
     </message>
     <message>
         <source>Simulate event reminder support</source>
-        <translation type="unfinished"></translation>
+        <translation>Simulación de recordatorio de eventos</translation>
     </message>
     <message>
         <source>Refresh weather every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar el tiempo cada (%1) minutos</translation>
     </message>
     <message>
         <source>Refresh calendar every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar el calendario cada (%1) minutos</translation>
     </message>
     <message>
         <source>Transliterate notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Transliterar notificaciones</translation>
     </message>
 </context>
 <context>
     <name>Settings-button-action</name>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Acciones de los botones</translation>
     </message>
     <message>
         <source>Double Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Acción de doble pulsación</translation>
     </message>
     <message>
         <source>Triple Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Presionar tres veces</translation>
     </message>
     <message>
         <source>Quad Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Presionar cuatro veces</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Guardar</translation>
+        <translation>Guardar la configuración</translation>
     </message>
     <message>
         <source>No Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguna acción</translation>
     </message>
     <message>
         <source>Next Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Pista siguiente</translation>
     </message>
     <message>
         <source>Previous Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Pista anterior</translation>
     </message>
     <message>
         <source>Volume Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Subir volumen</translation>
     </message>
     <message>
         <source>Volume Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Bajar volumen</translation>
     </message>
     <message>
         <source>Custom Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Script personalizado</translation>
     </message>
 </context>
 <context>
@@ -598,11 +618,11 @@
     </message>
     <message>
         <source>Time</source>
-        <translation>Tiempo</translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>Date/Time</source>
-        <translation>Datos/Tiempo</translation>
+        <translation>Fecha/Hora</translation>
     </message>
     <message>
         <source>Time Format</source>
@@ -618,7 +638,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation>Guardar</translation>
+        <translation>Guardar la configuración</translation>
     </message>
     <message>
         <source>Distance Unit</source>
@@ -662,114 +682,118 @@
     </message>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Artículos de exposición Huami</translation>
     </message>
     <message>
         <source>nl_NL</source>
-        <translation type="unfinished"></translation>
+        <translation>nl_NL</translation>
+    </message>
+    <message>
+        <source>Realtime HRM measurement</source>
+        <translation>Medición de frecuencia cardíaca en tiempo real</translation>
     </message>
 </context>
 <context>
     <name>Settings-huami-shortcuts</name>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Artículos de exposición Huami</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished">Guardar</translation>
+        <translation>Guardar la configuración</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">Estado</translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished">Frecuencia cardiaca</translation>
+        <translation>Frecuencia cardiaca</translation>
     </message>
     <message>
         <source>Workout</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrenamientos</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished">Tiempo</translation>
+        <translation>Tiempo</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished">Notificaciones</translation>
+        <translation>Notificaciones</translation>
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Más</translation>
     </message>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>No molestar</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished">Alarmas</translation>
+        <translation>Alarmas</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Música</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished">Tiempo</translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>Mute Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Silenciar teléfono</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Ajustes</translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished">Actividad</translation>
+        <translation>Actividad</translation>
     </message>
     <message>
         <source>Event Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Recordatorio de eventos</translation>
     </message>
     <message>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <source>World Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Reloj mundial</translation>
     </message>
     <message>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation>Estrés</translation>
     </message>
     <message>
         <source>Period</source>
-        <translation type="unfinished"></translation>
+        <translation>Período</translation>
     </message>
     <message>
         <source>SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SPO2</translation>
     </message>
     <message>
         <source>Alexa</source>
-        <translation type="unfinished"></translation>
+        <translation>Alexa</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation type="unfinished">Brújula</translation>
+        <translation>Brújula</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation type="unfinished">Alipay</translation>
+        <translation>Alipay</translation>
     </message>
     <message>
         <source>Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Cronómetro</translation>
     </message>
 </context>
 <context>
@@ -808,7 +832,7 @@
     </message>
     <message>
         <source>Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava</translation>
     </message>
 </context>
 <context>
@@ -879,7 +903,7 @@
     </message>
     <message>
         <source>Save Profile</source>
-        <translation>Guardar</translation>
+        <translation>Guardar perfil</translation>
     </message>
     <message>
         <source>Personal data</source>
@@ -895,15 +919,15 @@
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>Encender</translation>
     </message>
     <message>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>Horario</translation>
     </message>
 </context>
 <context>
@@ -927,11 +951,11 @@
     </message>
     <message>
         <source>%1 hrs</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 hrs.</translation>
     </message>
     <message>
         <source>Deep %1 hrs</source>
-        <translation type="unfinished"></translation>
+        <translation>Profundo %1 hrs</translation>
     </message>
 </context>
 <context>
@@ -1082,7 +1106,7 @@
     </message>
     <message>
         <source>bpm</source>
-        <translation>bpm</translation>
+        <translation>lpm</translation>
     </message>
     <message>
         <source>seconds/km</source>
@@ -1106,7 +1130,7 @@
     </message>
     <message>
         <source>Send to Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar a Strava</translation>
     </message>
 </context>
 <context>
@@ -1121,7 +1145,7 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitar</translation>
     </message>
 </context>
 <context>
@@ -1135,86 +1159,86 @@
     <name>StravaSettingsPage</name>
     <message>
         <source>Strava settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes de Strava</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar sesión</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar sesión</translation>
     </message>
     <message>
         <source>User Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de usuario: </translation>
     </message>
     <message>
         <source>Country: </source>
-        <translation type="unfinished"></translation>
+        <translation>País: </translation>
     </message>
     <message>
         <source>not logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>no conectado</translation>
     </message>
 </context>
 <context>
     <name>StravaUploadPage</name>
     <message>
         <source>Strava Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Subir a Strava</translation>
     </message>
     <message>
         <source>Activity name for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de la actividad para Strava</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <source>Activity description for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción de la actividad para Strava</translation>
     </message>
     <message>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>Privado</translation>
     </message>
     <message>
         <source>Commute</source>
-        <translation type="unfinished"></translation>
+        <translation>Desplazamientos</translation>
     </message>
     <message>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar</translation>
     </message>
     <message>
         <source>Uploading data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando datos...</translation>
     </message>
     <message>
         <source>Checking upload...</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprobando la carga...</translation>
     </message>
     <message>
         <source>Activity upload complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Carga finalizada</translation>
     </message>
     <message>
         <source>An unknown error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocurrió un error desconocido</translation>
     </message>
     <message>
         <source>Type (Strava)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo (Strava)</translation>
     </message>
     <message>
         <source>TCX uploaded...</source>
-        <translation type="unfinished"></translation>
+        <translation>TCX subido...</translation>
     </message>
 </context>
 <context>

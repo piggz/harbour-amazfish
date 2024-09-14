@@ -9,7 +9,7 @@
             "desktop":  "harbour-amazfish-ui.desktop"
         }
     },
-    "version": "2.3.0",
+    "version": "2.4.0",
     "maintainer": "Adam Pigg <adam@piggz.co.uk>",
     "framework" : "ubuntu-sdk-20.04"
 }

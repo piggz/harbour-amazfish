@@ -1,6 +1,7 @@
 #include "huamidevice.h"
 #include "bipfirmwareinfo.h"
 #include "updatefirmwareoperation.h"
+#include "immediatealertservice.h"
 #include "amazfishconfig.h"
 
 #include <QtXml/QtXml>
@@ -165,6 +166,15 @@ void HuamiDevice::incomingCall(const QString &caller)
         alert->incomingCall(QByteArray::fromHex("0301"), caller);
     }
 }
+
+void HuamiDevice::incomingCallEnded()
+{
+    ImmediateAlertService *ias = qobject_cast<ImmediateAlertService*>(service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT));
+    if (ias) {
+        ias->sendAlert(ImmediateAlertService::Levels::NoAlert);
+    }
+}
+
 
 void HuamiDevice::navigationRunning(bool running)
 {
