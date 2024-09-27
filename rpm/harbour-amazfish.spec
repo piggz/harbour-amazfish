@@ -122,6 +122,6 @@ desktop-file-install --delete-original       \
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-ui.svg
 %{_userunitdir}/harbour-amazfish.service
 %{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges
-%{_datadir}/harbour-amazfish/chirp.raw
+%{_datadir}/harbour-amazfishd/chirp.raw
 # >> files
 # << files
