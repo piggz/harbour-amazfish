@@ -233,10 +233,10 @@ void BangleJSDevice::sendWeather(CurrentWeather *weather)
         QJsonObject o;
         o.insert("t", "weather");
         o.insert("temp", weather->temperature());
-	o.insert("hum", weather->humidity());
+        o.insert("hum", weather->humidity());
         o.insert("txt", weather->description());
-	o.insert("wind", weather->windSpeed());
-	o.insert("wdir", weather->windDeg());
+        o.insert("wind", weather->windSpeed());
+        o.insert("wdir", weather->windDeg());
         o.insert("loc", weather->city()->name());
 
         uart->txJson(o);
@@ -291,7 +291,7 @@ void BangleJSDevice::refreshInformation()
 
 QString BangleJSDevice::information(Info i) const
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << i;
 
     if (i == INFO_BATTERY) {
         return QString::number(m_infoBatteryLevel);
@@ -332,7 +332,14 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         m_infoBatteryLevel = json.value("bat").toInt();
         emit informationChanged(INFO_BATTERY, QString::number(m_infoBatteryLevel));
     } else if (t == "findPhone") {
+        bool running = json.value("n").toBool();
+        qDebug() << "findPhone" << running;
+        if (running) {
+            emit deviceEvent(AbstractDevice::EVENT_FIND_PHONE);
+        } else {
+            emit deviceEvent(AbstractDevice::EVENT_CANCEL_FIND_PHONE);
 
+        }
 
     } else if (t == "music") {
 
