@@ -26,7 +26,7 @@ These are devices I have, have tested, and will try not to break any functionali
  * Amazfit GTS
  * Amazfit GTR2
  * Pinetime InfiniTime
- * Bangle.js
+ * Bangle.js - [Android integration](https://gadgetbridge.org/gadgets/wearables/banglejs/) app should be installed
 
 ### Silver
 
