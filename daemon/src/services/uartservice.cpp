@@ -56,7 +56,7 @@ void UARTService::handleRx(const QString &json)
 
     if (json.contains( "Uncaught ReferenceError: \"gb\" is not defined")) {
         emit message("Gadgetbridge plugin not installed on Bangle.js");
-    } else if (json.at(0)=='{') {
+    } else if ((json.length() > 0) && (json.at(0)=='{')) {
         // JSON - we hope!
         QJsonObject obj = ObjectFromString(json);
         emit jsonRx(obj);
