@@ -342,18 +342,41 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         }
 
     } else if (t == "music") {
+        QString music_action = json.value("n").toString();
 
+        if (music_action == "play") {
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAY);
+        } else if (music_action == "pause") {
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_PAUSE);
+        } else if (music_action == "next") {
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
+        } else if (music_action == "previous") {
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_PREV);
+        } else if (music_action == "volumeup") {
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
+        } else if (music_action == "volumedown") {
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
+        }
 
-    } else if (t == "call") {
+//            emit deviceEvent(AbstractDevice::EVENT_APP_MUSIC);
 
-
-    } else if (t == "notify") {
-
-
+//    } else if (t == "call") {
+//    } else if (t == "notify") {
     } else if (t == "act") {
 
+        long ts = json.value("ts").toInt(); // timestamp
+        int hrm = json.value("hrm").toInt(); // heart rate,
+        int stp = json.value("stp").toInt(); // steps
+        int mov = json.value("mov").toInt(); // movement intensity
+        int rt = json.value("rt").toInt();
+
+        qDebug() << "parsed type = act " << ts << hrm << stp << mov << rt;
+
+        emit informationChanged(INFO_HEARTRATE, QString("%1").arg(hrm));
+        emit informationChanged(INFO_STEPS, QString("%1").arg(stp));
 
     } else {
+        qDebug() << "Gadgetbridge type " << t;
 
     }
 #if 0
