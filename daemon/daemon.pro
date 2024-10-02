@@ -82,7 +82,7 @@ systemd_services.path = $$PREFIX/lib/systemd/user/
 systemd_services.files = $$OUT_PWD/harbour-amazfish.service
 systemd_services.CONFIG += no_check_exist
 
-chirp.path = $$PREFIX/share/harbour-amazfish/
+chirp.path = $$PREFIX/share/harbour-amazfishd/
 chirp.files = chirp.raw
 
 #Install appropriate files for each system

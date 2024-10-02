@@ -691,9 +691,9 @@ void DeviceInterface::findDevice()
 
 
 #ifdef MER_EDITION_SAILFISH
-    QFile file("/usr/share/harbour-amazfish/chirp.raw");
+    QFile file("/usr/share/harbour-amazfishd/chirp.raw");
 #else // elif defined(UUITK_EDITION)
-    QFile file("/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/share/harbour-amazfish/chirp.raw");
+    QFile file("/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/share/harbour-amazfishd/chirp.raw");
 #endif
 
     if(!file.open(QIODevice::ReadOnly))
