@@ -27,7 +27,12 @@ PagePL {
             textRole: "path"
             label: qsTr("BT Adapter")
             Component.onCompleted: {
-                cboLocalAdapter.value =  AmazfishConfig.localAdapter;
+                for (var i = 0; i < adapters.rowCount(); i++) {
+                    if (adapters.get(i).path == AmazfishConfig.localAdapter) {
+                        cboLocalAdapter.currentIndex = i;
+                        return
+                    }
+                }
             }
         }
 
