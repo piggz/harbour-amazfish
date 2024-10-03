@@ -44,7 +44,7 @@ jobs:
         flatpak build-bundle ${{ github.workspace }}/repo ${{ github.workspace }}/uk.co.piggz.amazfish.flatpak uk.co.piggz.amazfish
 
     - name: Upload Flatpak
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
-        name: uk.co.piggz.amazfish.flatpak
+        pattern: uk.co.piggz.amazfish.flatpak
         path: uk.co.piggz.amazfish.flatpak
