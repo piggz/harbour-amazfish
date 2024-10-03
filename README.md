@@ -151,3 +151,9 @@ Credits to:
 
     The Gadgetbridge devs, which gave me a lot of hints and inspiration from their device code.
     https://codeberg.org/Freeyourgadget/Gadgetbridge
+
+## Automatic Reconnecting
+
+Depending on device and operating system if there are problems with pairing or reconnecting you may need to take one action.
+Open the bluetooth settings on your phone and head for known devices. There enter the settings for the watch and enable "reconnect automatically" for it.
+This should fix pairing and reconnecting issues.
