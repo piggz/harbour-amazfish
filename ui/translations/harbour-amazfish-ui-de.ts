@@ -126,27 +126,27 @@
     </message>
     <message>
         <source>Address: </source>
-        <translation>Adresse:</translation>
+        <translation>Adresse: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation>Serien Nr:</translation>
+        <translation>Serien Nr: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation>Hardware Rev:</translation>
+        <translation>Hardware Rev: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation>Software Rev:</translation>
+        <translation>Software Rev: </translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation>Verbindungsstatus:</translation>
+        <translation>Verbindungsstatus: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation>GPS Ver:</translation>
+        <translation>GPS Ver: </translation>
     </message>
     <message>
         <source>Test Notification</source>
