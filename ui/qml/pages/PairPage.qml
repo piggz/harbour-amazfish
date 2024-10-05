@@ -10,12 +10,11 @@ PageListPL {
     //backNavigation: !DaemonInterfaceInstance.pairing
     title: qsTr("Pair Device")
 
-    placeholderText: _placeholderText || qsTr("No devices found")
-    placeholderEnabled: devicesModel.rowCount() > 0
+    placeholderText: qsTr("No devices found")
+    placeholderEnabled: (delegateModel.count === 0) && !busyIndicator.running
 
     property string deviceType
     property variant aliases
-    property string _placeholderText
     property string _deviceName
     property string _deviceAddress
     property QtObject adapter: _bluetoothManager ? _bluetoothManager.usableAdapter : null
@@ -156,7 +155,7 @@ PageListPL {
     }
 
     // Set to undefined when pairing to show busy indicator only
-    model: !DaemonInterfaceInstance.pairing && !_placeholderText
+    model: (DaemonInterfaceInstance !== undefined) && !DaemonInterfaceInstance.pairing && delegateModel.count > 0
            ? delegateModel
            : undefined
 
@@ -165,13 +164,12 @@ PageListPL {
         //busy: discoveryModel.running || DaemonInterfaceInstance.pairing
 
         PageMenuItemPL {
-            enabled: !DaemonInterfaceInstance.pairing
+            enabled: (DaemonInterfaceInstance !== undefined) && !DaemonInterfaceInstance.pairing
             iconSource: adapter && adapter.discovering ? "" : (styler.iconDeviceScan !== undefined ? styler.iconDeviceScan : "")
             text: adapter && adapter.discovering
                   ? qsTr("Stop scanning")
                   : qsTr("Scan for devices")
             onClicked: {
-                _placeholderText = ""
                 if (adapter && adapter.discovering) {
                     stopDiscovery();
                 } else {
@@ -191,6 +189,7 @@ PageListPL {
         }
     }
 
+ background:
     BusyIndicatorPL {
         id: busyIndicator
         anchors.centerIn: parent
