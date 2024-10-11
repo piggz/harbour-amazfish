@@ -35,7 +35,7 @@ Kirigami.ApplicationWindow {
     pageStack.globalToolBar.showNavigationButtons: pages && pages.currentIndex > 0 ?
                                                        Kirigami.ApplicationHeaderStyle.ShowBackButton :
                                                        Kirigami.ApplicationHeaderStyle.NoNavigationButtons
-
+    property var    cover
     property real   compassOrientationOffset: 0
     property bool   isConvergent: true
     property var    initialPage
