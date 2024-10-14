@@ -199,6 +199,11 @@ PagePL {
                     text: AmazfishConfig.profileFitnessGoal.toLocaleString()
                 }
             }
+            Component.onCompleted: {
+                if (_connected) {
+                    _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
+                }
+            }
         }
 
         SectionHeaderPL {
