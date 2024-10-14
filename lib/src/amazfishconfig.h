@@ -161,7 +161,7 @@ public:
     ENUM_OPTION(QStringLiteral("profile/gender"),       profileGender,       setProfileGender,       ProfileGender, ProfileGenderMale)
     ENUM_OPTION(QStringLiteral("profile/wearlocation"), profileWearLocation, setProfileWearLocation, WearLocation,  WearLocationLeftWrist)
 
-    UINT_OPTION(QStringLiteral("profile/height"),      profileHeight,      setProfileHeight,      200)
+    UINT_OPTION(QStringLiteral("profile/height"),      profileHeight,      setProfileHeight,      170)
     UINT_OPTION(QStringLiteral("profile/weight"),      profileWeight,      setProfileWeight,      70)
     UINT_OPTION(QStringLiteral("profile/alldayhrm"),   profileAllDayHRM,   setProfileAllDayHRM,   0)
     UINT_OPTION(QStringLiteral("profile/fitnessgoal"), profileFitnessGoal, setProfileFitnessGoal, 10000)
