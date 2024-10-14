@@ -91,9 +91,8 @@ PagePL {
                 anchors.rightMargin: 2
                 height: parent.height - 4
             }
-
-
         }
+
         RowLayout {
             height: styler.themeItemSizeSmall
             width: parent.width
@@ -146,7 +145,6 @@ PagePL {
             }
         }
 
-
         SectionHeaderPL {
             text: qsTr("Steps")
             visible: supportsFeature(Amazfish.FEATURE_STEPS)
@@ -155,6 +153,8 @@ PagePL {
         // steps
         IconPL {
             id: imgSteps
+            anchors.left: parent.left
+            anchors.leftMargin: styler.themePaddingLarge
             iconName: styler.iconSteps
             height: styler.themeIconSizeMedium
             width: height
@@ -205,6 +205,10 @@ PagePL {
 
         //Heartrate
         RowLayout {
+            anchors.left: parent.left
+            anchors.leftMargin: styler.themePaddingLarge
+            anchors.right: parent.right
+            anchors.rightMargin: styler.themePaddingLarge
             spacing: styler.themePaddingLarge
             width: parent.width
             visible: supportsFeature(Amazfish.FEATURE_HRM)
@@ -267,8 +271,6 @@ PagePL {
                 }
             }
         }
-
-
     }
 
     onPageStatusActive: {
