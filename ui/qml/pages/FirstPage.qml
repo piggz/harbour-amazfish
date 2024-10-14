@@ -30,7 +30,7 @@ PagePL {
             }
         }
         PageMenuItemPL {
-            text: qsTr("Download File")
+            text: qsTr("Upload File")
             onClicked: app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
         }
         PageMenuItemPL {
