@@ -142,7 +142,7 @@ clickable build --libs
 clickable desktop
 ```
 
-To build the libraries and the application for ARM architecture and install it on your device, follow these steps:
+To build the libraries and the application for the architecture of the connected device and install the app on your device, follow these steps:
 
 ```
 clickable build --libs --app --arch detect --skip-review
