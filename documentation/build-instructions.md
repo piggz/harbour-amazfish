@@ -41,12 +41,12 @@ sudo apt install -y qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libkdb3-de
 ```
 
 Two dependencies can be found on git repos
-https://git.sailfishos.org/mer-core/nemo-qml-plugin-dbus
+https://github.com/sailfishos/nemo-qml-plugin-dbus
 and
-https://git.sailfishos.org/mer-core/qtmpris
+https://github.com/sailfishos/qtmpris.git/
 
 ```
-git clone https://git.sailfishos.org/mer-core/qtmpris.git
+git clone https://github.com/sailfishos/qtmpris.git/
 cd qtmpris
 qmake
 make
@@ -58,7 +58,7 @@ cd ..
 ```
 
 ```
-git clone https://git.sailfishos.org/mer-core/nemo-qml-plugin-dbus.git
+git clone https://github.com/sailfishos/nemo-qml-plugin-dbus
 cd nemo-qml-plugin-dbus
 qmake
 make
