@@ -88,10 +88,12 @@ PagePL {
         graphSleepSummary.updateGraph(day);
     }
 
-    function decimalToHourMin(decHours) {
-        var timeDate = new Date(0,0);
-        timeDate.setMinutes(decHours * 60);
-        return timeDate.toLocaleTimeString([], {timeStyle: 'short'});
+    function decimalToHourMin(decTime) {
+        var totalMinutes = Math.round(decTime * 60);
+        var hours = Math.floor(totalMinutes / 60);
+        var minutes = (totalMinutes % 60).toString().padStart(2, '0');
+
+        return hours + ":" + minutes;
     }
 
     onPageStatusActive: {
