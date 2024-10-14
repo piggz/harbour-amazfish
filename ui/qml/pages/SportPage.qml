@@ -61,6 +61,8 @@ PagePL {
                 Layout.rowSpan: 3
                 Layout.preferredWidth: styler.themeItemSizeLarge
                 Layout.preferredHeight: styler.themeItemSizeLarge
+                Layout.alignment: Qt.AlignLeft
+                Layout.leftMargin: styler.themePaddingLarge
                 iconName: styler.customIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
             }
 

@@ -172,6 +172,7 @@ TRANSLATIONS += \
     translations/harbour-amazfish-ui-de.ts \
     translations/harbour-amazfish-ui-es.ts \
     translations/harbour-amazfish-ui-fr.ts \
+    translations/harbour-amazfish-ui-nb_NO.ts \
     translations/harbour-amazfish-ui-nl.ts \
     translations/harbour-amazfish-ui-pl.ts \
     translations/harbour-amazfish-ui-ru.ts \

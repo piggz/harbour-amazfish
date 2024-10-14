@@ -9,6 +9,7 @@ build target which are not available by default.
 
 To get into the build machine (if started by Sailfish IDE)
 `ssh -l mersdk localhost -p 2222 -i ~/SailfishOS/vmshare/ssh/private_keys/engine/mersdk`
+or `sfdk engine exec` with docker based builder
 
 Use the `sb2-config` command to make your ARM target the default
 
