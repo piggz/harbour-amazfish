@@ -19,14 +19,23 @@ PagePL {
         width: parent.width
         anchors.top: parent.top
         anchors.margins: styler.themePaddingMedium
-        spacing: styler.themePaddingLarge
+        spacing: styler.themePaddingMedium
 
         LabelPL {
             id: lblSleepLastnight
-            font.pixelSize: styler.themeFontSizeExtraLarge * 3
+            font.pixelSize: styler.themeFontSizeExtraLarge * 2
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: qsTr("%1 hrs").arg(parseFloat(Math.round(graphSleepSummary.lastY * 100) / 100).toFixed(2))
+            text: qsTr("Total %1").arg(decimalToHourMin(graphSleepSummary.lastY + graphSleepSummary.lastZ))
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        LabelPL {
+            id: lblLightSleepLastnight
+            font.pixelSize: styler.themeFontSizeExtraLarge
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: qsTr("Light %1").arg(decimalToHourMin(graphSleepSummary.lastY))
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -35,7 +44,7 @@ PagePL {
             font.pixelSize:styler.themeFontSizeExtraLarge
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: qsTr("Deep %1 hrs").arg(parseFloat(Math.round(graphSleepSummary.lastZ * 100) / 100).toFixed(2))
+            text: qsTr("Deep %1").arg(decimalToHourMin(graphSleepSummary.lastZ))
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -77,6 +86,14 @@ PagePL {
 
     function updateGraphs() {
         graphSleepSummary.updateGraph(day);
+    }
+
+    function decimalToHourMin(decTime) {
+        var totalMinutes = Math.round(decTime * 60);
+        var hours = Math.floor(totalMinutes / 60);
+        var minutes = (totalMinutes % 60).toString().padStart(2, '0');
+
+        return hours + ":" + minutes;
     }
 
     onPageStatusActive: {

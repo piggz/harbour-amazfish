@@ -82,7 +82,7 @@ systemd_services.path = $$PREFIX/lib/systemd/user/
 systemd_services.files = $$OUT_PWD/harbour-amazfish.service
 systemd_services.CONFIG += no_check_exist
 
-chirp.path = $$PREFIX/share/harbour-amazfish/
+chirp.path = $$PREFIX/share/harbour-amazfishd/
 chirp.files = chirp.raw
 
 #Install appropriate files for each system
@@ -265,7 +265,16 @@ HEADERS += \
     src/activitycoordinate.h
 
 TRANSLATIONS += \
-    translations/harbour-amazfishd-cs.ts
+    translations/harbour-amazfishd-cs.ts \
+    translations/harbour-amazfishd-de.ts \
+    translations/harbour-amazfishd-es.ts \
+    translations/harbour-amazfishd-fr.ts \
+    translations/harbour-amazfishd-nl.ts \
+    translations/harbour-amazfishd-pl.ts \
+    translations/harbour-amazfishd-ru.ts \
+    translations/harbour-amazfishd-sv.ts \
+    translations/harbour-amazfishd-zh_Hans.ts
+
 
 flavor_uuitk {
     DEFINES += TRANSLATION_FOLDER=\\\"/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/translations\\\"
