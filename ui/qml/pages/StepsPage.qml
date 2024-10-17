@@ -25,7 +25,7 @@ PagePL {
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: text: _InfoSteps > 0 ? _InfoSteps.toLocaleString() : graphStepSummary.lastValue
+            text: _InfoSteps > 0 ? _InfoSteps.toLocaleString() : graphStepSummary.lastValue
             horizontalAlignment: Text.AlignHCenter
         }
 
