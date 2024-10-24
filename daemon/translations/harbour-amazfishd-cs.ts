@@ -12,7 +12,7 @@
 <context>
     <name>AsteroidOSDevice</name>
     <message>
-        <location filename="../src/devices/asteroidosdevice.cpp" line="313"/>
+        <location filename="../src/devices/asteroidosdevice.cpp" line="324"/>
         <source>Stored %1...</source>
         <translation>Uloženo %1 ...</translation>
     </message>
@@ -61,27 +61,27 @@
         <translation>Zařízení není platné, nemusí být podporované</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="446"/>
+        <location filename="../src/deviceinterface.cpp" line="444"/>
         <source>Amazfish</source>
         <translation>Amazfish</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="446"/>
+        <location filename="../src/deviceinterface.cpp" line="444"/>
         <source>Connected</source>
         <translation>Připojeno</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="446"/>
+        <location filename="../src/deviceinterface.cpp" line="444"/>
         <source>Phone and watch are connected</source>
         <translation>Telefon a hodinky jsou propojeny</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="511"/>
+        <location filename="../src/deviceinterface.cpp" line="504"/>
         <source>Low Battery</source>
         <translation>Slabá baterie</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="511"/>
+        <location filename="../src/deviceinterface.cpp" line="504"/>
         <source>Battery level now </source>
         <translation>Stupeň nabití </translation>
     </message>
@@ -102,17 +102,17 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="172"/>
+        <location filename="../src/devices/huamidevice.cpp" line="183"/>
         <source>Navigation Started</source>
         <translation>Navigace spuštěna</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="174"/>
+        <location filename="../src/devices/huamidevice.cpp" line="185"/>
         <source>Navigation Stopped</source>
         <translation>Navigace zastavena</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="181"/>
+        <location filename="../src/devices/huamidevice.cpp" line="192"/>
         <source>Progress</source>
         <translation>Průbeh</translation>
     </message>

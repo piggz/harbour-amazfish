@@ -938,11 +938,11 @@
     </message>
     <message>
         <source>%1 hrs</source>
-        <translation>%1 hodin</translation>
+        <translation type="vanished">%1 hodin</translation>
     </message>
     <message>
         <source>Deep %1 hrs</source>
-        <translation>Hluboký spánek %1 hodin</translation>
+        <translation type="vanished">Hluboký spánek %1 hodin</translation>
     </message>
     <message>
         <source>Sleep Summary</source>
@@ -956,6 +956,18 @@
     <message>
         <source>Hours</source>
         <translation>Hodin</translation>
+    </message>
+    <message>
+        <source>Total %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

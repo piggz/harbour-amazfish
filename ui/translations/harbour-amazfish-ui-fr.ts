@@ -941,20 +941,24 @@
         <translation>Sommeil</translation>
     </message>
     <message>
-        <source>%1 hrs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deep %1 hrs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

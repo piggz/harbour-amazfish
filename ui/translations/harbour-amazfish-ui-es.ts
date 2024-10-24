@@ -951,11 +951,23 @@
     </message>
     <message>
         <source>%1 hrs</source>
-        <translation>%1 hrs.</translation>
+        <translation type="vanished">%1 hrs.</translation>
     </message>
     <message>
         <source>Deep %1 hrs</source>
-        <translation>Profundo %1 hrs</translation>
+        <translation type="vanished">Profundo %1 hrs</translation>
+    </message>
+    <message>
+        <source>Total %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
