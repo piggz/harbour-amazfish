@@ -4,7 +4,7 @@ import "../components/platform"
 
 PagePL {
     id: page
-    title: qsTr("Upload File")
+    title: qsTr("Install File")
 
     property string selectedFile: qsTr("None")
     property string fileVersion
@@ -19,7 +19,7 @@ PagePL {
 
         LabelPL {
             width: parent.width
-            text: qsTr("Select a file to upload.");
+            text: qsTr("Select a file to install.");
         }
 
         ValueButtonPL {
