@@ -85,44 +85,64 @@ PagePL {
 
         //Type summary
         Grid {
-            columns: 2
+            columns: 3
             spacing: styler.themePaddingMedium
-            width: parent.width
-            LabelPL { text: qsTr("Relaxed") }
-            Item { width: parent.width * 0.5; height: 50
+            width: parent.width - (styler.themePaddingMedium * 2)
+            LabelPL {text: qsTr("Relaxed")}
+            Item { 
+                width: parent.width * 0.5
+                height: 50
                 Rectangle { color: "grey"; width: parent.width * (relaxed  / total) ; height: parent.height }
-                LabelPL { text: Math.floor((relaxed / total) * 100) + "%"; anchors.centerIn: parent}
+                LabelPL { text: Math.round((relaxed / total) * 100) + "%"; anchors.centerIn: parent}
             }
-            LabelPL { text: qsTr("Light") }
-            Item { width: parent.width * 0.5; height: 50
+            LabelPL {text: qsTr("<= %1 BPM".arg(Math.round(maxHR()*0.5)))}
+
+            LabelPL {text: qsTr("Light")}
+            Item {
+                width: parent.width * 0.5
+                height: 50
                 Rectangle { color: "lightblue"; width: parent.width * (light  / total) ; height: parent.height }
-                LabelPL { text: Math.floor((light / total) * 100) + "%"; anchors.centerIn: parent}
+                LabelPL { text: Math.round((light / total) * 100) + "%"; anchors.centerIn: parent}
             }
-            LabelPL { text: qsTr("Intensive")}
-            Item { width: parent.width * 0.5; height: 50
+            LabelPL {text: qsTr("<= %1 BPM".arg(Math.round(maxHR()*0.6)))}
+
+            LabelPL {text: qsTr("Intensive")}
+            Item {
+                width: parent.width * 0.5
+                height: 50
                 Rectangle { color: "green"; width: parent.width * (intensive  / total) ; height: parent.height }
-                LabelPL { text: Math.floor((intensive / total) * 100) + "%"; anchors.centerIn: parent}
+                LabelPL { text: Math.round((intensive / total) * 100) + "%"; anchors.centerIn: parent}
             }
-            LabelPL { text: qsTr("Aerobic")}
-            Item { width: parent.width * 0.5; height: 50
+            LabelPL {text: qsTr("<= %1 BPM".arg(Math.round(maxHR()*0.7)))}
+
+            LabelPL {text: qsTr("Aerobic")}
+            Item {
+                width: parent.width * 0.5
+                height: 50
                 Rectangle { color: "yellow"; width: parent.width * (aerobic  / total) ; height: parent.height }
-                LabelPL { text: Math.floor((aerobic / total) * 100) + "%"; anchors.centerIn: parent}
+                LabelPL { text: Math.round((aerobic / total) * 100) + "%"; anchors.centerIn: parent}
             }
+            LabelPL {text: qsTr("<= %1 BPM".arg(Math.round(maxHR()*0.8)))}
 
-            LabelPL { text: qsTr("Anerobic")}
-            Item { width: parent.width * 0.5; height: 50
+            LabelPL {text: qsTr("Anerobic")}
+            Item {
+                width: parent.width * 0.5
+                height: 50
                 Rectangle { color: "orange"; width: parent.width * (anerobic  / total) ; height: parent.height }
-                LabelPL { text: Math.floor((anerobic / total) * 100) + "%"; anchors.centerIn: parent}
+                LabelPL { text: Math.round((anerobic / total) * 100) + "%"; anchors.centerIn: parent}
             }
+            LabelPL {text: qsTr("<= %1 BPM".arg(Math.round(maxHR()*0.9)))}
 
-            LabelPL { text: qsTr("VO2 Max") }
-            Item { width: parent.width * 0.5; height: 50
+            LabelPL {text: qsTr("VO2 Max")}
+            Item {
+                width: parent.width * 0.5
+                height: 50
                 Rectangle { color: "red"; width: parent.width * (vo2max  / total) ; height: parent.height }
-                LabelPL { text: Math.floor((vo2max / total) * 100) + "%"; anchors.centerIn: parent}
+                LabelPL { text: Math.round((vo2max / total) * 100) + "%"; anchors.centerIn: parent}
             }
+            LabelPL {text: qsTr("<= %1 BPM".arg(Math.round(maxHR())))}
         }
     }
-
 
     function updateGraphs() {
         graphHR.updateGraph(day);
