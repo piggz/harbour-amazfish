@@ -212,7 +212,7 @@ PagePL {
         }
         // max HR calculated with Wingate formula as the most recent evaluation with a large test group
         // for details see https://en.wikipedia.org/wiki/Heart_rate#Maximum_heart_rate
-        if (gender = qsTr("Male")) {
+        if (gender = 1) { // 1=male
             max_hr = 208.609-(0.716*age)
         } else {
             max_hr = 209.273-(0.804*age)
