@@ -199,33 +199,23 @@ PagePL {
 
     function maxHR() {
         var dob = AmazfishConfig.profileDOB;
+        var gender = AmazfishConfig.profileGender;
         var diff_ms = Date.now() - dob.getTime();
         var age_dt = new Date(diff_ms);
         var age = Math.abs(age_dt.getUTCFullYear() - 1970);
-        var max_hr = 200;
+        var max_hr;
 
-        if (age >= 70) {
-            max_hr = 150;
-        } else if (age >= 65) {
-            max_hr = 155;
-        } else if (age >= 60) {
-            max_hr = 160;
-        } else if (age >= 55) {
-            max_hr = 165;
-        } else if (age >= 50) {
-            max_hr = 170;
-        } else if (age >= 45) {
-            max_hr = 175;
-        } else if (age >= 40) {
-            max_hr = 180;
-        } else if (age >= 35) {
-            max_hr = 185;
-        } else if (age >= 30) {
-            max_hr = 190;
-        } else if (age >= 25) {
-            max_hr = 195;
+        // if no age is provided, use an average age
+        // this is to avoid providing too height values which may be a health risk
+        if (!age) {
+            age = 50
+        }
+        // max HR calculated with Wingate formula as the most recent evaluation with a large test group
+        // for details see https://en.wikipedia.org/wiki/Heart_rate#Maximum_heart_rate
+        if (gender = qsTr("Male")) {
+            max_hr = 208.609-(0.716*age)
         } else {
-            max_hr = 200;
+            max_hr = 209.273-(0.804*age)
         }
 
         console.log("Age is", age, "max hr is", max_hr);
