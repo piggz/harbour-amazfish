@@ -942,11 +942,11 @@
     </message>
     <message>
         <source>%1 hrs</source>
-        <translation>%1 uur</translation>
+        <translation type="vanished">%1 uur</translation>
     </message>
     <message>
         <source>Deep %1 hrs</source>
-        <translation>Diep %1 uur</translation>
+        <translation type="vanished">Diep %1 uur</translation>
     </message>
     <message>
         <source>MM/dd</source>
@@ -956,6 +956,18 @@
     <message>
         <source>Hours</source>
         <translation>Uur</translation>
+    </message>
+    <message>
+        <source>Total %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

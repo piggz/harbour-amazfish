@@ -346,32 +346,32 @@
         <translation>连接到手表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="148"/>
+        <location filename="../qml/pages/FirstPage.qml" line="147"/>
         <source>%1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="154"/>
+        <location filename="../qml/pages/FirstPage.qml" line="152"/>
         <source>Steps</source>
         <translation type="unfinished">步数</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="205"/>
+        <location filename="../qml/pages/FirstPage.qml" line="210"/>
         <source>Heartrate</source>
         <translation type="unfinished">心率</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="227"/>
+        <location filename="../qml/pages/FirstPage.qml" line="236"/>
         <source>%1 bpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="246"/>
+        <location filename="../qml/pages/FirstPage.qml" line="255"/>
         <source>Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="251"/>
+        <location filename="../qml/pages/FirstPage.qml" line="260"/>
         <source>Enable on boot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -593,27 +593,27 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="36"/>
+        <location filename="../qml/pages/Settings-app.qml" line="41"/>
         <source>Notifications</source>
         <translation>通知</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="44"/>
+        <location filename="../qml/pages/Settings-app.qml" line="49"/>
         <source>Notify on connect</source>
         <translation>连接时通知</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="80"/>
+        <location filename="../qml/pages/Settings-app.qml" line="85"/>
         <source>Refresh rates</source>
         <translation>刷新频率</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="86"/>
+        <location filename="../qml/pages/Settings-app.qml" line="91"/>
         <source>Sync activity data each hour</source>
         <translation>每小时同步活动数据</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="52"/>
+        <location filename="../qml/pages/Settings-app.qml" line="57"/>
         <source>Low battery notification</source>
         <translation>低电量通知</translation>
     </message>
@@ -628,62 +628,62 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="60"/>
+        <location filename="../qml/pages/Settings-app.qml" line="65"/>
         <source>Navigation notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="68"/>
+        <location filename="../qml/pages/Settings-app.qml" line="73"/>
         <source>Transliterate notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="76"/>
+        <location filename="../qml/pages/Settings-app.qml" line="81"/>
         <source>Simulate event reminder support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="97"/>
+        <location filename="../qml/pages/Settings-app.qml" line="102"/>
         <source>Refresh weather every (%1) minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="106"/>
+        <location filename="../qml/pages/Settings-app.qml" line="111"/>
         <source>Refresh calendar every (%1) minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="111"/>
+        <location filename="../qml/pages/Settings-app.qml" line="116"/>
         <source>Amazfish Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="118"/>
+        <location filename="../qml/pages/Settings-app.qml" line="123"/>
         <source>Start service on boot</source>
         <translation>启动时开启服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="133"/>
+        <location filename="../qml/pages/Settings-app.qml" line="138"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>开启/停止 Amazfish 后台服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="146"/>
+        <location filename="../qml/pages/Settings-app.qml" line="151"/>
         <source>Start</source>
         <translation>开启</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="155"/>
+        <location filename="../qml/pages/Settings-app.qml" line="160"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="165"/>
+        <location filename="../qml/pages/Settings-app.qml" line="170"/>
         <source>Button Actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="177"/>
+        <location filename="../qml/pages/Settings-app.qml" line="182"/>
         <source>Save Settings</source>
         <translation>保存设置</translation>
     </message>
@@ -1182,27 +1182,32 @@
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="29"/>
-        <source>%1 hrs</source>
+        <source>Total %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="38"/>
-        <source>Deep %1 hrs</source>
+        <source>Light %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="62"/>
+        <location filename="../qml/pages/SleepPage.qml" line="47"/>
+        <source>Deep %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SleepPage.qml" line="71"/>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="63"/>
+        <location filename="../qml/pages/SleepPage.qml" line="72"/>
         <source>Hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="58"/>
+        <location filename="../qml/pages/SleepPage.qml" line="67"/>
         <source>Sleep Summary</source>
         <translation>睡眠摘要</translation>
     </message>
@@ -1215,213 +1220,213 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="88"/>
+        <location filename="../qml/pages/SportPage.qml" line="90"/>
         <source>Data:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="357"/>
+        <location filename="../qml/pages/SportPage.qml" line="359"/>
         <source>Steps</source>
         <translation type="unfinished">步数</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="358"/>
+        <location filename="../qml/pages/SportPage.qml" line="360"/>
         <source>Active Seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="359"/>
+        <location filename="../qml/pages/SportPage.qml" line="361"/>
         <source>Calories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="360"/>
+        <location filename="../qml/pages/SportPage.qml" line="362"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="361"/>
+        <location filename="../qml/pages/SportPage.qml" line="363"/>
         <source>Ascent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="362"/>
+        <location filename="../qml/pages/SportPage.qml" line="364"/>
         <source>Descent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="363"/>
+        <location filename="../qml/pages/SportPage.qml" line="365"/>
         <source>Max Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="364"/>
+        <location filename="../qml/pages/SportPage.qml" line="366"/>
         <source>Min Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="365"/>
+        <location filename="../qml/pages/SportPage.qml" line="367"/>
         <source>Min Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="366"/>
+        <location filename="../qml/pages/SportPage.qml" line="368"/>
         <source>Max Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="367"/>
+        <location filename="../qml/pages/SportPage.qml" line="369"/>
         <source>Average HR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="368"/>
+        <location filename="../qml/pages/SportPage.qml" line="370"/>
         <source>Average Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="369"/>
+        <location filename="../qml/pages/SportPage.qml" line="371"/>
         <source>Average Stride</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="370"/>
+        <location filename="../qml/pages/SportPage.qml" line="372"/>
         <source>Max HR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="371"/>
+        <location filename="../qml/pages/SportPage.qml" line="373"/>
         <source>Time Ascending</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="372"/>
+        <location filename="../qml/pages/SportPage.qml" line="374"/>
         <source>Time Descending</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="373"/>
+        <location filename="../qml/pages/SportPage.qml" line="375"/>
         <source>Time Flat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="374"/>
+        <location filename="../qml/pages/SportPage.qml" line="376"/>
         <source>Average Stroke</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="375"/>
+        <location filename="../qml/pages/SportPage.qml" line="377"/>
         <source>Average Stroke/s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="376"/>
+        <location filename="../qml/pages/SportPage.qml" line="378"/>
         <source>Average Lap Pace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="377"/>
+        <location filename="../qml/pages/SportPage.qml" line="379"/>
         <source>Strokes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="378"/>
+        <location filename="../qml/pages/SportPage.qml" line="380"/>
         <source>SWOLF Index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="379"/>
+        <location filename="../qml/pages/SportPage.qml" line="381"/>
         <source>Swim Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="380"/>
+        <location filename="../qml/pages/SportPage.qml" line="382"/>
         <source>Laps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="381"/>
+        <location filename="../qml/pages/SportPage.qml" line="383"/>
         <source>Max Latitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="382"/>
+        <location filename="../qml/pages/SportPage.qml" line="384"/>
         <source>Min Latitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="383"/>
+        <location filename="../qml/pages/SportPage.qml" line="385"/>
         <source>Max Longitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="384"/>
+        <location filename="../qml/pages/SportPage.qml" line="386"/>
         <source>Min Longitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="385"/>
+        <location filename="../qml/pages/SportPage.qml" line="387"/>
         <source>Max Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="386"/>
+        <location filename="../qml/pages/SportPage.qml" line="388"/>
         <source>Total Stride</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="392"/>
+        <location filename="../qml/pages/SportPage.qml" line="394"/>
         <source>steps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="393"/>
+        <location filename="../qml/pages/SportPage.qml" line="395"/>
         <source>seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="394"/>
+        <location filename="../qml/pages/SportPage.qml" line="396"/>
         <source>kcal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="395"/>
+        <location filename="../qml/pages/SportPage.qml" line="397"/>
         <source>meters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="396"/>
+        <location filename="../qml/pages/SportPage.qml" line="398"/>
         <source>seconds/m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="397"/>
+        <location filename="../qml/pages/SportPage.qml" line="399"/>
         <source>bpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="398"/>
+        <location filename="../qml/pages/SportPage.qml" line="400"/>
         <source>seconds/km</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="399"/>
+        <location filename="../qml/pages/SportPage.qml" line="401"/>
         <source>cm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="400"/>
+        <location filename="../qml/pages/SportPage.qml" line="402"/>
         <source>strokes/s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="401"/>
+        <location filename="../qml/pages/SportPage.qml" line="403"/>
         <source>strokes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="402"/>
-        <location filename="../qml/pages/SportPage.qml" line="405"/>
+        <location filename="../qml/pages/SportPage.qml" line="404"/>
+        <location filename="../qml/pages/SportPage.qml" line="407"/>
         <source>swolf</source>
         <translation type="unfinished"></translation>
     </message>

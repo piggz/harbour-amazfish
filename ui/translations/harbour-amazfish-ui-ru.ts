@@ -950,11 +950,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 hrs</source>
+        <source>Total %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Deep %1 hrs</source>
+        <source>Light %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
