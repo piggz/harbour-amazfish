@@ -69,7 +69,7 @@ PagePL {
             graphTitle: qsTr("BPM")
             graphHeight: 300
 
-            axisY.units: "BPM"
+            axisY.units: qsTr("BPM")
             type: DataSource.Heartrate
             graphType: 2
 

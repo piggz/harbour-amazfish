@@ -40,7 +40,7 @@ PagePL {
             graphTitle: qsTr("Heartrate")
             graphHeight: 300
 
-            axisY.units: "BPM"
+            axisY.units: qsTr("BPM")
             type: DataSource.Heartrate
 
             minY: 0
@@ -57,7 +57,7 @@ PagePL {
             graphTitle: qsTr("Steps")
             graphHeight: 300
 
-            axisY.units: "Steps"
+            axisY.units: qsTr("Steps")
             type: DataSource.Steps
 
             minY: 0
