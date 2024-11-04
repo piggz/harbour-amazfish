@@ -65,7 +65,13 @@
         <translation>心率</translation>
     </message>
     <message>
+        <location filename="../qml/pages/AnalysisPage.qml" line="43"/>
+        <source>BPM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="57"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="60"/>
         <source>Steps</source>
         <translation>步数</translation>
     </message>
@@ -106,14 +112,22 @@
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BipFirmwarePage.qml" line="7"/>
         <source>Download File</source>
-        <translation>下载文件</translation>
+        <translation type="vanished">下载文件</translation>
+    </message>
+    <message>
+        <source>Select a file to download.</source>
+        <translation type="vanished">选择要下载的文件。</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BipFirmwarePage.qml" line="7"/>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="22"/>
-        <source>Select a file to download.</source>
-        <translation>选择要下载的文件。</translation>
+        <source>Select a file to install.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="26"/>
@@ -321,9 +335,13 @@
         <translation>配对手表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="33"/>
         <source>Download File</source>
-        <translation>下载文件</translation>
+        <translation type="vanished">下载文件</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="33"/>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="37"/>
@@ -398,6 +416,7 @@
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="69"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="72"/>
         <source>BPM</source>
         <translation type="unfinished"></translation>
     </message>
@@ -407,27 +426,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="96"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="100"/>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="101"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="109"/>
         <source>Intensive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="106"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="118"/>
         <source>Aerobic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="112"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="127"/>
         <source>Anerobic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="118"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="136"/>
         <source>VO2 Max</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1454,6 +1473,7 @@
     <message>
         <location filename="../qml/pages/StepsPage.qml" line="9"/>
         <location filename="../qml/pages/StepsPage.qml" line="49"/>
+        <location filename="../qml/pages/StepsPage.qml" line="53"/>
         <source>Steps</source>
         <translation>步数</translation>
     </message>

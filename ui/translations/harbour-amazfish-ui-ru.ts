@@ -61,6 +61,10 @@
         <source>Intensity</source>
         <translation>Нагрузка</translation>
     </message>
+    <message>
+        <source>BPM</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -88,11 +92,11 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Загрузка файлов</translation>
+        <translation type="vanished">Загрузка файлов</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Выберите файл для загрузки</translation>
+        <translation type="vanished">Выберите файл для загрузки</translation>
     </message>
     <message>
         <source>None</source>
@@ -108,6 +112,14 @@
     </message>
     <message>
         <source>File not supported on this device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a file to install.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -256,7 +268,7 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Загрузка файлов</translation>
+        <translation type="vanished">Загрузка файлов</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -296,6 +308,10 @@
     </message>
     <message>
         <source>Enable on boot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
