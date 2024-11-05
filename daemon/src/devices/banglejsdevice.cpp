@@ -175,6 +175,24 @@ void BangleJSDevice::initialise()
     }
 
     setConnectionState("authenticated");
+
+    setTime();
+}
+
+void BangleJSDevice::setTime() {
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+
+    qint64 ts;
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
+    ts = QDateTime::currentSecsSinceEpoch();
+#else
+    ts = QDateTime::currentDateTime().toTime_t();
+#endif
+    uart->tx(QByteArray(1, 0x10) + QString("setTime(" + QString::number(ts) + ");\n").toUtf8());
 }
 
 void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
