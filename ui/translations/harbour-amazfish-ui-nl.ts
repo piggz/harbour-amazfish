@@ -61,6 +61,10 @@
         <source>Intensity</source>
         <translation>Intensiteit</translation>
     </message>
+    <message>
+        <source>BPM</source>
+        <translation type="unfinished">BPM</translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -88,11 +92,11 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Download bestand</translation>
+        <translation type="vanished">Download bestand</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Selecteer een bestand om te downloaden.</translation>
+        <translation type="vanished">Selecteer een bestand om te downloaden.</translation>
     </message>
     <message>
         <source>None</source>
@@ -109,6 +113,14 @@
     <message>
         <source>File not supported on this device</source>
         <translation>Bestand niet ondersteund op dit apparaat</translation>
+    </message>
+    <message>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a file to install.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -256,7 +268,7 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Download bestand</translation>
+        <translation type="vanished">Download bestand</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -297,6 +309,10 @@
     <message>
         <source>Enable on boot</source>
         <translation>Inschakelen bij opstarten</translation>
+    </message>
+    <message>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

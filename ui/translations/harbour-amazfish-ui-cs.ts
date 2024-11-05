@@ -61,6 +61,10 @@
         <source>Intensity</source>
         <translation>Intensita</translation>
     </message>
+    <message>
+        <source>BPM</source>
+        <translation type="unfinished">TEP/MIN</translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -88,11 +92,11 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Stáhnout soubor</translation>
+        <translation type="vanished">Stáhnout soubor</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Vybrat soubor ke stažení.</translation>
+        <translation type="vanished">Vybrat soubor ke stažení.</translation>
     </message>
     <message>
         <source>None</source>
@@ -109,6 +113,14 @@
     <message>
         <source>File not supported on this device</source>
         <translation>Soubor není podporavný na tomto zařízení</translation>
+    </message>
+    <message>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a file to install.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -268,7 +280,7 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Stáhnout soubor</translation>
+        <translation type="vanished">Stáhnout soubor</translation>
     </message>
     <message>
         <source>Data Graphs</source>
@@ -297,6 +309,10 @@
     <message>
         <source>Enable on boot</source>
         <translation>Povolit při startu</translation>
+    </message>
+    <message>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
