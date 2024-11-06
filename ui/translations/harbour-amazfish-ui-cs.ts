@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished">TEP/MIN</translation>
+        <translation>TEP/MIN</translation>
     </message>
 </context>
 <context>
@@ -116,11 +116,11 @@
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Nainstalovat soubor</translation>
     </message>
     <message>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat soubor k instalaci.</translation>
     </message>
 </context>
 <context>
@@ -312,7 +312,7 @@
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Nainstalovat soubor</translation>
     </message>
 </context>
 <context>
@@ -975,15 +975,15 @@
     </message>
     <message>
         <source>Total %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Celkem %1</translation>
     </message>
     <message>
         <source>Light %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lehký %1</translation>
     </message>
     <message>
         <source>Deep %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hluboký %1</translation>
     </message>
 </context>
 <context>
