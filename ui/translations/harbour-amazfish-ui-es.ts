@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished">BPM</translation>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
@@ -116,11 +116,11 @@
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo de instalación</translation>
     </message>
     <message>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione un archivo para instalar.</translation>
     </message>
 </context>
 <context>
@@ -312,7 +312,7 @@
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo de instalación</translation>
     </message>
 </context>
 <context>
@@ -975,15 +975,15 @@
     </message>
     <message>
         <source>Total %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Total %1</translation>
     </message>
     <message>
         <source>Light %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligero %1</translation>
     </message>
     <message>
         <source>Deep %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Profundo %1</translation>
     </message>
 </context>
 <context>
