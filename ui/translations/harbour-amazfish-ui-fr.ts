@@ -5,7 +5,7 @@
     <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished">Définir la localisation</translation>
+        <translation>Définir la localisation</translation>
     </message>
 </context>
 <context>
@@ -63,21 +63,21 @@
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entrez la clef d&apos;authentification</translation>
     </message>
 </context>
 <context>
     <name>BatteryPage</name>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie</translation>
     </message>
     <message>
         <source>%1 %</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>File type/version: </source>
-        <translation>Type/version du fichier: </translation>
+        <translation>Type/version du fichier&#xa0;: </translation>
     </message>
     <message>
         <source>File not supported on this device</source>
@@ -120,14 +120,14 @@
     </message>
     <message>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez un fichier à installer.</translation>
     </message>
 </context>
 <context>
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur inattendue</translation>
     </message>
 </context>
 <context>
@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>Address: </source>
-        <translation>Adresse:</translation>
+        <translation>Adresse&#xa0;: </translation>
     </message>
     <message>
         <source>Serial No: </source>
@@ -194,31 +194,31 @@
     </message>
     <message>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>Débogage</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>Modèle&#xa0;: </translation>
     </message>
     <message>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Rév. Firmware&#xa0;: </translation>
     </message>
     <message>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fabriquant&#xa0;: </translation>
     </message>
     <message>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Tests fonctionnels</translation>
     </message>
     <message>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mettre à jour le calendrier</translation>
     </message>
     <message>
         <source>Music Control</source>
@@ -226,27 +226,27 @@
     </message>
     <message>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Demander une capture d&apos;écran</translation>
     </message>
     <message>
         <source>Somebody</source>
-        <translation type="unfinished"></translation>
+        <translation>Quelqu&apos;un</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre</translation>
     </message>
     <message>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>Bonjour depuis Sailfish OS. Ceci est un message long envoyé par BLE&#x202f;!</translation>
     </message>
     <message>
         <source>Donald Duck</source>
-        <translation type="unfinished"></translation>
+        <translation>Donald Duck</translation>
     </message>
     <message>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hello, ceci est un email envoyé depuis Sailfish OS&#x202f;!</translation>
     </message>
     <message>
         <source>Test Immediate Alert Service</source>
@@ -393,7 +393,7 @@
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée</translation>
     </message>
 </context>
 <context>
@@ -404,23 +404,23 @@
     </message>
     <message>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun appareil trouvé</translation>
     </message>
     <message>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter la recherche</translation>
     </message>
     <message>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher des appareils</translation>
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche d&apos;appareils…</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>Apairage…</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
@@ -544,11 +544,11 @@
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter</translation>
     </message>
     <message>
         <source>Button Actions</source>
@@ -706,7 +706,7 @@
     </message>
     <message>
         <source>Realtime HRM measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesure CFM en temps réel</translation>
     </message>
 </context>
 <context>
@@ -745,7 +745,7 @@
     </message>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne Pas Déranger</translation>
     </message>
     <message>
         <source>Alarms</source>
@@ -753,7 +753,7 @@
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Musique</translation>
     </message>
     <message>
         <source>Time</source>
