@@ -28,12 +28,51 @@ PagePL {
             label: qsTr("BT Adapter")
             Component.onCompleted: {
                 for (var i = 0; i < adapters.rowCount(); i++) {
-                    if (adapters.get(i).path == AmazfishConfig.localAdapter) {
+                    var item = adapters.get(i)
+                    if (item.path === AmazfishConfig.localAdapter) {
                         cboLocalAdapter.currentIndex = i;
+                        setDetails(item)
                         return
                     }
                 }
             }
+
+            onCurrentIndexChanged: {
+                setDetails(adapters.get(currentIndex))
+            }
+
+            function setDetails(data) {
+                lblBluetoothName.text = data.name
+                lblBluetoothAlias.text = data.alias
+                lblBluetoothAddress.text = data.address
+            }
+        }
+
+
+        LabelPL {
+            id: lblBluetoothName
+            color: styler.themeSecondaryHighlightColor
+            font.pixelSize: styler.themeFontSizeMedium
+            truncMode: truncModes.fade
+            // Layout.fillWidth: true
+            width: parent.width
+        }
+
+        LabelPL {
+            id: lblBluetoothAlias
+            color: styler.themeSecondaryHighlightColor
+            font.pixelSize: styler.themeFontSizeMedium
+            truncMode: truncModes.fade
+            // Layout.fillWidth: true
+            width: parent.width
+        }
+        LabelPL {
+            id: lblBluetoothAddress
+            color: styler.themeSecondaryHighlightColor
+            font.pixelSize: styler.themeFontSizeMedium
+            truncMode: truncModes.fade
+            // Layout.fillWidth: true
+            width: parent.width
         }
 
         SectionHeaderPL {
