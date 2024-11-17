@@ -19,11 +19,11 @@
     <name>BipDevice</name>
     <message>
         <source>Navigation Started</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigation Démarrée</translation>
     </message>
     <message>
         <source>Navigation Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigation Arrêtée</translation>
     </message>
     <message>
         <source>Progress</source>
@@ -42,7 +42,7 @@
     </message>
     <message>
         <source>No file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun fichier sélectionné</translation>
     </message>
 </context>
 <context>
@@ -57,15 +57,15 @@
     </message>
     <message>
         <source>Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Connecté</translation>
     </message>
     <message>
         <source>Phone and watch are connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Téléphone et montre connectés</translation>
     </message>
     <message>
         <source>Low Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie faible</translation>
     </message>
     <message>
         <source>Battery level now </source>
@@ -80,18 +80,18 @@
     </message>
     <message>
         <source>No file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun fichier sélectionné</translation>
     </message>
 </context>
 <context>
     <name>HuamiDevice</name>
     <message>
         <source>Navigation Started</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigation Démarrée</translation>
     </message>
     <message>
         <source>Navigation Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigation Arrêtée</translation>
     </message>
     <message>
         <source>Progress</source>
