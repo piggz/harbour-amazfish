@@ -78,7 +78,7 @@ void AsteroidOSDevice::pair()
     setConnectionState("pairing");
     emit connectionStateChanged();
 
-    QBLEDevice::connectToDevice();
+    QBLEDevice::pair();
 }
 
 
