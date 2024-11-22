@@ -20,7 +20,7 @@ void BangleJSDevice::pair()
     setConnectionState("pairing");
     emit connectionStateChanged();
 
-    QBLEDevice::connectToDevice();
+    QBLEDevice::pair();
 }
 
 int BangleJSDevice::supportedFeatures() const
