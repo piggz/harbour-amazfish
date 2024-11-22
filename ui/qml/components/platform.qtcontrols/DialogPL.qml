@@ -41,7 +41,7 @@ PagePL {
             if (acceptDestinationPop)
                 app.pages.pop(acceptDestination);
             else
-                app.push(acceptDestination);
+                app.pages.push(acceptDestination);
         } else
             app.pages.pop();
     }
