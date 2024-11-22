@@ -11,21 +11,18 @@ PagePL {
 
     function unpairAccepted() {
         DaemonInterfaceInstance.disconnect();
-        app.pages.push(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
     }
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
             text: qsTr("Pair with watch")
             onClicked: {
-                var page = AmazfishConfig.pairedAddress
-                        ? "UnpairDeviceDialog.qml"
-                        : "PairSelectDeviceType.qml"
-
-                var obj = app.pages.push(Qt.resolvedUrl(page));
-
                 if (AmazfishConfig.pairedAddress) {
+                    var obj = app.pages.push(Qt.resolvedUrl("UnpairDeviceDialog.qml"));
+                    obj.acceptDestination = Qt.resolvedUrl("PairSelectDeviceType.qml")
                     obj.accepted.connect(unpairAccepted);
+                } else {
+                    app.pages.push(Qt.resolvedUrl("PairSelectDeviceType.qml"));
                 }
             }
         }

@@ -38,9 +38,9 @@ PagePL {
             if (acceptDestinationPop)
                 app.pages.pop(acceptDestination);
             else
-                app.push(acceptDestination);
-        } //else
-            //app.pages.pop();
+                app.pages.push(acceptDestination);
+        } else
+            app.pages.pop();
     }
 
     function accept() {
