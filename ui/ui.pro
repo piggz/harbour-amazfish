@@ -39,6 +39,7 @@ SOURCES += src/harbour-amazfish-ui.cpp \
     src/trackloader.cpp
 
 DISTFILES += qml/harbour-amazfish.qml \
+    harbour-amazfish-ui.appdata.xml \
     qml/components/DateNavigation.qml \
     qml/components/DeviceButton.qml \
     qml/components/PercentCircle.qml \
