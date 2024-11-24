@@ -28,16 +28,24 @@
   </developer>
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot1.png</image>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/first-page.png</image>
       <caption>Main screen with step counter and heart rate</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot2.png</image>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/settings-application.png</image>
       <caption>Application settings</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot3.png</image>
-      <caption>Analysis screen</caption>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/settings-profile.png</image>
+      <caption>User profile settings</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/pairing-page.png</image>
+      <caption>Pairing page</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/sports-running.png</image>
+      <caption>Sports Activities: Running</caption>
     </screenshot>
   </screenshots>
   <categories>
