@@ -26,6 +26,10 @@
   <developer id="@piggz@fosstodon.org">
     <name>Adam Pigg</name>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#ff8446</color>
+    <color type="primary" scheme_preference="dark">#3a1d11</color>
+  </branding>
   <screenshots>
     <screenshot type="default">
       <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot1.png</image>
