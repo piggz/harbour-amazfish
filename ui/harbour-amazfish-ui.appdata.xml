@@ -73,7 +73,7 @@
       <p>Translation updates using Weblate (Spanish, Persian, Czech, German).</p>
       <p>UX improvements such as enabling the SailfishOS cover page and updating the device image for AsteroidOS.</p>
       <p>Functional enhancements for Bangle.js, including time synchronization upon connection, JSON handling, music control, and "find my phone" functionality.</p>
-      <p>Replacement of the Haskell & Fox maxHR formula with the more precise Wingate formula.</p>
+      <p>Replacement of the Haskell &amp; Fox maxHR formula with the more precise Wingate formula.</p>
       <p>Updates to translatable strings for UI labels, ensuring accurate translation of axis labels.</p>
       <p>Improvements to number formatting for steps, default height adjustment, and general documentation updates.</p>
       <p>Improve how infinitime, banglejs and AsteroidOS devices pair/connect</p>
