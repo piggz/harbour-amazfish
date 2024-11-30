@@ -5,1259 +5,1259 @@
     <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation>இருப்பிடத்தை அமைக்கவும்</translation>
     </message>
 </context>
 <context>
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>இயக்கப்பட்டது</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>தி</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>செவ்வாய்</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>அறிவன்</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Thu</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>வெள்ளி</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>காரி</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>சூரியன்</translation>
     </message>
 </context>
 <context>
     <name>AnalysisPage</name>
     <message>
         <source>Analysis</source>
-        <translation type="unfinished"></translation>
+        <translation>பகுப்பாய்வு</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>இதய துடிப்பு</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>படிகள்</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation>தீவிரம்</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>பிபிஎம்</translation>
     </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation>அங்கீகார விசையை உள்ளிடவும்</translation>
     </message>
 </context>
 <context>
     <name>BatteryPage</name>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>மின்கலம்</translation>
     </message>
     <message>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பு அனுப்பவும்</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>எதுவுமில்லை</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பைத் தேர்வுசெய்க</translation>
     </message>
     <message>
         <source>File type/version: </source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பு வகை/பதிப்பு: </translation>
     </message>
     <message>
         <source>File not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>இந்த சாதனத்தில் கோப்பு ஆதரிக்கப்படவில்லை</translation>
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பை நிறுவவும்</translation>
     </message>
     <message>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>நிறுவ ஒரு கோப்பைத் தேர்ந்தெடுக்கவும்.</translation>
     </message>
 </context>
 <context>
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>எதிர்பாராத பிழை</translation>
     </message>
 </context>
 <context>
     <name>DebugInfo</name>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>புதுப்பிப்பு</translation>
     </message>
     <message>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>முகவரி: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>சீரியல் எண்: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>வன்பொருள் ரெவ்: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>மென்பொருள் ரெவ்: </translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>இணைப்பு நிலை: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>சி.பி.எச் பார்க்க: </translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>சோதனை அறிவிப்பு</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation type="unfinished"></translation>
+        <translation>மின்னஞ்சல் சோதனை</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>சோதனை அழைப்பு</translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>பிழைத்திருத்த பதிவைப் பெறுங்கள்</translation>
     </message>
     <message>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>சோதனை பாப்அப்</translation>
     </message>
     <message>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>பிழைத்திருத்தம்</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>தகவல்</translation>
     </message>
     <message>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>மாதிரி: </translation>
     </message>
     <message>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>ஃபார்ம்வேர் ரெவ்: </translation>
     </message>
     <message>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>உற்பத்தியாளர்: </translation>
     </message>
     <message>
         <source>A:</source>
-        <translation type="unfinished"></translation>
+        <translation>அ:</translation>
     </message>
     <message>
         <source>S:</source>
-        <translation type="unfinished"></translation>
+        <translation>கள்:</translation>
     </message>
     <message>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>செயல்பாட்டு சோதனைகள்</translation>
     </message>
     <message>
         <source>Send Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>வானிலை அனுப்புங்கள்</translation>
     </message>
     <message>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>காலெண்டரைப் புதுப்பிக்கவும்</translation>
     </message>
     <message>
         <source>Music Control</source>
-        <translation type="unfinished"></translation>
+        <translation>இசை கட்டுப்பாடு</translation>
     </message>
     <message>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>திரை சாட்டைக் கோருங்கள்</translation>
     </message>
     <message>
         <source>Somebody</source>
-        <translation type="unfinished"></translation>
+        <translation>யாரோ</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>தலைப்பு</translation>
     </message>
     <message>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>SAILFISH OS இலிருந்து வணக்கம். இது பி.எல்.இ மீது அனுப்பப்பட்ட நீண்ட செய்தி!</translation>
     </message>
     <message>
         <source>Donald Duck</source>
-        <translation type="unfinished"></translation>
+        <translation>டொனால்ட் டக்</translation>
     </message>
     <message>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation type="unfinished"></translation>
+        <translation>வணக்கம், இது SAILFISH OS இன் மின்னஞ்சல்!</translation>
     </message>
     <message>
         <source>Test Immediate Alert Service</source>
-        <translation type="unfinished"></translation>
+        <translation>உடனடி எச்சரிக்கை சேவையை சோதிக்கவும்</translation>
     </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished"></translation>
+        <translation>தரவைப் பதிவிறக்கவும்</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Pair with watch</source>
-        <translation type="unfinished"></translation>
+        <translation>கடிகாரத்துடன் இணை</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>அமைப்புகள்</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
-        <translation type="unfinished"></translation>
+        <translation>கடிகாரத்திலிருந்து துண்டிக்கவும்</translation>
     </message>
     <message>
         <source>Connect to watch</source>
-        <translation type="unfinished"></translation>
+        <translation>பார்க்க இணைக்கவும்</translation>
     </message>
     <message>
         <source>Data Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>தரவு வரைபடங்கள்</translation>
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>படிகள்</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>இதய துடிப்பு</translation>
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 பிபிஎம்</translation>
     </message>
     <message>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>பணி</translation>
     </message>
     <message>
         <source>Enable on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>துவக்கத்தில் இயக்கு</translation>
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பை நிறுவவும்</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>தரவு இல்லை</translation>
     </message>
 </context>
 <context>
     <name>HeartratePage</name>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>இதய துடிப்பு</translation>
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 பிபிஎம்</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>பிபிஎம்</translation>
     </message>
     <message>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>நிதானமாக</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>ஒளி</translation>
     </message>
     <message>
         <source>Intensive</source>
-        <translation type="unfinished"></translation>
+        <translation>தீவிரமான</translation>
     </message>
     <message>
         <source>Aerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>ஏரோபிக்</translation>
     </message>
     <message>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>காற்றில்லா</translation>
     </message>
     <message>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation>Vo2 அதிகபட்சம்</translation>
     </message>
 </context>
 <context>
     <name>JSTools</name>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>காலி</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>இதய துடிப்பு</translation>
     </message>
     <message>
         <source>Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>விரைவு</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>வேகம்</translation>
     </message>
     <message>
         <source>Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>குத்துயரம்</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>தூரம்</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>இடைநிறுத்தம்</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>காலம்</translation>
     </message>
 </context>
 <context>
     <name>PairPage</name>
     <message>
         <source>Pair Device</source>
-        <translation type="unfinished"></translation>
+        <translation>இணை சாதனம்</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>சாதனங்கள் எதுவும் கிடைக்கவில்லை</translation>
     </message>
     <message>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>ச்கேன் செய்வதை நிறுத்துங்கள்</translation>
     </message>
     <message>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>சாதனங்களுக்கான ச்கேன்</translation>
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>சாதனங்களுக்கான ச்கேன்…</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>இணைத்தல்…</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>ஊடலை அடாப்டர் கிடைக்கவில்லை</translation>
     </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
     <message>
         <source>Select Device Type</source>
-        <translation type="unfinished"></translation>
+        <translation>சாதன வகையைத் தேர்ந்தெடுக்கவும்</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 கள்</translation>
     </message>
     <message>
         <source>%1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 மீ %2 கள்</translation>
     </message>
     <message>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 a %அல்லது %ezz</translation>
     </message>
 </context>
 <context>
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>அலாரங்கள்</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>அமைப்புகளை சேமிக்கவும்</translation>
     </message>
     <message>
         <source>Alarm 1</source>
-        <translation type="unfinished"></translation>
+        <translation>அலாரம் 1</translation>
     </message>
     <message>
         <source>Alarm 2</source>
-        <translation type="unfinished"></translation>
+        <translation>அலாரம் 2</translation>
     </message>
     <message>
         <source>Alarm 3</source>
-        <translation type="unfinished"></translation>
+        <translation>அலாரம் 3</translation>
     </message>
     <message>
         <source>Alarm 4</source>
-        <translation type="unfinished"></translation>
+        <translation>அலாரம் 4</translation>
     </message>
     <message>
         <source>Alarm 5</source>
-        <translation type="unfinished"></translation>
+        <translation>அலாரம் 5</translation>
     </message>
 </context>
 <context>
     <name>Settings-app</name>
     <message>
         <source>Notify on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>இணைப்பில் அறிவிக்கவும்</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>அமைப்புகளை சேமிக்கவும்</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
-        <translation type="unfinished"></translation>
+        <translation>ஒவ்வொரு மணி நேரமும் செயல்பாட்டு தரவை ஒத்திசைக்கவும்</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>பயன்பாட்டு அமைப்புகள்</translation>
     </message>
     <message>
         <source>BT Adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>பி.டி அடாப்டர்</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>அறிவிப்புகள்</translation>
     </message>
     <message>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
+        <translation>குறைந்த பேட்டரி அறிவிப்பு</translation>
     </message>
     <message>
         <source>Navigation notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>வழிசெலுத்தல் அறிவிப்புகள்</translation>
     </message>
     <message>
         <source>Simulate event reminder support</source>
-        <translation type="unfinished"></translation>
+        <translation>நிகழ்வு நினைவூட்டல் ஆதரவை உருவகப்படுத்துங்கள்</translation>
     </message>
     <message>
         <source>Refresh rates</source>
-        <translation type="unfinished"></translation>
+        <translation>விகிதங்களை புதுப்பிக்கவும்</translation>
     </message>
     <message>
         <source>Refresh weather every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>ஒவ்வொரு (%1) நிமிடங்களுக்கும் வானிலை புதுப்பிக்கவும்</translation>
     </message>
     <message>
         <source>Refresh calendar every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>ஒவ்வொரு (%1) நிமிடங்களுக்கும் காலெண்டரைப் புதுப்பிக்கவும்</translation>
     </message>
     <message>
         <source>Amazfish Service</source>
-        <translation type="unfinished"></translation>
+        <translation>அமாச்ஃபிச் பணி</translation>
     </message>
     <message>
         <source>Start service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>துவக்கத்தில் சேவையைத் தொடங்கவும்</translation>
     </message>
     <message>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation type="unfinished"></translation>
+        <translation>அமாச்ஃபிச் பின்னணி சேவையைத் தொடங்க/நிறுத்துங்கள்</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>தொடங்கு</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>நிறுத்து</translation>
     </message>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>பொத்தான் செயல்கள்</translation>
     </message>
     <message>
         <source>Transliterate notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>மொழிபெயர்ப்பு அறிவிப்புகள்</translation>
     </message>
 </context>
 <context>
     <name>Settings-button-action</name>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>பொத்தான் செயல்கள்</translation>
     </message>
     <message>
         <source>Double Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>இரட்டை செய்தித் தாள் நடவடிக்கை</translation>
     </message>
     <message>
         <source>Triple Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>மூன்று செய்தித் தாள் நடவடிக்கை</translation>
     </message>
     <message>
         <source>Quad Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>குவாட் செய்தித் தாள் நடவடிக்கை</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>அமைப்புகளை சேமிக்கவும்</translation>
     </message>
     <message>
         <source>No Action</source>
-        <translation type="unfinished"></translation>
+        <translation>நடவடிக்கை இல்லை</translation>
     </message>
     <message>
         <source>Next Track</source>
-        <translation type="unfinished"></translation>
+        <translation>அடுத்த பாடல்</translation>
     </message>
     <message>
         <source>Previous Track</source>
-        <translation type="unfinished"></translation>
+        <translation>முந்தைய பாடல்</translation>
     </message>
     <message>
         <source>Volume Up</source>
-        <translation type="unfinished"></translation>
+        <translation>தொகுதி</translation>
     </message>
     <message>
         <source>Volume Down</source>
-        <translation type="unfinished"></translation>
+        <translation>தொகுதி கீழே</translation>
     </message>
     <message>
         <source>Custom Script</source>
-        <translation type="unfinished"></translation>
+        <translation>தனிப்பயன் ச்கிரிப்ட்</translation>
     </message>
 </context>
 <context>
     <name>Settings-device</name>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>சாதன அமைப்புகள்</translation>
     </message>
     <message>
         <source>en_US</source>
-        <translation type="unfinished"></translation>
+        <translation>மற்றும்_ச்</translation>
     </message>
     <message>
         <source>es_ES</source>
-        <translation type="unfinished"></translation>
+        <translation>es_es</translation>
     </message>
     <message>
         <source>zh_CN</source>
-        <translation type="unfinished"></translation>
+        <translation>ZH_CN</translation>
     </message>
     <message>
         <source>zh_TW</source>
-        <translation type="unfinished"></translation>
+        <translation>zh</translation>
     </message>
     <message>
         <source>Date Display</source>
-        <translation type="unfinished"></translation>
+        <translation>தேதி காட்சி</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>நேரம்</translation>
     </message>
     <message>
         <source>Date/Time</source>
-        <translation type="unfinished"></translation>
+        <translation>தேதி/நேரம்</translation>
     </message>
     <message>
         <source>Time Format</source>
-        <translation type="unfinished"></translation>
+        <translation>நேர வடிவம்</translation>
     </message>
     <message>
         <source>12hr</source>
-        <translation type="unfinished"></translation>
+        <translation>12 மணி</translation>
     </message>
     <message>
         <source>24hr</source>
-        <translation type="unfinished"></translation>
+        <translation>24 மணி</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>அமைப்புகளை சேமிக்கவும்</translation>
     </message>
     <message>
         <source>Distance Unit</source>
-        <translation type="unfinished"></translation>
+        <translation>தூர அலகு</translation>
     </message>
     <message>
         <source>Metric</source>
-        <translation type="unfinished"></translation>
+        <translation>மெட்ரிக்</translation>
     </message>
     <message>
         <source>Imperial</source>
-        <translation type="unfinished"></translation>
+        <translation>ஏகாதிபத்திய</translation>
     </message>
     <message>
         <source>ru_RU</source>
-        <translation type="unfinished"></translation>
+        <translation>_ரு போன்றவை</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>மொழி</translation>
     </message>
     <message>
         <source>de_DE</source>
-        <translation type="unfinished"></translation>
+        <translation>of</translation>
     </message>
     <message>
         <source>it_IT</source>
-        <translation type="unfinished"></translation>
+        <translation>it_it</translation>
     </message>
     <message>
         <source>fr_FR</source>
-        <translation type="unfinished"></translation>
+        <translation>Fr_fr</translation>
     </message>
     <message>
         <source>tr_TR</source>
-        <translation type="unfinished"></translation>
+        <translation>Tr_tr</translation>
     </message>
     <message>
         <source>nl_NL</source>
-        <translation type="unfinished"></translation>
+        <translation>nl_nl</translation>
     </message>
     <message>
         <source>Disconnect Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>அறிவிப்பைத் துண்டிக்கவும்</translation>
     </message>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>உவாமாம் காட்சி உருப்படிகள்</translation>
     </message>
     <message>
         <source>Realtime HRM measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>நிகழ்நேர HRM அளவீட்டு</translation>
     </message>
 </context>
 <context>
     <name>Settings-huami-shortcuts</name>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>உவாமி காட்சி உருப்படிகள்</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>அமைப்புகளை சேமிக்கவும்</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>நிலை</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>இதய துடிப்பு</translation>
     </message>
     <message>
         <source>Workout</source>
-        <translation type="unfinished"></translation>
+        <translation>பயிற்சி</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>வானிலை</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>அறிவிப்புகள்</translation>
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>மேலும்</translation>
     </message>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>தொந்தரவு செய்ய வேண்டாம்</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>அலாரங்கள்</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>இசை</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>நேரம்</translation>
     </message>
     <message>
         <source>Mute Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>முடக்கு தொலைபேசி</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>அமைப்புகள்</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>செய்கைப்பாடு</translation>
     </message>
     <message>
         <source>Event Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>நிகழ்வு நினைவூட்டல்</translation>
     </message>
     <message>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>பை</translation>
     </message>
     <message>
         <source>World Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>உலக கடிகாரம்</translation>
     </message>
     <message>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation>தகைவு</translation>
     </message>
     <message>
         <source>Period</source>
-        <translation type="unfinished"></translation>
+        <translation>காலசுழற்சி</translation>
     </message>
     <message>
         <source>SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>Spo2</translation>
     </message>
     <message>
         <source>Alexa</source>
-        <translation type="unfinished"></translation>
+        <translation>அலெக்சா</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation type="unfinished"></translation>
+        <translation>திசைகாட்டி</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation type="unfinished"></translation>
+        <translation>அலிபே</translation>
     </message>
     <message>
         <source>Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>நேரங்குறிகருவி</translation>
     </message>
 </context>
 <context>
     <name>Settings-menu</name>
     <message>
         <source>Settings Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>அமைப்புகள் பட்டியல்</translation>
     </message>
     <message>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>பயனர் அமைப்புகள்</translation>
     </message>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>சாதன அமைப்புகள்</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>பயன்பாட்டு அமைப்புகள்</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>அலாரங்கள்</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>நன்கொடை</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>வானிலை</translation>
     </message>
     <message>
         <source>Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>ச்ட்ராவா</translation>
     </message>
     <message>
         <source>Debug Info</source>
-        <translation type="unfinished"></translation>
+        <translation>பிழைத்திருத்த செய்தி</translation>
     </message>
 </context>
 <context>
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>சுயவிவர அமைப்புகள்</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>பெயர்:</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>பிறந்த நாள்</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>பாலினம்</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>ஆண்</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>பெண்</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>உயரம் (முதல்வர்): </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>எடை (கிலோ): </translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>இருப்பிடத்தை அணியுங்கள்</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>இடது</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>வலது</translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>லிப்ட் மணிக்கட்டில் காண்பி</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>இலக்கு (படிகள்): </translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>உடற்பயிற்சி இலக்கு குறித்த எச்சரிக்கை</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>தூக்கத்தைக் கண்டறிவதற்கு HRM ஐப் பயன்படுத்தவும்</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>நாள் முழுவதும் HRM இடைவெளி (நிமிடங்கள்): </translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>சுயவிவரத்தை சேமிக்கவும்</translation>
     </message>
     <message>
         <source>Personal data</source>
-        <translation type="unfinished"></translation>
+        <translation>தனிப்பட்ட செய்தி</translation>
     </message>
     <message>
         <source>Personal preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>தனிப்பட்ட விருப்பத்தேர்வுகள்</translation>
     </message>
     <message>
         <source>Heartrate usage</source>
-        <translation type="unfinished"></translation>
+        <translation>இதய துடிப்பு பயன்பாடு</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>அணை</translation>
     </message>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>ஆன்</translation>
     </message>
     <message>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>அட்டவணை</translation>
     </message>
 </context>
 <context>
     <name>SleepPage</name>
     <message>
         <source>Sleep Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>தூக்க சுருக்கம்</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>தூங்கு</translation>
     </message>
     <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>மாத/நாள்</translation>
     </message>
     <message>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>மணி</translation>
     </message>
     <message>
         <source>Total %1</source>
-        <translation type="unfinished"></translation>
+        <translation>மொத்த %1</translation>
     </message>
     <message>
         <source>Light %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ஒளி %1</translation>
     </message>
     <message>
         <source>Deep %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ஆழமான %1</translation>
     </message>
 </context>
 <context>
     <name>SportPage</name>
     <message>
         <source>Send to Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>ச்ட்ராவாவுக்கு அனுப்புங்கள்</translation>
     </message>
     <message>
         <source>Data:</source>
-        <translation type="unfinished"></translation>
+        <translation>தரவு:</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>படிகள்</translation>
     </message>
     <message>
         <source>Active Seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>செயலில் விநாடிகள்</translation>
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation>கலோரிகள்</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>தூரம்</translation>
     </message>
     <message>
         <source>Ascent</source>
-        <translation type="unfinished"></translation>
+        <translation>ஏற்றம்</translation>
     </message>
     <message>
         <source>Descent</source>
-        <translation type="unfinished"></translation>
+        <translation>இறக்கம்</translation>
     </message>
     <message>
         <source>Max Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>அதிகபட்ச உயரம்</translation>
     </message>
     <message>
         <source>Min Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>குறைந்தபட்ச உயரம்</translation>
     </message>
     <message>
         <source>Min Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>மணித்துளி விரைவு</translation>
     </message>
     <message>
         <source>Max Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>அதிகபட்ச விரைவு</translation>
     </message>
     <message>
         <source>Average HR</source>
-        <translation type="unfinished"></translation>
+        <translation>சராசரி மனிதவள</translation>
     </message>
     <message>
         <source>Average Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>சராசரி விரைவு</translation>
     </message>
     <message>
         <source>Average Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>சராசரி முன்னேற்றம்</translation>
     </message>
     <message>
         <source>Max HR</source>
-        <translation type="unfinished"></translation>
+        <translation>அதிகபட்ச எச்.ஆர்</translation>
     </message>
     <message>
         <source>Time Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>நேரம் ஏறுதல்</translation>
     </message>
     <message>
         <source>Time Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>நேரம் இறங்கு</translation>
     </message>
     <message>
         <source>Time Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>நேரம் தட்டையானது</translation>
     </message>
     <message>
         <source>Average Stroke</source>
-        <translation type="unfinished"></translation>
+        <translation>சராசரி பக்கவாதம்</translation>
     </message>
     <message>
         <source>Average Stroke/s</source>
-        <translation type="unfinished"></translation>
+        <translation>சராசரி பக்கவாதம்/கள்</translation>
     </message>
     <message>
         <source>Average Lap Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>சராசரி மடியில் விரைவு</translation>
     </message>
     <message>
         <source>Strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>பக்கவாதம்</translation>
     </message>
     <message>
         <source>SWOLF Index</source>
-        <translation type="unfinished"></translation>
+        <translation>ச்வோல்ஃப் இன்டெக்ச்</translation>
     </message>
     <message>
         <source>Swim Style</source>
-        <translation type="unfinished"></translation>
+        <translation>நீச்சல் நடை</translation>
     </message>
     <message>
         <source>Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>மடியில்</translation>
     </message>
     <message>
         <source>Max Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>அதிகபட்ச அட்சரேகை</translation>
     </message>
     <message>
         <source>Min Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>குறைந்தபட்ச அட்சரேகை</translation>
     </message>
     <message>
         <source>Max Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>அதிகபட்ச தீர்க்கரேகை</translation>
     </message>
     <message>
         <source>Min Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>குறைந்தபட்ச தீர்க்கரேகை</translation>
     </message>
     <message>
         <source>Max Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>அதிகபட்ச வேகம்</translation>
     </message>
     <message>
         <source>Total Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>மொத்த முன்னேற்றம்</translation>
     </message>
     <message>
         <source>steps</source>
-        <translation type="unfinished"></translation>
+        <translation>படிகள்</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>நொடிகள்</translation>
     </message>
     <message>
         <source>kcal</source>
-        <translation type="unfinished"></translation>
+        <translation>கிலோகலோரி</translation>
     </message>
     <message>
         <source>meters</source>
-        <translation type="unfinished"></translation>
+        <translation>மீட்டர்</translation>
     </message>
     <message>
         <source>seconds/m</source>
-        <translation type="unfinished"></translation>
+        <translation>விநாடிகள்/மீ</translation>
     </message>
     <message>
         <source>bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>பிபிஎம்</translation>
     </message>
     <message>
         <source>seconds/km</source>
-        <translation type="unfinished"></translation>
+        <translation>விநாடிகள்/கிமீ</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>முதல்வர்</translation>
     </message>
     <message>
         <source>strokes/s</source>
-        <translation type="unfinished"></translation>
+        <translation>பக்கவாதம்/கள்</translation>
     </message>
     <message>
         <source>strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>தாக்குதல்கள்</translation>
     </message>
     <message>
         <source>swolf</source>
-        <translation type="unfinished"></translation>
+        <translation>ச்வோல்ஃப்</translation>
     </message>
 </context>
 <context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Sports Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>விளையாட்டு நடவடிக்கைகள்</translation>
     </message>
     <message>
         <source>Download Next Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>அடுத்த செயல்பாட்டைப் பதிவிறக்கவும்</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>அகற்று</translation>
     </message>
 </context>
 <context>
     <name>StepsPage</name>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>படிகள்</translation>
     </message>
 </context>
 <context>
     <name>StravaSettingsPage</name>
     <message>
         <source>Strava settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ச்ட்ராவா அமைப்புகள்</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>வெளியேற்றம்</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>புகுபதிவு</translation>
     </message>
     <message>
         <source>User Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>பயனர் பெயர்: </translation>
     </message>
     <message>
         <source>Country: </source>
-        <translation type="unfinished"></translation>
+        <translation>நாடு: </translation>
     </message>
     <message>
         <source>not logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>உள்நுழையவில்லை</translation>
     </message>
 </context>
 <context>
     <name>StravaUploadPage</name>
     <message>
         <source>Strava Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>ச்ட்ராவா பதிவேற்றம்</translation>
     </message>
     <message>
         <source>Activity name for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>ச்ட்ராவாவிற்கான செயல்பாட்டு பெயர்</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>பெயர்</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>விவரம்</translation>
     </message>
     <message>
         <source>Activity description for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>ச்ட்ராவாவிற்கான செயல்பாட்டு விளக்கம்</translation>
     </message>
     <message>
         <source>Type (Strava)</source>
-        <translation type="unfinished"></translation>
+        <translation>வகை (ச்ட்ராவா)</translation>
     </message>
     <message>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>தனிப்பட்ட</translation>
     </message>
     <message>
         <source>Commute</source>
-        <translation type="unfinished"></translation>
+        <translation>பயணம்</translation>
     </message>
     <message>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>பதிவேற்றும்</translation>
     </message>
     <message>
         <source>Uploading data...</source>
-        <translation type="unfinished"></translation>
+        <translation>தரவைப் பதிவேற்றுகிறது ...</translation>
     </message>
     <message>
         <source>Checking upload...</source>
-        <translation type="unfinished"></translation>
+        <translation>பதிவேற்றத்தை சரிபார்க்கிறது ...</translation>
     </message>
     <message>
         <source>TCX uploaded...</source>
-        <translation type="unfinished"></translation>
+        <translation>டி.சி.எக்ச் பதிவேற்றப்பட்டது ...</translation>
     </message>
     <message>
         <source>Activity upload complete</source>
-        <translation type="unfinished"></translation>
+        <translation>செயல்பாட்டு பதிவேற்றம் முடிந்தது</translation>
     </message>
     <message>
         <source>An unknown error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>அறியப்படாத பிழை ஏற்பட்டது</translation>
     </message>
 </context>
 <context>
     <name>UnpairDeviceDialog</name>
     <message>
         <source>Unpair</source>
-        <translation type="unfinished"></translation>
+        <translation>அவிழ்த்து விடுங்கள்</translation>
     </message>
     <message>
         <source>Before proceeding you need to unpair your current device.</source>
-        <translation type="unfinished"></translation>
+        <translation>தொடர்வதற்கு முன் உங்கள் தற்போதைய சாதனத்தை திறக்க வேண்டும்.</translation>
     </message>
 </context>
 </TS>
