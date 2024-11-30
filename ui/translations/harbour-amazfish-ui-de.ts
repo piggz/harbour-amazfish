@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished">BPM</translation>
+        <translation>bpm</translation>
     </message>
 </context>
 <context>
@@ -116,11 +116,11 @@
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei installieren</translation>
     </message>
     <message>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu installierende Datei auswählen.</translation>
     </message>
 </context>
 <context>
@@ -146,11 +146,11 @@
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation>Hardware Rev: </translation>
+        <translation>Hardware Rev.: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation>Software Rev: </translation>
+        <translation>Software Rev.: </translation>
     </message>
     <message>
         <source>Connection State: </source>
@@ -158,7 +158,7 @@
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation>GPS Ver: </translation>
+        <translation>GPS Ver.: </translation>
     </message>
     <message>
         <source>Test Notification</source>
@@ -178,7 +178,7 @@
     </message>
     <message>
         <source>Test Popup</source>
-        <translation>Test Popup</translation>
+        <translation>Testbenachrichtigung</translation>
     </message>
     <message>
         <source>Send Weather</source>
@@ -214,7 +214,7 @@
     </message>
     <message>
         <source>Debugging</source>
-        <translation>Debugging</translation>
+        <translation>Fehlersuche</translation>
     </message>
     <message>
         <source>Information</source>
@@ -312,7 +312,7 @@
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei installieren</translation>
     </message>
 </context>
 <context>
@@ -330,7 +330,7 @@
     </message>
     <message>
         <source>BPM</source>
-        <translation>BPM</translation>
+        <translation>bpm</translation>
     </message>
     <message>
         <source>Relaxed</source>
@@ -412,11 +412,11 @@
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation>Suche nach Geräten...</translation>
+        <translation>Suche nach Geräten…</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation>Koppeln...</translation>
+        <translation>Koppeln…</translation>
     </message>
     <message>
         <source>No devices found</source>
@@ -975,15 +975,15 @@
     </message>
     <message>
         <source>Total %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Insgesamt %1</translation>
     </message>
     <message>
         <source>Light %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Leichter Schlaf %1</translation>
     </message>
     <message>
         <source>Deep %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiefschlaf %1</translation>
     </message>
 </context>
 <context>
@@ -1062,11 +1062,11 @@
     </message>
     <message>
         <source>Average Stroke</source>
-        <translation>Durchschnittlicher Hub</translation>
+        <translation>Durchschnittlicher Schwimmzug</translation>
     </message>
     <message>
         <source>Average Stroke/s</source>
-        <translation>Durchschnittlicher Hub/s</translation>
+        <translation>Durchschnittliche Schwimmzüge/s</translation>
     </message>
     <message>
         <source>Average Lap Pace</source>
@@ -1074,7 +1074,7 @@
     </message>
     <message>
         <source>Strokes</source>
-        <translation>Schläge</translation>
+        <translation>Schwimmzüge</translation>
     </message>
     <message>
         <source>SWOLF Index</source>
@@ -1106,7 +1106,7 @@
     </message>
     <message>
         <source>Max Speed</source>
-        <translation>Maximale Geschwindigkeit</translation>
+        <translation>Max. Geschwindigkeit</translation>
     </message>
     <message>
         <source>Total Stride</source>
@@ -1118,7 +1118,7 @@
     </message>
     <message>
         <source>seconds</source>
-        <translation>Nachschlag</translation>
+        <translation>Sekunden</translation>
     </message>
     <message>
         <source>kcal</source>
@@ -1146,11 +1146,11 @@
     </message>
     <message>
         <source>strokes/s</source>
-        <translation>Hübe/s</translation>
+        <translation>Schwimmzüge/s</translation>
     </message>
     <message>
         <source>strokes</source>
-        <translation>Schläge</translation>
+        <translation>Schwimmzüge</translation>
     </message>
     <message>
         <source>swolf</source>
