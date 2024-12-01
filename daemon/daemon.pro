@@ -273,6 +273,7 @@ TRANSLATIONS += \
     translations/harbour-amazfishd-pl.ts \
     translations/harbour-amazfishd-ru.ts \
     translations/harbour-amazfishd-sv.ts \
+    translations/harbour-amazfishd-ta.ts \
     translations/harbour-amazfishd-zh_Hans.ts
 
 
