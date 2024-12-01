@@ -178,6 +178,7 @@ TRANSLATIONS += \
     translations/harbour-amazfish-ui-pl.ts \
     translations/harbour-amazfish-ui-ru.ts \
     translations/harbour-amazfish-ui-sv.ts \
+    translations/harbour-amazfish-ui-ta.ts \
     translations/harbour-amazfish-ui-zh_CN.ts
 
 HEADERS += \
