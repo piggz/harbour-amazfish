@@ -193,7 +193,7 @@ PagePL {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                app.showMessage("This is a test notification");
+                app.showMessage(qsTr("This is a test notification"));
             }
         }
         ButtonPL {
