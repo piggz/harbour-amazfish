@@ -116,19 +116,9 @@ ApplicationWindowPL
         function updateProperties() {
             if (ENABLE_SYSTEMD === "YES"){
                 var activeProperty = systemdServiceIface.getProperty("ActiveState");
-                if (activeProperty === "active") {
-                    serviceActiveState = true;
-                } else {
-                    serviceActiveState = false;
-                }
-
+                serviceActiveState = (activeProperty === "active");
                 var serviceEnabledProperty = systemdServiceIface.getProperty("UnitFileState");
-                if (serviceEnabledProperty === "enabled") {
-                    serviceEnabledState = true;
-                }
-                else {
-                    serviceEnabledState = false;
-                }
+                serviceEnabledState = (serviceEnabledProperty === "enabled");
             }
         }
 
@@ -147,7 +137,8 @@ ApplicationWindowPL
         signal unitNew(string name)
         onUnitNew: {
             if (name == "harbour-amazfish.service" && ENABLE_SYSTEMD === "YES") {
-                systemdServiceIface.updateProperties()
+                // systemd unit is created every time when doesn't exists, hence this leads to recursion
+                // systemdServiceIface.updateProperties()
             }
         }
 
