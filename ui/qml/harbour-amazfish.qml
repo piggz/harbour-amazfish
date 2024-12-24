@@ -116,19 +116,9 @@ ApplicationWindowPL
         function updateProperties() {
             if (ENABLE_SYSTEMD === "YES"){
                 var activeProperty = systemdServiceIface.getProperty("ActiveState");
-                if (activeProperty === "active") {
-                    serviceActiveState = true;
-                } else {
-                    serviceActiveState = false;
-                }
-
+                serviceActiveState = (activeProperty === "active");
                 var serviceEnabledProperty = systemdServiceIface.getProperty("UnitFileState");
-                if (serviceEnabledProperty === "enabled") {
-                    serviceEnabledState = true;
-                }
-                else {
-                    serviceEnabledState = false;
-                }
+                serviceEnabledState = (serviceEnabledProperty === "enabled");
             }
         }
 
@@ -143,13 +133,6 @@ ApplicationWindowPL
         path: "/org/freedesktop/systemd1"
         iface: "org.freedesktop.systemd1.Manager"
         signalsEnabled: true
-
-        signal unitNew(string name)
-        onUnitNew: {
-            if (name == "harbour-amazfish.service" && ENABLE_SYSTEMD === "YES") {
-                systemdServiceIface.updateProperties()
-            }
-        }
 
         function enableService() {
             if(ENABLE_SYSTEMD === "YES") {
