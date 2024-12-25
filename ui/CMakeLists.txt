@@ -78,11 +78,11 @@ target_link_libraries(harbour-amazfish-ui
 #install(FILES "harbour-amazfish.desktop"
 #    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
 
-install(FILES "icons/256x256/harbour-amazfish.png"
-    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256/apps")
+#install(FILES "icons/256x256/harbour-amazfish.png"
+#    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256/apps")
 
-install(FILES "icons/512x512/harbour-amazfish.png"
-    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/512x512/apps")
+#install(FILES "icons/512x512/harbour-amazfish.png"
+#    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/512x512/apps")
 
 # install(FILES "harbour-amazfish.appdata.xml"
 #    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")

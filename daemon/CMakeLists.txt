@@ -155,13 +155,20 @@ set(HEADERS
 ./src/typeconversion.h
 )
 
+add_executable(harbour-amazfishd ${SOURCES} ${HEADERS})
 
-set(WATCHFISH_FEATURES "notificationmonitor;walltime;music;calendar;voicecall;volume")
+find_package(PkgConfig REQUIRED)
+find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)
+find_package(KF5Archive REQUIRED)
+find_package(ZLIB REQUIRED)
+find_package(ICU REQUIRED COMPONENTS uc i18n data)
+find_package(KDb REQUIRED)
+
 
 if(FLAVOR STREQUAL "silica")
+    set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall")
 
 #    message(SailfishOS daemon build)
-#    DEFINES += MER_EDITION_SAILFISH
 #    LIBS += -lkeepalive -lpulse-simple
 #    CONFIG += sailfishapp
 #    CONFIG += link_pkgconfig
@@ -172,14 +179,15 @@ if(FLAVOR STREQUAL "silica")
 #                      calendar
 
 elseif(FLAVOR STREQUAL "uuitk")
+    set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall")
 
-#    DEFINES += UUITK_EDITION
 #    LIBS += -lpulse-simple
 #    PKGCONFIG += libpulse
-#    WATCHFISH_FEATURES += music \
-#                      voicecall \
-#                      notificationmonitor \
-#                      calendar
+
+    pkg_check_modules(PULSE REQUIRED libpulse)
+    target_include_directories(harbour-amazfishd PUBLIC ${PULSE_INCLUDE_DIRS})
+    target_link_libraries(harbour-amazfishd PUBLIC ${PULSE_LIBRARIES} pulse-simple)
+
 
 else()
     set(WATCHFISH_FEATURES "notificationmonitor;music;calendar")
@@ -187,13 +195,7 @@ endif()
 
 add_subdirectory(libwatchfish)
 
-find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)
-find_package(KF5Archive REQUIRED)
-find_package(ZLIB REQUIRED)
-find_package(ICU REQUIRED COMPONENTS uc i18n data)
-find_package(KDb REQUIRED)
 
-add_executable(harbour-amazfishd ${SOURCES} ${HEADERS})
 
 install(TARGETS harbour-amazfishd RUNTIME
         DESTINATION ${CMAKE_INSTALL_BINDIR})
