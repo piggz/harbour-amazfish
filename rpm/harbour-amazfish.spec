@@ -56,6 +56,7 @@ BuildRequires:  libkeepalive-devel
 BuildRequires:  libkf5archive-devel
 BuildRequires:  pulseaudio-devel
 BuildRequires:  libicu-devel
+BuildRequires:  cmake
 
 %description
 Watch companion application for SalfishOS
@@ -88,12 +89,18 @@ Links:
 
 %build
 %if 0%{?sailfishos}
-%qmake5 VERSION='%{version}-%{release}' FLAVOR=silica
+    cmake \
+        -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
+        -DFLAVOR=silica \
+        .
 %else
-%qmake5 VERSION='%{version}-%{release}' FLAVOR=kirigami
+    cmake \
+        -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
+        -DFLAVOR=kirigami \
+        .
 %endif
 
-%qtc_make %{?_smp_mflags}
+cmake --build "." %{?_smp_mflags} --verbose
 
 # >> build post
 # << build post
@@ -102,7 +109,9 @@ Links:
 rm -rf %{buildroot}
 # >> install pre
 # << install pre
-%qmake5_install
+
+DESTDIR=%{buildroot} cmake --install build
+
 
 # >> install post
 # << install post
