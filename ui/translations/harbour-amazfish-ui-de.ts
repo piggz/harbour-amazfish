@@ -1026,11 +1026,11 @@
     </message>
     <message>
         <source>Min Pace</source>
-        <translation>Min. Geschwindigkeit</translation>
+        <translation>Min. Pace</translation>
     </message>
     <message>
         <source>Max Pace</source>
-        <translation>Max. Geschwindigkeit</translation>
+        <translation>Max. Pace</translation>
     </message>
     <message>
         <source>Average HR</source>
@@ -1038,7 +1038,7 @@
     </message>
     <message>
         <source>Average Pace</source>
-        <translation>Durchschnittsgeschwindigkeit</translation>
+        <translation>durchschnittlicher Pace</translation>
     </message>
     <message>
         <source>Average Stride</source>
@@ -1070,7 +1070,7 @@
     </message>
     <message>
         <source>Average Lap Pace</source>
-        <translation>Durchschnittliche Rundenpace</translation>
+        <translation>Durchschnittlicher Runden-Pace</translation>
     </message>
     <message>
         <source>Strokes</source>
