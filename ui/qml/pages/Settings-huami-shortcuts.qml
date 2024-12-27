@@ -107,6 +107,8 @@ PagePL {
         if (name === "compass") return qsTr("Compass");
         if (name === "alipay") return qsTr("AliPay");
         if (name === "timer") return qsTr("Timer");
+        if (name === "steps") return qsTr("Steps");
+        if (name === "stopwatch") return qsTr("Stopwatch");
 
         //If all else fails, use original name
         return name;
