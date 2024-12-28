@@ -227,7 +227,7 @@ file(GLOB TS_FILES translations/*.ts)
 
 # TODO check if translation path is correct on all platforms
 if(FLAVOR STREQUAL "uuitk")
-    add_definitions(-DTRANSLATION_FOLDER="./share/harbour-amazfish/translations")
+    add_definitions(-DTRANSLATION_FOLDER="../share/harbour-amazfish/translations")
 else() 
     add_definitions(-DTRANSLATION_FOLDER=".")
 endif()
