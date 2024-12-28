@@ -1,4 +1,3 @@
-
 set(SOURCES
 ./src/activitycoordinate.cpp
 ./src/activitykind.cpp

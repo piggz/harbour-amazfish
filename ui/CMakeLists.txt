@@ -73,7 +73,16 @@ target_link_libraries(harbour-amazfish-ui
   Qt5::Core Qt5::Widgets Qt5::Quick Qt5::Positioning
   KDb
   o2
+  ${SAILFISH_LDFLAGS}
 )
+
+if(FLAVOR STREQUAL "silica")
+    target_include_directories(harbour-amazfish-ui PRIVATE
+        $<BUILD_INTERFACE:
+        ${SAILFISH_INCLUDE_DIRS}
+        >)
+endif()
+
 
 #install(FILES "harbour-amazfish.desktop"
 #    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
