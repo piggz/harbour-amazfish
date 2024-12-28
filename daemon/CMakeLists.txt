@@ -235,3 +235,9 @@ endif()
 QT5_ADD_TRANSLATION(QM_FILES ${TS_FILES})
 add_custom_target(daemon_translations DEPENDS ${QM_FILES})
 add_dependencies(harbour-amazfishd daemon_translations)
+
+QT5_CREATE_TRANSLATION(QT_FILES "${CMAKE_SOURCE_DIR}"
+    OPTIONS "-no-obsolete")
+
+install(FILES ${QM_FILES}
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfish/translations")
