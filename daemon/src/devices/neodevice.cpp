@@ -8,7 +8,7 @@
 
 NeoDevice::NeoDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
-    qDebug() << "Creating Neo Device";
+    qDebug() << "Creating Neo Device" << pairedName;
 }
 
 QString NeoDevice::deviceType() const
@@ -109,16 +109,16 @@ void NeoDevice::parseServices()
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), nullptr);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
 
-    qDebug() << "Resolved services...";
+    // qDebug() << "Resolved services...";
 
-    qDebug().noquote() << xml.value();
+    // qDebug().noquote() << xml.value();
 
     QDomDocument doc;
     doc.setContent(xml.value());
 
     QDomNodeList nodes = doc.elementsByTagName("node");
 
-    qDebug() << nodes.count() << "nodes";
+    // qDebug() << nodes.count() << "nodes";
 
     for (int x = 0; x < nodes.count(); x++)
     {

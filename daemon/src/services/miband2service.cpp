@@ -33,7 +33,7 @@ void MiBand2Service::initialise(bool firstTime)
 
 void MiBand2Service::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value;
+    qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value.toHex();
 
     if (value[0] == RESPONSE && value[1] == AUTH_SEND_KEY && ((value[2] & SUCCESS) == SUCCESS || value[2] == 0x06) ) {
         qDebug() << "Received initial auth success, requesting random auth number";
@@ -67,14 +67,15 @@ QByteArray MiBand2Service::getSecretKey()
 }
 
 QByteArray MiBand2Service::requestAuthNumber() {
-    qDebug() << Q_FUNC_INFO << "Crypt Byte:" << m_cryptByte;
+    qDebug() << Q_FUNC_INFO << "Crypt Byte:" << QString::number(m_cryptByte, 16); // 0x80
     if (m_cryptByte == 0x00) {
         return UCHAR_TO_BYTEARRAY(AUTH_REQUEST_RANDOM_AUTH_NUMBER) + UCHAR_TO_BYTEARRAY(m_authByte);
     } else {
-        uint8_t req = (m_cryptByte | AUTH_REQUEST_RANDOM_AUTH_NUMBER);
-        uint8_t suffix[3] = {0x02,0x01, 0x00};
+        uint8_t req = (m_cryptByte | AUTH_REQUEST_RANDOM_AUTH_NUMBER); // 0x80 | 0x02 = 0x82
+        uint8_t suffix[3] = {0x02, 0x01, 0x00};
         //uint8_t suffix[1] = {0x02};
 
+        // 82 08 02 01 00
         return UCHAR_TO_BYTEARRAY(req) + UCHAR_TO_BYTEARRAY(m_authByte) + UCHARARR_TO_BYTEARRAY(suffix);
     }
 }
