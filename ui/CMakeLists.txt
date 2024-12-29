@@ -83,15 +83,20 @@ if(FLAVOR STREQUAL "silica")
         >)
 endif()
 
-
 #install(FILES "harbour-amazfish.desktop"
 #    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
 
-#install(FILES "icons/256x256/harbour-amazfish.png"
-#    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256/apps")
+install(FILES "icons/108x108/harbour-amazfish-ui.png"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/108x108/apps")
 
-#install(FILES "icons/512x512/harbour-amazfish.png"
-#    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/512x512/apps")
+install(FILES "icons/172x172/harbour-amazfish-ui.png"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/172x172/apps")
+
+install(FILES "icons/128x128/harbour-amazfish-ui.png"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/128x128/apps")
+
+install(FILES "icons/86x86/harbour-amazfish-ui.png"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/86x86/apps")
 
 # install(FILES "harbour-amazfish.appdata.xml"
 #    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")

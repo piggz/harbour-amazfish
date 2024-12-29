@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Icon=harbour-amazfish-ui.png
+Icon=share/icons/hicolor/172x172/apps/harbour-amazfish-ui.png
 Exec=./bin/run.sh
 Name=Amazfish
 X-Ubuntu-Touch=true
