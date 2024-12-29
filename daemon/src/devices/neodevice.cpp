@@ -97,6 +97,8 @@ void NeoDevice::initialise()
 
     QString revision = softwareRevision();
     qDebug() << Q_FUNC_INFO << "Neo Firmware: " << revision;
+    m_ActivitySampleSize = 8;
+
 }
 
 
