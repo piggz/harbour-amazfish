@@ -84,33 +84,52 @@ PagePL {
     }
 
     function displayName(name) {
-        if (name === "status") return qsTr("Status");
-        if (name === "hr") return qsTr("Heartrate");
-        if (name === "workout") return qsTr("Workout");
-        if (name === "weather") return qsTr("Weather");
-        if (name === "notifications") return qsTr("Notifications");
-        if (name === "more") return qsTr("More");
-        if (name === "dnd") return qsTr("Do Not Disturb");
-        if (name === "alarm") return qsTr("Alarms");
-        if (name === "music") return qsTr("Music");
-        if (name === "time") return qsTr("Time");
-        if (name === "mutephone") return qsTr("Mute Phone");
-        if (name === "settings") return qsTr("Settings");
-        if (name === "activity") return qsTr("Activity");
-        if (name === "eventreminder") return qsTr("Event Reminder");
-        if (name === "pai") return qsTr("PAI");
-        if (name === "worldclock") return qsTr("World Clock");
-        if (name === "stress") return qsTr("Stress");
-        if (name === "period") return qsTr("Period");
-        if (name === "spo2") return qsTr("SPO2");
-        if (name === "alexa") return qsTr("Alexa");
-        if (name === "compass") return qsTr("Compass");
-        if (name === "alipay") return qsTr("AliPay");
-        if (name === "timer") return qsTr("Timer");
-        if (name === "steps") return qsTr("Steps");
-        if (name === "stopwatch") return qsTr("Stopwatch");
-
-        //If all else fails, use original name
+        const translations = {
+            "status": qsTr("Status"),
+            "hr": qsTr("HR"),
+            "workout": qsTr("Workout"),
+            "weather": qsTr("Weather"),
+            "notifications": qsTr("Notifications"),
+            "more": qsTr("More"),
+            "dnd": qsTr("DND"),
+            "alarm": qsTr("Alarm"),
+            "takephoto": qsTr("Take Photo"),
+            "music": qsTr("Music"),
+            "stopwatch": qsTr("Stopwatch"),
+            "timer": qsTr("Timer"),
+            "findphone": qsTr("Find Phone"),
+            "mutephone": qsTr("Mute Phone"),
+            "nfc": qsTr("NFC"),
+            "alipay": qsTr("AliPay"),
+            "watchface": qsTr("Watch Face"),
+            "settings": qsTr("Settings"),
+            "activity": qsTr("Activity"),
+            "eventreminder": qsTr("Event Reminder"),
+            "compass": qsTr("Compass"),
+            "pai": qsTr("PAI"),
+            "worldclock": qsTr("World Clock"),
+            "timer_stopwatch": qsTr("Timer/Stopwatch"),
+            "stress": qsTr("Stress"),
+            "period": qsTr("Period"),
+            "goal": qsTr("Goal"),
+            "sleep": qsTr("Sleep"),
+            "spo2": qsTr("SpO2"),
+            "events": qsTr("Events"),
+            "widgets": qsTr("Widgets"),
+            "breathing": qsTr("Breathing"),
+            "steps": qsTr("Steps"),
+            "distance": qsTr("Distance"),
+            "calories": qsTr("Calories"),
+            "pomodoro": qsTr("Pomodoro"),
+            "alexa": qsTr("Alexa"),
+            "battery": qsTr("Battery"),
+            "temperature": qsTr("Temperature"),
+            "barometer": qsTr("Barometer"),
+            "flashlight": qsTr("Flashlight")
+        };
+        if (translations[name] !== undefined) {
+            return translations[name];
+        }
         return name;
     }
 
