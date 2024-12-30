@@ -98,5 +98,8 @@ install(FILES "icons/128x128/harbour-amazfish-ui.png"
 install(FILES "icons/86x86/harbour-amazfish-ui.png"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/86x86/apps")
 
+install(FILES "icons/scalable/harbour-amazfish-ui.svg"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps")
+
 # install(FILES "harbour-amazfish.appdata.xml"
 #    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")
