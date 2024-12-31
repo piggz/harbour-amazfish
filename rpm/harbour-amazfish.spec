@@ -111,7 +111,7 @@ rm -rf %{buildroot}
 # >> install pre
 # << install pre
 
-DESTDIR=%{buildroot} cmake --install build
+DESTDIR=%{buildroot} cmake --install .
 
 # >> install post
 # << install post
