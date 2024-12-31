@@ -28,7 +28,7 @@ jobs:
             cp -r /share/* . ;
             sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive ar --no-gpgcheck https://repo.sailfishos.org/obs/sailfishos:/chum/4.6_${{ matrix.arch }}/ sailfishos_chum ;
             sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive refresh ;
-            sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive in -y mpris-qt5-devel libkf5archive-devel kcoreaddons-devel kdb-devel libKDb3-3 mkcal-qt5-devel libicu-devel pulseaudio-devel;
+            sb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} -R zypper --non-interactive in -y mpris-qt5-devel libkf5archive-devel kcoreaddons-devel kdb-devel libKDb3-3 mkcal-qt5-devel libicu-devel pulseaudio-devel ninja;
             mb2 -t SailfishOS-$OS_VERSION-${{ matrix.arch }} build ;
             sudo cp -r RPMS/*.rpm /share/output"
       
