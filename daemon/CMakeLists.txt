@@ -163,7 +163,6 @@ find_package(ZLIB REQUIRED)
 find_package(ICU REQUIRED COMPONENTS uc i18n data)
 find_package(KDb REQUIRED)
 
-
 if(FLAVOR STREQUAL "silica")
     set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall")
 
@@ -177,11 +176,19 @@ if(FLAVOR STREQUAL "silica")
 #                      notificationmonitor \
 #                      calendar
 
+
+    pkg_check_modules(PULSE REQUIRED libpulse)
+    target_include_directories(harbour-amazfishd PUBLIC ${PULSE_INCLUDE_DIRS})
+    target_link_libraries(harbour-amazfishd PUBLIC ${PULSE_LIBRARIES} pulse-simple)
+
+    pkg_check_modules(MLITE5 REQUIRED mlite5)
+    target_include_directories(harbour-amazfishd PUBLIC ${MLITE5_INCLUDE_DIRS})
+    target_link_libraries(harbour-amazfishd PUBLIC ${MLITE5_LIBRARIES})
+
+    target_link_libraries(harbour-amazfishd PUBLIC keepalive)
+
 elseif(FLAVOR STREQUAL "uuitk")
     set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall")
-
-#    LIBS += -lpulse-simple
-#    PKGCONFIG += libpulse
 
     pkg_check_modules(PULSE REQUIRED libpulse)
     target_include_directories(harbour-amazfishd PUBLIC ${PULSE_INCLUDE_DIRS})
