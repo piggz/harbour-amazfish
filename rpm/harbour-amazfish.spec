@@ -120,17 +120,21 @@ desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
    %{buildroot}%{_datadir}/applications/*.desktop
 
+rm -rf %{buildroot}/usr/include/o2
+rm -f %{buildroot}/usr/lib/libo2.a
+rm -f %{buildroot}/usr/share/metainfo/harbour-amazfish-ui.appdata.xml
+
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}-ui
+%{_bindir}/%{name}d
 %attr(2755,root,privileged) %{_bindir}/%{name}d
-%{_datadir}/%{name}-ui
-%{_datadir}/%{name}d
+%{_datadir}/%{name}
 %{_datadir}/applications/%{name}-ui.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-ui.svg
 %{_userunitdir}/harbour-amazfish.service
 %{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges
-%{_datadir}/harbour-amazfishd/chirp.raw
+%{_datadir}/harbour-amazfish/chirp.raw
 # >> files
 # << files

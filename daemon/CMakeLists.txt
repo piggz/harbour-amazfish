@@ -247,3 +247,19 @@ QT5_CREATE_TRANSLATION(QT_FILES "${CMAKE_SOURCE_DIR}"
 
 install(FILES ${QM_FILES}
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfish/translations")
+
+install(FILES "chirp.raw"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfish/")
+
+install(FILES "harbour-amazfishd.privileges"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/mapplauncherd/privileges.d/")
+
+if(FLAVOR STREQUAL "silica")
+    configure_file(harbour-amazfish-sailfish.service.in
+        ${CMAKE_CURRENT_BINARY_DIR}/harbour-amazfish.service)
+else()
+    configure_file(harbour-amazfish.service.in
+        ${CMAKE_CURRENT_BINARY_DIR}/harbour-amazfish.service)
+endif()
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/harbour-amazfish.service
+    DESTINATION  ${CMAKE_INSTALL_PREFIX}/lib/systemd/user)
