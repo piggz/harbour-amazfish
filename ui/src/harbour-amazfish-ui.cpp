@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef MER_EDITION_SAILFISH
-    view->setSource(SailfishApp::pathTo("qml/harbour-amazfish.qml"));
+    view->setSource(QUrl("qrc:/qml/harbour-amazfish.qml"));
     view->show();
 #elif UUITK_EDITION
     view->rootContext()->setContextProperty("APPLICATION_FILE_DIR",  QFileInfo(QCoreApplication::applicationFilePath()).absolutePath());
