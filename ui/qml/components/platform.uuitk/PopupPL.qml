@@ -23,10 +23,8 @@ DBusInterface {
             { "type": "s", "value": msg },                    // summary
             { "type": "s", "value": "" },                     // body
             { "type": "as", "value": [] },                    // actions
-            { "type": "a{sv}", "value": {
-                "sound-file": "/usr/share/sounds/lomiri/notifications/Xylo.ogg",
-            }},                                               // hints
-            { "type": "i", "value": 5000 }                   // expire_timeout
+            { "type": "a{sv}", "value": {}},                  // hints
+            { "type": "i", "value": 5000 }                    // expire_timeout
         ]);
 
     }
