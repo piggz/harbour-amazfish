@@ -1,6 +1,11 @@
+option(DISABLE_SYSTEMD "Disable systemd support" OFF)
+
+if (DISABLE_SYSTEMD)
+    add_definitions(-DDISABLE_SYSTEMD)
+endif()
+
 set(o2_WITH_KEYCHAIN OFF CACHE BOOL "keychain store" FORCE)
 add_subdirectory(o2)
-
 
 file(GLOB TS_FILES translations/*.ts)
 

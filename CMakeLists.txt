@@ -43,3 +43,5 @@ add_subdirectory(qble)
 add_subdirectory(lib)
 add_subdirectory(daemon)
 add_subdirectory(ui)
+
+feature_summary(WHAT ALL)
