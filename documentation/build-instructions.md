@@ -23,7 +23,7 @@ In the .pro file, you can set `FLAVOR = silica` (or `FLAVOR = $$FLAVOR` and in t
 To install missing packages, as pointed out by build errors, use:
 
 ```
-sb2 -R zypper in mpris-qt5-devel libkf5archive-devel kcoreaddons-devel kdb-devel libKDb3-3 mkcal-qt5-devel libicu-devel pulseaudio-devel
+sb2 -R zypper in mpris-qt5-devel libkf5archive-devel kcoreaddons-devel kdb-devel libKDb3-3 mkcal-qt5-devel libicu-devel pulseaudio-devel ninja
 ```
 
 etc as pointed out by build errors.
