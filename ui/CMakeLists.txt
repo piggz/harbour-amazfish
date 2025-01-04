@@ -108,3 +108,6 @@ install(FILES "icons/scalable/harbour-amazfish-ui.svg"
 
 install(FILES "harbour-amazfish-ui.appdata.xml"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")
+
+file(WRITE "${CMAKE_BINARY_DIR}/QtCreatorDeployment.txt"
+    "${CMAKE_INSTALL_PREFIX}\n${CMAKE_BINARY_DIR}/harbour-amazfish-ui:bin\n")
