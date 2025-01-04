@@ -698,7 +698,7 @@ void DeviceInterface::findDevice()
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        qWarning() << Q_FUNC_INFO << "Unable to open chirp sound";
+        qWarning() << Q_FUNC_INFO << "Unable to open chirp sound" << file.fileName();
         return;
     }
 

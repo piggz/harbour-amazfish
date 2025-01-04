@@ -233,9 +233,9 @@ file(GLOB TS_FILES translations/*.ts)
 
 # TODO check if translation path is correct on all platforms
 if(FLAVOR STREQUAL "uuitk")
-    add_definitions(-DTRANSLATION_FOLDER="../share/harbour-amazfish/translations")
+    add_definitions(-DTRANSLATION_FOLDER="../share/harbour-amazfishd/translations")
 elseif(FLAVOR STREQUAL "silica")
-    add_definitions(-DTRANSLATION_FOLDER="/usr/share/harbour-amazfish/translations")
+    add_definitions(-DTRANSLATION_FOLDER="/usr/share/harbour-amazfishd/translations")
 else() 
     add_definitions(-DTRANSLATION_FOLDER=".")
 endif()
@@ -248,10 +248,10 @@ QT5_CREATE_TRANSLATION(QT_FILES "${CMAKE_SOURCE_DIR}"
     OPTIONS "-no-obsolete")
 
 install(FILES ${QM_FILES}
-    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfish/translations")
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfishd/translations")
 
 install(FILES "chirp.raw"
-    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfish/")
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfishd/")
 
 install(FILES "harbour-amazfishd.privileges"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/mapplauncherd/privileges.d/")

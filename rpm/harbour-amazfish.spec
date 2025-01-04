@@ -129,12 +129,13 @@ rm -f %{buildroot}/usr/share/metainfo/harbour-amazfish-ui.appdata.xml
 %{_bindir}/%{name}-ui
 %{_bindir}/%{name}d
 %attr(2755,root,privileged) %{_bindir}/%{name}d
-%{_datadir}/%{name}
+%{_datadir}/%{name}d
+%{_datadir}/%{name}-ui
 %{_datadir}/applications/%{name}-ui.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-ui.svg
 %{_userunitdir}/harbour-amazfish.service
 %{_datadir}/mapplauncherd/privileges.d/harbour-amazfishd.privileges
-%{_datadir}/harbour-amazfish/chirp.raw
+%{_datadir}/harbour-amazfishd/chirp.raw
 # >> files
 # << files

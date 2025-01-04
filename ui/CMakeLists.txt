@@ -10,9 +10,9 @@ add_subdirectory(o2)
 file(GLOB TS_FILES translations/*.ts)
 
 if(FLAVOR STREQUAL "uuitk")
-    add_definitions(-DTRANSLATION_FOLDER="./share/harbour-amazfish/translations")
+    add_definitions(-DTRANSLATION_FOLDER="./share/harbour-amazfish-ui/translations")
 elseif(FLAVOR STREQUAL "silica")
-    add_definitions(-DTRANSLATION_FOLDER="/usr/share/harbour-amazfish/translations")
+    add_definitions(-DTRANSLATION_FOLDER="/usr/share/harbour-amazfish-ui/translations")
 else()
     add_definitions(-DTRANSLATION_FOLDER=".")
 endif()
@@ -62,7 +62,7 @@ QT5_CREATE_TRANSLATION(QT_FILES "${CMAKE_SOURCE_DIR}"
     OPTIONS "-no-obsolete")
 
 install(FILES ${QM_FILES}
-    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfish/translations")
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfish-ui/translations")
 
 install(TARGETS harbour-amazfish-ui RUNTIME
         DESTINATION ${CMAKE_INSTALL_BINDIR})
