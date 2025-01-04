@@ -42,7 +42,7 @@ PageListPL {
             for (let i = 0; i < properties.length; ++i) {
                 let propertyName = properties[i];
                     if (regex.test(propertyName) && !regexEnd.test(propertyName)) {
-                        console.log(propertyName + ": " + styler[propertyName]);
+//                        console.log(propertyName + ": " + styler[propertyName]);
                         append({"icon": styler[propertyName], "name": propertyName});
                     }
             }

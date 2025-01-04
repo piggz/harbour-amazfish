@@ -57,11 +57,10 @@ QtObject {
     property real themeIconSizeSmall: units.gridUnit*4
 
     // used icons
-    // used icons
     property string iconBluetooth: "image://theme/bluetooth-active"
     property string iconBattery: "image://theme/battery-good-symbolic"
-    property string iconSteps: "../../pics/custom-icons/icon-m-steps2.png"
-    property string iconHeartrate: "../../pics/custom-icons/icon-m-heartrate2.png"
+    property string iconSteps: "qrc:///qml/custom-icons/icon-m-steps2.png"
+    property string iconHeartrate: "qrc:///qml/custom-icons/icon-m-heartrate2.png"
     property string iconDeviceScan: "image://theme/toolkit_input-search"
 
 
@@ -78,8 +77,8 @@ QtObject {
     property string iconDown: "image://theme/down" //Qt.resolvedUrl("../../icons/go-down-symbolic.svg")
     property string iconEdit: "image://theme/edit" //Qt.resolvedUrl("../../icons/document-edit-symbolic.svg")
     property string iconEditClear: "image://theme/edit-clear" //Qt.resolvedUrl("../../icons/edit-clear-symbolic.svg")
-    property string iconEmail: "image://theme/mail"
-    property string iconFavorite: Qt.resolvedUrl("../icons/uuitk/bookmark-new-symbolic.svg")
+    property string iconEmail: "image://theme/mail-read-symbolic"
+    property string iconFavorite: "image://theme/bookmark-new-symbolic" // Qt.resolvedUrl("../icons/uuitk/bookmark-new-symbolic.svg")
 //    property string iconFavoriteSelected: Qt.resolvedUrl("../icons/uuitk/user-bookmarks-symbolic.svg")
     property string iconForward: "image://theme/next" //Qt.resolvedUrl("../../icons/go-next-symbolic.svg")
     property string iconMenu: "image://theme/navigation-menu" //Qt.resolvedUrl("../../icons/open-menu-symbolic.svg")
@@ -104,7 +103,7 @@ QtObject {
     property string iconDiagnostic: "image://theme/info"                                  // "Debug Info"
     property string iconFavoriteSelected: "image://theme/bookmark"                        // "Donate"
 
-    property string customIconPrefix: "../../pics/custom-icons/"
+    property string customIconPrefix: "qrc:///qml/custom-icons/"
     property string customIconSuffix: ".png"
 
     property string iconLocation: "image://theme/location"
