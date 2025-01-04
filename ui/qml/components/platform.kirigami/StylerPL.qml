@@ -96,8 +96,8 @@ QtObject {
     property string iconLocation: "icon-m-location"
     property string iconStrava: "icon-strava"
 
-    property string customIconPrefix: ""
-    property string customIconSuffix: ""
+    property string customIconPrefix: "qrc:///qml/custom-icons/"
+    property string customIconSuffix: ".png"
 
     // item sizes
     property real themeItemSizeLarge: themeItemSizeSmall * 2
