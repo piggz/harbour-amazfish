@@ -24,6 +24,7 @@
         <file>qml/pages/StravaSettingsPage.qml</file>
         <file>qml/pages/StravaUploadPage.qml</file>
         <file>qml/pages/StepsPage.qml</file>
+        <file>qml/pages/TestIconsPage.qml</file>
         <file>qml/pages/UnpairDeviceDialog.qml</file>
         <file>qml/pics/devices/amazfit-bip.png</file>
         <file>qml/pics/devices/amazfit-bips.png</file>
