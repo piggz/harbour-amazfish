@@ -59,7 +59,6 @@ QtObject {
     property string iconClear: "edit-clear-all-symbolic"
     property string iconClose: "window-close-symbolic"
     property string iconDelete: "edit-delete-symbolic"
-    property string iconDot: "find-location-symbolic"
     property string iconDown: "go-down-symbolic"
     property string iconEdit: "document-edit-symbolic"
     property string iconEditClear: "edit-clear-symbolic"

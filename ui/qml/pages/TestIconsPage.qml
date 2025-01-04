@@ -35,12 +35,12 @@ PageListPL {
         property bool completed: false
         Component.onCompleted: {
 
-            let properties = Object.keys(styler); // Get all property names
-            let regex = /^icon/; // Regex to match property names starting with "icon"
-            let regexEnd = /Changed$/; // Regex to match property names starting with "icon"
+            var properties = Object.keys(styler); // Get all property names
+            var regex = /^icon/; // Regex to match property names starting with "icon"
+            var regexEnd = /Changed$/; // Regex to match property names starting with "icon"
 
-            for (let i = 0; i < properties.length; ++i) {
-                let propertyName = properties[i];
+            for (var i = 0; i < properties.length; ++i) {
+                var propertyName = properties[i];
                     if (regex.test(propertyName) && !regexEnd.test(propertyName)) {
 //                        console.log(propertyName + ": " + styler[propertyName]);
                         append({"icon": styler[propertyName], "name": propertyName});
