@@ -32,5 +32,7 @@
         <file>qml/custom-icons/icon-m-swimming.png</file>
         <file>qml/custom-icons/icon-m-trail running.png</file>
         <file>qml/custom-icons/icon-strava.png</file>
+        <file>qml/custom-icons/icon-m-activity.png</file>
+        <file>qml/custom-icons/icon-m-exercise.png</file>
     </qresource>
 </RCC>
