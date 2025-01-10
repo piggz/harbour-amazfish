@@ -1,57 +1,57 @@
 <RCC>
     <qresource prefix="/">
-<file alias="./qml/components/platform/ButtonPL.qml">./qml/components/platform.qtcontrols/ButtonPL.qml</file>
-<file alias="./qml/components/platform/ClipboardPL.qml">./qml/components/platform.qtcontrols/ClipboardPL.qml</file>
-<file alias="./qml/components/platform/ComboBoxPL.qml">./qml/components/platform.qtcontrols/ComboBoxPL.qml</file>
-<file alias="./qml/components/platform/ContextMenuItemPL.qml">./qml/components/platform.qtcontrols/ContextMenuItemPL.qml</file>
-<file alias="./qml/components/platform/ContextMenuPL.qml">./qml/components/platform.qtcontrols/ContextMenuPL.qml</file>
-<file alias="./qml/components/platform/DatePickerDialogPL.qml">./qml/components/platform.qtcontrols/DatePickerDialogPL.qml</file>
-<file alias="./qml/components/platform/DialogAutoPL.qml">./qml/components/platform.qtcontrols/DialogAutoPL.qml</file>
-<file alias="./qml/components/platform/DialogListPL.qml">./qml/components/platform.qtcontrols/DialogListPL.qml</file>
-<file alias="./qml/components/platform/ExpandingSectionGroupPL.qml">./qml/components/platform.qtcontrols/ExpandingSectionGroupPL.qml</file>
-<file alias="./qml/components/platform/ExpandingSectionPL.qml">./qml/components/platform.qtcontrols/ExpandingSectionPL.qml</file>
-<file alias="./qml/components/platform/FileSelectorPL.qml">./qml/components/platform.qtcontrols/FileSelectorPL.qml</file>
-<file alias="./qml/components/platform/FormLayoutPL.qml">./qml/components/platform.qtcontrols/FormLayoutPL.qml</file>
-<file alias="./qml/components/platform/HeaderBarImpl.qml">./qml/components/platform.qtcontrols/HeaderBarImpl.qml</file>
-<file alias="./qml/components/platform/IconButtonPL.qml">./qml/components/platform.qtcontrols/IconButtonPL.qml</file>
-<file alias="./qml/components/platform/IconPL.qml">./qml/components/platform.qtcontrols/IconPL.qml</file>
-<file alias="./qml/components/platform/LabelPL.qml">./qml/components/platform.qtcontrols/LabelPL.qml</file>
-<file alias="./qml/components/platform/ListItemPL.qml">./qml/components/platform.qtcontrols/ListItemPL.qml</file>
-<file alias="./qml/components/platform/MenuDrawerItemPL.qml">./qml/components/platform.qtcontrols/MenuDrawerItemPL.qml</file>
-<file alias="./qml/components/platform/MenuDrawerPL.qml">./qml/components/platform.qtcontrols/MenuDrawerPL.qml</file>
-<file alias="./qml/components/platform/MenuDrawerSubmenuItemPL.qml">./qml/components/platform.qtcontrols/MenuDrawerSubmenuItemPL.qml</file>
-<file alias="./qml/components/platform/MenuDrawerSubmenuPL.qml">./qml/components/platform.qtcontrols/MenuDrawerSubmenuPL.qml</file>
-<file alias="./qml/components/platform/PageEmptyPL.qml">./qml/components/platform.qtcontrols/PageEmptyPL.qml</file>
-<file alias="./qml/components/platform/PageListPL.qml">./qml/components/platform.qtcontrols/PageListPL.qml</file>
-<file alias="./qml/components/platform/PageMenuItemPL.qml">./qml/components/platform.qtcontrols/PageMenuItemPL.qml</file>
-<file alias="./qml/components/platform/PageMenuPL.qml">./qml/components/platform.qtcontrols/PageMenuPL.qml</file>
-<file alias="./qml/components/platform/PagePL.qml">./qml/components/platform.qtcontrols/PagePL.qml</file>
-<file alias="./qml/components/platform/RemorsePopupPL.qml">./qml/components/platform.qtcontrols/RemorsePopupPL.qml</file>
-<file alias="./qml/components/platform/SearchFieldPL.qml">./qml/components/platform.qtcontrols/SearchFieldPL.qml</file>
-<file alias="./qml/components/platform/SectionHeaderPL.qml">./qml/components/platform.qtcontrols/SectionHeaderPL.qml</file>
-<file alias="./qml/components/platform/SliderPL.qml">./qml/components/platform.qtcontrols/SliderPL.qml</file>
-<file alias="./qml/components/platform/StackPL.qml">./qml/components/platform.qtcontrols/StackPL.qml</file>
-<file alias="./qml/components/platform/StylerPL.qml">./qml/components/platform.qtcontrols/StylerPL.qml</file>
-<file alias="./qml/components/platform/TextAreaPL.qml">./qml/components/platform.qtcontrols/TextAreaPL.qml</file>
-<file alias="./qml/components/platform/TextFieldPL.qml">./qml/components/platform.qtcontrols/TextFieldPL.qml</file>
-<file alias="./qml/components/platform/TextSwitchPL.qml">./qml/components/platform.qtcontrols/TextSwitchPL.qml</file>
-<file alias="./qml/components/platform/ToolItemPL.qml">./qml/components/platform.qtcontrols/ToolItemPL.qml</file>
-<file alias="./qml/components/platform/ValueButtonPL.qml">./qml/components/platform.qtcontrols/ValueButtonPL.qml</file>
-<file alias="./qml/components/platform/TimePickerDialogPL.qml">./qml/components/platform.qtcontrols/TimePickerDialogPL.qml</file>
-<file alias="./qml/components/platform/BusyIndicatorSmallPL.qml">./qml/components/platform.qtcontrols/BusyIndicatorSmallPL.qml</file>
-<file alias="./qml/components/platform/ApplicationWindowPL.qml">./qml/components/platform.qtcontrols/ApplicationWindowPL.qml</file>
-<file alias="./qml/components/platform/BusyIndicatorPL.qml">./qml/components/platform.qtcontrols/BusyIndicatorPL.qml</file>
-<file alias="./qml/components/platform/DialogPL.qml">./qml/components/platform.qtcontrols/DialogPL.qml</file>
-<file>./qml/components/Alarm.qml</file>
-<file>./qml/components/Axis.qml</file>
-<file>./qml/components/DateNavigation.qml</file>
-<file>./qml/components/DeviceButton.qml</file>
-<file>./qml/components/DownloadDataMenuItem.qml</file>
-<file>./qml/components/DraggableItem.qml</file>
-<file>./qml/components/DraggableItemDropArea.qml</file>
-<file>./qml/components/Graph.qml</file>
-<file>./qml/components/GraphData.qml</file>
-<file>./qml/components/PercentCircle.qml</file>
-<file>./qml/components/TruncationModes.qml</file>
+        <file alias="./qml/components/platform/ExpandingSectionGroupPL.qml">./qml/components/platform.qtcontrols/ExpandingSectionGroupPL.qml</file>
+        <file alias="./qml/components/platform/ExpandingSectionPL.qml">./qml/components/platform.qtcontrols/ExpandingSectionPL.qml</file>
+        <file alias="./qml/components/platform/MenuDrawerItemPL.qml">./qml/components/platform.qtcontrols/MenuDrawerItemPL.qml</file>
+        <file alias="./qml/components/platform/MenuDrawerPL.qml">./qml/components/platform.qtcontrols/MenuDrawerPL.qml</file>
+        <file alias="./qml/components/platform/MenuDrawerSubmenuItemPL.qml">./qml/components/platform.qtcontrols/MenuDrawerSubmenuItemPL.qml</file>
+        <file alias="./qml/components/platform/MenuDrawerSubmenuPL.qml">./qml/components/platform.qtcontrols/MenuDrawerSubmenuPL.qml</file>
+        <file alias="./qml/components/platform/ButtonPL.qml">./qml/components/platform.qtcontrols/ButtonPL.qml</file>
+        <file alias="./qml/components/platform/ClipboardPL.qml">./qml/components/platform.qtcontrols/ClipboardPL.qml</file>
+        <file alias="./qml/components/platform/ContextMenuItemPL.qml">./qml/components/platform.qtcontrols/ContextMenuItemPL.qml</file>
+        <file alias="./qml/components/platform/ContextMenuPL.qml">./qml/components/platform.qtcontrols/ContextMenuPL.qml</file>
+        <file alias="./qml/components/platform/DialogAutoPL.qml">./qml/components/platform.qtcontrols/DialogAutoPL.qml</file>
+        <file alias="./qml/components/platform/DialogListPL.qml">./qml/components/platform.qtcontrols/DialogListPL.qml</file>
+        <file alias="./qml/components/platform/FileSelectorPL.qml">./qml/components/platform.qtcontrols/FileSelectorPL.qml</file>
+        <file alias="./qml/components/platform/FormLayoutPL.qml">./qml/components/platform.qtcontrols/FormLayoutPL.qml</file>
+        <file alias="./qml/components/platform/HeaderBarImpl.qml">./qml/components/platform.qtcontrols/HeaderBarImpl.qml</file>
+        <file alias="./qml/components/platform/IconButtonPL.qml">./qml/components/platform.qtcontrols/IconButtonPL.qml</file>
+        <file alias="./qml/components/platform/IconPL.qml">./qml/components/platform.qtcontrols/IconPL.qml</file>
+        <file alias="./qml/components/platform/ListItemPL.qml">./qml/components/platform.qtcontrols/ListItemPL.qml</file>
+        <file alias="./qml/components/platform/PageEmptyPL.qml">./qml/components/platform.qtcontrols/PageEmptyPL.qml</file>
+        <file alias="./qml/components/platform/PageListPL.qml">./qml/components/platform.qtcontrols/PageListPL.qml</file>
+        <file alias="./qml/components/platform/PageMenuItemPL.qml">./qml/components/platform.qtcontrols/PageMenuItemPL.qml</file>
+        <file alias="./qml/components/platform/PageMenuPL.qml">./qml/components/platform.qtcontrols/PageMenuPL.qml</file>
+        <file alias="./qml/components/platform/PagePL.qml">./qml/components/platform.qtcontrols/PagePL.qml</file>
+        <file alias="./qml/components/platform/RemorsePopupPL.qml">./qml/components/platform.qtcontrols/RemorsePopupPL.qml</file>
+        <file alias="./qml/components/platform/SearchFieldPL.qml">./qml/components/platform.qtcontrols/SearchFieldPL.qml</file>
+        <file alias="./qml/components/platform/SectionHeaderPL.qml">./qml/components/platform.qtcontrols/SectionHeaderPL.qml</file>
+        <file alias="./qml/components/platform/SliderPL.qml">./qml/components/platform.qtcontrols/SliderPL.qml</file>
+        <file alias="./qml/components/platform/StackPL.qml">./qml/components/platform.qtcontrols/StackPL.qml</file>
+        <file alias="./qml/components/platform/TextAreaPL.qml">./qml/components/platform.qtcontrols/TextAreaPL.qml</file>
+        <file alias="./qml/components/platform/TextFieldPL.qml">./qml/components/platform.qtcontrols/TextFieldPL.qml</file>
+        <file alias="./qml/components/platform/TextSwitchPL.qml">./qml/components/platform.qtcontrols/TextSwitchPL.qml</file>
+        <file alias="./qml/components/platform/ToolItemPL.qml">./qml/components/platform.qtcontrols/ToolItemPL.qml</file>
+        <file alias="./qml/components/platform/ValueButtonPL.qml">./qml/components/platform.qtcontrols/ValueButtonPL.qml</file>
+        <file alias="./qml/components/platform/BusyIndicatorSmallPL.qml">./qml/components/platform.qtcontrols/BusyIndicatorSmallPL.qml</file>
+        <file alias="./qml/components/platform/ApplicationWindowPL.qml">./qml/components/platform.qtcontrols/ApplicationWindowPL.qml</file>
+        <file alias="./qml/components/platform/ComboBoxPL.qml">./qml/components/platform.qtcontrols/ComboBoxPL.qml</file>
+        <file alias="./qml/components/platform/DatePickerDialogPL.qml">./qml/components/platform.qtcontrols/DatePickerDialogPL.qml</file>
+        <file alias="./qml/components/platform/LabelPL.qml">./qml/components/platform.qtcontrols/LabelPL.qml</file>
+        <file alias="./qml/components/platform/TimePickerDialogPL.qml">./qml/components/platform.qtcontrols/TimePickerDialogPL.qml</file>
+        <file alias="./qml/components/platform/BusyIndicatorPL.qml">./qml/components/platform.qtcontrols/BusyIndicatorPL.qml</file>
+        <file alias="./qml/components/platform/DialogPL.qml">./qml/components/platform.qtcontrols/DialogPL.qml</file>
+        <file alias="./qml/components/platform/StylerPL.qml">./qml/components/platform.qtcontrols/StylerPL.qml</file>
+        <file>./qml/components/Alarm.qml</file>
+        <file>./qml/components/Axis.qml</file>
+        <file>./qml/components/DeviceButton.qml</file>
+        <file>./qml/components/DraggableItem.qml</file>
+        <file>./qml/components/DraggableItemDropArea.qml</file>
+        <file>./qml/components/PercentCircle.qml</file>
+        <file>./qml/components/TruncationModes.qml</file>
+        <file>./qml/components/DateNavigation.qml</file>
+        <file>./qml/components/DownloadDataMenuItem.qml</file>
+        <file>./qml/components/Graph.qml</file>
+        <file>./qml/components/GraphData.qml</file>
     </qresource>
 </RCC>
