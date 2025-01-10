@@ -29,7 +29,7 @@ PageListPL {
             x: styler.themePaddingMedium
             width: styler.themeItemSizeSmall
             height: width
-            iconName: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+            iconSource: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
         }
         LabelPL
         {
