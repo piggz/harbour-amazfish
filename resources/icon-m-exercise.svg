@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="42.221062mm"
+   height="42.224091mm"
+   viewBox="0 0 42.221062 42.224091"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="icon-m-exercise.svg"
+   inkscape:export-filename="icon-m-exercise.png"
+   inkscape:export-xdpi="154.00844"
+   inkscape:export-ydpi="154.00844"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#707070"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.4093294"
+     inkscape:cx="-163.55296"
+     inkscape:cy="120.97952"
+     inkscape:window-width="1920"
+     inkscape:window-height="1000"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-238.65417,-169.33333)">
+    <path
+       id="rect2-9"
+       style="fill:#ffffff;fill-opacity:0.705882;stroke-width:2.04384"
+       d="m 249.07989,169.33333 c -5.77593,0 -10.42572,4.66315 -10.42572,10.45569 v 21.3124 c 0,5.79254 4.64979,10.45621 10.42572,10.45621 h 21.36924 c 5.77593,0 10.42624,-4.66367 10.42624,-10.45621 v -21.3124 c 0,-5.79254 -4.65031,-10.45569 -10.42624,-10.45569 z m 10.68462,8.21759 c 1.41841,0 2.57917,1.16025 2.57917,2.57865 0,1.4184 -1.16076,2.57917 -2.57917,2.57917 -1.4184,0 -2.57865,-1.16077 -2.57865,-2.57917 0,-1.4184 1.16025,-2.57865 2.57865,-2.57865 z m -11.60498,6.44715 H 271.37 v 2.57917 h -7.73699 v 16.7628 h -2.57866 v -7.737 h -2.57917 v 7.737 h -2.57865 v -16.7628 h -7.737 z" />
+  </g>
+</svg>
