@@ -35,6 +35,7 @@ Requires:   kcoreaddons >= 5.31.0
 Requires:   libicu
 Requires:   kf5bluezqt
 Requires:   libkf5archive
+Requires:   mapboxgl-qml
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)

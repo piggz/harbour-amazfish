@@ -138,6 +138,7 @@ Item {
                 delegate: LabelPL {
                     text: createYLabel( (maxY-minY)/axisY.grid * index + minY)
                     width: styler.themeItemSizeLarge - 2*styler.themePaddingSmall
+                    wrapMode: Text.NoWrap
                     anchors {
                         top: (index == axisY.grid) ? parent.top : undefined
                         bottom: (index == axisY.grid) ? undefined : parent.bottom
