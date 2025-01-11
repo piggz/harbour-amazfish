@@ -223,10 +223,8 @@ file(GLOB TS_FILES translations/*.ts)
 # TODO check if translation path is correct on all platforms
 if(FLAVOR STREQUAL "uuitk")
     add_definitions(-DTRANSLATION_FOLDER="../share/harbour-amazfishd/translations")
-elseif(FLAVOR STREQUAL "silica")
-    add_definitions(-DTRANSLATION_FOLDER="/usr/share/harbour-amazfishd/translations")
-else() 
-    add_definitions(-DTRANSLATION_FOLDER=".")
+else()
+    add_definitions(-DTRANSLATION_FOLDER="${CMAKE_INSTALL_FULL_DATAROOTDIR}/harbour-amazfishd/translations")
 endif()
 
 QT5_ADD_TRANSLATION(QM_FILES ${TS_FILES})

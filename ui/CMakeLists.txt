@@ -11,10 +11,8 @@ file(GLOB TS_FILES translations/*.ts)
 
 if(FLAVOR STREQUAL "uuitk")
     add_definitions(-DTRANSLATION_FOLDER="./share/harbour-amazfish-ui/translations")
-elseif(FLAVOR STREQUAL "silica")
-    add_definitions(-DTRANSLATION_FOLDER="/usr/share/harbour-amazfish-ui/translations")
 else()
-    add_definitions(-DTRANSLATION_FOLDER=".")
+    add_definitions(-DTRANSLATION_FOLDER="${CMAKE_INSTALL_FULL_DATAROOTDIR}/harbour-amazfish-ui/translations")
 endif()
 
 list(APPEND RESOURCES amazfish.qrc)
