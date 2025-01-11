@@ -166,17 +166,6 @@ find_package(KDb REQUIRED)
 if(FLAVOR STREQUAL "silica")
     set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall")
 
-#    message(SailfishOS daemon build)
-#    LIBS += -lkeepalive -lpulse-simple
-#    CONFIG += sailfishapp
-#    CONFIG += link_pkgconfig
-#    PKGCONFIG += mlite5 libpulse
-#    WATCHFISH_FEATURES += music \
-#                      voicecall \
-#                      notificationmonitor \
-#                      calendar
-
-
     pkg_check_modules(PULSE REQUIRED libpulse)
     target_include_directories(harbour-amazfishd PUBLIC ${PULSE_INCLUDE_DIRS})
     target_link_libraries(harbour-amazfishd PUBLIC ${PULSE_LIBRARIES} pulse-simple)

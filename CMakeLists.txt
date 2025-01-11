@@ -24,7 +24,7 @@ if(NOT DEFINED FLAVOR)
     message(FATAL_ERROR "Please specify the platform using -DFLAVOR=platform as a CMake option. Supported platforms: kirigami, silica, qtcontrols, uuitk.")
 elseif(FLAVOR STREQUAL "silica")
     add_definitions(-DMER_EDITION_SAILFISH)
-    add_definitions(-DKF5CALENDARCORE) ### FIME I don't know why this doesn't work with libwatchfish
+    add_definitions(-DKF5CALENDARCORE) ### FIXME this should be in libwatchfish
 
     include(FindPkgConfig)
     pkg_search_module(SAILFISH sailfishapp REQUIRED)
