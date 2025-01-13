@@ -372,7 +372,8 @@ void HuamiDevice::serviceEvent(char event)
 
 void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
-    qDebug() << Q_FUNC_INFO << interface << map << list;
+    qDebug() << Q_FUNC_INFO << interface << map << list << m_connectionState;
+
 
     if (interface == "org.bluez.Device1") {
         m_reconnectTimer->start();
