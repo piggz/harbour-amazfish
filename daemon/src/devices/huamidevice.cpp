@@ -394,7 +394,12 @@ void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStrin
             }
         }
         if (deviceProperty("ServicesResolved").toBool() ) {
-            initialise();
+            int elapsed = init_dt.secsTo(QDateTime::currentDateTime());
+            qDebug() << "initialise() elapsed: " << elapsed << "starting: " << (elapsed >60);
+            if (elapsed > 60) {
+                init_dt = QDateTime::currentDateTime();
+                initialise();
+            }
         }
     }
 }
