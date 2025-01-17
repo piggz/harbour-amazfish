@@ -81,9 +81,9 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
 
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
         if (value[0] == EVENT_DECLINE_CALL) {
-            emit serviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
+            emit serviceEvent(EVENT_DECLINE_CALL);
         } else if (value[0] == EVENT_IGNORE_CALL) {
-            emit serviceEvent(AbstractDevice::EVENT_IGNORE_CALL);
+            emit serviceEvent(EVENT_IGNORE_CALL);
         } else if (value[0] == EVENT_BUTTON) {
             emit buttonPressed();
         } else if (value[0] == EVENT_MUSIC) {
