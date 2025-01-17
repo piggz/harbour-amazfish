@@ -9,15 +9,15 @@ PagePL {
     title: qsTr("Heartrate")
 
     property var day: new Date()
-    property var relaxed: 0
-    property var light: 0
-    property var intensive: 0
-    property var aerobic: 0
-    property var anerobic: 0
-    property var vo2max: 0
-    property var total: relaxed + light + intensive + aerobic + anerobic + vo2max
-    property var minhr: 0
-    property var maxhr: 0
+    property real relaxed: 0
+    property real light: 0
+    property real intensive: 0
+    property real aerobic: 0
+    property real anerobic: 0
+    property real vo2max: 0
+    property real total: relaxed + light + intensive + aerobic + anerobic + vo2max
+    property real minhr: 0
+    property real maxhr: 0
 
     pageMenu: PageMenuPL {
         DownloadDataMenuItem{}
@@ -164,28 +164,29 @@ PagePL {
         minhr = 0;
         maxhr = 0;
         for (var i = 0; i < end; i++) {
-            if (points[i].y >= (maxHRforAge * 0.9)) {
+            var point = points[i];
+            if (point.y >= (maxHRforAge * 0.9)) {
                 vo2max++;
-            } else if (points[i].y >= (maxHRforAge * 0.8)) {
+            } else if (point.y >= (maxHRforAge * 0.8)) {
                 anerobic++;
-            } else if (points[i].y >= (maxHRforAge * 0.7)) {
+            } else if (point.y >= (maxHRforAge * 0.7)) {
                 aerobic++
-            } else if (points[i].y >= (maxHRforAge * 0.6)) {
+            } else if (point.y >= (maxHRforAge * 0.6)) {
                 intensive++;
-            } else if (points[i].y >= (maxHRforAge * 0.5)) {
+            } else if (point.y >= (maxHRforAge * 0.5)) {
                 light++;
             } else {
                 relaxed++;
             }
-            if (points[i].y > maxhr) {
-                maxhr = points[i].y;
+            if (point.y > maxhr) {
+                maxhr = point.y;
             }
             if (minhr == 0) {
-                minhr = points[i].y;
+                minhr = point.y;
             }
 
-            if (points[i].y > 0 && points[i].y < minhr)  {
-                minhr = points[i].y;
+            if (point.y > 0 && point.y < minhr)  {
+                minhr = point.y;
             }
         }
         console.log("relaxed:", relaxed);
