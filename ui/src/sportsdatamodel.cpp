@@ -1,7 +1,6 @@
 #include "sportsdatamodel.h"
 #include "daemoninterface.h"
 #include <QFile>
-#include <QElapsedTimer>
 
 SportsDataModel::SportsDataModel()
 {
@@ -72,8 +71,6 @@ int SportsDataModel::rowCount(const QModelIndex &parent) const
 
 void SportsDataModel::update()
 {
-    QElapsedTimer timer;
-    timer.start();
     beginResetModel();
     QString qry = "SELECT id, name, version, start_timestamp_dt, end_timestamp_dt, kind, base_longitude, base_latitude, base_altitude, gpx FROM sports_data ORDER BY start_timestamp_dt DESC";
     m_data.clear();
@@ -106,7 +103,6 @@ void SportsDataModel::update()
     }
 
     endResetModel();
-    qDebug() << qry << timer.elapsed() << "ms";
 }
 
 QString SportsDataModel::gpx(uint id)
