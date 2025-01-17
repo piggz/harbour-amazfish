@@ -19,6 +19,8 @@ PagePL {
     property real minhr: 0
     property real maxhr: 0
 
+    property real maxHRforAge: wingate()
+
     pageMenu: PageMenuPL {
         DownloadDataMenuItem{}
     }
@@ -95,7 +97,7 @@ PagePL {
                 Rectangle { color: "grey"; width: parent.width * (relaxed  / total) ; height: parent.height }
                 LabelPL { text: Math.round((relaxed / total) * 100) + "%"; anchors.centerIn: parent}
             }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHR()*0.5)))}
+            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.5)))}
 
             LabelPL {text: qsTr("Light")}
             Item {
@@ -104,7 +106,7 @@ PagePL {
                 Rectangle { color: "lightblue"; width: parent.width * (light  / total) ; height: parent.height }
                 LabelPL { text: Math.round((light / total) * 100) + "%"; anchors.centerIn: parent}
             }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHR()*0.6)))}
+            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.6)))}
 
             LabelPL {text: qsTr("Intensive")}
             Item {
@@ -113,7 +115,7 @@ PagePL {
                 Rectangle { color: "green"; width: parent.width * (intensive  / total) ; height: parent.height }
                 LabelPL { text: Math.round((intensive / total) * 100) + "%"; anchors.centerIn: parent}
             }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHR()*0.7)))}
+            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.7)))}
 
             LabelPL {text: qsTr("Aerobic")}
             Item {
@@ -122,7 +124,7 @@ PagePL {
                 Rectangle { color: "yellow"; width: parent.width * (aerobic  / total) ; height: parent.height }
                 LabelPL { text: Math.round((aerobic / total) * 100) + "%"; anchors.centerIn: parent}
             }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHR()*0.8)))}
+            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.8)))}
 
             LabelPL {text: qsTr("Anerobic")}
             Item {
@@ -131,7 +133,7 @@ PagePL {
                 Rectangle { color: "orange"; width: parent.width * (anerobic  / total) ; height: parent.height }
                 LabelPL { text: Math.round((anerobic / total) * 100) + "%"; anchors.centerIn: parent}
             }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHR()*0.9)))}
+            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.9)))}
 
             LabelPL {text: qsTr("VO2 Max")}
             Item {
@@ -140,7 +142,7 @@ PagePL {
                 Rectangle { color: "red"; width: parent.width * (vo2max  / total) ; height: parent.height }
                 LabelPL { text: Math.round((vo2max / total) * 100) + "%"; anchors.centerIn: parent}
             }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHR())))}
+            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge)))}
         }
     }
 
@@ -152,7 +154,6 @@ PagePL {
     function calculateZones() {
         var points = graphHR.points;
         var end = points.length;
-        var maxHRforAge = maxHR();
 
         relaxed = 0;
         light = 0;
@@ -198,7 +199,7 @@ PagePL {
 
     }
 
-    function maxHR() {
+    function wingate() {
         var dob = AmazfishConfig.profileDOB;
         var gender = AmazfishConfig.profileGender;
         var diff_ms = Date.now() - dob.getTime();
