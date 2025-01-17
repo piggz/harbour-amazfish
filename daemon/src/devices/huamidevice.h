@@ -66,6 +66,8 @@ private:
     QString m_softwareRevision;
     int m_buttonPresses = 0;
     QTimer *m_keyPressTimer = nullptr;
+
+    QDateTime init_dt = QDateTime::fromTime_t(0);
 };
 
 #endif // BIPDEVICE_H
