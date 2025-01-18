@@ -59,7 +59,7 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
         return new PinetimeJFDevice(deviceName);
     }
 
-    if (deviceName.startsWith("Bangle.js")) {
+    if (deviceName.startsWith("Bangle.js") || deviceName.startsWith("Espruino")) {
         return new BangleJSDevice(deviceName);
     }
 
