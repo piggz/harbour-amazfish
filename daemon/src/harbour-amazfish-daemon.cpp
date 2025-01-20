@@ -42,15 +42,20 @@ int main(int argc, char **argv)
 
     {
         QString tr_path(TRANSLATION_FOLDER);
-        if ( !tr_path.isEmpty() ) {
-            QString locale = QLocale::system().name();
-            QTranslator *translator = new QTranslator();
+        if (QDir::isRelativePath(tr_path)) {
+            tr_path = QDir(QFileInfo(QCoreApplication::applicationFilePath()).absolutePath() + "/" + tr_path ).absolutePath();
+        }
 
-            if ( !translator->load(QLocale(), "harbour-amazfishd", "-", tr_path) ) {
-                qWarning() << "Failed to load translation for " << locale << " " << tr_path;
+        QString locale = QLocale::system().name();
+        QTranslator *translator = new QTranslator();
+        if ( translator->load(QLocale(), "harbour-amazfishd", "-", tr_path) ) {
+            if (app.installTranslator(translator)) {
+                qDebug() << "Install translation success for " << locale << " " << tr_path;
+            } else {
+                qWarning() << "Install translation failed for " << locale << " " << tr_path;
             }
-
-            app.installTranslator(translator);
+        } else {
+            qWarning() << "Failed to load translation for " << locale << " " << tr_path;
         }
 
     }
