@@ -91,7 +91,6 @@ public:
 
 private:
 
-
     int m_connectionStateChangedCount = 0;
     QString m_deviceAddress;
     QString m_deviceName;
