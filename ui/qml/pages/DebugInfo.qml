@@ -67,7 +67,7 @@ PagePL {
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
-            text: qsTr("Connection State: ") + DaemonInterfaceInstance.connectionState
+            text: qsTr("Connection State: ") + DaemonInterfaceInstance.connectionState + " (" +DaemonInterfaceInstance.connectionStateChangedCount+")"
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {

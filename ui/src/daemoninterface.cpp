@@ -85,6 +85,14 @@ void DaemonInterface::changeConnectionState()
         return;
     }
 
+    auto watcherCount = new QDBusPendingCallWatcher(iface->asyncCall(QStringLiteral("connectionStateChangedCount")));
+    connect(watcherCount, &QDBusPendingCallWatcher::finished, this, [this, watcherCount]() {
+        QDBusReply<int> reply(watcherCount->reply());
+        auto count = reply.value();
+        m_connectionStateChangedCount = count;
+        emit connectionStateChangedCountChanged();
+    });
+
     auto watcher = new QDBusPendingCallWatcher(iface->asyncCall(QStringLiteral("connectionState")));
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
         QDBusReply<QString> reply(watcher->reply());
@@ -95,6 +103,7 @@ void DaemonInterface::changeConnectionState()
         }
         watcher->deleteLater();
     });
+
 }
 
 void DaemonInterface::connectToDevice(const QString &address)
