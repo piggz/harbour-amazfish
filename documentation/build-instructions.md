@@ -23,7 +23,7 @@ In the .pro file, you can set `FLAVOR = silica` (or `FLAVOR = $$FLAVOR` and in t
 To install missing packages, as pointed out by build errors, use:
 
 ```
-sb2 -R zypper in mpris-qt5-devel libkf5archive-devel kcoreaddons-devel kdb-devel libKDb3-3 mkcal-qt5-devel libicu-devel pulseaudio-devel
+sb2 -R zypper in mpris-qt5-devel libkf5archive-devel kcoreaddons-devel kdb-devel libKDb3-3 mkcal-qt5-devel libicu-devel pulseaudio-devel ninja
 ```
 
 etc as pointed out by build errors.
@@ -38,7 +38,7 @@ In Ubuntu 20.04, with default Ubuntu repository, QT is in version 5.12.8. Tested
 Most dependencies can be installed from the system's package repositories:
 ```
 sudo apt update
-sudo apt install -y qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libkdb3-dev libkf5contacts-dev libkf5archive-dev libkf5coreaddons-dev qtlocation5-dev qtconnectivity5-dev qtpositioning5-dev qml-module-qtbluetooth qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qt-labs-settings qml-module-org-kde-kirigami2 qml-module-org-kde-bluezqt
+sudo apt install -y qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libkdb3-dev libkf5contacts-dev libkf5archive-dev libkf5coreaddons-dev qtlocation5-dev qtconnectivity5-dev qtpositioning5-dev qml-module-qtbluetooth qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qt-labs-settings qml-module-org-kde-kirigami2 qml-module-org-kde-bluezqt cmake ninja-build
 ```
 
 Two dependencies can be found on git repos
@@ -90,8 +90,8 @@ git submodule update
 ```
 mkdir build
 cd build
-qmake FLAVOR=kirigami  ..
-make
+cmake -DFLAVOR=silica ..
+cmake --build ..
 ```
 
 Here, you may get an error like this:
