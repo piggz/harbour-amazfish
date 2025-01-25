@@ -24,7 +24,7 @@ PageListPL {
         ListElement {
             deviceType: "AsteroidOS"
             icon: "../pics/devices/asteroidos.png"
-            pattern: "bass|sturgeon|narwhal|sparrow|dory|lenok|catfish|carp|smelt|anthias|pike|sawfish|ray/firefish|beluga|skipjack|koi|mooneye|swift|nemo|hoki|minnow|tetra|sprat|kingyo|medaka"
+            pattern: "bass|sturgeon|narwhal|sparrow|dory|lenok|catfish|carp|smelt|anthias|pike|sawfish|ray|firefish|beluga|skipjack|koi|mooneye|swift|nemo|hoki|minnow|tetra|sprat|kingyo|medaka"
         }
         ListElement {
             deviceType: "Amazfit Bip Watch"
