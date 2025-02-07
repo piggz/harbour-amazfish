@@ -117,7 +117,7 @@ PageListPL {
             deviceType: "InfiniTime"
             icon: "../pics/devices/pinetime.png"
             auth: false
-            pattern: "Pinetime"
+            pattern: "Pinetime|InfiniTime"
         }
         ListElement {
             deviceType: "Bangle.js"
