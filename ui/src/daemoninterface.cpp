@@ -113,6 +113,15 @@ void DaemonInterface::disconnect()
     iface->call(QStringLiteral("disconnect"));
 }
 
+void DaemonInterface::unpair()
+{
+    if (!iface || !iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("unpair"));
+}
+
+
 bool DaemonInterface::supportsFeature(Amazfish::Feature f)
 {
     if (!iface || !iface->isValid()) {

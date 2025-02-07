@@ -1,5 +1,5 @@
 #include "deviceinterface.h"
-
+#include "bluezadapter.h"
 #include "deviceinfoservice.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
@@ -144,6 +144,17 @@ void DeviceInterface::disconnect()
     qDebug() << Q_FUNC_INFO;
     if (m_device) {
         m_device->disconnectFromDevice();
+    }
+}
+
+void DeviceInterface::unpair()
+{
+    qDebug() << Q_FUNC_INFO;
+    if (m_device) {
+        BluezAdapter adapter;
+        adapter.setAdapterPath(AmazfishConfig::instance()->localAdapter());
+        adapter.removeDevice(m_deviceAddress);
+
     }
 }
 
