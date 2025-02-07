@@ -945,14 +945,14 @@ void DeviceInterface::registerDBus()
         if (!connection.registerService(SERVICE))
         {
             qCritical() << Q_FUNC_INFO << "Unable to register service. Quit.";
-            QCoreApplication::quit();
+            exit(1);
             return;
         }
 
         if (!connection.registerObject(PATH, this, QDBusConnection::ExportAllInvokables | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties))
         {
             qCritical() << Q_FUNC_INFO << "Unable to register objects. Quit.";
-            QCoreApplication::quit();
+            exit(1);
             return;
         }
         m_dbusRegistered = true;
