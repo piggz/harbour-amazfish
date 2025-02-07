@@ -21,10 +21,12 @@ void BatteryService::characteristicRead(const QString &characteristic, const QBy
 {
     qDebug() << Q_FUNC_INFO << "Read:" << characteristic << value;
     if (characteristic == UUID_CHARACTERISTIC_BATTERY_LEVEL) {
-        m_batteryLevel = value[0];
-        emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(m_batteryLevel));
+        if (value.length() == 1) {
+            m_batteryLevel = value[0];
+            emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(m_batteryLevel));
+        }
     } else {
-        qWarning() << "Unknown value";
+        qWarning() << "Unknown characteristic";
     }
 }
 
