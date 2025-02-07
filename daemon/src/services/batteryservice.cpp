@@ -24,6 +24,8 @@ void BatteryService::characteristicRead(const QString &characteristic, const QBy
         if (value.length() == 1) {
             m_batteryLevel = value[0];
             emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(m_batteryLevel));
+        } else {
+            qWarning() << "Invalid length";
         }
     } else {
         qWarning() << "Unknown characteristic";
