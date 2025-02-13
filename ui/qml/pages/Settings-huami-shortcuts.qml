@@ -86,13 +86,13 @@ PagePL {
     function displayName(name) {
         const translations = {
             "status": qsTr("Status"),
-            "hr": qsTr("HR"),
+            "hr": qsTr("Heartrate"),
             "workout": qsTr("Workout"),
             "weather": qsTr("Weather"),
             "notifications": qsTr("Notifications"),
             "more": qsTr("More"),
-            "dnd": qsTr("DND"),
-            "alarm": qsTr("Alarm"),
+            "dnd": qsTr("Do Not Disturb"),
+            "alarm": qsTr("Alarms"),
             "takephoto": qsTr("Take Photo"),
             "music": qsTr("Music"),
             "stopwatch": qsTr("Stopwatch"),
