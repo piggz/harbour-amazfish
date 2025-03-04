@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/AddCityPage.qml" line="8"/>
         <source>Set Location</source>
-        <translation type="unfinished">设置位置</translation>
+        <translation>设置地理位置</translation>
     </message>
 </context>
 <context>
@@ -67,7 +67,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="43"/>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="57"/>
@@ -86,7 +86,7 @@
     <message>
         <location filename="../qml/pages/AuthKeyDialog.qml" line="18"/>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation>输入授权密钥</translation>
     </message>
 </context>
 <context>
@@ -95,12 +95,12 @@
         <location filename="../qml/pages/BatteryPage.qml" line="9"/>
         <location filename="../qml/pages/BatteryPage.qml" line="45"/>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>电池</translation>
     </message>
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="25"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -122,12 +122,12 @@
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="7"/>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>安装文件</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="22"/>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择安装文件。</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="26"/>
@@ -155,7 +155,7 @@
     <message>
         <location filename="../src/daemoninterface.cpp" line="65"/>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>意外错误</translation>
     </message>
 </context>
 <context>
@@ -168,12 +168,12 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="8"/>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>调试程序</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="32"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>信息</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="36"/>
@@ -202,19 +202,19 @@
         <location filename="../qml/pages/DebugInfo.qml" line="56"/>
         <location filename="../qml/pages/DebugInfo.qml" line="248"/>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>模型： </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="61"/>
         <location filename="../qml/pages/DebugInfo.qml" line="254"/>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>固件版本： </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
         <location filename="../qml/pages/DebugInfo.qml" line="251"/>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>作者： </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="70"/>
@@ -240,48 +240,48 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="135"/>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>功能测试</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="144"/>
         <location filename="../qml/pages/DebugInfo.qml" line="161"/>
         <source>Somebody</source>
-        <translation type="unfinished"></translation>
+        <translation>某人</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="144"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>题目</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="144"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>来自Sailfish OS 的问候。这是一条通过蓝牙低功耗（BLE）发送的长消息！</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="153"/>
         <source>Donald Duck</source>
-        <translation type="unfinished"></translation>
+        <translation>唐老鸭</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="153"/>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation type="unfinished"></translation>
+        <translation>你好，这是一封来自旗鱼操作系统（Sailfish OS）的电子邮件！</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="166"/>
         <source>Test Immediate Alert Service</source>
-        <translation type="unfinished"></translation>
+        <translation>测试即时警报服务</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="183"/>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>请求屏幕截图</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="223"/>
         <source>Music Control</source>
-        <translation type="unfinished"></translation>
+        <translation>音乐控制</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="139"/>
@@ -341,7 +341,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="33"/>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>安装文件</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="37"/>
@@ -351,7 +351,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="41"/>
         <source>Data Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>数据图表</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="47"/>
@@ -366,7 +366,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="147"/>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="152"/>
@@ -381,17 +381,17 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="236"/>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1bpm</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="255"/>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>服务</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="260"/>
         <source>Enable on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>开机自启</translation>
     </message>
 </context>
 <context>
@@ -412,43 +412,43 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="38"/>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="69"/>
         <location filename="../qml/pages/HeartratePage.qml" line="72"/>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="91"/>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>放松的</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="100"/>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>轻度的</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="109"/>
         <source>Intensive</source>
-        <translation type="unfinished"></translation>
+        <translation>较高强度</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="118"/>
         <source>Aerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>高强度有氧</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="127"/>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>高强度厌氧</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="136"/>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation>最大强度</translation>
     </message>
 </context>
 <context>
@@ -457,7 +457,7 @@
         <location filename="../qml/tools/JSTools.js" line="87"/>
         <location filename="../qml/tools/JSTools.js" line="299"/>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>空</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="88"/>
@@ -473,7 +473,7 @@
         <location filename="../qml/tools/JSTools.js" line="302"/>
         <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>步幅</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="92"/>
@@ -481,24 +481,24 @@
         <location filename="../qml/tools/JSTools.js" line="304"/>
         <location filename="../qml/tools/JSTools.js" line="305"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="94"/>
         <location filename="../qml/tools/JSTools.js" line="306"/>
         <source>Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>海拔</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="95"/>
         <location filename="../qml/tools/JSTools.js" line="307"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>距离</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="96"/>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>暂停</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="97"/>
