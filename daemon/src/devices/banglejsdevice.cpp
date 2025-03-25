@@ -33,7 +33,7 @@ int BangleJSDevice::supportedFeatures() const
 
 QString BangleJSDevice::deviceType() const
 {
-    return "pinetimejf";
+    return "banglejs";
 }
 
 void BangleJSDevice::abortOperations()
