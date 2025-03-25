@@ -131,6 +131,12 @@ PageListPL {
             auth: true
             aliases: []
         }
+        
+        ListElement {
+            deviceType: "Mi Smart Band 5"
+            icon: "../pics/devices/miband5.png"
+            auth: true
+        }
 
         ListElement {
             deviceType: "Amazfit Stratos 3"
