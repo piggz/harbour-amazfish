@@ -5,7 +5,7 @@
     <name>AbstractDevice</name>
     <message>
         <source>Device does not support settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство не поддерживает настройки</translation>
     </message>
 </context>
 <context>
