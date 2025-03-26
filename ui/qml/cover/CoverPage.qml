@@ -70,7 +70,7 @@ CoverBackground {
 
             Image {
                 id: imgSteps
-                source: "../pics/custom-icons/icon-m-steps.png"
+                source: "../custom-icons/icon-m-steps.png"
                 height: Theme.iconSizeMedium
                 width: height
             }
@@ -94,7 +94,7 @@ CoverBackground {
 
             Image {
                 id: imgHeartrate
-                source: "../pics/custom-icons/icon-m-heartrate.png"
+                source: "../custom-icons/icon-m-heartrate.png"
                 height: Theme.iconSizeMedium
                 width: height
             }

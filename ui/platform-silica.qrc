@@ -1,0 +1,59 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="./qml/components/platform/ContextMenuItemPL.qml">./qml/components/platform.silica/ContextMenuItemPL.qml</file>
+        <file alias="./qml/components/platform/MenuDrawerItemPL.qml">./qml/components/platform.silica/MenuDrawerItemPL.qml</file>
+        <file alias="./qml/components/platform/MenuDrawerPL.qml">./qml/components/platform.silica/MenuDrawerPL.qml</file>
+        <file alias="./qml/components/platform/MenuDrawerSubmenuItemPL.qml">./qml/components/platform.silica/MenuDrawerSubmenuItemPL.qml</file>
+        <file alias="./qml/components/platform/MenuDrawerSubmenuPL.qml">./qml/components/platform.silica/MenuDrawerSubmenuPL.qml</file>
+        <file alias="./qml/components/platform/ApplicationWindowPL.qml">./qml/components/platform.silica/ApplicationWindowPL.qml</file>
+        <file alias="./qml/components/platform/BusyIndicatorPL.qml">./qml/components/platform.silica/BusyIndicatorPL.qml</file>
+        <file alias="./qml/components/platform/BusyIndicatorSmallPL.qml">./qml/components/platform.silica/BusyIndicatorSmallPL.qml</file>
+        <file alias="./qml/components/platform/ButtonPL.qml">./qml/components/platform.silica/ButtonPL.qml</file>
+        <file alias="./qml/components/platform/ClipboardPL.qml">./qml/components/platform.silica/ClipboardPL.qml</file>
+        <file alias="./qml/components/platform/ComboBoxPL.qml">./qml/components/platform.silica/ComboBoxPL.qml</file>
+        <file alias="./qml/components/platform/ContextMenuPL.qml">./qml/components/platform.silica/ContextMenuPL.qml</file>
+        <file alias="./qml/components/platform/Cover.qml">./qml/components/platform.silica/Cover.qml</file>
+        <file alias="./qml/components/platform/DatePickerDialogPL.qml">./qml/components/platform.silica/DatePickerDialogPL.qml</file>
+        <file alias="./qml/components/platform/DialogAutoPL.qml">./qml/components/platform.silica/DialogAutoPL.qml</file>
+        <file alias="./qml/components/platform/DialogListPL.qml">./qml/components/platform.silica/DialogListPL.qml</file>
+        <file alias="./qml/components/platform/DialogPL.qml">./qml/components/platform.silica/DialogPL.qml</file>
+        <file alias="./qml/components/platform/ExpandingSectionGroupPL.qml">./qml/components/platform.silica/ExpandingSectionGroupPL.qml</file>
+        <file alias="./qml/components/platform/ExpandingSectionPL.qml">./qml/components/platform.silica/ExpandingSectionPL.qml</file>
+        <file alias="./qml/components/platform/FileSelectorPL.qml">./qml/components/platform.silica/FileSelectorPL.qml</file>
+        <file alias="./qml/components/platform/FormLayoutPL.qml">./qml/components/platform.silica/FormLayoutPL.qml</file>
+        <file alias="./qml/components/platform/IconButtonPL.qml">./qml/components/platform.silica/IconButtonPL.qml</file>
+        <file alias="./qml/components/platform/IconPL.qml">./qml/components/platform.silica/IconPL.qml</file>
+        <file alias="./qml/components/platform/LabelPL.qml">./qml/components/platform.silica/LabelPL.qml</file>
+        <file alias="./qml/components/platform/ListItemPL.qml">./qml/components/platform.silica/ListItemPL.qml</file>
+        <file alias="./qml/components/platform/ListViewPL.qml">./qml/components/platform.silica/ListViewPL.qml</file>
+        <file alias="./qml/components/platform/PageEmptyPL.qml">./qml/components/platform.silica/PageEmptyPL.qml</file>
+        <file alias="./qml/components/platform/PageMenuPL.qml">./qml/components/platform.silica/PageMenuPL.qml</file>
+        <file alias="./qml/components/platform/PagePL.qml">./qml/components/platform.silica/PagePL.qml</file>
+        <file alias="./qml/components/platform/PopupPL.qml">./qml/components/platform.silica/PopupPL.qml</file>
+        <file alias="./qml/components/platform/RemorsePopupPL.qml">./qml/components/platform.silica/RemorsePopupPL.qml</file>
+        <file alias="./qml/components/platform/SearchFieldPL.qml">./qml/components/platform.silica/SearchFieldPL.qml</file>
+        <file alias="./qml/components/platform/SectionHeaderPL.qml">./qml/components/platform.silica/SectionHeaderPL.qml</file>
+        <file alias="./qml/components/platform/SliderPL.qml">./qml/components/platform.silica/SliderPL.qml</file>
+        <file alias="./qml/components/platform/StackPL.qml">./qml/components/platform.silica/StackPL.qml</file>
+        <file alias="./qml/components/platform/TextAreaPL.qml">./qml/components/platform.silica/TextAreaPL.qml</file>
+        <file alias="./qml/components/platform/TextFieldPL.qml">./qml/components/platform.silica/TextFieldPL.qml</file>
+        <file alias="./qml/components/platform/TextSwitchPL.qml">./qml/components/platform.silica/TextSwitchPL.qml</file>
+        <file alias="./qml/components/platform/TimePickerDialogPL.qml">./qml/components/platform.silica/TimePickerDialogPL.qml</file>
+        <file alias="./qml/components/platform/ToolItemPL.qml">./qml/components/platform.silica/ToolItemPL.qml</file>
+        <file alias="./qml/components/platform/ValueButtonPL.qml">./qml/components/platform.silica/ValueButtonPL.qml</file>
+        <file alias="./qml/components/platform/PageMenuItemPL.qml">./qml/components/platform.silica/PageMenuItemPL.qml</file>
+        <file alias="./qml/components/platform/PageListPL.qml">./qml/components/platform.silica/PageListPL.qml</file>
+        <file alias="./qml/components/platform/StylerPL.qml">./qml/components/platform.silica/StylerPL.qml</file>
+        <file>./qml/components/Alarm.qml</file>
+        <file>./qml/components/Axis.qml</file>
+        <file>./qml/components/DeviceButton.qml</file>
+        <file>./qml/components/DraggableItem.qml</file>
+        <file>./qml/components/DraggableItemDropArea.qml</file>
+        <file>./qml/components/PercentCircle.qml</file>
+        <file>./qml/components/TruncationModes.qml</file>
+        <file>./qml/components/DateNavigation.qml</file>
+        <file>./qml/components/DownloadDataMenuItem.qml</file>
+        <file>./qml/components/Graph.qml</file>
+        <file>./qml/components/GraphData.qml</file>
+    </qresource>
+</RCC>

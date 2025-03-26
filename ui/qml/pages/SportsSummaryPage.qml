@@ -17,23 +17,12 @@ PageListPL {
         }
     }
 
-    IconPL {
-        id: sharedIconLocation
-        iconName: styler.iconLocation
-        visible: false
-    }
-
-    IconPL {
-        id: sharedIconTime
-        iconName: styler.iconClock
-        visible: false
-    }
-
     delegate: ListItemPL {
         id: listItem
         contentHeight: styler.themeItemSizeSmall + (styler.themePaddingMedium * 2)
 
         Loader {
+        {
             id: workoutImage
             anchors.top: parent.top
             anchors.topMargin: styler.themePaddingMedium
@@ -45,6 +34,7 @@ PageListPL {
                 width: styler.themeItemSizeSmall
                 height: width
             }
+
         }
         LabelPL
         {
@@ -70,11 +60,11 @@ PageListPL {
             anchors.top: nameLabel.bottom
             anchors.left: workoutImage.right
             anchors.leftMargin: styler.themePaddingMedium
-            width: distLabel.height
+            iconName: styler.iconLocation
             height: distLabel.height
-            asynchronous: true
-            source: sharedIconLocation.source
+            width: height
         }
+
         LabelPL
         {
             id: distLabel
@@ -87,10 +77,9 @@ PageListPL {
             id: timeImage
             anchors.top: timeLabel.top
             anchors.right: timeLabel.left
-            width: timeLabel.height
+            iconName: styler.iconClock
             height: timeLabel.height
-            asynchronous: true
-            source: sharedIconTime.source
+            width: height
         }
         LabelPL
         {

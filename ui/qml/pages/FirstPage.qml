@@ -18,6 +18,10 @@ PagePL {
     }
 
     pageMenu: PageMenuPL {
+//        PageMenuItemPL {
+//            text: qsTr("Test Icons")
+//            onClicked: app.pages.push(Qt.resolvedUrl("TestIconsPage.qml"))
+//        }
         PageMenuItemPL {
             text: qsTr("Pair with watch")
             onClicked: {
