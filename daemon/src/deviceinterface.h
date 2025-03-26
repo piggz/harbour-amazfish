@@ -46,6 +46,7 @@ public:
     Q_INVOKABLE QString pair(const QString &name, const QString &address);
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
+    Q_INVOKABLE void unpair();
     Q_INVOKABLE QString connectionState() const;
     Q_INVOKABLE bool operationRunning();
     Q_INVOKABLE bool supportsFeature(int f);

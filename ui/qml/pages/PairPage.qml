@@ -114,8 +114,6 @@ PageListPL {
             contentHeight: styler.themeItemSizeLarge
 //            visible: model.FriendlyName.indexOf(deviceType) >= 0
             onClicked: {
-                AmazfishConfig.pairedAddress = "";
-                AmazfishConfig.pairedName = "";
                 stopDiscovery();
                 _deviceName = model.FriendlyName;
                 _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
