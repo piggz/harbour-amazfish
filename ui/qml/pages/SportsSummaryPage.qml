@@ -17,19 +17,34 @@ PageListPL {
         }
     }
 
+    IconPL {
+        id: sharedIconLocation
+        iconName: styler.iconLocation
+        visible: false
+    }
+
+    IconPL {
+        id: sharedIconTime
+        iconName: styler.iconClock
+        visible: false
+    }
+
     delegate: ListItemPL {
         id: listItem
         contentHeight: styler.themeItemSizeSmall + (styler.themePaddingMedium * 2)
 
-        IconPL
-        {
+        Loader {
             id: workoutImage
             anchors.top: parent.top
             anchors.topMargin: styler.themePaddingMedium
             x: styler.themePaddingMedium
             width: styler.themeItemSizeSmall
             height: width
-            iconName: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+            sourceComponent: IconPL {
+                iconSource: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+                width: styler.themeItemSizeSmall
+                height: width
+            }
         }
         LabelPL
         {
@@ -55,11 +70,11 @@ PageListPL {
             anchors.top: nameLabel.bottom
             anchors.left: workoutImage.right
             anchors.leftMargin: styler.themePaddingMedium
-            iconName: styler.iconLocation
+            width: distLabel.height
             height: distLabel.height
-            width: height
+            asynchronous: true
+            source: sharedIconLocation.source
         }
-
         LabelPL
         {
             id: distLabel
@@ -72,9 +87,10 @@ PageListPL {
             id: timeImage
             anchors.top: timeLabel.top
             anchors.right: timeLabel.left
-            iconName: styler.iconClock
+            width: timeLabel.height
             height: timeLabel.height
-            width: height
+            asynchronous: true
+            source: sharedIconTime.source
         }
         LabelPL
         {
