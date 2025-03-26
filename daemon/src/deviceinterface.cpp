@@ -165,6 +165,10 @@ QString DeviceInterface::connectionState() const
     }
     return m_device->connectionState();
 }
+int DeviceInterface::connectionStateChangedCount() const
+{
+    return m_connectionStateChangedCount;
+}
 
 HRMService *DeviceInterface::hrmService() const
 {
@@ -457,6 +461,7 @@ void DeviceInterface::onConnectionStateChanged()
 
         sendBufferedNotifications();
         updateCalendar();
+        m_connectionStateChangedCount++;
     } else {
         //Terminate running operations
         m_device->abortOperations();

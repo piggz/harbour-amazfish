@@ -48,6 +48,7 @@ public:
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
     Q_INVOKABLE QString connectionState() const;
+    Q_INVOKABLE int connectionStateChangedCount() const;
     Q_INVOKABLE bool operationRunning();
     Q_INVOKABLE bool supportsFeature(int f);
     Q_INVOKABLE int supportedFeatures();
@@ -92,6 +93,7 @@ private:
         QString body;
     };
 
+    int m_connectionStateChangedCount = 0;
     QString m_deviceAddress;
     QString m_deviceName;
     bool m_dbusRegistered = false;
