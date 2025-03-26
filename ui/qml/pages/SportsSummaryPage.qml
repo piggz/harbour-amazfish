@@ -21,7 +21,7 @@ PageListPL {
         id: listItem
         contentHeight: styler.themeItemSizeSmall + (styler.themePaddingMedium * 2)
 
-        IconPL
+        Loader {
         {
             id: workoutImage
             anchors.top: parent.top
@@ -29,7 +29,12 @@ PageListPL {
             x: styler.themePaddingMedium
             width: styler.themeItemSizeSmall
             height: width
-            iconSource: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+            sourceComponent: IconPL {
+                iconSource: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+                width: styler.themeItemSizeSmall
+                height: width
+            }
+
         }
         LabelPL
         {
