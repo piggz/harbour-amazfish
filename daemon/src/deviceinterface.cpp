@@ -1,5 +1,5 @@
 #include "deviceinterface.h"
-
+#include "bluezadapter.h"
 #include "deviceinfoservice.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
@@ -147,12 +147,27 @@ void DeviceInterface::disconnect()
     }
 }
 
+void DeviceInterface::unpair()
+{
+    qDebug() << Q_FUNC_INFO;
+    if (m_device) {
+        BluezAdapter adapter;
+        adapter.setAdapterPath(AmazfishConfig::instance()->localAdapter());
+        adapter.removeDevice(m_deviceAddress);
+
+    }
+}
+
 QString DeviceInterface::connectionState() const
 {
     if (!m_device) {
         return QString();
     }
     return m_device->connectionState();
+}
+int DeviceInterface::connectionStateChangedCount() const
+{
+    return m_connectionStateChangedCount;
 }
 
 HRMService *DeviceInterface::hrmService() const
@@ -446,6 +461,7 @@ void DeviceInterface::onConnectionStateChanged()
 
         sendBufferedNotifications();
         updateCalendar();
+        m_connectionStateChangedCount++;
     } else {
         //Terminate running operations
         m_device->abortOperations();

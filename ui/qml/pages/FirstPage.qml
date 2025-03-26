@@ -11,6 +11,10 @@ PagePL {
 
     function unpairAccepted() {
         DaemonInterfaceInstance.disconnect();
+        DaemonInterfaceInstance.unpair()
+        AmazfishConfig.pairedAddress = "";
+        AmazfishConfig.pairedName = "";
+
     }
 
     pageMenu: PageMenuPL {

@@ -33,7 +33,7 @@ int BangleJSDevice::supportedFeatures() const
 
 QString BangleJSDevice::deviceType() const
 {
-    return "pinetimejf";
+    return "banglejs";
 }
 
 void BangleJSDevice::abortOperations()
@@ -187,12 +187,21 @@ void BangleJSDevice::setTime() {
 
     qint64 ts;
 
+    QDateTime now = QDateTime::currentDateTime();
+    QTimeZone timeZone = QTimeZone::systemTimeZone();
 #if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
-    ts = QDateTime::currentSecsSinceEpoch();
+    ts = now.currentSecsSinceEpoch();
 #else
-    ts = QDateTime::currentDateTime().toTime_t();
+    ts = now.currentDateTime().toTime_t();
 #endif
-    uart->tx(QByteArray(1, 0x10) + QString("setTime(" + QString::number(ts) + ");\n").toUtf8());
+
+    // Get the offset in seconds and convert to hours
+    int offsetSeconds = timeZone.offsetFromUtc(now);
+    double offsetHours = offsetSeconds / 3600.0;
+
+    QString cmd = QString("setTime(%1);\nE.setTimeZone(%2);\n(s=>s&&(s.timezone=%2,require('Storage').write('setting.json',s)))(require('Storage').readJSON('setting.json',1));").arg(ts).arg(offsetHours);
+
+    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8());
 }
 
 void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
