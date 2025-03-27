@@ -25,6 +25,7 @@
 #include "libwatchfish/notificationmonitor.h"
 #include "libwatchfish/notification.h"
 #include "libwatchfish/calendarsource.h"
+#include "libwatchfish/soundprofile.h"
 #include "navigationinterface.h"
 
 class HRMService;
@@ -138,6 +139,7 @@ private:
 #endif
     watchfish::NotificationMonitor m_notificationMonitor;
     watchfish::CalendarSource m_calendarSource;
+    watchfish::SoundProfile m_soundProfile;
 
     //Notifications
     QQueue<WatchNotification> m_notificationBuffer;

@@ -164,7 +164,7 @@ find_package(ICU REQUIRED COMPONENTS uc i18n data)
 find_package(KDb REQUIRED)
 
 if(FLAVOR STREQUAL "silica")
-    set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall")
+    set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall;soundprofile")
 
     pkg_check_modules(PULSE REQUIRED libpulse)
     target_include_directories(harbour-amazfishd PUBLIC ${PULSE_INCLUDE_DIRS})
@@ -177,7 +177,7 @@ if(FLAVOR STREQUAL "silica")
     target_link_libraries(harbour-amazfishd PUBLIC keepalive)
 
 elseif(FLAVOR STREQUAL "uuitk")
-    set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall")
+    set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall;soundprofile")
 
     pkg_check_modules(PULSE REQUIRED libpulse)
     target_include_directories(harbour-amazfishd PUBLIC ${PULSE_INCLUDE_DIRS})
@@ -185,7 +185,7 @@ elseif(FLAVOR STREQUAL "uuitk")
 
 
 else()
-    set(WATCHFISH_FEATURES "notificationmonitor;music;calendar")
+    set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;soundprofile")
 endif()
 
 add_subdirectory(libwatchfish)

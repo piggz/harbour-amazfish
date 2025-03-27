@@ -81,6 +81,14 @@ PagePL {
         }
 
         TextSwitchPL {
+            id: chkSilenceConnect
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+
+            width: parent.width
+            text: qsTr("Set silent profile on connect")
+        }
+
+        TextSwitchPL {
             id: chkNotifyConnect
             visible: supportsFeature(Amazfish.FEATURE_ALERT)
 
@@ -227,6 +235,7 @@ PagePL {
     }
 
     Component.onCompleted: {
+        chkSilenceConnect.checked = AmazfishConfig.appSilenceConnect;
         chkNotifyConnect.checked = AmazfishConfig.appNotifyConnect;
         sldWeatherRefresh.value = AmazfishConfig.appRefreshWeather;
         sldCalendarRefresh.value = AmazfishConfig.appRefreshCalendar;
@@ -241,6 +250,7 @@ PagePL {
     }
 
     function saveSettings() {
+        AmazfishConfig.appSilenceConnect = chkSilenceConnect.checked;
         AmazfishConfig.appNotifyConnect = chkNotifyConnect.checked;
         AmazfishConfig.appRefreshWeather = sldWeatherRefresh.value;
         AmazfishConfig.appRefreshCalendar = sldCalendarRefresh.value;

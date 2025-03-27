@@ -459,12 +459,23 @@ void DeviceInterface::onConnectionStateChanged()
             sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
         }
 
+        if (m_device && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)
+            && AmazfishConfig::instance()->appSilenceConnect()) {
+            m_soundProfile.setProfile(watchfish::SoundProfile::Silent);
+        }
+
         sendBufferedNotifications();
         updateCalendar();
         m_connectionStateChangedCount++;
     } else {
         //Terminate running operations
         m_device->abortOperations();
+
+        if (m_device && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)
+            && AmazfishConfig::instance()->appSilenceConnect()) {
+            m_soundProfile.setProfile(watchfish::SoundProfile::General);
+        }
+
     }
     emit connectionStateChanged();
 }
