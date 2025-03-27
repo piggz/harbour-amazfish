@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/custom-icons/icon-m-activity.png</file>
         <file>qml/custom-icons/icon-m-alarm.png</file>
         <file>qml/custom-icons/icon-m-back.png</file>
         <file>qml/custom-icons/icon-m-battery.png</file>
@@ -7,15 +8,24 @@
         <file>qml/custom-icons/icon-m-bluetooth-device.png</file>
         <file>qml/custom-icons/icon-m-clock.png</file>
         <file>qml/custom-icons/icon-m-contact.png</file>
+        <file>qml/custom-icons/icon-m-cycling.png</file>
         <file>qml/custom-icons/icon-m-diagnostic.png</file>
         <file>qml/custom-icons/icon-m-down.png</file>
+        <file>qml/custom-icons/icon-m-exercise.png</file>
         <file>qml/custom-icons/icon-m-favorite-selected.png</file>
         <file>qml/custom-icons/icon-m-forward.png</file>
+        <file>qml/custom-icons/icon-m-heartrate2.png</file>
         <file>qml/custom-icons/icon-m-heartrate.png</file>
+        <file>qml/custom-icons/icon-m-indoor cycling.png</file>
         <file>qml/custom-icons/icon-m-levels.png</file>
         <file>qml/custom-icons/icon-m-location.png</file>
+        <file>qml/custom-icons/icon-m-open swimming.png</file>
         <file>qml/custom-icons/icon-m-running.png</file>
+        <file>qml/custom-icons/icon-m-skiing.png</file>
+        <file>qml/custom-icons/icon-m-steps2.png</file>
         <file>qml/custom-icons/icon-m-steps.png</file>
+        <file>qml/custom-icons/icon-m-swimming.png</file>
+        <file>qml/custom-icons/icon-m-trail running.png</file>
         <file>qml/custom-icons/icon-m-treadmill.png</file>
         <file>qml/custom-icons/icon-m-unknown.png</file>
         <file>qml/custom-icons/icon-m-up-down.png</file>
@@ -23,16 +33,6 @@
         <file>qml/custom-icons/icon-m-walking.png</file>
         <file>qml/custom-icons/icon-m-watch.png</file>
         <file>qml/custom-icons/icon-m-weather-d212-light.png</file>
-        <file>qml/custom-icons/icon-m-cycling.png</file>
-        <file>qml/custom-icons/icon-m-heartrate2.png</file>
-        <file>qml/custom-icons/icon-m-indoor cycling.png</file>
-        <file>qml/custom-icons/icon-m-open swimming.png</file>
-        <file>qml/custom-icons/icon-m-skiing.png</file>
-        <file>qml/custom-icons/icon-m-steps2.png</file>
-        <file>qml/custom-icons/icon-m-swimming.png</file>
-        <file>qml/custom-icons/icon-m-trail running.png</file>
         <file>qml/custom-icons/icon-strava.png</file>
-        <file>qml/custom-icons/icon-m-activity.png</file>
-        <file>qml/custom-icons/icon-m-exercise.png</file>
     </qresource>
 </RCC>
