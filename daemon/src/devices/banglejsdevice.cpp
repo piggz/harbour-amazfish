@@ -1,5 +1,7 @@
 #include "banglejsdevice.h"
+#include "batteryservice.h"
 #include "uartservice.h"
+#include "deviceinfoservice.h"
 
 #include <QtXml/QtXml>
 
@@ -25,10 +27,11 @@ void BangleJSDevice::pair()
 
 int BangleJSDevice::supportedFeatures() const
 {
-    return FEATURE_HRM |
-            FEATURE_ALERT |
-            FEATURE_MUSIC_CONTROL |
-            FEATURE_WEATHER;
+    return FEATURE_STEPS |
+           FEATURE_HRM |
+           FEATURE_ALERT |
+           FEATURE_MUSIC_CONTROL |
+           FEATURE_WEATHER;
 }
 
 QString BangleJSDevice::deviceType() const
@@ -152,6 +155,10 @@ void BangleJSDevice::parseServices()
 
             if (uuid == UARTService::UUID_SERVICE_UART && !service(UARTService::UUID_SERVICE_UART)) {
                 addService(UARTService::UUID_SERVICE_UART, new UARTService(path, this));
+            } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
+                addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
+            } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
+                addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
             } else if ( !service(uuid)) {
                 addService(uuid, new QBLEService(uuid, path, this));
             }
@@ -172,6 +179,16 @@ void BangleJSDevice::initialise()
 
         uart->enableNotification(UARTService::UUID_CHARACTERISTIC_UART_RX);
         uart->tx(QByteArray(1, 0x03)); //Clear line)
+    }
+
+    BatteryService *battery = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
+    if (battery) {
+        connect(battery, &BatteryService::informationChanged, this, &BangleJSDevice::informationChanged, Qt::UniqueConnection);
+    }
+
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
+    if (info) {
+        connect(info, &DeviceInfoService::informationChanged, this, &BangleJSDevice::informationChanged, Qt::UniqueConnection);
     }
 
     setConnectionState("authenticated");
@@ -313,6 +330,16 @@ void BangleJSDevice::startDownload()
 void BangleJSDevice::refreshInformation()
 {
     qDebug() << Q_FUNC_INFO;
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
+    if (info) {
+        info->refreshInformation();
+    }
+
+    BatteryService *bat = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
+    if (bat) {
+        bat->refreshInformation();
+    }
+
 
 }
 
@@ -320,11 +347,13 @@ QString BangleJSDevice::information(Info i) const
 {
     qDebug() << Q_FUNC_INFO << i;
 
-    if (i == INFO_BATTERY) {
+    switch (i) {
+    case AbstractDevice::INFO_BATTERY:
         return QString::number(m_infoBatteryLevel);
-    }
-    if (i == INFO_SWVER) {
+    case AbstractDevice::INFO_SWVER:
         return m_firmwareVersion;
+    default:
+        break;
     }
 
     return QString();
