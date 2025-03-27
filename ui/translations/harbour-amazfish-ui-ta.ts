@@ -244,6 +244,10 @@
         <source>Test Immediate Alert Service</source>
         <translation>உடனடி எச்சரிக்கை சேவையை சோதிக்கவும்</translation>
     </message>
+    <message>
+        <source>This is a test notification</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>
@@ -744,10 +748,6 @@
         <translation>இசை</translation>
     </message>
     <message>
-        <source>Time</source>
-        <translation>நேரம்</translation>
-    </message>
-    <message>
         <source>Mute Phone</source>
         <translation>முடக்கு தொலைபேசி</translation>
     </message>
@@ -780,10 +780,6 @@
         <translation>காலசுழற்சி</translation>
     </message>
     <message>
-        <source>SPO2</source>
-        <translation>Spo2</translation>
-    </message>
-    <message>
         <source>Alexa</source>
         <translation>அலெக்சா</translation>
     </message>
@@ -798,6 +794,86 @@
     <message>
         <source>Timer</source>
         <translation>நேரங்குறிகருவி</translation>
+    </message>
+    <message>
+        <source>Take Photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stopwatch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NFC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Watch Face</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer/Stopwatch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sleep</source>
+        <translation type="unfinished">தூங்கு</translation>
+    </message>
+    <message>
+        <source>SpO2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Widgets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breathing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation type="unfinished">படிகள்</translation>
+    </message>
+    <message>
+        <source>Distance</source>
+        <translation type="unfinished">தூரம்</translation>
+    </message>
+    <message>
+        <source>Calories</source>
+        <translation type="unfinished">கலோரிகள்</translation>
+    </message>
+    <message>
+        <source>Pomodoro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished">மின்கலம்</translation>
+    </message>
+    <message>
+        <source>Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barometer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flashlight</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1139,21 +1215,6 @@
     <message>
         <source>swolf</source>
         <translation>ச்வோல்ஃப்</translation>
-    </message>
-</context>
-<context>
-    <name>SportsSummaryPage</name>
-    <message>
-        <source>Sports Activities</source>
-        <translation>விளையாட்டு நடவடிக்கைகள்</translation>
-    </message>
-    <message>
-        <source>Download Next Activity</source>
-        <translation>அடுத்த செயல்பாட்டைப் பதிவிறக்கவும்</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>அகற்று</translation>
     </message>
 </context>
 <context>

@@ -91,14 +91,6 @@
         <translation>Enviar</translation>
     </message>
     <message>
-        <source>Download File</source>
-        <translation type="vanished">Enviar archivo</translation>
-    </message>
-    <message>
-        <source>Select a file to download.</source>
-        <translation type="vanished">Selecciona archivo para enviar.</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Ninguno</translation>
     </message>
@@ -252,6 +244,10 @@
         <source>Test Immediate Alert Service</source>
         <translation>Probar el servicio de alerta inmediata</translation>
     </message>
+    <message>
+        <source>This is a test notification</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>
@@ -265,10 +261,6 @@
     <message>
         <source>Pair with watch</source>
         <translation>Vincular reloj</translation>
-    </message>
-    <message>
-        <source>Download File</source>
-        <translation type="vanished">Enviar archivo</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -756,10 +748,6 @@
         <translation>Música</translation>
     </message>
     <message>
-        <source>Time</source>
-        <translation>Hora</translation>
-    </message>
-    <message>
         <source>Mute Phone</source>
         <translation>Silenciar teléfono</translation>
     </message>
@@ -792,10 +780,6 @@
         <translation>Período</translation>
     </message>
     <message>
-        <source>SPO2</source>
-        <translation>SPO2</translation>
-    </message>
-    <message>
         <source>Alexa</source>
         <translation>Alexa</translation>
     </message>
@@ -810,6 +794,86 @@
     <message>
         <source>Timer</source>
         <translation>Cronómetro</translation>
+    </message>
+    <message>
+        <source>Take Photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stopwatch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NFC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Watch Face</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer/Stopwatch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sleep</source>
+        <translation type="unfinished">Sueño</translation>
+    </message>
+    <message>
+        <source>SpO2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Widgets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breathing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Steps</source>
+        <translation type="unfinished">Pasos</translation>
+    </message>
+    <message>
+        <source>Distance</source>
+        <translation type="unfinished">Distancia</translation>
+    </message>
+    <message>
+        <source>Calories</source>
+        <translation type="unfinished">Calorías</translation>
+    </message>
+    <message>
+        <source>Pomodoro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished">Batería</translation>
+    </message>
+    <message>
+        <source>Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barometer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flashlight</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -964,14 +1028,6 @@
     <message>
         <source>Hours</source>
         <translation>Horas</translation>
-    </message>
-    <message>
-        <source>%1 hrs</source>
-        <translation type="vanished">%1 hrs.</translation>
-    </message>
-    <message>
-        <source>Deep %1 hrs</source>
-        <translation type="vanished">Profundo %1 hrs</translation>
     </message>
     <message>
         <source>Total %1</source>
@@ -1159,21 +1215,6 @@
     <message>
         <source>Send to Strava</source>
         <translation>Enviar a Strava</translation>
-    </message>
-</context>
-<context>
-    <name>SportsSummaryPage</name>
-    <message>
-        <source>Sports Activities</source>
-        <translation>Actividades deportivas</translation>
-    </message>
-    <message>
-        <source>Download Next Activity</source>
-        <translation>Descargar Siguiente Actividad</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Quitar</translation>
     </message>
 </context>
 <context>
