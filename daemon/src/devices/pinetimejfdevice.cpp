@@ -58,14 +58,15 @@ void PinetimeJFDevice::pair()
 {
     qDebug() << Q_FUNC_INFO;
 
-    m_needsAuth = false;
+    m_needsAuth = true;
     m_pairing = true;
     m_autoreconnect = true;
-    //disconnectFromDevice();
+    disconnectFromDevice();
     setConnectionState("pairing");
     emit connectionStateChanged();
 
-    QBLEDevice::connectToDevice();
+    QBLEDevice::pair();
+
 }
 
 int PinetimeJFDevice::supportedFeatures() const

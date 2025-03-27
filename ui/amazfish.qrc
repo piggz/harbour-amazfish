@@ -1,57 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="qml/components/platform/ApplicationWindowPL.qml">qml/components/platform.kirigami/ApplicationWindowPL.qml</file>
-        <file alias="qml/components/platform/BusyIndicatorPL.qml">qml/components/platform.kirigami/BusyIndicatorPL.qml</file>
-        <file alias="qml/components/platform/BusyIndicatorSmallPL.qml">qml/components/platform.kirigami/BusyIndicatorSmallPL.qml</file>
-        <file alias="qml/components/platform/ButtonPL.qml">qml/components/platform.kirigami/ButtonPL.qml</file>
-        <file alias="qml/components/platform/ClipboardPL.qml">qml/components/platform.kirigami/ClipboardPL.qml</file>
-        <file alias="qml/components/platform/ComboBoxPL.qml">qml/components/platform.kirigami/ComboBoxPL.qml</file>
-        <file alias="qml/components/platform/ContextMenuItemPL.qml">qml/components/platform.kirigami/ContextMenuItemPL.qml</file>
-        <file alias="qml/components/platform/ContextMenuPL.qml">qml/components/platform.kirigami/ContextMenuPL.qml</file>
-        <file alias="qml/components/platform/DatePickerDialogPL.qml">qml/components/platform.kirigami/DatePickerDialogPL.qml</file>
-        <file alias="qml/components/platform/DialogAutoPL.qml">qml/components/platform.kirigami/DialogAutoPL.qml</file>
-        <file alias="qml/components/platform/DialogListPL.qml">qml/components/platform.kirigami/DialogListPL.qml</file>
-        <file alias="qml/components/platform/DialogPL.qml">qml/components/platform.kirigami/DialogPL.qml</file>
-        <file alias="qml/components/platform/ExpandingSectionGroupPL.qml">qml/components/platform.kirigami/ExpandingSectionGroupPL.qml</file>
-        <file alias="qml/components/platform/ExpandingSectionPL.qml">qml/components/platform.kirigami/ExpandingSectionPL.qml</file>
-        <file alias="qml/components/platform/FileSelectorPL.qml">qml/components/platform.kirigami/FileSelectorPL.qml</file>
-        <file alias="qml/components/platform/FormLayoutPL.qml">qml/components/platform.kirigami/FormLayoutPL.qml</file>
-        <file alias="qml/components/platform/IconButtonPL.qml">qml/components/platform.kirigami/IconButtonPL.qml</file>
-        <file alias="qml/components/platform/IconPL.qml">qml/components/platform.kirigami/IconPL.qml</file>
-        <file alias="qml/components/platform/LabelPL.qml">qml/components/platform.kirigami/LabelPL.qml</file>
-        <file alias="qml/components/platform/ListViewPL.qml">qml/components/platform.kirigami/ListViewPL.qml</file>
-        <file alias="qml/components/platform/ListItemPL.qml">qml/components/platform.kirigami/ListItemPL.qml</file>
-        <file alias="qml/components/platform/MenuDrawerItemPL.qml">qml/components/platform.kirigami/MenuDrawerItemPL.qml</file>
-        <file alias="qml/components/platform/MenuDrawerPL.qml">qml/components/platform.kirigami/MenuDrawerPL.qml</file>
-        <file alias="qml/components/platform/MenuDrawerSubmenuItemPL.qml">qml/components/platform.kirigami/MenuDrawerSubmenuItemPL.qml</file>
-        <file alias="qml/components/platform/MenuDrawerSubmenuPL.qml">qml/components/platform.kirigami/MenuDrawerSubmenuPL.qml</file>
-        <file alias="qml/components/platform/PageEmptyPL.qml">qml/components/platform.kirigami/PageEmptyPL.qml</file>
-        <file alias="qml/components/platform/PageListPL.qml">qml/components/platform.kirigami/PageListPL.qml</file>
-        <file alias="qml/components/platform/PageMenuItemPL.qml">qml/components/platform.kirigami/PageMenuItemPL.qml</file>
-        <file alias="qml/components/platform/PageMenuPL.qml">qml/components/platform.kirigami/PageMenuPL.qml</file>
-        <file alias="qml/components/platform/PagePL.qml">qml/components/platform.kirigami/PagePL.qml</file>
-        <file alias="qml/components/platform/PopupPL.qml">qml/components/platform.kirigami/PopupPL.qml</file>
-        <file alias="qml/components/platform/RemorsePopupPL.qml">qml/components/platform.kirigami/RemorsePopupPL.qml</file>
-        <file alias="qml/components/platform/SearchFieldPL.qml">qml/components/platform.kirigami/SearchFieldPL.qml</file>
-        <file alias="qml/components/platform/SectionHeaderPL.qml">qml/components/platform.kirigami/SectionHeaderPL.qml</file>
-        <file alias="qml/components/platform/SliderPL.qml">qml/components/platform.kirigami/SliderPL.qml</file>
-        <file alias="qml/components/platform/StackPL.qml">qml/components/platform.kirigami/StackPL.qml</file>
-        <file alias="qml/components/platform/StylerPL.qml">qml/components/platform.kirigami/StylerPL.qml</file>
-        <file alias="qml/components/platform/TextAreaPL.qml">qml/components/platform.kirigami/TextAreaPL.qml</file>
-        <file alias="qml/components/platform/TextFieldPL.qml">qml/components/platform.kirigami/TextFieldPL.qml</file>
-        <file alias="qml/components/platform/TextSwitchPL.qml">qml/components/platform.kirigami/TextSwitchPL.qml</file>
-        <file alias="qml/components/platform/TimePickerDialogPL.qml">qml/components/platform.kirigami/TimePickerDialogPL.qml</file>
-        <file alias="qml/components/platform/ToolItemPL.qml">qml/components/platform.kirigami/ToolItemPL.qml</file>
-        <file alias="qml/components/platform/ValueButtonPL.qml">qml/components/platform.kirigami/ValueButtonPL.qml</file>
-        <file>qml/components/DraggableItemDropArea.qml</file>
-        <file>qml/components/DraggableItem.qml</file>
-        <file>qml/components/Alarm.qml</file>
-        <file>qml/components/Axis.qml</file>
-        <file>qml/components/DeviceButton.qml</file>
-        <file>qml/components/DownloadDataMenuItem.qml</file>
-        <file>qml/components/Graph.qml</file>
-        <file>qml/components/GraphData.qml</file>
-        <file>qml/components/PercentCircle.qml</file>
         <file>qml/cover/CoverPage.qml</file>
         <file>qml/pages/AddCityPage.qml</file>
         <file>qml/pages/AnalysisPage.qml</file>
@@ -76,6 +24,7 @@
         <file>qml/pages/StravaSettingsPage.qml</file>
         <file>qml/pages/StravaUploadPage.qml</file>
         <file>qml/pages/StepsPage.qml</file>
+        <file>qml/pages/TestIconsPage.qml</file>
         <file>qml/pages/UnpairDeviceDialog.qml</file>
         <file>qml/pics/devices/amazfit-bip.png</file>
         <file>qml/pics/devices/amazfit-bips.png</file>
@@ -121,8 +70,6 @@
         <file>qml/pics/weather-storm.png</file>
         <file>qml/tools/JSTools.js</file>
         <file>qml/harbour-amazfish.qml</file>
-        <file>qml/components/TruncationModes.qml</file>
-        <file>qml/components/DateNavigation.qml</file>
         <file>icons/172x172/harbour-amazfish-ui.png</file>
     </qresource>
 </RCC>

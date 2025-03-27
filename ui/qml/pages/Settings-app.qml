@@ -28,17 +28,64 @@ PagePL {
             label: qsTr("BT Adapter")
             Component.onCompleted: {
                 for (var i = 0; i < adapters.rowCount(); i++) {
-                    if (adapters.get(i).path == AmazfishConfig.localAdapter) {
+                    var item = adapters.get(i)
+                    if (item.path === AmazfishConfig.localAdapter) {
                         cboLocalAdapter.currentIndex = i;
+                        setDetails(item)
                         return
                     }
                 }
             }
+
+            onCurrentIndexChanged: {
+                setDetails(adapters.get(currentIndex))
+            }
+
+            function setDetails(data) {
+                lblBluetoothName.text = data.name
+                lblBluetoothAlias.text = data.alias
+                lblBluetoothAddress.text = data.address
+            }
+        }
+
+
+        LabelPL {
+            id: lblBluetoothName
+            color: styler.themeSecondaryHighlightColor
+            font.pixelSize: styler.themeFontSizeMedium
+            truncMode: truncModes.fade
+            // Layout.fillWidth: true
+            width: parent.width
+        }
+
+        LabelPL {
+            id: lblBluetoothAlias
+            color: styler.themeSecondaryHighlightColor
+            font.pixelSize: styler.themeFontSizeMedium
+            truncMode: truncModes.fade
+            // Layout.fillWidth: true
+            width: parent.width
+        }
+        LabelPL {
+            id: lblBluetoothAddress
+            color: styler.themeSecondaryHighlightColor
+            font.pixelSize: styler.themeFontSizeMedium
+            truncMode: truncModes.fade
+            // Layout.fillWidth: true
+            width: parent.width
         }
 
         SectionHeaderPL {
             visible: supportsFeature(Amazfish.FEATURE_ALERT)
             text: qsTr("Notifications")
+        }
+
+        TextSwitchPL {
+            id: chkSilenceConnect
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+
+            width: parent.width
+            text: qsTr("Set silent profile on connect")
         }
 
         TextSwitchPL {
@@ -188,6 +235,7 @@ PagePL {
     }
 
     Component.onCompleted: {
+        chkSilenceConnect.checked = AmazfishConfig.appSilenceConnect;
         chkNotifyConnect.checked = AmazfishConfig.appNotifyConnect;
         sldWeatherRefresh.value = AmazfishConfig.appRefreshWeather;
         sldCalendarRefresh.value = AmazfishConfig.appRefreshCalendar;
@@ -202,6 +250,7 @@ PagePL {
     }
 
     function saveSettings() {
+        AmazfishConfig.appSilenceConnect = chkSilenceConnect.checked;
         AmazfishConfig.appNotifyConnect = chkNotifyConnect.checked;
         AmazfishConfig.appRefreshWeather = sldWeatherRefresh.value;
         AmazfishConfig.appRefreshCalendar = sldCalendarRefresh.value;

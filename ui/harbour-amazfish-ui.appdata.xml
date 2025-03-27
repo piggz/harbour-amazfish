@@ -26,18 +26,30 @@
   <developer id="@piggz@fosstodon.org">
     <name>Adam Pigg</name>
   </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#ff8446</color>
+    <color type="primary" scheme_preference="dark">#3a1d11</color>
+  </branding>
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot1.png</image>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/first-page.png</image>
       <caption>Main screen with step counter and heart rate</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot2.png</image>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/settings-application.png</image>
       <caption>Application settings</caption>
     </screenshot>
     <screenshot>
-      <image>https://github.com/piggz/harbour-amazfish/raw/2.2.4/screenshots/screenshot3.png</image>
-      <caption>Analysis screen</caption>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/settings-profile.png</image>
+      <caption>User profile settings</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/pairing-page.png</image>
+      <caption>Pairing page</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/piggz/harbour-amazfish/raw/master/screenshots/plasma/sports-running.png</image>
+      <caption>Sports Activities: Running</caption>
     </screenshot>
   </screenshots>
   <categories>
@@ -56,6 +68,18 @@
   </keywords>
   <content_rating type="oars-1.1"/>
   <releases>
+  <release version="2.5.0" timestamp="1732467548">
+    <description>
+      <p>Translation updates using Weblate (Spanish, Persian, Czech, German).</p>
+      <p>UX improvements such as enabling the SailfishOS cover page and updating the device image for AsteroidOS.</p>
+      <p>Functional enhancements for Bangle.js, including time synchronization upon connection, JSON handling, music control, and "find my phone" functionality.</p>
+      <p>Replacement of the Haskell &amp; Fox maxHR formula with the more precise Wingate formula.</p>
+      <p>Updates to translatable strings for UI labels, ensuring accurate translation of axis labels.</p>
+      <p>Improvements to number formatting for steps, default height adjustment, and general documentation updates.</p>
+      <p>Improve how infinitime, banglejs and AsteroidOS devices pair/connect</p>
+      <p>UI improvements for Kirigami and Ubuntu Touch</p>
+    </description>
+  </release>
   <release version="2.4.0" timestamp="1724083380">
     <description>
       <p>Fix Sports page not displaying routes</p>

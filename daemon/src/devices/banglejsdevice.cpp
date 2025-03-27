@@ -20,7 +20,7 @@ void BangleJSDevice::pair()
     setConnectionState("pairing");
     emit connectionStateChanged();
 
-    QBLEDevice::connectToDevice();
+    QBLEDevice::pair();
 }
 
 int BangleJSDevice::supportedFeatures() const
@@ -33,7 +33,7 @@ int BangleJSDevice::supportedFeatures() const
 
 QString BangleJSDevice::deviceType() const
 {
-    return "pinetimejf";
+    return "banglejs";
 }
 
 void BangleJSDevice::abortOperations()
@@ -175,6 +175,33 @@ void BangleJSDevice::initialise()
     }
 
     setConnectionState("authenticated");
+
+    setTime();
+}
+
+void BangleJSDevice::setTime() {
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+
+    qint64 ts;
+
+    QDateTime now = QDateTime::currentDateTime();
+    QTimeZone timeZone = QTimeZone::systemTimeZone();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
+    ts = now.currentSecsSinceEpoch();
+#else
+    ts = now.currentDateTime().toTime_t();
+#endif
+
+    // Get the offset in seconds and convert to hours
+    int offsetSeconds = timeZone.offsetFromUtc(now);
+    double offsetHours = offsetSeconds / 3600.0;
+
+    QString cmd = QString("setTime(%1);\nE.setTimeZone(%2);\n(s=>s&&(s.timezone=%2,require('Storage').write('setting.json',s)))(require('Storage').readJSON('setting.json',1));").arg(ts).arg(offsetHours);
+
+    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8());
 }
 
 void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)

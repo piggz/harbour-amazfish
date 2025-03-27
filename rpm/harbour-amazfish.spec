@@ -22,7 +22,7 @@ Name:       harbour-amazfish
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Watch interface application
-Version:    2.4.0
+Version:    2.5.0
 Release:    1
 Group:      QtQt
 License:    GPLv3
@@ -35,6 +35,7 @@ Requires:   kcoreaddons >= 5.31.0
 Requires:   libicu
 Requires:   kf5bluezqt
 Requires:   libkf5archive
+Requires:   mapboxgl-qml
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -56,6 +57,8 @@ BuildRequires:  libkeepalive-devel
 BuildRequires:  libkf5archive-devel
 BuildRequires:  pulseaudio-devel
 BuildRequires:  libicu-devel
+BuildRequires:  cmake
+BuildRequires:  ninja
 
 %description
 Watch companion application for SalfishOS
@@ -88,12 +91,18 @@ Links:
 
 %build
 %if 0%{?sailfishos}
-%qmake5 VERSION='%{version}-%{release}' FLAVOR=silica
+    cmake \
+        -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
+        -DFLAVOR=silica \
+        .
 %else
-%qmake5 VERSION='%{version}-%{release}' FLAVOR=kirigami
+    cmake \
+        -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
+        -DFLAVOR=kirigami \
+        .
 %endif
 
-%qtc_make %{?_smp_mflags}
+cmake --build "." %{?_smp_mflags} --verbose
 
 # >> build post
 # << build post
@@ -102,7 +111,8 @@ Links:
 rm -rf %{buildroot}
 # >> install pre
 # << install pre
-%qmake5_install
+
+DESTDIR=%{buildroot} cmake --install .
 
 # >> install post
 # << install post
@@ -111,12 +121,17 @@ desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
    %{buildroot}%{_datadir}/applications/*.desktop
 
+rm -rf %{buildroot}/usr/include/o2
+rm -f %{buildroot}/usr/lib/libo2.a
+rm -f %{buildroot}/usr/share/metainfo/harbour-amazfish-ui.appdata.xml
+
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}-ui
+%{_bindir}/%{name}d
 %attr(2755,root,privileged) %{_bindir}/%{name}d
-%{_datadir}/%{name}-ui
 %{_datadir}/%{name}d
+%{_datadir}/%{name}-ui
 %{_datadir}/applications/%{name}-ui.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}-ui.png
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-ui.svg

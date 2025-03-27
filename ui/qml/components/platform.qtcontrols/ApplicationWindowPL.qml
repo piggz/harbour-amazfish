@@ -27,6 +27,7 @@ ApplicationWindow {
     height: 480
     visible: true
 
+    property var    cover
     property real   compassOrientationOffset: 0
     property alias  initialPage: pageStack.initialItem
     property string menuPageUrl

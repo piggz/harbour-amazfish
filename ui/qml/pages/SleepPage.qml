@@ -91,7 +91,10 @@ PagePL {
     function decimalToHourMin(decTime) {
         var totalMinutes = Math.round(decTime * 60);
         var hours = Math.floor(totalMinutes / 60);
-        var minutes = (totalMinutes % 60).toString().padStart(2, '0');
+        var minutes = (totalMinutes % 60);
+        if (minutes < 10) {
+            return hours + ":0" + minutes;
+        }
 
         return hours + ":" + minutes;
     }

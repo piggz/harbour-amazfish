@@ -22,6 +22,7 @@ class DaemonInterface : public QObject
 
     //Device Interface
     Q_PROPERTY(QString connectionState MEMBER m_connectionState NOTIFY connectionStateChanged)
+    Q_PROPERTY(int connectionStateChangedCount MEMBER m_connectionStateChangedCount NOTIFY connectionStateChangedCountChanged)
     Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
 
 public:
@@ -30,6 +31,7 @@ public:
 
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
+    Q_INVOKABLE void unpair();
     Q_INVOKABLE bool supportsFeature(Amazfish::Feature f);
     Q_INVOKABLE int supportedFeatures();
 
@@ -68,6 +70,7 @@ signals:
     void buttonPressed(int presses);
     void informationChanged(int infoKey, const QString& infoValue);
     void connectionStateChanged();
+    void connectionStateChangedCountChanged();
 
 private slots:
     void changeConnectionState();
@@ -90,6 +93,7 @@ private:
     void connectDatabase();
 
     QString m_connectionState;
+    int m_connectionStateChangedCount;
 
     bool operationRunning();
 

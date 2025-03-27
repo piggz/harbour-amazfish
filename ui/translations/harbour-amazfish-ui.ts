@@ -61,6 +61,10 @@
         <source>Intensity</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>BPM</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
@@ -87,14 +91,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Download File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select a file to download.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -108,6 +104,14 @@
     </message>
     <message>
         <source>File not supported on this device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a file to install.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -255,10 +259,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Download File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -296,6 +296,10 @@
     </message>
     <message>
         <source>Enable on boot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -941,20 +945,24 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 hrs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deep %1 hrs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

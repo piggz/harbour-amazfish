@@ -32,28 +32,33 @@ QHash<int, QByteArray> SportsDataModel::roleNames() const
 
 QVariant SportsDataModel::data(const QModelIndex &index, int role) const
 {
-    if (index.row() >= 0 && index.row() < m_data.length()) {
-        if (role == SportId) {
-            return m_data.at(index.row()).id;
-        } else if (role == SportName) {
-            return m_data.at(index.row()).name;
-        } else if (role == SportVersion) {
-            return m_data.at(index.row()).version;
-        } else if (role == SportStartDate) {
-            return m_data.at(index.row()).startDate;
-        } else if (role == SportEndDate) {
-            return m_data.at(index.row()).endDate;
-        } else if (role == SportKind) {
-            return m_data.at(index.row()).kind;
-        } else if (role == SportKindString) {
-            return Amazfish::activityToString((Amazfish::ActivityType)m_data.at(index.row()).kind);
-        } else if (role == SportBaseLongitude) {
-            return m_data.at(index.row()).baseLongitude;
-        } else if (role == SportBaseLatitude) {
-            return m_data.at(index.row()).baseLatitude;
-        } else if (role == SportBaseAltitude) {
-            return m_data.at(index.row()).baseAltitude;
-        }
+    if (index.row() < 0 || index.row() > m_data.length()) {
+        return QVariant();
+    }
+
+    const SportsData &item = m_data.at(index.row());
+
+    switch (role) {
+    case SportId:
+        return item.id;
+    case SportName:
+        return item.name;
+    case SportVersion:
+        return item.version;
+    case SportStartDate:
+        return item.startDate;
+    case SportEndDate:
+        return item.endDate;
+    case SportKind:
+        return item.kind;
+    case SportKindString:
+        return Amazfish::activityToString((Amazfish::ActivityType)item.kind);
+    case SportBaseLongitude:
+        return item.baseLongitude;
+    case SportBaseLatitude:
+        return item.baseLongitude;
+    case SportBaseAltitude:
+        return item.baseAltitude;
     }
     return QVariant();
 }
@@ -68,8 +73,8 @@ void SportsDataModel::update()
 {
     beginResetModel();
     QString qry = "SELECT id, name, version, start_timestamp_dt, end_timestamp_dt, kind, base_longitude, base_latitude, base_altitude, gpx FROM sports_data ORDER BY start_timestamp_dt DESC";
-
     m_data.clear();
+
     if (m_connection && m_connection->isDatabaseUsed()) {
         KDbCursor *curs = m_connection->executeQuery(KDbEscapedString(qry));
         if (curs) {
@@ -96,6 +101,7 @@ void SportsDataModel::update()
             qDebug() << "Error executing query";
         }
     }
+
     endResetModel();
 }
 

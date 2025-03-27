@@ -55,10 +55,14 @@
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Skritt</translation>
     </message>
     <message>
         <source>Intensity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BPM</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -88,11 +92,11 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Last ned fil</translation>
+        <translation type="vanished">Last ned fil</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Velg fil å laste ned</translation>
+        <translation type="vanished">Velg fil å laste ned</translation>
     </message>
     <message>
         <source>None</source>
@@ -108,6 +112,14 @@
     </message>
     <message>
         <source>File not supported on this device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a file to install.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -256,7 +268,7 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Last ned fil</translation>
+        <translation type="vanished">Last ned fil</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -296,6 +308,10 @@
     </message>
     <message>
         <source>Enable on boot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -422,7 +438,7 @@
     <name>QObject</name>
     <message>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1% {1s?}</translation>
     </message>
     <message>
         <source>%1m %2s</source>
@@ -437,7 +453,7 @@
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alarmer</translation>
     </message>
     <message>
         <source>Save Settings</source>
@@ -547,7 +563,7 @@
     <name>Settings-button-action</name>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Knappehandlinger</translation>
     </message>
     <message>
         <source>Double Press Action</source>
@@ -563,7 +579,7 @@
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lagre innstillinger</translation>
     </message>
     <message>
         <source>No Action</source>
@@ -941,14 +957,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 hrs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deep %1 hrs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
         <translation type="unfinished"></translation>
@@ -956,6 +964,18 @@
     <message>
         <source>Hours</source>
         <translation>Timer</translation>
+    </message>
+    <message>
+        <source>Total %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deep %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

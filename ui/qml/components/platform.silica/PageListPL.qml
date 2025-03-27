@@ -35,11 +35,19 @@ Page {
     property alias  pageMenu: menuLoader.sourceComponent
     property alias  placeholderEnabled: viewPlaceholder.enabled
     property alias  placeholderText: viewPlaceholder.hintText
+    property alias  background: backgroundLoader.sourceComponent
     property string title
 
     signal pageStatusActivating
     signal pageStatusActive
     signal pageStatusInactive
+
+
+    Loader {
+        id: backgroundLoader
+        active: sourceComponent ? true : false
+        anchors.centerIn: parent
+    }
 
     SilicaListView {
         id: listView

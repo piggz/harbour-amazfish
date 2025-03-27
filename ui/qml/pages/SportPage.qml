@@ -53,6 +53,7 @@ PagePL {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.margins: styler.themePaddingLarge
             Layout.preferredHeight: page.height * 0.66
 
             IconPL
@@ -62,7 +63,6 @@ PagePL {
                 Layout.preferredWidth: styler.themeItemSizeLarge
                 Layout.preferredHeight: styler.themeItemSizeLarge
                 Layout.alignment: Qt.AlignLeft
-                Layout.leftMargin: styler.themePaddingLarge
                 iconName: styler.customIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
             }
 
@@ -97,7 +97,7 @@ PagePL {
             height: app.height / 3
             clip: true
             anchors.top: grid.bottom
-            anchors.topMargin: styler.themePaddingSmall
+            anchors.margins: styler.themePaddingLarge
 
             model: SportsMeta
 

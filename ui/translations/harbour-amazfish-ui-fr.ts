@@ -5,7 +5,7 @@
     <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished">Définir la localisation</translation>
+        <translation>Définir la localisation</translation>
     </message>
 </context>
 <context>
@@ -61,19 +61,23 @@
         <source>Intensity</source>
         <translation>Intensité</translation>
     </message>
+    <message>
+        <source>BPM</source>
+        <translation>BPM</translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entrez la clef d&apos;authentification</translation>
     </message>
 </context>
 <context>
     <name>BatteryPage</name>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie</translation>
     </message>
     <message>
         <source>%1 %</source>
@@ -88,11 +92,11 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Télécharger un fichier</translation>
+        <translation type="vanished">Télécharger un fichier</translation>
     </message>
     <message>
         <source>Select a file to download.</source>
-        <translation>Sélectionner un fichier à télécharger.</translation>
+        <translation type="vanished">Sélectionner un fichier à télécharger.</translation>
     </message>
     <message>
         <source>None</source>
@@ -104,18 +108,26 @@
     </message>
     <message>
         <source>File type/version: </source>
-        <translation>Type/version du fichier: </translation>
+        <translation>Type/version du fichier&#xa0;: </translation>
     </message>
     <message>
         <source>File not supported on this device</source>
         <translation>Fichier non supporté sur cet appareil</translation>
+    </message>
+    <message>
+        <source>Install File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a file to install.</source>
+        <translation>Choisissez un fichier à installer.</translation>
     </message>
 </context>
 <context>
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur inattendue</translation>
     </message>
 </context>
 <context>
@@ -126,11 +138,11 @@
     </message>
     <message>
         <source>Address: </source>
-        <translation>Adresse:</translation>
+        <translation>Adresse&#xa0;: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation>Numéro de série:</translation>
+        <translation>Numéro de série&#xa0;: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
@@ -142,7 +154,7 @@
     </message>
     <message>
         <source>Connection State: </source>
-        <translation>Status de la connexion:</translation>
+        <translation>Statut de la connexion&#xa0;: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
@@ -182,31 +194,31 @@
     </message>
     <message>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>Débogage</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>Modèle&#xa0;: </translation>
     </message>
     <message>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Rév. Firmware&#xa0;: </translation>
     </message>
     <message>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fabriquant&#xa0;: </translation>
     </message>
     <message>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Tests fonctionnels</translation>
     </message>
     <message>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mettre à jour le calendrier</translation>
     </message>
     <message>
         <source>Music Control</source>
@@ -214,27 +226,27 @@
     </message>
     <message>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Demander une capture d&apos;écran</translation>
     </message>
     <message>
         <source>Somebody</source>
-        <translation type="unfinished"></translation>
+        <translation>Quelqu&apos;un</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre</translation>
     </message>
     <message>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>Bonjour depuis Sailfish OS. Ceci est un message long envoyé par BLE&#x202f;!</translation>
     </message>
     <message>
         <source>Donald Duck</source>
-        <translation type="unfinished"></translation>
+        <translation>Donald Duck</translation>
     </message>
     <message>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hello, ceci est un email envoyé depuis Sailfish OS&#x202f;!</translation>
     </message>
     <message>
         <source>Test Immediate Alert Service</source>
@@ -256,7 +268,7 @@
     </message>
     <message>
         <source>Download File</source>
-        <translation>Télécharger fichier</translation>
+        <translation type="vanished">Télécharger fichier</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -296,6 +308,10 @@
     </message>
     <message>
         <source>Enable on boot</source>
+        <translation>Activer au démarrage</translation>
+    </message>
+    <message>
+        <source>Install File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -318,7 +334,7 @@
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <source>Relaxed</source>
@@ -377,7 +393,7 @@
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée</translation>
     </message>
 </context>
 <context>
@@ -388,23 +404,23 @@
     </message>
     <message>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun appareil trouvé</translation>
     </message>
     <message>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter la recherche</translation>
     </message>
     <message>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher des appareils</translation>
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche d&apos;appareils…</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>Apairage…</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
@@ -520,19 +536,19 @@
     </message>
     <message>
         <source>Start service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer le service au démarrage</translation>
     </message>
     <message>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer/Arrêter le service Amazfish en tâche de fond</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter</translation>
     </message>
     <message>
         <source>Button Actions</source>
@@ -682,7 +698,7 @@
     </message>
     <message>
         <source>nl_NL</source>
-        <translation type="unfinished"></translation>
+        <translation>nl_NL</translation>
     </message>
     <message>
         <source>Huami Display Items</source>
@@ -690,7 +706,7 @@
     </message>
     <message>
         <source>Realtime HRM measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesure CFM en temps réel</translation>
     </message>
 </context>
 <context>
@@ -725,11 +741,11 @@
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus</translation>
     </message>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne Pas Déranger</translation>
     </message>
     <message>
         <source>Alarms</source>
@@ -737,7 +753,7 @@
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Musique</translation>
     </message>
     <message>
         <source>Time</source>
@@ -785,7 +801,7 @@
     </message>
     <message>
         <source>Compass</source>
-        <translation type="unfinished">Compas</translation>
+        <translation>Boussole</translation>
     </message>
     <message>
         <source>AliPay</source>
@@ -808,7 +824,7 @@
     </message>
     <message>
         <source>Device Settings</source>
-        <translation>Paramètre de l&apos;appareil</translation>
+        <translation>Paramètres de l&apos;appareil</translation>
     </message>
     <message>
         <source>Application Settings</source>
@@ -832,7 +848,7 @@
     </message>
     <message>
         <source>Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava</translation>
     </message>
 </context>
 <context>
@@ -941,36 +957,40 @@
         <translation>Sommeil</translation>
     </message>
     <message>
-        <source>%1 hrs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deep %1 hrs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>MM/jj</translation>
     </message>
     <message>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Heures</translation>
+    </message>
+    <message>
+        <source>Total %1</source>
+        <translation>Total %1</translation>
+    </message>
+    <message>
+        <source>Light %1</source>
+        <translation>Léger %1</translation>
+    </message>
+    <message>
+        <source>Deep %1</source>
+        <translation>Profond %1</translation>
     </message>
 </context>
 <context>
     <name>SportPage</name>
     <message>
         <source>Send to Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer au Strava</translation>
     </message>
     <message>
         <source>Data:</source>
-        <translation type="unfinished"></translation>
+        <translation>Données&#xa0;:</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Pas</translation>
+        <translation>Pas</translation>
     </message>
     <message>
         <source>Active Seconds</source>
@@ -978,27 +998,27 @@
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation>Calories</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distance</translation>
     </message>
     <message>
         <source>Ascent</source>
-        <translation type="unfinished"></translation>
+        <translation>Montée</translation>
     </message>
     <message>
         <source>Descent</source>
-        <translation type="unfinished"></translation>
+        <translation>Descente</translation>
     </message>
     <message>
         <source>Max Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitude Max</translation>
     </message>
     <message>
         <source>Min Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitude Min</translation>
     </message>
     <message>
         <source>Min Pace</source>
@@ -1062,27 +1082,27 @@
     </message>
     <message>
         <source>Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>Tours</translation>
     </message>
     <message>
         <source>Max Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Latitude Max</translation>
     </message>
     <message>
         <source>Min Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Latitude Min</translation>
     </message>
     <message>
         <source>Max Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitude Max</translation>
     </message>
     <message>
         <source>Min Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitude Min</translation>
     </message>
     <message>
         <source>Max Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Vitesse Max</translation>
     </message>
     <message>
         <source>Total Stride</source>
@@ -1090,35 +1110,35 @@
     </message>
     <message>
         <source>steps</source>
-        <translation type="unfinished"></translation>
+        <translation>pas</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>secondes</translation>
     </message>
     <message>
         <source>kcal</source>
-        <translation type="unfinished"></translation>
+        <translation>kcal</translation>
     </message>
     <message>
         <source>meters</source>
-        <translation type="unfinished"></translation>
+        <translation>mètres</translation>
     </message>
     <message>
         <source>seconds/m</source>
-        <translation type="unfinished"></translation>
+        <translation>secondes/m</translation>
     </message>
     <message>
         <source>bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>bpm</translation>
     </message>
     <message>
         <source>seconds/km</source>
-        <translation type="unfinished"></translation>
+        <translation>secondes/km</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>strokes/s</source>
@@ -1163,11 +1183,11 @@
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Déconnexion</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion</translation>
     </message>
     <message>
         <source>User Name: </source>
@@ -1175,11 +1195,11 @@
     </message>
     <message>
         <source>Country: </source>
-        <translation type="unfinished"></translation>
+        <translation>Pays&#xa0;: </translation>
     </message>
     <message>
         <source>not logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>déconnecté</translation>
     </message>
 </context>
 <context>
@@ -1194,11 +1214,11 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Description</translation>
     </message>
     <message>
         <source>Activity description for Strava</source>

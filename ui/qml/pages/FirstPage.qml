@@ -11,26 +11,31 @@ PagePL {
 
     function unpairAccepted() {
         DaemonInterfaceInstance.disconnect();
-        app.pages.push(Qt.resolvedUrl("./PairSelectDeviceType.qml"));
+        DaemonInterfaceInstance.unpair()
+        AmazfishConfig.pairedAddress = "";
+        AmazfishConfig.pairedName = "";
+
     }
 
     pageMenu: PageMenuPL {
+//        PageMenuItemPL {
+//            text: qsTr("Test Icons")
+//            onClicked: app.pages.push(Qt.resolvedUrl("TestIconsPage.qml"))
+//        }
         PageMenuItemPL {
             text: qsTr("Pair with watch")
             onClicked: {
-                var page = AmazfishConfig.pairedAddress
-                        ? "UnpairDeviceDialog.qml"
-                        : "PairSelectDeviceType.qml"
-
-                var obj = app.pages.push(Qt.resolvedUrl(page));
-
                 if (AmazfishConfig.pairedAddress) {
+                    var obj = app.pages.push(Qt.resolvedUrl("UnpairDeviceDialog.qml"));
+                    obj.acceptDestination = Qt.resolvedUrl("PairSelectDeviceType.qml")
                     obj.accepted.connect(unpairAccepted);
+                } else {
+                    app.pages.push(Qt.resolvedUrl("PairSelectDeviceType.qml"));
                 }
             }
         }
         PageMenuItemPL {
-            text: qsTr("Download File")
+            text: qsTr("Install File")
             onClicked: app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
         }
         PageMenuItemPL {
@@ -197,6 +202,11 @@ PagePL {
                     font.pixelSize: styler.themeFontSizeLarge
                     verticalAlignment: Text.AlignVCenter
                     text: AmazfishConfig.profileFitnessGoal.toLocaleString()
+                }
+            }
+            Component.onCompleted: {
+                if (_connected) {
+                    _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
                 }
             }
         }

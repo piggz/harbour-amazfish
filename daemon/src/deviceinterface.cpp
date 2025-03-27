@@ -1,5 +1,5 @@
 #include "deviceinterface.h"
-
+#include "bluezadapter.h"
 #include "deviceinfoservice.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
@@ -147,12 +147,27 @@ void DeviceInterface::disconnect()
     }
 }
 
+void DeviceInterface::unpair()
+{
+    qDebug() << Q_FUNC_INFO;
+    if (m_device) {
+        BluezAdapter adapter;
+        adapter.setAdapterPath(AmazfishConfig::instance()->localAdapter());
+        adapter.removeDevice(m_deviceAddress);
+
+    }
+}
+
 QString DeviceInterface::connectionState() const
 {
     if (!m_device) {
         return QString();
     }
     return m_device->connectionState();
+}
+int DeviceInterface::connectionStateChangedCount() const
+{
+    return m_connectionStateChangedCount;
 }
 
 HRMService *DeviceInterface::hrmService() const
@@ -444,11 +459,23 @@ void DeviceInterface::onConnectionStateChanged()
             sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
         }
 
+        if (m_device && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)
+            && AmazfishConfig::instance()->appSilenceConnect()) {
+            m_soundProfile.setProfile(watchfish::SoundProfile::Silent);
+        }
+
         sendBufferedNotifications();
         updateCalendar();
+        m_connectionStateChangedCount++;
     } else {
         //Terminate running operations
         m_device->abortOperations();
+
+        if (m_device && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)
+            && AmazfishConfig::instance()->appSilenceConnect()) {
+            m_soundProfile.setProfile(watchfish::SoundProfile::General);
+        }
+
     }
     emit connectionStateChanged();
 }
@@ -690,15 +717,15 @@ void DeviceInterface::findDevice()
     int error;
 
 
-#ifdef MER_EDITION_SAILFISH
-    QFile file("/usr/share/harbour-amazfishd/chirp.raw");
-#else // elif defined(UUITK_EDITION)
+#ifdef UUITK_EDITION
     QFile file("/opt/click.ubuntu.com/uk.co.piggz.amazfish/current/share/harbour-amazfishd/chirp.raw");
+#else // elif defined(MER_EDITION_SAILFISH)
+    QFile file("/usr/share/harbour-amazfishd/chirp.raw");
 #endif
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        qWarning() << Q_FUNC_INFO << "Unable to open chirp sound";
+        qWarning() << Q_FUNC_INFO << "Unable to open chirp sound" << file.fileName();
         return;
     }
 
@@ -945,14 +972,14 @@ void DeviceInterface::registerDBus()
         if (!connection.registerService(SERVICE))
         {
             qCritical() << Q_FUNC_INFO << "Unable to register service. Quit.";
-            QCoreApplication::quit();
+            exit(1);
             return;
         }
 
         if (!connection.registerObject(PATH, this, QDBusConnection::ExportAllInvokables | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties))
         {
             qCritical() << Q_FUNC_INFO << "Unable to register objects. Quit.";
-            QCoreApplication::quit();
+            exit(1);
             return;
         }
         m_dbusRegistered = true;

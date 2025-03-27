@@ -29,6 +29,7 @@ UC.PageHeader {
     navigationActions: UC.Action {
         iconSource: styler.iconBack
         onTriggered: app.pages.pop()
+        visible: (app.pages.currentIndex > 0)
     }
     title: page.title
     width: page.width

@@ -25,7 +25,7 @@ PagePL {
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: _InfoSteps > 0 ? _InfoSteps : graphStepSummary.lastValue
+            text: _InfoSteps > 0 ? _InfoSteps.toLocaleString() : graphStepSummary.lastValue.toLocaleString()
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -50,7 +50,7 @@ PagePL {
             graphHeight: 300
 
             axisX.mask: "MM/dd"
-            axisY.units: "Steps"
+            axisY.units: qsTr("Steps")
             type: DataSource.StepSummary
             graphType: 2
 

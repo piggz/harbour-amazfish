@@ -122,6 +122,7 @@ public:
     STRING_OPTION(QStringLiteral("pairedAddress"), pairedAddress, setPairedAddress, QString())
     STRING_OPTION(QStringLiteral("pairedName"),    pairedName,    setPairedName,    QString())
 
+    BOOL_OPTION(QStringLiteral("app/silenceconnect"),   appSilenceConnect,   setAppSilenceConnect,    false)
     BOOL_OPTION(QStringLiteral("app/notifyconnect"),    appNotifyConnect,    setAppNotifyConnect,    true)
     BOOL_OPTION(QStringLiteral("app/autosyncdata"),     appAutoSyncData,     setAppAutoSyncData,     true)
     BOOL_OPTION(QStringLiteral("app/notifylowbattery"), appNotifyLowBattery, setAppNotifyLowBattery, true)
@@ -161,7 +162,7 @@ public:
     ENUM_OPTION(QStringLiteral("profile/gender"),       profileGender,       setProfileGender,       ProfileGender, ProfileGenderMale)
     ENUM_OPTION(QStringLiteral("profile/wearlocation"), profileWearLocation, setProfileWearLocation, WearLocation,  WearLocationLeftWrist)
 
-    UINT_OPTION(QStringLiteral("profile/height"),      profileHeight,      setProfileHeight,      200)
+    UINT_OPTION(QStringLiteral("profile/height"),      profileHeight,      setProfileHeight,      170)
     UINT_OPTION(QStringLiteral("profile/weight"),      profileWeight,      setProfileWeight,      70)
     UINT_OPTION(QStringLiteral("profile/alldayhrm"),   profileAllDayHRM,   setProfileAllDayHRM,   0)
     UINT_OPTION(QStringLiteral("profile/fitnessgoal"), profileFitnessGoal, setProfileFitnessGoal, 10000)

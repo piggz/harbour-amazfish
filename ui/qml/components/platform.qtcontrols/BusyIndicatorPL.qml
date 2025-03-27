@@ -23,5 +23,7 @@ import QtQuick.Layouts 1.12
 BusyIndicator {
     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 //    anchors.centerIn: parent
+    height: styler.themeFontSizeHuge
+    width: height
 }
 

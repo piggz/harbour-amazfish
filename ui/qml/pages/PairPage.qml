@@ -10,12 +10,13 @@ PageListPL {
     //backNavigation: !DaemonInterfaceInstance.pairing
     title: qsTr("Pair Device")
 
-    placeholderText: _placeholderText || qsTr("No devices found")
-    placeholderEnabled: devicesModel.rowCount() > 0
+    placeholderText: qsTr("No devices found")
+    placeholderEnabled: (delegateModel.count === 0) && !busy
+    property bool busy: (adapter && adapter.discovering && !page.count) || DaemonInterfaceInstance.connectionState == "pairing"
+    //busy: discoveryModel.running || DaemonInterfaceInstance.pairing
 
     property string deviceType
-    property variant aliases
-    property string _placeholderText
+    property string pattern
     property string _deviceName
     property string _deviceAddress
     property QtObject adapter: _bluetoothManager ? _bluetoothManager.usableAdapter : null
@@ -94,15 +95,13 @@ PageListPL {
             for (var i = 0; i < itemsCount; ++i) {
                 var item = items.get(i)
                 var visible = false;
-                if (item.model.FriendlyName.indexOf(deviceType) !== -1) {
-                    visible = true;
-                }
-                for (var j = 0; j < aliases.count; j++) {
-                    var aliasitem = aliases.get(j);
-                    if (item.model.FriendlyName.indexOf(aliasitem.name) !== -1) {
+                try {
+                    var regex = new RegExp(pattern);
+                    if (regex.test(item.model.FriendlyName)) {
                         visible = true;
                     }
-
+                } catch (e) {
+                    console.error("Invalid regex: " + pattern, e);
                 }
                 item.inVisible = visible
             }
@@ -113,8 +112,6 @@ PageListPL {
             contentHeight: styler.themeItemSizeLarge
 //            visible: model.FriendlyName.indexOf(deviceType) >= 0
             onClicked: {
-                AmazfishConfig.pairedAddress = "";
-                AmazfishConfig.pairedName = "";
                 stopDiscovery();
                 _deviceName = model.FriendlyName;
                 _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
@@ -156,7 +153,7 @@ PageListPL {
     }
 
     // Set to undefined when pairing to show busy indicator only
-    model: !DaemonInterfaceInstance.pairing && !_placeholderText
+    model: (DaemonInterfaceInstance !== undefined) && !DaemonInterfaceInstance.pairing && delegateModel.count > 0
            ? delegateModel
            : undefined
 
@@ -165,13 +162,12 @@ PageListPL {
         //busy: discoveryModel.running || DaemonInterfaceInstance.pairing
 
         PageMenuItemPL {
-            enabled: !DaemonInterfaceInstance.pairing
+            enabled: (DaemonInterfaceInstance !== undefined) && !DaemonInterfaceInstance.pairing
             iconSource: adapter && adapter.discovering ? "" : (styler.iconDeviceScan !== undefined ? styler.iconDeviceScan : "")
             text: adapter && adapter.discovering
                   ? qsTr("Stop scanning")
                   : qsTr("Scan for devices")
             onClicked: {
-                _placeholderText = ""
                 if (adapter && adapter.discovering) {
                     stopDiscovery();
                 } else {
@@ -191,10 +187,13 @@ PageListPL {
         }
     }
 
-    BusyIndicatorPL {
+    background: BusyIndicatorPL {
         id: busyIndicator
         anchors.centerIn: parent
-        running: (adapter && adapter.discovering && !page.count) || DaemonInterfaceInstance.connectionState == "pairing"
+        running: busy
     }
+
+
+
 }
 

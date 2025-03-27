@@ -25,6 +25,7 @@
 #include "libwatchfish/notificationmonitor.h"
 #include "libwatchfish/notification.h"
 #include "libwatchfish/calendarsource.h"
+#include "libwatchfish/soundprofile.h"
 #include "navigationinterface.h"
 
 class HRMService;
@@ -46,7 +47,9 @@ public:
     Q_INVOKABLE QString pair(const QString &name, const QString &address);
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
+    Q_INVOKABLE void unpair();
     Q_INVOKABLE QString connectionState() const;
+    Q_INVOKABLE int connectionStateChangedCount() const;
     Q_INVOKABLE bool operationRunning();
     Q_INVOKABLE bool supportsFeature(int f);
     Q_INVOKABLE int supportedFeatures();
@@ -91,6 +94,7 @@ private:
         QString body;
     };
 
+    int m_connectionStateChangedCount = 0;
     QString m_deviceAddress;
     QString m_deviceName;
     bool m_dbusRegistered = false;
@@ -135,6 +139,7 @@ private:
 #endif
     watchfish::NotificationMonitor m_notificationMonitor;
     watchfish::CalendarSource m_calendarSource;
+    watchfish::SoundProfile m_soundProfile;
 
     //Notifications
     QQueue<WatchNotification> m_notificationBuffer;

@@ -372,7 +372,8 @@ void HuamiDevice::serviceEvent(char event)
 
 void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
-    qDebug() << Q_FUNC_INFO << interface << map << list;
+    qDebug() << Q_FUNC_INFO << interface << map << list << m_connectionState;
+
 
     if (interface == "org.bluez.Device1") {
         m_reconnectTimer->start();
@@ -393,7 +394,12 @@ void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStrin
             }
         }
         if (deviceProperty("ServicesResolved").toBool() ) {
-            initialise();
+            int elapsed = init_dt.secsTo(QDateTime::currentDateTime());
+            qDebug() << "initialise() elapsed: " << elapsed << "starting: " << (elapsed >60);
+            if (elapsed > 60) {
+                init_dt = QDateTime::currentDateTime();
+                initialise();
+            }
         }
     }
 }
