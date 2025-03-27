@@ -5,7 +5,7 @@
     <name>AbstractDevice</name>
     <message>
         <source>Device does not support settings</source>
-        <translation type="unfinished"></translation>
+        <translation>设备不支持设置</translation>
     </message>
 </context>
 <context>
@@ -19,11 +19,11 @@
     <name>BipDevice</name>
     <message>
         <source>Navigation Started</source>
-        <translation type="unfinished"></translation>
+        <translation>导航开始</translation>
     </message>
     <message>
         <source>Navigation Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>导航停止</translation>
     </message>
     <message>
         <source>Progress</source>
