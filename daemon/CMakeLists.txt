@@ -33,6 +33,7 @@ set(SOURCES
 ./src/devices/neofirmwareinfo.cpp
 ./src/devices/pebbledevice.cpp
 ./src/devices/pinetimejfdevice.cpp
+./src/devices/zepposdevice.cpp
 ./src/harbour-amazfish-daemon.cpp
 ./src/huamiweathercondition.cpp
 ./src/navigationinterface.cpp
@@ -117,6 +118,7 @@ set(HEADERS
 ./src/devices/neofirmwareinfo.h
 ./src/devices/pebbledevice.h
 ./src/devices/pinetimejfdevice.h
+./src/devices/zepposdevice.h
 ./src/huamiweathercondition.h
 ./src/navigationinterface.h
 ./src/operations/abstractfetchoperation.h
