@@ -20,12 +20,14 @@ PageListPL {
     IconPL {
         id: sharedIconLocation
         iconName: styler.iconLocation
+        cache: true
         visible: false
     }
 
     IconPL {
         id: sharedIconTime
         iconName: styler.iconClock
+        cache: true
         visible: false
     }
 
