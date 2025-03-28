@@ -108,4 +108,11 @@ ListModel {
         pattern: "Bangle\\.js.*|Pixl\\.js.*|Puck\\.js.*|MDBT42Q.*|Espruino.*"
     }
 
+    ListElement {
+        deviceType: "Kospet DK08"
+        icon: "../pics/devices/kospet_dk08.png"
+        auth: false
+        pattern: "DK08"
+    }
+
 }
