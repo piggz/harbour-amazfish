@@ -17,6 +17,7 @@ set(SOURCES
 ./src/devices/biplitedevice.cpp
 ./src/devices/biplitefirmwareinfo.cpp
 ./src/devices/bipsdevice.cpp
+./src/devices/dk08device.cpp
 ./src/devices/gtr2device.cpp
 ./src/devices/gtr2firmwareinfo.cpp
 ./src/devices/gtrdevice.cpp
@@ -61,6 +62,8 @@ set(SOURCES
 ./src/services/currenttimeservice.cpp
 ./src/services/deviceinfoservice.cpp
 ./src/services/dfuservice.cpp
+./src/services/dk08nusservice.cpp
+./src/services/dk08wechatservice.cpp
 ./src/services/hrmservice.cpp
 ./src/services/immediatealertservice.cpp
 ./src/services/infinitimemotionservice.cpp
@@ -96,6 +99,7 @@ set(HEADERS
 ./src/devices/biplitedevice.h
 ./src/devices/biplitefirmwareinfo.h
 ./src/devices/bipsdevice.h
+./src/devices/dk08device.h
 ./src/devices/gtr2device.h
 ./src/devices/gtr2firmwareinfo.h
 ./src/devices/gtrdevice.h
@@ -139,6 +143,8 @@ set(HEADERS
 ./src/services/currenttimeservice.h
 ./src/services/deviceinfoservice.h
 ./src/services/dfuservice.h
+./src/services/dk08nusservice.h
+./src/services/dk08wechatservice.h
 ./src/services/hrmservice.h
 ./src/services/immediatealertservice.h
 ./src/services/infinitimemotionservice.h

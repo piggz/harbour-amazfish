@@ -10,6 +10,7 @@
 #include "gts2device.h"
 #include "gtrdevice.h"
 #include "gtr2device.h"
+#include "dk08device.h"
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 {
@@ -61,6 +62,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 
     if (deviceName.startsWith("Bangle.js") || deviceName.startsWith("Espruino") || deviceName.startsWith("Pixl.js") || deviceName.startsWith("Puck.js") || deviceName.startsWith("MDBT42Q")) {
         return new BangleJSDevice(deviceName);
+    }
+
+    if (deviceName == "DK08") {
+        return new DK08Device(deviceName);
     }
 
     QList<QString> asteroidDevices = {
