@@ -4,6 +4,7 @@
 #include "gtsdevice.h"
 #include "neodevice.h"
 #include "biplitedevice.h"
+#include "pebbledevice.h"
 #include "pinetimejfdevice.h"
 #include "banglejsdevice.h"
 #include "bipsdevice.h"
@@ -57,6 +58,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 
     if (deviceName == "InfiniTime" || deviceName == "Pinetime-JF") {
         return new PinetimeJFDevice(deviceName);
+    }
+
+    if (deviceName.startsWith("Pebble Time")) {
+        return new PebbleDevice(deviceName);
     }
 
     if (deviceName.startsWith("Bangle.js") || deviceName.startsWith("Espruino") || deviceName.startsWith("Pixl.js") || deviceName.startsWith("Puck.js") || deviceName.startsWith("MDBT42Q")) {

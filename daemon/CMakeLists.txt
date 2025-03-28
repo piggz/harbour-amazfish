@@ -30,6 +30,7 @@ set(SOURCES
 ./src/devices/infinitimefirmwareinfo.cpp
 ./src/devices/neodevice.cpp
 ./src/devices/neofirmwareinfo.cpp
+./src/devices/pebbledevice.cpp
 ./src/devices/pinetimejfdevice.cpp
 ./src/harbour-amazfish-daemon.cpp
 ./src/huamiweathercondition.cpp
@@ -69,6 +70,7 @@ set(SOURCES
 ./src/services/infinitimeweatherservice.cpp
 ./src/services/miband2service.cpp
 ./src/services/mibandservice.cpp
+./src/services/pebbleservice.cpp
 ./src/services/pinetimemusicservice.cpp
 ./src/services/pinetimesimpleweatherservice.cpp
 ./src/services/uartservice.cpp
@@ -109,6 +111,7 @@ set(HEADERS
 ./src/devices/infinitimefirmwareinfo.h
 ./src/devices/neodevice.h
 ./src/devices/neofirmwareinfo.h
+./src/devices/pebbledevice.h
 ./src/devices/pinetimejfdevice.h
 ./src/huamiweathercondition.h
 ./src/navigationinterface.h
@@ -147,6 +150,7 @@ set(HEADERS
 ./src/services/infinitimeweatherservice.h
 ./src/services/miband2service.h
 ./src/services/mibandservice.h
+./src/services/pebbleservice.h
 ./src/services/pinetimemusicservice.h
 ./src/services/pinetimesimpleweatherservice.h
 ./src/services/uartservice.h
