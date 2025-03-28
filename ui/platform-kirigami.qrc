@@ -47,6 +47,7 @@
         <file>./qml/components/Axis.qml</file>
         <file>./qml/components/DateNavigation.qml</file>
         <file>./qml/components/DeviceButton.qml</file>
+        <file>./qml/components/DeviceListModel.qml</file>
         <file>./qml/components/DownloadDataMenuItem.qml</file>
         <file>./qml/components/DraggableItemDropArea.qml</file>
         <file>./qml/components/DraggableItem.qml</file>

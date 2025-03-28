@@ -27,10 +27,10 @@ PagePL {
             onClicked: {
                 if (AmazfishConfig.pairedAddress) {
                     var obj = app.pages.push(Qt.resolvedUrl("UnpairDeviceDialog.qml"));
-                    obj.acceptDestination = Qt.resolvedUrl("PairSelectDeviceType.qml")
+                    obj.acceptDestination = Qt.resolvedUrl("PairDevicePage.qml");
                     obj.accepted.connect(unpairAccepted);
                 } else {
-                    app.pages.push(Qt.resolvedUrl("PairSelectDeviceType.qml"));
+                    app.pages.push(Qt.resolvedUrl("PairDevicePage.qml"));
                 }
             }
         }

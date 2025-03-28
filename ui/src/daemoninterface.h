@@ -59,7 +59,8 @@ public:
     Q_INVOKABLE void immediateAlert(int level);
 
 public slots:
-    void pair(const QString &name, QString address);
+    void pair(const QString &name, const QString &deviceType, const QString &address);
+
 
 signals:
     void paired(const QString &name, const QString &address, const QString &error);

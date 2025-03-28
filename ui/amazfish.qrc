@@ -8,8 +8,7 @@
         <file>qml/pages/DebugInfo.qml</file>
         <file>qml/pages/FirstPage.qml</file>
         <file>qml/pages/HeartratePage.qml</file>
-        <file>qml/pages/PairPage.qml</file>
-        <file>qml/pages/PairSelectDeviceType.qml</file>
+        <file>qml/pages/PairDevicePage.qml</file>
         <file>qml/pages/Settings-alarms.qml</file>
         <file>qml/pages/Settings-app.qml</file>
         <file>qml/pages/Settings-huami-shortcuts.qml</file>

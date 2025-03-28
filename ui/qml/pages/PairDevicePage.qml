@@ -74,6 +74,31 @@ PageListPL {
         id: devicesModel
     }
 
+    DeviceListModel {
+        id: deviceListModel
+    }
+
+    function deviceListFind(friendlyName) {
+        for (var i = 0; i < deviceListModel.count; i++) {
+            var device = deviceListModel.get(i);
+            try {
+                var regex = new RegExp(device.pattern)
+                if (regex.test(friendlyName)) {
+                    return device;
+                }
+
+            } catch(e) {
+                console.error("Invalid regex: " + device.pattern, e);
+            }
+        }
+        return {
+            deviceType: "",
+            icon: "",
+            auth: false,
+            pattern: ""
+        }
+    }
+
     DelegateModel {
         id: delegateModel
         model: devicesModel
@@ -93,30 +118,37 @@ PageListPL {
             }
 
             for (var i = 0; i < itemsCount; ++i) {
-                var item = items.get(i)
-                var visible = false;
-                try {
-                    var regex = new RegExp(pattern);
-                    if (regex.test(item.model.FriendlyName)) {
-                        visible = true;
-                    }
-                } catch (e) {
-                    console.error("Invalid regex: " + pattern, e);
-                }
-                item.inVisible = visible
+                var btItem = items.get(i)
+                var device = deviceListFind(btItem.model.FriendlyName);
+                // console.log(btItem.model.FriendlyName + " " + JSON.stringify(device))
+                btItem.inVisible = (device.deviceType !== "");
             }
+
         }
 
         delegate: ListItemPL {
             id: listItem
+            property var device: deviceListFind(model.FriendlyName)
             contentHeight: styler.themeItemSizeLarge
-//            visible: model.FriendlyName.indexOf(deviceType) >= 0
+
             onClicked: {
+                if (device.auth) {
+                    var authdialog = app.pages.push(Qt.resolvedUrl("./AuthKeyDialog.qml"));
+
+                    authdialog.accepted.connect(function() {
+                        stopDiscovery();
+                        _deviceName = model.FriendlyName;
+                        _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
+                        DaemonInterfaceInstance.pair(_deviceName, device.deviceType, _deviceAddress)
+                    })
+                    return;
+                }
+
                 stopDiscovery();
                 _deviceName = model.FriendlyName;
                 _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
 
-                DaemonInterfaceInstance.pair(_deviceName, _deviceAddress)
+                DaemonInterfaceInstance.pair(_deviceName, device.deviceType, _deviceAddress)
             }
 
             Item {
@@ -128,10 +160,19 @@ PageListPL {
                 }
                 height: nameLabel.height + addressLabel.height + styler.themePaddingSmall
 
+                Image {
+                    id: iconImage
+                    source: device.icon
+                    height: parent.height
+                    fillMode: Image.PreserveAspectFit
+                }
+
+
                 LabelPL {
                     id: nameLabel
                     //truncationMode: TruncationMode.Fade
-                    width: parent.width
+                    anchors.left: iconImage.right
+                    width: parent.width - iconImage.paintedWidth
                     text: model.FriendlyName
                     color: listItem.pressed ? styler.themeHighlightColor : styler.themePrimaryColor
                 }
@@ -141,9 +182,10 @@ PageListPL {
                     anchors {
                         top: nameLabel.bottom
                         topMargin: styler.themePaddingSmall
+                        left: iconImage.right
                     }
                     //truncationMode: TruncationMode.Fade
-                    width: parent.width
+                    width: nameLabel.width
                     text: model.Address
                     //font.pixelSize: Theme.fontSizeSmall
                     color: listItem.pressed ? styler.themeSecondaryHighlightColor : styler.themeSecondaryColor
@@ -185,6 +227,7 @@ PageListPL {
                     ? qsTr("Pairing…")
                     : ""
         }
+
     }
 
     background: BusyIndicatorPL {
@@ -196,4 +239,3 @@ PageListPL {
 
 
 }
-

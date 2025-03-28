@@ -44,7 +44,8 @@ public:
 
     void registerDBus();
 
-    Q_INVOKABLE QString pair(const QString &name, const QString &address);
+    Q_INVOKABLE QString pair(const QString &name, const QString &deviceType, const QString &address);
+
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
