@@ -95,6 +95,13 @@ ListModel {
     }
 
     ListElement {
+        deviceType: "Pebble"
+        icon: "../pics/devices/pebble.png"
+        auth: false
+        pattern: "Pebble Time"
+    }
+
+    ListElement {
         deviceType: "InfiniTime"
         icon: "../pics/devices/pinetime.png"
         auth: false
