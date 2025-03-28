@@ -53,9 +53,9 @@ void DaemonInterface::connectDaemon()
     changeConnectionState();
 }
 
-void DaemonInterface::pair(const QString &name, QString address)
+void DaemonInterface::pair(const QString &name, const QString &deviceType, const QString &address)
 {
-    qDebug() << Q_FUNC_INFO << name << address;
+    qDebug() << Q_FUNC_INFO << name << deviceType << address;
 
     if (m_connectionState == "pairing") {
         return;
@@ -66,8 +66,8 @@ void DaemonInterface::pair(const QString &name, QString address)
         return;
     }
 
-    auto watcher = new QDBusPendingCallWatcher(iface->asyncCall(QStringLiteral("pair"), name, address));
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, name, address]() {
+    auto watcher = new QDBusPendingCallWatcher(iface->asyncCall(QStringLiteral("pair"), name, deviceType, address));
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, name, deviceType, address]() {
         watcher->deleteLater();
     });
 }
