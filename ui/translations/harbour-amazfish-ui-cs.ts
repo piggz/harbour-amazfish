@@ -246,7 +246,7 @@
     </message>
     <message>
         <source>This is a test notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto je testovací upozorění</translation>
     </message>
 </context>
 <context>
@@ -797,83 +797,83 @@
     </message>
     <message>
         <source>Take Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Udělat fotku</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Stopky</translation>
     </message>
     <message>
         <source>Find Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Najít telefon</translation>
     </message>
     <message>
         <source>NFC</source>
-        <translation type="unfinished"></translation>
+        <translation>NFC</translation>
     </message>
     <message>
         <source>Watch Face</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciferník</translation>
     </message>
     <message>
         <source>Timer/Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Minutka/Stopky</translation>
     </message>
     <message>
         <source>Goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Cíl</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation type="unfinished">Spánek</translation>
+        <translation>Spánek</translation>
     </message>
     <message>
         <source>SpO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO2</translation>
     </message>
     <message>
         <source>Events</source>
-        <translation type="unfinished"></translation>
+        <translation>Události</translation>
     </message>
     <message>
         <source>Widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Widgety</translation>
     </message>
     <message>
         <source>Breathing</source>
-        <translation type="unfinished"></translation>
+        <translation>Dýchání</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Kroky</translation>
+        <translation>Kroky</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished">Vzdálenost</translation>
+        <translation>Vzdálenost</translation>
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished">Kalorie</translation>
+        <translation>Kalorie</translation>
     </message>
     <message>
         <source>Pomodoro</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomodoro</translation>
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished">Baterie</translation>
+        <translation>Baterie</translation>
     </message>
     <message>
         <source>Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Teplota</translation>
     </message>
     <message>
         <source>Barometer</source>
-        <translation type="unfinished"></translation>
+        <translation>Barometr</translation>
     </message>
     <message>
         <source>Flashlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Svítilna</translation>
     </message>
 </context>
 <context>
