@@ -5,371 +5,371 @@
     <name>AddCityPage</name>
     <message>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیم مکان</translation>
     </message>
 </context>
 <context>
     <name>Alarm</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>به کار افتاده</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>دو</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>سه</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>چه</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>پن</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>آد</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>شن</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>یک</translation>
     </message>
 </context>
 <context>
     <name>AnalysisPage</name>
     <message>
         <source>Analysis</source>
-        <translation type="unfinished"></translation>
+        <translation>تحلیل</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>ضربان قلب</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>گام‌ها</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation>شدّت</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>ض‌دد</translation>
     </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>
     <message>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation>ورود کلید هویت‌سنجی</translation>
     </message>
 </context>
 <context>
     <name>BatteryPage</name>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>باتری</translation>
     </message>
     <message>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ٪</translation>
     </message>
 </context>
 <context>
     <name>BipFirmwarePage</name>
     <message>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>فرستادن پرونده</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>هیچ</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>گزینش پرونده</translation>
     </message>
     <message>
         <source>File type/version: </source>
-        <translation type="unfinished"></translation>
+        <translation>گونه یا نگارش پرونده: </translation>
     </message>
     <message>
         <source>File not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>پرونده روی این افزاره پشتیبانی نشده</translation>
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>نصب پرونده</translation>
     </message>
     <message>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>گزینش پرونده برای نصب.</translation>
     </message>
 </context>
 <context>
     <name>DaemonInterface</name>
     <message>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>خطای غیرمنتظره</translation>
     </message>
 </context>
 <context>
     <name>DebugInfo</name>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>نوسازی</translation>
     </message>
     <message>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>نشانی: </translation>
     </message>
     <message>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>شماره سریال: </translation>
     </message>
     <message>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>بازنگارش سخت‌افزاری: </translation>
     </message>
     <message>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>بازنگارش نرم‌افزاری: </translation>
     </message>
     <message>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>وضعیت اتّصال: </translation>
     </message>
     <message>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>نگارش مکان‌یاب: </translation>
     </message>
     <message>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>آزمون آگاهی</translation>
     </message>
     <message>
         <source>Test Email</source>
-        <translation type="unfinished"></translation>
+        <translation>آزمون رایانامه</translation>
     </message>
     <message>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>آزمون تماس</translation>
     </message>
     <message>
         <source>Fetch debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>واکشی گزارش اشکال زدایی</translation>
     </message>
     <message>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>آزمون بالا پریدنی</translation>
     </message>
     <message>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>اشکال‌زدایی</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>اطّلاعات</translation>
     </message>
     <message>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>مدل: </translation>
     </message>
     <message>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>بازنگارش ثابت‌افزاری: </translation>
     </message>
     <message>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>سازنده: </translation>
     </message>
     <message>
         <source>A:</source>
-        <translation type="unfinished"></translation>
+        <translation>A:</translation>
     </message>
     <message>
         <source>S:</source>
-        <translation type="unfinished"></translation>
+        <translation>S:</translation>
     </message>
     <message>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>آزمون‌های کارایی</translation>
     </message>
     <message>
         <source>Send Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>فرستادن آب و هوا</translation>
     </message>
     <message>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>به‌روز&#xa0;رسانی تقویم</translation>
     </message>
     <message>
         <source>Music Control</source>
-        <translation type="unfinished"></translation>
+        <translation>واپایش آهنک</translation>
     </message>
     <message>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>درخواست نماگرفت</translation>
     </message>
     <message>
         <source>Somebody</source>
-        <translation type="unfinished"></translation>
+        <translation>کسی</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>عنوان</translation>
     </message>
     <message>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>درود از سیستم‌عامل سیل‌فیش. این پیامی بلند است که با BLE فرستاده شده!</translation>
     </message>
     <message>
         <source>Donald Duck</source>
-        <translation type="unfinished"></translation>
+        <translation>دانلد داک</translation>
     </message>
     <message>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation type="unfinished"></translation>
+        <translation>درود این رایانامه‌ای از سیستم‌عامل سیل‌فیش است!</translation>
     </message>
     <message>
         <source>Test Immediate Alert Service</source>
-        <translation type="unfinished"></translation>
+        <translation>آزمون خدمت هشدار فوری</translation>
     </message>
     <message>
         <source>This is a test notification</source>
-        <translation type="unfinished"></translation>
+        <translation>این آگاهی آزمایشی است</translation>
     </message>
 </context>
 <context>
     <name>DownloadDataMenuItem</name>
     <message>
         <source>Download Data</source>
-        <translation type="unfinished"></translation>
+        <translation>بارگیری داده‌ها</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Pair with watch</source>
-        <translation type="unfinished"></translation>
+        <translation>جفت شدن با ساعت</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات</translation>
     </message>
     <message>
         <source>Disconnect from watch</source>
-        <translation type="unfinished"></translation>
+        <translation>قطع شدن از ساعت</translation>
     </message>
     <message>
         <source>Connect to watch</source>
-        <translation type="unfinished"></translation>
+        <translation>وصل شدن به ساعت</translation>
     </message>
     <message>
         <source>Data Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>نمودارهای داده</translation>
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1٪</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>گام‌ها</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>ضربان قلب</translation>
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ض‌دد</translation>
     </message>
     <message>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>خدمت</translation>
     </message>
     <message>
         <source>Enable on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>به کار افتاده هنگام راه‌اندازی</translation>
     </message>
     <message>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>نصب پرونده</translation>
     </message>
 </context>
 <context>
     <name>GraphData</name>
     <message>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>بدون داده</translation>
     </message>
 </context>
 <context>
     <name>HeartratePage</name>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>ضربان قلب</translation>
     </message>
     <message>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ض‌دد</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>ض‌دد</translation>
     </message>
     <message>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>آسوده</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>سبک</translation>
     </message>
     <message>
         <source>Intensive</source>
-        <translation type="unfinished"></translation>
+        <translation>شدید</translation>
     </message>
     <message>
         <source>Aerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>هوازی</translation>
     </message>
     <message>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>بی‌هوازی</translation>
     </message>
     <message>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation>بیشینهٔ VO2</translation>
     </message>
 </context>
 <context>
     <name>JSTools</name>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>خالی</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>ضربان قلب</translation>
     </message>
     <message>
         <source>Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>سرعت</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>سرعت</translation>
     </message>
     <message>
         <source>Altitude</source>
@@ -377,391 +377,391 @@
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>فاصله</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>مکث</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>مدّت</translation>
     </message>
 </context>
 <context>
     <name>PairPage</name>
     <message>
         <source>Pair Device</source>
-        <translation type="unfinished"></translation>
+        <translation>وصل کردن افزاره</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>هیچ افزاره‌ای پیدا نشد</translation>
     </message>
     <message>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>توقّف پویش</translation>
     </message>
     <message>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>پویش افزاره‌ها</translation>
     </message>
     <message>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>پوییدن افزاره‌ها…</translation>
     </message>
     <message>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>حفت کردن…</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>سازوارگر بلوتوثی موجود نیست</translation>
     </message>
 </context>
 <context>
     <name>PairSelectDeviceType</name>
     <message>
         <source>Select Device Type</source>
-        <translation type="unfinished"></translation>
+        <translation>گزینش گونهٔ افزاره</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1ث</translation>
     </message>
     <message>
         <source>%1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1د و %2ث</translation>
     </message>
     <message>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1س و %2د و %3ث</translation>
     </message>
 </context>
 <context>
     <name>Settings-alarms</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>هشدارها</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ تنظیمات</translation>
     </message>
     <message>
         <source>Alarm 1</source>
-        <translation type="unfinished"></translation>
+        <translation>هشدار ۱</translation>
     </message>
     <message>
         <source>Alarm 2</source>
-        <translation type="unfinished"></translation>
+        <translation>هشدار ۲</translation>
     </message>
     <message>
         <source>Alarm 3</source>
-        <translation type="unfinished"></translation>
+        <translation>هشدار ۳</translation>
     </message>
     <message>
         <source>Alarm 4</source>
-        <translation type="unfinished"></translation>
+        <translation>هشدار ۴</translation>
     </message>
     <message>
         <source>Alarm 5</source>
-        <translation type="unfinished"></translation>
+        <translation>هشدار ۵</translation>
     </message>
 </context>
 <context>
     <name>Settings-app</name>
     <message>
         <source>Notify on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>آگاهی هنگام وصل شدن</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ تنظیمات</translation>
     </message>
     <message>
         <source>Sync activity data each hour</source>
-        <translation type="unfinished"></translation>
+        <translation>هم‌گام&#xa0;سازی ساعتی داده‌های فعّالیت</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات برنامه</translation>
     </message>
     <message>
         <source>BT Adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>سازوارگر بلوتوث</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>آگاهی‌ها</translation>
     </message>
     <message>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
+        <translation>آگاهی کم بودن باتری</translation>
     </message>
     <message>
         <source>Navigation notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>آگاهی‌های ناوبری</translation>
     </message>
     <message>
         <source>Simulate event reminder support</source>
-        <translation type="unfinished"></translation>
+        <translation>شبیه‌سازی پشتیبانی یادآور رویداد</translation>
     </message>
     <message>
         <source>Refresh rates</source>
-        <translation type="unfinished"></translation>
+        <translation>آهنگ‌های نوسازی</translation>
     </message>
     <message>
         <source>Refresh weather every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>نوسازی آب وهوا هر (%1) دقیقه</translation>
     </message>
     <message>
         <source>Refresh calendar every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>نوسازی تقویم هر (%1) دقیقه</translation>
     </message>
     <message>
         <source>Amazfish Service</source>
-        <translation type="unfinished"></translation>
+        <translation>خدمت امیزفیش</translation>
     </message>
     <message>
         <source>Start service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>آغاز خدمت هنگام راه‌اندازی</translation>
     </message>
     <message>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation type="unfinished"></translation>
+        <translation>آغاز یا پایان خدمت پس‌زمینهٔ امیزفیش</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>آغاز</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>پایان</translation>
     </message>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>کنش دکمه‌ها</translation>
     </message>
     <message>
         <source>Transliterate notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>آگاهی‌های آوانگاری</translation>
     </message>
 </context>
 <context>
     <name>Settings-button-action</name>
     <message>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>کنش دکمه‌ها</translation>
     </message>
     <message>
         <source>Double Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>کنش دوبار فشردن</translation>
     </message>
     <message>
         <source>Triple Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>کنش سه بار فشردن</translation>
     </message>
     <message>
         <source>Quad Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>کنش جهاربار فشردن</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ تنظیمات</translation>
     </message>
     <message>
         <source>No Action</source>
-        <translation type="unfinished"></translation>
+        <translation>بدون کنش</translation>
     </message>
     <message>
         <source>Next Track</source>
-        <translation type="unfinished"></translation>
+        <translation>قطعهٔ بعدی</translation>
     </message>
     <message>
         <source>Previous Track</source>
-        <translation type="unfinished"></translation>
+        <translation>قطعهٔ پیشین</translation>
     </message>
     <message>
         <source>Volume Up</source>
-        <translation type="unfinished"></translation>
+        <translation>افزودن حجم صدا</translation>
     </message>
     <message>
         <source>Volume Down</source>
-        <translation type="unfinished"></translation>
+        <translation>کاستن حجم صدا</translation>
     </message>
     <message>
         <source>Custom Script</source>
-        <translation type="unfinished"></translation>
+        <translation>کدنویسهٔ سفارشی</translation>
     </message>
 </context>
 <context>
     <name>Settings-device</name>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات افزاره</translation>
     </message>
     <message>
         <source>en_US</source>
-        <translation type="unfinished"></translation>
+        <translation>انگلیسی</translation>
     </message>
     <message>
         <source>es_ES</source>
-        <translation type="unfinished"></translation>
+        <translation>اسپانیایی</translation>
     </message>
     <message>
         <source>zh_CN</source>
-        <translation type="unfinished"></translation>
+        <translation>چینی</translation>
     </message>
     <message>
         <source>zh_TW</source>
-        <translation type="unfinished"></translation>
+        <translation>تایوانی</translation>
     </message>
     <message>
         <source>Date Display</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش تاریخ</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان</translation>
     </message>
     <message>
         <source>Date/Time</source>
-        <translation type="unfinished"></translation>
+        <translation>تاریخ و زمان</translation>
     </message>
     <message>
         <source>Time Format</source>
-        <translation type="unfinished"></translation>
+        <translation>قالب زمان</translation>
     </message>
     <message>
         <source>12hr</source>
-        <translation type="unfinished"></translation>
+        <translation>۱۲ ساعته</translation>
     </message>
     <message>
         <source>24hr</source>
-        <translation type="unfinished"></translation>
+        <translation>۲۴ ساعته</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ تنظیمات</translation>
     </message>
     <message>
         <source>Distance Unit</source>
-        <translation type="unfinished"></translation>
+        <translation>یکای مسافت</translation>
     </message>
     <message>
         <source>Metric</source>
-        <translation type="unfinished"></translation>
+        <translation>استاندارد</translation>
     </message>
     <message>
         <source>Imperial</source>
-        <translation type="unfinished"></translation>
+        <translation>امپراتوری</translation>
     </message>
     <message>
         <source>ru_RU</source>
-        <translation type="unfinished"></translation>
+        <translation>روسی</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>زبان</translation>
     </message>
     <message>
         <source>de_DE</source>
-        <translation type="unfinished"></translation>
+        <translation>آلمانی</translation>
     </message>
     <message>
         <source>it_IT</source>
-        <translation type="unfinished"></translation>
+        <translation>ایتالیایی</translation>
     </message>
     <message>
         <source>fr_FR</source>
-        <translation type="unfinished"></translation>
+        <translation>فرانسوی</translation>
     </message>
     <message>
         <source>tr_TR</source>
-        <translation type="unfinished"></translation>
+        <translation>ترکی</translation>
     </message>
     <message>
         <source>nl_NL</source>
-        <translation type="unfinished"></translation>
+        <translation>هلندی</translation>
     </message>
     <message>
         <source>Disconnect Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>آگاهی قطع شدن</translation>
     </message>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>موردهای نمایش هوامی</translation>
     </message>
     <message>
         <source>Realtime HRM measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>محاسبهٔ هم‌زمان HRM</translation>
     </message>
 </context>
 <context>
     <name>Settings-huami-shortcuts</name>
     <message>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>موردهای نمایش هوامی</translation>
     </message>
     <message>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ تنظیمات</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>وضعیت</translation>
     </message>
     <message>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>ضربان قلب</translation>
     </message>
     <message>
         <source>Workout</source>
-        <translation type="unfinished"></translation>
+        <translation>ورزش</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>آب و هوا</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>آگاهی‌ها</translation>
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>بیش‌تر</translation>
     </message>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>مزاحم نشوید</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>هشدارها</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>آهنگ</translation>
     </message>
     <message>
         <source>Mute Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>خموشی تلفن</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات</translation>
     </message>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>فعّالیت</translation>
     </message>
     <message>
         <source>Event Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>یادآور رویداد</translation>
     </message>
     <message>
         <source>PAI</source>
@@ -769,27 +769,27 @@
     </message>
     <message>
         <source>World Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>ساعت جهانی</translation>
     </message>
     <message>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation>استرس</translation>
     </message>
     <message>
         <source>Period</source>
-        <translation type="unfinished"></translation>
+        <translation>دوره</translation>
     </message>
     <message>
         <source>Alexa</source>
-        <translation type="unfinished"></translation>
+        <translation>الکسا</translation>
     </message>
     <message>
         <source>Compass</source>
-        <translation type="unfinished"></translation>
+        <translation>قطب‌نما</translation>
     </message>
     <message>
         <source>AliPay</source>
-        <translation type="unfinished"></translation>
+        <translation>علی‌پی</translation>
     </message>
     <message>
         <source>Timer</source>
@@ -797,7 +797,7 @@
     </message>
     <message>
         <source>Take Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>عکس‌گرفتن</translation>
     </message>
     <message>
         <source>Stopwatch</source>
@@ -805,15 +805,15 @@
     </message>
     <message>
         <source>Find Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>یافتن تلفن</translation>
     </message>
     <message>
         <source>NFC</source>
-        <translation type="unfinished"></translation>
+        <translation>ان‌اف‌سی</translation>
     </message>
     <message>
         <source>Watch Face</source>
-        <translation type="unfinished"></translation>
+        <translation>صفحهٔ ساعت</translation>
     </message>
     <message>
         <source>Timer/Stopwatch</source>
@@ -821,252 +821,252 @@
     </message>
     <message>
         <source>Goal</source>
-        <translation type="unfinished"></translation>
+        <translation>هدف</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>خواب</translation>
     </message>
     <message>
         <source>SpO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO2</translation>
     </message>
     <message>
         <source>Events</source>
-        <translation type="unfinished"></translation>
+        <translation>رویدادها</translation>
     </message>
     <message>
         <source>Widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>ابزارک‌ها</translation>
     </message>
     <message>
         <source>Breathing</source>
-        <translation type="unfinished"></translation>
+        <translation>نفس کشیدن</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>گام‌ها</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>فاصله</translation>
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation>کالری</translation>
     </message>
     <message>
         <source>Pomodoro</source>
-        <translation type="unfinished"></translation>
+        <translation>پومودورو</translation>
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>باتری</translation>
     </message>
     <message>
         <source>Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>دما</translation>
     </message>
     <message>
         <source>Barometer</source>
-        <translation type="unfinished"></translation>
+        <translation>فشارسنج</translation>
     </message>
     <message>
         <source>Flashlight</source>
-        <translation type="unfinished"></translation>
+        <translation>چراغ قوه</translation>
     </message>
 </context>
 <context>
     <name>Settings-menu</name>
     <message>
         <source>Settings Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>فهرست تنظیمات</translation>
     </message>
     <message>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات کاربری</translation>
     </message>
     <message>
         <source>Device Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات افزاره</translation>
     </message>
     <message>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات برنامه</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>هشدارها</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>اعانه</translation>
     </message>
     <message>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>آب و هوا</translation>
     </message>
     <message>
         <source>Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>استراوا</translation>
     </message>
     <message>
         <source>Debug Info</source>
-        <translation type="unfinished"></translation>
+        <translation>اطّلاعات اشکال‌زدایی</translation>
     </message>
 </context>
 <context>
     <name>Settings-profile</name>
     <message>
         <source>Profile Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات نمایه</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>نام:</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>تاریخ تولد</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>جنس</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>نر</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>ماده</translation>
     </message>
     <message>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>قد: </translation>
     </message>
     <message>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>وزن: </translation>
     </message>
     <message>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>دست</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>چپ</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>راست</translation>
     </message>
     <message>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش روی مچ چپ</translation>
     </message>
     <message>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>هدف (قدم): </translation>
     </message>
     <message>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>هشدار هنگام رسیدن به هدف</translation>
     </message>
     <message>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>استفاده از HRM برای تشخیص خواب</translation>
     </message>
     <message>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>دورهٔ HRM روزانه (دقیقه): </translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ نمایه</translation>
     </message>
     <message>
         <source>Personal data</source>
-        <translation type="unfinished"></translation>
+        <translation>داده‌های شخصی</translation>
     </message>
     <message>
         <source>Personal preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>ترجیحات شخصی</translation>
     </message>
     <message>
         <source>Heartrate usage</source>
-        <translation type="unfinished"></translation>
+        <translation>استفادهٔ ضربان قلب</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>خاموش</translation>
     </message>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>روشن</translation>
     </message>
     <message>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان‌بندی</translation>
     </message>
 </context>
 <context>
     <name>SleepPage</name>
     <message>
         <source>Sleep Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>خلاصهٔ خواب</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>خواب</translation>
     </message>
     <message>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>MM/dd</translation>
     </message>
     <message>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>ساعت</translation>
     </message>
     <message>
         <source>Total %1</source>
-        <translation type="unfinished"></translation>
+        <translation>در مجموع %1</translation>
     </message>
     <message>
         <source>Light %1</source>
-        <translation type="unfinished"></translation>
+        <translation>سبک %1</translation>
     </message>
     <message>
         <source>Deep %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ژرف %1</translation>
     </message>
 </context>
 <context>
     <name>SportPage</name>
     <message>
         <source>Send to Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>فرستادن به استراوا</translation>
     </message>
     <message>
         <source>Data:</source>
-        <translation type="unfinished"></translation>
+        <translation>داده‌ها:</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>گام‌ها</translation>
     </message>
     <message>
         <source>Active Seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>ثانیه‌های فعّال</translation>
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation>کالری</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>فاصله</translation>
     </message>
     <message>
         <source>Ascent</source>
@@ -1086,19 +1086,19 @@
     </message>
     <message>
         <source>Min Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>کمینهٔ سرعت</translation>
     </message>
     <message>
         <source>Max Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>بیشینهٔ سرعت</translation>
     </message>
     <message>
         <source>Average HR</source>
-        <translation type="unfinished"></translation>
+        <translation>متوسّط ض‌ق</translation>
     </message>
     <message>
         <source>Average Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>متوسّط سرعت</translation>
     </message>
     <message>
         <source>Average Stride</source>
@@ -1106,7 +1106,7 @@
     </message>
     <message>
         <source>Max HR</source>
-        <translation type="unfinished"></translation>
+        <translation>بیشینهٔ ض‌ق</translation>
     </message>
     <message>
         <source>Time Ascending</source>
@@ -1146,7 +1146,7 @@
     </message>
     <message>
         <source>Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>دور</translation>
     </message>
     <message>
         <source>Max Latitude</source>
@@ -1166,7 +1166,7 @@
     </message>
     <message>
         <source>Max Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>بیشینهٔ سرعت</translation>
     </message>
     <message>
         <source>Total Stride</source>
@@ -1174,35 +1174,35 @@
     </message>
     <message>
         <source>steps</source>
-        <translation type="unfinished"></translation>
+        <translation>گام</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>ثانیه</translation>
     </message>
     <message>
         <source>kcal</source>
-        <translation type="unfinished"></translation>
+        <translation>ک‌کالری</translation>
     </message>
     <message>
         <source>meters</source>
-        <translation type="unfinished"></translation>
+        <translation>متر</translation>
     </message>
     <message>
         <source>seconds/m</source>
-        <translation type="unfinished"></translation>
+        <translation>ثانیه/م</translation>
     </message>
     <message>
         <source>bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>ض‌دد</translation>
     </message>
     <message>
         <source>seconds/km</source>
-        <translation type="unfinished"></translation>
+        <translation>ثانیه/ک‌م</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>س‌م</translation>
     </message>
     <message>
         <source>strokes/s</source>
@@ -1221,104 +1221,104 @@
     <name>StepsPage</name>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>گام</translation>
     </message>
 </context>
 <context>
     <name>StravaSettingsPage</name>
     <message>
         <source>Strava settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات استراوا</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>خروج</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>ورود</translation>
     </message>
     <message>
         <source>User Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>نام کاربری: </translation>
     </message>
     <message>
         <source>Country: </source>
-        <translation type="unfinished"></translation>
+        <translation>کشور: </translation>
     </message>
     <message>
         <source>not logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>وارد نشده</translation>
     </message>
 </context>
 <context>
     <name>StravaUploadPage</name>
     <message>
         <source>Strava Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>بارگذاری استراوا</translation>
     </message>
     <message>
         <source>Activity name for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>نام فعّالیت برای استراوا</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>نام</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>شرح</translation>
     </message>
     <message>
         <source>Activity description for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>شرح فعّالیت برای استراوا</translation>
     </message>
     <message>
         <source>Type (Strava)</source>
-        <translation type="unfinished"></translation>
+        <translation>گونه (استراوا)</translation>
     </message>
     <message>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>خصوصی</translation>
     </message>
     <message>
         <source>Commute</source>
-        <translation type="unfinished"></translation>
+        <translation>رفت و آمد</translation>
     </message>
     <message>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>بارگذاری</translation>
     </message>
     <message>
         <source>Uploading data...</source>
-        <translation type="unfinished"></translation>
+        <translation>بار گذاشتن داده‌ها…</translation>
     </message>
     <message>
         <source>Checking upload...</source>
-        <translation type="unfinished"></translation>
+        <translation>بررسی کردن بارگذاری…</translation>
     </message>
     <message>
         <source>TCX uploaded...</source>
-        <translation type="unfinished"></translation>
+        <translation>بارگذاشتن TCX…</translation>
     </message>
     <message>
         <source>Activity upload complete</source>
-        <translation type="unfinished"></translation>
+        <translation>بار گذاشتن فعّالیت کامل شد</translation>
     </message>
     <message>
         <source>An unknown error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>خطایی ناشناخته رخ داد</translation>
     </message>
 </context>
 <context>
     <name>UnpairDeviceDialog</name>
     <message>
         <source>Unpair</source>
-        <translation type="unfinished"></translation>
+        <translation>جدا کردن</translation>
     </message>
     <message>
         <source>Before proceeding you need to unpair your current device.</source>
-        <translation type="unfinished"></translation>
+        <translation>پیش از ادامه باید افزارهٔ کنونیتان را جدا کنید.</translation>
     </message>
 </context>
 </TS>
