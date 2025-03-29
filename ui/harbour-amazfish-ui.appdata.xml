@@ -68,6 +68,20 @@
   </keywords>
   <content_rating type="oars-1.1"/>
   <releases>
+  <release version="2.6.0" timestamp="1743233740">
+    <description>
+      <p>Added support for the Kospet DK08 smartwatch.</p>
+      <p>Improved support Bangle.js - time with timezone, device info service and battery service are used when possible.</p>
+      <p>Automatic profile switching to silent mode when a smartwatch is connected.</p>
+      <p>Reworked pairing dialog for a better user experience.</p>
+      <p>Improved unpairing process to ensure devices are properly removed.</p>
+      <p>Added a reconnect counter to monitor connection stability.</p>
+      <p>Optimized icon rendering using a shared image source.</p>
+      <p>Improved UI responsiveness with Loader for QML elements.</p>
+      <p>Switched to CMake as the primary build system.</p>
+      <p>Updated translations for Tamil, Belarusian, Russian, Simplified Chinese, Czech, and German.</p>
+    </description>
+  </release>
   <release version="2.5.0" timestamp="1732467548">
     <description>
       <p>Translation updates using Weblate (Spanish, Persian, Czech, German).</p>
