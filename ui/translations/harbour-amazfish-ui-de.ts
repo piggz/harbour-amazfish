@@ -246,7 +246,7 @@
     </message>
     <message>
         <source>This is a test notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine Testbenachrichtigung</translation>
     </message>
 </context>
 <context>
@@ -797,35 +797,35 @@
     </message>
     <message>
         <source>Take Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Foto aufnehmen</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppuhr</translation>
     </message>
     <message>
         <source>Find Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät finden</translation>
     </message>
     <message>
         <source>NFC</source>
-        <translation type="unfinished"></translation>
+        <translation>NFC</translation>
     </message>
     <message>
         <source>Watch Face</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziffernblatt</translation>
     </message>
     <message>
         <source>Timer/Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Timer/Stoppuhr</translation>
     </message>
     <message>
         <source>Goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziel</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation type="unfinished">Schlaf</translation>
+        <translation>Schlaf</translation>
     </message>
     <message>
         <source>SpO2</source>
@@ -833,27 +833,27 @@
     </message>
     <message>
         <source>Events</source>
-        <translation type="unfinished"></translation>
+        <translation>Ereignisse</translation>
     </message>
     <message>
         <source>Widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Widgets</translation>
     </message>
     <message>
         <source>Breathing</source>
-        <translation type="unfinished"></translation>
+        <translation>Atmung</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Schritte</translation>
+        <translation>Schritte</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished">Distanz</translation>
+        <translation>Distanz</translation>
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished">Kalorien</translation>
+        <translation>Kalorien</translation>
     </message>
     <message>
         <source>Pomodoro</source>
@@ -861,19 +861,19 @@
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished">Batterie</translation>
+        <translation>Akku</translation>
     </message>
     <message>
         <source>Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatur</translation>
     </message>
     <message>
         <source>Barometer</source>
-        <translation type="unfinished"></translation>
+        <translation>Barometer</translation>
     </message>
     <message>
         <source>Flashlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Blitzlicht</translation>
     </message>
 </context>
 <context>
