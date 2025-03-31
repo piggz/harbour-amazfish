@@ -1,9 +1,9 @@
 #ifndef ZEPPOSDEVICE_H
 #define ZEPPOSDEVICE_H
 
-#include <abstractdevice.h>
+#include <huamidevice.h>
 
-class ZeppOSDevice: public AbstractDevice
+class ZeppOSDevice: public HuamiDevice
 {
 public:
     ZeppOSDevice(const QString &pairedName, QObject *parent = nullptr);
