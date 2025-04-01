@@ -2,7 +2,7 @@
 #define DFUSERVICE_H
 
 #include <memory>
-#include "qble/qbleservice.h"
+#include "abstractoperationservice.h"
 #include "abstractfirmwareinfo.h"
 #include "dfuoperation.h"
 /*
@@ -14,7 +14,7 @@
 
 class DfuOperation;
 
-class DfuService : public QBLEService
+class DfuService : public AbstractOperationService
 {
     Q_OBJECT
 

@@ -218,7 +218,7 @@ void PinetimeJFDevice::initialise()
     if (fw) {
         connect(fw, &DfuService::message, this, &PinetimeJFDevice::message, Qt::UniqueConnection);
         connect(fw, &DfuService::downloadProgress, this, &PinetimeJFDevice::downloadProgress, Qt::UniqueConnection);
-        connect(fw, &QBLEService::operationRunningChanged, this, &QBLEDevice::operationRunningChanged, Qt::UniqueConnection);
+        connect(fw, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));

@@ -13,10 +13,13 @@ public:
     explicit AbstractOperationService(const QString &uuid, const QString &path, QObject *parent);
 
     void registerOperation(AbstractOperation *operation);
+    void notifyOperations(const QString &characteristic, const QByteArray &value);
 
+    Q_INVOKABLE virtual bool operationRunning() = 0;
+    Q_SIGNAL void operationRunningChanged();
 private:
 
-    QList<AbstractOperation*> m_operations;
+    QVector<AbstractOperation*> m_operations;
 };
 
 #endif // ABSTRACTOPERATIONSERVICE_H

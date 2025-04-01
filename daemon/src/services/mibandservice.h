@@ -1,7 +1,7 @@
 #ifndef MIBANDSERVICE_H
 #define MIBANDSERVICE_H
 
-#include "qble/qbleservice.h"
+#include "abstractoperationservice.h"
 #include "bipbatteryinfo.h"
 #include "logfetchoperation.h"
 #include "activityfetchoperation.h"
@@ -32,7 +32,7 @@
 --00000020-0000-3512-2118-0009af100700 //Chunked transfer
 */
 
-class MiBandService : public QBLEService
+class MiBandService : public AbstractOperationService
 {
     Q_OBJECT
 public:
