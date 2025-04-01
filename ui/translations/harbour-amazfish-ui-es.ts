@@ -246,7 +246,7 @@
     </message>
     <message>
         <source>This is a test notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Este es una notificación de prueba</translation>
     </message>
 </context>
 <context>
@@ -793,87 +793,87 @@
     </message>
     <message>
         <source>Timer</source>
-        <translation>Cronómetro</translation>
+        <translation>Temporizador</translation>
     </message>
     <message>
         <source>Take Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tomar foto</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Cronómetro</translation>
     </message>
     <message>
         <source>Find Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Encontrar teléfono</translation>
     </message>
     <message>
         <source>NFC</source>
-        <translation type="unfinished"></translation>
+        <translation>NFC</translation>
     </message>
     <message>
         <source>Watch Face</source>
-        <translation type="unfinished"></translation>
+        <translation>Carátula</translation>
     </message>
     <message>
         <source>Timer/Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Temporizador/Cronómetro</translation>
     </message>
     <message>
         <source>Goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Meta</translation>
     </message>
     <message>
         <source>Sleep</source>
-        <translation type="unfinished">Sueño</translation>
+        <translation>Sueño</translation>
     </message>
     <message>
         <source>SpO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO2</translation>
     </message>
     <message>
         <source>Events</source>
-        <translation type="unfinished"></translation>
+        <translation>Eventos</translation>
     </message>
     <message>
         <source>Widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Widgets</translation>
     </message>
     <message>
         <source>Breathing</source>
-        <translation type="unfinished"></translation>
+        <translation>Respiración</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished">Pasos</translation>
+        <translation>Pasos</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished">Distancia</translation>
+        <translation>Distancia</translation>
     </message>
     <message>
         <source>Calories</source>
-        <translation type="unfinished">Calorías</translation>
+        <translation>Calorías</translation>
     </message>
     <message>
         <source>Pomodoro</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomodoro</translation>
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished">Batería</translation>
+        <translation>Batería</translation>
     </message>
     <message>
         <source>Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura</translation>
     </message>
     <message>
         <source>Barometer</source>
-        <translation type="unfinished"></translation>
+        <translation>Barómetro</translation>
     </message>
     <message>
         <source>Flashlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Linterna</translation>
     </message>
 </context>
 <context>
