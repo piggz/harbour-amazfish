@@ -136,7 +136,7 @@ PageListPL {
                     var authdialog = app.pages.push(Qt.resolvedUrl("./AuthKeyDialog.qml"));
 
                     authdialog.accepted.connect(function() {
-                        stopDiscovery();
+                        page.stopDiscovery();
                         _deviceName = model.FriendlyName;
                         _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
                         DaemonInterfaceInstance.pair(_deviceName, device.deviceType, _deviceAddress)
