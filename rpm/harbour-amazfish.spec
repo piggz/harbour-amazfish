@@ -71,11 +71,11 @@ Categories:
  - Utility
 Custom:
   Repo: https://github.com/piggz/harbour-amazfish
-PackageIcon: https://raw.githubusercontent.com/piggz/harbour-amazfish/master/harbour-amazfish-ui.svg
+PackageIcon: https://raw.githubusercontent.com/piggz/harbour-amazfish/master/ui/icons/scalable/harbour-amazfish-ui.svg
 Screenshots:
- - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot1.png
- - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot2.png
- - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot3.png
+ - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_main.png
+ - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_activity.png
+ - https://github.com/piggz/harbour-amazfish/raw/master/screenshots/screenshot_sleep.png
 Links:
   Homepage: https://github.com/piggz/harbour-amazfish
   Help: https://github.com/piggz/harbour-amazfish/discussions
