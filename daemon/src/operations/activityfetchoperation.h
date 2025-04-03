@@ -14,9 +14,10 @@ class ActivityFetchOperation : public AbstractFetchOperation
 public:
     ActivityFetchOperation(QBLEService *service, KDbConnection *db, int sampleSize = 4);
 
-    void start() override;
+    void start(QBLEService *service) override;
     void handleData(const QByteArray &data) override;
     bool finished(bool success) override;
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
 private:
 

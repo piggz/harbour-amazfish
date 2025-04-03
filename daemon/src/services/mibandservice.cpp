@@ -29,9 +29,6 @@ MiBandService::MiBandService(const QString &path, QObject *parent) : AbstractOpe
     connect(this, &QBLEService::characteristicChanged, this, &MiBandService::characteristicChanged);
     connect(this, &QBLEService::characteristicRead, this, &MiBandService::characteristicRead);
 
-    m_operationTimeout = new QTimer();
-    connect(m_operationTimeout, &QTimer::timeout, this, &MiBandService::operationTimeout);
-
     displayItemsIdMap["status"] = 0x01;
     displayItemsIdMap["hr"] = 0x02;
     displayItemsIdMap["workout"] = 0x03;
@@ -79,6 +76,8 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
 {
     qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value.toHex();
 
+    AbstractOperationService::notifyOperation(characteristic, value);
+
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
         if (value[0] == EVENT_DECLINE_CALL) {
             emit serviceEvent(EVENT_DECLINE_CALL);
@@ -120,77 +119,7 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
         } else {
             qDebug() << "Unknown configuration info: " << value;
         }
-    } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
-        //qDebug() << "...got data";
-        m_operationTimeout->start(10000);
-        if (m_operationRunning == 1 && m_logFetchOperation) {
-            m_logFetchOperation->handleData(value);
-        } else if (m_operationRunning == 2 && m_activityFetchOperation) {
-            m_activityFetchOperation->handleData(value);
-        } else if (m_operationRunning == 3 && m_sportsSummaryOperation) {
-            m_sportsSummaryOperation->handleData(value);
-        } else if (m_operationRunning == 4 && m_sportsDetailOperation) {
-            m_sportsDetailOperation->handleData(value);
-        }
-    } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
-        qDebug() << "...got metadata";
-        m_operationTimeout->start(10000);
-        if (m_operationRunning == 1 && m_logFetchOperation) {
-            if (m_logFetchOperation->handleMetaData(value)) {
-                delete m_logFetchOperation;
-                m_logFetchOperation = nullptr;
-                m_operationRunning = 0;
-                emit operationRunningChanged();
-                m_operationTimeout->stop();
-            }
-        } else if (m_operationRunning == 2 && m_activityFetchOperation) {
-            if (m_activityFetchOperation->handleMetaData(value)) {
-                delete m_activityFetchOperation;
-                m_activityFetchOperation = nullptr;
-                m_operationRunning = 0;
-                emit operationRunningChanged();
-                m_operationTimeout->stop();
-            }
-        } else if (m_operationRunning == 3 && m_sportsSummaryOperation) {
-            if (m_sportsSummaryOperation->handleMetaData(value)) {
-                //Now the summary is finished, need to get the detail
-                bool createDetail = false;
-                ActivitySummary summary;
-                if (m_sportsSummaryOperation->success()) {
-                    qDebug() << "Finished summary data, now getting track detail";
-                    summary = m_sportsSummaryOperation->summary();
-                    createDetail = true;
-                }
-
-                delete m_sportsSummaryOperation;
-                m_sportsSummaryOperation = nullptr;
-                m_operationRunning = 0;
-                emit operationRunningChanged();
-                m_operationTimeout->stop();
-                if (createDetail) {
-                    m_sportsDetailOperation = new SportsDetailOperation(this, m_conn, summary);
-                    m_operationRunning = 4;
-                    m_sportsDetailOperation->start();
-                    emit operationRunningChanged();
-                    m_operationTimeout->start(10000);
-                }
-            }
-        }  else if (m_operationRunning == 4 && m_sportsDetailOperation) {
-            if (m_sportsDetailOperation->handleMetaData(value)) {
-                delete m_sportsDetailOperation;
-                m_sportsDetailOperation = nullptr;
-                m_operationRunning = 0;
-                emit operationRunningChanged();
-                m_operationTimeout->stop();
-            }
-        }
     }
-}
-
-void MiBandService::operationTimeout()
-{
-    qDebug() << Q_FUNC_INFO << "Timeout while waiting for operation data";
-    abortOperations();
 }
 
 void MiBandService::decodeAlarms(const QByteArray &data)
@@ -634,54 +563,6 @@ int MiBandService::steps() const
     return m_steps;
 }
 
-void MiBandService::fetchLogs()
-{
-    if (!m_logFetchOperation && m_operationRunning == 0) {
-        m_operationRunning = 1;
-        m_logFetchOperation = new LogFetchOperation(this);
-        m_logFetchOperation->start();
-        emit operationRunningChanged();
-        m_operationTimeout->start(10000);
-    } else {
-        emit message(tr("An operation is currently running, please try later"));
-    }
-}
-
-void MiBandService::fetchActivityData()
-{
-    if (!m_activityFetchOperation && m_operationRunning == 0) {
-        m_operationRunning = 2;
-        int sampleSize = 4;
-        HuamiDevice *device = qobject_cast<HuamiDevice*>(parent());
-
-        if (device) {
-            sampleSize = device->activitySampleSize();
-        }
-
-        qDebug() << Q_FUNC_INFO << "Sample size is " << sampleSize;
-
-        m_activityFetchOperation = new ActivityFetchOperation(this, m_conn, sampleSize);
-        m_activityFetchOperation->start();
-        emit operationRunningChanged();
-        m_operationTimeout->start(10000);
-    } else {
-        emit message(tr("An operation is currently running, please try later"));
-    }
-}
-
-void MiBandService::fetchSportsSummaries()
-{
-    if (!m_sportsSummaryOperation && m_operationRunning == 0) {
-        m_operationRunning = 3;
-        m_sportsSummaryOperation = new SportsSummaryOperation(this, m_conn);
-        m_sportsSummaryOperation->start();
-        emit operationRunningChanged();
-        m_operationTimeout->start(10000);
-    } else {
-        emit message(tr("An operation is currently running, please try later"));
-    }
-}
-
 void MiBandService::setDatabase(KDbConnection *conn)
 {
     m_conn = conn;
@@ -717,36 +598,6 @@ void MiBandService::setDisconnectNotification()
             : COMMAND_DISABLE_DISCONNECT_NOTIFICATION;
 
     writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, UCHARARR_TO_BYTEARRAY(value));
-}
-
-bool MiBandService::operationRunning()
-{
-    if (m_operationRunning > 0)
-        qDebug() << Q_FUNC_INFO << "MiBand operation running:" << m_operationRunning;
-    return m_operationRunning > 0;
-}
-
-void MiBandService::abortOperations()
-{
-    if (m_logFetchOperation) {
-        delete m_logFetchOperation;
-        m_logFetchOperation = nullptr;
-    }
-    if (m_activityFetchOperation) {
-        delete m_activityFetchOperation;
-        m_activityFetchOperation = nullptr;
-    }
-    if (m_sportsSummaryOperation) {
-        delete m_sportsSummaryOperation;
-        m_sportsSummaryOperation = nullptr;
-    }
-    if (m_sportsDetailOperation) {
-        delete m_sportsDetailOperation;
-        m_sportsDetailOperation = nullptr;
-    }
-    m_operationRunning = 0;
-    emit operationRunningChanged();
-    m_operationTimeout->stop();
 }
 
 void MiBandService::sendWeather(const CurrentWeather *weather, bool supportsConditionString)

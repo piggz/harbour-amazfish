@@ -130,13 +130,13 @@ struct summary_t {
 };
 #pragma pack(pop)
 
-SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn) : AbstractFetchOperation(service)
+SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn)
 {
     m_conn = conn;
     setLastSyncKey("device/lastsportsyncmillis");
 }
 
-void SportsSummaryOperation::start()
+void SportsSummaryOperation::start(QBLEService *service)
 {
     setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
@@ -145,11 +145,21 @@ void SportsSummaryOperation::start()
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
 
-    m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
+    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
 
     //Send log read configuration
-    m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES) + rawDate);
+    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES) + rawDate);
+}
+
+bool SportsSummaryOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
+{
+    if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
+        handleData(value);
+    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
+        return handleMetaData(value);
+    }
+    return false;
 }
 
 void SportsSummaryOperation::handleData(const QByteArray &data)

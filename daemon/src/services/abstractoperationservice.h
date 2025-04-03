@@ -12,14 +12,21 @@ class AbstractOperationService : public QBLEService
 public:
     explicit AbstractOperationService(const QString &uuid, const QString &path, QObject *parent);
 
-    void registerOperation(AbstractOperation *operation);
-    void notifyOperations(const QString &characteristic, const QByteArray &value);
+    bool registerOperation(AbstractOperation *operation);
+    void notifyOperation(const QString &characteristic, const QByteArray &value);
+    void cancelOperation();
 
-    Q_INVOKABLE virtual bool operationRunning() = 0;
+    Q_INVOKABLE virtual bool operationRunning();
     Q_SIGNAL void operationRunningChanged();
-private:
+    Q_SIGNAL void operationComplete(AbstractOperation* m_currentOperation);
 
-    QVector<AbstractOperation*> m_operations;
+private:
+    AbstractOperation* m_currentOperation = nullptr;
+    AbstractOperation* m_queuedOperation = nullptr;
+    QTimer *m_operationTimeout = nullptr;
+
+
+    void operationTimeout();
 };
 
 #endif // ABSTRACTOPERATIONSERVICE_H

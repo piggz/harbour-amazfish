@@ -3,7 +3,7 @@
 #include "typeconversion.h"
 #include "amazfishconfig.h"
 
-AbstractFetchOperation::AbstractFetchOperation(QBLEService *service) : AbstractOperation(service)
+AbstractFetchOperation::AbstractFetchOperation()
 {
 
 }
@@ -45,6 +45,10 @@ void AbstractFetchOperation::setLastSyncKey(const QString &key)
 
 bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 {
+    if (!m_service) {
+        return true;
+    }
+
     if (m_abort) {
         qDebug() << Q_FUNC_INFO << ": Abort signalled from operation";
         return true;

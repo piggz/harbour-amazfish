@@ -14,7 +14,8 @@ public:
     ~DfuOperation();
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
-    void start() override;
+    void start(QBLEService *service) override;
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override {return false;};
 
     Q_SIGNAL void transferError(const QString error);
 protected:
@@ -36,6 +37,7 @@ private:
 
     Q_SLOT void packetNotification();
     bool probeArchive();
+    QBLEService *m_service = nullptr;
 };
 
 #endif // DFUOPERATION_H

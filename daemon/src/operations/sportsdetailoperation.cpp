@@ -5,28 +5,28 @@
 
 #include "mibandservice.h"
 #include "typeconversion.h"
-#include "activitykind.h"
 #include "bipactivitydetailparser.h"
 #include "amazfishconfig.h"
 
-SportsDetailOperation::SportsDetailOperation(QBLEService *service, KDbConnection *conn, const ActivitySummary &summary) : AbstractFetchOperation(service), m_summary(summary)
+SportsDetailOperation::SportsDetailOperation(QBLEService *service, KDbConnection *conn, const ActivitySummary &summary) :  m_summary(summary)
 {
     m_conn = conn;
     setLastSyncKey("device/lastsportsyncmillis");
 }
 
-void SportsDetailOperation::start()
+void SportsDetailOperation::start(QBLEService *service)
 {
     setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
+    m_service = service;
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
 
-    m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
+    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
 
     //Send log read configuration
-    m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_DETAILS) + rawDate);
+    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_DETAILS) + rawDate);
 }
 
 void SportsDetailOperation::handleData(const QByteArray &data)
@@ -47,6 +47,16 @@ void SportsDetailOperation::handleData(const QByteArray &data)
         finished(false);
         return;
     }
+}
+
+bool SportsDetailOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
+{
+    if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
+        handleData(value);
+    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
+        return handleMetaData(value);
+    }
+    return false;
 }
 
 bool SportsDetailOperation::finished(bool success)

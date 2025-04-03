@@ -49,7 +49,7 @@ void BipFirmwareService::startDownload()
         m_operationRunning = 1;
         emit operationRunningChanged();
         emit message(tr("Sending %1...").arg(m_updateFirmware->version()));
-        m_updateFirmware->start();
+        m_updateFirmware->start(this);
     } else {
         emit message(tr("No file selected"));
     }

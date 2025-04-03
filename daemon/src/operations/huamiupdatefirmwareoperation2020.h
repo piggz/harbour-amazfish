@@ -9,7 +9,7 @@ public:
     HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service, QBLEService &mibandService);
 
     bool handleMetaData(const QByteArray &meta) override;
-    void start() override;
+    void start(QBLEService *service) override;
 
 protected:
     bool sendFwInfo() override;

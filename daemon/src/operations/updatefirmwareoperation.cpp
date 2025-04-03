@@ -3,12 +3,13 @@
 #include "typeconversion.h"
 #include <QApplication>
 
-UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info), m_fwBytes(info->bytes())
+UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service) : m_info(info), m_fwBytes(info->bytes())
 {
 }
 
-void UpdateFirmwareOperation::start()
+void UpdateFirmwareOperation::start(QBLEService *service)
 {
+    m_service = service;
     if (m_info->type() != AbstractFirmwareInfo::Invalid) {
         BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
 

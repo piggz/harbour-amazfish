@@ -7,6 +7,7 @@ class UpdateFirmwareOperationNew : public UpdateFirmwareOperation
 {
 public:
     UpdateFirmwareOperationNew(const AbstractFirmwareInfo *info, QBLEService *service);
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override {return false;};
 
 protected:
     bool sendFwInfo() override;

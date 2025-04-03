@@ -44,7 +44,7 @@ void DfuService::startDownload()
     if (m_updateFirmware && m_operationRunning == 0) {
         m_operationRunning = 1;
         connect(m_updateFirmware.get(), &DfuOperation::transferError, this, &DfuService::onTransferError);
-        m_updateFirmware->start();
+        m_updateFirmware->start(this);
     } else {
         emit message(tr("No file selected"));
     }

@@ -3,10 +3,6 @@
 
 #include "abstractoperationservice.h"
 #include "bipbatteryinfo.h"
-#include "logfetchoperation.h"
-#include "activityfetchoperation.h"
-#include "sportssummaryoperation.h"
-#include "sportsdetailoperation.h"
 #include "weather/currentweather.h"
 #include "devices/abstractdevice.h"
 
@@ -146,18 +142,9 @@ public:
 
     void sendWeather(const CurrentWeather *weather, bool supportsConditionString);
 
-    //Operations
-    void fetchLogs();
-    void fetchActivityData();
-    void fetchSportsSummaries();
-    //Q_INVOKABLE void fetchActivityDetail();
-
     Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
     Q_SIGNAL void buttonPressed();
     Q_SIGNAL void serviceEvent(uint8_t event);
-
-    virtual bool operationRunning() override;
-    void abortOperations();
 
     void setDatabase(KDbConnection *conn);
 
@@ -170,23 +157,16 @@ public:
 private:
     void characteristicRead(const QString &c, const QByteArray &value);
     void characteristicChanged(const QString &c, const QByteArray &value);
-    void operationTimeout();
 
     void setGPSVersion(const QString& v);
     void decodeAlarms(const QByteArray &data);
 
     QString m_gpsVersion;
     int m_steps = 0;
-    int m_operationRunning = 0;
 
     BipBatteryInfo m_batteryInfo;
-    LogFetchOperation *m_logFetchOperation = nullptr;
-    ActivityFetchOperation *m_activityFetchOperation = nullptr;
-    SportsSummaryOperation *m_sportsSummaryOperation = nullptr;
-    SportsDetailOperation *m_sportsDetailOperation = nullptr;
 
     KDbConnection *m_conn = nullptr;
-    QTimer *m_operationTimeout = nullptr;
     QMap<QString, uint8_t> displayItemsIdMap;
 };
 

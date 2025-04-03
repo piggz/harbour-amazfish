@@ -3,7 +3,7 @@
 #include "adafruitblefsworker.h"
 #include <QMetaType>
 
-AdafruitBleFsOperation::AdafruitBleFsOperation(QBLEService *service, const AbstractFirmwareInfo *info) : AbstractOperation(service), info{info}
+AdafruitBleFsOperation::AdafruitBleFsOperation(QBLEService *service, const AbstractFirmwareInfo *info) : info{info}
 {
 
 }
@@ -13,9 +13,9 @@ AdafruitBleFsOperation::~AdafruitBleFsOperation()
 
 }
 
-void AdafruitBleFsOperation::start()
+void AdafruitBleFsOperation::start(QBLEService *service)
 {
-
+  m_service = service;
 }
 
 bool AdafruitBleFsOperation::handleMetaData(const QByteArray &value)

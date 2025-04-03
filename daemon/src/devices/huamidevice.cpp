@@ -1,5 +1,8 @@
 #include "huamidevice.h"
-#include "bipfirmwareinfo.h"
+#include "logfetchoperation.h"
+#include "activityfetchoperation.h"
+#include "sportssummaryoperation.h"
+#include "sportsdetailoperation.h"
 #include "updatefirmwareoperation.h"
 #include "immediatealertservice.h"
 #include "amazfishconfig.h"
@@ -45,7 +48,13 @@ void HuamiDevice::downloadSportsData()
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
-        mi->fetchSportsSummaries();
+        SportsSummaryOperation *sportsSummaryOperation = new SportsSummaryOperation(mi, m_conn);
+        if (mi->registerOperation(sportsSummaryOperation)) {
+            sportsSummaryOperation->start(mi);
+            emit operationRunningChanged();
+        } else {
+            delete sportsSummaryOperation;
+        }
     }
 }
 
@@ -53,15 +62,29 @@ void HuamiDevice::downloadActivityData()
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
-        mi->fetchActivityData();
+        int sampleSize = activitySampleSize();
+        ActivityFetchOperation *activityFetchOperation = new ActivityFetchOperation(mi, m_conn, sampleSize);
+        if (mi->registerOperation(activityFetchOperation)) {
+            activityFetchOperation->start(mi);
+            emit operationRunningChanged();
+        } else {
+            delete activityFetchOperation;
+        }
     }
 }
 
 void HuamiDevice::fetchLogs()
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        mi->fetchLogs();
+
+    if (mi){
+        LogFetchOperation *logFetchOperation = new LogFetchOperation();
+        if (mi->registerOperation(logFetchOperation)) {
+            logFetchOperation->start(mi);
+            emit operationRunningChanged();
+        } else {
+            delete logFetchOperation;
+        }
     }
 }
 
@@ -69,7 +92,7 @@ void HuamiDevice::refreshInformation()
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (info) {
-         info->refreshInformation();
+        info->refreshInformation();
     }
     
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
@@ -82,7 +105,7 @@ void HuamiDevice::refreshInformation()
 QString HuamiDevice::information(Info i) const
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
-     if (!info) {
+    if (!info) {
         return QString();
     }
     
@@ -116,7 +139,7 @@ QString HuamiDevice::information(Info i) const
     case INFO_STEPS:
         return QString::number(mi->steps());
         break;
-    }    
+    }
     return QString();
 }    
 
@@ -334,11 +357,11 @@ void HuamiDevice::abortOperations()
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi){
-        mi->abortOperations();
+        mi->cancelOperation();
     }
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw){
-        fw->abortOperations();
+        fw->cancelOperation();
     }
 }
 
@@ -367,6 +390,35 @@ void HuamiDevice::serviceEvent(char event)
         break;
     default:
         break;
+    }
+}
+
+void HuamiDevice::operationComplete(AbstractOperation *operation)
+{
+    qDebug() << Q_FUNC_INFO;
+    SportsSummaryOperation *sportSummary = dynamic_cast<SportsSummaryOperation*>(operation);
+
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+
+    if (sportSummary && mi) {
+        //Now the summary is finished, need to get the detail
+        bool createDetail = false;
+        ActivitySummary summary;
+        if (sportSummary->success()) {
+            qDebug() << "Finished summary data, now getting track detail";
+            summary = sportSummary->summary();
+            createDetail = true;
+        }
+
+        if (createDetail) {
+            SportsDetailOperation *sportsDetailOperation = new SportsDetailOperation(mi, m_conn, summary);
+            if (mi->registerOperation(sportsDetailOperation)) {
+                sportsDetailOperation->start(mi);
+                emit operationRunningChanged();
+            } else {
+                delete sportsDetailOperation;
+            }
+        }
     }
 }
 

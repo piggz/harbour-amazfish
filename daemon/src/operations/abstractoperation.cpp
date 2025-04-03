@@ -1,11 +1,6 @@
 #include "abstractoperation.h"
 
-AbstractOperation::AbstractOperation(QBLEService *service) : m_service(service)
-{
-
-}
-
-bool AbstractOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
+AbstractOperation::AbstractOperation()
 {
 
 }

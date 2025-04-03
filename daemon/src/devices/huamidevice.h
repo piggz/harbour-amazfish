@@ -56,6 +56,7 @@ protected:
     Q_SLOT void stepsChanged();
     Q_SLOT void batteryInfoChanged();
     Q_SLOT void serviceEvent(char event);
+    Q_SLOT void operationComplete(AbstractOperation *operation);
 
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     virtual void initialise() = 0;

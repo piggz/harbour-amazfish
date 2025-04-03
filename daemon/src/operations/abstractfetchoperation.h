@@ -9,7 +9,7 @@
 class AbstractFetchOperation : public AbstractOperation
 {
 public:
-    explicit AbstractFetchOperation(QBLEService *service);
+    explicit AbstractFetchOperation();
 
     bool handleMetaData(const QByteArray &meta) override;
 
@@ -27,6 +27,8 @@ protected:
     void saveLastActivitySync(qint64 millis);
 
     void setAbort(bool abort);
+
+    QBLEService *m_service = nullptr;
 };
 
 #endif // ABSTRACTFETCHOPERATION_H

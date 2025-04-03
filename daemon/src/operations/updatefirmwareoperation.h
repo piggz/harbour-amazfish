@@ -11,7 +11,8 @@ public:
 
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
-    void start() override;
+    void start(QBLEService *service) override;
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override {return false;};
 
     QString version();
 
@@ -25,6 +26,7 @@ protected:
     virtual void sendChecksum();
     virtual QByteArray getFirmwareStartCommand();
     bool m_startWithFWInfo = true;
+    QBLEService *m_service = nullptr;
 
 private:
     bool m_needToSendFwInfo = true;

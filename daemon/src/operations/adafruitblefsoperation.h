@@ -16,7 +16,8 @@ public:
     ~AdafruitBleFsOperation();
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
-    void start() override;
+    void start(QBLEService *service) override;
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override {return false;};
 
     struct File {        
         std::string name;
@@ -68,6 +69,8 @@ private:
 
     QThread m_workerThread;
     BleFsWorker* m_worker = nullptr;
+
+    QBLEService *m_service = nullptr;
 
     Q_SIGNAL void startUpdateFiles(AdafruitBleFsOperation* service, const int mtu);
 };

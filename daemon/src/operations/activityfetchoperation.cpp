@@ -7,24 +7,36 @@
 #include "typeconversion.h"
 #include "amazfishconfig.h"
 
-ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn, int sampleSize) : AbstractFetchOperation(service), m_conn(conn), m_sampleSize(sampleSize)
+ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn, int sampleSize) : m_conn(conn), m_sampleSize(sampleSize)
 {
     setLastSyncKey("device/lastactivitysyncmillis");
 }
 
-void ActivityFetchOperation::start()
+void ActivityFetchOperation::start(QBLEService *service)
 {
     setStartDate(lastActivitySync());
+    m_service = service;
 
     qDebug() << Q_FUNC_INFO << ": Last sync was " << startDate();
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
 
-    m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    m_service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
+    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
 
     //Send log read configuration
-    m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY) + rawDate);
+    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY) + rawDate);
+}
+
+
+bool ActivityFetchOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
+{
+    if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
+        handleData(value);
+        return false;
+    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
+        return handleMetaData(value);
+    }
 }
 
 void ActivityFetchOperation::handleData(const QByteArray &data)

@@ -50,7 +50,7 @@ uint16_t getFirmwareCrc(QByteArray& manifestData, bool& valid) {
 }
 }
 
-DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service) : AbstractOperation(service), m_info(info)
+DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service) : m_info(info)
 {
 
 }
@@ -116,9 +116,10 @@ bool DfuOperation::probeArchive()
     return true;
 }
 
-void DfuOperation::start()
+void DfuOperation::start(QBLEService *service)
 {
     qDebug() << Q_FUNC_INFO;
+    m_service = service;
     bool probeOk = probeArchive();
 
     if (m_info->type() == AbstractFirmwareInfo::Firmware && probeOk && m_uncompressedFwBytes.size() > 0) {

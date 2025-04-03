@@ -14,8 +14,9 @@ class SportsDetailOperation : public AbstractFetchOperation
 public:
     SportsDetailOperation(QBLEService *service, KDbConnection *db, const ActivitySummary &summary);
 
-    void start() override;
+    void start(QBLEService *service) override;
     void handleData(const QByteArray &data) override;
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
 private:
     ActivitySummary m_summary;
