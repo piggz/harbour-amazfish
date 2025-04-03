@@ -1,7 +1,7 @@
 #ifndef BIPFIRMWARESERVICE_H
 #define BIPFIRMWARESERVICE_H
 
-#include "qble/qbleservice.h"
+#include "abstractoperationservice.h"
 #include "updatefirmwareoperation.h"
 
 /*
@@ -9,7 +9,7 @@
 --00001531-0000-3512-2118-0009af100700 //Firmware
 --00001532-0000-3512-2118-0009af100700 //Firmware data
 */
-class BipFirmwareService : public QBLEService
+class BipFirmwareService : public AbstractOperationService
 {
     Q_OBJECT
 

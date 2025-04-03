@@ -51,6 +51,7 @@ set(SOURCES
 ./src/operations/updatefirmwareoperationnew.cpp
 ./src/qaesencryption.cpp
 ./src/realtimeactivitysample.cpp
+./src/services/abstractoperationservice.cpp
 ./src/services/adafruitblefsservice.cpp
 ./src/services/alertnotificationservice.cpp
 ./src/services/asteroidmediaservice.cpp
@@ -134,6 +135,7 @@ set(HEADERS
 ./src/operations/updatefirmwareoperationnew.h
 ./src/qaesencryption.h
 ./src/realtimeactivitysample.h
+./src/services/abstractoperationservice.h
 ./src/services/adafruitblefsservice.h
 ./src/services/alertnotificationservice.h
 ./src/services/asteroidmediaservice.h

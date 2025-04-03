@@ -1,4 +1,5 @@
 #include "abstractdevice.h"
+#include "abstractoperationservice.h"
 
 #include <QString>
     
@@ -200,4 +201,16 @@ QStringList AbstractDevice::supportedDisplayItems() const
 
 void AbstractDevice::immediateAlert(int level) {
     qDebug() << Q_FUNC_INFO << level;
+}
+
+bool AbstractDevice::operationRunning()
+{
+    bool running = false;
+    foreach(QBLEService* service, services()) {
+        AbstractOperationService *a = qobject_cast<AbstractOperationService*>(service);
+        if (a) {
+            running |= a->operationRunning();
+        }
+    }
+    return running;
 }

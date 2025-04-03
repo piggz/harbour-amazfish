@@ -124,6 +124,10 @@ public:
     virtual QStringList supportedDisplayItems() const;
     virtual void immediateAlert(int level);
 
+    Q_SIGNAL void operationRunningChanged();
+
+    bool operationRunning();
+
     //signals    
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);

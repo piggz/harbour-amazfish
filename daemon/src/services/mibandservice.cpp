@@ -22,7 +22,7 @@ const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER = "000000
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE = "00000016-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ = "00000017-0000-3512-2118-0009af100700";
 
-MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND, path, parent)
+MiBandService::MiBandService(const QString &path, QObject *parent) : AbstractOperationService(UUID_SERVICE_MIBAND, path, parent)
 {
     qDebug() << Q_FUNC_INFO;
 
