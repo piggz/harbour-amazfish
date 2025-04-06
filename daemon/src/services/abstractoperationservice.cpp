@@ -22,6 +22,11 @@ bool AbstractOperationService::registerOperation(AbstractOperation *operation)
     return true;
 }
 
+AbstractOperation *AbstractOperationService::currentOperation()
+{
+    return m_currentOperation;
+}
+
 void AbstractOperationService::notifyOperation(const QString &characteristic, const QByteArray &value)
 {
     QVector <AbstractOperation *> finishedList;

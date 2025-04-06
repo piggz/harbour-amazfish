@@ -79,7 +79,6 @@ void Gts2Device::initialise()
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw) {
         connect(fw, &BipFirmwareService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
-        connect(fw, &BipFirmwareService::downloadProgress, this, &HuamiDevice::downloadProgress, Qt::UniqueConnection);
         connect(fw, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 

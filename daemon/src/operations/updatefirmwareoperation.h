@@ -3,16 +3,17 @@
 
 #include "abstractoperation.h"
 #include "bipfirmwareinfo.h"
+#include "abstractdevice.h"
 
 class UpdateFirmwareOperation : public AbstractOperation
 {
 public:
-    UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service);
+    UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service, AbstractDevice *device);
 
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
     void start(QBLEService *service) override;
-    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override {return false;};
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
     QString version();
 
@@ -27,9 +28,11 @@ protected:
     virtual QByteArray getFirmwareStartCommand();
     bool m_startWithFWInfo = true;
     QBLEService *m_service = nullptr;
+    AbstractDevice *m_device = nullptr;
 
 private:
     bool m_needToSendFwInfo = true;
+
 };
 
 #endif // UPDATEFIRMWAREOPERATION_H

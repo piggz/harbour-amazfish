@@ -3,7 +3,7 @@
 #include "typeconversion.h"
 #include <QApplication>
 
-UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service) : m_info(info), m_fwBytes(info->bytes())
+UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service, AbstractDevice *device) : m_info(info), m_fwBytes(info->bytes()), m_device(device)
 {
 }
 
@@ -27,6 +27,14 @@ void UpdateFirmwareOperation::start(QBLEService *service)
         }
     } else {
         m_service->message(QObject::tr("File does not seem to be supported"));
+    }
+}
+
+bool UpdateFirmwareOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
+{
+    if (characteristic == BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE) {
+        qDebug() << "...got metadata";
+        return handleMetaData(value);
     }
 }
 
@@ -128,10 +136,6 @@ void UpdateFirmwareOperation::sendFirmwareData()
 
     BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
 
-
-//    if (prefs.getBoolean("mi_low_latency_fw_update", true)) {
-//        getSupport().setLowLatency(builder);
-//    }
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, getFirmwareStartCommand());
 
     for (int i = 0; i < packets; i++) {
@@ -143,7 +147,7 @@ void UpdateFirmwareOperation::sendFirmwareData()
         progressPercent = (int) ((((float) firmwareProgress) / len) * 100);
         if ((i > 0) && (i % 100 == 0)) {
             m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC));
-            serv->downloadProgress(progressPercent);
+            m_device->downloadProgress(progressPercent);
             //QApplication::processEvents();
 
         }
@@ -156,7 +160,7 @@ void UpdateFirmwareOperation::sendFirmwareData()
     }
 
     qDebug() << Q_FUNC_INFO << "Finished sending firmware";
-    serv->downloadProgress(100);
+    m_device->downloadProgress(progressPercent);
 
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, QByteArray(1, BipFirmwareService::COMMAND_FIRMWARE_UPDATE_SYNC));
 }

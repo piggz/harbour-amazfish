@@ -12,7 +12,7 @@ constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_COMPLETE_TRANSFER;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_FINALIZE_UPDATE;
 
 
-HuamiUpdateFirmwareOperation2020::HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service, QBLEService &mibandService) : UpdateFirmwareOperation(info, service), m_mibandService(mibandService)
+HuamiUpdateFirmwareOperation2020::HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service, QBLEService *mibandService, AbstractDevice *device) : UpdateFirmwareOperation(info, service, device), m_mibandService(mibandService)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -67,7 +67,7 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
             } else {
                 BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
                 if (serv) {
-                    serv->downloadProgress(0);
+                    m_device->downloadProgress(0);
                     m_service->message(QObject::tr("Update operation complete"));
                 }
             }
@@ -134,7 +134,7 @@ bool HuamiUpdateFirmwareOperation2020::sendFwInfo()
                 m_fwBytes[20],
                 m_fwBytes[21]
             };
-            m_mibandService.writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, UCHARARR_TO_BYTEARRAY(watchfaceConfig));
+            m_mibandService->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, UCHARARR_TO_BYTEARRAY(watchfaceConfig));
         }
     }
 
@@ -204,7 +204,7 @@ bool HuamiUpdateFirmwareOperation2020::sendFirmwareDataChunk(int offset) {
     }
 
     progressPercent = (int) ((((float) (offset + chunkLength)) / len) * 100);
-    serv->downloadProgress(progressPercent);
+    m_device->downloadProgress(progressPercent);
 
     qDebug() << Q_FUNC_INFO << "Finished sending chunk";
 

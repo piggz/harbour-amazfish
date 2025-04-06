@@ -6,7 +6,7 @@
 class HuamiUpdateFirmwareOperation2020 : public UpdateFirmwareOperation
 {
 public:
-    HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service, QBLEService &mibandService);
+    HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service, QBLEService *mibandService, AbstractDevice *device);
 
     bool handleMetaData(const QByteArray &meta) override;
     void start(QBLEService *service) override;
@@ -29,7 +29,7 @@ private:
     void sendTransferComplete();
     void sendFinalize();
 
-    QBLEService &m_mibandService;
+    QBLEService *m_mibandService;
 
     int mChunkLength = -1;
 };

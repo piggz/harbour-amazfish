@@ -349,7 +349,13 @@ void HuamiDevice::startDownload()
 {
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw){
-        fw->startDownload();
+        UpdateFirmwareOperation *operation = dynamic_cast<UpdateFirmwareOperation*>(fw->currentOperation());
+        if (operation) {
+            emit message(tr("Sending %1...").arg(operation->version()));
+            operation->start(fw);
+        } else {
+            emit message(tr("No file selected"));
+        }
     }
 }
 
@@ -369,7 +375,16 @@ void HuamiDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw){
-        fw->prepareFirmwareDownload(info, new UpdateFirmwareOperation(info, fw));
+        if (fw->currentOperation()) {
+            emit message(tr("An operation is currently running, please try later"));
+            return;
+        }
+        UpdateFirmwareOperation *updateFirmwareOperation =  new UpdateFirmwareOperation(info, fw, this);
+        if (fw->registerOperation(updateFirmwareOperation)) {
+            emit operationRunningChanged();
+        } else {
+            delete updateFirmwareOperation;
+        }
     }
 }
 

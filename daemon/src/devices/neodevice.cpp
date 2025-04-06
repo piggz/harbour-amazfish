@@ -2,9 +2,6 @@
 #include "neofirmwareinfo.h"
 #include <QtXml/QtXml>
 #include <QDateTime>
-#include "typeconversion.h"
-#include "updatefirmwareoperationnew.h"
-#include "amazfishconfig.h"
 
 NeoDevice::NeoDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
@@ -81,7 +78,6 @@ void NeoDevice::initialise()
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw) {
         connect(fw, &BipFirmwareService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
-        connect(fw, &BipFirmwareService::downloadProgress, this, &HuamiDevice::downloadProgress, Qt::UniqueConnection);
         connect(fw, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 

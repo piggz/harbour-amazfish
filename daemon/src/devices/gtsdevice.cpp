@@ -5,7 +5,6 @@
 #include "typeconversion.h"
 #include "updatefirmwareoperationnew.h"
 #include "huamiupdatefirmwareoperation2020.h"
-#include "amazfishconfig.h"
 
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
@@ -107,7 +106,6 @@ void GtsDevice::initialise()
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw) {
         connect(fw, &BipFirmwareService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
-        connect(fw, &BipFirmwareService::downloadProgress, this, &HuamiDevice::downloadProgress, Qt::UniqueConnection);
         connect(fw, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 
@@ -225,13 +223,28 @@ void GtsDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
 
     if (fw && mi){
+        if (fw->currentOperation()) {
+            emit message(tr("An operation is currently running, please try later"));
+            return;
+        }
+
         QString revision = softwareRevision();
+        AbstractOperation *operation;
         if (revision > "0.1.1.16") {
-            fw->prepareFirmwareDownload(info, new HuamiUpdateFirmwareOperation2020(info, fw, *mi));
+            operation =  new HuamiUpdateFirmwareOperation2020(info, fw, mi, this);
         } else {
-            fw->prepareFirmwareDownload(info, new UpdateFirmwareOperationNew(info, fw));
+            operation =  new UpdateFirmwareOperationNew(info, fw, this);
+        }
+
+
+        if (fw->registerOperation(operation)) {
+            emit operationRunningChanged();
+        } else {
+            delete operation;
         }
     }
+
+
 }
 
 void GtsDevice::applyDeviceSetting(AbstractDevice::Settings s)

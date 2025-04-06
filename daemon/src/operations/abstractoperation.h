@@ -16,6 +16,7 @@ public:
 
     virtual bool finished(bool success);
     bool busy();
+
 protected:
     bool m_busy = false;
 

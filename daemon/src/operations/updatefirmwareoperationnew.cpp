@@ -2,7 +2,7 @@
 #include"typeconversion.h"
 #include "bipfirmwareservice.h"
 
-UpdateFirmwareOperationNew::UpdateFirmwareOperationNew(const AbstractFirmwareInfo *info, QBLEService *service) : UpdateFirmwareOperation(info, service)
+UpdateFirmwareOperationNew::UpdateFirmwareOperationNew(const AbstractFirmwareInfo *info, QBLEService *service, AbstractDevice *device) : UpdateFirmwareOperation(info, service, device)
 {
     m_startWithFWInfo = false;
 }

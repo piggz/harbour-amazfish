@@ -33,10 +33,10 @@ bool ActivityFetchOperation::characteristicChanged(const QString &characteristic
 {
     if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         handleData(value);
-        return false;
     } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
         return handleMetaData(value);
     }
+    return false;
 }
 
 void ActivityFetchOperation::handleData(const QByteArray &data)

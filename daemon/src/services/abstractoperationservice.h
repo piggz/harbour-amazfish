@@ -13,6 +13,7 @@ public:
     explicit AbstractOperationService(const QString &uuid, const QString &path, QObject *parent);
 
     bool registerOperation(AbstractOperation *operation);
+    AbstractOperation *currentOperation();
     void notifyOperation(const QString &characteristic, const QByteArray &value);
     void cancelOperation();
 

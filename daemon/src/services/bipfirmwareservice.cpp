@@ -16,58 +16,5 @@ void BipFirmwareService::characteristicChanged(const QString &characteristic, co
 {
     qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value;
 
-    if (characteristic == UUID_CHARACTERISTIC_FIRMWARE) {
-        qDebug() << "...got metadata";
-        if (m_operationRunning == 1 && m_updateFirmware) {
-            if (m_updateFirmware->handleMetaData(value)) {
-                delete m_updateFirmware;
-                m_updateFirmware = nullptr;
-                m_operationRunning = 0;
-                emit operationRunningChanged();
-            }
-        }
-    }
-}
-
-void BipFirmwareService::prepareFirmwareDownload(const AbstractFirmwareInfo *info, UpdateFirmwareOperation* operation)
-{
-    if (!m_updateFirmware) {
-        m_updateFirmware = operation;
-    } else {
-        if (m_operationRunning == 1) {
-            emit message(tr("An operation is currently running, please try later"));
-        } else {
-            delete m_updateFirmware;
-            m_updateFirmware = new UpdateFirmwareOperation(info, this);
-        }
-    }
-}
-
-void BipFirmwareService::startDownload()
-{
-    if (m_updateFirmware && m_operationRunning == 0) {
-        m_operationRunning = 1;
-        emit operationRunningChanged();
-        emit message(tr("Sending %1...").arg(m_updateFirmware->version()));
-        m_updateFirmware->start(this);
-    } else {
-        emit message(tr("No file selected"));
-    }
-}
-
-bool BipFirmwareService::operationRunning()
-{
-    if (m_operationRunning > 0)
-        qDebug() << Q_FUNC_INFO << "Firmware operation running:" << m_operationRunning;
-    return m_operationRunning > 0;
-}
-
-void BipFirmwareService::abortOperations()
-{
-    if (m_updateFirmware) {
-        delete m_updateFirmware;
-        m_updateFirmware = nullptr;
-    }
-    m_operationRunning = 0;
-    emit operationRunningChanged();
+    AbstractOperationService::notifyOperation(characteristic, value);
 }

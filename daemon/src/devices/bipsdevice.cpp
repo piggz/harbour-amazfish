@@ -57,7 +57,6 @@ void BipSDevice::initialise()
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw) {
         connect(fw, &BipFirmwareService::message, this, &BipSDevice::message, Qt::UniqueConnection);
-        connect(fw, &BipFirmwareService::downloadProgress, this, &BipSDevice::downloadProgress, Qt::UniqueConnection);
         connect(fw, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 
