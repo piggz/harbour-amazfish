@@ -10,13 +10,16 @@ AbstractOperationService::AbstractOperationService(const QString &uuid, const QS
 
 bool AbstractOperationService::registerOperation(AbstractOperation *operation)
 {
+    qDebug() << Q_FUNC_INFO;
     if (m_currentOperation) {
         if (m_queuedOperation) {
             return false;
         }  else {
+            qDebug() << "Setting the queued operation";
             m_queuedOperation = operation;
         }
     } else {
+        qDebug() << "Setting the current operation";
         m_currentOperation = operation;
     }
     return true;
