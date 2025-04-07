@@ -130,7 +130,7 @@ struct summary_t {
 };
 #pragma pack(pop)
 
-SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn)
+SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn) : AbstractFetchOperation()
 {
     qDebug() << Q_FUNC_INFO;
     m_conn = conn;
@@ -140,6 +140,7 @@ SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnecti
 void SportsSummaryOperation::start(QBLEService *service)
 {
     qDebug() << Q_FUNC_INFO;
+    m_service = service;
     setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
 

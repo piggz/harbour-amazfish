@@ -47,6 +47,7 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO;
     if (!m_service) {
+        qDebug() << "No service set";
         return true;
     }
 
