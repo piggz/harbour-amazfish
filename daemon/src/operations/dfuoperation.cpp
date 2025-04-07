@@ -50,7 +50,7 @@ uint16_t getFirmwareCrc(QByteArray& manifestData, bool& valid) {
 }
 }
 
-DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service) : m_info(info)
+DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service, AbstractDevice *device) : m_info(info), m_device(device)
 {
 
 }
@@ -141,8 +141,17 @@ void DfuOperation::start(QBLEService *service)
         m_service->writeValue(DfuService::UUID_CHARACTERISTIC_DFU_CONTROL, UCHAR_TO_BYTEARRAY(DfuService::COMMAND_PACKET_RECEIPT_NOTIFICATION_REQUEST) + QByteArray(1, m_notificationPackets));
 
     } else {
-        emit transferError("File does not seem to be supported");
+        m_device->message(QObject::tr("File does not seem to be supported"));
     }
+}
+
+bool DfuOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
+{
+    if (characteristic == DfuService::UUID_CHARACTERISTIC_DFU_CONTROL) {
+        qDebug() << "...got metadata";
+        return handleMetaData(value);
+    }
+    return false;
 }
 
 bool DfuOperation::handleMetaData(const QByteArray &value)
@@ -206,7 +215,7 @@ bool DfuOperation::handleMetaData(const QByteArray &value)
         //Use the data from the notification to inform the UI on progress
         int progressPercent = (int) ((((float) bytesReceived) / m_uncompressedFwBytes.length()) * 100);
         DfuService *serv = qobject_cast<DfuService*>(m_service);
-        serv->downloadProgress(progressPercent);
+        m_device->downloadProgress(progressPercent);
         serv->setWaitForWatch(false);
         return false;
     }

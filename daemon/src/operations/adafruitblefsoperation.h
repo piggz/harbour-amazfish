@@ -2,6 +2,7 @@
 #define ADAFRUITBLEFSOPERATION_H
 
 #include "abstractoperation.h"
+#include "abstractdevice.h"
 #include "abstractfirmwareinfo.h"
 #include <future>
 
@@ -12,12 +13,12 @@ class AdafruitBleFsOperation : public QObject, public AbstractOperation
 {
     Q_OBJECT
 public:
-    AdafruitBleFsOperation(QBLEService *service, const AbstractFirmwareInfo *info);
+    AdafruitBleFsOperation(QBLEService *service, const AbstractFirmwareInfo *info, AbstractDevice *device);
     ~AdafruitBleFsOperation();
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
     void start(QBLEService *service) override;
-    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override {return false;};
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
     struct File {        
         std::string name;
@@ -71,8 +72,10 @@ private:
     BleFsWorker* m_worker = nullptr;
 
     QBLEService *m_service = nullptr;
+    AbstractDevice *m_device = nullptr;
 
     Q_SIGNAL void startUpdateFiles(AdafruitBleFsOperation* service, const int mtu);
+    Q_SLOT void workerDestroyed(QObject *object);
 };
 
 #endif // ADAFRUITBLEFSOPERATION_H

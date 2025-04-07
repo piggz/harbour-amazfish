@@ -19,33 +19,33 @@
 #include <QtXml/QtXml>
 
 namespace {
-    size_t GetMtuForCharacteristic(QString path, const char* characteristicUUID)
+size_t GetMtuForCharacteristic(QString path, const char* characteristicUUID)
+{
+    size_t transferMtu = 20;
+    QDBusInterface adapterIntro("org.bluez", path, "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
+    QDBusReply<QString> adapterXml = adapterIntro.call("Introspect");
+    QDomDocument adapterDoc;
+    adapterDoc.setContent(adapterXml.value());
+    QDomNodeList adapterNodes = adapterDoc.elementsByTagName("node");
+
+    for (int x = 0; x < adapterNodes.count(); x++)
     {
-        size_t transferMtu = 20;
-        QDBusInterface adapterIntro("org.bluez", path, "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
-        QDBusReply<QString> adapterXml = adapterIntro.call("Introspect");
-        QDomDocument adapterDoc;
-        adapterDoc.setContent(adapterXml.value());
-        QDomNodeList adapterNodes = adapterDoc.elementsByTagName("node");
-
-        for (int x = 0; x < adapterNodes.count(); x++)
-        {
-            QDomElement node = adapterNodes.at(x).toElement();
-            QString nodeName = node.attribute("name");
-            if (nodeName.startsWith("char")) {
-                QString nodePath = path + "/" + nodeName;
-                QDBusInterface characteristicInterface("org.bluez", nodePath, "org.bluez.GattCharacteristic1", QDBusConnection::systemBus(), 0);
-                QString currentCharacteristicUUID = characteristicInterface.property("UUID").toString();
-                if(currentCharacteristicUUID == characteristicUUID){
-                    QDBusInterface mtuInterface("org.bluez", nodePath, "org.bluez.GattCharacteristic1", QDBusConnection::systemBus(), 0);
-                    QString mtu = mtuInterface.property("MTU").toString();
-                    transferMtu = mtu.toInt();
-                }
-
+        QDomElement node = adapterNodes.at(x).toElement();
+        QString nodeName = node.attribute("name");
+        if (nodeName.startsWith("char")) {
+            QString nodePath = path + "/" + nodeName;
+            QDBusInterface characteristicInterface("org.bluez", nodePath, "org.bluez.GattCharacteristic1", QDBusConnection::systemBus(), 0);
+            QString currentCharacteristicUUID = characteristicInterface.property("UUID").toString();
+            if(currentCharacteristicUUID == characteristicUUID){
+                QDBusInterface mtuInterface("org.bluez", nodePath, "org.bluez.GattCharacteristic1", QDBusConnection::systemBus(), 0);
+                QString mtu = mtuInterface.property("MTU").toString();
+                transferMtu = mtu.toInt();
             }
+
         }
-        return transferMtu;
     }
+    return transferMtu;
+}
 }
 
 PinetimeJFDevice::PinetimeJFDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
@@ -87,7 +87,7 @@ void PinetimeJFDevice::abortOperations()
     qDebug() << Q_FUNC_INFO;
     DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
     if (fw){
-        fw->abortOperations();
+        fw->cancelOperation();
     }
 }
 
@@ -217,7 +217,6 @@ void PinetimeJFDevice::initialise()
     DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
     if (fw) {
         connect(fw, &DfuService::message, this, &PinetimeJFDevice::message, Qt::UniqueConnection);
-        connect(fw, &DfuService::downloadProgress, this, &PinetimeJFDevice::downloadProgress, Qt::UniqueConnection);
         connect(fw, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
     }
 
@@ -235,11 +234,6 @@ void PinetimeJFDevice::initialise()
         //motion->enableNotification(InfiniTimeMotionService::UUID_CHARACTERISTIC_MOTION_MOTION);
         connect(motion, &InfiniTimeMotionService::informationChanged, this, &AbstractDevice::informationChanged, Qt::UniqueConnection);
         connect(motion, &InfiniTimeMotionService::informationChanged, &realtimeActivitySample, &RealtimeActivitySample::slot_informationChanged, Qt::UniqueConnection);
-    }
-
-    AdafruitBleFsService *bleFs = qobject_cast<AdafruitBleFsService*>(service(AdafruitBleFsService::UUID_SERVICE_FS));
-    if (bleFs) {
-        connect(bleFs, &AdafruitBleFsService::downloadProgress, this, &PinetimeJFDevice::downloadProgress, Qt::UniqueConnection);
     }
 
     connect(&realtimeActivitySample, &RealtimeActivitySample::samplesReady, this, &PinetimeJFDevice::sampledActivity, Qt::UniqueConnection);
@@ -366,12 +360,30 @@ void PinetimeJFDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
     if(info->type() == AbstractFirmwareInfo::Type::Firmware) {
         DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
         if (fw){
-            fw->prepareFirmwareDownload(info);
+            if (fw->currentOperation()) {
+                emit message(tr("An operation is currently running, please try later"));
+                return;
+            }
+            DfuOperation *dfu = new DfuOperation(info, fw, this);
+            if (fw->registerOperation(dfu)) {
+                emit operationRunningChanged();
+            } else {
+                delete dfu;
+            }
         }
     } else if (info->type() == AbstractFirmwareInfo::Type::Res_Compressed) {
         AdafruitBleFsService* s = qobject_cast<AdafruitBleFsService*>(service(AdafruitBleFsService::UUID_SERVICE_FS));
         if(s) {
-            s->prepareDownload(new AdafruitBleFsOperation(s, info));
+            if (s->currentOperation()) {
+                emit message(tr("An operation is currently running, please try later"));
+                return;
+            }
+            AdafruitBleFsOperation *updateFirmwareOperation =  new AdafruitBleFsOperation(s, info, this);
+            if (s->registerOperation(updateFirmwareOperation)) {
+                emit operationRunningChanged();
+            } else {
+                delete updateFirmwareOperation;
+            }
         }
     }
 }
@@ -383,17 +395,27 @@ void PinetimeJFDevice::startDownload()
     if(firmwareType == AbstractFirmwareInfo::Type::Firmware)
     {
         DfuService *fw = qobject_cast<DfuService*>(service(DfuService::UUID_SERVICE_DFU));
-        if (fw)
-        {
-            fw->startDownload();
+        if (fw) {
+            DfuOperation *operation = dynamic_cast<DfuOperation*>(fw->currentOperation());
+            if (operation) {
+                emit message(tr("Sending file..."));
+                operation->start(fw);
+            } else {
+                emit message(tr("No file selected"));
+            }
         }
     }
     else if(firmwareType == AbstractFirmwareInfo::Type::Res_Compressed)
     {
         AdafruitBleFsService* s = qobject_cast<AdafruitBleFsService*>(service(AdafruitBleFsService::UUID_SERVICE_FS));
-        if(s)
-        {
-            s->updateFiles();
+        if(s) {
+            AdafruitBleFsOperation *operation = dynamic_cast<AdafruitBleFsOperation*>(s->currentOperation());
+            if (operation) {
+                emit message(tr("Sending file..."));
+                operation->start(s);
+            } else {
+                emit message(tr("No file selected"));
+            }
         }
     }
 }
@@ -413,7 +435,7 @@ void PinetimeJFDevice::refreshInformation()
     InfiniTimeMotionService *motion = qobject_cast<InfiniTimeMotionService*>(service(InfiniTimeMotionService::UUID_SERVICE_MOTION));
     if (motion) {
         motion->refreshSteps();
-//        motion->refreshMotion();
+        //        motion->refreshMotion();
     }
 
 }
@@ -520,11 +542,11 @@ void PinetimeJFDevice::applyDeviceSetting(Settings s)
 
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     switch(s) {
-        case SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
-            if (hrm) {
-                hrm->enableRealtimeHRMeasurement(AmazfishConfig::instance()->deviceRealtimeHRMMeasurement());
-            }
-            break;
+    case SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
+        if (hrm) {
+            hrm->enableRealtimeHRMeasurement(AmazfishConfig::instance()->deviceRealtimeHRMMeasurement());
+        }
+        break;
     }
 
 }

@@ -18,53 +18,7 @@ void DfuService::characteristicChanged(const QString &characteristic, const QByt
 {
     qDebug() << Q_FUNC_INFO << characteristic << value;
 
-    if (characteristic == UUID_CHARACTERISTIC_DFU_CONTROL) {
-        qDebug() << "...got metadata";
-        if (m_operationRunning == 1 && m_updateFirmware) {
-            if (m_updateFirmware->handleMetaData(value)) {
-                m_updateFirmware.release();
-                m_operationRunning = 0;
-            }
-        }
-    }
-}
-
-void DfuService::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
-{
-    if (m_operationRunning == 1) {
-        emit message(tr("An operation is currently running, please try later"));
-    } else {
-        m_updateFirmware.reset(new DfuOperation(info, this));
-    }
-}
-
-void DfuService::startDownload()
-{
-    qDebug() << Q_FUNC_INFO;
-    if (m_updateFirmware && m_operationRunning == 0) {
-        m_operationRunning = 1;
-        connect(m_updateFirmware.get(), &DfuOperation::transferError, this, &DfuService::onTransferError);
-        m_updateFirmware->start(this);
-    } else {
-        emit message(tr("No file selected"));
-    }
-}
-
-bool DfuService::operationRunning()
-{
-    if (m_operationRunning > 0)
-        qDebug() << Q_FUNC_INFO << "Firmware operation running:" << m_operationRunning;
-
-    return m_operationRunning > 0;
-}
-
-void DfuService::abortOperations()
-{
-    if (m_updateFirmware) {
-        m_updateFirmware.release();
-    }
-    m_operationRunning = 0;
-    emit operationRunningChanged();
+    AbstractOperationService::notifyOperation(characteristic, value);
 }
 
 void DfuService::setWaitForWatch(bool wait)
@@ -75,10 +29,4 @@ void DfuService::setWaitForWatch(bool wait)
 bool DfuService::waitForWatch()
 {
     return m_waitForWatch.load();
-}
-
-void DfuService::onTransferError(const QString error) {
-    m_operationRunning = 0;
-    qDebug() << Q_FUNC_INFO << "Transfer error:" << error;
-    emit message(error);
 }

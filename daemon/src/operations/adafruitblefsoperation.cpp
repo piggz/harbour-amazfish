@@ -3,7 +3,7 @@
 #include "adafruitblefsworker.h"
 #include <QMetaType>
 
-AdafruitBleFsOperation::AdafruitBleFsOperation(QBLEService *service, const AbstractFirmwareInfo *info) : info{info}
+AdafruitBleFsOperation::AdafruitBleFsOperation(QBLEService *service, const AbstractFirmwareInfo *info, AbstractDevice *device) : info{info}, m_device(device)
 {
 
 }
@@ -15,12 +15,44 @@ AdafruitBleFsOperation::~AdafruitBleFsOperation()
 
 void AdafruitBleFsOperation::start(QBLEService *service)
 {
-  m_service = service;
+    m_service = service;
+
+    AdafruitBleFsService *s = dynamic_cast<AdafruitBleFsService*>(service);
+    if (!s) {
+        return;
+    }
+
+    if(m_worker == nullptr)
+    {
+        m_worker = new BleFsWorker(info);
+        m_worker->moveToThread(&m_workerThread);
+        QObject::connect(&m_workerThread, &QThread::finished, m_worker, &QObject::deleteLater);
+        QObject::connect(this, &AdafruitBleFsOperation::startUpdateFiles, m_worker, &BleFsWorker::updateFiles);
+        QObject::connect(m_worker, &QObject::destroyed, this, &AdafruitBleFsOperation::workerDestroyed);
+
+        m_workerThread.start();
+    }
+
+    emit startUpdateFiles(this, s->mtu());
+}
+
+bool AdafruitBleFsOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
+{
+    if (!m_worker) {
+        return true;
+    }
+
+    if (characteristic == AdafruitBleFsService::UUID_CHARACTERISTIC_FS_VERSION) {
+        qDebug() << "Version : " << (value[0] + (value[1] << 8));
+    } else {
+        handleData(value);
+    }
+    return false;
 }
 
 bool AdafruitBleFsOperation::handleMetaData(const QByteArray &value)
 {
-  return true;
+    return true;
 }
 
 void AdafruitBleFsOperation::handleData(const QByteArray &data)
@@ -190,21 +222,8 @@ std::future<bool> AdafruitBleFsOperation::writeFileData(const std::vector<uint8_
     return writeFilePromise.get_future();
 }
 
-void AdafruitBleFsOperation::updateFiles(const int mtu)
-{
-    if(m_worker == nullptr)
-    {
-        m_worker = new BleFsWorker(info);
-        m_worker->moveToThread(&m_workerThread);
-        QObject::connect(&m_workerThread, &QThread::finished, m_worker, &QObject::deleteLater);
-        QObject::connect(this, &AdafruitBleFsOperation::startUpdateFiles, m_worker, &BleFsWorker::updateFiles);
-        m_workerThread.start();
-    }
-    emit startUpdateFiles(this, mtu);
-}
-
 void AdafruitBleFsOperation::downloadProgress(int percent) {
-    emit dynamic_cast<AdafruitBleFsService*>(m_service)->downloadProgress(percent);
+    m_device->downloadProgress(percent);
 }
 
 
@@ -241,4 +260,9 @@ std::future<bool> AdafruitBleFsOperation::createDirectory(const std::string& pat
 void AdafruitBleFsOperation::handleCreateDirectory(const QByteArray &value) {
     uint8_t status = value[1];
     createDirectoryPromise.set_value(status != static_cast<uint8_t>(Status::ReadOnly)); // In this case, ERROR means that the directory already existst
+}
+
+void AdafruitBleFsOperation::workerDestroyed(QObject *object)
+{
+    m_worker = nullptr;
 }

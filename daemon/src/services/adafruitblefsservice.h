@@ -1,7 +1,7 @@
 #ifndef ADAFRUITBLEFSSERVICE_H
 #define ADAFRUITBLEFSSERVICE_H
 
-#include "qble/qbleservice.h"
+#include "abstractoperationservice.h"
 #include "adafruitblefsoperation.h"
 
 /*
@@ -10,7 +10,7 @@
 --adaf0200-4669-6c65-5472-616e73666572 // transfer
 */
 
-class AdafruitBleFsService : public QBLEService
+class AdafruitBleFsService : public AbstractOperationService
 {
     Q_OBJECT
 
@@ -20,16 +20,12 @@ public:
     static const char *UUID_CHARACTERISTIC_FS_VERSION;
     static const char *UUID_CHARACTERISTIC_FS_TRANSFER;
 
-    void prepareDownload(AdafruitBleFsOperation* operation);
-    void updateFiles();
-
-    Q_SIGNAL void downloadProgress(int percent);
+    size_t mtu();
 
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 
-    AdafruitBleFsOperation* operation = nullptr;
-    const size_t mtu;
+    const size_t m_mtu;
 };
 
 #endif // ADAFRUITBLEFSSERVICE_H

@@ -1,10 +1,8 @@
 #ifndef DFUSERVICE_H
 #define DFUSERVICE_H
 
-#include <memory>
 #include "abstractoperationservice.h"
-#include "abstractfirmwareinfo.h"
-#include "dfuoperation.h"
+
 /*
 {00001530-1212-EFDE-1523-785FEABCD123} DFU Service
 --00001531-1212-EFDE-1523-785FEABCD123 //Control Point
@@ -48,22 +46,12 @@ public:
     static constexpr uint8_t ERROR_CRC_ERROR = 0x05;
     static constexpr uint8_t ERROR_OPERATION_FAILED = 0x06;
 
-    void prepareFirmwareDownload(const AbstractFirmwareInfo *info);
-    void startDownload();
-    Q_SIGNAL void downloadProgress(int percent);
-
-    Q_INVOKABLE virtual bool operationRunning() override;
-    void abortOperations();
-
     void setWaitForWatch(bool wait);
     bool waitForWatch();
 
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
-    Q_SLOT void onTransferError(const QString error);
 
-    int m_operationRunning = 0;
-    std::unique_ptr<DfuOperation> m_updateFirmware = nullptr;
     std::atomic<bool> m_waitForWatch;
 };
 

@@ -1,6 +1,7 @@
 #ifndef DFUOPERATION_H
 #define DFUOPERATION_H
 
+#include "abstractdevice.h"
 #include "abstractoperation.h"
 #include "dfuworker.h"
 
@@ -10,14 +11,13 @@ class DfuOperation : public QObject, public AbstractOperation
 {
     Q_OBJECT
 public:
-    DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service);
+    DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service, AbstractDevice *device);
     ~DfuOperation();
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
     void start(QBLEService *service) override;
-    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override {return false;};
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
-    Q_SIGNAL void transferError(const QString error);
 protected:
     const AbstractFirmwareInfo *m_info = nullptr;
     QByteArray m_uncompressedFwBytes;
@@ -38,6 +38,7 @@ private:
     Q_SLOT void packetNotification();
     bool probeArchive();
     QBLEService *m_service = nullptr;
-};
+    AbstractDevice *m_device = nullptr;
+    };
 
 #endif // DFUOPERATION_H

@@ -52,8 +52,6 @@ private:
     RealtimeActivitySample realtimeActivitySample;
 
     Q_SLOT void sampledActivity(QDateTime dt, int kind, int intensity, int steps, int heartrate);
-
-
 };
 
 #endif // PINETIMEJFDEVICE_H
