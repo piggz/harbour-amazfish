@@ -66,4 +66,5 @@ bool LogFetchOperation::characteristicChanged(const QString &characteristic, con
     } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
         return handleMetaData(value);
     }
+    return false;
 }

@@ -36,6 +36,7 @@ bool UpdateFirmwareOperation::characteristicChanged(const QString &characteristi
         qDebug() << "...got metadata";
         return handleMetaData(value);
     }
+    return false;
 }
 
 bool UpdateFirmwareOperation::handleMetaData(const QByteArray &value)
