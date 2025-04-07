@@ -132,12 +132,14 @@ struct summary_t {
 
 SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn)
 {
+    qDebug() << Q_FUNC_INFO;
     m_conn = conn;
     setLastSyncKey("device/lastsportsyncmillis");
 }
 
 void SportsSummaryOperation::start(QBLEService *service)
 {
+    qDebug() << Q_FUNC_INFO;
     setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
 
@@ -154,6 +156,7 @@ void SportsSummaryOperation::start(QBLEService *service)
 
 bool SportsSummaryOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
+    qDebug() << Q_FUNC_INFO;
     if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         handleData(value);
     } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
@@ -164,6 +167,7 @@ bool SportsSummaryOperation::characteristicChanged(const QString &characteristic
 
 void SportsSummaryOperation::handleData(const QByteArray &data)
 {
+    qDebug() << Q_FUNC_INFO;
     if (data.length() < 2) {
         qDebug() << Q_FUNC_INFO << "unexpected sports summary data length: " << data.length();
         return;
@@ -185,6 +189,7 @@ void SportsSummaryOperation::handleData(const QByteArray &data)
 
 bool SportsSummaryOperation::finished(bool success)
 {
+    qDebug() << Q_FUNC_INFO << success;
     if (success) {
         parseSummary();
         m_summary.setName(activityName());

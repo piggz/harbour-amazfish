@@ -46,6 +46,7 @@ QString HuamiDevice::softwareRevision()
 
 void HuamiDevice::downloadSportsData()
 {
+    qDebug() << Q_FUNC_INFO;
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
         SportsSummaryOperation *sportsSummaryOperation = new SportsSummaryOperation(mi, m_conn);

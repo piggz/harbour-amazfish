@@ -45,6 +45,7 @@ void AbstractFetchOperation::setLastSyncKey(const QString &key)
 
 bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 {
+    qDebug() << Q_FUNC_INFO;
     if (!m_service) {
         return true;
     }
