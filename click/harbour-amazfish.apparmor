@@ -1,5 +1,6 @@
 {
     "policy_groups": [
+        "usermetrics"
     ],
     "policy_version": 20.04,
     "template": "unconfined"

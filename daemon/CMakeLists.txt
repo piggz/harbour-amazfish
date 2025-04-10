@@ -216,7 +216,10 @@ elseif(FLAVOR STREQUAL "uuitk")
     target_include_directories(harbour-amazfishd PUBLIC ${PULSE_INCLUDE_DIRS})
     target_link_libraries(harbour-amazfishd PUBLIC ${PULSE_LIBRARIES} pulse-simple)
 
+    pkg_check_modules(LIBUSERMETRICSINPUT REQUIRED libusermetricsinput-1)
 
+    target_include_directories(harbour-amazfishd PUBLIC ${LIBUSERMETRICSINPUT_INCLUDE_DIRS})
+    target_link_libraries(harbour-amazfishd PUBLIC ${LIBUSERMETRICSINPUT_LIBRARIES})
 else()
     set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;soundprofile")
 endif()
