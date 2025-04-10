@@ -49,6 +49,8 @@ set(SOURCES
 ./src/operations/sportssummaryoperation.cpp
 ./src/operations/updatefirmwareoperation.cpp
 ./src/operations/updatefirmwareoperationnew.cpp
+./src/operations/huamiinitoperation2021.cpp
+./src/operations/huami2021chunkedencoder.cpp
 ./src/qaesencryption.cpp
 ./src/realtimeactivitysample.cpp
 ./src/services/abstractoperationservice.cpp
@@ -80,6 +82,7 @@ set(SOURCES
 ./src/services/uartservice.cpp
 ./src/transliterator.cpp
 ./src/typeconversion.cpp
+./src/ecdh/ecdh.c
 )
 
 set(HEADERS
@@ -133,6 +136,8 @@ set(HEADERS
 ./src/operations/sportssummaryoperation.h
 ./src/operations/updatefirmwareoperation.h
 ./src/operations/updatefirmwareoperationnew.h
+./src/operations/huamiinitoperation2021.h
+./src/operations/huami2021chunkedencoder.h
 ./src/qaesencryption.h
 ./src/realtimeactivitysample.h
 ./src/services/abstractoperationservice.h
@@ -164,9 +169,10 @@ set(HEADERS
 ./src/services/uartservice.h
 ./src/transliterator.h
 ./src/typeconversion.h
+./src/ecdh/ecdh.h
 )
 
-add_executable(harbour-amazfishd ${SOURCES} ${HEADERS})
+add_executable(harbour-amazfishd ${SOURCES} ${HEADERS} )
 
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)

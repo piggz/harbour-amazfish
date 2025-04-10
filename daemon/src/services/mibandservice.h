@@ -113,6 +113,22 @@ public:
     static constexpr uint8_t RESPONSE_FINISH_SUCCESS[3] {RESPONSE, COMMAND_FETCH_DATA, SUCCESS };
     static constexpr uint8_t RESPONSE_FINISH_FAIL[3] {RESPONSE, COMMAND_FETCH_DATA, FAIL };
 
+    /**
+     * Endpoints for 2021 chunked protocol
+     */
+    static const short CHUNKED2021_ENDPOINT_WEATHER = 0x000e;
+    static const short CHUNKED2021_ENDPOINT_CONNECTION = 0x0015;
+    static const short CHUNKED2021_ENDPOINT_USER_INFO = 0x0017;
+    static const short CHUNKED2021_ENDPOINT_STEPS = 0x0016;
+    static const short CHUNKED2021_ENDPOINT_VIBRATION_PATTERNS = 0x0018;
+    static const short CHUNKED2021_ENDPOINT_WORKOUT = 0x0019;
+    static const short CHUNKED2021_ENDPOINT_FIND_DEVICE = 0x001a;
+    static const short CHUNKED2021_ENDPOINT_HEARTRATE = 0x001d;
+    static const short CHUNKED2021_ENDPOINT_BATTERY = 0x0029;
+    static const short CHUNKED2021_ENDPOINT_SILENT_MODE = 0x003b;
+    static const short CHUNKED2021_ENDPOINT_AUTH = 0x0082;
+    static const short CHUNKED2021_ENDPOINT_COMPAT = 0x0090;
+
     void requestBatteryInfo();
     void requestGPSVersion();
     QString gpsVersion();

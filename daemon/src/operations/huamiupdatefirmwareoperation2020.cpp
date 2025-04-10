@@ -2,6 +2,7 @@
 #include"typeconversion.h"
 #include "bipfirmwareservice.h"
 #include "mibandservice.h"
+#include "ecdh/ecdh.h"
 
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_REQUEST_PARAMETERS;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_START_FILE;
