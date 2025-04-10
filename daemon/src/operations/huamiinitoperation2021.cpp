@@ -55,6 +55,8 @@ void HuamiInitOperation2021::start(QBLEService *service)
 
 bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
+    qDebug() << Q_FUNC_INFO << characteristic << value;
+
 #if 0
     UUID characteristicUUID = characteristic.getUuid();
     if (!HuamiService.UUID_CHARACTERISTIC_CHUNKEDTRANSFER_2021_READ.equals(characteristicUUID)) {
