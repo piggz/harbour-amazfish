@@ -12,6 +12,7 @@
 #include "gtrdevice.h"
 #include "gtr2device.h"
 #include "dk08device.h"
+#include "zepposdevice.h"
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 {
@@ -55,6 +56,10 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
 
     if (deviceName == "Mi Smart Band 4") {
         return new BipLiteDevice(deviceName);
+    }
+
+    if (deviceName == "Amazfit Balance") {
+        return new ZeppOSDevice(deviceName);
     }
 
     if (deviceName == "InfiniTime" || deviceName == "Pinetime-JF") {

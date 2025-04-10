@@ -95,6 +95,13 @@ ListModel {
     }
 
     ListElement {
+        deviceType: "Amazfit Balance"
+        icon: "../pics/devices/miband4.png"
+        auth: true
+        pattern: "Amazfit Balance"
+    }
+
+    ListElement {
         deviceType: "Pebble"
         icon: "../pics/devices/pebble.png"
         auth: false
