@@ -4,3 +4,6 @@
 [submodule "daemon/libwatchfish"]
 	path = daemon/libwatchfish
 	url = https://github.com/piggz/libwatchfish.git
+[submodule "daemon/Qt-AES"]
+	path = daemon/Qt-AES
+	url = https://github.com/bricke/Qt-AES/

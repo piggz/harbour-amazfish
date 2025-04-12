@@ -209,8 +209,7 @@ else()
 endif()
 
 add_subdirectory(libwatchfish)
-
-
+add_subdirectory(Qt-AES)
 
 install(TARGETS harbour-amazfishd RUNTIME
         DESTINATION ${CMAKE_INSTALL_BINDIR})
