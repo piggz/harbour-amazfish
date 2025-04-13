@@ -3,6 +3,7 @@
 
 #include "abstractoperation.h"
 #include "huami2021chunkedencoder.h"
+#include "huami2021chunkeddecoder.h"
 
 class HuamiInitOperation2021 : public AbstractOperation
 {
@@ -26,6 +27,7 @@ private:
     uint8_t m_finalSharedSessionAES[16];
 
     Huami2021ChunkedEncoder *m_encoder = nullptr;
+    Huami2021ChunkedDecoder *m_decoder = nullptr;
 
     void generateKeyPair();
 };

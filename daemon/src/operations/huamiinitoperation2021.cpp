@@ -47,6 +47,7 @@ void HuamiInitOperation2021::start(QBLEService *service)
     QByteArray sendPubkeyCommand;
 
     m_encoder = new Huami2021ChunkedEncoder(service->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE), true);
+    m_decoder = new Huami2021ChunkedDecoder(true);
 
     generateKeyPair();
 
@@ -94,10 +95,10 @@ bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic
         return false;
     }
 
-    // bool needsAck = huami2021ChunkedDecoder.decode(value);
-    // if (needsAck) {
-    //     huamiSupport.sendChunkedAck();
-    // }
+    bool needsAck = m_decoder->decode(value);
+    if (needsAck) {
+         //TODO huamiSupport.sendChunkedAck();
+    }
 
     return false;
 }
