@@ -52,6 +52,7 @@ set(SOURCES
 ./src/operations/updatefirmwareoperationnew.cpp
 ./src/operations/huamiinitoperation2021.cpp
 ./src/operations/huami2021chunkedencoder.cpp
+./src/operations/huami2021chunkeddecoder.cpp
 ./src/qaesencryption.cpp
 ./src/realtimeactivitysample.cpp
 ./src/services/abstractoperationservice.cpp
@@ -140,6 +141,7 @@ set(HEADERS
 ./src/operations/updatefirmwareoperationnew.h
 ./src/operations/huamiinitoperation2021.h
 ./src/operations/huami2021chunkedencoder.h
+./src/operations/huami2021chunkeddecoder.h
 ./src/qaesencryption.h
 ./src/realtimeactivitysample.h
 ./src/services/abstractoperationservice.h
@@ -174,7 +176,7 @@ set(HEADERS
 ./src/ecdh/ecdh.h
 )
 
-add_executable(harbour-amazfishd ${SOURCES} ${HEADERS} )
+add_executable(harbour-amazfishd ${SOURCES} ${HEADERS})
 
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)

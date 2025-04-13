@@ -10,6 +10,7 @@ public:
     HuamiInitOperation2021(bool needsAuth, uint8_t authFlags, uint8_t cryptFlags);
 
     void handleData(const QByteArray &data) override;
+    bool handleMetaData(const QByteArray &data) override;
     void start(QBLEService *service) override;
     bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 

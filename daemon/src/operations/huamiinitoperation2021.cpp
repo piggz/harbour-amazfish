@@ -13,7 +13,7 @@ uint8_t getRandomUint8() {
 
 HuamiInitOperation2021::HuamiInitOperation2021(bool needsAuth, uint8_t authFlags, uint8_t cryptFlags)
 {
-
+    qDebug() << Q_FUNC_INFO;
 }
 
 void HuamiInitOperation2021::handleData(const QByteArray &data)
@@ -21,8 +21,14 @@ void HuamiInitOperation2021::handleData(const QByteArray &data)
 
 }
 
+bool HuamiInitOperation2021::handleMetaData(const QByteArray &data)
+{
+return false;
+}
+
 void HuamiInitOperation2021::start(QBLEService *service)
 {
+    qDebug() << Q_FUNC_INFO;
 #if 0
     huamiSupport.enableNotifications(builder, true);
     builder.add(new SetDeviceStateAction(getDevice(), GBDevice.State.INITIALIZING, getContext()));
@@ -77,6 +83,21 @@ bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic
 
     return true;
 #endif
+
+    if (characteristic != MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ) {
+        qDebug() << "Unhandles characteristic";
+        return false;
+    }
+
+    if (value.length() <= 1 || value[0] != 0x03) {
+        //No chunked
+        return false;
+    }
+
+    // bool needsAck = huami2021ChunkedDecoder.decode(value);
+    // if (needsAck) {
+    //     huamiSupport.sendChunkedAck();
+    // }
 
     return false;
 }

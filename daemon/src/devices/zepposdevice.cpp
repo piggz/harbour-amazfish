@@ -1,6 +1,6 @@
 #include "zepposdevice.h"
-#include "amazfishconfig.h"
 #include "batteryservice.h"
+#include "huamiinitoperation2021.h"
 
 #include <QtXml/QtXml>
 #include <QDebug>
@@ -37,17 +37,17 @@ AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes)
 
 void ZeppOSDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
-
+    qDebug() << Q_FUNC_INFO;
 }
 
 void ZeppOSDevice::incomingCall(const QString &caller)
 {
-
+    qDebug() << Q_FUNC_INFO;
 }
 
 void ZeppOSDevice::incomingCallEnded()
 {
-
+    qDebug() << Q_FUNC_INFO;
 }
 
 
@@ -152,6 +152,10 @@ void ZeppOSDevice::initialise()
         connect(mi, &MiBandService::buttonPressed, this, &ZeppOSDevice::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &ZeppOSDevice::serviceEvent, Qt::UniqueConnection);
+
+        HuamiInitOperation2021 *init = new HuamiInitOperation2021(true, 0x00, 0x80);
+        mi->registerOperation(init);
+        init->start(mi);
     }
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
@@ -160,10 +164,6 @@ void ZeppOSDevice::initialise()
         connect(mi2, &MiBand2Service::authenticated, this, &HuamiDevice::authenticated, Qt::UniqueConnection);
 
         mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
-    }
-
-    if (mi2) {
-        mi2->initialise(false);
     }
 
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
