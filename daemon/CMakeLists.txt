@@ -176,7 +176,8 @@ set(HEADERS
 ./src/ecdh/ecdh.h
 )
 
-add_executable(harbour-amazfishd ${SOURCES} ${HEADERS})
+add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
+    src/operations/huami2020handler.h src/operations/huami2020handler.cpp)
 
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)

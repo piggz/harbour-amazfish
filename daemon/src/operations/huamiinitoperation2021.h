@@ -2,10 +2,11 @@
 #define HUAMIINITOPERATION2_21_H
 
 #include "abstractoperation.h"
+#include "huami2020handler.h"
 #include "huami2021chunkedencoder.h"
 #include "huami2021chunkeddecoder.h"
 
-class HuamiInitOperation2021 : public AbstractOperation
+class HuamiInitOperation2021 : public AbstractOperation, Huami2020Handler
 {
 public:
     HuamiInitOperation2021(bool needsAuth, uint8_t authFlags, uint8_t cryptFlags);
@@ -15,6 +16,7 @@ public:
     void start(QBLEService *service) override;
     bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
+    void handle2021Payload(short type, const QByteArray &data) override;
 
 
 private:

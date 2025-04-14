@@ -49,6 +49,7 @@ void HuamiInitOperation2021::start(QBLEService *service)
 
     m_encoder = new Huami2021ChunkedEncoder(service->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE), true);
     m_decoder = new Huami2021ChunkedDecoder(true);
+    m_decoder->setHuami2021Handler(this);
 
     generateKeyPair();
 
@@ -63,7 +64,7 @@ void HuamiInitOperation2021::start(QBLEService *service)
 
 bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << Q_FUNC_INFO << characteristic << value;
+    qDebug() << Q_FUNC_INFO << characteristic << value.toHex(':');
 
 #if 0
     UUID characteristicUUID = characteristic.getUuid();
@@ -87,7 +88,7 @@ bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic
 #endif
 
     if (characteristic != MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ) {
-        qDebug() << "Unhandles characteristic";
+        qDebug() << "Unhandled characteristic:" << characteristic;
         return false;
     }
 
@@ -115,6 +116,12 @@ bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic
     }
 
     return false;
+}
+
+void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &data)
+{
+    qDebug() << Q_FUNC_INFO << type << data.toHex(':');
+
 }
 
 void HuamiInitOperation2021::generateKeyPair()

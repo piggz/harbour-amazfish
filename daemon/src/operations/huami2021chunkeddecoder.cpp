@@ -24,7 +24,7 @@ uint8_t Huami2021ChunkedDecoder::lastCount()
 
 bool Huami2021ChunkedDecoder::decode(QByteArray data)
 {
-    qDebug() << Q_FUNC_INFO << data;
+    qDebug() << Q_FUNC_INFO << data.toHex(':');
 
     int i = 0;
     if (data.at(i++) != 0x03) {
@@ -91,16 +91,20 @@ bool Huami2021ChunkedDecoder::decode(QByteArray data)
         }
 
         qDebug() << m_reassemblyBuffer;
-        // try {
-        //     huami2021Handler.handle2021Payload((short) currentType, buf);
-        // } catch (final Exception e) {
-        //     LOG.error("Failed to handle payload", e);
-        // }
+        if (m_handler) {
+            m_handler->handle2021Payload(m_currentType, m_reassemblyBuffer);
+        }
+
         m_currentHandle = 0;
         m_currentType = 0;
     }
 
     qDebug() << Q_FUNC_INFO << needsAck;
     return needsAck;
+}
+
+void Huami2021ChunkedDecoder::setHuami2021Handler(Huami2020Handler *handler)
+{
+    m_handler = handler;
 }
 
