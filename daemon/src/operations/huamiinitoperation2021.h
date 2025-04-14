@@ -25,6 +25,7 @@ private:
     uint8_t m_remoteRandom[16];
     QByteArray m_sharedEC;
     uint8_t m_finalSharedSessionAES[16];
+    QBLEService *m_service = nullptr;
 
     Huami2021ChunkedEncoder *m_encoder = nullptr;
     Huami2021ChunkedDecoder *m_decoder = nullptr;

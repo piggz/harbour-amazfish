@@ -45,6 +45,7 @@ void HuamiInitOperation2021::start(QBLEService *service)
 #endif
 
     QByteArray sendPubkeyCommand;
+    m_service = service;
 
     m_encoder = new Huami2021ChunkedEncoder(service->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE), true);
     m_decoder = new Huami2021ChunkedDecoder(true);
@@ -91,13 +92,26 @@ bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic
     }
 
     if (value.length() <= 1 || value[0] != 0x03) {
-        //No chunked
+        //Not chunked
         return false;
     }
 
     bool needsAck = m_decoder->decode(value);
     if (needsAck) {
-         //TODO huamiSupport.sendChunkedAck();
+        qDebug() << "Sending ACK to device";
+        QByteArray ack;
+        ack.append(UCHAR_TO_BYTEARRAY(0x04));
+        ack.append(UCHAR_TO_BYTEARRAY(0x00));
+        ack.append(UCHAR_TO_BYTEARRAY(m_decoder->lastHandle()));
+        ack.append(UCHAR_TO_BYTEARRAY(0x01));
+        ack.append(UCHAR_TO_BYTEARRAY(m_decoder->lastCount()));
+
+        if (m_service) {
+            QBLECharacteristic *c = m_service->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ);
+            if (c) {
+                c->writeValue(ack);
+            }
+        }
     }
 
     return false;
