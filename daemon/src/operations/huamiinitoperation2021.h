@@ -25,7 +25,7 @@ private:
     uint8_t m_publicEC[48];
     uint8_t m_remotePublicEC[48];
     uint8_t m_remoteRandom[16];
-    QByteArray m_sharedEC;
+    uint8_t m_sharedEC[48];
     uint8_t m_finalSharedSessionAES[16];
     QBLEService *m_service = nullptr;
 
