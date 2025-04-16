@@ -145,7 +145,7 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         qDebug() << ecdh_shared_secret(m_privateEC, m_remotePublicEC, m_sharedEC);
 
         debugArrayPrint("m_remoteRandom", m_remoteRandom, 16);
-        debugArrayPrint("m_remotePublicEC", m_remotePublicEC, 16);
+        debugArrayPrint("m_remotePublicEC", m_remotePublicEC, 48);
         debugArrayPrint("m_privateEC", m_privateEC, 24);
         debugArrayPrint("m_publicEC", m_publicEC, 48);
         debugArrayPrint("m_sharedEC", m_sharedEC, 48);
