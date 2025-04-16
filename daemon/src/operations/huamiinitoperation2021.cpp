@@ -149,6 +149,7 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         for (int i = 0; i < 16; i++) {
             m_finalSharedSessionAES[i] = (m_sharedEC[i + 8] ^ secretKey[i]);
         }
+        qDebug() << "Secret Key: " << secretKey;
 
         QByteArray f;
         f.resize(16);
@@ -161,7 +162,7 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         m_decoder->setEncryptionParameters(f);
 
         QByteArray r;
-        f.resize(16);
+        r.resize(16);
         for (int i = 0; i < 16; i++) {
             r[i] = m_remoteRandom[i];
         }

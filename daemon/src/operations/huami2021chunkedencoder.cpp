@@ -10,7 +10,7 @@ Huami2021ChunkedEncoder::Huami2021ChunkedEncoder(QBLECharacteristic *characteris
 
 void Huami2021ChunkedEncoder::setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << encryptedSequenceNumber << sharedSessionKey.toHex(':');
     m_encryptedSequenceNumber = encryptedSequenceNumber;
     m_sharedSessionKey = sharedSessionKey;
 }

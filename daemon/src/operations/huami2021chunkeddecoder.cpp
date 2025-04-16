@@ -9,6 +9,7 @@ Huami2021ChunkedDecoder::Huami2021ChunkedDecoder(bool force2021Protocal) : m_for
 
 void Huami2021ChunkedDecoder::setEncryptionParameters(QByteArray sharedSessionKey)
 {
+    qDebug() << Q_FUNC_INFO << sharedSessionKey.toHex(':');
     m_sharedSessionKey = sharedSessionKey;
 }
 
