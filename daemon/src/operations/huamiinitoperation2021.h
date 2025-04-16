@@ -33,7 +33,7 @@ private:
     Huami2021ChunkedDecoder *m_decoder = nullptr;
 
     void generateKeyPair();
-    void debugArrayPrint(uint8_t *arr, int size);
+    void debugArrayPrint(const QString &name, uint8_t *arr, int size);
 };
 
 #endif // HUAMIINITOPERATION2_21_H

@@ -130,25 +130,26 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         return;
     }
 
-    if (payload[0] == MiBandService::RESPONSE && payload[1] == 0x04 && payload[2] == MiBandService::SUCCESS) {
+    if (payload[0] == MiBandService::RESPONSE && payload[1] == 0x04 && payload[2] == MiBandService::SUCCESS && payload.length() == 67) {
         qDebug() << "Got remote random + public key";
 
         for (int i = 0; i < 16; i++) {
             m_remoteRandom[i] = payload[i + 3];
         }
-        qDebug() << "m_remoteRandom: ";
-        debugArrayPrint(m_remoteRandom, 16);
 
         for (int i = 0; i < 48; i++) {
             m_remotePublicEC[i] = payload[i + 19];
-
         }
-        qDebug() << "m_remotePublicEC: ";
-        debugArrayPrint(m_remotePublicEC, 16);
 
         qDebug() << "Generating shared secret";
-
         qDebug() << ecdh_shared_secret(m_privateEC, m_remotePublicEC, m_sharedEC);
+
+        debugArrayPrint("m_remoteRandom", m_remoteRandom, 16);
+        debugArrayPrint("m_remotePublicEC", m_remotePublicEC, 16);
+        debugArrayPrint("m_privateEC", m_privateEC, 24);
+        debugArrayPrint("m_publicEC", m_publicEC, 48);
+        debugArrayPrint("m_sharedEC", m_sharedEC, 48);
+
         int encryptedSequenceNumber = (m_sharedEC[0] & 0xff) | ((m_sharedEC[1] & 0xff) << 8) | ((m_sharedEC[2] & 0xff) << 16) | ((m_sharedEC[3] & 0xff) << 24);
 
         QByteArray secretKey = QByteArray::fromHex(AmazfishConfig::instance()->deviceAuthKey().toLocal8Bit());
@@ -187,6 +188,8 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         } else {
             qDebug() << "Random lengths not 16:" << encryptedRandom1.length() << encryptedRandom2.length();
         }
+    } else {
+        qDebug() << "Unexpected payload";
     }
 #if 0
     if (type != Huami2021Service.CHUNKED2021_ENDPOINT_AUTH) {
@@ -264,18 +267,12 @@ void HuamiInitOperation2021::generateKeyPair()
         m_privateEC[i] = getRandomUint8();
     }
     ecdh_generate_keys(m_publicEC, m_privateEC);
-
-
-    qDebug() << "privateEC ";
-    debugArrayPrint(m_privateEC, 24);
-    qDebug() << "publicEC ";
-    debugArrayPrint(m_publicEC, 48);
 }
 
-void HuamiInitOperation2021::debugArrayPrint(uint8_t *arr, int size)
+void HuamiInitOperation2021::debugArrayPrint(const QString &name, uint8_t *arr, int size)
 {
+    qDebug() << name << ":";
     QDebug dbg(QtDebugMsg);
-
     for (int i = 0; i < size; i++) {
         dbg << Qt::hex << arr[i] << (i < size ? ':' : '\n');
     }
