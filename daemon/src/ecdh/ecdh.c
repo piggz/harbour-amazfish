@@ -37,6 +37,7 @@
 */
 
 #include <stdint.h>
+#include <stdio.h>
 #include "ecdh.h"
 
 

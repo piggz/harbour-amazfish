@@ -4,6 +4,7 @@
 #include "mibandservice.h"
 #include "amazfishconfig.h"
 #include <Qt-AES/qaesencryption.h>
+#include <iostream>
 
 uint8_t getRandomUint8() {
     static std::random_device rd;  // Non-deterministic random device
@@ -135,21 +136,26 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         for (int i = 0; i < 16; i++) {
             m_remoteRandom[i] = payload[i + 3];
         }
+        qDebug() << "m_remoteRandom: ";
+        debugArrayPrint(m_remoteRandom, 16);
 
         for (int i = 0; i < 48; i++) {
             m_remotePublicEC[i] = payload[i + 19];
+
         }
+        qDebug() << "m_remotePublicEC: ";
+        debugArrayPrint(m_remotePublicEC, 16);
 
         qDebug() << "Generating shared secret";
 
-        ecdh_shared_secret(m_privateEC, m_remotePublicEC, m_sharedEC);
+        qDebug() << ecdh_shared_secret(m_privateEC, m_remotePublicEC, m_sharedEC);
         int encryptedSequenceNumber = (m_sharedEC[0] & 0xff) | ((m_sharedEC[1] & 0xff) << 8) | ((m_sharedEC[2] & 0xff) << 16) | ((m_sharedEC[3] & 0xff) << 24);
 
         QByteArray secretKey = QByteArray::fromHex(AmazfishConfig::instance()->deviceAuthKey().toLocal8Bit());
         for (int i = 0; i < 16; i++) {
             m_finalSharedSessionAES[i] = (m_sharedEC[i + 8] ^ secretKey[i]);
         }
-        qDebug() << "Secret Key: " << secretKey;
+        qDebug() << "Secret Key: " << secretKey.toHex(';');
 
         QByteArray f;
         f.resize(16);
@@ -258,5 +264,20 @@ void HuamiInitOperation2021::generateKeyPair()
         m_privateEC[i] = getRandomUint8();
     }
     ecdh_generate_keys(m_publicEC, m_privateEC);
+
+
+    qDebug() << "privateEC ";
+    debugArrayPrint(m_privateEC, 24);
+    qDebug() << "publicEC ";
+    debugArrayPrint(m_publicEC, 48);
+}
+
+void HuamiInitOperation2021::debugArrayPrint(uint8_t *arr, int size)
+{
+    QDebug dbg(QtDebugMsg);
+
+    for (int i = 0; i < size; i++) {
+        dbg << Qt::hex << arr[i] << (i < size ? ':' : '\n');
+    }
 }
 
