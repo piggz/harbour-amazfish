@@ -91,7 +91,7 @@ bool Huami2021ChunkedDecoder::decode(QByteArray data)
             m_reassemblyBuffer = m_reassemblyBuffer.mid(0, m_currentLength);
         }
 
-        qDebug() << m_reassemblyBuffer;
+        qDebug() << m_reassemblyBuffer.toHex(':');
         if (m_handler) {
             m_handler->handle2021Payload(m_currentType, m_reassemblyBuffer);
         }
