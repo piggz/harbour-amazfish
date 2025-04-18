@@ -550,25 +550,14 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
             m_lastBatteryLevel = battery_level;
         }
     }
-#ifdef UUITK_EDITION
     if (key == AbstractDevice::INFO_STEPS) {
         bool conversionOk = false;
         int steps = val.toInt(&conversionOk);
         if (conversionOk) {
-            MetricManagerPtr manager(MetricManager::getInstance());
-            MetricPtr metric(
-                manager->add(
-                    MetricParameters("uk.co.piggz.harbour-amazfish.steps-metric")
-                      .formatString("<b>%1</b> steps made today")
-                      .emptyDataString("No steps measured today")
-                      .textDomain("harbour-amazfish")
-                )
-            );
-            metric->update((double)steps);
-            qDebug() << "metric-update(double steps)" << steps;
+            auto goal = AmazfishConfig::instance()->profileFitnessGoal();
+            m_achievements.updateStepsStatus(steps, goal);
         }
     }
-#endif
 
     emit informationChanged(key, val);
 }
