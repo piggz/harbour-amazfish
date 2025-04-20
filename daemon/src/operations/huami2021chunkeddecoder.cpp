@@ -68,7 +68,7 @@ bool Huami2021ChunkedDecoder::decode(QByteArray data)
     }
 
     //m_reassemblyBuffer.put(data, i, data.length() - i);
-    for (int j = i; j < data.length() - i; j++) {
+    for (int j = i; j < data.length(); j++) {
         m_reassemblyBuffer[j-i] = (data[j]);
     }
     if (lastChunk) { // end
