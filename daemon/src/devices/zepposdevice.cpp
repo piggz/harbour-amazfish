@@ -38,6 +38,10 @@ AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes)
 void ZeppOSDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
     qDebug() << Q_FUNC_INFO;
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->sendAlert(sender, subject, message);
+    }
 }
 
 void ZeppOSDevice::incomingCall(const QString &caller)
@@ -152,7 +156,7 @@ void ZeppOSDevice::initialise()
         connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &ZeppOSDevice::serviceEvent, Qt::UniqueConnection);
 
-        HuamiInitOperation2021 *init = new HuamiInitOperation2021(true, 0x00, 0x80);
+        HuamiInitOperation2021 *init = new HuamiInitOperation2021(true, 0x00, 0x80, this);
         mi->registerOperation(init);
         init->start(mi);
     }
