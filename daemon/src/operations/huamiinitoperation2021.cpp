@@ -3,6 +3,7 @@
 #include "ecdh/ecdh.h"
 #include "mibandservice.h"
 #include "amazfishconfig.h"
+#include "typeconversion.h"
 #include <Qt-AES/qaesencryption.h>
 #include <iostream>
 
@@ -150,8 +151,7 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         debugArrayPrint("m_publicEC", m_publicEC, 48);
         debugArrayPrint("m_sharedEC", m_sharedEC, 48);
 
-        int encryptedSequenceNumber = (m_sharedEC[0] & 0xff) | ((m_sharedEC[1] & 0xff) << 8) | ((m_sharedEC[2] & 0xff) << 16) | ((m_sharedEC[3] & 0xff) << 24);
-
+        uint32_t encryptedSequenceNumber = TypeConversion::toUint32(m_sharedEC[0], m_sharedEC[1], m_sharedEC[2], m_sharedEC[3]);
         QByteArray secretKey = QByteArray::fromHex(AmazfishConfig::instance()->deviceAuthKey().toLocal8Bit());
         for (int i = 0; i < 16; i++) {
             m_finalSharedSessionAES[i] = (m_sharedEC[i + 8] ^ secretKey[i]);
