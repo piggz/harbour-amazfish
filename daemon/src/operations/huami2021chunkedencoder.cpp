@@ -46,20 +46,20 @@ void Huami2021ChunkedEncoder::write(short type, QByteArray data, bool extendedFl
         }
 
         QByteArray encryptable_payload;
-        encryptable_payload.append(data);
-        encryptable_payload.append(UCHAR_TO_BYTEARRAY((m_encryptedSequenceNumber & 0xff)));
-        encryptable_payload.append(UCHAR_TO_BYTEARRAY(((m_encryptedSequenceNumber >> 8) & 0xff)));
-        encryptable_payload.append(UCHAR_TO_BYTEARRAY(((m_encryptedSequenceNumber >> 16) & 0xff)));
-        encryptable_payload.append(UCHAR_TO_BYTEARRAY(((m_encryptedSequenceNumber >> 24) & 0xff)));
+        encryptable_payload += data;
+        encryptable_payload += UCHARVAL_TO_BYTEARRAY((m_encryptedSequenceNumber & 0xff));
+        encryptable_payload += UCHARVAL_TO_BYTEARRAY(((m_encryptedSequenceNumber >> 8) & 0xff));
+        encryptable_payload += UCHARVAL_TO_BYTEARRAY(((m_encryptedSequenceNumber >> 16) & 0xff));
+        encryptable_payload += UCHARVAL_TO_BYTEARRAY(((m_encryptedSequenceNumber >> 24) & 0xff));
 
         m_encryptedSequenceNumber++;
 
         int checksum = calcCrc32(encryptable_payload);
 
-        encryptable_payload.append(UCHAR_TO_BYTEARRAY((checksum & 0xff)));
-        encryptable_payload.append(UCHAR_TO_BYTEARRAY(((checksum >> 8) & 0xff)));
-        encryptable_payload.append(UCHAR_TO_BYTEARRAY(((checksum >> 16) & 0xff)));
-        encryptable_payload.append(UCHAR_TO_BYTEARRAY(((checksum >> 24) & 0xff)));
+        encryptable_payload += UCHARVAL_TO_BYTEARRAY((checksum & 0xff));
+        encryptable_payload += UCHARVAL_TO_BYTEARRAY(((checksum >> 8) & 0xff));
+        encryptable_payload += UCHARVAL_TO_BYTEARRAY(((checksum >> 16) & 0xff));
+        encryptable_payload += UCHARVAL_TO_BYTEARRAY(((checksum >> 24) & 0xff));
 
         remaining = encrypted_length;
         data = QAESEncryption::Crypt(QAESEncryption::AES_128, QAESEncryption::ECB, encryptable_payload, messageKey, QByteArray(), QAESEncryption::ZERO);

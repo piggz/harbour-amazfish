@@ -26,26 +26,12 @@ void HuamiInitOperation2021::handleData(const QByteArray &data)
 
 bool HuamiInitOperation2021::handleMetaData(const QByteArray &data)
 {
-return false;
+    return false;
 }
 
 void HuamiInitOperation2021::start(QBLEService *service)
 {
     qDebug() << Q_FUNC_INFO;
-#if 0
-    huamiSupport.enableNotifications(builder, true);
-    builder.add(new SetDeviceStateAction(getDevice(), GBDevice.State.INITIALIZING, getContext()));
-    // get random auth number
-    generateKeyPair();
-    byte[] sendPubkeyCommand = new byte[48 + 4];
-    sendPubkeyCommand[0] = 0x04;
-    sendPubkeyCommand[1] = 0x02;
-    sendPubkeyCommand[2] = 0x00;
-    sendPubkeyCommand[3] = 0x02;
-    System.arraycopy(publicEC, 0, sendPubkeyCommand, 4, 48);
-    //testAuth();
-    huami2021ChunkedEncoder.write(builder, Huami2021Service.CHUNKED2021_ENDPOINT_AUTH, sendPubkeyCommand, true, false);
-#endif
 
     QByteArray sendPubkeyCommand;
     m_service = service;
@@ -62,33 +48,11 @@ void HuamiInitOperation2021::start(QBLEService *service)
     sendPubkeyCommand += QByteArray(1, 0x02);
     sendPubkeyCommand += UCHARARR_TO_BYTEARRAY(m_publicEC);
     m_encoder->write(MiBandService::CHUNKED2021_ENDPOINT_AUTH, sendPubkeyCommand, true, false);
-
 }
 
 bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO << characteristic << value.toHex(':');
-
-#if 0
-    UUID characteristicUUID = characteristic.getUuid();
-    if (!HuamiService.UUID_CHARACTERISTIC_CHUNKEDTRANSFER_2021_READ.equals(characteristicUUID)) {
-        LOG.info("Unhandled characteristic changed: " + characteristicUUID);
-        return super.onCharacteristicChanged(gatt, characteristic);
-    }
-
-    byte[] value = characteristic.getValue();
-    if (value.length <= 1 || value[0] != 0x03) {
-        // Not chunked
-        return super.onCharacteristicChanged(gatt, characteristic);
-    }
-
-    final boolean needsAck = huami2021ChunkedDecoder.decode(value);
-    if (needsAck) {
-        huamiSupport.sendChunkedAck();
-    }
-
-    return true;
-#endif
 
     if (characteristic != MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ) {
         qDebug() << "Unhandled characteristic:" << characteristic;
@@ -104,11 +68,11 @@ bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic
     if (needsAck) {
         qDebug() << "Sending ACK to device";
         QByteArray ack;
-        ack.append(UCHAR_TO_BYTEARRAY(0x04));
-        ack.append(UCHAR_TO_BYTEARRAY(0x00));
-        ack.append(UCHAR_TO_BYTEARRAY(m_decoder->lastHandle()));
-        ack.append(UCHAR_TO_BYTEARRAY(0x01));
-        ack.append(UCHAR_TO_BYTEARRAY(m_decoder->lastCount()));
+        ack += CMD_PUB_KEY;
+        ack += UCHARVAL_TO_BYTEARRAY(0x00);
+        ack += m_decoder->lastHandle();
+        ack += 0x01;
+        ack += m_decoder->lastCount();
 
         if (m_service) {
             QBLECharacteristic *c = m_service->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ);
@@ -118,7 +82,7 @@ bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic
         }
     }
 
-    return false;
+    return m_done;
 }
 
 void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &payload)
@@ -178,9 +142,9 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
 
         if (encryptedRandom1.length() == 16 && encryptedRandom2.length() == 16) {
             QByteArray command;
-            command.append(0x05);
-            command.append(encryptedRandom1);
-            command.append(encryptedRandom2);
+            command += CMD_SESSION_KEY;
+            command += encryptedRandom1;
+            command += encryptedRandom2;
 
             m_encoder->write(MiBandService::CHUNKED2021_ENDPOINT_AUTH, command, true, false);
             //huamiSupport.performImmediately(builder);
@@ -192,7 +156,7 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         if (m_device) {
             m_device->authenticated(true);
         }
-
+        m_done = true;
     } else {
         qDebug() << "Unexpected payload";
     }

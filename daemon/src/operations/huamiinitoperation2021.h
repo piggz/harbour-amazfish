@@ -33,6 +33,7 @@ private:
     uint8_t m_finalSharedSessionAES[16];
     QBLEService *m_service = nullptr;
     HuamiDevice *m_device = nullptr;
+    bool m_done = false;
 
     Huami2021ChunkedEncoder *m_encoder = nullptr;
     Huami2021ChunkedDecoder *m_decoder = nullptr;
