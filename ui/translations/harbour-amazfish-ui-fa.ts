@@ -373,7 +373,7 @@
     </message>
     <message>
         <source>Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>ارتفاع</translation>
     </message>
     <message>
         <source>Distance</source>
@@ -793,7 +793,7 @@
     </message>
     <message>
         <source>Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>شمارش معکوس</translation>
     </message>
     <message>
         <source>Take Photo</source>
@@ -801,7 +801,7 @@
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان‌سنج</translation>
     </message>
     <message>
         <source>Find Phone</source>
@@ -817,7 +817,7 @@
     </message>
     <message>
         <source>Timer/Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان‌سنج و شمارش معکوس</translation>
     </message>
     <message>
         <source>Goal</source>
@@ -1070,19 +1070,19 @@
     </message>
     <message>
         <source>Ascent</source>
-        <translation type="unfinished"></translation>
+        <translation>بالا رفتن</translation>
     </message>
     <message>
         <source>Descent</source>
-        <translation type="unfinished"></translation>
+        <translation>پایین آمدن</translation>
     </message>
     <message>
         <source>Max Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>بیشینهٔ ارتفاع</translation>
     </message>
     <message>
         <source>Min Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>کمینهٔ ارتفاع</translation>
     </message>
     <message>
         <source>Min Pace</source>
@@ -1102,7 +1102,7 @@
     </message>
     <message>
         <source>Average Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>قدم متوسّط</translation>
     </message>
     <message>
         <source>Max HR</source>
@@ -1110,15 +1110,15 @@
     </message>
     <message>
         <source>Time Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان بالا رفتن</translation>
     </message>
     <message>
         <source>Time Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان پایین آمدن</translation>
     </message>
     <message>
         <source>Time Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان صاف رفتن</translation>
     </message>
     <message>
         <source>Average Stroke</source>
@@ -1130,7 +1130,7 @@
     </message>
     <message>
         <source>Average Lap Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>سرعت متوسّط دور</translation>
     </message>
     <message>
         <source>Strokes</source>
@@ -1138,11 +1138,11 @@
     </message>
     <message>
         <source>SWOLF Index</source>
-        <translation type="unfinished"></translation>
+        <translation>شاخص SWOLF</translation>
     </message>
     <message>
         <source>Swim Style</source>
-        <translation type="unfinished"></translation>
+        <translation>سبک شنا</translation>
     </message>
     <message>
         <source>Laps</source>
@@ -1150,19 +1150,19 @@
     </message>
     <message>
         <source>Max Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>بیشینهٔ عرض</translation>
     </message>
     <message>
         <source>Min Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>کمینهٔ عرض</translation>
     </message>
     <message>
         <source>Max Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>بیشینهٔ طول</translation>
     </message>
     <message>
         <source>Min Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>کمینهٔ طول</translation>
     </message>
     <message>
         <source>Max Speed</source>
@@ -1170,7 +1170,7 @@
     </message>
     <message>
         <source>Total Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>محموع قدم</translation>
     </message>
     <message>
         <source>steps</source>
@@ -1214,7 +1214,7 @@
     </message>
     <message>
         <source>swolf</source>
-        <translation type="unfinished"></translation>
+        <translation>swolf</translation>
     </message>
 </context>
 <context>
