@@ -3,8 +3,8 @@
 
 #include "abstractoperation.h"
 #include "huami2020handler.h"
-#include "huami2021chunkedencoder.h"
-#include "huami2021chunkeddecoder.h"
+#include "devices/zeppos/huami2021chunkedencoder.h"
+#include "devices/zeppos/huami2021chunkeddecoder.h"
 #include "huamidevice.h"
 
 class HuamiInitOperation2021 : public AbstractOperation, Huami2020Handler

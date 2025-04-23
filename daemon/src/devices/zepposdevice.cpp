@@ -2,6 +2,8 @@
 #include "batteryservice.h"
 #include "huamiinitoperation2021.h"
 
+#include "zeppos/zepposnotificationservice.h"
+
 #include <QtXml/QtXml>
 #include <QDebug>
 
@@ -38,10 +40,7 @@ AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes)
 void ZeppOSDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
 {
     qDebug() << Q_FUNC_INFO;
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        mi->sendAlert(sender, subject, message);
-    }
+    notificationService->sendAlert(sender, subject, message);
 }
 
 void ZeppOSDevice::incomingCall(const QString &caller)
@@ -52,6 +51,11 @@ void ZeppOSDevice::incomingCall(const QString &caller)
 void ZeppOSDevice::incomingCallEnded()
 {
     qDebug() << Q_FUNC_INFO;
+}
+
+void ZeppOSDevice::writeToChunked2021(short endpoint, QByteArray data, bool encryptIgnored)
+{
+    m_encoder->write(endpoint, data, true, encryptIgnored);
 }
 
 
@@ -150,6 +154,9 @@ void ZeppOSDevice::initialise()
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ);
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER);
 
+        m_encoder = new Huami2021ChunkedEncoder(mi->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE), true);
+        m_decoder = new Huami2021ChunkedDecoder(true);
+
         connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
         connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &ZeppOSDevice::handleButtonPressed, Qt::UniqueConnection);
@@ -158,6 +165,8 @@ void ZeppOSDevice::initialise()
 
         HuamiInitOperation2021 *init = new HuamiInitOperation2021(true, 0x00, 0x80, this);
         mi->registerOperation(init);
+
+        notificationService = new ZeppOsNotificationService(this, true);
         init->start(mi);
     }
 

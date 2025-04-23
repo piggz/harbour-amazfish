@@ -34,6 +34,9 @@ set(SOURCES
 ./src/devices/pebbledevice.cpp
 ./src/devices/pinetimejfdevice.cpp
 ./src/devices/zepposdevice.cpp
+./src/devices/zeppos/abstractzepposservice.cpp
+./src/devices/zeppos/huami2021chunkedencoder.cpp
+./src/devices/zeppos/huami2021chunkeddecoder.cpp
 ./src/harbour-amazfish-daemon.cpp
 ./src/huamiweathercondition.cpp
 ./src/navigationinterface.cpp
@@ -51,8 +54,7 @@ set(SOURCES
 ./src/operations/updatefirmwareoperation.cpp
 ./src/operations/updatefirmwareoperationnew.cpp
 ./src/operations/huamiinitoperation2021.cpp
-./src/operations/huami2021chunkedencoder.cpp
-./src/operations/huami2021chunkeddecoder.cpp
+./src/operations/huami2020handler.cpp
 ./src/qaesencryption.cpp
 ./src/realtimeactivitysample.cpp
 ./src/services/abstractoperationservice.cpp
@@ -124,6 +126,9 @@ set(HEADERS
 ./src/devices/pebbledevice.h
 ./src/devices/pinetimejfdevice.h
 ./src/devices/zepposdevice.h
+./src/devices/zeppos/abstractzepposservice.h
+./src/devices/zeppos/huami2021chunkedencoder.h
+./src/devices/zeppos/huami2021chunkeddecoder.h
 ./src/huamiweathercondition.h
 ./src/navigationinterface.h
 ./src/operations/abstractfetchoperation.h
@@ -140,8 +145,7 @@ set(HEADERS
 ./src/operations/updatefirmwareoperation.h
 ./src/operations/updatefirmwareoperationnew.h
 ./src/operations/huamiinitoperation2021.h
-./src/operations/huami2021chunkedencoder.h
-./src/operations/huami2021chunkeddecoder.h
+./src/operations/huami2020handler.h
 ./src/qaesencryption.h
 ./src/realtimeactivitysample.h
 ./src/services/abstractoperationservice.h
@@ -177,7 +181,7 @@ set(HEADERS
 )
 
 add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
-    src/operations/huami2020handler.h src/operations/huami2020handler.cpp)
+    src/devices/zeppos/zepposnotificationservice.h src/devices/zeppos/zepposnotificationservice.cpp)
 
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)
