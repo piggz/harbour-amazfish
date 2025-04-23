@@ -14,7 +14,7 @@ uint8_t getRandomUint8() {
     return static_cast<uint8_t>(dist(gen));
 }
 
-HuamiInitOperation2021::HuamiInitOperation2021(bool needsAuth, uint8_t authFlags, uint8_t cryptFlags, HuamiDevice *device) : m_device(device)
+HuamiInitOperation2021::HuamiInitOperation2021(bool needsAuth, uint8_t authFlags, uint8_t cryptFlags, HuamiDevice *device, Huami2021ChunkedEncoder *encoder, Huami2021ChunkedDecoder *decoder) : m_device(device), m_encoder(encoder), m_decoder(decoder)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -36,8 +36,6 @@ void HuamiInitOperation2021::start(QBLEService *service)
     QByteArray sendPubkeyCommand;
     m_service = service;
 
-    m_encoder = new Huami2021ChunkedEncoder(service->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE), true);
-    m_decoder = new Huami2021ChunkedDecoder(true);
     m_decoder->setHuami2021Handler(this);
 
     generateKeyPair();

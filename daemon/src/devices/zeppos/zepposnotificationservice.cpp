@@ -102,6 +102,7 @@ void ZeppOsNotificationService::sendAlert(const QString &sender, const QString &
     cmd += NOTIFICATION_SUBCMD_SHOW;
 
     //TODO Application ID here?
+    cmd += "Amazfish";
     cmd += (uint8_t)0x00;
 
     //TODO Sender
@@ -126,9 +127,31 @@ void ZeppOsNotificationService::sendAlert(const QString &sender, const QString &
     //Has reply?
     cmd += (uint8_t)0x00;
 
+    //Pad
+    cmd += (uint8_t)0x00;
+
     //Write
     m_device->writeToChunked2021(endpoint(), cmd, encrypted());
 
+}
+
+void ZeppOsNotificationService::incomingCall(const QString &caller)
+{
+    QByteArray cmd;
+
+    cmd += NOTIFICATION_CMD_SEND;
+    cmd += TypeConversion::fromInt32(0);
+    cmd += NOTIFICATION_TYPE_CALL;
+    cmd += NOTIFICATION_CALL_STATE_START;
+    cmd += (uint8_t)0x00;
+    cmd += caller.toUtf8();
+    cmd += (uint8_t)0x00;
+    cmd += (uint8_t)0x00;
+    cmd += (uint8_t)0x00;
+
+    cmd += (uint8_t)0x00;
+    cmd += (uint8_t)0x00;
+    m_device->writeToChunked2021(endpoint(), cmd, encrypted());
 }
 
 void ZeppOsNotificationService::handlePayload(const QByteArray &payload)

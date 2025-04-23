@@ -46,6 +46,7 @@ void ZeppOSDevice::sendAlert(const QString &sender, const QString &subject, cons
 void ZeppOSDevice::incomingCall(const QString &caller)
 {
     qDebug() << Q_FUNC_INFO;
+    notificationService->incomingCall(caller);
 }
 
 void ZeppOSDevice::incomingCallEnded()
@@ -163,7 +164,7 @@ void ZeppOSDevice::initialise()
         connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &ZeppOSDevice::serviceEvent, Qt::UniqueConnection);
 
-        HuamiInitOperation2021 *init = new HuamiInitOperation2021(true, 0x00, 0x80, this);
+        HuamiInitOperation2021 *init = new HuamiInitOperation2021(true, 0x00, 0x80, this, m_encoder, m_decoder);
         mi->registerOperation(init);
 
         notificationService = new ZeppOsNotificationService(this, true);

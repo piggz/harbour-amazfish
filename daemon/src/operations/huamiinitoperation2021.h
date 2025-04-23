@@ -13,7 +13,7 @@ public:
     static constexpr uint8_t CMD_PUB_KEY = 0x04;
     static constexpr uint8_t CMD_SESSION_KEY = 0x05;
 
-    HuamiInitOperation2021(bool needsAuth, uint8_t authFlags, uint8_t cryptFlags, HuamiDevice *device);
+    HuamiInitOperation2021(bool needsAuth, uint8_t authFlags, uint8_t cryptFlags, HuamiDevice *device, Huami2021ChunkedEncoder *encoder, Huami2021ChunkedDecoder *decoder);
 
     void handleData(const QByteArray &data) override;
     bool handleMetaData(const QByteArray &data) override;
