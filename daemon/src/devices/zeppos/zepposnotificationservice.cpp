@@ -7,7 +7,7 @@ ZeppOsNotificationService::ZeppOsNotificationService(ZeppOSDevice *device, bool 
     m_endpoint = 0x001e;
 }
 
-void ZeppOsNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message) const
+void ZeppOsNotificationService::sendAlert(const AbstractDevice::WatchNotification &notification) const
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -97,32 +97,31 @@ void ZeppOsNotificationService::sendAlert(const QString &sender, const QString &
     QByteArray cmd;
 
     cmd += NOTIFICATION_CMD_SEND;
-    cmd += TypeConversion::fromInt32(0);
+    cmd += TypeConversion::fromInt32(notification.id);
     cmd += NOTIFICATION_TYPE_NORMAL;
     cmd += NOTIFICATION_SUBCMD_SHOW;
 
-    //TODO Application ID here?
-    cmd += "Amazfish";
+    //Application ID
+    cmd += notification.appId.isEmpty() ? "uk.co.piggz.amazfish" : notification.appId;
     cmd += (uint8_t)0x00;
 
     //TODO Sender
     cmd += (uint8_t)0x00;
 
     //Body
-    if (!subject.isEmpty()) {
-        cmd += subject.toUtf8();
+    if (!notification.summary.isEmpty()) {
+        cmd += notification.summary.toUtf8();
         cmd += 0x0a;
     }
 
-    if (!message.isEmpty()) {
-        cmd += message.toUtf8();
+    if (!notification.body.isEmpty()) {
+        cmd += notification.body.toUtf8();
     }
     cmd += (uint8_t)0x00;
 
     //Sending application
-    cmd += sender.left(32).toUtf8();
+    cmd += notification.appName.isEmpty() ? "Amazfish" : notification.appName;
     cmd += (uint8_t)0x00;
-
 
     //Has reply?
     cmd += (uint8_t)0x00;

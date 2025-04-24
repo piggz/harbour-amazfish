@@ -27,7 +27,7 @@ public:
 
     void applyDeviceSetting(Settings s) override;
 
-    virtual void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
+    virtual void sendAlert(const AbstractDevice::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
 

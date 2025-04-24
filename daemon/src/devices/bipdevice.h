@@ -92,9 +92,6 @@ public:
 
     void sendWeather(CurrentWeather *weather) override;
 
-    void navigationRunning(bool running) override;
-    void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
-
 protected:
     void initialise() override;
 

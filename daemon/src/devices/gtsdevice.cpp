@@ -29,14 +29,6 @@ int GtsDevice::supportedFeatures() const
             FEATURE_BUTTON_ACTION;
 }
 
-void GtsDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
-{
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        mi->sendAlert(sender, subject, message);
-    }
-}
-
 void GtsDevice::serviceEvent(uint8_t event)
 {
     switch(event) {

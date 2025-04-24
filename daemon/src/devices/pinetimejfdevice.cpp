@@ -91,12 +91,12 @@ void PinetimeJFDevice::abortOperations()
     }
 }
 
-void PinetimeJFDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
+void PinetimeJFDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
 {
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
     if (alert) {
         qDebug() << Q_FUNC_INFO << "Have an alert service";
-        alert->sendAlert(sender, subject, message);
+        alert->sendAlert(notification.appName, notification.summary, notification.body);
     }
 }
 

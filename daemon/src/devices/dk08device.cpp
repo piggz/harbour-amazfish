@@ -34,7 +34,7 @@ void DK08Device::pair()
     QBLEDevice::pair();
 }
 
-void DK08Device::sendAlert(const QString &sender, const QString &subject, const QString &message) {
+void DK08Device::sendAlert(const AbstractDevice::WatchNotification &notification) {
     qDebug() << Q_FUNC_INFO;
     DK08NUSService *nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));
     m_alert_id = (m_alert_id + 1) % 32;
@@ -60,13 +60,13 @@ void DK08Device::sendAlert(const QString &sender, const QString &subject, const 
 
 
         DK08NUSService::AlertType type = DK08NUSService::AlertType::SMSAlert;
-        auto icon = AppToType.find(sender);
+        auto icon = AppToType.find(notification.appName);
         if ( icon != AppToType.end() ) {
             type = icon->second;
         }
 
-        nus->setSMSAlertName(m_alert_id, type, sender);
-        nus->setSMSAlertContext(m_alert_id, type, subject + " " + message);
+        nus->setSMSAlertName(m_alert_id, type, notification.appName);
+        nus->setSMSAlertContext(m_alert_id, type, notification.summary + " " + notification.body);
     }
 }
 void DK08Device::incomingCall(const QString &caller) {

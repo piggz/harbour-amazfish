@@ -72,7 +72,7 @@ public:
     Q_INVOKABLE void downloadActivityData();
     Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(int i);
-    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
+    Q_INVOKABLE void sendAlert(const AbstractDevice::WatchNotification &notification, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
     Q_INVOKABLE void incomingCallEnded();
     Q_INVOKABLE void applyDeviceSetting(int s);
@@ -87,13 +87,7 @@ public:
     Q_INVOKABLE void immediateAlert(int level);
 
 private:
-    struct WatchNotification
-    {
-        int id;
-        QString appName;
-        QString summary;
-        QString body;
-    };
+
 
     int m_connectionStateChangedCount = 0;
     QString m_deviceAddress;
@@ -143,7 +137,7 @@ private:
     watchfish::SoundProfile m_soundProfile;
 
     //Notifications
-    QQueue<WatchNotification> m_notificationBuffer;
+    QQueue<AbstractDevice::WatchNotification> m_notificationBuffer;
 
     //Database
     KDbDriver *m_dbDriver = nullptr;

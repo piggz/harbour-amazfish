@@ -174,11 +174,11 @@ void HuamiDevice::rebootWatch()
 
 }
 
-void HuamiDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
+void HuamiDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
 {
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
     if (alert) {
-        alert->sendAlert(sender, subject, message);
+        alert->sendAlert(notification.appName, notification.summary, notification.body);
     }
 }
 
@@ -199,7 +199,6 @@ void HuamiDevice::incomingCallEnded()
     }
 }
 
-
 void HuamiDevice::navigationRunning(bool running)
 {
     QString msg;
@@ -208,12 +207,28 @@ void HuamiDevice::navigationRunning(bool running)
     } else {
         msg = tr("Navigation Stopped");
     }
-    sendAlert("navigation", msg, "");
+    AbstractDevice::WatchNotification n;
+    n.id = 0;
+    n.appId = "uk.co.piggz.amazfish.navigation";
+    n.appName = "navigation";
+    n.summary = msg;
+    n.body = "";
+
+    sendAlert(n);
 }
 
 void HuamiDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
 {
-    sendAlert("navigation", tr("Progress") + ":" + QString::number(progress), narrative + "\n" + manDist);
+    Q_UNUSED(flag)
+
+    AbstractDevice::WatchNotification n;
+    n.id = 0;
+    n.appId = "uk.co.piggz.amazfish.navigation";
+    n.appName = "navigation";
+    n.summary = tr("Progress") + ":" + QString::number(progress);
+    n.body = narrative + "\n" + manDist;
+
+    sendAlert(n);
 }
 
 void HuamiDevice::setDatabase(KDbConnection *conn)

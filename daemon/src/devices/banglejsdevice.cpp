@@ -45,7 +45,7 @@ void BangleJSDevice::abortOperations()
 
 }
 
-void BangleJSDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
+void BangleJSDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -55,7 +55,7 @@ void BangleJSDevice::sendAlert(const QString &sender, const QString &subject, co
     }
 
     //For mails, there is a double notification which is empty except for sender
-    if(message.isEmpty() && subject.isEmpty())
+    if(notification.body.isEmpty() && notification.summary.isEmpty())
     {
         return;
     }
@@ -80,9 +80,9 @@ void BangleJSDevice::sendAlert(const QString &sender, const QString &subject, co
     o.insert("id", QString::number(IdentifierGenerator().getNewId())); //id is necessary for some apps like messageui, and should be unique
     o.insert("src", "");
     o.insert("title", "");
-    o.insert("subject", subject);
-    o.insert("body", message);
-    o.insert("sender", sender);
+    o.insert("subject", notification.summary);
+    o.insert("body", notification.body);
+    o.insert("sender", notification.appName);
     o.insert("tel", "");
     uart->txJson(o);
 }

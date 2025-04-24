@@ -15,7 +15,7 @@ public:
     QString deviceType() const override;
     void abortOperations() override;
 
-    void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
+    void sendAlert(const AbstractDevice::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
 

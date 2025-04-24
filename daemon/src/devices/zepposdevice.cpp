@@ -37,10 +37,10 @@ AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes)
     return nullptr;
 }
 
-void ZeppOSDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
+void ZeppOSDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
-    notificationService->sendAlert(sender, subject, message);
+    notificationService->sendAlert(notification);
 }
 
 void ZeppOSDevice::incomingCall(const QString &caller)

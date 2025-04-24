@@ -133,23 +133,6 @@ void BipDevice::initialise()
     }
 }
 
-void BipDevice::navigationRunning(bool running)
-{
-    QString msg;
-    if (running) {
-        msg = tr("Navigation Started");
-    } else {
-        msg = tr("Navigation Stopped");
-    }
-    sendAlert("navigation", msg, "");
-}
-
-void BipDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress)
-{
-    Q_UNUSED(flag)
-    sendAlert("navigation", tr("Progress") + ":" + QString::number(progress), narrative + "\n" + manDist);
-}
-
 QStringList BipDevice::supportedDisplayItems() const
 {
     QStringList items;

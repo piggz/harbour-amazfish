@@ -177,17 +177,18 @@ HRMService *DeviceInterface::hrmService() const
 
 void DeviceInterface::onNotification(watchfish::Notification *notification)
 {
+    AbstractDevice::WatchNotification n;
+    n.id = notification->id();
+    n.appId = notification->appId();
+    n.appName = notification->appName();
+    n.summary = notification->summary();
+    n.body = notification->body();
+
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
         qDebug() << Q_FUNC_INFO << "Sending alert to device";
-        sendAlert(notification->appName(), notification->summary(), notification->body());
+        sendAlert(n);
     } else {
         qDebug() << Q_FUNC_INFO << "no notification service, buffering notification";
-
-        WatchNotification n;
-        n.id = notification->id();
-        n.appName = notification->appName();
-        n.summary = notification->summary();
-        n.body = notification->body();
 
         m_notificationBuffer.enqueue(n);
         if (m_notificationBuffer.count() > 10) {
@@ -456,7 +457,13 @@ void DeviceInterface::onConnectionStateChanged()
             m_dbusHRM->setHRMService(hrmService());
         }
         if (AmazfishConfig::instance()->appNotifyConnect() && m_notificationBuffer.isEmpty()) {
-            sendAlert(tr("Amazfish"), tr("Connected"), tr("Phone and watch are connected"), true);
+            AbstractDevice::WatchNotification n;
+            n.id = 0;
+            n.appId = "uk.co.piggz.amazfish";
+            n.appName = tr("Amazfish");
+            n.summary = tr("Connected");
+            n.body = tr("Phone and watch are connected");
+            sendAlert(n, true);
         }
 
         if (m_device && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)
@@ -528,7 +535,13 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
             log_battery_level(battery_level);
 
             if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
-                sendAlert("Amazfish", tr("Low Battery"), tr("Battery level now ") + QString::number(battery_level) + "%");
+                AbstractDevice::WatchNotification n;
+                n.id = 0;
+                n.appId = "uk.co.piggz.amazfish";
+                n.appName = tr("Amazfish");
+                n.summary = tr("Low Battery");
+                n.body = tr("Battery level now ") + QString::number(battery_level) + "%";
+                sendAlert(n);
             }
             m_lastBatteryLevel = battery_level;
         }
@@ -640,7 +653,14 @@ void DeviceInterface::onEventTimer()
     if (m_eventlist.isEmpty())
         return;
     watchfish::CalendarEvent event = m_eventlist.takeFirst();
-    sendAlert("calendar", event.title(), event.description().isEmpty()?" ":event.description());
+    AbstractDevice::WatchNotification n;
+    n.id = 0;
+    n.appId = "uk.co.piggz.amazfish.calendar";
+    n.appName = tr("Calendar");
+    n.summary = event.title();
+    n.body = event.description().isEmpty()?" ":event.description();
+
+    sendAlert(n);
     scheduleNextEvent();
 }
 
@@ -656,10 +676,10 @@ void DeviceInterface::sendBufferedNotifications()
 {
     qDebug() << Q_FUNC_INFO;
     while (m_notificationBuffer.count() > 0) {
-        WatchNotification n = m_notificationBuffer.dequeue();
+        AbstractDevice::WatchNotification n = m_notificationBuffer.dequeue();
         if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
             qDebug() << "Sending notification";
-            sendAlert(n.appName, n.summary, n.body);
+            sendAlert(n);
         }
     }
 }
@@ -870,11 +890,11 @@ QString DeviceInterface::information(int i)
     return QString();
 }
 
-void DeviceInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
+void DeviceInterface::sendAlert(const AbstractDevice::WatchNotification &notification, bool allowDuplicate)
 {
     qDebug() << Q_FUNC_INFO;
 
-    int hash = qHash(sender + subject + message);
+    int hash = qHash(notification.appId + notification.appName + notification.summary + notification.body);
     if (hash == m_lastAlertHash && !allowDuplicate) {
         qDebug() << "Discarded duplicate alert";
         return; //Do not send duplicate alerts
@@ -884,15 +904,15 @@ void DeviceInterface::sendAlert(const QString &sender, const QString &subject, c
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
         qDebug() << "Snding alert to device";
 
+        AbstractDevice::WatchNotification t = notification;
+
         if (AmazfishConfig::instance()->appTransliterate()) {
-            m_device->sendAlert(
-                        Transliterator::convert(sender),
-                        Transliterator::convert(subject),
-                        Transliterator::convert(message)
-                        );
-        } else {
-            m_device->sendAlert(sender, subject, message);
+            t.appName = Transliterator::convert(notification.appName);
+            t.summary = Transliterator::convert(notification.summary);
+            t.body = Transliterator::convert(notification.body);
         }
+        m_device->sendAlert(t);
+
     }
 }
 
