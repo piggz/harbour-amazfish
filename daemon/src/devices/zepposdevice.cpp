@@ -59,6 +59,16 @@ void ZeppOSDevice::writeToChunked2021(short endpoint, QByteArray data, bool encr
     m_encoder->write(endpoint, data, true, encryptIgnored);
 }
 
+AbstractZeppOsService *ZeppOSDevice::zosService(short endpoint) const
+{
+    return nullptr;
+}
+
+void ZeppOSDevice::addSupportedService(short endpoint, bool encryted)
+{
+    qDebug() << Q_FUNC_INFO << endpoint << encryted;
+}
+
 
 void ZeppOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {

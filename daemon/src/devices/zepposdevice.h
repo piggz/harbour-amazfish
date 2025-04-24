@@ -5,6 +5,7 @@
 #include "zeppos/huami2021chunkedencoder.h"
 #include <huamidevice.h>
 
+class AbstractZeppOsService;
 class ZeppOsNotificationService;
 
 class ZeppOSDevice: public HuamiDevice
@@ -23,6 +24,9 @@ public:
     void incomingCallEnded() override;
 
     void writeToChunked2021(short endpoint, QByteArray data, bool encryptIgnored);
+
+    AbstractZeppOsService *zosService(short endpoint) const;
+    void addSupportedService(short endpoint, bool encryted);
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);

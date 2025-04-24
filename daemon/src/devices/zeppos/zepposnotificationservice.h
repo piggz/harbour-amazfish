@@ -29,10 +29,11 @@ public:
 
     ZeppOsNotificationService(ZeppOSDevice *device, bool encryptedDefault);
 
+    void handlePayload(const QByteArray &payload) override;
+    QString name() const override;
+
     void sendAlert(const AbstractDevice::WatchNotification &notification) const;
     void incomingCall(const QString &caller);
-
-    void handlePayload(const QByteArray &payload) override;
 };
 
 #endif // ZEPPOSNOTIFICATIONSERVICE_H

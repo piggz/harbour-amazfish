@@ -37,6 +37,8 @@ set(SOURCES
 ./src/devices/zeppos/abstractzepposservice.cpp
 ./src/devices/zeppos/huami2021chunkedencoder.cpp
 ./src/devices/zeppos/huami2021chunkeddecoder.cpp
+./src/devices/zeppos/zepposservicesservice.cpp
+./src/devices/zeppos/zepposnotificationservice.cpp
 ./src/harbour-amazfish-daemon.cpp
 ./src/huamiweathercondition.cpp
 ./src/navigationinterface.cpp
@@ -129,6 +131,8 @@ set(HEADERS
 ./src/devices/zeppos/abstractzepposservice.h
 ./src/devices/zeppos/huami2021chunkedencoder.h
 ./src/devices/zeppos/huami2021chunkeddecoder.h
+./src/devices/zeppos/zepposservicesservice.h
+./src/devices/zeppos/zepposnotificationservice.h
 ./src/huamiweathercondition.h
 ./src/navigationinterface.h
 ./src/operations/abstractfetchoperation.h
@@ -180,8 +184,7 @@ set(HEADERS
 ./src/ecdh/ecdh.h
 )
 
-add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
-    src/devices/zeppos/zepposnotificationservice.h src/devices/zeppos/zepposnotificationservice.cpp)
+add_executable(harbour-amazfishd ${SOURCES} ${HEADERS})
 
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)

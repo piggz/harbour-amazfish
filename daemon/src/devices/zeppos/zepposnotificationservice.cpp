@@ -157,3 +157,8 @@ void ZeppOsNotificationService::handlePayload(const QByteArray &payload)
 {
 
 }
+
+QString ZeppOsNotificationService::name() const
+{
+    return "NotificationService";
+}
