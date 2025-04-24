@@ -171,7 +171,9 @@ void HuamiInitOperation2021::generateKeyPair()
 void HuamiInitOperation2021::debugArrayPrint(const QString &name, uint8_t *arr, int size)
 {
     qDebug() << name << ":";
-#ifndef MER_EDITION_SAILFISH
+#if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
+    qDebug() << "FIXME";
+#else
     QDebug dbg(QtDebugMsg);
     for (int i = 0; i < size; i++) {
         dbg << Qt::hex << arr[i] << (i < size ? ':' : '\n');
