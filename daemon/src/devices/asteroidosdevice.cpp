@@ -39,7 +39,7 @@ void AsteroidOSDevice::sendAlert(const AbstractDevice::WatchNotification &notifi
 
     AsteroidNotificationService *n = qobject_cast<AsteroidNotificationService*>(service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION));
     if (n) {
-        n->sendAlert(notification.appName, notification.summary, notification.body);
+        n->sendAlert(notification);
     }
 
 }

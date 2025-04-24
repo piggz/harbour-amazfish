@@ -11,19 +11,17 @@ AsteroidNotificationService::AsteroidNotificationService(const QString &path, QO
     connect(this, &QBLEService::characteristicChanged, this, &AsteroidNotificationService::characteristicChanged);
 }
 
-void AsteroidNotificationService::sendAlert(const QString &sender, const QString &subject, const QString &message)
+void AsteroidNotificationService::sendAlert(const AbstractDevice::WatchNotification &notification)
 {
 //    qDebug() << Q_FUNC_INFO << sender << subject << message;
 
-    QString icon = mapSenderToIcon(sender);
+    QString icon = mapSenderToIcon(notification.appName);
 
     // for vibrate, valid options are { "ringtone", "strong", "normal", "none" }
     QString vibrate = "normal";
 
     QByteArray data = QString("<insert><pn>%1</pn><id>%2</id><an>%3</an><ai>%4</ai><su>%5</su><bo>%6</bo><vb>%7</vb></insert>")
-                .arg(sender, QString::number(m_lastNotificationId), sender, icon, subject, message, vibrate).toUtf8();
-
-    m_lastNotificationId++;
+                .arg(notification.appId, QString::number(notification.id), notification.appName, icon, notification.summary, notification.body, vibrate).toUtf8();
 
     writeValue(UUID_CHARACTERISTIC_NOTIFICATION_UPDATE, data);
 }
@@ -31,8 +29,14 @@ void AsteroidNotificationService::sendAlert(const QString &sender, const QString
 void AsteroidNotificationService::incomingCall(const QString &caller)
 {
     qDebug() << Q_FUNC_INFO << caller;
-    m_lastVoiceCallNotification = m_lastNotificationId;
-    sendAlert("incoming-call", caller, "");
+    m_lastVoiceCallNotification++;
+    AbstractDevice::WatchNotification n;
+
+    n.appId = "incoming-call";
+    n.appName = "incoming-call";
+    n.id = m_lastVoiceCallNotification;
+    n.summary = caller;
+    sendAlert(n);
 }
 
 void AsteroidNotificationService::incomingCallEnded()
