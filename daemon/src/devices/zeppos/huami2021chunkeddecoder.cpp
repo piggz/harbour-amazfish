@@ -9,7 +9,7 @@ Huami2021ChunkedDecoder::Huami2021ChunkedDecoder(bool force2021Protocal) : m_for
 
 void Huami2021ChunkedDecoder::setEncryptionParameters(QByteArray sharedSessionKey)
 {
-    qDebug() << Q_FUNC_INFO << sharedSessionKey.toHex(':');
+    qDebug() << Q_FUNC_INFO << sharedSessionKey.toHex();
     m_sharedSessionKey = sharedSessionKey;
 }
 
@@ -25,7 +25,7 @@ uint8_t Huami2021ChunkedDecoder::lastCount()
 
 bool Huami2021ChunkedDecoder::decode(QByteArray data)
 {
-    qDebug() << Q_FUNC_INFO << data.toHex(':');
+    qDebug() << Q_FUNC_INFO << data.toHex();
 
     int i = 0;
     if (data.at(i++) != 0x03) {
@@ -91,7 +91,7 @@ bool Huami2021ChunkedDecoder::decode(QByteArray data)
             m_reassemblyBuffer = m_reassemblyBuffer.mid(0, m_currentLength);
         }
 
-        qDebug() << m_reassemblyBuffer.toHex(':');
+        qDebug() << m_reassemblyBuffer.toHex();
         if (m_handler) {
             m_handler->handle2021Payload(m_currentType, m_reassemblyBuffer);
         }

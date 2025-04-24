@@ -10,14 +10,14 @@ Huami2021ChunkedEncoder::Huami2021ChunkedEncoder(QBLECharacteristic *characteris
 
 void Huami2021ChunkedEncoder::setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey)
 {
-    qDebug() << Q_FUNC_INFO << encryptedSequenceNumber << sharedSessionKey.toHex(':');
+    qDebug() << Q_FUNC_INFO << encryptedSequenceNumber << sharedSessionKey.toHex();
     m_encryptedSequenceNumber = encryptedSequenceNumber;
     m_sharedSessionKey = sharedSessionKey;
 }
 
 void Huami2021ChunkedEncoder::write(short type, QByteArray data, bool extendedFlags, bool encrypt)
 {
-    qDebug() << Q_FUNC_INFO << type << data.toHex(':') << extendedFlags << encrypt;
+    qDebug() << Q_FUNC_INFO << type << data.toHex() << extendedFlags << encrypt;
     if (!m_characteristic) {
         qDebug() << "No characteristic";
         return;
@@ -65,7 +65,7 @@ void Huami2021ChunkedEncoder::write(short type, QByteArray data, bool extendedFl
         data = QAESEncryption::Crypt(QAESEncryption::AES_128, QAESEncryption::ECB, encryptable_payload, messageKey, QByteArray(), QAESEncryption::ZERO);
     }
 
-    qDebug() << Q_FUNC_INFO << "Chunking data:" << data.toHex(':');
+    qDebug() << Q_FUNC_INFO << "Chunking data:" << data.toHex();
 
     while (remaining > 0) {
         int MAX_CHUNKLENGTH = m_mtu - 3 - header_size;

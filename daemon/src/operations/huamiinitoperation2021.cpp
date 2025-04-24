@@ -50,7 +50,7 @@ void HuamiInitOperation2021::start(QBLEService *service)
 
 bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << Q_FUNC_INFO << characteristic << value.toHex(':');
+    qDebug() << Q_FUNC_INFO << characteristic << value.toHex();
 
     if (characteristic != MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ) {
         qDebug() << "Unhandled characteristic:" << characteristic;
@@ -85,7 +85,7 @@ bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic
 
 void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &payload)
 {
-    qDebug() << Q_FUNC_INFO << type << payload.toHex(':');
+    qDebug() << Q_FUNC_INFO << type << payload.toHex();
 
     if (type != MiBandService::CHUNKED2021_ENDPOINT_AUTH) {
         qDebug() << "Unandles message type";
@@ -124,7 +124,7 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         for (int i = 0; i < 16; i++) {
             f[i] = m_finalSharedSessionAES[i];
         }
-        qDebug() << "Shared Session Key: " << f.toHex(':');
+        qDebug() << "Shared Session Key: " << f.toHex();
 
         m_encoder->setEncryptionParameters(encryptedSequenceNumber, f);
         m_decoder->setEncryptionParameters(f);
