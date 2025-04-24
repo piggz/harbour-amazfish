@@ -35,12 +35,14 @@ void PebbleDevice::pair()
 }
 
 
-void PebbleDevice::sendAlert(const QString &sender, const QString &subject, const QString &message) {
+void PebbleDevice::sendAlert(const AbstractDevice::WatchNotification &notification) {
     qDebug() << Q_FUNC_INFO;
 }
+
 void PebbleDevice::incomingCall(const QString &caller) {
     qDebug() << Q_FUNC_INFO;
 }
+
 void PebbleDevice::incomingCallEnded() {
     qDebug() << Q_FUNC_INFO;
 }

@@ -10,7 +10,6 @@ public:
     explicit NeoDevice(const QString &pairedName, QObject *parent = nullptr);
 
     QString deviceType() const override;
-    void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     int supportedFeatures() const override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void applyDeviceSetting(Settings s) override;

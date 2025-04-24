@@ -33,13 +33,13 @@ AbstractFirmwareInfo *AsteroidOSDevice::firmwareInfo(const QByteArray &bytes)
     return nullptr;
 }
 
-void AsteroidOSDevice::sendAlert(const QString &sender, const QString &subject, const QString &message)
+void AsteroidOSDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
 {
-    qDebug() << Q_FUNC_INFO << sender << subject << message;
+    qDebug() << Q_FUNC_INFO;
 
-    AsteroidNotificationService *notification = qobject_cast<AsteroidNotificationService*>(service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION));
-    if (notification) {
-        notification->sendAlert(sender, subject, message);
+    AsteroidNotificationService *n = qobject_cast<AsteroidNotificationService*>(service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION));
+    if (n) {
+        n->sendAlert(notification);
     }
 
 }

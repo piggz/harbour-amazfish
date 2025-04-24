@@ -12,7 +12,7 @@ public:
 
     int supportedFeatures() const override;
     QString deviceType() const override;
-    void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
+    void sendAlert(const AbstractDevice::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
     void downloadActivityData() override;

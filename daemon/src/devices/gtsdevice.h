@@ -10,7 +10,6 @@ public:
     explicit GtsDevice(const QString &pairedName, QObject *parent = nullptr);
 
     QString deviceType() const override;
-    void sendAlert(const QString &sender, const QString &subject, const QString &message) override;
     void sendEventReminder(int id, const QDateTime &dt, const QString &event) override;
     int supportedFeatures() const override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
