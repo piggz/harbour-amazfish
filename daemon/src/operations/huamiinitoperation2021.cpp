@@ -117,7 +117,7 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         for (int i = 0; i < 16; i++) {
             m_finalSharedSessionAES[i] = (m_sharedEC[i + 8] ^ secretKey[i]);
         }
-        qDebug() << "Secret Key: " << secretKey.toHex(';');
+        qDebug() << "Secret Key: " << secretKey.toHex();
 
         QByteArray f;
         f.resize(16);
