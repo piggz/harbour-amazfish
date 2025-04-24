@@ -1,8 +1,4 @@
-cmake_minimum_required(VERSION 2.8.11)
-
-if(POLICY CMP0048) # in CMake >= 3.0.0
-    cmake_policy(SET CMP0048 OLD) # keep project() from clearing VERSION variables
-endif(POLICY CMP0048)
+cmake_minimum_required(VERSION 3.16)
 
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
 
@@ -16,7 +12,7 @@ set(CPACK_PACKAGE_VERSION_PATCH ${VER_PATCH})
 set(PROJECT_VERSION ${VER_MAJOR}.${VER_MINOR}.${VER_PATCH})
 set(API_VERSION ${VER_MAJOR}.${VER_MINOR}.${API_VER_PATCH})
 
-project(o2)
+project(o2 VERSION ${VER_MAJOR}.${VER_MINOR}.${VER_PATCH})
 
 option(o2_WITH_QT5 "Use Qt5" ON)
 
