@@ -7,7 +7,7 @@
 class DeviceFactory
 {
 public:
-    static AbstractDevice* createDevice(const QString &deviceName);
+    static AbstractDevice* createDevice(const QString &deviceName, const QString &deviceType);
 };
 
 #endif

@@ -37,7 +37,7 @@ DeviceInterface::DeviceInterface()
     auto config = AmazfishConfig::instance();
 
     //Create a device object
-    m_device = DeviceFactory::createDevice(config->pairedName());
+    m_device = DeviceFactory::createDevice(config->pairedName(), config->pairedType());
     if (m_device) {
         connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message, Qt::UniqueConnection);
@@ -125,7 +125,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
     if (m_device) {
         delete m_device;
     }
-    m_device = DeviceFactory::createDevice(name);
+    m_device = DeviceFactory::createDevice(name, deviceType);
 
     if (m_device) {
         m_device->setDevicePath(address);

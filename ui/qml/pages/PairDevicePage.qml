@@ -15,10 +15,10 @@ PageListPL {
     property bool busy: (adapter && adapter.discovering && !page.count) || DaemonInterfaceInstance.connectionState == "pairing"
     //busy: discoveryModel.running || DaemonInterfaceInstance.pairing
 
-    property string deviceType
     property string pattern
     property string _deviceName
     property string _deviceAddress
+    property string _deviceType
     property QtObject adapter: _bluetoothManager ? _bluetoothManager.usableAdapter : null
     property QtObject _bluetoothManager : BluezQt.Manager
 
@@ -64,7 +64,8 @@ PageListPL {
             if (DaemonInterfaceInstance.connectionState == "paired" || DaemonInterfaceInstance.connectionState == "connected") {
                 AmazfishConfig.pairedAddress = _deviceAddress
                 AmazfishConfig.pairedName = _deviceName
-                console.log("Paired with", AmazfishConfig.pairedName, AmazfishConfig.pairedAddress, _deviceName, _deviceAddress);
+                AmazfishConfig.pairedType = _deviceType
+                console.log("Paired with", AmazfishConfig.pairedName, AmazfishConfig.pairedType, AmazfishConfig.pairedAddress, _deviceName, _deviceAddress);
                 app.pages.pop(app.rootPage);
             }
         }
@@ -139,16 +140,17 @@ PageListPL {
                         page.stopDiscovery();
                         _deviceName = model.FriendlyName;
                         _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
-                        DaemonInterfaceInstance.pair(_deviceName, device.deviceType, _deviceAddress)
+                        _deviceType = device.deviceType
+                        DaemonInterfaceInstance.pair(_deviceName, _deviceType, _deviceAddress);
                     })
                     return;
                 }
 
                 stopDiscovery();
                 _deviceName = model.FriendlyName;
+                _deviceType = device.deviceType;
                 _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
-
-                DaemonInterfaceInstance.pair(_deviceName, device.deviceType, _deviceAddress)
+                DaemonInterfaceInstance.pair(_deviceName, _deviceType, _deviceAddress);
             }
 
             Item {

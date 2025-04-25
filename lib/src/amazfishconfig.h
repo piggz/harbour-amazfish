@@ -121,6 +121,7 @@ public:
 
     STRING_OPTION(QStringLiteral("pairedAddress"), pairedAddress, setPairedAddress, QString())
     STRING_OPTION(QStringLiteral("pairedName"),    pairedName,    setPairedName,    QString())
+    STRING_OPTION(QStringLiteral("pairedType"),    pairedType,    setPairedType,    QString())
 
     BOOL_OPTION(QStringLiteral("app/silenceconnect"),   appSilenceConnect,   setAppSilenceConnect,    false)
     BOOL_OPTION(QStringLiteral("app/notifyconnect"),    appNotifyConnect,    setAppNotifyConnect,    true)
