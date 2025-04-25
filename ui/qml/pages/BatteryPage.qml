@@ -8,7 +8,7 @@ PagePL {
     id: page
     title: qsTr("Battery")
 
-    property var day: new Date()
+    property alias day: nav.day
 
     Column {
         id: column
@@ -27,18 +27,22 @@ PagePL {
         }
 
         DateNavigation {
-            text: day.toDateString();
+            id: nav
             onBackward: {
-                day.setDate(day.getDate() - 1);
-                text = day.toDateString();
-                updateGraphs();
+                var d = new Date(day);
+                d.setDate(day.getDate() - 1);
+                day = d;
             }
             onForward: {
-                day.setDate(day.getDate() + 1);
-                text = day.toDateString();
+                var d = new Date(day);
+                d.setDate(day.getDate() + 1);
+                day = d;
+            }
+            onDayChanged: {
                 updateGraphs();
             }
         }
+
 
         Graph {
             id: graphBat
