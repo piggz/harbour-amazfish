@@ -1,12 +1,12 @@
-#ifndef HUAMI2_2_HANDLER_H
-#define HUAMI2_2_HANDLER_H
+#ifndef HUAMI2021HANDLER_H
+#define HUAMI2021HANDLER_H
 
 #include <QByteArray>
 
-class Huami2020Handler
+class Huami2021Handler
 {
 public:
-    Huami2020Handler();
+    Huami2021Handler();
     virtual void handle2021Payload(short type, const QByteArray &data) = 0;
 };
 

@@ -56,7 +56,7 @@ set(SOURCES
 ./src/operations/updatefirmwareoperation.cpp
 ./src/operations/updatefirmwareoperationnew.cpp
 ./src/operations/huamiinitoperation2021.cpp
-./src/operations/huami2020handler.cpp
+./src/operations/huami2021handler.cpp
 ./src/qaesencryption.cpp
 ./src/realtimeactivitysample.cpp
 ./src/services/abstractoperationservice.cpp
@@ -149,7 +149,7 @@ set(HEADERS
 ./src/operations/updatefirmwareoperation.h
 ./src/operations/updatefirmwareoperationnew.h
 ./src/operations/huamiinitoperation2021.h
-./src/operations/huami2020handler.h
+./src/operations/huami2021handler.h
 ./src/qaesencryption.h
 ./src/realtimeactivitysample.h
 ./src/services/abstractoperationservice.h

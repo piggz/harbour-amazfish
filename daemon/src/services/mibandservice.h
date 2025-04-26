@@ -3,8 +3,10 @@
 
 #include "abstractoperationservice.h"
 #include "bipbatteryinfo.h"
+#include "huami2021handler.h"
 #include "weather/currentweather.h"
 #include "devices/abstractdevice.h"
+#include "zeppos/huami2021chunkeddecoder.h"
 
 #include <QTimer>
 #include <QtCore/QJsonDocument>
@@ -170,12 +172,17 @@ public:
 
     void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration, int position);
 
+    void setHuami2021Handler(Huami2021Handler *handler);
+    void setHuami2021ChunkedDecoder(Huami2021ChunkedDecoder *decoder);
+
 private:
     void characteristicRead(const QString &c, const QByteArray &value);
     void characteristicChanged(const QString &c, const QByteArray &value);
 
     void setGPSVersion(const QString& v);
     void decodeAlarms(const QByteArray &data);
+
+    void handleChunked(QByteArray data);
 
     QString m_gpsVersion;
     int m_steps = 0;
@@ -184,6 +191,9 @@ private:
 
     KDbConnection *m_conn = nullptr;
     QMap<QString, uint8_t> displayItemsIdMap;
+
+    Huami2021Handler *m_handler = nullptr;
+    Huami2021ChunkedDecoder *m_decoder = nullptr;
 };
 
 #endif // MIBANDSERVICE_H

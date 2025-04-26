@@ -40,7 +40,7 @@ public:
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void startDownload() override;
 
-    Q_SLOT void authenticated(bool ready);
+    Q_SLOT virtual void authenticated(bool ready);
 
     void sendWeatherHuami(CurrentWeather *weather, bool sendConditionString);
 

@@ -4,6 +4,7 @@
 #include "mibandservice.h"
 #include "amazfishconfig.h"
 #include "typeconversion.h"
+#include "zepposdevice.h"
 #include <Qt-AES/qaesencryption.h>
 
 uint8_t getRandomUint8() {
@@ -154,6 +155,8 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
         if (m_device) {
             m_device->authenticated(true);
         }
+        m_decoder->setHuami2021Handler(dynamic_cast<ZeppOSDevice*>(m_device));
+
         m_done = true;
     } else {
         qDebug() << "Unexpected payload";

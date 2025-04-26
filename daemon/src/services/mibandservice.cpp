@@ -76,6 +76,9 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
 {
     qDebug() << Q_FUNC_INFO << "Changed:" << characteristic << value.toHex();
 
+    if (characteristic == UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ) {
+        handleChunked(value);
+    }
     AbstractOperationService::notifyOperation(characteristic, value);
 
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
@@ -135,6 +138,33 @@ void MiBandService::decodeAlarms(const QByteArray &data)
         bool enabled = (alarm_data & 0x10) == 0x10;
         qDebug() << "alarm " << index << " is enabled:" << enabled;
         config->setAlarmEnabled(i + 1, enabled);
+    }
+}
+
+void MiBandService::handleChunked(QByteArray data)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    uint8_t handle = data[2];
+    uint8_t count = data[4];
+
+    switch (data[0]) {
+    case 0x03:
+        if (m_decoder) {
+            bool needsAck = m_decoder->decode(data);
+            if (needsAck) {
+                //sendChunkedAck();
+            }
+        } else {
+            qDebug() << "Got chunked payload, but decoder is null";;
+        }
+        return;
+    case 0x04:
+        qDebug() << "Got chunked ack, handle=" << handle << "count=" << count;
+        // TODO: We should probably update the handle and count on the encoder
+        return;
+    default:
+        qDebug() << "Unhandled chunked payload of type " << data[0];
     }
 }
 
@@ -814,4 +844,16 @@ void MiBandService::setMusicStatus(bool playing, const QString &artist, const QS
         cmd += TypeConversion::fromInt32(duration);
     }
     writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
+}
+
+void MiBandService::setHuami2021Handler(Huami2021Handler *handler)
+{
+    qDebug() << Q_FUNC_INFO;
+    m_handler = handler;
+}
+
+void MiBandService::setHuami2021ChunkedDecoder(Huami2021ChunkedDecoder *decoder)
+{
+    qDebug() << Q_FUNC_INFO;
+    m_decoder = decoder;
 }

@@ -2,12 +2,12 @@
 #define HUAMIINITOPERATION2_21_H
 
 #include "abstractoperation.h"
-#include "huami2020handler.h"
+#include "huami2021handler.h"
 #include "devices/zeppos/huami2021chunkedencoder.h"
 #include "devices/zeppos/huami2021chunkeddecoder.h"
 #include "huamidevice.h"
 
-class HuamiInitOperation2021 : public AbstractOperation, Huami2020Handler
+class HuamiInitOperation2021 : public AbstractOperation, Huami2021Handler
 {
 public:
     static constexpr uint8_t CMD_PUB_KEY = 0x04;

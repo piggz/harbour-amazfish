@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <qaesencryption.h>
 
-Huami2021ChunkedDecoder::Huami2021ChunkedDecoder(bool force2021Protocal) : m_force2021Protocol(force2021Protocal)
+Huami2021ChunkedDecoder::Huami2021ChunkedDecoder(Huami2021Handler *handler, bool force2021Protocal) : m_force2021Protocol(force2021Protocal)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -104,7 +104,7 @@ bool Huami2021ChunkedDecoder::decode(QByteArray data)
     return needsAck;
 }
 
-void Huami2021ChunkedDecoder::setHuami2021Handler(Huami2020Handler *handler)
+void Huami2021ChunkedDecoder::setHuami2021Handler(Huami2021Handler *handler)
 {
     m_handler = handler;
 }

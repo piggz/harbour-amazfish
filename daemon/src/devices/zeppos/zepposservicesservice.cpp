@@ -4,7 +4,7 @@
 
 ZeppOsServicesService::ZeppOsServicesService(ZeppOSDevice *device, bool encryptedDefault) : AbstractZeppOsService(device, encryptedDefault)
 {
-    m_endpoint = 0x000;
+    m_endpoint = 0x0000;
 }
 
 void ZeppOsServicesService::handlePayload(const QByteArray &payload)
@@ -81,7 +81,7 @@ void ZeppOsServicesService::handleSupportedServices(QByteArray payload)
 
         AbstractZeppOsService *service = m_device->zosService(endpoint);
 
-        qDebug() << "Zepp OS Service: endpoint=" << endpoint << "encrypted={} " << encrypted << "name=" << service->name();
+        qDebug() << "Zepp OS Service: endpoint=" << endpoint << "encrypted= " << encrypted << "name=" << (service ? service->name() : "");
 
         if (service) {
             service->setEncrypted(encrypted);

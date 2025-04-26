@@ -2,6 +2,7 @@
 #include "batteryservice.h"
 #include "huamiinitoperation2021.h"
 
+#include "zeppos/zepposservicesservice.h"
 #include "zeppos/zepposnotificationservice.h"
 
 #include <QtXml/QtXml>
@@ -12,6 +13,15 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
     qDebug() << Q_FUNC_INFO;
 
     connect(this, &QBLEDevice::propertiesChanged, this, &ZeppOSDevice::onPropertiesChanged);
+
+    //Create all possile services
+
+    m_servicesService = new ZeppOsServicesService(this, false);
+    m_serviceMap[m_servicesService->endpoint()] = m_servicesService;
+
+    m_notificationService = new ZeppOsNotificationService(this, true);
+    m_serviceMap[m_notificationService->endpoint()] = m_notificationService;
+
 }
 
 QString ZeppOSDevice::deviceType() const
@@ -40,13 +50,13 @@ AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes)
 void ZeppOSDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
-    notificationService->sendAlert(notification);
+    m_notificationService->sendAlert(notification);
 }
 
 void ZeppOSDevice::incomingCall(const QString &caller)
 {
     qDebug() << Q_FUNC_INFO;
-    notificationService->incomingCall(caller);
+    m_notificationService->incomingCall(caller);
 }
 
 void ZeppOSDevice::incomingCallEnded()
@@ -61,14 +71,42 @@ void ZeppOSDevice::writeToChunked2021(short endpoint, QByteArray data, bool encr
 
 AbstractZeppOsService *ZeppOSDevice::zosService(short endpoint) const
 {
+    if (m_serviceMap.contains(endpoint)) {
+        qDebug() << "Found matching service";
+        return m_serviceMap[endpoint];
+    }
     return nullptr;
 }
 
 void ZeppOSDevice::addSupportedService(short endpoint, bool encryted)
 {
     qDebug() << Q_FUNC_INFO << endpoint << encryted;
+    m_supportedServices.insert(endpoint);
 }
 
+void ZeppOSDevice::handle2021Payload(short type, const QByteArray &data)
+{
+    qDebug() << Q_FUNC_INFO << type;
+
+    if (data.isEmpty()) {
+        qDebug() << "Empty payload for " << type;
+        return;
+    }
+
+    AbstractZeppOsService *service = zosService(type);
+    if (service) {
+        qDebug() << "Found service " << service->name();
+        service->handlePayload(data);
+        return;
+    }
+}
+
+void ZeppOSDevice::authenticated(bool ready)
+{
+    qDebug() << Q_FUNC_INFO << ready;
+
+    m_servicesService->requestServices();
+}
 
 void ZeppOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
@@ -166,7 +204,9 @@ void ZeppOSDevice::initialise()
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER);
 
         m_encoder = new Huami2021ChunkedEncoder(mi->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE), true);
-        m_decoder = new Huami2021ChunkedDecoder(true);
+        m_decoder = new Huami2021ChunkedDecoder(this, true);
+
+        mi->setHuami2021ChunkedDecoder(m_decoder);
 
         connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
         connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
@@ -177,7 +217,6 @@ void ZeppOSDevice::initialise()
         HuamiInitOperation2021 *init = new HuamiInitOperation2021(true, 0x00, 0x80, this, m_encoder, m_decoder);
         mi->registerOperation(init);
 
-        notificationService = new ZeppOsNotificationService(this, true);
         init->start(mi);
     }
 
