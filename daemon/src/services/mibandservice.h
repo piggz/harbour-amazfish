@@ -172,7 +172,6 @@ public:
 
     void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration, int position);
 
-    void setHuami2021Handler(Huami2021Handler *handler);
     void setHuami2021ChunkedDecoder(Huami2021ChunkedDecoder *decoder);
 
 private:
@@ -192,7 +191,6 @@ private:
     KDbConnection *m_conn = nullptr;
     QMap<QString, uint8_t> displayItemsIdMap;
 
-    Huami2021Handler *m_handler = nullptr;
     Huami2021ChunkedDecoder *m_decoder = nullptr;
 };
 

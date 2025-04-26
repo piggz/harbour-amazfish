@@ -846,12 +846,6 @@ void MiBandService::setMusicStatus(bool playing, const QString &artist, const QS
     writeChunked(MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER, 3, cmd);
 }
 
-void MiBandService::setHuami2021Handler(Huami2021Handler *handler)
-{
-    qDebug() << Q_FUNC_INFO;
-    m_handler = handler;
-}
-
 void MiBandService::setHuami2021ChunkedDecoder(Huami2021ChunkedDecoder *decoder)
 {
     qDebug() << Q_FUNC_INFO;
