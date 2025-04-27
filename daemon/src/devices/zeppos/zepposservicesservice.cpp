@@ -2,7 +2,7 @@
 #include "typeconversion.h"
 
 
-ZeppOsServicesService::ZeppOsServicesService(ZeppOSDevice *device) : AbstractZeppOsService(device)
+ZeppOsServicesService::ZeppOsServicesService(ZeppOSDevice *device) : AbstractZeppOsService(device, false)
 {
     m_endpoint = 0x0000;
 }

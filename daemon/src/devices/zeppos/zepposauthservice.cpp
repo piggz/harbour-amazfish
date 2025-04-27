@@ -14,7 +14,7 @@ uint8_t getRandomUint8() {
     return static_cast<uint8_t>(dist(gen));
 }
 
-ZeppOsAuthService::ZeppOsAuthService(ZeppOSDevice *device) : AbstractZeppOsService(device)
+ZeppOsAuthService::ZeppOsAuthService(ZeppOSDevice *device) : AbstractZeppOsService(device, false)
 {
     qDebug() << Q_FUNC_INFO;
     m_endpoint = 0x0082;

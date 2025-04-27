@@ -8,7 +8,7 @@ class AbstractZeppOsService
 {
 
 public:
-    AbstractZeppOsService(ZeppOSDevice *device);
+    AbstractZeppOsService(ZeppOSDevice *device, bool encryptedDefault);
 
     virtual void handlePayload(const QByteArray &payload) = 0;
     virtual QString name() const = 0;

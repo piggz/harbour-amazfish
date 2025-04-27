@@ -16,7 +16,7 @@ void AbstractZeppOsService::setEncrypted(bool enc)
     m_encrypted = enc;
 }
 
-AbstractZeppOsService::AbstractZeppOsService(ZeppOSDevice *device) : m_device(device)
+AbstractZeppOsService::AbstractZeppOsService(ZeppOSDevice *device, bool encryptedDefault) : m_device(device), m_encrypted(encryptedDefault)
 {
 
 }

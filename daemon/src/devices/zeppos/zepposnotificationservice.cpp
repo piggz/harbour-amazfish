@@ -2,7 +2,7 @@
 #include "typeconversion.h"
 
 
-ZeppOsNotificationService::ZeppOsNotificationService(ZeppOSDevice *device) : AbstractZeppOsService(device)
+ZeppOsNotificationService::ZeppOsNotificationService(ZeppOSDevice *device) : AbstractZeppOsService(device, true)
 {
     m_endpoint = 0x001e;
 }
