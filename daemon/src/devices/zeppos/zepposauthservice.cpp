@@ -1,10 +1,9 @@
-#include "huamiinitoperation2021.h"
+#include "zepposauthservice.h"
 
 #include "ecdh/ecdh.h"
-#include "mibandservice.h"
-#include "amazfishconfig.h"
 #include "typeconversion.h"
-#include "zepposdevice.h"
+#include "amazfishconfig.h"
+
 #include <Qt-AES/qaesencryption.h>
 
 uint8_t getRandomUint8() {
@@ -15,83 +14,20 @@ uint8_t getRandomUint8() {
     return static_cast<uint8_t>(dist(gen));
 }
 
-HuamiInitOperation2021::HuamiInitOperation2021(bool needsAuth, uint8_t authFlags, uint8_t cryptFlags, HuamiDevice *device, Huami2021ChunkedEncoder *encoder, Huami2021ChunkedDecoder *decoder) : m_device(device), m_encoder(encoder), m_decoder(decoder)
+ZeppOsAuthService::ZeppOsAuthService(ZeppOSDevice *device, bool encryptedDefault) : AbstractZeppOsService(device, encryptedDefault)
 {
     qDebug() << Q_FUNC_INFO;
+    m_endpoint = 0x0082;
 }
 
-void HuamiInitOperation2021::handleData(const QByteArray &data)
+QString ZeppOsAuthService::name() const
 {
-
+    return "Auth";
 }
 
-bool HuamiInitOperation2021::handleMetaData(const QByteArray &data)
+void ZeppOsAuthService::handlePayload(const QByteArray &payload)
 {
-    return false;
-}
-
-void HuamiInitOperation2021::start(QBLEService *service)
-{
-    qDebug() << Q_FUNC_INFO;
-
-    QByteArray sendPubkeyCommand;
-    m_service = service;
-
-    m_decoder->setHuami2021Handler(this);
-
-    generateKeyPair();
-
-    sendPubkeyCommand += QByteArray(1, 0x04);
-    sendPubkeyCommand += QByteArray(1, 0x02);
-    sendPubkeyCommand += QByteArray(1, 0x00);
-    sendPubkeyCommand += QByteArray(1, 0x02);
-    sendPubkeyCommand += UCHARARR_TO_BYTEARRAY(m_publicEC);
-    m_encoder->write(MiBandService::CHUNKED2021_ENDPOINT_AUTH, sendPubkeyCommand, true, false);
-}
-
-bool HuamiInitOperation2021::characteristicChanged(const QString &characteristic, const QByteArray &value)
-{
-    qDebug() << Q_FUNC_INFO << characteristic << value.toHex();
-
-    if (characteristic != MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ) {
-        qDebug() << "Unhandled characteristic:" << characteristic;
-        return false;
-    }
-
-    if (value.length() <= 1 || value[0] != 0x03) {
-        //Not chunked
-        return false;
-    }
-
-    bool needsAck = m_decoder->decode(value);
-    if (needsAck) {
-        qDebug() << "Sending ACK to device";
-        QByteArray ack;
-        ack += CMD_PUB_KEY;
-        ack += UCHARVAL_TO_BYTEARRAY(0x00);
-        ack += m_decoder->lastHandle();
-        ack += 0x01;
-        ack += m_decoder->lastCount();
-
-        if (m_service) {
-            QBLECharacteristic *c = m_service->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ);
-            if (c) {
-                c->writeValue(ack);
-            }
-        }
-    }
-
-    return m_done;
-}
-
-void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &payload)
-{
-    qDebug() << Q_FUNC_INFO << type << payload.toHex();
-
-    if (type != MiBandService::CHUNKED2021_ENDPOINT_AUTH) {
-        qDebug() << "Unandles message type";
-        return;
-    }
+    qDebug() << Q_FUNC_INFO << payload.toHex();
 
     if (payload[0] == MiBandService::RESPONSE && payload[1] == CMD_PUB_KEY && payload[2] == MiBandService::SUCCESS && payload.length() == 67) {
         qDebug() << "Got remote random + public key";
@@ -163,7 +99,61 @@ void HuamiInitOperation2021::handle2021Payload(short type, const QByteArray &pay
     }
 }
 
-void HuamiInitOperation2021::generateKeyPair()
+void ZeppOsAuthService::startAuthentication()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QByteArray sendPubkeyCommand;
+
+    generateKeyPair();
+
+    sendPubkeyCommand += QByteArray(1, 0x04);
+    sendPubkeyCommand += QByteArray(1, 0x02);
+    sendPubkeyCommand += QByteArray(1, 0x00);
+    sendPubkeyCommand += QByteArray(1, 0x02);
+    sendPubkeyCommand += UCHARARR_TO_BYTEARRAY(m_publicEC);
+    m_encoder->write(MiBandService::CHUNKED2021_ENDPOINT_AUTH, sendPubkeyCommand, true, false);
+}
+
+#if 0
+bool ZeppOsAuthService::characteristicChanged(const QString &characteristic, const QByteArray &value)
+{
+    qDebug() << Q_FUNC_INFO << characteristic << value.toHex();
+
+    if (characteristic != MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ) {
+        qDebug() << "Unhandled characteristic:" << characteristic;
+        return false;
+    }
+
+    if (value.length() <= 1 || value[0] != 0x03) {
+        //Not chunked
+        return false;
+    }
+
+    bool needsAck = m_decoder->decode(value);
+    if (needsAck) {
+        qDebug() << "Sending ACK to device";
+        QByteArray ack;
+        ack += CMD_PUB_KEY;
+        ack += UCHARVAL_TO_BYTEARRAY(0x00);
+        ack += m_decoder->lastHandle();
+        ack += 0x01;
+        ack += m_decoder->lastCount();
+
+        if (m_service) {
+            QBLECharacteristic *c = m_service->characteristic(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ);
+            if (c) {
+                c->writeValue(ack);
+            }
+        }
+    }
+
+    return m_done;
+}
+
+#endif
+
+void ZeppOsAuthService::generateKeyPair()
 {
     for (unsigned int i = 0; i < 24; ++i) {
         m_privateEC[i] = getRandomUint8();
@@ -171,7 +161,7 @@ void HuamiInitOperation2021::generateKeyPair()
     ecdh_generate_keys(m_publicEC, m_privateEC);
 }
 
-void HuamiInitOperation2021::debugArrayPrint(const QString &name, uint8_t *arr, int size)
+void ZeppOsAuthService::debugArrayPrint(const QString &name, uint8_t *arr, int size)
 {
     qDebug() << name << ":";
 #if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)

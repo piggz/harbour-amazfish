@@ -39,6 +39,8 @@ set(SOURCES
 ./src/devices/zeppos/huami2021chunkeddecoder.cpp
 ./src/devices/zeppos/zepposservicesservice.cpp
 ./src/devices/zeppos/zepposnotificationservice.cpp
+./src/devices/zeppos/zepposauthservice.cpp
+./src/devices/zeppos/huami2021handler.cpp
 ./src/harbour-amazfish-daemon.cpp
 ./src/huamiweathercondition.cpp
 ./src/navigationinterface.cpp
@@ -55,8 +57,6 @@ set(SOURCES
 ./src/operations/sportssummaryoperation.cpp
 ./src/operations/updatefirmwareoperation.cpp
 ./src/operations/updatefirmwareoperationnew.cpp
-./src/operations/huamiinitoperation2021.cpp
-./src/operations/huami2021handler.cpp
 ./src/qaesencryption.cpp
 ./src/realtimeactivitysample.cpp
 ./src/services/abstractoperationservice.cpp
@@ -133,6 +133,8 @@ set(HEADERS
 ./src/devices/zeppos/huami2021chunkeddecoder.h
 ./src/devices/zeppos/zepposservicesservice.h
 ./src/devices/zeppos/zepposnotificationservice.h
+./src/devices/zeppos/zepposauthservice.h
+./src/devices/zeppos/huami2021handler.h
 ./src/huamiweathercondition.h
 ./src/navigationinterface.h
 ./src/operations/abstractfetchoperation.h
@@ -148,8 +150,6 @@ set(HEADERS
 ./src/operations/sportssummaryoperation.h
 ./src/operations/updatefirmwareoperation.h
 ./src/operations/updatefirmwareoperationnew.h
-./src/operations/huamiinitoperation2021.h
-./src/operations/huami2021handler.h
 ./src/qaesencryption.h
 ./src/realtimeactivitysample.h
 ./src/services/abstractoperationservice.h

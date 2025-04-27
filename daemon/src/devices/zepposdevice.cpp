@@ -1,6 +1,6 @@
 #include "zepposdevice.h"
 #include "batteryservice.h"
-#include "huamiinitoperation2021.h"
+#include "zeppos/zepposauthservice.h"
 
 #include "zeppos/zepposservicesservice.h"
 #include "zeppos/zepposnotificationservice.h"
@@ -18,6 +18,9 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 
     m_servicesService = new ZeppOsServicesService(this, false);
     m_serviceMap[m_servicesService->endpoint()] = m_servicesService;
+
+    m_authService = new ZeppOsAuthService(this, false);
+    m_serviceMap[m_authService->endpoint()] = m_authService;
 
     m_notificationService = new ZeppOsNotificationService(this, true);
     m_serviceMap[m_notificationService->endpoint()] = m_notificationService;
@@ -106,6 +109,12 @@ void ZeppOSDevice::authenticated(bool ready)
     qDebug() << Q_FUNC_INFO << ready;
 
     m_servicesService->requestServices();
+
+    if (ready) {
+        setConnectionState("authenticated");
+    } else {
+        setConnectionState("authfailed");
+    }
 }
 
 void ZeppOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
@@ -214,10 +223,8 @@ void ZeppOSDevice::initialise()
         connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &ZeppOSDevice::serviceEvent, Qt::UniqueConnection);
 
-        HuamiInitOperation2021 *init = new HuamiInitOperation2021(true, 0x00, 0x80, this, m_encoder, m_decoder);
-        mi->registerOperation(init);
 
-        init->start(mi);
+        m_authService->startAuthentication();
     }
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));

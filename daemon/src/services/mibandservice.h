@@ -3,7 +3,7 @@
 
 #include "abstractoperationservice.h"
 #include "bipbatteryinfo.h"
-#include "huami2021handler.h"
+#include "devices/zeppos/huami2021handler.h"
 #include "weather/currentweather.h"
 #include "devices/abstractdevice.h"
 #include "zeppos/huami2021chunkeddecoder.h"

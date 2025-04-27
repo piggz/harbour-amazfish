@@ -1,27 +1,23 @@
-#ifndef HUAMIINITOPERATION2_21_H
-#define HUAMIINITOPERATION2_21_H
+#ifndef ZEPPOSAUTHSERVICE_H
+#define ZEPPOSAUTHSERVICE_H
 
-#include "abstractoperation.h"
-#include "huami2021handler.h"
 #include "devices/zeppos/huami2021chunkedencoder.h"
 #include "devices/zeppos/huami2021chunkeddecoder.h"
 #include "huamidevice.h"
+#include "zeppos/abstractzepposservice.h"
 
-class HuamiInitOperation2021 : public AbstractOperation, Huami2021Handler
+class ZeppOsAuthService : public AbstractZeppOsService
 {
 public:
     static constexpr uint8_t CMD_PUB_KEY = 0x04;
     static constexpr uint8_t CMD_SESSION_KEY = 0x05;
 
-    HuamiInitOperation2021(bool needsAuth, uint8_t authFlags, uint8_t cryptFlags, HuamiDevice *device, Huami2021ChunkedEncoder *encoder, Huami2021ChunkedDecoder *decoder);
+    ZeppOsAuthService(ZeppOSDevice *device, bool encryptedDefault);
 
-    void handleData(const QByteArray &data) override;
-    bool handleMetaData(const QByteArray &data) override;
-    void start(QBLEService *service) override;
-    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
+    void handlePayload(const QByteArray &data) override;
+    QString name() const override;
 
-    void handle2021Payload(short type, const QByteArray &data) override;
-
+    void startAuthentication();
 
 private:
 
