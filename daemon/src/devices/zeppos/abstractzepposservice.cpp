@@ -16,6 +16,11 @@ void AbstractZeppOsService::setEncrypted(bool enc)
     m_encrypted = enc;
 }
 
+void AbstractZeppOsService::write(const QByteArray &data)
+{
+    m_device->writeToChunked2021(endpoint(), data, encrypted());
+}
+
 AbstractZeppOsService::AbstractZeppOsService(ZeppOSDevice *device, bool encryptedDefault) : m_device(device), m_encrypted(encryptedDefault)
 {
 

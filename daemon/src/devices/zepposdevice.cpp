@@ -1,9 +1,10 @@
 #include "zepposdevice.h"
 #include "batteryservice.h"
-#include "zeppos/zepposauthservice.h"
 
+#include "zeppos/zepposauthservice.h"
 #include "zeppos/zepposservicesservice.h"
 #include "zeppos/zepposnotificationservice.h"
+#include "zeppos/zepposstepsservice.h"
 
 #include <QtXml/QtXml>
 #include <QDebug>
@@ -24,6 +25,10 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 
     m_notificationService = new ZeppOsNotificationService(this);
     m_serviceMap[m_notificationService->endpoint()] = m_notificationService;
+
+    m_stepsService = new ZeppOsStepsService(this);
+    m_serviceMap[m_stepsService->endpoint()] = m_stepsService;
+
 
 }
 
@@ -119,6 +124,8 @@ void ZeppOSDevice::authenticated(bool ready)
 void ZeppOSDevice::ready()
 {
     setConnectionState("authenticated");
+
+    m_stepsService->enableRealtimeSteps(true);
 }
 
 void ZeppOSDevice::setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey)
