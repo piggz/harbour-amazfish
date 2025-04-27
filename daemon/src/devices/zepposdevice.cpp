@@ -16,13 +16,13 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 
     //Create all possile services
 
-    m_servicesService = new ZeppOsServicesService(this, false);
+    m_servicesService = new ZeppOsServicesService(this);
     m_serviceMap[m_servicesService->endpoint()] = m_servicesService;
 
-    m_authService = new ZeppOsAuthService(this, false);
+    m_authService = new ZeppOsAuthService(this);
     m_serviceMap[m_authService->endpoint()] = m_authService;
 
-    m_notificationService = new ZeppOsNotificationService(this, true);
+    m_notificationService = new ZeppOsNotificationService(this);
     m_serviceMap[m_notificationService->endpoint()] = m_notificationService;
 
 }
@@ -108,13 +108,23 @@ void ZeppOSDevice::authenticated(bool ready)
 {
     qDebug() << Q_FUNC_INFO << ready;
 
-    m_servicesService->requestServices();
 
     if (ready) {
-        setConnectionState("authenticated");
+        m_servicesService->requestServices();
     } else {
         setConnectionState("authfailed");
     }
+}
+
+void ZeppOSDevice::ready()
+{
+    setConnectionState("authenticated");
+}
+
+void ZeppOSDevice::setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey)
+{
+    m_encoder->setEncryptionParameters(encryptedSequenceNumber, sharedSessionKey);
+    m_decoder->setEncryptionParameters(sharedSessionKey);
 }
 
 void ZeppOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)

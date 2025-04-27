@@ -12,10 +12,11 @@ bool AbstractZeppOsService::encrypted() const
 
 void AbstractZeppOsService::setEncrypted(bool enc)
 {
+    qDebug() << "Setting service " << m_endpoint << " encrypted " << enc;
     m_encrypted = enc;
 }
 
-AbstractZeppOsService::AbstractZeppOsService(ZeppOSDevice *device, bool encryptedDefault) : m_device(device), m_encrypted(encryptedDefault)
+AbstractZeppOsService::AbstractZeppOsService(ZeppOSDevice *device) : m_device(device)
 {
 
 }

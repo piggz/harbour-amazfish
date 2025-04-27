@@ -12,7 +12,7 @@ public:
     static constexpr uint8_t CMD_PUB_KEY = 0x04;
     static constexpr uint8_t CMD_SESSION_KEY = 0x05;
 
-    ZeppOsAuthService(ZeppOSDevice *device, bool encryptedDefault);
+    ZeppOsAuthService(ZeppOSDevice *device);
 
     void handlePayload(const QByteArray &data) override;
     QString name() const override;
@@ -28,11 +28,7 @@ private:
     uint8_t m_sharedEC[48];
     uint8_t m_finalSharedSessionAES[16];
     QBLEService *m_service = nullptr;
-    HuamiDevice *m_device = nullptr;
     bool m_done = false;
-
-    Huami2021ChunkedEncoder *m_encoder = nullptr;
-    Huami2021ChunkedDecoder *m_decoder = nullptr;
 
     void generateKeyPair();
     void debugArrayPrint(const QString &name, uint8_t *arr, int size);

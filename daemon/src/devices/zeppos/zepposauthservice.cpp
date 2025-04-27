@@ -14,7 +14,7 @@ uint8_t getRandomUint8() {
     return static_cast<uint8_t>(dist(gen));
 }
 
-ZeppOsAuthService::ZeppOsAuthService(ZeppOSDevice *device, bool encryptedDefault) : AbstractZeppOsService(device, encryptedDefault)
+ZeppOsAuthService::ZeppOsAuthService(ZeppOSDevice *device) : AbstractZeppOsService(device)
 {
     qDebug() << Q_FUNC_INFO;
     m_endpoint = 0x0082;
@@ -63,8 +63,7 @@ void ZeppOsAuthService::handlePayload(const QByteArray &payload)
         }
         qDebug() << "Shared Session Key: " << f.toHex();
 
-        m_encoder->setEncryptionParameters(encryptedSequenceNumber, f);
-        m_decoder->setEncryptionParameters(f);
+        m_device->setEncryptionParameters(encryptedSequenceNumber, f);
 
         QByteArray r;
         r.resize(16);
@@ -81,7 +80,7 @@ void ZeppOsAuthService::handlePayload(const QByteArray &payload)
             command += encryptedRandom1;
             command += encryptedRandom2;
 
-            m_encoder->write(MiBandService::CHUNKED2021_ENDPOINT_AUTH, command, true, false);
+            m_device->writeToChunked2021(m_endpoint, command, false);
             //huamiSupport.performImmediately(builder);
         } else {
             qDebug() << "Random lengths not 16:" << encryptedRandom1.length() << encryptedRandom2.length();
@@ -91,8 +90,6 @@ void ZeppOsAuthService::handlePayload(const QByteArray &payload)
         if (m_device) {
             m_device->authenticated(true);
         }
-        m_decoder->setHuami2021Handler(dynamic_cast<ZeppOSDevice*>(m_device));
-
         m_done = true;
     } else {
         qDebug() << "Unexpected payload";
@@ -112,7 +109,8 @@ void ZeppOsAuthService::startAuthentication()
     sendPubkeyCommand += QByteArray(1, 0x00);
     sendPubkeyCommand += QByteArray(1, 0x02);
     sendPubkeyCommand += UCHARARR_TO_BYTEARRAY(m_publicEC);
-    m_encoder->write(MiBandService::CHUNKED2021_ENDPOINT_AUTH, sendPubkeyCommand, true, false);
+
+    m_device->writeToChunked2021(m_endpoint, sendPubkeyCommand, false);
 }
 
 #if 0

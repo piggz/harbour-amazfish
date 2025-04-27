@@ -14,8 +14,6 @@ public:
     uint8_t lastCount();
     bool decode(QByteArray data);
 
-    void setHuami2021Handler(Huami2021Handler *handler);
-
 private:
     bool m_force2021Protocol = false;
     QByteArray m_sharedSessionKey;

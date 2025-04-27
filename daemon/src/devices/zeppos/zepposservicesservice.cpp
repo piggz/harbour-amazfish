@@ -2,7 +2,7 @@
 #include "typeconversion.h"
 
 
-ZeppOsServicesService::ZeppOsServicesService(ZeppOSDevice *device, bool encryptedDefault) : AbstractZeppOsService(device, encryptedDefault)
+ZeppOsServicesService::ZeppOsServicesService(ZeppOSDevice *device) : AbstractZeppOsService(device)
 {
     m_endpoint = 0x0000;
 }
@@ -89,6 +89,8 @@ void ZeppOsServicesService::handleSupportedServices(QByteArray payload)
 
         m_device->addSupportedService(endpoint, encrypted);
     }
+
+    m_device->ready();
 }
 
 QString ZeppOsServicesService::name() const

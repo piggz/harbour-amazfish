@@ -33,6 +33,9 @@ public:
     void handle2021Payload(short type, const QByteArray &data) override;
 
     Q_SLOT void authenticated(bool ready) override;
+    void ready();
+
+    void setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey);
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;

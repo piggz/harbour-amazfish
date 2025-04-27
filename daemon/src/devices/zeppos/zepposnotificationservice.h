@@ -27,7 +27,7 @@ public:
     static const uint8_t NOTIFICATION_CALL_STATE_START = 0x00;
     static const uint8_t NOTIFICATION_CALL_STATE_END = 0x02;
 
-    ZeppOsNotificationService(ZeppOSDevice *device, bool encryptedDefault);
+    ZeppOsNotificationService(ZeppOSDevice *device);
 
     void handlePayload(const QByteArray &payload) override;
     QString name() const override;

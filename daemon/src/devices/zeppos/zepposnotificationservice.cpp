@@ -2,7 +2,7 @@
 #include "typeconversion.h"
 
 
-ZeppOsNotificationService::ZeppOsNotificationService(ZeppOSDevice *device, bool encryptedDefault) : AbstractZeppOsService(device, encryptedDefault)
+ZeppOsNotificationService::ZeppOsNotificationService(ZeppOSDevice *device) : AbstractZeppOsService(device)
 {
     m_endpoint = 0x001e;
 }
