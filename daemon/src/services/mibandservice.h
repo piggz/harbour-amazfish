@@ -95,11 +95,13 @@ public:
     static constexpr uint8_t COMMAND_SET_FITNESS_GOAL_START[3] = { 0x10, 0x0, 0x0 };
     static constexpr uint8_t COMMAND_SET_FITNESS_GOAL_END[2] = { 0, 0 };
     static const uint8_t COMMAND_ACTIVITY_DATA_START_DATE = 0x01;
+    static const uint8_t COMMAND_FETCH_DATA = 0x02;
+    static const uint8_t COMMAND_ACK_ACTIVITY_DATA = 0x03;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY = 0x01;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES = 0x05;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_SPORTS_DETAILS = 0x06;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS = 0x07;
-    static const uint8_t COMMAND_FETCH_DATA = 0x02;
+
     static constexpr uint8_t COMMAND_CHANGE_SCREENS[12] = {ENDPOINT_DISPLAY_ITEMS, 0x01, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
     static constexpr uint8_t COMMAND_ENABLE_DISCONNECT_NOTIFICATION[8] = {ENDPOINT_DISPLAY, 0x0c, 0x00, 0x01, 0, 0, 0, 0};
     static constexpr uint8_t COMMAND_DISABLE_DISCONNECT_NOTIFICATION[8] = {ENDPOINT_DISPLAY, 0x0c, 0x00, 0x00, 0, 0, 0, 0};

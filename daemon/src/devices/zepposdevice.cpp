@@ -14,6 +14,8 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 {
     qDebug() << Q_FUNC_INFO;
 
+    m_ActivitySampleSize = 8;
+
     connect(this, &QBLEDevice::propertiesChanged, this, &ZeppOSDevice::onPropertiesChanged);
 
     //Create all possile services

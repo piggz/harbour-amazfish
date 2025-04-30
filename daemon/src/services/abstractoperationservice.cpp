@@ -61,6 +61,7 @@ void AbstractOperationService::cancelOperation()
         delete m_currentOperation;
         m_currentOperation = nullptr;
         emit operationRunningChanged();
+        m_operationTimeout->stop();
     }
 }
 

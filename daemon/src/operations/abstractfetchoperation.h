@@ -18,6 +18,9 @@ private:
     QString m_lastSyncKey;
     bool m_abort = false;
 
+    bool handleStartDateResponse(const QByteArray &value);
+    bool handleFetchDataResponse(const QByteArray &value);
+
 protected:
     void setStartDate(const QDateTime &sd);
     QDateTime startDate() const;
