@@ -132,6 +132,7 @@ public:
     virtual void requestScreenshot();
     virtual QStringList supportedDisplayItems() const;
     virtual void immediateAlert(int level);
+    virtual void requestManualHeartrate() const;
 
     Q_SIGNAL void operationRunningChanged();
 

@@ -14,7 +14,7 @@ class HRMService : public QBLEService
     Q_OBJECT
 
 public:
-    HRMService(const QString &path, QObject *parent);
+    HRMService(const QString &path, QObject *parent, bool handleDataExternally = false);
     static const char *UUID_SERVICE_HRM;
     static const char *UUID_CHARACTERISTIC_HRM_MEASUREMENT;
     static const char *UUID_CHARACTERISTIC_HRM_CONTROL;

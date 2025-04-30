@@ -946,8 +946,8 @@ void DeviceInterface::requestManualHeartrate()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (hrmService()) {
-        hrmService()->enableManualHRMeasurement(true);
+    if (m_device) {
+        m_device->requestManualHeartrate();
     }
 }
 

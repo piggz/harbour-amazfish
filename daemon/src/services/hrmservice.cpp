@@ -6,11 +6,13 @@ const char* HRMService::UUID_CHARACTERISTIC_HRM_MEASUREMENT = "00002a37-0000-100
 const char* HRMService::UUID_CHARACTERISTIC_HRM_CONTROL = "00002a39-0000-1000-8000-00805f9b34fb";
 
 
-HRMService::HRMService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_HRM, path, parent)
+HRMService::HRMService(const QString &path, QObject *parent, bool handleDataExternally) : QBLEService(UUID_SERVICE_HRM, path, parent)
 {
     qDebug() << Q_FUNC_INFO;
 
-    connect(this, &QBLEService::characteristicChanged, this, &HRMService::characteristicChanged);
+    if (!handleDataExternally) {
+        connect(this, &QBLEService::characteristicChanged, this, &HRMService::characteristicChanged);
+    }
 }
 
 

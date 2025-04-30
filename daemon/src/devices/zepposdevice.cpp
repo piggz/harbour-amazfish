@@ -5,6 +5,7 @@
 #include "zeppos/zepposservicesservice.h"
 #include "zeppos/zepposnotificationservice.h"
 #include "zeppos/zepposstepsservice.h"
+#include "zeppos/zepposheartrateservice.h"
 
 #include <QtXml/QtXml>
 #include <QDebug>
@@ -29,7 +30,8 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
     m_stepsService = new ZeppOsStepsService(this);
     m_serviceMap[m_stepsService->endpoint()] = m_stepsService;
 
-
+    m_heartRateService = new ZeppOsHeartRateService(this);
+    m_serviceMap[m_heartRateService->endpoint()] = m_heartRateService;
 }
 
 QString ZeppOSDevice::deviceType() const
@@ -70,6 +72,11 @@ void ZeppOSDevice::incomingCall(const QString &caller)
 void ZeppOSDevice::incomingCallEnded()
 {
     qDebug() << Q_FUNC_INFO;
+}
+
+void ZeppOSDevice::requestManualHeartrate() const
+{
+    m_heartRateService->enableRealtimeHeartRateMeasurement(true, true);
 }
 
 void ZeppOSDevice::writeToChunked2021(short endpoint, QByteArray data, bool encryptIgnored)
@@ -203,7 +210,7 @@ void ZeppOSDevice::parseServices()
             } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
                 addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
             } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
-                addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
+                addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this, true));
             } else if (uuid == MiBandService::UUID_SERVICE_MIBAND && !service(MiBandService::UUID_SERVICE_MIBAND)) {
                 addService(MiBandService::UUID_SERVICE_MIBAND, new MiBandService(path, this));
             } else if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2 && !service(MiBand2Service::UUID_SERVICE_MIBAND2)) {
@@ -216,6 +223,15 @@ void ZeppOSDevice::parseServices()
                 addService(uuid, new QBLEService(uuid, path, this));
             }
         }
+    }
+}
+
+void ZeppOSDevice::characteristicChanged(const QString &characteristic, const QByteArray &value)
+{
+    qDebug() << Q_FUNC_INFO << characteristic << value.toHex();
+
+    if (characteristic == HRMService::UUID_CHARACTERISTIC_HRM_MEASUREMENT) {
+        m_heartRateService->handleHeartRate(value);
     }
 }
 
@@ -266,5 +282,6 @@ void ZeppOSDevice::initialise()
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     if (hrm) {
         connect(hrm, &HRMService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
+        connect(hrm, &QBLEService::characteristicChanged, this, &ZeppOSDevice::characteristicChanged, Qt::UniqueConnection);
     }
 }

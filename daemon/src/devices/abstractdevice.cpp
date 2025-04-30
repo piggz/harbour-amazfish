@@ -1,5 +1,6 @@
 #include "abstractdevice.h"
 #include "abstractoperationservice.h"
+#include "hrmservice.h"
 
 #include <QString>
     
@@ -201,6 +202,14 @@ QStringList AbstractDevice::supportedDisplayItems() const
 
 void AbstractDevice::immediateAlert(int level) {
     qDebug() << Q_FUNC_INFO << level;
+}
+
+void AbstractDevice::requestManualHeartrate() const
+{
+    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
+    if (hrm) {
+        hrm->enableManualHRMeasurement(true);
+    }
 }
 
 bool AbstractDevice::operationRunning()
