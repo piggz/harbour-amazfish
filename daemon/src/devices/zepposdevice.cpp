@@ -5,6 +5,7 @@
 #include "zeppos/zepposservicesservice.h"
 #include "zeppos/zepposnotificationservice.h"
 #include "zeppos/zepposstepsservice.h"
+#include "zeppos/zepposbatteryservice.h"
 #include "zeppos/zepposheartrateservice.h"
 
 #include <QtXml/QtXml>
@@ -31,6 +32,9 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 
     m_stepsService = new ZeppOsStepsService(this);
     m_serviceMap[m_stepsService->endpoint()] = m_stepsService;
+
+    m_batteryService = new ZeppOsBatteryService(this);
+    m_serviceMap[m_batteryService->endpoint()] = m_batteryService;
 
     m_heartRateService = new ZeppOsHeartRateService(this);
     m_serviceMap[m_heartRateService->endpoint()] = m_heartRateService;
@@ -234,6 +238,8 @@ void ZeppOSDevice::characteristicChanged(const QString &characteristic, const QB
 
     if (characteristic == HRMService::UUID_CHARACTERISTIC_HRM_MEASUREMENT) {
         m_heartRateService->handleHeartRate(value);
+    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO) {
+        m_batteryService->handlePayload(value);
     }
 }
 

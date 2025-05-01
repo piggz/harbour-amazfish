@@ -10,6 +10,7 @@ class ZeppOsServicesService;
 class ZeppOsAuthService;
 class ZeppOsNotificationService;
 class ZeppOsStepsService;
+class ZeppOsBatteryService;
 class ZeppOsHeartRateService;
 
 class ZeppOSDevice: public HuamiDevice, public Huami2021Handler
@@ -52,6 +53,7 @@ private:
     ZeppOsNotificationService *m_notificationService = nullptr;
     ZeppOsAuthService *m_authService = nullptr;
     ZeppOsStepsService *m_stepsService = nullptr;
+    ZeppOsBatteryService *m_batteryService = nullptr;
     ZeppOsHeartRateService *m_heartRateService = nullptr;
 
     QMap<short, AbstractZeppOsService *> m_serviceMap;
