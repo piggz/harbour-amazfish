@@ -5,6 +5,8 @@
 #include "amazfishconfig.h"
 
 #include <Qt-AES/qaesencryption.h>
+#include <iostream>
+#include <random>
 
 uint8_t getRandomUint8() {
     static std::random_device rd;  // Non-deterministic random device
