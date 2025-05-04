@@ -8,7 +8,7 @@ PagePL {
     id: page
     title: qsTr("Heartrate")
 
-    property var day: new Date()
+    property alias day: nav.day
     property real relaxed: 0
     property real light: 0
     property real intensive: 0
@@ -53,18 +53,22 @@ PagePL {
         }
 
         DateNavigation {
-            text: day.toDateString();
+            id: nav
             onBackward: {
-                day.setDate(day.getDate() - 1);
-                text = day.toDateString();
-                updateGraphs();
+                var d = new Date(day);
+                d.setDate(day.getDate() - 1);
+                day = d;
             }
             onForward: {
-                day.setDate(day.getDate() + 1);
-                text = day.toDateString();
+                var d = new Date(day);
+                d.setDate(day.getDate() + 1);
+                day = d;
+            }
+            onDayChanged: {
                 updateGraphs();
             }
         }
+
 
         Graph {
             id: graphHR
