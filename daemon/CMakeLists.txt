@@ -1,4 +1,5 @@
 set(SOURCES
+./src/achievements.cpp
 ./src/activitycoordinate.cpp
 ./src/activitykind.cpp
 ./src/activitysample.cpp
@@ -94,6 +95,7 @@ set(SOURCES
 )
 
 set(HEADERS
+./src/achievements.h
 ./src/activitycoordinate.h
 ./src/activitykind.h
 ./src/activitysample.h
@@ -217,7 +219,10 @@ elseif(FLAVOR STREQUAL "uuitk")
     target_include_directories(harbour-amazfishd PUBLIC ${PULSE_INCLUDE_DIRS})
     target_link_libraries(harbour-amazfishd PUBLIC ${PULSE_LIBRARIES} pulse-simple)
 
+    pkg_check_modules(LIBUSERMETRICSINPUT REQUIRED libusermetricsinput-1)
 
+    target_include_directories(harbour-amazfishd PUBLIC ${LIBUSERMETRICSINPUT_INCLUDE_DIRS})
+    target_link_libraries(harbour-amazfishd PUBLIC ${LIBUSERMETRICSINPUT_LIBRARIES})
 else()
     set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;soundprofile")
 endif()

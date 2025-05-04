@@ -27,6 +27,7 @@
 #include "libwatchfish/calendarsource.h"
 #include "libwatchfish/soundprofile.h"
 #include "navigationinterface.h"
+#include "achievements.h"
 
 class HRMService;
 class MiBand2Service;
@@ -135,6 +136,8 @@ private:
     watchfish::NotificationMonitor m_notificationMonitor;
     watchfish::CalendarSource m_calendarSource;
     watchfish::SoundProfile m_soundProfile;
+
+    Achievements m_achievements;
 
     //Notifications
     QQueue<AbstractDevice::WatchNotification> m_notificationBuffer;

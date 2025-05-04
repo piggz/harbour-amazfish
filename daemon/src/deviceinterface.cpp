@@ -20,6 +20,12 @@
 #include <pulse/error.h>
 #endif
 
+#ifdef UUITK_EDITION
+#include <libusermetricsinput/MetricManager.h>
+using namespace UserMetricsInput;
+#endif
+
+
 static const char *SERVICE = SERVICE_NAME_AMAZFISH;
 static const char *PATH = "/application";
 
@@ -531,9 +537,7 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
     if (key == AbstractDevice::INFO_BATTERY) {
         int battery_level = val.toInt();
         if (battery_level != m_lastBatteryLevel) {
-
             log_battery_level(battery_level);
-
             if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
                 AbstractDevice::WatchNotification n;
                 n.id = 0;
@@ -544,6 +548,14 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
                 sendAlert(n);
             }
             m_lastBatteryLevel = battery_level;
+        }
+    }
+    if (key == AbstractDevice::INFO_STEPS) {
+        bool conversionOk = false;
+        int steps = val.toInt(&conversionOk);
+        if (conversionOk) {
+            auto goal = AmazfishConfig::instance()->profileFitnessGoal();
+            m_achievements.updateStepsStatus(steps, goal);
         }
     }
 
