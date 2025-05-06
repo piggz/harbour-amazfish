@@ -2,6 +2,7 @@
 #ifndef ABSTRACTDEVICE_H
 #define ABSTRACTDEVICE_H
 
+#include "amazfish.h"
 #include "qble/qbledevice.h"
 #include "weather/currentweather.h"
 #include "abstractfirmwareinfo.h"
@@ -82,15 +83,6 @@ public:
     };
     Q_ENUM(Event)
 
-    struct WatchNotification
-    {
-        int id;
-        QString appId;
-        QString appName;
-        QString summary;
-        QString body;
-    };
-
     explicit AbstractDevice(const QString &pairedName, QObject *parent = nullptr);
     
     virtual void pair() override;
@@ -121,7 +113,7 @@ public:
     virtual QString information(Info i) const;
     virtual void applyDeviceSetting(Settings s);
     virtual void rebootWatch();
-    virtual void sendAlert(const AbstractDevice::WatchNotification &notification) = 0;
+    virtual void sendAlert(const Amazfish::WatchNotification &notification) = 0;
     virtual void incomingCall(const QString &caller) = 0;
     virtual void incomingCallEnded() = 0;
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);

@@ -11,7 +11,7 @@ AsteroidNotificationService::AsteroidNotificationService(const QString &path, QO
     connect(this, &QBLEService::characteristicChanged, this, &AsteroidNotificationService::characteristicChanged);
 }
 
-void AsteroidNotificationService::sendAlert(const AbstractDevice::WatchNotification &notification)
+void AsteroidNotificationService::sendAlert(const Amazfish::WatchNotification &notification)
 {
 //    qDebug() << Q_FUNC_INFO << sender << subject << message;
 
@@ -30,7 +30,7 @@ void AsteroidNotificationService::incomingCall(const QString &caller)
 {
     qDebug() << Q_FUNC_INFO << caller;
     m_lastVoiceCallNotification++;
-    AbstractDevice::WatchNotification n;
+    Amazfish::WatchNotification n;
 
     n.appId = "incoming-call";
     n.appName = "incoming-call";

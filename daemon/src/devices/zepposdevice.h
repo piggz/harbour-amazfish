@@ -23,7 +23,7 @@ public:
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
 
     //Overrides from AbstractDevice
-    void sendAlert(const AbstractDevice::WatchNotification &notification) override;
+    void sendAlert(const Amazfish::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
     void requestManualHeartrate() const override;

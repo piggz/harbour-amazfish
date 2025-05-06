@@ -33,7 +33,7 @@ AbstractFirmwareInfo *AsteroidOSDevice::firmwareInfo(const QByteArray &bytes)
     return nullptr;
 }
 
-void AsteroidOSDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
+void AsteroidOSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
 

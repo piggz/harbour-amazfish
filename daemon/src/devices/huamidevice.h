@@ -27,7 +27,7 @@ public:
 
     void applyDeviceSetting(Settings s) override;
 
-    virtual void sendAlert(const AbstractDevice::WatchNotification &notification) override;
+    virtual void sendAlert(const Amazfish::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
 

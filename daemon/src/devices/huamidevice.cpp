@@ -174,7 +174,7 @@ void HuamiDevice::rebootWatch()
 
 }
 
-void HuamiDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
+void HuamiDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
     if (alert) {
@@ -207,7 +207,7 @@ void HuamiDevice::navigationRunning(bool running)
     } else {
         msg = tr("Navigation Stopped");
     }
-    AbstractDevice::WatchNotification n;
+    Amazfish::WatchNotification n;
     n.id = 0;
     n.appId = "uk.co.piggz.amazfish.navigation";
     n.appName = "navigation";
@@ -221,7 +221,7 @@ void HuamiDevice::navigationNarrative(const QString &flag, const QString &narrat
 {
     Q_UNUSED(flag)
 
-    AbstractDevice::WatchNotification n;
+    Amazfish::WatchNotification n;
     n.id = 0;
     n.appId = "uk.co.piggz.amazfish.navigation";
     n.appName = "navigation";

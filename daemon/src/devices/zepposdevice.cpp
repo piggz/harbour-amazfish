@@ -59,7 +59,7 @@ AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes)
     return nullptr;
 }
 
-void ZeppOSDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
+void ZeppOSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
     m_notificationService->sendAlert(notification);

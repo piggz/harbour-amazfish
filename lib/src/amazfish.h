@@ -2,6 +2,7 @@
 #define AMAZFISH_H
 
 #include <QObject>
+#include <QVariantMap>
 
 //Container class for enums
 class Amazfish : public QObject {
@@ -78,11 +79,42 @@ public:
     };
     Q_ENUM(Settings)
 
+    struct WatchNotification
+    {
+        int id;
+        QString appId;
+        QString appName;
+        QString summary;
+        QString body;
+
+        QVariantMap toQVariantMap() const {
+            QVariantMap map;
+            map["id"] = id;
+            map["appId"] = appId;
+            map["appName"] = appName;
+            map["summary"] = summary;
+            map["body"] = body;
+            return map;
+        }
+
+        static WatchNotification fromQVariantMap(const QVariantMap &map) {
+            WatchNotification n;
+            n.id = map.value("id").toInt();
+            n.appId = map.value("appId").toString();
+            n.appName = map.value("appName").toString();
+            n.summary = map.value("summary").toString();
+            n.body = map.value("body").toString();
+            return n;
+        }
+    };
+
+
     static QString activityToString(Amazfish::ActivityType type);
 };
 Q_DECLARE_METATYPE(Amazfish::ActivityType)
 Q_DECLARE_METATYPE(Amazfish::Feature)
 Q_DECLARE_METATYPE(Amazfish::Info)
 Q_DECLARE_METATYPE(Amazfish::Settings)
+Q_DECLARE_METATYPE(Amazfish::WatchNotification)
 
 #endif // AMAZFISH_H

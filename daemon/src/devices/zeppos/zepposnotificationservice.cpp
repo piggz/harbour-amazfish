@@ -7,7 +7,7 @@ ZeppOsNotificationService::ZeppOsNotificationService(ZeppOSDevice *device) : Abs
     m_endpoint = 0x001e;
 }
 
-void ZeppOsNotificationService::sendAlert(const AbstractDevice::WatchNotification &notification) const
+void ZeppOsNotificationService::sendAlert(const Amazfish::WatchNotification &notification) const
 {
     qDebug() << Q_FUNC_INFO;
 

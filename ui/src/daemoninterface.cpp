@@ -215,10 +215,19 @@ QString DaemonInterface::information(Amazfish::Info i)
 
 void DaemonInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
 {
+
+    Amazfish::WatchNotification n = {
+        .id = 0,
+        .appId = "uk.co.piggz.amazfish",
+        .appName = sender,
+        .summary = subject,
+        .body = message
+    };
+
     if (!iface || !iface->isValid()) {
         return;
     }
-    iface->call(QStringLiteral("sendAlert"), sender, subject, message, allowDuplicate);
+    iface->call(QStringLiteral("sendAlert"), n.toQVariantMap(), allowDuplicate);
 }
 
 void DaemonInterface::incomingCall(const QString &caller)

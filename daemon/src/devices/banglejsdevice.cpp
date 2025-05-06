@@ -45,7 +45,7 @@ void BangleJSDevice::abortOperations()
 
 }
 
-void BangleJSDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
+void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
 
