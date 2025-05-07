@@ -41,6 +41,7 @@ set(SOURCES
 ./src/devices/zeppos/zepposservicesservice.cpp
 ./src/devices/zeppos/zepposnotificationservice.cpp
 ./src/devices/zeppos/zepposauthservice.cpp
+./src/devices/zeppos/zepposbatteryservice.cpp
 ./src/devices/zeppos/zepposstepsservice.cpp
 ./src/devices/zeppos/huami2021handler.cpp
 ./src/devices/zeppos/zepposheartrateservice.cpp
@@ -138,6 +139,7 @@ set(HEADERS
 ./src/devices/zeppos/zepposservicesservice.h
 ./src/devices/zeppos/zepposnotificationservice.h
 ./src/devices/zeppos/zepposauthservice.h
+./src/devices/zeppos/zepposbatteryservice.h
 ./src/devices/zeppos/zepposstepsservice.h
 ./src/devices/zeppos/zepposheartrateservice.h
 ./src/devices/zeppos/huami2021handler.h
