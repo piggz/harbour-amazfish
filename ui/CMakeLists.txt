@@ -91,8 +91,17 @@ endif()
 install(FILES "harbour-amazfish-ui.desktop"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
 
+
+if(FLAVOR STREQUAL "uuitk")
+
+install(FILES "icons/172x172-ubports/harbour-amazfish-ui.png"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/172x172/apps")
+
+else()
+
 install(FILES "icons/108x108/harbour-amazfish-ui.png"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/108x108/apps")
+
 
 install(FILES "icons/172x172/harbour-amazfish-ui.png"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/172x172/apps")
@@ -105,6 +114,8 @@ install(FILES "icons/86x86/harbour-amazfish-ui.png"
 
 install(FILES "icons/scalable/harbour-amazfish-ui.svg"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps")
+
+endif()
 
 install(FILES "harbour-amazfish-ui.appdata.xml"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")
