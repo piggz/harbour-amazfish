@@ -35,7 +35,7 @@ void PebbleDevice::pair()
 }
 
 
-void PebbleDevice::sendAlert(const AbstractDevice::WatchNotification &notification) {
+void PebbleDevice::sendAlert(const Amazfish::WatchNotification &notification) {
     qDebug() << Q_FUNC_INFO;
 }
 

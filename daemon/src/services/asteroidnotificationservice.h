@@ -14,7 +14,7 @@ public:
     static const char* UUID_CHARACTERISTIC_NOTIFICATION_UPDATE;
     static const char* UUID_CHARACTERISTIC_NOTIFICATION_FEEDBACK;
 
-    Q_INVOKABLE void sendAlert(const AbstractDevice::WatchNotification &notification);
+    Q_INVOKABLE void sendAlert(const Amazfish::WatchNotification &notification);
     Q_INVOKABLE void removeNotification(unsigned int id);
     Q_INVOKABLE void incomingCall(const QString &caller);
     Q_INVOKABLE void incomingCallEnded();

@@ -91,7 +91,7 @@ void PinetimeJFDevice::abortOperations()
     }
 }
 
-void PinetimeJFDevice::sendAlert(const AbstractDevice::WatchNotification &notification)
+void PinetimeJFDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
     if (alert) {

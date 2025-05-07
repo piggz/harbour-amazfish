@@ -12,7 +12,7 @@ public:
 
     virtual int supportedFeatures() const override;
     virtual QString deviceType() const override;
-    virtual void sendAlert(const AbstractDevice::WatchNotification &notification) override;
+    virtual void sendAlert(const Amazfish::WatchNotification &notification) override;
     virtual void incomingCall(const QString &caller) override;
     virtual void incomingCallEnded() override;
     virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;

@@ -34,7 +34,7 @@ void DK08Device::pair()
     QBLEDevice::pair();
 }
 
-void DK08Device::sendAlert(const AbstractDevice::WatchNotification &notification) {
+void DK08Device::sendAlert(const Amazfish::WatchNotification &notification) {
     qDebug() << Q_FUNC_INFO;
     DK08NUSService *nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));
     m_alert_id = (m_alert_id + 1) % 32;

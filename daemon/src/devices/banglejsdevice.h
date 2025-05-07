@@ -14,7 +14,7 @@ public:
     QString deviceType() const override;
     void abortOperations() override;
 
-    void sendAlert(const AbstractDevice::WatchNotification &notification) override;
+    void sendAlert(const Amazfish::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
 

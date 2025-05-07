@@ -32,7 +32,7 @@ public:
     void handlePayload(const QByteArray &payload) override;
     QString name() const override;
 
-    void sendAlert(const AbstractDevice::WatchNotification &notification) const;
+    void sendAlert(const Amazfish::WatchNotification &notification) const;
     void incomingCall(const QString &caller);
 };
 

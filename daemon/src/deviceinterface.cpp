@@ -183,7 +183,7 @@ HRMService *DeviceInterface::hrmService() const
 
 void DeviceInterface::onNotification(watchfish::Notification *notification)
 {
-    AbstractDevice::WatchNotification n;
+    Amazfish::WatchNotification n;
     n.id = notification->id();
     n.appId = notification->appId();
     n.appName = notification->appName();
@@ -463,7 +463,7 @@ void DeviceInterface::onConnectionStateChanged()
             m_dbusHRM->setHRMService(hrmService());
         }
         if (AmazfishConfig::instance()->appNotifyConnect() && m_notificationBuffer.isEmpty()) {
-            AbstractDevice::WatchNotification n;
+            Amazfish::WatchNotification n;
             n.id = 0;
             n.appId = "uk.co.piggz.amazfish";
             n.appName = tr("Amazfish");
@@ -539,7 +539,7 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
         if (battery_level != m_lastBatteryLevel) {
             log_battery_level(battery_level);
             if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
-                AbstractDevice::WatchNotification n;
+                Amazfish::WatchNotification n;
                 n.id = 0;
                 n.appId = "uk.co.piggz.amazfish";
                 n.appName = tr("Amazfish");
@@ -665,7 +665,7 @@ void DeviceInterface::onEventTimer()
     if (m_eventlist.isEmpty())
         return;
     watchfish::CalendarEvent event = m_eventlist.takeFirst();
-    AbstractDevice::WatchNotification n;
+    Amazfish::WatchNotification n;
     n.id = 0;
     n.appId = "uk.co.piggz.amazfish.calendar";
     n.appName = tr("Calendar");
@@ -688,7 +688,7 @@ void DeviceInterface::sendBufferedNotifications()
 {
     qDebug() << Q_FUNC_INFO;
     while (m_notificationBuffer.count() > 0) {
-        AbstractDevice::WatchNotification n = m_notificationBuffer.dequeue();
+        Amazfish::WatchNotification n = m_notificationBuffer.dequeue();
         if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
             qDebug() << "Sending notification";
             sendAlert(n);
@@ -902,7 +902,11 @@ QString DeviceInterface::information(int i)
     return QString();
 }
 
-void DeviceInterface::sendAlert(const AbstractDevice::WatchNotification &notification, bool allowDuplicate)
+void DeviceInterface::sendAlert(const QVariantMap &notification, bool allowDuplicate) {
+    sendAlert(Amazfish::WatchNotification::fromQVariantMap(notification), allowDuplicate);
+}
+
+void DeviceInterface::sendAlert(const Amazfish::WatchNotification &notification, bool allowDuplicate)
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -916,7 +920,7 @@ void DeviceInterface::sendAlert(const AbstractDevice::WatchNotification &notific
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
         qDebug() << "Snding alert to device";
 
-        AbstractDevice::WatchNotification t = notification;
+        Amazfish::WatchNotification t = notification;
 
         if (AmazfishConfig::instance()->appTransliterate()) {
             t.appName = Transliterator::convert(notification.appName);

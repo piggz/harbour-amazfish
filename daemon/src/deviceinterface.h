@@ -72,8 +72,10 @@ public:
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void downloadActivityData();
     Q_INVOKABLE void refreshInformation();
+
     Q_INVOKABLE QString information(int i);
-    Q_INVOKABLE void sendAlert(const AbstractDevice::WatchNotification &notification, bool allowDuplicate = false);
+    Q_INVOKABLE void sendAlert(const QVariantMap &notification, bool allowDuplicate = false);
+    Q_INVOKABLE void sendAlert(const Amazfish::WatchNotification &notification, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
     Q_INVOKABLE void incomingCallEnded();
     Q_INVOKABLE void applyDeviceSetting(int s);
@@ -140,7 +142,7 @@ private:
     Achievements m_achievements;
 
     //Notifications
-    QQueue<AbstractDevice::WatchNotification> m_notificationBuffer;
+    QQueue<Amazfish::WatchNotification> m_notificationBuffer;
 
     //Database
     KDbDriver *m_dbDriver = nullptr;
