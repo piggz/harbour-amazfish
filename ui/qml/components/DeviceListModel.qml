@@ -69,7 +69,7 @@ ListModel {
     }
 
     ListElement {
-        deviceType: "MI Band 2"
+        deviceType: "Mi Band 2"
         icon: "../pics/devices/miband2.png"
         pattern: "MI Band 2"
     }

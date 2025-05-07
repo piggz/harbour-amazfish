@@ -14,88 +14,39 @@
 #include "dk08device.h"
 #include "zepposdevice.h"
 
-AbstractDevice* DeviceFactory::createDevice(const QString &deviceName)
-{
-    qDebug() << Q_FUNC_INFO <<": requested device of type:" << deviceName;
+using DeviceCreator = std::function<AbstractDevice*(const QString &)>;
 
-    if (deviceName == "Amazfit Bip Watch") {
-        return new BipDevice(deviceName);
-    }
+static const QMap<QString, DeviceCreator> deviceMap = {
+    { "Amazfit Bip Watch", [](const QString &name) { return new BipDevice(name); } },
+    { "Amazfit GTS", [](const QString &name) { return new GtsDevice(name); } },
+    { "Amazfit Neo", [](const QString &name) { return new NeoDevice(name); } },
+    { "Amazfit GTS 2", [](const QString &name) { return new Gts2Device(name); } },
+    { "Amazfit GTR", [](const QString &name) { return new GtrDevice(name); } },
+    { "Amazfit GTR 2", [](const QString &name) { return new Gtr2Device(name); } },
+    { "Amazfit Bip Lite", [](const QString &name) { return new BipLiteDevice(name); } },
+    { "Amazfit Bip S", [](const QString &name) { return new BipSDevice(name); } },
+    { "Amazfit Stratos 3", [](const QString &name) { return new GtsDevice(name); } },
+    { "Mi Smart Band 4", [](const QString &name) { return new BipLiteDevice(name); } },
+    { "Amazfit Balance", [](const QString &name) { return new ZeppOSDevice(name); } },
+    { "InfiniTime", [](const QString &name) { return new PinetimeJFDevice(name); } },
+    { "Pebble", [](const QString &name) { return new PebbleDevice(name); } },
+    { "Bangle.js", [](const QString &name) { return new BangleJSDevice(name); } },
+    { "Kospet DK08", [](const QString &name) { return new DK08Device(name); } },
+    { "AsteroidOS", [](const QString &name) { return new AsteroidOSDevice(name); } },
 
-    if (deviceName == "Amazfit GTS") {
-        return new GtsDevice(deviceName);
-    }
-
-    if (deviceName == "Amazfit Neo") {
-        return new NeoDevice(deviceName);
-    }
-
-    if (deviceName == "Amazfit GTS 2") {
-        return new Gts2Device(deviceName);
-    }
-
-    if (deviceName == "Amazfit GTR") {
-        return new GtrDevice(deviceName);
-    }
-
-    if (deviceName == "Amazfit GTR 2") {
-        return new Gtr2Device(deviceName);
-    }
-
-    if (deviceName == "Amazfit Bip Lite") {
-        return new BipLiteDevice(deviceName);
-    }
-
-    if (deviceName == "Amazfit Bip S") {
-        return new BipSDevice(deviceName);
-    }
-
-    if (deviceName == "Amazfit Stratos 3") {
-        return new GtsDevice(deviceName);
-    }
-
-    if (deviceName == "Mi Smart Band 4") {
-        return new BipLiteDevice(deviceName);
-    }
-
-    if (deviceName == "Amazfit Balance") {
-        return new ZeppOSDevice(deviceName);
-    }
-
-    if (deviceName == "InfiniTime" || deviceName == "Pinetime-JF") {
-        return new PinetimeJFDevice(deviceName);
-    }
-
-    if (deviceName.startsWith("Pebble Time")) {
-        return new PebbleDevice(deviceName);
-    }
-
-    if (deviceName.startsWith("Bangle.js") || deviceName.startsWith("Espruino") || deviceName.startsWith("Pixl.js") || deviceName.startsWith("Puck.js") || deviceName.startsWith("MDBT42Q")) {
-        return new BangleJSDevice(deviceName);
-    }
-
-    if (deviceName == "DK08") {
-        return new DK08Device(deviceName);
-    }
-
-    QList<QString> asteroidDevices = {
-        "AsteroidOS",
-        "bass", "sturgeon", "narwhal", "sparrow", "dory",
-        "lenok", "catfish", "carp", "smelt", "anthias",
-        "pike", "sawfish", "ray", "firefish", "beluga", "skipjack",
-        "koi", "mooneye", "swift", "nemo", "hoki",
-        "minnow", "tetra", "sprat", "kingyo", "medaka"
+    { "Amazfit Cor", [](const QString &name) { return new BipLiteDevice(name); } },
+    { "Mi Band 3", [](const QString &name) { return new BipLiteDevice(name); } },
+    { "Mi Band 2", [](const QString &name) { return new BipLiteDevice(name); } },
     };
 
-    for (auto iterator = asteroidDevices.begin(); iterator != asteroidDevices.end(); ++iterator) {
-        if (deviceName == *iterator) {
-            return new AsteroidOSDevice(deviceName);
-        }
+AbstractDevice* DeviceFactory::createDevice(const QString &deviceName, const QString &deviceType)
+{
+    qDebug() << Q_FUNC_INFO <<": requested device of type:" << deviceName << deviceType;
+
+    if (deviceMap.contains(deviceType)) {
+        return deviceMap.value(deviceType)(deviceName);
     }
 
-    qDebug() << Q_FUNC_INFO << ": no suitable devices found, creating a Bip device as default";
-    return new BipDevice(deviceName);
-
-    //!TODO allow the user to choose the device type
-    //return nullptr;
+    qWarning() << "DeviceCreator not found";
+    return nullptr;
 }

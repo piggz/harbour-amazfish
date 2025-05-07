@@ -14,6 +14,7 @@ PagePL {
         DaemonInterfaceInstance.unpair()
         AmazfishConfig.pairedAddress = "";
         AmazfishConfig.pairedName = "";
+        AmazfishConfig.pairedType = "";
 
     }
 
