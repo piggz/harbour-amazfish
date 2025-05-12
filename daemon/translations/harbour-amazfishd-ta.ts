@@ -9,40 +9,65 @@
     </message>
 </context>
 <context>
+    <name>Achievements</name>
+    <message>
+        <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The ring is cast into the fire. &lt;b&gt;%1&lt;/b&gt; steps done — Middle-earth is saved!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You kept walking after saving the world?! &lt;b&gt;%1&lt;/b&gt; steps — you’re a true legend. 🧙</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Let&apos;s get moving! You&apos;ve taken only &lt;b&gt;%1&lt;/b&gt; steps so far.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warming up! &lt;b&gt;%1&lt;/b&gt; steps done — keep going!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You&apos;re halfway there. &lt;b&gt;%1&lt;/b&gt; steps so far!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Almost there! Just a bit more — &lt;b&gt;%1&lt;/b&gt; steps already!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goal reached! &lt;b&gt;%1&lt;/b&gt; steps — you can have that cake now 🎉</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AsteroidOSDevice</name>
     <message>
         <source>Stored %1...</source>
         <translation>சேமிக்கப்பட்டது %1 ...</translation>
-    </message>
-</context>
-<context>
-    <name>BipDevice</name>
-    <message>
-        <source>Navigation Started</source>
-        <translation>வழிசெலுத்தல் தொடங்கியது</translation>
-    </message>
-    <message>
-        <source>Navigation Stopped</source>
-        <translation>வழிசெலுத்தல் நிறுத்தப்பட்டது</translation>
-    </message>
-    <message>
-        <source>Progress</source>
-        <translation>முன்னேற்றம்</translation>
-    </message>
-</context>
-<context>
-    <name>BipFirmwareService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation>ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
-    </message>
-    <message>
-        <source>Sending %1...</source>
-        <translation>%1 ஐ அனுப்புகிறது ...</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation>எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
 </context>
 <context>
@@ -71,16 +96,16 @@
         <source>Battery level now </source>
         <translation>இப்போது பேட்டரி நிலை </translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>DfuService</name>
+    <name>GtsDevice</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation>ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation>எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
+        <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
     </message>
 </context>
 <context>
@@ -97,6 +122,18 @@
         <source>Progress</source>
         <translation>முன்னேற்றம்</translation>
     </message>
+    <message>
+        <source>Sending %1...</source>
+        <translation type="unfinished">%1 ஐ அனுப்புகிறது ...</translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation type="unfinished">எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
+    </message>
+    <message>
+        <source>An operation is currently running, please try later</source>
+        <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
+    </message>
 </context>
 <context>
     <name>MiBandService</name>
@@ -104,9 +141,20 @@
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
         <translation>காட்சி உருப்படிகளை அமைக்க ஃபார்ம்வேர் மிகவும் பழையது, v0.1.1.14 தேவை</translation>
     </message>
+</context>
+<context>
+    <name>PinetimeJFDevice</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation>ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
+        <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
+    </message>
+    <message>
+        <source>Sending file...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation type="unfinished">எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
 </context>
 <context>
@@ -114,10 +162,6 @@
     <message>
         <source>About to transfer data from </source>
         <translation>தரவை மாற்றப் போவது </translation>
-    </message>
-    <message>
-        <source>Finished transferring activity data</source>
-        <translation>செயல்பாட்டு தரவை மாற்ற முடிந்தது</translation>
     </message>
     <message>
         <source>No data to transfer</source>

@@ -389,34 +389,34 @@
     </message>
 </context>
 <context>
-    <name>PairPage</name>
+    <name>PairDevicePage</name>
     <message>
         <source>Pair Device</source>
-        <translation>Parkoppla enhet</translation>
-    </message>
-    <message>
-        <source>Stop scanning</source>
-        <translation>Stoppa sökning</translation>
-    </message>
-    <message>
-        <source>Scan for devices</source>
-        <translation>Sök efter enheter</translation>
-    </message>
-    <message>
-        <source>Scanning for devices…</source>
-        <translation>Söker efter enheter...</translation>
-    </message>
-    <message>
-        <source>Pairing…</source>
-        <translation>Parkopplar...</translation>
+        <translation type="unfinished">Parkoppla enhet</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation>Inga enheter hittades</translation>
+        <translation type="unfinished">Inga enheter hittades</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop scanning</source>
+        <translation type="unfinished">Stoppa sökning</translation>
+    </message>
+    <message>
+        <source>Scan for devices</source>
+        <translation type="unfinished">Sök efter enheter</translation>
+    </message>
+    <message>
+        <source>Scanning for devices…</source>
+        <translation type="unfinished">Söker efter enheter...</translation>
+    </message>
+    <message>
+        <source>Pairing…</source>
+        <translation type="unfinished">Parkopplar...</translation>
     </message>
 </context>
 <context>
@@ -548,6 +548,10 @@
     </message>
     <message>
         <source>Transliterate notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set silent profile on connect</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1215,6 +1219,21 @@
     <message>
         <source>Send to Strava</source>
         <translation>Skicka till Strava</translation>
+    </message>
+</context>
+<context>
+    <name>SportsSummaryPage</name>
+    <message>
+        <source>Sports Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

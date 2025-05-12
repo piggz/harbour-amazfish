@@ -9,40 +9,65 @@
     </message>
 </context>
 <context>
+    <name>Achievements</name>
+    <message>
+        <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The ring is cast into the fire. &lt;b&gt;%1&lt;/b&gt; steps done — Middle-earth is saved!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You kept walking after saving the world?! &lt;b&gt;%1&lt;/b&gt; steps — you’re a true legend. 🧙</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Let&apos;s get moving! You&apos;ve taken only &lt;b&gt;%1&lt;/b&gt; steps so far.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warming up! &lt;b&gt;%1&lt;/b&gt; steps done — keep going!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You&apos;re halfway there. &lt;b&gt;%1&lt;/b&gt; steps so far!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Almost there! Just a bit more — &lt;b&gt;%1&lt;/b&gt; steps already!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goal reached! &lt;b&gt;%1&lt;/b&gt; steps — you can have that cake now 🎉</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AsteroidOSDevice</name>
     <message>
         <source>Stored %1...</source>
         <translation>Gespeichert %1...</translation>
-    </message>
-</context>
-<context>
-    <name>BipDevice</name>
-    <message>
-        <source>Navigation Started</source>
-        <translation>Navigation gestartet</translation>
-    </message>
-    <message>
-        <source>Navigation Stopped</source>
-        <translation>Navigation gestoppt</translation>
-    </message>
-    <message>
-        <source>Progress</source>
-        <translation>Fortschritt</translation>
-    </message>
-</context>
-<context>
-    <name>BipFirmwareService</name>
-    <message>
-        <source>An operation is currently running, please try later</source>
-        <translation>Ein Vorgang wird derzeit ausgeführt, bitte versuchen Sie es später</translation>
-    </message>
-    <message>
-        <source>Sending %1...</source>
-        <translation>%1 wird gesendet...</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation>Keine Datei ausgewählt</translation>
     </message>
 </context>
 <context>
@@ -71,16 +96,16 @@
         <source>Battery level now </source>
         <translation>Akkustand jetzt </translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>DfuService</name>
+    <name>GtsDevice</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation>Ein Vorgang wird derzeit ausgeführt, bitte versuchen Sie es später</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation>Keine Datei ausgewählt</translation>
+        <translation type="unfinished">Ein Vorgang wird derzeit ausgeführt, bitte versuchen Sie es später</translation>
     </message>
 </context>
 <context>
@@ -97,6 +122,18 @@
         <source>Progress</source>
         <translation>Fortschritt</translation>
     </message>
+    <message>
+        <source>Sending %1...</source>
+        <translation type="unfinished">%1 wird gesendet...</translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation type="unfinished">Keine Datei ausgewählt</translation>
+    </message>
+    <message>
+        <source>An operation is currently running, please try later</source>
+        <translation type="unfinished">Ein Vorgang wird derzeit ausgeführt, bitte versuchen Sie es später</translation>
+    </message>
 </context>
 <context>
     <name>MiBandService</name>
@@ -104,9 +141,20 @@
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
         <translation>Die Firmware ist zu alt, um Anzeigeelemente zu setzen, V0.1.1.14 wird benötigt</translation>
     </message>
+</context>
+<context>
+    <name>PinetimeJFDevice</name>
     <message>
         <source>An operation is currently running, please try later</source>
-        <translation>Ein Vorgang wird derzeit ausgeführt, bitte versuchen Sie es später</translation>
+        <translation type="unfinished">Ein Vorgang wird derzeit ausgeführt, bitte versuchen Sie es später</translation>
+    </message>
+    <message>
+        <source>Sending file...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation type="unfinished">Keine Datei ausgewählt</translation>
     </message>
 </context>
 <context>
@@ -114,10 +162,6 @@
     <message>
         <source>About to transfer data from </source>
         <translation>Über das Übertragen von Daten aus </translation>
-    </message>
-    <message>
-        <source>Finished transferring activity data</source>
-        <translation>Übergabe der Vorgangsdaten abgeschlossen</translation>
     </message>
     <message>
         <source>No data to transfer</source>

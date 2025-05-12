@@ -389,34 +389,34 @@
     </message>
 </context>
 <context>
-    <name>PairPage</name>
+    <name>PairDevicePage</name>
     <message>
         <source>Pair Device</source>
-        <translation>Vincular dispositivo</translation>
-    </message>
-    <message>
-        <source>Stop scanning</source>
-        <translation>Detener búsqueda</translation>
-    </message>
-    <message>
-        <source>Scan for devices</source>
-        <translation>Buscar dispositivos</translation>
-    </message>
-    <message>
-        <source>Scanning for devices…</source>
-        <translation>Buscando dispositivos..…</translation>
-    </message>
-    <message>
-        <source>Pairing…</source>
-        <translation>Vinculando…</translation>
+        <translation type="unfinished">Vincular dispositivo</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation>Ningún dispositivo encontrado</translation>
+        <translation type="unfinished">Ningún dispositivo encontrado</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
-        <translation>El adaptador Bluetooth no está disponible</translation>
+        <translation type="unfinished">El adaptador Bluetooth no está disponible</translation>
+    </message>
+    <message>
+        <source>Stop scanning</source>
+        <translation type="unfinished">Detener búsqueda</translation>
+    </message>
+    <message>
+        <source>Scan for devices</source>
+        <translation type="unfinished">Buscar dispositivos</translation>
+    </message>
+    <message>
+        <source>Scanning for devices…</source>
+        <translation type="unfinished">Buscando dispositivos..…</translation>
+    </message>
+    <message>
+        <source>Pairing…</source>
+        <translation type="unfinished">Vinculando…</translation>
     </message>
 </context>
 <context>
@@ -549,6 +549,10 @@
     <message>
         <source>Transliterate notifications</source>
         <translation>Transliterar notificaciones</translation>
+    </message>
+    <message>
+        <source>Set silent profile on connect</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1215,6 +1219,21 @@
     <message>
         <source>Send to Strava</source>
         <translation>Enviar a Strava</translation>
+    </message>
+</context>
+<context>
+    <name>SportsSummaryPage</name>
+    <message>
+        <source>Sports Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

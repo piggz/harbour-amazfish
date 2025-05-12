@@ -389,34 +389,34 @@
     </message>
 </context>
 <context>
-    <name>PairPage</name>
+    <name>PairDevicePage</name>
     <message>
         <source>Pair Device</source>
-        <translation>Párování zařízení</translation>
+        <translation type="unfinished">Párování zařízení</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation>Nebylo nelezeno žádné zařízení</translation>
-    </message>
-    <message>
-        <source>Stop scanning</source>
-        <translation>Zastavit hledání</translation>
-    </message>
-    <message>
-        <source>Scan for devices</source>
-        <translation>Hledání zařízení</translation>
-    </message>
-    <message>
-        <source>Scanning for devices…</source>
-        <translation>Hledání zařízení…</translation>
-    </message>
-    <message>
-        <source>Pairing…</source>
-        <translation>Párování…</translation>
+        <translation type="unfinished">Nebylo nelezeno žádné zařízení</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
-        <translation>Adaptér bluetooth není k dispozici</translation>
+        <translation type="unfinished">Adaptér bluetooth není k dispozici</translation>
+    </message>
+    <message>
+        <source>Stop scanning</source>
+        <translation type="unfinished">Zastavit hledání</translation>
+    </message>
+    <message>
+        <source>Scan for devices</source>
+        <translation type="unfinished">Hledání zařízení</translation>
+    </message>
+    <message>
+        <source>Scanning for devices…</source>
+        <translation type="unfinished">Hledání zařízení…</translation>
+    </message>
+    <message>
+        <source>Pairing…</source>
+        <translation type="unfinished">Párování…</translation>
     </message>
 </context>
 <context>
@@ -549,6 +549,10 @@
     <message>
         <source>Transliterate notifications</source>
         <translation>Přepsat diakritiku oznámení</translation>
+    </message>
+    <message>
+        <source>Set silent profile on connect</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1215,6 +1219,21 @@
     <message>
         <source>swolf</source>
         <translation>swolf</translation>
+    </message>
+</context>
+<context>
+    <name>SportsSummaryPage</name>
+    <message>
+        <source>Sports Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

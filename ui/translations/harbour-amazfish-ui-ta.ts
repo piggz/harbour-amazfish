@@ -389,34 +389,34 @@
     </message>
 </context>
 <context>
-    <name>PairPage</name>
+    <name>PairDevicePage</name>
     <message>
         <source>Pair Device</source>
-        <translation>இணை சாதனம்</translation>
+        <translation type="unfinished">இணை சாதனம்</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation>சாதனங்கள் எதுவும் கிடைக்கவில்லை</translation>
-    </message>
-    <message>
-        <source>Stop scanning</source>
-        <translation>ச்கேன் செய்வதை நிறுத்துங்கள்</translation>
-    </message>
-    <message>
-        <source>Scan for devices</source>
-        <translation>சாதனங்களுக்கான ச்கேன்</translation>
-    </message>
-    <message>
-        <source>Scanning for devices…</source>
-        <translation>சாதனங்களுக்கான ச்கேன்…</translation>
-    </message>
-    <message>
-        <source>Pairing…</source>
-        <translation>இணைத்தல்…</translation>
+        <translation type="unfinished">சாதனங்கள் எதுவும் கிடைக்கவில்லை</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
-        <translation>ஊடலை அடாப்டர் கிடைக்கவில்லை</translation>
+        <translation type="unfinished">ஊடலை அடாப்டர் கிடைக்கவில்லை</translation>
+    </message>
+    <message>
+        <source>Stop scanning</source>
+        <translation type="unfinished">ச்கேன் செய்வதை நிறுத்துங்கள்</translation>
+    </message>
+    <message>
+        <source>Scan for devices</source>
+        <translation type="unfinished">சாதனங்களுக்கான ச்கேன்</translation>
+    </message>
+    <message>
+        <source>Scanning for devices…</source>
+        <translation type="unfinished">சாதனங்களுக்கான ச்கேன்…</translation>
+    </message>
+    <message>
+        <source>Pairing…</source>
+        <translation type="unfinished">இணைத்தல்…</translation>
     </message>
 </context>
 <context>
@@ -549,6 +549,10 @@
     <message>
         <source>Transliterate notifications</source>
         <translation>மொழிபெயர்ப்பு அறிவிப்புகள்</translation>
+    </message>
+    <message>
+        <source>Set silent profile on connect</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1215,6 +1219,21 @@
     <message>
         <source>swolf</source>
         <translation>ச்வோல்ஃப்</translation>
+    </message>
+</context>
+<context>
+    <name>SportsSummaryPage</name>
+    <message>
+        <source>Sports Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

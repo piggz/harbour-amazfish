@@ -389,34 +389,34 @@
     </message>
 </context>
 <context>
-    <name>PairPage</name>
+    <name>PairDevicePage</name>
     <message>
         <source>Pair Device</source>
-        <translation>Appairer un appareil</translation>
+        <translation type="unfinished">Appairer un appareil</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation>Aucun appareil trouvé</translation>
-    </message>
-    <message>
-        <source>Stop scanning</source>
-        <translation>Arrêter la recherche</translation>
-    </message>
-    <message>
-        <source>Scan for devices</source>
-        <translation>Rechercher des appareils</translation>
-    </message>
-    <message>
-        <source>Scanning for devices…</source>
-        <translation>Recherche d&apos;appareils…</translation>
-    </message>
-    <message>
-        <source>Pairing…</source>
-        <translation>Apairage…</translation>
+        <translation type="unfinished">Aucun appareil trouvé</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop scanning</source>
+        <translation type="unfinished">Arrêter la recherche</translation>
+    </message>
+    <message>
+        <source>Scan for devices</source>
+        <translation type="unfinished">Rechercher des appareils</translation>
+    </message>
+    <message>
+        <source>Scanning for devices…</source>
+        <translation type="unfinished">Recherche d&apos;appareils…</translation>
+    </message>
+    <message>
+        <source>Pairing…</source>
+        <translation type="unfinished">Apairage…</translation>
     </message>
 </context>
 <context>
@@ -548,6 +548,10 @@
     </message>
     <message>
         <source>Transliterate notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set silent profile on connect</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1214,6 +1218,21 @@
     </message>
     <message>
         <source>swolf</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SportsSummaryPage</name>
+    <message>
+        <source>Sports Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

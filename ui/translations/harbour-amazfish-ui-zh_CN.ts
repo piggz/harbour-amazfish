@@ -68,23 +68,23 @@
         <translation>分析</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="40"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="44"/>
         <source>Heartrate</source>
         <translation>心率</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="43"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
         <source>BPM</source>
         <translation>BPM</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="57"/>
-        <location filename="../qml/pages/AnalysisPage.qml" line="60"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="61"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="64"/>
         <source>Steps</source>
         <translation>步数</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="74"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="78"/>
         <source>Intensity</source>
         <translation>强度</translation>
     </message>
@@ -101,7 +101,7 @@
     <name>BatteryPage</name>
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="9"/>
-        <location filename="../qml/pages/BatteryPage.qml" line="45"/>
+        <location filename="../qml/pages/BatteryPage.qml" line="49"/>
         <source>Battery</source>
         <translation>电池</translation>
     </message>
@@ -336,62 +336,62 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="26"/>
+        <location filename="../qml/pages/FirstPage.qml" line="27"/>
         <source>Pair with watch</source>
         <translation>配对手表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="38"/>
+        <location filename="../qml/pages/FirstPage.qml" line="39"/>
         <source>Install File</source>
         <translation>安装文件</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="42"/>
+        <location filename="../qml/pages/FirstPage.qml" line="43"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="46"/>
+        <location filename="../qml/pages/FirstPage.qml" line="47"/>
         <source>Data Graphs</source>
         <translation>数据图表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="52"/>
+        <location filename="../qml/pages/FirstPage.qml" line="53"/>
         <source>Disconnect from watch</source>
         <translation>从手表断开</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="52"/>
+        <location filename="../qml/pages/FirstPage.qml" line="53"/>
         <source>Connect to watch</source>
         <translation>连接到手表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="152"/>
+        <location filename="../qml/pages/FirstPage.qml" line="153"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="157"/>
+        <location filename="../qml/pages/FirstPage.qml" line="158"/>
         <source>Steps</source>
         <translation type="unfinished">步数</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="215"/>
+        <location filename="../qml/pages/FirstPage.qml" line="216"/>
         <source>Heartrate</source>
         <translation type="unfinished">心率</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="241"/>
+        <location filename="../qml/pages/FirstPage.qml" line="242"/>
         <source>%1 bpm</source>
         <translation>%1bpm</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="260"/>
+        <location filename="../qml/pages/FirstPage.qml" line="261"/>
         <source>Service</source>
         <translation>服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="265"/>
+        <location filename="../qml/pages/FirstPage.qml" line="266"/>
         <source>Enable on boot</source>
         <translation>开机自启</translation>
     </message>
@@ -418,38 +418,38 @@
         <translation>%1 bpm</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="71"/>
-        <location filename="../qml/pages/HeartratePage.qml" line="74"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="75"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="78"/>
         <source>BPM</source>
         <translation>BPM</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="93"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="97"/>
         <source>Relaxed</source>
         <translation>放松的</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="102"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="106"/>
         <source>Light</source>
         <translation>轻度的</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="111"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="115"/>
         <source>Intensive</source>
         <translation>较高强度</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="120"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="124"/>
         <source>Aerobic</source>
         <translation>高强度有氧</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="129"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="133"/>
         <source>Anerobic</source>
         <translation>高强度厌氧</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HeartratePage.qml" line="138"/>
+        <location filename="../qml/pages/HeartratePage.qml" line="142"/>
         <source>VO2 Max</source>
         <translation>最大强度</translation>
     </message>
@@ -511,39 +511,39 @@
     </message>
 </context>
 <context>
-    <name>PairPage</name>
+    <name>PairDevicePage</name>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="11"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation>配对设备</translation>
+        <translation type="unfinished">配对设备</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="13"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="27"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="27"/>
         <source>Bluetooth adapter is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="168"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="212"/>
         <source>Stop scanning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="169"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="213"/>
         <source>Scan for devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="183"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="227"/>
         <source>Scanning for devices…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairPage.qml" line="185"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="229"/>
         <source>Pairing…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -620,22 +620,22 @@
         <translation>通知</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="88"/>
+        <location filename="../qml/pages/Settings-app.qml" line="96"/>
         <source>Notify on connect</source>
         <translation>连接时通知</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="124"/>
+        <location filename="../qml/pages/Settings-app.qml" line="132"/>
         <source>Refresh rates</source>
         <translation>刷新频率</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="130"/>
+        <location filename="../qml/pages/Settings-app.qml" line="138"/>
         <source>Sync activity data each hour</source>
         <translation>每小时同步活动数据</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="96"/>
+        <location filename="../qml/pages/Settings-app.qml" line="104"/>
         <source>Low battery notification</source>
         <translation>低电量通知</translation>
     </message>
@@ -650,62 +650,67 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="104"/>
-        <source>Navigation notifications</source>
+        <location filename="../qml/pages/Settings-app.qml" line="88"/>
+        <source>Set silent profile on connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="112"/>
-        <source>Transliterate notifications</source>
+        <source>Navigation notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="120"/>
+        <source>Transliterate notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="128"/>
         <source>Simulate event reminder support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="141"/>
+        <location filename="../qml/pages/Settings-app.qml" line="149"/>
         <source>Refresh weather every (%1) minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="150"/>
+        <location filename="../qml/pages/Settings-app.qml" line="158"/>
         <source>Refresh calendar every (%1) minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="155"/>
+        <location filename="../qml/pages/Settings-app.qml" line="163"/>
         <source>Amazfish Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="162"/>
+        <location filename="../qml/pages/Settings-app.qml" line="170"/>
         <source>Start service on boot</source>
         <translation>启动时开启服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="177"/>
+        <location filename="../qml/pages/Settings-app.qml" line="185"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>开启/停止 Amazfish 后台服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="190"/>
+        <location filename="../qml/pages/Settings-app.qml" line="198"/>
         <source>Start</source>
         <translation>开启</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="199"/>
+        <location filename="../qml/pages/Settings-app.qml" line="207"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="209"/>
+        <location filename="../qml/pages/Settings-app.qml" line="217"/>
         <source>Button Actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="221"/>
+        <location filename="../qml/pages/Settings-app.qml" line="229"/>
         <source>Save Settings</source>
         <translation>保存设置</translation>
     </message>
@@ -1308,18 +1313,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="71"/>
+        <location filename="../qml/pages/SleepPage.qml" line="74"/>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="72"/>
+        <location filename="../qml/pages/SleepPage.qml" line="75"/>
         <source>Hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="67"/>
+        <location filename="../qml/pages/SleepPage.qml" line="70"/>
         <source>Sleep Summary</source>
         <translation>睡眠摘要</translation>
     </message>
@@ -1544,11 +1549,29 @@
     </message>
 </context>
 <context>
+    <name>SportsSummaryPage</name>
+    <message>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="8"/>
+        <source>Sports Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="14"/>
+        <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="143"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>StepsPage</name>
     <message>
         <location filename="../qml/pages/StepsPage.qml" line="9"/>
-        <location filename="../qml/pages/StepsPage.qml" line="49"/>
-        <location filename="../qml/pages/StepsPage.qml" line="53"/>
+        <location filename="../qml/pages/StepsPage.qml" line="51"/>
+        <location filename="../qml/pages/StepsPage.qml" line="55"/>
         <source>Steps</source>
         <translation>步数</translation>
     </message>

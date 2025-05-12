@@ -389,9 +389,17 @@
     </message>
 </context>
 <context>
-    <name>PairPage</name>
+    <name>PairDevicePage</name>
     <message>
         <source>Pair Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No devices found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bluetooth adapter is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -408,14 +416,6 @@
     </message>
     <message>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No devices found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bluetooth adapter is not available</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -548,6 +548,10 @@
     </message>
     <message>
         <source>Refresh calendar every (%1) minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set silent profile on connect</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1214,6 +1218,21 @@
     </message>
     <message>
         <source>Send to Strava</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SportsSummaryPage</name>
+    <message>
+        <source>Sports Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

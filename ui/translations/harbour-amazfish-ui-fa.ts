@@ -389,34 +389,34 @@
     </message>
 </context>
 <context>
-    <name>PairPage</name>
+    <name>PairDevicePage</name>
     <message>
         <source>Pair Device</source>
-        <translation>وصل کردن افزاره</translation>
+        <translation type="unfinished">وصل کردن افزاره</translation>
     </message>
     <message>
         <source>No devices found</source>
-        <translation>هیچ افزاره‌ای پیدا نشد</translation>
-    </message>
-    <message>
-        <source>Stop scanning</source>
-        <translation>توقّف پویش</translation>
-    </message>
-    <message>
-        <source>Scan for devices</source>
-        <translation>پویش افزاره‌ها</translation>
-    </message>
-    <message>
-        <source>Scanning for devices…</source>
-        <translation>پوییدن افزاره‌ها…</translation>
-    </message>
-    <message>
-        <source>Pairing…</source>
-        <translation>حفت کردن…</translation>
+        <translation type="unfinished">هیچ افزاره‌ای پیدا نشد</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
-        <translation>سازوارگر بلوتوثی موجود نیست</translation>
+        <translation type="unfinished">سازوارگر بلوتوثی موجود نیست</translation>
+    </message>
+    <message>
+        <source>Stop scanning</source>
+        <translation type="unfinished">توقّف پویش</translation>
+    </message>
+    <message>
+        <source>Scan for devices</source>
+        <translation type="unfinished">پویش افزاره‌ها</translation>
+    </message>
+    <message>
+        <source>Scanning for devices…</source>
+        <translation type="unfinished">پوییدن افزاره‌ها…</translation>
+    </message>
+    <message>
+        <source>Pairing…</source>
+        <translation type="unfinished">حفت کردن…</translation>
     </message>
 </context>
 <context>
@@ -549,6 +549,10 @@
     <message>
         <source>Transliterate notifications</source>
         <translation>آگاهی‌های آوانگاری</translation>
+    </message>
+    <message>
+        <source>Set silent profile on connect</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1215,6 +1219,21 @@
     <message>
         <source>swolf</source>
         <translation>swolf</translation>
+    </message>
+</context>
+<context>
+    <name>SportsSummaryPage</name>
+    <message>
+        <source>Sports Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Next Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
