@@ -396,7 +396,7 @@
     </message>
     <message>
         <source>No devices found</source>
-        <translation type="unfinished">Nebylo nelezeno žádné zařízení</translation>
+        <translation>Nebylo nalezeno žádné zařízení</translation>
     </message>
     <message>
         <source>Bluetooth adapter is not available</source>
