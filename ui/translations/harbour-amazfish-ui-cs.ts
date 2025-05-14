@@ -515,7 +515,7 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation type="unfinished">Párování zařízení</translation>
+        <translation>Párovat zařízení</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
@@ -525,27 +525,27 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="27"/>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished">Adaptér bluetooth není k dispozici</translation>
+        <translation>Adaptér bluetooth není k dispozici</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="212"/>
         <source>Stop scanning</source>
-        <translation type="unfinished">Zastavit hledání</translation>
+        <translation>Zastavit hledání</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="213"/>
         <source>Scan for devices</source>
-        <translation type="unfinished">Hledání zařízení</translation>
+        <translation>Hledat zařízení</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="227"/>
         <source>Scanning for devices…</source>
-        <translation type="unfinished">Hledání zařízení…</translation>
+        <translation>Hledání zařízení…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="229"/>
         <source>Pairing…</source>
-        <translation type="unfinished">Párování…</translation>
+        <translation>Párování…</translation>
     </message>
 </context>
 <context>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="88"/>
         <source>Set silent profile on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Po připojení nastavit tichý profil</translation>
     </message>
 </context>
 <context>
@@ -1553,17 +1553,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="8"/>
         <source>Sports Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>Sportovní aktivity</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="14"/>
         <source>Download Next Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Stáhnout další aktivity</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="143"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit</translation>
     </message>
 </context>
 <context>
