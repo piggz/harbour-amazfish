@@ -54,8 +54,10 @@ PagePL {
             color: styler.themeSecondaryHighlightColor
             font.pixelSize: styler.themeFontSizeMedium
             truncMode: truncModes.fade
-            // Layout.fillWidth: true
-            width: parent.width
+            anchors.left: parent.left
+            anchors.right: parent.right;
+            anchors.leftMargin: styler.themePaddingMedium
+            anchors.rightMargin: styler.themePaddingMedium
         }
 
         LabelPL {
@@ -63,16 +65,20 @@ PagePL {
             color: styler.themeSecondaryHighlightColor
             font.pixelSize: styler.themeFontSizeMedium
             truncMode: truncModes.fade
-            // Layout.fillWidth: true
-            width: parent.width
+            anchors.left: parent.left
+            anchors.right: parent.right;
+            anchors.leftMargin: styler.themePaddingMedium
+            anchors.rightMargin: styler.themePaddingMedium
         }
         LabelPL {
             id: lblBluetoothAddress
             color: styler.themeSecondaryHighlightColor
             font.pixelSize: styler.themeFontSizeMedium
             truncMode: truncModes.fade
-            // Layout.fillWidth: true
-            width: parent.width
+            anchors.left: parent.left
+            anchors.right: parent.right;
+            anchors.leftMargin: styler.themePaddingMedium
+            anchors.rightMargin: styler.themePaddingMedium
         }
 
         SectionHeaderPL {
@@ -181,9 +187,12 @@ PagePL {
         }
 
         LabelPL {
-            width: parent.width
             text: qsTr("Start/Stop the Amazfish Background Service")
             visible: (ENABLE_SYSTEMD === "YES")
+            anchors.left: parent.left
+            anchors.right: parent.right;
+            anchors.leftMargin: styler.themePaddingMedium
+            anchors.rightMargin: styler.themePaddingMedium
         }
 
         Row {

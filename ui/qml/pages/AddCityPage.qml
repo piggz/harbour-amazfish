@@ -60,7 +60,11 @@ PagePL {
 
 
         Row {
-            width: parent.width - (2 * anchors.margins)
+            anchors.left: parent.left
+            anchors.right: parent.right;
+            anchors.leftMargin: styler.themePaddingLarge
+            anchors.rightMargin: styler.themePaddingLarge
+
             LabelPL {
                 text: page.currentCity
                 width: parent.width * 0.75
