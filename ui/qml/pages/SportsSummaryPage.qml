@@ -87,6 +87,7 @@ PageListPL {
             id: timeImage
             anchors.top: timeLabel.top
             anchors.right: timeLabel.left
+            anchors.rightMargin: styler.themePaddingMedium
             width: timeLabel.height
             height: timeLabel.height
             asynchronous: true
