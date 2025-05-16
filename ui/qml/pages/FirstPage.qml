@@ -262,10 +262,11 @@ PagePL {
 
         SectionHeaderPL {
             text: qsTr("Service")
-            visible: (ENABLE_SYSTEMD === "YES") && (!serviceActiveState || !serviceEnabledState)
+            visible: btnSystemdEnable.visible
         }
 
         ButtonPL {
+            id: btnSystemdEnable
             text: qsTr("Enable on boot")
             visible: serviceEnabledState == false && (ENABLE_SYSTEMD === "YES")
             anchors.horizontalCenter: parent.horizontalCenter
