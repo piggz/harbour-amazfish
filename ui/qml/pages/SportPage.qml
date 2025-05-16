@@ -63,7 +63,7 @@ PagePL {
                 Layout.preferredWidth: styler.themeItemSizeLarge
                 Layout.preferredHeight: styler.themeItemSizeLarge
                 Layout.alignment: Qt.AlignLeft
-                iconName: styler.customIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
+                iconSource: styler.customIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
             }
 
             LabelPL
@@ -186,7 +186,7 @@ PagePL {
                         map.fitView(trackPointsTemporary);
                     }
                 }
-                Image
+                IconPL
                 {
                     anchors.fill: parent
                     source: "../pics/map_btn_center.png"
@@ -213,7 +213,7 @@ PagePL {
                         bMapMaximized = !bMapMaximized;
                     }
                 }
-                Image
+                IconPL
                 {
                     anchors.fill: parent
                     source: (map.height === page.height) ? "../pics/map_btn_min.png" : "../pics/map_btn_max.png"
