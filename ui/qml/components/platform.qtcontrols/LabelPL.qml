@@ -23,9 +23,6 @@ import QtQuick.Layouts 1.12
 Label {
     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
 
-    leftPadding: styler.themeHorizontalPageMargin
-    rightPadding: styler.themeHorizontalPageMargin
-
     elide: {
         if (truncMode === truncModes.elide) return Text.ElideRight;
         if (truncMode === truncModes.fade) return Text.ElideRight;
