@@ -62,7 +62,8 @@ PageListPL {
             anchors.top: parent.top
             anchors.topMargin: styler.themePaddingMedium
             anchors.right: parent.right
-            anchors.rightMargin: styler.themePaddingSmall
+            anchors.rightMargin: styler.themePaddingMedium
+            width: listItem.width / 3
             text: startdate
         }
         IconPL {
