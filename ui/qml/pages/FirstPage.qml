@@ -104,7 +104,10 @@ PagePL {
 
         RowLayout {
             height: styler.themeItemSizeSmall
-            width: parent.width
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: styler.themePaddingLarge
+            anchors.rightMargin: styler.themePaddingLarge
 
             LabelPL {
                 id: pairedNameLabel
