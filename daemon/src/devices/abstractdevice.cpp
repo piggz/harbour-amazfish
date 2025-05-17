@@ -212,6 +212,16 @@ void AbstractDevice::requestManualHeartrate() const
     }
 }
 
+AbstractActivitySummaryParser *AbstractDevice::activitySummaryParser() const
+{
+    return nullptr;
+}
+
+AbstractActivityDetailParser *AbstractDevice::activityDetailParser() const
+{
+    return nullptr;
+}
+
 bool AbstractDevice::operationRunning()
 {
     bool running = false;

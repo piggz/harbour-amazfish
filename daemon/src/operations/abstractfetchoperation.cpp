@@ -3,7 +3,7 @@
 #include "typeconversion.h"
 #include "amazfishconfig.h"
 
-AbstractFetchOperation::AbstractFetchOperation()
+AbstractFetchOperation::AbstractFetchOperation(bool isZeppOs) : m_isZeppOs(isZeppOs)
 {
 
 }
@@ -45,7 +45,7 @@ void AbstractFetchOperation::setLastSyncKey(const QString &key)
 
 bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << value;
     if (!m_service) {
         qDebug() << "No service set";
         return true;
@@ -55,34 +55,29 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
         qDebug() << Q_FUNC_INFO << ": Abort signalled from operation";
         return true;
     }
-    qDebug() << Q_FUNC_INFO << value;
 
     if (value.length() < 3) {
         qDebug() << "Activity metadata too short";
-        finished(false);
-        return true;
+        return false;
     }
 
     if (value[0] != MiBandService::RESPONSE) {
         qDebug() << "Activity metadata not a response: " << value[0];
-        finished(false);
-        return true;
+        return false;
     }
 
 
     switch (value[1]) {
     case MiBandService::COMMAND_ACTIVITY_DATA_START_DATE:
-        return handleStartDateResponse(value);
+        return !handleStartDateResponse(value);
     case MiBandService::COMMAND_FETCH_DATA:
         handleFetchDataResponse(value);
         return false;
     case MiBandService::COMMAND_ACK_ACTIVITY_DATA:
         qDebug() << "Got reply to COMMAND_ACK_ACTIVITY_DATA";
-        finished(true);
         return true;
     default:
         qDebug() << "Unexpected activity metadata: " << value;
-        finished(true);
         return true;
     }
 
@@ -91,16 +86,16 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 
 bool AbstractFetchOperation::handleStartDateResponse(const QByteArray &value)
 {
+    qDebug() << Q_FUNC_INFO;
+
     if (value[2] != MiBandService::SUCCESS) {
-        finished(false);
-        return true;
+        return false;
     }
 
     // it's 16 on the MB7, with a 0 at the end
     if (value.length() != 15 && (value.length() != 16 && value[15] != 0x00)) {
         qDebug() << "Start date response length: " << value.length();
-        finished(false);
-        return true;
+        return false;
     }
 
     // the third byte (0x01 on success) = ?
@@ -119,7 +114,7 @@ bool AbstractFetchOperation::handleStartDateResponse(const QByteArray &value)
     //Send log read command
     m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
 
-    return false;
+    return true;
 
 }
 
@@ -127,20 +122,39 @@ bool AbstractFetchOperation::handleFetchDataResponse(const QByteArray &value)
 {
     if (value.length() != 3 && value.length() != 7) {
         qDebug() << "Fetch data unexpected metadata length: " << value.length();
-        finished(false);
-        return true;
+        return false;;
     }
 
     if (value[2] != MiBandService::SUCCESS) {
         m_service->message(QObject::tr("No data to transfer"));
-        finished(true);
         return true;
     }
 
     //TODO handle size 7
-    finished(true);
-    return true;
 
+    bool success = m_valid && processBufferedData();
+    if (success) {
+        qDebug() << "Sending Ack";
+        sendAck();
+    }
+
+    return true;
+}
+
+bool AbstractFetchOperation::sendAck()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    if (m_isZeppOs) {
+        QByteArray cmd;
+
+        bool keepDataOnDevice = true;
+
+        cmd += MiBandService::COMMAND_ACK_ACTIVITY_DATA;
+        cmd += (keepDataOnDevice ? 0x09 : 0x01);
+        m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, cmd);
+    }
+    return true;
 }
 
 void AbstractFetchOperation::setAbort(bool abort)

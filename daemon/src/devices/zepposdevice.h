@@ -38,6 +38,9 @@ public:
     void ready();
     void setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey);
 
+    AbstractActivitySummaryParser* activitySummaryParser() const override;
+    AbstractActivityDetailParser *activityDetailParser() const override;
+
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
     void initialise() override;

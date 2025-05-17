@@ -34,13 +34,13 @@ QByteArray fromInt32(int val)
 QByteArray fromInt64(long long int val)
 {
     QByteArray ret = QByteArray(1, val & 0xff)
-     + QByteArray(1, ((val >> 8) & 0xff))
-     + QByteArray(1, ((val >> 16) & 0xff))
-     + QByteArray(1, ((val >> 24) & 0xff))
-     + QByteArray(1, ((val >> 32) & 0xff))
-     + QByteArray(1, ((val >> 40) & 0xff))
-     + QByteArray(1, ((val >> 48) & 0xff))
-     + QByteArray(1, ((val >> 56) & 0xff));
+            + QByteArray(1, ((val >> 8) & 0xff))
+            + QByteArray(1, ((val >> 16) & 0xff))
+            + QByteArray(1, ((val >> 24) & 0xff))
+            + QByteArray(1, ((val >> 32) & 0xff))
+            + QByteArray(1, ((val >> 40) & 0xff))
+            + QByteArray(1, ((val >> 48) & 0xff))
+            + QByteArray(1, ((val >> 56) & 0xff));
 
     qDebug() << "Converting int64 to char" << val << " " << ret.toHex();
 
@@ -106,12 +106,12 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
         QDateTime timestamp(QDate(
                                 year,
                                 (value[2] & 0xff),
-                            value[3] & 0xff),
-                QTime(
-                    value[4] & 0xff,
-                value[5] & 0xff,
-                value[6] & 0xff),
-                tz);
+                                value[3] & 0xff),
+                            QTime(
+                                value[4] & 0xff,
+                                value[5] & 0xff,
+                                value[6] & 0xff),
+                            tz);
         /*
         QDateTime temp = QDateTime::fromString(timestamp.toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
         qDebug() << "Timestamp: " << timestamp << timestamp.toString(Qt::ISODate);
@@ -152,7 +152,7 @@ int toUint16(char val1, char val2) {
     return (val1 & 0xff) | ((val2 & 0xff) << 8);
 }
 
-int toUint32(char val1, char val2, char val3, char val4) {
+uint32_t toUint32(char val1, char val2, char val3, char val4) {
     return (val1 & 0xff) | ((val2 & 0xff) << 8) | ((val3 & 0xff) << 16) | ((val4 & 0xff) << 24);
 }
 
@@ -173,5 +173,37 @@ int16_t toInt16(uint8_t val1, uint8_t val2) {
 
 uint16_t toUint16(char value) {
     return toUnsigned(value);
+}
+
+int32_t toInt32(char val1, char val2, char val3, char val4) {
+    union {
+        unsigned char a[4];
+        int32_t val;
+    } number;
+
+    number.a[0] = val1;
+    number.a[1] = val2;
+    number.a[2] = val3;
+    number.a[3] = val4;
+
+    return number.val;
+}
+
+int64_t toInt64(char val1, char val2, char val3, char val4, char val5, char val6, char val7, char val8) {
+    union {
+        unsigned char a[8];
+        int64_t val;
+    } number;
+
+    number.a[0] = val1;
+    number.a[1] = val2;
+    number.a[2] = val3;
+    number.a[3] = val4;
+    number.a[4] = val5;
+    number.a[5] = val6;
+    number.a[6] = val7;
+    number.a[7] = val8;
+
+    return number.val;
 }
 }

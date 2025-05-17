@@ -9,7 +9,7 @@
 class AbstractFetchOperation : public AbstractOperation
 {
 public:
-    explicit AbstractFetchOperation();
+    explicit AbstractFetchOperation(bool isZeppOs = false);
 
     bool handleMetaData(const QByteArray &meta) override;
 
@@ -17,9 +17,11 @@ private:
     QDateTime m_startDate;
     QString m_lastSyncKey;
     bool m_abort = false;
+    bool m_isZeppOs = false;
 
     bool handleStartDateResponse(const QByteArray &value);
     bool handleFetchDataResponse(const QByteArray &value);
+    bool sendAck();
 
 protected:
     void setStartDate(const QDateTime &sd);
@@ -30,6 +32,8 @@ protected:
     void saveLastActivitySync(qint64 millis);
 
     void setAbort(bool abort);
+    virtual bool processBufferedData() = 0;
+
 
     QBLEService *m_service = nullptr;
 };

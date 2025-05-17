@@ -66,22 +66,22 @@ QDateTime ActivitySummary::endTime() const
     return m_endTime;
 }
 
-void ActivitySummary::setBaseLatitude(int lat)
+void ActivitySummary::setBaseLatitude(float lat)
 {
     m_baseLatitude = lat;
 }
 
-int ActivitySummary::baseLatitude() const
+float ActivitySummary::baseLatitude() const
 {
     return m_baseLatitude;
 }
 
-void ActivitySummary::setBaseLongitude(int lon)
+void ActivitySummary::setBaseLongitude(float lon)
 {
     m_baseLongitude = lon;
 }
 
-int ActivitySummary::baseLongitude() const
+float ActivitySummary::baseLongitude() const
 {
     return m_baseLongitude;
 }
@@ -133,6 +133,16 @@ ActivitySummary::meta ActivitySummary::metaData(const QString &key)
     return m;
 }
 
+bool ActivitySummary::isValid() const
+{
+    return m_valid;
+}
+
+void ActivitySummary::setValid(bool valid)
+{
+    m_valid = valid;
+}
+
 bool ActivitySummary::saveToDatabase(KDbConnection *conn)
 {
 
@@ -167,8 +177,8 @@ bool ActivitySummary::saveToDatabase(KDbConnection *conn)
     values << m_deviceId;
     values << m_userId;
     values << activityKind();
-    values << baseLongitude() / 3000000.0;
-    values << baseLatitude() / 3000000.0;
+    values << baseLongitude();
+    values << baseLatitude();
     values << baseAltitude();
     values << m_gpxTrack;
 

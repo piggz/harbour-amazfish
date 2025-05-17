@@ -4,7 +4,7 @@ set(SOURCES
 ./src/activitykind.cpp
 ./src/activitysample.cpp
 ./src/activitysummary.cpp
-./src/bipactivitydetailparser.cpp
+./src/devices/bipactivitydetailparser.cpp
 ./src/bipbatteryinfo.cpp
 ./src/dbushrm.cpp
 ./src/devicefactory.cpp
@@ -35,6 +35,8 @@ set(SOURCES
 ./src/devices/pebbledevice.cpp
 ./src/devices/pinetimejfdevice.cpp
 ./src/devices/zepposdevice.cpp
+./src/devices/abstractactivitydetailparser.cpp
+./src/devices/huamiactivitysummaryparser.cpp
 ./src/devices/zeppos/abstractzepposservice.cpp
 ./src/devices/zeppos/huami2021chunkedencoder.cpp
 ./src/devices/zeppos/huami2021chunkeddecoder.cpp
@@ -45,6 +47,9 @@ set(SOURCES
 ./src/devices/zeppos/zepposstepsservice.cpp
 ./src/devices/zeppos/huami2021handler.cpp
 ./src/devices/zeppos/zepposheartrateservice.cpp
+./src/devices/zeppos/zepposactivitysummaryparser.cpp
+./src/devices/zeppos/zepposactivitydetailparser.cpp
+./src/devices/zeppos/picoproto.cpp
 ./src/harbour-amazfish-daemon.cpp
 ./src/huamiweathercondition.cpp
 ./src/navigationinterface.cpp
@@ -101,7 +106,6 @@ set(HEADERS
 ./src/activitykind.h
 ./src/activitysample.h
 ./src/activitysummary.h
-./src/bipactivitydetailparser.h
 ./src/bipbatteryinfo.h
 ./src/codec.h
 ./src/dbushrm.h
@@ -109,6 +113,8 @@ set(HEADERS
 ./src/deviceinterface.h
 ./src/devices/abstractdevice.h
 ./src/devices/abstractfirmwareinfo.h
+./src/devices/abstractactivitysummaryparser.h
+./src/devices/abstractactivitydetailparser.h
 ./src/devices/asteroidosdevice.h
 ./src/devices/banglejsdevice.h
 ./src/devices/bipdevice.h
@@ -133,6 +139,8 @@ set(HEADERS
 ./src/devices/pebbledevice.h
 ./src/devices/pinetimejfdevice.h
 ./src/devices/zepposdevice.h
+./src/devices/bipactivitydetailparser.h
+./src/devices/huamiactivitysummaryparser.h
 ./src/devices/zeppos/abstractzepposservice.h
 ./src/devices/zeppos/huami2021chunkedencoder.h
 ./src/devices/zeppos/huami2021chunkeddecoder.h
@@ -143,6 +151,9 @@ set(HEADERS
 ./src/devices/zeppos/zepposstepsservice.h
 ./src/devices/zeppos/zepposheartrateservice.h
 ./src/devices/zeppos/huami2021handler.h
+./src/devices/zeppos/picoproto.h
+./src/devices/zeppos/zepposactivitysummaryparser.h
+./src/devices/zeppos/zepposactivitydetailparser.h
 ./src/huamiweathercondition.h
 ./src/navigationinterface.h
 ./src/operations/abstractfetchoperation.h

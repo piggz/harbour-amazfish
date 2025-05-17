@@ -52,6 +52,9 @@ public:
 
     Q_SLOT void operationComplete(AbstractOperation *operation);
 
+    AbstractActivitySummaryParser *activitySummaryParser() const override;
+    AbstractActivityDetailParser *activityDetailParser() const override;
+
 protected:
     Q_SLOT void handleButtonPressed();
     Q_SLOT void buttonPressTimeout();

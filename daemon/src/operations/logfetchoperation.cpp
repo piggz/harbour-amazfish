@@ -7,7 +7,7 @@
 #include "mibandservice.h"
 #include "typeconversion.h"
 
-LogFetchOperation::LogFetchOperation()
+LogFetchOperation::LogFetchOperation(bool isZeppOs) : AbstractFetchOperation(isZeppOs)
 {
     QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     if (!cachelocation.exists()) {
@@ -49,15 +49,6 @@ void LogFetchOperation::handleData(const QByteArray &data)
     }
 }
 
-bool LogFetchOperation::finished(bool success)
-{
-    Q_UNUSED(success);
-    if (m_logFile) {
-        m_logFile->close();
-    }
-    return true;
-}
-
 bool LogFetchOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
     if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
@@ -67,4 +58,12 @@ bool LogFetchOperation::characteristicChanged(const QString &characteristic, con
         return handleMetaData(value);
     }
     return false;
+}
+
+bool LogFetchOperation::processBufferedData()
+{
+    if (m_logFile) {
+        m_logFile->close();
+    }
+    return true;
 }

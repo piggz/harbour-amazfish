@@ -12,11 +12,10 @@
 class ActivityFetchOperation : public AbstractFetchOperation
 {
 public:
-    ActivityFetchOperation(QBLEService *service, KDbConnection *db, int sampleSize = 4);
+    ActivityFetchOperation(QBLEService *service, KDbConnection *db, int sampleSize = 4, bool isZeppOs = false);
 
     void start(QBLEService *service) override;
     void handleData(const QByteArray &data) override;
-    bool finished(bool success) override;
     bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
 private:
@@ -28,6 +27,8 @@ private:
 
     bool saveSamples();
     int m_sampleSize = 4;
+
+    bool processBufferedData() override;
 };
 
 #endif // ACTIVITYFETCHOPERATION_H

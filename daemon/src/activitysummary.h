@@ -38,11 +38,11 @@ public:
     void setEndTime(const QDateTime& end);
     QDateTime endTime() const;
 
-    void setBaseLatitude(int lat);
-    int baseLatitude() const;
+    void setBaseLatitude(float lat);
+    float baseLatitude() const;
 
-    void setBaseLongitude(int lon);
-    int baseLongitude() const;
+    void setBaseLongitude(float lon);
+    float baseLongitude() const;
 
     void setBaseAltitude(int alt);
     int baseAltitude() const;
@@ -54,6 +54,9 @@ public:
     void addMetaData(const QString &key, const QString &value, const QString &unit);
     ActivitySummary::meta metaData(const QString &key);
 
+    bool isValid() const;
+    void setValid(bool valid);
+
     bool saveToDatabase(KDbConnection *conn);
 private:
     short m_version;
@@ -62,12 +65,14 @@ private:
     QDateTime m_startTime;     /** Not-null value. */
     QDateTime m_endTime;     /** Not-null value. */
     ActivityKind::Type m_activityKind;
-    int m_baseLongitude;
-    int m_baseLatitude;
+    float m_baseLongitude;
+    float m_baseLatitude;
     int m_baseAltitude;
     QString m_gpxTrack;
     uint m_deviceId;
     uint m_userId;
+
+    bool m_valid = false;
 
 
 

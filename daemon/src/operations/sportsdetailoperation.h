@@ -6,13 +6,15 @@
 #include <QDateTime>
 #include <KDb3/KDbConnection>
 
+#include "abstractactivitydetailparser.h"
 #include "abstractfetchoperation.h"
 #include "activitysummary.h"
 
 class SportsDetailOperation : public AbstractFetchOperation
 {
 public:
-    SportsDetailOperation(QBLEService *service, KDbConnection *db, const ActivitySummary &summary);
+    SportsDetailOperation(QBLEService *service, KDbConnection *db, const ActivitySummary &summary, bool isZeppOs = false, AbstractActivityDetailParser *parser = nullptr);
+    ~SportsDetailOperation();
 
     void start(QBLEService *service) override;
     void handleData(const QByteArray &data) override;
@@ -20,16 +22,19 @@ public:
 
 private:
     ActivitySummary m_summary;
+    AbstractActivityDetailParser *m_parser = 0;
     int m_lastPacketCounter = 0;
     QByteArray m_buffer;
     QString m_gpx;
 
     bool saveSport(const QString &filename);
-    bool finished(bool success) override;
 
     KDbConnection *m_conn;
 
     bool save();
+
+    bool processBufferedData() override;
+
 };
 
 #endif // SPORTSDETAILOPERATION_H

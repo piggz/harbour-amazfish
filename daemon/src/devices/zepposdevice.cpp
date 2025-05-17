@@ -1,6 +1,8 @@
 #include "zepposdevice.h"
 #include "batteryservice.h"
 
+#include "zeppos/zepposactivitydetailparser.h"
+#include "zeppos/zepposactivitysummaryparser.h"
 #include "zeppos/zepposauthservice.h"
 #include "zeppos/zepposservicesservice.h"
 #include "zeppos/zepposnotificationservice.h"
@@ -147,6 +149,16 @@ void ZeppOSDevice::setEncryptionParameters(int encryptedSequenceNumber, QByteArr
     m_decoder->setEncryptionParameters(sharedSessionKey);
 }
 
+AbstractActivitySummaryParser *ZeppOSDevice::activitySummaryParser() const
+{
+    return new ZeppOsActivitySummaryParser();
+}
+
+AbstractActivityDetailParser *ZeppOSDevice::activityDetailParser() const
+{
+    return new ZeppOsActivityDetailParser();
+}
+
 void ZeppOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
     qDebug() << Q_FUNC_INFO << interface << map << list << m_connectionState;
@@ -260,6 +272,7 @@ void ZeppOSDevice::initialise()
 
         connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
         connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
+        connect(mi, &AbstractOperationService::operationComplete, this, &HuamiDevice::operationComplete, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &ZeppOSDevice::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &ZeppOSDevice::serviceEvent, Qt::UniqueConnection);

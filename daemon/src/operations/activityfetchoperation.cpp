@@ -7,7 +7,7 @@
 #include "typeconversion.h"
 #include "amazfishconfig.h"
 
-ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn, int sampleSize) : m_conn(conn), m_sampleSize(sampleSize)
+ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn, int sampleSize, bool isZeppOs) : AbstractFetchOperation(isZeppOs), m_conn(conn), m_sampleSize(sampleSize)
 {
     setLastSyncKey("device/lastactivitysyncmillis");
 }
@@ -45,6 +45,7 @@ void ActivityFetchOperation::handleData(const QByteArray &data)
 
     if (len % m_sampleSize != 1) {
         qDebug() << Q_FUNC_INFO << "Unexpected data size";
+        m_valid = false;
         return;
     }
 
@@ -55,21 +56,6 @@ void ActivityFetchOperation::handleData(const QByteArray &data)
         }
         m_samples << (sample);
     }
-}
-
-bool ActivityFetchOperation::finished(bool success)
-{
-    bool saved = true;
-    if (success) {
-        //store the successful samples
-        saved = saveSamples();
-        m_sampleTime.setTimeSpec(Qt::LocalTime);
-        qDebug() << Q_FUNC_INFO << "Last sample time saved as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
-
-        saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());
-        qDebug() << Q_FUNC_INFO << "Last record was " << m_sampleTime;
-    }
-    return saved;
 }
 
 bool ActivityFetchOperation::saveSamples()
@@ -126,5 +112,19 @@ bool ActivityFetchOperation::saveSamples()
     tg.commit();
 
     return true;
+}
+
+bool ActivityFetchOperation::processBufferedData()
+{
+    bool saved = true;
+    //store the successful samples
+    saved = saveSamples();
+    m_sampleTime.setTimeSpec(Qt::LocalTime);
+    qDebug() << Q_FUNC_INFO << "Last sample time saved as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
+
+    saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());
+    qDebug() << Q_FUNC_INFO << "Last record was " << m_sampleTime;
+
+    return saved;
 }
 

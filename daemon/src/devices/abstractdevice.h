@@ -3,6 +3,8 @@
 #define ABSTRACTDEVICE_H
 
 #include "amazfish.h"
+#include "abstractactivitydetailparser.h"
+#include "abstractactivitysummaryparser.h"
 #include "qble/qbledevice.h"
 #include "weather/currentweather.h"
 #include "abstractfirmwareinfo.h"
@@ -125,6 +127,8 @@ public:
     virtual QStringList supportedDisplayItems() const;
     virtual void immediateAlert(int level);
     virtual void requestManualHeartrate() const;
+    virtual AbstractActivitySummaryParser* activitySummaryParser() const;
+    virtual AbstractActivityDetailParser* activityDetailParser() const;
 
     Q_SIGNAL void operationRunningChanged();
 

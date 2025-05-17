@@ -6,6 +6,8 @@
 #include "updatefirmwareoperation.h"
 #include "immediatealertservice.h"
 #include "amazfishconfig.h"
+#include "huamiactivitysummaryparser.h"
+#include "bipactivitydetailparser.h"
 
 #include <QtXml/QtXml>
 
@@ -49,7 +51,7 @@ void HuamiDevice::downloadSportsData()
     qDebug() << Q_FUNC_INFO;
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
-        SportsSummaryOperation *sportsSummaryOperation = new SportsSummaryOperation(mi, m_conn);
+        SportsSummaryOperation *sportsSummaryOperation = new SportsSummaryOperation(mi, m_conn, true, activitySummaryParser());
         if (mi->registerOperation(sportsSummaryOperation)) {
             sportsSummaryOperation->start(mi);
             emit operationRunningChanged();
@@ -64,7 +66,7 @@ void HuamiDevice::downloadActivityData()
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
         int sampleSize = activitySampleSize();
-        ActivityFetchOperation *activityFetchOperation = new ActivityFetchOperation(mi, m_conn, sampleSize);
+        ActivityFetchOperation *activityFetchOperation = new ActivityFetchOperation(mi, m_conn, sampleSize, true);
         if (mi->registerOperation(activityFetchOperation)) {
             activityFetchOperation->start(mi);
             emit operationRunningChanged();
@@ -442,7 +444,7 @@ void HuamiDevice::operationComplete(AbstractOperation *operation)
         }
 
         if (createDetail) {
-            SportsDetailOperation *sportsDetailOperation = new SportsDetailOperation(mi, m_conn, summary);
+            SportsDetailOperation *sportsDetailOperation = new SportsDetailOperation(mi, m_conn, summary, true, activityDetailParser());
             if (mi->registerOperation(sportsDetailOperation)) {
                 sportsDetailOperation->start(mi);
                 emit operationRunningChanged();
@@ -451,6 +453,16 @@ void HuamiDevice::operationComplete(AbstractOperation *operation)
             }
         }
     }
+}
+
+AbstractActivitySummaryParser *HuamiDevice::activitySummaryParser() const
+{
+    return new HuamiActivitySummaryParser();
+}
+
+AbstractActivityDetailParser *HuamiDevice::activityDetailParser() const
+{
+    return new BipActivityDetailParser();
 }
 
 void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)

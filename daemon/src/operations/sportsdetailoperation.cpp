@@ -5,17 +5,23 @@
 
 #include "mibandservice.h"
 #include "typeconversion.h"
-#include "bipactivitydetailparser.h"
 #include "amazfishconfig.h"
 
-SportsDetailOperation::SportsDetailOperation(QBLEService *service, KDbConnection *conn, const ActivitySummary &summary) :  m_summary(summary)
+SportsDetailOperation::SportsDetailOperation(QBLEService *service, KDbConnection *conn, const ActivitySummary &summary, bool isZeppOs, AbstractActivityDetailParser *parser) :  AbstractFetchOperation(isZeppOs), m_summary(summary), m_parser(parser)
 {
+    qDebug() << Q_FUNC_INFO;
     m_conn = conn;
     setLastSyncKey("device/lastsportsyncmillis");
 }
 
+SportsDetailOperation::~SportsDetailOperation()
+{
+    delete m_parser;
+}
+
 void SportsDetailOperation::start(QBLEService *service)
 {
+    qDebug() << Q_FUNC_INFO;
     setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
     m_service = service;
@@ -31,8 +37,9 @@ void SportsDetailOperation::start(QBLEService *service)
 
 void SportsDetailOperation::handleData(const QByteArray &data)
 {
+    qDebug() << Q_FUNC_INFO;
     if (data.length() < 2) {
-        qDebug() << "unexpected sports summary data length: " << data.length();
+        qDebug() << "unexpected sports detail data length: " << data.length();
         return;
     }
 
@@ -44,7 +51,7 @@ void SportsDetailOperation::handleData(const QByteArray &data)
         m_buffer += data.mid(1);
     } else {
         qDebug() << "invalid package counter: " << (uint8_t)data[0] << ", last was: " << m_lastPacketCounter;
-        finished(false);
+        m_valid = false;
         return;
     }
 }
@@ -59,60 +66,64 @@ bool SportsDetailOperation::characteristicChanged(const QString &characteristic,
     return false;
 }
 
-bool SportsDetailOperation::finished(bool success)
+bool SportsDetailOperation::processBufferedData()
 {
+    qDebug() << Q_FUNC_INFO;
     bool saved = false;
-    if (success) {
-        BipActivityDetailParser parser(m_summary);
-        parser.parse(m_buffer);
-        m_gpx = parser.toText();
+    m_parser->setSummary(m_summary);
 
-        QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-        QString filename = m_summary.name() + ".gpx";
-        QString tcx = m_summary.name() + ".tcx";
-        QFile logFile;
-
-        QDir laufhelden(QDir::homePath() + "/Laufhelden/");
-
-        qDebug() << "Checking for " << laufhelden.absolutePath();
-
-        if (laufhelden.exists()) {
-            logFile.setFileName(laufhelden.absolutePath() + "/" + filename);
-        } else {
-            logFile.setFileName(cachelocation.absolutePath() + "/" + filename);
-        }
-
-        if(logFile.open(QIODevice::WriteOnly)) {
-            qDebug() << "Saving to" << logFile.fileName();
-            QTextStream stream( &logFile );
-            stream << m_gpx;
-        }
-        logFile.close();
-
-        //Saving TCX
-        if (laufhelden.exists()) {
-            logFile.setFileName(laufhelden.absolutePath() + "/" + tcx);
-        } else {
-            logFile.setFileName(cachelocation.absolutePath() + "/" + tcx);
-        }
-
-        if(logFile.open(QIODevice::WriteOnly)) {
-            qDebug() << "Saving to" << logFile.fileName();
-            QTextStream stream( &logFile );
-            stream << parser.toTCX();
-        }
-        logFile.close();
-
-        saved = saveSport(logFile.fileName());
-
-        qDebug() << "End sport time is:" << m_summary.endTime() << m_summary.endTime().toMSecsSinceEpoch();
-        QDateTime end = m_summary.endTime();
-        end.setTimeSpec(Qt::LocalTime);
-        saveLastActivitySync(end.toMSecsSinceEpoch());
-    } else {
-        setAbort(true);
+    if (!m_summary.isValid()) {
+        qDebug() << "Summary is invalid, not parsing";
+        return false;
     }
-    return saved;
+
+    m_parser->parse(m_buffer);
+    m_gpx = m_parser->toText();
+
+    QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QString filename = m_summary.name() + ".gpx";
+    QString tcx = m_summary.name() + ".tcx";
+    QFile logFile;
+
+    QDir laufhelden(QDir::homePath() + "/Laufhelden/");
+
+    qDebug() << "Checking for " << laufhelden.absolutePath();
+
+    if (laufhelden.exists()) {
+        logFile.setFileName(laufhelden.absolutePath() + "/" + filename);
+    } else {
+        logFile.setFileName(cachelocation.absolutePath() + "/" + filename);
+    }
+
+    if(logFile.open(QIODevice::WriteOnly)) {
+        qDebug() << "Saving to" << logFile.fileName();
+        QTextStream stream( &logFile );
+        stream << m_gpx;
+    }
+    logFile.close();
+
+    //Saving TCX
+    if (laufhelden.exists()) {
+        logFile.setFileName(laufhelden.absolutePath() + "/" + tcx);
+    } else {
+        logFile.setFileName(cachelocation.absolutePath() + "/" + tcx);
+    }
+
+    if(logFile.open(QIODevice::WriteOnly)) {
+        qDebug() << "Saving to" << logFile.fileName();
+        QTextStream stream( &logFile );
+        stream << m_parser->toTCX();
+    }
+    logFile.close();
+
+    saved = saveSport(logFile.fileName());
+
+    qDebug() << "End sport time is:" << m_summary.endTime() << m_summary.endTime().toMSecsSinceEpoch();
+    QDateTime end = m_summary.endTime();
+    end.setTimeSpec(Qt::LocalTime);
+    saveLastActivitySync(end.toMSecsSinceEpoch());
+
+    return true;
 }
 
 bool SportsDetailOperation::saveSport(const QString &filename)

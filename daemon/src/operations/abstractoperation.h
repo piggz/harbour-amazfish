@@ -14,11 +14,11 @@ public:
     //! Return true if the operation is now complete and can be deleted
     virtual bool characteristicChanged(const QString &characteristic, const QByteArray &value) = 0;
 
-    virtual bool finished(bool success);
     bool busy();
 
 protected:
     bool m_busy = false;
+    bool m_valid = true;
 
 private:
     virtual bool handleMetaData(const QByteArray &meta) = 0;

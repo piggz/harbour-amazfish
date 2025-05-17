@@ -39,12 +39,16 @@ void AbstractOperationService::notifyOperation(const QString &characteristic, co
         bool finished = m_currentOperation->characteristicChanged(characteristic, value);
 
         if (finished) {
-            qDebug() << "Operation complete, deleting";
+            qDebug() << "Operation complete, notifying.....";
             emit operationComplete(m_currentOperation);
+
+            qDebug() << "......deleting";
             delete m_currentOperation;
             m_currentOperation = nullptr;
 
             if (m_queuedOperation) {
+                qDebug() << "Current operation is the queued operation";
+
                 m_currentOperation = m_queuedOperation;
                 m_queuedOperation = nullptr;
             } else {
