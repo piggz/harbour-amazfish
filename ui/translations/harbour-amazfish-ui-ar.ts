@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/AddCityPage.qml" line="8"/>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Set Location</translation>
     </message>
 </context>
 <context>
