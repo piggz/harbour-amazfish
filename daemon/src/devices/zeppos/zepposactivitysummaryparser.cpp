@@ -29,26 +29,34 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     m_summary.version = message.GetString(1);
 
     //Location
-    m_summary.location.startTimestamp = message.GetMessage(2)->GetUInt32(1);
-    m_summary.location.baseLatitude = message.GetMessage(2)->GetInt32(5);
-    m_summary.location.baseLongitude = message.GetMessage(2)->GetInt32(6);
-    m_summary.location.baseAltitude = message.GetMessage(2)->GetInt32(7);
-    m_summary.location.maxLatitude = message.GetMessage(2)->GetInt32(8);
-    m_summary.location.minLatitude = message.GetMessage(2)->GetInt32(9);
-    m_summary.location.maxLongitude = message.GetMessage(2)->GetInt32(10);
-    m_summary.location.minLongitude = message.GetMessage(2)->GetInt32(11);
+    if (message.GetField(2)) {
+        m_summary.location.startTimestamp = message.GetMessage(2)->GetUInt32(1);
+        m_summary.location.baseLatitude = message.GetMessage(2)->GetInt32(5);
+        m_summary.location.baseLongitude = message.GetMessage(2)->GetInt32(6);
+        m_summary.location.baseAltitude = message.GetMessage(2)->GetInt32(7);
+        m_summary.location.maxLatitude = message.GetMessage(2)->GetInt32(8);
+        m_summary.location.minLatitude = message.GetMessage(2)->GetInt32(9);
+        m_summary.location.maxLongitude = message.GetMessage(2)->GetInt32(10);
+        m_summary.location.minLongitude = message.GetMessage(2)->GetInt32(11);
+    }
 
     //Type
-    m_summary.type.type =message.GetMessage(3)->GetUInt32(1);
-    m_summary.type.ai =message.GetMessage(3)->GetUInt32(2);
+    if (message.GetField(3)) {
+        m_summary.type.type =message.GetMessage(3)->GetUInt32(1);
+        m_summary.type.ai =message.GetMessage(3)->GetUInt32(2);
+    }
 
     //Distance
-    m_summary.distance.distance = message.GetMessage(4)->GetFloat(1);
+    if (message.GetField(4)) {
+        m_summary.distance.distance = message.GetMessage(4)->GetFloat(1);
+    }
 
     //Time
-    m_summary.time.totalDuration = message.GetMessage(7)->GetUInt32(1);
-    m_summary.time.workoutDuration = message.GetMessage(7)->GetUInt32(2);
-    //m_summary.time.pauseDuration = message.GetMessage(7)->GetInt32(3);
+    if (message.GetField(7)) {
+        m_summary.time.totalDuration = message.GetMessage(7)->GetUInt32(1);
+        m_summary.time.workoutDuration = message.GetMessage(7)->GetUInt32(2);
+        //m_summary.time.pauseDuration = message.GetMessage(7)->GetInt32(3);
+    }
 
     //Swimming
     if (message.GetField(9)) {
@@ -63,44 +71,59 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         m_summary.swimmingData.laneLengthUnit = message.GetMessage(9)->GetUInt32(9);
     }
     //Pace
-    m_summary.pace.avg = message.GetMessage(10)->GetFloat(1);
-    m_summary.pace.best = message.GetMessage(10)->GetFloat(2);
+    if (message.GetField(10)) {
+        m_summary.pace.avg = message.GetMessage(10)->GetFloat(1);
+        m_summary.pace.best = message.GetMessage(10)->GetFloat(2);
+    }
 
     //Steps
-    m_summary.steps.avgCadence = message.GetMessage(11)->GetFloat(1);
-    m_summary.steps.maxCadence = message.GetMessage(11)->GetFloat(2);
-    m_summary.steps.avgStride = message.GetMessage(11)->GetInt32(3);
-    m_summary.steps.steps = message.GetMessage(11)->GetInt32(4);
+    if (message.GetField(11)) {
+        m_summary.steps.avgCadence = message.GetMessage(11)->GetFloat(1);
+        m_summary.steps.maxCadence = message.GetMessage(11)->GetFloat(2);
+        m_summary.steps.avgStride = message.GetMessage(11)->GetInt32(3);
+        m_summary.steps.steps = message.GetMessage(11)->GetInt32(4);
+    }
 
     //Altitiude
-    m_summary.altitude.maxAltitude = message.GetMessage(13)->GetInt32(1);
-    m_summary.altitude.minAltitude = message.GetMessage(13)->GetInt32(2);
-    m_summary.altitude.avgAltitude = message.GetMessage(13)->GetInt32(3);
-    m_summary.altitude.totalClimbing = message.GetMessage(13)->GetInt32(4);
-    m_summary.altitude.elevationGain = message.GetMessage(13)->GetInt32(5);
-    m_summary.altitude.elevationLoss = message.GetMessage(13)->GetInt32(6);
-
+    if (message.GetField(13)) {
+        m_summary.altitude.maxAltitude = message.GetMessage(13)->GetInt32(1);
+        m_summary.altitude.minAltitude = message.GetMessage(13)->GetInt32(2);
+        m_summary.altitude.avgAltitude = message.GetMessage(13)->GetInt32(3);
+        m_summary.altitude.totalClimbing = message.GetMessage(13)->GetInt32(4);
+        m_summary.altitude.elevationGain = message.GetMessage(13)->GetInt32(5);
+        m_summary.altitude.elevationLoss = message.GetMessage(13)->GetInt32(6);
+    }
     //Calories
-    m_summary.calories.calories = message.GetMessage(16)->GetInt32(1);
+    if (message.GetField(16)) {
+        m_summary.calories.calories = message.GetMessage(16)->GetInt32(1);
+    }
 
     //Heartrate
-    m_summary.heartRate.avg = message.GetMessage(19)->GetInt32(1);
-    m_summary.heartRate.max = message.GetMessage(19)->GetInt32(2);
-    m_summary.heartRate.min = message.GetMessage(19)->GetInt32(3);
+    if (message.GetField(19)) {
+        m_summary.heartRate.avg = message.GetMessage(19)->GetInt32(1);
+        m_summary.heartRate.max = message.GetMessage(19)->GetInt32(2);
+        m_summary.heartRate.min = message.GetMessage(19)->GetInt32(3);
+    }
 
     //TrainigEffect
-    m_summary.trainingEffect.aerobicTrainingEffect = message.GetMessage(21)->GetFloat(4);
-    m_summary.trainingEffect.anaerobicTrainingEffect = message.GetMessage(21)->GetFloat(5);
-    m_summary.trainingEffect.currentWorkoutLoad = message.GetMessage(21)->GetInt32(6);
-    //m_summary.trainingEffect.aerobicTrainingEffect = message.GetMessage(21)->GetInt32(4);
+    if (message.GetField(21)) {
+        m_summary.trainingEffect.aerobicTrainingEffect = message.GetMessage(21)->GetFloat(4);
+        m_summary.trainingEffect.anaerobicTrainingEffect = message.GetMessage(21)->GetFloat(5);
+        m_summary.trainingEffect.currentWorkoutLoad = message.GetMessage(21)->GetInt32(6);
+        //m_summary.trainingEffect.aerobicTrainingEffect = message.GetMessage(21)->GetInt32(4);
 
+    }
     //HeartrateZones
-    m_summary.heartRateZones.zoneMax2 = message.GetMessage(22)->GetInt32Array(2);
-    m_summary.heartRateZones.zoneTime = message.GetMessage(22)->GetInt32Array(3);
+    if (message.GetField(22)) {
+        m_summary.heartRateZones.zoneMax2 = message.GetMessage(22)->GetInt32Array(2);
+        m_summary.heartRateZones.zoneTime = message.GetMessage(22)->GetInt32Array(3);
+    }
 
     //Elevation
-    m_summary.elevation.uphillTime = message.GetMessage(23)->GetUInt32(1);
-    m_summary.elevation.downhillTime = message.GetMessage(23)->GetUInt32(2);
+    if (message.GetField(23)) {
+        m_summary.elevation.uphillTime = message.GetMessage(23)->GetUInt32(1);
+        m_summary.elevation.downhillTime = message.GetMessage(23)->GetUInt32(2);
+    }
 
     ActivityKind::Type activityKind = ActivityKind::fromBipType(ActivityKind::Type(m_summary.type.type));
 
