@@ -6,7 +6,7 @@
     <message>
         <location filename="../src/devices/abstractdevice.cpp" line="143"/>
         <source>Device does not support settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Device does not support settings</translation>
     </message>
 </context>
 <context>
@@ -14,7 +14,7 @@
     <message>
         <location filename="../src/achievements.cpp" line="12"/>
         <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
