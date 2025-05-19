@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/AddCityPage.qml" line="8"/>
         <source>Set Location</source>
-        <translation type="unfinished">Set Location</translation>
+        <translation>Set Location</translation>
     </message>
 </context>
 <context>
@@ -15,7 +15,7 @@
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enabled</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="92"/>
