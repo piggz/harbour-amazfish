@@ -68,6 +68,13 @@ PageListPL {
         }
 
         ListElement {
+            deviceType: "Amazfit GTR 3 Pro"
+            icon: "../pics/devices/miband4.png"
+            auth: true
+            pattern: "Amazfit GTR 3 Pro"
+        }
+
+        ListElement {
             deviceType: "Amazfit GTR"
             icon: "../pics/devices/amazfit-gtr.png"
             auth: true
