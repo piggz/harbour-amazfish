@@ -181,14 +181,14 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     }
 
     if (m_summary.pace.hasData) {
-        summary.addMetaData("paceAvg", QString::number(m_summary.pace.avg * 1000 / 60), "min_km");
-        summary.addMetaData("paceBest", QString::number(m_summary.pace.best * 1000 / 60), "min_km");
+        summary.addMetaData("paceAvg", QString::number((m_summary.pace.avg * 1000) / 60), "min_km");
+        summary.addMetaData("paceBest", QString::number((m_summary.pace.best * 1000) / 60), "min_km");
     }
 
     if (m_summary.steps.hasData) {
-        summary.addMetaData("stepsAvgCadence", QString::number(m_summary.pace.avg), "steps_min");
-        summary.addMetaData("stepsMaxCadence", QString::number(m_summary.pace.best), "steps_min");
-        summary.addMetaData("stepsAvgStride", QString::number(m_summary.pace.avg), "cm");
+        summary.addMetaData("stepsAvgCadence", QString::number(m_summary.steps.avgCadence * 60), "steps_min");
+        summary.addMetaData("stepsMaxCadence", QString::number(m_summary.steps.maxCadence * 60), "steps_min");
+        summary.addMetaData("stepsAvgStride", QString::number(m_summary.steps.avgStride), "cm");
         summary.addMetaData("steps", QString::number(m_summary.steps.steps), "steps");
     }
 
