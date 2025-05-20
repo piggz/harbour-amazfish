@@ -28,13 +28,6 @@ ListModel {
     }
 
     ListElement {
-        deviceType: "Amazfit GTS"
-        icon: "../pics/devices/amazfit-gts.png"
-        auth: true
-        pattern: "Amazfit GTS"
-    }
-
-    ListElement {
         deviceType: "Amazfit Neo"
         icon: "../pics/devices/amazfit-neo.png"
         auth: true
@@ -49,6 +42,13 @@ ListModel {
     }
 
     ListElement {
+        deviceType: "Amazfit GTS"
+        icon: "../pics/devices/amazfit-gts.png"
+        auth: true
+        pattern: "Amazfit GTS"
+    }
+
+    ListElement {
         deviceType: "Amazfit GTR 3 Pro"
         icon: "../pics/devices/miband4.png"
         auth: true
@@ -56,17 +56,17 @@ ListModel {
     }
 
     ListElement {
-        deviceType: "Amazfit GTR"
-        icon: "../pics/devices/amazfit-gtr.png"
-        auth: true
-        pattern: "Amazfit GTR"
-    }
-
-    ListElement {
         deviceType: "Amazfit GTR 2"
         icon: "../pics/devices/amazfit-gtr2.png"
         auth: true
         pattern: "Amazfit GTR 2"
+    }
+
+    ListElement {
+        deviceType: "Amazfit GTR"
+        icon: "../pics/devices/amazfit-gtr.png"
+        auth: true
+        pattern: "Amazfit GTR"
     }
 
     ListElement {
