@@ -255,7 +255,6 @@ ActivityCoordinate ZeppOsActivityDetailParser::getCurrentActivityPoint()
 
 void ZeppOsActivityDetailParser::addNewGpsCoordinate()
 {
-
     m_lastCoordinate.setLongitude(convertHuamiValueToDecimalDegrees(m_baseLongitude));
     m_lastCoordinate.setLatitude(convertHuamiValueToDecimalDegrees(m_baseLatitude));
     m_lastCoordinate.setAltitude(m_baseAltitude);
@@ -271,7 +270,7 @@ void ZeppOsActivityDetailParser::addNewGpsCoordinate()
 
 void ZeppOsActivityDetailParser::add(const ActivityCoordinate &ap)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     if (ap.coordinate() != m_lastActivityPoint.coordinate()) {
         m_activityTrack << ap;
     } else {
