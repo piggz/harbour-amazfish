@@ -18,7 +18,7 @@ ZeppOsActivityDetailParser::ZeppOsActivityDetailParser()
 
 void ZeppOsActivityDetailParser::parse(const QByteArray &bytes)
 {
-    qDebug() << Q_FUNC_INFO << bytes.toHex();
+    qDebug() << Q_FUNC_INFO;
 
     int i = 0;
 
@@ -110,7 +110,7 @@ int ZeppOsActivityDetailParser::typeLength(Type t)
 
 int ZeppOsActivityDetailParser::consumeTimestamp(const QByteArray &bytes, int offset)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     int unused = TypeConversion::toInt32(bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3]);
     int64_t ts = TypeConversion::toInt64(bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3], bytes[offset + 4], bytes[offset + 5], bytes[offset + 6], bytes[offset + 7]);
     QDateTime dt = QDateTime::fromMSecsSinceEpoch(ts);
@@ -122,7 +122,7 @@ int ZeppOsActivityDetailParser::consumeTimestamp(const QByteArray &bytes, int of
 
 int ZeppOsActivityDetailParser::consumeTimestampOffset(const QByteArray &bytes, int offset)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     short tso = TypeConversion::toInt16(bytes[offset], bytes[offset + 1]);
     m_offset = tso;
     return 2;
@@ -130,7 +130,7 @@ int ZeppOsActivityDetailParser::consumeTimestampOffset(const QByteArray &bytes, 
 
 int ZeppOsActivityDetailParser::consumeGpsCoords(const QByteArray &bytes, int offset)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     // TODO which one is the time offset? Not sure it is the first
 
     m_baseLongitude = TypeConversion::toInt32(bytes[offset + 6], bytes[offset + 7], bytes[offset + 8], bytes[offset + 9]);
@@ -143,7 +143,7 @@ int ZeppOsActivityDetailParser::consumeGpsCoords(const QByteArray &bytes, int of
 
 int ZeppOsActivityDetailParser::consumeGpsDelta(const QByteArray &bytes, int offset)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     offset += consumeTimestampOffset(bytes, offset);
     short longitudeDelta = TypeConversion::toInt16(bytes[offset], bytes[offset + 1]);
     short latitudeDelta = TypeConversion::toInt16(bytes[offset + 2], bytes[offset + 3]);
@@ -159,7 +159,7 @@ int ZeppOsActivityDetailParser::consumeGpsDelta(const QByteArray &bytes, int off
 
 int ZeppOsActivityDetailParser::consumeStatus(const QByteArray &bytes, int offset)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     offset += consumeTimestampOffset(bytes, offset);
 
     int statusCode = TypeConversion::toInt16(bytes[offset], bytes[offset + 1]);
@@ -188,7 +188,7 @@ int ZeppOsActivityDetailParser::consumeStatus(const QByteArray &bytes, int offse
 
 int ZeppOsActivityDetailParser::consumeSpeed(const QByteArray &bytes, int offset)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     offset += consumeTimestampOffset(bytes, offset);
 
     short cadence = TypeConversion::toInt16(bytes[offset], bytes[offset + 1]); // spm
@@ -207,7 +207,7 @@ int ZeppOsActivityDetailParser::consumeSpeed(const QByteArray &bytes, int offset
 
 int ZeppOsActivityDetailParser::consumeAltitude(const QByteArray &bytes, int offset)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     offset += consumeTimestampOffset(bytes, offset);
     m_baseAltitude = (int) (TypeConversion::toInt32(bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3]) / 100.0f);
 
@@ -216,7 +216,7 @@ int ZeppOsActivityDetailParser::consumeAltitude(const QByteArray &bytes, int off
 
 int ZeppOsActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offset)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     offset += consumeTimestampOffset(bytes, offset);
     m_lastHeartrate = bytes[offset] & 0xff;
 
@@ -225,7 +225,7 @@ int ZeppOsActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int of
 
 int ZeppOsActivityDetailParser::consumeStrengthSet(const QByteArray &bytes, int offset)
 {
-    qDebug() << Q_FUNC_INFO;
+    //qDebug() << Q_FUNC_INFO;
     return 34;
 }
 

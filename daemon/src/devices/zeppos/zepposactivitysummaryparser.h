@@ -24,12 +24,14 @@ private:
         int32_t minLatitude;     // 9 /3000000 -> coords
         int32_t maxLongitude;    // 10 /3000000 -> coords
         int32_t minLongitude;    // 11 /3000000 -> coords
+        bool hasData = false;
     };
 
     struct HeartRate {
         int32_t avg; // 1 bpm
         int32_t max; // 2 bpm
         int32_t min; // 3 bpm
+        bool hasData = false;
     };
 
     struct Steps {
@@ -37,26 +39,31 @@ private:
         float maxCadence;  // 2 steps/sec
         int32_t avgStride; // 3 cm
         int32_t steps;     // 4 count
+        bool hasData = false;
     };
 
     struct Type {
         int32_t type; // 1  1 = running, 4 = bike, 3 = walk
         int32_t ai; // 2 0 = normal, 1 = ai/automatic
+        bool hasData = false;
     };
 
     struct Distance {
         float distance; // 1 meters
+        bool hasData = false;
     };
 
     struct Time {
         int32_t totalDuration; // 1 seconds
         int32_t workoutDuration; // 2 seconds
         int32_t pauseDuration; // 3 seconds
+        bool hasData = false;
     };
 
     struct Pace {
         float avg; // 1 val * 1000 / 60 -> min/km
         float best; // 2 val * 1000 / 60 -> min/km
+        bool hasData = false;
     };
 
     struct Altitude {
@@ -66,10 +73,12 @@ private:
         int32_t totalClimbing = 4; // cm
         int32_t elevationGain = 5; // cm
         int32_t elevationLoss = 6; // cm
+        bool hasData = false;
     };
 
     struct Calories {
         int32_t calories = 1; // kcal
+        bool hasData = false;
     };
 
     struct HeartRateZones {
@@ -77,12 +86,14 @@ private:
         // Zones: N/A, Warm-up, Fat-burn time, Aerobic, Anaerobic, Extreme
         std::vector<int32_t> zoneMax2; // 2 bpm
         std::vector<int32_t> zoneTime; // 1 seconds
+        bool hasData = false;
     };
 
     struct Elevation {
         // TODO 1, 2?
         uint32_t uphillTime;   // 3 sec
         uint32_t downhillTime; // 4 sec
+        bool hasData = false;
     };
 
     struct TrainingEffect {
@@ -90,6 +101,7 @@ private:
         float anaerobicTrainingEffect; // 5
         int32_t currentWorkoutLoad;    // 6
         int32_t maximumOxygenUptake;   // 7 ml/kg/min
+        bool hasData = false;
     };
 
     struct SwimmingData {
@@ -102,6 +114,7 @@ private:
         uint32_t maxStrokeRate;  // 7 stroke/min
         uint32_t laneLength;     // 8
         uint32_t laneLengthUnit; //  9 0: meter, 1: yard
+        bool hasData = false;
     };
 
     struct WorkoutSummary {
