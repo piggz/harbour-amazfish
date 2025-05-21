@@ -111,11 +111,12 @@ int ZeppOsActivityDetailParser::typeLength(Type t)
 int ZeppOsActivityDetailParser::consumeTimestamp(const QByteArray &bytes, int offset)
 {
     //qDebug() << Q_FUNC_INFO;
-    int unused = TypeConversion::toInt32(bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3]);
-    int64_t ts = TypeConversion::toInt64(bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3], bytes[offset + 4], bytes[offset + 5], bytes[offset + 6], bytes[offset + 7]);
+    int64_t ts = TypeConversion::toInt64(bytes[offset + 4], bytes[offset + 5], bytes[offset + 6], bytes[offset + 7], bytes[offset + 8], bytes[offset + 9], bytes[offset + 10], bytes[offset + 11]);
     QDateTime dt = QDateTime::fromMSecsSinceEpoch(ts);
     m_lastTimestamp = dt;
     m_offset = 0;
+
+    qDebug() << Q_FUNC_INFO << m_lastTimestamp;
 
     return 12;
 }
