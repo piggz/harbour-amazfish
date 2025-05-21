@@ -154,6 +154,8 @@ protected:
     void setConnectionState(const QString &state);
     KDbConnection *m_conn = nullptr;
 
+    Q_SLOT void deviceError(const QString &message);
+
 private:
     void reconnectionTimer();
     void devicePairFinished(const QString& status);

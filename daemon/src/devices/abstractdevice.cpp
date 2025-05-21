@@ -14,6 +14,7 @@ AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBL
     m_reconnectTimer->setInterval(60000);
     connect(m_reconnectTimer, &QTimer::timeout, this, &AbstractDevice::reconnectionTimer);
     //connect(this, &QBLEDevice::pairFinished, this, &AbstractDevice::devicePairFinished);
+    connect(this, &QBLEDevice::error, this, &AbstractDevice::deviceError);
 }
 
 void AbstractDevice::pair()
@@ -78,6 +79,13 @@ void AbstractDevice::setConnectionState(const QString &state)
         m_connectionState = state;
         emit connectionStateChanged();
     }
+}
+
+void AbstractDevice::deviceError(const QString &msg)
+{
+    qDebug() << Q_FUNC_INFO;
+    Q_EMIT message(msg);
+    setConnectionState("disconnected");
 }
 
 QString AbstractDevice::connectionState() const
