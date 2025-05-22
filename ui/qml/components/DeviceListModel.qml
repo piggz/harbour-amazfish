@@ -96,7 +96,7 @@ ListModel {
 
     ListElement {
         deviceType: "Amazfit Balance"
-        icon: "../pics/devices/miband4.png"
+        icon: "../pics/devices/amazfit-balance.png"
         auth: true
         pattern: "^Amazfit Balance$"
     }
