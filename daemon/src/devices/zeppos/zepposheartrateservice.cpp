@@ -44,6 +44,7 @@ void ZeppOsHeartRateService::enableRealtimeHeartRateMeasurement(bool enable, boo
 
     if (enable == realtimeStarted) {
         // same state, ignore
+        qDebug() << "Ignoring";
         return;
     }
 

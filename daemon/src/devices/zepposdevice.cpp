@@ -68,13 +68,17 @@ AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes)
 void ZeppOSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
-    m_notificationService->sendAlert(notification);
+    if (m_notificationService) {
+        m_notificationService->sendAlert(notification);
+    }
 }
 
 void ZeppOSDevice::incomingCall(const QString &caller)
 {
     qDebug() << Q_FUNC_INFO;
-    m_notificationService->incomingCall(caller);
+    if (m_notificationService) {
+        m_notificationService->incomingCall(caller);
+    }
 }
 
 void ZeppOSDevice::incomingCallEnded()
@@ -84,12 +88,16 @@ void ZeppOSDevice::incomingCallEnded()
 
 void ZeppOSDevice::requestManualHeartrate() const
 {
-    m_heartRateService->enableRealtimeHeartRateMeasurement(true, true);
+    if (m_heartRateService) {
+        m_heartRateService->enableRealtimeHeartRateMeasurement(true, true);
+    }
 }
 
 void ZeppOSDevice::writeToChunked2021(short endpoint, QByteArray data, bool encryptIgnored)
 {
-    m_encoder->write(endpoint, data, true, encryptIgnored);
+    if (m_encoder) {
+        m_encoder->write(endpoint, data, true, encryptIgnored);
+    }
 }
 
 AbstractZeppOsService *ZeppOSDevice::zosService(short endpoint) const
