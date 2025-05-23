@@ -22,6 +22,8 @@ PageListPL {
     property QtObject adapter: _bluetoothManager ? _bluetoothManager.usableAdapter : null
     property QtObject _bluetoothManager : BluezQt.Manager
 
+    property variant enforcedDeviceType
+
     function startDiscovery() {
         if (!adapter) {
             showMessage(qsTr("Bluetooth adapter is not available"))
@@ -110,7 +112,7 @@ PageListPL {
             includeByDefault: false
         }
 
-        filterOnGroup: "visible"
+        filterOnGroup: enforcedDeviceType ? "" : "visible"
 
         items.onChanged: {
             var itemsCount = items.count
@@ -140,7 +142,7 @@ PageListPL {
                         page.stopDiscovery();
                         _deviceName = model.FriendlyName;
                         _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
-                        _deviceType = device.deviceType
+                        _deviceType = (enforcedDeviceType !== undefined) ? enforcedDeviceType.deviceType : device.deviceType
                         DaemonInterfaceInstance.pair(_deviceName, _deviceType, _deviceAddress);
                     })
                     return;
@@ -148,7 +150,7 @@ PageListPL {
 
                 stopDiscovery();
                 _deviceName = model.FriendlyName;
-                _deviceType = device.deviceType;
+                _deviceType = (enforcedDeviceType !== undefined) ? enforcedDeviceType.deviceType : device.deviceType
                 _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
                 DaemonInterfaceInstance.pair(_deviceName, _deviceType, _deviceAddress);
             }
@@ -204,6 +206,24 @@ PageListPL {
 
     pageMenu: PageMenuPL {
         //busy: discoveryModel.running || DaemonInterfaceInstance.pairing
+
+        PageMenuItemPL {
+            text: (enforcedDeviceType !== undefined) ? enforcedDeviceType.deviceType : qsTr("Select device type")
+            onClicked: {
+                if (enforcedDeviceType !== undefined) {
+                    enforcedDeviceType = undefined
+                } else {
+
+                    var enforceTypeDialog = app.pages.push(Qt.resolvedUrl("./PairDeviceTypeDialog.qml"));
+                    enforceTypeDialog.selected.connect(function(d) {
+                        enforcedDeviceType = d;
+                    })
+
+                    return;
+                }
+
+            }
+        }
 
         PageMenuItemPL {
             enabled: (DaemonInterfaceInstance !== undefined) && !DaemonInterfaceInstance.pairing
