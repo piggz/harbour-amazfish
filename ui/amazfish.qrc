@@ -9,6 +9,7 @@
         <file>qml/pages/FirstPage.qml</file>
         <file>qml/pages/HeartratePage.qml</file>
         <file>qml/pages/PairDevicePage.qml</file>
+        <file>qml/pages/PairDeviceTypeDialog.qml</file>
         <file>qml/pages/Settings-alarms.qml</file>
         <file>qml/pages/Settings-app.qml</file>
         <file>qml/pages/Settings-huami-shortcuts.qml</file>
