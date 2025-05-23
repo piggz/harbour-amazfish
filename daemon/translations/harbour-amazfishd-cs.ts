@@ -14,67 +14,67 @@
     <message>
         <location filename="../src/achievements.cpp" line="12"/>
         <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta začíná, dobrodruhu. Zatím jen &lt;b&gt;%1&lt;/b&gt; kroků — Kraj je stále na dohled.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
         <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
-        <translation type="unfinished"></translation>
+        <translation>Překročil si most přes Brandyvínu. Máš našlapáno &lt;b&gt;%1&lt;/b&gt; kroků – vpředu číhají trollové!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="14"/>
         <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Napůl cesty do Mordoru. Ušels &lt;b&gt;%1&lt;/b&gt; kroků a přišel o druhou snídani.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="15"/>
         <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora osudu je na obzoru. Máš za sebou &lt;b&gt;%1&lt;/b&gt; kroků — hlavně neztrať prsten!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="16"/>
         <source>The ring is cast into the fire. &lt;b&gt;%1&lt;/b&gt; steps done — Middle-earth is saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Prsten je vržen do ohně. &lt;b&gt;%1&lt;/b&gt; kroků za tebou — Středozem je zachráněna!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="17"/>
         <source>You kept walking after saving the world?! &lt;b&gt;%1&lt;/b&gt; steps — you’re a true legend. 🧙</source>
-        <translation type="unfinished"></translation>
+        <translation>Fakt jsi šlapal i po záchraně světa?! &lt;b&gt;%1&lt;/b&gt; kroků — to z tebe dělá legendu. 🧙</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="18"/>
         <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hobit, aneb tam a zase zpátky — &lt;b&gt;%1&lt;/b&gt; kroků ušlapáno, druhá snídaně ti náleží!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
         <source>Let&apos;s get moving! You&apos;ve taken only &lt;b&gt;%1&lt;/b&gt; steps so far.</source>
-        <translation type="unfinished"></translation>
+        <translation>Do toho! Zatím máš jen &lt;b&gt;%1&lt;/b&gt; kroků.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="23"/>
         <source>Warming up! &lt;b&gt;%1&lt;/b&gt; steps done — keep going!</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahříváš se! &lt;b&gt;%1&lt;/b&gt; kroků za tebou — pokračuj!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="24"/>
         <source>You&apos;re halfway there. &lt;b&gt;%1&lt;/b&gt; steps so far!</source>
-        <translation type="unfinished"></translation>
+        <translation>Jsi v polovině! Už máš &lt;b&gt;%1&lt;/b&gt; kroků!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="25"/>
         <source>Almost there! Just a bit more — &lt;b&gt;%1&lt;/b&gt; steps already!</source>
-        <translation type="unfinished"></translation>
+        <translation>Skoro hotovo! Už jen kousek — &lt;b&gt;%1&lt;/b&gt; kroků ušlapáno!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="26"/>
         <source>Goal reached! &lt;b&gt;%1&lt;/b&gt; steps — you can have that cake now 🎉</source>
-        <translation type="unfinished"></translation>
+        <translation>Cíl splněn! &lt;b&gt;%1&lt;/b&gt; kroků — ten dort si teď zasloužíš 🎉</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="27"/>
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dals to! &lt;b&gt;%1&lt;/b&gt; kroků — teď pauza, nebo přidáš ještě pár navíc?</translation>
     </message>
 </context>
 <context>
@@ -121,7 +121,7 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="671"/>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalendář</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/devices/gtsdevice.cpp" line="219"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Operace právě běží, prosím zkuste to později</translation>
     </message>
 </context>
 <context>
@@ -152,17 +152,17 @@
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="370"/>
         <source>Sending %1...</source>
-        <translation type="unfinished">Odesílá %1 ...</translation>
+        <translation>Odesílá %1 ...</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="373"/>
         <source>No file selected</source>
-        <translation type="unfinished">Nebyl vybrán soubor</translation>
+        <translation>Nebyl vybrán žádný soubor</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="395"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Operace právě běží. Prosím zkuste to pozdějí</translation>
     </message>
 </context>
 <context>
@@ -180,19 +180,19 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="364"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="378"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Operace právě běží, prosím zkuste to později</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="401"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="414"/>
         <source>Sending file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Odesílá soubor...</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="404"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="417"/>
         <source>No file selected</source>
-        <translation type="unfinished">Nebyl vybrán soubor</translation>
+        <translation>Nebyl vybrán soubor</translation>
     </message>
 </context>
 <context>
