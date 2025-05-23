@@ -52,12 +52,8 @@ QString Achievements::selectStepsMessage(int steps, double goal)
     QDate today = QDate::currentDate();
     std::map<float, QString> usedMap;
 
-    if (today.month() == 3 && today.day() == 25) {
-//        qDebug() << "Tolkien reading day easter egg!";
-        usedMap = loreStepMessages;
-    } else {
-        usedMap = stepMessages;
-    }
+    // use lord of rings messages whole march
+    usedMap = (today.month() == 3) ? loreStepMessages : stepMessages;
 
     double reached = (goal > 0) ? steps / static_cast<double>(goal) : 0.0;
 
