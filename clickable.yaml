@@ -1,4 +1,4 @@
-clickable_minimum_required: 8.0.0
+clickable_minimum_required: 8.3.1
 framework: ubuntu-sdk-20.04
 
 prebuild: git submodule update --init
