@@ -515,37 +515,37 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation type="unfinished">Gerät koppeln</translation>
+        <translation>Gerät koppeln</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation type="unfinished">Kein Gerät gefunden</translation>
+        <translation>Kein Gerät gefunden</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="27"/>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished">Bluetooth-Adapter ist nicht verfügbar</translation>
+        <translation>Bluetooth-Adapter ist nicht verfügbar</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="212"/>
         <source>Stop scanning</source>
-        <translation type="unfinished">Suche stoppen</translation>
+        <translation>Suche stoppen</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="213"/>
         <source>Scan for devices</source>
-        <translation type="unfinished">Nach Geräten suchen</translation>
+        <translation>Nach Geräten suchen</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="227"/>
         <source>Scanning for devices…</source>
-        <translation type="unfinished">Suche nach Geräten…</translation>
+        <translation>Suche nach Geräten…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="229"/>
         <source>Pairing…</source>
-        <translation type="unfinished">Koppeln…</translation>
+        <translation>Koppeln…</translation>
     </message>
 </context>
 <context>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="88"/>
         <source>Set silent profile on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Lautlosprofil beim Verbinden aktivieren</translation>
     </message>
 </context>
 <context>
@@ -1061,7 +1061,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="116"/>
         <source>SpO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO2</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="117"/>
@@ -1096,7 +1096,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="123"/>
         <source>Pomodoro</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomodoro</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="125"/>
@@ -1553,17 +1553,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="8"/>
         <source>Sports Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>Sportliche Aktivitäten</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="14"/>
         <source>Download Next Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Nächste Aktivität herunterladen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="143"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
 </context>
 <context>
