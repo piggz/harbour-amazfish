@@ -52,7 +52,7 @@ ListModel {
         deviceType: "Amazfit GTR 3 Pro"
         icon: "../pics/devices/miband4.png"
         auth: true
-        pattern: "Amazfit GTR 3 Pro"
+        pattern: "^Amazfit GTR 3 Pro$"
     }
 
     ListElement {
