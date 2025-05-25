@@ -304,6 +304,9 @@ int32_t Message::GetInt32(int32_t number) {
 
 int64_t Message::GetInt64(int32_t number) {
   Field* field = GetFieldAndCheckType(number, FIELD_UINT64);
+  if (!field) {
+      return 0;
+  }
   uint64_t first_value = (*(field->value.v_uint64))[0];
   int64_t zig_zag_decoded =
     static_cast<int64_t>((first_value >> 1) ^ (-(first_value & 1)));
@@ -312,12 +315,18 @@ int64_t Message::GetInt64(int32_t number) {
 
 uint32_t Message::GetUInt32(int32_t number) {
   Field* field = GetFieldAndCheckType(number, FIELD_UINT32);
+  if (!field) {
+      return 0;
+  }
   uint32_t first_value = (*(field->value.v_uint32))[0];
   return first_value;
 }
 
 uint64_t Message::GetUInt64(int32_t number) {
   Field* field = GetFieldAndCheckType(number, FIELD_UINT64);
+  if (!field) {
+      return 0;
+  }
   uint64_t first_value = (*(field->value.v_uint64))[0];
   return first_value;
 }
@@ -364,6 +373,9 @@ std::pair<uint8_t*, size_t> Message::GetBytes(int32_t number) {
 
 std::string Message::GetString(int32_t number) {
   Field* field = GetFieldAndCheckType(number, FIELD_BYTES);
+  if (!field) {
+      return "";
+  }
   std::pair<uint8_t*, size_t> first_value = (*(field->value.v_bytes))[0];
   std::string result(first_value.first, first_value.first + first_value.second);
   return result;
