@@ -12,7 +12,7 @@ QDateTime AbstractFetchOperation::lastActivitySync()
 {
     qlonglong ls = AmazfishConfig::instance()->value(m_lastSyncKey).toLongLong();
 
-    if (ls == 0) {
+    if (ls <= 0) {
         return QDateTime::currentDateTime().addDays(-100);
     }
 
