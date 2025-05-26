@@ -28,6 +28,7 @@ static const QMap<QString, DeviceCreator> deviceMap = {
     { "Amazfit Stratos 3", [](const QString &name) { return new GtsDevice(name); } },
     { "Mi Smart Band 4", [](const QString &name) { return new BipLiteDevice(name); } },
     { "Amazfit Balance", [](const QString &name) { return new ZeppOSDevice(name); } },
+    { "Amazfit GTR 3 Pro", [](const QString &name) { return new ZeppOSDevice(name); } },
     { "InfiniTime", [](const QString &name) { return new PinetimeJFDevice(name); } },
     { "Pebble", [](const QString &name) { return new PebbleDevice(name); } },
     { "Bangle.js", [](const QString &name) { return new BangleJSDevice(name); } },
