@@ -6,7 +6,6 @@
 
 #include "mibandservice.h"
 #include "typeconversion.h"
-#include "activitykind.h"
 
 SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn, bool isZeppOs, AbstractActivitySummaryParser *parser) : AbstractFetchOperation(isZeppOs), m_parser(parser)
 {

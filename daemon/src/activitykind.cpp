@@ -1,97 +1,443 @@
 #include "activitykind.h"
 #include <QDebug>
+
+const QMap<ActivityKind::Type, QString> ActivityKind::m_typeNames = {
+    {Unknown, "Unknown"},
+    {Activity, "Activity"},
+    {LightSleep, "LightSleep"},
+    {DeepSleep, "DeepSleep"},
+    {NotWorn, "NotWorn"},
+    {Running, "Running"},
+    {Walking, "Walking"},
+    {Swimming, "Swimming"},
+    {Cycling, "Cycling"},
+    {Treadmill, "Treadmill"},
+    {Exercise, "Exercise"},
+    {OpenSwimming, "OpenSwimming"},
+    {IndoorCycling, "IndoorCycling"},
+    {EllipticalTrainer, "EllipticalTrainer"},
+    {JumpRope, "JumpRope"},
+    {Yoga, "Yoga"},
+    {Soccer, "Soccer"},
+    {RowingMachine, "RowingMachine"},
+    {Cricket, "Cricket"},
+    {Basketball, "Basketball"},
+    {PingPong, "PingPong"},
+    {Badmington, "Badmington"},
+    {StrengthTraining, "StrengthTraining"},
+    {Hiking, "Hiking"},
+    {Climbing, "Climbing"},
+    {REMSleep, "REMSleep"},
+    {SleepAny, "SleepAny"},
+    {AwakeSleep, "AwakeSleep"},
+    {Navigate, "Navigate"},
+    {IndoorTrack, "IndoorTrack"},
+    {Handcycling, "Handcycling"},
+    {EBike, "EBike"},
+    {BikeCommute, "BikeCommute"},
+    {HandcyclingIndoor, "HandcyclingIndoor"},
+    {Transition, "Transition"},
+    {FitnessEquipment, "FitnessEquipment"},
+    {StairStepper, "StairStepper"},
+    {Pilates, "Pilates"},
+    {PoolSwim, "PoolSwim"},
+    {Tennis, "Tennis"},
+    {PlatformTennis, "PlatformTennis"},
+    {TableTennis, "TableTennis"},
+    {AmericanFootball, "AmericanFootball"},
+    {Training, "Training"},
+    {Cardio, "Cardio"},
+    {Breathwork, "Breathwork"},
+    {IndoorWalking, "IndoorWalking"},
+    {XcClassicSki, "XcClassicSki"},
+    {Skiing, "Skiing"},
+    {Snowboarding, "Snowboarding"},
+    {Rowing, "Rowing"},
+    {Mountaineering, "Mountaineering"},
+    {Multisport, "Multisport"},
+    {Paddling, "Paddling"},
+    {Flying, "Flying"},
+    {Motorcycling, "Motorcycling"},
+    {Boating, "Boating"},
+    {Driving, "Driving"},
+    {Golf, "Golf"},
+    {HangGliding, "HangGliding"},
+    {Hunting, "Hunting"},
+    {Fishing, "Fishing"},
+    {InlineSkating, "InlineSkating"},
+    {RockClimbing, "RockClimbing"},
+    {ClimbIndoor, "ClimbIndoor"},
+    {Bouldering, "Bouldering"},
+    {SailRace, "SailRace"},
+    {SailExpedition, "SailExpedition"},
+    {IceSkating, "IceSkating"},
+    {SkyDiving, "SkyDiving"},
+    {Snowshoe, "Snowshoe"},
+    {Snowmobiling, "Snowmobiling"},
+    {StandUpPaddleboarding, "StandUpPaddleboarding"},
+    {Surfing, "Surfing"},
+    {Wakeboarding, "Wakeboarding"},
+    {WaterSkiing, "WaterSkiing"},
+    {Kayaking, "Kayaking"},
+    {Rafting, "Rafting"},
+    {Windsurfing, "Windsurfing"},
+    {Kitesurfing, "Kitesurfing"},
+    {Tactical, "Tactical"},
+    {Jumpmaster, "Jumpmaster"},
+    {Boxing, "Boxing"},
+    {FloorClimbing, "FloorClimbing"},
+    {Baseball, "Baseball"},
+    {Softball, "Softball"},
+    {SoftballSlowPitch, "SoftballSlowPitch"},
+    {Shooting, "Shooting"},
+    {AutoRacing, "AutoRacing"},
+    {WinterSport, "WinterSport"},
+    {Grinding, "Grinding"},
+    {HealthSnapshot, "HealthSnapshot"},
+    {Marine, "Marine"},
+    {Hiit, "Hiit"},
+    {VideoGaming, "VideoGaming"},
+    {Racket, "Racket"},
+    {Pickleball, "Pickleball"},
+    {Padel, "Padel"},
+    {Squash, "Squash"},
+    {Racquetball, "Racquetball"},
+    {PushWalkSpeed, "PushWalkSpeed"},
+    {IndoorPushWalkSpeed, "IndoorPushWalkSpeed"},
+    {PushRunSpeed, "PushRunSpeed"},
+    {IndoorPushRunSpeed, "IndoorPushRunSpeed"},
+    {Meditation, "Meditation"},
+    {ParaSport, "ParaSport"},
+    {DiscGolf, "DiscGolf"},
+    {UltimateDisc, "UltimateDisc"},
+    {TeamSport, "TeamSport"},
+    {Rugby, "Rugby"},
+    {Hockey, "Hockey"},
+    {Lacrosse, "Lacrosse"},
+    {Volleyball, "Volleyball"},
+    {WaterTubing, "WaterTubing"},
+    {Wakesurfing, "Wakesurfing"},
+    {MixedMartialArts, "MixedMartialArts"},
+    {Dance, "Dance"},
+    {MountainHike, "MountainHike"},
+    {CrossTrainer, "CrossTrainer"},
+    {FreeTraining, "FreeTraining"},
+    {DynamicCycle, "DynamicCycle"},
+    {Kickboxing, "Kickboxing"},
+    {FitnessExercises, "FitnessExercises"},
+    {Crossfit, "Crossfit"},
+    {FunctionalTraining, "FunctionalTraining"},
+    {PhysicalTraining, "PhysicalTraining"},
+    {Taekwondo, "Taekwondo"},
+    {TaeBo, "TaeBo"},
+    {CrossCountryRunning, "CrossCountryRunning"},
+    {Karate, "Karate"},
+    {Fencing, "Fencing"},
+    {CoreTraining, "CoreTraining"},
+    {Kendo, "Kendo"},
+    {HorizontalBar, "HorizontalBar"},
+    {ParallelBar, "ParallelBar"},
+    {Cooldown, "Cooldown"},
+    {CrossTraining, "CrossTraining"},
+    {SitUps, "SitUps"},
+    {FitnessGaming, "FitnessGaming"},
+    {AerobicRxercise, "AerobicRxercise"},
+    {Rolling, "Rolling"},
+    {Flexibility, "Flexibility"},
+    {Gymnastics, "Gymnastics"},
+    {TrackAndField, "TrackAndField"},
+    {PushUps, "PushUps"},
+    {BattleRope, "BattleRope"},
+    {SmithMachine, "SmithMachine"},
+    {PullUps, "PullUps"},
+    {Plank, "Plank"},
+    {Javelin, "Javelin"},
+    {LongJump, "LongJump"},
+    {HighJump, "HighJump"},
+    {Trampoline, "Trampoline"},
+    {Dumbbell, "Dumbbell"},
+    {BellyDance, "BellyDance"},
+    {JazzDance, "JazzDance"},
+    {LatinDance, "LatinDance"},
+    {Ballet, "Ballet"},
+    {StreetDance, "StreetDance"},
+    {Zumba, "Zumba"},
+    {RollerSkating, "RollerSkating"},
+    {MartialArts, "MartialArts"},
+    {TaiChi, "TaiChi"},
+    {HulaHooping, "HulaHooping"},
+    {DiscSports, "DiscSports"},
+    {Darts, "Darts"},
+    {Archery, "Archery"},
+    {HorseRiding, "HorseRiding"},
+    {KiteFlying, "KiteFlying"},
+    {Swing, "Swing"},
+    {Stairs, "Stairs"},
+    {MindAndBody, "MindAndBody"},
+    {Wrestling, "Wrestling"},
+    {Kabaddi, "Kabaddi"},
+    {Karting, "Karting"},
+    {Billiards, "Billiards"},
+    {Bowling, "Bowling"},
+    {Shuttlecock, "Shuttlecock"},
+    {Handball, "Handball"},
+    {Dodgeball, "Dodgeball"},
+    {AustralianFootball, "AustralianFootball"},
+    {Lacross, "Lacross"},
+    {Shot, "Shot"},
+    {BeachSoccer, "BeachSoccer"},
+    {BeachVolleyball, "BeachVolleyball"},
+    {Gateball, "Gateball"},
+    {SepakTakraw, "SepakTakraw"},
+    {Sailing, "Sailing"},
+    {JetSkiing, "JetSkiing"},
+    {Skating, "Skating"},
+    {IceHockey, "IceHockey"},
+    {Curling, "Curling"},
+    {CrossCountrySkiing, "CrossCountrySkiing"},
+    {SnowSports, "SnowSports"},
+    {Luge, "Luge"},
+    {Skateboarding, "Skateboarding"},
+    {Parachuting, "Parachuting"},
+    {Parkour, "Parkour"},
+    {IndoorRunning, "IndoorRunning"},
+    {OutdoorRunning, "OutdoorRunning"},
+    {OutdoorWalking, "OutdoorWalking"},
+    {OutdoorCycling, "OutdoorCycling"},
+    {AerobicCombo, "AerobicCombo"},
+    {Aerobics, "Aerobics"},
+    {AirWalker, "AirWalker"},
+    {ArtisticSwimming, "ArtisticSwimming"},
+    {BallroomDance, "BallroomDance"},
+    {Bmx, "Bmx"},
+    {BoardGame, "BoardGame"},
+    {Bocce, "Bocce"},
+    {Breaking, "Breaking"},
+    {Bridge, "Bridge"},
+    {CardioCombat, "CardioCombat"},
+    {Checkers, "Checkers"},
+    {Chess, "Chess"},
+    {DragonBoat, "DragonBoat"},
+    {Esports, "Esports"},
+    {Finswimming, "Finswimming"},
+    {Flowriding, "Flowriding"},
+    {FolkDance, "FolkDance"},
+    {Frisbee, "Frisbee"},
+    {Futsal, "Futsal"},
+    {HackySack, "HackySack"},
+    {HipHop, "HipHop"},
+    {HulaHoop, "HulaHoop"},
+    {IndoorFitness, "IndoorFitness"},
+    {IndoorIceSkating, "IndoorIceSkating"},
+    {JaiAlai, "JaiAlai"},
+    {Judo, "Judo"},
+    {Jujitsu, "Jujitsu"},
+    {MassGymnastics, "MassGymnastics"},
+    {ModernDance, "ModernDance"},
+    {MuayThai, "MuayThai"},
+    {ParallelBars, "ParallelBars"},
+    {PoleDance, "PoleDance"},
+    {RaceWalking, "RaceWalking"},
+    {Shuffleboard, "Shuffleboard"},
+    {Snorkeling, "Snorkeling"},
+    {SomatosensoryGame, "SomatosensoryGame"},
+    {Spinning, "Spinning"},
+    {SquareDance, "SquareDance"},
+    {StairClimber, "StairClimber"},
+    {Stepper, "Stepper"},
+    {Stretching, "Stretching"},
+    {TableFootball, "TableFootball"},
+    {TugOfWar, "TugOfWar"},
+    {WallBall, "WallBall"},
+    {WaterPolo, "WaterPolo"},
+    {Weiqi, "Weiqi"},
+    {FreeSparring, "FreeSparring"},
+    {BodyCombat, "BodyCombat"},
+    {PlazaDancing, "PlazaDancing"},
+    {LaserTag, "LaserTag"},
+    {ObstacleRace, "ObstacleRace"},
+    {BilliardPool, "BilliardPool"},
+    {Canoeing, "Canoeing"},
+    {WaterScooter, "WaterScooter"},
+    {Bobsleigh, "Bobsleigh"},
+    {Sledding, "Sledding"},
+    {Biathlon, "Biathlon"},
+    {BungeeJumping, "BungeeJumping"},
+    {Orienteering, "Orienteering"},
+    {Trekking, "Trekking"},
+    {TrailRun, "TrailRun"},
+    {UpperBody, "UpperBody"},
+    {LowerBody, "LowerBody"},
+    {Barbell, "Barbell"},
+    {Triathlon, "Triathlon"},
+    {OtherWaterSports, "OtherWaterSports"},
+    {OtherWinterSports, "OtherWinterSports"},
+    {Powerboating, "Powerboating"},
+    {Diving, "Diving"},
+    {Atv, "Atv"},
+    {Paragliding, "Paragliding"},
+    {Weightlifting, "Weightlifting"},
+    {Deadlift, "Deadlift"},
+    {Burpee, "Burpee"},
+    {Abs, "Abs"},
+    {Back, "Back"},
+    {StepAerobics, "StepAerobics"},
+    {Equestrian, "Equestrian"},
+    {Athletics, "Athletics"},
+};
+
+const QMap<uint8_t, ActivityKind::Type> ActivityKind::m_zepposTypes = {
+    {0x33, AerobicCombo},
+    {0x6d, Aerobics},
+    {0x90, AirWalker},
+    {0x5d, Archery},
+    {0x9c, ArtisticSwimming},
+    {0x5c, Badmington},
+    {0x47, Ballet},
+    {0x4b, BallroomDance},
+    {0x4f, Baseball},
+    {0x55, Basketball},
+    {0xa7, BattleRope},
+    {0x7a, BeachVolleyball},
+    {0x48, BellyDance},
+    {0x97, Billiards},
+    {0x30, Bmx},
+    {0xb1, BoardGame},
+    {0xaa, Bocce},
+    {0x50, Bowling},
+    {0x61, Boxing},
+    {0xa8, Breaking},
+    {0xb0, Bridge},
+    {0x72, CardioCombat},
+    {0xae, Checkers},
+    {0xad, Chess},
+    {0x32, CoreTraining},
+    {0x4e, Cricket},
+    {0x82, CrossTraining},
+    {0x29, Curling},
+    {0x4c, Dance},
+    {0x75, Darts},
+    {0x99, Dodgeball},
+    {0x8a, DragonBoat},
+    {0x84, Driving},
+    {0x09, EllipticalTrainer},
+    {0xbd, Esports},
+    {0x5e, HorseRiding},
+    {0x94, Fencing},
+    {0x9b, Finswimming},
+    {0x40, Fishing},
+    {0x37, Flexibility},
+    {0xac, Flowriding},
+    {0x92, FolkDance},
+    {0x05, FreeTraining},
+    {0x74, Frisbee},
+    {0xa4, Futsal},
+    {0x57, Gateball},
+    {0x3b, Gymnastics},
+    {0xa9, HackySack},
+    {0x5b, Handball},
+    {0x31, Hiit},
+    {0xa5, HipHop},
+    {0x95, HorizontalBar},
+    {0x73, HulaHoop},
+    {0x9e, IceHockey},
+    {0x2c, IceSkating},
+    {0x08, IndoorCycling},
+    {0x18, IndoorFitness},
+    {0x2d, IndoorIceSkating},
+    {0xab, JaiAlai},
+    {0x71, JazzDance},
+    {0x62, Judo},
+    {0x93, Jujitsu},
+    {0x15, JumpRope},
+    {0x60, Karate},
+    {0x8c, Kayaking},
+    {0x5f, Kendo},
+    {0x68, Kickboxing},
+    {0x76, KiteFlying},
+    {0x70, LatinDance},
+    {0x67, MartialArts},
+    {0x6f, MassGymnastics},
+    {0xb9, ModernDance},
+    {0x65, MuayThai},
+    {0x04, OutdoorCycling},
+    {0x0f, Hiking},
+    {0x01, OutdoorRunning},
+    {0x07, OpenSwimming},
+    {0x96, ParallelBars},
+    {0x81, Parkour},
+    {0x3d, Pilates},
+    {0xa6, PoleDance},
+    {0x06, PoolSwim},
+    {0x83, RaceWalking},
+    {0x46, RockClimbing},
+    {0x45, RollerSkating},
+    {0x17, Rowing},
+    {0x41, Sailing},
+    {0x98, SepakTakraw},
+    {0xa0, Shuffleboard},
+    {0xa2, Shuttlecock},
+    {0x43, Skateboarding},
+    {0x9d, Snorkeling},
+    {0xbf, Soccer},
+    {0x56, Softball},
+    {0xa3, SomatosensoryGame},
+    {0x8f, Spinning},
+    {0x49, SquareDance},
+    {0x51, Squash},
+    {0x36, StairClimber},
+    {0x39, Stepper},
+    {0x4a, StreetDance},
+    {0x34, StrengthTraining},
+    {0x35, Stretching},
+    {0x9f, Swing},
+    {0xa1, TableFootball},
+    {0x59, TableTennis},
+    {0x64, TaiChi},
+    {0x66, Taekwondo},
+    {0x11, Tennis},
+    {0x02, Treadmill},
+    {0x77, TugOfWar},
+    {0x58, Volleyball},
+    {0x03, Walking},
+    {0x91, WallBall},
+    {0x9a, WaterPolo},
+    {0x42, Rowing},
+    {0xaf, Weiqi},
+    {0x63, Wrestling},
+    {0x3c, Yoga},
+    {0x4d, Zumba}
+};
+
+const QMap<int, ActivityKind::Type> ActivityKind::m_huamiTypes = {
+    {1, Running},
+    {2, Treadmill},
+    {3, Walking},
+    {4, Cycling},
+    {5, Exercise},
+    {6, Swimming},
+    {7, OpenSwimming},
+    {8, IndoorCycling},
+    {9, EllipticalTrainer},
+    {11, TrailRun},
+    {21, JumpRope},
+    {60, Yoga},
+    {105, Skiing}
+};
+
 ActivityKind::Type ActivityKind::fromBipType(int type)
 {
     qDebug() << "Checking for bip activity type: " << type;
-    if (type == 1) {
-        return Running;
-    } else if (type == 2) {
-        return Treadmill;
-    } else if (type == 3) {
-        return Walking;
-    } else if (type == 4) {
-        return Cycling;
-    } else if (type == 5) {
-        return Exercise;
-    } else if (type == 6) {
-        return Swimming;
-    } else if (type == 7) {
-        return OpenSwimming;
-    } else if (type == 8) {
-        return IndoorCycling;
-    } else if (type == 9) {
-        return EllipticalTrainer;
-    } else if (type == 21) {
-        return JumpRope;
-    } else if (type == 60) {
-        return Yoga;
-    } else if (type == 11) {
-        return TrailRunning;
-    } else if (type == 105) {
-        return Skiing;
-    }
-    return Activity;
+    return m_huamiTypes.value(type, Activity);
+}
+
+ActivityKind::Type ActivityKind::fromZeppOsType(uint8_t type)
+{
+    qDebug() << "Checking for zeppos activity type: " << type;
+    return m_zepposTypes.value(type, Activity);
 }
 
 QString ActivityKind::toString(Type type)
 {
-    if (type == NotMeasured) {
-        return "NotMeasured";
-    }
-    if (type == Unknown) {
-        return "Unknown";
-    }
-    if (type == Activity) {
-        return "Activity";
-    }
-    if (type == LightSleep) {
-        return "LightSleep";
-    }
-    if (type == DeepSleep) {
-        return "DeepSleep";
-    }
-    if (type == NotWorn) {
-        return "NotWorn";
-    }
-    if (type == Running) {
-        return "Running";
-    }
-    if (type == Walking) {
-        return "Walking";
-    }
-    if (type == Swimming) {
-        return "Swimming";
-    }
-    if (type == Cycling) {
-        return "Cycling";
-    }
-    if (type == Treadmill) {
-        return "Treadmill";
-    }
-    if (type == Exercise) {
-        return "Exercise";
-    }
-    if (type == OpenSwimming) {
-        return "Open Swimming";
-    }
-    if (type == IndoorCycling) {
-        return "Indoor Cycling";
-    }
-    if (type == EllipticalTrainer) {
-        return "Eliptical Trainer";
-    }
-    if (type == JumpRope) {
-        return "Jump Rope";
-    }
-    if (type == Yoga) {
-        return "Yoga";
-    }
-    if (type == TrailRunning) {
-        return "Trail Running";
-    }
-    if (type == Skiing) {
-        return "Skiing";
-    }
-
-    return "Unknown";
+    return m_typeNames.value(type, "Unknown");
 }

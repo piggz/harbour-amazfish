@@ -140,7 +140,7 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         m_summary.elevation.downhillTime = message.GetMessage(23)->GetUInt32(2);
     }
 
-    ActivityKind::Type activityKind = ActivityKind::fromBipType(ActivityKind::Type(m_summary.type.type));
+    ActivityKind::Type activityKind = ActivityKind::fromZeppOsType(ActivityKind::Type(m_summary.type.type));
 
     qDebug() << "Raw activity data:" << m_summary.type.type << m_summary.time.totalDuration << m_summary.location.baseLatitude << m_summary.location.baseLongitude << m_summary.location.baseAltitude;
     summary.setStartTime(startTime);
