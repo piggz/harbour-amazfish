@@ -19,7 +19,7 @@ void ActivityFetchOperation::start(QBLEService *service)
 
     qDebug() << Q_FUNC_INFO << ": Last sync was " << startDate();
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, true);
 
     service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
     service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
@@ -119,7 +119,7 @@ bool ActivityFetchOperation::processBufferedData()
     bool saved = true;
     //store the successful samples
     saved = saveSamples();
-    m_sampleTime.setTimeSpec(Qt::LocalTime);
+    m_sampleTime.setTimeSpec(Qt::UTC);
     qDebug() << Q_FUNC_INFO << "Last sample time saved as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
 
     saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());

@@ -19,8 +19,8 @@ QDateTime AbstractFetchOperation::lastActivitySync()
     //QTimeZone tz = QTimeZone(QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime())); //Getting the timezone without DST
 
     //Convert the last sync time, which is seconds since epoch, to a qdatetime in the local timezone
-    qDebug() << Q_FUNC_INFO << ": Last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, Qt::LocalTime);
-    return QDateTime::fromMSecsSinceEpoch(ls, Qt::LocalTime);
+    qDebug() << Q_FUNC_INFO << ": Last sync was " << ls << QDateTime::fromMSecsSinceEpoch(ls, QTimeZone::utc());
+    return QDateTime::fromMSecsSinceEpoch(ls, QTimeZone::utc());
 }
 
 void AbstractFetchOperation::saveLastActivitySync(qint64 millis)

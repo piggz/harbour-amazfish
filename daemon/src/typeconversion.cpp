@@ -74,9 +74,9 @@ QByteArray dateTimeToBytes(const QDateTime &dt, int format, bool adjustForTZ)
     //Timezone
     int utcOffset = 0;
     //Keep watch on UTC and convert when reading back
-    //if (adjustForTZ) {
-    //    utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(dt);
-    //}
+    if (adjustForTZ) {
+        utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(dt);
+    }
     qDebug() << "UTC offset it " << utcOffset;
 
     ret += char((utcOffset / (60 * 60)) * 4);
@@ -93,16 +93,6 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
 
         QTimeZone tz(0);
 
-        //force timezone to UTC always
-        //if (value.length() > 7 && honorDeviceTimeOffset) {
-        //    tz = QTimeZone(value[7] * 15 * 60);
-        //} /*else {
-        //    timestamp.setTimeSpec(Qt::LocalTime);
-        //}*/
-
-        qDebug() << "Watch timezone is:" << tz;
-        qDebug() << "System timezone is" << QTimeZone::systemTimeZone() << QTimeZone::systemTimeZoneId();
-
         QDateTime timestamp(QDate(
                                 year,
                                 (value[2] & 0xff),
@@ -112,6 +102,20 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
                                 value[5] & 0xff,
                                 value[6] & 0xff),
                             tz);
+
+
+        //force timezone to UTC always
+        if (value.length() > 7 && honorDeviceTimeOffset) {
+            tz = QTimeZone(value[7] * 15 * 60);
+            timestamp.setTimeZone(tz);
+        } else {
+            timestamp.setTimeSpec(Qt::LocalTime);
+        }
+
+        qDebug() << "Watch timezone is:" << tz;
+        qDebug() << "System timezone is" << QTimeZone::systemTimeZone() << QTimeZone::systemTimeZoneId();
+        qDebug() << "Time:" << timestamp;
+
         /*
         QDateTime temp = QDateTime::fromString(timestamp.toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");
         qDebug() << "Timestamp: " << timestamp << timestamp.toString(Qt::ISODate);
