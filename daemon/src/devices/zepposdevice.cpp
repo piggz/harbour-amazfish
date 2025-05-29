@@ -9,6 +9,7 @@
 #include "zeppos/zepposstepsservice.h"
 #include "zeppos/zepposbatteryservice.h"
 #include "zeppos/zepposheartrateservice.h"
+#include "zeppos/zeppostimeservice.h"
 
 #include <QtXml/QtXml>
 #include <QDebug>
@@ -40,6 +41,10 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 
     m_heartRateService = new ZeppOsHeartRateService(this);
     m_serviceMap[m_heartRateService->endpoint()] = m_heartRateService;
+
+    m_timeService = new ZeppOsTimeService(this);
+    m_serviceMap[m_timeService->endpoint()] = m_timeService;
+
 }
 
 QString ZeppOSDevice::deviceType() const
@@ -148,6 +153,7 @@ void ZeppOSDevice::ready()
 {
     setConnectionState("authenticated");
 
+    m_timeService->setTime();
     m_stepsService->enableRealtimeSteps(true);
 }
 
