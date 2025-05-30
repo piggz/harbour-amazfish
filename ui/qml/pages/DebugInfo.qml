@@ -78,14 +78,41 @@ PagePL {
 
         Row {
             width: parent.width
+            spacing: styler.themePaddingLarge
+
             LabelPL {
                 id: lblActivitySync
-                width: parent.width * 0.66
-                text: qsTr("A:" ) + activityDate.toISOString()
+                height: parent.height
+                text: "A: "
             }
+
+            DateNavigation {
+                id: activityDateNav
+                width: parent.width / 2
+                onBackward: {
+                    var d = new Date(activityDate);
+                    d.setDate(day.getDate() - 1);
+                    day = d;
+                }
+                onForward: {
+                    var d = new Date(activityDate);
+                    d.setDate(day.getDate() + 1);
+                    day = d;
+                }
+                onDayChanged: {
+                    activityDate = day;
+                }
+            }
+
+            LabelPL {
+                id: lblActivityTime
+                text: activityDate.toTimeString()
+                height: parent.height
+            }
+
             ButtonPL {
                 id: btnMinusActivitySync
-                width: parent.width * 0.16
+                width: height
                 text: "-"
                 onClicked: {
                     AmazfishConfig.lastActivitySync -= 3600000
@@ -94,7 +121,8 @@ PagePL {
             }
             ButtonPL {
                 id: btnAddActivitySync
-                width: parent.width * 0.16
+                width: height
+
                 text: "+"
                 onClicked: {
                     AmazfishConfig.lastActivitySync += 3600000
@@ -105,15 +133,41 @@ PagePL {
 
         Row {
             width: parent.width
+            spacing: styler.themePaddingLarge
 
             LabelPL {
                 id: lblSportSync
-                width: parent.width * 0.66
-                text: qsTr("S:" ) + sportDate.toISOString()
+                height: parent.height
+                text: "S: "
             }
+
+            DateNavigation {
+                id: sportDateNav
+                width: parent.width / 2
+                onBackward: {
+                    var d = new Date(sportDate);
+                    d.setDate(day.getDate() - 1);
+                    day = d;
+                }
+                onForward: {
+                    var d = new Date(sportDate);
+                    d.setDate(day.getDate() + 1);
+                    day = d;
+                }
+                onDayChanged: {
+                    sportDate = day;
+                }
+            }
+
+            LabelPL {
+                id: lblSportTime
+                text: sportDate.toTimeString()
+                height: parent.height
+            }
+
             ButtonPL {
                 id: btnMinusSportSync
-                width: parent.width * 0.16
+                width: height
                 text: "-"
                 onClicked: {
                     AmazfishConfig.lastSportSync -= 3600000
@@ -122,7 +176,7 @@ PagePL {
             }
             ButtonPL {
                 id: btnAddSportSync
-                width: parent.width * 0.16
+                width: height
                 text: "+"
                 onClicked: {
                     AmazfishConfig.lastSportSync += 3600000
@@ -263,6 +317,7 @@ PagePL {
 Component.onCompleted: {
     DaemonInterfaceInstance.refreshInformation();
     activityDate = new Date(AmazfishConfig.lastActivitySync);
+    activityDateNav.day = activityDate;
     sportDate = new Date(AmazfishConfig.lastSportSync);
 }
 
