@@ -73,9 +73,10 @@ QByteArray dateTimeToBytes(const QDateTime &dt, int format, bool adjustForTZ)
 
     //Timezone
     int utcOffset = 0;
-    //Keep watch on UTC and convert when reading back
+
     if (adjustForTZ) {
-        utcOffset = QTimeZone::systemTimeZone().offsetFromUtc(dt);
+        QDateTime local = dt.toLocalTime();
+        utcOffset = local.offsetFromUtc(); //QTimeZone::systemTimeZone().offsetFromUtc(local);
     }
     qDebug() << "UTC offset it " << utcOffset;
 
