@@ -101,6 +101,7 @@ PagePL {
                 }
                 onDayChanged: {
                     activityDate = day;
+                    AmazfishConfig.lastActivitySync = activityDate.getTime();
                 }
             }
 
@@ -115,7 +116,7 @@ PagePL {
                 width: height
                 text: "-"
                 onClicked: {
-                    AmazfishConfig.lastActivitySync -= 3600000
+                    activityDate.setTime(activityDate.getTime() - (1*60*60*1000));
                     activityDate = new Date(AmazfishConfig.lastActivitySync);
                 }
             }
@@ -125,8 +126,8 @@ PagePL {
 
                 text: "+"
                 onClicked: {
-                    AmazfishConfig.lastActivitySync += 3600000
-                    activityDate = new Date(AmazfishConfig.lastActivitySync);
+                    activityDate.setTime(activityDate.getTime() + (1*60*60*1000));
+                    AmazfishConfig.lastActivitySync = activityDate.getTime();
                 }
             }
         }
@@ -156,6 +157,7 @@ PagePL {
                 }
                 onDayChanged: {
                     sportDate = day;
+                    AmazfishConfig.lastSportSync = sportDate.getTime();
                 }
             }
 
@@ -170,8 +172,8 @@ PagePL {
                 width: height
                 text: "-"
                 onClicked: {
-                    AmazfishConfig.lastSportSync -= 3600000
-                    sportDate = new Date(AmazfishConfig.lastSportSync);
+                    sportDate.setTime(sportDate.getTime() - (1*60*60*1000));
+                    AmazfishConfig.lastSportSync = sportDate.getTime();
                 }
             }
             ButtonPL {
@@ -179,8 +181,8 @@ PagePL {
                 width: height
                 text: "+"
                 onClicked: {
-                    AmazfishConfig.lastSportSync += 3600000
-                    sportDate = new Date(AmazfishConfig.lastSportSync);
+                    sportDate.setTime(sportDate.getTime() + (1*60*60*1000));
+                    AmazfishConfig.lastSportSync = sportDate.getTime();
                 }
             }
         }
@@ -319,6 +321,7 @@ Component.onCompleted: {
     activityDate = new Date(AmazfishConfig.lastActivitySync);
     activityDateNav.day = activityDate;
     sportDate = new Date(AmazfishConfig.lastSportSync);
+    sportDateNav.day = sportDate;
 }
 
 }
