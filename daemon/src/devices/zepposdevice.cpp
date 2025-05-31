@@ -10,6 +10,7 @@
 #include "zeppos/zepposbatteryservice.h"
 #include "zeppos/zepposheartrateservice.h"
 #include "zeppos/zeppostimeservice.h"
+#include "zeppos/zepposuserinfoservice.h"
 
 #include <QtXml/QtXml>
 #include <QDebug>
@@ -44,6 +45,9 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 
     m_timeService = new ZeppOsTimeService(this);
     m_serviceMap[m_timeService->endpoint()] = m_timeService;
+
+    m_userInfoService = new ZeppOsUserInfoService(this);
+    m_serviceMap[m_userInfoService->endpoint()] = m_userInfoService;
 
 }
 
@@ -95,6 +99,34 @@ void ZeppOSDevice::requestManualHeartrate() const
 {
     if (m_heartRateService) {
         m_heartRateService->enableRealtimeHeartRateMeasurement(true, true);
+    }
+}
+
+void ZeppOSDevice::applyDeviceSetting(Settings s)
+{
+    qDebug() << Q_FUNC_INFO << s;
+
+    switch(s) {
+    case SETTING_USER_PROFILE:
+    case SETTING_DEVICE_LANGUAGE:
+        if (m_userInfoService) {
+            m_userInfoService->setUserInfo();
+        }
+        break;
+    case SETTING_USER_GOAL:
+    case SETTING_USER_ALERT_GOAL:
+    case SETTING_USER_ALL_DAY_HRM:
+    case SETTING_USER_HRM_SLEEP_DETECTION:
+    case SETTING_USER_DISPLAY_ON_LIFT:
+    case SETTING_ALARMS:
+    case SETTING_DEVICE_DISPLAY_ITEMS:
+    case SETTING_DEVICE_DATE:
+    case SETTING_DEVICE_TIME:
+    case SETTING_DEVICE_UNIT:
+    case SETTING_DISCONNECT_NOTIFICATION:
+    case SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
+        qDebug() << "Setting not implemented";
+        break;
     }
 }
 

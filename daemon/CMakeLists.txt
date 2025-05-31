@@ -50,6 +50,7 @@ set(SOURCES
 ./src/devices/zeppos/zepposactivitysummaryparser.cpp
 ./src/devices/zeppos/zepposactivitydetailparser.cpp
 ./src/devices/zeppos/zeppostimeservice.cpp
+./src/devices/zeppos/zepposuserinfoservice.cpp
 ./src/devices/zeppos/picoproto.cpp
 ./src/harbour-amazfish-daemon.cpp
 ./src/huamiweathercondition.cpp
@@ -156,6 +157,7 @@ set(HEADERS
 ./src/devices/zeppos/zepposactivitysummaryparser.h
 ./src/devices/zeppos/zepposactivitydetailparser.h
 ./src/devices/zeppos/zeppostimeservice.h
+./src/devices/zeppos/zepposuserinfoservice.h
 ./src/huamiweathercondition.h
 ./src/navigationinterface.h
 ./src/operations/abstractfetchoperation.h

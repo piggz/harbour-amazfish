@@ -4,7 +4,7 @@
 #include "abstractzepposservice.h"
 #include "zepposdevice.h"
 
-class ZeppOsTimeService: public AbstractZeppOsService
+class ZeppOsTimeService : public AbstractZeppOsService
 {
 public:    
     static const uint8_t CMD_CAPABILITIES_REQUEST = 0x01;

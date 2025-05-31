@@ -13,6 +13,7 @@ class ZeppOsStepsService;
 class ZeppOsBatteryService;
 class ZeppOsHeartRateService;
 class ZeppOsTimeService;
+class ZeppOsUserInfoService;
 
 class ZeppOSDevice: public HuamiDevice, public Huami2021Handler
 {
@@ -29,6 +30,7 @@ public:
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
     void requestManualHeartrate() const override;
+    void applyDeviceSetting(Settings s) override;
 
 
     void writeToChunked2021(short endpoint, QByteArray data, bool encryptIgnored);
@@ -60,6 +62,8 @@ private:
     ZeppOsBatteryService *m_batteryService = nullptr;
     ZeppOsHeartRateService *m_heartRateService = nullptr;
     ZeppOsTimeService *m_timeService = nullptr;
+    ZeppOsUserInfoService *m_userInfoService = nullptr;
+
 
     QMap<short, AbstractZeppOsService *> m_serviceMap;
     QSet<short> m_supportedServices;
