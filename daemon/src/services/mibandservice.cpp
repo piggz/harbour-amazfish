@@ -202,6 +202,8 @@ int MiBandService::batteryInfo()
 
 void MiBandService::setCurrentTime()
 {
+    qDebug() << Q_FUNC_INFO;
+
     QByteArray timeBytes;
 
     QDateTime now = QDateTime::currentDateTime();
@@ -212,8 +214,8 @@ void MiBandService::setCurrentTime()
     timeBytes += TypeConversion::fromInt8(now.time().minute());
     timeBytes += TypeConversion::fromInt8(now.time().second());
     timeBytes += TypeConversion::fromInt8(now.date().dayOfWeek());
-    timeBytes += char(0); //fractions of seconds
-    timeBytes += char(0); //could be adjust reason or DST offset. In both cases 0 is safe.
+    timeBytes += TypeConversion::fromInt8((now.time().msec() / 1000 ) * 256);
+    timeBytes += now.isDaylightTime() ? char(0x08) : char(0x00);
 
     // calculate timezone
     int offsetInSec = now.offsetFromUtc();
