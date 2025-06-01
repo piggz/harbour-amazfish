@@ -121,7 +121,7 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="671"/>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalender</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/devices/gtsdevice.cpp" line="219"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">Ein Vorgang wird derzeit ausgeführt, bitte versuchen Sie es später</translation>
+        <translation>Ein Vorgang wird derzeit ausgeführt, bitte später nochmal versuchen</translation>
     </message>
 </context>
 <context>
@@ -152,17 +152,17 @@
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="370"/>
         <source>Sending %1...</source>
-        <translation type="unfinished">%1 wird gesendet...</translation>
+        <translation>Sende %1...</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="373"/>
         <source>No file selected</source>
-        <translation type="unfinished">Keine Datei ausgewählt</translation>
+        <translation>Keine Datei ausgewählt</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="395"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">Ein Vorgang wird derzeit ausgeführt, bitte versuchen Sie es später</translation>
+        <translation>Ein Vorgang wird derzeit ausgeführt, bitte später nochmal versuchen</translation>
     </message>
 </context>
 <context>
@@ -180,19 +180,19 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="364"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="378"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">Ein Vorgang wird derzeit ausgeführt, bitte versuchen Sie es später</translation>
+        <translation>Ein Vorgang wird derzeit ausgeführt, bitte später nochmal versuchen</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="401"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="414"/>
         <source>Sending file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sende Datei...</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="404"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="417"/>
         <source>No file selected</source>
-        <translation type="unfinished">Keine Datei ausgewählt</translation>
+        <translation>Keine Datei ausgewählt</translation>
     </message>
 </context>
 <context>
