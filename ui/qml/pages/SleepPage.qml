@@ -107,6 +107,7 @@ PagePL {
     }
 
     Component.onCompleted: {
+        day = new Date();
         updateGraphs();
     }
 }

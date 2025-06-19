@@ -7,8 +7,8 @@ PagePL {
     id: page
     title: qsTr("Debugging")
 
-    property date activityDate
-    property date sportDate
+    property alias activityDate: activityDateNav.day
+    property alias sportDate: sportDateNav.day
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
@@ -116,8 +116,8 @@ PagePL {
                 width: height
                 text: "-"
                 onClicked: {
-                    activityDate.setTime(activityDate.getTime() - (1*60*60*1000));
-                    activityDate = new Date(AmazfishConfig.lastActivitySync);
+                    activityDate = new Date(activityDate.getTime() - (1*60*60*1000));;
+                    AmazfishConfig.lastActivitySync = activityDate.getTime();
                 }
             }
             ButtonPL {
@@ -126,7 +126,7 @@ PagePL {
 
                 text: "+"
                 onClicked: {
-                    activityDate.setTime(activityDate.getTime() + (1*60*60*1000));
+                    activityDate = new Date(activityDate.getTime() + (1*60*60*1000));;
                     AmazfishConfig.lastActivitySync = activityDate.getTime();
                 }
             }
@@ -172,7 +172,7 @@ PagePL {
                 width: height
                 text: "-"
                 onClicked: {
-                    sportDate.setTime(sportDate.getTime() - (1*60*60*1000));
+                    sportDate = new Date(sportDate.getTime() - (1*60*60*1000));;
                     AmazfishConfig.lastSportSync = sportDate.getTime();
                 }
             }
@@ -181,7 +181,7 @@ PagePL {
                 width: height
                 text: "+"
                 onClicked: {
-                    sportDate.setTime(sportDate.getTime() + (1*60*60*1000));
+                    sportDate = new Date(sportDate.getTime() + (1*60*60*1000));;
                     AmazfishConfig.lastSportSync = sportDate.getTime();
                 }
             }

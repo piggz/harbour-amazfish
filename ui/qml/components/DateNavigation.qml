@@ -6,7 +6,7 @@ RowLayout {
     id: dateNavigation
     spacing: styler.themePaddingLarge
     width: parent.width
-    property date day: new Date()
+    property date day
     signal backward
     signal forward
 
@@ -20,7 +20,6 @@ RowLayout {
             backward();
         }
     }
-
 
     ButtonPL {
         id: lblDay
@@ -37,8 +36,8 @@ RowLayout {
                                             date: !isNaN(datearg) ? datearg : new Date()
                                         })
             dialog.accepted.connect(function() {
-                page.day = dialog.date;
-                console.log(page.day)
+                dateNavigation.day = dialog.date;
+                console.log(dateNavigation.day)
             })
         }
 
@@ -48,15 +47,6 @@ RowLayout {
         }
     }
 
-
-    // LabelPL {
-    //     id: lblDay
-    //     Layout.fillWidth: true
-    //     text: dateNavigation.text
-    //     height: btnPrev.height
-    //     horizontalAlignment: Text.AlignHCenter
-    //     verticalAlignment: Text.AlignVCenter
-    // }
     IconButtonPL {
         id: btnNext
         iconName: styler.iconForward

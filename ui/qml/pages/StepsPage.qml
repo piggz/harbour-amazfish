@@ -8,7 +8,7 @@ PagePL {
     id: page
     title: qsTr("Steps")
 
-    property alias day: nav.day
+    property alias day: nav.day    
 
     pageMenu: PageMenuPL {
         DownloadDataMenuItem{}
@@ -72,6 +72,7 @@ PagePL {
     }
 
     Component.onCompleted: {
+        day = new Date();
         updateGraphs();
         _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
     }
