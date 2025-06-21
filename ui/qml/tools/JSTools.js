@@ -223,17 +223,19 @@ function fncConvertArrayToSaveStringCoverPage()
 var arrayStravaWorkoutTypes =
 [
     { name: "running", stravaType: "Run" },
+    { name: "outdoorrunning", stravaType: "Run" },
     { name: "cycling", stravaType: "Ride" },
+    { name: "outdoorcycling", stravaType: "Ride" },
     { name: "mountainbiking", stravaType: "Ride" },
     { name: "walking", stravaType: "Walk" },
     { name: "inlineskating", stravaType: "InlineSkate" },
     { name: "skiing", stravaType: "AlpineSki" },
     { name: "hiking", stravaType: "Hike" },
-    { name: "indoor cycling", stravaType: "VirtualRide" },
+    { name: "indoorcycling", stravaType: "VirtualRide" },
     { name: "treadmill", stravaType: "VirtualRun" },
     { name: "swimming", stravaType: "Swim" },
-    { name: "open swimming", stravaType: "Swim" },
-    { name: "trail running", stravaType: "Run" },
+    { name: "openswimming", stravaType: "Swim" },
+    { name: "trailrun", stravaType: "Run" },
     { name: "yoga", stravaType: "Yoga" }
 ]
 
