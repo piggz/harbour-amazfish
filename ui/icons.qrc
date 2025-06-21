@@ -34,5 +34,7 @@
         <file>qml/custom-icons/icon-m-watch.png</file>
         <file>qml/custom-icons/icon-m-weather-d212-light.png</file>
         <file>qml/custom-icons/icon-strava.png</file>
+        <file>qml/custom-icons/icon-m-outdoorcycling.png</file>
+        <file>qml/custom-icons/icon-m-outdoorrunning.png</file>
     </qresource>
 </RCC>

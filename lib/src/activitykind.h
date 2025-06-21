@@ -3,6 +3,7 @@
 
 #include <QMap>
 #include <QString>
+#include <qobject.h>
 
 class ActivityKind
 {
@@ -306,5 +307,7 @@ private:
     static const QMap<int, ActivityKind::Type> m_huamiTypes;
 
 };
+
+Q_DECLARE_METATYPE(ActivityKind::Type)
 
 #endif

@@ -18,12 +18,12 @@ target_include_directories(libamazfish PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src ${
 target_link_libraries(libamazfish PUBLIC Qt5::Core Qt5::DBus Qt5::Xml ${MLITE5_LIBRARIES})
 
 set(SOURCES
-    ./src/amazfish.cpp
     ./src/amazfishconfig.cpp
     ./src/weather/city.cpp
     ./src/weather/citymanager.cpp
     ./src/weather/citysearchmodel.cpp
     ./src/weather/currentweather.cpp
+    ./src/activitykind.cpp
 )
 
 set(HEADERS
@@ -34,6 +34,7 @@ set(HEADERS
     ./src/weather/currentweather.h
     ./src/amazfish.h
     ./src/amazfishconfig.h
+    ./src/activitykind.h
 )
 
 target_sources(libamazfish PUBLIC ${SOURCES} ${HEADERS})

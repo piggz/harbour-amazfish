@@ -1,7 +1,6 @@
 set(SOURCES
 ./src/achievements.cpp
 ./src/activitycoordinate.cpp
-./src/activitykind.cpp
 ./src/activitysample.cpp
 ./src/activitysummary.cpp
 ./src/devices/bipactivitydetailparser.cpp
@@ -105,7 +104,6 @@ set(SOURCES
 set(HEADERS
 ./src/achievements.h
 ./src/activitycoordinate.h
-./src/activitykind.h
 ./src/activitysample.h
 ./src/activitysummary.h
 ./src/bipbatteryinfo.h

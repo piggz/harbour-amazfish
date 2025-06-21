@@ -1,5 +1,5 @@
 #include "sportsdatamodel.h"
-#include "daemoninterface.h"
+#include "activitykind.h"
 #include <QFile>
 
 SportsDataModel::SportsDataModel()
@@ -52,7 +52,7 @@ QVariant SportsDataModel::data(const QModelIndex &index, int role) const
     case SportKind:
         return item.kind;
     case SportKindString:
-        return Amazfish::activityToString((Amazfish::ActivityType)item.kind);
+        return ActivityKind::toString((ActivityKind::Type)item.kind);
     case SportBaseLongitude:
         return item.baseLongitude;
     case SportBaseLatitude:
