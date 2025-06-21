@@ -105,9 +105,11 @@ bool AbstractFetchOperation::handleStartDateResponse(const QByteArray &value)
     // last 8 bytes are the start date
     //! Here, we read the start date/time and dont apply the TZ offset.  We then apply the local
     //! TZ.  This should work in most cases i think!
-    QDateTime startDate = TypeConversion::rawBytesToDateTime(value.mid(7, 8), false);
-    startDate.setTimeZone(QTimeZone::systemTimeZone());
-    setStartDate(startDate);
+    QDateTime startDate = TypeConversion::rawBytesToDateTime(value.mid(7, 8), true);
+    QDateTime local = startDate.toLocalTime();
+    qDebug() << "DEBG:" << startDate << startDate.toMSecsSinceEpoch() << local;
+
+    setStartDate(local);
 
     qDebug() << "About to transfer data from " << startDate << "expected length:" << expectedDataLength; //TODO use expectedDataLength
     m_service->message(QObject::tr("About to transfer data from ") + startDate.toString());

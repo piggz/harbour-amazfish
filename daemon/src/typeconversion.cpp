@@ -88,8 +88,9 @@ QByteArray dateTimeToBytes(const QDateTime &dt, int format, bool adjustForTZ)
 }
 
 QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset) {
+    qDebug() << "Date length is " << value.length() << value.toHex() << honorDeviceTimeOffset;
+
     if (value.length() >= 7) {
-        qDebug() << "Date length is " << value.length() << value;
         int year = TypeConversion::toUint16(value[0], value[1]);
 
         QTimeZone tz(0);
