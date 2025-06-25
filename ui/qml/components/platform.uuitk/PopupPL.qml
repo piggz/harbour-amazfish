@@ -12,7 +12,7 @@ DBusInterface {
         // https://specifications.freedesktop.org/notification-spec/latest/protocol.html
         // https://wiki.ubuntu.com/Touch/Notifications
 
-        console.log(msg) // notification will not apear in `clickable desktop`
+        console.log("PopupPL Message:", msg); // notification will not apear in `clickable desktop`
 
         var app_icon = APPLICATION_FILE_DIR + "/../share/icons/hicolor/172x172/apps/harbour-amazfish-ui.png"
 

@@ -83,7 +83,7 @@ void AbstractDevice::setConnectionState(const QString &state)
 
 void AbstractDevice::deviceError(const QString &msg)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << msg;
     Q_EMIT message(msg);
     setConnectionState("disconnected");
 }
