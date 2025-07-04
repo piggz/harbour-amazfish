@@ -910,6 +910,10 @@ void DeviceInterface::sendAlert(const Amazfish::WatchNotification &notification,
 {
     qDebug() << Q_FUNC_INFO;
 
+    if (notification.body.isEmpty() && notification.summary.isEmpty()) { //ignore empty notifications
+        return;
+    }
+
     int hash = qHash(notification.appId + notification.appName + notification.summary + notification.body);
     if (hash == m_lastAlertHash && !allowDuplicate) {
         qDebug() << "Discarded duplicate alert";
