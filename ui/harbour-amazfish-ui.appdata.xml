@@ -65,9 +65,19 @@
     <keyword>Pinetime InfiniTime</keyword>
     <keyword>Bangle.js</keyword>
     <keyword>AsteroidOS</keyword>
+    <keyword>ZeppOS</keyword>
   </keywords>
   <content_rating type="oars-1.1"/>
   <releases>
+  <release version="2.7.0" timestamp="1751655030">
+    <description>
+        <p>Initial support for ZeppOS devices.  Tested with Balance and GTR3Pro</p>
+        <p>Many refactorings to use a similar structure to GadgetBridge</p>
+        <p>Add support for Ubuntu Touch user metrics API</p>
+        <p>Pair improvments allowing user override of device type</p>
+        <p>Improved error and notification handling</p>
+    </description>
+  </release>
   <release version="2.6.0" timestamp="1743233740">
     <description>
       <p>Added support for the Kospet DK08 smartwatch.</p>
