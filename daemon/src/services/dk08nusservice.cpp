@@ -68,7 +68,7 @@ void DK08NUSService::characteristicRead(const QString &characteristic, const QBy
             parseUser(value.mid(1));
             break;
         default:
-            qWarning() << "default handler for " << (NUSCallType)value[0] << QString("0x%1").arg((u_int8_t)value[0], 0, 16);
+            qWarning() << "default handler for " << (NUSCallType)value[0] << QString("0x%1").arg((uint8_t)value[0], 0, 16);
             break;
         }
     } else {
@@ -198,7 +198,7 @@ void DK08NUSService::getSportInfo(InfoType type) {
 void DK08NUSService::parseStep(QByteArray value) {
     quint8 en = static_cast<quint8>(value[0]); // Command identifier
 
-    qDebug() << Q_FUNC_INFO << QString("0x%1").arg((u_int8_t)value[0], 0, 16);
+    qDebug() << Q_FUNC_INFO << QString("0x%1").arg((uint8_t)value[0], 0, 16);
     if (en == 0x80) {
         int hisLength = static_cast<quint8>(value[1]);
         qDebug() << "Step history length:" << hisLength;
