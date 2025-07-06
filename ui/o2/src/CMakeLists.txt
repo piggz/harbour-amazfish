@@ -232,7 +232,7 @@ install(TARGETS o2
 )
 
 install(FILES ${o2_HDRS}
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/include/o2
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/o2
 )
 
 #message(STATUS "Writing pkg-config file...")
