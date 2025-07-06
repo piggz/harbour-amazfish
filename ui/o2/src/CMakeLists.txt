@@ -231,9 +231,9 @@ install(TARGETS o2
     ARCHIVE DESTINATION lib${o2_LIB_SUFFIX}
 )
 
-install(FILES ${o2_HDRS}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/o2
-)
+#install(FILES ${o2_HDRS}
+#    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/o2
+#)
 
 #message(STATUS "Writing pkg-config file...")
 #configure_file(${CMAKE_SOURCE_DIR}/o2.pc.cmake ${CMAKE_BINARY_DIR}/o2.pc @ONLY)
