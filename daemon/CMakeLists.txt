@@ -303,5 +303,7 @@ else()
     configure_file(harbour-amazfish.service.in
         ${CMAKE_CURRENT_BINARY_DIR}/harbour-amazfish.service)
 endif()
+
+set(SYSTEMD_USER_UNIT_DIR "lib/systemd/user" CACHE PATH "Directory for systemd user units")
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/harbour-amazfish.service
-    DESTINATION  ${CMAKE_INSTALL_PREFIX}/lib/systemd/user)
+    DESTINATION ${SYSTEMD_USER_UNIT_DIR})
