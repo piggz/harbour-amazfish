@@ -520,7 +520,7 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="211"/>
         <source>Select device type</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolit typ zařízení</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
