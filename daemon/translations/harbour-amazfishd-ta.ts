@@ -4,7 +4,7 @@
 <context>
     <name>AbstractDevice</name>
     <message>
-        <location filename="../src/devices/abstractdevice.cpp" line="143"/>
+        <location filename="../src/devices/abstractdevice.cpp" line="151"/>
         <source>Device does not support settings</source>
         <translation>சாதனம் அமைப்புகளை ஆதரிக்காது</translation>
     </message>
@@ -135,32 +135,32 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="206"/>
+        <location filename="../src/devices/huamidevice.cpp" line="208"/>
         <source>Navigation Started</source>
         <translation>வழிசெலுத்தல் தொடங்கியது</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="208"/>
+        <location filename="../src/devices/huamidevice.cpp" line="210"/>
         <source>Navigation Stopped</source>
         <translation>வழிசெலுத்தல் நிறுத்தப்பட்டது</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="228"/>
+        <location filename="../src/devices/huamidevice.cpp" line="230"/>
         <source>Progress</source>
         <translation>முன்னேற்றம்</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="370"/>
+        <location filename="../src/devices/huamidevice.cpp" line="372"/>
         <source>Sending %1...</source>
         <translation type="unfinished">%1 ஐ அனுப்புகிறது ...</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="373"/>
+        <location filename="../src/devices/huamidevice.cpp" line="375"/>
         <source>No file selected</source>
         <translation type="unfinished">எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="395"/>
+        <location filename="../src/devices/huamidevice.cpp" line="397"/>
         <source>An operation is currently running, please try later</source>
         <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
     </message>
@@ -168,8 +168,8 @@
 <context>
     <name>MiBandService</name>
     <message>
-        <location filename="../src/services/mibandservice.cpp" line="420"/>
-        <location filename="../src/services/mibandservice.cpp" line="480"/>
+        <location filename="../src/services/mibandservice.cpp" line="422"/>
+        <location filename="../src/services/mibandservice.cpp" line="482"/>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
         <translation>காட்சி உருப்படிகளை அமைக்க ஃபார்ம்வேர் மிகவும் பழையது, v0.1.1.14 தேவை</translation>
     </message>
@@ -198,12 +198,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="118"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="115"/>
         <source>About to transfer data from </source>
         <translation>தரவை மாற்றப் போவது </translation>
     </message>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="135"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="131"/>
         <source>No data to transfer</source>
         <translation>மாற்ற தரவு இல்லை</translation>
     </message>

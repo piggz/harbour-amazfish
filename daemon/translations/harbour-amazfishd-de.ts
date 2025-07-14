@@ -4,7 +4,7 @@
 <context>
     <name>AbstractDevice</name>
     <message>
-        <location filename="../src/devices/abstractdevice.cpp" line="143"/>
+        <location filename="../src/devices/abstractdevice.cpp" line="151"/>
         <source>Device does not support settings</source>
         <translation>Das Gerät unterstützt keine Einstellungen</translation>
     </message>
@@ -135,32 +135,32 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="206"/>
+        <location filename="../src/devices/huamidevice.cpp" line="208"/>
         <source>Navigation Started</source>
         <translation>Navigation gestartet</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="208"/>
+        <location filename="../src/devices/huamidevice.cpp" line="210"/>
         <source>Navigation Stopped</source>
         <translation>Navigation gestoppt</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="228"/>
+        <location filename="../src/devices/huamidevice.cpp" line="230"/>
         <source>Progress</source>
         <translation>Fortschritt</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="370"/>
+        <location filename="../src/devices/huamidevice.cpp" line="372"/>
         <source>Sending %1...</source>
         <translation>Sende %1...</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="373"/>
+        <location filename="../src/devices/huamidevice.cpp" line="375"/>
         <source>No file selected</source>
         <translation>Keine Datei ausgewählt</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="395"/>
+        <location filename="../src/devices/huamidevice.cpp" line="397"/>
         <source>An operation is currently running, please try later</source>
         <translation>Ein Vorgang wird derzeit ausgeführt, bitte später nochmal versuchen</translation>
     </message>
@@ -168,8 +168,8 @@
 <context>
     <name>MiBandService</name>
     <message>
-        <location filename="../src/services/mibandservice.cpp" line="420"/>
-        <location filename="../src/services/mibandservice.cpp" line="480"/>
+        <location filename="../src/services/mibandservice.cpp" line="422"/>
+        <location filename="../src/services/mibandservice.cpp" line="482"/>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
         <translation>Die Firmware ist zu alt, um Anzeigeelemente zu setzen, V0.1.1.14 wird benötigt</translation>
     </message>
@@ -198,12 +198,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="118"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="115"/>
         <source>About to transfer data from </source>
         <translation>Über das Übertragen von Daten aus </translation>
     </message>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="135"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="131"/>
         <source>No data to transfer</source>
         <translation>Es müssen keine Daten übertragen werden</translation>
     </message>

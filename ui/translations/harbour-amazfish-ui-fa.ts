@@ -172,19 +172,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="41"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="236"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="292"/>
         <source>Serial No: </source>
         <translation>شماره سریال: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="46"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="239"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="295"/>
         <source>Hardware Rev: </source>
         <translation>بازنگارش سخت‌افزاری: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="51"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="242"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="298"/>
         <source>Software Rev: </source>
         <translation>بازنگارش نرم‌افزاری: </translation>
     </message>
@@ -195,32 +195,32 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="75"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="245"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>GPS Ver: </source>
         <translation>نگارش مکان‌یاب: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="139"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="195"/>
         <source>Test Notification</source>
         <translation>آزمون آگاهی</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="148"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="204"/>
         <source>Test Email</source>
         <translation>آزمون رایانامه</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="157"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="213"/>
         <source>Test Call</source>
         <translation>آزمون تماس</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="175"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="231"/>
         <source>Fetch debug log</source>
         <translation>واکشی گزارش اشکال زدایی</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="192"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="248"/>
         <source>Test Popup</source>
         <translation>آزمون بالا پریدنی</translation>
     </message>
@@ -236,90 +236,80 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="56"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="248"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="304"/>
         <source>Model: </source>
         <translation>مدل: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="61"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="254"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="310"/>
         <source>Firmware Rev: </source>
         <translation>بازنگارش ثابت‌افزاری: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="251"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="307"/>
         <source>Manufacturer: </source>
         <translation>سازنده: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="84"/>
-        <source>A:</source>
-        <translation>A:</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="112"/>
-        <source>S:</source>
-        <translation>S:</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="135"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="191"/>
         <source>Function Tests</source>
         <translation>آزمون‌های کارایی</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="200"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="256"/>
         <source>Send Weather</source>
         <translation>فرستادن آب و هوا</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="210"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="266"/>
         <source>Update Calendar</source>
         <translation>به‌روز&#xa0;رسانی تقویم</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="223"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="279"/>
         <source>Music Control</source>
         <translation>واپایش آهنک</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="183"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="239"/>
         <source>Request Screenshot</source>
         <translation>درخواست نماگرفت</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="144"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="161"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="200"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="217"/>
         <source>Somebody</source>
         <translation>کسی</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="144"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Title</source>
         <translation>عنوان</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="144"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
         <translation>درود از سیستم‌عامل سیل‌فیش. این پیامی بلند است که با BLE فرستاده شده!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="153"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Donald Duck</source>
         <translation>دانلد داک</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="153"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Hello, this is an email from Sailfish OS!</source>
         <translation>درود این رایانامه‌ای از سیستم‌عامل سیل‌فیش است!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="166"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="222"/>
         <source>Test Immediate Alert Service</source>
         <translation>آزمون خدمت هشدار فوری</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="196"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="252"/>
         <source>This is a test notification</source>
         <translation>این آگاهی آزمایشی است</translation>
     </message>
@@ -361,32 +351,32 @@
         <translation>نمودارهای داده</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="153"/>
+        <location filename="../qml/pages/FirstPage.qml" line="156"/>
         <source>%1%</source>
         <translation>%1٪</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="158"/>
+        <location filename="../qml/pages/FirstPage.qml" line="161"/>
         <source>Steps</source>
         <translation>گام‌ها</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="216"/>
+        <location filename="../qml/pages/FirstPage.qml" line="219"/>
         <source>Heartrate</source>
         <translation>ضربان قلب</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="242"/>
+        <location filename="../qml/pages/FirstPage.qml" line="245"/>
         <source>%1 bpm</source>
         <translation>%1 ض‌دد</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="261"/>
+        <location filename="../qml/pages/FirstPage.qml" line="264"/>
         <source>Service</source>
         <translation>خدمت</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="266"/>
+        <location filename="../qml/pages/FirstPage.qml" line="270"/>
         <source>Enable on boot</source>
         <translation>به کار افتاده هنگام راه‌اندازی</translation>
     </message>
@@ -458,43 +448,43 @@
     <name>JSTools</name>
     <message>
         <location filename="../qml/tools/JSTools.js" line="87"/>
-        <location filename="../qml/tools/JSTools.js" line="299"/>
+        <location filename="../qml/tools/JSTools.js" line="301"/>
         <source>Empty</source>
         <translation>خالی</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="88"/>
         <location filename="../qml/tools/JSTools.js" line="89"/>
-        <location filename="../qml/tools/JSTools.js" line="300"/>
-        <location filename="../qml/tools/JSTools.js" line="301"/>
+        <location filename="../qml/tools/JSTools.js" line="302"/>
+        <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Heartrate</source>
         <translation>ضربان قلب</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="90"/>
         <location filename="../qml/tools/JSTools.js" line="91"/>
-        <location filename="../qml/tools/JSTools.js" line="302"/>
-        <location filename="../qml/tools/JSTools.js" line="303"/>
+        <location filename="../qml/tools/JSTools.js" line="304"/>
+        <location filename="../qml/tools/JSTools.js" line="305"/>
         <source>Pace</source>
         <translation>سرعت</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="92"/>
         <location filename="../qml/tools/JSTools.js" line="93"/>
-        <location filename="../qml/tools/JSTools.js" line="304"/>
-        <location filename="../qml/tools/JSTools.js" line="305"/>
+        <location filename="../qml/tools/JSTools.js" line="306"/>
+        <location filename="../qml/tools/JSTools.js" line="307"/>
         <source>Speed</source>
         <translation>سرعت</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="94"/>
-        <location filename="../qml/tools/JSTools.js" line="306"/>
+        <location filename="../qml/tools/JSTools.js" line="308"/>
         <source>Altitude</source>
         <translation>ارتفاع</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="95"/>
-        <location filename="../qml/tools/JSTools.js" line="307"/>
+        <location filename="../qml/tools/JSTools.js" line="309"/>
         <source>Distance</source>
         <translation>فاصله</translation>
     </message>
@@ -505,7 +495,7 @@
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="97"/>
-        <location filename="../qml/tools/JSTools.js" line="308"/>
+        <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
         <translation>مدّت</translation>
     </message>
@@ -523,37 +513,34 @@
         <translation type="unfinished">هیچ افزاره‌ای پیدا نشد</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="27"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
         <source>Bluetooth adapter is not available</source>
         <translation type="unfinished">سازوارگر بلوتوثی موجود نیست</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="212"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="211"/>
+        <source>Select device type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Stop scanning</source>
         <translation type="unfinished">توقّف پویش</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="213"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="233"/>
         <source>Scan for devices</source>
         <translation type="unfinished">پویش افزاره‌ها</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="227"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="247"/>
         <source>Scanning for devices…</source>
         <translation type="unfinished">پوییدن افزاره‌ها…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="229"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="249"/>
         <source>Pairing…</source>
         <translation type="unfinished">حفت کردن…</translation>
-    </message>
-</context>
-<context>
-    <name>PairSelectDeviceType</name>
-    <message>
-        <location filename="../qml/pages/PairSelectDeviceType.qml" line="8"/>
-        <source>Select Device Type</source>
-        <translation>گزینش گونهٔ افزاره</translation>
     </message>
 </context>
 <context>
@@ -615,17 +602,17 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="96"/>
+        <location filename="../qml/pages/Settings-app.qml" line="102"/>
         <source>Notify on connect</source>
         <translation>آگاهی هنگام وصل شدن</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="229"/>
+        <location filename="../qml/pages/Settings-app.qml" line="238"/>
         <source>Save Settings</source>
         <translation>ذخیرهٔ تنظیمات</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="138"/>
+        <location filename="../qml/pages/Settings-app.qml" line="144"/>
         <source>Sync activity data each hour</source>
         <translation>هم‌گام&#xa0;سازی ساعتی داده‌های فعّالیت</translation>
     </message>
@@ -640,77 +627,77 @@
         <translation>سازوارگر بلوتوث</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="80"/>
+        <location filename="../qml/pages/Settings-app.qml" line="86"/>
         <source>Notifications</source>
         <translation>آگاهی‌ها</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="104"/>
+        <location filename="../qml/pages/Settings-app.qml" line="110"/>
         <source>Low battery notification</source>
         <translation>آگاهی کم بودن باتری</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="112"/>
+        <location filename="../qml/pages/Settings-app.qml" line="118"/>
         <source>Navigation notifications</source>
         <translation>آگاهی‌های ناوبری</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="128"/>
+        <location filename="../qml/pages/Settings-app.qml" line="134"/>
         <source>Simulate event reminder support</source>
         <translation>شبیه‌سازی پشتیبانی یادآور رویداد</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="132"/>
+        <location filename="../qml/pages/Settings-app.qml" line="138"/>
         <source>Refresh rates</source>
         <translation>آهنگ‌های نوسازی</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="149"/>
+        <location filename="../qml/pages/Settings-app.qml" line="155"/>
         <source>Refresh weather every (%1) minutes</source>
         <translation>نوسازی آب وهوا هر (%1) دقیقه</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="158"/>
+        <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Refresh calendar every (%1) minutes</source>
         <translation>نوسازی تقویم هر (%1) دقیقه</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="163"/>
+        <location filename="../qml/pages/Settings-app.qml" line="169"/>
         <source>Amazfish Service</source>
         <translation>خدمت امیزفیش</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="170"/>
+        <location filename="../qml/pages/Settings-app.qml" line="176"/>
         <source>Start service on boot</source>
         <translation>آغاز خدمت هنگام راه‌اندازی</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="185"/>
+        <location filename="../qml/pages/Settings-app.qml" line="190"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>آغاز یا پایان خدمت پس‌زمینهٔ امیزفیش</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="198"/>
+        <location filename="../qml/pages/Settings-app.qml" line="207"/>
         <source>Start</source>
         <translation>آغاز</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="207"/>
+        <location filename="../qml/pages/Settings-app.qml" line="216"/>
         <source>Stop</source>
         <translation>پایان</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="217"/>
+        <location filename="../qml/pages/Settings-app.qml" line="226"/>
         <source>Button Actions</source>
         <translation>کنش دکمه‌ها</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="120"/>
+        <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Transliterate notifications</source>
         <translation>آگاهی‌های آوانگاری</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="88"/>
+        <location filename="../qml/pages/Settings-app.qml" line="94"/>
         <source>Set silent profile on connect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1561,7 +1548,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="143"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="145"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
