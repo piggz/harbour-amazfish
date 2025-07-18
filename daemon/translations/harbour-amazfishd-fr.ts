@@ -6,7 +6,7 @@
     <message>
         <location filename="../src/devices/abstractdevice.cpp" line="151"/>
         <source>Device does not support settings</source>
-        <translation type="unfinished"></translation>
+        <translation>l&apos;appareil ne supporte pas la configuration</translation>
     </message>
 </context>
 <context>
