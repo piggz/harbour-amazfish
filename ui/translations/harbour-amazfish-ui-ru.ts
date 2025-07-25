@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/AddCityPage.qml" line="8"/>
         <source>Set Location</source>
-        <translation type="unfinished">Задать местоположение</translation>
+        <translation>Установить местоположение</translation>
     </message>
 </context>
 <context>
@@ -86,7 +86,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../qml/pages/AuthKeyDialog.qml" line="18"/>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите ключ авторизации</translation>
     </message>
 </context>
 <context>
@@ -103,12 +103,12 @@
         <location filename="../qml/pages/BatteryPage.qml" line="9"/>
         <location filename="../qml/pages/BatteryPage.qml" line="49"/>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Батарея</translation>
     </message>
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="25"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -137,17 +137,17 @@
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="53"/>
         <source>File not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл не поддерживается на этом устройстве</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="7"/>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить файл</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="22"/>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите файл для установки.</translation>
     </message>
 </context>
 <context>
@@ -155,7 +155,7 @@
     <message>
         <location filename="../src/daemoninterface.cpp" line="65"/>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>Неожиданная ошибка</translation>
     </message>
 </context>
 <context>
@@ -227,91 +227,91 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="256"/>
         <source>Send Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить погоду</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="266"/>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить календарь</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="56"/>
         <location filename="../qml/pages/DebugInfo.qml" line="304"/>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>Модель: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="61"/>
         <location filename="../qml/pages/DebugInfo.qml" line="310"/>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Версия прошивки: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
         <location filename="../qml/pages/DebugInfo.qml" line="307"/>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>Производитель: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="279"/>
         <source>Music Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Управление музыкой</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="8"/>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>Отладка</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="32"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="191"/>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Функциональные тесты</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="239"/>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать отладочный скриншот</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <location filename="../qml/pages/DebugInfo.qml" line="217"/>
         <source>Somebody</source>
-        <translation type="unfinished"></translation>
+        <translation>Кто-то</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>Привет из Sailfish OS. Это длинное сообщение, отправленное по BLE!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Donald Duck</source>
-        <translation type="unfinished"></translation>
+        <translation>Дональд Дак</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation type="unfinished"></translation>
+        <translation>Здравствуйте, это письмо от Sailfish OS!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="222"/>
         <source>Test Immediate Alert Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверка службы немедленного оповещения</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="252"/>
         <source>This is a test notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Это тестовое уведомление</translation>
     </message>
 </context>
 <context>
@@ -320,7 +320,7 @@
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
         <source>Download Data</source>
-        <translation type="unfinished">Загрузить данные</translation>
+        <translation>Скачать данные</translation>
     </message>
 </context>
 <context>
@@ -348,42 +348,42 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="156"/>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="245"/>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 уд/мин</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="47"/>
         <source>Data Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>Графики данных</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="161"/>
         <source>Steps</source>
-        <translation type="unfinished">Шаги</translation>
+        <translation>Шаги</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="219"/>
         <source>Heartrate</source>
-        <translation type="unfinished">ЧСС</translation>
+        <translation>Пульс</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="264"/>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервис</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="270"/>
         <source>Enable on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкл. при загрузке</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="39"/>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить файл</translation>
     </message>
 </context>
 <context>
@@ -392,7 +392,7 @@
         <location filename="../qml/components/GraphData.qml" line="305"/>
         <location filename="../qml/components/GraphData.qml" line="305"/>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных</translation>
     </message>
 </context>
 <context>
@@ -400,48 +400,48 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="9"/>
         <source>Heartrate</source>
-        <translation type="unfinished">ЧСС</translation>
+        <translation>Пульс</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="75"/>
         <location filename="../qml/pages/HeartratePage.qml" line="78"/>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>уд./мин.</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="97"/>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Спокойный</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="106"/>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Лёгкий</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="115"/>
         <source>Intensive</source>
-        <translation type="unfinished"></translation>
+        <translation>Интенсивный</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="124"/>
         <source>Aerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Аэробный</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="133"/>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Анаэробный</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="142"/>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation>МПК</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="40"/>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 уд/мин</translation>
     </message>
 </context>
 <context>
@@ -450,7 +450,7 @@
         <location filename="../qml/tools/JSTools.js" line="87"/>
         <location filename="../qml/tools/JSTools.js" line="301"/>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Отсутствует</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="88"/>
@@ -458,7 +458,7 @@
         <location filename="../qml/tools/JSTools.js" line="302"/>
         <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Heartrate</source>
-        <translation type="unfinished">ЧСС</translation>
+        <translation>Пульс</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="90"/>
@@ -466,7 +466,7 @@
         <location filename="../qml/tools/JSTools.js" line="304"/>
         <location filename="../qml/tools/JSTools.js" line="305"/>
         <source>Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Темп</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="92"/>
@@ -474,30 +474,30 @@
         <location filename="../qml/tools/JSTools.js" line="306"/>
         <location filename="../qml/tools/JSTools.js" line="307"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="94"/>
         <location filename="../qml/tools/JSTools.js" line="308"/>
         <source>Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="95"/>
         <location filename="../qml/tools/JSTools.js" line="309"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Дистанция</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="96"/>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Пауза</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="97"/>
         <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность</translation>
     </message>
 </context>
 <context>
@@ -505,42 +505,42 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Сопряжение устройства</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройства не найдены</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Адаптер Bluetooth недоступен</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="211"/>
         <source>Select device type</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите тип устройства</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>Остановить сканирование</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="233"/>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск устройств</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="247"/>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск устройств…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="249"/>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>Сопряжение…</translation>
     </message>
 </context>
 <context>
@@ -548,17 +548,17 @@
     <message>
         <location filename="../src/timeformatter.cpp" line="33"/>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1s</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="35"/>
         <source>%1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1м %2s</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="39"/>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1ч %2м %3с</translation>
     </message>
 </context>
 <context>
@@ -619,17 +619,17 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="110"/>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Уведомление о низком заряде</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="86"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Уведомление</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="138"/>
         <source>Refresh rates</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота обновления</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="176"/>
