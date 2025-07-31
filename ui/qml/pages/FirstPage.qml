@@ -85,7 +85,6 @@ PagePL {
             LabelPL {
                 id: lblProgress
                 x: 10
-                anchors.left: lblLastMessage.right
                 anchors.leftMargin: 5
                 horizontalAlignment: Text.AlignLeft
                 color: styler.themeSecondaryHighlightColor
@@ -96,7 +95,7 @@ PagePL {
             BusyIndicatorSmallPL {
                 y: 2
                 running: DaemonInterfaceInstance.operationRunning
-                anchors.right: parent.right
+                Layout.alignment: Qt.AlignRight
                 anchors.rightMargin: 2
                 height: parent.height - 4
             }
