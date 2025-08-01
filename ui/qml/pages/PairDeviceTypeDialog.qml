@@ -3,14 +3,11 @@ import uk.co.piggz.amazfish 1.0
 import "../components"
 import "../components/platform"
 
-DialogPL {
+DialogListPL {
     id: dialog;
     canAccept: false
     signal selected(variant deviceType);
 
-    ListViewPL {
-        id: listView
-        anchors.fill: parent
         model: DeviceListModel {
         }
         delegate: ListItemPL {
@@ -57,6 +54,5 @@ DialogPL {
                 text: model.deviceType
             }
         }
-    }
 
 }
