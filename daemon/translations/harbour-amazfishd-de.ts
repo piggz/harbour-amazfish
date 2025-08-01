@@ -14,67 +14,67 @@
     <message>
         <location filename="../src/achievements.cpp" line="12"/>
         <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Reise beginnt Abenteurer. Nur &lt;b&gt;%1&lt;/b&gt; Schritte - das Auenland ist noch in Sichtweite.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
         <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
-        <translation type="unfinished"></translation>
+        <translation>Du hast den Brandywine überquert. &lt;b&gt;%1&lt;/b&gt; Schritte nach unten - Trolle voraus!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="14"/>
         <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf halber Strecke nach Mordor. &lt;b&gt;%1&lt;/b&gt; Schritte gelaufen und das zweite Frühstück verpasst.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="15"/>
         <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Schicksalsberg ist am Horizont zu sehen. &lt;b&gt;%1&lt;/b&gt; Schritte hinter dir - wirf den Ring nicht weg, noch nicht!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="16"/>
         <source>The ring is cast into the fire. &lt;b&gt;%1&lt;/b&gt; steps done — Middle-earth is saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Ring liegt im Feuer. &lt;b&gt;%1&lt;/b&gt; Schritte getan - Mittelerde ist gerettet!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="17"/>
         <source>You kept walking after saving the world?! &lt;b&gt;%1&lt;/b&gt; steps — you’re a true legend. 🧙</source>
-        <translation type="unfinished"></translation>
+        <translation>Du bist weitergelaufen nachdem du die Welt gerettet hast?! &lt;b&gt;%1&lt;/b&gt; Schritte - du bist eine wahre Legende. 🧙</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="18"/>
         <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Hobbit, oder Hin und zurück - &lt;b&gt;%1&lt;/b&gt; Schritte und das zweite Frühstück verdient!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
         <source>Let&apos;s get moving! You&apos;ve taken only &lt;b&gt;%1&lt;/b&gt; steps so far.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lasst uns losgehen! Du hast bisher nur &lt;b&gt;%1&lt;/b&gt; Schritte getan.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="23"/>
         <source>Warming up! &lt;b&gt;%1&lt;/b&gt; steps done — keep going!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufwärmphase! &lt;b&gt;%1&lt;/b&gt; Schritte getan - mach weiter so!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="24"/>
         <source>You&apos;re halfway there. &lt;b&gt;%1&lt;/b&gt; steps so far!</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Hälfte ist geschafft. Bereits &lt;b&gt;%1&lt;/b&gt; Schritte!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="25"/>
         <source>Almost there! Just a bit more — &lt;b&gt;%1&lt;/b&gt; steps already!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fast geschafft! Nur ein kleines Stück noch - schon &lt;b&gt;%1&lt;/b&gt; Schritte!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="26"/>
         <source>Goal reached! &lt;b&gt;%1&lt;/b&gt; steps — you can have that cake now 🎉</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Ziel ist erreicht! &lt;b&gt;%1&lt;/b&gt; Schritte - du hast dir das Stück Kuchen jetzt verdient 🎉</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="27"/>
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
-        <translation type="unfinished"></translation>
+        <translation>Du hast es geschafft! &lt;b&gt;%1&lt;/b&gt; Schritte — Zeit für eine Pause oder noch ein paar Bonusschritte?</translation>
     </message>
 </context>
 <context>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../src/operations/abstractfetchoperation.cpp" line="115"/>
         <source>About to transfer data from </source>
-        <translation>Über das Übertragen von Daten aus </translation>
+        <translation>Beginne Datenübertragung vom </translation>
     </message>
     <message>
         <location filename="../src/operations/abstractfetchoperation.cpp" line="131"/>
