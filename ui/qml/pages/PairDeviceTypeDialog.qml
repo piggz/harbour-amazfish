@@ -1,62 +1,67 @@
-import QtQuick 2.0
-import uk.co.piggz.amazfish 1.0
 import "../components"
 import "../components/platform"
+import QtQuick 2.0
+import uk.co.piggz.amazfish 1.0
 
-DialogPL {
-    id: dialog;
+DialogListPL {
+
+    id: dialog
+
+    signal selected(variant deviceType)
+
     canAccept: false
-    signal selected(variant deviceType);
 
-    ListViewPL {
-        id: listView
-        anchors.fill: parent
-        model: DeviceListModel {
+    model: DeviceListModel {
+    }
+
+    delegate: ListItemPL {
+        id: item
+
+        contentHeight: styler.themeItemSizeLarge
+        onClicked: {
+            console.log(index);
+            selected({
+                "deviceType": model.deviceType,
+                "icon": model.icon,
+                "auth": model.auth,
+                "pattern": model.pattern
+            });
+            dialog.accepted();
         }
-        delegate: ListItemPL {
-            id: item
-            contentHeight: styler.themeItemSizeLarge
 
+        Image {
+            id: icon
 
-            onClicked: {
-                console.log(index)
-                selected({
-                             deviceType: model.deviceType,
-                             icon: model.icon,
-                             auth: model.auth,
-                             pattern: model.pattern
-                         })
-                dialog.accepted()
-                // selected(model.auth, model.deviceType);
+            height: parent.height
+            width: parent.height
+            fillMode: Image.PreserveAspectFit
+            source: model.icon
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                leftMargin: styler.themeHorizontalPageMargin
             }
 
-            Image {
-                id: icon
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    left: parent.left
-                    leftMargin: styler.themeHorizontalPageMargin
-                }
-                height: parent.height
-                width: parent.height
-                fillMode: Image.PreserveAspectFit
-                source: model.icon
-            }
-
-            Text {
-                id: text
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    left: icon.right
-                    leftMargin: styler.themePaddingMedium
-                    right: parent.right
-                    rightMargin: styler.themeHorizontalPageMargin
-                }
-                font.pixelSize: styler.themeFontSizeLarge
-                color: item.down ? styler.themeHighlightColor : styler.themePrimaryColor
-                text: model.deviceType
-            }
         }
+
+        Text {
+            id: text
+
+            font.pixelSize: styler.themeFontSizeLarge
+            color: item.down ? styler.themeHighlightColor : styler.themePrimaryColor
+            text: model.deviceType
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: icon.right
+                leftMargin: styler.themePaddingMedium
+                right: parent.right
+                rightMargin: styler.themeHorizontalPageMargin
+            }
+
+        }
+
     }
 
 }
