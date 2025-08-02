@@ -20,6 +20,8 @@
         <file>qml/custom-icons/icon-m-levels.png</file>
         <file>qml/custom-icons/icon-m-location.png</file>
         <file>qml/custom-icons/icon-m-open swimming.png</file>
+        <file>qml/custom-icons/icon-m-outdoorcycling.png</file>
+        <file>qml/custom-icons/icon-m-outdoorrunning.png</file>
         <file>qml/custom-icons/icon-m-running.png</file>
         <file>qml/custom-icons/icon-m-skiing.png</file>
         <file>qml/custom-icons/icon-m-steps2.png</file>
@@ -34,7 +36,5 @@
         <file>qml/custom-icons/icon-m-watch.png</file>
         <file>qml/custom-icons/icon-m-weather-d212-light.png</file>
         <file>qml/custom-icons/icon-strava.png</file>
-        <file>qml/custom-icons/icon-m-outdoorcycling.png</file>
-        <file>qml/custom-icons/icon-m-outdoorrunning.png</file>
     </qresource>
 </RCC>
