@@ -49,32 +49,32 @@
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
         <source>Let&apos;s get moving! You&apos;ve taken only &lt;b&gt;%1&lt;/b&gt; steps so far.</source>
-        <translation type="unfinished"></translation>
+        <translation>Allons-y bougeons&#x202f;! Vous n’avez fait que &lt;b&gt;%1&lt;/b&gt; pas jusqu’à présent.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="23"/>
         <source>Warming up! &lt;b&gt;%1&lt;/b&gt; steps done — keep going!</source>
-        <translation type="unfinished"></translation>
+        <translation>Échauffement&#x202f;! &lt;b&gt;%1&lt;/b&gt; pas effectuées — continuez&#x202f;!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="24"/>
         <source>You&apos;re halfway there. &lt;b&gt;%1&lt;/b&gt; steps so far!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous êtes à mi-chemin. &lt;b&gt;%1&lt;/b&gt; pas jusqu’à présent&#x202f;!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="25"/>
         <source>Almost there! Just a bit more — &lt;b&gt;%1&lt;/b&gt; steps already!</source>
-        <translation type="unfinished"></translation>
+        <translation>Presque là&#x202f;! Juste un peu plus — &lt;b&gt;%1&lt;/b&gt; pas déjà&#x202f;!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="26"/>
         <source>Goal reached! &lt;b&gt;%1&lt;/b&gt; steps — you can have that cake now 🎉</source>
-        <translation type="unfinished"></translation>
+        <translation>Objectif atteint&#x202f;! &lt;b&gt;%1&lt;/b&gt; pas — vous pouvez avoir ce gâteau maintenant&#xa0;🎉</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="27"/>
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu l’as écrasé&#x202f;! &lt;b&gt;%1&lt;/b&gt; pas — il est temps de se reposer ou alors d’aller chercher des pas bonus&#x202f;?</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../src/devices/asteroidosdevice.cpp" line="324"/>
         <source>Stored %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Stocké %1&#xa0;...</translation>
     </message>
 </context>
 <context>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="115"/>
         <source>Device is not valid, it may not be supported</source>
-        <translation type="unfinished"></translation>
+        <translation>L’appareil n’est pas valide, il peut ne pas être pris en charge</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="469"/>
@@ -116,12 +116,12 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="547"/>
         <source>Battery level now </source>
-        <translation type="unfinished"></translation>
+        <translation>Niveau batterie actuel </translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="671"/>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Calendrier</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/devices/gtsdevice.cpp" line="219"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Une opération est en cours, essayez plus tard</translation>
     </message>
 </context>
 <context>
@@ -147,12 +147,12 @@
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="230"/>
         <source>Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Progression</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="372"/>
         <source>Sending %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoi %1&#xa0;...</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="375"/>
@@ -162,7 +162,7 @@
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="397"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Une opération est en cours, essayez plus tard</translation>
     </message>
 </context>
 <context>
@@ -171,7 +171,7 @@
         <location filename="../src/services/mibandservice.cpp" line="422"/>
         <location filename="../src/services/mibandservice.cpp" line="482"/>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation type="unfinished"></translation>
+        <translation>Le firmware est trop ancien pour définir les éléments d’affichage, V0.1.1.14 est requis</translation>
     </message>
 </context>
 <context>
@@ -180,13 +180,13 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="364"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="378"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Une opération est en cours, essayez plus tard</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="401"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="414"/>
         <source>Sending file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoi fichier&#xa0;...</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="404"/>
@@ -200,12 +200,12 @@
     <message>
         <location filename="../src/operations/abstractfetchoperation.cpp" line="115"/>
         <source>About to transfer data from </source>
-        <translation type="unfinished"></translation>
+        <translation>Sur le point de transférer des données depuis </translation>
     </message>
     <message>
         <location filename="../src/operations/abstractfetchoperation.cpp" line="131"/>
         <source>No data to transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune donnée à transférer</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="186"/>
@@ -213,33 +213,33 @@
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="85"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="87"/>
         <source>Update operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>L’opération de mise à jour a échoué</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="224"/>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="97"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="95"/>
         <source>Update operation failed, unexpected metadata</source>
-        <translation type="unfinished"></translation>
+        <translation>L’opération de mise à jour a échoué, métadonnées inattendues</translation>
     </message>
     <message>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="72"/>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="79"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="74"/>
         <source>Update operation complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Opération de mise à jour terminée</translation>
     </message>
     <message>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="95"/>
         <source>Update operation failed, filetype not supported</source>
-        <translation type="unfinished"></translation>
+        <translation>L’opération de mise à jour a échoué, type de fichier non pris en charge</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="144"/>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="109"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="29"/>
         <source>File does not seem to be supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier ne semble pas être pris en charge</translation>
     </message>
 </context>
 </TS>
