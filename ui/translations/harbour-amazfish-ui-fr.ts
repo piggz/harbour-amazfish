@@ -436,7 +436,7 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="133"/>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Anaérobie</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="142"/>
@@ -689,7 +689,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="226"/>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Actions bouton</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="126"/>
@@ -707,7 +707,7 @@
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="10"/>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Actions bouton</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="27"/>
@@ -880,7 +880,7 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="104"/>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Éléments affichage Huami</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="96"/>
@@ -893,7 +893,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="10"/>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Éléments affichage Huami</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="57"/>
@@ -1391,7 +1391,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="371"/>
         <source>Average Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>Foulée moyenne</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="372"/>
