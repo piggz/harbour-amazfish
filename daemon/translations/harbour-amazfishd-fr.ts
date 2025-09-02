@@ -14,37 +14,37 @@
     <message>
         <location filename="../src/achievements.cpp" line="12"/>
         <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le voyage commence, aventurier. Seulement &lt;b&gt;%1&lt;/b&gt; pas — la Comté est encore en vue.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
         <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu as traversé le Brandywine. &lt;b&gt;%1&lt;/b&gt; pas tombés — trolls en avant&#x202f;!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="14"/>
         <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>À mi-chemin vers Mordor. &lt;b&gt;%1&lt;/b&gt; étapes parcourues et deuxième petit déjeuner manqué.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="15"/>
         <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le volcan Orodruin est à l’horizon. &lt;b&gt;%1&lt;/b&gt; pas derrière toi — ne lâche pas encore la bague&#x202f;!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="16"/>
         <source>The ring is cast into the fire. &lt;b&gt;%1&lt;/b&gt; steps done — Middle-earth is saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>L’anneau est jeté dans le feu. &lt;b&gt;%1&lt;/b&gt; pas effectuées — La Terre du Milieu est sauvée&#x202f;!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="17"/>
         <source>You kept walking after saving the world?! &lt;b&gt;%1&lt;/b&gt; steps — you’re a true legend. 🧙</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu as continué à marcher après avoir sauvé le monde&#x202f;?! &lt;b&gt;%1&lt;/b&gt; pas — tu es une véritable légende.&#xa0;🧙</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="18"/>
         <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le Hobbit, ou There and Back Again — &lt;b&gt;%1&lt;/b&gt; pas et deuxième petit déjeuner gagné&#x202f;!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
