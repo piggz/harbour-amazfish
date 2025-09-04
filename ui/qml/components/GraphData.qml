@@ -51,6 +51,7 @@ Item {
 
     property real minY: 0 //Always 0
     property real maxY: 0
+    property real suggestedMaxY: 0
 
     property int minX: 0
     property int maxX: 0
@@ -75,8 +76,10 @@ Item {
             }
         });
         points = data;
+
+        suggestedMaxY = pointMaxY * 1.20
         if (scale) {
-            maxY = pointMaxY * 1.20;
+            maxY = suggestedMaxY;
         }
         doubleAxisXLables = ((maxX - minX) > 129600); // 1,5 days
 
