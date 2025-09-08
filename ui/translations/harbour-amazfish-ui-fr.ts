@@ -320,7 +320,7 @@
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
         <source>Download Data</source>
-        <translation type="unfinished">Télécharger les données</translation>
+        <translation>Télécharger données</translation>
     </message>
 </context>
 <context>
@@ -441,7 +441,7 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="142"/>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation>VO2 max</translation>
     </message>
 </context>
 <context>
@@ -624,7 +624,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="8"/>
         <source>Application Settings</source>
-        <translation type="unfinished">Paramètres de l&apos;application</translation>
+        <translation>Paramètres d&apos;application</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="28"/>
@@ -727,7 +727,7 @@
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="56"/>
         <source>Save Settings</source>
-        <translation type="unfinished">Sauvegarder les paramètres</translation>
+        <translation>Sauvegarder paramètres</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="79"/>
@@ -898,12 +898,12 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="57"/>
         <source>Save Settings</source>
-        <translation type="unfinished">Sauvegarder les paramètres</translation>
+        <translation>Sauvegarder paramètres</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="88"/>
         <source>Status</source>
-        <translation type="unfinished">Statut</translation>
+        <translation>Statut</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="89"/>
@@ -958,7 +958,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="106"/>
         <source>Activity</source>
-        <translation type="unfinished">Activité</translation>
+        <translation>Activité</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="107"/>
@@ -1073,12 +1073,12 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="121"/>
         <source>Distance</source>
-        <translation type="unfinished">Distance</translation>
+        <translation>Distance</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="122"/>
         <source>Calories</source>
-        <translation type="unfinished">Calories</translation>
+        <translation>Calories</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="123"/>
@@ -1088,7 +1088,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="125"/>
         <source>Battery</source>
-        <translation type="unfinished">Batterie</translation>
+        <translation>Batterie</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="126"/>
