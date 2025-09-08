@@ -96,7 +96,7 @@
         <location filename="../src/deviceinterface.cpp" line="469"/>
         <location filename="../src/deviceinterface.cpp" line="545"/>
         <source>Amazfish</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfish</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="470"/>
@@ -157,7 +157,7 @@
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="375"/>
         <source>No file selected</source>
-        <translation type="unfinished">Aucun fichier sélectionné</translation>
+        <translation>Aucun fichier sélectionné</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="397"/>
@@ -192,7 +192,7 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="404"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="417"/>
         <source>No file selected</source>
-        <translation type="unfinished">Aucun fichier sélectionné</translation>
+        <translation>Aucun fichier sélectionné</translation>
     </message>
 </context>
 <context>
