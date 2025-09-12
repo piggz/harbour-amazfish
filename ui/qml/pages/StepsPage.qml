@@ -25,7 +25,7 @@ PagePL {
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: _InfoSteps > 0 ? _InfoSteps.toLocaleString() : graphStepSummary.lastValue.toLocaleString()
+            text: graphStepSummary.lastValue.toLocaleString()
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -57,7 +57,10 @@ PagePL {
             graphType: 2
 
             minY: 0
-            maxY: 2 * AmazfishConfig.profileFitnessGoal
+            maxY: (2 * AmazfishConfig.profileFitnessGoal > suggestedMaxY)
+                  ? 2 * AmazfishConfig.profileFitnessGoal
+                  : Math.ceil(suggestedMaxY/1000)*1000
+
             valueConverter: function(value) {
                 return value.toFixed(0);
             }
