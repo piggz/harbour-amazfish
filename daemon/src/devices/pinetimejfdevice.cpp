@@ -122,9 +122,9 @@ void PinetimeJFDevice::parseServices()
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
 
-    qDebug() << "Resolved services...";
+    // qDebug() << "Resolved services...";
 
-    qDebug().noquote() << xml.value();
+    // qDebug().noquote() << xml.value();
 
     QDomDocument doc;
     doc.setContent(xml.value());
