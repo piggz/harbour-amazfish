@@ -53,7 +53,8 @@ DialogPL {
 	    id: authKeyField
 	    width: parent.width
 	    label: qsTr("Passkey: ")
-	    visible: authType == "passkey"
+	    visible: (authType == "passkey") || (authType == "pincode")
+	    inputMethodHints: (authType == "passkey") ? Qt.ImhDigitsOnly : Qt.ImhPreferNumbers
 	}
     }
 }
