@@ -11,5 +11,5 @@
     },
     "version": "2.7.0",
     "maintainer": "Adam Pigg <adam@piggz.co.uk>",
-    "framework" : "ubuntu-sdk-20.04"
+    "framework" : "@CLICK_FRAMEWORK@"
 }
