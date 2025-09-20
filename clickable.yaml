@@ -1,5 +1,4 @@
-clickable_minimum_required: 8.3.1
-framework: ubuntu-sdk-20.04
+clickable_minimum_required: 8.4.0
 
 prebuild: git submodule update --init
 kill: harbour-amazfish
