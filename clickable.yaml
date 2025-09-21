@@ -1,5 +1,4 @@
-clickable_minimum_required: 8.3.1
-framework: ubuntu-sdk-20.04
+clickable_minimum_required: 8.4.0
 
 prebuild: git submodule update --init
 kill: harbour-amazfish
@@ -23,6 +22,7 @@ dependencies_target:
 - libdbus-1-dev
 - libtelepathy-qt5-dev
 - libusermetricsinput1-dev
+- libpulse-dev
 
 libraries:
   qtmpris:
@@ -48,6 +48,9 @@ libraries:
     - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/disable-armhf-version-check.patch
     - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/enable-clang-cross-compiling.patch
     - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/fix-compilation-with-clickable.patch
+    - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/add-some-missing-cstdint-inclusions-872-874.patch
+    - cd ${ROOT}/3rdparty/maplibre-gl-native/vendor/eternal && git apply --verbose ${ROOT}/click/missing-include.patch
+
     builder: cmake
     build_args:
     - -DMBGL_WITH_QT=ON
