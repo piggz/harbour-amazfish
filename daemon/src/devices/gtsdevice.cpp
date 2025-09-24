@@ -357,3 +357,11 @@ QStringList GtsDevice::supportedDisplayItems() const
 
     return items;
 }
+
+void GtsDevice::sendAlert(const Amazfish::WatchNotification &notification)
+{
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi) {
+        mi->sendAlert(notification.appName, notification.summary, notification.body);
+    }
+}

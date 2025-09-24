@@ -10,6 +10,7 @@ public:
     explicit GtsDevice(const QString &pairedName, QObject *parent = nullptr);
 
     QString deviceType() const override;
+    void sendAlert(const Amazfish::WatchNotification &notification) override;
     void sendEventReminder(int id, const QDateTime &dt, const QString &event) override;
     int supportedFeatures() const override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
