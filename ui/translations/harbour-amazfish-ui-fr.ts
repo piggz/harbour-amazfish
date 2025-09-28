@@ -108,7 +108,7 @@
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="25"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -358,7 +358,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="161"/>
         <source>Steps</source>
-        <translation type="unfinished">Pas</translation>
+        <translation>Pas</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="219"/>
