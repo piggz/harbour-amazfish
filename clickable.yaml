@@ -1,4 +1,4 @@
-clickable_minimum_required: 8.4.0
+clickable_minimum_required: 8.5.0
 
 prebuild: git submodule update --init
 kill: harbour-amazfish
