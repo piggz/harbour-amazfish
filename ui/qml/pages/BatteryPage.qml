@@ -18,11 +18,10 @@ PagePL {
         spacing: styler.themePaddingLarge
 
         LabelPL {
-            id: lblCurrentHeartrate
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: qsTr("%1 %").arg(_InfoBatteryPercent)
+	    text: qsTr("%1 %").arg(graphBat.lastValue.toLocaleString())
             horizontalAlignment: Text.AlignHCenter
         }
 
