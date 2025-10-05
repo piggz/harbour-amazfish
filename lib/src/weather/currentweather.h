@@ -138,6 +138,8 @@ public:
 
     QString description() const;
     qlonglong dateTime() const;
+    qlonglong sunrise() const;
+    qlonglong sunset() const;
 
     Q_INVOKABLE void refresh();
 
@@ -176,6 +178,8 @@ private:
 
     QString m_description;
     qlonglong m_dateTime = 0;
+    qlonglong m_sunrise = 0;
+    qlonglong m_sunset = 0;
 
     QList<Forecast> m_forecasts;
 };

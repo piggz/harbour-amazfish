@@ -14,7 +14,6 @@ public:
 
     explicit PineTimeSimpleWeatherService(const QString &path, QObject *parent);
 
-
     void sendWeather(CurrentWeather *weather);
 
     enum class WeatherIcons {
@@ -33,6 +32,13 @@ public:
     Q_ENUM(WeatherIcons)
 
     WeatherIcons iconToEnum(const QString& iconName);
+
+    void setVersion(int _version) {
+	m_version = _version;
+    }
+
+private:
+    int m_version = 0;
 
 };
 

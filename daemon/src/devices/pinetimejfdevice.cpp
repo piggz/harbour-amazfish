@@ -530,9 +530,18 @@ void PinetimeJFDevice::sendWeather(CurrentWeather *weather)
         w->sendWeather(weather);
     }
 
-    PineTimeSimpleWeatherService *sw = qobject_cast<PineTimeSimpleWeatherService*>(service(PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER));
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
 
+    PineTimeSimpleWeatherService *sw = qobject_cast<PineTimeSimpleWeatherService*>(service(PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER));
     if (sw){
+	if (info) {
+	    // Convert version number 1.15.0 to int 1 015 000 (each number is 0-1000)
+	    QStringList parts = info->fwRevision().split('.');
+	    int version_number = (parts.size() == 3) ? parts.value(0).toInt()*1000000 + parts.value(1).toInt()*1000 + parts.value(2).toInt() : 0;
+	    if (version_number >= 1016000) {
+		sw->setVersion(1);
+	    }
+	}
         sw->sendWeather(weather);
     }
 }
