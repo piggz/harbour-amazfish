@@ -6,7 +6,7 @@
     <message>
         <location filename="../src/devices/abstractdevice.cpp" line="151"/>
         <source>Device does not support settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Enheten støtter ikke innstillinger</translation>
     </message>
 </context>
 <context>
@@ -59,22 +59,22 @@
     <message>
         <location filename="../src/achievements.cpp" line="24"/>
         <source>You&apos;re halfway there. &lt;b&gt;%1&lt;/b&gt; steps so far!</source>
-        <translation type="unfinished"></translation>
+        <translation>Du er halvveis. &lt;b&gt;%1&lt;/b&gt; skritt så langt!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="25"/>
         <source>Almost there! Just a bit more — &lt;b&gt;%1&lt;/b&gt; steps already!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nesten der! Bare litt mer – &lt;b&gt;%1&lt;/b&gt; skritt allerede!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="26"/>
         <source>Goal reached! &lt;b&gt;%1&lt;/b&gt; steps — you can have that cake now 🎉</source>
-        <translation type="unfinished"></translation>
+        <translation>Målet er nådd! &lt;b&gt;%1&lt;/b&gt; skritt – du kan få den kaken nå 🎉</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="27"/>
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
-        <translation type="unfinished"></translation>
+        <translation>Du klarte det! &lt;b&gt;%1&lt;/b&gt; trinn — er det på tide å hvile eller gå for bonustrinn?</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../src/devices/asteroidosdevice.cpp" line="324"/>
         <source>Stored %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagret %1...</translation>
     </message>
 </context>
 <context>
@@ -90,38 +90,38 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="115"/>
         <source>Device is not valid, it may not be supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Enheten er ikke gyldig. Den er kanskje ikke støttet</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="469"/>
         <location filename="../src/deviceinterface.cpp" line="545"/>
         <source>Amazfish</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfish</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="470"/>
         <source>Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilkoblet</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="471"/>
         <source>Phone and watch are connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefon og klokke er sammenkoblet</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="546"/>
         <source>Low Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Lavt batteri</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="547"/>
         <source>Battery level now </source>
-        <translation type="unfinished"></translation>
+        <translation>Batterinivå nå </translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="671"/>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalender</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/devices/gtsdevice.cpp" line="219"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>En operasjon kjører for øyeblikket, prøv senere</translation>
     </message>
 </context>
 <context>
@@ -137,32 +137,32 @@
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="208"/>
         <source>Navigation Started</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigasjon startet</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="210"/>
         <source>Navigation Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigasjonen har stoppet</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="230"/>
         <source>Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Framgang</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="372"/>
         <source>Sending %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sender %1...</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="375"/>
         <source>No file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen fil er valgt</translation>
     </message>
     <message>
         <location filename="../src/devices/huamidevice.cpp" line="397"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>En operasjon kjører for øyeblikket, prøv senere</translation>
     </message>
 </context>
 <context>
@@ -171,7 +171,7 @@
         <location filename="../src/services/mibandservice.cpp" line="422"/>
         <location filename="../src/services/mibandservice.cpp" line="482"/>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation type="unfinished"></translation>
+        <translation>Fastvaren er for gammel til å angi visningselementer, V0.1.1.14 kreves</translation>
     </message>
 </context>
 <context>
@@ -180,19 +180,19 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="364"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="378"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>En operasjon kjører for øyeblikket, prøv senere</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="401"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="414"/>
         <source>Sending file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sender fil…</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="404"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="417"/>
         <source>No file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen fil er valgt</translation>
     </message>
 </context>
 <context>
@@ -200,12 +200,12 @@
     <message>
         <location filename="../src/operations/abstractfetchoperation.cpp" line="115"/>
         <source>About to transfer data from </source>
-        <translation type="unfinished"></translation>
+        <translation>Er i ferd med å overføre data fra </translation>
     </message>
     <message>
         <location filename="../src/operations/abstractfetchoperation.cpp" line="131"/>
         <source>No data to transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen data overført</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="186"/>
@@ -213,33 +213,33 @@
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="85"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="87"/>
         <source>Update operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdatering mislyktes</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="224"/>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="97"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="95"/>
         <source>Update operation failed, unexpected metadata</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdatering mislyktes, uventede metadata</translation>
     </message>
     <message>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="72"/>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="79"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="74"/>
         <source>Update operation complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdatering fullført</translation>
     </message>
     <message>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="95"/>
         <source>Update operation failed, filetype not supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdatering feilet, ikke støttet filtype</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="144"/>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="109"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="29"/>
         <source>File does not seem to be supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Det ser ikke ut til at filen støttes</translation>
     </message>
 </context>
 </TS>
