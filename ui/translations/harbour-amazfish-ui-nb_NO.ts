@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/AddCityPage.qml" line="8"/>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Angi sted</translation>
     </message>
 </context>
 <context>
@@ -15,49 +15,49 @@
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivert</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Man</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tirs</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ons</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tors</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fre</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lør</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Søn</translation>
     </message>
 </context>
 <context>
@@ -65,23 +65,23 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="8"/>
         <source>Analysis</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyser</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="44"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjerterytme</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="61"/>
         <location filename="../qml/pages/AnalysisPage.qml" line="64"/>
         <source>Steps</source>
-        <translation type="unfinished">Skritt</translation>
+        <translation>Skritt</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="78"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensitet</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../qml/pages/AuthKeyDialog.qml" line="18"/>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv inn autentiseringsnøkkel</translation>
     </message>
 </context>
 <context>
@@ -108,7 +108,7 @@
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="25"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -137,17 +137,17 @@
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="53"/>
         <source>File not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen støttes ikke på denne enheten</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="7"/>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer fil</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="22"/>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg filen som skal installeres.</translation>
     </message>
 </context>
 <context>
@@ -155,7 +155,7 @@
     <message>
         <location filename="../src/daemoninterface.cpp" line="65"/>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>Uventet feil</translation>
     </message>
 </context>
 <context>
@@ -163,7 +163,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="16"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="36"/>
@@ -180,13 +180,13 @@
         <location filename="../qml/pages/DebugInfo.qml" line="46"/>
         <location filename="../qml/pages/DebugInfo.qml" line="295"/>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Mmaskinvareversjon: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="51"/>
         <location filename="../qml/pages/DebugInfo.qml" line="298"/>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>Programvareversjon: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="70"/>
@@ -202,22 +202,22 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="195"/>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Testvarsel</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="204"/>
         <source>Test Email</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Test e-post</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="213"/>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>Test anrop</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="231"/>
         <source>Fetch debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>Hent feilsøkingsloggen</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="248"/>
@@ -227,7 +227,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="8"/>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>Feilsøking</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="32"/>
@@ -250,7 +250,7 @@
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
         <location filename="../qml/pages/DebugInfo.qml" line="307"/>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>Produsent: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="191"/>
@@ -286,7 +286,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Tittel</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
@@ -296,12 +296,12 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Donald Duck</source>
-        <translation type="unfinished"></translation>
+        <translation>Donald Duck</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallo, dette er en e-post fra Sailfish OS!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="222"/>
@@ -416,27 +416,27 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="97"/>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Avslappet</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="106"/>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Lett</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="115"/>
         <source>Intensive</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensivt</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="124"/>
         <source>Aerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Aerob</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="133"/>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>Anaerob</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="142"/>
@@ -458,7 +458,7 @@
         <location filename="../qml/tools/JSTools.js" line="302"/>
         <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjerterytme</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="90"/>
@@ -466,7 +466,7 @@
         <location filename="../qml/tools/JSTools.js" line="304"/>
         <location filename="../qml/tools/JSTools.js" line="305"/>
         <source>Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="92"/>
@@ -491,7 +491,7 @@
     <message>
         <location filename="../qml/tools/JSTools.js" line="96"/>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Pause</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="97"/>
@@ -505,42 +505,42 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Koble til enhet</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen enheter funnet</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth-adapteret er ikke tilgjengelig</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="211"/>
         <source>Select device type</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg type enhet</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>Stopp skanning</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="233"/>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Skann for enheter</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="247"/>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>Skanner for enheter…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="249"/>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>Kobler sammen…</translation>
     </message>
 </context>
 <context>
@@ -553,12 +553,12 @@
     <message>
         <location filename="../src/timeformatter.cpp" line="35"/>
         <source>%1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1m %2s</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="39"/>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1t %2m %3s</translation>
     </message>
 </context>
 <context>
@@ -604,7 +604,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="102"/>
         <source>Notify on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsle ved tilkobling</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="238"/>
@@ -732,7 +732,7 @@
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="79"/>
         <source>No Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen handling</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="80"/>
@@ -770,27 +770,27 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="24"/>
         <source>en_US</source>
-        <translation type="unfinished"></translation>
+        <translation>en_US</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="25"/>
         <source>es_ES</source>
-        <translation type="unfinished"></translation>
+        <translation>es_ES</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="26"/>
         <source>zh_CN</source>
-        <translation type="unfinished"></translation>
+        <translation>zh_CN</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="27"/>
         <source>zh_TW</source>
-        <translation type="unfinished"></translation>
+        <translation>zh_TW</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="43"/>
         <source>Date Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Datovisning</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="46"/>
@@ -810,12 +810,12 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="61"/>
         <source>12hr</source>
-        <translation type="unfinished"></translation>
+        <translation>12t</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="60"/>
         <source>24hr</source>
-        <translation type="unfinished"></translation>
+        <translation>24t</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="115"/>
@@ -825,22 +825,22 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="71"/>
         <source>Distance Unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Avstandsenhet</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="74"/>
         <source>Metric</source>
-        <translation type="unfinished"></translation>
+        <translation>Metrisk</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="75"/>
         <source>Imperial</source>
-        <translation type="unfinished"></translation>
+        <translation>Imperial</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="28"/>
         <source>ru_RU</source>
-        <translation type="unfinished"></translation>
+        <translation>ru_RU</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="20"/>
@@ -850,32 +850,32 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="29"/>
         <source>de_DE</source>
-        <translation type="unfinished"></translation>
+        <translation>de_DE</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="30"/>
         <source>it_IT</source>
-        <translation type="unfinished"></translation>
+        <translation>it_IT</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="31"/>
         <source>fr_FR</source>
-        <translation type="unfinished"></translation>
+        <translation>fr_FR</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="32"/>
         <source>tr_TR</source>
-        <translation type="unfinished"></translation>
+        <translation>tr_TR</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="33"/>
         <source>nl_NL</source>
-        <translation type="unfinished"></translation>
+        <translation>nl_NL</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="86"/>
         <source>Disconnect Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsel om frakobling</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="104"/>
