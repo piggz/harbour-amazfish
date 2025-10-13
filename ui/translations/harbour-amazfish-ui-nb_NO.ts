@@ -1028,22 +1028,22 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="104"/>
         <source>Watch Face</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Klokkeskive</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="111"/>
         <source>Timer/Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Timer/stoppeklokke</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="114"/>
         <source>Goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Mål</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="115"/>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Søvn</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="116"/>
@@ -1053,17 +1053,17 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="117"/>
         <source>Events</source>
-        <translation type="unfinished"></translation>
+        <translation>Hendelser</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="118"/>
         <source>Widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Widgets</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="119"/>
         <source>Breathing</source>
-        <translation type="unfinished"></translation>
+        <translation>Pusting</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="120"/>
@@ -1083,7 +1083,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="123"/>
         <source>Pomodoro</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomodoro</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="125"/>
@@ -1093,17 +1093,17 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="126"/>
         <source>Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatur</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="127"/>
         <source>Barometer</source>
-        <translation type="unfinished"></translation>
+        <translation>Barometer</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="128"/>
         <source>Flashlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Lommelykt</translation>
     </message>
 </context>
 <context>
@@ -1174,7 +1174,7 @@
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="35"/>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Bursdag</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="63"/>
@@ -1282,12 +1282,12 @@
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="70"/>
         <source>Sleep Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Søvnoppsummering</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="9"/>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Søvn</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="74"/>
