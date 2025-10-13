@@ -49,12 +49,12 @@
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
         <source>Let&apos;s get moving! You&apos;ve taken only &lt;b&gt;%1&lt;/b&gt; steps so far.</source>
-        <translation type="unfinished"></translation>
+        <translation>La oss sette i gang! Du har bare tatt &lt;b&gt;%1&lt;/b&gt; skritt så langt.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="23"/>
         <source>Warming up! &lt;b&gt;%1&lt;/b&gt; steps done — keep going!</source>
-        <translation type="unfinished"></translation>
+        <translation>Varmer opp! &lt;b&gt;%1&lt;/b&gt; skritt fullført – fortsett!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="24"/>
