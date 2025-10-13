@@ -70,7 +70,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="44"/>
         <source>Heartrate</source>
-        <translation>Hjerterytme</translation>
+        <translation>Hjertefrekvens</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="61"/>
@@ -328,7 +328,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="27"/>
         <source>Pair with watch</source>
-        <translation type="unfinished"></translation>
+        <translation>Koble samme med klokke</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="43"/>
@@ -363,7 +363,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="219"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjertefrekvens</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="245"/>
@@ -378,12 +378,12 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="270"/>
         <source>Enable on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver ved oppstart</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="39"/>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer fil</translation>
     </message>
 </context>
 <context>
@@ -400,7 +400,7 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="9"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjertefrekvens</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="40"/>
@@ -458,7 +458,7 @@
         <location filename="../qml/tools/JSTools.js" line="302"/>
         <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Heartrate</source>
-        <translation>Hjerterytme</translation>
+        <translation>Hjertefrekvens</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="90"/>
@@ -908,7 +908,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="89"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjertefrekvens</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="90"/>
@@ -988,12 +988,12 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="124"/>
         <source>Alexa</source>
-        <translation type="unfinished"></translation>
+        <translation>Alexa</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="108"/>
         <source>Compass</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompass</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="103"/>
