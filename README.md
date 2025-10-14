@@ -12,5 +12,4 @@ Companion application for Huami Devices (such as Amazfit Bip, Cor, MiBand2/3 and
 * Run `devel-su pkcon install harbour-amazfish`
 
 <a href='https://open-store.io/app/uk.co.piggz.amazfish'><img width='240' alt='Download on OpenStore' src='https://open-store.io/badges/en_US.svg'/></a>
-<a href='https://flathub.org/apps/details/uk.co.piggz.amazfish'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
-
+<a href='https://flathub.org/apps/details/uk.co.piggz.amazfish'><img width='240' alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
