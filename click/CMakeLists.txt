@@ -18,6 +18,8 @@ else()
     set(CLICK_FRAMEWORK "ubuntu-sdk-20.04")
 endif()
 
+set(CLICK_FRAMEWORK_BASE "@CLICK_FRAMEWORK_BASE@") # CMake shouldn't replace this value in the configure_file macro; it should be replaced by Clickable.
+
 # This figures out the target architecture for use in the manifest file.
 if(DEFINED ENV{ARCH})
     set(CLICK_ARCH "$ENV{ARCH}")
