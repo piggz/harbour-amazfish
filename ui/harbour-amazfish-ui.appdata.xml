@@ -69,6 +69,17 @@
   </keywords>
   <content_rating type="oars-1.1"/>
   <releases>
+  <release version="2.8.0" timestamp="1760535988">
+    <description>
+    <p>Fixed compatibility with Ubuntu Touch 24.04 (separate version for noble).</p>
+    <p>Battery graph now shows the last recorded value.</p>
+    <p>Step graph scales dynamically based on maximum values.</p>
+    <p>Fixed notifications for GTS+ devices.</p>
+    <p>Fixed manual selection of device type on Ubuntu Touch.</p>
+    <p>Fixed missing Amazfit GTR3 icon in Qt resources.</p>
+    <p>Updated translations for Norwegian Bokmål, French, German, Russian, Ukrainian, and Czech.</p>
+    </description>
+  </release>
   <release version="2.7.0" timestamp="1751655030">
     <description>
         <p>Initial support for ZeppOS devices.  Tested with Balance and GTR3Pro</p>
