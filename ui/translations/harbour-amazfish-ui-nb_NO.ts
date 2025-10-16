@@ -1293,7 +1293,7 @@
         <location filename="../qml/pages/SleepPage.qml" line="74"/>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>MM/dd</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="75"/>
@@ -1336,7 +1336,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="360"/>
         <source>Active Seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktive sekunder</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="361"/>
