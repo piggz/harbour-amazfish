@@ -9,7 +9,7 @@
             "desktop":  "harbour-amazfish-ui.desktop"
         }
     },
-    "version": "2.7.0-@CLICK_FRAMEWORK_BASE@",
+    "version": "2.8.0-@CLICK_FRAMEWORK_BASE@",
     "maintainer": "Adam Pigg <adam@piggz.co.uk>",
     "framework" : "@CLICK_FRAMEWORK@"
 }
