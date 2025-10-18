@@ -1441,7 +1441,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="381"/>
         <source>Swim Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Svømmestil</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="382"/>
@@ -1451,27 +1451,27 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="383"/>
         <source>Max Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks. breddegrad</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="384"/>
         <source>Min Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. breddegrad</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="385"/>
         <source>Max Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks. lengdegrad</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="386"/>
         <source>Min Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. lengdegrad</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="387"/>
         <source>Max Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks. hastighet</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="388"/>
@@ -1491,7 +1491,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="396"/>
         <source>kcal</source>
-        <translation type="unfinished"></translation>
+        <translation>kcal</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="397"/>
@@ -1501,7 +1501,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="398"/>
         <source>seconds/m</source>
-        <translation type="unfinished"></translation>
+        <translation>sekunder/m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="399"/>
@@ -1511,12 +1511,12 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="400"/>
         <source>seconds/km</source>
-        <translation type="unfinished"></translation>
+        <translation>sekunder/km</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="401"/>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="402"/>
@@ -1545,12 +1545,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="14"/>
         <source>Download Next Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Last ned neste aktivitet</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="145"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern</translation>
     </message>
 </context>
 <context>
