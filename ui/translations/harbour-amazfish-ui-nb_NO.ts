@@ -291,7 +291,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallo fra Sailfish OS. Dette er en lang melding sendt via BLE!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
@@ -311,7 +311,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="252"/>
         <source>This is a test notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Dette er en testvarsling</translation>
     </message>
 </context>
 <context>
@@ -348,7 +348,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="47"/>
         <source>Data Graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>Datagrafer</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="156"/>
@@ -913,7 +913,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="90"/>
         <source>Workout</source>
-        <translation type="unfinished"></translation>
+        <translation>Trening</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="91"/>
@@ -933,7 +933,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="94"/>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikke forstyrr</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="95"/>
@@ -948,7 +948,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="101"/>
         <source>Mute Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Demp telefonen</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="105"/>
@@ -973,12 +973,12 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="110"/>
         <source>World Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Verdensklokke</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="112"/>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation>Stress</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="113"/>
@@ -1008,22 +1008,22 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="96"/>
         <source>Take Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bilde</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="98"/>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppeklokke</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="100"/>
         <source>Find Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Finn telefonen</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="102"/>
         <source>NFC</source>
-        <translation type="unfinished"></translation>
+        <translation>NFC</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="104"/>
@@ -1209,12 +1209,12 @@
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="97"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Venstre</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="98"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyre</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="113"/>
@@ -1224,12 +1224,12 @@
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="177"/>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>Mål (steg): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="184"/>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsel om treningsmål</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="194"/>
@@ -1249,7 +1249,7 @@
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="22"/>
         <source>Personal data</source>
-        <translation type="unfinished"></translation>
+        <translation>Personopplysninger</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="88"/>
@@ -1371,27 +1371,27 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="367"/>
         <source>Min Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. tempo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="368"/>
         <source>Max Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks. tempo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="369"/>
         <source>Average HR</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjennomsnittlig puls</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="370"/>
         <source>Average Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjennomsnittlig tempo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="371"/>
         <source>Average Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjennomsnittlig skrittlengde</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="372"/>
@@ -1622,7 +1622,7 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="55"/>
         <source>Activity description for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitetsbeskrivelse for Strava</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="63"/>
