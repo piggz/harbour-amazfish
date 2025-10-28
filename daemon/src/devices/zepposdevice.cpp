@@ -184,8 +184,15 @@ void ZeppOSDevice::authenticated(bool ready)
 void ZeppOSDevice::ready()
 {
     setConnectionState("authenticated");
+    if (m_supportedServices.end() != m_supportedServices.find(m_timeService->endpoint())) {
+        m_timeService->setTime();
+    } else {
+        MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+        if (mi) {
+            mi->setCurrentTime();
+        }
+    }
 
-    m_timeService->setTime();
     m_stepsService->enableRealtimeSteps(true);
 }
 

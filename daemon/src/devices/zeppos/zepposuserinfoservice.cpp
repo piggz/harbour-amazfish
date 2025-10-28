@@ -9,7 +9,7 @@ ZeppOsUserInfoService::ZeppOsUserInfoService(ZeppOSDevice *device) : AbstractZep
 
 QString ZeppOsUserInfoService::name() const
 {
-    return "time";
+    return "userinfo";
 }
 
 void ZeppOsUserInfoService::handlePayload(const QByteArray &payload)
