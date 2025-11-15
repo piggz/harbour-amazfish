@@ -124,6 +124,10 @@ void CurrentWeather::handleCurrent(const QByteArray &reply)
     m_minTemperature = main.value("temp_min").toDouble();
     m_maxTemperature = main.value("temp_max").toDouble();
     m_humidity = main.value("humidity").toDouble();
+
+    QJsonObject sys = object.value("sys").toObject();
+    m_sunrise = sys.value("sunrise").toInt(0);
+    m_sunset = sys.value("sunset").toInt(0);
 }
 
 void CurrentWeather::handleForecast(const QByteArray &reply)
@@ -364,6 +368,16 @@ qreal CurrentWeather::maxTemperature() const
 qlonglong CurrentWeather::dateTime() const
 {
     return m_dateTime;
+}
+
+qlonglong CurrentWeather::sunrise() const
+{
+    return m_sunrise;
+}
+
+qlonglong CurrentWeather::sunset() const
+{
+    return m_sunset;
 }
 
 QString CurrentWeather::description() const
