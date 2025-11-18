@@ -998,7 +998,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="103"/>
         <source>AliPay</source>
-        <translation type="unfinished">AliPay</translation>
+        <translation>AliPay</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="99"/>
