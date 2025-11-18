@@ -505,42 +505,42 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation type="unfinished">وصل کردن افزاره</translation>
+        <translation>جفت کردن افزاره</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation type="unfinished">هیچ افزاره‌ای پیدا نشد</translation>
+        <translation>هیچ افزاره‌ای پیدا نشد</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished">سازوارگر بلوتوثی موجود نیست</translation>
+        <translation>سازوارگر بلوتوثی موجود نیست</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="211"/>
         <source>Select device type</source>
-        <translation type="unfinished"></translation>
+        <translation>گزینش گونهٔ افزاره</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Stop scanning</source>
-        <translation type="unfinished">توقّف پویش</translation>
+        <translation>توقّف پویش</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="233"/>
         <source>Scan for devices</source>
-        <translation type="unfinished">پویش افزاره‌ها</translation>
+        <translation>پویش افزاره‌ها</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="247"/>
         <source>Scanning for devices…</source>
-        <translation type="unfinished">پوییدن افزاره‌ها…</translation>
+        <translation>پوییدن افزاره‌ها…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="249"/>
         <source>Pairing…</source>
-        <translation type="unfinished">حفت کردن…</translation>
+        <translation>حفت کردن…</translation>
     </message>
 </context>
 <context>
@@ -699,7 +699,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="94"/>
         <source>Set silent profile on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیم نماگر بی‌صدا هنگام وصل شدن</translation>
     </message>
 </context>
 <context>
@@ -1540,17 +1540,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="8"/>
         <source>Sports Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>فعّالیت‌های ورزشی</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="14"/>
         <source>Download Next Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>بارگیری فعّالیت بعدی</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="145"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>برداشتن</translation>
     </message>
 </context>
 <context>
