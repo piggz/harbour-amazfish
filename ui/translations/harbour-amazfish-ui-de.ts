@@ -875,7 +875,7 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="104"/>
         <source>Huami Display Items</source>
-        <translation>Huami-Ausstellungsstücke</translation>
+        <translation>Angezeigte Funktionen</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="33"/>
@@ -885,7 +885,7 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="96"/>
         <source>Realtime HRM measurement</source>
-        <translation>HRM-Messung in Echtzeit</translation>
+        <translation>Echtzeit HFM-Messung</translation>
     </message>
 </context>
 <context>
@@ -893,7 +893,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="10"/>
         <source>Huami Display Items</source>
-        <translation>Huami-Ausstellungsstücke</translation>
+        <translation>Angezeigte Funktionen</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="57"/>
@@ -1239,7 +1239,7 @@
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="204"/>
         <source>All day HRM interval (minutes): </source>
-        <translation>Ganztägiges HRM (Intervall in Minuten): </translation>
+        <translation>Ganztägige HFM (Intervall in Minuten): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="209"/>
@@ -1269,7 +1269,7 @@
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="117"/>
         <source>On</source>
-        <translation>Auf</translation>
+        <translation>An</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-profile.qml" line="118"/>
