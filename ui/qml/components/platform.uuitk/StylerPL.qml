@@ -92,7 +92,7 @@ QtObject {
     property string iconStop: "image://theme/media-playback-stop" //Qt.resolvedUrl("../../icons/media-playback-stop-symbolic.svg")
     property string iconUp: "image://theme/up"
     property string iconWebLink: "image://theme/stock_website" //Qt.resolvedUrl("../../icons/web-browser-symbolic.svg")
-
+    property string iconUpDown: "image://theme/sort-listitem" //Qt.resolvedUrl("../../icons/sort-listitem.svg")
     property string iconContact: "image://theme/preferences-desktop-accounts-symbolic"    // "User Settings"
     property string iconWatch: "image://theme/smartwatch-symbolic"                        // "Device settings"
     property string iconLevels: "image://theme/settings"                                  // "Application settings"
