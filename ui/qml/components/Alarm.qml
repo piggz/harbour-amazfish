@@ -36,7 +36,7 @@ Item {
             }
             ButtonPL {
                 id: button
-                text: "Time: " + pad(hour, 2) + ":" + pad(minute, 2)
+                text: qsTr("Time: %1:%2").arg(pad(hour, 2)).arg(pad(minute, 2))
 
                 onClicked: {
                     var dialog = pageStack.push(pickerComponent, {
