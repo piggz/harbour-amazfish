@@ -135,7 +135,8 @@ PageListPL {
             contentHeight: styler.themeItemSizeLarge
 
             onClicked: {
-                if (device.auth) {
+                let device_auth = (enforcedDeviceType !== undefined) ? enforcedDeviceType.auth : device.auth;
+                if (device_auth) {
                     var authdialog = app.pages.push(Qt.resolvedUrl("./AuthKeyDialog.qml"));
 
                     authdialog.accepted.connect(function() {
