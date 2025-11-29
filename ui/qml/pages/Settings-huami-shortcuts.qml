@@ -5,7 +5,7 @@ import QtQml.Models 2.1
 import "../components"
 import "../components/platform"
 
-PagePL {
+DialogListPL {
     id: page
     title: qsTr("Huami Display Items")
 
@@ -13,64 +13,45 @@ PagePL {
         id: displayItems
     }
 
-    Column
-    {
-        id: column
+    acceptText: qsTr("Save Settings")
+    onAccepted: {
+        saveDisplayItems();
+        saveSettings();
+    }
+
+    model: displayItems
+    delegate: DraggableItem {
         width: parent.width
-        anchors.top: parent.top
-        anchors.margins: styler.themePaddingMedium
-        spacing: styler.themePaddingLarge
-
-        ListView {
-            id: view
+        Item {
+            height: textSwitch.height * 1.5
             width: parent.width
-            height: page.height * 0.6
-            model: displayItems
-            spacing: 4
-            cacheBuffer: 50
-            clip: true
-            delegate: DraggableItem {
-                Item {
-                    height: textSwitch.height * 1.5
-                    width: view.width
 
-                    TextSwitchPL {
-                        id: textSwitch
-                        text: itemText
-                        checked: itemVisible
-                        width: parent.width / 2
-                        y: (parent.height - height) / 2
-                        onCheckedChanged: {
-                            itemVisible = checked;
-                        }
-                    }
-                }
-                draggedItemParent: page
-                onMoveItemRequested: {
-                    displayItems.move(from, to, 1);
+            TextSwitchPL {
+                id: textSwitch
+                text: itemText
+                checked: itemVisible
+                width: parent.width / 2
+                y: (parent.height - height) / 2
+                onCheckedChanged: {
+                    itemVisible = checked;
                 }
             }
         }
-
-        ButtonPL {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("Save Settings")
-            onClicked: {
-                saveDisplayItems();
-                saveSettings();
-            }
+        draggedItemParent: parent
+        onMoveItemRequested: {
+            displayItems.move(from, to, 1);
         }
+    }
 
-        Timer {
-            //Allow data to sync
-            id: tmrSetDelay
-            repeat: false
-            interval: 500
-            running: false
-            onTriggered: {
-                DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_DISPLAY_ITEMS);
-                app.pages.pop();
-            }
+    Timer {
+        //Allow data to sync
+        id: tmrSetDelay
+        repeat: false
+        interval: 500
+        running: false
+        onTriggered: {
+            DaemonInterfaceInstance.applyDeviceSetting(Amazfish.SETTING_DEVICE_DISPLAY_ITEMS);
+            app.pages.pop();
         }
     }
 
