@@ -20,4 +20,5 @@ import QtQuick 2.0
 
 Column {
     width: parent.width
+    spacing: styler.themePaddingLarge
 }
