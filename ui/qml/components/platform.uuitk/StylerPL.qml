@@ -52,9 +52,9 @@ QtObject {
     property real themeButtonWidthMedium: units.gridUnit*22
 
     // icon sizes
-    property real themeIconSizeLarge: units.gridUnit*7
-    property real themeIconSizeMedium: units.gridUnit*5
-    property real themeIconSizeSmall: units.gridUnit*4
+    property real themeIconSizeLarge: units.gridUnit*6
+    property real themeIconSizeMedium: units.gridUnit*4
+    property real themeIconSizeSmall: units.gridUnit*2
 
     // used icons
     property string iconBluetooth: "image://theme/bluetooth-active"
