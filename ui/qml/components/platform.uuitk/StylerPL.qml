@@ -52,9 +52,9 @@ QtObject {
     property real themeButtonWidthMedium: units.gridUnit*22
 
     // icon sizes
-    property real themeIconSizeLarge: units.gridUnit*7
-    property real themeIconSizeMedium: units.gridUnit*5
-    property real themeIconSizeSmall: units.gridUnit*4
+    property real themeIconSizeLarge: units.gridUnit*6
+    property real themeIconSizeMedium: units.gridUnit*4
+    property real themeIconSizeSmall: units.gridUnit*2
 
     // used icons
     property string iconBluetooth: "image://theme/bluetooth-active"
@@ -92,7 +92,7 @@ QtObject {
     property string iconStop: "image://theme/media-playback-stop" //Qt.resolvedUrl("../../icons/media-playback-stop-symbolic.svg")
     property string iconUp: "image://theme/up"
     property string iconWebLink: "image://theme/stock_website" //Qt.resolvedUrl("../../icons/web-browser-symbolic.svg")
-
+    property string iconUpDown: "image://theme/sort-listitem" //Qt.resolvedUrl("../../icons/sort-listitem.svg")
     property string iconContact: "image://theme/preferences-desktop-accounts-symbolic"    // "User Settings"
     property string iconWatch: "image://theme/smartwatch-symbolic"                        // "Device settings"
     property string iconLevels: "image://theme/settings"                                  // "Application settings"
