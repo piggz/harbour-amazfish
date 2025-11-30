@@ -18,6 +18,12 @@
         <translation>Zapnuto</translation>
     </message>
     <message>
+        <location filename="../qml/components/Alarm.qml" line="39"/>
+        <location filename="../qml/components/Alarm.qml" line="39"/>
+        <source>Time: %1:%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <source>Mon</source>
@@ -101,12 +107,12 @@
     <name>BatteryPage</name>
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="9"/>
-        <location filename="../qml/pages/BatteryPage.qml" line="49"/>
+        <location filename="../qml/pages/BatteryPage.qml" line="48"/>
         <source>Battery</source>
         <translation>Baterie</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BatteryPage.qml" line="25"/>
+        <location filename="../qml/pages/BatteryPage.qml" line="24"/>
         <source>%1 %</source>
         <translation>%1 %</translation>
     </message>
@@ -351,32 +357,32 @@
         <translation>Datové grafy</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <location filename="../qml/pages/FirstPage.qml" line="155"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="161"/>
+        <location filename="../qml/pages/FirstPage.qml" line="160"/>
         <source>Steps</source>
         <translation>Kroky</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="219"/>
+        <location filename="../qml/pages/FirstPage.qml" line="218"/>
         <source>Heartrate</source>
         <translation>Puls</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="245"/>
+        <location filename="../qml/pages/FirstPage.qml" line="244"/>
         <source>%1 bpm</source>
         <translation>%1 tep/min</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="264"/>
+        <location filename="../qml/pages/FirstPage.qml" line="263"/>
         <source>Service</source>
         <translation>Služba</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="270"/>
+        <location filename="../qml/pages/FirstPage.qml" line="269"/>
         <source>Enable on boot</source>
         <translation>Povolit při startu</translation>
     </message>
@@ -389,8 +395,8 @@
 <context>
     <name>GraphData</name>
     <message>
-        <location filename="../qml/components/GraphData.qml" line="305"/>
-        <location filename="../qml/components/GraphData.qml" line="305"/>
+        <location filename="../qml/components/GraphData.qml" line="308"/>
+        <location filename="../qml/components/GraphData.qml" line="308"/>
         <source>No data</source>
         <translation>Žádná data</translation>
     </message>
@@ -518,27 +524,27 @@
         <translation>Adaptér bluetooth není k dispozici</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="211"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="210"/>
         <source>Select device type</source>
         <translation>Zvolit typ zařízení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="231"/>
         <source>Stop scanning</source>
         <translation>Zastavit hledání</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="233"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Scan for devices</source>
         <translation>Hledat zařízení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="247"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="246"/>
         <source>Scanning for devices…</source>
         <translation>Hledání zařízení…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/PairDevicePage.qml" line="249"/>
+        <location filename="../qml/pages/PairDevicePage.qml" line="248"/>
         <source>Pairing…</source>
         <translation>Párování…</translation>
     </message>
@@ -896,212 +902,212 @@
         <translation>Zobrazení položek Huami</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="57"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="16"/>
         <source>Save Settings</source>
         <translation>Uložit nastavení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="88"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="69"/>
         <source>Status</source>
         <translation>Stav</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="89"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="70"/>
         <source>Heartrate</source>
         <translation>Puls</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="90"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="71"/>
         <source>Workout</source>
         <translation>Cvičení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="91"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="72"/>
         <source>Weather</source>
         <translation>Počasí</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="92"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="73"/>
         <source>Notifications</source>
         <translation>Upozornění</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="93"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="74"/>
         <source>More</source>
         <translation>Více</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="94"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="75"/>
         <source>Do Not Disturb</source>
         <translation>Nevyrušovat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="95"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="76"/>
         <source>Alarms</source>
         <translation>Budíky</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="97"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="78"/>
         <source>Music</source>
         <translation>Hudba</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="101"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="82"/>
         <source>Mute Phone</source>
         <translation>Ztišit telefon</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="105"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="86"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="106"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="87"/>
         <source>Activity</source>
         <translation>Aktivita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="107"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="88"/>
         <source>Event Reminder</source>
         <translation>Připomínaní událostí</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="109"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="90"/>
         <source>PAI</source>
         <translation>PAI</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="110"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="91"/>
         <source>World Clock</source>
         <translation>Světový čas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="112"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="93"/>
         <source>Stress</source>
         <translation>Stres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="113"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="94"/>
         <source>Period</source>
         <translation>Doba</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="124"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="105"/>
         <source>Alexa</source>
         <translation>Alexa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="108"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="89"/>
         <source>Compass</source>
         <translation>Kompas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="103"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="84"/>
         <source>AliPay</source>
         <translation>AliPay</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="99"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="80"/>
         <source>Timer</source>
         <translation>Časovač</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="96"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="77"/>
         <source>Take Photo</source>
         <translation>Udělat fotku</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="98"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="79"/>
         <source>Stopwatch</source>
         <translation>Stopky</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="100"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="81"/>
         <source>Find Phone</source>
         <translation>Najít telefon</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="102"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="83"/>
         <source>NFC</source>
         <translation>NFC</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="104"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="85"/>
         <source>Watch Face</source>
         <translation>Ciferník</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="111"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="92"/>
         <source>Timer/Stopwatch</source>
         <translation>Minutka/Stopky</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="114"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="95"/>
         <source>Goal</source>
         <translation>Cíl</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="115"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="96"/>
         <source>Sleep</source>
         <translation>Spánek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="116"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="97"/>
         <source>SpO2</source>
         <translation>SpO2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="117"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="98"/>
         <source>Events</source>
         <translation>Události</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="118"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="99"/>
         <source>Widgets</source>
         <translation>Widgety</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="119"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="100"/>
         <source>Breathing</source>
         <translation>Dýchání</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="120"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="101"/>
         <source>Steps</source>
         <translation>Kroky</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="121"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="102"/>
         <source>Distance</source>
         <translation>Vzdálenost</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="122"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="103"/>
         <source>Calories</source>
         <translation>Kalorie</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="123"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="104"/>
         <source>Pomodoro</source>
         <translation>Pomodoro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="125"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="106"/>
         <source>Battery</source>
         <translation>Baterie</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="126"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="107"/>
         <source>Temperature</source>
         <translation>Teplota</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="127"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="108"/>
         <source>Barometer</source>
         <translation>Barometr</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="128"/>
+        <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="109"/>
         <source>Flashlight</source>
         <translation>Svítilna</translation>
     </message>
