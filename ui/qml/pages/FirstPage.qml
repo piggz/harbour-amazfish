@@ -187,18 +187,28 @@ PagePL {
 
                 LabelPL {
                     id: lblSteps
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: centerItem.top
+                    }
                     color: styler.themeHighlightColor
                     font.pixelSize: styler.themeFontSizeExtraLarge
                     verticalAlignment: Text.AlignVCenter
                     text: _InfoSteps.toLocaleString()
                 }
 
+                Item {
+                    id: centerItem
+                    width: 1
+                    height: 1
+                    anchors.centerIn: parent
+                }
+
                 LabelPL {
                     id: lblGoal
                     anchors {
                         horizontalCenter: parent.horizontalCenter
-                        top: lblSteps.bottom
+                        top: centerItem.bottom
                         topMargin: styler.themePaddingSmall
                     }
                     color: styler.themeSecondaryHighlightColor
