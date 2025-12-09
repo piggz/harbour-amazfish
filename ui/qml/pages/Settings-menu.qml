@@ -61,7 +61,7 @@ PageListPL {
 
         property bool completed: false
         Component.onCompleted: {
-            append({"icon": styler.iconContact, "name": qsTr("User Settings"), "url": "Settings-profile.qml"});
+            append({"icon": styler.iconContact, "name": qsTr("User Settings"), "url": "Settings-user.qml"});
             append({"icon": styler.iconWatch, "name": qsTr("Device Settings"), "url": "Settings-device.qml"});
             append({"icon": styler.iconLevels, "name": qsTr("Application Settings"), "url": "Settings-app.qml"});
             append({"icon": styler.iconAlarm, "name": qsTr("Alarms"), "url": "Settings-alarms.qml"});

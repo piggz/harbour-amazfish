@@ -16,7 +16,7 @@
         <file>qml/pages/Settings-button-action.qml</file>
         <file>qml/pages/Settings-device.qml</file>
         <file>qml/pages/Settings-menu.qml</file>
-        <file>qml/pages/Settings-profile.qml</file>
+        <file>qml/pages/Settings-user.qml</file>
         <file>qml/pages/SleepPage.qml</file>
         <file>qml/pages/SportPage.qml</file>
         <file>qml/pages/BatteryPage.qml</file>
