@@ -367,22 +367,22 @@
         <translation>படிகள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="218"/>
+        <location filename="../qml/pages/FirstPage.qml" line="228"/>
         <source>Heartrate</source>
         <translation>இதய துடிப்பு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="244"/>
+        <location filename="../qml/pages/FirstPage.qml" line="254"/>
         <source>%1 bpm</source>
         <translation>%1 பிபிஎம்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="263"/>
+        <location filename="../qml/pages/FirstPage.qml" line="273"/>
         <source>Service</source>
         <translation>பணி</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="269"/>
+        <location filename="../qml/pages/FirstPage.qml" line="279"/>
         <source>Enable on boot</source>
         <translation>துவக்கத்தில் இயக்கு</translation>
     </message>
@@ -1165,120 +1165,124 @@
     </message>
 </context>
 <context>
-    <name>Settings-profile</name>
+    <name>Settings-user</name>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="8"/>
         <source>Profile Settings</source>
-        <translation>சுயவிவர அமைப்புகள்</translation>
+        <translation type="vanished">சுயவிவர அமைப்புகள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="27"/>
-        <location filename="../qml/pages/Settings-profile.qml" line="28"/>
+        <location filename="../qml/pages/Settings-user.qml" line="27"/>
+        <location filename="../qml/pages/Settings-user.qml" line="28"/>
         <source>Name:</source>
         <translation>பெயர்:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="35"/>
+        <location filename="../qml/pages/Settings-user.qml" line="35"/>
         <source>Birthday</source>
         <translation>பிறந்த நாள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="63"/>
+        <location filename="../qml/pages/Settings-user.qml" line="63"/>
         <source>Gender</source>
         <translation>பாலினம்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="66"/>
+        <location filename="../qml/pages/Settings-user.qml" line="66"/>
         <source>Male</source>
         <translation>ஆண்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="67"/>
+        <location filename="../qml/pages/Settings-user.qml" line="67"/>
         <source>Female</source>
         <translation>பெண்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="76"/>
+        <location filename="../qml/pages/Settings-user.qml" line="76"/>
         <source>Height (cm): </source>
         <translation>உயரம் (முதல்வர்): </translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="84"/>
+        <location filename="../qml/pages/Settings-user.qml" line="84"/>
         <source>Weight (kg): </source>
         <translation>எடை (கிலோ): </translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="94"/>
+        <location filename="../qml/pages/Settings-user.qml" line="94"/>
         <source>Wear Location</source>
         <translation>இருப்பிடத்தை அணியுங்கள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="97"/>
+        <location filename="../qml/pages/Settings-user.qml" line="97"/>
         <source>Left</source>
         <translation>இடது</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="98"/>
+        <location filename="../qml/pages/Settings-user.qml" line="98"/>
         <source>Right</source>
         <translation>வலது</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="113"/>
+        <location filename="../qml/pages/Settings-user.qml" line="113"/>
         <source>Display on lift wrist</source>
         <translation>லிப்ட் மணிக்கட்டில் காண்பி</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="177"/>
+        <location filename="../qml/pages/Settings-user.qml" line="177"/>
         <source>Goal (steps): </source>
         <translation>இலக்கு (படிகள்): </translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="184"/>
+        <location filename="../qml/pages/Settings-user.qml" line="184"/>
         <source>Alert on fitness goal</source>
         <translation>உடற்பயிற்சி இலக்கு குறித்த எச்சரிக்கை</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="194"/>
+        <location filename="../qml/pages/Settings-user.qml" line="194"/>
         <source>Use HRM for Sleep Detection</source>
         <translation>தூக்கத்தைக் கண்டறிவதற்கு HRM ஐப் பயன்படுத்தவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="204"/>
+        <location filename="../qml/pages/Settings-user.qml" line="204"/>
         <source>All day HRM interval (minutes): </source>
         <translation>நாள் முழுவதும் HRM இடைவெளி (நிமிடங்கள்): </translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="209"/>
+        <location filename="../qml/pages/Settings-user.qml" line="209"/>
         <source>Save Profile</source>
         <translation>சுயவிவரத்தை சேமிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="22"/>
+        <location filename="../qml/pages/Settings-user.qml" line="22"/>
         <source>Personal data</source>
         <translation>தனிப்பட்ட செய்தி</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="88"/>
+        <location filename="../qml/pages/Settings-user.qml" line="8"/>
+        <source>User Settings</source>
+        <translation type="unfinished">பயனர் அமைப்புகள்</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-user.qml" line="88"/>
         <source>Personal preferences</source>
         <translation>தனிப்பட்ட விருப்பத்தேர்வுகள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="188"/>
+        <location filename="../qml/pages/Settings-user.qml" line="188"/>
         <source>Heartrate usage</source>
         <translation>இதய துடிப்பு பயன்பாடு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="116"/>
+        <location filename="../qml/pages/Settings-user.qml" line="116"/>
         <source>Off</source>
         <translation>அணை</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="117"/>
+        <location filename="../qml/pages/Settings-user.qml" line="117"/>
         <source>On</source>
         <translation>ஆன்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="118"/>
+        <location filename="../qml/pages/Settings-user.qml" line="118"/>
         <source>Schedule</source>
         <translation>அட்டவணை</translation>
     </message>

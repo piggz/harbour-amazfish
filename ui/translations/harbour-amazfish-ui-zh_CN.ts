@@ -372,22 +372,22 @@
         <translation type="unfinished">步数</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="218"/>
+        <location filename="../qml/pages/FirstPage.qml" line="228"/>
         <source>Heartrate</source>
         <translation type="unfinished">心率</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="244"/>
+        <location filename="../qml/pages/FirstPage.qml" line="254"/>
         <source>%1 bpm</source>
         <translation>%1bpm</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="263"/>
+        <location filename="../qml/pages/FirstPage.qml" line="273"/>
         <source>Service</source>
         <translation>服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="269"/>
+        <location filename="../qml/pages/FirstPage.qml" line="279"/>
         <source>Enable on boot</source>
         <translation>开机自启</translation>
     </message>
@@ -1165,120 +1165,124 @@
     </message>
 </context>
 <context>
-    <name>Settings-profile</name>
+    <name>Settings-user</name>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="8"/>
         <source>Profile Settings</source>
-        <translation>配置设置</translation>
+        <translation type="vanished">配置设置</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="22"/>
+        <location filename="../qml/pages/Settings-user.qml" line="8"/>
+        <source>User Settings</source>
+        <translation type="unfinished">用户设置</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-user.qml" line="22"/>
         <source>Personal data</source>
         <translation>个人数据</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="27"/>
-        <location filename="../qml/pages/Settings-profile.qml" line="28"/>
+        <location filename="../qml/pages/Settings-user.qml" line="27"/>
+        <location filename="../qml/pages/Settings-user.qml" line="28"/>
         <source>Name:</source>
         <translation>名称:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="35"/>
+        <location filename="../qml/pages/Settings-user.qml" line="35"/>
         <source>Birthday</source>
         <translation>生日</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="63"/>
+        <location filename="../qml/pages/Settings-user.qml" line="63"/>
         <source>Gender</source>
         <translation>性别</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="66"/>
+        <location filename="../qml/pages/Settings-user.qml" line="66"/>
         <source>Male</source>
         <translation>男</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="67"/>
+        <location filename="../qml/pages/Settings-user.qml" line="67"/>
         <source>Female</source>
         <translation>女</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="76"/>
+        <location filename="../qml/pages/Settings-user.qml" line="76"/>
         <source>Height (cm): </source>
         <translation>身高（厘米）:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="84"/>
+        <location filename="../qml/pages/Settings-user.qml" line="84"/>
         <source>Weight (kg): </source>
         <translation>体重（千克）:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="88"/>
+        <location filename="../qml/pages/Settings-user.qml" line="88"/>
         <source>Personal preferences</source>
         <translation>个人偏好</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="94"/>
+        <location filename="../qml/pages/Settings-user.qml" line="94"/>
         <source>Wear Location</source>
         <translation>穿戴位置</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="97"/>
+        <location filename="../qml/pages/Settings-user.qml" line="97"/>
         <source>Left</source>
         <translation>左手</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="98"/>
+        <location filename="../qml/pages/Settings-user.qml" line="98"/>
         <source>Right</source>
         <translation>右手</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="113"/>
+        <location filename="../qml/pages/Settings-user.qml" line="113"/>
         <source>Display on lift wrist</source>
         <translation>抬腕显示</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="116"/>
+        <location filename="../qml/pages/Settings-user.qml" line="116"/>
         <source>Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="117"/>
+        <location filename="../qml/pages/Settings-user.qml" line="117"/>
         <source>On</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="118"/>
+        <location filename="../qml/pages/Settings-user.qml" line="118"/>
         <source>Schedule</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="177"/>
+        <location filename="../qml/pages/Settings-user.qml" line="177"/>
         <source>Goal (steps): </source>
         <translation>目标（步数）:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="184"/>
+        <location filename="../qml/pages/Settings-user.qml" line="184"/>
         <source>Alert on fitness goal</source>
         <translation>健身目标提醒</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="188"/>
+        <location filename="../qml/pages/Settings-user.qml" line="188"/>
         <source>Heartrate usage</source>
         <translation>心率使用</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="194"/>
+        <location filename="../qml/pages/Settings-user.qml" line="194"/>
         <source>Use HRM for Sleep Detection</source>
         <translation>使用 HRM 进行睡眠监测</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="204"/>
+        <location filename="../qml/pages/Settings-user.qml" line="204"/>
         <source>All day HRM interval (minutes): </source>
         <translation>全天 HRM 间隔（分钟）:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="209"/>
+        <location filename="../qml/pages/Settings-user.qml" line="209"/>
         <source>Save Profile</source>
         <translation>保存配置</translation>
     </message>

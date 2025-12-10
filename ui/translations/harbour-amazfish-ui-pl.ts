@@ -367,22 +367,22 @@
         <translation type="unfinished">Kroki</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="218"/>
+        <location filename="../qml/pages/FirstPage.qml" line="228"/>
         <source>Heartrate</source>
         <translation type="unfinished">Tętno</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="244"/>
+        <location filename="../qml/pages/FirstPage.qml" line="254"/>
         <source>%1 bpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="263"/>
+        <location filename="../qml/pages/FirstPage.qml" line="273"/>
         <source>Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="269"/>
+        <location filename="../qml/pages/FirstPage.qml" line="279"/>
         <source>Enable on boot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1165,120 +1165,124 @@
     </message>
 </context>
 <context>
-    <name>Settings-profile</name>
+    <name>Settings-user</name>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="8"/>
         <source>Profile Settings</source>
-        <translation>Ustawienia profili</translation>
+        <translation type="vanished">Ustawienia profili</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="27"/>
-        <location filename="../qml/pages/Settings-profile.qml" line="28"/>
+        <location filename="../qml/pages/Settings-user.qml" line="27"/>
+        <location filename="../qml/pages/Settings-user.qml" line="28"/>
         <source>Name:</source>
         <translation>Nazwa:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="35"/>
+        <location filename="../qml/pages/Settings-user.qml" line="35"/>
         <source>Birthday</source>
         <translation>Urodziny</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="63"/>
+        <location filename="../qml/pages/Settings-user.qml" line="63"/>
         <source>Gender</source>
         <translation>Płeć</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="66"/>
+        <location filename="../qml/pages/Settings-user.qml" line="66"/>
         <source>Male</source>
         <translation>męska</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="67"/>
+        <location filename="../qml/pages/Settings-user.qml" line="67"/>
         <source>Female</source>
         <translation>żeńska</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="76"/>
+        <location filename="../qml/pages/Settings-user.qml" line="76"/>
         <source>Height (cm): </source>
         <translation>Wzrost (cm): </translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="84"/>
+        <location filename="../qml/pages/Settings-user.qml" line="84"/>
         <source>Weight (kg): </source>
         <translation>Waga (kg): </translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="94"/>
+        <location filename="../qml/pages/Settings-user.qml" line="94"/>
         <source>Wear Location</source>
         <translation>Miejsce noszenia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="97"/>
+        <location filename="../qml/pages/Settings-user.qml" line="97"/>
         <source>Left</source>
         <translation>Lewa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="98"/>
+        <location filename="../qml/pages/Settings-user.qml" line="98"/>
         <source>Right</source>
         <translation>Prawa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="113"/>
+        <location filename="../qml/pages/Settings-user.qml" line="113"/>
         <source>Display on lift wrist</source>
         <translation>Włącz ekran przy ruchu nadgarstkiem</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="177"/>
+        <location filename="../qml/pages/Settings-user.qml" line="177"/>
         <source>Goal (steps): </source>
         <translation>Cel (kroki): </translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="184"/>
+        <location filename="../qml/pages/Settings-user.qml" line="184"/>
         <source>Alert on fitness goal</source>
         <translation>Alarm celu fitnesu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="194"/>
+        <location filename="../qml/pages/Settings-user.qml" line="194"/>
         <source>Use HRM for Sleep Detection</source>
         <translation>Użyj HRM dla detekcji snu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="204"/>
+        <location filename="../qml/pages/Settings-user.qml" line="204"/>
         <source>All day HRM interval (minutes): </source>
         <translation>Interwał HRM na cały dzień (minuty): </translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="209"/>
+        <location filename="../qml/pages/Settings-user.qml" line="209"/>
         <source>Save Profile</source>
         <translation>Zapisz profil</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="22"/>
+        <location filename="../qml/pages/Settings-user.qml" line="22"/>
         <source>Personal data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="88"/>
+        <location filename="../qml/pages/Settings-user.qml" line="8"/>
+        <source>User Settings</source>
+        <translation type="unfinished">Ustawienia użytkownika</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-user.qml" line="88"/>
         <source>Personal preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="188"/>
+        <location filename="../qml/pages/Settings-user.qml" line="188"/>
         <source>Heartrate usage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="116"/>
+        <location filename="../qml/pages/Settings-user.qml" line="116"/>
         <source>Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="117"/>
+        <location filename="../qml/pages/Settings-user.qml" line="117"/>
         <source>On</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-profile.qml" line="118"/>
+        <location filename="../qml/pages/Settings-user.qml" line="118"/>
         <source>Schedule</source>
         <translation type="unfinished"></translation>
     </message>
