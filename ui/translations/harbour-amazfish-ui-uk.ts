@@ -1259,7 +1259,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="8"/>
         <source>User Settings</source>
-        <translation type="unfinished">Налаштування користувача</translation>
+        <translation>Налаштування користувача</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="88"/>
