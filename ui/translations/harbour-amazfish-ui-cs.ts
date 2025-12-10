@@ -1204,7 +1204,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="8"/>
         <source>User Settings</source>
-        <translation type="unfinished">Uživatelská nastavení</translation>
+        <translation>Uživatelská nastavení</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="67"/>
