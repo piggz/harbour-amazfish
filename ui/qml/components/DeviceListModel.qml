@@ -66,7 +66,7 @@ ListModel {
         deviceType: "Amazfit GTR 2"
         icon: "../pics/devices/amazfit-gtr2.png"
         auth: true
-        pattern: "^Amazfit GTR 2$"
+        pattern: "^Amazfit GTR 2e?$"
     }
 
     ListElement {
