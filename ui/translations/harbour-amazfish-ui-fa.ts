@@ -21,7 +21,7 @@
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <source>Time: %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان:‪ %1:%2‬</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="92"/>
@@ -1259,7 +1259,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="8"/>
         <source>User Settings</source>
-        <translation type="unfinished">تنظیمات کاربری</translation>
+        <translation>تنظیمات کاربری</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="88"/>
