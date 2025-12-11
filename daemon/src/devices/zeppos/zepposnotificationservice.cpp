@@ -1,6 +1,6 @@
 #include "zepposnotificationservice.h"
 #include "typeconversion.h"
-
+#include "zepposdevice.h"
 
 ZeppOsNotificationService::ZeppOsNotificationService(ZeppOSDevice *device) : AbstractZeppOsService(device, true)
 {
@@ -102,7 +102,7 @@ void ZeppOsNotificationService::sendAlert(const Amazfish::WatchNotification &not
     cmd += NOTIFICATION_SUBCMD_SHOW;
 
     //Application ID
-    cmd += notification.appId.isEmpty() ? "uk.co.piggz.amazfish" : notification.appId;
+    cmd += notification.appId.isEmpty() ? "uk.co.piggz.amazfish" : notification.appId.toLocal8Bit();
     cmd += (uint8_t)0x00;
 
     //TODO Sender
@@ -120,7 +120,7 @@ void ZeppOsNotificationService::sendAlert(const Amazfish::WatchNotification &not
     cmd += (uint8_t)0x00;
 
     //Sending application
-    cmd += notification.appName.isEmpty() ? "Amazfish" : notification.appName;
+    cmd += notification.appName.isEmpty() ? "Amazfish" : notification.appName.toLocal8Bit();
     cmd += (uint8_t)0x00;
 
     //Has reply?

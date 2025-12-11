@@ -1,4 +1,3 @@
-
 #ifndef ABSTRACTDEVICE_H
 #define ABSTRACTDEVICE_H
 
@@ -132,7 +131,7 @@ public:
 
     Q_SIGNAL void operationRunningChanged();
 
-    bool operationRunning();
+    virtual bool operationRunning();
 
     //signals    
     Q_SIGNAL void message(const QString &text);

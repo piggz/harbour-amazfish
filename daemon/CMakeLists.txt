@@ -41,6 +41,7 @@ set(SOURCES
 ./src/devices/zeppos/huami2021chunkeddecoder.cpp
 ./src/devices/zeppos/zepposservicesservice.cpp
 ./src/devices/zeppos/zepposnotificationservice.cpp
+./src/devices/zeppos/zepposagpsservice.cpp
 ./src/devices/zeppos/zepposauthservice.cpp
 ./src/devices/zeppos/zepposbatteryservice.cpp
 ./src/devices/zeppos/zepposstepsservice.cpp
@@ -51,6 +52,9 @@ set(SOURCES
 ./src/devices/zeppos/zeppostimeservice.cpp
 ./src/devices/zeppos/zepposuserinfoservice.cpp
 ./src/devices/zeppos/picoproto.cpp
+./src/devices/zeppos/zepposfiletransferservice.cpp
+./src/devices/zeppos/filetransfer/zepposfiletransferimpl.cpp
+./src/devices/zeppos/filetransfer/zepposfiletransferv3.cpp
 ./src/harbour-amazfish-daemon.cpp
 ./src/huamiweathercondition.cpp
 ./src/navigationinterface.cpp
@@ -67,6 +71,8 @@ set(SOURCES
 ./src/operations/sportssummaryoperation.cpp
 ./src/operations/updatefirmwareoperation.cpp
 ./src/operations/updatefirmwareoperationnew.cpp
+./src/operations/zeppos/abstractzepposoperation.cpp
+./src/operations/zeppos/zepposagpsupdateoperation.cpp
 ./src/qaesencryption.cpp
 ./src/realtimeactivitysample.cpp
 ./src/services/abstractoperationservice.cpp
@@ -146,6 +152,7 @@ set(HEADERS
 ./src/devices/zeppos/huami2021chunkeddecoder.h
 ./src/devices/zeppos/zepposservicesservice.h
 ./src/devices/zeppos/zepposnotificationservice.h
+./src/devices/zeppos/zepposagpsservice.h
 ./src/devices/zeppos/zepposauthservice.h
 ./src/devices/zeppos/zepposbatteryservice.h
 ./src/devices/zeppos/zepposstepsservice.h
@@ -156,6 +163,9 @@ set(HEADERS
 ./src/devices/zeppos/zepposactivitydetailparser.h
 ./src/devices/zeppos/zeppostimeservice.h
 ./src/devices/zeppos/zepposuserinfoservice.h
+./src/devices/zeppos/zepposfiletransferservice.h
+./src/devices/zeppos/filetransfer/zepposfiletransferimpl.h
+./src/devices/zeppos/filetransfer/zepposfiletransferv3.h
 ./src/huamiweathercondition.h
 ./src/navigationinterface.h
 ./src/operations/abstractfetchoperation.h
@@ -171,6 +181,8 @@ set(HEADERS
 ./src/operations/sportssummaryoperation.h
 ./src/operations/updatefirmwareoperation.h
 ./src/operations/updatefirmwareoperationnew.h
+./src/operations/zeppos/abstractzepposoperation.h
+./src/operations/zeppos/zepposagpsupdateoperation.h
 ./src/qaesencryption.h
 ./src/realtimeactivitysample.h
 ./src/services/abstractoperationservice.h
@@ -205,7 +217,9 @@ set(HEADERS
 ./src/ecdh/ecdh.h
 )
 
-add_executable(harbour-amazfishd ${SOURCES} ${HEADERS})
+add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
+    src/devices/zepposfirmwareinfo.h src/devices/zepposfirmwareinfo.cpp
+)
 
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)

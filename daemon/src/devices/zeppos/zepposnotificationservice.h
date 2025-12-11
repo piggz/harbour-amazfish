@@ -2,6 +2,7 @@
 #define ZEPPOSNOTIFICATIONSERVICE_H
 
 #include "zeppos/abstractzepposservice.h"
+#include "amazfish.h"
 
 class ZeppOsNotificationService : public AbstractZeppOsService
 {
