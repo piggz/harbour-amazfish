@@ -18,6 +18,8 @@ public:
     static const char *UUID_SERVICE_FIRMWARE;
     static const char *UUID_CHARACTERISTIC_FIRMWARE;
     static const char *UUID_CHARACTERISTIC_FIRMWARE_DATA;
+    static const char *UUID_CHARACTERISTIC_ZEPP_OS_FILE_TRANSFER_V3_SEND;
+    static const char *UUID_CHARACTERISTIC_ZEPP_OS_FILE_TRANSFER_V3_RECEIVE;
 
     static constexpr uint8_t RESPONSE = 0x10;
     static constexpr uint8_t SUCCESS = 0x01;

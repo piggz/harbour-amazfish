@@ -3,6 +3,7 @@
 
 #include "zeppos/huami2021chunkeddecoder.h"
 #include "zeppos/huami2021chunkedencoder.h"
+#include "zeppos/zepposfiletransferservice.h"
 #include <huamidevice.h>
 
 class AbstractZeppOsService;
@@ -14,8 +15,11 @@ class ZeppOsBatteryService;
 class ZeppOsHeartRateService;
 class ZeppOsTimeService;
 class ZeppOsUserInfoService;
+class ZeppOsAgpsService;
+class ZeppOsFileTransferService;
+class AbstractZeppOsOperation;
 
-class ZeppOSDevice: public HuamiDevice, public Huami2021Handler
+class ZeppOSDevice: public HuamiDevice, public Huami2021Handler, public ZeppOsFileTransferService::Callback
 {
 public:
     ZeppOSDevice(const QString &pairedName, QObject *parent = nullptr);
@@ -24,6 +28,8 @@ public:
     int supportedFeatures() const override;
 
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
+    void startDownload() override;
 
     //Overrides from AbstractDevice
     void sendAlert(const Amazfish::WatchNotification &notification) override;
@@ -32,17 +38,25 @@ public:
     void requestManualHeartrate() const override;
     void applyDeviceSetting(Settings s) override;
 
-
     void writeToChunked2021(short endpoint, QByteArray data, bool encryptIgnored);
     AbstractZeppOsService *zosService(short endpoint) const;
     void addSupportedService(short endpoint, bool encryted);
     void handle2021Payload(short type, const QByteArray &data) override;
     Q_SLOT void authenticated(bool ready) override;
     void ready();
+    bool operationRunning() override;
+
+
     void setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey);
 
     AbstractActivitySummaryParser* activitySummaryParser() const override;
     AbstractActivityDetailParser *activityDetailParser() const override;
+
+
+    //File Transfer Callback Interface
+    void fileUploadFinish(bool success) override;
+    void fileUploadProgress(int progress) override;
+    void fileDownloadFinish(const QString &url, const QString &filename, const QByteArray &data) override;
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
@@ -63,12 +77,17 @@ private:
     ZeppOsHeartRateService *m_heartRateService = nullptr;
     ZeppOsTimeService *m_timeService = nullptr;
     ZeppOsUserInfoService *m_userInfoService = nullptr;
+    ZeppOsAgpsService *m_agpsService = nullptr;
+    ZeppOsFileTransferService *m_fileTransferService = nullptr;
 
 
     QMap<short, AbstractZeppOsService *> m_serviceMap;
     QSet<short> m_supportedServices;
 
+    AbstractZeppOsOperation *m_currentZosOperation = nullptr;
+
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 };
+
 
 #endif // ZEPPOSDEVICE_H

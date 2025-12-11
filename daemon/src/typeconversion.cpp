@@ -154,12 +154,24 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
     return QDateTime();
 }
 
-int toUint16(char val1, char val2) {
+uint16_t toUint16(char val1, char val2) {
     return (val1 & 0xff) | ((val2 & 0xff) << 8);
+}
+
+uint16_t toUint16(const QByteArray &arr, int &idx) {
+    uint16_t ret = toUint16(arr[idx], arr[idx+1]);
+    idx +=2;
+    return ret;
 }
 
 uint32_t toUint32(char val1, char val2, char val3, char val4) {
     return (val1 & 0xff) | ((val2 & 0xff) << 8) | ((val3 & 0xff) << 16) | ((val4 & 0xff) << 24);
+}
+
+uint32_t toUint32(const QByteArray &arr, int &idx) {
+    uint32_t ret = toUint32(arr[idx], arr[idx+1], arr[idx+2], arr[idx+3]);
+    idx +=4;
+    return ret;
 }
 
 long toUnsigned(int unsignedInt) {

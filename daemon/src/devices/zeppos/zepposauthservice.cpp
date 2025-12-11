@@ -3,6 +3,7 @@
 #include "ecdh/ecdh.h"
 #include "typeconversion.h"
 #include "amazfishconfig.h"
+#include "zepposdevice.h"
 
 #include <Qt-AES/qaesencryption.h>
 #include <iostream>

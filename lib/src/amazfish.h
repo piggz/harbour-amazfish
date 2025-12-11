@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QVariantMap>
+#include <zlib.h>
 
 //Container class for enums
 class Amazfish : public QObject {
@@ -85,6 +86,37 @@ public:
         }
     };
 
+    static int calculateCRC32(const QByteArray &bytes)
+    {
+        uint32_t crc = crc32(0L, Z_NULL, 0);
+
+        const char *b = bytes.data();
+        int len = bytes.length();
+
+        for (int i = 0; i < len; ++i)
+        {
+            crc = crc32(crc, (unsigned char*)b + i, 1);
+        }
+        return crc;
+    }
+
+    static QByteArray compressData(const QByteArray &data)
+    {
+        QByteArray compressedData = qCompress(data);
+        compressedData.remove(0, 4);
+
+        return compressedData;
+    }
+
+    static QByteArray unCompressData(const QByteArray &data)
+    {
+        QByteArray raw;
+        raw += QByteArray(4, (char)0x00);
+        raw += data;
+        QByteArray un = qUncompress(raw);
+
+        return un;
+    }
 
 };
 Q_DECLARE_METATYPE(Amazfish::Feature)

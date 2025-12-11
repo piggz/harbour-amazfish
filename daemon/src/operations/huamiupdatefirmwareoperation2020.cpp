@@ -2,7 +2,6 @@
 #include"typeconversion.h"
 #include "bipfirmwareservice.h"
 #include "mibandservice.h"
-#include "ecdh/ecdh.h"
 
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_REQUEST_PARAMETERS;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_START_FILE;
@@ -126,14 +125,14 @@ bool HuamiUpdateFirmwareOperation2020::sendFwInfo()
         if (m_fwBytes.startsWith(UCHARARR_TO_BYTEARRAY(HuamiFirmwareInfo::UIHH_HEADER))) {
 
             uint8_t watchfaceConfig[10] = {0x39, 0x00,
-                sizeBytes[0],
-                sizeBytes[1],
-                sizeBytes[2],
-                sizeBytes[3],
-                m_fwBytes[18],
-                m_fwBytes[19],
-                m_fwBytes[20],
-                m_fwBytes[21]
+                static_cast<uint8_t>(sizeBytes[0]),
+                static_cast<uint8_t>(sizeBytes[1]),
+                static_cast<uint8_t>(sizeBytes[2]),
+                static_cast<uint8_t>(sizeBytes[3]),
+                static_cast<uint8_t>(m_fwBytes[18]),
+                static_cast<uint8_t>(m_fwBytes[19]),
+                static_cast<uint8_t>(m_fwBytes[20]),
+                static_cast<uint8_t>(m_fwBytes[21])
             };
             m_mibandService->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, UCHARARR_TO_BYTEARRAY(watchfaceConfig));
         }
