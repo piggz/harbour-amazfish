@@ -137,7 +137,7 @@ void NeoDevice::parseServices()
 
 
 
-AbstractFirmwareInfo *NeoDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *NeoDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new NeoFirmwareInfo(bytes);
 }

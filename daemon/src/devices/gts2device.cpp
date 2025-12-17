@@ -33,7 +33,7 @@ QStringList Gts2Device::supportedDisplayItems() const
     return items;
 }
 
-AbstractFirmwareInfo *Gts2Device::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *Gts2Device::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new Gts2FirmwareInfo(bytes);
 }

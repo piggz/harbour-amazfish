@@ -102,7 +102,8 @@ public:
     virtual void abortOperations();
 
     //Firmware handling
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) = 0; //Caller owns the pointer and should delete it
+    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &fileName) = 0; //Caller owns the pointer and should delete it
+
     virtual void prepareFirmwareDownload(const AbstractFirmwareInfo* info);
     virtual void startDownload();
 

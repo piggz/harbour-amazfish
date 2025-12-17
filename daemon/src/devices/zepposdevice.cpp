@@ -397,7 +397,7 @@ void ZeppOSDevice::initialise()
     }
 }
 
-AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new ZeppOSFirmwareInfo(bytes);
 }

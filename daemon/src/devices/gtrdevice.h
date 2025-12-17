@@ -10,7 +10,7 @@ public:
     explicit GtrDevice(const QString &pairedName, QObject *parent = nullptr);
     QString deviceType() const override;
 
-    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
 protected:
     void initialise() override;

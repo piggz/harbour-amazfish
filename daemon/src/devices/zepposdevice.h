@@ -27,7 +27,7 @@ public:
     QString deviceType() const override;
     int supportedFeatures() const override;
 
-    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void startDownload() override;
 

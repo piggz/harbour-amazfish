@@ -10,7 +10,7 @@ QString Gtr2Device::deviceType() const
     return "amazfitgtr2";
 }
 
-AbstractFirmwareInfo *Gtr2Device::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *Gtr2Device::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new Gtr2FirmwareInfo(bytes);
 }

@@ -27,7 +27,7 @@ QString AsteroidOSDevice::deviceType() const
     return "asteroidos";
 }
 
-AbstractFirmwareInfo *AsteroidOSDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *AsteroidOSDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     qDebug() << Q_FUNC_INFO;
     return nullptr;

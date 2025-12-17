@@ -41,6 +41,7 @@ protected:
     uint32_t m_crc32;
     Type m_type;
     QString m_version;
+    QString m_fileName;
 
     void calculateCRC16();
     void calculateCRC32();
