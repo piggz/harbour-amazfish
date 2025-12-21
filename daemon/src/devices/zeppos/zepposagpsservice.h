@@ -16,7 +16,7 @@ public:
     public:
         virtual void agpsUploadStartResponse(bool success) = 0;
         virtual void agpsProgressResponse(int size, int progress) = 0;
-        virtual void agpsUpdateFinishResponse(bool success) = 0;
+        virtual void agpsUpdateFinishResponse(int status) = 0;
     };
 
     ZeppOsAgpsService(ZeppOSDevice *device);

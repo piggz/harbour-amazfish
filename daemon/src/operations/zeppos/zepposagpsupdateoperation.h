@@ -14,7 +14,7 @@ public:
     //AGPS Callback Interface
     void agpsUploadStartResponse(bool success) override;
     void agpsProgressResponse(int size, int progress) override;
-    void agpsUpdateFinishResponse(bool success) override;
+    void agpsUpdateFinishResponse(int status) override;
 
     //File Transfer Callback Interface
     void fileUploadFinish(bool success) override;

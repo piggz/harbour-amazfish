@@ -6,12 +6,14 @@
 class ZeppOSFirmwareInfo : public HuamiFirmwareInfo
 {
 public:
-    ZeppOSFirmwareInfo(const QByteArray &bytes);
+    ZeppOSFirmwareInfo(const QByteArray &bytes, const QString &path);
     bool supportedOnDevice(const QString &device) const override;
 
 private:
     void determineFirmwareType();
     void determineFirmwareVersion();
+    bool isEpoZip();
+    bool buildEpoUIHH();
 };
 
 #endif // ZEPPOSFIRMWAREINFO_H

@@ -34,6 +34,8 @@ set(SOURCES
 ./src/devices/pebbledevice.cpp
 ./src/devices/pinetimejfdevice.cpp
 ./src/devices/zepposdevice.cpp
+./src/devices/zepposfirmwareinfo.cpp
+./src/devices/uihhcontainer.cpp
 ./src/devices/abstractactivitydetailparser.cpp
 ./src/devices/huamiactivitysummaryparser.cpp
 ./src/devices/zeppos/abstractzepposservice.cpp
@@ -145,6 +147,8 @@ set(HEADERS
 ./src/devices/pebbledevice.h
 ./src/devices/pinetimejfdevice.h
 ./src/devices/zepposdevice.h
+./src/devices/zepposfirmwareinfo.h
+./src/devices/uihhcontainer.h
 ./src/devices/bipactivitydetailparser.h
 ./src/devices/huamiactivitysummaryparser.h
 ./src/devices/zeppos/abstractzepposservice.h
@@ -218,7 +222,6 @@ set(HEADERS
 )
 
 add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
-    src/devices/zepposfirmwareinfo.h src/devices/zepposfirmwareinfo.cpp
 )
 
 find_package(PkgConfig REQUIRED)

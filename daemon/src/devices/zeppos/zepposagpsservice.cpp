@@ -10,7 +10,7 @@ ZeppOsAgpsService::ZeppOsAgpsService(ZeppOSDevice *device) : AbstractZeppOsServi
 
 void ZeppOsAgpsService::handlePayload(const QByteArray &payload)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << payload.toHex();
 
     uint8_t status = payload[1];
 
@@ -40,7 +40,7 @@ void ZeppOsAgpsService::handlePayload(const QByteArray &payload)
     case CMD_UPDATE_FINISH_RESPONSE:
         qDebug() << "Got agps update finish status = " << status;
         if (m_callback) {
-            m_callback->agpsUpdateFinishResponse(status == 0x01);
+            m_callback->agpsUpdateFinishResponse(status);
         }
         break;
     default:

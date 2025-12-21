@@ -12,7 +12,7 @@ ZeppOsFileTransferV3::ZeppOsFileTransferV3(ZeppOsFileTransferService *fileTransf
 
 void ZeppOsFileTransferV3::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    qDebug() << Q_FUNC_INFO << characteristic;
+    qDebug() << Q_FUNC_INFO << characteristic << value.toHex();
 
     if (characteristic == BipFirmwareService::UUID_CHARACTERISTIC_ZEPP_OS_FILE_TRANSFER_V3_RECEIVE) {
         handleFileReceiveData(value);
@@ -26,7 +26,7 @@ void ZeppOsFileTransferV3::characteristicChanged(const QString &characteristic, 
         int chunkIndex = value[2] & 0xff;
         uint8_t unk1 = value[3]; // 1/2?
 
-        qDebug()<< "Band acknowledged file transfer data";
+        qDebug()<< "Band acknowledged file transfer data: chunk:" << chunkIndex;
 
         if (!m_currentSendRequest) {
             qDebug() << "Got ack for file send, but we are not uploading";
@@ -177,7 +177,7 @@ void ZeppOsFileTransferV3::handleFileDownloadRequest(uint8_t session, Request *r
 
 void ZeppOsFileTransferV3::writeChunk(Request *request)
 {
-    qDebug() << Q_FUNC_INFO << request->chunkSize();
+    qDebug() << Q_FUNC_INFO << request->chunkSize() << request->progress();
 
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(m_device->service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (!fw) {
@@ -210,7 +210,7 @@ void ZeppOsFileTransferV3::writeChunk(Request *request)
 
     request->setProgress(request->progress() + chunk.length());
     request->setIndex(request->index() + 1);
-    request->callback()->fileUploadProgress(request->progress());
+    request->callback()->fileUploadProgress(request->progress() / (request->size() / 100.0));
 }
 
 void ZeppOsFileTransferV3::handleFileReceiveData(const QByteArray &payload)

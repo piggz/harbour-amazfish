@@ -399,7 +399,7 @@ void ZeppOSDevice::initialise()
 
 AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
-    return new ZeppOSFirmwareInfo(bytes);
+    return new ZeppOSFirmwareInfo(bytes, path);
 }
 
 void ZeppOSDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)

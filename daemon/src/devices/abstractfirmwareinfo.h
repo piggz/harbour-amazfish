@@ -34,6 +34,7 @@ public:
     uint32_t getCrc32() const;
     virtual bool supportedOnDevice(const QString &device) const = 0;
     QByteArray bytes() const;
+    QUrl path() const;
 
 protected:
     QByteArray m_bytes;
