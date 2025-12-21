@@ -88,15 +88,12 @@ public:
 
     static int calculateCRC32(const QByteArray &bytes)
     {
-        uint32_t crc = crc32(0L, Z_NULL, 0);
-
         const char *b = bytes.data();
         int len = bytes.length();
 
-        for (int i = 0; i < len; ++i)
-        {
-            crc = crc32(crc, (unsigned char*)b + i, 1);
-        }
+        int  crc = crc32(0L, Z_NULL, 0);
+        crc = crc32(crc, (const unsigned char*)b, len);
+
         return crc;
     }
 
