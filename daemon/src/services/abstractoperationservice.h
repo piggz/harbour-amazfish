@@ -19,7 +19,7 @@ public:
 
     Q_INVOKABLE virtual bool operationRunning();
     Q_SIGNAL void operationRunningChanged();
-    Q_SIGNAL void operationComplete(AbstractOperation* m_currentOperation);
+    Q_SIGNAL void operationComplete(AbstractOperation* operation);
 
 private:
     AbstractOperation* m_currentOperation = nullptr;

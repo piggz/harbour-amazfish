@@ -43,6 +43,7 @@ void ZeppOsAgpsUpdateOperation::agpsUpdateFinishResponse(int status)
     if (status == 0x01) { //success
         //TODO nned to trigger config service update
         m_device->message(QIODevice::tr("AGPS update Ok"));
+        operationFinished();
     } else if (status == 0x10) { //corrupt file
         m_device->message(QIODevice::tr("AGPS File is corrupt"));
     } else if (status  == 0x11) {
@@ -50,7 +51,6 @@ void ZeppOsAgpsUpdateOperation::agpsUpdateFinishResponse(int status)
     } else {
         m_device->message(QIODevice::tr("Unknown error sending AGPS file"));
     }
-
 }
 
 void ZeppOsAgpsUpdateOperation::fileUploadFinish(bool success)

@@ -87,6 +87,7 @@ private:
     AbstractZeppOsOperation *m_currentZosOperation = nullptr;
 
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
+    Q_SLOT void zopOperationComplete();
 };
 
 

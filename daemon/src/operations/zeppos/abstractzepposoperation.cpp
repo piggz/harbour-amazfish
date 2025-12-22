@@ -14,4 +14,5 @@ void AbstractZeppOsOperation::perform()
 void AbstractZeppOsOperation::operationFinished()
 {
     qDebug() << Q_FUNC_INFO;
+    emit operationComplete();
 }

@@ -1,11 +1,16 @@
 #ifndef ABSTRACTZEPPOSOPERATION_H
 #define ABSTRACTZEPPOSOPERATION_H
 
-class AbstractZeppOsOperation
+#include <qobject.h>
+
+class AbstractZeppOsOperation : public QObject
 {
+    Q_OBJECT
 public:
     AbstractZeppOsOperation();
     void perform();
+
+    Q_SIGNAL void operationComplete();
 
 protected:
     virtual void doPerform() = 0;

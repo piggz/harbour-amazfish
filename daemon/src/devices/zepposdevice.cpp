@@ -344,6 +344,15 @@ void ZeppOSDevice::characteristicChanged(const QString &characteristic, const QB
     }
 }
 
+void ZeppOSDevice::zopOperationComplete()
+{
+    if (m_currentZosOperation) {
+        qDebug() << "Deleting current operation";
+        delete m_currentZosOperation;
+        m_currentZosOperation = nullptr;
+    }
+}
+
 void ZeppOSDevice::initialise()
 {
     qDebug() << Q_FUNC_INFO;
@@ -423,6 +432,7 @@ void ZeppOSDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
         }
 
         m_currentZosOperation = new ZeppOsAgpsUpdateOperation(this, info->bytes(), agps, m_fileTransferService);
+        connect(m_currentZosOperation, &AbstractZeppOsOperation::operationComplete, this, &ZeppOSDevice::zopOperationComplete, Qt::UniqueConnection);
         emit operationRunningChanged();
 
     }
