@@ -353,6 +353,7 @@ void ZeppOsFileTransferV3::onUploadFinish(bool success)
 void ZeppOsFileTransferV3::resetSend()
 {
     m_currentSendSession = -1;
+    delete m_currentSendRequest;
     m_currentSendRequest = nullptr;
     m_lastSendActivityMillis = -1;
 }
@@ -360,6 +361,7 @@ void ZeppOsFileTransferV3::resetSend()
 void ZeppOsFileTransferV3::resetReceive()
 {
     m_currentReceiveSession = -1;
+    delete m_currentSendRequest;
     m_currentReceiveRequest = nullptr;
     m_lastReceiveActivityMillis = -1;
     m_currentReceiveChunkIsLast = false;
