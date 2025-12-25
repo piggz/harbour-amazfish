@@ -11,7 +11,7 @@ public:
 
     QString deviceType() const override;
 
-    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
 private:
     void initialise() override;

@@ -25,7 +25,7 @@ public:
 
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void startDownload() override;
-    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
     //Music
     void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0) override;

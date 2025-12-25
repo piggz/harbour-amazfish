@@ -253,7 +253,7 @@ void BangleJSDevice::authenticated(bool ready)
     }
 }
 
-AbstractFirmwareInfo *BangleJSDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *BangleJSDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     qDebug() << Q_FUNC_INFO;
     return nullptr;

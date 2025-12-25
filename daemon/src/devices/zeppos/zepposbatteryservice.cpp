@@ -1,4 +1,5 @@
 #include "zepposbatteryservice.h"
+#include "zepposdevice.h"
 
 ZeppOsBatteryService::ZeppOsBatteryService(ZeppOSDevice *device) : AbstractZeppOsService(device, false)
 {

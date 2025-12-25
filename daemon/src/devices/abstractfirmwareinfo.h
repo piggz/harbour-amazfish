@@ -34,6 +34,7 @@ public:
     uint32_t getCrc32() const;
     virtual bool supportedOnDevice(const QString &device) const = 0;
     QByteArray bytes() const;
+    QUrl path() const;
 
 protected:
     QByteArray m_bytes;
@@ -41,6 +42,7 @@ protected:
     uint32_t m_crc32;
     Type m_type;
     QString m_version;
+    QString m_fileName;
 
     void calculateCRC16();
     void calculateCRC32();

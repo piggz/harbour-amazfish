@@ -798,7 +798,7 @@ QString DeviceInterface::prepareFirmwareDownload(const QString &path)
         if (!file.open(QIODevice::ReadOnly)) {
             return QString();
         }
-        m_firmwareInfo = m_device->firmwareInfo(file.readAll());
+        m_firmwareInfo = m_device->firmwareInfo(file.readAll(), path);
         if (m_firmwareInfo == nullptr) {
             qWarning() << "m_firmwareInfo is NULL";
             return QString();

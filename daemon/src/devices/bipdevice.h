@@ -88,7 +88,7 @@ public:
     QStringList supportedDisplayItems() const override;
     void applyDeviceSetting(AbstractDevice::Settings s) override;
 
-    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
     void sendWeather(CurrentWeather *weather) override;
 

@@ -171,7 +171,7 @@ void GtsDevice::parseServices()
 
 
 
-AbstractFirmwareInfo *GtsDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *GtsDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new GtsFirmwareInfo(bytes);
 }
