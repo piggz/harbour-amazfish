@@ -53,6 +53,31 @@ bool ZeppOSFirmwareInfo::isEpoZip()
     return false;
 }
 
+bool ZeppOSFirmwareInfo::isBrmZip()
+{
+    qDebug() << Q_FUNC_INFO;
+    QDataStream in(&m_bytes, QIODevice::ReadOnly);
+    KCompressionDevice dev(in.device(), false, KCompressionDevice::CompressionType::None);
+    KZip zip(&dev);
+
+    if(!zip.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Cannot open the firmware archive";
+        return false;
+    }
+
+    const auto* root = zip.directory();
+    qDebug() << root->entries();
+
+    if (root->entries().contains("lto7dv5.brm")
+            && root->entries().contains("EPO_GAL_7.DAT") && root->entries().contains("EPO_GR_3.DAT")) {
+        qDebug() << "Archive looks like an EPO zip filer";
+        return true;
+    }
+
+    return false;
+}
+
 bool ZeppOSFirmwareInfo::buildEpoUIHH()
 {
     qDebug() << Q_FUNC_INFO;
@@ -93,6 +118,40 @@ bool ZeppOSFirmwareInfo::buildEpoUIHH()
     return true ;
 }
 
+bool ZeppOSFirmwareInfo::buildBrmUIHH()
+{
+    qDebug() << Q_FUNC_INFO;
+    QDataStream in(&m_bytes, QIODevice::ReadOnly);
+    KCompressionDevice dev(in.device(), false, KCompressionDevice::CompressionType::None);
+    KZip zip(&dev);
+
+    if(!zip.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Cannot open the firmware archive";
+        return false;
+    }
+
+    const auto* root = zip.directory();
+
+    UIHHContainer uih;
+
+    auto zipData = [root](const QString &entry) {
+        auto f = dynamic_cast<const KZipFileEntry*>(root->entry(entry));
+
+        if (!f) {
+            qDebug() << "File not found:" << entry << root->entries();
+            return QByteArray();
+        }
+        return f->data();
+    };
+
+    UIHHContainer::File brm("lto7dv5.brm", zipData("lto7dv5.brm"));
+    uih.addFile(brm);
+
+    m_bytes = uih.toRawBytes();
+    return true ;
+}
+
 void ZeppOSFirmwareInfo::determineFirmwareType()
 {
     qDebug() << Q_FUNC_INFO << "Determining firmware type";
@@ -101,7 +160,7 @@ void ZeppOSFirmwareInfo::determineFirmwareType()
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(AGPS_UIHH_HEADER))) {
         m_type = GPS_UIHH;
     } else if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(PKZIP_HEADER))) {
-        if (isEpoZip() && buildEpoUIHH()) {
+        if ((isEpoZip() && buildEpoUIHH()) || (isBrmZip() && buildBrmUIHH())) {
             m_type = GPS_UIHH;
         }
     } else if (path().fileName() == "lto7dv5.brm") {

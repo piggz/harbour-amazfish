@@ -13,7 +13,9 @@ private:
     void determineFirmwareType();
     void determineFirmwareVersion();
     bool isEpoZip();
+    bool isBrmZip();
     bool buildEpoUIHH();
+    bool buildBrmUIHH();
 };
 
 #endif // ZEPPOSFIRMWAREINFO_H
