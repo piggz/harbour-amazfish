@@ -135,7 +135,7 @@ PageListPL {
             contentHeight: styler.themeItemSizeLarge
 
             onClicked: {
-                let device_auth = (enforcedDeviceType !== undefined) ? enforcedDeviceType.auth : device.auth;
+                var device_auth = (enforcedDeviceType !== undefined) ? enforcedDeviceType.auth : device.auth;
 
                 _deviceName = model.FriendlyName;
                 _deviceType = (enforcedDeviceType !== undefined) ? enforcedDeviceType.deviceType : device.deviceType
