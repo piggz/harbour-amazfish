@@ -28,7 +28,7 @@ public:
 
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void startDownload() override;
-    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
     //Navigation
     void navigationRunning(bool running) override;

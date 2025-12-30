@@ -19,7 +19,7 @@ bool GtrDevice::is47mm(const QString &version) const
     return version >= "1.0.0.00" && version < "1.6.0.00";
 }
 
-AbstractFirmwareInfo *GtrDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *GtrDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new GtrFirmwareInfo(bytes);
 }

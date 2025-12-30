@@ -15,7 +15,7 @@ public:
     virtual void sendAlert(const Amazfish::WatchNotification &notification) override;
     virtual void incomingCall(const QString &caller) override;
     virtual void incomingCallEnded() override;
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
     virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0) override;
     virtual void requestScreenshot() override;
 

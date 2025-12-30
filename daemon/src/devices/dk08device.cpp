@@ -82,7 +82,7 @@ void DK08Device::incomingCallEnded() {
     qDebug() << Q_FUNC_INFO;
 }
 
-AbstractFirmwareInfo* DK08Device::firmwareInfo(const QByteArray &bytes) {
+AbstractFirmwareInfo* DK08Device::firmwareInfo(const QByteArray &bytes, const QString &path) {
     qDebug() << Q_FUNC_INFO;
     return nullptr;
 }

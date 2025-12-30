@@ -20,7 +20,7 @@ public:
     void sendWeather(CurrentWeather *weather) override;
 
 
-    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
     QString information(Info i) const override;
 

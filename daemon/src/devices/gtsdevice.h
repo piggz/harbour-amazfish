@@ -16,7 +16,7 @@ public:
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void applyDeviceSetting(Settings s) override;
 
-    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
     void sendWeather(CurrentWeather *weather) override;
     void enableFeature(AbstractDevice::Feature feature) override;

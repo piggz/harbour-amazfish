@@ -49,6 +49,11 @@ QByteArray AbstractFirmwareInfo::bytes() const
     return m_bytes;
 }
 
+QUrl AbstractFirmwareInfo::path() const
+{
+    return QUrl::fromLocalFile(m_fileName);
+}
+
 void AbstractFirmwareInfo::calculateCRC32()
 {
     uint32_t crc = crc32(0L, Z_NULL, 0);
