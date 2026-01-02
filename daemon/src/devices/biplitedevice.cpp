@@ -28,6 +28,7 @@ void BipLiteDevice::initialise()
 
         connect(mi, &MiBandService::message, this, &BipDevice::message, Qt::UniqueConnection);
         connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
+        connect(mi, &AbstractOperationService::operationComplete, this, &HuamiDevice::operationComplete, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &BipLiteDevice::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
     }
