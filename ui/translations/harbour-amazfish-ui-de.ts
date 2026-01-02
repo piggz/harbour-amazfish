@@ -1224,7 +1224,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="113"/>
         <source>Display on lift wrist</source>
-        <translation>Beleuchtung an bei anheben des Handgelenks</translation>
+        <translation>Display an bei Heben der Hand</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="177"/>
