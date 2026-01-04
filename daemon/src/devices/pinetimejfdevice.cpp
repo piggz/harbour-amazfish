@@ -321,7 +321,7 @@ void PinetimeJFDevice::authenticated(bool ready)
     }
 }
 
-AbstractFirmwareInfo *PinetimeJFDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *PinetimeJFDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new InfinitimeFirmwareInfo(bytes);
 }

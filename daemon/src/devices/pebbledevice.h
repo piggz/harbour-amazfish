@@ -16,7 +16,7 @@ public:
     virtual void incomingCall(const QString &caller) override;
     virtual void incomingCallEnded() override;
 
-   virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) override;
+   virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
    QString information(Info i) const override;
 

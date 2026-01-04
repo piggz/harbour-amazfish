@@ -2,7 +2,6 @@
 #include"typeconversion.h"
 #include "bipfirmwareservice.h"
 #include "mibandservice.h"
-#include "ecdh/ecdh.h"
 
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_REQUEST_PARAMETERS;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_START_FILE;
@@ -11,7 +10,6 @@ constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_START_TRANSFER;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::REPLY_UPDATE_PROGRESS;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_COMPLETE_TRANSFER;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_FINALIZE_UPDATE;
-
 
 HuamiUpdateFirmwareOperation2020::HuamiUpdateFirmwareOperation2020(const AbstractFirmwareInfo *info, QBLEService *service, QBLEService *mibandService, AbstractDevice *device) : UpdateFirmwareOperation(info, service, device), m_mibandService(mibandService)
 {
@@ -26,10 +24,10 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
         qDebug() << "Notifications should be 3, 6 or 11 bytes long.";
         return true;
     }
-    bool success = (value[2] == BipFirmwareService::SUCCESS) || ((value[1] == REPLY_UPDATE_PROGRESS) && value.length() == 6); // ugly
+    bool success = ((uint8_t)value[2] == BipFirmwareService::SUCCESS) || (((uint8_t)value[1] == REPLY_UPDATE_PROGRESS) && value.length() == 6); // ugly
 
-    if (value[0] == BipFirmwareService::RESPONSE && success) {
-        switch (value[1]) {
+    if ((uint8_t)value[0] == BipFirmwareService::RESPONSE && success) {
+        switch ((uint8_t)value[1]) {
         case COMMAND_REQUEST_PARAMETERS: {
             mChunkLength = TypeConversion::toInt16(value[4], value[5]);
             qDebug() << "got chunk length of " << mChunkLength;
@@ -126,14 +124,14 @@ bool HuamiUpdateFirmwareOperation2020::sendFwInfo()
         if (m_fwBytes.startsWith(UCHARARR_TO_BYTEARRAY(HuamiFirmwareInfo::UIHH_HEADER))) {
 
             uint8_t watchfaceConfig[10] = {0x39, 0x00,
-                sizeBytes[0],
-                sizeBytes[1],
-                sizeBytes[2],
-                sizeBytes[3],
-                m_fwBytes[18],
-                m_fwBytes[19],
-                m_fwBytes[20],
-                m_fwBytes[21]
+                static_cast<uint8_t>(sizeBytes[0]),
+                static_cast<uint8_t>(sizeBytes[1]),
+                static_cast<uint8_t>(sizeBytes[2]),
+                static_cast<uint8_t>(sizeBytes[3]),
+                static_cast<uint8_t>(m_fwBytes[18]),
+                static_cast<uint8_t>(m_fwBytes[19]),
+                static_cast<uint8_t>(m_fwBytes[20]),
+                static_cast<uint8_t>(m_fwBytes[21])
             };
             m_mibandService->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, UCHARARR_TO_BYTEARRAY(watchfaceConfig));
         }
@@ -183,8 +181,6 @@ bool HuamiUpdateFirmwareOperation2020::sendFirmwareDataChunk(int offset) {
     int packets = chunkLength / packetLength;
     int chunkProgress = 0;
     int progressPercent = 0;
-
-    BipFirmwareService *serv = dynamic_cast<BipFirmwareService*>(m_service);
 
     if (remaining <= 0) {
         sendTransferComplete();

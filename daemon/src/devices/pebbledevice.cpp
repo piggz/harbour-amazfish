@@ -47,7 +47,7 @@ void PebbleDevice::incomingCallEnded() {
     qDebug() << Q_FUNC_INFO;
 }
 
-AbstractFirmwareInfo* PebbleDevice::firmwareInfo(const QByteArray &bytes) {
+AbstractFirmwareInfo* PebbleDevice::firmwareInfo(const QByteArray &bytes, const QString &path) {
     qDebug() << Q_FUNC_INFO;
     return nullptr;
 }

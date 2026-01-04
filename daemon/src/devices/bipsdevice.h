@@ -15,7 +15,7 @@ public:
 
     void applyDeviceSetting(Settings s) override;
 
-    AbstractFirmwareInfo* firmwareInfo(const QByteArray &bytes) override;
+    AbstractFirmwareInfo* firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
     void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration = 0, int position = 0) override;
 

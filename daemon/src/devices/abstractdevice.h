@@ -1,4 +1,3 @@
-
 #ifndef ABSTRACTDEVICE_H
 #define ABSTRACTDEVICE_H
 
@@ -103,7 +102,8 @@ public:
     virtual void abortOperations();
 
     //Firmware handling
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) = 0; //Caller owns the pointer and should delete it
+    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &fileName) = 0; //Caller owns the pointer and should delete it
+
     virtual void prepareFirmwareDownload(const AbstractFirmwareInfo* info);
     virtual void startDownload();
 
@@ -132,7 +132,7 @@ public:
 
     Q_SIGNAL void operationRunningChanged();
 
-    bool operationRunning();
+    virtual bool operationRunning();
 
     //signals    
     Q_SIGNAL void message(const QString &text);

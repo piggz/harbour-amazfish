@@ -3,6 +3,7 @@
 
 #include "zeppos/zepposactivitydetailparser.h"
 #include "zeppos/zepposactivitysummaryparser.h"
+#include "zeppos/zepposagpsupdateoperation.h"
 #include "zeppos/zepposauthservice.h"
 #include "zeppos/zepposservicesservice.h"
 #include "zeppos/zepposnotificationservice.h"
@@ -11,6 +12,8 @@
 #include "zeppos/zepposheartrateservice.h"
 #include "zeppos/zeppostimeservice.h"
 #include "zeppos/zepposuserinfoservice.h"
+#include "zeppos/zepposagpsservice.h"
+#include "zepposfirmwareinfo.h"
 
 #include <QtXml/QtXml>
 #include <QDebug>
@@ -49,6 +52,11 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
     m_userInfoService = new ZeppOsUserInfoService(this);
     m_serviceMap[m_userInfoService->endpoint()] = m_userInfoService;
 
+    m_agpsService = new ZeppOsAgpsService(this);
+    m_serviceMap[m_agpsService->endpoint()] = m_agpsService;
+
+    m_fileTransferService = new ZeppOsFileTransferService(this);
+    m_serviceMap[m_fileTransferService->endpoint()] = m_fileTransferService;
 }
 
 QString ZeppOSDevice::deviceType() const
@@ -67,11 +75,6 @@ int ZeppOSDevice::supportedFeatures() const
             FEATURE_EVENT_REMINDER |
             FEATURE_MUSIC_CONTROL |
             FEATURE_BUTTON_ACTION;
-}
-
-AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes)
-{
-    return nullptr;
 }
 
 void ZeppOSDevice::sendAlert(const Amazfish::WatchNotification &notification)
@@ -194,6 +197,20 @@ void ZeppOSDevice::ready()
     }
 
     m_stepsService->enableRealtimeSteps(true);
+
+    for (AbstractZeppOsService *service : m_serviceMap.values()) {
+        if (m_supportedServices.contains(service->endpoint())) {
+            // Only initialize supported services
+            service->initialize();
+        }
+    }
+}
+
+bool ZeppOSDevice::operationRunning()
+{
+    bool classicOperationRunning = AbstractDevice::operationRunning();
+
+    return classicOperationRunning || m_currentZosOperation;
 }
 
 void ZeppOSDevice::setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey)
@@ -210,6 +227,21 @@ AbstractActivitySummaryParser *ZeppOSDevice::activitySummaryParser() const
 AbstractActivityDetailParser *ZeppOSDevice::activityDetailParser() const
 {
     return new ZeppOsActivityDetailParser();
+}
+
+void ZeppOSDevice::fileUploadFinish(bool success)
+{
+    qDebug() << Q_FUNC_INFO << success;
+}
+
+void ZeppOSDevice::fileUploadProgress(int progress)
+{
+    qDebug() << Q_FUNC_INFO << progress;
+}
+
+void ZeppOSDevice::fileDownloadFinish(const QString &url, const QString &filename, const QByteArray &data)
+{
+    qDebug() << Q_FUNC_INFO << url << filename;
 }
 
 void ZeppOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
@@ -305,6 +337,19 @@ void ZeppOSDevice::characteristicChanged(const QString &characteristic, const QB
         m_heartRateService->handleHeartRate(value);
     } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO) {
         m_batteryService->handlePayload(value);
+    } else if (characteristic == BipFirmwareService::UUID_CHARACTERISTIC_ZEPP_OS_FILE_TRANSFER_V3_SEND) {
+        m_fileTransferService->characteristicChanged(characteristic, value);
+    } else if (characteristic == BipFirmwareService::UUID_CHARACTERISTIC_ZEPP_OS_FILE_TRANSFER_V3_RECEIVE) {
+        m_fileTransferService->characteristicChanged(characteristic, value);
+    }
+}
+
+void ZeppOSDevice::zopOperationComplete()
+{
+    if (m_currentZosOperation) {
+        qDebug() << "Deleting current operation";
+        delete m_currentZosOperation;
+        m_currentZosOperation = nullptr;
     }
 }
 
@@ -346,6 +391,7 @@ void ZeppOSDevice::initialise()
     if (fw) {
         connect(fw, &BipFirmwareService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
         connect(fw, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
+        connect(fw, &QBLEService::characteristicChanged, this, &ZeppOSDevice::characteristicChanged, Qt::UniqueConnection);
     }
 
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
@@ -357,5 +403,46 @@ void ZeppOSDevice::initialise()
     if (hrm) {
         connect(hrm, &HRMService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
         connect(hrm, &QBLEService::characteristicChanged, this, &ZeppOSDevice::characteristicChanged, Qt::UniqueConnection);
+    }
+}
+
+AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
+{
+    return new ZeppOSFirmwareInfo(bytes, path);
+}
+
+void ZeppOSDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
+{
+    qDebug() << Q_FUNC_INFO << info->type();
+
+    if (!info) {
+        return;
+    }
+
+    if (operationRunning()) {
+        emit message(tr("An operation is currently running, please try later"));
+        return;
+    }
+
+    if (info->type() == HuamiFirmwareInfo::GPS_UIHH) {
+        ZeppOsAgpsService *agps = dynamic_cast<ZeppOsAgpsService*>(zosService(m_agpsService->endpoint())); //Ensure we have an agps service
+        if (!agps) {
+            qDebug() << "No AGPS service";
+            return;
+        }
+
+        m_currentZosOperation = new ZeppOsAgpsUpdateOperation(this, info->bytes(), agps, m_fileTransferService);
+        connect(m_currentZosOperation, &AbstractZeppOsOperation::operationComplete, this, &ZeppOSDevice::zopOperationComplete, Qt::UniqueConnection);
+        emit operationRunningChanged();
+
+    }
+}
+
+void ZeppOSDevice::startDownload()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    if (m_currentZosOperation) {
+        m_currentZosOperation->perform();
     }
 }

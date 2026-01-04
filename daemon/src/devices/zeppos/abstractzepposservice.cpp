@@ -1,4 +1,5 @@
 #include "abstractzepposservice.h"
+#include "zepposdevice.h"
 
 short AbstractZeppOsService::endpoint() const
 {
@@ -14,6 +15,11 @@ void AbstractZeppOsService::setEncrypted(bool enc)
 {
     qDebug() << "Setting service " << m_endpoint << " encrypted " << enc;
     m_encrypted = enc;
+}
+
+void AbstractZeppOsService::initialize()
+{
+
 }
 
 void AbstractZeppOsService::write(const QByteArray &data)

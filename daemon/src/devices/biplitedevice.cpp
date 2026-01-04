@@ -111,7 +111,7 @@ void BipLiteDevice::parseServices()
     }
 }
 
-AbstractFirmwareInfo *BipLiteDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *BipLiteDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new BipLiteFirmwareInfo(bytes);
 }

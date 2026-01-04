@@ -1,8 +1,10 @@
 #ifndef ABSTRACTZEPPOSSERCICE_H
 #define ABSTRACTZEPPOSSERCICE_H
 
-#include "zepposdevice.h"
 #include <QByteArray>
+#include <QDebug>
+
+class ZeppOSDevice;
 
 class AbstractZeppOsService
 {
@@ -16,6 +18,8 @@ public:
     short endpoint() const;
     bool encrypted() const;
     void setEncrypted(bool enc);
+
+    virtual void initialize();
 
 protected:
     short m_endpoint = 0x0000;

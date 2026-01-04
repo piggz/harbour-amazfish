@@ -81,7 +81,7 @@ void BipDevice::sendWeather(CurrentWeather *weather)
     sendWeatherHuami(weather, (softwareRevision() > "V0.0.8.74"));
 }
 
-AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new BipFirmwareInfo(bytes);
 }

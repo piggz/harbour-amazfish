@@ -136,7 +136,7 @@ void BipSDevice::applyDeviceSetting(AbstractDevice::Settings s)
     }
 }
 
-AbstractFirmwareInfo *BipSDevice::firmwareInfo(const QByteArray &bytes)
+AbstractFirmwareInfo *BipSDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return nullptr;
 }
