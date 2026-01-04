@@ -21,7 +21,7 @@ void ZeppOsFileTransferService::handlePayload(const QByteArray &payload)
     }
     int version = payload[1] & 0xff;
     if (version == 1 || version == 2) {
-        //m_impl = new ZeppOsFileTransferV2(this, getSupport());
+        qDebug() << "Unsupported file transfer service version: " << version;
     } else if (version == 3) {
         m_impl = new ZeppOsFileTransferV3(this, m_device);
     } else {

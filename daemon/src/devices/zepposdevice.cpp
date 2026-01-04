@@ -231,17 +231,17 @@ AbstractActivityDetailParser *ZeppOSDevice::activityDetailParser() const
 
 void ZeppOSDevice::fileUploadFinish(bool success)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << success;
 }
 
 void ZeppOSDevice::fileUploadProgress(int progress)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << progress;
 }
 
 void ZeppOSDevice::fileDownloadFinish(const QString &url, const QString &filename, const QByteArray &data)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << url << filename;
 }
 
 void ZeppOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
@@ -413,7 +413,7 @@ AbstractFirmwareInfo *ZeppOSDevice::firmwareInfo(const QByteArray &bytes, const 
 
 void ZeppOSDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << info->type();
 
     if (!info) {
         return;

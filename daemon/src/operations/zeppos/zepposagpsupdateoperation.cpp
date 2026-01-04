@@ -75,5 +75,5 @@ void ZeppOsAgpsUpdateOperation::fileUploadProgress(int progress)
 
 void ZeppOsAgpsUpdateOperation::fileDownloadFinish(const QString &url, const QString &filename, const QByteArray &data)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << url << filename;
 }
