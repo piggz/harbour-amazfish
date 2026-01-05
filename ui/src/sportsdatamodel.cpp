@@ -59,7 +59,7 @@ QVariant SportsDataModel::data(const QModelIndex &index, int role) const
     case SportBaseLongitude:
         return item.baseLongitude;
     case SportBaseLatitude:
-        return item.baseLongitude;
+        return item.baseLatitude;
     case SportBaseAltitude:
         return item.baseAltitude;
     }
