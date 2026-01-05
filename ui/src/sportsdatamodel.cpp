@@ -20,6 +20,7 @@ QHash<int, QByteArray> SportsDataModel::roleNames() const
     names[SportName] = "name";
     names[SportVersion] = "version";
     names[SportStartDate] = "startdate";
+    names[SportStartDateString] = "startdatestring";
     names[SportEndDate] = "enddate";
     names[SportKind] = "kind";
     names[SportKindString] = "kindstring";
@@ -47,6 +48,8 @@ QVariant SportsDataModel::data(const QModelIndex &index, int role) const
         return item.version;
     case SportStartDate:
         return item.startDate;
+    case SportStartDateString:
+        return item.startDate.toString("dd-MMM-yyyy hh:mm");
     case SportEndDate:
         return item.endDate;
     case SportKind:

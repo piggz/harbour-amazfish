@@ -30,6 +30,7 @@ public:
         SportName,
         SportVersion,
         SportStartDate,
+        SportStartDateString,
         SportEndDate,
         SportKind,
         SportKindString,

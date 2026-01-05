@@ -49,12 +49,13 @@ PageListPL {
         LabelPL
         {
             id: nameLabel
-            width: listItem.width - dateLabel.width - 2*styler.themePaddingLarge
+            width: listItem.width / 2 - workoutImage.width
             anchors.top: parent.top
             anchors.topMargin: styler.themePaddingMedium
             anchors.left: workoutImage.right
             anchors.leftMargin: styler.themePaddingMedium
             text: name
+            truncMode: truncModes.fade
         }
         LabelPL
         {
@@ -63,8 +64,10 @@ PageListPL {
             anchors.topMargin: styler.themePaddingMedium
             anchors.right: parent.right
             anchors.rightMargin: styler.themePaddingMedium
-            width: listItem.width / 3
-            text: startdate
+            width: listItem.width / 4
+            text: startdatestring
+            wrapMode: Text.NoWrap
+            truncMode: truncModes.fade
         }
         IconPL {
             id: distangeImage
