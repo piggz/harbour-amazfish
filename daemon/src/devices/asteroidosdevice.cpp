@@ -1,6 +1,7 @@
 #include "asteroidosdevice.h"
 
 #include "batteryservice.h"
+#include "deviceinfoservice.h"
 #include "asteroidtimeservice.h"
 #include "asteroidweatherservice.h"
 #include "asteroidnotificationservice.h"
@@ -156,7 +157,9 @@ void AsteroidOSDevice::parseServices()
 
             qDebug() << "Creating service for: " << uuid;
 
-            if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
+	    if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
+		addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
+	    } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
                 addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
             } else if (uuid == AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME && !service(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME)) {
                 addService(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME, new AsteroidTimeService(path, this));
@@ -188,6 +191,10 @@ void AsteroidOSDevice::initialise()
 //        connect(alert, &AlertNotificationService::serviceEvent, this, &PinetimeJFDevice::serviceEvent, Qt::UniqueConnection);
     }
 
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
+    if (info) {
+	connect(info, &DeviceInfoService::informationChanged, this, &AsteroidOSDevice::informationChanged, Qt::UniqueConnection);
+    }
 
     BatteryService *battery = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
     if (battery) {
@@ -232,6 +239,11 @@ void AsteroidOSDevice::refreshInformation()
     BatteryService *bat = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
     if (bat) {
         bat->refreshInformation();
+    }
+
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
+    if (info) {
+	info->refreshInformation();
     }
 
 }
@@ -295,6 +307,34 @@ void AsteroidOSDevice::serviceEvent(const QString &characteristic, uint8_t event
         qDebug() << Q_FUNC_INFO << characteristic << event << data;
     }
 
+}
+
+QString AsteroidOSDevice::information(Info i) const
+{
+    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
+    if (!info) {
+	qWarning() << "Device info service doesn't exists";
+	return QString();
+    }
+
+    switch(i) {
+    case INFO_MODEL:
+	return info->modelNumber();
+	break;
+    case INFO_SERIAL:
+	return info->serialNumber();
+	break;
+    case INFO_FW_REVISION:
+	return info->fwRevision();
+	break;
+    case INFO_HWVER:
+	return info->hardwareRevision();
+	break;
+    case INFO_MANUFACTURER:
+	return info->manufacturerName();
+	break;
+    }
+    return QString();
 }
 
 void AsteroidOSDevice::screenshotReceived(QByteArray data) {
