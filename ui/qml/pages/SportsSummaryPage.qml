@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import "../components/"
 import "../components/platform"
+import uk.co.piggz.amazfish 1.0
+import "../tools/JSTools.js" as JSTools
 
 PageListPL {
     id: page
@@ -20,124 +22,95 @@ PageListPL {
     IconPL {
         id: sharedIconLocation
         iconName: styler.iconLocation
-        cache: true
         visible: false
     }
 
     IconPL {
         id: sharedIconTime
         iconName: styler.iconClock
-        cache: true
         visible: false
     }
 
     delegate: ListItemPL {
         id: listItem
         contentHeight: styler.themeItemSizeSmall + (styler.themePaddingMedium * 2)
+        anchors.left: parent.left
+        anchors.leftMargin: styler.themePaddingMedium
 
-        Loader {
-        {
-            id: workoutImage
-            anchors.top: parent.top
-            anchors.topMargin: styler.themePaddingMedium
-            x: styler.themePaddingMedium
-            width: styler.themeItemSizeSmall
-            height: width
-            sourceComponent: IconPL {
-                iconSource: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+        Row {
+            width: parent.width
+            spacing: units.gu(2)
+            IconPL {
+                id: workoutImage
+                anchors.top: parent.top
+                anchors.topMargin: styler.themePaddingMedium
                 width: styler.themeItemSizeSmall
                 height: width
+                iconSource: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
             }
-        }
-        LabelPL
-        {
-            id: nameLabel
-            width: listItem.width / 2 - workoutImage.width
-            anchors.top: parent.top
-            anchors.topMargin: styler.themePaddingMedium
-            anchors.left: workoutImage.right
-            anchors.leftMargin: styler.themePaddingMedium
-            text: name
-            truncMode: truncModes.fade
-        }
-        LabelPL
-        {
-            id: dateLabel
-            anchors.top: parent.top
-            anchors.topMargin: styler.themePaddingMedium
-            anchors.right: parent.right
-            anchors.rightMargin: styler.themePaddingMedium
-            width: listItem.width / 4
-            text: startdatestring
-            wrapMode: Text.NoWrap
-            truncMode: truncModes.fade
-        }
-        IconPL {
-            id: distangeImage
-            anchors.top: nameLabel.bottom
-            anchors.left: workoutImage.right
-            anchors.leftMargin: styler.themePaddingMedium
-            width: distLabel.height
-            height: distLabel.height
-            asynchronous: true
-            source: sharedIconLocation.source
-        }
-        LabelPL
-        {
-            id: distLabel
-            anchors.top: distangeImage.top
-            anchors.left: distangeImage.right
-            anchors.leftMargin: styler.themePaddingMedium
-            text: baselatitude.toFixed(3) + "," + baselongitude.toFixed(3) + " " + basealtitude + "m"
-        }
-        IconPL {
-            id: timeImage
-            anchors.top: timeLabel.top
-            anchors.right: timeLabel.left
-            anchors.rightMargin: styler.themePaddingMedium
-            width: timeLabel.height
-            height: timeLabel.height
-            asynchronous: true
-            source: sharedIconTime.source
-        }
-        LabelPL
-        {
-            id: timeLabel
-            anchors.top: nameLabel.bottom
-            anchors.right: parent.right
-            anchors.rightMargin: styler.themePaddingMedium
-            text: fncCovertSecondsToString((enddate - startdate) / 1000)
-            width: listItem.width / 3
-        }
-        /*Image {
-                id: elevationImage
-                anchors.top: nameLabel.bottom
-                anchors.right: elevationLabel.left
-                anchors.rightMargin: Theme.paddingSmall
-                source: "../img/elevation.png"
-                height: elevationLabel.height
-                width: height
+            Column {
+                id: firstColumn
+                anchors.top: parent.top
+                anchors.topMargin: styler.themePaddingMedium
+                width: parent.width * 0.45
+                spacing: units.gu(1)
+                Row {
+                    anchors.left: parent.left
+                    spacing: units.gu(1)
+                    IconPL {
+                        id: timeImage
+                        iconName: styler.iconClock
+                        height: timeLabel.height
+                        width: height
+                    }
+                    LabelPL {
+                        id: nameLabel
+                        text: kindstring + " ~ " + fncCovertSecondsToString((enddate-startdate)/1000)
+                    }
+                }
+
+                Row {
+                    anchors.left: parent.left
+                    spacing: units.gu(1)
+                    IconPL {
+                        id: positionImage
+                        iconName: styler.iconLocation
+                        height: units.gu(2)
+                        width: height
+                    }
+                    LabelPL {
+                        id: positionLabel
+                        text: "%1 °; %2 °; %3 m".arg((Math.round(baselatitude * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( baselongitude * 1e3 ) / 1e3).toLocaleString()).arg(basealtitude.toLocaleString())
+                    }
+                }
             }
 
-            Label
-            {
-                id: elevationLabel
-                anchors.top: elevationImage.top
-                anchors.right: parent.right
-                anchors.rightMargin: Theme.paddingSmall
-                color: listItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
-                font.pixelSize: Theme.fontSizeSmall
-                text: stravaList.model[index]["total_elevation_gain"] + "m"
-            }*/
+            Column {
+                anchors.top: parent.top
+                anchors.topMargin: styler.themePaddingMedium
+                spacing: units.gu(1)
+                LabelPL {
+                    id: timesLabel
+                    anchors.left: parent.left
+                    text: Qt.formatDateTime(startdate, "yyyy/MM/dd hh:mm")
+                }
+                LabelPL {
+                    id: timeLabel
+                    anchors.left: parent.left
+                    text: Qt.formatDateTime(enddate, "yyyy/MM/dd hh:mm")
+                }
+            }
+        }
+
         onClicked: {
             //var activityPage = app.pages.push(Qt.resolvedUrl("StravaActivityPage.qml"));
             //activityPage.loadActivity(stravaList.model[index]["id"]);
             var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"));
-            sportpage.activitytitle = name;
-            sportpage.date = startdate;
-            sportpage.location = baselatitude.toFixed(3) + "," + baselongitude.toFixed(3) + " " + basealtitude + "m";
-            sportpage.startdate = startdate;
-            sportpage.duration = fncCovertSecondsToString((enddate - startdate) / 1000);
+            sportpage.activitytitle = kindstring + " - " + Qt.formatDateTime(startdate, "yyyy/MM/dd");
+            sportpage.date = Qt.formatDateTime(startdate, "yyyy/MM/dd");
+            sportpage.location = "%1 °; %2 °; %3 m".arg((Math.round( baselatitude * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( baselongitude * 1e3 ) / 1e3).toLocaleString()).arg(basealtitude.toLocaleString());
+            sportpage.starttime = Qt.formatDateTime(startdate, "hh:mm:ss");
+            sportpage.duration = timeLabel.text
             sportpage.kindstring = kindstring;
             SportsMeta.update(id);
             sportpage.tcx = SportsModel.gpx(id);
