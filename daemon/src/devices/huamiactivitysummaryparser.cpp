@@ -141,8 +141,8 @@ ActivitySummary HuamiActivitySummaryParser::parseBinaryData(const QByteArray &da
     summary.setStartTime(startTime);
     summary.setEndTime(startTime.addSecs(duration));
     summary.setActivityKind(activityKind);
-    summary.setBaseLongitude(summaryData.baseLongitude / 300000.0);
-    summary.setBaseLatitude(summaryData.baseLatitude / 300000.0);
+    summary.setBaseLongitude(summaryData.baseLongitude / HUAMI_TO_DECIMAL_DEGREES_DIVISOR);
+    summary.setBaseLatitude(summaryData.baseLatitude / HUAMI_TO_DECIMAL_DEGREES_DIVISOR);
     summary.setBaseAltitude(summaryData.baseAltitude);
 
     if (summaryData.version >= 512) {

@@ -146,8 +146,8 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     summary.setStartTime(startTime);
     summary.setEndTime(startTime.addSecs(m_summary.time.totalDuration));
     summary.setActivityKind(activityKind);
-    summary.setBaseLatitude(m_summary.location.baseLatitude / 6000000.0);
-    summary.setBaseLongitude(m_summary.location.baseLongitude / -6000000.0);
+    summary.setBaseLatitude(m_summary.location.baseLatitude / HUAMI_TO_DECIMAL_DEGREES_DIVISOR);
+    summary.setBaseLongitude(m_summary.location.baseLongitude / HUAMI_TO_DECIMAL_DEGREES_DIVISOR);
     summary.setBaseAltitude(m_summary.location.baseAltitude / 2);
 
     summary.setName((ActivityKind::toString(summary.activityKind())) + "-" + summary.startTime().toLocalTime().toString("yyyyMMdd-HHmm"));
