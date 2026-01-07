@@ -80,7 +80,7 @@ PageListPL {
                     }
                     LabelPL {
                         id: positionLabel
-                        text: "%1 °; %2 °; %3 m".arg((Math.round(baselatitude * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( baselongitude * 1e3 ) / 1e3).toLocaleString()).arg(basealtitude.toLocaleString())
+                        text: "%1°; %2°; %3m".arg((Math.round(baselatitude * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( baselongitude * 1e3 ) / 1e3).toLocaleString()).arg(basealtitude.toLocaleString())
                     }
                 }
             }
