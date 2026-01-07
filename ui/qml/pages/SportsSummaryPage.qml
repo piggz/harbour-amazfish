@@ -20,7 +20,7 @@ PageListPL {
     }
 
     IconPL {
-        id: sharedIconLocation
+        id: sharedIconPosition
         iconName: styler.iconLocation
         visible: false
     }
@@ -63,9 +63,10 @@ PageListPL {
                     spacing: units.gu(1)
                     IconPL {
                         id: timeImage
-                        iconName: styler.iconClock
                         height: timeLabel.height
                         width: height
+                        asynchronous: true
+                        source: sharedIconTime.source
                     }
                     LabelPL {
                         id: nameLabel
@@ -78,9 +79,10 @@ PageListPL {
                     spacing: units.gu(1)
                     IconPL {
                         id: positionImage
-                        iconName: styler.iconLocation
                         height: units.gu(2)
                         width: height
+                        asynchronous: true
+                        source: sharedIconPosition.source
                     }
                     LabelPL {
                         id: positionLabel
