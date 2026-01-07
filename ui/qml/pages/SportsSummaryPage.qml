@@ -40,13 +40,17 @@ PageListPL {
         Row {
             width: parent.width
             spacing: units.gu(2)
-            IconPL {
+            Loader {
                 id: workoutImage
                 anchors.top: parent.top
                 anchors.topMargin: styler.themePaddingMedium
                 width: styler.themeItemSizeSmall
                 height: width
-                iconSource: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+                sourceComponent: IconPL {
+                    iconSource: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+                    width: styler.themeItemSizeSmall
+                    height: width
+                }
             }
             Column {
                 id: firstColumn
