@@ -116,7 +116,7 @@ PageListPL {
             var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"));
             sportpage.activitytitle = kindstring + " - " + Qt.formatDateTime(startdate, "yyyy/MM/dd");
             sportpage.date = Qt.formatDateTime(startdate, "yyyy/MM/dd");
-            sportpage.location = "%1 °; %2 °; %3 m".arg((Math.round( baselatitude * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( baselongitude * 1e3 ) / 1e3).toLocaleString()).arg(basealtitude.toLocaleString());
+            sportpage.location = positionLabel.text
             sportpage.starttime = Qt.formatDateTime(startdate, "hh:mm:ss");
             sportpage.duration = timeLabel.text
             sportpage.kindstring = kindstring;
