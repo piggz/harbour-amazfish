@@ -13,7 +13,7 @@ PagePL {
     property string date: ""
     property string duration: ""
     property string location: ""
-    property string startdate: ""
+    property string starttime: ""
     property string kindstring: ""
     property string activitytitle: ""
     property string tcx: ""
@@ -69,19 +69,19 @@ PagePL {
             LabelPL
             {
                 id: dateLabel
-                text: startdate
+                text: qsTr("Start: %1 %2").arg(date).arg(starttime)
             }
 
             LabelPL
             {
                 id: durationLabel
-                text: duration
+                text: qsTr("Duration: %1").arg(duration)
             }
 
             LabelPL
             {
                 id: locationLabel
-                text: location
+                text: qsTr("Location: %1").arg(location)
             }
 
             LabelPL {
@@ -108,7 +108,7 @@ PagePL {
                 LabelPL
                 {
                     id: keyLabel
-                    width: page.width / 2
+                    width: (page.width - (2*styler.themePaddingLarge)) / 2
                     anchors.topMargin: styler.themePaddingMedium
                     anchors.left: parent.left
                     anchors.leftMargin: styler.themePaddingMedium
@@ -118,7 +118,7 @@ PagePL {
                 LabelPL
                 {
                     id: valueLabel
-                    width: page.width / 3
+                    width: (page.width - (2*styler.themePaddingLarge)) / 2
                     anchors.top: parent.top
                     anchors.left: keyLabel.right
                     anchors.leftMargin: styler.themePaddingMedium
@@ -396,15 +396,15 @@ PagePL {
         if (unit === "calories_unit") return qsTr("kcal");
         if (unit === "meters") return qsTr("meters");
         if (unit === "seconds_m") return qsTr("seconds/m");
+        if (unit === "meters_second") return qsTr("m/s");
         if (unit === "bpm") return qsTr("bpm");
         if (unit === "seconds_km") return qsTr("seconds/km");
         if (unit === "cm") return qsTr("cm");
         if (unit === "strokes_second") return qsTr("strokes/s");
         if (unit === "strokes") return qsTr("strokes");
-        if (unit === "swolf_index") return qsTr("swolf");
+        if (unit === "swolf_index") return qsTr("SWOLF");
         if (unit === "style") return "";
         if (unit === "laps") return "";
-        if (unit === "swolf_index") return qsTr("swolf");
 
         return unit;
     }
