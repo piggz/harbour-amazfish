@@ -111,17 +111,16 @@ PageListPL {
         }
 
         onClicked: {
-            //var activityPage = app.pages.push(Qt.resolvedUrl("StravaActivityPage.qml"));
-            //activityPage.loadActivity(stravaList.model[index]["id"]);
-            var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"));
-            sportpage.activitytitle = kindstring + " - " + Qt.formatDateTime(startdate, "yyyy/MM/dd");
-            sportpage.date = Qt.formatDateTime(startdate, "yyyy/MM/dd");
-            sportpage.location = positionLabel.text
-            sportpage.starttime = Qt.formatDateTime(startdate, "hh:mm:ss");
-            sportpage.duration = timeLabel.text
-            sportpage.kindstring = kindstring;
+            var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"), {
+                "activitytitle": kindstring + " - " + Qt.formatDateTime(startdate, "yyyy/MM/dd"),
+                "date": Qt.formatDateTime(startdate, "yyyy/MM/dd"),
+                "location": positionLabel.text,
+                "starttime": Qt.formatDateTime(startdate, "hh:mm:ss"),
+                "duration": timeLabel.text,
+                "kindstring": kindstring,
+                "tcx": SportsModel.gpx(id)
+            });
             SportsMeta.update(id);
-            sportpage.tcx = SportsModel.gpx(id);
             sportpage.update();
         }
 
