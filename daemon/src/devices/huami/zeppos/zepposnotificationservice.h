@@ -1,7 +1,7 @@
 #ifndef ZEPPOSNOTIFICATIONSERVICE_H
 #define ZEPPOSNOTIFICATIONSERVICE_H
 
-#include "zeppos/abstractzepposservice.h"
+#include "huami/zeppos/abstractzepposservice.h"
 #include "amazfish.h"
 
 class ZeppOsNotificationService : public AbstractZeppOsService

@@ -3,10 +3,9 @@
 
 #include "abstractoperationservice.h"
 #include "bipbatteryinfo.h"
-#include "devices/zeppos/huami2021handler.h"
 #include "weather/currentweather.h"
 #include "devices/abstractdevice.h"
-#include "zeppos/huami2021chunkeddecoder.h"
+#include "huami/zeppos/huami2021chunkeddecoder.h"
 
 #include <QTimer>
 #include <QtCore/QJsonDocument>

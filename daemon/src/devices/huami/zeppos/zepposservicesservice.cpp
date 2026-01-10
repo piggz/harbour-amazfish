@@ -1,6 +1,6 @@
 #include "zepposservicesservice.h"
 #include "typeconversion.h"
-#include "zepposdevice.h"
+#include "huami/zepposdevice.h"
 
 ZeppOsServicesService::ZeppOsServicesService(ZeppOSDevice *device) : AbstractZeppOsService(device, false)
 {

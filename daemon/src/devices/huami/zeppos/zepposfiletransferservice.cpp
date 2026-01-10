@@ -1,6 +1,6 @@
 #include "zepposfiletransferservice.h"
 #include "qbleservice.h"
-#include "zeppos/filetransfer/zepposfiletransferv3.h"
+#include "huami/zeppos/filetransfer/zepposfiletransferv3.h"
 
 ZeppOsFileTransferService::ZeppOsFileTransferService(ZeppOSDevice *device) : AbstractZeppOsService(device, false)
 {

@@ -3,7 +3,7 @@
 #include "typeconversion.h"
 #include <qdatetime.h>
 #include "mibandservice.h"
-#include "zepposdevice.h"
+#include "huami/zepposdevice.h"
 
 ZeppOsFileTransferV3::ZeppOsFileTransferV3(ZeppOsFileTransferService *fileTransferService, ZeppOSDevice *device) : ZeppOsFileTransferImpl(fileTransferService, device)
 {

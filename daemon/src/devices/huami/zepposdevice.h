@@ -4,7 +4,7 @@
 #include "zeppos/huami2021chunkeddecoder.h"
 #include "zeppos/huami2021chunkedencoder.h"
 #include "zeppos/zepposfiletransferservice.h"
-#include <huamidevice.h>
+#include "huami/huamidevice.h"
 
 class AbstractZeppOsService;
 class ZeppOsServicesService;

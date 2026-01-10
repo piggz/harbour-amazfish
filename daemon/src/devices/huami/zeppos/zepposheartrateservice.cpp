@@ -1,6 +1,6 @@
 #include "zepposheartrateservice.h"
 #include "hrmservice.h"
-#include "zepposdevice.h"
+#include "huami/zepposdevice.h"
 
 ZeppOsHeartRateService::ZeppOsHeartRateService(ZeppOSDevice *device) : AbstractZeppOsService(device, false)
 {

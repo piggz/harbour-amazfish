@@ -1,7 +1,7 @@
 #ifndef ZEPPOSSERVICESSERVICE_H
 #define ZEPPOSSERVICESSERVICE_H
 
-#include "zeppos/abstractzepposservice.h"
+#include "huami/zeppos/abstractzepposservice.h"
 
 class ZeppOsServicesService : public AbstractZeppOsService
 {

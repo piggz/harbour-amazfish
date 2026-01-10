@@ -1,5 +1,5 @@
 #include "zepposbatteryservice.h"
-#include "zepposdevice.h"
+#include "huami/zepposdevice.h"
 
 ZeppOsBatteryService::ZeppOsBatteryService(ZeppOSDevice *device) : AbstractZeppOsService(device, false)
 {

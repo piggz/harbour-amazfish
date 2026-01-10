@@ -2,8 +2,8 @@
 #define ZEPPOSAGPSUPDATEOPERATION_H
 
 #include "abstractzepposoperation.h"
-#include "zeppos/zepposagpsservice.h"
-#include "zeppos/zepposfiletransferservice.h"
+#include "huami/zeppos/zepposagpsservice.h"
+#include "huami/zeppos/zepposfiletransferservice.h"
 #include <QString>
 
 class ZeppOsAgpsUpdateOperation : public AbstractZeppOsOperation, public ZeppOsAgpsService::Callback, public ZeppOsFileTransferService::Callback

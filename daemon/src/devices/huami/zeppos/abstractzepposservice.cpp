@@ -1,5 +1,5 @@
 #include "abstractzepposservice.h"
-#include "zepposdevice.h"
+#include "huami/zepposdevice.h"
 
 short AbstractZeppOsService::endpoint() const
 {

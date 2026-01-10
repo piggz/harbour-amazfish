@@ -1,7 +1,7 @@
 #ifndef ZEPPOSHEARTRATESERVICE_H
 #define ZEPPOSHEARTRATESERVICE_H
 
-#include "zeppos/abstractzepposservice.h"
+#include "huami/zeppos/abstractzepposservice.h"
 
 class ZeppOsHeartRateService : public AbstractZeppOsService
 {

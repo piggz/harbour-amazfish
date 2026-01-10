@@ -3,7 +3,7 @@
 #include <QTimeZone>
 
 #include "typeconversion.h"
-#include "huamidevice.h"
+#include "huami/huamidevice.h"
 #include "huamiweathercondition.h"
 #include "amazfishconfig.h"
 

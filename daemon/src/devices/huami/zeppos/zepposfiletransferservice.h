@@ -1,7 +1,7 @@
 #ifndef ZEPPOSFILETRANSFERSERVICE_H
 #define ZEPPOSFILETRANSFERSERVICE_H
 
-#include "zeppos/abstractzepposservice.h"
+#include "huami/zeppos/abstractzepposservice.h"
 
 class ZeppOsDevice;
 class ZeppOsFileTransferImpl;

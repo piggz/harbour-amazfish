@@ -1,5 +1,5 @@
 
-#include "zeppos/zepposfiletransferservice.h"
+#include "huami/zeppos/zepposfiletransferservice.h"
 #include <QStringList>
 #include <optional>
 

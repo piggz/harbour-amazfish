@@ -2,7 +2,6 @@
 #define UPDATEFIRMWAREOPERATION_H
 
 #include "abstractoperation.h"
-#include "bipfirmwareinfo.h"
 #include "abstractdevice.h"
 
 class UpdateFirmwareOperation : public AbstractOperation

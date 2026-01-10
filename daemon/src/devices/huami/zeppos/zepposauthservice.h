@@ -1,10 +1,8 @@
 #ifndef ZEPPOSAUTHSERVICE_H
 #define ZEPPOSAUTHSERVICE_H
 
-#include "devices/zeppos/huami2021chunkedencoder.h"
-#include "devices/zeppos/huami2021chunkeddecoder.h"
-#include "huamidevice.h"
-#include "zeppos/abstractzepposservice.h"
+#include "abstractzepposservice.h"
+#include "qbleservice.h"
 
 class ZeppOsAuthService : public AbstractZeppOsService
 {

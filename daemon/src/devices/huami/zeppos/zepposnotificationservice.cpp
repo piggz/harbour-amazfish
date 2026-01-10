@@ -1,6 +1,6 @@
 #include "zepposnotificationservice.h"
 #include "typeconversion.h"
-#include "zepposdevice.h"
+#include "huami/zepposdevice.h"
 
 ZeppOsNotificationService::ZeppOsNotificationService(ZeppOSDevice *device) : AbstractZeppOsService(device, true)
 {

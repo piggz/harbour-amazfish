@@ -2,7 +2,7 @@
 #define ZEPPOSSTEPSSERVICE_H
 
 #include "abstractzepposservice.h"
-#include "zepposdevice.h"
+#include "huami/zepposdevice.h"
 
 class ZeppOsStepsService : public AbstractZeppOsService
 {
