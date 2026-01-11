@@ -57,8 +57,8 @@ void Gts2Device::initialise()
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE);
 
         connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
-        connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
-        connect(mi, &AbstractOperationService::operationComplete, this, &HuamiDevice::operationComplete, Qt::UniqueConnection);
+        //connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
+        //connect(mi, &AbstractOperationService::operationComplete, this, &HuamiDevice::operationComplete, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &Gts2Device::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &Gts2Device::serviceEvent, Qt::UniqueConnection);

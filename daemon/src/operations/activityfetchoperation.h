@@ -12,7 +12,7 @@
 class ActivityFetchOperation : public AbstractFetchOperation
 {
 public:
-    ActivityFetchOperation(QBLEService *service, KDbConnection *db, int sampleSize = 4, bool isZeppOs = false);
+    ActivityFetchOperation(HuamiFetcher *fetcher, KDbConnection *db, int sampleSize = 4, bool isZeppOs = false);
 
     void start(QBLEService *service) override;
     void handleData(const QByteArray &data) override;

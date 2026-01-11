@@ -16,6 +16,9 @@ HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractD
     qDebug() << Q_FUNC_INFO;
     m_keyPressTimer = new QTimer(this);
     m_keyPressTimer->setInterval(500);
+
+    m_fetcher = new HuamiFetcher(this);
+
     connect(this, &QBLEDevice::propertiesChanged, this, &HuamiDevice::onPropertiesChanged);
     connect(m_keyPressTimer, &QTimer::timeout, this, &HuamiDevice::buttonPressTimeout);
 }
@@ -52,17 +55,18 @@ void HuamiDevice::downloadSportsData()
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
         SportsSummaryOperation *sportsSummaryOperation = new SportsSummaryOperation(mi, m_conn, true, activitySummaryParser());
-        if (mi->registerOperation(sportsSummaryOperation)) {
-            sportsSummaryOperation->start(mi);
-            emit operationRunningChanged();
-        } else {
-            delete sportsSummaryOperation;
-        }
+        //if (mi->registerOperation(sportsSummaryOperation)) {
+        //    sportsSummaryOperation->start(mi);
+        //    emit operationRunningChanged();
+        //} else {
+        //    delete sportsSummaryOperation;
+        //}
     }
 }
 
 void HuamiDevice::downloadActivityData()
 {
+    /*
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
         int sampleSize = activitySampleSize();
@@ -73,7 +77,8 @@ void HuamiDevice::downloadActivityData()
         } else {
             delete activityFetchOperation;
         }
-    }
+    }*/
+    m_fetcher->startFetchData(Amazfish::DataType::TYPE_ACTIVITY);
 }
 
 void HuamiDevice::fetchLogs()
@@ -82,12 +87,12 @@ void HuamiDevice::fetchLogs()
 
     if (mi){
         LogFetchOperation *logFetchOperation = new LogFetchOperation();
-        if (mi->registerOperation(logFetchOperation)) {
-            logFetchOperation->start(mi);
-            emit operationRunningChanged();
-        } else {
-            delete logFetchOperation;
-        }
+        //if (mi->registerOperation(logFetchOperation)) {
+        //    logFetchOperation->start(mi);
+        //    emit operationRunningChanged();
+        //} else {
+        //    delete logFetchOperation;
+        //}
     }
 }
 
@@ -381,7 +386,7 @@ void HuamiDevice::abortOperations()
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi){
-        mi->cancelOperation();
+        //mi->cancelOperation();
     }
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw){
@@ -445,12 +450,12 @@ void HuamiDevice::operationComplete(AbstractOperation *operation)
 
         if (createDetail) {
             SportsDetailOperation *sportsDetailOperation = new SportsDetailOperation(mi, m_conn, summary, true, activityDetailParser());
-            if (mi->registerOperation(sportsDetailOperation)) {
-                sportsDetailOperation->start(mi);
-                emit operationRunningChanged();
-            } else {
-                delete sportsDetailOperation;
-            }
+            //if (mi->registerOperation(sportsDetailOperation)) {
+            //    sportsDetailOperation->start(mi);
+            //    emit operationRunningChanged();
+            //} else {
+            //    delete sportsDetailOperation;
+            //}
         }
     }
 }
@@ -465,11 +470,35 @@ AbstractActivityDetailParser *HuamiDevice::activityDetailParser() const
     return new BipActivityDetailParser();
 }
 
+void HuamiDevice::setActivityNotifications(bool control, bool data)
+{
+    qDebug() << Q_FUNC_INFO << control << data;
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi){
+        if (control) {
+            mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL);
+        } else {
+            mi->disableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL);
+        }
+        if (data) {
+            mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
+        } else {
+            mi->disableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
+        }
+    }
+}
+
+void HuamiDevice::writeActivityControl(const QByteArray &value)
+{
+    qDebug() << Q_FUNC_INFO;
+    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
+    if (mi){
+        mi->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL, value);
+    }
+}
+
 void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
-    qDebug() << Q_FUNC_INFO << interface << map << list << m_connectionState;
-
-
     if (interface == "org.bluez.Device1") {
         m_reconnectTimer->start();
         if (map.contains("Paired")) {

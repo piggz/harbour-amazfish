@@ -222,6 +222,7 @@ set(HEADERS
 )
 
 add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
+    src/devices/huami/huamifetcher.h src/devices/huami/huamifetcher.cpp
 )
 
 find_package(PkgConfig REQUIRED)

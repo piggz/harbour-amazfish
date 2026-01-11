@@ -7,7 +7,7 @@
 #include "typeconversion.h"
 #include "amazfishconfig.h"
 
-SportsDetailOperation::SportsDetailOperation(QBLEService *service, KDbConnection *conn, const ActivitySummary &summary, bool isZeppOs, AbstractActivityDetailParser *parser) :  AbstractFetchOperation(isZeppOs), m_summary(summary), m_parser(parser)
+SportsDetailOperation::SportsDetailOperation(QBLEService *service, KDbConnection *conn, const ActivitySummary &summary, bool isZeppOs, AbstractActivityDetailParser *parser) :  AbstractFetchOperation(0, isZeppOs), m_summary(summary), m_parser(parser)
 {
     qDebug() << Q_FUNC_INFO;
     m_conn = conn;
@@ -29,10 +29,10 @@ void SportsDetailOperation::start(QBLEService *service)
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
 
     service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL);
 
     //Send log read configuration
-    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_DETAILS) + rawDate);
+    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_DETAILS) + rawDate);
 }
 
 void SportsDetailOperation::handleData(const QByteArray &data)
@@ -60,7 +60,7 @@ bool SportsDetailOperation::characteristicChanged(const QString &characteristic,
 {
     if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         handleData(value);
-    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
+    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL) {
         return handleMetaData(value);
     }
     return false;

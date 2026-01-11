@@ -27,8 +27,8 @@ void BipLiteDevice::initialise()
         mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS);
 
         connect(mi, &MiBandService::message, this, &BipDevice::message, Qt::UniqueConnection);
-        connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
-        connect(mi, &AbstractOperationService::operationComplete, this, &HuamiDevice::operationComplete, Qt::UniqueConnection);
+        //connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
+        //connect(mi, &AbstractOperationService::operationComplete, this, &HuamiDevice::operationComplete, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &BipLiteDevice::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &BipDevice::informationChanged, Qt::UniqueConnection);
     }

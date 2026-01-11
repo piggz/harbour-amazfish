@@ -2,6 +2,7 @@
 #define HUAMIDEVICE_H
 
 #include "abstractdevice.h"
+#include "huami/huamifetcher.h"
 #include "qble/qbleservice.h"
 
 #include "deviceinfoservice.h"
@@ -55,6 +56,9 @@ public:
     AbstractActivitySummaryParser *activitySummaryParser() const override;
     AbstractActivityDetailParser *activityDetailParser() const override;
 
+    virtual void setActivityNotifications(bool control, bool data);
+    virtual void writeActivityControl(const QByteArray &value);
+
 protected:
     Q_SLOT void handleButtonPressed();
     Q_SLOT void buttonPressTimeout();
@@ -66,6 +70,7 @@ protected:
     virtual void initialise() = 0;
 
     int m_ActivitySampleSize = 4;
+    HuamiFetcher *m_fetcher = nullptr;
 
 private:
     QString m_softwareRevision;

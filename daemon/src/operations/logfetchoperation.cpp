@@ -7,7 +7,7 @@
 #include "mibandservice.h"
 #include "typeconversion.h"
 
-LogFetchOperation::LogFetchOperation(bool isZeppOs) : AbstractFetchOperation(isZeppOs)
+LogFetchOperation::LogFetchOperation(bool isZeppOs) : AbstractFetchOperation(0, isZeppOs)
 {
     QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     if (!cachelocation.exists()) {
@@ -34,12 +34,12 @@ void LogFetchOperation::start(QBLEService *service)
     QByteArray rawDate = TypeConversion::dateTimeToBytes(fetchFrom, 0);
 
     service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL);
 
     //Send log read configuration
-    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS) + rawDate);
+    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS) + rawDate);
     //Send log read command
-    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
+    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
 }
 
 void LogFetchOperation::handleData(const QByteArray &data)
@@ -54,7 +54,7 @@ bool LogFetchOperation::characteristicChanged(const QString &characteristic, con
     if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         handleData(value);
         return false;
-    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
+    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL) {
         return handleMetaData(value);
     }
     return false;

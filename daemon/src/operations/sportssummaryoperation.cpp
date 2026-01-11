@@ -7,7 +7,7 @@
 #include "mibandservice.h"
 #include "typeconversion.h"
 
-SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn, bool isZeppOs, AbstractActivitySummaryParser *parser) : AbstractFetchOperation(isZeppOs), m_parser(parser)
+SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn, bool isZeppOs, AbstractActivitySummaryParser *parser) : AbstractFetchOperation(0, isZeppOs), m_parser(parser)
 {
     qDebug() << Q_FUNC_INFO;
     m_conn = conn;
@@ -36,10 +36,10 @@ void SportsSummaryOperation::start(QBLEService *service)
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
 
     service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL);
 
     //Send log read configuration
-    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES) + rawDate);
+    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES) + rawDate);
 }
 
 bool SportsSummaryOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
@@ -47,7 +47,7 @@ bool SportsSummaryOperation::characteristicChanged(const QString &characteristic
     qDebug() << Q_FUNC_INFO;
     if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         handleData(value);
-    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
+    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL) {
         return handleMetaData(value);
     }
     return false;

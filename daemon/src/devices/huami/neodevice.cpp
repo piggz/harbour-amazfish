@@ -46,8 +46,8 @@ void NeoDevice::initialise()
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (mi) {
         connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
-        connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
-        connect(mi, &AbstractOperationService::operationComplete, this, &HuamiDevice::operationComplete, Qt::UniqueConnection);
+        //connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
+        //connect(mi, &AbstractOperationService::operationComplete, this, &HuamiDevice::operationComplete, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &NeoDevice::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &NeoDevice::serviceEvent, Qt::UniqueConnection);

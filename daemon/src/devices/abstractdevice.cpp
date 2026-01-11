@@ -103,6 +103,11 @@ void AbstractDevice::setDatabase(KDbConnection *conn)
     m_conn = conn;
 }
 
+KDbConnection *AbstractDevice::database()
+{
+    return m_conn;
+}
+
 QString AbstractDevice::deviceName() const
 {
     return m_pairedName;

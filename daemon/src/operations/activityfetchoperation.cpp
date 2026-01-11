@@ -6,8 +6,9 @@
 #include "mibandservice.h"
 #include "typeconversion.h"
 #include "amazfishconfig.h"
+#include "huami/huamifetcher.h"
 
-ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnection *conn, int sampleSize, bool isZeppOs) : AbstractFetchOperation(isZeppOs), m_conn(conn), m_sampleSize(sampleSize)
+ActivityFetchOperation::ActivityFetchOperation(HuamiFetcher *fetcher, KDbConnection *conn, int sampleSize, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn), m_sampleSize(sampleSize)
 {
     setLastSyncKey("device/lastactivitysyncmillis");
 }
@@ -15,27 +16,20 @@ ActivityFetchOperation::ActivityFetchOperation(QBLEService *service, KDbConnecti
 void ActivityFetchOperation::start(QBLEService *service)
 {
     setStartDate(lastActivitySync());
-    m_service = service;
+
+    m_fetcher->setNotifications(true, true);
 
     qDebug() << Q_FUNC_INFO << ": Last sync was " << startDate();
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, true);
 
-    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
-
     //Send log read configuration
-    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY) + rawDate);
+    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY) + rawDate);
 }
 
 
 bool ActivityFetchOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
-        handleData(value);
-    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
-        return handleMetaData(value);
-    }
     return false;
 }
 
