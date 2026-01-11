@@ -37,7 +37,7 @@ RowLayout {
                                         })
             dialog.accepted.connect(function() {
                 dateNavigation.day = dialog.date;
-                console.log(dateNavigation.day)
+                // console.log(dateNavigation.day)
             })
         }
 

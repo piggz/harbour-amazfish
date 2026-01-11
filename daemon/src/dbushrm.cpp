@@ -42,7 +42,7 @@ void DBusHRM::stop()
 
 int DBusHRM::heartRate()
 {
-    qDebug() << Q_FUNC_INFO << m_hrm->heartRate();
+    // qDebug() << Q_FUNC_INFO << m_hrm->heartRate();
 
     if (m_hrm) {
         m_hrm->keepRealtimeHRMMeasurementAlive();

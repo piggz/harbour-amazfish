@@ -291,7 +291,7 @@ PagePL {
             repeat: false
             interval: 500
             onTriggered: {
-                console.log("Start timer triggered");
+                // console.log("Start timer triggered");
                 pushAttached(Qt.resolvedUrl("StepsPage.qml"))
                 if (!AmazfishConfig.profileName) {
                     app.pages.push(Qt.resolvedUrl("Settings-user.qml"))
