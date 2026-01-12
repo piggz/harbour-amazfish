@@ -13,12 +13,9 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
     qDebug() << Q_FUNC_INFO << type;
 
     if (type & Amazfish::DataType::TYPE_ACTIVITY) {
-        MiBandService *mi = qobject_cast<MiBandService*>(m_device->service(MiBandService::UUID_SERVICE_MIBAND));
-        if (mi){
-            m_currentOperation = new ActivityFetchOperation(this, m_device->database(), m_device->activitySampleSize(), true);
-            m_currentOperation->start(mi);
-            setBusy(true);
-        }
+        m_currentOperation = new ActivityFetchOperation(this, m_device->database(), m_device->activitySampleSize(), true);
+        m_currentOperation->start(0);
+        setBusy(true);
     }
 }
 
