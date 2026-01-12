@@ -67,34 +67,12 @@ void HuamiDevice::downloadSportsData()
 
 void HuamiDevice::downloadActivityData()
 {
-    /*
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        int sampleSize = activitySampleSize();
-        ActivityFetchOperation *activityFetchOperation = new ActivityFetchOperation(mi, m_conn, sampleSize, true);
-        if (mi->registerOperation(activityFetchOperation)) {
-            activityFetchOperation->start(mi);
-            emit operationRunningChanged();
-        } else {
-            delete activityFetchOperation;
-        }
-    }*/
     m_fetcher->startFetchData(Amazfish::DataType::TYPE_ACTIVITY);
 }
 
 void HuamiDevice::fetchLogs()
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-
-    if (mi){
-        LogFetchOperation *logFetchOperation = new LogFetchOperation();
-        //if (mi->registerOperation(logFetchOperation)) {
-        //    logFetchOperation->start(mi);
-        //    emit operationRunningChanged();
-        //} else {
-        //    delete logFetchOperation;
-        //}
-    }
+    m_fetcher->startFetchData(Amazfish::DataType::TYPE_DEBUGLOG);
 }
 
 void HuamiDevice::refreshInformation()

@@ -110,7 +110,7 @@ bool AbstractFetchOperation::handleStartDateResponse(const QByteArray &value)
 
     qDebug() << "About to transfer data from " << startDate << "expected length:" << expectedDataLength; //TODO use expectedDataLength
     m_fetcher->message(QObject::tr("About to transfer data from ") + startDate.toString());
-    //Send log read command
+    //Send read command
     m_fetcher->writeControl(QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
     return true;
 

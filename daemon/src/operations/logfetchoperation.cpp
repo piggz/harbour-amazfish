@@ -6,8 +6,9 @@
 
 #include "mibandservice.h"
 #include "typeconversion.h"
+#include "huami/huamifetcher.h"
 
-LogFetchOperation::LogFetchOperation(bool isZeppOs) : AbstractFetchOperation(0, isZeppOs)
+LogFetchOperation::LogFetchOperation(HuamiFetcher *fetcher, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs)
 {
     QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     if (!cachelocation.exists()) {
@@ -18,7 +19,7 @@ LogFetchOperation::LogFetchOperation(bool isZeppOs) : AbstractFetchOperation(0, 
         }
     }
 
-    QString filename = "amazfitbip_" + QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss") + ".log";
+    QString filename = "huami_" + QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss") + ".log";
     m_logFile = new QFile(cachelocation.absolutePath() + "/logs/" + filename);
 
     if(m_logFile->open(QIODevice::WriteOnly)) {
@@ -33,13 +34,13 @@ void LogFetchOperation::start(QBLEService *service)
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(fetchFrom, 0);
 
-    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL);
+    m_fetcher->setNotifications(true, true);
 
+    QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS) + rawDate;
     //Send log read configuration
-    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS) + rawDate);
-    //Send log read command
-    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
+    m_fetcher->writeControl(cmd);
+    //Send read command
+    m_fetcher->writeControl(QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
 }
 
 void LogFetchOperation::handleData(const QByteArray &data)
@@ -51,12 +52,6 @@ void LogFetchOperation::handleData(const QByteArray &data)
 
 bool LogFetchOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
 {
-    if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
-        handleData(value);
-        return false;
-    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL) {
-        return handleMetaData(value);
-    }
     return false;
 }
 

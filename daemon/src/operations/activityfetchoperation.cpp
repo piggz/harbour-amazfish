@@ -23,8 +23,9 @@ void ActivityFetchOperation::start(QBLEService *service)
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, true);
 
+    QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY) + rawDate;
     //Send log read configuration
-    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY) + rawDate);
+    m_fetcher->writeControl(cmd);
 }
 
 

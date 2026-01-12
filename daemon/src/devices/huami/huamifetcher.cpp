@@ -2,6 +2,7 @@
 
 #include "activityfetchoperation.h"
 #include "huamidevice.h"
+#include "logfetchoperation.h"
 
 HuamiFetcher::HuamiFetcher(HuamiDevice *device) : m_device(device)
 {
@@ -14,6 +15,11 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
 
     if (type & Amazfish::DataType::TYPE_ACTIVITY) {
         m_currentOperation = new ActivityFetchOperation(this, m_device->database(), m_device->activitySampleSize(), true);
+    } else if (type & Amazfish::DataType::TYPE_DEBUGLOG) {
+        m_currentOperation = new LogFetchOperation(this);
+    }
+
+    if (m_currentOperation) {
         m_currentOperation->start(0);
         setBusy(true);
     }
