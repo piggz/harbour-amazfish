@@ -2,8 +2,6 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import "../components/"
 import "../components/platform"
-import uk.co.piggz.amazfish 1.0
-import "../tools/JSTools.js" as JSTools
 
 PageListPL {
     id: page
@@ -20,12 +18,6 @@ PageListPL {
     }
 
     IconPL {
-        id: sharedIconPosition
-        iconName: styler.iconLocation
-        visible: false
-    }
-
-    IconPL {
         id: sharedIconTime
         iconName: styler.iconClock
         visible: false
@@ -38,8 +30,10 @@ PageListPL {
         anchors.leftMargin: styler.themePaddingMedium
 
         Row {
+            id: listItemRow
             width: parent.width
-            spacing: units.gu(2)
+            spacing: styler.themePaddingLarge
+
             Loader {
                 id: workoutImage
                 anchors.top: parent.top
@@ -52,60 +46,48 @@ PageListPL {
                     height: width
                 }
             }
+
             Column {
-                id: firstColumn
+                id: leftColumn
                 anchors.top: parent.top
                 anchors.topMargin: styler.themePaddingMedium
-                width: parent.width * 0.45
+                width: (parent.width - workoutImage.width - (2 * styler.themePaddingMedium)) * 0.5
+                spacing: units.gu(1)
+
+                LabelPL {
+                    id: nameLabel
+                    text: kindstring
+                }
+
+                LabelPL {
+                    id: dateLabel
+                    text: Qt.formatDate(startdate, "ddd") + " " + startdate.toLocaleDateString(Qt.locale(),Locale.ShortFormat)
+                }
+            }
+
+            Column {
+                id: rightColumn
+                anchors.top: parent.top
+                anchors.topMargin: styler.themePaddingMedium
+                width: leftColumn.width
                 spacing: units.gu(1)
                 Row {
-                    anchors.left: parent.left
                     spacing: units.gu(1)
                     IconPL {
-                        id: timeImage
-                        height: timeLabel.height
+                        id: durationImage
+                        height: durationLabel.height
                         width: height
                         asynchronous: true
                         source: sharedIconTime.source
                     }
                     LabelPL {
-                        id: nameLabel
-                        text: kindstring + " ~ " + fncCovertSecondsToString((enddate-startdate)/1000)
+                        id: durationLabel
+                        text: fncCovertSecondsToString((enddate-startdate)/1000)
                     }
                 }
-
-                Row {
-                    anchors.left: parent.left
-                    spacing: units.gu(1)
-                    IconPL {
-                        id: positionImage
-                        height: units.gu(2)
-                        width: height
-                        asynchronous: true
-                        source: sharedIconPosition.source
-                    }
-                    LabelPL {
-                        id: positionLabel
-                        text: (baselatitude === 0 && baselongitude === 0)
-                                ? "---"
-                                : qsTr("%1°; %2°; %3m").arg((Math.round(baselatitude * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( baselongitude * 1e3 ) / 1e3).toLocaleString()).arg(basealtitude.toLocaleString())
-                    }
-                }
-            }
-
-            Column {
-                anchors.top: parent.top
-                anchors.topMargin: styler.themePaddingMedium
-                spacing: units.gu(1)
                 LabelPL {
                     id: timesLabel
-                    anchors.left: parent.left
-                    text: Qt.formatDateTime(startdate, "yyyy/MM/dd hh:mm")
-                }
-                LabelPL {
-                    id: timeLabel
-                    anchors.left: parent.left
-                    text: Qt.formatDateTime(enddate, "yyyy/MM/dd hh:mm")
+                    text: startdate.toLocaleTimeString(Qt.locale(),Locale.ShortFormat) + " ⟶ " + enddate.toLocaleTimeString(Qt.locale(),Locale.ShortFormat)
                 }
             }
         }
@@ -114,7 +96,7 @@ PageListPL {
             var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"), {
                 "activitytitle": kindstring + " - " + Qt.formatDateTime(startdate, "yyyy/MM/dd"),
                 "date": Qt.formatDateTime(startdate, "yyyy/MM/dd"),
-                "location": positionLabel.text,
+                // "location": positionLabel.text,
                 "starttime": Qt.formatDateTime(startdate, "hh:mm:ss"),
                 "duration": timeLabel.text,
                 "kindstring": kindstring,
