@@ -18,6 +18,7 @@ HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractD
     m_keyPressTimer->setInterval(500);
 
     m_fetcher = new HuamiFetcher(this);
+    connect(m_fetcher, &HuamiFetcher::busyChanged, this, &HuamiDevice::operationRunningChanged);
 
     connect(this, &QBLEDevice::propertiesChanged, this, &HuamiDevice::onPropertiesChanged);
     connect(m_keyPressTimer, &QTimer::timeout, this, &HuamiDevice::buttonPressTimeout);
@@ -525,5 +526,16 @@ void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStrin
                 initialise();
             }
         }
+    }
+}
+
+void HuamiDevice::characteristicChanged(const QString &characteristic, const QByteArray &value)
+{
+    qDebug() << Q_FUNC_INFO << characteristic << value.toHex();
+
+    if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL) {
+        m_fetcher->fetchControl(value);
+    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
+        m_fetcher->fetchData(value);
     }
 }

@@ -17,6 +17,7 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
         if (mi){
             m_currentOperation = new ActivityFetchOperation(this, m_device->database(), m_device->activitySampleSize(), true);
             m_currentOperation->start(mi);
+            setBusy(true);
         }
     }
 }
@@ -28,6 +29,7 @@ void HuamiFetcher::fetchControl(const QByteArray &value)
         if (m_currentOperation->handleMetaData(value)) {
             delete m_currentOperation;
             m_currentOperation = nullptr;
+            setBusy(false);
         }
     }
 }
@@ -55,4 +57,17 @@ void HuamiFetcher::writeControl(const QByteArray value)
 void HuamiFetcher::message(const QString &string)
 {
     m_device->message(string);
+}
+
+bool HuamiFetcher::busy() const
+{
+    return m_busy;
+}
+
+void HuamiFetcher::setBusy(bool b)
+{
+    if (b != m_busy) {
+        m_busy = b;
+        emit busyChanged();
+    }
 }
