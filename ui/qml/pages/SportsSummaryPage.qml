@@ -27,12 +27,17 @@ PageListPL {
         id: listItem
         contentHeight: styler.themeItemSizeSmall + (styler.themePaddingMedium * 2)
         anchors.left: parent.left
-        anchors.leftMargin: styler.themePaddingMedium
+        anchors.right: parent.right
+        width: parent.width
 
         Row {
             id: listItemRow
-            width: parent.width
-            spacing: styler.themePaddingLarge
+            width: parent.width - (2 * styler.themePaddingLarge)
+            spacing: styler.themePaddingLarge * 2
+            anchors.left: parent.left
+            anchors.leftMargin: styler.themePaddingLarge * 2
+            anchors.right: parent.right
+            anchors.rightMargin: styler.themePaddingLarge * 2
 
             Loader {
                 id: workoutImage
@@ -51,7 +56,7 @@ PageListPL {
                 id: leftColumn
                 anchors.top: parent.top
                 anchors.topMargin: styler.themePaddingMedium
-                width: (parent.width - workoutImage.width - (2 * styler.themePaddingMedium)) * 0.5
+                width: (parent.width - workoutImage.width - (styler.themePaddingLarge * 4)) * 0.5
                 spacing: units.gu(1)
 
                 LabelPL {
@@ -72,6 +77,7 @@ PageListPL {
                 width: leftColumn.width
                 spacing: units.gu(1)
                 Row {
+                    anchors.right: parent.right
                     spacing: units.gu(1)
                     IconPL {
                         id: durationImage
@@ -83,11 +89,14 @@ PageListPL {
                     LabelPL {
                         id: durationLabel
                         text: fncCovertSecondsToString((enddate-startdate)/1000)
+                        horizontalAlignment: Text.AlignRight
                     }
                 }
                 LabelPL {
                     id: timesLabel
+                    anchors.right: parent.right
                     text: startdate.toLocaleTimeString(Qt.locale(),Locale.ShortFormat) + " ⟶ " + enddate.toLocaleTimeString(Qt.locale(),Locale.ShortFormat)
+                    horizontalAlignment: Text.AlignRight
                 }
             }
         }
@@ -96,9 +105,9 @@ PageListPL {
             var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"), {
                 "activitytitle": kindstring + " - " + Qt.formatDateTime(startdate, "yyyy/MM/dd"),
                 "date": Qt.formatDateTime(startdate, "yyyy/MM/dd"),
-                // "location": positionLabel.text,
+                "location": positionString(baselatitude, baselongitude, basealtitude),
                 "starttime": Qt.formatDateTime(startdate, "hh:mm:ss"),
-                "duration": timeLabel.text,
+                "duration": timesLabel.text,
                 "kindstring": kindstring,
                 "tcx": SportsModel.gpx(id)
             });
@@ -121,6 +130,18 @@ PageListPL {
 
     Component.onCompleted: {
         SportsModel.update();
+    }
+
+    function positionString (lat, lon, alt) {
+        var positionstring
+        if (lat === 0 && lon === 0) {
+            positionstring = "---"
+        } else if (alt < -1000) {
+            positionstring = "---"
+        } else {
+            positionstring =  qsTr("%1°; %2°; %3m").arg((Math.round(lat * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( lon * 1e3 ) / 1e3).toLocaleString()).arg(alt.toLocaleString())
+        }
+        return positionstring
     }
 
     function fncCovertSecondsToString(sec)
