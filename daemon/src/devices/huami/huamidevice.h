@@ -59,6 +59,8 @@ public:
     virtual void setActivityNotifications(bool control, bool data);
     virtual void writeActivityControl(const QByteArray &value);
 
+    virtual bool isZeppOs() { return false;}
+
 protected:
     Q_SLOT void handleButtonPressed();
     Q_SLOT void buttonPressTimeout();

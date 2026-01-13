@@ -77,6 +77,11 @@ int ZeppOSDevice::supportedFeatures() const
             FEATURE_BUTTON_ACTION;
 }
 
+bool ZeppOSDevice::isZeppOs()
+{
+    return true;
+}
+
 void ZeppOSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;

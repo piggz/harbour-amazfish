@@ -417,7 +417,7 @@ void HuamiDevice::fetchOperationComplete(AbstractFetchOperation *operation)
         }
 
         if (createDetail) {
-            SportsDetailOperation *sportsDetailOperation = new SportsDetailOperation(m_fetcher, database(), summary, activityDetailParser(), true);
+            SportsDetailOperation *sportsDetailOperation = new SportsDetailOperation(m_fetcher, database(), summary, activityDetailParser(), isZeppOs());
             m_fetcher->jumpQueue(sportsDetailOperation);
         }
     }
