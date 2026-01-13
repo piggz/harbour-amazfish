@@ -51,7 +51,7 @@ public:
 
     void setDatabase(KDbConnection *conn) override;
 
-    Q_SLOT void operationComplete(AbstractOperation *operation);
+    Q_SLOT void fetchOperationComplete(AbstractFetchOperation *operation);
 
     AbstractActivitySummaryParser *activitySummaryParser() const override;
     AbstractActivityDetailParser *activityDetailParser() const override;

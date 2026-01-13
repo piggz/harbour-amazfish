@@ -19,6 +19,7 @@ HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractD
 
     m_fetcher = new HuamiFetcher(this);
     connect(m_fetcher, &HuamiFetcher::busyChanged, this, &HuamiDevice::operationRunningChanged);
+    connect(m_fetcher, &HuamiFetcher::fetchOperationComplete, this, &HuamiDevice::fetchOperationComplete);
 
     connect(this, &QBLEDevice::propertiesChanged, this, &HuamiDevice::onPropertiesChanged);
     connect(m_keyPressTimer, &QTimer::timeout, this, &HuamiDevice::buttonPressTimeout);
@@ -52,17 +53,7 @@ QString HuamiDevice::softwareRevision()
 
 void HuamiDevice::downloadSportsData()
 {
-    qDebug() << Q_FUNC_INFO;
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        SportsSummaryOperation *sportsSummaryOperation = new SportsSummaryOperation(mi, m_conn, true, activitySummaryParser());
-        //if (mi->registerOperation(sportsSummaryOperation)) {
-        //    sportsSummaryOperation->start(mi);
-        //    emit operationRunningChanged();
-        //} else {
-        //    delete sportsSummaryOperation;
-        //}
-    }
+    m_fetcher->startFetchData(Amazfish::DataType::TYPE_GPS_TRACK);
 }
 
 void HuamiDevice::downloadActivityData()
@@ -410,14 +401,12 @@ void HuamiDevice::serviceEvent(char event)
     }
 }
 
-void HuamiDevice::operationComplete(AbstractOperation *operation)
+void HuamiDevice::fetchOperationComplete(AbstractFetchOperation *operation)
 {
     qDebug() << Q_FUNC_INFO;
     SportsSummaryOperation *sportSummary = dynamic_cast<SportsSummaryOperation*>(operation);
 
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-
-    if (sportSummary && mi) {
+    if (sportSummary) {
         //Now the summary is finished, need to get the detail
         bool createDetail = false;
         ActivitySummary summary;
@@ -428,13 +417,8 @@ void HuamiDevice::operationComplete(AbstractOperation *operation)
         }
 
         if (createDetail) {
-            SportsDetailOperation *sportsDetailOperation = new SportsDetailOperation(mi, m_conn, summary, true, activityDetailParser());
-            //if (mi->registerOperation(sportsDetailOperation)) {
-            //    sportsDetailOperation->start(mi);
-            //    emit operationRunningChanged();
-            //} else {
-            //    delete sportsDetailOperation;
-            //}
+            SportsDetailOperation *sportsDetailOperation = new SportsDetailOperation(m_fetcher, database(), summary, activityDetailParser(), true);
+            m_fetcher->jumpQueue(sportsDetailOperation);
         }
     }
 }
