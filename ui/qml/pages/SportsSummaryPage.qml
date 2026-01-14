@@ -105,7 +105,7 @@ PageListPL {
             var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"), {
                 "activitytitle": kindstring + " - " + Qt.formatDateTime(startdate, "yyyy/MM/dd"),
                 "date": Qt.formatDateTime(startdate, "yyyy/MM/dd"),
-                "location": positionString(baselatitude, baselongitude, basealtitude),
+                "location": [baselatitude, baselongitude, basealtitude],
                 "starttime": Qt.formatDateTime(startdate, "hh:mm:ss"),
                 "duration": timesLabel.text,
                 "kindstring": kindstring,
@@ -130,18 +130,6 @@ PageListPL {
 
     Component.onCompleted: {
         SportsModel.update();
-    }
-
-    function positionString (lat, lon, alt) {
-        var positionstring
-        if (lat === 0 && lon === 0) {
-            positionstring = "---"
-        } else if (alt < -1000) {
-            positionstring = qsTr("%1°; %2°").arg((Math.round(lat * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( lon * 1e3 ) / 1e3).toLocaleString())
-        } else {
-            positionstring = qsTr("%1°; %2°; %3m").arg((Math.round(lat * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( lon * 1e3 ) / 1e3).toLocaleString()).arg(alt.toLocaleString())
-        }
-        return positionstring
     }
 
     function fncCovertSecondsToString(sec)

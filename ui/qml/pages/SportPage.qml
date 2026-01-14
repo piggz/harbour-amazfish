@@ -12,7 +12,7 @@ PagePL {
 
     property string date: ""
     property string duration: ""
-    property string location: ""
+    property var location: ""
     property string starttime: ""
     property string kindstring: ""
     property string activitytitle: ""
@@ -81,7 +81,7 @@ PagePL {
             LabelPL
             {
                 id: locationLabel
-                text: qsTr("Location: %1").arg(location)
+                text: qsTr("Location: %1").arg(positionString(location[0],location[1],location[2]))
             }
 
             LabelPL {
@@ -353,6 +353,19 @@ PagePL {
             return "unknown";
         }
         return kind.toLowerCase();
+    }
+
+    function positionString(lat, lon, alt) {
+        var positionstring
+        console.log("location: " + lat + lon + alt)
+        if (lat === 0 && lon === 0) {
+            positionstring = "---"
+        } else if (alt < -1000) {
+            positionstring = qsTr("%1°; %2°").arg((Math.round(lat * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( lon * 1e3 ) / 1e3).toLocaleString())
+        } else {
+            positionstring = qsTr("%1°; %2°; %3m").arg((Math.round(lat * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( lon * 1e3 ) / 1e3).toLocaleString()).arg(alt.toLocaleString())
+        }
+        return positionstring
     }
 
     function translateSportKey(key) {
