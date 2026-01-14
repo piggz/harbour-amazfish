@@ -137,9 +137,9 @@ PageListPL {
         if (lat === 0 && lon === 0) {
             positionstring = "---"
         } else if (alt < -1000) {
-            positionstring = "---"
+            positionstring = qsTr("%1°; %2°").arg((Math.round(lat * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( lon * 1e3 ) / 1e3).toLocaleString())
         } else {
-            positionstring =  qsTr("%1°; %2°; %3m").arg((Math.round(lat * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( lon * 1e3 ) / 1e3).toLocaleString()).arg(alt.toLocaleString())
+            positionstring = qsTr("%1°; %2°; %3m").arg((Math.round(lat * 1e3 ) / 1e3).toLocaleString()).arg((Math.round( lon * 1e3 ) / 1e3).toLocaleString()).arg(alt.toLocaleString())
         }
         return positionstring
     }
