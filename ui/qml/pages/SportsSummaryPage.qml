@@ -107,7 +107,8 @@ PageListPL {
                 "date": Qt.formatDateTime(startdate, "yyyy/MM/dd"),
                 "location": [baselatitude, baselongitude, basealtitude],
                 "starttime": Qt.formatDateTime(startdate, "hh:mm:ss"),
-                "duration": timesLabel.text,
+                "duration": durationLabel.text,
+                "times": timesLabel.text,
                 "kindstring": kindstring,
                 "tcx": SportsModel.gpx(id)
             });
