@@ -200,7 +200,7 @@
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>AGPS aktualizace Ok</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
