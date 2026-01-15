@@ -99,9 +99,11 @@ PagePL {
             "descentMeters": qsTr("Descent"),
             "maxAltitude": qsTr("Max Altitude"),
             "minAltitude": qsTr("Min Altitude"),
+            "avgAltitude": qsTr("Average Altitude"),
             "minPace": qsTr("Min Pace"),
             "maxPace": qsTr("Max Pace"),
             "averageHR": qsTr("Average HR"),
+            "averageHeartRate": qsTr("Average Heart Rate"),
             "averageKMPaceSeconds": qsTr("Average Pace"),
             "averageStride": qsTr("Average Stride"),
             "maxHR": qsTr("Max HR"),
@@ -120,7 +122,13 @@ PagePL {
             "maxLongitude": qsTr("Max Longitude"),
             "minLongitude": qsTr("Min Longitude"),
             "maxSpeed": qsTr("Max Speed"),
-            "totalStride": qsTr("Total Stride")
+            "totalStride": qsTr("Total Stride"),
+            "aerobicTrainingEffect": qsTr("Aerobic Training Effect"),
+            "calories": qsTr("Calories"),
+            "currentWorkoutLoad": qsTr("Current Workout Load"),
+            "downhillTime": qsTr("Downhill time"),
+            "elevationGain": qsTr("Elevation gain"),
+            "elevationLoss": qsTr("Elevation loss"),
         };
         if (translations[key] !== undefined)
             return translations[key];
