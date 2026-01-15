@@ -127,7 +127,7 @@
 <context>
     <name>GtsDevice</name>
     <message>
-        <location filename="../src/devices/gtsdevice.cpp" line="219"/>
+        <location filename="../src/devices/huami/gtsdevice.cpp" line="220"/>
         <source>An operation is currently running, please try later</source>
         <translation>En operasjon kjører for øyeblikket, prøv senere</translation>
     </message>
@@ -135,32 +135,32 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="208"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="208"/>
         <source>Navigation Started</source>
         <translation>Navigasjon startet</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="210"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="210"/>
         <source>Navigation Stopped</source>
         <translation>Navigasjonen har stoppet</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="230"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="230"/>
         <source>Progress</source>
         <translation>Framgang</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="372"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="372"/>
         <source>Sending %1...</source>
         <translation>Sender %1...</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="375"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="375"/>
         <source>No file selected</source>
         <translation>Ingen fil er valgt</translation>
     </message>
     <message>
-        <location filename="../src/devices/huamidevice.cpp" line="397"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="397"/>
         <source>An operation is currently running, please try later</source>
         <translation>En operasjon kjører for øyeblikket, prøv senere</translation>
     </message>
@@ -196,6 +196,39 @@
     </message>
 </context>
 <context>
+    <name>QIODevice</name>
+    <message>
+        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
+        <source>AGPS update Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
+        <source>AGPS File is corrupt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
+        <source>AGPS File is not the correct format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
+        <source>Unknown error sending AGPS file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
+        <source>File upload Ok.  Performing on-device update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
+        <source>File upload failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../src/operations/abstractfetchoperation.cpp" line="115"/>
@@ -210,36 +243,44 @@
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="186"/>
         <location filename="../src/operations/dfuoperation.cpp" line="205"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="85"/>
+        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="84"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="87"/>
         <source>Update operation failed</source>
         <translation>Oppdatering mislyktes</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="224"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="97"/>
+        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="96"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="95"/>
         <source>Update operation failed, unexpected metadata</source>
         <translation>Oppdatering mislyktes, uventede metadata</translation>
     </message>
     <message>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="72"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="79"/>
+        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="71"/>
+        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="78"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="74"/>
         <source>Update operation complete</source>
         <translation>Oppdatering fullført</translation>
     </message>
     <message>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="95"/>
+        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="94"/>
         <source>Update operation failed, filetype not supported</source>
         <translation>Oppdatering feilet, ikke støttet filtype</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="144"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="109"/>
+        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="108"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="29"/>
         <source>File does not seem to be supported</source>
         <translation>Det ser ikke ut til at filen støttes</translation>
+    </message>
+</context>
+<context>
+    <name>ZeppOSDevice</name>
+    <message>
+        <location filename="../src/devices/huami/zepposdevice.cpp" line="423"/>
+        <source>An operation is currently running, please try later</source>
+        <translation type="unfinished">En operasjon kjører for øyeblikket, prøv senere</translation>
     </message>
 </context>
 </TS>

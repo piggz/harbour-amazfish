@@ -1329,218 +1329,435 @@
 <context>
     <name>SportPage</name>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="90"/>
+        <location filename="../qml/pages/SportPage.qml" line="244"/>
         <source>Data:</source>
         <translation>Дата:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="359"/>
+        <location filename="../qml/pages/SportPage.qml" line="135"/>
         <source>Steps</source>
         <translation>Шаги</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="360"/>
         <source>Active Seconds</source>
-        <translation>Активные секунды</translation>
+        <translation type="vanished">Активные секунды</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="361"/>
+        <location filename="../qml/pages/SportPage.qml" line="108"/>
+        <location filename="../qml/pages/SportPage.qml" line="109"/>
         <source>Calories</source>
         <translation>Калории</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="362"/>
+        <location filename="../qml/pages/SportPage.qml" line="113"/>
         <source>Distance</source>
         <translation>Дистанция</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="363"/>
+        <location filename="../qml/pages/SportPage.qml" line="97"/>
         <source>Ascent</source>
         <translation>Подъем</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="364"/>
+        <location filename="../qml/pages/SportPage.qml" line="86"/>
+        <source>%1°; %2°</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="88"/>
+        <source>%1°; %2°; %3m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="94"/>
+        <source>Active Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="95"/>
+        <source>Aerobic Training Effect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="96"/>
+        <source>Anaerobic Training Effect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="99"/>
+        <location filename="../qml/pages/SportPage.qml" line="100"/>
+        <location filename="../qml/pages/SportPage.qml" line="107"/>
+        <source>Average Heart Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="104"/>
+        <source>Average Stroke Distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="105"/>
+        <location filename="../qml/pages/SportPage.qml" line="142"/>
+        <source>Average Stroke Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="106"/>
+        <source>Average Altitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="110"/>
+        <source>Current Workout Load</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="111"/>
         <source>Descent</source>
         <translation>Спуск</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="365"/>
+        <location filename="../qml/pages/SportPage.qml" line="114"/>
+        <source>Downhill Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="115"/>
+        <source>Elevation Gain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="116"/>
+        <source>Elevation Loss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="117"/>
+        <source>Time on Flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="119"/>
         <source>Max Altitude</source>
         <translation>Максимальная высота</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="366"/>
+        <location filename="../qml/pages/SportPage.qml" line="120"/>
+        <location filename="../qml/pages/SportPage.qml" line="121"/>
+        <source>Max Heart Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="122"/>
+        <source>VO₂ Max</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="127"/>
         <source>Min Altitude</source>
         <translation>Минимальная высота</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="367"/>
+        <location filename="../qml/pages/SportPage.qml" line="128"/>
+        <source>Min Heart Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="131"/>
         <source>Min Pace</source>
         <translation>Мин. темп</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="368"/>
+        <location filename="../qml/pages/SportPage.qml" line="180"/>
+        <source>SWOLF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="225"/>
+        <source>Start: %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="231"/>
+        <source>Duration: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="237"/>
+        <source>Location: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="125"/>
         <source>Max Pace</source>
         <translation>Макс. Темп</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="369"/>
         <source>Average HR</source>
-        <translation>Ср. Пульс</translation>
+        <translation type="vanished">Ср. Пульс</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="370"/>
+        <location filename="../qml/pages/SportPage.qml" line="101"/>
+        <location filename="../qml/pages/SportPage.qml" line="132"/>
         <source>Average Pace</source>
         <translation>Средний темп</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="371"/>
+        <location filename="../qml/pages/SportPage.qml" line="103"/>
+        <location filename="../qml/pages/SportPage.qml" line="137"/>
         <source>Average Stride</source>
         <translation>Средний шаг</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="372"/>
         <source>Max HR</source>
-        <translation>Макс. пульс</translation>
+        <translation type="vanished">Макс. пульс</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="373"/>
+        <location filename="../qml/pages/SportPage.qml" line="98"/>
         <source>Time Ascending</source>
         <translation>Время подъёма</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="374"/>
+        <location filename="../qml/pages/SportPage.qml" line="112"/>
         <source>Time Descending</source>
         <translation>Время спуска</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="375"/>
         <source>Time Flat</source>
-        <translation>Время на ровной</translation>
+        <translation type="vanished">Время на ровной</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="376"/>
         <source>Average Stroke</source>
-        <translation>Средний гребок</translation>
+        <translation type="vanished">Средний гребок</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="377"/>
         <source>Average Stroke/s</source>
-        <translation>Среднее число шагов/с</translation>
+        <translation type="vanished">Среднее число шагов/с</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="378"/>
+        <location filename="../qml/pages/SportPage.qml" line="102"/>
         <source>Average Lap Pace</source>
         <translation>Средний темп круга</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="379"/>
+        <location filename="../qml/pages/SportPage.qml" line="133"/>
+        <source>Best Pace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="134"/>
+        <source>Pause Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="136"/>
+        <source>Average Cadence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="138"/>
+        <source>Max Cadence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="139"/>
         <source>Strokes</source>
         <translation>Гребки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="380"/>
+        <location filename="../qml/pages/SportPage.qml" line="140"/>
+        <source>Average Distance per Stroke</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="141"/>
+        <source>Max Stroke Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="143"/>
+        <source>Lane Length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="144"/>
+        <source>Swim Laps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="145"/>
+        <source>Swim Strokes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="147"/>
         <source>SWOLF Index</source>
         <translation>Индекс SWOLF</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="381"/>
+        <location filename="../qml/pages/SportPage.qml" line="146"/>
         <source>Swim Style</source>
         <translation>Стиль плавания</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="382"/>
+        <location filename="../qml/pages/SportPage.qml" line="118"/>
         <source>Laps</source>
         <translation>Круги</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="383"/>
+        <location filename="../qml/pages/SportPage.qml" line="123"/>
         <source>Max Latitude</source>
         <translation>Максимальная широта</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="384"/>
+        <location filename="../qml/pages/SportPage.qml" line="129"/>
         <source>Min Latitude</source>
         <translation>Мин широта</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="385"/>
+        <location filename="../qml/pages/SportPage.qml" line="124"/>
         <source>Max Longitude</source>
         <translation>Максимальная долгота</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="386"/>
+        <location filename="../qml/pages/SportPage.qml" line="130"/>
         <source>Min Longitude</source>
         <translation>Мин долгота</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="387"/>
+        <location filename="../qml/pages/SportPage.qml" line="126"/>
         <source>Max Speed</source>
         <translation>Макс. скорость</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="388"/>
+        <location filename="../qml/pages/SportPage.qml" line="148"/>
+        <source>Total Climbing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="149"/>
+        <source>Total Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="150"/>
         <source>Total Stride</source>
         <translation>Общий шаг</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="394"/>
+        <location filename="../qml/pages/SportPage.qml" line="151"/>
+        <source>Uphill Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="152"/>
+        <source>Workout Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="166"/>
+        <source>°</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="167"/>
+        <source>laps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="168"/>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="169"/>
+        <source>m/s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="170"/>
+        <source>min/km</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="171"/>
+        <source>ml/kg/min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="172"/>
+        <source>s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="173"/>
+        <source>s/km</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="174"/>
+        <source>s/m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="175"/>
+        <location filename="../qml/pages/SportPage.qml" line="177"/>
         <source>steps</source>
         <translation>шаги</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="395"/>
         <source>seconds</source>
-        <translation>секунд</translation>
+        <translation type="vanished">секунд</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="396"/>
+        <location filename="../qml/pages/SportPage.qml" line="163"/>
+        <location filename="../qml/pages/SportPage.qml" line="164"/>
         <source>kcal</source>
         <translation>ккал</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="397"/>
         <source>meters</source>
-        <translation>метров</translation>
+        <translation type="vanished">метров</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="398"/>
         <source>seconds/m</source>
-        <translation>сек/м</translation>
+        <translation type="vanished">сек/м</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="399"/>
+        <location filename="../qml/pages/SportPage.qml" line="162"/>
         <source>bpm</source>
         <translation>уд/мин</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="400"/>
         <source>seconds/km</source>
-        <translation>сек/км</translation>
+        <translation type="vanished">сек/км</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="401"/>
+        <location filename="../qml/pages/SportPage.qml" line="165"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="402"/>
+        <location filename="../qml/pages/SportPage.qml" line="176"/>
+        <source>steps/min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="179"/>
         <source>strokes/s</source>
         <translation>удары/с</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="403"/>
+        <location filename="../qml/pages/SportPage.qml" line="178"/>
         <source>strokes</source>
         <translation>гребки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="404"/>
-        <location filename="../qml/pages/SportPage.qml" line="407"/>
         <source>swolf</source>
-        <translation>swolf</translation>
+        <translation type="vanished">swolf</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="30"/>
+        <location filename="../qml/pages/SportPage.qml" line="434"/>
         <source>Send to Strava</source>
         <translation>Отправить в Strava</translation>
     </message>
@@ -1558,7 +1775,7 @@
         <translation>Загрузить следующую деятельность</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="145"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="122"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
