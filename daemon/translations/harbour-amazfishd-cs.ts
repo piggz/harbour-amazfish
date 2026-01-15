@@ -205,27 +205,27 @@
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor AGPS je poškozený</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor AGPS není ve správném formátu</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámá chyba při odesílání AGPS souboru</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrávání souboru bylo úspěšné.  Probíhá aktualizace na zařízení</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Odesílání souboru selhalo</translation>
     </message>
 </context>
 <context>
@@ -280,7 +280,7 @@
     <message>
         <location filename="../src/devices/huami/zepposdevice.cpp" line="423"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Momentálně probíhá operace, prosím zkuste to později</translation>
     </message>
 </context>
 </TS>
