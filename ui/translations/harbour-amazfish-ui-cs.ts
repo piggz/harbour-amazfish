@@ -1552,17 +1552,17 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="134"/>
         <source>Pause Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Doba přestávky</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="136"/>
         <source>Average Cadence</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměrná kadence</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="138"/>
         <source>Max Cadence</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximální kadence</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="139"/>
@@ -1572,27 +1572,27 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="140"/>
         <source>Average Distance per Stroke</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměrná vzdálenost na záběr</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="141"/>
         <source>Max Stroke Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximální frekvence záběrů</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="143"/>
         <source>Lane Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka dráhy</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="144"/>
         <source>Swim Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaveckých kol</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="145"/>
         <source>Swim Strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaveckých záběrů</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="147"/>
@@ -1637,12 +1637,12 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="148"/>
         <source>Total Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Celkově lezení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="149"/>
         <source>Total Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Celková doba</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="150"/>
@@ -1652,57 +1652,57 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="151"/>
         <source>Uphill Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas do kopce</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="152"/>
         <source>Workout Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Doba cvičení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="166"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation>°</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="167"/>
         <source>laps</source>
-        <translation type="unfinished"></translation>
+        <translation>kol</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="168"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="169"/>
         <source>m/s</source>
-        <translation type="unfinished"></translation>
+        <translation>m/s</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>min/km</source>
-        <translation type="unfinished"></translation>
+        <translation>min/km</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="171"/>
         <source>ml/kg/min</source>
-        <translation type="unfinished"></translation>
+        <translation>ml/kg/min</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="172"/>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="173"/>
         <source>s/km</source>
-        <translation type="unfinished"></translation>
+        <translation>s/km</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="174"/>
         <source>s/m</source>
-        <translation type="unfinished"></translation>
+        <translation>s/m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="175"/>
@@ -1745,7 +1745,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="176"/>
         <source>steps/min</source>
-        <translation type="unfinished"></translation>
+        <translation>kroků/min</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="179"/>
@@ -1767,22 +1767,22 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="18"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámá</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Activity</source>
-        <translation type="unfinished">Aktivita</translation>
+        <translation>Aktivita</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="20"/>
         <source>Light Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Lehký spánek</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="21"/>
         <source>Deep Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Hluboký spánek</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="22"/>
