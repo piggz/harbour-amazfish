@@ -90,141 +90,63 @@ PagePL {
     }
 
     function translateSportKey(key) {
-        if (key === "steps")
-            return qsTr("Steps");
-
-        if (key === "activeSeconds")
-            return qsTr("Active Seconds");
-
-        if (key === "caloriesBurnt")
-            return qsTr("Calories");
-
-        if (key === "distanceMeters")
-            return qsTr("Distance");
-
-        if (key === "ascentMeters")
-            return qsTr("Ascent");
-
-        if (key === "descentMeters")
-            return qsTr("Descent");
-
-        if (key === "maxAltitude")
-            return qsTr("Max Altitude");
-
-        if (key === "minAltitude")
-            return qsTr("Min Altitude");
-
-        if (key === "minPace")
-            return qsTr("Min Pace");
-
-        if (key === "maxPace")
-            return qsTr("Max Pace");
-
-        if (key === "averageHR")
-            return qsTr("Average HR");
-
-        if (key === "averageKMPaceSeconds")
-            return qsTr("Average Pace");
-
-        if (key === "averageStride")
-            return qsTr("Average Stride");
-
-        if (key === "maxHR")
-            return qsTr("Max HR");
-
-        if (key === "ascentSeconds")
-            return qsTr("Time Ascending");
-
-        if (key === "descentSeconds")
-            return qsTr("Time Descending");
-
-        if (key === "flatSeconds")
-            return qsTr("Time Flat");
-
-        if (key === "averageStrokeDistance")
-            return qsTr("Average Stroke");
-
-        if (key === "averageStrokesPerSecond")
-            return qsTr("Average Stroke/s");
-
-        if (key === "averageLapPace")
-            return qsTr("Average Lap Pace");
-
-        if (key === "strokes")
-            return qsTr("Strokes");
-
-        if (key === "swolfIndex")
-            return qsTr("SWOLF Index");
-
-        if (key === "swimStyle")
-            return qsTr("Swim Style");
-
-        if (key === "laps")
-            return qsTr("Laps");
-
-        if (key === "maxLatitude")
-            return qsTr("Max Latitude");
-
-        if (key === "minLatitude")
-            return qsTr("Min Latitude");
-
-        if (key === "maxLongitude")
-            return qsTr("Max Longitude");
-
-        if (key === "minLongitude")
-            return qsTr("Min Longitude");
-
-        if (key === "maxSpeed")
-            return qsTr("Max Speed");
-
-        if (key === "totalStride")
-            return qsTr("Total Stride");
+        const translations = {
+            "steps": qsTr("Steps"),
+            "activeSeconds": qsTr("Active Seconds"),
+            "caloriesBurnt": qsTr("Calories"),
+            "distanceMeters": qsTr("Distance"),
+            "ascentMeters": qsTr("Ascent"),
+            "descentMeters": qsTr("Descent"),
+            "maxAltitude": qsTr("Max Altitude"),
+            "minAltitude": qsTr("Min Altitude"),
+            "minPace": qsTr("Min Pace"),
+            "maxPace": qsTr("Max Pace"),
+            "averageHR": qsTr("Average HR"),
+            "averageKMPaceSeconds": qsTr("Average Pace"),
+            "averageStride": qsTr("Average Stride"),
+            "maxHR": qsTr("Max HR"),
+            "ascentSeconds": qsTr("Time Ascending"),
+            "descentSeconds": qsTr("Time Descending"),
+            "flatSeconds": qsTr("Time Flat"),
+            "averageStrokeDistance": qsTr("Average Stroke"),
+            "averageStrokesPerSecond": qsTr("Average Stroke/s"),
+            "averageLapPace": qsTr("Average Lap Pace"),
+            "strokes": qsTr("Strokes"),
+            "swolfIndex": qsTr("SWOLF Index"),
+            "swimStyle": qsTr("Swim Style"),
+            "laps": qsTr("Laps"),
+            "maxLatitude": qsTr("Max Latitude"),
+            "minLatitude": qsTr("Min Latitude"),
+            "maxLongitude": qsTr("Max Longitude"),
+            "minLongitude": qsTr("Min Longitude"),
+            "maxSpeed": qsTr("Max Speed"),
+            "totalStride": qsTr("Total Stride")
+        };
+        if (translations[key] !== undefined)
+            return translations[key];
 
         return key;
     }
 
     function translateSportUnit(unit) {
-        if (unit === "steps_unit")
-            return qsTr("steps");
-
-        if (unit === "seconds")
-            return qsTr("seconds");
-
-        if (unit === "calories_unit")
-            return qsTr("kcal");
-
-        if (unit === "meters")
-            return qsTr("meters");
-
-        if (unit === "seconds_m")
-            return qsTr("seconds/m");
-
-        if (unit === "meters_second")
-            return qsTr("m/s");
-
-        if (unit === "bpm")
-            return qsTr("bpm");
-
-        if (unit === "seconds_km")
-            return qsTr("seconds/km");
-
-        if (unit === "cm")
-            return qsTr("cm");
-
-        if (unit === "strokes_second")
-            return qsTr("strokes/s");
-
-        if (unit === "strokes")
-            return qsTr("strokes");
-
-        if (unit === "swolf_index")
-            return qsTr("SWOLF");
-
-        if (unit === "style")
-            return "";
-
-        if (unit === "laps")
-            return "";
+        const translations = {
+            "steps_unit": qsTr("steps"),
+            "seconds": qsTr("seconds"),
+            "calories_unit": qsTr("kcal"),
+            "meters": qsTr("meters"),
+            "seconds_m": qsTr("seconds/m"),
+            "meters_second": qsTr("m/s"),
+            "bpm": qsTr("bpm"),
+            "seconds_km": qsTr("seconds/km"),
+            "cm": qsTr("cm"),
+            "strokes_second": qsTr("strokes/s"),
+            "strokes": qsTr("strokes"),
+            "swolf_index": qsTr("SWOLF"),
+            "style": "",
+            "laps": ""
+        };
+        if (translations[unit] !== undefined)
+            return translations[unit];
 
         return unit;
     }
