@@ -391,7 +391,7 @@ PageListPL {
                 anchors.top: parent.top
                 anchors.topMargin: styler.themePaddingMedium
                 width: (parent.width - workoutImage.width - (styler.themePaddingLarge * 4)) * 0.5
-                spacing: units.gu(1)
+                spacing: styler.themePaddingSmall
 
                 LabelPL {
                     id: nameLabel
@@ -413,11 +413,11 @@ PageListPL {
                 anchors.top: parent.top
                 anchors.topMargin: styler.themePaddingMedium
                 width: leftColumn.width
-                spacing: units.gu(1)
+                spacing: styler.themePaddingSmall
 
                 Row {
                     anchors.right: parent.right
-                    spacing: units.gu(1)
+                    spacing: styler.themePaddingSmall
 
                     IconPL {
                         id: durationImage
