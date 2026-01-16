@@ -1787,122 +1787,122 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="22"/>
         <source>Not Worn</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenošeno</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="23"/>
         <source>Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Běhání</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="24"/>
         <source>Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>Chůze</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="25"/>
         <source>Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Plavání</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="26"/>
         <source>Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Jízda na kole</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="27"/>
         <source>Treadmill</source>
-        <translation type="unfinished"></translation>
+        <translation>Běžecký pás</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="28"/>
         <source>Exercise</source>
-        <translation type="unfinished"></translation>
+        <translation>Cvičení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="29"/>
         <source>Open Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Plavání na otevřené vodě</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="30"/>
         <source>Indoor Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Dráhová cyklistika</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="31"/>
         <source>Elliptical Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliptický trenažér</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="32"/>
         <source>Jump Rope</source>
-        <translation type="unfinished"></translation>
+        <translation>Švihadlo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="33"/>
         <source>Yoga</source>
-        <translation type="unfinished"></translation>
+        <translation>Jóga</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="34"/>
         <source>Soccer</source>
-        <translation type="unfinished"></translation>
+        <translation>Fotbal</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="35"/>
         <source>Rowing Machine</source>
-        <translation type="unfinished"></translation>
+        <translation>Veslovací trenažér</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="36"/>
         <source>Cricket</source>
-        <translation type="unfinished"></translation>
+        <translation>Kriket</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="37"/>
         <source>Basketball</source>
-        <translation type="unfinished"></translation>
+        <translation>Basketbal</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="38"/>
         <source>Ping Pong</source>
-        <translation type="unfinished"></translation>
+        <translation>Ping Pong</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="39"/>
         <source>Badmington</source>
-        <translation type="unfinished"></translation>
+        <translation>Badminton</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="40"/>
         <source>Strength Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Silový trénink</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
         <source>Hiking</source>
-        <translation type="unfinished"></translation>
+        <translation>Turistika</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="42"/>
         <source>Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lezení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="43"/>
         <source>REM Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>REM spánek</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="44"/>
         <source>Sleep Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Spánek obecně</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="45"/>
         <source>Awake Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Bdělost ve spánku</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="46"/>
@@ -1912,27 +1912,27 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="47"/>
         <source>Indoor Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnitřní dráha</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="48"/>
         <source>Handcycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruční cyklistika</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="49"/>
         <source>E Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektrokolo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="50"/>
         <source>Bike Commute</source>
-        <translation type="unfinished"></translation>
+        <translation>Dojíždění na kole</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="51"/>
         <source>Handcycling Indoor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruční cyklistika v interiéru</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="52"/>
@@ -1942,27 +1942,27 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="53"/>
         <source>Fitness Equipment</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitness vybavení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="54"/>
         <source>Stair Stepper</source>
-        <translation type="unfinished"></translation>
+        <translation>Schodový trenažér</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="55"/>
         <source>Pilates</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilates</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="56"/>
         <source>Pool Swim</source>
-        <translation type="unfinished"></translation>
+        <translation>Plavání v bazénu</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="57"/>
         <source>Tennis</source>
-        <translation type="unfinished"></translation>
+        <translation>Tenis</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="58"/>
@@ -1972,57 +1972,57 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="59"/>
         <source>Table Tennis</source>
-        <translation type="unfinished"></translation>
+        <translation>Stolní tenis</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="60"/>
         <source>American Football</source>
-        <translation type="unfinished"></translation>
+        <translation>Americký fotbal</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="61"/>
         <source>Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Trénink</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="62"/>
         <source>Cardio</source>
-        <translation type="unfinished"></translation>
+        <translation>Kardio</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="63"/>
         <source>Breathwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Dechová cvičení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="64"/>
         <source>Indoor Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>Chůze v interiéru</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="65"/>
         <source>XC Classic Ski</source>
-        <translation type="unfinished"></translation>
+        <translation>Klasické běžky</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="66"/>
         <source>Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lyžování</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="67"/>
         <source>Snowboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Snowboarding</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="68"/>
         <source>Rowing</source>
-        <translation type="unfinished"></translation>
+        <translation>Veslování</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="69"/>
         <source>Mountaineering</source>
-        <translation type="unfinished"></translation>
+        <translation>Horolezectví</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="70"/>
@@ -2032,17 +2032,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="71"/>
         <source>Paddling</source>
-        <translation type="unfinished"></translation>
+        <translation>Pádlování</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="72"/>
         <source>Flying</source>
-        <translation type="unfinished"></translation>
+        <translation>Létání</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="73"/>
         <source>Motorcycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Motocykly</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="74"/>
@@ -2052,72 +2052,72 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="75"/>
         <source>Driving</source>
-        <translation type="unfinished"></translation>
+        <translation>Řízení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="76"/>
         <source>Golf</source>
-        <translation type="unfinished"></translation>
+        <translation>Golf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="77"/>
         <source>Hang Gliding</source>
-        <translation type="unfinished"></translation>
+        <translation>Závěsné létání</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="78"/>
         <source>Hunting</source>
-        <translation type="unfinished"></translation>
+        <translation>Lov</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="79"/>
         <source>Fishing</source>
-        <translation type="unfinished"></translation>
+        <translation>Rybaření</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="80"/>
         <source>Inline Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Inline bruslení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="81"/>
         <source>Rock Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalní lezení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="82"/>
         <source>Climb Indoor</source>
-        <translation type="unfinished"></translation>
+        <translation>Lezení v interiéru</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="83"/>
         <source>Bouldering</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouldering</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="84"/>
         <source>Sail Race</source>
-        <translation type="unfinished"></translation>
+        <translation>Závody plachetnic</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="85"/>
         <source>Sail Expedition</source>
-        <translation type="unfinished"></translation>
+        <translation>Expedice plachetnic</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="86"/>
         <source>Ice Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruslení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="87"/>
         <source>Sky Diving</source>
-        <translation type="unfinished"></translation>
+        <translation>Seskoky padákem</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="88"/>
         <source>Snowshoe</source>
-        <translation type="unfinished"></translation>
+        <translation>Sněžnice</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="89"/>
@@ -2127,32 +2127,32 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="90"/>
         <source>Stand Up Paddleboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Paddleboarding</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="91"/>
         <source>Surfing</source>
-        <translation type="unfinished"></translation>
+        <translation>Surfování</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="92"/>
         <source>Wakeboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Wakeboarding</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="93"/>
         <source>Water Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodní lyžování</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="94"/>
         <source>Kayaking</source>
-        <translation type="unfinished"></translation>
+        <translation>Kajak</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="95"/>
         <source>Rafting</source>
-        <translation type="unfinished"></translation>
+        <translation>Rafting</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="96"/>
