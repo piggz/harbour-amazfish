@@ -200,32 +200,32 @@
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Оновлення AGPS ОК</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл AGPS пошкоджений</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл AGPS має неправильний формат</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідома помилка надсилання AGPS-файлу</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантаження файлу успішне. Виконується оновлення на пристрої</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося завантажити файл</translation>
     </message>
 </context>
 <context>
@@ -280,7 +280,7 @@
     <message>
         <location filename="../src/devices/huami/zepposdevice.cpp" line="423"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Наразі виконується операція, спробуйте пізніше</translation>
     </message>
 </context>
 </TS>
