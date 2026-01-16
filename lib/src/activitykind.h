@@ -152,7 +152,7 @@ public:
         CrossTraining = 0x0400006f,
         SitUps = 0x04000070,
         FitnessGaming = 0x04000071,
-        AerobicRxercise = 0x04000072,
+        AerobicExercise = 0x04000072,
         Rolling = 0x04000073,
         Flexibility = 0x04000074,
         Gymnastics = 0x04000075,
