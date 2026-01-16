@@ -92,7 +92,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
         <source>BPM</source>
-        <translation>уд/хв</translation>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
@@ -417,7 +417,7 @@
         <location filename="../qml/pages/HeartratePage.qml" line="75"/>
         <location filename="../qml/pages/HeartratePage.qml" line="78"/>
         <source>BPM</source>
-        <translation>уд/хв</translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="97"/>
@@ -1772,7 +1772,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Activity</source>
-        <translation type="unfinished">Активність</translation>
+        <translation>Активність</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="20"/>
