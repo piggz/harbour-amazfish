@@ -200,32 +200,32 @@
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>aGPS Update ok</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
-        <translation type="unfinished"></translation>
+        <translation>aGPS Datei ist beschädigt</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
-        <translation type="unfinished"></translation>
+        <translation>aGPS Datei hat nicht das richtige Format</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Fehler beim Senden der aGPS Datei</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei hochladen fertig.  Starte Aktualisierung am Gerät</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei hochladen fehlgeschlagen</translation>
     </message>
 </context>
 <context>
@@ -280,7 +280,7 @@
     <message>
         <location filename="../src/devices/huami/zepposdevice.cpp" line="423"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">Ein Vorgang wird derzeit ausgeführt, bitte später nochmal versuchen</translation>
+        <translation>Ein Vorgang läuft noch, bitte später nochmal versuchen</translation>
     </message>
 </context>
 </TS>
