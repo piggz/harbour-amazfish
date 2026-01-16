@@ -154,7 +154,7 @@ PageListPL {
             "CrossTraining": qsTr("Cross Training"),
             "SitUps": qsTr("Sit Ups"),
             "FitnessGaming": qsTr("Fitness Gaming"),
-            "AerobicRxercise": qsTr("Aerobic Rxercise"),
+            "AerobicExercise": qsTr("Aerobic Exercise"),
             "Rolling": qsTr("Rolling"),
             "Flexibility": qsTr("Flexibility"),
             "Gymnastics": qsTr("Gymnastics"),

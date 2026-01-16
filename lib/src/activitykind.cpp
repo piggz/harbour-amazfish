@@ -141,7 +141,7 @@ const QMap<ActivityKind::Type, QString> ActivityKind::m_typeNames = {
     {CrossTraining, "CrossTraining"},
     {SitUps, "SitUps"},
     {FitnessGaming, "FitnessGaming"},
-    {AerobicRxercise, "AerobicRxercise"},
+    {AerobicExercise, "AerobicExercise"},
     {Rolling, "Rolling"},
     {Flexibility, "Flexibility"},
     {Gymnastics, "Gymnastics"},
