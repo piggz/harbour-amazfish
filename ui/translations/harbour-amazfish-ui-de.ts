@@ -2460,9 +2460,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="157"/>
         <source>Aerobic Rxercise</source>
-        <translation>Aerobe Übungen</translation>
+        <translation type="vanished">Aerobe Übungen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="157"/>
+        <source>Aerobic Exercise</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="158"/>

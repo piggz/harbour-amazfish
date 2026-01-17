@@ -2437,7 +2437,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="157"/>
-        <source>Aerobic Rxercise</source>
+        <source>Aerobic Exercise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
