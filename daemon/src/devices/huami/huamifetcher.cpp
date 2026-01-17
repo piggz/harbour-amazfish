@@ -85,6 +85,7 @@ void HuamiFetcher::setBusy(bool b)
 
 void HuamiFetcher::triggerNextOperation()
 {
+    qDebug() << Q_FUNC_INFO;
     bool wasFetching = m_currentOperation != nullptr;
     if (m_operations.isEmpty()) {
         m_currentOperation = nullptr;

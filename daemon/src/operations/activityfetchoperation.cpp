@@ -15,6 +15,7 @@ ActivityFetchOperation::ActivityFetchOperation(HuamiFetcher *fetcher, KDbConnect
 
 void ActivityFetchOperation::start(QBLEService *service)
 {
+    qDebug() << Q_FUNC_INFO;
     setStartDate(lastActivitySync());
 
     m_fetcher->setNotifications(true, true);
