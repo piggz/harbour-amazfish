@@ -134,12 +134,12 @@ DialogListPL {
     function saveDisplayItems() {
         var items = "";
         for(var i = 0; i < displayItems.count; ++i) {
-            console.log(displayItems.get(i).itemText, displayItems.get(i).itemVisible );
+            // console.log(displayItems.get(i).itemText, displayItems.get(i).itemVisible );
             if (displayItems.get(i).itemVisible) {
                 items = items + displayItems.get(i).itemId + ",";
             }
         }
-        console.log(items);
+        // console.log(items);
         AmazfishConfig.deviceDisplayItems = items;
     }
 }

@@ -194,13 +194,6 @@ PagePL {
                 minhr = point.y;
             }
         }
-        console.log("relaxed:", relaxed);
-        console.log("light:", light);
-        console.log("intensive:", intensive);
-        console.log("aerobic:", aerobic);
-        console.log("anerobic:", anerobic);
-        console.log("vo2max:", vo2max);
-
     }
 
     function wingate() {
@@ -223,8 +216,6 @@ PagePL {
         } else {
             max_hr = 209.273-(0.804*age)
         }
-
-        console.log("Age is", age, "max hr is", max_hr);
 
         return max_hr;
     }

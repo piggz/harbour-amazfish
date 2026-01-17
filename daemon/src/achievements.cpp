@@ -42,7 +42,7 @@ void Achievements::updateStepsStatus(int steps, int goal)
         )
     );
     metric->update(static_cast<double>(steps));
-    qDebug() << "metric-update(double steps)" << steps;
+    // qDebug() << "metric-update(double steps)" << steps;
 #endif
 
 }
@@ -57,7 +57,7 @@ QString Achievements::selectStepsMessage(int steps, double goal)
 
     double reached = (goal > 0) ? steps / static_cast<double>(goal) : 0.0;
 
-    qDebug() << Q_FUNC_INFO  << reached << " " << steps << " " << goal;
+    // qDebug() << Q_FUNC_INFO  << reached << " " << steps << " " << goal;
 
     for (const auto& entry : usedMap) {
         if (entry.first > reached) {

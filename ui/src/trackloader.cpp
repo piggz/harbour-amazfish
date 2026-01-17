@@ -34,7 +34,7 @@ TrackLoader::TrackLoader(QObject *parent) :
 QString TrackLoader::readGpx(){
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/Laufhelden";
     QString fullFilename = dirName + "/" + m_filename;
-    qDebug()<<"Reading File:"<<fullFilename;
+    // qDebug()<<"Reading File:"<<fullFilename;
 
     QFile f(fullFilename);
     if (!f.open(QFile::ReadOnly | QFile::Text)) return "";
@@ -53,7 +53,7 @@ void TrackLoader::vReadFile(const QString &sFilename)
 
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/Laufhelden";
     QString fullFilename = dirName + "/" + sFilename;
-    qDebug()<<"Reading File:"<<fullFilename;
+    // qDebug()<<"Reading File:"<<fullFilename;
 
     QFile f(fullFilename);
     if (!f.open(QFile::ReadWrite | QFile::Text)) return;
@@ -78,7 +78,7 @@ void TrackLoader::vSetNewProperties(const QString &sOldName, const QString &sOld
     {
         if (!bDescFound && this->sFileStringArray.at(i).contains(sOldDesc) && this->sFileStringArray.at(i).contains("<desc>", Qt::CaseInsensitive) && this->sFileStringArray.at(i).contains("</desc>", Qt::CaseInsensitive))
         {
-            qDebug()<<"Found description: "<<this->sFileStringArray.at(i);
+            // qDebug()<<"Found description: "<<this->sFileStringArray.at(i);
             bDescFound = true;
 
             this->sFileStringArray.replace(i, "        <desc>" + sDesc + "</desc>");
@@ -94,7 +94,7 @@ void TrackLoader::vSetNewProperties(const QString &sOldName, const QString &sOld
 
         if (!bNameFound && this->sFileStringArray.at(i).contains(sOldName) && this->sFileStringArray.at(i).contains("<name>", Qt::CaseInsensitive) && this->sFileStringArray.at(i).contains("</name>", Qt::CaseInsensitive))
         {
-            qDebug()<<"Found name: "<<this->sFileStringArray.at(i);
+            // qDebug()<<"Found name: "<<this->sFileStringArray.at(i);
             bNameFound = true;
 
             this->sFileStringArray.replace(i, "        <name>" + sName + "</name>");
@@ -102,7 +102,7 @@ void TrackLoader::vSetNewProperties(const QString &sOldName, const QString &sOld
 
         if (!bMeerunFound && this->sFileStringArray.at(i).contains("<meerun", Qt::CaseInsensitive) && this->sFileStringArray.at(i).contains("activity=", Qt::CaseInsensitive))
         {
-            qDebug()<<"Found meerun: "<<this->sFileStringArray.at(i);
+            // qDebug()<<"Found meerun: "<<this->sFileStringArray.at(i);
             bMeerunFound = true;
 
             QString sMeerun = this->sFileStringArray.at(i);
@@ -125,7 +125,7 @@ void TrackLoader::vWriteFile(const QString &sFilename)
 {
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/Laufhelden";
     QString fullFilename = dirName + "/" + sFilename;
-    qDebug()<<"Writing File:"<<fullFilename;
+    // qDebug()<<"Writing File:"<<fullFilename;
 
 
     QFile fOut(fullFilename);
@@ -139,7 +139,7 @@ void TrackLoader::vWriteFile(const QString &sFilename)
     }
     else
     {
-        qDebug() << "error opening output file\n";
+        qDebug() << "error opening output file\n"<<fullFilename;
         return;
     }
     fOut.close();
@@ -573,7 +573,7 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
 
         m_time = firstTime.toLocalTime();
 
-        qDebug()<<"m_distance first calculated: "<<QString::number(m_distance);
+        // qDebug()<<"m_distance first calculated: "<<QString::number(m_distance);
 
         m_distance = 0;
 
@@ -586,7 +586,7 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
             //We need to find out if this point is the end of a pause
             if (this->pausePositionsCount() > 0 && i==(this->pausePositionAt(iPausePositionsIndex) + 1))
             {
-                qDebug()<<"Pause point: "<<QString::number(i);
+                // qDebug()<<"Pause point: "<<QString::number(i);
 
                 //Here we are at a point where a pause ends. We can calculate the pause duration here
                 QDateTime firstTime(m_points.at(i-1).time);
@@ -643,7 +643,7 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
         m_pace = m_duration / m_distance * 1000 / 60;
         m_heartRate = m_heartRate / m_heartRatePoints;
 
-        qDebug()<<"m_distance second calculated: "<<QString::number(m_distance);
+        // qDebug()<<"m_distance second calculated: "<<QString::number(m_distance);
 
         emit paceChanged();
         emit heartRateChanged();
@@ -870,7 +870,7 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
 
         m_time = firstTime.toLocalTime();
 
-        qDebug()<<"m_distance first calculated: "<<QString::number(m_distance);
+        // qDebug()<<"m_distance first calculated: "<<QString::number(m_distance);
 
         m_distance = 0;
 
@@ -883,7 +883,7 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
             //We need to find out if this point is the end of a pause
             if (this->pausePositionsCount() > 0 && i==(this->pausePositionAt(iPausePositionsIndex) + 1))
             {
-                qDebug()<<"Pause point: "<<QString::number(i);
+                // qDebug()<<"Pause point: "<<QString::number(i);
 
                 //Here we are at a point where a pause ends. We can calculate the pause duration here
                 QDateTime firstTime(m_points.at(i-1).time);
@@ -940,7 +940,7 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
         m_pace = m_duration / m_distance * 1000 / 60;
         m_heartRate = m_heartRate / m_heartRatePoints;
 
-        qDebug()<<"m_distance second calculated: "<<QString::number(m_distance);
+        // qDebug()<<"m_distance second calculated: "<<QString::number(m_distance);
 
         emit paceChanged();
         emit heartRateChanged();
@@ -971,7 +971,7 @@ void TrackLoader::setFilename(const QString &filename) {
         qDebug()<<"No change in filename";
         return;
     }
-    qDebug()<<"Setting filename"<<filename;
+    // qDebug()<<"Setting filename"<<filename;
     m_filename = filename;
     emit filenameChanged();
     // Trigger loading

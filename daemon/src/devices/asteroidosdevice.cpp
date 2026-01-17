@@ -302,7 +302,7 @@ void AsteroidOSDevice::screenshotReceived(QByteArray data) {
     QString filename = "screenshot_" + QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss") + ".jpg";
     QDir picturelocation = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     if (!picturelocation.exists()) {
-        qDebug() << "Creating picture amazfish folder";
+        // qDebug() << "Creating picture amazfish folder";
         if (!picturelocation.mkpath("")) {
             qDebug() << "Error creating amazfish picture folder!";
             return;
@@ -312,7 +312,7 @@ void AsteroidOSDevice::screenshotReceived(QByteArray data) {
     QString fullpath = picturelocation.absolutePath() + "/" + filename;
     QFile screenshotFile(fullpath);
 
-    qDebug() << fullpath << data.size();
+    // qDebug() << fullpath << data.size();
 
     if (!screenshotFile.open(QIODevice::WriteOnly)) {
         qWarning() << "cannot open " << fullpath;

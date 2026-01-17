@@ -19,7 +19,7 @@ DialogListPL {
 
         contentHeight: styler.themeItemSizeLarge
         onClicked: {
-            console.log(index);
+            // console.log(index);
             selected({
                 "deviceType": model.deviceType,
                 "icon": model.icon,

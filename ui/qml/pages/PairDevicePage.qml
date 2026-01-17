@@ -47,17 +47,17 @@ PageListPL {
         running: true
         interval: 100
         onTriggered: {
-            console.log("Delayed Manager operational:", _bluetoothManager.operational, _bluetoothManager.usableAdapter);
+            // console.log("Delayed Manager operational:", _bluetoothManager.operational, _bluetoothManager.usableAdapter);
             if (typeof(devicesModel.filters) == 'number') {
                 devicesModel.filters = BluezQt.DevicesModelPrivate.AllDevices;
             }
         }
     }
 
-    Component.onCompleted: {
-        console.log("Manager operational:", _bluetoothManager.operational, _bluetoothManager.usableAdapter);
+    // Component.onCompleted: {
+    //     console.log("Manager operational:", _bluetoothManager.operational, _bluetoothManager.usableAdapter);
 
-    }
+    // }
 
     Connections {
         target: DaemonInterfaceInstance
