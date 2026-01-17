@@ -18,12 +18,20 @@ PineTimeSimpleWeatherService::PineTimeSimpleWeatherService(const QString &path, 
 void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
 {
 
-    qDebug() << Q_FUNC_INFO << ": Current weather data"
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
-        << QDateTime::fromSecsSinceEpoch(weather->dateTime())
+    QDateTime weatherDate = QDateTime::fromSecsSinceEpoch(weather->dateTime());
+    QDateTime sunrise = QDateTime::fromSecsSinceEpoch(weather->sunrise());
+    QDateTime sunset = QDateTime::fromSecsSinceEpoch(weather->sunset());
 #else
-        << QDateTime::fromTime_t(weather->dateTime())
+    QDateTime weatherDate = QDateTime::fromTime_t(weather->dateTime());
+    QDateTime sunrise = QDateTime::fromTime_t(weather->sunrise());
+    QDateTime sunset = QDateTime::fromTime_t(weather->sunset());
 #endif
+
+
+    qDebug() << Q_FUNC_INFO << ": Current weather data"
+	<< weatherDate
         << weather->dateTime()
         << weather->temperature() - 273.15
         << weather->minTemperature() - 273.15
@@ -34,6 +42,8 @@ void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
                 (int)iconToEnum(weather->weatherIcon())
            )
         << (int)iconToEnum(weather->weatherIcon())
+	<< sunrise
+	<< sunset
 //        << weather->clouds()
 //        << weather->humidity()
 //        << weather->windDeg()
@@ -55,13 +65,30 @@ void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
     QByteArray weatherBytes;
 
     weatherBytes += TypeConversion::fromInt8(0); // message type
-    weatherBytes += TypeConversion::fromInt8(0); // version information
+    weatherBytes += TypeConversion::fromInt8(m_version); // version information
     weatherBytes += TypeConversion::fromInt64(weather->dateTime());
     weatherBytes += TypeConversion::fromInt16( round((weather->temperature() - 273.15) * 100) );
     weatherBytes += TypeConversion::fromInt16( round((weather->minTemperature() - 273.15) * 100) );
     weatherBytes += TypeConversion::fromInt16( round((weather->maxTemperature() - 273.15) * 100) );
     weatherBytes += cityNameBytes;
     weatherBytes += TypeConversion::fromInt8( (int)iconToEnum(weather->weatherIcon()) );
+
+    if (m_version == 1) {
+        qDebug() << "Weather Version " << m_version;
+        short sunriseMinutes = -2;
+        short sunsetMinutes  = -2;
+
+        if (sunrise.date() == weatherDate.date()) {
+            sunriseMinutes = sunrise.time().hour() * 60 + sunrise.time().minute();
+        }
+
+        if (sunset.date() == weatherDate.date()) {
+            sunsetMinutes = sunset.time().hour() * 60 + sunset.time().minute();
+        }
+
+        weatherBytes += TypeConversion::fromInt16(sunriseMinutes);
+        weatherBytes += TypeConversion::fromInt16(sunsetMinutes);
+    }
 
 //    weatherBytes += TypeConversion::fromInt8( weather->clouds() );
 //    weatherBytes += TypeConversion::fromInt8( weather->humidity() );
