@@ -9,7 +9,7 @@
 class LogFetchOperation : public AbstractFetchOperation
 {
 public:
-    explicit LogFetchOperation(bool isZeppOs = false);
+    explicit LogFetchOperation(HuamiFetcher *fetcher, bool isZeppOs = false);
 
     void start(QBLEService *service) override;
     void handleData(const QByteArray &data) override;

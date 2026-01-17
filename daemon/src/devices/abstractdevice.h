@@ -96,6 +96,7 @@ public:
     virtual int supportedFeatures() const = 0;
 
     virtual void setDatabase(KDbConnection *conn);
+    virtual KDbConnection* database();
 
     virtual QString deviceType() const = 0;
     QString deviceName() const;

@@ -26,6 +26,7 @@ public:
 
     QString deviceType() const override;
     int supportedFeatures() const override;
+    bool isZeppOs() override;
 
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
@@ -45,7 +46,6 @@ public:
     Q_SLOT void authenticated(bool ready) override;
     void ready();
     bool operationRunning() override;
-
 
     void setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey);
 
@@ -87,7 +87,7 @@ private:
     AbstractZeppOsOperation *m_currentZosOperation = nullptr;
 
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
-    Q_SLOT void zopOperationComplete();
+    Q_SLOT void zosOperationComplete();
 };
 
 

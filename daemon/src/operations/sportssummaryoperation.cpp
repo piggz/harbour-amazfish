@@ -6,11 +6,11 @@
 
 #include "mibandservice.h"
 #include "typeconversion.h"
+#include "huami/huamifetcher.h"
 
-SportsSummaryOperation::SportsSummaryOperation(QBLEService *service, KDbConnection *conn, bool isZeppOs, AbstractActivitySummaryParser *parser) : AbstractFetchOperation(isZeppOs), m_parser(parser)
+SportsSummaryOperation::SportsSummaryOperation(HuamiFetcher *fetcher, KDbConnection *conn, AbstractActivitySummaryParser *parser, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_parser(parser), m_conn(conn)
 {
     qDebug() << Q_FUNC_INFO;
-    m_conn = conn;
     setLastSyncKey("device/lastsportsyncmillis");
 }
 
@@ -22,7 +22,6 @@ SportsSummaryOperation::~SportsSummaryOperation()
 void SportsSummaryOperation::start(QBLEService *service)
 {
     qDebug() << Q_FUNC_INFO;
-    m_service = service;
     setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
 
@@ -34,12 +33,12 @@ void SportsSummaryOperation::start(QBLEService *service)
     }
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
+    m_fetcher->setNotifications(true, true);
 
-    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA);
-    service->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA);
+    //Send read configuration
+    QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES) + rawDate;
+    m_fetcher->writeControl(cmd);
 
-    //Send log read configuration
-    service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES) + rawDate);
 }
 
 bool SportsSummaryOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
@@ -47,7 +46,7 @@ bool SportsSummaryOperation::characteristicChanged(const QString &characteristic
     qDebug() << Q_FUNC_INFO;
     if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         handleData(value);
-    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA) {
+    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL) {
         return handleMetaData(value);
     }
     return false;

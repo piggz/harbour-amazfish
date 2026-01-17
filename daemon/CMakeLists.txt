@@ -31,6 +31,7 @@ set(SOURCES
 ./src/devices/huami/zepposfirmwareinfo.cpp
 ./src/devices/abstractactivitydetailparser.cpp
 ./src/devices/huami/huamiactivitysummaryparser.cpp
+./src/devices/huami/huamifetcher.cpp
 ./src/devices/huami/zeppos/abstractzepposservice.cpp
 ./src/devices/huami/zeppos/huami2021chunkedencoder.cpp
 ./src/devices/huami/zeppos/huami2021chunkeddecoder.cpp
@@ -145,6 +146,7 @@ set(HEADERS
 ./src/devices/huami/uihhcontainer.h
 ./src/devices/huami/bipactivitydetailparser.h
 ./src/devices/huami/huamiactivitysummaryparser.h
+./src/devices/huami/huamifetcher.h
 ./src/devices/huami/zeppos/abstractzepposservice.h
 ./src/devices/huami/zeppos/huami2021chunkedencoder.h
 ./src/devices/huami/zeppos/huami2021chunkeddecoder.h

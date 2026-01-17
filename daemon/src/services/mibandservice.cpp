@@ -10,7 +10,7 @@
 const char* MiBandService::UUID_SERVICE_MIBAND = "0000fee0-0000-1000-8000-00805f9b34fb";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_NOTIFICATION = "00000002-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION = "00000003-0000-3512-2118-0009af100700";
-const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA = "00000004-0000-3512-2118-0009af100700";
+const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL = "00000004-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA = "00000005-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO = "00000006-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS = "00000007-0000-3512-2118-0009af100700";
@@ -22,7 +22,7 @@ const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER = "000000
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_WRITE = "00000016-0000-3512-2118-0009af100700";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ = "00000017-0000-3512-2118-0009af100700";
 
-MiBandService::MiBandService(const QString &path, QObject *parent) : AbstractOperationService(UUID_SERVICE_MIBAND, path, parent)
+MiBandService::MiBandService(const QString &path, QObject *parent) : QBLEService(UUID_SERVICE_MIBAND, path, parent)
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -79,7 +79,6 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_2021_CHUNKED_CHAR_READ) {
         handleChunked(value);
     }
-    AbstractOperationService::notifyOperation(characteristic, value);
 
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT) {
         if (value[0] == EVENT_DECLINE_CALL) {

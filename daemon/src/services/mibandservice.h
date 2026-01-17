@@ -29,7 +29,7 @@
 --00000020-0000-3512-2118-0009af100700 //Chunked transfer
 */
 
-class MiBandService : public AbstractOperationService
+class MiBandService : public QBLEService
 {
     Q_OBJECT
 public:
@@ -42,7 +42,7 @@ public:
     static const char* UUID_CHARACTERISTIC_MIBAND_CURRENT_TIME;
     static const char* UUID_CHARACTERISTIC_MIBAND_USER_SETTINGS;
     static const char* UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS;
-    static const char* UUID_CHARACTERISTIC_MIBAND_FETCH_DATA;
+    static const char* UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL;
     static const char* UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA;
     static const char* UUID_CHARACTERISTIC_MIBAND_WEATHER;
     static const char* UUID_CHARACTERISTIC_MIBAND_CHUNKED_TRANSFER;

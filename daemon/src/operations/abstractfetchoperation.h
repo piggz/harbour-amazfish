@@ -6,10 +6,12 @@
 #include <QDateTime>
 #include <QString>
 
+class HuamiFetcher;
+
 class AbstractFetchOperation : public AbstractOperation
 {
 public:
-    explicit AbstractFetchOperation(bool isZeppOs = false);
+    explicit AbstractFetchOperation(HuamiFetcher *fetcher, bool isZeppOs = false);
 
     bool handleMetaData(const QByteArray &meta) override;
 
@@ -35,6 +37,7 @@ protected:
     virtual bool processBufferedData() = 0;
 
 
+    HuamiFetcher *m_fetcher = nullptr;
     QBLEService *m_service = nullptr;
 };
 
