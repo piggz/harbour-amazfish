@@ -92,7 +92,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
         <source>BPM</source>
-        <translation>bpm</translation>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
@@ -1361,55 +1361,55 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="86"/>
         <source>%1°; %2°</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 °; %2 °</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°; %3m</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 °; %2 °; %3 m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="94"/>
         <source>Active Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktive Zeit</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="95"/>
         <source>Aerobic Training Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Aerober Trainingseffekt</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="96"/>
         <source>Anaerobic Training Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Anaerobischer Trainingseffekt</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="99"/>
         <location filename="../qml/pages/SportPage.qml" line="100"/>
         <location filename="../qml/pages/SportPage.qml" line="107"/>
         <source>Average Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittliche Herzfrequenz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="104"/>
         <source>Average Stroke Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittliche Schwimmzug Strecke</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="105"/>
         <location filename="../qml/pages/SportPage.qml" line="142"/>
         <source>Average Stroke Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittliche Schwimmzug Frequenz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="106"/>
         <source>Average Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittliche Höhe</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="110"/>
         <source>Current Workout Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelle Ausarbeitungsbelastung</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="111"/>
@@ -1419,22 +1419,22 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="114"/>
         <source>Downhill Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit Abfahrt</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="115"/>
         <source>Elevation Gain</source>
-        <translation type="unfinished"></translation>
+        <translation>positiver Höhenunterschied</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="116"/>
         <source>Elevation Loss</source>
-        <translation type="unfinished"></translation>
+        <translation>negativer Höhenunterschied</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="117"/>
         <source>Time on Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit in der Ebene</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="119"/>
@@ -1445,12 +1445,12 @@
         <location filename="../qml/pages/SportPage.qml" line="120"/>
         <location filename="../qml/pages/SportPage.qml" line="121"/>
         <source>Max Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. Herzfrequenz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="122"/>
         <source>VO₂ Max</source>
-        <translation type="unfinished"></translation>
+        <translation>VO₂ Max</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="127"/>
@@ -1460,7 +1460,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="128"/>
         <source>Min Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. Herzfrequenz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="131"/>
@@ -1470,22 +1470,22 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="180"/>
         <source>SWOLF</source>
-        <translation type="unfinished"></translation>
+        <translation>SWOLF</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="225"/>
         <source>Start: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Start: %1 %2</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="231"/>
         <source>Duration: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dauer: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="237"/>
         <source>Location: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Position: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="125"/>
@@ -1542,22 +1542,22 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="133"/>
         <source>Best Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Bester Pace</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="134"/>
         <source>Pause Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausenzeiten</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="136"/>
         <source>Average Cadence</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittlere Trittfrequenz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="138"/>
         <source>Max Cadence</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. Trittfrequenz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="139"/>
@@ -1567,27 +1567,27 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="140"/>
         <source>Average Distance per Stroke</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittliche Strecke pro Schwimmzug</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="141"/>
         <source>Max Stroke Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. Schwimmzugfrequenz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="143"/>
         <source>Lane Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahnlänge</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="144"/>
         <source>Swim Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>geschwommene Runden</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="145"/>
         <source>Swim Strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwimmzüge</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="147"/>
@@ -1632,12 +1632,12 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="148"/>
         <source>Total Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufstieg gesamt</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="149"/>
         <source>Total Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamtdauer</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="150"/>
@@ -1647,57 +1647,57 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="151"/>
         <source>Uphill Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit Aufwärts</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="152"/>
         <source>Workout Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Workout-Dauer</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="166"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation>°</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="167"/>
         <source>laps</source>
-        <translation type="unfinished"></translation>
+        <translation>Runden</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="168"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="169"/>
         <source>m/s</source>
-        <translation type="unfinished"></translation>
+        <translation>m/s</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>min/km</source>
-        <translation type="unfinished"></translation>
+        <translation>min/km</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="171"/>
         <source>ml/kg/min</source>
-        <translation type="unfinished"></translation>
+        <translation>ml/kg/min</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="172"/>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="173"/>
         <source>s/km</source>
-        <translation type="unfinished"></translation>
+        <translation>s/km</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="174"/>
         <source>s/m</source>
-        <translation type="unfinished"></translation>
+        <translation>s/m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="175"/>
@@ -1740,7 +1740,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="176"/>
         <source>steps/min</source>
-        <translation type="unfinished"></translation>
+        <translation>Schritte/min</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="179"/>
@@ -1767,237 +1767,237 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="18"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Activity</source>
-        <translation type="unfinished">Aktivität</translation>
+        <translation>Aktivität</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="20"/>
         <source>Light Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Leichter Schlaf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="21"/>
         <source>Deep Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiefschlaf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="22"/>
         <source>Not Worn</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht getragen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="23"/>
         <source>Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Laufen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="24"/>
         <source>Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>Gehen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="25"/>
         <source>Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwimmen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="26"/>
         <source>Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Radfahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="27"/>
         <source>Treadmill</source>
-        <translation type="unfinished"></translation>
+        <translation>Laufband</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="28"/>
         <source>Exercise</source>
-        <translation type="unfinished"></translation>
+        <translation>Übungseinheit</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="29"/>
         <source>Open Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Freiwasserschwimmen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="30"/>
         <source>Indoor Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Radfahren Halle</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="31"/>
         <source>Elliptical Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation>Elliptischer Trainer</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="32"/>
         <source>Jump Rope</source>
-        <translation type="unfinished"></translation>
+        <translation>Springseil</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="33"/>
         <source>Yoga</source>
-        <translation type="unfinished"></translation>
+        <translation>Yoga</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="34"/>
         <source>Soccer</source>
-        <translation type="unfinished"></translation>
+        <translation>Fußball</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="35"/>
         <source>Rowing Machine</source>
-        <translation type="unfinished"></translation>
+        <translation>Rudermaschine</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="36"/>
         <source>Cricket</source>
-        <translation type="unfinished"></translation>
+        <translation>Cricket</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="37"/>
         <source>Basketball</source>
-        <translation type="unfinished"></translation>
+        <translation>Basketball</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="38"/>
         <source>Ping Pong</source>
-        <translation type="unfinished"></translation>
+        <translation>Ping Pong</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="39"/>
         <source>Badmington</source>
-        <translation type="unfinished"></translation>
+        <translation>Federball</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="40"/>
         <source>Strength Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Krafttraining</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
         <source>Hiking</source>
-        <translation type="unfinished"></translation>
+        <translation>Wandern</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="42"/>
         <source>Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Klettern</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="43"/>
         <source>REM Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>REM Schlaf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="44"/>
         <source>Sleep Any</source>
-        <translation type="unfinished"></translation>
+        <translation>anderer Schlaf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="45"/>
         <source>Awake Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachschlaf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="46"/>
         <source>Navigate</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigieren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="47"/>
         <source>Indoor Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallenbahn</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="48"/>
         <source>Handcycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Handradfahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="49"/>
         <source>E Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Bike</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="50"/>
         <source>Bike Commute</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbeitsweg Fahrrad</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="51"/>
         <source>Handcycling Indoor</source>
-        <translation type="unfinished"></translation>
+        <translation>Handradfahren Halle</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="52"/>
         <source>Transition</source>
-        <translation type="unfinished"></translation>
+        <translation>Übergang</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="53"/>
         <source>Fitness Equipment</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitnessausrüstung</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="54"/>
         <source>Stair Stepper</source>
-        <translation type="unfinished"></translation>
+        <translation>Treppensteiger</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="55"/>
         <source>Pilates</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilates</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="56"/>
         <source>Pool Swim</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwimmen Pool</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="57"/>
         <source>Tennis</source>
-        <translation type="unfinished"></translation>
+        <translation>Tennis</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="58"/>
         <source>Platform Tennis</source>
-        <translation type="unfinished"></translation>
+        <translation>Plattform Tennis</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="59"/>
         <source>Table Tennis</source>
-        <translation type="unfinished"></translation>
+        <translation>Tischtennis</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="60"/>
         <source>American Football</source>
-        <translation type="unfinished"></translation>
+        <translation>American Football</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="61"/>
         <source>Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Training</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="62"/>
         <source>Cardio</source>
-        <translation type="unfinished"></translation>
+        <translation>Herztraining</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="63"/>
         <source>Breathwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Atemarbeit</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="64"/>
         <source>Indoor Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>Gehen Innen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="65"/>
@@ -2007,47 +2007,47 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="66"/>
         <source>Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>Skifahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="67"/>
         <source>Snowboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Snowboardfahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="68"/>
         <source>Rowing</source>
-        <translation type="unfinished"></translation>
+        <translation>Rudern</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="69"/>
         <source>Mountaineering</source>
-        <translation type="unfinished"></translation>
+        <translation>Alpines Bergsteigen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="70"/>
         <source>Multisport</source>
-        <translation type="unfinished"></translation>
+        <translation>Multisport</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="71"/>
         <source>Paddling</source>
-        <translation type="unfinished"></translation>
+        <translation>Paddeln</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="72"/>
         <source>Flying</source>
-        <translation type="unfinished"></translation>
+        <translation>Fliegen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="73"/>
         <source>Motorcycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorradfahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="74"/>
         <source>Boating</source>
-        <translation type="unfinished"></translation>
+        <translation>Bootfahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="75"/>
@@ -2057,112 +2057,112 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="76"/>
         <source>Golf</source>
-        <translation type="unfinished"></translation>
+        <translation>Golf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="77"/>
         <source>Hang Gliding</source>
-        <translation type="unfinished"></translation>
+        <translation>Drachenfliegen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="78"/>
         <source>Hunting</source>
-        <translation type="unfinished"></translation>
+        <translation>Jagen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="79"/>
         <source>Fishing</source>
-        <translation type="unfinished"></translation>
+        <translation>Angeln</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="80"/>
         <source>Inline Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Inlineskating</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="81"/>
         <source>Rock Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Bergsteigen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="82"/>
         <source>Climb Indoor</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallenklettern</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="83"/>
         <source>Bouldering</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouldern</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="84"/>
         <source>Sail Race</source>
-        <translation type="unfinished"></translation>
+        <translation>Segelbootrennen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="85"/>
         <source>Sail Expedition</source>
-        <translation type="unfinished"></translation>
+        <translation>Segelexpedition</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="86"/>
         <source>Ice Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlittschuhlaufen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="87"/>
         <source>Sky Diving</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallschirmspringen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="88"/>
         <source>Snowshoe</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneeschulaufen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="89"/>
         <source>Snowmobiling</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneemobilfahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="90"/>
         <source>Stand Up Paddleboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Stand Up Paddling</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="91"/>
         <source>Surfing</source>
-        <translation type="unfinished"></translation>
+        <translation>Surfen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="92"/>
         <source>Wakeboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Wakeboarding</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="93"/>
         <source>Water Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>Wasserskifahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="94"/>
         <source>Kayaking</source>
-        <translation type="unfinished"></translation>
+        <translation>Kayaking</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="95"/>
         <source>Rafting</source>
-        <translation type="unfinished"></translation>
+        <translation>Rafting</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="96"/>
         <source>Windsurfing</source>
-        <translation type="unfinished"></translation>
+        <translation>Windsurfen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="97"/>
         <source>Kitesurfing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kitesurfen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="98"/>
@@ -2177,7 +2177,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="100"/>
         <source>Boxing</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="101"/>
@@ -2187,12 +2187,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="102"/>
         <source>Baseball</source>
-        <translation type="unfinished"></translation>
+        <translation>Baseball</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="103"/>
         <source>Softball</source>
-        <translation type="unfinished"></translation>
+        <translation>Softball</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="104"/>
@@ -2202,17 +2202,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="105"/>
         <source>Shooting</source>
-        <translation type="unfinished"></translation>
+        <translation>Schießen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="106"/>
         <source>Auto Racing</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorennen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="107"/>
         <source>Winter Sport</source>
-        <translation type="unfinished"></translation>
+        <translation>Wintersport</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="108"/>
@@ -2222,7 +2222,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="109"/>
         <source>Health Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesundheitsmomentaufnahme</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="110"/>
@@ -2232,12 +2232,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="111"/>
         <source>HIIT</source>
-        <translation type="unfinished"></translation>
+        <translation>HIIT</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="112"/>
         <source>Video Gaming</source>
-        <translation type="unfinished"></translation>
+        <translation>Computerspielen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="113"/>
@@ -2257,12 +2257,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="116"/>
         <source>Squash</source>
-        <translation type="unfinished"></translation>
+        <translation>Squash</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="117"/>
         <source>Racquetball</source>
-        <translation type="unfinished"></translation>
+        <translation>Racquetball</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="118"/>
@@ -2287,7 +2287,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="122"/>
         <source>Meditation</source>
-        <translation type="unfinished"></translation>
+        <translation>Meditation</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="123"/>
@@ -2307,17 +2307,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="126"/>
         <source>Team Sport</source>
-        <translation type="unfinished"></translation>
+        <translation>Teamsport</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="127"/>
         <source>Rugby</source>
-        <translation type="unfinished"></translation>
+        <translation>Rugby</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="128"/>
         <source>Hockey</source>
-        <translation type="unfinished"></translation>
+        <translation>Hockey</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="129"/>
@@ -2327,7 +2327,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="130"/>
         <source>Volleyball</source>
-        <translation type="unfinished"></translation>
+        <translation>Volleyball</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="131"/>
@@ -2337,32 +2337,32 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="132"/>
         <source>Wakesurfing</source>
-        <translation type="unfinished"></translation>
+        <translation>Wakesurfen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="133"/>
         <source>Mixed Martial Arts</source>
-        <translation type="unfinished"></translation>
+        <translation>Mixed Martial Arts</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="134"/>
         <source>Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanzen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="135"/>
         <source>Mountain Hike</source>
-        <translation type="unfinished"></translation>
+        <translation>Bergwandern</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="136"/>
         <source>Cross Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation>Crosstrainer</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="137"/>
         <source>Free Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Freies Training</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="138"/>
@@ -2372,12 +2372,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="139"/>
         <source>Kickboxing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kickboxen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="140"/>
         <source>Fitness Exercises</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausdauertraining</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="141"/>
@@ -2397,27 +2397,27 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="144"/>
         <source>Taekwondo</source>
-        <translation type="unfinished"></translation>
+        <translation>Taekwondo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="145"/>
         <source>Tae Bo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tae Bo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="146"/>
         <source>Cross Country Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Crosslauf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="147"/>
         <source>Karate</source>
-        <translation type="unfinished"></translation>
+        <translation>Karate</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="148"/>
         <source>Fencing</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechten</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="149"/>
@@ -2427,22 +2427,22 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="150"/>
         <source>Kendo</source>
-        <translation type="unfinished"></translation>
+        <translation>Kendo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="151"/>
         <source>Horizontal Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Reck</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="152"/>
         <source>Parallel Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="153"/>
         <source>Cooldown</source>
-        <translation type="unfinished"></translation>
+        <translation>Abkühlen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="154"/>
@@ -2452,7 +2452,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="155"/>
         <source>Sit Ups</source>
-        <translation type="unfinished"></translation>
+        <translation>Rumpfbeugen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="156"/>
@@ -2462,7 +2462,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="157"/>
         <source>Aerobic Rxercise</source>
-        <translation type="unfinished"></translation>
+        <translation>Aerobe Übungen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="158"/>
@@ -2472,12 +2472,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="159"/>
         <source>Flexibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Flexibilität</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="160"/>
         <source>Gymnastics</source>
-        <translation type="unfinished"></translation>
+        <translation>Gymnastik</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="161"/>
@@ -2487,102 +2487,102 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="162"/>
         <source>Push Ups</source>
-        <translation type="unfinished"></translation>
+        <translation>Liegestütze</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
         <source>Battle Rope</source>
-        <translation type="unfinished"></translation>
+        <translation>Tauziehen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="164"/>
         <source>Smith Machine</source>
-        <translation type="unfinished"></translation>
+        <translation>Smith Machine</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="165"/>
         <source>Pull Ups</source>
-        <translation type="unfinished"></translation>
+        <translation>Klimmzüge</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="166"/>
         <source>Plank</source>
-        <translation type="unfinished"></translation>
+        <translation>Brett</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="167"/>
         <source>Javelin</source>
-        <translation type="unfinished"></translation>
+        <translation>Speerwerfen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="168"/>
         <source>Long Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Weitsprung</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="169"/>
         <source>High Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochsprung</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="170"/>
         <source>Trampoline</source>
-        <translation type="unfinished"></translation>
+        <translation>Trampolin</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="171"/>
         <source>Dumbbell</source>
-        <translation type="unfinished"></translation>
+        <translation>Hantel</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="172"/>
         <source>Belly Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Bauchtanz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="173"/>
         <source>Jazz Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Jazz Tanzen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="174"/>
         <source>Latin Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Lateinamerikanische Tänze</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="175"/>
         <source>Ballet</source>
-        <translation type="unfinished"></translation>
+        <translation>Ballett</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="176"/>
         <source>Street Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Straßentanz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="177"/>
         <source>Zumba</source>
-        <translation type="unfinished"></translation>
+        <translation>Zumba</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="178"/>
         <source>Roller Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollschuhfahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="179"/>
         <source>Martial Arts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kampfsport</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="180"/>
         <source>Tai Chi</source>
-        <translation type="unfinished"></translation>
+        <translation>Tai Chi</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="181"/>
         <source>Hula Hooping</source>
-        <translation type="unfinished"></translation>
+        <translation>Hula Hop Reifen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="182"/>
@@ -2592,22 +2592,22 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="183"/>
         <source>Darts</source>
-        <translation type="unfinished"></translation>
+        <translation>Dart</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="184"/>
         <source>Archery</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenschießen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="185"/>
         <source>Horse Riding</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiten</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="186"/>
         <source>Kite Flying</source>
-        <translation type="unfinished"></translation>
+        <translation>Drachenfliegen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="187"/>
@@ -2617,7 +2617,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="188"/>
         <source>Stairs</source>
-        <translation type="unfinished"></translation>
+        <translation>Treppensteigen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="189"/>
@@ -2647,7 +2647,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="194"/>
         <source>Bowling</source>
-        <translation type="unfinished"></translation>
+        <translation>Bowling</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="195"/>
@@ -2657,7 +2657,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="196"/>
         <source>Handball</source>
-        <translation type="unfinished"></translation>
+        <translation>Handball</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="197"/>
@@ -2687,7 +2687,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="202"/>
         <source>Beach Volleyball</source>
-        <translation type="unfinished"></translation>
+        <translation>Beach Volleyball</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="203"/>
@@ -2702,37 +2702,37 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="205"/>
         <source>Sailing</source>
-        <translation type="unfinished"></translation>
+        <translation>Segeln</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="206"/>
         <source>Jet Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>JetSki ifahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="207"/>
         <source>Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaten</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="208"/>
         <source>Ice Hockey</source>
-        <translation type="unfinished"></translation>
+        <translation>Eishockey</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="209"/>
         <source>Curling</source>
-        <translation type="unfinished"></translation>
+        <translation>Curling</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="210"/>
         <source>Cross Country Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>Skilanglauf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="211"/>
         <source>Snow Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Wintersport</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="212"/>
@@ -2742,37 +2742,37 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="213"/>
         <source>Skateboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Skateboard</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="214"/>
         <source>Parachuting</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallschirmspringen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="215"/>
         <source>Parkour</source>
-        <translation type="unfinished"></translation>
+        <translation>Parkour</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="216"/>
         <source>Indoor Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Laufen (drinnen)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="217"/>
         <source>Outdoor Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Laufen (draußen)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="218"/>
         <source>Outdoor Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>Gehen (draußen)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="219"/>
         <source>Outdoor Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Fahrradfahren (draußen)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="220"/>
@@ -2782,7 +2782,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="221"/>
         <source>Aerobics</source>
-        <translation type="unfinished"></translation>
+        <translation>Aerobic</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="222"/>
@@ -2792,22 +2792,22 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="223"/>
         <source>Artistic Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunstschwimmen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="224"/>
         <source>Ballroom Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Paartanz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="225"/>
         <source>BMX</source>
-        <translation type="unfinished"></translation>
+        <translation>BMX-Rad fahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="226"/>
         <source>Board Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Brettspiel</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="227"/>
@@ -2837,12 +2837,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="232"/>
         <source>Chess</source>
-        <translation type="unfinished"></translation>
+        <translation>Schach</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="233"/>
         <source>Dragon Boat</source>
-        <translation type="unfinished"></translation>
+        <translation>Drachenboot</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="234"/>
@@ -2852,7 +2852,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="235"/>
         <source>Finswimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Flossenschwimmen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="236"/>
@@ -2862,12 +2862,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="237"/>
         <source>Folk Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Volkstanz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="238"/>
         <source>Frisbee</source>
-        <translation type="unfinished"></translation>
+        <translation>Frisbee</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="239"/>
@@ -2887,17 +2887,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="242"/>
         <source>Hula Hoop</source>
-        <translation type="unfinished"></translation>
+        <translation>Hula Hop</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="243"/>
         <source>Indoor Fitness</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitnesstraining (drinnen)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="244"/>
         <source>Indoor Ice Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Eislaufen (drinnen)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="245"/>
@@ -2907,12 +2907,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="246"/>
         <source>Judo</source>
-        <translation type="unfinished"></translation>
+        <translation>Judo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="247"/>
         <source>Jujitsu</source>
-        <translation type="unfinished"></translation>
+        <translation>Jujitsu</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="248"/>
@@ -2922,7 +2922,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="249"/>
         <source>Modern Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Moderne Tänze</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="250"/>
@@ -2932,12 +2932,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="251"/>
         <source>Parallel Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Parallelbarren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="252"/>
         <source>Pole Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Poledance</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="253"/>
@@ -2952,7 +2952,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="255"/>
         <source>Snorkeling</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnorcheln</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="256"/>
@@ -2972,22 +2972,22 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="259"/>
         <source>Stair Climber</source>
-        <translation type="unfinished"></translation>
+        <translation>Treppensteiger</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="260"/>
         <source>Stepper</source>
-        <translation type="unfinished"></translation>
+        <translation>Stepptanz</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="261"/>
         <source>Stretching</source>
-        <translation type="unfinished"></translation>
+        <translation>Dehnung</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="262"/>
         <source>Table Football</source>
-        <translation type="unfinished"></translation>
+        <translation>Tischkicker</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="263"/>
@@ -3002,7 +3002,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="265"/>
         <source>Water Polo</source>
-        <translation type="unfinished"></translation>
+        <translation>Wasserpolo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="266"/>
@@ -3032,7 +3032,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="271"/>
         <source>Obstacle Race</source>
-        <translation type="unfinished"></translation>
+        <translation>Hindernislauf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="272"/>
@@ -3042,42 +3042,42 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="273"/>
         <source>Canoeing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanufahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="274"/>
         <source>Water Scooter</source>
-        <translation type="unfinished"></translation>
+        <translation>Wasserscooter</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="275"/>
         <source>Bobsleigh</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlitten</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="276"/>
         <source>Sledding</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodeln</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="277"/>
         <source>Biathlon</source>
-        <translation type="unfinished"></translation>
+        <translation>Biathlon</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="278"/>
         <source>Bungee Jumping</source>
-        <translation type="unfinished"></translation>
+        <translation>Bungee Jumping</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="279"/>
         <source>Orienteering</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientierungslauf</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="280"/>
         <source>Trekking</source>
-        <translation type="unfinished"></translation>
+        <translation>Trekkingtour</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="281"/>
@@ -3087,12 +3087,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="282"/>
         <source>Upper Body</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberkörper</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="283"/>
         <source>Lower Body</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterkörper</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="284"/>
@@ -3102,27 +3102,27 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="285"/>
         <source>Triathlon</source>
-        <translation type="unfinished"></translation>
+        <translation>Triathlon</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="286"/>
         <source>Other Water Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Anderer Wassersport</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="287"/>
         <source>Other Winter Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Anderer Wintersport</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="288"/>
         <source>Powerboating</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorbootfahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="289"/>
         <source>Diving</source>
-        <translation type="unfinished"></translation>
+        <translation>Tauchen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="290"/>
@@ -3132,12 +3132,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="291"/>
         <source>Paragliding</source>
-        <translation type="unfinished"></translation>
+        <translation>Gleitschirmfliegen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="292"/>
         <source>Weightlifting</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewichtheben</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="293"/>
@@ -3157,22 +3157,22 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="296"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Rücken</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="297"/>
         <source>Step Aerobics</source>
-        <translation type="unfinished"></translation>
+        <translation>Step Aerobic</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="298"/>
         <source>Equestrian</source>
-        <translation type="unfinished"></translation>
+        <translation>Reitsport</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="299"/>
         <source>Athletics</source>
-        <translation type="unfinished"></translation>
+        <translation>Leichtathletik</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="307"/>
