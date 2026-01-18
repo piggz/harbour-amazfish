@@ -17,17 +17,12 @@ public:
     ~SportsSummaryOperation();
 
     void start(QBLEService *service) override;
-    void handleData(const QByteArray &data) override;
-    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
     bool success() const;
     ActivitySummary summary();
 
 private:
-
     QDateTime m_sampleTime;
-    int m_lastPacketCounter = 0;
-    QByteArray m_buffer;
     bool m_error = false;
     ActivitySummary m_summary;
 

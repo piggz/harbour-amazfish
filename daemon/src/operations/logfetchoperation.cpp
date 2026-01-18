@@ -43,11 +43,6 @@ void LogFetchOperation::start(QBLEService *service)
     m_fetcher->writeControl(QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
 }
 
-bool LogFetchOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
-{
-    return false;
-}
-
 bool LogFetchOperation::processBufferedData()
 {
     if (m_dataStream) {

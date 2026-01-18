@@ -12,7 +12,6 @@ public:
     explicit LogFetchOperation(HuamiFetcher *fetcher, bool isZeppOs = false);
 
     void start(QBLEService *service) override;
-    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
 private:
     QFile *m_logFile = nullptr;

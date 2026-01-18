@@ -15,6 +15,7 @@ public:
 
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
+    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 private:
     QDateTime m_startDate;
     QString m_lastSyncKey;

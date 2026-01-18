@@ -38,40 +38,6 @@ void SportsSummaryOperation::start(QBLEService *service)
     //Send read configuration
     QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES) + rawDate;
     m_fetcher->writeControl(cmd);
-
-}
-
-bool SportsSummaryOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
-{
-    qDebug() << Q_FUNC_INFO;
-    if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
-        handleData(value);
-    } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_CONTROL) {
-        return handleMetaData(value);
-    }
-    return false;
-}
-
-void SportsSummaryOperation::handleData(const QByteArray &data)
-{
-    qDebug() << Q_FUNC_INFO;
-    if (data.length() < 2) {
-        qDebug() << Q_FUNC_INFO << "unexpected sports summary data length: " << data.length();
-        return;
-    }
-
-    qDebug() << Q_FUNC_INFO << "Data counter:" << data[0];
-    if ((m_lastPacketCounter + 1) == data[0] ) {
-        m_lastPacketCounter++;
-        if (m_lastPacketCounter > 255) {
-            m_lastPacketCounter = 0;
-        }
-        m_buffer += data.mid(1);
-    } else {
-        qDebug() << Q_FUNC_INFO << "invalid package counter: " << data[0] << ", last was: " << m_lastPacketCounter;
-        m_error = true;
-        return;
-    }
 }
 
 bool SportsSummaryOperation::processBufferedData()

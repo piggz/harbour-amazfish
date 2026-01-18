@@ -29,12 +29,6 @@ void ActivityFetchOperation::start(QBLEService *service)
     m_fetcher->writeControl(cmd);
 }
 
-
-bool ActivityFetchOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
-{
-    return false;
-}
-
 bool ActivityFetchOperation::saveSamples()
 {
     qDebug()<< Q_FUNC_INFO << m_sampleSize << m_buffer.length();
