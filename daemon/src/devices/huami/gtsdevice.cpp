@@ -250,14 +250,14 @@ void GtsDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
 
 }
 
-void GtsDevice::applyDeviceSetting(AbstractDevice::Settings s)
+void GtsDevice::applyDeviceSetting(Amazfish::Settings s)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (!mi) {
         return;
     }
 
-    if (s == SETTING_DEVICE_DISPLAY_ITEMS) {
+    if (s == Amazfish::Settings::SETTING_DEVICE_DISPLAY_ITEMS) {
         mi->setDisplayItemsNew();
     } else {
         HuamiDevice::applyDeviceSetting(s);

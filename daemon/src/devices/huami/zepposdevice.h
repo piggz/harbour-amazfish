@@ -38,7 +38,7 @@ public:
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
     void requestManualHeartrate() const override;
-    void applyDeviceSetting(Settings s) override;
+    void applyDeviceSetting(Amazfish::Settings s) override;
 
     void writeToChunked2021(short endpoint, QByteArray data, bool encryptIgnored);
     AbstractZeppOsService *zosService(short endpoint) const;

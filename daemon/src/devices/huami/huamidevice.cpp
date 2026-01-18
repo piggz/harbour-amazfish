@@ -264,7 +264,7 @@ void HuamiDevice::authenticated(bool ready)
             mi->setDistanceUnit();
             mi->setWearLocation();
             mi->setFitnessGoal();
-            applyDeviceSetting(SETTING_DEVICE_DISPLAY_ITEMS);
+            applyDeviceSetting(Amazfish::Settings::SETTING_DEVICE_DISPLAY_ITEMS);
             mi->setDoNotDisturb();
             mi->setEnableDisplayOnLiftWrist();
             mi->setRotateWristToSwitchInfo(true);
@@ -286,7 +286,7 @@ void HuamiDevice::authenticated(bool ready)
 }
 
 
-void HuamiDevice::applyDeviceSetting(Settings s)
+void HuamiDevice::applyDeviceSetting(Amazfish::Settings s)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (!mi) {
@@ -298,46 +298,46 @@ void HuamiDevice::applyDeviceSetting(Settings s)
         return;
     }
     switch(s) {
-    case SETTING_ALARMS:
+    case Amazfish::Settings::SETTING_ALARMS:
         mi->setAlarms();
         break;
-    case SETTING_DEVICE_DATE:
+    case Amazfish::Settings::SETTING_DEVICE_DATE:
         mi->setDateDisplay();
         break;
-    case SETTING_DEVICE_DISPLAY_ITEMS:
+    case Amazfish::Settings::SETTING_DEVICE_DISPLAY_ITEMS:
         mi->setDisplayItems();
         break;
-    case SETTING_DEVICE_LANGUAGE:
+    case Amazfish::Settings::SETTING_DEVICE_LANGUAGE:
         mi->setLanguage();
         break;
-    case SETTING_DEVICE_TIME:
+    case Amazfish::Settings::SETTING_DEVICE_TIME:
         mi->setCurrentTime();
         break;
-    case SETTING_DEVICE_UNIT:
+    case Amazfish::Settings::SETTING_DEVICE_UNIT:
         mi->setDistanceUnit();
         break;
-    case SETTING_USER_ALERT_GOAL:
+    case Amazfish::Settings::SETTING_USER_ALERT_GOAL:
         mi->setAlertFitnessGoal();
         break;
-    case SETTING_USER_ALL_DAY_HRM:
+    case Amazfish::Settings::SETTING_USER_ALL_DAY_HRM:
         hrm->setAllDayHRM();
         break;
-    case SETTING_USER_DISPLAY_ON_LIFT:
+    case Amazfish::Settings::SETTING_USER_DISPLAY_ON_LIFT:
         mi->setEnableDisplayOnLiftWrist();
         break;
-    case SETTING_USER_GOAL:
+    case Amazfish::Settings::SETTING_USER_GOAL:
         mi->setFitnessGoal();
         break;
-    case SETTING_USER_HRM_SLEEP_DETECTION:
+    case Amazfish::Settings::SETTING_USER_HRM_SLEEP_DETECTION:
         hrm->setHeartrateSleepSupport();
         break;
-    case SETTING_USER_PROFILE:
+    case Amazfish::Settings::SETTING_USER_PROFILE:
         mi->setUserInfo();
         break;
-    case SETTING_DISCONNECT_NOTIFICATION:
+    case Amazfish::Settings::SETTING_DISCONNECT_NOTIFICATION:
         mi->setDisconnectNotification();
         break;
-    case SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
+    case Amazfish::Settings::SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
         hrm->enableRealtimeHRMeasurement(AmazfishConfig::instance()->deviceRealtimeHRMMeasurement());
         break;
     }

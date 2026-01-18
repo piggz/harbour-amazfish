@@ -18,23 +18,6 @@ class AbstractDevice : public QBLEDevice
     Q_OBJECT
 
 public:
-    enum Settings {
-        SETTING_USER_PROFILE,
-        SETTING_USER_GOAL,
-        SETTING_USER_ALERT_GOAL,
-        SETTING_USER_ALL_DAY_HRM,
-        SETTING_USER_HRM_SLEEP_DETECTION,
-        SETTING_USER_DISPLAY_ON_LIFT,
-        SETTING_ALARMS,
-        SETTING_DEVICE_DISPLAY_ITEMS,
-        SETTING_DEVICE_LANGUAGE,
-        SETTING_DEVICE_DATE,
-        SETTING_DEVICE_TIME,
-        SETTING_DEVICE_UNIT,
-        SETTING_DISCONNECT_NOTIFICATION,
-        SETTING_DEVICE_REALTIME_HRM_MEASUREMENT
-    };
-    Q_ENUM(Settings)
 
     enum Event {
         EVENT_MUSIC_STOP,
@@ -86,7 +69,7 @@ public:
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
     virtual QString information(Amazfish::Info i) const;
-    virtual void applyDeviceSetting(Settings s);
+    virtual void applyDeviceSetting(Amazfish::Settings s);
     virtual void rebootWatch();
     virtual void sendAlert(const Amazfish::WatchNotification &notification) = 0;
     virtual void incomingCall(const QString &caller) = 0;

@@ -38,7 +38,7 @@ public:
     //Weather
     void sendWeather(CurrentWeather *weather) override;
 
-    virtual void applyDeviceSetting(Settings s);
+    virtual void applyDeviceSetting(Amazfish::Settings s);
     virtual void immediateAlert(int level) override;
 
 protected:

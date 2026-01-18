@@ -154,7 +154,7 @@ QStringList BipDevice::supportedDisplayItems() const
     return items;
 }
 
-void BipDevice::applyDeviceSetting(AbstractDevice::Settings s)
+void BipDevice::applyDeviceSetting(Amazfish::Settings s)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
     if (!mi) {
@@ -170,7 +170,7 @@ void BipDevice::applyDeviceSetting(AbstractDevice::Settings s)
     keyPosMap["settings"] = 7;
     keyPosMap["alipay"] = 8;
 
-    if (s == SETTING_DEVICE_DISPLAY_ITEMS) {
+    if (s == Amazfish::Settings::SETTING_DEVICE_DISPLAY_ITEMS) {
         mi->setDisplayItemsOld(keyPosMap);
     } else {
         HuamiDevice::applyDeviceSetting(s);

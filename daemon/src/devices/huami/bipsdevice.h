@@ -13,7 +13,7 @@ public:
     Amazfish::Features supportedFeatures() const override;
     QStringList supportedDisplayItems() const override;
 
-    void applyDeviceSetting(Settings s) override;
+    void applyDeviceSetting(Amazfish::Settings s) override;
 
     AbstractFirmwareInfo* firmwareInfo(const QByteArray &bytes, const QString &path) override;
 

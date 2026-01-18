@@ -155,7 +155,7 @@ QString AbstractDevice::information(Amazfish::Info i) const
     return QString();
 }
 
-void AbstractDevice::applyDeviceSetting(Settings s)
+void AbstractDevice::applyDeviceSetting(Amazfish::Settings s)
 {
     Q_UNUSED(s);
     emit message(tr("Device does not support settings"));

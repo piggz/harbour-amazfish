@@ -15,7 +15,7 @@ public:
     Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
-    void applyDeviceSetting(Settings s) override;
+    void applyDeviceSetting(Amazfish::Settings s) override;
 
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 

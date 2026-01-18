@@ -551,12 +551,12 @@ void PinetimeJFDevice::sendWeather(CurrentWeather *weather)
     }
 }
 
-void PinetimeJFDevice::applyDeviceSetting(Settings s)
+void PinetimeJFDevice::applyDeviceSetting(Amazfish::Settings s)
 {
 
     HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
     switch(s) {
-    case SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
+    case Amazfish::Settings::SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
         if (hrm) {
             hrm->enableRealtimeHRMeasurement(AmazfishConfig::instance()->deviceRealtimeHRMMeasurement());
         }

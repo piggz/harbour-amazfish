@@ -122,29 +122,29 @@ void ZeppOSDevice::requestManualHeartrate() const
     }
 }
 
-void ZeppOSDevice::applyDeviceSetting(Settings s)
+void ZeppOSDevice::applyDeviceSetting(Amazfish::Settings s)
 {
     qDebug() << Q_FUNC_INFO << s;
 
     switch(s) {
-    case SETTING_USER_PROFILE:
-    case SETTING_DEVICE_LANGUAGE:
+    case Amazfish::Settings::SETTING_USER_PROFILE:
+    case Amazfish::Settings::SETTING_DEVICE_LANGUAGE:
         if (m_userInfoService) {
             m_userInfoService->setUserInfo();
         }
         break;
-    case SETTING_USER_GOAL:
-    case SETTING_USER_ALERT_GOAL:
-    case SETTING_USER_ALL_DAY_HRM:
-    case SETTING_USER_HRM_SLEEP_DETECTION:
-    case SETTING_USER_DISPLAY_ON_LIFT:
-    case SETTING_ALARMS:
-    case SETTING_DEVICE_DISPLAY_ITEMS:
-    case SETTING_DEVICE_DATE:
-    case SETTING_DEVICE_TIME:
-    case SETTING_DEVICE_UNIT:
-    case SETTING_DISCONNECT_NOTIFICATION:
-    case SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
+    case Amazfish::Settings::SETTING_USER_GOAL:
+    case Amazfish::Settings::SETTING_USER_ALERT_GOAL:
+    case Amazfish::Settings::SETTING_USER_ALL_DAY_HRM:
+    case Amazfish::Settings::SETTING_USER_HRM_SLEEP_DETECTION:
+    case Amazfish::Settings::SETTING_USER_DISPLAY_ON_LIFT:
+    case Amazfish::Settings::SETTING_ALARMS:
+    case Amazfish::Settings::SETTING_DEVICE_DISPLAY_ITEMS:
+    case Amazfish::Settings::SETTING_DEVICE_DATE:
+    case Amazfish::Settings::SETTING_DEVICE_TIME:
+    case Amazfish::Settings::SETTING_DEVICE_UNIT:
+    case Amazfish::Settings::SETTING_DISCONNECT_NOTIFICATION:
+    case Amazfish::Settings::SETTING_DEVICE_REALTIME_HRM_MEASUREMENT:
         qDebug() << "Setting not implemented";
         break;
     }

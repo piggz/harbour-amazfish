@@ -17,7 +17,7 @@ public:
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
     void downloadActivityData() override;
-    void applyDeviceSetting(Settings s) override;
+    void applyDeviceSetting(Amazfish::Settings s) override;
     void sendWeather(CurrentWeather *weather) override;
 
 

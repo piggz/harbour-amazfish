@@ -18,7 +18,7 @@ public:
     QString information(Amazfish::Info i) const override;
     void rebootWatch() override;
 
-    void applyDeviceSetting(Settings s) override;
+    void applyDeviceSetting(Amazfish::Settings s) override;
 
     virtual void sendAlert(const Amazfish::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;

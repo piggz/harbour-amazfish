@@ -951,10 +951,10 @@ void DeviceInterface::incomingCallEnded() {
 
 void DeviceInterface::applyDeviceSetting(int s)
 {
-    qDebug() << Q_FUNC_INFO << "Setting:" << (AbstractDevice::Settings)s << (int)s;
+    qDebug() << Q_FUNC_INFO << "Setting:" << (Amazfish::Settings)s << (int)s;
 
     if (m_device) {
-        m_device->applyDeviceSetting((AbstractDevice::Settings)s);
+        m_device->applyDeviceSetting((Amazfish::Settings)s);
     }
 }
 

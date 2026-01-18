@@ -246,29 +246,29 @@ void DK08Device::downloadActivityData() {
 
 }
 
-void DK08Device::applyDeviceSetting(AbstractDevice::Settings settings) {
+void DK08Device::applyDeviceSetting(Amazfish::Settings settings) {
     DK08NUSService *nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));
     if (!nus) {
         qWarning() << "NUSService not available";
         return;
     }
     switch(settings) {
-    case AbstractDevice::Settings::SETTING_ALARMS:
+    case Amazfish::Settings::SETTING_ALARMS:
         nus->setAlarms();
         break;
-    case AbstractDevice::Settings::SETTING_USER_PROFILE:
+    case Amazfish::Settings::SETTING_USER_PROFILE:
         nus->setUserInfo();
         break;
-    case AbstractDevice::Settings::SETTING_USER_GOAL:
+    case Amazfish::Settings::SETTING_USER_GOAL:
         nus->setSportTarget();
         break;
-    case AbstractDevice::Settings::SETTING_DEVICE_UNIT:
+    case Amazfish::Settings::SETTING_DEVICE_UNIT:
         nus->setUnit();
         break;
-    case AbstractDevice::Settings::SETTING_DEVICE_TIME:
+    case Amazfish::Settings::SETTING_DEVICE_TIME:
         nus->setTimeFormat();
         break;
-    case AbstractDevice::Settings::SETTING_USER_DISPLAY_ON_LIFT:
+    case Amazfish::Settings::SETTING_USER_DISPLAY_ON_LIFT:
         nus->setPalming();
         break;
     default:
