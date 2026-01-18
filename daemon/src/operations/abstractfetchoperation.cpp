@@ -46,15 +46,17 @@ void AbstractFetchOperation::setLastSyncKey(const QString &key)
 
 void AbstractFetchOperation::handleData(const QByteArray &data)
 {
-    if ((m_lastPacketCounter + 1) == data[0]) {
+    uint8_t counter = data[0];
+
+    if ((m_lastPacketCounter + 1) == counter) {
         // TODO we should handle skipped or repeated bytes more gracefully
         m_lastPacketCounter++;
-        if (m_lastPacketCounter > 255) {
-            m_lastPacketCounter = 0;
+        if (m_lastPacketCounter >= 255) {
+            m_lastPacketCounter = -1;
         }
         m_buffer += data.mid(1);
     } else {
-        qDebug() << "Invalid packet counter:" << data[0] << "last was" << m_lastPacketCounter;
+        qDebug() << "Invalid packet counter:" << counter << "last was" << m_lastPacketCounter;
         m_fetcher->message("Invalid packet counter during fetch");
         m_valid = false;
     }
