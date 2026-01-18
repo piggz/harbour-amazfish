@@ -17,24 +17,16 @@ public:
     ~SportsDetailOperation();
 
     void start(QBLEService *service) override;
-    void handleData(const QByteArray &data) override;
-    bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
 private:
     ActivitySummary m_summary;
     AbstractActivityDetailParser *m_parser = 0;
-    int m_lastPacketCounter = 0;
-    QByteArray m_buffer;
     QString m_gpx;
-
-    bool saveSport(const QString &filename);
-
     KDbConnection *m_conn;
 
+    bool saveSport(const QString &filename);
     bool save();
-
     bool processBufferedData() override;
-
 };
 
 #endif // SPORTSDETAILOPERATION_H

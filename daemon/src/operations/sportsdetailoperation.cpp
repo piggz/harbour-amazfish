@@ -34,32 +34,6 @@ void SportsDetailOperation::start(QBLEService *service)
     m_fetcher->writeControl(cmd);
 }
 
-void SportsDetailOperation::handleData(const QByteArray &data)
-{
-    qDebug() << Q_FUNC_INFO;
-    if (data.length() < 2) {
-        qDebug() << "unexpected sports detail data length: " << data.length();
-        return;
-    }
-
-    if ((m_lastPacketCounter + 1) == (uint8_t)data[0] ) {
-        m_lastPacketCounter++;
-        if (m_lastPacketCounter >= 255) {
-            m_lastPacketCounter =-1;
-        }
-        m_buffer += data.mid(1);
-    } else {
-        qDebug() << "invalid package counter: " << (uint8_t)data[0] << ", last was: " << m_lastPacketCounter;
-        m_valid = false;
-        return;
-    }
-}
-
-bool SportsDetailOperation::characteristicChanged(const QString &characteristic, const QByteArray &value)
-{
-    return false;
-}
-
 bool SportsDetailOperation::processBufferedData()
 {
     qDebug() << Q_FUNC_INFO;
