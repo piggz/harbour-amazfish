@@ -433,7 +433,7 @@ void O2::refresh() {
 }
 
 bool O2::isExpired() {
-    return QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000 > expires();
+    return QDateTime::currentMSecsSinceEpoch() / 1000 > expires();
 }
 
 void O2::onRefreshFinished() {

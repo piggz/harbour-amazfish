@@ -26,7 +26,7 @@ QByteArray UIHHContainer::toRawBytes()
 {
     QByteArray content;
 
-    for (File f: m_files) {
+    for (const File &f: std::as_const(m_files)) {
         content += f.header();
         content += f.content();
     }

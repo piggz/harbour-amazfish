@@ -59,7 +59,7 @@ void RealtimeActivitySample::sampleUpdated() {
         }
 
         if (!m_heartrate_samples.isEmpty()) {
-            for (int value : m_heartrate_samples) {
+            for (int value : std::as_const(m_heartrate_samples)) {
                 avg_heartrate += value;
             }
             avg_heartrate = avg_heartrate / m_heartrate_samples.size();

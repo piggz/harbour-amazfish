@@ -105,7 +105,7 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
     auto obsoleteFileList = manifestObject["obsolete_files"].toArray();
 
     // Remove obsolete files
-    for(const QJsonValue& file : obsoleteFileList)
+    for(const QJsonValue& file : std::as_const(obsoleteFileList))
     {
         if(file.toObject().value("path").isUndefined() || !file.toObject().value("path").isString())
             continue;
@@ -119,7 +119,7 @@ void BleFsWorker::updateFiles(AdafruitBleFsOperation* service, int transferMtu)
 
     // Upload the resources
     int progressSize = 0;
-    for(const QJsonValue& resource : resourceList)
+    for(const QJsonValue& resource : std::as_const(resourceList))
     {
         if(resource.toObject().value("filename").isUndefined() || !resource.toObject().value("filename").isString())
             continue;

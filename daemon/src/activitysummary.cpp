@@ -124,7 +124,7 @@ ActivitySummary::meta ActivitySummary::metaData(const QString &key)
 {
     ActivitySummary::meta m;
 
-    for(auto i:m_metaData) {
+    for(const auto &i:std::as_const(m_metaData)) {
         if (i.key == key) {
             m = i;
             break;

@@ -48,7 +48,7 @@ QVariant DataSource::data(Type type, const QDate &day)
 
             float light = 0;
             float deep = 0;
-            for (const DataSource::SleepSession &s : sessions) {
+            for (const DataSource::SleepSession &s : std::as_const(sessions)) {
                 light += s.lightSleepDuration;
                 deep += s.deepSleepDuration;;
             }
