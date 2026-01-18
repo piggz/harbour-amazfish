@@ -11,6 +11,7 @@ public:
 
     void pair() override;
     int supportedFeatures() const override;
+    Amazfish::DataTypes supportedDataTypes() const override;
     QString deviceType() const override;
     void abortOperations() override;
 

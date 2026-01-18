@@ -26,6 +26,7 @@ public:
 
     QString deviceType() const override;
     int supportedFeatures() const override;
+    Amazfish::DataTypes supportedDataTypes() const override;
     bool isZeppOs() override;
 
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;

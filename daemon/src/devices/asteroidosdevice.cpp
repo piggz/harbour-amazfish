@@ -18,8 +18,7 @@ AsteroidOSDevice::AsteroidOSDevice(const QString &pairedName, QObject *parent) :
 
 int AsteroidOSDevice::supportedFeatures() const
 {
-    return FEATURE_WEATHER | FEATURE_WEATHER | FEATURE_ALERT | FEATURE_SCREENSHOT;
-//FEATURE_HRM  | FEATURE_STEPS;
+    return FEATURE_WEATHER  | FEATURE_ALERT | FEATURE_SCREENSHOT;
 }
 
 QString AsteroidOSDevice::deviceType() const
@@ -333,4 +332,9 @@ void AsteroidOSDevice::requestScreenshot() {
         screenshot->requestScreenshot();
     }
 
+}
+
+Amazfish::DataTypes AsteroidOSDevice::supportedDataTypes() const
+{
+    return Amazfish::DataType::TYPE_NONE;
 }

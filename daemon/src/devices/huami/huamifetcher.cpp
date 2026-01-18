@@ -14,11 +14,11 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
 {
     qDebug() << Q_FUNC_INFO << type;
 
-    if (type & Amazfish::DataType::TYPE_ACTIVITY) {
+    if (type & Amazfish::DataType::TYPE_ACTIVITY && m_device->supportsDataType(Amazfish::DataType::TYPE_ACTIVITY)) {
         m_operations.append(new ActivityFetchOperation(this, m_device->database(), m_device->activitySampleSize(), m_device->isZeppOs()));
-    } else if (type & Amazfish::DataType::TYPE_DEBUGLOG) {
+    } else if (type & Amazfish::DataType::TYPE_DEBUGLOG && m_device->supportsDataType(Amazfish::DataType::TYPE_DEBUGLOG)) {
         m_operations.append(new LogFetchOperation(this, m_device->isZeppOs()));
-    } else if (type & Amazfish::DataType::TYPE_GPS_TRACK) {
+    } else if (type & Amazfish::DataType::TYPE_GPS_TRACK && m_device->supportsDataType(Amazfish::DataType::TYPE_GPS_TRACK)) {
         m_operations.append(new SportsSummaryOperation(this, m_device->database(), m_device->activitySummaryParser(), m_device->isZeppOs()));
     }
 

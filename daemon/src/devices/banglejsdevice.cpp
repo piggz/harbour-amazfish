@@ -34,6 +34,11 @@ int BangleJSDevice::supportedFeatures() const
            FEATURE_WEATHER;
 }
 
+Amazfish::DataTypes BangleJSDevice::supportedDataTypes() const
+{
+    return Amazfish::DataType::TYPE_HEART_RATE;
+}
+
 QString BangleJSDevice::deviceType() const
 {
     return "banglejs";

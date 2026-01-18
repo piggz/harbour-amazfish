@@ -13,6 +13,7 @@ public:
     void sendAlert(const Amazfish::WatchNotification &notification) override;
     void sendEventReminder(int id, const QDateTime &dt, const QString &event) override;
     int supportedFeatures() const override;
+    Amazfish::DataTypes supportedDataTypes() const override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void applyDeviceSetting(Settings s) override;
 

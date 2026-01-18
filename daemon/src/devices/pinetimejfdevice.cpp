@@ -77,6 +77,11 @@ int PinetimeJFDevice::supportedFeatures() const
             FEATURE_STEPS;
 }
 
+Amazfish::DataTypes PinetimeJFDevice::supportedDataTypes() const
+{
+    return Amazfish::DataType::TYPE_HEART_RATE;
+}
+
 QString PinetimeJFDevice::deviceType() const
 {
     return "pinetimejf";

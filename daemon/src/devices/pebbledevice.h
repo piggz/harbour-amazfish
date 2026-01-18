@@ -11,6 +11,7 @@ public:
     explicit PebbleDevice(const QString &pairedName, QObject *parent = 0);
 
     virtual int supportedFeatures() const override;
+    Amazfish::DataTypes supportedDataTypes() const override;
     virtual QString deviceType() const override;
     virtual void sendAlert(const Amazfish::WatchNotification &notification) override;
     virtual void incomingCall(const QString &caller) override;

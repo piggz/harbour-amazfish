@@ -98,6 +98,11 @@ bool AbstractDevice::supportsFeature(AbstractDevice::Feature f) const
     return (supportedFeatures() & f) == f;
 }
 
+bool AbstractDevice::supportsDataType(Amazfish::DataType t) const
+{
+    return (supportsDataType(t) & t) == t;
+}
+
 void AbstractDevice::setDatabase(KDbConnection *conn)
 {
     m_conn = conn;

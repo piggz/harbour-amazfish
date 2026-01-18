@@ -29,6 +29,11 @@ int GtsDevice::supportedFeatures() const
             FEATURE_BUTTON_ACTION;
 }
 
+Amazfish::DataTypes GtsDevice::supportedDataTypes() const
+{
+    return Amazfish::DataType::TYPE_ACTIVITY | Amazfish::DataType::TYPE_GPS_TRACK | Amazfish::DataType::TYPE_HEART_RATE;
+}
+
 void GtsDevice::serviceEvent(uint8_t event)
 {
     switch(event) {

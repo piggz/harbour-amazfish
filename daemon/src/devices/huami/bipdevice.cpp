@@ -21,6 +21,11 @@ int BipDevice::supportedFeatures() const
             FEATURE_BUTTON_ACTION;
 }
 
+Amazfish::DataTypes BipDevice::supportedDataTypes() const
+{
+    return Amazfish::DataType::TYPE_ACTIVITY | Amazfish::DataType::TYPE_GPS_TRACK | Amazfish::DataType::TYPE_HEART_RATE;
+}
+
 QString BipDevice::deviceType() const
 {
     return "amazfitbip";

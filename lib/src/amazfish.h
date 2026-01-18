@@ -59,6 +59,7 @@ public:
     Q_ENUM(Settings)
 
     enum class DataType{
+        TYPE_NONE = 0,
         TYPE_DEBUGLOG = 1,
         TYPE_ACTIVITY = 2,
         TYPE_GPS_TRACK = 4,
@@ -138,5 +139,7 @@ Q_DECLARE_METATYPE(Amazfish::Info)
 Q_DECLARE_METATYPE(Amazfish::Settings)
 Q_DECLARE_METATYPE(Amazfish::WatchNotification)
 Q_DECLARE_METATYPE(Amazfish::DataType)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Amazfish::Features)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Amazfish::DataTypes)
 
 #endif // AMAZFISH_H
