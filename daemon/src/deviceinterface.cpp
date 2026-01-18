@@ -102,8 +102,7 @@ DeviceInterface::~DeviceInterface()
 
 void DeviceInterface::connectToDevice(const QString &address)
 {
-    // qDebug() << Q_FUNC_INFO << ": address:" << address;
-
+    qDebug() << Q_FUNC_INFO << ": address:" << address;
 
     if (m_device) {
         m_deviceAddress = address;
@@ -118,7 +117,7 @@ void DeviceInterface::connectToDevice(const QString &address)
 
 QString DeviceInterface::pair(const QString &name, const QString &deviceType, const QString &address)
 {
-    // qDebug() << Q_FUNC_INFO << name << deviceType << address;
+    qDebug() << Q_FUNC_INFO << name << deviceType << address;
 
     m_deviceAddress = address;
 

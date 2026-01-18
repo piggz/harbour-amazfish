@@ -176,7 +176,7 @@ QVariant DataSource::data(Type type, const QDate &day)
                     day.toString("yyyy-MM-ddT23:59:59") +  "' AND key = '"+ QString::number((int)Amazfish::Info::INFO_BATTERY) +"' ORDER BY timestamp_dt ASC"; // 7 = AbstractDevice::INFO_BATTERY
         }
 
-        // qDebug() << qry;
+        qDebug() << qry;
         if (m_conn && m_conn->isDatabaseUsed()) {
             KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
 
