@@ -879,7 +879,8 @@ void DeviceInterface::navigationRunningChanged(bool running)
 
 void DeviceInterface::navigationChanged(const QString &icon, const QString &narrative, const QString &manDist, int progress)
 {
-    qDebug() << Q_FUNC_INFO << icon << narrative;
+    qDebug() << Q_FUNC_INFO << "enabled: " << AmazfishConfig::instance()->appNavigationNotification()
+        << icon << narrative << manDist << progress << m_device;
     if (m_device && AmazfishConfig::instance()->appNavigationNotification()) {
         m_device->navigationNarrative(icon, narrative, manDist, progress);
     }

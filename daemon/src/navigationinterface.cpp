@@ -16,7 +16,6 @@ NavigationInterface::NavigationInterface(QObject *parent) : QObject(parent)
 
 void NavigationInterface::connectDaemon()
 {
-    qDebug() << Q_FUNC_INFO;
 
     if (iface) {
         iface->deleteLater();
@@ -25,12 +24,13 @@ void NavigationInterface::connectDaemon()
     iface = new QDBusInterface(QStringLiteral(SERVICE_NAME_MAPS), QStringLiteral(OBJECT_PATH), QStringLiteral(INTERFACE_NAME), QDBusConnection::sessionBus());
 
     if (!iface->isValid()) {
-        qDebug() << "Interface is not valid";
+        qDebug() << Q_FUNC_INFO << "Interface is not valid";
 
         iface->deleteLater();
         iface = nullptr;
         return;
     }
+    qDebug() << Q_FUNC_INFO << iface;
 
     connect(iface, SIGNAL(runningChanged()), this, SLOT(slot_runningChanged()), Qt::UniqueConnection);
     connect(iface, SIGNAL(narrativeChanged()), this, SLOT(slot_narrativeChanged()), Qt::UniqueConnection);
@@ -46,13 +46,12 @@ void NavigationInterface::disconnectDaemon()
 
 void NavigationInterface::slot_runningChanged()
 {
-    qDebug() << Q_FUNC_INFO;
-
     if (!iface || !iface->isValid()) {
+        qWarning() << Q_FUNC_INFO << iface;
         return;
     }
     bool reply = iface->property("running").toBool();
-    qDebug() << reply;
+    qDebug() << Q_FUNC_INFO << reply;
 
     if (m_running != reply) {
         m_running = reply;
@@ -62,14 +61,14 @@ void NavigationInterface::slot_runningChanged()
 
 void NavigationInterface::slot_iconChanged()
 {
-    qDebug() << Q_FUNC_INFO;
 
     if (!iface || !iface->isValid()) {
+        qWarning() << Q_FUNC_INFO << iface;
         return;
     }
     m_progress = iface->property("progress").toInt();
     QString reply = iface->property("icon").toString();
-    qDebug() << reply;
+    qDebug() << Q_FUNC_INFO << reply;
 
     if (m_icon != reply) {
         m_icon = reply;
@@ -79,14 +78,13 @@ void NavigationInterface::slot_iconChanged()
 
 void NavigationInterface::slot_manDistChanged()
 {
-    qDebug() << Q_FUNC_INFO;
-
     if (!iface || !iface->isValid()) {
+        qWarning() << Q_FUNC_INFO << iface;
         return;
     }
     m_progress = iface->property("progress").toInt();
     QString reply = iface->property("manDist").toString();
-    qDebug() << reply;
+    qDebug() << Q_FUNC_INFO << reply;
 
     if (m_manDist != reply) {
         m_manDist = reply;
@@ -96,14 +94,13 @@ void NavigationInterface::slot_manDistChanged()
 
 void NavigationInterface::slot_narrativeChanged()
 {
-    qDebug() << Q_FUNC_INFO;
-
     if (!iface || !iface->isValid()) {
+        qWarning() << Q_FUNC_INFO << iface;
         return;
     }
     m_progress = iface->property("progress").toInt();
     QString reply = iface->property("narrative").toString();
-    qDebug() << reply;
+    qDebug() << Q_FUNC_INFO << reply;
     if (m_narrative != reply) {
         m_narrative = reply;
         emit navigationChanged(m_icon, m_narrative, m_manDist, m_progress);
