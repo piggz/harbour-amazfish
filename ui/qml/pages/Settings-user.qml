@@ -134,7 +134,7 @@ PagePL {
                                                 minute: profile_lift_start.getMinutes()
                                                 });
                     dialog.accepted.connect(function() {
-                        console.log(dialog.timeText, dialog.time, dialog.hour, dialog.minute);
+                        // console.log(dialog.timeText, dialog.time, dialog.hour, dialog.minute);
                         page.wristScheduleStart = dialog.time;
                     })
                 }

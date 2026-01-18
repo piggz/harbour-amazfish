@@ -102,7 +102,7 @@ PagePL {
                 contentHeight: styler.themeItemSizeSmall
 
                 onClicked: {
-                    console.log("Setting city to ", model.identifier);
+                    // console.log("Setting city to ", model.identifier);
                     cityManager.removeAllCities();
                     cityManager.addCity(model.identifier, model.name, model.state,
                                         model.country, model.countryCode,

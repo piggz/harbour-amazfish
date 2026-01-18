@@ -57,14 +57,14 @@ QVariant DataSource::data(Type type, const QDate &day)
 
             result.append(pt);
         }
-        qDebug() << "Sleep data:" << result;
+        // qDebug() << "Sleep data:" << result;
 
 #if 0
         qry = "SELECT timestamp_dt, raw_kind, raw_intensity FROM mi_band_activity WHERE timestamp_dt >= date('" +
                 day.toString("yyyy-MM-ddT11:59:00") + "','-10 day') AND timestamp_dt <= '" +
                 day.toString("yyyy-MM-ddT12:01:00") +  "' ORDER BY timestamp_dt ASC";
 
-        qDebug() << qry;
+        // qDebug() << qry;
         if (m_conn && m_conn->isDatabaseUsed()) {
             KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
 
@@ -176,7 +176,7 @@ QVariant DataSource::data(Type type, const QDate &day)
                     day.toString("yyyy-MM-ddT23:59:59") +  "' AND key = '"+ QString::number((int)Amazfish::Info::INFO_BATTERY) +"' ORDER BY timestamp_dt ASC"; // 7 = AbstractDevice::INFO_BATTERY
         }
 
-        qDebug() << qry;
+        // qDebug() << qry;
         if (m_conn && m_conn->isDatabaseUsed()) {
             KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
 
@@ -207,7 +207,7 @@ QVariant DataSource::data(Type type, const QDate &day)
 
 QList<DataSource::SleepSession> DataSource::calculateSleep(const QDate &day)
 {
-    qDebug() << "Calculating sleep for " << day;
+    // qDebug() << "Calculating sleep for " << day;
     QDateTime startDate = QDateTime(day, QTime(12, 00)); //In localtime
     QDateTime endDate = startDate.addDays(1);
     QList<DataSource::SleepSession> sessions;
@@ -218,12 +218,12 @@ QList<DataSource::SleepSession> DataSource::calculateSleep(const QDate &day)
     long lightSleepDuration = 0;
     long deepSleepDuration = 0;
     long durationSinceLastSleep = 0;
-     
+
     QString qry = "SELECT timestamp, raw_kind, raw_intensity FROM mi_band_activity WHERE timestamp >= " +
             QString::number(startDate.toMSecsSinceEpoch() / 1000) + " AND timestamp <= '" +
             QString::number(endDate.toMSecsSinceEpoch() / 1000) +   "' ORDER BY timestamp ASC";
-    
-    qDebug() << qry;
+
+    // qDebug() << qry;
 
     if (m_conn && m_conn->isDatabaseUsed()) {
         KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
@@ -259,7 +259,7 @@ QList<DataSource::SleepSession> DataSource::calculateSleep(const QDate &day)
                                     ss.lightSleepDuration = lightSleepDuration;
                                     ss.deepSleepDuration = deepSleepDuration;
                                     sessions << ss;
-                                    qDebug() << "Sleep Session" << ss.sleepStart << ss.sleepEnd << ss.lightSleepDuration << ss.deepSleepDuration;
+                                    // qDebug() << "Sleep Session" << ss.sleepStart << ss.sleepEnd << ss.lightSleepDuration << ss.deepSleepDuration;
 
                                 }
                                 sleepStart = QDateTime();

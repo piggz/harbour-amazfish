@@ -27,7 +27,7 @@ QByteArray fromInt24(int val)
 
 QByteArray fromInt32(int val)
 {
-    qDebug() << "Converting int32 to char" << val;
+    // qDebug() << "Converting int32 to char" << val;
     return QByteArray(1, val & 0xff) + QByteArray(1, ((val >> 8) & 0xff)) + QByteArray(1, ((val >> 16) & 0xff)) + QByteArray(1, ((val >> 24) & 0xff));
 }
 
@@ -42,7 +42,7 @@ QByteArray fromInt64(long long int val)
             + QByteArray(1, ((val >> 48) & 0xff))
             + QByteArray(1, ((val >> 56) & 0xff));
 
-    qDebug() << "Converting int64 to char" << val << " " << ret.toHex();
+    // qDebug() << "Converting int64 to char" << val << " " << ret.toHex();
 
     return ret;
 }
@@ -78,17 +78,17 @@ QByteArray dateTimeToBytes(const QDateTime &dt, int format, bool adjustForTZ)
         QDateTime local = dt.toLocalTime();
         utcOffset = local.offsetFromUtc(); //QTimeZone::systemTimeZone().offsetFromUtc(local);
     }
-    qDebug() << "UTC offset it " << utcOffset;
+    // qDebug() << "UTC offset it " << utcOffset;
 
     ret += char((utcOffset / (60 * 60)) * 4);
     //ret += char(1);
 
-    qDebug() << "converted date" << dt << "to" << ret;
+    // qDebug() << "converted date" << dt << "to" << ret;
     return ret;
 }
 
 QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset) {
-    qDebug() << "Date length is " << value.length() << value.toHex() << honorDeviceTimeOffset;
+    // qDebug() << "Date length is " << value.length() << value.toHex() << honorDeviceTimeOffset;
 
     if (value.length() >= 7) {
         int year = TypeConversion::toUint16(value[0], value[1]);
@@ -114,9 +114,9 @@ QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset
             timestamp.setTimeSpec(Qt::LocalTime);
         }
 
-        qDebug() << "Watch timezone is:" << tz;
-        qDebug() << "System timezone is" << QTimeZone::systemTimeZone() << QTimeZone::systemTimeZoneId();
-        qDebug() << "Time:" << timestamp;
+        // qDebug() << "Watch timezone is:" << tz;
+        // qDebug() << "System timezone is" << QTimeZone::systemTimeZone() << QTimeZone::systemTimeZoneId();
+        // qDebug() << "Time:" << timestamp;
 
         /*
         QDateTime temp = QDateTime::fromString(timestamp.toString("yyyy-MM-dd hh:mm:ss"), "yyyy-MM-dd hh:mm:ss");

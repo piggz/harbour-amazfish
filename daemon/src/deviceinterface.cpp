@@ -102,7 +102,7 @@ DeviceInterface::~DeviceInterface()
 
 void DeviceInterface::connectToDevice(const QString &address)
 {
-    qDebug() << Q_FUNC_INFO << ": address:" << address;
+    // qDebug() << Q_FUNC_INFO << ": address:" << address;
 
 
     if (m_device) {
@@ -118,7 +118,7 @@ void DeviceInterface::connectToDevice(const QString &address)
 
 QString DeviceInterface::pair(const QString &name, const QString &deviceType, const QString &address)
 {
-    qDebug() << Q_FUNC_INFO << name << deviceType << address;
+    // qDebug() << Q_FUNC_INFO << name << deviceType << address;
 
     m_deviceAddress = address;
 
@@ -139,7 +139,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
         m_device->pair();
         return "pairing";
     }
-    
+
     qDebug() << Q_FUNC_INFO << ": device not created";
 
     return QString("no device found");
@@ -300,7 +300,7 @@ void DeviceInterface::createTables()
                 KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg(AbstractDevice::INFO_BATTERY), // automatically adds LIMIT 1 into query
                 &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
         m_lastBatteryLevel = batteryLevel;
-        qDebug() << Q_FUNC_INFO << "Last Battery Level: " << m_lastBatteryLevel;
+        // qDebug() << Q_FUNC_INFO << "Last Battery Level: " << m_lastBatteryLevel;
     } else {
         qWarning() << "Cannot get battery level";
     }
@@ -501,7 +501,7 @@ void DeviceInterface::log_battery_level(int level) {
     }
 
     QDateTime m_sampleTime = QDateTime::currentDateTime();
-    qDebug() << Q_FUNC_INFO << "Start time" << m_sampleTime;
+    // qDebug() << Q_FUNC_INFO << "Start time" << m_sampleTime;
 
     KDbTransaction transaction = m_conn->beginTransaction();
     KDbTransactionGuard tg(transaction);
@@ -981,20 +981,20 @@ void DeviceInterface::onRefreshTimer()
     QDateTime currentDate = QDateTime::currentDateTime();
 
     if (m_lastWeatherSync.secsTo(currentDate) >= (config->appRefreshWeather() * 60)) {
-        qDebug() << Q_FUNC_INFO << "weather interval reached";
+        // qDebug() << Q_FUNC_INFO << "weather interval reached";
         m_lastWeatherSync = currentDate;
         m_currentWeather.refresh();
     }
 
     if (m_lastCalendarSync.secsTo(currentDate) >= (config->appRefreshCalendar() * 60)) {
-        qDebug() << Q_FUNC_INFO << "calendar interval reached";
+        // qDebug() << Q_FUNC_INFO << "calendar interval reached";
         m_lastCalendarSync = currentDate;
         updateCalendar();
     }
 
     if (config->appAutoSyncData()) {
         if (m_lastActivitySync.secsTo(currentDate) >= (60*60)) {
-            qDebug() << Q_FUNC_INFO << "Auto syncing activity data";
+            // qDebug() << Q_FUNC_INFO << "Auto syncing activity data";
             m_lastActivitySync = currentDate;
             downloadActivityData();
         }

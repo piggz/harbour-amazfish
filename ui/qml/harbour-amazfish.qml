@@ -170,7 +170,7 @@ ApplicationWindowPL
     Connections {
         target: DaemonInterfaceInstance
         onInformationChanged: {
-            console.log("Information changed", infoKey, infoValue);
+            // console.log("Information changed", infoKey, infoValue);
 
             switch (infoKey) {
             case Amazfish.INFO_BATTERY:
@@ -208,7 +208,7 @@ ApplicationWindowPL
         }
 
         supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
-        console.log("Supported features", supportedFeatures);
+        // console.log("Supported features", supportedFeatures);
 
         DaemonInterfaceInstance.refreshInformation();
     }
