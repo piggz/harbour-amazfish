@@ -1,9 +1,6 @@
 #include "deviceinterface.h"
 #include "bluezadapter.h"
-#include "deviceinfoservice.h"
-#include "alertnotificationservice.h"
 #include "hrmservice.h"
-#include "bipfirmwareservice.h"
 #include "devicefactory.h"
 #include "amazfishconfig.h"
 #include "transliterator.h"
@@ -97,7 +94,6 @@ DeviceInterface::DeviceInterface()
 DeviceInterface::~DeviceInterface()
 {
     disconnect();
-
 }
 
 void DeviceInterface::connectToDevice(const QString &address)

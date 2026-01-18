@@ -4,9 +4,9 @@
 #include "typeconversion.h"
 #include "amazfishconfig.h"
 #include "huami/zepposdevice.h"
+#include "mibandservice.h"
 
 #include <Qt-AES/qaesencryption.h>
-#include <iostream>
 #include <random>
 
 uint8_t getRandomUint8() {

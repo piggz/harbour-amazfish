@@ -2,6 +2,12 @@
 #include "gtrfirmwareinfo.h"
 #include <QtXml/QtXml>
 #include <QTimer>
+#include "mibandservice.h"
+#include "miband2service.h"
+#include "deviceinfoservice.h"
+#include "bipfirmwareservice.h"
+#include "hrmservice.h"
+#include "alertnotificationservice.h"
 
 GtrDevice::GtrDevice(const QString &pairedName, QObject *parent) : GtsDevice(pairedName, parent)
 {

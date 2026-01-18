@@ -1,5 +1,10 @@
 #include "gts2device.h"
 #include "gts2firmwareinfo.h"
+#include "mibandservice.h"
+#include "miband2service.h"
+#include "deviceinfoservice.h"
+#include "bipfirmwareservice.h"
+#include "hrmservice.h"
 
 Gts2Device::Gts2Device(const QString &pairedName, QObject *parent) : GtsDevice(pairedName, parent)
 {

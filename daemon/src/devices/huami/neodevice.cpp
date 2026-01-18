@@ -1,5 +1,12 @@
 #include "neodevice.h"
 #include "neofirmwareinfo.h"
+#include "mibandservice.h"
+#include "miband2service.h"
+#include "deviceinfoservice.h"
+#include "bipfirmwareservice.h"
+#include "hrmservice.h"
+#include "alertnotificationservice.h"
+
 #include <QtXml/QtXml>
 #include <QDateTime>
 

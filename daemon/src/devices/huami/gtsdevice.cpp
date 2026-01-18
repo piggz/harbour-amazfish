@@ -5,6 +5,12 @@
 #include "typeconversion.h"
 #include "updatefirmwareoperationnew.h"
 #include "huamiupdatefirmwareoperation2020.h"
+#include "mibandservice.h"
+#include "miband2service.h"
+#include "deviceinfoservice.h"
+#include "bipfirmwareservice.h"
+#include "hrmservice.h"
+#include "alertnotificationservice.h"
 
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {

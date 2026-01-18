@@ -3,14 +3,6 @@
 
 #include "abstractdevice.h"
 #include "huami/huamifetcher.h"
-#include "qble/qbleservice.h"
-
-#include "deviceinfoservice.h"
-#include "mibandservice.h"
-#include "miband2service.h"
-#include "alertnotificationservice.h"
-#include "hrmservice.h"
-#include "bipfirmwareservice.h"
 
 #include <QTimer>
 

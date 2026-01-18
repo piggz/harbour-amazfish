@@ -2,6 +2,7 @@
 #include "zepposfiletransferimpl.h"
 #include "typeconversion.h"
 #include "huami/zepposdevice.h"
+#include "bipfirmwareservice.h"
 
 auto static readUntilNull(int &start, const QByteArray b) {
     QByteArray out;

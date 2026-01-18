@@ -1,6 +1,5 @@
 #include "huamidevice.h"
-#include "logfetchoperation.h"
-#include "activityfetchoperation.h"
+
 #include "sportssummaryoperation.h"
 #include "sportsdetailoperation.h"
 #include "updatefirmwareoperation.h"
@@ -8,6 +7,12 @@
 #include "amazfishconfig.h"
 #include "huamiactivitysummaryparser.h"
 #include "bipactivitydetailparser.h"
+
+#include "deviceinfoservice.h"
+#include "mibandservice.h"
+#include "alertnotificationservice.h"
+#include "hrmservice.h"
+#include "bipfirmwareservice.h"
 
 #include <QtXml/QtXml>
 

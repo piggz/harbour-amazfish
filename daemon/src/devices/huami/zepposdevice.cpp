@@ -14,6 +14,12 @@
 #include "zeppos/zepposuserinfoservice.h"
 #include "zeppos/zepposagpsservice.h"
 #include "zepposfirmwareinfo.h"
+#include "mibandservice.h"
+#include "miband2service.h"
+#include "deviceinfoservice.h"
+#include "bipfirmwareservice.h"
+#include "hrmservice.h"
+#include "alertnotificationservice.h"
 
 #include <QtXml/QtXml>
 #include <QDebug>
