@@ -12,7 +12,6 @@ public:
     explicit LogFetchOperation(HuamiFetcher *fetcher, bool isZeppOs = false);
 
     void start(QBLEService *service) override;
-    void handleData(const QByteArray &data) override;
     bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
 private:
@@ -20,7 +19,6 @@ private:
     QDataStream *m_dataStream = nullptr;
 
     bool processBufferedData() override;
-
 };
 
 #endif // LOGFETCHOPERATION_H
