@@ -54,7 +54,7 @@ int DBusHRM::heartRate()
 int DBusHRM::batteryLevel()
 {
     if (m_device) {
-        return m_device->information(AbstractDevice::INFO_BATTERY).toInt();
+        return m_device->information(Amazfish::Info::INFO_BATTERY).toInt();
     }
     return 0;
 }

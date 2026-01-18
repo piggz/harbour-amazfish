@@ -36,5 +36,5 @@ void ZeppOsBatteryService::handlePayload(const QByteArray &payload)
     // Example for 18%:
     // 040f1200e90704190f24240ce90704190f24240c64
 
-    m_device->informationChanged(AbstractDevice::INFO_BATTERY, QString::number(batteryLevel));
+    m_device->informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(batteryLevel));
 }

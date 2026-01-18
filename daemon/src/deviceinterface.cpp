@@ -296,7 +296,7 @@ void DeviceInterface::createTables()
     int batteryLevel = 0;
 
     if (m_conn->querySingleNumber(
-                KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg(AbstractDevice::INFO_BATTERY), // automatically adds LIMIT 1 into query
+                KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg((int)Amazfish::Info::INFO_BATTERY), // automatically adds LIMIT 1 into query
                 &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
         m_lastBatteryLevel = batteryLevel;
         // qDebug() << Q_FUNC_INFO << "Last Battery Level: " << m_lastBatteryLevel;
@@ -517,7 +517,7 @@ void DeviceInterface::log_battery_level(int level) {
 
     values << m_sampleTime.toMSecsSinceEpoch() / 1000;
     values << m_sampleTime;
-    values << AbstractDevice::INFO_BATTERY;
+    values << (int)Amazfish::Info::INFO_BATTERY;
     values << level;
 
     if (!m_conn->insertRecord(&fields, values)) {
@@ -528,12 +528,12 @@ void DeviceInterface::log_battery_level(int level) {
 
 }
 
-void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QString &val)
+void DeviceInterface::slot_informationChanged(Amazfish::Info key, const QString &val)
 {
     qDebug() << Q_FUNC_INFO << key << val;
 
     //Handle notification of low battery
-    if (key == AbstractDevice::INFO_BATTERY) {
+    if (key == Amazfish::Info::INFO_BATTERY) {
         int battery_level = val.toInt();
         if (battery_level != m_lastBatteryLevel) {
             log_battery_level(battery_level);
@@ -549,7 +549,7 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
             m_lastBatteryLevel = battery_level;
         }
     }
-    if (key == AbstractDevice::INFO_STEPS) {
+    if (key == Amazfish::Info::INFO_STEPS) {
         bool conversionOk = false;
         int steps = val.toInt(&conversionOk);
         if (conversionOk) {
@@ -558,7 +558,7 @@ void DeviceInterface::slot_informationChanged(AbstractDevice::Info key, const QS
         }
     }
 
-    emit informationChanged(key, val);
+    emit informationChanged((int)key, val);
 }
 
 void DeviceInterface::musicChanged()
@@ -897,7 +897,7 @@ void DeviceInterface::refreshInformation()
 QString DeviceInterface::information(int i)
 {
     if (m_device) {
-        return m_device->information((AbstractDevice::Info)i);
+        return m_device->information((Amazfish::Info)i);
     }
     return QString();
 }

@@ -59,5 +59,5 @@ void ZeppOsStepsService::handleRealtimeSteps(const QByteArray value)
     int steps = TypeConversion::toUint16(value[1], value[2]);
     qDebug() << "realtime steps: " << steps;
 
-    m_device->informationChanged(AbstractDevice::INFO_STEPS, QString::number(steps));
+    m_device->informationChanged(Amazfish::Info::INFO_STEPS, QString::number(steps));
 }

@@ -25,6 +25,7 @@
 #include "libwatchfish/notification.h"
 #include "libwatchfish/calendarsource.h"
 #include "libwatchfish/soundprofile.h"
+#include "libwatchfish/voicecallcontroller.h"
 #include "navigationinterface.h"
 #include "achievements.h"
 
@@ -118,7 +119,7 @@ private:
     Q_SLOT void onNotification(watchfish::Notification *notification);
     Q_SLOT void onRingingChanged();
     Q_SLOT void onConnectionStateChanged();
-    Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
+    Q_SLOT void slot_informationChanged(Amazfish::Info infokey, const QString &infovalue);
     Q_SLOT void musicChanged();
     Q_SLOT void deviceEvent(AbstractDevice::Event event);
     Q_SLOT void handleButtonPressed(int presses);

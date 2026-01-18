@@ -20,7 +20,7 @@ public:
     void incomingCallEnded() override;
 
     void refreshInformation() override;
-    QString information(Info i) const override;
+    QString information(Amazfish::Info i) const override;
 
     Q_SLOT void authenticated(bool ready);
 

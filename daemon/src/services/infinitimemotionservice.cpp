@@ -35,7 +35,7 @@ void InfiniTimeMotionService::characteristicChanged(const QString &characteristi
     if (characteristic == UUID_CHARACTERISTIC_MOTION_STEPS) {
         if (value.length() == 4) {
             m_steps = TypeConversion::toUint32(value[0], value[1], value[2], value[3]);
-            emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(m_steps));
+            emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MOTION_MOTION) {
         if (value.length() == 6) {

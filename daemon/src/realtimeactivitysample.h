@@ -20,7 +20,7 @@ class RealtimeActivitySample : public QObject {
         void samplesReady(QDateTime dt, int kind, int intensity, int steps, int heart);
 
     public slots:
-    Q_SLOT void slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue);
+    Q_SLOT void slot_informationChanged(Amazfish::Info infokey, const QString &infovalue);
 
 
     private:

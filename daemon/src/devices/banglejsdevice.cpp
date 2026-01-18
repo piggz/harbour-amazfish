@@ -348,14 +348,14 @@ void BangleJSDevice::refreshInformation()
 
 }
 
-QString BangleJSDevice::information(Info i) const
+QString BangleJSDevice::information(Amazfish::Info i) const
 {
     qDebug() << Q_FUNC_INFO << i;
 
     switch (i) {
-    case AbstractDevice::INFO_BATTERY:
+    case Amazfish::Info::INFO_BATTERY:
         return QString::number(m_infoBatteryLevel);
-    case AbstractDevice::INFO_SWVER:
+    case Amazfish::Info::INFO_SWVER:
         return m_firmwareVersion;
     default:
         break;
@@ -388,10 +388,10 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         if (json.keys().contains("fw2")) {
             m_firmwareVersion = json.value("fw2").toString();
         }
-        emit informationChanged(INFO_SWVER, m_firmwareVersion);
+        emit informationChanged(Amazfish::Info::INFO_SWVER, m_firmwareVersion);
     } else if (t == "status") {
         m_infoBatteryLevel = json.value("bat").toInt();
-        emit informationChanged(INFO_BATTERY, QString::number(m_infoBatteryLevel));
+        emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(m_infoBatteryLevel));
     } else if (t == "findPhone") {
         bool running = json.value("n").toBool();
         qDebug() << "findPhone" << running;
@@ -433,8 +433,8 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 
         qDebug() << "parsed type = act " << ts << hrm << stp << mov << rt;
 
-        emit informationChanged(INFO_HEARTRATE, QString("%1").arg(hrm));
-        emit informationChanged(INFO_STEPS, QString("%1").arg(stp));
+        emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString("%1").arg(hrm));
+        emit informationChanged(Amazfish::Info::INFO_STEPS, QString("%1").arg(stp));
 
     } else {
         qDebug() << "Gadgetbridge type " << t;

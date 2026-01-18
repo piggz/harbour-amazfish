@@ -445,7 +445,7 @@ void PinetimeJFDevice::refreshInformation()
 
 }
 
-QString PinetimeJFDevice::information(Info i) const
+QString PinetimeJFDevice::information(Amazfish::Info i) const
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (!info) {
@@ -460,22 +460,22 @@ QString PinetimeJFDevice::information(Info i) const
     }
 
     switch(i) {
-    case INFO_MODEL:
+    case Amazfish::Info::INFO_MODEL:
         return info->modelNumber();
         break;
-    case INFO_SERIAL:
+    case Amazfish::Info::INFO_SERIAL:
         return info->serialNumber();
         break;
-    case INFO_FW_REVISION:
+    case Amazfish::Info::INFO_FW_REVISION:
         return info->fwRevision();
         break;
-    case INFO_HWVER:
+    case Amazfish::Info::INFO_HWVER:
         return info->hardwareRevision();
         break;
-    case INFO_MANUFACTURER:
+    case Amazfish::Info::INFO_MANUFACTURER:
         return info->manufacturerName();
         break;
-    case INFO_STEPS:
+    case Amazfish::Info::INFO_STEPS:
         return QString::number(motion->steps());
         break;
     }

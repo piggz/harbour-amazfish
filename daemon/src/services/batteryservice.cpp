@@ -23,7 +23,7 @@ void BatteryService::characteristicRead(const QString &characteristic, const QBy
     if (characteristic == UUID_CHARACTERISTIC_BATTERY_LEVEL) {
         if (value.length() == 1) {
             m_batteryLevel = value[0];
-            emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(m_batteryLevel));
+            emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(m_batteryLevel));
         } else {
             qWarning() << "Invalid length";
         }

@@ -149,7 +149,7 @@ void AbstractDevice::refreshInformation()
     
 }
 
-QString AbstractDevice::information(Info i) const
+QString AbstractDevice::information(Amazfish::Info i) const
 {
     Q_UNUSED(i);
     return QString();

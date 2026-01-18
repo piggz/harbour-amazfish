@@ -100,7 +100,7 @@ public:
 
     Q_INVOKABLE void refreshInformation();
 
-    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
+    Q_SIGNAL void informationChanged(Amazfish::Info key, const QString &val);
 
     void setTime();
     void getBattery();

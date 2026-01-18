@@ -34,7 +34,7 @@ public:
     QString fwRevision() const;
     QString manufacturerName() const;
 
-    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
+    Q_SIGNAL void informationChanged(Amazfish::Info key, const QString &val);
 
 private:
     QString m_serialNumber;

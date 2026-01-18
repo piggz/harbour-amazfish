@@ -23,7 +23,7 @@ public:
 
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
-    QString information(Info i) const override;
+    QString information(Amazfish::Info i) const override;
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);

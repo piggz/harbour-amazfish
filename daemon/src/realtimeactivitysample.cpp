@@ -81,13 +81,13 @@ void RealtimeActivitySample::sampleUpdated() {
 
 }
 
-void RealtimeActivitySample::slot_informationChanged(AbstractDevice::Info infokey, const QString &infovalue) {
+void RealtimeActivitySample::slot_informationChanged(Amazfish::Info infokey, const QString &infovalue) {
 
     switch (infokey) {
-        case AbstractDevice::INFO_STEPS:
+        case Amazfish::Info::INFO_STEPS:
             setSteps(infovalue.toInt());
         break;
-        case AbstractDevice::INFO_HEARTRATE:
+        case Amazfish::Info::INFO_HEARTRATE:
             setHeartrate(infovalue.toInt());
         break;
         default:

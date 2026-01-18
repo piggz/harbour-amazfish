@@ -35,7 +35,7 @@ public:
     void setAllDayHRM();
     void setHeartrateSleepSupport();
 
-    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
+    Q_SIGNAL void informationChanged(Amazfish::Info key, const QString &val);
 
 private:
     Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);

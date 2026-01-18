@@ -195,7 +195,7 @@ void DK08Device::refreshInformation()
 
 }
 
-QString DK08Device::information(AbstractDevice::Info i) const
+QString DK08Device::information(Amazfish::Info i) const
 {
     DK08WechatService *wechat = qobject_cast<DK08WechatService*>(service(DK08WechatService::UUID_SERVICE_WECHAT));
     if (!wechat) {
@@ -204,7 +204,7 @@ QString DK08Device::information(AbstractDevice::Info i) const
     }
 
     switch(i) {
-    case AbstractDevice::INFO_STEPS:
+    case Amazfish::Info::INFO_STEPS:
         return QString::number(wechat->steps(), 10);
     // case AbstractDevice::INFO_BATTERY:
     // case INFO_MODEL:

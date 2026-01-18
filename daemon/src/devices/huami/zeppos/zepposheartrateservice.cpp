@@ -88,7 +88,7 @@ void ZeppOsHeartRateService::handleHeartRate(const QByteArray &value)
         m_heartRate = (value[1] & 0xff);
         qDebug() << "Real-time hr: " << m_heartRate;
 
-        m_device->informationChanged(AbstractDevice::INFO_HEARTRATE, QString::number(m_heartRate));
+        m_device->informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartRate));
 
         //if (realtimeSamplesAggregator != null) {
         //    realtimeSamplesAggregator.broadcastHeartRate(hrValue);

@@ -113,13 +113,13 @@ void DK08NUSService::parseFirmware(QByteArray value) {
         .arg(static_cast<unsigned char>(value[6]))
             .arg(static_cast<unsigned char>(value[7]))
             .arg(static_cast<unsigned char>(value[8]));
-        emit informationChanged(AbstractDevice::INFO_FW_REVISION, firmwareVersion);
+        emit informationChanged(Amazfish::Info::INFO_FW_REVISION, firmwareVersion);
 
         if (value.length() > 11 && static_cast<quint8>(value[9]) == 0x55) {
             QString typeStr = QString("%1%2")
             .arg( bcdToTwoDigits(value[10]) )
                 .arg( bcdToTwoDigits(value[11]) );
-            emit informationChanged(AbstractDevice::INFO_MODEL, typeStr);
+            emit informationChanged(Amazfish::Info::INFO_MODEL, typeStr);
         }
 
     } else if (static_cast<quint8>(value[0]) == 0x06) {
@@ -129,7 +129,7 @@ void DK08NUSService::parseFirmware(QByteArray value) {
 
         qDebug() << "Battery:" << battery;
 
-        emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(batteryState));
+        emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(batteryState));
 
     } else {
         qDebug() << "NUSCallType::FirmwareVersion" << NUSCallType::FirmwareVersion << value[0];
@@ -176,7 +176,7 @@ void DK08NUSService::parseHr(QByteArray value) {
     qDebug() << "HR Date:" << hrDate;
 
     if (type == InfoType::Current) {
-        informationChanged(AbstractDevice::Info::INFO_HEARTRATE, QString::number(hr));
+        informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(hr));
     } else if (type == InfoType::Notify) {
         qDebug() << "hr notify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
     } else if (type == InfoType::History) {

@@ -30,7 +30,7 @@ void DK08WechatService::characteristicRead(const QString &characteristic, const 
     if (characteristic == UUID_CHARACTERISTIC_WECHAT_PEDOMETER) {
         if (value.length() == 4) {
             m_steps = TypeConversion::toUint32(value[1], value[2], value[3], 0);
-            emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(m_steps, 10));
+            emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps, 10));
         }
     }
 

@@ -148,7 +148,7 @@ void PebbleDevice::refreshInformation()
     }
 }
 
-QString PebbleDevice::information(Info i) const
+QString PebbleDevice::information(Amazfish::Info i) const
 {
     qDebug() << Q_FUNC_INFO << i;
 
@@ -159,19 +159,19 @@ QString PebbleDevice::information(Info i) const
     }
 
     switch(i) {
-    case INFO_MODEL:
+    case Amazfish::Info::INFO_MODEL:
         return info->modelNumber();
         break;
-    case INFO_SERIAL:
+    case Amazfish::Info::INFO_SERIAL:
         return info->serialNumber();
         break;
-    case INFO_FW_REVISION:
+    case Amazfish::Info::INFO_FW_REVISION:
         return info->fwRevision();
         break;
-    case INFO_HWVER:
+    case Amazfish::Info::INFO_HWVER:
         return info->hardwareRevision();
         break;
-    case INFO_MANUFACTURER:
+    case Amazfish::Info::INFO_MANUFACTURER:
         return info->manufacturerName();
         break;
     }

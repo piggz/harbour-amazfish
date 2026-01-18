@@ -161,7 +161,7 @@ public:
 
     void sendWeather(const CurrentWeather *weather, bool supportsConditionString);
 
-    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
+    Q_SIGNAL void informationChanged(Amazfish::Info key, const QString &val);
     Q_SIGNAL void buttonPressed();
     Q_SIGNAL void serviceEvent(uint8_t event);
 

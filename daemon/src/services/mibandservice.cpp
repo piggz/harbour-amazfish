@@ -102,19 +102,19 @@ void MiBandService::characteristicChanged(const QString &characteristic, const Q
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO) {
         qDebug() << "...Got battery info";
         m_batteryInfo.setData(value);
-        emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(m_batteryInfo.currentChargeLevelPercent()));
+        emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(m_batteryInfo.currentChargeLevelPercent()));
 
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS) {
         qDebug() << "...Got realtime steps:" << value.length();
         if (value.length() == 13) {
             m_steps = TypeConversion::toUint16(value[1], value[2]);
-            emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(m_steps));
+            emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
         }
     } else if (characteristic == UUID_CHARACTERISTIC_MIBAND_CONFIGURATION) {
         if (value[0] == RESPONSE && value[1] == COMMAND_REQUEST_GPS_VERSION && value[2] == SUCCESS) {
             m_gpsVersion = value.mid(3);
             qDebug() << "Got gps version = " << m_gpsVersion;
-            emit informationChanged(AbstractDevice::INFO_GPSVER, m_gpsVersion);
+            emit informationChanged(Amazfish::Info::INFO_GPSVER, m_gpsVersion);
         } else if (value[0] == RESPONSE && value[1] == COMMAND_REQUEST_ALARMS && value[2] == SUCCESS) {
             qDebug() << "Got alarm info = " << value.mid(3);
             decodeAlarms(value.mid(3));
@@ -174,7 +174,7 @@ void MiBandService::characteristicRead(const QString &characteristic, const QByt
     if (characteristic == UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO) {
         qDebug() << "...Got battery info";
         m_batteryInfo.setData(value);
-        emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(m_batteryInfo.currentChargeLevelPercent()));
+        emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(m_batteryInfo.currentChargeLevelPercent()));
     }
 }
 

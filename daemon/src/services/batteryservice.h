@@ -17,7 +17,7 @@ public:
 
     int batteryLevel() const;
 
-    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString &val);
+    Q_SIGNAL void informationChanged(Amazfish::Info key, const QString &val);
 
 private:
     int m_batteryLevel;

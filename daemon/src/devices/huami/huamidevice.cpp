@@ -80,7 +80,7 @@ void HuamiDevice::refreshInformation()
     }
 }
 
-QString HuamiDevice::information(Info i) const
+QString HuamiDevice::information(Amazfish::Info i) const
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
     if (!info) {
@@ -93,28 +93,28 @@ QString HuamiDevice::information(Info i) const
     }
     
     switch(i) {
-    case INFO_SWVER:
+    case Amazfish::Info::INFO_SWVER:
         return info->softwareRevision();
         break;
-    case INFO_HWVER:
+    case Amazfish::Info::INFO_HWVER:
         return info->hardwareRevision();
         break;
-    case INFO_SERIAL:
+    case Amazfish::Info::INFO_SERIAL:
         return info->serialNumber();
         break;
-    case INFO_SYSTEMID:
+    case Amazfish::Info::INFO_SYSTEMID:
         return info->systemId();
         break;
-    case INFO_PNPID:
+    case Amazfish::Info::INFO_PNPID:
         return info->pnpId();
         break;
-    case INFO_GPSVER:
+    case Amazfish::Info::INFO_GPSVER:
         return mi->gpsVersion();
         break;
-    case INFO_BATTERY:
+    case Amazfish::Info::INFO_BATTERY:
         return QString::number(mi->batteryInfo());
         break;
-    case INFO_STEPS:
+    case Amazfish::Info::INFO_STEPS:
         return QString::number(mi->steps());
         break;
     }
@@ -128,7 +128,7 @@ void HuamiDevice::stepsChanged()
         return;
     }
 
-    emit informationChanged(AbstractDevice::INFO_STEPS, QString::number(mi->steps()));
+    emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(mi->steps()));
 }
 
 void HuamiDevice::batteryInfoChanged()
@@ -138,7 +138,7 @@ void HuamiDevice::batteryInfoChanged()
         return;
     }
 
-    emit informationChanged(AbstractDevice::INFO_BATTERY, QString::number(mi->batteryInfo()));
+    emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(mi->batteryInfo()));
 }
 
 void HuamiDevice::rebootWatch()

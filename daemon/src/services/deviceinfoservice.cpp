@@ -38,28 +38,28 @@ void DeviceInfoService::characteristicRead(const QString &characteristic, const 
 
     if (characteristic == UUID_CHARACTERISTIC_INFO_SERIAL_NO) {
         m_serialNumber = value;
-        emit informationChanged(AbstractDevice::INFO_SERIAL, m_serialNumber);
+        emit informationChanged(Amazfish::Info::INFO_SERIAL, m_serialNumber);
     } else if (characteristic == UUID_CHARACTERISTIC_INFO_HARDWARE_REV) {
         m_hardwareRevision = value;
-        emit informationChanged(AbstractDevice::INFO_HWVER, m_hardwareRevision);
+        emit informationChanged(Amazfish::Info::INFO_HWVER, m_hardwareRevision);
     } else if (characteristic == UUID_CHARACTERISTIC_INFO_SOFTWARE_REV) {
         m_softwareRevision = value;
-        emit informationChanged(AbstractDevice::INFO_SWVER, m_softwareRevision);
+        emit informationChanged(Amazfish::Info::INFO_SWVER, m_softwareRevision);
     } else if (characteristic  == UUID_CHARACTERISTIC_INFO_SYSTEM_ID) {
         m_systemId = value;
-        emit informationChanged(AbstractDevice::INFO_SYSTEMID, m_systemId);
+        emit informationChanged(Amazfish::Info::INFO_SYSTEMID, m_systemId);
     } else if (characteristic == UUID_CHARACTERISTIC_INFO_PNP_ID) {
         m_pnpId = value;
-        emit informationChanged(AbstractDevice::INFO_PNPID, m_pnpId);
+        emit informationChanged(Amazfish::Info::INFO_PNPID, m_pnpId);
     }  else if (characteristic == UUID_CHARACTERISTIC_INFO_MODEL_NO) {
         m_model = value;
-        emit informationChanged(AbstractDevice::INFO_MODEL, m_model);
+        emit informationChanged(Amazfish::Info::INFO_MODEL, m_model);
     } else if (characteristic  == UUID_CHARACTERISTIC_INFO_FW_REVISION) {
         m_fwRevision = value;
-        emit informationChanged(AbstractDevice::INFO_FW_REVISION, m_fwRevision);
+        emit informationChanged(Amazfish::Info::INFO_FW_REVISION, m_fwRevision);
     } else if (characteristic == UUID_CHARACTERISTIC_INFO_MANUFACTURER_NAME) {
         m_manufacturer = value;
-        emit informationChanged(AbstractDevice::INFO_MANUFACTURER, m_manufacturer);
+        emit informationChanged(Amazfish::Info::INFO_MANUFACTURER, m_manufacturer);
     } else {
         qDebug() << Q_FUNC_INFO << "Unknown value";
     }

@@ -18,23 +18,6 @@ class AbstractDevice : public QBLEDevice
     Q_OBJECT
 
 public:
-    enum Info {
-        INFO_SWVER = 1,
-        INFO_HWVER,
-        INFO_SERIAL,
-        INFO_SYSTEMID,
-        INFO_PNPID,
-        INFO_GPSVER,
-        INFO_BATTERY,
-        INFO_STEPS,
-        INFO_HEARTRATE,
-        INFO_MODEL,
-        INFO_FW_REVISION,
-        INFO_MANUFACTURER,
-        INFO_IMMEDIATE_ALERT
-    };
-    Q_ENUM(Info)
-
     enum Settings {
         SETTING_USER_PROFILE,
         SETTING_USER_GOAL,
@@ -102,7 +85,7 @@ public:
     virtual void fetchLogs();
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
-    virtual QString information(Info i) const;
+    virtual QString information(Amazfish::Info i) const;
     virtual void applyDeviceSetting(Settings s);
     virtual void rebootWatch();
     virtual void sendAlert(const Amazfish::WatchNotification &notification) = 0;
@@ -129,7 +112,7 @@ public:
     Q_SIGNAL void downloadProgress(int percent);
     Q_SIGNAL void buttonPressed(int presses);
     Q_SIGNAL void connectionStateChanged();
-    Q_SIGNAL void informationChanged(AbstractDevice::Info key, const QString& val);
+    Q_SIGNAL void informationChanged(Amazfish::Info key, const QString& val);
     Q_SIGNAL void deviceEvent(Event event);
 
 protected:

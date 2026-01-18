@@ -23,7 +23,7 @@ public:
     void abortOperations() override;
 
     void refreshInformation() override;
-    QString information(Info i) const override;
+    QString information(Amazfish::Info i) const override;
     void rebootWatch() override;
 
     void applyDeviceSetting(Settings s) override;
