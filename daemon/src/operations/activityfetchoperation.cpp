@@ -35,27 +35,26 @@ bool ActivityFetchOperation::characteristicChanged(const QString &characteristic
     return false;
 }
 
-void ActivityFetchOperation::handleData(const QByteArray &data)
+bool ActivityFetchOperation::saveSamples()
 {
-    int len = data.length();
+    qDebug()<< Q_FUNC_INFO << m_sampleSize << m_buffer.length();
 
-    if (len % m_sampleSize != 1) {
+    int len = m_buffer.length();
+
+    if (len % m_sampleSize != 0) {
         qDebug() << Q_FUNC_INFO << "Unexpected data size";
         m_valid = false;
-        return;
+        return false;
     }
 
     for (int i = 1; i < len; i+=m_sampleSize) {
-        ActivitySample sample(data[i] & 0xff, data[i + 1] & 0xff, data[i + 2] & 0xff, data[i + 3] & 0xff);
+        ActivitySample sample(m_buffer[i] & 0xff, m_buffer[i + 1] & 0xff, m_buffer[i + 2] & 0xff, m_buffer[i + 3] & 0xff);
         if (m_sampleSize == 8) {
-            qDebug() << Q_FUNC_INFO << "Sample data missed:" << (data[i + 4] & 0xff) << (data[i + 5] & 0xff) << (data[i + 6] & 0xff) << (data[i + 7] & 0xff);
+            qDebug() << Q_FUNC_INFO << "Sample data missed:" << (m_buffer[i + 4] & 0xff) << (m_buffer[i + 5] & 0xff) << (m_buffer[i + 6] & 0xff) << (m_buffer[i + 7] & 0xff);
         }
         m_samples << (sample);
     }
-}
 
-bool ActivityFetchOperation::saveSamples()
-{
     if (m_samples.count() <= 0) {
         return true;
     }
@@ -112,15 +111,19 @@ bool ActivityFetchOperation::saveSamples()
 
 bool ActivityFetchOperation::processBufferedData()
 {
-    bool saved = true;
+    qDebug()<< Q_FUNC_INFO;
+
     //store the successful samples
-    saved = saveSamples();
-    m_sampleTime.setTimeSpec(Qt::UTC);
-    qDebug() << Q_FUNC_INFO << "Last sample time saved as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
+    if (saveSamples()) {
+        m_sampleTime.setTimeSpec(Qt::UTC);
+        qDebug() << Q_FUNC_INFO << "Last sample time saved as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
 
-    saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());
-    qDebug() << Q_FUNC_INFO << "Last record was " << m_sampleTime;
+        saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());
+        qDebug() << Q_FUNC_INFO << "Last record was " << m_sampleTime;
 
-    return saved;
+        return true;
+    }
+
+    return false;
 }
 

@@ -4,7 +4,7 @@
 #include "amazfishconfig.h"
 #include "huami/huamifetcher.h"
 
-AbstractFetchOperation::AbstractFetchOperation(HuamiFetcher *fetcher, bool isZeppOs) : m_fetcher(fetcher), m_isZeppOs(isZeppOs)
+AbstractFetchOperation::AbstractFetchOperation(HuamiFetcher *fetcher, bool isZeppOs) : m_fetcher(fetcher), m_isZeppOs(isZeppOs), m_valid(true)
 {
 
 }
@@ -42,6 +42,19 @@ QDateTime AbstractFetchOperation::startDate() const
 void AbstractFetchOperation::setLastSyncKey(const QString &key)
 {
     m_lastSyncKey = key;
+}
+
+void AbstractFetchOperation::handleData(const QByteArray &data)
+{
+    if ((m_lastPacketCounter + 1) == data[0]) {
+        // TODO we should handle skipped or repeated bytes more gracefully
+        m_lastPacketCounter++;
+        m_buffer += data.mid(1);
+    } else {
+        qDebug() << "Invalid packet counter:" << data[0] << "last was" << m_lastPacketCounter;
+        m_fetcher->message("Invalid packet counter during fetch");
+        m_valid = false;
+    }
 }
 
 bool AbstractFetchOperation::handleMetaData(const QByteArray &value)

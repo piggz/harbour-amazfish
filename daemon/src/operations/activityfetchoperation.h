@@ -15,7 +15,6 @@ public:
     ActivityFetchOperation(HuamiFetcher *fetcher, KDbConnection *db, int sampleSize = 4, bool isZeppOs = false);
 
     void start(QBLEService *service) override;
-    void handleData(const QByteArray &data) override;
     bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
 private:

@@ -14,7 +14,7 @@ public:
     explicit AbstractFetchOperation(HuamiFetcher *fetcher, bool isZeppOs = false);
 
     bool handleMetaData(const QByteArray &meta) override;
-
+    void handleData(const QByteArray &data) override;
 private:
     QDateTime m_startDate;
     QString m_lastSyncKey;
@@ -39,6 +39,10 @@ protected:
 
     HuamiFetcher *m_fetcher = nullptr;
     QBLEService *m_service = nullptr;
+
+    QByteArray m_buffer;
+    bool m_valid = true;
+    int m_lastPacketCounter = -1;
 };
 
 #endif // ABSTRACTFETCHOPERATION_H
