@@ -68,8 +68,7 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
     case MiBandService::COMMAND_ACTIVITY_DATA_START_DATE:
         return !handleStartDateResponse(value);
     case MiBandService::COMMAND_FETCH_DATA:
-        handleFetchDataResponse(value);
-        return false;
+        return handleFetchDataResponse(value);
     case MiBandService::COMMAND_ACK_ACTIVITY_DATA:
         qDebug() << "Got reply to COMMAND_ACK_ACTIVITY_DATA";
         return true;
@@ -131,15 +130,16 @@ bool AbstractFetchOperation::handleFetchDataResponse(const QByteArray &value)
     //TODO handle size 7
 
     bool success = m_valid && processBufferedData();
-    if (success) {
+    if (success && m_isZeppOs) {
         qDebug() << "Sending Ack";
         sendAck();
+        return false;
     }
 
     return true;
 }
 
-bool AbstractFetchOperation::sendAck()
+void AbstractFetchOperation::sendAck()
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -152,7 +152,6 @@ bool AbstractFetchOperation::sendAck()
         cmd += (keepDataOnDevice ? 0x09 : 0x01);
         m_fetcher->writeControl(cmd);
     }
-    return true;
 }
 
 void AbstractFetchOperation::setAbort(bool abort)

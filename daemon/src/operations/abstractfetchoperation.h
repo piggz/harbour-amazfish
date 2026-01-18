@@ -23,7 +23,7 @@ private:
 
     bool handleStartDateResponse(const QByteArray &value);
     bool handleFetchDataResponse(const QByteArray &value);
-    bool sendAck();
+    void sendAck();
 
 protected:
     void setStartDate(const QDateTime &sd);

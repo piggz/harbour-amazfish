@@ -100,7 +100,7 @@ bool AbstractDevice::supportsFeature(AbstractDevice::Feature f) const
 
 bool AbstractDevice::supportsDataType(Amazfish::DataType t) const
 {
-    return (supportsDataType(t) & t) == t;
+    return (supportedDataTypes() & t);
 }
 
 void AbstractDevice::setDatabase(KDbConnection *conn)
