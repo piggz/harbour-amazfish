@@ -3,7 +3,7 @@
 
 #include "zeppos/zepposactivitydetailparser.h"
 #include "zeppos/zepposactivitysummaryparser.h"
-#include "zeppos/zepposagpsupdateoperation.h"
+#include "huami/zeppos/zepposagpsupdateoperation.h"
 #include "zeppos/zepposauthservice.h"
 #include "zeppos/zepposservicesservice.h"
 #include "zeppos/zepposnotificationservice.h"

@@ -1,6 +1,5 @@
 #include "bipdevice.h"
 #include "bipfirmwareinfo.h"
-#include "updatefirmwareoperation.h"
 
 #include <QtXml/QtXml>
 

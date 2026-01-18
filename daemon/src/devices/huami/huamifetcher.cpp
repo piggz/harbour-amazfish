@@ -1,9 +1,9 @@
 #include "huamifetcher.h"
 
-#include "activityfetchoperation.h"
+#include "huami/activityfetchoperation.h"
 #include "huamidevice.h"
-#include "logfetchoperation.h"
-#include "sportssummaryoperation.h"
+#include "huami/logfetchoperation.h"
+#include "huami/sportssummaryoperation.h"
 
 HuamiFetcher::HuamiFetcher(HuamiDevice *device) : m_device(device)
 {

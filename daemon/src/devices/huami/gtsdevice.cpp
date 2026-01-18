@@ -3,8 +3,8 @@
 #include <QtXml/QtXml>
 #include <QDateTime>
 #include "typeconversion.h"
-#include "updatefirmwareoperationnew.h"
-#include "huamiupdatefirmwareoperation2020.h"
+#include "huami/updatefirmwareoperationnew.h"
+#include "huami/huamiupdatefirmwareoperation2020.h"
 #include "mibandservice.h"
 #include "miband2service.h"
 #include "deviceinfoservice.h"

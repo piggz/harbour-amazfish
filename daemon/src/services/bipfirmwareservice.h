@@ -2,7 +2,7 @@
 #define BIPFIRMWARESERVICE_H
 
 #include "abstractoperationservice.h"
-#include "updatefirmwareoperation.h"
+#include "huami/updatefirmwareoperation.h"
 
 /*
 {00001530-0000-3512-2118-0009af100700} Firmware Service

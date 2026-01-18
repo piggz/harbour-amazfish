@@ -1,8 +1,8 @@
 #include "huamidevice.h"
 
-#include "sportssummaryoperation.h"
-#include "sportsdetailoperation.h"
-#include "updatefirmwareoperation.h"
+#include "huami/sportssummaryoperation.h"
+#include "huami/sportsdetailoperation.h"
+#include "huami/updatefirmwareoperation.h"
 #include "immediatealertservice.h"
 #include "amazfishconfig.h"
 #include "huamiactivitysummaryparser.h"
