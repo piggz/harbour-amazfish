@@ -10,7 +10,7 @@ public:
     explicit NeoDevice(const QString &pairedName, QObject *parent = nullptr);
 
     QString deviceType() const override;
-    int supportedFeatures() const override;
+    Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void applyDeviceSetting(Settings s) override;

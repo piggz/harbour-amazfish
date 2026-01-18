@@ -25,7 +25,7 @@ public:
     ZeppOSDevice(const QString &pairedName, QObject *parent = nullptr);
 
     QString deviceType() const override;
-    int supportedFeatures() const override;
+    Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
     bool isZeppOs() override;
 

@@ -25,13 +25,13 @@ void BangleJSDevice::pair()
     QBLEDevice::pair();
 }
 
-int BangleJSDevice::supportedFeatures() const
+Amazfish::Features BangleJSDevice::supportedFeatures() const
 {
-    return FEATURE_STEPS |
-           FEATURE_HRM |
-           FEATURE_ALERT |
-           FEATURE_MUSIC_CONTROL |
-           FEATURE_WEATHER;
+    return Amazfish::Feature::FEATURE_STEPS |
+           Amazfish::Feature::FEATURE_HRM |
+           Amazfish::Feature::FEATURE_ALERT |
+           Amazfish::Feature::FEATURE_MUSIC_CONTROL |
+           Amazfish::Feature::FEATURE_WEATHER;
 }
 
 Amazfish::DataTypes BangleJSDevice::supportedDataTypes() const

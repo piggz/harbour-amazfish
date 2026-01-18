@@ -18,20 +18,6 @@ class AbstractDevice : public QBLEDevice
     Q_OBJECT
 
 public:
-    enum Feature{
-        FEATURE_HRM = 1,
-        FEATURE_WEATHER = 2,
-        FEATURE_ACTIVITY = 4,
-        FEATURE_STEPS = 8,
-        FEATURE_ALARMS = 16,
-        FEATURE_ALERT = 32,
-        FEATURE_EVENT_REMINDER = 64,
-        FEATURE_MUSIC_CONTROL = 128,
-        FEATURE_BUTTON_ACTION = 256,
-        FEATURE_SCREENSHOT = 512,
-    };
-    Q_ENUM(Feature)
-
     enum Info {
         INFO_SWVER = 1,
         INFO_HWVER,
@@ -92,8 +78,8 @@ public:
     virtual void disconnectFromDevice() override;
     virtual QString connectionState() const;
 
-    bool supportsFeature(Feature f) const;
-    virtual int supportedFeatures() const = 0;
+    bool supportsFeature(Amazfish::Feature f) const;
+    virtual Amazfish::Features supportedFeatures() const = 0;
 
     virtual Amazfish::DataTypes supportedDataTypes() const = 0;
     bool supportsDataType(Amazfish::DataType t) const;
@@ -123,7 +109,7 @@ public:
     virtual void incomingCall(const QString &caller) = 0;
     virtual void incomingCallEnded() = 0;
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);
-    virtual void enableFeature(AbstractDevice::Feature feature);
+    virtual void enableFeature(Amazfish::Feature feature);
     virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0);
     virtual void navigationRunning(bool running);
     virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress);

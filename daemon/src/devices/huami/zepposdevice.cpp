@@ -64,17 +64,17 @@ QString ZeppOSDevice::deviceType() const
     return "amazfitbalance";
 }
 
-int ZeppOSDevice::supportedFeatures() const
+Amazfish::Features ZeppOSDevice::supportedFeatures() const
 {
-    return FEATURE_HRM |
-            FEATURE_WEATHER |
-            FEATURE_ACTIVITY |
-            FEATURE_STEPS |
-            FEATURE_ALARMS |
-            FEATURE_ALERT |
-            FEATURE_EVENT_REMINDER |
-            FEATURE_MUSIC_CONTROL |
-            FEATURE_BUTTON_ACTION;
+    return Amazfish::Feature::FEATURE_HRM |
+            Amazfish::Feature::FEATURE_WEATHER |
+            Amazfish::Feature::FEATURE_ACTIVITY |
+            Amazfish::Feature::FEATURE_STEPS |
+            Amazfish::Feature::FEATURE_ALARMS |
+            Amazfish::Feature::FEATURE_ALERT |
+            Amazfish::Feature::FEATURE_EVENT_REMINDER |
+            Amazfish::Feature::FEATURE_MUSIC_CONTROL |
+            Amazfish::Feature::FEATURE_BUTTON_ACTION;
 }
 
 Amazfish::DataTypes ZeppOSDevice::supportedDataTypes() const

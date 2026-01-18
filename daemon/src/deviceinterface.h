@@ -21,7 +21,6 @@
 #include "weather/citymanager.h"
 #include "weather/currentweather.h"
 #include "libwatchfish/musiccontroller.h"
-#include "libwatchfish/voicecallcontroller.h"
 #include "libwatchfish/notificationmonitor.h"
 #include "libwatchfish/notification.h"
 #include "libwatchfish/calendarsource.h"

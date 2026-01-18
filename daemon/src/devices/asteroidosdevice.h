@@ -10,18 +10,18 @@ class AsteroidOSDevice : public AbstractDevice
 public:
     explicit AsteroidOSDevice(const QString &pairedName, QObject *parent = nullptr);
 
-    virtual int supportedFeatures() const override;
+    Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
-    virtual QString deviceType() const override;
-    virtual void sendAlert(const Amazfish::WatchNotification &notification) override;
-    virtual void incomingCall(const QString &caller) override;
-    virtual void incomingCallEnded() override;
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
-    virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0) override;
-    virtual void requestScreenshot() override;
+    QString deviceType() const override;
+    void sendAlert(const Amazfish::WatchNotification &notification) override;
+    void incomingCall(const QString &caller) override;
+    void incomingCallEnded() override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
+    void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0) override;
+    void requestScreenshot() override;
 
 protected:
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 
 private:
     void parseServices();

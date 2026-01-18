@@ -10,20 +10,20 @@ class PebbleDevice : public AbstractDevice
 public:
     explicit PebbleDevice(const QString &pairedName, QObject *parent = 0);
 
-    virtual int supportedFeatures() const override;
+    Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
-    virtual QString deviceType() const override;
-    virtual void sendAlert(const Amazfish::WatchNotification &notification) override;
-    virtual void incomingCall(const QString &caller) override;
-    virtual void incomingCallEnded() override;
+    QString deviceType() const override;
+    void sendAlert(const Amazfish::WatchNotification &notification) override;
+    void incomingCall(const QString &caller) override;
+    void incomingCallEnded() override;
 
-   virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
-   QString information(Info i) const override;
+    QString information(Info i) const override;
 
 
 protected:
-    virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 
 private:
     void parseServices();

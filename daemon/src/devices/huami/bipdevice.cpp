@@ -10,15 +10,15 @@ BipDevice::BipDevice(const QString &pairedName, QObject *parent) : HuamiDevice(p
 }
 
 
-int BipDevice::supportedFeatures() const
+Amazfish::Features BipDevice::supportedFeatures() const
 {
-    return FEATURE_HRM |
-            FEATURE_WEATHER |
-            FEATURE_ACTIVITY |
-            FEATURE_STEPS |
-            FEATURE_ALARMS |
-            FEATURE_ALERT |
-            FEATURE_BUTTON_ACTION;
+    return Amazfish::Feature::FEATURE_HRM |
+            Amazfish::Feature::FEATURE_WEATHER |
+            Amazfish::Feature::FEATURE_ACTIVITY |
+            Amazfish::Feature::FEATURE_STEPS |
+            Amazfish::Feature::FEATURE_ALARMS |
+            Amazfish::Feature::FEATURE_ALERT |
+            Amazfish::Feature::FEATURE_BUTTON_ACTION;
 }
 
 Amazfish::DataTypes BipDevice::supportedDataTypes() const

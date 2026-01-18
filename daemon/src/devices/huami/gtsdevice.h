@@ -12,7 +12,7 @@ public:
     QString deviceType() const override;
     void sendAlert(const Amazfish::WatchNotification &notification) override;
     void sendEventReminder(int id, const QDateTime &dt, const QString &event) override;
-    int supportedFeatures() const override;
+    Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void applyDeviceSetting(Settings s) override;
@@ -20,7 +20,7 @@ public:
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
     void sendWeather(CurrentWeather *weather) override;
-    void enableFeature(AbstractDevice::Feature feature) override;
+    void enableFeature(Amazfish::Feature feature) override;
     void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration = 0, int position = 0) override;
 
     //Navigation

@@ -93,9 +93,9 @@ QString AbstractDevice::connectionState() const
     return m_connectionState;
 }
 
-bool AbstractDevice::supportsFeature(AbstractDevice::Feature f) const
+bool AbstractDevice::supportsFeature(Amazfish::Feature f) const
 {
-    return (supportedFeatures() & f) == f;
+    return (supportedFeatures() & f);
 }
 
 bool AbstractDevice::supportsDataType(Amazfish::DataType t) const
@@ -179,7 +179,7 @@ void AbstractDevice::sendEventReminder(int id, const QDateTime &dt, const QStrin
     Q_UNUSED(event);
 }
 
-void AbstractDevice::enableFeature(AbstractDevice::Feature feature)
+void AbstractDevice::enableFeature(Amazfish::Feature feature)
 {
     Q_UNUSED(feature);
 }

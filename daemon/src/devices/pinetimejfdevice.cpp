@@ -69,12 +69,12 @@ void PinetimeJFDevice::pair()
 
 }
 
-int PinetimeJFDevice::supportedFeatures() const
+Amazfish::Features PinetimeJFDevice::supportedFeatures() const
 {
-    return FEATURE_HRM |
-            FEATURE_ALERT |
-            FEATURE_WEATHER |
-            FEATURE_STEPS;
+    return Amazfish::Feature::FEATURE_HRM |
+            Amazfish::Feature::FEATURE_ALERT |
+            Amazfish::Feature::FEATURE_WEATHER |
+            Amazfish::Feature::FEATURE_STEPS;
 }
 
 Amazfish::DataTypes PinetimeJFDevice::supportedDataTypes() const

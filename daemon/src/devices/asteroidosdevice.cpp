@@ -16,9 +16,9 @@ AsteroidOSDevice::AsteroidOSDevice(const QString &pairedName, QObject *parent) :
     connect(this, &QBLEDevice::propertiesChanged, this, &AsteroidOSDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
-int AsteroidOSDevice::supportedFeatures() const
+Amazfish::Features AsteroidOSDevice::supportedFeatures() const
 {
-    return FEATURE_WEATHER  | FEATURE_ALERT | FEATURE_SCREENSHOT;
+    return Amazfish::Feature::FEATURE_WEATHER  | Amazfish::Feature::FEATURE_ALERT | Amazfish::Feature::FEATURE_SCREENSHOT;
 }
 
 QString AsteroidOSDevice::deviceType() const

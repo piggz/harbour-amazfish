@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QVariantMap>
+#include <qdbusmetatype.h>
 #include <zlib.h>
 
 //Container class for enums
@@ -10,6 +11,7 @@ class Amazfish : public QObject {
     Q_OBJECT
 public:
     enum class Feature{
+        FEATURE_NONE = 0,
         FEATURE_HRM = 1,
         FEATURE_WEATHER = 2,
         FEATURE_ACTIVITY = 4,

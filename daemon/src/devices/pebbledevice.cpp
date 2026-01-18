@@ -10,10 +10,9 @@ PebbleDevice::PebbleDevice(const QString &pairedName, QObject *parent ) : Abstra
     connect(this, &QBLEDevice::propertiesChanged, this, &PebbleDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
-int PebbleDevice::supportedFeatures() const
+Amazfish::Features PebbleDevice::supportedFeatures() const
 {
-    //  FEATURE_HRM | FEATURE_WEATHER | FEATURE_ACTIVITY |FEATURE_STEPS | FEATURE_ALARMS | FEATURE_ALERT | FEATURE_EVENT_REMINDER | FEATURE_MUSIC_CONTROL | FEATURE_BUTTON_ACTION | FEATURE_SCREENSHOT
-    return 0;
+    return Amazfish::Feature::FEATURE_NONE;
 }
 
 Amazfish::DataTypes PebbleDevice::supportedDataTypes() const

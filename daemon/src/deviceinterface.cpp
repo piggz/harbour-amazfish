@@ -189,7 +189,7 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
     n.summary = notification->summary();
     n.body = notification->body();
 
-    if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
+    if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)){
         qDebug() << Q_FUNC_INFO << "Sending alert to device";
         sendAlert(n);
     } else {
@@ -471,7 +471,7 @@ void DeviceInterface::onConnectionStateChanged()
             sendAlert(n, true);
         }
 
-        if (m_device && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)
+        if (m_device && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
             && AmazfishConfig::instance()->appSilenceConnect()) {
             m_soundProfile.setProfile(watchfish::SoundProfile::Silent);
         }
@@ -483,7 +483,7 @@ void DeviceInterface::onConnectionStateChanged()
         //Terminate running operations
         m_device->abortOperations();
 
-        if (m_device && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)
+        if (m_device && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
             && AmazfishConfig::instance()->appSilenceConnect()) {
             m_soundProfile.setProfile(watchfish::SoundProfile::General);
         }
@@ -622,7 +622,7 @@ void DeviceInterface::handleButtonPressed(int presses)
 {
     qDebug() << Q_FUNC_INFO << presses;
 
-    if (m_device && m_device->supportsFeature(AbstractDevice::FEATURE_BUTTON_ACTION)) {
+    if (m_device && m_device->supportsFeature(Amazfish::Feature::FEATURE_BUTTON_ACTION)) {
         QString action = "action-none";
 
         if (presses == 2) {
@@ -688,7 +688,7 @@ void DeviceInterface::sendBufferedNotifications()
     qDebug() << Q_FUNC_INFO;
     while (m_notificationBuffer.count() > 0) {
         Amazfish::WatchNotification n = m_notificationBuffer.dequeue();
-        if (m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
+        if (m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)){
             qDebug() << "Sending notification";
             sendAlert(n);
         }
@@ -921,7 +921,7 @@ void DeviceInterface::sendAlert(const Amazfish::WatchNotification &notification,
     }
     m_lastAlertHash = hash;
 
-    if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(AbstractDevice::FEATURE_ALERT)){
+    if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)){
         qDebug() << "Snding alert to device";
 
         Amazfish::WatchNotification t = notification;
@@ -1036,7 +1036,7 @@ void DeviceInterface::triggerSendWeather()
 void DeviceInterface::updateCalendar()
 {
     qDebug() << Q_FUNC_INFO;
-    if (supportsFeature(AbstractDevice::FEATURE_EVENT_REMINDER)) {
+    if (supportsFeature(int(Amazfish::Feature::FEATURE_EVENT_REMINDER))) {
         if (m_device) {
             QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
 
@@ -1084,7 +1084,7 @@ void DeviceInterface::enableFeature(int feature)
 {
     qDebug() << Q_FUNC_INFO << feature;
     if (m_device) {
-        m_device->enableFeature(AbstractDevice::Feature(feature));
+        m_device->enableFeature((Amazfish::Feature)feature);
     }
 }
 
@@ -1111,7 +1111,7 @@ QStringList DeviceInterface::supportedDisplayItems()
 }
 
 bool DeviceInterface::supportsFeature(int f){
-    return (supportedFeatures() & f) == f;
+    return (supportedFeatures() & f);
 }
 
 int DeviceInterface::supportedFeatures()

@@ -16,17 +16,17 @@ QString GtsDevice::deviceType() const
     return "amazfitgts";
 }
 
-int GtsDevice::supportedFeatures() const
+Amazfish::Features GtsDevice::supportedFeatures() const
 {
-    return FEATURE_HRM |
-            FEATURE_WEATHER |
-            FEATURE_ACTIVITY |
-            FEATURE_STEPS |
-            FEATURE_ALARMS |
-            FEATURE_ALERT |
-            FEATURE_EVENT_REMINDER |
-            FEATURE_MUSIC_CONTROL |
-            FEATURE_BUTTON_ACTION;
+    return Amazfish::Feature::FEATURE_HRM |
+            Amazfish::Feature::FEATURE_WEATHER |
+            Amazfish::Feature::FEATURE_ACTIVITY |
+            Amazfish::Feature::FEATURE_STEPS |
+            Amazfish::Feature::FEATURE_ALARMS |
+            Amazfish::Feature::FEATURE_ALERT |
+            Amazfish::Feature::FEATURE_EVENT_REMINDER |
+            Amazfish::Feature::FEATURE_MUSIC_CONTROL |
+            Amazfish::Feature::FEATURE_BUTTON_ACTION;
 }
 
 Amazfish::DataTypes GtsDevice::supportedDataTypes() const
@@ -263,10 +263,10 @@ void GtsDevice::sendWeather(CurrentWeather *weather)
     sendWeatherHuami(weather, true);
 }
 
-void GtsDevice::enableFeature(AbstractDevice::Feature feature)
+void GtsDevice::enableFeature(Amazfish::Feature feature)
 {
     qDebug() << Q_FUNC_INFO << feature;
-    if (feature == AbstractDevice::FEATURE_MUSIC_CONTROL) {
+    if (feature == Amazfish::Feature::FEATURE_MUSIC_CONTROL) {
         QByteArray cmd;
 
         cmd += (char)0x01;

@@ -10,7 +10,7 @@ class DK08Device : public AbstractDevice
 public:
     explicit DK08Device(const QString &pairedName, QObject *parent = 0);
 
-    int supportedFeatures() const override;
+    Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
     QString deviceType() const override;
     void sendAlert(const Amazfish::WatchNotification &notification) override;
