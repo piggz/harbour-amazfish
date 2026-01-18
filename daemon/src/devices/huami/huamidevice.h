@@ -2,6 +2,7 @@
 #define HUAMIDEVICE_H
 
 #include "abstractdevice.h"
+#include "huami/huamifetcher.h"
 #include "qble/qbleservice.h"
 
 #include "deviceinfoservice.h"
@@ -50,10 +51,15 @@ public:
 
     void setDatabase(KDbConnection *conn) override;
 
-    Q_SLOT void operationComplete(AbstractOperation *operation);
+    Q_SLOT void fetchOperationComplete(AbstractFetchOperation *operation);
 
     AbstractActivitySummaryParser *activitySummaryParser() const override;
     AbstractActivityDetailParser *activityDetailParser() const override;
+
+    virtual void setActivityNotifications(bool control, bool data);
+    virtual void writeActivityControl(const QByteArray &value);
+
+    virtual bool isZeppOs() { return false;}
 
 protected:
     Q_SLOT void handleButtonPressed();
@@ -61,11 +67,13 @@ protected:
     Q_SLOT void stepsChanged();
     Q_SLOT void batteryInfoChanged();
     Q_SLOT void serviceEvent(char event);
+    Q_SLOT void characteristicChanged(const QString &characteristic, const QByteArray &value);
 
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     virtual void initialise() = 0;
 
     int m_ActivitySampleSize = 4;
+    HuamiFetcher *m_fetcher = nullptr;
 
 private:
     QString m_softwareRevision;

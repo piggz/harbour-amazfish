@@ -13,7 +13,7 @@
 class SportsDetailOperation : public AbstractFetchOperation
 {
 public:
-    SportsDetailOperation(QBLEService *service, KDbConnection *db, const ActivitySummary &summary, bool isZeppOs = false, AbstractActivityDetailParser *parser = nullptr);
+    SportsDetailOperation(HuamiFetcher *fetcher, KDbConnection *db, const ActivitySummary &summary, AbstractActivityDetailParser *parser = nullptr, bool isZeppOs = false);
     ~SportsDetailOperation();
 
     void start(QBLEService *service) override;

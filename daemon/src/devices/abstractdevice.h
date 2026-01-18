@@ -95,7 +95,11 @@ public:
     bool supportsFeature(Feature f) const;
     virtual int supportedFeatures() const = 0;
 
+    virtual Amazfish::DataTypes supportedDataTypes() const = 0;
+    bool supportsDataType(Amazfish::DataType t) const;
+
     virtual void setDatabase(KDbConnection *conn);
+    virtual KDbConnection* database();
 
     virtual QString deviceType() const = 0;
     QString deviceName() const;

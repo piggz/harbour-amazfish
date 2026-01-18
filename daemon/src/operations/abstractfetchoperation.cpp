@@ -2,8 +2,9 @@
 #include "mibandservice.h"
 #include "typeconversion.h"
 #include "amazfishconfig.h"
+#include "huami/huamifetcher.h"
 
-AbstractFetchOperation::AbstractFetchOperation(bool isZeppOs) : m_isZeppOs(isZeppOs)
+AbstractFetchOperation::AbstractFetchOperation(HuamiFetcher *fetcher, bool isZeppOs) : m_fetcher(fetcher), m_isZeppOs(isZeppOs)
 {
 
 }
@@ -46,10 +47,6 @@ void AbstractFetchOperation::setLastSyncKey(const QString &key)
 bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO << value;
-    if (!m_service) {
-        qDebug() << "No service set";
-        return true;
-    }
 
     if (m_abort) {
         qDebug() << Q_FUNC_INFO << ": Abort signalled from operation";
@@ -71,8 +68,7 @@ bool AbstractFetchOperation::handleMetaData(const QByteArray &value)
     case MiBandService::COMMAND_ACTIVITY_DATA_START_DATE:
         return !handleStartDateResponse(value);
     case MiBandService::COMMAND_FETCH_DATA:
-        handleFetchDataResponse(value);
-        return false;
+        return handleFetchDataResponse(value);
     case MiBandService::COMMAND_ACK_ACTIVITY_DATA:
         qDebug() << "Got reply to COMMAND_ACK_ACTIVITY_DATA";
         return true;
@@ -112,10 +108,9 @@ bool AbstractFetchOperation::handleStartDateResponse(const QByteArray &value)
     setStartDate(local);
 
     qDebug() << "About to transfer data from " << startDate << "expected length:" << expectedDataLength; //TODO use expectedDataLength
-    m_service->message(QObject::tr("About to transfer data from ") + startDate.toString());
-    //Send log read command
-    m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
-
+    m_fetcher->message(QObject::tr("About to transfer data from ") + startDate.toString());
+    //Send read command
+    m_fetcher->writeControl(QByteArray(1, MiBandService::COMMAND_FETCH_DATA));
     return true;
 
 }
@@ -128,22 +123,23 @@ bool AbstractFetchOperation::handleFetchDataResponse(const QByteArray &value)
     }
 
     if (value[2] != MiBandService::SUCCESS) {
-        m_service->message(QObject::tr("No data to transfer"));
+        m_fetcher->message(QObject::tr("No data to transfer"));
         return true;
     }
 
     //TODO handle size 7
 
     bool success = m_valid && processBufferedData();
-    if (success) {
+    if (success && m_isZeppOs) {
         qDebug() << "Sending Ack";
         sendAck();
+        return false;
     }
 
     return true;
 }
 
-bool AbstractFetchOperation::sendAck()
+void AbstractFetchOperation::sendAck()
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -154,9 +150,8 @@ bool AbstractFetchOperation::sendAck()
 
         cmd += MiBandService::COMMAND_ACK_ACTIVITY_DATA;
         cmd += (keepDataOnDevice ? 0x09 : 0x01);
-        m_service->writeValue(MiBandService::UUID_CHARACTERISTIC_MIBAND_FETCH_DATA, cmd);
+        m_fetcher->writeControl(cmd);
     }
-    return true;
 }
 
 void AbstractFetchOperation::setAbort(bool abort)

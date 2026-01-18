@@ -15,6 +15,12 @@ int PebbleDevice::supportedFeatures() const
     //  FEATURE_HRM | FEATURE_WEATHER | FEATURE_ACTIVITY |FEATURE_STEPS | FEATURE_ALARMS | FEATURE_ALERT | FEATURE_EVENT_REMINDER | FEATURE_MUSIC_CONTROL | FEATURE_BUTTON_ACTION | FEATURE_SCREENSHOT
     return 0;
 }
+
+Amazfish::DataTypes PebbleDevice::supportedDataTypes() const
+{
+    return Amazfish::DataType::TYPE_NONE;
+}
+
 QString PebbleDevice::deviceType() const 
 {
     return "pebble";

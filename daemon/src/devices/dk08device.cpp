@@ -15,6 +15,12 @@ int DK08Device::supportedFeatures() const
     //   FEATURE_ACTIVITY | FEATURE_EVENT_REMINDER | FEATURE_MUSIC_CONTROL | FEATURE_BUTTON_ACTION | FEATURE_SCREENSHOT
     return FEATURE_STEPS | FEATURE_HRM  | FEATURE_ALERT | FEATURE_ALARMS | FEATURE_WEATHER;
 }
+
+Amazfish::DataTypes DK08Device::supportedDataTypes() const
+{
+    return Amazfish::DataType::TYPE_HEART_RATE;
+}
+
 QString DK08Device::deviceType() const 
 {
     return "dk08";

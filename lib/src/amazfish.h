@@ -22,6 +22,7 @@ public:
         FEATURE_SCREENSHOT = 512,
     };
     Q_ENUM(Feature)
+    Q_DECLARE_FLAGS(Features, Feature);
 
     enum class Info {
         INFO_SWVER = 1,
@@ -56,6 +57,23 @@ public:
         SETTING_DEVICE_REALTIME_HRM_MEASUREMENT
     };
     Q_ENUM(Settings)
+
+    enum class DataType{
+        TYPE_NONE = 0,
+        TYPE_DEBUGLOG = 1,
+        TYPE_ACTIVITY = 2,
+        TYPE_GPS_TRACK = 4,
+        TYPE_STRESS = 8,
+        TYPE_SPO2 = 16,
+        TYPE_PAI = 32,
+        TYPE_HEART_RATE = 64,
+        TYPE_SLEEP_RESPIRATORY_RATE = 128,
+        TYPE_TEMPERATURE = 256,
+        TYPE_SLEEP = 512,
+        TYPE_HUAMI_STATISTICS = 1024
+    };
+    Q_ENUM(DataType)
+    Q_DECLARE_FLAGS(DataTypes, DataType);
 
     struct WatchNotification
     {
@@ -120,5 +138,8 @@ Q_DECLARE_METATYPE(Amazfish::Feature)
 Q_DECLARE_METATYPE(Amazfish::Info)
 Q_DECLARE_METATYPE(Amazfish::Settings)
 Q_DECLARE_METATYPE(Amazfish::WatchNotification)
+Q_DECLARE_METATYPE(Amazfish::DataType)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Amazfish::Features)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Amazfish::DataTypes)
 
 #endif // AMAZFISH_H

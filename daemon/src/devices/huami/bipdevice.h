@@ -84,6 +84,7 @@ public:
     explicit BipDevice(const QString &pairedName, QObject *parent = nullptr);
 
     int supportedFeatures() const override;
+    Amazfish::DataTypes supportedDataTypes() const override;
     QString deviceType() const override;
     QStringList supportedDisplayItems() const override;
     void applyDeviceSetting(AbstractDevice::Settings s) override;

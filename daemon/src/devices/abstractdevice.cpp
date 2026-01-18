@@ -98,9 +98,19 @@ bool AbstractDevice::supportsFeature(AbstractDevice::Feature f) const
     return (supportedFeatures() & f) == f;
 }
 
+bool AbstractDevice::supportsDataType(Amazfish::DataType t) const
+{
+    return (supportedDataTypes() & t);
+}
+
 void AbstractDevice::setDatabase(KDbConnection *conn)
 {
     m_conn = conn;
+}
+
+KDbConnection *AbstractDevice::database()
+{
+    return m_conn;
 }
 
 QString AbstractDevice::deviceName() const

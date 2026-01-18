@@ -11,18 +11,17 @@ public:
     
     virtual void start(QBLEService *service) = 0;
 
-    //! Return true if the operation is now complete and can be deleted
     virtual bool characteristicChanged(const QString &characteristic, const QByteArray &value) = 0;
 
     bool busy();
 
+    //! Return true if the operation is now complete and can be deleted
+    virtual bool handleMetaData(const QByteArray &meta) = 0;
+    virtual void handleData(const QByteArray &data) = 0;
+
 protected:
     bool m_busy = false;
     bool m_valid = true;
-
-private:
-    virtual bool handleMetaData(const QByteArray &meta) = 0;
-    virtual void handleData(const QByteArray &data) = 0;
 };
 
 #endif // ABSTRACTOPERATION_H

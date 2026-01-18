@@ -77,6 +77,17 @@ int ZeppOSDevice::supportedFeatures() const
             FEATURE_BUTTON_ACTION;
 }
 
+Amazfish::DataTypes ZeppOSDevice::supportedDataTypes() const
+{
+    return Amazfish::DataType::TYPE_ACTIVITY | Amazfish::DataType::TYPE_GPS_TRACK | Amazfish::DataType::TYPE_HEART_RATE
+            | Amazfish::DataType::TYPE_PAI | Amazfish::DataType::TYPE_SPO2 | Amazfish::DataType::TYPE_STRESS;
+}
+
+bool ZeppOSDevice::isZeppOs()
+{
+    return true;
+}
+
 void ZeppOSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
@@ -210,7 +221,8 @@ bool ZeppOSDevice::operationRunning()
 {
     bool classicOperationRunning = AbstractDevice::operationRunning();
 
-    return classicOperationRunning || m_currentZosOperation;
+    qDebug() << Q_FUNC_INFO << (classicOperationRunning || m_currentZosOperation || m_fetcher->busy());
+    return classicOperationRunning || m_currentZosOperation || m_fetcher->busy();
 }
 
 void ZeppOSDevice::setEncryptionParameters(int encryptedSequenceNumber, QByteArray sharedSessionKey)
@@ -341,10 +353,12 @@ void ZeppOSDevice::characteristicChanged(const QString &characteristic, const QB
         m_fileTransferService->characteristicChanged(characteristic, value);
     } else if (characteristic == BipFirmwareService::UUID_CHARACTERISTIC_ZEPP_OS_FILE_TRANSFER_V3_RECEIVE) {
         m_fileTransferService->characteristicChanged(characteristic, value);
+    } else {
+        HuamiDevice::characteristicChanged(characteristic, value);
     }
 }
 
-void ZeppOSDevice::zopOperationComplete()
+void ZeppOSDevice::zosOperationComplete()
 {
     if (m_currentZosOperation) {
         qDebug() << "Deleting current operation";
@@ -369,12 +383,10 @@ void ZeppOSDevice::initialise()
         mi->setHuami2021ChunkedDecoder(m_decoder);
 
         connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
-        connect(mi, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
-        connect(mi, &AbstractOperationService::operationComplete, this, &HuamiDevice::operationComplete, Qt::UniqueConnection);
         connect(mi, &MiBandService::buttonPressed, this, &ZeppOSDevice::handleButtonPressed, Qt::UniqueConnection);
         connect(mi, &MiBandService::informationChanged, this, &HuamiDevice::informationChanged, Qt::UniqueConnection);
         connect(mi, &MiBandService::serviceEvent, this, &ZeppOSDevice::serviceEvent, Qt::UniqueConnection);
-
+        connect(mi, &QBLEService::characteristicChanged, this, &ZeppOSDevice::characteristicChanged, Qt::UniqueConnection);
 
         m_authService->startAuthentication();
     }
@@ -432,7 +444,7 @@ void ZeppOSDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)
         }
 
         m_currentZosOperation = new ZeppOsAgpsUpdateOperation(this, info->bytes(), agps, m_fileTransferService);
-        connect(m_currentZosOperation, &AbstractZeppOsOperation::operationComplete, this, &ZeppOSDevice::zopOperationComplete, Qt::UniqueConnection);
+        connect(m_currentZosOperation, &AbstractZeppOsOperation::operationComplete, this, &ZeppOSDevice::zosOperationComplete, Qt::UniqueConnection);
         emit operationRunningChanged();
 
     }
