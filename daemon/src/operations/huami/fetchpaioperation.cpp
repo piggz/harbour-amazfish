@@ -49,7 +49,7 @@ bool FetchPaiOperation::processBufferedData()
         }
 
         int32_t timestampSeconds = TypeConversion::toUint32(m_buffer, offset);
-        timestamp.setSecsSinceEpoch(timestampSeconds);
+        timestamp.setMSecsSinceEpoch(timestampSeconds * 1000);
         uint8_t utcOffsetInQuarterHours = m_buffer[offset++];
 
         offset += 31; // unknown 31 bytes
