@@ -1091,6 +1091,13 @@ void DeviceInterface::fetchLogs()
     }
 }
 
+void DeviceInterface::fetchData(int dataType)
+{
+    if (m_device) {
+        m_device->fetchData((Amazfish::DataTypes)dataType);
+    }
+}
+
 void DeviceInterface::requestScreenshot() {
     if (m_device) {
         m_device->requestScreenshot();

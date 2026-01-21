@@ -43,6 +43,7 @@ public:
     Q_INVOKABLE bool startDownload();
     Q_INVOKABLE void downloadSportsData();
     Q_INVOKABLE void downloadActivityData();
+    Q_INVOKABLE void fetchData(int dataTypes);
     Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(Amazfish::Info i);
     Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);

@@ -29,6 +29,7 @@ public:
     void downloadSportsData() override;
     void downloadActivityData() override;
     void fetchLogs() override;
+    void fetchData(Amazfish::DataTypes dataTypes) override;
 
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
     void startDownload() override;

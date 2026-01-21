@@ -71,6 +71,11 @@ void HuamiDevice::fetchLogs()
     m_fetcher->startFetchData(Amazfish::DataType::TYPE_DEBUGLOG);
 }
 
+void HuamiDevice::fetchData(Amazfish::DataTypes dataTypes)
+{
+    m_fetcher->startFetchData(dataTypes);
+}
+
 void HuamiDevice::refreshInformation()
 {
     DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));

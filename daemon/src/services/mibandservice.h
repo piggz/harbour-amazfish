@@ -97,6 +97,8 @@ public:
     static const uint8_t COMMAND_FETCH_DATA = 0x02;
     static const uint8_t COMMAND_ACK_ACTIVITY_DATA = 0x03;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY = 0x01;
+    static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_PAI = 0x0d;
+
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_SPORTS_SUMMARIES = 0x05;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_SPORTS_DETAILS = 0x06;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS = 0x07;
