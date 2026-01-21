@@ -239,15 +239,16 @@ PagePL {
         Row {
             width: parent.width * 0.8
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: styler.themePaddingLarge
 
             TextFieldPL {
+                label: "Data Type"
+                anchors.leftMargin: 0
                 id: txtDataType
-                width: parent.width * 0.3
+                width: parent.width * 0.4
             }
             ButtonPL {
                 text: qsTr("Fetch Data")
-                width: parent.width * 0.7
+                width: parent.width * 0.6
                 onClicked: {
                     DaemonInterfaceInstance.fetchData(parseInt(txtDataType.text));
                 }
