@@ -876,8 +876,15 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
 {
     qDebug() << Q_FUNC_INFO << "enabled: " << AmazfishConfig::instance()->appNavigationNotification()
         << icon << narrative << manDist << progress << m_device;
+
     if (m_device && AmazfishConfig::instance()->appNavigationNotification()) {
-        m_device->navigationNarrative(icon, narrative, manDist, progress);
+
+        if (AmazfishConfig::instance()->appTransliterate()) {
+            m_device->navigationNarrative(icon, Transliterator::convert( narrative ), manDist, progress);
+        } else {
+            m_device->navigationNarrative(icon, narrative, manDist, progress);
+        }
+
     }
 }
 
