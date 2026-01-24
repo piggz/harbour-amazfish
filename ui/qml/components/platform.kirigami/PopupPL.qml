@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 Popup {
     id: popup
     width: app.width - 40
+    x: 20
     y: parent.height + 10
     z: 999
     height: contentChildren.height + 20
@@ -20,6 +21,14 @@ Popup {
         wrapMode: Text.Wrap
         color: styler.themeHighlightColor
         font.pixelSize: styler.themeFontSizeMedium
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                popup.close();
+            }
+        }
+
     }
     Timer {
         id: tmrHideMessage
