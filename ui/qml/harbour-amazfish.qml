@@ -54,10 +54,10 @@ ApplicationWindowPL
 	target: DaemonInterfaceInstance
 	onRequestPasskey: {
 	    var authdialog = app.pages.push(Qt.resolvedUrl("./pages/AuthAgentDialog.qml"), {
-			       authType: "passkey",
-			       deviceName: deviceName,
-			       devicePath: devicePath
-			   })
+						authType: "passkey",
+						deviceName: deviceName,
+						devicePath: devicePath
+					    })
 	    authdialog.accepted.connect(function() {
 		DaemonInterfaceInstance.agentPasskeyResponse(authdialog.enteredPasskey)
 	    })
@@ -69,16 +69,17 @@ ApplicationWindowPL
 	onRequestConfirmation: {
 
 	    var authdialog = app.pages.push(Qt.resolvedUrl("./pages/AuthAgentDialog.qml"), {
-			       authType: "confirmation",
-			       deviceName: deviceName,
-			       devicePath: devicePath,
-			       passkey: passkey
-			   })
+						authType: "confirmation",
+						deviceName: deviceName,
+						devicePath: devicePath,
+						passkey: passkey
+					    })
 	    authdialog.accepted.connect(function() {
 		DaemonInterfaceInstance.agentConfirmationResponse(true)
 	    })
-
-
+	    authdialog.rejected.connect(function() {
+		DaemonInterfaceInstance.agentConfirmationResponse(false)
+	    })
 	}
     }
 
@@ -86,10 +87,10 @@ ApplicationWindowPL
 	target: DaemonInterfaceInstance
 	onRequestPinCode: {
 	    var authdialog = app.pages.push(Qt.resolvedUrl("./pages/AuthAgentDialog.qml"), {
-			       authType: "pincode",
-			       deviceName: deviceName,
-			       devicePath: devicePath
-			   })
+						authType: "pincode",
+						deviceName: deviceName,
+						devicePath: devicePath
+					    })
 	    authdialog.accepted.connect(function() {
 		DaemonInterfaceInstance.agentPinCodeResponse(authdialog.enteredPasskey)
 	    })
