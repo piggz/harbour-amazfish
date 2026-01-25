@@ -24,6 +24,7 @@ int toUnsigned(short value);
 int toUnsigned(char value);
 int16_t toInt16(uint8_t val1, uint8_t val2);
 uint16_t toUint16(char value);
+float toFloat(const QByteArray &arr, int &idx);
 }
 
 #endif // TYPECONVERSION_H

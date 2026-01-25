@@ -1,6 +1,7 @@
 #include "huamifetcher.h"
 
 #include "huami/activityfetchoperation.h"
+#include "huami/fetchpaioperation.h"
 #include "huamidevice.h"
 #include "huami/logfetchoperation.h"
 #include "huami/sportssummaryoperation.h"
@@ -20,6 +21,8 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
         m_operations.append(new LogFetchOperation(this, m_device->isZeppOs()));
     } else if (type & Amazfish::DataType::TYPE_GPS_TRACK && m_device->supportsDataType(Amazfish::DataType::TYPE_GPS_TRACK)) {
         m_operations.append(new SportsSummaryOperation(this, m_device->database(), m_device->activitySummaryParser(), m_device->isZeppOs()));
+    } else if (type & Amazfish::DataType::TYPE_PAI && m_device->supportsDataType(Amazfish::DataType::TYPE_PAI)) {
+        m_operations.append(new FetchPaiOperation(this, m_device->database(), m_device->isZeppOs()));
     }
 
     if (!m_currentOperation) {

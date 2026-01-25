@@ -196,6 +196,14 @@ void DaemonInterface::downloadActivityData()
     iface->call(QStringLiteral("downloadActivityData"));
 }
 
+void DaemonInterface::fetchData(int dataTypes)
+{
+    if (!iface || !iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("fetchData"), dataTypes);
+}
+
 void DaemonInterface::refreshInformation()
 {
     if (!iface || !iface->isValid()) {
