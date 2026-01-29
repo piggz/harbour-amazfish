@@ -396,7 +396,7 @@ PageListPL {
                 LabelPL {
                     id: nameLabel
 
-                    text: kindstring
+                    text: translateSportKind(kindstring)
                 }
 
                 LabelPL {
