@@ -374,6 +374,47 @@ void DeviceInterface::createTables()
         qDebug() << *t_meta;
     }
 
+    if (!m_conn->containsTable("pai")) {
+        KDbTableSchema *t_pai = new KDbTableSchema("pai");
+        t_pai->setCaption("Personal Activity Intelligence");
+        t_pai->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_pai->addField(f = new KDbField("pai_date", KDbField::Date, KDbField::NoConstraints));
+        f->setCaption("PAI Date");
+
+        t_pai->addField(f = new KDbField("pai_low", KDbField::Float));
+        f->setCaption("Low");
+
+        t_pai->addField(f = new KDbField("pai_moderate", KDbField::Float));
+        f->setCaption("Moderate");
+
+        t_pai->addField(f = new KDbField("pai_high", KDbField::Float));
+        f->setCaption("High");
+
+        t_pai->addField(f = new KDbField("pai_low_time", KDbField::ShortInteger));
+        f->setCaption("Low Time (secs)");
+
+        t_pai->addField(f = new KDbField("pai_moderate_time", KDbField::ShortInteger));
+        f->setCaption("Moderate Time (secs)");
+
+        t_pai->addField(f = new KDbField("pai_high_time", KDbField::ShortInteger));
+        f->setCaption("High Time (secs)");
+
+        t_pai->addField(f = new KDbField("pai_today", KDbField::Float));
+        f->setCaption("Daily Total");
+
+        t_pai->addField(f = new KDbField("pai_total", KDbField::Float));
+        f->setCaption("Total");
+
+        if (!m_conn->createTable(t_pai)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- pai created --";
+        qDebug() << *t_pai;
+    }
+
     if (!m_conn->commitTransaction(t)) {
         qDebug() << m_conn->result();
         return;

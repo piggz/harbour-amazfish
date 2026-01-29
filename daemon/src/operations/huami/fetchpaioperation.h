@@ -17,6 +17,17 @@ public:
     void start(QBLEService *service) override;
 
 private:
+    struct PaiRecord {
+        QDate day;
+        float low;
+        float moderate;
+        float high;
+        uint16_t time_low;
+        uint16_t time_moderate;
+        uint16_t time_high;
+        float total_today;
+        float total;
+    };
 
     QDateTime m_sampleTime;
     QList<ActivitySample> m_samples;
@@ -24,6 +35,7 @@ private:
     KDbConnection *m_conn;
 
     bool processBufferedData() override;
+    bool saveRecords(QVector<PaiRecord> recs);
 };
 
 #endif // FETCHPAIOPERATION_H
