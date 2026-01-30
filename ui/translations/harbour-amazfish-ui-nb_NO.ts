@@ -21,7 +21,7 @@
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <source>Time: %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tid: %1:%2</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="92"/>
@@ -261,7 +261,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="191"/>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Funksjonstest</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="256"/>
@@ -620,7 +620,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="144"/>
         <source>Sync activity data each hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Synk aktivitetsdata hver time</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="8"/>
@@ -640,12 +640,12 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="110"/>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Lavt batteri-varsel</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="118"/>
         <source>Navigation notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigasjonsvarsler</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="134"/>
@@ -655,27 +655,27 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="138"/>
         <source>Refresh rates</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdateringsfrekvens</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="155"/>
         <source>Refresh weather every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater været hvert (%1). minutt</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Refresh calendar every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater kalenderen hvert (%1). minutt</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="169"/>
         <source>Amazfish Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfish tjeneste</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="176"/>
         <source>Start service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Start tjenesten ved oppstart</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="190"/>
