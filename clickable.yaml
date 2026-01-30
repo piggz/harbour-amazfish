@@ -39,40 +39,36 @@ libraries:
     - git -C ${SRC_DIR} pull || git clone https://github.com/sailfishos/nemo-qml-plugin-dbus ${SRC_DIR}
     builder: qmake
 
-  maplibre-gl-native:
-    src_dir: 3rdparty/maplibre-gl-native
+  maplibre-native:
+    src_dir: 3rdparty/maplibre-native
     prebuild:
     - mkdir -p ${ROOT}/3rdparty
-    - rm -rf ${ROOT}/3rdparty/maplibre-gl-native
-    - git clone -b qt-v2.0.1 --recursive --shallow-submodules --depth 1 https://github.com/maplibre/maplibre-gl-native.git ${SRC_DIR}
-    - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/disable-armhf-version-check.patch
-    - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/enable-clang-cross-compiling.patch
-    - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/fix-compilation-with-clickable.patch
-    - cd ${ROOT}/3rdparty/maplibre-gl-native && git apply --verbose ${ROOT}/click/add-some-missing-cstdint-inclusions-872-874.patch
-    - cd ${ROOT}/3rdparty/maplibre-gl-native/vendor/eternal && git apply --verbose ${ROOT}/click/missing-include.patch
-
+    - rm -rf ${ROOT}/3rdparty/maplibre-native
+    - git clone -b v3.0.0 --recursive --shallow-submodules --depth 1 https://github.com/maplibre/maplibre-native-qt.git ${SRC_DIR}
+    - cd ${ROOT}/3rdparty/maplibre-native && git apply --verbose ${ROOT}/click/0002-Fixes-for-compilation-on-SFOS.patch
+    - cd ${ROOT}/3rdparty/maplibre-native/vendor/maplibre-native && git apply --verbose ${ROOT}/click/0004-fix-double-move-callback.patch
     builder: cmake
     build_args:
-    - -DMBGL_WITH_QT=ON
-    - -DMBGL_WITH_WERROR=OFF
-    - -DMBGL_WITH_QT_HEADLESS=OFF
-    - -DMBGL_QT_LIBRARY_ONLY=ON
-    - -DMBGL_QT_STATIC=OFF
-
+    - -DMLN_QT_WITH_WIDGETS=OFF
+    - -DMLN_QT_WITH_LOCATION=OFF
+    - -DMLN_QT_WITH_INTERNAL_ICU=ON
+    - -DMLN_WITH_WERROR=OFF
   mapbox-gl-qml:
     src_dir: 3rdparty/mapbox-gl-qml
     prebuild:
     - mkdir -p ${ROOT}/3rdparty
     - rm -rf ${ROOT}/3rdparty/mapbox-gl-qml
-    - git clone -b 2.1.1 --recursive --shallow-submodules --depth 1  https://github.com/rinigus/mapbox-gl-qml.git ${SRC_DIR}
+    - git clone -b 3.1.1 --recursive --shallow-submodules --depth 1  https://github.com/rinigus/mapbox-gl-qml.git ${SRC_DIR}
     builder: cmake
     build_args:
     - -DCMAKE_CXX_STANDARD=14
+    - -DCMAKE_CXX_FLAGS=-I${MAPLIBRE_NATIVE_LIB_INSTALL_DIR}/include\ -L${MAPLIBRE_NATIVE_LIB_INSTALL_DIR}/lib
+
 
 install_lib:
 - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libnemodbus.so*
 - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libmpris-qt5.so*
-- ${MAPLIBRE_GL_NATIVE_LIB_INSTALL_DIR}/lib/libQMapLibreGL.so*
+- ${MAPLIBRE_NATIVE_LIB_INSTALL_DIR}/lib/libQMapLibre.so*
 - /usr/lib/${ARCH_TRIPLET}/libKDb3.so*
 - /usr/lib/${ARCH_TRIPLET}/libKF5BluezQt.so*
 install_data:
@@ -81,4 +77,5 @@ install_qml:
 - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Nemo/DBus
 - ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/org/nemomobile/mpris
 - ${MAPBOX_GL_QML_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/MapboxMap
+- ${MAPLIBRE_NATIVE_LIB_INSTALL_DIR}/lib/libQMapLibre.so*
 - /usr/lib/${ARCH_TRIPLET}/qt5/qml/org/kde/bluezqt

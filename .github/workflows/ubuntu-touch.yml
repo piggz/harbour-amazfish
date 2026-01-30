@@ -9,17 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
-        fetch-depth: 0
+        fetch-depth: 1
         submodules: recursive
     - name: avoid git submodule update step in clickable.yaml
       run: sed 's/^prebuild/#prebuild/' -i clickable.yaml
     - name: build package
       uses: tuxecure/clickable@v1
       with:
-        image: clickable/ci-20.04-${{ matrix.arch }}
-        run: clickable build --all --skip-review
+        image: clickable/ci-ut24.04-1.x-${{ matrix.arch }}
+        run: clickable build --all --skip-review --verbose
     - name: Upload .click package
       uses: actions/upload-artifact@v4
       with:
