@@ -224,4 +224,21 @@ int64_t toInt64(char val1, char val2, char val3, char val4, char val5, char val6
 
     return number.val;
 }
+
+float toFloat(const QByteArray &arr, int &idx)
+{
+    unsigned char a[4];
+    float val;
+
+    a[0] = arr[idx];
+    a[1] = arr[idx+1];
+    a[2] = arr[idx+2];
+    a[3] = arr[idx+3];
+
+    idx += 4;
+
+    val = (*(float*)a);
+    return val;
+}
+
 }

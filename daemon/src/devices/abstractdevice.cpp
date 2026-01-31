@@ -139,6 +139,10 @@ void AbstractDevice::fetchLogs()
 {
 }
 
+void AbstractDevice::fetchData(Amazfish::DataTypes dataTypes)
+{
+}
+
 void AbstractDevice::sendWeather(CurrentWeather *weather)
 {
     Q_UNUSED(weather);

@@ -66,6 +66,7 @@ public:
     virtual void downloadSportsData();
     virtual void downloadActivityData();
     virtual void fetchLogs();
+    virtual void fetchData(Amazfish::DataTypes dataTypes);
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
     virtual QString information(Amazfish::Info i) const;

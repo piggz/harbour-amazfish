@@ -224,6 +224,7 @@ set(HEADERS
 )
 
 add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
+    src/operations/huami/fetchpaioperation.h src/operations/huami/fetchpaioperation.cpp
 )
 
 find_package(PkgConfig REQUIRED)
