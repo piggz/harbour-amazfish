@@ -6,6 +6,7 @@ import "../components/platform"
 PageListPL {
     id: page
     title: "Test Icons"
+    property string qmlUrl: "TestIconsPage.qml"
 
     model: iconsModel
 
@@ -49,4 +50,16 @@ PageListPL {
             completed = true;
         }
     }
+
+    Timer {
+        id: tmr;
+        interval: 1000;
+        onTriggered: {
+            pushAttached(Qt.resolvedUrl(getNextPage()))
+        }
+    }
+    onPageStatusActive: {
+        tmr.start()
+    }
+
 }

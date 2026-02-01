@@ -7,6 +7,7 @@ import "../components/platform"
 PagePL {
     id: page
     title: qsTr("Battery")
+    property string qmlUrl: "BatteryPage.qml"
 
     property alias day: nav.day
 

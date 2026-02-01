@@ -8,6 +8,7 @@ import "../components/platform"
 PagePL {
     id: page
     title: "Amazfish"
+    property string qmlUrl: "FirstPage.qml"
 
     function unpairAccepted() {
         DaemonInterfaceInstance.disconnect();
@@ -292,7 +293,9 @@ PagePL {
             interval: 500
             onTriggered: {
                 // console.log("Start timer triggered");
-                pushAttached(Qt.resolvedUrl("StepsPage.qml"))
+                pushAttached(Qt.resolvedUrl(getNextPage()))
+
+
                 if (!AmazfishConfig.profileName) {
                     app.pages.push(Qt.resolvedUrl("Settings-user.qml"))
                 }

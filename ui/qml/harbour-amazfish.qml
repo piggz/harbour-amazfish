@@ -11,7 +11,7 @@ import "./components/platform"
 ApplicationWindowPL
 {
     id: app
-    initialPage: Component { FirstPage { } }
+    initialPage: Qt.createComponent( Qt.resolvedUrl("pages/"+pagesModel.get(0).qmlUrl) )
     property var    rootPage: null
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     //allowedOrientations: defaultAllowedOrientations
@@ -157,6 +157,12 @@ ApplicationWindowPL
 
     onSupportedFeaturesChanged: {
         console.log("Supported features:", supportedFeatures);
+
+        // FIXME
+        // var currentPage = app.pages.currentPage();
+        // app.pages.popAttached()
+        // pushAttached(Qt.resolvedUrl(getNextPage()))
+
     }
 
     on_ConnectionStateChanged: console.log(_connectionState)
@@ -237,4 +243,35 @@ ApplicationWindowPL
         }
         return pc.createObject(parent ? parent : app, options ? options : {})
     }
+
+
+    ListModel {
+        id: pagesModel
+
+        // ListElement { qmlUrl: "TestIconsPage.qml";       feature: Amazfish.FEATURE_NONE }
+        ListElement { qmlUrl: "FirstPage.qml";           feature: Amazfish.FEATURE_NONE }
+        ListElement { qmlUrl: "StepsPage.qml";           feature: Amazfish.FEATURE_STEPS }
+        ListElement { qmlUrl: "SleepPage.qml";           feature: Amazfish.FEATURE_HRM }
+        ListElement { qmlUrl: "HeartratePage.qml";       feature: Amazfish.FEATURE_HRM }
+        ListElement { qmlUrl: "SportsSummaryPage.qml";   feature: Amazfish.FEATURE_ACTIVITY }
+        ListElement { qmlUrl: "BatteryPage.qml";         feature: Amazfish.FEATURE_NONE }
+    }
+
+
+    function getNextPage() {
+        var current = app.pages.currentPage()
+        var currentUrl = current.qmlUrl
+        var returnNext = false;
+        for (var i = 0; i < pagesModel.count; i++) {
+            var page = pagesModel.get(i)
+            if (returnNext && supportsFeature(page.feature)) {
+                return page.qmlUrl
+            }
+            if (page.qmlUrl === currentUrl) {
+                returnNext = true
+            }
+        }
+        return null;
+    }
+
 }
