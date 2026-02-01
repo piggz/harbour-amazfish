@@ -266,6 +266,10 @@ void DeviceInterface::createTables()
         qDebug() << *t_activity;
     }
 
+    if (!m_conn->executeSql(KDbEscapedString("CREATE INDEX IF NOT EXISTS idx_mi_band_activity_timestamp ON mi_band_activity (timestamp);"))) {
+        qWarning() << "Cannot create index on mi_band_activity(timestamp)";
+    }
+
 
     if (!m_conn->containsTable("info_log")) {
         KDbTableSchema *t_info = new KDbTableSchema("info_log");
