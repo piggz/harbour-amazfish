@@ -37,7 +37,7 @@ PagePL {
             id: graphPAI
             anchors.margins: styler.themePaddingLarge
             graphTitle: ""
-            graphHeight: 250
+            graphHeight: 300
             axisX.mask: ""
 
             axisY.units: ""
