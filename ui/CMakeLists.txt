@@ -27,6 +27,7 @@ set(SOURCES
     ./src/datasource.cpp
     ./src/sportsdatamodel.cpp
     ./src/sportsmetamodel.cpp
+    ./src/paimodel.cpp
     ./src/timeformatter.cpp
     ./src/harbour-amazfish-ui.cpp
     ./src/trackloader.cpp
@@ -37,6 +38,7 @@ set(HEADERS
     ./src/datasource.h
     ./src/sportsdatamodel.h
     ./src/sportsmetamodel.h
+    ./src/paimodel.h
     ./src/timeformatter.h
     ./src/trackloader.h
     ./src/daemoninterface.h

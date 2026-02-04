@@ -48,6 +48,10 @@ PagePL {
             onClicked: app.pages.push(Qt.resolvedUrl("AnalysisPage.qml"))
         }
         PageMenuItemPL {
+            text: qsTr("PAI")
+            onClicked: app.pages.push(Qt.resolvedUrl("PaiDataPage.qml"))
+        }
+        PageMenuItemPL {
             visible: AmazfishConfig.pairedAddress
             enabled: !_connecting
             text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")

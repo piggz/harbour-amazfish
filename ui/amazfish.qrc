@@ -75,5 +75,6 @@
         <file>qml/harbour-amazfish.qml</file>
         <file>icons/172x172/harbour-amazfish-ui.png</file>
         <file>qml/pics/devices/amazfit-balance.png</file>
+        <file>qml/pages/PaiDataPage.qml</file>
     </qresource>
 </RCC>
