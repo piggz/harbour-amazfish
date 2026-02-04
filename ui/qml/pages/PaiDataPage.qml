@@ -212,8 +212,4 @@ PagePL {
             txtTimeHigh.text = "0" + qsTr(" min");
         }
     }
-
-    onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("SportsSummaryPage.qml"))
-    }
 }
