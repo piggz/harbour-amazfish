@@ -50,6 +50,7 @@ PagePL {
         PageMenuItemPL {
             text: qsTr("PAI")
             onClicked: app.pages.push(Qt.resolvedUrl("PaiDataPage.qml"))
+            visible: DaemonInterfaceInstance.supportedDataTypes() & Amazfish.TYPE_PAI
         }
         PageMenuItemPL {
             visible: AmazfishConfig.pairedAddress
