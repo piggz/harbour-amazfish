@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.1" language="pt_BR">
 <context>
     <name>AbstractDevice</name>
     <message>
         <location filename="../src/devices/abstractdevice.cpp" line="151"/>
         <source>Device does not support settings</source>
-        <translation>l&apos;appareil ne supporte pas la configuration</translation>
+        <translation>O dispositivo não sustenta configurações</translation>
     </message>
 </context>
 <context>
@@ -14,67 +14,67 @@
     <message>
         <location filename="../src/achievements.cpp" line="12"/>
         <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
-        <translation>Le voyage commence, aventurier. Seulement &lt;b&gt;%1&lt;/b&gt; pas — la Comté est encore en vue.</translation>
+        <translation>A jornada começa, aventureiro. Apenas &lt;b&gt;%1&lt;/b&gt; de passos — O Condado ainda está à vista.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
         <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
-        <translation>Tu as traversé le Brandywine. &lt;b&gt;%1&lt;/b&gt; pas tombés — trolls en avant&#x202f;!</translation>
+        <translation>Você cruzou o Brandevin. &lt;b&gt;%1&lt;/b&gt; de passos dados — trolls à frente!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="14"/>
         <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
-        <translation>À mi-chemin vers Mordor. &lt;b&gt;%1&lt;/b&gt; étapes parcourues et deuxième petit déjeuner manqué.</translation>
+        <translation>Metade do caminho para Mordor. &lt;b&gt;%1&lt;/b&gt; de passos caminhados e segundo café-da-manhã perdido.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="15"/>
         <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
-        <translation>Le volcan Orodruin est à l’horizon. &lt;b&gt;%1&lt;/b&gt; pas derrière toi — ne lâche pas encore la bague&#x202f;!</translation>
+        <translation>O Monte da Perdição está no horizonte. &lt;b&gt;%1&lt;/b&gt; passos atrás de você — não solte o anel ainda!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="16"/>
         <source>The ring is cast into the fire. &lt;b&gt;%1&lt;/b&gt; steps done — Middle-earth is saved!</source>
-        <translation>L’anneau est jeté dans le feu. &lt;b&gt;%1&lt;/b&gt; pas effectuées — La Terre du Milieu est sauvée&#x202f;!</translation>
+        <translation>O anel foi jogado ao fogo. &lt;b&gt;%1&lt;/b&gt; passos completados — a Terra Média está salva!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="17"/>
         <source>You kept walking after saving the world?! &lt;b&gt;%1&lt;/b&gt; steps — you’re a true legend. 🧙</source>
-        <translation>Tu as continué à marcher après avoir sauvé le monde&#x202f;?! &lt;b&gt;%1&lt;/b&gt; pas — tu es une véritable légende.&#xa0;🧙</translation>
+        <translation>Você continuou andando depois de salvar o mundo?! &lt;b&gt;%1&lt;/b&gt; passos — Você é uma verdadeira lenda. 🧙</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="18"/>
         <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
-        <translation>Le Hobbit, ou There and Back Again — &lt;b&gt;%1&lt;/b&gt; pas et deuxième petit déjeuner gagné&#x202f;!</translation>
+        <translation>O Hobbit, ou Lá e de Volta Outra Vez —&lt;b&gt;%1&lt;/b&gt; passos e segundo café-da-manhã merecido!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
         <source>Let&apos;s get moving! You&apos;ve taken only &lt;b&gt;%1&lt;/b&gt; steps so far.</source>
-        <translation>Allons-y bougeons&#x202f;! Vous n’avez fait que &lt;b&gt;%1&lt;/b&gt; pas jusqu’à présent.</translation>
+        <translation>Vamos nos mexer! Você só andou &lt;b&gt;%1&lt;/b&gt; passos até agora.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="23"/>
         <source>Warming up! &lt;b&gt;%1&lt;/b&gt; steps done — keep going!</source>
-        <translation>Échauffement&#x202f;! &lt;b&gt;%1&lt;/b&gt; pas effectuées — continuez&#x202f;!</translation>
+        <translation>Se aquecendo! &lt;b&gt;%1&lt;/b&gt; passos completos — continue!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="24"/>
         <source>You&apos;re halfway there. &lt;b&gt;%1&lt;/b&gt; steps so far!</source>
-        <translation>Vous êtes à mi-chemin. &lt;b&gt;%1&lt;/b&gt; pas jusqu’à présent&#x202f;!</translation>
+        <translation>Você está na metade do caminho. &lt;b&gt;%1&lt;/b&gt; passos até agora!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="25"/>
         <source>Almost there! Just a bit more — &lt;b&gt;%1&lt;/b&gt; steps already!</source>
-        <translation>Presque là&#x202f;! Juste un peu plus — &lt;b&gt;%1&lt;/b&gt; pas déjà&#x202f;!</translation>
+        <translation>Quase lá! Só mais um pouco — Já andou &lt;b&gt;%1&lt;/b&gt; passos!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="26"/>
         <source>Goal reached! &lt;b&gt;%1&lt;/b&gt; steps — you can have that cake now 🎉</source>
-        <translation>Objectif atteint&#x202f;! &lt;b&gt;%1&lt;/b&gt; pas — vous pouvez avoir ce gâteau maintenant&#xa0;🎉</translation>
+        <translation>Meta alcançada! &lt;b&gt;%1&lt;/b&gt; passos — pode comer o bolo agora 🎉</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="27"/>
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
-        <translation>Tu l’as écrasé&#x202f;! &lt;b&gt;%1&lt;/b&gt; pas — il est temps de se reposer ou alors d’aller chercher des pas bonus&#x202f;?</translation>
+        <translation>Você arrasou! &lt;b&gt;%1&lt;/b&gt; passos — hora de descansar ou pegar uns passos extra?</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../src/devices/asteroidosdevice.cpp" line="324"/>
         <source>Stored %1...</source>
-        <translation>Stocké %1&#xa0;...</translation>
+        <translation>Armazenado %1...</translation>
     </message>
 </context>
 <context>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="115"/>
         <source>Device is not valid, it may not be supported</source>
-        <translation>L’appareil n’est pas valide, il peut ne pas être pris en charge</translation>
+        <translation>Aparelho não é válido, pode não ser sustentado</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="469"/>
@@ -101,27 +101,27 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="470"/>
         <source>Connected</source>
-        <translation>Connecté</translation>
+        <translation>Conectado</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="471"/>
         <source>Phone and watch are connected</source>
-        <translation>Téléphone et montre connectés</translation>
+        <translation>Celular e relógio conectados</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="546"/>
         <source>Low Battery</source>
-        <translation>Batterie faible</translation>
+        <translation>Pouca Bateria</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="547"/>
         <source>Battery level now </source>
-        <translation>Niveau batterie actuel </translation>
+        <translation>Nível atual da bateria </translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="671"/>
         <source>Calendar</source>
-        <translation>Calendrier</translation>
+        <translation>Calendário</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/devices/huami/gtsdevice.cpp" line="220"/>
         <source>An operation is currently running, please try later</source>
-        <translation>Une opération est en cours, essayez plus tard</translation>
+        <translation>Uma operação está sendo executada, por favor tente mais tarde</translation>
     </message>
 </context>
 <context>
@@ -137,32 +137,32 @@
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="208"/>
         <source>Navigation Started</source>
-        <translation>Navigation Démarrée</translation>
+        <translation>Navegação Iniciada</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="210"/>
         <source>Navigation Stopped</source>
-        <translation>Navigation Arrêtée</translation>
+        <translation>Navegação Parada</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="230"/>
         <source>Progress</source>
-        <translation>Progression</translation>
+        <translation>Progresso</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="372"/>
         <source>Sending %1...</source>
-        <translation>Envoi %1&#xa0;...</translation>
+        <translation>Enviando %1...</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="375"/>
         <source>No file selected</source>
-        <translation>Aucun fichier sélectionné</translation>
+        <translation>Nenhum arquivo selecionado</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="397"/>
         <source>An operation is currently running, please try later</source>
-        <translation>Une opération est en cours, essayez plus tard</translation>
+        <translation>Uma operação está sendo executada, por favor tente mais tarde</translation>
     </message>
 </context>
 <context>
@@ -171,7 +171,7 @@
         <location filename="../src/services/mibandservice.cpp" line="422"/>
         <location filename="../src/services/mibandservice.cpp" line="482"/>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
-        <translation>Le firmware est trop ancien pour définir les éléments d’affichage, V0.1.1.14 est requis</translation>
+        <translation>Firmware muito antiga para definir itens de display, V0.1.1.14 é necessária</translation>
     </message>
 </context>
 <context>
@@ -180,19 +180,19 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="364"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="378"/>
         <source>An operation is currently running, please try later</source>
-        <translation>Une opération est en cours, essayez plus tard</translation>
+        <translation>Uma operação está sendo executada, por favor tente mais tarde</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="401"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="414"/>
         <source>Sending file...</source>
-        <translation>Envoi fichier&#xa0;...</translation>
+        <translation>Enviando arquivo...</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="404"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="417"/>
         <source>No file selected</source>
-        <translation>Aucun fichier sélectionné</translation>
+        <translation>Nenhum arquivo selecionado</translation>
     </message>
 </context>
 <context>
@@ -200,32 +200,32 @@
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation>Mise à jour d&apos;AGPS OK</translation>
+        <translation>Atualização de AGPS Ok</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
-        <translation>Fichier AGPS est corrompu</translation>
+        <translation>Arquivo AGPS está corrompido</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
-        <translation>Fichier AGPS n&apos;est pas au format correct</translation>
+        <translation>Arquivo AGPS não é o formato correto</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
-        <translation>Erreur inconnue lors de l’envoi du fichier AGPS</translation>
+        <translation>Erro desconhecido ao enviar arquivo AGPS</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
-        <translation>Téléversement du fichier OK. Mise à jour en cours sur l&apos;appareil</translation>
+        <translation>Upload de arquivo Ok.  Realizando atualização no dispositivo</translation>
     </message>
     <message>
         <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
-        <translation>Téléversement du fichier a échoué</translation>
+        <translation>Upload de arquivo falhou</translation>
     </message>
 </context>
 <context>
@@ -233,12 +233,12 @@
     <message>
         <location filename="../src/operations/abstractfetchoperation.cpp" line="115"/>
         <source>About to transfer data from </source>
-        <translation>Sur le point de transférer des données depuis </translation>
+        <translation>Pronto para transferir dados de </translation>
     </message>
     <message>
         <location filename="../src/operations/abstractfetchoperation.cpp" line="131"/>
         <source>No data to transfer</source>
-        <translation>Aucune donnée à transférer</translation>
+        <translation>Sem dados a transferir</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="186"/>
@@ -246,33 +246,33 @@
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="84"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="87"/>
         <source>Update operation failed</source>
-        <translation>L’opération de mise à jour a échoué</translation>
+        <translation>Operação de atualização falhou</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="224"/>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="96"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="95"/>
         <source>Update operation failed, unexpected metadata</source>
-        <translation>L’opération de mise à jour a échoué, métadonnées inattendues</translation>
+        <translation>Operação de atualização falhou, metadata inesperada</translation>
     </message>
     <message>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="71"/>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="78"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="74"/>
         <source>Update operation complete</source>
-        <translation>Opération de mise à jour terminée</translation>
+        <translation>Operação de atualização completa</translation>
     </message>
     <message>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="94"/>
         <source>Update operation failed, filetype not supported</source>
-        <translation>L’opération de mise à jour a échoué, type de fichier non pris en charge</translation>
+        <translation>Operação de atualização falhou, tipo de arquivo não sustentado</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="144"/>
         <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="108"/>
         <location filename="../src/operations/updatefirmwareoperation.cpp" line="29"/>
         <source>File does not seem to be supported</source>
-        <translation>Le fichier ne semble pas être pris en charge</translation>
+        <translation>O arquivo parece não ser sustentado</translation>
     </message>
 </context>
 <context>
@@ -280,7 +280,7 @@
     <message>
         <location filename="../src/devices/huami/zepposdevice.cpp" line="423"/>
         <source>An operation is currently running, please try later</source>
-        <translation>Une opération est actuellement en cours, veuillez essayer plus tard</translation>
+        <translation>Uma operação está sendo executada, tente mais tarde</translation>
     </message>
 </context>
 </TS>

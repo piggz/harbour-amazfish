@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.1" language="pt_BR">
 <context>
     <name>AddCityPage</name>
     <message>
         <location filename="../qml/pages/AddCityPage.qml" line="8"/>
         <source>Set Location</source>
-        <translation>Définir la localisation</translation>
+        <translation>Definir Localização</translation>
     </message>
 </context>
 <context>
@@ -15,55 +15,55 @@
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <source>Enabled</source>
-        <translation>Activée</translation>
+        <translation>Habilitado</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <source>Time: %1:%2</source>
-        <translation>Heure&#xa0;: %1:%2</translation>
+        <translation>Hora: %1%2</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <source>Mon</source>
-        <translation>Lun</translation>
+        <translation>Seg</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <source>Tue</source>
-        <translation>Mar</translation>
+        <translation>Ter</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <source>Wed</source>
-        <translation>Mer</translation>
+        <translation>Qua</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <source>Thu</source>
-        <translation>Jeu</translation>
+        <translation>Qui</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <source>Fri</source>
-        <translation>Ven</translation>
+        <translation>Sex</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <source>Sat</source>
-        <translation>Sam</translation>
+        <translation>Sab</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <source>Sun</source>
-        <translation>Dim</translation>
+        <translation>Dom</translation>
     </message>
 </context>
 <context>
@@ -71,23 +71,23 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="8"/>
         <source>Analysis</source>
-        <translation>Analyse</translation>
+        <translation>Análise</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="44"/>
         <source>Heartrate</source>
-        <translation>Rythme cardiaque</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="61"/>
         <location filename="../qml/pages/AnalysisPage.qml" line="64"/>
         <source>Steps</source>
-        <translation>Pas</translation>
+        <translation>Passos</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="78"/>
         <source>Intensity</source>
-        <translation>Intensité</translation>
+        <translation>Intensidade</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../qml/pages/AuthKeyDialog.qml" line="18"/>
         <source>Enter auth key</source>
-        <translation>Entrez la clé d&apos;auth</translation>
+        <translation>Digite a senha de autenticação</translation>
     </message>
 </context>
 <context>
@@ -109,7 +109,7 @@
         <location filename="../qml/pages/BatteryPage.qml" line="9"/>
         <location filename="../qml/pages/BatteryPage.qml" line="48"/>
         <source>Battery</source>
-        <translation>Batterie</translation>
+        <translation>Bateria</translation>
     </message>
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="24"/>
@@ -122,38 +122,38 @@
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="49"/>
         <source>Send file</source>
-        <translation>Envoyer un fichier</translation>
+        <translation>Enviar arquivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="9"/>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="27"/>
         <source>None</source>
-        <translation>Aucun</translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="26"/>
         <source>Choose File</source>
-        <translation>Choisir fichier</translation>
+        <translation>Escolha o Arquivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="44"/>
         <source>File type/version: </source>
-        <translation>Type/version du fichier&#xa0;: </translation>
+        <translation>Versão/tipo do arquivo: </translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="53"/>
         <source>File not supported on this device</source>
-        <translation>Fichier non supporté sur cet appareil</translation>
+        <translation>Arquivo não sustentado nesse dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="7"/>
         <source>Install File</source>
-        <translation>Fichier d&apos;installation</translation>
+        <translation>Instalar Arquivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="22"/>
         <source>Select a file to install.</source>
-        <translation>Choisissez un fichier à installer.</translation>
+        <translation>Selecione o arquivo a instalar.</translation>
     </message>
 </context>
 <context>
@@ -161,7 +161,7 @@
     <message>
         <location filename="../src/daemoninterface.cpp" line="65"/>
         <source>Unexpected error</source>
-        <translation>Erreur inattendue</translation>
+        <translation>Erro inesperado</translation>
     </message>
 </context>
 <context>
@@ -169,155 +169,155 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="16"/>
         <source>Refresh</source>
-        <translation>Actualiser</translation>
+        <translation>Recarregar</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="36"/>
         <source>Address: </source>
-        <translation>Adresse&#xa0;: </translation>
+        <translation>Endereço: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="41"/>
         <location filename="../qml/pages/DebugInfo.qml" line="292"/>
         <source>Serial No: </source>
-        <translation>Numéro de série&#xa0;: </translation>
+        <translation>Nº Serial: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="46"/>
         <location filename="../qml/pages/DebugInfo.qml" line="295"/>
         <source>Hardware Rev: </source>
-        <translation>Révision matérielle&#xa0;: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="51"/>
         <location filename="../qml/pages/DebugInfo.qml" line="298"/>
         <source>Software Rev: </source>
-        <translation>Révision logicielle&#xa0;: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="70"/>
         <source>Connection State: </source>
-        <translation>Statut de la connexion&#xa0;: </translation>
+        <translation>Estato da Conexão: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="75"/>
         <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>GPS Ver: </source>
-        <translation>GPS Ver&#xa0;: </translation>
+        <translation>Ver. do GPS: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="195"/>
         <source>Test Notification</source>
-        <translation>Notification de test</translation>
+        <translation>Testar Notificação</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="204"/>
         <source>Test Email</source>
-        <translation>Email de test</translation>
+        <translation>Testar Email</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="213"/>
         <source>Test Call</source>
-        <translation>Appel de test</translation>
+        <translation>Testar Ligação</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="231"/>
         <source>Fetch debug log</source>
-        <translation>Récupérer le fichier de débogage</translation>
+        <translation>Resgatar log de debug</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="248"/>
         <source>Test Popup</source>
-        <translation>Popup de test</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="256"/>
-        <source>Send Weather</source>
-        <translation>Envoyer la météo</translation>
+        <translation>Testar Popup</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="8"/>
         <source>Debugging</source>
-        <translation>Débogage</translation>
+        <translation>Debugging</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="32"/>
         <source>Information</source>
-        <translation>Information</translation>
+        <translation>Informação</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="56"/>
         <location filename="../qml/pages/DebugInfo.qml" line="304"/>
         <source>Model: </source>
-        <translation>Modèle&#xa0;: </translation>
+        <translation>Model: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="61"/>
         <location filename="../qml/pages/DebugInfo.qml" line="310"/>
         <source>Firmware Rev: </source>
-        <translation>Rév. Firmware&#xa0;: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
         <location filename="../qml/pages/DebugInfo.qml" line="307"/>
         <source>Manufacturer: </source>
-        <translation>Fabriquant&#xa0;: </translation>
+        <translation>Fabricante: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="191"/>
         <source>Function Tests</source>
-        <translation>Tests fonctionnels</translation>
+        <translation>Testes de Funcionalidade</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="256"/>
+        <source>Send Weather</source>
+        <translation>Enviar Clima</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="266"/>
         <source>Update Calendar</source>
-        <translation>Mettre à jour calendrier</translation>
+        <translation>Atualizar Calendário</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="279"/>
         <source>Music Control</source>
-        <translation>Contrôle musique</translation>
+        <translation>Controle de Música</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="239"/>
         <source>Request Screenshot</source>
-        <translation>Demander capture d&apos;écran</translation>
+        <translation>Pedir Captura de Tela</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <location filename="../qml/pages/DebugInfo.qml" line="217"/>
         <source>Somebody</source>
-        <translation>Quelqu&apos;un</translation>
+        <translation>Alguém</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Title</source>
-        <translation>Titre</translation>
+        <translation>Título</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation>Bonjour de Sailfish OS. Ceci est un long message envoyé par BLE&#x202f;!</translation>
+        <translation>Olá da Sailfish OS. Esta é uma mensagem longa enviada por BLE!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Donald Duck</source>
-        <translation>Donald Duck</translation>
+        <translation>Pato Donald</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation>Hello, ceci est un email envoyé depuis Sailfish OS&#x202f;!</translation>
+        <translation>Olá, este é um email da Sailfish OS!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="222"/>
         <source>Test Immediate Alert Service</source>
-        <translation>Tester service d’alerte immédiate</translation>
+        <translation>Testar Serviço de Alerta Imediato</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="252"/>
         <source>This is a test notification</source>
-        <translation>Ceci est une notification de test</translation>
+        <translation>Esta é uma notificação de test</translation>
     </message>
 </context>
 <context>
@@ -326,7 +326,7 @@
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
         <source>Download Data</source>
-        <translation>Télécharger données</translation>
+        <translation>Baixar Dados</translation>
     </message>
 </context>
 <context>
@@ -334,42 +334,42 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="27"/>
         <source>Pair with watch</source>
-        <translation>Appairer avec la montre</translation>
+        <translation>Parear com relógio</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="43"/>
         <source>Settings</source>
-        <translation>Paramètres</translation>
+        <translation>Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="53"/>
         <source>Disconnect from watch</source>
-        <translation>Déconnexion de la montre</translation>
+        <translation>Desconectar do relógio</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="53"/>
         <source>Connect to watch</source>
-        <translation>Connexion à la montre</translation>
+        <translation>Conectar ao relógio</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="47"/>
         <source>Data Graphs</source>
-        <translation>Graphes de données</translation>
+        <translation>Gráfico de Dados</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="155"/>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="160"/>
         <source>Steps</source>
-        <translation>Pas</translation>
+        <translation>Passos</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="228"/>
         <source>Heartrate</source>
-        <translation type="unfinished">Rythme cardiaque</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="254"/>
@@ -379,17 +379,17 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="273"/>
         <source>Service</source>
-        <translation>Service</translation>
+        <translation>Serviço</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="279"/>
         <source>Enable on boot</source>
-        <translation>Activer au démarrage</translation>
+        <translation>Habilitar na inicialização</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="39"/>
         <source>Install File</source>
-        <translation>Fichier d&apos;installation</translation>
+        <translation>Instalar Arquivo</translation>
     </message>
 </context>
 <context>
@@ -398,7 +398,7 @@
         <location filename="../qml/components/GraphData.qml" line="308"/>
         <location filename="../qml/components/GraphData.qml" line="308"/>
         <source>No data</source>
-        <translation>Aucune donnée</translation>
+        <translation>Sem dados</translation>
     </message>
 </context>
 <context>
@@ -406,7 +406,7 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="9"/>
         <source>Heartrate</source>
-        <translation type="unfinished">Rythme cardiaque</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="40"/>
@@ -422,32 +422,32 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="97"/>
         <source>Relaxed</source>
-        <translation>Détendu</translation>
+        <translation>Relaxado</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="106"/>
         <source>Light</source>
-        <translation>Léger</translation>
+        <translation>Leve</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="115"/>
         <source>Intensive</source>
-        <translation>Intensif</translation>
+        <translation>Intenso</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="124"/>
         <source>Aerobic</source>
-        <translation>Aérobic</translation>
+        <translation>Aeróbico</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="133"/>
         <source>Anerobic</source>
-        <translation>Anaérobie</translation>
+        <translation>Anaeróbico</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="142"/>
         <source>VO2 Max</source>
-        <translation>VO2 max</translation>
+        <translation>VO2 Máx</translation>
     </message>
 </context>
 <context>
@@ -456,7 +456,7 @@
         <location filename="../qml/tools/JSTools.js" line="87"/>
         <location filename="../qml/tools/JSTools.js" line="301"/>
         <source>Empty</source>
-        <translation>Vide</translation>
+        <translation>Vazio</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="88"/>
@@ -464,7 +464,7 @@
         <location filename="../qml/tools/JSTools.js" line="302"/>
         <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Heartrate</source>
-        <translation type="unfinished">Rythme cardiaque</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="90"/>
@@ -472,7 +472,7 @@
         <location filename="../qml/tools/JSTools.js" line="304"/>
         <location filename="../qml/tools/JSTools.js" line="305"/>
         <source>Pace</source>
-        <translation>Rythme</translation>
+        <translation>Ritmo</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="92"/>
@@ -480,7 +480,7 @@
         <location filename="../qml/tools/JSTools.js" line="306"/>
         <location filename="../qml/tools/JSTools.js" line="307"/>
         <source>Speed</source>
-        <translation>Vitesse</translation>
+        <translation>Velocidade</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="94"/>
@@ -492,18 +492,18 @@
         <location filename="../qml/tools/JSTools.js" line="95"/>
         <location filename="../qml/tools/JSTools.js" line="309"/>
         <source>Distance</source>
-        <translation>Distance</translation>
+        <translation>Distância</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="96"/>
         <source>Pause</source>
-        <translation>Pause</translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="97"/>
         <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
-        <translation>Durée</translation>
+        <translation>Duração</translation>
     </message>
 </context>
 <context>
@@ -511,42 +511,42 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation type="unfinished">Appairer un appareil</translation>
+        <translation>Parear Dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation type="unfinished">Aucun appareil trouvé</translation>
+        <translation>Nenhum dispositivo encontrado</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
         <source>Bluetooth adapter is not available</source>
-        <translation>Adaptateur Bluetooth non disponible</translation>
+        <translation>Adaptador bluetooth indisponível</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="210"/>
         <source>Select device type</source>
-        <translation>Sélection type d’appareil</translation>
+        <translation>Selecione o tipo de dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="231"/>
         <source>Stop scanning</source>
-        <translation type="unfinished">Arrêter la recherche</translation>
+        <translation>Parar procura</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Scan for devices</source>
-        <translation type="unfinished">Rechercher des appareils</translation>
+        <translation>Procurar dispositivos</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="246"/>
         <source>Scanning for devices…</source>
-        <translation type="unfinished">Recherche d&apos;appareils…</translation>
+        <translation>Procurando dispositivos…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="248"/>
         <source>Pairing…</source>
-        <translation type="unfinished">Apairage…</translation>
+        <translation>Pareando…</translation>
     </message>
 </context>
 <context>
@@ -554,17 +554,17 @@
     <message>
         <location filename="../src/timeformatter.cpp" line="33"/>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1s</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="35"/>
         <source>%1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1m %2s</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="39"/>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1h %2m %3s</translation>
     </message>
 </context>
 <context>
@@ -577,7 +577,7 @@
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="57"/>
         <source>Save Settings</source>
-        <translation>Sauvegarder les paramètres</translation>
+        <translation>Salvar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="19"/>
@@ -610,102 +610,102 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="102"/>
         <source>Notify on connect</source>
-        <translation>Notification lors de la connexion</translation>
+        <translation>Notificar ao conectar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="238"/>
         <source>Save Settings</source>
-        <translation>Sauvegarder les paramètres</translation>
+        <translation>Salvar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="144"/>
         <source>Sync activity data each hour</source>
-        <translation>Synchroniser les données d&apos;activité toutes les heures</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-app.qml" line="110"/>
-        <source>Low battery notification</source>
-        <translation>Notification de batterie faible</translation>
+        <translation>Sincronizar atividade a cada hora</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="8"/>
         <source>Application Settings</source>
-        <translation>Paramètres d&apos;application</translation>
+        <translation>Configurações do Aplicativo</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="28"/>
         <source>BT Adapter</source>
-        <translation>Adaptateur BT</translation>
+        <translation>Adaptador BT</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="86"/>
         <source>Notifications</source>
-        <translation>Notifications</translation>
+        <translation>Notificações</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="110"/>
+        <source>Low battery notification</source>
+        <translation>Notificação de pouca bateria</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="118"/>
         <source>Navigation notifications</source>
-        <translation>Notifications de navigation</translation>
+        <translation>Notificações de navegação</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="134"/>
         <source>Simulate event reminder support</source>
-        <translation>Simuler support de rappel d’événement</translation>
+        <translation type="unfinished">Simular suporte ao lembrete de eventos</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="138"/>
         <source>Refresh rates</source>
-        <translation>Taux rafraîchissement</translation>
+        <translation>Taxa de atualização</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="155"/>
         <source>Refresh weather every (%1) minutes</source>
-        <translation>Rafraîchir météo après (%1) minutes</translation>
+        <translation>Atualizar clima a cada (%1) minutos</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Refresh calendar every (%1) minutes</source>
-        <translation>Actualiser calendrier après (%1) minutes</translation>
+        <translation>Atualizar calendário a cada (%1) minutos</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="169"/>
         <source>Amazfish Service</source>
-        <translation>Service Amazfish</translation>
+        <translation>Serviço Amazfish</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="176"/>
         <source>Start service on boot</source>
-        <translation>Démarrer le service au démarrage</translation>
+        <translation>Iniciar serviço na inicialização</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="190"/>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation>Démarrer/Arrêter le service Amazfish en tâche de fond</translation>
+        <translation>Inicia/Para o Serviço de Fundo Amazfish</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="207"/>
         <source>Start</source>
-        <translation>Démarrer</translation>
+        <translation>Iniciar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="216"/>
         <source>Stop</source>
-        <translation>Arrêter</translation>
+        <translation>Parar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="226"/>
         <source>Button Actions</source>
-        <translation>Actions bouton</translation>
+        <translation>Ações com Botão</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Transliterate notifications</source>
-        <translation>Translittérer notifications</translation>
+        <translation>Transliterar notificações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="94"/>
         <source>Set silent profile on connect</source>
-        <translation>Définir profil silencieux sur connexion</translation>
+        <translation>Definir perfil silencioso ao conectar</translation>
     </message>
 </context>
 <context>
@@ -713,57 +713,57 @@
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="10"/>
         <source>Button Actions</source>
-        <translation>Actions bouton</translation>
+        <translation>Ações com Botão</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="27"/>
         <source>Double Press Action</source>
-        <translation>Action double pression</translation>
+        <translation>Ação de Dois Cliques</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="37"/>
         <source>Triple Press Action</source>
-        <translation>Action triple pression</translation>
+        <translation>Ação de Três Cliques</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="47"/>
         <source>Quad Press Action</source>
-        <translation>Action quad pression</translation>
+        <translation>Ação de Quatro Cliques</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="56"/>
         <source>Save Settings</source>
-        <translation>Sauvegarder paramètres</translation>
+        <translation>Salvar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="79"/>
         <source>No Action</source>
-        <translation>Pas d&apos;action</translation>
+        <translation>Nenhuma Ação</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="80"/>
         <source>Next Track</source>
-        <translation>Morceau suivant</translation>
+        <translation>Próxima Faixa</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="81"/>
         <source>Previous Track</source>
-        <translation>Morceau précédent</translation>
+        <translation>Faixa Anterior</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="82"/>
         <source>Volume Up</source>
-        <translation>Volume haut</translation>
+        <translation>Aumentar o Volume</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="83"/>
         <source>Volume Down</source>
-        <translation>Volume bas</translation>
+        <translation>Diminuir o Volume</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="84"/>
         <source>Custom Script</source>
-        <translation>Script perso</translation>
+        <translation>Script Customizado</translation>
     </message>
 </context>
 <context>
@@ -771,7 +771,7 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="8"/>
         <source>Device Settings</source>
-        <translation>Paramètres de l&apos;appareil</translation>
+        <translation>Configurações do Dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="24"/>
@@ -794,59 +794,54 @@
         <translation>zh_TW</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-device.qml" line="31"/>
-        <source>fr_FR</source>
-        <translation>fr_FR</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/Settings-device.qml" line="43"/>
         <source>Date Display</source>
-        <translation>Affichage de la date</translation>
+        <translation>Exibição de Data</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="46"/>
         <source>Time</source>
-        <translation>Heure</translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="47"/>
         <source>Date/Time</source>
-        <translation>Date/Heure</translation>
+        <translation>Data/Hora</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="57"/>
         <source>Time Format</source>
-        <translation>Format de l&apos;heure</translation>
+        <translation>Formato de Hora</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="61"/>
         <source>12hr</source>
-        <translation>12 heures</translation>
+        <translation>12hr</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="60"/>
         <source>24hr</source>
-        <translation>24 heures</translation>
+        <translation>24hr</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="115"/>
         <source>Save Settings</source>
-        <translation>Sauvegarder les paramètres</translation>
+        <translation>Salvar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="71"/>
         <source>Distance Unit</source>
-        <translation>Unité de distance</translation>
+        <translation>Unidade de Distância</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="74"/>
         <source>Metric</source>
-        <translation>Métrique</translation>
+        <translation>Métrica</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="75"/>
         <source>Imperial</source>
-        <translation>Impérial</translation>
+        <translation>Imperial</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="28"/>
@@ -856,7 +851,7 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="20"/>
         <source>Language</source>
-        <translation>Langue</translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="29"/>
@@ -869,14 +864,14 @@
         <translation>it_IT</translation>
     </message>
     <message>
+        <location filename="../qml/pages/Settings-device.qml" line="31"/>
+        <source>fr_FR</source>
+        <translation>fr_FR</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/Settings-device.qml" line="32"/>
         <source>tr_TR</source>
         <translation>tr_TR</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-device.qml" line="86"/>
-        <source>Disconnect Notification</source>
-        <translation>Notification de déconnexion</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="33"/>
@@ -884,14 +879,19 @@
         <translation>nl_NL</translation>
     </message>
     <message>
+        <location filename="../qml/pages/Settings-device.qml" line="86"/>
+        <source>Disconnect Notification</source>
+        <translation>Notificação ao Desconectar</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/Settings-device.qml" line="104"/>
         <source>Huami Display Items</source>
-        <translation>Éléments affichage Huami</translation>
+        <translation>Items de Exibição Huami</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="96"/>
         <source>Realtime HRM measurement</source>
-        <translation>Mesure CFM en temps réel</translation>
+        <translation>Medida de HRM em tempo real</translation>
     </message>
 </context>
 <context>
@@ -899,47 +899,47 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="10"/>
         <source>Huami Display Items</source>
-        <translation>Éléments affichage Huami</translation>
+        <translation>Itens de Exibição Huami</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="16"/>
         <source>Save Settings</source>
-        <translation>Sauvegarder paramètres</translation>
+        <translation>Salvar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="69"/>
         <source>Status</source>
-        <translation>Statut</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="70"/>
         <source>Heartrate</source>
-        <translation type="unfinished">Rythme cardiaque</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="71"/>
         <source>Workout</source>
-        <translation>Exercice</translation>
+        <translation>Exercício</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="72"/>
         <source>Weather</source>
-        <translation type="unfinished">Météo</translation>
+        <translation>Clima</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="73"/>
         <source>Notifications</source>
-        <translation>Notifications</translation>
+        <translation>Notificações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="74"/>
         <source>More</source>
-        <translation>Plus</translation>
+        <translation>Mais</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="75"/>
         <source>Do Not Disturb</source>
-        <translation>Ne Pas Déranger</translation>
+        <translation>Não Perturbe</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="76"/>
@@ -949,47 +949,47 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="78"/>
         <source>Music</source>
-        <translation>Musique</translation>
+        <translation>Música</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="82"/>
         <source>Mute Phone</source>
-        <translation>Téléphone muet</translation>
+        <translation>Silenciar Celular</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="86"/>
         <source>Settings</source>
-        <translation>Paramètres</translation>
+        <translation>Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="87"/>
         <source>Activity</source>
-        <translation>Activité</translation>
+        <translation>Atividade</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="88"/>
         <source>Event Reminder</source>
-        <translation>Rappel d&apos;événement</translation>
+        <translation>Lembrete de Evento</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="90"/>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>IPA</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="91"/>
         <source>World Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Relógio Mundial</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="93"/>
         <source>Stress</source>
-        <translation>Stress</translation>
+        <translation>Estresse</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="94"/>
         <source>Period</source>
-        <translation>Période</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="105"/>
@@ -999,7 +999,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="89"/>
         <source>Compass</source>
-        <translation>Boussole</translation>
+        <translation>Bússola</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="84"/>
@@ -1009,82 +1009,82 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="80"/>
         <source>Timer</source>
-        <translation type="unfinished">Minuteur</translation>
+        <translation>Temporizador</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="77"/>
         <source>Take Photo</source>
-        <translation>Prendre photo</translation>
+        <translation>Tirar Foto</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="79"/>
         <source>Stopwatch</source>
-        <translation>Chronomètre</translation>
+        <translation>Cronômetro</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="81"/>
         <source>Find Phone</source>
-        <translation>Trouver téléphone</translation>
+        <translation>Encontrar Celular</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="83"/>
         <source>NFC</source>
-        <translation type="unfinished"></translation>
+        <translation>NFC</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="85"/>
         <source>Watch Face</source>
-        <translation>Cadran de montre</translation>
+        <translation>Aparência do Relógio</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="92"/>
         <source>Timer/Stopwatch</source>
-        <translation>Minuteur/Chronomètre</translation>
+        <translation>Temporizador/Cronômetro</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="95"/>
         <source>Goal</source>
-        <translation>Objectif</translation>
+        <translation>Meta</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="96"/>
         <source>Sleep</source>
-        <translation type="unfinished">Sommeil</translation>
+        <translation>Sono</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="97"/>
         <source>SpO2</source>
-        <translation>SpO2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="98"/>
         <source>Events</source>
-        <translation>Événements</translation>
+        <translation>Eventos</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="99"/>
         <source>Widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Widgets</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="100"/>
         <source>Breathing</source>
-        <translation>Respiration</translation>
+        <translation>Respiração</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="101"/>
         <source>Steps</source>
-        <translation type="unfinished">Pas</translation>
+        <translation>Passos</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="102"/>
         <source>Distance</source>
-        <translation>Distance</translation>
+        <translation>Distância</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="103"/>
         <source>Calories</source>
-        <translation>Calories</translation>
+        <translation>Calorias</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="104"/>
@@ -1094,22 +1094,22 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="106"/>
         <source>Battery</source>
-        <translation>Batterie</translation>
+        <translation>Bateria</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="107"/>
         <source>Temperature</source>
-        <translation>Température</translation>
+        <translation>Temperatura</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="108"/>
         <source>Barometer</source>
-        <translation>Baromètre</translation>
+        <translation>Barômetro</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="109"/>
         <source>Flashlight</source>
-        <translation>Lampe de poche</translation>
+        <translation>Lanterna</translation>
     </message>
 </context>
 <context>
@@ -1117,22 +1117,22 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="8"/>
         <source>Settings Menu</source>
-        <translation>Menu de paramètres</translation>
+        <translation>Menu de Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="64"/>
         <source>User Settings</source>
-        <translation>Paramètres utilisateur</translation>
+        <translation>Configurações do Usuário</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="65"/>
         <source>Device Settings</source>
-        <translation>Paramètres de l&apos;appareil</translation>
+        <translation>Configurações do Dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="66"/>
         <source>Application Settings</source>
-        <translation>Paramètres de l&apos;application</translation>
+        <translation>Configurações de Aplicativo</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="46"/>
@@ -1144,147 +1144,143 @@
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
         <location filename="../qml/pages/Settings-menu.qml" line="71"/>
         <source>Donate</source>
-        <translation>Faire un don</translation>
+        <translation>Doar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="33"/>
         <location filename="../qml/pages/Settings-menu.qml" line="49"/>
         <location filename="../qml/pages/Settings-menu.qml" line="68"/>
         <source>Weather</source>
-        <translation>Météo</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="70"/>
-        <source>Debug Info</source>
-        <translation>Information de débogage</translation>
+        <translation>Clima</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="69"/>
         <source>Strava</source>
         <translation>Strava</translation>
     </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="70"/>
+        <source>Debug Info</source>
+        <translation>Informações de Debug</translation>
+    </message>
 </context>
 <context>
     <name>Settings-user</name>
     <message>
-        <source>Profile Settings</source>
-        <translation type="vanished">Paramètres du profil</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/Settings-user.qml" line="27"/>
         <location filename="../qml/pages/Settings-user.qml" line="28"/>
         <source>Name:</source>
-        <translation>Nom:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="35"/>
         <source>Birthday</source>
-        <translation>Date de naissance</translation>
+        <translation>Aniversário</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="63"/>
         <source>Gender</source>
-        <translation>Sexe</translation>
+        <translation>Gênero</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="66"/>
         <source>Male</source>
-        <translation>Homme</translation>
+        <translation>Masculino</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="67"/>
         <source>Female</source>
-        <translation>Femme</translation>
+        <translation>Feminino</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="76"/>
         <source>Height (cm): </source>
-        <translation>Taille (cm)&#xa0;: </translation>
+        <translation>Altura (cm): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="84"/>
         <source>Weight (kg): </source>
-        <translation>Poids (kg)&#xa0;: </translation>
+        <translation>Peso (kg): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="94"/>
         <source>Wear Location</source>
-        <translation>Poignet où la montre est portée</translation>
+        <translation>Local de Uso</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="97"/>
         <source>Left</source>
-        <translation>Gauche</translation>
+        <translation>Esquerda</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="98"/>
         <source>Right</source>
-        <translation>Droit</translation>
+        <translation>Direita</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="113"/>
         <source>Display on lift wrist</source>
-        <translation>Activer l&apos;affichage quand le poignet est levé</translation>
+        <translation>Exibir ao levantar pulso</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="177"/>
         <source>Goal (steps): </source>
-        <translation>Objectif (pas)&#xa0;: </translation>
+        <translation>Meta (passos): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="184"/>
         <source>Alert on fitness goal</source>
-        <translation>Alerte lorsque la cible est atteinte</translation>
+        <translation>Alerta de meta de exercícios</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="194"/>
         <source>Use HRM for Sleep Detection</source>
-        <translation>Utiliser le capteur cardiaque pour la détection de sommeil</translation>
+        <translation>Usar HRM para Detecção de Sono</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="204"/>
         <source>All day HRM interval (minutes): </source>
-        <translation>Capteur cardiaque en continu (Intervale en minutes, 0 signifie désactivé):</translation>
+        <translation>Intervalo de HRM do dia todo (minutos): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="209"/>
         <source>Save Profile</source>
-        <translation>Sauvegarder profil</translation>
+        <translation>Salvar Perfil</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="22"/>
         <source>Personal data</source>
-        <translation>Données personnelles</translation>
+        <translation>Dados pessoais</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="8"/>
         <source>User Settings</source>
-        <translation type="unfinished">Paramètres utilisateur</translation>
+        <translation>Configurações de Usuário</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="88"/>
         <source>Personal preferences</source>
-        <translation>Préférences personnelles</translation>
+        <translation>Preferências pessoais</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="188"/>
         <source>Heartrate usage</source>
-        <translation>Utilisation débit cardiaque</translation>
+        <translation>Utilização de batimento cardíaco</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="116"/>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligado</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="117"/>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligado</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="118"/>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>Agendar</translation>
     </message>
 </context>
 <context>
@@ -1292,23 +1288,23 @@
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="70"/>
         <source>Sleep Summary</source>
-        <translation>Résumé de sommeil</translation>
+        <translation>Resumo de Sono</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="9"/>
         <source>Sleep</source>
-        <translation>Sommeil</translation>
+        <translation>Sono</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="74"/>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation>MM/jj</translation>
+        <translation>MM/dd</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="75"/>
         <source>Hours</source>
-        <translation>Heures</translation>
+        <translation>Horas</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="29"/>
@@ -1318,12 +1314,12 @@
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="38"/>
         <source>Light %1</source>
-        <translation>Léger %1</translation>
+        <translation>Leve %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="47"/>
         <source>Deep %1</source>
-        <translation>Profond %1</translation>
+        <translation>Profundo %1</translation>
     </message>
 </context>
 <context>
@@ -1331,69 +1327,65 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="434"/>
         <source>Send to Strava</source>
-        <translation>Envoyer au Strava</translation>
+        <translation>Enviar para Strava</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="244"/>
         <source>Data:</source>
-        <translation>Données&#xa0;:</translation>
+        <translation>Dados:</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="135"/>
         <source>Steps</source>
-        <translation>Pas</translation>
-    </message>
-    <message>
-        <source>Active Seconds</source>
-        <translation type="vanished">Secondes actives</translation>
+        <translation>Passos</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="108"/>
         <location filename="../qml/pages/SportPage.qml" line="109"/>
         <source>Calories</source>
-        <translation>Calories</translation>
+        <translation>Calorias</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="113"/>
         <source>Distance</source>
-        <translation>Distance</translation>
+        <translation>Distância</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="97"/>
         <source>Ascent</source>
-        <translation>Montée</translation>
+        <translation>Subida</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="86"/>
         <source>%1°; %2°</source>
-        <translation type="unfinished"></translation>
+        <translation>%1°; %2°</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°; %3m</source>
-        <translation type="unfinished"></translation>
+        <translation>%1°; %2°; %3m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="94"/>
         <source>Active Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo de Atividade</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="95"/>
         <source>Aerobic Training Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Efeito do Treinamento Aeróbico</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="96"/>
         <source>Anaerobic Training Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Efeito do Treinamento Anaeróbico</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="99"/>
         <location filename="../qml/pages/SportPage.qml" line="100"/>
         <location filename="../qml/pages/SportPage.qml" line="107"/>
         <source>Average Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Frequência Cardíaca Média</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="104"/>
@@ -1409,17 +1401,17 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="106"/>
         <source>Average Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitude Média</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="110"/>
         <source>Current Workout Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Carga de Exercício Atual</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="111"/>
         <source>Descent</source>
-        <translation>Descente</translation>
+        <translation>Descida</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="114"/>
@@ -1429,12 +1421,12 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="115"/>
         <source>Elevation Gain</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganho de Elevação</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="116"/>
         <source>Elevation Loss</source>
-        <translation type="unfinished"></translation>
+        <translation>Perda de Elevação</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="117"/>
@@ -1444,7 +1436,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="119"/>
         <source>Max Altitude</source>
-        <translation>Altitude Max</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="120"/>
@@ -1460,7 +1452,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="127"/>
         <source>Min Altitude</source>
-        <translation>Altitude Min</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="128"/>
@@ -1485,12 +1477,12 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="231"/>
         <source>Duration: %1</source>
-        <translation>Durée&#xa0;: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="237"/>
         <source>Location: %1</source>
-        <translation>Emplacement&#xa0;: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="125"/>
@@ -1507,17 +1499,17 @@
         <location filename="../qml/pages/SportPage.qml" line="103"/>
         <location filename="../qml/pages/SportPage.qml" line="137"/>
         <source>Average Stride</source>
-        <translation>Foulée moyenne</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="98"/>
         <source>Time Ascending</source>
-        <translation>Temps croissant</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="112"/>
         <source>Time Descending</source>
-        <translation>Temps décroissant</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="102"/>
@@ -1532,17 +1524,17 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="134"/>
         <source>Pause Duration</source>
-        <translation>Durée pause</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="136"/>
         <source>Average Cadence</source>
-        <translation>Cadence moyenne</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="138"/>
         <source>Max Cadence</source>
-        <translation>Cadence max</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="139"/>
@@ -1577,57 +1569,57 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="147"/>
         <source>SWOLF Index</source>
-        <translation>Indice SWOLF</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="146"/>
         <source>Swim Style</source>
-        <translation>Style de nage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="118"/>
         <source>Laps</source>
-        <translation>Tours</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="123"/>
         <source>Max Latitude</source>
-        <translation>Latitude Max</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="129"/>
         <source>Min Latitude</source>
-        <translation>Latitude Min</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="124"/>
         <source>Max Longitude</source>
-        <translation>Longitude Max</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="130"/>
         <source>Min Longitude</source>
-        <translation>Longitude Min</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="126"/>
         <source>Max Speed</source>
-        <translation>Vitesse Max</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="148"/>
         <source>Total Climbing</source>
-        <translation>Escalade totale</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="149"/>
         <source>Total Duration</source>
-        <translation>Durée totale</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="150"/>
         <source>Total Stride</source>
-        <translation>Foulée totale</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="151"/>
@@ -1637,7 +1629,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="152"/>
         <source>Workout Duration</source>
-        <translation>Durée d&apos;entraînement</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="166"/>
@@ -1688,39 +1680,23 @@
         <location filename="../qml/pages/SportPage.qml" line="175"/>
         <location filename="../qml/pages/SportPage.qml" line="177"/>
         <source>steps</source>
-        <translation>pas</translation>
-    </message>
-    <message>
-        <source>seconds</source>
-        <translation type="vanished">secondes</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="163"/>
         <location filename="../qml/pages/SportPage.qml" line="164"/>
         <source>kcal</source>
-        <translation>kcal</translation>
-    </message>
-    <message>
-        <source>meters</source>
-        <translation type="vanished">mètres</translation>
-    </message>
-    <message>
-        <source>seconds/m</source>
-        <translation type="vanished">secondes/m</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="162"/>
         <source>bpm</source>
-        <translation>bpm</translation>
-    </message>
-    <message>
-        <source>seconds/km</source>
-        <translation type="vanished">secondes/km</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="165"/>
         <source>cm</source>
-        <translation>cm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="176"/>
@@ -1743,57 +1719,57 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="18"/>
         <source>Unknown</source>
-        <translation>Inconnu(e)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Activity</source>
-        <translation type="unfinished">Activité</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="20"/>
         <source>Light Sleep</source>
-        <translation>Sommeil léger</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="21"/>
         <source>Deep Sleep</source>
-        <translation>Sommeil profond</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="22"/>
         <source>Not Worn</source>
-        <translation>Non porté</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="23"/>
         <source>Running</source>
-        <translation>Course</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="24"/>
         <source>Walking</source>
-        <translation>Marche</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="25"/>
         <source>Swimming</source>
-        <translation>Nage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="26"/>
         <source>Cycling</source>
-        <translation>Cyclisme</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="27"/>
         <source>Treadmill</source>
-        <translation>Tapis de course</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="28"/>
         <source>Exercise</source>
-        <translation>Exercice</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="29"/>
@@ -1803,32 +1779,32 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="30"/>
         <source>Indoor Cycling</source>
-        <translation>Cyclisme d&apos;intérieur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="31"/>
         <source>Elliptical Trainer</source>
-        <translation>Vélo elliptique</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="32"/>
         <source>Jump Rope</source>
-        <translation>Corde à sauter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="33"/>
         <source>Yoga</source>
-        <translation>Yoga</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="34"/>
         <source>Soccer</source>
-        <translation>Football</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="35"/>
         <source>Rowing Machine</source>
-        <translation>Rameur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="36"/>
@@ -1838,37 +1814,37 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="37"/>
         <source>Basketball</source>
-        <translation>Basket-ball</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="38"/>
         <source>Ping Pong</source>
-        <translation>Ping pong</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="39"/>
         <source>Badmington</source>
-        <translation>Badmington</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="40"/>
         <source>Strength Training</source>
-        <translation>Musculation</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
         <source>Hiking</source>
-        <translation>Randonnée</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="42"/>
         <source>Climbing</source>
-        <translation>Escalade</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="43"/>
         <source>REM Sleep</source>
-        <translation>Sommeil paradoxal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="44"/>
@@ -1928,17 +1904,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="55"/>
         <source>Pilates</source>
-        <translation>Pilates</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="56"/>
         <source>Pool Swim</source>
-        <translation>Natation en piscine</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="57"/>
         <source>Tennis</source>
-        <translation>Tennis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="58"/>
@@ -1953,7 +1929,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="60"/>
         <source>American Football</source>
-        <translation>Football américain</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="61"/>
@@ -1963,17 +1939,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="62"/>
         <source>Cardio</source>
-        <translation>Cardio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="63"/>
         <source>Breathwork</source>
-        <translation>Respiration consciente</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="64"/>
         <source>Indoor Walking</source>
-        <translation>Marche en salle</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="65"/>
@@ -1983,7 +1959,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="66"/>
         <source>Skiing</source>
-        <translation>Skier</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="67"/>
@@ -1993,7 +1969,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="68"/>
         <source>Rowing</source>
-        <translation>Aviron</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="69"/>
@@ -2028,7 +2004,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="75"/>
         <source>Driving</source>
-        <translation>Conduite</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="76"/>
@@ -2043,12 +2019,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="78"/>
         <source>Hunting</source>
-        <translation>Chasse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="79"/>
         <source>Fishing</source>
-        <translation>Pêche</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="80"/>
@@ -2058,12 +2034,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="81"/>
         <source>Rock Climbing</source>
-        <translation>Escalade</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="82"/>
         <source>Climb Indoor</source>
-        <translation>Escalade en intérieur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="83"/>
@@ -2073,7 +2049,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="84"/>
         <source>Sail Race</source>
-        <translation>Course à la voile</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="85"/>
@@ -2083,7 +2059,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="86"/>
         <source>Ice Skating</source>
-        <translation>Patinage sur glace</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="87"/>
@@ -3153,17 +3129,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="307"/>
         <source>Sports Activities</source>
-        <translation>Activités sportives</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="333"/>
         <source>Download Next Activity</source>
-        <translation>Télécharger activité suivante</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="457"/>
         <source>Remove</source>
-        <translation>Retirer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3173,7 +3149,7 @@
         <location filename="../qml/pages/StepsPage.qml" line="51"/>
         <location filename="../qml/pages/StepsPage.qml" line="55"/>
         <source>Steps</source>
-        <translation>Pas</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3181,33 +3157,33 @@
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="25"/>
         <source>Strava settings</source>
-        <translation>Paramètres Strava</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="36"/>
         <source>Logout</source>
-        <translation>Déconnexion</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="36"/>
         <source>Login</source>
-        <translation>Connexion</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="89"/>
         <source>User Name: </source>
-        <translation>Nom d&apos;usager&#xa0;: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="95"/>
         <source>Country: </source>
-        <translation>Pays&#xa0;: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="70"/>
         <source>not logged in</source>
-        <translation>déconnecté</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3215,37 +3191,37 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="26"/>
         <source>Strava Upload</source>
-        <translation>Téléversement Strava</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="43"/>
         <source>Activity name for Strava</source>
-        <translation>Nom d’activité pour Strava</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="44"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="48"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="55"/>
         <source>Activity description for Strava</source>
-        <translation>Description d&apos;activité pour Strava</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="63"/>
         <source>Type (Strava)</source>
-        <translation>Type (Strava)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="68"/>
         <source>Private</source>
-        <translation>Privé</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="72"/>
@@ -3255,32 +3231,32 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="76"/>
         <source>Upload</source>
-        <translation>Téléversement</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="133"/>
         <source>Uploading data...</source>
-        <translation>Téléversement données&#xa0;…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="150"/>
         <source>Checking upload...</source>
-        <translation>Vérifier téléversement&#xa0;…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="213"/>
         <source>TCX uploaded...</source>
-        <translation>TCX téléversé&#xa0;…</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="248"/>
         <source>Activity upload complete</source>
-        <translation>Téléchargement d’activité terminé</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
         <source>An unknown error occurred</source>
-        <translation>Une erreur inconnue s’est produite</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

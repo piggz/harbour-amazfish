@@ -21,7 +21,7 @@
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <source>Time: %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tid: %1:%2</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="92"/>
@@ -92,7 +92,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="248"/>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Test-popup</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="8"/>
@@ -261,7 +261,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="191"/>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Funksjonstest</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="256"/>
@@ -312,7 +312,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="222"/>
         <source>Test Immediate Alert Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Test umiddelbar varslingstjeneste</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="252"/>
@@ -374,7 +374,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="254"/>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="273"/>
@@ -411,13 +411,13 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="40"/>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="75"/>
         <location filename="../qml/pages/HeartratePage.qml" line="78"/>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="97"/>
@@ -447,7 +447,7 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="142"/>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation>VO2 Max</translation>
     </message>
 </context>
 <context>
@@ -554,7 +554,7 @@
     <message>
         <location filename="../src/timeformatter.cpp" line="33"/>
         <source>%1s</source>
-        <translation type="unfinished">%1% {1s?}</translation>
+        <translation>%1s</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="35"/>
@@ -572,7 +572,7 @@
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="8"/>
         <source>Alarms</source>
-        <translation type="unfinished">Alarmer</translation>
+        <translation>Alarmer</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="57"/>
@@ -620,7 +620,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="144"/>
         <source>Sync activity data each hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Synk aktivitetsdata hver time</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="8"/>
@@ -630,7 +630,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="28"/>
         <source>BT Adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>BT-adapter</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="86"/>
@@ -640,47 +640,47 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="110"/>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Lavt batteri-varsel</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="118"/>
         <source>Navigation notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigasjonsvarsler</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="134"/>
         <source>Simulate event reminder support</source>
-        <translation type="unfinished"></translation>
+        <translation>Simuler støtte for hendelsespåminnelser</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="138"/>
         <source>Refresh rates</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdateringsfrekvens</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="155"/>
         <source>Refresh weather every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater været hvert (%1). minutt</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Refresh calendar every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater kalenderen hvert (%1). minutt</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="169"/>
         <source>Amazfish Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfish tjeneste</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="176"/>
         <source>Start service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Start tjenesten ved oppstart</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="190"/>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Start/stopp Amazfish-bakgrunnstjenesten</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="207"/>
@@ -2677,147 +2677,147 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="204"/>
         <source>Sepak Takraw</source>
-        <translation type="unfinished"></translation>
+        <translation>Sepak Takraw</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="205"/>
         <source>Sailing</source>
-        <translation type="unfinished"></translation>
+        <translation>Seiling</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="206"/>
         <source>Jet Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>Jetski</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="207"/>
         <source>Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Skøyter</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="208"/>
         <source>Ice Hockey</source>
-        <translation type="unfinished"></translation>
+        <translation>Ishockey</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="209"/>
         <source>Curling</source>
-        <translation type="unfinished"></translation>
+        <translation>Curling</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="210"/>
         <source>Cross Country Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>Langrenn</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="211"/>
         <source>Snow Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Vintersport</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="212"/>
         <source>Luge</source>
-        <translation type="unfinished"></translation>
+        <translation>Aking</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="213"/>
         <source>Skateboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Skateboarding</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="214"/>
         <source>Parachuting</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallskjermhopping</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="215"/>
         <source>Parkour</source>
-        <translation type="unfinished"></translation>
+        <translation>Parkour</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="216"/>
         <source>Indoor Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Innendørsløping</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="217"/>
         <source>Outdoor Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Utendørsløping</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="218"/>
         <source>Outdoor Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>Utendørs gang</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="219"/>
         <source>Outdoor Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Sykling</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="220"/>
         <source>Aerobic Combo</source>
-        <translation type="unfinished"></translation>
+        <translation>Aerobic Combo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="221"/>
         <source>Aerobics</source>
-        <translation type="unfinished"></translation>
+        <translation>Aerobics</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="222"/>
         <source>Air Walker</source>
-        <translation type="unfinished"></translation>
+        <translation>Gåmaskin / Crosstrainer</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="223"/>
         <source>Artistic Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Synkronsvømming</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="224"/>
         <source>Ballroom Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Selskapsdans</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="225"/>
         <source>BMX</source>
-        <translation type="unfinished"></translation>
+        <translation>BMX</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="226"/>
         <source>Board Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Brettspill</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="227"/>
         <source>Bocce</source>
-        <translation type="unfinished"></translation>
+        <translation>Petanque</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="228"/>
         <source>Breaking</source>
-        <translation type="unfinished"></translation>
+        <translation>Breaking</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="229"/>
         <source>Bridge</source>
-        <translation type="unfinished"></translation>
+        <translation>Bridge</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="230"/>
         <source>Cardio Combat</source>
-        <translation type="unfinished"></translation>
+        <translation>Cardio Combat</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="231"/>
         <source>Checkers</source>
-        <translation type="unfinished"></translation>
+        <translation>Dam</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="232"/>
         <source>Chess</source>
-        <translation type="unfinished"></translation>
+        <translation>Sjakk</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="233"/>
