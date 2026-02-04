@@ -241,9 +241,9 @@ void DeviceInterface::createTables()
         t_activity->setCaption("Activity data samples");
         t_activity->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
         f->setCaption("ID");
-        t_activity->addField(f = new KDbField("timestamp", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_activity->addField(f = new KDbField("timestamp", KDbField::Integer, KDbField::Indexed, KDbField::Unsigned));
         f->setCaption("Timestamp");
-        t_activity->addField(f = new KDbField("timestamp_dt", KDbField::DateTime));
+        t_activity->addField(f = new KDbField("timestamp_dt", KDbField::DateTime, KDbField::Indexed));
         f->setCaption("Timestamp in Date/Time format");
         t_activity->addField(f = new KDbField("device_id", KDbField::Integer, nullptr, KDbField::Unsigned));
         f->setCaption("Device ID");
@@ -264,6 +264,18 @@ void DeviceInterface::createTables()
         }
         qDebug() << "-- mi_band_activity created --";
         qDebug() << *t_activity;
+    } else {
+        //Upgrade schema with index
+        qDebug() << "Upgrading mi_band_activity with INDEX";
+        KDbTableSchema *t_activity = m_conn->tableSchema("mi_band_activity");
+        if (!t_activity->field("timestamp")->isIndexed()) {
+            if (!m_conn->executeSql(KDbEscapedString("CREATE INDEX IF NOT EXISTS idx_mi_band_activity_timestamp ON mi_band_activity (timestamp);"))) {
+                qWarning() << "Cannot create index on mi_band_activity(timestamp)";
+            }
+            if (!m_conn->executeSql(KDbEscapedString("CREATE INDEX IF NOT EXISTS idx_mi_band_activity_timestamp_dt ON mi_band_activity (timestamp_dt);"))) {
+                qWarning() << "Cannot create index on mi_band_activity(timestamp_dt)";
+            }
+        }
     }
 
 
@@ -468,7 +480,7 @@ void DeviceInterface::onConnectionStateChanged()
         }
 
         if (m_device && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
-            && AmazfishConfig::instance()->appSilenceConnect()) {
+                && AmazfishConfig::instance()->appSilenceConnect()) {
             m_soundProfile.setProfile(watchfish::SoundProfile::Silent);
         }
 
@@ -480,7 +492,7 @@ void DeviceInterface::onConnectionStateChanged()
         m_device->abortOperations();
 
         if (m_device && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
-            && AmazfishConfig::instance()->appSilenceConnect()) {
+                && AmazfishConfig::instance()->appSilenceConnect()) {
             m_soundProfile.setProfile(watchfish::SoundProfile::General);
         }
 
@@ -875,7 +887,7 @@ void DeviceInterface::navigationRunningChanged(bool running)
 void DeviceInterface::navigationChanged(const QString &icon, const QString &narrative, const QString &manDist, int progress)
 {
     qDebug() << Q_FUNC_INFO << "enabled: " << AmazfishConfig::instance()->appNavigationNotification()
-        << icon << narrative << manDist << progress << m_device;
+             << icon << narrative << manDist << progress << m_device;
 
     if (m_device && AmazfishConfig::instance()->appNavigationNotification()) {
 
