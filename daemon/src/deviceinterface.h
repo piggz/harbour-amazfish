@@ -55,6 +55,7 @@ public:
     Q_INVOKABLE bool operationRunning();
     Q_INVOKABLE bool supportsFeature(int f);
     Q_INVOKABLE int supportedFeatures();
+    Q_INVOKABLE int supportedDataTypes();
 
     KDbConnection *dbConnection();
 

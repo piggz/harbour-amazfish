@@ -1166,6 +1166,14 @@ int DeviceInterface::supportedFeatures()
     return 0;
 }
 
+int DeviceInterface::supportedDataTypes()
+{
+    if (m_device) {
+        return m_device->supportedDataTypes();
+    }
+    return 0;
+}
+
 void DeviceInterface::immediateAlert(int level)
 {
     if (m_device) {

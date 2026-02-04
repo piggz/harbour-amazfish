@@ -34,6 +34,7 @@ public:
     Q_INVOKABLE void unpair();
     Q_INVOKABLE bool supportsFeature(Amazfish::Feature f);
     Q_INVOKABLE int supportedFeatures();
+    Q_INVOKABLE int supportedDataTypes();
 
     Q_INVOKABLE DataSource *dataSource();
     KDbConnection *dbConnection();

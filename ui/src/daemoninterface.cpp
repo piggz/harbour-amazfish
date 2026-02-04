@@ -149,6 +149,15 @@ int DaemonInterface::supportedFeatures()
     return reply;
 }
 
+int DaemonInterface::supportedDataTypes()
+{
+    if (!iface || !iface->isValid()) {
+        return 0;
+    }
+    QDBusReply<int> reply = iface->call(QStringLiteral("supportedDataTypes"));
+    return reply;
+}
+
 DataSource *DaemonInterface::dataSource()
 {
     return &m_dataSource;
