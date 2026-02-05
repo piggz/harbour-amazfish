@@ -392,7 +392,7 @@ void DeviceInterface::createTables()
         t_pai->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
         f->setCaption("ID");
 
-        t_pai->addField(f = new KDbField("pai_date", KDbField::Date, KDbField::NoConstraints));
+        t_pai->addField(f = new KDbField("pai_date", KDbField::Date, KDbField::Indexed));
         f->setCaption("PAI Date");
 
         t_pai->addField(f = new KDbField("pai_low", KDbField::Float));

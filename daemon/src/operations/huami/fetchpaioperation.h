@@ -5,9 +5,6 @@
 #include <KDb3/KDbConnection>
 
 #include "abstractfetchoperation.h"
-#include "activitysample.h"
-
-#include <abstractfetchoperation.h>
 
 class FetchPaiOperation : public AbstractFetchOperation
 {
@@ -28,9 +25,6 @@ private:
         float total_today;
         float total;
     };
-
-    QDateTime m_sampleTime;
-    QList<ActivitySample> m_samples;
 
     KDbConnection *m_conn;
 

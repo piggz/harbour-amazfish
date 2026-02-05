@@ -1,13 +1,16 @@
 <RCC>
     <qresource prefix="/">
+        <file>icons/172x172/harbour-amazfish-ui.png</file>
         <file>qml/cover/CoverPage.qml</file>
         <file>qml/pages/AddCityPage.qml</file>
         <file>qml/pages/AnalysisPage.qml</file>
         <file>qml/pages/AuthKeyDialog.qml</file>
+        <file>qml/pages/BatteryPage.qml</file>
         <file>qml/pages/BipFirmwarePage.qml</file>
         <file>qml/pages/DebugInfo.qml</file>
         <file>qml/pages/FirstPage.qml</file>
         <file>qml/pages/HeartratePage.qml</file>
+        <file>qml/pages/PaiDataPage.qml</file>
         <file>qml/pages/PairDevicePage.qml</file>
         <file>qml/pages/PairDeviceTypeDialog.qml</file>
         <file>qml/pages/Settings-alarms.qml</file>
@@ -19,7 +22,6 @@
         <file>qml/pages/Settings-user.qml</file>
         <file>qml/pages/SleepPage.qml</file>
         <file>qml/pages/SportPage.qml</file>
-        <file>qml/pages/BatteryPage.qml</file>
         <file>qml/pages/SportsSummaryPage.qml</file>
         <file>qml/pages/StravaSettingsPage.qml</file>
         <file>qml/pages/StravaUploadPage.qml</file>
@@ -73,8 +75,6 @@
         <file>qml/pics/weather-storm.png</file>
         <file>qml/tools/JSTools.js</file>
         <file>qml/harbour-amazfish.qml</file>
-        <file>icons/172x172/harbour-amazfish-ui.png</file>
         <file>qml/pics/devices/amazfit-balance.png</file>
-        <file>qml/pages/PaiDataPage.qml</file>
     </qresource>
 </RCC>

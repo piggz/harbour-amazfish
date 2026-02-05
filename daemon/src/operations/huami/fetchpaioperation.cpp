@@ -10,7 +10,6 @@ FetchPaiOperation::FetchPaiOperation(HuamiFetcher *fetcher, KDbConnection *conn,
 
 void FetchPaiOperation::start(QBLEService *service)
 {
-    qDebug() << Q_FUNC_INFO;
     setStartDate(lastActivitySync());
 
     m_fetcher->setNotifications(true, true);
