@@ -110,7 +110,7 @@ PagePL {
                         font.pixelSize: parent.height / 2
                     }
                 }
-                Text {
+                LabelPL {
                     id: txtTimeLow
                     font.pixelSize: styler.themeFontSizeLarge
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -132,7 +132,7 @@ PagePL {
                         font.pixelSize: parent.height / 2
                     }
                 }
-                Text {
+                LabelPL {
                     id: txtTimeModerate
                     font.pixelSize: styler.themeFontSizeLarge
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -154,7 +154,7 @@ PagePL {
                         font.pixelSize: parent.height / 2
                     }
                 }
-                Text {
+                LabelPL {
                     id: txtTimeHigh
                     font.pixelSize: styler.themeFontSizeLarge
                     anchors.horizontalCenter: parent.horizontalCenter
