@@ -16,6 +16,37 @@ PagePL {
         }
     }
 
+    Component {
+        id: paiColumnDelegate
+        Column {
+            id: item
+            property int value
+            property int time
+            property color fillColor
+            Rectangle {
+                width: styler.themeItemSizeLarge
+                height: width
+                radius: width / 2
+                color: fillColor
+                Text {
+                    id: txtLow
+                    anchors.centerIn: parent
+                    anchors.fill: parent
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    font.pixelSize: parent.height / 2
+                    text: value
+                }
+            }
+            LabelPL {
+                id: txtTimeLow
+                font.pixelSize: styler.themeFontSizeLarge
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: time + qsTr(" min");
+            }
+        }
+    }
+
     Column {
         id: column
         width: parent.width
@@ -95,69 +126,26 @@ PagePL {
 
             spacing: styler.themePaddingLarge * 2
 
-            Column {
-                Rectangle {
-                    width: styler.themeItemSizeLarge
-                    height: width
-                    radius: width / 2
-                    color: "#f1c984"
-                    Text {
-                        id: txtLow
-                        anchors.centerIn: parent
-                        anchors.fill: parent
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        font.pixelSize: parent.height / 2
-                    }
-                }
-                LabelPL {
-                    id: txtTimeLow
-                    font.pixelSize: styler.themeFontSizeLarge
-                    anchors.horizontalCenter: parent.horizontalCenter
+            Loader {
+                sourceComponent: paiColumnDelegate
+                id: low
+                Component.onCompleted: {
+                    low.item.fillColor = "#f1c984"
                 }
             }
+            Loader {
+                sourceComponent: paiColumnDelegate
+                id: moderate
 
-            Column {
-                Rectangle {
-                    width: styler.themeItemSizeLarge
-                    height: width
-                    radius: width / 2
-                    color: "#5fc5dc"
-                    Text {
-                        id: txtModerate
-                        anchors.centerIn: parent
-                        anchors.fill: parent
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        font.pixelSize: parent.height / 2
-                    }
-                }
-                LabelPL {
-                    id: txtTimeModerate
-                    font.pixelSize: styler.themeFontSizeLarge
-                    anchors.horizontalCenter: parent.horizontalCenter
+                Component.onCompleted: {
+                    moderate.item.fillColor = "#5fc5dc"
                 }
             }
-
-            Column {
-                Rectangle {
-                    width: styler.themeItemSizeLarge
-                    height: width
-                    radius: width / 2
-                    color: "#32a32d"
-                    Text {
-                        id: txtHigh
-                        anchors.centerIn: parent
-                        anchors.fill: parent
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        font.pixelSize: parent.height / 2
-                    }
-                }
-                LabelPL {
-                    id: txtTimeHigh
-                    font.pixelSize: styler.themeFontSizeLarge
-                    anchors.horizontalCenter: parent.horizontalCenter
+            Loader {
+                sourceComponent: paiColumnDelegate
+                id: high
+                Component.onCompleted: {
+                    high.item.fillColor = "#32a32d"
                 }
             }
         }
@@ -192,24 +180,21 @@ PagePL {
 
         if (maybeToday.pai_day.getTime() === now.getTime()) {
             lblToday.text = PaiModel.get(PaiModel.rowCount() - 1).pai_total_today.toFixed(1)
-            txtLow.text = maybeToday.pai_low.toFixed(0);
-            txtModerate.text = maybeToday.pai_moderate.toFixed(0);
-            txtHigh.text = maybeToday.pai_high.toFixed(0);
-
-            txtTimeLow.text = maybeToday.pai_time_low + qsTr(" min");
-            txtTimeModerate.text = maybeToday.pai_time_moderate + qsTr(" min");
-            txtTimeHigh.text = maybeToday.pai_time_high + qsTr(" min");
+            low.item.value = maybeToday.pai_low.toFixed(0);
+            moderate.item.value = maybeToday.pai_moderate.toFixed(0);
+            high.item.value = maybeToday.pai_high.toFixed(0);
+            low.item.time = maybeToday.pai_time_low;
+            moderate.item.time = maybeToday.pai_time_moderate;
+            high.item.time = maybeToday.pai_time_high;
         } else {
             console.log("latest PAI record is not today");
             lblToday.text = 0.0
-
-            txtLow.text = "0"
-            txtModerate.text = "0"
-            txtHigh.text = "0"
-
-            txtTimeLow.text = "0" + qsTr(" min");
-            txtTimeModerate.text = "0" + qsTr(" min");
-            txtTimeHigh.text = "0" + qsTr(" min");
+            low.item.value = "0"
+            moderate.item.value = "0"
+            high.item.value = "0"
+            low.item.time = "0"
+            moderate.item.time = "0"
+            high.item.time = "0"
         }
     }
 }
