@@ -37,7 +37,6 @@ void HuamiFetcher::fetchControl(const QByteArray &value)
         if (m_currentOperation->handleMetaData(value)) {
             emit fetchOperationComplete(m_currentOperation);
             delete m_currentOperation;
-            m_currentOperation = nullptr;
             triggerNextOperation();
         }
     }
