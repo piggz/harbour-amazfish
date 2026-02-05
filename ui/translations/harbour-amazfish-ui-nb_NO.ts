@@ -705,7 +705,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="94"/>
         <source>Set silent profile on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver lydløs profil ved tilkobling</translation>
     </message>
 </context>
 <context>
@@ -718,17 +718,17 @@
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="27"/>
         <source>Double Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Funksjon ved dobbelttrykk</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="37"/>
         <source>Triple Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Funksjon ved trippeltrykk</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="47"/>
         <source>Quad Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Funksjon ved firedobbelt trykk</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="56"/>
@@ -1224,7 +1224,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="113"/>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis ved løfting av håndledd</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="177"/>
@@ -1239,12 +1239,12 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="194"/>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk pulsmåler for søvnregistrering</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="204"/>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>Pulsintervall hele dagen (minutter): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="209"/>
@@ -1264,7 +1264,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="88"/>
         <source>Personal preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Personlige innstillinger</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="188"/>
