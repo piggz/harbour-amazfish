@@ -81,7 +81,7 @@ void ZeppOsFileTransferV2::uploadFile(Request *request)
     int payloadSize = 2 +
             request->url().toLocal8Bit().length() + 1 +
             request->filename().toLocal8Bit().length() + 1 +
-            4 + 4 + 2;
+            4 + 4;
     if (request->compressed()) {
         payloadSize += 4;
     }
@@ -118,16 +118,10 @@ void ZeppOsFileTransferV2::handleFileDownloadRequest(uint8_t session, Request *r
 }
 
 void ZeppOsFileTransferV2::writeChunk(uint8_t session, Request *request)
-// TODO this code is exactly as V3
 {
     qDebug() << Q_FUNC_INFO << request->chunkSize() << request->progress();
-
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(m_device->service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (!fw) {
-        return;
-    }
-
-    QByteArray chunk = request->bytes().mid(request->progress(), request->chunkSize());
+    QByteArray buf;
+    buf += UCHARVAL_TO_BYTEARRAY(CMD_DATA_SEND);
 
     uint8_t flags = 0;
     if (request->progress() == 0) {
@@ -139,8 +133,6 @@ void ZeppOsFileTransferV2::writeChunk(uint8_t session, Request *request)
 
     int partSize = 127; // TODO mtu hardcoded
 
-    QByteArray buf;
-    buf += UCHARVAL_TO_BYTEARRAY(CMD_DATA_SEND);
     buf += UCHARVAL_TO_BYTEARRAY(flags);
     buf += UCHARVAL_TO_BYTEARRAY(session);
     buf += UCHARARR_TO_BYTEARRAY(request->index());
@@ -152,28 +144,20 @@ void ZeppOsFileTransferV2::writeChunk(uint8_t session, Request *request)
     }
 
 
+    QByteArray chunk = request->bytes().mid(request->progress(), request->chunkSize());
     buf += TypeConversion::fromInt16(chunk.length());
     buf += chunk;
-
-    for (int i = 0; i < buf.length(); i += partSize) {
-        QByteArray part = buf.mid(i, partSize);
-        fw->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_ZEPP_OS_FILE_TRANSFER_V3_SEND, part);
-    }
 
     request->setProgress(request->progress() + chunk.length());
     request->setIndex(request->index() + 1);
     request->callback()->fileUploadProgress(request->progress() / (request->size() / 100.0));
+
+    m_fileTransferService->write(buf);
 }
 
 void ZeppOsFileTransferV2::handleFileTransferData(const QByteArray &payload)
 {
     qDebug() << Q_FUNC_INFO;
-
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(m_device->service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (!fw) {
-        return;
-    }
-
     {
         int i = 0;
         uint8_t flags = payload[++i];
@@ -215,7 +199,7 @@ void ZeppOsFileTransferV2::handleFileTransferData(const QByteArray &payload)
         buf += UCHARVAL_TO_BYTEARRAY(session);
         buf += UCHARVAL_TO_BYTEARRAY(0x00);
 
-        fw->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_ZEPP_OS_FILE_TRANSFER_V3_RECEIVE, buf);
+        m_fileTransferService->write(buf);
 
         if (lastChunk) {
             m_sessionRequests.remove(session);
@@ -279,4 +263,3 @@ void ZeppOsFileTransferV2::onUploadFinish(uint8_t session, bool success)
 
     request->callback()->fileUploadFinish(success);
 }
-
