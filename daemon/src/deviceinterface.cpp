@@ -427,6 +427,30 @@ void DeviceInterface::createTables()
         qDebug() << *t_pai;
     }
 
+    if (!m_conn->containsTable("hrv")) {
+        KDbTableSchema *t_hrv = new KDbTableSchema("hrv");
+        t_hrv->setCaption("Heartrate Variation");
+        t_hrv->addField(f = new KDbField("hrv_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_hrv->addField(f = new KDbField("hrv_timestamp", KDbField::Integer, KDbField::Indexed));
+        f->setCaption("Timestamp");
+
+        t_hrv->addField(f = new KDbField("hrv_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
+        f->setCaption("Timestamp in Date/Time format");
+
+        t_hrv->addField(f = new KDbField("hrv_value", KDbField::Integer));
+        f->setCaption("Value");
+
+        if (!m_conn->createTable(t_hrv)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- hrv created --";
+        qDebug() << *t_hrv;
+    }
+
+
     if (!m_conn->commitTransaction(t)) {
         qDebug() << m_conn->result();
         return;
