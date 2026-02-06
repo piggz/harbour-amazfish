@@ -8,7 +8,7 @@
 #include "typeconversion.h"
 #include "huami/huamifetcher.h"
 
-SportsSummaryOperation::SportsSummaryOperation(HuamiFetcher *fetcher, KDbConnection *conn, AbstractActivitySummaryParser *parser, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_parser(parser), m_conn(conn)
+SportsSummaryOperation::SportsSummaryOperation(HuamiFetcher *fetcher, AbstractActivitySummaryParser *parser, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_parser(parser)
 {
     qDebug() << Q_FUNC_INFO;
     setLastSyncKey("device/lastsportsyncmillis");

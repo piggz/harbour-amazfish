@@ -13,7 +13,7 @@
 class SportsSummaryOperation : public AbstractFetchOperation
 {
 public:
-    SportsSummaryOperation(HuamiFetcher *fetcher, KDbConnection *db, AbstractActivitySummaryParser *parser = nullptr, bool isZeppOs = false);
+    SportsSummaryOperation(HuamiFetcher *fetcher, AbstractActivitySummaryParser *parser = nullptr, bool isZeppOs = false);
     ~SportsSummaryOperation();
 
     void start(QBLEService *service) override;
@@ -28,7 +28,6 @@ private:
 
     bool processBufferedData() override;
 
-    KDbConnection *m_conn;
     AbstractActivitySummaryParser *m_parser = nullptr;
 };
 

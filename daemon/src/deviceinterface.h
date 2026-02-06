@@ -55,6 +55,7 @@ public:
     Q_INVOKABLE bool operationRunning();
     Q_INVOKABLE bool supportsFeature(int f);
     Q_INVOKABLE int supportedFeatures();
+    Q_INVOKABLE int supportedDataTypes();
 
     KDbConnection *dbConnection();
 
@@ -85,6 +86,7 @@ public:
     Q_INVOKABLE void reloadCities();
     Q_INVOKABLE void enableFeature(int feature);
     Q_INVOKABLE void fetchLogs();
+    Q_INVOKABLE void fetchData(int dataType);
     Q_INVOKABLE void requestScreenshot();
     Q_INVOKABLE QStringList supportedDisplayItems();
     Q_INVOKABLE void immediateAlert(int level);

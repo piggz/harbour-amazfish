@@ -149,6 +149,15 @@ int DaemonInterface::supportedFeatures()
     return reply;
 }
 
+int DaemonInterface::supportedDataTypes()
+{
+    if (!iface || !iface->isValid()) {
+        return 0;
+    }
+    QDBusReply<int> reply = iface->call(QStringLiteral("supportedDataTypes"));
+    return reply;
+}
+
 DataSource *DaemonInterface::dataSource()
 {
     return &m_dataSource;
@@ -194,6 +203,14 @@ void DaemonInterface::downloadActivityData()
         return;
     }
     iface->call(QStringLiteral("downloadActivityData"));
+}
+
+void DaemonInterface::fetchData(int dataTypes)
+{
+    if (!iface || !iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("fetchData"), dataTypes);
 }
 
 void DaemonInterface::refreshInformation()

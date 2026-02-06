@@ -235,6 +235,26 @@ PagePL {
                 DaemonInterfaceInstance.fetchLogs();
             }
         }
+
+        Row {
+            width: parent.width * 0.8
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            TextFieldPL {
+                label: "Data Type"
+                anchors.leftMargin: 0
+                id: txtDataType
+                width: parent.width * 0.4
+            }
+            ButtonPL {
+                text: qsTr("Fetch Data")
+                width: parent.width * 0.6
+                onClicked: {
+                    DaemonInterfaceInstance.fetchData(parseInt(txtDataType.text));
+                }
+            }
+        }
+
         ButtonPL {
             text: qsTr("Request Screenshot")
             anchors.horizontalCenter: parent.horizontalCenter

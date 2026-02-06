@@ -1,6 +1,7 @@
 #include "huamifetcher.h"
 
 #include "huami/activityfetchoperation.h"
+#include "huami/fetchpaioperation.h"
 #include "huamidevice.h"
 #include "huami/logfetchoperation.h"
 #include "huami/sportssummaryoperation.h"
@@ -19,7 +20,9 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
     } else if (type & Amazfish::DataType::TYPE_DEBUGLOG && m_device->supportsDataType(Amazfish::DataType::TYPE_DEBUGLOG)) {
         m_operations.append(new LogFetchOperation(this, m_device->isZeppOs()));
     } else if (type & Amazfish::DataType::TYPE_GPS_TRACK && m_device->supportsDataType(Amazfish::DataType::TYPE_GPS_TRACK)) {
-        m_operations.append(new SportsSummaryOperation(this, m_device->database(), m_device->activitySummaryParser(), m_device->isZeppOs()));
+        m_operations.append(new SportsSummaryOperation(this, m_device->activitySummaryParser(), m_device->isZeppOs()));
+    } else if (type & Amazfish::DataType::TYPE_PAI && m_device->supportsDataType(Amazfish::DataType::TYPE_PAI)) {
+        m_operations.append(new FetchPaiOperation(this, m_device->database(), m_device->isZeppOs()));
     }
 
     if (!m_currentOperation) {
@@ -34,7 +37,6 @@ void HuamiFetcher::fetchControl(const QByteArray &value)
         if (m_currentOperation->handleMetaData(value)) {
             emit fetchOperationComplete(m_currentOperation);
             delete m_currentOperation;
-            m_currentOperation = nullptr;
             triggerNextOperation();
         }
     }

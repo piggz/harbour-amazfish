@@ -181,7 +181,7 @@ Item {
                     top: parent.top
                     left: parent.left
                 }
-                visible: !noData
+                visible: !noData && text != ""
             }
 
             Canvas {

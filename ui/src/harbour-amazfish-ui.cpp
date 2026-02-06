@@ -1,3 +1,4 @@
+#include "src/paimodel.h"
 #ifdef QT_QML_DEBUG
 #include <QtQuick>
 #endif
@@ -68,7 +69,6 @@ int main(int argc, char *argv[])
 
 #endif
 
-
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setOrganizationDomain("piggz.co.uk");
     QCoreApplication::setApplicationName("harbour-amazfish");
@@ -87,9 +87,11 @@ int main(int argc, char *argv[])
 
     SportsDataModel sportsDataModel;
     SportsMetaModel sportsMetaModel;
+    PaiModel paiModel;
     DaemonInterface daemonInterface;
     sportsDataModel.setConnection(daemonInterface.dbConnection());
     sportsMetaModel.setConnection(daemonInterface.dbConnection());
+    paiModel.setConnection(daemonInterface.dbConnection());
 
     qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
     qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");
@@ -113,6 +115,7 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("DaemonInterfaceInstance", &daemonInterface);
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
     view->rootContext()->setContextProperty("SportsMeta", &sportsMetaModel);
+    view->rootContext()->setContextProperty("PaiModel", &paiModel);
 
     view->rootContext()->setContextProperty("STRAVA_CLIENT_SECRET", encryptDecrypt("}{s{--z*.x{y{ss///x/x){*xz{(|yy/{syr-/})"));
     view->rootContext()->setContextProperty("STRAVA_CLIENT_ID", "13707");
