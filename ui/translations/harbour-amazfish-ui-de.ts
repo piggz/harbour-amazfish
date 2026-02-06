@@ -2052,7 +2052,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="75"/>
         <source>Driving</source>
-        <translation type="unfinished"></translation>
+        <translation>Fahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="76"/>
@@ -2626,7 +2626,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="189"/>
         <source>Mind And Body</source>
-        <translation type="unfinished"></translation>
+        <translation>Körper und Seele</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="190"/>
@@ -2641,12 +2641,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="192"/>
         <source>Karting</source>
-        <translation type="unfinished"></translation>
+        <translation>Kartfahren</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="193"/>
         <source>Billiards</source>
-        <translation type="unfinished"></translation>
+        <translation>Billard</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="194"/>
@@ -3016,7 +3016,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="267"/>
         <source>Free Sparring</source>
-        <translation type="unfinished"></translation>
+        <translation>Freies Sparring</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="268"/>
@@ -3041,7 +3041,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="272"/>
         <source>Billiard Pool</source>
-        <translation type="unfinished"></translation>
+        <translation>Pool Billard</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="273"/>
@@ -3146,7 +3146,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="293"/>
         <source>Deadlift</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreuzheben</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="294"/>
