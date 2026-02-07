@@ -90,6 +90,21 @@ PagePL {
                 updateGraph(day);
             }
         }
+        Graph {
+            id: graphHRV
+            graphTitle: qsTr("HRV")
+            graphHeight: 300
+
+            axisY.units: ""
+            type: DataSource.HRV
+
+            minY: 0
+            maxY: 100
+
+            onClicked: {
+                updateGraph(day);
+            }
+        }
 
     }
 
@@ -97,6 +112,7 @@ PagePL {
         graphHeartrate.updateGraph(day);
         graphSteps.updateGraph(day);
         graphIntensity.updateGraph(day);
+        graphHRV.updateGraph(day);
     }
 
     Component.onCompleted: {

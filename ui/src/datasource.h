@@ -5,7 +5,6 @@
 #include <QVariant>
 
 #include <KDb3/KDbConnection>
-#include "amazfish.h"
 
 class DataSource: public QObject
 {
@@ -20,6 +19,7 @@ public:
         StepSummary = 5,
         SleepSummary = 6,
         BatteryLog = 7,
+        HRV
     };
     Q_ENUM(Type)
 

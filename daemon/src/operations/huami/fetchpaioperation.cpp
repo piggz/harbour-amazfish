@@ -25,7 +25,6 @@ void FetchPaiOperation::start(QBLEService *service)
 
 bool FetchPaiOperation::processBufferedData()
 {
-
     qDebug() << Q_FUNC_INFO << m_buffer.length() << (m_buffer.length() / 102);
 
     if (m_buffer.length() % 102 != 0) {
