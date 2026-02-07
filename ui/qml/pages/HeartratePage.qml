@@ -7,6 +7,7 @@ import "../components/platform"
 PagePL {
     id: page
     title: qsTr("Heartrate")
+    property string qmlUrl: "HeartratePage.qml"
 
     property alias day: nav.day
     property real relaxed: 0
@@ -227,6 +228,6 @@ PagePL {
     }
 
     onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("SportsSummaryPage.qml"))
+        pushAttached(Qt.resolvedUrl(getNextPage()))
     }
 }

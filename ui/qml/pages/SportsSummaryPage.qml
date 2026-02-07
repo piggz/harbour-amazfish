@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.1
 
 PageListPL {
     id: page
+    property string qmlUrl: "SportsSummaryPage.qml"
 
     function fncCovertSecondsToString(sec) {
         var iHours = Math.floor(sec / 3600);

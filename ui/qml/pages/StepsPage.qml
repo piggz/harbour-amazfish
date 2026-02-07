@@ -7,6 +7,7 @@ import "../components/platform"
 PagePL {
     id: page
     title: qsTr("Steps")
+    property string qmlUrl: "StepsPage.qml"
 
     property alias day: nav.day    
 
@@ -81,6 +82,6 @@ PagePL {
     }
 
     onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("SleepPage.qml"))
+        pushAttached(Qt.resolvedUrl(getNextPage()))
     }
 }
