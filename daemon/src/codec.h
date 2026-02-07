@@ -4,6 +4,7 @@
 // COPYRIGHT.md file in the top-level folder of the CBOR-lite software
 // distribution.
 
+#include <cinttypes>
 #include <exception>
 #include <iterator>
 #include <string>
