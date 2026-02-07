@@ -13,6 +13,8 @@
 #include "pinetimejfdevice.h"
 #include "dk08device.h"
 
+#include <functional>
+
 using DeviceCreator = std::function<AbstractDevice*(const QString &)>;
 
 static const QMap<QString, DeviceCreator> deviceMap = {
