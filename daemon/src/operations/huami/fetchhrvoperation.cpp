@@ -36,13 +36,13 @@ bool FetchHrvOperation::processBufferedData()
     QDateTime timestamp;
     QVector<HrvRecord> recs;
 
-    for (int i = 0; i < m_buffer.length(); i+=102) {
+    for (int i = 0; i < m_buffer.length(); i+=6) {
         int offset = i;
 
         int32_t timestampSeconds = TypeConversion::toUint32(m_buffer, offset);
         timestamp.setMSecsSinceEpoch((qint64)timestampSeconds * 1000);
         uint8_t utcOffsetInQuarterHours = m_buffer[offset++];
-        uint8_t val = m_buffer[i] * 0xff;
+        uint8_t val = m_buffer[offset] & 0xff;
 
         HrvRecord hrv;
         hrv.timestamp = timestamp;
