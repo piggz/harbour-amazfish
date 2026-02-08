@@ -2167,7 +2167,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="98"/>
         <source>Tactical</source>
-        <translation type="unfinished"></translation>
+        <translation>Taktisch</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="99"/>
@@ -2227,7 +2227,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="110"/>
         <source>Marine</source>
-        <translation type="unfinished"></translation>
+        <translation>Marine</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="111"/>
