@@ -261,7 +261,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="250"/>
         <source>Fetch Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Stáhnout data</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="268"/>
@@ -364,7 +364,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="51"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="160"/>
@@ -521,12 +521,12 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="9"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
         <source>Download PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>Stáhnout PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="45"/>
