@@ -22,20 +22,56 @@
         <file>qml/custom-icons/icon-m-weather-d212-light.png</file>
         <file>qml/custom-icons/icon-strava.png</file>
         <file>qml/activity-icons/icon-m-activity.png</file>
+        <file>qml/activity-icons/icon-m-americanfootball.png</file>
+        <file>qml/activity-icons/icon-m-atv.png</file>
+        <file>qml/activity-icons/icon-m-badmington.png</file>
+        <file>qml/activity-icons/icon-m-barbell.png</file>
+        <file>qml/activity-icons/icon-m-baseball.png</file>
+        <file>qml/activity-icons/icon-m-basketball.png</file>
         <file>qml/activity-icons/icon-m-biking.png</file>
+        <file>qml/activity-icons/icon-m-bowling.png</file>
+        <file>qml/activity-icons/icon-m-chess.png</file>
         <file>qml/activity-icons/icon-m-cycling.png</file>
+        <file>qml/activity-icons/icon-m-darts.png</file>
+        <file>qml/activity-icons/icon-m-diving.png</file>
+        <file>qml/activity-icons/icon-m-dumbbell.png</file>
+        <file>qml/activity-icons/icon-m-esports.png</file>
         <file>qml/activity-icons/icon-m-exercise.png</file>
+        <file>qml/activity-icons/icon-m-fishing.png</file>
+        <file>qml/activity-icons/icon-m-handball.png</file>
         <file>qml/activity-icons/icon-m-hiking.png</file>
+        <file>qml/activity-icons/icon-m-hockey.png</file>
+        <file>qml/activity-icons/icon-m-iceskating.png</file>
         <file>qml/activity-icons/icon-m-indoorcycling.png</file>
+        <file>qml/activity-icons/icon-m-kayaking.png</file>
+        <file>qml/activity-icons/icon-m-kitesurfing.png</file>
+        <file>qml/activity-icons/icon-m-martialarts.png</file>
+        <file>qml/activity-icons/icon-m-meditation.png</file>
         <file>qml/activity-icons/icon-m-openswimming.png</file>
+        <file>qml/activity-icons/icon-m-otherwatersports.png</file>
         <file>qml/activity-icons/icon-m-outdoorcycling.png</file>
         <file>qml/activity-icons/icon-m-outdoorrunning.png</file>
+        <file>qml/activity-icons/icon-m-paragliding.png</file>
+        <file>qml/activity-icons/icon-m-rollerskating.png</file>
+        <file>qml/activity-icons/icon-m-rugby.png</file>
         <file>qml/activity-icons/icon-m-running.png</file>
+        <file>qml/activity-icons/icon-m-sailing.png</file>
         <file>qml/activity-icons/icon-m-skiing.png</file>
+        <file>qml/activity-icons/icon-m-sledding.png</file>
+        <file>qml/activity-icons/icon-m-sleepany.png</file>
+        <file>qml/activity-icons/icon-m-snorkeling.png</file>
+        <file>qml/activity-icons/icon-m-snowmobiling.png</file>
+        <file>qml/activity-icons/icon-m-soccer.png</file>
         <file>qml/activity-icons/icon-m-swimming.png</file>
+        <file>qml/activity-icons/icon-m-tennis.png</file>
         <file>qml/activity-icons/icon-m-trail running.png</file>
         <file>qml/activity-icons/icon-m-treadmill.png</file>
         <file>qml/activity-icons/icon-m-unknown.png</file>
+        <file>qml/activity-icons/icon-m-volleyball.png</file>
+        <file>qml/activity-icons/icon-m-wakesurfing.png</file>
         <file>qml/activity-icons/icon-m-walking.png</file>
+        <file>qml/activity-icons/icon-m-windsurfing.png</file>
+        <file>qml/activity-icons/icon-m-wintersport.png</file>
+        <file>qml/activity-icons/icon-m-yoga.png</file>
     </qresource>
 </RCC>
