@@ -31,16 +31,9 @@ done
         for i in $(find qml/custom-icons/ -type f -name '*.png'|sort); do
             echo "        <file>$i</file>";
         done
-        echo "    </qresource>"
-        echo "</RCC>"
-    ) > icons.qrc
-
-    (
-        echo "<RCC>"
-        echo "    <qresource prefix=\"/\">"
         for i in $(find qml/activity-icons/ -type f -name '*.png'|sort); do
             echo "        <file>$i</file>";
         done
         echo "    </qresource>"
         echo "</RCC>"
-    ) > activity-icons.qrc
+    ) > icons.qrc
