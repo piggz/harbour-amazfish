@@ -170,7 +170,7 @@
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="106"/>
         <source>All operations complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny operace byli dokončeny</translation>
     </message>
 </context>
 <context>
