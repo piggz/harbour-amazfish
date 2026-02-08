@@ -209,14 +209,22 @@ PagePL {
             anchors.margins: styler.themePaddingLarge
             Layout.preferredHeight: page.height * 0.66
 
-            IconPL {
-                id: workoutImage
-
+            Item {
                 Layout.rowSpan: 3
                 Layout.preferredWidth: styler.themeItemSizeLarge
                 Layout.preferredHeight: styler.themeItemSizeLarge
                 Layout.alignment: Qt.AlignLeft
-                iconSource: styler.activityIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
+
+                IconPL {
+                    id: workoutImage
+                    iconSource: styler.activityIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
+                    anchors.fill: parent
+                }
+                IconPL {
+                    visible: workoutImage.status !== Image.Ready
+                    iconSource: styler.activityIconPrefix + "icon-m-" + "activity" + styler.customIconSuffix
+                    anchors.fill: parent
+                }
             }
 
             LabelPL {
