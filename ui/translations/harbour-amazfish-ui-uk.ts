@@ -530,7 +530,7 @@
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="45"/>
-        <source> min</source>
+        <source>%1 min</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

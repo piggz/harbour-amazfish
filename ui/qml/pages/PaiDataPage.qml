@@ -42,7 +42,7 @@ PagePL {
                 id: txtTimeLow
                 font.pixelSize: styler.themeFontSizeLarge
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: time + qsTr(" min");
+                text: qsTr("%1 min").arg(time)
             }
         }
     }
