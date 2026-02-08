@@ -4,7 +4,7 @@
 <context>
     <name>AbstractDevice</name>
     <message>
-        <location filename="../src/devices/abstractdevice.cpp" line="151"/>
+        <location filename="../src/devices/abstractdevice.cpp" line="165"/>
         <source>Device does not support settings</source>
         <translation>l&apos;appareil ne supporte pas la configuration</translation>
     </message>
@@ -80,7 +80,7 @@
 <context>
     <name>AsteroidOSDevice</name>
     <message>
-        <location filename="../src/devices/asteroidosdevice.cpp" line="324"/>
+        <location filename="../src/devices/asteroidosdevice.cpp" line="323"/>
         <source>Stored %1...</source>
         <translation>Stocké %1&#xa0;...</translation>
     </message>
@@ -88,38 +88,38 @@
 <context>
     <name>DeviceInterface</name>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="115"/>
+        <location filename="../src/deviceinterface.cpp" line="110"/>
         <source>Device is not valid, it may not be supported</source>
         <translation>L’appareil n’est pas valide, il peut ne pas être pris en charge</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="469"/>
-        <location filename="../src/deviceinterface.cpp" line="545"/>
+        <location filename="../src/deviceinterface.cpp" line="517"/>
+        <location filename="../src/deviceinterface.cpp" line="593"/>
         <source>Amazfish</source>
         <translation>Amazfish</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="470"/>
+        <location filename="../src/deviceinterface.cpp" line="518"/>
         <source>Connected</source>
         <translation>Connecté</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="471"/>
+        <location filename="../src/deviceinterface.cpp" line="519"/>
         <source>Phone and watch are connected</source>
         <translation>Téléphone et montre connectés</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="546"/>
+        <location filename="../src/deviceinterface.cpp" line="594"/>
         <source>Low Battery</source>
         <translation>Batterie faible</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="547"/>
+        <location filename="../src/deviceinterface.cpp" line="595"/>
         <source>Battery level now </source>
         <translation>Niveau batterie actuel </translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="671"/>
+        <location filename="../src/deviceinterface.cpp" line="719"/>
         <source>Calendar</source>
         <translation>Calendrier</translation>
     </message>
@@ -127,7 +127,7 @@
 <context>
     <name>GtsDevice</name>
     <message>
-        <location filename="../src/devices/huami/gtsdevice.cpp" line="220"/>
+        <location filename="../src/devices/huami/gtsdevice.cpp" line="230"/>
         <source>An operation is currently running, please try later</source>
         <translation>Une opération est en cours, essayez plus tard</translation>
     </message>
@@ -135,34 +135,42 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="208"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="193"/>
         <source>Navigation Started</source>
         <translation>Navigation Démarrée</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="210"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="195"/>
         <source>Navigation Stopped</source>
         <translation>Navigation Arrêtée</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="230"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="215"/>
         <source>Progress</source>
         <translation>Progression</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="372"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="357"/>
         <source>Sending %1...</source>
         <translation>Envoi %1&#xa0;...</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="375"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="360"/>
         <source>No file selected</source>
         <translation>Aucun fichier sélectionné</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="397"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="382"/>
         <source>An operation is currently running, please try later</source>
         <translation>Une opération est en cours, essayez plus tard</translation>
+    </message>
+</context>
+<context>
+    <name>HuamiFetcher</name>
+    <message>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="106"/>
+        <source>All operations complete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -177,20 +185,20 @@
 <context>
     <name>PinetimeJFDevice</name>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="364"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="378"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="369"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="383"/>
         <source>An operation is currently running, please try later</source>
         <translation>Une opération est en cours, essayez plus tard</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="401"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="414"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="406"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="419"/>
         <source>Sending file...</source>
         <translation>Envoi fichier&#xa0;...</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="404"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="417"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="409"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="422"/>
         <source>No file selected</source>
         <translation>Aucun fichier sélectionné</translation>
     </message>
@@ -198,32 +206,32 @@
 <context>
     <name>QIODevice</name>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
         <translation>Mise à jour d&apos;AGPS OK</translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
         <translation>Fichier AGPS est corrompu</translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
         <translation>Fichier AGPS n&apos;est pas au format correct</translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
         <translation>Erreur inconnue lors de l’envoi du fichier AGPS</translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
         <translation>Téléversement du fichier OK. Mise à jour en cours sur l&apos;appareil</translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
         <translation>Téléversement du fichier a échoué</translation>
     </message>
@@ -231,46 +239,46 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="115"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="134"/>
         <source>About to transfer data from </source>
         <translation>Sur le point de transférer des données depuis </translation>
     </message>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="131"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="149"/>
         <source>No data to transfer</source>
         <translation>Aucune donnée à transférer</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="186"/>
         <location filename="../src/operations/dfuoperation.cpp" line="205"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="84"/>
-        <location filename="../src/operations/updatefirmwareoperation.cpp" line="87"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="84"/>
+        <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="87"/>
         <source>Update operation failed</source>
         <translation>L’opération de mise à jour a échoué</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="224"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="96"/>
-        <location filename="../src/operations/updatefirmwareoperation.cpp" line="95"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="96"/>
+        <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="95"/>
         <source>Update operation failed, unexpected metadata</source>
         <translation>L’opération de mise à jour a échoué, métadonnées inattendues</translation>
     </message>
     <message>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="71"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="78"/>
-        <location filename="../src/operations/updatefirmwareoperation.cpp" line="74"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="71"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="78"/>
+        <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="74"/>
         <source>Update operation complete</source>
         <translation>Opération de mise à jour terminée</translation>
     </message>
     <message>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="94"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="94"/>
         <source>Update operation failed, filetype not supported</source>
         <translation>L’opération de mise à jour a échoué, type de fichier non pris en charge</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="144"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="108"/>
-        <location filename="../src/operations/updatefirmwareoperation.cpp" line="29"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="108"/>
+        <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="29"/>
         <source>File does not seem to be supported</source>
         <translation>Le fichier ne semble pas être pris en charge</translation>
     </message>
@@ -278,7 +286,7 @@
 <context>
     <name>ZeppOSDevice</name>
     <message>
-        <location filename="../src/devices/huami/zepposdevice.cpp" line="423"/>
+        <location filename="../src/devices/huami/zepposdevice.cpp" line="441"/>
         <source>An operation is currently running, please try later</source>
         <translation>Une opération est actuellement en cours, veuillez essayer plus tard</translation>
     </message>

@@ -4,7 +4,7 @@
 <context>
     <name>AbstractDevice</name>
     <message>
-        <location filename="../src/devices/abstractdevice.cpp" line="151"/>
+        <location filename="../src/devices/abstractdevice.cpp" line="165"/>
         <source>Device does not support settings</source>
         <translation>சாதனம் அமைப்புகளை ஆதரிக்காது</translation>
     </message>
@@ -80,7 +80,7 @@
 <context>
     <name>AsteroidOSDevice</name>
     <message>
-        <location filename="../src/devices/asteroidosdevice.cpp" line="324"/>
+        <location filename="../src/devices/asteroidosdevice.cpp" line="323"/>
         <source>Stored %1...</source>
         <translation>சேமிக்கப்பட்டது %1 ...</translation>
     </message>
@@ -88,38 +88,38 @@
 <context>
     <name>DeviceInterface</name>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="115"/>
+        <location filename="../src/deviceinterface.cpp" line="110"/>
         <source>Device is not valid, it may not be supported</source>
         <translation>சாதனம் செல்லுபடியாகாது, அதை ஆதரிக்காமல் இருக்கலாம்</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="469"/>
-        <location filename="../src/deviceinterface.cpp" line="545"/>
+        <location filename="../src/deviceinterface.cpp" line="517"/>
+        <location filename="../src/deviceinterface.cpp" line="593"/>
         <source>Amazfish</source>
         <translation>அமாச்ஃபிச்</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="470"/>
+        <location filename="../src/deviceinterface.cpp" line="518"/>
         <source>Connected</source>
         <translation>இணைக்கப்பட்டுள்ளது</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="471"/>
+        <location filename="../src/deviceinterface.cpp" line="519"/>
         <source>Phone and watch are connected</source>
         <translation>தொலைபேசி மற்றும் வாட்ச் இணைக்கப்பட்டுள்ளன</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="546"/>
+        <location filename="../src/deviceinterface.cpp" line="594"/>
         <source>Low Battery</source>
         <translation>குறைந்த பேட்டரி</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="547"/>
+        <location filename="../src/deviceinterface.cpp" line="595"/>
         <source>Battery level now </source>
         <translation>இப்போது பேட்டரி நிலை </translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="671"/>
+        <location filename="../src/deviceinterface.cpp" line="719"/>
         <source>Calendar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -127,7 +127,7 @@
 <context>
     <name>GtsDevice</name>
     <message>
-        <location filename="../src/devices/huami/gtsdevice.cpp" line="220"/>
+        <location filename="../src/devices/huami/gtsdevice.cpp" line="230"/>
         <source>An operation is currently running, please try later</source>
         <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
     </message>
@@ -135,34 +135,42 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="208"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="193"/>
         <source>Navigation Started</source>
         <translation>வழிசெலுத்தல் தொடங்கியது</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="210"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="195"/>
         <source>Navigation Stopped</source>
         <translation>வழிசெலுத்தல் நிறுத்தப்பட்டது</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="230"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="215"/>
         <source>Progress</source>
         <translation>முன்னேற்றம்</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="372"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="357"/>
         <source>Sending %1...</source>
         <translation type="unfinished">%1 ஐ அனுப்புகிறது ...</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="375"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="360"/>
         <source>No file selected</source>
         <translation type="unfinished">எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="397"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="382"/>
         <source>An operation is currently running, please try later</source>
         <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
+    </message>
+</context>
+<context>
+    <name>HuamiFetcher</name>
+    <message>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="106"/>
+        <source>All operations complete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -177,20 +185,20 @@
 <context>
     <name>PinetimeJFDevice</name>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="364"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="378"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="369"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="383"/>
         <source>An operation is currently running, please try later</source>
         <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="401"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="414"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="406"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="419"/>
         <source>Sending file...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="404"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="417"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="409"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="422"/>
         <source>No file selected</source>
         <translation type="unfinished">எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
@@ -198,32 +206,32 @@
 <context>
     <name>QIODevice</name>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/operations/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
+        <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -231,46 +239,46 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="115"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="134"/>
         <source>About to transfer data from </source>
         <translation>தரவை மாற்றப் போவது </translation>
     </message>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="131"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="149"/>
         <source>No data to transfer</source>
         <translation>மாற்ற தரவு இல்லை</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="186"/>
         <location filename="../src/operations/dfuoperation.cpp" line="205"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="84"/>
-        <location filename="../src/operations/updatefirmwareoperation.cpp" line="87"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="84"/>
+        <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="87"/>
         <source>Update operation failed</source>
         <translation>புதுப்பிப்பு செயல்பாடு தோல்வியடைந்தது</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="224"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="96"/>
-        <location filename="../src/operations/updatefirmwareoperation.cpp" line="95"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="96"/>
+        <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="95"/>
         <source>Update operation failed, unexpected metadata</source>
         <translation>புதுப்பிப்பு செயல்பாடு தோல்வியுற்றது, எதிர்பாராத மேனிலை தரவு</translation>
     </message>
     <message>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="71"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="78"/>
-        <location filename="../src/operations/updatefirmwareoperation.cpp" line="74"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="71"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="78"/>
+        <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="74"/>
         <source>Update operation complete</source>
         <translation>புதுப்பிப்பு செயல்பாடு முடிந்தது</translation>
     </message>
     <message>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="94"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="94"/>
         <source>Update operation failed, filetype not supported</source>
         <translation>புதுப்பிப்பு செயல்பாடு தோல்வியடைந்தது, கோப்பு வகை ஆதரிக்கப்படவில்லை</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="144"/>
-        <location filename="../src/operations/huamiupdatefirmwareoperation2020.cpp" line="108"/>
-        <location filename="../src/operations/updatefirmwareoperation.cpp" line="29"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="108"/>
+        <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="29"/>
         <source>File does not seem to be supported</source>
         <translation>கோப்பு ஆதரிக்கப்படுவதாகத் தெரியவில்லை</translation>
     </message>
@@ -278,7 +286,7 @@
 <context>
     <name>ZeppOSDevice</name>
     <message>
-        <location filename="../src/devices/huami/zepposdevice.cpp" line="423"/>
+        <location filename="../src/devices/huami/zepposdevice.cpp" line="441"/>
         <source>An operation is currently running, please try later</source>
         <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
     </message>

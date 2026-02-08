@@ -178,19 +178,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="41"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="292"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="312"/>
         <source>Serial No: </source>
         <translation>Serienr: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="46"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="295"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="315"/>
         <source>Hardware Rev: </source>
         <translation>Mmaskinvareversjon: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="51"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="298"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="318"/>
         <source>Software Rev: </source>
         <translation>Programvareversjon: </translation>
     </message>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="75"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="321"/>
         <source>GPS Ver: </source>
         <translation>GPS-ver: </translation>
     </message>
@@ -226,7 +226,12 @@
         <translation>Hent feilsøkingsloggen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="248"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="250"/>
+        <source>Fetch Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="268"/>
         <source>Test Popup</source>
         <translation>Test-popup</translation>
     </message>
@@ -242,19 +247,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="56"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="304"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="324"/>
         <source>Model: </source>
         <translation>Modell: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="61"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="310"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="330"/>
         <source>Firmware Rev: </source>
         <translation>Fastvare-rev: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="307"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="327"/>
         <source>Manufacturer: </source>
         <translation>Produsent: </translation>
     </message>
@@ -264,22 +269,22 @@
         <translation>Funksjonstest</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="256"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="276"/>
         <source>Send Weather</source>
         <translation>Send værdata</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="266"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="286"/>
         <source>Update Calendar</source>
         <translation>Oppdater kalender</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="279"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="299"/>
         <source>Music Control</source>
         <translation>Musikk-kontroll</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="239"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="259"/>
         <source>Request Screenshot</source>
         <translation>Forespør skjermavbildning</translation>
     </message>
@@ -315,7 +320,7 @@
         <translation>Test umiddelbar varslingstjeneste</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="252"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="272"/>
         <source>This is a test notification</source>
         <translation>Dette er en testvarsling</translation>
     </message>
@@ -342,12 +347,12 @@
         <translation>Innstillinger</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="53"/>
+        <location filename="../qml/pages/FirstPage.qml" line="58"/>
         <source>Disconnect from watch</source>
         <translation>Koble fra klokke</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="53"/>
+        <location filename="../qml/pages/FirstPage.qml" line="58"/>
         <source>Connect to watch</source>
         <translation>Koble til klokke</translation>
     </message>
@@ -357,32 +362,37 @@
         <translation>Datagrafer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="155"/>
+        <location filename="../qml/pages/FirstPage.qml" line="51"/>
+        <source>PAI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="160"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="160"/>
+        <location filename="../qml/pages/FirstPage.qml" line="165"/>
         <source>Steps</source>
         <translation>Skritt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="228"/>
+        <location filename="../qml/pages/FirstPage.qml" line="233"/>
         <source>Heartrate</source>
         <translation>Hjertefrekvens</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="254"/>
+        <location filename="../qml/pages/FirstPage.qml" line="259"/>
         <source>%1 bpm</source>
         <translation>%1 bpm</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="273"/>
+        <location filename="../qml/pages/FirstPage.qml" line="278"/>
         <source>Service</source>
         <translation>Tjeneste</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="279"/>
+        <location filename="../qml/pages/FirstPage.qml" line="284"/>
         <source>Enable on boot</source>
         <translation>Aktiver ved oppstart</translation>
     </message>
@@ -504,6 +514,39 @@
         <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
         <translation>Varighet</translation>
+    </message>
+</context>
+<context>
+    <name>PaiDataPage</name>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="9"/>
+        <source>PAI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
+        <source>Download PAI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="45"/>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="62"/>
+        <source>Last 7 Days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="92"/>
+        <source>Now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="110"/>
+        <source>Earned Today</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

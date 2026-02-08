@@ -188,37 +188,37 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="41"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="292"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="312"/>
         <source>Serial No: </source>
         <translation>序列号:</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="46"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="295"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="315"/>
         <source>Hardware Rev: </source>
         <translation>硬件版本:</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="51"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="298"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="318"/>
         <source>Software Rev: </source>
         <translation>软件版本:</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="56"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="304"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="324"/>
         <source>Model: </source>
         <translation>模型： </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="61"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="310"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="330"/>
         <source>Firmware Rev: </source>
         <translation>固件版本： </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="66"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="307"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="327"/>
         <source>Manufacturer: </source>
         <translation>作者： </translation>
     </message>
@@ -229,7 +229,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="75"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="321"/>
         <source>GPS Ver: </source>
         <translation>GPS 版本:</translation>
     </message>
@@ -270,17 +270,22 @@
         <translation>测试即时警报服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="239"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="250"/>
+        <source>Fetch Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="259"/>
         <source>Request Screenshot</source>
         <translation>请求屏幕截图</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="252"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="272"/>
         <source>This is a test notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="279"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="299"/>
         <source>Music Control</source>
         <translation>音乐控制</translation>
     </message>
@@ -305,17 +310,17 @@
         <translation>获取测试日志</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="248"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="268"/>
         <source>Test Popup</source>
         <translation>测试弹出</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="256"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="276"/>
         <source>Send Weather</source>
         <translation>发送天气</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="266"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="286"/>
         <source>Update Calendar</source>
         <translation>更新日历</translation>
     </message>
@@ -352,42 +357,47 @@
         <translation>数据图表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="53"/>
+        <location filename="../qml/pages/FirstPage.qml" line="51"/>
+        <source>PAI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="58"/>
         <source>Disconnect from watch</source>
         <translation>从手表断开</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="53"/>
+        <location filename="../qml/pages/FirstPage.qml" line="58"/>
         <source>Connect to watch</source>
         <translation>连接到手表</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="155"/>
+        <location filename="../qml/pages/FirstPage.qml" line="160"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="160"/>
+        <location filename="../qml/pages/FirstPage.qml" line="165"/>
         <source>Steps</source>
         <translation type="unfinished">步数</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="228"/>
+        <location filename="../qml/pages/FirstPage.qml" line="233"/>
         <source>Heartrate</source>
         <translation type="unfinished">心率</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="254"/>
+        <location filename="../qml/pages/FirstPage.qml" line="259"/>
         <source>%1 bpm</source>
         <translation>%1bpm</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="273"/>
+        <location filename="../qml/pages/FirstPage.qml" line="278"/>
         <source>Service</source>
         <translation>服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="279"/>
+        <location filename="../qml/pages/FirstPage.qml" line="284"/>
         <source>Enable on boot</source>
         <translation>开机自启</translation>
     </message>
@@ -503,6 +513,39 @@
         <location filename="../qml/tools/JSTools.js" line="97"/>
         <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaiDataPage</name>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="9"/>
+        <source>PAI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
+        <source>Download PAI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="45"/>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="62"/>
+        <source>Last 7 Days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="92"/>
+        <source>Now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PaiDataPage.qml" line="110"/>
+        <source>Earned Today</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
