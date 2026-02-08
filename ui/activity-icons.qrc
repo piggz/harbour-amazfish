@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/activity-icons/icon-m-activity.png</file>
+        <file>qml/activity-icons/icon-m-biking.png</file>
+        <file>qml/activity-icons/icon-m-cycling.png</file>
+        <file>qml/activity-icons/icon-m-exercise.png</file>
+        <file>qml/activity-icons/icon-m-hiking.png</file>
+        <file>qml/activity-icons/icon-m-indoorcycling.png</file>
+        <file>qml/activity-icons/icon-m-openswimming.png</file>
+        <file>qml/activity-icons/icon-m-outdoorcycling.png</file>
+        <file>qml/activity-icons/icon-m-outdoorrunning.png</file>
+        <file>qml/activity-icons/icon-m-running.png</file>
+        <file>qml/activity-icons/icon-m-skiing.png</file>
+        <file>qml/activity-icons/icon-m-swimming.png</file>
+        <file>qml/activity-icons/icon-m-trail running.png</file>
+        <file>qml/activity-icons/icon-m-treadmill.png</file>
+        <file>qml/activity-icons/icon-m-unknown.png</file>
+        <file>qml/activity-icons/icon-m-walking.png</file>
+    </qresource>
+</RCC>

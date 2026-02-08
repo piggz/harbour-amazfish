@@ -102,6 +102,7 @@ QtObject {
     property string iconDiagnostic: "image://theme/info"                                  // "Debug Info"
     property string iconFavoriteSelected: "image://theme/bookmark"                        // "Donate"
 
+    property string activityIconPrefix: "qrc:///qml/activity-icons/"
     property string customIconPrefix: "qrc:///qml/custom-icons/"
     property string customIconSuffix: ".png"
 

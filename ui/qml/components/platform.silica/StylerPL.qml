@@ -96,6 +96,7 @@ QtObject {
     property string iconClock: "image://theme/icon-m-clock"
     property string iconLocation: "image://theme/icon-m-location"
     property string iconStrava: "qrc:///qml/custom-icons/icon-strava.png"
+    property string activityIconPrefix: "qrc:///qml/activity-icons/"
     property string customIconPrefix: "qrc:///qml/custom-icons/"
     property string customIconSuffix: ".png"
 

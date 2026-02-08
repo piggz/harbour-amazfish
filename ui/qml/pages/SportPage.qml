@@ -216,7 +216,7 @@ PagePL {
                 Layout.preferredWidth: styler.themeItemSizeLarge
                 Layout.preferredHeight: styler.themeItemSizeLarge
                 Layout.alignment: Qt.AlignLeft
-                iconSource: styler.customIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
+                iconSource: styler.activityIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
             }
 
             LabelPL {

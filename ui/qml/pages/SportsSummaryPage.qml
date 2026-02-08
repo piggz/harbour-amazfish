@@ -378,7 +378,7 @@ PageListPL {
                 height: width
 
                 sourceComponent: IconPL {
-                    iconSource: styler.customIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+                    iconSource: styler.activityIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
                     width: styler.themeItemSizeSmall
                     height: width
                 }
