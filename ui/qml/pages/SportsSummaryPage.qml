@@ -320,12 +320,6 @@ PageListPL {
         visible: false
     }
 
-    IconPL {
-        id: sharedIconActivity
-        iconSource: styler.activityIconPrefix + "icon-m-" + "activity" + styler.customIconSuffix
-        visible: false;
-    }
-
     Connections {
         target: DaemonInterfaceInstance
         onOperationRunningChanged: {
@@ -382,19 +376,11 @@ PageListPL {
                 anchors.topMargin: styler.themePaddingMedium
                 width: styler.themeItemSizeSmall
                 height: width
-                z: listItemRow.z + 2
 
-                sourceComponent: Item {
-                    IconPL {
-                        id: workoutImageWithData
-                        anchors.fill: parent
-                        iconSource: styler.activityIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
-                    }
-                    IconPL {
-                        anchors.fill: parent
-                        iconSource: sharedIconActivity.iconSource
-                        visible: workoutImageWithData.status !== Image.Ready
-                    }
+                sourceComponent: IconPL {
+                    iconSource: styler.activityIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
+                    width: styler.themeItemSizeSmall
+                    height: width
                 }
 
             }
