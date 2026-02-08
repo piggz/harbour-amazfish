@@ -531,22 +531,22 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="45"/>
         <source>%1 min</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 min</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="62"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>Posledních 7 dní</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="92"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyní</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="110"/>
         <source>Earned Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Získáno dnes</translation>
     </message>
 </context>
 <context>
