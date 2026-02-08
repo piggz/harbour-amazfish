@@ -11,7 +11,8 @@
         Companion application for Huami Devices (such as Amazfit Bip, Cor, MiBand2/3 and GTS and GTS) and the Pinetime Infinitime.
     </p>
   </description>
-  <url type="homepage">https://github.com/piggz/harbour-amazfish</url>
+  <url type="homepage">https://amazfish.github.io/</url>
+  <url type="vcs-browser">https://github.com/piggz/harbour-amazfish</url>
   <url type="bugtracker">https://github.com/piggz/harbour-amazfish/issues</url>
   <url type="donation">https://paypal.me/piggz</url>
   <url type="translate">https://hosted.weblate.org/projects/harbour-amazfish/</url>
