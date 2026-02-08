@@ -19,7 +19,7 @@ public:
         StepSummary = 5,
         SleepSummary = 6,
         BatteryLog = 7,
-        HRV
+        HRV = 8
     };
     Q_ENUM(Type)
 
