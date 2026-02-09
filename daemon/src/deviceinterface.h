@@ -28,6 +28,7 @@
 #include "libwatchfish/voicecallcontroller.h"
 #include "navigationinterface.h"
 #include "achievements.h"
+#include "qbleagent.h"
 
 class HRMService;
 class MiBand2Service;
@@ -67,6 +68,11 @@ public:
     Q_SIGNAL void informationChanged(int infoKey, const QString& infoValue);
     Q_SIGNAL void connectionStateChanged();
 
+    // authentication agent
+    Q_SIGNAL void requestPasskeyFromUI(const QString& deviceName, const QString& devicePath);
+    Q_SIGNAL void requestPinCodeFromUI(const QString& deviceName, const QString& devicePath);
+    Q_SIGNAL void requestConfirmationFromUI(const QString& deviceName, const QString& devicePath, uint passkey);
+
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
     Q_INVOKABLE bool startDownload();
@@ -91,7 +97,15 @@ public:
     Q_INVOKABLE QStringList supportedDisplayItems();
     Q_INVOKABLE void immediateAlert(int level);
 
+    // authentication agent
+    Q_INVOKABLE void agentPasskeyResponse(const uint respnse);
+    Q_INVOKABLE void agentPinCodeResponse(const QString& response);
+    Q_INVOKABLE void agentConfirmationResponse(const bool response);
+
 private:
+
+    QBLEAgent *m_agent = nullptr;
+    void initAgent();
 
     int m_connectionStateChangedCount = 0;
     QString m_deviceAddress;
