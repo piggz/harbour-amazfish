@@ -228,7 +228,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="250"/>
         <source>Fetch Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Hent data</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="268"/>
@@ -364,7 +364,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="51"/>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="160"/>
@@ -521,32 +521,32 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="9"/>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
         <source>Download PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>Last ned PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="45"/>
         <source>%1 min</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 min</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="62"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>Siste 7 dager</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="92"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Nå</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="110"/>
         <source>Earned Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjent i dag</translation>
     </message>
 </context>
 <context>
