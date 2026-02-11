@@ -531,22 +531,22 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="45"/>
         <source>%1 min</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 دقیقه</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="62"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>۷ روز اخیر</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="92"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>اکنون</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="110"/>
         <source>Earned Today</source>
-        <translation type="unfinished"></translation>
+        <translation>امروز به دست آورده</translation>
     </message>
 </context>
 <context>
@@ -1697,47 +1697,47 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="166"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation>°</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="167"/>
         <source>laps</source>
-        <translation type="unfinished"></translation>
+        <translation>دور</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="168"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>م</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="169"/>
         <source>m/s</source>
-        <translation type="unfinished"></translation>
+        <translation>م/ث</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>min/km</source>
-        <translation type="unfinished"></translation>
+        <translation>د/ک‌م</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="171"/>
         <source>ml/kg/min</source>
-        <translation type="unfinished"></translation>
+        <translation>م‌ل/ک‌گ/د</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="172"/>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>ث</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="173"/>
         <source>s/km</source>
-        <translation type="unfinished"></translation>
+        <translation>ث/ک‌م</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="174"/>
         <source>s/m</source>
-        <translation type="unfinished"></translation>
+        <translation>ث/م</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="175"/>
@@ -1780,7 +1780,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="176"/>
         <source>steps/min</source>
-        <translation type="unfinished"></translation>
+        <translation>گام/دقیقه</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="179"/>
@@ -1802,12 +1802,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="18"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>نامعلوم</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Activity</source>
-        <translation type="unfinished">فعّالیت</translation>
+        <translation>فعّالیت</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="20"/>
@@ -1827,32 +1827,32 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="23"/>
         <source>Running</source>
-        <translation type="unfinished"></translation>
+        <translation>دویدن</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="24"/>
         <source>Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>قدم زدن</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="25"/>
         <source>Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>شنا کردن</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="26"/>
         <source>Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>رکاب زدن</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="27"/>
         <source>Treadmill</source>
-        <translation type="unfinished"></translation>
+        <translation>تردمیل</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="28"/>
         <source>Exercise</source>
-        <translation type="unfinished"></translation>
+        <translation>تمرین</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="29"/>
@@ -1877,12 +1877,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="33"/>
         <source>Yoga</source>
-        <translation type="unfinished"></translation>
+        <translation>یوگا</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="34"/>
         <source>Soccer</source>
-        <translation type="unfinished"></translation>
+        <translation>فوتبال</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="35"/>
@@ -1892,12 +1892,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="36"/>
         <source>Cricket</source>
-        <translation type="unfinished"></translation>
+        <translation>کریکت</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="37"/>
         <source>Basketball</source>
-        <translation type="unfinished"></translation>
+        <translation>بسکتبال</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="38"/>
@@ -1907,7 +1907,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="39"/>
         <source>Badmington</source>
-        <translation type="unfinished"></translation>
+        <translation>بدمینتون</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="40"/>
@@ -1917,12 +1917,12 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
         <source>Hiking</source>
-        <translation type="unfinished"></translation>
+        <translation>کوهنوردی</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="42"/>
         <source>Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>صخره‌نوردی</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="43"/>
@@ -1942,7 +1942,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="46"/>
         <source>Navigate</source>
-        <translation type="unfinished"></translation>
+        <translation>ناوبری</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="47"/>
@@ -1972,7 +1972,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="52"/>
         <source>Transition</source>
-        <translation type="unfinished"></translation>
+        <translation>تبدیل</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="53"/>
@@ -1987,7 +1987,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="55"/>
         <source>Pilates</source>
-        <translation type="unfinished"></translation>
+        <translation>پیلاتس</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="56"/>
@@ -1997,7 +1997,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="57"/>
         <source>Tennis</source>
-        <translation type="unfinished"></translation>
+        <translation>تنیس</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="58"/>
@@ -2017,17 +2017,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="61"/>
         <source>Training</source>
-        <translation type="unfinished"></translation>
+        <translation>تمرین</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="62"/>
         <source>Cardio</source>
-        <translation type="unfinished"></translation>
+        <translation>هوازی</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="63"/>
         <source>Breathwork</source>
-        <translation type="unfinished"></translation>
+        <translation>نفس‌گیری</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="64"/>
@@ -2042,17 +2042,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="66"/>
         <source>Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>اسکی کردن</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="67"/>
         <source>Snowboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>برف‌نوردی</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="68"/>
         <source>Rowing</source>
-        <translation type="unfinished"></translation>
+        <translation>پاروزنی</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="69"/>
