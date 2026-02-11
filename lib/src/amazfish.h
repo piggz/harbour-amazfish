@@ -73,7 +73,9 @@ public:
         TYPE_SLEEP_RESPIRATORY_RATE = 128,
         TYPE_TEMPERATURE = 256,
         TYPE_SLEEP = 512,
-        TYPE_HUAMI_STATISTICS = 1024
+        TYPE_HUAMI_STATISTICS = 1024,
+        TYPE_HRV=2048,
+
     };
     Q_ENUM(DataType)
     Q_DECLARE_FLAGS(DataTypes, DataType);

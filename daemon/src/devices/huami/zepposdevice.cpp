@@ -86,7 +86,7 @@ Amazfish::Features ZeppOSDevice::supportedFeatures() const
 Amazfish::DataTypes ZeppOSDevice::supportedDataTypes() const
 {
     return Amazfish::DataType::TYPE_ACTIVITY | Amazfish::DataType::TYPE_GPS_TRACK | Amazfish::DataType::TYPE_HEART_RATE
-            | Amazfish::DataType::TYPE_PAI | Amazfish::DataType::TYPE_SPO2 | Amazfish::DataType::TYPE_STRESS;
+            | Amazfish::DataType::TYPE_PAI | Amazfish::DataType::TYPE_SPO2 | Amazfish::DataType::TYPE_STRESS | Amazfish::DataType::TYPE_HRV;
 }
 
 bool ZeppOSDevice::isZeppOs()
