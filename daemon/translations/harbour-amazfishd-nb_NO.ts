@@ -14,37 +14,37 @@
     <message>
         <location filename="../src/achievements.cpp" line="12"/>
         <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reisen begynner, eventyrer. Bare &lt;b&gt;%1&lt;/b&gt; skritt — Hobsyssel er fremdeles i syne.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
         <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
-        <translation type="unfinished"></translation>
+        <translation>Du har krysset Brennvina. &lt;b&gt;%1&lt;/b&gt; skritt unnagjort — vokt deg for trollene lenger fremme!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="14"/>
         <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Halvveis til Mordor. &lt;b&gt;%1&lt;/b&gt; skritt er gått, og jeg har gått glipp av andre frokost.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="15"/>
         <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
-        <translation type="unfinished"></translation>
+        <translation>Dommedagsberg er i horisonten. &lt;b&gt;%1&lt;/b&gt; skritt bak deg — ikke mist ringen ennå!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="16"/>
         <source>The ring is cast into the fire. &lt;b&gt;%1&lt;/b&gt; steps done — Middle-earth is saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ringen er kastet i ilden. &lt;b&gt;%1&lt;/b&gt; skritt fullført — Midgard er reddet!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="17"/>
         <source>You kept walking after saving the world?! &lt;b&gt;%1&lt;/b&gt; steps — you’re a true legend. 🧙</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortsatte du å gå etter å ha reddet verden?! &lt;b&gt;%1&lt;/b&gt; skritt — du er en ekte legende. 🧙</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="18"/>
         <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hobbiten, eller Fram og tilbake igjen — &lt;b&gt;%1&lt;/b&gt; skritt og andre frokost er vel fortjent!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
@@ -170,7 +170,7 @@
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="106"/>
         <source>All operations complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle operasjoner fullført</translation>
     </message>
 </context>
 <context>
@@ -208,32 +208,32 @@
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>AGPS-oppdatering OK</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
-        <translation type="unfinished"></translation>
+        <translation>AGPS-filen er korrupt</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
-        <translation type="unfinished"></translation>
+        <translation>AGPS-filen har feil format</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukjent feil ved sending av AGPS-fil</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen er lastet opp.  Oppdaterer enheten nå</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Feil ved filopplasting</translation>
     </message>
 </context>
 <context>
@@ -288,7 +288,7 @@
     <message>
         <location filename="../src/devices/huami/zepposdevice.cpp" line="441"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">En operasjon kjører for øyeblikket, prøv senere</translation>
+        <translation>En operasjon pågår allerede, vennligst prøv igjen senere</translation>
     </message>
 </context>
 </TS>
