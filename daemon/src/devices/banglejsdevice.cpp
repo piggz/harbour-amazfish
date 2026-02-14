@@ -357,6 +357,8 @@ QString BangleJSDevice::information(Amazfish::Info i) const
         return QString::number(m_infoBatteryLevel);
     case Amazfish::Info::INFO_SWVER:
         return m_firmwareVersion;
+    case Amazfish::Info::INFO_HWVER:
+        return m_hardwareVersion;
     default:
         break;
     }
@@ -382,6 +384,9 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
     } else if (t == "error") {
         emit message(json.value("msg").toString());
     } else if (t == "ver") {
+        if (json.keys().contains("fw")) {
+            m_firmwareVersion = json.value("fw").toString();
+        }
         if (json.keys().contains("fw1")) {
             m_firmwareVersion = json.value("fw1").toString();
         }
@@ -389,6 +394,12 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             m_firmwareVersion = json.value("fw2").toString();
         }
         emit informationChanged(Amazfish::Info::INFO_SWVER, m_firmwareVersion);
+
+        if (json.keys().contains("hw")) {
+            m_hardwareVersion = QString::number(json.value("hw").toInt());
+        }
+        emit informationChanged(Amazfish::Info::INFO_HWVER, m_hardwareVersion);
+
     } else if (t == "status") {
         m_infoBatteryLevel = json.value("bat").toInt();
         emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(m_infoBatteryLevel));
