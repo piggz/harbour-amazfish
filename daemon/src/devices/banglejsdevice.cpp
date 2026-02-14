@@ -65,25 +65,17 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
         return;
     }
 
-    //This should provide a unique identifier and thread safe, which stays in an js int for now
-    class IdentifierGenerator
-    {
-    public :
-        qint64 getNewId() const
-        {
-            static qint64 id = QDateTime::currentMSecsSinceEpoch();
-            QMutexLocker locker(&mutex);
-            return id++;
-        }
-    private:
-        mutable QMutex mutex;
-
-    };
+    QString src = notification.appName;
+    if (notification.appName == "") {
+        // gadgedbridge does this https://codeberg.org/Freeyourgadget/Gadgetbridge/src/commit/3c8a9b5821160e80639a11554c42bba7dd4aece3/app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/banglejs/BangleJSDeviceSupport.java#L1436
+        // mapss probably at? https://github.com/espruino/BangleApps/blob/ec987e1ee2d4d6a3302baf9a26bbb2aae6f91737/apps/messageicons/icons/icon_names.json#L133
+        src = "SMS Message";
+    }
 
     QJsonObject o;
     o.insert("t", "notify");
-    o.insert("id", QString::number(IdentifierGenerator().getNewId())); //id is necessary for some apps like messageui, and should be unique
-    o.insert("src", "");
+    o.insert("id", notification.id); //id is necessary for some apps like messageui, and should be unique
+    o.insert("src", src);
     o.insert("title", "");
     o.insert("subject", notification.summary);
     o.insert("body", notification.body);
@@ -357,6 +349,12 @@ QString BangleJSDevice::information(Amazfish::Info i) const
         return QString::number(m_infoBatteryLevel);
     case Amazfish::Info::INFO_SWVER:
         return m_firmwareVersion;
+    case Amazfish::Info::INFO_HWVER:
+        return m_hardwareVersion;
+    case Amazfish::Info::INFO_STEPS:
+        return QString::number(m_steps);
+    case Amazfish::Info::INFO_HEARTRATE:
+        return QString::number(m_heartrate);
     default:
         break;
     }
@@ -382,6 +380,9 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
     } else if (t == "error") {
         emit message(json.value("msg").toString());
     } else if (t == "ver") {
+        if (json.keys().contains("fw")) {
+            m_firmwareVersion = json.value("fw").toString();
+        }
         if (json.keys().contains("fw1")) {
             m_firmwareVersion = json.value("fw1").toString();
         }
@@ -389,6 +390,12 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             m_firmwareVersion = json.value("fw2").toString();
         }
         emit informationChanged(Amazfish::Info::INFO_SWVER, m_firmwareVersion);
+
+        if (json.keys().contains("hw")) {
+            m_hardwareVersion = QString::number(json.value("hw").toInt());
+        }
+        emit informationChanged(Amazfish::Info::INFO_HWVER, m_hardwareVersion);
+
     } else if (t == "status") {
         m_infoBatteryLevel = json.value("bat").toInt();
         emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(m_infoBatteryLevel));
@@ -425,16 +432,21 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 //    } else if (t == "notify") {
     } else if (t == "act") {
 
-        long ts = json.value("ts").toInt(); // timestamp
-        int hrm = json.value("hrm").toInt(); // heart rate,
-        int stp = json.value("stp").toInt(); // steps
-        int mov = json.value("mov").toInt(); // movement intensity
-        int rt = json.value("rt").toInt();
+        long ts = json.value("ts").toInt();      // timestamp
+        m_heartrate = json.value("hrm").toInt(); // heart rate,
+        m_steps = json.value("stp").toInt();     // steps
+        int mov = json.value("mov").toInt();     // movement intensity
+        int rt = json.value("rt").toInt();       // realtime
+        QString act;
+        if (json.keys().contains("act")) {
+            act = json.value("act").toString();
+            // "UNKNOWN","NOT_WORN","WALKING","EXERCISE","LIGHT_SLEEP","DEEP_SLEEP"
+        }
 
-        qDebug() << "parsed type = act " << ts << hrm << stp << mov << rt;
+        qDebug() << "parsed type = act " << ts << m_heartrate << m_steps << mov << rt << act ;
 
-        emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString("%1").arg(hrm));
-        emit informationChanged(Amazfish::Info::INFO_STEPS, QString("%1").arg(stp));
+        emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
+        emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
 
     } else {
         qDebug() << "Gadgetbridge type " << t;
