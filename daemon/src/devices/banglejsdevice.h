@@ -51,6 +51,7 @@ private:
 
     int m_infoBatteryLevel = 0;
     QString m_firmwareVersion;
+    QString m_hardwareVersion;
 };
 
 #endif // BANGLEJSDEVICE_H
