@@ -10,6 +10,8 @@ PagePL {
     property alias activityDate: activityDateNav.day
     property alias sportDate: sportDateNav.day
 
+    property int _lastNotificationId: 1
+
     pageMenu: PageMenuPL {
         PageMenuItemPL {
             iconSource: styler.iconRefresh !== undefined ? styler.iconRefresh : ""
@@ -197,7 +199,7 @@ PagePL {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                DaemonInterfaceInstance.sendAlert(qsTr("Somebody"), qsTr("Title"), qsTr("Hello from Sailfish OS. This is a long message sent over BLE!"));
+                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, qsTr("Somebody"), qsTr("Title"), qsTr("Hello from Sailfish OS. This is a long message sent over BLE!"));
             }
         }
         ButtonPL {
@@ -206,7 +208,7 @@ PagePL {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                DaemonInterfaceInstance.sendAlert("someone-somewhere.com", qsTr("Donald Duck"), qsTr("Hello, this is an email from Sailfish OS!"));
+                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, "someone-somewhere.com", qsTr("Donald Duck"), qsTr("Hello, this is an email from Sailfish OS!"));
             }
         }
         ButtonPL {

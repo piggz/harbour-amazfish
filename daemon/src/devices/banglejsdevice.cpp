@@ -65,25 +65,17 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
         return;
     }
 
-    //This should provide a unique identifier and thread safe, which stays in an js int for now
-    class IdentifierGenerator
-    {
-    public :
-        qint64 getNewId() const
-        {
-            static qint64 id = QDateTime::currentMSecsSinceEpoch();
-            QMutexLocker locker(&mutex);
-            return id++;
-        }
-    private:
-        mutable QMutex mutex;
-
-    };
+    QString src = notification.appName;
+    if (notification.appName == "") {
+        // gadgedbridge does this https://codeberg.org/Freeyourgadget/Gadgetbridge/src/commit/3c8a9b5821160e80639a11554c42bba7dd4aece3/app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/banglejs/BangleJSDeviceSupport.java#L1436
+        // mapss probably at? https://github.com/espruino/BangleApps/blob/ec987e1ee2d4d6a3302baf9a26bbb2aae6f91737/apps/messageicons/icons/icon_names.json#L133
+        src = "SMS Message";
+    }
 
     QJsonObject o;
     o.insert("t", "notify");
-    o.insert("id", QString::number(IdentifierGenerator().getNewId())); //id is necessary for some apps like messageui, and should be unique
-    o.insert("src", "");
+    o.insert("id", notification.id); //id is necessary for some apps like messageui, and should be unique
+    o.insert("src", src);
     o.insert("title", "");
     o.insert("subject", notification.summary);
     o.insert("body", notification.body);
