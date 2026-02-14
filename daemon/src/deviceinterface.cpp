@@ -614,7 +614,15 @@ void DeviceInterface::musicChanged()
 {
     qDebug() << Q_FUNC_INFO;
     if (m_device) {
-        m_device->setMusicStatus(m_musicController.status() == watchfish::MusicController::StatusPlaying, m_musicController.title(), m_musicController.artist(), m_musicController.album());
+        if (AmazfishConfig::instance()->appTransliterate()) {
+                m_device->setMusicStatus(m_musicController.status() == watchfish::MusicController::StatusPlaying,
+                                         Transliterator::convert(m_musicController.title()),
+                                         Transliterator::convert(m_musicController.artist()),
+                                         Transliterator::convert(m_musicController.album()));
+        } else {
+            m_device->setMusicStatus(m_musicController.status() == watchfish::MusicController::StatusPlaying,
+                m_musicController.title(), m_musicController.artist(), m_musicController.album());
+        }
     }
 }
 
