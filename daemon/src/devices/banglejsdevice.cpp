@@ -359,6 +359,10 @@ QString BangleJSDevice::information(Amazfish::Info i) const
         return m_firmwareVersion;
     case Amazfish::Info::INFO_HWVER:
         return m_hardwareVersion;
+    case Amazfish::Info::INFO_STEPS:
+        return QString::number(m_steps);
+    case Amazfish::Info::INFO_HEARTRATE:
+        return QString::number(m_heartrate);
     default:
         break;
     }
@@ -436,16 +440,21 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 //    } else if (t == "notify") {
     } else if (t == "act") {
 
-        long ts = json.value("ts").toInt(); // timestamp
-        int hrm = json.value("hrm").toInt(); // heart rate,
-        int stp = json.value("stp").toInt(); // steps
-        int mov = json.value("mov").toInt(); // movement intensity
-        int rt = json.value("rt").toInt();
+        long ts = json.value("ts").toInt();      // timestamp
+        m_heartrate = json.value("hrm").toInt(); // heart rate,
+        m_steps = json.value("stp").toInt();     // steps
+        int mov = json.value("mov").toInt();     // movement intensity
+        int rt = json.value("rt").toInt();       // realtime
+        QString act;
+        if (json.keys().contains("act")) {
+            act = json.value("act").toString();
+            // "UNKNOWN","NOT_WORN","WALKING","EXERCISE","LIGHT_SLEEP","DEEP_SLEEP"
+        }
 
-        qDebug() << "parsed type = act " << ts << hrm << stp << mov << rt;
+        qDebug() << "parsed type = act " << ts << m_heartrate << m_steps << mov << rt << act ;
 
-        emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString("%1").arg(hrm));
-        emit informationChanged(Amazfish::Info::INFO_STEPS, QString("%1").arg(stp));
+        emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
+        emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
 
     } else {
         qDebug() << "Gadgetbridge type " << t;
