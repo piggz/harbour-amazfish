@@ -50,6 +50,8 @@ private:
     Q_SLOT void handleRxJson(const QJsonObject &json);
 
     int m_infoBatteryLevel = 0;
+    int m_steps = 0;
+    int m_heartrate = 0;
     QString m_firmwareVersion;
     QString m_hardwareVersion;
 };
