@@ -38,32 +38,32 @@ PagePL {
         }
         LabelPL {
             id: lblSerial
-            text: qsTr("Serial No: ")
+            text: qsTr("Serial No: ") + DaemonInterfaceInstance.information(Amazfish.INFO_SERIAL)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblHWRev
-            text: qsTr("Hardware Rev: ")
+            text: qsTr("Hardware Rev: ") + DaemonInterfaceInstance.information(Amazfish.INFO_HWVER)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblSWRev
-            text: qsTr("Software Rev: ")
+            text: qsTr("Software Rev: ") + DaemonInterfaceInstance.information(Amazfish.INFO_SWVER)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblModel
-            text: qsTr("Model: ")
+            text: qsTr("Model: ") + DaemonInterfaceInstance.information(Amazfish.INFO_MODEL)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblFWRev
-            text: qsTr("Firmware Rev: ")
+            text: qsTr("Firmware Rev: ") + DaemonInterfaceInstance.information(Amazfish.INFO_FW_REVISION)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblManufacturer
-            text: qsTr("Manufacturer: ")
+            text: qsTr("Manufacturer: ") + DaemonInterfaceInstance.information(Amazfish.INFO_MANUFACTURER)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
@@ -72,7 +72,7 @@ PagePL {
         }
         LabelPL {
             id: lblGPSVer
-            text: qsTr("GPS Ver: ")
+            text: qsTr("GPS Ver: ") + DaemonInterfaceInstance.information(Amazfish.INFO_GPSVER)
             color: styler.themeSecondaryHighlightColor
         }
 
