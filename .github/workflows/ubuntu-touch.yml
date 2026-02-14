@@ -16,7 +16,7 @@ jobs:
     - name: avoid git submodule update step in clickable.yaml
       run: sed 's/^prebuild/#prebuild/' -i clickable.yaml
     - name: build package
-      uses: tuxecure/clickable@v1
+      uses: tuxecure/clickable@v2
       with:
         image: clickable/ci-ut24.04-1.x-${{ matrix.arch }}
         run: clickable build --all --skip-review --verbose
