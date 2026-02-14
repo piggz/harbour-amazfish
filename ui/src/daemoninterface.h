@@ -47,7 +47,7 @@ public:
     Q_INVOKABLE void fetchData(int dataTypes);
     Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(Amazfish::Info i);
-    Q_INVOKABLE void sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
+    Q_INVOKABLE void sendAlert(const int notificationId, const QString &sender, const QString &subject, const QString &message, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
     Q_INVOKABLE void applyDeviceSetting(Amazfish::Settings s);
     Q_INVOKABLE void requestManualHeartrate();
