@@ -30,6 +30,12 @@ HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractD
     connect(m_keyPressTimer, &QTimer::timeout, this, &HuamiDevice::buttonPressTimeout);
 }
 
+HuamiDevice::~HuamiDevice()
+{
+    delete m_keyPressTimer;
+    delete m_fetcher;
+}
+
 void HuamiDevice::sendWeatherHuami(CurrentWeather *weather, bool sendConditionString)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));

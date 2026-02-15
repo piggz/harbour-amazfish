@@ -11,6 +11,7 @@ class HuamiDevice : public AbstractDevice
     Q_OBJECT
 public:
     explicit HuamiDevice(const QString &pairedName, QObject *parent = nullptr);
+    ~HuamiDevice();
     
     void abortOperations() override;
 

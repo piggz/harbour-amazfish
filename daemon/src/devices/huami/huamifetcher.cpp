@@ -9,7 +9,13 @@
 
 HuamiFetcher::HuamiFetcher(HuamiDevice *device) : m_device(device)
 {
+    m_operationTimeout = new QTimer();
+    connect(m_operationTimeout, &QTimer::timeout, this, &HuamiFetcher::operationTimeout);
+}
 
+HuamiFetcher::~HuamiFetcher()
+{
+    delete m_operationTimeout;
 }
 
 void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
@@ -37,6 +43,7 @@ void HuamiFetcher::fetchControl(const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO;
     if (m_currentOperation) {
+        m_operationTimeout->start(10000);
         if (m_currentOperation->handleMetaData(value)) {
             emit fetchOperationComplete(m_currentOperation);
             delete m_currentOperation;
@@ -49,6 +56,7 @@ void HuamiFetcher::fetchData(const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO;
     if (m_currentOperation) {
+        m_operationTimeout->start(10000);
         m_currentOperation->handleData(value);
     }
 }
@@ -82,6 +90,7 @@ void HuamiFetcher::reset()
     qDeleteAll(m_operations);
     delete m_currentOperation;
     m_currentOperation = nullptr;
+    m_operationTimeout->stop();
     m_device->message(tr("All operations cancelled"));
     setBusy(false);
 }
@@ -105,6 +114,7 @@ void HuamiFetcher::triggerNextOperation()
     bool wasFetching = m_currentOperation != nullptr;
     if (m_operations.isEmpty()) {
         m_currentOperation = nullptr;
+        m_operationTimeout->stop();
     } else {
         m_currentOperation = m_operations.takeFirst();
     }
@@ -120,4 +130,10 @@ void HuamiFetcher::triggerNextOperation()
         m_device->message(tr("All operations complete"));
         setBusy(false);
     }
+}
+
+void HuamiFetcher::operationTimeout()
+{
+    qDebug() << Q_FUNC_INFO;
+    reset();
 }

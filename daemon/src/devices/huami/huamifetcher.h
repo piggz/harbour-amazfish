@@ -12,6 +12,7 @@ class HuamiFetcher : public QObject
     Q_OBJECT
 public:
     HuamiFetcher(HuamiDevice *device);
+    ~HuamiFetcher();
 
     void startFetchData(Amazfish::DataTypes type);
     void fetchControl(const QByteArray &value);
@@ -33,10 +34,12 @@ private:
     AbstractFetchOperation *m_currentOperation = nullptr;
     HuamiDevice *m_device = nullptr;
     bool m_busy = false;
+    QTimer *m_operationTimeout = nullptr;
     void setBusy(bool b);
     void triggerNextOperation();
 
     QList<AbstractFetchOperation*> m_operations;
+    void operationTimeout();
 };
 
 #endif // HUAMIFETCHER_H
