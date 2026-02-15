@@ -283,7 +283,33 @@ void BangleJSDevice::downloadActivityData() {
     o.insert("t", "actfetch");
     o.insert("ts", ls);
     uart->txJson(o);
+}
 
+void BangleJSDevice::downloadSportsData() {
+    qDebug() << Q_FUNC_INFO;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+
+    QString lastSyncId = AmazfishConfig::instance()->value("device/lastsportsyncid").toString();
+
+    QJsonObject o;
+    o.insert("t", "listRecs");
+    o.insert("id", lastSyncId);
+    uart->txJson(o);
+}
+
+void BangleJSDevice::fetchActivityRec(const QString& id) {
+    qDebug() << Q_FUNC_INFO << id;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+    QJsonObject o;
+    o.insert("t", "fetchRec");
+    o.insert("id", id);
+    uart->txJson(o);
 
 }
 
@@ -492,9 +518,25 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             qDebug() << "Realtime activity " << actDate << kind << mov << m_steps << m_heartrate  ;
             emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
             emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
-        } else {
+        } else if (ts > 0) {
             m_samples << ActivitySample(actDate, kind, mov, m_steps, m_heartrate);
+        } else {
+            qDebug() << "Activity data" << actDate << kind << mov << m_steps << m_heartrate  ;
         }
+    } else if (t == "actTrksList") {
+        QJsonArray trksList = json.value("list").toArray();
+
+        for (const QJsonValue &value : trksList) {
+            QString listItem = value.toString();
+            fetchActivityRec(listItem);
+            break;
+        }
+    } else if (t == "actTrk") {
+        // t:"actTrk", log:"YYYYMMDDx" (e.g. 20240101a), lines:"four lines of the log"/"erase", cnt: "the current packet count"
+        QString logId = json.value("log").toString();
+        int currentPacketCount = json.value("cnt").toInt();
+        QString lines = json.value("lines").toString();
+        // TODO: app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/banglejs/BangleJSActivityTrack.java parseFetchedRecorderCSV
     } else {
         qDebug() << "Gadgetbridge type " << t;
     }
