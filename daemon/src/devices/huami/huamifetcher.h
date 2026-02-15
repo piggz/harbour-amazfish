@@ -21,6 +21,7 @@ public:
     void writeControl(const QByteArray value);
     void message(const QString &string);
     void jumpQueue(AbstractFetchOperation* operation);
+    void reset();
 
     Q_SLOT bool busy() const;
 

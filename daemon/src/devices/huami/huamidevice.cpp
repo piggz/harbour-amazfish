@@ -364,14 +364,12 @@ void HuamiDevice::startDownload()
 
 void HuamiDevice::abortOperations()
 {
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi){
-        //mi->cancelOperation();
-    }
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
     if (fw){
         fw->cancelOperation();
     }
+
+    m_fetcher->reset();
 }
 
 void HuamiDevice::prepareFirmwareDownload(const AbstractFirmwareInfo *info)

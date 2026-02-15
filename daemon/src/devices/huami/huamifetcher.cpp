@@ -75,6 +75,17 @@ void HuamiFetcher::jumpQueue(AbstractFetchOperation *operation)
     m_operations.push_front(operation);
 }
 
+void HuamiFetcher::reset()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    qDeleteAll(m_operations);
+    delete m_currentOperation;
+    m_currentOperation = nullptr;
+    m_device->message(tr("All operations cancelled"));
+    setBusy(false);
+}
+
 bool HuamiFetcher::busy() const
 {
     return m_busy;
