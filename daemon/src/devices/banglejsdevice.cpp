@@ -272,13 +272,23 @@ void BangleJSDevice::sendWeather(CurrentWeather *weather)
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (uart){
         QJsonObject o;
+        // t:"weather",
+        // temp,hi,lo,hum,rain,uv,code,txt,wind,wdir,loc
+        // weather report (current temp, days highest temp, days lowest temp, current humidity, rain/precip probability, UV Index, current condition code, current condition text, wind speed, wind direction)
+
         o.insert("t", "weather");
         o.insert("temp", weather->temperature());
+        o.insert("hi", weather->maxTemperature());
+        o.insert("lo", weather->minTemperature());
         o.insert("hum", weather->humidity());
+        // rain
+        // uv
+        o.insert("code", weather->weatherCode());
         o.insert("txt", weather->description());
         o.insert("wind", weather->windSpeed());
         o.insert("wdir", weather->windDeg());
         o.insert("loc", weather->city()->name());
+
 
         uart->txJson(o);
     }
