@@ -38,6 +38,7 @@ public:
     void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
     void downloadActivityData() override;
+    void downloadSportsData() override;
 
     //Weather
     void sendWeather(CurrentWeather *weather) override;
@@ -62,6 +63,7 @@ private:
     QList<ActivitySample> m_samples;
     bool saveActivitySamples();
     ActivityKind::Type convertToActivityKind(const QString &bangle_kind);
+    void fetchActivityRec(const QString &recId);
 };
 
 #endif // BANGLEJSDEVICE_H
