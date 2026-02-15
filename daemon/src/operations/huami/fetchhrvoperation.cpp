@@ -6,7 +6,7 @@
 
 FetchHrvOperation::FetchHrvOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
 {
-    setLastSyncKey("device/lastPaiTimeMillis");
+    setLastSyncKey("device/lastHrvTimeMillis");
 }
 
 void FetchHrvOperation::start(QBLEService *service)
