@@ -1,7 +1,6 @@
 #ifndef FETCHHRVOPERATION_H
 #define FETCHHRVOPERATION_H
 
-
 #include "abstractfetchoperation.h"
 #include <KDbConnection.h>
 

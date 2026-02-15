@@ -74,6 +74,7 @@ set(SOURCES
 ./src/operations/huami/zeppos/zepposagpsupdateoperation.cpp
 ./src/operations/huami/fetchhrvoperation.cpp
 ./src/operations/huami/fetchpaioperation.cpp
+./src/operations/huami/fetchspo2normaloperation.cpp
 ./src/operations/adafruitblefsoperation.cpp
 ./src/operations/adafruitblefsworker.cpp
 ./src/operations/dfuoperation.cpp
@@ -189,6 +190,7 @@ set(HEADERS
 ./src/operations/huami/zeppos/zepposagpsupdateoperation.h
 ./src/operations/huami/fetchhrvoperation.h
 ./src/operations/huami/fetchpaioperation.h
+./src/operations/huami/fetchspo2normaloperation.h
 ./src/operations/adafruitblefsoperation.h
 ./src/operations/adafruitblefsworker.h
 ./src/operations/dfuoperation.h
@@ -228,7 +230,6 @@ set(HEADERS
 )
 
 add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
-
 )
 
 find_package(PkgConfig REQUIRED)
