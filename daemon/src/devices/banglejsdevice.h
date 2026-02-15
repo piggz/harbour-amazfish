@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include "abstractdevice.h"
+#include "activitysampleex.h"
+#include "activitykind.h"
 
 class BangleJSDevice : public AbstractDevice
 {
@@ -35,6 +37,8 @@ public:
     void navigationRunning(bool running) override;
     void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
+    void downloadActivityData() override;
+
     //Weather
     void sendWeather(CurrentWeather *weather) override;
 
@@ -54,6 +58,10 @@ private:
     int m_heartrate = 0;
     QString m_firmwareVersion;
     QString m_hardwareVersion;
+
+    QList<ActivitySampleEx> m_samples;
+    bool saveActivitySamples();
+    ActivityKind::Type convertToActivityKind(const QString &bangle_kind);
 };
 
 #endif // BANGLEJSDEVICE_H

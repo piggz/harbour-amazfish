@@ -2,6 +2,8 @@
 #include "batteryservice.h"
 #include "uartservice.h"
 #include "deviceinfoservice.h"
+#include "amazfishconfig.h"
+#include "activitysampleex.h"
 
 #include <QtXml/QtXml>
 
@@ -267,6 +269,24 @@ void BangleJSDevice::navigationNarrative(const QString &flag, const QString &nar
     qDebug() << Q_FUNC_INFO;
 }
 
+void BangleJSDevice::downloadActivityData() {
+    qDebug() << Q_FUNC_INFO;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+
+    qlonglong ls = AmazfishConfig::instance()->value("device/lastactivitysyncmillis").toLongLong();
+
+    m_samples.clear();
+    QJsonObject o;
+    o.insert("t", "actfetch");
+    o.insert("ts", ls);
+    uart->txJson(o);
+
+
+}
+
 void BangleJSDevice::sendWeather(CurrentWeather *weather)
 {
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
@@ -440,9 +460,24 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 
 //    } else if (t == "call") {
 //    } else if (t == "notify") {
+    } else if (t == "actfetch") {
+        int sample_count = json.value("count").toInt();
+        QString fetch_state = json.value("state").toString();
+        if ((fetch_state == "end") && (sample_count > 0) && (m_samples.count() > 0)) {
+            QDateTime lastItemDateTime = m_samples.last().datetime(); // grab timestamp before m_samples.clear()
+            saveActivitySamples();
+            AmazfishConfig::instance()->setValue("device/lastactivitysyncmillis", lastItemDateTime.toMSecsSinceEpoch());
+        }
     } else if (t == "act") {
 
-        long ts = json.value("ts").toInt();      // timestamp
+        long ts = json.value("ts").toVariant().toLongLong();      // timestamp
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
+        QDateTime actDate= QDateTime::fromMSecsSinceEpoch(ts);
+#else
+        QDateTime actDate = QDateTime::fromTime_t(ts / 1000);
+#endif
+
         m_heartrate = json.value("hrm").toInt(); // heart rate,
         m_steps = json.value("stp").toInt();     // steps
         int mov = json.value("mov").toInt();     // movement intensity
@@ -450,86 +485,71 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         QString act;
         if (json.keys().contains("act")) {
             act = json.value("act").toString();
-            // "UNKNOWN","NOT_WORN","WALKING","EXERCISE","LIGHT_SLEEP","DEEP_SLEEP"
         }
+        ActivityKind::Type kind = convertToActivityKind(act);
 
-        qDebug() << "parsed type = act " << ts << m_heartrate << m_steps << mov << rt << act ;
-
-        emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
-        emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
-
+        if (rt) {
+            qDebug() << "Realtime activity " << actDate << kind << mov << m_steps << m_heartrate  ;
+            emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
+            emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
+        } else {
+            m_samples << ActivitySampleEx(actDate, kind, mov, m_steps, m_heartrate);
+        }
     } else {
         qDebug() << "Gadgetbridge type " << t;
-
     }
-#if 0
-    case "status": {
-        if (json.has("volt"))
-            gbDevice.setBatteryVoltage((float)json.getDouble("volt"));
-        gbDevice.sendDeviceUpdateIntent(context);
-    } break;
-    case "findPhone": {
-        boolean start = json.has("n") && json.getBoolean("n");
-        GBDeviceEventFindPhone deviceEventFindPhone = new GBDeviceEventFindPhone();
-        deviceEventFindPhone.event = start ? GBDeviceEventFindPhone.Event.START : GBDeviceEventFindPhone.Event.STOP;
-        evaluateGBDeviceEvent(deviceEventFindPhone);
-    } break;
-    case "music": {
-        GBDeviceEventMusicControl deviceEventMusicControl = new GBDeviceEventMusicControl();
-        deviceEventMusicControl.event = GBDeviceEventMusicControl.Event.valueOf(json.getString("n").toUpperCase());
-        evaluateGBDeviceEvent(deviceEventMusicControl);
-    } break;
-    case "call": {
-        GBDeviceEventCallControl deviceEventCallControl = new GBDeviceEventCallControl();
-        deviceEventCallControl.event = GBDeviceEventCallControl.Event.valueOf(json.getString("n").toUpperCase());
-        evaluateGBDeviceEvent(deviceEventCallControl);
-    } break;
-    case "notify" : {
-        GBDeviceEventNotificationControl deviceEvtNotificationControl = new GBDeviceEventNotificationControl();
-        // .title appears unused
-        deviceEvtNotificationControl.event = GBDeviceEventNotificationControl.Event.valueOf(json.getString("n").toUpperCase());
-        if (json.has("id"))
-            deviceEvtNotificationControl.handle = json.getInt("id");
-        if (json.has("tel"))
-            deviceEvtNotificationControl.phoneNumber = json.getString("tel");
-        if (json.has("msg"))
-            deviceEvtNotificationControl.reply = json.getString("msg");
-        evaluateGBDeviceEvent(deviceEvtNotificationControl);
-    } break;
-    case "act": {
-        BangleJSActivitySample sample = new BangleJSActivitySample();
-        sample.setTimestamp((int) (GregorianCalendar.getInstance().getTimeInMillis() / 1000L));
-        int hrm = 0;
-        int steps = 0;
-        if (json.has("hrm")) hrm = json.getInt("hrm");
-        if (json.has("stp")) steps = json.getInt("stp");
-        int activity = ActivityKind.TYPE_UNKNOWN;
-        if (json.has("act")) {
-            String actName = "TYPE_" + json.getString("act").toUpperCase();
-            try {
-                Field f = ActivityKind.class.getField(actName);
-                try {
-                    activity = f.getInt(null);
-                } catch (IllegalAccessException e) {
-                    LOG.info("JSON activity '"+actName+"' not readable");
-                }
-            } catch (NoSuchFieldException e) {
-                LOG.info("JSON activity '"+actName+"' not found");
-            }
+}
+
+ActivityKind::Type BangleJSDevice::convertToActivityKind(const QString &bangle_kind) {
+    static const QHash<QString, ActivityKind::Type> map =
+    {
+        {"UNKNOWN", ActivityKind::Unknown},
+        {"NOT_WORN", ActivityKind::NotWorn},
+        {"WALKING", ActivityKind::Walking},
+        {"EXERCISE", ActivityKind::Exercise},
+        {"LIGHT_SLEEP", ActivityKind::LightSleep},
+        {"DEEP_SLEEP", ActivityKind::DeepSleep},
+    };
+    return map.value(bangle_kind, ActivityKind::Unknown);
+}
+
+bool BangleJSDevice::saveActivitySamples() {
+    uint user_id = qHash(AmazfishConfig::instance()->profileName());
+    uint device_id = qHash(AmazfishConfig::instance()->pairedAddress());
+
+    KDbTransaction transaction = m_conn->beginTransaction();
+    KDbTransactionGuard tg(transaction);
+
+    KDbFieldList fields;
+    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
+
+    fields.addField(mibandActivity->field("timestamp"));
+    fields.addField(mibandActivity->field("timestamp_dt"));
+    fields.addField(mibandActivity->field("device_id"));
+    fields.addField(mibandActivity->field("user_id"));
+    fields.addField(mibandActivity->field("raw_intensity"));
+    fields.addField(mibandActivity->field("steps"));
+    fields.addField(mibandActivity->field("raw_kind"));
+    fields.addField(mibandActivity->field("heartrate"));
+
+    for (int i = 0; i < m_samples.count(); ++i) {
+        QList<QVariant> values;
+
+        values << m_samples[i].datetime().toMSecsSinceEpoch() / 1000;
+        values << m_samples[i].datetime();
+        values << device_id;
+        values << user_id;
+        values << m_samples[i].intensity();
+        values << m_samples[i].steps();
+        values << m_samples[i].kind();
+        values << m_samples[i].heartrate();
+
+        if (!m_conn->insertRecord(&fields, values)) {
+            qDebug() << Q_FUNC_INFO << "error inserting record";
+            return false;
         }
-        sample.setRawKind(activity);
-        sample.setHeartRate(hrm);
-        sample.setSteps(steps);
-        try (DBHandler dbHandler = GBApplication.acquireDB()) {
-            Long userId = getUser(dbHandler.getDaoSession()).getId();
-            Long deviceId = DBHelper.getDevice(getDevice(), dbHandler.getDaoSession()).getId();
-            BangleJSSampleProvider provider = new BangleJSSampleProvider(getDevice(), dbHandler.getDaoSession());
-            sample.setDeviceId(deviceId);
-            sample.setUserId(userId);
-            provider.addGBActivitySample(sample);
-        } catch (Exception ex) {
-            LOG.warn("Error saving activity: " + ex.getLocalizedMessage());
-        }
-    } break;
-#endif
+    }
+    tg.commit();
+    m_samples.clear();
+    return true;
 }
