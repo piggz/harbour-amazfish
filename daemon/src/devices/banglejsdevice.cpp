@@ -3,7 +3,7 @@
 #include "uartservice.h"
 #include "deviceinfoservice.h"
 #include "amazfishconfig.h"
-#include "activitysampleex.h"
+#include "activitysample.h"
 
 #include <QtXml/QtXml>
 
@@ -493,7 +493,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
             emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
         } else {
-            m_samples << ActivitySampleEx(actDate, kind, mov, m_steps, m_heartrate);
+            m_samples << ActivitySample(actDate, kind, mov, m_steps, m_heartrate);
         }
     } else {
         qDebug() << "Gadgetbridge type " << t;

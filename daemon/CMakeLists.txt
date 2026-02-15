@@ -2,7 +2,6 @@ set(SOURCES
 ./src/achievements.cpp
 ./src/activitycoordinate.cpp
 ./src/activitysample.cpp
-./src/activitysampleex.cpp
 ./src/activitysummary.cpp
 ./src/bipbatteryinfo.cpp
 ./src/dbushrm.cpp
@@ -120,7 +119,6 @@ set(HEADERS
 ./src/achievements.h
 ./src/activitycoordinate.h
 ./src/activitysample.h
-./src/activitysampleex.h
 ./src/activitysummary.h
 ./src/bipbatteryinfo.h
 ./src/codec.h
