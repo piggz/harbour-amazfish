@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "abstractdevice.h"
-#include "activitysampleex.h"
+#include "activitysample.h"
 #include "activitykind.h"
 
 class BangleJSDevice : public AbstractDevice
@@ -59,7 +59,7 @@ private:
     QString m_firmwareVersion;
     QString m_hardwareVersion;
 
-    QList<ActivitySampleEx> m_samples;
+    QList<ActivitySample> m_samples;
     bool saveActivitySamples();
     ActivityKind::Type convertToActivityKind(const QString &bangle_kind);
 };
