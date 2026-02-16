@@ -628,14 +628,14 @@ bool BangleJSDevice::saveSportData(const QString& logId) {
     summary.setStartTime(m_activityRecords.first().time());
     summary.setEndTime(m_activityRecords.last().time());
     // summary.setActivityKind()
-    summary.setName(logId);
     // summary.setName((ActivityKind::toString(summary.activityKind())) + "-" + summary.startTime().toLocalTime().toString("yyyyMMdd-HHmm"));
+    summary.setName(logId);
     summary.setValid(true);
     summary.saveToDatabase(m_conn);
 
 
     // TODO: app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/banglejs/BangleJSActivityTrack.java parseFetchedRecorderCSV
-    qDebug() << m_activityRecords;
+    // qDebug() << m_activityRecords;
 
     return false;
 }
