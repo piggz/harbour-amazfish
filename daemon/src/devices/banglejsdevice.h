@@ -71,7 +71,7 @@ private:
     QList<BangleActTrkRecord> m_activityRecords;
     bool saveSportData(const QString& logId);
     QString activityRecordsToText(const QString& logId);
-    QString activityRecordsToTCX(const QString& logId);
+    // QString activityRecordsToTCX(const QString& logId);
 
 
 };
