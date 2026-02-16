@@ -743,7 +743,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Transliterate notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Translitterer varsler</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="94"/>
@@ -929,12 +929,12 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="104"/>
         <source>Huami Display Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Huami-visningselementer</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="96"/>
         <source>Realtime HRM measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulsmåling i sanntid</translation>
     </message>
 </context>
 <context>
@@ -1409,55 +1409,55 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="86"/>
         <source>%1°; %2°</source>
-        <translation type="unfinished"></translation>
+        <translation>%1°; %2°</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°; %3m</source>
-        <translation type="unfinished"></translation>
+        <translation>%1°; %2°; %3m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="94"/>
         <source>Active Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiv tid</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="95"/>
         <source>Aerobic Training Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Aerob treningseffekt</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="96"/>
         <source>Anaerobic Training Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Anaerob treningseffekt</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="99"/>
         <location filename="../qml/pages/SportPage.qml" line="100"/>
         <location filename="../qml/pages/SportPage.qml" line="107"/>
         <source>Average Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjennomsnittlig puls</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="104"/>
         <source>Average Stroke Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjennomsnittlig distanse per tak</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="105"/>
         <location filename="../qml/pages/SportPage.qml" line="142"/>
         <source>Average Stroke Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjennomsnittlig taktfrekvens</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="106"/>
         <source>Average Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjennomsnittlig høyde</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="110"/>
         <source>Current Workout Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Nåværende treningsbelastning</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="111"/>
