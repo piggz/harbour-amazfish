@@ -71,6 +71,7 @@ bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
     KDbTransaction transaction = m_conn->beginTransaction();
     KDbTransactionGuard tg(transaction);
 
+    QDateTime lastTime;
     foreach(const auto &r, recs) {
         qDebug() << "Processing record:" << r.timestamp << r.value;
         int count;
@@ -95,6 +96,8 @@ bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
                 spoValues << r.automatic;
                 spoValues << r.value;
 
+                lastTime = r.timestamp;
+
                 result = m_conn->insertRecord(&hrvFields, spoValues);
                 if (result->lastResult().isError()) {
                     qDebug() << Q_FUNC_INFO << "Error inserting spo2 record";
@@ -106,5 +109,6 @@ bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
         }
     }
     tg.commit();
+    saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }
