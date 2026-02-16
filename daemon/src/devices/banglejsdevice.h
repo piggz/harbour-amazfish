@@ -5,6 +5,7 @@
 #include "abstractdevice.h"
 #include "activitysample.h"
 #include "activitykind.h"
+#include "bangleacttrkrecord.h"
 
 class BangleJSDevice : public AbstractDevice
 {
@@ -64,6 +65,8 @@ private:
     bool saveActivitySamples();
     ActivityKind::Type convertToActivityKind(const QString &bangle_kind);
     void fetchActivityRec(const QString &recId);
+    QList<BangleActTrkRecord> m_activityRecords;
+    bool saveSportData(const QString& logId);
 };
 
 #endif // BANGLEJSDEVICE_H

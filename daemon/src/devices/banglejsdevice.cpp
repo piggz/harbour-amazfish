@@ -4,6 +4,8 @@
 #include "deviceinfoservice.h"
 #include "amazfishconfig.h"
 #include "activitysample.h"
+#include "bangleacttrkrecord.h"
+#include "activitysummary.h"
 
 #include <QtXml/QtXml>
 
@@ -535,8 +537,32 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         // t:"actTrk", log:"YYYYMMDDx" (e.g. 20240101a), lines:"four lines of the log"/"erase", cnt: "the current packet count"
         QString logId = json.value("log").toString();
         int currentPacketCount = json.value("cnt").toInt();
-        QString lines = json.value("lines").toString();
-        // TODO: app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/banglejs/BangleJSActivityTrack.java parseFetchedRecorderCSV
+        if (json.keys().contains("lines")) {
+            QString lines = json.value("lines").toString();
+            if (lines == "erase") {
+                m_activityRecords.clear();
+            } else {
+
+
+                const QStringList rows = lines.split('\n', Qt::SkipEmptyParts);
+                for (const QString &row : rows) {
+
+                    if (row.startsWith("Time,")) {
+                        continue; // skip header
+                    }
+                    BangleActTrkRecord record =
+                        BangleActTrkRecord::fromCsvRow(row.trimmed().split(',', Qt::KeepEmptyParts));
+                    if (record.isValid()) {
+                        m_activityRecords.append(record);
+                    } else {
+                        qWarning() << "Parsing error" << row;
+                    }
+                }
+
+            }
+        } else {
+            saveSportData(logId);
+        }
     } else {
         qDebug() << "Gadgetbridge type " << t;
     }
@@ -594,4 +620,22 @@ bool BangleJSDevice::saveActivitySamples() {
     tg.commit();
     m_samples.clear();
     return true;
+}
+
+bool BangleJSDevice::saveSportData(const QString& logId) {
+    ActivitySummary summary;
+
+    summary.setStartTime(m_activityRecords.first().time());
+    summary.setEndTime(m_activityRecords.last().time());
+    // summary.setActivityKind()
+    summary.setName(logId);
+    // summary.setName((ActivityKind::toString(summary.activityKind())) + "-" + summary.startTime().toLocalTime().toString("yyyyMMdd-HHmm"));
+    summary.setValid(true);
+    summary.saveToDatabase(m_conn);
+
+
+    // TODO: app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/banglejs/BangleJSActivityTrack.java parseFetchedRecorderCSV
+    qDebug() << m_activityRecords;
+
+    return false;
 }
