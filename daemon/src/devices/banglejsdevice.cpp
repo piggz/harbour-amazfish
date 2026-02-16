@@ -532,7 +532,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         for (const QJsonValue &value : trksList) {
             QString listItem = value.toString();
             fetchActivityRec(listItem);
-            QString lastSyncId = AmazfishConfig::instance()->value("device/lastsportsyncid").toString();
+            AmazfishConfig::instance()->setValue("device/lastsportsyncid", listItem);
             break;
         }
     } else if (t == "actTrk") {
@@ -633,6 +633,8 @@ bool BangleJSDevice::saveActivitySamples() {
 }
 
 bool BangleJSDevice::saveSportData(const QString& logId) {
+
+    m_summary = ActivitySummary();
 
     auto config = AmazfishConfig::instance();
     uint id = qHash(config->profileName());
