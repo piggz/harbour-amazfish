@@ -450,6 +450,31 @@ void DeviceInterface::createTables()
         qDebug() << *t_hrv;
     }
 
+    if (!m_conn->containsTable("spo2")) {
+        KDbTableSchema *t_hrv = new KDbTableSchema("spo2");
+        t_hrv->setCaption("SPO2 Blood Oxygen");
+        t_hrv->addField(f = new KDbField("spo2_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_hrv->addField(f = new KDbField("spo2_timestamp", KDbField::Integer, KDbField::Indexed));
+        f->setCaption("Timestamp");
+
+        t_hrv->addField(f = new KDbField("spo2_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
+        f->setCaption("Timestamp in Date/Time format");
+
+        t_hrv->addField(f = new KDbField("spo2_automatic", KDbField::Boolean));
+        f->setCaption("Value");
+
+        t_hrv->addField(f = new KDbField("spo2_value", KDbField::Integer));
+        f->setCaption("Value");
+
+        if (!m_conn->createTable(t_hrv)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- hrv created --";
+        qDebug() << *t_hrv;
+    }
 
     if (!m_conn->commitTransaction(t)) {
         qDebug() << m_conn->result();

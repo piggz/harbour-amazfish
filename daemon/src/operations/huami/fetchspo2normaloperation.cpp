@@ -75,6 +75,35 @@ bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
         qDebug() << "Processing record:" << r.timestamp << r.value;
         int count;
 
+        if (m_conn && m_conn->isDatabaseUsed()) {
+            KDbEscapedString sql = KDbEscapedString("SELECT spo2_id FROM spo2 WHERE spo2_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
+            tristate success = m_conn->querySingleNumber(sql, &count);
+            qDebug() << sql << success << count;
+
+            if (success == cancelled || success == false) {
+                qDebug() << "SPO2 record does not exist, inserting";
+                auto spoData = m_conn->tableSchema("spo2");
+                KDbFieldList hrvFields;
+                hrvFields.addField(spoData->field("spo2_timestamp"));
+                hrvFields.addField(spoData->field("spo2_timestamp_dt"));
+                hrvFields.addField(spoData->field("spo2_automatic"));
+                hrvFields.addField(spoData->field("spo2_value"));
+
+                QList<QVariant> spoValues;
+                spoValues << r.timestamp.toMSecsSinceEpoch() / 1000;
+                spoValues << r.timestamp;
+                spoValues << r.automatic;
+                spoValues << r.value;
+
+                result = m_conn->insertRecord(&hrvFields, spoValues);
+                if (result->lastResult().isError()) {
+                    qDebug() << Q_FUNC_INFO << "Error inserting spo2 record";
+                    success = false;
+                }
+            } else {
+                qDebug() << "HRV record exists, skipping";
+            }
+        }
     }
     tg.commit();
     return true;
