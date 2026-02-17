@@ -12,6 +12,7 @@ public:
     BangleActTrkRecord();
 
     static BangleActTrkRecord fromCsvRow(const QStringList &columns);
+    static void fromCsvHeader(const QStringList &header);
 
     QDateTime time() const;
 
@@ -89,6 +90,33 @@ private:
     double m_latitude;
     double m_longitude;
     double m_altitude;
+
+    struct CsvColumns {
+        int time = -1;
+        int heartRate = -1;
+        int confidence = -1;
+        int source = -1;
+
+        int batteryPercentage = -1;
+        int batteryVoltage = -1;
+        int charging = -1;
+
+        int steps = -1;
+
+        int accelX = -1;
+        int accelY = -1;
+        int accelZ = -1;
+
+        int barometerTemperature = -1;
+        int barometerPressure = -1;
+        int barometerAltitude = -1;
+
+        int latitude = -1;
+        int longitude = -1;
+        int altitude = -1;
+    };
+    static CsvColumns m_columns;
+
 };
 
 QDebug operator<<(QDebug dbg, const BangleActTrkRecord &record);

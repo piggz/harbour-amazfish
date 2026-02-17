@@ -557,8 +557,12 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
                 for (const QString &row : rows) {
 
                     if (row.startsWith("Time,")) {
-                        continue; // skip header
-                    }
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                        BangleActTrkRecord::fromCsvHeader(row.trimmed().split(',', Qt::KeepEmptyParts));
+#else
+                        BangleActTrkRecord::fromCsvHeader(row.trimmed().split(',', QString::KeepEmptyParts));
+#endif
+                        continue;                     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
                     BangleActTrkRecord record = BangleActTrkRecord::fromCsvRow(row.trimmed().split(',', Qt::KeepEmptyParts));
@@ -574,7 +578,9 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 
             }
         } else {
-            saveSportData(logId);
+            if (m_activityRecords.count() > 0) {
+                saveSportData(logId);
+            }
         }
     } else if (t == "http") {
         // {"t":"http","url":"https://www.espruino.com/agps/casic.base64","id":"12060707015","timeout":10000}
