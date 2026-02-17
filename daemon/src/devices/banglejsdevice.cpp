@@ -755,8 +755,6 @@ bool BangleJSDevice::saveSportData(const QString& logId) {
     }
     m_summary.setValid(count > 0);
 
-    // TODO: app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/banglejs/BangleJSActivityTrack.java parseFetchedRecorderCSV
-
     return m_summary.saveToDatabase(m_conn);
 
 }
