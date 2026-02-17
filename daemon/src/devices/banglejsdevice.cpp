@@ -724,19 +724,34 @@ bool BangleJSDevice::saveSportData(const QString& logId) {
     }
 
     if (count > 0) {
-        QString m_gpx = activityRecordsToText(logId);
         QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-        QString filename = m_summary.name() + ".gpx";
-        QFile logFile;
-        logFile.setFileName(cachelocation.absolutePath() + "/" + filename);
-        if(logFile.open(QIODevice::WriteOnly)) {
-            qDebug() << "Saving to" << logFile.fileName();
-            QTextStream stream( &logFile );
-            stream << m_gpx;
-        }
-        logFile.close();
+        QFile gpxFile, tcxFile;
 
-        m_summary.setGPX(cachelocation.absolutePath() + "/" + filename);
+        QDir laufhelden(QDir::homePath() + "/Laufhelden/");
+
+        if (laufhelden.exists()) {
+            gpxFile.setFileName(laufhelden.absolutePath() + "/" + m_summary.name() + ".gpx");
+            tcxFile.setFileName(laufhelden.absolutePath() + "/" + m_summary.name() + ".tcx");
+        } else {
+            gpxFile.setFileName(cachelocation.absolutePath() + "/" + m_summary.name() + ".gpx");
+            tcxFile.setFileName(cachelocation.absolutePath() + "/" + m_summary.name() + ".tcx");
+        }
+
+        if(gpxFile.open(QIODevice::WriteOnly)) {
+            qDebug() << "Saving to" << gpxFile.fileName();
+            QTextStream stream( &gpxFile );
+            stream << activityRecordsToGpx();
+        }
+        gpxFile.close();
+
+        if(tcxFile.open(QIODevice::WriteOnly)) {
+            qDebug() << "Saving to" << tcxFile.fileName();
+            QTextStream stream( &tcxFile );
+            stream << activityRecordsToGpx();
+        }
+        gpxFile.close();
+
+        m_summary.setGPX(tcxFile.fileName());
     }
     m_summary.setValid(count > 0);
 
@@ -747,7 +762,7 @@ bool BangleJSDevice::saveSportData(const QString& logId) {
 }
 
 
-QString BangleJSDevice::activityRecordsToText(const QString& logId)
+QString BangleJSDevice::activityRecordsToGpx()
 {
     QString str;
     QTextStream out(&str);
@@ -766,10 +781,10 @@ QString BangleJSDevice::activityRecordsToText(const QString& logId)
 
     //Laufhelden compatible metadata
     out << "<metadata>" << endl;
-    out << "<name>" << logId << "</name>" << endl;
+    out << "<name>" << ActivityKind::toString(m_summary.activityKind()) << "</name>" << endl;
     out << "<desc></desc>" << endl;
     out << "<extensions>" << endl;
-    // out << "<meerun activity=\"" << ActivityKind::toString(m_summary.activityKind()).toLower() << "\" />" << endl;
+    out << "<meerun activity=\"" << ActivityKind::toString(m_summary.activityKind()).toLower() << "\" />" << endl;
     out << "</extensions>" << endl;
     out << "</metadata>" << endl;
 
@@ -796,6 +811,103 @@ QString BangleJSDevice::activityRecordsToText(const QString& logId)
     return str;
 }
 
+QString BangleJSDevice::activityRecordsToTcx()
+{
+    QString str;
+    QTextStream out(&str);
+    out.setRealNumberPrecision(10);
 
-//    QString AbstractActivityDetailParser::toTCX()
-// QString BangleJSDevice::activityRecordsToTCX(const QString& logId)
+    out << "<?xml version=\"1.0\" standalone=\"yes\"?>" << endl;
+    out << "<TrainingCenterDatabase" << endl;
+    out << "xmlns=\"http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2\"" << endl;
+    out << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << endl;
+    out << "xsi:schemaLocation=\"http://www.garmin.com/xmlschemas/ActivityExtension/v2" << endl;
+    out << "http://www.garmin.com/xmlschemas/ActivityExtensionv2.xsd" << endl;
+    out << "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" << endl;
+    out << "http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd\">" << endl;
+
+    out << "<Activities>" << endl;
+    out << "<Activity Sport=\"" + ActivityKind::toString(m_summary.activityKind()) + "\">" << endl;
+    out << "<Id>" << m_summary.name() << "</Id>" << endl;
+    out << "<Lap StartTime=\"" << m_summary.startTime().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "\">" << endl;
+
+    //TotalTimeSeconds
+    ActivitySummary::meta m = m_summary.metaData("activeSeconds");
+    if (m.key == "activeSeconds") {
+        out << "<TotalTimeSeconds>" << m.value << "</TotalTimeSeconds>" << endl;
+    }
+
+    //DistanceMeters
+    m = m_summary.metaData("distanceMeters");
+    if (m.key == "distanceMeters") {
+        out << "<DistanceMeters>" << m.value << "</DistanceMeters>" << endl;
+    }
+
+    //Calories
+    m = m_summary.metaData("caloriesBurnt");
+    if (m.key == "caloriesBurnt") {
+        out << "<Calories>" << m.value << "</Calories>" << endl;
+    }
+
+    //AverageHeartRateBpm
+    m = m_summary.metaData("averageHR");
+    if (m.key == "averageHR") {
+        out << "<AverageHeartRateBpm><Value>" << m.value << "</Value></AverageHeartRateBpm>" << endl;
+    }
+
+    //MaximumHeartRateBpm
+    m = m_summary.metaData("maxHR");
+    if (m.key == "maxHR") {
+        out << "<MaximumHeartRateBpm><Value>" << m.value << "</Value></MaximumHeartRateBpm>" << endl;
+    }
+
+    out << "<Track>" << endl;
+
+    foreach (const BangleActTrkRecord &record, m_activityRecords) {
+        out << "<Trackpoint>" << endl;
+        QDateTime dt = record.time();
+        //dt.setTimeZone(QTimeZone::systemTimeZone());
+        //dt.setTimeSpec(Qt::OffsetFromUTC);
+        out << "<Time>" << dt.toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "</Time>" << endl;
+
+        if ((record.latitude() != 0) && (record.longitude() != 0)) {
+            out << "  <Position>" << endl;
+            out << "    <LatitudeDegrees>" << record.latitude() << "</LatitudeDegrees>" << endl;
+            out << "    <LongitudeDegrees>" << record.longitude() << "</LongitudeDegrees>" << endl;
+            out << "  </Position>" << endl;
+            out << "  <AltitudeMeters>" << record.altitude() << "</AltitudeMeters>" << endl;
+        }
+        if (record.heartRate() != 0) {
+            out << "<HeartRateBpm xsi:type=\"HeartRateInBeatsPerMinute_t\"><Value>" << record.heartRate() << "</Value></HeartRateBpm>" << endl;
+        }
+        out << "</Trackpoint>" << endl;
+    }
+
+    out << "</Track>" << endl;
+
+    //Steps
+    m = m_summary.metaData("steps");
+    if (m.key == "steps") {
+        out << "<Extensions>" << endl;
+        out << "  <LX xmlns=\"http://www.garmin.com/xmlschemas/ActivityExtension/v2\">" << endl;
+        out << "    <Steps>" << m.value << "</Steps>" << endl;
+        out << "  </LX>" << endl;
+        out << "</Extensions>" << endl;
+    }
+
+    out << "</Lap>" << endl;
+
+    //Creator
+    out << "<Creator xsi:type=\"Device_t\"><Name>" << AmazfishConfig::instance()->pairedName() << "</Name><UnitId>0000000000</UnitId><ProductId>0000</ProductId><Version><VersionMajor>1</VersionMajor><VersionMinor>0</VersionMinor><BuildMajor>1</BuildMajor><BuildMinor>0</BuildMinor></Version></Creator>" << endl;
+
+    out << "</Activity>" << endl;
+    out << "</Activities>" << endl;
+
+    //Author
+    out << "<Author xsi:type=\"Application_t\"><Name>Amazfish</Name><Build><Version><VersionMajor>1</VersionMajor><VersionMinor>0</VersionMinor><BuildMajor>1</BuildMajor><BuildMinor>0</BuildMinor></Version></Build><LangID>en</LangID><PartNumber>000-00000-00</PartNumber></Author>" << endl;
+
+    out << "</TrainingCenterDatabase>" << endl;
+
+    return str;
+
+}
