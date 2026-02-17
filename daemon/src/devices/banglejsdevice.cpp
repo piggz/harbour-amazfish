@@ -747,7 +747,7 @@ bool BangleJSDevice::saveSportData(const QString& logId) {
         if(tcxFile.open(QIODevice::WriteOnly)) {
             qDebug() << "Saving to" << tcxFile.fileName();
             QTextStream stream( &tcxFile );
-            stream << activityRecordsToGpx();
+            stream << activityRecordsToTcx();
         }
         gpxFile.close();
 
