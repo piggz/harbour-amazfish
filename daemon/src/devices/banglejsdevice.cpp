@@ -8,12 +8,15 @@
 #include "activitysummary.h"
 #include <algorithm>
 
+#include <QtNetwork>
 #include <QtXml/QtXml>
 
 BangleJSDevice::BangleJSDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO << pairedName;
     connect(this, &QBLEDevice::propertiesChanged, this, &BangleJSDevice::onPropertiesChanged, Qt::UniqueConnection);
+
+    manager = new QNetworkAccessManager(this);
 }
 
 void BangleJSDevice::pair()
@@ -573,9 +576,55 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         } else {
             saveSportData(logId);
         }
+    } else if (t == "http") {
+        // {"t":"http","url":"https://www.espruino.com/agps/casic.base64","id":"12060707015","timeout":10000}
+        if (json.keys().contains("url")) {
+
+            QUrl url(json.value("url").toString());
+            QNetworkRequest request(url);
+
+            auto reply = manager->get(request);
+            reply->setProperty("id", json.value("id").toString());
+            qDebug() << "download url" << url;
+
+            connect(reply, &QNetworkReply::finished, this, &BangleJSDevice::networkReply);
+        }
     } else {
         qDebug() << "Gadgetbridge type " << t;
     }
+}
+
+void BangleJSDevice::networkReply()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+    if (!reply) {
+        return;
+    }
+    QString id = reply->property("id").toString();
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+
+    if (!uart) {
+        reply->deleteLater();
+        return;
+    }
+
+    if (reply->error() != QNetworkReply::NoError) {
+        qDebug() << "Error:" << reply->errorString();
+    } else {
+
+        QByteArray data = reply->readAll();
+        qDebug() << "Response size:" << data.size();
+
+        QJsonObject p;
+        p.insert("t", "http");
+        p.insert("id", id);
+        p.insert("resp", QString::fromUtf8(data));
+
+        uart->txJson(p);
+    }
+
+    reply->deleteLater();
 }
 
 ActivityKind::Type BangleJSDevice::convertToActivityKind(const QString &bangle_kind) {

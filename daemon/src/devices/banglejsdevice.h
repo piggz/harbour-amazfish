@@ -73,6 +73,8 @@ private:
     QString activityRecordsToGpx();
     QString activityRecordsToTcx();
 
+    QNetworkAccessManager *manager;
+    void networkReply();
 };
 
 #endif // BANGLEJSDEVICE_H
