@@ -1,14 +1,14 @@
-#include "fetchspo2normaloperation.h"
+#include "fetchspo2sleepoperation.h"
 #include "typeconversion.h"
 #include "huami/huamifetcher.h"
 #include "mibandservice.h"
 
-FetchSpo2NormalOperation::FetchSpo2NormalOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
+FetchSpo2SleepOperation::FetchSpo2SleepOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
 {
-    setLastSyncKey("device/lastSpo2NormalTimeMillis");
+    setLastSyncKey("device/lastSpo2SleepTimeMillis");
 }
 
-void FetchSpo2NormalOperation::start(QBLEService *service)
+void FetchSpo2SleepOperation::start(QBLEService *service)
 {
     setStartDate(lastActivitySync());
 
@@ -19,42 +19,43 @@ void FetchSpo2NormalOperation::start(QBLEService *service)
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, true);
 
     //Send log read configuration
-    QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPO2_NORMAL) + rawDate;
+    QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPO2_SLEEP) + rawDate;
     m_fetcher->writeControl(cmd);
 }
 
-bool FetchSpo2NormalOperation::processBufferedData()
+bool FetchSpo2SleepOperation::processBufferedData()
 {
     qDebug() << Q_FUNC_INFO << m_buffer.length() << (m_buffer.length() / 65);
 
-    if ((m_buffer.length() - 1) % 65 != 0) {
-        qDebug() << "Unexpected length for SPO2 data, not divisible by 65" << m_buffer.length();
+    if ((m_buffer.length() - 1) % 30 != 0) {
+        qDebug() << "Unexpected length for SPO2 sleep data, not divisible by 30" << m_buffer.length();
         return false;
     }
 
     QDateTime timestamp;
-    QVector<Spo2Record> recs;
+    QVector<Spo2SleepRecord> recs;
 
     int version = m_buffer[0];
     if (version != 2) {
-        qDebug() << "Unknown normal spo2 data version " << version;
+        qDebug() << "Unknown sleep spo2 data version " << version;
         return false;
     }
 
-    for (int i = 1; i < m_buffer.length(); i+=65) {
+    for (int i = 1; i < m_buffer.length(); i+=30) {
         int offset = i;
         int32_t timestampSeconds = TypeConversion::toUint32(m_buffer, offset);
         timestamp.setMSecsSinceEpoch((qint64)timestampSeconds * 1000);
-        char spoRaw = m_buffer[offset++];
-        bool automatic = spoRaw < 0;
-        uint8_t spo2 = (uint8_t) (spoRaw < 0 ? spoRaw + 128 : spoRaw);
 
-        offset += 60; // unknown 60 bytes
-
-        Spo2Record spo;
+        Spo2SleepRecord spo;
         spo.timestamp = timestamp;
-        spo.automatic = automatic;
-        spo.value = spo2;
+        spo.value =  (uint8_t)m_buffer[offset++];
+        spo.duration =  (uint8_t)m_buffer[offset++];
+        spo.spo2High = m_buffer.mid(offset, 6);
+        offset += 6;
+        spo.spo2Low = m_buffer.mid(offset, 6);
+        offset += 6;
+        spo.spo2Quality = m_buffer.mid(offset, 8);
+        offset += 8;
 
         recs << spo;
     }
@@ -62,7 +63,7 @@ bool FetchSpo2NormalOperation::processBufferedData()
     return saveRecords(recs);
 }
 
-bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
+bool FetchSpo2SleepOperation::saveRecords(QVector<Spo2SleepRecord> recs)
 {
     QSharedPointer<KDbSqlResult> result;
 
@@ -77,24 +78,30 @@ bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
         int count;
 
         if (m_conn && m_conn->isDatabaseUsed()) {
-            KDbEscapedString sql = KDbEscapedString("SELECT spo2_id FROM spo2 WHERE spo2_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
+            KDbEscapedString sql = KDbEscapedString("SELECT spo2sleep_id FROM spo2sleep WHERE spo2_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
             tristate success = m_conn->querySingleNumber(sql, &count);
             qDebug() << sql << success << count;
 
             if (success == cancelled || success == false) {
                 qDebug() << "SPO2 record does not exist, inserting";
-                auto spoData = m_conn->tableSchema("spo2");
+                auto spoData = m_conn->tableSchema("spo2sleep");
                 KDbFieldList spoFields;
-                spoFields.addField(spoData->field("spo2_timestamp"));
-                spoFields.addField(spoData->field("spo2_timestamp_dt"));
-                spoFields.addField(spoData->field("spo2_automatic"));
-                spoFields.addField(spoData->field("spo2_value"));
+                spoFields.addField(spoData->field("spo2sleep_timestamp"));
+                spoFields.addField(spoData->field("spo2sleep_timestamp_dt"));
+                spoFields.addField(spoData->field("spo2sleep_value"));
+                spoFields.addField(spoData->field("spo2sleep_duration"));
+                spoFields.addField(spoData->field("spo2sleep_high"));
+                spoFields.addField(spoData->field("spo2sleep_low"));
+                spoFields.addField(spoData->field("spo2sleep_quality"));
 
                 QList<QVariant> spoValues;
                 spoValues << r.timestamp.toMSecsSinceEpoch() / 1000;
                 spoValues << r.timestamp;
-                spoValues << r.automatic;
                 spoValues << r.value;
+                spoValues << r.duration;
+                spoValues << r.spo2High;
+                spoValues << r.spo2Low;
+                spoValues << r.spo2Quality;
 
                 lastTime = r.timestamp;
 
