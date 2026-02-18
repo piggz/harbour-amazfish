@@ -510,7 +510,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         QDateTime actDate = QDateTime::fromTime_t(ts / 1000);
 #endif
 
-        m_heartrate = json.value("hrm").toInt(); // heart rate,
+        m_heartrate = json.value("hrm").toDouble(); // heart rate,
         m_steps = json.value("stp").toInt();     // steps
         int mov = json.value("mov").toInt();     // movement intensity
         int rt = json.value("rt").toInt();       // realtime
