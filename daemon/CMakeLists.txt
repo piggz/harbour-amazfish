@@ -51,6 +51,7 @@ set(SOURCES
 ./src/devices/huami/zeppos/zepposfiletransferservice.cpp
 ./src/devices/huami/zeppos/filetransfer/zepposfiletransferimpl.cpp
 ./src/devices/huami/zeppos/filetransfer/zepposfiletransferv3.cpp
+./src/devices/huami/zeppos/filetransfer/zepposfiletransferv2.cpp
 ./src/devices/asteroidosdevice.cpp
 ./src/devices/banglejsdevice.cpp
 ./src/devices/pebbledevice.cpp
@@ -168,6 +169,7 @@ set(HEADERS
 ./src/devices/huami/zeppos/zepposfiletransferservice.h
 ./src/devices/huami/zeppos/filetransfer/zepposfiletransferimpl.h
 ./src/devices/huami/zeppos/filetransfer/zepposfiletransferv3.h
+./src/devices/huami/zeppos/filetransfer/zepposfiletransferv2.h
 ./src/devices/asteroidosdevice.h
 ./src/devices/banglejsdevice.h
 ./src/devices/pebbledevice.h
