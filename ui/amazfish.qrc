@@ -21,6 +21,7 @@
         <file>qml/pages/Settings-menu.qml</file>
         <file>qml/pages/Settings-user.qml</file>
         <file>qml/pages/SleepPage.qml</file>
+        <file>qml/pages/Spo2DataPage.qml</file>
         <file>qml/pages/SportPage.qml</file>
         <file>qml/pages/SportsSummaryPage.qml</file>
         <file>qml/pages/StravaSettingsPage.qml</file>
@@ -76,6 +77,5 @@
         <file>qml/tools/JSTools.js</file>
         <file>qml/harbour-amazfish.qml</file>
         <file>qml/pics/devices/amazfit-balance.png</file>
-        <file>qml/pages/Spo2DataPage.qml</file>
     </qresource>
 </RCC>
