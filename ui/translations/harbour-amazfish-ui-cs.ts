@@ -109,7 +109,7 @@
         <location filename="../qml/pages/BatteryPage.qml" line="9"/>
         <location filename="../qml/pages/BatteryPage.qml" line="48"/>
         <source>Battery</source>
-        <translation>Baterie</translation>
+        <translation>Akumulátor</translation>
     </message>
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="24"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="53"/>
         <source>File not supported on this device</source>
-        <translation>Soubor není podporavný na tomto zařízení</translation>
+        <translation>Soubor není na tomto zařízení podporovaný</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="7"/>
@@ -153,7 +153,7 @@
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="22"/>
         <source>Select a file to install.</source>
-        <translation>Vybrat soubor k instalaci.</translation>
+        <translation>Vyberte soubor k instalaci.</translation>
     </message>
 </context>
 <context>
@@ -307,7 +307,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="200"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation>Ahoj z Sailfish OS. Toto je dlouhá zpráva odeslaná přes BLE!</translation>
+        <translation>Zdravím ze Sailfish OS. Toto je dlouhá zpráva odeslaná přes BLE!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
@@ -536,7 +536,7 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="62"/>
         <source>Last 7 Days</source>
-        <translation>Posledních 7 dní</translation>
+        <translation>Uplynulých 7 dnů</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="92"/>
@@ -559,7 +559,7 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation>Nebylo nalezeno žádné zařízení</translation>
+        <translation>Nenalezena žádná zařízení</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
@@ -678,7 +678,7 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="110"/>
         <source>Low battery notification</source>
-        <translation>Upozornění na slabou baterii</translation>
+        <translation>Upozornění na téměř vybitý akumulátor</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="118"/>
@@ -962,7 +962,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="71"/>
         <source>Workout</source>
-        <translation>Trénink</translation>
+        <translation>Tělesné cvičení</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="72"/>
@@ -1137,7 +1137,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="106"/>
         <source>Battery</source>
-        <translation>Baterie</translation>
+        <translation>Akumulátor</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="107"/>
@@ -1160,7 +1160,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="8"/>
         <source>Settings Menu</source>
-        <translation>Мenu nastavení</translation>
+        <translation>Nabídka nastavení</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="64"/>
@@ -1990,7 +1990,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="54"/>
         <source>Stair Stepper</source>
-        <translation>Schodový trenažér</translation>
+        <translation>Schodové pedály</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="55"/>
@@ -2400,7 +2400,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="136"/>
         <source>Cross Trainer</source>
-        <translation>Eliptický trenažér</translation>
+        <translation>Crossový trenažér</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="137"/>
@@ -2480,7 +2480,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="152"/>
         <source>Parallel Bar</source>
-        <translation>Bradla</translation>
+        <translation>Bradlo</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="153"/>
@@ -2525,7 +2525,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="161"/>
         <source>Track And Field</source>
-        <translation>Atletika</translation>
+        <translation>Atletika (severoamerická)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="162"/>
@@ -2670,7 +2670,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="190"/>
         <source>Wrestling</source>
-        <translation>Zápas</translation>
+        <translation>Zápasení</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="191"/>
@@ -2755,7 +2755,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="207"/>
         <source>Skating</source>
-        <translation>Bruslení</translation>
+        <translation>Kolečkové brusle</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="208"/>
@@ -2795,7 +2795,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="215"/>
         <source>Parkour</source>
-        <translation>Parašutismus</translation>
+        <translation>Parkour</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="216"/>
@@ -3015,7 +3015,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="259"/>
         <source>Stair Climber</source>
-        <translation>Schodový trenažér</translation>
+        <translation>Schodový pás</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="260"/>
@@ -3225,7 +3225,7 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="333"/>
         <source>Download Next Activity</source>
-        <translation>Stáhnout další aktivity</translation>
+        <translation>Stáhnout další aktivitu</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="457"/>
@@ -3248,7 +3248,7 @@
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="25"/>
         <source>Strava settings</source>
-        <translation>Nastavení Strava</translation>
+        <translation>Nastavení pro Strava</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="36"/>
@@ -3274,7 +3274,7 @@
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="70"/>
         <source>not logged in</source>
-        <translation>nepříhlášen</translation>
+        <translation>nepřihlášeni</translation>
     </message>
 </context>
 <context>
@@ -3287,7 +3287,7 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="43"/>
         <source>Activity name for Strava</source>
-        <translation>Jméno aktivity pro Stravu</translation>
+        <translation>Název aktivity pro Stravu</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="44"/>
@@ -3327,22 +3327,22 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="133"/>
         <source>Uploading data...</source>
-        <translation>Odesílají se data...</translation>
+        <translation>Odesílání dat…</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="150"/>
         <source>Checking upload...</source>
-        <translation>Kontrolují se nahrané...</translation>
+        <translation>Kontrolování nahraného…</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="213"/>
         <source>TCX uploaded...</source>
-        <translation>TCX nahráno...</translation>
+        <translation>TCX nahráno…</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="248"/>
         <source>Activity upload complete</source>
-        <translation>Odesílání aktivity je dokončené</translation>
+        <translation>Odesílání aktivity dokončeno</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
@@ -3360,7 +3360,7 @@
     <message>
         <location filename="../qml/pages/UnpairDeviceDialog.qml" line="31"/>
         <source>Before proceeding you need to unpair your current device.</source>
-        <translation>Před tím než budete pokračovat musíte zrušit párování s akutální zařízením.</translation>
+        <translation>Před pokračováním je třeba zrušit spárování se stávajícím zařízením.</translation>
     </message>
 </context>
 </TS>
