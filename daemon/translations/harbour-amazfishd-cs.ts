@@ -82,7 +82,7 @@
     <message>
         <location filename="../src/devices/asteroidosdevice.cpp" line="323"/>
         <source>Stored %1...</source>
-        <translation>Uloženo %1 ...</translation>
+        <translation>Uloženo %1…</translation>
     </message>
 </context>
 <context>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="110"/>
         <source>Device is not valid, it may not be supported</source>
-        <translation>Zařízení není platné, nemusí být podporované</translation>
+        <translation>Zařízení není platné – je možné, že není podporováno</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="517"/>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/devices/huami/gtsdevice.cpp" line="230"/>
         <source>An operation is currently running, please try later</source>
-        <translation>Operace právě běží, prosím zkuste to později</translation>
+        <translation>Operace právě probíhá – zkuste to později</translation>
     </message>
 </context>
 <context>
@@ -152,7 +152,7 @@
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="357"/>
         <source>Sending %1...</source>
-        <translation>Odesílá %1 ...</translation>
+        <translation>Odesílání %1…</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="360"/>
@@ -170,7 +170,7 @@
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="106"/>
         <source>All operations complete</source>
-        <translation>Všechny operace byli dokončeny</translation>
+        <translation>Všechny operace byly dokončeny</translation>
     </message>
 </context>
 <context>
@@ -194,13 +194,13 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="406"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="419"/>
         <source>Sending file...</source>
-        <translation>Odesílá soubor...</translation>
+        <translation>Odesílání souboru…</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="409"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="422"/>
         <source>No file selected</source>
-        <translation>Nebyl vybrán soubor</translation>
+        <translation>Nevybrán žádný soubor</translation>
     </message>
 </context>
 <context>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation>AGPS aktualizace Ok</translation>
+        <translation>AGPS aktualizace OK</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
@@ -233,7 +233,7 @@
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
-        <translation>Odesílání souboru selhalo</translation>
+        <translation>Odesílání souboru se nezdařilo</translation>
     </message>
 </context>
 <context>
@@ -254,14 +254,14 @@
         <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="84"/>
         <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="87"/>
         <source>Update operation failed</source>
-        <translation>Operace aktualizace selhala</translation>
+        <translation>Operace aktualizace se nezdařila</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="224"/>
         <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="96"/>
         <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="95"/>
         <source>Update operation failed, unexpected metadata</source>
-        <translation>Operace aktualizace selhala, neočekávané metadata</translation>
+        <translation>Operace aktualizace se nezdařila – neočekávané metadata</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="71"/>
@@ -273,7 +273,7 @@
     <message>
         <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="94"/>
         <source>Update operation failed, filetype not supported</source>
-        <translation>Operace aktualizace selhala, typ souboru není podporovaný</translation>
+        <translation>Operace aktualizace se nezdařila – nepodporovaný typ souboru</translation>
     </message>
     <message>
         <location filename="../src/operations/dfuoperation.cpp" line="144"/>
@@ -288,7 +288,7 @@
     <message>
         <location filename="../src/devices/huami/zepposdevice.cpp" line="441"/>
         <source>An operation is currently running, please try later</source>
-        <translation>Momentálně probíhá operace, prosím zkuste to později</translation>
+        <translation>Momentálně probíhá operace – zkuste to později</translation>
     </message>
 </context>
 </TS>
