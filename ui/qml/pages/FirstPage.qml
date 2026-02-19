@@ -53,6 +53,11 @@ PagePL {
             visible: _authenticated ? DaemonInterfaceInstance.supportedDataTypes() & Amazfish.TYPE_PAI : false
         }
         PageMenuItemPL {
+            text: qsTr("Blood Oxygen")
+            onClicked: app.pages.push(Qt.resolvedUrl("Spo2DataPage.qml"))
+            visible: _authenticated ? DaemonInterfaceInstance.supportedDataTypes() & Amazfish.TYPE_SPO2 : false
+        }
+        PageMenuItemPL {
             visible: AmazfishConfig.pairedAddress
             enabled: !_connecting
             text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")

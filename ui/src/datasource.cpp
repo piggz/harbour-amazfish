@@ -179,6 +179,14 @@ QVariant DataSource::data(Type type, const QDate &day)
             qry = "SELECT hrv_timestamp_dt, hrv_value FROM hrv WHERE hrv_timestamp_dt >= '" +
                     day.toString("yyyy-MM-ddT00:00:00") + "' AND hrv_timestamp_dt <= '" +
                     day.toString("yyyy-MM-ddT23:59:59") +  "' ORDER BY hrv_timestamp_dt ASC";
+        } else if (type == DataSource::Spo2Normal) {
+            qry = "SELECT spo2_timestamp_dt, spo2_value FROM spo2 WHERE date(spo2_timestamp_dt) >= date('" +
+                    day.toString("yyyy-MM-ddT00:00:00") + "','-10 day') AND spo2_timestamp_dt <= '" +
+                    day.toString("yyyy-MM-ddT23:59:59") +  "' GROUP BY date(spo2_timestamp_dt) ORDER BY spo2_timestamp_dt ASC";
+        } else if (type == DataSource::Spo2Sleep) {
+            qry = "SELECT spo2sleep_timestamp_dt, spo2sleep_value FROM spo2sleep WHERE date(spo2sleep_timestamp_dt) >= date('" +
+                    day.toString("yyyy-MM-ddT00:00:00") + "','-10 day') AND spo2sleep_timestamp_dt <= '" +
+                    day.toString("yyyy-MM-ddT23:59:59") +  "' GROUP BY date(spo2sleep_timestamp_dt) ORDER BY spo2sleep_timestamp_dt ASC";
         }
 
         qDebug() << qry;

@@ -76,5 +76,6 @@
         <file>qml/tools/JSTools.js</file>
         <file>qml/harbour-amazfish.qml</file>
         <file>qml/pics/devices/amazfit-balance.png</file>
+        <file>qml/pages/Spo2DataPage.qml</file>
     </qresource>
 </RCC>

@@ -77,7 +77,7 @@ PagePL {
 
             axisY.units: qsTr("BPM")
             type: DataSource.Heartrate
-            graphType: 2
+            graphType: bar
 
             minY: 0
             maxY: 200

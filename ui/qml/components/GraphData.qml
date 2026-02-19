@@ -249,6 +249,7 @@ Item {
                     if (graphType == line) {
                         x = -stepX;
                     }
+
                     var valueSum = 0;
                     for (var i = 0; i < end; i++) {
                         valueSum += points[i].y;

@@ -19,7 +19,9 @@ public:
         StepSummary = 5,
         SleepSummary = 6,
         BatteryLog = 7,
-        HRV = 8
+        HRV = 8,
+        Spo2Normal = 9,
+        Spo2Sleep = 10
     };
     Q_ENUM(Type)
 
