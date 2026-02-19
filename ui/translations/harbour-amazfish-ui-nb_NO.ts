@@ -1467,22 +1467,22 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="114"/>
         <source>Downhill Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Utfortid</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="115"/>
         <source>Elevation Gain</source>
-        <translation type="unfinished"></translation>
+        <translation>Høydemeter opp</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="116"/>
         <source>Elevation Loss</source>
-        <translation type="unfinished"></translation>
+        <translation>Høydemeter ned</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="117"/>
         <source>Time on Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Tid på flata</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="119"/>
@@ -1493,12 +1493,12 @@
         <location filename="../qml/pages/SportPage.qml" line="120"/>
         <location filename="../qml/pages/SportPage.qml" line="121"/>
         <source>Max Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Makspuls</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="122"/>
         <source>VO₂ Max</source>
-        <translation type="unfinished"></translation>
+        <translation>Maksimalt oksygenopptak</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="127"/>
@@ -1508,7 +1508,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="128"/>
         <source>Min Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimumspuls</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="131"/>
@@ -1518,17 +1518,17 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="180"/>
         <source>SWOLF</source>
-        <translation type="unfinished"></translation>
+        <translation>SWOLF</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="225"/>
         <source>Start: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Start: %1 %2</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="231"/>
         <source>Duration: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Varighet: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="237"/>
