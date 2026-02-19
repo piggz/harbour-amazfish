@@ -4,6 +4,7 @@
         <file>qml/cover/CoverPage.qml</file>
         <file>qml/pages/AddCityPage.qml</file>
         <file>qml/pages/AnalysisPage.qml</file>
+	<file>qml/pages/AuthAgentDialog.qml</file>
         <file>qml/pages/AuthKeyDialog.qml</file>
         <file>qml/pages/BatteryPage.qml</file>
         <file>qml/pages/BipFirmwarePage.qml</file>

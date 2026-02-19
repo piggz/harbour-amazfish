@@ -48,6 +48,16 @@ void DaemonInterface::connectDaemon()
     connect(iface, SIGNAL(buttonPressed(int)), this, SIGNAL(buttonPressed(int)), Qt::UniqueConnection);
     connect(iface, SIGNAL(informationChanged(int, QString)), this, SIGNAL(informationChanged(int,QString)), Qt::UniqueConnection);
 
+    connect(iface, SIGNAL(requestPasskeyFromUI(const QString&, const QString&)),
+	    this, SIGNAL(requestPasskey(const QString&, const QString&)), Qt::UniqueConnection);
+
+    connect(iface, SIGNAL(requestPinCodeFromUI(const QString&, const QString&)),
+	    this, SIGNAL(requestPinCode(const QString&, const QString&)), Qt::UniqueConnection);
+
+    connect(iface, SIGNAL(requestConfirmationFromUI(const QString&, const QString&, uint)),
+	    this, SIGNAL(requestConfirmation(const QString&, const QString&, uint)), Qt::UniqueConnection);
+
+
     //Property proxying
     connect(iface, SIGNAL(connectionStateChanged()), this, SLOT(changeConnectionState()), Qt::UniqueConnection);
     changeConnectionState();
@@ -395,4 +405,26 @@ void DaemonInterface::immediateAlert(int level) {
         return;
     }
     iface->call(QStringLiteral("immediateAlert"), level);
+}
+
+void DaemonInterface::agentPasskeyResponse(const uint response) {
+    if (!iface || !iface->isValid()) {
+	return;
+    }
+    iface->call(QStringLiteral("agentPasskeyResponse"), response);
+}
+
+void DaemonInterface::agentPinCodeResponse(const QString& response) {
+    if (!iface || !iface->isValid()) {
+	return;
+    }
+    iface->call(QStringLiteral("agentPinCodeResponse"), response);
+}
+
+
+void DaemonInterface::agentConfirmationResponse(const bool response) {
+    if (!iface || !iface->isValid()) {
+	return;
+    }
+    iface->call(QStringLiteral("agentConfirmationResponse"), response);
 }
