@@ -81,6 +81,8 @@ bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
             tristate success = m_conn->querySingleNumber(sql, &count);
             qDebug() << sql << success << count;
 
+            lastTime = r.timestamp;
+
             if (success == cancelled || success == false) {
                 qDebug() << "SPO2 record does not exist, inserting";
                 auto spoData = m_conn->tableSchema("spo2");
@@ -95,8 +97,6 @@ bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
                 spoValues << r.timestamp;
                 spoValues << r.automatic;
                 spoValues << r.value;
-
-                lastTime = r.timestamp;
 
                 result = m_conn->insertRecord(&spoFields, spoValues);
                 if (result->lastResult().isError()) {
