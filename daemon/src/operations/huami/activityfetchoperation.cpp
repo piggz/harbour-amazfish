@@ -41,7 +41,7 @@ bool ActivityFetchOperation::saveSamples()
         return false;
     }
 
-    for (int i = 1; i < len; i+=m_sampleSize) {
+    for (int i = 0; i < len; i+=m_sampleSize) {
         ActivitySample sample(m_buffer[i] & 0xff, m_buffer[i + 1] & 0xff, m_buffer[i + 2] & 0xff, m_buffer[i + 3] & 0xff);
         if (m_sampleSize == 8) {
             qDebug() << Q_FUNC_INFO << "Sample data missed:" << (m_buffer[i + 4] & 0xff) << (m_buffer[i + 5] & 0xff) << (m_buffer[i + 6] & 0xff) << (m_buffer[i + 7] & 0xff);
