@@ -60,7 +60,7 @@ PagePL {
             type: DataSource.Spo2Normal
             graphType: bar
 
-            minY: 0
+            minY: 80
             maxY: 100
 
             valueConverter: function(value) {
@@ -81,7 +81,7 @@ PagePL {
             type: DataSource.Spo2Sleep
             graphType: bar
 
-            minY: 0
+            minY: 80
             maxY: 100
 
             valueConverter: function(value) {
