@@ -73,7 +73,7 @@ private:
     QString activityRecordsToGpx();
     QString activityRecordsToTcx();
 
-    QNetworkAccessManager *manager;
+    QNetworkAccessManager *m_manager;
     void networkReply();
 };
 

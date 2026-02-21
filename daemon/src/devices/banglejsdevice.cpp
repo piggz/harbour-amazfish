@@ -16,7 +16,7 @@ BangleJSDevice::BangleJSDevice(const QString &pairedName, QObject *parent) : Abs
     qDebug() << Q_FUNC_INFO << pairedName;
     connect(this, &QBLEDevice::propertiesChanged, this, &BangleJSDevice::onPropertiesChanged, Qt::UniqueConnection);
 
-    manager = new QNetworkAccessManager(this);
+    m_manager = new QNetworkAccessManager(this);
 }
 
 void BangleJSDevice::pair()
@@ -589,7 +589,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             QUrl url(json.value("url").toString());
             QNetworkRequest request(url);
 
-            auto reply = manager->get(request);
+            auto reply = m_manager->get(request);
             reply->setProperty("id", json.value("id").toString());
             qDebug() << "download url" << url;
 
