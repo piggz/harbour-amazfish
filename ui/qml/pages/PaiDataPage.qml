@@ -153,12 +153,11 @@ PagePL {
     }
 
     Component.onCompleted: {
-        PaiModel.update();
-
         updateData();
     }
 
     function updateData() {
+        PaiModel.update();
         var data = [];
 
         for(var i = 0; i < PaiModel.rowCount(); i++) {
