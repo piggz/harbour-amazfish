@@ -50,7 +50,7 @@ PagePL {
 
             axisY.units: "%"
             type: DataSource.BatteryLog
-            graphType: 1
+            graphType: line
 
             minY: 0
             maxY: 100

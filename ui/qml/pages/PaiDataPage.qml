@@ -72,7 +72,7 @@ PagePL {
             axisX.mask: ""
 
             axisY.units: ""
-            graphType: GraphData.bar
+            graphType: bar
 
             minY: 0
             maxY: 200
