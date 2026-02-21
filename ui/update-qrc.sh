@@ -15,7 +15,7 @@ for platform in ${platforms[@]}; do
             echo "        <file alias=\"$x\">$i</file>";
         done
 
-        for i in $(find ./qml/components/ -maxdepth 1 -name '*.qml'|sort); do
+        for i in $(find ./qml/components/ -maxdepth 1 -type f|sort); do
             echo "        <file>$i</file>";
         done
         echo "    </qresource>"

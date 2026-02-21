@@ -1,6 +1,7 @@
 import "../components/"
 import "../components/platform"
 import "../tools/JSTools.js" as JSTools
+import "../components/Translation.js" as T
 import MapboxMap 1.0
 import QtPositioning 5.3
 import QtQuick 2.0
@@ -89,101 +90,7 @@ PagePL {
         return positionstring;
     }
 
-    function translateSportKey(key) {
-        const translations = {
-            "activeSeconds": qsTr("Active Time"),
-            "aerobicTrainingEffect": qsTr("Aerobic Training Effect"),
-            "anaerobicTrainingEffect": qsTr("Anaerobic Training Effect"),
-            "ascentMeters": qsTr("Ascent"),
-            "ascentSeconds": qsTr("Time Ascending"),
-            "averageHeartRate": qsTr("Average Heart Rate"),
-            "averageHR": qsTr("Average Heart Rate"),
-            "averageKMPaceSeconds": qsTr("Average Pace"),
-            "averageLapPace": qsTr("Average Lap Pace"),
-            "averageStride": qsTr("Average Stride"),
-            "averageStrokeDistance": qsTr("Average Stroke Distance"),
-            "averageStrokesPerSecond": qsTr("Average Stroke Rate"),
-            "avgAltitude": qsTr("Average Altitude"),
-            "avgHeartRate": qsTr("Average Heart Rate"),
-            "caloriesBurnt": qsTr("Calories"),
-            "calories": qsTr("Calories"),
-            "currentWorkoutLoad": qsTr("Current Workout Load"),
-            "descentMeters": qsTr("Descent"),
-            "descentSeconds": qsTr("Time Descending"),
-            "distanceMeters": qsTr("Distance"),
-            "downhillTime": qsTr("Downhill Time"),
-            "elevationGain": qsTr("Elevation Gain"),
-            "elevationLoss": qsTr("Elevation Loss"),
-            "flatSeconds": qsTr("Time on Flat"),
-            "laps": qsTr("Laps"),
-            "maxAltitude": qsTr("Max Altitude"),
-            "maxHeartRate": qsTr("Max Heart Rate"),
-            "maxHR": qsTr("Max Heart Rate"),
-            "maximumOxygenUptake": qsTr("VO₂ Max"),
-            "maxLatitude": qsTr("Max Latitude"),
-            "maxLongitude": qsTr("Max Longitude"),
-            "maxPace": qsTr("Max Pace"),
-            "maxSpeed": qsTr("Max Speed"),
-            "minAltitude": qsTr("Min Altitude"),
-            "minHeartRate": qsTr("Min Heart Rate"),
-            "minLatitude": qsTr("Min Latitude"),
-            "minLongitude": qsTr("Min Longitude"),
-            "minPace": qsTr("Min Pace"),
-            "paceAvg": qsTr("Average Pace"),
-            "paceBest": qsTr("Best Pace"),
-            "pauseDuration": qsTr("Pause Duration"),
-            "steps": qsTr("Steps"),
-            "stepsAvgCadence": qsTr("Average Cadence"),
-            "stepsAvgStride": qsTr("Average Stride"),
-            "stepsMaxCadence": qsTr("Max Cadence"),
-            "strokes": qsTr("Strokes"),
-            "swimAvgDps": qsTr("Average Distance per Stroke"),
-            "swimAvgMaxRate": qsTr("Max Stroke Rate"),
-            "swimAvgStrokeRate": qsTr("Average Stroke Rate"),
-            "swimLaneLength": qsTr("Lane Length"),
-            "swimLaps": qsTr("Swim Laps"),
-            "swimStrokes": qsTr("Swim Strokes"),
-            "swimStyle": qsTr("Swim Style"),
-            "swolfIndex": qsTr("SWOLF Index"),
-            "totalClimbing": qsTr("Total Climbing"),
-            "totalDuration": qsTr("Total Duration"),
-            "totalStride": qsTr("Total Stride"),
-            "uphillTime": qsTr("Uphill Time"),
-            "workoutDuration": qsTr("Workout Duration")
-        };
-        if (translations[key] !== undefined)
-            return translations[key];
 
-        return key;
-    }
-
-    function translateSportUnit(unit) {
-        const translations = {
-            "bpm": qsTr("bpm"),
-            "calories": qsTr("kcal"),
-            "calories_unit": qsTr("kcal"),
-            "cm": qsTr("cm"),
-            "deg": qsTr("°"),
-            "laps": qsTr("laps"),
-            "meters": qsTr("m"),
-            "meters_second": qsTr("m/s"),
-            "min_km": qsTr("min/km"),
-            "ml_kg_min": qsTr("ml/kg/min"),
-            "seconds": qsTr("s"),
-            "seconds_km": qsTr("s/km"),
-            "seconds_m": qsTr("s/m"),
-            "steps": qsTr("steps"),
-            "steps_min": qsTr("steps/min"),
-            "steps_unit": qsTr("steps"),
-            "strokes": qsTr("strokes"),
-            "strokes_second": qsTr("strokes/s"),
-            "swolf_index": qsTr("SWOLF"),
-        };
-        if (translations[unit] !== undefined)
-            return translations[unit];
-
-        return unit;
-    }
 
     function update() {
         loader.loadString(tcx);
@@ -268,7 +175,7 @@ PagePL {
                     anchors.topMargin: styler.themePaddingMedium
                     anchors.left: parent.left
                     anchors.leftMargin: styler.themePaddingMedium
-                    text: translateSportKey(key)
+                    text: T.translateSportKey(key)
                 }
 
                 LabelPL {
@@ -278,7 +185,7 @@ PagePL {
                     anchors.top: parent.top
                     anchors.left: keyLabel.right
                     anchors.leftMargin: styler.themePaddingMedium
-                    text: value + " " + translateSportUnit(unit)
+                    text: value + " " + T.translateSportUnit(unit)
                 }
 
             }

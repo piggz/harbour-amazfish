@@ -52,6 +52,7 @@
         <file>./qml/components/GraphData.qml</file>
         <file>./qml/components/Graph.qml</file>
         <file>./qml/components/PercentCircle.qml</file>
+        <file>./qml/components/Translation.js</file>
         <file>./qml/components/TruncationModes.qml</file>
     </qresource>
 </RCC>
