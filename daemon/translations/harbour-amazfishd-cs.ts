@@ -93,33 +93,33 @@
         <translation>Zařízení není platné – je možné, že není podporováno</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="517"/>
-        <location filename="../src/deviceinterface.cpp" line="593"/>
+        <location filename="../src/deviceinterface.cpp" line="541"/>
+        <location filename="../src/deviceinterface.cpp" line="617"/>
         <source>Amazfish</source>
         <translation>Amazfish</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="518"/>
+        <location filename="../src/deviceinterface.cpp" line="542"/>
         <source>Connected</source>
         <translation>Připojeno</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="519"/>
+        <location filename="../src/deviceinterface.cpp" line="543"/>
         <source>Phone and watch are connected</source>
         <translation>Telefon a hodinky jsou propojeny</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="594"/>
+        <location filename="../src/deviceinterface.cpp" line="618"/>
         <source>Low Battery</source>
         <translation>Slabá baterie</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="595"/>
+        <location filename="../src/deviceinterface.cpp" line="619"/>
         <source>Battery level now </source>
         <translation>Stupeň nabití </translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="719"/>
+        <location filename="../src/deviceinterface.cpp" line="751"/>
         <source>Calendar</source>
         <translation>Kalendář</translation>
     </message>
@@ -135,32 +135,32 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="193"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="199"/>
         <source>Navigation Started</source>
         <translation>Navigace spuštěna</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="195"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="201"/>
         <source>Navigation Stopped</source>
         <translation>Navigace zastavena</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="215"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="221"/>
         <source>Progress</source>
         <translation>Průbeh</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="357"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="363"/>
         <source>Sending %1...</source>
         <translation>Odesílání %1…</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="360"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="366"/>
         <source>No file selected</source>
         <translation>Nebyl vybrán žádný soubor</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="382"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="386"/>
         <source>An operation is currently running, please try later</source>
         <translation>Operace právě běží. Prosím zkuste to pozdějí</translation>
     </message>
@@ -168,7 +168,12 @@
 <context>
     <name>HuamiFetcher</name>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="106"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="94"/>
+        <source>All operations cancelled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="130"/>
         <source>All operations complete</source>
         <translation>Všechny operace byly dokončeny</translation>
     </message>

@@ -90,6 +90,11 @@
         <translation>Intensywność</translation>
     </message>
     <message>
+        <location filename="../qml/pages/AnalysisPage.qml" line="95"/>
+        <source>HRV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
         <source>BPM</source>
         <translation type="unfinished"></translation>

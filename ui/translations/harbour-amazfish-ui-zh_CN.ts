@@ -94,6 +94,11 @@
         <source>Intensity</source>
         <translation>强度</translation>
     </message>
+    <message>
+        <location filename="../qml/pages/AnalysisPage.qml" line="95"/>
+        <source>HRV</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AuthKeyDialog</name>

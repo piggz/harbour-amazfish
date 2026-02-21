@@ -93,33 +93,33 @@
         <translation>சாதனம் செல்லுபடியாகாது, அதை ஆதரிக்காமல் இருக்கலாம்</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="517"/>
-        <location filename="../src/deviceinterface.cpp" line="593"/>
+        <location filename="../src/deviceinterface.cpp" line="541"/>
+        <location filename="../src/deviceinterface.cpp" line="617"/>
         <source>Amazfish</source>
         <translation>அமாச்ஃபிச்</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="518"/>
+        <location filename="../src/deviceinterface.cpp" line="542"/>
         <source>Connected</source>
         <translation>இணைக்கப்பட்டுள்ளது</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="519"/>
+        <location filename="../src/deviceinterface.cpp" line="543"/>
         <source>Phone and watch are connected</source>
         <translation>தொலைபேசி மற்றும் வாட்ச் இணைக்கப்பட்டுள்ளன</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="594"/>
+        <location filename="../src/deviceinterface.cpp" line="618"/>
         <source>Low Battery</source>
         <translation>குறைந்த பேட்டரி</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="595"/>
+        <location filename="../src/deviceinterface.cpp" line="619"/>
         <source>Battery level now </source>
         <translation>இப்போது பேட்டரி நிலை </translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="719"/>
+        <location filename="../src/deviceinterface.cpp" line="751"/>
         <source>Calendar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -135,32 +135,32 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="193"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="199"/>
         <source>Navigation Started</source>
         <translation>வழிசெலுத்தல் தொடங்கியது</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="195"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="201"/>
         <source>Navigation Stopped</source>
         <translation>வழிசெலுத்தல் நிறுத்தப்பட்டது</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="215"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="221"/>
         <source>Progress</source>
         <translation>முன்னேற்றம்</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="357"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="363"/>
         <source>Sending %1...</source>
         <translation type="unfinished">%1 ஐ அனுப்புகிறது ...</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="360"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="366"/>
         <source>No file selected</source>
         <translation type="unfinished">எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="382"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="386"/>
         <source>An operation is currently running, please try later</source>
         <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
     </message>
@@ -168,7 +168,12 @@
 <context>
     <name>HuamiFetcher</name>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="106"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="94"/>
+        <source>All operations cancelled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="130"/>
         <source>All operations complete</source>
         <translation type="unfinished"></translation>
     </message>
