@@ -57,6 +57,7 @@ PageListPL {
         width: parent.width
         onClicked: {
             var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"), {
+                "activityId": model.id,
                 "activitytitle": T.translateSportKind(kindstring) + " - " + Qt.formatDateTime(startdate, "yyyy/MM/dd"),
                 "date": Qt.formatDateTime(startdate, "yyyy/MM/dd"),
                 "location": [baselatitude, baselongitude, basealtitude],

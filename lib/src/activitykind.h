@@ -300,6 +300,7 @@ public:
     static Type fromBipType(int type);
     static Type fromZeppOsType(uint8_t type);
     static QString toString(Type type);
+    static Type fromString(const QString& str);
 
 private:
     static const QMap<ActivityKind::Type, QString> m_typeNames;

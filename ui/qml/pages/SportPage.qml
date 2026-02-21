@@ -13,6 +13,7 @@ PagePL {
 
     id: page
 
+    property int activityId
     property string date: ""
     property string duration: ""
     property var location: ""
@@ -124,6 +125,21 @@ PagePL {
                 Layout.preferredHeight: styler.themeItemSizeLarge
                 Layout.alignment: Qt.AlignLeft
                 iconSource: styler.activityIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
+                MouseArea {
+                    anchors.fill: parent;
+                    onClicked: {
+                        var activityPage = app.pages.push(Qt.resolvedUrl("SportsActivityKindPage.qml"), {
+                            "kindstring": kindstring
+                        })
+                        activityPage.onAccepted.connect(function() {
+                            console.log("Accepted " + activityPage.kindstring + " " + activityId)
+                            kindstring = activityPage.kindstring;
+                            SportsModel.setKind(activityId, activityPage.kindstring );
+                            SportsModel.update();
+                        })
+                    }
+                }
+
             }
 
             LabelPL {

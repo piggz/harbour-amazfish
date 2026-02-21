@@ -72,6 +72,21 @@ int SportsDataModel::rowCount(const QModelIndex &parent) const
     return m_data.length();
 }
 
+void SportsDataModel::setKind(uint id, const QString &kind) {
+    ActivityKind::Type kindType = ActivityKind::fromString(kind);
+    qDebug() << "UPDATE sports_data SET kind = " << kindType << " WHERE id = " << id;
+
+    if (!m_connection->executeSql(
+            KDbEscapedString("UPDATE sports_data SET kind = %1 WHERE id = %2")
+                                .arg(kindType)
+                                .arg(id)
+            ))
+        {
+        qDebug() << Q_FUNC_INFO << "Error updating activity type";
+    }
+
+}
+
 void SportsDataModel::update()
 {
     beginResetModel();
