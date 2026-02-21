@@ -3,6 +3,7 @@ set(SOURCES
 ./src/activitycoordinate.cpp
 ./src/activitysample.cpp
 ./src/activitysummary.cpp
+./src/bangleacttrkrecord.cpp
 ./src/bipbatteryinfo.cpp
 ./src/dbushrm.cpp
 ./src/devicefactory.cpp
@@ -118,6 +119,7 @@ set(HEADERS
 ./src/activitysample.h
 ./src/activitysummary.h
 ./src/bipbatteryinfo.h
+./src/bangleacttrkrecord.h
 ./src/codec.h
 ./src/dbushrm.h
 ./src/devicefactory.h
