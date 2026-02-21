@@ -13,6 +13,7 @@ PagePL {
 
     id: page
 
+    property int activityId
     property string date: ""
     property string duration: ""
     property var location: ""
@@ -131,7 +132,10 @@ PagePL {
                             "kindstring": kindstring
                         })
                         activityPage.onAccepted.connect(function() {
-                            console.log("Accepted " + activityPage.kindstring)
+                            console.log("Accepted " + activityPage.kindstring + " " + activityId)
+                            kindstring = activityPage.kindstring;
+                            SportsModel.setKind(activityId, activityPage.kindstring );
+                            SportsModel.update();
                         })
                     }
                 }
