@@ -22,7 +22,7 @@ SportsDetailOperation::~SportsDetailOperation()
 void SportsDetailOperation::start(QBLEService *service)
 {
     qDebug() << Q_FUNC_INFO;
-    setStartDate(lastActivitySync());
+    setStartDate(m_summary.startTime());
     m_lastPacketCounter = -1;
 
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
@@ -89,7 +89,14 @@ bool SportsDetailOperation::processBufferedData()
     qDebug() << "End sport time is:" << m_summary.endTime() << m_summary.endTime().toMSecsSinceEpoch();
     QDateTime end = m_summary.endTime();
     end.setTimeSpec(Qt::LocalTime);
-    saveLastActivitySync(end.toMSecsSinceEpoch());
+
+    qint64 duration = end.toMSecsSinceEpoch() - m_summary.startTime().toMSecsSinceEpoch();
+    int addition = 0;
+
+    if (duration < 60000) {
+        addition = 60000 - duration;
+    }
+    saveLastActivitySync(end.addMSecs(addition).toMSecsSinceEpoch());
 
     return true;
 }
