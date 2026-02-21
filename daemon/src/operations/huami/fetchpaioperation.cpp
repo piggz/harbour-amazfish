@@ -85,6 +85,7 @@ bool FetchPaiOperation::saveRecords(QVector<PaiRecord> recs)
     KDbTransaction transaction = m_conn->beginTransaction();
     KDbTransactionGuard tg(transaction);
 
+    QDateTime lastTime;
     foreach(const auto &r, recs) {
         int count;
 
@@ -119,6 +120,11 @@ bool FetchPaiOperation::saveRecords(QVector<PaiRecord> recs)
                 paiValues << r.total_today;
                 paiValues << r.total;
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+                lastTime = QDateTime(r.day);
+#else
+                lastTime = r.day.startOfDay();
+#endif
                 result = m_conn->insertRecord(&paiFields, paiValues);
                 if (result->lastResult().isError()) {
                     qDebug() << Q_FUNC_INFO << "Error inserting meta record";
@@ -154,6 +160,7 @@ bool FetchPaiOperation::saveRecords(QVector<PaiRecord> recs)
         }
     }
     tg.commit();
+    saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return success;
 }
 

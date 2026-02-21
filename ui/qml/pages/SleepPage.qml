@@ -74,7 +74,7 @@ PagePL {
             axisX.mask: qsTr("MM/dd")
             axisY.units: qsTr("Hours")
             type: DataSource.SleepSummary
-            graphType: 2
+            graphType: bar
 
             minY: 0
             maxY: 12

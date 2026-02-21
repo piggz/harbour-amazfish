@@ -63,6 +63,7 @@ bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
     KDbTransaction transaction = m_conn->beginTransaction();
     KDbTransactionGuard tg(transaction);
 
+    QDateTime lastTime;
     foreach(const auto &r, recs) {
         qDebug() << "Processing record:" << r.timestamp << r.value;
         int count;
@@ -85,6 +86,8 @@ bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
                 hrvValues << r.timestamp;
                 hrvValues << r.value;
 
+                lastTime = r.timestamp;
+
                 result = m_conn->insertRecord(&hrvFields, hrvValues);
                 if (result->lastResult().isError()) {
                     qDebug() << Q_FUNC_INFO << "Error inserting hrv record";
@@ -96,5 +99,6 @@ bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
         }
     }
     tg.commit();
+    saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }

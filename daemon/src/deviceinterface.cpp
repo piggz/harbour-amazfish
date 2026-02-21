@@ -450,6 +450,66 @@ void DeviceInterface::createTables()
         qDebug() << *t_hrv;
     }
 
+    if (!m_conn->containsTable("spo2")) {
+        KDbTableSchema *t_hrv = new KDbTableSchema("spo2");
+        t_hrv->setCaption("SPO2 Blood Oxygen");
+        t_hrv->addField(f = new KDbField("spo2_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_hrv->addField(f = new KDbField("spo2_timestamp", KDbField::Integer, KDbField::Indexed));
+        f->setCaption("Timestamp");
+
+        t_hrv->addField(f = new KDbField("spo2_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
+        f->setCaption("Timestamp in Date/Time format");
+
+        t_hrv->addField(f = new KDbField("spo2_automatic", KDbField::Boolean));
+        f->setCaption("Value");
+
+        t_hrv->addField(f = new KDbField("spo2_value", KDbField::Integer));
+        f->setCaption("Value");
+
+        if (!m_conn->createTable(t_hrv)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- spo2 created --";
+        qDebug() << *t_hrv;
+    }
+
+    if (!m_conn->containsTable("spo2sleep")) {
+        KDbTableSchema *t_sposleep = new KDbTableSchema("spo2sleep");
+        t_sposleep->setCaption("SPO2 Blood Oxygen (Sleep)");
+        t_sposleep->addField(f = new KDbField("spo2sleep_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_sposleep->addField(f = new KDbField("spo2sleep_timestamp", KDbField::Integer, KDbField::Indexed));
+        f->setCaption("Timestamp");
+
+        t_sposleep->addField(f = new KDbField("spo2sleep_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
+        f->setCaption("Timestamp in Date/Time format");
+
+        t_sposleep->addField(f = new KDbField("spo2sleep_value", KDbField::Integer));
+        f->setCaption("Value");
+
+        t_sposleep->addField(f = new KDbField("spo2sleep_duration", KDbField::Integer));
+        f->setCaption("Duration");
+
+        t_sposleep->addField(f = new KDbField("spo2sleep_high", KDbField::Text));
+        f->setCaption("High");
+
+        t_sposleep->addField(f = new KDbField("spo2sleep_low", KDbField::Text));
+        f->setCaption("Low");
+
+        t_sposleep->addField(f = new KDbField("spo2sleep_quality", KDbField::Text));
+        f->setCaption("Quality");
+
+        if (!m_conn->createTable(t_sposleep)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- spo2sleep created --";
+        qDebug() << *t_sposleep;
+    }
 
     if (!m_conn->commitTransaction(t)) {
         qDebug() << m_conn->result();

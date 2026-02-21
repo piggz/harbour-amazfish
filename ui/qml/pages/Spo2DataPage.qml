@@ -6,12 +6,16 @@ import "../components/platform"
 
 PagePL {
     id: page
-    title: qsTr("Steps")
+    title: qsTr("Blood Oxygen")
 
-    property alias day: nav.day    
+    property alias day: nav.day
 
     pageMenu: PageMenuPL {
-        DownloadDataMenuItem{}
+        PageMenuItemPL {
+            iconSource: styler.iconDownloadData !== undefined ? styler.iconDownloadData : ""
+            text: qsTr("Download SPO2")
+            onClicked: DaemonInterfaceInstance.fetchData(Amazfish.TYPE_SPO2);
+        }
     }
 
     Column {
@@ -25,7 +29,7 @@ PagePL {
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: graphStepSummary.lastValue.toLocaleString()
+            text: graphSpo2Normal.lastValue + "%"
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -47,19 +51,38 @@ PagePL {
         }
 
         Graph {
-            id: graphStepSummary
-            graphTitle: qsTr("Steps")
+            id: graphSpo2Normal
+            graphTitle: qsTr("Normal SPO2")
             graphHeight: 300
 
             axisX.mask: "MM/dd"
-            axisY.units: qsTr("Steps")
-            type: DataSource.StepSummary
+            axisY.units: qsTr("%")
+            type: DataSource.Spo2Normal
             graphType: bar
 
-            minY: 0
-            maxY: (2 * AmazfishConfig.profileFitnessGoal > suggestedMaxY)
-                  ? 2 * AmazfishConfig.profileFitnessGoal
-                  : Math.ceil(suggestedMaxY/1000)*1000
+            minY: 80
+            maxY: 100
+
+            valueConverter: function(value) {
+                return value.toFixed(0);
+            }
+            onClicked: {
+                updateGraph(day);
+            }
+        }
+
+        Graph {
+            id: graphSpo2Sleep
+            graphTitle: qsTr("Sleep SPO2")
+            graphHeight: 300
+
+            axisX.mask: "MM/dd"
+            axisY.units: qsTr("%")
+            type: DataSource.Spo2Sleep
+            graphType: bar
+
+            minY: 80
+            maxY: 100
 
             valueConverter: function(value) {
                 return value.toFixed(0);
@@ -71,16 +94,12 @@ PagePL {
     }
 
     function updateGraphs() {
-        graphStepSummary.updateGraph(day);
+        graphSpo2Normal.updateGraph(day);
+        graphSpo2Sleep.updateGraph(day);
     }
 
     Component.onCompleted: {
         day = new Date();
         updateGraphs();
-        _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
-    }
-
-    onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("SleepPage.qml"))
     }
 }

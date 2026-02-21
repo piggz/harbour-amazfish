@@ -249,12 +249,13 @@ Item {
                     if (graphType == line) {
                         x = -stepX;
                     }
+
                     var valueSum = 0;
                     for (var i = 0; i < end; i++) {
                         valueSum += points[i].y;
                         lastY = points[i].y;
 
-                        var y = height - Math.floor(points[i].y / stepY) - 1;
+                        var y = height - Math.floor((points[i].y - minY) / stepY) - 1;
                         if (graphType == line) {
                             if (i === 0) {
                                 ctx.moveTo(x, y);
