@@ -93,33 +93,33 @@
         <translation>Urządzenie jest nieprawidłowe, może nie być obsługiwane</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="541"/>
-        <location filename="../src/deviceinterface.cpp" line="617"/>
+        <location filename="../src/deviceinterface.cpp" line="601"/>
+        <location filename="../src/deviceinterface.cpp" line="677"/>
         <source>Amazfish</source>
         <translation type="unfinished">Amazfish</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="542"/>
+        <location filename="../src/deviceinterface.cpp" line="602"/>
         <source>Connected</source>
         <translation type="unfinished">Połączony</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="543"/>
+        <location filename="../src/deviceinterface.cpp" line="603"/>
         <source>Phone and watch are connected</source>
         <translation type="unfinished">Telefon i zegarek są połączone</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="618"/>
+        <location filename="../src/deviceinterface.cpp" line="678"/>
         <source>Low Battery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="619"/>
+        <location filename="../src/deviceinterface.cpp" line="679"/>
         <source>Battery level now </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="751"/>
+        <location filename="../src/deviceinterface.cpp" line="811"/>
         <source>Calendar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -168,12 +168,12 @@
 <context>
     <name>HuamiFetcher</name>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="94"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="99"/>
         <source>All operations cancelled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="130"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="135"/>
         <source>All operations complete</source>
         <translation type="unfinished"></translation>
     </message>
