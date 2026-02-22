@@ -14,7 +14,7 @@ public:
 private:
     struct TemperatureRecord {
         QDateTime timestamp;
-        uint8_t value;
+        float value;
         QString type;
         QString location;
     };

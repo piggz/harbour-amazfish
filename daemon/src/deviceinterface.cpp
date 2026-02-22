@@ -523,7 +523,7 @@ void DeviceInterface::createTables()
         t_temp->addField(f = new KDbField("temperature_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
         f->setCaption("Timestamp in Date/Time format");
 
-        t_temp->addField(f = new KDbField("temperature_value", KDbField::Integer));
+        t_temp->addField(f = new KDbField("temperature_value", KDbField::Double));
         f->setCaption("Value");
 
         t_temp->addField(f = new KDbField("temperature_location", KDbField::Text));

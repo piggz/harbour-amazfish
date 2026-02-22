@@ -46,7 +46,7 @@ bool FetchTemperatureOperation::processBufferedData()
 
         TemperatureRecord temp;
         temp.timestamp = timestamp;
-        temp.value = t;
+        temp.value = t / 100.0f;
         temp.location = "wrist";
         temp.type = "skin";
 
@@ -68,18 +68,15 @@ bool FetchTemperatureOperation::saveRecords(QVector<TemperatureRecord> recs)
 
     QDateTime lastTime;
     foreach(const auto &r, recs) {
-        qDebug() << "Processing record:" << r.timestamp << r.value;
         int count;
 
         if (m_conn && m_conn->isDatabaseUsed()) {
-            KDbEscapedString sql = KDbEscapedString("SELECT temperature_id FROM temperature WHERE stemperature_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
+            KDbEscapedString sql = KDbEscapedString("SELECT temperature_id FROM temperature WHERE temperature_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
             tristate success = m_conn->querySingleNumber(sql, &count);
-            qDebug() << sql << success << count;
 
             lastTime = r.timestamp;
 
             if (success == cancelled || success == false) {
-                qDebug() << "Temperature record does not exist, inserting";
                 auto tempData = m_conn->tableSchema("temperature");
                 KDbFieldList tempFields;
                 tempFields.addField(tempData->field("temperature_timestamp"));
@@ -97,7 +94,7 @@ bool FetchTemperatureOperation::saveRecords(QVector<TemperatureRecord> recs)
 
                 result = m_conn->insertRecord(&tempFields, tempValues);
                 if (result->lastResult().isError()) {
-                    qDebug() << Q_FUNC_INFO << "Error inserting spo2 record";
+                    qDebug() << Q_FUNC_INFO << "Error inserting temperature record";
                     success = false;
                 }
             } else {
@@ -106,6 +103,7 @@ bool FetchTemperatureOperation::saveRecords(QVector<TemperatureRecord> recs)
         }
     }
     tg.commit();
+    lastTime = lastTime.addSecs(60);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }
