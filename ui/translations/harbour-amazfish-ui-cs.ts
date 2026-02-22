@@ -92,7 +92,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="95"/>
         <source>HRV</source>
-        <translation type="unfinished"></translation>
+        <translation>HRV</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
@@ -374,7 +374,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="56"/>
         <source>Blood Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation>Okysličení krve</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="165"/>
@@ -1384,28 +1384,28 @@
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="9"/>
         <source>Blood Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation>Okysličení krve</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="16"/>
         <source>Download SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>Stáhnout SPO2</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="55"/>
         <source>Normal SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální SPO2</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="59"/>
         <location filename="../qml/pages/Spo2DataPage.qml" line="80"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="76"/>
         <source>Sleep SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SPO2 ve spánku</translation>
     </message>
 </context>
 <context>
