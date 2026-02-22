@@ -511,6 +511,35 @@ void DeviceInterface::createTables()
         qDebug() << *t_sposleep;
     }
 
+    if (!m_conn->containsTable("temperature")) {
+        KDbTableSchema *t_temp = new KDbTableSchema("temperature");
+        t_temp->setCaption("Temperature");
+        t_temp->addField(f = new KDbField("temperature_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_temp->addField(f = new KDbField("temperature_timestamp", KDbField::Integer, KDbField::Indexed));
+        f->setCaption("Timestamp");
+
+        t_temp->addField(f = new KDbField("temperature_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
+        f->setCaption("Timestamp in Date/Time format");
+
+        t_temp->addField(f = new KDbField("temperature_value", KDbField::Integer));
+        f->setCaption("Value");
+
+        t_temp->addField(f = new KDbField("temperature_location", KDbField::Text));
+        f->setCaption("Location");
+
+        t_temp->addField(f = new KDbField("temperature_type", KDbField::Text));
+        f->setCaption("Type");
+
+        if (!m_conn->createTable(t_temp)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- temperature created --";
+        qDebug() << *t_temp;
+    }
+
     if (!m_conn->commitTransaction(t)) {
         qDebug() << m_conn->result();
         return;
