@@ -170,7 +170,7 @@
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="99"/>
         <source>All operations cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle operasjoner avbrutt</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="135"/>
