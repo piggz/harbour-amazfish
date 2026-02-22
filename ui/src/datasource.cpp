@@ -187,6 +187,11 @@ QVariant DataSource::data(Type type, const QDate &day)
             qry = "SELECT spo2sleep_timestamp_dt, spo2sleep_value FROM spo2sleep WHERE date(spo2sleep_timestamp_dt) >= date('" +
                     day.toString("yyyy-MM-ddT00:00:00") + "','-10 day') AND spo2sleep_timestamp_dt <= '" +
                     day.toString("yyyy-MM-ddT23:59:59") +  "' GROUP BY date(spo2sleep_timestamp_dt) ORDER BY spo2sleep_timestamp_dt ASC";
+        } else if (type == DataSource::BodyTemperature) {
+            qry = "SELECT temperature_timestamp_dt, temperature_value FROM temperature WHERE temperature_timestamp_dt >= '" +
+                    day.toString("yyyy-MM-ddT00:00:00") + "' AND temperature_timestamp_dt <= '" +
+                    day.toString("yyyy-MM-ddT23:59:59") +  "' AND temperature_type = 'skin' AND temperature_location = 'wrist'" +
+                    " ORDER BY temperature_timestamp_dt ASC";
         }
 
         qDebug() << qry;
