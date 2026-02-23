@@ -92,11 +92,14 @@ void HuamiFetcher::reset()
 {
     qDebug() << Q_FUNC_INFO;
 
+    if (!m_operations.isEmpty() || m_currentOperation) {
+        m_device->message(tr("All operations cancelled"));
+    }
     qDeleteAll(m_operations);
     delete m_currentOperation;
     m_currentOperation = nullptr;
     m_operationTimeout->stop();
-    m_device->message(tr("All operations cancelled"));
+
     setBusy(false);
 }
 
