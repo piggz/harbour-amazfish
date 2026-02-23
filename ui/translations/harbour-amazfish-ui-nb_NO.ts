@@ -27,43 +27,43 @@
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <source>Mon</source>
-        <translation type="unfinished">Man</translation>
+        <translation>Man</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <source>Tue</source>
-        <translation type="unfinished">Tirs</translation>
+        <translation>Tirs</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <source>Wed</source>
-        <translation type="unfinished">Ons</translation>
+        <translation>Ons</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <source>Thu</source>
-        <translation type="unfinished">Tors</translation>
+        <translation>Tors</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <source>Fri</source>
-        <translation type="unfinished">Fre</translation>
+        <translation>Fre</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <source>Sat</source>
-        <translation type="unfinished">Lør</translation>
+        <translation>Lør</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <source>Sun</source>
-        <translation type="unfinished">Søn</translation>
+        <translation>Søn</translation>
     </message>
 </context>
 <context>
@@ -92,7 +92,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="95"/>
         <source>HRV</source>
-        <translation type="unfinished"></translation>
+        <translation>HRV (Hjertevariabilitet)</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
@@ -213,12 +213,12 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="195"/>
         <source>Test Notification</source>
-        <translation type="unfinished">Testvarsel</translation>
+        <translation>Testvarsel</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="204"/>
         <source>Test Email</source>
-        <translation type="unfinished">Test e-post</translation>
+        <translation>Test e-post</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="213"/>
@@ -374,7 +374,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="56"/>
         <source>Blood Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation>Oksygenmetning</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="165"/>
@@ -786,7 +786,7 @@
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="56"/>
         <source>Save Settings</source>
-        <translation type="unfinished">Lagre innstillinger</translation>
+        <translation>Lagre innstillinger</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="79"/>
@@ -1027,7 +1027,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="90"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="91"/>
@@ -1042,7 +1042,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="94"/>
         <source>Period</source>
-        <translation type="unfinished"></translation>
+        <translation>Periode</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="105"/>
@@ -1057,7 +1057,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="84"/>
         <source>AliPay</source>
-        <translation type="unfinished"></translation>
+        <translation>AliPay</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="80"/>
@@ -1107,7 +1107,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="97"/>
         <source>SpO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO2 (Oksygenmetning)</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="98"/>
@@ -1262,7 +1262,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="94"/>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvor enheten bæres</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="97"/>
@@ -1322,7 +1322,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="188"/>
         <source>Heartrate usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk av hjertefrekvensdata</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="116"/>
@@ -1337,7 +1337,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="118"/>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidsplan</translation>
     </message>
 </context>
 <context>
@@ -1366,7 +1366,7 @@
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="29"/>
         <source>Total %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Total %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="38"/>
@@ -1782,7 +1782,7 @@
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="89"/>
         <source>User Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Brukernavn: </translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="95"/>
@@ -1806,7 +1806,7 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="43"/>
         <source>Activity name for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitetsnavn for Strava</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="44"/>
@@ -1836,7 +1836,7 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="72"/>
         <source>Commute</source>
-        <translation type="unfinished"></translation>
+        <translation>Jobbreise</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="76"/>
@@ -1851,17 +1851,17 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="150"/>
         <source>Checking upload...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sjekker opplasting...</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="213"/>
         <source>TCX uploaded...</source>
-        <translation type="unfinished"></translation>
+        <translation>TCX opplastet...</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="248"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviteten er lastet opp</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
@@ -1875,7 +1875,7 @@
         <location filename="../qml/components/Translation.js" line="4"/>
         <location filename="../qml/components/Translation.js" line="4"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukjent</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="5"/>
@@ -1887,67 +1887,67 @@
         <location filename="../qml/components/Translation.js" line="6"/>
         <location filename="../qml/components/Translation.js" line="6"/>
         <source>Light Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Lett søvn</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="7"/>
         <location filename="../qml/components/Translation.js" line="7"/>
         <source>Deep Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Dyp søvn</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="8"/>
         <location filename="../qml/components/Translation.js" line="8"/>
         <source>Not Worn</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikke brukt</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="9"/>
         <location filename="../qml/components/Translation.js" line="9"/>
         <source>Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Løper</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="10"/>
         <location filename="../qml/components/Translation.js" line="10"/>
         <source>Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>Går</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="11"/>
         <location filename="../qml/components/Translation.js" line="11"/>
         <source>Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Svømmer</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="12"/>
         <location filename="../qml/components/Translation.js" line="12"/>
         <source>Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Sykler</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="13"/>
         <location filename="../qml/components/Translation.js" line="13"/>
         <source>Treadmill</source>
-        <translation type="unfinished"></translation>
+        <translation>Tredemølle</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="14"/>
         <location filename="../qml/components/Translation.js" line="14"/>
         <source>Exercise</source>
-        <translation type="unfinished"></translation>
+        <translation>Trening</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="15"/>
         <location filename="../qml/components/Translation.js" line="15"/>
         <source>Open Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Svømming i åpent vann</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="16"/>
         <location filename="../qml/components/Translation.js" line="16"/>
         <source>Indoor Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Innendørssykling</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="17"/>
