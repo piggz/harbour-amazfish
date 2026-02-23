@@ -16,17 +16,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 2.2 as Controls
 
-Item {
+
+import QtQuick 2.0
+import Lomiri.Components 1.3
+
+ListItemActions {
+    id: root
+
+    // Forward children explicitly
+    default property alias actionsList: root.actions
+
     // skipping context menu in UUITK for now
     // TODO: fix
     // otherwise was getting all kind of errors on absence of
     // "enabled" property on UUITK setup and complains regarding FINAL property on
     // desktop
-    function open() { console.log("Not implemented") }
+    function open() {
+        console.log("Not implemented")
+    }
 }
-
-//Controls.Menu {
-//}
