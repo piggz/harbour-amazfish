@@ -103,6 +103,7 @@ public:
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_PAI = 0x0d;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_SPO2_NORMAL = 0x25;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_SPO2_SLEEP = 0x26;
+    static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_TEMPERATURE = 0x2e;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_HRV = 0x49;
 
     static constexpr uint8_t COMMAND_CHANGE_SCREENS[12] = {ENDPOINT_DISPLAY_ITEMS, 0x01, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};

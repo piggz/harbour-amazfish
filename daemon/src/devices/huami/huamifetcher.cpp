@@ -5,6 +5,7 @@
 #include "huami/fetchpaioperation.h"
 #include "huami/fetchspo2normaloperation.h"
 #include "huami/fetchspo2sleepoperation.h"
+#include "huami/fetchtemperatureoperation.h"
 #include "huamidevice.h"
 #include "huami/logfetchoperation.h"
 #include "huami/sportssummaryoperation.h"
@@ -37,6 +38,8 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
     } else if (type & Amazfish::DataType::TYPE_SPO2 && m_device->supportsDataType(Amazfish::DataType::TYPE_SPO2)) {
         m_operations.append(new FetchSpo2NormalOperation(this, m_device->database(), m_device->isZeppOs()));
         m_operations.append(new FetchSpo2SleepOperation(this, m_device->database(), m_device->isZeppOs()));
+    } else if (type & Amazfish::DataType::TYPE_TEMPERATURE && m_device->supportsDataType(Amazfish::DataType::TYPE_TEMPERATURE)) {
+        m_operations.append(new FetchTemperatureOperation(this, m_device->database(), m_device->isZeppOs()));
     }
 
     if (!m_currentOperation) {

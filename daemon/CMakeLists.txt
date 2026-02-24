@@ -76,6 +76,7 @@ set(SOURCES
 ./src/operations/huami/fetchpaioperation.cpp
 ./src/operations/huami/fetchspo2normaloperation.cpp
 ./src/operations/huami/fetchspo2sleepoperation.cpp
+./src/operations/huami/fetchtemperatureoperation.cpp
 ./src/operations/adafruitblefsoperation.cpp
 ./src/operations/adafruitblefsworker.cpp
 ./src/operations/dfuoperation.cpp
@@ -193,6 +194,7 @@ set(HEADERS
 ./src/operations/huami/fetchpaioperation.h
 ./src/operations/huami/fetchspo2normaloperation.h
 ./src/operations/huami/fetchspo2sleepoperation.h
+./src/operations/huami/fetchtemperatureoperation.h
 ./src/operations/adafruitblefsoperation.h
 ./src/operations/adafruitblefsworker.h
 ./src/operations/dfuoperation.h

@@ -21,7 +21,8 @@ public:
         BatteryLog = 7,
         HRV = 8,
         Spo2Normal = 9,
-        Spo2Sleep = 10
+        Spo2Sleep = 10,
+        BodyTemperature = 11
     };
     Q_ENUM(Type)
 

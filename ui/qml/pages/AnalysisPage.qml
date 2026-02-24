@@ -106,6 +106,25 @@ PagePL {
             }
         }
 
+        Graph {
+            id: graphBodyTemperature
+            graphTitle: qsTr("Body Temperature")
+            graphHeight: 300
+
+            axisY.units: "°C"
+            axisX.mask: "hh:mm"
+
+            type: DataSource.BodyTemperature
+            graphType: line
+
+            minY: 20
+            maxY: 40
+
+            onClicked: {
+                updateGraph(day);
+            }
+        }
+
     }
 
     function updateGraphs() {
@@ -113,6 +132,7 @@ PagePL {
         graphSteps.updateGraph(day);
         graphIntensity.updateGraph(day);
         graphHRV.updateGraph(day);
+        graphBodyTemperature.updateGraph(day);
     }
 
     Component.onCompleted: {
