@@ -441,3 +441,13 @@ QString ActivityKind::toString(Type type)
 {
     return m_typeNames.value(type, "Unknown");
 }
+
+ActivityKind::Type ActivityKind::fromString(const QString &str)
+{
+    for (auto it = m_typeNames.constBegin(); it != m_typeNames.constEnd(); ++it) {
+        if (it.value() == str)
+            return it.key();
+    }
+    return Unknown;
+}
+
