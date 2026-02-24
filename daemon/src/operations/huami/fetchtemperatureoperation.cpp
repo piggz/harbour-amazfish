@@ -28,7 +28,7 @@ bool FetchTemperatureOperation::processBufferedData()
     qDebug() << Q_FUNC_INFO << m_buffer.length() << (m_buffer.length() / 65);
 
     if (m_buffer.length() % 8 != 0) {
-        qDebug() << "Unexpected length for SPO2 sleep data, not divisible by 8" << m_buffer.length();
+        qDebug() << "Unexpected length for temperature data, not divisible by 8" << m_buffer.length();
         return false;
     }
 
@@ -42,7 +42,6 @@ bool FetchTemperatureOperation::processBufferedData()
         uint16_t t = TypeConversion::toUint16(m_buffer, offset);
         uint16_t unk2 = TypeConversion::toUint16(m_buffer, offset);
         uint16_t unk3 = TypeConversion::toUint16(m_buffer, offset);
-
 
         TemperatureRecord temp;
         temp.timestamp = timestamp;
