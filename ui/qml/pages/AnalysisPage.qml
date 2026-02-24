@@ -111,7 +111,7 @@ PagePL {
             graphTitle: qsTr("Body Temperature")
             graphHeight: 300
 
-            axisY.units: "C"
+            axisY.units: "°C"
             axisX.mask: "hh:mm"
 
             type: DataSource.BodyTemperature
