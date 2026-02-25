@@ -92,7 +92,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="95"/>
         <source>HRV</source>
-        <translation type="unfinished"></translation>
+        <translation>HRV</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
