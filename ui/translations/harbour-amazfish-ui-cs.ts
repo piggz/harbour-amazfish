@@ -97,7 +97,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="111"/>
         <source>Body Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Teplota těla</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
