@@ -10,6 +10,8 @@ PagePL {
     property alias activityDate: activityDateNav.day
     property alias sportDate: sportDateNav.day
 
+    property int _lastNotificationId: 1
+
     pageMenu: PageMenuPL {
         PageMenuItemPL {
             iconSource: styler.iconRefresh !== undefined ? styler.iconRefresh : ""
@@ -38,32 +40,32 @@ PagePL {
         }
         LabelPL {
             id: lblSerial
-            text: qsTr("Serial No: ")
+            text: qsTr("Serial No: ") + DaemonInterfaceInstance.information(Amazfish.INFO_SERIAL)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblHWRev
-            text: qsTr("Hardware Rev: ")
+            text: qsTr("Hardware Rev: ") + DaemonInterfaceInstance.information(Amazfish.INFO_HWVER)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblSWRev
-            text: qsTr("Software Rev: ")
+            text: qsTr("Software Rev: ") + DaemonInterfaceInstance.information(Amazfish.INFO_SWVER)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblModel
-            text: qsTr("Model: ")
+            text: qsTr("Model: ") + DaemonInterfaceInstance.information(Amazfish.INFO_MODEL)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblFWRev
-            text: qsTr("Firmware Rev: ")
+            text: qsTr("Firmware Rev: ") + DaemonInterfaceInstance.information(Amazfish.INFO_FW_REVISION)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
             id: lblManufacturer
-            text: qsTr("Manufacturer: ")
+            text: qsTr("Manufacturer: ") + DaemonInterfaceInstance.information(Amazfish.INFO_MANUFACTURER)
             color: styler.themeSecondaryHighlightColor
         }
         LabelPL {
@@ -72,7 +74,7 @@ PagePL {
         }
         LabelPL {
             id: lblGPSVer
-            text: qsTr("GPS Ver: ")
+            text: qsTr("GPS Ver: ") + DaemonInterfaceInstance.information(Amazfish.INFO_GPSVER)
             color: styler.themeSecondaryHighlightColor
         }
 
@@ -197,7 +199,7 @@ PagePL {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                DaemonInterfaceInstance.sendAlert(qsTr("Somebody"), qsTr("Title"), qsTr("Hello from Sailfish OS. This is a long message sent over BLE!"));
+                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, qsTr("Somebody"), qsTr("Title"), qsTr("Hello from Sailfish OS. This is a long message sent over BLE!"));
             }
         }
         ButtonPL {
@@ -206,7 +208,7 @@ PagePL {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                DaemonInterfaceInstance.sendAlert("someone-somewhere.com", qsTr("Donald Duck"), qsTr("Hello, this is an email from Sailfish OS!"));
+                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, "someone-somewhere.com", qsTr("Donald Duck"), qsTr("Hello, this is an email from Sailfish OS!"));
             }
         }
         ButtonPL {

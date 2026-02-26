@@ -2,13 +2,21 @@
 #include "batteryservice.h"
 #include "uartservice.h"
 #include "deviceinfoservice.h"
+#include "amazfishconfig.h"
+#include "activitysample.h"
+#include "bangleacttrkrecord.h"
+#include "activitysummary.h"
+#include <algorithm>
 
+#include <QtNetwork>
 #include <QtXml/QtXml>
 
 BangleJSDevice::BangleJSDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO << pairedName;
     connect(this, &QBLEDevice::propertiesChanged, this, &BangleJSDevice::onPropertiesChanged, Qt::UniqueConnection);
+
+    m_manager = new QNetworkAccessManager(this);
 }
 
 void BangleJSDevice::pair()
@@ -65,25 +73,17 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
         return;
     }
 
-    //This should provide a unique identifier and thread safe, which stays in an js int for now
-    class IdentifierGenerator
-    {
-    public :
-        qint64 getNewId() const
-        {
-            static qint64 id = QDateTime::currentMSecsSinceEpoch();
-            QMutexLocker locker(&mutex);
-            return id++;
-        }
-    private:
-        mutable QMutex mutex;
-
-    };
+    QString src = notification.appName;
+    // if (notification.appName == "") {
+    //     // gadgedbridge does this https://codeberg.org/Freeyourgadget/Gadgetbridge/src/commit/3c8a9b5821160e80639a11554c42bba7dd4aece3/app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/banglejs/BangleJSDeviceSupport.java#L1436
+    //     // mapss probably at? https://github.com/espruino/BangleApps/blob/ec987e1ee2d4d6a3302baf9a26bbb2aae6f91737/apps/messageicons/icons/icon_names.json#L133
+    //     src = "SMS Message";
+    // }
 
     QJsonObject o;
     o.insert("t", "notify");
-    o.insert("id", QString::number(IdentifierGenerator().getNewId())); //id is necessary for some apps like messageui, and should be unique
-    o.insert("src", "");
+    o.insert("id", notification.id); //id is necessary for some apps like messageui, and should be unique
+    o.insert("src", src);
     o.insert("title", "");
     o.insert("subject", notification.summary);
     o.insert("body", notification.body);
@@ -275,18 +275,72 @@ void BangleJSDevice::navigationNarrative(const QString &flag, const QString &nar
     qDebug() << Q_FUNC_INFO;
 }
 
+void BangleJSDevice::downloadActivityData() {
+    qDebug() << Q_FUNC_INFO;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+
+    qlonglong ls = AmazfishConfig::instance()->value("device/lastactivitysyncmillis").toLongLong();
+
+    m_samples.clear();
+    QJsonObject o;
+    o.insert("t", "actfetch");
+    o.insert("ts", ls);
+    uart->txJson(o);
+}
+
+void BangleJSDevice::downloadSportsData() {
+    qDebug() << Q_FUNC_INFO;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+
+    QString lastSyncId = AmazfishConfig::instance()->value("device/lastsportsyncid").toString();
+
+    QJsonObject o;
+    o.insert("t", "listRecs");
+    o.insert("id", lastSyncId);
+    uart->txJson(o);
+}
+
+void BangleJSDevice::fetchActivityRec(const QString& id) {
+    qDebug() << Q_FUNC_INFO << id;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+    QJsonObject o;
+    o.insert("t", "fetchRec");
+    o.insert("id", id);
+    uart->txJson(o);
+
+}
+
 void BangleJSDevice::sendWeather(CurrentWeather *weather)
 {
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (uart){
         QJsonObject o;
+        // t:"weather",
+        // temp,hi,lo,hum,rain,uv,code,txt,wind,wdir,loc
+        // weather report (current temp, days highest temp, days lowest temp, current humidity, rain/precip probability, UV Index, current condition code, current condition text, wind speed, wind direction)
+
         o.insert("t", "weather");
         o.insert("temp", weather->temperature());
+        o.insert("hi", weather->maxTemperature());
+        o.insert("lo", weather->minTemperature());
         o.insert("hum", weather->humidity());
+        // rain
+        // uv
+        o.insert("code", weather->weatherCode());
         o.insert("txt", weather->description());
         o.insert("wind", weather->windSpeed());
         o.insert("wdir", weather->windDeg());
         o.insert("loc", weather->city()->name());
+
 
         uart->txJson(o);
     }
@@ -357,6 +411,12 @@ QString BangleJSDevice::information(Amazfish::Info i) const
         return QString::number(m_infoBatteryLevel);
     case Amazfish::Info::INFO_SWVER:
         return m_firmwareVersion;
+    case Amazfish::Info::INFO_HWVER:
+        return m_hardwareVersion;
+    case Amazfish::Info::INFO_STEPS:
+        return QString::number(m_steps);
+    case Amazfish::Info::INFO_HEARTRATE:
+        return QString::number(m_heartrate);
     default:
         break;
     }
@@ -382,6 +442,9 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
     } else if (t == "error") {
         emit message(json.value("msg").toString());
     } else if (t == "ver") {
+        if (json.keys().contains("fw")) {
+            m_firmwareVersion = json.value("fw").toString();
+        }
         if (json.keys().contains("fw1")) {
             m_firmwareVersion = json.value("fw1").toString();
         }
@@ -389,6 +452,12 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             m_firmwareVersion = json.value("fw2").toString();
         }
         emit informationChanged(Amazfish::Info::INFO_SWVER, m_firmwareVersion);
+
+        if (json.keys().contains("hw")) {
+            m_hardwareVersion = QString::number(json.value("hw").toInt());
+        }
+        emit informationChanged(Amazfish::Info::INFO_HWVER, m_hardwareVersion);
+
     } else if (t == "status") {
         m_infoBatteryLevel = json.value("bat").toInt();
         emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(m_infoBatteryLevel));
@@ -423,91 +492,475 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 
 //    } else if (t == "call") {
 //    } else if (t == "notify") {
+    } else if (t == "actfetch") {
+        int sample_count = json.value("count").toInt();
+        QString fetch_state = json.value("state").toString();
+        if ((fetch_state == "end") && (sample_count > 0) && (m_samples.count() > 0)) {
+            QDateTime lastItemDateTime = m_samples.last().datetime(); // grab timestamp before m_samples.clear()
+            saveActivitySamples();
+            AmazfishConfig::instance()->setValue("device/lastactivitysyncmillis", lastItemDateTime.toMSecsSinceEpoch());
+        }
     } else if (t == "act") {
 
-        long ts = json.value("ts").toInt(); // timestamp
-        int hrm = json.value("hrm").toInt(); // heart rate,
-        int stp = json.value("stp").toInt(); // steps
-        int mov = json.value("mov").toInt(); // movement intensity
-        int rt = json.value("rt").toInt();
+        long ts = json.value("ts").toVariant().toLongLong();      // timestamp
 
-        qDebug() << "parsed type = act " << ts << hrm << stp << mov << rt;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
+        QDateTime actDate= QDateTime::fromMSecsSinceEpoch(ts);
+#else
+        QDateTime actDate = QDateTime::fromTime_t(ts / 1000);
+#endif
 
-        emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString("%1").arg(hrm));
-        emit informationChanged(Amazfish::Info::INFO_STEPS, QString("%1").arg(stp));
+        m_heartrate = json.value("hrm").toDouble(); // heart rate,
+        m_steps = json.value("stp").toInt();     // steps
+        int mov = json.value("mov").toInt();     // movement intensity
+        int rt = json.value("rt").toInt();       // realtime
+        QString act;
+        if (json.keys().contains("act")) {
+            act = json.value("act").toString();
+        }
+        ActivityKind::Type kind = convertToActivityKind(act);
 
-    } else {
-        qDebug() << "Gadgetbridge type " << t;
+        if (rt) {
+            qDebug() << "Realtime activity " << actDate << kind << mov << m_steps << m_heartrate  ;
+            emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
+            emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
+        } else if (ts > 0) {
+            m_samples << ActivitySample(actDate, kind, mov, m_steps, m_heartrate);
+        } else {
+            qDebug() << "Activity data" << actDate << kind << mov << m_steps << m_heartrate  ;
+        }
+    } else if (t == "actTrksList") {
+        QJsonArray trksList = json.value("list").toArray();
 
-    }
-#if 0
-    case "status": {
-        if (json.has("volt"))
-            gbDevice.setBatteryVoltage((float)json.getDouble("volt"));
-        gbDevice.sendDeviceUpdateIntent(context);
-    } break;
-    case "findPhone": {
-        boolean start = json.has("n") && json.getBoolean("n");
-        GBDeviceEventFindPhone deviceEventFindPhone = new GBDeviceEventFindPhone();
-        deviceEventFindPhone.event = start ? GBDeviceEventFindPhone.Event.START : GBDeviceEventFindPhone.Event.STOP;
-        evaluateGBDeviceEvent(deviceEventFindPhone);
-    } break;
-    case "music": {
-        GBDeviceEventMusicControl deviceEventMusicControl = new GBDeviceEventMusicControl();
-        deviceEventMusicControl.event = GBDeviceEventMusicControl.Event.valueOf(json.getString("n").toUpperCase());
-        evaluateGBDeviceEvent(deviceEventMusicControl);
-    } break;
-    case "call": {
-        GBDeviceEventCallControl deviceEventCallControl = new GBDeviceEventCallControl();
-        deviceEventCallControl.event = GBDeviceEventCallControl.Event.valueOf(json.getString("n").toUpperCase());
-        evaluateGBDeviceEvent(deviceEventCallControl);
-    } break;
-    case "notify" : {
-        GBDeviceEventNotificationControl deviceEvtNotificationControl = new GBDeviceEventNotificationControl();
-        // .title appears unused
-        deviceEvtNotificationControl.event = GBDeviceEventNotificationControl.Event.valueOf(json.getString("n").toUpperCase());
-        if (json.has("id"))
-            deviceEvtNotificationControl.handle = json.getInt("id");
-        if (json.has("tel"))
-            deviceEvtNotificationControl.phoneNumber = json.getString("tel");
-        if (json.has("msg"))
-            deviceEvtNotificationControl.reply = json.getString("msg");
-        evaluateGBDeviceEvent(deviceEvtNotificationControl);
-    } break;
-    case "act": {
-        BangleJSActivitySample sample = new BangleJSActivitySample();
-        sample.setTimestamp((int) (GregorianCalendar.getInstance().getTimeInMillis() / 1000L));
-        int hrm = 0;
-        int steps = 0;
-        if (json.has("hrm")) hrm = json.getInt("hrm");
-        if (json.has("stp")) steps = json.getInt("stp");
-        int activity = ActivityKind.TYPE_UNKNOWN;
-        if (json.has("act")) {
-            String actName = "TYPE_" + json.getString("act").toUpperCase();
-            try {
-                Field f = ActivityKind.class.getField(actName);
-                try {
-                    activity = f.getInt(null);
-                } catch (IllegalAccessException e) {
-                    LOG.info("JSON activity '"+actName+"' not readable");
+        for (const QJsonValue &value : trksList) {
+            QString listItem = value.toString();
+            fetchActivityRec(listItem);
+            AmazfishConfig::instance()->setValue("device/lastsportsyncid", listItem);
+            break;
+        }
+    } else if (t == "actTrk") {
+        // t:"actTrk", log:"YYYYMMDDx" (e.g. 20240101a), lines:"four lines of the log"/"erase", cnt: "the current packet count"
+        QString logId = json.value("log").toString();
+        int currentPacketCount = json.value("cnt").toInt();
+        if (json.keys().contains("lines")) {
+            QString lines = json.value("lines").toString();
+            if (lines == "erase") {
+                m_activityRecords.clear();
+            } else {
+
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                const QStringList rows = lines.split('\n', Qt::SkipEmptyParts);
+#else
+                const QStringList rows = lines.split('\n', QString::SkipEmptyParts);
+#endif
+                for (const QString &row : rows) {
+
+                    if (row.startsWith("Time,")) {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                        BangleActTrkRecord::fromCsvHeader(row.trimmed().split(',', Qt::KeepEmptyParts));
+#else
+                        BangleActTrkRecord::fromCsvHeader(row.trimmed().split(',', QString::KeepEmptyParts));
+#endif
+                        continue;                     }
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                    BangleActTrkRecord record = BangleActTrkRecord::fromCsvRow(row.trimmed().split(',', Qt::KeepEmptyParts));
+#else
+                    BangleActTrkRecord record = BangleActTrkRecord::fromCsvRow(row.trimmed().split(',', QString::KeepEmptyParts));
+#endif
+                    if (record.isValid()) {
+                        m_activityRecords.append(record);
+                    } else {
+                        qWarning() << "Parsing error" << row;
+                    }
                 }
-            } catch (NoSuchFieldException e) {
-                LOG.info("JSON activity '"+actName+"' not found");
+
+            }
+        } else {
+            if (m_activityRecords.count() > 0) {
+                saveSportData(logId);
             }
         }
-        sample.setRawKind(activity);
-        sample.setHeartRate(hrm);
-        sample.setSteps(steps);
-        try (DBHandler dbHandler = GBApplication.acquireDB()) {
-            Long userId = getUser(dbHandler.getDaoSession()).getId();
-            Long deviceId = DBHelper.getDevice(getDevice(), dbHandler.getDaoSession()).getId();
-            BangleJSSampleProvider provider = new BangleJSSampleProvider(getDevice(), dbHandler.getDaoSession());
-            sample.setDeviceId(deviceId);
-            sample.setUserId(userId);
-            provider.addGBActivitySample(sample);
-        } catch (Exception ex) {
-            LOG.warn("Error saving activity: " + ex.getLocalizedMessage());
+    } else if (t == "http") {
+        // {"t":"http","url":"https://www.espruino.com/agps/casic.base64","id":"12060707015","timeout":10000}
+        if (json.keys().contains("url")) {
+
+            QUrl url(json.value("url").toString());
+            QNetworkRequest request(url);
+
+            auto reply = m_manager->get(request);
+            reply->setProperty("id", json.value("id").toString());
+            qDebug() << "download url" << url;
+
+            connect(reply, &QNetworkReply::finished, this, &BangleJSDevice::networkReply);
         }
-    } break;
-#endif
+    } else {
+        qDebug() << "Gadgetbridge type " << t;
+    }
+}
+
+void BangleJSDevice::networkReply()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+    if (!reply) {
+        return;
+    }
+    QString id = reply->property("id").toString();
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+
+    if (!uart) {
+        reply->deleteLater();
+        return;
+    }
+
+    if (reply->error() != QNetworkReply::NoError) {
+        qDebug() << "Error:" << reply->errorString();
+    } else {
+
+        QByteArray data = reply->readAll();
+        qDebug() << "Response size:" << data.size();
+
+        QJsonObject p;
+        p.insert("t", "http");
+        p.insert("id", id);
+        p.insert("resp", QString::fromUtf8(data));
+
+        uart->txJson(p);
+    }
+
+    reply->deleteLater();
+}
+
+ActivityKind::Type BangleJSDevice::convertToActivityKind(const QString &bangle_kind) {
+    static const QHash<QString, ActivityKind::Type> map =
+    {
+        {"UNKNOWN", ActivityKind::Unknown},
+        {"NOT_WORN", ActivityKind::NotWorn},
+        {"WALKING", ActivityKind::Walking},
+        {"EXERCISE", ActivityKind::Exercise},
+        {"LIGHT_SLEEP", ActivityKind::LightSleep},
+        {"DEEP_SLEEP", ActivityKind::DeepSleep},
+    };
+    return map.value(bangle_kind, ActivityKind::Unknown);
+}
+
+bool BangleJSDevice::saveActivitySamples() {
+    uint user_id = qHash(AmazfishConfig::instance()->profileName());
+    uint device_id = qHash(AmazfishConfig::instance()->pairedAddress());
+
+    KDbTransaction transaction = m_conn->beginTransaction();
+    KDbTransactionGuard tg(transaction);
+
+    KDbFieldList fields;
+    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
+
+    fields.addField(mibandActivity->field("timestamp"));
+    fields.addField(mibandActivity->field("timestamp_dt"));
+    fields.addField(mibandActivity->field("device_id"));
+    fields.addField(mibandActivity->field("user_id"));
+    fields.addField(mibandActivity->field("raw_intensity"));
+    fields.addField(mibandActivity->field("steps"));
+    fields.addField(mibandActivity->field("raw_kind"));
+    fields.addField(mibandActivity->field("heartrate"));
+
+    for (int i = 0; i < m_samples.count(); ++i) {
+        QList<QVariant> values;
+
+        values << m_samples[i].datetime().toMSecsSinceEpoch() / 1000;
+        values << m_samples[i].datetime();
+        values << device_id;
+        values << user_id;
+        values << m_samples[i].intensity();
+        values << m_samples[i].steps();
+        values << m_samples[i].kind();
+        values << m_samples[i].heartrate();
+
+        if (!m_conn->insertRecord(&fields, values)) {
+            qDebug() << Q_FUNC_INFO << "error inserting record";
+            return false;
+        }
+    }
+    tg.commit();
+    m_samples.clear();
+    return true;
+}
+
+bool BangleJSDevice::saveSportData(const QString& logId) {
+
+    m_summary = ActivitySummary();
+
+    auto config = AmazfishConfig::instance();
+    uint id = qHash(config->profileName());
+    uint devid = qHash(config->pairedAddress());
+
+    m_summary.setProfileId(id);
+    m_summary.setDeviceId(devid);
+
+    m_summary.setStartTime(m_activityRecords.first().time());
+    m_summary.setEndTime(m_activityRecords.last().time());
+    // summary.setActivityKind()
+    // summary.setName((ActivityKind::toString(summary.activityKind())) + "-" + summary.startTime().toLocalTime().toString("yyyyMMdd-HHmm"));
+    m_summary.setName(logId);
+
+
+    bool positionValid = false;
+    double maxAlt = -10000;
+    double minAlt =  10000;
+    double minLatitude  =  360;
+    double minLongitude =  360;
+    double maxLatitude  = -360;
+    double maxLongitude = -360;
+    double minHR =  10000.0;
+    double maxHR = -10000.0;
+    double sumAlt = 0.0;
+    double sumLat = 0.0;
+    double sumLon = 0.0;
+    double sumHR  = 0.0;
+    double sumSteps = 0.0;
+    int count = 0;
+    int countHR = 0;
+    int countSteps = 0;
+
+    foreach (const BangleActTrkRecord &record, m_activityRecords) {
+        if (record.heartRate() != 0) {
+            sumHR += record.heartRate();
+            minHR = std::min(minHR, (double)record.heartRate());
+            maxHR = std::max(maxHR, (double)record.heartRate());
+            countHR++;
+        }
+        if (record.steps() != 0) {
+            sumSteps += record.steps();
+            countSteps++;
+        }
+
+        if ((record.latitude() == 0.0) && (record.longitude() == 0.0)) {
+            continue;
+        }
+        positionValid = true;
+        maxAlt = std::max(maxAlt, record.altitude());
+        minAlt = std::min(minAlt, record.altitude());
+        maxLatitude  = std::max(maxLatitude,  record.latitude());
+        minLatitude  = std::min(minLatitude,  record.latitude());
+        maxLongitude = std::max(maxLongitude, record.longitude());
+        minLongitude = std::min(minLongitude, record.longitude());
+
+        sumAlt += record.altitude();
+        sumLat += record.latitude();
+        sumLon += record.longitude();
+        count++;
+
+    }
+
+    if (positionValid) {
+        m_summary.addMetaData("maxLatitude", QString::number(maxLatitude), "deg");
+        m_summary.addMetaData("maxLongitude", QString::number(maxLongitude), "deg");
+        m_summary.addMetaData("minLatitude", QString::number(minLatitude), "deg");
+        m_summary.addMetaData("minLongitude", QString::number(minLongitude), "deg");
+        m_summary.setBaseLatitude(sumLat/count);
+        m_summary.setBaseLongitude(sumLon/count);
+        m_summary.setBaseAltitude(sumAlt/count);
+        m_summary.addMetaData("maxAltitude", QString::number(maxAlt), "meters");
+        m_summary.addMetaData("minAltitude", QString::number(minAlt), "meters");
+        m_summary.addMetaData("avgAltitude", QString::number(sumAlt/count), "meters");
+    }
+
+
+    // m_summary.addMetaData("totalDuration", QString::number(m_summary.time.totalDuration), "seconds");
+    if (countSteps > 0) {
+        m_summary.addMetaData("steps", QString::number(sumSteps), "steps");
+    }
+
+    if (countHR > 0) {
+        m_summary.addMetaData("avgHeartRate", QString::number(sumHR/countHR), "bpm");
+        m_summary.addMetaData("maxHeartRate", QString::number(maxHR), "bpm");
+        m_summary.addMetaData("minHeartRate", QString::number(minHR), "bpm");
+    }
+
+    if (count > 0) {
+        QDir cachelocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+        QFile gpxFile, tcxFile;
+
+        QDir laufhelden(QDir::homePath() + "/Laufhelden/");
+
+        if (laufhelden.exists()) {
+            gpxFile.setFileName(laufhelden.absolutePath() + "/" + m_summary.name() + ".gpx");
+            tcxFile.setFileName(laufhelden.absolutePath() + "/" + m_summary.name() + ".tcx");
+        } else {
+            gpxFile.setFileName(cachelocation.absolutePath() + "/" + m_summary.name() + ".gpx");
+            tcxFile.setFileName(cachelocation.absolutePath() + "/" + m_summary.name() + ".tcx");
+        }
+
+        if(gpxFile.open(QIODevice::WriteOnly)) {
+            qDebug() << "Saving to" << gpxFile.fileName();
+            QTextStream stream( &gpxFile );
+            stream << activityRecordsToGpx();
+        }
+        gpxFile.close();
+
+        if(tcxFile.open(QIODevice::WriteOnly)) {
+            qDebug() << "Saving to" << tcxFile.fileName();
+            QTextStream stream( &tcxFile );
+            stream << activityRecordsToTcx();
+        }
+        gpxFile.close();
+
+        m_summary.setGPX(tcxFile.fileName());
+    }
+    m_summary.setValid(count > 0);
+
+    return m_summary.saveToDatabase(m_conn);
+
+}
+
+
+QString BangleJSDevice::activityRecordsToGpx()
+{
+    QString str;
+    QTextStream out(&str);
+    out.setRealNumberPrecision(10);
+
+    out << "<?xml version=\"1.0\" standalone=\"yes\"?>" << endl;
+    out << "<?xml-stylesheet type=\"text/xsl\" href=\"details.xsl\"?>" << endl;
+    out << "<gpx" << endl;
+    out << "version=\"1.1\"" << endl;
+    out << "creator=\"Amazfish for SailfishOS\"" << endl;
+    out << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << endl;
+    out << "xmlns=\"http://www.topografix.com/GPX/1/1\"" << endl;
+    out << "xmlns:topografix=\"http://www.topografix.com/GPX/Private/TopoGrafix/0/1\"" << endl;
+    out << "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd\"" << endl;
+    out << "xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v1\">" << endl;
+
+    //Laufhelden compatible metadata
+    out << "<metadata>" << endl;
+    out << "<name>" << ActivityKind::toString(m_summary.activityKind()) << "</name>" << endl;
+    out << "<desc></desc>" << endl;
+    out << "<extensions>" << endl;
+    out << "<meerun activity=\"" << ActivityKind::toString(m_summary.activityKind()).toLower() << "\" />" << endl;
+    out << "</extensions>" << endl;
+    out << "</metadata>" << endl;
+
+    out << "<trk>" << endl;
+    out << "<trkseg>" << endl;
+
+    foreach (const BangleActTrkRecord &record, m_activityRecords) {
+        if ((record.latitude() == 0.0) && (record.longitude() == 0.0)) {
+            continue;
+        }
+        out << "<trkpt lat=\""<< record.latitude() << "\" lon=\"" << record.longitude() << "\">" << endl;
+        out << "<ele>" << record.altitude() << "</ele>" << endl;
+        out << "<time>" << record.time().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "</time>" << endl;
+        if (record.heartRate() != 0) {
+            out << "<extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>" << record.heartRate() << "</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions>" << endl;
+        }
+        out << "</trkpt>" << endl;
+    }
+
+    out << "</trkseg>" << endl;
+    out << "</trk>" << endl;
+    out << "</gpx>" << endl;
+
+    return str;
+}
+
+QString BangleJSDevice::activityRecordsToTcx()
+{
+    QString str;
+    QTextStream out(&str);
+    out.setRealNumberPrecision(10);
+
+    out << "<?xml version=\"1.0\" standalone=\"yes\"?>" << endl;
+    out << "<TrainingCenterDatabase" << endl;
+    out << "xmlns=\"http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2\"" << endl;
+    out << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << endl;
+    out << "xsi:schemaLocation=\"http://www.garmin.com/xmlschemas/ActivityExtension/v2" << endl;
+    out << "http://www.garmin.com/xmlschemas/ActivityExtensionv2.xsd" << endl;
+    out << "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" << endl;
+    out << "http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd\">" << endl;
+
+    out << "<Activities>" << endl;
+    out << "<Activity Sport=\"" + ActivityKind::toString(m_summary.activityKind()) + "\">" << endl;
+    out << "<Id>" << m_summary.name() << "</Id>" << endl;
+    out << "<Lap StartTime=\"" << m_summary.startTime().toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "\">" << endl;
+
+    //TotalTimeSeconds
+    ActivitySummary::meta m = m_summary.metaData("activeSeconds");
+    if (m.key == "activeSeconds") {
+        out << "<TotalTimeSeconds>" << m.value << "</TotalTimeSeconds>" << endl;
+    }
+
+    //DistanceMeters
+    m = m_summary.metaData("distanceMeters");
+    if (m.key == "distanceMeters") {
+        out << "<DistanceMeters>" << m.value << "</DistanceMeters>" << endl;
+    }
+
+    //Calories
+    m = m_summary.metaData("caloriesBurnt");
+    if (m.key == "caloriesBurnt") {
+        out << "<Calories>" << m.value << "</Calories>" << endl;
+    }
+
+    //AverageHeartRateBpm
+    m = m_summary.metaData("averageHR");
+    if (m.key == "averageHR") {
+        out << "<AverageHeartRateBpm><Value>" << m.value << "</Value></AverageHeartRateBpm>" << endl;
+    }
+
+    //MaximumHeartRateBpm
+    m = m_summary.metaData("maxHR");
+    if (m.key == "maxHR") {
+        out << "<MaximumHeartRateBpm><Value>" << m.value << "</Value></MaximumHeartRateBpm>" << endl;
+    }
+
+    out << "<Track>" << endl;
+
+    foreach (const BangleActTrkRecord &record, m_activityRecords) {
+        out << "<Trackpoint>" << endl;
+        QDateTime dt = record.time();
+        //dt.setTimeZone(QTimeZone::systemTimeZone());
+        //dt.setTimeSpec(Qt::OffsetFromUTC);
+        out << "<Time>" << dt.toTimeSpec(Qt::OffsetFromUTC).toString(Qt::ISODate) << "</Time>" << endl;
+
+        if ((record.latitude() != 0) && (record.longitude() != 0)) {
+            out << "  <Position>" << endl;
+            out << "    <LatitudeDegrees>" << record.latitude() << "</LatitudeDegrees>" << endl;
+            out << "    <LongitudeDegrees>" << record.longitude() << "</LongitudeDegrees>" << endl;
+            out << "  </Position>" << endl;
+            out << "  <AltitudeMeters>" << record.altitude() << "</AltitudeMeters>" << endl;
+        }
+        if (record.heartRate() != 0) {
+            out << "<HeartRateBpm xsi:type=\"HeartRateInBeatsPerMinute_t\"><Value>" << record.heartRate() << "</Value></HeartRateBpm>" << endl;
+        }
+        out << "</Trackpoint>" << endl;
+    }
+
+    out << "</Track>" << endl;
+
+    //Steps
+    m = m_summary.metaData("steps");
+    if (m.key == "steps") {
+        out << "<Extensions>" << endl;
+        out << "  <LX xmlns=\"http://www.garmin.com/xmlschemas/ActivityExtension/v2\">" << endl;
+        out << "    <Steps>" << m.value << "</Steps>" << endl;
+        out << "  </LX>" << endl;
+        out << "</Extensions>" << endl;
+    }
+
+    out << "</Lap>" << endl;
+
+    //Creator
+    out << "<Creator xsi:type=\"Device_t\"><Name>" << AmazfishConfig::instance()->pairedName() << "</Name><UnitId>0000000000</UnitId><ProductId>0000</ProductId><Version><VersionMajor>1</VersionMajor><VersionMinor>0</VersionMinor><BuildMajor>1</BuildMajor><BuildMinor>0</BuildMinor></Version></Creator>" << endl;
+
+    out << "</Activity>" << endl;
+    out << "</Activities>" << endl;
+
+    //Author
+    out << "<Author xsi:type=\"Application_t\"><Name>Amazfish</Name><Build><Version><VersionMajor>1</VersionMajor><VersionMinor>0</VersionMinor><BuildMajor>1</BuildMajor><BuildMinor>0</BuildMinor></Version></Build><LangID>en</LangID><PartNumber>000-00000-00</PartNumber></Author>" << endl;
+
+    out << "</TrainingCenterDatabase>" << endl;
+
+    return str;
+
 }

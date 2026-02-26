@@ -230,11 +230,11 @@ QString DaemonInterface::information(Amazfish::Info i)
     return reply;
 }
 
-void DaemonInterface::sendAlert(const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
+void DaemonInterface::sendAlert(const int notificationId, const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
 {
 
     Amazfish::WatchNotification n = {
-        .id = 0,
+        .id = notificationId,
         .appId = "uk.co.piggz.amazfish",
         .appName = sender,
         .summary = subject,

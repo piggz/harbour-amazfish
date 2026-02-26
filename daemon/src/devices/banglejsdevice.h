@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include "abstractdevice.h"
+#include "activitysample.h"
+#include "activitykind.h"
+#include "activitysummary.h"
+#include "bangleacttrkrecord.h"
 
 class BangleJSDevice : public AbstractDevice
 {
@@ -35,6 +39,9 @@ public:
     void navigationRunning(bool running) override;
     void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
+    void downloadActivityData() override;
+    void downloadSportsData() override;
+
     //Weather
     void sendWeather(CurrentWeather *weather) override;
 
@@ -50,7 +57,24 @@ private:
     Q_SLOT void handleRxJson(const QJsonObject &json);
 
     int m_infoBatteryLevel = 0;
+    int m_steps = 0;
+    double m_heartrate = 0;
     QString m_firmwareVersion;
+    QString m_hardwareVersion;
+
+    QList<ActivitySample> m_samples;
+    bool saveActivitySamples();
+    ActivityKind::Type convertToActivityKind(const QString &bangle_kind);
+
+    ActivitySummary m_summary;
+    void fetchActivityRec(const QString &recId);
+    QList<BangleActTrkRecord> m_activityRecords;
+    bool saveSportData(const QString& logId);
+    QString activityRecordsToGpx();
+    QString activityRecordsToTcx();
+
+    QNetworkAccessManager *m_manager;
+    void networkReply();
 };
 
 #endif // BANGLEJSDEVICE_H

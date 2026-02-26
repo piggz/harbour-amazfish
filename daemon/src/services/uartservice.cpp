@@ -37,7 +37,7 @@ void UARTService::txJson(const QJsonObject &json)
 
 void UARTService::characteristicChanged(const QString &c, const QByteArray &value)
 {
-    qDebug() << Q_FUNC_INFO << c << value;
+    // qDebug() << Q_FUNC_INFO << c << value;
 
     if (c == UUID_CHARACTERISTIC_UART_RX) {
         m_incomingJson += value;
@@ -52,10 +52,10 @@ void UARTService::characteristicChanged(const QString &c, const QByteArray &valu
 
 void UARTService::handleRx(const QString &json)
 {
-    qDebug() << Q_FUNC_INFO << json;
+    // qDebug() << Q_FUNC_INFO << json;
 
-    if (json.contains( "Uncaught ReferenceError: \"gb\" is not defined")) {
-        emit message("Gadgetbridge plugin not installed on Bangle.js");
+    if (json.contains( "Uncaught ReferenceError: \"GB\" is not defined")) {
+        emit message(tr("Android Integration plugin not installed on Bangle.js"));
     } else if ((json.length() > 0) && (json.at(0)=='{')) {
         // JSON - we hope!
         QJsonObject obj = ObjectFromString(json);
