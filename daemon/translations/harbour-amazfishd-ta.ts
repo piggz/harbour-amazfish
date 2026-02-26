@@ -93,33 +93,33 @@
         <translation>சாதனம் செல்லுபடியாகாது, அதை ஆதரிக்காமல் இருக்கலாம்</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="601"/>
-        <location filename="../src/deviceinterface.cpp" line="677"/>
+        <location filename="../src/deviceinterface.cpp" line="630"/>
+        <location filename="../src/deviceinterface.cpp" line="706"/>
         <source>Amazfish</source>
         <translation>அமாச்ஃபிச்</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="602"/>
+        <location filename="../src/deviceinterface.cpp" line="631"/>
         <source>Connected</source>
         <translation>இணைக்கப்பட்டுள்ளது</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="603"/>
+        <location filename="../src/deviceinterface.cpp" line="632"/>
         <source>Phone and watch are connected</source>
         <translation>தொலைபேசி மற்றும் வாட்ச் இணைக்கப்பட்டுள்ளன</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="678"/>
+        <location filename="../src/deviceinterface.cpp" line="707"/>
         <source>Low Battery</source>
         <translation>குறைந்த பேட்டரி</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="679"/>
+        <location filename="../src/deviceinterface.cpp" line="708"/>
         <source>Battery level now </source>
         <translation>இப்போது பேட்டரி நிலை </translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="811"/>
+        <location filename="../src/deviceinterface.cpp" line="840"/>
         <source>Calendar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -173,7 +173,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="135"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="141"/>
         <source>All operations complete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -289,9 +289,17 @@
     </message>
 </context>
 <context>
+    <name>UARTService</name>
+    <message>
+        <location filename="../src/services/uartservice.cpp" line="58"/>
+        <source>Android Integration plugin not installed on Bangle.js</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ZeppOSDevice</name>
     <message>
-        <location filename="../src/devices/huami/zepposdevice.cpp" line="441"/>
+        <location filename="../src/devices/huami/zepposdevice.cpp" line="442"/>
         <source>An operation is currently running, please try later</source>
         <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
     </message>
