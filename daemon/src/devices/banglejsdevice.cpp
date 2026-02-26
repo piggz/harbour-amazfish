@@ -497,8 +497,9 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         QString fetch_state = json.value("state").toString();
         if ((fetch_state == "end") && (sample_count > 0) && (m_samples.count() > 0)) {
             QDateTime lastItemDateTime = m_samples.last().datetime(); // grab timestamp before m_samples.clear()
-            saveActivitySamples();
-            AmazfishConfig::instance()->setValue("device/lastactivitysyncmillis", lastItemDateTime.toMSecsSinceEpoch());
+            if (saveActivitySamples()) {
+                AmazfishConfig::instance()->setValue("device/lastactivitysyncmillis", lastItemDateTime.toMSecsSinceEpoch());
+            }
         }
     } else if (t == "act") {
 
