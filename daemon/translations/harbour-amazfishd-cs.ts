@@ -293,7 +293,7 @@
     <message>
         <location filename="../src/services/uartservice.cpp" line="58"/>
         <source>Android Integration plugin not installed on Bangle.js</source>
-        <translation type="unfinished"></translation>
+        <translation>Na bangle.js není nainstalovaná aplikace pro integraci s androidem</translation>
     </message>
 </context>
 <context>
