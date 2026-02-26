@@ -316,7 +316,6 @@ void BangleJSDevice::fetchActivityRec(const QString& id) {
     o.insert("t", "fetchRec");
     o.insert("id", id);
     uart->txJson(o);
-
 }
 
 void BangleJSDevice::sendWeather(CurrentWeather *weather)
@@ -536,12 +535,11 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         for (const QJsonValue &value : trksList) {
             QString listItem = value.toString();
             fetchActivityRec(listItem);
-            AmazfishConfig::instance()->setValue("device/lastsportsyncid", listItem);
             break;
         }
     } else if (t == "actTrk") {
         // t:"actTrk", log:"YYYYMMDDx" (e.g. 20240101a), lines:"four lines of the log"/"erase", cnt: "the current packet count"
-        QString logId = json.value("log").toString();
+        m_synced_activity_id = json.value("log").toString();
         int currentPacketCount = json.value("cnt").toInt();
         if (json.keys().contains("lines")) {
             QString lines = json.value("lines").toString();
@@ -580,7 +578,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             }
         } else {
             if (m_activityRecords.count() > 0) {
-                saveSportData(logId);
+                saveSportData();
             }
         }
     } else if (t == "http") {
@@ -688,7 +686,7 @@ bool BangleJSDevice::saveActivitySamples() {
     return true;
 }
 
-bool BangleJSDevice::saveSportData(const QString& logId) {
+bool BangleJSDevice::saveSportData() {
 
     m_summary = ActivitySummary();
 
@@ -703,7 +701,7 @@ bool BangleJSDevice::saveSportData(const QString& logId) {
     m_summary.setEndTime(m_activityRecords.last().time());
     // summary.setActivityKind()
     // summary.setName((ActivityKind::toString(summary.activityKind())) + "-" + summary.startTime().toLocalTime().toString("yyyyMMdd-HHmm"));
-    m_summary.setName(logId);
+    m_summary.setName(m_synced_activity_id);
 
 
     bool positionValid = false;
@@ -811,8 +809,11 @@ bool BangleJSDevice::saveSportData(const QString& logId) {
     }
     m_summary.setValid(count > 0);
 
-    return m_summary.saveToDatabase(m_conn);
-
+    int saved = m_summary.saveToDatabase(m_conn);
+    if (saved) {
+        AmazfishConfig::instance()->setValue("device/lastsportsyncid", m_synced_activity_id);
+    }
+    return saved;
 }
 
 

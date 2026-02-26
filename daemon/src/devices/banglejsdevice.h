@@ -67,9 +67,10 @@ private:
     ActivityKind::Type convertToActivityKind(const QString &bangle_kind);
 
     ActivitySummary m_summary;
+    QString m_synced_activity_id;
     void fetchActivityRec(const QString &recId);
     QList<BangleActTrkRecord> m_activityRecords;
-    bool saveSportData(const QString& logId);
+    bool saveSportData();
     QString activityRecordsToGpx();
     QString activityRecordsToTcx();
 
