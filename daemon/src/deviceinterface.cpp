@@ -1216,13 +1216,7 @@ void DeviceInterface::updateCalendar()
     if (supportsFeature(int(Amazfish::Feature::FEATURE_EVENT_REMINDER))) {
         if (m_device) {
             QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
-
-            int id=0;
-            foreach (const watchfish::CalendarEvent &event, eventlist) {
-                qDebug() << event.uid() << event.title() << event.start();
-                m_device->sendEventReminder(id, event.start(), event.title());
-                id++;
-            }
+	    m_device->syncCalendar(eventlist);
         }
     } else if (AmazfishConfig::instance()->appSimulateEventSupport()){
         QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);

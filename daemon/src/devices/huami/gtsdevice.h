@@ -11,7 +11,7 @@ public:
 
     QString deviceType() const override;
     void sendAlert(const Amazfish::WatchNotification &notification) override;
-    void sendEventReminder(int id, const QDateTime &dt, const QString &event) override;
+    void syncCalendar(QList<watchfish::CalendarEvent> &eventlist) override;
     Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
@@ -37,6 +37,9 @@ protected:
 private:
     QString pairedName;
     bool m_navigationRunning = false;
+
+    void sendEventReminder(int id, const QDateTime &dt, const QString &event);
+
 };
 
 #endif // GTSDEVICE_H

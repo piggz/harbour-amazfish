@@ -39,6 +39,7 @@ Amazfish::Features BangleJSDevice::supportedFeatures() const
            Amazfish::Feature::FEATURE_HRM |
            Amazfish::Feature::FEATURE_ALERT |
            Amazfish::Feature::FEATURE_ALARMS |
+	   Amazfish::Feature::FEATURE_EVENT_REMINDER |
            Amazfish::Feature::FEATURE_MUSIC_CONTROL |
            Amazfish::Feature::FEATURE_WEATHER;
 }
@@ -511,6 +512,16 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             emit deviceEvent(AbstractDevice::EVENT_CANCEL_FIND_PHONE);
 
         }
+
+    } else if (t == "force_calendar_sync") {
+
+	QList<int> deviceIds;
+	const QJsonArray ids = json.value("ids").toArray();
+	for (const QJsonValue &v : ids) {
+	    deviceIds.append(v.toInt());
+	}
+	qDebug() << "Calendar IDs from device:" << deviceIds;
+	syncCalendarWithDeviceIds(deviceIds);
 
     } else if (t == "music") {
         QString music_action = json.value("n").toString();
@@ -1064,4 +1075,143 @@ void BangleJSDevice::setAlarms()
     root.insert("d", alarmsArray);
 
     uart->txJson(root);
+}
+
+// ask for list of events stored on device
+void BangleJSDevice::forceCalendarSync()
+{
+    qDebug() << Q_FUNC_INFO;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+	return;
+    }
+
+    QJsonObject o;
+    o.insert("t", "force_calendar_sync_start");
+    uart->txJson(o);
+}
+
+void BangleJSDevice::syncCalendar(QList<watchfish::CalendarEvent> &eventlist)
+{
+    qDebug() << Q_FUNC_INFO << eventlist.count();
+    m_eventlist = eventlist;
+    forceCalendarSync();
+}
+
+void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
+    if (!m_eventlist.has_value()) {
+	qDebug() << Q_FUNC_INFO << "DeviceInterface must call syncCalendar() first";
+	return;
+    }
+
+    qDebug() << Q_FUNC_INFO << deviceIds << m_event_id_map << m_eventlist->count();
+
+    if (m_eventlist->isEmpty()) {
+	// No calendar events — wipe everything from device
+	for (int deviceId : deviceIds) {
+	    removeEventReminder(deviceId);
+	}
+	m_event_id_map.clear();
+	return;
+    }
+
+    // Step 1: Device has IDs we have no record of (e.g. after app restart) — remove them
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QSet<int> knownIds = m_event_id_map.values().toSet();
+#else
+    QSet<int> knownIds(m_event_id_map.values().begin(), m_event_id_map.values().end());
+#endif
+    for (int deviceId : deviceIds) {
+	if (!knownIds.contains(deviceId)) {
+	    removeEventReminder(deviceId);
+	}
+    }
+
+
+    // Step 2: UIDs no longer in eventlist — remove from device and map
+    QSet<QString> incomingUids;
+    for (const auto &event : *m_eventlist) {
+	incomingUids.insert(event.uid());
+    }
+
+    QList<QString> toRemove;
+    for (auto it = m_event_id_map.constBegin(); it != m_event_id_map.constEnd(); ++it) {
+	if (!incomingUids.contains(it.key())) {
+	    removeEventReminder(it.value());
+	    toRemove.append(it.key());
+	}
+    }
+    for (const QString &uid : toRemove) {
+	m_event_id_map.remove(uid);
+    }
+
+    // Step 3: Send events missing from device
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QSet<int> deviceIdSet = deviceIds.toSet();
+#else
+    QSet<int> deviceIdSet(deviceIds.begin(), deviceIds.end());
+#endif
+    for (const auto &event : *m_eventlist) {
+	const QString uid = event.uid();
+
+	if (!m_event_id_map.contains(uid)) {
+	    m_event_id_map.insert(uid, m_next_event_id++);
+	}
+
+	int id = m_event_id_map[uid];
+	if (!deviceIdSet.contains(id)) { // insert
+	    sendCalendarEvent(id, event);
+	} // else update
+    }
+}
+
+
+void BangleJSDevice::sendCalendarEvent(int id, const watchfish::CalendarEvent &event)
+{
+    qDebug() << Q_FUNC_INFO << id;
+    // t:"calendar", id:int, type:int, timestamp:seconds, durationInSeconds,
+    // title:string, description:string,location:string,calName:string.color:int,allDay:bool - Add a calendar event
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+	return;
+    }
+
+    QJsonObject o;
+    // {t:"calendar", id:int, type:int, timestamp:seconds, durationInSeconds, title:string, description:string, location:string, calName:string, color:int, allDay:bool
+	// type:int, what is it?
+	// color:int e.g. 0xff0000
+
+    QString description = event.description();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0) // Qt 5
+    description.replace(QRegExp("[:~-]{3,}"), "");
+#else // Qt 6+
+    description.replace(QRegularExpression(R"([:~-]{3,})"), "");
+#endif
+    o.insert("t", "calendar");
+    o.insert("id", id);
+    o.insert("type", 0);
+    o.insert("timestamp", event.start().toMSecsSinceEpoch() / 1000);
+    o.insert("durationInSeconds", event.start().secsTo(event.end()));
+    o.insert("title", event.title());
+    o.insert("description", description);
+    o.insert("location", event.location());
+    o.insert("calName", "amazfish");
+    o.insert("color", (int)0xff8446);
+    o.insert("allDay", event.allDay());
+    uart->txJson(o);
+
+}
+
+void BangleJSDevice::removeEventReminder(int id)
+{
+    qDebug() << Q_FUNC_INFO << id;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+	return;
+    }
+    QJsonObject o;
+    o.insert("t", "calendar-");
+    o.insert("id", id);
+    uart->txJson(o);
 }
