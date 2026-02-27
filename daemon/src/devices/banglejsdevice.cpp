@@ -38,6 +38,7 @@ Amazfish::Features BangleJSDevice::supportedFeatures() const
     return Amazfish::Feature::FEATURE_STEPS |
            Amazfish::Feature::FEATURE_HRM |
            Amazfish::Feature::FEATURE_ALERT |
+           Amazfish::Feature::FEATURE_ALARMS |
            Amazfish::Feature::FEATURE_MUSIC_CONTROL |
            Amazfish::Feature::FEATURE_WEATHER;
 }
@@ -199,6 +200,7 @@ void BangleJSDevice::initialise()
     setConnectionState("authenticated");
 
     setTime();
+    setAlarms();
 }
 
 void BangleJSDevice::setTime() {
@@ -965,4 +967,54 @@ QString BangleJSDevice::activityRecordsToTcx()
 
     return str;
 
+}
+
+void BangleJSDevice::applyDeviceSetting(Amazfish::Settings s) {
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+
+    switch(s) {
+    case Amazfish::Settings::SETTING_ALARMS:
+        setAlarms();
+        break;
+    case Amazfish::Settings::SETTING_DEVICE_TIME:
+        setTime();
+        break;
+    }
+
+}
+
+void BangleJSDevice::setAlarms()
+{
+
+    // t:"alarm", d:[{h:int,m:int,rep:int,on:int},...] - set alarms
+    // rep=binary mask of weekdays
+    // on is optional, indicates whether the alarm is enabled (default) or disabled
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+
+    auto config = AmazfishConfig::instance();
+    QJsonArray alarmsArray;
+
+    for (int n = 1; n <= 5; ++n) {
+
+        QJsonObject alarmObj;
+        alarmObj.insert("h", config->alarmHour(n));
+        alarmObj.insert("m", config->alarmMinute(n));
+        alarmObj.insert("rep", config->alarmRepeatMask(n));  // 0 = one-shot
+        alarmObj.insert("on", config->alarmEnabled(n) ? 1 : 0);
+
+        alarmsArray.append(alarmObj);
+    }
+
+    QJsonObject root;
+    root.insert("t", "alarm");   // singular
+    root.insert("d", alarmsArray);
+
+    uart->txJson(root);
 }
