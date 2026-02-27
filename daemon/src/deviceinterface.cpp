@@ -1217,6 +1217,7 @@ void DeviceInterface::updateCalendar()
         if (m_device) {
             QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
 
+	    m_device->syncCalendar(eventlist);
             int id=0;
             foreach (const watchfish::CalendarEvent &event, eventlist) {
                 qDebug() << event.uid() << event.title() << event.start();
