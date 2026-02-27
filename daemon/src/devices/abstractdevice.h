@@ -7,6 +7,8 @@
 #include "qble/qbledevice.h"
 #include "weather/currentweather.h"
 #include "abstractfirmwareinfo.h"
+#include "libwatchfish/calendarsource.h"
+
 
 #include <KDb3/KDbDriver>
 #include <KDb3/KDbConnection>
@@ -75,6 +77,7 @@ public:
     virtual void sendAlert(const Amazfish::WatchNotification &notification) = 0;
     virtual void incomingCall(const QString &caller) = 0;
     virtual void incomingCallEnded() = 0;
+    virtual void sendEventReminder(int id, const watchfish::CalendarEvent &event);
     virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);
     virtual void enableFeature(Amazfish::Feature feature);
     virtual void setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0);
