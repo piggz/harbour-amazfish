@@ -45,7 +45,7 @@ public:
     //Weather
     void sendWeather(CurrentWeather *weather) override;
 
-    void setTime();
+    void applyDeviceSetting(Amazfish::Settings s) override;
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
@@ -76,6 +76,10 @@ private:
 
     QNetworkAccessManager *m_manager;
     void networkReply();
+
+    void setTime();
+    void setAlarms();
+
 };
 
 #endif // BANGLEJSDEVICE_H
