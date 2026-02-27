@@ -170,12 +170,12 @@
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="99"/>
         <source>All operations cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Operationen abgebrochen</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="141"/>
         <source>All operations complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Operationen beendet</translation>
     </message>
 </context>
 <context>
@@ -293,7 +293,7 @@
     <message>
         <location filename="../src/services/uartservice.cpp" line="58"/>
         <source>Android Integration plugin not installed on Bangle.js</source>
-        <translation type="unfinished"></translation>
+        <translation>Plugin für Androidintegration ist auf Bangle.js nicht installiert</translation>
     </message>
 </context>
 <context>
