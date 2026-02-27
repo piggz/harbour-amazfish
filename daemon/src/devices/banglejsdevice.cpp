@@ -461,6 +461,8 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 
     } else if (t == "status") {
         m_infoBatteryLevel = json.value("bat").toInt();
+        // json.value("volt").toDouble()
+        // json.value("chg").toInt()
         emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(m_infoBatteryLevel));
     } else if (t == "findPhone") {
         bool running = json.value("n").toBool();
