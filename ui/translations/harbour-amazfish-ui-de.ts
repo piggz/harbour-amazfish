@@ -97,7 +97,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="111"/>
         <source>Body Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Körpertemperatur</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="47"/>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="252"/>
         <source>Fetch Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Hole Daten</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="270"/>
@@ -364,7 +364,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="56"/>
         <source>Blood Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation>Blutsauerstoff</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="63"/>
@@ -541,27 +541,27 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
         <source>Download PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAI herunterladen</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="45"/>
         <source>%1 min</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 min</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="62"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>in den letzten 7 Tagen</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="92"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Jetzt</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="110"/>
         <source>Earned Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Heute dazugewonnen</translation>
     </message>
 </context>
 <context>
@@ -1389,28 +1389,28 @@
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="9"/>
         <source>Blood Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation>Blutsauerstoff</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="16"/>
         <source>Download SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SPO2 herunterladen</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="55"/>
         <source>Normal SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SPO2 Normal</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="59"/>
         <location filename="../qml/pages/Spo2DataPage.qml" line="80"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="76"/>
         <source>Sleep SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SPO2 Schlaf</translation>
     </message>
 </context>
 <context>
@@ -3330,7 +3330,7 @@
         <location filename="../qml/components/Translation.js" line="99"/>
         <location filename="../qml/components/Translation.js" line="99"/>
         <source>Racket</source>
-        <translation type="unfinished"></translation>
+        <translation>Racketsport</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="100"/>
@@ -3504,13 +3504,13 @@
         <location filename="../qml/components/Translation.js" line="128"/>
         <location filename="../qml/components/Translation.js" line="128"/>
         <source>Functional Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Funktionelles Training</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="129"/>
         <location filename="../qml/components/Translation.js" line="129"/>
         <source>Physical Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Krafttraining</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="130"/>
@@ -3546,7 +3546,7 @@
         <location filename="../qml/components/Translation.js" line="135"/>
         <location filename="../qml/components/Translation.js" line="135"/>
         <source>Core Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Core-Training</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="136"/>
