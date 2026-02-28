@@ -287,15 +287,16 @@ var activityKindTranslations = {
 
 
 function translateSportKind(sportkind) {
-    if (activityKindTranslations[sportkind] !== undefined)
+    if (activityKindTranslations[sportkind] !== undefined) {
         return activityKindTranslations[sportkind];
+    }
 
     return sportkind;
 }
 
 
 function translateSportKey(key) {
-    const translations = {
+    var translations = {
         "activeSeconds": qsTr("Active Time"),
         "aerobicTrainingEffect": qsTr("Aerobic Training Effect"),
         "anaerobicTrainingEffect": qsTr("Anaerobic Training Effect"),
@@ -356,14 +357,15 @@ function translateSportKey(key) {
         "uphillTime": qsTr("Uphill Time"),
         "workoutDuration": qsTr("Workout Duration")
     };
-    if (translations[key] !== undefined)
+    if (translations[key] !== undefined) {
         return translations[key];
+    }
 
     return key;
 }
 
 function translateSportUnit(unit) {
-    const translations = {
+    var translations = {
         "bpm": qsTr("bpm"),
         "calories": qsTr("kcal"),
         "calories_unit": qsTr("kcal"),
@@ -384,8 +386,9 @@ function translateSportUnit(unit) {
         "strokes_second": qsTr("strokes/s"),
         "swolf_index": qsTr("SWOLF"),
     };
-    if (translations[unit] !== undefined)
+    if (translations[unit] !== undefined) {
         return translations[unit];
+    }
 
     return unit;
 }
