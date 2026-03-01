@@ -9,7 +9,11 @@ PagePL {
     property alias day: nav.day
 
     pageMenu: PageMenuPL {
-        DownloadDataMenuItem{}
+        PageMenuItemPL {
+            iconSource: styler.iconDownloadData !== undefined ? styler.iconDownloadData : ""
+            text: qsTr("Download All Data")
+            onClicked: DaemonInterfaceInstance.fetchData(Amazfish.TYPE_HRV | Amazfish.TYPE_TEMPERATURE | Amazfish.TYPE_ACTIVITY);
+        }
     }
 
     // Place our content in a Column.  The PageHeader is always placed at the top
