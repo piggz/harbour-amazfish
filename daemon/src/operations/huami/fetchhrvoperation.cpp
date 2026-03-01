@@ -68,6 +68,8 @@ bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
         qDebug() << "Processing record:" << r.timestamp << r.value;
         int count;
 
+        lastTime = r.timestamp;
+
         if (m_conn && m_conn->isDatabaseUsed()) {
             KDbEscapedString sql = KDbEscapedString("SELECT hrv_id FROM hrv WHERE hrv_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
             tristate success = m_conn->querySingleNumber(sql, &count);
@@ -85,8 +87,6 @@ bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
                 hrvValues << r.timestamp.toMSecsSinceEpoch() / 1000;
                 hrvValues << r.timestamp;
                 hrvValues << r.value;
-
-                lastTime = r.timestamp;
 
                 result = m_conn->insertRecord(&hrvFields, hrvValues);
                 if (result->lastResult().isError()) {
