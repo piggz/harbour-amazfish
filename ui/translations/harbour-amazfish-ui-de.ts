@@ -551,7 +551,7 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="62"/>
         <source>Last 7 Days</source>
-        <translation>in den letzten 7 Tagen</translation>
+        <translation>Wochenstatistik</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="92"/>
