@@ -27,18 +27,24 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
 
     if (type & Amazfish::DataType::TYPE_ACTIVITY && m_device->supportsDataType(Amazfish::DataType::TYPE_ACTIVITY)) {
         m_operations.append(new ActivityFetchOperation(this, m_device->database(), m_device->activitySampleSize(), m_device->isZeppOs()));
-    } else if (type & Amazfish::DataType::TYPE_DEBUGLOG && m_device->supportsDataType(Amazfish::DataType::TYPE_DEBUGLOG)) {
+    }
+    if (type & Amazfish::DataType::TYPE_DEBUGLOG && m_device->supportsDataType(Amazfish::DataType::TYPE_DEBUGLOG)) {
         m_operations.append(new LogFetchOperation(this, m_device->isZeppOs()));
-    } else if (type & Amazfish::DataType::TYPE_GPS_TRACK && m_device->supportsDataType(Amazfish::DataType::TYPE_GPS_TRACK)) {
+    }
+    if (type & Amazfish::DataType::TYPE_GPS_TRACK && m_device->supportsDataType(Amazfish::DataType::TYPE_GPS_TRACK)) {
         m_operations.append(new SportsSummaryOperation(this, m_device->activitySummaryParser(), m_device->isZeppOs()));
-    } else if (type & Amazfish::DataType::TYPE_PAI && m_device->supportsDataType(Amazfish::DataType::TYPE_PAI)) {
+    }
+    if (type & Amazfish::DataType::TYPE_PAI && m_device->supportsDataType(Amazfish::DataType::TYPE_PAI)) {
         m_operations.append(new FetchPaiOperation(this, m_device->database(), m_device->isZeppOs()));
-    } else if (type & Amazfish::DataType::TYPE_HRV && m_device->supportsDataType(Amazfish::DataType::TYPE_HRV)) {
+    }
+    if (type & Amazfish::DataType::TYPE_HRV && m_device->supportsDataType(Amazfish::DataType::TYPE_HRV)) {
         m_operations.append(new FetchHrvOperation(this, m_device->database(), m_device->isZeppOs()));
-    } else if (type & Amazfish::DataType::TYPE_SPO2 && m_device->supportsDataType(Amazfish::DataType::TYPE_SPO2)) {
+    }
+    if (type & Amazfish::DataType::TYPE_SPO2 && m_device->supportsDataType(Amazfish::DataType::TYPE_SPO2)) {
         m_operations.append(new FetchSpo2NormalOperation(this, m_device->database(), m_device->isZeppOs()));
         m_operations.append(new FetchSpo2SleepOperation(this, m_device->database(), m_device->isZeppOs()));
-    } else if (type & Amazfish::DataType::TYPE_TEMPERATURE && m_device->supportsDataType(Amazfish::DataType::TYPE_TEMPERATURE)) {
+    }
+    if (type & Amazfish::DataType::TYPE_TEMPERATURE && m_device->supportsDataType(Amazfish::DataType::TYPE_TEMPERATURE)) {
         m_operations.append(new FetchTemperatureOperation(this, m_device->database(), m_device->isZeppOs()));
     }
 
