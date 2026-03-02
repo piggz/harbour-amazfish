@@ -76,7 +76,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="14"/>
         <source>Download All Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Stáhnout všechny data</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="48"/>
