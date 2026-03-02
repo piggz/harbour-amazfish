@@ -22,19 +22,19 @@ private:
         STRENGTH_SET = 15
     };
 
-    QMap<Type, int> m_types;
+    QMap<Type, QSet<int>> m_types;
     QMap<char, int> m_unknownTypes;
 
     Type typeFromCode(char code);
-    int typeLength(Type t);
+    bool typeLengthMatch(Type t, int length) const;
 
     int consumeTimestamp(const QByteArray &bytes, int offset);
     int consumeTimestampOffset(const QByteArray &bytes, int offset);
-    int consumeGpsCoords(const QByteArray &bytes, int offset);
-    int consumeGpsDelta(const QByteArray &bytes, int offset);
+    int consumeGpsCoords(const QByteArray &bytes, int offset, int length);
+    int consumeGpsDelta(const QByteArray &bytes, int offset, int length);
     int consumeStatus(const QByteArray &bytes, int offset);
     int consumeSpeed(const QByteArray &bytes, int offset);
-    int consumeAltitude(const QByteArray &bytes, int offset);
+    int consumeAltitude(const QByteArray &bytes, int offset, int length);
     int consumeHeartRate(const QByteArray &bytes, int offset);
     int consumeStrengthSet(const QByteArray &bytes, int offset);
 

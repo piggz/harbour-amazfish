@@ -5,14 +5,14 @@
 ZeppOsActivityDetailParser::ZeppOsActivityDetailParser()
 {
     m_types = {
-        {TIMESTAMP,12},
-        {GPS_COORDS,20},
-        {GPS_DELTA,8},
-        {STATUS,4},
-        {SPEED,8},
-        {ALTITUDE,6},
-        {HEARTRATE,3},
-        {STRENGTH_SET,34},
+        { TIMESTAMP,    {12} },
+        { GPS_COORDS,   {20, 28} },
+        { GPS_DELTA,    {8, 16} },
+        { STATUS,       {4} },
+        { SPEED,        {8} },
+        { ALTITUDE,     {6, 7} },
+        { HEARTRATE,    {3} },
+        { STRENGTH_SET, {34} },
     };
 }
 
@@ -49,7 +49,7 @@ void ZeppOsActivityDetailParser::parse(const QByteArray &bytes)
             m_unknownTypes[typeCode] = m_unknownTypes[typeCode] + 1;
             i += length;
             continue;
-        } else if (length != typeLength(type)) {
+        } else if (!typeLengthMatch(type,length)) {
             qDebug() << "Unexpected length " << length << " for type " << type;
             // Consume the reported length
             i += length;
@@ -62,10 +62,10 @@ void ZeppOsActivityDetailParser::parse(const QByteArray &bytes)
             i += consumeTimestamp(bytes, i);
             break;
         case GPS_COORDS:
-            i += consumeGpsCoords(bytes, i);
+            i += consumeGpsCoords(bytes, i, length);
             break;
         case GPS_DELTA:
-            i += consumeGpsDelta(bytes, i);
+            i += consumeGpsDelta(bytes, i, length);
             break;
         case STATUS:
             i += consumeStatus(bytes, i);
@@ -74,7 +74,7 @@ void ZeppOsActivityDetailParser::parse(const QByteArray &bytes)
             i += consumeSpeed(bytes, i);
             break;
         case ALTITUDE:
-            i += consumeAltitude(bytes, i);
+            i += consumeAltitude(bytes, i, length);
             break;
         case HEARTRATE:
             i += consumeHeartRate(bytes, i);
@@ -103,10 +103,11 @@ void ZeppOsActivityDetailParser::parse(const QByteArray &bytes)
     //}
 }
 
-int ZeppOsActivityDetailParser::typeLength(Type t)
+bool ZeppOsActivityDetailParser::typeLengthMatch(Type t, int length) const
 {
-    return m_types[t];
+    return m_types.contains(t) && m_types[t].contains(length);
 }
+
 
 int ZeppOsActivityDetailParser::consumeTimestamp(const QByteArray &bytes, int offset)
 {
@@ -129,7 +130,7 @@ int ZeppOsActivityDetailParser::consumeTimestampOffset(const QByteArray &bytes, 
     return 2;
 }
 
-int ZeppOsActivityDetailParser::consumeGpsCoords(const QByteArray &bytes, int offset)
+int ZeppOsActivityDetailParser::consumeGpsCoords(const QByteArray &bytes, int offset, int length)
 {
     //qDebug() << Q_FUNC_INFO;
     // TODO which one is the time offset? Not sure it is the first
@@ -139,10 +140,14 @@ int ZeppOsActivityDetailParser::consumeGpsCoords(const QByteArray &bytes, int of
 
     addNewGpsCoordinate();
 
-    return 20;
+    if (length > 20) {
+        // Balance 2 format: skip remaining 14 bytes (6 old + 8 new)
+    }
+
+    return length;
 }
 
-int ZeppOsActivityDetailParser::consumeGpsDelta(const QByteArray &bytes, int offset)
+int ZeppOsActivityDetailParser::consumeGpsDelta(const QByteArray &bytes, int offset, int length)
 {
     //qDebug() << Q_FUNC_INFO;
     offset += consumeTimestampOffset(bytes, offset);
@@ -153,9 +158,13 @@ int ZeppOsActivityDetailParser::consumeGpsDelta(const QByteArray &bytes, int off
     m_baseLongitude += longitudeDelta;
     m_baseLatitude += latitudeDelta;
 
+    if (length > 8) {
+        // Skip additional 8 bytes: 2-byte flag + 2x 4-byte floats (likely speed/accuracy)
+    }
+
     addNewGpsCoordinate();
 
-    return 8;
+    return length;
 }
 
 int ZeppOsActivityDetailParser::consumeStatus(const QByteArray &bytes, int offset)
@@ -206,13 +215,22 @@ int ZeppOsActivityDetailParser::consumeSpeed(const QByteArray &bytes, int offset
     return 8;
 }
 
-int ZeppOsActivityDetailParser::consumeAltitude(const QByteArray &bytes, int offset)
+int ZeppOsActivityDetailParser::consumeAltitude(const QByteArray &bytes, int offset, int length)
 {
-    //qDebug() << Q_FUNC_INFO;
     offset += consumeTimestampOffset(bytes, offset);
-    m_baseAltitude = (int) (TypeConversion::toInt32(bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3]) / 100.0f);
+    int altitudeRaw = TypeConversion::toInt32(bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3]);
 
-    return 6;
+    if (length == 7) {
+        const quint8 validityFlag = static_cast<quint8>(bytes[offset + 4]);
+
+        if (altitudeRaw == -1 || validityFlag == 0xFF) {
+            return length;  // Invalid altitude → don't update
+        }
+        m_baseAltitude = (int) (altitudeRaw / 10000.0f);
+    } else {
+        m_baseAltitude = (int) (altitudeRaw / 100.0f);
+    }
+    return length;
 }
 
 int ZeppOsActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int offset)
