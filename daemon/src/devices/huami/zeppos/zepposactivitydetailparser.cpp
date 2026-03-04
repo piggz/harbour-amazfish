@@ -201,9 +201,9 @@ int ZeppOsActivityDetailParser::consumeSpeed(const QByteArray &bytes, int offset
     //qDebug() << Q_FUNC_INFO;
     offset += consumeTimestampOffset(bytes, offset);
 
-    short cadence = TypeConversion::toInt16(bytes[offset], bytes[offset + 1]); // spm
+    m_lastCadence = TypeConversion::toInt16(bytes[offset], bytes[offset + 1]); // spm
     short stride = TypeConversion::toInt16(bytes[offset + 2], bytes[offset + 3]); // cm
-    short pace = TypeConversion::toInt16(bytes[offset + 4], bytes[offset + 5]); // sec/km
+    m_lastPace = TypeConversion::toInt16(bytes[offset + 4], bytes[offset + 5]); // sec/km
 
     //TODO
     //if (ap != null) {
@@ -282,6 +282,10 @@ void ZeppOsActivityDetailParser::addNewGpsCoordinate()
 
     ac.setCoordinate(m_lastCoordinate);
     ac.setHeartRate(m_lastHeartrate);
+    ac.setCadence(m_lastCadence);
+    if (m_lastPace != 0) {
+        ac.setSpeed(1000.0f / m_lastPace); // s/km -> m/s
+    }
     ac.setTimeStamp(m_lastTimestamp.addMSecs(m_offset));
 
     add(ac);

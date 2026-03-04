@@ -45,6 +45,8 @@ private:
     QDateTime m_lastTimestamp;
     QGeoCoordinate m_lastCoordinate;
     ActivityCoordinate m_lastActivityPoint;
+    short m_lastCadence = 0;
+    short m_lastPace = 0;
     int m_lastHeartrate = 0;
     long m_offset = 0;
 
