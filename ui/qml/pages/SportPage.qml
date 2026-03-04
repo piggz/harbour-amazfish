@@ -365,6 +365,19 @@ PagePL {
                 dialog.activityType = kindstring;
             }
         }
+        PageMenuItemPL {
+            iconSource: styler.iconUploadToStrava !== undefined ? styler.iconUploadToStrava : ""
+            text: qsTr("Send to FitTrackee")
+            visible: o2fittrackee.linked
+            onClicked: {
+                var dialog = app.pages.push(Qt.resolvedUrl("FitTrackeeUploadPage.qml"));
+                dialog.activityID = activitytitle.replace(/\s/g, '');
+                dialog.tcx = tcx;
+                dialog.activityName = activitytitle;
+                dialog.activityDescription = trackLoader.description;
+                dialog.activityType = kindstring;
+            }
+        }
 
     }
 

@@ -179,6 +179,11 @@ public:
     ALARM_OPTION(QStringLiteral("alarms/alarm%1/hour"),    alarmHour,       setAlarmHour,       int,  0,     toInt)
     ALARM_OPTION(QStringLiteral("alarms/alarm%1/minute"),  alarmMinute,     setAlarmMinute,     int,  0,     toInt)
 
+    STRING_OPTION(QStringLiteral("fittrackee/baseURL"),      fittrackeeBaseURL,      setFittrackeeBaseURL,    "")
+    STRING_OPTION(QStringLiteral("fittrackee/clientID"),     fittrackeeClientID,     setFittrackeeClientID,    "")
+    STRING_OPTION(QStringLiteral("fittrackee/clientSecret"), fittrackeeClientSecret, setFittrackeeClientSecret,    "")
+
+
 private:
     using signal_ptr = void(AmazfishConfig::*)();
 
