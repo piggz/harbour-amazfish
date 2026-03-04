@@ -14,7 +14,7 @@
     <message>
         <location filename="../src/achievements.cpp" line="12"/>
         <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
-        <translation type="unfinished"></translation>
+        <translation>El viaje empieza, aventurero. Sólo &lt;b&gt;%1&lt;/b&gt; pasos — la gloria está a la vista.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
@@ -34,12 +34,12 @@
     <message>
         <location filename="../src/achievements.cpp" line="16"/>
         <source>The ring is cast into the fire. &lt;b&gt;%1&lt;/b&gt; steps done — Middle-earth is saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>El anillo es lanzado al fuego. &lt;b&gt;%1&lt;/b&gt; pasos realizados — ¡La Tierra Media es salvada!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="17"/>
         <source>You kept walking after saving the world?! &lt;b&gt;%1&lt;/b&gt; steps — you’re a true legend. 🧙</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguiste caminando después de salvar el mundo?! &lt;b&gt;%1&lt;/b&gt; pasos — eres una verdadera leyenda. 🧙</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="18"/>
@@ -49,32 +49,32 @@
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
         <source>Let&apos;s get moving! You&apos;ve taken only &lt;b&gt;%1&lt;/b&gt; steps so far.</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Vamos a movernos! Solo haz dado &lt;b&gt;%1&lt;/b&gt; pasos hasta ahora.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="23"/>
         <source>Warming up! &lt;b&gt;%1&lt;/b&gt; steps done — keep going!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Vas calentando! llevas &lt;b&gt;%1&lt;/b&gt; pasos — ¡Sigue así!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="24"/>
         <source>You&apos;re halfway there. &lt;b&gt;%1&lt;/b&gt; steps so far!</source>
-        <translation type="unfinished"></translation>
+        <translation>Estás a mitad del camino. ¡Llevas &lt;b&gt;%1&lt;/b&gt; pasos hasta ahora!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="25"/>
         <source>Almost there! Just a bit more — &lt;b&gt;%1&lt;/b&gt; steps already!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Casi! Sólo un poco más — ¡Llevas &lt;b&gt;%1&lt;/b&gt; pasos ya!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="26"/>
         <source>Goal reached! &lt;b&gt;%1&lt;/b&gt; steps — you can have that cake now 🎉</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Objetivo alcanzado! &lt;b&gt;%1&lt;/b&gt; pasos — Ahora puedes ir por ese pastel 🎉</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="27"/>
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Te superaste! &lt;b&gt;%1&lt;/b&gt; pasos — tomarás un descanso o irás por la bonificación?</translation>
     </message>
 </context>
 <context>
@@ -121,7 +121,7 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="840"/>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Calendario</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/devices/huami/gtsdevice.cpp" line="230"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualmente se está ejecutando una operación, por favor intenta más tarde</translation>
     </message>
 </context>
 <context>
@@ -162,7 +162,7 @@
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="386"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualmente se está ejecutando una operación, por favor intenta más tarde</translation>
     </message>
 </context>
 <context>
@@ -170,12 +170,12 @@
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="99"/>
         <source>All operations cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas las operaciones han sido canceladas</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="141"/>
         <source>All operations complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas las operaciones han sido completadas</translation>
     </message>
 </context>
 <context>
@@ -193,13 +193,13 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="369"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="383"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualmente se está ejecutando una operación, por favor intenta más tarde</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="406"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="419"/>
         <source>Sending file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviando archivo...</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="409"/>
@@ -218,27 +218,27 @@
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
-        <translation type="unfinished"></translation>
+        <translation>el archivo AGPS está corrupto</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
-        <translation type="unfinished"></translation>
+        <translation>El formato del archivo AGPS no es correcto</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
-        <translation type="unfinished"></translation>
+        <translation>Error desconocido enviando el archivo AGPS</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo cargado correctamente.  Comenzando la actualización del dispositivo</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló carga de archivo</translation>
     </message>
 </context>
 <context>
@@ -293,7 +293,7 @@
     <message>
         <location filename="../src/services/uartservice.cpp" line="58"/>
         <source>Android Integration plugin not installed on Bangle.js</source>
-        <translation type="unfinished"></translation>
+        <translation>El plugin de integración con Android no está instalado en el Bangle.js</translation>
     </message>
 </context>
 <context>
@@ -301,7 +301,7 @@
     <message>
         <location filename="../src/devices/huami/zepposdevice.cpp" line="442"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualmente se está ejecutando una operación, por favor intenta más tarde</translation>
     </message>
 </context>
 </TS>
