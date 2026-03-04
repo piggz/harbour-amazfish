@@ -76,7 +76,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="14"/>
         <source>Download All Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Descargar todos los datos</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="48"/>
@@ -2209,7 +2209,7 @@
         <location filename="../qml/components/Translation.js" line="78"/>
         <location filename="../qml/components/Translation.js" line="78"/>
         <source>Wakeboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Wakeboarding</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="79"/>
@@ -2257,7 +2257,7 @@
         <location filename="../qml/components/Translation.js" line="86"/>
         <location filename="../qml/components/Translation.js" line="86"/>
         <source>Boxing</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxeo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="87"/>
@@ -2269,37 +2269,37 @@
         <location filename="../qml/components/Translation.js" line="88"/>
         <location filename="../qml/components/Translation.js" line="88"/>
         <source>Baseball</source>
-        <translation type="unfinished"></translation>
+        <translation>Baseball</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="89"/>
         <location filename="../qml/components/Translation.js" line="89"/>
         <source>Softball</source>
-        <translation type="unfinished"></translation>
+        <translation>Softball</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="90"/>
         <location filename="../qml/components/Translation.js" line="90"/>
         <source>Softball Slow Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Softball Slow Pitch</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="91"/>
         <location filename="../qml/components/Translation.js" line="91"/>
         <source>Shooting</source>
-        <translation type="unfinished"></translation>
+        <translation>Shooting</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="92"/>
         <location filename="../qml/components/Translation.js" line="92"/>
         <source>Auto Racing</source>
-        <translation type="unfinished"></translation>
+        <translation>Conducción automovilística</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="93"/>
         <location filename="../qml/components/Translation.js" line="93"/>
         <source>Winter Sport</source>
-        <translation type="unfinished"></translation>
+        <translation>Deporte de invierno</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="94"/>
