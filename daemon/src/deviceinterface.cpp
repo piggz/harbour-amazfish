@@ -1221,6 +1221,7 @@ void DeviceInterface::updateCalendar()
             foreach (const watchfish::CalendarEvent &event, eventlist) {
                 qDebug() << event.uid() << event.title() << event.start();
                 m_device->sendEventReminder(id, event.start(), event.title());
+                m_device->sendEventReminder(id, event);
                 id++;
             }
         }

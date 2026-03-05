@@ -170,6 +170,13 @@ void AbstractDevice::rebootWatch()
 
 }
 
+
+void AbstractDevice::sendEventReminder(int id, const watchfish::CalendarEvent &event)
+{
+    Q_UNUSED(id);
+    Q_UNUSED(event);
+}
+
 //!
 //! \brief AbstractDevice::sendEventReminder
 //! \param id Optional identifer if required by the device

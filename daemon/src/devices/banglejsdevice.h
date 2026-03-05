@@ -46,6 +46,9 @@ public:
     void sendWeather(CurrentWeather *weather) override;
 
     void applyDeviceSetting(Amazfish::Settings s) override;
+    void sendEventReminder(int id, const watchfish::CalendarEvent &event) override;
+
+
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);

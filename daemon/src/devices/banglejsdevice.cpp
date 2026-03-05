@@ -39,6 +39,7 @@ Amazfish::Features BangleJSDevice::supportedFeatures() const
            Amazfish::Feature::FEATURE_HRM |
            Amazfish::Feature::FEATURE_ALERT |
            Amazfish::Feature::FEATURE_ALARMS |
+           Amazfish::Feature::FEATURE_EVENT_REMINDER |
            Amazfish::Feature::FEATURE_MUSIC_CONTROL |
            Amazfish::Feature::FEATURE_WEATHER;
 }
@@ -474,6 +475,9 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 
         }
 
+    } else if (t == "force_calendar_sync") {
+
+        qDebug() << "Calendar IDs" << json.value("ids");
     } else if (t == "music") {
         QString music_action = json.value("n").toString();
 
@@ -1019,4 +1023,34 @@ void BangleJSDevice::setAlarms()
     root.insert("d", alarmsArray);
 
     uart->txJson(root);
+}
+
+void BangleJSDevice::sendEventReminder(int id, const watchfish::CalendarEvent &event)
+{
+    // t:"calendar", id:int, type:int, timestamp:seconds, durationInSeconds,
+    // title:string, description:string,location:string,calName:string.color:int,allDay:bool - Add a calendar event
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+
+    QJsonObject o;
+    // {t:"calendar", id:int, type:int, timestamp:seconds, durationInSeconds, title:string, description:string, location:string, calName:string, color:int, allDay:bool
+        // type:int, what is it?
+        // color:int e.g. 0xff0000
+
+    o.insert("t", "calendar");
+    o.insert("id", id);
+    o.insert("type", 0);
+    o.insert("timestamp", event.start().toMSecsSinceEpoch() / 1000);
+    o.insert("durationInSeconds", event.start().secsTo(event.end()));
+    o.insert("title", event.title());
+    o.insert("description", event.description());
+    o.insert("location", event.description());
+    o.insert("calName", "amazfish");
+    o.insert("color", (int)0xff8446);
+    o.insert("allDay", event.allDay());
+    uart->txJson(o);
+
 }
