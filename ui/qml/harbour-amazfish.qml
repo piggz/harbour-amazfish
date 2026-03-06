@@ -21,6 +21,7 @@ ApplicationWindowPL
     property bool serviceEnabledState: false
     property int supportedFeatures: 0
     property bool stravaLinked: false
+    property bool fittrackeeLinked: false
     property bool firstPass: true
     property string _lastMessage: ""
     property string _percentText: ""
@@ -102,6 +103,29 @@ ApplicationWindowPL
 
         onLinkedChanged: {
             stravaLinked = linked
+        }
+    }
+
+    O2 {
+        id: o2fittrackee
+        property string baseUrl: AmazfishConfig.fittrackeeBaseURL
+        clientId: AmazfishConfig.fittrackeeClientID
+        clientSecret: AmazfishConfig.fittrackeeClientSecret
+        scope: "workouts:write workouts:read profile:read"
+        requestUrl: baseUrl + "/profile/apps/authorize"
+        tokenUrl: baseUrl + "/api/oauth/token"
+        refreshTokenUrl: baseUrl + "/api/oauth/token"
+        replyContent: "<html><head><body><h1>You can now close this window</h1></body></head></html>"
+
+        onOpenBrowser: {
+            Qt.openUrlExternally(url);
+        }
+
+        onCloseBrowser: {
+        }
+
+        onLinkedChanged: {
+            fittrackeeLinked = linked
         }
     }
 
