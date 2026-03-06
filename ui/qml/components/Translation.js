@@ -306,6 +306,7 @@ function translateSportKey(key) {
         "averageHR": qsTr("Average Heart Rate"),
         "averageKMPaceSeconds": qsTr("Average Pace"),
         "averageLapPace": qsTr("Average Lap Pace"),
+        "averageSpeed": qsTr("Average Speed"),
         "averageStride": qsTr("Average Stride"),
         "averageStrokeDistance": qsTr("Average Stroke Distance"),
         "averageStrokesPerSecond": qsTr("Average Stroke Rate"),

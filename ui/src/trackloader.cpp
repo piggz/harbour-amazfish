@@ -291,6 +291,7 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
                                 point.longitude = xml.attributes().value("lon").toDouble();
                                 point.distance = 0;
                                 point.speed = 0;
+                                point.cadence = 0;
                                 point.pace = 0;
                                 point.duration = 0;
 
@@ -334,8 +335,22 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
                                                     if(xml.name() == "hr")
                                                     {
                                                         point.heartrate = xml.readElementText().toInt();
+                                                    } else if(xml.name() == "cad")
+                                                    {
+                                                        point.cadence = xml.readElementText().toInt();
                                                     }
-                                                    else
+                                                    else if(xml.name() == "speed")
+                                                    {
+                                                        //Calculate speed from [m/s] to [km/h]
+                                                        point.speed = xml.readElementText().toDouble() * 3.6;
+
+                                                        //Calculate pace in [min/km]
+                                                        if (point.speed > 0) {
+                                                            point.pace = 60.0 / point.speed;
+                                                        } else {
+                                                            point.pace = 99;
+                                                        }
+                                                    } else
                                                         xml.skipCurrentElement();
                                                 }
                                             }
@@ -393,11 +408,13 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
                                             rCurrentDuration += m_durationarray[i];
                                         }
 
-                                        //Calculate speed in [km/h]
-                                        point.speed = (rCurrentDistance / 1000.0) / (rCurrentDuration / 3600.0);
-
-                                        //Calculate pace in [min/km]
-                                        point.pace = (rCurrentDuration / 60.0) / (rCurrentDistance / 1000.0);
+                                        // Set speed and pace if not obtained from file
+                                        if (point.speed == 0 && point.pace == 99) {
+                                            //Calculate speed in [km/h]
+                                            point.speed = (rCurrentDistance / 1000.0) / (rCurrentDuration / 3600.0);
+                                            //Calculate pace in [min/km]
+                                            point.pace = (rCurrentDuration / 60.0) / (rCurrentDistance / 1000.0);
+                                        }
                                     }
                                     point.distance = m_distance;
                                 }
@@ -431,6 +448,7 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
                         point.longitude = xml.attributes().value("lon").toDouble();
                         point.distance = 0;
                         point.speed = 0;
+                        point.cadence = 0;
                         point.pace = 0;
                         point.duration = 0;
 
@@ -474,6 +492,22 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
                                             if(xml.name() == "hr")
                                             {
                                                 point.heartrate = xml.readElementText().toInt();
+                                            }
+                                            else if(xml.name() == "cad")
+                                            {
+                                                point.cadence = xml.readElementText().toInt();
+                                            }
+                                            else if(xml.name() == "speed")
+                                            {
+                                                //Calculate speed from [m/s] to [km/h]
+                                                point.speed = xml.readElementText().toDouble() * 3.6;
+
+                                                //Calculate pace in [min/km]
+                                                if (point.speed > 0) {
+                                                    point.pace = 60.0 / point.speed;
+                                                } else {
+                                                    point.pace = 99;
+                                                }
                                             }
                                             else
                                                 xml.skipCurrentElement();
@@ -534,11 +568,13 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
                                     rCurrentDuration += m_durationarray[i];
                                 }
 
-                                //Calculate speed in [km/h]
-                                point.speed = (rCurrentDistance / 1000.0) / (rCurrentDuration / 3600.0);
-
-                                //Calculate pace in [min/km]
-                                point.pace = (rCurrentDuration / 60.0) / (rCurrentDistance / 1000.0);
+                                // Set speed and pace if not obtained from file
+                                if (point.speed == 0 && point.pace == 99) {
+                                    //Calculate speed in [km/h]
+                                    point.speed = (rCurrentDistance / 1000.0) / (rCurrentDuration / 3600.0);
+                                    //Calculate pace in [min/km]
+                                    point.pace = (rCurrentDuration / 60.0) / (rCurrentDistance / 1000.0);
+                                }
                             }
                             point.distance = m_distance;
                         }
@@ -622,6 +658,18 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
                     m_heartRateMin = m_points.at(i).heartrate;
             }
 
+            //Cadence
+            if (m_points.at(i).cadence > 0)
+            {
+                m_cadencePoints++;
+                m_cadence += m_points.at(i).cadence;
+
+                if (m_points.at(i).cadence > m_cadenceMax)
+                    m_cadenceMax = m_points.at(i).cadence;
+                if (m_points.at(i).heartrate < m_heartRateMin)
+                    m_cadenceMin = m_points.at(i).cadence;
+            }
+
             //Elevation Up/Down
             if (i > 1)
             {
@@ -642,6 +690,7 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
         m_speed = m_distance / m_duration;
         m_pace = m_duration / m_distance * 1000 / 60;
         m_heartRate = m_heartRate / m_heartRatePoints;
+        m_cadence = m_cadence / m_cadencePoints;
 
         // qDebug()<<"m_distance second calculated: "<<QString::number(m_distance);
 
@@ -655,6 +704,9 @@ void TrackLoader::parseXmlStream(QXmlStreamReader &xml)
         emit durationChanged();
         emit timeChanged();
         emit elevationChanged();
+        emit cadenceChanged();
+        emit cadenceMinChanged();
+        emit cadenceMaxChanged();
     }
     else
     {
@@ -740,6 +792,7 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
                                                 point.longitude = 0;
                                                 point.distance = 0;
                                                 point.speed = 0;
+                                                point.cadence = 0;
                                                 point.pace = 0;
                                                 point.duration = 0;
 
@@ -749,6 +802,8 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
                                                         point.time = QDateTime::fromString(xml.readElementText(),Qt::ISODate);
                                                     } else if(xml.name() == "AltitudeMeters") {
                                                         point.elevation = xml.readElementText().toDouble();
+                                                    } else if(xml.name() == "Cadence") {
+                                                        point.cadence = xml.readElementText().toInt();
                                                     } else if(xml.name() == "HeartRateBpm") {
                                                         while(xml.readNextStartElement())
                                                         {
@@ -769,6 +824,32 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
                                                                 xml.skipCurrentElement();
                                                             }
                                                         }
+                                                    } else if(xml.name() == "Extensions") {
+                                                        while(xml.readNextStartElement())
+                                                        {
+                                                            if(xml.name() == "TPX") {
+                                                                while(xml.readNextStartElement())
+                                                                {
+                                                                    if(xml.name() == "Speed") {
+                                                                        //Calculate speed from [m/s] to [km/h]
+                                                                        point.speed = xml.readElementText().toDouble() * 3.6;
+
+                                                                        //Calculate pace in [min/km]
+                                                                        if (point.speed > 0) {
+                                                                            point.pace = 60.0 / point.speed;
+                                                                        } else {
+                                                                            point.pace = 99;
+                                                                        }
+                                                                    } else {
+                                                                        xml.skipCurrentElement();
+                                                                    }
+                                                                }
+                                                            } else {
+                                                                xml.skipCurrentElement();
+                                                            }
+                                                        }
+                                                    } else {
+                                                        xml.skipCurrentElement();
                                                     }
                                                 }
                                                 //Before the point is appended we need to calculate a few more things.
@@ -820,11 +901,13 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
                                                             rCurrentDuration += m_durationarray[i];
                                                         }
 
-                                                        //Calculate speed in [km/h]
-                                                        point.speed = (rCurrentDistance / 1000.0) / (rCurrentDuration / 3600.0);
-
-                                                        //Calculate pace in [min/km]
-                                                        point.pace = (rCurrentDuration / 60.0) / (rCurrentDistance / 1000.0);
+                                                        // Set speed and pace if not obtained from file
+                                                        if (point.speed == 0 && point.pace == 99) {
+                                                            //Calculate speed in [km/h]
+                                                            point.speed = (rCurrentDistance / 1000.0) / (rCurrentDuration / 3600.0);
+                                                            //Calculate pace in [min/km]
+                                                            point.pace = (rCurrentDuration / 60.0) / (rCurrentDistance / 1000.0);
+                                                        }
                                                     }
                                                     point.distance = m_distance;
                                                 }
@@ -919,6 +1002,18 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
                     m_heartRateMin = m_points.at(i).heartrate;
             }
 
+            //Cadence
+            if (m_points.at(i).cadence > 0)
+            {
+                m_cadencePoints++;
+                m_cadence += m_points.at(i).cadence;
+
+                if (m_points.at(i).cadence > m_cadenceMax)
+                    m_cadenceMax = m_points.at(i).cadence;
+                if (m_points.at(i).heartrate < m_heartRateMin)
+                    m_cadenceMin = m_points.at(i).cadence;
+            }
+
             //Elevation Up/Down
             if (i > 1)
             {
@@ -939,6 +1034,7 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
         m_speed = m_distance / m_duration;
         m_pace = m_duration / m_distance * 1000 / 60;
         m_heartRate = m_heartRate / m_heartRatePoints;
+        m_cadence = m_cadence / m_cadencePoints;
 
         // qDebug()<<"m_distance second calculated: "<<QString::number(m_distance);
 
@@ -952,6 +1048,9 @@ void TrackLoader::parseXmlTcxStream(QXmlStreamReader &xml)
         emit durationChanged();
         emit timeChanged();
         emit elevationChanged();
+        emit cadenceChanged();
+        emit cadenceMinChanged();
+        emit cadenceMaxChanged();
     }
     else
     {
@@ -1249,6 +1348,39 @@ uint TrackLoader::heartRateMax() {
     return m_heartRateMax;
 }
 
+qreal TrackLoader::cadence() {
+    if(!m_loaded && !m_error) {
+        load();
+    }
+    if(!m_loaded || m_error) {
+        // Nothing to load or error in loading
+        return 0;
+    }
+    return m_cadence;
+}
+
+uint TrackLoader::cadenceMin() {
+    if(!m_loaded && !m_error) {
+        load();
+    }
+    if(!m_loaded || m_error) {
+        // Nothing to load or error in loading
+        return 0;
+    }
+    return m_cadenceMin;
+}
+
+uint TrackLoader::cadenceMax() {
+    if(!m_loaded && !m_error) {
+        load();
+    }
+    if(!m_loaded || m_error) {
+        // Nothing to load or error in loading
+        return 0;
+    }
+    return m_cadenceMax;
+}
+
 bool TrackLoader::loaded() {
     return m_loaded;
 }
@@ -1293,6 +1425,11 @@ QGeoCoordinate TrackLoader::trackPointAt(int index)
 uint TrackLoader::heartRateAt(int index)
 {
     return m_points.at(index).heartrate;
+}
+
+uint TrackLoader::cadenceAt(int index)
+{
+    return m_points.at(index).cadence;
 }
 
 qreal TrackLoader::elevationAt(int index)

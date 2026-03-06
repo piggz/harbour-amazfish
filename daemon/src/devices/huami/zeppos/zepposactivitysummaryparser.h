@@ -28,9 +28,9 @@ private:
     };
 
     struct HeartRate {
-        int32_t avg; // 1 bpm
-        int32_t max; // 2 bpm
-        int32_t min; // 3 bpm
+        uint32_t avg; // 1 bpm
+        uint32_t max; // 2 bpm
+        uint32_t min; // 3 bpm
         bool hasData = false;
     };
 
@@ -38,7 +38,7 @@ private:
         float avgCadence;  // 1 steps/sec
         float maxCadence;  // 2 steps/sec
         int32_t avgStride; // 3 cm
-        int32_t steps;     // 4 count
+        uint32_t steps;     // 4 count
         bool hasData = false;
     };
 
@@ -67,17 +67,17 @@ private:
     };
 
     struct Altitude {
-        int32_t maxAltitude = 1; // /200 -> meters
-        int32_t minAltitude = 2; // /200 -> meters
-        int32_t avgAltitude = 3; // /200 -> meters
-        int32_t totalClimbing = 4; // cm
-        int32_t elevationGain = 5; // cm
-        int32_t elevationLoss = 6; // cm
+        uint32_t maxAltitude = 1; // /200 -> meters
+        uint32_t minAltitude = 2; // /200 -> meters
+        uint32_t avgAltitude = 3; // /200 -> meters
+        uint32_t totalClimbing = 4; // cm
+        uint32_t elevationGain = 5; // cm
+        uint32_t elevationLoss = 6; // cm
         bool hasData = false;
     };
 
     struct Calories {
-        int32_t calories = 1; // kcal
+        uint32_t calories = 1; // kcal
         bool hasData = false;
     };
 
@@ -99,7 +99,7 @@ private:
     struct TrainingEffect {
         float aerobicTrainingEffect;   // 4
         float anaerobicTrainingEffect; // 5
-        int32_t currentWorkoutLoad;    // 6
+        uint32_t currentWorkoutLoad;    // 6
         int32_t maximumOxygenUptake;   // 7 ml/kg/min
         bool hasData = false;
     };

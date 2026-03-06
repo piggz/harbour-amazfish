@@ -34,11 +34,11 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         m_summary.location.startTimestamp = message.GetMessage(2)->GetUInt32(1);
         m_summary.location.baseLatitude = message.GetMessage(2)->GetInt32(5);
         m_summary.location.baseLongitude = message.GetMessage(2)->GetInt32(6);
-        m_summary.location.baseAltitude = message.GetMessage(2)->GetInt32(7);
-        m_summary.location.maxLatitude = message.GetMessage(2)->GetInt32(8);
-        m_summary.location.minLatitude = message.GetMessage(2)->GetInt32(9);
-        m_summary.location.maxLongitude = message.GetMessage(2)->GetInt32(10);
-        m_summary.location.minLongitude = message.GetMessage(2)->GetInt32(11);
+        m_summary.location.baseAltitude = message.GetMessage(2)->GetUInt32(7);
+        m_summary.location.maxLatitude = message.GetMessage(2)->GetUInt32(8);
+        m_summary.location.minLatitude = message.GetMessage(2)->GetUInt32(9);
+        m_summary.location.maxLongitude = message.GetMessage(2)->GetUInt32(10);
+        m_summary.location.minLongitude = message.GetMessage(2)->GetUInt32(11);
     }
 
     //Type
@@ -59,7 +59,7 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         m_summary.time.hasData = true;
         m_summary.time.totalDuration = message.GetMessage(7)->GetUInt32(1);
         m_summary.time.workoutDuration = message.GetMessage(7)->GetUInt32(2);
-        m_summary.time.pauseDuration = message.GetMessage(7)->GetInt32(3);
+        m_summary.time.pauseDuration = message.GetMessage(7)->GetUInt32(3);
     }
 
     //Swimming
@@ -88,33 +88,33 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         m_summary.steps.hasData = true;
         m_summary.steps.avgCadence = message.GetMessage(11)->GetFloat(1);
         m_summary.steps.maxCadence = message.GetMessage(11)->GetFloat(2);
-        m_summary.steps.avgStride = message.GetMessage(11)->GetInt32(3);
-        m_summary.steps.steps = message.GetMessage(11)->GetInt32(4);
+        m_summary.steps.avgStride = message.GetMessage(11)->GetUInt32(3);
+        m_summary.steps.steps = message.GetMessage(11)->GetUInt32(4);
     }
 
     //Altitiude
     if (message.GetField(13)) {
         m_summary.altitude.hasData = true;
-        m_summary.altitude.maxAltitude = message.GetMessage(13)->GetInt32(1);
-        m_summary.altitude.minAltitude = message.GetMessage(13)->GetInt32(2);
-        m_summary.altitude.avgAltitude = message.GetMessage(13)->GetInt32(3);
-        m_summary.altitude.totalClimbing = message.GetMessage(13)->GetInt32(4);
-        m_summary.altitude.elevationGain = message.GetMessage(13)->GetInt32(5);
-        m_summary.altitude.elevationLoss = message.GetMessage(13)->GetInt32(6);
+        m_summary.altitude.maxAltitude = message.GetMessage(13)->GetUInt32(1);
+        m_summary.altitude.minAltitude = message.GetMessage(13)->GetUInt32(2);
+        m_summary.altitude.avgAltitude = message.GetMessage(13)->GetUInt32(3);
+        m_summary.altitude.totalClimbing = message.GetMessage(13)->GetUInt32(4);
+        m_summary.altitude.elevationGain = message.GetMessage(13)->GetUInt32(5);
+        m_summary.altitude.elevationLoss = message.GetMessage(13)->GetUInt32(6);
     }
 
     //Calories
     if (message.GetField(16)) {
         m_summary.calories.hasData = true;
-        m_summary.calories.calories = message.GetMessage(16)->GetInt32(1);
+        m_summary.calories.calories = message.GetMessage(16)->GetUInt32(1);
     }
 
     //Heartrate
     if (message.GetField(19)) {
         m_summary.heartRate.hasData = true;
-        m_summary.heartRate.avg = message.GetMessage(19)->GetInt32(1);
-        m_summary.heartRate.max = message.GetMessage(19)->GetInt32(2);
-        m_summary.heartRate.min = message.GetMessage(19)->GetInt32(3);
+        m_summary.heartRate.avg = message.GetMessage(19)->GetUInt32(1);
+        m_summary.heartRate.max = message.GetMessage(19)->GetUInt32(2);
+        m_summary.heartRate.min = message.GetMessage(19)->GetUInt32(3);
     }
 
     //TrainigEffect
@@ -122,10 +122,10 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         m_summary.trainingEffect.hasData = true;
         m_summary.trainingEffect.aerobicTrainingEffect = message.GetMessage(21)->GetFloat(4);
         m_summary.trainingEffect.anaerobicTrainingEffect = message.GetMessage(21)->GetFloat(5);
-        m_summary.trainingEffect.currentWorkoutLoad = message.GetMessage(21)->GetInt32(6);
-        m_summary.trainingEffect.aerobicTrainingEffect = message.GetMessage(21)->GetInt32(4);
-
+        m_summary.trainingEffect.currentWorkoutLoad = message.GetMessage(21)->GetUInt32(6);
+        m_summary.trainingEffect.maximumOxygenUptake = message.GetMessage(21)->GetUInt32(7);
     }
+
     //HeartrateZones
     if (message.GetField(22)) {
         m_summary.heartRateZones.hasData = true;
@@ -165,7 +165,7 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     }
 
     if (m_summary.time.hasData) {
-        summary.addMetaData("totalDuration", QString::number(m_summary.time.totalDuration), "seconds");
+        summary.addMetaData("activeSeconds", QString::number(m_summary.time.totalDuration), "seconds");
         summary.addMetaData("workoutDuration", QString::number(m_summary.time.workoutDuration), "seconds");
         summary.addMetaData("pauseDuration", QString::number(m_summary.time.pauseDuration), "seconds");
     }
@@ -183,6 +183,8 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     if (m_summary.pace.hasData) {
         summary.addMetaData("paceAvg", QString::number((m_summary.pace.avg * 1000) / 60), "min_km");
         summary.addMetaData("paceBest", QString::number((m_summary.pace.best * 1000) / 60), "min_km");
+        summary.addMetaData("averageSpeed", QString::number(1 / m_summary.pace.avg), "meters_second");
+        summary.addMetaData("maxSpeed", QString::number(1 / m_summary.pace.best), "meters_second");
     }
 
     if (m_summary.steps.hasData) {
@@ -202,12 +204,12 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     }
 
     if (m_summary.calories.hasData) {
-        summary.addMetaData("calories", QString::number(m_summary.calories.calories), "calories");
+        summary.addMetaData("caloriesBurnt", QString::number(m_summary.calories.calories), "calories");
     }
 
     if (m_summary.heartRate.hasData) {
-        summary.addMetaData("avgHeartRate", QString::number(m_summary.heartRate.avg), "bpm");
-        summary.addMetaData("maxHeartRate", QString::number(m_summary.heartRate.max), "bpm");
+        summary.addMetaData("averageHR", QString::number(m_summary.heartRate.avg), "bpm");
+        summary.addMetaData("maxHR", QString::number(m_summary.heartRate.max), "bpm");
         summary.addMetaData("minHeartRate", QString::number(m_summary.heartRate.min), "bpm");
     }
 
