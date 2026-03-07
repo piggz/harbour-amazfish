@@ -121,8 +121,8 @@ PagePL {
             type: DataSource.BodyTemperature
             graphType: line
 
-            minY: 20
-            maxY: 40
+            minY: -20
+            maxY: 50
 
             onClicked: {
                 updateGraph(day);

@@ -38,10 +38,10 @@ bool FetchTemperatureOperation::processBufferedData()
     for (int i = 0; i < m_buffer.length(); i+=8) {
         int offset = i;
 
-        uint16_t unk1 = TypeConversion::toUint16(m_buffer, offset);
-        uint16_t t = TypeConversion::toUint16(m_buffer, offset);
-        uint16_t unk2 = TypeConversion::toUint16(m_buffer, offset);
-        uint16_t unk3 = TypeConversion::toUint16(m_buffer, offset);
+        int16_t unk1 = TypeConversion::toInt16(m_buffer, offset);
+        int16_t t = TypeConversion::toInt16(m_buffer, offset);
+        int16_t unk2 = TypeConversion::toInt16(m_buffer, offset);
+        int16_t unk3 = TypeConversion::toInt16(m_buffer, offset);
 
         TemperatureRecord temp;
         temp.timestamp = timestamp;
@@ -103,6 +103,7 @@ bool FetchTemperatureOperation::saveRecords(QVector<TemperatureRecord> recs)
     }
     tg.commit();
     lastTime = lastTime.addSecs(60);
+    lastTime.setTimeSpec(Qt::UTC);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }
