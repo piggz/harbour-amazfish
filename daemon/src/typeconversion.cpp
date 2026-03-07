@@ -189,6 +189,12 @@ int16_t toInt16(uint8_t val1, uint8_t val2) {
     return (int16_t)((val1 & 0xff) | ((val2 & 0xff) << 8));
 }
 
+int16_t toInt16(const QByteArray &arr, int &idx) {
+    int16_t ret = toInt16(arr[idx], arr[idx+1]);
+    idx +=2;
+    return ret;
+}
+
 uint16_t toUint16(char value) {
     return toUnsigned(value);
 }
@@ -205,6 +211,12 @@ int32_t toInt32(char val1, char val2, char val3, char val4) {
     number.a[3] = val4;
 
     return number.val;
+}
+
+int32_t toInt32(const QByteArray &arr, int &idx) {
+    int32_t ret = toInt32(arr[idx], arr[idx+1], arr[idx+2], arr[idx+3]);
+    idx +=4;
+    return ret;
 }
 
 int64_t toInt64(char val1, char val2, char val3, char val4, char val5, char val6, char val7, char val8) {
