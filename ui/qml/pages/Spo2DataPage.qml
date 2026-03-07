@@ -23,9 +23,10 @@ PagePL {
         width: parent.width
         anchors.top: parent.top
         anchors.margins: styler.themePaddingMedium
+        spacing: styler.themePaddingLarge
 
         LabelPL {
-            id: lblStepsToday
+            id: lblSPO2Today
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width

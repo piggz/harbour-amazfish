@@ -45,9 +45,9 @@ bool FetchSpo2NormalOperation::processBufferedData()
         int offset = i;
         int32_t timestampSeconds = TypeConversion::toUint32(m_buffer, offset);
         timestamp.setMSecsSinceEpoch((qint64)timestampSeconds * 1000);
-        char spoRaw = m_buffer[offset++];
+        int8_t spoRaw = (int8_t)m_buffer[offset++];
         bool automatic = spoRaw < 0;
-        uint8_t spo2 = (uint8_t) (spoRaw < 0 ? spoRaw + 128 : spoRaw);
+        uint8_t spo2 = automatic ? (uint8_t)(spoRaw + 128) : (uint8_t)spoRaw;
 
         offset += 60; // unknown 60 bytes
 
@@ -104,7 +104,7 @@ bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
                     success = false;
                 }
             } else {
-                qDebug() << "HRV record exists, skipping";
+                qDebug() << "SPO2 record exists, skipping";
             }
         }
     }

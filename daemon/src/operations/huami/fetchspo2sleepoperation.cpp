@@ -111,7 +111,7 @@ bool FetchSpo2SleepOperation::saveRecords(QVector<Spo2SleepRecord> recs)
                     success = false;
                 }
             } else {
-                qDebug() << "HRV record exists, skipping";
+                qDebug() << "SPO2 Sleep record exists, skipping";
             }
         }
     }
