@@ -12,6 +12,9 @@ build_args:
 env_vars:
   PKG_CONFIG_PATH: ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig:${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig
 
+dependencies_host:
+  - qtorganizer5-eds
+
 dependencies_target:
 - libkdb3-driver-sqlite
 - qml-module-org-kde-bluezqt
