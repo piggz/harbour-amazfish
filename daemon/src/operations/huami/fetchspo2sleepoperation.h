@@ -17,7 +17,7 @@ private:
         uint8_t value;
         uint8_t duration;
         QByteArray spo2High; //6
-        QByteArray spo2Low; //8
+        QByteArray spo2Low; //6
         QByteArray spo2Quality; //8
     };
 
