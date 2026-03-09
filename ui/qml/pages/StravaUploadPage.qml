@@ -286,7 +286,7 @@ PagePL {
     function requestError(strerr) {
         console.log(strerr);
         console.log("Some kind of error happened");
-        var errStatus = JSON.parse(xmlhttp.responseText);
+        var errStatus = JSON.parse(strerr);
         console.log(errStatus);
         if (errStatus.message !== null){
             statusMessage(errStatus["message"]);
