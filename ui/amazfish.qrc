@@ -9,6 +9,8 @@
         <file>qml/pages/BipFirmwarePage.qml</file>
         <file>qml/pages/DebugInfo.qml</file>
         <file>qml/pages/FirstPage.qml</file>
+        <file>qml/pages/FitTrackeeSettingsPage.qml</file>
+        <file>qml/pages/FitTrackeeUploadPage.qml</file>
         <file>qml/pages/HeartratePage.qml</file>
         <file>qml/pages/PaiDataPage.qml</file>
         <file>qml/pages/PairDevicePage.qml</file>
