@@ -116,6 +116,7 @@ bool FetchSpo2SleepOperation::saveRecords(QVector<Spo2SleepRecord> recs)
         }
     }
     tg.commit();
+    lastTime.setTimeSpec(Qt::UTC);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }

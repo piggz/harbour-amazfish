@@ -88,7 +88,7 @@ bool SportsDetailOperation::processBufferedData()
 
     qDebug() << "End sport time is:" << m_summary.endTime() << m_summary.endTime().toMSecsSinceEpoch();
     QDateTime end = m_summary.endTime();
-    end.setTimeSpec(Qt::LocalTime);
+    end.setTimeSpec(Qt::UTC);
 
     qint64 duration = end.toMSecsSinceEpoch() - m_summary.startTime().toMSecsSinceEpoch();
     int addition = 0;

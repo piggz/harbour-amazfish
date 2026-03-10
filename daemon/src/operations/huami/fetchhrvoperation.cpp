@@ -99,6 +99,7 @@ bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
         }
     }
     tg.commit();
+    lastTime.setTimeSpec(Qt::UTC);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }

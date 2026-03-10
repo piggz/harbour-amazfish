@@ -109,6 +109,7 @@ bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
         }
     }
     tg.commit();
+    lastTime.setTimeSpec(Qt::UTC);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }
