@@ -55,6 +55,16 @@ float ActivityCoordinate::speed() const
     return m_speed;
 }
 
+void ActivityCoordinate::setTemperature(float temperature)
+{
+    m_temperature = temperature;
+}
+
+float ActivityCoordinate::temperature() const
+{
+    return m_temperature;
+}
+
 bool ActivityCoordinate::operator ==(const ActivityCoordinate &other) const
 {
     return heartRate() == other.heartRate() && timeStamp() == other.timeStamp() && coordinate() == other.coordinate();

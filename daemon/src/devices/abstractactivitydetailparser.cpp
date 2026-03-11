@@ -53,6 +53,7 @@ QString AbstractActivityDetailParser::toText()
             out << "      <gpxtpx:hr>" << pos.heartRate() << "</gpxtpx:hr>" << endl;
             out << "      <gpxtpx:cad>" << pos.cadence() / 2 << "</gpxtpx:cad>" << endl; // The Cadence field in tcx is designed for rpm (e.g. cycling), so we have to divide spm by 2 to indicate the cadence value for a single leg. The average cadence for both legs goes in the AvgRunCadence field.
             out << "      <gpxtpx:speed>" << pos.speed() << "</gpxtpx:speed>" << endl;
+            out << "      <gpxtpx:atemp>" << pos.temperature() << "</gpxtpx:atemp>" << endl;
             out << "    </gpxtpx:TrackPointExtension>" << endl;
             out << "  </extensions>" << endl;
             out << "</trkpt>" << endl;

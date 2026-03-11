@@ -24,6 +24,9 @@ public:
     void setSpeed(float speed);
     float speed() const;
     
+    void setTemperature(float temperature);
+    float temperature() const;
+
     bool operator==(const ActivityCoordinate &other) const;
     bool operator!=(const ActivityCoordinate &other) const;
 
@@ -34,6 +37,7 @@ private:
     int m_heartRate = 0;
     short m_cadence = 0;
     float m_speed = 0;
+    float m_temperature = 0;
 };
 
 #endif

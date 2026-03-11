@@ -28,9 +28,16 @@ private:
     };
 
     struct HeartRate {
-        uint32_t avg; // 1 bpm
-        uint32_t max; // 2 bpm
-        uint32_t min; // 3 bpm
+        int32_t avg; // 1 bpm
+        int32_t max; // 2 bpm
+        int32_t min; // 3 bpm
+        bool hasData = false;
+    };
+
+    struct Temperature {
+        float avg; // 1 celsius
+        float max; // 2 celsius
+        float min; // 3 celsius
         bool hasData = false;
     };
 
@@ -38,7 +45,7 @@ private:
         float avgCadence;  // 1 steps/sec
         float maxCadence;  // 2 steps/sec
         int32_t avgStride; // 3 cm
-        uint32_t steps;     // 4 count
+        int32_t steps;     // 4 count
         bool hasData = false;
     };
 
@@ -50,6 +57,11 @@ private:
 
     struct Distance {
         float distance; // 1 meters
+        bool hasData = false;
+    };
+
+    struct Count {
+        uint32_t totalJumps; // 1 count
         bool hasData = false;
     };
 
@@ -67,17 +79,28 @@ private:
     };
 
     struct Altitude {
-        uint32_t maxAltitude = 1; // /200 -> meters
-        uint32_t minAltitude = 2; // /200 -> meters
-        uint32_t avgAltitude = 3; // /200 -> meters
-        uint32_t totalClimbing = 4; // cm
-        uint32_t elevationGain = 5; // cm
-        uint32_t elevationLoss = 6; // cm
+        int32_t maxAltitude; // 1 /200 -> meters
+        int32_t minAltitude; // 2 /200 -> meters
+        int32_t avgAltitude; // 3 /200 -> meters
+        int32_t totalClimbing; // 4 cm
+        int32_t elevationGain; // 5 cm
+        int32_t elevationLoss; // 6 cm
+        bool hasData = false;
+    };
+
+    struct Slope {
+        uint32_t avg; // 1 %
         bool hasData = false;
     };
 
     struct Calories {
-        uint32_t calories = 1; // kcal
+        int32_t calories; // 1 kcal
+        bool hasData = false;
+    };
+
+    struct Frequency {
+        uint32_t avgFrequency; // 1
+        uint32_t maxFrequency; // 2
         bool hasData = false;
     };
 
@@ -85,7 +108,7 @@ private:
         // TODO 1, is always = 1?
         // Zones: N/A, Warm-up, Fat-burn time, Aerobic, Anaerobic, Extreme
         std::vector<int32_t> zoneMax2; // 2 bpm
-        std::vector<int32_t> zoneTime; // 1 seconds
+        std::vector<int32_t> zoneTime; // 3 seconds
         bool hasData = false;
     };
 
@@ -99,7 +122,7 @@ private:
     struct TrainingEffect {
         float aerobicTrainingEffect;   // 4
         float anaerobicTrainingEffect; // 5
-        uint32_t currentWorkoutLoad;    // 6
+        int32_t currentWorkoutLoad;    // 6
         int32_t maximumOxygenUptake;   // 7 ml/kg/min
         bool hasData = false;
     };
@@ -117,21 +140,35 @@ private:
         bool hasData = false;
     };
 
+    struct MovementEvaluation {
+        float consistency;  // 1
+        float stability;    // 2
+        float continuity;   // 3
+        float rhythm;       // 4
+        float speedDecay;   // 5
+        bool hasData = false;
+    };
+
     struct WorkoutSummary {
-        std::string version;           // 1
-        Location location;             // 2
-        Type type;                     // 3
-        Distance distance;             // 4
-        Time time;                     // 7
-        SwimmingData swimmingData;     // 9
-        Pace pace;                     // 10
-        Steps steps;                   // 11
-        Altitude altitude;             // 13
-        Calories calories;             // 16
-        HeartRate heartRate;           // 19
-        TrainingEffect trainingEffect; // 21
-        HeartRateZones heartRateZones; // 22
-        Elevation elevation;           // 23
+        std::string version;                    // 1
+        Location location;                      // 2
+        Type type;                              // 3
+        Distance distance;                      // 4
+        Count count;                            // 5
+        Time time;                              // 7
+        SwimmingData swimmingData;              // 9
+        Pace pace;                              // 10
+        Steps steps;                            // 11
+        Altitude altitude;                      // 13
+        Slope slope;                            // 14
+        Calories calories;                      // 16
+        Frequency frequency;                    // 18
+        HeartRate heartRate;                    // 19
+        Temperature temperature;                // 20
+        TrainingEffect trainingEffect;          // 21
+        HeartRateZones heartRateZones;          // 22
+        Elevation elevation;                    // 23
+        MovementEvaluation movementEvaluation;  // 42
     };
 
     WorkoutSummary m_summary;
