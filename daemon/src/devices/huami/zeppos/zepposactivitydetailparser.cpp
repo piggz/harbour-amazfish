@@ -12,6 +12,7 @@ ZeppOsActivityDetailParser::ZeppOsActivityDetailParser()
         { SPEED,        {8} },
         { ALTITUDE,     {6, 7} },
         { HEARTRATE,    {3} },
+        { TEMPERATURE,  {7} },
         { STRENGTH_SET, {34} },
     };
 }
@@ -79,6 +80,8 @@ void ZeppOsActivityDetailParser::parse(const QByteArray &bytes)
         case HEARTRATE:
             i += consumeHeartRate(bytes, i);
             break;
+        case TEMPERATURE:
+            i += consumeTemperature(bytes, i);
         case STRENGTH_SET:
             i += consumeStrengthSet(bytes, i);
             break;
@@ -201,9 +204,9 @@ int ZeppOsActivityDetailParser::consumeSpeed(const QByteArray &bytes, int offset
     //qDebug() << Q_FUNC_INFO;
     offset += consumeTimestampOffset(bytes, offset);
 
-    short cadence = TypeConversion::toInt16(bytes[offset], bytes[offset + 1]); // spm
+    m_lastCadence = TypeConversion::toInt16(bytes[offset], bytes[offset + 1]); // spm
     short stride = TypeConversion::toInt16(bytes[offset + 2], bytes[offset + 3]); // cm
-    short pace = TypeConversion::toInt16(bytes[offset + 4], bytes[offset + 5]); // sec/km
+    m_lastPace = TypeConversion::toInt16(bytes[offset + 4], bytes[offset + 5]); // sec/km
 
     //TODO
     //if (ap != null) {
@@ -226,9 +229,9 @@ int ZeppOsActivityDetailParser::consumeAltitude(const QByteArray &bytes, int off
         if (altitudeRaw == -1 || validityFlag == 0xFF) {
             return length;  // Invalid altitude → don't update
         }
-        m_baseAltitude = (int) (altitudeRaw / 10000.0f);
+        m_baseAltitude = altitudeRaw / 100000.0;
     } else {
-        m_baseAltitude = (int) (altitudeRaw / 100.0f);
+        m_baseAltitude = altitudeRaw / 100.0;
     }
     return length;
 }
@@ -240,6 +243,15 @@ int ZeppOsActivityDetailParser::consumeHeartRate(const QByteArray &bytes, int of
     m_lastHeartrate = bytes[offset] & 0xff;
 
     return 3;
+}
+
+int ZeppOsActivityDetailParser::consumeTemperature(const QByteArray &bytes, int offset)
+{
+    //qDebug() << Q_FUNC_INFO;
+    offset += consumeTimestampOffset(bytes, offset);
+    m_temperature = TypeConversion::toFloat(bytes, offset);
+
+    return 7;
 }
 
 int ZeppOsActivityDetailParser::consumeStrengthSet(const QByteArray &bytes, int offset)
@@ -282,7 +294,12 @@ void ZeppOsActivityDetailParser::addNewGpsCoordinate()
 
     ac.setCoordinate(m_lastCoordinate);
     ac.setHeartRate(m_lastHeartrate);
+    ac.setCadence(m_lastCadence);
+    if (m_lastPace != 0) {
+        ac.setSpeed(1000.0f / m_lastPace); // s/km -> m/s
+    }
     ac.setTimeStamp(m_lastTimestamp.addMSecs(m_offset));
+    ac.setTemperature(m_temperature);
 
     add(ac);
 }

@@ -53,6 +53,9 @@ class TrackLoader : public QObject
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
     Q_PROPERTY(qreal elevationUp READ elevationUp NOTIFY elevationChanged)
     Q_PROPERTY(qreal elevationDown READ elevationDown NOTIFY elevationChanged)
+    Q_PROPERTY(qreal cadence READ cadence NOTIFY cadenceChanged)
+    Q_PROPERTY(uint cadenceMin READ cadenceMin NOTIFY cadenceMinChanged)
+    Q_PROPERTY(uint cadenceMax READ cadenceMax NOTIFY cadenceMaxChanged)
 
 public:
     struct TrackPoint
@@ -72,6 +75,7 @@ public:
         qreal speed;
         qreal pace;
         qreal duration;
+        qreal cadence;
     };
 
     explicit TrackLoader(QObject *parent = 0);
@@ -98,6 +102,9 @@ public:
     uint heartRateMax();
     qreal elevationUp();
     qreal elevationDown();
+    qreal cadence();
+    uint cadenceMin();
+    uint cadenceMax();
     bool loaded();
 
     Q_INVOKABLE QString readGpx();
@@ -116,6 +123,7 @@ public:
     Q_INVOKABLE qreal paceAt(int index);
     Q_INVOKABLE QString paceStrAt(int index);
     Q_INVOKABLE QString paceImperialStrAt(int index);
+    Q_INVOKABLE uint cadenceAt(int index);
 
     // Temporary "hacks" to get around misbehaving Map.fitViewportToMapItems()
     Q_INVOKABLE int fitZoomLevel(int width, int height);
@@ -145,6 +153,9 @@ signals:
     void heartRateMinChanged();
     void heartRateMaxChanged();
     void elevationChanged();
+    void cadenceChanged();
+    void cadenceMinChanged();
+    void cadenceMaxChanged();
 
 public slots:
 
@@ -180,6 +191,10 @@ private:
     qreal m_elevationDown = 0;
     QList<qreal> m_distancearray;
     QList<qreal> m_durationarray;
+    qreal m_cadence = 0;
+    qreal m_cadencePoints= 0;
+    uint m_cadenceMin = 0;
+    uint m_cadenceMax = 0;
 };
 
 #endif // TRACKLOADER_H

@@ -19,6 +19,7 @@ private:
         SPEED = 5,
         ALTITUDE = 7,
         HEARTRATE = 8,
+        TEMPERATURE = 13,
         STRENGTH_SET = 15
     };
 
@@ -36,6 +37,7 @@ private:
     int consumeSpeed(const QByteArray &bytes, int offset);
     int consumeAltitude(const QByteArray &bytes, int offset, int length);
     int consumeHeartRate(const QByteArray &bytes, int offset);
+    int consumeTemperature(const QByteArray &bytes, int offset);
     int consumeStrengthSet(const QByteArray &bytes, int offset);
 
     ActivityCoordinate getCurrentActivityPoint();
@@ -45,12 +47,15 @@ private:
     QDateTime m_lastTimestamp;
     QGeoCoordinate m_lastCoordinate;
     ActivityCoordinate m_lastActivityPoint;
+    short m_lastCadence = 0;
+    short m_lastPace = 0;
     int m_lastHeartrate = 0;
     long m_offset = 0;
 
     long m_baseLongitude = 0;
     long m_baseLatitude = 0;
     double m_baseAltitude = 0;
+    float m_temperature = 0;
 };
 
 #endif // ZEPPOSACTIVITYDETAILPARSER_H

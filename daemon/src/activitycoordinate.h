@@ -17,7 +17,16 @@ public:
     
     void setHeartRate(int hr);
     int heartRate() const;
+
+    void setCadence(short cadence);
+    short cadence() const;
+
+    void setSpeed(float speed);
+    float speed() const;
     
+    void setTemperature(float temperature);
+    float temperature() const;
+
     bool operator==(const ActivityCoordinate &other) const;
     bool operator!=(const ActivityCoordinate &other) const;
 
@@ -25,7 +34,10 @@ private:
     
     QGeoCoordinate m_coordinate;
     QDateTime m_timeStamp;
-    int m_heartRate = 0;    
+    int m_heartRate = 0;
+    short m_cadence = 0;
+    float m_speed = 0;
+    float m_temperature = 0;
 };
 
 #endif

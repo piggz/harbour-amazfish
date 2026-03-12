@@ -27,26 +27,28 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         return summary;
     }
 
+    //qDebug() << "DataHex: " << data.mid(2).toHex();
+
     m_summary.version = message.GetString(1);
 
     //Location
     if (message.GetField(2)) {
         m_summary.location.hasData = true;
-        m_summary.location.startTimestamp = message.GetMessage(2)->GetUInt32(1);
-        m_summary.location.baseLatitude = message.GetMessage(2)->GetInt32(5);
-        m_summary.location.baseLongitude = message.GetMessage(2)->GetInt32(6);
-        m_summary.location.baseAltitude = message.GetMessage(2)->GetInt32(7);
-        m_summary.location.maxLatitude = message.GetMessage(2)->GetInt32(8);
-        m_summary.location.minLatitude = message.GetMessage(2)->GetInt32(9);
-        m_summary.location.maxLongitude = message.GetMessage(2)->GetInt32(10);
-        m_summary.location.minLongitude = message.GetMessage(2)->GetInt32(11);
+        m_summary.location.startTimestamp = message.GetMessage(2)->GetUInt64(1);
+        m_summary.location.baseLatitude = message.GetMessage(2)->GetUInt64(5);
+        m_summary.location.baseLongitude = message.GetMessage(2)->GetUInt64(6);
+        m_summary.location.baseAltitude = message.GetMessage(2)->GetUInt64(7);
+        m_summary.location.maxLatitude = message.GetMessage(2)->GetUInt64(8);
+        m_summary.location.minLatitude = message.GetMessage(2)->GetUInt64(9);
+        m_summary.location.maxLongitude = message.GetMessage(2)->GetUInt64(10);
+        m_summary.location.minLongitude = message.GetMessage(2)->GetUInt64(11);
     }
 
     //Type
     if (message.GetField(3)) {
         m_summary.type.hasData = true;
-        m_summary.type.type =message.GetMessage(3)->GetUInt32(1);
-        m_summary.type.ai =message.GetMessage(3)->GetUInt32(2);
+        m_summary.type.type = message.GetMessage(3)->GetUInt64(1);
+        m_summary.type.ai = message.GetMessage(3)->GetUInt64(2);
     }
 
     //Distance
@@ -55,26 +57,32 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         m_summary.distance.distance = message.GetMessage(4)->GetFloat(1);
     }
 
+    //Count
+    if (message.GetField(5)) {
+        m_summary.count.hasData = true;
+        m_summary.count.totalJumps = message.GetMessage(5)->GetUInt64(1);
+    }
+
     //Time
     if (message.GetField(7)) {
         m_summary.time.hasData = true;
-        m_summary.time.totalDuration = message.GetMessage(7)->GetUInt32(1);
-        m_summary.time.workoutDuration = message.GetMessage(7)->GetUInt32(2);
-        m_summary.time.pauseDuration = message.GetMessage(7)->GetInt32(3);
+        m_summary.time.totalDuration = message.GetMessage(7)->GetUInt64(1);
+        m_summary.time.workoutDuration = message.GetMessage(7)->GetUInt64(2);
+        m_summary.time.pauseDuration = message.GetMessage(7)->GetUInt64(3);
     }
 
     //Swimming
     if (message.GetField(9)) {
         m_summary.swimmingData.hasData = true;
-        m_summary.swimmingData.style = message.GetMessage(9)->GetUInt32(1);
-        m_summary.swimmingData.laps = message.GetMessage(9)->GetUInt32(2);
-        m_summary.swimmingData.strokes = message.GetMessage(9)->GetUInt32(3);
-        m_summary.swimmingData.avgDps = message.GetMessage(9)->GetUInt32(4);
-        m_summary.swimmingData.swolf = message.GetMessage(9)->GetUInt32(5);
-        m_summary.swimmingData.avgStrokeRate = message.GetMessage(9)->GetUInt32(6);
-        m_summary.swimmingData.maxStrokeRate = message.GetMessage(9)->GetUInt32(7);
-        m_summary.swimmingData.laneLength = message.GetMessage(9)->GetUInt32(8);
-        m_summary.swimmingData.laneLengthUnit = message.GetMessage(9)->GetUInt32(9);
+        m_summary.swimmingData.style = message.GetMessage(9)->GetUInt64(1);
+        m_summary.swimmingData.laps = message.GetMessage(9)->GetUInt64(2);
+        m_summary.swimmingData.strokes = message.GetMessage(9)->GetUInt64(3);
+        m_summary.swimmingData.avgDps = message.GetMessage(9)->GetUInt64(4);
+        m_summary.swimmingData.swolf = message.GetMessage(9)->GetUInt64(5);
+        m_summary.swimmingData.avgStrokeRate = message.GetMessage(9)->GetUInt64(6);
+        m_summary.swimmingData.maxStrokeRate = message.GetMessage(9)->GetUInt64(7);
+        m_summary.swimmingData.laneLength = message.GetMessage(9)->GetUInt64(8);
+        m_summary.swimmingData.laneLengthUnit = message.GetMessage(9)->GetUInt64(9);
     }
 
     //Pace
@@ -89,33 +97,54 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         m_summary.steps.hasData = true;
         m_summary.steps.avgCadence = message.GetMessage(11)->GetFloat(1);
         m_summary.steps.maxCadence = message.GetMessage(11)->GetFloat(2);
-        m_summary.steps.avgStride = message.GetMessage(11)->GetInt32(3);
-        m_summary.steps.steps = message.GetMessage(11)->GetInt32(4);
+        m_summary.steps.avgStride = message.GetMessage(11)->GetUInt64(3);
+        m_summary.steps.steps = message.GetMessage(11)->GetUInt64(4);
     }
 
     //Altitiude
     if (message.GetField(13)) {
         m_summary.altitude.hasData = true;
-        m_summary.altitude.maxAltitude = message.GetMessage(13)->GetInt32(1);
-        m_summary.altitude.minAltitude = message.GetMessage(13)->GetInt32(2);
-        m_summary.altitude.avgAltitude = message.GetMessage(13)->GetInt32(3);
-        m_summary.altitude.totalClimbing = message.GetMessage(13)->GetInt32(4);
-        m_summary.altitude.elevationGain = message.GetMessage(13)->GetInt32(5);
-        m_summary.altitude.elevationLoss = message.GetMessage(13)->GetInt32(6);
+        m_summary.altitude.maxAltitude = message.GetMessage(13)->GetUInt64(1);
+        m_summary.altitude.minAltitude = message.GetMessage(13)->GetUInt64(2);
+        m_summary.altitude.avgAltitude = message.GetMessage(13)->GetUInt64(3);
+        m_summary.altitude.totalClimbing = message.GetMessage(13)->GetUInt64(4);
+        m_summary.altitude.elevationGain = message.GetMessage(13)->GetUInt64(5);
+        m_summary.altitude.elevationLoss = message.GetMessage(13)->GetUInt64(6);
+    }
+
+    // Slope
+    if (message.GetField(14)) {
+        m_summary.slope.hasData = true;
+        m_summary.slope.avg = message.GetMessage(14)->GetUInt64(1);
     }
 
     //Calories
     if (message.GetField(16)) {
         m_summary.calories.hasData = true;
-        m_summary.calories.calories = message.GetMessage(16)->GetInt32(1);
+        m_summary.calories.calories = message.GetMessage(16)->GetUInt64(1);
+    }
+
+    //Frequency
+    if (message.GetField(18)) {
+        m_summary.frequency.hasData = true;
+        m_summary.frequency.avgFrequency = message.GetMessage(18)->GetUInt64(1);
+        m_summary.frequency.maxFrequency = message.GetMessage(18)->GetUInt64(2);
     }
 
     //Heartrate
     if (message.GetField(19)) {
         m_summary.heartRate.hasData = true;
-        m_summary.heartRate.avg = message.GetMessage(19)->GetInt32(1);
-        m_summary.heartRate.max = message.GetMessage(19)->GetInt32(2);
-        m_summary.heartRate.min = message.GetMessage(19)->GetInt32(3);
+        m_summary.heartRate.avg = message.GetMessage(19)->GetUInt64(1);
+        m_summary.heartRate.max = message.GetMessage(19)->GetUInt64(2);
+        m_summary.heartRate.min = message.GetMessage(19)->GetUInt64(3);
+    }
+
+    //Temperature
+    if (message.GetField(20)) {
+        m_summary.temperature.hasData = true;
+        m_summary.temperature.avg = message.GetMessage(20)->GetFloat(1);
+        m_summary.temperature.max = message.GetMessage(20)->GetFloat(2);
+        m_summary.temperature.min = message.GetMessage(20)->GetFloat(3);
     }
 
     //TrainigEffect
@@ -123,10 +152,10 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         m_summary.trainingEffect.hasData = true;
         m_summary.trainingEffect.aerobicTrainingEffect = message.GetMessage(21)->GetFloat(4);
         m_summary.trainingEffect.anaerobicTrainingEffect = message.GetMessage(21)->GetFloat(5);
-        m_summary.trainingEffect.currentWorkoutLoad = message.GetMessage(21)->GetInt32(6);
-        m_summary.trainingEffect.aerobicTrainingEffect = message.GetMessage(21)->GetInt32(4);
-
+        m_summary.trainingEffect.currentWorkoutLoad = message.GetMessage(21)->GetUInt64(6);
+        m_summary.trainingEffect.maximumOxygenUptake = message.GetMessage(21)->GetUInt64(7);
     }
+
     //HeartrateZones
     if (message.GetField(22)) {
         m_summary.heartRateZones.hasData = true;
@@ -137,8 +166,18 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     //Elevation
     if (message.GetField(23)) {
         m_summary.elevation.hasData = true;
-        m_summary.elevation.uphillTime = message.GetMessage(23)->GetUInt32(1);
-        m_summary.elevation.downhillTime = message.GetMessage(23)->GetUInt32(2);
+        m_summary.elevation.uphillTime = message.GetMessage(23)->GetUInt64(3);
+        m_summary.elevation.downhillTime = message.GetMessage(23)->GetUInt64(4);
+    }
+
+    //MovementEvaluation
+    if (message.GetField(42)) {
+        m_summary.movementEvaluation.hasData = true;
+        m_summary.movementEvaluation.consistency = message.GetMessage(42)->GetFloat(1);
+        m_summary.movementEvaluation.stability = message.GetMessage(42)->GetFloat(2);
+        m_summary.movementEvaluation.continuity = message.GetMessage(42)->GetFloat(3);
+        m_summary.movementEvaluation.rhythm = message.GetMessage(42)->GetFloat(4);
+        m_summary.movementEvaluation.speedDecay = message.GetMessage(42)->GetFloat(5);
     }
 
     ActivityKind::Type activityKind = ActivityKind::fromZeppOsType(ActivityKind::Type(m_summary.type.type));
@@ -147,8 +186,8 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     summary.setStartTime(startTime);
     summary.setEndTime(startTime.addSecs(m_summary.time.totalDuration));
     summary.setActivityKind(activityKind);
-    summary.setBaseLatitude(m_summary.location.baseLatitude / HUAMI_TO_DECIMAL_DEGREES_DIVISOR);
-    summary.setBaseLongitude(m_summary.location.baseLongitude / HUAMI_TO_DECIMAL_DEGREES_DIVISOR);
+    summary.setBaseLatitude(m_summary.location.baseLatitude / 6000000.0);
+    summary.setBaseLongitude(m_summary.location.baseLongitude / -6000000.0);
     summary.setBaseAltitude(m_summary.location.baseAltitude / 2);
 
     summary.setName((ActivityKind::toString(summary.activityKind())) + "-" + summary.startTime().toLocalTime().toString("yyyyMMdd-HHmm"));
@@ -165,8 +204,12 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         summary.addMetaData("distanceMeters", QString::number(m_summary.distance.distance), "meters");
     }
 
+    if (m_summary.count.hasData) {
+        summary.addMetaData("totalJumps", QString::number(m_summary.count.totalJumps), "");
+    }
+
     if (m_summary.time.hasData) {
-        summary.addMetaData("totalDuration", QString::number(m_summary.time.totalDuration), "seconds");
+        summary.addMetaData("activeSeconds", QString::number(m_summary.time.totalDuration), "seconds");
         summary.addMetaData("workoutDuration", QString::number(m_summary.time.workoutDuration), "seconds");
         summary.addMetaData("pauseDuration", QString::number(m_summary.time.pauseDuration), "seconds");
     }
@@ -184,6 +227,8 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     if (m_summary.pace.hasData) {
         summary.addMetaData("paceAvg", QString::number((m_summary.pace.avg * 1000) / 60), "min_km");
         summary.addMetaData("paceBest", QString::number((m_summary.pace.best * 1000) / 60), "min_km");
+        summary.addMetaData("averageSpeed", QString::number(1 / m_summary.pace.avg), "meters_second");
+        summary.addMetaData("maxSpeed", QString::number(1 / m_summary.pace.best), "meters_second");
     }
 
     if (m_summary.steps.hasData) {
@@ -202,14 +247,29 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
         summary.addMetaData("elevationLoss", QString::number(m_summary.altitude.elevationLoss / 100), "meters");
     }
 
+    if (m_summary.slope.hasData) {
+        summary.addMetaData("avgSlope", QString::number(m_summary.slope.avg), "%");
+    }
+
     if (m_summary.calories.hasData) {
-        summary.addMetaData("calories", QString::number(m_summary.calories.calories), "calories");
+        summary.addMetaData("caloriesBurnt", QString::number(m_summary.calories.calories), "calories");
+    }
+
+    if (m_summary.frequency.hasData) {
+        summary.addMetaData("avgCadence", QString::number(m_summary.frequency.avgFrequency), "");
+        summary.addMetaData("maxCadence", QString::number(m_summary.frequency.maxFrequency), "");
     }
 
     if (m_summary.heartRate.hasData) {
-        summary.addMetaData("avgHeartRate", QString::number(m_summary.heartRate.avg), "bpm");
-        summary.addMetaData("maxHeartRate", QString::number(m_summary.heartRate.max), "bpm");
+        summary.addMetaData("averageHR", QString::number(m_summary.heartRate.avg), "bpm");
+        summary.addMetaData("maxHR", QString::number(m_summary.heartRate.max), "bpm");
         summary.addMetaData("minHeartRate", QString::number(m_summary.heartRate.min), "bpm");
+    }
+
+    if (m_summary.temperature.hasData) {
+        summary.addMetaData("avgTemp", QString::number(m_summary.temperature.avg), "ºC");
+        summary.addMetaData("maxTemp", QString::number(m_summary.temperature.max), "ºC");
+        summary.addMetaData("minTemp", QString::number(m_summary.temperature.min), "ºC");
     }
 
     if (m_summary.trainingEffect.hasData) {
@@ -222,6 +282,14 @@ ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &d
     if (m_summary.elevation.hasData) {
         summary.addMetaData("uphillTime", QString::number(m_summary.elevation.uphillTime), "seconds");
         summary.addMetaData("downhillTime", QString::number(m_summary.elevation.downhillTime), "seconds");
+    }
+
+    if (m_summary.movementEvaluation.hasData) {
+        summary.addMetaData("movementConsistency", QString::number(m_summary.movementEvaluation.consistency), "");
+        summary.addMetaData("movementStability", QString::number(m_summary.movementEvaluation.stability), "");
+        summary.addMetaData("movementContinuity", QString::number(m_summary.movementEvaluation.continuity), "");
+        summary.addMetaData("movementRhythm", QString::number(m_summary.movementEvaluation.rhythm), "");
+        summary.addMetaData("movementSpeedDecay", QString::number(m_summary.movementEvaluation.speedDecay), "");
     }
 
     qDebug() << "Summary:" << summary.startTime() << summary.activityKind() << summary.baseLatitude() << summary.baseLongitude() << summary.baseAltitude();

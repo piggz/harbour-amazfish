@@ -35,6 +35,36 @@ int ActivityCoordinate::heartRate() const
     return m_heartRate;
 }
 
+void ActivityCoordinate::setCadence(short cadence)
+{
+    m_cadence = cadence;
+}
+
+short ActivityCoordinate::cadence() const
+{
+    return m_cadence;
+}
+
+void ActivityCoordinate::setSpeed(float speed)
+{
+    m_speed = speed;
+}
+
+float ActivityCoordinate::speed() const
+{
+    return m_speed;
+}
+
+void ActivityCoordinate::setTemperature(float temperature)
+{
+    m_temperature = temperature;
+}
+
+float ActivityCoordinate::temperature() const
+{
+    return m_temperature;
+}
+
 bool ActivityCoordinate::operator ==(const ActivityCoordinate &other) const
 {
     return heartRate() == other.heartRate() && timeStamp() == other.timeStamp() && coordinate() == other.coordinate();
