@@ -68,10 +68,6 @@ PagePL {
             id: chkPrivate
             text: qsTr("Private");
         }
-        TextSwitchPL {
-            id: chkCommute
-            text: qsTr("Commute");
-        }
 
         ButtonPL {
             text: qsTr("Upload")
@@ -87,7 +83,6 @@ PagePL {
             readOnly: true
             width: parent.width
             height: width * 0.6
-            textFormat: TextEdit.RichText
 
             BusyIndicatorPL {
                 visible: fitTrackeeDialog.busy
@@ -142,9 +137,9 @@ PagePL {
             "notes": "",
             "title": st_name.text,
             "description": st_description.text,
-            "analysis_visibility": chkPrivate ? "private" : "public", // private, followers_only or public
-            "map_visibility": chkPrivate ? "private" : "public", // private, followers_only or public
-            "workout_visibility": chkPrivate ? "private" : "public", // private, followers_only or public
+            "analysis_visibility": chkPrivate.checked ? "private" : "public", // private, followers_only or public
+            "map_visibility": chkPrivate.checked ? "private" : "public", // private, followers_only or public
+            "workout_visibility": chkPrivate.checked ? "private" : "public", // private, followers_only or public
             "equipment_ids": []
         }
 
