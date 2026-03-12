@@ -11,6 +11,7 @@ ZeppOsActivitySummaryParser::ZeppOsActivitySummaryParser()
 ActivitySummary ZeppOsActivitySummaryParser::parseBinaryData(const QByteArray &data, const QDateTime &startTime)
 {
     qDebug() << Q_FUNC_INFO;
+    qDebug() << data.toBase64();
 
     picoproto::Message message;
 
