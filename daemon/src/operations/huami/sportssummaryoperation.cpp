@@ -58,11 +58,6 @@ bool SportsSummaryOperation::processBufferedData()
     return true;
 }
 
-bool SportsSummaryOperation::success() const
-{
-    return !m_error;
-}
-
 ActivitySummary SportsSummaryOperation::summary()
 {
     return m_summary;

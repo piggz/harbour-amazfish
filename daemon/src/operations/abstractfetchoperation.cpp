@@ -4,7 +4,7 @@
 #include "amazfishconfig.h"
 #include "huami/huamifetcher.h"
 
-AbstractFetchOperation::AbstractFetchOperation(HuamiFetcher *fetcher, bool isZeppOs) : m_fetcher(fetcher), m_isZeppOs(isZeppOs), m_valid(true)
+AbstractFetchOperation::AbstractFetchOperation(HuamiFetcher *fetcher, bool isZeppOs) : m_fetcher(fetcher), m_isZeppOs(isZeppOs)
 {
 
 }
@@ -142,11 +142,13 @@ bool AbstractFetchOperation::handleFetchDataResponse(const QByteArray &value)
 {
     if (value.length() != 3 && value.length() != 7) {
         qDebug() << "Fetch data unexpected metadata length: " << value.length();
-        return false;;
+        m_error = true;
+        return true;
     }
 
     if (value[2] != MiBandService::SUCCESS) {
         m_fetcher->message(QObject::tr("No data to transfer"));
+        m_error = true;
         return true;
     }
 
@@ -180,4 +182,9 @@ void AbstractFetchOperation::sendAck()
 void AbstractFetchOperation::setAbort(bool abort)
 {
     m_abort = abort;
+}
+
+bool AbstractFetchOperation::success() const
+{
+    return !m_error;
 }

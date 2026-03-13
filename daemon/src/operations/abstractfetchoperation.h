@@ -16,6 +16,8 @@ public:
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
     bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
+    bool success() const;
+
 private:
     QDateTime m_startDate;
     QString m_lastSyncKey;
@@ -42,7 +44,7 @@ protected:
     QBLEService *m_service = nullptr;
 
     QByteArray m_buffer;
-    bool m_valid = true;
+    bool m_error = false;
     int m_lastPacketCounter = -1;
 };
 

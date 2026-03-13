@@ -17,13 +17,10 @@ public:
     ~SportsSummaryOperation();
 
     void start(QBLEService *service) override;
-
-    bool success() const;
     ActivitySummary summary();
 
 private:
     QDateTime m_sampleTime;
-    bool m_error = false;
     ActivitySummary m_summary;
 
     bool processBufferedData() override;
