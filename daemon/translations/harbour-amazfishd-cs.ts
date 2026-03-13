@@ -233,7 +233,7 @@
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
-        <translation>Nahrávání souboru bylo úspěšné.  Probíhá aktualizace na zařízení</translation>
+        <translation>Odesílání souboru bylo úspěšné.  Probíhá aktualizace na zařízení</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
