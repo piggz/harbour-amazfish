@@ -427,37 +427,37 @@
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="26"/>
         <source>FitTrackee settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Logout</source>
-        <translation type="unfinished">Odhlásit</translation>
+        <translation>Odhlásit</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Login</source>
-        <translation type="unfinished">Přihlásit</translation>
+        <translation>Přihlásit</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="70"/>
         <source>Base URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>základní URL:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="79"/>
         <source>Client ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID klienta:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="87"/>
         <source>Client Secret:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tajný kód klienta:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="94"/>
         <source>Account linked</source>
-        <translation type="unfinished"></translation>
+        <translation>Účet propojen</translation>
     </message>
 </context>
 <context>
@@ -465,57 +465,57 @@
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="27"/>
         <source>FitTrackee Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Odesílání na FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="44"/>
         <source>Activity name for FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno aktivity pro FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="45"/>
         <source>Name</source>
-        <translation type="unfinished">Jméno</translation>
+        <translation>Jméno</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="49"/>
         <source>Description</source>
-        <translation type="unfinished">Popis</translation>
+        <translation>Popis</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="56"/>
         <source>Activity description for FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis aktivity pro FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="64"/>
         <source>Type (FitTrackee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ (FitTrackee)</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="69"/>
         <source>Private</source>
-        <translation type="unfinished">Soukromé</translation>
+        <translation>Soukromé</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="73"/>
         <source>Upload</source>
-        <translation type="unfinished">Odeslat</translation>
+        <translation>Odeslat</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="110"/>
         <source>Uploading data...</source>
-        <translation type="unfinished">Odesílání dat…</translation>
+        <translation>Odesílání dat…</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="125"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished">Odesílání aktivity dokončeno</translation>
+        <translation>Odesílání aktivity dokončeno</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="224"/>
         <source>An unknown error occurred</source>
-        <translation type="unfinished">Došlo k neznámé chybě</translation>
+        <translation>Došlo k neznámé chybě</translation>
     </message>
 </context>
 <context>
@@ -1320,7 +1320,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="70"/>
         <source>FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="71"/>
@@ -1659,7 +1659,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="370"/>
         <source>Send to FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>Odeslat na FitTrackee</translation>
     </message>
     <message>
         <source>Max Pace</source>
@@ -3077,7 +3077,7 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="26"/>
         <source>Strava Upload</source>
-        <translation>Nahrát na Stravu</translation>
+        <translation>Odeslání na Stravu</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="43"/>
@@ -4897,7 +4897,7 @@
         <location filename="../qml/components/Translation.js" line="309"/>
         <location filename="../qml/components/Translation.js" line="309"/>
         <source>Average Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměrná rychlost</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="310"/>
@@ -4931,13 +4931,13 @@
         <location filename="../qml/components/Translation.js" line="316"/>
         <location filename="../qml/components/Translation.js" line="316"/>
         <source>Average Slope</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměrný sklon</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="317"/>
         <location filename="../qml/components/Translation.js" line="317"/>
         <source>Average Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměrná teplota</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="318"/>
@@ -5049,7 +5049,7 @@
         <location filename="../qml/components/Translation.js" line="338"/>
         <location filename="../qml/components/Translation.js" line="338"/>
         <source>Max Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximální teplota</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="339"/>
@@ -5085,37 +5085,37 @@
         <location filename="../qml/components/Translation.js" line="344"/>
         <location filename="../qml/components/Translation.js" line="344"/>
         <source>Min Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimální teplota</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="345"/>
         <location filename="../qml/components/Translation.js" line="345"/>
         <source>Mov Consistency</source>
-        <translation type="unfinished"></translation>
+        <translation>Konzistence pohybu</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="346"/>
         <location filename="../qml/components/Translation.js" line="346"/>
         <source>Mov Continuity</source>
-        <translation type="unfinished"></translation>
+        <translation>Plynulost pohybu</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="347"/>
         <location filename="../qml/components/Translation.js" line="347"/>
         <source>Mov Rhythm</source>
-        <translation type="unfinished"></translation>
+        <translation>Rytmus pohybu</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="348"/>
         <location filename="../qml/components/Translation.js" line="348"/>
         <source>Mov Speed Decay</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpomalení pohybu</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="349"/>
         <location filename="../qml/components/Translation.js" line="349"/>
         <source>Mov Stability</source>
-        <translation type="unfinished"></translation>
+        <translation>Stabilita pohybu</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="351"/>
