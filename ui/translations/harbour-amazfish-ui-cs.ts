@@ -423,6 +423,102 @@
     </message>
 </context>
 <context>
+    <name>FitTrackeeSettingsPage</name>
+    <message>
+        <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="26"/>
+        <source>FitTrackee settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
+        <source>Logout</source>
+        <translation type="unfinished">Odhlásit</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
+        <source>Login</source>
+        <translation type="unfinished">Přihlásit</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="70"/>
+        <source>Base URL:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="79"/>
+        <source>Client ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="87"/>
+        <source>Client Secret:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="94"/>
+        <source>Account linked</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FitTrackeeUploadPage</name>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="27"/>
+        <source>FitTrackee Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="44"/>
+        <source>Activity name for FitTrackee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="45"/>
+        <source>Name</source>
+        <translation type="unfinished">Jméno</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="49"/>
+        <source>Description</source>
+        <translation type="unfinished">Popis</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="56"/>
+        <source>Activity description for FitTrackee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="64"/>
+        <source>Type (FitTrackee)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="69"/>
+        <source>Private</source>
+        <translation type="unfinished">Soukromé</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="73"/>
+        <source>Upload</source>
+        <translation type="unfinished">Odeslat</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="110"/>
+        <source>Uploading data...</source>
+        <translation type="unfinished">Odesílání dat…</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="125"/>
+        <source>Activity upload complete</source>
+        <translation type="unfinished">Odesílání aktivity dokončeno</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="224"/>
+        <source>An unknown error occurred</source>
+        <translation type="unfinished">Došlo k neznámé chybě</translation>
+    </message>
+</context>
+<context>
     <name>GraphData</name>
     <message>
         <location filename="../qml/components/GraphData.qml" line="309"/>
@@ -1205,7 +1301,7 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="71"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="72"/>
         <source>Donate</source>
         <translation>Dar vývojáři</translation>
     </message>
@@ -1223,6 +1319,11 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="70"/>
+        <source>FitTrackee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="71"/>
         <source>Debug Info</source>
         <translation>Ladící informace</translation>
     </message>
@@ -1402,18 +1503,18 @@
         <translation>Stáhnout SPO2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="55"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="56"/>
         <source>Normal SPO2</source>
         <translation>Normální SPO2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="59"/>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="80"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="60"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="81"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="76"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="77"/>
         <source>Sleep SPO2</source>
         <translation>SPO2 ve spánku</translation>
     </message>
@@ -1554,6 +1655,11 @@
         <location filename="../qml/pages/SportPage.qml" line="160"/>
         <source>Location: %1</source>
         <translation>Místo: %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="370"/>
+        <source>Send to FitTrackee</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Max Pace</source>
@@ -4766,18 +4872,18 @@
     <message>
         <location filename="../qml/components/Translation.js" line="305"/>
         <location filename="../qml/components/Translation.js" line="306"/>
-        <location filename="../qml/components/Translation.js" line="313"/>
+        <location filename="../qml/components/Translation.js" line="315"/>
         <location filename="../qml/components/Translation.js" line="305"/>
         <location filename="../qml/components/Translation.js" line="306"/>
-        <location filename="../qml/components/Translation.js" line="313"/>
+        <location filename="../qml/components/Translation.js" line="315"/>
         <source>Average Heart Rate</source>
         <translation>Průměrná tepová frekvence</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="307"/>
-        <location filename="../qml/components/Translation.js" line="338"/>
+        <location filename="../qml/components/Translation.js" line="350"/>
         <location filename="../qml/components/Translation.js" line="307"/>
-        <location filename="../qml/components/Translation.js" line="338"/>
+        <location filename="../qml/components/Translation.js" line="350"/>
         <source>Average Pace</source>
         <translation>Průměrné tempo</translation>
     </message>
@@ -4789,379 +4895,443 @@
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="309"/>
-        <location filename="../qml/components/Translation.js" line="343"/>
         <location filename="../qml/components/Translation.js" line="309"/>
-        <location filename="../qml/components/Translation.js" line="343"/>
+        <source>Average Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="310"/>
+        <location filename="../qml/components/Translation.js" line="355"/>
+        <location filename="../qml/components/Translation.js" line="310"/>
+        <location filename="../qml/components/Translation.js" line="355"/>
         <source>Average Stride</source>
         <translation>Průměrný krok</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="310"/>
-        <location filename="../qml/components/Translation.js" line="310"/>
+        <location filename="../qml/components/Translation.js" line="311"/>
+        <location filename="../qml/components/Translation.js" line="311"/>
         <source>Average Stroke Distance</source>
         <translation>Průměrná vzdálenost záběru</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="311"/>
-        <location filename="../qml/components/Translation.js" line="348"/>
-        <location filename="../qml/components/Translation.js" line="311"/>
-        <location filename="../qml/components/Translation.js" line="348"/>
+        <location filename="../qml/components/Translation.js" line="312"/>
+        <location filename="../qml/components/Translation.js" line="360"/>
+        <location filename="../qml/components/Translation.js" line="312"/>
+        <location filename="../qml/components/Translation.js" line="360"/>
         <source>Average Stroke Rate</source>
         <translation>Průměrná frekvence záběru</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="312"/>
-        <location filename="../qml/components/Translation.js" line="312"/>
+        <location filename="../qml/components/Translation.js" line="313"/>
+        <location filename="../qml/components/Translation.js" line="313"/>
         <source>Average Altitude</source>
         <translation>Průměrná nadmořská výška</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="314"/>
-        <location filename="../qml/components/Translation.js" line="315"/>
-        <location filename="../qml/components/Translation.js" line="314"/>
-        <location filename="../qml/components/Translation.js" line="315"/>
+        <location filename="../qml/components/Translation.js" line="316"/>
+        <location filename="../qml/components/Translation.js" line="316"/>
+        <source>Average Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="317"/>
+        <location filename="../qml/components/Translation.js" line="317"/>
+        <source>Average Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="318"/>
+        <location filename="../qml/components/Translation.js" line="319"/>
+        <location filename="../qml/components/Translation.js" line="318"/>
+        <location filename="../qml/components/Translation.js" line="319"/>
         <source>Calories</source>
         <translation>Kalorie</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="316"/>
-        <location filename="../qml/components/Translation.js" line="316"/>
+        <location filename="../qml/components/Translation.js" line="320"/>
+        <location filename="../qml/components/Translation.js" line="320"/>
         <source>Current Workout Load</source>
         <translation>Aktuální zátěž při tréninku</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="317"/>
-        <location filename="../qml/components/Translation.js" line="317"/>
+        <location filename="../qml/components/Translation.js" line="321"/>
+        <location filename="../qml/components/Translation.js" line="321"/>
         <source>Descent</source>
         <translation>Klesání</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="318"/>
-        <location filename="../qml/components/Translation.js" line="318"/>
+        <location filename="../qml/components/Translation.js" line="322"/>
+        <location filename="../qml/components/Translation.js" line="322"/>
         <source>Time Descending</source>
         <translation>Čas klesání</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="319"/>
-        <location filename="../qml/components/Translation.js" line="319"/>
+        <location filename="../qml/components/Translation.js" line="323"/>
+        <location filename="../qml/components/Translation.js" line="323"/>
         <source>Distance</source>
         <translation>Vzdálenost</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="320"/>
-        <location filename="../qml/components/Translation.js" line="320"/>
+        <location filename="../qml/components/Translation.js" line="324"/>
+        <location filename="../qml/components/Translation.js" line="324"/>
         <source>Downhill Time</source>
         <translation>Čas z kopce</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="321"/>
-        <location filename="../qml/components/Translation.js" line="321"/>
+        <location filename="../qml/components/Translation.js" line="325"/>
+        <location filename="../qml/components/Translation.js" line="325"/>
         <source>Elevation Gain</source>
         <translation>Nastoupané převýšení</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="322"/>
-        <location filename="../qml/components/Translation.js" line="322"/>
+        <location filename="../qml/components/Translation.js" line="326"/>
+        <location filename="../qml/components/Translation.js" line="326"/>
         <source>Elevation Loss</source>
         <translation>Sklesané převýšení</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="323"/>
-        <location filename="../qml/components/Translation.js" line="323"/>
+        <location filename="../qml/components/Translation.js" line="327"/>
+        <location filename="../qml/components/Translation.js" line="327"/>
         <source>Time on Flat</source>
         <translation>Čas na rovině</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="324"/>
-        <location filename="../qml/components/Translation.js" line="324"/>
+        <location filename="../qml/components/Translation.js" line="328"/>
+        <location filename="../qml/components/Translation.js" line="328"/>
         <source>Laps</source>
         <translation>Koleček</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="325"/>
-        <location filename="../qml/components/Translation.js" line="325"/>
+        <location filename="../qml/components/Translation.js" line="329"/>
+        <location filename="../qml/components/Translation.js" line="329"/>
         <source>Max Altitude</source>
         <translation>Maximální výška</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="326"/>
-        <location filename="../qml/components/Translation.js" line="327"/>
-        <location filename="../qml/components/Translation.js" line="326"/>
-        <location filename="../qml/components/Translation.js" line="327"/>
+        <location filename="../qml/components/Translation.js" line="331"/>
+        <location filename="../qml/components/Translation.js" line="332"/>
+        <location filename="../qml/components/Translation.js" line="331"/>
+        <location filename="../qml/components/Translation.js" line="332"/>
         <source>Max Heart Rate</source>
         <translation>Maximální tepová frekvence</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="328"/>
-        <location filename="../qml/components/Translation.js" line="328"/>
+        <location filename="../qml/components/Translation.js" line="333"/>
+        <location filename="../qml/components/Translation.js" line="333"/>
         <source>VO₂ Max</source>
         <translation>Maximální spotřeba kyslíku</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="329"/>
-        <location filename="../qml/components/Translation.js" line="329"/>
+        <location filename="../qml/components/Translation.js" line="334"/>
+        <location filename="../qml/components/Translation.js" line="334"/>
         <source>Max Latitude</source>
         <translation>Max zem. šíř.</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="330"/>
-        <location filename="../qml/components/Translation.js" line="330"/>
+        <location filename="../qml/components/Translation.js" line="335"/>
+        <location filename="../qml/components/Translation.js" line="335"/>
         <source>Max Longitude</source>
         <translation>Max zem. délka</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="331"/>
-        <location filename="../qml/components/Translation.js" line="331"/>
+        <location filename="../qml/components/Translation.js" line="336"/>
+        <location filename="../qml/components/Translation.js" line="336"/>
         <source>Max Pace</source>
         <translation>Maximální tempo</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="332"/>
-        <location filename="../qml/components/Translation.js" line="332"/>
+        <location filename="../qml/components/Translation.js" line="337"/>
+        <location filename="../qml/components/Translation.js" line="337"/>
         <source>Max Speed</source>
         <translation>Max. rychlost</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="333"/>
-        <location filename="../qml/components/Translation.js" line="333"/>
+        <location filename="../qml/components/Translation.js" line="338"/>
+        <location filename="../qml/components/Translation.js" line="338"/>
+        <source>Max Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="339"/>
+        <location filename="../qml/components/Translation.js" line="339"/>
         <source>Min Altitude</source>
         <translation>Minimální výška</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="334"/>
-        <location filename="../qml/components/Translation.js" line="334"/>
+        <location filename="../qml/components/Translation.js" line="340"/>
+        <location filename="../qml/components/Translation.js" line="340"/>
         <source>Min Heart Rate</source>
         <translation>Minimální tepová frekvence</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="335"/>
-        <location filename="../qml/components/Translation.js" line="335"/>
+        <location filename="../qml/components/Translation.js" line="341"/>
+        <location filename="../qml/components/Translation.js" line="341"/>
         <source>Min Latitude</source>
         <translation>Min zem. šíř.</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="336"/>
-        <location filename="../qml/components/Translation.js" line="336"/>
+        <location filename="../qml/components/Translation.js" line="342"/>
+        <location filename="../qml/components/Translation.js" line="342"/>
         <source>Min Longitude</source>
         <translation>Min zem. délka</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="337"/>
-        <location filename="../qml/components/Translation.js" line="337"/>
+        <location filename="../qml/components/Translation.js" line="343"/>
+        <location filename="../qml/components/Translation.js" line="343"/>
         <source>Min Pace</source>
         <translation>Minimální tempo</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="339"/>
-        <location filename="../qml/components/Translation.js" line="339"/>
+        <location filename="../qml/components/Translation.js" line="344"/>
+        <location filename="../qml/components/Translation.js" line="344"/>
+        <source>Min Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="345"/>
+        <location filename="../qml/components/Translation.js" line="345"/>
+        <source>Mov Consistency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="346"/>
+        <location filename="../qml/components/Translation.js" line="346"/>
+        <source>Mov Continuity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="347"/>
+        <location filename="../qml/components/Translation.js" line="347"/>
+        <source>Mov Rhythm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="348"/>
+        <location filename="../qml/components/Translation.js" line="348"/>
+        <source>Mov Speed Decay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="349"/>
+        <location filename="../qml/components/Translation.js" line="349"/>
+        <source>Mov Stability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/Translation.js" line="351"/>
+        <location filename="../qml/components/Translation.js" line="351"/>
         <source>Best Pace</source>
         <translation>Nejlepší tempo</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="340"/>
-        <location filename="../qml/components/Translation.js" line="340"/>
+        <location filename="../qml/components/Translation.js" line="352"/>
+        <location filename="../qml/components/Translation.js" line="352"/>
         <source>Pause Duration</source>
         <translation>Doba přestávky</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="341"/>
-        <location filename="../qml/components/Translation.js" line="341"/>
+        <location filename="../qml/components/Translation.js" line="353"/>
+        <location filename="../qml/components/Translation.js" line="353"/>
         <source>Steps</source>
         <translation>Kroky</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="342"/>
-        <location filename="../qml/components/Translation.js" line="342"/>
+        <location filename="../qml/components/Translation.js" line="314"/>
+        <location filename="../qml/components/Translation.js" line="354"/>
+        <location filename="../qml/components/Translation.js" line="314"/>
+        <location filename="../qml/components/Translation.js" line="354"/>
         <source>Average Cadence</source>
         <translation>Průměrná kadence</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="344"/>
-        <location filename="../qml/components/Translation.js" line="344"/>
+        <location filename="../qml/components/Translation.js" line="330"/>
+        <location filename="../qml/components/Translation.js" line="356"/>
+        <location filename="../qml/components/Translation.js" line="330"/>
+        <location filename="../qml/components/Translation.js" line="356"/>
         <source>Max Cadence</source>
         <translation>Maximální kadence</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="345"/>
-        <location filename="../qml/components/Translation.js" line="345"/>
+        <location filename="../qml/components/Translation.js" line="357"/>
+        <location filename="../qml/components/Translation.js" line="357"/>
         <source>Strokes</source>
         <translation>Zdvihů</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="346"/>
-        <location filename="../qml/components/Translation.js" line="346"/>
+        <location filename="../qml/components/Translation.js" line="358"/>
+        <location filename="../qml/components/Translation.js" line="358"/>
         <source>Average Distance per Stroke</source>
         <translation>Průměrná vzdálenost na záběr</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="347"/>
-        <location filename="../qml/components/Translation.js" line="347"/>
+        <location filename="../qml/components/Translation.js" line="359"/>
+        <location filename="../qml/components/Translation.js" line="359"/>
         <source>Max Stroke Rate</source>
         <translation>Maximální frekvence záběrů</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="349"/>
-        <location filename="../qml/components/Translation.js" line="349"/>
+        <location filename="../qml/components/Translation.js" line="361"/>
+        <location filename="../qml/components/Translation.js" line="361"/>
         <source>Lane Length</source>
         <translation>Délka dráhy</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="350"/>
-        <location filename="../qml/components/Translation.js" line="350"/>
+        <location filename="../qml/components/Translation.js" line="362"/>
+        <location filename="../qml/components/Translation.js" line="362"/>
         <source>Swim Laps</source>
         <translation>Plaveckých kol</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="351"/>
-        <location filename="../qml/components/Translation.js" line="351"/>
+        <location filename="../qml/components/Translation.js" line="363"/>
+        <location filename="../qml/components/Translation.js" line="363"/>
         <source>Swim Strokes</source>
         <translation>Plaveckých záběrů</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="352"/>
-        <location filename="../qml/components/Translation.js" line="352"/>
+        <location filename="../qml/components/Translation.js" line="364"/>
+        <location filename="../qml/components/Translation.js" line="364"/>
         <source>Swim Style</source>
         <translation>Styl plavání</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="353"/>
-        <location filename="../qml/components/Translation.js" line="353"/>
+        <location filename="../qml/components/Translation.js" line="365"/>
+        <location filename="../qml/components/Translation.js" line="365"/>
         <source>SWOLF Index</source>
         <translation>SWOLF Index</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="354"/>
-        <location filename="../qml/components/Translation.js" line="354"/>
+        <location filename="../qml/components/Translation.js" line="366"/>
+        <location filename="../qml/components/Translation.js" line="366"/>
         <source>Total Climbing</source>
         <translation>Celkově lezení</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="355"/>
-        <location filename="../qml/components/Translation.js" line="355"/>
+        <location filename="../qml/components/Translation.js" line="367"/>
+        <location filename="../qml/components/Translation.js" line="367"/>
         <source>Total Duration</source>
         <translation>Celková doba</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="356"/>
-        <location filename="../qml/components/Translation.js" line="356"/>
+        <location filename="../qml/components/Translation.js" line="368"/>
+        <location filename="../qml/components/Translation.js" line="368"/>
         <source>Total Stride</source>
         <translation>Celkově kroků</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="357"/>
-        <location filename="../qml/components/Translation.js" line="357"/>
+        <location filename="../qml/components/Translation.js" line="369"/>
+        <location filename="../qml/components/Translation.js" line="369"/>
         <source>Uphill Time</source>
         <translation>Čas do kopce</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="358"/>
-        <location filename="../qml/components/Translation.js" line="358"/>
+        <location filename="../qml/components/Translation.js" line="370"/>
+        <location filename="../qml/components/Translation.js" line="370"/>
         <source>Workout Duration</source>
         <translation>Doba cvičení</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="369"/>
-        <location filename="../qml/components/Translation.js" line="369"/>
+        <location filename="../qml/components/Translation.js" line="381"/>
+        <location filename="../qml/components/Translation.js" line="381"/>
         <source>bpm</source>
         <translation>tep/min</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="370"/>
-        <location filename="../qml/components/Translation.js" line="371"/>
-        <location filename="../qml/components/Translation.js" line="370"/>
-        <location filename="../qml/components/Translation.js" line="371"/>
+        <location filename="../qml/components/Translation.js" line="382"/>
+        <location filename="../qml/components/Translation.js" line="383"/>
+        <location filename="../qml/components/Translation.js" line="382"/>
+        <location filename="../qml/components/Translation.js" line="383"/>
         <source>kcal</source>
         <translation>kcal</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="372"/>
-        <location filename="../qml/components/Translation.js" line="372"/>
+        <location filename="../qml/components/Translation.js" line="384"/>
+        <location filename="../qml/components/Translation.js" line="384"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="373"/>
-        <location filename="../qml/components/Translation.js" line="373"/>
+        <location filename="../qml/components/Translation.js" line="385"/>
+        <location filename="../qml/components/Translation.js" line="385"/>
         <source>°</source>
         <translation>°</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="374"/>
-        <location filename="../qml/components/Translation.js" line="374"/>
+        <location filename="../qml/components/Translation.js" line="386"/>
+        <location filename="../qml/components/Translation.js" line="386"/>
         <source>laps</source>
         <translation>kol</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="375"/>
-        <location filename="../qml/components/Translation.js" line="375"/>
+        <location filename="../qml/components/Translation.js" line="387"/>
+        <location filename="../qml/components/Translation.js" line="387"/>
         <source>m</source>
         <translation>m</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="376"/>
-        <location filename="../qml/components/Translation.js" line="376"/>
+        <location filename="../qml/components/Translation.js" line="388"/>
+        <location filename="../qml/components/Translation.js" line="388"/>
         <source>m/s</source>
         <translation>m/s</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="377"/>
-        <location filename="../qml/components/Translation.js" line="377"/>
+        <location filename="../qml/components/Translation.js" line="389"/>
+        <location filename="../qml/components/Translation.js" line="389"/>
         <source>min/km</source>
         <translation>min/km</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="378"/>
-        <location filename="../qml/components/Translation.js" line="378"/>
+        <location filename="../qml/components/Translation.js" line="390"/>
+        <location filename="../qml/components/Translation.js" line="390"/>
         <source>ml/kg/min</source>
         <translation>ml/kg/min</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="379"/>
-        <location filename="../qml/components/Translation.js" line="379"/>
+        <location filename="../qml/components/Translation.js" line="391"/>
+        <location filename="../qml/components/Translation.js" line="391"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="380"/>
-        <location filename="../qml/components/Translation.js" line="380"/>
+        <location filename="../qml/components/Translation.js" line="392"/>
+        <location filename="../qml/components/Translation.js" line="392"/>
         <source>s/km</source>
         <translation>s/km</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="381"/>
-        <location filename="../qml/components/Translation.js" line="381"/>
+        <location filename="../qml/components/Translation.js" line="393"/>
+        <location filename="../qml/components/Translation.js" line="393"/>
         <source>s/m</source>
         <translation>s/m</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="382"/>
-        <location filename="../qml/components/Translation.js" line="384"/>
-        <location filename="../qml/components/Translation.js" line="382"/>
-        <location filename="../qml/components/Translation.js" line="384"/>
+        <location filename="../qml/components/Translation.js" line="394"/>
+        <location filename="../qml/components/Translation.js" line="396"/>
+        <location filename="../qml/components/Translation.js" line="394"/>
+        <location filename="../qml/components/Translation.js" line="396"/>
         <source>steps</source>
         <translation>kroků</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="383"/>
-        <location filename="../qml/components/Translation.js" line="383"/>
+        <location filename="../qml/components/Translation.js" line="395"/>
+        <location filename="../qml/components/Translation.js" line="395"/>
         <source>steps/min</source>
         <translation>kroků/min</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="385"/>
-        <location filename="../qml/components/Translation.js" line="385"/>
+        <location filename="../qml/components/Translation.js" line="397"/>
+        <location filename="../qml/components/Translation.js" line="397"/>
         <source>strokes</source>
         <translation>zdvihů</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="386"/>
-        <location filename="../qml/components/Translation.js" line="386"/>
+        <location filename="../qml/components/Translation.js" line="398"/>
+        <location filename="../qml/components/Translation.js" line="398"/>
         <source>strokes/s</source>
         <translation>zdvihů/s</translation>
     </message>
     <message>
-        <location filename="../qml/components/Translation.js" line="387"/>
-        <location filename="../qml/components/Translation.js" line="387"/>
+        <location filename="../qml/components/Translation.js" line="399"/>
+        <location filename="../qml/components/Translation.js" line="399"/>
         <source>SWOLF</source>
         <translation>SWOLF</translation>
     </message>

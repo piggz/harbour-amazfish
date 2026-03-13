@@ -168,12 +168,12 @@
 <context>
     <name>HuamiFetcher</name>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="99"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="105"/>
         <source>All operations cancelled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="141"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="147"/>
         <source>All operations complete</source>
         <translation type="unfinished"></translation>
     </message>
