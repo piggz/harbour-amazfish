@@ -442,22 +442,22 @@
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="70"/>
         <source>Base URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>Base-URL:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="79"/>
         <source>Client ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klient-ID:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="87"/>
         <source>Client Secret:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klienthemmelighet:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="94"/>
         <source>Account linked</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto tilkoblet</translation>
     </message>
 </context>
 <context>
@@ -2333,7 +2333,7 @@
         <location filename="../qml/components/Translation.js" line="61"/>
         <location filename="../qml/components/Translation.js" line="61"/>
         <source>Driving</source>
-        <translation type="unfinished"></translation>
+        <translation>Kjøre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="62"/>
@@ -2591,25 +2591,25 @@
         <location filename="../qml/components/Translation.js" line="104"/>
         <location filename="../qml/components/Translation.js" line="104"/>
         <source>Push Walk Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Gåhastighet (ved trilling)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="105"/>
         <location filename="../qml/components/Translation.js" line="105"/>
         <source>Indoor Push Walk Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Gåhastighet innendørs (ved trilling)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="106"/>
         <location filename="../qml/components/Translation.js" line="106"/>
         <source>Push Run Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Løpehastighet (ved trilling)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="107"/>
         <location filename="../qml/components/Translation.js" line="107"/>
         <source>Indoor Push Run Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Løpehastighet innendørs (ved trilling)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="108"/>
@@ -2669,7 +2669,7 @@
         <location filename="../qml/components/Translation.js" line="117"/>
         <location filename="../qml/components/Translation.js" line="117"/>
         <source>Water Tubing</source>
-        <translation type="unfinished"></translation>
+        <translation>Tube-kjøring</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="118"/>
