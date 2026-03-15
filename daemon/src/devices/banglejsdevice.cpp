@@ -515,9 +515,9 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 #endif
 
         m_heartrate = json.value("hrm").toDouble(); // heart rate,
-        m_steps = json.value("stp").toInt();     // steps
-        int mov = json.value("mov").toInt();     // movement intensity
-        int rt = json.value("rt").toInt();       // realtime
+        int steps = json.value("stp").toInt();      // steps
+        int mov = json.value("mov").toInt();        // movement intensity
+        int rt = json.value("rt").toInt();          // realtime
         QString act;
         if (json.keys().contains("act")) {
             act = json.value("act").toString();
@@ -525,13 +525,17 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         ActivityKind::Type kind = convertToActivityKind(act);
 
         if (rt) {
+            m_steps += steps;
             qDebug() << "Realtime activity " << actDate << kind << mov << m_steps << m_heartrate  ;
             emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
             emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
         } else if (ts > 0) {
-            m_samples << ActivitySample(actDate, kind, mov, m_steps, m_heartrate);
+
+            ActivitySample sample = ActivitySample(actDate, ActivityKind::toHuamiRawType(kind), mov, steps, m_heartrate);
+            qDebug() << sample << kind;
+            m_samples << sample;
         } else {
-            qDebug() << "Activity data" << actDate << kind << mov << m_steps << m_heartrate  ;
+            qDebug() << "Activity data" << actDate << kind << mov << steps << m_heartrate  ;
         }
     } else if (t == "actTrksList") {
         QJsonArray trksList = json.value("list").toArray();
