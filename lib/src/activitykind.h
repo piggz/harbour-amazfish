@@ -301,11 +301,14 @@ public:
     static Type fromZeppOsType(uint8_t type);
     static QString toString(Type type);
     static Type fromString(const QString& str);
+    static Type fromHuamiRawType(int raw);
+    static int toHuamiRawType(Type type);
 
 private:
     static const QMap<ActivityKind::Type, QString> m_typeNames;
     static const QMap<uint8_t, ActivityKind::Type> m_zepposTypes;
     static const QMap<int, ActivityKind::Type> m_huamiTypes;
+    static const QMap<int, ActivityKind::Type> m_huamiRawType;
 
 };
 

@@ -425,6 +425,24 @@ const QMap<int, ActivityKind::Type> ActivityKind::m_huamiTypes = {
     {105, Skiing}
 };
 
+const QMap<int, ActivityKind::Type> ActivityKind::m_huamiRawType = {
+    // https://codeberg.org/Freeyourgadget/Gadgetbridge/src/branch/master/app/src/main/java/nodomain/freeyourgadget/gadgetbridge/devices/huami/HuamiConst.java#L36
+    {-1, Unknown},    // TYPE_UNSET
+    {0, Unknown},     // TYPE_NO_CHANGE
+    {1, Activity},    // TYPE_ACTIVITY
+    {1, Walking},
+    {1, Exercise},
+    {2, Running},     // TYPE_RUNNING
+    {3, NotWorn},     // TYPE_NONWEAR
+    {4, Cycling},     // TYPE_RIDE_BIKE
+    {6, NotWorn},     // TYPE_CHARGING
+    {9, LightSleep},  // TYPE_LIGHT_SLEEP
+    {10, Unknown},    // TYPE_IGNORE
+    {11, DeepSleep},  // TYPE_DEEP_SLEEP
+    {12, AwakeSleep}, // TYPE_WAKE_UP
+};
+
+
 ActivityKind::Type ActivityKind::fromBipType(int type)
 {
     qDebug() << "Checking for bip activity type: " << type;
@@ -451,3 +469,10 @@ ActivityKind::Type ActivityKind::fromString(const QString &str)
     return Unknown;
 }
 
+ActivityKind::Type ActivityKind::fromHuamiRawType(int raw) {
+    return m_huamiRawType.value(raw, Unknown);
+}
+
+int ActivityKind::toHuamiRawType(ActivityKind::Type type) {
+    return m_huamiRawType.key(type, -1);
+}
