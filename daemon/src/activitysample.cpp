@@ -44,3 +44,16 @@ int ActivitySample::kind() const
 {
     return m_kind;
 }
+
+QDebug operator<<(QDebug debug, const ActivitySample &sample)
+{
+    QDebugStateSaver saver(debug);
+    debug.nospace() << "ActivitySample("
+                    << "datetime=" << sample.datetime() << ", "
+                    << "kind=" << sample.kind() << ", "
+                    << "intensity=" << sample.intensity() << ", "
+                    << "steps=" << sample.steps() << ", "
+                    << "heartrate=" << sample.heartrate()
+                    << ")";
+    return debug;
+}

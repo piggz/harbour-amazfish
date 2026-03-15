@@ -3,6 +3,7 @@
 
 #include <QTextStream>
 #include <QDateTime>
+#include <QDebug>
 
 class ActivitySample
 {
@@ -23,5 +24,7 @@ private:
     int m_steps = 0;
     int m_heartRate = 0;
 };
+
+QDebug operator<<(QDebug debug, const ActivitySample &sample);
 
 #endif // ACTIVITYSAMPLE_H
