@@ -15,9 +15,9 @@ void FetchHrvOperation::start(QBLEService *service)
 
     m_fetcher->setNotifications(true, true);
 
-    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDate();
+    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDateLocal();
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, true);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDateLocal(), 0, true);
 
     //Send log read configuration
     QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_HRV) + rawDate;
@@ -99,7 +99,6 @@ bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
         }
     }
     tg.commit();
-    lastTime.setTimeSpec(Qt::UTC);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }

@@ -34,9 +34,9 @@ void AbstractFetchOperation::setStartDate(const QDateTime &sd)
     m_startDate = sd;
 }
 
-QDateTime AbstractFetchOperation::startDate() const
+QDateTime AbstractFetchOperation::startDateLocal() const
 {
-    return m_startDate;
+    return m_startDate.toTimeSpec(Qt::LocalTime);
 }
 
 void AbstractFetchOperation::setLastSyncKey(const QString &key)
@@ -121,6 +121,10 @@ bool AbstractFetchOperation::handleStartDateResponse(const QByteArray &value)
     // the 4th - 7th bytes epresent the number of bytes/packets to expect, excluding the counter bytes
     int expectedDataLength = TypeConversion::toUint32(value[3], value[4], value[5], value[6]);
 
+    if (expectedDataLength == 0) {
+        //No data to transfer
+        return false;
+    }
     // last 8 bytes are the start date
     //! Here, we read the start date/time and dont apply the TZ offset.  We then apply the local
     //! TZ.  This should work in most cases i think!

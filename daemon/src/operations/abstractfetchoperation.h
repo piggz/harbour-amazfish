@@ -30,7 +30,7 @@ private:
 
 protected:
     void setStartDate(const QDateTime &sd);
-    QDateTime startDate() const;
+    QDateTime startDateLocal() const;
 
     void setLastSyncKey(const QString &key);
     QDateTime lastActivitySync();
