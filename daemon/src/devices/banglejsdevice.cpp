@@ -7,7 +7,7 @@
 #include "bangleacttrkrecord.h"
 #include "activitysummary.h"
 #include <algorithm>
-
+#include <KDb.h>
 #include <QtNetwork>
 #include <QtXml/QtXml>
 
@@ -201,8 +201,46 @@ void BangleJSDevice::initialise()
 
     setTime();
     setAlarms();
+
+    m_steps = getStepsFromDb();
+    emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
 }
 
+int BangleJSDevice::getStepsFromDb()
+{
+    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
+    if (!mibandActivity) {
+        qDebug() << Q_FUNC_INFO << "could not get table schema";
+        return -1;
+    }
+
+    uint user_id = qHash(AmazfishConfig::instance()->profileName());
+    uint device_id = qHash(AmazfishConfig::instance()->pairedAddress());
+
+    QString today = QDate::currentDate().toString("yyyy-MM-dd");
+
+    QString qry = QString("SELECT SUM(steps) FROM mi_band_activity "
+                          "WHERE device_id = '%1' AND user_id = '%2' "
+                          "AND DATE(timestamp_dt) = '%3'")
+                    .arg(device_id)
+                    .arg(user_id)
+                    .arg(today);
+    qDebug() << qry;
+
+    int steps = 0;
+    KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
+    if (!curs) {
+        qDebug() << Q_FUNC_INFO << "Error executing query";
+        return 0;
+    }
+    if (curs->open() && curs->moveFirst() && !curs->eof()) {
+        steps = curs->value(0).toString().toInt();
+    }
+
+    m_conn->deleteCursor(curs);
+
+    return steps;
+}
 void BangleJSDevice::setTime() {
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (!uart){
@@ -524,18 +562,14 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         }
         ActivityKind::Type kind = convertToActivityKind(act);
 
-        if (rt) {
-            m_steps += steps;
-            qDebug() << "Realtime activity " << actDate << kind << mov << m_steps << m_heartrate  ;
-            emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
-            emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
-        } else if (ts > 0) {
-
-            ActivitySample sample = ActivitySample(actDate, ActivityKind::toHuamiRawType(kind), mov, steps, m_heartrate);
-            qDebug() << sample << kind;
+        if (!rt && (ts > 0)) {
+            ActivitySample sample = ActivitySample(actDate, ActivityKind::toHuamiRawType(kind), 100*mov/2048, steps, m_heartrate);
             m_samples << sample;
         } else {
-            qDebug() << "Activity data" << actDate << kind << mov << steps << m_heartrate  ;
+            m_steps += steps;
+            qDebug() << "Activity " << actDate << kind << mov << m_steps << m_heartrate  ;
+            emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
+            emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
         }
     } else if (t == "actTrksList") {
         QJsonArray trksList = json.value("list").toArray();

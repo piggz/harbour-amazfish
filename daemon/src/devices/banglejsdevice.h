@@ -79,6 +79,7 @@ private:
 
     void setTime();
     void setAlarms();
+    int getStepsFromDb();
 
 };
 
