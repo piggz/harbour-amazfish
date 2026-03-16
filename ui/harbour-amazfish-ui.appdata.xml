@@ -15,6 +15,7 @@
   <url type="vcs-browser">https://github.com/piggz/harbour-amazfish</url>
   <url type="bugtracker">https://github.com/piggz/harbour-amazfish/issues</url>
   <url type="donation">https://paypal.me/piggz</url>
+  <url type="donation">https://liberapay.com/adampigg</url>
   <url type="translate">https://hosted.weblate.org/projects/harbour-amazfish/</url>
   <requires>
     <display_length compare="ge">300</display_length>
@@ -70,58 +71,95 @@
   </keywords>
   <content_rating type="oars-1.1"/>
   <releases>
-  <release version="2.8.0" timestamp="1760535988">
-    <description>
-    <p>Fixed compatibility with Ubuntu Touch 24.04 (separate version for noble).</p>
-    <p>Battery graph now shows the last recorded value.</p>
-    <p>Step graph scales dynamically based on maximum values.</p>
-    <p>Fixed notifications for GTS+ devices.</p>
-    <p>Fixed manual selection of device type on Ubuntu Touch.</p>
-    <p>Fixed missing Amazfit GTR3 icon in Qt resources.</p>
-    <p>Updated translations for Norwegian Bokmål, French, German, Russian, Ukrainian, and Czech.</p>
-    </description>
-  </release>
-  <release version="2.7.0" timestamp="1751655030">
-    <description>
+    <release version="2.9.0" timestamp="1773681177">
+      <description>
+        <p>Devices</p>
+        <ul>
+          <li>ZeppOS
+            <ul>
+              <li>Added PAI, HRV, Temperature, SpO2 display</li>
+              <li>Added support for BRM AGPS files</li>
+              <li>GTR2e pairing pattern added</li>
+            </ul>
+          </li>
+          <li>Bangle.js - step sync, sport summary export (GPX/TCX), alarm sync</li>
+          <li>PineTime - sunset/sunrise weather sync updated for InfiniTime 1.16 (backward compatible)</li>
+        </ul>
+        <p>User Experience</p>
+        <ul>
+          <li>FitTrackee - added support for uploading workouts to FitTrackee, a FOSS alternative to Strava</li>
+          <li>Sport Activity
+            <ul>
+              <li>Summary page reworked and cleaned up</li>
+              <li>Activity type can be edited via icon in the Detail page</li>
+              <li>Activity type is now translatable (~280 activities)</li>
+              <li>36 new icons added</li><li>Deleting an activity now uses the standard swipe gesture (Ubuntu Touch, via LomiriListItem)</li>
+            </ul>
+          </li>
+          <li>Calendar events now work on Ubuntu Touch</li>
+          <li>Transliteration of Music/Artist/Song name</li>
+          <li>Transliteration of navigation instructions</li>
+          <li>Fixed manual pairing procedure when device type is explicitly selected</li>
+        </ul>
+        <p>Translations</p>
+        <ul>
+          <li>Updated translations (Brazil, Czech, French, German, Norwegian Bokmål, Persian, Russian, Spanish, Swedish, Ukrainian)</li>
+          <li>Many new strings to translate (Activity kind, Alarm Settings)</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.8.0" timestamp="1760535988">
+      <description>
+        <p>Fixed compatibility with Ubuntu Touch 24.04 (separate version for noble).</p>
+        <p>Battery graph now shows the last recorded value.</p>
+        <p>Step graph scales dynamically based on maximum values.</p>
+        <p>Fixed notifications for GTS+ devices.</p>
+        <p>Fixed manual selection of device type on Ubuntu Touch.</p>
+        <p>Fixed missing Amazfit GTR3 icon in Qt resources.</p>
+        <p>Updated translations for Norwegian Bokmål, French, German, Russian, Ukrainian, and Czech.</p>
+      </description>
+    </release>
+    <release version="2.7.0" timestamp="1751655030">
+      <description>
         <p>Initial support for ZeppOS devices.  Tested with Balance and GTR3Pro</p>
         <p>Many refactorings to use a similar structure to GadgetBridge</p>
         <p>Add support for Ubuntu Touch user metrics API</p>
         <p>Pair improvments allowing user override of device type</p>
         <p>Improved error and notification handling</p>
-    </description>
-  </release>
-  <release version="2.6.0" timestamp="1743233740">
-    <description>
-      <p>Added support for the Kospet DK08 smartwatch.</p>
-      <p>Improved support Bangle.js - time with timezone, device info service and battery service are used when possible.</p>
-      <p>Automatic profile switching to silent mode when a smartwatch is connected.</p>
-      <p>Reworked pairing dialog for a better user experience.</p>
-      <p>Improved unpairing process to ensure devices are properly removed.</p>
-      <p>Added a reconnect counter to monitor connection stability.</p>
-      <p>Optimized icon rendering using a shared image source.</p>
-      <p>Improved UI responsiveness with Loader for QML elements.</p>
-      <p>Switched to CMake as the primary build system.</p>
-      <p>Updated translations for Tamil, Belarusian, Russian, Simplified Chinese, Czech, and German.</p>
-    </description>
-  </release>
-  <release version="2.5.0" timestamp="1732467548">
-    <description>
-      <p>Translation updates using Weblate (Spanish, Persian, Czech, German).</p>
-      <p>UX improvements such as enabling the SailfishOS cover page and updating the device image for AsteroidOS.</p>
-      <p>Functional enhancements for Bangle.js, including time synchronization upon connection, JSON handling, music control, and "find my phone" functionality.</p>
-      <p>Replacement of the Haskell &amp; Fox maxHR formula with the more precise Wingate formula.</p>
-      <p>Updates to translatable strings for UI labels, ensuring accurate translation of axis labels.</p>
-      <p>Improvements to number formatting for steps, default height adjustment, and general documentation updates.</p>
-      <p>Improve how infinitime, banglejs and AsteroidOS devices pair/connect</p>
-      <p>UI improvements for Kirigami and Ubuntu Touch</p>
-    </description>
-  </release>
-  <release version="2.4.0" timestamp="1724083380">
-    <description>
-      <p>Fix Sports page not displaying routes</p>
-      <p>Add missing mapbox components for Ubuntu Touch</p>
-    </description>
-  </release>
+      </description>
+    </release>
+    <release version="2.6.0" timestamp="1743233740">
+      <description>
+        <p>Added support for the Kospet DK08 smartwatch.</p>
+        <p>Improved support Bangle.js - time with timezone, device info service and battery service are used when possible.</p>
+        <p>Automatic profile switching to silent mode when a smartwatch is connected.</p>
+        <p>Reworked pairing dialog for a better user experience.</p>
+        <p>Improved unpairing process to ensure devices are properly removed.</p>
+        <p>Added a reconnect counter to monitor connection stability.</p>
+        <p>Optimized icon rendering using a shared image source.</p>
+        <p>Improved UI responsiveness with Loader for QML elements.</p>
+        <p>Switched to CMake as the primary build system.</p>
+        <p>Updated translations for Tamil, Belarusian, Russian, Simplified Chinese, Czech, and German.</p>
+      </description>
+    </release>
+    <release version="2.5.0" timestamp="1732467548">
+      <description>
+        <p>Translation updates using Weblate (Spanish, Persian, Czech, German).</p>
+        <p>UX improvements such as enabling the SailfishOS cover page and updating the device image for AsteroidOS.</p>
+        <p>Functional enhancements for Bangle.js, including time synchronization upon connection, JSON handling, music control, and "find my phone" functionality.</p>
+        <p>Replacement of the Haskell &amp; Fox maxHR formula with the more precise Wingate formula.</p>
+        <p>Updates to translatable strings for UI labels, ensuring accurate translation of axis labels.</p>
+        <p>Improvements to number formatting for steps, default height adjustment, and general documentation updates.</p>
+        <p>Improve how infinitime, banglejs and AsteroidOS devices pair/connect</p>
+        <p>UI improvements for Kirigami and Ubuntu Touch</p>
+      </description>
+    </release>
+    <release version="2.4.0" timestamp="1724083380">
+      <description>
+        <p>Fix Sports page not displaying routes</p>
+        <p>Add missing mapbox components for Ubuntu Touch</p>
+      </description>
+    </release>
     <release version="2.3.0" timestamp="1718467463">
       <description>
         <p>Fix for Sailfish 4.6</p>
