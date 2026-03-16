@@ -114,6 +114,7 @@ bool AbstractFetchOperation::handleStartDateResponse(const QByteArray &value)
     // it's 16 on the MB7, with a 0 at the end
     if (value.length() != 15 && (value.length() != 16 && value[15] != 0x00)) {
         qDebug() << "Start date response length: " << value.length();
+        m_error = true;
         return false;
     }
 
@@ -123,6 +124,7 @@ bool AbstractFetchOperation::handleStartDateResponse(const QByteArray &value)
 
     if (expectedDataLength == 0) {
         //No data to transfer
+        m_error = true;
         return false;
     }
     // last 8 bytes are the start date
