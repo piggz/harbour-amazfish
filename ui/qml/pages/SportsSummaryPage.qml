@@ -52,9 +52,6 @@ PageListPL {
         id: listItem
 
         contentHeight: styler.themeItemSizeSmall + (styler.themePaddingMedium * 2)
-        anchors.left: parent.left
-        anchors.right: parent.right
-        width: parent.width
         onClicked: {
             var sportpage = app.pages.push(Qt.resolvedUrl("SportPage.qml"), {
                 "activityId": model.id,
