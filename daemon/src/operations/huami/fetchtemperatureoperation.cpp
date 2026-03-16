@@ -14,9 +14,9 @@ void FetchTemperatureOperation::start(QBLEService *service)
 
     m_fetcher->setNotifications(true, true);
 
-    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDate();
+    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDateLocal();
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, true);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDateLocal(), 0, true);
 
     //Send log read configuration
     QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_TEMPERATURE) + rawDate;
@@ -32,7 +32,7 @@ bool FetchTemperatureOperation::processBufferedData()
         return false;
     }
 
-    QDateTime timestamp = startDate();
+    QDateTime timestamp = startDateLocal();
     QVector<TemperatureRecord> recs;
 
     for (int i = 0; i < m_buffer.length(); i+=8) {
@@ -103,7 +103,6 @@ bool FetchTemperatureOperation::saveRecords(QVector<TemperatureRecord> recs)
     }
     tg.commit();
     lastTime = lastTime.addSecs(60);
-    lastTime.setTimeSpec(Qt::UTC);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }

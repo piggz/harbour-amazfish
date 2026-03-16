@@ -34,9 +34,9 @@ void AbstractFetchOperation::setStartDate(const QDateTime &sd)
     m_startDate = sd;
 }
 
-QDateTime AbstractFetchOperation::startDate() const
+QDateTime AbstractFetchOperation::startDateLocal() const
 {
-    return m_startDate;
+    return m_startDate.toTimeSpec(Qt::LocalTime);
 }
 
 void AbstractFetchOperation::setLastSyncKey(const QString &key)

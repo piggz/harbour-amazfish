@@ -20,9 +20,9 @@ void ActivityFetchOperation::start(QBLEService *service)
 
     m_fetcher->setNotifications(true, true);
 
-    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDate();
+    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDateLocal();
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, true);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDateLocal(), 0, true);
 
     //Send log read configuration
     QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_ACTIVTY) + rawDate;
@@ -58,7 +58,7 @@ bool ActivityFetchOperation::saveSamples()
         return false;
     }
 
-    m_sampleTime = startDate();
+    m_sampleTime = startDateLocal();
     qDebug() << Q_FUNC_INFO << "Start sample time" << m_sampleTime;
 
     auto config = AmazfishConfig::instance();
@@ -109,7 +109,6 @@ bool ActivityFetchOperation::processBufferedData()
 
     //store the successful samples
     if (saveSamples()) {
-        m_sampleTime.setTimeSpec(Qt::UTC);
         qDebug() << Q_FUNC_INFO << "Last sample time saved as " << m_sampleTime.toString() << m_sampleTime.offsetFromUtc() <<  m_sampleTime.toMSecsSinceEpoch();
 
         saveLastActivitySync(m_sampleTime.toMSecsSinceEpoch());

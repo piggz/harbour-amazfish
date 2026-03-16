@@ -25,14 +25,14 @@ void SportsSummaryOperation::start(QBLEService *service)
     setStartDate(lastActivitySync());
     m_lastPacketCounter = -1;
 
-    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDate();
+    qDebug() << Q_FUNC_INFO << ": Last sync was " << startDateLocal();
 
     if (!m_parser) {
         qDebug() << "No data parser has been set";
         return;
     }
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDateLocal(), 0, true);
     m_fetcher->setNotifications(true, true);
 
     //Send read configuration
@@ -49,7 +49,7 @@ bool SportsSummaryOperation::processBufferedData()
         return false;
     }
 
-    m_summary = m_parser->parseBinaryData(m_buffer, startDate());
+    m_summary = m_parser->parseBinaryData(m_buffer, startDateLocal());
 
     if (!m_summary.isValid()) {
         return false;

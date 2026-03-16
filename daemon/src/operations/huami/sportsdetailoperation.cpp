@@ -25,7 +25,7 @@ void SportsDetailOperation::start(QBLEService *service)
     setStartDate(m_summary.startTime());
     m_lastPacketCounter = -1;
 
-    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDate().toUTC(), 0, false);
+    QByteArray rawDate = TypeConversion::dateTimeToBytes(startDateLocal(), 0, true);
 
     m_fetcher->setNotifications(true, true);
 
@@ -88,7 +88,6 @@ bool SportsDetailOperation::processBufferedData()
 
     qDebug() << "End sport time is:" << m_summary.endTime() << m_summary.endTime().toMSecsSinceEpoch();
     QDateTime end = m_summary.endTime();
-    end.setTimeSpec(Qt::UTC);
 
     qint64 duration = end.toMSecsSinceEpoch() - m_summary.startTime().toMSecsSinceEpoch();
     int addition = 0;
