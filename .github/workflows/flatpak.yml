@@ -22,7 +22,7 @@ jobs:
       run: sudo apt-get --quiet update --yes
 
     - name: Install Flatpak and flatpak-builder
-      run: sudo apt-get --quiet install --yes flatpak flatpak-builder
+      run: sudo apt-get --quiet install --yes flatpak flatpak-builder appstream libgirepository1.0-dev gir1.2-ostree-1.0 gir1.2-appstream-1.0 libcairo2-dev desktop-file-utils
 
     - name: Add the Flathub repository
       run: sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -33,6 +33,9 @@ jobs:
     - name: Use dir instead of git tag in flatpak json
       run: |
         jq 'walk(if type == "object" and .url == "https://github.com/piggz/harbour-amazfish.git" then .type = "dir" | .path = "../harbour-amazfish" | del(.url, .branch, .commit, .tag) else . end)' ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish.json > ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish-ci.json
+
+    - name: Validate AppStream metadata
+      run: appstreamcli validate --explain "${{ github.workspace }}/harbour-amazfish/ui/harbour-amazfish-ui.appdata.xml"
 
     - name: Build development snapshot and package as Flatpak
       run: |
