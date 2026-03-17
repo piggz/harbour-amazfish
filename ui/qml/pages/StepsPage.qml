@@ -79,8 +79,4 @@ PagePL {
         updateGraphs();
         _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
     }
-
-    onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("SleepPage.qml"))
-    }
 }
