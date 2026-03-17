@@ -225,8 +225,4 @@ PagePL {
         updateGraphs();
         DaemonInterfaceInstance.requestManualHeartrate();
     }
-
-    onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("SportsSummaryPage.qml"))
-    }
 }

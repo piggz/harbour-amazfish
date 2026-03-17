@@ -102,10 +102,6 @@ PagePL {
         return hours + ":" + minutes;
     }
 
-    onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("HeartratePage.qml"))
-    }
-
     Component.onCompleted: {
         day = new Date();
         updateGraphs();

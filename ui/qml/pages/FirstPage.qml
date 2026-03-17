@@ -19,10 +19,10 @@ PagePL {
     }
 
     pageMenu: PageMenuPL {
-//        PageMenuItemPL {
-//            text: qsTr("Test Icons")
-//            onClicked: app.pages.push(Qt.resolvedUrl("TestIconsPage.qml"))
-//        }
+        //        PageMenuItemPL {
+        //            text: qsTr("Test Icons")
+        //            onClicked: app.pages.push(Qt.resolvedUrl("TestIconsPage.qml"))
+        //        }
         PageMenuItemPL {
             text: qsTr("Pair with watch")
             onClicked: {
@@ -71,11 +71,13 @@ PagePL {
         }
     }
 
+
     Column {
         id: column
         spacing: styler.themePaddingLarge
-        anchors.top: parent.top
-        width: parent.width
+//        anchors.top: parent.top
+//        width: parent.width
+//        height: childrenRect.height
         anchors.margins: styler.themePaddingMedium
 
         RowLayout {
@@ -167,6 +169,176 @@ PagePL {
         }
 
         SectionHeaderPL {
+        }
+
+        GridLayout {
+            id: pageGrid
+            columns: 3
+            width: parent.width
+            height: childrenRect.height
+
+            property double colMulti: pageGrid.width / pageGrid.columns
+            property double rowMulti: pageGrid.height / pageGrid.rows
+            function prefWidth(item){
+                return colMulti * item.Layout.columnSpan
+            }
+            function prefHeight(item){
+                return rowMulti * item.Layout.rowSpan
+            }
+
+            Tile {
+                text: "Steps"
+                Layout.rowSpan: 2
+                Layout.columnSpan: 2
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefHeight(this)
+
+                contentItem: PercentCircle {
+                    id: stpsCircle
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    size: parent.width - styler.themeHorizontalPageMargin * 4
+                    percent: _InfoSteps ? _InfoSteps / AmazfishConfig.profileFitnessGoal : 0.06
+                    widthRatio: 0.08
+
+                    Item {
+                        anchors.centerIn: parent
+                        height: lblSteps.height + lblGoal.height + styler.paddingSmall
+                        width: Math.max(lblSteps.width, lblGoal.width)
+
+                        LabelPL {
+                            id: lblSteps
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                                bottom: centerItem.top
+                            }
+                            color: styler.themeHighlightColor
+                            font.pixelSize: styler.themeFontSizeExtraLarge
+                            verticalAlignment: Text.AlignVCenter
+                            text: _InfoSteps.toLocaleString()
+                        }
+
+                        Item {
+                            id: centerItem
+                            width: 1
+                            height: 1
+                            anchors.centerIn: parent
+                        }
+
+                        LabelPL {
+                            id: lblGoal
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                                top: centerItem.bottom
+                                topMargin: styler.themePaddingSmall
+                            }
+                            color: styler.themeSecondaryHighlightColor
+                            font.pixelSize: styler.themeFontSizeLarge
+                            verticalAlignment: Text.AlignVCenter
+                            text: AmazfishConfig.profileFitnessGoal.toLocaleString()
+                        }
+                    }
+                    Component.onCompleted: {
+                        if (_connected) {
+                            _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
+                        }
+                    }
+                }
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("StepsPage.qml"))
+                }
+            }
+
+            Tile {
+                text: "Sleep"
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
+
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("SleepPage.qml"))
+                }
+            }
+
+            Tile {
+                text: "Heartrate"
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
+
+                contentItem: Image {
+                    id: imgHeartrate
+                    source: "../custom-icons/icon-m-heartrate.png"
+                    width: parent.width
+                    height: width
+                }
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("HeartratePage.qml"))
+                }
+            }
+
+            Tile {
+                text: "PAI"
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
+
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("PaiDataPage.qml"))
+                }
+            }
+
+            Tile {
+                text: "Spo2"
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
+
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("Spo2DataPage.qml"))
+                }
+            }
+
+            Tile {
+                text: "Sports"
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
+                contentItem: Image {
+                    id: imgSports
+                    source: "../activity-icons/icon-m-running.png"
+                    anchors.fill: parent
+                }
+
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("SportsSummaryPage.qml"))
+                }
+            }
+
+            Tile {
+                text: "Data"
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
+
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("AnalysisPage.qml"))
+                }
+            }
+
+            Tile {
+                text: "Battery"
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
+
+                contentItem: Image {
+                    source: "../custom-icons/icon-m-battery.png"
+                    width: parent.width
+                    height: width
+                }
+
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("BatteryPage.qml"))
+                }
+
+            }
+        }
+
+        /*
+        SectionHeaderPL {
             text: qsTr("Steps")
             visible: supportsFeature(Amazfish.FEATURE_STEPS)
         }
@@ -182,57 +354,7 @@ PagePL {
             visible: supportsFeature(Amazfish.FEATURE_STEPS)
         }
 
-        PercentCircle {
-            id: stpsCircle
-            visible: supportsFeature(Amazfish.FEATURE_STEPS)
-            anchors.horizontalCenter: parent.horizontalCenter
-            size: parent.width - styler.themeHorizontalPageMargin * 4
-            percent: _InfoSteps ? _InfoSteps / AmazfishConfig.profileFitnessGoal : 0.06
-            widthRatio: 0.08
 
-            Item {
-                anchors.centerIn: parent
-                height: lblSteps.height + lblGoal.height + styler.paddingSmall
-                width: Math.max(lblSteps.width, lblGoal.width)
-
-                LabelPL {
-                    id: lblSteps
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        bottom: centerItem.top
-                    }
-                    color: styler.themeHighlightColor
-                    font.pixelSize: styler.themeFontSizeExtraLarge
-                    verticalAlignment: Text.AlignVCenter
-                    text: _InfoSteps.toLocaleString()
-                }
-
-                Item {
-                    id: centerItem
-                    width: 1
-                    height: 1
-                    anchors.centerIn: parent
-                }
-
-                LabelPL {
-                    id: lblGoal
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        top: centerItem.bottom
-                        topMargin: styler.themePaddingSmall
-                    }
-                    color: styler.themeSecondaryHighlightColor
-                    font.pixelSize: styler.themeFontSizeLarge
-                    verticalAlignment: Text.AlignVCenter
-                    text: AmazfishConfig.profileFitnessGoal.toLocaleString()
-                }
-            }
-            Component.onCompleted: {
-                if (_connected) {
-                    _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
-                }
-            }
-        }
 
         SectionHeaderPL {
             text: qsTr("Heartrate")
@@ -279,6 +401,8 @@ PagePL {
             }
         }
 
+
+
         SectionHeaderPL {
             text: qsTr("Service")
             visible: btnSystemdEnable.visible
@@ -288,12 +412,14 @@ PagePL {
             id: btnSystemdEnable
             text: qsTr("Enable on boot")
             visible: serviceEnabledState == false && (ENABLE_SYSTEMD === "YES")
-            anchors.horizontalCenter: parent.horizontalCenter
+            //anchors.horizontalCenter: parent.horizontalCenter
 
             onClicked: {
                 systemdManager.enableService();
             }
         }
+
+        */
 
         Timer {
             id: tmrStartup
@@ -302,7 +428,6 @@ PagePL {
             interval: 500
             onTriggered: {
                 // console.log("Start timer triggered");
-                pushAttached(Qt.resolvedUrl("StepsPage.qml"))
                 if (!AmazfishConfig.profileName) {
                     app.pages.push(Qt.resolvedUrl("Settings-user.qml"))
                 }
