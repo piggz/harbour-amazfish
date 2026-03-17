@@ -14,7 +14,6 @@
   <url type="homepage">https://amazfish.github.io/</url>
   <url type="vcs-browser">https://github.com/piggz/harbour-amazfish</url>
   <url type="bugtracker">https://github.com/piggz/harbour-amazfish/issues</url>
-  <url type="donation">https://paypal.me/piggz</url>
   <url type="donation">https://liberapay.com/adampigg</url>
   <url type="translate">https://hosted.weblate.org/projects/harbour-amazfish/</url>
   <requires>
@@ -74,38 +73,16 @@
     <release version="2.9.0" timestamp="1773681177">
       <description>
         <p>Devices</p>
-        <ul>
-          <li>ZeppOS
-            <ul>
-              <li>Added PAI, HRV, Temperature, SpO2 display</li>
-              <li>Added support for BRM AGPS files</li>
-              <li>GTR2e pairing pattern added</li>
-            </ul>
-          </li>
-          <li>Bangle.js - step sync, sport summary export (GPX/TCX), alarm sync</li>
-          <li>PineTime - sunset/sunrise weather sync updated for InfiniTime 1.16 (backward compatible)</li>
-        </ul>
+        <p>ZeppOS: added PAI, HRV, Temperature, SpO2 display; added support for BRM AGPS files; GTR2e pairing pattern added.</p>
+        <p>Bangle.js: step sync, sport summary export (GPX/TCX), alarm sync.</p>
+        <p>PineTime: sunset/sunrise weather sync updated for InfiniTime 1.16 (backward compatible).</p>
         <p>User Experience</p>
-        <ul>
-          <li>FitTrackee - added support for uploading workouts to FitTrackee, a FOSS alternative to Strava</li>
-          <li>Sport Activity
-            <ul>
-              <li>Summary page reworked and cleaned up</li>
-              <li>Activity type can be edited via icon in the Detail page</li>
-              <li>Activity type is now translatable (~280 activities)</li>
-              <li>36 new icons added</li><li>Deleting an activity now uses the standard swipe gesture (Ubuntu Touch, via LomiriListItem)</li>
-            </ul>
-          </li>
-          <li>Calendar events now work on Ubuntu Touch</li>
-          <li>Transliteration of Music/Artist/Song name</li>
-          <li>Transliteration of navigation instructions</li>
-          <li>Fixed manual pairing procedure when device type is explicitly selected</li>
-        </ul>
-        <p>Translations</p>
-        <ul>
-          <li>Updated translations (Brazil, Czech, French, German, Norwegian Bokmål, Persian, Russian, Spanish, Swedish, Ukrainian)</li>
-          <li>Many new strings to translate (Activity kind, Alarm Settings)</li>
-        </ul>
+        <p>FitTrackee: added support for uploading workouts to FitTrackee, a FOSS alternative to Strava.</p>
+        <p>Sport Activity: summary page reworked and cleaned up; activity type can be edited via icon in the Detail page; activity type is now translatable (~280 activities); 36 new icons added; deleting an activity now uses the standard swipe gesture (Ubuntu Touch).</p>
+        <p>Calendar events now work on Ubuntu Touch.</p>
+        <p>Transliteration of Music/Artist/Song name and navigation instructions.</p>
+        <p>Fixed manual pairing procedure when device type is explicitly selected.</p>
+        <p>Translations: updated Brazilian Portuguese, Czech, French, German, Norwegian Bokmål, Persian, Russian, Spanish, Swedish, Ukrainian. Many new strings to translate (Activity kind, Alarm Settings).</p>
       </description>
     </release>
     <release version="2.8.0" timestamp="1760535988">
