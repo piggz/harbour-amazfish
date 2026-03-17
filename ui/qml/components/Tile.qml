@@ -19,11 +19,15 @@ Item {
 
         Item {
             id: content
-            anchors.fill: parent
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: lbl.top
             anchors.margins: 8
         }
 
         LabelPL {
+            id: lbl
             text: itm.text
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
