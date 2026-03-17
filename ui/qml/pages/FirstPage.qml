@@ -170,6 +170,8 @@ PagePL {
             columns: 3
             width: parent.width
             height: childrenRect.height
+            columnSpacing: 0
+            rowSpacing: 0
 
             property double colMulti: pageGrid.width / pageGrid.columns
             property double rowMulti: pageGrid.height / pageGrid.rows
