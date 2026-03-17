@@ -264,6 +264,7 @@ PagePL {
                     source: "../custom-icons/icon-m-heartrate.png"
                     width: parent.width
                     height: width
+                    fillMode: Image.PreserveAspectFit
                 }
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("HeartratePage.qml"))
@@ -298,6 +299,7 @@ PagePL {
                     id: imgSports
                     source: "../activity-icons/icon-m-running.png"
                     anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
                 }
 
                 onClicked: {
@@ -324,6 +326,7 @@ PagePL {
                     source: "../custom-icons/icon-m-battery.png"
                     width: parent.width
                     height: width
+                    fillMode: Image.PreserveAspectFit
                 }
 
                 onClicked: {
