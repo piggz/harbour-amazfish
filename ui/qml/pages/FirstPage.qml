@@ -35,28 +35,12 @@ PagePL {
                 }
             }
         }
-        PageMenuItemPL {
-            text: qsTr("Install File")
-            onClicked: app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
-        }
+
         PageMenuItemPL {
             text: qsTr("Settings")
             onClicked: app.pages.push(Qt.resolvedUrl("Settings-menu.qml"))
         }
-        PageMenuItemPL {
-            text: qsTr("Data Graphs")
-            onClicked: app.pages.push(Qt.resolvedUrl("AnalysisPage.qml"))
-        }
-        PageMenuItemPL {
-            text: qsTr("PAI")
-            onClicked: app.pages.push(Qt.resolvedUrl("PaiDataPage.qml"))
-            visible: _authenticated ? DaemonInterfaceInstance.supportedDataTypes() & Amazfish.TYPE_PAI : false
-        }
-        PageMenuItemPL {
-            text: qsTr("Blood Oxygen")
-            onClicked: app.pages.push(Qt.resolvedUrl("Spo2DataPage.qml"))
-            visible: _authenticated ? DaemonInterfaceInstance.supportedDataTypes() & Amazfish.TYPE_SPO2 : false
-        }
+
         PageMenuItemPL {
             visible: AmazfishConfig.pairedAddress
             enabled: !_connecting
@@ -67,6 +51,16 @@ PagePL {
                 } else {
                     DaemonInterfaceInstance.disconnect();
                 }
+            }
+        }
+
+        PageMenuItemPL {
+            id: btnSystemdEnable
+            text: qsTr("Enable service on boot")
+            visible: serviceEnabledState == false && (ENABLE_SYSTEMD === "YES")
+
+            onClicked: {
+                systemdManager.enableService();
             }
         }
     }
@@ -333,33 +327,22 @@ PagePL {
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("BatteryPage.qml"))
                 }
+            }
+
+            Tile {
+                text: "Install File"
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
+
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
+                }
 
             }
         }
 
         /*
-        SectionHeaderPL {
-            text: qsTr("Steps")
-            visible: supportsFeature(Amazfish.FEATURE_STEPS)
-        }
 
-        // steps
-        IconPL {
-            id: imgSteps
-            anchors.left: parent.left
-            anchors.leftMargin: styler.themePaddingLarge
-            iconName: styler.iconSteps
-            height: styler.themeIconSizeMedium
-            width: height
-            visible: supportsFeature(Amazfish.FEATURE_STEPS)
-        }
-
-
-
-        SectionHeaderPL {
-            text: qsTr("Heartrate")
-            visible: supportsFeature(Amazfish.FEATURE_HRM)
-        }
 
         //Heartrate
         RowLayout {
@@ -398,24 +381,6 @@ PagePL {
                 onClicked: {
                     DaemonInterfaceInstance.requestManualHeartrate();
                 }
-            }
-        }
-
-
-
-        SectionHeaderPL {
-            text: qsTr("Service")
-            visible: btnSystemdEnable.visible
-        }
-
-        ButtonPL {
-            id: btnSystemdEnable
-            text: qsTr("Enable on boot")
-            visible: serviceEnabledState == false && (ENABLE_SYSTEMD === "YES")
-            //anchors.horizontalCenter: parent.horizontalCenter
-
-            onClicked: {
-                systemdManager.enableService();
             }
         }
 
