@@ -573,12 +573,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         }
     } else if (t == "actTrksList") {
         QJsonArray trksList = json.value("list").toArray();
-
-        for (const QJsonValue &value : trksList) {
-            QString listItem = value.toString();
-            fetchActivityRec(listItem);
-            break;
-        }
+        fetchActivityRec(trksList.first().toString());
     } else if (t == "actTrk") {
         // t:"actTrk", log:"YYYYMMDDx" (e.g. 20240101a), lines:"four lines of the log"/"erase", cnt: "the current packet count"
         m_synced_activity_id = json.value("log").toString();
