@@ -15,7 +15,6 @@ PagePL {
         AmazfishConfig.pairedAddress = "";
         AmazfishConfig.pairedName = "";
         AmazfishConfig.pairedType = "";
-
     }
 
     pageMenu: PageMenuPL {
@@ -65,19 +64,16 @@ PagePL {
         }
     }
 
-
-    Column {
+    ColumnLayout {
         id: column
         spacing: styler.themePaddingLarge
-//        anchors.top: parent.top
-//        width: parent.width
-//        height: childrenRect.height
-        anchors.margins: styler.themePaddingMedium
+        width: page.availableWidth
+        anchors.margins: styler.themePaddingSmall
 
         RowLayout {
             id: rowUpdateOperation
             height: styler.themeItemSizeSmall
-            width: parent.width
+            Layout.fillWidth: true
             visible: DaemonInterfaceInstance.operationRunning
             LabelPL {
                 id: lblLastMessage
@@ -109,10 +105,7 @@ PagePL {
 
         RowLayout {
             height: styler.themeItemSizeSmall
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: styler.themePaddingLarge
-            anchors.rightMargin: styler.themePaddingLarge
+            Layout.fillWidth: true
 
             LabelPL {
                 id: pairedNameLabel
@@ -162,14 +155,12 @@ PagePL {
             }
         }
 
-        SectionHeaderPL {
-        }
-
         GridLayout {
             id: pageGrid
             columns: 3
+            Layout.fillWidth: true
             width: parent.width
-            height: childrenRect.height
+
             columnSpacing: 0
             rowSpacing: 0
 
@@ -187,7 +178,7 @@ PagePL {
                 Layout.rowSpan: 2
                 Layout.columnSpan: 2
                 Layout.preferredWidth: pageGrid.prefWidth(this)
-                Layout.preferredHeight: pageGrid.prefHeight(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
 
                 contentItem: PercentCircle {
                     id: stpsCircle
@@ -239,6 +230,7 @@ PagePL {
                         }
                     }
                 }
+
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("StepsPage.qml"))
                 }
@@ -272,9 +264,27 @@ PagePL {
             }
 
             Tile {
+                text: "Sports"
+                Layout.preferredWidth: pageGrid.prefWidth(this)
+                Layout.preferredHeight: pageGrid.prefWidth(this)
+                contentItem: Image {
+                    id: imgSports
+                    source: "../activity-icons/icon-m-running.png"
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    app.pages.push(Qt.resolvedUrl("SportsSummaryPage.qml"))
+                }
+            }
+
+            Tile {
                 text: "PAI"
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
+                Layout.rowSpan: 2
+                Layout.columnSpan: 2
 
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("PaiDataPage.qml"))
@@ -288,22 +298,6 @@ PagePL {
 
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("Spo2DataPage.qml"))
-                }
-            }
-
-            Tile {
-                text: "Sports"
-                Layout.preferredWidth: pageGrid.prefWidth(this)
-                Layout.preferredHeight: pageGrid.prefWidth(this)
-                contentItem: Image {
-                    id: imgSports
-                    source: "../activity-icons/icon-m-running.png"
-                    anchors.fill: parent
-                    fillMode: Image.PreserveAspectFit
-                }
-
-                onClicked: {
-                    app.pages.push(Qt.resolvedUrl("SportsSummaryPage.qml"))
                 }
             }
 
