@@ -17,10 +17,7 @@ DialogListPL {
 
     delegate: ListItemPL {
         contentHeight: styler.themeItemSizeSmall + (styler.themePaddingMedium * 2)
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-        width: parent.width
+        width: dialog.width
         highlighted: currentIndex === index
 
         Loader {
