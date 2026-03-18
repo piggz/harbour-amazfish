@@ -540,6 +540,8 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             QDateTime lastItemDateTime = m_samples.last().datetime(); // grab timestamp before m_samples.clear()
             if (saveActivitySamples()) {
                 AmazfishConfig::instance()->setValue("device/lastactivitysyncmillis", lastItemDateTime.toMSecsSinceEpoch());
+                m_steps = getStepsFromDb();
+                emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
             }
         }
     } else if (t == "act") {
@@ -653,6 +655,13 @@ void BangleJSDevice::networkReply()
 
     if (reply->error() != QNetworkReply::NoError) {
         qDebug() << "Error:" << reply->errorString();
+
+        QJsonObject p;
+        p.insert("t", "http");
+        p.insert("err", reply->errorString());
+
+        uart->txJson(p);
+
     } else {
 
         QByteArray data = reply->readAll();
