@@ -242,6 +242,13 @@ PagePL {
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
+                contentItem: Image {
+                    id: imgHeartrate
+                    source: "../page-icons/icon-page-sleep.png"
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                }
+
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("SleepPage.qml"))
                 }
@@ -253,10 +260,8 @@ PagePL {
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
                 contentItem: Image {
-                    id: imgHeartrate
-                    source: "../custom-icons/icon-m-heartrate.png"
-                    width: parent.width
-                    height: width
+                    source: "../page-icons/icon-page-heartrate.png"
+                    anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
                 }
                 onClicked: {
@@ -268,9 +273,9 @@ PagePL {
                 text: "Sports"
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
+
                 contentItem: Image {
-                    id: imgSports
-                    source: "../activity-icons/icon-m-running.png"
+                    source: "../page-icons/icon-page-sport.png"
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
                 }
@@ -297,6 +302,12 @@ PagePL {
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
+                contentItem: Image {
+                    source: "../page-icons/icon-page-spo2.png"
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                }
+
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("Spo2DataPage.qml"))
                 }
@@ -306,6 +317,12 @@ PagePL {
                 text: "Data"
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
+
+                contentItem: Image {
+                    source: "../page-icons/icon-page-data.png"
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                }
 
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("AnalysisPage.qml"))
@@ -318,9 +335,8 @@ PagePL {
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
                 contentItem: Image {
-                    source: "../custom-icons/icon-m-battery.png"
-                    width: parent.width
-                    height: width
+                    source: "../page-icons/icon-page-battery.png"
+                    anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
                 }
 
@@ -333,6 +349,12 @@ PagePL {
                 text: "Install File"
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
+
+                contentItem: Image {
+                    source: "../page-icons/icon-page-install.png"
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                }
 
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
