@@ -67,7 +67,7 @@ PagePL {
     ColumnLayout {
         id: column
         spacing: styler.themePaddingLarge
-        width: page.availableWidth
+        width: page.width
         anchors.margins: styler.themePaddingSmall
 
         RowLayout {
@@ -336,7 +336,6 @@ PagePL {
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
                 }
-
             }
         }
 
