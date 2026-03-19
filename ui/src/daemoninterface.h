@@ -36,7 +36,6 @@ public:
     Q_INVOKABLE int supportedFeatures();
     Q_INVOKABLE int supportedDataTypes();
 
-    Q_INVOKABLE DataSource *dataSource();
     KDbConnection *dbConnection();
 
     //Functions provided by services
@@ -81,7 +80,6 @@ private slots:
 private:
     QDBusInterface *iface = nullptr;
     QDBusServiceWatcher *m_serviceWatcher = nullptr;
-    DataSource m_dataSource;
     bool m_pairing = false;
 
     //Database

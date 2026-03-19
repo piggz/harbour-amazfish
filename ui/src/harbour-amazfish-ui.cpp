@@ -89,9 +89,12 @@ int main(int argc, char *argv[])
     SportsMetaModel sportsMetaModel;
     PaiModel paiModel;
     DaemonInterface daemonInterface;
+    DataSource dataSource;
+
     sportsDataModel.setConnection(daemonInterface.dbConnection());
     sportsMetaModel.setConnection(daemonInterface.dbConnection());
     paiModel.setConnection(daemonInterface.dbConnection());
+    dataSource.setConnection(daemonInterface.dbConnection());
 
     qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
     qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");
@@ -116,6 +119,7 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
     view->rootContext()->setContextProperty("SportsMeta", &sportsMetaModel);
     view->rootContext()->setContextProperty("PaiModel", &paiModel);
+    view->rootContext()->setContextProperty("DataSource", &dataSource);
 
     view->rootContext()->setContextProperty("STRAVA_CLIENT_SECRET", encryptDecrypt("}{s{--z*.x{y{ss///x/x){*xz{(|yy/{syr-/})"));
     view->rootContext()->setContextProperty("STRAVA_CLIENT_ID", "13707");

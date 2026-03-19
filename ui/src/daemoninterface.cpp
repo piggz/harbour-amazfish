@@ -17,7 +17,6 @@ DaemonInterface::DaemonInterface(QObject *parent)
 
     connectDaemon();
     connectDatabase();
-    m_dataSource.setConnection(dbConnection());
 }
 
 DaemonInterface::~DaemonInterface()
@@ -156,11 +155,6 @@ int DaemonInterface::supportedDataTypes()
     }
     QDBusReply<int> reply = iface->call(QStringLiteral("supportedDataTypes"));
     return reply;
-}
-
-DataSource *DaemonInterface::dataSource()
-{
-    return &m_dataSource;
 }
 
 KDbConnection *DaemonInterface::dbConnection()

@@ -3,7 +3,6 @@ import "."
 
 GraphData {
     id: graphData
-    property QtObject dataSource: DaemonInterfaceInstance.dataSource()
 
     property int type: 0
     property alias graphType: graphData.graphType
@@ -12,7 +11,7 @@ GraphData {
     property alias lastZ: graphData.lastZ
 
     function updateGraph(day) {
-        var dataPoints = dataSource.data(type, day);
+        var dataPoints = DataSource.data(type, day);
         setPoints(dataPoints);
     }
 }
