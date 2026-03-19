@@ -74,6 +74,7 @@ PagePL {
             id: rowUpdateOperation
             height: styler.themeItemSizeSmall
             Layout.fillWidth: true
+            Layout.preferredWidth: parent.width
             visible: DaemonInterfaceInstance.operationRunning
             LabelPL {
                 id: lblLastMessage
@@ -81,8 +82,7 @@ PagePL {
                 color: styler.themeSecondaryHighlightColor
                 font.pixelSize: styler.themeFontSizeMedium
                 truncMode: truncModes.fade
-                Layout.fillWidth: true
-                width: parent.width *0.6
+                Layout.preferredWidth: parent.width * 0.7
             }
             LabelPL {
                 id: lblProgress
@@ -91,7 +91,8 @@ PagePL {
                 horizontalAlignment: Text.AlignLeft
                 color: styler.themeSecondaryHighlightColor
                 font.pixelSize: styler.themeFontSizeMedium
-                text: _percentText
+                text: _percentText + "100%"
+                Layout.preferredWidth: parent.height * 2
             }
 
             BusyIndicatorSmallPL {
@@ -100,6 +101,7 @@ PagePL {
                 Layout.alignment: Qt.AlignRight
                 anchors.rightMargin: 2
                 height: parent.height - 4
+                Layout.preferredWidth: parent.height
             }
         }
 
@@ -114,7 +116,6 @@ PagePL {
                 font.pixelSize: styler.themeFontSizeLarge
                 truncMode: truncModes.fade
                 Layout.fillWidth: true
-
             }
 
             IconPL {

@@ -29,7 +29,7 @@ Label {
         return Text.ElideNone;
     }
     font.pixelSize: styler.themeFontSizeMedium
-    wrapMode: Text.WordWrap
+    wrapMode: Text.NoWrap
 
     property int truncMode: truncModes.none
 }
