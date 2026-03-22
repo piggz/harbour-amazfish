@@ -170,6 +170,11 @@ void AbstractDevice::rebootWatch()
 
 }
 
+void AbstractDevice::syncCalendar(QList<watchfish::CalendarEvent> &eventlist) {
+    Q_UNUSED(eventlist)
+}
+
+
 //!
 //! \brief AbstractDevice::sendEventReminder
 //! \param id Optional identifer if required by the device
