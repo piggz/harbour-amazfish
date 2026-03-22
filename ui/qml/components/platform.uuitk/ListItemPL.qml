@@ -7,4 +7,8 @@ ListItem {
 
     height: visible ? implicitHeight : 0
     leadingActions: menu ? menu : null
+
+    property bool emphasized: false
+    color: emphasized ? theme.palette.highlighted.background : "transparent"
+
 }

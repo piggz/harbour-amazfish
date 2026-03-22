@@ -36,6 +36,7 @@ Item {
     property real contentHeight
     property bool highlighted: false
     property var  menu
+    property bool emphasized: false
 
     signal clicked
 
@@ -44,6 +45,7 @@ Item {
 
         height: contentHeight
         width: parent.width
+        color: emphasized ? theme.palette.selected.background : "transparent"
 
         MouseArea {
             anchors.fill: parent
