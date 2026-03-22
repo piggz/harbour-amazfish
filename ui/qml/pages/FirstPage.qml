@@ -353,6 +353,7 @@ PagePL {
 
             Tile {
                 text: qsTr("Install File")
+                visible: _authenticated && supportsFeature(Amazfish.FEATURE_FILE_INSTALL)
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
