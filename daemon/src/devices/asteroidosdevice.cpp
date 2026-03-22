@@ -81,26 +81,6 @@ void AsteroidOSDevice::pair()
 }
 
 
-/*
-//Firmware handling
-AbstractFirmwareInfo * AsteroidOSDevice::firmwareInfo(const QByteArray &bytes) = 0; //Caller owns the pointer and should delete it
-void AsteroidOSDevice::prepareFirmwareDownload(const AbstractFirmwareInfo* info);
-void AsteroidOSDevice::startDownload();
-
-void AsteroidOSDevice::downloadSportsData();
-void AsteroidOSDevice::refreshInformation();
-QString AsteroidOSDevice::information(Info i) const;
-void AsteroidOSDevice::applyDeviceSetting(Settings s);
-void AsteroidOSDevice::rebootWatch();
-void AsteroidOSDevice::sendEventReminder(int id, const QDateTime &dt, const QString &event);
-void AsteroidOSDevice::enableFeature(AbstractDevice::Feature feature);
-void AsteroidOSDevice::setMusicStatus(bool playing, const QString &title, const QString &artist, const QString &album, int duration = 0, int position = 0);
-void AsteroidOSDevice::navigationRunning(bool running);
-void AsteroidOSDevice::navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress);
-QStringList AsteroidOSDevice::supportedDisplayItems() const;
-*/
-
-
 void AsteroidOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
     qDebug() << Q_FUNC_INFO << interface << map << list;
