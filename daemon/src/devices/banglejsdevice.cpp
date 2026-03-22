@@ -618,6 +618,9 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         } else {
             if (m_activityRecords.count() > 0) {
                 saveSportData();
+            } else {
+                // empty
+                AmazfishConfig::instance()->setValue("device/lastsportsyncid", m_synced_activity_id);
             }
         }
     } else if (t == "http") {
