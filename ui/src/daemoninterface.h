@@ -60,6 +60,10 @@ public:
     Q_INVOKABLE QStringList supportedDisplayItems();
     Q_INVOKABLE void immediateAlert(int level);
 
+    Q_INVOKABLE void agentPasskeyResponse(const uint response);
+    Q_INVOKABLE void agentPinCodeResponse(const QString& response);
+    Q_INVOKABLE void agentConfirmationResponse(const bool response);
+
 public slots:
     void pair(const QString &name, const QString &deviceType, const QString &address);
 
@@ -74,6 +78,11 @@ signals:
     void informationChanged(int infoKey, const QString& infoValue);
     void connectionStateChanged();
     void connectionStateChangedCountChanged();
+
+    void requestPasskey(const QString& deviceName, const QString& devicePath);
+    void requestPinCode(const QString& deviceName, const QString& devicePath);
+    void requestConfirmation(const QString& deviceName, const QString& devicePath, uint passkey);
+
 
 private slots:
     void changeConnectionState();
@@ -99,7 +108,6 @@ private:
     int m_connectionStateChangedCount;
 
     bool operationRunning();
-
 };
 
 #endif // DAEMONINTERFACE_H
