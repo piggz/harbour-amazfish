@@ -91,7 +91,7 @@ PagePL {
                 horizontalAlignment: Text.AlignLeft
                 color: styler.themeSecondaryHighlightColor
                 font.pixelSize: styler.themeFontSizeMedium
-                text: _percentText + "100%"
+                text: _percentText
                 Layout.preferredWidth: parent.height * 2
             }
 
@@ -138,21 +138,6 @@ PagePL {
                     running: visible
                     anchors.centerIn: parent
                 }
-            }
-
-            IconPL {
-                id: btryImage
-                iconName: styler.iconBattery
-                iconHeight: styler.themeIconSizeMedium
-                visible: _authenticated
-            }
-
-            LabelPL {
-                id: btryPercent
-                visible: _authenticated
-                font.pixelSize: styler.themeFontSizeMedium
-                width: styler.themeIconSizeMedium
-                text: qsTr("%1%").arg(_InfoBatteryPercent)
             }
         }
 
@@ -201,7 +186,7 @@ PagePL {
                                 bottom: centerItem.top
                             }
                             color: styler.themeHighlightColor
-                            font.pixelSize: styler.themeFontSizeExtraLarge
+                            font.pixelSize: styler.themeFontSizeHuge
                             verticalAlignment: Text.AlignVCenter
                             text: _InfoSteps.toLocaleString()
                         }
@@ -220,8 +205,8 @@ PagePL {
                                 top: centerItem.bottom
                                 topMargin: styler.themePaddingSmall
                             }
-                            color: styler.themeSecondaryHighlightColor
-                            font.pixelSize: styler.themeFontSizeLarge
+                            color: styler.blockBg
+                            font.pixelSize: styler.themeFontSizeExtraLarge
                             verticalAlignment: Text.AlignVCenter
                             text: AmazfishConfig.profileFitnessGoal.toLocaleString()
                         }
@@ -266,6 +251,13 @@ PagePL {
                     source: "../page-icons/icon-page-heartrate.png"
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
+                    Text {
+                        text: qsTr("%1 bpm").arg(_InfoHeartrate)
+                        anchors.top: parent.top
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.pixelSize: styler.themeFontSizeLarge
+                        color: styler.blockBg
+                    }
                 }
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("HeartratePage.qml"))
@@ -344,6 +336,13 @@ PagePL {
                     source: "../page-icons/icon-page-battery.png"
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
+                    Text {
+                        text: qsTr("%1%").arg(_InfoBatteryPercent)
+                        anchors.top: parent.top
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.pixelSize: styler.themeFontSizeLarge
+                        color: styler.blockBg
+                    }
                 }
 
                 onClicked: {
