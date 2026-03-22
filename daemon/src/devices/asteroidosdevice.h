@@ -27,12 +27,14 @@ private:
     void parseServices();
     void initialise();
 
-    virtual void pair() override;
+    void pair() override;
 
     Q_SLOT void authenticated(bool ready);
 
-    virtual void refreshInformation() override;
-    virtual void sendWeather(CurrentWeather *weather) override;
+    void refreshInformation() override;
+    QString information(Info i) const override;
+
+    void sendWeather(CurrentWeather *weather) override;
 
     Q_SLOT void serviceEvent(const QString &characteristic, uint8_t event, uint8_t data);
 
@@ -41,31 +43,6 @@ private:
 
     int m_prevVolume = 50;
 
-
-/*
-
-    virtual void connectToDevice() override;
-    virtual void disconnectFromDevice() override;
-    virtual QString connectionState() const;
-
-    QString deviceName() const;
-    virtual void abortOperations();
-
-    //Firmware handling
-    virtual AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes) = 0; //Caller owns the pointer and should delete it
-    virtual void prepareFirmwareDownload(const AbstractFirmwareInfo* info);
-    virtual void startDownload();
-
-    virtual void downloadSportsData();
-    virtual QString information(Info i) const;
-    virtual void applyDeviceSetting(Settings s);
-    virtual void rebootWatch();
-    virtual void sendEventReminder(int id, const QDateTime &dt, const QString &event);
-    virtual void enableFeature(AbstractDevice::Feature feature);
-    virtual void navigationRunning(bool running);
-    virtual void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress);
-    virtual QStringList supportedDisplayItems() const;
-*/
 };
 
 #endif // ASTEROID_OS_DEVICE__H
