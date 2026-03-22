@@ -175,7 +175,7 @@ PagePL {
             }
 
             Tile {
-                text: "Steps"
+                text: qsTr("Steps")
                 Layout.rowSpan: 2
                 Layout.columnSpan: 2
                 Layout.preferredWidth: pageGrid.prefWidth(this)
@@ -238,7 +238,7 @@ PagePL {
             }
 
             Tile {
-                text: "Sleep"
+                text: qsTr("Sleep")
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
@@ -255,7 +255,7 @@ PagePL {
             }
 
             Tile {
-                text: "Heartrate"
+                text: qsTr("Heartrate")
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
@@ -270,7 +270,7 @@ PagePL {
             }
 
             Tile {
-                text: "Sports"
+                text: qsTr("Sports")
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
@@ -286,7 +286,7 @@ PagePL {
             }
 
             Tile {
-                text: "PAI"
+                text: qsTr("PAI")
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
                 Layout.rowSpan: 2
@@ -298,7 +298,7 @@ PagePL {
             }
 
             Tile {
-                text: "Spo2"
+                text: qsTr("Spo2")
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
@@ -314,7 +314,7 @@ PagePL {
             }
 
             Tile {
-                text: "Data"
+                text: qsTr("Data")
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
@@ -330,7 +330,7 @@ PagePL {
             }
 
             Tile {
-                text: "Battery"
+                text: qsTr("Battery")
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
@@ -346,7 +346,7 @@ PagePL {
             }
 
             Tile {
-                text: "Install File"
+                text: qsTr("Install File")
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
