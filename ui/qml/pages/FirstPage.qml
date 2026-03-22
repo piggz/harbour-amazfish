@@ -176,6 +176,7 @@ PagePL {
 
             Tile {
                 text: qsTr("Steps")
+                visible:  _authenticated && supportsFeature(Amazfish.FEATURE_STEPS)
                 Layout.rowSpan: 2
                 Layout.columnSpan: 2
                 Layout.preferredWidth: pageGrid.prefWidth(this)
@@ -239,6 +240,7 @@ PagePL {
 
             Tile {
                 text: qsTr("Sleep")
+                visible:  _authenticated && supportsData(Amazfish.TYPE_SLEEP)
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
@@ -256,6 +258,7 @@ PagePL {
 
             Tile {
                 text: qsTr("Heartrate")
+                visible:  _authenticated && supportsData(Amazfish.TYPE_HEART_RATE)
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
@@ -271,6 +274,7 @@ PagePL {
 
             Tile {
                 text: qsTr("Sports")
+                visible:  _authenticated && supportsFeature(Amazfish.FEATURE_ACTIVITY)
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 
@@ -287,6 +291,7 @@ PagePL {
 
             Tile {
                 text: qsTr("PAI")
+                visible:  _authenticated && supportsData(Amazfish.TYPE_PAI)
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
                 Layout.rowSpan: 2
@@ -299,6 +304,7 @@ PagePL {
 
             Tile {
                 text: qsTr("Spo2")
+                visible: _authenticated && supportsData(Amazfish.TYPE_SPO2)
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
 

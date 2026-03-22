@@ -226,6 +226,10 @@ ApplicationWindowPL
         return (supportedFeatures & feature) === feature;
     }
 
+    function supportsData(data) {
+        return _authenticated ? DaemonInterfaceInstance.supportedDataTypes() & data : false
+    }
+
     function _refreshInformation() {
         if (!_authenticated) {
             return
