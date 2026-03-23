@@ -250,10 +250,12 @@ PagePL {
                 contentItem: Image {
                     source: "../page-icons/icon-page-heartrate.png"
                     anchors.fill: parent
+                    anchors.topMargin: styler.themeFontSizeLarge
                     fillMode: Image.PreserveAspectFit
                     Text {
                         text: qsTr("%1 bpm").arg(_InfoHeartrate)
                         anchors.top: parent.top
+                        anchors.topMargin: -styler.themeFontSizeLarge
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.pixelSize: styler.themeFontSizeLarge
                         color: styler.blockBg
@@ -335,10 +337,12 @@ PagePL {
                 contentItem: Image {
                     source: "../page-icons/icon-page-battery.png"
                     anchors.fill: parent
+                    anchors.topMargin: styler.themeFontSizeLarge
                     fillMode: Image.PreserveAspectFit
                     Text {
                         text: qsTr("%1%").arg(_InfoBatteryPercent)
                         anchors.top: parent.top
+                        anchors.topMargin: -styler.themeFontSizeLarge
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.pixelSize: styler.themeFontSizeLarge
                         color: styler.blockBg
