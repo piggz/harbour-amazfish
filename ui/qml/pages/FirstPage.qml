@@ -337,34 +337,7 @@ PagePL {
                         }
                     }
                     Component.onCompleted: {
-                        updateData();
-                    }
-
-
-                    function updateData() {
-                        PaiModel.update();
-
-                        var maybeToday = PaiModel.get(PaiModel.rowCount() - 1);
-                        const pai_total = maybeToday.pai_total.toFixed(1);
-                        lblPAITotal.text = pai_total
-                        paiCircle.percent = pai_total / 200 //200 Is a pretty high target, usually > 100 is good
-
-                        if (pai_total < 50 ) {
-                            paiCircle.gradientColor = "orange"
-                        } else if (pai_total < 100 ) {
-                            paiCircle.gradientColor = "lightblue"
-                        } else {
-                            paiCircle.gradientColor = "lightgreen"
-                        }
-
-                        var now = new Date();
-                        now.setHours(0,0,0,0);
-
-                        if (maybeToday.pai_day.getTime() === now.getTime()) {
-                            lblPAIToday.text = PaiModel.get(PaiModel.rowCount() - 1).pai_total_today.toFixed(1)
-                        } else {
-                            lblPAIToday.text = 0.0
-                        }
+                        updatePAI();
                     }
                 }
             }
@@ -506,6 +479,7 @@ PagePL {
 
     onPageStatusActive: {
         tmrStartup.start();
+        updatePAI();
     }
 
     Component.onCompleted: {
@@ -517,5 +491,32 @@ PagePL {
 
     function start() {
         app.rootPage = page;
+    }
+
+    function updatePAI() {
+        console.log("Refreshing PAI");
+        PaiModel.update();
+
+        var maybeToday = PaiModel.get(PaiModel.rowCount() - 1);
+        const pai_total = maybeToday.pai_total.toFixed(1);
+        lblPAITotal.text = pai_total
+        paiCircle.percent = pai_total / 200 //200 Is a pretty high target, usually > 100 is good
+
+        if (pai_total < 50 ) {
+            paiCircle.gradientColor = "orange"
+        } else if (pai_total < 100 ) {
+            paiCircle.gradientColor = "lightblue"
+        } else {
+            paiCircle.gradientColor = "lightgreen"
+        }
+
+        var now = new Date();
+        now.setHours(0,0,0,0);
+
+        if (maybeToday.pai_day.getTime() === now.getTime()) {
+            lblPAIToday.text = PaiModel.get(PaiModel.rowCount() - 1).pai_total_today.toFixed(1)
+        } else {
+            lblPAIToday.text = 0.0
+        }
     }
 }
