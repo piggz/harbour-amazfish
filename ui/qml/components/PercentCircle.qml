@@ -6,6 +6,7 @@ Rectangle {
     property double percent
     property int size
     property real widthRatio
+    property color gradientColor: styler.themeSecondaryHighlightColor
 
     color: "transparent"
     implicitWidth: size
@@ -39,8 +40,8 @@ Rectangle {
             anchors.fill: parent
             gradient: Gradient
             {
-                GradientStop { position: 0.00; color: styler.themeSecondaryHighlightColor }
-                GradientStop { position: percent; color: styler.themeSecondaryHighlightColor }
+                GradientStop { position: 0.00; color: gradientColor}
+                GradientStop { position: percent; color: gradientColor }
                 GradientStop { position: percent + 0.01; color: "transparent" }
                 GradientStop { position: 1.00; color: "transparent" }
             }
