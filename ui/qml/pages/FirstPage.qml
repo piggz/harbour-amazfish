@@ -246,6 +246,7 @@ PagePL {
                 visible:  _authenticated && supportsData(Amazfish.TYPE_HEART_RATE)
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
+                actionSize: styler.themeIconSizeMedium
 
                 contentItem: Image {
                     source: "../page-icons/icon-page-heartrate.png"
@@ -261,6 +262,19 @@ PagePL {
                         color: styler.blockBg
                     }
                 }
+                actionItem: IconButtonPL {
+                    iconName: styler.iconRefresh
+                    iconHeight: styler.themeIconSizeMedium
+                    iconWidth: iconHeight
+
+                    anchors.fill: parent
+
+                    onClicked: {
+                        console.log("Request manual HR");
+                        DaemonInterfaceInstance.requestManualHeartrate();
+                    }
+                }
+
                 onClicked: {
                     app.pages.push(Qt.resolvedUrl("HeartratePage.qml"))
                 }
@@ -417,51 +431,6 @@ PagePL {
                 }
             }
         }
-
-        /*
-
-
-        //Heartrate
-        RowLayout {
-            anchors.left: parent.left
-            anchors.leftMargin: styler.themePaddingLarge
-            anchors.right: parent.right
-            anchors.rightMargin: styler.themePaddingLarge
-            spacing: styler.themePaddingLarge
-            width: parent.width
-            visible: supportsFeature(Amazfish.FEATURE_HRM)
-
-            IconPL {
-                id: imgHeartrate
-                iconName: styler.iconHeartrate
-                width: styler.themeIconSizeMedium
-                height: width
-            }
-            LabelPL {
-                id: lblHeartrate
-                color: styler.themePrimaryColor
-                font.pixelSize: styler.themeFontSizeLarge
-                height: styler.iconSizeMedium
-                verticalAlignment: Text.AlignVCenter
-                text: qsTr("%1 bpm").arg(_InfoHeartrate)
-            }
-
-            Item {
-                Layout.fillWidth: true
-            }
-
-            IconButtonPL {
-                id: btnHR
-                iconName: styler.iconRefresh
-                iconHeight: styler.themeIconSizeMedium
-                iconWidth: iconHeight
-                onClicked: {
-                    DaemonInterfaceInstance.requestManualHeartrate();
-                }
-            }
-        }
-
-        */
 
         Timer {
             id: tmrStartup

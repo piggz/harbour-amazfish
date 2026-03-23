@@ -7,6 +7,8 @@ Item {
 
     property string text: ""
     property alias contentItem: content.children
+    property alias actionItem: action.children
+    property int actionSize: styler.themeFontSizeLarge
 
     signal clicked()
 
@@ -24,6 +26,16 @@ Item {
             anchors.right: parent.right
             anchors.bottom: lbl.top
             anchors.margins: 8
+        }
+
+        Item {
+            id: action
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: 2
+            width: actionSize
+            height: actionSize
+            z: 10
         }
 
         LabelPL {
