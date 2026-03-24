@@ -8,7 +8,6 @@ Item {
     property string text: ""
     property alias contentItem: content.children
     property alias actionItem: action.children
-    property int actionSize: styler.themeFontSizeLarge
 
     signal clicked()
 
@@ -24,28 +23,32 @@ Item {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottom: lbl.top
+            anchors.bottom: row.top
             anchors.margins: 8
         }
 
-        Item {
-            id: action
+        RowLayout {
+            id: row
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.margins: 2
-            width: actionSize
-            height: actionSize
-            z: 10
-        }
+            anchors.margins: 8
+            height: styler.themeIconSizeMedium
 
-        LabelPL {
-            id: lbl
-            text: itm.text
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 8
-            color: styler.blockBg
-            font.pixelSize: styler.themeFontSizeLarge
+            LabelPL {
+                id: lbl
+                text: itm.text
+                color: styler.blockBg
+                Layout.fillWidth: true
+                font.pixelSize: styler.themeFontSizeLarge
+                Layout.alignment: Qt.AlignBottom
+            }
+            Item {
+                id: action
+                width: styler.themeIconSizeMedium
+                height: styler.themeIconSizeMedium
+                z: 10
+            }
         }
 
         MouseArea {

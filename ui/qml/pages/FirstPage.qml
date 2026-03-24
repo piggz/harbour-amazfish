@@ -73,7 +73,6 @@ PagePL {
         RowLayout {
             id: rowUpdateOperation
             height: styler.themeItemSizeSmall
-            Layout.fillWidth: true
             Layout.preferredWidth: parent.width
             visible: DaemonInterfaceInstance.operationRunning
             LabelPL {
@@ -107,7 +106,7 @@ PagePL {
 
         RowLayout {
             height: styler.themeItemSizeSmall
-            Layout.fillWidth: true
+            Layout.preferredWidth: parent.width
 
             LabelPL {
                 id: pairedNameLabel
@@ -144,8 +143,7 @@ PagePL {
         GridLayout {
             id: pageGrid
             columns: 3
-            Layout.fillWidth: true
-            width: parent.width
+            Layout.preferredWidth: parent.width
 
             columnSpacing: 0
             rowSpacing: 0
@@ -246,7 +244,6 @@ PagePL {
                 visible: supportsData(Amazfish.TYPE_HEART_RATE)
                 Layout.preferredWidth: pageGrid.prefWidth(this)
                 Layout.preferredHeight: pageGrid.prefWidth(this)
-                actionSize: styler.themeIconSizeMedium
 
                 contentItem: Image {
                     source: "../page-icons/icon-page-heartrate.png"
@@ -431,17 +428,17 @@ PagePL {
                 }
             }
         }
+    }
 
-        Timer {
-            id: tmrStartup
-            running: false
-            repeat: false
-            interval: 500
-            onTriggered: {
-                // console.log("Start timer triggered");
-                if (!AmazfishConfig.profileName) {
-                    app.pages.push(Qt.resolvedUrl("Settings-user.qml"))
-                }
+    Timer {
+        id: tmrStartup
+        running: false
+        repeat: false
+        interval: 500
+        onTriggered: {
+            // console.log("Start timer triggered");
+            if (!AmazfishConfig.profileName) {
+                app.pages.push(Qt.resolvedUrl("Settings-user.qml"))
             }
         }
     }
