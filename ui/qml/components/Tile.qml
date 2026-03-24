@@ -42,6 +42,7 @@ Item {
                 Layout.fillWidth: true
                 font.pixelSize: styler.themeFontSizeLarge
                 Layout.alignment: Qt.AlignBottom
+                truncMode: truncModes.elide
             }
             Item {
                 id: action
