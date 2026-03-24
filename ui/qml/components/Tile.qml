@@ -18,7 +18,7 @@ Item {
     Rectangle {
         color: styler.themeSecondaryHighlightColor
         anchors.fill: parent
-        anchors.margins: 4
+        anchors.margins: styler.themePaddingSmall
 
         Item {
             id: content
@@ -26,7 +26,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: row.top
-            anchors.margins: 8
+            anchors.margins: styler.themePaddingLarge
         }
 
         RowLayout {
@@ -34,7 +34,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: 8
+            anchors.margins: styler.themePaddingLarge
             height: styler.themeIconSizeMedium
 
             LabelPL {
