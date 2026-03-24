@@ -8,10 +8,12 @@ Item {
     property string text: ""
     property alias contentItem: content.children
     property alias actionItem: action.children
+    property int size
 
     signal clicked()
 
-    height: width
+    Layout.preferredHeight: size
+    Layout.preferredWidth: size
 
     Rectangle {
         color: styler.themeSecondaryHighlightColor
