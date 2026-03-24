@@ -449,7 +449,6 @@ PagePL {
 
     function start() {
         app.rootPage = page;
-        pageGrid.fo
     }
 
     function updatePAI() {
