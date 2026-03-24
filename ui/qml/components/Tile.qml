@@ -26,7 +26,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: row.top
-            anchors.margins: styler.themePaddingLarge
+            anchors.margins: styler.themePaddingSmall
         }
 
         RowLayout {
@@ -34,7 +34,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: styler.themePaddingLarge
+            anchors.margins: styler.themePaddingSmall
             height: styler.themeIconSizeMedium
 
             LabelPL {
