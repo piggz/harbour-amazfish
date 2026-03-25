@@ -34,6 +34,9 @@ done
         for i in $(find qml/activity-icons/ -type f -name '*.png'|sort); do
             echo "        <file>$i</file>";
         done
+        for i in $(find qml/page-icons/ -type f -name '*.png'|sort); do
+            echo "        <file>$i</file>";
+        done
         echo "    </qresource>"
         echo "</RCC>"
     ) > icons.qrc
