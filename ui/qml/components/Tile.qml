@@ -20,6 +20,20 @@ Item {
         anchors.fill: parent
         anchors.margins: styler.themePaddingSmall
 
+        transform: Rotation {
+            id: transf
+            origin.x: width/2 - styler.themePaddingSmall
+            origin.y: height/2 - styler.themePaddingSmall
+            axis { x: 0; y: 1; z: 0 }
+            angle: mouse.pressed ? 180 : 0
+            Behavior on angle {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+
         Item {
             id: content
             anchors.top: parent.top
@@ -27,6 +41,7 @@ Item {
             anchors.right: parent.right
             anchors.bottom: row.top
             anchors.margins: styler.themePaddingSmall
+            visible: transf.angle < 90
         }
 
         RowLayout {
@@ -35,6 +50,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: styler.themePaddingSmall
+            visible: transf.angle < 90
             height: styler.themeIconSizeMedium
 
             LabelPL {
@@ -55,6 +71,7 @@ Item {
         }
 
         MouseArea {
+            id: mouse
             anchors.fill: parent
             onClicked: {
                 itm.clicked();
