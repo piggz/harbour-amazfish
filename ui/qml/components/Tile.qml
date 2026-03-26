@@ -48,7 +48,7 @@ Item {
             }
             Item {
                 id: action
-                width: styler.themeIconSizeMedium
+                width: children.length ? styler.themeIconSizeMedium : 0
                 height: styler.themeIconSizeMedium
                 z: 10
             }
