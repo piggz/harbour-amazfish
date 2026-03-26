@@ -9,6 +9,8 @@ DialogListPL {
     id: dialog
     property string kindstring
 
+    title: qsTr("Select activity type")
+
     model: ListModel {
         id: actionKindModel;
     }
@@ -18,17 +20,18 @@ DialogListPL {
     delegate: ListItemPL {
         contentHeight: styler.themeItemSizeSmall + (styler.themePaddingMedium * 2)
         width: dialog.width
-        highlighted: currentIndex === index
-
+        emphasized: currentIndex === index
         Loader {
             id: workoutImage
 
+            anchors.margins: styler.themePaddingMedium
             anchors.top: parent.top
-            anchors.topMargin: styler.themePaddingMedium
+            anchors.left: parent.left
             width: styler.themeItemSizeSmall
             height: width
 
             sourceComponent: IconPL {
+                anchors.margins: styler.themePaddingMedium
                 iconSource: styler.activityIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
                 width: styler.themeItemSizeSmall
                 height: width

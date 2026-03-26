@@ -20,9 +20,11 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 ListItem {
+    id: root
     // required properties:
     //    contentHeight
     //    menu
     //
     // signals: clicked
+    property alias emphasized: root.highlighted
 }
