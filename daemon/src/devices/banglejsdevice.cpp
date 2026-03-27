@@ -11,6 +11,10 @@
 #include <QtNetwork>
 #include <QtXml/QtXml>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+#define endl Qt::endl
+#endif
+
 BangleJSDevice::BangleJSDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO << pairedName;
