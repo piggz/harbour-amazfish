@@ -199,7 +199,7 @@ PagePL {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, qsTr("Somebody"), qsTr("Title"), qsTr("Hello from Sailfish OS. This is a long message sent over BLE!"));
+                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, qsTr("Somebody"), qsTr("Title"), qsTr("Hello from Amazfish app. This is a long message sent over BLE!"));
             }
         }
         ButtonPL {
@@ -208,7 +208,7 @@ PagePL {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
-                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, "someone-somewhere.com", qsTr("Donald Duck"), qsTr("Hello, this is an email from Sailfish OS!"));
+                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, "someone-somewhere.com", qsTr("Amazing fish"), qsTr("Hello, this is an email from Amazfish app!"));
             }
         }
         ButtonPL {
