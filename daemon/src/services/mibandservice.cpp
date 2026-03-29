@@ -213,8 +213,8 @@ void MiBandService::setCurrentTime()
     timeBytes += TypeConversion::fromInt8(now.time().hour());
     timeBytes += TypeConversion::fromInt8(now.time().minute());
     timeBytes += TypeConversion::fromInt8(now.time().second());
-    timeBytes += TypeConversion::fromInt8(now.date().dayOfWeek());
-    timeBytes += TypeConversion::fromInt8((now.time().msec() / 1000 ) * 256);
+    timeBytes += TypeConversion::fromInt8(now.date().dayOfWeek() % 7);
+    timeBytes += TypeConversion::fromInt8(now.time().msec() * 256 / 1000 );
     timeBytes += now.isDaylightTime() ? char(0x08) : char(0x00);
 
     // calculate timezone
