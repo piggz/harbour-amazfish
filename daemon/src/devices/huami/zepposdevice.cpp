@@ -35,34 +35,34 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
     //Create all possile services
 
     m_servicesService = new ZeppOsServicesService(this);
-    m_serviceMap[m_servicesService->endpoint()] = m_servicesService;
+    m_zosServiceMap[m_servicesService->endpoint()] = m_servicesService;
 
     m_authService = new ZeppOsAuthService(this);
-    m_serviceMap[m_authService->endpoint()] = m_authService;
+    m_zosServiceMap[m_authService->endpoint()] = m_authService;
 
     m_notificationService = new ZeppOsNotificationService(this);
-    m_serviceMap[m_notificationService->endpoint()] = m_notificationService;
+    m_zosServiceMap[m_notificationService->endpoint()] = m_notificationService;
 
     m_stepsService = new ZeppOsStepsService(this);
-    m_serviceMap[m_stepsService->endpoint()] = m_stepsService;
+    m_zosServiceMap[m_stepsService->endpoint()] = m_stepsService;
 
     m_batteryService = new ZeppOsBatteryService(this);
-    m_serviceMap[m_batteryService->endpoint()] = m_batteryService;
+    m_zosServiceMap[m_batteryService->endpoint()] = m_batteryService;
 
     m_heartRateService = new ZeppOsHeartRateService(this);
-    m_serviceMap[m_heartRateService->endpoint()] = m_heartRateService;
+    m_zosServiceMap[m_heartRateService->endpoint()] = m_heartRateService;
 
     m_timeService = new ZeppOsTimeService(this);
-    m_serviceMap[m_timeService->endpoint()] = m_timeService;
+    m_zosServiceMap[m_timeService->endpoint()] = m_timeService;
 
     m_userInfoService = new ZeppOsUserInfoService(this);
-    m_serviceMap[m_userInfoService->endpoint()] = m_userInfoService;
+    m_zosServiceMap[m_userInfoService->endpoint()] = m_userInfoService;
 
     m_agpsService = new ZeppOsAgpsService(this);
-    m_serviceMap[m_agpsService->endpoint()] = m_agpsService;
+    m_zosServiceMap[m_agpsService->endpoint()] = m_agpsService;
 
     m_fileTransferService = new ZeppOsFileTransferService(this);
-    m_serviceMap[m_fileTransferService->endpoint()] = m_fileTransferService;
+    m_zosServiceMap[m_fileTransferService->endpoint()] = m_fileTransferService;
 }
 
 QString ZeppOSDevice::deviceType() const
@@ -160,9 +160,9 @@ void ZeppOSDevice::writeToChunked2021(short endpoint, QByteArray data, bool encr
 
 AbstractZeppOsService *ZeppOSDevice::zosService(short endpoint) const
 {
-    if (m_serviceMap.contains(endpoint)) {
+    if (m_zosServiceMap.contains(endpoint)) {
         qDebug() << "Found matching service";
-        return m_serviceMap[endpoint];
+        return m_zosServiceMap[endpoint];
     }
     return nullptr;
 }
@@ -216,7 +216,7 @@ void ZeppOSDevice::ready()
 
     m_stepsService->enableRealtimeSteps(true);
 
-    for (AbstractZeppOsService *service : m_serviceMap.values()) {
+    for (AbstractZeppOsService *service : m_zosServiceMap.values()) {
         if (m_supportedServices.contains(service->endpoint())) {
             // Only initialize supported services
             service->initialize();

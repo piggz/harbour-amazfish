@@ -82,7 +82,7 @@ private:
     ZeppOsFileTransferService *m_fileTransferService = nullptr;
 
 
-    QMap<short, AbstractZeppOsService *> m_serviceMap;
+    QMap<short, AbstractZeppOsService *> m_zosServiceMap;
     QSet<short> m_supportedServices;
 
     AbstractZeppOsOperation *m_currentZosOperation = nullptr;
