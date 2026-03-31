@@ -226,9 +226,24 @@
         <translation>Testvarsel</translation>
     </message>
     <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Test Email</source>
         <translation>Test e-post</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Amazing fish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Hello, this is an email from Amazfish app!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="215"/>
@@ -315,19 +330,16 @@
         <translation>Tittel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation>Hallo fra Sailfish OS. Dette er en lang melding sendt via BLE!</translation>
+        <translation type="vanished">Hallo fra Sailfish OS. Dette er en lang melding sendt via BLE!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Donald Duck</source>
-        <translation>Donald Duck</translation>
+        <translation type="vanished">Donald Duck</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation>Hallo, dette er en e-post fra Sailfish OS!</translation>
+        <translation type="vanished">Hallo, dette er en e-post fra Sailfish OS!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="224"/>
@@ -1731,6 +1743,14 @@
     </message>
 </context>
 <context>
+    <name>SportsActivityKindPage</name>
+    <message>
+        <location filename="../qml/pages/SportsActivityKindPage.qml" line="12"/>
+        <source>Select activity type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Activity</source>
@@ -1863,7 +1883,7 @@
         <translation>Last ned neste aktivitet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="169"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="166"/>
         <source>Remove</source>
         <translation>Fjern</translation>
     </message>

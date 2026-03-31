@@ -226,9 +226,24 @@
         <translation>Testmelding</translation>
     </message>
     <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Test Email</source>
         <translation>Test e-mail</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Amazing fish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Hello, this is an email from Amazfish app!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="215"/>
@@ -312,21 +327,6 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="202"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
-        <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
-        <source>Donald Duck</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
-        <source>Hello, this is an email from Sailfish OS!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1727,6 +1727,14 @@
     </message>
 </context>
 <context>
+    <name>SportsActivityKindPage</name>
+    <message>
+        <location filename="../qml/pages/SportsActivityKindPage.qml" line="12"/>
+        <source>Select activity type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Activity</source>
@@ -1743,7 +1751,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="169"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="166"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>

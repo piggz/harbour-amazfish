@@ -226,9 +226,24 @@
         <translation>சோதனை அறிவிப்பு</translation>
     </message>
     <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Test Email</source>
         <translation>மின்னஞ்சல் சோதனை</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Amazing fish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Hello, this is an email from Amazfish app!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="215"/>
@@ -315,19 +330,16 @@
         <translation>தலைப்பு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation>SAILFISH OS இலிருந்து வணக்கம். இது பி.எல்.இ மீது அனுப்பப்பட்ட நீண்ட செய்தி!</translation>
+        <translation type="vanished">SAILFISH OS இலிருந்து வணக்கம். இது பி.எல்.இ மீது அனுப்பப்பட்ட நீண்ட செய்தி!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Donald Duck</source>
-        <translation>டொனால்ட் டக்</translation>
+        <translation type="vanished">டொனால்ட் டக்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation>வணக்கம், இது SAILFISH OS இன் மின்னஞ்சல்!</translation>
+        <translation type="vanished">வணக்கம், இது SAILFISH OS இன் மின்னஞ்சல்!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="224"/>
@@ -1727,6 +1739,14 @@
     </message>
 </context>
 <context>
+    <name>SportsActivityKindPage</name>
+    <message>
+        <location filename="../qml/pages/SportsActivityKindPage.qml" line="12"/>
+        <source>Select activity type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Activity</source>
@@ -1743,7 +1763,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="169"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="166"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>

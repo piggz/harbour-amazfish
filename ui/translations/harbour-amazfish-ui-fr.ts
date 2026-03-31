@@ -226,9 +226,24 @@
         <translation>Notification de test</translation>
     </message>
     <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Test Email</source>
         <translation>Email de test</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Amazing fish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Hello, this is an email from Amazfish app!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="215"/>
@@ -315,19 +330,16 @@
         <translation>Titre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation>Bonjour de Sailfish OS. Ceci est un long message envoyé par BLE&#x202f;!</translation>
+        <translation type="vanished">Bonjour de Sailfish OS. Ceci est un long message envoyé par BLE&#x202f;!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Donald Duck</source>
-        <translation>Donald Duck</translation>
+        <translation type="vanished">Donald Duck</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation>Hello, ceci est un email envoyé depuis Sailfish OS&#x202f;!</translation>
+        <translation type="vanished">Hello, ceci est un email envoyé depuis Sailfish OS&#x202f;!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="224"/>
@@ -1699,6 +1711,14 @@
     </message>
 </context>
 <context>
+    <name>SportsActivityKindPage</name>
+    <message>
+        <location filename="../qml/pages/SportsActivityKindPage.qml" line="12"/>
+        <source>Select activity type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Unknown</source>
@@ -1871,7 +1891,7 @@
         <translation>Télécharger activité suivante</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="169"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="166"/>
         <source>Remove</source>
         <translation>Retirer</translation>
     </message>

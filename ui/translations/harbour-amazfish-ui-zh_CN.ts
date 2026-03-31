@@ -265,19 +265,16 @@
         <translation>题目</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
         <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation>来自Sailfish OS 的问候。这是一条通过蓝牙低功耗（BLE）发送的长消息！</translation>
+        <translation type="vanished">来自Sailfish OS 的问候。这是一条通过蓝牙低功耗（BLE）发送的长消息！</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Donald Duck</source>
-        <translation>唐老鸭</translation>
+        <translation type="vanished">唐老鸭</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Hello, this is an email from Sailfish OS!</source>
-        <translation>你好，这是一封来自旗鱼操作系统（Sailfish OS）的电子邮件！</translation>
+        <translation type="vanished">你好，这是一封来自旗鱼操作系统（Sailfish OS）的电子邮件！</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="224"/>
@@ -310,9 +307,24 @@
         <translation>测试通知</translation>
     </message>
     <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Test Email</source>
         <translation>测试邮件</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Amazing fish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
+        <source>Hello, this is an email from Amazfish app!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="215"/>
@@ -1571,6 +1583,14 @@
     </message>
 </context>
 <context>
+    <name>SportsActivityKindPage</name>
+    <message>
+        <location filename="../qml/pages/SportsActivityKindPage.qml" line="12"/>
+        <source>Select activity type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SportsSummaryPage</name>
     <message>
         <source>Activity</source>
@@ -1587,7 +1607,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="169"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="166"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
