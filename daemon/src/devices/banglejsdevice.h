@@ -1,6 +1,7 @@
 #ifndef BANGLEJSDEVICE_H
 #define BANGLEJSDEVICE_H
 
+#include <optional>
 #include <QObject>
 #include "abstractdevice.h"
 #include "activitysample.h"
@@ -46,6 +47,7 @@ public:
     void sendWeather(CurrentWeather *weather) override;
 
     void applyDeviceSetting(Amazfish::Settings s) override;
+    void syncCalendar(QList<watchfish::CalendarEvent> &eventlist) override;
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
@@ -80,6 +82,15 @@ private:
     void setTime();
     void setAlarms();
     int getStepsFromDb();
+
+
+    void forceCalendarSync(); // request list of events in bangle.js
+    void syncCalendarWithDeviceIds(QList<int> &deviceIds);
+    void sendCalendarEvent(int id, const watchfish::CalendarEvent &event); // send single event (create or replace)
+    void removeEventReminder(int id); // remove single event from device
+    QMap<QString, int> m_event_id_map; // maps calendar event uid to device id
+    std::optional<QList<watchfish::CalendarEvent>> m_eventlist; // list of all events which should go to device
+    int m_next_event_id = 1;
 
 };
 

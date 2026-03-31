@@ -187,6 +187,17 @@ AbstractFirmwareInfo *GtsDevice::firmwareInfo(const QByteArray &bytes, const QSt
     return new GtsFirmwareInfo(bytes);
 }
 
+void GtsDevice::syncCalendar(QList<watchfish::CalendarEvent> &eventlist)
+{
+    int id=0;
+    foreach (const watchfish::CalendarEvent &event, eventlist) {
+        qDebug() << event.uid() << event.title() << event.start();
+        sendEventReminder(id, event.start(), event.title());
+        id++;
+    }
+}
+
+
 void GtsDevice::sendEventReminder(int id, const QDateTime &dt, const QString &event)
 {
     //Send event reminder
