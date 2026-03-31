@@ -261,7 +261,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="202"/>
         <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ahoj z aplikace Amazfish. Toto je dlouhá zpráva odeslaná přes BLE!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
@@ -271,12 +271,12 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Amazing fish</source>
-        <translation type="unfinished"></translation>
+        <translation>Úžasná ryba</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Hello, this is an email from Amazfish app!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ahoj, toto je email z aplikace Amazfish!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="215"/>
@@ -1899,7 +1899,7 @@
     <message>
         <location filename="../qml/pages/SportsActivityKindPage.qml" line="12"/>
         <source>Select activity type</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte typ aktivity</translation>
     </message>
 </context>
 <context>
