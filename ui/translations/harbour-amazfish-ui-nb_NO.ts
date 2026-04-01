@@ -228,7 +228,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="202"/>
         <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hei fra Amazfish-appen. Dette er en lang melding sendt over BLE!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
@@ -238,12 +238,12 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Amazing fish</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazing fish</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Hello, this is an email from Amazfish app!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hei, dette er en e-post fra Amazfish-appen!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="215"/>
@@ -1332,7 +1332,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="70"/>
         <source>FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="71"/>
@@ -1747,7 +1747,7 @@
     <message>
         <location filename="../qml/pages/SportsActivityKindPage.qml" line="12"/>
         <source>Select activity type</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg aktivitet</translation>
     </message>
 </context>
 <context>
