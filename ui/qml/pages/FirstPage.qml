@@ -67,6 +67,7 @@ PagePL {
     GridLayout {
         id: pageGrid
         width: parent.width
+        anchors.margins: styler.themePaddingSmall
 
         columns: 3
         columnSpacing: 0
@@ -123,7 +124,6 @@ PagePL {
             Layout.preferredHeight: styler.themeIconSizeMedium
             Layout.fillWidth: true
             Layout.columnSpan: 3
-            spacing: styler.themePaddingSmall
 
             LabelPL {
                 id: pairedNameLabel
@@ -131,7 +131,7 @@ PagePL {
                 color: styler.themeSecondaryHighlightColor
                 font.pixelSize: styler.themeFontSizeLarge
                 truncMode: truncModes.fade
-                width: parent.width - (2 * styler.themeIconSizeMedium)
+                width: parent.width - (2 * styler.themeIconSizeMedium + 2 * styler.themePaddingSmall)
             }
 
             IconPL {
@@ -257,7 +257,7 @@ PagePL {
         }
 
         Tile {
-            text: qsTr("Spo2")
+            text: qsTr("SpO₂")
             visible: supportsData(Amazfish.TYPE_SPO2)
 
             contentItem: Image {
