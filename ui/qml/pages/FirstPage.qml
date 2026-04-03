@@ -94,7 +94,7 @@ PagePL {
                 color: styler.themeSecondaryHighlightColor
                 font.pixelSize: styler.themeFontSizeMedium
                 truncMode: truncModes.fade
-                width: parent.width - styler.themeIconSizeMedium - styler.themeIconSizeLarge - (3 * styler.themePaddingSmall)
+                width: pageGrid.width - styler.themeIconSizeMedium - styler.themeIconSizeLarge - (3 * styler.themePaddingSmall)
             }
 
             LabelPL {
