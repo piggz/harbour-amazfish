@@ -163,7 +163,6 @@ PagePL {
             visible: supportsFeature(Amazfish.FEATURE_STEPS)
             Layout.rowSpan: 2
             Layout.columnSpan: 2
-            size: pageGrid.prefWidth(this)
             stepCount: _InfoSteps
             stepGoal: AmazfishConfig.profileFitnessGoal
 
@@ -181,7 +180,7 @@ PagePL {
         Tile {
             text: qsTr("Sleep")
             visible: supportsData(Amazfish.TYPE_SLEEP)
-            size: pageGrid.prefWidth(this)
+
 
             contentItem: Image {
                 id: imgHeartrate
@@ -198,7 +197,6 @@ PagePL {
         Tile {
             text: qsTr("Heartrate")
             visible: supportsData(Amazfish.TYPE_HEART_RATE)
-            size: pageGrid.prefWidth(this)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-heartrate.png"
@@ -235,7 +233,6 @@ PagePL {
         Tile {
             text: qsTr("Sports")
             visible: supportsFeature(Amazfish.FEATURE_ACTIVITY)
-            size: pageGrid.prefWidth(this)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-sport.png"
@@ -251,7 +248,6 @@ PagePL {
         PAITile {
             id: paiTile
             visible: supportsData(Amazfish.TYPE_PAI)
-            size: pageGrid.prefWidth(this)
             Layout.rowSpan: 2
             Layout.columnSpan: 2
 
@@ -263,7 +259,6 @@ PagePL {
         Tile {
             text: qsTr("Spo2")
             visible: supportsData(Amazfish.TYPE_SPO2)
-            size: pageGrid.prefWidth(this)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-spo2.png"
@@ -278,7 +273,6 @@ PagePL {
 
         Tile {
             text: qsTr("Data")
-            size: pageGrid.prefWidth(this)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-data.png"
@@ -293,7 +287,6 @@ PagePL {
 
         Tile {
             text: qsTr("Battery")
-            size: pageGrid.prefWidth(this)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-battery.png"
@@ -318,7 +311,6 @@ PagePL {
         Tile {
             text: qsTr("Install File")
             visible: _authenticated && supportsFeature(Amazfish.FEATURE_FILE_INSTALL)
-            size: pageGrid.prefWidth(this)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-install.png"

@@ -8,7 +8,7 @@ Item {
     property string text: ""
     property alias contentItem: content.children
     property alias actionItem: action.children
-    property int size
+    property int size: pageGrid.prefWidth(this)
 
     signal clicked()
 
