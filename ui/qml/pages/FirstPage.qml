@@ -15,14 +15,13 @@ PagePL {
         AmazfishConfig.pairedAddress = "";
         AmazfishConfig.pairedName = "";
         AmazfishConfig.pairedType = "";
-
     }
 
     pageMenu: PageMenuPL {
-//        PageMenuItemPL {
-//            text: qsTr("Test Icons")
-//            onClicked: app.pages.push(Qt.resolvedUrl("TestIconsPage.qml"))
-//        }
+        //        PageMenuItemPL {
+        //            text: qsTr("Test Icons")
+        //            onClicked: app.pages.push(Qt.resolvedUrl("TestIconsPage.qml"))
+        //        }
         PageMenuItemPL {
             text: qsTr("Pair with watch")
             onClicked: {
@@ -35,28 +34,12 @@ PagePL {
                 }
             }
         }
-        PageMenuItemPL {
-            text: qsTr("Install File")
-            onClicked: app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
-        }
+
         PageMenuItemPL {
             text: qsTr("Settings")
             onClicked: app.pages.push(Qt.resolvedUrl("Settings-menu.qml"))
         }
-        PageMenuItemPL {
-            text: qsTr("Data Graphs")
-            onClicked: app.pages.push(Qt.resolvedUrl("AnalysisPage.qml"))
-        }
-        PageMenuItemPL {
-            text: qsTr("PAI")
-            onClicked: app.pages.push(Qt.resolvedUrl("PaiDataPage.qml"))
-            visible: _authenticated ? DaemonInterfaceInstance.supportedDataTypes() & Amazfish.TYPE_PAI : false
-        }
-        PageMenuItemPL {
-            text: qsTr("Blood Oxygen")
-            onClicked: app.pages.push(Qt.resolvedUrl("Spo2DataPage.qml"))
-            visible: _authenticated ? DaemonInterfaceInstance.supportedDataTypes() & Amazfish.TYPE_SPO2 : false
-        }
+
         PageMenuItemPL {
             visible: AmazfishConfig.pairedAddress
             enabled: !_connecting
@@ -69,29 +52,52 @@ PagePL {
                 }
             }
         }
+
+        PageMenuItemPL {
+            id: btnSystemdEnable
+            text: qsTr("Enable service on boot")
+            visible: serviceEnabledState == false && (ENABLE_SYSTEMD === "YES")
+
+            onClicked: {
+                systemdManager.enableService();
+            }
+        }
     }
 
-    Column {
-        id: column
-        spacing: styler.themePaddingLarge
-        anchors.top: parent.top
+    GridLayout {
+        id: pageGrid
         width: parent.width
-        anchors.margins: styler.themePaddingMedium
+        anchors.margins: styler.themePaddingSmall
 
-        RowLayout {
+        columns: 3
+        columnSpacing: 0
+        rowSpacing: 0
+
+        property double colMulti: pageGrid.width / pageGrid.columns
+
+        function prefWidth(item){
+            return colMulti * item.Layout.columnSpan
+        }
+
+        //========== Busy Notification Row ==========
+
+        Row {
             id: rowUpdateOperation
-            height: styler.themeItemSizeSmall
-            width: parent.width
+            Layout.preferredHeight: styler.themeIconSizeMedium
+            Layout.fillWidth: true
+            Layout.columnSpan: 3
+            spacing: styler.themePaddingSmall
             visible: DaemonInterfaceInstance.operationRunning
+
             LabelPL {
                 id: lblLastMessage
                 text: _lastMessage
                 color: styler.themeSecondaryHighlightColor
                 font.pixelSize: styler.themeFontSizeMedium
                 truncMode: truncModes.fade
-                Layout.fillWidth: true
-                width: parent.width *0.6
+                width: pageGrid.width - styler.themeIconSizeMedium - styler.themeIconSizeLarge - (3 * styler.themePaddingSmall)
             }
+
             LabelPL {
                 id: lblProgress
                 x: 10
@@ -99,6 +105,7 @@ PagePL {
                 horizontalAlignment: Text.AlignLeft
                 color: styler.themeSecondaryHighlightColor
                 font.pixelSize: styler.themeFontSizeMedium
+                width: styler.themeIconSizeLarge
                 text: _percentText
             }
 
@@ -107,16 +114,16 @@ PagePL {
                 running: DaemonInterfaceInstance.operationRunning
                 Layout.alignment: Qt.AlignRight
                 anchors.rightMargin: 2
-                height: parent.height - 4
+                width: styler.themeIconSizeMedium
             }
         }
 
-        RowLayout {
-            height: styler.themeItemSizeSmall
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: styler.themePaddingLarge
-            anchors.rightMargin: styler.themePaddingLarge
+        //========== Device Row ==========
+
+        Row {
+            Layout.preferredHeight: styler.themeIconSizeMedium
+            Layout.fillWidth: true
+            Layout.columnSpan: 3
 
             LabelPL {
                 id: pairedNameLabel
@@ -124,8 +131,7 @@ PagePL {
                 color: styler.themeSecondaryHighlightColor
                 font.pixelSize: styler.themeFontSizeLarge
                 truncMode: truncModes.fade
-                Layout.fillWidth: true
-
+                width: parent.width - (2 * styler.themeIconSizeMedium + 2 * styler.themePaddingSmall)
             }
 
             IconPL {
@@ -149,169 +155,192 @@ PagePL {
                     anchors.centerIn: parent
                 }
             }
-
-            IconPL {
-                id: btryImage
-                iconName: styler.iconBattery
-                iconHeight: styler.themeIconSizeMedium
-                visible: _authenticated
-            }
-
-            LabelPL {
-                id: btryPercent
-                visible: _authenticated
-                font.pixelSize: styler.themeFontSizeMedium
-                width: styler.themeIconSizeMedium
-                text: qsTr("%1%").arg(_InfoBatteryPercent)
-            }
         }
 
-        SectionHeaderPL {
-            text: qsTr("Steps")
+        //========== Tiles ==========
+
+        StepsTile {
             visible: supportsFeature(Amazfish.FEATURE_STEPS)
-        }
+            Layout.rowSpan: 2
+            Layout.columnSpan: 2
+            stepCount: _InfoSteps
+            stepGoal: AmazfishConfig.profileFitnessGoal
 
-        // steps
-        IconPL {
-            id: imgSteps
-            anchors.left: parent.left
-            anchors.leftMargin: styler.themePaddingLarge
-            iconName: styler.iconSteps
-            height: styler.themeIconSizeMedium
-            width: height
-            visible: supportsFeature(Amazfish.FEATURE_STEPS)
-        }
-
-        PercentCircle {
-            id: stpsCircle
-            visible: supportsFeature(Amazfish.FEATURE_STEPS)
-            anchors.horizontalCenter: parent.horizontalCenter
-            size: parent.width - styler.themeHorizontalPageMargin * 4
-            percent: _InfoSteps ? _InfoSteps / AmazfishConfig.profileFitnessGoal : 0.06
-            widthRatio: 0.08
-
-            Item {
-                anchors.centerIn: parent
-                height: lblSteps.height + lblGoal.height + styler.paddingSmall
-                width: Math.max(lblSteps.width, lblGoal.width)
-
-                LabelPL {
-                    id: lblSteps
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        bottom: centerItem.top
-                    }
-                    color: styler.themeHighlightColor
-                    font.pixelSize: styler.themeFontSizeExtraLarge
-                    verticalAlignment: Text.AlignVCenter
-                    text: _InfoSteps.toLocaleString()
-                }
-
-                Item {
-                    id: centerItem
-                    width: 1
-                    height: 1
-                    anchors.centerIn: parent
-                }
-
-                LabelPL {
-                    id: lblGoal
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        top: centerItem.bottom
-                        topMargin: styler.themePaddingSmall
-                    }
-                    color: styler.themeSecondaryHighlightColor
-                    font.pixelSize: styler.themeFontSizeLarge
-                    verticalAlignment: Text.AlignVCenter
-                    text: AmazfishConfig.profileFitnessGoal.toLocaleString()
-                }
-            }
             Component.onCompleted: {
                 if (_connected) {
                     _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
                 }
             }
+
+            onClicked: {
+                app.pages.push(Qt.resolvedUrl("StepsPage.qml"))
+            }
         }
 
-        SectionHeaderPL {
-            text: qsTr("Heartrate")
-            visible: supportsFeature(Amazfish.FEATURE_HRM)
-        }
+        Tile {
+            text: qsTr("Sleep")
+            visible: supportsData(Amazfish.TYPE_SLEEP)
 
-        //Heartrate
-        RowLayout {
-            anchors.left: parent.left
-            anchors.leftMargin: styler.themePaddingLarge
-            anchors.right: parent.right
-            anchors.rightMargin: styler.themePaddingLarge
-            spacing: styler.themePaddingLarge
-            width: parent.width
-            visible: supportsFeature(Amazfish.FEATURE_HRM)
 
-            IconPL {
+            contentItem: Image {
                 id: imgHeartrate
-                iconName: styler.iconHeartrate
-                width: styler.themeIconSizeMedium
-                height: width
-            }
-            LabelPL {
-                id: lblHeartrate
-                color: styler.themePrimaryColor
-                font.pixelSize: styler.themeFontSizeLarge
-                height: styler.iconSizeMedium
-                verticalAlignment: Text.AlignVCenter
-                text: qsTr("%1 bpm").arg(_InfoHeartrate)
+                source: "../page-icons/icon-page-sleep.png"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
             }
 
-            Item {
-                Layout.fillWidth: true
+            onClicked: {
+                app.pages.push(Qt.resolvedUrl("SleepPage.qml"))
             }
+        }
 
-            IconButtonPL {
-                id: btnHR
+        Tile {
+            text: qsTr("Heartrate")
+            visible: supportsData(Amazfish.TYPE_HEART_RATE)
+
+            contentItem: Image {
+                source: "../page-icons/icon-page-heartrate.png"
+                anchors.fill: parent
+                anchors.topMargin: styler.themeFontSizeLarge
+                fillMode: Image.PreserveAspectFit
+                Text {
+                    text: qsTr("%1 bpm").arg(_InfoHeartrate)
+                    anchors.top: parent.top
+                    anchors.topMargin: -styler.themeFontSizeLarge
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pixelSize: styler.themeFontSizeLarge
+                    color: styler.blockBg
+                }
+            }
+            actionItem: IconButtonPL {
                 iconName: styler.iconRefresh
                 iconHeight: styler.themeIconSizeMedium
                 iconWidth: iconHeight
+
+                anchors.fill: parent
+
                 onClicked: {
+                    console.log("Request manual HR");
                     DaemonInterfaceInstance.requestManualHeartrate();
                 }
             }
-        }
-
-        SectionHeaderPL {
-            text: qsTr("Service")
-            visible: btnSystemdEnable.visible
-        }
-
-        ButtonPL {
-            id: btnSystemdEnable
-            text: qsTr("Enable on boot")
-            visible: serviceEnabledState == false && (ENABLE_SYSTEMD === "YES")
-            anchors.horizontalCenter: parent.horizontalCenter
 
             onClicked: {
-                systemdManager.enableService();
+                app.pages.push(Qt.resolvedUrl("HeartratePage.qml"))
             }
         }
 
-        Timer {
-            id: tmrStartup
-            running: false
-            repeat: false
-            interval: 500
-            onTriggered: {
-                // console.log("Start timer triggered");
-                pushAttached(Qt.resolvedUrl("StepsPage.qml"))
-                if (!AmazfishConfig.profileName) {
-                    app.pages.push(Qt.resolvedUrl("Settings-user.qml"))
+        Tile {
+            text: qsTr("Sports")
+            visible: supportsFeature(Amazfish.FEATURE_ACTIVITY)
+
+            contentItem: Image {
+                source: "../page-icons/icon-page-sport.png"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+            }
+
+            onClicked: {
+                app.pages.push(Qt.resolvedUrl("SportsSummaryPage.qml"))
+            }
+        }
+
+        PAITile {
+            id: paiTile
+            visible: supportsData(Amazfish.TYPE_PAI)
+            Layout.rowSpan: 2
+            Layout.columnSpan: 2
+
+            onClicked: {
+                app.pages.push(Qt.resolvedUrl("PaiDataPage.qml"))
+            }
+        }
+
+        Tile {
+            text: qsTr("SpO₂")
+            visible: supportsData(Amazfish.TYPE_SPO2)
+
+            contentItem: Image {
+                source: "../page-icons/icon-page-spo2.png"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+            }
+
+            onClicked: {
+                app.pages.push(Qt.resolvedUrl("Spo2DataPage.qml"))
+            }
+        }
+
+        Tile {
+            text: qsTr("Data")
+
+            contentItem: Image {
+                source: "../page-icons/icon-page-data.png"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+            }
+
+            onClicked: {
+                app.pages.push(Qt.resolvedUrl("AnalysisPage.qml"))
+            }
+        }
+
+        Tile {
+            text: qsTr("Battery")
+
+            contentItem: Image {
+                source: "../page-icons/icon-page-battery.png"
+                anchors.fill: parent
+                anchors.topMargin: styler.themeFontSizeLarge
+                fillMode: Image.PreserveAspectFit
+                Text {
+                    text: qsTr("%1%").arg(_InfoBatteryPercent)
+                    anchors.top: parent.top
+                    anchors.topMargin: -styler.themeFontSizeLarge
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pixelSize: styler.themeFontSizeLarge
+                    color: styler.blockBg
                 }
+            }
+
+            onClicked: {
+                app.pages.push(Qt.resolvedUrl("BatteryPage.qml"))
+            }
+        }
+
+        Tile {
+            text: qsTr("Install File")
+            visible: _authenticated && supportsFeature(Amazfish.FEATURE_FILE_INSTALL)
+
+            contentItem: Image {
+                source: "../page-icons/icon-page-install.png"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+            }
+
+            onClicked: {
+                app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))
+            }
+        }
+        // }
+    }
+
+    Timer {
+        id: tmrStartup
+        running: false
+        repeat: false
+        interval: 500
+        onTriggered: {
+            // console.log("Start timer triggered");
+            if (!AmazfishConfig.profileName) {
+                app.pages.push(Qt.resolvedUrl("Settings-user.qml"))
             }
         }
     }
 
     onPageStatusActive: {
         tmrStartup.start();
+        updatePAI();
     }
 
     Component.onCompleted: {
@@ -323,5 +352,12 @@ PagePL {
 
     function start() {
         app.rootPage = page;
+    }
+
+    function updatePAI() {
+        if (!supportsData(Amazfish.TYPE_PAI)) {
+            return;
+        }
+        paiTile.update();
     }
 }

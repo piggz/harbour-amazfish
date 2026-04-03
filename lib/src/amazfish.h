@@ -22,6 +22,7 @@ public:
         FEATURE_MUSIC_CONTROL = 128,
         FEATURE_BUTTON_ACTION = 256,
         FEATURE_SCREENSHOT = 512,
+        FEATURE_FILE_INSTALL = 1024
     };
     Q_ENUM(Feature)
     Q_DECLARE_FLAGS(Features, Feature);

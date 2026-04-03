@@ -74,7 +74,8 @@ Amazfish::Features PinetimeJFDevice::supportedFeatures() const
     return Amazfish::Feature::FEATURE_HRM |
             Amazfish::Feature::FEATURE_ALERT |
             Amazfish::Feature::FEATURE_WEATHER |
-            Amazfish::Feature::FEATURE_STEPS;
+            Amazfish::Feature::FEATURE_STEPS |
+            Amazfish::Feature::FEATURE_FILE_INSTALL;
 }
 
 Amazfish::DataTypes PinetimeJFDevice::supportedDataTypes() const

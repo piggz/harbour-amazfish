@@ -32,7 +32,8 @@ Amazfish::Features GtsDevice::supportedFeatures() const
             Amazfish::Feature::FEATURE_ALERT |
             Amazfish::Feature::FEATURE_EVENT_REMINDER |
             Amazfish::Feature::FEATURE_MUSIC_CONTROL |
-            Amazfish::Feature::FEATURE_BUTTON_ACTION;
+            Amazfish::Feature::FEATURE_BUTTON_ACTION |
+            Amazfish::Feature::FEATURE_FILE_INSTALL;
 }
 
 Amazfish::DataTypes GtsDevice::supportedDataTypes() const

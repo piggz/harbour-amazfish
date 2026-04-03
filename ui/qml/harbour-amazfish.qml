@@ -19,7 +19,6 @@ ApplicationWindowPL
     property int _lastNotificationId: 0
     property bool serviceActiveState: false
     property bool serviceEnabledState: false
-    property int supportedFeatures: 0
     property bool stravaLinked: false
     property bool fittrackeeLinked: false
     property bool firstPass: true
@@ -179,10 +178,6 @@ ApplicationWindowPL
         }
     }
 
-    onSupportedFeaturesChanged: {
-        console.log("Supported features:", supportedFeatures);
-    }
-
     on_ConnectionStateChanged: console.log(_connectionState)
 
     on_AuthenticatedChanged: {
@@ -222,18 +217,19 @@ ApplicationWindowPL
     }
 
     function supportsFeature(feature) {
-        // console.log("Checking if feature is supported:", feature, (supportedFeatures & feature) === feature);
-        return (supportedFeatures & feature) === feature;
+        console.log("Supports feature", (_authenticated || !_authenticated) && ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature));
+        return (_authenticated || !_authenticated) && ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature)
+    }
+
+    function supportsData(data) {
+        console.log("Supports data:", data, (_authenticated || !_authenticated) && ((DaemonInterfaceInstance.supportedDataTypes() & data) === data))
+        return (_authenticated || !_authenticated) && ((DaemonInterfaceInstance.supportedDataTypes() & data) === data)
     }
 
     function _refreshInformation() {
         if (!_authenticated) {
             return
         }
-
-        supportedFeatures = DaemonInterfaceInstance.supportedFeatures();
-        // console.log("Supported features", supportedFeatures);
-
         DaemonInterfaceInstance.refreshInformation();
     }
 

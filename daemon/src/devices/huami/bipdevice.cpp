@@ -17,7 +17,8 @@ Amazfish::Features BipDevice::supportedFeatures() const
             Amazfish::Feature::FEATURE_STEPS |
             Amazfish::Feature::FEATURE_ALARMS |
             Amazfish::Feature::FEATURE_ALERT |
-            Amazfish::Feature::FEATURE_BUTTON_ACTION;
+            Amazfish::Feature::FEATURE_BUTTON_ACTION |
+            Amazfish::Feature::FEATURE_FILE_INSTALL;
 }
 
 Amazfish::DataTypes BipDevice::supportedDataTypes() const

@@ -73,5 +73,13 @@
         <file>qml/activity-icons/icon-m-windsurfing.png</file>
         <file>qml/activity-icons/icon-m-wintersport.png</file>
         <file>qml/activity-icons/icon-m-yoga.png</file>
+        <file>qml/page-icons/icon-page-battery.png</file>
+        <file>qml/page-icons/icon-page-data.png</file>
+        <file>qml/page-icons/icon-page-heartrate.png</file>
+        <file>qml/page-icons/icon-page-hrv.png</file>
+        <file>qml/page-icons/icon-page-install.png</file>
+        <file>qml/page-icons/icon-page-sleep.png</file>
+        <file>qml/page-icons/icon-page-spo2.png</file>
+        <file>qml/page-icons/icon-page-sport.png</file>
     </qresource>
 </RCC>
