@@ -39,18 +39,39 @@ void BangleJSDevice::pair()
 
 Amazfish::Features BangleJSDevice::supportedFeatures() const
 {
-    return Amazfish::Feature::FEATURE_STEPS |
-           Amazfish::Feature::FEATURE_HRM |
-           Amazfish::Feature::FEATURE_ALERT |
-           Amazfish::Feature::FEATURE_ALARMS |
-	   Amazfish::Feature::FEATURE_EVENT_REMINDER |
-           Amazfish::Feature::FEATURE_MUSIC_CONTROL |
-           Amazfish::Feature::FEATURE_WEATHER;
+
+    return Amazfish::Feature::FEATURE_NONE
+        | Amazfish::Feature::FEATURE_HRM
+        | Amazfish::Feature::FEATURE_WEATHER
+        | Amazfish::Feature::FEATURE_ACTIVITY
+        | Amazfish::Feature::FEATURE_STEPS
+        | Amazfish::Feature::FEATURE_ALARMS
+        | Amazfish::Feature::FEATURE_ALERT
+        | Amazfish::Feature::FEATURE_EVENT_REMINDER
+        | Amazfish::Feature::FEATURE_MUSIC_CONTROL
+        // | Amazfish::Feature::FEATURE_BUTTON_ACTION
+        // | Amazfish::Feature::FEATURE_SCREENSHOT
+        | Amazfish::Feature::FEATURE_FILE_INSTALL
+        ;
+
 }
 
 Amazfish::DataTypes BangleJSDevice::supportedDataTypes() const
 {
-    return Amazfish::DataType::TYPE_HEART_RATE;
+    return Amazfish::DataType::TYPE_NONE
+        // | Amazfish::DataType::TYPE_DEBUGLOG
+        | Amazfish::DataType::TYPE_ACTIVITY
+        | Amazfish::DataType::TYPE_GPS_TRACK
+        // | Amazfish::DataType::TYPE_STRESS
+        // | Amazfish::DataType::TYPE_SPO2
+        // | Amazfish::DataType::TYPE_PAI
+        | Amazfish::DataType::TYPE_HEART_RATE
+        // | Amazfish::DataType::TYPE_SLEEP_RESPIRATORY_RATE
+        // | Amazfish::DataType::TYPE_TEMPERATURE
+        | Amazfish::DataType::TYPE_SLEEP
+        // | Amazfish::DataType::TYPE_HUAMI_STATISTICS
+        // | Amazfish::DataType::TYPE_HRV
+        ;
 }
 
 QString BangleJSDevice::deviceType() const
