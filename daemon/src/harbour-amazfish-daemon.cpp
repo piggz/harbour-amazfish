@@ -18,6 +18,7 @@
 #include <QDir>
 
 #include "deviceinterface.h"
+#include "devicefactory.h"
 
 static void daemonize();
 static void signalHandler(int sig);
@@ -39,6 +40,11 @@ int main(int argc, char **argv)
     QCoreApplication app(argc, argv);
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setApplicationName("harbour-amazfish");
+
+    if (app.arguments().contains("--features")) {
+        DeviceFactory::printAvailableFeatures();
+        return 0;
+    }
 
     {
         QString tr_path(TRANSLATION_FOLDER);
