@@ -217,13 +217,13 @@ ApplicationWindowPL
     }
 
     function supportsFeature(feature) {
-        console.log("Supports feature", (_authenticated || !_authenticated) && ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature));
-        return (_authenticated || !_authenticated) && ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature)
+        console.log("Supports feature", feature, ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature));
+        return ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature)
     }
 
     function supportsData(data) {
-        console.log("Supports data:", data, (_authenticated || !_authenticated) && ((DaemonInterfaceInstance.supportedDataTypes() & data) === data))
-        return (_authenticated || !_authenticated) && ((DaemonInterfaceInstance.supportedDataTypes() & data) === data)
+        console.log("Supports data:", data, ((DaemonInterfaceInstance.supportedDataTypes() & data) === data))
+        return ((DaemonInterfaceInstance.supportedDataTypes() & data) === data)
     }
 
     function _refreshInformation() {
