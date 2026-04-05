@@ -80,6 +80,8 @@ private:
     void networkReply();
 
     void setTime();
+    void setUserGoal(uint steps);
+    void setUserGoalAlert(bool enabled);
     void setAlarms();
     int getStepsFromDb();
 
