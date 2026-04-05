@@ -20,9 +20,6 @@ PageListPL {
     Component.onCompleted: {
         SportsModel.update();
     }
-    onPageStatusActive: {
-        pushAttached(Qt.resolvedUrl("BatteryPage.qml"));
-    }
 
     IconPL {
         id: sharedIconTime
