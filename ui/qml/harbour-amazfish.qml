@@ -217,7 +217,7 @@ ApplicationWindowPL
     }
 
     function supportsFeature(feature) {
-        console.log("Supports feature", (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature));
+        console.log("Supports feature", feature, (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature));
         return (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature)
     }
 
