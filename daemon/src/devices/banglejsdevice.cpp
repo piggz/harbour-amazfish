@@ -82,7 +82,18 @@ QString BangleJSDevice::deviceType() const
 void BangleJSDevice::abortOperations()
 {
     qDebug() << Q_FUNC_INFO;
+    setOperationRunning(false);
+}
 
+bool BangleJSDevice::operationRunning()
+{
+    return m_operationRunning;
+}
+
+void BangleJSDevice::setOperationRunning(bool running)
+{
+    m_operationRunning = running;
+    emit operationRunningChanged();
 }
 
 void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
@@ -343,6 +354,10 @@ void BangleJSDevice::navigationNarrative(const QString &flag, const QString &nar
 
 void BangleJSDevice::downloadActivityData() {
     qDebug() << Q_FUNC_INFO;
+    if (m_operationRunning) {
+        qDebug() << "Operation is running";
+        return;
+    }
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (!uart) {
         return;
@@ -351,6 +366,8 @@ void BangleJSDevice::downloadActivityData() {
     qlonglong ls = AmazfishConfig::instance()->value("device/lastactivitysyncmillis").toLongLong();
 
     m_samples.clear();
+    emit message(tr("Downloading activity data"));
+    setOperationRunning(true);
     QJsonObject o;
     o.insert("t", "actfetch");
     o.insert("ts", ls);
@@ -359,6 +376,10 @@ void BangleJSDevice::downloadActivityData() {
 
 void BangleJSDevice::downloadSportsData() {
     qDebug() << Q_FUNC_INFO;
+    if (m_operationRunning) {
+        qDebug() << "Operation is running";
+        return;
+    }
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (!uart) {
         return;
@@ -366,6 +387,8 @@ void BangleJSDevice::downloadSportsData() {
 
     QString lastSyncId = AmazfishConfig::instance()->value("device/lastsportsyncid").toString();
 
+    emit message(tr("Downloading sports data"));
+    setOperationRunning(true);
     QJsonObject o;
     o.insert("t", "listRecs");
     o.insert("id", lastSyncId);
@@ -572,13 +595,16 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
     } else if (t == "actfetch") {
         int sample_count = json.value("count").toInt();
         QString fetch_state = json.value("state").toString();
-        if ((fetch_state == "end") && (sample_count > 0) && (m_samples.count() > 0)) {
-            QDateTime lastItemDateTime = m_samples.last().datetime(); // grab timestamp before m_samples.clear()
-            if (saveActivitySamples()) {
-                AmazfishConfig::instance()->setValue("device/lastactivitysyncmillis", lastItemDateTime.toMSecsSinceEpoch());
-                m_steps = getStepsFromDb();
-                emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
+        if (fetch_state == "end") {
+            if ((sample_count > 0) && (m_samples.count() > 0)) {
+                QDateTime lastItemDateTime = m_samples.last().datetime(); // grab timestamp before m_samples.clear()
+                if (saveActivitySamples()) {
+                    AmazfishConfig::instance()->setValue("device/lastactivitysyncmillis", lastItemDateTime.toMSecsSinceEpoch());
+                    m_steps = getStepsFromDb();
+                    emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
+                }
             }
+            setOperationRunning(false);
         }
     } else if (t == "act") {
 
@@ -658,6 +684,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
                 // empty
                 AmazfishConfig::instance()->setValue("device/lastsportsyncid", m_synced_activity_id);
             }
+            setOperationRunning(false);
         }
     } else if (t == "http") {
         // {"t":"http","url":"https://www.espruino.com/agps/casic.base64","id":"12060707015","timeout":10000}
@@ -1119,25 +1146,32 @@ void BangleJSDevice::forceCalendarSync()
 void BangleJSDevice::syncCalendar(QList<watchfish::CalendarEvent> &eventlist)
 {
     qDebug() << Q_FUNC_INFO << eventlist.count();
+    if (m_operationRunning) {
+        qDebug() << "Operation is running";
+        return;
+    }
+    setOperationRunning(true);
     m_eventlist = eventlist;
     forceCalendarSync();
 }
 
 void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
     if (!m_eventlist.has_value()) {
-	qDebug() << Q_FUNC_INFO << "DeviceInterface must call syncCalendar() first";
-	return;
+        qDebug() << Q_FUNC_INFO << "DeviceInterface must call syncCalendar() first";
+        setOperationRunning(false);
+        return;
     }
 
     qDebug() << Q_FUNC_INFO << deviceIds << m_event_id_map << m_eventlist->count();
 
     if (m_eventlist->isEmpty()) {
-	// No calendar events — wipe everything from device
-	for (int deviceId : deviceIds) {
-	    removeEventReminder(deviceId);
-	}
-	m_event_id_map.clear();
-	return;
+        // No calendar events — wipe everything from device
+        for (int deviceId : deviceIds) {
+            removeEventReminder(deviceId);
+        }
+        m_event_id_map.clear();
+        setOperationRunning(false);
+        return;
     }
 
     // Step 1: Device has IDs we have no record of (e.g. after app restart) — remove them
@@ -1147,27 +1181,27 @@ void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
     QSet<int> knownIds(m_event_id_map.values().begin(), m_event_id_map.values().end());
 #endif
     for (int deviceId : deviceIds) {
-	if (!knownIds.contains(deviceId)) {
-	    removeEventReminder(deviceId);
-	}
+        if (!knownIds.contains(deviceId)) {
+            removeEventReminder(deviceId);
+        }
     }
 
 
     // Step 2: UIDs no longer in eventlist — remove from device and map
     QSet<QString> incomingUids;
     for (const auto &event : *m_eventlist) {
-	incomingUids.insert(event.uid());
+        incomingUids.insert(event.uid());
     }
 
     QList<QString> toRemove;
     for (auto it = m_event_id_map.constBegin(); it != m_event_id_map.constEnd(); ++it) {
-	if (!incomingUids.contains(it.key())) {
-	    removeEventReminder(it.value());
-	    toRemove.append(it.key());
-	}
+        if (!incomingUids.contains(it.key())) {
+            removeEventReminder(it.value());
+            toRemove.append(it.key());
+        }
     }
     for (const QString &uid : toRemove) {
-	m_event_id_map.remove(uid);
+        m_event_id_map.remove(uid);
     }
 
     // Step 3: Send events missing from device
@@ -1177,17 +1211,19 @@ void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
     QSet<int> deviceIdSet(deviceIds.begin(), deviceIds.end());
 #endif
     for (const auto &event : *m_eventlist) {
-	const QString uid = event.uid();
+        const QString uid = event.uid();
 
-	if (!m_event_id_map.contains(uid)) {
-	    m_event_id_map.insert(uid, m_next_event_id++);
-	}
+        if (!m_event_id_map.contains(uid)) {
+            m_event_id_map.insert(uid, m_next_event_id++);
+        }
 
-	int id = m_event_id_map[uid];
-	if (!deviceIdSet.contains(id)) { // insert
-	    sendCalendarEvent(id, event);
-	} // else update
+        int id = m_event_id_map[uid];
+        if (!deviceIdSet.contains(id)) { // insert
+            sendCalendarEvent(id, event);
+        } // else update
     }
+
+    setOperationRunning(false);
 }
 
 
@@ -1199,7 +1235,7 @@ void BangleJSDevice::sendCalendarEvent(int id, const watchfish::CalendarEvent &e
 
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (!uart) {
-	return;
+        return;
     }
 
     QJsonObject o;
@@ -1233,7 +1269,7 @@ void BangleJSDevice::removeEventReminder(int id)
     qDebug() << Q_FUNC_INFO << id;
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (!uart) {
-	return;
+        return;
     }
     QJsonObject o;
     o.insert("t", "calendar-");

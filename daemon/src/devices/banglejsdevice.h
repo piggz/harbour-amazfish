@@ -43,6 +43,8 @@ public:
     void downloadActivityData() override;
     void downloadSportsData() override;
 
+    bool operationRunning() override;
+
     //Weather
     void sendWeather(CurrentWeather *weather) override;
 
@@ -58,6 +60,8 @@ private:
     Q_SLOT void serviceEvent(uint8_t event);
     Q_SLOT void handleRxJson(const QJsonObject &json);
 
+    bool m_operationRunning = false;
+    void setOperationRunning(bool running);
     int m_infoBatteryLevel = 0;
     int m_steps = 0;
     double m_heartrate = 0;
