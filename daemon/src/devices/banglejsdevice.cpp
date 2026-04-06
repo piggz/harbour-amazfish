@@ -1053,10 +1053,6 @@ QString BangleJSDevice::activityRecordsToTcx()
 }
 
 void BangleJSDevice::applyDeviceSetting(Amazfish::Settings s) {
-    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
-    if (!uart){
-        return;
-    }
 
     switch(s) {
     case Amazfish::Settings::SETTING_ALARMS:
@@ -1065,9 +1061,49 @@ void BangleJSDevice::applyDeviceSetting(Amazfish::Settings s) {
     case Amazfish::Settings::SETTING_DEVICE_TIME:
         setTime();
         break;
+    case Amazfish::Settings::SETTING_USER_GOAL:
+        setUserGoal(AmazfishConfig::instance()->profileFitnessGoal());
+        break;
+    case Amazfish::Settings::SETTING_USER_ALERT_GOAL:
+        setUserGoalAlert(AmazfishConfig::instance()->profileAlertFitnessGoal());
+        break;
     }
 
 }
+
+void BangleJSDevice::setUserGoal(uint steps) {
+    qDebug() << Q_FUNC_INFO << steps;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+
+    QString cmd = QString(
+                      "var h = require(\"Storage\").readJSON(\"health.json\", true) || {};"
+                      " h.stepGoal = %1;"
+                      " require(\"Storage\").writeJSON(\"health.json\", h);\n"
+                      ).arg(steps);
+    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8());
+
+}
+
+void BangleJSDevice::setUserGoalAlert(bool enabled) {
+    qDebug() << Q_FUNC_INFO << enabled;
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+
+    QString cmd = QString(
+                      "var h = require(\"Storage\").readJSON(\"health.json\", true) || {};"
+                      " h.stepGoalNotification = %1;"
+                      " require(\"Storage\").writeJSON(\"health.json\", h);\n"
+                      ).arg(enabled ? "true" : "false");
+
+    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8());
+
+}
+
 
 void BangleJSDevice::setAlarms()
 {
