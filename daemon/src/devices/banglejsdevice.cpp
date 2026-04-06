@@ -96,6 +96,14 @@ void BangleJSDevice::setOperationRunning(bool running)
     emit operationRunningChanged();
 }
 
+QString BangleJSDevice::alertIcon(const QString &appname) const {
+    auto it = AppToIconMap.find(appname);
+    if (it != AppToIconMap.end()) {
+        return it->second;
+    }
+    return "";
+}
+
 void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
@@ -111,17 +119,10 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
         return;
     }
 
-    QString src = notification.appName;
-    // if (notification.appName == "") {
-    //     // gadgedbridge does this https://codeberg.org/Freeyourgadget/Gadgetbridge/src/commit/3c8a9b5821160e80639a11554c42bba7dd4aece3/app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/banglejs/BangleJSDeviceSupport.java#L1436
-    //     // mapss probably at? https://github.com/espruino/BangleApps/blob/ec987e1ee2d4d6a3302baf9a26bbb2aae6f91737/apps/messageicons/icons/icon_names.json#L133
-    //     src = "SMS Message";
-    // }
-
     QJsonObject o;
     o.insert("t", "notify");
     o.insert("id", notification.id); //id is necessary for some apps like messageui, and should be unique
-    o.insert("src", src);
+    o.insert("src", alertIcon(notification.appId));
     o.insert("title", "");
     o.insert("subject", notification.summary);
     o.insert("body", notification.body);
