@@ -101,7 +101,7 @@ QString BangleJSDevice::alertIcon(const QString &appname) const {
     if (it != AppToIconMap.end()) {
         return it->second;
     }
-    return "";
+    return appname;
 }
 
 void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
