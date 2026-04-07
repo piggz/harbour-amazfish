@@ -105,6 +105,7 @@ void HuamiFetcher::reset()
         m_device->message(tr("All operations cancelled"));
     }
     qDeleteAll(m_operations);
+    m_operations.clear();
     delete m_currentOperation;
     m_currentOperation = nullptr;
     m_operationTimeout->stop();
