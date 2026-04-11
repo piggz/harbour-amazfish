@@ -2,6 +2,7 @@
 #define BANGLEJSDEVICE_H
 
 #include <optional>
+#include <map>
 #include <QObject>
 #include "abstractdevice.h"
 #include "activitysample.h"
@@ -12,6 +13,49 @@
 class BangleJSDevice : public AbstractDevice
 {
 public:
+    static inline std::map<QString, QString> AppToIconMap = {
+        // {"ubuntu/SFOS name", "bangle name"}
+        // Sources:
+        // - https://github.com/espruino/BangleApps/blob/master/apps/messageicons/icons/icon_names.json
+        // - https://open-store.io  (Ubuntu Touch app IDs)
+        // - https://sailfishos-chum.github.io  (SailfishOS Chum packages)
+
+        {"Lomiri Telephony Service Indicator", "sms message"}, // UT: SMS
+        {"dekko2.dekkoproject_dekko", "mail"},  // UT: Email client
+        {"teleports.ubports", "telegram"},      // UT: TELEports
+        {"depecher", "telegram"},               // SFOS
+        {"fernschreiber", "telegram"},          // SFOS
+        {"sailorgram", "telegram"},             // SFOS (old/unmaintained)
+        {"telegram", "telegram"},               // generic / Android layer
+        {"yottogram", "telegram"},              // SFOS
+        {"piepmatz", "twitter"},                // SFOS
+        {"tweetian", "twitter"},                // SFOS
+        {"twitter", "twitter"},                 // generic
+        {"whatsapp", "whatsapp"},
+        {"textsecure.nanuc", "signal"},         // UT: Axolotl (Signal client)
+        {"cinny.danfro_cinny", "element"},      // UT: Cinny UT
+        {"fluffychat.christianpauly", "element"}, // UT: FluffyChat
+        {"fluffychatflutter.red", "element"},   // UT: FluffyChat (Flutter)
+        {"harbour-sailtrix", "element"},        // SFOS: Sailtrix
+        {"harbour-hydrogen", "element"},        // SFOS: Hydrogen
+        {"harbour-matrix", "element"},          // SFOS: harbour-matrix
+        {"harbour-determinant", "element"},     // SFOS: Determinant
+        {"harbour-tooter", "mastodon"},         // SFOS
+        {"harbour-tooterb", "mastodon"},        // SFOS (beta branch)
+        {"im.kaidan.kaidan", "chat"},           // UT: Kaidan
+        {"harbour-kaidan", "chat"},             // SFOS: Kaidan (via Chum)
+        {"harbour-shmoose", "chat"},            // SFOS: Shmoose
+        {"harbour-pingyou", "chat"},            // SFOS: PingYou
+        {"harbour-sailslack", "slack"},         // SFOS (notifications unreliable)
+        {"rocketchat.pparent", "chat"},         // UT (no Bangle icon → "chat")
+        {"deltatouch.lotharketterer", "chat"},  // UT: DeltaTouch
+        {"facebook", "facebook"},
+        {"messenger", "messenger"},
+        {"instagram", "instagram"},
+        {"snapchat", "snapchat"},
+        {"skype", "skype"},
+    };
+
     explicit BangleJSDevice(const QString &pairedName, QObject *parent = 0);
 
     void pair() override;
@@ -89,6 +133,7 @@ private:
     void setAlarms();
     int getStepsFromDb();
 
+    QString alertIcon(const QString &appname) const;
 
     void forceCalendarSync(); // request list of events in bangle.js
     void syncCalendarWithDeviceIds(QList<int> &deviceIds);
