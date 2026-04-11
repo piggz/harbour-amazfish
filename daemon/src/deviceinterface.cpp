@@ -201,6 +201,20 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
 }
 
 void DeviceInterface::onNotificationClosed(quint32 nid, quint32 reason) {
+    qDebug() << Q_FUNC_INFO << nid << reason <<  m_notificationBuffer.count();
+
+    // remove closed notifications from buffer
+    if (!m_notificationBuffer.isEmpty()) {
+        auto it = m_notificationBuffer.begin();
+        while (it != m_notificationBuffer.end()) {
+            if (it->id == static_cast<int>(nid)) {
+                it = m_notificationBuffer.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
+
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)){
         m_device->sendAlertClosed(nid, reason);
     }
