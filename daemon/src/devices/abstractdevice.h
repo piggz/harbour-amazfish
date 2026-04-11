@@ -74,7 +74,8 @@ public:
     virtual QString information(Amazfish::Info i) const;
     virtual void applyDeviceSetting(Amazfish::Settings s);
     virtual void rebootWatch();
-    virtual void sendAlert(const Amazfish::WatchNotification &notification) = 0;
+    virtual void sendAlert(const Amazfish::WatchNotification &notification);
+    virtual void sendAlertClosed(quint32 nid, quint32 reason);
     virtual void incomingCall(const QString &caller) = 0;
     virtual void incomingCallEnded() = 0;
     virtual void syncCalendar(QList<watchfish::CalendarEvent> &eventlist);
@@ -100,6 +101,7 @@ public:
     Q_SIGNAL void connectionStateChanged();
     Q_SIGNAL void informationChanged(Amazfish::Info key, const QString& val);
     Q_SIGNAL void deviceEvent(Event event);
+    Q_SIGNAL void dismissNotification(quint32 id);
 
 protected:
     bool m_needsAuth = false;
