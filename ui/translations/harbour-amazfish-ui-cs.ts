@@ -256,37 +256,37 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Alert</source>
-        <translation type="unfinished"></translation>
+        <translation>Upozornění</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="216"/>
         <source>SMS Message (Ubuntu Touch)</source>
-        <translation type="unfinished"></translation>
+        <translation>SMS Zpráva (Ubuntu Touch)</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="226"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Email</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="231"/>
         <source>The quick brown fox jumps over the lazy dog</source>
-        <translation type="unfinished"></translation>
+        <translation>Příliš žluťoučký kůň úpěl ďábelské ódy</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="237"/>
         <source>Telegram message</source>
-        <translation type="unfinished"></translation>
+        <translation>Telegramová zpráva</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="244"/>
         <source>Matrix message</source>
-        <translation type="unfinished"></translation>
+        <translation>Matrixová zpráva</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="251"/>
         <source>Slack message</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpráva přes Slack</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="270"/>
@@ -413,32 +413,32 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="58"/>
         <source>Enable service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit službu při startu zařízení</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="181"/>
         <source>Sleep</source>
-        <translation type="unfinished">Spánek</translation>
+        <translation>Spánek</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="234"/>
         <source>Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Sporty</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="260"/>
         <source>SpO₂</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO₂</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="275"/>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="289"/>
         <source>Battery</source>
-        <translation type="unfinished">Akumulátor</translation>
+        <translation>Akumulátor</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="39"/>
@@ -706,7 +706,7 @@
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation>PAI</translation>
     </message>
 </context>
 <context>
@@ -3129,7 +3129,7 @@
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <source>Steps</source>
-        <translation type="unfinished">Kroky</translation>
+        <translation>Kroky</translation>
     </message>
 </context>
 <context>
