@@ -174,7 +174,7 @@
 <context>
     <name>DaemonInterface</name>
     <message>
-        <location filename="../src/daemoninterface.cpp" line="65"/>
+        <location filename="../src/daemoninterface.cpp" line="64"/>
         <source>Unexpected error</source>
         <translation>Neočekávaná chyba</translation>
     </message>
@@ -203,37 +203,37 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="314"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="382"/>
         <source>Serial No: </source>
         <translation>Sériové číslo: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="317"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="385"/>
         <source>Hardware Rev: </source>
         <translation>Revize hardware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="388"/>
         <source>Software Rev: </source>
         <translation>Revize software: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="326"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="394"/>
         <source>Model: </source>
         <translation>Model: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="332"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="400"/>
         <source>Firmware Rev: </source>
         <translation>Revize firmware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="397"/>
         <source>Manufacturer: </source>
         <translation>Výrobce: </translation>
     </message>
@@ -244,7 +244,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="323"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="391"/>
         <source>GPS Ver: </source>
         <translation>Verze GPS: </translation>
     </message>
@@ -254,78 +254,110 @@
         <translation>Testování funkcí</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="197"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="206"/>
+        <source>Alert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="216"/>
+        <source>SMS Message (Ubuntu Touch)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="226"/>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="231"/>
+        <source>The quick brown fox jumps over the lazy dog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="237"/>
+        <source>Telegram message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="244"/>
+        <source>Matrix message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="251"/>
+        <source>Slack message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="270"/>
         <source>Test Notification</source>
         <translation>Test oznámení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="210"/>
         <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
         <translation>Ahoj z aplikace Amazfish. Toto je dlouhá zpráva odeslaná přes BLE!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Test Email</source>
-        <translation>Test Emailu</translation>
+        <translation type="vanished">Test Emailu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Amazing fish</source>
-        <translation>Úžasná ryba</translation>
+        <translation type="vanished">Úžasná ryba</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
         <source>Hello, this is an email from Amazfish app!</source>
-        <translation>Ahoj, toto je email z aplikace Amazfish!</translation>
+        <translation type="vanished">Ahoj, toto je email z aplikace Amazfish!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="215"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="283"/>
         <source>Test Call</source>
         <translation>Test Volání</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="233"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>Fetch debug log</source>
         <translation>Stáhnout logy pro ladění</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="252"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
         <source>Fetch Data</source>
         <translation>Stáhnout data</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="270"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Test Popup</source>
         <translation>Test upozornění</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="278"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="346"/>
         <source>Send Weather</source>
         <translation>Odeslat počasí</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="288"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="356"/>
         <source>Update Calendar</source>
         <translation>Aktualizovat kalendář</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="369"/>
         <source>Music Control</source>
         <translation>Ovládání hudby</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="261"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
         <source>Request Screenshot</source>
         <translation>Vyžádat snímek obrazovky</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="219"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="208"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="287"/>
         <source>Somebody</source>
         <translation>Někdo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Title</source>
         <translation>Nadpis</translation>
     </message>
@@ -342,12 +374,12 @@
         <translation type="vanished">Ahoj, toto je e-mail ze Sailfish OS!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="224"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="292"/>
         <source>Test Immediate Alert Service</source>
         <translation>Test služby okamžitého upozornění</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="274"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="342"/>
         <source>This is a test notification</source>
         <translation>Toto je testovací upozorění</translation>
     </message>
@@ -364,72 +396,96 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="27"/>
+        <location filename="../qml/pages/FirstPage.qml" line="26"/>
         <source>Pair with watch</source>
         <translation>Párovat s hodinkami</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="63"/>
+        <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Connect to watch</source>
         <translation>Připojit k hodinkám</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="63"/>
+        <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Disconnect from watch</source>
         <translation>Odpojit od hodinek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="43"/>
+        <location filename="../qml/pages/FirstPage.qml" line="58"/>
+        <source>Enable service on boot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="181"/>
+        <source>Sleep</source>
+        <translation type="unfinished">Spánek</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="234"/>
+        <source>Sports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="260"/>
+        <source>SpO₂</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="289"/>
+        <source>Battery</source>
+        <translation type="unfinished">Akumulátor</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="39"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="47"/>
         <source>Data Graphs</source>
-        <translation>Datové grafy</translation>
+        <translation type="vanished">Datové grafy</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="51"/>
         <source>PAI</source>
-        <translation>PAI</translation>
+        <translation type="vanished">PAI</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="56"/>
         <source>Blood Oxygen</source>
-        <translation>Okysličení krve</translation>
+        <translation type="vanished">Okysličení krve</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="165"/>
+        <location filename="../qml/pages/FirstPage.qml" line="297"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="170"/>
         <source>Steps</source>
-        <translation>Kroky</translation>
+        <translation type="vanished">Kroky</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="238"/>
+        <location filename="../qml/pages/FirstPage.qml" line="198"/>
         <source>Heartrate</source>
         <translation>Puls</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="264"/>
+        <location filename="../qml/pages/FirstPage.qml" line="207"/>
         <source>%1 bpm</source>
         <translation>%1 tep/min</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="283"/>
         <source>Service</source>
-        <translation>Služba</translation>
+        <translation type="vanished">Služba</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="289"/>
         <source>Enable on boot</source>
-        <translation>Povolit při startu</translation>
+        <translation type="vanished">Povolit při startu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="39"/>
+        <location filename="../qml/pages/FirstPage.qml" line="312"/>
         <source>Install File</source>
         <translation>Nainstalovat soubor</translation>
     </message>
@@ -642,6 +698,15 @@
         <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
         <translation>Doba trvání</translation>
+    </message>
+</context>
+<context>
+    <name>PAITile</name>
+    <message>
+        <location filename="../qml/components/PAITile.qml" line="5"/>
+        <location filename="../qml/components/PAITile.qml" line="5"/>
+        <source>PAI</source>
+        <translation type="unfinished">PAI</translation>
     </message>
 </context>
 <context>
@@ -3038,12 +3103,12 @@
         <translation>Sportovní aktivity</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="44"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
         <source>Download Next Activity</source>
         <translation>Stáhnout další aktivitu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="166"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
@@ -3056,6 +3121,15 @@
         <location filename="../qml/pages/StepsPage.qml" line="55"/>
         <source>Steps</source>
         <translation>Kroky</translation>
+    </message>
+</context>
+<context>
+    <name>StepsTile</name>
+    <message>
+        <location filename="../qml/components/StepsTile.qml" line="11"/>
+        <location filename="../qml/components/StepsTile.qml" line="11"/>
+        <source>Steps</source>
+        <translation type="unfinished">Kroky</translation>
     </message>
 </context>
 <context>
