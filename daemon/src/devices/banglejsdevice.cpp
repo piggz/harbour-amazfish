@@ -486,6 +486,8 @@ void BangleJSDevice::refreshInformation()
     BatteryService *bat = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
     if (bat) {
         bat->refreshInformation();
+    } else {
+        emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(m_infoBatteryLevel));
     }
 
 
