@@ -23,6 +23,7 @@ public:
         {"Lomiri Telephony Service Indicator", "sms message"}, // UT: SMS
         {"dekko2.dekkoproject_dekko", "mail"},  // UT: Email client
         {"teleports.ubports", "telegram"},      // UT: TELEports
+        {"teleports.ubports_teleports", "telegram"}, // UT: TELEports
         {"depecher", "telegram"},               // SFOS
         {"fernschreiber", "telegram"},          // SFOS
         {"sailorgram", "telegram"},             // SFOS (old/unmaintained)
