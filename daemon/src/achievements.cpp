@@ -33,19 +33,27 @@ void Achievements::updateStepsStatus(int steps, int goal)
 
 #ifdef UUITK_EDITION
     try {
-	MetricManagerPtr manager(MetricManager::getInstance());
-	MetricPtr metric(
-	    manager->add(
-		MetricParameters("uk.co.piggz.harbour-amazfish.steps-metric")
-		    .formatString(selectStepsMessage(steps, goal))
-		    .emptyDataString("No data")
-		    .textDomain("harbour-amazfish")
-		)
-	    );
-	metric->update(static_cast<double>(steps));
-	qDebug() << "metric-update(double steps)" << steps;
-    } catch (const std::exception& e) {
-	qWarning() << "Failed to update steps metric:" << e.what();
+        if (!m_manager) {
+            m_manager = UserMetricsInput::MetricManager::getInstance();
+        }
+
+        QString message = selectStepsMessage(steps, goal);
+
+        if (m_metric.isNull() || message != m_lastMessage) {
+            m_metric = m_manager->add(
+                UserMetricsInput::MetricParameters("uk.co.piggz.harbour-amazfish.steps-metric")
+                    .formatString(message)
+                    .emptyDataString(tr("No data"))
+                    .textDomain("harbour-amazfish"));
+            m_lastMessage = message;
+        }
+
+        if (m_metric) {
+            m_metric->update(static_cast<double>(steps));
+            qDebug() << "metric-update(double steps)" << steps;
+        }
+    } catch (const std::exception &e) {
+        qWarning() << "Failed to update steps metric:" << e.what();
     }
 #endif
 
@@ -65,9 +73,9 @@ QString Achievements::selectStepsMessage(int steps, double goal)
 
     for (const auto& entry : usedMap) {
         if (entry.first > reached) {
-            return entry.second.arg(steps);
+            return entry.second;
         }
     }
 
-    return usedMap.rbegin()->second.arg(steps);
+    return usedMap.rbegin()->second;
 }
