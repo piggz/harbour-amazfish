@@ -1398,7 +1398,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="94"/>
         <source>Wear Location</source>
-        <translation type="unfinished">Posizione usura</translation>
+        <translation>Indossato in luogo</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="97"/>
@@ -1769,7 +1769,7 @@
         <location filename="../qml/components/Translation.js" line="8"/>
         <location filename="../qml/components/Translation.js" line="8"/>
         <source>Not Worn</source>
-        <translation type="unfinished">Non Indossato</translation>
+        <translation>Non Indossato</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="9"/>
@@ -3449,19 +3449,19 @@
         <location filename="../qml/components/Translation.js" line="302"/>
         <location filename="../qml/components/Translation.js" line="302"/>
         <source>Anaerobic Training Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Effetto formazione anaerobica</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="303"/>
         <location filename="../qml/components/Translation.js" line="303"/>
         <source>Ascent</source>
-        <translation type="unfinished"></translation>
+        <translation>Salita</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="304"/>
         <location filename="../qml/components/Translation.js" line="304"/>
         <source>Time Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo ascendente</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="305"/>
@@ -3471,7 +3471,7 @@
         <location filename="../qml/components/Translation.js" line="306"/>
         <location filename="../qml/components/Translation.js" line="315"/>
         <source>Average Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Battito cardiaco medio</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="307"/>
@@ -3479,19 +3479,19 @@
         <location filename="../qml/components/Translation.js" line="307"/>
         <location filename="../qml/components/Translation.js" line="350"/>
         <source>Average Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo medio</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="308"/>
         <location filename="../qml/components/Translation.js" line="308"/>
         <source>Average Lap Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo medio per giro</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="309"/>
         <location filename="../qml/components/Translation.js" line="309"/>
         <source>Average Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocità media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="310"/>
@@ -3499,13 +3499,13 @@
         <location filename="../qml/components/Translation.js" line="310"/>
         <location filename="../qml/components/Translation.js" line="355"/>
         <source>Average Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>Andatura media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="311"/>
         <location filename="../qml/components/Translation.js" line="311"/>
         <source>Average Stroke Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distanza media colpo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="312"/>
@@ -3513,25 +3513,25 @@
         <location filename="../qml/components/Translation.js" line="312"/>
         <location filename="../qml/components/Translation.js" line="360"/>
         <source>Average Stroke Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasso medio colpi</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="313"/>
         <location filename="../qml/components/Translation.js" line="313"/>
         <source>Average Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitudine media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="316"/>
         <location filename="../qml/components/Translation.js" line="316"/>
         <source>Average Slope</source>
-        <translation type="unfinished"></translation>
+        <translation>Pendenza media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="317"/>
         <location filename="../qml/components/Translation.js" line="317"/>
         <source>Average Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="318"/>
@@ -3539,67 +3539,67 @@
         <location filename="../qml/components/Translation.js" line="318"/>
         <location filename="../qml/components/Translation.js" line="319"/>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation>Calorie</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="320"/>
         <location filename="../qml/components/Translation.js" line="320"/>
         <source>Current Workout Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Sforzo corrente workout</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="321"/>
         <location filename="../qml/components/Translation.js" line="321"/>
         <source>Descent</source>
-        <translation type="unfinished"></translation>
+        <translation>Discesa</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="322"/>
         <location filename="../qml/components/Translation.js" line="322"/>
         <source>Time Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo discendente</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="323"/>
         <location filename="../qml/components/Translation.js" line="323"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distanza</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="324"/>
         <location filename="../qml/components/Translation.js" line="324"/>
         <source>Downhill Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo di discesa</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="325"/>
         <location filename="../qml/components/Translation.js" line="325"/>
         <source>Elevation Gain</source>
-        <translation type="unfinished"></translation>
+        <translation>Guadagno elevazione</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="326"/>
         <location filename="../qml/components/Translation.js" line="326"/>
         <source>Elevation Loss</source>
-        <translation type="unfinished"></translation>
+        <translation>Perdita elevazione</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="327"/>
         <location filename="../qml/components/Translation.js" line="327"/>
         <source>Time on Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo sul piatto</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="328"/>
         <location filename="../qml/components/Translation.js" line="328"/>
         <source>Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>Giri</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="329"/>
         <location filename="../qml/components/Translation.js" line="329"/>
         <source>Max Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitudine massima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="331"/>
@@ -3607,127 +3607,127 @@
         <location filename="../qml/components/Translation.js" line="331"/>
         <location filename="../qml/components/Translation.js" line="332"/>
         <source>Max Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Battito cardiaco massimo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="333"/>
         <location filename="../qml/components/Translation.js" line="333"/>
         <source>VO₂ Max</source>
-        <translation type="unfinished"></translation>
+        <translation>VO2 Max</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="334"/>
         <location filename="../qml/components/Translation.js" line="334"/>
         <source>Max Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Latitudine massima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="335"/>
         <location filename="../qml/components/Translation.js" line="335"/>
         <source>Max Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitudine massima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="336"/>
         <location filename="../qml/components/Translation.js" line="336"/>
         <source>Max Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo massimo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="337"/>
         <location filename="../qml/components/Translation.js" line="337"/>
         <source>Max Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocità massima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="338"/>
         <location filename="../qml/components/Translation.js" line="338"/>
         <source>Max Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura massima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="339"/>
         <location filename="../qml/components/Translation.js" line="339"/>
         <source>Min Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitudine minima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="340"/>
         <location filename="../qml/components/Translation.js" line="340"/>
         <source>Min Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Battito cardiaco minimo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="341"/>
         <location filename="../qml/components/Translation.js" line="341"/>
         <source>Min Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Latitudine minima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="342"/>
         <location filename="../qml/components/Translation.js" line="342"/>
         <source>Min Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitudine minima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="343"/>
         <location filename="../qml/components/Translation.js" line="343"/>
         <source>Min Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo minimo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="344"/>
         <location filename="../qml/components/Translation.js" line="344"/>
         <source>Min Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura minima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="345"/>
         <location filename="../qml/components/Translation.js" line="345"/>
         <source>Mov Consistency</source>
-        <translation type="unfinished"></translation>
+        <translation>Consistenza movimento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="346"/>
         <location filename="../qml/components/Translation.js" line="346"/>
         <source>Mov Continuity</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuità movimento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="347"/>
         <location filename="../qml/components/Translation.js" line="347"/>
         <source>Mov Rhythm</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo movimento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="348"/>
         <location filename="../qml/components/Translation.js" line="348"/>
         <source>Mov Speed Decay</source>
-        <translation type="unfinished"></translation>
+        <translation>Perdita velocità movimento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="349"/>
         <location filename="../qml/components/Translation.js" line="349"/>
         <source>Mov Stability</source>
-        <translation type="unfinished"></translation>
+        <translation>Stabilità movimento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="351"/>
         <location filename="../qml/components/Translation.js" line="351"/>
         <source>Best Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo migliore</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="352"/>
         <location filename="../qml/components/Translation.js" line="352"/>
         <source>Pause Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durata pausa</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="353"/>
         <location filename="../qml/components/Translation.js" line="353"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Passi</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="314"/>
@@ -3735,7 +3735,7 @@
         <location filename="../qml/components/Translation.js" line="314"/>
         <location filename="../qml/components/Translation.js" line="354"/>
         <source>Average Cadence</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadenza media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="330"/>
@@ -3743,91 +3743,91 @@
         <location filename="../qml/components/Translation.js" line="330"/>
         <location filename="../qml/components/Translation.js" line="356"/>
         <source>Max Cadence</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadenza massima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="357"/>
         <location filename="../qml/components/Translation.js" line="357"/>
         <source>Strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>Colpi</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="358"/>
         <location filename="../qml/components/Translation.js" line="358"/>
         <source>Average Distance per Stroke</source>
-        <translation type="unfinished"></translation>
+        <translation>Distanza media per colpo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="359"/>
         <location filename="../qml/components/Translation.js" line="359"/>
         <source>Max Stroke Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritmo massimo per colpo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="361"/>
         <location filename="../qml/components/Translation.js" line="361"/>
         <source>Lane Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Lunghezza corsia</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="362"/>
         <location filename="../qml/components/Translation.js" line="362"/>
         <source>Swim Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>Giri nuoto</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="363"/>
         <location filename="../qml/components/Translation.js" line="363"/>
         <source>Swim Strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>Colpi nuoto</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="364"/>
         <location filename="../qml/components/Translation.js" line="364"/>
         <source>Swim Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stile nuoto</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="365"/>
         <location filename="../qml/components/Translation.js" line="365"/>
         <source>SWOLF Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Indice SWOLF</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="366"/>
         <location filename="../qml/components/Translation.js" line="366"/>
         <source>Total Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrampicata totale</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="367"/>
         <location filename="../qml/components/Translation.js" line="367"/>
         <source>Total Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durata totale</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="368"/>
         <location filename="../qml/components/Translation.js" line="368"/>
         <source>Total Stride</source>
-        <translation type="unfinished"></translation>
+        <translation>Andatura totale</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="369"/>
         <location filename="../qml/components/Translation.js" line="369"/>
         <source>Uphill Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo in salita</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="370"/>
         <location filename="../qml/components/Translation.js" line="370"/>
         <source>Workout Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durata dell&apos;allenamento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="381"/>
         <location filename="../qml/components/Translation.js" line="381"/>
         <source>bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>bpm</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="382"/>
@@ -3835,67 +3835,67 @@
         <location filename="../qml/components/Translation.js" line="382"/>
         <location filename="../qml/components/Translation.js" line="383"/>
         <source>kcal</source>
-        <translation type="unfinished"></translation>
+        <translation>kcal</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="384"/>
         <location filename="../qml/components/Translation.js" line="384"/>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="385"/>
         <location filename="../qml/components/Translation.js" line="385"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation>°</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="386"/>
         <location filename="../qml/components/Translation.js" line="386"/>
         <source>laps</source>
-        <translation type="unfinished"></translation>
+        <translation>giri</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="387"/>
         <location filename="../qml/components/Translation.js" line="387"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="388"/>
         <location filename="../qml/components/Translation.js" line="388"/>
         <source>m/s</source>
-        <translation type="unfinished"></translation>
+        <translation>m/s</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="389"/>
         <location filename="../qml/components/Translation.js" line="389"/>
         <source>min/km</source>
-        <translation type="unfinished"></translation>
+        <translation>min/km</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="390"/>
         <location filename="../qml/components/Translation.js" line="390"/>
         <source>ml/kg/min</source>
-        <translation type="unfinished"></translation>
+        <translation>ml/kg/min</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="391"/>
         <location filename="../qml/components/Translation.js" line="391"/>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="392"/>
         <location filename="../qml/components/Translation.js" line="392"/>
         <source>s/km</source>
-        <translation type="unfinished"></translation>
+        <translation>s/km</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="393"/>
         <location filename="../qml/components/Translation.js" line="393"/>
         <source>s/m</source>
-        <translation type="unfinished"></translation>
+        <translation>s/m</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="394"/>
@@ -3903,31 +3903,31 @@
         <location filename="../qml/components/Translation.js" line="394"/>
         <location filename="../qml/components/Translation.js" line="396"/>
         <source>steps</source>
-        <translation type="unfinished"></translation>
+        <translation>passi</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="395"/>
         <location filename="../qml/components/Translation.js" line="395"/>
         <source>steps/min</source>
-        <translation type="unfinished"></translation>
+        <translation>passi/min</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="397"/>
         <location filename="../qml/components/Translation.js" line="397"/>
         <source>strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>colpi</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="398"/>
         <location filename="../qml/components/Translation.js" line="398"/>
         <source>strokes/s</source>
-        <translation type="unfinished"></translation>
+        <translation>colpi/s</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="399"/>
         <location filename="../qml/components/Translation.js" line="399"/>
         <source>SWOLF</source>
-        <translation type="unfinished"></translation>
+        <translation>SWOLF</translation>
     </message>
 </context>
 <context>
@@ -3935,12 +3935,12 @@
     <message>
         <location filename="../qml/pages/UnpairDeviceDialog.qml" line="20"/>
         <source>Unpair</source>
-        <translation type="unfinished"></translation>
+        <translation>Scollega</translation>
     </message>
     <message>
         <location filename="../qml/pages/UnpairDeviceDialog.qml" line="31"/>
         <source>Before proceeding you need to unpair your current device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prima di procedere è necessario scollegare il dispositivo corrente.</translation>
     </message>
 </context>
 </TS>
