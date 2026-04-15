@@ -224,15 +224,15 @@ QString DaemonInterface::information(Amazfish::Info i)
     return reply;
 }
 
-void DaemonInterface::sendAlert(const int notificationId, const QString &sender, const QString &subject, const QString &message, bool allowDuplicate)
+void DaemonInterface::sendAlert(const int notificationId, const QString &appId, const QString &appName, const QString &summary, const QString &body, bool allowDuplicate)
 {
 
     Amazfish::WatchNotification n = {
         .id = notificationId,
-        .appId = "uk.co.piggz.amazfish",
-        .appName = sender,
-        .summary = subject,
-        .body = message
+        .appId = appId,
+        .appName = appName,
+        .summary = summary,
+        .body = body
     };
 
     if (!iface || !iface->isValid()) {

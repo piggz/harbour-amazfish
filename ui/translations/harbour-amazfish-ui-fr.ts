@@ -174,7 +174,7 @@
 <context>
     <name>DaemonInterface</name>
     <message>
-        <location filename="../src/daemoninterface.cpp" line="65"/>
+        <location filename="../src/daemoninterface.cpp" line="64"/>
         <source>Unexpected error</source>
         <translation>Erreur inattendue</translation>
     </message>
@@ -193,19 +193,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="314"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="382"/>
         <source>Serial No: </source>
         <translation>Numéro de série&#xa0;: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="317"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="385"/>
         <source>Hardware Rev: </source>
         <translation>Révision matérielle&#xa0;: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="388"/>
         <source>Software Rev: </source>
         <translation>Révision logicielle&#xa0;: </translation>
     </message>
@@ -216,57 +216,81 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="323"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="391"/>
         <source>GPS Ver: </source>
         <translation>GPS Ver&#xa0;: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="197"/>
-        <source>Test Notification</source>
-        <translation>Notification de test</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
-        <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
-        <source>Test Email</source>
-        <translation>Email de test</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
-        <source>Amazing fish</source>
+        <source>Alert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
-        <source>Hello, this is an email from Amazfish app!</source>
+        <location filename="../qml/pages/DebugInfo.qml" line="216"/>
+        <source>SMS Message (Ubuntu Touch)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="215"/>
-        <source>Test Call</source>
-        <translation>Appel de test</translation>
+        <location filename="../qml/pages/DebugInfo.qml" line="226"/>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="233"/>
-        <source>Fetch debug log</source>
-        <translation>Récupérer le fichier de débogage</translation>
+        <location filename="../qml/pages/DebugInfo.qml" line="231"/>
+        <source>The quick brown fox jumps over the lazy dog</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="252"/>
-        <source>Fetch Data</source>
+        <location filename="../qml/pages/DebugInfo.qml" line="237"/>
+        <source>Telegram message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="244"/>
+        <source>Matrix message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="251"/>
+        <source>Slack message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="270"/>
+        <source>Test Notification</source>
+        <translation>Notification de test</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="210"/>
+        <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Email</source>
+        <translation type="vanished">Email de test</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="283"/>
+        <source>Test Call</source>
+        <translation>Appel de test</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
+        <source>Fetch debug log</source>
+        <translation>Récupérer le fichier de débogage</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <source>Fetch Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Test Popup</source>
         <translation>Popup de test</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="278"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="346"/>
         <source>Send Weather</source>
         <translation>Envoyer la météo</translation>
     </message>
@@ -282,19 +306,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="326"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="394"/>
         <source>Model: </source>
         <translation>Modèle&#xa0;: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="332"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="400"/>
         <source>Firmware Rev: </source>
         <translation>Rév. Firmware&#xa0;: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="397"/>
         <source>Manufacturer: </source>
         <translation>Fabriquant&#xa0;: </translation>
     </message>
@@ -304,28 +328,28 @@
         <translation>Tests fonctionnels</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="288"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="356"/>
         <source>Update Calendar</source>
         <translation>Mettre à jour calendrier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="369"/>
         <source>Music Control</source>
         <translation>Contrôle musique</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="261"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
         <source>Request Screenshot</source>
         <translation>Demander capture d&apos;écran</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="219"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="208"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="287"/>
         <source>Somebody</source>
         <translation>Quelqu&apos;un</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Title</source>
         <translation>Titre</translation>
     </message>
@@ -342,12 +366,12 @@
         <translation type="vanished">Hello, ceci est un email envoyé depuis Sailfish OS&#x202f;!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="224"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="292"/>
         <source>Test Immediate Alert Service</source>
         <translation>Tester service d’alerte immédiate</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="274"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="342"/>
         <source>This is a test notification</source>
         <translation>Ceci est une notification de test</translation>
     </message>
@@ -364,72 +388,88 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="27"/>
+        <location filename="../qml/pages/FirstPage.qml" line="26"/>
         <source>Pair with watch</source>
         <translation>Appairer avec la montre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="43"/>
+        <location filename="../qml/pages/FirstPage.qml" line="39"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="63"/>
+        <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Disconnect from watch</source>
         <translation>Déconnexion de la montre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="63"/>
+        <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Connect to watch</source>
         <translation>Connexion à la montre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="47"/>
+        <location filename="../qml/pages/FirstPage.qml" line="58"/>
+        <source>Enable service on boot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="181"/>
+        <source>Sleep</source>
+        <translation type="unfinished">Sommeil</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="234"/>
+        <source>Sports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="260"/>
+        <source>SpO₂</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="289"/>
+        <source>Battery</source>
+        <translation type="unfinished">Batterie</translation>
+    </message>
+    <message>
         <source>Data Graphs</source>
-        <translation>Graphes de données</translation>
+        <translation type="vanished">Graphes de données</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="51"/>
-        <source>PAI</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="56"/>
-        <source>Blood Oxygen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="165"/>
+        <location filename="../qml/pages/FirstPage.qml" line="297"/>
         <source>%1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="170"/>
         <source>Steps</source>
-        <translation>Pas</translation>
+        <translation type="vanished">Pas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="238"/>
+        <location filename="../qml/pages/FirstPage.qml" line="198"/>
         <source>Heartrate</source>
         <translation type="unfinished">Rythme cardiaque</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="264"/>
+        <location filename="../qml/pages/FirstPage.qml" line="207"/>
         <source>%1 bpm</source>
         <translation>%1 bpm</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="283"/>
         <source>Service</source>
-        <translation>Service</translation>
+        <translation type="vanished">Service</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="289"/>
         <source>Enable on boot</source>
-        <translation>Activer au démarrage</translation>
+        <translation type="vanished">Activer au démarrage</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="39"/>
+        <location filename="../qml/pages/FirstPage.qml" line="312"/>
         <source>Install File</source>
         <translation>Fichier d&apos;installation</translation>
     </message>
@@ -642,6 +682,15 @@
         <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
         <translation>Durée</translation>
+    </message>
+</context>
+<context>
+    <name>PAITile</name>
+    <message>
+        <location filename="../qml/components/PAITile.qml" line="5"/>
+        <location filename="../qml/components/PAITile.qml" line="5"/>
+        <source>PAI</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1886,12 +1935,12 @@
         <translation>Activités sportives</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="44"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
         <source>Download Next Activity</source>
         <translation>Télécharger activité suivante</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="166"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
         <source>Remove</source>
         <translation>Retirer</translation>
     </message>
@@ -1904,6 +1953,15 @@
         <location filename="../qml/pages/StepsPage.qml" line="55"/>
         <source>Steps</source>
         <translation>Pas</translation>
+    </message>
+</context>
+<context>
+    <name>StepsTile</name>
+    <message>
+        <location filename="../qml/components/StepsTile.qml" line="11"/>
+        <location filename="../qml/components/StepsTile.qml" line="11"/>
+        <source>Steps</source>
+        <translation type="unfinished">Pas</translation>
     </message>
 </context>
 <context>
