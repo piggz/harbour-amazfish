@@ -8,6 +8,7 @@ class DeviceFactory
 {
 public:
     static AbstractDevice* createDevice(const QString &deviceName, const QString &deviceType);
+    static void printAvailableFeatures();
 };
 
 #endif

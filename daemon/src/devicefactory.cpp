@@ -14,6 +14,11 @@
 #include "dk08device.h"
 
 #include <functional>
+#include <QMetaEnum>
+#include <QTextStream>
+#include <QFile>
+#include <QRegularExpression>
+#include <QDebug>
 
 using DeviceCreator = std::function<AbstractDevice*(const QString &)>;
 
@@ -51,4 +56,75 @@ AbstractDevice* DeviceFactory::createDevice(const QString &deviceName, const QSt
 
     qWarning() << "DeviceCreator not found";
     return nullptr;
+}
+
+void DeviceFactory::printAvailableFeatures()
+{
+    for (auto it = deviceMap.begin(); it != deviceMap.end(); ++it) {
+        QString type = it.key();
+
+        // Create CamelCase filename from device name
+        QString fileName;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0) // Qt 5
+        QStringList parts = type.split(QRegExp("[\\s\\.\\-\\/]+"), QString::SkipEmptyParts);
+#else // Qt 6+
+        QStringList parts = type.split(QRegularExpression("[\\s\\.\\-\\/]+"), Qt::SkipEmptyParts);
+#endif
+        for (const QString &part : parts) {
+            fileName += part.at(0).toUpper() + part.mid(1);
+        }
+        fileName += ".md";
+
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            qWarning() << "Could not open file for writing:" << fileName;
+            continue;
+        }
+
+        QTextStream out(&file);
+        AbstractDevice* dev = it.value()(it.key());
+        if (dev) {
+            out << "---\n";
+            out << "title: \"" << type << "\"\n";
+            out << "image:\n";
+            out << "link:\n";
+            out << "support:\n";
+            out << "features:" << "\n";
+            Amazfish::Features supportedFeatures = dev->supportedFeatures();
+            QMetaEnum featureEnum = QMetaEnum::fromType<Amazfish::Feature>();
+            for (int i = 0; i < featureEnum.keyCount(); ++i) {
+                int val = featureEnum.value(i);
+                if (val == 0) {
+                    continue; // Skip FEATURE_NONE
+                }
+                out << "  - id: \"" << featureEnum.key(i) << "\"" << "\n";
+                if (supportedFeatures & static_cast<Amazfish::Feature>(val)) {
+                    out << "    value: \"Y\"" << "\n";
+                } else {
+                    out << "    value: \"N\"" << "\n";
+                }
+            }
+
+            Amazfish::DataTypes supportedDataTypes = dev->supportedDataTypes();
+            QMetaEnum dataTypeEnum = QMetaEnum::fromType<Amazfish::DataType>();
+            for (int i = 0; i < dataTypeEnum.keyCount(); ++i) {
+                int val = dataTypeEnum.value(i);
+                if (val == 0) {
+                    continue; // Skip TYPE_NONE
+                }
+
+                out << "  - id: \"" << dataTypeEnum.key(i) << "\"" << "\n";
+                if (supportedDataTypes & static_cast<Amazfish::DataType>(val)) {
+                    out << "    value: \"Y\"" << "\n";
+                } else {
+                    out << "    value: \"N\"" << "\n";
+                }
+            }
+
+            delete dev;
+        }
+        out << "---\n";
+        file.close();
+        qDebug() << "Exported features for" << type << "to" << fileName;
+    }
 }

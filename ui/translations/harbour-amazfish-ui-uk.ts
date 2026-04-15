@@ -174,7 +174,7 @@
 <context>
     <name>DaemonInterface</name>
     <message>
-        <location filename="../src/daemoninterface.cpp" line="65"/>
+        <location filename="../src/daemoninterface.cpp" line="64"/>
         <source>Unexpected error</source>
         <translation>Несподівана помилка</translation>
     </message>
@@ -193,19 +193,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="314"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="382"/>
         <source>Serial No: </source>
         <translation>Серійний номер: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="317"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="385"/>
         <source>Hardware Rev: </source>
         <translation>Версія апаратного забезпечення: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="388"/>
         <source>Software Rev: </source>
         <translation>Версія програмного забезпечення: </translation>
     </message>
@@ -216,52 +216,41 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="323"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="391"/>
         <source>GPS Ver: </source>
         <translation>Версія GPS: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="197"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="270"/>
         <source>Test Notification</source>
         <translation>Тестове Повідомлення</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="210"/>
         <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Test Email</source>
-        <translation>Тестовий електронний лист</translation>
+        <translation type="vanished">Тестовий електронний лист</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
-        <source>Amazing fish</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="211"/>
-        <source>Hello, this is an email from Amazfish app!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="215"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="283"/>
         <source>Test Call</source>
         <translation>Тестовий дзвінок</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="233"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>Fetch debug log</source>
         <translation>Отримати журнал налагодження</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="252"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
         <source>Fetch Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="270"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Test Popup</source>
         <translation>Тестове спливаюче вікно</translation>
     </message>
@@ -277,19 +266,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="326"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="394"/>
         <source>Model: </source>
         <translation>Модель: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="332"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="400"/>
         <source>Firmware Rev: </source>
         <translation>Версія прошивки: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="397"/>
         <source>Manufacturer: </source>
         <translation>Виробник: </translation>
     </message>
@@ -299,33 +288,68 @@
         <translation>Випробування функцій</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="278"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="206"/>
+        <source>Alert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="216"/>
+        <source>SMS Message (Ubuntu Touch)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="226"/>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="231"/>
+        <source>The quick brown fox jumps over the lazy dog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="237"/>
+        <source>Telegram message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="244"/>
+        <source>Matrix message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="251"/>
+        <source>Slack message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/DebugInfo.qml" line="346"/>
         <source>Send Weather</source>
         <translation>Надіслати погоду</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="288"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="356"/>
         <source>Update Calendar</source>
         <translation>Оновити календар</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="369"/>
         <source>Music Control</source>
         <translation>Управління музикою</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="261"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
         <source>Request Screenshot</source>
         <translation>Запит на знімок екрана</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="219"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="208"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="287"/>
         <source>Somebody</source>
         <translation>Хтось</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="202"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Title</source>
         <translation>Назва</translation>
     </message>
@@ -342,12 +366,12 @@
         <translation type="vanished">Привіт, це електронний лист від Sailfish OS!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="224"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="292"/>
         <source>Test Immediate Alert Service</source>
         <translation>Тест служби негайного оповіщення</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="274"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="342"/>
         <source>This is a test notification</source>
         <translation>Це тестове повідомлення</translation>
     </message>
@@ -364,72 +388,92 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="27"/>
+        <location filename="../qml/pages/FirstPage.qml" line="26"/>
         <source>Pair with watch</source>
         <translation>Створити пару з годинником</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="43"/>
+        <location filename="../qml/pages/FirstPage.qml" line="39"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="63"/>
+        <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Disconnect from watch</source>
         <translation>Відключити від годинника</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="63"/>
+        <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Connect to watch</source>
         <translation>Підключити до годинника</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="47"/>
-        <source>Data Graphs</source>
-        <translation>Графіки даних</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="51"/>
-        <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="56"/>
-        <source>Blood Oxygen</source>
+        <location filename="../qml/pages/FirstPage.qml" line="58"/>
+        <source>Enable service on boot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="165"/>
+        <location filename="../qml/pages/FirstPage.qml" line="181"/>
+        <source>Sleep</source>
+        <translation type="unfinished">Сон</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="234"/>
+        <source>Sports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="260"/>
+        <source>SpO₂</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="289"/>
+        <source>Battery</source>
+        <translation type="unfinished">Акумулятор</translation>
+    </message>
+    <message>
+        <source>Data Graphs</source>
+        <translation type="vanished">Графіки даних</translation>
+    </message>
+    <message>
+        <source>PAI</source>
+        <translation type="obsolete">PAI</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="297"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="170"/>
         <source>Steps</source>
-        <translation>Кроки</translation>
+        <translation type="vanished">Кроки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="238"/>
+        <location filename="../qml/pages/FirstPage.qml" line="198"/>
         <source>Heartrate</source>
         <translation>Пульс</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="264"/>
+        <location filename="../qml/pages/FirstPage.qml" line="207"/>
         <source>%1 bpm</source>
         <translation>%1 уд/хв</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="283"/>
         <source>Service</source>
-        <translation>Служба</translation>
+        <translation type="vanished">Служба</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="289"/>
         <source>Enable on boot</source>
-        <translation>Увімкнути при завантаженні</translation>
+        <translation type="vanished">Увімкнути при завантаженні</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="39"/>
+        <location filename="../qml/pages/FirstPage.qml" line="312"/>
         <source>Install File</source>
         <translation>Встановити файл</translation>
     </message>
@@ -642,6 +686,15 @@
         <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
         <translation>Тривалість</translation>
+    </message>
+</context>
+<context>
+    <name>PAITile</name>
+    <message>
+        <location filename="../qml/components/PAITile.qml" line="5"/>
+        <location filename="../qml/components/PAITile.qml" line="5"/>
+        <source>PAI</source>
+        <translation type="unfinished">PAI</translation>
     </message>
 </context>
 <context>
@@ -1758,12 +1811,12 @@
         <translation>Спортивні заходи</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="44"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
         <source>Download Next Activity</source>
         <translation>Завантажити наступну активність</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="166"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
         <source>Remove</source>
         <translation>Видалити</translation>
     </message>
@@ -1776,6 +1829,15 @@
         <location filename="../qml/pages/StepsPage.qml" line="55"/>
         <source>Steps</source>
         <translation>Кроки</translation>
+    </message>
+</context>
+<context>
+    <name>StepsTile</name>
+    <message>
+        <location filename="../qml/components/StepsTile.qml" line="11"/>
+        <location filename="../qml/components/StepsTile.qml" line="11"/>
+        <source>Steps</source>
+        <translation type="unfinished">Кроки</translation>
     </message>
 </context>
 <context>

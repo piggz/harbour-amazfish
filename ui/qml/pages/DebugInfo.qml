@@ -193,23 +193,91 @@ PagePL {
             text: qsTr("Function Tests")
         }
 
-        ButtonPL {
-            text: qsTr("Test Notification")
+        Row {
+            width: parent.width
+            spacing: styler.themePaddingLarge
             visible: supportsFeature(Amazfish.FEATURE_ALERT)
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width * 0.8
-            onClicked: {
-                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, qsTr("Somebody"), qsTr("Title"), qsTr("Hello from Amazfish app. This is a long message sent over BLE!"));
+
+
+            ListModel {
+                id: notificationExamples
+
+                ListElement {
+                    itemText: qsTr("Alert")
+                    appId: "uk.co.piggz.amazfish"
+                    appName: qsTr("Somebody")
+                    summary: qsTr("Title")
+                    body: qsTr("Hello from Amazfish app. This is a long message sent over BLE!")
+                }
+
+                // Incoming notification 114 Notification(appId="Lomiri Telephony Service Indicator", appName="Lomiri Telephony Service Indicator", summary="Sender", body="This is example sms message\n", appIcon="/usr/share/lomiri-telephony-service/assets/avatar-default@18.png", hints=QHash(("x-lomiri-switch-to-application", "true")), timeout=-1, actions=("notification_action", "View message"))
+
+                ListElement {
+                    itemText: qsTr("SMS Message (Ubuntu Touch)")
+                    appId: "Lomiri Telephony Service Indicator"
+                    appName: "Lomiri Telephony Service Indicator"
+                    summary: "Sender name"
+                    body: "SMS message content"
+                }
+
+                // Incoming notification 32 Notification(appId="dekko2.dekkoproject_dekko", appName="Dekko 2", summary="someone@somewhere.com", body="Subject\nMessage content\n", appIcon="", hints=QHash(("x-lomiri-secondary-icon", "dekko-symbolic")("sound-file", "/usr/share/sounds/lomiri/notifications/Xylo.ogg")("x-lomiri-switch-to-application", "true")), timeout=30000, actions=("{\"app\":\"dekko2.dekkoproject_dekko\",\"act\":\"appid://dekko2.dekkoproject/dekko/current-user-version\",\"nid\":\"040b3ba\"}", "appid://dekko2.dekkoproject/dekko/current-user-version"))
+
+                ListElement {
+                    itemText: qsTr("Email")
+                    appId: "dekko2.dekkoproject_dekko"
+                    appName: "Dekko 2"
+                    summary: "someone@somewhere.com"
+                    //% "Sentence with all letters in alphabet"
+                    body: qsTr("The quick brown fox jumps over the lazy dog")
+                }
+
+                // Incoming notification 4 Notification(appId="teleports.ubports_teleports", appName="TELEports", summary="Channel", body="Message", appIcon="file:///home/phablet/.local/share/teleports.ubports/teleports.ubports/database/profile_photos/5825737299093210490.jpg", hints=QHash(("x-lomiri-secondary-icon", "/opt/click.ubuntu.com/.click/users/@all/teleports.ubports/assets/icon.svg")("sound-file", "/usr/share/sounds/lomiri/notifications/Xylo.ogg")("x-lomiri-switch-to-application", "true")), timeout=30000, actions=("{\"app\":\"teleports.ubports_teleports\",\"act\":\"teleports://chat/-2943\",\"nid\":\"Z8A==\"}", "teleports://chat/-2943"))
+
+                ListElement {
+                    itemText: qsTr("Telegram message")
+                    appId: "teleports.ubports"
+                    appName: "TELEports"
+                    summary: "Amazfish"
+                    body: "Some message on telegram"
+                }
+                ListElement {
+                    itemText: qsTr("Matrix message")
+                    appId: "cinny.danfro_cinny"
+                    appName: "Cinny UT"
+                    summary: "Amazfish"
+                    body: "Some message on matrix"
+                }
+                ListElement {
+                    itemText: qsTr("Slack message")
+                    appId: "harbour-sailslack"
+                    appName: "Sailslack"
+                    summary: "Amazfish"
+                    body: "Some message on slack"
+                }
+
             }
-        }
-        ButtonPL {
-            text: qsTr("Test Email")
-            visible: supportsFeature(Amazfish.FEATURE_ALERT)
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width * 0.8
-            onClicked: {
-                DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, "someone-somewhere.com", qsTr("Amazing fish"), qsTr("Hello, this is an email from Amazfish app!"));
+
+            ComboBoxPL {
+                id: cboNotifications
+                width: parent.width / 2
+                textRole: "itemText"
+                model: notificationExamples
+                inForm: true
             }
+
+
+            ButtonPL {
+                text: qsTr("Test Notification")
+                preferredWidth: parent.width / 2 - (styler.themePaddingLarge*3)
+
+                // anchors.horizontalCenter: parent.horizontalCenter
+                // width: parent.width * 0.8
+                onClicked: {
+                    var n = notificationExamples.get(cboNotifications.currentIndex);
+                    DaemonInterfaceInstance.sendAlert(page._lastNotificationId++, n.appId, n.appName, n.summary, n.body)
+                }
+            }
+
         }
         ButtonPL {
             text: qsTr("Test Call")
