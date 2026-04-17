@@ -192,6 +192,11 @@ QVariant DataSource::data(Type type, const QDate &day)
                     day.toString("yyyy-MM-ddT00:00:00") + "' AND temperature_timestamp_dt <= '" +
                     day.toString("yyyy-MM-ddT23:59:59") +  "' AND temperature_type = 'skin' AND temperature_location = 'wrist'" +
                     " ORDER BY temperature_timestamp_dt ASC";
+        } else if (type == DataSource::StressAuto) {
+            qry = "SELECT stress_timestamp_dt, stress_value FROM stress WHERE stress_timestamp_dt >= '" +
+                    day.toString("yyyy-MM-ddT00:00:00") + "' AND stress_timestamp_dt <= '" +
+                    day.toString("yyyy-MM-ddT23:59:59") +  "' AND stress_type = 1" +
+                    " ORDER BY stress_timestamp_dt ASC";
         }
 
         qDebug() << qry;
