@@ -20,7 +20,7 @@ private:
     KDbConnection *m_conn;
 
     bool processBufferedData() override;
-    bool saveRecords(QVector<StressRecord> recs);
+    bool saveRecords(QVector<StressRecord> recs, QDateTime lastTimeDefault);
 
 };
 

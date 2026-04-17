@@ -20,17 +20,16 @@ void FetchStressAutoOperation::start(QBLEService *service)
     QByteArray rawDate = TypeConversion::dateTimeToBytes(startDateLocal(), 0, true);
 
     //Send log read configuration
-    QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_SPO2_SLEEP) + rawDate;
+    QByteArray cmd = QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_START_DATE) + QByteArray(1, MiBandService::COMMAND_ACTIVITY_DATA_TYPE_STRESS_AUTO) + rawDate;
     m_fetcher->writeControl(cmd);
 }
 
 bool FetchStressAutoOperation::processBufferedData()
 {
-    qDebug() << Q_FUNC_INFO << m_buffer.length() << (m_buffer.length() / 65);
+    qDebug() << Q_FUNC_INFO << m_buffer.length() << m_buffer.toHex();
 
     QDateTime timestamp = startDateLocal();
     QVector<StressRecord> recs;
-
 
     for (int i = 0; i < m_buffer.length(); i++) {
         // 0-39 = relaxed
@@ -38,7 +37,8 @@ bool FetchStressAutoOperation::processBufferedData()
         // 60-79 = moderate
         // 80-100 = high
 
-        int b = m_buffer[i] & 0xff;
+        int8_t b = m_buffer[i];
+
         if (b == -1) {
             timestamp = timestamp.addSecs(60);
             continue;
@@ -48,16 +48,16 @@ bool FetchStressAutoOperation::processBufferedData()
 
         rec.timestamp = timestamp;
         rec.type = 1;
-        rec.value = b;
+        rec.value = b & 0xff;
 
         timestamp = timestamp.addSecs(60);
         recs << rec;
     }
 
-    return saveRecords(recs);
+    return saveRecords(recs, timestamp);
 }
 
-bool FetchStressAutoOperation::saveRecords(QVector<StressRecord> recs)
+bool FetchStressAutoOperation::saveRecords(QVector<StressRecord> recs, QDateTime lastTimeDefault)
 {
     QSharedPointer<KDbSqlResult> result;
 
@@ -66,7 +66,7 @@ bool FetchStressAutoOperation::saveRecords(QVector<StressRecord> recs)
     KDbTransaction transaction = m_conn->beginTransaction();
     KDbTransactionGuard tg(transaction);
 
-    QDateTime lastTime;
+    QDateTime lastTime = lastTimeDefault;
     foreach(const auto &r, recs) {
         qDebug() << "Processing record:" << r.timestamp << r.value;
         int count;
@@ -103,6 +103,7 @@ bool FetchStressAutoOperation::saveRecords(QVector<StressRecord> recs)
         }
     }
     tg.commit();
+    lastTime = lastTime.addSecs(60);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }
