@@ -32,17 +32,21 @@ void Achievements::updateStepsStatus(int steps, int goal)
 {
 
 #ifdef UUITK_EDITION
-    MetricManagerPtr manager(MetricManager::getInstance());
-    MetricPtr metric(
-        manager->add(
-            MetricParameters("uk.co.piggz.harbour-amazfish.steps-metric")
-              .formatString(selectStepsMessage(steps, goal))
-              .emptyDataString("No data")
-              .textDomain("harbour-amazfish")
-        )
-    );
-    metric->update(static_cast<double>(steps));
-    // qDebug() << "metric-update(double steps)" << steps;
+    try {
+	MetricManagerPtr manager(MetricManager::getInstance());
+	MetricPtr metric(
+	    manager->add(
+		MetricParameters("uk.co.piggz.harbour-amazfish.steps-metric")
+		    .formatString(selectStepsMessage(steps, goal))
+		    .emptyDataString("No data")
+		    .textDomain("harbour-amazfish")
+		)
+	    );
+	metric->update(static_cast<double>(steps));
+	qDebug() << "metric-update(double steps)" << steps;
+    } catch (const std::exception& e) {
+	qWarning() << "Failed to update steps metric:" << e.what();
+    }
 #endif
 
 }
