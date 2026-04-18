@@ -252,7 +252,7 @@ Item {
                     ctx.lineWidth = lineWidth;
                     ctx.beginPath();
                     var x = stepX / 2;
-                    if (!timeSerias && graphType == line) {
+                    if (!timeSeries && graphType == line) {
                         x = -stepX;
                     }
 
