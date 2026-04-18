@@ -18,6 +18,7 @@ Item {
     property int line: 1
     property int bar: 2
     property int graphType: line
+    property bool timeSeries: true
 
     property alias axisX: _axisXobject
     Axis {
@@ -55,6 +56,8 @@ Item {
 
     property int minX: 0
     property int maxX: 0
+    property int duration: 0
+    property real range: 0.0
 
     property var points: []
     onPointsChanged: {
@@ -69,6 +72,7 @@ Item {
         if (data.length > 0) {
             minX = data[0].x;
             maxX = data[data.length-1].x;
+            duration = maxX - minX;
         }
         data.forEach(function(point) {
             if (point.y > pointMaxY) {
@@ -224,6 +228,8 @@ Item {
                     ctx.globalCompositeOperation = "source-over";
                     ctx.clearRect(0,0,width,height);
 
+                    range = width / duration;
+
                     //console.log("maxY", maxY, "minY", minY, "height", height, "StepY", stepY);
 
                     var end = points.length;
@@ -246,7 +252,7 @@ Item {
                     ctx.lineWidth = lineWidth;
                     ctx.beginPath();
                     var x = stepX / 2;
-                    if (graphType == line) {
+                    if (!timeSerias && graphType == line) {
                         x = -stepX;
                     }
 
@@ -254,6 +260,9 @@ Item {
                     for (var i = 0; i < end; i++) {
                         valueSum += points[i].y;
                         lastY = points[i].y;
+                        if (timeSeries) {
+                            x = (points[i].x  - minX) * range;
+                        }
 
                         var y = height - Math.floor((points[i].y - minY) / stepY) - 1;
                         if (graphType == line) {
@@ -282,7 +291,9 @@ Item {
                             }
                         }
 
-                        x+=stepX; //point[i].x can be used for grid title
+                        if (!timeSeries) {
+                            x+=stepX; //point[i].x can be used for grid title
+                        }
                     }
                     ctx.stroke();
                     ctx.restore();
