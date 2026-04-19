@@ -64,6 +64,13 @@ PagePL {
             minY: 1
             maxY: 100
 
+            colorMap: [
+                {"limit": 39, "color": "blue"},
+                {"limit": 59, "color": "green"},
+                {"limit": 79, "color": "orange"},
+                {"limit": 100, "color": "red"}
+            ]
+
             valueConverter: function(value) {
                 return value.toFixed(0);
             }
