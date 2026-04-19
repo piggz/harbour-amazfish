@@ -192,6 +192,7 @@ PagePL {
                     anchors.left: parent.left
                     anchors.leftMargin: styler.themePaddingMedium
                     text: T.translateSportKey(key)
+                    truncMode: truncModes.elide
                 }
 
                 LabelPL {
@@ -226,7 +227,7 @@ PagePL {
             accessToken: "pk.eyJ1IjoiamRyZXNjaGVyIiwiYSI6ImNqYmVta256YTJsdjUzMm1yOXU0cmxibGoifQ.JiMiONJkWdr0mVIjajIFZQ"
             cacheDatabaseDefaultPath: true
             styleUrl: "mapbox://styles/mapbox/outdoors-v11"
-            visible: true
+            visible: positionString(location[0], location[1], location[2]) === "---" ? false : true
 
             Item {
                 id: centerButton
