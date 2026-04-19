@@ -48,6 +48,7 @@ Item {
     property bool doubleAxisXLables: false
 
     property bool scale: false
+    property color axisColor: styler.themeHighlightColor
     property color defaultColor: styler.themeHighlightColor
     property color lineColor: defaultColor
     property var colorMap:[]
@@ -240,7 +241,7 @@ Item {
                     ctx.save();
 
                     ctx.lineWidth = 1;
-                    ctx.strokeStyle = defaultColor;
+                    ctx.strokeStyle = axisColor;
                     ctx.globalAlpha = 0.4;
                     //i=0 and i=axisY.grid skipped, top/bottom line
                     for (var i=1;i<axisY.grid;i++) {
@@ -351,7 +352,7 @@ Item {
             Text {
                 id: textNoData
                 anchors.centerIn: parent
-                color: lineColor
+                color: axisColor
                 text: qsTr("No data");
                 visible: noData
             }
