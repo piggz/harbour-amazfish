@@ -15,9 +15,9 @@ PagePL {
     property real high: 0
     property real minstress: 0
     property real maxstress: 0
-    property real total: relaxed + mild + moderate + high
+    property real totaltime: relaxed + mild + moderate + high
     property real totalstress: 0
-    property real avgstress: totalstress / total
+    property real avgstress: (totalstress / totaltime) || 0
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
@@ -108,32 +108,32 @@ PagePL {
             Item {
                 width: parent.width * 0.5
                 height: 50
-                Rectangle { color: "lightblue"; width: parent.width * (relaxed  / total) ; height: parent.height }
-                LabelPL { text: Math.round((relaxed / total) * 100) + "%"; anchors.centerIn: parent}
+                Rectangle { color: "lightblue"; width: parent.width * (relaxed  / totaltime) ; height: parent.height }
+                LabelPL { text: Math.round((relaxed / totaltime) * 100) || 0 + "%"; anchors.centerIn: parent}
             }
 
             LabelPL {text: qsTr("Mild")}
             Item {
                 width: parent.width * 0.5
                 height: 50
-                Rectangle { color: "green"; width: parent.width * (mild  / total) ; height: parent.height }
-                LabelPL { text: Math.round((mild / total) * 100) + "%"; anchors.centerIn: parent}
+                Rectangle { color: "green"; width: parent.width * (mild  / totaltime) ; height: parent.height }
+                LabelPL { text: Math.round((mild / totaltime) * 100) || 0 + "%"; anchors.centerIn: parent}
             }
 
             LabelPL {text: qsTr("Moderate")}
             Item {
                 width: parent.width * 0.5
                 height: 50
-                Rectangle { color: "orange"; width: parent.width * (moderate  / total) ; height: parent.height }
-                LabelPL { text: Math.round((moderate / total) * 100) + "%"; anchors.centerIn: parent}
+                Rectangle { color: "orange"; width: parent.width * (moderate  / totaltime) ; height: parent.height }
+                LabelPL { text: Math.round((moderate / totaltime) * 100) || 0 + "%"; anchors.centerIn: parent}
             }
 
             LabelPL {text: qsTr("High")}
             Item {
                 width: parent.width * 0.5
                 height: 50
-                Rectangle { color: "red"; width: parent.width * (high  / total) ; height: parent.height }
-                LabelPL { text: Math.round((high / total) * 100) + "%"; anchors.centerIn: parent}
+                Rectangle { color: "red"; width: parent.width * (high  / totaltime) ; height: parent.height }
+                LabelPL { text: Math.round((high / totaltime) * 100) || 0 + "%"; anchors.centerIn: parent}
             }
 
         }
@@ -150,6 +150,7 @@ PagePL {
         high = 0;
         minstress = 0;
         maxstress = 0;
+        totalstress = 0;
 
         for (var i = 0; i < end; i++) {
             var point = points[i];
@@ -163,6 +164,7 @@ PagePL {
             } else {
                 relaxed++;
             }
+
             if (point.y > maxstress) {
                 maxstress = point.y;
             }
