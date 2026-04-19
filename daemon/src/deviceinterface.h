@@ -119,11 +119,13 @@ private:
     HRMService *hrmService() const;
     
     Q_SLOT void onNotification(watchfish::Notification *notification);
+    Q_SLOT void onNotificationClosed(quint32 nid, quint32 reason);
     Q_SLOT void onRingingChanged();
     Q_SLOT void onConnectionStateChanged();
     Q_SLOT void slot_informationChanged(Amazfish::Info infokey, const QString &infovalue);
     Q_SLOT void musicChanged();
     Q_SLOT void deviceEvent(AbstractDevice::Event event);
+    Q_SLOT void dismissNotification(quint32 id);
     Q_SLOT void handleButtonPressed(int presses);
     Q_SLOT void onEventTimer();
     Q_SLOT void backgroundActivityStateChanged();

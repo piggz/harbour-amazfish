@@ -43,6 +43,7 @@ DeviceInterface::DeviceInterface()
         connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::handleButtonPressed, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::dismissNotification, this, &DeviceInterface::dismissNotification, Qt::UniqueConnection);
     }
 
     //Create the DBUS HRM Interface
@@ -52,6 +53,7 @@ DeviceInterface::DeviceInterface()
 
     //Notifications
     connect(&m_notificationMonitor, &watchfish::NotificationMonitor::notification, this, &DeviceInterface::onNotification);
+    connect(&m_notificationMonitor, &watchfish::NotificationMonitor::notificationClosed, this, &DeviceInterface::onNotificationClosed);
 
     // Calls
 #if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
@@ -197,6 +199,27 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
         }
     }
 }
+
+void DeviceInterface::onNotificationClosed(quint32 nid, quint32 reason) {
+    qDebug() << Q_FUNC_INFO << nid << reason <<  m_notificationBuffer.count();
+
+    // remove closed notifications from buffer
+    if (!m_notificationBuffer.isEmpty()) {
+        auto it = m_notificationBuffer.begin();
+        while (it != m_notificationBuffer.end()) {
+            if (it->id == static_cast<int>(nid)) {
+                it = m_notificationBuffer.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
+
+    if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)){
+        m_device->sendAlertClosed(nid, reason);
+    }
+}
+
 
 void DeviceInterface::onRingingChanged()
 {
@@ -736,6 +759,14 @@ void DeviceInterface::musicChanged()
             m_device->setMusicStatus(m_musicController.status() == watchfish::MusicController::StatusPlaying,
                 m_musicController.title(), m_musicController.artist(), m_musicController.album());
         }
+    }
+}
+
+void DeviceInterface::dismissNotification(quint32 id) {
+    qDebug() << Q_FUNC_INFO << id;
+    watchfish::Notification *n  = m_notificationMonitor.getNotification(id);
+    if (n) {
+        n->close();
     }
 }
 
