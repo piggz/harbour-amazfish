@@ -19,6 +19,7 @@ Item {
     property int bar: 2
     property int graphType: line
     property bool timeSeries: true
+    property real barDuration: 0.0
 
     property alias axisX: _axisXobject
     Axis {
@@ -47,7 +48,10 @@ Item {
     property bool doubleAxisXLables: false
 
     property bool scale: false
-    property color lineColor: styler.themeHighlightColor
+    property color defaultColor: styler.themeHighlightColor
+    property color lineColor: defaultColor
+    property var colorMap:[]
+
     property real lineWidth: 3
 
     property real minY: 0 //Always 0
@@ -64,6 +68,34 @@ Item {
         noData = (points.length == 0);
     }
     property bool noData: true
+
+    onWidthChanged: {
+        calculateLineWidth();
+    }
+
+    function getColor(value) {
+        var ret = defaultColor;
+
+        for (var i = 0; i <colorMap.length; i++) {
+            if (value <= colorMap[i].limit) {
+                ret = colorMap[i].color;
+                break;
+            }
+        }
+        return ret;
+    }
+
+    function calculateLineWidth() {
+        var lastX = 0;
+        barDuration = duration;
+
+        points.forEach(function(point) {
+            if (((point.x - lastX) > 0) && ((point.x - lastX) < barDuration)) {
+                barDuration = (point.x - lastX)
+            }
+            lastX = point.x;
+        });
+    }
 
     function setPoints(data) {
         if (!data) return;
@@ -86,6 +118,8 @@ Item {
             maxY = suggestedMaxY;
         }
         doubleAxisXLables = ((maxX - minX) > 129600); // 1,5 days
+
+        calculateLineWidth();
 
         canvas.requestPaint();
     }
@@ -206,7 +240,7 @@ Item {
                     ctx.save();
 
                     ctx.lineWidth = 1;
-                    ctx.strokeStyle = lineColor;
+                    ctx.strokeStyle = defaultColor;
                     ctx.globalAlpha = 0.4;
                     //i=0 and i=axisY.grid skipped, top/bottom line
                     for (var i=1;i<axisY.grid;i++) {
@@ -230,8 +264,6 @@ Item {
 
                     range = width / duration;
 
-                    //console.log("maxY", maxY, "minY", minY, "height", height, "StepY", stepY);
-
                     var end = points.length;
 
                     if (end > 0) {
@@ -239,12 +271,12 @@ Item {
                     }
 
                     ctx.save()
-                    ctx.strokeStyle = lineColor;
+
                     //ctx.globalAlpha = 0.8;
 
                     //PGZ
                     if (graphType == bar) {
-                        lineWidth = width / end;
+                        lineWidth = range * barDuration;
                     } else {
                         stepX = width / end;
                     }
@@ -258,7 +290,9 @@ Item {
 
                     var valueSum = 0;
                     for (var i = 0; i < end; i++) {
+                        ctx.strokeStyle = getColor(points[i].y);
                         valueSum += points[i].y;
+
                         lastY = points[i].y;
                         if (timeSeries) {
                             x = (points[i].x  - minX) * range;
@@ -272,6 +306,7 @@ Item {
                                 ctx.lineTo(x, y);
                             }
                         } else if (graphType == bar) {
+                            ctx.beginPath();
                             ctx.moveTo(x, y);
                             ctx.lineTo(x, height);
 
@@ -287,15 +322,15 @@ Item {
                                 ctx.stroke();
                                 ctx.strokeStyle = lineColor;
                                 ctx.beginPath();
-
                             }
                         }
 
                         if (!timeSeries) {
                             x+=stepX; //point[i].x can be used for grid title
                         }
+                        ctx.stroke();
                     }
-                    ctx.stroke();
+
                     ctx.restore();
 
                     if (end > 0) {
