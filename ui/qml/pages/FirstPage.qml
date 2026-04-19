@@ -272,6 +272,21 @@ PagePL {
         }
 
         Tile {
+            text: qsTr("Stress")
+            visible: supportsData(Amazfish.TYPE_STRESS)
+
+            contentItem: Image {
+                source: "../page-icons/icon-page-spo2.png"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+            }
+
+            onClicked: {
+                app.pages.push(Qt.resolvedUrl("StressDataPage.qml"))
+            }
+        }
+
+        Tile {
             text: qsTr("Data")
 
             contentItem: Image {

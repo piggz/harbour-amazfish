@@ -540,6 +540,33 @@ void DeviceInterface::createTables()
         qDebug() << *t_temp;
     }
 
+    if (!m_conn->containsTable("stress")) {
+        KDbTableSchema *t_stress = new KDbTableSchema("stress");
+        t_stress->setCaption("Stress");
+        t_stress->addField(f = new KDbField("stress_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_stress->addField(f = new KDbField("stress_timestamp", KDbField::Integer, KDbField::Indexed));
+        f->setCaption("Timestamp");
+
+        t_stress->addField(f = new KDbField("stress_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
+        f->setCaption("Timestamp in Date/Time format");
+
+        t_stress->addField(f = new KDbField("stress_value", KDbField::Integer));
+        f->setCaption("Value");
+
+        t_stress->addField(f = new KDbField("stress_type", KDbField::ShortInteger));
+        f->setCaption("Type");
+
+        if (!m_conn->createTable(t_stress)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- stress created --";
+        qDebug() << *t_stress;
+    }
+
+
     if (!m_conn->commitTransaction(t)) {
         qDebug() << m_conn->result();
         return;

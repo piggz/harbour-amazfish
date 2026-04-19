@@ -9,6 +9,8 @@ GraphData {
     property alias lastValue: graphData.lastValue
     property alias lastY: graphData.lastY
     property alias lastZ: graphData.lastZ
+    property alias colorMap: graphData.colorMap
+    property alias defaultColor: graphData.defaultColor
 
     function updateGraph(day) {
         var dataPoints = DataSource.data(type, day);

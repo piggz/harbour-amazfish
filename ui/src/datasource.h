@@ -22,7 +22,9 @@ public:
         HRV = 8,
         Spo2Normal = 9,
         Spo2Sleep = 10,
-        BodyTemperature = 11
+        BodyTemperature = 11,
+        StressAuto = 12,
+        StressManual = 13
     };
     Q_ENUM(Type)
 
