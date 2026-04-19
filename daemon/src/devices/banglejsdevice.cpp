@@ -581,6 +581,8 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAY);
         } else if (music_action == "pause") {
             emit deviceEvent(AbstractDevice::EVENT_MUSIC_PAUSE);
+        } else if (music_action == "playpause") {
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAYPAUSE);
         } else if (music_action == "next") {
             emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
         } else if (music_action == "previous") {

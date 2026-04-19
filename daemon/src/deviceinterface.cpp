@@ -753,6 +753,9 @@ void DeviceInterface::deviceEvent(AbstractDevice::Event event)
     case AbstractDevice::EVENT_MUSIC_PAUSE:
         m_musicController.pause();
         break;
+    case AbstractDevice::EVENT_MUSIC_PLAYPAUSE:
+        m_musicController.playPause();
+        break;
     case AbstractDevice::EVENT_MUSIC_NEXT:
         m_musicController.next();
         break;
