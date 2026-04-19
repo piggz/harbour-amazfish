@@ -81,13 +81,15 @@ PagePL {
 
     function positionString(lat, lon, alt) {
         var positionstring;
-        console.log("location: " + lat + lon + alt);
-        if (lat === 0 && lon === 0)
+        if (Math.abs(lat) < 1e-9 && Math.abs(lon) < 1e-9)
             positionstring = "---";
         else if (alt < -1000)
             positionstring = qsTr("%1°; %2°").arg(lat.toFixed(3).toLocaleString()).arg(lon.toFixed(3).toLocaleString());
         else
             positionstring = qsTr("%1°; %2°; %3m").arg(lat.toFixed(3).toLocaleString()).arg(lon.toFixed(3).toLocaleString()).arg(alt.toLocaleString());
+
+        console.log("location: " + lat + ", " + lon + ", " + alt + " ---> " + positionstring);
+
         return positionstring;
     }
 
@@ -227,7 +229,7 @@ PagePL {
             accessToken: "pk.eyJ1IjoiamRyZXNjaGVyIiwiYSI6ImNqYmVta256YTJsdjUzMm1yOXU0cmxibGoifQ.JiMiONJkWdr0mVIjajIFZQ"
             cacheDatabaseDefaultPath: true
             styleUrl: "mapbox://styles/mapbox/outdoors-v11"
-            visible: positionString(location[0], location[1], location[2]) === "---" ? false : true
+            visible: (Math.abs(location[0]) > 1e-9 || Math.abs(location[1]) > 1e-9)
 
             Item {
                 id: centerButton
