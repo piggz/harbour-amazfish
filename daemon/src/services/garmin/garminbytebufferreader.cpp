@@ -1,84 +1,119 @@
 #include "garminbytebufferreader.h"
 
+
 GarminByteBufferReader::GarminByteBufferReader(QByteArray data) {
-        this.byteBuffer = ByteBuffer.wrap(data);
+        mByteBuffer.setData(data);
+        mByteBuffer.open(QIODevice::ReadOnly);
+}
+
+GarminByteBufferReader::~GarminByteBufferReader()
+{
+    mByteBuffer.close();
+}
+int GarminByteBufferReader::remaining()
+{
+        return mByteBuffer.bytesAvailable();
+}
+
+
+QByteArray GarminByteBufferReader::asReadOnlyBuffer()
+{
+        return mByteBuffer.data();
+}
+
+
+void GarminByteBufferReader::setByteOrder(QSysInfo::Endian   byteOrder)
+{
+        mOrder=byteOrder;
+}
+
+int GarminByteBufferReader::readByte()
+{
+    char res;
+    mByteBuffer.getChar(&res);
+    return static_cast<unsigned int>(res);
+}
+
+int GarminByteBufferReader::getPosition()
+{
+        return mByteBuffer.pos();
+}
+
+void GarminByteBufferReader::setPosition(int position)
+{
+        mByteBuffer.seek(position);
+}
+
+int GarminByteBufferReader::getLimit()
+{
+        return mByteBuffer.size();
+}
+
+int GarminByteBufferReader::readShort()
+{
+    QByteArray data;
+    data=mByteBuffer.read(2);
+    return data.toInt();
+}
+
+int GarminByteBufferReader::readInt()
+{
+    QByteArray data;
+    data = mByteBuffer.read(4);
+    return data.toInt();
+}
+
+long GarminByteBufferReader::readLong()
+{
+    QByteArray data;
+    data = mByteBuffer.read(8);
+    return data.toLong();
+}
+
+float GarminByteBufferReader::readFloat32()
+{
+    QByteArray data;
+    data = mByteBuffer.read(4);
+    return data.toFloat();
+}
+
+double GarminByteBufferReader::readFloat64() {
+    QByteArray data;
+    data = mByteBuffer.read(8);
+    return data.toDouble();
+}
+
+QString GarminByteBufferReader::readString() {
+        int size = readByte();
+        QByteArray bytes;
+        bytes = mByteBuffer.read(size);
+        QString res(bytes);
+        return res;
     }
 
-    public int remaining() {
-        return byteBuffer.remaining();
-    }
-
-    public ByteBuffer asReadOnlyBuffer() {
-        return byteBuffer.asReadOnlyBuffer();
-    }
-
-    public void setByteOrder(QSysInfo::Endian   byteOrder) {
-        this.byteBuffer.order(byteOrder);
-    }
-
-    public int readByte() {
-        return Byte.toUnsignedInt(byteBuffer.get());
-    }
-
-    public int getPosition() {
-        return byteBuffer.position();
-    }
-
-    public void setPosition(final int position) {
-        byteBuffer.position(position);
-    }
-
-    public int getLimit() {
-        return byteBuffer.limit();
-    }
-
-    public int readShort() {
-        return Short.toUnsignedInt(byteBuffer.getShort());
-    }
-
-    public int readInt() {
-        return byteBuffer.getInt();
-    }
-
-    public long readLong() {
-        return byteBuffer.getLong();
-    }
-
-    public float readFloat32() {
-        return byteBuffer.getFloat();
-    }
-
-    public double readFloat64() {
-        return byteBuffer.getDouble();
-    }
-
-    public String readString() {
-        final int size = readByte();
-        byte[] bytes = new byte[size];
-        byteBuffer.get(bytes);
-        return new String(bytes, StandardCharsets.UTF_8);
-    }
-
-    public String readNullTerminatedString() {
-        int position = byteBuffer.position();
+QString GarminByteBufferReader::readNullTerminatedString() {
+        int position = mByteBuffer.pos();
         int size = 0;
-        while (byteBuffer.hasRemaining()) {
-            if (byteBuffer.get() == 0)
+        while (!mByteBuffer.atEnd()) {
+            char c;
+            mByteBuffer.read(&c,1);
+            if ( c == 0)
                 break;
             size++;
         }
-        byteBuffer.position(position);
-        byte[] bytes = new byte[size];
-        byteBuffer.get(bytes);
-        byteBuffer.get(); // discard null terminator
-        return new String(bytes, StandardCharsets.UTF_8);
+        mByteBuffer.seek(position);
+        QByteArray bytes;
+        bytes = mByteBuffer.read(size);
+        mByteBuffer.read(1); // discard null terminator
+        QString res(bytes);
+        return res;
     }
 
-    public byte[] readBytes(int size) {
-        byte[] bytes = new byte[size];
+QByteArray GarminByteBufferReader::readBytes(int size) {
+        QByteArray bytes;
 
-        byteBuffer.get(bytes);
+        bytes = mByteBuffer.read(size);
 
         return bytes;
     }
-}
+

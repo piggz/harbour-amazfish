@@ -136,4 +136,10 @@ ListModel {
         pattern: "DK08"
     }
 
+    ListElement {
+        deviceType: "Garmin Epix"
+        icon: "../pics/devices/kospet_dk08.png"
+        auth: false
+        pattern: "EPIX.*"
+    }
 }

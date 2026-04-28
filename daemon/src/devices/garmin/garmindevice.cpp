@@ -1,7 +1,9 @@
 #include "garmindevice.h"
-
+#include "services/garmin/garminservice.h"
 #include "hrmservice.h"
 #include "deviceinfoservice.h"
+
+
 #include <QDomDocument>
 
 
@@ -15,7 +17,8 @@ GarminDevice::GarminDevice(const QString &pairedName, QObject *parent) : Abstrac
 Amazfish::Features GarminDevice::supportedFeatures() const
 {
 
-    return  Amazfish::Feature::FEATURE_HRM
+    return  Amazfish::Feature::FEATURE_NONE
+        // | Amazfish::Feature::FEATURE_HRM
         // | Amazfish::Feature::FEATURE_ACTIVITY
         //| Amazfish::Feature::FEATURE_STEPS
         // | Amazfish::Feature::FEATURE_ALARMS
@@ -119,9 +122,9 @@ void GarminDevice::parseServices()
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
 
-    qDebug() << "Resolved services...";
+    //Debug() << "Resolved services...";
 
-    qDebug().noquote() << xml.value();
+    //qDebug().noquote() << xml.value();
 
     QDomDocument doc;
     doc.setContent(xml.value());
@@ -145,24 +148,15 @@ void GarminDevice::parseServices()
 
             if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
                 addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
+                qDebug() << "Added Garmin HRM Support";
             }
-/*
-            if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
-                addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
-            } else if (uuid == AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME && !service(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME)) {
-                addService(AsteroidTimeService::UUID_SERVICE_ASTEROID_TIME, new AsteroidTimeService(path, this));
-            } else if (uuid == AsteroidWeatherService::UUID_SERVICE_WEATHER && !service(AsteroidWeatherService::UUID_SERVICE_WEATHER)) {
-                addService(AsteroidWeatherService::UUID_SERVICE_WEATHER, new AsteroidWeatherService(path, this));
-            } else if (uuid == AsteroidNotificationService::UUID_SERVICE_NOTIFICATION && !service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION)) {
-                addService(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION, new AsteroidNotificationService(path, this));
-            } else if (uuid == AsteroidMediaService::UUID_SERVICE_MEDIA  && !service(AsteroidMediaService::UUID_SERVICE_MEDIA  )) {
-                addService(AsteroidMediaService::UUID_SERVICE_MEDIA  , new AsteroidMediaService(path, this));
-            } else if (uuid == AsteroidScreenshotService::UUID_SERVICE_SCREENSHOT  && !service(AsteroidScreenshotService::UUID_SERVICE_SCREENSHOT  )) {
-                addService(AsteroidScreenshotService::UUID_SERVICE_SCREENSHOT, new AsteroidScreenshotService(path, this));
-            } else if ( !service(uuid)) {
-                addService(uuid, new QBLEService(uuid, path, this));
+            else if (uuid == GarminService::UUID_SERVICE_GARMIN_ML_GFDI && !service(GarminService::UUID_SERVICE_GARMIN_ML_GFDI)) {
+                qDebug() << "Added Garmin ML GDFI Service";
+                addService(GarminService::UUID_SERVICE_GARMIN_ML_GFDI, new GarminService(path, this));
             }
- */
+            else{
+                 //addService(uuid, new QBLEService(uuid, path, this));
+            }
         }
     }
     setConnectionState("authenticated");
@@ -173,28 +167,7 @@ void GarminDevice::initialise()
     qDebug() << Q_FUNC_INFO;
     setConnectionState("connected");
     parseServices();
-/*
-    AsteroidNotificationService *notification = qobject_cast<AsteroidNotificationService*>(service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION));
-    if (notification) {
-//        notification->enableNotification(AsteroidNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_EVENT);
-//        connect(alert, &AlertNotificationService::serviceEvent, this, &PinetimeJFDevice::serviceEvent, Qt::UniqueConnection);
-    }
-*/
 
-    /*
-    BatteryService *battery = qobject_cast<BatteryService*>(service(BatteryService::UUID_SERVICE_BATTERY));
-    if (battery) {
-        connect(battery, &BatteryService::informationChanged, this, &GarminDevice::informationChanged, Qt::UniqueConnection);
-    }
-    */
-    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
-    if (hrm) {
-        hrm->setAllDayHRM();
-        hrm->setHeartrateSleepSupport();
-        hrm->enableRealtimeHRMeasurement(true);
-        hrm->enableManualHRMeasurement(true);
-        connect(hrm, &HRMService::informationChanged, this, &GarminDevice::informationChanged, Qt::UniqueConnection);
-    }
     setConnectionState("authenticated");
     //mSteps = getStepsFromDb();
     //emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(mSteps));

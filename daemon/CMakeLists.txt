@@ -55,6 +55,7 @@ set(SOURCES
 ./src/devices/asteroidosdevice.cpp
 ./src/devices/banglejsdevice.cpp
 ./src/devices/pebbledevice.cpp
+./src/devices/garmin/garmindevice.cpp
 ./src/devices/pinetimejfdevice.cpp
 ./src/devices/infinitimefirmwareinfo.cpp
 ./src/devices/dk08device.cpp
@@ -108,6 +109,11 @@ set(SOURCES
 ./src/services/miband2service.cpp
 ./src/services/mibandservice.cpp
 ./src/services/pebbleservice.cpp
+./src/services/garmin/garminservice.cpp
+./src/services/garmin/garminmlrservice.cpp
+./src/services/garmin/garmingdfimessage.cpp
+./src/services/garmin/garminbytebufferreader.cpp
+./src/services/garmin/checksumcalculator.cpp
 ./src/services/pinetimemusicservice.cpp
 ./src/services/pinetimesimpleweatherservice.cpp
 ./src/services/uartservice.cpp
@@ -176,6 +182,7 @@ set(HEADERS
 ./src/devices/asteroidosdevice.h
 ./src/devices/banglejsdevice.h
 ./src/devices/pebbledevice.h
+./src/devices/garmin/garmindevice.h
 ./src/devices/pinetimejfdevice.h
 ./src/devices/infinitimefirmwareinfo.h
 ./src/devices/dk08device.h
@@ -227,6 +234,11 @@ set(HEADERS
 ./src/services/miband2service.h
 ./src/services/mibandservice.h
 ./src/services/pebbleservice.h
+./src/services/garmin/garminservice.h
+./src/services/garmin/garminmlrservice.h
+./src/services/garmin/garmingdfimessage.h
+./src/services/garmin/garminbytebufferreader.h
+./src/services/garmin/checksumcalculator.h
 ./src/services/pinetimemusicservice.h
 ./src/services/pinetimesimpleweatherservice.h
 ./src/services/uartservice.h
@@ -244,6 +256,7 @@ find_package(KF5Archive REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(ICU REQUIRED COMPONENTS uc i18n data)
 find_package(KDb REQUIRED)
+
 
 if(FLAVOR STREQUAL "silica")
     set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall;soundprofile")
@@ -310,6 +323,7 @@ if(FLAVOR STREQUAL "uuitk")
 else()
     add_definitions(-DTRANSLATION_FOLDER="${CMAKE_INSTALL_FULL_DATAROOTDIR}/harbour-amazfishd/translations")
 endif()
+
 
 QT5_ADD_TRANSLATION(QM_FILES ${TS_FILES})
 add_custom_target(daemon_translations DEPENDS ${QM_FILES})

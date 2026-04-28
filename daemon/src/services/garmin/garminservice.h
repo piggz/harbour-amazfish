@@ -3,14 +3,18 @@
 
 //#include "abstractoperationservice.h"
 #include "garminmlrservice.h"
+
 #include <qmap.h>
 #include <qbledevice.h>
-
 #include <optional>
 #include <vector>
+#include <QObject>
+#include <qbleservice.h>
 
-class GarminService : public QObject
+class GarminService : public QBLEService
 {
+    Q_OBJECT
+
     class Service {
     public:
         enum Value {
@@ -75,7 +79,19 @@ class GarminService : public QObject
         }
     };
 
-    Q_OBJECT
+    enum RequestType {
+            REGISTER_ML_REQ = 0,
+            REGISTER_ML_RESP = 1,
+            CLOSE_HANDLE_REQ = 2,
+            CLOSE_HANDLE_RESP = 3,
+            UNK_HANDLE = 4,
+            CLOSE_ALL_REQ = 5,
+            CLOSE_ALL_RES = 6,
+            UNK_REQ = 7,
+            UNK_RESP = 8
+     };
+
+
 public:
     explicit GarminService(const QString &path, QObject *parent);
     static const char* BASE_UUID;
@@ -83,14 +99,13 @@ public:
     int mMaxWriteSize = 20;
 
     void onMtuChanged(int mtu);
-    bool initializeDevice( QBLEDevice builder);
+    bool initializeDevice();
 
 private:
     QString mPath;
-    QObject *mParent;
-    QBLECharacteristic *mCharacteristicSend;
-    QBLECharacteristic *mCharacteristicReceive;
-    //static GarminDevice mDevice;
+    QBLECharacteristic *mCharacteristicSend = NULL;
+    QBLECharacteristic *mCharacteristicReceive = NULL;
+    QObject *mDevice;
 
     QMap<int, Service> mServiceByHandle;
     QMap<Service, int> mHandleByService;
@@ -103,6 +118,9 @@ private:
 
     int calcMaxWriteChunk(int mtu);
 
+    Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
+
+    QByteArray closeAllServices();
 
 };
 

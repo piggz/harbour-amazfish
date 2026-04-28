@@ -1,17 +1,17 @@
 #ifndef GARMINBYTEBUFFERREADER_H
 #define GARMINBYTEBUFFERREADER_H
 
-#include <qbuffer.h>
+#include <QBuffer>
 #include <qsysinfo.h>
-#include "byteorder.h"
 
 class GarminByteBufferReader
 {
 public:
-    GarminByteBufferReader(QBuffer byteBuffer);
+    GarminByteBufferReader(QByteArray byteBuffer);
+    ~GarminByteBufferReader();
 
      int remaining();
-     QBuffer asReadOnlyBuffer();
+     QByteArray asReadOnlyBuffer();
      void setByteOrder(QSysInfo::Endian   byteOrder);
      int readByte();
      int getPosition();
@@ -25,6 +25,10 @@ public:
      QString readString();
      QString readNullTerminatedString();
      QByteArray readBytes(int size);
+
+private:
+     QBuffer mByteBuffer;
+     QSysInfo::Endian mOrder=QSysInfo::LittleEndian;
 };
 
 #endif // GARMINBYTEBUFFERREADER_H
