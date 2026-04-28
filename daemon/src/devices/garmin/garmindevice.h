@@ -4,6 +4,9 @@
 #include <QObject>
 #include "abstractdevice.h"
 
+#include "services/garmin/garminservice.h"
+
+
 class GarminDevice : public AbstractDevice
 {
     Q_OBJECT
@@ -29,7 +32,7 @@ protected:
 
 private:
     int mSteps = 0;
-
+    GarminService *mService;
 
     void parseServices();
     void initialise();
