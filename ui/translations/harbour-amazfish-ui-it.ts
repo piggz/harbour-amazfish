@@ -1492,7 +1492,7 @@
         <location filename="../qml/pages/SleepPage.qml" line="74"/>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation type="unfinished">dd/MM</translation>
+        <translation>dd/MM</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="75"/>
