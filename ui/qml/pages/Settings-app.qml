@@ -111,6 +111,14 @@ PagePL {
         }
 
         TextSwitchPL {
+            id: chkEmailsNotification
+            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+
+            width: parent.width
+            text: qsTr("No notification for emails")
+        }
+
+        TextSwitchPL {
             id: chkNavigationNotification
             visible: supportsFeature(Amazfish.FEATURE_ALERT)
 
@@ -250,6 +258,7 @@ PagePL {
         sldCalendarRefresh.value = AmazfishConfig.appRefreshCalendar;
         chkAutoSyncData.checked = AmazfishConfig.appAutoSyncData;
         chkNotifyLowBattery.checked = AmazfishConfig.appNotifyLowBattery;
+        chkEmailsNotification.checked = AmazfishConfig.appEmailsNotification;
         chkNavigationNotification.checked = AmazfishConfig.appNavigationNotification;
         chkSimulateEventSupport.checked = AmazfishConfig.appSimulateEventSupport;
         chkTransliterate.checked = AmazfishConfig.appTransliterate;
@@ -265,6 +274,7 @@ PagePL {
         AmazfishConfig.appRefreshCalendar = sldCalendarRefresh.value;
         AmazfishConfig.appAutoSyncData = chkAutoSyncData.checked;
         AmazfishConfig.appNotifyLowBattery = chkNotifyLowBattery.checked;
+        AmazfishConfig.appEmailsNotification = chkEmailsNotification.checked;
         AmazfishConfig.appNavigationNotification = chkNavigationNotification.checked;
         AmazfishConfig.appSimulateEventSupport = chkSimulateEventSupport.checked;
         AmazfishConfig.localAdapter = cboLocalAdapter.value;

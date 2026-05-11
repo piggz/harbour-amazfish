@@ -178,6 +178,14 @@ HRMService *DeviceInterface::hrmService() const
 
 void DeviceInterface::onNotification(watchfish::Notification *notification)
 {
+    if ((AmazfishConfig::instance()->appEmailsNotification()) &&
+     (notification->appId() == "messageserver5" ||
+      notification->appName() == "Mail"))
+    {
+        qDebug() << "Ignoring Sailfish Mail notification";
+        return;
+    }
+
     Amazfish::WatchNotification n;
     n.id = notification->id();
     n.appId = notification->appId();

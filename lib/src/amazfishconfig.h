@@ -128,6 +128,7 @@ public:
     BOOL_OPTION(QStringLiteral("app/autosyncdata"),     appAutoSyncData,     setAppAutoSyncData,     true)
     BOOL_OPTION(QStringLiteral("app/notifylowbattery"), appNotifyLowBattery, setAppNotifyLowBattery, true)
     BOOL_OPTION(QStringLiteral("app/overridefwcheck"),  appOverrideFwCheck,  setAppOverrideFwCheck,  false)
+    BOOL_OPTION(QStringLiteral("app/emailsnotification"),  appEmailsNotification,  setEmailsNotification,  false)
     BOOL_OPTION(QStringLiteral("app/navigationnotification"),  appNavigationNotification,  setAppNavigationNotification,  false)
     BOOL_OPTION(QStringLiteral("app/simulateevents"),  appSimulateEventSupport,  setSimulateEventSupport,  false)
     BOOL_OPTION(QStringLiteral("app/transliterate"),  appTransliterate,  setTransliterate,  false)
