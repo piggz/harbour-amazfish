@@ -50,6 +50,11 @@ class QJSEngine;
     Q_INVOKABLE void setter(quint8 n, type value)              \
     { setValue(key.arg(n), value); }
 
+#define MAP_OPTION(key, name, setter, def) \
+    OPTION(key, name, setter, def, QVariantMap, toMap, const QVariantMap &)
+
+#define VARIANT_OPTION(key, name, setter, def) \
+    OPTION(key, name, setter, def, QVariant, fromValue, const QVariant &)
 
 class AmazfishConfig : public QObject
 {
@@ -183,6 +188,7 @@ public:
     STRING_OPTION(QStringLiteral("fittrackee/clientID"),     fittrackeeClientID,     setFittrackeeClientID,    "")
     STRING_OPTION(QStringLiteral("fittrackee/clientSecret"), fittrackeeClientSecret, setFittrackeeClientSecret,    "")
 
+    MAP_OPTION(QStringLiteral("app/notificationSettings"), notificationSettings, setNotificationSettings, QVariantMap())
 
 private:
     using signal_ptr = void(AmazfishConfig::*)();
