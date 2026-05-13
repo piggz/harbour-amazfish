@@ -26,8 +26,8 @@ void BipActivityDetailParser::parse(const QByteArray &bytes)
 {
     qDebug() << Q_FUNC_INFO << bytes.toHex();
 
-    m_baseLongitude = m_summary.baseLongitude();
-    m_baseLatitude = m_summary.baseLatitude();
+    m_baseLongitude = m_summary.baseLongitude() * HUAMI_TO_DECIMAL_DEGREES_DIVISOR;
+    m_baseLatitude = m_summary.baseLatitude() * HUAMI_TO_DECIMAL_DEGREES_DIVISOR;
     m_baseAltitude = m_summary.baseAltitude();
     m_baseDate = m_summary.startTime();
 
