@@ -185,6 +185,21 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
     n.summary = notification->summary();
     n.body = notification->body();
 
+    QVariantMap notificationSettings = AmazfishConfig::instance()->notificationSettings();
+
+    bool enabled = true;
+    QString app_slug = n.appId.isEmpty() ? n.appName : n.appId;
+    if (notificationSettings.contains(app_slug)) {
+        enabled = notificationSettings.value(app_slug).toBool();
+    } else {
+        notificationSettings.insert(app_slug, enabled);
+    }
+    AmazfishConfig::instance()->setNotificationSettings(notificationSettings);
+
+    if (!enabled) {
+        qDebug() << Q_FUNC_INFO << "Notification " << app_slug << " disabled in settings";
+        return;
+    }
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)){
         qDebug() << Q_FUNC_INFO << "Sending alert to device";
         sendAlert(n);

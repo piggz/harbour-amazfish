@@ -21,6 +21,7 @@
         <file>qml/pages/Settings-button-action.qml</file>
         <file>qml/pages/Settings-device.qml</file>
         <file>qml/pages/Settings-menu.qml</file>
+        <file>qml/pages/Settings-notifications.qml</file>
         <file>qml/pages/Settings-user.qml</file>
         <file>qml/pages/SleepPage.qml</file>
         <file>qml/pages/Spo2DataPage.qml</file>
