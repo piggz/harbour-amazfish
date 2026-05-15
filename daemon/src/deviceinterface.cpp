@@ -1066,6 +1066,7 @@ void DeviceInterface::downloadActivityData()
 
 void DeviceInterface::sendWeather(CurrentWeather *weather)
 {
+    qDebug() << Q_FUNC_INFO << *weather;
     if (m_device) {
         m_device->sendWeather(weather);
     }

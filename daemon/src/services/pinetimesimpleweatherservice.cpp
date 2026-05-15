@@ -48,7 +48,6 @@ void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
 //        << weather->humidity()
 //        << weather->windDeg()
 //        << weather->windSpeed()
-//        << weather->windGusts()
     ;
 
     QByteArray cityNameBytes = weather->city()->name().toLocal8Bit().left(32);
@@ -95,7 +94,6 @@ void PineTimeSimpleWeatherService::sendWeather(CurrentWeather *weather)
 
 //    weatherBytes += TypeConversion::fromInt16( (int)(100 * weather->windDeg()));
 //    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windSpeed()));
-//    weatherBytes += TypeConversion::fromInt16((int)(100 * weather->windGusts()));
 
     qDebug() << Q_FUNC_INFO << "Weather bytes" << weatherBytes.toHex();
 
