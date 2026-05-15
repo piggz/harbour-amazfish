@@ -216,17 +216,19 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
 
         if (t.hour() >=12 && t.hour() < 15) { //Set the general weather description for that around mid-day
             qDebug() << "Midday "
-             << "pressure = "  << main.value("pressure").toDouble()
-             << "code = "  << code
-             << "icon = "  << weatherIcon
-             << "precipProbability = " << precipProbability;
-            f.setPrecipProbability(precipProbability);
+                << "dt = " << dt
+                << "desc = "  << desc
+                << "code = "  << code
+                << "icon = "  << weatherIcon
+                << "pressure = "  << main.value("pressure").toDouble()
+                << "precipProbability = " << precipProbability;
             f.setDateTime(dt);
             f.setDescription(desc);
             f.setWeatherCode(code);
             f.setWeatherIcon(weatherIcon);
             f.setPressure(main.value("pressure").toDouble());
             f.setHumidity(main.value("humidity").toDouble());
+            f.setPrecipProbability(precipProbability);
         }
         if (max_temp > f.maxTemperature()){
             f.setMaxTemperature(max_temp);
@@ -245,7 +247,6 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
     m_forecasts << f;
 
     foreach(Forecast fc, m_forecasts) {
-//        qDebug() << fc.dateTime() << fc.description() << fc.minTemperature() << fc.maxTemperature() << fc.weatherCode();
         qDebug() << fc;
     }
 

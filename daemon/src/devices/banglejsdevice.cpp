@@ -418,12 +418,14 @@ void BangleJSDevice::sendWeather(CurrentWeather *weather)
         // weather report (current temp, days highest temp, days lowest temp, current humidity, rain/precip probability, UV Index, current condition code, current condition text, wind speed, wind direction)
 
         o.insert("t", "weather");
-        // o.insert("v","1")
+        o.insert("v","1");
         o.insert("temp", weather->temperature());
         o.insert("hi", weather->maxTemperature());
         o.insert("lo", weather->minTemperature());
         o.insert("hum", weather->humidity());
-        // rain //  weatherSpec.getPrecipProbability());
+        if (weather->forecastCount() > 0) {
+            o.insert("rain", 100*weather->forecast(0).precipProbability());
+        }
         // uv // Math.round(weatherSpec.getUvIndex() *10)/10);
         o.insert("code", weather->weatherCode());
         o.insert("txt", weather->description());
