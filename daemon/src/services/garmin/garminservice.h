@@ -2,19 +2,93 @@
 #define GARMINSERVICE__H
 
 //#include "abstractoperationservice.h"
-#include "garminmlrservice.h"
+#include "garminmlr.h"
+#include "cobscodec.h"
+#include "garmintypes.h"
 
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <QHash>
+#include <QQueue>
+#include <QVector>
+#include <QMutex>
+#include <QMutexLocker>
+#include <QSharedPointer>
+#include <QWeakPointer>
+#include <optional>
+#include <variant>
 #include <qmap.h>
 #include <qbledevice.h>
-#include <optional>
-#include <vector>
-#include <QObject>
 #include <qbleservice.h>
+
+static constexpr quint64 GADGETBRIDGE_CLIENT_ID = 2;
+
+
+// -------------------- MLR adapters --------------------
+// These glue the communicator to your MlrCommunicator and your BLE write primitive.
+/*
+class MlrBleSender : public QObject {
+    Q_OBJECT
+public:
+    //MlrBleSender(QSharedPointer<IBleSupport> ble,
+    MlrBleSender(QSharedPointer<QBLEService> ble,
+                 QBLECharacteristic sendCh,
+                 QObject* parent=nullptr)
+        : QObject(parent), mBle(std::move(ble)), mSendCh(std::move(sendCh)) {}
+
+public slots:
+    void sendPacket(const QString& taskName, const QByteArray& packet);
+
+private:
+    QSharedPointer<QBLEService> mBle;
+    QBLECharacteristic mSendCh;
+};
+
+*/
+
+class MlrGfdiReceiver : public QObject {
+    Q_OBJECT
+public:
+    explicit MlrGfdiReceiver(QObject* parent=nullptr);
+
+public slots:
+    void onDataReceived(const QByteArray& data);
+
+signals:
+    // decoded == raw GFDI message: [size:2][msg_id:2]...[crc:2] (NO handle byte)
+    void gfdiDecoded(const QByteArray& decoded);
+
+
+private:
+    CobsCoDec* mCodec; // persistent to support multi-packet messages
+};
+
+
+// -------------------- Service Writer / Callback (Qt) --------------------
+class IServiceWriter : public QObject {
+    Q_OBJECT
+public:
+    using QObject::QObject;
+public slots:
+    virtual void write(const QString& taskName, const QByteArray& data) = 0;
+};
+
+class IServiceCallback : public QObject {
+    Q_OBJECT
+public:
+    using QObject::QObject;
+public slots:
+    virtual void onConnect(IServiceWriter* writer) { Q_UNUSED(writer); }
+    virtual void onClose() {}
+    virtual void onMessage(const QByteArray& data) = 0;
+};
+
 
 class GarminService : public QBLEService
 {
     Q_OBJECT
-
+/*
     class Service {
     public:
         enum Value {
@@ -78,7 +152,8 @@ class GarminService : public QBLEService
             return std::nullopt;
         }
     };
-
+    */
+/*
     enum RequestType {
             REGISTER_ML_REQ = 0,
             REGISTER_ML_RESP = 1,
@@ -90,6 +165,7 @@ class GarminService : public QBLEService
             UNK_REQ = 7,
             UNK_RESP = 8
      };
+*/
 
 
 public:
@@ -98,8 +174,42 @@ public:
     static const char* UUID_SERVICE_GARMIN_ML_GFDI;
     int mMaxWriteSize = 20;
 
-    void onMtuChanged(int mtu);
     bool initializeDevice();
+    void setServiceCallback(Service service, QSharedPointer<IServiceCallback> cb);
+    void removeServiceCallback(Service service);
+
+public slots:
+    // service lifecycle
+    void registerService(Service service, bool reliable);
+    void closeService(Service service);
+
+    // send/receive
+    void sendMessage(const QString& taskName, const QByteArray& gfdiMessage);
+    void sendMessageWithTransaction(const QString& taskName, const QByteArray& gfdiMessage);
+    void onCharacteristicChanged(const QByteArray& data);
+
+
+    // async-response emulation
+    void submitGfdiResponse(quint64 requestId, const QByteArray& response);
+
+    // MTU / device max size
+    void onMtuChanged(int mtu);
+    void onDeviceMaxPacketSize(quint16 deviceMaxPacketSize);
+
+signals:
+    void initialized(bool ok);
+
+    // GFDI delivery
+    void gfdiMessageReceived(const QByteArray& gfdiMessage);
+    void gfdiMessageReceivedNeedResponse(quint64 requestId, const QByteArray& gfdiMessage);
+
+    // other service delivery
+    void serviceMessageReceived(Service service, const QByteArray& data);
+
+    // BLE write primitive (decouple transport)
+    void writeToBle(const QString& taskName, const QBLECharacteristic& handle, const QByteArray& data);
+
+    void errorOccurred(const QString& error);
 
 private:
     QString mPath;
@@ -111,16 +221,65 @@ private:
     QMap<Service, int> mHandleByService;
     //QMap<Service, ServiceCallback> mServiceCallbacks;
 
-    QMap<int, GarminMlrService> mMlrServices;
+    QMap<int, MlrCommunicator> mMlrServices;
 
     bool mRealtimeHrOneShot = false;
     int mPreviousSteps = -1;
 
     int calcMaxWriteChunk(int mtu);
 
-    Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
+    // helpers
+    static QString uuidFor(quint16 shortId);
+    static quint16 u16le(const QByteArray& b, int off);
+    static quint64 u64le(const QByteArray& b, int off);
 
-    QByteArray closeAllServices();
+    // write queue
+    void enqueueWrite(const QString& taskName, const QByteArray& data);
+    void pumpWriteQueue();
+
+
+
+    QByteArray createCloseAllServicesMessage() const;
+    QByteArray createRegisterServiceMessage(Service service, bool reliable) const;
+    QByteArray createCloseServiceMessage(Service service, quint8 handle) const;
+
+    // connection handling + MLR management
+    void onConnectionStateChanged(bool connected);
+    void pauseMlr();
+    void resumeMlr();
+    void clearAndPauseMlr();
+
+    // inbound handling
+    void processHandleManagement(const QByteArray& payload);
+    void processRegisterMlResp(const QByteArray& payload);
+    void processCloseHandleResp(const QByteArray& payload);
+    void processCloseAllResp();
+
+    void handleDecodedFrame(const QByteArray& decodedFrame); // decoded frame begins with handle byte
+    void dispatchServiceMessage(quint8 handle, const QByteArray& payload);
+
+    QScopedPointer<CobsCoDec> mCobs;
+    QMutex mMutex;
+    bool mWriteInFlight{false};
+    QQueue<QPair<QString, QByteArray>> mPendingWrites;
+
+    // MLR keyed by mlrHandle (bits 0-3)
+    QHash<quint8, QSharedPointer<MlrCommunicator>> mMlrByHandle;
+
+    QHash<Service, QSharedPointer<IServiceCallback>> mServiceCallbacks;
+
+    // request-id counter for gfdiMessageReceivedNeedResponse
+    quint64 mRequestSeq{1};
+    QHash<quint64, QByteArray> mPendingResponses;
+
+    // Sequential write queue (replaces Rust await writes)
+    QQueue<QPair<QString, QByteArray>> pendingWrites_;
+
+
+private slots:
+    void characteristicRead(const QString &c, const QByteArray &value);
+    void onBleWriteCompleted(const QString& taskName, bool ok, const QString& error);
+
 
 };
 
