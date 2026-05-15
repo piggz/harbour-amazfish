@@ -429,11 +429,16 @@
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <source>Stress</source>
+        <translation type="unfinished">தகைவு</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="290"/>
         <source>Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="289"/>
+        <location filename="../qml/pages/FirstPage.qml" line="304"/>
         <source>Battery</source>
         <translation type="unfinished">மின்கலம்</translation>
     </message>
@@ -446,7 +451,7 @@
         <translation type="obsolete">பை</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="297"/>
+        <location filename="../qml/pages/FirstPage.qml" line="312"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
@@ -473,7 +478,7 @@
         <translation type="vanished">துவக்கத்தில் இயக்கு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="312"/>
+        <location filename="../qml/pages/FirstPage.qml" line="327"/>
         <source>Install File</source>
         <translation>கோப்பை நிறுவவும்</translation>
     </message>
@@ -577,8 +582,8 @@
 <context>
     <name>GraphData</name>
     <message>
-        <location filename="../qml/components/GraphData.qml" line="309"/>
-        <location filename="../qml/components/GraphData.qml" line="309"/>
+        <location filename="../qml/components/GraphData.qml" line="356"/>
+        <location filename="../qml/components/GraphData.qml" line="356"/>
         <source>No data</source>
         <translation>தரவு இல்லை</translation>
     </message>
@@ -1366,31 +1371,54 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="72"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
         <source>Donate</source>
         <translation>நன்கொடை</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="33"/>
         <location filename="../qml/pages/Settings-menu.qml" line="49"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="68"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="69"/>
         <source>Weather</source>
         <translation>வானிலை</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="69"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="68"/>
+        <source>Notifications</source>
+        <translation type="unfinished">அறிவிப்புகள்</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="70"/>
         <source>Strava</source>
         <translation>ச்ட்ராவா</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="70"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="71"/>
         <source>FitTrackee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-menu.qml" line="71"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="72"/>
         <source>Debug Info</source>
         <translation>பிழைத்திருத்த செய்தி</translation>
+    </message>
+</context>
+<context>
+    <name>Settings-notifications</name>
+    <message>
+        <location filename="../qml/pages/Settings-notifications.qml" line="8"/>
+        <source>Notifications settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-notifications.qml" line="9"/>
+        <source>Save Settings</source>
+        <translation type="unfinished">அமைப்புகளை சேமிக்கவும்</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-notifications.qml" line="36"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1587,12 +1615,12 @@
 <context>
     <name>SportPage</name>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="357"/>
+        <location filename="../qml/pages/SportPage.qml" line="360"/>
         <source>Send to Strava</source>
         <translation>ச்ட்ராவாவுக்கு அனுப்புங்கள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="167"/>
+        <location filename="../qml/pages/SportPage.qml" line="169"/>
         <source>Data:</source>
         <translation>தரவு:</translation>
     </message>
@@ -1617,12 +1645,12 @@
         <translation type="vanished">ஏற்றம்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="88"/>
+        <location filename="../qml/pages/SportPage.qml" line="87"/>
         <source>%1°; %2°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="90"/>
+        <location filename="../qml/pages/SportPage.qml" line="89"/>
         <source>%1°; %2°; %3m</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1643,22 +1671,22 @@
         <translation type="vanished">மணித்துளி விரைவு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="148"/>
+        <location filename="../qml/pages/SportPage.qml" line="150"/>
         <source>Start: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="154"/>
+        <location filename="../qml/pages/SportPage.qml" line="156"/>
         <source>Duration: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="160"/>
+        <location filename="../qml/pages/SportPage.qml" line="162"/>
         <source>Location: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="370"/>
+        <location filename="../qml/pages/SportPage.qml" line="373"/>
         <source>Send to FitTrackee</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1945,6 +1973,61 @@
         <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
         <source>An unknown error occurred</source>
         <translation>அறியப்படாத பிழை ஏற்பட்டது</translation>
+    </message>
+</context>
+<context>
+    <name>StressDataPage</name>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="9"/>
+        <location filename="../qml/pages/StressDataPage.qml" line="76"/>
+        <source>Stress</source>
+        <translation type="unfinished">தகைவு</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="25"/>
+        <source>Download Stress Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="42"/>
+        <source>Avg: %1%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="80"/>
+        <location filename="../qml/pages/StressDataPage.qml" line="147"/>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="107"/>
+        <source>Relaxed</source>
+        <translation type="unfinished">நிதானமாக</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="115"/>
+        <source>Mild</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="123"/>
+        <source>Moderate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="131"/>
+        <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="143"/>
+        <source>Stress Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StressDataPage.qml" line="174"/>
+        <source>Last Manual Reading</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
