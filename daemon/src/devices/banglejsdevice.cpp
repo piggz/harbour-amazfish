@@ -51,7 +51,7 @@ Amazfish::Features BangleJSDevice::supportedFeatures() const
         | Amazfish::Feature::FEATURE_MUSIC_CONTROL
         // | Amazfish::Feature::FEATURE_BUTTON_ACTION
         // | Amazfish::Feature::FEATURE_SCREENSHOT
-        | Amazfish::Feature::FEATURE_FILE_INSTALL
+        // | Amazfish::Feature::FEATURE_FILE_INSTALL
         ;
 
 }
