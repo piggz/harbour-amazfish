@@ -433,7 +433,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="275"/>
         <source>Stress</source>
-        <translation type="unfinished">Stres</translation>
+        <translation>Stres</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="290"/>
@@ -1397,7 +1397,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="68"/>
         <source>Notifications</source>
-        <translation type="unfinished">Upozornění</translation>
+        <translation>Upozornění</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="70"/>
@@ -1420,17 +1420,17 @@
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="8"/>
         <source>Notifications settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení upozornění</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="9"/>
         <source>Save Settings</source>
-        <translation type="unfinished">Uložit nastavení</translation>
+        <translation>Uložit nastavení</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="36"/>
         <source>Remove</source>
-        <translation type="unfinished">Odstranit</translation>
+        <translation>Odstranit</translation>
     </message>
 </context>
 <context>
@@ -3273,53 +3273,53 @@
         <location filename="../qml/pages/StressDataPage.qml" line="9"/>
         <location filename="../qml/pages/StressDataPage.qml" line="76"/>
         <source>Stress</source>
-        <translation type="unfinished">Stres</translation>
+        <translation>Stres</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="25"/>
         <source>Download Stress Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Stáhnout data o stresu</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="42"/>
         <source>Avg: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Prům.: %1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="80"/>
         <location filename="../qml/pages/StressDataPage.qml" line="147"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="107"/>
         <source>Relaxed</source>
-        <translation type="unfinished">Uvolněný</translation>
+        <translation>Uvolněný</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="115"/>
         <source>Mild</source>
-        <translation type="unfinished"></translation>
+        <translation>Mírný</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="123"/>
         <source>Moderate</source>
-        <translation type="unfinished"></translation>
+        <translation>Střední</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="131"/>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Vysoký</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="143"/>
         <source>Stress Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Přehled stresu</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="174"/>
         <source>Last Manual Reading</source>
-        <translation type="unfinished"></translation>
+        <translation>Naposledy ručně přečteno</translation>
     </message>
 </context>
 <context>
