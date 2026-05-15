@@ -2,6 +2,8 @@
 #include "checksumcalculator.h"
 
 #include <qdebug.h>
+#include <QMap>
+
 
 MessageReader::MessageReader(QByteArray data) : GarminByteBufferReader(data)
 {
@@ -42,8 +44,50 @@ void MessageReader::checkCRC() {
     }
 }
 
+void MessageReader::warnIfLeftover(int messageType, bool supportedType) {
+            if (!mByteBuffer.atEnd() && (getPosition() < getLimit())) {
+                int pos = getPosition();
+                QByteArray leftover;
+                leftover=mByteBuffer.readAll();
+                setPosition(pos);
+                if (supportedType){
+                    qDebug() << "Leftover bytes when parsing message type " << messageType << ". Bytes: " << leftover << ", complete message: " << mByteBuffer.data();
+                } else {
+                    qDebug() << "Unknown message type " << messageType <<". Bytes: " <<leftover;;
+                }
+            }
+        }
 
 GarminGDFIMessage::GarminGDFIMessage()
 {
 
+}
+
+void GarminGDFIMessage::parseIncoming(GarminGDFIMessage &message, QByteArray incoming)
+{
+    MessageReader messageReader(message);
+
+    bool supportedType = false;
+    int messageType = messageReader.readShort();
+    std::unique_ptr<GarminGDFIMessage> tmp(new GarminGDFIMessage);
+            /*
+        try {
+        if ((messageType & 0x8000) != 0) {
+            // final int sequenceNumber = (messageType >> 8) & 0x7f;
+            messageType = (messageType & 0xff) + 5000;
+        }
+        if (mMesssageMap.contains(messageType)) {
+            mMesssageMap.value(messageType)();
+        }
+        if (mes != NULL)
+        {
+            supportedType=true;
+            mes->parseIncoming(message);
+            return *mes;
+        } else
+        {
+            supportedType=false;
+            return new GarminGDFIMessage;
+         }
+         */
 }

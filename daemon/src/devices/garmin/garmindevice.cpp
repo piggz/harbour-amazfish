@@ -1,5 +1,5 @@
 #include "garmindevice.h"
-#include "services/garmin/garminservice.h"
+#include "services/garmin/communicator_v2.h"
 #include "hrmservice.h"
 #include "deviceinfoservice.h"
 
@@ -150,9 +150,9 @@ void GarminDevice::parseServices()
                 addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
                 qDebug() << "Added Garmin HRM Support";
             }
-            else if (uuid == GarminService::UUID_SERVICE_GARMIN_ML_GFDI && !service(GarminService::UUID_SERVICE_GARMIN_ML_GFDI)) {
+            else if (uuid == CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI && !service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI)) {
                 qDebug() << "Added Garmin ML GDFI Service";
-                addService(GarminService::UUID_SERVICE_GARMIN_ML_GFDI, new GarminService(path, this));
+                addService(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI, new CommunicatorV2(path, this));
             }
             else{
                  //addService(uuid, new QBLEService(uuid, path, this));

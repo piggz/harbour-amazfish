@@ -26,7 +26,7 @@ public:
      QString readNullTerminatedString();
      QByteArray readBytes(int size);
 
-private:
+protected:
      QBuffer mByteBuffer;
      QSysInfo::Endian mOrder=QSysInfo::LittleEndian;
 };
