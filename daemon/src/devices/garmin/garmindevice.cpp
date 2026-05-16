@@ -88,7 +88,7 @@ void GarminDevice::pair()
     emit connectionStateChanged();
 
     QBLEDevice::pair();
-    initialise();
+    //initialise();
 }
 
 
@@ -122,9 +122,6 @@ void GarminDevice::parseServices()
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
 
-    //Debug() << "Resolved services...";
-
-    //qDebug().noquote() << xml.value();
 
     QDomDocument doc;
     doc.setContent(xml.value());

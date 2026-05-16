@@ -61,10 +61,10 @@ QSet<quint16> GfdiMessageParser::parseCapabilities(const QByteArray& bytes)
 
 // -------------------- Parser: per-message parsers --------------------
 
-Result<DeviceInformationMessage> GfdiMessageParser::parseDeviceInformation(const QByteArray& data)
+Result<GfdiMessage> GfdiMessageParser::parseDeviceInformation(const QByteArray& data)
 {
     if (data.size() < 10) {
-        return Result<DeviceInformationMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage, "DeviceInformation too short"));
     }
     int off = 0;
@@ -76,46 +76,45 @@ Result<DeviceInformationMessage> GfdiMessageParser::parseDeviceInformation(const
     msg.maxPacketSize   = u16le(data, off); off += 2;
 
     int consumed = 0;
-    /*
-     * TODO
+
     auto s1 = readLengthPrefixedString(data.mid(off), consumed);
-    if (!s1.isOk()) return Result<DeviceInformationMessage>::err(s1.error());
-    msg.bluetoothFriendlyName = s1.value();
+    if (!s1.ok) return Result<GfdiMessage>::err(s1.error);
+    msg.bluetoothFriendlyName = s1.value;
     off += consumed;
 
     auto s2 = readLengthPrefixedString(data.mid(off), consumed);
-    if (!s2.isOk()) return Result<DeviceInformationMessage>::err(s2.error());
-    msg.deviceName = s2.value();
+    if (!s2.ok) return Result<GfdiMessage>::err(s2.error);
+    msg.deviceName = s2.value;
     off += consumed;
 
     auto s3 = readLengthPrefixedString(data.mid(off), consumed);
-    if (!s3.isOk()) return Result<DeviceInformationMessage>::err(s3.error());
-    msg.deviceModel = s3.value();
-    */
+    if (!s3.ok) return Result<GfdiMessage>::err(s3.error);
+    msg.deviceModel = s3.value;
 
-    return Result<DeviceInformationMessage>::isOk(msg);
+
+    return Result<GfdiMessage>::isOk(msg);
 }
 
-Result<ConfigurationMessage> GfdiMessageParser::parseConfiguration(const QByteArray& data)
+Result<GfdiMessage> GfdiMessageParser::parseConfiguration(const QByteArray& data)
 {
     if (data.isEmpty()) {
-        return Result<ConfigurationMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage, "Configuration message empty"));
     }
     const int numBytes = quint8(data[0]);
     if (data.size() < 1 + numBytes) {
-        return Result<ConfigurationMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage, "Configuration data truncated"));
     }
     ConfigurationMessage msg;
     msg.capabilities = parseCapabilities(data.mid(1, numBytes));
-    return Result<ConfigurationMessage>::isOk(msg);
+    return Result<GfdiMessage>::isOk(msg);
 }
 
-Result<NotificationControlMessage> GfdiMessageParser::parseNotificationControl(const QByteArray& data)
+Result<GfdiMessage> GfdiMessageParser::parseNotificationControl(const QByteArray& data)
 {
     if (data.size() < 7) {
-        return Result<NotificationControlMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage, "NotificationControl message too short"));
     }
 
@@ -126,7 +125,7 @@ Result<NotificationControlMessage> GfdiMessageParser::parseNotificationControl(c
     // PERFORM_NOTIFICATION_ACTION (128)
     if (msg.command == 128) {
         if (data.size() < 6) {
-            return Result<NotificationControlMessage>::err(
+            return Result<GfdiMessage>::err(
                 GarminError(GarminError::Code::InvalidMessage, "PERFORM_NOTIFICATION_ACTION message too short"));
         }
         msg.actionId = quint8(data[5]);
@@ -151,7 +150,7 @@ Result<NotificationControlMessage> GfdiMessageParser::parseNotificationControl(c
             }
         }
         // attributes empty
-        return Result<NotificationControlMessage>::isOk(msg);
+        return Result<GfdiMessage>::isOk(msg);
     }
 
     // Requested attributes parsing
@@ -179,32 +178,32 @@ Result<NotificationControlMessage> GfdiMessageParser::parseNotificationControl(c
         off += 3;
     }
 
-    return Result<NotificationControlMessage>::isOk(msg);
+    return Result<GfdiMessage>::isOk(msg);
 }
 
-Result<NotificationSubscriptionMessage> GfdiMessageParser::parseNotificationSubscription(const QByteArray& data)
+Result<GfdiMessage> GfdiMessageParser::parseNotificationSubscription(const QByteArray& data)
 {
     if (data.size() < 2) {
-        return Result<NotificationSubscriptionMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage, "NotificationSubscription message too short"));
     }
     NotificationSubscriptionMessage msg;
     msg.enable = (quint8(data[0]) == 1);
     msg.unk = quint8(data[1]);
-    return Result<NotificationSubscriptionMessage>::isOk(msg);
+    return Result<GfdiMessage>::isOk(msg);
 }
 
-Result<SynchronizationMessage> GfdiMessageParser::parseSynchronization(const QByteArray& data)
+Result<GfdiMessage> GfdiMessageParser::parseSynchronization(const QByteArray& data)
 {
     if (data.size() < 2) {
-        return Result<SynchronizationMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage, "Synchronization message too short"));
     }
     const quint8 syncType = quint8(data[0]);
     const int size = quint8(data[1]);
 
     if (data.size() < 2 + size) {
-        return Result<SynchronizationMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage, "Synchronization message truncated"));
     }
 
@@ -214,7 +213,7 @@ Result<SynchronizationMessage> GfdiMessageParser::parseSynchronization(const QBy
     } else if (size == 4) {
         bitmask = quint64(u32le(data, 2));
     } else {
-        return Result<SynchronizationMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage,
                         QString("Unexpected synchronization bitmask size: %1").arg(size)));
     }
@@ -222,13 +221,13 @@ Result<SynchronizationMessage> GfdiMessageParser::parseSynchronization(const QBy
     SynchronizationMessage msg;
     msg.synchronizationType = syncType;
     msg.fileTypeBitmask = bitmask;
-    return Result<SynchronizationMessage>::isOk(msg);
+    return Result<GfdiMessage>::isOk(msg);
 }
 
-Result<WeatherRequestMessage> GfdiMessageParser::parseWeatherRequest(const QByteArray& data)
+Result<GfdiMessage> GfdiMessageParser::parseWeatherRequest(const QByteArray& data)
 {
     if (data.size() < 10) {
-        return Result<WeatherRequestMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage, "Weather request message too short"));
     }
     WeatherRequestMessage msg;
@@ -236,13 +235,13 @@ Result<WeatherRequestMessage> GfdiMessageParser::parseWeatherRequest(const QByte
     msg.latitude = i32le(data, 1);
     msg.longitude = i32le(data, 5);
     msg.hoursOfForecast = quint8(data[9]);
-    return Result<WeatherRequestMessage>::isOk(msg);
+    return Result<GfdiMessage>::isOk(msg);
 }
 
-Result<FilterStatusMessage> GfdiMessageParser::parseFilterStatus(const QByteArray& data)
+Result<GfdiMessage> GfdiMessageParser::parseFilterStatus(const QByteArray& data)
 {
     if (data.size() < 3) {
-        return Result<FilterStatusMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage, "Filter status message too short"));
     }
 
@@ -253,7 +252,7 @@ Result<FilterStatusMessage> GfdiMessageParser::parseFilterStatus(const QByteArra
     case 1: st = Status::Nack; break;
     case 2: st = Status::Unsupported; break;
     default:
-        return Result<FilterStatusMessage>::err(
+        return Result<GfdiMessage>::err(
             GarminError(GarminError::Code::InvalidMessage,
                         QString("Unknown status: %1").arg(statusByte)));
     }
@@ -261,128 +260,64 @@ Result<FilterStatusMessage> GfdiMessageParser::parseFilterStatus(const QByteArra
     FilterStatusMessage msg;
     msg.status = st;
     msg.filterType = (data.size() > 3) ? quint8(data[3]) : 0;
-    return Result<FilterStatusMessage>::isOk(msg);
+    return Result<GfdiMessage>::isOk(msg);
 }
 
 // -------------------- Parser main --------------------
-/*
-void GfdiMessageParser::parseAndEmit(const QByteArray& data)
-{
-    auto res = parse(
-        data,
-        [this](const DeviceInformationMessage& m){ emit deviceInformationReceived(m); },
-        [this](const ConfigurationMessage& m){ emit configurationReceived(m); },
-        [this](){ emit currentTimeRequestReceived(); },
-        [this](const NotificationControlMessage& m){ emit notificationControlReceived(m); },
-        [this](const NotificationSubscriptionMessage& m){ emit notificationSubscriptionReceived(m); },
-        [this](const SynchronizationMessage& m){ emit synchronizationReceived(m); },
-        [this](const FilterStatusMessage& m){ emit filterStatusReceived(m); },
-        [this](const WeatherRequestMessage& m){ emit weatherRequestReceived(m); },
-        [this](quint16 id, const QByteArray& p){ emit unknownMessageReceived(id, p); }
-    );
 
-    if (res.isErr()) emit parseError(res.error().message());
-}
 
-Result<std::monostate> GfdiMessageParser::parse(
-    const QByteArray& data,
-    std::function<void(const DeviceInformationMessage&)> onDeviceInfo,
-    std::function<void(const ConfigurationMessage&)> onConfig,
-    std::function<void()> onCurrentTimeReq,
-    std::function<void(const NotificationControlMessage&)> onNotifControl,
-    std::function<void(const NotificationSubscriptionMessage&)> onNotifSub,
-    std::function<void(const SynchronizationMessage&)> onSync,
-    std::function<void(const FilterStatusMessage&)> onFilterStatus,
-    std::function<void(const WeatherRequestMessage&)> onWeather,
-    std::function<void(quint16, const QByteArray&)> onUnknown)
-{
+Result<GfdiMessage> GfdiMessageParser::parse(const QByteArray& data) {
     if (data.size() < 6) {
-        return Result<std::monostate>::err(
-            GarminError(GarminError::Type::InvalidMessage, "Message too short"));
+        return Result<GfdiMessage>::err(GarminError::invalidMessage(QStringLiteral("Message too short")));
     }
 
     int offset = 0;
-    offset += 2; // skip packet size
-    quint16 messageId = u16le(data, offset);
+    offset += 2; // packet size
+
+    quint16 rawId = le16(data.constData() + offset);
     offset += 2;
 
-    // sequence encoding: if bit 15 set, actual_id = (raw & 0xFF) + 5000
-    if (messageId & 0x8000) {
-        messageId = quint16((messageId & 0x00FF) + 5000);
+    // decode possible sequence wrapper (bit 15)
+    quint16 msgId = rawId;
+    if ((msgId & 0x8000) != 0) {
+        msgId = (msgId & 0xFF) + 5000;
     }
 
-    const QByteArray payload = data.mid(offset);
-
-    const auto mid = messageIdFromU16(messageId);
+    const auto mid = messageIdFromU16(msgId);
     if (!mid.has_value()) {
-        onUnknown(messageId, payload);
-        return Result<std::monostate>::ok(std::monostate{});
+        return Result<GfdiMessage>::isOk(UnknownMessage{msgId, data.mid(offset)});
     }
 
     switch (*mid) {
-    case MessageId::DeviceInformation: {
-        auto r = parseDeviceInformation(payload);
-        if (r.isErr()) return Result<std::monostate>::err(r.error());
-        onDeviceInfo(r.value());
-        break;
-    }
-    case MessageId::Configuration: {
-        auto r = parseConfiguration(payload);
-        if (r.isErr()) return Result<std::monostate>::err(r.error());
-        onConfig(r.value());
-        break;
-    }
+    case MessageId::DeviceInformation:
+        return parseDeviceInformation(data.mid(offset));
+    case MessageId::Configuration:
+        return parseConfiguration(data.mid(offset));
     case MessageId::CurrentTimeRequest:
-        onCurrentTimeReq();
-        break;
-
-    case MessageId::NotificationControl: {
-        auto r = parseNotificationControl(payload);
-        if (r.isErr()) return Result<std::monostate>::err(r.error());
-        onNotifControl(r.value());
-        break;
-    }
-    case MessageId::NotificationSubscription: {
-        auto r = parseNotificationSubscription(payload);
-        if (r.isErr()) return Result<std::monostate>::err(r.error());
-        onNotifSub(r.value());
-        break;
-    }
-    case MessageId::Synchronization: {
-        auto r = parseSynchronization(payload);
-        if (r.isErr()) return Result<std::monostate>::err(r.error());
-        onSync(r.value());
-        break;
-    }
-    case MessageId::WeatherRequest: {
-        auto r = parseWeatherRequest(payload);
-        if (r.isErr()) return Result<std::monostate>::err(r.error());
-        onWeather(r.value());
-        break;
-    }
+        return Result<GfdiMessage>::isOk(GfdiMessage{std::monostate{}});
+    case MessageId::NotificationControl:
+        return parseNotificationControl(data.mid(offset));
+    case MessageId::NotificationSubscription:
+        return parseNotificationSubscription(data.mid(offset));
+    case MessageId::Synchronization:
+        return parseSynchronization(data.mid(offset));
+    case MessageId::WeatherRequest:
+        return parseWeatherRequest(data.mid(offset));
     case MessageId::Response: {
-        // filter status special case: first field in payload is original message ID (2 bytes)
-        if (payload.size() >= 2) {
-            const quint16 original = u16le(payload, 0);
-            if (original == 5007) {
-                auto r = parseFilterStatus(payload);
-                if (r.isErr()) return Result<std::monostate>::err(r.error());
-                onFilterStatus(r.value());
-                break;
+        // Filter status special-case
+        if (offset + 2 < data.size()) {
+            const quint16 orig = le16(data.constData() + offset);
+            if (orig == 5007) {
+                return parseFilterStatus(data.mid(offset));
             }
         }
-        onUnknown(messageId, payload);
-        break;
+        return Result<GfdiMessage>::isOk(UnknownMessage{msgId, data.mid(offset)});
     }
     default:
-        onUnknown(messageId, payload);
-        break;
+        return Result<GfdiMessage>::isOk(UnknownMessage{msgId, data.mid(offset)});
     }
-
-    return Result<std::monostate>::ok(std::monostate{});
 }
 
-*/
 // -------------------- Generator helpers --------------------
 
 void GfdiMessageGenerator::pushU16le(QByteArray& out, quint16 v) {

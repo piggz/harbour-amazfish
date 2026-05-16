@@ -73,10 +73,10 @@ private:
 // Callbacks (Rust: GfdiMessageCallback / AsyncGfdiMessageCallback / ServiceWriter / ServiceCallback)
 // =============================================================================
 
-class GfdiMessageCallback {
+class GfdiMessageCallback : public QObject{
 public:
-    virtual ~GfdiMessageCallback() = default;
-    virtual Result<void> onMessage(const QByteArray& message) = 0;
+     ~GfdiMessageCallback() = default;
+     Result<void> onMessage(const QByteArray& message);
 };
 
 // Async callback uses signals to deliver reply; we will “await” it via QEventLoop.
