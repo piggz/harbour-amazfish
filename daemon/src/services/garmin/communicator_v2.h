@@ -210,7 +210,7 @@ private:
 private:
     mutable QMutex m_mutex;
     QSharedPointer<CommunicatorState> m_state;
-    QSharedPointer<BleSupport> m_ble;
+    QSharedPointer<QBLEService> m_ble;
 
     QSharedPointer<GfdiMessageCallback> m_syncCb;
     QPointer<AsyncGfdiMessageCallback> m_asyncCb;
@@ -221,7 +221,7 @@ private:
     bool isFirstConncet=true;
 };
 
-/*
+
 // =============================================================================
 // MlrServiceWriter (Rust: struct MlrServiceWriter implements ServiceWriter)
 // =============================================================================
@@ -229,7 +229,7 @@ private:
 class MlrServiceWriter : public ServiceWriter {
 public:
     MlrServiceWriter(quint8 handle,
-                     QSharedPointer<BleSupport> ble,
+                     QSharedPointer<QBLEService> ble,
                      QString sendPath);
 
     Result<void> write(const QString& taskName, const QByteArray& data) override;
@@ -238,9 +238,10 @@ private:
     Result<void> awaitBleWrite(const QString& taskName, const QByteArray& bytes);
 
     quint8 m_handle;
-    QSharedPointer<BleSupport> m_ble;
+    QSharedPointer<QBLEService> m_ble;
     QBLECharacteristic m_sendChar;
 };
+
 
 // =============================================================================
 // Example service callbacks (Rust: GfdiServiceCallback, Realtime*, FileTransfer*)
@@ -258,7 +259,7 @@ private:
     QSharedPointer<GfdiMessageCallback> m_cb;
     CobsCoDec m_codec;
 };
-
+/*
 class RealtimeHeartRateCallback : public ServiceCallback {
 public:
     using Handler = std::function<Result<void>(quint8)>;
@@ -271,6 +272,7 @@ public:
 private:
     Handler m_handler;
 };
+
 
 class RealtimeStepsCallback : public ServiceCallback {
 public:

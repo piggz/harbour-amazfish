@@ -13,7 +13,21 @@
 #include <optional>
 
 #include "garmintypes.h"
+#include <variant>
 
+
+
+static inline quint16 le16(const char* p) {
+    return quint16(quint8(p[0]) | (quint16(quint8(p[1]))<<8));
+}
+static inline quint32 le32(const char* p) {
+    return quint32(quint8(p[0]) | (quint32(quint8(p[1]))<<8) | (quint32(quint8(p[2]))<<16) | (quint32(quint8(p[3]))<<24));
+}
+static inline quint64 le64(const char* p) {
+    quint64 v=0;
+    for (int i=0;i<8;++i) v |= (quint64(quint8(p[i])) << (8*i));
+    return v;
+}
 
 // -------------------- Enums --------------------
 
@@ -172,6 +186,25 @@ struct WeatherRequestMessage {
     quint8 hoursOfForecast{};
 };
 
+struct UnknownMessage {
+    quint16 messageId {0};
+    QByteArray data;
+};
+
+
+using GfdiMessage = std::variant<
+    DeviceInformationMessage,
+    ConfigurationMessage,
+    std::monostate, // CurrentTimeRequest
+    NotificationControlMessage,
+    NotificationSubscriptionMessage,
+    SynchronizationMessage,
+    FilterStatusMessage,
+    WeatherRequestMessage,
+    UnknownMessage
+>;
+
+
 // -------------------- Parser (QObject + signals) --------------------
 
 class GfdiMessageParser : public QObject {
@@ -184,21 +217,7 @@ public slots:
     //void parseAndEmit(const QByteArray& data);
 
 public:
-    // If you prefer pull-based parsing, you can use this too.
-    // It emits nothing; it just returns ok/err and fills out parameters.
-    /*
-    static Result<std::monostate> parse(const QByteArray& data,
-                                             std::function<void(const DeviceInformationMessage&)>,
-                                             std::function<void(const ConfigurationMessage&)>,
-                                             std::function<void()>, // current time request
-                                             std::function<void(const NotificationControlMessage&)>,
-                                             std::function<void(const NotificationSubscriptionMessage&)>,
-                                             std::function<void(const SynchronizationMessage&)>,
-                                             std::function<void(const FilterStatusMessage&)>,
-                                             std::function<void(const WeatherRequestMessage&)>,
-                                             std::function<void(quint16, const QByteArray&)> // unknown
-                                             );
-    */
+    static Result<GfdiMessage> parse(const QByteArray& data);
 
 signals:
     void deviceInformationReceived(const DeviceInformationMessage& msg);
@@ -213,13 +232,13 @@ signals:
     void parseError(const QString& error);
 
 private:
-    static Result<DeviceInformationMessage> parseDeviceInformation(const QByteArray& data);
-    static Result<ConfigurationMessage> parseConfiguration(const QByteArray& data);
-    static Result<NotificationControlMessage> parseNotificationControl(const QByteArray& data);
-    static Result<NotificationSubscriptionMessage> parseNotificationSubscription(const QByteArray& data);
-    static Result<SynchronizationMessage> parseSynchronization(const QByteArray& data);
-    static Result<WeatherRequestMessage> parseWeatherRequest(const QByteArray& data);
-    static Result<FilterStatusMessage> parseFilterStatus(const QByteArray& data);
+    static Result<GfdiMessage> parseDeviceInformation(const QByteArray& data);
+    static Result<GfdiMessage> parseConfiguration(const QByteArray& data);
+    static Result<GfdiMessage> parseNotificationControl(const QByteArray& data);
+    static Result<GfdiMessage> parseNotificationSubscription(const QByteArray& data);
+    static Result<GfdiMessage> parseSynchronization(const QByteArray& data);
+    static Result<GfdiMessage> parseWeatherRequest(const QByteArray& data);
+    static Result<GfdiMessage> parseFilterStatus(const QByteArray& data);
 
     static Result<QString> readLengthPrefixedString(const QByteArray& data, int& consumedBytes);
     static QSet<quint16> parseCapabilities(const QByteArray& bytes);
