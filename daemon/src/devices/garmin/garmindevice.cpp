@@ -88,8 +88,7 @@ void GarminDevice::pair()
     emit connectionStateChanged();
 
     QBLEDevice::pair();
-    //initialise();
-}
+ }
 
 
 void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
@@ -117,6 +116,7 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
 
 void GarminDevice::parseServices()
 {
+    // Garmin is using a single service for all functions (Mlr), so we don't need that.
     qDebug() << Q_FUNC_INFO << "Parsing Services for Garmin Epix";
 
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);

@@ -98,6 +98,45 @@ inline std::optional<MessageId> messageIdFromU16(quint16 id) {
     }
 }
 
+inline std::optional<QString> messageIdToString(quint16 id) {
+    switch (id) {
+    case 5000: return "Response";
+    case 5002: return "DownloadRequest";
+    case 5003: return "UploadRequest";
+    case 5004: return "FileTransferData";
+    case 5005: return "CreateFile";
+    case 5007: return "Filter";
+    case 5008: return "SetFileFlag";
+    case 5011: return "FitDefinition";
+    case 5012: return "FitData";
+    case 5014: return "WeatherRequest";
+    case 5024: return "DeviceInformation";
+    case 5026: return "DeviceSettings";
+    case 5030: return "SystemEvent";
+    case 5031: return "SupportedFileTypesRequest";
+    case 5033: return "NotificationUpdate";
+    case 5034: return "NotificationControl";
+    case 5035: return "NotificationData";
+    case 5036: return "NotificationSubscription";
+    case 5037: return "Synchronization";
+    case 5039: return "FindMyPhoneRequest";
+    case 5040: return "FindMyPhoneCancel";
+    case 5041: return "MusicControl";
+    case 5042: return "MusicControlCapabilities";
+    case 5043: return "ProtobufRequest";
+    case 5044: return "ProtobufResponse";
+    case 5049: return "MusicControlEntityUpdate";
+    case 5050: return "Configuration";
+    case 5052: return "CurrentTimeRequest";
+    case 5101: return "AuthNegotiation";
+    default: return "Unknown";
+    //default: return std::nullopt;
+    }
+}
+
+
+/// Status codes for response messages
+///
 enum class Status : quint8 {
     Ack = 0,
     Nack = 1,
@@ -132,6 +171,8 @@ inline QString statusName(Status s) {
 }
 
 // -------------------- Parsed message structs --------------------
+// Device Information Message (incoming from watch)
+
 
 struct DeviceInformationMessage {
     quint16 protocolVersion{};
@@ -144,9 +185,13 @@ struct DeviceInformationMessage {
     QString deviceModel;
 };
 
+// Configuration Message (incoming from watch)
+
 struct ConfigurationMessage {
     QSet<quint16> capabilities;
 };
+
+// Notification Control Message (incoming from watch)
 
 struct NotificationControlMessage {
     qint32 notificationId{};
@@ -156,10 +201,14 @@ struct NotificationControlMessage {
     std::optional<QString> actionString;
 };
 
+// Notification Subscription Message (incoming from watch)
+
 struct NotificationSubscriptionMessage {
     bool enable{};
     quint8 unk{};
 };
+
+// Synchronization Message (incoming from watch)
 
 struct SynchronizationMessage {
     quint8 synchronizationType{};
@@ -174,10 +223,14 @@ struct SynchronizationMessage {
     }
 };
 
+// Filter Status Message (response to Filter message)
+
 struct FilterStatusMessage {
     Status status{};
     quint8 filterType{};
 };
+
+// Weather Request Message (5014)
 
 struct WeatherRequestMessage {
     quint8 format{};
@@ -217,10 +270,10 @@ public slots:
     //void parseAndEmit(const QByteArray& data);
 
 public:
-    static Result<GfdiMessage> parse(const QByteArray& data);
+    void parse(const QByteArray& data);
 
 signals:
-    void deviceInformationReceived(const DeviceInformationMessage& msg);
+    void deviceInformationReceived(DeviceInformationMessage& msg);
     void configurationReceived(const ConfigurationMessage& msg);
     void currentTimeRequestReceived();
     void notificationControlReceived(const NotificationControlMessage& msg);
@@ -232,13 +285,13 @@ signals:
     void parseError(const QString& error);
 
 private:
-    static Result<GfdiMessage> parseDeviceInformation(const QByteArray& data);
-    static Result<GfdiMessage> parseConfiguration(const QByteArray& data);
-    static Result<GfdiMessage> parseNotificationControl(const QByteArray& data);
-    static Result<GfdiMessage> parseNotificationSubscription(const QByteArray& data);
-    static Result<GfdiMessage> parseSynchronization(const QByteArray& data);
-    static Result<GfdiMessage> parseWeatherRequest(const QByteArray& data);
-    static Result<GfdiMessage> parseFilterStatus(const QByteArray& data);
+    void parseDeviceInformation(const QByteArray& data);
+    void parseConfiguration(const QByteArray& data);
+    void parseNotificationControl(const QByteArray& data);
+    void parseNotificationSubscription(const QByteArray& data);
+    void parseSynchronization(const QByteArray& data);
+    void parseWeatherRequest(const QByteArray& data);
+    void parseFilterStatus(const QByteArray& data);
 
     static Result<QString> readLengthPrefixedString(const QByteArray& data, int& consumedBytes);
     static QSet<quint16> parseCapabilities(const QByteArray& bytes);
@@ -287,7 +340,7 @@ public:
                                                                 bool hasDismissAction);
 
 private:
-    static QByteArray generateCapabilities();
+    static Result<QByteArray> generateCapabilities();
     static quint16 computeChecksum(const QByteArray& data);
     static quint16 computeCrc16(const QByteArray& data);
     static QByteArray truncateUtf8Bytes(const QString& s, int maxBytes);

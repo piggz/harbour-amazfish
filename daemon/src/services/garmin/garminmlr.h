@@ -19,7 +19,7 @@
 
 
 // =============================================================================
-// Constants (copied 1:1 from mlr.rs) [1](https://computacenter-my.sharepoint.com/personal/thomas_michel_computacenter_com/Documents/Microsoft%20Copilot%20Chat%20Files/mlr.rs)
+// Constants
 // =============================================================================
 static constexpr quint8  MLR_FLAG_MASK   = 0x80;
 static constexpr quint8  HANDLE_MASK     = 0x70;
@@ -35,7 +35,7 @@ static constexpr int     ACK_TIMEOUT_MS                      = 250;
 static constexpr int     ACK_TRIGGER_THRESHOLD               = 5;
 
 // =============================================================================
-// Fragment (Rust: struct Fragment) [1](https://computacenter-my.sharepoint.com/personal/thomas_michel_computacenter_com/Documents/Microsoft%20Copilot%20Chat%20Files/mlr.rs)
+// Fragment
 // =============================================================================
 struct Fragment {
     QString taskName;
@@ -44,7 +44,7 @@ struct Fragment {
 };
 
 // =============================================================================
-// MessageSender / MessageReceiver (Rust traits) [1](https://computacenter-my.sharepoint.com/personal/thomas_michel_computacenter_com/Documents/Microsoft%20Copilot%20Chat%20Files/mlr.rs)
+// MessageSender / MessageReceiver (Rust traits)
 // =============================================================================
 
 // Sender is async-like via signals (to model Rust .await).
@@ -52,7 +52,7 @@ class MlrMessageSender : public QObject {
     Q_OBJECT
 public:
     using QObject::QObject;
-    MlrMessageSender(QBLECharacteristic *sendChar,
+    MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar,
                  QObject* parent=nullptr);
     virtual ~MlrMessageSender() = default;
 
@@ -64,9 +64,9 @@ signals:
     void sendFailed(const QString& taskName, const QString& error);
 
 private:
-    Result<void> awaitBleWrite(const QString& taskName, const QByteArray& bytes);
+    //Result<void> awaitBleWrite(const QString& taskName, const QByteArray& bytes);
 
-    QBLECharacteristic *m_sendChar;
+    QSharedPointer<QBLECharacteristic> m_sendChar;
 };
 
 // =============================================================================
@@ -75,6 +75,7 @@ private:
 
 class GfdiMessageCallback : public QObject{
 public:
+    GfdiMessageCallback() {};
      ~GfdiMessageCallback() = default;
      Result<void> onMessage(const QByteArray& message);
 };
@@ -158,8 +159,8 @@ public:
     ~MlrCommunicator() override;
 
 signals:
-    void debugLog(const QString& msg);
-    void warnLog(const QString& msg);
+    //void debugLog(const QString& msg);
+    //void warnLog(const QString& msg);
     void errorOccurred(const QString& msg);
 
 private slots:
