@@ -6,7 +6,7 @@
 void CobsCoDec::ensureTimerStarted()
 {
     if (!mTimer.isValid()) {
-        mTimer.start(); // monotonic elapsed timer where available [2](https://doc.qt.io/qt-6.11/qelapsedtimer.html)
+        mTimer.start(); // monotonic elapsed timer where available
     }
 }
 

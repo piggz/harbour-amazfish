@@ -40,64 +40,45 @@ public:
     virtual Result<void> queue() = 0;
 };
 
-// BLE support uses signals/slots so we can “await” like Rust async.
-class BleSupport : public QObject {
-    Q_OBJECT
-public:
-    using QObject::QObject;
-
-    virtual ~BleSupport() = default;
-
-    // Rust: fn get_characteristic(&self, uuid: &str) -> Option<QBLECharacteristic>
-    virtual QBLECharacteristic getCharacteristic(const QString& uuid) = 0;
-
-    // Rust: fn enable_notifications(&self, handle: &QBLECharacteristic) -> Result<()>
-    virtual Result<void> enableNotifications(const QBLECharacteristic& handle) = 0;
-
-    // Rust: async fn write_characteristic(...)
-public slots:
-    virtual void writeCharacteristic(const QBLECharacteristic& handle,
-                                     const QByteArray& data,
-                                     const QString& taskName) = 0;
-
-signals:
-    void writeCompleted(const QString& taskName);
-    void writeFailed(const QString& taskName, const QString& error);
-
-public:
-    // Rust: fn create_transaction(&self, name: &str) -> Box<dyn Transaction>
-    virtual QSharedPointer<Transaction> createTransaction(const QString& name) = 0;
-};
-
-
-
+// Writer for sending messages to a service ->needed? Or use QBLECharacteristic?
 class ServiceWriter {
 public:
     virtual ~ServiceWriter() = default;
     virtual Result<void> write(const QString& taskName, const QByteArray& data) = 0;
 };
 
-class ServiceCallback {
+// Callback for service lifecycle events
+class ServiceCallback : public QObject{
+    Q_OBJECT
 public:
     virtual ~ServiceCallback() = default;
 
+    // Called when service is connected and ready to use
     virtual Result<void> onConnect(QSharedPointer<ServiceWriter> writer) {
         Q_UNUSED(writer);
         return Result<void>::isOk();
     }
     virtual Result<void> onClose() { return Result<void>::isOk(); }
+    // Called when a message is received from the service
     virtual Result<void> onMessage(const QByteArray& data) = 0;
+signals:
+    void deviceInformationReceived(DeviceInformationMessage &msg);
+
+private:
+    QBLEService *mParent;
 };
 
 // =============================================================================
 // Internal state (Rust: struct CommunicatorState)
 // =============================================================================
 
+//Rust characteristicHandle = QBLECharacteristic
+
 struct CommunicatorState {
-    QBLECharacteristic *characteristicSend = NULL;
-    QBLECharacteristic *characteristicReceive = NULL;
-    QString sendPath;
-    QString receivePath;
+    QSharedPointer<QBLECharacteristic> characteristicSend;
+    QSharedPointer<QBLECharacteristic> characteristicReceive;
+    QString sendPath; //TODO: Check if needed, used as QBLECharacteristic does not give the path back
+    QString receivePath; //TODO: Check if needed, used as QBLECharacteristic does not give the path back
 
     QMap<quint8, Service> serviceByHandle;
     QMap<Service, quint8> handleByService;
@@ -164,6 +145,10 @@ public:
     void registerHandle(Service service, quint8 handle);
     Result<void> dispose();
 
+    // Complete pairing
+    Result<bool> completePairing();
+
+
     // Rust: connection state helpers
     void onConnectionStateChange(bool connected);
     void pauseMlr();
@@ -175,20 +160,27 @@ signals:
     void logInfo(const QString& msg);
     void logWarn(const QString& msg);
     void logError(const QString& msg);
+    void mlrConnected();
+    void pairingComplete();
 
     void gfdiMessageReceived(const QByteArray& gfdiMessage);
 
 public slots:
     void characteristicRead(const QString &c, const QByteArray &value);
-    // Rust: on_characteristic_changed
+
     void onCharacteristicChanged(const QString &characteristic, const QByteArray& data);
 
+    void onDeviceInformationReceived(DeviceInformationMessage &message);
 
-private:
+    // Register services
+    Result<void> registerServices();
+
+
+private:/*
     Result<void> awaitBleWrite(const QBLECharacteristic& handle,
                                const QByteArray& bytes,
                                const QString& taskName);
-
+*/
     Result<std::optional<QByteArray>> awaitAsyncCallback(const QByteArray& message);
 
     // Rust: process_handle_management + process_*_resp
@@ -207,18 +199,20 @@ private:
 
     quint64 nextCookie();
 
+
 private:
     mutable QMutex m_mutex;
-    QSharedPointer<CommunicatorState> m_state;
-    QSharedPointer<QBLEService> m_ble;
+    QSharedPointer<CommunicatorState> mState;
+    //QSharedPointer<QBLEService> m_ble;
 
-    QSharedPointer<GfdiMessageCallback> m_syncCb;
-    QPointer<AsyncGfdiMessageCallback> m_asyncCb;
+    QSharedPointer<GfdiMessageCallback> mMessageCallback;
+    QPointer<AsyncGfdiMessageCallback> mAsyncMessageCallback;
 
     quint64 m_cookieCounter {1};
     QString m_Path;
     QObject *m_device;
     bool isFirstConncet=true;
+    bool isPairing=false;
 };
 
 
@@ -229,8 +223,8 @@ private:
 class MlrServiceWriter : public ServiceWriter {
 public:
     MlrServiceWriter(quint8 handle,
-                     QSharedPointer<QBLEService> ble,
-                     QString sendPath);
+                     QSharedPointer<QBLECharacteristic> sendChar);
+
 
     Result<void> write(const QString& taskName, const QByteArray& data) override;
 
@@ -238,8 +232,7 @@ private:
     Result<void> awaitBleWrite(const QString& taskName, const QByteArray& bytes);
 
     quint8 m_handle;
-    QSharedPointer<QBLEService> m_ble;
-    QBLECharacteristic m_sendChar;
+    QSharedPointer<QBLECharacteristic> m_sendChar;
 };
 
 
@@ -249,7 +242,7 @@ private:
 
 class GfdiServiceCallback : public ServiceCallback {
 public:
-    explicit GfdiServiceCallback(QSharedPointer<GfdiMessageCallback> cb);
+    explicit GfdiServiceCallback(QSharedPointer<GfdiMessageCallback> cb, CommunicatorV2* parent);
 
     Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
     Result<void> onClose() override;
@@ -258,12 +251,14 @@ public:
 private:
     QSharedPointer<GfdiMessageCallback> m_cb;
     CobsCoDec m_codec;
+    CommunicatorV2 *mCommunicator;
 };
-/*
+
 class RealtimeHeartRateCallback : public ServiceCallback {
 public:
     using Handler = std::function<Result<void>(quint8)>;
-    explicit RealtimeHeartRateCallback(Handler h);
+    //explicit RealtimeHeartRateCallback(Handler h);
+    explicit RealtimeHeartRateCallback(CommunicatorV2* parent);
 
     Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
     Result<void> onClose() override;
@@ -271,13 +266,30 @@ public:
 
 private:
     Handler m_handler;
+    CommunicatorV2 *mCommunicator;
+
+};
+
+class RealtimeSpo2Callback : public ServiceCallback {
+public:
+    using Handler = std::function<Result<void>(quint8)>;
+    explicit RealtimeSpo2Callback(CommunicatorV2* parent);
+
+    Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
+    Result<void> onClose() override;
+    Result<void> onMessage(const QByteArray& data) override;
+
+private:
+    Handler m_handler;
+    CommunicatorV2 *mCommunicator;
+
 };
 
 
 class RealtimeStepsCallback : public ServiceCallback {
 public:
     using Handler = std::function<Result<void>(quint32)>;
-    explicit RealtimeStepsCallback(Handler h);
+    explicit RealtimeStepsCallback(Handler h,CommunicatorV2* parent);
 
     Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
     Result<void> onClose() override;
@@ -285,8 +297,10 @@ public:
 
 private:
     Handler m_handler;
-};
+    CommunicatorV2 *mCommunicator;
 
+};
+/*
 class FileTransferCallback : public ServiceCallback {
 public:
     using Handler = std::function<Result<void>(QByteArray)>;
