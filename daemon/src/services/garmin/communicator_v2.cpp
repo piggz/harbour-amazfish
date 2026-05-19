@@ -136,48 +136,7 @@ void CommunicatorV2::onDeviceMaxPacketSize(quint16 deviceMaxPacketSize) {
         }
     }
 }
-/*
-Result<void> CommunicatorV2::awaitBleWrite(const QBLECharacteristic& handle,
-                                          const QByteArray& bytes,
-                                          const QString& taskName) {
-    qDebug() << "Garmin: Communicator awaiting write for task " <<taskName << "data " <<bytes;
-    Result<void> outcome = Result<void>::isOk();
 
-    QEventLoop loop;
-
-
-    QMetaObject::Connection c1 = QObject::connect(
-        &handle, &QBLECharacteristic::characteristicWritten,
-        &loop, [&](const QString& tn){
-            qDebug() << "Garmin: Communicator awaiting wrote successfull, taskname " << taskName << " returned tn " << tn;
-            if (tn == taskName) loop.quit();
-        });
-
-    QMetaObject::Connection c2 = QObject::connect(
-        &handle, &QBLECharacteristic::characteristicWriteFailed,
-        &loop, [&](const QString& tn, const QString& err){
-
-            if (tn == taskName) {
-                qDebug() << "Garmin: Communicator awaiting wrote failed, taskname " << taskName << " returned tn " << tn;
-                outcome = Result<void>::err(GarminError::bluetoothError(err));
-                loop.quit();
-            }
-    });
-
-    handle.writeAsync(bytes,&ErrorMsg);
-    //m_ble->writeCharacteristic(handle, bytes, taskName);
-    loop.exec();
-
-    QObject::disconnect(c1);
-    QObject::disconnect(c2);
-
-    QString ErrorMsg;
-    handle.writeValue(bytes,&ErrorMsg);
-
-    qDebug() << "Garmin: Comminicator awaiting write finished for " << taskName << "Error Message " << ErrorMsg;
-    return outcome;
-}
-*/
 
 quint64 CommunicatorV2::nextCookie() {
     //QMutexLocker lock(&m_mutex);
@@ -282,14 +241,7 @@ Result<bool> CommunicatorV2::initializeDevice() {
             mState->characteristicSend->writeValue(closeAll,&errorMsg);
             if (!errorMsg.isEmpty())
                 return Result<bool>::isOk(false);
-/*
 
-            auto msg = GfdiMessageGenerator::protobufBatteryStatusRequest(0);
-            if (!msg.ok) return Result<bool>::isOk(false);
-            qDebug() << "Garmin: Request Battery Updates";
-            wr = sendMessage("Battery Updates",msg.value);
-            if (!wr.ok) return Result<bool>::err(wr.error);
-*/
 
             return Result<bool>::isOk(true);        }
     }
@@ -554,6 +506,8 @@ void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, cons
 
     // Non-MLR COBS processing (faithful: Rust passes full data into codec)
     {
+        // Test: Seems non GFDI don't need cobscodec??
+        /*
         QMutexLocker lock(&m_mutex);
         mState->cobsCodec.receiveBytes(data);
         auto decoded = mState->cobsCodec.retrieveMessage();
@@ -562,6 +516,8 @@ void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, cons
             handleDecodedMessage(*decoded);
             return;
         }
+        */
+        handleDecodedMessage(data);
     }
     return;
 }
@@ -588,10 +544,10 @@ void CommunicatorV2::onDeviceInformationReceived(DeviceInformationMessage &messa
 
 
 Result<void> CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
-    qDebug() << "Garmin: handleDecodedMessage: " << decodedWithHandle.toHex();
+    qDebug() << Q_FUNC_INFO << "Garmin: handleDecodedMessage: " << decodedWithHandle.toHex();
     if (decodedWithHandle.isEmpty())
     {
-        qDebug() << "Garmin: decoded with handle is empty!";
+        qDebug() << Q_FUNC_INFO << "Garmin: decoded with handle is empty!";
         return Result<void>::isOk();
     }
 
@@ -604,13 +560,13 @@ Result<void> CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithH
     //QSharedPointer<GfdiMessageCallback> syncCb;
     //QPointer<AsyncGfdiMessageCallback> asyncCb;
 
-    qDebug() << "Garmin: handle decoded message: Found handle " << handle;
+    qDebug() << Q_FUNC_INFO << "Garmin: handle decoded message: Found handle " << handle;
 
     {
         //QMutexLocker lock(&m_mutex);
 
         service = mState->serviceByHandle.value(handle, Service::GFDI);
-        qDebug() << "Garmin handle decoded message: Found Service " << serviceToString(service);
+        qDebug() << Q_FUNC_INFO << "Garmin handle decoded message: Found Service " << serviceToString(service);
         //svcCb = mState->serviceCallbacks.value(service);
     }
 /*
@@ -620,12 +576,12 @@ Result<void> CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithH
         if (!r.ok) return r;
     }
 */
-    qDebug() << "Garmin: Communicator handling decoded message for service " << serviceToString(service);
+    qDebug() << Q_FUNC_INFO << "Garmin: Communicator handling decoded message for service " << serviceToString(service);
 
     switch (service) {
 
     case Service::GFDI:
-        qDebug() << "Garmin: handle GFDI";
+        qDebug() << Q_FUNC_INFO << "Garmin: handle GFDI";
         /*
         GfdiMessageParser::parse(payload);
         if (mMessageCallback) {
@@ -639,30 +595,34 @@ Result<void> CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithH
         */
         if (mState->serviceCallbacks.contains(Service::GFDI))
         {
+            mState->cobsCodec.receiveBytes(decodedWithHandle);
+            auto decoded = mState->cobsCodec.retrieveMessage();
+            if (decoded.has_value()) {
+                return Result<void>::isOk();
+            }
             mState->serviceCallbacks.value(Service::GFDI)->onMessage(payload);
         }
         return Result<void>::isOk();
 
     case Service::RealtimeSpo2:
-        qDebug() << "Garmin: handle Realtime Spo2";
+        qDebug() << Q_FUNC_INFO << "Garmin: handle Realtime Spo2";
         if (mState->serviceCallbacks.contains(Service::RealtimeSpo2))
         {
+            qDebug() << Q_FUNC_INFO << "Garmin: calling Dpo2 callback";
+
             mState->serviceCallbacks.value(Service::RealtimeSpo2)->onMessage(payload);
         }
         return Result<void>::isOk();
     case Service::RealtimeHr:
-        qDebug() << "Garmin: handle Realtime HeartRate";
+        qDebug() << Q_FUNC_INFO  << "Garmin: handle Realtime HeartRate";
         if (mState->serviceCallbacks.contains(Service::RealtimeHr))
         {
             mState->serviceCallbacks.value(Service::RealtimeHr)->onMessage(payload);
         }
         return Result<void>::isOk();
     default:
-        qDebug() << "Garmin: decoded message is not handled: " << serviceToString(service);
+        qDebug() << Q_FUNC_INFO << "Garmin: decoded message is not handled: " << serviceToString(service);
         return Result<void>::isOk();
-
-
-
     }
     return Result<void>::isOk();
 }
@@ -812,6 +772,10 @@ Result<void> CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         case Service::RealtimeHr:
            qDebug() << Q_FUNC_INFO << "Garmin: Inserting realtime HR callback handle";
             mState->serviceCallbacks.insert(service, QSharedPointer<ServiceCallback>(new RealtimeHeartRateCallback(this)));
+            break;
+        case Service::RealtimeSteps:
+           qDebug() << Q_FUNC_INFO << "Garmin: Inserting realtime Steps callback handle";
+            mState->serviceCallbacks.insert(service, QSharedPointer<ServiceCallback>(new RealtimeStepsCallback(this)));
             break;
         default:
             // Create Default Callback
@@ -979,19 +943,33 @@ Result<void> CommunicatorV2::registerServices() {
              return Result<void>::isOk();
 */
 
-        QByteArray reg = createRegisterServiceMessage(Service::RealtimeHr, false);
-        //(void)awaitBleWrite(*sendChar, reg, QStringLiteral("register_Hr"));
+        QByteArray reg = createRegisterServiceMessage(Service::RealtimeHr, true);
         mState->characteristicSend->writeValue(reg,&errorMsg);
         if (!errorMsg.isEmpty())
             return Result<void>::isOk();
-        reg = createRegisterServiceMessage(Service::RealtimeSpo2, false);
+        reg.clear();
+        reg = createRegisterServiceMessage(Service::RealtimeSpo2, true);
         //(void)awaitBleWrite(*sendChar, reg, QStringLiteral("register_Spo2"));
         mState->characteristicSend->writeValue(reg,&errorMsg);
         if (!errorMsg.isEmpty())
             return Result<void>::isOk();
+        reg.clear();
+        reg = createRegisterServiceMessage(Service::RealtimeSteps, true);
+        //(void)awaitBleWrite(*sendChar, reg, QStringLiteral("register_Steps"));
+        mState->characteristicSend->writeValue(reg,&errorMsg);
+        if (!errorMsg.isEmpty())
+            return Result<void>::isOk();
+
+
+         auto msg = GfdiMessageGenerator::protobufBatteryStatusRequest(0);
+         if (!msg.ok) return Result<void>::isOk();
+         mState->characteristicSend->writeValue(msg.value,&errorMsg);
+         if (!errorMsg.isEmpty())
+             return Result<void>::isOk();
 
         //Test: REgister HRM & Steps
         //registerService(Service::RealtimeHr,true);
+        //registerService(Service::RealtimeSpo2,true);
         //registerService(Service::RealtimeSteps,true);
 
         return Result<void>::isOk();
@@ -1081,55 +1059,21 @@ MlrServiceWriter::MlrServiceWriter(quint8 handle,
     : m_handle(handle), m_sendChar(sendChar)
 {}
 
-Result<void> MlrServiceWriter::awaitBleWrite(const QString& taskName, const QByteArray& bytes) {
-    qDebug() <<"Garmin: MLR Servicwriter awaitWrite called";
-    Result<void> outcome = Result<void>::isOk();
-/*
-    QEventLoop loop;
-
-
-    QMetaObject::Connection c1 = QObject::connect(
-        &m_sendChar, &QBLECharacteristic::characteristicWritten,
-        &loop, [&](const QString& tn){
-            qDebug() << "Garmin: ServiceWRiter wrote successfull, taskname " << taskName << " returned tn " << tn;
-            if (tn == taskName) loop.quit();
-        });
-
-    QMetaObject::Connection c2 = QObject::connect(
-        &m_sendChar, &QBLECharacteristic::characteristicWriteFailed,
-        &loop, [&](const QString& tn, const QString& err){
-
-            if (tn == taskName) {
-                qDebug() << "Garmin: ServiceWRiter wrote failed, taskname " << taskName << " returned tn " << tn;
-                outcome = Result<void>::err(GarminError::bluetoothError(err));
-                loop.quit();
-            }
-        });
-
-   m_sendChar.writeValue(bytes);
-    //m_ble->writeCharacteristic(m_sendChar, bytes, taskName);
-
-    loop.exec();
-
-    QObject::disconnect(c1);
-    QObject::disconnect(c2);
-*/
-    QString errorMsg;
-    m_sendChar->writeValue(bytes,&errorMsg);
-    qDebug() << "Garmin: Mlr Service writer wrote, error returned: " << errorMsg;
-    return outcome;
-}
 
 Result<void> MlrServiceWriter::write(const QString& taskName, const QByteArray& data) {
     QByteArray payload;
     payload.reserve(data.size() + 1);
     payload.append(char(m_handle));
     payload.append(data);
-    return awaitBleWrite(taskName, payload);
+    //return awaitBleWrite(taskName, payload);
+    QString errorMsg;
+    m_sendChar->writeValue(data,&errorMsg);
+    qDebug() << "Garmin: Mlr Service writer wrote, error returned: " << errorMsg;
+    return Result<void>::isOk();
 }
 
 // =============================================================================
-// Example callbacks
+// Callbacks handling the actual responses based on the handle/service
 // =============================================================================
 
 
@@ -1181,13 +1125,7 @@ Result<void> GfdiServiceCallback::onMessage(const QByteArray& data) {
         qDebug() << "Garmin: Unknown GFDI message: " << msgId;
         return Result<void>::err(GarminError::invalidMessage(QStringLiteral("Unknown ID")));
     }
-    /*
-    auto decoded = m_codec.retrieveMessage();
-    if (decoded.has_value() && m_cb) {
-        qDebug() << Q_FUNC_INFO << "Garmin: GfdiServicecallback calling m_cb";
-        return m_cb->onMessage(*decoded);
-    }
-    */
+
     return Result<void>::isOk();
 }
 
@@ -1214,38 +1152,34 @@ RealtimeSpo2Callback::RealtimeSpo2Callback(CommunicatorV2* parent) : mCommunicat
 Result<void> RealtimeSpo2Callback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer); return Result<void>::isOk(); }
 Result<void> RealtimeSpo2Callback::onClose() { return Result<void>::isOk(); }
 Result<void> RealtimeSpo2Callback::onMessage(const QByteArray& data) {
-    qDebug() << Q_FUNC_INFO << "Garmin: Realtime  SpO2 Servicecallback called with data " << data;
+    qDebug() << Q_FUNC_INFO << "Garmin: Realtime  Spo2 Servicecallback called with data " << data;
     quint8 spo2 = data[0];
-    //todo: Grab time from data[1]
-    /*
-    final int garminTs = BLETypeConversions.toUint32(value, 1);
-    convert using GarminTimeutils
-   */
-    qDebug() << "Garmin: realtime Spo2 Callback: " << spo2;
+    quint32 ts = le32(data.constData()+1);
+
+    ts=ts + 631065600; // Unix timestamp in seconds
+    QDateTime Timestamp;
+
+    qDebug() << Q_FUNC_INFO << "Garmin: realtime Spo2 Callback: " << spo2 << ", Timestamp " << QDateTime::fromTime_t(ts).toString();
     return Result<void>::isOk();
 }
 
-RealtimeStepsCallback::RealtimeStepsCallback(Handler h,CommunicatorV2* parent) : m_handler(std::move(h)), mCommunicator(parent)
+RealtimeStepsCallback::RealtimeStepsCallback(CommunicatorV2* parent) : mCommunicator(parent)
 {
 
 }
 Result<void> RealtimeStepsCallback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer); return Result<void>::isOk(); }
 Result<void> RealtimeStepsCallback::onClose() { return Result<void>::isOk(); }
 Result<void> RealtimeStepsCallback::onMessage(const QByteArray& data) {
-    if (data.size() >= 4 && m_handler) return m_handler(readLe32(data, 0));
+    qDebug() << Q_FUNC_INFO << "Garmin: Realtime  Steps Servicecallback called with data " << data;
+
+    if (data.size() >= 8)
+    {
+        quint32 steps = le32(data.constData());
+        quint32 stepsGoal = le32(data.constData()+4);
+        qDebug() << Q_FUNC_INFO << "Garmin: Realtime  Steps :  " << steps << ", goal = " << stepsGoal;
+        return Result<void>::isOk();
+    }
     return Result<void>::isOk();
 }
 
-/*
-FileTransferCallback::FileTransferCallback(Handler onComplete) : m_onComplete(std::move(onComplete)) {}
-Result<void> FileTransferCallback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer); return Result<void>::isOk(); }
-Result<void> FileTransferCallback::onClose() {
-    if (!m_data.isEmpty() && m_onComplete) return m_onComplete(m_data);
-    return Result<void>::isOk();
-}
-Result<void> FileTransferCallback::onMessage(const QByteArray& data) {
-    m_data.append(data);
-    return Result<void>::isOk();
-}
 
-*/

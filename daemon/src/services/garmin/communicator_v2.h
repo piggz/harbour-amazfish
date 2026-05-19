@@ -229,7 +229,6 @@ public:
     Result<void> write(const QString& taskName, const QByteArray& data) override;
 
 private:
-    Result<void> awaitBleWrite(const QString& taskName, const QByteArray& bytes);
 
     quint8 m_handle;
     QSharedPointer<QBLECharacteristic> m_sendChar;
@@ -289,14 +288,13 @@ private:
 class RealtimeStepsCallback : public ServiceCallback {
 public:
     using Handler = std::function<Result<void>(quint32)>;
-    explicit RealtimeStepsCallback(Handler h,CommunicatorV2* parent);
+    explicit RealtimeStepsCallback(CommunicatorV2* parent);
 
     Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
     Result<void> onClose() override;
     Result<void> onMessage(const QByteArray& data) override;
 
 private:
-    Handler m_handler;
     CommunicatorV2 *mCommunicator;
 
 };
