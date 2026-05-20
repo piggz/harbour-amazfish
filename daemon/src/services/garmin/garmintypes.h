@@ -78,7 +78,7 @@ private:
 
 
 // =============================================================================
-// Result<T> (Rust: pub type Result<T> = std::result::Result<T, GarminError>)
+// Result<T>
 // =============================================================================
 
 template<typename T>
@@ -124,7 +124,7 @@ struct Result<void> {
 
 
 // =============================================================================
-// RequestType (Rust: enum RequestType repr(u8) + from_u8/to_u8 + Display)
+// RequestType
 // =============================================================================
 
 enum class RequestType : quint8 {
@@ -144,7 +144,7 @@ inline quint8 requestTypeToU8(RequestType t) { return quint8(t); }
 QString requestTypeToString(RequestType t);
 
 // =============================================================================
-// Service (Rust: enum Service repr(u16) + from_code/code + Display)
+// Service
 // =============================================================================
 
 enum class Service : quint16 {

@@ -25,15 +25,19 @@ public:
     Q_SLOT void authenticated(bool ready);
 
 
-    //QString information(Amazfish::Info i) const override;
+    QString information(Amazfish::Info i) const override;
 
 
-protected:
+public slots:
+
+    //void informationChanged(Amazfish::Info infoKey, const QString& infoValue);
+
+protected slots:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+
 
 private:
     int mSteps = 0;
-    CommunicatorV2 *mService;
 
     void parseServices();
     void initialise();

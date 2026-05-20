@@ -44,7 +44,7 @@ struct Fragment {
 };
 
 // =============================================================================
-// MessageSender / MessageReceiver (Rust traits)
+// MessageSender / MessageReceiver
 // =============================================================================
 
 // Sender is async-like via signals (to model Rust .await).
@@ -70,7 +70,7 @@ private:
 };
 
 // =============================================================================
-// Callbacks (Rust: GfdiMessageCallback / AsyncGfdiMessageCallback / ServiceWriter / ServiceCallback)
+// Callbacks
 // =============================================================================
 
 class GfdiMessageCallback : public QObject{
@@ -125,7 +125,7 @@ private:
 };
 
 // =============================================================================
-// MlrCommunicator (Rust: struct MlrCommunicator) [1](https://computacenter-my.sharepoint.com/personal/thomas_michel_computacenter_com/Documents/Microsoft%20Copilot%20Chat%20Files/mlr.rs)
+// MlrCommunicator
 // =============================================================================
 class MlrCommunicator : public QObject {
     Q_OBJECT
@@ -196,34 +196,24 @@ private:
     // helper monotonic clock like Rust Instant
     qint64 nowMs() const;
 
-    // Create packet (Rust: create_packet)
     static QByteArray createPacket(const State& st, quint8 reqNum, quint8 seqNum, const QByteArray& data);
 
-    // seq_diff (Rust: seq_diff)
     static int seqDiff(quint8 a, quint8 b);
 
-    // process_ack (Rust: process_ack)
     static Result<void> processAck(State& st, quint8 reqNum);
 
-    // schedule_ack (Rust: schedule_ack)
     static void scheduleAck(State& st, qint64 nowMs);
 
-    // send_ack_packet (Rust: send_ack_packet)
     Result<void> sendAckPacketLocked(const State& st);
 
-    // run_protocol (Rust: run_protocol)
     Result<void> runProtocolOnce();
 
-    // check_ack_timeout (Rust: check_ack_timeout)
     Result<void> checkAckTimeout();
 
-    // check_retransmit_timeout (Rust: check_retransmit_timeout)
     Result<void> checkRetransmitTimeout();
 
-    // clear_state (Rust: clear_state)
     void clearStateLocked(State& st);
 
-    // await a send using sender signals (models Rust await)
     Result<void> awaitSend(const QString& taskName, const QByteArray& packet);
 
 
