@@ -100,7 +100,7 @@ void GfdiMessageParser::parse(const QByteArray& data) {
         return;// Result<GfdiMessage>::isOk(UnknownMessage{msgId, data.mid(offset)});
     }
 
-    // Rust: match MessageId::from_u16(message_id)
+
     switch (*mid) {
     case MessageId::DeviceInformation:
         parseDeviceInformation(data.mid(offset));
@@ -160,6 +160,7 @@ void GfdiMessageParser::parseDeviceInformation(const QByteArray& data)
     //if (!s1.ok) return Result<GfdiMessage>::err(s1.error);
     msg.bluetoothFriendlyName = s1.value;
     qDebug() << Q_FUNC_INFO << "Garmin: Friendly name is " <<s1.value;
+
     off += consumed;
 
     auto s2 = readLengthPrefixedString(data.mid(off), consumed);
