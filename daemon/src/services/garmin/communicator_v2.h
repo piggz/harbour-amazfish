@@ -19,7 +19,6 @@
 #include "cobscodec.h"
 #include "garminmlr.h"
 #include "garminmessages.h"
-#include "communicator_v2.h"
 #include <qbledevice.h>
 #include <qbleservice.h>
 #include <KDbConnection.h>
@@ -29,7 +28,7 @@
 // Constants
 // =============================================================================
 static constexpr const char* BASE_UUID_FORMAT = "6A4E%04X-667B-11E3-949A-0800200C9A66";
-static constexpr quint64 GADGETBRIDGE_CLIENT_ID = 2;
+static constexpr quint64 AMAZFISH_CLIENT_ID = 3; // use 3 to not clas wthi Gadgetbridge or Garmin Connect
 
 
 struct deviceInfo {
@@ -46,7 +45,7 @@ struct deviceInfo {
 class ServiceWriter {
 public:
     virtual ~ServiceWriter() = default;
-    virtual Result<void> write(const QString& taskName, const QByteArray& data) = 0;
+    void write(const QString& taskName, const QByteArray& data);
 };
 
 // Callback for service lifecycle events
@@ -56,13 +55,12 @@ public:
     virtual ~ServiceCallback() = default;
 
     // Called when service is connected and ready to use
-    virtual Result<void> onConnect(QSharedPointer<ServiceWriter> writer) {
+    void onConnect(QSharedPointer<ServiceWriter> writer) {
         Q_UNUSED(writer);
-        return Result<void>::isOk();
     }
-    virtual Result<void> onClose() { return Result<void>::isOk(); }
+    virtual void onClose() { }
     // Called when a message is received from the service
-    virtual Result<void> onMessage(const QByteArray& data) = 0;
+    virtual void onMessage(const QByteArray& data) = 0;
 signals:
     void deviceInformationReceived(DeviceInformationMessage &msg);
 
@@ -125,24 +123,24 @@ public:
     void onDeviceMaxPacketSize(quint16 deviceMaxPacketSize);
 
     //  initialize_device
-    Result<bool> initializeDevice();
+    bool initializeDevice();
 
     //  send_message
-    Result<void> sendMessage(const QString& taskName, const QByteArray& message);
+    void sendMessage(const QString& taskName, const QByteArray& message);
 
     //  handle_decoded_message_async
     Result<std::optional<QByteArray>> handleDecodedMessageAsync(const QByteArray& decodedWithHandle);
 
     //  register_service / close_service
-    Result<void> registerService(Service service, bool reliable);
-    Result<void> closeService(Service service);
+    void registerService(Service service, bool reliable);
+    void closeService(Service service);
 
     //  register_handle / dispose
     void registerHandle(Service service, quint8 handle);
-    Result<void> dispose();
+    void dispose();
 
     // Complete pairing
-    Result<bool> completePairing();
+    bool completePairing();
 
 
     // Rust: connection state helpers
@@ -186,18 +184,18 @@ public slots:
     void setSpo2(quint8 val);
 
     // Register services
-    Result<void> registerServices();
+    void registerServices();
 
 
 private:
     //  process_handle_management
-    Result<void> processHandleManagement(const QByteArray& message);
-    Result<void> processRegisterMlResp(const QByteArray& payload);
-    Result<void> processCloseHandleResp(const QByteArray& payload);
-    Result<void> processCloseAllResp();
+    void processHandleManagement(const QByteArray& message);
+    void processRegisterMlResp(const QByteArray& payload);
+    void processCloseHandleResp(const QByteArray& payload);
+    void processCloseAllResp();
 
     //  handle_decoded_message
-    Result<void> handleDecodedMessage(const QByteArray& decodedWithHandle);
+    void handleDecodedMessage(const QByteArray& decodedWithHandle);
 
     // create messages
     QByteArray createCloseAllServicesMessage() const;
@@ -244,7 +242,7 @@ public:
                      QSharedPointer<QBLECharacteristic> sendChar);
 
 
-    Result<void> write(const QString& taskName, const QByteArray& data) override;
+    void write(const QString& taskName, const QByteArray& data);
 
 private:
 
@@ -261,9 +259,9 @@ class GfdiServiceCallback : public ServiceCallback {
 public:
     explicit GfdiServiceCallback(QSharedPointer<GfdiMessageCallback> cb, CommunicatorV2* parent);
 
-    Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
-    Result<void> onClose() override;
-    Result<void> onMessage(const QByteArray& data) override;
+    void onConnect(QSharedPointer<ServiceWriter> writer);
+    void onClose() override;
+    void onMessage(const QByteArray& data) override;
 
 private:
     QSharedPointer<GfdiMessageCallback> m_cb;
@@ -273,12 +271,11 @@ private:
 
 class RealtimeHeartRateCallback : public ServiceCallback {
 public:
-    using Handler = std::function<Result<void>(quint8)>;
     explicit RealtimeHeartRateCallback(CommunicatorV2* parent);
 
-    Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
-    Result<void> onClose() override;
-    Result<void> onMessage(const QByteArray& data) override;
+    void onConnect(QSharedPointer<ServiceWriter> writer);
+    void onClose() override;
+    void onMessage(const QByteArray& data) override;
 
 private:
     CommunicatorV2 *mCommunicator;
@@ -287,12 +284,11 @@ private:
 
 class RealtimeSpo2Callback : public ServiceCallback {
 public:
-    using Handler = std::function<Result<void>(quint8)>;
     explicit RealtimeSpo2Callback(CommunicatorV2* parent);
 
-    Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
-    Result<void> onClose() override;
-    Result<void> onMessage(const QByteArray& data) override;
+    void onConnect(QSharedPointer<ServiceWriter> writer);
+    void onClose() override;
+    void onMessage(const QByteArray& data) override;
 
 private:
     CommunicatorV2 *mCommunicator;
@@ -301,12 +297,11 @@ private:
 
 class RealtimeHRVCallback : public ServiceCallback {
 public:
-    using Handler = std::function<Result<void>(quint8)>;
     explicit RealtimeHRVCallback(CommunicatorV2* parent);
 
-    Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
-    Result<void> onClose() override;
-    Result<void> onMessage(const QByteArray& data) override;
+    void onConnect(QSharedPointer<ServiceWriter> writer);
+    void onClose() override;
+    void onMessage(const QByteArray& data) override;
 
 private:
     CommunicatorV2 *mCommunicator;
@@ -316,12 +311,11 @@ private:
 
 class RealtimeStepsCallback : public ServiceCallback {
 public:
-    using Handler = std::function<Result<void>(quint32)>;
     explicit RealtimeStepsCallback(CommunicatorV2* parent);
 
-    Result<void> onConnect(QSharedPointer<ServiceWriter> writer) override;
-    Result<void> onClose() override;
-    Result<void> onMessage(const QByteArray& data) override;
+    void onConnect(QSharedPointer<ServiceWriter> writer);
+    void onClose() override;
+    void onMessage(const QByteArray& data) override;
 
 private:
     CommunicatorV2 *mCommunicator;

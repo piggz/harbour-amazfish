@@ -12,38 +12,7 @@ MlrMessageSender::MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar,
                            QObject* parent)
     : m_sendChar(sendChar)
 {}
-/*
-Result<void> MlrMessageSender::awaitBleWrite(const QString& taskName, const QByteArray& bytes) {
-    // Model Rust `.await` by waiting for BleSupport signals.
-    QEventLoop loop;
-    Result<void> outcome = Result<void>::isOk();
 
-    QMetaObject::Connection c1 = QObject::connect(
-        m_ble.data(), &BleSupport::writeCompleted,
-        &loop, [&](const QString& tn){
-            if (tn == taskName) loop.quit();
-        });
-
-    QMetaObject::Connection c2 = QObject::connect(
-        m_ble.data(), &BleSupport::writeFailed,
-        &loop, [&](const QString& tn, const QString& err){
-            if (tn == taskName) {
-                outcome = Result<void>::err(GarminError::bluetoothError(err));
-                loop.quit();
-            }
-        });
-
-    //m_ble->writeCharacteristic(*m_sendChar, bytes, taskName);
-    m_sendChar->writeValue(bytes);
-    qDebug() << "Garmin: MLR MessageSEnder awaitBleWrite sent packet for " <<taskName;
-//    loop.exec();
-
-//    QObject::disconnect(c1);
-//    QObject::disconnect(c2);
-    return outcome;
-}
-
-    */
 
 Result<void> MlrMessageSender::sendPacket(const QString& taskName, const QByteArray& packet) {
     // Rust logs hex dump; left to caller's logging.
@@ -113,7 +82,7 @@ Result<std::optional<QByteArray>> MlrMessageReceiver::awaitAsyncCallback(const Q
     return outcome;
 }
 
-Result<void> MlrMessageReceiver::onDataReceived(const QByteArray& data) {
+void MlrMessageReceiver::onDataReceived(const QByteArray& data) {
     qDebug() << "Garmin:MLR received data: " << data.length() << " bytes";
 
     // The data from MLR is COBS encoded, so we need to decode it
@@ -122,7 +91,7 @@ Result<void> MlrMessageReceiver::onDataReceived(const QByteArray& data) {
 
     auto decodedOpt = m_codec.retrieveMessage();
     if (!decodedOpt.has_value()) {
-        return Result<void>::isOk(); // incomplete, wait for more
+        return; // incomplete, wait for more
     }
 
     const QByteArray decoded = *decodedOpt;
@@ -130,113 +99,18 @@ Result<void> MlrMessageReceiver::onDataReceived(const QByteArray& data) {
     // The handle was already in the MLR header (stripped by MLR layer)
     if (decoded.isEmpty()) {
         qDebug() << "Garmin: Warning: MLR decoded empty message";
-        return Result<void>::isOk();
+        return;
     }
 
-    // GFDI message format: [packet_size:2][message_id:2][payload...][crc:2]
-    // First 2 bytes are packet size (little-endian), NOT a handle byte
-
-    // Extract and log message type with sequence number and response details
-/*
-    if (decoded.length() >= 4) {
-        int offset = 2;
-        // Read message ID (2 bytes, little-endian)
-        quint16 rawMsgId = le16(decoded.constData() + offset);
-
-        // Check for sequence number (bit 15 set)
-        // If bit 15 is set, the message ID is encoded with a sequence number
-        // Format: [bit 15: 1] [bits 14-8: sequence] [bits 7-0: message_id - 5000]
-        // We need to decode it: actual_id = (raw_id & 0xFF) + 5000
-        // Sequence number: bit 15 set
-        std::optional<quint16> sequenceNumber;
-        if ((rawMsgId & 0x8000) != 0) {
-            const quint16 seq = (rawMsgId >> 8) & 0x7F;
-            rawMsgId = quint16((rawMsgId & 0xFF) + 5000);
-            sequenceNumber = seq;
-        }
-
-        const quint16 msgId = rawMsgId;
-
-        QStringList logParts;
-        logParts << QStringLiteral("%1 bytes").arg(decoded.size());
-        logParts << QStringLiteral("type: 0x%1").arg(msgId, 4, 16, QLatin1Char('0')).toUpper();
-        if (sequenceNumber) {
-            logParts << QStringLiteral("seq: %1").arg(*sequenceNumber);
-        }
-
-        // Response message (5000) details: orig msg + status
-        if (msgId == 5000) {
-            qDebug()<< "Response message raw bytes: " << decoded;
-
-            if (decoded.size() >= 9) {
-                const quint16 origMsgId = le16(decoded.constData() + 4);
-                const quint8 statusByte = quint8(decoded[6]);
-
-                QString statusStr;
-                // If your Status helper exists, use it; otherwise numeric fallback.
-                // Assume supporting exists per your rules.
-                if (auto st = statusFromU8(statusByte); st.has_value()) {
-                    statusStr = statusName(*st);
-                } else {
-                    statusStr = QStringLiteral("UNKNOWN_0x%1")
-                                    .arg(statusByte, 2, 16, QLatin1Char('0'))
-                                    .toUpper();
-                    qDebug() << "Unknown status code: " << statusByte << " (valid codes: 0-5)";
-
-                }
-
-                logParts << QStringLiteral("responding to: 0x%1").arg(origMsgId, 4, 16, QLatin1Char('0')).toUpper();
-                logParts << QStringLiteral("status: %1").arg(statusStr);
-
-                if (origMsgId == 0xFFFF) {
-                    qDebug() << "Response with message ID 0xFFFF - watch doesn't recognise/support this message type (normal for optional features)";
-                }
-            } else {
-                qDebug() << "Response message too short: " << decoded.size() << " bytes (need at least 9)";
-            }
-        }
-
-        qDebug() << "GFDI message received: "<< logParts;
-    } else {
-        qDebug() <<"GFDI message received: " << decoded.size() << " bytes (invalid - too short)";
-    }
-*/
-
-    // Rust callback dispatch:
-    // 1) sync callback -> direct call, return its Result
-    // 2) else async callback -> spawn task and ignore result
-    // 3) else nothing
     emit gfdiDecoded(decoded);
 
-    // following code is not needed I think as message is handled in communicator itsel, mot in the mlr communicator
-        /*
-    if (m_syncCb) {
-        return m_syncCb->onMessage(decoded);
-    }
-    if (m_asyncCb) {
-        qDebug() << "Garmin: MLR Receiver calling async Callback";
-        auto r = awaitAsyncCallback(decoded);
-        if (!r.ok) return Result<void>::err(r.error);
-        // Rust receiver ignores returned bytes; it is just for response capability.
-        return Result<void>::isOk();
-    }
-
-    qDebug() << "No callback registered for MLR data";
-    */
-    return Result<void>::isOk();
+    return;
 }
 
 
-Result<void> GfdiMessageCallback::onMessage(const QByteArray& data) {
-    /*
-    m_codec.receiveBytes(data);
-    auto decoded = m_codec.retrieveMessage();
-    if (decoded.has_value() && m_cb) {
-        return m_cb->onMessage(*decoded);
-    }
-    */
+void GfdiMessageCallback::onMessage(const QByteArray& data) {
+
     qDebug() << "Garmin: GdfiMessageCallback onMessage called  with data  " << data;
-    return Result<void>::isOk();
 }
 
 MlrCommunicator::MlrCommunicator(quint8 handle,
@@ -280,7 +154,7 @@ qint64 MlrCommunicator::nowMs() const {
 }
 
 // =============================================================================
-// Public API (matches Rust methods)
+// Public API
 // =============================================================================
 
 void MlrCommunicator::setMaxPacketSize(int maxPacketSize) {
@@ -463,15 +337,12 @@ void MlrCommunicator::close() {
 // Timer tick (replaces Tokio background task)
 // =============================================================================
 void MlrCommunicator::onTick() {
-    // mimic Rust periodic loop
     auto a = checkAckTimeout();
     if (!a.ok) qDebug() << "Garmin: ACK timeout check failed: " << a.error.toString();
 
     auto r = checkRetransmitTimeout();
     if (!r.ok) {
         qDebug() << "Garmin: Retransmit timeout check failed: " << r.error.toString();
-        // Rust: clear_state(&state).await on retransmit error
-        //QMutexLocker lock(&m_mutex);
         clearStateLocked(m_state);
     }
 }
@@ -542,34 +413,12 @@ Result<void> MlrCommunicator::awaitSend(const QString& taskName, const QByteArra
         return Result<void>::err(GarminError::bluetoothError(QStringLiteral("MessageSender not set")));
     }
     Result<void> outcome = Result<void>::isOk();
-/*
-    QEventLoop loop;
-    QMetaObject::Connection c1 = QObject::connect(
-        m_sender.data(), &MlrMessageSender::sendSucceeded,
-        &loop, [&](const QString& tn){
-            if (tn == taskName) loop.quit();
-        });
 
-
-    QMetaObject::Connection c2 = QObject::connect(
-        m_sender.data(), &MlrMessageSender::sendFailed,
-        &loop, [&](const QString& tn, const QString& err){
-        if (tn == taskName) {
-            outcome = Result<void>::err(GarminError::bluetoothError(err));
-            loop.quit();
-        }
-    });
-*/
     // invoke sender (queued) then wait (models .await)
     QMetaObject::invokeMethod(m_sender.data(), "sendPacket", Qt::QueuedConnection,
                               Q_ARG(QString, taskName),
                               Q_ARG(QByteArray, packet));
-    /*
-    loop.exec();
 
-    disconnect(c1);
-    disconnect(c2);
-    */
     return outcome;
 }
 
@@ -591,7 +440,6 @@ Result<void> MlrCommunicator::runProtocolOnce() {
     int numSentUnacked = 0;
 
     {
-        //QMutexLocker lock(&m_mutex);
 
         if (m_state.paused) return Result<void>::isOk();
 
@@ -634,7 +482,6 @@ Result<void> MlrCommunicator::checkAckTimeout() {
     QByteArray pkt;
 
     {
-        //QMutexLocker lock(&m_mutex);
         if (m_state.paused) return Result<void>::isOk();
         if (!m_state.lastAckTimeMs.has_value()) return Result<void>::isOk();
 
@@ -681,7 +528,6 @@ Result<void> MlrCommunicator::checkRetransmitTimeout() {
     bool hadPackets = false;
 
     {
-        //QMutexLocker lock(&m_mutex);
         if (m_state.paused) return Result<void>::isOk();
         if (!m_state.lastRetransmitTimeMs.has_value()) return Result<void>::isOk();
 
@@ -717,7 +563,6 @@ Result<void> MlrCommunicator::checkRetransmitTimeout() {
             const QString errMsg = r.error.toString();
             if (errMsg.contains(QStringLiteral("Not connected"), Qt::CaseInsensitive)) {
                 qDebug() << "Garmin: Connection lost during retransmission - clearing MLR state";
-                //QMutexLocker lock(&m_mutex);
                 for (auto& opt : m_state.sentFragments) opt.reset();
                 m_state.fragmentQueue.clear();
                 m_state.lastRetransmitTimeMs.reset();
@@ -728,7 +573,6 @@ Result<void> MlrCommunicator::checkRetransmitTimeout() {
     }
 
     {
-        //QMutexLocker lock(&m_mutex);
         if (sentCount > 0) {
             m_state.lastRetransmitTimeMs = nowMs();
         } else if (hadPackets) {

@@ -80,6 +80,7 @@ void GarminDevice::pair()
     emit connectionStateChanged();
 
     QBLEDevice::pair();
+    initialise();
  }
 
 
