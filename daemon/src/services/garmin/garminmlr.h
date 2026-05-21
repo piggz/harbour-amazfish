@@ -77,7 +77,7 @@ class GfdiMessageCallback : public QObject{
 public:
     GfdiMessageCallback() {};
      ~GfdiMessageCallback() = default;
-     Result<void> onMessage(const QByteArray& message);
+     void onMessage(const QByteArray& message);
 };
 
 // Async callback uses signals to deliver reply; we will “await” it via QEventLoop.
@@ -109,7 +109,7 @@ public:
     virtual ~MlrMessageReceiver() = default;
 
 public slots:
-    Result<void> onDataReceived(const QByteArray& data);
+    void onDataReceived(const QByteArray& data);
 
 signals:
     void gfdiDecoded(const QByteArray& gfdiMessage);
