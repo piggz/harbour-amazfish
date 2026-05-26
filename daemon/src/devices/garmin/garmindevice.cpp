@@ -92,18 +92,27 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
         m_reconnectTimer->start();
         if (deviceProperty("ServicesResolved").toBool() ) {
             initialise();
-        }
+            }
         if (map.contains("Connected")) {
             bool value = map["Connected"].toBool();
-
+            CommunicatorV2 *svc = qobject_cast<CommunicatorV2 *>(service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI));
             if (!value) {
                 setConnectionState("disconnected");
+                if (svc)
+                {
+                    qDebug() << Q_FUNC_INFO << "Garmin: Communicator already exists, sending disconnect";
+                    svc->onConnectionStateChange(false);
+                }
             } else {
                 setConnectionState("connected");
+                if (svc)
+                {
+                    qDebug() << Q_FUNC_INFO << "Garmin: Communicator already exists, sending connect";
+                    svc->onConnectionStateChange(true);
+                }
             }
         }
     }
-
 }
 
 
@@ -153,10 +162,8 @@ void GarminDevice::parseServices()
 void GarminDevice::initialise()
 {
     qDebug() << Q_FUNC_INFO;
-    setConnectionState("connected");
+    //setConnectionState("connected");
     parseServices();
-
-    setConnectionState("authenticated");
 
 }
 

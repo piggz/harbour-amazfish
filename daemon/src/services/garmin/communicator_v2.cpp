@@ -170,7 +170,6 @@ bool CommunicatorV2::initializeDevice() {
         {
             mState->characteristicReceive = characteristicMap.value(serviceRec);
             mState->characteristicSend = characteristicMap.value(serviceSnd);
-            qDebug() << Q_FUNC_INFO << "Garmin: ML Characteristic found. Send " << serviceSnd << ", Receive " << serviceRec;
         }
 
 
@@ -186,8 +185,11 @@ bool CommunicatorV2::initializeDevice() {
             QString errorMsg;
             mState->characteristicSend->writeValue(closeAll,&errorMsg);
             if (!errorMsg.isEmpty())
+            {
+                qDebug() << Q_FUNC_INFO << "Garmin: closeall failed " << errorMsg;
                 return false;
-
+            }
+            completePairing();
             return true;
         }
     }
@@ -430,8 +432,6 @@ void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
         qDebug() << Q_FUNC_INFO << "Garmin: handle Realtime Spo2";
         if (mState->serviceCallbacks.contains(Service::RealtimeSpo2))
         {
-            qDebug() << Q_FUNC_INFO << "Garmin: calling Dpo2 callback";
-
             mState->serviceCallbacks.value(Service::RealtimeSpo2)->onMessage(payload);
         }
         return;
@@ -620,7 +620,7 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
 
     // complete the pairing - technically only needed once, not on every connect. Doesn't seem to break anything but should be looked into
 
-    completePairing();
+    //completePairing();
     emit mlrConnected();
     return;
 }
@@ -675,7 +675,7 @@ void CommunicatorV2::processCloseAllResp() {
     }
 
     if (sendChar) {
-        registerService(Service::GFDI, true);
+        //registerService(Service::GFDI, true);
         //const QByteArray reg = createRegisterServiceMessage(Service::GFDI, true);
         //sendChar->writeValue(reg);
     }
@@ -692,7 +692,7 @@ void CommunicatorV2::registerService(Service service, bool reliable) {
     }
     mState->characteristicSend->writeValue(msg,&errorMsg);
     if (!errorMsg.isEmpty())
-        qDebug() << Q_FUNC_INFO << "Garmin: could not register Service " << serviceToString(service);
+        qDebug() << Q_FUNC_INFO << "Garmin: could not register Service " << serviceToString(service) << errorMsg;
 }
 
 void CommunicatorV2::closeService(Service service) {
@@ -736,9 +736,8 @@ bool CommunicatorV2::completePairing() {
         isPairing=false;
         isFirstConncet=false;
         qDebug()<< Q_FUNC_INFO << "Garmin: pairing complete.";
-        emit pairingComplete();
-        return true;
     }
+    emit pairingComplete();
     return true;
 }
 
@@ -752,13 +751,16 @@ void CommunicatorV2::registerServices() {
 
 
     // GFDI Service is already registered
-    //registerService(Service::GFDI, true);
-    registerService(Service::RealtimeSpo2, true);
+    registerService(Service::GFDI, true);
+    //Spo2 is not shown in the GUI so no realtime info needed
+    //registerService(Service::RealtimeSpo2, true);
     registerService(Service::RealtimeHr, true);
-    registerService(Service::RealtimeHrv, true);
+    //HRV is not shown in the GUI so no realtime info needed
+    //registerService(Service::RealtimeHrv, true);
     registerService(Service::RealtimeSteps, true);
 
     // Battery Status needs to be treated differently
+    // response is not handled yet so no battery information shown
     auto msg = GfdiMessageGenerator::protobufBatteryStatusRequest(0);
     if (!msg.ok) {
         qDebug() << Q_FUNC_INFO << "Garmin: could not generate battery request message";
@@ -775,7 +777,17 @@ void CommunicatorV2::dispose() {
 }
 
 void CommunicatorV2::onConnectionStateChange(bool connected) {
-    if (!connected) clearAndPauseMlr();
+    qDebug() << Q_FUNC_INFO << connected;
+    if (!mState->characteristicSend) return;
+    if (!connected) {
+        clearAndPauseMlr();
+        QByteArray closeAll = createCloseAllServicesMessage();
+           mState->characteristicSend->writeValue(closeAll);
+    }
+    else
+    {
+        initializeDevice();
+    }
 }
 
 void CommunicatorV2::pauseMlr() {
@@ -851,12 +863,12 @@ void CommunicatorV2::setStepsGoal(quint32 val)
     int configuredGoal=AmazfishConfig::instance()->profileFitnessGoal();
     if((val != mStepsGoal) || (val != configuredGoal))
     {
-
+        qDebug() << Q_FUNC_INFO << "Garmin: setting steps goal to value from watch";
         mStepsGoal=val;
+        // This doesn't seem to work - it sets the steps to the goal value, not the goal itself.
+        // Don't do anything for now
         AmazfishConfig::instance()->setProfileFitnessGoal(val);
     }
-
-    emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(val));
 }
 
 void CommunicatorV2::setHeartRate(quint8 val)
@@ -870,7 +882,7 @@ void CommunicatorV2::setHRV(quint16 val)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: setting HRV to " << val;
     mHRV =val;
-    // Future use - savin HRV
+    // Future use if needed - saving HRV
     //saveHRVRecord();
 
 }
@@ -879,7 +891,7 @@ void CommunicatorV2::setSpo2(quint8 val)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: setting Spo2 to " << val;
     mSpo2 =val;
-    // Future use - save Spo2
+    // Future use if needed - save Spo2
     //saveSpo2Record();
 }
 
@@ -887,7 +899,7 @@ void CommunicatorV2::setSpo2(quint8 val)
 
 void CommunicatorV2::saveHRVRecord()
 {
-
+    // This will probably be never used as the proper way is downloading activities
     KDbConnection *con = qobject_cast<GarminDevice *> (m_device)->database();
     if (!con)
     {
@@ -926,6 +938,8 @@ void CommunicatorV2::saveHRVRecord()
 
  void CommunicatorV2::saveSpo2Record()
     {
+        // This will probably be never used as the proper way is downloading activities
+
         KDbConnection *con = qobject_cast<GarminDevice *> (m_device)->database();
         if (!con)
         {
@@ -1023,7 +1037,6 @@ RealtimeHeartRateCallback::RealtimeHeartRateCallback(CommunicatorV2* parent) : m
 void RealtimeHeartRateCallback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer);  }
 void RealtimeHeartRateCallback::onClose() { }
 void RealtimeHeartRateCallback::onMessage(const QByteArray& data) {
-    qDebug() << Q_FUNC_INFO << "Garmin: Realtime Heart Rate Servicecallback called with data " << data;
     quint8 type = data[0]; // 0/2/3? 3 == realtime?
     quint8 hr = data[1] & 0xff;
     quint8 resting = data[2] & 0xff;
@@ -1039,7 +1052,6 @@ RealtimeHRVCallback::RealtimeHRVCallback(CommunicatorV2* parent) : mCommunicator
 void RealtimeHRVCallback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer); }
 void RealtimeHRVCallback::onClose() {  }
 void RealtimeHRVCallback::onMessage(const QByteArray& data) {
-    qDebug() << Q_FUNC_INFO << "Garmin: Realtime HRV Servicecallback called with data " << data;
     quint16 rr = le16(data.constData());
     quint16 unk = le32(data.constData() + 2);
     qDebug() << Q_FUNC_INFO << "Garmin: realtime HRV: " << rr << ", Unknown " << unk;
@@ -1053,7 +1065,6 @@ RealtimeSpo2Callback::RealtimeSpo2Callback(CommunicatorV2* parent) : mCommunicat
 void RealtimeSpo2Callback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer);   }
 void RealtimeSpo2Callback::onClose() {  }
 void RealtimeSpo2Callback::onMessage(const QByteArray& data) {
-    qDebug() << Q_FUNC_INFO << "Garmin: Realtime  Spo2 Servicecallback called with data " << data;
     quint8 spo2 = data[0];
     quint32 ts = le32(data.constData()+1);
 
@@ -1072,7 +1083,6 @@ RealtimeStepsCallback::RealtimeStepsCallback(CommunicatorV2* parent) : mCommunic
 void RealtimeStepsCallback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer); }
 void RealtimeStepsCallback::onClose() {  }
 void RealtimeStepsCallback::onMessage(const QByteArray& data) {
-    qDebug() << Q_FUNC_INFO << "Garmin: Realtime  Steps Servicecallback called with data " << data;
 
     if (data.size() >= 8)
     {
@@ -1080,6 +1090,7 @@ void RealtimeStepsCallback::onMessage(const QByteArray& data) {
         quint32 stepsGoal = le32(data.constData()+4);
         qDebug() << Q_FUNC_INFO << "Garmin: Realtime  Steps :  " << steps << ", goal = " << stepsGoal;
 
+        mCommunicator->setStepsGoal(stepsGoal);
         mCommunicator->setSteps(steps);
     }
 }

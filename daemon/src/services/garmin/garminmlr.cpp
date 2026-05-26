@@ -300,20 +300,20 @@ void MlrCommunicator::pause() {
 
 void MlrCommunicator::resume() {
     //QMutexLocker lock(&m_mutex);
-    qDebug() << "Garmin: Resuming MLR communicator";
+    qDebug() << Q_FUNC_INFO << "Garmin: Resuming MLR communicator";
     m_state.paused = false;
 }
 
 void MlrCommunicator::clearAndPause() {
     //QMutexLocker lock(&m_mutex);
-    qDebug() << "Garmin: Clearing and pausing MLR state due to disconnection";
+    qDebug() << Q_FUNC_INFO << "Garmin: Clearing and pausing MLR state due to disconnection";
 
     m_state.paused = true;
 
     for (auto& opt : m_state.sentFragments) opt.reset();
     m_state.fragmentQueue.clear();
 
-    // Reset sequence numbers but keep nextSendSeq (Rust: last_rcv_ack = next_send_seq)
+    // Reset sequence numbers but keep nextSendSeq
     m_state.lastRcvAck = m_state.nextSendSeq;
 
     m_state.lastAckTimeMs.reset();
