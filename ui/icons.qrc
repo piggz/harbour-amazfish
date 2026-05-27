@@ -81,5 +81,6 @@
         <file>qml/page-icons/icon-page-sleep.png</file>
         <file>qml/page-icons/icon-page-spo2.png</file>
         <file>qml/page-icons/icon-page-sport.png</file>
+        <file>qml/custom-icons/icon-m-spo2.png</file>
     </qresource>
 </RCC>

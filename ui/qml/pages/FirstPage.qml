@@ -263,7 +263,16 @@ PagePL {
             contentItem: Image {
                 source: "../page-icons/icon-page-spo2.png"
                 anchors.fill: parent
+                anchors.topMargin: styler.themeFontSizeLarge
                 fillMode: Image.PreserveAspectFit
+                Text {
+                    text: qsTr("%1%").arg(_InfoSpo2)
+                    anchors.top: parent.top
+                    anchors.topMargin: -styler.themeFontSizeLarge
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pixelSize: styler.themeFontSizeLarge
+                    color: styler.blockBg
+                }
             }
 
             onClicked: {

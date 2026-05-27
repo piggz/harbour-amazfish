@@ -36,6 +36,7 @@ Amazfish::Features GarminDevice::supportedFeatures() const
         // | Amazfish::Feature::FEATURE_BUTTON_ACTION
         // | Amazfish::Feature::FEATURE_SCREENSHOT
         // | Amazfish::Feature::FEATURE_FILE_INSTALL
+        | Amazfish::Feature::FEATURE_SPO2
         ;
 }
 
@@ -44,6 +45,7 @@ Amazfish::DataTypes GarminDevice::supportedDataTypes() const
 {
     return Amazfish::DataType::TYPE_SPO2
             | Amazfish::DataType::TYPE_HRV
+            | Amazfish::DataType::TYPE_HEART_RATE
             ;
 
 }
