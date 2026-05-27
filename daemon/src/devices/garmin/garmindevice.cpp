@@ -6,8 +6,15 @@
 
 
 #include <QDomDocument>
+#include "MNotification"
 
+const char* UUID_SERVICE_GARMIN_GFDI_V0 = "9b012401-bc30-ce9a-e111-0f67e491abde";
+const char* UUID_CHARACTERISTIC_GARMIN_GFDI_V0_SEND = "df334c80-e6a7-d082-274a-78fc66f85e16";
+const char* UUID_CHARACTERISTIC_GARMIN_GFDI_V0_RECEIVE = "4acbcd28-7425-868e-f447-915c8f00d0cb";
 
+const char* UUID_SERVICE_GARMIN_GFDI_V1 = "6a4e2401-667b-11e3-949a-0800200c9a66";
+const char* UUID_CHARACTERISTIC_GARMIN_GFDI_V1_SEND = "6a4e4c80-667b-11e3-949a-0800200c9a66";
+const char* UUID_CHARACTERISTIC_GARMIN_GFDI_V1_RECEIVE = "6a4ecd28-667B-11e3-949a-0800200c9a66";
 
 GarminDevice::GarminDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
@@ -151,12 +158,24 @@ void GarminDevice::parseServices()
                 {
                     connect(com, &CommunicatorV2::informationChanged, this, &GarminDevice::informationChanged, Qt::UniqueConnection);
                     addService(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI, com);
-
+                    setConnectionState("authenticated");
+                    return;
                 }
+            }
+            if ((uuid == UUID_SERVICE_GARMIN_GFDI_V0) ||(uuid == UUID_SERVICE_GARMIN_GFDI_V1))
+            {
+                // This should probably better be done via dbus, but works for now
+                MNotification note("Warning","Amazfish","Garmin V0/V1 protocol not implemented");
+                note.publish();
+                qDebug() << Q_FUNC_INFO << "Garmin: Protocol version 0/1 sound, not supported yet";
+                return;
             }
         }
     }
-    setConnectionState("authenticated");
+    // This should probably better be done via dbus, but works for now
+    // if we are here, no Garmin device was detected
+    MNotification note("Warning","Amazfish","No Garmin device detected");
+    note.publish();
 }
 
 void GarminDevice::initialise()
