@@ -164,18 +164,16 @@ void GarminDevice::parseServices()
             }
             if ((uuid == UUID_SERVICE_GARMIN_GFDI_V0) ||(uuid == UUID_SERVICE_GARMIN_GFDI_V1))
             {
-                // This should probably better be done via dbus, but works for now
-                MNotification note("Warning","Amazfish","Garmin V0/V1 protocol not implemented");
-                note.publish();
+                emit message("Garmin V0/V1 protocol not implemented");
                 qDebug() << Q_FUNC_INFO << "Garmin: Protocol version 0/1 sound, not supported yet";
                 return;
             }
         }
     }
-    // This should probably better be done via dbus, but works for now
     // if we are here, no Garmin device was detected
-    MNotification note("Warning","Amazfish","No Garmin device detected");
-    note.publish();
+    emit message("No Garmin device detected");
+    qDebug() << Q_FUNC_INFO << "Garmin: No supported device detected";
+
 }
 
 void GarminDevice::initialise()
