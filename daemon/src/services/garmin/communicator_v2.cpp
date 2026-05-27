@@ -752,8 +752,7 @@ void CommunicatorV2::registerServices() {
 
     // GFDI Service is already registered
     registerService(Service::GFDI, true);
-    //Spo2 is not shown in the GUI so no realtime info needed
-    //registerService(Service::RealtimeSpo2, true);
+    registerService(Service::RealtimeSpo2, true);
     registerService(Service::RealtimeHr, true);
     //HRV is not shown in the GUI so no realtime info needed
     //registerService(Service::RealtimeHrv, true);
@@ -891,6 +890,7 @@ void CommunicatorV2::setSpo2(quint8 val)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: setting Spo2 to " << val;
     mSpo2 =val;
+    emit informationChanged(Amazfish::Info::INFO_SPO2, QString::number(val));
     // Future use if needed - save Spo2
     //saveSpo2Record();
 }
