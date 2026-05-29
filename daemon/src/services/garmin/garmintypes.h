@@ -9,7 +9,7 @@
 #include <optional>
 #include <utility>
 
-
+// This defines some selper classes and functions used by the Garmin communication
 
 // =============================================================================
 // GarminError (Rust: enum GarminError)
@@ -171,5 +171,22 @@ enum class Service : quint16 {
 Result<Service> serviceFromCode(quint16 code);
 inline quint16 serviceCode(Service s) { return quint16(s); }
 QString serviceToString(Service s);
+
+
+// Helper functions
+quint16 computeCrc16(const QByteArray& data);
+QByteArray wrapInGfdiEnvelope(quint16 messageId, const QByteArray& payload);
+quint16 le16(const char* p);
+quint32 le32(const char* p);
+quint64 le64(const char* p);
+quint8  u8le(const QByteArray& b, int off);
+quint16 u16le(const QByteArray& b, int off);
+quint32 u32le(const QByteArray& b, int off);
+quint64 u64le(const QByteArray& b, int off);
+qint32  i32le(const QByteArray& b, int off);
+void writeU16le(QByteArray& out, quint16 v);
+void writeU32le(QByteArray& out, quint32 v);
+void writeU64le(QByteArray& out, quint64 v);
+
 
 #endif //GARMINTYPES__H

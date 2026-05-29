@@ -1,12 +1,10 @@
 #include "communicator_v2.h"
 #include "devices/garmin/garmindevice.h"
-#include "garmintypes.h"
 #include "cobscodec.h"      // CobsCoDec
 #include "garminmlr.h"   // MlrCommunicator (Qt)
 #include "garmintypes.h"
 #include "garminmessages.h"
 #include "amazfishconfig.h"
-
 
 #include <QtCore/QStringList>
 #include <QtCore/QMetaObject>
@@ -25,36 +23,9 @@ static inline QString fmtUuid(quint16 shortId) {
         .toUpper();
 }
 
-static inline void appendLe16(QByteArray& out, quint16 v) {
-    out.append(char(v & 0xFF));
-    out.append(char((v >> 8) & 0xFF));
-}
-static inline void appendLe64(QByteArray& out, quint64 v) {
-    for (int i=0;i<8;++i) out.append(char((v >> (8*i)) & 0xFF));
-}
-static inline quint16 readLe16(const QByteArray& b, int off) {
-    if (off + 1 >= b.size()) return 0;
-    return quint16(quint8(b[off]) | (quint16(quint8(b[off+1])) << 8));
-}
-static inline quint32 readLe32(const QByteArray& b, int off) {
-    if (off + 3 >= b.size()) return 0;
-    return quint32(quint8(b[off]) |
-                   (quint32(quint8(b[off+1])) << 8) |
-                   (quint32(quint8(b[off+2])) << 16) |
-                   (quint32(quint8(b[off+3])) << 24));
-}
-static inline quint64 readLe64(const QByteArray& b, int off) {
-    if (off + 7 >= b.size()) return 0;
-    return quint64(quint8(b[off]) |
-             (quint64(quint8(b[off+1])) << 8) |
-             (quint64(quint8(b[off+2])) << 16) |
-             (quint64(quint8(b[off+3])) << 24) |
-             (quint64(quint8(b[off+4])) << 32) |
-             (quint64(quint8(b[off+5])) << 40) |
-             (quint64(quint8(b[off+6])) << 48) |
-             (quint64(quint8(b[off+7])) << 56));
 
-}
+
+
 static inline QString hexDump(const QByteArray& b, int max=32) {
     const int n = qMin(max, b.size());
     QStringList parts;
@@ -200,14 +171,14 @@ bool CommunicatorV2::initializeDevice() {
      return false;
 }
 
-void CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& message) {
+bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& message) {
     // Send a message to the device via the GFDI service
     //
     // Messages are COBS-encoded and sent via MLR protocol or directly depending on setup.
 
     qDebug() <<Q_FUNC_INFO << "Garmin: Send Message " << taskName << " Content " << message;
     if (message.isEmpty())
-        return;
+        return false;
 
     //Locking
     QMutexLocker lock(&m_mutex);
@@ -220,12 +191,12 @@ void CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
 
     if (!mState->handleByService.contains(Service::GFDI)) {
         qDebug() << Q_FUNC_INFO << "Garmin: No GFDI handle found";
-        return;
+        return false;
     }
 
     gfdiHandle = mState->handleByService.value(Service::GFDI);
 
-    qDebug() << Q_FUNC_INFO << "Sending message " << taskName << "viea GFDI handle " << gfdiHandle;
+    qDebug() << Q_FUNC_INFO << "Sending message " << taskName << "via GFDI handle " << gfdiHandle;
 
     // Extract and log message type with sequence number and response details
 
@@ -292,7 +263,7 @@ void CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
     if (mlr) {
         qDebug() << Q_FUNC_INFO << "Garmin: Sending message via MLR";
         mlr->sendMessage(taskName, payload);
-        return;
+        return true;
     }
 
     // No MLR => fragment if needed and write directly
@@ -300,7 +271,7 @@ void CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
     maxWriteSize = mState->maxWriteSize;
     if (!mState->characteristicSend) {
         qDebug() << Q_FUNC_INFO << "Garmin: No send characteristic found.";
-        return;
+        return false;
     }
 
     qDebug() << Q_FUNC_INFO << "Garmin: No Mlr found, sending directly";
@@ -319,7 +290,7 @@ void CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
             QString errorMsg;
             mState->characteristicSend->writeValue(fragment,&errorMsg);
             if (!errorMsg.isEmpty())
-                return;
+                return true;
 
 
             position += chunk;
@@ -335,10 +306,12 @@ void CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
         QString errorMsg;
         mState->characteristicSend->writeValue(packet,&errorMsg);
         if (!errorMsg.isEmpty())
-            return;
+            return true;
 
     }
 }
+
+
 
 void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, const QByteArray& data) {
 
@@ -392,6 +365,126 @@ void CommunicatorV2::onDeviceInformationReceived(DeviceInformationMessage &messa
     }
 }
 
+void CommunicatorV2::onConfigurationReceived(const ConfigurationMessage& message) {
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "Garmin: Received Configuration with"
+            << message.capabilities.size() << "capabilities";
+
+    //m_pairingDetected = true;
+
+    Result<QByteArray> response =  GfdiMessageGenerator::configurationResponse();
+    if (response.ok)
+    {
+        sendMessage("Device Configuration Response", response.value);
+    }
+    response =  GfdiMessageGenerator::setDeviceSettings(true,true,false);
+        if (response.ok)
+        {
+            sendMessage("Device Settings", response.value);
+        }
+
+    response = GfdiMessageGenerator::systemEvent(8, 0);
+    if (response.ok)
+    {
+        sendMessage("Device Settings", response.value);
+    }
+    // SYNC_READY
+    response = GfdiMessageGenerator::systemEvent(6, 0);// FOREGROUND
+    if (response.ok)
+    {
+        sendMessage("Device Settings", response.value);
+    }
+    /*
+    if (!isFirstConncet) {
+        isFirstConncet = true;
+        send(MessageGenerator::systemEvent(0, 0)); // SYNC_COMPLETE
+    */
+}
+
+void CommunicatorV2::onCurrentTimeRequestReceived(){
+    qDebug() << Q_FUNC_INFO;
+
+}
+
+void CommunicatorV2::onNotificationControlReceived(const NotificationControlMessage& msg){
+    qDebug() << Q_FUNC_INFO;
+
+}
+
+void CommunicatorV2::onNotificationSubscriptionReceived(const NotificationSubscriptionMessage& msg) {
+    qDebug() << Q_FUNC_INFO;
+
+}
+
+void CommunicatorV2::onSynchronizationReceived(const SynchronizationMessage& msg) {
+    qDebug() << Q_FUNC_INFO;
+
+}
+
+void CommunicatorV2::onFilterStatusReceived(const FilterStatusMessage& msg) {
+    qDebug() << Q_FUNC_INFO;
+
+}
+
+void CommunicatorV2::onWeatherRequestReceived(const WeatherRequestMessage& msg) {
+    qDebug() << Q_FUNC_INFO;
+
+}
+
+void CommunicatorV2::onUnknownMessageReceived(const UnknownMessage& msg) {
+    // Not really unknown, more generic message
+
+
+    // Handle MusicControlCapabilities (0x13B2 = 5042)
+    if (msg.messageId== 5042) {
+        //Music control not fully implemented - sending ACK
+
+        // Send simple ACK for MusicControlCapabilities
+        QByteArray response_payload;
+        response_payload.append(char(0xb2));
+        response_payload.append(char(0x13)); // Original message ID: MusicControlCapabilities (5042)
+        response_payload.append(char(0x00)); // Status: ACK
+        QByteArray gfdi = wrapInGfdiEnvelope(0x1388, response_payload);
+        sendMessage("MusicAck",gfdi);
+    }
+
+    // Handle Response/Status messages (0x1388 = 5000)
+    else if (msg.messageId == 0x1388) {
+        qDebug() << Q_FUNC_INFO << "Garmin: RESPONSE/STATUS MESSAGE (0x1388) Full data ({}" << msg.data.size() << " bytes): " << msg.data.data();
+
+        // Parse Response message
+        if (msg.data.size() >= 4) {
+            quint16 original_msg_id = u16le(msg.data.constData(),0);
+            quint8 status = u8le (msg.data.constData(),2);
+
+            // Check if this is an ACK for a ProtobufResponse (0x13B4) - need to send next chunk
+            if ((original_msg_id == 0x13B4) && (status == 0) && (msg.data.size() >= 11)) {
+                quint16 request_id = u16le(msg.data.constData(),3);
+                quint32 data_offset = u32le(msg.data.constData(),5);
+
+                qDebug() << Q_FUNC_INFO << "ACK for ProtobufResponse chunk,  Original msg ID: " << original_msg_id;
+                if (status ==0) qDebug() << Q_FUNC_INFO << "Status: Ack";
+                else qDebug() << Q_FUNC_INFO << "Status: Nack";
+
+                // TODO Handle the chunk ACK (send next chunk if needed)
+                /*
+                if let Err(e) = self
+                    .handle_protobuf_chunk_ack(request_id, data_offset)
+                    .await
+                {
+                    eprintln!(
+                        "   ❌ Failed to handle protobuf chunk ACK: {}",
+                        e
+                    );
+                }
+                */
+            }
+        }
+    }
+
+    qDebug() << Q_FUNC_INFO << "Message ID " << msg.messageId;
+
+}
 
 
 void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
@@ -479,7 +572,7 @@ void CommunicatorV2::processHandleManagement(const QByteArray& message) {
         return;
     }
 
-    const quint64 clientId = readLe64(message, 1);
+    const quint64 clientId = u64le(message, 1);
     if (clientId != AMAZFISH_CLIENT_ID) {
         return;
     }
@@ -515,7 +608,7 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         return;
     }
 
-    const quint16 serviceCodeLE = readLe16(payload, 0);
+    const quint16 serviceCodeLE = u16le(payload, 0);
     const quint8 status = quint8(payload[2]);
     const quint8 handle = quint8(payload[3]);
     const quint8 reliable = quint8(payload[4]);
@@ -631,7 +724,7 @@ void CommunicatorV2::processCloseHandleResp(const QByteArray& payload) {
         return;
     }
 
-    const quint16 serviceCodeLE = readLe16(payload, 0);
+    const quint16 serviceCodeLE = u16le(payload, 0);
     const quint8 handle = quint8(payload[2]);
 
     auto svc = serviceFromCode(serviceCodeLE);
@@ -813,8 +906,8 @@ QByteArray CommunicatorV2::createCloseAllServicesMessage() const {
     b.reserve(13);
     b.append(char(0));
     b.append(char(quint8(RequestType::CloseAllReq)));
-    appendLe64(b, AMAZFISH_CLIENT_ID);
-    appendLe16(b, 0);
+    writeU64le(b, AMAZFISH_CLIENT_ID);
+    writeU16le(b, 0);
     b.append(char(0));
     return b;
 }
@@ -824,8 +917,8 @@ QByteArray CommunicatorV2::createRegisterServiceMessage(Service service, bool re
     b.reserve(13);
     b.append(char(0));
     b.append(char(quint8(RequestType::RegisterMlReq)));
-    appendLe64(b, AMAZFISH_CLIENT_ID);
-    appendLe16(b, serviceCode(service));
+    writeU64le(b, AMAZFISH_CLIENT_ID);
+    writeU16le(b, serviceCode(service));
     b.append(char(reliable ? 2 : 0));
     return b;
 }
@@ -835,8 +928,8 @@ QByteArray CommunicatorV2::createCloseServiceMessage(Service service, quint8 han
     b.reserve(12);
     b.append(char(0));
     b.append(char(quint8(RequestType::CloseHandleReq)));
-    appendLe64(b, AMAZFISH_CLIENT_ID);
-    appendLe16(b, serviceCode(service));
+    writeU64le(b, AMAZFISH_CLIENT_ID);
+    writeU16le(b, serviceCode(service));
     b.append(char(handle));
     return b;
 }
@@ -980,8 +1073,6 @@ void CommunicatorV2::saveHRVRecord()
 }
 
 
-
-
 // =============================================================================
 // MlrServiceWriter
 // =============================================================================
@@ -1025,6 +1116,15 @@ void GfdiServiceCallback::onClose() {
 void GfdiServiceCallback::onMessage(const QByteArray& data) {
     GfdiMessageParser parser;
     connect(&parser,&GfdiMessageParser::deviceInformationReceived,mCommunicator,&CommunicatorV2::onDeviceInformationReceived);
+    connect(&parser,&GfdiMessageParser::configurationReceived,mCommunicator,&CommunicatorV2::onConfigurationReceived);
+    connect(&parser,&GfdiMessageParser::currentTimeRequestReceived,mCommunicator,&CommunicatorV2::onCurrentTimeRequestReceived);
+    connect(&parser,&GfdiMessageParser::notificationControlReceived,mCommunicator,&CommunicatorV2::onNotificationControlReceived);
+    connect(&parser,&GfdiMessageParser::notificationSubscriptionReceived,mCommunicator,&CommunicatorV2::onNotificationSubscriptionReceived);
+    connect(&parser,&GfdiMessageParser::synchronizationReceived,mCommunicator,&CommunicatorV2::onSynchronizationReceived);
+    connect(&parser,&GfdiMessageParser::filterStatusReceived,mCommunicator,&CommunicatorV2::onFilterStatusReceived);
+    connect(&parser,&GfdiMessageParser::weatherRequestReceived,mCommunicator,&CommunicatorV2::onWeatherRequestReceived);
+    connect(&parser,&GfdiMessageParser::unknownMessageReceived,mCommunicator,&CommunicatorV2::onUnknownMessageReceived);
+
     parser.parse(data);
 
 }

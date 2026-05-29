@@ -17,17 +17,7 @@
 
 
 
-static inline quint16 le16(const char* p) {
-    return quint16(quint8(p[0]) | (quint16(quint8(p[1]))<<8));
-}
-static inline quint32 le32(const char* p) {
-    return quint32(quint8(p[0]) | (quint32(quint8(p[1]))<<8) | (quint32(quint8(p[2]))<<16) | (quint32(quint8(p[3]))<<24));
-}
-static inline quint64 le64(const char* p) {
-    quint64 v=0;
-    for (int i=0;i<8;++i) v |= (quint64(quint8(p[i])) << (8*i));
-    return v;
-}
+
 
 // -------------------- Enums --------------------
 
@@ -281,7 +271,7 @@ signals:
     void synchronizationReceived(const SynchronizationMessage& msg);
     void filterStatusReceived(const FilterStatusMessage& msg);
     void weatherRequestReceived(const WeatherRequestMessage& msg);
-    void unknownMessageReceived(quint16 messageId, const QByteArray& payload);
+    void unknownMessageReceived(const UnknownMessage& msg);
     void parseError(const QString& error);
 
 private:
@@ -292,15 +282,13 @@ private:
     void parseSynchronization(const QByteArray& data);
     void parseWeatherRequest(const QByteArray& data);
     void parseFilterStatus(const QByteArray& data);
+    void parseUnknownMessage(const quint16 , const QByteArray& data);
 
     static Result<QString> readLengthPrefixedString(const QByteArray& data, int& consumedBytes);
     static QSet<quint16> parseCapabilities(const QByteArray& bytes);
 
     // LE helpers
-    static quint16 u16le(const QByteArray& b, int off);
-    static quint32 u32le(const QByteArray& b, int off);
-    static quint64 u64le(const QByteArray& b, int off);
-    static qint32  i32le(const QByteArray& b, int off);
+
 };
 
 // -------------------- Generator (static functions) --------------------
@@ -342,12 +330,10 @@ public:
 private:
     static Result<QByteArray> generateCapabilities();
     static quint16 computeChecksum(const QByteArray& data);
-    static quint16 computeCrc16(const QByteArray& data);
     static QByteArray truncateUtf8Bytes(const QString& s, int maxBytes);
 
     // LE push/overwrite helpers
-    static void pushU16le(QByteArray& out, quint16 v);
-    static void pushU32le(QByteArray& out, quint32 v);
+
     static void overwriteU16le(QByteArray& out, int off, quint16 v);
 };
 

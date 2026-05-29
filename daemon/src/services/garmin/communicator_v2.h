@@ -19,6 +19,7 @@
 #include "cobscodec.h"
 #include "garminmlr.h"
 #include "garminmessages.h"
+#include "garminnotification.h"
 #include <qbledevice.h>
 #include <qbleservice.h>
 #include <KDbConnection.h>
@@ -101,6 +102,9 @@ struct CommunicatorState {
 class CommunicatorV2 : public QBLEService {
     Q_OBJECT
 public:
+    static QSharedPointer<CommunicatorV2> create(const QString &path, QObject* parent=nullptr) {
+        return QSharedPointer<CommunicatorV2>(new CommunicatorV2(path,parent));
+    }
     explicit CommunicatorV2(const QString &path, QObject* parent=nullptr);
 
     static const char* BASE_UUID;
@@ -126,7 +130,7 @@ public:
     bool initializeDevice();
 
     //  send_message
-    void sendMessage(const QString& taskName, const QByteArray& message);
+    bool sendMessage(const QString& taskName, const QByteArray& message);
 
     //  handle_decoded_message_async
     Result<std::optional<QByteArray>> handleDecodedMessageAsync(const QByteArray& decodedWithHandle);
@@ -177,6 +181,16 @@ public slots:
     void onCharacteristicChanged(const QString &characteristic, const QByteArray& data);
 
     void onDeviceInformationReceived(DeviceInformationMessage &message);
+    void onConfigurationReceived(const ConfigurationMessage& msg);
+    void onCurrentTimeRequestReceived();
+    void onNotificationControlReceived(const NotificationControlMessage& msg);
+    void onNotificationSubscriptionReceived(const NotificationSubscriptionMessage& msg);
+    void onSynchronizationReceived(const SynchronizationMessage& msg);
+    void onFilterStatusReceived(const FilterStatusMessage& msg);
+    void onWeatherRequestReceived(const WeatherRequestMessage& msg);
+    void onUnknownMessageReceived(const UnknownMessage &msg);
+
+
     void setSteps(quint32 val);
     void setStepsGoal(quint32);
     void setHeartRate(quint8 val);
@@ -215,6 +229,7 @@ private:
     quint8 mBatteryLevel;
 
     struct deviceInfo mDeviceInfo;
+
 
 
 

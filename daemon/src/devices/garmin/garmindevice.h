@@ -2,11 +2,12 @@
 #define GARMIN_DEVICE__H
 
 #include <QObject>
+#include <QSharedPointer>
 #include "abstractdevice.h"
-
-//#include "services/garmin/garminservice.h"
 #include "services/garmin/communicator_v2.h"
 
+
+class NotificationSpec;
 
 class GarminDevice : public AbstractDevice
 {
@@ -35,9 +36,12 @@ public slots:
 protected slots:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 
+signals:
+    void sendAlertToDevice(NotificationSpec &note);
 
 private:
     int mSteps = 0;
+
 
     void parseServices();
     void initialise();
