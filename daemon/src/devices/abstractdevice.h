@@ -25,6 +25,7 @@ public:
         EVENT_MUSIC_STOP,
         EVENT_MUSIC_PLAY,
         EVENT_MUSIC_PAUSE,
+        EVENT_MUSIC_PLAYPAUSE,
         EVENT_MUSIC_NEXT,
         EVENT_MUSIC_PREV,
         EVENT_MUSIC_VOLUP,

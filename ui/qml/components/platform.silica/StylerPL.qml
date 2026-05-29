@@ -83,6 +83,7 @@ QtObject {
     property string iconWatch: "image://theme/icon-m-watch"
     property string iconLevels: "image://theme/icon-m-levels"
     property string iconAlarm: "image://theme/icon-m-alarm"
+    property string iconNotifications: "image://theme/icon-m-notifications"
     property string iconWeather: "image://theme/icon-m-weather-d212-light"
     property string iconDiagnostic: "image://theme/icon-m-diagnostic"
     property string iconFavoriteSelected: "image://theme/icon-m-favorite-selected"

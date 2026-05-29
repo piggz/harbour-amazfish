@@ -37,6 +37,11 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 int main(int argc, char **argv)
 {
     qInstallMessageHandler(myMessageOutput);
+
+#ifdef PROJECT_GIT_VERSION
+    qDebug() << "Starting harbour-amazfishd " << PROJECT_GIT_VERSION;
+#endif
+
     QCoreApplication app(argc, argv);
     QCoreApplication::setOrganizationName("harbour-amazfish");
     QCoreApplication::setApplicationName("harbour-amazfish");

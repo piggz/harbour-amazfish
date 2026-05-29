@@ -51,7 +51,7 @@ Amazfish::Features BangleJSDevice::supportedFeatures() const
         | Amazfish::Feature::FEATURE_MUSIC_CONTROL
         // | Amazfish::Feature::FEATURE_BUTTON_ACTION
         // | Amazfish::Feature::FEATURE_SCREENSHOT
-        | Amazfish::Feature::FEATURE_FILE_INSTALL
+        // | Amazfish::Feature::FEATURE_FILE_INSTALL
         ;
 
 }
@@ -418,12 +418,15 @@ void BangleJSDevice::sendWeather(CurrentWeather *weather)
         // weather report (current temp, days highest temp, days lowest temp, current humidity, rain/precip probability, UV Index, current condition code, current condition text, wind speed, wind direction)
 
         o.insert("t", "weather");
+        o.insert("v","1");
         o.insert("temp", weather->temperature());
         o.insert("hi", weather->maxTemperature());
         o.insert("lo", weather->minTemperature());
         o.insert("hum", weather->humidity());
-        // rain
-        // uv
+        if (weather->forecastCount() > 0) {
+            o.insert("rain", 100*weather->forecast(0).precipProbability());
+        }
+        // uv // Math.round(weatherSpec.getUvIndex() *10)/10);
         o.insert("code", weather->weatherCode());
         o.insert("txt", weather->description());
         o.insert("wind", weather->windSpeed());
@@ -581,6 +584,8 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAY);
         } else if (music_action == "pause") {
             emit deviceEvent(AbstractDevice::EVENT_MUSIC_PAUSE);
+        } else if (music_action == "playpause") {
+            emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAYPAUSE);
         } else if (music_action == "next") {
             emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
         } else if (music_action == "previous") {

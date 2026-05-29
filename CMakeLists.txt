@@ -39,6 +39,31 @@ else()
     message(FATAL_ERROR "Unsupported platform '${FLAVOR}'. Supported platforms: kirigami, silica, qtcontrols, uuitk.")
 endif()
 
+# Allow manual override via cmake -DPROJECT_GIT_VERSION=v2.9.0
+set(PROJECT_GIT_VERSION "" CACHE STRING "Override git version string")
+
+if(PROJECT_GIT_VERSION STREQUAL "")
+    find_program(GIT_EXECUTABLE git)
+    if(GIT_EXECUTABLE)
+        execute_process(
+            COMMAND ${GIT_EXECUTABLE} describe --tags --always --long --dirty
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            OUTPUT_VARIABLE PROJECT_GIT_VERSION
+            RESULT_VARIABLE GIT_DESCRIBE_RESULT
+            ERROR_QUIET
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+        if(NOT GIT_DESCRIBE_RESULT EQUAL 0)
+            set(PROJECT_GIT_VERSION "unknown")
+        endif()
+    else()
+        set(PROJECT_GIT_VERSION "unknown")
+    endif()
+endif()
+
+message(STATUS "Git version: ${PROJECT_GIT_VERSION}")
+add_compile_definitions(PROJECT_GIT_VERSION="${PROJECT_GIT_VERSION}")
+
 add_subdirectory(qble)
 add_subdirectory(lib)
 add_subdirectory(daemon)

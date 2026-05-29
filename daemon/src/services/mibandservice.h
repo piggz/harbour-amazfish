@@ -101,6 +101,8 @@ public:
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_SPORTS_DETAILS = 0x06;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_DEBUGLOGS = 0x07;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_PAI = 0x0d;
+    static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_STRESS_MANUAL = 0x12;
+    static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_STRESS_AUTO = 0x13;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_SPO2_NORMAL = 0x25;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_SPO2_SLEEP = 0x26;
     static const uint8_t COMMAND_ACTIVITY_DATA_TYPE_TEMPERATURE = 0x2e;
