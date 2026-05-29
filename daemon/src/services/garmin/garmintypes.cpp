@@ -174,3 +174,98 @@ QString serviceToString(Service s) {
     return QStringLiteral("Unknown");
 }
 
+quint16 computeCrc16(const QByteArray& data)
+{
+    static const quint16 C[16] = {
+        0x0000,0xCC01,0xD801,0x1400,0xF001,0x3C00,0x2800,0xE401,
+        0xA001,0x6C00,0x7800,0xB401,0x5000,0x9C01,0x8801,0x4400
+    };
+
+    quint16 crc = 0;
+
+    for (quint8 b : data) {
+        crc = (((crc >> 4) & 0x0FFF) ^ C[crc & 0x0F]) ^ C[b & 0x0F];
+        crc = (((crc >> 4) & 0x0FFF) ^ C[crc & 0x0F]) ^ C[(b >> 4) & 0x0F];
+    }
+
+    return crc;
+}
+
+QByteArray wrapInGfdiEnvelope(quint16 messageId, const QByteArray& payload)
+{
+    QByteArray msg;
+
+    quint16 size = static_cast<quint16>(2 + 2 + payload.size() + 2);
+
+    msg.append(char(size & 0xFF));
+    msg.append(char((size >> 8) & 0xFF));
+
+    msg.append(char(messageId & 0xFF));
+    msg.append(char((messageId >> 8) & 0xFF));
+
+    msg.append(payload);
+
+    quint16 crc = computeCrc16(msg);
+
+    msg.append(char(crc & 0xFF));
+    msg.append(char((crc >> 8) & 0xFF));
+
+    return msg;
+}
+
+quint16 le16(const char* p) {
+    return quint16(quint8(p[0]) | (quint16(quint8(p[1]))<<8));
+}
+
+quint32 le32(const char* p) {
+    return quint32(quint8(p[0]) | (quint32(quint8(p[1]))<<8) | (quint32(quint8(p[2]))<<16) | (quint32(quint8(p[3]))<<24));
+}
+
+quint64 le64(const char* p) {
+    quint64 v=0;
+    for (int i=0;i<8;++i) v |= (quint64(quint8(p[i])) << (8*i));
+    return v;
+}
+
+quint8 u8le(const QByteArray& b, int off) {
+    if (off >= b.size()) return 0;
+    return quint16(quint8(b[off]));
+}
+
+quint16 u16le(const QByteArray& b, int off) {
+    if (off + 1 >= b.size()) return 0;
+    return quint16(quint8(b[off])) | (quint16(quint8(b[off+1])) << 8);
+}
+
+quint32 u32le(const QByteArray& b, int off) {
+    if (off + 3 >= b.size()) return 0;
+    return quint32(quint8(b[off])) |
+           (quint32(quint8(b[off+1])) << 8) |
+           (quint32(quint8(b[off+2])) << 16) |
+           (quint32(quint8(b[off+3])) << 24);
+}
+
+quint64 u64le(const QByteArray& b, int off) {
+    if (off + 7 >= b.size()) return 0;
+    quint64 v = 0;
+    for (int i=0;i<8;i++) v |= (quint64(quint8(b[off+i])) << (8*i));
+    return v;
+}
+
+qint32 i32le(const QByteArray& b, int off) {
+    return qint32(u32le(b, off));
+}
+
+void writeU16le(QByteArray& out, quint16 v) {
+    out.append(char(v & 0xFF));
+    out.append(char((v >> 8) & 0xFF));
+}
+void writeU32le(QByteArray& out, quint32 v) {
+    out.append(char(v & 0xFF));
+    out.append(char((v >> 8) & 0xFF));
+    out.append(char((v >> 16) & 0xFF));
+    out.append(char((v >> 24) & 0xFF));
+}
+void writeU64le(QByteArray& out, quint64 v) {
+    for (int i=0;i<8;++i) out.append(char((v >> (8*i)) & 0xFF));
+}
