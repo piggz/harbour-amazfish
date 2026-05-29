@@ -1,6 +1,3 @@
-[submodule "qble"]
-	path = qble
-	url = https://github.com/piggz/qble
 [submodule "daemon/libwatchfish"]
 	path = daemon/libwatchfish
 	url = https://github.com/piggz/libwatchfish.git

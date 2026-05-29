@@ -68,16 +68,15 @@ qreal CurrentWeather::temperature() const
 
 void CurrentWeather::refresh()
 {
-    qDebug() << "Refreshing weather";
 
     clear();
 
     if (!m_city) {
-        qDebug() << "No city set!";
+        qDebug() << Q_FUNC_INFO << "No city set!";
         return;
     }
 
-    qDebug() << "...city is" << m_city->name();
+    qDebug() << Q_FUNC_INFO << "Refreshing weather " << m_city->name();
 
     QVariantMap arguments;
     arguments.insert(QLatin1String("id"), m_city->identifier());
@@ -110,20 +109,25 @@ void CurrentWeather::handleCurrent(const QByteArray &reply)
     m_weatherCode = weather.value("id").toVariant().toInt();
     m_description = weather.value("description").toVariant().toString();
     m_weatherIcon = weather.value("icon").toVariant().toString();
+//    qDebug() << "m_weatherCode = " << m_weatherCode <<     m_description  <<    m_weatherIcon ;
 
-    QJsonObject wind = object.value("wind").toArray().first().toObject();
-    m_windDeg = wind.value("wind_deg").toVariant().toDouble();
-    m_windSpeed = wind.value("wind_speed").toVariant().toDouble();
-    m_windGusts = wind.value("wind_gusts").toVariant().toDouble();
+    QJsonObject wind = object.value("wind").toObject();
+    m_windDeg = wind.value("deg").toVariant().toDouble();
+    m_windSpeed = wind.value("speed").toVariant().toDouble();
+//    qDebug() << "wind =  " << wind << " m_windDeg = " << m_windDeg << " m_windSpeed = " << m_windSpeed;
 
-    QJsonObject clouds = object.value("clouds").toArray().first().toObject();
+    QJsonObject clouds = object.value("clouds").toObject();
     m_clouds = clouds.value("all").toVariant().toInt();
+
+//    qDebug() << "clouds " << clouds << m_clouds;
 
     QJsonObject main = object.value("main").toObject();
     m_temperature = main.value("temp").toDouble();
     m_minTemperature = main.value("temp_min").toDouble();
     m_maxTemperature = main.value("temp_max").toDouble();
     m_humidity = main.value("humidity").toDouble();
+
+//    qDebug() << "main " << main << m_temperature << m_minTemperature << m_maxTemperature << m_humidity;
 
     QJsonObject sys = object.value("sys").toObject();
     m_sunrise = sys.value("sunrise").toInt(0);
@@ -132,7 +136,7 @@ void CurrentWeather::handleCurrent(const QByteArray &reply)
 
 void CurrentWeather::handleForecast(const QByteArray &reply)
 {
-    qDebug() << "Forecast weather data:\n" << reply;
+//    qDebug() << "Forecast weather data:\n" << reply;
 
     QJsonDocument document = QJsonDocument::fromJson(reply);
     if (document.isNull()) {
@@ -169,6 +173,8 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
         QString weatherIcon = weather.value("icon").toVariant().toString();
 
         int code = weather.value("id").toVariant().toInt();
+        double precipProbability = obj.value("pop").toVariant().toDouble();
+//        qDebug() << "precipProbability" << precipProbability;
         QString desc = weather.value("description").toVariant().toString();
 
         QJsonObject main = obj.value("main").toObject();
@@ -188,10 +194,10 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
 
         if (obj.contains("wind")) {
             QJsonObject wind = obj.value("wind").toObject();
-            wind_speed += wind.value("speed").toDouble();
+            wind_speed = wind.value("speed").toDouble();
         }
 
-        qDebug() << "Forecast on " << dt << d << t << min_temp << max_temp << desc << code << "Hour:" << t.hour();
+//        qDebug() << "Forecast on " << dt << d << t << min_temp << max_temp << desc << code << "Hour:" << t.hour();
 
         if (d > last_day) {
             if (last_day != QDate::currentDate()) {
@@ -209,13 +215,20 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
         }
 
         if (t.hour() >=12 && t.hour() < 15) { //Set the general weather description for that around mid-day
-            qDebug() << "Midday" << main.value("pressure") << main.value("pressure").toDouble();
+            qDebug() << "Midday "
+                << "dt = " << dt
+                << "desc = "  << desc
+                << "code = "  << code
+                << "icon = "  << weatherIcon
+                << "pressure = "  << main.value("pressure").toDouble()
+                << "precipProbability = " << precipProbability;
             f.setDateTime(dt);
             f.setDescription(desc);
             f.setWeatherCode(code);
             f.setWeatherIcon(weatherIcon);
             f.setPressure(main.value("pressure").toDouble());
             f.setHumidity(main.value("humidity").toDouble());
+            f.setPrecipProbability(precipProbability);
         }
         if (max_temp > f.maxTemperature()){
             f.setMaxTemperature(max_temp);
@@ -234,7 +247,7 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
     m_forecasts << f;
 
     foreach(Forecast fc, m_forecasts) {
-        qDebug() << fc.dateTime() << fc.description() << fc.minTemperature() << fc.maxTemperature() << fc.weatherCode();
+        qDebug() << fc;
     }
 
     emit ready();
@@ -340,11 +353,6 @@ qreal CurrentWeather::windSpeed() const
     return m_windSpeed;
 }
 
-qreal CurrentWeather::windGusts() const
-{
-    return m_windGusts;
-}
-
 int CurrentWeather::humidity() const
 {
     return m_humidity;
@@ -383,6 +391,16 @@ qlonglong CurrentWeather::sunset() const
 QString CurrentWeather::description() const
 {
     return m_description;
+}
+
+qreal CurrentWeather::Forecast::precipProbability() const
+{
+    return m_precipProbability;
+}
+
+void CurrentWeather::Forecast::setPrecipProbability(qreal precipProbability)
+{
+    m_precipProbability = precipProbability;
 }
 
 qreal CurrentWeather::Forecast::minTemperature() const
@@ -534,4 +552,50 @@ int CurrentWeather::forecastCount() const
 const CurrentWeather::Forecast& CurrentWeather::forecast(int f) const
 {
     return m_forecasts.at(f);
+}
+
+QDebug operator<<(QDebug debug, const CurrentWeather::Forecast &forecast)
+{
+    QDebugStateSaver saver(debug);
+
+    debug.nospace()
+        << "Forecast("
+        << "dt=" << forecast.dateTime()
+        << ", minTemp=" << forecast.minTemperature()
+        << ", maxTemp=" << forecast.maxTemperature()
+        << ", weatherCode=" << forecast.weatherCode()
+        << ", icon=" << forecast.weatherIcon()
+        << ", description=" << forecast.description()
+        << ", precipProb=" << forecast.precipProbability()
+        << ", rainMM=" << forecast.rainMMDay()
+        << ", snowMM=" << forecast.snowMMDay()
+        << ", clouds=" << forecast.clouds()
+        << ", humidity=" << forecast.humidity()
+        << ", pressure=" << forecast.pressure()
+        << ", windMin=" << forecast.windMinSpeed()
+        << ", windMax=" << forecast.windMaxSpeed()
+        << ", windDir=" << forecast.windDirection()
+        << ")";
+
+    return debug;
+}
+
+QDebug operator<<(QDebug debug, const CurrentWeather &weather)
+{
+    QDebugStateSaver saver(debug);
+
+    debug.nospace()
+        << "CurrentWeather("
+        << "temp=" << weather.temperature()
+        << ", minTemp=" << weather.minTemperature()
+        << ", maxTemp=" << weather.maxTemperature()
+        << ", weatherCode=" << weather.weatherCode()
+        << ", humidity=" << weather.humidity()
+        << ", clouds=" << weather.clouds()
+        << ", windSpeed=" << weather.windSpeed()
+        << ", description=\"" << weather.description() << "\""
+        << ", forecasts=" << weather.forecastCount()
+        << ")";
+
+    return debug;
 }

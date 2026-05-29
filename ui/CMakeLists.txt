@@ -54,6 +54,8 @@ add_executable(harbour-amazfish-ui
 find_package(Qt5 COMPONENTS Gui Widgets Quick Positioning REQUIRED)
 find_package(KDb REQUIRED)
 
+target_compile_options(harbour-amazfish-ui PRIVATE -Wall -Wextra -Wpedantic)
+
 QT5_ADD_TRANSLATION(QM_FILES ${TS_FILES})
 add_custom_target(ui_translations DEPENDS ${QM_FILES})
 add_dependencies(harbour-amazfish-ui ui_translations)
