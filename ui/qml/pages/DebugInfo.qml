@@ -194,7 +194,7 @@ PagePL {
         }
 
         Row {
-            width: parent.width
+            width: page.width
             spacing: styler.themePaddingLarge
             visible: supportsFeature(Amazfish.FEATURE_ALERT)
 

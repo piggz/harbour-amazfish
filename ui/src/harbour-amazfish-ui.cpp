@@ -46,6 +46,10 @@ QByteArray encryptDecrypt(QByteArray toEncrypt) {
 
 int main(int argc, char *argv[])
 {
+#ifdef PROJECT_GIT_VERSION
+    qDebug() << "Starting harbour-amazfish-ui " << PROJECT_GIT_VERSION;
+#endif
+
     QGuiApplication *app;
 #ifdef MER_EDITION_SAILFISH
     app = SailfishApp::application(argc, argv);
@@ -119,7 +123,7 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("SportsModel", &sportsDataModel);
     view->rootContext()->setContextProperty("SportsMeta", &sportsMetaModel);
     view->rootContext()->setContextProperty("PaiModel", &paiModel);
-    view->rootContext()->setContextProperty("DataSource", &dataSource);
+    view->rootContext()->setContextProperty("dataSource", &dataSource);
 
     view->rootContext()->setContextProperty("STRAVA_CLIENT_SECRET", encryptDecrypt("}{s{--z*.x{y{ss///x/x){*xz{(|yy/{syr-/})"));
     view->rootContext()->setContextProperty("STRAVA_CLIENT_ID", "13707");

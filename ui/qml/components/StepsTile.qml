@@ -28,7 +28,7 @@ Tile {
                     horizontalCenter: parent.horizontalCenter
                     bottom: centerItem.top
                 }
-                color: styler.themeHighlightColor
+                color: styler.blockBg
                 font.pixelSize: styler.themeFontSizeHuge
                 verticalAlignment: Text.AlignVCenter
                 text: stepCount.toLocaleString()

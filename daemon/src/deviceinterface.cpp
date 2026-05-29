@@ -185,6 +185,21 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
     n.summary = notification->summary();
     n.body = notification->body();
 
+    QVariantMap notificationSettings = AmazfishConfig::instance()->notificationSettings();
+
+    bool enabled = true;
+    QString app_slug = n.appId.isEmpty() ? n.appName : n.appId;
+    if (notificationSettings.contains(app_slug)) {
+        enabled = notificationSettings.value(app_slug).toBool();
+    } else {
+        notificationSettings.insert(app_slug, enabled);
+    }
+    AmazfishConfig::instance()->setNotificationSettings(notificationSettings);
+
+    if (!enabled) {
+        qDebug() << Q_FUNC_INFO << "Notification " << app_slug << " disabled in settings";
+        return;
+    }
     if (m_device && m_device->connectionState() == "authenticated" && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)){
         qDebug() << Q_FUNC_INFO << "Sending alert to device";
         sendAlert(n);
@@ -540,6 +555,33 @@ void DeviceInterface::createTables()
         qDebug() << *t_temp;
     }
 
+    if (!m_conn->containsTable("stress")) {
+        KDbTableSchema *t_stress = new KDbTableSchema("stress");
+        t_stress->setCaption("Stress");
+        t_stress->addField(f = new KDbField("stress_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_stress->addField(f = new KDbField("stress_timestamp", KDbField::Integer, KDbField::Indexed));
+        f->setCaption("Timestamp");
+
+        t_stress->addField(f = new KDbField("stress_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
+        f->setCaption("Timestamp in Date/Time format");
+
+        t_stress->addField(f = new KDbField("stress_value", KDbField::Integer));
+        f->setCaption("Value");
+
+        t_stress->addField(f = new KDbField("stress_type", KDbField::ShortInteger));
+        f->setCaption("Type");
+
+        if (!m_conn->createTable(t_stress)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- stress created --";
+        qDebug() << *t_stress;
+    }
+
+
     if (!m_conn->commitTransaction(t)) {
         qDebug() << m_conn->result();
         return;
@@ -752,6 +794,9 @@ void DeviceInterface::deviceEvent(AbstractDevice::Event event)
         break;
     case AbstractDevice::EVENT_MUSIC_PAUSE:
         m_musicController.pause();
+        break;
+    case AbstractDevice::EVENT_MUSIC_PLAYPAUSE:
+        m_musicController.playPause();
         break;
     case AbstractDevice::EVENT_MUSIC_NEXT:
         m_musicController.next();
@@ -1021,6 +1066,7 @@ void DeviceInterface::downloadActivityData()
 
 void DeviceInterface::sendWeather(CurrentWeather *weather)
 {
+    qDebug() << Q_FUNC_INFO << *weather;
     if (m_device) {
         m_device->sendWeather(weather);
     }

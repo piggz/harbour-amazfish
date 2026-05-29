@@ -21,11 +21,14 @@ import QtQuick.Controls 2.2
 
 Item {
     id: item
-    anchors.left: parent.left
-    anchors.leftMargin: styler.themeHorizontalPageMargin
-    anchors.right: parent.right
-    anchors.rightMargin: styler.themeHorizontalPageMargin
-    height: Math.max(lab.height, val.height) + desc.height + desc.anchors.topMargin
+
+    anchors.left: inForm ? undefined : parent.left
+    anchors.leftMargin: inForm ? undefined : styler.themeHorizontalPageMargin
+    anchors.right: inForm ? undefined : parent.right
+    anchors.rightMargin: inForm ? undefined : styler.themeHorizontalPageMargin
+    implicitHeight: (inForm ? val.height : Math.max(lab.height, val.height)) + desc.height + desc.anchors.topMargin
+
+    property bool   inForm: parent.isFormLayout ? true : false
 
     property int   currentIndex
     property alias description: desc.text

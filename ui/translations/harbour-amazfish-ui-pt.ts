@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="uk">
+<TS version="2.1" language="pt">
 <context>
     <name>AddCityPage</name>
     <message>
         <location filename="../qml/pages/AddCityPage.qml" line="8"/>
         <source>Set Location</source>
-        <translation>Встановити Локацію</translation>
+        <translation>Definir Localização</translation>
     </message>
 </context>
 <context>
@@ -15,55 +15,55 @@
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <source>Enabled</source>
-        <translation>Увімкнено</translation>
+        <translation>Ativado</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <source>Time: %1:%2</source>
-        <translation>Час: %1:%2</translation>
+        <translation>Hora: %1%2</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <source>Mon</source>
-        <translation>Пн</translation>
+        <translation>Seg</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <source>Tue</source>
-        <translation>Вт</translation>
+        <translation>Ter</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <source>Wed</source>
-        <translation>Ср</translation>
+        <translation>Qua</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <source>Thu</source>
-        <translation>Чт</translation>
+        <translation>Qui</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <source>Fri</source>
-        <translation>Пт</translation>
+        <translation>Sex</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <source>Sat</source>
-        <translation>Сб</translation>
+        <translation>Sab</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <source>Sun</source>
-        <translation>Нд</translation>
+        <translation>Dom</translation>
     </message>
 </context>
 <context>
@@ -71,28 +71,28 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="8"/>
         <source>Analysis</source>
-        <translation>Аналіз</translation>
+        <translation>Análise</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="14"/>
         <source>Download All Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Descarregar todos os dados</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="48"/>
         <source>Heartrate</source>
-        <translation>Пульс</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="65"/>
         <location filename="../qml/pages/AnalysisPage.qml" line="68"/>
         <source>Steps</source>
-        <translation>Кроки</translation>
+        <translation>Passos</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="82"/>
         <source>Intensity</source>
-        <translation>Інтенсивність</translation>
+        <translation>Intensidade</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="99"/>
@@ -115,7 +115,7 @@
     <message>
         <location filename="../qml/pages/AuthKeyDialog.qml" line="18"/>
         <source>Enter auth key</source>
-        <translation>Введіть ключ автентифікації</translation>
+        <translation>Digite a palavra-passe de autenticação</translation>
     </message>
 </context>
 <context>
@@ -124,7 +124,7 @@
         <location filename="../qml/pages/BatteryPage.qml" line="9"/>
         <location filename="../qml/pages/BatteryPage.qml" line="48"/>
         <source>Battery</source>
-        <translation>Акумулятор</translation>
+        <translation>Pilha</translation>
     </message>
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="24"/>
@@ -137,38 +137,38 @@
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="49"/>
         <source>Send file</source>
-        <translation>Надіслати файл</translation>
+        <translation>Enviar ficheiro</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="9"/>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="27"/>
         <source>None</source>
-        <translation>Відсутній</translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="26"/>
         <source>Choose File</source>
-        <translation>Вибрати файл</translation>
+        <translation>Escolha o Ficheiro</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="44"/>
         <source>File type/version: </source>
-        <translation>Тип/версія файлу: </translation>
+        <translation>Versão/tipo do ficheiro: </translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="53"/>
         <source>File not supported on this device</source>
-        <translation>Файл не підтримується на цьому пристрої</translation>
+        <translation>Ficheiro não sustentado nesse dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="7"/>
         <source>Install File</source>
-        <translation>Встановити файл</translation>
+        <translation>Instalar Ficheiro</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="22"/>
         <source>Select a file to install.</source>
-        <translation>Виберіть файл для встановлення.</translation>
+        <translation>Selecione o ficheiro a instalar.</translation>
     </message>
 </context>
 <context>
@@ -176,7 +176,7 @@
     <message>
         <location filename="../src/daemoninterface.cpp" line="64"/>
         <source>Unexpected error</source>
-        <translation>Несподівана помилка</translation>
+        <translation>Erro inesperado</translation>
     </message>
 </context>
 <context>
@@ -184,118 +184,114 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="18"/>
         <source>Refresh</source>
-        <translation>Оновити</translation>
+        <translation>Recarregar</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="38"/>
         <source>Address: </source>
-        <translation>Адреса: </translation>
+        <translation>Endereço: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
         <location filename="../qml/pages/DebugInfo.qml" line="382"/>
         <source>Serial No: </source>
-        <translation>Серійний номер: </translation>
+        <translation>Nº Serial: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
         <location filename="../qml/pages/DebugInfo.qml" line="385"/>
         <source>Hardware Rev: </source>
-        <translation>Версія апаратного забезпечення: </translation>
+        <translation>Rev do Hardware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
         <location filename="../qml/pages/DebugInfo.qml" line="388"/>
         <source>Software Rev: </source>
-        <translation>Версія програмного забезпечення: </translation>
+        <translation>Rev do Software: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="72"/>
         <source>Connection State: </source>
-        <translation>Стан з&apos;єднання: </translation>
+        <translation>Estato da Conexão: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
         <location filename="../qml/pages/DebugInfo.qml" line="391"/>
         <source>GPS Ver: </source>
-        <translation>Версія GPS: </translation>
+        <translation>Ver. do GPS: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="270"/>
         <source>Test Notification</source>
-        <translation>Тестове Повідомлення</translation>
+        <translation>Testar Notificação</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="210"/>
         <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Test Email</source>
-        <translation type="vanished">Тестовий електронний лист</translation>
+        <translation>Olá, da app Amazfish. Esta é uma longa mensagem enviada por BLE!</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="283"/>
         <source>Test Call</source>
-        <translation>Тестовий дзвінок</translation>
+        <translation>Testar Ligação</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>Fetch debug log</source>
-        <translation>Отримати журнал налагодження</translation>
+        <translation>Resgatar log de debug</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="320"/>
         <source>Fetch Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar Dados</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Test Popup</source>
-        <translation>Тестове спливаюче вікно</translation>
+        <translation>Testar Popup</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="8"/>
         <source>Debugging</source>
-        <translation>Налагодження</translation>
+        <translation>Depuração</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="34"/>
         <source>Information</source>
-        <translation>Інформація</translation>
+        <translation>Informação</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
         <location filename="../qml/pages/DebugInfo.qml" line="394"/>
         <source>Model: </source>
-        <translation>Модель: </translation>
+        <translation>Model: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
         <location filename="../qml/pages/DebugInfo.qml" line="400"/>
         <source>Firmware Rev: </source>
-        <translation>Версія прошивки: </translation>
+        <translation>Rev do Firmware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
         <location filename="../qml/pages/DebugInfo.qml" line="397"/>
         <source>Manufacturer: </source>
-        <translation>Виробник: </translation>
+        <translation>Fabricante: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="193"/>
         <source>Function Tests</source>
-        <translation>Випробування функцій</translation>
+        <translation>Testes de Funcionalidade</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Alert</source>
-        <translation type="unfinished"></translation>
+        <translation>Alerta</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="216"/>
         <source>SMS Message (Ubuntu Touch)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagem SMS (Ubuntu Touch)</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="226"/>
@@ -305,75 +301,63 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="231"/>
         <source>The quick brown fox jumps over the lazy dog</source>
-        <translation type="unfinished"></translation>
+        <translation>Luís argüia à Júlia que «brações, fé, chá, óxido, pôr, zângão» eram palavras do português</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="237"/>
         <source>Telegram message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagem do Telegram</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="244"/>
         <source>Matrix message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagem do Matrix</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="251"/>
         <source>Slack message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagem do Slack</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="346"/>
         <source>Send Weather</source>
-        <translation>Надіслати погоду</translation>
+        <translation>Enviar Clima</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="356"/>
         <source>Update Calendar</source>
-        <translation>Оновити календар</translation>
+        <translation>Atualizar Calendário</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="369"/>
         <source>Music Control</source>
-        <translation>Управління музикою</translation>
+        <translation>Controlo de Música</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="329"/>
         <source>Request Screenshot</source>
-        <translation>Запит на знімок екрана</translation>
+        <translation>Pedir Captura de Ecrã</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="208"/>
         <location filename="../qml/pages/DebugInfo.qml" line="287"/>
         <source>Somebody</source>
-        <translation>Хтось</translation>
+        <translation>Alguém</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Title</source>
-        <translation>Назва</translation>
-    </message>
-    <message>
-        <source>Hello from Sailfish OS. This is a long message sent over BLE!</source>
-        <translation type="vanished">Привіт від Sailfish OS. Це довге повідомлення, надіслане через BLE!</translation>
-    </message>
-    <message>
-        <source>Donald Duck</source>
-        <translation type="vanished">Дональд Дак</translation>
-    </message>
-    <message>
-        <source>Hello, this is an email from Sailfish OS!</source>
-        <translation type="vanished">Привіт, це електронний лист від Sailfish OS!</translation>
+        <translation>Título</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="292"/>
         <source>Test Immediate Alert Service</source>
-        <translation>Тест служби негайного оповіщення</translation>
+        <translation>Testar Serviço de Alerta Imediato</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="342"/>
         <source>This is a test notification</source>
-        <translation>Це тестове повідомлення</translation>
+        <translation>Esta é uma notificação de test</translation>
     </message>
 </context>
 <context>
@@ -382,7 +366,7 @@
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
         <source>Download Data</source>
-        <translation>Завантажити дані</translation>
+        <translation>Descarregar Dados</translation>
     </message>
 </context>
 <context>
@@ -390,65 +374,57 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="26"/>
         <source>Pair with watch</source>
-        <translation>Створити пару з годинником</translation>
+        <translation>Parear com relógio</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="39"/>
         <source>Settings</source>
-        <translation>Налаштування</translation>
+        <translation>Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Disconnect from watch</source>
-        <translation>Відключити від годинника</translation>
+        <translation>Desconectar do relógio</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Connect to watch</source>
-        <translation>Підключити до годинника</translation>
+        <translation>Conectar ao relógio</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="58"/>
         <source>Enable service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Ativar o serviço na inicialização</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="181"/>
         <source>Sleep</source>
-        <translation type="unfinished">Сон</translation>
+        <translation>Dormir</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="234"/>
         <source>Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Desporto</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="260"/>
         <source>SpO₂</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO2</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="275"/>
         <source>Stress</source>
-        <translation type="unfinished">Стрес</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="290"/>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Dados</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="304"/>
         <source>Battery</source>
-        <translation type="unfinished">Акумулятор</translation>
-    </message>
-    <message>
-        <source>Data Graphs</source>
-        <translation type="vanished">Графіки даних</translation>
-    </message>
-    <message>
-        <source>PAI</source>
-        <translation type="obsolete">PAI</translation>
+        <translation>Bateria</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="312"/>
@@ -456,31 +432,19 @@
         <translation>%1%</translation>
     </message>
     <message>
-        <source>Steps</source>
-        <translation type="vanished">Кроки</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/FirstPage.qml" line="198"/>
         <source>Heartrate</source>
-        <translation>Пульс</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="207"/>
         <source>%1 bpm</source>
-        <translation>%1 уд/хв</translation>
-    </message>
-    <message>
-        <source>Service</source>
-        <translation type="vanished">Служба</translation>
-    </message>
-    <message>
-        <source>Enable on boot</source>
-        <translation type="vanished">Увімкнути при завантаженні</translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="327"/>
         <source>Install File</source>
-        <translation>Встановити файл</translation>
+        <translation>Instalar Ficheiro</translation>
     </message>
 </context>
 <context>
@@ -493,12 +457,12 @@
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Logout</source>
-        <translation type="unfinished">Вийти</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Login</source>
-        <translation type="unfinished">Увійти</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="70"/>
@@ -536,12 +500,12 @@
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="45"/>
         <source>Name</source>
-        <translation type="unfinished">Ім&apos;я</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="49"/>
         <source>Description</source>
-        <translation type="unfinished">Опис</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="56"/>
@@ -556,27 +520,27 @@
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="69"/>
         <source>Private</source>
-        <translation type="unfinished">Приватний</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="73"/>
         <source>Upload</source>
-        <translation type="unfinished">Завантажити</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="110"/>
         <source>Uploading data...</source>
-        <translation type="unfinished">Завантаження даних...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="125"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished">Завантаження активності завершено</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="224"/>
         <source>An unknown error occurred</source>
-        <translation type="unfinished">Сталася невідома помилка</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -585,7 +549,7 @@
         <location filename="../qml/components/GraphData.qml" line="356"/>
         <location filename="../qml/components/GraphData.qml" line="356"/>
         <source>No data</source>
-        <translation>Дані відсутні</translation>
+        <translation>Sem dados</translation>
     </message>
 </context>
 <context>
@@ -593,12 +557,12 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="9"/>
         <source>Heartrate</source>
-        <translation>Пульс</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="40"/>
         <source>%1 bpm</source>
-        <translation>%1 уд/хв</translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="75"/>
@@ -609,32 +573,32 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="97"/>
         <source>Relaxed</source>
-        <translation>Спокійно</translation>
+        <translation>Relaxado</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="106"/>
         <source>Light</source>
-        <translation>Легка</translation>
+        <translation>Leve</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="115"/>
         <source>Intensive</source>
-        <translation>Інтенсивна</translation>
+        <translation>Intenso</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="124"/>
         <source>Aerobic</source>
-        <translation>Аеробна</translation>
+        <translation>Aeróbico</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="133"/>
         <source>Anerobic</source>
-        <translation>Анаеробна</translation>
+        <translation>Anaeróbico</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="142"/>
         <source>VO2 Max</source>
-        <translation>VO2 Max</translation>
+        <translation>VO2 Máx</translation>
     </message>
 </context>
 <context>
@@ -643,7 +607,7 @@
         <location filename="../qml/tools/JSTools.js" line="87"/>
         <location filename="../qml/tools/JSTools.js" line="301"/>
         <source>Empty</source>
-        <translation>Порожній</translation>
+        <translation>Vazio</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="88"/>
@@ -651,7 +615,7 @@
         <location filename="../qml/tools/JSTools.js" line="302"/>
         <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Heartrate</source>
-        <translation>Пульс</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="90"/>
@@ -659,7 +623,7 @@
         <location filename="../qml/tools/JSTools.js" line="304"/>
         <location filename="../qml/tools/JSTools.js" line="305"/>
         <source>Pace</source>
-        <translation>Темп</translation>
+        <translation>Ritmo</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="92"/>
@@ -667,30 +631,30 @@
         <location filename="../qml/tools/JSTools.js" line="306"/>
         <location filename="../qml/tools/JSTools.js" line="307"/>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>Velocidade</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="94"/>
         <location filename="../qml/tools/JSTools.js" line="308"/>
         <source>Altitude</source>
-        <translation>Висота</translation>
+        <translation>Altitude</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="95"/>
         <location filename="../qml/tools/JSTools.js" line="309"/>
         <source>Distance</source>
-        <translation>Відстань</translation>
+        <translation>Distância</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="96"/>
         <source>Pause</source>
-        <translation>Пауза</translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="97"/>
         <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
-        <translation>Тривалість</translation>
+        <translation>Duração</translation>
     </message>
 </context>
 <context>
@@ -699,7 +663,7 @@
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -707,7 +671,7 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="9"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
@@ -740,42 +704,42 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation>Створити пару</translation>
+        <translation>Parear Dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation>Пристроїв не знайдено</translation>
+        <translation>Nenhum dispositivo encontrado</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
         <source>Bluetooth adapter is not available</source>
-        <translation>Bluetooth-адаптер недоступний</translation>
+        <translation>Adaptador bluetooth indisponível</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="210"/>
         <source>Select device type</source>
-        <translation>Виберіть тип пристрою</translation>
+        <translation>Selecione o tipo de dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="231"/>
         <source>Stop scanning</source>
-        <translation>Припинити сканування</translation>
+        <translation>Parar procura</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Scan for devices</source>
-        <translation>Сканувати пристрої</translation>
+        <translation>Procurar dispositivos</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="246"/>
         <source>Scanning for devices…</source>
-        <translation>Пошук пристроїв…</translation>
+        <translation>A procurar dispositivos…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="248"/>
         <source>Pairing…</source>
-        <translation>Створення пари…</translation>
+        <translation>A parear…</translation>
     </message>
 </context>
 <context>
@@ -783,17 +747,17 @@
     <message>
         <location filename="../src/timeformatter.cpp" line="33"/>
         <source>%1s</source>
-        <translation>%1сек</translation>
+        <translation>%1s</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="35"/>
         <source>%1m %2s</source>
-        <translation>%1хв %2сек</translation>
+        <translation>%1m %2s</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="39"/>
         <source>%1h %2m %3s</source>
-        <translation>%1год %2хв %3сек</translation>
+        <translation>%1h %2m %3s</translation>
     </message>
 </context>
 <context>
@@ -801,37 +765,37 @@
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="8"/>
         <source>Alarms</source>
-        <translation>Будильники</translation>
+        <translation>Alarmes</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="57"/>
         <source>Save Settings</source>
-        <translation>Зберегти налаштування</translation>
+        <translation>Gravar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="19"/>
         <source>Alarm 1</source>
-        <translation>Будильник 1</translation>
+        <translation>Alarme 1</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="25"/>
         <source>Alarm 2</source>
-        <translation>Будильник 2</translation>
+        <translation>Alarme 2</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="33"/>
         <source>Alarm 3</source>
-        <translation>Будильник 3</translation>
+        <translation>Alarme 3</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="40"/>
         <source>Alarm 4</source>
-        <translation>Будильник 4</translation>
+        <translation>Alarme 4</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="47"/>
         <source>Alarm 5</source>
-        <translation>Будильник 5</translation>
+        <translation>Alarme 5</translation>
     </message>
 </context>
 <context>
@@ -839,102 +803,102 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="102"/>
         <source>Notify on connect</source>
-        <translation>Повідомляти при підключенні</translation>
+        <translation>Notificar ao conectar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="238"/>
         <source>Save Settings</source>
-        <translation>Зберегти налаштування</translation>
+        <translation>Gravar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="144"/>
         <source>Sync activity data each hour</source>
-        <translation>Синхронізація даних про активність щогодини</translation>
+        <translation>Sincronizar atividade a cada hora</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="8"/>
         <source>Application Settings</source>
-        <translation>Налаштування програми</translation>
+        <translation>Configurações da Aplicação</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="28"/>
         <source>BT Adapter</source>
-        <translation>BlueTooth-адаптер</translation>
+        <translation>Adaptador BT</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="86"/>
         <source>Notifications</source>
-        <translation>Повідомлення</translation>
+        <translation>Notificações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="110"/>
         <source>Low battery notification</source>
-        <translation>Повідомлення про низький заряд акумулятора</translation>
+        <translation>Notificação de pouca pilha</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="118"/>
         <source>Navigation notifications</source>
-        <translation>Повідомлення про навігацію</translation>
+        <translation>Notificações de navegação</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="134"/>
         <source>Simulate event reminder support</source>
-        <translation>Імітація підтримки нагадувань про події</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="138"/>
         <source>Refresh rates</source>
-        <translation>Частота оновлення</translation>
+        <translation>Taxa de atualização</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="155"/>
         <source>Refresh weather every (%1) minutes</source>
-        <translation>Оновлювати погоду кожні (%1) хвилин</translation>
+        <translation>Atualizar clima a cada (%1) minutos</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Refresh calendar every (%1) minutes</source>
-        <translation>Оновлювати календар кожні (%1) хвилин</translation>
+        <translation>Atualizar calendário a cada (%1) minutos</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="169"/>
         <source>Amazfish Service</source>
-        <translation>Сервіс Amazfish</translation>
+        <translation>Serviço Amazfish</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="176"/>
         <source>Start service on boot</source>
-        <translation>Запустити службу при завантаженні</translation>
+        <translation>Iniciar serviço na inicialização</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="190"/>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation>Запуск/зупинка фонової служби Amazfish</translation>
+        <translation>Inicia/Para o Serviço de Fundo Amazfish</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="207"/>
         <source>Start</source>
-        <translation>Запуск</translation>
+        <translation>Iniciar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="216"/>
         <source>Stop</source>
-        <translation>Зупинка</translation>
+        <translation>Parar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="226"/>
         <source>Button Actions</source>
-        <translation>Дії кнопок</translation>
+        <translation>Ações com Botão</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Transliterate notifications</source>
-        <translation>Транслітерація повідомлень</translation>
+        <translation>Transliterar notificações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="94"/>
         <source>Set silent profile on connect</source>
-        <translation>Встановити безшумний профіль при підключенні</translation>
+        <translation>Definir perfil silencioso ao conectar</translation>
     </message>
 </context>
 <context>
@@ -942,57 +906,57 @@
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="10"/>
         <source>Button Actions</source>
-        <translation>Дії кнопок</translation>
+        <translation>Ações com Botão</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="27"/>
         <source>Double Press Action</source>
-        <translation>Подвійне натискання</translation>
+        <translation>Ação de Dois Cliques</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="37"/>
         <source>Triple Press Action</source>
-        <translation>Потрійне натискання</translation>
+        <translation>Ação de Três Cliques</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="47"/>
         <source>Quad Press Action</source>
-        <translation>Чотириразове натискання</translation>
+        <translation>Ação de Quatro Cliques</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="56"/>
         <source>Save Settings</source>
-        <translation>Зберегти налаштування</translation>
+        <translation>Gravar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="79"/>
         <source>No Action</source>
-        <translation>Без дій</translation>
+        <translation>Nenhuma Ação</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="80"/>
         <source>Next Track</source>
-        <translation>Наступний трек</translation>
+        <translation>Próxima Faixa</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="81"/>
         <source>Previous Track</source>
-        <translation>Попередній трек</translation>
+        <translation>Faixa Anterior</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="82"/>
         <source>Volume Up</source>
-        <translation>Збільшити гучність</translation>
+        <translation>Aumentar o Volume</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="83"/>
         <source>Volume Down</source>
-        <translation>Зменшити гучність</translation>
+        <translation>Diminuir o Volume</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="84"/>
         <source>Custom Script</source>
-        <translation>Спеціальний скрипт</translation>
+        <translation>Script Customizado</translation>
     </message>
 </context>
 <context>
@@ -1000,7 +964,7 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="8"/>
         <source>Device Settings</source>
-        <translation>Налаштування пристрою</translation>
+        <translation>Configurações do Dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="24"/>
@@ -1025,52 +989,52 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="43"/>
         <source>Date Display</source>
-        <translation>Відображення дати</translation>
+        <translation>Exibição de Data</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="46"/>
         <source>Time</source>
-        <translation>Час</translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="47"/>
         <source>Date/Time</source>
-        <translation>Дата/Час</translation>
+        <translation>Data/Hora</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="57"/>
         <source>Time Format</source>
-        <translation>Формат часу</translation>
+        <translation>Formato de Hora</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="61"/>
         <source>12hr</source>
-        <translation>12 годин</translation>
+        <translation>12hr</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="60"/>
         <source>24hr</source>
-        <translation>24 години</translation>
+        <translation>24hr</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="115"/>
         <source>Save Settings</source>
-        <translation>Зберегти налаштування</translation>
+        <translation>Gravar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="71"/>
         <source>Distance Unit</source>
-        <translation>Одиниці відстані</translation>
+        <translation>Unidade de Distância</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="74"/>
         <source>Metric</source>
-        <translation>Метрична система</translation>
+        <translation>Métrica</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="75"/>
         <source>Imperial</source>
-        <translation>Імперська система</translation>
+        <translation>Imperial</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="28"/>
@@ -1080,7 +1044,7 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="20"/>
         <source>Language</source>
-        <translation>Мова</translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="29"/>
@@ -1110,17 +1074,17 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="86"/>
         <source>Disconnect Notification</source>
-        <translation>Повідомлення про відключення</translation>
+        <translation>Notificação ao Desconectar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="104"/>
         <source>Huami Display Items</source>
-        <translation>Елементи дисплея Huami</translation>
+        <translation>Items de Exibição Huami</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="96"/>
         <source>Realtime HRM measurement</source>
-        <translation>Вимірювання частоти серцевих скорочень у режимі реального часу</translation>
+        <translation>Medida de HRM em tempo real</translation>
     </message>
 </context>
 <context>
@@ -1128,107 +1092,107 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="10"/>
         <source>Huami Display Items</source>
-        <translation>Елементи дисплея Huami</translation>
+        <translation>Elementos de Exibição Huami</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="16"/>
         <source>Save Settings</source>
-        <translation>Зберегти налаштування</translation>
+        <translation>Gravar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="69"/>
         <source>Status</source>
-        <translation>Статус</translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="70"/>
         <source>Heartrate</source>
-        <translation>Пульс</translation>
+        <translation>Frequência cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="71"/>
         <source>Workout</source>
-        <translation>Тренування</translation>
+        <translation>Exercício</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="72"/>
         <source>Weather</source>
-        <translation>Погода</translation>
+        <translation>Clima</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="73"/>
         <source>Notifications</source>
-        <translation>Повідомлення</translation>
+        <translation>Notificações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="74"/>
         <source>More</source>
-        <translation>Більше</translation>
+        <translation>Mais</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="75"/>
         <source>Do Not Disturb</source>
-        <translation>Не турбувати</translation>
+        <translation>Não Perturbe</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="76"/>
         <source>Alarms</source>
-        <translation>Будильники</translation>
+        <translation>Alarmes</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="78"/>
         <source>Music</source>
-        <translation>Музика</translation>
+        <translation>Música</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="82"/>
         <source>Mute Phone</source>
-        <translation>Вимкнути звук телефону</translation>
+        <translation>Silenciar Telemóvel</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="86"/>
         <source>Settings</source>
-        <translation>Налаштування</translation>
+        <translation>Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="87"/>
         <source>Activity</source>
-        <translation>Активність</translation>
+        <translation>Atividade</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="88"/>
         <source>Event Reminder</source>
-        <translation>Нагадування про подію</translation>
+        <translation>Lembrete de Evento</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="90"/>
         <source>PAI</source>
-        <translation>PAI</translation>
+        <translation>IPA</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="91"/>
         <source>World Clock</source>
-        <translation>Світовий годинник</translation>
+        <translation>Relógio Mundial</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="93"/>
         <source>Stress</source>
-        <translation>Стрес</translation>
+        <translation>Estresse</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="94"/>
         <source>Period</source>
-        <translation>Період</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="105"/>
         <source>Alexa</source>
-        <translation>Алекса</translation>
+        <translation>Alexa</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="89"/>
         <source>Compass</source>
-        <translation>Компас</translation>
+        <translation>Bússola</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="84"/>
@@ -1238,22 +1202,22 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="80"/>
         <source>Timer</source>
-        <translation>Таймер</translation>
+        <translation>Temporizador</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="77"/>
         <source>Take Photo</source>
-        <translation>Зробити фото</translation>
+        <translation>Tirar Foto</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="79"/>
         <source>Stopwatch</source>
-        <translation>Секундомір</translation>
+        <translation>Cronômetro</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="81"/>
         <source>Find Phone</source>
-        <translation>Знайти телефон</translation>
+        <translation>Encontrar Telemóvel</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="83"/>
@@ -1263,82 +1227,82 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="85"/>
         <source>Watch Face</source>
-        <translation>Циферблат годинника</translation>
+        <translation>Aparência do Relógio</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="92"/>
         <source>Timer/Stopwatch</source>
-        <translation>Таймер/Секундомір</translation>
+        <translation>Temporizador/Cronômetro</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="95"/>
         <source>Goal</source>
-        <translation>Мета</translation>
+        <translation>Meta</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="96"/>
         <source>Sleep</source>
-        <translation>Сон</translation>
+        <translation>Sono</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="97"/>
         <source>SpO2</source>
-        <translation>SpO2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="98"/>
         <source>Events</source>
-        <translation>Події</translation>
+        <translation>Eventos</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="99"/>
         <source>Widgets</source>
-        <translation>Віджети</translation>
+        <translation>Widgets</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="100"/>
         <source>Breathing</source>
-        <translation>Дихання</translation>
+        <translation>Respiração</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="101"/>
         <source>Steps</source>
-        <translation>Кроки</translation>
+        <translation>Passos</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="102"/>
         <source>Distance</source>
-        <translation>Відстань</translation>
+        <translation>Distância</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="103"/>
         <source>Calories</source>
-        <translation>Калорії</translation>
+        <translation>Calorias</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="104"/>
         <source>Pomodoro</source>
-        <translation>Pomodoro (таймер фокусування)</translation>
+        <translation>Pomodoro</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="106"/>
         <source>Battery</source>
-        <translation>Акумулятор</translation>
+        <translation>Pilha</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="107"/>
         <source>Temperature</source>
-        <translation>Температура</translation>
+        <translation>Temperatura</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="108"/>
         <source>Barometer</source>
-        <translation>Барометр</translation>
+        <translation>Barômetro</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="109"/>
         <source>Flashlight</source>
-        <translation>Ліхтарик</translation>
+        <translation>Lanterna</translation>
     </message>
 </context>
 <context>
@@ -1346,46 +1310,46 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="8"/>
         <source>Settings Menu</source>
-        <translation>Меню налаштувань</translation>
+        <translation>Menu de Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="64"/>
         <source>User Settings</source>
-        <translation>Налаштування користувача</translation>
+        <translation>Configurações do Utilizador</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="65"/>
         <source>Device Settings</source>
-        <translation>Налаштування пристрою</translation>
+        <translation>Configurações do Dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="66"/>
         <source>Application Settings</source>
-        <translation>Налаштування програми</translation>
+        <translation>Configurações de Aplicação</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="46"/>
         <location filename="../qml/pages/Settings-menu.qml" line="67"/>
         <source>Alarms</source>
-        <translation>Будильники</translation>
+        <translation>Alarmes</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
         <location filename="../qml/pages/Settings-menu.qml" line="73"/>
         <source>Donate</source>
-        <translation>Пожертвувати</translation>
+        <translation>Doar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="33"/>
         <location filename="../qml/pages/Settings-menu.qml" line="49"/>
         <location filename="../qml/pages/Settings-menu.qml" line="69"/>
         <source>Weather</source>
-        <translation>Погода</translation>
+        <translation>Clima</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="68"/>
         <source>Notifications</source>
-        <translation type="unfinished">Повідомлення</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="70"/>
@@ -1400,7 +1364,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
         <source>Debug Info</source>
-        <translation>Інформація про налагодження</translation>
+        <translation>Informações de Debug</translation>
     </message>
 </context>
 <context>
@@ -1413,135 +1377,131 @@
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="9"/>
         <source>Save Settings</source>
-        <translation type="unfinished">Зберегти налаштування</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="36"/>
         <source>Remove</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Settings-user</name>
     <message>
-        <source>Profile Settings</source>
-        <translation type="vanished">Профіль</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/Settings-user.qml" line="27"/>
         <location filename="../qml/pages/Settings-user.qml" line="28"/>
         <source>Name:</source>
-        <translation>Ім&apos;я:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="35"/>
         <source>Birthday</source>
-        <translation>Дата народження</translation>
+        <translation>Aniversário</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="63"/>
         <source>Gender</source>
-        <translation>Стать</translation>
+        <translation>Género</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="66"/>
         <source>Male</source>
-        <translation>Чоловіча</translation>
+        <translation>Masculino</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="67"/>
         <source>Female</source>
-        <translation>Жіноча</translation>
+        <translation>Feminino</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="76"/>
         <source>Height (cm): </source>
-        <translation>Висота (см): </translation>
+        <translation>Altura (cm): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="84"/>
         <source>Weight (kg): </source>
-        <translation>Вага (кг): </translation>
+        <translation>Peso (kg): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="94"/>
         <source>Wear Location</source>
-        <translation>Де носяться годинник</translation>
+        <translation>Local de Uso</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="97"/>
         <source>Left</source>
-        <translation>Зліва</translation>
+        <translation>Esquerda</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="98"/>
         <source>Right</source>
-        <translation>Справа</translation>
+        <translation>Direita</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="113"/>
         <source>Display on lift wrist</source>
-        <translation>Увімкнути екран поворотом зап&apos;ястя</translation>
+        <translation>Exibir ao levantar pulso</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="177"/>
         <source>Goal (steps): </source>
-        <translation>Мета (кроки): </translation>
+        <translation>Meta (passos): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="184"/>
         <source>Alert on fitness goal</source>
-        <translation>Повідомляти про досягнення цільового навантаження</translation>
+        <translation>Alerta de meta de exercícios</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="194"/>
         <source>Use HRM for Sleep Detection</source>
-        <translation>Використовуйте пульс для виявлення сну</translation>
+        <translation>Usar HRM para Detecção de Sono</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="204"/>
         <source>All day HRM interval (minutes): </source>
-        <translation>Інтервал вимірювань пульсу (хвилин): </translation>
+        <translation>Intervalo de HRM do dia todo (minutos): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="209"/>
         <source>Save Profile</source>
-        <translation>Зберегти профіль</translation>
+        <translation>Gravar Perfil</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="22"/>
         <source>Personal data</source>
-        <translation>Персональні дані</translation>
+        <translation>Dados pessoais</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="8"/>
         <source>User Settings</source>
-        <translation>Налаштування користувача</translation>
+        <translation>Configurações de Utilizador</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="88"/>
         <source>Personal preferences</source>
-        <translation>Особисті уподобання</translation>
+        <translation>Preferências pessoais</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="188"/>
         <source>Heartrate usage</source>
-        <translation>Використання пульсу</translation>
+        <translation>Utilização de batimento cardíaco</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="116"/>
         <source>Off</source>
-        <translation>Вимк.</translation>
+        <translation>Desligado</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="117"/>
         <source>On</source>
-        <translation>Увімк.</translation>
+        <translation>Ligado</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="118"/>
         <source>Schedule</source>
-        <translation>Таблиця</translation>
+        <translation>Agendar</translation>
     </message>
 </context>
 <context>
@@ -1549,38 +1509,38 @@
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="70"/>
         <source>Sleep Summary</source>
-        <translation>Підсумок сну</translation>
+        <translation>Resumo de Sono</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="9"/>
         <source>Sleep</source>
-        <translation>Сон</translation>
+        <translation>Sono</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="74"/>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation>dd/MM</translation>
+        <translation>MM/dd</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="75"/>
         <source>Hours</source>
-        <translation>Години</translation>
+        <translation>Horas</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="29"/>
         <source>Total %1</source>
-        <translation>Всього %1</translation>
+        <translation>Total %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="38"/>
         <source>Light %1</source>
-        <translation>Швидкий %1</translation>
+        <translation>Leve %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="47"/>
         <source>Deep %1</source>
-        <translation>Глибокий %1</translation>
+        <translation>Profundo %1</translation>
     </message>
 </context>
 <context>
@@ -1617,58 +1577,22 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="360"/>
         <source>Send to Strava</source>
-        <translation>Надіслати до Strava</translation>
+        <translation>Enviar para Strava</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="169"/>
         <source>Data:</source>
-        <translation>Дата:</translation>
-    </message>
-    <message>
-        <source>Steps</source>
-        <translation type="vanished">Кроки</translation>
-    </message>
-    <message>
-        <source>Active Seconds</source>
-        <translation type="vanished">Активні секунди</translation>
-    </message>
-    <message>
-        <source>Calories</source>
-        <translation type="vanished">Калорії</translation>
-    </message>
-    <message>
-        <source>Distance</source>
-        <translation type="vanished">Відстань</translation>
-    </message>
-    <message>
-        <source>Ascent</source>
-        <translation type="vanished">Підйом</translation>
+        <translation>Dados:</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="87"/>
         <source>%1°; %2°</source>
-        <translation type="unfinished"></translation>
+        <translation>%1°; %2°</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="89"/>
         <source>%1°; %2°; %3m</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Descent</source>
-        <translation type="vanished">Спуск</translation>
-    </message>
-    <message>
-        <source>Max Altitude</source>
-        <translation type="vanished">Максимальна висота</translation>
-    </message>
-    <message>
-        <source>Min Altitude</source>
-        <translation type="vanished">Мінімальна висота</translation>
-    </message>
-    <message>
-        <source>Min Pace</source>
-        <translation type="vanished">Мін. Темп</translation>
+        <translation>%1°; %2°; %3m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="150"/>
@@ -1690,134 +1614,6 @@
         <source>Send to FitTrackee</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Max Pace</source>
-        <translation type="vanished">Макс. Темп</translation>
-    </message>
-    <message>
-        <source>Average HR</source>
-        <translation type="vanished">Середній пульс</translation>
-    </message>
-    <message>
-        <source>Average Pace</source>
-        <translation type="vanished">Середній темп</translation>
-    </message>
-    <message>
-        <source>Average Stride</source>
-        <translation type="vanished">Середня довжина кроку</translation>
-    </message>
-    <message>
-        <source>Max HR</source>
-        <translation type="vanished">Макс. пульс</translation>
-    </message>
-    <message>
-        <source>Time Ascending</source>
-        <translation type="vanished">Час сходження</translation>
-    </message>
-    <message>
-        <source>Time Descending</source>
-        <translation type="vanished">Час спуску</translation>
-    </message>
-    <message>
-        <source>Time Flat</source>
-        <translation type="vanished">Час на рівній</translation>
-    </message>
-    <message>
-        <source>Average Stroke</source>
-        <translation type="vanished">Середній гребок</translation>
-    </message>
-    <message>
-        <source>Average Stroke/s</source>
-        <translation type="vanished">Середня к-сть кроків/с</translation>
-    </message>
-    <message>
-        <source>Average Lap Pace</source>
-        <translation type="vanished">Середній темп кола</translation>
-    </message>
-    <message>
-        <source>Strokes</source>
-        <translation type="vanished">Гребки</translation>
-    </message>
-    <message>
-        <source>SWOLF Index</source>
-        <translation type="vanished">Індекс SWOLF</translation>
-    </message>
-    <message>
-        <source>Swim Style</source>
-        <translation type="vanished">Стиль плавання</translation>
-    </message>
-    <message>
-        <source>Laps</source>
-        <translation type="vanished">Кола</translation>
-    </message>
-    <message>
-        <source>Max Latitude</source>
-        <translation type="vanished">Макс. широта</translation>
-    </message>
-    <message>
-        <source>Min Latitude</source>
-        <translation type="vanished">Мін. широта</translation>
-    </message>
-    <message>
-        <source>Max Longitude</source>
-        <translation type="vanished">Макс. довгота</translation>
-    </message>
-    <message>
-        <source>Min Longitude</source>
-        <translation type="vanished">Мін. довгота</translation>
-    </message>
-    <message>
-        <source>Max Speed</source>
-        <translation type="vanished">Макс. швидкість</translation>
-    </message>
-    <message>
-        <source>Total Stride</source>
-        <translation type="vanished">Загальний крок</translation>
-    </message>
-    <message>
-        <source>steps</source>
-        <translation type="vanished">кроків</translation>
-    </message>
-    <message>
-        <source>seconds</source>
-        <translation type="vanished">секунд</translation>
-    </message>
-    <message>
-        <source>kcal</source>
-        <translation type="vanished">ккал</translation>
-    </message>
-    <message>
-        <source>meters</source>
-        <translation type="vanished">метрів</translation>
-    </message>
-    <message>
-        <source>seconds/m</source>
-        <translation type="vanished">сек/м</translation>
-    </message>
-    <message>
-        <source>bpm</source>
-        <translation type="vanished">уд/хв</translation>
-    </message>
-    <message>
-        <source>seconds/km</source>
-        <translation type="vanished">сек/км</translation>
-    </message>
-    <message>
-        <source>cm</source>
-        <translation type="vanished">см</translation>
-    </message>
-    <message>
-        <source>strokes/s</source>
-        <translation type="vanished">гребків/сек</translation>
-    </message>
-    <message>
-        <source>strokes</source>
-        <translation type="vanished">гребки</translation>
-    </message>
-    <message>
-        <source>swolf</source>
-        <translation type="vanished">swolf</translation>
-    </message>
 </context>
 <context>
     <name>SportsActivityKindPage</name>
@@ -1830,23 +1626,19 @@
 <context>
     <name>SportsSummaryPage</name>
     <message>
-        <source>Activity</source>
-        <translation type="vanished">Активність</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="18"/>
         <source>Sports Activities</source>
-        <translation>Спортивні заходи</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
         <source>Download Next Activity</source>
-        <translation>Завантажити наступну активність</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
         <source>Remove</source>
-        <translation>Видалити</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1856,7 +1648,7 @@
         <location filename="../qml/pages/StepsPage.qml" line="51"/>
         <location filename="../qml/pages/StepsPage.qml" line="55"/>
         <source>Steps</source>
-        <translation>Кроки</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1865,7 +1657,7 @@
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <source>Steps</source>
-        <translation type="unfinished">Кроки</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1873,33 +1665,33 @@
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="25"/>
         <source>Strava settings</source>
-        <translation>Налаштування Strava</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="36"/>
         <source>Logout</source>
-        <translation>Вийти</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="36"/>
         <source>Login</source>
-        <translation>Увійти</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="89"/>
         <source>User Name: </source>
-        <translation>Ім&apos;я користувача: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="95"/>
         <source>Country: </source>
-        <translation>Країна: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="70"/>
         <source>not logged in</source>
-        <translation>не зареєстрований</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1907,72 +1699,72 @@
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="26"/>
         <source>Strava Upload</source>
-        <translation>Завантаження Strava</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="43"/>
         <source>Activity name for Strava</source>
-        <translation>Назва активності для Strava</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="44"/>
         <source>Name</source>
-        <translation>Ім&apos;я</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="48"/>
         <source>Description</source>
-        <translation>Опис</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="55"/>
         <source>Activity description for Strava</source>
-        <translation>Опис активності для Strava</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="63"/>
         <source>Type (Strava)</source>
-        <translation>Тип (Strava)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="68"/>
         <source>Private</source>
-        <translation>Приватний</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="72"/>
         <source>Commute</source>
-        <translation>Поїздка</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="76"/>
         <source>Upload</source>
-        <translation>Завантажити</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="133"/>
         <source>Uploading data...</source>
-        <translation>Завантаження даних...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="150"/>
         <source>Checking upload...</source>
-        <translation>Перевірка завантаження...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="213"/>
         <source>TCX uploaded...</source>
-        <translation>TCX завантажено...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="248"/>
         <source>Activity upload complete</source>
-        <translation>Завантаження активності завершено</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
         <source>An unknown error occurred</source>
-        <translation>Сталася невідома помилка</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1981,7 +1773,7 @@
         <location filename="../qml/pages/StressDataPage.qml" line="9"/>
         <location filename="../qml/pages/StressDataPage.qml" line="76"/>
         <source>Stress</source>
-        <translation type="unfinished">Стрес</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="25"/>
@@ -2002,7 +1794,7 @@
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="107"/>
         <source>Relaxed</source>
-        <translation type="unfinished">Спокійно</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="115"/>
@@ -2042,7 +1834,7 @@
         <location filename="../qml/components/Translation.js" line="5"/>
         <location filename="../qml/components/Translation.js" line="5"/>
         <source>Activity</source>
-        <translation type="unfinished">Активність</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="6"/>
@@ -3746,13 +3538,13 @@
         <location filename="../qml/components/Translation.js" line="303"/>
         <location filename="../qml/components/Translation.js" line="303"/>
         <source>Ascent</source>
-        <translation type="unfinished">Підйом</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="304"/>
         <location filename="../qml/components/Translation.js" line="304"/>
         <source>Time Ascending</source>
-        <translation type="unfinished">Час сходження</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="305"/>
@@ -3770,13 +3562,13 @@
         <location filename="../qml/components/Translation.js" line="307"/>
         <location filename="../qml/components/Translation.js" line="350"/>
         <source>Average Pace</source>
-        <translation type="unfinished">Середній темп</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="308"/>
         <location filename="../qml/components/Translation.js" line="308"/>
         <source>Average Lap Pace</source>
-        <translation type="unfinished">Середній темп кола</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="309"/>
@@ -3790,7 +3582,7 @@
         <location filename="../qml/components/Translation.js" line="310"/>
         <location filename="../qml/components/Translation.js" line="355"/>
         <source>Average Stride</source>
-        <translation type="unfinished">Середня довжина кроку</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="311"/>
@@ -3830,7 +3622,7 @@
         <location filename="../qml/components/Translation.js" line="318"/>
         <location filename="../qml/components/Translation.js" line="319"/>
         <source>Calories</source>
-        <translation type="unfinished">Калорії</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="320"/>
@@ -3842,19 +3634,19 @@
         <location filename="../qml/components/Translation.js" line="321"/>
         <location filename="../qml/components/Translation.js" line="321"/>
         <source>Descent</source>
-        <translation type="unfinished">Спуск</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="322"/>
         <location filename="../qml/components/Translation.js" line="322"/>
         <source>Time Descending</source>
-        <translation type="unfinished">Час спуску</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="323"/>
         <location filename="../qml/components/Translation.js" line="323"/>
         <source>Distance</source>
-        <translation type="unfinished">Відстань</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="324"/>
@@ -3884,13 +3676,13 @@
         <location filename="../qml/components/Translation.js" line="328"/>
         <location filename="../qml/components/Translation.js" line="328"/>
         <source>Laps</source>
-        <translation type="unfinished">Кола</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="329"/>
         <location filename="../qml/components/Translation.js" line="329"/>
         <source>Max Altitude</source>
-        <translation type="unfinished">Максимальна висота</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="331"/>
@@ -3910,25 +3702,25 @@
         <location filename="../qml/components/Translation.js" line="334"/>
         <location filename="../qml/components/Translation.js" line="334"/>
         <source>Max Latitude</source>
-        <translation type="unfinished">Макс. широта</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="335"/>
         <location filename="../qml/components/Translation.js" line="335"/>
         <source>Max Longitude</source>
-        <translation type="unfinished">Макс. довгота</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="336"/>
         <location filename="../qml/components/Translation.js" line="336"/>
         <source>Max Pace</source>
-        <translation type="unfinished">Макс. Темп</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="337"/>
         <location filename="../qml/components/Translation.js" line="337"/>
         <source>Max Speed</source>
-        <translation type="unfinished">Макс. швидкість</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="338"/>
@@ -3940,7 +3732,7 @@
         <location filename="../qml/components/Translation.js" line="339"/>
         <location filename="../qml/components/Translation.js" line="339"/>
         <source>Min Altitude</source>
-        <translation type="unfinished">Мінімальна висота</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="340"/>
@@ -3952,19 +3744,19 @@
         <location filename="../qml/components/Translation.js" line="341"/>
         <location filename="../qml/components/Translation.js" line="341"/>
         <source>Min Latitude</source>
-        <translation type="unfinished">Мін. широта</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="342"/>
         <location filename="../qml/components/Translation.js" line="342"/>
         <source>Min Longitude</source>
-        <translation type="unfinished">Мін. довгота</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="343"/>
         <location filename="../qml/components/Translation.js" line="343"/>
         <source>Min Pace</source>
-        <translation type="unfinished">Мін. Темп</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="344"/>
@@ -4018,7 +3810,7 @@
         <location filename="../qml/components/Translation.js" line="353"/>
         <location filename="../qml/components/Translation.js" line="353"/>
         <source>Steps</source>
-        <translation type="unfinished">Кроки</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="314"/>
@@ -4040,7 +3832,7 @@
         <location filename="../qml/components/Translation.js" line="357"/>
         <location filename="../qml/components/Translation.js" line="357"/>
         <source>Strokes</source>
-        <translation type="unfinished">Гребки</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="358"/>
@@ -4076,13 +3868,13 @@
         <location filename="../qml/components/Translation.js" line="364"/>
         <location filename="../qml/components/Translation.js" line="364"/>
         <source>Swim Style</source>
-        <translation type="unfinished">Стиль плавання</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="365"/>
         <location filename="../qml/components/Translation.js" line="365"/>
         <source>SWOLF Index</source>
-        <translation type="unfinished">Індекс SWOLF</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="366"/>
@@ -4100,7 +3892,7 @@
         <location filename="../qml/components/Translation.js" line="368"/>
         <location filename="../qml/components/Translation.js" line="368"/>
         <source>Total Stride</source>
-        <translation type="unfinished">Загальний крок</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="369"/>
@@ -4118,7 +3910,7 @@
         <location filename="../qml/components/Translation.js" line="381"/>
         <location filename="../qml/components/Translation.js" line="381"/>
         <source>bpm</source>
-        <translation type="unfinished">уд/хв</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="382"/>
@@ -4126,13 +3918,13 @@
         <location filename="../qml/components/Translation.js" line="382"/>
         <location filename="../qml/components/Translation.js" line="383"/>
         <source>kcal</source>
-        <translation type="unfinished">ккал</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="384"/>
         <location filename="../qml/components/Translation.js" line="384"/>
         <source>cm</source>
-        <translation type="unfinished">см</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="385"/>
@@ -4194,7 +3986,7 @@
         <location filename="../qml/components/Translation.js" line="394"/>
         <location filename="../qml/components/Translation.js" line="396"/>
         <source>steps</source>
-        <translation type="unfinished">кроків</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="395"/>
@@ -4206,13 +3998,13 @@
         <location filename="../qml/components/Translation.js" line="397"/>
         <location filename="../qml/components/Translation.js" line="397"/>
         <source>strokes</source>
-        <translation type="unfinished">гребки</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="398"/>
         <location filename="../qml/components/Translation.js" line="398"/>
         <source>strokes/s</source>
-        <translation type="unfinished">гребків/сек</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="399"/>
@@ -4226,12 +4018,12 @@
     <message>
         <location filename="../qml/pages/UnpairDeviceDialog.qml" line="20"/>
         <source>Unpair</source>
-        <translation>Від&apos;єднати</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/UnpairDeviceDialog.qml" line="31"/>
         <source>Before proceeding you need to unpair your current device.</source>
-        <translation>Перш ніж продовжувати, необхідно від&apos;єднатися від поточного пристрою.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

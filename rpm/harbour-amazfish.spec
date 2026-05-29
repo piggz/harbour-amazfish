@@ -92,11 +92,13 @@ Links:
 %build
 %if 0%{?sailfishos}
     cmake \
+        -DPROJECT_GIT_VERSION=%{version} \
         -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
         -DFLAVOR=silica \
         .
 %else
     cmake \
+        -DPROJECT_GIT_VERSION=%{version} \
         -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
         -DFLAVOR=kirigami \
         .
