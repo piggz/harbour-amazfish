@@ -22,14 +22,17 @@ public:
         HRV = 8,
         Spo2Normal = 9,
         Spo2Sleep = 10,
-        BodyTemperature = 11
+        BodyTemperature = 11,
+        StressAuto = 12,
+        StressManual = 13,
+        StressSummary = 14
     };
     Q_ENUM(Type)
 
     DataSource();
     void setConnection(KDbConnection *conn);
 
-    Q_INVOKABLE QVariant data(DataSource::Type type, const QDate  &day);
+    Q_INVOKABLE QVariant data(const DataSource::Type type, const QDate  &day);
 
 private:
     KDbConnection *m_conn = nullptr;

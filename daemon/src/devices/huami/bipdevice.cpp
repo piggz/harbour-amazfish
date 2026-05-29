@@ -23,7 +23,10 @@ Amazfish::Features BipDevice::supportedFeatures() const
 
 Amazfish::DataTypes BipDevice::supportedDataTypes() const
 {
-    return Amazfish::DataType::TYPE_ACTIVITY | Amazfish::DataType::TYPE_GPS_TRACK | Amazfish::DataType::TYPE_HEART_RATE;
+    return Amazfish::DataType::TYPE_ACTIVITY
+        | Amazfish::DataType::TYPE_GPS_TRACK
+        | Amazfish::DataType::TYPE_HEART_RATE
+        | Amazfish::DataType::TYPE_SLEEP;
 }
 
 QString BipDevice::deviceType() const

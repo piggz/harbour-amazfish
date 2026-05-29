@@ -81,6 +81,7 @@ QtObject {
     property string iconWatch: "icon-m-watch"
     property string iconLevels: "icon-m-levels"
     property string iconAlarm: "icon-m-alarm"
+    property string iconNotifications: "icon-m-notifications"
     property string iconWeather: "icon-m-weather-d212-light"
     property string iconDiagnostic: "icon-m-diagnostic"
     property string iconFavoriteSelected: "icon-m-favorite-selected"

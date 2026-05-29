@@ -14,6 +14,7 @@
         <file>qml/custom-icons/icon-m-heartrate.png</file>
         <file>qml/custom-icons/icon-m-levels.png</file>
         <file>qml/custom-icons/icon-m-location.png</file>
+        <file>qml/custom-icons/icon-m-notifications.png</file>
         <file>qml/custom-icons/icon-m-steps2.png</file>
         <file>qml/custom-icons/icon-m-steps.png</file>
         <file>qml/custom-icons/icon-m-up-down.png</file>
@@ -81,5 +82,6 @@
         <file>qml/page-icons/icon-page-sleep.png</file>
         <file>qml/page-icons/icon-page-spo2.png</file>
         <file>qml/page-icons/icon-page-sport.png</file>
+        <file>qml/page-icons/icon-page-stress.png</file>
     </qresource>
 </RCC>

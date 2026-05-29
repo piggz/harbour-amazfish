@@ -46,6 +46,10 @@ public:
     class Forecast {
 
     public:
+
+        qreal precipProbability() const;
+        void setPrecipProbability(qreal precipProbability);
+
         qreal minTemperature() const;
         void setMinTemperature(qreal minTemperature);
 
@@ -89,6 +93,7 @@ public:
         void setWindDirection(uint8_t newWindDirection);
 
     private:
+        qreal m_precipProbability = 0;
         qreal m_temperature = 0;
         qreal m_minTemperature = 0;
         qreal m_maxTemperature = 0;
@@ -120,7 +125,6 @@ public:
     Q_PROPERTY(QString weatherIcon READ weatherIcon NOTIFY ready)
     Q_PROPERTY(qreal windDeg READ windDeg NOTIFY ready)
     Q_PROPERTY(qreal windSpeed READ windSpeed NOTIFY ready)
-    Q_PROPERTY(qreal windGusts READ windGusts NOTIFY ready)
     Q_PROPERTY(int humidity READ humidity NOTIFY ready)
     Q_PROPERTY(int clouds READ clouds NOTIFY ready)
 
@@ -132,7 +136,6 @@ public:
     QString weatherIcon() const;
     qreal windDeg() const;
     qreal windSpeed() const;
-    qreal windGusts() const;
     int humidity() const;
     int clouds() const;
 
@@ -172,7 +175,6 @@ private:
 
     qreal m_windDeg = 0;
     qreal m_windSpeed = 0;
-    qreal m_windGusts = 0;
     int m_humidity = 0;
     int m_clouds = 0;
 
@@ -183,5 +185,8 @@ private:
 
     QList<Forecast> m_forecasts;
 };
+
+QDebug operator<<(QDebug debug, const CurrentWeather::Forecast &forecast);
+QDebug operator<<(QDebug debug, const CurrentWeather &weather);
 
 #endif // CURRENTWEATHERMODEL_H

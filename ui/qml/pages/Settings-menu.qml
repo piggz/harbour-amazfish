@@ -65,6 +65,7 @@ PageListPL {
             append({"icon": styler.iconWatch, "name": qsTr("Device Settings"), "url": "Settings-device.qml"});
             append({"icon": styler.iconLevels, "name": qsTr("Application Settings"), "url": "Settings-app.qml"});
             append({"icon": styler.iconAlarm, "name": qsTr("Alarms"), "url": "Settings-alarms.qml"});
+            append({"icon": styler.iconNotifications, "name": qsTr("Notifications"), "url": "Settings-notifications.qml"});
             append({"icon": styler.iconWeather, "name": qsTr("Weather"), "url": "AddCityPage.qml"});
             append({"icon": styler.iconStrava, "name": qsTr("Strava"), "url": "StravaSettingsPage.qml"});
             append({"icon": styler.iconStrava, "name": qsTr("FitTrackee"), "url": "FitTrackeeSettingsPage.qml"});
