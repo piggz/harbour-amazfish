@@ -115,7 +115,7 @@
     <message>
         <location filename="../qml/pages/AuthKeyDialog.qml" line="18"/>
         <source>Enter auth key</source>
-        <translation>Entrez la clé d&apos;auth</translation>
+        <translation>Entrez une clé d&apos;authentification</translation>
     </message>
 </context>
 <context>
@@ -330,17 +330,17 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="356"/>
         <source>Update Calendar</source>
-        <translation>Mettre à jour calendrier</translation>
+        <translation>Mettre à jour le calendrier</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="369"/>
         <source>Music Control</source>
-        <translation>Contrôle musique</translation>
+        <translation>Contrôles de la musique</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="329"/>
         <source>Request Screenshot</source>
-        <translation>Demander capture d&apos;écran</translation>
+        <translation>Demander une capture d&apos;écran</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="208"/>
