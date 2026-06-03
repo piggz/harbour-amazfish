@@ -13,6 +13,7 @@
 #include "pinetimejfdevice.h"
 #include "dk08device.h"
 #include "garmin/garmindevice.h"
+#include "garmin/epixpro.h"
 
 #include <functional>
 #include <QMetaEnum>
@@ -45,7 +46,8 @@ static const QMap<QString, DeviceCreator> deviceMap = {
     { "Amazfit Cor", [](const QString &name) { return new BipLiteDevice(name); } },
     { "Mi Band 3", [](const QString &name) { return new BipLiteDevice(name); } },
     { "Mi Band 2", [](const QString &name) { return new BipLiteDevice(name); } },
-    { "Garmin Epix", [](const QString &name) { return new GarminDevice(name); } },
+    { "Generic Garmin", [](const QString &name) { return new GarminDevice(name); } },
+    { "Garmin Epix Pro", [](const QString &name) { return new EpixProDevice(name); } },
 
     };
 

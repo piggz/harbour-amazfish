@@ -25,18 +25,20 @@ GarminDevice::GarminDevice(const QString &pairedName, QObject *parent) : Abstrac
 Amazfish::Features GarminDevice::supportedFeatures() const
 {
 
+    //HRM and steps should be supported on all devices
+
     return  Amazfish::Feature::FEATURE_NONE
         | Amazfish::Feature::FEATURE_HRM
         // | Amazfish::Feature::FEATURE_ACTIVITY
         | Amazfish::Feature::FEATURE_STEPS
         // | Amazfish::Feature::FEATURE_ALARMS
-        | Amazfish::Feature::FEATURE_ALERT
+        // Amazfish::Feature::FEATURE_ALERT
         // | Amazfish::Feature::FEATURE_EVENT_REMINDER
         // | Amazfish::Feature::FEATURE_MUSIC_CONTROL
         // | Amazfish::Feature::FEATURE_BUTTON_ACTION
         // | Amazfish::Feature::FEATURE_SCREENSHOT
         // | Amazfish::Feature::FEATURE_FILE_INSTALL
-        | Amazfish::Feature::FEATURE_SPO2
+        // Amazfish::Feature::FEATURE_SPO2
         ;
 }
 
@@ -86,16 +88,17 @@ void GarminDevice::incomingCallEnded()
 
 void GarminDevice::pair()
 {
-    qDebug() << Q_FUNC_INFO << "Pairing with Garmin Epix";
+    qDebug() << Q_FUNC_INFO << "Pairing with Garmin " << devicePath();
 
     m_needsAuth = true;
     m_pairing = true;
     m_autoreconnect = true;
-    setConnectionState("pairing");
-    emit connectionStateChanged();
 
+
+    setConnectionState("pairing");
+    //emit connectionStateChanged();
     QBLEDevice::pair();
-    initialise();
+    //initialise();
  }
 
 
@@ -134,8 +137,12 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
 void GarminDevice::parseServices()
 {
     // Garmin is using a single service for all functions (Mlr), so we probably don't need full parsing.
-    qDebug() << Q_FUNC_INFO << "Parsing Services for Garmin Epix";
+    qDebug() << Q_FUNC_INFO << "Parsing Services for Garmin";
 
+    if (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI))
+    {
+        qDebug() << Q_FUNC_INFO << "Garmin: Communicator already exists, no parsing required.";
+    }
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
 
@@ -159,7 +166,7 @@ void GarminDevice::parseServices()
             QString uuid = devInterface.property("UUID").toString();
 
             qDebug() << "Creating service for: " << uuid;
-            if (uuid == CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI && !service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI)) {
+            if (uuid == CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI) {
                 qDebug() << "Added Garmin ML GDFI Service";
                 QSharedPointer<CommunicatorV2> com = QSharedPointer<CommunicatorV2>::create(path, this);
                 if (com)
@@ -184,6 +191,7 @@ void GarminDevice::parseServices()
         }
     }
     // if we are here, no Garmin device was detected
+
     emit message("No Garmin device detected");
     qDebug() << Q_FUNC_INFO << "Garmin: No supported device detected";
 

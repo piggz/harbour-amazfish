@@ -840,16 +840,24 @@ void CommunicatorV2::registerServices() {
     {
         qDebug() << "Garmin: Can't register services due to missing send characteristic";
     }
+    if (!m_device)
+    {
+        qDebug() << "Garmin: No device configured";
+    }
+
     QString errorMsg;
 
 
-    // GFDI Service is already registered
     registerService(Service::GFDI, true);
-    registerService(Service::RealtimeSpo2, true);
-    registerService(Service::RealtimeHr, true);
+    if ((qobject_cast<GarminDevice *>(m_device))->supportedFeatures() &  Amazfish::Feature::FEATURE_SPO2 )
+        registerService(Service::RealtimeSpo2, true);
+    if ((qobject_cast<GarminDevice *>(m_device))->supportedFeatures() &  Amazfish::Feature::FEATURE_HRM )
+        registerService(Service::RealtimeHr, true);
+    if ((qobject_cast<GarminDevice *>(m_device))->supportedFeatures() &  Amazfish::Feature::FEATURE_STEPS )
+        registerService(Service::RealtimeSteps, true);
+
     //HRV is not shown in the GUI so no realtime info needed
     //registerService(Service::RealtimeHrv, true);
-    registerService(Service::RealtimeSteps, true);
 
     // Battery Status needs to be treated differently
     // response is not handled yet so no battery information shown

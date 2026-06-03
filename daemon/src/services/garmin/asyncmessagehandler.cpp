@@ -9,31 +9,16 @@
 
 AsyncMessageHandler::AsyncMessageHandler(QObject* parent)
     : QObject(parent)
+    , mInitializationComplete(false)
+    ,mPairingDetected(false)
     , mSendSemaphore(1)
 {
-    // -----------------------------
-    // Weather provider initialisation
-    //
-    // UnifiedWeatherProvider::new(WeatherProviderType::Bom, Some(600))
-    // if OPENAQ_API_KEY set -> enable_air_quality(...)
-    //
-    // Assumes your UnifiedWeatherProvider API exists.
-    // -----------------------------
+    mCommunicator.reset();
+    mNotificationHandler.reset();
 
-    // This i not used at the moment, left here for future work
-    try {
-        // You can replace these with your actual factory/constructor calls
-        // once you wire in your provider header.
-        // m_weatherProvider = QSharedPointer<UnifiedWeatherProvider>::create(WeatherProviderType::Bom, 600);
+    mMessageQueue.clear();
+    mPendingProtobufChunks.clear();
 
-        const QByteArray apiKey = qgetenv("OPENAQ_API_KEY");
-        if (!apiKey.isEmpty()) {
-            emit logInfo(QStringLiteral("🌍 Enabling OpenAQ air quality support"));
-            // m_weatherProvider->enableAirQuality(QString::fromUtf8(apiKey), 600);
-        }
-    } catch (...) {
-        // Keep silent  (it doesn't crash the handler if env var/feature not available)
-    }
 
     // DataTransferHandler::new()
     // Assumes DataTransferHandler has a default constructor or static create().
@@ -45,6 +30,7 @@ AsyncMessageHandler::AsyncMessageHandler(QObject* parent)
     // We'll tick every 10ms and enforce the 50ms spacing by holding semaphore
     // and releasing it after 50ms.
     // -----------------------------
+    m_queueTimer.setParent(this);
     m_queueTimer.setInterval(10);
     connect(&m_queueTimer, &QTimer::timeout, this, &AsyncMessageHandler::processQueueTick);
     m_queueTimer.start();
