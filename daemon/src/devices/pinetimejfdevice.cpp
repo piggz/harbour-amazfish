@@ -8,6 +8,7 @@
 #include "dfuoperation.h"
 #include "infinitimenavservice.h"
 #include "immediatealertservice.h"
+#include "immediatealertserverservice.h"
 #include "hrmservice.h"
 #include "infinitimemotionservice.h"
 #include "infinitimeweatherservice.h"
@@ -16,6 +17,7 @@
 #include "batteryservice.h"
 #include "amazfishconfig.h"
 #include "realtimeactivitysample.h"
+#include "qble/qblelocalapplication.h"
 #include <QtXml/QtXml>
 
 namespace {
@@ -191,6 +193,9 @@ void PinetimeJFDevice::initialise()
 {
     setConnectionState("connected");
     parseServices();
+
+    // Start the GATT server (IAS) so InfiniTime can find this phone
+    setupGattServer();
 
     AlertNotificationService *alert = qobject_cast<AlertNotificationService*>(service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION));
     if (alert) {
@@ -571,5 +576,50 @@ void PinetimeJFDevice::immediateAlert(int level)
     ImmediateAlertService *ias = qobject_cast<ImmediateAlertService*>(service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT));
     if (ias) {
         ias->sendAlert((ImmediateAlertService::Levels)level);
+    }
+}
+
+// ---------------------------------------------------------------------------
+// GATT server — serve IAS so that InfiniTime FindMyPhone can alert this device
+// ---------------------------------------------------------------------------
+
+void PinetimeJFDevice::setupGattServer()
+{
+    if (m_iasApp) {
+        qDebug() << Q_FUNC_INFO << "GATT server already set up";
+        return;
+    }
+
+    qDebug() << Q_FUNC_INFO << "Setting up IAS GATT server for PineTime";
+
+    // Application root — implements org.freedesktop.DBus.ObjectManager on system bus
+    m_iasApp = new QBLELocalApplication(QStringLiteral("/uk/co/piggz/amazfish/gatt"), this);
+
+    // IAS service (index 0), UUID 0x1802
+    m_iasService = new ImmediateAlertServerService(QDBusConnection::systemBus(), 0, m_iasApp);
+    m_iasApp->addService(m_iasService);
+
+    connect(m_iasService, &ImmediateAlertServerService::alertLevelChanged, this, &PinetimeJFDevice::onImmediateAlertFromWatch);
+
+    // Register with the BlueZ adapter from config
+    QString adapterPath = AmazfishConfig::instance()->localAdapter();
+    m_iasApp->registerWithAdapter(adapterPath);
+}
+
+void PinetimeJFDevice::onImmediateAlertFromWatch(int level)
+{
+    qDebug() << Q_FUNC_INFO << "FindMyPhone alert level from watch:" << level;
+
+    switch (static_cast<ImmediateAlertServerService::Levels>(level)) {
+    case ImmediateAlertServerService::Levels::HighAlert:
+    case ImmediateAlertServerService::Levels::MildAlert:
+        emit deviceEvent(AbstractDevice::EVENT_FIND_PHONE);
+        break;
+    case ImmediateAlertServerService::Levels::NoAlert:
+        emit deviceEvent(AbstractDevice::EVENT_CANCEL_FIND_PHONE);
+        break;
+    default:
+        qWarning() << Q_FUNC_INFO << "Unknown alert level:" << level;
+        break;
     }
 }
