@@ -1,6 +1,5 @@
 #include "garmindevice.h"
 #include "services/garmin/communicator_v2.h"
-//#include "services/garmin/garminnotification.h"
 #include "hrmservice.h"
 #include "deviceinfoservice.h"
 #include "amazfishconfig.h"
@@ -66,23 +65,41 @@ AbstractFirmwareInfo *GarminDevice::firmwareInfo(const QByteArray &bytes, const 
 void GarminDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
     qDebug() << Q_FUNC_INFO;
-    CommunicatorV2 *svc = qobject_cast<CommunicatorV2*> (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI));
-    NotificationSpec note;
-    note.body = notification.body;
-    note.sourceName = notification.appName;
-    note.title = notification.summary;
-    note.id=0;
-    emit (sendAlertToDevice(note));
+    if (mNotificationHandler)
+    {
+        NotificationSpec note;
+        note.body = notification.body;
+        note.sourceName = notification.appName;
+        note.title = notification.summary;
+        note.id=0;
+        mNotificationHandler->onNotification(note);
+    }
+    else qDebug() << Q_FUNC_INFO << "Garmin: No notification handler!";
 }
 
 void GarminDevice::incomingCall(const QString &caller)
 {
     qDebug() << Q_FUNC_INFO << caller;
+    if (mNotificationHandler)
+    {
+        CallSpec call;
+        call.name = caller;
+        call.command = CallCommand::Incoming;
+        mNotificationHandler->onSetCallState(call);
+    }
+    else qDebug() << Q_FUNC_INFO << "Garmin: No notification handler!";
 }
 
 void GarminDevice::incomingCallEnded()
 {
     qDebug() << Q_FUNC_INFO;
+    if (mNotificationHandler)
+    {
+        CallSpec call;
+        call.command = CallCommand::End;
+        mNotificationHandler->onSetCallState(call);
+    }
+    else qDebug() << Q_FUNC_INFO << "Garmin: No notification handler!";
 }
 
 
@@ -138,10 +155,13 @@ void GarminDevice::parseServices()
 {
     // Garmin is using a single service for all functions (Mlr), so we probably don't need full parsing.
     qDebug() << Q_FUNC_INFO << "Parsing Services for Garmin";
-
-    if (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI))
+    CommunicatorV2* com = qobject_cast<CommunicatorV2*> (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI));
+    if (com)
+    //if (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI))
     {
         qDebug() << Q_FUNC_INFO << "Garmin: Communicator already exists, no parsing required.";
+        //re-initialise device
+        com->initializeDevice();
     }
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
@@ -173,12 +193,12 @@ void GarminDevice::parseServices()
                 {
                     connect(com.data(), &CommunicatorV2::informationChanged, this, &GarminDevice::informationChanged, Qt::UniqueConnection);
                     addService(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI, com.data());
-                    setConnectionState("authenticated");
 
                     // add notification handler
-                    GarminNotificationHandler *notificationHandler = new GarminNotificationHandler(com);
-                    connect(this,&GarminDevice::sendAlertToDevice,notificationHandler,&GarminNotificationHandler::onNotification);
-
+                    qDebug() << Q_FUNC_INFO << "Garmin: Adding notification handler";
+                    mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(com);
+                    //connect(this,&GarminDevice::sendAlertToDevice,mNotificationHandler.data(),&GarminNotificationHandler::onNotification);
+                    setConnectionState("authenticated");
                     return;
                 }
             }

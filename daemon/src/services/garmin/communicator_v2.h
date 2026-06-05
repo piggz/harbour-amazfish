@@ -24,12 +24,14 @@
 #include <qbleservice.h>
 #include <KDbConnection.h>
 
+#include <optional>
+
 
 // =============================================================================
 // Constants
 // =============================================================================
 static constexpr const char* BASE_UUID_FORMAT = "6A4E%04X-667B-11E3-949A-0800200C9A66";
-static constexpr quint64 AMAZFISH_CLIENT_ID = 3; // use 3 to not clas wthi Gadgetbridge or Garmin Connect
+static constexpr quint64 AMAZFISH_CLIENT_ID = 2; // use 3 to not clash with Gadgetbridge or Garmin Connect
 
 
 struct deviceInfo {
@@ -40,7 +42,6 @@ struct deviceInfo {
     QString deviceModel;
     QString deviceManufacturer;
 };
-
 
 // Writer for sending messages to a service ->needed? Or use QBLECharacteristic?
 class ServiceWriter {
@@ -229,9 +230,6 @@ private:
     quint8 mBatteryLevel;
 
     struct deviceInfo mDeviceInfo;
-
-
-
 
     mutable QMutex m_mutex;
     QSharedPointer<CommunicatorState> mState;

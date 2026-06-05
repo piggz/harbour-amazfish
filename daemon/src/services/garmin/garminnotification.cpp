@@ -8,7 +8,7 @@ const uint MAX_PROTOBUF_CHUNK_SIZE = 3072;
 
 void GarminNotificationHandler::cleanupOldNotifications()
 {
-    QMutexLocker lock(&m_mutex);
+    //QMutexLocker lock(&m_mutex);
 
     if (m_lastCleanup.elapsed() < 120000) // 2 minutes
         return;
@@ -45,11 +45,13 @@ void GarminNotificationHandler::cleanupOldNotifications()
 bool GarminNotificationHandler::removeNotification(qint32 id)
 {
     NotificationType type = NotificationType::Generic;
+    int count = 0;
 
     {
-        QMutexLocker lock(&m_mutex);
+        //QMutexLocker lock(&m_mutex);
         if (m_storedNotifications.contains(id)) {
             type = m_storedNotifications[id].notificationType;
+            count = getNotificationCount(type);
             m_storedNotifications.remove(id);
         }
     }
@@ -57,155 +59,60 @@ bool GarminNotificationHandler::removeNotification(qint32 id)
     auto msg = NotificationUpdateMessageBuilder::create(
         NotificationUpdateType::Remove,
         type,
-        0,
+        count,
         id).build();
 
     QByteArray gfdi = wrapInGfdiEnvelope(5033, msg);
 
     // async send simulated
-    return m_communicator->sendMessage("notification_remove", gfdi);
+    if (m_communicator) return m_communicator->sendMessage("notification_remove", gfdi);
+    else return false;
 }
 
 void GarminNotificationHandler::onNotification(NotificationSpec notification)
 {
+    qDebug() << Q_FUNC_INFO << "Garmin: sending notification";
+    bool isUpdate = addNotificationToQueue(notification);
+    NotificationUpdateType updateType = isUpdate ? NotificationUpdateType::Modify : NotificationUpdateType::Add;
+    if (m_storedNotifications.size() > 30)
+        m_storedNotifications.erase(m_storedNotifications.end()); //remove the oldest notification TODO: should send a delete notification message to watch!
 
-    // Send generic notification (SMS, email, etc)
-    qDebug() << Q_FUNC_INFO << notification.sourceName.value() << notification.title.value();
-    if (!m_isConnected) {
-        QMutexLocker lock(&m_mutex);
-        m_missedNotifications.enqueue(notification);
-        qDebug() << Q_FUNC_INFO << "Garmin: Watch not connected, can't send";
-        return;
-    }
+    bool  hasActions = (notification.hasActions);
+    if (hasActions) {
 
-    cleanupOldNotifications();
-
-
-    QString typeStr;
-    switch (notification.notificationType) {
-    case NotificationType::GenericPhone:       typeStr = "Phone"; break;
-    case NotificationType::GenericSms:         typeStr = "SMS"; break;
-    case NotificationType::GenericEmail:       typeStr = "Email"; break;
-    case NotificationType::GenericChat:        typeStr = "Chat"; break;
-    case NotificationType::GenericSocial:      typeStr = "Social"; break;
-    case NotificationType::GenericNavigation:  typeStr = "Navigation"; break;
-    case NotificationType::GenericCalendar:    typeStr = "Calendar"; break;
-    case NotificationType::GenericAlarmClock:  typeStr = "Alarm"; break;
-    case NotificationType::Generic:            typeStr = "Generic"; break;
-    default: typeStr = "Generic";
-    }
-
-
-    // ---------------------------------------------------------
-    // Calculate unretrieved count + IDs
-    // ---------------------------------------------------------
-    quint8 count = 0;
-    QVector<QPair<qint32, NotificationType>> unretrieved;
-
-    {
-        QMutexLocker lock(&m_mutex);
-
-        for (auto it = m_storedNotifications.begin();
-             it != m_storedNotifications.end(); ++it)
-        {
-            const auto& spec = it.value();
-
-            if (spec.notificationType == notification.notificationType &&
-                !spec.retrieved)
-            {
-                unretrieved.append({it.key(), spec.notificationType});
+        for (auto it = notification.attachedActions.begin(); it!= notification.attachedActions.end(); it++) {
+             Action action = *(it->data());
+             if (action.isReply()) {
+                mNotificationReplyAction.insert(notification.id, action.handle);
             }
         }
 
-        quint8 unretrievedCount = static_cast<quint8>(unretrieved.size());
-
-        // +1 for new notification, capped at 50
-        count = qMin<quint8>(unretrievedCount + 1, 50);
     }
 
-    // ---------------------------------------------------------
-    // High count cleanup logic (>=5)
-    // ---------------------------------------------------------
-    if (count >= 5) {
+    //bool hasPicture = notification.hasPicture;
+    int count = getNotificationCount(notification.notificationType);
+    qDebug() << Q_FUNC_INFO << "Garmin: Found " << count << " notifications of this type";
 
-        qWarning() << "🧹 Count too high (" << count
-                   << "), removing OLD unretrieved notifications (>60s)";
-
-        QElapsedTimer now;
-        now.start();
-
-        int removedCount = 0;
-        int totalUnretrieved = unretrieved.size();
-
-        for (const auto& pair : unretrieved) {
-            qint32 id = pair.first;
-
-            bool isOld = false;
-
-            {
-                QMutexLocker lock(&m_mutex);
-                if (m_storedNotifications.contains(id)) {
-                    const auto& spec = m_storedNotifications[id];
-                    isOld = (spec.timestamp.elapsed() > 60000); // 60 sec
-                }
-            }
-
-            if (isOld) {
-                bool res = removeNotification(id);
-                if (!res) {
-                    qWarning() << "Failed to remove notification"
-                               << id;
-                } else {
-                    removedCount++;
-                }
-            } else {
-                qInfo() << "Keeping notification" << id
-                        << "(too recent)";
-            }
-        }
-
-        if (removedCount > 0) {
-            qDebug()  << Q_FUNC_INFO << "Garmin: Removed" << removedCount
-                    << "old notifications,"
-                    << (totalUnretrieved - removedCount) << "kept";
-        } else {
-            qDebug() <<Q_FUNC_INFO << "Garmin: No old notifications to remove";
-        }
-
-        count = count-removedCount;
-    }
-    auto updateMsg =
-        NotificationUpdateMessageBuilder::create(
-            NotificationUpdateType::Add,
-            notification.notificationType,
-            count,
-            notification.id)
-            .withActions(notification.hasActions)
-            .build();
+    QByteArray updateMsg = NotificationUpdateMessageBuilder::create(
+                updateType,
+                notification.notificationType,
+                count,
+                notification.id)
+                .withActions(notification.hasActions)
+                .build();
 
     QByteArray gfdi = wrapInGfdiEnvelope(5033, updateMsg);
+    if (m_communicator) {
+        //m_communicator->sendMessage("notification", gfdi);
+        bool result = m_communicator->sendMessage("notification", gfdi);
 
-    bool result = m_communicator->sendMessage("notification", gfdi);
-
-    if (result) {
-        qDebug() << Q_FUNC_INFO << "Garmin: Notification sent successfully";
-    } else {
-        qDebug() << Q_FUNC_INFO <<"Garmin: Notification could not be sent";
-
-        return; //result
+        if (result) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Notification sent successfully";
+        } else {
+            qDebug() << Q_FUNC_INFO <<"Garmin: Notification could not be sent";
+        }
     }
-
-    // Store notification
-    {
-        QMutexLocker lock(&m_mutex);
-        m_storedNotifications.insert(notification.id, notification);
-    }
-    return;
-     qDebug() << Q_FUNC_INFO << "Garmin: Count is " << count;
 }
-
-
-
 
 
 
@@ -215,7 +122,7 @@ void GarminNotificationHandler::replayMissedNotifications()
     QList<NotificationSpec> list;
 
     {
-        QMutexLocker lock(&m_mutex);
+        //QMutexLocker lock(&m_mutex);
         while (!m_missedNotifications.isEmpty())
             list.append(m_missedNotifications.dequeue());
     }
@@ -228,58 +135,49 @@ void GarminNotificationHandler::replayMissedNotifications()
 
 void GarminNotificationHandler::setConnected(bool v)
 {
-    QMutexLocker lock(&m_mutex);
+    //QMutexLocker lock(&m_mutex);
     m_isConnected = v;
 }
 
 void GarminNotificationHandler::onSetCallState(const CallSpec& call)
 {
-    const qint32 id = call.getId();
+    qDebug() << Q_FUNC_INFO;
+
+    qint32 id;
+    if (call.number.isEmpty()) id = qHash(call.number);
+            else id = qHash("Amazfish Call");
 
     if (call.command == CallCommand::Incoming) {
-
-        {
-            QMutexLocker lock(&m_mutex);
-            m_activeNotifications.insert(id, call);
-        }
-
         NotificationSpec notif =
             NotificationSpec::create(id, NotificationType::GenericPhone)
             .withTitle(call.name.value_or("Incoming Call"))
-            .withBody(QString("From: %1").arg(call.number))
-            .withSender(call.sourceName.value_or("Phone"));
+            .withBody(call.name.value_or("Unknown"))
+            .withSender(call.sourceName.value_or("Phone"))
+            .withBody(call.name.value_or("Unknown"))
+            .withActions(true);
 
-        {
-            QMutexLocker lock(&m_mutex);
-            m_storedNotifications.insert(id, notif);
-        }
+        // add an empty bogus action to toggle the hasActions boolean. The actions are hardcoded on the watch in case of incoming calls.
+        notif.attachedActions.empty();
+        notif.attachedActions.insert(0, QSharedPointer(new Action()));
 
-        auto msg = NotificationUpdateMessageBuilder::create(
-            NotificationUpdateType::Add,
-            NotificationType::GenericPhone,
-            1,
-            id)
-            .withActions(true)
-            .build();
 
-        QByteArray gfdi = wrapInGfdiEnvelope(5033, msg);
-        m_communicator->sendMessage("notification", gfdi);
+        qDebug() << Q_FUNC_INFO << "Garmin: Sending incoming call notification";
+        onNotification(notif);
     }
     else if (call.command == CallCommand::End ||
              call.command == CallCommand::Reject)
     {
-        QMutexLocker lock(&m_mutex);
-        m_activeNotifications.remove(id);
-        m_storedNotifications.remove(id);
+        //QMutexLocker lock(&m_mutex);
+        qDebug() << Q_FUNC_INFO << "Garmin: Sending call ended notification";
 
-        auto msg = NotificationUpdateMessageBuilder::create(
-            NotificationUpdateType::Remove,
-            NotificationType::GenericPhone,
-            0,
-            id).build();
+        bool result = removeNotification(id);
 
-        QByteArray gfdi = wrapInGfdiEnvelope(5033, msg);
-        m_communicator->sendMessage("call_end_notification", gfdi);
+        if (result) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Notification sent successfully";
+        } else {
+            qDebug() << Q_FUNC_INFO <<"Garmin: Notification could not be sent";
+            return; //result
+        }
     }
 }
 
@@ -289,21 +187,39 @@ QByteArray GarminNotificationHandler::wrapInGfdiEnvelope(quint16 messageId, cons
 
     quint16 size = static_cast<quint16>(2 + 2 + payload.size() + 2);
 
-    msg.append(char(size & 0xFF));
-    msg.append(char((size >> 8) & 0xFF));
+    writeU16le(msg,size);
 
-    msg.append(char(messageId & 0xFF));
-    msg.append(char((messageId >> 8) & 0xFF));
+    writeU16le(msg,messageId);
+
 
     msg.append(payload);
 
     quint16 crc = computeCrc16(msg);
+    writeU16le(msg,crc);
 
-    msg.append(char(crc & 0xFF));
-    msg.append(char((crc >> 8) & 0xFF));
+    //msg.append(char(crc & 0xFF));
+    //msg.append(char((crc >> 8) & 0xFF));
 
     return msg;
 }
 
+bool GarminNotificationHandler::addNotificationToQueue(NotificationSpec note) {
+    bool found = false;
+    if (m_storedNotifications.contains(note.id)){
+        found = true;
+        m_storedNotifications.remove(note.id);
+    }
+    m_storedNotifications.begin();
+    m_storedNotifications.insert(note.id,note);
+    return found;
+}
 
+int GarminNotificationHandler::getNotificationCount(NotificationType type) {
+    int count = 0;
+    for (auto it =m_storedNotifications.begin(); it != m_storedNotifications.end();) {
+        count += it.value().notificationType == type ? 1 : 0;
+        ++it;
+    }
+    return count;
+}
 

@@ -44,30 +44,20 @@ class AsyncMessageHandler : public QObject
 public:
     explicit AsyncMessageHandler(QObject* parent = nullptr);
      ~AsyncMessageHandler() override = default;
-
-     // Rust: set_communicator(&self, comm: Arc<CommunicatorV2>)
-     void setCommunicator(const QSharedPointer<CommunicatorV2>& comm);
-
-     // Rust: set_notification_handler(&self, handler: Arc<GarminNotificationHandler>)
+     void setCommunicator(CommunicatorV2* comm);
      void setNotificationHandler(const QSharedPointer<GarminNotificationHandler>& handler);
 
      // Rust: set_calendar_manager(&self, manager: Arc<CalendarManager>)
      //void setCalendarManager(const QSharedPointer<CalendarManager>& manager);
-
-     // Rust: send_response(&self, response: &[u8]) -> Result<()>
-     Result<void> sendResponse(const QByteArray& response);
-
-     // Rust: send_protobuf_response(&self, message: Vec<u8>) -> Result<()>
-     Result<void> sendProtobufResponse(const QByteArray& message);
-
-     // Rust: send_protobuf_chunk(...)
-     Result<void> sendProtobufChunk(quint16 requestId,
+     bool sendResponse(const QByteArray& response);
+     bool sendProtobufResponse(const QByteArray& message);
+     bool sendProtobufChunk(quint16 requestId,
                                     quint32 dataOffset,
                                     const QByteArray& chunkData,
                                     int totalLength);
+     bool handleProtobufChunkAck(quint16 requestId, quint32 dataOffset);
 
-     // Rust: handle_protobuf_chunk_ack(...)
-     Result<void> handleProtobufChunkAck(quint16 requestId, quint32 dataOffset);
+     void parse(const UnknownMessage& msg);
 
  signals:
      void logInfo(const QString& msg);
@@ -87,7 +77,7 @@ public:
      // Mirrors Rust fields (Arc<Mutex<...>> -> QMutex + value)
      mutable QMutex mMutex;
 
-     QSharedPointer<CommunicatorV2> mCommunicator;
+     CommunicatorV2* mCommunicator;
      bool mInitializationComplete = false;
      QSharedPointer<GarminNotificationHandler> mNotificationHandler;
      bool mPairingDetected = false;
