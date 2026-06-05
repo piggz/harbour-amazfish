@@ -139,6 +139,16 @@ bool DaemonInterface::supportsFeature(Amazfish::Feature f)
     return reply;
 }
 
+bool DaemonInterface::supportsDataType(Amazfish::DataType t)
+{
+    if (!iface || !iface->isValid()) {
+        return false;
+    }
+    QDBusReply<bool> reply = iface->call(QStringLiteral("supportsDataType"), (int)t);
+    return reply;
+}
+
+
 int DaemonInterface::supportedFeatures()
 {
     if (!iface || !iface->isValid()) {

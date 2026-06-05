@@ -1338,6 +1338,11 @@ bool DeviceInterface::supportsFeature(int f){
     return (supportedFeatures() & f);
 }
 
+bool DeviceInterface::supportsDataType(int t) {
+    return (supportedDataTypes() & t);
+}
+
+
 int DeviceInterface::supportedFeatures()
 {
     if (m_device) {
