@@ -5,9 +5,10 @@
 #include <QSharedPointer>
 #include "abstractdevice.h"
 #include "services/garmin/communicator_v2.h"
-
+#include "services/garmin/garminnotification.h"
 
 class NotificationSpec;
+class GarminNotificationHandler;
 
 class GarminDevice : public AbstractDevice
 {
@@ -33,7 +34,7 @@ public slots:
 
     //void informationChanged(Amazfish::Info infoKey, const QString& infoValue);
 
-protected slots:
+//protected slots:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
 
 signals:
@@ -46,6 +47,7 @@ private:
     void parseServices();
     void initialise();
     virtual void pair() override;
+    QSharedPointer<GarminNotificationHandler> mNotificationHandler;
 
 
 //    Q_SLOT void authenticated(bool ready);

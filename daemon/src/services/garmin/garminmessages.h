@@ -229,6 +229,8 @@ struct WeatherRequestMessage {
     quint8 hoursOfForecast{};
 };
 
+
+
 struct UnknownMessage {
     quint16 messageId {0};
     QByteArray data;
@@ -260,6 +262,7 @@ public slots:
     //void parseAndEmit(const QByteArray& data);
 
 public:
+
     void parse(const QByteArray& data);
 
 signals:
@@ -287,7 +290,6 @@ private:
     static Result<QString> readLengthPrefixedString(const QByteArray& data, int& consumedBytes);
     static QSet<quint16> parseCapabilities(const QByteArray& bytes);
 
-    // LE helpers
 
 };
 

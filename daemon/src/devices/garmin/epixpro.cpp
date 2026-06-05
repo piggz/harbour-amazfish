@@ -10,7 +10,7 @@
 EpixProDevice::EpixProDevice(const QString &pairedName, QObject *parent) : GarminDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO << pairedName;
-    connect(this, &QBLEDevice::propertiesChanged, this, &EpixProDevice::onPropertiesChanged, Qt::UniqueConnection);
+    connect(this, &QBLEDevice::propertiesChanged, this, &GarminDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 Amazfish::Features EpixProDevice::supportedFeatures() const
@@ -37,6 +37,9 @@ Amazfish::DataTypes EpixProDevice::supportedDataTypes() const
     return Amazfish::DataType::TYPE_SPO2
             | Amazfish::DataType::TYPE_HRV
             | Amazfish::DataType::TYPE_HEART_RATE
+            | Amazfish::DataType::TYPE_ACTIVITY
+            | Amazfish::DataType::TYPE_PAI
+            | Amazfish::DataType::TYPE_SLEEP
             ;
 
 }

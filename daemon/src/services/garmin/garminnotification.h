@@ -10,8 +10,39 @@
 #include <QObject>
 
 #include "communicator_v2.h"
+#include "garmintypes.h"
 
 class CommunicatorV2;
+
+//
+// -------------------------
+// CallCommand
+// -------------------------
+class Action  {
+public:
+    static constexpr int TYPE_UNDEFINED = -1;
+    static constexpr int TYPE_WEARABLE_SIMPLE = 0;
+    static constexpr int TYPE_WEARABLE_REPLY = 1;
+    static constexpr int TYPE_SYNTECTIC_REPLY_PHONENR = 2;
+    static constexpr int TYPE_SYNTECTIC_DISMISS = 3;
+    static constexpr int TYPE_SYNTECTIC_DISMISS_ALL = 4;
+    static constexpr int TYPE_SYNTECTIC_MUTE = 5;
+    static constexpr int TYPE_SYNTECTIC_OPEN = 6;
+    static constexpr int TYPE_CUSTOM_SIMPLE = 7;
+    static constexpr int TYPE_CUSTOM_REPLY = 8;
+
+    int type = TYPE_UNDEFINED;
+    long handle = 0;
+    QString title;
+
+    bool isReply() const {
+        return type == TYPE_WEARABLE_REPLY || type == TYPE_SYNTECTIC_REPLY_PHONENR || type == TYPE_CUSTOM_REPLY;
+    }
+};
+
+
+
+
 //
 // -------------------------
 // CallCommand
@@ -140,9 +171,7 @@ enum class NotificationUpdateType : quint8 {
 class NotificationUpdateMessageBuilder
 {
 public:
-    // -----------------------------------------------------------------
-    // Constructor (Rust: new)
-    // -----------------------------------------------------------------
+
     static NotificationUpdateMessageBuilder create(
         NotificationUpdateType updateType,
         NotificationType notificationType,
@@ -170,12 +199,12 @@ public:
     }
 
     // -----------------------------------------------------------------
-    // build() -> QByteArray (Rust Vec<u8>)
+    // build() -> QByteArray
     // -----------------------------------------------------------------
     QByteArray build() const
     {
         QByteArray message;
-        message.reserve(9); // exact Rust capacity
+        // message.reserve(9); // exact Rust capacity
 
         // NOTE: Payload only, envelope added later (unchanged)
 
@@ -196,10 +225,8 @@ public:
         message.append(static_cast<char>(count));
 
         // 5. Notification ID (LE i32)
-        message.append(static_cast<char>(notificationId & 0xFF));
-        message.append(static_cast<char>((notificationId >> 8) & 0xFF));
-        message.append(static_cast<char>((notificationId >> 16) & 0xFF));
-        message.append(static_cast<char>((notificationId >> 24) & 0xFF));
+        writeU32le(message,notificationId);
+
 
         // 6. Phone flags
         quint8 phoneFlags = 0;
@@ -215,12 +242,6 @@ public:
 
         return message;
     }
-
-
-
-
-
-
 
     NotificationUpdateType updateType;
     NotificationType notificationType;
@@ -250,11 +271,11 @@ public:
     bool hasActions;
     bool hasPicture;
 
-    QElapsedTimer timestamp;      // equivalent of Rust Instant
+    QElapsedTimer timestamp;
     bool retrieved;
 
-public:
-    // Rust: new()
+    QVector<QSharedPointer<Action>> attachedActions;
+
     static NotificationSpec create(qint32 id, NotificationType type)
     {
         NotificationSpec s;
@@ -270,8 +291,7 @@ public:
         s.hasPicture = false;
         s.retrieved = false;
 
-        s.timestamp.start();      // Instant::now()
-
+        s.timestamp.start();
         return s;
     }
 
@@ -333,6 +353,11 @@ class GarminNotificationHandler : public QObject
     Q_OBJECT
 
 public:
+    static QSharedPointer<GarminNotificationHandler> create(const QSharedPointer<CommunicatorV2> communicator)
+    {
+        return QSharedPointer<GarminNotificationHandler>(new GarminNotificationHandler(communicator));
+    }
+
     GarminNotificationHandler(QSharedPointer<CommunicatorV2> communicator)
         : m_communicator(communicator)
     {
@@ -359,13 +384,16 @@ public:
 
 private:
 
+    bool addNotificationToQueue(NotificationSpec note);
+    int getNotificationCount(NotificationType type);
 
    QSharedPointer<CommunicatorV2> m_communicator;
 
    QMutex m_mutex;
 
-   QHash<qint32, CallSpec> m_activeNotifications;
-   QHash<NotificationType, quint8> m_notificationCounts;
+   //QHash<qint32, CallSpec> m_activeNotifications;
+   //QHash<NotificationType, quint8> m_notificationCounts;
+   QHash<int,long> mNotificationReplyAction;
    QHash<qint32, NotificationSpec> m_storedNotifications;
 
    std::optional<QPair<qint32, QByteArray>> m_lastControlRequest;
@@ -376,9 +404,8 @@ private:
 
    QElapsedTimer m_lastCleanup;
 
-   QSet<QPair<QString, quint64>> m_seenDbusMessages;
+   //QSet<QPair<QString, quint64>> m_seenDbusMessages;
 
-   //QSharedPointer<WatchdogManager> m_watchdog;
 
    QQueue<NotificationSpec> m_missedNotifications;
 

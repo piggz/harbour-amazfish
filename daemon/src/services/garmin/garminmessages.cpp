@@ -2,8 +2,6 @@
 #include <QChar>
 
 
-
-
 Result<QString> GfdiMessageParser::readLengthPrefixedString(const QByteArray& data, int& consumedBytes)
 {
     consumedBytes = 0;
@@ -80,9 +78,10 @@ void GfdiMessageParser::parse(const QByteArray& data) {
     const auto mid = messageIdFromU16(msgId);
     if (!mid.has_value()) {
         qDebug() << Q_FUNC_INFO << "Garmin: Unknown GFDI message: " << msgId;
-        return;// Result<GfdiMessage>::isOk(UnknownMessage{msgId, data.mid(offset)});
+        return;
     }
 
+    qDebug() << Q_FUNC_INFO << "Garmin:  GFDI message: " << messageIdToString(msgId).value();
 
     switch (*mid) {
     case MessageId::DeviceInformation:
@@ -110,7 +109,9 @@ void GfdiMessageParser::parse(const QByteArray& data) {
                 return parseFilterStatus(data.mid(offset));
             }
         }
-        return;// Result<GfdiMessage>::isOk(UnknownMessage{msgId, data.mid(offset)});
+        // parse response messages
+        //return parseResponse(data.mid(offset));
+        //return;// Result<GfdiMessage>::isOk(UnknownMessage{msgId, data.mid(offset)});
     }
     default:
         parseUnknownMessage(msgId, data.mid(offset));
@@ -165,7 +166,7 @@ void GfdiMessageParser::parseDeviceInformation(const QByteArray& data)
 
 void GfdiMessageParser::parseConfiguration(const QByteArray& data)
 {
-    qDebug() << "Garmin: parsing configuration";
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing configuration";
     if (data.isEmpty()) {
         return ;//Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "Configuration message empty"));
     }
@@ -182,7 +183,7 @@ void GfdiMessageParser::parseConfiguration(const QByteArray& data)
 
 void GfdiMessageParser::parseNotificationControl(const QByteArray& data)
 {
-    qDebug() << "Garmin: parsing notification control";
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing notification control";
     if (data.size() < 7) {
         return; //Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "NotificationControl message too short"));
     }
@@ -252,7 +253,7 @@ void GfdiMessageParser::parseNotificationControl(const QByteArray& data)
 
 void GfdiMessageParser::parseNotificationSubscription(const QByteArray& data)
 {
-    qDebug() << "Garmin: parsing notification subscription";
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing notification subscription";
     if (data.size() < 2) {
         return;// Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "NotificationSubscription message too short"));
     }
@@ -265,7 +266,7 @@ void GfdiMessageParser::parseNotificationSubscription(const QByteArray& data)
 
 void GfdiMessageParser::parseSynchronization(const QByteArray& data)
 {
-    qDebug() << "Garmin: parsing synchronization";
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing synchronization";
     if (data.size() < 2) {
         return; // Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "Synchronization message too short"));
     }
@@ -295,7 +296,7 @@ void GfdiMessageParser::parseSynchronization(const QByteArray& data)
 
 void GfdiMessageParser::parseWeatherRequest(const QByteArray& data)
 {
-    qDebug() << "Garmin: parsing weather request";
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing weather request";
 
     if (data.size() < 10) {
         return; // Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "Weather request message too short"));
@@ -311,7 +312,7 @@ void GfdiMessageParser::parseWeatherRequest(const QByteArray& data)
 
 void GfdiMessageParser::parseFilterStatus(const QByteArray& data)
 {
-    qDebug() << "Garmin: parsing filter status";
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing filter status";
 
     if (data.size() < 3) {
         return; // Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "Filter status message too short"));
@@ -334,9 +335,10 @@ void GfdiMessageParser::parseFilterStatus(const QByteArray& data)
     return;// Result<GfdiMessage>::isOk(msg);
 }
 
+
 void GfdiMessageParser::parseUnknownMessage(const quint16 msgId, const QByteArray& data)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing unknown message ";;
 
     UnknownMessage msg;
     msg.messageId = msgId;
