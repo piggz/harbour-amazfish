@@ -153,20 +153,17 @@ void GarminGfdiMessage::parseDeviceInformation(const QByteArray& data)
 
     // Read length-prefixed strings (1 byte length, then N bytes of UTF-8 string)
     auto s1 = readLengthPrefixedString(data.mid(off), consumed);
-    //if (!s1.ok) return Result<GfdiMessage>::err(s1.error);
     msg.bluetoothFriendlyName = s1.value;
     qDebug() << Q_FUNC_INFO << "Garmin: Friendly name is " <<s1.value;
 
     off += consumed;
 
     auto s2 = readLengthPrefixedString(data.mid(off), consumed);
-    //if (!s2.ok) return Result<GfdiMessage>::err(s2.error);
     msg.deviceName = s2.value;
     qDebug() << Q_FUNC_INFO << "Garmin: name is " <<s2.value;
     off += consumed;
 
     auto s3 = readLengthPrefixedString(data.mid(off), consumed);
-    //if (!s3.ok) return Result<GfdiMessage>::err(s3.error);
     msg.deviceModel = s3.value;
 
 

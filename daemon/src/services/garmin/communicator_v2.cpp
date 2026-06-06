@@ -372,8 +372,9 @@ void CommunicatorV2::onDeviceInformationReceived(DeviceInformationMessage &messa
     //received device information is " << message.maxPacketSize;
     mDeviceInfo.deviceName=message.deviceName;
     mDeviceInfo.deviceModel=message.deviceModel;
-    mDeviceInfo.serialNumber=message.unitNumber;
-    mDeviceInfo.softwareRevision=message.softwareVersion;
+    mDeviceInfo.serialNumber=QString::number(message.unitNumber);
+    mDeviceInfo.softwareRevision=QString::number(message.softwareVersion);
+    mDeviceInfo.deviceManufacturer="Garmin";
 
     //set max packet size
     onDeviceMaxPacketSize(message.maxPacketSize);
