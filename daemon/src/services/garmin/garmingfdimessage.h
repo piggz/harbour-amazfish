@@ -146,15 +146,6 @@ public slots:
     //void parseAndEmit(const QByteArray& data);
 
 signals:
-    void deviceInformationReceived(DeviceInformationMessage& msg);
-    void configurationReceived(const ConfigurationMessage& msg);
-    void currentTimeRequestReceived();
-    void notificationControlReceived(const NotificationControlMessage& msg);
-    void notificationSubscriptionReceived(const NotificationSubscriptionMessage& msg);
-    void synchronizationReceived(const SynchronizationMessage& msg);
-    void filterStatusReceived(const FilterStatusMessage& msg);
-    void weatherRequestReceived(const WeatherRequestMessage& msg);
-    void unknownMessageReceived(const UnknownMessage& msg);
     void parseError(const QString& error);
 
 private:
@@ -221,13 +212,6 @@ private:
     static void overwriteU16le(QByteArray& out, int off, quint16 v);
 };
 
-// Qt metatype declarations so these structs can be used in queued signals
-Q_DECLARE_METATYPE(DeviceInformationMessage)
-Q_DECLARE_METATYPE(ConfigurationMessage)
-Q_DECLARE_METATYPE(NotificationControlMessage)
-Q_DECLARE_METATYPE(NotificationSubscriptionMessage)
-Q_DECLARE_METATYPE(SynchronizationMessage)
-Q_DECLARE_METATYPE(FilterStatusMessage)
-Q_DECLARE_METATYPE(WeatherRequestMessage)
+
 
 #endif //GARMINGDFDIMESSAGE_H

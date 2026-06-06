@@ -72,19 +72,7 @@ void CommunicatorV2::setMessageCallback(QSharedPointer<GfdiMessageCallback> cb) 
 void CommunicatorV2::registerServiceCallback(Service service, QSharedPointer<ServiceCallback> cb) {
     mState->serviceCallbacks.insert(service, std::move(cb));
     if (service==Service::GFDI) {
-        // This should be changed to not use signals but take action in the parser itself, just like the other handlers
-        // It is part of the rework of the service callbacks
-
         GarminGfdiMessage* parser= qobject_cast<GarminGfdiMessage*>(cb.data());
-        connect(parser,&GarminGfdiMessage::deviceInformationReceived,this,&CommunicatorV2::onDeviceInformationReceived);
-        connect(parser,&GarminGfdiMessage::configurationReceived,this,&CommunicatorV2::onConfigurationReceived);
-        connect(parser,&GarminGfdiMessage::currentTimeRequestReceived,this,&CommunicatorV2::onCurrentTimeRequestReceived);
-        connect(parser,&GarminGfdiMessage::notificationControlReceived,this,&CommunicatorV2::onNotificationControlReceived);
-        connect(parser,&GarminGfdiMessage::notificationSubscriptionReceived,this,&CommunicatorV2::onNotificationSubscriptionReceived);
-        connect(parser,&GarminGfdiMessage::synchronizationReceived,this,&CommunicatorV2::onSynchronizationReceived);
-        connect(parser,&GarminGfdiMessage::filterStatusReceived,this,&CommunicatorV2::onFilterStatusReceived);
-        connect(parser,&GarminGfdiMessage::weatherRequestReceived,this,&CommunicatorV2::onWeatherRequestReceived);
-        connect(parser,&GarminGfdiMessage::unknownMessageReceived,this,&CommunicatorV2::onUnknownMessageReceived);
     }
 
 }
@@ -1099,17 +1087,6 @@ void GfdiServiceCallback::onClose() {
 }
 
 void GfdiServiceCallback::onMessage(const QByteArray& data) {
-
-    GarminGfdiMessage parser;
-    connect(&parser,&GarminGfdiMessage::deviceInformationReceived,mCommunicator,&CommunicatorV2::onDeviceInformationReceived);
-    connect(&parser,&GarminGfdiMessage::configurationReceived,mCommunicator,&CommunicatorV2::onConfigurationReceived);
-    connect(&parser,&GarminGfdiMessage::currentTimeRequestReceived,mCommunicator,&CommunicatorV2::onCurrentTimeRequestReceived);
-    connect(&parser,&GarminGfdiMessage::notificationControlReceived,mCommunicator,&CommunicatorV2::onNotificationControlReceived);
-    connect(&parser,&GarminGfdiMessage::notificationSubscriptionReceived,mCommunicator,&CommunicatorV2::onNotificationSubscriptionReceived);
-    connect(&parser,&GarminGfdiMessage::synchronizationReceived,mCommunicator,&CommunicatorV2::onSynchronizationReceived);
-    connect(&parser,&GarminGfdiMessage::filterStatusReceived,mCommunicator,&CommunicatorV2::onFilterStatusReceived);
-    connect(&parser,&GarminGfdiMessage::weatherRequestReceived,mCommunicator,&CommunicatorV2::onWeatherRequestReceived);
-    connect(&parser,&GarminGfdiMessage::unknownMessageReceived,mCommunicator,&CommunicatorV2::onUnknownMessageReceived);
 
  }
 
