@@ -8,16 +8,13 @@ GarminHrmMessage::GarminHrmMessage(CommunicatorV2* parent) : mCommunicator(paren
 {
 
 }
-void GarminHrmMessage::onConnect() {};
+void GarminHrmMessage::onConnect() {}
 void GarminHrmMessage::onClose() {}
 void GarminHrmMessage::onMessage(const QByteArray& data) {
-    quint8 spo2 = data[0];
-    quint32 ts = le32(data.constData()+1);
-
-    ts=ts + 631065600; // Unix timestamp in seconds
-    QDateTime Timestamp;
-
-    qDebug() << Q_FUNC_INFO << "Garmin: realtime Spo2 Callback: " << spo2 << ", Timestamp " << QDateTime::fromTime_t(ts).toString();
-    mCommunicator->setSpo2(spo2);
+    quint8 type = data[0]; // 0/2/3? 3 == realtime?
+    quint8 hr = data[1] & 0xff;
+    quint8 resting = data[2] & 0xff;
+    qDebug() << "Garmin: Got realtime HR type: " << type << ", hr=" << hr << ", resting=" << resting;
+    mCommunicator->setHeartRate(hr);
 
 }

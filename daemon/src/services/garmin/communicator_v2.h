@@ -266,18 +266,6 @@ private:
     CommunicatorV2 *mCommunicator;
 };
 
-class RealtimeHeartRateCallback : public ServiceCallback {
-public:
-    explicit RealtimeHeartRateCallback(CommunicatorV2* parent);
-
-    void onConnect(QSharedPointer<ServiceWriter> writer);
-    void onClose() override;
-    void onMessage(const QByteArray& data) override;
-
-private:
-    CommunicatorV2 *mCommunicator;
-
-};
 
 
 class RealtimeHRVCallback : public ServiceCallback {
