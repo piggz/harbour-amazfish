@@ -292,7 +292,6 @@ struct SynchronizationMessage {
 using GfdiMessage = std::variant<
     DeviceInformationMessage,
     ConfigurationMessage,
-    std::monostate, // CurrentTimeRequest
     NotificationControlMessage,
     NotificationSubscriptionMessage,
     SynchronizationMessage,

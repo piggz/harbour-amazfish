@@ -74,7 +74,6 @@ public:
 
 
  private:
-     // Mirrors Rust fields (Arc<Mutex<...>> -> QMutex + value)
      mutable QMutex mMutex;
 
      CommunicatorV2* mCommunicator;
@@ -82,7 +81,7 @@ public:
      QSharedPointer<GarminNotificationHandler> mNotificationHandler;
      bool mPairingDetected = false;
 
-     QQueue<QByteArray> mMessageQueue;                             // VecDeque<Vec<u8>>
+     QQueue<QByteArray> mMessageQueue;
      QSemaphore mSendSemaphore;                                    // Semaphore(1)
 
      QSharedPointer<WatchdogManager> mWatchdog;                    // Option<Arc<WatchdogManager>>
