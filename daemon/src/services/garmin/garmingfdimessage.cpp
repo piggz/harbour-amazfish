@@ -1,8 +1,8 @@
-#include "garminmessages.h"
+#include "garmingfdimessage.h"
 #include <QChar>
 
 
-Result<QString> GfdiMessageParser::readLengthPrefixedString(const QByteArray& data, int& consumedBytes)
+Result<QString> GarminGfdiMessage::readLengthPrefixedString(const QByteArray& data, int& consumedBytes)
 {
     consumedBytes = 0;
     if (data.isEmpty()) {
@@ -26,7 +26,7 @@ Result<QString> GfdiMessageParser::readLengthPrefixedString(const QByteArray& da
     return Result<QString>::isOk(s);
 }
 
-QSet<quint16> GfdiMessageParser::parseCapabilities(const QByteArray& bytes)
+QSet<quint16> GarminGfdiMessage::parseCapabilities(const QByteArray& bytes)
 {
     QSet<quint16> caps;
     quint16 current = 0;
@@ -40,12 +40,12 @@ QSet<quint16> GfdiMessageParser::parseCapabilities(const QByteArray& bytes)
     return caps;
 }
 
-void GfdiMessageParser::onMessage(const QByteArray& data) {
+void GarminGfdiMessage::onMessage(const QByteArray& data) {
     parse(data);
 }
 
 
-void GfdiMessageParser::setCommunicator(CommunicatorV2* comm) {
+void GarminGfdiMessage::setCommunicator(CommunicatorV2* comm) {
     mCommunicator = comm;
 }
 
@@ -54,7 +54,7 @@ void GfdiMessageParser::setCommunicator(CommunicatorV2* comm) {
 // corresponging handlers
 //-------------------------------------------------
 
-void GfdiMessageParser::parse(const QByteArray& data) {
+void GarminGfdiMessage::parse(const QByteArray& data) {
     // Parse a GFDI message from raw bytes
     // MessageParser::parse in Rust
 
@@ -131,7 +131,7 @@ void GfdiMessageParser::parse(const QByteArray& data) {
 }
 
 // -------------------- Parser: per-message parsers --------------------
-void GfdiMessageParser::parseDeviceInformation(const QByteArray& data)
+void GarminGfdiMessage::parseDeviceInformation(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing device information" << data;
     if (data.size() < 10) {
@@ -175,7 +175,7 @@ void GfdiMessageParser::parseDeviceInformation(const QByteArray& data)
     //return Result<GfdiMessage>::isOk(msg);
 }
 
-void GfdiMessageParser::parseConfiguration(const QByteArray& data)
+void GarminGfdiMessage::parseConfiguration(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing configuration";
     if (data.isEmpty()) {
@@ -192,7 +192,7 @@ void GfdiMessageParser::parseConfiguration(const QByteArray& data)
     return; // Result<GfdiMessage>::isOk(msg);
 }
 
-void GfdiMessageParser::parseNotificationControl(const QByteArray& data)
+void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing notification control";
     if (data.size() < 7) {
@@ -262,7 +262,7 @@ void GfdiMessageParser::parseNotificationControl(const QByteArray& data)
     return;// Result<GfdiMessage>::isOk(msg);
 }
 
-void GfdiMessageParser::parseNotificationSubscription(const QByteArray& data)
+void GarminGfdiMessage::parseNotificationSubscription(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing notification subscription";
     if (data.size() < 2) {
@@ -275,7 +275,7 @@ void GfdiMessageParser::parseNotificationSubscription(const QByteArray& data)
     return;// Result<GfdiMessage>::isOk(msg);
 }
 
-void GfdiMessageParser::parseSynchronization(const QByteArray& data)
+void GarminGfdiMessage::parseSynchronization(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing synchronization";
     if (data.size() < 2) {
@@ -305,7 +305,7 @@ void GfdiMessageParser::parseSynchronization(const QByteArray& data)
     return; // Result<GfdiMessage>::isOk(msg);
 }
 
-void GfdiMessageParser::parseWeatherRequest(const QByteArray& data)
+void GarminGfdiMessage::parseWeatherRequest(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing weather request";
 
@@ -321,7 +321,7 @@ void GfdiMessageParser::parseWeatherRequest(const QByteArray& data)
     return; // Result<GfdiMessage>::isOk(msg);
 }
 
-void GfdiMessageParser::parseFilterStatus(const QByteArray& data)
+void GarminGfdiMessage::parseFilterStatus(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing filter status";
 
@@ -347,7 +347,7 @@ void GfdiMessageParser::parseFilterStatus(const QByteArray& data)
 }
 
 
-void GfdiMessageParser::parseUnknownMessage(const quint16 msgId, const QByteArray& data)
+void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing unknown message ";;
 
