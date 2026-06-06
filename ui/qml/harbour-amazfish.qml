@@ -216,16 +216,6 @@ ApplicationWindowPL
         popup.showMessage(msg)
     }
 
-    function supportsFeature(feature) {
-        console.log("Supports feature", feature, (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature));
-        return (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature)
-    }
-
-    function supportsData(data) {
-        console.log("Supports data:", data, (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedDataTypes() & data) === data))
-        return (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedDataTypes() & data) === data)
-    }
-
     function _refreshInformation() {
         if (!_authenticated) {
             return
