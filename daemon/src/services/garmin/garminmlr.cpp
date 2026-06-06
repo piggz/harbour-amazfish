@@ -1,5 +1,4 @@
 #include "garminmlr.h"
-#include "garminmessages.h"
 #include <QtMath>
 #include <QObject>
 #include <QString>

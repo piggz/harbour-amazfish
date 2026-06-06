@@ -18,7 +18,7 @@
 #include "garmintypes.h"
 #include "cobscodec.h"
 #include "garminmlr.h"
-#include "garminmessages.h"
+#include "garmingfdimessage.h"
 #include "garminnotification.h"
 #include <qbledevice.h>
 #include <qbleservice.h>

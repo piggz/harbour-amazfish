@@ -1,5 +1,5 @@
-#ifndef GARMINMESSAGES__H
-#define GARMINMESSAGES__H
+#ifndef GARMINGDFDIMESSAGE_H
+#define GARMINGDFDIMESSAGE_H
 #pragma once
 
 #include <QObject>
@@ -127,16 +127,13 @@ inline std::optional<QString> messageIdToString(quint16 id) {
 }
 
 
-
-// -------------------- Parser (QObject + signals) --------------------
-
-class GfdiMessageParser : public ServiceCallback {
+class GarminGfdiMessage : public ServiceCallback {
     Q_OBJECT
 public:
-    static QSharedPointer<GfdiMessageParser> create(CommunicatorV2* parent=nullptr) {
-        return QSharedPointer<GfdiMessageParser>(new GfdiMessageParser(parent));
+    static QSharedPointer<GarminGfdiMessage> create(CommunicatorV2* parent=nullptr) {
+        return QSharedPointer<GarminGfdiMessage>(new GarminGfdiMessage(parent));
     }
-    explicit GfdiMessageParser(CommunicatorV2* parent=nullptr) : mCommunicator(parent)
+    explicit GarminGfdiMessage(CommunicatorV2* parent=nullptr) : mCommunicator(parent)
     {
     }
     void setCommunicator(CommunicatorV2* comm);
@@ -233,4 +230,4 @@ Q_DECLARE_METATYPE(SynchronizationMessage)
 Q_DECLARE_METATYPE(FilterStatusMessage)
 Q_DECLARE_METATYPE(WeatherRequestMessage)
 
-#endif //GARMINMESSAGES__H
+#endif //GARMINGDFDIMESSAGE_H
