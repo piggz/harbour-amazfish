@@ -1046,50 +1046,7 @@ void CommunicatorV2::saveHRVRecord()
     return;
 }
 
-// =============================================================================
-// MlrServiceWriter
-// =============================================================================
-
-MlrServiceWriter::MlrServiceWriter(quint8 handle,
-                                   QSharedPointer<QBLECharacteristic> sendChar)
-    : m_handle(handle), m_sendChar(sendChar)
-{}
-
-
-void MlrServiceWriter::write(const QString& taskName, const QByteArray& data) {
-    QByteArray payload;
-    payload.reserve(data.size() + 1);
-    payload.append(char(m_handle));
-    payload.append(data);
-    //return awaitBleWrite(taskName, payload);
-    QString errorMsg;
-    m_sendChar->writeValue(data,&errorMsg);
-    qDebug() << "Garmin: Mlr Service writer wrote, error returned: " << errorMsg;
-    return;
-}
-
-// =============================================================================
-// Callbacks handling the actual responses based on the handle/service
-// =============================================================================
-
-
-GfdiServiceCallback::GfdiServiceCallback(QSharedPointer<GfdiMessageCallback> cb, CommunicatorV2* parent)
-    : m_cb(std::move(cb)), mCommunicator(parent)
-{
-    qDebug() << "Garmin: GFDI Callback called";
-}
-
-void GfdiServiceCallback::onConnect(QSharedPointer<ServiceWriter> writer) {
-    Q_UNUSED(writer);
-}
-
-void GfdiServiceCallback::onClose() {
-}
-
-void GfdiServiceCallback::onMessage(const QByteArray& data) {
-
- }
-
+*/
 
 
 

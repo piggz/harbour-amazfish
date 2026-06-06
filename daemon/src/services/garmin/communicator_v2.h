@@ -228,43 +228,6 @@ private:
 };
 
 
-// =============================================================================
-// MlrServiceWriter
-// =============================================================================
-
-class MlrServiceWriter : public ServiceWriter {
-public:
-    MlrServiceWriter(quint8 handle,
-                     QSharedPointer<QBLECharacteristic> sendChar);
-
-
-    void write(const QString& taskName, const QByteArray& data);
-
-private:
-
-    quint8 m_handle;
-    QSharedPointer<QBLECharacteristic> m_sendChar;
-};
-
-
-// =============================================================================
-// Example service callbacks
-// =============================================================================
-
-class GfdiServiceCallback : public ServiceCallback {
-public:
-    explicit GfdiServiceCallback(QSharedPointer<GfdiMessageCallback> cb, CommunicatorV2* parent);
-
-    void onConnect(QSharedPointer<ServiceWriter> writer);
-    void onClose() override;
-    void onMessage(const QByteArray& data) override;
-
-private:
-    QSharedPointer<GfdiMessageCallback> m_cb;
-    CobsCoDec m_codec;
-    CommunicatorV2 *mCommunicator;
-};
-
 
 
 

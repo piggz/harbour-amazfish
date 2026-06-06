@@ -103,29 +103,31 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
         return;
     case MessageId::Configuration:
         return parseConfiguration(data.mid(offset));
-
-    //currentTimeRequestRequst - TODO
-    //case MessageId::CurrentTimeRequest:
-    //    return Result<GfdiMessage>::isOk(GfdiMessage{std::monostate{}});
+    case MessageId::CurrentTimeRequest:
+         parseCurrentTimeRequest(data.mid(offset));
+         return;
     case MessageId::NotificationControl:
-        return parseNotificationControl(data.mid(offset));
+        parseNotificationControl(data.mid(offset));
+        return;
     case MessageId::NotificationSubscription:
-        return parseNotificationSubscription(data.mid(offset));
+        parseNotificationSubscription(data.mid(offset));
+        return;
     case MessageId::Synchronization:
-        return parseSynchronization(data.mid(offset));
+        parseSynchronization(data.mid(offset));
+        return;
     case MessageId::WeatherRequest:
-        return parseWeatherRequest(data.mid(offset));
+        parseWeatherRequest(data.mid(offset));
+        return;
     case MessageId::Response: {
         // Check if this is a filter status response - special-case
         if (offset + 2 < data.size()) {
             const quint16 orig = le16(data.constData() + offset);
             if (orig == 5007) {
-                return parseFilterStatus(data.mid(offset));
+                parseFilterStatus(data.mid(offset));
+                return;
             }
         }
-        // parse response messages
-        //return parseResponse(data.mid(offset));
-        //return;// Result<GfdiMessage>::isOk(UnknownMessage{msgId, data.mid(offset)});
+        // Other Responses will be handled as Unknown Messages in the default section
     }
     default:
         parseUnknownMessage(msgId, data.mid(offset));
@@ -134,6 +136,13 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
 }
 
 // -------------------- Parser: per-message parsers --------------------
+void GarminGfdiMessage::parseCurrentTimeRequest(const QByteArray& data)
+{
+    auto timeResponse = GfdiMessageGenerator::currentTimeResponse(data);
+    if (timeResponse.ok)
+        if (mCommunicator) mCommunicator->sendMessage("Time Response", timeResponse.value);
+}
+
 void GarminGfdiMessage::parseDeviceInformation(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing device information" << data;
@@ -202,7 +211,7 @@ void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
     // PERFORM_NOTIFICATION_ACTION (128)
     if (msg.command == 128) {
         if (data.size() < 6) {
-            return;// Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "PERFORM_NOTIFICATION_ACTION message too short"));
+            return;
         }
         msg.actionId = quint8(data[5]);
 
@@ -227,7 +236,7 @@ void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
         }
         // attributes empty
         if (mCommunicator)mCommunicator->onNotificationControlReceived(msg);
-        return;// Result<GfdiMessage>::isOk(msg);
+        return;
     }
 
     // Requested attributes parsing
@@ -347,6 +356,7 @@ void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArra
 
     if (mCommunicator) mCommunicator->onUnknownMessageReceived(msg);
 }
+
 
 
 // MessageGenerator is used to generate messages for sending to the device
@@ -491,9 +501,19 @@ Result<QByteArray> GfdiMessageGenerator::generateCapabilities() {
     return Result<QByteArray>::isOk(caps);
 }
 
-Result<QByteArray> GfdiMessageGenerator::currentTimeResponse()
+Result<QByteArray> GfdiMessageGenerator::currentTimeResponse(const QByteArray& data)
 {
     // Generate a CurrentTimeRequest response with current time
+    // Unix seconds -> Garmin epoch (Dec 31 1989) offset 631065600
+    quint32 unixNow = quint32(QDateTime::currentMSecsSinceEpoch()/1000);
+    quint32 garminTime = unixNow - 631065600u;
+    quint16 refid=u16le(data,0);
+
+    //TODO: Fix this.
+    int nextTransitionEndsGarminTs =0;
+    int nextTransitionStartsGarminTs = 0;
+    int timeZoneOffset = 0;// = TimeZone.getDefault().getOffset(now.toEpochMilli()) / 1000;
+
     QByteArray r;
     // Packet size placeholder
     r.append(char(0)); r.append(char(0));
@@ -503,12 +523,16 @@ Result<QByteArray> GfdiMessageGenerator::currentTimeResponse()
     writeU16le(r, 5052);
     // Status: ACK
     r.append(char(quint8(Status::Ack)));
-
-    // Unix seconds -> Garmin epoch (Dec 31 1989) offset 631065600
-    quint32 unixNow = quint32(QDateTime::currentMSecsSinceEpoch()/1000);
-    quint32 garminTime = unixNow - 631065600u;
-    writeU32le(r, garminTime);
-
+    // Now referenceid(32bit)
+    writeU16le(r,refid);
+    //Now Garmin Time
+    writeU32le(r, garminTime);;
+    //now timezoneoffset
+    writeU32le(r,timeZoneOffset);
+    //nexttransitionendsgarmints
+    writeU32le(r,nextTransitionEndsGarminTs);
+    //nexttransitionstartsgarmints
+    writeU32le(r,nextTransitionStartsGarminTs);
     // Fill in packet size
     const quint16 packetSize = quint16(r.size() + 2);
     overwriteU16le(r, 0, packetSize);

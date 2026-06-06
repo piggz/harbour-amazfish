@@ -149,6 +149,7 @@ signals:
     void parseError(const QString& error);
 
 private:
+    void parseCurrentTimeRequest(const QByteArray& data);
     void parseDeviceInformation(const QByteArray& data);
     void parseConfiguration(const QByteArray& data);
     void parseNotificationControl(const QByteArray& data);
@@ -173,7 +174,7 @@ public:
     static Result<QByteArray> deviceInformationResponse(const DeviceInformationMessage& incoming);
     static Result<QByteArray> configurationResponse();
     static Result<QByteArray> ackResponse(quint16 messageId);
-    static Result<QByteArray> currentTimeResponse();
+    static Result<QByteArray> currentTimeResponse(const QByteArray& data);
     static Result<QByteArray> filterMessage(quint8 filterType);
     static Result<QByteArray> synchronizationAck();
     static Result<QByteArray> weatherResponse(const WeatherRequestMessage& request);
