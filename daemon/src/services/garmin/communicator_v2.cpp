@@ -1111,20 +1111,6 @@ void GfdiServiceCallback::onMessage(const QByteArray& data) {
  }
 
 
-RealtimeHeartRateCallback::RealtimeHeartRateCallback(CommunicatorV2* parent) : mCommunicator(parent)
-{
-
-}
-void RealtimeHeartRateCallback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer);  }
-void RealtimeHeartRateCallback::onClose() { }
-void RealtimeHeartRateCallback::onMessage(const QByteArray& data) {
-    quint8 type = data[0]; // 0/2/3? 3 == realtime?
-    quint8 hr = data[1] & 0xff;
-    quint8 resting = data[2] & 0xff;
-    qDebug() << "Garmin: Got realtime HR type: " << type << ", hr=" << hr << ", resting=" << resting;
-    mCommunicator->setHeartRate(hr);
-
-}
 
 RealtimeHRVCallback::RealtimeHRVCallback(CommunicatorV2* parent) : mCommunicator(parent)
 {
