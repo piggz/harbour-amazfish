@@ -1,6 +1,9 @@
 #include "garmingfdimessage.h"
 #include <QChar>
 
+#include "communicator_v2.h"
+
+
 
 Result<QString> GarminGfdiMessage::readLengthPrefixedString(const QByteArray& data, int& consumedBytes)
 {
@@ -166,10 +169,8 @@ void GarminGfdiMessage::parseDeviceInformation(const QByteArray& data)
     auto s3 = readLengthPrefixedString(data.mid(off), consumed);
     msg.deviceModel = s3.value;
 
-
-    emit deviceInformationReceived(msg);
-
-    //return Result<GfdiMessage>::isOk(msg);
+    // Now update the device via the communicator
+    if (mCommunicator) mCommunicator->onDeviceInformationReceived(msg);
 }
 
 void GarminGfdiMessage::parseConfiguration(const QByteArray& data)
@@ -184,9 +185,7 @@ void GarminGfdiMessage::parseConfiguration(const QByteArray& data)
     }
     ConfigurationMessage msg;
     msg.capabilities = parseCapabilities(data.mid(1, numBytes));
-    emit configurationReceived(msg);
-
-    return; // Result<GfdiMessage>::isOk(msg);
+    if (mCommunicator) mCommunicator->onConfigurationReceived(msg);
 }
 
 void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
@@ -227,7 +226,7 @@ void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
             }
         }
         // attributes empty
-        emit notificationControlReceived(msg);
+        if (mCommunicator)mCommunicator->onNotificationControlReceived(msg);
         return;// Result<GfdiMessage>::isOk(msg);
     }
 
@@ -255,8 +254,7 @@ void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
         msg.attributes.append({attrId, maxLen});
         off += 3;
     }
-    emit notificationControlReceived(msg);
-    return;// Result<GfdiMessage>::isOk(msg);
+    if (mCommunicator) mCommunicator->onNotificationControlReceived(msg);
 }
 
 void GarminGfdiMessage::parseNotificationSubscription(const QByteArray& data)
@@ -268,8 +266,7 @@ void GarminGfdiMessage::parseNotificationSubscription(const QByteArray& data)
     NotificationSubscriptionMessage msg;
     msg.enable = (quint8(data[0]) == 1);
     msg.unk = quint8(data[1]);
-    emit notificationSubscriptionReceived(msg);
-    return;// Result<GfdiMessage>::isOk(msg);
+    if (mCommunicator) mCommunicator->onNotificationSubscriptionReceived(msg);
 }
 
 void GarminGfdiMessage::parseSynchronization(const QByteArray& data)
@@ -297,9 +294,7 @@ void GarminGfdiMessage::parseSynchronization(const QByteArray& data)
     SynchronizationMessage msg;
     msg.synchronizationType = syncType;
     msg.fileTypeBitmask = bitmask;
-    emit synchronizationReceived(msg);
-
-    return; // Result<GfdiMessage>::isOk(msg);
+    if (mCommunicator) mCommunicator->onSynchronizationReceived(msg);
 }
 
 void GarminGfdiMessage::parseWeatherRequest(const QByteArray& data)
@@ -314,8 +309,7 @@ void GarminGfdiMessage::parseWeatherRequest(const QByteArray& data)
     msg.latitude = i32le(data, 1);
     msg.longitude = i32le(data, 5);
     msg.hoursOfForecast = quint8(data[9]);
-    emit weatherRequestReceived(msg);
-    return; // Result<GfdiMessage>::isOk(msg);
+    if (mCommunicator) mCommunicator->onWeatherRequestReceived(msg);
 }
 
 void GarminGfdiMessage::parseFilterStatus(const QByteArray& data)
@@ -339,8 +333,7 @@ void GarminGfdiMessage::parseFilterStatus(const QByteArray& data)
     FilterStatusMessage msg;
     msg.status = st;
     msg.filterType = (data.size() > 3) ? quint8(data[3]) : 0;
-    emit filterStatusReceived(msg);
-    return;// Result<GfdiMessage>::isOk(msg);
+    if (mCommunicator) mCommunicator->onFilterStatusReceived(msg);
 }
 
 
@@ -352,8 +345,9 @@ void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArra
     msg.messageId = msgId;
     msg.data=data;
 
-    emit unknownMessageReceived(msg);
+    if (mCommunicator) mCommunicator->onUnknownMessageReceived(msg);
 }
+
 
 // MessageGenerator is used to generate messages for sending to the device
 

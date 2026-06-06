@@ -137,6 +137,17 @@ public:
     void resumeMlr();
     void clearAndPauseMlr();
 
+    //hadle incoming GFDI  messages
+    void onDeviceInformationReceived(DeviceInformationMessage &message);
+    void onConfigurationReceived(const ConfigurationMessage& msg);
+    void onCurrentTimeRequestReceived();
+    void onNotificationControlReceived(const NotificationControlMessage& msg);
+    void onNotificationSubscriptionReceived(const NotificationSubscriptionMessage& msg);
+    void onSynchronizationReceived(const SynchronizationMessage& msg);
+    void onFilterStatusReceived(const FilterStatusMessage& msg);
+    void onWeatherRequestReceived(const WeatherRequestMessage& msg);
+    void onUnknownMessageReceived(const UnknownMessage &msg);
+
     // return data
     quint32 steps() {return mSteps;};
     quint32 stepsGoal() {return mStepsGoal;};
@@ -163,17 +174,6 @@ public slots:
     void characteristicRead(const QString &c, const QByteArray &value);
 
     void onCharacteristicChanged(const QString &characteristic, const QByteArray& data);
-
-    void onDeviceInformationReceived(DeviceInformationMessage &message);
-    void onConfigurationReceived(const ConfigurationMessage& msg);
-    void onCurrentTimeRequestReceived();
-    void onNotificationControlReceived(const NotificationControlMessage& msg);
-    void onNotificationSubscriptionReceived(const NotificationSubscriptionMessage& msg);
-    void onSynchronizationReceived(const SynchronizationMessage& msg);
-    void onFilterStatusReceived(const FilterStatusMessage& msg);
-    void onWeatherRequestReceived(const WeatherRequestMessage& msg);
-    void onUnknownMessageReceived(const UnknownMessage &msg);
-
 
     void setSteps(quint32 val);
     void setStepsGoal(quint32);
