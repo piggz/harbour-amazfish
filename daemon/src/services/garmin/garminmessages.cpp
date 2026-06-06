@@ -40,8 +40,19 @@ QSet<quint16> GfdiMessageParser::parseCapabilities(const QByteArray& bytes)
     return caps;
 }
 
-// -------------------- Parser main --------------------
+void GfdiMessageParser::onMessage(const QByteArray& data) {
+    parse(data);
+}
 
+
+void GfdiMessageParser::setCommunicator(CommunicatorV2* comm) {
+    mCommunicator = comm;
+}
+
+// -------------------- Parser --------------------
+// Parses an incoming GFDI messages and calls
+// corresponging handlers
+//-------------------------------------------------
 
 void GfdiMessageParser::parse(const QByteArray& data) {
     // Parse a GFDI message from raw bytes

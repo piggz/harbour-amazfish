@@ -54,6 +54,7 @@ CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
     qDebug() << "Garmin: Service created for " << path;
     connect(this, &QBLEService::characteristicRead, this, &CommunicatorV2::characteristicRead);
     mMessageCallback =QSharedPointer<GfdiMessageCallback>::create();
+
     //mAsyncMessageCallback = QSharedPointer<AsyncGfdiMessageCallback>::create(new AsyncGfdiMessageCallback());
     initializeDevice();
 
@@ -66,6 +67,22 @@ void CommunicatorV2::setMessageCallback(QSharedPointer<GfdiMessageCallback> cb) 
 
 void CommunicatorV2::registerServiceCallback(Service service, QSharedPointer<ServiceCallback> cb) {
     mState->serviceCallbacks.insert(service, std::move(cb));
+    if (service==Service::GFDI) {
+        // This should be changed to not use signals but take action in the parser itself, just like the other handlers
+        // It is part of the rework of the service callbacks
+
+        GfdiMessageParser* parser= qobject_cast<GfdiMessageParser*>(cb.data());
+        connect(parser,&GfdiMessageParser::deviceInformationReceived,this,&CommunicatorV2::onDeviceInformationReceived);
+        connect(parser,&GfdiMessageParser::configurationReceived,this,&CommunicatorV2::onConfigurationReceived);
+        connect(parser,&GfdiMessageParser::currentTimeRequestReceived,this,&CommunicatorV2::onCurrentTimeRequestReceived);
+        connect(parser,&GfdiMessageParser::notificationControlReceived,this,&CommunicatorV2::onNotificationControlReceived);
+        connect(parser,&GfdiMessageParser::notificationSubscriptionReceived,this,&CommunicatorV2::onNotificationSubscriptionReceived);
+        connect(parser,&GfdiMessageParser::synchronizationReceived,this,&CommunicatorV2::onSynchronizationReceived);
+        connect(parser,&GfdiMessageParser::filterStatusReceived,this,&CommunicatorV2::onFilterStatusReceived);
+        connect(parser,&GfdiMessageParser::weatherRequestReceived,this,&CommunicatorV2::onWeatherRequestReceived);
+        connect(parser,&GfdiMessageParser::unknownMessageReceived,this,&CommunicatorV2::onUnknownMessageReceived);
+    }
+
 }
 
 QSharedPointer<ServiceCallback> CommunicatorV2::unregisterServiceCallback(Service service) {
@@ -416,7 +433,12 @@ void CommunicatorV2::onNotificationControlReceived(const NotificationControlMess
 
 void CommunicatorV2::onNotificationSubscriptionReceived(const NotificationSubscriptionMessage& msg) {
     qDebug() << Q_FUNC_INFO;
-
+    bool enable = msg.enable;
+    //todo: set notification handler enable in device
+    //Todo: Check if notfications are enabled in device settings, setting to true for now.
+    // could be in AmazfishConfig::deviceDisconnectNotification() ?
+    auto response = GfdiMessageGenerator::notificationSubscriptionResponse(msg,true);
+    if (response.ok) sendMessage("Notification Response",response.value);
 }
 
 void CommunicatorV2::onSynchronizationReceived(const SynchronizationMessage& msg) {
@@ -630,7 +652,8 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         switch (service) {
         case Service::GFDI:
             qDebug() << Q_FUNC_INFO <<  "Garmin: Inserting GFDI callback handle";
-            registerServiceCallback(Service::GFDI,QSharedPointer<ServiceCallback>(new GfdiServiceCallback(mMessageCallback,this)));
+            //registerServiceCallback(Service::GFDI,QSharedPointer<ServiceCallback>(new GfdiServiceCallback(mMessageCallback,this)));
+            registerServiceCallback(Service::GFDI,QSharedPointer<ServiceCallback>(new GfdiMessageParser(this)));
             // now we can continue with initialising as we have a GFDI handle to send messages
             completePairing();
             break;
@@ -653,7 +676,7 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         }
     }
 
-
+/*
     // Call onConnect for the service callback if registered
     QSharedPointer<ServiceCallback> cb;
     QSharedPointer<QBLECharacteristic> sendChar;
@@ -665,7 +688,7 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
            (void)cb->onConnect(writer);
        }
     }
-
+*/
     emit mlrConnected();
     return;
 }
@@ -799,6 +822,7 @@ void CommunicatorV2::registerServices() {
 
     registerService(Service::GFDI, true);
 
+    //todo: change this as it does not use the real devicde class
     if ((qobject_cast<GarminDevice *>(m_device))->supportedFeatures() &  Amazfish::Feature::FEATURE_SPO2 )
         registerService(Service::RealtimeSpo2, true);
     if ((qobject_cast<GarminDevice *>(m_device))->supportedFeatures() &  Amazfish::Feature::FEATURE_HRM )
@@ -1070,6 +1094,7 @@ void GfdiServiceCallback::onClose() {
 }
 
 void GfdiServiceCallback::onMessage(const QByteArray& data) {
+
     GfdiMessageParser parser;
     connect(&parser,&GfdiMessageParser::deviceInformationReceived,mCommunicator,&CommunicatorV2::onDeviceInformationReceived);
     connect(&parser,&GfdiMessageParser::configurationReceived,mCommunicator,&CommunicatorV2::onConfigurationReceived);
@@ -1081,9 +1106,7 @@ void GfdiServiceCallback::onMessage(const QByteArray& data) {
     connect(&parser,&GfdiMessageParser::weatherRequestReceived,mCommunicator,&CommunicatorV2::onWeatherRequestReceived);
     connect(&parser,&GfdiMessageParser::unknownMessageReceived,mCommunicator,&CommunicatorV2::onUnknownMessageReceived);
 
-    parser.parse(data);
-
-}
+ }
 
 
 RealtimeHeartRateCallback::RealtimeHeartRateCallback(CommunicatorV2* parent) : mCommunicator(parent)
