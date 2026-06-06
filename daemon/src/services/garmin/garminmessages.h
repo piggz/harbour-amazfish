@@ -14,11 +14,9 @@
 #include <optional>
 
 #include "garmintypes.h"
-//#include "communicator_v2.h"
 
 // Forward declarations
 class CommunicatorV2;
-//class ServiceCallback;
 
 
 

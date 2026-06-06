@@ -116,6 +116,8 @@ set(SOURCES
 ./src/services/garmin/cobscodec.cpp
 ./src/services/garmin/garmintypes.cpp
 ./src/services/garmin/garminmessages.cpp
+./src/services/garmin/garminspo2message.cpp
+./src/services/garmin/garminhrmmessage.cpp
 ./src/services/garmin/garminmlr.cpp
 ./src/services/garmin/asyncmessagehandler.cpp
 ./src/services/garmin/datatransferhandler.cpp
@@ -208,6 +210,7 @@ set(HEADERS
 ./src/operations/huami/fetchhrvoperation.h
 ./src/operations/huami/fetchpaioperation.h
 ./src/operations/huami/fetchspo2normaloperation.h
+./src/operations/huami/fetchspo2normaloperation.h
 ./src/operations/huami/fetchspo2sleepoperation.h
 ./src/operations/huami/fetchstressautooperation.h
 ./src/operations/huami/fetchstressmanualoperation.h
@@ -247,6 +250,8 @@ set(HEADERS
 ./src/services/garmin/cobscodec.h
 ./src/services/garmin/garmintypes.h
 ./src/services/garmin/garminmessages.h
+./src/services/garmin/garminspo2message.h
+./src/services/garmin/garminhrmmessage.h
 ./src/services/garmin/garminmlr.h
 ./src/services/garmin/asyncmessagehandler.h
 ./src/services/garmin/datatransferhandler.h

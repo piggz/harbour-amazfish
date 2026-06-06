@@ -279,18 +279,6 @@ private:
 
 };
 
-class RealtimeSpo2Callback : public ServiceCallback {
-public:
-    explicit RealtimeSpo2Callback(CommunicatorV2* parent);
-
-    void onConnect(QSharedPointer<ServiceWriter> writer);
-    void onClose() override;
-    void onMessage(const QByteArray& data) override;
-
-private:
-    CommunicatorV2 *mCommunicator;
-
-};
 
 class RealtimeHRVCallback : public ServiceCallback {
 public:

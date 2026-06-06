@@ -31,7 +31,7 @@ Amazfish::Features GarminDevice::supportedFeatures() const
         // | Amazfish::Feature::FEATURE_ACTIVITY
         | Amazfish::Feature::FEATURE_STEPS
         // | Amazfish::Feature::FEATURE_ALARMS
-        // Amazfish::Feature::FEATURE_ALERT
+        | Amazfish::Feature::FEATURE_ALERT
         // | Amazfish::Feature::FEATURE_EVENT_REMINDER
         // | Amazfish::Feature::FEATURE_MUSIC_CONTROL
         // | Amazfish::Feature::FEATURE_BUTTON_ACTION
@@ -198,7 +198,7 @@ void GarminDevice::parseServices()
                     qDebug() << Q_FUNC_INFO << "Garmin: Adding notification handler";
                     mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(com);
                     //connect(this,&GarminDevice::sendAlertToDevice,mNotificationHandler.data(),&GarminNotificationHandler::onNotification);
-                    setConnectionState("authenticated");
+                    setConnectionState("connected");
                     return;
                 }
             }
