@@ -4,6 +4,8 @@
 #include "garminmlr.h"   // MlrCommunicator (Qt)
 #include "garmintypes.h"
 #include "garminmessages.h"
+#include "garminspo2message.h"
+#include "garminhrmmessage.h"
 #include "amazfishconfig.h"
 #include "asyncmessagehandler.h"
 
@@ -658,10 +660,10 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
             completePairing();
             break;
         case Service::RealtimeSpo2:
-            registerServiceCallback(Service::RealtimeSpo2,QSharedPointer<ServiceCallback>(new RealtimeSpo2Callback(this)));
+            registerServiceCallback(Service::RealtimeSpo2,QSharedPointer<ServiceCallback>(new GarminSpo2Message(this)));
             break;
         case Service::RealtimeHr:
-            registerServiceCallback(Service::RealtimeHr,QSharedPointer<ServiceCallback>(new RealtimeHeartRateCallback(this)));
+            registerServiceCallback(Service::RealtimeHr,QSharedPointer<ServiceCallback>(new GarminHrmMessage(this)));
             break;
         case Service::RealtimeHrv:
             registerServiceCallback(Service::RealtimeHrv,QSharedPointer<ServiceCallback>(new RealtimeHRVCallback(this)));
@@ -1135,23 +1137,6 @@ void RealtimeHRVCallback::onMessage(const QByteArray& data) {
     quint16 unk = le32(data.constData() + 2);
     qDebug() << Q_FUNC_INFO << "Garmin: realtime HRV: " << rr << ", Unknown " << unk;
     mCommunicator->setHRV(rr);
-
-}
-RealtimeSpo2Callback::RealtimeSpo2Callback(CommunicatorV2* parent) : mCommunicator(parent)
-{
-
-}
-void RealtimeSpo2Callback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer);   }
-void RealtimeSpo2Callback::onClose() {  }
-void RealtimeSpo2Callback::onMessage(const QByteArray& data) {
-    quint8 spo2 = data[0];
-    quint32 ts = le32(data.constData()+1);
-
-    ts=ts + 631065600; // Unix timestamp in seconds
-    QDateTime Timestamp;
-
-    qDebug() << Q_FUNC_INFO << "Garmin: realtime Spo2 Callback: " << spo2 << ", Timestamp " << QDateTime::fromTime_t(ts).toString();
-    mCommunicator->setSpo2(spo2);
 
 }
 
