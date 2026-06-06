@@ -118,6 +118,8 @@ set(SOURCES
 ./src/services/garmin/garminmessages.cpp
 ./src/services/garmin/garminspo2message.cpp
 ./src/services/garmin/garminhrmmessage.cpp
+./src/services/garmin/garminhrvmessage.cpp
+./src/services/garmin/garminstepsmessage.cpp
 ./src/services/garmin/garminmlr.cpp
 ./src/services/garmin/asyncmessagehandler.cpp
 ./src/services/garmin/datatransferhandler.cpp
@@ -252,6 +254,8 @@ set(HEADERS
 ./src/services/garmin/garminmessages.h
 ./src/services/garmin/garminspo2message.h
 ./src/services/garmin/garminhrmmessage.h
+./src/services/garmin/garminhrvmessage.h
+./src/services/garmin/garminstepsmessage.h
 ./src/services/garmin/garminmlr.h
 ./src/services/garmin/asyncmessagehandler.h
 ./src/services/garmin/datatransferhandler.h

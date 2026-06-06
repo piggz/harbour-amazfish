@@ -268,33 +268,5 @@ private:
 
 
 
-class RealtimeHRVCallback : public ServiceCallback {
-public:
-    explicit RealtimeHRVCallback(CommunicatorV2* parent);
-
-    void onConnect(QSharedPointer<ServiceWriter> writer);
-    void onClose() override;
-    void onMessage(const QByteArray& data) override;
-
-private:
-    CommunicatorV2 *mCommunicator;
-
-};
-
-
-class RealtimeStepsCallback : public ServiceCallback {
-public:
-    explicit RealtimeStepsCallback(CommunicatorV2* parent);
-
-    void onConnect(QSharedPointer<ServiceWriter> writer);
-    void onClose() override;
-    void onMessage(const QByteArray& data) override;
-
-private:
-    CommunicatorV2 *mCommunicator;
-
-};
-
-
 
 #endif //_COMMUNICATOR__H
