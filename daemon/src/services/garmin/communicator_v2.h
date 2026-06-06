@@ -50,25 +50,8 @@ public:
     void write(const QString& taskName, const QByteArray& data);
 };
 
-// Callback for service lifecycle events
-class ServiceCallback : public QObject{
-    Q_OBJECT
-public:
-    virtual ~ServiceCallback() = default;
 
-    // Called when service is connected and ready to use
-    void onConnect(QSharedPointer<ServiceWriter> writer) {
-        Q_UNUSED(writer);
-    }
-    virtual void onClose() { }
-    // Called when a message is received from the service
-    virtual void onMessage(const QByteArray& data) = 0;
-signals:
-    void deviceInformationReceived(DeviceInformationMessage &msg);
 
-private:
-    QBLEService *mParent;
-};
 
 // =============================================================================
 // Internal state (Rust: struct CommunicatorState)
@@ -115,6 +98,7 @@ public:
 
     // set_message_callback
     void setMessageCallback(QSharedPointer<GfdiMessageCallback> cb);
+
 
     // register_service_callback / unregister_service_callback
     void registerServiceCallback(Service service, QSharedPointer<ServiceCallback> cb);

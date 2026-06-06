@@ -8,6 +8,8 @@
 
 #include <optional>
 #include <utility>
+#include <variant>
+
 
 // This defines some selper classes and functions used by the Garmin communication
 
@@ -172,6 +174,132 @@ Result<Service> serviceFromCode(quint16 code);
 inline quint16 serviceCode(Service s) { return quint16(s); }
 QString serviceToString(Service s);
 
+/// Status codes for response messages
+///
+enum class Status : quint8 {
+    Ack = 0,
+    Nack = 1,
+    Unsupported = 2,
+    DecodeError = 3,
+    CrcError = 4,
+    LengthError = 5,
+};
+
+inline std::optional<Status> statusFromU8(quint8 code) {
+    switch (code) {
+    case 0: return Status::Ack;
+    case 1: return Status::Nack;
+    case 2: return Status::Unsupported;
+    case 3: return Status::DecodeError;
+    case 4: return Status::CrcError;
+    case 5: return Status::LengthError;
+    default: return std::nullopt;
+    }
+}
+
+inline QString statusName(Status s) {
+    switch (s) {
+    case Status::Ack: return "ACK";
+    case Status::Nack: return "NACK";
+    case Status::Unsupported: return "UNSUPPORTED";
+    case Status::DecodeError: return "DECODE_ERROR";
+    case Status::CrcError: return "CRC_ERROR";
+    case Status::LengthError: return "LENGTH_ERROR";
+    }
+    return "UNKNOWN";
+}
+
+// Device Information Message (incoming from watch)
+
+struct DeviceInformationMessage {
+    quint16 protocolVersion{};
+    quint16 productNumber{};
+    quint32 unitNumber{};
+    quint16 softwareVersion{};
+    quint16 maxPacketSize{};
+    QString bluetoothFriendlyName;
+    QString deviceName;
+    QString deviceModel;
+};
+
+// Filter Status Message (response to Filter message)
+
+struct FilterStatusMessage {
+    Status status{};
+    quint8 filterType{};
+};
+
+// Weather Request Message (5014)
+
+struct WeatherRequestMessage {
+    quint8 format{};
+    qint32 latitude{};
+    qint32 longitude{};
+    quint8 hoursOfForecast{};
+};
+
+
+
+struct UnknownMessage {
+    quint16 messageId {0};
+    QByteArray data;
+};
+
+
+
+
+// -------------------- Parsed message structs --------------------
+
+
+// Configuration Message (incoming from watch)
+
+struct ConfigurationMessage {
+    QSet<quint16> capabilities;
+};
+
+// Notification Control Message (incoming from watch)
+
+struct NotificationControlMessage {
+    qint32 notificationId{};
+    quint8 command{};
+    QVector<QPair<quint8, quint16>> attributes; // (attribute_id, max_length)
+    std::optional<quint8> actionId;
+    std::optional<QString> actionString;
+};
+
+// Notification Subscription Message (incoming from watch)
+
+struct NotificationSubscriptionMessage {
+    bool enable{};
+    quint8 unk{};
+};
+
+// Synchronization Message (incoming from watch)
+
+struct SynchronizationMessage {
+    quint8 synchronizationType{};
+    quint64 fileTypeBitmask{};
+
+    bool shouldProceed() const {
+        constexpr quint64 WORKOUTS = 1ull << 3;
+        constexpr quint64 ACTIVITIES = 1ull << 5;
+        constexpr quint64 ACTIVITY_SUMMARY = 1ull << 21;
+        constexpr quint64 SLEEP = 1ull << 26;
+        return (fileTypeBitmask & (WORKOUTS | ACTIVITIES | ACTIVITY_SUMMARY | SLEEP)) != 0;
+    }
+};
+
+using GfdiMessage = std::variant<
+    DeviceInformationMessage,
+    ConfigurationMessage,
+    std::monostate, // CurrentTimeRequest
+    NotificationControlMessage,
+    NotificationSubscriptionMessage,
+    SynchronizationMessage,
+    FilterStatusMessage,
+    WeatherRequestMessage,
+    UnknownMessage
+>;
 
 // Helper functions
 quint16 computeCrc16(const QByteArray& data);
@@ -187,6 +315,29 @@ qint32  i32le(const QByteArray& b, int off);
 void writeU16le(QByteArray& out, quint16 v);
 void writeU32le(QByteArray& out, quint32 v);
 void writeU64le(QByteArray& out, quint64 v);
+
+
+// Callback for service lifecycle events
+class ServiceCallback : public QObject{
+    Q_OBJECT
+public:
+    virtual ~ServiceCallback() = default;
+
+    // Called when service is connected and ready to use
+    /*
+    void onConnect(QSharedPointer<ServiceWriter> writer) {
+        Q_UNUSED(writer);
+    }
+    */
+    virtual void onClose() { }
+    // Called when a message is received from the service
+    virtual void onMessage(const QByteArray& data) = 0;
+signals:
+    void deviceInformationReceived(DeviceInformationMessage &msg);
+
+private:
+    //QBLEService *mParent;
+};
 
 
 #endif //GARMINTYPES__H

@@ -231,7 +231,7 @@ bool AsyncMessageHandler::sendProtobufChunk(quint16 requestId,
     const quint16 crc = computeCrc16A001(msg);
     writeU16le(msg, crc);
 
-    emit logDebug(QStringLiteral("📤 Chunk message size: %1 bytes").arg(msg.size()));
+    qDebug() << Q_FUNC_INFO << "Garmin: Chunk message size: " << msg.size() <<" bytes";
 
     // Rust: send_response(&message).await => enqueue
     return sendResponse(msg);
@@ -273,10 +273,8 @@ bool AsyncMessageHandler::handleProtobufChunkAck(quint16 requestId, quint32 data
         const int chunkSize = qMin(remaining, MAX_PROTOBUF_CHUNK_SIZE);
 
         if (nextOffset + chunkSize > chunkInfo.completePayload.size()) {
-            emit logError(QStringLiteral("❌ ERROR: Chunk boundary exceeds payload! offset=%1 size=%2 total=%3")
-                          .arg(nextOffset)
-                          .arg(chunkSize)
-                          .arg(chunkInfo.completePayload.size()));
+            qDebug() << Q_FUNC_INFO << "Garmin: ERROR: Chunk boundary exceeds payload! offset" << nextOffset
+                    << " size=" << chunkSize << " total=" << chunkInfo.completePayload.size();
             return true; // Rust returns Ok(())
         }
 
