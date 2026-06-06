@@ -6,6 +6,8 @@
 #include "garminmessages.h"
 #include "garminspo2message.h"
 #include "garminhrmmessage.h"
+#include "garminhrvmessage.h"
+#include "garminstepsmessage.h"
 #include "amazfishconfig.h"
 #include "asyncmessagehandler.h"
 
@@ -666,10 +668,10 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
             registerServiceCallback(Service::RealtimeHr,QSharedPointer<ServiceCallback>(new GarminHrmMessage(this)));
             break;
         case Service::RealtimeHrv:
-            registerServiceCallback(Service::RealtimeHrv,QSharedPointer<ServiceCallback>(new RealtimeHRVCallback(this)));
+            registerServiceCallback(Service::RealtimeHrv,QSharedPointer<ServiceCallback>(new GarminHrmMessage(this)));
             break;
         case Service::RealtimeSteps:
-            registerServiceCallback(Service::RealtimeSteps,QSharedPointer<ServiceCallback>(new RealtimeStepsCallback(this)));
+            registerServiceCallback(Service::RealtimeSteps,QSharedPointer<ServiceCallback>(new GarminStepsMessage(this)));
             break;
         default:
             // Create Default Callback
@@ -1112,37 +1114,5 @@ void GfdiServiceCallback::onMessage(const QByteArray& data) {
 
 
 
-RealtimeHRVCallback::RealtimeHRVCallback(CommunicatorV2* parent) : mCommunicator(parent)
-{
-
-}
-void RealtimeHRVCallback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer); }
-void RealtimeHRVCallback::onClose() {  }
-void RealtimeHRVCallback::onMessage(const QByteArray& data) {
-    quint16 rr = le16(data.constData());
-    quint16 unk = le32(data.constData() + 2);
-    qDebug() << Q_FUNC_INFO << "Garmin: realtime HRV: " << rr << ", Unknown " << unk;
-    mCommunicator->setHRV(rr);
-
-}
-
-RealtimeStepsCallback::RealtimeStepsCallback(CommunicatorV2* parent) : mCommunicator(parent)
-{
-
-}
-void RealtimeStepsCallback::onConnect(QSharedPointer<ServiceWriter> writer) { Q_UNUSED(writer); }
-void RealtimeStepsCallback::onClose() {  }
-void RealtimeStepsCallback::onMessage(const QByteArray& data) {
-
-    if (data.size() >= 8)
-    {
-        quint32 steps = le32(data.constData());
-        quint32 stepsGoal = le32(data.constData()+4);
-        qDebug() << Q_FUNC_INFO << "Garmin: Realtime  Steps :  " << steps << ", goal = " << stepsGoal;
-
-        mCommunicator->setStepsGoal(stepsGoal);
-        mCommunicator->setSteps(steps);
-    }
-}
 
 
