@@ -1372,7 +1372,7 @@
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="8"/>
         <source>Notifications settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni notifiche</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="9"/>
@@ -1778,12 +1778,12 @@
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="25"/>
         <source>Download Stress Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Scarica Dati Stress</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="42"/>
         <source>Avg: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Media: %1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="80"/>
@@ -1799,27 +1799,27 @@
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="115"/>
         <source>Mild</source>
-        <translation type="unfinished"></translation>
+        <translation>Lieve</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="123"/>
         <source>Moderate</source>
-        <translation type="unfinished"></translation>
+        <translation>Moderato</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="131"/>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Alto</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="143"/>
         <source>Stress Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Sommario Stress</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="174"/>
         <source>Last Manual Reading</source>
-        <translation type="unfinished"></translation>
+        <translation>Ultima lettura manuale</translation>
     </message>
 </context>
 <context>
