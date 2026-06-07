@@ -813,15 +813,13 @@ void CommunicatorV2::registerServices() {
 
     // Battery Status needs to be treated differently
     // response is not handled yet so no battery information shown
-    /*
-    auto msg = GfdiMessageGenerator::protobufBatteryStatusRequest(0);
+    auto msg = GfdiMessageGenerator::protobufBatteryStatusRequest(1);
     if (!msg.ok) {
         qDebug() << Q_FUNC_INFO << "Garmin: could not generate battery request message";
         return;
     }
 
     sendMessage("Request Battery Status",msg.value);
-*/
 
 }
 

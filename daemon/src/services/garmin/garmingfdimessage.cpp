@@ -131,7 +131,6 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
     }
     default:
         parseUnknownMessage(msgId, data.mid(offset));
-        //return Result<GfdiMessage>::isOk(UnknownMessage{msgId, data.mid(offset)});
     }
 }
 

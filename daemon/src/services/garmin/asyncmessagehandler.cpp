@@ -677,6 +677,21 @@ void AsyncMessageHandler::parse(const UnknownMessage& msg) {
                          // =============================================================
                          if (fieldNumber == 8 && wireType == 2) {
                              qDebug() << Q_FUNC_INFO << "Garmin: Detected DeviceStatusService request";
+                             //Nestedservice so need to find inner service first
+                             const quint16 requestId = u16le(protobufPayload, 0);
+                             const quint32 dataOffset = u32le(protobufPayload, 2);
+                             const quint32 totalProtobufLength = u32le(protobufPayload, 6);
+                             const quint32 protobufDataLength = u32le(protobufPayload, 10);
+
+                             qDebug() << Q_FUNC_INFO << "Garmin: Inner Request ID:" << requestId;
+                             qDebug() << Q_FUNC_INFO << "Garmin: Inner Data Offset:" << dataOffset;
+                             qDebug() << Q_FUNC_INFO << "Garmin: Inner Total Protobuf Length:" << totalProtobufLength;
+                             qDebug() << Q_FUNC_INFO << "Garmin: Inner Protobuf Data Length:" << protobufDataLength;
+                             const QByteArray protobufPayload2 =protobufPayload.mid(protobufStart, protobufDataLength);
+
+                             qDebug() << Q_FUNC_INFO << "Garmin: Inner payload:" << protobufPayload2.toHex();
+
+
 
                              QByteArray responsePayload;
                              responsePayload.append(char(0xB3));
@@ -700,29 +715,25 @@ void AsyncMessageHandler::parse(const UnknownMessage& msg) {
                              }
                          }
                          // =============================================================
-                         // Field 21 => LiveTrackService
+                         // Field 27 => Authentication Request
                          // =============================================================
-                         else if (fieldNumber == 21 && wireType == 2) {
-                             qDebug() << Q_FUNC_INFO << "Garmin: Detected LiveTrackService request";
-                             qDebug() << Q_FUNC_INFO << "Garmin: Live tracking not implemented - sending ACK";
+                         else if (fieldNumber == 27 && wireType == 2) {
+                             qDebug() << Q_FUNC_INFO << "Garmin: Detected Authentication request";
+                             qDebug() << Q_FUNC_INFO << "Garmin: Sending back 0 as we don't know what else to do";
 
                              QByteArray responsePayload;
-                             responsePayload.append(char(0xB3));
-                             responsePayload.append(char(0x13));
-                             responsePayload.append(char(0x00)); // ACK
                              writeU16le(responsePayload, requestId);
-                             writeU32le(responsePayload, dataOffset);
-                             responsePayload.append(char(0x00)); // KEPT
-                             responsePayload.append(char(0x00)); // NO_ERROR
+                             responsePayload.append(char(0));
+                             writeU32le(responsePayload,0);
 
                              const QByteArray response =
-                                 wrapInGfdiEnvelope(5000, responsePayload);
+                                 wrapInGfdiEnvelope(5101, responsePayload);
 
                              bool queueRes = sendResponse(response);
                              if (!queueRes) {
                                  qDebug() << Q_FUNC_INFO << "Garmin: Failed to queue ACK:";
                              } else {
-                                 qDebug() << Q_FUNC_INFO << "Garmin: LiveTrackService ACK queued";
+                                 qDebug() << Q_FUNC_INFO << "Garmin: Authentication Response sent";
                              }
                          }
                          // =============================================================
