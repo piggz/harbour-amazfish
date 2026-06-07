@@ -358,8 +358,8 @@ void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, cons
 void CommunicatorV2::onDeviceInformationReceived(DeviceInformationMessage &message)
 {
     //received device information is " << message.maxPacketSize;
-    mDeviceInfo.deviceName=message.deviceName;
-    mDeviceInfo.deviceModel=message.deviceModel;
+    mDeviceInfo.deviceName=QString(message.deviceName);
+    mDeviceInfo.deviceModel=QString(message.deviceName) +QString(" ") + QString(message.deviceModel);
     mDeviceInfo.serialNumber=QString::number(message.unitNumber);
     mDeviceInfo.softwareRevision=QString::number(message.softwareVersion);
     mDeviceInfo.deviceManufacturer="Garmin";
@@ -475,7 +475,7 @@ void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
 
     QSharedPointer<ServiceCallback> svcCb;
 
-    qDebug() << Q_FUNC_INFO << "Garmin: handle decoded message: Found handle " << handle;
+    qDebug() << Q_FUNC_INFO << "Garmin: handle decoded message: Found handle " <<handle;
 
     service = mState->serviceByHandle.value(handle, Service::GFDI);
 
@@ -645,7 +645,6 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         switch (service) {
         case Service::GFDI:
             qDebug() << Q_FUNC_INFO <<  "Garmin: Inserting GFDI callback handle";
-            //registerServiceCallback(Service::GFDI,QSharedPointer<ServiceCallback>(new GfdiServiceCallback(mMessageCallback,this)));
             registerServiceCallback(Service::GFDI,QSharedPointer<ServiceCallback>(new GarminGfdiMessage(this)));
             // now we can continue with initialising as we have a GFDI handle to send messages
             completePairing();
@@ -669,19 +668,6 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         }
     }
 
-/*
-    // Call onConnect for the service callback if registered
-    QSharedPointer<ServiceCallback> cb;
-    QSharedPointer<QBLECharacteristic> sendChar;
-    {
-       cb = mState->serviceCallbacks.value(service);
-       if (mState->characteristicSend) sendChar = mState->characteristicSend;
-       if (cb && sendChar) {
-           QSharedPointer<ServiceWriter> writer(new MlrServiceWriter(mlrHandle,sendChar));
-           (void)cb->onConnect(writer);
-       }
-    }
-*/
     emit mlrConnected();
     return;
 }
@@ -815,7 +801,6 @@ void CommunicatorV2::registerServices() {
 
     registerService(Service::GFDI, true);
 
-    //todo: change this as it does not use the real devicde class
     if ((qobject_cast<GarminDevice *>(m_device))->supportedFeatures() &  Amazfish::Feature::FEATURE_SPO2 )
         registerService(Service::RealtimeSpo2, true);
     if ((qobject_cast<GarminDevice *>(m_device))->supportedFeatures() &  Amazfish::Feature::FEATURE_HRM )
@@ -828,6 +813,7 @@ void CommunicatorV2::registerServices() {
 
     // Battery Status needs to be treated differently
     // response is not handled yet so no battery information shown
+    /*
     auto msg = GfdiMessageGenerator::protobufBatteryStatusRequest(0);
     if (!msg.ok) {
         qDebug() << Q_FUNC_INFO << "Garmin: could not generate battery request message";
@@ -835,7 +821,7 @@ void CommunicatorV2::registerServices() {
     }
 
     sendMessage("Request Battery Status",msg.value);
-
+*/
 
 }
 
@@ -1046,7 +1032,7 @@ void CommunicatorV2::saveHRVRecord()
     return;
 }
 
-*/
+
 
 
 

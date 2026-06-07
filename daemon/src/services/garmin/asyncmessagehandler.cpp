@@ -61,18 +61,11 @@ AsyncMessageHandler::AsyncMessageHandler(QObject* parent)
 }
 
 void AsyncMessageHandler::setCommunicator(CommunicatorV2* comm) {
-    QMutexLocker lock(&mMutex);
     mCommunicator = comm;
 }
 
 void AsyncMessageHandler::setNotificationHandler(const QSharedPointer<GarminNotificationHandler>& handler) {
-    QMutexLocker lock(&mMutex);
     mNotificationHandler = handler;
-
-    // Rust also sets watchdog reference from handler.watchdog.clone().
-    // Assumes GarminNotificationHandler exposes watchdog() -> QSharedPointer<WatchdogManager>.
-    // If your API differs, adjust here.
-    // m_watchdog = handler ? handler->watchdog() : nullptr;
 }
 
 /*
@@ -84,7 +77,6 @@ void AsyncMessageHandler::setCalendarManager(const QSharedPointer<CalendarManage
 
 bool AsyncMessageHandler::sendResponse(const QByteArray& response) {
     // Rust: push_back(response.to_vec()) and return Ok(())
-    QMutexLocker lock(&mMutex);
     mMessageQueue.enqueue(response);
     return true;
 }
@@ -99,7 +91,6 @@ void AsyncMessageHandler::processQueueTick() {
     CommunicatorV2* comm;
 
     {
-        QMutexLocker lock(&mMutex);
         if (mMessageQueue.isEmpty()) return;
 
         // If we cannot acquire, we're in the 50ms cooldown period
@@ -166,7 +157,6 @@ bool AsyncMessageHandler::sendProtobufResponse(const QByteArray& message) {
     emit logInfo(QStringLiteral("📦 Message too large, chunking into %1-byte chunks").arg(MAX_PROTOBUF_CHUNK_SIZE));
 
     {
-        QMutexLocker lock(&mMutex);
         PendingProtobufChunk chunk;
         chunk.completePayload = protobufPayload;
         chunk.totalLength = protobufPayload.size();
@@ -241,7 +231,6 @@ bool AsyncMessageHandler::handleProtobufChunkAck(quint16 requestId, quint32 data
     std::optional<PendingProtobufChunk> pendingChunk;
 
     {
-        QMutexLocker lock(&mMutex);
         auto it = mPendingProtobufChunks.find(requestId);
         if (it != mPendingProtobufChunks.end()) {
             pendingChunk = it.value(); // cloned()
@@ -288,7 +277,6 @@ bool AsyncMessageHandler::handleProtobufChunkAck(quint16 requestId, quint32 data
 
     // Done: remove pending
     {
-        QMutexLocker lock(&mMutex);
         mPendingProtobufChunks.remove(requestId);
     }
     emit logInfo(QStringLiteral("✅ All chunks sent for request ID %1").arg(requestId));
