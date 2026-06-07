@@ -73,6 +73,7 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: sending notification";
     bool isUpdate = addNotificationToQueue(notification);
+    qDebug() << Q_FUNC_INFO << "Garmin: notification isupdate=" <<isUpdate;
     NotificationUpdateType updateType = isUpdate ? NotificationUpdateType::Modify : NotificationUpdateType::Add;
     if (m_storedNotifications.size() > 30)
         m_storedNotifications.erase(m_storedNotifications.end()); //remove the oldest notification TODO: should send a delete notification message to watch!
@@ -103,7 +104,6 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
 
     QByteArray gfdi = wrapInGfdiEnvelope(5033, updateMsg);
     if (m_communicator) {
-        //m_communicator->sendMessage("notification", gfdi);
         bool result = m_communicator->sendMessage("notification", gfdi);
 
         if (result) {
@@ -185,6 +185,7 @@ QByteArray GarminNotificationHandler::wrapInGfdiEnvelope(quint16 messageId, cons
 {
     QByteArray msg;
 
+    // try without crc?
     quint16 size = static_cast<quint16>(2 + 2 + payload.size() + 2);
 
     writeU16le(msg,size);
@@ -197,8 +198,6 @@ QByteArray GarminNotificationHandler::wrapInGfdiEnvelope(quint16 messageId, cons
     quint16 crc = computeCrc16(msg);
     writeU16le(msg,crc);
 
-    //msg.append(char(crc & 0xFF));
-    //msg.append(char((crc >> 8) & 0xFF));
 
     return msg;
 }
