@@ -118,6 +118,7 @@ set(SOURCES
 ./src/services/garmin/garmingfdimessage.cpp
 ./src/services/garmin/garmindeviceinformationmessage.cpp
 ./src/services/garmin/garmincurrenttimemessage.cpp
+./src/services/garmin/garminconfigurationmessage.cpp
 ./src/services/garmin/garminspo2message.cpp
 ./src/services/garmin/garminhrmmessage.cpp
 ./src/services/garmin/garminhrvmessage.cpp
@@ -256,6 +257,7 @@ set(HEADERS
 ./src/services/garmin/garmingfdimessage.h
 ./src/services/garmin/garmindeviceinformationmessage.h
 ./src/services/garmin/garmincurrenttimemessage.h
+./src/services/garmin/garminconfigurationmessage.h
 ./src/services/garmin/garminspo2message.h
 ./src/services/garmin/garminhrmmessage.h
 ./src/services/garmin/garminhrvmessage.h

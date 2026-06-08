@@ -367,33 +367,11 @@ void CommunicatorV2::onDeviceInformationReceived(DeviceInformationMessage &messa
     //set max packet size
     onDeviceMaxPacketSize(message.maxPacketSize);
 
-    //response to the information received
-    Result<QByteArray> response =  GfdiMessageGenerator::deviceInformationResponse(message);
-    if (response.ok)
-    {
-        sendMessage("Device Information Response",response.value);
-    }
 }
 
-void CommunicatorV2::onConfigurationReceived(const ConfigurationMessage& message) {
-    qDebug() << Q_FUNC_INFO;
-    qDebug() << "Garmin: Received Configuration with"
-            << message.capabilities.size() << "capabilities";
+void CommunicatorV2::onConfigurationReceived() {
 
-
-    Result<QByteArray> response =  GfdiMessageGenerator::configurationResponse();
-    if (response.ok)
-    {
-        sendMessage("Device Configuration Response", response.value);
-    }
-
-    response =  GfdiMessageGenerator::setDeviceSettings(false,false,false); //don't advertise autoUpload, weatherconditions and weatherAlerts
-        if (response.ok)
-        {
-            sendMessage("Device Settings", response.value);
-        }
-
-    response = GfdiMessageGenerator::systemEvent(8, 0);
+    Result<QByteArray> response = GfdiMessageGenerator::systemEvent(8, 0);
     if (response.ok)
     {
         sendMessage("SYNC READY", response.value);

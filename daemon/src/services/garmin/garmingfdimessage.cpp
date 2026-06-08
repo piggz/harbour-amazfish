@@ -4,6 +4,7 @@
 #include "communicator_v2.h"
 #include "garmindeviceinformationmessage.h"
 #include "garmincurrenttimemessage.h"
+#include "garminconfigurationmessage.h"
 
 
 
@@ -29,20 +30,6 @@ Result<QString> GarminGfdiMessage::readLengthPrefixedString(const QByteArray& da
     }
     consumedBytes = 1 + len;
     return Result<QString>::isOk(s);
-}
-
-QSet<quint16> GarminGfdiMessage::parseCapabilities(const QByteArray& bytes)
-{
-    QSet<quint16> caps;
-    quint16 current = 0;
-    for (auto ch : bytes) {
-        const quint8 byte = quint8(ch);
-        for (int i=0;i<8;i++) {
-            if (byte & (1u << i)) caps.insert(current);
-            current++;
-        }
-    }
-    return caps;
 }
 
 void GarminGfdiMessage::onMessage(const QByteArray& data) {
@@ -151,17 +138,8 @@ void GarminGfdiMessage::parseDeviceInformation(const QByteArray& data)
 
 void GarminGfdiMessage::parseConfiguration(const QByteArray& data)
 {
-    qDebug() << Q_FUNC_INFO << "Garmin: parsing configuration";
-    if (data.isEmpty()) {
-        return ;//Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "Configuration message empty"));
-    }
-    const int numBytes = quint8(data[0]);
-    if (data.size() < 1 + numBytes) {
-        return; // Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "Configuration data truncated"));
-    }
-    ConfigurationMessage msg;
-    msg.capabilities = parseCapabilities(data.mid(1, numBytes));
-    if (mCommunicator) mCommunicator->onConfigurationReceived(msg);
+    GarminConfigurationMessage* mesg = new GarminConfigurationMessage(mCommunicator);
+    mesg->parse(data);
 }
 
 void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
@@ -365,65 +343,7 @@ QByteArray GfdiMessageGenerator::truncateUtf8Bytes(const QString& s, int maxByte
 
 // -------------------- Generator: public API --------------------
 
-Result<QByteArray> GfdiMessageGenerator::deviceInformationResponse(const DeviceInformationMessage& incoming)
-{
-    QByteArray r;
-    r.append(char(0)); r.append(char(0));           // size placeholder - will be filled at the end
-    writeU16le(r, 5000);                             // RESPONSE
-    writeU16le(r, 5024);                             // original DEVICE_INFORMATION
-    r.append(char(quint8(Status::Ack)));            // status
 
-    writeU16le(r, 150);                              // protocol version 1.50
-    writeU16le(r, 0xFFFF);                           // product number (-1 = 0xFFFF for phone)
-    writeU32le(r, 0xFFFFFFFFu);                      // our unit number
-    writeU16le(r, 7791);                             // software version  (7791 = version 77.91, matching Gadgetbridge)
-    writeU16le(r, 0xFFFF);                           // our max packet size( -1 = 0xFFFF means no limit)
-    // Bluetooth name (null-terminated)
-    r.append("Jolla-Amazfish"); r.append(char(0));
-    // Device manufacturer (null-terminated)
-    r.append("Jolla");      r.append(char(0));
-    // Device model (null-terminated)
-    r.append("SailfishOS");             r.append(char(0));
-
-     // Protocol flags (1 for v1.x, 0 for v2.x)
-    const quint8 protocolFlags = (incoming.protocolVersion / 100 == 1) ? 1 : 0;
-    r.append(char(protocolFlags));
-
-    // Fill in packet size (total length + 2 for checksum)
-    const quint16 packetSize = quint16(r.size() + 2);   // +2 for checksum
-    overwriteU16le(r, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeChecksum(r);
-    writeU16le(r, crc);
-    return Result<QByteArray>::isOk(r);
-}
-
-Result<QByteArray> GfdiMessageGenerator::configurationResponse()
-{
-    QByteArray r;
-
-    // Packet size placeholder
-    r.append(char(0)); r.append(char(0));
-    // Message ID: CONFIGURATION (5050)
-    writeU16le(r, 5050); // CONFIGURATION
-
-    // Generate our capabilities
-    const QByteArray caps = generateCapabilities().value;
-    // Number of capability bytes
-    r.append(char(quint8(caps.size())));
-    // Capability bytes
-    r.append(caps);
-
-    // Fill in packet size
-    const quint16 packetSize = quint16(r.size() + 2);
-    overwriteU16le(r, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeChecksum(r);
-    writeU16le(r, crc);
-    return Result<QByteArray>::isOk(r);
-}
 
 Result<QByteArray> GfdiMessageGenerator::ackResponse(quint16 messageId)
 {
@@ -443,73 +363,7 @@ Result<QByteArray> GfdiMessageGenerator::ackResponse(quint16 messageId)
     return Result<QByteArray>::isOk(r);
 }
 
-Result<QByteArray> GfdiMessageGenerator::generateCapabilities() {
-    QByteArray caps(15, char(0));
 
-    // Set ALL capabilities (0-119) except the unknown/unsupported ones
-    // This matches Gadgetbridge Java's OUR_CAPABILITIES behavior
-    const int unsupported[] = {
-        104,105,106,107,108,109,110,111,
-        114,115,116,117,118,119
-    };
-
-    for (int cap = 0; cap < 120; ++cap) {
-        bool skip = false;
-
-        for (int u : unsupported) if (u == cap) { skip = true; break; }
-        if (skip) continue;
-
-        const int byteIdx = cap / 8;
-        const int bitIdx = cap % 8;
-        if (byteIdx < caps.size()) {
-            caps[byteIdx] = char(quint8(caps[byteIdx]) | (1u << bitIdx));
-        }
-    }
-    return Result<QByteArray>::isOk(caps);
-}
-
-Result<QByteArray> GfdiMessageGenerator::currentTimeResponse(const QByteArray& data)
-{
-    // Generate a CurrentTimeRequest response with current time
-    // Unix seconds -> Garmin epoch (Dec 31 1989) offset 631065600
-    quint32 unixNow = quint32(QDateTime::currentMSecsSinceEpoch()/1000);
-    quint32 garminTime = unixNow - 631065600u;
-    quint16 refid=u16le(data,0);
-
-    //TODO: Fix this.
-    int nextTransitionEndsGarminTs =0;
-    int nextTransitionStartsGarminTs = 0;
-    int timeZoneOffset = 0;// = TimeZone.getDefault().getOffset(now.toEpochMilli()) / 1000;
-
-    QByteArray r;
-    // Packet size placeholder
-    r.append(char(0)); r.append(char(0));
-    // Message ID: RESPONSE (5000)
-    writeU16le(r, 5000);
-    // Original message ID: CURRENT_TIME_REQUEST (5052)
-    writeU16le(r, 5052);
-    // Status: ACK
-    r.append(char(quint8(Status::Ack)));
-    // Now referenceid(32bit)
-    writeU32le(r,refid);
-    //Now Garmin Time
-    writeU32le(r, garminTime);;
-    //now timezoneoffset
-    writeU32le(r,timeZoneOffset);
-    //nexttransitionendsgarmints
-    writeU32le(r,nextTransitionEndsGarminTs);
-    //nexttransitionstartsgarmints
-    writeU32le(r,nextTransitionStartsGarminTs);
-    // Fill in packet size
-    const quint16 packetSize = quint16(r.size() + 2);
-    overwriteU16le(r, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeChecksum(r);
-    writeU16le(r, crc);
-
-    return Result<QByteArray>::isOk(r);
-}
 
 Result<QByteArray> GfdiMessageGenerator::filterMessage(quint8 filterType)
 {
@@ -697,43 +551,7 @@ Result<QByteArray> GfdiMessageGenerator::supportedFileTypesRequest()
     return Result<QByteArray>::isOk(m);
 }
 
-Result<QByteArray> GfdiMessageGenerator::setDeviceSettings(bool autoUpload, bool weatherConditions, bool weatherAlerts)
-{
-    // Generate a SetDeviceSettings message
-    //
-    // Sends device settings to the watch (auto upload, weather, etc.)
-    // Sent after Configuration exchange during initialization.
-    //
-    // # Arguments
-    // * `autoUpload` - Enable auto upload of activities
-    // * `weatherConditions` - Enable weather conditions
-    // * `weatherAlerts` - Enable weather alerts
-    QByteArray m;
 
-    // Packet size placeholder
-    m.append(char(0)); m.append(char(0));
-    // Message ID: DEVICE_SETTINGS (5026)
-    writeU16le(m, 5026);
-    // Number of settings (always 3 for now)
-    m.append(char(3));
-
-    // Each setting consists of an ordinal/index, data length and status byte
-    // Setting 1: AUTO_UPLOAD_ENABLED (index 6)
-    m.append(char(6)); m.append(char(1)); m.append(char(autoUpload ? 1 : 0)); // GarminDeviceSetting.AUTO_UPLOAD_ENABLED ordinal
-    // Setting 2: WEATHER_CONDITIONS_ENABLED (index 7)
-    m.append(char(7)); m.append(char(1)); m.append(char(weatherConditions ? 1 : 0));
-    // Setting 3: WEATHER_ALERTS_ENABLED (index 8)
-    m.append(char(8)); m.append(char(1)); m.append(char(weatherAlerts ? 1 : 0));
-
-    // Fill in packet size
-    const quint16 packetSize = quint16(m.size() + 2);
-    overwriteU16le(m, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeChecksum(m);
-    writeU16le(m, crc);
-    return Result<QByteArray>::isOk(m);
-}
 
 Result<QByteArray> GfdiMessageGenerator::systemEvent(quint8 eventType, quint8 value)
 {

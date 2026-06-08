@@ -209,18 +209,7 @@ inline QString statusName(Status s) {
     return "UNKNOWN";
 }
 
-// Device Information Message (incoming from watch)
 
-struct DeviceInformationMessage {
-    quint16 protocolVersion{};
-    quint16 productNumber{};
-    quint32 unitNumber{};
-    quint16 softwareVersion{};
-    quint16 maxPacketSize{};
-    QString bluetoothFriendlyName;
-    QString deviceName;
-    QString deviceModel;
-};
 
 // Filter Status Message (response to Filter message)
 
@@ -251,11 +240,6 @@ struct UnknownMessage {
 // -------------------- Parsed message structs --------------------
 
 
-// Configuration Message (incoming from watch)
-
-struct ConfigurationMessage {
-    QSet<quint16> capabilities;
-};
 
 // Notification Control Message (incoming from watch)
 
@@ -290,8 +274,6 @@ struct SynchronizationMessage {
 };
 
 using GfdiMessage = std::variant<
-    DeviceInformationMessage,
-    ConfigurationMessage,
     NotificationControlMessage,
     NotificationSubscriptionMessage,
     SynchronizationMessage,
@@ -331,8 +313,6 @@ public:
     virtual void onClose() { }
     // Called when a message is received from the service
     virtual void onMessage(const QByteArray& data) = 0;
-signals:
-    void deviceInformationReceived(DeviceInformationMessage &msg);
 
 private:
     //QBLEService *mParent;

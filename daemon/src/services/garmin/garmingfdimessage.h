@@ -157,7 +157,6 @@ private:
     void parseFilterStatus(const QByteArray& data);
     void parseUnknownMessage(const quint16 , const QByteArray& data);
 
-    static QSet<quint16> parseCapabilities(const QByteArray& bytes);
 
 protected:
     CommunicatorV2* mCommunicator;
@@ -170,10 +169,7 @@ protected:
 
 class GfdiMessageGenerator {
 public:
-    static Result<QByteArray> deviceInformationResponse(const DeviceInformationMessage& incoming);
-    static Result<QByteArray> configurationResponse();
     static Result<QByteArray> ackResponse(quint16 messageId);
-    static Result<QByteArray> currentTimeResponse(const QByteArray& data);
     static Result<QByteArray> filterMessage(quint8 filterType);
     static Result<QByteArray> synchronizationAck();
     static Result<QByteArray> weatherResponse(const WeatherRequestMessage& request);

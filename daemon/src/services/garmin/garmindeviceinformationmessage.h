@@ -6,8 +6,7 @@
 
 #include <QObject>
 
-// Forward declarations
-//class CommunicatorV2;
+
 
 class GarminDeviceInformationMessage : public GarminGfdiMessage
 {
@@ -16,7 +15,7 @@ public:
         mCommunicator = parent;
     }
     void parse(const QByteArray& data);
-
+    QByteArray generateResponse(const DeviceInformationMessage& incoming);
 };
 
 #endif // GARMINDEVICEINFORMATIONMESSAGE_H

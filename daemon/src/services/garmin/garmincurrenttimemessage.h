@@ -8,6 +8,7 @@
 
 class GarminCurrentTimeMessage : public GarminGfdiMessage
 {
+    Q_OBJECT
 public:
     explicit GarminCurrentTimeMessage(CommunicatorV2 *parent) {
         mCommunicator = parent;
