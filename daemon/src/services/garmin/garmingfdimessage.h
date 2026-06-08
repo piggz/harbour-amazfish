@@ -145,8 +145,6 @@ public slots:
     // Convenience slot: parse and emit appropriate signal
     //void parseAndEmit(const QByteArray& data);
 
-signals:
-    void parseError(const QString& error);
 
 private:
     void parseCurrentTimeRequest(const QByteArray& data);
@@ -159,10 +157,11 @@ private:
     void parseFilterStatus(const QByteArray& data);
     void parseUnknownMessage(const quint16 , const QByteArray& data);
 
-    static Result<QString> readLengthPrefixedString(const QByteArray& data, int& consumedBytes);
     static QSet<quint16> parseCapabilities(const QByteArray& bytes);
 
+protected:
     CommunicatorV2* mCommunicator;
+    static Result<QString> readLengthPrefixedString(const QByteArray& data, int& consumedBytes);
 
 
 };
