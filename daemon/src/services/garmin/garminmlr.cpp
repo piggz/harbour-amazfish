@@ -175,18 +175,18 @@ Result<void> MlrCommunicator::start() {
 
 Result<void> MlrCommunicator::sendMessage(const QString& taskName, const QByteArray& message) {
     if (message.isEmpty()) {
-        qDebug() << "Garmin: Empty Message  in MLR Commnicator";
+        qDebug() << Q_FUNC_INFO << "Garmin: Empty Message  in MLR Commnicator";
         return Result<void>::err(GarminError::emptyMessage());
     }
 
     {
         QMutexLocker lock(&m_mutex);
         if (m_state.paused) {
-            qDebug() << "Garmin: MLR is paused - rejecting send_message for " << taskName;
+            qDebug() << Q_FUNC_INFO << "Garmin: MLR is paused - rejecting send_message for " << taskName;
             return Result<void>::err(GarminError::bluetoothError(QStringLiteral("MLR is paused during reconnection")));
         }
 
-        qDebug() << "Garmin: Queuing MLR message for " << taskName <<  "(" << message.size() <<" bytes)";
+        qDebug() << Q_FUNC_INFO << "Garmin: Queuing MLR message for " << taskName <<  "(" << message.size() <<" bytes)";
 
         const int maxDataSize = qMax(0, m_state.maxPacketSize - 2);
 
@@ -209,7 +209,6 @@ Result<void> MlrCommunicator::sendMessage(const QString& taskName, const QByteAr
         lock.unlock();
     }
 
-    // Rust drops lock then run_protocol().await
     return runProtocolOnce();
 }
 
@@ -444,6 +443,7 @@ Result<void> MlrCommunicator::runProtocolOnce() {
 
         numSentUnacked = seqDiff(m_state.nextSendSeq, m_state.lastRcvAck);
         if (numSentUnacked >= m_state.maxNumUnackedSend) {
+            qDebug() << Q_FUNC_INFO << "Cannot send more packets, " << numSentUnacked <<" unacked, max " << m_state.maxNumUnackedSend;
             return Result<void>::isOk();
         }
         if (m_state.fragmentQueue.isEmpty()) {
@@ -468,7 +468,7 @@ Result<void> MlrCommunicator::runProtocolOnce() {
     auto r = awaitSend(taskName, pkt);
     if (!r.ok) return r;
 
-    qDebug() << "Garmin: Sent MLR packet: seqNum=" << seq << ", dataLen=" << pkt.size() - 2;
+    qDebug() << Q_FUNC_INFO << "Garmin: Sent MLR packet: seqNum=" << seq << ", dataLen=" << pkt.size() - 2;
     return Result<void>::isOk();
 }
 
@@ -561,7 +561,7 @@ Result<void> MlrCommunicator::checkRetransmitTimeout() {
         } else {
             const QString errMsg = r.error.toString();
             if (errMsg.contains(QStringLiteral("Not connected"), Qt::CaseInsensitive)) {
-                qDebug() << "Garmin: Connection lost during retransmission - clearing MLR state";
+                qDebug() << Q_FUNC_INFO << "Garmin: Connection lost during retransmission - clearing MLR state";
                 for (auto& opt : m_state.sentFragments) opt.reset();
                 m_state.fragmentQueue.clear();
                 m_state.lastRetransmitTimeMs.reset();

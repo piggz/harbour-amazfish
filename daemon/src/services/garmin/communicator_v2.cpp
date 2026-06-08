@@ -392,25 +392,11 @@ void CommunicatorV2::onConfigurationReceived() {
     }
 }
 
-void CommunicatorV2::onCurrentTimeRequestReceived(){
-    qDebug() << Q_FUNC_INFO;
-
-}
-
 void CommunicatorV2::onNotificationControlReceived(const NotificationControlMessage& msg){
     qDebug() << Q_FUNC_INFO;
 
 }
 
-void CommunicatorV2::onNotificationSubscriptionReceived(const NotificationSubscriptionMessage& msg) {
-    qDebug() << Q_FUNC_INFO;
-    bool enable = msg.enable;
-    //todo: set notification handler enable in device
-    //Todo: Check if notfications are enabled in device settings, setting to true for now.
-    // could be in AmazfishConfig::deviceDisconnectNotification() ?
-    auto response = GfdiMessageGenerator::notificationSubscriptionResponse(msg,true);
-    if (response.ok) sendMessage("Notification Response",response.value);
-}
 
 void CommunicatorV2::onSynchronizationReceived(const SynchronizationMessage& msg) {
     qDebug() << Q_FUNC_INFO;

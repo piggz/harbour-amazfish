@@ -251,12 +251,6 @@ struct NotificationControlMessage {
     std::optional<QString> actionString;
 };
 
-// Notification Subscription Message (incoming from watch)
-
-struct NotificationSubscriptionMessage {
-    bool enable{};
-    quint8 unk{};
-};
 
 // Synchronization Message (incoming from watch)
 
@@ -275,7 +269,6 @@ struct SynchronizationMessage {
 
 using GfdiMessage = std::variant<
     NotificationControlMessage,
-    NotificationSubscriptionMessage,
     SynchronizationMessage,
     FilterStatusMessage,
     WeatherRequestMessage,

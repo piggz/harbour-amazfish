@@ -19,12 +19,13 @@ QByteArray GarminCurrentTimeMessage::generateResponse(const QByteArray& data) {
 
     quint32 unixNow = quint32(QDateTime::currentMSecsSinceEpoch()/1000);
     quint32 garminTime = unixNow - 631065600u;
-    quint16 refid=u16le(data,0);
+    quint32 refid=u32le(data,0);
 
     //TODO: Fix this.
+    QTimeZone tz = QTimeZone::systemTimeZone();
+    int timeZoneOffset = tz.offsetFromUtc(QDateTime::currentDateTime());
     int nextTransitionEndsGarminTs =0;
     int nextTransitionStartsGarminTs = 0;
-    int timeZoneOffset = 0;// = TimeZone.getDefault().getOffset(now.toEpochMilli()) / 1000;
 
 
     // Original message ID: CURRENT_TIME_REQUEST (5052)
@@ -34,7 +35,7 @@ QByteArray GarminCurrentTimeMessage::generateResponse(const QByteArray& data) {
     // Now referenceid(32bit)
     writeU32le(r,refid);
     //Now Garmin Time
-    writeU32le(r, garminTime);;
+    writeU32le(r, garminTime);
     //now timezoneoffset
     writeU32le(r,timeZoneOffset);
     //nexttransitionendsgarmints
