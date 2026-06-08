@@ -18,6 +18,8 @@
 #include "cobscodec.h"
 #include "garminmlr.h"
 #include "garminnotification.h"
+
+
 #include <qbledevice.h>
 #include <qbleservice.h>
 #include <KDbConnection.h>
@@ -39,6 +41,17 @@ struct deviceInfo {
     QString deviceName;
     QString deviceModel;
     QString deviceManufacturer;
+};
+
+struct DeviceInformationMessage {
+    quint16 protocolVersion{};
+    quint16 productNumber{};
+    quint32 unitNumber{};
+    quint16 softwareVersion{};
+    quint16 maxPacketSize{};
+    QString bluetoothFriendlyName;
+    QString deviceName;
+    QString deviceModel;
 };
 
 // Writer for sending messages to a service ->needed? Or use QBLECharacteristic?
@@ -138,7 +151,7 @@ public:
 
     //hadle incoming GFDI  messages
     void onDeviceInformationReceived(DeviceInformationMessage &message);
-    void onConfigurationReceived(const ConfigurationMessage& msg);
+    void onConfigurationReceived();
     void onCurrentTimeRequestReceived();
     void onNotificationControlReceived(const NotificationControlMessage& msg);
     void onNotificationSubscriptionReceived(const NotificationSubscriptionMessage& msg);
