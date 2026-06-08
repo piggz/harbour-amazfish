@@ -3,6 +3,7 @@
 
 #include "communicator_v2.h"
 #include "garmindeviceinformationmessage.h"
+#include "garmincurrenttimemessage.h"
 
 
 
@@ -138,16 +139,14 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
 // -------------------- Parser: per-message parsers --------------------
 void GarminGfdiMessage::parseCurrentTimeRequest(const QByteArray& data)
 {
-    auto timeResponse = GfdiMessageGenerator::currentTimeResponse(data);
-    if (timeResponse.ok)
-        if (mCommunicator) mCommunicator->sendMessage("Time Response", timeResponse.value);
+    GarminCurrentTimeMessage* mesg = new GarminCurrentTimeMessage(mCommunicator);
+    mesg->parse(data);
 }
 
 void GarminGfdiMessage::parseDeviceInformation(const QByteArray& data)
 {
     GarminDeviceInformationMessage* mesg = new GarminDeviceInformationMessage(mCommunicator);
     mesg->parse(data);
-    return;
 }
 
 void GarminGfdiMessage::parseConfiguration(const QByteArray& data)
