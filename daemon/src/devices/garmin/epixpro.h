@@ -2,13 +2,9 @@
 #define EPIXPRO_DEVICE__H
 
 #include <QObject>
-#include <QSharedPointer>
-#include "abstractdevice.h"
 #include "garmindevice.h"
-#include "services/garmin/communicator_v2.h"
 
 
-class NotificationSpec;
 
 class EpixProDevice : public GarminDevice
 
