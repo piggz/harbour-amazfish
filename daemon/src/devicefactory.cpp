@@ -14,6 +14,7 @@
 #include "dk08device.h"
 #include "garmin/garmindevice.h"
 #include "garmin/epixpro.h"
+#include "garmin/vivosmart5.h"
 
 #include <functional>
 #include <QMetaEnum>
@@ -48,7 +49,7 @@ static const QMap<QString, DeviceCreator> deviceMap = {
     { "Mi Band 2", [](const QString &name) { return new BipLiteDevice(name); } },
     { "Generic Garmin", [](const QString &name) { return new GarminDevice(name); } },
     { "Garmin Epix", [](const QString &name) { return new EpixProDevice(name); } },
-
+    { "Garmin Vivosmart 5", [](const QString &name) { return new Vivosmart5Device(name); } },
     };
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName, const QString &deviceType)

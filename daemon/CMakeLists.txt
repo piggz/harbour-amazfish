@@ -57,6 +57,7 @@ set(SOURCES
 ./src/devices/pebbledevice.cpp
 ./src/devices/garmin/garmindevice.cpp
 ./src/devices/garmin/epixpro.cpp
+./src/devices/garmin/vivosmart5.cpp
 ./src/devices/pinetimejfdevice.cpp
 ./src/devices/infinitimefirmwareinfo.cpp
 ./src/devices/dk08device.cpp
@@ -198,6 +199,7 @@ set(HEADERS
 ./src/devices/pebbledevice.h
 ./src/devices/garmin/garmindevice.h
 ./src/devices/garmin/epixpro.h
+./src/devices/garmin/vivosmart5.h
 ./src/devices/pinetimejfdevice.h
 ./src/devices/infinitimefirmwareinfo.h
 ./src/devices/dk08device.h
