@@ -598,8 +598,9 @@ Result<QByteArray> GfdiMessageGenerator::protobufBatteryStatusRequest(quint16 re
     // DeviceStatusService with field 2 (remote_device_battery_status_request)
     QByteArray deviceStatusService;
     deviceStatusService.append(char((2 << 3) | 2)); // Field 2, wire type 2 (length-delimited)
-    deviceStatusService.append(char(inner.size()));// Length of inner message (0)
-    deviceStatusService.append(inner);
+    //deviceStatusService.append(char(inner.size()));// Length of inner message (0)
+    //deviceStatusService.append(inner);
+    deviceStatusService.append(char(0));
 
     // Smart with field 8 (device_status_service)
     QByteArray smartProto;
