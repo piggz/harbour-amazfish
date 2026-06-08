@@ -5,6 +5,7 @@
 #include "garmindeviceinformationmessage.h"
 #include "garmincurrenttimemessage.h"
 #include "garminconfigurationmessage.h"
+#include "garminnotificationsubscriptionmessage.h"
 
 
 
@@ -126,18 +127,21 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
 // -------------------- Parser: per-message parsers --------------------
 void GarminGfdiMessage::parseCurrentTimeRequest(const QByteArray& data)
 {
+    qDebug() << Q_FUNC_INFO;
     GarminCurrentTimeMessage* mesg = new GarminCurrentTimeMessage(mCommunicator);
     mesg->parse(data);
 }
 
 void GarminGfdiMessage::parseDeviceInformation(const QByteArray& data)
 {
+    qDebug() << Q_FUNC_INFO;
     GarminDeviceInformationMessage* mesg = new GarminDeviceInformationMessage(mCommunicator);
     mesg->parse(data);
 }
 
 void GarminGfdiMessage::parseConfiguration(const QByteArray& data)
 {
+    qDebug() << Q_FUNC_INFO;
     GarminConfigurationMessage* mesg = new GarminConfigurationMessage(mCommunicator);
     mesg->parse(data);
 }
@@ -213,14 +217,9 @@ void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
 
 void GarminGfdiMessage::parseNotificationSubscription(const QByteArray& data)
 {
-    qDebug() << Q_FUNC_INFO << "Garmin: parsing notification subscription";
-    if (data.size() < 2) {
-        return;// Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "NotificationSubscription message too short"));
-    }
-    NotificationSubscriptionMessage msg;
-    msg.enable = (quint8(data[0]) == 1);
-    msg.unk = quint8(data[1]);
-    if (mCommunicator) mCommunicator->onNotificationSubscriptionReceived(msg);
+    qDebug() << Q_FUNC_INFO;
+    GarminNotificationSubscriptionMessage* msg = new GarminNotificationSubscriptionMessage(mCommunicator);
+    msg->parse(data);
 }
 
 void GarminGfdiMessage::parseSynchronization(const QByteArray& data)
@@ -491,41 +490,7 @@ Result<QByteArray> GfdiMessageGenerator::fitDataMessage(const QByteArray& fitDat
     return Result<QByteArray>::isOk(m);
 }
 
-Result<QByteArray> GfdiMessageGenerator::notificationSubscriptionResponse(const NotificationSubscriptionMessage& incoming, bool enabled)
-{
-    // Generate a NotificationSubscription response
-    //
-    // This responds to the watch's notification subscription request (message ID 5036)
-    // with an ACK and notification status information.
-    //
-    // # Arguments
-    // * `incoming` - The incoming NotificationSubscriptionMessage
-    // * `enabled` - Whether notifications are enabled (typically true)
-    QByteArray r;
-    // Packet size placeholder
-    r.append(char(0)); r.append(char(0));
-    // Message ID: RESPONSE (5000)
-    writeU16le(r, 5000);
-    // Original message ID: NOTIFICATION_SUBSCRIPTION (5036)
-    writeU16le(r, 5036);
-    // Status: ACK
-    r.append(char(quint8(Status::Ack)));
-    // Notification Status (0 = ENABLED, 1 = DISABLED)
-    r.append(char(enabled ? 0 : 1));
-    // Enable flag (matches incoming request)
-    r.append(char(incoming.enable ? 1 : 0));
-    // Unknown byte (copy from incoming)
-    r.append(char(incoming.unk));
 
-    // Fill in packet size
-    const quint16 packetSize = quint16(r.size() + 2);
-    overwriteU16le(r, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeChecksum(r);
-    writeU16le(r, crc);
-    return Result<QByteArray>::isOk(r);
-}
 
 Result<QByteArray> GfdiMessageGenerator::supportedFileTypesRequest()
 {

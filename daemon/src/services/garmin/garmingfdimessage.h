@@ -175,7 +175,6 @@ public:
     static Result<QByteArray> weatherResponse(const WeatherRequestMessage& request);
     static Result<QByteArray> fitDefinitionMessage(const QByteArray& fitDefinitionData);
     static Result<QByteArray> fitDataMessage(const QByteArray& fitData);
-    static Result<QByteArray> notificationSubscriptionResponse(const NotificationSubscriptionMessage& incoming, bool enabled);
     static Result<QByteArray> supportedFileTypesRequest();
     static Result<QByteArray> setDeviceSettings(bool autoUpload, bool weatherConditions, bool weatherAlerts);
     static Result<QByteArray> systemEvent(quint8 eventType, quint8 value);
