@@ -297,7 +297,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="356"/>
         <source>Update Calendar</source>
-        <translation>Kalender updaten</translation>
+        <translation>Kalender aktualisieren</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
