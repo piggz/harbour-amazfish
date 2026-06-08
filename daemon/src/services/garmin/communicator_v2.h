@@ -190,6 +190,7 @@ public slots:
     void setHeartRate(quint8 val);
     void setHRV(quint16 val);
     void setSpo2(quint8 val);
+    void setBatteryLevel(quint8 val);
 
     // Register services
     void registerServices();

@@ -370,18 +370,17 @@ void CommunicatorV2::onDeviceInformationReceived(DeviceInformationMessage &messa
 }
 
 void CommunicatorV2::onConfigurationReceived() {
-
     Result<QByteArray> response = GfdiMessageGenerator::systemEvent(8, 0);
     if (response.ok)
     {
         sendMessage("SYNC READY", response.value);
     }
-    // SYNC_READY
-    response = GfdiMessageGenerator::systemEvent(6, 0);// FOREGROUND
+    response = GfdiMessageGenerator::systemEvent(6, 0);
     if (response.ok)
     {
         sendMessage("HOST FOREGROUND", response.value);
     }
+    /*
     if (isFirstConncet) {
         isFirstConncet = false;
         response = GfdiMessageGenerator::systemEvent(0, 0);// SYNC_COMPLETE
@@ -390,6 +389,14 @@ void CommunicatorV2::onConfigurationReceived() {
             sendMessage("SYNC COMPLETE", response.value);
         }
     }
+    */
+    auto msg = GfdiMessageGenerator::protobufBatteryStatusRequest(1);
+    if (!msg.ok) {
+        qDebug() << Q_FUNC_INFO << "Garmin: could not generate battery request message";
+        return;
+    }
+
+    sendMessage("Request Battery Status",msg.value);
 }
 
 void CommunicatorV2::onNotificationControlReceived(const NotificationControlMessage& msg){
@@ -742,6 +749,11 @@ bool CommunicatorV2::completePairing() {
         if (!msg4.ok) return false;
         if (!sendMessage("SETUP_WIZARD_COMPLETE",msg4.value)) return false;;
 
+        auto msg5 = GfdiMessageGenerator::systemEvent(6,0);
+        if (!msg5.ok) return false;
+        if (!sendMessage("SET_FOREGROUND",msg5.value)) return false;
+
+
         isPairing=false;
         isFirstConncet=false;
         qDebug()<< Q_FUNC_INFO << "Garmin: pairing complete.";
@@ -910,7 +922,15 @@ void CommunicatorV2::setSpo2(quint8 val)
     //saveSpo2Record();
 }
 
-
+void CommunicatorV2::setBatteryLevel(quint8 val)
+{
+    //qDebug() << Q_FUNC_INFO << "Garmin: setting Spo2 to " << val;
+    if (mBatteryLevel != val)
+    {
+        mBatteryLevel =val;
+        emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(val));
+    }
+}
 
 void CommunicatorV2::saveHRVRecord()
 {

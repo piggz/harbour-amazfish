@@ -6,6 +6,7 @@
 #include <QtCore/QDebug>
 
 #include "garmintypes.h"
+#include "garmindevicestatusmessage.h"
 
 static inline QString transferStatusName(quint8 transferStatus)
 {
@@ -675,45 +676,7 @@ void AsyncMessageHandler::parse(const UnknownMessage& msg) {
                          // =============================================================
                          // Field 8 => DeviceStatusService
                          // =============================================================
-                         if (fieldNumber == 8 && wireType == 2) {
-                             qDebug() << Q_FUNC_INFO << "Garmin: Detected DeviceStatusService request";
-                             //Nestedservice so need to find inner service first
-                             const quint16 requestId = u16le(protobufPayload, 0);
-                             const quint32 dataOffset = u32le(protobufPayload, 2);
-                             const quint32 totalProtobufLength = u32le(protobufPayload, 6);
-                             const quint32 protobufDataLength = u32le(protobufPayload, 10);
-
-                             qDebug() << Q_FUNC_INFO << "Garmin: Inner Request ID:" << requestId;
-                             qDebug() << Q_FUNC_INFO << "Garmin: Inner Data Offset:" << dataOffset;
-                             qDebug() << Q_FUNC_INFO << "Garmin: Inner Total Protobuf Length:" << totalProtobufLength;
-                             qDebug() << Q_FUNC_INFO << "Garmin: Inner Protobuf Data Length:" << protobufDataLength;
-                             const QByteArray protobufPayload2 =protobufPayload.mid(protobufStart, protobufDataLength);
-
-                             qDebug() << Q_FUNC_INFO << "Garmin: Inner payload:" << protobufPayload2.toHex();
-
-
-
-                             QByteArray responsePayload;
-                             responsePayload.append(char(0xB3));
-                             responsePayload.append(char(0x13));
-                             responsePayload.append(char(0x00)); // ACK
-                             writeU16le(responsePayload, requestId);
-                             writeU32le(responsePayload, dataOffset);
-                             responsePayload.append(char(0x00)); // KEPT
-                             responsePayload.append(char(0x00)); // NO_ERROR
-
-                             const QByteArray response =
-                                 wrapInGfdiEnvelope(5000, responsePayload);
-
-                             qDebug() << Q_FUNC_INFO << "Garmin: Sending ProtobufStatus ACK for DeviceStatusService";
-
-                             bool queueRes = sendResponse(response);
-                             if (!queueRes) {
-                                 qDebug() << Q_FUNC_INFO << "Garmin: Failed to queue ACK:";
-                             } else {
-                                 qDebug() << Q_FUNC_INFO << "Garmin: ProtobufStatus ACK queued - watch should continue!";
-                             }
-                         }
+                         if (fieldNumber == 8 && wireType == 2) {}
                          // =============================================================
                          // Field 27 => Authentication Request
                          // =============================================================
@@ -1080,5 +1043,58 @@ void AsyncMessageHandler::parse(const UnknownMessage& msg) {
              qDebug() << Q_FUNC_INFO << "Garmin:  ProtobufRequest data too short to parse full header (got" << msg.data.size() <<" bytes, need 18)";
          }
      }
+    // ---------------------------------------------------------------------
+    // Handle ProtobufReponse (0x13B4 = 5044)
+    // ---------------------------------------------------------------------
+    else if (msg.messageId == 0x13B4) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Protobuf Response detected!";
+
+        if (msg.data.size() >= 18) {
+            const quint16 requestId = u16le(msg.data, 0);
+            const quint32 dataOffset = u32le(msg.data, 2);
+            const quint32 totalProtobufLength = u32le(msg.data, 6);
+            const quint32 protobufDataLength = u32le(msg.data, 10);
+
+            qDebug() << Q_FUNC_INFO << "Garmin: Request ID:" << requestId;
+            qDebug() << Q_FUNC_INFO << "Garmin: Data Offset:" << dataOffset;
+            qDebug() << Q_FUNC_INFO << "Garmin: Total Protobuf Length:" << totalProtobufLength;
+            qDebug() << Q_FUNC_INFO << "Garmin: Protobuf Data Length:" << protobufDataLength;
+
+            const int protobufStart = 14;
+            const int protobufEnd = protobufStart + static_cast<int>(protobufDataLength);
+
+            if (msg.data.size() >= protobufEnd) {
+                const QByteArray protobufPayload = msg.data.mid(protobufStart, protobufDataLength);
+                const bool isComplete =
+                    (dataOffset == 0 && totalProtobufLength == protobufDataLength);
+
+                if (isComplete) {
+                    qDebug() << Q_FUNC_INFO << "Garmin: Complete protobuf message - attempting to parse";
+
+                    if (!protobufPayload.isEmpty()) {
+                        const quint8 firstTag = static_cast<quint8>(protobufPayload[0]);
+                        const quint8 fieldNumber = firstTag >> 3;
+                        const quint8 wireType = firstTag & 0x07;
+
+
+                        qDebug() << Q_FUNC_INFO << "Garmin: First protobuf field:" << fieldNumber
+                                << "(wire type:" << wireType << ") Payload: " << protobufPayload.toHex();
+
+                        if (fieldNumber==8 && wireType ==2)
+                        { //get length of inner protobuf
+                            quint8  innerLength=protobufPayload[1];
+                            GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(mCommunicator);
+                            msg->parse(protobufPayload.mid(2,innerLength));
+                      }
+
+                    }
+                }
+            }
+    }
+
+    }
+     else {
+            qDebug() << Q_FUNC_INFO << "Garmin: Unknown protobuf message";
+    }
 }
 

@@ -26,7 +26,7 @@ QByteArray GarminNotificationSubscriptionMessage::generateResponse(NotificationS
     // * `incoming` - The incoming NotificationSubscriptionMessage
     // * `enabled` - Whether notifications are enabled (typically true)
 
-    bool enabled = msg.enable;
+    bool enabled =true;
     //todo: set notification handler enable in device
     //Todo: Check if notfications are enabled in device settings, setting to true for now.
     // could be in AmazfishConfig::deviceDisconnectNotification() ?
