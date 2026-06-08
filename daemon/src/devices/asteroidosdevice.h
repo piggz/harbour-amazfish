@@ -27,12 +27,14 @@ private:
     void parseServices();
     void initialise();
 
-    virtual void pair() override;
+    void pair() override;
 
     Q_SLOT void authenticated(bool ready);
 
-    virtual void refreshInformation() override;
-    virtual void sendWeather(CurrentWeather *weather) override;
+    void refreshInformation() override;
+    QString information(Info i) const override;
+
+    void sendWeather(CurrentWeather *weather) override;
 
     Q_SLOT void serviceEvent(const QString &characteristic, uint8_t event, uint8_t data);
 
