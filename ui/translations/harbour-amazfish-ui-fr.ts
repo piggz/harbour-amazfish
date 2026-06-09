@@ -1404,12 +1404,12 @@
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="8"/>
         <source>Notifications settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres notifications</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="9"/>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer paramètres</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="36"/>
@@ -1427,7 +1427,7 @@
         <location filename="../qml/pages/Settings-user.qml" line="27"/>
         <location filename="../qml/pages/Settings-user.qml" line="28"/>
         <source>Name:</source>
-        <translation>Nom:</translation>
+        <translation>Nom&#xa0;:</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="35"/>
@@ -1497,7 +1497,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="204"/>
         <source>All day HRM interval (minutes): </source>
-        <translation>Capteur cardiaque en continu (Intervale en minutes, 0 signifie désactivé):</translation>
+        <translation>Capteur cardiaque en continu (Intervale en minutes, 0 signifie désactivé)&#xa0;: </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="209"/>
@@ -1643,7 +1643,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="87"/>
         <source>%1°; %2°</source>
-        <translation>%1°&#x202f;;  %2°</translation>
+        <translation>%1°&#x202f;; %2°</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="89"/>
@@ -2136,7 +2136,7 @@
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="123"/>
         <source>Moderate</source>
-        <translation type="unfinished"></translation>
+        <translation>Modéré(e)</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="131"/>
@@ -2151,7 +2151,7 @@
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="174"/>
         <source>Last Manual Reading</source>
-        <translation type="unfinished"></translation>
+        <translation>Dernière lecture manuelle</translation>
     </message>
 </context>
 <context>
