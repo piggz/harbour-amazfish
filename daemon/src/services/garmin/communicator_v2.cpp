@@ -10,6 +10,7 @@
 #include "garminstepsmessage.h"
 #include "amazfishconfig.h"
 #include "asyncmessagehandler.h"
+#include "garmindevicestatusmessage.h"
 
 #include <QtCore/QStringList>
 #include <QtCore/QMetaObject>
@@ -390,13 +391,9 @@ void CommunicatorV2::onConfigurationReceived() {
         }
     }
     */
-    auto msg = GfdiMessageGenerator::protobufBatteryStatusRequest(1);
-    if (!msg.ok) {
-        qDebug() << Q_FUNC_INFO << "Garmin: could not generate battery request message";
-        return;
-    }
+    GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
+    sendMessage("BATTERY STATUS REQUEST",msg->generateBatteryStatusRequest(1));
 
-    sendMessage("Request Battery Status",msg.value);
 }
 
 void CommunicatorV2::onNotificationControlReceived(const NotificationControlMessage& msg){
@@ -787,15 +784,10 @@ void CommunicatorV2::registerServices() {
     //HRV is not shown in the GUI so no realtime info needed
     //registerService(Service::RealtimeHrv, true);
 
-    // Battery Status needs to be treated differently
-    // response is not handled yet so no battery information shown
-    auto msg = GfdiMessageGenerator::protobufBatteryStatusRequest(1);
-    if (!msg.ok) {
-        qDebug() << Q_FUNC_INFO << "Garmin: could not generate battery request message";
-        return;
-    }
+    // Send Battery Status request
+    GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
+    sendMessage("BATTERY STATUS REQUEST",msg->generateBatteryStatusRequest(1));
 
-    sendMessage("Request Battery Status",msg.value);
 
 }
 
