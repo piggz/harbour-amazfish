@@ -1,4 +1,5 @@
 #include "garmindevicestatusmessage.h"
+#include "garmintypes.h"
 
 void GarminDeviceStatusMessage::parse(const QByteArray& data) {
     // This is a device status response
@@ -26,3 +27,61 @@ QByteArray GarminDeviceStatusMessage::generateResponse(const QByteArray& data) {
 
 }
 
+
+QByteArray GarminDeviceStatusMessage::generateBatteryStatusRequest(quint16 requestId)
+{
+
+    // Generate a ProtobufRequest for battery status updates
+    //
+    // This sends a protobuf request asking the watch to provide battery status updates.
+    // Sent during initialization (completeInitialization in Java).
+    //
+    // The protobuf structure is:
+    // ```proto
+    // Smart {
+    //   device_status_service = 8 {
+    //     remote_device_battery_status_request = 2 {
+    //       // empty message
+    //     }
+    //   }
+    // }
+    // ```
+    //
+    // # Arguments
+    // * `requestId` - The protobuf request ID (incrementing counter)
+
+    // Build the protobuf payload manually
+    // Smart.device_status_service (field 8, type length-delimited)
+    // DeviceStatusService.remote_device_battery_status_request (field 2, type length-delimited)
+
+    // Inner message: RemoteDeviceBatteryStatusRequest (empty)
+    QByteArray inner; // empty
+
+    // DeviceStatusService with field 2 (remote_device_battery_status_request)
+    QByteArray deviceStatusService;
+    deviceStatusService.append(char((2 << 3) | 2)); // Field 2, wire type 2 (length-delimited)
+    //deviceStatusService.append(char(inner.size()));// Length of inner message (0)
+    //deviceStatusService.append(inner);
+    deviceStatusService.append(char(0));
+
+    // Smart with field 8 (device_status_service)
+    QByteArray smartProto;
+    smartProto.append(char((8 << 3) | 2));// Field 8, wire type 2 (length-delimited)
+    smartProto.append(char(deviceStatusService.size()));// Length
+    smartProto.append(deviceStatusService);
+
+    // Now build the ProtobufRequest message
+    QByteArray m;
+    // Request ID
+    writeU16le(m, requestId);
+    // Data offset (0 for non-chunked)
+    writeU32le(m, 0);
+    // Total protobuf length
+    writeU32le(m, quint32(smartProto.size()));
+    // Protobuf data length (same as total for non-chunked)
+    writeU32le(m, quint32(smartProto.size()));
+    // Protobuf payload
+    m.append(smartProto);
+    // Message ID: PROTOBUF_REQUEST (5043)
+    return wrapInGfdiEnvelope(5043,m);
+}
