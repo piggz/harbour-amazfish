@@ -404,7 +404,6 @@ void CommunicatorV2::onNotificationControlReceived(const NotificationControlMess
 
 void CommunicatorV2::onSynchronizationReceived(const SynchronizationMessage& msg) {
     qDebug() << Q_FUNC_INFO;
-
 }
 
 void CommunicatorV2::onFilterStatusReceived(const FilterStatusMessage& msg) {
