@@ -269,3 +269,26 @@ void writeU32le(QByteArray& out, quint32 v) {
 void writeU64le(QByteArray& out, quint64 v) {
     for (int i=0;i<8;++i) out.append(char((v >> (8*i)) & 0xFF));
 }
+
+void overwriteU16le(QByteArray& out, int off, quint16 v) {
+    out[off] = char(v & 0xFF);
+    out[off+1] = char((v >> 8) & 0xFF);
+}
+
+void overwriteU32le(QByteArray& out, int off, quint32 v) {
+    out[off] = char(v & 0xFF);
+    out[off+1] = char((v >> 8) & 0xFF);
+    out[off+2] = char((v >> 16) & 0xFF);
+    out[off+3] = char((v >> 24) & 0xFF);
+}
+
+void overwriteU64le(QByteArray& out, int off, quint64 v) {
+    out[off] = char(v & 0xFF);
+    out[off+1] = char((v >> 8) & 0xFF);
+    out[off+2] = char((v >> 16) & 0xFF);
+    out[off+3] = char((v >> 24) & 0xFF);
+    out[off+4] = char((v >> 32) & 0xFF);
+    out[off+5] = char((v >> 40) & 0xFF);
+    out[off+6] = char((v >> 48) & 0xFF);
+    out[off+6] = char((v >> 56) & 0xFF);
+}

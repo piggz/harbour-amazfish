@@ -289,6 +289,9 @@ qint32  i32le(const QByteArray& b, int off);
 void writeU16le(QByteArray& out, quint16 v);
 void writeU32le(QByteArray& out, quint32 v);
 void writeU64le(QByteArray& out, quint64 v);
+void overwriteU16le(QByteArray& out, int off, quint16 v);
+void overwriteU32le(QByteArray& out, int off, quint32 v);
+void overwriteU64le(QByteArray& out, int off, quint64 v);
 
 
 // Callback for service lifecycle events
@@ -309,6 +312,33 @@ public:
 
 private:
     //QBLEService *mParent;
+};
+
+
+//
+// ---------------------------------------------------------------------
+// NotificationUpdateType
+// ---------------------------------------------------------------------
+enum class NotificationUpdateType : quint8 {
+    Add    = 0,
+    Modify = 1,
+    Remove = 2
+};
+
+//
+// -------------------------
+// NotificationType
+// -------------------------
+enum class NotificationType : quint8 {
+    GenericPhone        = 1,
+    GenericSms          = 2,
+    GenericEmail        = 3,
+    GenericChat         = 4,
+    GenericSocial       = 5,
+    GenericNavigation   = 6,
+    GenericCalendar     = 7,
+    GenericAlarmClock   = 8,
+    Generic             = 9
 };
 
 

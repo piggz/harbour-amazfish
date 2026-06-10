@@ -18,6 +18,7 @@
 #include "cobscodec.h"
 #include "garminmlr.h"
 #include "garminnotification.h"
+#include "weather/currentweather.h"
 
 
 #include <qbledevice.h>
@@ -143,7 +144,6 @@ public:
     bool completePairing();
 
 
-    // Rust: connection state helpers
     void onConnectionStateChange(bool connected);
     void pauseMlr();
     void resumeMlr();

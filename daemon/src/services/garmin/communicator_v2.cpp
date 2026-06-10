@@ -426,7 +426,6 @@ void CommunicatorV2::onUnknownMessageReceived(const UnknownMessage& msg) {
 
 }
 
-
 void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
     qDebug() << Q_FUNC_INFO << "Garmin: handleDecodedMessage: " << decodedWithHandle.toHex();
     if (decodedWithHandle.isEmpty())

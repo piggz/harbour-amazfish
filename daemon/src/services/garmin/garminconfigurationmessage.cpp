@@ -16,7 +16,7 @@ void GarminConfigurationMessage::parse(const QByteArray& data) {
     msg.capabilities = parseCapabilities(data.mid(1, numBytes));
     QByteArray resp = generateResponse(data);
     resp = wrapInGfdiEnvelope(5050, data);
-    QByteArray settings =  setDeviceSettings(false,false,false); //don't advertise autoUpload, weatherconditions and weatherAlerts
+    QByteArray settings =  setDeviceSettings(false,true,true); //don't advertise autoUpload, advertise weatherconditions and weatherAlerts
     settings = wrapInGfdiEnvelope(5026,settings);
 
     if (mCommunicator) {

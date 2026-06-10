@@ -1,5 +1,6 @@
 #include "garminnotification.h"
 #include "garmintypes.h"
+#include "garminnotificationupdatemessage.h"
 
 #include <optional>
 
@@ -56,25 +57,26 @@ bool GarminNotificationHandler::removeNotification(qint32 id)
         }
     }
 
-    auto msg = NotificationUpdateMessageBuilder::create(
-        NotificationUpdateType::Remove,
-        type,
-        count,
-        id).build();
-
-    QByteArray gfdi = wrapInGfdiEnvelope(5033, msg);
-
-    // async send simulated
-    if (m_communicator) return m_communicator->sendMessage("notification_remove", gfdi);
-    else return false;
+    CommunicatorV2 *com = m_communicator.data();
+    GarminNotificationUpdateMessage* msg = new GarminNotificationUpdateMessage(com);
+    msg->notificationType=type;
+    msg->updateType=NotificationUpdateType::Remove;
+    msg->count=count;
+    msg->notificationId=id;
+    msg->parse();
+    return true;
 }
 
 void GarminNotificationHandler::onNotification(NotificationSpec notification)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: sending notification";
+    CommunicatorV2 *com = m_communicator.data();
+    GarminNotificationUpdateMessage* updateMessage = new GarminNotificationUpdateMessage(com);
     bool isUpdate = addNotificationToQueue(notification);
+    //TEST:
+    isUpdate = false;
     qDebug() << Q_FUNC_INFO << "Garmin: notification isupdate=" <<isUpdate;
-    NotificationUpdateType updateType = isUpdate ? NotificationUpdateType::Modify : NotificationUpdateType::Add;
+    updateMessage->updateType = isUpdate ? NotificationUpdateType::Modify : NotificationUpdateType::Add;
     if (m_storedNotifications.size() > 30)
         m_storedNotifications.erase(m_storedNotifications.end()); //remove the oldest notification TODO: should send a delete notification message to watch!
 
@@ -89,29 +91,14 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
         }
 
     }
+    updateMessage->hasActions=hasActions;
 
     //bool hasPicture = notification.hasPicture;
-    int count = getNotificationCount(notification.notificationType);
-    qDebug() << Q_FUNC_INFO << "Garmin: Found " << count << " notifications of this type";
+    updateMessage->count = getNotificationCount(notification.notificationType);
+    qDebug() << Q_FUNC_INFO << "Garmin: Found " << updateMessage->count << " notifications of this type";
 
-    QByteArray updateMsg = NotificationUpdateMessageBuilder::create(
-                updateType,
-                notification.notificationType,
-                count,
-                notification.id)
-                .withActions(notification.hasActions)
-                .build();
+    updateMessage->parse();
 
-    QByteArray gfdi = wrapInGfdiEnvelope(5033, updateMsg);
-    if (m_communicator) {
-        bool result = m_communicator->sendMessage("notification", gfdi);
-
-        if (result) {
-            qDebug() << Q_FUNC_INFO << "Garmin: Notification sent successfully";
-        } else {
-            qDebug() << Q_FUNC_INFO <<"Garmin: Notification could not be sent";
-        }
-    }
 }
 
 
@@ -181,26 +168,6 @@ void GarminNotificationHandler::onSetCallState(const CallSpec& call)
     }
 }
 
-QByteArray GarminNotificationHandler::wrapInGfdiEnvelope(quint16 messageId, const QByteArray& payload)
-{
-    QByteArray msg;
-
-    // try without crc?
-    quint16 size = static_cast<quint16>(2 + 2 + payload.size() + 2);
-
-    writeU16le(msg,size);
-
-    writeU16le(msg,messageId);
-
-
-    msg.append(payload);
-
-    quint16 crc = computeCrc16(msg);
-    writeU16le(msg,crc);
-
-
-    return msg;
-}
 
 bool GarminNotificationHandler::addNotificationToQueue(NotificationSpec note) {
     bool found = false;
