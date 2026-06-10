@@ -69,11 +69,11 @@ public:
      void processQueueTick();
 
  private:
+     void handleProtobufResponse(const QByteArray& data);
+     void handleAuthenticationRequest(quint16 requestiD);
      static quint16 computeCrc16A001(const QByteArray& data);
+     void sendGenericAck(const QByteArray& data);
 
-
-
- private:
      mutable QMutex mMutex;
 
      CommunicatorV2* mCommunicator;

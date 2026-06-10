@@ -8,7 +8,8 @@
 #include "garminnotificationsubscriptionmessage.h"
 #include "garminnotificationcontrolmessage.h"
 #include "garminsynchronizationmessage.h"
-
+#include "garminweathermessage.h"
+#include "garminfilterstatusmessage.h"
 
 Result<QString> GarminGfdiMessage::readLengthPrefixedString(const QByteArray& data, int& consumedBytes)
 {
@@ -168,41 +169,14 @@ void GarminGfdiMessage::parseSynchronization(const QByteArray& data)
 
 void GarminGfdiMessage::parseWeatherRequest(const QByteArray& data)
 {
-    qDebug() << Q_FUNC_INFO << "Garmin: parsing weather request";
-
-    if (data.size() < 10) {
-        return;
-    }
-    WeatherRequestMessage msg;
-    msg.format = quint8(data[0]);
-    msg.latitude = i32le(data, 1);
-    msg.longitude = i32le(data, 5);
-    msg.hoursOfForecast = quint8(data[9]);
-    if (mCommunicator) mCommunicator->onWeatherRequestReceived(msg);
+    GarminWeatherMessage* msg = new GarminWeatherMessage(mCommunicator);
+    msg->parse(data);
 }
 
 void GarminGfdiMessage::parseFilterStatus(const QByteArray& data)
 {
-    qDebug() << Q_FUNC_INFO << "Garmin: parsing filter status";
-
-    if (data.size() < 3) {
-        return; // Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "Filter status message too short"));
-    }
-
-    const quint8 statusByte = quint8(data[2]);
-    Status st;
-    switch (statusByte) {
-    case 0: st = Status::Ack; break;
-    case 1: st = Status::Nack; break;
-    case 2: st = Status::Unsupported; break;
-    default:
-        return;// Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage,QString("Unknown status: %1").arg(statusByte)));
-    }
-
-    FilterStatusMessage msg;
-    msg.status = st;
-    msg.filterType = (data.size() > 3) ? quint8(data[3]) : 0;
-    if (mCommunicator) mCommunicator->onFilterStatusReceived(msg);
+    GarminFilterStatusMessage* msg = new GarminFilterStatusMessage(mCommunicator);
+    msg->parse(data);
 }
 
 
