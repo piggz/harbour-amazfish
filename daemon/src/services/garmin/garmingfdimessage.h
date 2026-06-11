@@ -155,6 +155,9 @@ private:
     void parseSynchronization(const QByteArray& data);
     void parseWeatherRequest(const QByteArray& data);
     void parseFilterStatus(const QByteArray& data);
+    void parseProtobufRequest(const QByteArray& data);
+    void parseProtobufResponse(const QByteArray& data);
+    void parseResponse(const QByteArray& data);
     void parseUnknownMessage(const quint16 , const QByteArray& data);
 
 
@@ -170,13 +173,10 @@ protected:
 class GfdiMessageGenerator {
 public:
     static Result<QByteArray> ackResponse(quint16 messageId);
-    static Result<QByteArray> filterMessage(quint8 filterType);
-    static Result<QByteArray> synchronizationAck();
     static Result<QByteArray> weatherResponse(const WeatherRequestMessage& request);
     static Result<QByteArray> fitDefinitionMessage(const QByteArray& fitDefinitionData);
     static Result<QByteArray> fitDataMessage(const QByteArray& fitData);
     static Result<QByteArray> supportedFileTypesRequest();
-    static Result<QByteArray> setDeviceSettings(bool autoUpload, bool weatherConditions, bool weatherAlerts);
     static Result<QByteArray> systemEvent(quint8 eventType, quint8 value);
     static Result<QByteArray> protobufBatteryStatusRequest(quint16 requestId);
 

@@ -4,7 +4,7 @@ void GarminFilterStatusMessage::parse(const QByteArray& data) {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing filter status";
 
     if (data.size() < 3) {
-        return; // Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage, "Filter status message too short"));
+        return;
     }
 
     const quint8 statusByte = quint8(data[2]);
@@ -14,7 +14,7 @@ void GarminFilterStatusMessage::parse(const QByteArray& data) {
     case 1: st = Status::Nack; break;
     case 2: st = Status::Unsupported; break;
     default:
-        return;// Result<GfdiMessage>::err(GarminError(GarminError::Code::InvalidMessage,QString("Unknown status: %1").arg(statusByte)));
+        return;
     }
 
     FilterStatusMessage msg;
