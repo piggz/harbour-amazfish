@@ -10,6 +10,8 @@
 #include "garminsynchronizationmessage.h"
 #include "garminweathermessage.h"
 #include "garminfilterstatusmessage.h"
+#include "garmingfdistatusmessage.h"
+#include "garminprotobufmessage.h"
 
 Result<QString> GarminGfdiMessage::readLengthPrefixedString(const QByteArray& data, int& consumedBytes)
 {
@@ -109,6 +111,12 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
     case MessageId::WeatherRequest:
         parseWeatherRequest(data.mid(offset));
         return;
+    case  MessageId::ProtobufRequest:
+        parseProtobufRequest(data.mid(offset));
+        return;
+    case  MessageId::ProtobufResponse:
+        parseProtobufResponse(data.mid(offset));
+        return;
     case MessageId::Response: {
         // Check if this is a filter status response - special-case
         if (offset + 2 < data.size()) {
@@ -118,7 +126,7 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
                 return;
             }
         }
-        // Other Responses will be handled as Unknown Messages in the default section
+        parseResponse(data.mid(offset));
     }
     default:
         parseUnknownMessage(msgId, data.mid(offset));
@@ -179,6 +187,25 @@ void GarminGfdiMessage::parseFilterStatus(const QByteArray& data)
     msg->parse(data);
 }
 
+void GarminGfdiMessage::parseResponse(const QByteArray& data)
+{
+    GarminGfdiStatusMessage* msg = new GarminGfdiStatusMessage(mCommunicator);
+    msg->parse(data);
+}
+
+
+void GarminGfdiMessage::parseProtobufResponse(const QByteArray& data)
+{
+    GarminProtobufMessage* msg = new GarminProtobufMessage(mCommunicator);
+    msg->parseResponse(data);
+}
+
+void GarminGfdiMessage::parseProtobufRequest(const QByteArray &data)
+{
+    GarminProtobufMessage* msg = new GarminProtobufMessage(mCommunicator);
+    msg->parse(data);
+
+}
 
 void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArray& data)
 {
@@ -245,51 +272,6 @@ Result<QByteArray> GfdiMessageGenerator::ackResponse(quint16 messageId)
     writeU16le(r, messageId);
     // Status: ACK
     r.append(char(quint8(Status::Ack)));
-
-    // Add checksum
-    const quint16 crc = computeChecksum(r);
-    writeU16le(r, crc);
-    return Result<QByteArray>::isOk(r);
-}
-
-
-
-Result<QByteArray> GfdiMessageGenerator::filterMessage(quint8 filterType)
-{
-    QByteArray m;
-    // Packet size placeholder (will be filled at end)
-    m.append(char(0)); m.append(char(0));
-    // Message ID: FILTER (5007)
-    writeU16le(m, 5007);
-    // Filter type
-    m.append(char(filterType));
-
-
-    // Fill in packet size TODO: Shouldn't this be +2?
-    const quint16 packetSize = quint16(m.size() - 2);
-    overwriteU16le(m, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeChecksum(m);
-    writeU16le(m, crc);
-    return Result<QByteArray>::isOk(m);
-}
-
-Result<QByteArray> GfdiMessageGenerator::synchronizationAck()
-{
-    QByteArray r;
-    // Packet size placeholder
-    r.append(char(0)); r.append(char(0));
-    // Message ID: RESPONSE (5000)
-    writeU16le(r, 5000);
-    // Original message ID: SYNCHRONIZATION (5037)
-    writeU16le(r, 5037);
-    // Status: ACK
-    r.append(char(quint8(Status::Ack)));
-
-    // Fill in packet size TODO: Shouldn't this be +2?
-    const quint16 packetSize = quint16(r.size() - 2);
-    overwriteU16le(r, 0, packetSize);
 
     // Add checksum
     const quint16 crc = computeChecksum(r);

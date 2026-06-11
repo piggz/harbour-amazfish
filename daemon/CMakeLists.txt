@@ -127,6 +127,10 @@ set(SOURCES
 ./src/services/garmin/garminweathermessage.cpp
 ./src/services/garmin/garminfilterstatusmessage.cpp
 ./src/services/garmin/garminnotificationupdatemessage.cpp
+./src/services/garmin/garminauthnegotiationstatusmessage.cpp
+./src/services/garmin/garmincalendarmessage.cpp
+./src/services/garmin/garmingfdistatusmessage.cpp
+./src/services/garmin/garminprotobufmessage.cpp
 ./src/services/garmin/garminspo2message.cpp
 ./src/services/garmin/garminhrmmessage.cpp
 ./src/services/garmin/garminhrvmessage.cpp
@@ -274,6 +278,10 @@ set(HEADERS
 ./src/services/garmin/garminweathermessage.h
 ./src/services/garmin/garminfilterstatusmessage.h
 ./src/services/garmin/garminnotificationupdatemessage.h
+./src/services/garmin/garminauthnegotiationstatusmessage.h
+./src/services/garmin/garmincalendarmessage.h
+./src/services/garmin/garmingfdistatusmessage.h
+./src/services/garmin/garminprotobufmessage.h
 ./src/services/garmin/garminspo2message.h
 ./src/services/garmin/garminhrmmessage.h
 ./src/services/garmin/garminhrvmessage.h
