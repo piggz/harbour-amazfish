@@ -19,12 +19,12 @@
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
         <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
-        <translation type="unfinished"></translation>
+        <translation>Has cruzado el Brandywine. &lt;b&gt;%1&lt;/b&gt; pasos hacia abajo — ¡trolls delante!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="14"/>
         <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>A mitad de camino a Mordor. &lt;b&gt;%1&lt;/b&gt; pasos caminados y el segundo desayuno se perdió.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="15"/>
@@ -44,7 +44,7 @@
     <message>
         <location filename="../src/achievements.cpp" line="18"/>
         <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
-        <translation type="unfinished"></translation>
+        <translation>El Hobbit, o Allí y Atrás Otra vez — &lt;b&gt;%1&lt;/b&gt; pasos y el segundo almuerzo se ganaron!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
@@ -152,12 +152,12 @@
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="363"/>
         <source>Sending %1...</source>
-        <translation type="unfinished">Enviando %1...</translation>
+        <translation>Enviando %1...</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="366"/>
         <source>No file selected</source>
-        <translation type="unfinished">Ningún archivo seleccionado</translation>
+        <translation>Ningún archivo seleccionado</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="386"/>
@@ -205,7 +205,7 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="409"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="422"/>
         <source>No file selected</source>
-        <translation type="unfinished">Ningún archivo seleccionado</translation>
+        <translation>Ningún archivo seleccionado</translation>
     </message>
 </context>
 <context>
@@ -213,7 +213,7 @@
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualización AGPS Ok</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
