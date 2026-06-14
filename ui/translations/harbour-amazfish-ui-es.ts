@@ -530,7 +530,7 @@
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="27"/>
         <source>FitTrackee Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Subir FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="44"/>
@@ -2652,13 +2652,13 @@
         <location filename="../qml/components/Translation.js" line="106"/>
         <location filename="../qml/components/Translation.js" line="106"/>
         <source>Push Run Speed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Empujón Velocidad Corrida</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="107"/>
         <location filename="../qml/components/Translation.js" line="107"/>
         <source>Indoor Push Run Speed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Empujón interior Velocidad Corrida</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="108"/>
@@ -2670,19 +2670,19 @@
         <location filename="../qml/components/Translation.js" line="109"/>
         <location filename="../qml/components/Translation.js" line="109"/>
         <source>Para Sport</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Para Deporte</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="110"/>
         <location filename="../qml/components/Translation.js" line="110"/>
         <source>Disc Golf</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Disco Golf</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="111"/>
         <location filename="../qml/components/Translation.js" line="111"/>
         <source>Ultimate Disc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Disco Definitivo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="112"/>
@@ -2706,7 +2706,7 @@
         <location filename="../qml/components/Translation.js" line="115"/>
         <location filename="../qml/components/Translation.js" line="115"/>
         <source>Lacrosse</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lacrosse</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="116"/>
@@ -2718,7 +2718,7 @@
         <location filename="../qml/components/Translation.js" line="117"/>
         <location filename="../qml/components/Translation.js" line="117"/>
         <source>Water Tubing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tubo de Agua</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="118"/>
@@ -2748,7 +2748,7 @@
         <location filename="../qml/components/Translation.js" line="122"/>
         <location filename="../qml/components/Translation.js" line="122"/>
         <source>Cross Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entrenador de Cross</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="123"/>
@@ -2856,7 +2856,7 @@
         <location filename="../qml/components/Translation.js" line="140"/>
         <location filename="../qml/components/Translation.js" line="140"/>
         <source>Cross Training</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entrenador de Cross</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="141"/>
