@@ -59,7 +59,8 @@ PageListPL {
                 "duration": durationLabel.text,
                 "times": timesLabel.text,
                 "kindstring": kindstring,
-                "tcx": SportsModel.gpx(id)
+                "tcx": SportsModel.gpx(id),
+                "rawGpx": SportsModel.rawGpx(id)
             });
             SportsMeta.update(id);
             sportpage.update();

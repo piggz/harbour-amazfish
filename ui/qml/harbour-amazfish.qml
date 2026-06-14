@@ -21,6 +21,7 @@ ApplicationWindowPL
     property bool serviceEnabledState: false
     property bool stravaLinked: false
     property bool fittrackeeLinked: false
+    property bool fitpubLinked: AmazfishConfig.fitpubBaseURL !== "" && AmazfishConfig.fitpubUsername !== ""
     property bool firstPass: true
     property string _lastMessage: ""
     property string _percentText: ""
