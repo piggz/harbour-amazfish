@@ -100,8 +100,8 @@ void AbstractDevice::parseServices()
             QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
             QString uuid = devInterface.property("UUID").toString();
 
-            qDebug() << "Creating service for: " << uuid;
             QBLEService *service = drv_createService(uuid, path);
+            qDebug() << "Creating service for: " << uuid << (service != nullptr);
 
             if (service) {
                 addService(uuid, service);
