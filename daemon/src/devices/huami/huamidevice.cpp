@@ -10,11 +10,10 @@
 
 #include "deviceinfoservice.h"
 #include "mibandservice.h"
+#include "miband2service.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
 #include "bipfirmwareservice.h"
-
-#include <QtXml/QtXml>
 
 HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
@@ -514,4 +513,24 @@ void HuamiDevice::characteristicChanged(const QString &characteristic, const QBy
     } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         m_fetcher->fetchData(value);
     }
+}
+
+
+QBLEService *HuamiDevice::drv_createService(const QString &uuid, const QString &path)
+{
+    if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
+        return new AlertNotificationService(path, this);
+    } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
+        return new DeviceInfoService(path, this);
+    } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
+        return new HRMService(path, this);
+    } else if (uuid == MiBandService::UUID_SERVICE_MIBAND && !service(MiBandService::UUID_SERVICE_MIBAND)) {
+        return new MiBandService(path, this);
+    } else if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2 && !service(MiBand2Service::UUID_SERVICE_MIBAND2)) {
+        return new MiBand2Service(path, 0x00, 0x80, true, this);
+    } else if (uuid == BipFirmwareService::UUID_SERVICE_FIRMWARE && !service(BipFirmwareService::UUID_SERVICE_FIRMWARE)) {
+        return new BipFirmwareService(path, this);
+    }
+
+    return nullptr;
 }

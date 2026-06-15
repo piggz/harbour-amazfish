@@ -3,7 +3,8 @@
 #include "hrmservice.h"
 
 #include <QString>
-    
+#include <QDomDocument>
+
 AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBLEDevice(parent)
 {
     qDebug() << Q_FUNC_INFO;
@@ -69,6 +70,45 @@ void AbstractDevice::devicePairFinished(const QString &status)
     qDebug() << Q_FUNC_INFO;
     if (status == "paired") {
         setConnectionState("paired");
+    }
+}
+
+void AbstractDevice::parseServices()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
+    QDBusReply<QString> xml = adapterIntro.call("Introspect");
+
+    // qDebug() << "Resolved services...";
+
+    QDomDocument doc;
+    doc.setContent(xml.value());
+
+    QDomNodeList nodes = doc.elementsByTagName("node");
+
+    qDebug() << nodes.count() << "nodes";
+
+    for (int x = 0; x < nodes.count(); x++)
+    {
+        QDomElement node = nodes.at(x).toElement();
+        QString nodeName = node.attribute("name");
+
+        if (nodeName.startsWith("service")) {
+            QString path = devicePath() + "/" + nodeName;
+
+            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
+            QString uuid = devInterface.property("UUID").toString();
+
+            qDebug() << "Creating service for: " << uuid;
+            QBLEService *service = drv_createService(uuid, path);
+
+            if (service) {
+                addService(uuid, service);
+            } else {
+                addService(uuid, new QBLEService(uuid, path, this));
+            }
+        }
     }
 }
 

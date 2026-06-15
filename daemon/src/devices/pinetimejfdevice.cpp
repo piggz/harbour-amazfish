@@ -120,73 +120,6 @@ void PinetimeJFDevice::incomingCallEnded()
     qDebug() << Q_FUNC_INFO << "not available";
 }
 
-
-void PinetimeJFDevice::parseServices()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
-    QDBusReply<QString> xml = adapterIntro.call("Introspect");
-
-    // qDebug() << "Resolved services...";
-
-    // qDebug().noquote() << xml.value();
-
-    QDomDocument doc;
-    doc.setContent(xml.value());
-
-    QDomNodeList nodes = doc.elementsByTagName("node");
-
-    qDebug() << nodes.count() << "nodes";
-
-    for (int x = 0; x < nodes.count(); x++)
-    {
-        QDomElement node = nodes.at(x).toElement();
-        QString nodeName = node.attribute("name");
-
-        if (nodeName.startsWith("service")) {
-            QString path = devicePath() + "/" + nodeName;
-
-            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
-            QString uuid = devInterface.property("UUID").toString();
-
-            qDebug() << "Creating service for: " << uuid;
-
-            if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
-                addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
-            } else if (uuid == CurrentTimeService::UUID_SERVICE_CURRENT_TIME  && !service(CurrentTimeService::UUID_SERVICE_CURRENT_TIME)) {
-                addService(CurrentTimeService::UUID_SERVICE_CURRENT_TIME, new CurrentTimeService(path, this));
-            } else if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION  && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
-                addService(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION, new AlertNotificationService(path, this));
-            } else if (uuid == PineTimeMusicService::UUID_SERVICE_MUSIC  && !service(PineTimeMusicService::UUID_SERVICE_MUSIC  )) {
-                addService(PineTimeMusicService::UUID_SERVICE_MUSIC  , new PineTimeMusicService(path, this));
-            } else if (uuid == DfuService::UUID_SERVICE_DFU && !service(DfuService::UUID_SERVICE_DFU)) {
-                addService(DfuService::UUID_SERVICE_DFU, new DfuService(path, this));
-            } else if (uuid == InfiniTimeNavService::UUID_SERVICE_NAVIGATION && !service(InfiniTimeNavService::UUID_SERVICE_NAVIGATION)) {
-                addService(InfiniTimeNavService::UUID_SERVICE_NAVIGATION, new InfiniTimeNavService(path, this));
-            } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
-                addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
-            } else if (uuid == InfiniTimeMotionService::UUID_SERVICE_MOTION && !service(InfiniTimeMotionService::UUID_SERVICE_MOTION)) {
-                addService(InfiniTimeMotionService::UUID_SERVICE_MOTION, new InfiniTimeMotionService(path, this));
-            } else if (uuid == PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER && !service(PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER)) {
-                addService(PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER, new PineTimeSimpleWeatherService(path, this));
-            } else if (uuid == InfiniTimeWeatherService::UUID_SERVICE_WEATHER && !service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER)) {
-                addService(InfiniTimeWeatherService::UUID_SERVICE_WEATHER, new InfiniTimeWeatherService(path, this));
-            } else if (uuid == AdafruitBleFsService::UUID_SERVICE_FS && !service(AdafruitBleFsService::UUID_SERVICE_FS)) {
-                size_t transferMtu = GetMtuForCharacteristic(path, AdafruitBleFsService::UUID_CHARACTERISTIC_FS_TRANSFER);
-                addService(AdafruitBleFsService::UUID_SERVICE_FS, new AdafruitBleFsService(path, this, transferMtu));
-            } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
-                addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
-            } else if (uuid == ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT && !service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT)) {
-                addService(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT, new ImmediateAlertService(path, this));
-            } else if ( !service(uuid)) {
-                addService(uuid, new QBLEService(uuid, path, this));
-            }
-        }
-    }
-    setConnectionState("authenticated");
-}
-
 void PinetimeJFDevice::initialise()
 {
     setConnectionState("connected");
@@ -243,6 +176,8 @@ void PinetimeJFDevice::initialise()
     }
 
     connect(&realtimeActivitySample, &RealtimeActivitySample::samplesReady, this, &PinetimeJFDevice::sampledActivity, Qt::UniqueConnection);
+
+    setConnectionState("authenticated");
 }
 
 void PinetimeJFDevice::sampledActivity(QDateTime dt, int kind, int intensity, int steps, int heartrate) {
@@ -314,6 +249,40 @@ void PinetimeJFDevice::onPropertiesChanged(QString interface, QVariantMap map, Q
         }
     }
 
+}
+
+QBLEService *PinetimeJFDevice::drv_createService(const QString &uuid, const QString &path)
+{
+    if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
+        return new DeviceInfoService(path, this);
+    } else if (uuid == CurrentTimeService::UUID_SERVICE_CURRENT_TIME  && !service(CurrentTimeService::UUID_SERVICE_CURRENT_TIME)) {
+        return new CurrentTimeService(path, this);
+    } else if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION  && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
+        return new AlertNotificationService(path, this);
+    } else if (uuid == PineTimeMusicService::UUID_SERVICE_MUSIC  && !service(PineTimeMusicService::UUID_SERVICE_MUSIC  )) {
+        return new PineTimeMusicService(path, this);
+    } else if (uuid == DfuService::UUID_SERVICE_DFU && !service(DfuService::UUID_SERVICE_DFU)) {
+        return new DfuService(path, this);
+    } else if (uuid == InfiniTimeNavService::UUID_SERVICE_NAVIGATION && !service(InfiniTimeNavService::UUID_SERVICE_NAVIGATION)) {
+        return new InfiniTimeNavService(path, this);
+    } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
+        return new HRMService(path, this);
+    } else if (uuid == InfiniTimeMotionService::UUID_SERVICE_MOTION && !service(InfiniTimeMotionService::UUID_SERVICE_MOTION)) {
+        return new InfiniTimeMotionService(path, this);
+    } else if (uuid == PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER && !service(PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER)) {
+        return new PineTimeSimpleWeatherService(path, this);
+    } else if (uuid == InfiniTimeWeatherService::UUID_SERVICE_WEATHER && !service(InfiniTimeWeatherService::UUID_SERVICE_WEATHER)) {
+        return new InfiniTimeWeatherService(path, this);
+    } else if (uuid == AdafruitBleFsService::UUID_SERVICE_FS && !service(AdafruitBleFsService::UUID_SERVICE_FS)) {
+        size_t transferMtu = GetMtuForCharacteristic(path, AdafruitBleFsService::UUID_CHARACTERISTIC_FS_TRANSFER);
+        return new AdafruitBleFsService(path, this, transferMtu);
+    } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
+        return  new BatteryService(path, this);
+    } else if (uuid == ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT && !service(ImmediateAlertService::UUID_SERVICE_IMMEDIATE_ALERT)) {
+        return new ImmediateAlertService(path, this);
+    }
+
+    return nullptr;
 }
 
 void PinetimeJFDevice::authenticated(bool ready)

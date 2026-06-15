@@ -24,7 +24,6 @@ protected:
 
 private:
     Q_SLOT void serviceEvent(uint8_t event);
-    void parseServices();
 };
 
 #endif // BIPSDEVICE_H

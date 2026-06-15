@@ -62,10 +62,10 @@ public:
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
     void initialise() override;
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
     QDateTime init_dt = QDateTime::fromTime_t(0);
-    void parseServices();
 
     Huami2021ChunkedEncoder *m_encoder = nullptr;
     Huami2021ChunkedDecoder *m_decoder = nullptr;

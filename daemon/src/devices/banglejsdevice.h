@@ -98,9 +98,9 @@ public:
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
-    void parseServices();
     void initialise();
     Q_SLOT void serviceEvent(uint8_t event);
     Q_SLOT void handleRxJson(const QJsonObject &json);

@@ -116,10 +116,14 @@ protected:
 
     Q_SLOT void deviceError(const QString &message);
 
+    void parseServices();
+    virtual QBLEService* drv_createService(const QString &uuid, const QString &path) = 0;
+
 private:
     void reconnectionTimer();
     void devicePairFinished(const QString& status);
     QString m_pairedName;
+
 
 };
 
