@@ -14,67 +14,67 @@
     <message>
         <location filename="../src/achievements.cpp" line="12"/>
         <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
-        <translation type="unfinished"></translation>
+        <translation>பயணம் தொடங்குகிறது, சாகசக்காரர். &lt;b&gt;%1&lt;/b&gt; படிகள் மட்டுமே — சைர் இன்னும் பார்வையில் உள்ளது.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
         <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
-        <translation type="unfinished"></translation>
+        <translation>நீங்கள் பிராண்டிவைனைக் கடந்துவிட்டீர்கள். &lt;b&gt;%1&lt;/b&gt; படிகள் கீழே - ட்ரோல்ச்!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="14"/>
         <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>மொர்டோருக்கு பாதி வழி. &lt;b&gt;%1&lt;/b&gt; அடிகள் நடந்தன, இரண்டாவது காலை உணவு தவறிவிட்டது.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="15"/>
         <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
-        <translation type="unfinished"></translation>
+        <translation>மவுண்ட் டூம் அடிவானத்தில் உள்ளது. உங்களுக்குப் பின்னால் &lt;b&gt;%1&lt;/b&gt; அடிகள் — இன்னும் மோதிரத்தைக் கைவிட வேண்டாம்!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="16"/>
         <source>The ring is cast into the fire. &lt;b&gt;%1&lt;/b&gt; steps done — Middle-earth is saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>மோதிரம் நெருப்பில் போடப்படுகிறது. &lt;b&gt;%1&lt;/b&gt; படிகள் முடிந்தது — நடு பூமி சேமிக்கப்பட்டது!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="17"/>
         <source>You kept walking after saving the world?! &lt;b&gt;%1&lt;/b&gt; steps — you’re a true legend. 🧙</source>
-        <translation type="unfinished"></translation>
+        <translation>உலகைக் காப்பாற்றிய பிறகும் தொடர்ந்து நடந்தீர்களா?! &lt;b&gt;%1&lt;/b&gt; படிகள் — நீங்கள் ஒரு உண்மையான புராணக்கதை. 🧙</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="18"/>
         <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
-        <translation type="unfinished"></translation>
+        <translation>The Hobbit, or there and பின் Again — &lt;b&gt;%1&lt;/b&gt; படிகள் மற்றும் இரண்டாவது காலை உணவு சம்பாதித்தது!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
         <source>Let&apos;s get moving! You&apos;ve taken only &lt;b&gt;%1&lt;/b&gt; steps so far.</source>
-        <translation type="unfinished"></translation>
+        <translation>நகர்வோம்! நீங்கள் இதுவரை &lt;b&gt;%1&lt;/b&gt; படிகளை மட்டுமே எடுத்துள்ளீர்கள்.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="23"/>
         <source>Warming up! &lt;b&gt;%1&lt;/b&gt; steps done — keep going!</source>
-        <translation type="unfinished"></translation>
+        <translation>சூடு! &lt;b&gt;%1&lt;/b&gt; படிகள் முடிந்தது — தொடரவும்!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="24"/>
         <source>You&apos;re halfway there. &lt;b&gt;%1&lt;/b&gt; steps so far!</source>
-        <translation type="unfinished"></translation>
+        <translation>நீங்கள் பாதியிலேயே இருக்கிறீர்கள். இதுவரை &lt;b&gt;%1&lt;/b&gt; படிகள்!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="25"/>
         <source>Almost there! Just a bit more — &lt;b&gt;%1&lt;/b&gt; steps already!</source>
-        <translation type="unfinished"></translation>
+        <translation>கிட்டத்தட்ட அங்கே! இன்னும் கொஞ்சம் — &lt;b&gt;%1&lt;/b&gt; படிகள் ஏற்கனவே!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="26"/>
         <source>Goal reached! &lt;b&gt;%1&lt;/b&gt; steps — you can have that cake now 🎉</source>
-        <translation type="unfinished"></translation>
+        <translation>இலக்கை எட்டியது! &lt;b&gt;%1&lt;/b&gt; படிகள் — நீங்கள் இப்போது அந்த கேக்கை சாப்பிடலாம் 🎉</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="27"/>
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
-        <translation type="unfinished"></translation>
+        <translation>நீங்கள் அதை உடைத்தீர்கள்! &lt;b&gt;%1&lt;/b&gt; படிகள் — ஓய்வெடுக்க வேண்டுமா அல்லது போனச் படிகளுக்கு செல்ல வேண்டுமா?</translation>
     </message>
 </context>
 <context>
@@ -121,7 +121,7 @@
     <message>
         <location filename="../src/deviceinterface.cpp" line="840"/>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>நாள்காட்டி</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/devices/huami/gtsdevice.cpp" line="230"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
+        <translation>தற்போது ஒரு செயல்பாடு இயங்குகிறது, பிறகு முயற்சிக்கவும்</translation>
     </message>
 </context>
 <context>
@@ -152,17 +152,17 @@
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="363"/>
         <source>Sending %1...</source>
-        <translation type="unfinished">%1 ஐ அனுப்புகிறது ...</translation>
+        <translation>% 1ஐ அனுப்புகிறது...</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="366"/>
         <source>No file selected</source>
-        <translation type="unfinished">எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
+        <translation>கோப்பு எதுவும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamidevice.cpp" line="386"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
+        <translation>தற்போது ஒரு செயல்பாடு இயங்குகிறது, பிறகு முயற்சிக்கவும்</translation>
     </message>
 </context>
 <context>
@@ -170,12 +170,12 @@
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="105"/>
         <source>All operations cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>அனைத்து செயல்பாடுகளும் ரத்து செய்யப்பட்டன</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="147"/>
         <source>All operations complete</source>
-        <translation type="unfinished"></translation>
+        <translation>அனைத்து செயல்பாடுகளும் முடிந்தது</translation>
     </message>
 </context>
 <context>
@@ -193,19 +193,19 @@
         <location filename="../src/devices/pinetimejfdevice.cpp" line="369"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="383"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
+        <translation>தற்போது ஒரு செயல்பாடு இயங்குகிறது, பிறகு முயற்சிக்கவும்</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="406"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="419"/>
         <source>Sending file...</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பை அனுப்புகிறது...</translation>
     </message>
     <message>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="409"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="422"/>
         <source>No file selected</source>
-        <translation type="unfinished">எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை</translation>
+        <translation>கோப்பு எதுவும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
 </context>
 <context>
@@ -213,32 +213,32 @@
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>AGPS புதுப்பிப்பு சரி</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
-        <translation type="unfinished"></translation>
+        <translation>AGPS கோப்பு சிதைந்துள்ளது</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
-        <translation type="unfinished"></translation>
+        <translation>AGPS கோப்பு சரியான வடிவம் அல்ல</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
-        <translation type="unfinished"></translation>
+        <translation>AGPS கோப்பை அனுப்புவதில் தெரியாத பிழை</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பு பதிவேற்றம் சரி. சாதனத்தில் புதுப்பிப்பைச் செய்கிறது</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பு பதிவேற்றம் தோல்வியடைந்தது</translation>
     </message>
 </context>
 <context>
@@ -293,7 +293,7 @@
     <message>
         <location filename="../src/services/uartservice.cpp" line="58"/>
         <source>Android Integration plugin not installed on Bangle.js</source>
-        <translation type="unfinished"></translation>
+        <translation>ஆண்ட்ராய்டு ஒருங்கிணைப்பு செருகுநிரல் Bangle.js இல் நிறுவப்படவில்லை</translation>
     </message>
 </context>
 <context>
@@ -301,7 +301,7 @@
     <message>
         <location filename="../src/devices/huami/zepposdevice.cpp" line="442"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">ஒரு செயல்பாடு தற்போது இயங்குகிறது, தயவுசெய்து பின்னர் முயற்சிக்கவும்</translation>
+        <translation>தற்போது ஒரு செயல்பாடு இயங்குகிறது, பிறகு முயற்சிக்கவும்</translation>
     </message>
 </context>
 </TS>
