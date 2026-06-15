@@ -165,49 +165,17 @@ void BangleJSDevice::incomingCallEnded()
     uart->txJson(o);
 }
 
-
-void BangleJSDevice::parseServices()
+QBLEService *BangleJSDevice::drv_createService(const QString &uuid, const QString &path)
 {
-    qDebug() << Q_FUNC_INFO;
-
-    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
-    QDBusReply<QString> xml = adapterIntro.call("Introspect");
-
-    qDebug() << "Resolved services...";
-
-    qDebug().noquote() << xml.value();
-
-    QDomDocument doc;
-    doc.setContent(xml.value());
-
-    QDomNodeList nodes = doc.elementsByTagName("node");
-
-    qDebug() << nodes.count() << "nodes";
-
-    for (int x = 0; x < nodes.count(); x++)
-    {
-        QDomElement node = nodes.at(x).toElement();
-        QString nodeName = node.attribute("name");
-
-        if (nodeName.startsWith("service")) {
-            QString path = devicePath() + "/" + nodeName;
-
-            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
-            QString uuid = devInterface.property("UUID").toString();
-
-            qDebug() << "Creating service for: " << uuid;
-
-            if (uuid == UARTService::UUID_SERVICE_UART && !service(UARTService::UUID_SERVICE_UART)) {
-                addService(UARTService::UUID_SERVICE_UART, new UARTService(path, this));
-            } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
-                addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
-            } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
-                addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
-            } else if ( !service(uuid)) {
-                addService(uuid, new QBLEService(uuid, path, this));
-            }
-        }
+    if (uuid == UARTService::UUID_SERVICE_UART && !service(UARTService::UUID_SERVICE_UART)) {
+        return new UARTService(path, this);
+    } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
+        return new BatteryService(path, this);
+    } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
+        return new DeviceInfoService(path, this);
     }
+
+    return nullptr;
 }
 
 void BangleJSDevice::initialise()

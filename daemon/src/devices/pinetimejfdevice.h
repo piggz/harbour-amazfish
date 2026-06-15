@@ -43,9 +43,9 @@ public:
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
-    void parseServices();
     void initialise();
     Q_SLOT void serviceEvent(const QString &characteristic, uint8_t event);
     AbstractFirmwareInfo::Type firmwareType;

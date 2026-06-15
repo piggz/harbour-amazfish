@@ -115,47 +115,15 @@ void DK08Device::onPropertiesChanged(QString interface, QVariantMap map, QString
 
 }
 
-void DK08Device::parseServices()
+QBLEService *DK08Device::drv_createService(const QString &uuid, const QString &path)
 {
-
-    qDebug() << Q_FUNC_INFO;
-
-    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
-    QDBusReply<QString> xml = adapterIntro.call("Introspect");
-
-    // qDebug() << "Resolved services...";
-    // qDebug().noquote() << xml.value();
-
-    QDomDocument doc;
-    doc.setContent(xml.value());
-
-    QDomNodeList nodes = doc.elementsByTagName("node");
-
-    // qDebug() << nodes.count() << "nodes";
-
-    for (int x = 0; x < nodes.count(); x++)
-    {
-        QDomElement node = nodes.at(x).toElement();
-        QString nodeName = node.attribute("name");
-
-        if (nodeName.startsWith("service")) {
-            QString path = devicePath() + "/" + nodeName;
-
-            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
-            QString uuid = devInterface.property("UUID").toString();
-
-            qDebug() << "Creating service for: " << uuid;
-
-            if (uuid == DK08NUSService::UUID_SERVICE_NUS  && !service(DK08NUSService::UUID_SERVICE_NUS)) {
-                addService(DK08NUSService::UUID_SERVICE_NUS, new DK08NUSService(path, this));
-            } else if (uuid == DK08WechatService::UUID_SERVICE_WECHAT  && !service(DK08WechatService::UUID_SERVICE_WECHAT)) {
-                addService(DK08WechatService::UUID_SERVICE_WECHAT, new DK08WechatService(path, this));
-            } else if ( !service(uuid)) {
-                addService(uuid, new QBLEService(uuid, path, this));
-            }
-        }
+    if (uuid == DK08NUSService::UUID_SERVICE_NUS  && !service(DK08NUSService::UUID_SERVICE_NUS)) {
+        return new DK08NUSService(path, this);
+    } else if (uuid == DK08WechatService::UUID_SERVICE_WECHAT  && !service(DK08WechatService::UUID_SERVICE_WECHAT)) {
+        return new DK08WechatService(path, this);
     }
-    setConnectionState("authenticated");
+
+    return nullptr;
 }
 
 void DK08Device::initialise()
@@ -178,6 +146,7 @@ void DK08Device::initialise()
         // nus->test();
     }
 
+    setConnectionState("authenticated");
 }
 
 void DK08Device::refreshInformation()

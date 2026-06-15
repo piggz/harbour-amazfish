@@ -96,9 +96,6 @@ public:
 protected:
     void initialise() override;
 
-private:
-    void parseServices();
-
 };
 
 #endif // BIPDEVICE_H

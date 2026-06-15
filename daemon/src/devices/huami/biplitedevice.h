@@ -15,10 +15,6 @@ public:
 
 private:
     void initialise() override;
-    void parseServices();
-
-
-private:
     QString pairedName;
 
 };

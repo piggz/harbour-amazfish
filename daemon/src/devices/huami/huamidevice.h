@@ -65,6 +65,7 @@ protected:
 
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     virtual void initialise() = 0;
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
     int m_ActivitySampleSize = 4;
     HuamiFetcher *m_fetcher = nullptr;
