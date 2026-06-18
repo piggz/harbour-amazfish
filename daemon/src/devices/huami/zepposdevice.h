@@ -17,6 +17,7 @@ class ZeppOsTimeService;
 class ZeppOsUserInfoService;
 class ZeppOsAgpsService;
 class ZeppOsFileTransferService;
+class ZeppOsConfigService;
 class AbstractZeppOsOperation;
 
 class ZeppOSDevice: public HuamiDevice, public Huami2021Handler, public ZeppOsFileTransferService::Callback
@@ -80,6 +81,7 @@ private:
     ZeppOsUserInfoService *m_userInfoService = nullptr;
     ZeppOsAgpsService *m_agpsService = nullptr;
     ZeppOsFileTransferService *m_fileTransferService = nullptr;
+    ZeppOsConfigService *m_configService = nullptr;
 
 
     QMap<short, AbstractZeppOsService *> m_zosServiceMap;

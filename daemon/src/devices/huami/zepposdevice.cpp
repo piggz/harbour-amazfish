@@ -13,12 +13,14 @@
 #include "zeppos/zeppostimeservice.h"
 #include "zeppos/zepposuserinfoservice.h"
 #include "zeppos/zepposagpsservice.h"
+#include "zeppos/zepposconfigservice.h"
 #include "zepposfirmwareinfo.h"
 #include "mibandservice.h"
 #include "miband2service.h"
 #include "deviceinfoservice.h"
 #include "bipfirmwareservice.h"
 #include "hrmservice.h"
+#include "amazfishconfig.h"
 
 #include <QDebug>
 
@@ -61,6 +63,9 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 
     m_fileTransferService = new ZeppOsFileTransferService(this);
     m_zosServiceMap[m_fileTransferService->endpoint()] = m_fileTransferService;
+
+    m_configService = new ZeppOsConfigService(this);
+    m_zosServiceMap[m_configService->endpoint()] = m_configService;
 }
 
 QString ZeppOSDevice::deviceType() const
@@ -133,10 +138,24 @@ void ZeppOSDevice::applyDeviceSetting(Amazfish::Settings s)
             m_userInfoService->setUserInfo();
         }
         break;
-    case Amazfish::Settings::SETTING_USER_GOAL:
-    case Amazfish::Settings::SETTING_USER_ALERT_GOAL:
     case Amazfish::Settings::SETTING_USER_ALL_DAY_HRM:
+        if (m_configService) {
+            auto interval = AmazfishConfig::instance()->profileAllDayHRM();
+            uint8_t intervalClamped = static_cast<uint8_t>(qMin(120u, interval));
+            m_configService->setAllDayHeartRateInterval(intervalClamped);
+        }
+        break;
     case Amazfish::Settings::SETTING_USER_HRM_SLEEP_DETECTION:
+        if (m_configService) {
+            m_configService->setSleepHeartRateDetection(AmazfishConfig::instance()->profileHRMSleepSupport());
+        }
+        break;
+    case Amazfish::Settings::SETTING_USER_GOAL:
+        if (m_configService) {
+            m_configService->setFitnessGoalSteps(AmazfishConfig::instance()->profileFitnessGoal());
+        }
+        break;
+    case Amazfish::Settings::SETTING_USER_ALERT_GOAL:
     case Amazfish::Settings::SETTING_USER_DISPLAY_ON_LIFT:
     case Amazfish::Settings::SETTING_ALARMS:
     case Amazfish::Settings::SETTING_DEVICE_DISPLAY_ITEMS:
