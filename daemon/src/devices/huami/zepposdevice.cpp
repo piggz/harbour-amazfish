@@ -28,8 +28,6 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 
     m_ActivitySampleSize = 8;
 
-    connect(this, &QBLEDevice::propertiesChanged, this, &ZeppOSDevice::onPropertiesChanged);
-
     //Create all possile services
 
     m_servicesService = new ZeppOsServicesService(this);
@@ -262,41 +260,9 @@ void ZeppOSDevice::fileDownloadFinish(const QString &url, const QString &filenam
     qDebug() << Q_FUNC_INFO << url << filename;
 }
 
-void ZeppOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
-{
-    qDebug() << Q_FUNC_INFO << interface << map << list << m_connectionState;
-
-    if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
-        if (map.contains("Paired")) {
-            bool value = map["Paired"].toBool();
-
-            if (value) {
-                setConnectionState("paired");
-            }
-        }
-        if (map.contains("Connected")) {
-            bool value = map["Connected"].toBool();
-
-            if (!value) {
-                setConnectionState("disconnected");
-            } else {
-                setConnectionState("connected");
-            }
-        }
-        if (deviceProperty("ServicesResolved").toBool() ) {
-            int elapsed = init_dt.secsTo(QDateTime::currentDateTime());
-            qDebug() << "initialise() elapsed: " << elapsed << "starting: " << (elapsed >60);
-            if (elapsed > 60) {
-                init_dt = QDateTime::currentDateTime();
-                initialise();
-            }
-        }
-    }
-}
-
 QBLEService *ZeppOSDevice::drv_createService(const QString &uuid, const QString &path)
 {
+    qDebug() << Q_FUNC_INFO << uuid;
     if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
         return new BatteryService(path, this);
     } else {

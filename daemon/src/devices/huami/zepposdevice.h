@@ -60,7 +60,6 @@ public:
     void fileDownloadFinish(const QString &url, const QString &filename, const QByteArray &data) override;
 
 protected:
-    void onPropertiesChanged(QString interface, QVariantMap map, QStringList list) override;
     void initialise() override;
     QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 

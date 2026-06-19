@@ -499,6 +499,8 @@ void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStrin
             if (elapsed > 60) {
                 init_dt = QDateTime::currentDateTime();
                 initialise();
+            } else {
+                disconnectFromDevice();
             }
         }
     }
@@ -518,17 +520,23 @@ void HuamiDevice::characteristicChanged(const QString &characteristic, const QBy
 
 QBLEService *HuamiDevice::drv_createService(const QString &uuid, const QString &path)
 {
-    if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
+    qDebug() << Q_FUNC_INFO << uuid;
+
+    if (service(uuid)) {
+        return nullptr;
+    }
+
+    if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION) {
         return new AlertNotificationService(path, this);
-    } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
+    } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO) {
         return new DeviceInfoService(path, this);
-    } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
+    } else if (uuid == HRMService::UUID_SERVICE_HRM) {
         return new HRMService(path, this);
-    } else if (uuid == MiBandService::UUID_SERVICE_MIBAND && !service(MiBandService::UUID_SERVICE_MIBAND)) {
+    } else if (uuid == MiBandService::UUID_SERVICE_MIBAND) {
         return new MiBandService(path, this);
-    } else if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2 && !service(MiBand2Service::UUID_SERVICE_MIBAND2)) {
+    } else if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2) {
         return new MiBand2Service(path, 0x00, 0x80, true, this);
-    } else if (uuid == BipFirmwareService::UUID_SERVICE_FIRMWARE && !service(BipFirmwareService::UUID_SERVICE_FIRMWARE)) {
+    } else if (uuid == BipFirmwareService::UUID_SERVICE_FIRMWARE) {
         return new BipFirmwareService(path, this);
     }
 

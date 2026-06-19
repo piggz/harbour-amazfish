@@ -10,7 +10,6 @@
 GtrDevice::GtrDevice(const QString &pairedName, QObject *parent) : GtsDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO;
-    connect(this, &QBLEDevice::propertiesChanged, this, &GtrDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
 QString GtrDevice::deviceType() const
