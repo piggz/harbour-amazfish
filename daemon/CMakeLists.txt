@@ -242,6 +242,7 @@ set(HEADERS
 )
 
 add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
+    src/operations/huami/fetchsleepsessionoperation.h src/operations/huami/fetchsleepsessionoperation.cpp
 )
 
 find_package(PkgConfig REQUIRED)
