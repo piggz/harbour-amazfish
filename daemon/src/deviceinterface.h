@@ -54,6 +54,7 @@ public:
     Q_INVOKABLE int connectionStateChangedCount() const;
     Q_INVOKABLE bool operationRunning();
     Q_INVOKABLE bool supportsFeature(int f);
+    Q_INVOKABLE bool supportsDataType(int t);
     Q_INVOKABLE int supportedFeatures();
     Q_INVOKABLE int supportedDataTypes();
 

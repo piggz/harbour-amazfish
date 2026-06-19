@@ -82,13 +82,13 @@ PagePL {
         }
 
         SectionHeaderPL {
-            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_ALERT)
             text: qsTr("Notifications")
         }
 
         TextSwitchPL {
             id: chkSilenceConnect
-            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_ALERT)
 
             width: parent.width
             text: qsTr("Set silent profile on connect")
@@ -96,7 +96,7 @@ PagePL {
 
         TextSwitchPL {
             id: chkNotifyConnect
-            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_ALERT)
 
             width: parent.width
             text: qsTr("Notify on connect")
@@ -104,7 +104,7 @@ PagePL {
 
         TextSwitchPL {
             id: chkNotifyLowBattery
-            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_ALERT)
 
             width: parent.width
             text: qsTr("Low battery notification")
@@ -112,7 +112,7 @@ PagePL {
 
         TextSwitchPL {
             id: chkNavigationNotification
-            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_ALERT)
 
             width: parent.width
             text: qsTr("Navigation notifications")
@@ -120,7 +120,7 @@ PagePL {
 
         TextSwitchPL {
             id: chkTransliterate
-            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_ALERT)
 
             width: parent.width
             text: qsTr("Transliterate notifications")
@@ -128,7 +128,7 @@ PagePL {
 
         TextSwitchPL {
             id: chkSimulateEventSupport
-            visible: supportsFeature(Amazfish.FEATURE_ALERT) && !supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_ALERT) && !DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
 
             width: parent.width
             text: qsTr("Simulate event reminder support")
@@ -146,7 +146,7 @@ PagePL {
 
         SliderPL {
             id: sldWeatherRefresh
-            visible: supportsFeature(Amazfish.FEATURE_WEATHER)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_WEATHER)
 
             width: parent.width
             minimumValue: 15
@@ -162,7 +162,7 @@ PagePL {
             maximumValue: 240
             stepSize: 15
             label: qsTr("Refresh calendar every (%1) minutes").arg(value)
-            visible: supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
         }
 
         SectionHeaderPL {
@@ -224,7 +224,7 @@ PagePL {
         ButtonPL {
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("Button Actions")
-            visible: supportsFeature(Amazfish.FEATURE_BUTTON_ACTION)
+            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_BUTTON_ACTION)
             onClicked: {
                 app.pages.push(Qt.resolvedUrl("Settings-button-action.qml"))
             }

@@ -33,6 +33,7 @@ public:
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
     Q_INVOKABLE bool supportsFeature(Amazfish::Feature f);
+    Q_INVOKABLE bool supportsDataType(Amazfish::DataType t);
     Q_INVOKABLE int supportedFeatures();
     Q_INVOKABLE int supportedDataTypes();
 
