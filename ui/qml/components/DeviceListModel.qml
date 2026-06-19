@@ -135,5 +135,22 @@ ListModel {
         auth: false
         pattern: "DK08"
     }
-
+    ListElement {
+        deviceType: "Generic Garmin"
+        icon: "../pics/devices/kospet_dk08.png"
+        auth: false
+        pattern: "GARMIN"
+    }
+    ListElement {
+        deviceType: "Garmin Epix"
+        icon: "../pics/devices/kospet_dk08.png"
+        auth: false
+        pattern: "EPIX.*"
+    }
+    ListElement {
+        deviceType: "Garmin Vivosmart 5"
+        icon: "../pics/devices/kospet_dk08.png"
+        auth: false
+        pattern: "v.vosmart 5"
+    }
 }

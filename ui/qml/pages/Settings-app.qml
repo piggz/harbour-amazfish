@@ -29,11 +29,11 @@ PagePL {
             Component.onCompleted: {
                 for (var i = 0; i < adapters.rowCount(); i++) {
                     var item = adapters.get(i)
-                    if (item.path === AmazfishConfig.localAdapter) {
+                   if (item.path === AmazfishConfig.localAdapter) {
                         cboLocalAdapter.currentIndex = i;
                         setDetails(item)
                         return
-                    }
+                   }
                 }
             }
 

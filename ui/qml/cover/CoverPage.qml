@@ -7,7 +7,7 @@ CoverBackground {
 
     Column {
         anchors.fill: parent
-        spacing: Theme.paddingLarge
+        spacing: Theme.paddingMedium
         anchors.margins: Theme.paddingMedium
 
         Label {
@@ -63,7 +63,7 @@ CoverBackground {
 
         //Steps
         Row {
-            spacing: Theme.paddingLarge
+            spacing: Theme.paddingMedium
             width: childrenRect.width
             anchors.horizontalCenter: parent.horizontalCenter
             visible: supportsFeature(Amazfish.FEATURE_STEPS)
@@ -87,7 +87,7 @@ CoverBackground {
 
         //Heartrate
         Row {
-            spacing: Theme.paddingLarge
+            spacing: Theme.paddingMedium
             width: childrenRect.width
             anchors.horizontalCenter: parent.horizontalCenter
             visible: supportsFeature(Amazfish.FEATURE_HRM)
@@ -107,7 +107,28 @@ CoverBackground {
                 width: height
             }
         }
+        //Spo2
+        Row {
+            spacing: Theme.paddingMedium
+            width: childrenRect.width
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: supportsFeature(Amazfish.FEATURE_SPO2)
 
+            Image {
+                id: imgSpo2
+                source: "../custom-icons/icon-m-spo2.png"
+                height: Theme.iconSizeMedium
+                width: height
+            }
+            Label {
+                id: lblSpo2
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeLarge
+                height: Theme.iconSizeMedium
+                verticalAlignment: Text.AlignVCenter
+                width: height
+            }
+        }
     }
 
     CoverActionList {
@@ -148,6 +169,9 @@ CoverBackground {
                 break;
             case Amazfish.INFO_STEPS:
                 stepCount = parseInt(infoValue, 10) || 0;
+                break
+            case Amazfish.INFO_SPO2:
+                lblSpo2.text = parseInt(infoValue, 10) || 0;
                 break
             }
         }
