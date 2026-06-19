@@ -5,6 +5,9 @@
 #include "abstractdevice.h"
 #include "realtimeactivitysample.h"
 
+class QBLELocalApplication;
+class ImmediateAlertServerService;
+
 class PinetimeJFDevice : public AbstractDevice
 {
 public:
@@ -53,6 +56,12 @@ private:
     RealtimeActivitySample realtimeActivitySample;
 
     Q_SLOT void sampledActivity(QDateTime dt, int kind, int intensity, int steps, int heartrate);
+
+    // GATT server — serves IAS so InfiniTime FindMyPhone can alert this device
+    QBLELocalApplication *m_iasApp = nullptr;
+    ImmediateAlertServerService *m_iasService = nullptr;
+    void setupGattServer();
+    Q_SLOT void onImmediateAlertFromWatch(int level);
 };
 
 #endif // PINETIMEJFDEVICE_H
