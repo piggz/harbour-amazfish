@@ -522,10 +522,6 @@ QBLEService *HuamiDevice::drv_createService(const QString &uuid, const QString &
 {
     qDebug() << Q_FUNC_INFO << uuid;
 
-    if (service(uuid)) {
-        return nullptr;
-    }
-
     if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION) {
         return new AlertNotificationService(path, this);
     } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO) {

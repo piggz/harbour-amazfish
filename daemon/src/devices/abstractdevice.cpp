@@ -100,16 +100,20 @@ void AbstractDevice::parseServices()
             QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
             QString uuid = devInterface.property("UUID").toString();
 
-            QBLEService *svc = drv_createService(uuid, path);
-            qDebug() << "Creating service for: " << uuid << (svc != nullptr);
-
-            if (svc) {
-                addService(uuid, svc);
+            if (service(uuid)) {
+                qDebug() << "Skipping service creation for: " << uuid;
             } else {
-                if (!service(uuid)) {
+                QBLEService *svc = drv_createService(uuid, path);
+                qDebug() << "Creating service for: " << uuid << (svc != nullptr);
+
+                if (svc) {
+                    addService(uuid, svc);
+                } else {
                     addService(uuid, new QBLEService(uuid, path, this));
                 }
             }
+
+
         }
     }
 }
