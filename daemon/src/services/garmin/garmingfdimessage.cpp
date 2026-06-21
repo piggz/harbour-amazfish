@@ -55,7 +55,11 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
     // Parse a GFDI message from raw bytes
     // MessageParser::parse in Rust
 
-    qDebug() << Q_FUNC_INFO << "Garmin: parsing GFDI Message " << data;
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing GFDI Message " << data.toHex()
+
+
+
+                ;
 
     if (data.size() < 6) {
         return;// Result<GfdiMessage>::err(GarminError::invalidMessage(QStringLiteral("Message too short")));
@@ -127,6 +131,7 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
             }
         }
         parseResponse(data.mid(offset));
+        return;
     }
     default:
         parseUnknownMessage(msgId, data.mid(offset));
@@ -196,14 +201,16 @@ void GarminGfdiMessage::parseResponse(const QByteArray& data)
 
 void GarminGfdiMessage::parseProtobufResponse(const QByteArray& data)
 {
-    GarminProtobufMessage* msg = new GarminProtobufMessage(mCommunicator);
-    msg->parseResponse(data);
+    //GarminProtobufStatusMessage msg(data, mCommunicator);
+    if (mCommunicator) mCommunicator->onProtobufStatusMessageReceived(data);
+    //msg->parse(data);
 }
 
 void GarminGfdiMessage::parseProtobufRequest(const QByteArray &data)
 {
-    GarminProtobufMessage* msg = new GarminProtobufMessage(mCommunicator);
-    msg->parse(data);
+    //GarminProtobufMessage msg(data,mCommunicator);
+    if (mCommunicator) mCommunicator->onProtobufMessageReceived(data);
+    //msg->parse(data);
 
 }
 
@@ -219,29 +226,38 @@ void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArra
 }
 
 
+QByteArray GarminGfdiMessage::getOutgoingMessage(){
+    QByteArray message;
+    QByteArray toSend = generateOutgoing();
+    if (toSend.isEmpty())
+        return toSend;
+    message=wrapInGfdiEnvelope((quint16)mMessageType,toSend);
+    return message;
+}
+
+
+QByteArray GarminGfdiMessage::getAckByteStream() {
+    if (mStatusMessage.isNull()) {
+        return QByteArray();
+    }
+    return mStatusMessage->getOutgoingMessage();
+}
+
+GarminProtobufStatusMessage::GarminProtobufStatusMessage(CommunicatorV2 *com, int requestId, int dataOffset, int totalProtobufLength, int protobufDataLength, QByteArray messageBytes, bool sendOutgoing) {
+    mCommunicator = com;
+    mRequestId=requestId;
+    mDataOffset=dataOffset;
+    mTotalProtobufLength=totalProtobufLength;
+    mProtobufDataLength=protobufDataLength;
+    mMessageBytes=messageBytes;
+    mSendOutgoing=sendOutgoing;
+}
+
 
 // MessageGenerator is used to generate messages for sending to the device
 
 // -------------------- Generator helpers --------------------
 
-
-void GfdiMessageGenerator::overwriteU16le(QByteArray& out, int off, quint16 v) {
-    out[off] = char(v & 0xFF);
-    out[off+1] = char((v >> 8) & 0xFF);
-}
-
-// CRC-16 checksum (Modbus/IBM), matches Rust compute_checksum()
-quint16 GfdiMessageGenerator::computeChecksum(const QByteArray& data) {
-    quint16 crc = 0;
-    for (auto ch : data) {
-        crc ^= quint8(ch);
-        for (int i=0;i<8;i++) {
-            if (crc & 1) crc = quint16((crc >> 1) ^ 0xA001);
-            else crc = quint16(crc >> 1);
-        }
-    }
-    return crc;
-}
 
 
 
@@ -274,7 +290,7 @@ Result<QByteArray> GfdiMessageGenerator::ackResponse(quint16 messageId)
     r.append(char(quint8(Status::Ack)));
 
     // Add checksum
-    const quint16 crc = computeChecksum(r);
+    const quint16 crc = computeCrc16(r);
     writeU16le(r, crc);
     return Result<QByteArray>::isOk(r);
 }
@@ -304,7 +320,7 @@ Result<QByteArray> GfdiMessageGenerator::weatherResponse(const WeatherRequestMes
     overwriteU16le(r, 0, packetSize);
 
     // Add checksum
-    const quint16 crc = computeChecksum(r);
+    const quint16 crc = computeCrc16(r);
     writeU16le(r, crc);
     return Result<QByteArray>::isOk(r);
 }
@@ -331,7 +347,7 @@ Result<QByteArray> GfdiMessageGenerator::fitDefinitionMessage(const QByteArray& 
     overwriteU16le(m, 0, packetSize);
 
     // Add checksum
-    const quint16 crc = computeChecksum(m);
+    const quint16 crc = computeCrc16(m);
     writeU16le(m, crc);
     return Result<QByteArray>::isOk(m);
 }
@@ -357,7 +373,7 @@ Result<QByteArray> GfdiMessageGenerator::fitDataMessage(const QByteArray& fitDat
     overwriteU16le(m, 0, packetSize);
 
     // Add checksum
-    const quint16 crc = computeChecksum(m);
+    const quint16 crc = computeCrc16(m);
     writeU16le(m, crc);
     return Result<QByteArray>::isOk(m);
 }
@@ -383,7 +399,7 @@ Result<QByteArray> GfdiMessageGenerator::supportedFileTypesRequest()
     overwriteU16le(m, 0, packetSize);
 
      // Add checksum
-    const quint16 crc = computeChecksum(m);
+    const quint16 crc = computeCrc16(m);
     writeU16le(m, crc);
     return Result<QByteArray>::isOk(m);
 }
@@ -433,7 +449,7 @@ Result<QByteArray> GfdiMessageGenerator::systemEvent(quint8 eventType, quint8 va
     overwriteU16le(m, 0, packetSize);
 
     // Add checksum
-    const quint16 crc = computeChecksum(m);
+    const quint16 crc = computeCrc16(m);
     writeU16le(m, crc);
     return Result<QByteArray>::isOk(m);
 }
@@ -587,7 +603,7 @@ Result<QByteArray> GfdiMessageGenerator::notificationDataWithActions(
     overwriteU16le(m, 0, packetSize);
 
     // Add envelope checksum
-    const quint16 crc = computeChecksum(m);
+    const quint16 crc = computeCrc16(m);
     writeU16le(m, crc);
     return Result<QByteArray>::isOk(m);
 }

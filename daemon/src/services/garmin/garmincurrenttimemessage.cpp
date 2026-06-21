@@ -7,12 +7,12 @@
 void GarminCurrentTimeMessage::parse(const QByteArray& data) {
     // no parsing needed as no incoming information
     // simply send back the current time as response
-    QByteArray response = generateResponse(data);
+    QByteArray response = generateOutgoing(data);
     response=wrapInGfdiEnvelope(5000,response);
     if (mCommunicator) mCommunicator->sendMessage("CURRENT TIME", response);
 }
 
-QByteArray GarminCurrentTimeMessage::generateResponse(const QByteArray& data) {
+QByteArray GarminCurrentTimeMessage::generateOutgoing(const QByteArray& data) {
     // Generate a CurrentTimeRequest response with current time
     QByteArray r;
     // Unix seconds -> Garmin epoch (Dec 31 1989) offset 631065600

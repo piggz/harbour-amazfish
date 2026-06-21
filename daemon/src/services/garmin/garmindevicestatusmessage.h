@@ -14,8 +14,9 @@ public:
     }
         void parse(const QByteArray& data);
         QByteArray generateBatteryStatusRequest(quint16 requestId);
+
 private:
-        QByteArray generateResponse(const QByteArray& data);
+        QByteArray generateOutgoing(const QByteArray& data);
 };
 
 #endif // GARMINDEVICESTATUSMESSAGE_H

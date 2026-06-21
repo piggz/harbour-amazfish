@@ -14,10 +14,12 @@ class GarminDeviceInformationMessage : public GarminGfdiMessage
 public:
     explicit GarminDeviceInformationMessage(CommunicatorV2* parent=nullptr)  {
         mCommunicator = parent;
+        mMessageType = MessageId::DeviceInformation;
     }
     void parse(const QByteArray& data);
+
 private:
-    QByteArray generateResponse(const DeviceInformationMessage& incoming);
+    QByteArray generateOutgoing(const DeviceInformationMessage& incoming);
 };
 
 #endif // GARMINDEVICEINFORMATIONMESSAGE_H

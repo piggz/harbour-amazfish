@@ -17,9 +17,11 @@ class GarminConfigurationMessage : public GarminGfdiMessage
 public:
     GarminConfigurationMessage(CommunicatorV2 *parent) {
         mCommunicator = parent;
+        mMessageType = MessageId::Configuration;
     }
     void parse(const QByteArray& data);
-    QByteArray generateResponse(const QByteArray& data);
+    QByteArray generateOutgoing(const QByteArray& data);
+
 private:
     QSet<quint16> parseCapabilities(const QByteArray& bytes);
     QByteArray generateCapabilities();

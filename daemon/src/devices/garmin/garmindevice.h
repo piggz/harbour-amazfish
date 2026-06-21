@@ -5,10 +5,13 @@
 #include <QSharedPointer>
 #include "abstractdevice.h"
 #include "services/garmin/communicator_v2.h"
-#include "services/garmin/garminnotification.h"
+#include "services/garmin/garminnotificationhandler.h"
+#include "services/garmin/protobufhandler.h"
+
 
 class NotificationSpec;
 class GarminNotificationHandler;
+class ProtobufHandler;
 
 class GarminDevice : public AbstractDevice
 {
@@ -48,6 +51,7 @@ private:
     void initialise();
     virtual void pair() override;
     QSharedPointer<GarminNotificationHandler> mNotificationHandler;
+    QSharedPointer<ProtobufHandler> mProtobufHandler;
 
 
 //    Q_SLOT void authenticated(bool ready);

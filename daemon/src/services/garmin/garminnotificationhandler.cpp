@@ -1,11 +1,11 @@
-#include "garminnotification.h"
+#include "garminnotificationhandler.h"
 #include "garmintypes.h"
 #include "garminnotificationupdatemessage.h"
 
 #include <optional>
 
 
-const uint MAX_PROTOBUF_CHUNK_SIZE = 3072;
+//const uint MAX_PROTOBUF_CHUNK_SIZE = 3072;
 
 void GarminNotificationHandler::cleanupOldNotifications()
 {
@@ -92,6 +92,8 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
 
     }
     updateMessage->hasActions=hasActions;
+    updateMessage->notificationId=notification.id;
+    updateMessage->notificationType=notification.notificationType;
 
     //bool hasPicture = notification.hasPicture;
     updateMessage->count = getNotificationCount(notification.notificationType);

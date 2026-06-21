@@ -1,5 +1,5 @@
-//#ifndef _GARMIN_NOTIFICATION__H
-//#define _GARMIN_NOTIFICATION__H
+//#ifndef _GARMINNOTIFICATIONHANDLER_H
+//#define _GARMINNOTIFICATIONHANDLER_H
 
 #pragma once
 
@@ -305,4 +305,4 @@ public slots:
 
 };
 
-//#endif //_GARMIN_NOTIFICATION__H
+//#endif //_GARMINNOTIFICATIONHANDLER_H

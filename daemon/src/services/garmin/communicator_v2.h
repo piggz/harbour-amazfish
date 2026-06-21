@@ -17,9 +17,8 @@
 #include "garmintypes.h"
 #include "cobscodec.h"
 #include "garminmlr.h"
-#include "garminnotification.h"
 #include "weather/currentweather.h"
-
+#include "garminprotobufmessage.h"
 
 #include <qbledevice.h>
 #include <qbleservice.h>
@@ -27,6 +26,8 @@
 
 #include <optional>
 
+//forward declarations
+class ProtobufHandler;
 
 // =============================================================================
 // Constants
@@ -157,6 +158,10 @@ public:
     void onFilterStatusReceived(const FilterStatusMessage& msg);
     void onWeatherRequestReceived(const WeatherRequestMessage& msg);
     void onUnknownMessageReceived(const UnknownMessage &msg);
+    void onProtobufMessageReceived(const QByteArray& data);
+    void onProtobufStatusMessageReceived(const QByteArray& data);
+
+
 
     // return data
     quint32 steps() {return mSteps;};
@@ -230,6 +235,8 @@ private:
 
     QSharedPointer<GfdiMessageCallback> mMessageCallback;
     QPointer<AsyncGfdiMessageCallback> mAsyncMessageCallback;
+    QSharedPointer<ProtobufHandler> mProtobufHandler;
+
 
     quint64 m_cookieCounter {1};
     QString m_Path;

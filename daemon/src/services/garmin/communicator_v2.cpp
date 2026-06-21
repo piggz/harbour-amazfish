@@ -1,4 +1,4 @@
-#include "communicator_v2.h"
+﻿#include "communicator_v2.h"
 #include "devices/garmin/garmindevice.h"
 #include "cobscodec.h"      // CobsCoDec
 #include "garminmlr.h"   // MlrCommunicator (Qt)
@@ -9,7 +9,6 @@
 #include "garminhrvmessage.h"
 #include "garminstepsmessage.h"
 #include "amazfishconfig.h"
-#include "asyncmessagehandler.h"
 #include "garmindevicestatusmessage.h"
 
 #include <QtCore/QStringList>
@@ -59,6 +58,8 @@ CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
     qDebug() << "Garmin: Service created for " << path;
     connect(this, &QBLEService::characteristicRead, this, &CommunicatorV2::characteristicRead);
     mMessageCallback =QSharedPointer<GfdiMessageCallback>::create();
+    // add protobuf Handler
+    mProtobufHandler = QSharedPointer<ProtobufHandler>(new ProtobufHandler());
 
     //mAsyncMessageCallback = QSharedPointer<AsyncGfdiMessageCallback>::create(new AsyncGfdiMessageCallback());
     initializeDevice();
@@ -186,7 +187,7 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
     //
     // Messages are COBS-encoded and sent via MLR protocol or directly depending on setup.
 
-    qDebug() <<Q_FUNC_INFO << "Garmin: Send Message " << taskName << " Content " << message;
+    qDebug() <<Q_FUNC_INFO << "Garmin: Send Message " << taskName << " Content " << message.toHex();
     if (message.isEmpty())
         return false;
 
@@ -419,11 +420,48 @@ void CommunicatorV2::onWeatherRequestReceived(const WeatherRequestMessage& msg) 
 void CommunicatorV2::onUnknownMessageReceived(const UnknownMessage& msg) {
     // Not really unknown, more generic message
     // we handle this message using AsyncMessageHandler class
-    AsyncMessageHandler handler(this);
-    handler.setCommunicator(this);
-    handler.parse(msg);
-    qDebug() << Q_FUNC_INFO << "Message ID " << msg.messageId;
+    /*
+    if (protoHandler) {
+       protoHandler->parse(msg);
+       qDebug() << Q_FUNC_INFO << "Message ID " << msg.messageId;
+    }
+    */
+}
 
+void CommunicatorV2::onProtobufMessageReceived( const QByteArray& data)
+{
+    /*
+    the handler elaborates the followup message but might change the status message since it does
+    check the integrity of the incoming message payload. Hence we let the handlers elaborate the
+    incoming message, then we send the status message of the incoming message, then the response
+    and finally we send the followup.
+     */
+    QSharedPointer<GarminProtobufMessage> followup=QSharedPointer<GarminProtobufMessage>();
+    QSharedPointer<GarminProtobufMessage> message=QSharedPointer<GarminProtobufMessage>(new GarminProtobufMessage(data, this));
+    QSharedPointer<GarminProtobufMessage> parsed = message->parse();
+    followup = mProtobufHandler->processIncoming(parsed);
+
+    sendMessage("SEND STATUS", parsed->getAckByteStream()); //send status message
+
+    sendMessage("SEND PROTOBUF REPLY", parsed->getMessageBytes()); //send reply if any
+
+    if (!followup.isNull()) sendMessage("SEND PROTOBUF FOLWOW UP", followup->getMessageBytes()); //send followup message if any
+
+    /*
+    final List<GBDeviceEvent> events = parsedMessage.getGBDeviceEvent();
+    for (final GBDeviceEvent event : events) {
+        evaluateGBDeviceEvent(event);
+    }
+    */
+
+}
+
+void CommunicatorV2::onProtobufStatusMessageReceived(const QByteArray& data)
+{
+    QSharedPointer<GarminProtobufMessage> followup=QSharedPointer<GarminProtobufMessage>();
+    QSharedPointer<GarminProtobufStatusMessage> message=QSharedPointer<GarminProtobufStatusMessage>(new GarminProtobufStatusMessage(data, this));
+    message->parse();
+    //followup = mProtobufHandler->processIncoming(parsed);
 }
 
 void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {

@@ -16,7 +16,7 @@ void GarminWeatherMessage::parse(const QByteArray& data) {
     if (mCommunicator) mCommunicator->onWeatherRequestReceived(msg);
 }
 
-QByteArray GarminWeatherMessage::generateResponse(const QByteArray& data) {
+QByteArray GarminWeatherMessage::generateOutgoing(const QByteArray& data) {
 
 }
 

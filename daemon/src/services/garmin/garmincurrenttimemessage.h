@@ -12,9 +12,11 @@ class GarminCurrentTimeMessage : public GarminGfdiMessage
 public:
     explicit GarminCurrentTimeMessage(CommunicatorV2 *parent) {
         mCommunicator = parent;
+        mMessageType = MessageId::CurrentTimeRequest;
     }
     void parse(const QByteArray& data);
-    QByteArray generateResponse(const QByteArray& data);
+    QByteArray generateOutgoing(const QByteArray& data);
+
 };
 
 #endif // GARMINCURRENTTIMEMESSAGE_H
