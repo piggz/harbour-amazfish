@@ -14,10 +14,8 @@ public:
     void parse(const QByteArray& data);
 private:
     void handleAuthNegotiation(const QByteArray& data);
-    void handleDeviceConfiguration(const QByteArray& data);
     void handleNotificationData(const QByteArray& data);
     void handleProtobufRequest(const QByteArray& data);
-    void handleProtobufResponse(const QByteArray& data);
 
 };
 

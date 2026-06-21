@@ -16,8 +16,7 @@ QByteArray GarminNotificationUpdateMessage::generateMessage() {
     message.append(static_cast<char>(updateType));
 
     // 2. Category flags
-    quint8 categoryFlags =
-        NotificationTypeUtil::notificationFlags(notificationType, hasActions);
+    quint8 categoryFlags =NotificationTypeUtil::notificationFlags(notificationType, hasActions);
     message.append(static_cast<char>(categoryFlags));
 
     // 3. Category value

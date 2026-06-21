@@ -53,6 +53,7 @@ enum class MessageId : quint16 {
     Configuration = 5050,
     CurrentTimeRequest = 5052,
     AuthNegotiation = 5101,
+    Generic = 0,
 };
 
 inline std::optional<MessageId> messageIdFromU16(quint16 id) {
@@ -133,13 +134,23 @@ public:
     static QSharedPointer<GarminGfdiMessage> create(CommunicatorV2* parent=nullptr) {
         return QSharedPointer<GarminGfdiMessage>(new GarminGfdiMessage(parent));
     }
+
     explicit GarminGfdiMessage(CommunicatorV2* parent=nullptr) : mCommunicator(parent)
     {
     }
-    void setCommunicator(CommunicatorV2* comm);
-    void onMessage(const QByteArray& data) override;
+    /*
+    explicit GarminGfdiMessage(const QByteArray& data=QByteArray(), CommunicatorV2* parent=nullptr) : mMessageBytes(data), mCommunicator(parent)
+    {
 
+    }
+    */
+    void setCommunicator(CommunicatorV2* comm);
+    QByteArray getMessageBytes() { return mMessageBytes; };
+    void onMessage(const QByteArray& data) override;
     void parse(const QByteArray& data);
+    QByteArray getAckByteStream();
+    QByteArray getOutgoingMessage();
+    MessageId getMessageType() {return mMessageType; };
 
 public slots:
     // Convenience slot: parse and emit appropriate signal
@@ -163,8 +174,11 @@ private:
 
 protected:
     CommunicatorV2* mCommunicator;
+    QByteArray mMessageBytes;
     static Result<QString> readLengthPrefixedString(const QByteArray& data, int& consumedBytes);
-
+    QSharedPointer<GarminGfdiMessage> mStatusMessage;
+    MessageId mMessageType=MessageId::Generic;
+    QByteArray generateOutgoing() { return QByteArray(); };
 
 };
 
@@ -198,13 +212,9 @@ public:
                                                                 bool hasDismissAction);
 
 private:
-    static Result<QByteArray> generateCapabilities();
-    static quint16 computeChecksum(const QByteArray& data);
+
     static QByteArray truncateUtf8Bytes(const QString& s, int maxBytes);
 
-    // LE push/overwrite helpers
-
-    static void overwriteU16le(QByteArray& out, int off, quint16 v);
 };
 
 

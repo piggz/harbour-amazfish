@@ -13,7 +13,9 @@ public:
         mCommunicator = parent;
     }
     void parse(const QByteArray& data);
-    QByteArray generateResponse(const QByteArray& data);
+    QByteArray generateOutgoing(const QByteArray& data);
+    MessageId getMessageType() {return MessageId::NotificationControl; };
+
 };
 
 #endif // GARMINNOTIFICATIONCONTROLMESSAGE_H

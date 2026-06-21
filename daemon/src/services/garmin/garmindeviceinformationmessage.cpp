@@ -40,7 +40,7 @@ void GarminDeviceInformationMessage::parse(const QByteArray& data)
     msg.deviceModel = s3.value;
 
     // Generate Response
-    QByteArray response = generateResponse(msg);
+    QByteArray response = generateOutgoing(msg);
     response = wrapInGfdiEnvelope(5000,response);
     // Now update the device via the communicator
     if (mCommunicator) {
@@ -49,7 +49,7 @@ void GarminDeviceInformationMessage::parse(const QByteArray& data)
     }
 }
 
-QByteArray GarminDeviceInformationMessage::generateResponse(const DeviceInformationMessage& incoming)
+QByteArray GarminDeviceInformationMessage::generateOutgoing(const DeviceInformationMessage &incoming)
 {
     QByteArray r;
     writeU16le(r, 5024);                             // original DEVICE_INFORMATION

@@ -13,7 +13,7 @@ public:
         mCommunicator = parent;
     }
     void parse(const QByteArray& data);
-    QByteArray generateResponse(const QByteArray& data);
+    QByteArray generateOutgoing(const QByteArray& data);
 private:
     void sendSynchronizationAck();
     void sendFilterMessage(quint8 filterType);

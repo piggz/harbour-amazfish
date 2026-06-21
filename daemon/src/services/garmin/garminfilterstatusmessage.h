@@ -13,7 +13,7 @@ public:
         mCommunicator = parent;
     }
     void parse(const QByteArray& data);
-    QByteArray generateResponse(const QByteArray& data);
+    QByteArray generateOutgoing(const QByteArray& data);
 };
 
 #endif // GARMINFILTERSTATUSMESSAGE_H

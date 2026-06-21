@@ -23,7 +23,7 @@ void GarminDeviceStatusMessage::parse(const QByteArray& data) {
     }
 }
 
-QByteArray GarminDeviceStatusMessage::generateResponse(const QByteArray& data) {
+QByteArray GarminDeviceStatusMessage::generateOutgoing(const QByteArray& data) {
 
 }
 

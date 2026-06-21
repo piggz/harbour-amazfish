@@ -14,6 +14,8 @@ public:
     }
     void parse();
     QByteArray generateMessage();
+    MessageId getMessageType() {return MessageId::NotificationUpdate; };
+
 
     NotificationUpdateType updateType = NotificationUpdateType::Add;
     NotificationType notificationType = NotificationType::Generic;

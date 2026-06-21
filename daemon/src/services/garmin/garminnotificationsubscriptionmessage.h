@@ -19,10 +19,12 @@ class GarminNotificationSubscriptionMessage : public GarminGfdiMessage
 public:
     explicit GarminNotificationSubscriptionMessage(CommunicatorV2* parent=nullptr)  {
         mCommunicator = parent;
+
     }
     void parse(const QByteArray& data);
+    MessageId getMessageType() {return MessageId::NotificationSubscription; };
 private:
-    QByteArray generateResponse(NotificationSubscriptionMessage& msg);
+    QByteArray generateStatusMessage(NotificationSubscriptionMessage& msg);
 };
 
 #endif // GARMINNOTIFICATIONSUBSCRIPTIONMESSAGE_H
