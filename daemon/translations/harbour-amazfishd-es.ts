@@ -29,7 +29,7 @@
     <message>
         <location filename="../src/achievements.cpp" line="15"/>
         <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
-        <translation type="unfinished">El Monte Doom está en el horizonte. &lt;b&gt;%1&lt;/b&gt; pasos detrás de usted — ¡no suelte el anillo todavía!</translation>
+        <translation>El Monte Doom está en el horizonte. &lt;b&gt;%1&lt;/b&gt; pasos detrás de usted — ¡no suelte el anillo todavía!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="16"/>
