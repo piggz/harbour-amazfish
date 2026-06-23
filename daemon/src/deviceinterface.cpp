@@ -1050,20 +1050,6 @@ bool DeviceInterface::operationRunning()
     return false;
 }
 
-void DeviceInterface::downloadSportsData()
-{
-    if (m_device) {
-        m_device->downloadSportsData();
-    }
-}
-
-void DeviceInterface::downloadActivityData()
-{
-    if (m_device) {
-        m_device->downloadActivityData();
-    }
-}
-
 void DeviceInterface::sendWeather(CurrentWeather *weather)
 {
     qDebug() << Q_FUNC_INFO << *weather;
@@ -1218,7 +1204,7 @@ void DeviceInterface::onRefreshTimer()
         if (m_lastActivitySync.secsTo(currentDate) >= (60*60)) {
             // qDebug() << Q_FUNC_INFO << "Auto syncing activity data";
             m_lastActivitySync = currentDate;
-            downloadActivityData();
+            fetchData((int)Amazfish::DataType::TYPE_ACTIVITY);
         }
     }
 }
@@ -1302,13 +1288,6 @@ void DeviceInterface::enableFeature(int feature)
     qDebug() << Q_FUNC_INFO << feature;
     if (m_device) {
         m_device->enableFeature((Amazfish::Feature)feature);
-    }
-}
-
-void DeviceInterface::fetchLogs()
-{
-    if (m_device) {
-        m_device->fetchLogs();
     }
 }
 

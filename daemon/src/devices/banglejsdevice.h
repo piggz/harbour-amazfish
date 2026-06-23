@@ -85,8 +85,7 @@ public:
     void navigationRunning(bool running) override;
     void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
-    void downloadActivityData() override;
-    void downloadSportsData() override;
+    void fetchData(Amazfish::DataTypes dataTypes) override;
 
     bool operationRunning() override;
 
@@ -104,6 +103,9 @@ private:
     void initialise();
     Q_SLOT void serviceEvent(uint8_t event);
     Q_SLOT void handleRxJson(const QJsonObject &json);
+
+    void downloadActivityData();
+    void downloadSportsData();
 
     bool m_operationRunning = false;
     void setOperationRunning(bool running);

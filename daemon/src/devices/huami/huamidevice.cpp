@@ -61,21 +61,6 @@ QString HuamiDevice::softwareRevision()
     return m_softwareRevision;
 }
 
-void HuamiDevice::downloadSportsData()
-{
-    m_fetcher->startFetchData(Amazfish::DataType::TYPE_GPS_TRACK);
-}
-
-void HuamiDevice::downloadActivityData()
-{
-    m_fetcher->startFetchData(Amazfish::DataType::TYPE_ACTIVITY);
-}
-
-void HuamiDevice::fetchLogs()
-{
-    m_fetcher->startFetchData(Amazfish::DataType::TYPE_DEBUGLOG);
-}
-
 void HuamiDevice::fetchData(Amazfish::DataTypes dataTypes)
 {
     m_fetcher->startFetchData(dataTypes);

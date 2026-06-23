@@ -88,6 +88,13 @@ void DK08Device::incomingCallEnded() {
     qDebug() << Q_FUNC_INFO;
 }
 
+void DK08Device::fetchData(Amazfish::DataTypes dataTypes)
+{
+    if (dataTypes & Amazfish::DataType::TYPE_ACTIVITY) {
+        downloadActivityData();
+    }
+}
+
 AbstractFirmwareInfo* DK08Device::firmwareInfo(const QByteArray &bytes, const QString &path) {
     qDebug() << Q_FUNC_INFO;
     return nullptr;

@@ -26,10 +26,7 @@ public:
     void incomingCallEnded() override;
 
     QString softwareRevision();
-    
-    void downloadSportsData() override;
-    void downloadActivityData() override;
-    void fetchLogs() override;
+
     void fetchData(Amazfish::DataTypes dataTypes) override;
 
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;

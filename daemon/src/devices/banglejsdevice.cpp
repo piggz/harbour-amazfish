@@ -321,6 +321,17 @@ void BangleJSDevice::navigationNarrative(const QString &flag, const QString &nar
     qDebug() << Q_FUNC_INFO;
 }
 
+void BangleJSDevice::fetchData(Amazfish::DataTypes dataTypes)
+{
+    if (dataTypes & Amazfish::DataType::TYPE_ACTIVITY) {
+        downloadActivityData();
+    }
+
+    if (dataTypes & Amazfish::DataType::TYPE_GPS_TRACK) {
+        downloadActivityData();
+    }
+}
+
 void BangleJSDevice::downloadActivityData() {
     qDebug() << Q_FUNC_INFO;
     if (m_operationRunning) {

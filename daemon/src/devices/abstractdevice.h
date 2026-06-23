@@ -66,9 +66,6 @@ public:
     virtual void prepareFirmwareDownload(const AbstractFirmwareInfo* info);
     virtual void startDownload();
 
-    virtual void downloadSportsData();
-    virtual void downloadActivityData();
-    virtual void fetchLogs();
     virtual void fetchData(Amazfish::DataTypes dataTypes);
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
