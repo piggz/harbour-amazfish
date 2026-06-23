@@ -297,14 +297,6 @@ PagePL {
                 immediateAlertLevel = (immediateAlertLevel + 1) % 2;
             }
         }
-        ButtonPL {
-            text: qsTr("Fetch debug log")
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width * 0.8
-            onClicked: {
-                DaemonInterfaceInstance.fetchLogs();
-            }
-        }
 
         Row {
             width: parent.width * 0.8
