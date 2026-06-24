@@ -3492,7 +3492,7 @@
         <location filename="../qml/components/Translation.js" line="246"/>
         <location filename="../qml/components/Translation.js" line="246"/>
         <source>Stepper</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalador</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="247"/>
@@ -3510,13 +3510,13 @@
         <location filename="../qml/components/Translation.js" line="249"/>
         <location filename="../qml/components/Translation.js" line="249"/>
         <source>Tug Of War</source>
-        <translation type="unfinished"></translation>
+        <translation>Tira y Afloja</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="250"/>
         <location filename="../qml/components/Translation.js" line="250"/>
         <source>Wall Ball</source>
-        <translation type="unfinished"></translation>
+        <translation>Balón contra la pared</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="251"/>
@@ -3534,13 +3534,13 @@
         <location filename="../qml/components/Translation.js" line="253"/>
         <location filename="../qml/components/Translation.js" line="253"/>
         <source>Free Sparring</source>
-        <translation type="unfinished"></translation>
+        <translation>Combate libre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="254"/>
         <location filename="../qml/components/Translation.js" line="254"/>
         <source>Body Combat</source>
-        <translation>Combate de ente</translation>
+        <translation>Combate corporal</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="255"/>
@@ -3606,7 +3606,7 @@
         <location filename="../qml/components/Translation.js" line="265"/>
         <location filename="../qml/components/Translation.js" line="265"/>
         <source>Orienteering</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrera de orientación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="266"/>
