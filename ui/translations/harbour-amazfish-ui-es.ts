@@ -2670,7 +2670,7 @@
         <location filename="../qml/components/Translation.js" line="109"/>
         <location filename="../qml/components/Translation.js" line="109"/>
         <source>Para Sport</source>
-        <translation type="unfinished">Para Deporte</translation>
+        <translation>Paradeporte</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="110"/>
