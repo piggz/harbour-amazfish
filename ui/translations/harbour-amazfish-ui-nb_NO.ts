@@ -3746,7 +3746,7 @@
         <location filename="../qml/components/Translation.js" line="267"/>
         <location filename="../qml/components/Translation.js" line="267"/>
         <source>Trail Run</source>
-        <translation>Terrengløp</translation>
+        <translation>Stiløp</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="268"/>
