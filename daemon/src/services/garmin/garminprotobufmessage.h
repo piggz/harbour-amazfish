@@ -35,12 +35,23 @@ public:
         mCommunicator=parent;
     }
 
-    GarminProtobufStatusMessage(CommunicatorV2 *com, int requestId, int dataOffset, int totalProtobufLength, int protobufDataLength, QByteArray messageBytes, bool sendOutgoing=true);
+    GarminProtobufStatusMessage(Status status, int requestId, int dataOffset, ProtobufChunkStatus chunktatus, ProtobufStatusCode  code, bool sendOutgoing=true);
 
-    void parse();
+
+    QSharedPointer<GarminProtobufStatusMessage> parse();
     int getRequestId() { return mRequestId; };
     int getDataOffset() { return mDataOffset; };
+    Status getStatus() { return mStatus; };
     MessageId getMessageType() {return MessageId::ProtobufResponse; };
+    ProtobufChunkStatus getProtobufChunkStatus() { return mProtobufChunkStatus; };
+    ProtobufStatusCode getProtobufStatusCode() { return mProtobufStatusCode; };
+    bool isOK() {
+        return ((mStatus == Status::Ack) &&
+                (mProtobufChunkStatus == ProtobufChunkStatus::KEPT) &&
+                (mProtobufStatusCode == ProtobufStatusCode::NO_ERROR));
+    }
+    QByteArray getOutgoingMessage();
+
 
     CommunicatorV2* getCommunicator() { return mCommunicator; };
 
@@ -49,9 +60,9 @@ private:
     int mRequestId;
     int mDataOffset;
     bool mSendOutgoing;
-    int mTotalProtobufLength;
-    int mProtobufDataLength;
-    //QByteArray mMessageBytes;
+    ProtobufChunkStatus mProtobufChunkStatus;
+    ProtobufStatusCode mProtobufStatusCode;
+    Status mStatus;
 };
 
 class GarminProtobufMessage : public GarminGfdiMessage
@@ -83,6 +94,7 @@ public:
     CommunicatorV2* getCommunicator() { return mCommunicator; };
     MessageId getMessageType() {return MessageId::ProtobufRequest; };
     QByteArray getOutgoingMessage();
+    QByteArray getAckByteStream();
 
 
 private:
@@ -90,7 +102,6 @@ private:
     void handleCalendarRequest(const QByteArray& data, quint16 requestID, quint32 dataOffset);
     void sendGenericAck(const QByteArray& data);
 
-    bool mSendOutgoing;
     int mRequestId;
     int mDataOffset;
     int mTotalProtobufLength;

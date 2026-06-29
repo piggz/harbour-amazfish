@@ -55,11 +55,7 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
     // Parse a GFDI message from raw bytes
     // MessageParser::parse in Rust
 
-    qDebug() << Q_FUNC_INFO << "Garmin: parsing GFDI Message " << data.toHex()
-
-
-
-                ;
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing GFDI Message " << data.toHex();
 
     if (data.size() < 6) {
         return;// Result<GfdiMessage>::err(GarminError::invalidMessage(QStringLiteral("Message too short")));
@@ -202,7 +198,8 @@ void GarminGfdiMessage::parseResponse(const QByteArray& data)
 void GarminGfdiMessage::parseProtobufResponse(const QByteArray& data)
 {
     //GarminProtobufStatusMessage msg(data, mCommunicator);
-    if (mCommunicator) mCommunicator->onProtobufStatusMessageReceived(data);
+    qDebug() << Q_FUNC_INFO;
+    if (mCommunicator) mCommunicator->onProtobufMessageReceived(data);
     //msg->parse(data);
 }
 
@@ -243,15 +240,6 @@ QByteArray GarminGfdiMessage::getAckByteStream() {
     return mStatusMessage->getOutgoingMessage();
 }
 
-GarminProtobufStatusMessage::GarminProtobufStatusMessage(CommunicatorV2 *com, int requestId, int dataOffset, int totalProtobufLength, int protobufDataLength, QByteArray messageBytes, bool sendOutgoing) {
-    mCommunicator = com;
-    mRequestId=requestId;
-    mDataOffset=dataOffset;
-    mTotalProtobufLength=totalProtobufLength;
-    mProtobufDataLength=protobufDataLength;
-    mMessageBytes=messageBytes;
-    mSendOutgoing=sendOutgoing;
-}
 
 
 // MessageGenerator is used to generate messages for sending to the device

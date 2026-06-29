@@ -16,6 +16,10 @@ GarminProtobufMessage::GarminProtobufMessage(CommunicatorV2 *com, int requestId,
     mMessageType=MessageId::ProtobufRequest;
 }
 
+void GarminProtobufMessage::setStatusMessage(QSharedPointer<GarminProtobufStatusMessage> protobufStatusMessage) {
+    qDebug() << Q_FUNC_INFO;
+    mStatusMessage=protobufStatusMessage;
+}
 
 
 QSharedPointer<GarminProtobufMessage> GarminProtobufMessage::parse()
@@ -104,56 +108,61 @@ QByteArray GarminProtobufMessage::getOutgoingMessage(){
     writeU32le(message,mTotalProtobufLength);
     writeU32le(message,mProtobufDataLength);
     message.append(mMessageBytes);
+    qDebug() << Q_FUNC_INFO << "Garmin: outgoing protobuf message " << message.toHex();
     return wrapInGfdiEnvelope((quint16)MessageId::ProtobufRequest, message);
 }
 
-
-void GarminProtobufStatusMessage::parse() {
-    QByteArray data = mMessageBytes;
-    if (data.size() >= 18) {
-        const quint16 requestId = u16le(data, 0);
-        const quint32 dataOffset = u32le(data, 2);
-        const quint32 totalProtobufLength = u32le(data, 6);
-        const quint32 protobufDataLength = u32le(data, 10);
-        QByteArray messageBytes = data.mid(14,protobufDataLength);
-
-        QSharedPointer<GarminProtobufMessage> message = QSharedPointer<GarminProtobufMessage>( new GarminProtobufMessage(mCommunicator, requestId, dataOffset, totalProtobufLength, protobufDataLength, messageBytes, false));
-
-
-        qDebug() << Q_FUNC_INFO << "Garmin: Request ID:" << requestId;
-        qDebug() << Q_FUNC_INFO << "Garmin: Data Offset:" << dataOffset;
-        qDebug() << Q_FUNC_INFO << "Garmin: Total Protobuf Length:" << totalProtobufLength;
-        qDebug() << Q_FUNC_INFO << "Garmin: Protobuf Data Length:" << protobufDataLength;
-
-        const int protobufStart = 14;
-        const int protobufEnd = protobufStart + static_cast<int>(protobufDataLength);
-
-        if (data.size() >= protobufEnd) {
-            const QByteArray protobufPayload = data.mid(protobufStart, protobufDataLength);
-            const bool isComplete =
-                (dataOffset == 0 && totalProtobufLength == protobufDataLength);
-
-            if (isComplete) {
-                qDebug() << Q_FUNC_INFO << "Garmin: Complete protobuf message - attempting to parse";
-
-                if (!protobufPayload.isEmpty()) {
-                    const quint8 firstTag = static_cast<quint8>(protobufPayload[0]);
-                    const quint8 fieldNumber = firstTag >> 3;
-                    const quint8 wireType = firstTag & 0x07;
-
-
-                    qDebug() << Q_FUNC_INFO << "Garmin: First protobuf field:" << fieldNumber
-                            << "(wire type:" << wireType << ") Payload: " << protobufPayload.toHex();
-
-                    if (fieldNumber==8 && wireType ==2)
-                    { //get length of inner protobuf
-                        quint8  innerLength=protobufPayload[1];
-                        GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(mCommunicator);
-                        msg->parse(protobufPayload.mid(2,innerLength));
-                  }
-                }
-            }
-        }
+QByteArray GarminProtobufMessage::getAckByteStream() {
+    qDebug()<< Q_FUNC_INFO << "Garmin: getting Ack Byte Stream";
+    if (mStatusMessage.isNull()) {
+        qDebug()<< Q_FUNC_INFO << "Garmin: No status message";
+        return QByteArray();
     }
+    qDebug()<< Q_FUNC_INFO << "Garmin: status message is " << mStatusMessage->getOutgoingMessage().toHex();
+    return mStatusMessage->getOutgoingMessage();
+}
+GarminProtobufStatusMessage::GarminProtobufStatusMessage(Status status, int requestId, int dataOffset, ProtobufChunkStatus chunkStatus, ProtobufStatusCode  code, bool sendoutgoing)
+{
+    qDebug() << Q_FUNC_INFO;
+    mStatus = status;
+    mRequestId=requestId;
+    mDataOffset=dataOffset;
+    mProtobufStatusCode=code;
+    mProtobufChunkStatus=chunkStatus;
+    mSendOutgoing=sendoutgoing;
+
 }
 
+
+QSharedPointer<GarminProtobufStatusMessage> GarminProtobufStatusMessage::parse() {
+    qDebug() << Q_FUNC_INFO << "Garmin: Status message data " << mMessageBytes.toHex();
+
+    Status status = (Status) mMessageBytes.data()[0];
+
+
+    const quint16 requestId = u16le(mMessageBytes, 1);
+    const quint32 dataOffset = u32le(mMessageBytes, 3);
+    char s = mMessageBytes[7];
+    ProtobufChunkStatus protobufStatus = (ProtobufChunkStatus)s;
+    s=mMessageBytes[8];
+    ProtobufStatusCode error = (ProtobufStatusCode)s;
+    qDebug() << Q_FUNC_INFO << "Garmin: Processing protobuf status message " << (char)status  << "#" <<  requestId<< "status " << (char)error;
+
+    QSharedPointer<GarminProtobufStatusMessage> statusMessage = QSharedPointer<GarminProtobufStatusMessage>( new GarminProtobufStatusMessage(status, requestId, dataOffset, protobufStatus, error, true));
+    if (!statusMessage.isNull())
+        qDebug() << Q_FUNC_INFO << "Garmin: Processing protobuf status message " << statusMessage  << "#" <<  getRequestId() << "status " <<  statusMessage->getProtobufChunkStatus() << " error=" << statusMessage->getProtobufStatusCode();
+    return statusMessage;
+}
+
+QByteArray GarminProtobufStatusMessage::getOutgoingMessage() {
+    if (!mSendOutgoing) return QByteArray();
+    QByteArray response;
+    writeU16le(response,(quint16) mMessageType);
+    response.append((char)mStatus);
+    writeU16le(response, mRequestId);
+    writeU32le(response,mDataOffset);
+    response.append((char)mProtobufChunkStatus);
+    response.append((char)mProtobufStatusCode);
+    response=wrapInGfdiEnvelope((quint16)MessageId::Response,response);
+    return response;
+   }

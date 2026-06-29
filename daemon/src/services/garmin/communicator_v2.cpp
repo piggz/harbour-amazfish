@@ -59,7 +59,7 @@ CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
     connect(this, &QBLEService::characteristicRead, this, &CommunicatorV2::characteristicRead);
     mMessageCallback =QSharedPointer<GfdiMessageCallback>::create();
     // add protobuf Handler
-    mProtobufHandler = QSharedPointer<ProtobufHandler>(new ProtobufHandler());
+    mProtobufHandler = QSharedPointer<ProtobufHandler>(new ProtobufHandler(this));
 
     //mAsyncMessageCallback = QSharedPointer<AsyncGfdiMessageCallback>::create(new AsyncGfdiMessageCallback());
     initializeDevice();
@@ -207,10 +207,8 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
 
     gfdiHandle = mState->handleByService.value(Service::GFDI);
 
-    qDebug() << Q_FUNC_INFO << "Sending message " << taskName << "via GFDI handle " << gfdiHandle;
 
     // Extract and log message type with sequence number and response details
-
 
     if (message.size() >= 4) {
         int offset = 2;
@@ -240,24 +238,18 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
         qDebug() << Q_FUNC_INFO << "Garmin: SENDING MESSAGE to watch:" << taskName;
         qDebug() << Q_FUNC_INFO << "Garmin: Message type: " << typeString;
 
-        if (sequenceNumber) {
-            qDebug() << Q_FUNC_INFO << "Garmin: Sequence number " << sequenceNumber.value();
-        }
-
         // For Response messages, show what we're responding to and status
         if (msgId == 5000) {
             if (message.size() >= 9) {
                 const quint16 origMsgId = le16(message.constData() + 4);
                 const quint8 statusByte = quint8(message[6]);
-
                 qDebug() << Q_FUNC_INFO << "Outgoing Response decoding: orig_msg_id " << origMsgId << ", status_byte=" << statusByte;
 
             } else {
                 qDebug() << Q_FUNC_INFO << "Garmin: Response message too short: " << message.size() <<" bytes (need at least 9)";
+                return false;
             }
         }
-
-        qDebug() << Q_FUNC_INFO << "Garmin: Message size: " << message.size() << " bytes";
     } else {
         qDebug() << Q_FUNC_INFO << "Garmin: NOT SENDING MESSAGE to watch:" << taskName <<", Massage too short " << message.size() << "bytes.";
     }
@@ -312,8 +304,6 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
         packet.reserve(payload.size() + 1);
         packet.append(char(gfdiHandle));
         packet.append(payload);
-
-
         QString errorMsg;
         mState->characteristicSend->writeValue(packet,&errorMsg);
         if (!errorMsg.isEmpty())
@@ -382,19 +372,6 @@ void CommunicatorV2::onConfigurationReceived() {
     {
         sendMessage("HOST FOREGROUND", response.value);
     }
-    /*
-    if (isFirstConncet) {
-        isFirstConncet = false;
-        response = GfdiMessageGenerator::systemEvent(0, 0);// SYNC_COMPLETE
-        if (response.ok)
-        {
-            sendMessage("SYNC COMPLETE", response.value);
-        }
-    }
-    */
-    GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
-    sendMessage("BATTERY STATUS REQUEST",msg->generateBatteryStatusRequest(1));
-
 }
 
 void CommunicatorV2::onNotificationControlReceived(const NotificationControlMessage& msg){
@@ -430,6 +407,7 @@ void CommunicatorV2::onUnknownMessageReceived(const UnknownMessage& msg) {
 
 void CommunicatorV2::onProtobufMessageReceived( const QByteArray& data)
 {
+    qDebug() << Q_FUNC_INFO;
     /*
     the handler elaborates the followup message but might change the status message since it does
     check the integrity of the incoming message payload. Hence we let the handlers elaborate the
@@ -440,28 +418,38 @@ void CommunicatorV2::onProtobufMessageReceived( const QByteArray& data)
     QSharedPointer<GarminProtobufMessage> message=QSharedPointer<GarminProtobufMessage>(new GarminProtobufMessage(data, this));
     QSharedPointer<GarminProtobufMessage> parsed = message->parse();
     followup = mProtobufHandler->processIncoming(parsed);
-
+    qDebug() << Q_FUNC_INFO << "Garmin: Sendig Ackbytestream " << parsed->getAckByteStream().toHex();
     sendMessage("SEND STATUS", parsed->getAckByteStream()); //send status message
 
-    sendMessage("SEND PROTOBUF REPLY", parsed->getMessageBytes()); //send reply if any
+    if (parsed->toSend()) sendMessage("SEND PROTOBUF REPLY", parsed->getMessageBytes()); //send reply if any
 
-    if (!followup.isNull()) sendMessage("SEND PROTOBUF FOLWOW UP", followup->getMessageBytes()); //send followup message if any
+    if (!followup.isNull()&& followup->toSend()) sendMessage("SEND PROTOBUF FOLWOW UP", followup->getMessageBytes()); //send followup message if any
+
 
     /*
     final List<GBDeviceEvent> events = parsedMessage.getGBDeviceEvent();
     for (final GBDeviceEvent event : events) {
         evaluateGBDeviceEvent(event);
-    }
+
     */
 
 }
 
 void CommunicatorV2::onProtobufStatusMessageReceived(const QByteArray& data)
 {
+    qDebug() << Q_FUNC_INFO << "Garmin: Received protobuf status message " << data.toHex();
     QSharedPointer<GarminProtobufMessage> followup=QSharedPointer<GarminProtobufMessage>();
+    //QByteArray statusData=data.mid(2); // Remove Response field
     QSharedPointer<GarminProtobufStatusMessage> message=QSharedPointer<GarminProtobufStatusMessage>(new GarminProtobufStatusMessage(data, this));
-    message->parse();
-    //followup = mProtobufHandler->processIncoming(parsed);
+    QSharedPointer<GarminProtobufStatusMessage> parsed  =  message->parse();
+    qDebug() << Q_FUNC_INFO << "Garmin: Parsed Protobuf Status is " << parsed->getMessageBytes().toHex();
+    followup = mProtobufHandler->processIncoming(parsed);
+    sendMessage("SEND STATUS", parsed->getAckByteStream()); //send status message
+
+    if (parsed->toSend()) sendMessage("SEND PROTOBUF REPLY", parsed->getMessageBytes()); //send reply if any
+
+    if (!followup.isNull()&& followup->toSend()) sendMessage("SEND PROTOBUF FOLWOW UP", followup->getMessageBytes()); //send followup message if any
+
 }
 
 void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
@@ -821,10 +809,20 @@ void CommunicatorV2::registerServices() {
     //registerService(Service::RealtimeHrv, true);
 
     // Send Battery Status request
+    mBatteryTimer = new QTimer(this);
+    mBatteryTimer->setInterval(120000);
+    mBatteryTimer->start();
+    connect(mBatteryTimer,&QTimer::timeout, this, &CommunicatorV2::getBatteryLevel);
     GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
-    sendMessage("BATTERY STATUS REQUEST",msg->generateBatteryStatusRequest(1));
+    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg->generateBatteryStatusRequest(1));
+    sendMessage("BATTERY STATUS REQUEST",batteryRequest->getOutgoingMessage());
 
+}
 
+void CommunicatorV2::getBatteryLevel() {
+    GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
+    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg->generateBatteryStatusRequest(1));
+    sendMessage("BATTERY STATUS REQUEST",batteryRequest->getOutgoingMessage());
 }
 
 void CommunicatorV2::dispose() {
