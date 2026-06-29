@@ -151,6 +151,7 @@ public:
     QByteArray getAckByteStream();
     QByteArray getOutgoingMessage();
     MessageId getMessageType() {return mMessageType; };
+    bool toSend() {return mSendOutgoing;};
 
 public slots:
     // Convenience slot: parse and emit appropriate signal
@@ -179,6 +180,8 @@ protected:
     QSharedPointer<GarminGfdiMessage> mStatusMessage;
     MessageId mMessageType=MessageId::Generic;
     QByteArray generateOutgoing() { return QByteArray(); };
+    bool mSendOutgoing=true;
+
 
 };
 

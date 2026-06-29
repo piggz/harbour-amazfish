@@ -19,6 +19,7 @@ void GarminDeviceStatusMessage::parse(const QByteArray& data) {
             quint8 batteryLevel=u16le(data,5);
             qDebug() << Q_FUNC_INFO << "Garmin: Battery Leves is " << batteryLevel << "%";
             if (mCommunicator) mCommunicator->setBatteryLevel(batteryLevel);
+            else qDebug() << Q_FUNC_INFO << "Garmin: No communicator found";
         }
     }
 }
@@ -69,6 +70,9 @@ QByteArray GarminDeviceStatusMessage::generateBatteryStatusRequest(quint16 reque
     smartProto.append(char((8 << 3) | 2));// Field 8, wire type 2 (length-delimited)
     smartProto.append(char(deviceStatusService.size()));// Length
     smartProto.append(deviceStatusService);
+
+
+    return smartProto;
 
     // Now build the ProtobufRequest message
     QByteArray m;

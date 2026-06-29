@@ -15,7 +15,7 @@ public:
 private:
     void handleAuthNegotiation(const QByteArray& data);
     void handleNotificationData(const QByteArray& data);
-    void handleProtobufRequest(const QByteArray& data);
+    void handleProtobufResponse(const QByteArray& data);
 
 };
 

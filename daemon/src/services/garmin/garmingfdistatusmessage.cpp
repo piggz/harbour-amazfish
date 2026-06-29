@@ -29,6 +29,7 @@ static inline QString responseMessageName(quint16 originalMsgId)
 
 void GarminGfdiStatusMessage::parse(const QByteArray& data)
 {
+    qDebug() << Q_FUNC_INFO << "Garmin: GFDI Status content " << data.toHex();
     // This handles Status / Response MEssages from teh watch.
     // Not all below messages are expected, but for debugging we notify for all
     quint16 originalMessageType = u16le(data.constData(),0);
@@ -116,14 +117,17 @@ void GarminGfdiStatusMessage::parse(const QByteArray& data)
         handleNotificationUpdate(data);
         break;
         */
+
     case MessageId::ProtobufRequest:
         qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
+        handleProtobufResponse(data);
         break;
-        /*
+
     case MessageId::ProtobufResponse:
         qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
         handleProtobufResponse(data);
         break;
+    /*
     case MessageId::Response:
         qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
         break;
@@ -158,8 +162,7 @@ void GarminGfdiStatusMessage::parse(const QByteArray& data)
             qDebug() << Q_FUNC_INFO << "Garmin: Got ack for message type " << messageIdToString(originalMessageType).value() << ", not acking the ack.";
         }
         else {
-            qDebug() << Q_FUNC_INFO << "Garmin: Got unexpected result for message type " << messageIdToString(originalMessageType).value() << ": " << statusName(status);
-
+            qDebug() << Q_FUNC_INFO << "Garmin: Got unexpected result for message type " << originalMessageType << "," << messageIdToString(originalMessageType).value() << ": " << statusName(status);
         }
     }
 
@@ -216,4 +219,9 @@ void GarminGfdiStatusMessage::handleNotificationData(const QByteArray &data) {
     } else if (transferStatus == 2) {
         qDebug() << Q_FUNC_INFO << "Garmin: Watch sent ABORT";
     }
+}
+
+void GarminGfdiStatusMessage::handleProtobufResponse(const QByteArray &data) {
+    qDebug() << Q_FUNC_INFO << data.toHex();
+    if (mCommunicator) mCommunicator->onProtobufStatusMessageReceived(data);
 }

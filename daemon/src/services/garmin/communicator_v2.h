@@ -199,6 +199,7 @@ public slots:
 
     // Register services
     void registerServices();
+    void getBatteryLevel();
 
 
 private:
@@ -243,6 +244,7 @@ private:
     QObject *m_device = nullptr;
     bool isFirstConncet=true;
     bool isPairing=false;
+    QTimer* mBatteryTimer;
 };
 
 

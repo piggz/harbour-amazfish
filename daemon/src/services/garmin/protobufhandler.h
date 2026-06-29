@@ -33,19 +33,22 @@ private:
 class ProtobufHandler
 {
 public:
-    ProtobufHandler(){
+    ProtobufHandler(CommunicatorV2* com):mCommunicator(com){
     };
     int getNextProtobufRequestId();
     QSharedPointer<GarminProtobufMessage> processIncoming(QSharedPointer<GarminProtobufMessage> message);
     QSharedPointer<GarminProtobufMessage> processIncoming(QSharedPointer<GarminProtobufStatusMessage> message);
     QSharedPointer<ProtobufFragment> processChunkedMessage(QSharedPointer<GarminProtobufMessage> message);
+    QSharedPointer<GarminProtobufMessage> prepareProtobufRequest(QByteArray protobufPayload);
+        QSharedPointer<GarminProtobufMessage> prepareProtobufResponse(QByteArray protobufPayload, int requestId);
+    QSharedPointer<GarminProtobufMessage> prepareProtobufMessage(QByteArray bytes, MessageId type, int requestId);
 
 private:
     GarminDevice* mDevice;
     QMap<int, QSharedPointer<ProtobufFragment>> mChunkedFragmentsMap;
     int mMaxChunkSize = 375; //tested on Vívomove Style
     int mLastProtobufRequestId;
-    QSharedPointer<CommunicatorV2> mCommunicator;
+    CommunicatorV2* mCommunicator;
     void sendAck(QString taskName, QSharedPointer<GarminGfdiMessage> msg);
     //AppConfigHandler appConfigHandler;
     //HttpHandler httpHandler;

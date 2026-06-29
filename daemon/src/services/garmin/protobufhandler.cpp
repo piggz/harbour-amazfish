@@ -62,12 +62,17 @@ int ProtobufHandler::getNextProtobufRequestId() {
 QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPointer<GarminProtobufMessage> message) {
     qDebug() << Q_FUNC_INFO;
     QSharedPointer<ProtobufFragment> fragment = processChunkedMessage(message);
+    if (fragment.isNull()) {
+        qDebug() << Q_FUNC_INFO << "Garmin: processChunkedMessage returned Null";
+        return  QSharedPointer<GarminProtobufMessage>();
+    }
     if (fragment->isComplete()) {
         qDebug() << Q_FUNC_INFO << "Garmin: Protobuf message is complete" << message->getMessageBytes().toHex();
         mChunkedFragmentsMap.remove(message->getRequestId());
         // Message is complet now, start parsing
         QByteArray protobufPayload = fragment->getFragmentBytes();
-        const quint8 firstTag = static_cast<quint8>(protobufPayload[0]);
+
+        const quint8 firstTag = (quint8)protobufPayload[0];
         const quint8 fieldNumber = firstTag >> 3;
         const quint8 wireType = firstTag & 0x07;
 
@@ -75,11 +80,11 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
                 << "(wire type:" << wireType << ") Payload: " << protobufPayload.toHex();
 
         bool processed=false;
-         if (fieldNumber==8 && wireType ==2) {
+        if (fieldNumber==8 && wireType ==2) {
              // Device Status Message
              processed = true;
              quint8  innerLength=protobufPayload[1];
-             GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(mCommunicator.data());
+             GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(mCommunicator);
              msg->parse(protobufPayload.mid(2,innerLength));
          }
          if (fieldNumber==49 && wireType ==2) {
@@ -91,26 +96,28 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
              qDebug() << Q_FUNC_INFO << "Garmin: Got calendar service messge";
          }
          if (processed) {
-             QByteArray responsePayload;
-             responsePayload.append(char(0xB3));
-             responsePayload.append(char(0x13));
-             responsePayload.append(char(0x00)); // ACK
-             writeU16le(responsePayload, message->getRequestId());
-             writeU32le(responsePayload, message->getDataOffset());
-             responsePayload.append(char(ProtobufChunkStatus::KEPT)); // KEPT
-             responsePayload.append(char(ProtobufStatusCode::NO_ERROR)); // NO_ERROR
-             if (mCommunicator) mCommunicator->sendMessage("PROTOBUF ACK",responsePayload);
-         } else {
-             QByteArray responsePayload;
-             responsePayload.append(char(0xB3));
-             responsePayload.append(char(0x13));
-             responsePayload.append(char(0x00)); // ACK
-             writeU16le(responsePayload, message->getRequestId());
-             writeU32le(responsePayload, message->getDataOffset());
-             responsePayload.append(char(ProtobufChunkStatus::DISCARDED));
-             responsePayload.append(char(ProtobufStatusCode::UNKNOWN_REQUEST_ID));
-             if (mCommunicator) mCommunicator->sendMessage("PROTOBUF UNKNOWN ACK",responsePayload);
+             qDebug() << Q_FUNC_INFO << "Garmin: Add ACK with No error";
+
+             QSharedPointer<GarminProtobufStatusMessage> statusMessage = QSharedPointer<GarminProtobufStatusMessage>
+                     (new GarminProtobufStatusMessage( Status::Ack,
+                                                  message->getRequestId(),
+                                                  message->getDataOffset(),
+                                                  ProtobufChunkStatus::KEPT,
+                                                  ProtobufStatusCode::NO_ERROR,
+                                                  true));
+             message->setStatusMessage(statusMessage);
+            } else {
+             qDebug() << Q_FUNC_INFO << "Garmin: Add ACK with Unknown Request ID";
+             QSharedPointer<GarminProtobufStatusMessage> statusMessage = QSharedPointer<GarminProtobufStatusMessage>
+                     (new GarminProtobufStatusMessage(Status::Ack,
+                                                  message->getRequestId(),
+                                                  message->getDataOffset(),
+                                                  ProtobufChunkStatus::DISCARDED,
+                                                  ProtobufStatusCode::UNKNOWN_REQUEST_ID,
+                                                  true));
+             message->setStatusMessage(statusMessage);
          }
+         return message;
       }
     return QSharedPointer<GarminProtobufMessage>();
 }
@@ -130,7 +137,8 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
 }
 
 QSharedPointer<ProtobufFragment> ProtobufHandler::processChunkedMessage(QSharedPointer<GarminProtobufMessage> message) {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "Garmin: Process chunked message with Request ID " << message->getRequestId() << " content " << message->getMessageBytes().toHex();
+
     if (message->isComplete()) //comment this out if for any reason also smaller messages should end up in the map
         return QSharedPointer<ProtobufFragment>(new ProtobufFragment(message->getMessageBytes()));
 
@@ -153,4 +161,35 @@ void ProtobufHandler::sendAck(QString taskName, QSharedPointer<GarminGfdiMessage
     if (!msg->getAckByteStream().isEmpty())
         qDebug() << Q_FUNC_INFO << "Garmin: OUTGOING ACK "<< (quint16) msg->getMessageType() << ", " << msg->getAckByteStream();
     if (mCommunicator) mCommunicator->sendMessage(taskName, msg->getAckByteStream());
+}
+
+QSharedPointer<GarminProtobufMessage> ProtobufHandler::prepareProtobufRequest(QByteArray protobufPayload) {
+    if (protobufPayload.isEmpty())
+        return QSharedPointer<GarminProtobufMessage>();
+    int requestId = getNextProtobufRequestId();
+    return prepareProtobufMessage(protobufPayload, MessageId::ProtobufRequest, requestId);
+}
+
+QSharedPointer<GarminProtobufMessage> ProtobufHandler::prepareProtobufResponse(QByteArray protobufPayload, int requestId) {
+    if (protobufPayload.isEmpty())
+        return QSharedPointer<GarminProtobufMessage>();
+    return prepareProtobufMessage(protobufPayload, MessageId::ProtobufResponse, requestId);
+}
+
+QSharedPointer<GarminProtobufMessage> ProtobufHandler::prepareProtobufMessage(QByteArray bytes, MessageId type, int requestId) {
+    // This needs probably to be splitted into to functions to cater for request/response
+    qDebug() << Q_FUNC_INFO << messageIdToString((quint16)type).value() << " ID " << requestId;
+    if (bytes.isEmpty())
+        return QSharedPointer<GarminProtobufMessage>();
+
+    if (bytes.size() > mMaxChunkSize) {
+        mChunkedFragmentsMap.insert(requestId, QSharedPointer<ProtobufFragment>(new ProtobufFragment(bytes)));
+        return QSharedPointer<GarminProtobufMessage>(new GarminProtobufMessage(mCommunicator,
+                requestId,
+                0,
+                bytes.size(),
+                mMaxChunkSize,
+                bytes.mid(0, mMaxChunkSize)));
+    }
+    return QSharedPointer<GarminProtobufMessage>(new GarminProtobufMessage(mCommunicator, requestId, 0, bytes.size(), bytes.size(), bytes));
 }
