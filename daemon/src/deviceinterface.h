@@ -71,10 +71,8 @@ public:
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
     Q_INVOKABLE bool startDownload();
-    Q_INVOKABLE void downloadSportsData();
-    Q_INVOKABLE void downloadActivityData();
-    Q_INVOKABLE void refreshInformation();
 
+    Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(int i);
     Q_INVOKABLE void sendAlert(const QVariantMap &notification, bool allowDuplicate = false);
     Q_INVOKABLE void sendAlert(const Amazfish::WatchNotification &notification, bool allowDuplicate = false);
@@ -86,7 +84,6 @@ public:
     Q_INVOKABLE void updateCalendar();
     Q_INVOKABLE void reloadCities();
     Q_INVOKABLE void enableFeature(int feature);
-    Q_INVOKABLE void fetchLogs();
     Q_INVOKABLE void fetchData(int dataType);
     Q_INVOKABLE void requestScreenshot();
     Q_INVOKABLE QStringList supportedDisplayItems();

@@ -39,7 +39,7 @@ PageListPL {
         PageMenuItemPL {
             iconSource: styler.iconDownloadData !== undefined ? styler.iconDownloadData : ""
             text: qsTr("Download Next Activity")
-            onClicked: DaemonInterfaceInstance.downloadSportsData()
+            onClicked: DaemonInterfaceInstance.fetchData(Amazfish.TYPE_GPS_TRACK)
             enabled: DaemonInterfaceInstance.connectionState === "authenticated"
         }
 

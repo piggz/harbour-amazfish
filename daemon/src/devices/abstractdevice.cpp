@@ -173,20 +173,9 @@ void AbstractDevice::startDownload()
 {
 }
 
-void AbstractDevice::downloadSportsData()
-{   
-}
-
-void AbstractDevice::downloadActivityData()
-{
-}
-
-void AbstractDevice::fetchLogs()
-{
-}
-
 void AbstractDevice::fetchData(Amazfish::DataTypes dataTypes)
 {
+    Q_UNUSED(dataTypes);
 }
 
 void AbstractDevice::sendWeather(CurrentWeather *weather)

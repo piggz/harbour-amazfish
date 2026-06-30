@@ -193,22 +193,6 @@ bool DaemonInterface::startDownload()
     return reply;
 }
 
-void DaemonInterface::downloadSportsData()
-{
-    if (!iface || !iface->isValid()) {
-        return;
-    }
-    iface->call("downloadSportsData");
-}
-
-void DaemonInterface::downloadActivityData()
-{
-    if (!iface || !iface->isValid()) {
-        return;
-    }
-    iface->call(QStringLiteral("downloadActivityData"));
-}
-
 void DaemonInterface::fetchData(int dataTypes)
 {
     if (!iface || !iface->isValid()) {
@@ -369,13 +353,6 @@ void DaemonInterface::enableFeature(Amazfish::Feature feature)
         return;
     }
     iface->call(QStringLiteral("enableFeature"), (int)feature);
-}
-
-void DaemonInterface::fetchLogs() {
-    if (!iface || !iface->isValid()) {
-        return;
-    }
-    iface->call(QStringLiteral("fetchLogs"));
 }
 
 void DaemonInterface::requestScreenshot() {
