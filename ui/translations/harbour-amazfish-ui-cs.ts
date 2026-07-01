@@ -4786,7 +4786,7 @@
         <location filename="../qml/components/Translation.js" line="247"/>
         <location filename="../qml/components/Translation.js" line="247"/>
         <source>Stretching</source>
-        <translation>Stretching</translation>
+        <translation>Protahování</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="248"/>
