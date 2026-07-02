@@ -71,7 +71,7 @@ void GarminDevice::sendAlert(const Amazfish::WatchNotification &notification)
         note.body = notification.body;
         note.sourceName = notification.appName;
         note.title = notification.summary;
-        note.id=0;
+        note.id=(quint32)NotificationType::Generic;  // Todo: Change this based on Appname;
         mNotificationHandler->onNotification(note);
     }
     else qDebug() << Q_FUNC_INFO << "Garmin: No notification handler!";

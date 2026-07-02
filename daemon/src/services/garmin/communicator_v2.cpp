@@ -10,6 +10,7 @@
 #include "garminstepsmessage.h"
 #include "amazfishconfig.h"
 #include "garmindevicestatusmessage.h"
+#include "garminnotificationsubscriptionmessage.h"
 
 #include <QtCore/QStringList>
 #include <QtCore/QMetaObject>
@@ -330,6 +331,7 @@ void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, cons
 
     if (mlr) {
         // Pass data to mlr, which will emit gfdiDecoded with the decoded data.
+        qDebug() << Q_FUNC_INFO << "Garmin: passing data to Mlr handler: " << data.toHex();
         mlr->onPacketReceived(data);
         return;
     }
@@ -617,7 +619,7 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         auto sender = QSharedPointer<MlrMessageSender>::create(sendChar, this);
         auto receiver = QSharedPointer<MlrMessageReceiver>::create(mMessageCallback, mAsyncMessageCallback, this);
         auto mlr = QSharedPointer<MlrCommunicator>::create(mlrHandle, 20, sender, receiver);
-        mlr->start();
+        //mlr->start();
         qDebug() << Q_FUNC_INFO << "Garmin: Reliable MLR communicator created";
 
         mState->mlrCommunicators.insert(mlrHandle, mlr);
@@ -628,7 +630,11 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         createdMlr = mlr;
 
 
-     }
+     } else {
+        //Non Reliable mode requested, not yet implemented
+        qDebug() << Q_FUNC_INFO << "Garmin: Non reliable ML communicator requested, not yet implemented.";
+    }
+
 
     // If no callback is registered for this service, create a default one for known services
     if (!mState->serviceCallbacks.contains(service))
@@ -813,15 +819,14 @@ void CommunicatorV2::registerServices() {
     mBatteryTimer->setInterval(120000);
     mBatteryTimer->start();
     connect(mBatteryTimer,&QTimer::timeout, this, &CommunicatorV2::getBatteryLevel);
-    GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
-    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg->generateBatteryStatusRequest(1));
-    sendMessage("BATTERY STATUS REQUEST",batteryRequest->getOutgoingMessage());
+    getBatteryLevel();
+
 
 }
 
 void CommunicatorV2::getBatteryLevel() {
     GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
-    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg->generateBatteryStatusRequest(1));
+    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg->generateBatteryStatusRequest());
     sendMessage("BATTERY STATUS REQUEST",batteryRequest->getOutgoingMessage());
 }
 
@@ -833,7 +838,6 @@ void CommunicatorV2::onConnectionStateChange(bool connected) {
     qDebug() << Q_FUNC_INFO << connected;
     if (!mState->characteristicSend) return;
     if (!connected) {
-        clearAndPauseMlr();
         QByteArray closeAll = createCloseAllServicesMessage();
            mState->characteristicSend->writeValue(closeAll);
     }
@@ -843,24 +847,6 @@ void CommunicatorV2::onConnectionStateChange(bool connected) {
     }
 }
 
-void CommunicatorV2::pauseMlr() {
-    for (auto it = mState->mlrCommunicators.begin(); it != mState->mlrCommunicators.end(); ++it) {
-        it.value()->pause();
-    }
-}
-
-void CommunicatorV2::resumeMlr() {
-    for (auto it = mState->mlrCommunicators.begin(); it != mState->mlrCommunicators.end(); ++it) {
-        it.value()->resume();
-    }
-}
-
-void CommunicatorV2::clearAndPauseMlr() {
-    for (auto it = mState->mlrCommunicators.begin(); it != mState->mlrCommunicators.end(); ++it) {
-        it.value()->clearAndPause();
-    }
-    mState->mlrCommunicators.clear();
-}
 
 QByteArray CommunicatorV2::createCloseAllServicesMessage() const {
     QByteArray b;

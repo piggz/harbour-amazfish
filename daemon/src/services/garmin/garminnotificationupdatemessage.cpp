@@ -5,7 +5,6 @@ void GarminNotificationUpdateMessage::parse() {
     // parsing not needed as no inbound message
     // just keeping the name consistent
     QByteArray msg = generateMessage();
-    msg=wrapInGfdiEnvelope(5033,msg);
     if (mCommunicator) mCommunicator->sendMessage("NOTIFICATION UPDATE",msg);
 }
 
@@ -13,19 +12,19 @@ QByteArray GarminNotificationUpdateMessage::generateMessage() {
     QByteArray message;
 
     // 1. Update type
-    message.append(static_cast<char>(updateType));
+    message.append((char)updateType);
 
     // 2. Category flags
     quint8 categoryFlags =NotificationTypeUtil::notificationFlags(notificationType, hasActions);
-    message.append(static_cast<char>(categoryFlags));
+    message.append((char)categoryFlags);
 
     // 3. Category value
     quint8 categoryValue =
         NotificationTypeUtil::categoryValue(notificationType);
-    message.append(static_cast<char>(categoryValue));
+    message.append((char)categoryValue);
 
     // 4. Count
-    message.append(static_cast<char>(count));
+    message.append((char)count);
 
     // 5. Notification ID (LE i32)
     writeU32le(message,notificationId);
@@ -41,7 +40,8 @@ QByteArray GarminNotificationUpdateMessage::generateMessage() {
         phoneFlags |= 0x04; // HAS_ATTACHMENTS
     }
 
-    message.append(static_cast<char>(phoneFlags));
+    message.append((char)phoneFlags);
 
-    return message;
+    qDebug() << Q_FUNC_INFO << " Garmin: sending notification, update type = " << (int)updateType << ", category value = " << categoryValue;
+    return wrapInGfdiEnvelope((quint16)MessageId::NotificationUpdate,message);;
 }

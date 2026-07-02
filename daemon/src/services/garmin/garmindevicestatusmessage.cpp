@@ -29,8 +29,7 @@ QByteArray GarminDeviceStatusMessage::generateOutgoing(const QByteArray& data) {
 }
 
 
-QByteArray GarminDeviceStatusMessage::generateBatteryStatusRequest(quint16 requestId)
-{
+QByteArray GarminDeviceStatusMessage::generateBatteryStatusRequest() {
 
     // Generate a ProtobufRequest for battery status updates
     //
@@ -74,18 +73,5 @@ QByteArray GarminDeviceStatusMessage::generateBatteryStatusRequest(quint16 reque
 
     return smartProto;
 
-    // Now build the ProtobufRequest message
-    QByteArray m;
-    // Request ID
-    writeU16le(m, requestId);
-    // Data offset (0 for non-chunked)
-    writeU32le(m, 0);
-    // Total protobuf length
-    writeU32le(m, quint32(smartProto.size()));
-    // Protobuf data length (same as total for non-chunked)
-    writeU32le(m, quint32(smartProto.size()));
-    // Protobuf payload
-    m.append(smartProto);
-    // Message ID: PROTOBUF_REQUEST (5043)
-    return wrapInGfdiEnvelope(5043,m);
+
 }
