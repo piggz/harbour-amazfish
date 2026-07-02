@@ -2538,13 +2538,13 @@
         <location filename="../qml/components/Translation.js" line="87"/>
         <location filename="../qml/components/Translation.js" line="87"/>
         <source>Floor Climbing</source>
-        <translation>Escalada del piso</translation>
+        <translation>Escalada de planta del edificio</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="88"/>
         <location filename="../qml/components/Translation.js" line="88"/>
         <source>Baseball</source>
-        <translation>Baseball</translation>
+        <translation>Béisbol</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="89"/>
@@ -2556,7 +2556,7 @@
         <location filename="../qml/components/Translation.js" line="90"/>
         <location filename="../qml/components/Translation.js" line="90"/>
         <source>Softball Slow Pitch</source>
-        <translation>Softball Slow Pitch</translation>
+        <translation type="unfinished">Softbol de lanzamiento lento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="91"/>
@@ -2658,7 +2658,7 @@
         <location filename="../qml/components/Translation.js" line="107"/>
         <location filename="../qml/components/Translation.js" line="107"/>
         <source>Indoor Push Run Speed</source>
-        <translation type="unfinished">Empujón interior Velocidad Corrida</translation>
+        <translation type="unfinished">Empujón interior Velocidad Carrera</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="108"/>
