@@ -41,13 +41,13 @@ struct Fragment {
     QString taskName;
     int     num {0};
     QByteArray data;
+    int reqNum{0};
 };
 
 // =============================================================================
 // MessageSender / MessageReceiver
 // =============================================================================
 
-// Sender is async-like via signals (to model Rust .await).
 class MlrMessageSender : public QObject {
     Q_OBJECT
 public:
@@ -64,7 +64,6 @@ signals:
     void sendFailed(const QString& taskName, const QString& error);
 
 private:
-    //Result<void> awaitBleWrite(const QString& taskName, const QByteArray& bytes);
 
     QSharedPointer<QBLECharacteristic> m_sendChar;
 };
@@ -109,6 +108,7 @@ public:
     virtual ~MlrMessageReceiver() = default;
 
 public slots:
+    Result<std::optional<QByteArray>> awaitAsyncCallback(const QByteArray& message);
     void onDataReceived(const QByteArray& data);
 
 signals:
@@ -116,7 +116,6 @@ signals:
     void receiverError(const QString& error);
 
 private:
-    Result<std::optional<QByteArray>> awaitAsyncCallback(const QByteArray& message);
 
     QSharedPointer<GfdiMessageCallback> m_syncCb;
     QPointer<AsyncGfdiMessageCallback> m_asyncCb;
@@ -136,38 +135,27 @@ public:
                              QSharedPointer<MlrMessageReceiver> receiver,
                              QObject* parent=nullptr);
 
-    // Rust: set_max_packet_size(&self, ...) async
     void setMaxPacketSize(int maxPacketSize);
 
-    // Rust: start(&mut self) -> Result<()>
     Result<void> start();
 
-    // Rust: send_message(&self, ...) async -> Result<()>
-    Result<void> sendMessage(const QString& taskName, const QByteArray& message);
+    void sendMessage(const QString& taskName, const QByteArray& message);
 
-    // Rust: on_packet_received(&self, ...) async -> Result<()>
-    Result<void> onPacketReceived(const QByteArray& packet);
+    void onPacketReceived(const QByteArray& packet);
 
-    // Rust: pause/resume/clear_and_pause
-    void pause();
-    void resume();
-    void clearAndPause();
 
-    // Rust: close(&mut self)
     void close();
 
     ~MlrCommunicator() override;
 
 signals:
-    //void debugLog(const QString& msg);
-    //void warnLog(const QString& msg);
+
     void errorOccurred(const QString& msg);
 
 private slots:
-    void onTick();
+    void onRetransmissionTimeout();
 
 private:
-    // ---- state (Rust: struct MlrState) ----
     struct State {
         quint8 handle {0};
         int maxPacketSize {20};
@@ -181,40 +169,34 @@ private:
         int retransmissionTimeoutMs {INITIAL_RETRANSMISSION_TIMEOUT_MS};
 
         QQueue<Fragment> fragmentQueue;
-        QVector<std::optional<Fragment>> sentFragments; // size 64
+        QMap<int,Fragment> sentFragments;
 
-        std::optional<qint64> lastAckTimeMs;
-        std::optional<qint64> lastRetransmitTimeMs;
 
         bool paused {false};
 
         State() {
-            sentFragments.resize(int(MAX_SEQ_NUM) + 1);
+            //sentFragments.resize(int(MAX_SEQ_NUM) + 1);
         }
     };
+    QTimer retransmissionTimer;
+    QTimer ackTimer;
 
-    // helper monotonic clock like Rust Instant
-    qint64 nowMs() const;
 
-    static QByteArray createPacket(const State& st, quint8 reqNum, quint8 seqNum, const QByteArray& data);
+
+    QByteArray createPacket(quint8 reqNum, quint8 seqNum, const QByteArray& data);
 
     static int seqDiff(quint8 a, quint8 b);
 
-    static Result<void> processAck(State& st, quint8 reqNum);
+    void processAck(quint8 reqNum);
 
-    static void scheduleAck(State& st, qint64 nowMs);
+    void scheduleAck();
 
-    Result<void> sendAckPacketLocked(const State& st);
+    void sendAckPacket();
 
-    Result<void> runProtocolOnce();
+    void runProtocolOnce();
 
-    Result<void> checkAckTimeout();
+    void startRetransmissionTimer();
 
-    Result<void> checkRetransmitTimeout();
-
-    void clearStateLocked(State& st);
-
-    Result<void> awaitSend(const QString& taskName, const QByteArray& packet);
 
 
     mutable QMutex m_mutex;
@@ -223,8 +205,6 @@ private:
     QSharedPointer<MlrMessageSender> m_sender;
     QSharedPointer<MlrMessageReceiver> m_receiver;
 
-    QTimer m_timer;
-    QElapsedTimer m_clock;
 
     bool m_running {false};
 };

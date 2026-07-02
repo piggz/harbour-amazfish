@@ -1,4 +1,5 @@
 #include "garminnotificationsubscriptionmessage.h"
+#include "garmintypes.h"
 
 
 void GarminNotificationSubscriptionMessage::parse(const QByteArray& data) {
@@ -6,17 +7,16 @@ void GarminNotificationSubscriptionMessage::parse(const QByteArray& data) {
     if (data.size() < 2) {
         return;
     }
-    NotificationSubscriptionMessage msg;
-    msg.enable = (quint8(data[0]) == 1);
-    if (data.size()>1) msg.unk = quint8(data[1]); else msg.unk=0;
+
+    mMessage.enable = (quint8(data[0]) == 1);
+    if (data.size()>1) mMessage.unk = quint8(data[1]); else mMessage.unk=0;
     // First send subscription status message as ACK
-    QByteArray response = generateStatusMessage(msg);
-    response = wrapInGfdiEnvelope(5000,response);
+    QByteArray response = generateStatusMessage();
     if (mCommunicator) mCommunicator->sendMessage("NOTIFICATION SUBSCRIPTION RESPONSE",response);
     // no other response message needed
 }
 
-QByteArray GarminNotificationSubscriptionMessage::generateStatusMessage(NotificationSubscriptionMessage& msg) {
+QByteArray GarminNotificationSubscriptionMessage::generateStatusMessage() {
     QByteArray r;
     bool enabled =true;
     //todo: set notification handler enable in device
@@ -28,9 +28,19 @@ QByteArray GarminNotificationSubscriptionMessage::generateStatusMessage(Notifica
     // Notification Status (0 = ENABLED, 1 = DISABLED)
     r.append(char(enabled) ? 0 : 1);
     // Enable flag (matches incoming request)
-    r.append(char(msg.enable ? 1 : 0));
+    r.append(char(mMessage.enable ? 1 : 0));
     // Unknown byte (copy from incoming)
-    r.append(char(msg.unk));
-    return r;
+    r.append(char(mMessage.unk));
+    return wrapInGfdiEnvelope((quint16)MessageId::Response,r);
 
+}
+
+QByteArray GarminNotificationSubscriptionStatusMessage::getOutgoingMessage() {
+    QByteArray response;
+    writeU16le(response,(quint16)getMessageType());
+    response.append((char)mStatus);
+    response.append(mNotificationStatus ? 0:1);
+    response.append(mEnableRaw ? 1:0);
+    response.append(mUnk);
+    return wrapInGfdiEnvelope((quint16)MessageId::Response,response);
 }

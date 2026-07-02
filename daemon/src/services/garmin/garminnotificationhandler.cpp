@@ -73,8 +73,7 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
     CommunicatorV2 *com = m_communicator.data();
     GarminNotificationUpdateMessage* updateMessage = new GarminNotificationUpdateMessage(com);
     bool isUpdate = addNotificationToQueue(notification);
-    //TEST:
-    isUpdate = false;
+
     qDebug() << Q_FUNC_INFO << "Garmin: notification isupdate=" <<isUpdate;
     updateMessage->updateType = isUpdate ? NotificationUpdateType::Modify : NotificationUpdateType::Add;
     if (m_storedNotifications.size() > 30)
@@ -173,6 +172,7 @@ void GarminNotificationHandler::onSetCallState(const CallSpec& call)
 
 bool GarminNotificationHandler::addNotificationToQueue(NotificationSpec note) {
     bool found = false;
+    qDebug() << Q_FUNC_INFO << "Garmin: checking notification queue for id " << note.id;
     if (m_storedNotifications.contains(note.id)){
         found = true;
         m_storedNotifications.remove(note.id);

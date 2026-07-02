@@ -13,7 +13,7 @@ public:
         mCommunicator = parent;
     }
         void parse(const QByteArray& data);
-        QByteArray generateBatteryStatusRequest(quint16 requestId);
+        QByteArray generateBatteryStatusRequest();
 
 private:
         QByteArray generateOutgoing(const QByteArray& data);

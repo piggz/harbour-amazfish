@@ -252,6 +252,8 @@ public:
         m_nextNotificationId = 100;
         m_lastCleanup.start();
         m_isConnected = true;
+        m_storedNotifications.clear();
+
     }
 
     // -----------------------------------------------------------------

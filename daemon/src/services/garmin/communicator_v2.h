@@ -146,9 +146,7 @@ public:
 
 
     void onConnectionStateChange(bool connected);
-    void pauseMlr();
-    void resumeMlr();
-    void clearAndPauseMlr();
+
 
     //hadle incoming GFDI  messages
     void onDeviceInformationReceived(DeviceInformationMessage &message);
