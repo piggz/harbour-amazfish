@@ -84,23 +84,23 @@
         <translation>இதய துடிப்பு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="65"/>
-        <location filename="../qml/pages/AnalysisPage.qml" line="68"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="66"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="69"/>
         <source>Steps</source>
         <translation>படிகள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="82"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="83"/>
         <source>Intensity</source>
         <translation>தீவிரம்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="99"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="100"/>
         <source>HRV</source>
         <translation>HRV</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="115"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="118"/>
         <source>Body Temperature</source>
         <translation>உடல் வெப்பநிலை</translation>
     </message>
@@ -193,19 +193,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="382"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="374"/>
         <source>Serial No: </source>
         <translation>சீரியல் எண்: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="385"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="377"/>
         <source>Hardware Rev: </source>
         <translation>வன்பொருள் ரெவ்: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="388"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="380"/>
         <source>Software Rev: </source>
         <translation>மென்பொருள் ரெவ்: </translation>
     </message>
@@ -216,7 +216,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="391"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="383"/>
         <source>GPS Ver: </source>
         <translation>சி.பி.எச் பார்க்க: </translation>
     </message>
@@ -240,17 +240,16 @@
         <translation>சோதனை அழைப்பு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>Fetch debug log</source>
-        <translation>பிழைத்திருத்த பதிவைப் பெறுங்கள்</translation>
+        <translation type="vanished">பிழைத்திருத்த பதிவைப் பெறுங்கள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="312"/>
         <source>Fetch Data</source>
         <translation>தரவைப் பெறவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="330"/>
         <source>Test Popup</source>
         <translation>சோதனை பாப்அப்</translation>
     </message>
@@ -266,19 +265,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="394"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="386"/>
         <source>Model: </source>
         <translation>மாதிரி: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="400"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="392"/>
         <source>Firmware Rev: </source>
         <translation>ஃபார்ம்வேர் ரெவ்: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="397"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="389"/>
         <source>Manufacturer: </source>
         <translation>உற்பத்தியாளர்: </translation>
     </message>
@@ -323,22 +322,22 @@
         <translation>மந்தமான செய்தி</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="346"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Send Weather</source>
         <translation>வானிலை அனுப்புங்கள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="356"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="348"/>
         <source>Update Calendar</source>
         <translation>காலெண்டரைப் புதுப்பிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="369"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="361"/>
         <source>Music Control</source>
         <translation>இசை கட்டுப்பாடு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="321"/>
         <source>Request Screenshot</source>
         <translation>திரை சாட்டைக் கோருங்கள்</translation>
     </message>
@@ -371,7 +370,7 @@
         <translation>உடனடி எச்சரிக்கை சேவையை சோதிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="342"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="334"/>
         <source>This is a test notification</source>
         <translation>இது ஒரு சோதனை அறிவிப்பு</translation>
     </message>
@@ -481,6 +480,122 @@
         <location filename="../qml/pages/FirstPage.qml" line="327"/>
         <source>Install File</source>
         <translation>கோப்பை நிறுவவும்</translation>
+    </message>
+</context>
+<context>
+    <name>FitPubSettingsPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
+        <source>FitPub settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
+        <source>Instance URL:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
+        <source>Username or Email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
+        <source>Account linked</source>
+        <translation type="unfinished">கணக்கு இணைக்கப்பட்டது</translation>
+    </message>
+</context>
+<context>
+    <name>FitPubUploadPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="9"/>
+        <source>FitPub Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="26"/>
+        <source>Activity name for FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
+        <source>Name</source>
+        <translation type="unfinished">பெயர்</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
+        <source>Description</source>
+        <translation type="unfinished">விவரம்</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
+        <source>Activity description for FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="46"/>
+        <source>Type (FitPub)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
+        <source>Private</source>
+        <translation type="unfinished">தனிப்பட்ட</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
+        <source>Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
+        <source>Not linked to FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
+        <source>Authenticating...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
+        <source>Authentication failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
+        <source>Uploading data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
+        <source>Upload failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
+        <source>Updating activity metadata...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
+        <source>Activity upload complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
+        <source>Update failed: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1371,7 +1486,7 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
         <source>Donate</source>
         <translation>நன்கொடை</translation>
     </message>
@@ -1399,6 +1514,11 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
+        <source>FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
         <source>Debug Info</source>
         <translation>பிழைத்திருத்த செய்தி</translation>
     </message>
@@ -1615,12 +1735,12 @@
 <context>
     <name>SportPage</name>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="360"/>
+        <location filename="../qml/pages/SportPage.qml" line="361"/>
         <source>Send to Strava</source>
         <translation>ச்ட்ராவாவுக்கு அனுப்புங்கள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="169"/>
+        <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>Data:</source>
         <translation>தரவு:</translation>
     </message>
@@ -1645,12 +1765,12 @@
         <translation type="vanished">ஏற்றம்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="87"/>
+        <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°</source>
         <translation>% 1°; %2°</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="89"/>
+        <location filename="../qml/pages/SportPage.qml" line="90"/>
         <source>%1°; %2°; %3m</source>
         <translation>% 1°; %2°; % 3m</translation>
     </message>
@@ -1671,24 +1791,29 @@
         <translation type="vanished">மணித்துளி விரைவு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="150"/>
+        <location filename="../qml/pages/SportPage.qml" line="151"/>
         <source>Start: %1 %2</source>
         <translation>தொடக்கம்: % 1 % 2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="156"/>
+        <location filename="../qml/pages/SportPage.qml" line="157"/>
         <source>Duration: %1</source>
         <translation>காலம்:% 1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="162"/>
+        <location filename="../qml/pages/SportPage.qml" line="163"/>
         <source>Location: %1</source>
         <translation>இடம்:% 1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="373"/>
+        <location filename="../qml/pages/SportPage.qml" line="374"/>
         <source>Send to FitTrackee</source>
         <translation>FitTrackeeக்கு அனுப்பவும்</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="387"/>
+        <source>Send to FitPub</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Max Pace</source>
@@ -1844,7 +1969,7 @@
         <translation>அடுத்த செயல்பாட்டைப் பதிவிறக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="164"/>
         <source>Remove</source>
         <translation>அகற்று</translation>
     </message>

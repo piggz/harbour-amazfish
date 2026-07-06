@@ -84,23 +84,23 @@
         <translation>ЧСС</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="65"/>
-        <location filename="../qml/pages/AnalysisPage.qml" line="68"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="66"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="69"/>
         <source>Steps</source>
         <translation>Шаги</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="82"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="83"/>
         <source>Intensity</source>
         <translation>Нагрузка</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="99"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="100"/>
         <source>HRV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="115"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="118"/>
         <source>Body Temperature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -193,19 +193,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="382"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="374"/>
         <source>Serial No: </source>
         <translation>Серийный №: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="385"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="377"/>
         <source>Hardware Rev: </source>
         <translation>Версия аппаратуры: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="388"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="380"/>
         <source>Software Rev: </source>
         <translation>Версия ПО: </translation>
     </message>
@@ -216,7 +216,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="391"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="383"/>
         <source>GPS Ver: </source>
         <translation>Версия GPS: </translation>
     </message>
@@ -275,50 +275,49 @@
         <translation>Проверить вызовы</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>Fetch debug log</source>
-        <translation>Получить журнал отладки</translation>
+        <translation type="vanished">Получить журнал отладки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="312"/>
         <source>Fetch Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="330"/>
         <source>Test Popup</source>
         <translation>Проверить всплывающие уведомления</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="346"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Send Weather</source>
         <translation>Отправить погоду</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="356"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="348"/>
         <source>Update Calendar</source>
         <translation>Обновить календарь</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="394"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="386"/>
         <source>Model: </source>
         <translation>Модель: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="400"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="392"/>
         <source>Firmware Rev: </source>
         <translation>Версия прошивки: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="397"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="389"/>
         <source>Manufacturer: </source>
         <translation>Производитель: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="369"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="361"/>
         <source>Music Control</source>
         <translation>Управление музыкой</translation>
     </message>
@@ -338,7 +337,7 @@
         <translation>Функциональные тесты</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="321"/>
         <source>Request Screenshot</source>
         <translation>Создать отладочный скриншот</translation>
     </message>
@@ -371,7 +370,7 @@
         <translation>Проверка службы немедленного оповещения</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="342"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="334"/>
         <source>This is a test notification</source>
         <translation>Это тестовое уведомление</translation>
     </message>
@@ -481,6 +480,122 @@
         <location filename="../qml/pages/FirstPage.qml" line="327"/>
         <source>Install File</source>
         <translation>Установить файл</translation>
+    </message>
+</context>
+<context>
+    <name>FitPubSettingsPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
+        <source>FitPub settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
+        <source>Instance URL:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
+        <source>Username or Email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
+        <source>Account linked</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FitPubUploadPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="9"/>
+        <source>FitPub Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="26"/>
+        <source>Activity name for FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
+        <source>Name</source>
+        <translation type="unfinished">Имя</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
+        <source>Description</source>
+        <translation type="unfinished">Описание</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
+        <source>Activity description for FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="46"/>
+        <source>Type (FitPub)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
+        <source>Private</source>
+        <translation type="unfinished">Закрытый</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
+        <source>Upload</source>
+        <translation type="unfinished">Загрузить</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
+        <source>Not linked to FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
+        <source>Authenticating...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
+        <source>Authentication failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
+        <source>Uploading data...</source>
+        <translation type="unfinished">Загрузка данных...</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
+        <source>Upload failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
+        <source>Updating activity metadata...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
+        <source>Activity upload complete</source>
+        <translation type="unfinished">Загрузка активности завершена</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
+        <source>Update failed: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1371,7 +1486,7 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
         <source>Donate</source>
         <translation>Пожертвовать</translation>
     </message>
@@ -1394,6 +1509,11 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
+        <source>FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
         <source>Debug Info</source>
         <translation>Информация об отладке</translation>
     </message>
@@ -1615,7 +1735,7 @@
 <context>
     <name>SportPage</name>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="169"/>
+        <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>Data:</source>
         <translation>Дата:</translation>
     </message>
@@ -1640,12 +1760,12 @@
         <translation type="vanished">Подъем</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="87"/>
+        <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="89"/>
+        <location filename="../qml/pages/SportPage.qml" line="90"/>
         <source>%1°; %2°; %3m</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1666,23 +1786,28 @@
         <translation type="vanished">Мин. темп</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="150"/>
+        <location filename="../qml/pages/SportPage.qml" line="151"/>
         <source>Start: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="156"/>
+        <location filename="../qml/pages/SportPage.qml" line="157"/>
         <source>Duration: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="162"/>
+        <location filename="../qml/pages/SportPage.qml" line="163"/>
         <source>Location: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="373"/>
+        <location filename="../qml/pages/SportPage.qml" line="374"/>
         <source>Send to FitTrackee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="387"/>
+        <source>Send to FitPub</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1814,7 +1939,7 @@
         <translation type="vanished">swolf</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="360"/>
+        <location filename="../qml/pages/SportPage.qml" line="361"/>
         <source>Send to Strava</source>
         <translation>Отправить в Strava</translation>
     </message>
@@ -1844,7 +1969,7 @@
         <translation>Загрузить следующую деятельность</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="164"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>

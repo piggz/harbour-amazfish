@@ -84,23 +84,23 @@
         <translation>Frequência cardíaca</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="65"/>
-        <location filename="../qml/pages/AnalysisPage.qml" line="68"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="66"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="69"/>
         <source>Steps</source>
         <translation>Passos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="82"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="83"/>
         <source>Intensity</source>
         <translation>Intensidade</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="99"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="100"/>
         <source>HRV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="115"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="118"/>
         <source>Body Temperature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -193,19 +193,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="382"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="374"/>
         <source>Serial No: </source>
         <translation>Nº Serial: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="385"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="377"/>
         <source>Hardware Rev: </source>
         <translation>Rev do Hardware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="388"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="380"/>
         <source>Software Rev: </source>
         <translation>Rev do Software: </translation>
     </message>
@@ -216,7 +216,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="391"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="383"/>
         <source>GPS Ver: </source>
         <translation>Ver. do GPS: </translation>
     </message>
@@ -236,17 +236,16 @@
         <translation>Testar Ligação</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>Fetch debug log</source>
-        <translation>Resgatar log de debug</translation>
+        <translation type="vanished">Resgatar log de debug</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="312"/>
         <source>Fetch Data</source>
         <translation>Buscar Dados</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="330"/>
         <source>Test Popup</source>
         <translation>Testar Popup</translation>
     </message>
@@ -262,19 +261,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="394"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="386"/>
         <source>Model: </source>
         <translation>Model: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="400"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="392"/>
         <source>Firmware Rev: </source>
         <translation>Rev do Firmware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="397"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="389"/>
         <source>Manufacturer: </source>
         <translation>Fabricante: </translation>
     </message>
@@ -319,22 +318,22 @@
         <translation>Mensagem do Slack</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="346"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Send Weather</source>
         <translation>Enviar Clima</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="356"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="348"/>
         <source>Update Calendar</source>
         <translation>Atualizar Calendário</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="369"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="361"/>
         <source>Music Control</source>
         <translation>Controlo de Música</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="321"/>
         <source>Request Screenshot</source>
         <translation>Pedir Captura de Ecrã</translation>
     </message>
@@ -355,7 +354,7 @@
         <translation>Testar Serviço de Alerta Imediato</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="342"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="334"/>
         <source>This is a test notification</source>
         <translation>Esta é uma notificação de test</translation>
     </message>
@@ -414,7 +413,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="275"/>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Estresse</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="290"/>
@@ -445,6 +444,122 @@
         <location filename="../qml/pages/FirstPage.qml" line="327"/>
         <source>Install File</source>
         <translation>Instalar Ficheiro</translation>
+    </message>
+</context>
+<context>
+    <name>FitPubSettingsPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
+        <source>FitPub settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
+        <source>Instance URL:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
+        <source>Username or Email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
+        <source>Account linked</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FitPubUploadPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="9"/>
+        <source>FitPub Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="26"/>
+        <source>Activity name for FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
+        <source>Activity description for FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="46"/>
+        <source>Type (FitPub)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
+        <source>Private</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
+        <source>Upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
+        <source>Not linked to FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
+        <source>Authenticating...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
+        <source>Authentication failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
+        <source>Uploading data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
+        <source>Upload failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
+        <source>Updating activity metadata...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
+        <source>Activity upload complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
+        <source>Update failed: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -663,7 +778,7 @@
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">IPA</translation>
     </message>
 </context>
 <context>
@@ -671,7 +786,7 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="9"/>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">IPA</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
@@ -1335,7 +1450,7 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
         <source>Donate</source>
         <translation>Doar</translation>
     </message>
@@ -1349,7 +1464,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="68"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Notificações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="70"/>
@@ -1363,6 +1478,11 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
+        <source>FitPub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
         <source>Debug Info</source>
         <translation>Informações de Debug</translation>
     </message>
@@ -1377,7 +1497,7 @@
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="9"/>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gravar Configurações</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="36"/>
@@ -1575,43 +1695,48 @@
 <context>
     <name>SportPage</name>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="360"/>
+        <location filename="../qml/pages/SportPage.qml" line="361"/>
         <source>Send to Strava</source>
         <translation>Enviar para Strava</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="169"/>
+        <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>Data:</source>
         <translation>Dados:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="87"/>
+        <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°</source>
         <translation>%1°; %2°</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="89"/>
+        <location filename="../qml/pages/SportPage.qml" line="90"/>
         <source>%1°; %2°; %3m</source>
         <translation>%1°; %2°; %3m</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="150"/>
+        <location filename="../qml/pages/SportPage.qml" line="151"/>
         <source>Start: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="156"/>
+        <location filename="../qml/pages/SportPage.qml" line="157"/>
         <source>Duration: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="162"/>
+        <location filename="../qml/pages/SportPage.qml" line="163"/>
         <source>Location: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="373"/>
+        <location filename="../qml/pages/SportPage.qml" line="374"/>
         <source>Send to FitTrackee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="387"/>
+        <source>Send to FitPub</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1636,7 +1761,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="164"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1648,7 +1773,7 @@
         <location filename="../qml/pages/StepsPage.qml" line="51"/>
         <location filename="../qml/pages/StepsPage.qml" line="55"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Passos</translation>
     </message>
 </context>
 <context>
@@ -1657,7 +1782,7 @@
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Passos</translation>
     </message>
 </context>
 <context>
@@ -1773,7 +1898,7 @@
         <location filename="../qml/pages/StressDataPage.qml" line="9"/>
         <location filename="../qml/pages/StressDataPage.qml" line="76"/>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Estresse</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="25"/>
@@ -1794,7 +1919,7 @@
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="107"/>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Relaxado</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="115"/>
@@ -1834,7 +1959,7 @@
         <location filename="../qml/components/Translation.js" line="5"/>
         <location filename="../qml/components/Translation.js" line="5"/>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Atividade</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="6"/>
@@ -3622,7 +3747,7 @@
         <location filename="../qml/components/Translation.js" line="318"/>
         <location filename="../qml/components/Translation.js" line="319"/>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Calorias</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="320"/>
@@ -3646,7 +3771,7 @@
         <location filename="../qml/components/Translation.js" line="323"/>
         <location filename="../qml/components/Translation.js" line="323"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Distância</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="324"/>
@@ -3810,7 +3935,7 @@
         <location filename="../qml/components/Translation.js" line="353"/>
         <location filename="../qml/components/Translation.js" line="353"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Passos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="314"/>
