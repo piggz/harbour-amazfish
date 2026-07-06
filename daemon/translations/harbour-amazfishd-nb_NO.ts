@@ -4,7 +4,7 @@
 <context>
     <name>AbstractDevice</name>
     <message>
-        <location filename="../src/devices/abstractdevice.cpp" line="165"/>
+        <location filename="../src/devices/abstractdevice.cpp" line="200"/>
         <source>Device does not support settings</source>
         <translation>Enheten støtter ikke innstillinger</translation>
     </message>
@@ -76,13 +76,31 @@
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
         <translation>Du klarte det! &lt;b&gt;%1&lt;/b&gt; trinn — er det på tide å hvile eller gå for bonustrinn?</translation>
     </message>
+    <message>
+        <location filename="../src/achievements.cpp" line="46"/>
+        <source>No data</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AsteroidOSDevice</name>
     <message>
-        <location filename="../src/devices/asteroidosdevice.cpp" line="323"/>
+        <location filename="../src/devices/asteroidosdevice.cpp" line="271"/>
         <source>Stored %1...</source>
         <translation>Lagret %1...</translation>
+    </message>
+</context>
+<context>
+    <name>BangleJSDevice</name>
+    <message>
+        <location filename="../src/devices/banglejsdevice.cpp" line="349"/>
+        <source>Downloading activity data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/devices/banglejsdevice.cpp" line="370"/>
+        <source>Downloading sports data</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -93,33 +111,33 @@
         <translation>Enheten er ikke gyldig. Den er kanskje ikke støttet</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="630"/>
-        <location filename="../src/deviceinterface.cpp" line="706"/>
+        <location filename="../src/deviceinterface.cpp" line="672"/>
+        <location filename="../src/deviceinterface.cpp" line="748"/>
         <source>Amazfish</source>
         <translation>Amazfish</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="631"/>
+        <location filename="../src/deviceinterface.cpp" line="673"/>
         <source>Connected</source>
         <translation>Tilkoblet</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="632"/>
+        <location filename="../src/deviceinterface.cpp" line="674"/>
         <source>Phone and watch are connected</source>
         <translation>Telefon og klokke er sammenkoblet</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="707"/>
+        <location filename="../src/deviceinterface.cpp" line="749"/>
         <source>Low Battery</source>
         <translation>Lavt batteri</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="708"/>
+        <location filename="../src/deviceinterface.cpp" line="750"/>
         <source>Battery level now </source>
         <translation>Batterinivå nå </translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="840"/>
+        <location filename="../src/deviceinterface.cpp" line="885"/>
         <source>Calendar</source>
         <translation>Kalender</translation>
     </message>
@@ -127,7 +145,7 @@
 <context>
     <name>GtsDevice</name>
     <message>
-        <location filename="../src/devices/huami/gtsdevice.cpp" line="230"/>
+        <location filename="../src/devices/huami/gtsdevice.cpp" line="188"/>
         <source>An operation is currently running, please try later</source>
         <translation>En operasjon kjører for øyeblikket, prøv senere</translation>
     </message>
@@ -135,32 +153,32 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="199"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="183"/>
         <source>Navigation Started</source>
         <translation>Navigasjon startet</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="201"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="185"/>
         <source>Navigation Stopped</source>
         <translation>Navigasjonen har stoppet</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="221"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="205"/>
         <source>Progress</source>
         <translation>Framgang</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="363"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="347"/>
         <source>Sending %1...</source>
         <translation>Sender %1...</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="366"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="350"/>
         <source>No file selected</source>
         <translation>Ingen fil er valgt</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="386"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="370"/>
         <source>An operation is currently running, please try later</source>
         <translation>En operasjon kjører for øyeblikket, prøv senere</translation>
     </message>
@@ -168,12 +186,12 @@
 <context>
     <name>HuamiFetcher</name>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="105"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="111"/>
         <source>All operations cancelled</source>
         <translation>Alle operasjoner avbrutt</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="147"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="154"/>
         <source>All operations complete</source>
         <translation>Alle operasjoner fullført</translation>
     </message>
@@ -190,20 +208,20 @@
 <context>
     <name>PinetimeJFDevice</name>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="369"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="383"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="344"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="358"/>
         <source>An operation is currently running, please try later</source>
         <translation>En operasjon kjører for øyeblikket, prøv senere</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="406"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="419"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="381"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="394"/>
         <source>Sending file...</source>
         <translation>Sender fil…</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="409"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="422"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="384"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="397"/>
         <source>No file selected</source>
         <translation>Ingen fil er valgt</translation>
     </message>
@@ -244,12 +262,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="134"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="140"/>
         <source>About to transfer data from </source>
         <translation>Er i ferd med å overføre data fra </translation>
     </message>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="149"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="156"/>
         <source>No data to transfer</source>
         <translation>Ingen data overført</translation>
     </message>
@@ -299,7 +317,7 @@
 <context>
     <name>ZeppOSDevice</name>
     <message>
-        <location filename="../src/devices/huami/zepposdevice.cpp" line="442"/>
+        <location filename="../src/devices/huami/zepposdevice.cpp" line="364"/>
         <source>An operation is currently running, please try later</source>
         <translation>En operasjon pågår allerede, vennligst prøv igjen senere</translation>
     </message>

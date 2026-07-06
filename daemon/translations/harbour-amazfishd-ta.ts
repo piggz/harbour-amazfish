@@ -4,7 +4,7 @@
 <context>
     <name>AbstractDevice</name>
     <message>
-        <location filename="../src/devices/abstractdevice.cpp" line="165"/>
+        <location filename="../src/devices/abstractdevice.cpp" line="200"/>
         <source>Device does not support settings</source>
         <translation>சாதனம் அமைப்புகளை ஆதரிக்காது</translation>
     </message>
@@ -76,13 +76,31 @@
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
         <translation>நீங்கள் அதை உடைத்தீர்கள்! &lt;b&gt;%1&lt;/b&gt; படிகள் — ஓய்வெடுக்க வேண்டுமா அல்லது போனச் படிகளுக்கு செல்ல வேண்டுமா?</translation>
     </message>
+    <message>
+        <location filename="../src/achievements.cpp" line="46"/>
+        <source>No data</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AsteroidOSDevice</name>
     <message>
-        <location filename="../src/devices/asteroidosdevice.cpp" line="323"/>
+        <location filename="../src/devices/asteroidosdevice.cpp" line="271"/>
         <source>Stored %1...</source>
         <translation>சேமிக்கப்பட்டது %1 ...</translation>
+    </message>
+</context>
+<context>
+    <name>BangleJSDevice</name>
+    <message>
+        <location filename="../src/devices/banglejsdevice.cpp" line="349"/>
+        <source>Downloading activity data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/devices/banglejsdevice.cpp" line="370"/>
+        <source>Downloading sports data</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -93,33 +111,33 @@
         <translation>சாதனம் செல்லுபடியாகாது, அதை ஆதரிக்காமல் இருக்கலாம்</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="630"/>
-        <location filename="../src/deviceinterface.cpp" line="706"/>
+        <location filename="../src/deviceinterface.cpp" line="672"/>
+        <location filename="../src/deviceinterface.cpp" line="748"/>
         <source>Amazfish</source>
         <translation>அமாச்ஃபிச்</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="631"/>
+        <location filename="../src/deviceinterface.cpp" line="673"/>
         <source>Connected</source>
         <translation>இணைக்கப்பட்டுள்ளது</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="632"/>
+        <location filename="../src/deviceinterface.cpp" line="674"/>
         <source>Phone and watch are connected</source>
         <translation>தொலைபேசி மற்றும் வாட்ச் இணைக்கப்பட்டுள்ளன</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="707"/>
+        <location filename="../src/deviceinterface.cpp" line="749"/>
         <source>Low Battery</source>
         <translation>குறைந்த பேட்டரி</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="708"/>
+        <location filename="../src/deviceinterface.cpp" line="750"/>
         <source>Battery level now </source>
         <translation>இப்போது பேட்டரி நிலை </translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="840"/>
+        <location filename="../src/deviceinterface.cpp" line="885"/>
         <source>Calendar</source>
         <translation>நாள்காட்டி</translation>
     </message>
@@ -127,7 +145,7 @@
 <context>
     <name>GtsDevice</name>
     <message>
-        <location filename="../src/devices/huami/gtsdevice.cpp" line="230"/>
+        <location filename="../src/devices/huami/gtsdevice.cpp" line="188"/>
         <source>An operation is currently running, please try later</source>
         <translation>தற்போது ஒரு செயல்பாடு இயங்குகிறது, பிறகு முயற்சிக்கவும்</translation>
     </message>
@@ -135,32 +153,32 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="199"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="183"/>
         <source>Navigation Started</source>
         <translation>வழிசெலுத்தல் தொடங்கியது</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="201"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="185"/>
         <source>Navigation Stopped</source>
         <translation>வழிசெலுத்தல் நிறுத்தப்பட்டது</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="221"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="205"/>
         <source>Progress</source>
         <translation>முன்னேற்றம்</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="363"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="347"/>
         <source>Sending %1...</source>
         <translation>% 1ஐ அனுப்புகிறது...</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="366"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="350"/>
         <source>No file selected</source>
         <translation>கோப்பு எதுவும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="386"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="370"/>
         <source>An operation is currently running, please try later</source>
         <translation>தற்போது ஒரு செயல்பாடு இயங்குகிறது, பிறகு முயற்சிக்கவும்</translation>
     </message>
@@ -168,12 +186,12 @@
 <context>
     <name>HuamiFetcher</name>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="105"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="111"/>
         <source>All operations cancelled</source>
         <translation>அனைத்து செயல்பாடுகளும் ரத்து செய்யப்பட்டன</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="147"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="154"/>
         <source>All operations complete</source>
         <translation>அனைத்து செயல்பாடுகளும் முடிந்தது</translation>
     </message>
@@ -190,20 +208,20 @@
 <context>
     <name>PinetimeJFDevice</name>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="369"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="383"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="344"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="358"/>
         <source>An operation is currently running, please try later</source>
         <translation>தற்போது ஒரு செயல்பாடு இயங்குகிறது, பிறகு முயற்சிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="406"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="419"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="381"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="394"/>
         <source>Sending file...</source>
         <translation>கோப்பை அனுப்புகிறது...</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="409"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="422"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="384"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="397"/>
         <source>No file selected</source>
         <translation>கோப்பு எதுவும் தேர்ந்தெடுக்கப்படவில்லை</translation>
     </message>
@@ -244,12 +262,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="134"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="140"/>
         <source>About to transfer data from </source>
         <translation>தரவை மாற்றப் போவது </translation>
     </message>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="149"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="156"/>
         <source>No data to transfer</source>
         <translation>மாற்ற தரவு இல்லை</translation>
     </message>
@@ -299,7 +317,7 @@
 <context>
     <name>ZeppOSDevice</name>
     <message>
-        <location filename="../src/devices/huami/zepposdevice.cpp" line="442"/>
+        <location filename="../src/devices/huami/zepposdevice.cpp" line="364"/>
         <source>An operation is currently running, please try later</source>
         <translation>தற்போது ஒரு செயல்பாடு இயங்குகிறது, பிறகு முயற்சிக்கவும்</translation>
     </message>
