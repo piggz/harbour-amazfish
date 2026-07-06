@@ -499,32 +499,32 @@
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
         <source>FitPub settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Innstillinger for FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
         <source>Instance URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>Instans-URL:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
         <source>Username or Email:</source>
-        <translation type="unfinished"></translation>
+        <translation>Brukernavn eller e-postadresse:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Passord:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
         <source>Account linked</source>
-        <translation type="unfinished">Konto tilkoblet</translation>
+        <translation>Konto tilkoblet</translation>
     </message>
 </context>
 <context>
@@ -532,82 +532,82 @@
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="9"/>
         <source>FitPub Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>FitPub-opplasting</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="26"/>
         <source>Activity name for FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn på aktivitet for FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
         <source>Name</source>
-        <translation type="unfinished">Navn</translation>
+        <translation>Navn</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
         <source>Description</source>
-        <translation type="unfinished">Beskrivelse</translation>
+        <translation>Beskrivelse</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
         <source>Activity description for FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitetsbeskrivelse for FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="46"/>
         <source>Type (FitPub)</source>
-        <translation type="unfinished"></translation>
+        <translation>Type (FitPub)</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
         <source>Private</source>
-        <translation type="unfinished">Privat</translation>
+        <translation>Privat</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
         <source>Upload</source>
-        <translation type="unfinished">Last opp</translation>
+        <translation>Last opp</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
         <source>Not linked to FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikke lenket til FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
         <source>Authenticating...</source>
-        <translation type="unfinished"></translation>
+        <translation>Autentiserer...</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
         <source>Authentication failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Autentisering feilet: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
         <source>Uploading data...</source>
-        <translation type="unfinished">Laster opp data …</translation>
+        <translation>Laster opp data …</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
         <source>Upload failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Opplasting feilet: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
         <source>Updating activity metadata...</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdaterer metadata for aktivitet...</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished">Aktiviteten er lastet opp</translation>
+        <translation>Aktiviteten er lastet opp</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
         <source>Update failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdatering feilet: </translation>
     </message>
 </context>
 <context>
@@ -1527,7 +1527,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
         <source>FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="73"/>
@@ -1889,7 +1889,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="387"/>
         <source>Send to FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>Send til FitPub</translation>
     </message>
     <message>
         <source>Max Pace</source>
