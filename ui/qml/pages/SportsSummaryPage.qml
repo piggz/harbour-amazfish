@@ -3,6 +3,7 @@ import "../components/platform"
 import "../components/Translation.js" as T
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import uk.co.piggz.amazfish 1.0
 
 PageListPL {
     id: page
