@@ -1245,13 +1245,22 @@ void DeviceInterface::triggerSendWeather()
 void DeviceInterface::updateCalendar()
 {
     qDebug() << Q_FUNC_INFO;
+
+    QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
+
+    if (AmazfishConfig::instance()->appTransliterate()) {
+        for (watchfish::CalendarEvent &event : eventlist) {
+            event.setTitle(Transliterator::convert(event.title()));
+            event.setLocation(Transliterator::convert(event.location()));
+            event.setDescription(Transliterator::convert(event.description()));
+        }
+    }
+
     if (supportsFeature(int(Amazfish::Feature::FEATURE_EVENT_REMINDER))) {
         if (m_device) {
-            QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
-	    m_device->syncCalendar(eventlist);
+            m_device->syncCalendar(eventlist);
         }
     } else if (AmazfishConfig::instance()->appSimulateEventSupport()){
-        QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
         QList<watchfish::CalendarEvent> filteredEventList;
         foreach (const watchfish::CalendarEvent &event, eventlist) {
             if (!event.alertTime().isValid())
