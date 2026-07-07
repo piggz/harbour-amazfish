@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import "platform"
+import uk.co.piggz.amazfish 1.0
 
 PageMenuItemPL {
     iconSource: styler.iconDownloadData !== undefined ? styler.iconDownloadData : ""
