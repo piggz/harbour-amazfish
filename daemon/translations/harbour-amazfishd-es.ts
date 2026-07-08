@@ -79,7 +79,7 @@
     <message>
         <location filename="../src/achievements.cpp" line="46"/>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay datos</translation>
     </message>
 </context>
 <context>
@@ -95,12 +95,12 @@
     <message>
         <location filename="../src/devices/banglejsdevice.cpp" line="349"/>
         <source>Downloading activity data</source>
-        <translation type="unfinished"></translation>
+        <translation>Descargar datos de actividad</translation>
     </message>
     <message>
         <location filename="../src/devices/banglejsdevice.cpp" line="370"/>
         <source>Downloading sports data</source>
-        <translation type="unfinished"></translation>
+        <translation>Descargar datos de deportes</translation>
     </message>
 </context>
 <context>
