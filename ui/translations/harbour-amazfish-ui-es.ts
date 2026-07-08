@@ -491,32 +491,32 @@
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
         <source>FitPub settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes de FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
         <source>Instance URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>URL instanciada:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
         <source>Username or Email:</source>
-        <translation type="unfinished"></translation>
+        <translation>Id-usuario o correo-e:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraseña:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
         <source>Account linked</source>
-        <translation type="unfinished">Cuenta vinculada</translation>
+        <translation>Cuenta enlazada</translation>
     </message>
 </context>
 <context>
@@ -524,82 +524,82 @@
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="9"/>
         <source>FitPub Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Subida de FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="26"/>
         <source>Activity name for FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de actividad para FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
         <source>Activity description for FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción de actividad para FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="46"/>
         <source>Type (FitPub)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo (FitPub)</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
         <source>Private</source>
-        <translation type="unfinished">Privado</translation>
+        <translation>Privado</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Subida</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
         <source>Not linked to FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>No enlazado a FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
         <source>Authenticating...</source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticar…</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
         <source>Authentication failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticación incorrecta: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
         <source>Uploading data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Subiendo datos…</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
         <source>Upload failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Subida incorrecta: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
         <source>Updating activity metadata...</source>
-        <translation type="unfinished"></translation>
+        <translation>Metadatos de actividad de actualización…</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Subida de actividad completada</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
         <source>Update failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Actualización incorrecta: </translation>
     </message>
 </context>
 <context>
@@ -1812,7 +1812,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="387"/>
         <source>Send to FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar a FitPub</translation>
     </message>
     <message>
         <source>Max Pace</source>
@@ -2783,7 +2783,7 @@
         <location filename="../qml/components/Translation.js" line="107"/>
         <location filename="../qml/components/Translation.js" line="107"/>
         <source>Indoor Push Run Speed</source>
-        <translation type="unfinished">Empujón interior Velocidad Carrera</translation>
+        <translation type="unfinished">Velocidad de carrera en interior</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="108"/>
@@ -3701,7 +3701,7 @@
         <location filename="../qml/components/Translation.js" line="260"/>
         <location filename="../qml/components/Translation.js" line="260"/>
         <source>Water Scooter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Moto acuática</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="261"/>
@@ -3713,7 +3713,7 @@
         <location filename="../qml/components/Translation.js" line="262"/>
         <location filename="../qml/components/Translation.js" line="262"/>
         <source>Sledding</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Trineo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="263"/>
@@ -3725,7 +3725,7 @@
         <location filename="../qml/components/Translation.js" line="264"/>
         <location filename="../qml/components/Translation.js" line="264"/>
         <source>Bungee Jumping</source>
-        <translation type="unfinished"></translation>
+        <translation>Salto de caída libre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="265"/>
@@ -3749,7 +3749,7 @@
         <location filename="../qml/components/Translation.js" line="268"/>
         <location filename="../qml/components/Translation.js" line="268"/>
         <source>Upper Body</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte superior del cuerpo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="269"/>
@@ -4123,7 +4123,7 @@
         <location filename="../qml/components/Translation.js" line="348"/>
         <location filename="../qml/components/Translation.js" line="348"/>
         <source>Mov Speed Decay</source>
-        <translation type="unfinished"></translation>
+        <translation>Decaimiento de la velocidad de movimiento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="349"/>
@@ -4199,7 +4199,7 @@
         <location filename="../qml/components/Translation.js" line="363"/>
         <location filename="../qml/components/Translation.js" line="363"/>
         <source>Swim Strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilos de natación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="364"/>
@@ -4235,13 +4235,13 @@
         <location filename="../qml/components/Translation.js" line="369"/>
         <location filename="../qml/components/Translation.js" line="369"/>
         <source>Uphill Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo cuesta arriba</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="370"/>
         <location filename="../qml/components/Translation.js" line="370"/>
         <source>Workout Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Duración del entrenamiento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="381"/>
@@ -4273,7 +4273,7 @@
         <location filename="../qml/components/Translation.js" line="386"/>
         <location filename="../qml/components/Translation.js" line="386"/>
         <source>laps</source>
-        <translation type="unfinished"></translation>
+        <translation>vueltas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="387"/>
