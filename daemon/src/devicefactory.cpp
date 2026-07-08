@@ -12,6 +12,7 @@
 #include "pebbledevice.h"
 #include "pinetimejfdevice.h"
 #include "dk08device.h"
+#include "mijialywsddevice.h"
 
 #include <functional>
 #include <QMetaEnum>
@@ -44,6 +45,7 @@ static const QMap<QString, DeviceCreator> deviceMap = {
     { "Amazfit Cor", [](const QString &name) { return new BipLiteDevice(name); } },
     { "Mi Band 3", [](const QString &name) { return new BipLiteDevice(name); } },
     { "Mi Band 2", [](const QString &name) { return new BipLiteDevice(name); } },
+    { "Xiaomi Thermometer", [](const QString &name) { return new MijiaLywsdDevice(name); } },
     };
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName, const QString &deviceType)
