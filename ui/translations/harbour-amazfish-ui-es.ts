@@ -1514,7 +1514,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
         <source>FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="73"/>
@@ -2609,7 +2609,7 @@
         <location filename="../qml/components/Translation.js" line="78"/>
         <location filename="../qml/components/Translation.js" line="78"/>
         <source>Wakeboarding</source>
-        <translation>Wakeboarding</translation>
+        <translation>Wakeboard</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="79"/>
@@ -3329,7 +3329,7 @@
         <location filename="../qml/components/Translation.js" line="198"/>
         <location filename="../qml/components/Translation.js" line="198"/>
         <source>Luge</source>
-        <translation>Trineo</translation>
+        <translation>Trineo luge</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="199"/>
@@ -3707,13 +3707,13 @@
         <location filename="../qml/components/Translation.js" line="261"/>
         <location filename="../qml/components/Translation.js" line="261"/>
         <source>Bobsleigh</source>
-        <translation type="unfinished"></translation>
+        <translation>Bobsleigh</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="262"/>
         <location filename="../qml/components/Translation.js" line="262"/>
         <source>Sledding</source>
-        <translation type="unfinished">Trineo</translation>
+        <translation>Trineo sled</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="263"/>
