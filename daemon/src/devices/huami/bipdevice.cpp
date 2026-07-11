@@ -91,6 +91,17 @@ void BipDevice::initialise()
     }
 }
 
+QBLEService *BipDevice::drv_createService(const QString &uuid, const QString &path)
+{
+    qDebug() << Q_FUNC_INFO << uuid;
+
+    if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2) {
+        return new MiBand2Service(path, 0x08, 0x00, false, this);
+    }
+
+    return HuamiDevice::drv_createService(uuid, path);
+}
+
 QStringList BipDevice::supportedDisplayItems() const
 {
     QStringList items;

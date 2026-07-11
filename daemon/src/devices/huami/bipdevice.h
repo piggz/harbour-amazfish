@@ -95,6 +95,7 @@ public:
 
 protected:
     void initialise() override;
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 };
 
