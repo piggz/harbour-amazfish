@@ -411,6 +411,24 @@ void MiBandService::setEnableDisplayOnLiftWrist()
     writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
 }
 
+void MiBandService::setDisplayShortcuts()
+{
+    auto config = AmazfishConfig::instance();
+    auto sw = config->deviceDisplayWeatherShortcut();
+    auto sa = config->deviceDisplayAliPayShortcut();
+
+    QByteArray shortcuts;
+    shortcuts += 0x10;
+    shortcuts += ((sa || sw) ? 0x80 : 0x00);
+    shortcuts += (sw ? 0x02 : 0x01);
+    shortcuts += ((sa && sw) ? 0x81 : 0x01);
+    shortcuts += 0x01;
+
+    qDebug() << Q_FUNC_INFO << "Setting shortcuts to:" << shortcuts;
+
+    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, shortcuts);
+}
+
 void MiBandService::setDisplayItems()
 {
     uint8_t items1 = 0x01; //Always display clock
@@ -458,20 +476,7 @@ void MiBandService::setDisplayItems()
     writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, cmd);
 
     //Shortcuts
-    auto config = AmazfishConfig::instance();
-    auto sw = config->deviceDisplayWeatherShortcut();
-    auto sa = config->deviceDisplayAliPayShortcut();
-
-    QByteArray shortcuts;
-    shortcuts += 0x10;
-    shortcuts += ((sa || sw) ? 0x80 : 0x00);
-    shortcuts += (sw ? 0x02 : 0x01);
-    shortcuts += ((sa && sw) ? 0x81 : 0x01);
-    shortcuts += 0x01;
-
-    qDebug() << Q_FUNC_INFO << "Setting shortcuts to:" << shortcuts;
-
-    writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, shortcuts);
+    setDisplayShortcuts();
 }
 
 void MiBandService::setDisplayItemsOld(QMap<QString, uint8_t> keyPosMap)
@@ -515,6 +520,9 @@ void MiBandService::setDisplayItemsOld(QMap<QString, uint8_t> keyPosMap)
     command[2] = (uint8_t) ((enabled_mask >> 8 & 0xff));
 
     writeValue(UUID_CHARACTERISTIC_MIBAND_CONFIGURATION, command);
+
+    //Shortcuts
+    setDisplayShortcuts();
 }
 
 void MiBandService::setDisplayItemsNew()
