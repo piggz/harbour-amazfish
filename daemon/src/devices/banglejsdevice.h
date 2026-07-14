@@ -146,6 +146,10 @@ private:
     std::optional<QList<watchfish::CalendarEvent>> m_eventlist; // list of all events which should go to device
     int m_next_event_id = 1;
 
+    void actTrksList(const QList<QString> &available);
+    QDateTime parseActTrkDateTime(const QString &str);
+
+
 };
 
 #endif // BANGLEJSDEVICE_H

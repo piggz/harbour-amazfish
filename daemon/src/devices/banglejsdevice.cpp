@@ -365,13 +365,10 @@ void BangleJSDevice::downloadSportsData() {
         return;
     }
 
-    QString lastSyncId = AmazfishConfig::instance()->value("device/lastsportsyncid").toString();
-
     emit message(tr("Downloading sports data"));
     setOperationRunning(true);
     QJsonObject o;
     o.insert("t", "listRecs");
-    o.insert("id", lastSyncId);
     uart->txJson(o);
 }
 
@@ -624,7 +621,15 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         }
     } else if (t == "actTrksList") {
         QJsonArray trksList = json.value("list").toArray();
-        fetchActivityRec(trksList.first().toString());
+        if (trksList.isEmpty()) {
+            return;
+        }
+        QList<QString> trksListQStr;
+        for (const QJsonValue &v : trksList) {
+            trksListQStr << v.toString();
+        }
+
+        actTrksList(trksListQStr);
     } else if (t == "actTrk") {
         // t:"actTrk", log:"YYYYMMDDx" (e.g. 20240101a), lines:"four lines of the log"/"erase", cnt: "the current packet count"
         m_synced_activity_id = json.value("log").toString();
@@ -1298,4 +1303,91 @@ void BangleJSDevice::removeEventReminder(int id)
     o.insert("t", "calendar-");
     o.insert("id", id);
     uart->txJson(o);
+}
+
+/**
+ * @brief BangleJSDevice::parseActTrkDateTime
+ * parse timestamp from "actTrksList" reply
+ * @param str for example "20260406a"
+ * @return parsed QDatetime using pattern YYYYMMDD for example 2026-04-06
+ */
+
+QDateTime BangleJSDevice::parseActTrkDateTime(const QString &str) {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    static const QRegularExpression re(QStringLiteral("^(\\d{4})(\\d{2})(\\d{2})"));
+    const QRegularExpressionMatch m = re.match(str);
+    if (!m.hasMatch()) {
+        return QDateTime();
+    }
+    return QDateTime(
+        QDate(m.captured(1).toInt(), m.captured(2).toInt(), m.captured(3).toInt()),
+        QTime(0, 0), Qt::UTC);
+#else
+    static QRegExp re(QLatin1String("^(\\d{4})(\\d{2})(\\d{2})"));
+    if (re.indexIn(str) < 0) {
+        return QDateTime();
+    }
+    return QDateTime(
+        QDate(re.cap(1).toInt(), re.cap(2).toInt(), re.cap(3).toInt()),
+        QTime(0, 0), Qt::UTC);
+#endif
+}
+
+/**
+ * @brief BangleJSDevice::actTrksList
+ * @param available list of records on smartwatch
+ *
+ * removes synced records older than 30 days
+ * triggers download of first unsynced record
+ */
+
+void BangleJSDevice::actTrksList(const QList<QString> &available)
+{
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+
+    const QString lastSyncId = AmazfishConfig::instance()->value("device/lastsportsyncid").toString();
+    const QDateTime cutoff = QDateTime::currentDateTime().addDays(-30);
+
+    QStringList filesToDelete;
+    QString firstToDownload;
+
+    for (const QString &id : available) {
+        if (!lastSyncId.isEmpty() && id <= lastSyncId) {
+            const QDateTime parsedDate = parseActTrkDateTime(id);
+            if (parsedDate.isValid() && parsedDate < cutoff) {
+                filesToDelete << QStringLiteral("recorder.log") + id + QStringLiteral(".csv\\1");
+            }
+            continue;
+        }
+        qDebug() << "not synced" << id;
+
+        if (firstToDownload.isEmpty()) {
+            firstToDownload = id;
+        }
+    }
+
+    qDebug() << "filesToDelete" << filesToDelete;
+    if (!filesToDelete.isEmpty()) {
+        QStringList quoted;
+        for (const QString &f : filesToDelete) {
+            quoted << QStringLiteral("\"") + f + QStringLiteral("\"");
+        }
+
+        const QString cmd = QStringLiteral("[") + quoted.join(QStringLiteral(","))
+                            + QStringLiteral("].forEach(f=>require(\"Storage\").erase(f));");
+
+        qDebug().noquote() << cmd;
+        uart->tx(QByteArray(1, 0x10) + cmd.toUtf8() + "\n");
+    }
+
+    if (firstToDownload.isEmpty()) {
+        setOperationRunning(false);
+    } else {
+        qDebug() << "firstToDownload" << firstToDownload;
+        fetchActivityRec(firstToDownload);
+    }
+
 }
