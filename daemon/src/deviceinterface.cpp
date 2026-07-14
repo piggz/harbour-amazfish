@@ -155,6 +155,8 @@ void DeviceInterface::unpair()
         BluezAdapter adapter;
         adapter.setAdapterPath(AmazfishConfig::instance()->localAdapter());
         adapter.removeDevice(m_deviceAddress);
+        delete m_device;
+        m_device = nullptr;
 
     }
 }
