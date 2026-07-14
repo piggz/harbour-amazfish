@@ -1514,7 +1514,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
         <source>FitPub</source>
-        <translation type="unfinished">FitPub</translation>
+        <translation>FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="73"/>
@@ -3251,7 +3251,7 @@
         <location filename="../qml/components/Translation.js" line="185"/>
         <location filename="../qml/components/Translation.js" line="185"/>
         <source>Lacross</source>
-        <translation type="unfinished"></translation>
+        <translation>Lacross</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="186"/>
@@ -3527,7 +3527,7 @@
         <location filename="../qml/components/Translation.js" line="231"/>
         <location filename="../qml/components/Translation.js" line="231"/>
         <source>Jai Alai</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta punta</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="232"/>
@@ -3653,7 +3653,7 @@
         <location filename="../qml/components/Translation.js" line="252"/>
         <location filename="../qml/components/Translation.js" line="252"/>
         <source>Weiqi</source>
-        <translation type="unfinished"></translation>
+        <translation>Go</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="253"/>
@@ -3701,7 +3701,7 @@
         <location filename="../qml/components/Translation.js" line="260"/>
         <location filename="../qml/components/Translation.js" line="260"/>
         <source>Water Scooter</source>
-        <translation type="unfinished">Moto acuática</translation>
+        <translation>Propulsor acuático</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="261"/>
