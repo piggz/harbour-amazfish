@@ -50,7 +50,7 @@ PagePL {
 
             axisY.units: qsTr("BPM")
             type: DataSource.Heartrate
-            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.TYPE_HEART_RATE)
+            visible: supportsFeatureRefresh(Amazfish.TYPE_HEART_RATE)
 
             minY: 0
             maxY: 200
@@ -103,7 +103,7 @@ PagePL {
             axisY.units: ""
             type: DataSource.HRV
 
-            visible: DaemonInterfaceInstance.supportsDataType(Amazfish.TYPE_HRV)
+            visible: supportsDataRefresh(Amazfish.TYPE_HRV)
 
             minY: 0
             maxY: 100
@@ -121,7 +121,7 @@ PagePL {
             axisY.units: "°C"
             axisX.mask: "hh:mm"
 
-            visible: DaemonInterfaceInstance.supportsDataType(Amazfish.TYPE_TEMPERATURE)
+            visible: supportsDataRefresh(Amazfish.TYPE_TEMPERATURE)
 
             type: DataSource.BodyTemperature
             graphType: line

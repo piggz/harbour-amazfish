@@ -160,7 +160,7 @@ PagePL {
         //========== Tiles ==========
 
         StepsTile {
-            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_STEPS)
+            visible: supportsFeatureRefresh(Amazfish.FEATURE_STEPS)
             Layout.rowSpan: 2
             Layout.columnSpan: 2
             stepCount: _InfoSteps
@@ -179,7 +179,7 @@ PagePL {
 
         Tile {
             text: qsTr("Sleep")
-            visible: DaemonInterfaceInstance.supportsDataType(Amazfish.TYPE_SLEEP)
+            visible: supportsDataRefresh(Amazfish.TYPE_SLEEP)
 
 
             contentItem: Image {
@@ -196,7 +196,7 @@ PagePL {
 
         Tile {
             text: qsTr("Heartrate")
-            visible: DaemonInterfaceInstance.supportsDataType(Amazfish.TYPE_HEART_RATE)
+            visible: supportsDataRefresh(Amazfish.TYPE_HEART_RATE)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-heartrate.png"
@@ -232,7 +232,7 @@ PagePL {
 
         Tile {
             text: qsTr("Sports")
-            visible: DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_ACTIVITY)
+            visible: supportsFeatureRefresh(Amazfish.FEATURE_ACTIVITY)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-sport.png"
@@ -247,7 +247,7 @@ PagePL {
 
         PAITile {
             id: paiTile
-            visible: DaemonInterfaceInstance.supportsDataType(Amazfish.TYPE_PAI)
+            visible: supportsDataRefresh(Amazfish.TYPE_PAI)
             Layout.rowSpan: 2
             Layout.columnSpan: 2
 
@@ -258,7 +258,7 @@ PagePL {
 
         Tile {
             text: qsTr("SpO₂")
-            visible: DaemonInterfaceInstance.supportsDataType(Amazfish.TYPE_SPO2)
+            visible: supportsDataRefresh(Amazfish.TYPE_SPO2)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-spo2.png"
@@ -273,7 +273,7 @@ PagePL {
 
         Tile {
             text: qsTr("Stress")
-            visible: DaemonInterfaceInstance.supportsDataType(Amazfish.TYPE_STRESS)
+            visible: supportsDataRefresh(Amazfish.TYPE_STRESS)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-stress.png"
@@ -325,7 +325,7 @@ PagePL {
 
         Tile {
             text: qsTr("Install File")
-            visible: _authenticated && DaemonInterfaceInstance.supportsFeature(Amazfish.FEATURE_FILE_INSTALL)
+            visible: _authenticated && supportsFeatureRefresh(Amazfish.FEATURE_FILE_INSTALL)
 
             contentItem: Image {
                 source: "../page-icons/icon-page-install.png"
@@ -370,7 +370,7 @@ PagePL {
     }
 
     function updatePAI() {
-        if (!DaemonInterfaceInstance.supportsDataType(Amazfish.TYPE_PAI)) {
+        if (!supportsDataRefresh(Amazfish.TYPE_PAI)) {
             return;
         }
         paiTile.update();

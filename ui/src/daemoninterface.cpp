@@ -136,6 +136,7 @@ bool DaemonInterface::supportsFeature(Amazfish::Feature f)
         return false;
     }
     QDBusReply<bool> reply = iface->call(QStringLiteral("supportsFeature"), (int)f);
+    qDebug() << Q_FUNC_INFO << f << reply;
     return reply;
 }
 
@@ -145,6 +146,7 @@ bool DaemonInterface::supportsDataType(Amazfish::DataType t)
         return false;
     }
     QDBusReply<bool> reply = iface->call(QStringLiteral("supportsDataType"), (int)t);
+    qDebug() << Q_FUNC_INFO << t << reply;
     return reply;
 }
 

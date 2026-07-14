@@ -217,6 +217,18 @@ ApplicationWindowPL
         popup.showMessage(msg)
     }
 
+    function supportsFeatureRefresh(feature) {
+        DaemonInterfaceInstance.connectionState; // make dependency to refresh value
+        return DaemonInterfaceInstance.supportsFeature(feature)
+    }
+
+    function supportsDataRefresh(data) {
+        DaemonInterfaceInstance.connectionState; // make dependency to refresh value
+        return DaemonInterfaceInstance.supportsDataType(data)
+    }
+
+
+
     function _refreshInformation() {
         if (!_authenticated) {
             return

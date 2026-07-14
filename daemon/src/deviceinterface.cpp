@@ -1325,11 +1325,15 @@ QStringList DeviceInterface::supportedDisplayItems()
 }
 
 bool DeviceInterface::supportsFeature(int f){
-    return (supportedFeatures() & f);
+    bool result = (supportedFeatures() & f);
+    qDebug() << Q_FUNC_INFO << (Amazfish::Feature)f << result;
+    return result;
 }
 
 bool DeviceInterface::supportsDataType(int t) {
-    return (supportedDataTypes() & t);
+    bool result = (supportedDataTypes() & t);
+    qDebug() << Q_FUNC_INFO << (Amazfish::DataType)t << result;
+    return result;
 }
 
 
