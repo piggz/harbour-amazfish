@@ -79,7 +79,7 @@
     <message>
         <location filename="../src/achievements.cpp" line="46"/>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных</translation>
     </message>
 </context>
 <context>
@@ -95,12 +95,12 @@
     <message>
         <location filename="../src/devices/banglejsdevice.cpp" line="349"/>
         <source>Downloading activity data</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка данных об активности</translation>
     </message>
     <message>
         <location filename="../src/devices/banglejsdevice.cpp" line="370"/>
         <source>Downloading sports data</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка данных о тренировках</translation>
     </message>
 </context>
 <context>
@@ -188,12 +188,12 @@
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="111"/>
         <source>All operations cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Все операции отменены</translation>
     </message>
     <message>
         <location filename="../src/devices/huami/huamifetcher.cpp" line="154"/>
         <source>All operations complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Все операции завершены</translation>
     </message>
 </context>
 <context>
@@ -231,32 +231,32 @@
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновление AGPS выполнено успешно</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
         <source>AGPS File is corrupt</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл AGPS повреждён</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="51"/>
         <source>AGPS File is not the correct format</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный формат файла AGPS</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="53"/>
         <source>Unknown error sending AGPS file</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестная ошибка при отправке файла AGPS</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="62"/>
         <source>File upload Ok.  Performing on-device update</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл успешно загружен. Выполняется обновление на устройстве</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="65"/>
         <source>File upload failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить файл</translation>
     </message>
 </context>
 <context>
@@ -311,7 +311,7 @@
     <message>
         <location filename="../src/services/uartservice.cpp" line="58"/>
         <source>Android Integration plugin not installed on Bangle.js</source>
-        <translation type="unfinished"></translation>
+        <translation>Плагин интеграции с Android не установлен на Bangle.js</translation>
     </message>
 </context>
 <context>
@@ -319,7 +319,7 @@
     <message>
         <location filename="../src/devices/huami/zepposdevice.cpp" line="364"/>
         <source>An operation is currently running, please try later</source>
-        <translation type="unfinished">В настоящее время выполняется операция, попробуйте позже</translation>
+        <translation>В настоящее время выполняется операция. Повторите попытку позже</translation>
     </message>
 </context>
 </TS>
