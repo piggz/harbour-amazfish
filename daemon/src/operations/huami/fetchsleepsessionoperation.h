@@ -14,7 +14,8 @@ public:
 
 private:
     struct SleepSessionRecord {
-
+        QDateTime timestamp;
+        QString rawData;
     };
 
     KDbConnection *m_conn;
