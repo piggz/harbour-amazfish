@@ -47,7 +47,7 @@ PagePL {
     Connections {
         target: o2strava
         onLinkedChanged: {
-            if (linked) {
+            if (o2strava.linked) {
                 var tokens = o2strava.extraTokens;
                 athlete = tokens["athlete"];
                 username = (athlete["username"] !== undefined) ? athlete["username"] : athlete["firstname"] + " " + athlete["lastname"];
