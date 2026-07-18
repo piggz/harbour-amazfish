@@ -79,7 +79,7 @@
     <message>
         <location filename="../src/achievements.cpp" line="46"/>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>无数据</translation>
     </message>
 </context>
 <context>
