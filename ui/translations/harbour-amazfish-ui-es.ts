@@ -2681,7 +2681,7 @@
         <location filename="../qml/components/Translation.js" line="90"/>
         <location filename="../qml/components/Translation.js" line="90"/>
         <source>Softball Slow Pitch</source>
-        <translation type="unfinished">Softbol de lanzamiento lento</translation>
+        <translation>Softbol de lanzamiento lento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="91"/>
@@ -2783,7 +2783,7 @@
         <location filename="../qml/components/Translation.js" line="107"/>
         <location filename="../qml/components/Translation.js" line="107"/>
         <source>Indoor Push Run Speed</source>
-        <translation type="unfinished">Velocidad de carrera en interior</translation>
+        <translation>Velocidad de carrera en interior</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="108"/>
