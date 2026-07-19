@@ -52,6 +52,10 @@ Tile {
         PaiModel.update();
 
         var maybeToday = PaiModel.get(PaiModel.rowCount() - 1);
+        if (typeof maybeToday.pai_total == "undefined") {
+            return;
+        }
+
         var pai_total = maybeToday.pai_total.toFixed(1);
         lblPAITotal.text = pai_total
         paiCircle.percent = pai_total / 200 //200 Is a pretty high target, usually > 100 is good
