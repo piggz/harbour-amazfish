@@ -32,6 +32,7 @@ public:
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
+    Q_INVOKABLE QString deviceType() const;
     Q_INVOKABLE bool supportsFeature(Amazfish::Feature f);
     Q_INVOKABLE bool supportsDataType(Amazfish::DataType t);
     Q_INVOKABLE int supportedFeatures();
@@ -57,6 +58,8 @@ public:
     Q_INVOKABLE void requestScreenshot();
     Q_INVOKABLE QStringList supportedDisplayItems();
     Q_INVOKABLE void immediateAlert(int level);
+
+    Q_INVOKABLE DataSource* dataSource();
 
 public slots:
     void pair(const QString &name, const QString &deviceType, const QString &address);
@@ -97,6 +100,9 @@ private:
 
     bool operationRunning();
 
+    DataSource* m_dataSource = nullptr;
+
+    QString m_lastDeviceType;
 };
 
 #endif // DAEMONINTERFACE_H

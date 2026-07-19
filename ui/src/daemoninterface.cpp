@@ -1,4 +1,5 @@
 #include "daemoninterface.h"
+#include "src/dataproviderfactory.h"
 
 #include <QDBusReply>
 #include <QStandardPaths>
@@ -103,6 +104,15 @@ void DaemonInterface::changeConnectionState()
         watcher->deleteLater();
     });
 
+    QString currentDeviceType = deviceType();
+    if (!m_dataSource || (m_lastDeviceType != currentDeviceType)) {
+        m_lastDeviceType = currentDeviceType;
+        if (m_dataSource) {
+            delete m_dataSource;
+        }
+        m_dataSource = DataProviderFactory::dataSource(currentDeviceType);
+        m_dataSource->setConnection(dbConnection());
+    }
 }
 
 void DaemonInterface::connectToDevice(const QString &address)
@@ -127,6 +137,16 @@ void DaemonInterface::unpair()
         return;
     }
     iface->call(QStringLiteral("unpair"));
+}
+
+QString DaemonInterface::deviceType() const
+{
+    if (!iface || !iface->isValid()) {
+        return QString();
+    }
+    QDBusReply<QString> reply = iface->call(QStringLiteral("deviceType"));
+    qDebug() << Q_FUNC_INFO << reply;
+    return reply;
 }
 
 
@@ -378,4 +398,10 @@ void DaemonInterface::immediateAlert(int level) {
         return;
     }
     iface->call(QStringLiteral("immediateAlert"), level);
+}
+
+DataSource *DaemonInterface::dataSource()
+{
+    qDebug() << Q_FUNC_INFO;
+    return m_dataSource;
 }
