@@ -161,6 +161,15 @@ void DeviceInterface::unpair()
     }
 }
 
+QString DeviceInterface::deviceType() const
+{
+    qDebug() << Q_FUNC_INFO;
+    if (m_device) {
+        return m_device->deviceType();
+    }
+    return QString();
+}
+
 QString DeviceInterface::connectionState() const
 {
     if (!m_device) {
