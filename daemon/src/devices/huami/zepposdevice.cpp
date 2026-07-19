@@ -63,7 +63,7 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
 
 QString ZeppOSDevice::deviceType() const
 {
-    return "amazfitbalance";
+    return "amazfitzeppos";
 }
 
 Amazfish::Features ZeppOSDevice::supportedFeatures() const
