@@ -115,7 +115,6 @@ set(SOURCES
 ./src/services/pinetimesimpleweatherservice.cpp
 ./src/services/uartservice.cpp
 ./src/transliterator.cpp
-./src/typeconversion.cpp
 ./src/ecdh/ecdh.c
 )
 
@@ -237,7 +236,6 @@ set(HEADERS
 ./src/services/pinetimesimpleweatherservice.h
 ./src/services/uartservice.h
 ./src/transliterator.h
-./src/typeconversion.h
 ./src/ecdh/ecdh.h
 )
 
