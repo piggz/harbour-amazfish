@@ -366,8 +366,8 @@
 <context>
     <name>DownloadDataMenuItem</name>
     <message>
-        <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
-        <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
+        <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
+        <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
         <source>Download Data</source>
         <translation type="unfinished">Pobierz dane</translation>
     </message>
@@ -1771,17 +1771,17 @@
         <translation type="obsolete">Aktywność</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="18"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Sports Activities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="42"/>
         <source>Download Next Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="164"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="165"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1831,6 +1831,19 @@
         <location filename="../qml/pages/StravaSettingsPage.qml" line="95"/>
         <source>Country: </source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="107"/>
+        <source>Please Note:
+
+Changes to the Strava API access mean that it costs to provide this integration.
+Please consider making a donation if you use this functionality.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
+        <source>Donate</source>
+        <translation type="unfinished">Wspomóż</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
@@ -1887,27 +1900,40 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="133"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="105"/>
+        <source>Please Note:
+
+Changes to the Strava API access mean that it costs to provide this integration.
+Please consider making a donation if you use this functionality.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
+        <source>Donate</source>
+        <translation type="unfinished">Wspomóż</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="153"/>
         <source>Uploading data...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="150"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="170"/>
         <source>Checking upload...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="213"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="233"/>
         <source>TCX uploaded...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="248"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="268"/>
         <source>Activity upload complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="314"/>
         <source>An unknown error occurred</source>
         <translation type="unfinished"></translation>
     </message>
