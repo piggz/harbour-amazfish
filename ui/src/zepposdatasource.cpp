@@ -8,5 +8,5 @@ ZeppOSDataSource::ZeppOSDataSource()
 
 QList<DataSource::SleepSession> ZeppOSDataSource::calculateSleep(const QDate &day)
 {
-
+    return QList<DataSource::SleepSession>();
 }
