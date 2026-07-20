@@ -191,7 +191,7 @@ QVariant DataSource::data(const Type type, const QDate &day)
                     " ORDER BY stress_timestamp_dt DESC LIMIT 1";
         }
 
-        qDebug() << qry;
+        qDebug() << m_conn << qry;
         if (m_conn && m_conn->isDatabaseUsed()) {
             KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
 
