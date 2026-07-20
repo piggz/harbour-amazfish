@@ -6,12 +6,13 @@
 
 #include <KDb3/KDbDriverManager>
 #include <amazfishconfig.h>
+#include <qqmlcontext.h>
 
-DaemonInterface::DaemonInterface(QObject *parent)
-    : QObject(parent)
-    , m_serviceWatcher(new QDBusServiceWatcher(
-                           QStringLiteral(SERVICE_NAME), QDBusConnection::sessionBus(),
-                           QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration))
+DaemonInterface::DaemonInterface(QQmlApplicationEngine *parent)
+    : QObject(parent), m_serviceWatcher(new QDBusServiceWatcher(
+                                            QStringLiteral(SERVICE_NAME), QDBusConnection::sessionBus(),
+                                            QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration))
+    , m_engine(parent)
 {
     QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered,   this, &DaemonInterface::connectDaemon);
     QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, &DaemonInterface::disconnectDaemon);
@@ -106,12 +107,14 @@ void DaemonInterface::changeConnectionState()
 
     QString currentDeviceType = deviceType();
     if (!m_dataSource || (m_lastDeviceType != currentDeviceType)) {
+        qDebug() << "DataSource creation" << m_lastDeviceType << currentDeviceType;
         m_lastDeviceType = currentDeviceType;
         if (m_dataSource) {
             delete m_dataSource;
         }
         m_dataSource = DataProviderFactory::dataSource(currentDeviceType);
         m_dataSource->setConnection(dbConnection());
+        m_engine->rootContext()->setContextProperty("dataSource", dataSource());
     }
 }
 
@@ -351,6 +354,10 @@ void DaemonInterface::connectDatabase()
         qDebug() << m_conn->result();
         return;
     }
+
+    if (m_dataSource) {
+        m_dataSource->setConnection(m_conn);
+    }
 }
 
 void DaemonInterface::updateCalendar()
@@ -402,6 +409,6 @@ void DaemonInterface::immediateAlert(int level) {
 
 DataSource *DaemonInterface::dataSource()
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << (void *)m_dataSource;
     return m_dataSource;
 }

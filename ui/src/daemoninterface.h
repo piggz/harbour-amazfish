@@ -10,6 +10,7 @@
 #include <KDb3/KDbDriver>
 #include <KDb3/KDbConnection>
 #include <KDb3/KDbConnectionData>
+#include <qqmlapplicationengine.h>
 
 #include "datasource.h"
 #include "amazfish.h"
@@ -26,7 +27,7 @@ class DaemonInterface : public QObject
     Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
 
 public:
-    explicit DaemonInterface(QObject *parent = nullptr);
+    explicit DaemonInterface(QQmlApplicationEngine *parent = nullptr);
     ~DaemonInterface();
 
     Q_INVOKABLE void connectToDevice(const QString &address);
@@ -103,6 +104,7 @@ private:
     DataSource* m_dataSource = nullptr;
 
     QString m_lastDeviceType;
+    QQmlApplicationEngine *m_engine = nullptr;
 };
 
 #endif // DAEMONINTERFACE_H
