@@ -7,7 +7,7 @@
 class FetchSleepSessionOperation : public AbstractFetchOperation
 {
 public:
-    FetchSleepSessionOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
+    FetchSleepSessionOperation(HuamiFetcher *fetcher, KDbConnection *conn);
 
     void start(QBLEService *service) override;
 
