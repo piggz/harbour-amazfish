@@ -39,6 +39,8 @@ public:
         QDateTime sleepEnd;
         long lightSleepDuration;
         long deepSleepDuration;
+        long remSleepDuration;
+        long awakeDuration;
     };
 
 protected:
