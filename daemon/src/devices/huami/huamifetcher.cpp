@@ -3,6 +3,7 @@
 #include "huami/activityfetchoperation.h"
 #include "huami/fetchhrvoperation.h"
 #include "huami/fetchpaioperation.h"
+#include "huami/fetchsleepsessionoperation.h"
 #include "huami/fetchspo2normaloperation.h"
 #include "huami/fetchspo2sleepoperation.h"
 #include "huami/fetchstressautooperation.h"
@@ -52,6 +53,9 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
     }
     if (type & Amazfish::DataType::TYPE_TEMPERATURE && m_device->supportsDataType(Amazfish::DataType::TYPE_TEMPERATURE)) {
         m_operations.append(new FetchTemperatureOperation(this, m_device->database(), m_device->isZeppOs()));
+    }
+    if (type & Amazfish::DataType::TYPE_SLEEP && m_device->supportsDataType(Amazfish::DataType::TYPE_SLEEP)) {
+        m_operations.append(new FetchSleepSessionOperation(this, m_device->database()));
     }
 
     if (!m_currentOperation) {

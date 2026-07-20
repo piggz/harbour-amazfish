@@ -3,7 +3,7 @@
 #include "typeconversion.h"
 #include "mibandservice.h"
 
-FetchSleepSessionOperation::FetchSleepSessionOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
+FetchSleepSessionOperation::FetchSleepSessionOperation(HuamiFetcher *fetcher, KDbConnection *conn) : AbstractFetchOperation(fetcher, true), m_conn(conn)
 {
     setLastSyncKey("device/lastSleepSessionTimeMillis");
 }
