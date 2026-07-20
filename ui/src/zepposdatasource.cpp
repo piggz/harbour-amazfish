@@ -21,11 +21,11 @@ QList<DataSource::SleepSession> ZeppOSDataSource::calculateSleep(const QDate &da
     long deepSleepDuration = 0;
     long durationSinceLastSleep = 0;
 
-    QString qry = "SELECT sleep_session_timestamp, sleep_session_raw_data FROM sleep_session WHERE timestamp >= " +
-            QString::number(startDate.toMSecsSinceEpoch() / 1000) + " AND timestamp <= '" +
-            QString::number(endDate.toMSecsSinceEpoch() / 1000) +   "' ORDER BY timestamp ASC";
+    QString qry = "SELECT sleep_session_timestamp, sleep_session_raw_data FROM sleep_session WHERE sleep_session_timestamp >= " +
+            QString::number(startDate.toMSecsSinceEpoch() / 1000) + " AND sleep_session_timestamp <= '" +
+            QString::number(endDate.toMSecsSinceEpoch() / 1000) +   "' ORDER BY sleep_session_timestamp ASC";
 
-    // qDebug() << qry;
+    qDebug() << qry;
 
     if (m_conn && m_conn->isDatabaseUsed()) {
         KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
@@ -92,4 +92,5 @@ QList<DataSource::SleepSession> ZeppOSDataSource::calculateSleep(const QDate &da
             qDebug() << "Error executing query";
         }
     }
+    return sessions;
 }
