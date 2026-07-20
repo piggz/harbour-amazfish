@@ -54,7 +54,7 @@ void HuamiFetcher::startFetchData(Amazfish::DataTypes type)
     if (type & Amazfish::DataType::TYPE_TEMPERATURE && m_device->supportsDataType(Amazfish::DataType::TYPE_TEMPERATURE)) {
         m_operations.append(new FetchTemperatureOperation(this, m_device->database(), m_device->isZeppOs()));
     }
-    if (type & Amazfish::DataType::TYPE_SLEEP && m_device->supportsDataType(Amazfish::DataType::TYPE_SLEEP)) {
+    if (type & Amazfish::DataType::TYPE_SLEEP && m_device->supportsDataType(Amazfish::DataType::TYPE_SLEEP) && m_device->isZeppOs()) {
         m_operations.append(new FetchSleepSessionOperation(this, m_device->database()));
     }
 
