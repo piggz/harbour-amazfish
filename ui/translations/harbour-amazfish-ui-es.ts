@@ -2030,12 +2030,15 @@
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota:
+
+Debido a cambios en el acceso al API de Strava, esta integración tiene un costo.
+Si utilizas esta función, considera hacer una donación.</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
         <source>Donate</source>
-        <translation type="unfinished">Donar</translation>
+        <translation>Donar</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
@@ -2092,12 +2095,15 @@ Please consider making a donation if you use this functionality.</source>
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota:
+
+Debido a cambios en el acceso al API de Strava, esta integración tiene un costo.
+Si utilizas esta función, considera hacer una donación.</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
         <source>Donate</source>
-        <translation type="unfinished">Donar</translation>
+        <translation>Donar</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="153"/>
@@ -2827,7 +2833,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="110"/>
         <location filename="../qml/components/Translation.js" line="110"/>
         <source>Disc Golf</source>
-        <translation type="unfinished">Disco Golf</translation>
+        <translation>Disco Golf</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="111"/>
