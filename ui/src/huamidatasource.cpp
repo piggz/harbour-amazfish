@@ -76,6 +76,8 @@ QList<DataSource::SleepSession> HuamiDataSource::calculateSleep(const QDate &day
                                     ss.sleepEnd = sleepEnd;
                                     ss.lightSleepDuration = lightSleepDuration;
                                     ss.deepSleepDuration = deepSleepDuration;
+                                    ss.remSleepDuration = 0;
+                                    ss.awakeDuration = 0;
                                     sessions << ss;
                                     // qDebug() << "Sleep Session" << ss.sleepStart << ss.sleepEnd << ss.lightSleepDuration << ss.deepSleepDuration;
 
