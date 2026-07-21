@@ -36,7 +36,7 @@ bool FetchSleepSessionOperation::processBufferedData()
     QVector<SleepSessionRecord> recs;
 
     for (int i = 0; i < m_buffer.length(); i+=594) {
-        int offset = i * 594;
+        int offset = i;
 
         int32_t timestampSeconds = TypeConversion::toUint32(m_buffer, offset);
         timestamp.setMSecsSinceEpoch((qint64)timestampSeconds * 1000);
@@ -78,12 +78,14 @@ bool FetchSleepSessionOperation::saveRecords(QVector<SleepSessionRecord> recs)
                 KDbFieldList ssFields;
                 ssFields.addField(ssData->field("sleep_session_timestamp"));
                 ssFields.addField(ssData->field("sleep_session_timestamp_dt"));
-                ssFields.addField(ssData->field("sleep_session_raw_value"));
+                ssFields.addField(ssData->field("sleep_session_raw_data"));
 
                 QList<QVariant> ssValues;
                 ssValues << r.timestamp.toMSecsSinceEpoch() / 1000;
                 ssValues << r.timestamp;
                 ssValues << r.rawData;
+
+                qDebug() << "Inserting:" << ssValues;
 
                 result = m_conn->insertRecord(&ssFields, ssValues);
                 if (result->lastResult().isError()) {
