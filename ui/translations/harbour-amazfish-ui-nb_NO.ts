@@ -2158,12 +2158,15 @@
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst merk:
+
+Endringer i tilgangen til Strava-API-et gjør at det koster penger å tilby denne integrasjonen.
+Vurder gjerne å gi et bidrag dersom du bruker denne funksjonaliteten.</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
         <source>Donate</source>
-        <translation type="unfinished">Doner</translation>
+        <translation>Doner</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
@@ -2225,12 +2228,15 @@ Please consider making a donation if you use this functionality.</source>
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst merk:
+
+Endringer i tilgangen til Strava-API-et gjør at det koster penger å tilby denne integrasjonen.
+Vurder gjerne å gi et bidrag dersom du bruker denne funksjonaliteten.</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
         <source>Donate</source>
-        <translation type="unfinished">Doner</translation>
+        <translation>Doner</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="153"/>
