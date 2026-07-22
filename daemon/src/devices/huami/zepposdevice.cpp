@@ -139,8 +139,7 @@ void ZeppOSDevice::applyDeviceSetting(Amazfish::Settings s)
     case Amazfish::Settings::SETTING_USER_ALL_DAY_HRM:
         if (m_configService) {
             auto interval = AmazfishConfig::instance()->profileAllDayHRM();
-            uint8_t intervalClamped = static_cast<uint8_t>(qMin(120u, interval));
-            m_configService->setAllDayHeartRateInterval(intervalClamped);
+            m_configService->setAllDayHeartRateInterval(interval);
         }
         break;
     case Amazfish::Settings::SETTING_USER_HRM_SLEEP_DETECTION:

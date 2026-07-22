@@ -1,5 +1,6 @@
 #include "zepposconfigservice.h"
 #include "amazfishconfig.h"
+#include "typeconversion.h"
 
 ZeppOsConfigService::ZeppOsConfigService(ZeppOSDevice *device) : AbstractZeppOsService(device, false)
 {
@@ -102,7 +103,7 @@ void ZeppOsConfigService::handleConfigResponse(const QByteArray &payload)
     }
 }
 
-void ZeppOsConfigService::setAllDayHeartRateInterval(uint8_t minutes)
+void ZeppOsConfigService::setAllDayHeartRateInterval(char minutes)
 {
     QByteArray cmd;
     cmd += char(CMD_SET);
@@ -110,11 +111,14 @@ void ZeppOsConfigService::setAllDayHeartRateInterval(uint8_t minutes)
     cmd += char(GROUP_HEALTH_VERSION);
     cmd += char(0x00); // reserved
     cmd += char(0x01); // arg count
+    // TODO refactor the above in generic setConfig in upcoming settings
+
+    minutes = minutes < 0 ? -1 : minutes; // Any negative value works for testing "smart"
     cmd += char(ARG_HEART_RATE_ALL_DAY_MONITORING);
     cmd += char(TYPE_BYTE);
     cmd += char(minutes);
 
-    qDebug() << Q_FUNC_INFO << "minutes=" << minutes << cmd.toHex();
+    qDebug() << Q_FUNC_INFO << "minutes=" << (uint8_t)minutes << cmd.toHex();
 
     write(cmd);
 }
@@ -158,14 +162,10 @@ void ZeppOsConfigService::setFitnessGoalSteps(uint32_t steps)
 
     if (stepsType == TYPE_SHORT) {
         // v1: 2-byte little-endian uint16
-        cmd += char(steps & 0xff);
-        cmd += char((steps >> 8) & 0xff);
+        cmd += TypeConversion::fromInt16(steps);
     } else {
         // v2+: 4-byte little-endian uint32
-        cmd += char(steps & 0xff);
-        cmd += char((steps >> 8) & 0xff);
-        cmd += char((steps >> 16) & 0xff);
-        cmd += char((steps >> 24) & 0xff);
+        cmd += TypeConversion::fromInt32(steps);
     }
 
     qDebug() << Q_FUNC_INFO << "steps=" << steps << "type=" << QString::number(stepsType, 16) << cmd.toHex();
