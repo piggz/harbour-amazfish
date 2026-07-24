@@ -161,6 +161,15 @@ void DeviceInterface::unpair()
     }
 }
 
+QString DeviceInterface::deviceType() const
+{
+    qDebug() << Q_FUNC_INFO;
+    if (m_device) {
+        return m_device->deviceType();
+    }
+    return QString();
+}
+
 QString DeviceInterface::connectionState() const
 {
     if (!m_device) {
@@ -583,6 +592,28 @@ void DeviceInterface::createTables()
         qDebug() << *t_stress;
     }
 
+    if (!m_conn->containsTable("sleep_session")) {
+        KDbTableSchema *t_sleep_session = new KDbTableSchema("sleep_session");
+        t_sleep_session->setCaption("Sleep Session");
+        t_sleep_session->addField(f = new KDbField("sleep_session_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
+        f->setCaption("ID");
+
+        t_sleep_session->addField(f = new KDbField("sleep_session_timestamp", KDbField::Integer, KDbField::Indexed));
+        f->setCaption("Timestamp");
+
+        t_sleep_session->addField(f = new KDbField("sleep_session_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
+        f->setCaption("Timestamp in Date/Time format");
+
+        t_sleep_session->addField(f = new KDbField("sleep_session_raw_data", KDbField::Text));
+        f->setCaption("Value");
+
+        if (!m_conn->createTable(t_sleep_session)) {
+            qDebug() << m_conn->result();
+            return;
+        }
+        qDebug() << "-- t_sleep_session created --";
+        qDebug() << *t_sleep_session;
+    }
 
     if (!m_conn->commitTransaction(t)) {
         qDebug() << m_conn->result();

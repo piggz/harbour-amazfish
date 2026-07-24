@@ -253,4 +253,11 @@ float toFloat(const QByteArray &arr, int &idx)
     return val;
 }
 
+uint8_t toUint8(const QByteArray &arr, int &idx)
+{
+    uint8_t val = toUnsigned(arr[idx]);
+    idx += 1;
+    return val;
+}
+
 }
