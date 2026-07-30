@@ -483,27 +483,27 @@
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
         <source>FitPub settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
         <source>Instance URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>URL d’instance&#xa0;:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
         <source>Username or Email:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom d’utilisateur ou E-mail&#xa0;:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe&#xa0;:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
@@ -561,12 +561,12 @@
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
         <source>Authenticating...</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentification&#xa0;...</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
         <source>Authentication failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Authentification a échouée&#xa0;: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
@@ -581,7 +581,7 @@
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
         <source>Updating activity metadata...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise à jour des métadonnées d’activité&#xa0;...</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
@@ -1805,7 +1805,7 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="387"/>
         <source>Send to FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer à FitPub</translation>
     </message>
     <message>
         <source>Average Stride</source>
@@ -2150,7 +2150,10 @@
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez noter&#xa0;:
+
+Les modifications apportées à l’accès API Strava impliquent des coûts pour fournir cette intégration.
+Veuillez envisager de faire un don si vous utilisez cette fonctionnalité.</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
@@ -2217,7 +2220,10 @@ Please consider making a donation if you use this functionality.</source>
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez noter&#xa0;:
+
+Les modifications apportées à l’accès API Strava impliquent des coûts pour fournir cette intégration.
+Veuillez envisager de faire un don si vous utilisez cette fonctionnalité.</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
