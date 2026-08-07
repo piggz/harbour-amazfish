@@ -1818,7 +1818,10 @@
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota bene:
+
+L&apos;integrazione con le API di Strava ha un costo.
+Per favore, considera di effettuare una donazione se usi questa funzionalità.</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
@@ -1885,7 +1888,10 @@ Please consider making a donation if you use this functionality.</source>
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota bene:
+
+L&apos;integrazione con le API di Strava ha un costo.
+Per favore, considera di effettuare una donazione se usi questa funzionalità.</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
