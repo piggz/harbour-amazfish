@@ -7,10 +7,10 @@ ignore_review_errors: true
 builder: cmake
 build_args:
 - -DFLAVOR=uuitk
-- -DCMAKE_CXX_FLAGS=-I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/\ -I${QTMPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/MprisQt
-- -DCMAKE_EXE_LINKER_FLAGS=-L${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/
+- -DCMAKE_CXX_FLAGS=-I${AMBER_MPRIS_LIB_INSTALL_DIR}/usr/include/${ARCH_TRIPLET}/qt5/\ -I${AMBER_MPRIS_LIB_INSTALL_DIR}/usr/include/\ -I${AMBER_MPRIS_LIB_INSTALL_DIR}/usr/include/AmberMpris
+- -DCMAKE_EXE_LINKER_FLAGS=-L${AMBER_MPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/
 env_vars:
-  PKG_CONFIG_PATH: ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig:${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig
+  PKG_CONFIG_PATH: ${AMBER_MPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig:${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/pkgconfig
 
 dependencies_host:
   - qtorganizer5-eds
@@ -28,11 +28,11 @@ dependencies_target:
 - libpulse-dev
 
 libraries:
-  qtmpris:
-    src_dir: 3rdparty/qtmpris
+  amber-mpris:
+    src_dir: 3rdparty/amber-mpris
     prebuild:
     - mkdir -p ${ROOT}/3rdparty
-    - git -C ${SRC_DIR} pull || git clone https://github.com/sailfishos/qtmpris ${SRC_DIR}
+    - git -C ${SRC_DIR} pull || git clone https://github.com/sailfishos/amber-mpris ${SRC_DIR}
     builder: qmake
 
   nemo-qml-plugin-dbus:
@@ -70,7 +70,7 @@ libraries:
 
 install_lib:
 - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libnemodbus.so*
-- ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libmpris-qt5.so*
+- ${AMBER_MPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libambermpris.so*
 - ${MAPLIBRE_NATIVE_LIB_INSTALL_DIR}/lib/libQMapLibre.so*
 - /usr/lib/${ARCH_TRIPLET}/libKDb3.so*
 - /usr/lib/${ARCH_TRIPLET}/libKF5BluezQt.so*
@@ -78,7 +78,7 @@ install_data:
   /usr/lib/${ARCH_TRIPLET}/qt5/plugins/kdb3: bin
 install_qml:
 - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Nemo/DBus
-- ${QTMPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/org/nemomobile/mpris
+- ${AMBER_MPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Amber/Mpris
 - ${MAPBOX_GL_QML_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/MapboxMap
 - ${MAPLIBRE_NATIVE_LIB_INSTALL_DIR}/lib/libQMapLibre.so*
 - /usr/lib/${ARCH_TRIPLET}/qt5/qml/org/kde/bluezqt
