@@ -42,6 +42,7 @@ public:
 private:
     ZeppOsFileTransferImpl *m_impl = nullptr;
 
+    friend class ZeppOsFileTransferV2;
     friend class ZeppOsFileTransferV3;
 };
 
