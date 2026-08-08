@@ -178,6 +178,16 @@ void AbstractDevice::fetchData(Amazfish::DataTypes dataTypes)
     Q_UNUSED(dataTypes);
 }
 
+void AbstractDevice::sendAlert(const Amazfish::WatchNotification &notification) {
+    Q_UNUSED(notification)
+}
+
+void AbstractDevice::sendAlertClosed(quint32 nid, quint32 reason) {
+    Q_UNUSED(nid)
+    Q_UNUSED(reason)
+}
+
+
 void AbstractDevice::sendWeather(CurrentWeather *weather)
 {
     Q_UNUSED(weather);
