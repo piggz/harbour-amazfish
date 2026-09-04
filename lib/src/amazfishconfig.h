@@ -170,7 +170,7 @@ public:
 
     UINT_OPTION(QStringLiteral("profile/height"),      profileHeight,      setProfileHeight,      170)
     UINT_OPTION(QStringLiteral("profile/weight"),      profileWeight,      setProfileWeight,      70)
-    UINT_OPTION(QStringLiteral("profile/alldayhrm"),   profileAllDayHRM,   setProfileAllDayHRM,   0)
+    INT_OPTION(QStringLiteral("profile/alldayhrm"),    profileAllDayHRM,   setProfileAllDayHRM,   0)
     UINT_OPTION(QStringLiteral("profile/fitnessgoal"), profileFitnessGoal, setProfileFitnessGoal, 10000)
 
     BOOL_OPTION(QStringLiteral("profile/alertfitnessgoal"),   profileAlertFitnessGoal,   setProfileAlertFitnessGoal,   false)

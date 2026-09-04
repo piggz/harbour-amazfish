@@ -200,8 +200,8 @@ PagePL {
 
             minimumValue: 0
             maximumValue: 60
-            stepSize: 1
-            label: qsTr("All day HRM interval (minutes): ") + value
+            stepSize: 5
+            label: qsTr("All day HRM interval (minutes): ") + (value < 0 ? "smart" : String(value))
         }
 
         ButtonPL {
