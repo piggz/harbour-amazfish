@@ -108,6 +108,7 @@ private:
     void downloadSportsData();
 
     bool m_operationRunning = false;
+    bool m_initialised = false;
     void setOperationRunning(bool running);
     int m_infoBatteryLevel = 0;
     int m_steps = 0;
