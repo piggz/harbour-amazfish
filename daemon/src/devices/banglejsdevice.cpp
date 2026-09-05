@@ -328,7 +328,7 @@ void BangleJSDevice::fetchData(Amazfish::DataTypes dataTypes)
     }
 
     if (dataTypes & Amazfish::DataType::TYPE_GPS_TRACK) {
-        downloadActivityData();
+        downloadSportsData();
     }
 }
 
