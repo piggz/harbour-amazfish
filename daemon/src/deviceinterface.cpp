@@ -153,13 +153,12 @@ void DeviceInterface::disconnect()
 void DeviceInterface::unpair()
 {
     qDebug() << Q_FUNC_INFO;
-    if (m_device) {
+    if (m_device && !m_adapterPath.isEmpty()) {
         BluezAdapter adapter;
-        adapter.setAdapterPath(AmazfishConfig::instance()->localAdapter());
+        adapter.setAdapterPath(m_adapterPath);
         adapter.removeDevice(m_deviceAddress);
         delete m_device;
         m_device = nullptr;
-
     }
 }
 
@@ -739,6 +738,21 @@ void DeviceInterface::log_battery_level(int level) {
 QString DeviceInterface::devicePath(const QString &address)
 {
     qDebug() << Q_FUNC_INFO << address;
+
+    if (!determinAdapterPath(address)){
+        qDebug() << "No device path found";
+        return QString();
+    }
+
+    QString formattedAddress = address;
+    formattedAddress.replace(":", "_");
+
+    return m_adapterPath + "/dev_" + formattedAddress;
+}
+
+bool DeviceInterface::determinAdapterPath(const QString &address)
+{
+    qDebug() << Q_FUNC_INFO << address;
     AdapterModel adapterModel;
 
     for (int i = 0; i < adapterModel.rowCount(); ++i) {
@@ -749,16 +763,18 @@ QString DeviceInterface::devicePath(const QString &address)
         QString deviceString = adapter["itemText"].toString() + "/dev_" + formattedAddress;
         qDebug() << adapter << deviceString;
 
-        BluezAdapter *bluezAdapter = new BluezAdapter();
-        bluezAdapter->setAdapterPath(adapter["itemText"].toString());
+        BluezAdapter bluezAdapter;
+        bluezAdapter.setAdapterPath(adapter["itemText"].toString());
 
-        if (bluezAdapter->deviceIsValid(deviceString)) {
-            return deviceString;
+        if (bluezAdapter.deviceIsValid(deviceString)) {
+            m_adapterPath = adapter["itemText"].toString();
+            AmazfishConfig::instance()->setLocalAdapter(m_adapterPath); //Used by PTJF Device for local server
+            return true;
         }
     }
 
     qDebug() << "No device path found";
-    return QString();
+    return false;
 }
 
 void DeviceInterface::slot_informationChanged(Amazfish::Info key, const QString &val)
