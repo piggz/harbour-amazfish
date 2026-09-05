@@ -267,9 +267,9 @@ void BangleJSDevice::setTime() {
     int offsetSeconds = timeZone.offsetFromUtc(now);
     double offsetHours = offsetSeconds / 3600.0;
 
-    QString cmd = QString("setTime(%1);\nE.setTimeZone(%2);\n(s=>s&&(s.timezone=%2,require('Storage').write('setting.json',s)))(require('Storage').readJSON('setting.json',1));").arg(ts).arg(offsetHours);
+    QString cmd = QString("setTime(%1);E.setTimeZone(%2);(s=>s&&(s.timezone=%2,require('Storage').write('setting.json',s)))(require('Storage').readJSON('setting.json',1));").arg(ts).arg(offsetHours);
 
-    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8());
+    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8() + "\n");
 }
 
 void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
