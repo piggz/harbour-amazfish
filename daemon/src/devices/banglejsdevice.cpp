@@ -1282,9 +1282,9 @@ void BangleJSDevice::sendCalendarEvent(int id, const watchfish::CalendarEvent &e
     o.insert("type", 0);
     o.insert("timestamp", event.start().toMSecsSinceEpoch() / 1000);
     o.insert("durationInSeconds", event.start().secsTo(event.end()));
-    o.insert("title", event.title());
-    o.insert("description", description);
-    o.insert("location", event.location());
+    o.insert("title", event.title().left(40));
+    o.insert("description", description.left(200));
+    o.insert("location", event.location().left(40));
     o.insert("calName", "amazfish");
     o.insert("color", (int)0xff8446);
     o.insert("allDay", event.allDay());
