@@ -24,7 +24,10 @@ else()
 endif()
 
 set(SOURCES
+    ./src/dataproviderfactory.cpp
     ./src/datasource.cpp
+    ./src/huamidatasource.cpp
+    ./src/zepposdatasource.cpp
     ./src/sportsdatamodel.cpp
     ./src/sportsmetamodel.cpp
     ./src/paimodel.cpp
@@ -35,7 +38,10 @@ set(SOURCES
 )
 
 set(HEADERS
+    ./src/dataproviderfactory.h
     ./src/datasource.h
+    ./src/huamidatasource.h
+    ./src/zepposdatasource.h
     ./src/sportsdatamodel.h
     ./src/sportsmetamodel.h
     ./src/paimodel.h

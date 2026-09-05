@@ -50,6 +50,7 @@ public:
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
+    Q_INVOKABLE QString deviceType() const;
     Q_INVOKABLE QString connectionState() const;
     Q_INVOKABLE int connectionStateChangedCount() const;
     Q_INVOKABLE bool operationRunning();

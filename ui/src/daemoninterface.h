@@ -10,6 +10,7 @@
 #include <KDb3/KDbDriver>
 #include <KDb3/KDbConnection>
 #include <KDb3/KDbConnectionData>
+#include <qqmlapplicationengine.h>
 
 #include "datasource.h"
 #include "amazfish.h"
@@ -26,12 +27,13 @@ class DaemonInterface : public QObject
     Q_PROPERTY(bool operationRunning READ operationRunning NOTIFY operationRunningChanged)
 
 public:
-    explicit DaemonInterface(QObject *parent = nullptr);
+    explicit DaemonInterface(QQmlApplicationEngine *parent = nullptr);
     ~DaemonInterface();
 
     Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
+    Q_INVOKABLE QString deviceType() const;
     Q_INVOKABLE bool supportsFeature(Amazfish::Feature f);
     Q_INVOKABLE bool supportsDataType(Amazfish::DataType t);
     Q_INVOKABLE int supportedFeatures();
@@ -57,6 +59,8 @@ public:
     Q_INVOKABLE void requestScreenshot();
     Q_INVOKABLE QStringList supportedDisplayItems();
     Q_INVOKABLE void immediateAlert(int level);
+
+    Q_INVOKABLE DataSource* dataSource();
 
 public slots:
     void pair(const QString &name, const QString &deviceType, const QString &address);
@@ -97,6 +101,10 @@ private:
 
     bool operationRunning();
 
+    DataSource* m_dataSource = nullptr;
+
+    QString m_lastDeviceType;
+    QQmlApplicationEngine *m_engine = nullptr;
 };
 
 #endif // DAEMONINTERFACE_H
