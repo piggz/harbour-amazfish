@@ -8,6 +8,7 @@
 #include <QDir>
 #include <QFile>
 #include <QProcess>
+#include <adaptermodel.h>
 
 #include <KDb3/KDbDriverManager>
 #include <KDb3/KDbTransactionGuard>
@@ -100,9 +101,10 @@ void DeviceInterface::connectToDevice(const QString &address)
 {
     qDebug() << Q_FUNC_INFO << ": address:" << address;
 
-    if (m_device) {
-        m_deviceAddress = address;
-        m_device->setDevicePath(address);
+    m_deviceAddress = devicePath(address);
+
+    if (m_device && !m_deviceAddress.isEmpty()) {
+        m_device->setDevicePath(m_deviceAddress);
         m_device->connectToDevice();
     }
     else {
@@ -115,7 +117,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
 {
     qDebug() << Q_FUNC_INFO << name << deviceType << address;
 
-    m_deviceAddress = address;
+    m_deviceAddress = devicePath(address);
 
     if (m_device) {
         delete m_device;
@@ -123,7 +125,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
     m_device = DeviceFactory::createDevice(name, deviceType);
 
     if (m_device) {
-        m_device->setDevicePath(address);
+        m_device->setDevicePath(m_deviceAddress);
         connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress, Qt::UniqueConnection);
@@ -732,6 +734,31 @@ void DeviceInterface::log_battery_level(int level) {
     }
     tg.commit();
 
+}
+
+QString DeviceInterface::devicePath(const QString &address)
+{
+    qDebug() << Q_FUNC_INFO << address;
+    AdapterModel adapterModel;
+
+    for (int i = 0; i < adapterModel.rowCount(); ++i) {
+        QVariantMap adapter = adapterModel.get(i);
+        QString formattedAddress = address;
+        formattedAddress.replace(":", "_");
+
+        QString deviceString = adapter["itemText"].toString() + "/dev_" + formattedAddress;
+        qDebug() << adapter << deviceString;
+
+        BluezAdapter *bluezAdapter = new BluezAdapter();
+        bluezAdapter->setAdapterPath(adapter["itemText"].toString());
+
+        if (bluezAdapter->deviceIsValid(deviceString)) {
+            return deviceString;
+        }
+    }
+
+    qDebug() << "No device path found";
+    return QString();
 }
 
 void DeviceInterface::slot_informationChanged(Amazfish::Info key, const QString &val)

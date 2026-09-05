@@ -114,6 +114,8 @@ private:
 
     void log_battery_level(int level);
 
+    QString devicePath(const QString &address);
+
     HRMService *hrmService() const;
     
     Q_SLOT void onNotification(watchfish::Notification *notification);
