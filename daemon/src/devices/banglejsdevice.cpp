@@ -276,8 +276,12 @@ void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QSt
     qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
-        if (deviceProperty("ServicesResolved").toBool() ) {
+        const bool resolved = deviceProperty("ServicesResolved").toBool();
+        if (resolved && !m_initialised) { // bluez repeats Device1 properties, initialise once per connection
+            m_initialised = true;
             initialise();
+        } else if (!resolved) {
+            m_initialised = false;
         }
         if (map.contains("Connected")) {
             bool value = map["Connected"].toBool();
