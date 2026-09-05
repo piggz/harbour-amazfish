@@ -121,12 +121,13 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 
     QJsonObject o;
     o.insert("t", "notify");
-    o.insert("id", notification.id); //id is necessary for some apps like messageui, and should be unique
+    o.insert("id", notification.id); // id is necessary for some apps like
+                                     // messageui, and should be unique
     o.insert("src", alertIcon(notification.appId));
-    o.insert("title", "");
-    o.insert("subject", notification.summary);
-    o.insert("body", notification.body);
-    o.insert("sender", notification.appName);
+    o.insert("title", ""); // .left(80)
+    o.insert("subject", notification.summary.left(80));
+    o.insert("body", notification.body.left(400));
+    o.insert("sender", notification.appName.left(40));
     o.insert("tel", "");
     uart->txJson(o);
 }
