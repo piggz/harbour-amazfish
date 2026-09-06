@@ -87,6 +87,13 @@ DeviceInterface::DeviceInterface()
 
     //Finally, connect to device if it is defined
     QString pairedAddress = config->pairedAddress();
+
+    //Convert old format address to new
+    if (pairedAddress.contains("/org/bluez/hci")) {
+        pairedAddress = pairedAddress.right(17).replace("_", ":");
+        config->setPairedAddress(pairedAddress);
+    }
+
     if (!pairedAddress.isEmpty()) {
         connectToDevice(pairedAddress);
     }
