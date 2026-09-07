@@ -716,7 +716,9 @@ void BangleJSDevice::networkReply()
 
         QJsonObject p;
         p.insert("t", "http");
-        p.insert("id", id);
+        if (!id.isEmpty()) { // watch matches reply by id, do not invent one
+          p.insert("id", id);
+        }
         p.insert("resp", QString::fromUtf8(data));
 
         uart->txJson(p);
