@@ -12,6 +12,7 @@
 #include "garminfilterstatusmessage.h"
 #include "garmingfdistatusmessage.h"
 #include "garminprotobufmessage.h"
+#include "garminauthnegotiationmessage.h"
 
 Result<QString> GarminGfdiMessage::readLengthPrefixedString(const QByteArray& data, int& consumedBytes)
 {
@@ -53,7 +54,6 @@ void GarminGfdiMessage::setCommunicator(CommunicatorV2* comm) {
 
 void GarminGfdiMessage::parse(const QByteArray& data) {
     // Parse a GFDI message from raw bytes
-    // MessageParser::parse in Rust
 
     qDebug() << Q_FUNC_INFO << "Garmin: parsing GFDI Message " << data.toHex();
 
@@ -61,9 +61,14 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
         return;// Result<GfdiMessage>::err(GarminError::invalidMessage(QStringLiteral("Message too short")));
     }
 
-    int offset = 0;
-    offset += 1; // packet size field, skip over - TODO: was 2, guess it's not packet size but handle number
-
+    int offset = 1;
+    /*
+    const quint16 declaredLen = le16(data);
+    if (declaredLen != data.size())    {
+        qDebug() << Q_FUNC_INFO << "Garmin: GFDI Message length mismatch! " << data.toHex();
+        return;
+    }
+   */
     // Read message ID (2 bytes, little-endian)
     quint16 rawId = le16(data.constData() + offset);
     offset += 2;
@@ -117,6 +122,8 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
     case  MessageId::ProtobufResponse:
         parseProtobufResponse(data.mid(offset));
         return;
+    case MessageId::AuthNegotiation:
+        parseAuthNegotiation(data.mid(offset));
     case MessageId::Response: {
         // Check if this is a filter status response - special-case
         if (offset + 2 < data.size()) {
@@ -198,6 +205,7 @@ void GarminGfdiMessage::parseResponse(const QByteArray& data)
 void GarminGfdiMessage::parseProtobufResponse(const QByteArray& data)
 {
     //GarminProtobufStatusMessage msg(data, mCommunicator);
+    qDebug() << Q_FUNC_INFO << "Garmin: Received Protobuf response" << data.toHex();
     qDebug() << Q_FUNC_INFO;
     if (mCommunicator) mCommunicator->onProtobufMessageReceived(data);
     //msg->parse(data);
@@ -206,6 +214,7 @@ void GarminGfdiMessage::parseProtobufResponse(const QByteArray& data)
 void GarminGfdiMessage::parseProtobufRequest(const QByteArray &data)
 {
     //GarminProtobufMessage msg(data,mCommunicator);
+    qDebug() << Q_FUNC_INFO << "Garmin: Received Protobuf request" << data.toHex();
     if (mCommunicator) mCommunicator->onProtobufMessageReceived(data);
     //msg->parse(data);
 
@@ -222,13 +231,17 @@ void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArra
     if (mCommunicator) mCommunicator->onUnknownMessageReceived(msg);
 }
 
+void GarminGfdiMessage::parseAuthNegotiation(const QByteArray &data) {
+    GarminAuthNegotiationMessage* msg = new GarminAuthNegotiationMessage(mCommunicator);
+    msg->parse(data);
+}
 
 QByteArray GarminGfdiMessage::getOutgoingMessage(){
     QByteArray message;
     QByteArray toSend = generateOutgoing();
     if (toSend.isEmpty())
         return toSend;
-    message=wrapInGfdiEnvelope((quint16)mMessageType,toSend);
+    message=wrapInGfdiEnvelope(mMessageType,toSend);
     return message;
 }
 
@@ -392,7 +405,24 @@ Result<QByteArray> GfdiMessageGenerator::supportedFileTypesRequest()
     return Result<QByteArray>::isOk(m);
 }
 
-
+Result<QByteArray> GfdiMessageGenerator::deviceSettings()
+{
+    // Matches GarminSupport.sendDeviceSettings(): auto-upload + weather
+    // conditions enabled, weather alerts disabled. Each setting is
+    // [ordinal][valueLen][value...]; booleans are a single byte.
+    QByteArray payload;
+    payload.append(char(3)); // setting count
+    payload.append(char(quint8(GfdiDeviceSetting::AutoUploadEnabled)));
+    payload.append(char(1));
+    payload.append(char(1));
+    payload.append(char(quint8(GfdiDeviceSetting::WeatherConditionsEnabled)));
+    payload.append(char(1));
+    payload.append(char(1));
+    payload.append(char(quint8(GfdiDeviceSetting::WeatherAlertsEnabled)));
+    payload.append(char(1));
+    payload.append(char(0));
+    return Result<QByteArray>::isOk(wrapInGfdiEnvelope(MessageId::DeviceSettings, payload));
+}
 
 Result<QByteArray> GfdiMessageGenerator::systemEvent(quint8 eventType, quint8 value)
 {

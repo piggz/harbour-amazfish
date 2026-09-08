@@ -79,21 +79,6 @@ public:
      void onMessage(const QByteArray& message);
 };
 
-// Async callback uses signals to deliver reply; we will “await” it via QEventLoop.
-class AsyncGfdiMessageCallback : public QObject {
-    Q_OBJECT
-public:
-    using QObject::QObject;
-    virtual ~AsyncGfdiMessageCallback() = default;
-
-public slots:
-    virtual void onMessage(const QByteArray& message, quint64 cookie) = 0;
-
-signals:
-    void replyReady(quint64 cookie, const QByteArray& reply);
-    void noReply(quint64 cookie);
-    void failed(quint64 cookie, const QString& error);
-};
 
 // Receiver is async-like via queued slot.
 class MlrMessageReceiver : public QObject {
@@ -101,15 +86,16 @@ class MlrMessageReceiver : public QObject {
 public:
     using QObject::QObject;
     MlrMessageReceiver(QSharedPointer<GfdiMessageCallback> syncCb,
-                    QPointer<AsyncGfdiMessageCallback> asyncCb,
                     QObject* parent=nullptr);
 
 
     virtual ~MlrMessageReceiver() = default;
 
 public slots:
-    Result<std::optional<QByteArray>> awaitAsyncCallback(const QByteArray& message);
     void onDataReceived(const QByteArray& data);
+    void onDataDecoded(const QByteArray &decoded);
+
+
 
 signals:
     void gfdiDecoded(const QByteArray& gfdiMessage);
@@ -118,7 +104,6 @@ signals:
 private:
 
     QSharedPointer<GfdiMessageCallback> m_syncCb;
-    QPointer<AsyncGfdiMessageCallback> m_asyncCb;
 
     CobsCoDec m_codec;
 };
@@ -157,20 +142,21 @@ private slots:
 
 private:
     struct State {
-        quint8 handle {0};
+        int handle {0};
         int maxPacketSize {20};
 
-        quint8 lastSendAck {0};
-        quint8 nextSendSeq {0};
-        quint8 nextRcvSeq {0};
-        quint8 lastRcvAck {0};
+        int lastSendAck {0};
+        int nextSendSeq {0};
+        int nextRcvSeq {0};
+        int lastRcvAck {0};
 
         int maxNumUnackedSend {INITIAL_MAX_UNACKED_SEND};
         int retransmissionTimeoutMs {INITIAL_RETRANSMISSION_TIMEOUT_MS};
 
         QQueue<Fragment> fragmentQueue;
-        QMap<int,Fragment> sentFragments;
+        //QList<Fragment> sentFragments;
 
+        QVector<std::optional<Fragment>> sentFragments;
 
         bool paused {false};
 
@@ -178,16 +164,15 @@ private:
             //sentFragments.resize(int(MAX_SEQ_NUM) + 1);
         }
     };
-    QTimer retransmissionTimer;
-    QTimer ackTimer;
+    QTimer* m_retransmissionTimer;
+    QTimer* m_ackTimer;
 
 
 
-    QByteArray createPacket(quint8 reqNum, quint8 seqNum, const QByteArray& data);
+    QByteArray createPacket(int reqNum, int seqNum, const QByteArray& data);
 
-    static int seqDiff(quint8 a, quint8 b);
 
-    void processAck(quint8 reqNum);
+    void processAck(int reqNum);
 
     void scheduleAck();
 

@@ -83,7 +83,7 @@ struct CommunicatorState {
     QMap<quint8, QSharedPointer<MlrCommunicator>> mlrCommunicators; // key: mlr_handle
 
     int maxWriteSize {20};
-    CobsCoDec cobsCodec;
+    CobsCoDec *cobsCodec=nullptr;
     static QSharedPointer<CommunicatorState> create() {
         return QSharedPointer<CommunicatorState>(new CommunicatorState());
     }
@@ -233,15 +233,14 @@ private:
     QSharedPointer<CommunicatorState> mState;
 
     QSharedPointer<GfdiMessageCallback> mMessageCallback;
-    QPointer<AsyncGfdiMessageCallback> mAsyncMessageCallback;
+    //QPointer<AsyncGfdiMessageCallback> mAsyncMessageCallback;
     QSharedPointer<ProtobufHandler> mProtobufHandler;
 
 
     quint64 m_cookieCounter {1};
     QString m_Path;
     QObject *m_device = nullptr;
-    bool isFirstConncet=true;
-    bool isPairing=false;
+    bool isFirstConnect=true;
     QTimer* mBatteryTimer;
 };
 

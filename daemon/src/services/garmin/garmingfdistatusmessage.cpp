@@ -191,7 +191,7 @@ void GarminGfdiStatusMessage::handleNotificationData(const QByteArray &data) {
         finalStatusPayload.append(char(0x00));  // TransferStatus: OK
 
         const QByteArray finalStatusMsg =
-            wrapInGfdiEnvelope(5000, finalStatusPayload);
+            wrapInGfdiEnvelope(MessageId::Response, finalStatusPayload);
 
         qDebug() << Q_FUNC_INFO << "Garmin: Sending final status ACK (5000) to watch";
 

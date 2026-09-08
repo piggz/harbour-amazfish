@@ -59,7 +59,7 @@ public:
 private:
     int mRequestId;
     int mDataOffset;
-    bool mSendOutgoing;
+    //bool mSendOutgoing;
     ProtobufChunkStatus mProtobufChunkStatus;
     ProtobufStatusCode mProtobufStatusCode;
     Status mStatus;

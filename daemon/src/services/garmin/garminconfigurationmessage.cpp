@@ -3,7 +3,11 @@
 
 
 void GarminConfigurationMessage::parse(const QByteArray& data) {
-
+    QByteArray capabilities(15, char(0xFF));
+    QByteArray payload;
+    payload.append(char(capabilities.size()));
+    payload.append(capabilities);
+/*
     qDebug() << Q_FUNC_INFO << "Garmin: parsing configuration";
     if (data.isEmpty()) {
         return ;
@@ -14,15 +18,18 @@ void GarminConfigurationMessage::parse(const QByteArray& data) {
     }
     ConfigurationMessage msg;
     msg.capabilities = parseCapabilities(data.mid(1, numBytes));
+
     QByteArray resp = generateOutgoing(data);
-    resp = wrapInGfdiEnvelope(5050, data);
-    QByteArray settings =  setDeviceSettings(false,true,true); //don't advertise autoUpload, advertise weatherconditions and weatherAlerts
-    settings = wrapInGfdiEnvelope(5026,settings);
+    resp = wrapInGfdiEnvelope(MessageId::Configuration, data);
+    */
+    QByteArray resp = wrapInGfdiEnvelope(MessageId::Configuration, payload);
+    //QByteArray settings =  setDeviceSettings(false,true,true); //don't advertise autoUpload, advertise weatherconditions and weatherAlerts
+    //settings = wrapInGfdiEnvelope(MessageId::DeviceSettings,settings);
 
     if (mCommunicator) {
         mCommunicator->sendMessage("CONFIGURATION RESPOSE",resp);
-        mCommunicator->sendMessage("CONFIGURATION RESPOSE",settings);
-        mCommunicator->onConfigurationReceived();
+        //mCommunicator->sendMessage("CONFIGURATION RESPOSE",settings);
+        //mCommunicator->onConfigurationReceived();
     }
 }
 

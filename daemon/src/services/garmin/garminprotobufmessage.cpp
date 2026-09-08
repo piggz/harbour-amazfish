@@ -46,7 +46,7 @@ void GarminProtobufMessage::handleAuthenticationRequest(quint16 requestId) {
      writeU32le(responsePayload,0);
 
      const QByteArray response =
-         wrapInGfdiEnvelope(5101, responsePayload);
+         wrapInGfdiEnvelope(MessageId::AuthNegotiation, responsePayload);
 
      if (mCommunicator) {
          bool queueRes=mCommunicator->sendMessage("AUTHENTICATION SERVICE RESPONSE",response);
@@ -79,7 +79,7 @@ void GarminProtobufMessage::sendGenericAck(const QByteArray& data) {
     responsePayload.append(char(0x00)); // NO_ERROR
 
     const QByteArray response =
-        wrapInGfdiEnvelope(5000, responsePayload);
+        wrapInGfdiEnvelope(MessageId::Response, responsePayload);
 
     qDebug() << Q_FUNC_INFO << "Garmin: Unknown Protobuf detected, sending generic ACK";
 
@@ -109,7 +109,7 @@ QByteArray GarminProtobufMessage::getOutgoingMessage(){
     writeU32le(message,mProtobufDataLength);
     message.append(mMessageBytes);
     qDebug() << Q_FUNC_INFO << "Garmin: outgoing protobuf message " << message.toHex();
-    return wrapInGfdiEnvelope((quint16)MessageId::ProtobufRequest, message);
+    return wrapInGfdiEnvelope(MessageId::ProtobufRequest, message);
 }
 
 QByteArray GarminProtobufMessage::getAckByteStream() {
@@ -163,6 +163,6 @@ QByteArray GarminProtobufStatusMessage::getOutgoingMessage() {
     writeU32le(response,mDataOffset);
     response.append((char)mProtobufChunkStatus);
     response.append((char)mProtobufStatusCode);
-    response=wrapInGfdiEnvelope((quint16)MessageId::Response,response);
+    response=wrapInGfdiEnvelope(MessageId::Response,response);
     return response;
    }

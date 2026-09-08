@@ -41,7 +41,7 @@ void GarminDeviceInformationMessage::parse(const QByteArray& data)
 
     // Generate Response
     QByteArray response = generateOutgoing(msg);
-    response = wrapInGfdiEnvelope(5000,response);
+    response = wrapInGfdiEnvelope(MessageId::Response,response);
     // Now update the device via the communicator
     if (mCommunicator) {
         mCommunicator->sendMessage("DEVICEINFORMATION RESPONSE",response);
