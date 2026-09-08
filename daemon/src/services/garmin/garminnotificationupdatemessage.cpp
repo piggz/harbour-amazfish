@@ -43,5 +43,5 @@ QByteArray GarminNotificationUpdateMessage::generateMessage() {
     message.append((char)phoneFlags);
 
     qDebug() << Q_FUNC_INFO << " Garmin: sending notification, update type = " << (int)updateType << ", category value = " << categoryValue;
-    return wrapInGfdiEnvelope((quint16)MessageId::NotificationUpdate,message);;
+    return wrapInGfdiEnvelope(MessageId::NotificationUpdate,message);;
 }

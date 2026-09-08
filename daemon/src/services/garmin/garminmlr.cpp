@@ -10,7 +10,8 @@
 MlrMessageSender::MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar,
                            QObject* parent)
     : m_sendChar(sendChar)
-{}
+{
+}
 
 
 Result<void> MlrMessageSender::sendPacket(const QString& taskName, const QByteArray& packet) {
@@ -40,75 +41,23 @@ Result<void> MlrMessageSender::sendPacket(const QString& taskName, const QByteAr
 // It's only used in BLE/MLR transport layers.
 
 MlrMessageReceiver::MlrMessageReceiver(QSharedPointer<GfdiMessageCallback> syncCb,
-                                 QPointer<AsyncGfdiMessageCallback> asyncCb,
                                  QObject* parent)
     : m_syncCb(std::move(syncCb))
-    , m_asyncCb(asyncCb)
-{}
-
-Result<std::optional<QByteArray>> MlrMessageReceiver::awaitAsyncCallback(const QByteArray& message) {
-    if (!m_asyncCb) return Result<std::optional<QByteArray>>::isOk(std::nullopt);
-
-    const quint64 cookie = 1; // local cookie (receiver only)
-    QEventLoop loop;
-    Result<std::optional<QByteArray>> outcome = Result<std::optional<QByteArray>>::isOk(std::nullopt);
-
-    QMetaObject::Connection c1 = QObject::connect(
-        m_asyncCb, &AsyncGfdiMessageCallback::replyReady,
-        &loop, [&](quint64 c, const QByteArray& reply){
-            if (c == cookie) { outcome = Result<std::optional<QByteArray>>::isOk(reply); loop.quit(); }
-        });
-
-    QMetaObject::Connection c2 = QObject::connect(
-        m_asyncCb, &AsyncGfdiMessageCallback::noReply,
-        &loop, [&](quint64 c){
-            if (c == cookie) { outcome = Result<std::optional<QByteArray>>::isOk(std::nullopt); loop.quit(); }
-        });
-
-    QMetaObject::Connection c3 = QObject::connect(
-        m_asyncCb, &AsyncGfdiMessageCallback::failed,
-        &loop, [&](quint64 c, const QString& err){
-            if (c == cookie) { outcome = Result<std::optional<QByteArray>>::err(GarminError::invalidMessage(err)); loop.quit(); }
-        });
-
-    QMetaObject::invokeMethod(m_asyncCb, "onMessage", Qt::QueuedConnection,
-                              Q_ARG(QByteArray, message),
-                              Q_ARG(quint64, cookie));
-
-    loop.exec();
-
-    QObject::disconnect(c1);
-    QObject::disconnect(c2);
-    QObject::disconnect(c3);
-    return outcome;
+{
+    connect(&m_codec,&CobsCoDec::messageDecoded, this, &MlrMessageReceiver::onDataDecoded);
 }
-
-void MlrMessageReceiver::onDataReceived(const QByteArray& data) {
+void MlrMessageReceiver::onDataReceived(const QByteArray &data) {
     qDebug() << Q_FUNC_INFO << "Garmin: Mlr Data received " << data.toHex();
     // The data from MLR is COBS encoded, so we need to decode it
     // Use persistent codec to support multi-packet messages
-    m_codec.receiveBytes(data);
-
-    auto decodedOpt = m_codec.retrieveMessage();
-    if (!decodedOpt.has_value()) {
-        return; // incomplete, wait for more
-    }
-
-    const QByteArray decoded = *decodedOpt;
-    // The decoded message is the GFDI message directly - no handle byte here
-    // The handle was already in the MLR header (stripped by MLR layer)
-    if (decoded.isEmpty()) {
-        qDebug() << Q_FUNC_INFO << "Garmin: Warning: MLR decoded empty message";
-        return;
-    }
-
-    qDebug() << Q_FUNC_INFO << "Garmin: Mlr decoded data " << decoded.toHex();
-
-    emit gfdiDecoded(decoded);
-
-    return;
+    m_codec.feed(data);
 }
 
+
+void MlrMessageReceiver::onDataDecoded(const QByteArray &decoded)
+{
+    emit gfdiDecoded(decoded);
+}
 
 void GfdiMessageCallback::onMessage(const QByteArray& data) {
 
@@ -123,16 +72,18 @@ MlrCommunicator::MlrCommunicator(quint8 handle,
     : QObject(parent)
     , m_sender(sender)
     , m_receiver(receiver)
+    , m_ackTimer(new QTimer(this))
+    , m_retransmissionTimer(new QTimer(this))
 {
-    connect (&retransmissionTimer,&QTimer::timeout,this,&MlrCommunicator::onRetransmissionTimeout);
-    retransmissionTimer.setInterval(INITIAL_RETRANSMISSION_TIMEOUT_MS);
+    m_ackTimer->setSingleShot(true);
+    m_retransmissionTimer->setSingleShot(true);
 
-    connect (&ackTimer,&QTimer::timeout,this,&MlrCommunicator::sendAckPacket);
-    ackTimer.setInterval(ACK_TIMEOUT_MS);
-
+    m_state.sentFragments.resize(MAX_SEQ_NUM + 1);
     m_state.handle = handle;
     m_state.maxPacketSize = maxPacketSize;
 
+    connect (m_retransmissionTimer,&QTimer::timeout,this,&MlrCommunicator::onRetransmissionTimeout);
+    connect (m_ackTimer,&QTimer::timeout,this,&MlrCommunicator::sendAckPacket);
 
     if (m_receiver) {
         connect(m_receiver.data(), &MlrMessageReceiver::receiverError,
@@ -160,7 +111,7 @@ Result<void> MlrCommunicator::start() {
     ////QMutexLocker lock(&m_mutex);
     if (m_running) return Result<void>::isOk();
     m_running = true;
-    retransmissionTimer.start();
+    m_retransmissionTimer->start();
     qDebug() << "Garmin: MlrCommunicator started";
 
     return Result<void>::isOk();
@@ -186,14 +137,13 @@ void MlrCommunicator::sendMessage(const QString& taskName, const QByteArray& mes
             const int chunk = qMin(remaining, maxDataSize);
             Fragment f;
             f.taskName = taskName;
-            f.num = i;
+            f.num = i++;
             f.data = message.mid(position, chunk);
             f.reqNum=0;
-            m_state.fragmentQueue.enqueue(f);
+            m_state.fragmentQueue.append(f);
 
             position += f.data.size();
             remaining -= f.data.size();
-            i++;
         }
     }
     else {
@@ -202,7 +152,7 @@ void MlrCommunicator::sendMessage(const QString& taskName, const QByteArray& mes
         f.num=0;
         f.data=message;
         f.reqNum=0;
-        m_state.fragmentQueue.enqueue(f);
+        m_state.fragmentQueue.append(f);
     }
 
 
@@ -249,7 +199,7 @@ void MlrCommunicator::onPacketReceived(const QByteArray& packet) {
             if (m_receiver) {
                 m_receiver.data()->onDataReceived(data);
             }
-            m_state.nextRcvSeq = quint8((m_state.nextRcvSeq + 1) % (MAX_SEQ_NUM + 1));
+            m_state.nextRcvSeq = (m_state.nextRcvSeq + 1) % (MAX_SEQ_NUM + 1);
             scheduleAck();
         } else {
             qDebug() << Q_FUNC_INFO << "Gamin:  Out-of-sequence packet - expected " << m_state.nextRcvSeq <<", got " << seqNum;
@@ -266,40 +216,45 @@ void MlrCommunicator::close() {
     if (!m_running) return;
     qDebug() << "Garmin: Closing MLR communicator";
     m_running = false;
-    retransmissionTimer.stop();
+    m_retransmissionTimer->stop();
+    m_ackTimer->stop();
+    m_state.fragmentQueue.clear();
 }
+
 
 
 
 void MlrCommunicator::onRetransmissionTimeout() {
     qDebug() << Q_FUNC_INFO << "Garmin: Retransmission timeout expired";
     // Backoff retransmission timeout and reduce the maximum unacked
-    m_state.retransmissionTimeoutMs = std::min(m_state.retransmissionTimeoutMs * 2, MAX_RETRANSMISSION_TIMEOUT_MS);
-    m_state.maxNumUnackedSend = std::max(1, m_state.maxNumUnackedSend / 2);
+    m_state.retransmissionTimeoutMs = qMin(m_state.retransmissionTimeoutMs * 2, MAX_RETRANSMISSION_TIMEOUT_MS);
+    m_state.maxNumUnackedSend = qMax(1, m_state.maxNumUnackedSend / 2);
 
 
     for (int i = m_state.lastRcvAck; i != m_state.nextSendSeq; i = (i + 1) % (MAX_SEQ_NUM + 1)) {
         qDebug() << Q_FUNC_INFO << "Re-sending fragment " <<  i;
-        if (m_state.sentFragments.contains(i))
+        if (!m_state.sentFragments[i].has_value())
         {
-            Fragment fragment = m_state.sentFragments[i];
-            QByteArray packet = createPacket(fragment.reqNum, i, fragment.data);
-            if (m_sender) m_sender->sendPacket("retransmission " + fragment.taskName + " (" + fragment.num + ")", packet);
-        } else qDebug() << Q_FUNC_INFO << "Garmin: Attempting to re-send null fragment at index " << i;
+            qWarning() << "MlrCommunicator: attempting to re-send null fragment at index" << i;
+            continue;
+        }
+        const Fragment &fragment = *m_state.sentFragments[i];
+        const QByteArray packet = createPacket(fragment.reqNum, i, fragment.data);
+        if (m_sender)
+            m_sender->sendPacket(QStringLiteral("retransmission %1 (%2)").arg(fragment.taskName).arg(fragment.num), packet);
     }
+
     startRetransmissionTimer();
 }
 
 // =============================================================================
 // Static helpers (1:1 logic)
 // =============================================================================
-int MlrCommunicator::seqDiff(quint8 a, quint8 b) {
-    const int mod = int(MAX_SEQ_NUM) + 1;
-    return ( (int(a) - int(b) + mod) % mod );
-}
 
-QByteArray MlrCommunicator::createPacket(quint8 reqNum, quint8 seqNum, const QByteArray& data) {
+
+QByteArray MlrCommunicator::createPacket(int reqNum, int seqNum, const QByteArray& data) {
     QByteArray packet;
+    packet.reserve(2 + data.size());
 
     const quint8 byte0 = quint8(MLR_FLAG_MASK |
                                 ((m_state.handle & 0x07) << HANDLE_SHIFT) |
@@ -312,36 +267,30 @@ QByteArray MlrCommunicator::createPacket(quint8 reqNum, quint8 seqNum, const QBy
     return packet;
 }
 
-void MlrCommunicator::processAck(quint8 reqNum) {
-
+void MlrCommunicator::processAck(int reqNum) {
     qDebug() << Q_FUNC_INFO << "Garmin: MLRCommunicator processing Ack";
-    const int numAcked = seqDiff(reqNum, m_state.lastRcvAck);
 
-    retransmissionTimer.stop();
+    m_retransmissionTimer->stop();
 
-    quint8 i = m_state.lastRcvAck;
-    while (i != reqNum) {
-        if (m_state.sentFragments.contains(i)) m_state.sentFragments.remove(i);
-        i = quint8((i + 1) % (MAX_SEQ_NUM + 1));
+    for (int i = m_state.lastRcvAck; i != reqNum; i = (i + 1) % (MAX_SEQ_NUM + 1)) {
+        m_state.sentFragments[i].reset();
     }
     m_state.lastRcvAck = reqNum;
 
-    // Restart retransmit timer if still unacked
     if (m_state.lastRcvAck != m_state.nextSendSeq) {
         qDebug() << Q_FUNC_INFO <<  "Garmin: Restarting Ack Timer";
         startRetransmissionTimer();
     }
 
-    Q_UNUSED(numAcked);
 }
 
 void MlrCommunicator::scheduleAck() {
-    ackTimer.stop();
-    const int numRcvdUnacked = seqDiff(m_state.nextRcvSeq, m_state.lastSendAck);
+    m_ackTimer->stop();
+    const int numRcvdUnacked = (m_state.nextRcvSeq - m_state.lastSendAck + MAX_SEQ_NUM + 1) % (MAX_SEQ_NUM + 1);
     if (numRcvdUnacked >= ACK_TRIGGER_THRESHOLD) {
         sendAckPacket();
     } else {
-        ackTimer.start();
+        m_ackTimer->start(ACK_TIMEOUT_MS);
     }
 }
 
@@ -351,12 +300,11 @@ void MlrCommunicator::scheduleAck() {
 
 
 void MlrCommunicator::sendAckPacket() {
-    ackTimer.stop();
+    m_ackTimer->stop();
     const QByteArray pkt = createPacket(m_state.nextRcvSeq, 0, QByteArray());
     const QString task = QStringLiteral("ack reqNum=%1").arg(m_state.nextRcvSeq);
     if (m_sender) m_sender->sendPacket(task,pkt);
     m_state.lastSendAck = m_state.nextRcvSeq;
-    return;
 }
 
 // =============================================================================
@@ -364,12 +312,10 @@ void MlrCommunicator::sendAckPacket() {
 // =============================================================================
 void MlrCommunicator::runProtocolOnce() {
     Fragment frag;
-    quint8 seq = 0;
-    quint8 req = 0;
-    int numSentUnacked;
 
 
-    numSentUnacked = seqDiff(m_state.nextSendSeq, m_state.lastRcvAck);
+
+    const int numSentUnacked = (m_state.nextSendSeq - m_state.lastRcvAck + MAX_SEQ_NUM + 1) % (MAX_SEQ_NUM + 1);
     if (numSentUnacked >= m_state.maxNumUnackedSend) {
         qDebug() << Q_FUNC_INFO << "Garmin: Cannot send more packets, " << numSentUnacked <<" unacked, max " << m_state.maxNumUnackedSend;
         return;
@@ -378,9 +324,9 @@ void MlrCommunicator::runProtocolOnce() {
         return;
     }
 
-    frag = m_state.fragmentQueue.dequeue();
-    req = m_state.nextRcvSeq;
-    seq = m_state.nextSendSeq;
+    frag = m_state.fragmentQueue.takeFirst();
+    //req = m_state.nextRcvSeq;
+    //seq = m_state.nextSendSeq;
     Fragment fragmentWithReqNum;
     fragmentWithReqNum.taskName=frag.taskName;
     fragmentWithReqNum.num=frag.num;
@@ -390,16 +336,16 @@ void MlrCommunicator::runProtocolOnce() {
     const QString taskName = QStringLiteral("%1 (%2)").arg(frag.taskName).arg(frag.num);
     if (m_sender) m_sender->sendPacket(taskName, pkt);
 
-    m_state.sentFragments.insert(seq,fragmentWithReqNum);
-    m_state.nextSendSeq = quint8((m_state.nextSendSeq + 1) % (MAX_SEQ_NUM + 1));
+    m_state.sentFragments[m_state.nextSendSeq] = fragmentWithReqNum;
+    m_state.nextSendSeq = (m_state.nextSendSeq + 1) % (MAX_SEQ_NUM + 1);
 
     if (numSentUnacked == 0) {
         startRetransmissionTimer();
     }
-    qDebug() << Q_FUNC_INFO << "Garmin: Sent MLR packet: seqNum=" << seq << ", dataLen=" << pkt.size() - 2;
+    qDebug() << Q_FUNC_INFO << "Garmin: Sent MLR packet: seqNum=" << frag.num << ", dataLen=" << pkt.size() - 2;
 }
 
 
 void MlrCommunicator::startRetransmissionTimer() {
-    retransmissionTimer.start();
+    m_retransmissionTimer->start(m_state.retransmissionTimeoutMs);
 }

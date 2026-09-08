@@ -8,7 +8,7 @@ void GarminCurrentTimeMessage::parse(const QByteArray& data) {
     // no parsing needed as no incoming information
     // simply send back the current time as response
     QByteArray response = generateOutgoing(data);
-    response=wrapInGfdiEnvelope(5000,response);
+    response=wrapInGfdiEnvelope(MessageId::Response,response);
     if (mCommunicator) mCommunicator->sendMessage("CURRENT TIME", response);
 }
 

@@ -22,6 +22,8 @@ public:
     Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
     QString deviceType() const override;
+    void setPaired() {m_pairing = false;};
+    bool isPairing() {return m_pairing;};
     void sendAlert(const Amazfish::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;

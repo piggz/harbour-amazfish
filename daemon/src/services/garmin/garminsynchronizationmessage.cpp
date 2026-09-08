@@ -51,7 +51,7 @@ void GarminSynchronizationMessage::sendSynchronizationAck() {
     r.append(char(quint8(Status::Ack)));
 
 
-    r=wrapInGfdiEnvelope(5000,r);
+    r=wrapInGfdiEnvelope(MessageId::Response,r);
     if(mCommunicator) mCommunicator->sendMessage("SYNCHRONIZATION ACK",r);
 }
 
@@ -62,6 +62,6 @@ void GarminSynchronizationMessage::sendFilterMessage(quint8 filterType) {
     m.append(char(filterType));
 
    // Add checksum
-    m = wrapInGfdiEnvelope(5007,m);
+    m = wrapInGfdiEnvelope(MessageId::Filter,m);
     if (mCommunicator) mCommunicator->sendMessage("FILTER MESSAGE",m);
 }

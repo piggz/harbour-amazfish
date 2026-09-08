@@ -191,7 +191,7 @@ quint16 computeCrc16(const QByteArray& data)
     return crc;
 }
 
-QByteArray wrapInGfdiEnvelope(quint16 messageId, const QByteArray& payload)
+QByteArray wrapInGfdiEnvelope(MessageId messageId, const QByteArray& payload)
 {
     QByteArray msg;
 
@@ -200,8 +200,8 @@ QByteArray wrapInGfdiEnvelope(quint16 messageId, const QByteArray& payload)
     msg.append(char(size & 0xFF));
     msg.append(char((size >> 8) & 0xFF));
 
-    msg.append(char(messageId & 0xFF));
-    msg.append(char((messageId >> 8) & 0xFF));
+    msg.append(char((quint16)messageId & 0xFF));
+    msg.append(char(((quint16)(messageId )>> 8) & 0xFF));
 
     msg.append(payload);
 

@@ -18,9 +18,7 @@ public:
     QByteArray generateStatusMessage();
 private:
     quint8 authNegotiationStatus;
-    Status status;
-    quint16 authFlags;
-    char unk;
+    quint32 authFlags;
 };
 
 #endif // GARMINAUTHNEGOTIATIONMESSAGE_H

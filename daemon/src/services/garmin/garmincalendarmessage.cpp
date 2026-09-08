@@ -324,7 +324,7 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
     ackPayload.append(char(0x00)); // ProtobufStatusCode: NO_ERROR
 
     const QByteArray ackResponse =
-        wrapInGfdiEnvelope(5000, ackPayload);
+        wrapInGfdiEnvelope(MessageId::Response, ackPayload);
 
     if (mCommunicator) mCommunicator->sendMessage("CALENDER REQUEST ACK", ackResponse);
 
@@ -333,7 +333,7 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
     if (calendarProto.ok)
     {
         QByteArray responseData = encodeCalendarResponse(calendarProto.value,CalendarResponseStatus::Ok,requestId,request.useCoreServiceEnvelope);
-        QByteArray response =  wrapInGfdiEnvelope(0x13B4, responseData);
+        QByteArray response =  wrapInGfdiEnvelope(MessageId::ProtobufResponse, responseData);
         if (mCommunicator) mCommunicator->sendMessage("CALENDAR RESPONSE", response);
     }
     else {
@@ -344,7 +344,7 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
                 requestId,
                 request.useCoreServiceEnvelope);
 
-        QByteArray response = wrapInGfdiEnvelope(0x13B4, responseData);
+        QByteArray response = wrapInGfdiEnvelope(MessageId::ProtobufResponse, responseData);
         if (mCommunicator) mCommunicator->sendMessage("EMPTY CALENDAR RESPONSE",response);
     }
 }

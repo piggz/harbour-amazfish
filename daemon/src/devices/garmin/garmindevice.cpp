@@ -19,6 +19,7 @@ GarminDevice::GarminDevice(const QString &pairedName, QObject *parent) : Abstrac
 {
     qDebug() << Q_FUNC_INFO << pairedName;
     connect(this, &QBLEDevice::propertiesChanged, this, &GarminDevice::onPropertiesChanged, Qt::UniqueConnection);
+    m_pairing= false;
 }
 
 Amazfish::Features GarminDevice::supportedFeatures() const
@@ -113,9 +114,7 @@ void GarminDevice::pair()
 
 
     setConnectionState("pairing");
-    //emit connectionStateChanged();
     QBLEDevice::pair();
-    //initialise();
  }
 
 

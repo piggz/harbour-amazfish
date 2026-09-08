@@ -31,7 +31,7 @@ QByteArray GarminNotificationSubscriptionMessage::generateStatusMessage() {
     r.append(char(mMessage.enable ? 1 : 0));
     // Unknown byte (copy from incoming)
     r.append(char(mMessage.unk));
-    return wrapInGfdiEnvelope((quint16)MessageId::Response,r);
+    return wrapInGfdiEnvelope(MessageId::Response,r);
 
 }
 
@@ -42,5 +42,5 @@ QByteArray GarminNotificationSubscriptionStatusMessage::getOutgoingMessage() {
     response.append(mNotificationStatus ? 0:1);
     response.append(mEnableRaw ? 1:0);
     response.append(mUnk);
-    return wrapInGfdiEnvelope((quint16)MessageId::Response,response);
+    return wrapInGfdiEnvelope(MessageId::Response,response);
 }
