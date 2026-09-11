@@ -17,70 +17,6 @@ PagePL {
         anchors.top: parent.top
         anchors.margins: styler.themePaddingMedium
 
-        AdapterModel {
-            id: adapters
-        }
-
-        ComboBoxPL {
-            id: cboLocalAdapter
-            model: adapters
-            textRole: "path"
-            label: qsTr("BT Adapter")
-            Component.onCompleted: {
-                for (var i = 0; i < adapters.rowCount(); i++) {
-                    var item = adapters.get(i)
-                    if (item.path === AmazfishConfig.localAdapter) {
-                        cboLocalAdapter.currentIndex = i;
-                        setDetails(item)
-                        return
-                    }
-                }
-            }
-
-            onCurrentIndexChanged: {
-                setDetails(adapters.get(currentIndex))
-            }
-
-            function setDetails(data) {
-                lblBluetoothName.text = data.name
-                lblBluetoothAlias.text = data.alias
-                lblBluetoothAddress.text = data.address
-            }
-        }
-
-
-        LabelPL {
-            id: lblBluetoothName
-            color: styler.themeSecondaryHighlightColor
-            font.pixelSize: styler.themeFontSizeMedium
-            truncMode: truncModes.fade
-            anchors.left: parent.left
-            anchors.right: parent.right;
-            anchors.leftMargin: styler.themePaddingMedium
-            anchors.rightMargin: styler.themePaddingMedium
-        }
-
-        LabelPL {
-            id: lblBluetoothAlias
-            color: styler.themeSecondaryHighlightColor
-            font.pixelSize: styler.themeFontSizeMedium
-            truncMode: truncModes.fade
-            anchors.left: parent.left
-            anchors.right: parent.right;
-            anchors.leftMargin: styler.themePaddingMedium
-            anchors.rightMargin: styler.themePaddingMedium
-        }
-        LabelPL {
-            id: lblBluetoothAddress
-            color: styler.themeSecondaryHighlightColor
-            font.pixelSize: styler.themeFontSizeMedium
-            truncMode: truncModes.fade
-            anchors.left: parent.left
-            anchors.right: parent.right;
-            anchors.leftMargin: styler.themePaddingMedium
-            anchors.rightMargin: styler.themePaddingMedium
-        }
-
         SectionHeaderPL {
             visible: supportsFeatureRefresh(Amazfish.FEATURE_ALERT)
             text: qsTr("Notifications")
@@ -267,7 +203,6 @@ PagePL {
         AmazfishConfig.appNotifyLowBattery = chkNotifyLowBattery.checked;
         AmazfishConfig.appNavigationNotification = chkNavigationNotification.checked;
         AmazfishConfig.appSimulateEventSupport = chkSimulateEventSupport.checked;
-        AmazfishConfig.localAdapter = cboLocalAdapter.value;
         AmazfishConfig.appTransliterate = chkTransliterate.checked ;
     }
 

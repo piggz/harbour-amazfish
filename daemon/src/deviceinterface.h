@@ -94,6 +94,8 @@ private:
     int m_connectionStateChangedCount = 0;
     QString m_deviceAddress;
     QString m_deviceName;
+    QString m_adapterPath;
+
     bool m_dbusRegistered = false;
     int m_lastBatteryLevel = 0;
     int m_lastAlertHash = 0;
@@ -113,6 +115,9 @@ private:
     void updateServiceController();
 
     void log_battery_level(int level);
+
+    QString devicePath(const QString &address);
+    bool determinAdapterPath(const QString &address);
 
     HRMService *hrmService() const;
     

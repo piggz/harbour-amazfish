@@ -8,6 +8,7 @@
 #include <QDir>
 #include <QFile>
 #include <QProcess>
+#include <adaptermodel.h>
 
 #include <KDb3/KDbDriverManager>
 #include <KDb3/KDbTransactionGuard>
@@ -86,6 +87,13 @@ DeviceInterface::DeviceInterface()
 
     //Finally, connect to device if it is defined
     QString pairedAddress = config->pairedAddress();
+
+    //Convert old format address to new
+    if (pairedAddress.contains("/org/bluez/hci")) {
+        pairedAddress = pairedAddress.right(17).replace("_", ":");
+        config->setPairedAddress(pairedAddress);
+    }
+
     if (!pairedAddress.isEmpty()) {
         connectToDevice(pairedAddress);
     }
@@ -100,9 +108,10 @@ void DeviceInterface::connectToDevice(const QString &address)
 {
     qDebug() << Q_FUNC_INFO << ": address:" << address;
 
-    if (m_device) {
-        m_deviceAddress = address;
-        m_device->setDevicePath(address);
+    m_deviceAddress = devicePath(address);
+
+    if (m_device && !m_deviceAddress.isEmpty()) {
+        m_device->setDevicePath(m_deviceAddress);
         m_device->connectToDevice();
     }
     else {
@@ -115,7 +124,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
 {
     qDebug() << Q_FUNC_INFO << name << deviceType << address;
 
-    m_deviceAddress = address;
+    m_deviceAddress = devicePath(address);
 
     if (m_device) {
         delete m_device;
@@ -123,7 +132,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
     m_device = DeviceFactory::createDevice(name, deviceType);
 
     if (m_device) {
-        m_device->setDevicePath(address);
+        m_device->setDevicePath(m_deviceAddress);
         connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress, Qt::UniqueConnection);
@@ -151,13 +160,12 @@ void DeviceInterface::disconnect()
 void DeviceInterface::unpair()
 {
     qDebug() << Q_FUNC_INFO;
-    if (m_device) {
+    if (m_device && !m_adapterPath.isEmpty()) {
         BluezAdapter adapter;
-        adapter.setAdapterPath(AmazfishConfig::instance()->localAdapter());
+        adapter.setAdapterPath(m_adapterPath);
         adapter.removeDevice(m_deviceAddress);
         delete m_device;
         m_device = nullptr;
-
     }
 }
 
@@ -732,6 +740,48 @@ void DeviceInterface::log_battery_level(int level) {
     }
     tg.commit();
 
+}
+
+QString DeviceInterface::devicePath(const QString &address)
+{
+    qDebug() << Q_FUNC_INFO << address;
+
+    if (!determinAdapterPath(address)){
+        qDebug() << "No device path found";
+        return QString();
+    }
+
+    QString formattedAddress = address;
+    formattedAddress.replace(":", "_");
+
+    return m_adapterPath + "/dev_" + formattedAddress;
+}
+
+bool DeviceInterface::determinAdapterPath(const QString &address)
+{
+    qDebug() << Q_FUNC_INFO << address;
+    AdapterModel adapterModel;
+
+    for (int i = 0; i < adapterModel.rowCount(); ++i) {
+        QVariantMap adapter = adapterModel.get(i);
+        QString formattedAddress = address;
+        formattedAddress.replace(":", "_");
+
+        QString deviceString = adapter["itemText"].toString() + "/dev_" + formattedAddress;
+        qDebug() << adapter << deviceString;
+
+        BluezAdapter bluezAdapter;
+        bluezAdapter.setAdapterPath(adapter["itemText"].toString());
+
+        if (bluezAdapter.deviceIsValid(deviceString)) {
+            m_adapterPath = adapter["itemText"].toString();
+            AmazfishConfig::instance()->setLocalAdapter(m_adapterPath); //Used by PTJF Device for local server
+            return true;
+        }
+    }
+
+    qDebug() << "No device path found";
+    return false;
 }
 
 void DeviceInterface::slot_informationChanged(Amazfish::Info key, const QString &val)
