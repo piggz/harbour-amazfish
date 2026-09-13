@@ -1,26 +1,27 @@
 #include "devicefactory.h"
 #include "asteroidosdevice.h"
+#include "banglejsdevice.h"
+#include "dk08device.h"
+#include "huami/biplitedevice.h"
+#include "huami/bipsdevice.h"
+#include "huami/gtr2device.h"
+#include "huami/gtrdevice.h"
+#include "huami/gts2device.h"
 #include "huami/gtsdevice.h"
 #include "huami/neodevice.h"
-#include "huami/biplitedevice.h"
-#include "banglejsdevice.h"
-#include "huami/bipsdevice.h"
-#include "huami/gts2device.h"
-#include "huami/gtrdevice.h"
-#include "huami/gtr2device.h"
 #include "huami/zepposdevice.h"
+#include "mijialywsddevice.h"
 #include "pebbledevice.h"
 #include "pinetimejfdevice.h"
-#include "dk08device.h"
 
-#include <functional>
-#include <QMetaEnum>
-#include <QTextStream>
-#include <QFile>
-#include <QRegularExpression>
 #include <QDebug>
+#include <QFile>
+#include <QMetaEnum>
+#include <QRegularExpression>
+#include <QTextStream>
+#include <functional>
 
-using DeviceCreator = std::function<AbstractDevice*(const QString &)>;
+using DeviceCreator = std::function<AbstractDevice*(const QString&)>;
 
 static const QMap<QString, DeviceCreator> deviceMap = {
     { "Amazfit Bip Watch", [](const QString &name) { return new BipDevice(name); } },
@@ -40,11 +41,12 @@ static const QMap<QString, DeviceCreator> deviceMap = {
     { "Bangle.js", [](const QString &name) { return new BangleJSDevice(name); } },
     { "Kospet DK08", [](const QString &name) { return new DK08Device(name); } },
     { "AsteroidOS", [](const QString &name) { return new AsteroidOSDevice(name); } },
-
+    { "Xiaomi Thermometer", [](const QString& name) { return new MijiaLywsdDevice(name); } },
     { "Amazfit Cor", [](const QString &name) { return new BipLiteDevice(name); } },
     { "Mi Band 3", [](const QString &name) { return new BipLiteDevice(name); } },
     { "Mi Band 2", [](const QString &name) { return new BipLiteDevice(name); } },
-    };
+};
+
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName, const QString &deviceType)
 {

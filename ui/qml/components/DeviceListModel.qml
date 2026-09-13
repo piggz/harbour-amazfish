@@ -135,5 +135,11 @@ ListModel {
         auth: false
         pattern: "DK08"
     }
+    ListElement {
+        deviceType: "Xiaomi Thermometer"
+        icon: "../pics/devices/xiaomi-thermometer.png"
+        auth: false
+        pattern: "^LYWSD03MMC$"
+    }
 
 }
