@@ -126,8 +126,11 @@ void DeviceInterface::connectToDevice()
 
     //Convert old format address to new
     if (pairedAddress.contains("/org/bluez/hci")) {
-        pairedAddress = pairedAddress.right(17).replace("_", ":");
-        config->setPairedAddress(pairedAddress);
+
+        QString newAddress = pairedAddress.right(17).replace("_", ":");
+        //Migrate data to the new address format
+        migrateDataDeviceAddress(pairedAddress, newAddress);
+        config->setPairedAddress(newAddress);
     }
 
     if (!pairedAddress.isEmpty()) {
@@ -1173,6 +1176,14 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
         }
 
     }
+}
+
+void DeviceInterface::migrateDataDeviceAddress(const QString &oldAdress, const QString &newAddress)
+{
+    qDebug() << Q_FUNC_INFO << oldAdress << newAddress;
+
+    m_conn->executeSql(KDbEscapedString("UPDATE mi_band_activity SET device_id='%1' WHERE device_id='%2'").arg(qHash(newAddress)).arg(qHash(oldAdress)));
+    m_conn->executeSql(KDbEscapedString("UPDATE sports_data      SET device_id='%1' WHERE device_id='%2'").arg(qHash(newAddress)).arg(qHash(oldAdress)));
 }
 
 void DeviceInterface::refreshInformation()

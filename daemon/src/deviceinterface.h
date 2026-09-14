@@ -181,6 +181,8 @@ private:
 #ifdef MER_EDITION_SAILFISH
     BackgroundActivity *m_backgroundActivity = nullptr;
 #endif
+
+    void migrateDataDeviceAddress(const QString &oldAdress, const QString &newAddress);
 };
 
 #endif // BIPINTERFACE_H
