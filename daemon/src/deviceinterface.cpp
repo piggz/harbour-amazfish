@@ -155,6 +155,11 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
 
     m_deviceAddress = devicePath(address);
 
+    if (m_deviceAddress.isEmpty()) {
+        qDebug() << "Device is not available";
+        message(tr("Device is not yet available"));
+    }
+
     if (m_device) {
         delete m_device;
     }
