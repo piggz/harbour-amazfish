@@ -85,18 +85,12 @@ DeviceInterface::DeviceInterface()
     connect(&m_navigationInterface, &NavigationInterface::runningChanged, this, &DeviceInterface::navigationRunningChanged);
     connect(&m_navigationInterface, &NavigationInterface::navigationChanged, this, &DeviceInterface::navigationChanged);
 
-    //Finally, connect to device if it is defined
-    QString pairedAddress = config->pairedAddress();
+    m_reconnectTimer = new QTimer(this);
+    m_reconnectTimer->setInterval(60000);
+    connect(m_reconnectTimer, &QTimer::timeout, this, &DeviceInterface::reconnectionTimer);
+    m_reconnectTimer->start(); //Start timer to attempt to reconnect every 60 seconds
 
-    //Convert old format address to new
-    if (pairedAddress.contains("/org/bluez/hci")) {
-        pairedAddress = pairedAddress.right(17).replace("_", ":");
-        config->setPairedAddress(pairedAddress);
-    }
-
-    if (!pairedAddress.isEmpty()) {
-        connectToDevice(pairedAddress);
-    }
+    reconnectionTimer();
 }
 
 DeviceInterface::~DeviceInterface()
@@ -116,7 +110,39 @@ void DeviceInterface::connectToDevice(const QString &address)
     }
     else {
         qDebug() << Q_FUNC_INFO << ": device was not valid";
-        message(tr("Device is not valid, it may not be supported"));
+        message(tr("Device is not yet available"));
+    }
+}
+
+void DeviceInterface::connectToDevice()
+{
+    qDebug() << Q_FUNC_INFO;;
+
+    //Connect was called from UI so enable auto reconnect
+    m_autoreconnect = true;
+
+    auto config = AmazfishConfig::instance();
+    QString pairedAddress = config->pairedAddress();
+
+    //Convert old format address to new
+    if (pairedAddress.contains("/org/bluez/hci")) {
+        pairedAddress = pairedAddress.right(17).replace("_", ":");
+        config->setPairedAddress(pairedAddress);
+    }
+
+    if (!pairedAddress.isEmpty()) {
+        connectToDevice(pairedAddress);
+    }
+}
+
+void DeviceInterface::reconnectionTimer()
+{
+    //qDebug() << Q_FUNC_INFO;
+
+    if ((connectionState() != "authenticated" && m_autoreconnect) || connectionState() == "authfailed") {
+        qDebug() << Q_FUNC_INFO << "Lost connection";
+        disconnect();
+        connectToDevice();
     }
 }
 
@@ -141,6 +167,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
         m_device->pair();
+        m_autoreconnect = true;
         return "pairing";
     }
 
@@ -152,6 +179,8 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
 void DeviceInterface::disconnect()
 {
     qDebug() << Q_FUNC_INFO;
+    m_autoreconnect = false;
+
     if (m_device) {
         m_device->disconnectFromDevice();
     }

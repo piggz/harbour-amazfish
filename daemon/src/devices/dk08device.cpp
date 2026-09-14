@@ -32,7 +32,6 @@ void DK08Device::pair()
 
     m_needsAuth = true;
     m_pairing = true;
-    m_autoreconnect = true;
     //disconnectFromDevice();
     setConnectionState("pairing");
     emit connectionStateChanged();
@@ -105,7 +104,6 @@ void DK08Device::onPropertiesChanged(QString interface, QVariantMap map, QString
     qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
         if (deviceProperty("ServicesResolved").toBool() ) {
             initialise();
         }

@@ -105,6 +105,14 @@ void DaemonInterface::changeConnectionState()
 
 }
 
+void DaemonInterface::connectToDevice()
+{
+    if (!iface || !iface->isValid()) {
+        return;
+    }
+    iface->call(QStringLiteral("connectToDevice"));
+}
+
 void DaemonInterface::connectToDevice(const QString &address)
 {
     if (!iface || !iface->isValid()) {

@@ -48,6 +48,7 @@ public:
     Q_INVOKABLE QString pair(const QString &name, const QString &deviceType, const QString &address);
 
     Q_INVOKABLE void connectToDevice(const QString &address);
+    Q_INVOKABLE void connectToDevice();
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
     Q_INVOKABLE QString connectionState() const;
@@ -107,6 +108,10 @@ private:
 
     QTimer *m_refreshTimer = nullptr;
     QTimer *m_findDeviceTimer = nullptr;
+    QTimer *m_reconnectTimer = nullptr;
+    bool m_autoreconnect = true;
+    void reconnectionTimer();
+
     Q_SLOT void onRefreshTimer();
     void findDevice();
     int m_playedSounds = 0;

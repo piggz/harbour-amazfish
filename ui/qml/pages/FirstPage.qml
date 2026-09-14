@@ -46,7 +46,7 @@ PagePL {
             text: _disconnected ? qsTr("Connect to watch") : qsTr("Disconnect from watch")
             onClicked: {
                 if (_disconnected) {
-                    DaemonInterfaceInstance.connectToDevice(AmazfishConfig.pairedAddress);
+                    DaemonInterfaceInstance.connectToDevice();
                 } else {
                     DaemonInterfaceInstance.disconnect();
                 }
