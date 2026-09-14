@@ -1,5 +1,6 @@
 #include "deviceinterface.h"
 #include "bluezadapter.h"
+#include "adaptermodel.h"
 #include "hrmservice.h"
 #include "devicefactory.h"
 #include "amazfishconfig.h"
@@ -8,7 +9,6 @@
 #include <QDir>
 #include <QFile>
 #include <QProcess>
-#include <adaptermodel.h>
 
 #include <KDb3/KDbDriverManager>
 #include <KDb3/KDbTransactionGuard>
@@ -783,28 +783,26 @@ QString DeviceInterface::devicePath(const QString &address)
 {
     qDebug() << Q_FUNC_INFO << address;
 
-    if (!determinAdapterPath(address)){
+    QString formattedAddress = address;
+    formattedAddress.replace(":", "_");
+
+    if (!determineAdapterPath(address)){
         qDebug() << "No device path found";
         return QString();
     }
 
-    QString formattedAddress = address;
-    formattedAddress.replace(":", "_");
-
     return m_adapterPath + "/dev_" + formattedAddress;
 }
 
-bool DeviceInterface::determinAdapterPath(const QString &address)
+bool DeviceInterface::determineAdapterPath(const QString &address)
 {
     qDebug() << Q_FUNC_INFO << address;
     AdapterModel adapterModel;
 
     for (int i = 0; i < adapterModel.rowCount(); ++i) {
         QVariantMap adapter = adapterModel.get(i);
-        QString formattedAddress = address;
-        formattedAddress.replace(":", "_");
 
-        QString deviceString = adapter["itemText"].toString() + "/dev_" + formattedAddress;
+        QString deviceString = adapter["itemText"].toString() + "/dev_" + address;
         qDebug() << adapter << deviceString;
 
         BluezAdapter bluezAdapter;

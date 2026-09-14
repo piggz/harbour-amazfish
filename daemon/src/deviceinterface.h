@@ -122,7 +122,7 @@ private:
     void log_battery_level(int level);
 
     QString devicePath(const QString &address);
-    bool determinAdapterPath(const QString &address);
+    bool determineAdapterPath(const QString &address);
 
     HRMService *hrmService() const;
     
