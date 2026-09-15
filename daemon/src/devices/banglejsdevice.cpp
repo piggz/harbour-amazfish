@@ -120,12 +120,13 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 
     QJsonObject o;
     o.insert("t", "notify");
-    o.insert("id", notification.id); //id is necessary for some apps like messageui, and should be unique
+    o.insert("id", notification.id); // id is necessary for some apps like
+                                     // messageui, and should be unique
     o.insert("src", alertIcon(notification.appId));
-    o.insert("title", "");
-    o.insert("subject", notification.summary);
-    o.insert("body", notification.body);
-    o.insert("sender", notification.appName);
+    o.insert("title", ""); // .left(80)
+    o.insert("subject", notification.summary.left(80));
+    o.insert("body", notification.body.left(400));
+    o.insert("sender", notification.appName.left(40));
     o.insert("tel", "");
     uart->txJson(o);
 }
@@ -266,9 +267,9 @@ void BangleJSDevice::setTime() {
     int offsetSeconds = timeZone.offsetFromUtc(now);
     double offsetHours = offsetSeconds / 3600.0;
 
-    QString cmd = QString("setTime(%1);\nE.setTimeZone(%2);\n(s=>s&&(s.timezone=%2,require('Storage').write('setting.json',s)))(require('Storage').readJSON('setting.json',1));").arg(ts).arg(offsetHours);
+    QString cmd = QString("setTime(%1);E.setTimeZone(%2);(s=>s&&(s.timezone=%2,require('Storage').write('setting.json',s)))(require('Storage').readJSON('setting.json',1));").arg(ts).arg(offsetHours);
 
-    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8());
+    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8() + "\n");
 }
 
 void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
@@ -330,7 +331,7 @@ void BangleJSDevice::fetchData(Amazfish::DataTypes dataTypes)
     }
 
     if (dataTypes & Amazfish::DataType::TYPE_GPS_TRACK) {
-        downloadActivityData();
+        downloadSportsData();
     }
 }
 
@@ -1284,9 +1285,9 @@ void BangleJSDevice::sendCalendarEvent(int id, const watchfish::CalendarEvent &e
     o.insert("type", 0);
     o.insert("timestamp", event.start().toMSecsSinceEpoch() / 1000);
     o.insert("durationInSeconds", event.start().secsTo(event.end()));
-    o.insert("title", event.title());
-    o.insert("description", description);
-    o.insert("location", event.location());
+    o.insert("title", event.title().left(40));
+    o.insert("description", description.left(200));
+    o.insert("location", event.location().left(40));
     o.insert("calName", "amazfish");
     o.insert("color", (int)0xff8446);
     o.insert("allDay", event.allDay());

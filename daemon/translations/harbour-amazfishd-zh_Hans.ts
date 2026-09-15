@@ -100,7 +100,7 @@
     <message>
         <location filename="../src/devices/banglejsdevice.cpp" line="370"/>
         <source>Downloading sports data</source>
-        <translation type="unfinished"></translation>
+        <translation>下载运动数据中</translation>
     </message>
 </context>
 <context>
