@@ -461,7 +461,6 @@ void HuamiDevice::writeActivityControl(const QByteArray &value)
 void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
     if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
         if (map.contains("Paired")) {
             bool value = map["Paired"].toBool();
 

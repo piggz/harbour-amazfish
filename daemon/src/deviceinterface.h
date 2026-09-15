@@ -47,7 +47,7 @@ public:
 
     Q_INVOKABLE QString pair(const QString &name, const QString &deviceType, const QString &address);
 
-    Q_INVOKABLE void connectToDevice(const QString &address);
+    Q_INVOKABLE void connectToDevice();
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
     Q_INVOKABLE QString connectionState() const;
@@ -91,9 +91,13 @@ public:
 
 private:
 
+    void connectToDevice(const QString &address);
+
     int m_connectionStateChangedCount = 0;
     QString m_deviceAddress;
     QString m_deviceName;
+    QString m_adapterPath;
+
     bool m_dbusRegistered = false;
     int m_lastBatteryLevel = 0;
     int m_lastAlertHash = 0;
@@ -105,6 +109,10 @@ private:
 
     QTimer *m_refreshTimer = nullptr;
     QTimer *m_findDeviceTimer = nullptr;
+    QTimer *m_reconnectTimer = nullptr;
+    bool m_autoreconnect = true;
+    void reconnectionTimer();
+
     Q_SLOT void onRefreshTimer();
     void findDevice();
     int m_playedSounds = 0;
@@ -113,6 +121,9 @@ private:
     void updateServiceController();
 
     void log_battery_level(int level);
+
+    QString devicePath(const QString &address);
+    bool determineAdapterPath(const QString &address);
 
     HRMService *hrmService() const;
     
@@ -171,6 +182,8 @@ private:
 #ifdef MER_EDITION_SAILFISH
     BackgroundActivity *m_backgroundActivity = nullptr;
 #endif
+
+    bool migrateDataDeviceAddress(const QString& oldAddress, const QString& newAddress);
 };
 
 #endif // BIPINTERFACE_H

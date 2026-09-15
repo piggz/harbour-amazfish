@@ -72,7 +72,6 @@ void AsteroidOSDevice::pair()
 
     m_needsAuth = true;
     m_pairing = true;
-    m_autoreconnect = true;
     //disconnectFromDevice();
     setConnectionState("pairing");
     emit connectionStateChanged();
@@ -86,7 +85,6 @@ void AsteroidOSDevice::onPropertiesChanged(QString interface, QVariantMap map, Q
     qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
         if (deviceProperty("ServicesResolved").toBool() ) {
             initialise();
         }

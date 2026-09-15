@@ -29,7 +29,6 @@ void BangleJSDevice::pair()
 
     m_needsAuth = false;
     m_pairing = true;
-    m_autoreconnect = true;
     //disconnectFromDevice();
     setConnectionState("pairing");
     emit connectionStateChanged();
@@ -278,7 +277,6 @@ void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QSt
     qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
         const bool resolved = deviceProperty("ServicesResolved").toBool();
         if (resolved && !m_initialised) { // bluez repeats Device1 properties, initialise once per connection
             m_initialised = true;
