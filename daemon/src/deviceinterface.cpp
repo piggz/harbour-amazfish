@@ -133,8 +133,8 @@ void DeviceInterface::connectToDevice()
         config->setPairedAddress(newAddress);
     }
 
-    if (!pairedAddress.isEmpty()) {
-        connectToDevice(pairedAddress);
+    if (!config->pairedAddress().isEmpty()) {
+        connectToDevice(config->pairedAddress());
     }
 }
 
