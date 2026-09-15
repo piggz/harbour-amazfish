@@ -12,7 +12,6 @@ AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBL
     setConnectionState("disconnected");
     m_pairedName = pairedName;
 
-    //connect(this, &QBLEDevice::pairFinished, this, &AbstractDevice::devicePairFinished);
     connect(this, &QBLEDevice::error, this, &AbstractDevice::deviceError);
 }
 
@@ -47,14 +46,6 @@ void AbstractDevice::disconnectFromDevice()
     setConnectionState("disconnected");
 
     QBLEDevice::disconnectFromDevice();
-}
-
-void AbstractDevice::devicePairFinished(const QString &status)
-{
-    qDebug() << Q_FUNC_INFO;
-    if (status == "paired") {
-        setConnectionState("paired");
-    }
 }
 
 void AbstractDevice::parseServices()

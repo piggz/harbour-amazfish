@@ -133,14 +133,18 @@ void DeviceInterface::connectToDevice()
     if (!config->pairedAddress().isEmpty()) {
         //Connect was called from UI so enable auto reconnect
         m_autoreconnect = true;
-
         connectToDevice(config->pairedAddress());
     }
 }
 
 void DeviceInterface::reconnectionTimer()
 {
-    //qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO;
+
+    const QString state = connectionState();
+    if (state == "pairing" || state == "connecting" || state == "connected" || state == "paired") {
+        return;
+    }
 
     if ((connectionState() != "authenticated" && m_autoreconnect) || connectionState() == "authfailed") {
         qDebug() << Q_FUNC_INFO << "Lost connection";
@@ -176,6 +180,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
         m_device->pair();
+        m_autoreconnect = true;
         return "pairing";
     }
 

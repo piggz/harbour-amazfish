@@ -115,7 +115,6 @@ protected:
     virtual QBLEService* drv_createService(const QString &uuid, const QString &path) = 0;
 
 private:
-    void devicePairFinished(const QString& status);
     QString m_pairedName;
 
 
