@@ -1204,10 +1204,14 @@ bool DeviceInterface::migrateDataDeviceAddress(const QString &oldAddress, const 
         return false;
     }
 
-    m_conn->executeSql(KDbEscapedString("UPDATE mi_band_activity SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress)));
-    m_conn->executeSql(KDbEscapedString("UPDATE sports_data      SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress)));
-
-    return true;
+    KDbTransaction t = m_conn->beginTransaction();
+    KDbTransactionGuard tg(t);
+    bool ok = m_conn->executeSql(KDbEscapedString("UPDATE mi_band_activity SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress)));
+    ok = m_conn->executeSql(KDbEscapedString("UPDATE sports_data      SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress))) && ok;
+    if (ok) {
+        tg.commit();
+    }
+    return ok;
 }
 
 void DeviceInterface::refreshInformation()
