@@ -118,9 +118,6 @@ void DeviceInterface::connectToDevice()
 {
     qDebug() << Q_FUNC_INFO;;
 
-    //Connect was called from UI so enable auto reconnect
-    m_autoreconnect = true;
-
     auto config = AmazfishConfig::instance();
     QString pairedAddress = config->pairedAddress();
 
@@ -134,6 +131,9 @@ void DeviceInterface::connectToDevice()
     }
 
     if (!config->pairedAddress().isEmpty()) {
+        //Connect was called from UI so enable auto reconnect
+        m_autoreconnect = true;
+
         connectToDevice(config->pairedAddress());
     }
 }
@@ -176,7 +176,6 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
         m_device->pair();
-        m_autoreconnect = true;
         return "pairing";
     }
 
