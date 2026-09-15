@@ -148,7 +148,7 @@ void DeviceInterface::reconnectionTimer()
         return;
     }
 
-    if ((connectionState() != "authenticated" && m_autoreconnect) || connectionState() == "authfailed") {
+    if ((state != "authenticated" && m_autoreconnect) || state == "authfailed") {
         qDebug() << Q_FUNC_INFO << "Lost connection";
         disconnect();
         connectToDevice();
@@ -1191,7 +1191,7 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
     }
 }
 
-bool DeviceInterface::migrateDataDeviceAddress(const QString &oldAddress, const QString& newAddress)
+bool DeviceInterface::migrateDataDeviceAddress(const QString& oldAddress, const QString& newAddress)
 {
     qDebug() << Q_FUNC_INFO << oldAddress << newAddress;
 
