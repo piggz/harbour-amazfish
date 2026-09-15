@@ -128,10 +128,16 @@ void DeviceInterface::connectToDevice()
         //Migrate data to the new address format
         if (migrateDataDeviceAddress(pairedAddress, newAddress)) {
             config->setPairedAddress(newAddress);
+            pairedAddress = newAddress;
+        } else {
+            //Paired address required change but unable to migrate
+            //so cancel connection
+            pairedAddress = QString();
         }
+
     }
 
-    if (!config->pairedAddress().isEmpty()) {
+    if (!pairedAddress.isEmpty()) {
         //Connect was called from UI so enable auto reconnect
         m_autoreconnect = true;
         connectToDevice(config->pairedAddress());
@@ -163,7 +169,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
     if (m_deviceAddress.isEmpty()) {
         qDebug() << "Device is not available";
         message(tr("Device is not yet available"));
-        return QString("device not available");;
+        return QString("device not available");
     }
 
     if (m_device) {
@@ -209,6 +215,9 @@ void DeviceInterface::unpair()
         adapter.removeDevice(m_deviceAddress);
         delete m_device;
         m_device = nullptr;
+
+        m_autoreconnect = false;
+        m_adapterPath = QString();
     }
 }
 
@@ -1187,17 +1196,17 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
     }
 }
 
-bool DeviceInterface::migrateDataDeviceAddress(const QString &oldAdress, const QString &newAddress)
+bool DeviceInterface::migrateDataDeviceAddress(const QString &oldAddress, const QString &newAddress)
 {
-    qDebug() << Q_FUNC_INFO << oldAdress << newAddress;
+    qDebug() << Q_FUNC_INFO << oldAddress << newAddress;
 
     if (!m_conn || !m_conn->isDatabaseUsed()) {
         qWarning() << Q_FUNC_INFO << "no database, deferring address migration";
         return false;
     }
 
-    m_conn->executeSql(KDbEscapedString("UPDATE mi_band_activity SET device_id='%1' WHERE device_id='%2'").arg(qHash(newAddress)).arg(qHash(oldAdress)));
-    m_conn->executeSql(KDbEscapedString("UPDATE sports_data      SET device_id='%1' WHERE device_id='%2'").arg(qHash(newAddress)).arg(qHash(oldAdress)));
+    m_conn->executeSql(KDbEscapedString("UPDATE mi_band_activity SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress)));
+    m_conn->executeSql(KDbEscapedString("UPDATE sports_data      SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress)));
 
     return true;
 }
