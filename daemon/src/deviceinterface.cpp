@@ -135,7 +135,7 @@ void DeviceInterface::connectToDevice()
     if (!pairedAddress.isEmpty()) {
         // Connect was called from UI so enable auto reconnect
         m_autoreconnect = true;
-        connectToDevice(config->pairedAddress());
+        connectToDevice(pairedAddress);
     }
 }
 
