@@ -183,7 +183,7 @@ private:
     BackgroundActivity *m_backgroundActivity = nullptr;
 #endif
 
-    void migrateDataDeviceAddress(const QString &oldAdress, const QString &newAddress);
+    bool migrateDataDeviceAddress(const QString &oldAdress, const QString &newAddress);
 };
 
 #endif // BIPINTERFACE_H

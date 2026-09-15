@@ -126,8 +126,9 @@ void DeviceInterface::connectToDevice()
 
         QString newAddress = pairedAddress.right(17).replace("_", ":");
         //Migrate data to the new address format
-        migrateDataDeviceAddress(pairedAddress, newAddress);
-        config->setPairedAddress(newAddress);
+        if (migrateDataDeviceAddress(pairedAddress, newAddress)) {
+            config->setPairedAddress(newAddress);
+        }
     }
 
     if (!config->pairedAddress().isEmpty()) {
@@ -1186,12 +1187,19 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
     }
 }
 
-void DeviceInterface::migrateDataDeviceAddress(const QString &oldAdress, const QString &newAddress)
+bool DeviceInterface::migrateDataDeviceAddress(const QString &oldAdress, const QString &newAddress)
 {
     qDebug() << Q_FUNC_INFO << oldAdress << newAddress;
 
+    if (!m_conn || !m_conn->isDatabaseUsed()) {
+        qWarning() << Q_FUNC_INFO << "no database, deferring address migration";
+        return false;
+    }
+
     m_conn->executeSql(KDbEscapedString("UPDATE mi_band_activity SET device_id='%1' WHERE device_id='%2'").arg(qHash(newAddress)).arg(qHash(oldAdress)));
     m_conn->executeSql(KDbEscapedString("UPDATE sports_data      SET device_id='%1' WHERE device_id='%2'").arg(qHash(newAddress)).arg(qHash(oldAdress)));
+
+    return true;
 }
 
 void DeviceInterface::refreshInformation()
