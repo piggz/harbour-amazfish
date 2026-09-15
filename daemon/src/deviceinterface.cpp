@@ -786,7 +786,7 @@ QString DeviceInterface::devicePath(const QString &address)
     QString formattedAddress = address;
     formattedAddress.replace(":", "_");
 
-    if (!determineAdapterPath(address)){
+    if (!determineAdapterPath(formattedAddress)){
         qDebug() << "No device path found";
         return QString();
     }
