@@ -30,7 +30,6 @@ public:
     ~DaemonInterface();
 
     Q_INVOKABLE void connectToDevice();
-    Q_INVOKABLE void connectToDevice(const QString &address);
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
     Q_INVOKABLE bool supportsFeature(Amazfish::Feature f);
