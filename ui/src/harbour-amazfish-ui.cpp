@@ -15,6 +15,9 @@
 
 #include <QTranslator>
 #include <QLoggingCategory>
+#ifdef UUITK_EDITION
+#include <QFileInfo>
+#endif
 
 #include "datasource.h"
 #include "sportsdatamodel.h"
