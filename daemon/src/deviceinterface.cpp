@@ -158,6 +158,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
     if (m_deviceAddress.isEmpty()) {
         qDebug() << "Device is not available";
         message(tr("Device is not yet available"));
+        return QString("device not available");;
     }
 
     if (m_device) {
