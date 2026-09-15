@@ -127,13 +127,9 @@ void DeviceInterface::connectToDevice()
         // Migrate data to the new address format
         if (migrateDataDeviceAddress(pairedAddress, newAddress)) {
             config->setPairedAddress(newAddress);
-            pairedAddress = newAddress;
-        } else {
-            // Paired address required change but unable to migrate
-            // so cancel connection
-            pairedAddress = QString();
         }
-
+        //If migration fails, dont save the new address but connect anyway
+        pairedAddress = newAddress;
     }
 
     if (!pairedAddress.isEmpty()) {
