@@ -1,4 +1,3 @@
-#include "src/paimodel.h"
 #ifdef QT_QML_DEBUG
 #include <QtQuick>
 #endif
@@ -15,9 +14,11 @@
 #endif
 
 #include <QTranslator>
+#include <QLoggingCategory>
 
 #include "datasource.h"
 #include "sportsdatamodel.h"
+#include "paimodel.h"
 #include "sportsmetamodel.h"
 #include "daemoninterface.h"
 #include "amazfish.h"
