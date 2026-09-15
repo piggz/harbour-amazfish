@@ -88,7 +88,7 @@ DeviceInterface::DeviceInterface()
     m_reconnectTimer = new QTimer(this);
     m_reconnectTimer->setInterval(60000);
     connect(m_reconnectTimer, &QTimer::timeout, this, &DeviceInterface::reconnectionTimer);
-    m_reconnectTimer->start(); //Start timer to attempt to reconnect every 60 seconds
+    m_reconnectTimer->start(); // Start timer to attempt to reconnect every 60 seconds
 
     reconnectionTimer();
 }
@@ -107,8 +107,7 @@ void DeviceInterface::connectToDevice(const QString &address)
     if (m_device && !m_deviceAddress.isEmpty()) {
         m_device->setDevicePath(m_deviceAddress);
         m_device->connectToDevice();
-    }
-    else {
+    } else {
         qDebug() << Q_FUNC_INFO << ": device was not valid";
         message(tr("Device is not yet available"));
     }
@@ -116,29 +115,29 @@ void DeviceInterface::connectToDevice(const QString &address)
 
 void DeviceInterface::connectToDevice()
 {
-    qDebug() << Q_FUNC_INFO;;
+    qDebug() << Q_FUNC_INFO;
 
     auto config = AmazfishConfig::instance();
     QString pairedAddress = config->pairedAddress();
 
-    //Convert old format address to new
+    // Convert old format address to new
     if (pairedAddress.contains("/org/bluez/hci")) {
 
         QString newAddress = pairedAddress.right(17).replace("_", ":");
-        //Migrate data to the new address format
+        // Migrate data to the new address format
         if (migrateDataDeviceAddress(pairedAddress, newAddress)) {
             config->setPairedAddress(newAddress);
             pairedAddress = newAddress;
         } else {
-            //Paired address required change but unable to migrate
-            //so cancel connection
+            // Paired address required change but unable to migrate
+            // so cancel connection
             pairedAddress = QString();
         }
 
     }
 
     if (!pairedAddress.isEmpty()) {
-        //Connect was called from UI so enable auto reconnect
+        // Connect was called from UI so enable auto reconnect
         m_autoreconnect = true;
         connectToDevice(config->pairedAddress());
     }
@@ -794,14 +793,14 @@ void DeviceInterface::log_battery_level(int level) {
 
 }
 
-QString DeviceInterface::devicePath(const QString &address)
+QString DeviceInterface::devicePath(const QString& address)
 {
     qDebug() << Q_FUNC_INFO << address;
 
     QString formattedAddress = address;
     formattedAddress.replace(":", "_");
 
-    if (!determineAdapterPath(formattedAddress)){
+    if (!determineAdapterPath(formattedAddress)) {
         qDebug() << "No device path found";
         return QString();
     }
@@ -825,7 +824,7 @@ bool DeviceInterface::determineAdapterPath(const QString &address)
 
         if (bluezAdapter.deviceIsValid(deviceString)) {
             m_adapterPath = adapter["itemText"].toString();
-            AmazfishConfig::instance()->setLocalAdapter(m_adapterPath); //Used by PTJF Device for local server
+            AmazfishConfig::instance()->setLocalAdapter(m_adapterPath); // Used by PTJF Device for local server
             return true;
         }
     }
@@ -1196,7 +1195,7 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
     }
 }
 
-bool DeviceInterface::migrateDataDeviceAddress(const QString &oldAddress, const QString &newAddress)
+bool DeviceInterface::migrateDataDeviceAddress(const QString &oldAddress, const QString& newAddress)
 {
     qDebug() << Q_FUNC_INFO << oldAddress << newAddress;
 
