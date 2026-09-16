@@ -111,6 +111,8 @@ private:
     QTimer *m_findDeviceTimer = nullptr;
     QTimer *m_reconnectTimer = nullptr;
     bool m_autoreconnect = true;
+    bool m_allowDeviceNotAvailableMessage = true;
+
     void reconnectionTimer();
 
     Q_SLOT void onRefreshTimer();

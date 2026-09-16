@@ -109,7 +109,10 @@ void DeviceInterface::connectToDevice(const QString &address)
         m_device->connectToDevice();
     } else {
         qDebug() << Q_FUNC_INFO << ": device was not valid";
-        message(tr("Device is not yet available"));
+        if (m_allowDeviceNotAvailableMessage) {
+            message(tr("Device is not yet available"));
+            m_allowDeviceNotAvailableMessage = false;
+        }
     }
 }
 
@@ -715,6 +718,8 @@ void DeviceInterface::onConnectionStateChanged()
     qDebug() << Q_FUNC_INFO << connectionState();
 
     if (connectionState() == "authenticated") {
+        m_allowDeviceNotAvailableMessage = true;
+
         m_device->setDatabase(dbConnection());
         if (m_device) {
             m_dbusHRM->setDevice(m_device);
