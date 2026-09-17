@@ -1215,6 +1215,8 @@ bool DeviceInterface::migrateDataDeviceAddress(const QString& oldAddress, const 
     if (ok) {
         tg.commit();
     }
+
+    qDebug() << Q_FUNC_INFO << ok;
     return ok;
 }
 
