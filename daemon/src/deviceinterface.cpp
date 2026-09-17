@@ -719,11 +719,14 @@ void DeviceInterface::onConnectionStateChanged()
 {
     qDebug() << Q_FUNC_INFO << connectionState();
 
+    if (!m_device) {
+        return;
+    }
+
     if (connectionState() == "authenticated") {
         m_device->setDatabase(dbConnection());
-        if (m_device) {
-            m_dbusHRM->setDevice(m_device);
-        }
+        m_dbusHRM->setDevice(m_device);
+
         if (hrmService()) {
             m_dbusHRM->setHRMService(hrmService());
         }
@@ -749,7 +752,7 @@ void DeviceInterface::onConnectionStateChanged()
         //Terminate running operations
         m_device->abortOperations();
 
-        if (m_device && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
+        if (m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
                 && AmazfishConfig::instance()->appSilenceConnect()) {
             m_soundProfile.setProfile(watchfish::SoundProfile::General);
         }
