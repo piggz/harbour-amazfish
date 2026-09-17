@@ -47,7 +47,7 @@ public:
 
     Q_INVOKABLE QString pair(const QString &name, const QString &deviceType, const QString &address);
 
-    Q_INVOKABLE void connectToDevice();
+    Q_INVOKABLE void connectToDevice(bool userInitiated = true);
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
     Q_INVOKABLE QString connectionState() const;

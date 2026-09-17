@@ -116,12 +116,14 @@ void DeviceInterface::connectToDevice(const QString &address)
     }
 }
 
-void DeviceInterface::connectToDevice()
+void DeviceInterface::connectToDevice(bool userInitiated)
 {
     qDebug() << Q_FUNC_INFO;
 
     auto config = AmazfishConfig::instance();
     QString pairedAddress = config->pairedAddress();
+
+    m_allowDeviceNotAvailableMessage = userInitiated;
 
     // Convert old format address to new
     if (pairedAddress.contains("/org/bluez/hci")) {
@@ -154,7 +156,7 @@ void DeviceInterface::reconnectionTimer()
     if ((state != "authenticated" && m_autoreconnect) || state == "authfailed") {
         qDebug() << Q_FUNC_INFO << "Lost connection";
         disconnect();
-        connectToDevice();
+        connectToDevice(false);
     }
 }
 
@@ -718,8 +720,6 @@ void DeviceInterface::onConnectionStateChanged()
     qDebug() << Q_FUNC_INFO << connectionState();
 
     if (connectionState() == "authenticated") {
-        m_allowDeviceNotAvailableMessage = true;
-
         m_device->setDatabase(dbConnection());
         if (m_device) {
             m_dbusHRM->setDevice(m_device);

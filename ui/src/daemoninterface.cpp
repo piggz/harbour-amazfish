@@ -110,7 +110,7 @@ void DaemonInterface::connectToDevice()
     if (!iface || !iface->isValid()) {
         return;
     }
-    iface->call(QStringLiteral("connectToDevice"));
+    iface->call(QStringLiteral("connectToDevice"), true);
 }
 
 void DaemonInterface::disconnect()
