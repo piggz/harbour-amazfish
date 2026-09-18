@@ -719,44 +719,42 @@ void DeviceInterface::onConnectionStateChanged()
 {
     qDebug() << Q_FUNC_INFO << connectionState();
 
-    if (!m_device) {
-        return;
-    }
+    if (m_device) {
+        if (connectionState() == "authenticated") {
+            m_device->setDatabase(dbConnection());
+            m_dbusHRM->setDevice(m_device);
 
-    if (connectionState() == "authenticated") {
-        m_device->setDatabase(dbConnection());
-        m_dbusHRM->setDevice(m_device);
+            if (hrmService()) {
+                m_dbusHRM->setHRMService(hrmService());
+            }
+            if (AmazfishConfig::instance()->appNotifyConnect() && m_notificationBuffer.isEmpty()) {
+                Amazfish::WatchNotification n;
+                n.id = 0;
+                n.appId = "uk.co.piggz.amazfish";
+                n.appName = tr("Amazfish");
+                n.summary = tr("Connected");
+                n.body = tr("Phone and watch are connected");
+                sendAlert(n, true);
+            }
 
-        if (hrmService()) {
-            m_dbusHRM->setHRMService(hrmService());
+            if (m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
+                    && AmazfishConfig::instance()->appSilenceConnect()) {
+                m_soundProfile.setProfile(watchfish::SoundProfile::Silent);
+            }
+
+            sendBufferedNotifications();
+            updateCalendar();
+            m_connectionStateChangedCount++;
+        } else {
+            //Terminate running operations
+            m_device->abortOperations();
+
+            if (m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
+                    && AmazfishConfig::instance()->appSilenceConnect()) {
+                m_soundProfile.setProfile(watchfish::SoundProfile::General);
+            }
+
         }
-        if (AmazfishConfig::instance()->appNotifyConnect() && m_notificationBuffer.isEmpty()) {
-            Amazfish::WatchNotification n;
-            n.id = 0;
-            n.appId = "uk.co.piggz.amazfish";
-            n.appName = tr("Amazfish");
-            n.summary = tr("Connected");
-            n.body = tr("Phone and watch are connected");
-            sendAlert(n, true);
-        }
-
-        if (m_device && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
-                && AmazfishConfig::instance()->appSilenceConnect()) {
-            m_soundProfile.setProfile(watchfish::SoundProfile::Silent);
-        }
-
-        sendBufferedNotifications();
-        updateCalendar();
-        m_connectionStateChangedCount++;
-    } else {
-        //Terminate running operations
-        m_device->abortOperations();
-
-        if (m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
-                && AmazfishConfig::instance()->appSilenceConnect()) {
-            m_soundProfile.setProfile(watchfish::SoundProfile::General);
-        }
-
     }
     emit connectionStateChanged();
 }
