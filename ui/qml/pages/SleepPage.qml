@@ -11,7 +11,12 @@ PagePL {
     property alias day: nav.day
 
     pageMenu: PageMenuPL {
-        DownloadDataMenuItem{}
+        PageMenuItemPL {
+            iconSource: styler.iconDownloadData !== undefined ? styler.iconDownloadData : ""
+            text: qsTr("Download Data")
+            onClicked: DaemonInterfaceInstance.fetchData(Amazfish.TYPE_ACTIVITY | Amazfish.TYPE_SLEEP)
+            enabled: DaemonInterfaceInstance.connectionState === "authenticated"
+        }
     }
 
     Column {
