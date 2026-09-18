@@ -104,9 +104,7 @@ protected:
     bool m_pairing = false;
     bool m_ready = false;
     bool m_hasInitialised = false;
-    bool m_autoreconnect = true;
     QString m_connectionState;
-    QTimer *m_reconnectTimer;
 
     void setConnectionState(const QString &state);
     KDbConnection *m_conn = nullptr;
@@ -117,8 +115,6 @@ protected:
     virtual QBLEService* drv_createService(const QString &uuid, const QString &path) = 0;
 
 private:
-    void reconnectionTimer();
-    void devicePairFinished(const QString& status);
     QString m_pairedName;
 
 

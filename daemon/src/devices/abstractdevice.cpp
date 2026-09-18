@@ -11,10 +11,7 @@ AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBL
 
     setConnectionState("disconnected");
     m_pairedName = pairedName;
-    m_reconnectTimer = new QTimer(this);
-    m_reconnectTimer->setInterval(60000);
-    connect(m_reconnectTimer, &QTimer::timeout, this, &AbstractDevice::reconnectionTimer);
-    //connect(this, &QBLEDevice::pairFinished, this, &AbstractDevice::devicePairFinished);
+
     connect(this, &QBLEDevice::error, this, &AbstractDevice::deviceError);
 }
 
@@ -24,7 +21,7 @@ void AbstractDevice::pair()
 
     m_needsAuth = true;
     m_pairing = true;
-    m_autoreconnect = true;
+
     //disconnectFromDevice();
     setConnectionState("pairing");
 
@@ -37,40 +34,18 @@ void AbstractDevice::connectToDevice()
     qDebug() << Q_FUNC_INFO;
 
     m_pairing = false;
-    m_autoreconnect = true;
     QBLEDevice::disconnectFromDevice();
     setConnectionState("connecting");
     QBLEDevice::connectToDevice();
-    m_reconnectTimer->start(); //Start timer to attempt to reconnect every 60 seconds
 }
 
 void AbstractDevice::disconnectFromDevice()
 {
     qDebug() << Q_FUNC_INFO;
 
-    m_autoreconnect = false;
     setConnectionState("disconnected");
 
     QBLEDevice::disconnectFromDevice();
-}
-
-void AbstractDevice::reconnectionTimer()
-{
-    //qDebug() << Q_FUNC_INFO;
-
-    if ((!deviceProperty("Connected").toBool() && m_autoreconnect) || connectionState() == "authfailed") {
-        qDebug() << Q_FUNC_INFO << "Lost connection";
-        QBLEDevice::disconnectFromDevice();
-        QBLEDevice::connectToDevice();
-    }
-}
-
-void AbstractDevice::devicePairFinished(const QString &status)
-{
-    qDebug() << Q_FUNC_INFO;
-    if (status == "paired") {
-        setConnectionState("paired");
-    }
 }
 
 void AbstractDevice::parseServices()
