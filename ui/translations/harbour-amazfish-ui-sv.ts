@@ -2097,7 +2097,7 @@ Please consider making a donation if you use this functionality.</source>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="170"/>
         <source>Checking upload...</source>
-        <translation>Kontrollerar uppladdning...</translation>
+        <translation>Kontrollerar uppladdning…</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="268"/>
