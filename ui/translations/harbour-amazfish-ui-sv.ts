@@ -2117,7 +2117,7 @@ Please consider making a donation if you use this functionality.</source>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="233"/>
         <source>TCX uploaded...</source>
-        <translation>TCX uppladdat...</translation>
+        <translation>TCX uppladdat…</translation>
     </message>
 </context>
 <context>
