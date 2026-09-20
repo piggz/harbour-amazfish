@@ -107,7 +107,7 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="51"/>
         <source>BPM</source>
-        <translation type="unfinished">BPM</translation>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
@@ -406,7 +406,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="181"/>
         <source>Sleep</source>
-        <translation type="unfinished">Sömn</translation>
+        <translation>Sömn</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="234"/>
@@ -421,7 +421,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="275"/>
         <source>Stress</source>
-        <translation type="unfinished">Stress</translation>
+        <translation>Stress</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="290"/>
@@ -518,12 +518,12 @@
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
         <source>Name</source>
-        <translation type="unfinished">Namn</translation>
+        <translation>Namn</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
         <source>Description</source>
-        <translation type="unfinished">Beskrivning</translation>
+        <translation>Beskrivning</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
@@ -538,12 +538,12 @@
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
         <source>Private</source>
-        <translation type="unfinished">Privat</translation>
+        <translation>Privat</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
         <source>Upload</source>
-        <translation type="unfinished">Ladda upp</translation>
+        <translation>Ladda upp</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
@@ -563,7 +563,7 @@
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
         <source>Uploading data...</source>
-        <translation type="unfinished">Laddar upp data...</translation>
+        <translation>Laddar upp data…</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
@@ -578,7 +578,7 @@
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished">Aktivitetsuppladdning slutförd</translation>
+        <translation>Aktivitetsuppladdningen är klar</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
@@ -596,12 +596,12 @@
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Logout</source>
-        <translation type="unfinished">Logga ut</translation>
+        <translation>Logga ut</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Login</source>
-        <translation type="unfinished">Logga in</translation>
+        <translation>Logga in</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="70"/>
@@ -639,12 +639,12 @@
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="45"/>
         <source>Name</source>
-        <translation type="unfinished">Namn</translation>
+        <translation>Namn</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="49"/>
         <source>Description</source>
-        <translation type="unfinished">Beskrivning</translation>
+        <translation>Beskrivning</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="56"/>
@@ -659,27 +659,27 @@
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="69"/>
         <source>Private</source>
-        <translation type="unfinished">Privat</translation>
+        <translation>Privat</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="73"/>
         <source>Upload</source>
-        <translation type="unfinished">Ladda upp</translation>
+        <translation>Ladda upp</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="110"/>
         <source>Uploading data...</source>
-        <translation type="unfinished">Laddar upp data...</translation>
+        <translation>Laddar upp data…</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="125"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished">Aktivitetsuppladdning slutförd</translation>
+        <translation>Aktivitetsuppladdningen är klar</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="224"/>
         <source>An unknown error occurred</source>
-        <translation type="unfinished">Ett okänt fel inträffade</translation>
+        <translation>Ett okänt fel inträffade</translation>
     </message>
 </context>
 <context>
@@ -802,7 +802,7 @@
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation>PAI</translation>
     </message>
 </context>
 <context>
@@ -810,7 +810,7 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="9"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
@@ -843,12 +843,12 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation type="unfinished">Parkoppla enhet</translation>
+        <translation>Parkoppla enhet</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation type="unfinished">Inga enheter hittades</translation>
+        <translation>Inga enheter hittades</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
@@ -863,22 +863,22 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="231"/>
         <source>Stop scanning</source>
-        <translation type="unfinished">Stoppa sökning</translation>
+        <translation>Stoppa sökning</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Scan for devices</source>
-        <translation type="unfinished">Sök efter enheter</translation>
+        <translation>Sök efter enheter</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="246"/>
         <source>Scanning for devices…</source>
-        <translation type="unfinished">Söker efter enheter...</translation>
+        <translation>Söker efter enheter…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="248"/>
         <source>Pairing…</source>
-        <translation type="unfinished">Parkopplar...</translation>
+        <translation>Parkopplar…</translation>
     </message>
 </context>
 <context>
@@ -1381,7 +1381,7 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="96"/>
         <source>Sleep</source>
-        <translation type="unfinished">Sömn</translation>
+        <translation>Sömn</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="97"/>
@@ -1406,17 +1406,17 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="101"/>
         <source>Steps</source>
-        <translation type="unfinished">Steg</translation>
+        <translation>Steg</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="102"/>
         <source>Distance</source>
-        <translation type="unfinished">Distans</translation>
+        <translation>Distans</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="103"/>
         <source>Calories</source>
-        <translation type="unfinished">Kalorier</translation>
+        <translation>Kalorier</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="104"/>
@@ -1488,7 +1488,7 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="68"/>
         <source>Notifications</source>
-        <translation type="unfinished">Aviseringar</translation>
+        <translation>Aviseringar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="71"/>
@@ -1521,7 +1521,7 @@
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="9"/>
         <source>Save Settings</source>
-        <translation type="unfinished">Spara inställningar</translation>
+        <translation>Spara inställningar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="36"/>
@@ -1624,7 +1624,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="8"/>
         <source>User Settings</source>
-        <translation type="unfinished">Användarinställningar</translation>
+        <translation>Användarinställningar</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="88"/>
@@ -1978,7 +1978,7 @@
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <source>Steps</source>
-        <translation type="unfinished">Steg</translation>
+        <translation>Steg</translation>
     </message>
 </context>
 <context>
@@ -2019,7 +2019,7 @@ Please consider making a donation if you use this functionality.</source>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
         <source>Donate</source>
-        <translation type="unfinished">Donera</translation>
+        <translation>Donera</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
@@ -2081,7 +2081,7 @@ Please consider making a donation if you use this functionality.</source>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
         <source>Donate</source>
-        <translation type="unfinished">Donera</translation>
+        <translation>Donera</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="153"/>
@@ -2120,7 +2120,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/pages/StressDataPage.qml" line="9"/>
         <location filename="../qml/pages/StressDataPage.qml" line="76"/>
         <source>Stress</source>
-        <translation type="unfinished">Stress</translation>
+        <translation>Stress</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="25"/>
@@ -2141,7 +2141,7 @@ Please consider making a donation if you use this functionality.</source>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="107"/>
         <source>Relaxed</source>
-        <translation type="unfinished">Vila</translation>
+        <translation>Avslappnad</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="115"/>
@@ -2181,7 +2181,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="5"/>
         <location filename="../qml/components/Translation.js" line="5"/>
         <source>Activity</source>
-        <translation type="unfinished">Aktivitet</translation>
+        <translation>Aktivitet</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="6"/>
@@ -3885,13 +3885,13 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="303"/>
         <location filename="../qml/components/Translation.js" line="303"/>
         <source>Ascent</source>
-        <translation type="unfinished">Uppför</translation>
+        <translation>Stigning</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="304"/>
         <location filename="../qml/components/Translation.js" line="304"/>
         <source>Time Ascending</source>
-        <translation type="unfinished">Tid uppför</translation>
+        <translation>Tid vid stigning</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="305"/>
@@ -3909,13 +3909,13 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="307"/>
         <location filename="../qml/components/Translation.js" line="350"/>
         <source>Average Pace</source>
-        <translation type="unfinished">Tempo genomsnitt</translation>
+        <translation>Genomsnittligt tempo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="308"/>
         <location filename="../qml/components/Translation.js" line="308"/>
         <source>Average Lap Pace</source>
-        <translation type="unfinished">Genomsnitt varvtempo</translation>
+        <translation>Genomsnittligt varvtempo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="309"/>
@@ -3929,7 +3929,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="310"/>
         <location filename="../qml/components/Translation.js" line="355"/>
         <source>Average Stride</source>
-        <translation type="unfinished">Genomsnitt steg</translation>
+        <translation>Genomsnittlig steglängd</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="311"/>
@@ -3969,7 +3969,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="318"/>
         <location filename="../qml/components/Translation.js" line="319"/>
         <source>Calories</source>
-        <translation type="unfinished">Kalorier</translation>
+        <translation>Kalorier</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="320"/>
@@ -3981,19 +3981,19 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="321"/>
         <location filename="../qml/components/Translation.js" line="321"/>
         <source>Descent</source>
-        <translation type="unfinished">Utför</translation>
+        <translation>Nedstigning</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="322"/>
         <location filename="../qml/components/Translation.js" line="322"/>
         <source>Time Descending</source>
-        <translation type="unfinished">Tid utför</translation>
+        <translation>Tid vid nedstigning</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="323"/>
         <location filename="../qml/components/Translation.js" line="323"/>
         <source>Distance</source>
-        <translation type="unfinished">Distans</translation>
+        <translation>Distans</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="324"/>
@@ -4023,13 +4023,13 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="328"/>
         <location filename="../qml/components/Translation.js" line="328"/>
         <source>Laps</source>
-        <translation type="unfinished">Varv</translation>
+        <translation>Varv</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="329"/>
         <location filename="../qml/components/Translation.js" line="329"/>
         <source>Max Altitude</source>
-        <translation type="unfinished">Max höjd</translation>
+        <translation>Maximal höjd</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="331"/>
@@ -4049,25 +4049,25 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="334"/>
         <location filename="../qml/components/Translation.js" line="334"/>
         <source>Max Latitude</source>
-        <translation type="unfinished">Max latitud</translation>
+        <translation>Maximal latitud</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="335"/>
         <location filename="../qml/components/Translation.js" line="335"/>
         <source>Max Longitude</source>
-        <translation type="unfinished">Max longitud</translation>
+        <translation>Maximal longitud</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="336"/>
         <location filename="../qml/components/Translation.js" line="336"/>
         <source>Max Pace</source>
-        <translation type="unfinished">Max tempo</translation>
+        <translation>Högsta tempo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="337"/>
         <location filename="../qml/components/Translation.js" line="337"/>
         <source>Max Speed</source>
-        <translation type="unfinished">Max hastighet</translation>
+        <translation>Högsta hastighet</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="338"/>
@@ -4079,7 +4079,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="339"/>
         <location filename="../qml/components/Translation.js" line="339"/>
         <source>Min Altitude</source>
-        <translation type="unfinished">Min höjd</translation>
+        <translation>Minimal höjd</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="340"/>
@@ -4091,19 +4091,19 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="341"/>
         <location filename="../qml/components/Translation.js" line="341"/>
         <source>Min Latitude</source>
-        <translation type="unfinished">Min latitud</translation>
+        <translation>Minimal latitud</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="342"/>
         <location filename="../qml/components/Translation.js" line="342"/>
         <source>Min Longitude</source>
-        <translation type="unfinished">Min longitud</translation>
+        <translation>Minimal longitud</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="343"/>
         <location filename="../qml/components/Translation.js" line="343"/>
         <source>Min Pace</source>
-        <translation type="unfinished">Min tempo</translation>
+        <translation>Lägsta tempo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="344"/>
@@ -4157,7 +4157,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="353"/>
         <location filename="../qml/components/Translation.js" line="353"/>
         <source>Steps</source>
-        <translation type="unfinished">Steg</translation>
+        <translation>Steg</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="314"/>
@@ -4179,7 +4179,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="357"/>
         <location filename="../qml/components/Translation.js" line="357"/>
         <source>Strokes</source>
-        <translation type="unfinished">Slag</translation>
+        <translation>Slag</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="358"/>
@@ -4215,13 +4215,13 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="364"/>
         <location filename="../qml/components/Translation.js" line="364"/>
         <source>Swim Style</source>
-        <translation type="unfinished">Simstil</translation>
+        <translation>Simstil</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="365"/>
         <location filename="../qml/components/Translation.js" line="365"/>
         <source>SWOLF Index</source>
-        <translation type="unfinished">SWOLF Index</translation>
+        <translation>SWOLF-index</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="366"/>
@@ -4239,7 +4239,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="368"/>
         <location filename="../qml/components/Translation.js" line="368"/>
         <source>Total Stride</source>
-        <translation type="unfinished">Totalt steg</translation>
+        <translation>Total steglängd</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="369"/>
@@ -4257,7 +4257,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="381"/>
         <location filename="../qml/components/Translation.js" line="381"/>
         <source>bpm</source>
-        <translation type="unfinished">bpm</translation>
+        <translation>bpm</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="382"/>
@@ -4265,13 +4265,13 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="382"/>
         <location filename="../qml/components/Translation.js" line="383"/>
         <source>kcal</source>
-        <translation type="unfinished">kcal</translation>
+        <translation>kcal</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="384"/>
         <location filename="../qml/components/Translation.js" line="384"/>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="385"/>
@@ -4333,7 +4333,7 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="394"/>
         <location filename="../qml/components/Translation.js" line="396"/>
         <source>steps</source>
-        <translation type="unfinished">steg</translation>
+        <translation>steg</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="395"/>
@@ -4345,13 +4345,13 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="397"/>
         <location filename="../qml/components/Translation.js" line="397"/>
         <source>strokes</source>
-        <translation type="unfinished">slag</translation>
+        <translation>slag</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="398"/>
         <location filename="../qml/components/Translation.js" line="398"/>
         <source>strokes/s</source>
-        <translation type="unfinished">slag/s</translation>
+        <translation>slag/s</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="399"/>
