@@ -55,7 +55,7 @@ public slots:
 private:
     void parseCurrentTimeRequest(const QByteArray& data);
     void parseDeviceInformation(const QByteArray& data);
-    void parseConfiguration(const QByteArray& data);
+    void parseConfiguration(const QByteArray& data, quint16 msgId);
     void parseNotificationControl(const QByteArray& data);
     void parseNotificationSubscription(const QByteArray& data);
     void parseSynchronization(const QByteArray& data);
@@ -84,17 +84,17 @@ protected:
 
 class GfdiMessageGenerator {
 public:
-    static Result<QByteArray> ackResponse(quint16 messageId);
-    static Result<QByteArray> weatherResponse(const WeatherRequestMessage& request);
-    static Result<QByteArray> fitDefinitionMessage(const QByteArray& fitDefinitionData);
-    static Result<QByteArray> fitDataMessage(const QByteArray& fitData);
-    static Result<QByteArray> supportedFileTypesRequest();
-    static Result<QByteArray> deviceSettings();
+    static QByteArray ackResponse(quint16 messageId);
+    static QByteArray weatherResponse(const WeatherRequestMessage& request);
+    static QByteArray fitDefinitionMessage(const QByteArray& fitDefinitionData);
+    static QByteArray fitDataMessage(const QByteArray& fitData);
+    static QByteArray supportedFileTypesRequest();
+    static QByteArray deviceSettings();
 
-    static Result<QByteArray> systemEvent(quint8 eventType, quint8 value);
-    static Result<QByteArray> protobufBatteryStatusRequest(quint16 requestId);
+    static QByteArray systemEvent(quint8 eventType, quint8 value);
+    static QByteArray protobufBatteryStatusRequest(quint16 requestId);
 
-    static Result<QByteArray> notificationData(quint32 notificationId,
+    static QByteArray notificationData(quint32 notificationId,
                                                      const QVector<QPair<quint8, quint16>>& requestedAttributes,
                                                      const QString& title,
                                                      const QString& body,
@@ -102,7 +102,7 @@ public:
                                                      const QString& timestamp,
                                                      const QString& appId);
 
-    static Result<QByteArray> notificationDataWithActions(quint32 notificationId,
+    static QByteArray notificationDataWithActions(quint32 notificationId,
                                                                 const QVector<QPair<quint8, quint16>>& requestedAttributes,
                                                                 const QString& title,
                                                                 const QString& body,

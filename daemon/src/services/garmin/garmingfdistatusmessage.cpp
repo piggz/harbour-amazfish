@@ -36,10 +36,13 @@ void GarminGfdiStatusMessage::parse(const QByteArray& data)
     QByteArray response_payload;
     QByteArray gfdi;
 
+    bool handled = false;
+
     switch (static_cast<MessageId> (originalMessageType)) {
     case MessageId::AuthNegotiation:
         qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
         handleAuthNegotiation(data);
+        handled=true;
         break;
         /*
     case MessageId::Configuration:
@@ -106,6 +109,7 @@ void GarminGfdiStatusMessage::parse(const QByteArray& data)
         */
     case MessageId::NotificationData:
         qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
+        handled=true;
         handleNotificationData(data);
         break;
         /*
@@ -120,11 +124,13 @@ void GarminGfdiStatusMessage::parse(const QByteArray& data)
 
     case MessageId::ProtobufRequest:
         qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
+        handled=true;
         handleProtobufResponse(data);
         break;
 
     case MessageId::ProtobufResponse:
         qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
+        handled=true;
         handleProtobufResponse(data);
         break;
     /*
@@ -137,6 +143,8 @@ void GarminGfdiStatusMessage::parse(const QByteArray& data)
         break;
     case MessageId::SupportedFileTypesRequest:
         qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
+        handled=true;
+        handleSupportedFileTypesRequest(data);
         break;
         /*
     case MessageId::Synchronization:
@@ -165,7 +173,26 @@ void GarminGfdiStatusMessage::parse(const QByteArray& data)
             qDebug() << Q_FUNC_INFO << "Garmin: Got unexpected result for message type " << originalMessageType << "," << messageIdToString(originalMessageType).value() << ": " << statusName(status);
         }
     }
+    if (!handled) {
+        //send generic Ack
+        QByteArray resp = GfdiMessageGenerator::ackResponse(originalMessageType);
+        mCommunicator->sendMessage("STATUS ACK",resp);
+    }
 
+}
+
+void GarminGfdiStatusMessage::handleSupportedFileTypesRequest(const QByteArray &data) {
+    QByteArray resp;
+
+    Status status= static_cast<Status>(data[2]);
+
+    if (status == Status::Ack) {
+        return;
+    }
+    //Todo: Get the list of supported files
+    // For now just ack the message
+    resp=GfdiMessageGenerator::ackResponse((quint16)MessageId::SupportedFileTypesRequest);
+    mCommunicator->sendMessage("SUPPPORTED FILE TYPE ACK", resp);
 }
 
 void GarminGfdiStatusMessage::handleAuthNegotiation(const QByteArray &data) {

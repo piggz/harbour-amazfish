@@ -33,8 +33,7 @@ class ProtobufHandler;
 // Constants
 // =============================================================================
 static constexpr const char* BASE_UUID_FORMAT = "6A4E%04X-667B-11E3-949A-0800200C9A66";
-static constexpr quint64 AMAZFISH_CLIENT_ID = 3; // use 3 to not clash with Gadgetbridge or Garmin Connect
-
+static constexpr quint64 AMAZFISH_CLIENT_ID = 2;
 struct deviceInfo {
 
     QString softwareRevision;
@@ -56,12 +55,6 @@ struct DeviceInformationMessage {
     QString deviceModel;
 };
 
-// Writer for sending messages to a service ->needed? Or use QBLECharacteristic?
-class ServiceWriter {
-public:
-    virtual ~ServiceWriter() = default;
-    void write(const QString& taskName, const QByteArray& data);
-};
 
 
 
@@ -75,6 +68,9 @@ public:
 struct CommunicatorState {
     QSharedPointer<QBLECharacteristic> characteristicSend;
     QSharedPointer<QBLECharacteristic> characteristicReceive;
+
+    QString UUIDSend;
+    QString UUIDReceive;
 
     QMap<quint8, Service> serviceByHandle;
     QMap<Service, quint8> handleByService;
@@ -104,11 +100,17 @@ public:
     }
     explicit CommunicatorV2(const QString &path, QObject* parent=nullptr);
 
-    static const char* BASE_UUID;
-    static const char* UUID_SERVICE_GARMIN_ML_GFDI;
+
+    static const char* BASE_UUID;//                   = "6a4e%1-667b-11e3-949a-0800200c9a66";
+    static const char* UUID_SERVICE_GARMIN_ML_GFDI;//  = "6a4e2800-667b-11e3-949a-0800200c9a66";
+    static const char* UUID_SERVICE_GARMIN_V0_SEND;// = "df334c80-e6a7-d082-274d-78fc66f85e16";
+    static const char* UUID_SERVICE_GARMIN_V0_RECV;// = "4acbcd28-7425-868e-f447-915c8f00d0cb";
+    static const char* UUID_SERVICE_GARMIN_V1_SEND;// = "6a4e4c80-667b-11e3-949a-0800200c9a66";
+    static const char* UUID_SERVICE_GARMIN_V1_RECV;// = "6a4ecd28-667b-11e3-949a-0800200c9a66";
 
     static QString baseUuid(quint16 shortId); // helper for BASE_UUID_FORMAT
 
+    void setStatus(const QString &status);
     // set_message_callback
     void setMessageCallback(QSharedPointer<GfdiMessageCallback> cb);
 
@@ -128,6 +130,9 @@ public:
     bool initializeDevice();
 
     //  send_message
+    void sendRawBytes(const QString &label, const QByteArray &bytes);
+    void processSendQueue();
+
     bool sendMessage(const QString& taskName, const QByteArray& message);
 
     //  handle_decoded_message_async
@@ -155,7 +160,6 @@ public:
     void onSynchronizationReceived(const SynchronizationMessage& msg);
     void onFilterStatusReceived(const FilterStatusMessage& msg);
     void onWeatherRequestReceived(const WeatherRequestMessage& msg);
-    void onUnknownMessageReceived(const UnknownMessage &msg);
     void onProtobufMessageReceived(const QByteArray& data);
     void onProtobufStatusMessageReceived(const QByteArray& data);
 
@@ -169,8 +173,11 @@ public:
     quint8 spo2() {return mSpo2;};
     struct deviceInfo deviceInfo() {return mDeviceInfo;};
     quint8 batteryLevel() {return mBatteryLevel;};
+    bool isConnected() {return mConnected;};
+    bool handshakeComplete() {return !isFirstConnect;};
 
 signals:
+    void statusChanged();
     void logDebug(const QString& msg);
     void logInfo(const QString& msg);
     void logWarn(const QString& msg);
@@ -207,13 +214,21 @@ private:
     void processCloseHandleResp(const QByteArray& payload);
     void processCloseAllResp();
 
-    //  handle_decoded_message
+    //handle non Mlr Messages
+    void handleNonMlrMessage(const QByteArray& data);
+
+    //handle non reliable GFDI Messages
+    void handleIncomingGfdiMessage(const QByteArray& data);
+    //  handle MLR decoded_message
     void handleDecodedMessage(const QByteArray& decodedWithHandle);
 
     // create messages
     QByteArray createCloseAllServicesMessage() const;
     QByteArray createRegisterServiceMessage(Service service, bool reliable) const;
     QByteArray createCloseServiceMessage(Service service, quint8 handle) const;
+
+    // cleanup
+    void cleanup();
 
     quint64 nextCookie();
 
@@ -226,6 +241,7 @@ private:
     quint8 mHRV=0;
     quint8 mSpo2=0;
     quint8 mBatteryLevel;
+
 
     struct deviceInfo mDeviceInfo;
 
@@ -241,7 +257,14 @@ private:
     QString m_Path;
     QObject *m_device = nullptr;
     bool isFirstConnect=true;
+    bool mConnected=false;
+    bool mServicesResolved = false;
+    bool mIsMlProtocol = false;
+    bool mIsReliable = false;
+    QString mStatus;
     QTimer* mBatteryTimer;
+    QQueue<QPair<QByteArray, QString>> mSendQueue;
+    bool  mSendInProgress = false;
 };
 
 

@@ -12,7 +12,7 @@ void CobsCoDec::reset()
 void CobsCoDec::feed(const QByteArray &data)
 {
     if (mBuffer.size() + data.size() > MAX_BUFFER_SIZE) {
-        qWarning() << "COBS buffer overflow, resetting";
+        qDebug() << Q_FUNC_INFO << "COBS buffer overflow, resetting";
         mBuffer.clear();
         emit frameError(QStringLiteral("Buffer overflow"));
     }
@@ -70,6 +70,7 @@ QByteArray CobsCoDec::encode(const QByteArray &data)
 
 void CobsCoDec::decode()
 {
+
     // Need at least: leading 0x00 + one code byte + trailing 0x00
     if (mBuffer.size() < 4)
         return;
@@ -78,7 +79,7 @@ void CobsCoDec::decode()
         return; // no complete frame yet
 
     if ((unsigned char)mBuffer.at(0) != 0x00) {
-        qWarning() << "Garmin: COBS frame missing leading 0x00, discarding" << mBuffer.size() << "bytes";
+        qDebug() << Q_FUNC_INFO << "Garmin: COBS frame missing leading 0x00, discarding" << mBuffer.size() << "bytes";
         emit frameError(QStringLiteral("Missing leading 0x00"));
         mBuffer.clear();
         return;
@@ -99,7 +100,7 @@ void CobsCoDec::decode()
 
         int payloadSize = code - 1;
         if (pos + 1 + payloadSize > end) {
-            qWarning() << "COBS truncated frame, discarding";
+            qDebug() << Q_FUNC_INFO << "COBS truncated frame, discarding";
             emit frameError(QStringLiteral("Truncated frame"));
             mBuffer.clear();
             return;

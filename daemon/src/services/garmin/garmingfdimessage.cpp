@@ -14,6 +14,8 @@
 #include "garminprotobufmessage.h"
 #include "garminauthnegotiationmessage.h"
 
+
+
 Result<QString> GarminGfdiMessage::readLengthPrefixedString(const QByteArray& data, int& consumedBytes)
 {
     consumedBytes = 0;
@@ -57,23 +59,13 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
 
     qDebug() << Q_FUNC_INFO << "Garmin: parsing GFDI Message " << data.toHex();
 
-    if (data.size() < 6) {
-        return;// Result<GfdiMessage>::err(GarminError::invalidMessage(QStringLiteral("Message too short")));
-    }
+    int offset = 0;
 
-    int offset = 1;
-    /*
-    const quint16 declaredLen = le16(data);
-    if (declaredLen != data.size())    {
-        qDebug() << Q_FUNC_INFO << "Garmin: GFDI Message length mismatch! " << data.toHex();
-        return;
-    }
-   */
     // Read message ID (2 bytes, little-endian)
     quint16 rawId = le16(data.constData() + offset);
     offset += 2;
 
-    qDebug() << Q_FUNC_INFO << "Garmin: raw msgid is " << rawId;
+    //qDebug() << Q_FUNC_INFO << "Garmin: raw msgid is " << rawId;
 
 
     // Check for sequence number (bit 15 set)
@@ -85,22 +77,49 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
         msgId = (msgId & 0xFF) + 5000;
     }
 
-    qDebug() << Q_FUNC_INFO << "Garmin:  msgid is " << msgId;
+    qDebug() << Q_FUNC_INFO << "Garmin: recieved GFDI message " << messageIdToString(msgId)->data();
 
 
     const auto mid = messageIdFromU16(msgId);
     if (!mid.has_value()) {
         qDebug() << Q_FUNC_INFO << "Garmin: Unknown GFDI message: " << msgId;
+        // We have to ack the mesage as unsupported
+        parseUnknownMessage(msgId, data.mid(offset));
         return;
     }
 
-    qDebug() << Q_FUNC_INFO << "Garmin:  GFDI message: " << messageIdToString(msgId).value();
+    // Check if message is Response
+    if (*mid == MessageId::Response)
+    {
+        // Check if this is a filter status response - special-case
+
+        if (offset + 2 < data.size()) {
+            const quint16 orig = le16(data.constData() + offset);
+            if (orig == 5007) {
+                parseFilterStatus(data.mid(offset));
+                return;
+            }
+        }
+
+        parseResponse(data.mid(offset));
+        return;
+    }
+
+    // Ack message
+    /*
+    QByteArray ackData = GfdiMessageGenerator::ackResponse(msgId);
+    mCommunicator->sendMessage("ACK",ackData);
+    */
+
+    // Now handle packet
+    qDebug() << Q_FUNC_INFO << "Garmin:  Received GFDI message: " << messageIdToString(msgId).value();
     switch (*mid) {
     case MessageId::DeviceInformation:
         parseDeviceInformation(data.mid(offset));
         return;
     case MessageId::Configuration:
-        return parseConfiguration(data.mid(offset));
+        parseConfiguration(data.mid(offset),msgId);
+        return;
     case MessageId::CurrentTimeRequest:
          parseCurrentTimeRequest(data.mid(offset));
          return;
@@ -110,34 +129,30 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
     case MessageId::NotificationSubscription:
         parseNotificationSubscription(data.mid(offset));
         return;
+        /*
     case MessageId::Synchronization:
         parseSynchronization(data.mid(offset));
         return;
     case MessageId::WeatherRequest:
         parseWeatherRequest(data.mid(offset));
         return;
+
     case  MessageId::ProtobufRequest:
         parseProtobufRequest(data.mid(offset));
         return;
+    */
     case  MessageId::ProtobufResponse:
         parseProtobufResponse(data.mid(offset));
         return;
     case MessageId::AuthNegotiation:
         parseAuthNegotiation(data.mid(offset));
-    case MessageId::Response: {
-        // Check if this is a filter status response - special-case
-        if (offset + 2 < data.size()) {
-            const quint16 orig = le16(data.constData() + offset);
-            if (orig == 5007) {
-                parseFilterStatus(data.mid(offset));
-                return;
-            }
-        }
-        parseResponse(data.mid(offset));
         return;
-    }
+
     default:
-        parseUnknownMessage(msgId, data.mid(offset));
+        // Send simple Ack
+        QByteArray data = GfdiMessageGenerator::ackResponse(msgId);
+        mCommunicator->sendMessage("ACK",data);
+
     }
 }
 
@@ -156,16 +171,19 @@ void GarminGfdiMessage::parseDeviceInformation(const QByteArray& data)
     mesg->parse(data);
 }
 
-void GarminGfdiMessage::parseConfiguration(const QByteArray& data)
+void GarminGfdiMessage::parseConfiguration(const QByteArray& data, quint16 msgId)
 {
     qDebug() << Q_FUNC_INFO;
+    //This type needs Ack first as response is new message (special case)
+    QByteArray ackData = GfdiMessageGenerator::ackResponse(msgId);
+    mCommunicator->sendMessage("ACK",ackData);
     GarminConfigurationMessage* mesg = new GarminConfigurationMessage(mCommunicator);
     mesg->parse(data);
 }
 
 void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO <<"Garmin: handling NOTIFICATION CONTROL";
     GarminNotificationControlMessage* mesg = new GarminNotificationControlMessage(mCommunicator);
     mesg->parse(data);
 }
@@ -223,15 +241,15 @@ void GarminGfdiMessage::parseProtobufRequest(const QByteArray &data)
 void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing unknown message ";;
-
-    UnknownMessage msg;
-    msg.messageId = msgId;
-    msg.data=data;
-
-    if (mCommunicator) mCommunicator->onUnknownMessageReceived(msg);
+    // Build packet and send back to watch
+    QByteArray payload;
+    writeU16le(payload, msgId);
+    payload.append(char(quint8(Status::Unsupported)));
+    mCommunicator->sendMessage("UNSUPPORTED_MESSAGE",wrapInGfdiEnvelope(MessageId::Response,payload));
 }
 
 void GarminGfdiMessage::parseAuthNegotiation(const QByteArray &data) {
+    qDebug() << Q_FUNC_INFO << "Garmin: Received Authentication request" << data.toHex();
     GarminAuthNegotiationMessage* msg = new GarminAuthNegotiationMessage(mCommunicator);
     msg->parse(data);
 }
@@ -278,25 +296,15 @@ QByteArray GfdiMessageGenerator::truncateUtf8Bytes(const QString& s, int maxByte
 
 
 
-Result<QByteArray> GfdiMessageGenerator::ackResponse(quint16 messageId)
+QByteArray GfdiMessageGenerator::ackResponse(quint16 messageId)
 {
     QByteArray r;
-    // Packet size
-    writeU16le(r, 9);        // fixed packet size
-    // Message ID: RESPONSE (5000)
-    writeU16le(r, 5000);
-    // Original message ID
     writeU16le(r, messageId);
-    // Status: ACK
     r.append(char(quint8(Status::Ack)));
-
-    // Add checksum
-    const quint16 crc = computeCrc16(r);
-    writeU16le(r, crc);
-    return Result<QByteArray>::isOk(r);
+    return wrapInGfdiEnvelope(MessageId::Response,r);
 }
 
-Result<QByteArray> GfdiMessageGenerator::weatherResponse(const WeatherRequestMessage&)
+QByteArray GfdiMessageGenerator::weatherResponse(const WeatherRequestMessage&)
 {
     // Generate a weather response ACK
     //
@@ -307,26 +315,13 @@ Result<QByteArray> GfdiMessageGenerator::weatherResponse(const WeatherRequestMes
     // * `WeatherRequestMessage` - The incoming WeatherRequestMessage
 
     QByteArray r;
-    // Packet size placeholder
-    r.append(char(0)); r.append(char(0));
-    // Message ID: RESPONSE (5000)
-    writeU16le(r, 5000);
+
     // Original message ID: WEATHER_REQUEST (5014)
-    writeU16le(r, 5014);
-    // Status: ACK
-    r.append(char(quint8(Status::Ack)));
-
-    // Fill in packet size TODO: Shouldn't this be +2?
-    const quint16 packetSize = quint16(r.size() - 2);
-    overwriteU16le(r, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeCrc16(r);
-    writeU16le(r, crc);
-    return Result<QByteArray>::isOk(r);
+    QByteArray data = GfdiMessageGenerator::ackResponse(5014);
+    return data;
 }
 
-Result<QByteArray> GfdiMessageGenerator::fitDefinitionMessage(const QByteArray& fitDefinitionData)
+QByteArray GfdiMessageGenerator::fitDefinitionMessage(const QByteArray& fitDefinitionData)
 {
     // Generate a FIT Definition message (5011)
     //
@@ -336,24 +331,12 @@ Result<QByteArray> GfdiMessageGenerator::fitDefinitionMessage(const QByteArray& 
     // * `fit_definition_data` - The encoded FIT definition message bytes
     //
     QByteArray m;
-    // Packet size placeholder
-    m.append(char(0)); m.append(char(0));
-    // Message ID: FIT_DEFINITION (5011)
-    writeU16le(m, 5011);
     // FIT definition payload
     m.append(fitDefinitionData);
-
-    // Fill in packet size
-    const quint16 packetSize = quint16(m.size() - 2);
-    overwriteU16le(m, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeCrc16(m);
-    writeU16le(m, crc);
-    return Result<QByteArray>::isOk(m);
+    return wrapInGfdiEnvelope(MessageId::FitDefinition, m);
 }
 
-Result<QByteArray> GfdiMessageGenerator::fitDataMessage(const QByteArray& fitData)
+QByteArray GfdiMessageGenerator::fitDataMessage(const QByteArray& fitData)
 {
     // Generate a FIT Data message (5012)
     //
@@ -363,25 +346,14 @@ Result<QByteArray> GfdiMessageGenerator::fitDataMessage(const QByteArray& fitDat
     // * `fitData` - The encoded FIT data message bytes
     QByteArray m;
     // Packet size placeholder
-    m.append(char(0)); m.append(char(0));
-    // Message ID: FIT_DATA (5012)
-    writeU16le(m, 5012);
     // FIT data payload
     m.append(fitData);
-
-    // Fill in packet size
-    const quint16 packetSize = quint16(m.size() - 2);
-    overwriteU16le(m, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeCrc16(m);
-    writeU16le(m, crc);
-    return Result<QByteArray>::isOk(m);
+    return wrapInGfdiEnvelope(MessageId::FitData,m);
 }
 
 
 
-Result<QByteArray> GfdiMessageGenerator::supportedFileTypesRequest()
+QByteArray GfdiMessageGenerator::supportedFileTypesRequest()
 {
     // Generate a SupportedFileTypesRequest message
     //
@@ -390,22 +362,11 @@ Result<QByteArray> GfdiMessageGenerator::supportedFileTypesRequest()
     //
     // Message format: Just the message ID, no payload
     QByteArray m;
-    // Packet size placeholder
-    m.append(char(0)); m.append(char(0));
-    // Message ID: SUPPORTED_FILE_TYPES_REQUEST (5031)
-    writeU16le(m, 5031);
 
-    // Fill in packet size
-    const quint16 packetSize = quint16(m.size() + 2);
-    overwriteU16le(m, 0, packetSize);
-
-     // Add checksum
-    const quint16 crc = computeCrc16(m);
-    writeU16le(m, crc);
-    return Result<QByteArray>::isOk(m);
+    return wrapInGfdiEnvelope(MessageId::SupportedFileTypesRequest,m);
 }
 
-Result<QByteArray> GfdiMessageGenerator::deviceSettings()
+QByteArray GfdiMessageGenerator::deviceSettings()
 {
     // Matches GarminSupport.sendDeviceSettings(): auto-upload + weather
     // conditions enabled, weather alerts disabled. Each setting is
@@ -421,10 +382,10 @@ Result<QByteArray> GfdiMessageGenerator::deviceSettings()
     payload.append(char(quint8(GfdiDeviceSetting::WeatherAlertsEnabled)));
     payload.append(char(1));
     payload.append(char(0));
-    return Result<QByteArray>::isOk(wrapInGfdiEnvelope(MessageId::DeviceSettings, payload));
+    return wrapInGfdiEnvelope(MessageId::DeviceSettings, payload);
 }
 
-Result<QByteArray> GfdiMessageGenerator::systemEvent(quint8 eventType, quint8 value)
+QByteArray GfdiMessageGenerator::systemEvent(quint8 eventType, quint8 value)
 {
     // Generate a SystemEvent message
     //
@@ -453,28 +414,15 @@ Result<QByteArray> GfdiMessageGenerator::systemEvent(quint8 eventType, quint8 va
     // - 15: SETUP_WIZARD_SKIPPED
     // - 16: TIME_UPDATED
     QByteArray m;
-    // Packet size placeholder
-    m.append(char(0)); m.append(char(0));
-    // Message ID: SYSTEM_EVENT (5030)
-    writeU16le(m, 5030);
-    // Event type
+
     m.append(char(eventType));
-    // Value
     m.append(char(value));
 
-    // Fill in packet size
-    const quint16 packetSize = quint16(m.size() + 2);
-    overwriteU16le(m, 0, packetSize);
-
-    // Add checksum
-    const quint16 crc = computeCrc16(m);
-    writeU16le(m, crc);
-    return Result<QByteArray>::isOk(m);
+    return wrapInGfdiEnvelope(MessageId::SystemEvent, m);
 }
 
 
-// Convenience wrapper
-Result<QByteArray> GfdiMessageGenerator::notificationData(
+QByteArray GfdiMessageGenerator::notificationData(
 
     quint32 notificationId,
     const QVector<QPair<quint8, quint16>>& requestedAttributes,
@@ -497,7 +445,7 @@ Result<QByteArray> GfdiMessageGenerator::notificationData(
     return notificationDataWithActions(notificationId, requestedAttributes, title, body, sender, timestamp, appId, true);
 }
 
-Result<QByteArray> GfdiMessageGenerator::notificationDataWithActions(
+QByteArray GfdiMessageGenerator::notificationDataWithActions(
     quint32 notificationId,
     const QVector<QPair<quint8, quint16>>& requestedAttributes,
     const QString& title, const QString& body, const QString& sender,
@@ -533,7 +481,7 @@ Result<QByteArray> GfdiMessageGenerator::notificationDataWithActions(
         if (attrId == 127) {
             // ACTIONS
             if (hasDismissAction) {
-                // Encode actions list with DISMISS_NOTIFICATION action (code 98)
+                // Encode actions list with DISMISS_NOTIFICATION actSSSion (code 98)
                 // Format: [count(1), action_code(1), icon_position(1), title_len(1), title...]
                 // DISMISS_NOTIFICATION = 98, LEFT position = 0x04 (bit 2), title = "Dismiss"
                 // Icon positions are bit vectors: BOTTOM=0x01, RIGHT=0x02, LEFT=0x04
@@ -602,10 +550,7 @@ Result<QByteArray> GfdiMessageGenerator::notificationDataWithActions(
 
     // Build the NotificationData message
     QByteArray m;
-    // Packet size placeholder
-    m.append(char(0)); m.append(char(0));
-    // Message ID: NOTIFICATION_DATA (5035)
-    writeU16le(m, 5035);
+
     // Message size (total payload size)
     writeU16le(m, quint16(payload.size()));
 
@@ -616,12 +561,6 @@ Result<QByteArray> GfdiMessageGenerator::notificationDataWithActions(
     // Payload
     m.append(payload);
 
-    // Fill in packet size
-    const quint16 packetSize = quint16(m.size() + 2);
-    overwriteU16le(m, 0, packetSize);
 
-    // Add envelope checksum
-    const quint16 crc = computeCrc16(m);
-    writeU16le(m, crc);
-    return Result<QByteArray>::isOk(m);
+    return wrapInGfdiEnvelope(MessageId::NotificationData,m);
 }
