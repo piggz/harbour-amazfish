@@ -51,11 +51,11 @@ public:
     qint32 id;
     NotificationType notificationType;
 
-    std::optional<QString> title;
-    std::optional<QString> body;
-    std::optional<QString> sender;
-    std::optional<QString> phoneNumber;
-    std::optional<QString> sourceName;
+    QString title;
+    QString body;
+    QString sender;
+    QString phoneNumber;
+    QString sourceName;
 
     quint64 when;                 // UNIX timestamp (seconds)
     bool hasActions;
@@ -270,7 +270,6 @@ public:
     void replayMissedNotifications();
     void setConnected(bool v);
     void onSetCallState(const CallSpec& call);
-    QByteArray wrapInGfdiEnvelope(quint16 messageId, const QByteArray& payload);
 
 private:
 
@@ -304,6 +303,7 @@ private:
 
 public slots:
     void onNotification(NotificationSpec notification);
+    void onNotificationDataRequested(const NotificationControlMessage& msg);
 
 };
 

@@ -359,9 +359,10 @@ enum class GfdiDeviceSetting : quint8 {
 struct NotificationControlMessage {
     qint32 notificationId{};
     quint8 command{};
-    QVector<QPair<quint8, quint16>> attributes; // (attribute_id, max_length)
-    std::optional<quint8> actionId;
-    std::optional<QString> actionString;
+    QByteArray data;
+    //QVector<QPair<quint8, quint16>> attributes; // (attribute_id, max_length)
+    //std::optional<quint8> actionId;
+    //std::optional<QString> actionString;
 };
 
 

@@ -196,7 +196,7 @@ void GarminDevice::parseServices()
                     // add notification handler
                     qDebug() << Q_FUNC_INFO << "Garmin: Adding notification handler";
                     mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(com);
-                    //connect(this,&GarminDevice::sendAlertToDevice,mNotificationHandler.data(),&GarminNotificationHandler::onNotification);
+                    connect(com.data(), &CommunicatorV2::NotificationDataRequested,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationDataRequested);
                     setConnectionState("authenticated");
                     return;
                 }

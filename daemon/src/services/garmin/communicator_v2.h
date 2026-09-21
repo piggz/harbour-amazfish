@@ -187,6 +187,7 @@ signals:
     void stepsChanged(quint32 &steps);
     void heartRateChanged(quint8 &hr);
     void informationChanged(Amazfish::Info infoKey, const QString& infoValue);
+    void NotificationDataRequested(const NotificationControlMessage& msg);
 
     void gfdiMessageReceived(const QByteArray& gfdiMessage);
 
