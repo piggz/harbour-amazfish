@@ -421,7 +421,7 @@ QByteArray GfdiMessageGenerator::systemEvent(quint8 eventType, quint8 value)
     return wrapInGfdiEnvelope(MessageId::SystemEvent, m);
 }
 
-
+/*
 QByteArray GfdiMessageGenerator::notificationData(
 
     quint32 notificationId,
@@ -453,15 +453,7 @@ QByteArray GfdiMessageGenerator::notificationDataWithActions(
     bool hasDismissAction)
 {
 
-    // Generate NotificationData message with action support
-    // * `notificationId` - Unique notification identifier
-    // * `requestedAttributes` - List of (attribute_id, max_length) tuples
-    // * `title` - Notification title
-    // * `body` - Notification body text
-    // * `sender` - Notification sender
-    // * `timestamp` - Timestamp in format "yyyyMMddTHHmmss"
-    // * `appId` - Application identifier
-    // * `hasDismissAction` - Whether to include a dismiss action
+
     QByteArray payload;
     // Command byte: GET_NOTIFICATION_ATTRIBUTES = 0
     payload.append(char(0));
@@ -564,3 +556,4 @@ QByteArray GfdiMessageGenerator::notificationDataWithActions(
 
     return wrapInGfdiEnvelope(MessageId::NotificationData,m);
 }
+*/

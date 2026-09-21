@@ -391,6 +391,8 @@ void CommunicatorV2::onConfigurationReceived() {
 
 void CommunicatorV2::onNotificationControlReceived(const NotificationControlMessage& msg){
     qDebug() << Q_FUNC_INFO;
+    // Notification Handler needs to take care of this
+    emit NotificationDataRequested(msg);
 
 }
 
