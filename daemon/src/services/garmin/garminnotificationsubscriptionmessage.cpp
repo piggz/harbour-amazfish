@@ -8,8 +8,7 @@ void GarminNotificationSubscriptionMessage::parse(const QByteArray& data) {
         return;
     }
 
-    mMessage.enable = (quint8(data[0]) == 1);
-    if (data.size()>1) mMessage.unk = quint8(data[1]); else mMessage.unk=0;
+    mWatchProposal =  quint8(data[0])==1;
     // First send subscription status message as ACK
     QByteArray response = generateStatusMessage();
     if (mCommunicator) mCommunicator->sendMessage("NOTIFICATION SUBSCRIPTION RESPONSE",response);
@@ -18,19 +17,17 @@ void GarminNotificationSubscriptionMessage::parse(const QByteArray& data) {
 
 QByteArray GarminNotificationSubscriptionMessage::generateStatusMessage() {
     QByteArray r;
-    bool enabled =true;
-    //todo: set notification handler enable in device
     //Todo: Check if notfications are enabled in device settings, setting to true for now.
     // could be in AmazfishConfig::deviceDisconnectNotification() ?
 
     writeU16le(r,(quint16)MessageId::NotificationSubscription);
     r.append(char(Status::Ack));
     // Notification Status (0 = ENABLED, 1 = DISABLED)
-    r.append(char(enabled) ? 0 : 1);
+    r.append(char(0));
     // Enable flag (matches incoming request)
-    r.append(char(mMessage.enable ? 1 : 0));
+    r.append(char(mWatchProposal ? 1 : 0));
     // Unknown byte (copy from incoming)
-    r.append(char(mMessage.unk));
+    r.append(char(0));
     return wrapInGfdiEnvelope(MessageId::Response,r);
 
 }

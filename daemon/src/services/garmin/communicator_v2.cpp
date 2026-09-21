@@ -21,29 +21,24 @@
 #include <QObject>
 #include <QMutex>
 
+
+
 const char* CommunicatorV2::BASE_UUID                   = "6a4e%1-667b-11e3-949a-0800200c9a66";
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI = "6a4e2800-667b-11e3-949a-0800200c9a66";
+const char* CommunicatorV2::UUID_SERVICE_GARMIN_V0_SEND = "df334c80-e6a7-d082-274d-78fc66f85e16";
+const char* CommunicatorV2::UUID_SERVICE_GARMIN_V0_RECV = "4acbcd28-7425-868e-f447-915c8f00d0cb";
+const char* CommunicatorV2::UUID_SERVICE_GARMIN_V1_SEND = "6a4e4c80-667b-11e3-949a-0800200c9a66";
+const char* CommunicatorV2::UUID_SERVICE_GARMIN_V1_RECV = "6a4ecd28-667b-11e3-949a-0800200c9a66";
+
+
+
+
 
 static inline QString fmtUuid(quint16 shortId) {
     return QStringLiteral("6A4E%1-667B-11E3-949A-0800200C9A66")
         .arg(shortId, 4, 16, QLatin1Char('0'))
         .toUpper();
 }
-
-
-
-
-static inline QString hexDump(const QByteArray& b, int max=32) {
-    const int n = qMin(max, b.size());
-    QStringList parts;
-    parts.reserve(n);
-    for (int i=0;i<n;++i) {
-        parts << QStringLiteral("%1").arg(quint8(b[i]), 2, 16, QLatin1Char('0')).toUpper();
-    }
-    return parts.join(QStringLiteral(" "));
-}
-
-
 
 
 // =============================================================================
@@ -64,10 +59,18 @@ CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
 
     mState->cobsCodec=new CobsCoDec(this);
 
-    connect(mState->cobsCodec, &CobsCoDec::messageDecoded, this, &CommunicatorV2::handleDecodedMessage);
+    //connect(mState->cobsCodec, &CobsCoDec::messageDecoded, this, &CommunicatorV2::handleDecodedMessage);
 
     initializeDevice();
 
+}
+
+void CommunicatorV2::setStatus(const QString &status)
+{
+    if (status != mStatus) {
+        mStatus = status;
+        emit statusChanged();
+    }
 }
 
 void CommunicatorV2::setMessageCallback(QSharedPointer<GfdiMessageCallback> cb) {
@@ -77,9 +80,11 @@ void CommunicatorV2::setMessageCallback(QSharedPointer<GfdiMessageCallback> cb) 
 
 void CommunicatorV2::registerServiceCallback(Service service, QSharedPointer<ServiceCallback> cb) {
     mState->serviceCallbacks.insert(service, std::move(cb));
+    /*
     if (service==Service::GFDI) {
         GarminGfdiMessage* parser= qobject_cast<GarminGfdiMessage*>(cb.data());
     }
+    */
 
 }
 
@@ -122,7 +127,6 @@ quint64 CommunicatorV2::nextCookie() {
 
 bool CommunicatorV2::initializeDevice() {
     qDebug() <<Q_FUNC_INFO << "Garmin: initalizing device";
-    //QMutexLocker lock(&m_mutex);
 
     QMap<QString, QSharedPointer<QBLECharacteristic>> characteristicMap;
 
@@ -156,18 +160,58 @@ bool CommunicatorV2::initializeDevice() {
         if (characteristicMap.contains(serviceRec) && characteristicMap.contains(serviceSnd))
         {
             mState->characteristicReceive = characteristicMap.value(serviceRec);
+            mState->UUIDReceive = serviceRec;
             mState->characteristicSend = characteristicMap.value(serviceSnd);
+            mState->UUIDSend=serviceSnd;
+            mIsMlProtocol = true;
+
         }
+
+    }
+    // No V2 protocol found, checking for other protocols
+
+    if (characteristicMap.contains(UUID_SERVICE_GARMIN_V0_RECV) && characteristicMap.contains(UUID_SERVICE_GARMIN_V0_SEND))
+    {
+
+        mState->characteristicReceive = characteristicMap.value(UUID_SERVICE_GARMIN_V0_RECV);
+        mState->UUIDReceive = UUID_SERVICE_GARMIN_V0_RECV;
+
+        mState->characteristicSend = characteristicMap.value(UUID_SERVICE_GARMIN_V0_SEND);
+        mState->UUIDSend = UUID_SERVICE_GARMIN_V0_SEND;
 
 
         if ((mState->characteristicSend != NULL) && (mState->characteristicReceive  != NULL)) {
-            qDebug() << Q_FUNC_INFO << "Garmin: ML Characteristic found. Send " << serviceSnd << ", Receive " << serviceRec;
-            //lock.unlock();
+            qDebug() << Q_FUNC_INFO << "Garmin: ML Characteristic found. Send " << UUID_SERVICE_GARMIN_V0_SEND << ", Receive " << UUID_SERVICE_GARMIN_V0_RECV;
+            mIsMlProtocol = false;
+        }
+    }
+    else if (characteristicMap.contains(UUID_SERVICE_GARMIN_V1_RECV) && characteristicMap.contains(UUID_SERVICE_GARMIN_V1_SEND))
+    {
 
-            enableNotification(serviceRec);
-            connect(this,&QBLEService::characteristicChanged,this,&CommunicatorV2::onCharacteristicChanged);
-            connect(mState->characteristicReceive.data(),&QBLECharacteristic::characteristicRead,this,&CommunicatorV2::onCharacteristicChanged);
+        mState->characteristicReceive = characteristicMap.value(UUID_SERVICE_GARMIN_V1_RECV);
+        mState->UUIDReceive = UUID_SERVICE_GARMIN_V1_RECV;
 
+        mState->characteristicSend = characteristicMap.value(UUID_SERVICE_GARMIN_V1_SEND);
+        mState->UUIDSend = UUID_SERVICE_GARMIN_V1_RECV;
+
+
+        if ((mState->characteristicSend != NULL) && (mState->characteristicReceive  != NULL)) {
+            qDebug() << Q_FUNC_INFO << "Garmin: ML Characteristic found. Send " << UUID_SERVICE_GARMIN_V1_SEND << ", Receive " << UUID_SERVICE_GARMIN_V1_RECV;
+            mIsMlProtocol = false;
+        }
+    }
+
+
+    if ((mState->characteristicSend != NULL) && (mState->characteristicReceive  != NULL)) {
+        qDebug() << Q_FUNC_INFO << "Garmin: ML Characteristic found. Send " << mState->UUIDSend << ", Receive " << mState->UUIDReceive;
+        enableNotification(mState->UUIDReceive);
+        connect(this,&QBLEService::characteristicChanged,this,&CommunicatorV2::onCharacteristicChanged);
+        connect(mState->characteristicReceive.data(),&QBLECharacteristic::characteristicRead,this,&CommunicatorV2::onCharacteristicChanged);
+
+        setStatus(QStringLiteral("GFDI ready for communication"));
+        qDebug() << Q_FUNC_INFO << (QStringLiteral("Garmin: GFDI: Ready for communication"));
+
+        if (mIsMlProtocol) {
             const QByteArray closeAll = createCloseAllServicesMessage();
             QString errorMsg;
             mState->characteristicSend->writeValue(closeAll,&errorMsg);
@@ -176,33 +220,82 @@ bool CommunicatorV2::initializeDevice() {
                 qDebug() << Q_FUNC_INFO << "Garmin: closeall failed " << errorMsg;
                 return false;
             }
-            return true;
         }
+
+        return true;
     }
 
     qDebug() << Q_FUNC_INFO << "Garmin: Failed to find any known Garmin ML characteristics";
+    return false;
+}
 
 
-     return false;
+void CommunicatorV2::sendRawBytes(const QString &label,const QByteArray &bytes)
+{
+    qDebug() <<Q_FUNC_INFO << "Garmin: Send Message " << label << " Content " << bytes.toHex();
+    mSendQueue.enqueue(qMakePair(bytes, label));
+    processSendQueue();
+}
+
+void CommunicatorV2::processSendQueue()
+{
+
+    if (mSendInProgress || mSendQueue.isEmpty())
+    {
+        return;
+    }
+
+    if (!mState->characteristicSend) {
+        qWarning() << Q_FUNC_INFO <<"Garmin: DeviceConnection: no send characteristic, dropping" << mSendQueue.size() << "queued message(s)";
+        mSendQueue.clear();
+        return;
+    }
+
+    mSendInProgress = true;
+    const QPair<QByteArray, QString> item = mSendQueue.dequeue();
+
+    QString errorMsg;
+
+    qDebug() <<Q_FUNC_INFO << "Garmin: Sending data to watch " <<item.second ;
+    /*
+    mState->characteristicSend->writeAsyncChecked(item.first);
+    connect(mState->characteristicSend.data(), &QBLECharacteristic::characteristicWritten, this,[this, data= item.first, label = item.second](const QString &characteristic,const QByteArray &value) {
+        if (value.data()!=data.data()) {
+            qDebug() << Q_FUNC_INFO <<"Garmin: Sent data not ours.";
+            return;
+        }
+        qDebug() << Q_FUNC_INFO <<"Garmin: Sending next part of message queue: "<< label;
+        mSendInProgress = false;
+        processSendQueue();
+    });
+    */
+    mState->characteristicSend->writeValue(item.first,&errorMsg);
+
+    qDebug() <<Q_FUNC_INFO << "Garmin: writing result:" << errorMsg;
+    if (!errorMsg.isEmpty())
+    {
+        qWarning() << Q_FUNC_INFO <<"Garmin: Could not send message: " << errorMsg;
+    }
+    mSendInProgress = false;
+    if (!mSendQueue.isEmpty()) processSendQueue();
+
 }
 
 bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& message) {
-    // Send a message to the device via the GFDI service
-    //
-    // Messages are COBS-encoded and sent via MLR protocol or directly depending on setup.
-
     qDebug() <<Q_FUNC_INFO << "Garmin: Send Message " << taskName << " Content " << message.toHex();
-    if (message.isEmpty())
-        return false;
 
-    //Locking
-    //QMutexLocker lock(&m_mutex);
+    const QByteArray framed = CobsCoDec::encode(message);
 
+    // We don't negotiate a larger ATT MTU, and BlueZ's automatic long-write
+    // queueing can't be relied on across devices, so fragment defensively at
+    // a safe default MTU write size - same approach Gadgetbridge always
+    // uses (CommunicatorV1/V2.sendMessage), regardless of whether a given
+    // message happens to be small enough to not need it.
 
-    QSharedPointer<MlrCommunicator> mlr;
-    //QBLECharacteristic *sendChar;
-    quint8 gfdiHandle = 0;
-    int maxWriteSize = 20;
+    const int handlePrefixSize = mIsMlProtocol ? 1 : 0;
+    const int maxChunk = mState->maxWriteSize - handlePrefixSize;
+
+    quint8 gfdiHandle;
 
     if (!mState->handleByService.contains(Service::GFDI)) {
         qDebug() << Q_FUNC_INFO << "Garmin: No GFDI handle found";
@@ -211,117 +304,36 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
 
     gfdiHandle = mState->handleByService.value(Service::GFDI);
 
-
-    // Extract and log message type with sequence number and response details
-
-    if (message.size() >= 4) {
-        int offset = 2;
-        // Read message ID (2 bytes, little-endian)
-        quint16 rawMsgId = le16(message.constData() + offset);
-
-        // Check for sequence number (bit 15 set)
-        // If bit 15 is set, the message ID is encoded with a sequence number
-        // Format: [bit 15: 1] [bits 14-8: sequence] [bits 7-0: message_id - 5000]
-        // We need to decode it: actual_id = (raw_id & 0xFF) + 5000
-        // Sequence number: bit 15 set
-        std::optional<quint16> sequenceNumber;
-        if ((rawMsgId & 0x8000) != 0) {
-            const quint16 seq = (rawMsgId >> 8) & 0x7F;
-            rawMsgId = quint16((rawMsgId & 0xFF) + 5000);
-            sequenceNumber = seq;
-        }
-
-        const quint16 msgId = rawMsgId;
-
-        const quint16 msgType = msgId;
-        //let msg_type = crate::messages::MessageId::from_u16(msg_id);
-
-        // Build message type string
-        QString typeString = messageIdToString(msgType).value();
-
-        qDebug() << Q_FUNC_INFO << "Garmin: SENDING MESSAGE to watch:" << taskName;
-        qDebug() << Q_FUNC_INFO << "Garmin: Message type: " << typeString;
-
-        // For Response messages, show what we're responding to and status
-        if (msgId == 5000) {
-            if (message.size() >= 9) {
-                const quint16 origMsgId = le16(message.constData() + 4);
-                const quint8 statusByte = quint8(message[6]);
-                qDebug() << Q_FUNC_INFO << "Outgoing Response decoding: orig_msg_id " << origMsgId << ", status_byte=" << statusByte;
-
-            } else {
-                qDebug() << Q_FUNC_INFO << "Garmin: Response message too short: " << message.size() <<" bytes (need at least 9)";
-                return false;
-            }
-        }
-    } else {
-        qDebug() << Q_FUNC_INFO << "Garmin: NOT SENDING MESSAGE to watch:" << taskName <<", Massage too short " << message.size() << "bytes.";
-    }
-
-
-    const QByteArray payload = CobsCoDec::encode(message);
-
-
-
-
-    const quint8 mlrHandle = (gfdiHandle & 0x0F);
-    mlr = mState->mlrCommunicators.value(mlrHandle);
-
-
-    if (mlr) {
-        qDebug() << Q_FUNC_INFO << "Garmin: Sending message via MLR";
-        mlr->sendMessage(taskName, payload);
-        return true;
-    }
-
-    // No MLR => fragment if needed and write directly
-
-    maxWriteSize = mState->maxWriteSize;
-    if (!mState->characteristicSend) {
-        qDebug() << Q_FUNC_INFO << "Garmin: No send characteristic found.";
-        return false;
-    }
-
-    qDebug() << Q_FUNC_INFO << "Garmin: No Mlr found, sending directly";
-    int remaining = payload.size();
-    int position = 0;
-
-    if (remaining > maxWriteSize - 1) {
-        while (remaining > 0) {
-            const int chunk = qMin(remaining, maxWriteSize - 1);
-            QByteArray fragment;
-            fragment.reserve(chunk + 1);
-            fragment.append(char(gfdiHandle));
-            fragment.append(payload.mid(position, chunk));
-
-            //auto wr = awaitBleWrite(*sendChar, fragment, taskName);
-            QString errorMsg;
-            mState->characteristicSend->writeValue(fragment,&errorMsg);
-            if (!errorMsg.isEmpty())
-                return true;
-
-
-            position += chunk;
-            remaining -= chunk;
-        }
-    } else {
-        QByteArray packet;
-        packet.reserve(payload.size() + 1);
-        packet.append(char(gfdiHandle));
-        packet.append(payload);
-        QString errorMsg;
-        mState->characteristicSend->writeValue(packet,&errorMsg);
-        if (!errorMsg.isEmpty())
+    if (mIsReliable) {
+        QSharedPointer<MlrCommunicator> mlr;
+        const quint8 mlrHandle = (gfdiHandle & 0x0F);
+        mlr = mState->mlrCommunicators.value(mlrHandle);
+        if (mlr) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Sending message via MLR";
+            mlr->sendMessage(taskName, framed);
             return true;
+        }
+
     }
-    return false;
+
+    int offset = 0;
+    int fragmentNumber = 0;
+    while (offset < framed.size()) {
+        const int chunkLen = qMin(maxChunk, framed.size() - offset);
+        QByteArray chunk = framed.mid(offset, chunkLen);
+        if (mIsMlProtocol)
+            chunk.prepend(char(gfdiHandle));
+        sendRawBytes(QStringLiteral("GFDI message %1 part %2").arg(taskName).arg(++fragmentNumber), chunk);
+        offset += chunkLen;
+    }
+    return true;
 }
-
-
 
 void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, const QByteArray& data) {
 
     //handles incoming messages for a characteristic
+    qDebug() <<Q_FUNC_INFO << "Garmin: Received Message " << data.toHex();
+
 
     if (data.isEmpty()) return ;
 
@@ -333,31 +345,32 @@ void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, cons
         return;
     }
 
-    QSharedPointer<MlrCommunicator> mlr;
+    if (mIsReliable) {
+        QSharedPointer<MlrCommunicator> mlr;
 
-    if (data.size() >= 2 && (quint8(data[0]) & 0x80) != 0) {
-        const quint8 handle = (quint8(data[0]) & 0x70) >> 4;
-        mlr = mState->mlrCommunicators.value(handle);
-    }
+        if (data.size() >= 2 && (quint8(data[0]) & 0x80) != 0) {
+            const quint8 handle = (quint8(data[0]) & 0x70) >> 4;
+            mlr = mState->mlrCommunicators.value(handle);
+        }
 
+        if (mlr) {
+            // Pass data to mlr, which will emit gfdiDecoded with the decoded data.
+            QByteArray rest = data.mid(1);
+            qDebug() << Q_FUNC_INFO << "Garmin: passing data to Mlr handler: " << rest.toHex();
+            mlr->onPacketReceived(data); // data with handle
+            return;
+        }
+    } else {
+        // handle message directly if not mlr
+        qDebug() <<Q_FUNC_INFO << "Garmin: Not an MLR Message, handling directly ";
 
-    if (mlr) {
-        // Pass data to mlr, which will emit gfdiDecoded with the decoded data.
-        qDebug() << Q_FUNC_INFO << "Garmin: passing data to Mlr handler: " << data.toHex();
-        mlr->onPacketReceived(data); // data with handle
+        handleNonMlrMessage(data);
         return;
     }
-
-
-
-    // handle message directly if not mlr
-    handleDecodedMessage(data);
-    return;
 }
 
 void CommunicatorV2::onDeviceInformationReceived(DeviceInformationMessage &message)
 {
-    //received device information is " << message.maxPacketSize;
     mDeviceInfo.deviceName=QString(message.deviceName);
     mDeviceInfo.deviceModel=QString(message.deviceName) +QString(" ") + QString(message.deviceModel);
     mDeviceInfo.serialNumber=QString::number(message.unitNumber);
@@ -370,16 +383,10 @@ void CommunicatorV2::onDeviceInformationReceived(DeviceInformationMessage &messa
 }
 
 void CommunicatorV2::onConfigurationReceived() {
-    Result<QByteArray> response = GfdiMessageGenerator::systemEvent(8, 0);
-    if (response.ok)
-    {
-        sendMessage("SYNC READY", response.value);
-    }
-    response = GfdiMessageGenerator::systemEvent(6, 0);
-    if (response.ok)
-    {
-        sendMessage("HOST FOREGROUND", response.value);
-    }
+   QByteArray response = GfdiMessageGenerator::systemEvent(8, 0);
+   sendMessage("SYNC READY", response);
+   response = GfdiMessageGenerator::systemEvent(6, 0);
+   sendMessage("HOST FOREGROUND", response);
 }
 
 void CommunicatorV2::onNotificationControlReceived(const NotificationControlMessage& msg){
@@ -402,16 +409,6 @@ void CommunicatorV2::onWeatherRequestReceived(const WeatherRequestMessage& msg) 
 
 }
 
-void CommunicatorV2::onUnknownMessageReceived(const UnknownMessage& msg) {
-    // Not really unknown, more generic message
-    // we handle this message using AsyncMessageHandler class
-    /*
-    if (protoHandler) {
-       protoHandler->parse(msg);
-       qDebug() << Q_FUNC_INFO << "Message ID " << msg.messageId;
-    }
-    */
-}
 
 void CommunicatorV2::onProtobufMessageReceived( const QByteArray& data)
 {
@@ -432,14 +429,6 @@ void CommunicatorV2::onProtobufMessageReceived( const QByteArray& data)
     if (parsed->toSend()) sendMessage("SEND PROTOBUF REPLY", parsed->getMessageBytes()); //send reply if any
 
     if (!followup.isNull()&& followup->toSend()) sendMessage("SEND PROTOBUF FOLWOW UP", followup->getMessageBytes()); //send followup message if any
-
-
-    /*
-    final List<GBDeviceEvent> events = parsedMessage.getGBDeviceEvent();
-    for (final GBDeviceEvent event : events) {
-        evaluateGBDeviceEvent(event);
-
-    */
 
 }
 
@@ -462,16 +451,16 @@ void CommunicatorV2::onProtobufStatusMessageReceived(const QByteArray& data)
 }
 
 
-void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
-    qDebug() << Q_FUNC_INFO << "Garmin: handleDecodedMessage: " << decodedWithHandle.toHex();
-    if (decodedWithHandle.isEmpty())
+void CommunicatorV2::handleNonMlrMessage(const QByteArray& data) {
+    qDebug() << Q_FUNC_INFO << "Garmin: handle non MLR Message: " << data.toHex();
+    if (data.size() < 2)
     {
-        qDebug() << Q_FUNC_INFO << "Garmin: decoded with handle is empty!";
+        qDebug() << Q_FUNC_INFO << "Garmin: decoded with handle is too short!";
         return;
     }
 
-    const quint8 handle = quint8(decodedWithHandle[0]);
-    const QByteArray payload = decodedWithHandle.mid(1);
+    const quint8 handle = quint8(data[0]);
+    const QByteArray payload = data.mid(1);
 
 
     Service service;
@@ -483,23 +472,10 @@ void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
     service = mState->serviceByHandle.value(handle, Service::GFDI);
 
     switch (service) {
-
     case Service::GFDI:
         qDebug() << Q_FUNC_INFO << "Garmin: handle GFDI";
-        if (mState->serviceCallbacks.contains(Service::GFDI))
-        {
-            //cobs decode the GFDI message
-            //mState->cobsCodec.feed(payload);
-            /*
-            auto decoded = mState->cobsCodec.decode();
-            if (decoded.has_value()) {
-                return;
-            }
-            */
-            mState->serviceCallbacks.value(Service::GFDI)->onMessage(payload);
-        }
+        mState->cobsCodec->feed(payload);
         return;
-
     case Service::RealtimeSpo2:
         qDebug() << Q_FUNC_INFO << "Garmin: handle Realtime Spo2";
         if (mState->serviceCallbacks.contains(Service::RealtimeSpo2))
@@ -529,8 +505,82 @@ void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
         }
         return;
     default:
-        qDebug() << Q_FUNC_INFO << "Garmin: decoded message is not handled: " << serviceToString(service);
+        qDebug() << Q_FUNC_INFO << "Garmin: Non Mlr message is not handled: " << serviceToString(service);
     }
+
+}
+
+
+void CommunicatorV2::handleIncomingGfdiMessage(const QByteArray& data)
+{
+    if (data.size()<8) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Incoming Gfdi Message is too small";
+        return;
+    }
+    const quint16 declaredLen = le16(data);
+    if (declaredLen != data.size())
+    {
+        qDebug() << Q_FUNC_INFO << "Garmin: Incoming Gfdi Message packet size wrong";
+        return ;
+    }
+    const quint16 receivedCrc = le16(data.constData()+ data.size() - 2);
+    const quint16 computedCrc = computeCrc16(data.mid(0,data.size()-2));
+    if (receivedCrc != computedCrc)
+    {
+        qDebug() << Q_FUNC_INFO << "Garmin: Incoming Gfdi Message packet has wrong CRC";
+        return ;
+    }
+    QByteArray payload = data.mid(2, data.size() - 4);
+
+    qDebug() << Q_FUNC_INFO << "Garmin: process incoming GFDI message " << payload.toHex();
+    if (mState->serviceCallbacks.contains(Service::GFDI))
+        {
+            mState->serviceCallbacks.value(Service::GFDI)->onMessage(payload);
+        }
+
+}
+void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
+    // This should be a GFDI message
+
+    qDebug() << Q_FUNC_INFO << "Garmin: handleDecodedMessage: " << decodedWithHandle.toHex();
+    if (decodedWithHandle.isEmpty())
+    {
+        qDebug() << Q_FUNC_INFO << "Garmin: decoded with handle is empty!";
+        return;
+    }
+
+
+
+    if (decodedWithHandle.size() < 6)
+    {
+        qDebug() << Q_FUNC_INFO << "Garmin: decoded message size too small!";
+        return;
+    }
+
+    const quint16 declaredLen = le16(decodedWithHandle);
+    if (declaredLen != decodedWithHandle.size())
+    {
+        qDebug() << Q_FUNC_INFO << "Garmin: decoded message has wrong size!";
+        return ;
+    }
+
+    const quint16 receivedCrc = le16(decodedWithHandle.constData() + decodedWithHandle.size()-2);
+    const quint16 computedCrc = computeCrc16(decodedWithHandle.mid(0, decodedWithHandle.size() - 2));
+    if (receivedCrc != computedCrc)
+    {
+        qDebug() << Q_FUNC_INFO << "Garmin: decoded message has wrong crc!";
+        return;
+    }
+
+    QByteArray payload = decodedWithHandle.mid(2, decodedWithHandle.size() - 6);
+
+    qDebug() << Q_FUNC_INFO << "Garmin: handle GFDI";
+    if (mState->serviceCallbacks.contains(Service::GFDI))
+        {
+            mState->serviceCallbacks.value(Service::GFDI)->onMessage(payload);
+        }
+
+
 }
 
 void CommunicatorV2::processHandleManagement(const QByteArray& message) {
@@ -564,7 +614,7 @@ void CommunicatorV2::processHandleManagement(const QByteArray& message) {
         processRegisterMlResp(payload);
         return;
     case RequestType::CloseHandleResp:
-        qDebug() << "Garmin: handle CloseHendleResp";
+        qDebug() << "Garmin: handle CloseHandleResp";
         processCloseHandleResp(payload);
         return;
     case RequestType::CloseAllResp:
@@ -581,6 +631,8 @@ void CommunicatorV2::processHandleManagement(const QByteArray& message) {
 }
 
 void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
+    qDebug() << Q_FUNC_INFO << "Garmin: MLR Registration Response: " << payload.toHex();
+
     if (payload.size() < 5) {
         qDebug() << Q_FUNC_INFO << "Garmin: MLR Registration Response payload too short: " << payload.size();
         return;
@@ -641,14 +693,17 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
 
         createdMlr = mlr;
 
+        mIsReliable = true;
+     }
 
-     } else {
-        //Non Reliable mode requested, not yet implemented
-        qDebug() << Q_FUNC_INFO << "Garmin: Non reliable ML communicator requested, not yet implemented.";
+    if ((reliable==0)&&(service==Service::GFDI))
+    {
+        qDebug() << Q_FUNC_INFO << "Garmin: Non reliable ML communicator requested.";
+
+        connect(mState->cobsCodec,&CobsCoDec::messageDecoded,this,&CommunicatorV2::handleIncomingGfdiMessage);
+        mIsReliable = false;
     }
-
-
-    // If no callback is registered for this service, create a default one for known services
+    // Register callback services
     if (!mState->serviceCallbacks.contains(service))
     {
         switch (service) {
@@ -656,7 +711,7 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
             qDebug() << Q_FUNC_INFO <<  "Garmin: Inserting GFDI callback handle";
             registerServiceCallback(Service::GFDI,QSharedPointer<ServiceCallback>(new GarminGfdiMessage(this)));
             // now we can continue with initialising as we have a GFDI handle to send messages
-            completePairing();
+            //completePairing();
             break;
         case Service::RealtimeSpo2:
             registerServiceCallback(Service::RealtimeSpo2,QSharedPointer<ServiceCallback>(new GarminSpo2Message(this)));
@@ -768,41 +823,43 @@ void CommunicatorV2::registerHandle(Service service, quint8 handle) {
 bool CommunicatorV2::completePairing() {
     // To complete the initial pairing, some messages must be sent to the device
     qDebug()<< Q_FUNC_INFO << "Garmin: Checking for first connection";
-    if (isFirstConnect) {
+    if (isFirstConnect || (qobject_cast<GarminDevice *>(m_device))->isPairing()) {
+        qDebug()<< Q_FUNC_INFO << "Garmin: Doing first connection";
 
-        auto msg = GfdiMessageGenerator::supportedFileTypesRequest();
-        if (!msg.ok) return false;
-        if (!sendMessage("SUPPORTED FILE TYPE REQUEST",msg.value)) return false;
+        QByteArray msg;
+        //msg = GfdiMessageGenerator::supportedFileTypesRequest();
+        //if (!sendMessage("SUPPORTED FILE TYPE REQUEST",msg)) return false;
 
         msg = GfdiMessageGenerator::deviceSettings();
-        if (!msg.ok) return false;
-        if (!sendMessage("DEVICE_SETTINGS",msg.value)) return false;
+        if (!sendMessage("DEVICE_SETTINGS",msg)) return false;
+
+        // Time Synchronization should come now
+        msg = GfdiMessageGenerator::systemEvent(16,0);
+        if (!sendMessage("TIME_UPDATED",msg)) return false;
+
         msg = GfdiMessageGenerator::systemEvent(8,0);
-        if (!msg.ok) return false;
-        if (!sendMessage("SYNC_READY",msg.value)) return false;
+        if (!sendMessage("SYNC_READY",msg)) return false;
 
         // The next messages should only be sent during pairing, not when connecting to the device
 
         if ((qobject_cast<GarminDevice *>(m_device))->isPairing())
         {
             msg = GfdiMessageGenerator::systemEvent(4,0);
-            if (!msg.ok) return false;
-            if (!sendMessage("PAIR_COMPLETE",msg.value)) return false;
+            if (!sendMessage("PAIR_COMPLETE",msg)) return false;
 
             msg = GfdiMessageGenerator::systemEvent(0,0);
-            if (!msg.ok) return false;
-            if (!sendMessage("SYNC_COMPLETE",msg.value)) return false;
+            if (!sendMessage("SYNC_COMPLETE",msg)) return false;
 
-            auto msg = GfdiMessageGenerator::systemEvent(14,0);
-            if (!msg.ok) return false;
-            if (!sendMessage("SETUP_WIZARD_COMPLETE",msg.value)) return false;
+            msg = GfdiMessageGenerator::systemEvent(14,0);
+            if (!sendMessage("SETUP_WIZARD_COMPLETE",msg)) return false;
 
             (qobject_cast<GarminDevice *>(m_device))->setPaired();
         }
 
         isFirstConnect=false;
-        qDebug()<< Q_FUNC_INFO << "Garmin: pairing complete.";
     }
+    qDebug()<< Q_FUNC_INFO << "Garmin: First connection already done";
+
     return true;
 }
 
@@ -820,7 +877,7 @@ void CommunicatorV2::registerServices() {
     QString errorMsg;
 
 
-    registerService(Service::GFDI, true);
+    registerService(Service::GFDI, false); // reliable implemantation is broken, use unreliable for now
 
     if ((qobject_cast<GarminDevice *>(m_device))->supportedFeatures() &  Amazfish::Feature::FEATURE_SPO2 )
         registerService(Service::RealtimeSpo2, true);
@@ -838,8 +895,7 @@ void CommunicatorV2::registerServices() {
     mBatteryTimer->start();
     connect(mBatteryTimer,&QTimer::timeout, this, &CommunicatorV2::getBatteryLevel);
     getBatteryLevel();
-
-
+    mServicesResolved=true;
 }
 
 void CommunicatorV2::getBatteryLevel() {
@@ -850,25 +906,62 @@ void CommunicatorV2::getBatteryLevel() {
 
 void CommunicatorV2::dispose() {
     mState->mlrCommunicators.clear();
+    if (mState->characteristicReceive) {
+        mState->characteristicReceive->stopNotify();
+        disconnect(mState->characteristicReceive.data(),nullptr,this,nullptr);
+    }
+
+
+    if (m_device)
+        disconnect((qobject_cast<GarminDevice *>(m_device)), nullptr, this, nullptr);
+
+    mState->characteristicSend.reset();
+    mState->characteristicReceive.reset();
+    //m_gfdiService.reset();
+    mState->cobsCodec->reset();
+    mIsMlProtocol = false;
+    mIsReliable = false;
+
+    mSendQueue.clear();
+    mSendInProgress = false;
+    mState->mlrCommunicators.clear();
+    mState->serviceByHandle.clear();
+    mState->serviceCallbacks.clear();
+    // m_notificationsEnabled = false;
+    //m_pendingNotifications.clear();
+    //m_phoneIdToOurId.clear();
+
+    mConnected = false;
+    mServicesResolved = false;
+    //emit connectedChanged();
+    //emit servicesResolvedChanged();
+
+    if (!isFirstConnect) {
+        isFirstConnect = true;
+        //emit handshakeCompleteChanged();
+    }
+
+    setStatus(QStringLiteral("Idle"));
 }
 
 void CommunicatorV2::onConnectionStateChange(bool connected) {
     qDebug() << Q_FUNC_INFO << connected;
-    if (!mState->characteristicSend) return;
-    if (!connected) {
-        QByteArray closeAll = createCloseAllServicesMessage();
-           mState->characteristicSend->writeValue(closeAll);
-    }
-    else
+    if (connected==mConnected) return;
+    if (connected)
     {
+        isFirstConnect=true;
         initializeDevice();
     }
+    else {
+        dispose();
+    }
+    mConnected=connected;
+
 }
 
 
 QByteArray CommunicatorV2::createCloseAllServicesMessage() const {
     QByteArray b;
-    b.reserve(13);
     b.append(char(0));
     b.append(char(quint8(RequestType::CloseAllReq)));
     writeU64le(b, AMAZFISH_CLIENT_ID);
@@ -879,7 +972,6 @@ QByteArray CommunicatorV2::createCloseAllServicesMessage() const {
 
 QByteArray CommunicatorV2::createRegisterServiceMessage(Service service, bool reliable) const {
     QByteArray b;
-    b.reserve(13);
     b.append(char(0));
     b.append(char(quint8(RequestType::RegisterMlReq)));
     writeU64le(b, AMAZFISH_CLIENT_ID);

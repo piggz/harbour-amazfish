@@ -413,18 +413,11 @@ class ServiceCallback : public QObject{
 public:
     virtual ~ServiceCallback() = default;
 
-    // Called when service is connected and ready to use
-    /*
-    void onConnect(QSharedPointer<ServiceWriter> writer) {
-        Q_UNUSED(writer);
-    }
-    */
+
     virtual void onClose() { }
     // Called when a message is received from the service
     virtual void onMessage(const QByteArray& data) = 0;
 
-private:
-    //QBLEService *mParent;
 };
 
 

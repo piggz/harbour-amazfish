@@ -52,14 +52,14 @@ void GarminDeviceInformationMessage::parse(const QByteArray& data)
 QByteArray GarminDeviceInformationMessage::generateOutgoing(const DeviceInformationMessage &incoming)
 {
     QByteArray r;
-    writeU16le(r, 5024);                             // original DEVICE_INFORMATION
+    writeU16le(r, (quint16)MessageId::DeviceInformation);                             // original DEVICE_INFORMATION
     r.append(char(quint8(Status::Ack)));            // status
 
     writeU16le(r, 150);                              // protocol version 1.50
-    writeU16le(r, 0xFFFF);                           // product number (-1 = 0xFFFF for phone)
-    writeU32le(r, 0xFFFFFFFFu);                      // our unit number
+    writeU16le(r, -1);//0xFFFF);                           // product number (-1 = 0xFFFF for phone)
+    writeU32le(r, -1);//0xFFFFFFFFu);                      // our unit number
     writeU16le(r, 7791);                             // software version  (7791 = version 77.91, matching Gadgetbridge)
-    writeU16le(r, 0xFFFF);                           // our max packet size( -1 = 0xFFFF means no limit)
+    writeU16le(r, -1);//0xFFFF);                           // our max packet size( -1 = 0xFFFF means no limit)
     // Bluetooth name (null-terminated)
     r.append("Jolla-Amazfish"); r.append(char(0));
     // Device manufacturer (null-terminated)
@@ -68,8 +68,7 @@ QByteArray GarminDeviceInformationMessage::generateOutgoing(const DeviceInformat
     r.append("SailfishOS");             r.append(char(0));
 
      // Protocol flags (1 for v1.x, 0 for v2.x)
-    const quint8 protocolFlags = (incoming.protocolVersion / 100 == 1) ? 1 : 0;
+    const quint8 protocolFlags = incoming.protocolVersion / 100 == 1 ? 1 : 0;
     r.append(char(protocolFlags));
-
     return r;
 }

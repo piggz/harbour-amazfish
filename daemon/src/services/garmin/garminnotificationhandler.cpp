@@ -71,10 +71,13 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: sending notification";
     CommunicatorV2 *com = m_communicator.data();
+    if (!com->handshakeComplete()) return;
     GarminNotificationUpdateMessage* updateMessage = new GarminNotificationUpdateMessage(com);
     bool isUpdate = addNotificationToQueue(notification);
 
     qDebug() << Q_FUNC_INFO << "Garmin: notification isupdate=" <<isUpdate;
+    //Test
+    isUpdate = false;
     updateMessage->updateType = isUpdate ? NotificationUpdateType::Modify : NotificationUpdateType::Add;
     if (m_storedNotifications.size() > 30)
         m_storedNotifications.erase(m_storedNotifications.end()); //remove the oldest notification TODO: should send a delete notification message to watch!
@@ -94,6 +97,11 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
     updateMessage->notificationId=notification.id;
     updateMessage->notificationType=notification.notificationType;
 
+    //TESTING:
+    updateMessage->hasActions=false;
+    updateMessage->hasPicture=false;
+    updateMessage->notificationType=NotificationType::GenericSms;
+    updateMessage->count=1;
     //bool hasPicture = notification.hasPicture;
     updateMessage->count = getNotificationCount(notification.notificationType);
     qDebug() << Q_FUNC_INFO << "Garmin: Found " << updateMessage->count << " notifications of this type";
