@@ -93,24 +93,7 @@ public:
 
     static QByteArray systemEvent(quint8 eventType, quint8 value);
     static QByteArray protobufBatteryStatusRequest(quint16 requestId);
-/*
-    static QByteArray notificationData(quint32 notificationId,
-                                                     const QVector<QPair<quint8, quint16>>& requestedAttributes,
-                                                     const QString& title,
-                                                     const QString& body,
-                                                     const QString& sender,
-                                                     const QString& timestamp,
-                                                     const QString& appId);
 
-    static QByteArray notificationDataWithActions(quint32 notificationId,
-                                                                const QVector<QPair<quint8, quint16>>& requestedAttributes,
-                                                                const QString& title,
-                                                                const QString& body,
-                                                                const QString& sender,
-                                                                const QString& timestamp,
-                                                                const QString& appId,
-                                                                bool hasDismissAction);
-*/
 
 private:
 
