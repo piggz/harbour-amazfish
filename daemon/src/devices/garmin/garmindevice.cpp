@@ -121,7 +121,6 @@ void GarminDevice::pair()
 
     m_needsAuth = true;
     m_pairing = true;
-    m_autoreconnect = true;
 
 
     setConnectionState("pairing");
@@ -134,7 +133,6 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
     qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
         if (deviceProperty("ServicesResolved").toBool() ) {
             initialise();
             }
@@ -158,6 +156,13 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
             }
         }
     }
+}
+
+QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString &path)
+{
+    qDebug() << Q_FUNC_INFO << uuid;
+    parseServices();
+    return mCommunicator.data();
 }
 
 
@@ -209,6 +214,7 @@ void GarminDevice::parseServices()
                     connect(com.data(), &CommunicatorV2::NotificationDataRequested,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationDataRequested);
                     connect(com.data(), &CommunicatorV2::NotificationPerformAction,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationPerformAction);
                     setConnectionState("authenticated");
+                    mCommunicator = com;
                     return;
                 }
             }
