@@ -389,11 +389,10 @@ void CommunicatorV2::onConfigurationReceived() {
    sendMessage("HOST FOREGROUND", response);
 }
 
-void CommunicatorV2::onNotificationControlReceived(const NotificationControlMessage& msg){
+void CommunicatorV2::onNotificationDataRequested(const NotificationControlMessage& msg){
     qDebug() << Q_FUNC_INFO;
     // Notification Handler needs to take care of this
     emit NotificationDataRequested(msg);
-
 }
 
 

@@ -1,6 +1,7 @@
 #include "garminnotificationhandler.h"
 #include "garmintypes.h"
 #include "garminnotificationupdatemessage.h"
+#include "garminnotificationdatamessage.h"
 
 #include <optional>
 
@@ -8,71 +9,6 @@
 //const uint MAX_PROTOBUF_CHUNK_SIZE = 3072;
 
 
-const quint8 NOTIF_CMD_GET_NOTIFICATION_ATTRIBUTES = 0;
-
-const quint8 NOTIF_ATTR_APP_IDENTIFIER = 0;
-const quint8 NOTIF_ATTR_TITLE = 1;
-const quint8 NOTIF_ATTR_SUBTITLE = 2;
-const quint8 NOTIF_ATTR_MESSAGE = 3;
-const quint8 NOTIF_ATTR_MESSAGE_SIZE = 4;
-const quint8 NOTIF_ATTR_DATE = 5;
-const quint8 NOTIF_ATTR_ACTIONS = 127;
-const quint8 NOTIF_ATTR_ATTACHMENTS = 128;
-
-bool notificationAttributeHasLengthParam(quint8 code)
-{
-    return code == NOTIF_ATTR_TITLE || code == NOTIF_ATTR_SUBTITLE || code == NOTIF_ATTR_MESSAGE;
-}
-
-bool notificationAttributeHasAdditionalParams(quint8 code)
-{
-    return code == NOTIF_ATTR_ACTIONS;
-}
-
-// std::nullopt means "we don't supply this attribute" (the TLV is omitted
-// entirely, matching how Gadgetbridge just skips ATTACHMENTS/etc. when the
-// notification doesn't have one).
-std::optional<QByteArray> notificationAttributeValue(quint8 code, int maxLength, const QString &appIdentifier, const QString &title, const QString &message)
-{
-    QString text;
-    switch (code) {
-    case NOTIF_ATTR_APP_IDENTIFIER:
-        text = appIdentifier;
-        break;
-    case NOTIF_ATTR_TITLE:
-        text = title;
-        break;
-    case NOTIF_ATTR_SUBTITLE:
-        text = QString();
-        break;
-    case NOTIF_ATTR_MESSAGE:
-        text = message;
-        break;
-    case NOTIF_ATTR_MESSAGE_SIZE:
-        text = QString::number(message.length());
-        break;
-    case NOTIF_ATTR_DATE:
-        text = QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd'T'HHmmss"));
-        break;
-    case NOTIF_ATTR_ACTIONS:
-        // No attached actions: 4 zero bytes is the "no actions" marker.
-        return QByteArray(4, char(0));
-    case NOTIF_ATTR_ATTACHMENTS:
-        return std::nullopt; // we never advertise a picture, so never claim one
-    default:
-        // Never silently omit an attribute the watch explicitly asked for -
-        // it treats an incomplete reply as unsatisfactory and re-requests
-        // forever. Reply with an empty value instead when we have nothing
-        // real to say, matching Gadgetbridge's own attribute encoder (its
-        // switch has no case for every possible code either, but its
-        // default still always encodes something).
-        return QByteArray();
-    }
-
-    if (maxLength > 0)
-        text = text.left(maxLength);
-    return text.toUtf8();
-}
 
 
 
@@ -145,7 +81,6 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
     bool isUpdate = addNotificationToQueue(notification);
 
     qDebug() << Q_FUNC_INFO << "Garmin: notification isupdate=" <<isUpdate;
-    //Test
     isUpdate = false;
     updateMessage->updateType = isUpdate ? NotificationUpdateType::Modify : NotificationUpdateType::Add;
     if (m_storedNotifications.size() > 30)
@@ -166,11 +101,12 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
     updateMessage->notificationId=notification.id;
     updateMessage->notificationType=notification.notificationType;
 
-    //TESTING:
-    updateMessage->hasActions=false;
+    // Set Actions  and Picture to false for now as it breaks notifications to show
+    updateMessage->hasActions = false;
     updateMessage->hasPicture=false;
-    updateMessage->notificationType=NotificationType::GenericSms;
+
     updateMessage->count=1;
+
     //bool hasPicture = notification.hasPicture;
     updateMessage->count = getNotificationCount(notification.notificationType);
     qDebug() << Q_FUNC_INFO << "Garmin: Found " << updateMessage->count << " notifications of this type";
@@ -183,59 +119,18 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
 void GarminNotificationHandler::onNotificationDataRequested(const NotificationControlMessage& msg)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: Notification Data requested, looking up data";
-    QByteArray attributes;
-    attributes.append(char(msg.command));
-    writeU32le(attributes, msg.notificationId);
 
-    QByteArray messageSizeAttribute;
-
-    int pos = 0;
-    while (pos < msg.data.size()) {
-        const quint8 code = quint8(msg.data.at(pos++));
-        int maxLength = 0;
-        if (notificationAttributeHasLengthParam(code)) {
-            if (pos + 2 > msg.data.size())
-                break;
-            maxLength = u16le(msg.data, pos);
-            pos += 2;
-        } else if (notificationAttributeHasAdditionalParams(code)) {
-            if (pos + 3 > msg.data.size())
-                break;
-            maxLength = u16le(msg.data, pos);
-            pos += 3; // 2-byte param + 1 unknown byte we don't use
-        }
-
-        QString source, title, content;
-        if (m_storedNotifications.contains(msg.notificationId)) {
-            source = m_storedNotifications[msg.notificationId].sourceName;
-            title = m_storedNotifications[msg.notificationId].title;
-            content = m_storedNotifications[msg.notificationId].body;
-        }
-        const std::optional<QByteArray> value = notificationAttributeValue(code, maxLength, source, title, content);
-        if (!value)
-            continue;
-
-        QByteArray tlv;
-        tlv.append(char(code));
-        writeU16le(tlv, value->size());
-        tlv.append(*value);
-
-        if (code == NOTIF_ATTR_MESSAGE_SIZE)
-            messageSizeAttribute = tlv;
-        else
-            attributes.append(tlv);
+    QString source, title, content;
+    if (m_storedNotifications.contains(msg.notificationId)) {
+        source = m_storedNotifications[msg.notificationId].sourceName;
+        title = m_storedNotifications[msg.notificationId].title;
+        content = m_storedNotifications[msg.notificationId].body;
     }
-    attributes.append(messageSizeAttribute);
 
-
-    QByteArray dataPayload;
-    writeU16le(dataPayload, attributes.size()); // messageSize
-    writeU16le(dataPayload, computeCrc16(attributes)); // crc of this (only) chunk
-    writeU16le(dataPayload, 0); // dataOffset
-    dataPayload.append(attributes);
+    GarminNotificationDataMessage *data = new GarminNotificationDataMessage(m_communicator.data());
+    QByteArray reply = data->getNotificationDataMessage(msg,source,title,content);
     CommunicatorV2 *com = m_communicator.data();
-    if (com)  com->sendMessage("NOTIFICATIO_DATA",wrapInGfdiEnvelope(MessageId::NotificationData,dataPayload));
-// Test code ends - need to implement the real data in Notifcationhandler.
+    if (com)  com->sendMessage("NOTIFICATIO_DATA",reply);
 }
 
 

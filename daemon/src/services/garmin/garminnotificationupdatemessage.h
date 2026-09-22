@@ -23,7 +23,10 @@ public:
     bool hasPicture = false;
     int notificationId=0;
     int count = 1;
-
+private:
+    quint8 getCategoryValue();
+    quint8 getCategoryFlags();
+    quint8 getNotificationPhoneFlags();
 };
 
 

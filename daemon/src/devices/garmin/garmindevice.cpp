@@ -65,7 +65,7 @@ AbstractFirmwareInfo *GarminDevice::firmwareInfo(const QByteArray &bytes, const 
 
 void GarminDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "notifiation from " << notification.appName;
     if (mNotificationHandler)
     {
         NotificationSpec note;

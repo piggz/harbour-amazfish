@@ -156,7 +156,7 @@ public:
     //hadle incoming GFDI  messages
     void onDeviceInformationReceived(DeviceInformationMessage &message);
     void onConfigurationReceived();
-    void onNotificationControlReceived(const NotificationControlMessage& msg);
+    void onNotificationDataRequested(const NotificationControlMessage& msg);
     void onSynchronizationReceived(const SynchronizationMessage& msg);
     void onFilterStatusReceived(const FilterStatusMessage& msg);
     void onWeatherRequestReceived(const WeatherRequestMessage& msg);

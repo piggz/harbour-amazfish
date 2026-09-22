@@ -360,9 +360,7 @@ struct NotificationControlMessage {
     qint32 notificationId{};
     quint8 command{};
     QByteArray data;
-    //QVector<QPair<quint8, quint16>> attributes; // (attribute_id, max_length)
-    //std::optional<quint8> actionId;
-    //std::optional<QString> actionString;
+
 };
 
 
