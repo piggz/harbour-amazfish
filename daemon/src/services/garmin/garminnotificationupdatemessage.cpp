@@ -66,7 +66,7 @@ quint8 GarminNotificationUpdateMessage::getCategoryFlags() {
         case NotificationType::GenericEmail:
         case NotificationType::GenericSms:
         case NotificationType::GenericChat:
-            flags |= 0x01 << (quint8)NotificationFlag::FOREGROUND-1;
+            flags |= 0x01 << (quint8)NotificationFlag::FOREGROUND;
             break;
         case NotificationType::GenericNavigation:
         case NotificationType::GenericSocial:
@@ -74,7 +74,7 @@ quint8 GarminNotificationUpdateMessage::getCategoryFlags() {
         case NotificationType::Generic:
             // TODO: Maybe make this configurable, but most users expect all notifications
             // to be foreground, sending them as background was generating bug reports.
-            flags |= 0x01 << (quint8)NotificationFlag::FOREGROUND-1;
+            flags |= 0x01 << (quint8)NotificationFlag::FOREGROUND;
     }
     return flags;
 }

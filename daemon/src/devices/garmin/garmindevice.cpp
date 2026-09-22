@@ -65,14 +65,25 @@ AbstractFirmwareInfo *GarminDevice::firmwareInfo(const QByteArray &bytes, const 
 
 void GarminDevice::sendAlert(const Amazfish::WatchNotification &notification)
 {
-    qDebug() << Q_FUNC_INFO << "notifiation from " << notification.appName;
+    qDebug() << Q_FUNC_INFO << "notification from " << notification.appName;
     if (mNotificationHandler)
     {
         NotificationSpec note;
         note.body = notification.body;
         note.sourceName = notification.appName;
         note.title = notification.summary;
-        note.id=(quint32)NotificationType::Generic;  // Todo: Change this based on Appname;
+        // Configure notification type based on Appname (small list so far, needs to be extended);
+        if (notification.appName=="Whisperfish")
+            note.notificationType=NotificationType::GenericSocial;
+        else if (notification.appName=="Signal")
+            note.notificationType=NotificationType::GenericSocial;
+        // It seems for emails we don't see the app name but the sender address. Bug or feature?
+        else if (notification.appName.contains('@'))
+            note.notificationType=NotificationType::GenericEmail;
+        else if (notification.appName=="Calendar")
+            note.notificationType=NotificationType::GenericCalendar;
+        else note.notificationType = NotificationType::Generic;
+        note.id=notification.id;
         mNotificationHandler->onNotification(note);
     }
     else qDebug() << Q_FUNC_INFO << "Garmin: No notification handler!";

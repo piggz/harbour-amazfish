@@ -105,8 +105,6 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
     updateMessage->hasActions = false;
     updateMessage->hasPicture=false;
 
-    updateMessage->count=1;
-
     //bool hasPicture = notification.hasPicture;
     updateMessage->count = getNotificationCount(notification.notificationType);
     qDebug() << Q_FUNC_INFO << "Garmin: Found " << updateMessage->count << " notifications of this type";
@@ -120,17 +118,15 @@ void GarminNotificationHandler::onNotificationDataRequested(const NotificationCo
 {
     qDebug() << Q_FUNC_INFO << "Garmin: Notification Data requested, looking up data";
 
-    QString source, title, content;
+    NotificationSpec spec;
     if (m_storedNotifications.contains(msg.notificationId)) {
-        source = m_storedNotifications[msg.notificationId].sourceName;
-        title = m_storedNotifications[msg.notificationId].title;
-        content = m_storedNotifications[msg.notificationId].body;
+        spec = m_storedNotifications[msg.notificationId];
+        GarminNotificationDataMessage *data = new GarminNotificationDataMessage(m_communicator.data());
+        QByteArray reply = data->getNotificationDataMessage(msg,spec);
+        CommunicatorV2 *com = m_communicator.data();
+        if (com)  com->sendMessage("NOTIFICATIO_DATA",reply);
     }
 
-    GarminNotificationDataMessage *data = new GarminNotificationDataMessage(m_communicator.data());
-    QByteArray reply = data->getNotificationDataMessage(msg,source,title,content);
-    CommunicatorV2 *com = m_communicator.data();
-    if (com)  com->sendMessage("NOTIFICATIO_DATA",reply);
 }
 
 
@@ -201,17 +197,20 @@ void GarminNotificationHandler::onSetCallState(const CallSpec& call)
 
 bool GarminNotificationHandler::addNotificationToQueue(NotificationSpec note) {
     bool found = false;
-    qDebug() << Q_FUNC_INFO << "Garmin: checking notification queue for id " << note.id;
+    qDebug() << Q_FUNC_INFO << "Garmin: checking notification queue for id " << note.id << ", type = " <<(quint8) note.notificationType;
     if (m_storedNotifications.contains(note.id)){
         found = true;
         m_storedNotifications.remove(note.id);
+        qDebug() << Q_FUNC_INFO << "Garmin: found notification in queue for id " << note.id << ", type = " <<(quint8) note.notificationType;
+
     }
-    m_storedNotifications.begin();
+//    m_storedNotifications.begin();
     m_storedNotifications.insert(note.id,note);
     return found;
 }
 
 int GarminNotificationHandler::getNotificationCount(NotificationType type) {
+    qDebug() << Q_FUNC_INFO << "Garmin: Checking count for notification type " << (quint8)type;
     int count = 0;
     for (auto it =m_storedNotifications.begin(); it != m_storedNotifications.end();) {
         count += it.value().notificationType == type ? 1 : 0;

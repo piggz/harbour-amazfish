@@ -15,7 +15,7 @@ public:
         mCommunicator = parent;
     };
 
-    QByteArray getNotificationDataMessage(const NotificationControlMessage& msg, const QString& sourceName, const QString& title, const QString& body);
+    QByteArray getNotificationDataMessage(const NotificationControlMessage& msg, const NotificationSpec& spec);
 private:
     CommunicatorV2 *mCommunicator = nullptr;
 
