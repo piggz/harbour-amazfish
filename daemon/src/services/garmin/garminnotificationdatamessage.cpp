@@ -78,8 +78,7 @@ std::optional<QByteArray> notificationAttributeValue(quint8 code, int maxLength,
 
 
 
-
-QByteArray GarminNotificationDataMessage::getNotificationDataMessage(const NotificationControlMessage& msg, const QString& sourceName, const QString& title, const QString& body) {
+QByteArray GarminNotificationDataMessage::getNotificationDataMessage(const NotificationControlMessage& msg,const NotificationSpec& spec) {
     qDebug() << Q_FUNC_INFO << "Garmin: Notification Data requested, building packet";
     QByteArray attributes;
     attributes.append(char(msg.command));
@@ -103,7 +102,7 @@ QByteArray GarminNotificationDataMessage::getNotificationDataMessage(const Notif
             pos += 3; // 2-byte param + 1 unknown byte we don't use
         }
 
-        const std::optional<QByteArray> value = notificationAttributeValue(code, maxLength, sourceName, title, body);
+        const std::optional<QByteArray> value = notificationAttributeValue(code, maxLength, spec.sourceName, spec.title, spec.body);
         if (!value)
             continue;
 
