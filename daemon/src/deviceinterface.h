@@ -47,13 +47,14 @@ public:
 
     Q_INVOKABLE QString pair(const QString &name, const QString &deviceType, const QString &address);
 
-    Q_INVOKABLE void connectToDevice(const QString &address);
+    Q_INVOKABLE void connectToDevice(bool userInitiated);
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void unpair();
     Q_INVOKABLE QString connectionState() const;
     Q_INVOKABLE int connectionStateChangedCount() const;
     Q_INVOKABLE bool operationRunning();
     Q_INVOKABLE bool supportsFeature(int f);
+    Q_INVOKABLE bool supportsDataType(int t);
     Q_INVOKABLE int supportedFeatures();
     Q_INVOKABLE int supportedDataTypes();
 
@@ -70,10 +71,8 @@ public:
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
     Q_INVOKABLE bool startDownload();
-    Q_INVOKABLE void downloadSportsData();
-    Q_INVOKABLE void downloadActivityData();
-    Q_INVOKABLE void refreshInformation();
 
+    Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(int i);
     Q_INVOKABLE void sendAlert(const QVariantMap &notification, bool allowDuplicate = false);
     Q_INVOKABLE void sendAlert(const Amazfish::WatchNotification &notification, bool allowDuplicate = false);
@@ -85,7 +84,6 @@ public:
     Q_INVOKABLE void updateCalendar();
     Q_INVOKABLE void reloadCities();
     Q_INVOKABLE void enableFeature(int feature);
-    Q_INVOKABLE void fetchLogs();
     Q_INVOKABLE void fetchData(int dataType);
     Q_INVOKABLE void requestScreenshot();
     Q_INVOKABLE QStringList supportedDisplayItems();
@@ -93,9 +91,13 @@ public:
 
 private:
 
+    void connectToDevice(const QString &address);
+
     int m_connectionStateChangedCount = 0;
     QString m_deviceAddress;
     QString m_deviceName;
+    QString m_adapterPath;
+
     bool m_dbusRegistered = false;
     int m_lastBatteryLevel = 0;
     int m_lastAlertHash = 0;
@@ -107,6 +109,12 @@ private:
 
     QTimer *m_refreshTimer = nullptr;
     QTimer *m_findDeviceTimer = nullptr;
+    QTimer *m_reconnectTimer = nullptr;
+    bool m_autoreconnect = true;
+    bool m_allowDeviceNotAvailableMessage = true;
+
+    void reconnectionTimer();
+
     Q_SLOT void onRefreshTimer();
     void findDevice();
     int m_playedSounds = 0;
@@ -115,6 +123,9 @@ private:
     void updateServiceController();
 
     void log_battery_level(int level);
+
+    QString devicePath(const QString &address);
+    bool determineAdapterPath(const QString &address);
 
     HRMService *hrmService() const;
     
@@ -173,6 +184,8 @@ private:
 #ifdef MER_EDITION_SAILFISH
     BackgroundActivity *m_backgroundActivity = nullptr;
 #endif
+
+    bool migrateDataDeviceAddress(const QString& oldAddress, const QString& newAddress);
 };
 
 #endif // BIPINTERFACE_H

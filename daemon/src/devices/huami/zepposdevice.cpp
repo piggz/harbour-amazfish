@@ -19,9 +19,7 @@
 #include "deviceinfoservice.h"
 #include "bipfirmwareservice.h"
 #include "hrmservice.h"
-#include "alertnotificationservice.h"
 
-#include <QtXml/QtXml>
 #include <QDebug>
 
 ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
@@ -29,8 +27,6 @@ ZeppOSDevice::ZeppOSDevice(const QString &pairedName, QObject *parent) : HuamiDe
     qDebug() << Q_FUNC_INFO;
 
     m_ActivitySampleSize = 8;
-
-    connect(this, &QBLEDevice::propertiesChanged, this, &ZeppOSDevice::onPropertiesChanged);
 
     //Create all possile services
 
@@ -264,88 +260,13 @@ void ZeppOSDevice::fileDownloadFinish(const QString &url, const QString &filenam
     qDebug() << Q_FUNC_INFO << url << filename;
 }
 
-void ZeppOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
+QBLEService *ZeppOSDevice::drv_createService(const QString &uuid, const QString &path)
 {
-    qDebug() << Q_FUNC_INFO << interface << map << list << m_connectionState;
-
-    if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
-        if (map.contains("Paired")) {
-            bool value = map["Paired"].toBool();
-
-            if (value) {
-                setConnectionState("paired");
-            }
-        }
-        if (map.contains("Connected")) {
-            bool value = map["Connected"].toBool();
-
-            if (!value) {
-                setConnectionState("disconnected");
-            } else {
-                setConnectionState("connected");
-            }
-        }
-        if (deviceProperty("ServicesResolved").toBool() ) {
-            int elapsed = init_dt.secsTo(QDateTime::currentDateTime());
-            qDebug() << "initialise() elapsed: " << elapsed << "starting: " << (elapsed >60);
-            if (elapsed > 60) {
-                init_dt = QDateTime::currentDateTime();
-                initialise();
-            }
-        }
-    }
-}
-
-void ZeppOSDevice::parseServices()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), nullptr);
-    QDBusReply<QString> xml = adapterIntro.call("Introspect");
-
-    qDebug() << "Resolved services...";
-
-    qDebug().noquote() << xml.value();
-
-    QDomDocument doc;
-    doc.setContent(xml.value());
-
-    QDomNodeList nodes = doc.elementsByTagName("node");
-
-    qDebug() << nodes.count() << "nodes";
-
-    for (int x = 0; x < nodes.count(); x++)
-    {
-        QDomElement node = nodes.at(x).toElement();
-        QString nodeName = node.attribute("name");
-
-        if (nodeName.startsWith("service")) {
-            QString path = devicePath() + "/" + nodeName;
-
-            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), nullptr);
-            QString uuid = devInterface.property("UUID").toString();
-
-            qDebug() << "Creating service for: " << uuid;
-
-            if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
-                addService(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION, new AlertNotificationService(path, this));
-            } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
-                addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
-            } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
-                addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this, true));
-            } else if (uuid == MiBandService::UUID_SERVICE_MIBAND && !service(MiBandService::UUID_SERVICE_MIBAND)) {
-                addService(MiBandService::UUID_SERVICE_MIBAND, new MiBandService(path, this));
-            } else if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2 && !service(MiBand2Service::UUID_SERVICE_MIBAND2)) {
-                addService(MiBand2Service::UUID_SERVICE_MIBAND2, new MiBand2Service(path, 0x00, 0x80, true, this));
-            } else if (uuid == BipFirmwareService::UUID_SERVICE_FIRMWARE && !service(BipFirmwareService::UUID_SERVICE_FIRMWARE)) {
-                addService(BipFirmwareService::UUID_SERVICE_FIRMWARE, new BipFirmwareService(path, this));
-            } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
-                addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
-            } else if ( !service(uuid)) {
-                addService(uuid, new QBLEService(uuid, path, this));
-            }
-        }
+    qDebug() << Q_FUNC_INFO << uuid;
+    if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
+        return new BatteryService(path, this);
+    } else {
+        return HuamiDevice::drv_createService(uuid, path);
     }
 }
 

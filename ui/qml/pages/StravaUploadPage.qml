@@ -93,6 +93,26 @@ PagePL {
             }
         }
 
+        Rectangle {
+            width: parent.width
+            height: 1
+        }
+
+        LabelPL {
+            id: lblStravaAPI
+            horizontalAlignment: Text.AlignHCenter
+            width: parent.width
+            text: qsTr("Please Note:\n\nChanges to the Strava API access mean that it costs to provide this integration.\nPlease consider making a donation if you use this functionality.")
+        }
+        ButtonPL {
+            id: btnDonate
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Donate");
+            onClicked: {
+                Qt.openUrlExternally("https://paypal.me/piggz");
+            }
+        }
+
         Timer {
             id: tmrStatusCheck
             running: false

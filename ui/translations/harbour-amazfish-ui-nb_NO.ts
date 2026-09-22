@@ -84,23 +84,23 @@
         <translation>Hjertefrekvens</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="65"/>
-        <location filename="../qml/pages/AnalysisPage.qml" line="68"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="66"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="69"/>
         <source>Steps</source>
         <translation>Skritt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="82"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="83"/>
         <source>Intensity</source>
         <translation>Intensitet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="99"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="100"/>
         <source>HRV</source>
         <translation>HRV (Hjertevariabilitet)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="115"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="118"/>
         <source>Body Temperature</source>
         <translation>Kroppstemperatur</translation>
     </message>
@@ -193,19 +193,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="382"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="374"/>
         <source>Serial No: </source>
         <translation>Serienr: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="385"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="377"/>
         <source>Hardware Rev: </source>
         <translation>Mmaskinvareversjon: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="388"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="380"/>
         <source>Software Rev: </source>
         <translation>Programvareversjon: </translation>
     </message>
@@ -216,7 +216,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="391"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="383"/>
         <source>GPS Ver: </source>
         <translation>GPS-ver: </translation>
     </message>
@@ -248,17 +248,16 @@
         <translation>Test anrop</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>Fetch debug log</source>
-        <translation>Hent feilsøkingsloggen</translation>
+        <translation type="vanished">Hent feilsøkingsloggen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="312"/>
         <source>Fetch Data</source>
         <translation>Hent data</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="330"/>
         <source>Test Popup</source>
         <translation>Test-popup</translation>
     </message>
@@ -274,19 +273,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="394"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="386"/>
         <source>Model: </source>
         <translation>Modell: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="400"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="392"/>
         <source>Firmware Rev: </source>
         <translation>Fastvare-rev: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="397"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="389"/>
         <source>Manufacturer: </source>
         <translation>Produsent: </translation>
     </message>
@@ -331,22 +330,22 @@
         <translation>Slack-melding</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="346"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Send Weather</source>
         <translation>Send værdata</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="356"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="348"/>
         <source>Update Calendar</source>
         <translation>Oppdater kalender</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="369"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="361"/>
         <source>Music Control</source>
         <translation>Musikk-kontroll</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="321"/>
         <source>Request Screenshot</source>
         <translation>Forespør skjermavbildning</translation>
     </message>
@@ -379,7 +378,7 @@
         <translation>Test umiddelbar varslingstjeneste</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="342"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="334"/>
         <source>This is a test notification</source>
         <translation>Dette er en testvarsling</translation>
     </message>
@@ -387,8 +386,8 @@
 <context>
     <name>DownloadDataMenuItem</name>
     <message>
-        <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
-        <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
+        <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
+        <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
         <source>Download Data</source>
         <translation>Last ned data</translation>
     </message>
@@ -493,6 +492,122 @@
         <location filename="../qml/pages/FirstPage.qml" line="327"/>
         <source>Install File</source>
         <translation>Installer fil</translation>
+    </message>
+</context>
+<context>
+    <name>FitPubSettingsPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
+        <source>FitPub settings</source>
+        <translation>Innstillinger for FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
+        <source>Save</source>
+        <translation>Lagre</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
+        <source>Instance URL:</source>
+        <translation>Instans-URL:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
+        <source>Username or Email:</source>
+        <translation>Brukernavn eller e-postadresse:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
+        <source>Password:</source>
+        <translation>Passord:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
+        <source>Account linked</source>
+        <translation>Konto tilkoblet</translation>
+    </message>
+</context>
+<context>
+    <name>FitPubUploadPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="9"/>
+        <source>FitPub Upload</source>
+        <translation>FitPub-opplasting</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="26"/>
+        <source>Activity name for FitPub</source>
+        <translation>Navn på aktivitet for FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
+        <source>Name</source>
+        <translation>Navn</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
+        <source>Description</source>
+        <translation>Beskrivelse</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
+        <source>Activity description for FitPub</source>
+        <translation>Aktivitetsbeskrivelse for FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="46"/>
+        <source>Type (FitPub)</source>
+        <translation>Type (FitPub)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
+        <source>Private</source>
+        <translation>Privat</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
+        <source>Upload</source>
+        <translation>Last opp</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
+        <source>Not linked to FitPub</source>
+        <translation>Ikke lenket til FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
+        <source>Authenticating...</source>
+        <translation>Autentiserer...</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
+        <source>Authentication failed: </source>
+        <translation>Autentisering feilet: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
+        <source>Uploading data...</source>
+        <translation>Laster opp data …</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
+        <source>Upload failed: </source>
+        <translation>Opplasting feilet: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
+        <source>Updating activity metadata...</source>
+        <translation>Oppdaterer metadata for aktivitet...</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
+        <source>Activity upload complete</source>
+        <translation>Aktiviteten er lastet opp</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
+        <source>Update failed: </source>
+        <translation>Oppdatering feilet: </translation>
     </message>
 </context>
 <context>
@@ -1383,7 +1498,7 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
         <source>Donate</source>
         <translation>Doner</translation>
     </message>
@@ -1411,6 +1526,11 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
+        <source>FitPub</source>
+        <translation>FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
         <source>Debug Info</source>
         <translation>Avlusningsinfo</translation>
     </message>
@@ -1627,12 +1747,12 @@
 <context>
     <name>SportPage</name>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="360"/>
+        <location filename="../qml/pages/SportPage.qml" line="361"/>
         <source>Send to Strava</source>
         <translation>Send til Strava</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="169"/>
+        <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>Data:</source>
         <translation>Data:</translation>
     </message>
@@ -1657,12 +1777,12 @@
         <translation type="vanished">Stigning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="87"/>
+        <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°</source>
         <translation>%1°; %2°</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="89"/>
+        <location filename="../qml/pages/SportPage.qml" line="90"/>
         <source>%1°; %2°; %3m</source>
         <translation>%1°; %2°; %3m</translation>
     </message>
@@ -1747,24 +1867,29 @@
         <translation type="vanished">SWOLF</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="150"/>
+        <location filename="../qml/pages/SportPage.qml" line="151"/>
         <source>Start: %1 %2</source>
         <translation>Start: %1 %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="156"/>
+        <location filename="../qml/pages/SportPage.qml" line="157"/>
         <source>Duration: %1</source>
         <translation>Varighet: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="162"/>
+        <location filename="../qml/pages/SportPage.qml" line="163"/>
         <source>Location: %1</source>
         <translation>Posisjon: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="373"/>
+        <location filename="../qml/pages/SportPage.qml" line="374"/>
         <source>Send to FitTrackee</source>
         <translation>Send til FitTrackee</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="387"/>
+        <source>Send to FitPub</source>
+        <translation>Send til FitPub</translation>
     </message>
     <message>
         <source>Max Pace</source>
@@ -1966,17 +2091,17 @@
         <translation type="vanished">Sjakk</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="18"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Sports Activities</source>
         <translation>Sportslige aktiviteter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="42"/>
         <source>Download Next Activity</source>
         <translation>Last ned neste aktivitet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="165"/>
         <source>Remove</source>
         <translation>Fjern</translation>
     </message>
@@ -2026,6 +2151,22 @@
         <location filename="../qml/pages/StravaSettingsPage.qml" line="95"/>
         <source>Country: </source>
         <translation>Land: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="107"/>
+        <source>Please Note:
+
+Changes to the Strava API access mean that it costs to provide this integration.
+Please consider making a donation if you use this functionality.</source>
+        <translation>Vennligst merk:
+
+Endringer i tilgangen til Strava-API-et gjør at det koster penger å tilby denne integrasjonen.
+Vurder gjerne å gi et bidrag dersom du bruker denne funksjonaliteten.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
+        <source>Donate</source>
+        <translation>Doner</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
@@ -2082,27 +2223,43 @@
         <translation>Last opp</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="133"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="105"/>
+        <source>Please Note:
+
+Changes to the Strava API access mean that it costs to provide this integration.
+Please consider making a donation if you use this functionality.</source>
+        <translation>Vennligst merk:
+
+Endringer i tilgangen til Strava-API-et gjør at det koster penger å tilby denne integrasjonen.
+Vurder gjerne å gi et bidrag dersom du bruker denne funksjonaliteten.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
+        <source>Donate</source>
+        <translation>Doner</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="153"/>
         <source>Uploading data...</source>
         <translation>Laster opp data …</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="150"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="170"/>
         <source>Checking upload...</source>
         <translation>Sjekker opplasting...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="213"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="233"/>
         <source>TCX uploaded...</source>
         <translation>TCX opplastet...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="248"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="268"/>
         <source>Activity upload complete</source>
         <translation>Aktiviteten er lastet opp</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="314"/>
         <source>An unknown error occurred</source>
         <translation>En ukjent feil oppstod</translation>
     </message>
@@ -3746,7 +3903,7 @@
         <location filename="../qml/components/Translation.js" line="267"/>
         <location filename="../qml/components/Translation.js" line="267"/>
         <source>Trail Run</source>
-        <translation>Terrengløp</translation>
+        <translation>Stiløp</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="268"/>

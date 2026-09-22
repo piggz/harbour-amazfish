@@ -106,6 +106,7 @@ set(SOURCES
 ./src/services/dk08wechatservice.cpp
 ./src/services/hrmservice.cpp
 ./src/services/immediatealertservice.cpp
+./src/services/immediatealertserverservice.cpp
 ./src/services/infinitimemotionservice.cpp
 ./src/services/infinitimenavservice.cpp
 ./src/services/infinitimeweatherservice.cpp
@@ -257,6 +258,7 @@ set(HEADERS
 ./src/services/dk08wechatservice.h
 ./src/services/hrmservice.h
 ./src/services/immediatealertservice.h
+./src/services/immediatealertserverservice.h
 ./src/services/infinitimemotionservice.h
 ./src/services/infinitimenavservice.h
 #./src/services/infinitimeresourceservice.h

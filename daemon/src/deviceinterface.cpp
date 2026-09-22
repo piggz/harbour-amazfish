@@ -1,5 +1,6 @@
 #include "deviceinterface.h"
 #include "bluezadapter.h"
+#include "adaptermodel.h"
 #include "hrmservice.h"
 #include "devicefactory.h"
 #include "amazfishconfig.h"
@@ -84,11 +85,12 @@ DeviceInterface::DeviceInterface()
     connect(&m_navigationInterface, &NavigationInterface::runningChanged, this, &DeviceInterface::navigationRunningChanged);
     connect(&m_navigationInterface, &NavigationInterface::navigationChanged, this, &DeviceInterface::navigationChanged);
 
-    //Finally, connect to device if it is defined
-    QString pairedAddress = config->pairedAddress();
-    if (!pairedAddress.isEmpty()) {
-        connectToDevice(pairedAddress);
-    }
+    m_reconnectTimer = new QTimer(this);
+    m_reconnectTimer->setInterval(60000);
+    connect(m_reconnectTimer, &QTimer::timeout, this, &DeviceInterface::reconnectionTimer);
+    m_reconnectTimer->start(); // Start timer to attempt to reconnect every 60 seconds
+
+    reconnectionTimer();
 }
 
 DeviceInterface::~DeviceInterface()
@@ -100,14 +102,61 @@ void DeviceInterface::connectToDevice(const QString &address)
 {
     qDebug() << Q_FUNC_INFO << ": address:" << address;
 
-    if (m_device) {
-        m_deviceAddress = address;
-        m_device->setDevicePath(address);
+    m_deviceAddress = devicePath(address);
+
+    if (m_device && !m_deviceAddress.isEmpty()) {
+        m_device->setDevicePath(m_deviceAddress);
         m_device->connectToDevice();
-    }
-    else {
+    } else {
         qDebug() << Q_FUNC_INFO << ": device was not valid";
-        message(tr("Device is not valid, it may not be supported"));
+        if (m_allowDeviceNotAvailableMessage) {
+            message(tr("Device is not yet available"));
+            m_allowDeviceNotAvailableMessage = false;
+        }
+    }
+}
+
+void DeviceInterface::connectToDevice(bool userInitiated)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    auto config = AmazfishConfig::instance();
+    QString pairedAddress = config->pairedAddress();
+
+    m_allowDeviceNotAvailableMessage = userInitiated;
+
+    // Convert old format address to new
+    if (pairedAddress.contains("/org/bluez/hci")) {
+
+        QString newAddress = pairedAddress.right(17).replace("_", ":");
+        // Migrate data to the new address format
+        if (migrateDataDeviceAddress(pairedAddress, newAddress)) {
+            config->setPairedAddress(newAddress);
+        }
+        //If migration fails, dont save the new address but connect anyway
+        pairedAddress = newAddress;
+    }
+
+    if (!pairedAddress.isEmpty()) {
+        // Connect was called from UI so enable auto reconnect
+        m_autoreconnect = true;
+        connectToDevice(pairedAddress);
+    }
+}
+
+void DeviceInterface::reconnectionTimer()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    const QString state = connectionState();
+    if (state == "pairing" || state == "connecting" || state == "connected" || state == "paired") {
+        return;
+    }
+
+    if ((state != "authenticated" && m_autoreconnect) || state == "authfailed") {
+        qDebug() << Q_FUNC_INFO << "Lost connection";
+        disconnect();
+        connectToDevice(false);
     }
 }
 
@@ -115,7 +164,13 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
 {
     qDebug() << Q_FUNC_INFO << name << deviceType << address;
 
-    m_deviceAddress = address;
+    m_deviceAddress = devicePath(address);
+
+    if (m_deviceAddress.isEmpty()) {
+        qDebug() << "Device is not available";
+        message(tr("Device is not yet available"));
+        return QString("device not available");
+    }
 
     if (m_device) {
         delete m_device;
@@ -123,7 +178,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
     m_device = DeviceFactory::createDevice(name, deviceType);
 
     if (m_device) {
-        m_device->setDevicePath(address);
+        m_device->setDevicePath(m_deviceAddress);
         connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::downloadProgress, this, &DeviceInterface::downloadProgress, Qt::UniqueConnection);
@@ -132,6 +187,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
         m_device->pair();
+        m_autoreconnect = true;
         return "pairing";
     }
 
@@ -143,6 +199,8 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
 void DeviceInterface::disconnect()
 {
     qDebug() << Q_FUNC_INFO;
+    m_autoreconnect = false;
+
     if (m_device) {
         m_device->disconnectFromDevice();
     }
@@ -151,11 +209,15 @@ void DeviceInterface::disconnect()
 void DeviceInterface::unpair()
 {
     qDebug() << Q_FUNC_INFO;
-    if (m_device) {
+    if (m_device && !m_adapterPath.isEmpty()) {
         BluezAdapter adapter;
-        adapter.setAdapterPath(AmazfishConfig::instance()->localAdapter());
+        adapter.setAdapterPath(m_adapterPath);
         adapter.removeDevice(m_deviceAddress);
+        delete m_device;
+        m_device = nullptr;
 
+        m_autoreconnect = false;
+        m_adapterPath = QString();
     }
 }
 
@@ -657,41 +719,42 @@ void DeviceInterface::onConnectionStateChanged()
 {
     qDebug() << Q_FUNC_INFO << connectionState();
 
-    if (connectionState() == "authenticated") {
-        m_device->setDatabase(dbConnection());
-        if (m_device) {
+    if (m_device) {
+        if (connectionState() == "authenticated") {
+            m_device->setDatabase(dbConnection());
             m_dbusHRM->setDevice(m_device);
-        }
-        if (hrmService()) {
-            m_dbusHRM->setHRMService(hrmService());
-        }
-        if (AmazfishConfig::instance()->appNotifyConnect() && m_notificationBuffer.isEmpty()) {
-            Amazfish::WatchNotification n;
-            n.id = 0;
-            n.appId = "uk.co.piggz.amazfish";
-            n.appName = tr("Amazfish");
-            n.summary = tr("Connected");
-            n.body = tr("Phone and watch are connected");
-            sendAlert(n, true);
-        }
 
-        if (m_device && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
-                && AmazfishConfig::instance()->appSilenceConnect()) {
-            m_soundProfile.setProfile(watchfish::SoundProfile::Silent);
+            if (hrmService()) {
+                m_dbusHRM->setHRMService(hrmService());
+            }
+            if (AmazfishConfig::instance()->appNotifyConnect() && m_notificationBuffer.isEmpty()) {
+                Amazfish::WatchNotification n;
+                n.id = 0;
+                n.appId = "uk.co.piggz.amazfish";
+                n.appName = tr("Amazfish");
+                n.summary = tr("Connected");
+                n.body = tr("Phone and watch are connected");
+                sendAlert(n, true);
+            }
+
+            if (m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
+                    && AmazfishConfig::instance()->appSilenceConnect()) {
+                m_soundProfile.setProfile(watchfish::SoundProfile::Silent);
+            }
+
+            sendBufferedNotifications();
+            updateCalendar();
+            m_connectionStateChangedCount++;
+        } else {
+            //Terminate running operations
+            m_device->abortOperations();
+
+            if (m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
+                    && AmazfishConfig::instance()->appSilenceConnect()) {
+                m_soundProfile.setProfile(watchfish::SoundProfile::General);
+            }
+
         }
-
-        sendBufferedNotifications();
-        updateCalendar();
-        m_connectionStateChangedCount++;
-    } else {
-        //Terminate running operations
-        m_device->abortOperations();
-
-        if (m_device && m_device->supportsFeature(Amazfish::Feature::FEATURE_ALERT)
-                && AmazfishConfig::instance()->appSilenceConnect()) {
-            m_soundProfile.setProfile(watchfish::SoundProfile::General);
-        }
-
     }
     emit connectionStateChanged();
 }
@@ -730,6 +793,46 @@ void DeviceInterface::log_battery_level(int level) {
     }
     tg.commit();
 
+}
+
+QString DeviceInterface::devicePath(const QString& address)
+{
+    qDebug() << Q_FUNC_INFO << address;
+
+    QString formattedAddress = address;
+    formattedAddress.replace(":", "_");
+
+    if (!determineAdapterPath(formattedAddress)) {
+        qDebug() << "No device path found";
+        return QString();
+    }
+
+    return m_adapterPath + "/dev_" + formattedAddress;
+}
+
+bool DeviceInterface::determineAdapterPath(const QString &address)
+{
+    qDebug() << Q_FUNC_INFO << address;
+    AdapterModel adapterModel;
+
+    for (int i = 0; i < adapterModel.rowCount(); ++i) {
+        QVariantMap adapter = adapterModel.get(i);
+
+        QString deviceString = adapter["itemText"].toString() + "/dev_" + address;
+        qDebug() << adapter << deviceString;
+
+        BluezAdapter bluezAdapter;
+        bluezAdapter.setAdapterPath(adapter["itemText"].toString());
+
+        if (bluezAdapter.deviceIsValid(deviceString)) {
+            m_adapterPath = adapter["itemText"].toString();
+            AmazfishConfig::instance()->setLocalAdapter(m_adapterPath); // Used by PTJF Device for local server
+            return true;
+        }
+    }
+
+    qDebug() << "No device path found";
+    return false;
 }
 
 void DeviceInterface::slot_informationChanged(Amazfish::Info key, const QString &val)
@@ -1050,20 +1153,6 @@ bool DeviceInterface::operationRunning()
     return false;
 }
 
-void DeviceInterface::downloadSportsData()
-{
-    if (m_device) {
-        m_device->downloadSportsData();
-    }
-}
-
-void DeviceInterface::downloadActivityData()
-{
-    if (m_device) {
-        m_device->downloadActivityData();
-    }
-}
-
 void DeviceInterface::sendWeather(CurrentWeather *weather)
 {
     qDebug() << Q_FUNC_INFO << *weather;
@@ -1106,6 +1195,27 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
         }
 
     }
+}
+
+bool DeviceInterface::migrateDataDeviceAddress(const QString& oldAddress, const QString& newAddress)
+{
+    qDebug() << Q_FUNC_INFO << oldAddress << newAddress;
+
+    if (!m_conn || !m_conn->isDatabaseUsed()) {
+        qWarning() << Q_FUNC_INFO << "no database, deferring address migration";
+        return false;
+    }
+
+    KDbTransaction t = m_conn->beginTransaction();
+    KDbTransactionGuard tg(t);
+    bool ok = m_conn->executeSql(KDbEscapedString("UPDATE mi_band_activity SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress)));
+    ok = m_conn->executeSql(KDbEscapedString("UPDATE sports_data      SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress))) && ok;
+    if (ok) {
+        tg.commit();
+    }
+
+    qDebug() << Q_FUNC_INFO << ok;
+    return ok;
 }
 
 void DeviceInterface::refreshInformation()
@@ -1218,7 +1328,7 @@ void DeviceInterface::onRefreshTimer()
         if (m_lastActivitySync.secsTo(currentDate) >= (60*60)) {
             // qDebug() << Q_FUNC_INFO << "Auto syncing activity data";
             m_lastActivitySync = currentDate;
-            downloadActivityData();
+            fetchData((int)Amazfish::DataType::TYPE_ACTIVITY);
         }
     }
 }
@@ -1259,13 +1369,22 @@ void DeviceInterface::triggerSendWeather()
 void DeviceInterface::updateCalendar()
 {
     qDebug() << Q_FUNC_INFO;
+
+    QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
+
+    if (AmazfishConfig::instance()->appTransliterate()) {
+        for (watchfish::CalendarEvent &event : eventlist) {
+            event.setTitle(Transliterator::convert(event.title()));
+            event.setLocation(Transliterator::convert(event.location()));
+            event.setDescription(Transliterator::convert(event.description()));
+        }
+    }
+
     if (supportsFeature(int(Amazfish::Feature::FEATURE_EVENT_REMINDER))) {
         if (m_device) {
-            QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
-	    m_device->syncCalendar(eventlist);
+            m_device->syncCalendar(eventlist);
         }
     } else if (AmazfishConfig::instance()->appSimulateEventSupport()){
-        QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
         QList<watchfish::CalendarEvent> filteredEventList;
         foreach (const watchfish::CalendarEvent &event, eventlist) {
             if (!event.alertTime().isValid())
@@ -1305,13 +1424,6 @@ void DeviceInterface::enableFeature(int feature)
     }
 }
 
-void DeviceInterface::fetchLogs()
-{
-    if (m_device) {
-        m_device->fetchLogs();
-    }
-}
-
 void DeviceInterface::fetchData(int dataType)
 {
     if (m_device) {
@@ -1335,8 +1447,17 @@ QStringList DeviceInterface::supportedDisplayItems()
 }
 
 bool DeviceInterface::supportsFeature(int f){
-    return (supportedFeatures() & f);
+    bool result = (supportedFeatures() & f);
+    qDebug() << Q_FUNC_INFO << (Amazfish::Feature)f << result;
+    return result;
 }
+
+bool DeviceInterface::supportsDataType(int t) {
+    bool result = (supportedDataTypes() & t);
+    qDebug() << Q_FUNC_INFO << (Amazfish::DataType)t << result;
+    return result;
+}
+
 
 int DeviceInterface::supportedFeatures()
 {

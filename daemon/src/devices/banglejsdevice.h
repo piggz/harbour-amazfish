@@ -85,8 +85,7 @@ public:
     void navigationRunning(bool running) override;
     void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
-    void downloadActivityData() override;
-    void downloadSportsData() override;
+    void fetchData(Amazfish::DataTypes dataTypes) override;
 
     bool operationRunning() override;
 
@@ -98,14 +97,18 @@ public:
 
 protected:
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
-    void parseServices();
     void initialise();
     Q_SLOT void serviceEvent(uint8_t event);
     Q_SLOT void handleRxJson(const QJsonObject &json);
 
+    void downloadActivityData();
+    void downloadSportsData();
+
     bool m_operationRunning = false;
+    bool m_initialised = false;
     void setOperationRunning(bool running);
     int m_infoBatteryLevel = 0;
     int m_steps = 0;
@@ -143,6 +146,10 @@ private:
     QMap<QString, int> m_event_id_map; // maps calendar event uid to device id
     std::optional<QList<watchfish::CalendarEvent>> m_eventlist; // list of all events which should go to device
     int m_next_event_id = 1;
+
+    void actTrksList(const QList<QString> &available);
+    QDateTime parseActTrkDateTime(const QString &str);
+
 
 };
 

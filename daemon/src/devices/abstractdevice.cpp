@@ -3,17 +3,15 @@
 #include "hrmservice.h"
 
 #include <QString>
-    
+#include <QDomDocument>
+
 AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBLEDevice(parent)
 {
     qDebug() << Q_FUNC_INFO;
 
     setConnectionState("disconnected");
     m_pairedName = pairedName;
-    m_reconnectTimer = new QTimer(this);
-    m_reconnectTimer->setInterval(60000);
-    connect(m_reconnectTimer, &QTimer::timeout, this, &AbstractDevice::reconnectionTimer);
-    //connect(this, &QBLEDevice::pairFinished, this, &AbstractDevice::devicePairFinished);
+
     connect(this, &QBLEDevice::error, this, &AbstractDevice::deviceError);
 }
 
@@ -23,7 +21,7 @@ void AbstractDevice::pair()
 
     m_needsAuth = true;
     m_pairing = true;
-    m_autoreconnect = true;
+
     //disconnectFromDevice();
     setConnectionState("pairing");
 
@@ -36,39 +34,62 @@ void AbstractDevice::connectToDevice()
     qDebug() << Q_FUNC_INFO;
 
     m_pairing = false;
-    m_autoreconnect = true;
     QBLEDevice::disconnectFromDevice();
     setConnectionState("connecting");
     QBLEDevice::connectToDevice();
-    m_reconnectTimer->start(); //Start timer to attempt to reconnect every 60 seconds
 }
 
 void AbstractDevice::disconnectFromDevice()
 {
     qDebug() << Q_FUNC_INFO;
 
-    m_autoreconnect = false;
     setConnectionState("disconnected");
 
     QBLEDevice::disconnectFromDevice();
 }
 
-void AbstractDevice::reconnectionTimer()
-{
-    //qDebug() << Q_FUNC_INFO;
-
-    if ((!deviceProperty("Connected").toBool() && m_autoreconnect) || connectionState() == "authfailed") {
-        qDebug() << Q_FUNC_INFO << "Lost connection";
-        QBLEDevice::disconnectFromDevice();
-        QBLEDevice::connectToDevice();
-    }
-}
-
-void AbstractDevice::devicePairFinished(const QString &status)
+void AbstractDevice::parseServices()
 {
     qDebug() << Q_FUNC_INFO;
-    if (status == "paired") {
-        setConnectionState("paired");
+
+    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
+    QDBusReply<QString> xml = adapterIntro.call("Introspect");
+
+    // qDebug() << "Resolved services...";
+
+    QDomDocument doc;
+    doc.setContent(xml.value());
+
+    QDomNodeList nodes = doc.elementsByTagName("node");
+
+    qDebug() << nodes.count() << "nodes";
+
+    for (int x = 0; x < nodes.count(); x++)
+    {
+        QDomElement node = nodes.at(x).toElement();
+        QString nodeName = node.attribute("name");
+
+        if (nodeName.startsWith("service")) {
+            QString path = devicePath() + "/" + nodeName;
+
+            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
+            QString uuid = devInterface.property("UUID").toString();
+
+            if (service(uuid)) {
+                qDebug() << "Skipping service creation for: " << uuid;
+            } else {
+                QBLEService *svc = drv_createService(uuid, path);
+                qDebug() << "Creating service for: " << uuid << (svc != nullptr);
+
+                if (svc) {
+                    addService(uuid, svc);
+                } else {
+                    addService(uuid, new QBLEService(uuid, path, this));
+                }
+            }
+
+
+        }
     }
 }
 
@@ -127,20 +148,9 @@ void AbstractDevice::startDownload()
 {
 }
 
-void AbstractDevice::downloadSportsData()
-{   
-}
-
-void AbstractDevice::downloadActivityData()
-{
-}
-
-void AbstractDevice::fetchLogs()
-{
-}
-
 void AbstractDevice::fetchData(Amazfish::DataTypes dataTypes)
 {
+    Q_UNUSED(dataTypes);
 }
 
 void AbstractDevice::sendWeather(CurrentWeather *weather)

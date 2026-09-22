@@ -11,6 +11,8 @@
         <file>qml/pages/FirstPage.qml</file>
         <file>qml/pages/FitTrackeeSettingsPage.qml</file>
         <file>qml/pages/FitTrackeeUploadPage.qml</file>
+        <file>qml/pages/FitPubSettingsPage.qml</file>
+        <file>qml/pages/FitPubUploadPage.qml</file>
         <file>qml/pages/HeartratePage.qml</file>
         <file>qml/pages/PaiDataPage.qml</file>
         <file>qml/pages/PairDevicePage.qml</file>

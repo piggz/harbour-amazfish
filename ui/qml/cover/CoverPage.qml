@@ -66,7 +66,7 @@ CoverBackground {
             spacing: Theme.paddingMedium
             width: childrenRect.width
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: supportsFeature(Amazfish.FEATURE_STEPS)
+            visible: supportsFeatureRefresh(Amazfish.FEATURE_STEPS)
 
             Image {
                 id: imgSteps
@@ -90,7 +90,7 @@ CoverBackground {
             spacing: Theme.paddingMedium
             width: childrenRect.width
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: supportsFeature(Amazfish.FEATURE_HRM)
+            visible: supportsFeatureRefresh(Amazfish.FEATURE_HRM)
 
             Image {
                 id: imgHeartrate
@@ -138,7 +138,7 @@ CoverBackground {
             iconSource: "image://theme/icon-m-refresh";
 
             onTriggered: {
-                if (supportsFeature(Amazfish.FEATURE_HRM)) {
+                if (supportsFeatureRefresh(Amazfish.FEATURE_HRM)) {
                     DaemonInterfaceInstance.requestManualHeartrate();
                 }
             }

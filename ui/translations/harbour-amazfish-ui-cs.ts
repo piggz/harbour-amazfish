@@ -84,23 +84,23 @@
         <translation>Puls</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="65"/>
-        <location filename="../qml/pages/AnalysisPage.qml" line="68"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="66"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="69"/>
         <source>Steps</source>
         <translation>Kroky</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="82"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="83"/>
         <source>Intensity</source>
         <translation>Intensita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="99"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="100"/>
         <source>HRV</source>
         <translation>HRV</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="115"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="118"/>
         <source>Body Temperature</source>
         <translation>Teplota těla</translation>
     </message>
@@ -203,37 +203,37 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="382"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="374"/>
         <source>Serial No: </source>
         <translation>Sériové číslo: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="385"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="377"/>
         <source>Hardware Rev: </source>
         <translation>Revize hardware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="388"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="380"/>
         <source>Software Rev: </source>
         <translation>Revize software: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="394"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="386"/>
         <source>Model: </source>
         <translation>Model: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="400"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="392"/>
         <source>Firmware Rev: </source>
         <translation>Revize firmware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="397"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="389"/>
         <source>Manufacturer: </source>
         <translation>Výrobce: </translation>
     </message>
@@ -244,7 +244,7 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="391"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="383"/>
         <source>GPS Ver: </source>
         <translation>Verze GPS: </translation>
     </message>
@@ -316,37 +316,36 @@
         <translation>Test Volání</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>Fetch debug log</source>
-        <translation>Stáhnout logy pro ladění</translation>
+        <translation type="vanished">Stáhnout logy pro ladění</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="312"/>
         <source>Fetch Data</source>
         <translation>Stáhnout data</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="330"/>
         <source>Test Popup</source>
         <translation>Test upozornění</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="346"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Send Weather</source>
         <translation>Odeslat počasí</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="356"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="348"/>
         <source>Update Calendar</source>
         <translation>Aktualizovat kalendář</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="369"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="361"/>
         <source>Music Control</source>
         <translation>Ovládání hudby</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="321"/>
         <source>Request Screenshot</source>
         <translation>Vyžádat snímek obrazovky</translation>
     </message>
@@ -379,7 +378,7 @@
         <translation>Test služby okamžitého upozornění</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="342"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="334"/>
         <source>This is a test notification</source>
         <translation>Toto je testovací upozorění</translation>
     </message>
@@ -387,8 +386,8 @@
 <context>
     <name>DownloadDataMenuItem</name>
     <message>
-        <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
-        <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
+        <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
+        <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
         <source>Download Data</source>
         <translation>Stažení dat</translation>
     </message>
@@ -493,6 +492,122 @@
         <location filename="../qml/pages/FirstPage.qml" line="327"/>
         <source>Install File</source>
         <translation>Nainstalovat soubor</translation>
+    </message>
+</context>
+<context>
+    <name>FitPubSettingsPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
+        <source>FitPub settings</source>
+        <translation>Nastavení FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
+        <source>Save</source>
+        <translation>Uložit</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
+        <source>Instance URL:</source>
+        <translation>URL Instance:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
+        <source>Username or Email:</source>
+        <translation>Uživatelské jméno nebo Email:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
+        <source>Password:</source>
+        <translation>Heslo:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
+        <source>Account linked</source>
+        <translation>Účet propojen</translation>
+    </message>
+</context>
+<context>
+    <name>FitPubUploadPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="9"/>
+        <source>FitPub Upload</source>
+        <translation>Nahrávání FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="26"/>
+        <source>Activity name for FitPub</source>
+        <translation>Jméno aktivity pro FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
+        <source>Name</source>
+        <translation>Jméno</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
+        <source>Description</source>
+        <translation>Popis</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
+        <source>Activity description for FitPub</source>
+        <translation>Popis aktivity pro FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="46"/>
+        <source>Type (FitPub)</source>
+        <translation>Typ (FitPub)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
+        <source>Private</source>
+        <translation>Soukromé</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
+        <source>Upload</source>
+        <translation>Odeslat</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
+        <source>Not linked to FitPub</source>
+        <translation>Není připojeno k FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
+        <source>Authenticating...</source>
+        <translation>Ověřování přihlášení...</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
+        <source>Authentication failed: </source>
+        <translation>Přihlášení selhalo: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
+        <source>Uploading data...</source>
+        <translation>Odesílání dat…</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
+        <source>Upload failed: </source>
+        <translation>Odesílání selhalo: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
+        <source>Updating activity metadata...</source>
+        <translation>Odesílání metadat o aktivitě...</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
+        <source>Activity upload complete</source>
+        <translation>Odesílání aktivity dokončeno</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
+        <source>Update failed: </source>
+        <translation>Odesílání selhalo: </translation>
     </message>
 </context>
 <context>
@@ -1383,7 +1498,7 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
         <source>Donate</source>
         <translation>Dar vývojáři</translation>
     </message>
@@ -1411,6 +1526,11 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
+        <source>FitPub</source>
+        <translation>FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
         <source>Debug Info</source>
         <translation>Ladící informace</translation>
     </message>
@@ -1627,12 +1747,12 @@
 <context>
     <name>SportPage</name>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="360"/>
+        <location filename="../qml/pages/SportPage.qml" line="361"/>
         <source>Send to Strava</source>
         <translation>Odeslat na Stravu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="169"/>
+        <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>Data:</source>
         <translation>Data:</translation>
     </message>
@@ -1657,12 +1777,12 @@
         <translation type="vanished">Stoupání</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="87"/>
+        <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°</source>
         <translation>%1° %2°</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="89"/>
+        <location filename="../qml/pages/SportPage.qml" line="90"/>
         <source>%1°; %2°; %3m</source>
         <translation>%1°, %2°, %3m</translation>
     </message>
@@ -1747,24 +1867,29 @@
         <translation type="vanished">SWOLF</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="150"/>
+        <location filename="../qml/pages/SportPage.qml" line="151"/>
         <source>Start: %1 %2</source>
         <translation>Začátek: %1 %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="156"/>
+        <location filename="../qml/pages/SportPage.qml" line="157"/>
         <source>Duration: %1</source>
         <translation>Délka: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="162"/>
+        <location filename="../qml/pages/SportPage.qml" line="163"/>
         <source>Location: %1</source>
         <translation>Místo: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="373"/>
+        <location filename="../qml/pages/SportPage.qml" line="374"/>
         <source>Send to FitTrackee</source>
         <translation>Odeslat na FitTrackee</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="387"/>
+        <source>Send to FitPub</source>
+        <translation>Odeslat na FitPub</translation>
     </message>
     <message>
         <source>Max Pace</source>
@@ -3126,17 +3251,17 @@
         <translation type="vanished">Atletika</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="18"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Sports Activities</source>
         <translation>Sportovní aktivity</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="42"/>
         <source>Download Next Activity</source>
         <translation>Stáhnout další aktivitu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="165"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
@@ -3186,6 +3311,22 @@
         <location filename="../qml/pages/StravaSettingsPage.qml" line="95"/>
         <source>Country: </source>
         <translation>Země: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="107"/>
+        <source>Please Note:
+
+Changes to the Strava API access mean that it costs to provide this integration.
+Please consider making a donation if you use this functionality.</source>
+        <translation>Upozornění
+
+Změny v přístupu k Strava API znamenají, že poskytování této integrace je zpoplatněno.
+Pokud tuto funkci používáte, zvažte prosím dar.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
+        <source>Donate</source>
+        <translation>Dar vývojáři</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
@@ -3242,27 +3383,43 @@
         <translation>Odeslat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="133"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="105"/>
+        <source>Please Note:
+
+Changes to the Strava API access mean that it costs to provide this integration.
+Please consider making a donation if you use this functionality.</source>
+        <translation>Upozornění
+
+Změny v přístupu k Strava API znamenají, že poskytování této integrace je zpoplatněno.
+Pokud tuto funkci používáte, zvažte prosím dar.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
+        <source>Donate</source>
+        <translation>Dar vývojáři</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="153"/>
         <source>Uploading data...</source>
         <translation>Odesílání dat…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="150"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="170"/>
         <source>Checking upload...</source>
         <translation>Kontrolování nahraného…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="213"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="233"/>
         <source>TCX uploaded...</source>
         <translation>TCX nahráno…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="248"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="268"/>
         <source>Activity upload complete</source>
         <translation>Odesílání aktivity dokončeno</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="314"/>
         <source>An unknown error occurred</source>
         <translation>Došlo k neznámé chybě</translation>
     </message>
@@ -4786,7 +4943,7 @@
         <location filename="../qml/components/Translation.js" line="247"/>
         <location filename="../qml/components/Translation.js" line="247"/>
         <source>Stretching</source>
-        <translation>Stretching</translation>
+        <translation>Protahování</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="248"/>

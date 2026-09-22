@@ -10,11 +10,10 @@
 
 #include "deviceinfoservice.h"
 #include "mibandservice.h"
+#include "miband2service.h"
 #include "alertnotificationservice.h"
 #include "hrmservice.h"
 #include "bipfirmwareservice.h"
-
-#include <QtXml/QtXml>
 
 HuamiDevice::HuamiDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
@@ -60,21 +59,6 @@ QString HuamiDevice::softwareRevision()
         }
     }
     return m_softwareRevision;
-}
-
-void HuamiDevice::downloadSportsData()
-{
-    m_fetcher->startFetchData(Amazfish::DataType::TYPE_GPS_TRACK);
-}
-
-void HuamiDevice::downloadActivityData()
-{
-    m_fetcher->startFetchData(Amazfish::DataType::TYPE_ACTIVITY);
-}
-
-void HuamiDevice::fetchLogs()
-{
-    m_fetcher->startFetchData(Amazfish::DataType::TYPE_DEBUGLOG);
 }
 
 void HuamiDevice::fetchData(Amazfish::DataTypes dataTypes)
@@ -477,7 +461,6 @@ void HuamiDevice::writeActivityControl(const QByteArray &value)
 void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
     if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
         if (map.contains("Paired")) {
             bool value = map["Paired"].toBool();
 
@@ -500,6 +483,8 @@ void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStrin
             if (elapsed > 60) {
                 init_dt = QDateTime::currentDateTime();
                 initialise();
+            } else {
+                disconnectFromDevice();
             }
         }
     }
@@ -514,4 +499,26 @@ void HuamiDevice::characteristicChanged(const QString &characteristic, const QBy
     } else if (characteristic == MiBandService::UUID_CHARACTERISTIC_MIBAND_ACTIVITY_DATA) {
         m_fetcher->fetchData(value);
     }
+}
+
+
+QBLEService *HuamiDevice::drv_createService(const QString &uuid, const QString &path)
+{
+    qDebug() << Q_FUNC_INFO << uuid;
+
+    if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION) {
+        return new AlertNotificationService(path, this);
+    } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO) {
+        return new DeviceInfoService(path, this);
+    } else if (uuid == HRMService::UUID_SERVICE_HRM) {
+        return new HRMService(path, this);
+    } else if (uuid == MiBandService::UUID_SERVICE_MIBAND) {
+        return new MiBandService(path, this);
+    } else if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2) {
+        return new MiBand2Service(path, 0x00, 0x80, true, this);
+    } else if (uuid == BipFirmwareService::UUID_SERVICE_FIRMWARE) {
+        return new BipFirmwareService(path, this);
+    }
+
+    return nullptr;
 }

@@ -49,6 +49,7 @@ public:
     Q_INVOKABLE void setKind(uint id, const QString &kind);
     Q_INVOKABLE void update();
     Q_INVOKABLE QString gpx(uint id);
+    Q_INVOKABLE QString rawGpx(uint id);
     Q_INVOKABLE void deleteRecord(uint id);
 
 private:
