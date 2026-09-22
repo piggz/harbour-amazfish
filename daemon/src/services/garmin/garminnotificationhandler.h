@@ -192,46 +192,13 @@ enum class CallCommand : quint8 {
 // -------------------------
 // CallSpec
 // -------------------------
-class CallSpec
+struct CallSpec
 {
-public:
     QString number;
     std::optional<QString> name;
     std::optional<QString> sourceName;
     std::optional<QString> sourceAppId;
     CallCommand command;
-
-    // Constructor (Rust: new)
-    static CallSpec create(const QString& number, CallCommand command)
-    {
-        CallSpec s;
-        s.number = number;
-        s.command = command;
-        return s;
-    }
-
-    // Builder-style method (Rust: with_name)
-    CallSpec withName(const QString& newName) const
-    {
-        CallSpec copy = *this;
-        copy.name = newName;
-        return copy;
-    }
-
-    // Equivalent to Rust get_id()
-    qint32 getId() const
-    {
-        qint32 acc = 0;
-
-        const QByteArray bytes = number.toUtf8();
-        for (quint8 b : bytes) {
-            acc = static_cast<qint32>(
-                (acc * 31) + static_cast<qint32>(b)
-            ); // wrapping behaviour preserved implicitly (32-bit overflow)
-        }
-
-        return acc;
-    }
 };
 
 
@@ -249,20 +216,9 @@ public:
     GarminNotificationHandler(QSharedPointer<CommunicatorV2> communicator)
         : m_communicator(communicator)
     {
-        m_nextNotificationId = 100;
         m_lastCleanup.start();
         m_isConnected = true;
         m_storedNotifications.clear();
-
-    }
-
-    // -----------------------------------------------------------------
-    // get_next_notification_id
-    // -----------------------------------------------------------------
-    qint32 getNextNotificationId()
-    {
-        QMutexLocker lock(&m_mutex);
-        return m_nextNotificationId++;
     }
 
     void cleanupOldNotifications();
@@ -276,35 +232,22 @@ private:
     bool addNotificationToQueue(NotificationSpec note);
     int getNotificationCount(NotificationType type);
 
-   QSharedPointer<CommunicatorV2> m_communicator;
+    QSharedPointer<CommunicatorV2> m_communicator;
+    QMutex m_mutex;
+    QHash<int,long> mNotificationReplyAction;
+    QHash<qint32, NotificationSpec> m_storedNotifications;
+    std::optional<QPair<qint32, QByteArray>> m_lastControlRequest;
+    QHash<qint32, quint8> m_messageSizeRequestCount;
+    QElapsedTimer m_lastCleanup;
+    QQueue<NotificationSpec> m_missedNotifications;
 
-   QMutex m_mutex;
-
-   //QHash<qint32, CallSpec> m_activeNotifications;
-   //QHash<NotificationType, quint8> m_notificationCounts;
-   QHash<int,long> mNotificationReplyAction;
-   QHash<qint32, NotificationSpec> m_storedNotifications;
-
-   std::optional<QPair<qint32, QByteArray>> m_lastControlRequest;
-
-   QHash<qint32, quint8> m_messageSizeRequestCount;
-
-   qint32 m_nextNotificationId;
-
-   QElapsedTimer m_lastCleanup;
-
-   //QSet<QPair<QString, quint64>> m_seenDbusMessages;
-
-
-   QQueue<NotificationSpec> m_missedNotifications;
-
-   bool m_isConnected;
+    bool m_isConnected;
 
 
 public slots:
     void onNotification(NotificationSpec notification);
     void onNotificationDataRequested(const NotificationControlMessage& msg);
-
+    void onNotificationPerformAction(const NotificationControlMessage& msg);
 };
 
 //#endif //_GARMINNOTIFICATIONHANDLER_H

@@ -167,7 +167,6 @@ void GarminDevice::parseServices()
     qDebug() << Q_FUNC_INFO << "Parsing Services for Garmin";
     CommunicatorV2* com = qobject_cast<CommunicatorV2*> (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI));
     if (com)
-    //if (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI))
     {
         qDebug() << Q_FUNC_INFO << "Garmin: Communicator already exists, no parsing required.";
         //re-initialise device
@@ -208,6 +207,7 @@ void GarminDevice::parseServices()
                     qDebug() << Q_FUNC_INFO << "Garmin: Adding notification handler";
                     mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(com);
                     connect(com.data(), &CommunicatorV2::NotificationDataRequested,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationDataRequested);
+                    connect(com.data(), &CommunicatorV2::NotificationPerformAction,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationPerformAction);
                     setConnectionState("authenticated");
                     return;
                 }
@@ -230,7 +230,6 @@ void GarminDevice::parseServices()
 void GarminDevice::initialise()
 {
     qDebug() << Q_FUNC_INFO;
-    //setConnectionState("connected");
     parseServices();
 
 }
@@ -277,6 +276,8 @@ QString GarminDevice::information(Amazfish::Info i) const
         qDebug() << Q_FUNC_INFO << "Heart rate: " << com->heartRate();
         return QString::number(com->heartRate());
         break;
+    default:
+        return QString("");
     }
     return QString();
 }

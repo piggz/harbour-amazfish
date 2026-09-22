@@ -36,6 +36,11 @@ void GarminNotificationControlMessage::parse(const QByteArray& data) {
             msg.data = data.mid(5);
             if (mCommunicator)mCommunicator->onNotificationDataRequested(msg);
             return;
+        case (quint8) NotificationCommand::PERFORM_NOTIFICATION_ACTION:
+            msg.data = data.mid(5);
+            if (mCommunicator)mCommunicator->onNotificationPerformAction(msg);
+            return;
+
         default:
             qDebug() << Q_FUNC_INFO << QStringLiteral("GFDI: Unsupported notification control command %1").arg(msg.command);
 

@@ -59,8 +59,6 @@ CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
 
     mState->cobsCodec=new CobsCoDec(this);
 
-    //connect(mState->cobsCodec, &CobsCoDec::messageDecoded, this, &CommunicatorV2::handleDecodedMessage);
-
     initializeDevice();
 
 }
@@ -80,12 +78,6 @@ void CommunicatorV2::setMessageCallback(QSharedPointer<GfdiMessageCallback> cb) 
 
 void CommunicatorV2::registerServiceCallback(Service service, QSharedPointer<ServiceCallback> cb) {
     mState->serviceCallbacks.insert(service, std::move(cb));
-    /*
-    if (service==Service::GFDI) {
-        GarminGfdiMessage* parser= qobject_cast<GarminGfdiMessage*>(cb.data());
-    }
-    */
-
 }
 
 QSharedPointer<ServiceCallback> CommunicatorV2::unregisterServiceCallback(Service service) {
@@ -257,18 +249,7 @@ void CommunicatorV2::processSendQueue()
     QString errorMsg;
 
     qDebug() <<Q_FUNC_INFO << "Garmin: Sending data to watch " <<item.second ;
-    /*
-    mState->characteristicSend->writeAsyncChecked(item.first);
-    connect(mState->characteristicSend.data(), &QBLECharacteristic::characteristicWritten, this,[this, data= item.first, label = item.second](const QString &characteristic,const QByteArray &value) {
-        if (value.data()!=data.data()) {
-            qDebug() << Q_FUNC_INFO <<"Garmin: Sent data not ours.";
-            return;
-        }
-        qDebug() << Q_FUNC_INFO <<"Garmin: Sending next part of message queue: "<< label;
-        mSendInProgress = false;
-        processSendQueue();
-    });
-    */
+
     mState->characteristicSend->writeValue(item.first,&errorMsg);
 
     qDebug() <<Q_FUNC_INFO << "Garmin: writing result:" << errorMsg;
@@ -393,6 +374,12 @@ void CommunicatorV2::onNotificationDataRequested(const NotificationControlMessag
     qDebug() << Q_FUNC_INFO;
     // Notification Handler needs to take care of this
     emit NotificationDataRequested(msg);
+}
+
+void CommunicatorV2::onNotificationPerformAction(const NotificationControlMessage& msg){
+    qDebug() << Q_FUNC_INFO;
+    // Notification Handler needs to take care of this
+    emit NotificationPerformAction(msg);
 }
 
 
@@ -549,22 +536,17 @@ void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
         qDebug() << Q_FUNC_INFO << "Garmin: decoded with handle is empty!";
         return;
     }
-
-
-
     if (decodedWithHandle.size() < 6)
     {
         qDebug() << Q_FUNC_INFO << "Garmin: decoded message size too small!";
         return;
     }
-
     const quint16 declaredLen = le16(decodedWithHandle);
     if (declaredLen != decodedWithHandle.size())
     {
         qDebug() << Q_FUNC_INFO << "Garmin: decoded message has wrong size!";
         return ;
     }
-
     const quint16 receivedCrc = le16(decodedWithHandle.constData() + decodedWithHandle.size()-2);
     const quint16 computedCrc = computeCrc16(decodedWithHandle.mid(0, decodedWithHandle.size() - 2));
     if (receivedCrc != computedCrc)
@@ -572,16 +554,12 @@ void CommunicatorV2::handleDecodedMessage(const QByteArray& decodedWithHandle) {
         qDebug() << Q_FUNC_INFO << "Garmin: decoded message has wrong crc!";
         return;
     }
-
     QByteArray payload = decodedWithHandle.mid(2, decodedWithHandle.size() - 6);
-
     qDebug() << Q_FUNC_INFO << "Garmin: handle GFDI";
     if (mState->serviceCallbacks.contains(Service::GFDI))
         {
             mState->serviceCallbacks.value(Service::GFDI)->onMessage(payload);
         }
-
-
 }
 
 void CommunicatorV2::processHandleManagement(const QByteArray& message) {
@@ -753,7 +731,6 @@ void CommunicatorV2::processCloseHandleResp(const QByteArray& payload) {
 
     QSharedPointer<ServiceCallback> cb;
     {
-        //QMutexLocker lock(&m_mutex);
         cb = mState->serviceCallbacks.take(service);
         mState->handleByService.remove(service);
         mState->serviceByHandle.remove(handle);
@@ -768,8 +745,6 @@ void CommunicatorV2::processCloseAllResp() {
     QList<QSharedPointer<ServiceCallback>> callbacks;
 
     {
-        //QMutexLocker lock(&m_mutex);
-
         mState->serviceByHandle.clear();
         mState->handleByService.clear();
 
@@ -928,18 +903,12 @@ void CommunicatorV2::dispose() {
     mState->mlrCommunicators.clear();
     mState->serviceByHandle.clear();
     mState->serviceCallbacks.clear();
-    // m_notificationsEnabled = false;
-    //m_pendingNotifications.clear();
-    //m_phoneIdToOurId.clear();
 
     mConnected = false;
     mServicesResolved = false;
-    //emit connectedChanged();
-    //emit servicesResolvedChanged();
 
     if (!isFirstConnect) {
         isFirstConnect = true;
-        //emit handshakeCompleteChanged();
     }
 
     setStatus(QStringLiteral("Idle"));

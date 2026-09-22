@@ -126,6 +126,20 @@ struct Result<void> {
 
 
 // -------------------- Enums --------------------
+enum class NotificationAction {
+    CUSTOM_ACTION_1 = 1,
+    CUSTOM_ACTION_2 = 2,
+    CUSTOM_ACTION_3 = 3,
+    CUSTOM_ACTION_4 = 4,
+    CUSTOM_ACTION_5 = 5,
+    REPLY_INCOMING_CALL = 94,
+    REPLY_MESSAGES = 95,
+    ACCEPT_INCOMING_CALL= 96,
+    REJECT_INCOMING_CALL = 97,
+    DISMISS_NOTIFICATION = 98,
+    BLOCK_APPLICATION = 99
+};
+
 
 enum class MessageId : quint16 {
     Response = 5000,
