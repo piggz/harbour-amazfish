@@ -66,6 +66,7 @@ quint8 GarminNotificationUpdateMessage::getCategoryFlags() {
         case NotificationType::GenericEmail:
         case NotificationType::GenericSms:
         case NotificationType::GenericChat:
+    case NotificationType::GenericCalendar:
             flags |= 0x01 << (quint8)NotificationFlag::FOREGROUND;
             break;
         case NotificationType::GenericNavigation:

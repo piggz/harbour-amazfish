@@ -1,8 +1,10 @@
 #include "garminnotificationdatamessage.h"
 
+#include <QVector>
 
 const quint8 NOTIF_CMD_GET_NOTIFICATION_ATTRIBUTES = 0;
 
+// Notfification details reqest codes
 const quint8 NOTIF_ATTR_APP_IDENTIFIER = 0;
 const quint8 NOTIF_ATTR_TITLE = 1;
 const quint8 NOTIF_ATTR_SUBTITLE = 2;
@@ -11,6 +13,9 @@ const quint8 NOTIF_ATTR_MESSAGE_SIZE = 4;
 const quint8 NOTIF_ATTR_DATE = 5;
 const quint8 NOTIF_ATTR_ACTIONS = 127;
 const quint8 NOTIF_ATTR_ATTACHMENTS = 128;
+
+
+
 
 bool notificationAttributeHasLengthParam(quint8 code)
 {
@@ -48,14 +53,7 @@ std::optional<QByteArray> notificationAttributeValue(quint8 code, int maxLength,
         text = QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd'T'HHmmss"));
         break;
     case NOTIF_ATTR_ACTIONS:
-        // No attached actions: 4 zero bytes is the "no actions" marker.
-        /*
-        action.append(char(89));
-        action.append(quint8(title.toUtf8().size()));
-        action.append(title.toUtf8());
-
-        return action;
-        */
+        //This will be changed later as notificationspec is needed
         return QByteArray(4, char(0));
     case NOTIF_ATTR_ATTACHMENTS:
         return std::nullopt; // we never advertise a picture, so never claim one
@@ -74,6 +72,40 @@ std::optional<QByteArray> notificationAttributeValue(quint8 code, int maxLength,
     if (maxLength > 0)
         text = text.left(maxLength);
     return text.toUtf8();
+}
+
+QByteArray encodeNotificationAction(NotificationAction notificationAction, QString description) {
+    QByteArray action;
+    action.append((char) notificationAction);
+    /*
+    if (null == notificationAction.notificationActionIconPosition)
+        action.put((byte) 0x00);
+    else
+        action.put((byte) EnumUtils.generateBitVector(NotificationActionIconPosition.class, notificationAction.notificationActionIconPosition));
+    */
+    // don't care about IconPosition for now
+    action.append(char(0));
+    action.append((char) description.toUtf8().size());
+    action.append(description.toUtf8());
+    return action;
+}
+
+QByteArray encodeNotificationActionsString(NotificationSpec notificationSpec) {
+    qDebug() << Q_FUNC_INFO << "Garmin: Building Notification Actions";
+    QByteArray outputStream;
+    if (notificationSpec.notificationType == NotificationType::GenericPhone) {
+         outputStream.append(char(3)); // One action
+         outputStream.append(encodeNotificationAction(NotificationAction::REPLY_INCOMING_CALL, " ")); //text is not shown on watch
+         outputStream.append(encodeNotificationAction(NotificationAction::REJECT_INCOMING_CALL, " ")); //text is not shown on watch
+         outputStream.append(encodeNotificationAction(NotificationAction::ACCEPT_INCOMING_CALL, " ")); //text is not shown on watch
+         return outputStream;
+     }
+
+     outputStream.append(char(1)); // One action
+     outputStream.append(encodeNotificationAction(NotificationAction::DISMISS_NOTIFICATION, "Dismiss")); //TODO: Localization of this string
+     //Reply not yet working
+     //outputStream.append(encodeNotificationAction(NotificationAction::REPLY_MESSAGES, "Reply"));
+     return outputStream;
 }
 
 
@@ -96,21 +128,36 @@ QByteArray GarminNotificationDataMessage::getNotificationDataMessage(const Notif
             maxLength = u16le(msg.data, pos);
             pos += 2;
         } else if (notificationAttributeHasAdditionalParams(code)) {
+            // This attribute has an addional parameter - which we don't use
             if (pos + 3 > msg.data.size())
                 break;
             maxLength = u16le(msg.data, pos);
             pos += 3; // 2-byte param + 1 unknown byte we don't use
         }
 
+        // Now get the value for the data to return
         const std::optional<QByteArray> value = notificationAttributeValue(code, maxLength, spec.sourceName, spec.title, spec.body);
         if (!value)
             continue;
 
-        QByteArray tlv;
-        tlv.append(char(code));
-        writeU16le(tlv, value->size());
-        tlv.append(*value);
+        QByteArray tlv; //Type Length Value field
 
+        if (code == NOTIF_ATTR_ACTIONS) //special case as we need the Notificaiton spec
+        {
+            QByteArray actions = encodeNotificationActionsString(spec);
+            tlv.append(char(code));
+            writeU16le(tlv,actions.size());
+            tlv.append(actions);
+        }
+        else {
+            // Type = code
+            tlv.append(char(code));
+            //Lenght = attribute size
+            writeU16le(tlv, value->size());
+            //Value=actual value
+            tlv.append(*value);
+
+        }
         if (code == NOTIF_ATTR_MESSAGE_SIZE)
             messageSizeAttribute = tlv;
         else

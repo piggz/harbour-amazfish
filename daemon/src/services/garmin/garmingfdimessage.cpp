@@ -105,11 +105,7 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
         return;
     }
 
-    // Ack message
-    /*
-    QByteArray ackData = GfdiMessageGenerator::ackResponse(msgId);
-    mCommunicator->sendMessage("ACK",ackData);
-    */
+
 
     // Now handle packet
     qDebug() << Q_FUNC_INFO << "Garmin:  Received GFDI message: " << messageIdToString(msgId).value();
@@ -274,26 +270,7 @@ QByteArray GarminGfdiMessage::getAckByteStream() {
 
 
 // MessageGenerator is used to generate messages for sending to the device
-
-// -------------------- Generator helpers --------------------
-
-
-
-
-QByteArray GfdiMessageGenerator::truncateUtf8Bytes(const QString& s, int maxBytes) {
-    QByteArray utf8 = s.toUtf8();
-    if (utf8.size() <= maxBytes) return utf8;
-
-    int boundary = maxBytes;
-    // Back up while in a UTF-8 continuation byte (10xxxxxx)
-    while (boundary > 0 && (quint8(utf8[boundary]) & 0xC0u) == 0x80u) boundary--;
-    return utf8.left(boundary);
-}
-
-
-
-// -------------------- Generator: public API --------------------
-
+// Most of them are moved to dedicated classes now
 
 
 QByteArray GfdiMessageGenerator::ackResponse(quint16 messageId)
@@ -303,55 +280,6 @@ QByteArray GfdiMessageGenerator::ackResponse(quint16 messageId)
     r.append(char(quint8(Status::Ack)));
     return wrapInGfdiEnvelope(MessageId::Response,r);
 }
-
-QByteArray GfdiMessageGenerator::weatherResponse(const WeatherRequestMessage&)
-{
-    // Generate a weather response ACK
-    //
-    // This sends a simple ACK to weather requests. The actual weather data
-    // is sent separately via FIT messages (FitDefinition and FitData).
-    //
-    // # Arguments
-    // * `WeatherRequestMessage` - The incoming WeatherRequestMessage
-
-    QByteArray r;
-
-    // Original message ID: WEATHER_REQUEST (5014)
-    QByteArray data = GfdiMessageGenerator::ackResponse(5014);
-    return data;
-}
-
-QByteArray GfdiMessageGenerator::fitDefinitionMessage(const QByteArray& fitDefinitionData)
-{
-    // Generate a FIT Definition message (5011)
-    //
-    // This wraps FIT definition data in a GFDI message envelope for BLE transmission.
-    //
-    // # Arguments
-    // * `fit_definition_data` - The encoded FIT definition message bytes
-    //
-    QByteArray m;
-    // FIT definition payload
-    m.append(fitDefinitionData);
-    return wrapInGfdiEnvelope(MessageId::FitDefinition, m);
-}
-
-QByteArray GfdiMessageGenerator::fitDataMessage(const QByteArray& fitData)
-{
-    // Generate a FIT Data message (5012)
-    //
-    // This wraps FIT data in a GFDI message envelope for BLE transmission.
-    //
-    // # Arguments
-    // * `fitData` - The encoded FIT data message bytes
-    QByteArray m;
-    // Packet size placeholder
-    // FIT data payload
-    m.append(fitData);
-    return wrapInGfdiEnvelope(MessageId::FitData,m);
-}
-
-
 
 QByteArray GfdiMessageGenerator::supportedFileTypesRequest()
 {

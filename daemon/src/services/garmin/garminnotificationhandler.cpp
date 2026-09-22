@@ -6,15 +6,9 @@
 #include <optional>
 
 
-//const uint MAX_PROTOBUF_CHUNK_SIZE = 3072;
-
-
-
-
 
 void GarminNotificationHandler::cleanupOldNotifications()
 {
-    //QMutexLocker lock(&m_mutex);
 
     if (m_lastCleanup.elapsed() < 120000) // 2 minutes
         return;
@@ -29,7 +23,7 @@ void GarminNotificationHandler::cleanupOldNotifications()
         const auto& spec = it.value();
 
         if (!spec.retrieved &&
-            (now - spec.when) > 600) { // 10 minutes
+            (now - spec.when) > 3600) { // 1 hour
             toRemove.append(it.key());
         }
     }
@@ -54,7 +48,6 @@ bool GarminNotificationHandler::removeNotification(qint32 id)
     int count = 0;
 
     {
-        //QMutexLocker lock(&m_mutex);
         if (m_storedNotifications.contains(id)) {
             type = m_storedNotifications[id].notificationType;
             count = getNotificationCount(type);
@@ -101,8 +94,8 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
     updateMessage->notificationId=notification.id;
     updateMessage->notificationType=notification.notificationType;
 
-    // Set Actions  and Picture to false for now as it breaks notifications to show
-    updateMessage->hasActions = false;
+    // Set Picture to false for now
+
     updateMessage->hasPicture=false;
 
     //bool hasPicture = notification.hasPicture;
@@ -129,6 +122,25 @@ void GarminNotificationHandler::onNotificationDataRequested(const NotificationCo
 
 }
 
+void GarminNotificationHandler::onNotificationPerformAction(const NotificationControlMessage& msg)
+{
+    qDebug() << Q_FUNC_INFO << "Garmin: Notification Action requested " <<msg.data.toHex() ;
+
+    NotificationSpec spec;
+    if (m_storedNotifications.contains(msg.notificationId)) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Notification exists, checking for action";
+        quint8 action = msg.data[0];
+        //If a reply is included it's in the next bytes.
+        /*
+        if (msg.data.size()>3)
+            QString reply = Read Null Terminated KDbEscapedString
+        */
+        if (action==(quint16)NotificationAction::DISMISS_NOTIFICATION) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Received Notification Dismiss";
+            removeNotification(msg.notificationId);
+        }
+    }
+}
 
 void GarminNotificationHandler::replayMissedNotifications()
 {
@@ -148,7 +160,6 @@ void GarminNotificationHandler::replayMissedNotifications()
 
 void GarminNotificationHandler::setConnected(bool v)
 {
-    //QMutexLocker lock(&m_mutex);
     m_isConnected = v;
 }
 
@@ -173,14 +184,12 @@ void GarminNotificationHandler::onSetCallState(const CallSpec& call)
         notif.attachedActions.empty();
         notif.attachedActions.insert(0, QSharedPointer(new Action()));
 
-
         qDebug() << Q_FUNC_INFO << "Garmin: Sending incoming call notification";
         onNotification(notif);
     }
     else if (call.command == CallCommand::End ||
              call.command == CallCommand::Reject)
     {
-        //QMutexLocker lock(&m_mutex);
         qDebug() << Q_FUNC_INFO << "Garmin: Sending call ended notification";
 
         bool result = removeNotification(id);
@@ -204,7 +213,6 @@ bool GarminNotificationHandler::addNotificationToQueue(NotificationSpec note) {
         qDebug() << Q_FUNC_INFO << "Garmin: found notification in queue for id " << note.id << ", type = " <<(quint8) note.notificationType;
 
     }
-//    m_storedNotifications.begin();
     m_storedNotifications.insert(note.id,note);
     return found;
 }

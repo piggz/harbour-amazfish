@@ -85,19 +85,9 @@ protected:
 class GfdiMessageGenerator {
 public:
     static QByteArray ackResponse(quint16 messageId);
-    static QByteArray weatherResponse(const WeatherRequestMessage& request);
-    static QByteArray fitDefinitionMessage(const QByteArray& fitDefinitionData);
-    static QByteArray fitDataMessage(const QByteArray& fitData);
     static QByteArray supportedFileTypesRequest();
     static QByteArray deviceSettings();
-
     static QByteArray systemEvent(quint8 eventType, quint8 value);
-    static QByteArray protobufBatteryStatusRequest(quint16 requestId);
-
-
-private:
-
-    static QByteArray truncateUtf8Bytes(const QString& s, int maxBytes);
 
 };
 

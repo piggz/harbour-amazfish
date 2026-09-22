@@ -157,6 +157,7 @@ public:
     void onDeviceInformationReceived(DeviceInformationMessage &message);
     void onConfigurationReceived();
     void onNotificationDataRequested(const NotificationControlMessage& msg);
+    void onNotificationPerformAction(const NotificationControlMessage& msg);
     void onSynchronizationReceived(const SynchronizationMessage& msg);
     void onFilterStatusReceived(const FilterStatusMessage& msg);
     void onWeatherRequestReceived(const WeatherRequestMessage& msg);
@@ -188,6 +189,7 @@ signals:
     void heartRateChanged(quint8 &hr);
     void informationChanged(Amazfish::Info infoKey, const QString& infoValue);
     void NotificationDataRequested(const NotificationControlMessage& msg);
+    void NotificationPerformAction(const NotificationControlMessage& msg);
 
     void gfdiMessageReceived(const QByteArray& gfdiMessage);
 
