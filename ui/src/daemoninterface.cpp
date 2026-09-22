@@ -105,12 +105,12 @@ void DaemonInterface::changeConnectionState()
 
 }
 
-void DaemonInterface::connectToDevice(const QString &address)
+void DaemonInterface::connectToDevice()
 {
     if (!iface || !iface->isValid()) {
         return;
     }
-    iface->call(QStringLiteral("connectToDevice"), address);
+    iface->call(QStringLiteral("connectToDevice"), true);
 }
 
 void DaemonInterface::disconnect()
@@ -136,8 +136,20 @@ bool DaemonInterface::supportsFeature(Amazfish::Feature f)
         return false;
     }
     QDBusReply<bool> reply = iface->call(QStringLiteral("supportsFeature"), (int)f);
+    qDebug() << Q_FUNC_INFO << f << reply;
     return reply;
 }
+
+bool DaemonInterface::supportsDataType(Amazfish::DataType t)
+{
+    if (!iface || !iface->isValid()) {
+        return false;
+    }
+    QDBusReply<bool> reply = iface->call(QStringLiteral("supportsDataType"), (int)t);
+    qDebug() << Q_FUNC_INFO << t << reply;
+    return reply;
+}
+
 
 int DaemonInterface::supportedFeatures()
 {
@@ -181,22 +193,6 @@ bool DaemonInterface::startDownload()
     }
     QDBusReply<bool> reply = iface->call(QStringLiteral("startDownload"));
     return reply;
-}
-
-void DaemonInterface::downloadSportsData()
-{
-    if (!iface || !iface->isValid()) {
-        return;
-    }
-    iface->call("downloadSportsData");
-}
-
-void DaemonInterface::downloadActivityData()
-{
-    if (!iface || !iface->isValid()) {
-        return;
-    }
-    iface->call(QStringLiteral("downloadActivityData"));
 }
 
 void DaemonInterface::fetchData(int dataTypes)
@@ -359,13 +355,6 @@ void DaemonInterface::enableFeature(Amazfish::Feature feature)
         return;
     }
     iface->call(QStringLiteral("enableFeature"), (int)feature);
-}
-
-void DaemonInterface::fetchLogs() {
-    if (!iface || !iface->isValid()) {
-        return;
-    }
-    iface->call(QStringLiteral("fetchLogs"));
 }
 
 void DaemonInterface::requestScreenshot() {

@@ -14,7 +14,6 @@ public:
 
 protected:
     void initialise() override;
-    void parseServices();
 
 private:
     bool is47mm(const QString &version) const;

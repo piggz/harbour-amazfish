@@ -24,7 +24,6 @@ public:
 protected:
     Q_SLOT void serviceEvent(uint8_t event);
     void initialise() override;
-    void parseServices();
 
 private:
     QString pairedName;

@@ -15,6 +15,7 @@ public:
     static const char* UUID_SERVICE_IMMEDIATE_ALERT;
     static const char* UUID_CHARACTERISTIC_IMMEDIATE_ALERT_LEVEL;
     enum class Levels : uint8_t { NoAlert = 0, MildAlert = 1, HighAlert = 2 };
+    Q_ENUM(Levels);
 
     Levels alertLevel();
     void sendAlert(ImmediateAlertService::Levels level);

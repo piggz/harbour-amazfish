@@ -22,9 +22,9 @@ public:
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
-    void parseServices();
     void initialise();
 
     virtual void pair() override;

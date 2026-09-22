@@ -4,7 +4,7 @@
 <context>
     <name>AbstractDevice</name>
     <message>
-        <location filename="../src/devices/abstractdevice.cpp" line="165"/>
+        <location filename="../src/devices/abstractdevice.cpp" line="200"/>
         <source>Device does not support settings</source>
         <translation>El dispositivo no admite ajustes</translation>
     </message>
@@ -19,17 +19,17 @@
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
         <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
-        <translation type="unfinished"></translation>
+        <translation>Has cruzado el Brandywine. &lt;b&gt;%1&lt;/b&gt; pasos hacia abajo — ¡trolls delante!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="14"/>
         <source>Halfway to Mordor. &lt;b&gt;%1&lt;/b&gt; steps walked and second breakfast missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>A mitad de camino a Mordor. &lt;b&gt;%1&lt;/b&gt; pasos caminados y el segundo desayuno se perdió.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="15"/>
         <source>Mount Doom is on the horizon. &lt;b&gt;%1&lt;/b&gt; steps behind you — don&apos;t drop the ring yet!</source>
-        <translation type="unfinished"></translation>
+        <translation>El Monte Doom está en el horizonte. &lt;b&gt;%1&lt;/b&gt; pasos detrás de usted — ¡no suelte el anillo todavía!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="16"/>
@@ -44,7 +44,7 @@
     <message>
         <location filename="../src/achievements.cpp" line="18"/>
         <source>The Hobbit, or There and Back Again — &lt;b&gt;%1&lt;/b&gt; steps and second breakfast earned!</source>
-        <translation type="unfinished"></translation>
+        <translation>El Hobbit, o Allí y Atrás Otra vez — &lt;b&gt;%1&lt;/b&gt; pasos y el segundo almuerzo se ganaron!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="22"/>
@@ -76,13 +76,31 @@
         <source>You smashed it! &lt;b&gt;%1&lt;/b&gt; steps — time to rest or go for bonus steps?</source>
         <translation>¡Te superaste! &lt;b&gt;%1&lt;/b&gt; pasos — tomarás un descanso o irás por la bonificación?</translation>
     </message>
+    <message>
+        <location filename="../src/achievements.cpp" line="46"/>
+        <source>No data</source>
+        <translation>No hay datos</translation>
+    </message>
 </context>
 <context>
     <name>AsteroidOSDevice</name>
     <message>
-        <location filename="../src/devices/asteroidosdevice.cpp" line="323"/>
+        <location filename="../src/devices/asteroidosdevice.cpp" line="271"/>
         <source>Stored %1...</source>
         <translation>Almacenado %1...</translation>
+    </message>
+</context>
+<context>
+    <name>BangleJSDevice</name>
+    <message>
+        <location filename="../src/devices/banglejsdevice.cpp" line="349"/>
+        <source>Downloading activity data</source>
+        <translation>Descargar datos de actividad</translation>
+    </message>
+    <message>
+        <location filename="../src/devices/banglejsdevice.cpp" line="370"/>
+        <source>Downloading sports data</source>
+        <translation>Descargar datos de deportes</translation>
     </message>
 </context>
 <context>
@@ -93,33 +111,33 @@
         <translation>El dispositivo no es válido, puede que no sea compatible</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="630"/>
-        <location filename="../src/deviceinterface.cpp" line="706"/>
+        <location filename="../src/deviceinterface.cpp" line="672"/>
+        <location filename="../src/deviceinterface.cpp" line="748"/>
         <source>Amazfish</source>
         <translation>Amazfish</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="631"/>
+        <location filename="../src/deviceinterface.cpp" line="673"/>
         <source>Connected</source>
         <translation>Conectado</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="632"/>
+        <location filename="../src/deviceinterface.cpp" line="674"/>
         <source>Phone and watch are connected</source>
         <translation>Teléfono y reloj conectados</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="707"/>
+        <location filename="../src/deviceinterface.cpp" line="749"/>
         <source>Low Battery</source>
         <translation>Batería baja</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="708"/>
+        <location filename="../src/deviceinterface.cpp" line="750"/>
         <source>Battery level now </source>
         <translation>Nivel de batería actual </translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="840"/>
+        <location filename="../src/deviceinterface.cpp" line="885"/>
         <source>Calendar</source>
         <translation>Calendario</translation>
     </message>
@@ -127,7 +145,7 @@
 <context>
     <name>GtsDevice</name>
     <message>
-        <location filename="../src/devices/huami/gtsdevice.cpp" line="230"/>
+        <location filename="../src/devices/huami/gtsdevice.cpp" line="188"/>
         <source>An operation is currently running, please try later</source>
         <translation>Actualmente se está ejecutando una operación, por favor intenta más tarde</translation>
     </message>
@@ -135,32 +153,32 @@
 <context>
     <name>HuamiDevice</name>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="199"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="183"/>
         <source>Navigation Started</source>
         <translation>Navegación iniciada</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="201"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="185"/>
         <source>Navigation Stopped</source>
         <translation>Navegación detenida</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="221"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="205"/>
         <source>Progress</source>
         <translation>Progreso</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="363"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="347"/>
         <source>Sending %1...</source>
-        <translation type="unfinished">Enviando %1...</translation>
+        <translation>Enviando %1...</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="366"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="350"/>
         <source>No file selected</source>
-        <translation type="unfinished">Ningún archivo seleccionado</translation>
+        <translation>Ningún archivo seleccionado</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="386"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="370"/>
         <source>An operation is currently running, please try later</source>
         <translation>Actualmente se está ejecutando una operación, por favor intenta más tarde</translation>
     </message>
@@ -168,12 +186,12 @@
 <context>
     <name>HuamiFetcher</name>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="105"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="111"/>
         <source>All operations cancelled</source>
         <translation>Todas las operaciones han sido canceladas</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamifetcher.cpp" line="147"/>
+        <location filename="../src/devices/huami/huamifetcher.cpp" line="154"/>
         <source>All operations complete</source>
         <translation>Todas las operaciones han sido completadas</translation>
     </message>
@@ -190,22 +208,22 @@
 <context>
     <name>PinetimeJFDevice</name>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="369"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="383"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="344"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="358"/>
         <source>An operation is currently running, please try later</source>
         <translation>Actualmente se está ejecutando una operación, por favor intenta más tarde</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="406"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="419"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="381"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="394"/>
         <source>Sending file...</source>
         <translation>Enviando archivo...</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="409"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="422"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="384"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="397"/>
         <source>No file selected</source>
-        <translation type="unfinished">Ningún archivo seleccionado</translation>
+        <translation>Ningún archivo seleccionado</translation>
     </message>
 </context>
 <context>
@@ -213,7 +231,7 @@
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="45"/>
         <source>AGPS update Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualización AGPS Ok</translation>
     </message>
     <message>
         <location filename="../src/operations/huami/zeppos/zepposagpsupdateoperation.cpp" line="49"/>
@@ -244,12 +262,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="134"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="140"/>
         <source>About to transfer data from </source>
         <translation>A punto de transferir datos desde </translation>
     </message>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="149"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="156"/>
         <source>No data to transfer</source>
         <translation>Sin datos para transferir</translation>
     </message>
@@ -299,7 +317,7 @@
 <context>
     <name>ZeppOSDevice</name>
     <message>
-        <location filename="../src/devices/huami/zepposdevice.cpp" line="442"/>
+        <location filename="../src/devices/huami/zepposdevice.cpp" line="364"/>
         <source>An operation is currently running, please try later</source>
         <translation>Actualmente se está ejecutando una operación, por favor intenta más tarde</translation>
     </message>

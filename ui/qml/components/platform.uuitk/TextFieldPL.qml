@@ -31,6 +31,7 @@ Item {
     property alias inputMethodHints: entry.inputMethodHints
     property alias label: lab.text
     property alias placeholderText: entry.placeholderText
+    property alias echoMode: entry.echoMode
     property string text
     property alias validator: entry.validator
 

@@ -3,6 +3,7 @@ import "../components/platform"
 import "../components/Translation.js" as T
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import uk.co.piggz.amazfish 1.0
 
 PageListPL {
     id: page
@@ -39,7 +40,7 @@ PageListPL {
         PageMenuItemPL {
             iconSource: styler.iconDownloadData !== undefined ? styler.iconDownloadData : ""
             text: qsTr("Download Next Activity")
-            onClicked: DaemonInterfaceInstance.downloadSportsData()
+            onClicked: DaemonInterfaceInstance.fetchData(Amazfish.TYPE_GPS_TRACK)
             enabled: DaemonInterfaceInstance.connectionState === "authenticated"
         }
 
@@ -59,7 +60,8 @@ PageListPL {
                 "duration": durationLabel.text,
                 "times": timesLabel.text,
                 "kindstring": kindstring,
-                "tcx": SportsModel.gpx(id)
+                "tcx": SportsModel.gpx(id),
+                "rawGpx": SportsModel.rawGpx(id)
             });
             SportsMeta.update(id);
             sportpage.update();

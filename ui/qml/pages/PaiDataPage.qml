@@ -170,6 +170,10 @@ PagePL {
         graphPAI.setPoints(data);
 
         var maybeToday = PaiModel.get(PaiModel.rowCount() - 1);
+        if (typeof maybeToday.pai_total == "undefined") {
+            return;
+        }
+
         lblNow.text = maybeToday.pai_total.toFixed(1)
 
         var now = new Date();

@@ -5,6 +5,9 @@
 #include "abstractdevice.h"
 #include "realtimeactivitysample.h"
 
+class QBLELocalApplication;
+class ImmediateAlertServerService;
+
 class PinetimeJFDevice : public AbstractDevice
 {
 public:
@@ -43,9 +46,9 @@ public:
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
-    void parseServices();
     void initialise();
     Q_SLOT void serviceEvent(const QString &characteristic, uint8_t event);
     AbstractFirmwareInfo::Type firmwareType;
@@ -53,6 +56,12 @@ private:
     RealtimeActivitySample realtimeActivitySample;
 
     Q_SLOT void sampledActivity(QDateTime dt, int kind, int intensity, int steps, int heartrate);
+
+    // GATT server — serves IAS so InfiniTime FindMyPhone can alert this device
+    QBLELocalApplication *m_iasApp = nullptr;
+    ImmediateAlertServerService *m_iasService = nullptr;
+    void setupGattServer();
+    Q_SLOT void onImmediateAlertFromWatch(int level);
 };
 
 #endif // PINETIMEJFDEVICE_H

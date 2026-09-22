@@ -21,6 +21,7 @@ ApplicationWindowPL
     property bool serviceEnabledState: false
     property bool stravaLinked: false
     property bool fittrackeeLinked: false
+    property bool fitpubLinked: AmazfishConfig.fitpubBaseURL !== "" && AmazfishConfig.fitpubUsername !== ""
     property bool firstPass: true
     property string _lastMessage: ""
     property string _percentText: ""
@@ -220,15 +221,17 @@ ApplicationWindowPL
         popup.showMessage(msg)
     }
 
-    function supportsFeature(feature) {
-        console.log("Supports feature", feature, (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature));
-        return (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedFeatures() & feature) === feature)
+    function supportsFeatureRefresh(feature) {
+        DaemonInterfaceInstance.connectionState; // make dependency to refresh value
+        return DaemonInterfaceInstance.supportsFeature(feature)
     }
 
-    function supportsData(data) {
-        console.log("Supports data:", data, (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedDataTypes() & data) === data))
-        return (_authenticated && !_authenticated) || ((DaemonInterfaceInstance.supportedDataTypes() & data) === data)
+    function supportsDataRefresh(data) {
+        DaemonInterfaceInstance.connectionState; // make dependency to refresh value
+        return DaemonInterfaceInstance.supportsDataType(data)
     }
+
+
 
     function _refreshInformation() {
         if (!_authenticated) {

@@ -152,6 +152,39 @@ QString SportsDataModel::gpx(uint id)
     return line;
 }
 
+QString SportsDataModel::rawGpx(uint id)
+{
+    QString qry = QString("SELECT gpx FROM sports_data WHERE id = %1").arg(id);
+    QString gpx;
+
+    if (m_connection && m_connection->isDatabaseUsed()) {
+        KDbCursor *curs = m_connection->executeQuery(KDbEscapedString(qry));
+        if (curs) {
+            if (curs->open() && curs->moveFirst()) {
+                gpx = curs->value(0).toString();
+            }
+            m_connection->deleteCursor(curs);
+        } else {
+            qDebug() << "Error executing query";
+        }
+    }
+    
+    if (gpx.endsWith(".tcx")) {
+        gpx.replace(gpx.length() - 4, 4, ".gpx");
+    }
+
+    QFile file(gpx);
+    if(!file.open(QIODevice::ReadOnly)) {
+        return "";
+    }
+
+    QTextStream in(&file);
+    QString line = in.readAll();
+
+    file.close();
+    return line;
+}
+
 void SportsDataModel::deleteRecord(uint id)
 {
     QString qry = QString("DELETE FROM sports_meta WHERE sport_id = %1").arg(id);

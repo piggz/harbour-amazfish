@@ -26,10 +26,7 @@ public:
     void incomingCallEnded() override;
 
     QString softwareRevision();
-    
-    void downloadSportsData() override;
-    void downloadActivityData() override;
-    void fetchLogs() override;
+
     void fetchData(Amazfish::DataTypes dataTypes) override;
 
     void prepareFirmwareDownload(const AbstractFirmwareInfo *info) override;
@@ -65,6 +62,7 @@ protected:
 
     virtual void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     virtual void initialise() = 0;
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
     int m_ActivitySampleSize = 4;
     HuamiFetcher *m_fetcher = nullptr;

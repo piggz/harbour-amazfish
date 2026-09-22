@@ -29,7 +29,6 @@ void BangleJSDevice::pair()
 
     m_needsAuth = false;
     m_pairing = true;
-    m_autoreconnect = true;
     //disconnectFromDevice();
     setConnectionState("pairing");
     emit connectionStateChanged();
@@ -121,12 +120,13 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
 
     QJsonObject o;
     o.insert("t", "notify");
-    o.insert("id", notification.id); //id is necessary for some apps like messageui, and should be unique
+    o.insert("id", notification.id); // id is necessary for some apps like
+                                     // messageui, and should be unique
     o.insert("src", alertIcon(notification.appId));
-    o.insert("title", "");
-    o.insert("subject", notification.summary);
-    o.insert("body", notification.body);
-    o.insert("sender", notification.appName);
+    o.insert("title", ""); // .left(80)
+    o.insert("subject", notification.summary.left(80));
+    o.insert("body", notification.body.left(400));
+    o.insert("sender", notification.appName.left(40));
     o.insert("tel", "");
     uart->txJson(o);
 }
@@ -165,49 +165,17 @@ void BangleJSDevice::incomingCallEnded()
     uart->txJson(o);
 }
 
-
-void BangleJSDevice::parseServices()
+QBLEService *BangleJSDevice::drv_createService(const QString &uuid, const QString &path)
 {
-    qDebug() << Q_FUNC_INFO;
-
-    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
-    QDBusReply<QString> xml = adapterIntro.call("Introspect");
-
-    qDebug() << "Resolved services...";
-
-    qDebug().noquote() << xml.value();
-
-    QDomDocument doc;
-    doc.setContent(xml.value());
-
-    QDomNodeList nodes = doc.elementsByTagName("node");
-
-    qDebug() << nodes.count() << "nodes";
-
-    for (int x = 0; x < nodes.count(); x++)
-    {
-        QDomElement node = nodes.at(x).toElement();
-        QString nodeName = node.attribute("name");
-
-        if (nodeName.startsWith("service")) {
-            QString path = devicePath() + "/" + nodeName;
-
-            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
-            QString uuid = devInterface.property("UUID").toString();
-
-            qDebug() << "Creating service for: " << uuid;
-
-            if (uuid == UARTService::UUID_SERVICE_UART && !service(UARTService::UUID_SERVICE_UART)) {
-                addService(UARTService::UUID_SERVICE_UART, new UARTService(path, this));
-            } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
-                addService(BatteryService::UUID_SERVICE_BATTERY, new BatteryService(path, this));
-            } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
-                addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
-            } else if ( !service(uuid)) {
-                addService(uuid, new QBLEService(uuid, path, this));
-            }
-        }
+    if (uuid == UARTService::UUID_SERVICE_UART && !service(UARTService::UUID_SERVICE_UART)) {
+        return new UARTService(path, this);
+    } else if (uuid == BatteryService::UUID_SERVICE_BATTERY && !service(BatteryService::UUID_SERVICE_BATTERY)) {
+        return new BatteryService(path, this);
+    } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
+        return new DeviceInfoService(path, this);
     }
+
+    return nullptr;
 }
 
 void BangleJSDevice::initialise()
@@ -299,9 +267,9 @@ void BangleJSDevice::setTime() {
     int offsetSeconds = timeZone.offsetFromUtc(now);
     double offsetHours = offsetSeconds / 3600.0;
 
-    QString cmd = QString("setTime(%1);\nE.setTimeZone(%2);\n(s=>s&&(s.timezone=%2,require('Storage').write('setting.json',s)))(require('Storage').readJSON('setting.json',1));").arg(ts).arg(offsetHours);
+    QString cmd = QString("setTime(%1);E.setTimeZone(%2);(s=>s&&(s.timezone=%2,require('Storage').write('setting.json',s)))(require('Storage').readJSON('setting.json',1));").arg(ts).arg(offsetHours);
 
-    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8());
+    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8() + "\n");
 }
 
 void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
@@ -309,9 +277,12 @@ void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QSt
     qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
-        m_reconnectTimer->start();
-        if (deviceProperty("ServicesResolved").toBool() ) {
+        const bool resolved = deviceProperty("ServicesResolved").toBool();
+        if (resolved && !m_initialised) { // bluez repeats Device1 properties, initialise once per connection
+            m_initialised = true;
             initialise();
+        } else if (!resolved) {
+            m_initialised = false;
         }
         if (map.contains("Connected")) {
             bool value = map["Connected"].toBool();
@@ -353,6 +324,17 @@ void BangleJSDevice::navigationNarrative(const QString &flag, const QString &nar
     qDebug() << Q_FUNC_INFO;
 }
 
+void BangleJSDevice::fetchData(Amazfish::DataTypes dataTypes)
+{
+    if (dataTypes & Amazfish::DataType::TYPE_ACTIVITY) {
+        downloadActivityData();
+    }
+
+    if (dataTypes & Amazfish::DataType::TYPE_GPS_TRACK) {
+        downloadSportsData();
+    }
+}
+
 void BangleJSDevice::downloadActivityData() {
     qDebug() << Q_FUNC_INFO;
     if (m_operationRunning) {
@@ -386,13 +368,10 @@ void BangleJSDevice::downloadSportsData() {
         return;
     }
 
-    QString lastSyncId = AmazfishConfig::instance()->value("device/lastsportsyncid").toString();
-
     emit message(tr("Downloading sports data"));
     setOperationRunning(true);
     QJsonObject o;
     o.insert("t", "listRecs");
-    o.insert("id", lastSyncId);
     uart->txJson(o);
 }
 
@@ -645,7 +624,15 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         }
     } else if (t == "actTrksList") {
         QJsonArray trksList = json.value("list").toArray();
-        fetchActivityRec(trksList.first().toString());
+        if (trksList.isEmpty()) {
+            return;
+        }
+        QList<QString> trksListQStr;
+        for (const QJsonValue &v : trksList) {
+            trksListQStr << v.toString();
+        }
+
+        actTrksList(trksListQStr);
     } else if (t == "actTrk") {
         // t:"actTrk", log:"YYYYMMDDx" (e.g. 20240101a), lines:"four lines of the log"/"erase", cnt: "the current packet count"
         m_synced_activity_id = json.value("log").toString();
@@ -1298,9 +1285,9 @@ void BangleJSDevice::sendCalendarEvent(int id, const watchfish::CalendarEvent &e
     o.insert("type", 0);
     o.insert("timestamp", event.start().toMSecsSinceEpoch() / 1000);
     o.insert("durationInSeconds", event.start().secsTo(event.end()));
-    o.insert("title", event.title());
-    o.insert("description", description);
-    o.insert("location", event.location());
+    o.insert("title", event.title().left(40));
+    o.insert("description", description.left(200));
+    o.insert("location", event.location().left(40));
     o.insert("calName", "amazfish");
     o.insert("color", (int)0xff8446);
     o.insert("allDay", event.allDay());
@@ -1319,4 +1306,91 @@ void BangleJSDevice::removeEventReminder(int id)
     o.insert("t", "calendar-");
     o.insert("id", id);
     uart->txJson(o);
+}
+
+/**
+ * @brief BangleJSDevice::parseActTrkDateTime
+ * parse timestamp from "actTrksList" reply
+ * @param str for example "20260406a"
+ * @return parsed QDatetime using pattern YYYYMMDD for example 2026-04-06
+ */
+
+QDateTime BangleJSDevice::parseActTrkDateTime(const QString &str) {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    static const QRegularExpression re(QStringLiteral("^(\\d{4})(\\d{2})(\\d{2})"));
+    const QRegularExpressionMatch m = re.match(str);
+    if (!m.hasMatch()) {
+        return QDateTime();
+    }
+    return QDateTime(
+        QDate(m.captured(1).toInt(), m.captured(2).toInt(), m.captured(3).toInt()),
+        QTime(0, 0), Qt::UTC);
+#else
+    static QRegExp re(QLatin1String("^(\\d{4})(\\d{2})(\\d{2})"));
+    if (re.indexIn(str) < 0) {
+        return QDateTime();
+    }
+    return QDateTime(
+        QDate(re.cap(1).toInt(), re.cap(2).toInt(), re.cap(3).toInt()),
+        QTime(0, 0), Qt::UTC);
+#endif
+}
+
+/**
+ * @brief BangleJSDevice::actTrksList
+ * @param available list of records on smartwatch
+ *
+ * removes synced records older than 30 days
+ * triggers download of first unsynced record
+ */
+
+void BangleJSDevice::actTrksList(const QList<QString> &available)
+{
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+
+    const QString lastSyncId = AmazfishConfig::instance()->value("device/lastsportsyncid").toString();
+    const QDateTime cutoff = QDateTime::currentDateTime().addDays(-30);
+
+    QStringList filesToDelete;
+    QString firstToDownload;
+
+    for (const QString &id : available) {
+        if (!lastSyncId.isEmpty() && id <= lastSyncId) {
+            const QDateTime parsedDate = parseActTrkDateTime(id);
+            if (parsedDate.isValid() && parsedDate < cutoff) {
+                filesToDelete << QStringLiteral("recorder.log") + id + QStringLiteral(".csv\\1");
+            }
+            continue;
+        }
+        qDebug() << "not synced" << id;
+
+        if (firstToDownload.isEmpty()) {
+            firstToDownload = id;
+        }
+    }
+
+    qDebug() << "filesToDelete" << filesToDelete;
+    if (!filesToDelete.isEmpty()) {
+        QStringList quoted;
+        for (const QString &f : filesToDelete) {
+            quoted << QStringLiteral("\"") + f + QStringLiteral("\"");
+        }
+
+        const QString cmd = QStringLiteral("[") + quoted.join(QStringLiteral(","))
+                            + QStringLiteral("].forEach(f=>require(\"Storage\").erase(f));");
+
+        qDebug().noquote() << cmd;
+        uart->tx(QByteArray(1, 0x10) + cmd.toUtf8() + "\n");
+    }
+
+    if (firstToDownload.isEmpty()) {
+        setOperationRunning(false);
+    } else {
+        qDebug() << "firstToDownload" << firstToDownload;
+        fetchActivityRec(firstToDownload);
+    }
+
 }

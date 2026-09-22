@@ -66,9 +66,6 @@ public:
     virtual void prepareFirmwareDownload(const AbstractFirmwareInfo* info);
     virtual void startDownload();
 
-    virtual void downloadSportsData();
-    virtual void downloadActivityData();
-    virtual void fetchLogs();
     virtual void fetchData(Amazfish::DataTypes dataTypes);
     virtual void sendWeather(CurrentWeather *weather);
     virtual void refreshInformation();
@@ -107,19 +104,19 @@ protected:
     bool m_pairing = false;
     bool m_ready = false;
     bool m_hasInitialised = false;
-    bool m_autoreconnect = true;
     QString m_connectionState;
-    QTimer *m_reconnectTimer;
 
     void setConnectionState(const QString &state);
     KDbConnection *m_conn = nullptr;
 
     Q_SLOT void deviceError(const QString &message);
 
+    void parseServices();
+    virtual QBLEService* drv_createService(const QString &uuid, const QString &path) = 0;
+
 private:
-    void reconnectionTimer();
-    void devicePairFinished(const QString& status);
     QString m_pairedName;
+
 
 };
 

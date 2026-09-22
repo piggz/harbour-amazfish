@@ -196,7 +196,7 @@ PagePL {
         Row {
             width: page.width
             spacing: styler.themePaddingLarge
-            visible: supportsFeature(Amazfish.FEATURE_ALERT)
+            visible: supportsFeatureRefresh(Amazfish.FEATURE_ALERT)
 
 
             ListModel {
@@ -297,14 +297,6 @@ PagePL {
                 immediateAlertLevel = (immediateAlertLevel + 1) % 2;
             }
         }
-        ButtonPL {
-            text: qsTr("Fetch debug log")
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width * 0.8
-            onClicked: {
-                DaemonInterfaceInstance.fetchLogs();
-            }
-        }
 
         Row {
             width: parent.width * 0.8
@@ -329,7 +321,7 @@ PagePL {
             text: qsTr("Request Screenshot")
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
-            visible: supportsFeature(Amazfish.FEATURE_SCREENSHOT)
+            visible: supportsFeatureRefresh(Amazfish.FEATURE_SCREENSHOT)
             onClicked: {
                 DaemonInterfaceInstance.requestScreenshot();
             }
@@ -344,7 +336,7 @@ PagePL {
         }
         ButtonPL {
             text: qsTr("Send Weather")
-            visible: supportsFeature(Amazfish.FEATURE_WEATHER)
+            visible: supportsFeatureRefresh(Amazfish.FEATURE_WEATHER)
 
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
@@ -354,7 +346,7 @@ PagePL {
         }
         ButtonPL {
             text: qsTr("Update Calendar")
-            visible: supportsFeature(Amazfish.FEATURE_EVENT_REMINDER)
+            visible: supportsFeatureRefresh(Amazfish.FEATURE_EVENT_REMINDER)
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {
@@ -367,7 +359,7 @@ PagePL {
 
         ButtonPL {
             text: qsTr("Music Control")
-            visible: supportsFeature(Amazfish.FEATURE_MUSIC_CONTROL)
+            visible: supportsFeatureRefresh(Amazfish.FEATURE_MUSIC_CONTROL)
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.8
             onClicked: {

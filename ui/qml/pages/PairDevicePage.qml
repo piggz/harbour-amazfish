@@ -139,7 +139,7 @@ PageListPL {
 
                 _deviceName = model.FriendlyName;
                 _deviceType = (enforcedDeviceType !== undefined) ? enforcedDeviceType.deviceType : device.deviceType
-                _deviceAddress = AmazfishConfig.localAdapter+"/dev_" + model.Address.replace(/:/g, '_');
+                _deviceAddress = model.Address;
 
                 if (device_auth) {
                     var authdialog = app.pages.push(Qt.resolvedUrl("./AuthKeyDialog.qml"));

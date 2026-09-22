@@ -188,6 +188,10 @@ public:
     STRING_OPTION(QStringLiteral("fittrackee/clientID"),     fittrackeeClientID,     setFittrackeeClientID,    "")
     STRING_OPTION(QStringLiteral("fittrackee/clientSecret"), fittrackeeClientSecret, setFittrackeeClientSecret,    "")
 
+    STRING_OPTION(QStringLiteral("fitpub/baseURL"),      fitpubBaseURL,      setFitpubBaseURL,    "")
+    STRING_OPTION(QStringLiteral("fitpub/username"),     fitpubUsername,     setFitpubUsername,    "")
+    STRING_OPTION(QStringLiteral("fitpub/password"),     fitpubPassword,     setFitpubPassword,    "")
+
     MAP_OPTION(QStringLiteral("app/notificationSettings"), notificationSettings, setNotificationSettings, QVariantMap())
 
 private:

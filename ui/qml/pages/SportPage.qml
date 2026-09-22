@@ -21,6 +21,7 @@ PagePL {
     property string kindstring: ""
     property string activitytitle: ""
     property string tcx: ""
+    property string rawGpx: ""
     property bool bMapMaximized: false
     property alias loader: trackLoader
 
@@ -376,6 +377,19 @@ PagePL {
                 var dialog = app.pages.push(Qt.resolvedUrl("FitTrackeeUploadPage.qml"));
                 dialog.activityID = activitytitle.replace(/\s/g, '');
                 dialog.tcx = tcx;
+                dialog.activityName = activitytitle;
+                dialog.activityDescription = trackLoader.description;
+                dialog.activityType = kindstring;
+            }
+        }
+        PageMenuItemPL {
+            iconSource: styler.iconUploadToStrava !== undefined ? styler.iconUploadToStrava : ""
+            text: qsTr("Send to FitPub")
+            visible: app.fitpubLinked
+            onClicked: {
+                var dialog = app.pages.push(Qt.resolvedUrl("FitPubUploadPage.qml"));
+                dialog.activityID = activitytitle.replace(/\s/g, '');
+                dialog.tcx = rawGpx !== "" ? rawGpx : tcx;
                 dialog.activityName = activitytitle;
                 dialog.activityDescription = trackLoader.description;
                 dialog.activityType = kindstring;

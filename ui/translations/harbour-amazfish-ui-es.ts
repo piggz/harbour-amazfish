@@ -84,23 +84,23 @@
         <translation>Frecuencia cardiaca</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="65"/>
-        <location filename="../qml/pages/AnalysisPage.qml" line="68"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="66"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="69"/>
         <source>Steps</source>
         <translation>Pasos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="82"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="83"/>
         <source>Intensity</source>
         <translation>Intensidad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="99"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="100"/>
         <source>HRV</source>
         <translation>VFC</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AnalysisPage.qml" line="115"/>
+        <location filename="../qml/pages/AnalysisPage.qml" line="118"/>
         <source>Body Temperature</source>
         <translation>Temperatura corporal</translation>
     </message>
@@ -193,19 +193,19 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="382"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="374"/>
         <source>Serial No: </source>
         <translation>Nº Serie: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="385"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="377"/>
         <source>Hardware Rev: </source>
         <translation>Rev. hardware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="388"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="380"/>
         <source>Software Rev: </source>
         <translation>Rev. software: </translation>
     </message>
@@ -216,44 +216,44 @@
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="391"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="383"/>
         <source>GPS Ver: </source>
         <translation>Ver. GPS: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Alert</source>
-        <translation type="unfinished"></translation>
+        <translation>Alerta</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="216"/>
         <source>SMS Message (Ubuntu Touch)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaje SMS (Ubuntu Touch)</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="226"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo-e</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="231"/>
         <source>The quick brown fox jumps over the lazy dog</source>
-        <translation type="unfinished"></translation>
+        <translation>El rápido zorro marrón salta sobre el perro perezoso</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="237"/>
         <source>Telegram message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaje de Telegram</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="244"/>
         <source>Matrix message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaje de Matrix</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="251"/>
         <source>Slack message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaje de Slack</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="270"/>
@@ -263,7 +263,7 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="210"/>
         <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hola desde la app Amazfish. ¡Este es un mensaje largo enviado sobre BLE!</translation>
     </message>
     <message>
         <source>Test Email</source>
@@ -275,50 +275,49 @@
         <translation>Test de llamada</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="301"/>
         <source>Fetch debug log</source>
-        <translation>Registro de depuración</translation>
+        <translation type="vanished">Registro de depuración</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="320"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="312"/>
         <source>Fetch Data</source>
         <translation>Obtener datos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="330"/>
         <source>Test Popup</source>
         <translation>Test de ventana emergente</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="346"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Send Weather</source>
         <translation>Enviar Tiempo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="356"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="348"/>
         <source>Update Calendar</source>
         <translation>Actualizar calendario</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="394"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="386"/>
         <source>Model: </source>
         <translation>Modelo: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="400"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="392"/>
         <source>Firmware Rev: </source>
         <translation>Rev. firmware: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
-        <location filename="../qml/pages/DebugInfo.qml" line="397"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="389"/>
         <source>Manufacturer: </source>
         <translation>Fabricante: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="369"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="361"/>
         <source>Music Control</source>
         <translation>Control de música</translation>
     </message>
@@ -338,7 +337,7 @@
         <translation>Pruebas de funcionamiento</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="329"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="321"/>
         <source>Request Screenshot</source>
         <translation>Solicitar captura de pantalla</translation>
     </message>
@@ -371,7 +370,7 @@
         <translation>Probar el servicio de alerta inmediata</translation>
     </message>
     <message>
-        <location filename="../qml/pages/DebugInfo.qml" line="342"/>
+        <location filename="../qml/pages/DebugInfo.qml" line="334"/>
         <source>This is a test notification</source>
         <translation>Este es una notificación de prueba</translation>
     </message>
@@ -379,8 +378,8 @@
 <context>
     <name>DownloadDataMenuItem</name>
     <message>
-        <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
-        <location filename="../qml/components/DownloadDataMenuItem.qml" line="6"/>
+        <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
+        <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
         <source>Download Data</source>
         <translation>Descargar datos</translation>
     </message>
@@ -418,37 +417,37 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="58"/>
         <source>Enable service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilita servicio sobre arranque</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="181"/>
         <source>Sleep</source>
-        <translation type="unfinished">Sueño</translation>
+        <translation>Dormir</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="234"/>
         <source>Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Deportes</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="260"/>
         <source>SpO₂</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO₂</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="275"/>
         <source>Stress</source>
-        <translation type="unfinished">Estrés</translation>
+        <translation>Estrés</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="290"/>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="304"/>
         <source>Battery</source>
-        <translation type="unfinished">Batería</translation>
+        <translation>Batería</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="312"/>
@@ -488,41 +487,157 @@
     </message>
 </context>
 <context>
+    <name>FitPubSettingsPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
+        <source>FitPub settings</source>
+        <translation>Ajustes de FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
+        <source>Save</source>
+        <translation>Guardar</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
+        <source>Instance URL:</source>
+        <translation>URL instanciada:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
+        <source>Username or Email:</source>
+        <translation>Id-usuario o correo-e:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
+        <source>Password:</source>
+        <translation>Contraseña:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
+        <source>Account linked</source>
+        <translation>Cuenta enlazada</translation>
+    </message>
+</context>
+<context>
+    <name>FitPubUploadPage</name>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="9"/>
+        <source>FitPub Upload</source>
+        <translation>Subida de FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="26"/>
+        <source>Activity name for FitPub</source>
+        <translation>Nombre de actividad para FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
+        <source>Name</source>
+        <translation>Nombre</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
+        <source>Description</source>
+        <translation>Descripción</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
+        <source>Activity description for FitPub</source>
+        <translation>Descripción de actividad para FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="46"/>
+        <source>Type (FitPub)</source>
+        <translation>Tipo (FitPub)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
+        <source>Private</source>
+        <translation>Privado</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
+        <source>Upload</source>
+        <translation>Subida</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
+        <source>Not linked to FitPub</source>
+        <translation>No enlazado a FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
+        <source>Authenticating...</source>
+        <translation>Autenticar…</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
+        <source>Authentication failed: </source>
+        <translation>Autenticación incorrecta: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
+        <source>Uploading data...</source>
+        <translation>Subiendo datos…</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
+        <source>Upload failed: </source>
+        <translation>Subida incorrecta: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
+        <source>Updating activity metadata...</source>
+        <translation>Metadatos de actividad de actualización…</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
+        <source>Activity upload complete</source>
+        <translation>Subida de actividad completada</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
+        <source>Update failed: </source>
+        <translation>Actualización incorrecta: </translation>
+    </message>
+</context>
+<context>
     <name>FitTrackeeSettingsPage</name>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="26"/>
         <source>FitTrackee settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes de FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Logout</source>
-        <translation type="unfinished">Cerrar sesión</translation>
+        <translation>Cerrar sesión</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Login</source>
-        <translation type="unfinished">Iniciar sesión</translation>
+        <translation>Iniciar sesión</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="70"/>
         <source>Base URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>URL base:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="79"/>
         <source>Client ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID de cliente:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="87"/>
         <source>Client Secret:</source>
-        <translation type="unfinished"></translation>
+        <translation>Secreto de cliente:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="94"/>
         <source>Account linked</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuenta vinculada</translation>
     </message>
 </context>
 <context>
@@ -530,57 +645,57 @@
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="27"/>
         <source>FitTrackee Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Subir FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="44"/>
         <source>Activity name for FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de actividad para FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="45"/>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="49"/>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="56"/>
         <source>Activity description for FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción de la actividad para FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="64"/>
         <source>Type (FitTrackee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo (FitTrackee)</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="69"/>
         <source>Private</source>
-        <translation type="unfinished">Privado</translation>
+        <translation>Privado</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="73"/>
         <source>Upload</source>
-        <translation type="unfinished">Cargar</translation>
+        <translation>Subida</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="110"/>
         <source>Uploading data...</source>
-        <translation type="unfinished">Cargando datos...</translation>
+        <translation>Subiendo datos…</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="125"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished">Carga finalizada</translation>
+        <translation>Actividad de subida completada</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="224"/>
         <source>An unknown error occurred</source>
-        <translation type="unfinished">Ocurrió un error desconocido</translation>
+        <translation>Ha sucedido un error desconocido</translation>
     </message>
 </context>
 <context>
@@ -703,7 +818,7 @@
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation>PAI</translation>
     </message>
 </context>
 <context>
@@ -711,7 +826,7 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="9"/>
         <source>PAI</source>
-        <translation type="unfinished">PAI</translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
@@ -744,17 +859,17 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation type="unfinished">Vincular dispositivo</translation>
+        <translation>Emparejar dispositivo</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation type="unfinished">Ningún dispositivo encontrado</translation>
+        <translation>Ningún dispositivo encontrado</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished">El adaptador Bluetooth no está disponible</translation>
+        <translation>El adaptador Bluetooth no está disponible</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="210"/>
@@ -764,22 +879,22 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="231"/>
         <source>Stop scanning</source>
-        <translation type="unfinished">Detener búsqueda</translation>
+        <translation>Detener análisis</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Scan for devices</source>
-        <translation type="unfinished">Buscar dispositivos</translation>
+        <translation>Detectar dispositivos</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="246"/>
         <source>Scanning for devices…</source>
-        <translation type="unfinished">Buscando dispositivos..…</translation>
+        <translation>Analizando dispositivos…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="248"/>
         <source>Pairing…</source>
-        <translation type="unfinished">Vinculando…</translation>
+        <translation>Emparejando…</translation>
     </message>
 </context>
 <context>
@@ -1375,7 +1490,7 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
-        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
+        <location filename="../qml/pages/Settings-menu.qml" line="74"/>
         <source>Donate</source>
         <translation>Donar</translation>
     </message>
@@ -1389,15 +1504,20 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="68"/>
         <source>Notifications</source>
-        <translation type="unfinished">Notificaciones</translation>
+        <translation>Notificaciones</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="71"/>
         <source>FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
+        <source>FitPub</source>
+        <translation>FitPub</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-menu.qml" line="73"/>
         <source>Debug Info</source>
         <translation>Info depuración</translation>
     </message>
@@ -1412,17 +1532,17 @@
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="8"/>
         <source>Notifications settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes de notificaciones</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="9"/>
         <source>Save Settings</source>
-        <translation type="unfinished">Guardar la configuración</translation>
+        <translation>Guardar Ajustes</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="36"/>
         <source>Remove</source>
-        <translation type="unfinished">Eliminar</translation>
+        <translation>Retirar</translation>
     </message>
 </context>
 <context>
@@ -1520,7 +1640,7 @@
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="8"/>
         <source>User Settings</source>
-        <translation type="unfinished">Ajustes de usuario</translation>
+        <translation>Ajustes del Usuario</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="88"/>
@@ -1619,7 +1739,7 @@
 <context>
     <name>SportPage</name>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="169"/>
+        <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>Data:</source>
         <translation>Datos:</translation>
     </message>
@@ -1644,12 +1764,12 @@
         <translation type="vanished">Ascenso</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="87"/>
+        <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°</source>
         <translation>%1°; %2°</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="89"/>
+        <location filename="../qml/pages/SportPage.qml" line="90"/>
         <source>%1°; %2°; %3m</source>
         <translation>%1°; %2°; %3m</translation>
     </message>
@@ -1670,24 +1790,29 @@
         <translation type="vanished">Ritmo mín</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="150"/>
+        <location filename="../qml/pages/SportPage.qml" line="151"/>
         <source>Start: %1 %2</source>
         <translation>Inicio: %1 %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="156"/>
+        <location filename="../qml/pages/SportPage.qml" line="157"/>
         <source>Duration: %1</source>
         <translation>Duración: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="162"/>
+        <location filename="../qml/pages/SportPage.qml" line="163"/>
         <source>Location: %1</source>
         <translation>Ubicación: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="373"/>
+        <location filename="../qml/pages/SportPage.qml" line="374"/>
         <source>Send to FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar a FitTrackee</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SportPage.qml" line="387"/>
+        <source>Send to FitPub</source>
+        <translation>Enviar a FitPub</translation>
     </message>
     <message>
         <source>Max Pace</source>
@@ -1818,7 +1943,7 @@
         <translation type="vanished">swolf</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="360"/>
+        <location filename="../qml/pages/SportPage.qml" line="361"/>
         <source>Send to Strava</source>
         <translation>Enviar a Strava</translation>
     </message>
@@ -1828,7 +1953,7 @@
     <message>
         <location filename="../qml/pages/SportsActivityKindPage.qml" line="12"/>
         <source>Select activity type</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar tipo de actividad</translation>
     </message>
 </context>
 <context>
@@ -1838,17 +1963,17 @@
         <translation type="obsolete">Actividad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="18"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Sports Activities</source>
         <translation>Actividades deportivas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="41"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="42"/>
         <source>Download Next Activity</source>
         <translation>Descargar siguiente actividad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportsSummaryPage.qml" line="163"/>
+        <location filename="../qml/pages/SportsSummaryPage.qml" line="165"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
@@ -1869,7 +1994,7 @@
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <source>Steps</source>
-        <translation type="unfinished">Pasos</translation>
+        <translation>Pasos</translation>
     </message>
 </context>
 <context>
@@ -1898,6 +2023,22 @@
         <location filename="../qml/pages/StravaSettingsPage.qml" line="95"/>
         <source>Country: </source>
         <translation>País: </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="107"/>
+        <source>Please Note:
+
+Changes to the Strava API access mean that it costs to provide this integration.
+Please consider making a donation if you use this functionality.</source>
+        <translation>Nota:
+
+Debido a cambios en el acceso al API de Strava, esta integración tiene un costo.
+Si utilizas esta función, considera hacer una donación.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
+        <source>Donate</source>
+        <translation>Donar</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
@@ -1949,22 +2090,38 @@
         <translation>Cargar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="133"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="105"/>
+        <source>Please Note:
+
+Changes to the Strava API access mean that it costs to provide this integration.
+Please consider making a donation if you use this functionality.</source>
+        <translation>Nota:
+
+Debido a cambios en el acceso al API de Strava, esta integración tiene un costo.
+Si utilizas esta función, considera hacer una donación.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
+        <source>Donate</source>
+        <translation>Donar</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="153"/>
         <source>Uploading data...</source>
         <translation>Cargando datos...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="150"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="170"/>
         <source>Checking upload...</source>
         <translation>Comprobando la carga...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="248"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="268"/>
         <source>Activity upload complete</source>
         <translation>Carga finalizada</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="294"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="314"/>
         <source>An unknown error occurred</source>
         <translation>Ocurrió un error desconocido</translation>
     </message>
@@ -1974,7 +2131,7 @@
         <translation>Tipo (Strava)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/StravaUploadPage.qml" line="213"/>
+        <location filename="../qml/pages/StravaUploadPage.qml" line="233"/>
         <source>TCX uploaded...</source>
         <translation>TCX subido...</translation>
     </message>
@@ -1985,53 +2142,53 @@
         <location filename="../qml/pages/StressDataPage.qml" line="9"/>
         <location filename="../qml/pages/StressDataPage.qml" line="76"/>
         <source>Stress</source>
-        <translation type="unfinished">Estrés</translation>
+        <translation>Estrés</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="25"/>
         <source>Download Stress Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Descargar Datos de Stress</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="42"/>
         <source>Avg: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Prm: %1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="80"/>
         <location filename="../qml/pages/StressDataPage.qml" line="147"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="107"/>
         <source>Relaxed</source>
-        <translation type="unfinished">Relajado</translation>
+        <translation>Relajado</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="115"/>
         <source>Mild</source>
-        <translation type="unfinished"></translation>
+        <translation>Leve</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="123"/>
         <source>Moderate</source>
-        <translation type="unfinished"></translation>
+        <translation>Moderado</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="131"/>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Alto</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="143"/>
         <source>Stress Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Resumen de estrés</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="174"/>
         <source>Last Manual Reading</source>
-        <translation type="unfinished"></translation>
+        <translation>Última Lectura Manual</translation>
     </message>
 </context>
 <context>
@@ -2046,7 +2203,7 @@
         <location filename="../qml/components/Translation.js" line="5"/>
         <location filename="../qml/components/Translation.js" line="5"/>
         <source>Activity</source>
-        <translation type="unfinished">Actividad</translation>
+        <translation>Actividad</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="6"/>
@@ -2484,7 +2641,7 @@
         <location filename="../qml/components/Translation.js" line="78"/>
         <location filename="../qml/components/Translation.js" line="78"/>
         <source>Wakeboarding</source>
-        <translation>Wakeboarding</translation>
+        <translation>Wakeboard</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="79"/>
@@ -2526,7 +2683,7 @@
         <location filename="../qml/components/Translation.js" line="85"/>
         <location filename="../qml/components/Translation.js" line="85"/>
         <source>Jumpmaster</source>
-        <translation type="unfinished"></translation>
+        <translation>Salto maestro</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="86"/>
@@ -2538,13 +2695,13 @@
         <location filename="../qml/components/Translation.js" line="87"/>
         <location filename="../qml/components/Translation.js" line="87"/>
         <source>Floor Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalada de planta del edificio</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="88"/>
         <location filename="../qml/components/Translation.js" line="88"/>
         <source>Baseball</source>
-        <translation>Baseball</translation>
+        <translation>Béisbol</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="89"/>
@@ -2556,19 +2713,19 @@
         <location filename="../qml/components/Translation.js" line="90"/>
         <location filename="../qml/components/Translation.js" line="90"/>
         <source>Softball Slow Pitch</source>
-        <translation>Softball Slow Pitch</translation>
+        <translation>Softbol de lanzamiento lento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="91"/>
         <location filename="../qml/components/Translation.js" line="91"/>
         <source>Shooting</source>
-        <translation>Shooting</translation>
+        <translation>Disparo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="92"/>
         <location filename="../qml/components/Translation.js" line="92"/>
         <source>Auto Racing</source>
-        <translation>Conducción automovilística</translation>
+        <translation>Automovilismo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="93"/>
@@ -2580,1183 +2737,1183 @@
         <location filename="../qml/components/Translation.js" line="94"/>
         <location filename="../qml/components/Translation.js" line="94"/>
         <source>Grinding</source>
-        <translation type="unfinished"></translation>
+        <translation>Molienda</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="95"/>
         <location filename="../qml/components/Translation.js" line="95"/>
         <source>Health Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Instantánea de salud</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="96"/>
         <location filename="../qml/components/Translation.js" line="96"/>
         <source>Marine</source>
-        <translation type="unfinished"></translation>
+        <translation>Marino</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="97"/>
         <location filename="../qml/components/Translation.js" line="97"/>
         <source>HIIT</source>
-        <translation type="unfinished"></translation>
+        <translation>HIIT</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="98"/>
         <location filename="../qml/components/Translation.js" line="98"/>
         <source>Video Gaming</source>
-        <translation type="unfinished"></translation>
+        <translation>Videojuegos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="99"/>
         <location filename="../qml/components/Translation.js" line="99"/>
         <source>Racket</source>
-        <translation type="unfinished"></translation>
+        <translation>Raqueta</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="100"/>
         <location filename="../qml/components/Translation.js" line="100"/>
         <source>Pickleball</source>
-        <translation type="unfinished"></translation>
+        <translation>Pickleball</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="101"/>
         <location filename="../qml/components/Translation.js" line="101"/>
         <source>Padel</source>
-        <translation type="unfinished"></translation>
+        <translation>Pádel</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="102"/>
         <location filename="../qml/components/Translation.js" line="102"/>
         <source>Squash</source>
-        <translation type="unfinished"></translation>
+        <translation>Squash</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="103"/>
         <location filename="../qml/components/Translation.js" line="103"/>
         <source>Racquetball</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelota de raqueta</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="104"/>
         <location filename="../qml/components/Translation.js" line="104"/>
         <source>Push Walk Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad de caminata</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="105"/>
         <location filename="../qml/components/Translation.js" line="105"/>
         <source>Indoor Push Walk Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad de caminata interna</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="106"/>
         <location filename="../qml/components/Translation.js" line="106"/>
         <source>Push Run Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrera de relevos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="107"/>
         <location filename="../qml/components/Translation.js" line="107"/>
         <source>Indoor Push Run Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad de carrera en interior</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="108"/>
         <location filename="../qml/components/Translation.js" line="108"/>
         <source>Meditation</source>
-        <translation type="unfinished"></translation>
+        <translation>Meditación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="109"/>
         <location filename="../qml/components/Translation.js" line="109"/>
         <source>Para Sport</source>
-        <translation type="unfinished"></translation>
+        <translation>Paradeporte</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="110"/>
         <location filename="../qml/components/Translation.js" line="110"/>
         <source>Disc Golf</source>
-        <translation type="unfinished"></translation>
+        <translation>Disco Golf</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="111"/>
         <location filename="../qml/components/Translation.js" line="111"/>
         <source>Ultimate Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Disco Definitivo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="112"/>
         <location filename="../qml/components/Translation.js" line="112"/>
         <source>Team Sport</source>
-        <translation type="unfinished"></translation>
+        <translation>Deporte de equipo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="113"/>
         <location filename="../qml/components/Translation.js" line="113"/>
         <source>Rugby</source>
-        <translation type="unfinished"></translation>
+        <translation>Rugby</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="114"/>
         <location filename="../qml/components/Translation.js" line="114"/>
         <source>Hockey</source>
-        <translation type="unfinished"></translation>
+        <translation>Hockey</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="115"/>
         <location filename="../qml/components/Translation.js" line="115"/>
         <source>Lacrosse</source>
-        <translation type="unfinished"></translation>
+        <translation>Lacrosse</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="116"/>
         <location filename="../qml/components/Translation.js" line="116"/>
         <source>Volleyball</source>
-        <translation type="unfinished"></translation>
+        <translation>Voleibol</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="117"/>
         <location filename="../qml/components/Translation.js" line="117"/>
         <source>Water Tubing</source>
-        <translation type="unfinished"></translation>
+        <translation>Tubo de Agua</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="118"/>
         <location filename="../qml/components/Translation.js" line="118"/>
         <source>Wakesurfing</source>
-        <translation type="unfinished"></translation>
+        <translation>Deslizamiento acuático</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="119"/>
         <location filename="../qml/components/Translation.js" line="119"/>
         <source>Mixed Martial Arts</source>
-        <translation type="unfinished"></translation>
+        <translation>Artes marciales mixtas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="120"/>
         <location filename="../qml/components/Translation.js" line="120"/>
         <source>Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="121"/>
         <location filename="../qml/components/Translation.js" line="121"/>
         <source>Mountain Hike</source>
-        <translation type="unfinished"></translation>
+        <translation>Caminata de montaña</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="122"/>
         <location filename="../qml/components/Translation.js" line="122"/>
         <source>Cross Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrenador de Cross</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="123"/>
         <location filename="../qml/components/Translation.js" line="123"/>
         <source>Free Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Entreno libre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="124"/>
         <location filename="../qml/components/Translation.js" line="124"/>
         <source>Dynamic Cycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciclo dinámico</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="125"/>
         <location filename="../qml/components/Translation.js" line="125"/>
         <source>Kickboxing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kickboxing</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="126"/>
         <location filename="../qml/components/Translation.js" line="126"/>
         <source>Fitness Exercises</source>
-        <translation type="unfinished"></translation>
+        <translation>Ejercicios de forma física</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="127"/>
         <location filename="../qml/components/Translation.js" line="127"/>
         <source>Crossfit</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensidad alta (Crossfit)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="128"/>
         <location filename="../qml/components/Translation.js" line="128"/>
         <source>Functional Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrenamiento funcional</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="129"/>
         <location filename="../qml/components/Translation.js" line="129"/>
         <source>Physical Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrenamiento físico</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="130"/>
         <location filename="../qml/components/Translation.js" line="130"/>
         <source>Taekwondo</source>
-        <translation type="unfinished"></translation>
+        <translation>Taekwondo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="131"/>
         <location filename="../qml/components/Translation.js" line="131"/>
         <source>Tae Bo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tae Bo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="132"/>
         <location filename="../qml/components/Translation.js" line="132"/>
         <source>Cross Country Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrera de campo a través</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="133"/>
         <location filename="../qml/components/Translation.js" line="133"/>
         <source>Karate</source>
-        <translation type="unfinished"></translation>
+        <translation>Kárate</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="134"/>
         <location filename="../qml/components/Translation.js" line="134"/>
         <source>Fencing</source>
-        <translation type="unfinished"></translation>
+        <translation>Esgrima</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="135"/>
         <location filename="../qml/components/Translation.js" line="135"/>
         <source>Core Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Capacitación básica</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="136"/>
         <location filename="../qml/components/Translation.js" line="136"/>
         <source>Kendo</source>
-        <translation type="unfinished"></translation>
+        <translation>Kendo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="137"/>
         <location filename="../qml/components/Translation.js" line="137"/>
         <source>Horizontal Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra horizontal</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="138"/>
         <location filename="../qml/components/Translation.js" line="138"/>
         <source>Parallel Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra paralela</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="139"/>
         <location filename="../qml/components/Translation.js" line="139"/>
         <source>Cooldown</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de recarga</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="140"/>
         <location filename="../qml/components/Translation.js" line="140"/>
         <source>Cross Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrenamiento de Cross</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="141"/>
         <location filename="../qml/components/Translation.js" line="141"/>
         <source>Sit Ups</source>
-        <translation type="unfinished"></translation>
+        <translation>Sentadillas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="142"/>
         <location filename="../qml/components/Translation.js" line="142"/>
         <source>Fitness Gaming</source>
-        <translation type="unfinished"></translation>
+        <translation>Juego para forma física</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="143"/>
         <location filename="../qml/components/Translation.js" line="143"/>
         <source>Aerobic Exercise</source>
-        <translation type="unfinished"></translation>
+        <translation>Ejercicio aeróbico</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="144"/>
         <location filename="../qml/components/Translation.js" line="144"/>
         <source>Rolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcha</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="145"/>
         <location filename="../qml/components/Translation.js" line="145"/>
         <source>Flexibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Flexibilidad</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="146"/>
         <location filename="../qml/components/Translation.js" line="146"/>
         <source>Gymnastics</source>
-        <translation type="unfinished"></translation>
+        <translation>Gimnásticos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="147"/>
         <location filename="../qml/components/Translation.js" line="147"/>
         <source>Track And Field</source>
-        <translation type="unfinished"></translation>
+        <translation>Pista Y Campo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="148"/>
         <location filename="../qml/components/Translation.js" line="148"/>
         <source>Push Ups</source>
-        <translation type="unfinished"></translation>
+        <translation>Flexiones</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="149"/>
         <location filename="../qml/components/Translation.js" line="149"/>
         <source>Battle Rope</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuerda de batalla</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="150"/>
         <location filename="../qml/components/Translation.js" line="150"/>
         <source>Smith Machine</source>
-        <translation type="unfinished"></translation>
+        <translation>Máquina Smith</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="151"/>
         <location filename="../qml/components/Translation.js" line="151"/>
         <source>Pull Ups</source>
-        <translation type="unfinished"></translation>
+        <translation>Dominadas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="152"/>
         <location filename="../qml/components/Translation.js" line="152"/>
         <source>Plank</source>
-        <translation type="unfinished"></translation>
+        <translation>Plancha</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="153"/>
         <location filename="../qml/components/Translation.js" line="153"/>
         <source>Javelin</source>
-        <translation type="unfinished"></translation>
+        <translation>Jabalina</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="154"/>
         <location filename="../qml/components/Translation.js" line="154"/>
         <source>Long Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Salto largo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="155"/>
         <location filename="../qml/components/Translation.js" line="155"/>
         <source>High Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Salto alto</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="156"/>
         <location filename="../qml/components/Translation.js" line="156"/>
         <source>Trampoline</source>
-        <translation type="unfinished"></translation>
+        <translation>Trampolín</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="157"/>
         <location filename="../qml/components/Translation.js" line="157"/>
         <source>Dumbbell</source>
-        <translation type="unfinished"></translation>
+        <translation>Mancuerna</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="158"/>
         <location filename="../qml/components/Translation.js" line="158"/>
         <source>Belly Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile de vientre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="159"/>
         <location filename="../qml/components/Translation.js" line="159"/>
         <source>Jazz Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile de jazz</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="160"/>
         <location filename="../qml/components/Translation.js" line="160"/>
         <source>Latin Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile latino</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="161"/>
         <location filename="../qml/components/Translation.js" line="161"/>
         <source>Ballet</source>
-        <translation type="unfinished"></translation>
+        <translation>Ballet</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="162"/>
         <location filename="../qml/components/Translation.js" line="162"/>
         <source>Street Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile de calle</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="163"/>
         <location filename="../qml/components/Translation.js" line="163"/>
         <source>Zumba</source>
-        <translation type="unfinished"></translation>
+        <translation>Zumba</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="164"/>
         <location filename="../qml/components/Translation.js" line="164"/>
         <source>Roller Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Patinaje de rodillo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="165"/>
         <location filename="../qml/components/Translation.js" line="165"/>
         <source>Martial Arts</source>
-        <translation type="unfinished"></translation>
+        <translation>Artes marciales</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="166"/>
         <location filename="../qml/components/Translation.js" line="166"/>
         <source>Tai Chi</source>
-        <translation type="unfinished"></translation>
+        <translation>Tai Chi</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="167"/>
         <location filename="../qml/components/Translation.js" line="167"/>
         <source>Hula Hooping</source>
-        <translation type="unfinished"></translation>
+        <translation>Hula Hooping</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="168"/>
         <location filename="../qml/components/Translation.js" line="168"/>
         <source>Disc Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Deportes de disco</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="169"/>
         <location filename="../qml/components/Translation.js" line="169"/>
         <source>Darts</source>
-        <translation type="unfinished"></translation>
+        <translation>Dardos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="170"/>
         <location filename="../qml/components/Translation.js" line="170"/>
         <source>Archery</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiro con arco</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="171"/>
         <location filename="../qml/components/Translation.js" line="171"/>
         <source>Horse Riding</source>
-        <translation type="unfinished"></translation>
+        <translation>Equitación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="172"/>
         <location filename="../qml/components/Translation.js" line="172"/>
         <source>Kite Flying</source>
-        <translation type="unfinished"></translation>
+        <translation>Volar cometas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="173"/>
         <location filename="../qml/components/Translation.js" line="173"/>
         <source>Swing</source>
-        <translation type="unfinished"></translation>
+        <translation>Oscilante</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="174"/>
         <location filename="../qml/components/Translation.js" line="174"/>
         <source>Stairs</source>
-        <translation type="unfinished"></translation>
+        <translation>Escaleras</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="175"/>
         <location filename="../qml/components/Translation.js" line="175"/>
         <source>Mind And Body</source>
-        <translation type="unfinished"></translation>
+        <translation>Mente y cuerpo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="176"/>
         <location filename="../qml/components/Translation.js" line="176"/>
         <source>Wrestling</source>
-        <translation type="unfinished"></translation>
+        <translation>Lucha libre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="177"/>
         <location filename="../qml/components/Translation.js" line="177"/>
         <source>Kabaddi</source>
-        <translation type="unfinished"></translation>
+        <translation>Kabaddi</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="178"/>
         <location filename="../qml/components/Translation.js" line="178"/>
         <source>Karting</source>
-        <translation type="unfinished"></translation>
+        <translation>Karting</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="179"/>
         <location filename="../qml/components/Translation.js" line="179"/>
         <source>Billiards</source>
-        <translation type="unfinished"></translation>
+        <translation>Billares</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="180"/>
         <location filename="../qml/components/Translation.js" line="180"/>
         <source>Bowling</source>
-        <translation type="unfinished"></translation>
+        <translation>Bolos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="181"/>
         <location filename="../qml/components/Translation.js" line="181"/>
         <source>Shuttlecock</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelota de bádminton</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="182"/>
         <location filename="../qml/components/Translation.js" line="182"/>
         <source>Handball</source>
-        <translation type="unfinished"></translation>
+        <translation>Balonmano</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="183"/>
         <location filename="../qml/components/Translation.js" line="183"/>
         <source>Dodgeball</source>
-        <translation type="unfinished"></translation>
+        <translation>Balón prisionero</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="184"/>
         <location filename="../qml/components/Translation.js" line="184"/>
         <source>Australian Football</source>
-        <translation type="unfinished"></translation>
+        <translation>Fútbol australiano</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="185"/>
         <location filename="../qml/components/Translation.js" line="185"/>
         <source>Lacross</source>
-        <translation type="unfinished"></translation>
+        <translation>Lacross</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="186"/>
         <location filename="../qml/components/Translation.js" line="186"/>
         <source>Shot</source>
-        <translation type="unfinished"></translation>
+        <translation>Disparó</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="187"/>
         <location filename="../qml/components/Translation.js" line="187"/>
         <source>Beach Soccer</source>
-        <translation type="unfinished"></translation>
+        <translation>Fútbol de playa</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="188"/>
         <location filename="../qml/components/Translation.js" line="188"/>
         <source>Beach Volleyball</source>
-        <translation type="unfinished"></translation>
+        <translation>Voleibol de playa</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="189"/>
         <location filename="../qml/components/Translation.js" line="189"/>
         <source>Gateball</source>
-        <translation type="unfinished"></translation>
+        <translation>Stick japonés</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="190"/>
         <location filename="../qml/components/Translation.js" line="190"/>
         <source>Sepak Takraw</source>
-        <translation type="unfinished"></translation>
+        <translation>Sepak Takraw</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="191"/>
         <location filename="../qml/components/Translation.js" line="191"/>
         <source>Sailing</source>
-        <translation type="unfinished"></translation>
+        <translation>Vela</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="192"/>
         <location filename="../qml/components/Translation.js" line="192"/>
         <source>Jet Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>Moto acuática</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="193"/>
         <location filename="../qml/components/Translation.js" line="193"/>
         <source>Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Patinaje</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="194"/>
         <location filename="../qml/components/Translation.js" line="194"/>
         <source>Ice Hockey</source>
-        <translation type="unfinished"></translation>
+        <translation>Hockey sobre hielo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="195"/>
         <location filename="../qml/components/Translation.js" line="195"/>
         <source>Curling</source>
-        <translation type="unfinished"></translation>
+        <translation>Rizado</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="196"/>
         <location filename="../qml/components/Translation.js" line="196"/>
         <source>Cross Country Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>Esquí de fondo (campo traviesa)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="197"/>
         <location filename="../qml/components/Translation.js" line="197"/>
         <source>Snow Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Deportes de nieve</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="198"/>
         <location filename="../qml/components/Translation.js" line="198"/>
         <source>Luge</source>
-        <translation type="unfinished"></translation>
+        <translation>Trineo luge</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="199"/>
         <location filename="../qml/components/Translation.js" line="199"/>
         <source>Skateboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>Monopatinaje</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="200"/>
         <location filename="../qml/components/Translation.js" line="200"/>
         <source>Parachuting</source>
-        <translation type="unfinished"></translation>
+        <translation>Paracaídas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="201"/>
         <location filename="../qml/components/Translation.js" line="201"/>
         <source>Parkour</source>
-        <translation type="unfinished"></translation>
+        <translation>Salto de obstáculos en ciudades (Parkour)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="202"/>
         <location filename="../qml/components/Translation.js" line="202"/>
         <source>Indoor Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrera en interior</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="203"/>
         <location filename="../qml/components/Translation.js" line="203"/>
         <source>Outdoor Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Carreras al aire libre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="204"/>
         <location filename="../qml/components/Translation.js" line="204"/>
         <source>Outdoor Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>Paseo al aire libre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="205"/>
         <location filename="../qml/components/Translation.js" line="205"/>
         <source>Outdoor Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciclismo al aire libre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="206"/>
         <location filename="../qml/components/Translation.js" line="206"/>
         <source>Aerobic Combo</source>
-        <translation type="unfinished"></translation>
+        <translation>Combo aeróbico</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="207"/>
         <location filename="../qml/components/Translation.js" line="207"/>
         <source>Aerobics</source>
-        <translation type="unfinished"></translation>
+        <translation>Aeróbicos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="208"/>
         <location filename="../qml/components/Translation.js" line="208"/>
         <source>Air Walker</source>
-        <translation type="unfinished"></translation>
+        <translation>Simulador de sky</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="209"/>
         <location filename="../qml/components/Translation.js" line="209"/>
         <source>Artistic Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Natación artística</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="210"/>
         <location filename="../qml/components/Translation.js" line="210"/>
         <source>Ballroom Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile de salón</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="211"/>
         <location filename="../qml/components/Translation.js" line="211"/>
         <source>BMX</source>
-        <translation type="unfinished"></translation>
+        <translation>BMX</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="212"/>
         <location filename="../qml/components/Translation.js" line="212"/>
         <source>Board Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Juego de mesa</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="213"/>
         <location filename="../qml/components/Translation.js" line="213"/>
         <source>Bocce</source>
-        <translation type="unfinished"></translation>
+        <translation>Petanca</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="214"/>
         <location filename="../qml/components/Translation.js" line="214"/>
         <source>Breaking</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruptura</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="215"/>
         <location filename="../qml/components/Translation.js" line="215"/>
         <source>Bridge</source>
-        <translation type="unfinished"></translation>
+        <translation>Puente</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="216"/>
         <location filename="../qml/components/Translation.js" line="216"/>
         <source>Cardio Combat</source>
-        <translation type="unfinished"></translation>
+        <translation>Combate cardio</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="217"/>
         <location filename="../qml/components/Translation.js" line="217"/>
         <source>Checkers</source>
-        <translation type="unfinished"></translation>
+        <translation>Revisores</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="218"/>
         <location filename="../qml/components/Translation.js" line="218"/>
         <source>Chess</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajedrez</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="219"/>
         <location filename="../qml/components/Translation.js" line="219"/>
         <source>Dragon Boat</source>
-        <translation type="unfinished"></translation>
+        <translation>Bote de dragón</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="220"/>
         <location filename="../qml/components/Translation.js" line="220"/>
         <source>Esports</source>
-        <translation type="unfinished"></translation>
+        <translation>Deportes electrónicos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="221"/>
         <location filename="../qml/components/Translation.js" line="221"/>
         <source>Finswimming</source>
-        <translation type="unfinished"></translation>
+        <translation>Natación con aletas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="222"/>
         <location filename="../qml/components/Translation.js" line="222"/>
         <source>Flowriding</source>
-        <translation type="unfinished"></translation>
+        <translation>Sky acuático en piscina</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="223"/>
         <location filename="../qml/components/Translation.js" line="223"/>
         <source>Folk Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile folclórico</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="224"/>
         <location filename="../qml/components/Translation.js" line="224"/>
         <source>Frisbee</source>
-        <translation type="unfinished"></translation>
+        <translation>Frisbee</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="225"/>
         <location filename="../qml/components/Translation.js" line="225"/>
         <source>Futsal</source>
-        <translation type="unfinished"></translation>
+        <translation>Fútbol sala</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="226"/>
         <location filename="../qml/components/Translation.js" line="226"/>
         <source>Hacky Sack</source>
-        <translation type="unfinished"></translation>
+        <translation>Hacky Sack</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="227"/>
         <location filename="../qml/components/Translation.js" line="227"/>
         <source>Hip Hop</source>
-        <translation type="unfinished"></translation>
+        <translation>Hip Hop</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="228"/>
         <location filename="../qml/components/Translation.js" line="228"/>
         <source>Hula Hoop</source>
-        <translation type="unfinished"></translation>
+        <translation>Hula Hoop</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="229"/>
         <location filename="../qml/components/Translation.js" line="229"/>
         <source>Indoor Fitness</source>
-        <translation type="unfinished"></translation>
+        <translation>Forma física interior</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="230"/>
         <location filename="../qml/components/Translation.js" line="230"/>
         <source>Indoor Ice Skating</source>
-        <translation type="unfinished"></translation>
+        <translation>Patinaje de Hielo interior</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="231"/>
         <location filename="../qml/components/Translation.js" line="231"/>
         <source>Jai Alai</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta punta</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="232"/>
         <location filename="../qml/components/Translation.js" line="232"/>
         <source>Judo</source>
-        <translation type="unfinished"></translation>
+        <translation>Judo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="233"/>
         <location filename="../qml/components/Translation.js" line="233"/>
         <source>Jujitsu</source>
-        <translation type="unfinished"></translation>
+        <translation>Jujitsu</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="234"/>
         <location filename="../qml/components/Translation.js" line="234"/>
         <source>Mass Gymnastics</source>
-        <translation type="unfinished"></translation>
+        <translation>Gimnasias de levantamiento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="235"/>
         <location filename="../qml/components/Translation.js" line="235"/>
         <source>Modern Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Danza moderna</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="236"/>
         <location filename="../qml/components/Translation.js" line="236"/>
         <source>Muay Thai</source>
-        <translation type="unfinished"></translation>
+        <translation>Muay Thai</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="237"/>
         <location filename="../qml/components/Translation.js" line="237"/>
         <source>Parallel Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Barras paralelas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="238"/>
         <location filename="../qml/components/Translation.js" line="238"/>
         <source>Pole Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile de polo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="239"/>
         <location filename="../qml/components/Translation.js" line="239"/>
         <source>Race Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrera caminando</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="240"/>
         <location filename="../qml/components/Translation.js" line="240"/>
         <source>Shuffleboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Juego de tejo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="241"/>
         <location filename="../qml/components/Translation.js" line="241"/>
         <source>Snorkeling</source>
-        <translation type="unfinished"></translation>
+        <translation>Buceo con tubo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="242"/>
         <location filename="../qml/components/Translation.js" line="242"/>
         <source>Somatosensory Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Juego somatosensorial</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="243"/>
         <location filename="../qml/components/Translation.js" line="243"/>
         <source>Spinning</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="244"/>
         <location filename="../qml/components/Translation.js" line="244"/>
         <source>Square Dance</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile cuadrado</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="245"/>
         <location filename="../qml/components/Translation.js" line="245"/>
         <source>Stair Climber</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalador de peldaño</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="246"/>
         <location filename="../qml/components/Translation.js" line="246"/>
         <source>Stepper</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalador</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="247"/>
         <location filename="../qml/components/Translation.js" line="247"/>
         <source>Stretching</source>
-        <translation type="unfinished"></translation>
+        <translation>Estiramientos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="248"/>
         <location filename="../qml/components/Translation.js" line="248"/>
         <source>Table Football</source>
-        <translation type="unfinished"></translation>
+        <translation>Fútbol de mesa</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="249"/>
         <location filename="../qml/components/Translation.js" line="249"/>
         <source>Tug Of War</source>
-        <translation type="unfinished"></translation>
+        <translation>Tira y Afloja</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="250"/>
         <location filename="../qml/components/Translation.js" line="250"/>
         <source>Wall Ball</source>
-        <translation type="unfinished"></translation>
+        <translation>Balón contra la pared</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="251"/>
         <location filename="../qml/components/Translation.js" line="251"/>
         <source>Water Polo</source>
-        <translation type="unfinished"></translation>
+        <translation>Polo acuático</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="252"/>
         <location filename="../qml/components/Translation.js" line="252"/>
         <source>Weiqi</source>
-        <translation type="unfinished"></translation>
+        <translation>Go</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="253"/>
         <location filename="../qml/components/Translation.js" line="253"/>
         <source>Free Sparring</source>
-        <translation type="unfinished"></translation>
+        <translation>Combate libre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="254"/>
         <location filename="../qml/components/Translation.js" line="254"/>
         <source>Body Combat</source>
-        <translation type="unfinished"></translation>
+        <translation>Combate corporal</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="255"/>
         <location filename="../qml/components/Translation.js" line="255"/>
         <source>Plaza Dancing</source>
-        <translation type="unfinished"></translation>
+        <translation>Baile de plaza</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="256"/>
         <location filename="../qml/components/Translation.js" line="256"/>
         <source>Laser Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de láser</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="257"/>
         <location filename="../qml/components/Translation.js" line="257"/>
         <source>Obstacle Race</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrera de obstáculo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="258"/>
         <location filename="../qml/components/Translation.js" line="258"/>
         <source>Billiard Pool</source>
-        <translation type="unfinished"></translation>
+        <translation>Billar</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="259"/>
         <location filename="../qml/components/Translation.js" line="259"/>
         <source>Canoeing</source>
-        <translation type="unfinished"></translation>
+        <translation>Piragüismo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="260"/>
         <location filename="../qml/components/Translation.js" line="260"/>
         <source>Water Scooter</source>
-        <translation type="unfinished"></translation>
+        <translation>Propulsor acuático</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="261"/>
         <location filename="../qml/components/Translation.js" line="261"/>
         <source>Bobsleigh</source>
-        <translation type="unfinished"></translation>
+        <translation>Bobsleigh</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="262"/>
         <location filename="../qml/components/Translation.js" line="262"/>
         <source>Sledding</source>
-        <translation type="unfinished"></translation>
+        <translation>Trineo sled</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="263"/>
         <location filename="../qml/components/Translation.js" line="263"/>
         <source>Biathlon</source>
-        <translation type="unfinished"></translation>
+        <translation>Biatlón</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="264"/>
         <location filename="../qml/components/Translation.js" line="264"/>
         <source>Bungee Jumping</source>
-        <translation type="unfinished"></translation>
+        <translation>Salto de caída libre</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="265"/>
         <location filename="../qml/components/Translation.js" line="265"/>
         <source>Orienteering</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrera de orientación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="266"/>
         <location filename="../qml/components/Translation.js" line="266"/>
         <source>Trekking</source>
-        <translation type="unfinished"></translation>
+        <translation>Excursionismo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="267"/>
         <location filename="../qml/components/Translation.js" line="267"/>
         <source>Trail Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrera de estela</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="268"/>
         <location filename="../qml/components/Translation.js" line="268"/>
         <source>Upper Body</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte superior del cuerpo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="269"/>
         <location filename="../qml/components/Translation.js" line="269"/>
         <source>Lower Body</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuerpo inferior</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="270"/>
         <location filename="../qml/components/Translation.js" line="270"/>
         <source>Barbell</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra con pesas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="271"/>
         <location filename="../qml/components/Translation.js" line="271"/>
         <source>Triathlon</source>
-        <translation type="unfinished"></translation>
+        <translation>Triatlón</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="272"/>
         <location filename="../qml/components/Translation.js" line="272"/>
         <source>Other Water Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Otros deportes acuáticos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="273"/>
         <location filename="../qml/components/Translation.js" line="273"/>
         <source>Other Winter Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>Otros deportes de invierno</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="274"/>
         <location filename="../qml/components/Translation.js" line="274"/>
         <source>Powerboating</source>
-        <translation type="unfinished"></translation>
+        <translation>Motonáutica</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="275"/>
         <location filename="../qml/components/Translation.js" line="275"/>
         <source>Diving</source>
-        <translation type="unfinished"></translation>
+        <translation>Buceo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="276"/>
         <location filename="../qml/components/Translation.js" line="276"/>
         <source>ATV</source>
-        <translation type="unfinished"></translation>
+        <translation>ATV</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="277"/>
         <location filename="../qml/components/Translation.js" line="277"/>
         <source>Paragliding</source>
-        <translation type="unfinished"></translation>
+        <translation>Parapente</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="278"/>
         <location filename="../qml/components/Translation.js" line="278"/>
         <source>Weightlifting</source>
-        <translation type="unfinished"></translation>
+        <translation>Halterofilia</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="279"/>
         <location filename="../qml/components/Translation.js" line="279"/>
         <source>Deadlift</source>
-        <translation type="unfinished"></translation>
+        <translation>Peso muerto</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="280"/>
         <location filename="../qml/components/Translation.js" line="280"/>
         <source>Burpee</source>
-        <translation type="unfinished"></translation>
+        <translation>Burpee</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="281"/>
         <location filename="../qml/components/Translation.js" line="281"/>
         <source>Abs</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdominales</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="282"/>
         <location filename="../qml/components/Translation.js" line="282"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Espalda</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="283"/>
         <location filename="../qml/components/Translation.js" line="283"/>
         <source>Step Aerobics</source>
-        <translation type="unfinished"></translation>
+        <translation>Paso aeróbico</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="284"/>
         <location filename="../qml/components/Translation.js" line="284"/>
         <source>Equestrian</source>
-        <translation type="unfinished"></translation>
+        <translation>Deportes ecuestres</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="285"/>
         <location filename="../qml/components/Translation.js" line="285"/>
         <source>Athletics</source>
-        <translation type="unfinished"></translation>
+        <translation>Atletismo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="300"/>
         <location filename="../qml/components/Translation.js" line="300"/>
         <source>Active Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo activo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="301"/>
         <location filename="../qml/components/Translation.js" line="301"/>
         <source>Aerobic Training Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Efecto de entrenamiento aeróbica</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="302"/>
         <location filename="../qml/components/Translation.js" line="302"/>
         <source>Anaerobic Training Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Efecto de Entrenamiento Anaeróbico</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="303"/>
         <location filename="../qml/components/Translation.js" line="303"/>
         <source>Ascent</source>
-        <translation type="unfinished">Ascenso</translation>
+        <translation>Ascenso</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="304"/>
         <location filename="../qml/components/Translation.js" line="304"/>
         <source>Time Ascending</source>
-        <translation type="unfinished">Tiempo de ascenso</translation>
+        <translation>Tiempo de ascenso</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="305"/>
@@ -3766,7 +3923,7 @@
         <location filename="../qml/components/Translation.js" line="306"/>
         <location filename="../qml/components/Translation.js" line="315"/>
         <source>Average Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasa media de corazón</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="307"/>
@@ -3774,19 +3931,19 @@
         <location filename="../qml/components/Translation.js" line="307"/>
         <location filename="../qml/components/Translation.js" line="350"/>
         <source>Average Pace</source>
-        <translation type="unfinished">Ritmo medio</translation>
+        <translation>Ritmo medio</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="308"/>
         <location filename="../qml/components/Translation.js" line="308"/>
         <source>Average Lap Pace</source>
-        <translation type="unfinished">Ritmo medio de vuelta</translation>
+        <translation>Ritmo medio por vuelta</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="309"/>
         <location filename="../qml/components/Translation.js" line="309"/>
         <source>Average Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="310"/>
@@ -3794,13 +3951,13 @@
         <location filename="../qml/components/Translation.js" line="310"/>
         <location filename="../qml/components/Translation.js" line="355"/>
         <source>Average Stride</source>
-        <translation type="unfinished">Zancada media</translation>
+        <translation>Zancada media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="311"/>
         <location filename="../qml/components/Translation.js" line="311"/>
         <source>Average Stroke Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distancia media cerebrovascular</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="312"/>
@@ -3808,25 +3965,25 @@
         <location filename="../qml/components/Translation.js" line="312"/>
         <location filename="../qml/components/Translation.js" line="360"/>
         <source>Average Stroke Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Frecuencia media cerebrovascular</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="313"/>
         <location filename="../qml/components/Translation.js" line="313"/>
         <source>Average Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitud media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="316"/>
         <location filename="../qml/components/Translation.js" line="316"/>
         <source>Average Slope</source>
-        <translation type="unfinished"></translation>
+        <translation>Pendiente media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="317"/>
         <location filename="../qml/components/Translation.js" line="317"/>
         <source>Average Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="318"/>
@@ -3834,67 +3991,67 @@
         <location filename="../qml/components/Translation.js" line="318"/>
         <location filename="../qml/components/Translation.js" line="319"/>
         <source>Calories</source>
-        <translation type="unfinished">Calorías</translation>
+        <translation>Calorías</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="320"/>
         <location filename="../qml/components/Translation.js" line="320"/>
         <source>Current Workout Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Carga de entrenamiento actual</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="321"/>
         <location filename="../qml/components/Translation.js" line="321"/>
         <source>Descent</source>
-        <translation type="unfinished">Descenso</translation>
+        <translation>Descenso</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="322"/>
         <location filename="../qml/components/Translation.js" line="322"/>
         <source>Time Descending</source>
-        <translation type="unfinished">Tiempo de descenso</translation>
+        <translation>Tiempo de descenso</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="323"/>
         <location filename="../qml/components/Translation.js" line="323"/>
         <source>Distance</source>
-        <translation type="unfinished">Distancia</translation>
+        <translation>Distancia</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="324"/>
         <location filename="../qml/components/Translation.js" line="324"/>
         <source>Downhill Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora de descenso</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="325"/>
         <location filename="../qml/components/Translation.js" line="325"/>
         <source>Elevation Gain</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganancia de elevación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="326"/>
         <location filename="../qml/components/Translation.js" line="326"/>
         <source>Elevation Loss</source>
-        <translation type="unfinished"></translation>
+        <translation>Pérdida de elevación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="327"/>
         <location filename="../qml/components/Translation.js" line="327"/>
         <source>Time on Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo en Plano</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="328"/>
         <location filename="../qml/components/Translation.js" line="328"/>
         <source>Laps</source>
-        <translation type="unfinished">Vueltas</translation>
+        <translation>Vueltas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="329"/>
         <location filename="../qml/components/Translation.js" line="329"/>
         <source>Max Altitude</source>
-        <translation type="unfinished">Altitud máx</translation>
+        <translation>Altitud máx</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="331"/>
@@ -3902,127 +4059,127 @@
         <location filename="../qml/components/Translation.js" line="331"/>
         <location filename="../qml/components/Translation.js" line="332"/>
         <source>Max Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Max Ritmo cardíaco</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="333"/>
         <location filename="../qml/components/Translation.js" line="333"/>
         <source>VO₂ Max</source>
-        <translation type="unfinished"></translation>
+        <translation>VO₂ Max</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="334"/>
         <location filename="../qml/components/Translation.js" line="334"/>
         <source>Max Latitude</source>
-        <translation type="unfinished">Latitud máx</translation>
+        <translation>Latitud máx</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="335"/>
         <location filename="../qml/components/Translation.js" line="335"/>
         <source>Max Longitude</source>
-        <translation type="unfinished">Longitud máx</translation>
+        <translation>Longitud máx</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="336"/>
         <location filename="../qml/components/Translation.js" line="336"/>
         <source>Max Pace</source>
-        <translation type="unfinished">Ritmo máx</translation>
+        <translation>Paso máx</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="337"/>
         <location filename="../qml/components/Translation.js" line="337"/>
         <source>Max Speed</source>
-        <translation type="unfinished">Velocidad máx</translation>
+        <translation>Velocidad máx</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="338"/>
         <location filename="../qml/components/Translation.js" line="338"/>
         <source>Max Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura max</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="339"/>
         <location filename="../qml/components/Translation.js" line="339"/>
         <source>Min Altitude</source>
-        <translation type="unfinished">Altitud mín</translation>
+        <translation>Altitud mín</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="340"/>
         <location filename="../qml/components/Translation.js" line="340"/>
         <source>Min Heart Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Frec. mín. cardíaca</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="341"/>
         <location filename="../qml/components/Translation.js" line="341"/>
         <source>Min Latitude</source>
-        <translation type="unfinished">Latitud mín</translation>
+        <translation>Latitud mín</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="342"/>
         <location filename="../qml/components/Translation.js" line="342"/>
         <source>Min Longitude</source>
-        <translation type="unfinished">Longitud mín</translation>
+        <translation>Longitud mín</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="343"/>
         <location filename="../qml/components/Translation.js" line="343"/>
         <source>Min Pace</source>
-        <translation type="unfinished">Ritmo mín</translation>
+        <translation>Ritmo mín</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="344"/>
         <location filename="../qml/components/Translation.js" line="344"/>
         <source>Min Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura min</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="345"/>
         <location filename="../qml/components/Translation.js" line="345"/>
         <source>Mov Consistency</source>
-        <translation type="unfinished"></translation>
+        <translation>Mov Consistencia</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="346"/>
         <location filename="../qml/components/Translation.js" line="346"/>
         <source>Mov Continuity</source>
-        <translation type="unfinished"></translation>
+        <translation>Mov Continuidad</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="347"/>
         <location filename="../qml/components/Translation.js" line="347"/>
         <source>Mov Rhythm</source>
-        <translation type="unfinished"></translation>
+        <translation>Mov Ritmo</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="348"/>
         <location filename="../qml/components/Translation.js" line="348"/>
         <source>Mov Speed Decay</source>
-        <translation type="unfinished"></translation>
+        <translation>Decaimiento de la velocidad de movimiento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="349"/>
         <location filename="../qml/components/Translation.js" line="349"/>
         <source>Mov Stability</source>
-        <translation type="unfinished"></translation>
+        <translation>Mov Estabilidad</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="351"/>
         <location filename="../qml/components/Translation.js" line="351"/>
         <source>Best Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>Mejor paso</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="352"/>
         <location filename="../qml/components/Translation.js" line="352"/>
         <source>Pause Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausa Duración</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="353"/>
         <location filename="../qml/components/Translation.js" line="353"/>
         <source>Steps</source>
-        <translation type="unfinished">Pasos</translation>
+        <translation>Pasos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="314"/>
@@ -4030,7 +4187,7 @@
         <location filename="../qml/components/Translation.js" line="314"/>
         <location filename="../qml/components/Translation.js" line="354"/>
         <source>Average Cadence</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadencia media</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="330"/>
@@ -4038,91 +4195,91 @@
         <location filename="../qml/components/Translation.js" line="330"/>
         <location filename="../qml/components/Translation.js" line="356"/>
         <source>Max Cadence</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadencia max</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="357"/>
         <location filename="../qml/components/Translation.js" line="357"/>
         <source>Strokes</source>
-        <translation type="unfinished">Brazadas</translation>
+        <translation>Brazadas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="358"/>
         <location filename="../qml/components/Translation.js" line="358"/>
         <source>Average Distance per Stroke</source>
-        <translation type="unfinished"></translation>
+        <translation>Distancia mediana por Brazada</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="359"/>
         <location filename="../qml/components/Translation.js" line="359"/>
         <source>Max Stroke Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasa de Brazada Max</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="361"/>
         <location filename="../qml/components/Translation.js" line="361"/>
         <source>Lane Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud de carril</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="362"/>
         <location filename="../qml/components/Translation.js" line="362"/>
         <source>Swim Laps</source>
-        <translation type="unfinished"></translation>
+        <translation>Natación de Largos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="363"/>
         <location filename="../qml/components/Translation.js" line="363"/>
         <source>Swim Strokes</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilos de natación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="364"/>
         <location filename="../qml/components/Translation.js" line="364"/>
         <source>Swim Style</source>
-        <translation type="unfinished">Estilo de natación</translation>
+        <translation>Estilo de natación</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="365"/>
         <location filename="../qml/components/Translation.js" line="365"/>
         <source>SWOLF Index</source>
-        <translation type="unfinished">Índice SWOLF</translation>
+        <translation>Índice SWOLF</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="366"/>
         <location filename="../qml/components/Translation.js" line="366"/>
         <source>Total Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalada total</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="367"/>
         <location filename="../qml/components/Translation.js" line="367"/>
         <source>Total Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Duración total</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="368"/>
         <location filename="../qml/components/Translation.js" line="368"/>
         <source>Total Stride</source>
-        <translation type="unfinished">Total de zancadas</translation>
+        <translation>Zancada total</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="369"/>
         <location filename="../qml/components/Translation.js" line="369"/>
         <source>Uphill Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo cuesta arriba</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="370"/>
         <location filename="../qml/components/Translation.js" line="370"/>
         <source>Workout Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Duración del entrenamiento</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="381"/>
         <location filename="../qml/components/Translation.js" line="381"/>
         <source>bpm</source>
-        <translation type="unfinished">lpm</translation>
+        <translation>ppm</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="382"/>
@@ -4130,67 +4287,67 @@
         <location filename="../qml/components/Translation.js" line="382"/>
         <location filename="../qml/components/Translation.js" line="383"/>
         <source>kcal</source>
-        <translation type="unfinished">kcal</translation>
+        <translation>kcal</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="384"/>
         <location filename="../qml/components/Translation.js" line="384"/>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="385"/>
         <location filename="../qml/components/Translation.js" line="385"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation>°</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="386"/>
         <location filename="../qml/components/Translation.js" line="386"/>
         <source>laps</source>
-        <translation type="unfinished"></translation>
+        <translation>vueltas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="387"/>
         <location filename="../qml/components/Translation.js" line="387"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="388"/>
         <location filename="../qml/components/Translation.js" line="388"/>
         <source>m/s</source>
-        <translation type="unfinished"></translation>
+        <translation>m/s</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="389"/>
         <location filename="../qml/components/Translation.js" line="389"/>
         <source>min/km</source>
-        <translation type="unfinished"></translation>
+        <translation>min/km</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="390"/>
         <location filename="../qml/components/Translation.js" line="390"/>
         <source>ml/kg/min</source>
-        <translation type="unfinished"></translation>
+        <translation>ml/kg/min</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="391"/>
         <location filename="../qml/components/Translation.js" line="391"/>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="392"/>
         <location filename="../qml/components/Translation.js" line="392"/>
         <source>s/km</source>
-        <translation type="unfinished"></translation>
+        <translation>s/km</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="393"/>
         <location filename="../qml/components/Translation.js" line="393"/>
         <source>s/m</source>
-        <translation type="unfinished"></translation>
+        <translation>s/m</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="394"/>
@@ -4198,31 +4355,31 @@
         <location filename="../qml/components/Translation.js" line="394"/>
         <location filename="../qml/components/Translation.js" line="396"/>
         <source>steps</source>
-        <translation type="unfinished">pasos</translation>
+        <translation>pasos</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="395"/>
         <location filename="../qml/components/Translation.js" line="395"/>
         <source>steps/min</source>
-        <translation type="unfinished"></translation>
+        <translation>pasos/min</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="397"/>
         <location filename="../qml/components/Translation.js" line="397"/>
         <source>strokes</source>
-        <translation type="unfinished">brazadas</translation>
+        <translation>brazadas</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="398"/>
         <location filename="../qml/components/Translation.js" line="398"/>
         <source>strokes/s</source>
-        <translation type="unfinished">brazadas/s</translation>
+        <translation>brazadas/s</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="399"/>
         <location filename="../qml/components/Translation.js" line="399"/>
         <source>SWOLF</source>
-        <translation type="unfinished"></translation>
+        <translation>SWOLF</translation>
     </message>
 </context>
 <context>

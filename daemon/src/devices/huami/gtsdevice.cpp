@@ -1,6 +1,5 @@
 #include "gtsdevice.h"
 #include "gtsfirmwareinfo.h"
-#include <QtXml/QtXml>
 #include <QDateTime>
 #include "typeconversion.h"
 #include "huami/updatefirmwareoperationnew.h"
@@ -10,7 +9,6 @@
 #include "deviceinfoservice.h"
 #include "bipfirmwareservice.h"
 #include "hrmservice.h"
-#include "alertnotificationservice.h"
 
 GtsDevice::GtsDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
@@ -129,58 +127,6 @@ void GtsDevice::initialise()
         m_ActivitySampleSize = 8;
     }
 }
-
-
-void GtsDevice::parseServices()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), nullptr);
-    QDBusReply<QString> xml = adapterIntro.call("Introspect");
-
-    qDebug() << "Resolved services...";
-
-    qDebug().noquote() << xml.value();
-
-    QDomDocument doc;
-    doc.setContent(xml.value());
-
-    QDomNodeList nodes = doc.elementsByTagName("node");
-
-    qDebug() << nodes.count() << "nodes";
-
-    for (int x = 0; x < nodes.count(); x++)
-    {
-        QDomElement node = nodes.at(x).toElement();
-        QString nodeName = node.attribute("name");
-
-        if (nodeName.startsWith("service")) {
-            QString path = devicePath() + "/" + nodeName;
-
-            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), nullptr);
-            QString uuid = devInterface.property("UUID").toString();
-
-            qDebug() << "Creating service for: " << uuid;
-
-            if (uuid == AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION && !service(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION)) {
-                addService(AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION, new AlertNotificationService(path, this));
-            } else if (uuid == DeviceInfoService::UUID_SERVICE_DEVICEINFO  && !service(DeviceInfoService::UUID_SERVICE_DEVICEINFO)) {
-                addService(DeviceInfoService::UUID_SERVICE_DEVICEINFO, new DeviceInfoService(path, this));
-            } else if (uuid == HRMService::UUID_SERVICE_HRM && !service(HRMService::UUID_SERVICE_HRM)) {
-                addService(HRMService::UUID_SERVICE_HRM, new HRMService(path, this));
-            } else if (uuid == MiBandService::UUID_SERVICE_MIBAND && !service(MiBandService::UUID_SERVICE_MIBAND)) {
-                addService(MiBandService::UUID_SERVICE_MIBAND, new MiBandService(path, this));
-            } else if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2 && !service(MiBand2Service::UUID_SERVICE_MIBAND2)) {
-                addService(MiBand2Service::UUID_SERVICE_MIBAND2, new MiBand2Service(path, 0x00, 0x80, true, this));
-            } else if (uuid == BipFirmwareService::UUID_SERVICE_FIRMWARE && !service(BipFirmwareService::UUID_SERVICE_FIRMWARE)) {
-                addService(BipFirmwareService::UUID_SERVICE_FIRMWARE, new BipFirmwareService(path, this));
-            } else if ( !service(uuid)) {
-                addService(uuid, new QBLEService(uuid, path, this));
-            }
-        }
-    }
-}
-
 
 
 AbstractFirmwareInfo *GtsDevice::firmwareInfo(const QByteArray &bytes, const QString &path)

@@ -1,4 +1,3 @@
-#include "src/paimodel.h"
 #ifdef QT_QML_DEBUG
 #include <QtQuick>
 #endif
@@ -15,9 +14,14 @@
 #endif
 
 #include <QTranslator>
+#include <QLoggingCategory>
+#ifdef UUITK_EDITION
+#include <QFileInfo>
+#endif
 
 #include "datasource.h"
 #include "sportsdatamodel.h"
+#include "paimodel.h"
 #include "sportsmetamodel.h"
 #include "daemoninterface.h"
 #include "amazfish.h"
@@ -29,7 +33,6 @@
 
 #include "trackloader.h"
 #include "amazfishconfig.h"
-#include "qble/adaptermodel.h"
 
 #include "o2/src/o2.h"
 
@@ -105,7 +108,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<City>("org.SfietKonstantin.weatherfish", 1, 0, "City");
     qmlRegisterType<CurrentWeather>("org.SfietKonstantin.weatherfish", 1, 0, "CurrentWeather");
     qmlRegisterType<TrackLoader>("uk.co.piggz.amazfish", 1, 0, "TrackLoader");
-    qmlRegisterType<AdapterModel>("uk.co.piggz.amazfish", 1, 0, "AdapterModel");
     qmlRegisterType<O2>("com.pipacs.o2", 1, 0, "O2");
 
     qmlRegisterUncreatableType<DataSource>("uk.co.piggz.amazfish", 1, 0, "DataSource", "Data Source type available only for enum datatypes");

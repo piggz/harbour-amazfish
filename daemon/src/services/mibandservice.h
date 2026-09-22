@@ -200,6 +200,7 @@ private:
     QMap<QString, uint8_t> displayItemsIdMap;
 
     Huami2021ChunkedDecoder *m_decoder = nullptr;
+    void setDisplayShortcuts();
 };
 
 #endif // MIBANDSERVICE_H

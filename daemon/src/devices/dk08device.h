@@ -16,7 +16,8 @@ public:
     void sendAlert(const Amazfish::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
-    void downloadActivityData() override;
+    void fetchData(Amazfish::DataTypes dataTypes) override;
+
     void applyDeviceSetting(Amazfish::Settings s) override;
     void sendWeather(CurrentWeather *weather) override;
 
@@ -27,11 +28,12 @@ public:
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
-    void parseServices();
     void initialise();
     void pair() override;
+    void downloadActivityData();
 
 
 //    Q_SLOT void authenticated(bool ready);
