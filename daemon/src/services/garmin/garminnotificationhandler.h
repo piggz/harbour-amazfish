@@ -248,6 +248,10 @@ public slots:
     void onNotification(NotificationSpec notification);
     void onNotificationDataRequested(const NotificationControlMessage& msg);
     void onNotificationPerformAction(const NotificationControlMessage& msg);
+
+signals:
+    void acceptIncomingCall();
+    void rejectIncomingCall();
 };
 
 //#endif //_GARMINNOTIFICATIONHANDLER_H

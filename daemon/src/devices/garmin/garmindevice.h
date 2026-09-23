@@ -40,8 +40,9 @@ public slots:
 
     //void informationChanged(Amazfish::Info infoKey, const QString& infoValue);
 
-//protected slots:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    void onAnswerCallEvent();
+    void onRejectCallEvent();
 
 signals:
     void sendAlertToDevice(NotificationSpec &note);

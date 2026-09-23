@@ -1,8 +1,6 @@
 #include "garminnotificationdatamessage.h"
 
-#include <QVector>
 
-const quint8 NOTIF_CMD_GET_NOTIFICATION_ATTRIBUTES = 0;
 
 // Notfification details reqest codes
 const quint8 NOTIF_ATTR_APP_IDENTIFIER = 0;
@@ -32,7 +30,6 @@ bool notificationAttributeHasAdditionalParams(quint8 code)
 std::optional<QByteArray> notificationAttributeValue(quint8 code, int maxLength, const QString &appIdentifier, const QString &title, const QString &message)
 {
     QString text;
-    QByteArray action;
     switch (code) {
     case NOTIF_ATTR_APP_IDENTIFIER:
         text = appIdentifier;
@@ -57,7 +54,6 @@ std::optional<QByteArray> notificationAttributeValue(quint8 code, int maxLength,
         return QByteArray(4, char(0));
     case NOTIF_ATTR_ATTACHMENTS:
         return std::nullopt; // we never advertise a picture, so never claim one
-        //TEST CODE: Add Dismiss Action
 
     default:
         // Never silently omit an attribute the watch explicitly asked for -
@@ -77,25 +73,39 @@ std::optional<QByteArray> notificationAttributeValue(quint8 code, int maxLength,
 QByteArray encodeNotificationAction(NotificationAction notificationAction, QString description) {
     QByteArray action;
     action.append((char) notificationAction);
-    /*
-    if (null == notificationAction.notificationActionIconPosition)
-        action.put((byte) 0x00);
-    else
-        action.put((byte) EnumUtils.generateBitVector(NotificationActionIconPosition.class, notificationAction.notificationActionIconPosition));
-    */
-    // don't care about IconPosition for now
-    action.append(char(0));
+    // Add Icon position, seems necessary for accepting/rejecting calls
+    switch (notificationAction)
+    {
+        case NotificationAction::REPLY_INCOMING_CALL:
+            action.append(char(1));  //Bottom
+            break;
+        case NotificationAction::ACCEPT_INCOMING_CALL:
+            action.append(char(2)); // Right
+            break;
+        case NotificationAction::REJECT_INCOMING_CALL:
+            action.append(char(4)); // Left
+            break;
+        case NotificationAction::DISMISS_NOTIFICATION:
+            action.append(char(4)); // Left
+            break;
+        case NotificationAction::REPLY_MESSAGES:
+            action.append(char(1));  //Bottom
+            break;
+        default:
+            action.append(char(0));
+    }
     action.append((char) description.toUtf8().size());
     action.append(description.toUtf8());
     return action;
 }
 
 QByteArray encodeNotificationActionsString(NotificationSpec notificationSpec) {
-    qDebug() << Q_FUNC_INFO << "Garmin: Building Notification Actions";
+    qDebug() << Q_FUNC_INFO << "Garmin: Building Notification Actions, notification type " <<(quint16)notificationSpec.notificationType;
     QByteArray outputStream;
     if (notificationSpec.notificationType == NotificationType::GenericPhone) {
-         outputStream.append(char(3)); // One action
-         outputStream.append(encodeNotificationAction(NotificationAction::REPLY_INCOMING_CALL, " ")); //text is not shown on watch
+        qDebug() << Q_FUNC_INFO << "Garmin: Building Notification Actions for Phone Call";
+         outputStream.append(char(2)); // Two actions: ommit Reply as it cannot be handled
+         //outputStream.append(encodeNotificationAction(NotificationAction::REPLY_INCOMING_CALL, " ")); //text is not shown on watch
          outputStream.append(encodeNotificationAction(NotificationAction::REJECT_INCOMING_CALL, " ")); //text is not shown on watch
          outputStream.append(encodeNotificationAction(NotificationAction::ACCEPT_INCOMING_CALL, " ")); //text is not shown on watch
          return outputStream;
