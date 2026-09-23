@@ -167,22 +167,28 @@ void GarminDevice::onRejectCallEvent(){
 
 QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString &path)
 {
-    qDebug() << Q_FUNC_INFO << uuid;
     parseServices();
-    return mCommunicator.data();
+    if (mCommunicator.data())
+        return mCommunicator.data();
+    return nullptr;
 }
+
 
 
 void GarminDevice::parseServices()
 {
     // Garmin is using a single service for all functions (Mlr), so we probably don't need full parsing.
     qDebug() << Q_FUNC_INFO << "Parsing Services for Garmin";
-    CommunicatorV2* com = qobject_cast<CommunicatorV2*> (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI));
-    if (com)
+    CommunicatorV2* comv2 = qobject_cast<CommunicatorV2*> (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI));
+    CommunicatorV2* comv1 = qobject_cast<CommunicatorV2*> (service(UUID_SERVICE_GARMIN_GFDI_V1));
+    CommunicatorV2* comv0 = qobject_cast<CommunicatorV2*> (service(UUID_SERVICE_GARMIN_GFDI_V0));
+    if (comv0 || comv1 || comv2)
     {
         qDebug() << Q_FUNC_INFO << "Garmin: Communicator already exists, no parsing required.";
         //re-initialise device
-        com->initializeDevice();
+        if (comv0) comv0->initializeDevice();
+        if (comv1) comv1->initializeDevice();
+        if (comv1) comv2->initializeDevice();
     }
     QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
     QDBusReply<QString> xml = adapterIntro.call("Introspect");
@@ -207,14 +213,13 @@ void GarminDevice::parseServices()
             QString uuid = devInterface.property("UUID").toString();
 
             qDebug() << "Creating service for: " << uuid;
-            if (uuid == CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI) {
-                qDebug() << "Added Garmin ML GDFI Service";
+            if ((uuid == CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI) || (uuid == UUID_SERVICE_GARMIN_GFDI_V0) ||(uuid == UUID_SERVICE_GARMIN_GFDI_V1))
+            {
                 QSharedPointer<CommunicatorV2> com = QSharedPointer<CommunicatorV2>::create(path, this);
                 if (com)
                 {
                     connect(com.data(), &CommunicatorV2::informationChanged, this, &GarminDevice::informationChanged, Qt::UniqueConnection);
-                    addService(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI, com.data());
-
+                    addService(uuid, com.data());
                     // add notification handler
                     qDebug() << Q_FUNC_INFO << "Garmin: Adding notification handler";
                     mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(com);
@@ -227,26 +232,20 @@ void GarminDevice::parseServices()
                     return;
                 }
             }
-            if ((uuid == UUID_SERVICE_GARMIN_GFDI_V0) ||(uuid == UUID_SERVICE_GARMIN_GFDI_V1))
-            {
-                emit message("Garmin V0/V1 protocol not implemented");
-                qDebug() << Q_FUNC_INFO << "Garmin: Protocol version 0/1 sound, not supported yet";
-                return;
-            }
         }
     }
     // if we are here, no Garmin device was detected
-
     emit message("No Garmin device detected");
     qDebug() << Q_FUNC_INFO << "Garmin: No supported device detected";
 
 }
 
+
+
 void GarminDevice::initialise()
 {
     qDebug() << Q_FUNC_INFO;
     parseServices();
-
 }
 
 
