@@ -126,18 +126,29 @@ void GarminNotificationHandler::onNotificationPerformAction(const NotificationCo
 {
     qDebug() << Q_FUNC_INFO << "Garmin: Notification Action requested " <<msg.data.toHex() ;
 
-    NotificationSpec spec;
     if (m_storedNotifications.contains(msg.notificationId)) {
-        qDebug() << Q_FUNC_INFO << "Garmin: Notification exists, checking for action";
         quint8 action = msg.data[0];
+        qDebug() << Q_FUNC_INFO << "Garmin: Notification exists, checking for action: " << action;
         //If a reply is included it's in the next bytes.
         /*
         if (msg.data.size()>3)
-            QString reply = Read Null Terminated KDbEscapedString
+            QString reply = Read Null Terminated String
         */
-        if (action==(quint16)NotificationAction::DISMISS_NOTIFICATION) {
-            qDebug() << Q_FUNC_INFO << "Garmin: Received Notification Dismiss";
-            removeNotification(msg.notificationId);
+        switch (action) {
+            case (quint16)NotificationAction::DISMISS_NOTIFICATION:
+                removeNotification(msg.notificationId);
+                return;
+            case (quint8)NotificationAction::ACCEPT_INCOMING_CALL:
+                emit acceptIncomingCall();
+                return;
+            case (quint8)NotificationAction::REJECT_INCOMING_CALL:
+                emit rejectIncomingCall();
+                return;
+            case (quint8)NotificationAction::REPLY_INCOMING_CALL:
+                return;
+            default:
+                // Unknonw action, ignoring
+                return;
         }
     }
 }

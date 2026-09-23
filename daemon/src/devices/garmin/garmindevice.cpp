@@ -157,6 +157,13 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
         }
     }
 }
+void GarminDevice::onAnswerCallEvent() {
+    emit deviceEvent(AbstractDevice::EVENT_ANSWER_CALL);
+}
+
+void GarminDevice::onRejectCallEvent(){
+    emit deviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
+}
 
 QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString &path)
 {
@@ -213,6 +220,8 @@ void GarminDevice::parseServices()
                     mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(com);
                     connect(com.data(), &CommunicatorV2::NotificationDataRequested,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationDataRequested);
                     connect(com.data(), &CommunicatorV2::NotificationPerformAction,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationPerformAction);
+                    connect(mNotificationHandler.data(),&GarminNotificationHandler::acceptIncomingCall,this,&GarminDevice::onAnswerCallEvent);
+                    connect(mNotificationHandler.data(),&GarminNotificationHandler::rejectIncomingCall,this,&GarminDevice::onRejectCallEvent);
                     setConnectionState("authenticated");
                     mCommunicator = com;
                     return;
