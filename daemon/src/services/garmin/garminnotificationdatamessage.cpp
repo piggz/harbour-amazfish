@@ -112,7 +112,7 @@ QByteArray encodeNotificationActionsString(NotificationSpec notificationSpec) {
      }
 
      outputStream.append(char(1)); // One action
-     outputStream.append(encodeNotificationAction(NotificationAction::DISMISS_NOTIFICATION, "Dismiss")); //TODO: Localization of this string
+     outputStream.append(encodeNotificationAction(NotificationAction::DISMISS_NOTIFICATION, QObject::tr("Dismiss")));
      //Reply not yet working
      //outputStream.append(encodeNotificationAction(NotificationAction::REPLY_MESSAGES, "Reply"));
      return outputStream;

@@ -5,7 +5,7 @@
 
 
 // -----------------------------------------------------------------------------
-// Helpers
+// Helpers, might be transferred into seperate file later to be resued by other
 // -----------------------------------------------------------------------------
 static QString truncateByChars(const QString& s, quint32 maxLen)
 {
@@ -19,11 +19,11 @@ static QString truncateByChars(const QString& s, quint32 maxLen)
 // Decode protobuf varint
 // Returns: (value, bytesConsumed)
 // -----------------------------------------------------------------------------
-Result<QPair<quint64, int>> GarminCalendarMessage::decodeVarint(const QByteArray& data)
+bool decodeVarint(const QByteArray& data, quint64& result, int& bytesRead)
 {
-    quint64 result = 0;
     int shift = 0;
-    int bytesRead = 0;
+    bytesRead = 0;
+    result = 0;
 
     for (auto ch : data) {
         const quint8 byte = quint8(ch);
@@ -32,13 +32,12 @@ Result<QPair<quint64, int>> GarminCalendarMessage::decodeVarint(const QByteArray
         result |= (quint64(byte & 0x7F) << shift);
 
         if ((byte & 0x80) == 0) {
-            return Result<QPair<quint64, int>>::isOk(qMakePair(result, bytesRead));
+            return true;
         }
 
         shift += 7;
         if (shift >= 64) {
-            return Result<QPair<quint64, int>>::err(
-                GarminError::invalidMessage(QStringLiteral("Varint too long")));
+            return false; // Varint too long
         }
 
         if (bytesRead >= 10) {
@@ -46,14 +45,15 @@ Result<QPair<quint64, int>> GarminCalendarMessage::decodeVarint(const QByteArray
         }
     }
 
-    return Result<QPair<quint64, int>>::err(
-        GarminError::invalidMessage(QStringLiteral("Incomplete varint")));
+    return false; // Incomplete varint
 }
+
+
 
 // -----------------------------------------------------------------------------
 // Encode protobuf varint
 // -----------------------------------------------------------------------------
-void GarminCalendarMessage::encodeVarint(QByteArray& buffer, quint64 value)
+void encodeVarint(QByteArray& buffer, quint64 value)
 {
     while (true) {
         quint8 byte = quint8(value & 0x7F);
@@ -74,7 +74,7 @@ void GarminCalendarMessage::encodeVarint(QByteArray& buffer, quint64 value)
 // -----------------------------------------------------------------------------
 // Encode field key
 // -----------------------------------------------------------------------------
-void GarminCalendarMessage::encodeFieldKey(QByteArray& buffer, quint32 fieldNum, quint8 wireType)
+void encodeFieldKey(QByteArray& buffer, quint32 fieldNum, quint8 wireType)
 {
     const quint32 key = (fieldNum << 3) | quint32(wireType);
     encodeVarint(buffer, key);
@@ -84,7 +84,7 @@ void GarminCalendarMessage::encodeFieldKey(QByteArray& buffer, quint32 fieldNum,
 // Parse one protobuf field from data[startOffset...]
 // Returns fieldNum, wireType, fieldData (payload only), nextCursor absolute offset
 // -----------------------------------------------------------------------------
-bool GarminCalendarMessage::parseField(const QByteArray& data,
+bool parseField(const QByteArray& data,
                 int startOffset,
                 quint32& fieldNum,
                 quint8& wireType,
@@ -97,13 +97,12 @@ bool GarminCalendarMessage::parseField(const QByteArray& data,
 
     const QByteArray tail = data.mid(startOffset);
 
-    auto keyRes = decodeVarint(tail);
-    if (!keyRes.ok) {
+    quint64 key;
+    int keyLen;
+    bool keyRes = decodeVarint(tail,key,keyLen);
+    if (!keyRes) {
         return false;
     }
-
-    const quint64 key = keyRes.value.first;
-    const int keyLen = keyRes.value.second;
 
     fieldNum = quint32(key >> 3);
     wireType = quint8(key & 0x07);
@@ -113,12 +112,14 @@ bool GarminCalendarMessage::parseField(const QByteArray& data,
     switch (wireType) {
     case 0: {
         // varint payload
-        auto valueRes = decodeVarint(data.mid(cursor));
-        if (!valueRes.ok) {
+        int valueLen;
+        quint64 value;
+        bool valueRes = decodeVarint(data.mid(cursor),value,valueLen);
+        if (!valueRes) {
             return false;
         }
 
-        const int valueLen = valueRes.value.second;
+
         fieldData = data.mid(cursor, valueLen);
         nextCursor = cursor + valueLen;
         return true;
@@ -126,13 +127,12 @@ bool GarminCalendarMessage::parseField(const QByteArray& data,
 
     case 2: {
         // length-delimited
-        auto lenRes = decodeVarint(data.mid(cursor));
-        if (!lenRes.ok) {
+        quint64 length;
+        int lenLen;
+        bool  lenRes = decodeVarint(data.mid(cursor),length,lenLen);
+        if (!lenRes) {
             return false;
         }
-
-        const quint64 length = lenRes.value.first;
-        const int lenLen = lenRes.value.second;
 
         cursor += lenLen;
 
@@ -163,7 +163,7 @@ bool GarminCalendarMessage::parseField(const QByteArray& data,
 // -----------------------------------------------------------------------------
 void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, quint32 dataOffset)
 {
-    qDebug() << "Parsing calendar request from" << data.size() << "bytes";
+    qDebug() << Q_FUNC_INFO << "Parsing calendar request from" << data.size() << "bytes";
 
     CalendarServiceRequest request;
 
@@ -213,7 +213,7 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
 
     request.useCoreServiceEnvelope = false;
 
-    qDebug() << "Found CalendarService payload:" << calendarServiceData.size() << "bytes";
+    qDebug()<< Q_FUNC_INFO << "Found CalendarService payload:" << calendarServiceData.size() << "bytes";
 
     // Parse CalendarService.field1 = GarminCalendarMessage
     cursor = 0;
@@ -270,9 +270,10 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
         int nextCursor = 0;
 
         if (parseField(requestBytes, cursor, fieldNum, wireType, fieldData, nextCursor)) {
-            auto varintRes = decodeVarint(fieldData);
-            if (varintRes.ok) {
-                const quint64 value = varintRes.value.first;
+            quint64 value;
+            int valueLen;
+            auto varintRes = decodeVarint(fieldData,value,valueLen);
+            if (varintRes) {
 
                 switch (fieldNum) {
                 case 1: request.startDate = value; break;
@@ -290,14 +291,14 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
                 case 13: request.maxDescriptionLength = quint32(value); break;
                 case 14: request.maxEvents = quint32(value); break;
                 default:
-                    qDebug() << "Unknown GarminCalendarMessage field:" << fieldNum;
+                    qDebug() << Q_FUNC_INFO << "Unknown GarminCalendarMessage field:" << fieldNum;
                     break;
                 }
             }
 
             cursor = nextCursor;
             if (cursor == oldCursor) {
-                qCritical() << "parseCalendarRequest: cursor not advancing in request body";
+                qDebug() << Q_FUNC_INFO << "parseCalendarRequest: cursor not advancing in request body";
                 break;
             }
         } else {
@@ -305,7 +306,7 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
         }
     }
 
-    qDebug().noquote()
+    qDebug().noquote() << Q_FUNC_INFO
         << QStringLiteral("Parsed calendar request: start_date=%1, end_date=%2, max_events=%3, envelope=CalendarService(field 1)")
                .arg(request.startDate)
                .arg(request.endDate)
@@ -357,26 +358,34 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
     const CalendarServiceRequest& request)
 {
     watchfish::CalendarSource* calendarManager = new watchfish::CalendarSource();
-    qInfo() << "Handling calendar request:" << request.startDate << "to" << request.endDate;
+    qInfo() << Q_FUNC_INFO << "Handling calendar request:" << request.startDate << "to" << request.endDate;
 
     if (calendarManager == nullptr) {
         qWarning() << "No calendar manager available";
         return Result<QVector<CalendarEventProto>>::isOk({});
     }
 
-    static constexpr quint64 SECONDS_PER_DAY = 86400;
-    const quint64 endOfLastDay =
-        ((request.endDate / SECONDS_PER_DAY) + 1) * SECONDS_PER_DAY - 1;
-
-    QDate start= QDateTime::fromMSecsSinceEpoch(request.startDate).date();
-
-    QDate end= QDateTime::fromMSecsSinceEpoch(endOfLastDay).date();
+    QDate lastDay,startDay;
+    if (request.endDate == 0)
+    {
+        //Send next 14 day
+        lastDay=QDate::currentDate();
+        lastDay=lastDay.addDays(14);
+    } else {
+        lastDay=QDateTime::fromMSecsSinceEpoch(request.endDate).date();
+    }
+    if (request.startDate == 0)
+    {
+        //Send from today
+        startDay=QDate::currentDate();
+    } else {
+        startDay=QDateTime::fromMSecsSinceEpoch(request.startDate).date();;
+    }
 
     QList<watchfish::CalendarEvent> events = calendarManager->fetchEvents(
-        start,
-        end
+        startDay,
+        lastDay
     );
-
 
     if (events.isEmpty()) {
          qDebug() << Q_FUNC_INFO << "Failed to fetch calendar events";
@@ -413,8 +422,16 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
 
         proto.hasOrganizer = true;
 
-        proto.startDate = event.start();
-        proto.endDate = event.end();
+        if (event.allDay())
+        {
+            // Needs special treatment - watch expects start and endtime to be 0:00 in local time
+            // So need to convert from UTC
+            proto.startDate=proto.startDate.toLocalTime();
+            proto.endDate=proto.endDate.toLocalTime();
+        } else {
+            proto.startDate = event.start();
+            proto.endDate = event.end();
+        }
         proto.allDay = event.allDay();
 
         // reminders are not part of watchfish events so skipping
@@ -428,12 +445,12 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
         protoEvents.append(proto);
 
         if (protoEvents.size() >= int(request.maxEvents)) {
-            qDebug() << "Reached maxEvents limit:" << request.maxEvents;
+            qDebug() << Q_FUNC_INFO << "Reached maxEvents limit:" << request.maxEvents;
             break;
         }
     }
 
-    qInfo() << "Returning" << protoEvents.size() << "calendar events";
+    qInfo() << Q_FUNC_INFO << "Returning" << protoEvents.size() << "calendar events";
     return Result<QVector<CalendarEventProto>>::isOk
                                               (protoEvents);
 }
@@ -479,11 +496,11 @@ QByteArray GarminCalendarMessage::encodeCalendarEvent(const CalendarEventProto& 
 
     // Field 5: start_date
     encodeFieldKey(buf, 5, 0);
-    encodeVarint(buf, event.startDate.toMSecsSinceEpoch()*1000 - 631065600u);
+    encodeVarint(buf, event.startDate.toMSecsSinceEpoch()/1000);
 
     // Field 6: end_date
     encodeFieldKey(buf, 6, 0);
-    encodeVarint(buf, event.endDate.toMSecsSinceEpoch()*1000 - 631065600u);
+    encodeVarint(buf, event.endDate.toMSecsSinceEpoch()/1000);
 
     // Field 7: all_day
     encodeFieldKey(buf, 7, 0);

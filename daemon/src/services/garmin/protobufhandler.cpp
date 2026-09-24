@@ -1,6 +1,7 @@
 #include "protobufhandler.h"
 #include "garminprotobufmessage.h"
 #include "garmindevicestatusmessage.h"
+#include "garmincalendarmessage.h"
 
 const int MAX_CHUNK_SIZE = 375;
 
@@ -93,7 +94,11 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
          }
          if (fieldNumber==1 && wireType ==2) {
              // Calendar Service
-             qDebug() << Q_FUNC_INFO << "Garmin: Got calendar service messge";
+             processed = true;
+             quint8  innerLength=protobufPayload[1];
+             qDebug() << Q_FUNC_INFO << "Garmin: Got calendar service message";
+             GarminCalendarMessage* msg = new GarminCalendarMessage(mCommunicator);
+             msg->parse(protobufPayload.mid(2,innerLength),message->getRequestId(),0);
          }
          if (processed) {
              qDebug() << Q_FUNC_INFO << "Garmin: Add ACK with No error";

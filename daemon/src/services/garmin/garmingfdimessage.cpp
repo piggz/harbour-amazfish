@@ -132,11 +132,11 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
     case MessageId::WeatherRequest:
         parseWeatherRequest(data.mid(offset));
         return;
+        */
 
     case  MessageId::ProtobufRequest:
         parseProtobufRequest(data.mid(offset));
         return;
-    */
     case  MessageId::ProtobufResponse:
         parseProtobufResponse(data.mid(offset));
         return;
@@ -220,9 +220,7 @@ void GarminGfdiMessage::parseProtobufResponse(const QByteArray& data)
 {
     //GarminProtobufStatusMessage msg(data, mCommunicator);
     qDebug() << Q_FUNC_INFO << "Garmin: Received Protobuf response" << data.toHex();
-    qDebug() << Q_FUNC_INFO;
     if (mCommunicator) mCommunicator->onProtobufMessageReceived(data);
-    //msg->parse(data);
 }
 
 void GarminGfdiMessage::parseProtobufRequest(const QByteArray &data)
@@ -230,8 +228,6 @@ void GarminGfdiMessage::parseProtobufRequest(const QByteArray &data)
     //GarminProtobufMessage msg(data,mCommunicator);
     qDebug() << Q_FUNC_INFO << "Garmin: Received Protobuf request" << data.toHex();
     if (mCommunicator) mCommunicator->onProtobufMessageReceived(data);
-    //msg->parse(data);
-
 }
 
 void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArray& data)
