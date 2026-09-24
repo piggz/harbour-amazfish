@@ -980,7 +980,7 @@ void CommunicatorV2::setStepsGoal(quint32 val)
 {
     //qDebug() << Q_FUNC_INFO << "Garmin: setting steps goal to " << val;
     int configuredGoal=AmazfishConfig::instance()->profileFitnessGoal();
-    if((val != mStepsGoal) || (val != configuredGoal))
+    if((val != mStepsGoal) || ((int)val != configuredGoal))
     {
         qDebug() << Q_FUNC_INFO << "Garmin: setting steps goal to value from watch";
         mStepsGoal=val;

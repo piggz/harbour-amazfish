@@ -89,18 +89,7 @@ class  GarminCalendarMessage : public GarminGfdiMessage
 
  private:
 
-    bool parseField(const QByteArray& data,
-                    int startOffset,
-                    quint32& fieldNum,
-                    quint8& wireType,
-                    QByteArray& fieldData,
-                    int& nextCursor);
-
-    Result<QPair<quint64, int>> decodeVarint(const QByteArray& data);
-    void encodeVarint(QByteArray& buffer, quint64 value);
-    void encodeFieldKey(QByteArray& buffer, quint32 fieldNum, quint8 wireType);
-
-    QByteArray encodeCalendarEvent(const CalendarEventProto& event);
+      QByteArray encodeCalendarEvent(const CalendarEventProto& event);
 
 
 };

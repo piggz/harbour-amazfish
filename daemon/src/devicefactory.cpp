@@ -50,7 +50,7 @@ static const QMap<QString, DeviceCreator> deviceMap = {
     { "Generic Garmin", [](const QString &name) { return new GarminDevice(name); } },
     { "Garmin Epix", [](const QString &name) { return new EpixProDevice(name); } },
     { "Garmin Vivosmart 5", [](const QString &name) { return new Vivosmart5Device(name); } },
-    };
+};
 
 AbstractDevice* DeviceFactory::createDevice(const QString &deviceName, const QString &deviceType)
 {
