@@ -37,6 +37,7 @@ ApplicationWindowPL
     property int _InfoSteps: 0
     property int _InfoBatteryPercent: 0
     property int _InfoHeartrate: 0
+    property int _InfoSpo2: 0
 
     StylerPL {
         id: styler
@@ -201,6 +202,9 @@ ApplicationWindowPL
                 break;
             case Amazfish.INFO_STEPS:
                 _InfoSteps = parseInt(infoValue, 10) || 0;
+                break;
+            case Amazfish.INFO_SPO2:
+                _InfoSpo2 = parseInt(infoValue, 10) || 0;
                 break;
             }
         }

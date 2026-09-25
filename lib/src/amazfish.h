@@ -22,7 +22,8 @@ public:
         FEATURE_MUSIC_CONTROL = 128,
         FEATURE_BUTTON_ACTION = 256,
         FEATURE_SCREENSHOT = 512,
-        FEATURE_FILE_INSTALL = 1024
+        FEATURE_FILE_INSTALL = 1024,
+        FEATURE_SPO2 = 2048
     };
     Q_ENUM(Feature)
     Q_DECLARE_FLAGS(Features, Feature);
@@ -40,7 +41,8 @@ public:
         INFO_MODEL,
         INFO_FW_REVISION,
         INFO_MANUFACTURER,
-        INFO_IMMEDIATE_ALERT
+        INFO_IMMEDIATE_ALERT,
+        INFO_SPO2
     };
     Q_ENUM(Info)
 
