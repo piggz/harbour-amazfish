@@ -222,5 +222,9 @@ void HuamiUpdateFirmwareOperation2020::sendTransferComplete() {
 }
 
 void HuamiUpdateFirmwareOperation2020::sendFinalize() {
+    // The watch confirms finalizing only after processing the data: about 40 s
+    // for A-GPS on an Amazfit GTS. Waiting the usual 10 s cancelled the
+    // operation before that reply.
+    m_timeoutMs = 120000;
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, UCHAR_TO_BYTEARRAY(COMMAND_FINALIZE_UPDATE));
 }
