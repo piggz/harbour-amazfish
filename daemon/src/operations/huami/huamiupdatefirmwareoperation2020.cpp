@@ -101,6 +101,9 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
 
 void HuamiUpdateFirmwareOperation2020::start(QBLEService *service)
 {
+    // Overrides UpdateFirmwareOperation::start(), which is where m_service used
+    // to be set: without this every transfer crashed on the null m_service below.
+    m_service = service;
     if (m_info->type() != AbstractFirmwareInfo::Invalid) {
         m_service->enableNotification(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE);
         requestParameters();
