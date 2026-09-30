@@ -2,7 +2,8 @@ import QtQuick 2.0
 import "./platform"
 import "ChartColors.js" as ChartColors
 
-// One bar per day with an optional dashed goal line and average line,
+// One bar per day with an optional dashed goal line, a recommended range drawn as
+// a band behind the bars, and an average line,
 // like Gadgetbridge's weekly steps / sleep charts.
 // points: [{ x: seconds, y: value, z: optional value stacked *below* y }]
 Item {
@@ -10,6 +11,10 @@ Item {
 
     property var points: []
     property real goal: 0
+    property real bandLow: 0                 // recommended range, e.g. 7-9 h of sleep
+    property real bandHigh: 0
+    property color bandColor: ChartColors.goal
+    readonly property bool hasBand: bandHigh > bandLow && bandLow > 0
     property color colorY: ChartColors.active
     property color colorBelowGoal: ChartColors.activeDim
     property color colorZ: ChartColors.deepSleep
@@ -27,6 +32,7 @@ Item {
     readonly property real best: priv.best
     readonly property var bestTime: priv.bestTime
     readonly property int goalDays: priv.goalDays
+    readonly property int bandDays: priv.bandDays       // days inside the recommended range
     readonly property int count: priv.count
     readonly property real lastValue: priv.last
 
@@ -35,6 +41,8 @@ Item {
 
     onPointsChanged: { priv.summarise(); canvas.requestPaint(); }
     onGoalChanged: { priv.summarise(); canvas.requestPaint(); }
+    onBandLowChanged: { priv.summarise(); canvas.requestPaint(); }
+    onBandHighChanged: { priv.summarise(); canvas.requestPaint(); }
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
 
@@ -45,6 +53,7 @@ Item {
         property real best: 0
         property var bestTime: 0
         property int goalDays: 0
+        property int bandDays: 0
         property int count: 0
         property real last: 0
         property real maxY: 1
@@ -66,7 +75,7 @@ Item {
         }
 
         function summarise() {
-            var t = 0, b = 0, bt = 0, gd = 0, c = 0, m = 0, l = 0;
+            var t = 0, b = 0, bt = 0, gd = 0, bd = 0, c = 0, m = 0, l = 0;
             var list = chart.points || [];
             for (var i = 0; i < list.length; i++) {
                 var v = pointValue(list[i]);
@@ -75,11 +84,12 @@ Item {
                 t += v; c++;
                 if (v > b) { b = v; bt = list[i].x; }
                 if (chart.goal > 0 && v >= chart.goal) gd++;
+                if (chart.hasBand && v >= chart.bandLow && v <= chart.bandHigh) bd++;
                 if (v > m) m = v;
             }
-            total = t; best = b; bestTime = bt; goalDays = gd; count = c; last = l;
+            total = t; best = b; bestTime = bt; goalDays = gd; bandDays = bd; count = c; last = l;
             average = c ? t / c : 0;
-            maxY = niceMax(Math.max(m, chart.goal * 1.15) * 1.05);
+            maxY = niceMax(Math.max(m, chart.goal * 1.15, chart.hasBand ? chart.bandHigh * 1.1 : 0) * 1.05);
         }
     }
 
@@ -111,6 +121,18 @@ Item {
                 var gy = Math.round(yOf(val)) + 0.5;
                 ctx.beginPath(); ctx.moveTo(axisW, gy); ctx.lineTo(width, gy); ctx.stroke();
                 ctx.fillText(valueLabel(val), axisW - fontPx * 0.4, gy + fontPx * 0.35);
+            }
+
+            // recommended range behind the bars, with dashed edges
+            if (hasBand) {
+                var bandTop = Math.round(yOf(bandHigh)) + 0.5;
+                var bandBottom = Math.round(yOf(bandLow)) + 0.5;
+                ctx.fillStyle = ChartColors.withAlpha(bandColor, 0.16);
+                ctx.fillRect(axisW, bandTop, width - axisW, bandBottom - bandTop);
+                ctx.strokeStyle = ChartColors.withAlpha(bandColor, 0.7);
+                ctx.lineWidth = Math.max(1, fontPx / 16);
+                ChartColors.dashedLine(ctx, axisW, width, bandTop, fontPx * 0.3, fontPx * 0.3);
+                ChartColors.dashedLine(ctx, axisW, width, bandBottom, fontPx * 0.3, fontPx * 0.3);
             }
 
             var list = points || [];
