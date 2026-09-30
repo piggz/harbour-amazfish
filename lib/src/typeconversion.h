@@ -13,6 +13,7 @@ QByteArray BEfromInt16(int val);
 QByteArray fromInt64(long long int val);
 QDateTime rawBytesToDateTime(const QByteArray &value, bool honorDeviceTimeOffset);
 QByteArray dateTimeToBytes(const QDateTime &dt, int format, bool adjustForTZ = true);
+uint8_t toUint8(const QByteArray &arr, int &idx);
 uint16_t toUint16(char val1, char val2);
 uint16_t toUint16(const QByteArray &arr, int &idx);
 uint32_t toUint32(char val1, char val2, char val3, char val4);

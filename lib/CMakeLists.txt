@@ -24,6 +24,7 @@ set(SOURCES
     ./src/weather/citysearchmodel.cpp
     ./src/weather/currentweather.cpp
     ./src/activitykind.cpp
+    ./src/typeconversion.cpp
 )
 
 set(HEADERS
@@ -35,6 +36,7 @@ set(HEADERS
     ./src/amazfish.h
     ./src/amazfishconfig.h
     ./src/activitykind.h
+    ./src/typeconversion.h
 )
 
 target_sources(libamazfish PUBLIC ${SOURCES} ${HEADERS})
