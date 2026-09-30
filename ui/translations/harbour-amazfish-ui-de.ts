@@ -1816,55 +1816,82 @@
 <context>
     <name>SleepPage</name>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="48"/>
+        <location filename="../qml/pages/SleepPage.qml" line="74"/>
         <source>Last night</source>
         <translation>Letzte Nacht</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="75"/>
-        <location filename="../qml/pages/SleepPage.qml" line="97"/>
+        <location filename="../qml/pages/SleepPage.qml" line="101"/>
+        <location filename="../qml/pages/SleepPage.qml" line="124"/>
         <source>Deep sleep</source>
         <translation>Tiefschlaf</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="76"/>
-        <location filename="../qml/pages/SleepPage.qml" line="98"/>
+        <location filename="../qml/pages/SleepPage.qml" line="102"/>
+        <location filename="../qml/pages/SleepPage.qml" line="125"/>
         <source>Light sleep</source>
         <translation>Leichtschlaf</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="77"/>
+        <location filename="../qml/pages/SleepPage.qml" line="103"/>
         <source>Awake</source>
         <translation>Wach</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="81"/>
+        <location filename="../qml/pages/SleepPage.qml" line="107"/>
         <source>Sleep Summary</source>
         <translation>Schlafübersicht</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="82"/>
+        <location filename="../qml/pages/SleepPage.qml" line="108"/>
+        <source>Recommended %1–%2 h</source>
+        <translation>Empfohlen %1–%2 h</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SleepPage.qml" line="126"/>
+        <source>Recommended range</source>
+        <translation>Empfohlener Bereich</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SleepPage.qml" line="132"/>
+        <source>In recommended range</source>
+        <translation>Im empfohlenen Bereich</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SleepPage.qml" line="134"/>
+        <source>Recommendation</source>
+        <translation>Empfehlung</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SleepPage.qml" line="136"/>
+        <source>%1–%2 h at age %3</source>
+        <translation>%1–%2 h mit %3 Jahren</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SleepPage.qml" line="137"/>
+        <source>%1–%2 h for adults (no date of birth set)</source>
+        <translation>%1–%2 h für Erwachsene (kein Geburtsdatum hinterlegt)</translation>
+    </message>
+    <message>
         <source>Goal %1 h</source>
-        <translation>Ziel %1 h</translation>
+        <translation type="vanished">Ziel %1 h</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="99"/>
         <source>Goal</source>
-        <translation>Ziel</translation>
+        <translation type="vanished">Ziel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="100"/>
-        <location filename="../qml/pages/SleepPage.qml" line="104"/>
+        <location filename="../qml/pages/SleepPage.qml" line="127"/>
+        <location filename="../qml/pages/SleepPage.qml" line="131"/>
         <source>Average</source>
         <translation>Durchschnitt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="105"/>
         <source>Goal reached</source>
-        <translation>Ziel erreicht</translation>
+        <translation type="vanished">Ziel erreicht</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SleepPage.qml" line="105"/>
+        <location filename="../qml/pages/SleepPage.qml" line="132"/>
         <source>%1 of %2 nights</source>
         <translation>%1 von %2 Nächten</translation>
     </message>
@@ -1966,7 +1993,7 @@
         <translation type="vanished">Kalorien</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="400"/>
+        <location filename="../qml/pages/SportPage.qml" line="409"/>
         <source>Distance</source>
         <translation>Distanz</translation>
     </message>
@@ -1985,90 +2012,90 @@
         <translation>%1 °; %2 °; %3 m</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="393"/>
+        <location filename="../qml/pages/SportPage.qml" line="402"/>
         <source>Duration</source>
         <translation>Dauer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="416"/>
+        <location filename="../qml/pages/SportPage.qml" line="425"/>
         <source>BPM</source>
         <translation>bpm</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="425"/>
+        <location filename="../qml/pages/SportPage.qml" line="434"/>
         <source>Route</source>
         <translation>Route</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="495"/>
+        <location filename="../qml/pages/SportPage.qml" line="504"/>
         <source>Loading track…</source>
         <translation>Strecke wird geladen …</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="496"/>
+        <location filename="../qml/pages/SportPage.qml" line="505"/>
         <source>The watch did not send a start position for this workout. The route is only known relative to its start, so its shape can be shown but not where it is on a map.</source>
         <translation>Die Uhr hat für dieses Training keinen Startpunkt übertragen. Die Strecke ist nur relativ zu ihrem Start bekannt, daher kann ihre Form angezeigt werden, aber nicht, wo sie auf der Karte liegt.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="497"/>
+        <location filename="../qml/pages/SportPage.qml" line="506"/>
         <source>Distance, pace and shape were corrected using the distance measured by the watch.</source>
         <translation>Distanz, Tempo und Form wurden anhand der von der Uhr gemessenen Strecke korrigiert.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="498"/>
+        <location filename="../qml/pages/SportPage.qml" line="507"/>
         <source>This activity contains no GPS positions. The watch recorded it without GPS (e.g. indoors, or GPS had no fix), so there is no route to show.</source>
         <translation>Diese Aktivität enthält keine GPS-Positionen. Die Uhr hat sie ohne GPS aufgezeichnet (z. B. drinnen oder ohne GPS-Empfang), daher gibt es keine Route.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="499"/>
+        <location filename="../qml/pages/SportPage.qml" line="508"/>
         <source>The track file of this activity could not be read. It may have been moved or deleted, or the app is not allowed to access it:
 %1</source>
         <translation>Die Streckendatei dieser Aktivität konnte nicht gelesen werden. Sie wurde möglicherweise verschoben oder gelöscht, oder die App darf nicht darauf zugreifen:
 %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="500"/>
+        <location filename="../qml/pages/SportPage.qml" line="509"/>
         <source>The track file of this activity has an unsupported format.</source>
         <translation>Die Streckendatei dieser Aktivität hat ein nicht unterstütztes Format.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="507"/>
+        <location filename="../qml/pages/SportPage.qml" line="516"/>
         <source>Heart Rate</source>
         <translation>Herzfrequenz</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="508"/>
+        <location filename="../qml/pages/SportPage.qml" line="517"/>
         <source>Ø %1 BPM</source>
         <translation>Ø %1 bpm</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="519"/>
+        <location filename="../qml/pages/SportPage.qml" line="528"/>
         <source>Pace</source>
         <translation>Tempo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="519"/>
+        <location filename="../qml/pages/SportPage.qml" line="528"/>
         <source>Speed</source>
         <translation>Geschwindigkeit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="267"/>
-        <location filename="../qml/pages/SportPage.qml" line="520"/>
+        <location filename="../qml/pages/SportPage.qml" line="276"/>
+        <location filename="../qml/pages/SportPage.qml" line="529"/>
         <source>km/h</source>
         <translation>km/h</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="532"/>
+        <location filename="../qml/pages/SportPage.qml" line="541"/>
         <source>Elevation</source>
         <translation>Höhe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="544"/>
+        <location filename="../qml/pages/SportPage.qml" line="553"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="563"/>
+        <location filename="../qml/pages/SportPage.qml" line="572"/>
         <source>Location</source>
         <translation>Ort</translation>
     </message>
@@ -2085,7 +2112,7 @@
         <translation type="vanished">Anaerobischer Trainingseffekt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="417"/>
+        <location filename="../qml/pages/SportPage.qml" line="426"/>
         <source>Average Heart Rate</source>
         <translation>Ø Herzfrequenz</translation>
     </message>
@@ -2166,12 +2193,12 @@
         <translation type="vanished">Position: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="703"/>
+        <location filename="../qml/pages/SportPage.qml" line="712"/>
         <source>Send to FitTrackee</source>
         <translation>An FitTrackee senden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="716"/>
+        <location filename="../qml/pages/SportPage.qml" line="725"/>
         <source>Send to FitPub</source>
         <translation>An FitPub senden</translation>
     </message>
@@ -2184,7 +2211,7 @@
         <translation type="vanished">Durchschnitt HF</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="409"/>
+        <location filename="../qml/pages/SportPage.qml" line="418"/>
         <source>Average Pace</source>
         <translation>Ø Tempo</translation>
     </message>
@@ -2329,9 +2356,9 @@
         <translation type="vanished">m/s</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="261"/>
-        <location filename="../qml/pages/SportPage.qml" line="264"/>
-        <location filename="../qml/pages/SportPage.qml" line="520"/>
+        <location filename="../qml/pages/SportPage.qml" line="270"/>
+        <location filename="../qml/pages/SportPage.qml" line="273"/>
+        <location filename="../qml/pages/SportPage.qml" line="529"/>
         <source>min/km</source>
         <translation>min/km</translation>
     </message>
@@ -2400,7 +2427,7 @@
         <translation type="vanished">Swolf</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SportPage.qml" line="690"/>
+        <location filename="../qml/pages/SportPage.qml" line="699"/>
         <source>Send to Strava</source>
         <translation>An Strava senden</translation>
     </message>
@@ -3594,7 +3621,7 @@ Bitte ziehen Sie eine Spende in Betracht, wenn Sie diese Funktion nutzen.</trans
 <context>
     <name>SummaryBarChart</name>
     <message>
-        <location filename="../qml/components/SummaryBarChart.qml" line="119"/>
+        <location filename="../qml/components/SummaryBarChart.qml" line="141"/>
         <source>No data</source>
         <translation>Keine Daten</translation>
     </message>
