@@ -17,6 +17,9 @@ endif()
 
 list(APPEND RESOURCES amazfish.qrc)
 list(APPEND RESOURCES icons.qrc)
+# Device photos (~4.6 MB) in their own resource file: changing a page then only
+# rebuilds the small amazfish.qrc instead of recompiling all photos.
+list(APPEND RESOURCES devices.qrc)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/platform-${FLAVOR}.qrc")
     list(APPEND RESOURCES "platform-${FLAVOR}.qrc")
 else()

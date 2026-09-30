@@ -41,6 +41,15 @@ QVariant DataSource::data(const Type type, const QDate &day)
     sd.setTime(QTime(0,0));
     sd.setTimeZone(QTimeZone::systemTimeZone());
 
+    if (type == DataSource::Activity) {
+        return activitySamples(sd, sd.addDays(1));
+    }
+    if (type == DataSource::SleepPhases) {
+        // Same window as calculateSleep(): the night ending on the morning of 'day'
+        QDateTime start(day.addDays(-1), QTime(12, 00));
+        return activitySamples(start, start.addDays(1));
+    }
+
     if (type == DataSource::SleepSummary) {
         for (int i = 0; i < 10; i++) {
             QList<DataSource::SleepSession> sessions = calculateSleep(day.addDays(-10 + i));
@@ -319,6 +328,42 @@ QList<DataSource::SleepSession> DataSource::calculateSleep(const QDate &day)
     
     return sessions;
     
+}
+
+QList<QVariant> DataSource::activitySamples(const QDateTime& start, const QDateTime& end)
+{
+    QList<QVariant> result;
+
+    QString qry = "SELECT timestamp, raw_kind, raw_intensity, heartrate, steps FROM mi_band_activity WHERE timestamp >= " + QString::number(start.toMSecsSinceEpoch() / 1000) + " AND timestamp < " + QString::number(end.toMSecsSinceEpoch() / 1000) + " ORDER BY timestamp ASC";
+
+    if (m_conn && m_conn->isDatabaseUsed()) {
+        KDbCursor* curs = m_conn->executeQuery(KDbEscapedString(qry));
+
+        if (curs) {
+            if (curs->open() && curs->moveFirst()) {
+                while (!curs->eof()) {
+                    int k = kind(curs->value(1).toInt());
+                    int hr = curs->value(3).toInt();
+
+                    QVariantMap pt;
+                    pt[QStringLiteral("x")] = curs->value(0).toLongLong();
+                    pt[QStringLiteral("i")] = qRound((curs->value(2).toInt() / 255.0) * 100.0);
+                    pt[QStringLiteral("k")] = (k == TYPE_DEEP_SLEEP) ? PhaseDeepSleep
+                        : (k == TYPE_LIGHT_SLEEP)                    ? PhaseLightSleep
+                                                                     : PhaseAwake;
+                    pt[QStringLiteral("h")] = (hr > 0 && hr < 255) ? hr : 0;
+                    pt[QStringLiteral("s")] = curs->value(4).toInt();
+                    result.append(pt);
+
+                    curs->moveNext();
+                }
+            }
+            m_conn->deleteCursor(curs);
+        } else {
+            qDebug() << "Error executing query";
+        }
+    }
+    return result;
 }
 
 bool DataSource::isSleep(int kind)

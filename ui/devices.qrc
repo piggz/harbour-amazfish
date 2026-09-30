@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/pics/devices/amazfit-balance.png</file>
+        <file>qml/pics/devices/amazfit-bip.png</file>
+        <file>qml/pics/devices/amazfit-bips.png</file>
+        <file>qml/pics/devices/amazfit-cor.png</file>
+        <file>qml/pics/devices/amazfit-gtr.png</file>
+        <file>qml/pics/devices/amazfit-gtr2.png</file>
+        <file>qml/pics/devices/amazfit-gtr3.png</file>
+        <file>qml/pics/devices/amazfit-gts.png</file>
+        <file>qml/pics/devices/amazfit-gts2.png</file>
+        <file>qml/pics/devices/amazfit-neo.png</file>
+        <file>qml/pics/devices/asteroidos.png</file>
+        <file>qml/pics/devices/banglejs.png</file>
+        <file>qml/pics/devices/kospet_dk08.png</file>
+        <file>qml/pics/devices/miband2.png</file>
+        <file>qml/pics/devices/miband3.png</file>
+        <file>qml/pics/devices/miband4.png</file>
+        <file>qml/pics/devices/pebble.png</file>
+        <file>qml/pics/devices/pinetime.png</file>
+    </qresource>
+</RCC>
