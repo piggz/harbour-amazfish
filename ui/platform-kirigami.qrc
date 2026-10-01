@@ -43,6 +43,7 @@
         <file alias="./qml/components/platform/TimePickerDialogPL.qml">./qml/components/platform.kirigami/TimePickerDialogPL.qml</file>
         <file alias="./qml/components/platform/ToolItemPL.qml">./qml/components/platform.kirigami/ToolItemPL.qml</file>
         <file alias="./qml/components/platform/ValueButtonPL.qml">./qml/components/platform.kirigami/ValueButtonPL.qml</file>
+        <file>./qml/components/ActivityChart.qml</file>
         <file>./qml/components/ChartCanvas.qml</file>
         <file>./qml/components/ChartCard.qml</file>
         <file>./qml/components/ChartColors.js</file>

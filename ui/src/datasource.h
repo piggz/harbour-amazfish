@@ -26,10 +26,11 @@ public:
         StressAuto = 12,
         StressManual = 13,
         StressSummary = 14,
+        Activity = 15, // per-sample day data: x, i (intensity %), k (sleep phase), h (heartrate), s (steps)
         SleepPhases = 16 // per-sample data of the night ending on 'day' (12:00 -> 12:00)
     };
 
-    // Sleep phase classification returned in the 'k' field of SleepPhases samples
+    // Sleep phase classification returned in the 'k' field of Activity / SleepPhases samples
     enum Phase {
         PhaseAwake = 0,
         PhaseLightSleep = 1,

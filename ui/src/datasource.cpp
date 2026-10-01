@@ -41,6 +41,9 @@ QVariant DataSource::data(const Type type, const QDate &day)
     sd.setTime(QTime(0,0));
     sd.setTimeZone(QTimeZone::systemTimeZone());
 
+    if (type == DataSource::Activity) {
+        return activitySamples(sd, sd.addDays(1));
+    }
     if (type == DataSource::SleepPhases) {
         // Same window as calculateSleep(): the night ending on the morning of 'day'
         QDateTime start(day.addDays(-1), QTime(12, 00));
