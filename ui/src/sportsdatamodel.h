@@ -51,6 +51,9 @@ public:
     Q_INVOKABLE QString gpx(uint id);
     Q_INVOKABLE QString rawGpx(uint id);
     Q_INVOKABLE void deleteRecord(uint id);
+    // "yyyy-MM" of the activity in the given row, empty if the row does not exist.
+    // Lets list delegates group activities by month.
+    Q_INVOKABLE QString monthKeyAt(int row) const;
 
 private:
     KDbConnection *m_connection = nullptr;
