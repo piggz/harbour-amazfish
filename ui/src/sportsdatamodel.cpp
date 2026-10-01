@@ -201,3 +201,11 @@ void SportsDataModel::deleteRecord(uint id)
     }
     update();
 }
+
+QString SportsDataModel::monthKeyAt(int row) const
+{
+    if (row < 0 || row >= m_data.length()) {
+        return QString();
+    }
+    return m_data.at(row).startDate.toString(QStringLiteral("yyyy-MM"));
+}
