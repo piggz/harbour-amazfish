@@ -48,6 +48,7 @@
         <file>./qml/components/ChartColors.js</file>
         <file>./qml/components/ChartLegend.qml</file>
         <file>./qml/components/DetailRow.qml</file>
+        <file>./qml/components/SleepPhaseChart.qml</file>
         <file>./qml/components/SummaryBarChart.qml</file>
         <file>./qml/components/Alarm.qml</file>
         <file>./qml/components/Axis.qml</file>
