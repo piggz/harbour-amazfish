@@ -42,6 +42,13 @@
         <file alias="./qml/components/platform/TimePickerDialogPL.qml">./qml/components/platform.qtcontrols/TimePickerDialogPL.qml</file>
         <file alias="./qml/components/platform/ToolItemPL.qml">./qml/components/platform.qtcontrols/ToolItemPL.qml</file>
         <file alias="./qml/components/platform/ValueButtonPL.qml">./qml/components/platform.qtcontrols/ValueButtonPL.qml</file>
+        <file>./qml/components/ChartCanvas.qml</file>
+        <file>./qml/components/ChartCard.qml</file>
+        <file>./qml/components/ChartColors.js</file>
+        <file>./qml/components/ChartLegend.qml</file>
+        <file>./qml/components/DetailRow.qml</file>
+        <file>./qml/components/SleepPhaseChart.qml</file>
+        <file>./qml/components/SummaryBarChart.qml</file>
         <file>./qml/components/Alarm.qml</file>
         <file>./qml/components/Axis.qml</file>
         <file>./qml/components/DateNavigation.qml</file>
