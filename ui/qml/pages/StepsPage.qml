@@ -3,31 +3,28 @@ import uk.co.piggz.amazfish 1.0
 import QtQuick.Layouts 1.1
 import "../components/"
 import "../components/platform"
+import "../components/ChartColors.js" as ChartColors
 
 PagePL {
     id: page
     title: qsTr("Steps")
 
-    property alias day: nav.day    
+    property alias day: nav.day
+    readonly property int stepGoal: AmazfishConfig.profileFitnessGoal
 
     pageMenu: PageMenuPL {
         DownloadDataMenuItem{}
     }
 
+    function fmt(v) {
+        return Number(v).toLocaleString(Qt.locale(), "f", 0);
+    }
+
     Column {
         id: column
-        width: parent.width
-        anchors.top: parent.top
-        anchors.margins: styler.themePaddingMedium
-
-        LabelPL {
-            id: lblStepsToday
-            font.pixelSize: styler.themeFontSizeExtraLarge * 3
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            text: graphStepSummary.lastValue.toLocaleString()
-            horizontalAlignment: Text.AlignHCenter
-        }
+        x: styler.themeHorizontalPageMargin
+        width: parent.width - 2 * x
+        spacing: styler.themePaddingLarge
 
         DateNavigation {
             id: nav
@@ -46,32 +43,68 @@ PagePL {
             }
         }
 
-        Graph {
-            id: graphStepSummary
-            graphTitle: qsTr("Steps")
-            graphHeight: 300
+        ChartCard {
+            title: qsTr("Steps")
+            info: qsTr("Goal %1").arg(fmt(stepGoal))
+            onClicked: updateGraphs()
 
-            axisX.mask: "MM/dd"
-            axisY.units: qsTr("Steps")
-            type: DataSource.StepSummary
-            graphType: bar
-
-            minY: 0
-            maxY: (2 * AmazfishConfig.profileFitnessGoal > suggestedMaxY)
-                  ? 2 * AmazfishConfig.profileFitnessGoal
-                  : Math.ceil(suggestedMaxY/1000)*1000
-
-            valueConverter: function(value) {
-                return value.toFixed(0);
+            Row {
+                spacing: styler.themePaddingMedium
+                LabelPL {
+                    id: lblStepsToday
+                    text: fmt(stepChart.lastValue)
+                    color: styler.themeHighlightColor
+                    font.pixelSize: styler.themeFontSizeHuge
+                }
+                LabelPL {
+                    anchors.baseline: lblStepsToday.baseline
+                    text: qsTr("steps")
+                    color: styler.themeSecondaryHighlightColor
+                    font.pixelSize: styler.themeFontSizeMedium
+                }
             }
-            onClicked: {
-                updateGraph(day);
+
+            SummaryBarChart {
+                id: stepChart
+                goal: stepGoal
+                colorBelowGoal: ChartColors.belowGoal
+                averageLabel: function(v) { return fmt(v); }
+                valueLabel: function(v) {
+                    return v >= 1000 ? (v / 1000).toLocaleString(Qt.locale(), "f", v % 1000 ? 1 : 0) + "k" : fmt(v);
+                }
+            }
+
+            ChartLegend {
+                items: [
+                    { color: ChartColors.active, label: qsTr("Goal reached") },
+                    { color: ChartColors.belowGoal, label: qsTr("Below goal") },
+                    { color: ChartColors.goal, label: qsTr("Daily goal"), line: true },
+                    { color: ChartColors.average, label: qsTr("Average"), line: true }
+                ]
+            }
+        }
+
+        ChartCard {
+            title: qsTr("Last %n day(s)", "", stepChart.count)
+            visible: !stepChart.noData
+
+            DetailRow { label: qsTr("Average"); value: qsTr("%1 steps").arg(fmt(stepChart.average)) }
+            DetailRow { label: qsTr("Total"); value: qsTr("%1 steps").arg(fmt(stepChart.total)) }
+            DetailRow {
+                label: qsTr("Goal reached")
+                value: qsTr("%1 of %2 days").arg(stepChart.goalDays).arg(stepChart.count)
+            }
+            DetailRow {
+                label: qsTr("Best day")
+                value: stepChart.bestTime
+                       ? Qt.formatDate(new Date(stepChart.bestTime * 1000), "ddd d.M.") + " · " + fmt(stepChart.best)
+                       : "-"
             }
         }
     }
 
     function updateGraphs() {
-        graphStepSummary.updateGraph(day);
+        stepChart.points = dataSource.data(DataSource.StepSummary, day);
     }
 
     Component.onCompleted: {
