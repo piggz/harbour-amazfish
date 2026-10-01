@@ -10,6 +10,16 @@ var activeDim  = "#3f7f38";
 var belowGoal  = "#f2d541";   // yellow, clearly lighter than the orange goal line
 var average    = "#e6ffffff";
 
+// Battery levels: green / yellow / red, also clearly different in lightness
+var batteryHigh   = "#5ad24a";   // >= 50 %
+var batteryMedium = "#f2d541";   // 20 - 49 %
+var batteryLow    = "#ff6b6b";   // < 20 %
+
+function batteryColor(percent) {
+    if (percent >= 50) return batteryHigh;
+    if (percent >= 20) return batteryMedium;
+    return batteryLow;
+}
 var heartrate  = "#ff6b6b";
 var goal       = "#f5a623";
 var distance   = "#4fc3c9";

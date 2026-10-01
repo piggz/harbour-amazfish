@@ -50,6 +50,7 @@
         <file>./qml/components/ChartColors.js</file>
         <file>./qml/components/ChartLegend.qml</file>
         <file>./qml/components/DetailRow.qml</file>
+        <file>./qml/components/LevelBarChart.qml</file>
         <file>./qml/components/HeartRateChart.qml</file>
         <file>./qml/components/SleepPhaseChart.qml</file>
         <file>./qml/components/SummaryBarChart.qml</file>
