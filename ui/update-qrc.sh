@@ -40,3 +40,17 @@ done
         echo "    </qresource>"
         echo "</RCC>"
     ) > icons.qrc
+
+    # Pictures, kept apart from the QML code: rcc turns them into a large
+    # source file, which then only has to be rebuilt when a picture changes.
+    (
+        echo "<RCC>"
+        echo "    <qresource prefix=\"/\">"
+        echo "        <file>icons/172x172/harbour-amazfish-ui.png</file>"
+        # LC_ALL=C: the same order whatever the user's locale is
+        for i in $(find qml/pics/ -type f -name '*.png'|LC_ALL=C sort); do
+            echo "        <file>$i</file>";
+        done
+        echo "    </qresource>"
+        echo "</RCC>"
+    ) > images.qrc
