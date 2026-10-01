@@ -54,6 +54,7 @@
         <file>./qml/components/LevelBarChart.qml</file>
         <file>./qml/components/GlassStyle.js</file>
         <file>./qml/components/HeartRateChart.qml</file>
+        <file>./qml/components/RouteShape.qml</file>
         <file>./qml/components/SleepPhaseChart.qml</file>
         <file>./qml/components/StatTile.qml</file>
         <file>./qml/components/SummaryBarChart.qml</file>

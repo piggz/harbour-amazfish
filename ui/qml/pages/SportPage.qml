@@ -27,7 +27,9 @@ PagePL {
     property alias loader: trackLoader
 
     // "loading", "ok" (track with GPS points), "nogps" (track without positions),
-    // "nofile" (track file could not be read), "invalid" (file is no GPX 1.1 / TCX v2)
+    // "nobase" (positions are only relative: the watch sent no start position, so the
+    // track sits around 0°/0°), "nofile" (track file could not be read),
+    // "invalid" (file is no GPX 1.1 / TCX v2)
     property string trackStatus: "loading"
     property int gpsPointCount: 0
 
@@ -38,6 +40,12 @@ PagePL {
     property bool paceRelevant: true
     property var hrPoints: []
     property var pacePoints: []
+    property var rawPacePoints: []
+
+    // distance measured by the watch itself ("distanceMeters" of the summary) and,
+    // for tracks without start position, the latitude estimated from it
+    property real watchDistance: 0
+    property real estimatedLatitude: -1
     property var elevationPoints: []
 
     title: activitytitle
@@ -141,6 +149,83 @@ PagePL {
 
     function hasBaseLocation() {
         return location && (Math.abs(location[0]) > 1e-9 || Math.abs(location[1]) > 1e-9);
+    }
+
+    // Huami watches send GPS points as deltas to the start position of the summary.
+    // Some watches (seen on the Amazfit GTS) send 0/0 as start position even though
+    // GPS points are recorded from the first second; the route then keeps its shape
+    // but lies around 0°N 0°E in the Atlantic.
+    function trackIsRelativeOnly() {
+        if (hasBaseLocation() || JSTools.trackPointsAt.length === 0) {
+            return false;
+        }
+        for (var i = 0; i < JSTools.trackPointsAt.length; i++) {
+            var c = JSTools.trackPointsAt[i];
+            if (Math.abs(c.latitude) > 1 || Math.abs(c.longitude) > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // length of the track in metres when it is placed at latitude latDeg
+    function pathLength(latDeg) {
+        var pts = JSTools.trackPointsAt;
+        var k = Math.cos(latDeg * Math.PI / 180);
+        var sum = 0;
+        for (var i = 1; i < pts.length; i++) {
+            var dy = (pts[i].latitude - pts[i - 1].latitude) * 111320;
+            var dx = (pts[i].longitude - pts[i - 1].longitude) * 111320 * k;
+            sum += Math.sqrt(dx * dx + dy * dy);
+        }
+        return sum;
+    }
+
+    // The deltas are in degrees, so east-west steps shrink with the cosine of the real
+    // latitude. The watch measured the real distance, which lets us find that latitude
+    // (the hemisphere and the longitude stay unknown). Checked against a real GTS run:
+    // 3661 m at 0° vs. 2896 m at 51.26° vs. 2894 m measured by the watch.
+    function estimateLatitude() {
+        if (watchDistance <= 0 || JSTools.trackPointsAt.length < 2) {
+            return -1;
+        }
+        var lo = 0, hi = 85;
+        if (pathLength(lo) <= watchDistance || pathLength(hi) >= watchDistance) {
+            return -1;   // no east-west movement to measure, or distance does not fit
+        }
+        for (var n = 0; n < 40; n++) {
+            var mid = (lo + hi) / 2;
+            if (pathLength(mid) > watchDistance) lo = mid; else hi = mid;
+        }
+        return (lo + hi) / 2;
+    }
+
+    // Distance, pace and route shape of a track without start position are computed
+    // at 0° latitude, which stretches everything east-west. Correct them with the
+    // latitude estimated from the watch distance.
+    function correctRelativeTrack() {
+        if (trackStatus !== "nobase" || watchDistance <= 0) {
+            return;
+        }
+        var lat = estimateLatitude();
+        if (lat < 0) {
+            return;
+        }
+        estimatedLatitude = lat;
+        routeShape.referenceLatitude = lat;
+
+        var factor = pathLength(0) / pathLength(lat);   // > 1: how much too long it was
+        trackDistance = pathLength(lat);
+        var fixed = [];
+        for (var i = 0; i < rawPacePoints.length; i++) {
+            var p = rawPacePoints[i];
+            fixed.push({ x: p.x, y: paceRelevant ? p.y * factor : p.y / factor });
+        }
+        pacePoints = fixed;
+        if (trackLoader.duration > 0 && trackDistance > 0) {
+            trackPace = formatPace((trackLoader.duration / 60) / (trackDistance / 1000));
+        }
+        console.log("SportPage: estimated latitude", lat.toFixed(2), "distance", Math.round(trackDistance), "m");
     }
 
     // Values of the watch summary arrive raw (seconds, s/m, m/s, floats with six
@@ -402,6 +487,12 @@ PagePL {
 
             }
 
+            // shape of the route without a map when its location is unknown
+            RouteShape {
+                id: routeShape
+                visible: trackStatus === "nobase"
+            }
+
             // explains why there is no map instead of leaving an empty space
             LabelPL {
                 width: parent.width
@@ -411,6 +502,8 @@ PagePL {
                 font.pixelSize: styler.themeFontSizeSmall
                 text: {
                     if (trackStatus === "loading") return qsTr("Loading track…");
+                    if (trackStatus === "nobase") return qsTr("The watch did not send a start position for this workout. The route is only known relative to its start, so its shape can be shown but not where it is on a map.")
+                                                        + (estimatedLatitude >= 0 ? " " + qsTr("Distance, pace and shape were corrected using the distance measured by the watch.") : "");
                     if (trackStatus === "nogps") return qsTr("This activity contains no GPS positions. The watch recorded it without GPS (e.g. indoors, or GPS had no fix), so there is no route to show.");
                     if (trackStatus === "nofile") return qsTr("The track file of this activity could not be read. It may have been moved or deleted, or the app is not allowed to access it:\n%1").arg(tcx);
                     return qsTr("The track file of this activity has an unsupported format.");
@@ -466,6 +559,12 @@ PagePL {
                 delegate: DetailRow {
                     label: T.translateSportKey(model.key)
                     value: page.metaValue(model.value, model.unit)
+                    Component.onCompleted: {
+                        if (model.key === "distanceMeters") {
+                            page.watchDistance = parseFloat(model.value) || 0;
+                            page.correctRelativeTrack();
+                        }
+                    }
                 }
             }
 
@@ -562,7 +661,8 @@ PagePL {
             }
 
             hrPoints = downsample(hr, 300);
-            pacePoints = downsample(pace, 300);
+            rawPacePoints = downsample(pace, 300);
+            pacePoints = rawPacePoints;
             elevationPoints = downsample(ele, 300);
 
             trackDistance = trackLoader.distance;
@@ -571,7 +671,22 @@ PagePL {
 
             gpsPointCount = trackLength;
             console.log("SportPage: track loaded with", trackLength, "GPS points");
-            trackStatus = trackLength > 0 ? "ok" : "nogps";
+            if (trackLength === 0) {
+                trackStatus = "nogps";
+            } else if (trackIsRelativeOnly()) {
+                console.log("SportPage: no start position from the watch, route location unknown");
+                trackStatus = "nobase";
+            } else {
+                trackStatus = "ok";
+            }
+            if (trackStatus === "nobase") {
+                correctRelativeTrack();
+                var shapePts = [];
+                for (var k = 0; k < JSTools.trackPointsAt.length; k++) {
+                    shapePts.push(JSTools.trackPointsAt[k]);
+                }
+                routeShape.coordinates = shapePts;
+            }
             if (mapLoader.item) {
                 addActivityToMap();
             }
