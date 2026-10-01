@@ -16,10 +16,9 @@ Item {
     width: parent ? parent.width : 0
     height: column.height + 2 * padding
 
-    Rectangle {
+    GlassPanel {
         anchors.fill: parent
-        radius: styler.themePaddingLarge
-        color: ChartColors.withAlpha(styler.themeHighlightColor, 0.08)
+        pressed: cardMouse.pressed && cardMouse.containsMouse
     }
 
     MouseArea {

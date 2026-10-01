@@ -1,59 +1,50 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import "./platform"
+import "GlassStyle.js" as Glass
 
+// Steps tile: goal gauge with the step count in the middle.
 Tile {
     id: tile
 
     property int stepCount: 0
     property int stepGoal: 0
 
-    text: qsTr("Steps")
+    // bottom of the tile: progress towards the daily goal
+    value: stepGoal > 0 ? qsTr("%1 %").arg(Math.round(stepCount / stepGoal * 100)) : ""
+    text: stepGoal > 0 ? qsTr("Steps · daily goal") : qsTr("Steps")
 
-    contentItem: PercentCircle {
-        id: stpsCircle
-        anchors.horizontalCenter: parent.horizontalCenter
-        size: parent.width - styler.themeHorizontalPageMargin * 4
-        percent: stepCount ? stepCount / stepGoal : 0.06
-        widthRatio: 0.08
+    contentItem: GaugeArc {
+        id: gauge
+        anchors.centerIn: parent
+        width: Math.min(parent.width, parent.height)
+        height: width
+        value: stepGoal > 0 ? stepCount / stepGoal : 0
+        color: styler.themeHighlightColor
+        trackColor: Glass.track
 
-        Item {
+        Column {
             anchors.centerIn: parent
-            height: lblSteps.height + lblGoal.height + styler.paddingSmall
-            width: Math.max(lblSteps.width, lblGoal.width)
+            width: gauge.width * 0.7
 
             LabelPL {
-                id: lblSteps
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: centerItem.top
-                }
-                color: styler.blockBg
-                font.pixelSize: styler.themeFontSizeHuge
-                verticalAlignment: Text.AlignVCenter
-                text: stepCount.toLocaleString()
+                width: parent.width
+                horizontalAlignment: Text.AlignHCenter
+                color: styler.themePrimaryColor
+                font.pixelSize: Math.min(styler.themeFontSizeLarge, gauge.width * 0.22)
+                fontSizeMode: Text.HorizontalFit
+                minimumPixelSize: font.pixelSize * 0.6
+                text: Number(stepCount).toLocaleString(Qt.locale(), "f", 0)
             }
-
-            Item {
-                id: centerItem
-                width: 1
-                height: 1
-                anchors.centerIn: parent
-            }
-
             LabelPL {
-                id: lblGoal
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    top: centerItem.bottom
-                    topMargin: styler.themePaddingSmall
-                }
-                color: styler.blockBg
-                font.pixelSize: styler.themeFontSizeExtraLarge
-                verticalAlignment: Text.AlignVCenter
-                text: stepGoal.toLocaleString()
+                width: parent.width
+                horizontalAlignment: Text.AlignHCenter
+                color: styler.themeSecondaryColor
+                font.pixelSize: Math.min(styler.themeFontSizeExtraSmall, gauge.width * 0.11)
+                fontSizeMode: Text.HorizontalFit
+                minimumPixelSize: font.pixelSize * 0.6
+                text: stepGoal > 0 ? qsTr("of %1").arg(Number(stepGoal).toLocaleString(Qt.locale(), "f", 0)) : ""
             }
         }
-
     }
 }
