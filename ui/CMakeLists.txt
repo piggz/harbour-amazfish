@@ -17,6 +17,9 @@ endif()
 
 list(APPEND RESOURCES amazfish.qrc)
 list(APPEND RESOURCES icons.qrc)
+# Pictures in their own resource file, so a change to the QML code does not
+# recompile several megabytes of images (see update-qrc.sh)
+list(APPEND RESOURCES images.qrc)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/platform-${FLAVOR}.qrc")
     list(APPEND RESOURCES "platform-${FLAVOR}.qrc")
 else()
