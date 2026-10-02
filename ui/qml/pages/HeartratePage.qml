@@ -3,6 +3,7 @@ import uk.co.piggz.amazfish 1.0
 import QtQuick.Layouts 1.1
 import "../components/"
 import "../components/platform"
+import "../components/ChartColors.js" as ChartColors
 
 PagePL {
     id: page
@@ -18,6 +19,7 @@ PagePL {
     property real total: relaxed + light + intensive + aerobic + anerobic + vo2max
     property real minhr: 0
     property real maxhr: 0
+    property real avghr: 0
 
     property real maxHRforAge: wingate()
 
@@ -27,29 +29,17 @@ PagePL {
 
     Column {
         id: column
-        width: parent.width
-        anchors.top: parent.top
-        anchors.margins: styler.themePaddingMedium
+        x: styler.themeHorizontalPageMargin
+        width: parent.width - 2 * x
         spacing: styler.themePaddingLarge
 
         LabelPL {
             id: lblCurrentHeartrate
-            font.pixelSize: styler.themeFontSizeExtraLarge * 3
-            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: styler.themeFontSizeExtraLarge * 2
             width: parent.width
             text: qsTr("%1 bpm").arg(_InfoHeartrate)
+            color: styler.themeHighlightColor
             horizontalAlignment: Text.AlignHCenter
-        }
-
-        Row { //Min and Max HR
-            //height: childrenRect.height
-            anchors.horizontalCenter: parent.horizontalCenter
-            IconPL { iconName: styler.iconDown; iconHeight: styler.themeIconSizeSmall; iconWidth: styler.themeIconSizeSmall }
-            LabelPL { text: minhr; anchors.verticalCenter: parent.verticalCenter
-            }
-            IconPL { iconName: styler.iconUp; iconHeight: styler.themeIconSizeSmall; iconWidth: styler.themeIconSizeSmall }
-            LabelPL { text: maxhr; anchors.verticalCenter: parent.verticalCenter
-            }
         }
 
         DateNavigation {
@@ -69,94 +59,116 @@ PagePL {
             }
         }
 
+        ChartCard {
+            title: qsTr("Heartrate")
+            onClicked: updateGraphs()
 
-        Graph {
-            id: graphHR
-            graphTitle: qsTr("BPM")
-            graphHeight: 300
-
-            axisY.units: qsTr("BPM")
-            type: DataSource.Heartrate
-            graphType: bar
-
-            minY: 0
-            maxY: 200
-            valueConverter: function(value) {
-                return value.toFixed(0);
+            // resting / average / max, like the header of Gadgetbridge's heart rate chart
+            Row {
+                width: parent.width
+                Repeater {
+                    model: [
+                        { value: minhr, label: qsTr("Resting") },
+                        { value: avghr, label: qsTr("Average") },
+                        { value: maxhr, label: qsTr("Max") }
+                    ]
+                    delegate: Column {
+                        width: parent.width / 3
+                        LabelPL {
+                            width: parent.width
+                            horizontalAlignment: Text.AlignHCenter
+                            text: modelData.value ? Math.round(modelData.value) : "-"
+                            color: styler.themeHighlightColor
+                            font.pixelSize: styler.themeFontSizeExtraLarge
+                        }
+                        LabelPL {
+                            width: parent.width
+                            horizontalAlignment: Text.AlignHCenter
+                            text: modelData.label + " · " + qsTr("BPM")
+                            color: styler.themeSecondaryHighlightColor
+                            font.pixelSize: styler.themeFontSizeExtraSmall
+                        }
+                    }
+                }
             }
-            onClicked: {
-                updateGraph(day);
+
+            HeartRateChart {
+                id: hrChart
+                restingHeartrate: minhr
+                maxY: Math.max(160, 40 + Math.ceil((maxhr + 10 - 40) / 40) * 40)   // keeps grid steps round
+                zoneLimits: [0.5, 0.6, 0.7, 0.8, 0.9, 1.0].map(function(f) { return Math.round(maxHRforAge * f); })
+            }
+
+            ChartLegend {
+                items: [
+                    { color: ChartColors.heartrate, label: qsTr("Heartrate"), line: true },
+                    { color: ChartColors.lightSleep, label: qsTr("Resting"), line: true }
+                ]
             }
         }
 
-        //Type summary
-        Grid {
-            columns: 3
-            spacing: styler.themePaddingMedium
-            width: parent.width - (styler.themePaddingMedium * 2)
-            LabelPL {text: qsTr("Relaxed")}
-            Item { 
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "grey"; width: parent.width * (relaxed  / total) ; height: parent.height }
-                LabelPL { text: Math.round((relaxed / total) * 100) + "%"; anchors.centerIn: parent}
-            }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.5)))}
+        ChartCard {
+            title: qsTr("Time in zones")
+            visible: total > 0
 
-            LabelPL {text: qsTr("Light")}
-            Item {
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "lightblue"; width: parent.width * (light  / total) ; height: parent.height }
-                LabelPL { text: Math.round((light / total) * 100) + "%"; anchors.centerIn: parent}
-            }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.6)))}
+            Repeater {
+                model: [
+                    { name: qsTr("Relaxed"),   count: relaxed,   limit: 0.5 },
+                    { name: qsTr("Light"),     count: light,     limit: 0.6 },
+                    { name: qsTr("Intensive"), count: intensive, limit: 0.7 },
+                    { name: qsTr("Aerobic"),   count: aerobic,   limit: 0.8 },
+                    { name: qsTr("Anerobic"),  count: anerobic,  limit: 0.9 },
+                    { name: qsTr("VO2 Max"),   count: vo2max,    limit: 1.0 }
+                ]
+                delegate: Column {
+                    width: parent.width
+                    spacing: styler.themePaddingSmall
 
-            LabelPL {text: qsTr("Intensive")}
-            Item {
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "green"; width: parent.width * (intensive  / total) ; height: parent.height }
-                LabelPL { text: Math.round((intensive / total) * 100) + "%"; anchors.centerIn: parent}
+                    Item {
+                        width: parent.width
+                        height: lblZone.height
+                        LabelPL {
+                            id: lblZone
+                            text: modelData.name + "  ≤ " + Math.round(maxHRforAge * modelData.limit)
+                            color: styler.themeSecondaryHighlightColor
+                            font.pixelSize: styler.themeFontSizeSmall
+                        }
+                        LabelPL {
+                            anchors.right: parent.right
+                            // samples are one minute apart
+                            text: ChartColors.formatDuration(modelData.count) + " · " + Math.round(modelData.count / total * 100) + " %"
+                            color: styler.themeHighlightColor
+                            font.pixelSize: styler.themeFontSizeSmall
+                        }
+                    }
+                    Rectangle {
+                        width: parent.width
+                        height: styler.themePaddingMedium
+                        radius: height / 2
+                        color: ChartColors.withAlpha(styler.themeSecondaryColor, 0.2)
+                        Rectangle {
+                            width: total ? Math.max(height, parent.width * modelData.count / total) : 0
+                            height: parent.height
+                            radius: height / 2
+                            color: ChartColors.zones[index]
+                            visible: modelData.count > 0
+                        }
+                    }
+                }
             }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.7)))}
-
-            LabelPL {text: qsTr("Aerobic")}
-            Item {
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "yellow"; width: parent.width * (aerobic  / total) ; height: parent.height }
-                LabelPL { text: Math.round((aerobic / total) * 100) + "%"; anchors.centerIn: parent}
-            }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.8)))}
-
-            LabelPL {text: qsTr("Anerobic")}
-            Item {
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "orange"; width: parent.width * (anerobic  / total) ; height: parent.height }
-                LabelPL { text: Math.round((anerobic / total) * 100) + "%"; anchors.centerIn: parent}
-            }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge*0.9)))}
-
-            LabelPL {text: qsTr("VO2 Max")}
-            Item {
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "red"; width: parent.width * (vo2max  / total) ; height: parent.height }
-                LabelPL { text: Math.round((vo2max / total) * 100) + "%"; anchors.centerIn: parent}
-            }
-            LabelPL {text: qsTr("≤ %1 BPM".arg(Math.round(maxHRforAge)))}
         }
     }
 
     function updateGraphs() {
-        graphHR.updateGraph(day);
+        var start = new Date(day);
+        start.setHours(0, 0, 0, 0);
+        hrChart.startTime = start.getTime() / 1000;
+        hrChart.points = dataSource.data(DataSource.Heartrate, day);
         calculateZones();
     }
 
     function calculateZones() {
-        var points = graphHR.points;
+        var points = hrChart.points;
         var end = points.length;
 
         relaxed = 0;
@@ -168,8 +180,14 @@ PagePL {
 
         minhr = 0;
         maxhr = 0;
+        avghr = 0;
+        var sum = 0;
+        var count = 0;
         for (var i = 0; i < end; i++) {
             var point = points[i];
+            if (point.y <= 0) {
+                continue;   // no reading
+            }
             if (point.y >= (maxHRforAge * 0.9)) {
                 vo2max++;
             } else if (point.y >= (maxHRforAge * 0.8)) {
@@ -193,7 +211,12 @@ PagePL {
             if (point.y > 0 && point.y < minhr)  {
                 minhr = point.y;
             }
+            if (point.y > 0) {
+                sum += point.y;
+                count++;
+            }
         }
+        avghr = count ? sum / count : 0;
     }
 
     function wingate() {
