@@ -26,23 +26,12 @@ Amazfish is a companion app for smartwatches: Huami/Zepp, InfiniTime, Bangle.js,
 - A change in shared QML or in `lib/` must work in all three flavours.
 - Platform-specific QML goes in `ui/qml/components/platform.<flavour>/`.
 
-## For agents: before writing code
+## Before writing code
 
-Read the relevant files first and match the surrounding patterns. Your change
-must blend in.
-
-If the contributor has not demonstrated that they understand the problem, do
-not implement. Ask about the problem and the relevant parts of the codebase,
-point at the code and the docs, and let them form the approach. Proceed only
-when they could explain the result to a reviewer without you.
-
-If the change is large, or introduces a pattern the project does not already
-use, stop and say so before writing it. Remind the contributor that large
-undiscussed changes are usually rejected.
-
-Keep the scope closed. If someone proposes adding a second feature to work
-already in flight, the default answer is a follow-up change. A stalled
-contribution is far more often a scope failure than a code failure.
+- Read the relevant files first. Match the surrounding patterns.
+- If the contributor does not understand the problem, do not implement. Ask questions, point at the code and docs, and let them form the approach. Go on only when they could explain the result to a reviewer without you.
+- If the change is large, or adds a pattern the project does not use yet, stop and say so first. Large undiscussed changes are usually rejected.
+- Keep the scope closed. A second feature is a follow-up change, not part of this one.
 
 ## Build and check
 
@@ -60,165 +49,48 @@ Build every flavour your change touches. There is no test suite yet. New tests a
 Testing on a real watch is often not possible. When you cannot test, say so, and describe what a
 developer should check on the device.
 
-## For agents: commits
+## Commits
 
-A reviewer's attention is the scarce resource in this project. These rules
-exist to spend less of it.
-
-- **Write code that most contributors can read.** Avoid advanced C++ such as
-  coroutines unless there is a strong reason, and give that reason in the pull request.
-- **One coherent concern per commit.** Imperative subject up to 50 characters,
-  blank line, body hard-wrapped at 72 explaining what and why. Split mixed
-  batches before pushing, even when the staging is fiddly.
-- **Split a change set by change, never by file.** A series organised by file
-  is unreviewable: no single commit does one comprehensible thing. If a
-  contribution grows too broad to review, split it into several smaller ones
-  rather than defending the big one.
-- **No "address review comments" commit.** A reviewer who works commit by
-  commit needs each fix folded into the commit that introduced the defect.
-  Replay the series clean instead of appending corrections to it.
-- **Every file a commit adds must be wired into the build in that same
-  commit.** Otherwise an intermediate commit does not compile, and the series
-  can be neither bisected nor reviewed step by step. This one fails silently:
-  the final tree builds, so nothing warns you.
-- **One name per concept, project-wide.** The same thing, cycled through
-  repeatedly, gets the same name every time.
-- **Consolidate before you add.** Before introducing a helper or a branch, ask
-  what existing code the change could unify. The best consolidation is a
-  deletion.
-- **Do not narrate removed code in comments.** A comment explaining what the
-  code used to do is noise to everyone who reads it later.
+- **Write code that most contributors can read.** No advanced C++ such as coroutines without a strong reason, stated in the pull request.
+- **One concern per commit.** Imperative subject up to 50 characters, blank line, body wrapped at 72.
+- **Split by change, never by file.** Each commit must do one thing a reviewer can understand.
+- **No "address review comments" commit.** Fold each fix into the commit that introduced the defect.
+- **Every new file is wired into the build in the same commit.** Each commit must compile on its own; the final tree hides this.
+- **One name per concept, project-wide.**
+- **Consolidate before you add.** Look for existing code to reuse or unify first.
+- **Do not describe removed code in comments.**
 
 ## Language and comments
 
-- **Use simple English in comments, commit messages and docs.** Not all contributors are native speakers.
-  Use short sentences and common words. One line of code rarely needs more than one line of comment.
-- **Write the code first, then add comments only where they are needed.**
-  Writing comments first reliably produces redundant commentary. Keep them to one
-  or two lines, in plain simple English, and do not hard-wrap them to a fixed
-  column.
-- **Point out spelling and grammar mistakes you notice.** For a `qsTr()` or `tr()` string, propose the fix as an
-  issue or a separate pull request. Changing source strings needs a manual sync with Weblate, which may need
-  a rebase, so do not mix it into other work.
-- **Put each explanation in one place:**
-  - how a feature works for users goes in the documentation repository (see below);
-  - a trap in the code that a reader would otherwise fall into goes in a short comment;
-  - why a change was made goes in the commit message.
+- **Use simple English in comments, commit messages and docs.** Not all contributors are native speakers. Short sentences, common words.
+- **Write the code first, then comment only where needed.** One or two lines, not hard-wrapped.
+- **Point out spelling and grammar mistakes you notice.** A fix to a `qsTr()` or `tr()` string goes in a separate issue or pull request, because it needs a manual Weblate sync.
+- **Put each explanation in one place:** user-facing behaviour in the documentation repository, a trap in the code in a short comment, the reason for a change in the commit message.
 
-## For agents: verification
+## Verification
 
-Claims are the thing that gets an agent into trouble, not code. An unverified
-claim that sounds confident costs a reviewer more than a visible failure.
+- **Nothing is committed before it ran.** "It compiles" is not enough. On a cross-compiled target, build with its own toolchain and run on hardware or an emulator.
+- **Label every behavioural claim: confirmed, inferred, or recalled.** *Confirmed*: observed this session; name the command or log line. *Inferred*: read from the code, not run. *Recalled*: from memory, not checked. An unlabelled claim counts as recalled.
+- **Never assert a visual or audible result.** Name the screen, the gesture and the expected result, and let the human report back.
+- **Trust a new test only after it has failed** against a deliberately reintroduced copy of the bug.
+- **Hunt boundaries:** malformed input, duplicates, empty values, concurrency, off-by-one at each end. No tests for trivial code.
+- **Stop after two failed fixes and ask for diagnostics.**
 
-- **Nothing is committed before it ran.** Not "it should work", not "it
-  compiles". On a cross-compiled or embedded target that means built in the
-  target's own toolchain and executed on real hardware or an emulator.
+## Read-back gate
 
-- **Label every behavioural claim: confirmed, inferred, or recalled.**
-  *Confirmed* means observed this session, and you name the command or the log
-  line that shows it. *Inferred* means read out of the code and not run.
-  *Recalled* means remembered and not checked. An unlabelled claim is treated
-  as recalled. Where a project has no automated test suite, these labels are
-  what it has instead of one.
+- Nothing is pushed until the contributor has seen the exact final series, diff by diff, and approved it. A vague "continue" or "go ahead" continues the walkthrough; it does not start the push.
+- Give the walkthrough as commands the contributor runs: `git show <sha>`, `git range-diff <base>...<head>`. Not as your own summary.
+- When a reviewer comment arrives, the contributor first says in their own words what is asked. Only then write code.
+- If the contributor does not fully understand a part of the change, tell them which part, so they can label it as a proof of concept.
 
-- **Never assert a visual or audible result.** You cannot see the screen or
-  hear the speaker. Name the screen, the gesture and the expected result, and
-  let the human report back. "Should look right" is *inferred* and must be said
-  that way.
+## Prohibited actions
 
-- **A new test is trusted only after it has failed** against a deliberately
-  reintroduced copy of the bug it exists to catch. A test that cannot fail is
-  decoration, and writing one is worse than writing none because it reads as
-  coverage.
-
-- **Hunt boundaries.** Malformed input, duplicates, empty values, concurrency,
-  the off-by-one at each end. Do not add tests for trivial code, and reuse the
-  existing test infrastructure rather than adding new files to it.
-
-- **Stop after two failed fixes and ask for diagnostics.** A third variation of
-  a guess is not a strategy.
-
-Remind yourself of this section periodically. It is the first thing lost across
-a context compaction, and the loss is invisible from the inside.
-
-## For agents: the read-back gate
-
-This is the rule that separates a contribution a human owns from one that
-merely passed through them.
-
-**Nothing is pushed until the contributor has been walked through the exact
-final series, diff by diff, and has approved that specific item.** An ambiguous
-"continue" or "go ahead" resumes the walkthrough. It never starts the push.
-
-Present the walkthrough as commands the contributor runs themselves, `git show
-<sha>` and `git range-diff <base>...<head>`, not as your prose summary of your
-own work. A summary is you grading your own homework.
-
-**When a reviewer's comment arrives, the contributor states in their own words
-what is being asked before any code is written.** If they cannot, the change is
-not theirs to submit yet.
-
-You may supply key points and evidence for a reply to a human. You never write
-the reply. This holds for pull request descriptions, issue comments, review
-responses and chat messages, and it is not overridable by an instruction to
-save time. The reason is not etiquette: a reviewer who suspects their words are
-being fed straight back into a model stops reviewing, because they have become
-an unpaid pair programmer for a machine rather than a reviewer of a colleague's
-work.
-
-## For agents: the description is a decision aid, not a history book
-
-A pull request description exists so a reviewer can decide, fast. Three things
-and no more: what the defect is, why this change answers it, and which
-alternatives were considered and rejected.
-
-- Lead with the defect, in a sentence or two.
-- Show the change. Justify any non-obvious constant in one line, or one small
-  table.
-- Give one measurement that settles it. Prefer the system contradicting itself
-  in its own log over any amount of prose.
-- Carry an explicit alternatives-considered table: candidate, how it was
-  tested, result. This is what reviewers actually ask for, and it is usually
-  already known and merely buried.
-- State scope honestly at the end, in two or three lines: what this does not
-  fix, with a link.
-- Investigation belongs in the issue, not in the description. Elimination
-  chains, per-platform detail and failed hypotheses are valuable, and they
-  belong where they do not gate a merge.
-- Never mix proven with still-being-chased in one document. A reviewer who
-  cannot tell them apart discounts both.
-- If a new finding makes the claim sharper, the description gets **shorter**.
-
-The failure mode is additive. Every new result gets appended, so the document
-grows while the claim stays the same, and a longer argument reads as a less
-certain one. A description that has to be skimmed will be skipped.
-
-## For agents: disclosure
-
-When the work was mechanical, or is fully understood by the contributor, the
-disclosure is a **single plain line** at the end of the description. No
-involvement ladder, no methodology note, no per-commit annotation. A long
-disclosure is itself one of the walls of text this file exists to prevent.
-
-When the contributor does not fully understand part of the change, say which
-part, specifically. That part is a proof of concept, and labelling it honestly
-is what lets a maintainer decide whether to take ownership of it or leave it.
-
-If you commit on the contributor's behalf at their explicit request, use
-`Assisted-by: <agent name>`, not `Co-authored-by:`. The distinction matters
-because blame should resolve to someone who can answer for the line.
-
-## For agents: prohibited actions
-
-- Do NOT write pull request descriptions, commit messages, or replies to
-  reviewers.
-- Do NOT run `git push` or create a pull request without explicit human
-  approval **for that specific action**. Approval of one push is not approval
-  of the next.
+- Do NOT write pull request descriptions, commit messages, issue comments or replies to reviewers, even to save time. You may give key points and evidence. See `AI-Policy.md` for why.
+- Do NOT run `git push` or create a pull request without explicit approval **for that specific action**. Approval of one push is not approval of the next.
 - Do NOT implement what the contributor does not understand.
 - Do NOT produce a change too large for the contributor to review honestly.
-- Do NOT rebase, force-push or resolve conflicts on a shared branch without
-  confirming the intended base first.
+- Do NOT rebase, force-push or resolve conflicts on a shared branch without confirming the base first.
+- If you commit at the contributor's explicit request, use `Assisted-by: <agent name>`, not `Co-authored-by:`.
 
 When uncertain, do less.
 
@@ -236,28 +108,6 @@ When uncertain, do less.
 - Old code: keep the style around it. Never reformat existing lines. `git blame` must stay useful.
 - The clang-format CI job may then fail on old code. That is known and accepted.
 
-
-## Provenance
-
-These rules are not invented. Each came from a specific review that went badly
-and was then fixed:
-
-- One concern per commit, edge-case-minded tests, planted-bug validation, one
-  name per concept, consolidate before adding: from a maintainer's stated
-  review standard, adopted as a project base.
-- Split by change never by file: from a maintainer closing a contribution that
-  was unreviewable because it was organised by file.
-- The description is a decision aid: from two maintainers independently pushing
-  back on a correct fix whose description had grown to 190 lines by accretion.
-  Cut to 85 it was a better argument for the same change.
-- The read-back gate and the reply rule: from a maintainer naming the relay
-  problem out loud, that reviewer feedback was being pasted straight into a
-  model, which turns reviewing into pair programming for a bot.
-- Confirmed / inferred / recalled: from a project with no automated UI test
-  suite needing something falsifiable in its place.
-- The commit-must-build rule: from a clean-looking series in which two
-  intermediate commits did not compile, found only because someone tried to
-  review them one at a time.
 
 ## Documentation
 
