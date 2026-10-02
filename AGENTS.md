@@ -1,6 +1,6 @@
 # AGENTS.md
 
-**This file contains specific instructions for ai agents when contributing to this project.**
+**This file contains specific instructions for AI agents when contributing to this project.**
 
 Amazfish is a companion app for smartwatches: Huami/Zepp, InfiniTime, Bangle.js, AsteroidOS, Pebble and DK08.
 
@@ -65,7 +65,7 @@ developer should check on the device.
 A reviewer's attention is the scarce resource in this project. These rules
 exist to spend less of it.
 
-- **Write code that most contributors can read.** Avoid advanced C++ such as 
+- **Write code that most contributors can read.** Avoid advanced C++ such as
   coroutines unless there is a strong reason, and give that reason in the pull request.
 - **One coherent concern per commit.** Imperative subject up to 50 characters,
   blank line, body hard-wrapped at 72 explaining what and why. Split mixed
@@ -91,7 +91,7 @@ exist to spend less of it.
 
 ## Language and comments
 
-- **Use simple English in comments, ommit messages and docs.** Not all contributors are native speakers.
+- **Use simple English in comments, commit messages and docs.** Not all contributors are native speakers.
   Use short sentences and common words. One line of code rarely needs more than one line of comment.
 - **Write the code first, then add comments only where they are needed.**
   Writing comments first reliably produces redundant commentary. Keep them to one

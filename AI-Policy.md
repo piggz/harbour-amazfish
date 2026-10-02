@@ -28,19 +28,19 @@ The project targets level B of the Chum AI rating: "AI-assisted, all code human-
 
 ## For Contributors
 
-1. You **MAY** use AI assistance for contributing to this project, as long as you follow the 
+1. You **MAY** use AI assistance for contributing to this project, as long as you follow the
    principles described below.
-2. Accountability: You **MUST** take the responsibility for your contribution. Contributing means 
-   vouching for the quality, license compliance, and utility of your submission. All contributions, 
-   whether from a human author or assisted by large language models (LLMs) or other generative AI 
+2. Accountability: You **MUST** take the responsibility for your contribution. Contributing means
+   vouching for the quality, license compliance, and utility of your submission. All contributions,
+   whether from a human author or assisted by large language models (LLMs) or other generative AI
    tools, must meet the project’s standards for inclusion. The contributor is always the author
    and is fully accountable for the entirety of these contributions.
    - **Understand your change fully.** You must be able to explain any part of it
    to a reviewer without AI assistance.
    - **Own the maintenance.** Bugs in it are yours to fix.
-3. Transparency: You **MUST** disclose the use of AI tools when the significant part of the contribution 
-   is taken from a tool without changes. You SHOULD disclose the other uses of AI tools, where it 
-   might be useful. Routine use of assistive tools for correcting grammar and spelling, or for 
+3. Transparency: You **MUST** disclose the use of AI tools when a significant part of the contribution
+   is taken from a tool without changes. You SHOULD disclose the other uses of AI tools, where it
+   might be useful. Routine use of assistive tools for correcting grammar and spelling, or for
    clarifying language, does not require disclosure.
    Disclosures are made where authorship is normally indicated. For contributions tracked in git, the recommended method is an Assisted-by: commit message trailer. For other contributions, disclosure may include document preambles, design file metadata, translation notes, or wiki page categories.
    Examples:
@@ -59,9 +59,9 @@ The project targets level B of the Chum AI rating: "AI-assisted, all code human-
 7. **Not permitted:** AI-written pull request descriptions, commit messages or replies
    to reviewers. Implementing features without understanding the codebase.
    Automated commits or submissions with no human in the loop.
-8. **fully autonomous agents operating without human oversight, are not to
+8. **Fully autonomous agents operating without human oversight are not to
    contribute to this repository.**
 
 ## For Agents
 
-1. Use Agents.md for instructions to an agent.
+1. Use AGENTS.md for instructions to an agent.
