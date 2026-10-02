@@ -16,7 +16,7 @@ public:
     SportsDetailOperation(HuamiFetcher *fetcher, KDbConnection *db, const ActivitySummary &summary, AbstractActivityDetailParser *parser = nullptr, bool isZeppOs = false);
     ~SportsDetailOperation();
 
-    void start(QBLEService *service) override;
+    void start() override;
 
 private:
     ActivitySummary m_summary;

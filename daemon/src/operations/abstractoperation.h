@@ -8,8 +8,8 @@ class AbstractOperation
 public:
     AbstractOperation();
     virtual ~AbstractOperation(){}
-    
-    virtual void start(QBLEService *service) = 0;
+
+    virtual void start() = 0;
 
     virtual bool characteristicChanged(const QString &characteristic, const QByteArray &value) = 0;
 

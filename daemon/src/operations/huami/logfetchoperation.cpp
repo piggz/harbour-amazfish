@@ -27,7 +27,7 @@ LogFetchOperation::LogFetchOperation(HuamiFetcher *fetcher, bool isZeppOs) : Abs
     }
 }
 
-void LogFetchOperation::start(QBLEService *service)
+void LogFetchOperation::start()
 {
     QDateTime fetchFrom = QDateTime::currentDateTime();
     fetchFrom = fetchFrom.addDays(-10);

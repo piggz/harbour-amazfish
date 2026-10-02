@@ -8,7 +8,7 @@ FetchPaiOperation::FetchPaiOperation(HuamiFetcher *fetcher, KDbConnection *conn,
     setLastSyncKey("device/lastPaiTimeMillis");
 }
 
-void FetchPaiOperation::start(QBLEService *service)
+void FetchPaiOperation::start()
 {
     setStartDate(lastActivitySync());
 

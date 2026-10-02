@@ -19,7 +19,7 @@ SportsSummaryOperation::~SportsSummaryOperation()
     delete m_parser;
 }
 
-void SportsSummaryOperation::start(QBLEService *service)
+void SportsSummaryOperation::start()
 {
     qDebug() << Q_FUNC_INFO;
     setStartDate(lastActivitySync());

@@ -9,7 +9,7 @@ FetchHrvOperation::FetchHrvOperation(HuamiFetcher *fetcher, KDbConnection *conn,
     setLastSyncKey("device/lastHrvTimeMillis");
 }
 
-void FetchHrvOperation::start(QBLEService *service)
+void FetchHrvOperation::start()
 {
     setStartDate(lastActivitySync());
 

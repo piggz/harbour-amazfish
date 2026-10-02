@@ -9,7 +9,7 @@ FetchStressManualOperation::FetchStressManualOperation(HuamiFetcher *fetcher, KD
     setLastSyncKey("device/lastStressManualTimeMillis");
 }
 
-void FetchStressManualOperation::start(QBLEService *service)
+void FetchStressManualOperation::start()
 {
     setStartDate(lastActivitySync());
 

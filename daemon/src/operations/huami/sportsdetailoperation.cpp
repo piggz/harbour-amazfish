@@ -19,7 +19,7 @@ SportsDetailOperation::~SportsDetailOperation()
     delete m_parser;
 }
 
-void SportsDetailOperation::start(QBLEService *service)
+void SportsDetailOperation::start()
 {
     qDebug() << Q_FUNC_INFO;
     setStartDate(m_summary.startTime());
