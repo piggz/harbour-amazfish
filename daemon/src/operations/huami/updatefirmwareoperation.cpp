@@ -3,7 +3,11 @@
 #include "typeconversion.h"
 #include <QApplication>
 
-UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo *info, QBLEService *service, AbstractDevice *device) : m_info(info), m_fwBytes(info->bytes()), m_device(device)
+UpdateFirmwareOperation::UpdateFirmwareOperation(const AbstractFirmwareInfo* info, QBLEService* service, AbstractDevice* device)
+    : m_info(info)
+    , m_fwBytes(info->bytes())
+    , m_service(service)
+    , m_device(device)
 {
 }
 

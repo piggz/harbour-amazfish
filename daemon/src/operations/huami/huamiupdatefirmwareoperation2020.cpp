@@ -101,6 +101,9 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
 
 void HuamiUpdateFirmwareOperation2020::start(QBLEService *service)
 {
+    // Overrides UpdateFirmwareOperation::start(), which is where m_service used
+    // to be set: without this every transfer crashed on the null m_service below.
+    m_service = service;
     if (m_info->type() != AbstractFirmwareInfo::Invalid) {
         m_service->enableNotification(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE);
         requestParameters();
@@ -219,5 +222,9 @@ void HuamiUpdateFirmwareOperation2020::sendTransferComplete() {
 }
 
 void HuamiUpdateFirmwareOperation2020::sendFinalize() {
+    // The watch confirms finalizing only after processing the data: about 40 s
+    // for A-GPS on an Amazfit GTS. Waiting the usual 10 s cancelled the
+    // operation before that reply.
+    m_timeoutMs = 120000;
     m_service->writeValue(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE, UCHAR_TO_BYTEARRAY(COMMAND_FINALIZE_UPDATE));
 }
