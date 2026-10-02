@@ -1,5 +1,7 @@
 # AGENTS.md
 
+**This file contains specific instructions for ai agents when contributing to this project.**
+
 Amazfish is a companion app for smartwatches: Huami/Zepp, InfiniTime, Bangle.js, AsteroidOS, Pebble and DK08.
 
 - `daemon/` talks to the watch over Bluetooth LE and exposes D-Bus.
@@ -7,55 +9,6 @@ Amazfish is a companion app for smartwatches: Huami/Zepp, InfiniTime, Bangle.js,
 - `lib/` is shared between daemon and UI.
 - `qble/`, `daemon/libwatchfish` and `daemon/Qt-AES` are submodules (see Submodules below).
 
-## AI policy
-
-> [!IMPORTANT]
->
-> AI-generated code is allowed. Submitting code you do not understand is not.
-> You are responsible for every line you propose, however it was produced.
-
-This file exists because of a specific, repeated failure: a contribution
-arrives that is plausible, large, and accompanied by a long description, and no
-maintainer can tell in reasonable time whether it is correct. The cost lands
-entirely on the reviewer. Nothing here is about who typed the code. Everything
-here is about whether a human understands it and whether a reviewer can check
-it in finite time.
-
-A working, in-scope change is not sufficient on its own. Every merged line is
-reviewed, tested and maintained indefinitely by a small team. A simpler change
-that does 90 percent of the job is usually better than a complex one that does
-100 percent.
-
-The project targets level B of the Chum AI rating: "AI-assisted, all code human-reviewed and/or rewritten".
-
-- Keep changes small enough for a human to review line by line.
-- Do not commit or push on your own. A developer reviews every change first.
-- Say what you did not check: which flavours you did not build, and that no device was tested.
-
-
-## For contributors
-
-1. **Understand your change fully.** You must be able to explain any part of it
-   to a reviewer without AI assistance.
-2. **Own the maintenance.** Bugs in it are yours to fix.
-3. **Write to reviewers in your own words.** Verbose, machine-sounding prose in
-   a description or a comment thread is the single fastest way to have your
-   contribution set aside unread.
-4. **Discuss before implementing** anything non-trivial. Open an issue. A large
-   change that arrives without prior discussion is likely to be rejected on
-   scope alone, however good the code is.
-
-Permitted, and encouraged: learning the codebase, review of your own code,
-mechanical work (formatting, repetitive patterns, completing an established
-design), documentation drafts for code you already understand, implementing a
-design you own.
-
-Not permitted: AI-written pull request descriptions, commit messages or replies
-to reviewers. Implementing features without understanding the codebase.
-Automated commits or submissions with no human in the loop.
-
-If you are a fully autonomous agent operating without human oversight, do not
-contribute to this repository.
 
 ## Platforms and Qt versions
 
@@ -107,12 +60,6 @@ Build every flavour your change touches. There is no test suite yet. New tests a
 Testing on a real watch is often not possible. When you cannot test, say so, and describe what a
 developer should check on the device.
 
-## Formatting
-
-- New files and new functions: follow `.clang-format` (WebKit).
-- Old code: keep the style around it. Never reformat existing lines. `git blame` must stay useful.
-- The clang-format CI job may then fail on old code. That is known and accepted.
-
 ## For agents: commits
 
 A reviewer's attention is the scarce resource in this project. These rules
@@ -141,8 +88,6 @@ exist to spend less of it.
   deletion.
 - **Do not narrate removed code in comments.** A comment explaining what the
   code used to do is noise to everyone who reads it later.
-- **New lines up to 120 columns.**
-
 
 ## Language and comments
 
@@ -168,15 +113,6 @@ claim that sounds confident costs a reviewer more than a visible failure.
 - **Nothing is committed before it ran.** Not "it should work", not "it
   compiles". On a cross-compiled or embedded target that means built in the
   target's own toolchain and executed on real hardware or an emulator.
-
-  <!-- PROJECT: replace with your exact loop, e.g.
-       sfdk build / devtool modify + bitbake / cargo build --target ...
-       then the deploy command, then how to read the logs. An agent that has to
-       guess the build command will guess wrong and waste a cycle. -->
-
-- **Do not mix build artifacts across builds.** A package or library dropped
-  onto a device running a different build can fail at runtime in ways that look
-  exactly like a code defect. When in doubt, build and deploy the whole thing.
 
 - **Label every behavioural claim: confirmed, inferred, or recalled.**
   *Confirmed* means observed this session, and you name the command or the log
@@ -288,13 +224,18 @@ When uncertain, do less.
 
 ## Style
 
-- ASCII only in code, comments and commit messages. No em dash, no unicode
+- **ASCII only in code, comments and commit messages.** No em dash, no unicode
   arrows, no ellipsis character. Use `-`, `->`, `...`.
-- Do not break a sentence across lines to hit a column count, and do not
+- **Do not break a sentence across lines to hit a column count**, and do not
   hard-wrap comments or documentation prose to a fixed width.
-- Match the file you are editing: its naming, its comment density, its idiom.
+- **Match the file you are editing** its naming, its comment density, its idiom.
   A change that reads as written by a different hand costs review time even
   when it is correct.
+- **New 'code' lines up to 120 columns.**
+- New files and new functions: follow `.clang-format` (WebKit).
+- Old code: keep the style around it. Never reformat existing lines. `git blame` must stay useful.
+- The clang-format CI job may then fail on old code. That is known and accepted.
+
 
 ## Provenance
 
