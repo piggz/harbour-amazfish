@@ -9,7 +9,7 @@ class FetchSpo2SleepOperation : public AbstractFetchOperation
 public:
     FetchSpo2SleepOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
 
-    void start(QBLEService *service) override;
+    void start() override;
 
 private:
     struct Spo2SleepRecord {

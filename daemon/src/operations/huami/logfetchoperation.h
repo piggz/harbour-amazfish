@@ -11,7 +11,7 @@ class LogFetchOperation : public AbstractFetchOperation
 public:
     explicit LogFetchOperation(HuamiFetcher *fetcher, bool isZeppOs = false);
 
-    void start(QBLEService *service) override;
+    void start() override;
 
 private:
     QFile *m_logFile = nullptr;

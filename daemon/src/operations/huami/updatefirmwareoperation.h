@@ -11,7 +11,7 @@ public:
 
     bool handleMetaData(const QByteArray &meta) override;
     void handleData(const QByteArray &data) override;
-    void start(QBLEService *service) override;
+    void start() override;
     bool characteristicChanged(const QString &characteristic, const QByteArray &value) override;
 
     QString version();

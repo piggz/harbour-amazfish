@@ -11,7 +11,7 @@ class FetchPaiOperation : public AbstractFetchOperation
 public:
     FetchPaiOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
 
-    void start(QBLEService *service) override;
+    void start() override;
 
 private:
     struct PaiRecord {

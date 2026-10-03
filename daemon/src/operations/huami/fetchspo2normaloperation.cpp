@@ -8,7 +8,7 @@ FetchSpo2NormalOperation::FetchSpo2NormalOperation(HuamiFetcher *fetcher, KDbCon
     setLastSyncKey("device/lastSpo2NormalTimeMillis");
 }
 
-void FetchSpo2NormalOperation::start(QBLEService *service)
+void FetchSpo2NormalOperation::start()
 {
     setStartDate(lastActivitySync());
 

@@ -8,7 +8,7 @@ FetchSpo2SleepOperation::FetchSpo2SleepOperation(HuamiFetcher *fetcher, KDbConne
     setLastSyncKey("device/lastSpo2SleepTimeMillis");
 }
 
-void FetchSpo2SleepOperation::start(QBLEService *service)
+void FetchSpo2SleepOperation::start()
 {
     setStartDate(lastActivitySync());
 
