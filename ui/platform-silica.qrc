@@ -49,10 +49,10 @@
         <file>./qml/components/DateNavigation.qml</file>
         <file>./qml/components/DeviceListModel.qml</file>
         <file>./qml/components/DownloadDataMenuItem.qml</file>
-        <file>./qml/components/DraggableItemDropArea.qml</file>
         <file>./qml/components/DraggableItem.qml</file>
-        <file>./qml/components/GraphData.qml</file>
+        <file>./qml/components/DraggableItemDropArea.qml</file>
         <file>./qml/components/Graph.qml</file>
+        <file>./qml/components/GraphData.qml</file>
         <file>./qml/components/PAITile.qml</file>
         <file>./qml/components/PercentCircle.qml</file>
         <file>./qml/components/StepsTile.qml</file>
