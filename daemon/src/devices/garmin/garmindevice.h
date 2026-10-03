@@ -1,0 +1,68 @@
+#ifndef GARMIN_DEVICE__H
+#define GARMIN_DEVICE__H
+
+#include <QObject>
+#include <QSharedPointer>
+#include "abstractdevice.h"
+#include "services/garmin/communicator_v2.h"
+#include "services/garmin/garminnotificationhandler.h"
+#include "services/garmin/protobufhandler.h"
+
+
+class NotificationSpec;
+class GarminNotificationHandler;
+class ProtobufHandler;
+
+class GarminDevice : public AbstractDevice
+{
+    Q_OBJECT
+public:
+    explicit GarminDevice(const QString &pairedName, QObject *parent = 0);
+    QBLEService *drv_createService(const QString &uuid, const QString &path);
+
+    Amazfish::Features supportedFeatures() const override;
+    Amazfish::DataTypes supportedDataTypes() const override;
+    QString deviceType() const override;
+    void setPaired() {m_pairing = false;};
+    bool isPairing() {return m_pairing;};
+    void sendAlert(const Amazfish::WatchNotification &notification) override;
+    void incomingCall(const QString &caller) override;
+    void incomingCallEnded() override;
+
+    AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
+    Q_SLOT void authenticated(bool ready);
+
+
+    QString information(Amazfish::Info i) const override;
+
+
+public slots:
+
+    //void informationChanged(Amazfish::Info infoKey, const QString& infoValue);
+
+    void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
+    void onAnswerCallEvent();
+    void onRejectCallEvent();
+
+signals:
+    void sendAlertToDevice(NotificationSpec &note);
+
+private:
+    int mSteps = 0;
+
+
+    void parseServices();
+    void initialise();
+    virtual void pair() override;
+    QSharedPointer<GarminNotificationHandler> mNotificationHandler;
+    QSharedPointer<ProtobufHandler> mProtobufHandler;
+
+
+//    Q_SLOT void authenticated(bool ready);
+
+    virtual void refreshInformation() override;
+    QSharedPointer<CommunicatorV2> mCommunicator;
+
+};
+
+#endif // GARMIN_DEVICE__H
