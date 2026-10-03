@@ -426,8 +426,8 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
         {
             // Needs special treatment - watch expects start and endtime to be 0:00 in local time
             // So need to convert from UTC
-            proto.startDate=proto.startDate.toLocalTime();
-            proto.endDate=proto.endDate.toLocalTime();
+            proto.startDate=event.start().toLocalTime();
+            proto.endDate=event.end().toLocalTime();
         } else {
             proto.startDate = event.start();
             proto.endDate = event.end();
@@ -518,8 +518,6 @@ QByteArray GarminCalendarMessage::encodeCalendarEvent(const CalendarEventProto& 
 // -----------------------------------------------------------------------------
 // Encode full calendar response
 //
-// Format preserved from Rust:
-// [requestId:2][dataOffset:4][totalProtobufLength:4][protobufDataLength:4][protobufPayload]
 // -----------------------------------------------------------------------------
 QByteArray GarminCalendarMessage::encodeCalendarResponse(
     const QVector<CalendarEventProto>& events,
@@ -564,28 +562,16 @@ QByteArray GarminCalendarMessage::encodeCalendarResponse(
     QByteArray message;
 
     // request_id LE16
-    message.append(char(requestId & 0xFF));
-    message.append(char((requestId >> 8) & 0xFF));
-
+    writeU16le(message,requestId);
     // dataOffset LE32 = 0
     for (int i = 0; i < 4; ++i) {
         message.append(char(0));
     }
-
     const quint32 protobufLength = quint32(smartBuf.size());
-
     // totalProtobufLength LE32
-    message.append(char(protobufLength & 0xFF));
-    message.append(char((protobufLength >> 8) & 0xFF));
-    message.append(char((protobufLength >> 16) & 0xFF));
-    message.append(char((protobufLength >> 24) & 0xFF));
-
+    writeU32le(message,protobufLength);
     // protobufDataLength LE32
-    message.append(char(protobufLength & 0xFF));
-    message.append(char((protobufLength >> 8) & 0xFF));
-    message.append(char((protobufLength >> 16) & 0xFF));
-    message.append(char((protobufLength >> 24) & 0xFF));
-
+    writeU32le(message,protobufLength);
     // protobuf bytes
     message.append(smartBuf);
 
