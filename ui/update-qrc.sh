@@ -2,6 +2,7 @@
 
 declare -a platforms=("kirigami" "uuitk" "silica" "qtcontrols")
 
+export LC_ALL=C
 IFS=$'\n'
 
 for platform in ${platforms[@]}; do
@@ -28,13 +29,8 @@ done
     (
         echo "<RCC>"
         echo "    <qresource prefix=\"/\">"
-        for i in $(find qml/custom-icons/ -type f -name '*.png'|sort); do
-            echo "        <file>$i</file>";
-        done
-        for i in $(find qml/activity-icons/ -type f -name '*.png'|sort); do
-            echo "        <file>$i</file>";
-        done
-        for i in $(find qml/page-icons/ -type f -name '*.png'|sort); do
+        echo "        <file>icons/172x172/harbour-amazfish-ui.png</file>"
+        for i in $(find qml/ -type f -name '*.png'|sort); do
             echo "        <file>$i</file>";
         done
         echo "    </qresource>"

@@ -1,28 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/custom-icons/icon-m-alarm.png</file>
-        <file>qml/custom-icons/icon-m-back.png</file>
-        <file>qml/custom-icons/icon-m-battery.png</file>
-        <file>qml/custom-icons/icon-m-bluetooth-device.png</file>
-        <file>qml/custom-icons/icon-m-clock.png</file>
-        <file>qml/custom-icons/icon-m-contact.png</file>
-        <file>qml/custom-icons/icon-m-diagnostic.png</file>
-        <file>qml/custom-icons/icon-m-down.png</file>
-        <file>qml/custom-icons/icon-m-favorite-selected.png</file>
-        <file>qml/custom-icons/icon-m-forward.png</file>
-        <file>qml/custom-icons/icon-m-heartrate2.png</file>
-        <file>qml/custom-icons/icon-m-heartrate.png</file>
-        <file>qml/custom-icons/icon-m-spo2.png</file>
-        <file>qml/custom-icons/icon-m-levels.png</file>
-        <file>qml/custom-icons/icon-m-location.png</file>
-        <file>qml/custom-icons/icon-m-notifications.png</file>
-        <file>qml/custom-icons/icon-m-steps2.png</file>
-        <file>qml/custom-icons/icon-m-steps.png</file>
-        <file>qml/custom-icons/icon-m-up-down.png</file>
-        <file>qml/custom-icons/icon-m-up.png</file>
-        <file>qml/custom-icons/icon-m-watch.png</file>
-        <file>qml/custom-icons/icon-m-weather-d212-light.png</file>
-        <file>qml/custom-icons/icon-strava.png</file>
+        <file>icons/172x172/harbour-amazfish-ui.png</file>
         <file>qml/activity-icons/icon-m-activity.png</file>
         <file>qml/activity-icons/icon-m-americanfootball.png</file>
         <file>qml/activity-icons/icon-m-atv.png</file>
@@ -75,6 +53,28 @@
         <file>qml/activity-icons/icon-m-windsurfing.png</file>
         <file>qml/activity-icons/icon-m-wintersport.png</file>
         <file>qml/activity-icons/icon-m-yoga.png</file>
+        <file>qml/custom-icons/icon-m-alarm.png</file>
+        <file>qml/custom-icons/icon-m-back.png</file>
+        <file>qml/custom-icons/icon-m-battery.png</file>
+        <file>qml/custom-icons/icon-m-bluetooth-device.png</file>
+        <file>qml/custom-icons/icon-m-clock.png</file>
+        <file>qml/custom-icons/icon-m-contact.png</file>
+        <file>qml/custom-icons/icon-m-diagnostic.png</file>
+        <file>qml/custom-icons/icon-m-down.png</file>
+        <file>qml/custom-icons/icon-m-favorite-selected.png</file>
+        <file>qml/custom-icons/icon-m-forward.png</file>
+        <file>qml/custom-icons/icon-m-heartrate.png</file>
+        <file>qml/custom-icons/icon-m-heartrate2.png</file>
+        <file>qml/custom-icons/icon-m-levels.png</file>
+        <file>qml/custom-icons/icon-m-location.png</file>
+        <file>qml/custom-icons/icon-m-notifications.png</file>
+        <file>qml/custom-icons/icon-m-steps.png</file>
+        <file>qml/custom-icons/icon-m-steps2.png</file>
+        <file>qml/custom-icons/icon-m-up-down.png</file>
+        <file>qml/custom-icons/icon-m-up.png</file>
+        <file>qml/custom-icons/icon-m-watch.png</file>
+        <file>qml/custom-icons/icon-m-weather-d212-light.png</file>
+        <file>qml/custom-icons/icon-strava.png</file>
         <file>qml/page-icons/icon-page-battery.png</file>
         <file>qml/page-icons/icon-page-data.png</file>
         <file>qml/page-icons/icon-page-heartrate.png</file>
@@ -84,5 +84,51 @@
         <file>qml/page-icons/icon-page-spo2.png</file>
         <file>qml/page-icons/icon-page-sport.png</file>
         <file>qml/page-icons/icon-page-stress.png</file>
+        <file>qml/pics/devices/amazfit-balance.png</file>
+        <file>qml/pics/devices/amazfit-bip.png</file>
+        <file>qml/pics/devices/amazfit-bips.png</file>
+        <file>qml/pics/devices/amazfit-cor.png</file>
+        <file>qml/pics/devices/amazfit-gtr.png</file>
+        <file>qml/pics/devices/amazfit-gtr2.png</file>
+        <file>qml/pics/devices/amazfit-gtr3.png</file>
+        <file>qml/pics/devices/amazfit-gts.png</file>
+        <file>qml/pics/devices/amazfit-gts2.png</file>
+        <file>qml/pics/devices/amazfit-neo.png</file>
+        <file>qml/pics/devices/asteroidos.png</file>
+        <file>qml/pics/devices/banglejs.png</file>
+        <file>qml/pics/devices/kospet_dk08.png</file>
+        <file>qml/pics/devices/miband2.png</file>
+        <file>qml/pics/devices/miband3.png</file>
+        <file>qml/pics/devices/miband4.png</file>
+        <file>qml/pics/devices/pebble.png</file>
+        <file>qml/pics/devices/pinetime.png</file>
+        <file>qml/pics/map_btn_center.png</file>
+        <file>qml/pics/map_btn_max.png</file>
+        <file>qml/pics/map_btn_min.png</file>
+        <file>qml/pics/weather-clear-night.png</file>
+        <file>qml/pics/weather-clear.png</file>
+        <file>qml/pics/weather-clouds-night.png</file>
+        <file>qml/pics/weather-clouds.png</file>
+        <file>qml/pics/weather-few-clouds-night.png</file>
+        <file>qml/pics/weather-few-clouds.png</file>
+        <file>qml/pics/weather-freezing-rain.png</file>
+        <file>qml/pics/weather-hail.png</file>
+        <file>qml/pics/weather-many-clouds.png</file>
+        <file>qml/pics/weather-mist.png</file>
+        <file>qml/pics/weather-none-available.png</file>
+        <file>qml/pics/weather-showers-day.png</file>
+        <file>qml/pics/weather-showers-night.png</file>
+        <file>qml/pics/weather-showers-scattered-day.png</file>
+        <file>qml/pics/weather-showers-scattered-night.png</file>
+        <file>qml/pics/weather-showers-scattered.png</file>
+        <file>qml/pics/weather-showers.png</file>
+        <file>qml/pics/weather-snow-rain.png</file>
+        <file>qml/pics/weather-snow-scattered-day.png</file>
+        <file>qml/pics/weather-snow-scattered-night.png</file>
+        <file>qml/pics/weather-snow-scattered.png</file>
+        <file>qml/pics/weather-snow.png</file>
+        <file>qml/pics/weather-storm-day.png</file>
+        <file>qml/pics/weather-storm-night.png</file>
+        <file>qml/pics/weather-storm.png</file>
     </qresource>
 </RCC>
