@@ -14,7 +14,7 @@ class ActivityFetchOperation : public AbstractFetchOperation
 public:
     ActivityFetchOperation(HuamiFetcher *fetcher, KDbConnection *db, int sampleSize = 4, bool isZeppOs = false);
 
-    void start(QBLEService *service) override;
+    void start() override;
 
 private:
 

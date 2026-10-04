@@ -144,7 +144,7 @@ void HuamiFetcher::triggerNextOperation()
     }
 
     if (m_currentOperation) {
-        m_currentOperation->start(0);
+        m_currentOperation->start();
         setBusy(true);
 
         return;

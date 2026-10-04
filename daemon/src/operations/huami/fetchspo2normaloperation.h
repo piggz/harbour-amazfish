@@ -9,7 +9,7 @@ class FetchSpo2NormalOperation : public AbstractFetchOperation
 public:
     FetchSpo2NormalOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
 
-    void start(QBLEService *service) override;
+    void start() override;
 
 private:
     struct Spo2Record {

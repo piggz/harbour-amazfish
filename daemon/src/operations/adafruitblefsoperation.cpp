@@ -3,7 +3,7 @@
 #include "adafruitblefsworker.h"
 #include <QMetaType>
 
-AdafruitBleFsOperation::AdafruitBleFsOperation(QBLEService *service, const AbstractFirmwareInfo *info, AbstractDevice *device) : info{info}, m_device(device)
+AdafruitBleFsOperation::AdafruitBleFsOperation(QBLEService *service, const AbstractFirmwareInfo *info, AbstractDevice *device) : info{info}, m_service(service), m_device(device)
 {
 
 }
@@ -13,11 +13,9 @@ AdafruitBleFsOperation::~AdafruitBleFsOperation()
 
 }
 
-void AdafruitBleFsOperation::start(QBLEService *service)
+void AdafruitBleFsOperation::start()
 {
-    m_service = service;
-
-    AdafruitBleFsService *s = dynamic_cast<AdafruitBleFsService*>(service);
+    AdafruitBleFsService *s = dynamic_cast<AdafruitBleFsService*>(m_service);
     if (!s) {
         return;
     }

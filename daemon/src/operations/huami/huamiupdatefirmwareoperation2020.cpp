@@ -99,13 +99,13 @@ bool HuamiUpdateFirmwareOperation2020::handleMetaData(const QByteArray &value)
     return true;
 }
 
-void HuamiUpdateFirmwareOperation2020::start(QBLEService *service)
+void HuamiUpdateFirmwareOperation2020::start()
 {
     if (m_info->type() != AbstractFirmwareInfo::Invalid) {
         m_service->enableNotification(BipFirmwareService::UUID_CHARACTERISTIC_FIRMWARE);
         requestParameters();
     } else {
-        service->message(QObject::tr("File does not seem to be supported"));
+        m_service->message(QObject::tr("File does not seem to be supported"));
     }
 }
 

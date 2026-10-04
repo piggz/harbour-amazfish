@@ -9,7 +9,7 @@ class FetchStressManualOperation : public AbstractFetchOperation
 public:
     FetchStressManualOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
 
-    void start(QBLEService *service) override;
+    void start() override;
 
 private:
     struct StressRecord {

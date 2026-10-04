@@ -9,7 +9,7 @@ class FetchTemperatureOperation : public AbstractFetchOperation
 public:
     FetchTemperatureOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
 
-    void start(QBLEService *service) override;
+    void start() override;
 
 private:
     struct TemperatureRecord {

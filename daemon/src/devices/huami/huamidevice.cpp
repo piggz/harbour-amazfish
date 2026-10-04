@@ -345,7 +345,7 @@ void HuamiDevice::startDownload()
         UpdateFirmwareOperation *operation = dynamic_cast<UpdateFirmwareOperation*>(fw->currentOperation());
         if (operation) {
             emit message(tr("Sending %1...").arg(operation->version()));
-            operation->start(fw);
+            operation->start();
         } else {
             emit message(tr("No file selected"));
         }

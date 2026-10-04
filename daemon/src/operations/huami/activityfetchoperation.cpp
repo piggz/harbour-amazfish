@@ -13,7 +13,7 @@ ActivityFetchOperation::ActivityFetchOperation(HuamiFetcher *fetcher, KDbConnect
     setLastSyncKey("device/lastactivitysyncmillis");
 }
 
-void ActivityFetchOperation::start(QBLEService *service)
+void ActivityFetchOperation::start()
 {
     qDebug() << Q_FUNC_INFO;
     setStartDate(lastActivitySync());

@@ -87,8 +87,6 @@ void AbstractDevice::parseServices()
                     addService(uuid, new QBLEService(uuid, path, this));
                 }
             }
-
-
         }
     }
 }

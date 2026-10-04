@@ -8,7 +8,7 @@ FetchTemperatureOperation::FetchTemperatureOperation(HuamiFetcher *fetcher, KDbC
     setLastSyncKey("device/lastTemperatureTimeMillis");
 }
 
-void FetchTemperatureOperation::start(QBLEService *service)
+void FetchTemperatureOperation::start()
 {
     setStartDate(lastActivitySync());
 
