@@ -23,8 +23,8 @@ public:
 
 protected:
     short m_endpoint = 0x0000;
-    bool m_encrypted = false;
     ZeppOSDevice *m_device = nullptr;
+    bool m_encrypted = false;
 
     void write(const QByteArray &data);
 };
