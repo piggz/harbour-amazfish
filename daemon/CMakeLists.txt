@@ -48,6 +48,7 @@ set(SOURCES
 ./src/devices/huami/zeppos/zepposactivitydetailparser.cpp
 ./src/devices/huami/zeppos/zeppostimeservice.cpp
 ./src/devices/huami/zeppos/zepposuserinfoservice.cpp
+./src/devices/huami/zeppos/zepposconfigservice.cpp
 ./src/devices/huami/zeppos/picoproto.cpp
 ./src/devices/huami/zeppos/zepposfiletransferservice.cpp
 ./src/devices/huami/zeppos/filetransfer/zepposfiletransferimpl.cpp
@@ -173,6 +174,7 @@ set(HEADERS
 ./src/devices/huami/zeppos/zepposactivitydetailparser.h
 ./src/devices/huami/zeppos/zeppostimeservice.h
 ./src/devices/huami/zeppos/zepposuserinfoservice.h
+./src/devices/huami/zeppos/zepposconfigservice.h
 ./src/devices/huami/zeppos/zepposfiletransferservice.h
 ./src/devices/huami/zeppos/filetransfer/zepposfiletransferimpl.h
 ./src/devices/huami/zeppos/filetransfer/zepposfiletransferv3.h
