@@ -59,9 +59,12 @@
         <file>./qml/components/GraphData.qml</file>
         <file>./qml/components/PAITile.qml</file>
         <file>./qml/components/PercentCircle.qml</file>
+        <file>./qml/components/RouteShape.qml</file>
+        <file>./qml/components/StatTile.qml</file>
         <file>./qml/components/StepsTile.qml</file>
         <file>./qml/components/SummaryBarChart.qml</file>
         <file>./qml/components/Tile.qml</file>
+        <file>./qml/components/TrackChart.qml</file>
         <file>./qml/components/Translation.js</file>
         <file>./qml/components/TruncationModes.qml</file>
     </qresource>
