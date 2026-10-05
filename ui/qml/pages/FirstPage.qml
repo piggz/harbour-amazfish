@@ -4,6 +4,7 @@ import uk.co.piggz.amazfish 1.0
 import QtQuick.Layouts 1.1
 import "../components/"
 import "../components/platform"
+import "../components/ChartTools.js" as ChartTools
 
 PagePL {
     id: page
@@ -66,8 +67,9 @@ PagePL {
 
     GridLayout {
         id: pageGrid
-        width: parent.width
-        anchors.margins: styler.themePaddingSmall
+        // Tiles have their own gap, so the outer margin adds up to the page margin.
+        x: styler.themeHorizontalPageMargin - styler.themePaddingSmall
+        width: parent.width - 2 * x
 
         columns: 3
         columnSpacing: 0
@@ -81,78 +83,133 @@ PagePL {
 
         //========== Busy Notification Row ==========
 
-        Row {
+        Item {
             id: rowUpdateOperation
-            Layout.preferredHeight: styler.themeIconSizeMedium
+            Layout.preferredHeight: styler.themeItemSizeSmall
             Layout.fillWidth: true
             Layout.columnSpan: 3
-            spacing: styler.themePaddingSmall
             visible: DaemonInterfaceInstance.operationRunning
 
-            LabelPL {
-                id: lblLastMessage
-                text: _lastMessage
-                color: styler.themeSecondaryHighlightColor
-                font.pixelSize: styler.themeFontSizeMedium
-                truncMode: truncModes.fade
-                width: pageGrid.width - styler.themeIconSizeMedium - styler.themeIconSizeLarge - (3 * styler.themePaddingSmall)
-            }
+            GlassPanel {
+                round: true
+                anchors.fill: parent
+                anchors.margins: styler.themePaddingSmall
 
-            LabelPL {
-                id: lblProgress
-                x: 10
-                anchors.leftMargin: 5
-                horizontalAlignment: Text.AlignLeft
-                color: styler.themeSecondaryHighlightColor
-                font.pixelSize: styler.themeFontSizeMedium
-                width: styler.themeIconSizeLarge
-                text: _percentText
-            }
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: styler.themePaddingLarge
+                    anchors.rightMargin: styler.themePaddingMedium
+                    spacing: styler.themePaddingMedium
 
-            BusyIndicatorSmallPL {
-                y: 2
-                running: DaemonInterfaceInstance.operationRunning
-                Layout.alignment: Qt.AlignRight
-                anchors.rightMargin: 2
-                width: styler.themeIconSizeMedium
+                    LabelPL {
+                        id: lblLastMessage
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: _lastMessage
+                        color: styler.themeSecondaryColor
+                        font.pixelSize: styler.themeFontSizeSmall
+                        truncMode: truncModes.fade
+                        width: parent.width - lblProgress.width - busyIndicator.width - 2 * parent.spacing
+                    }
+
+                    LabelPL {
+                        id: lblProgress
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: styler.themePrimaryColor
+                        font.pixelSize: styler.themeFontSizeSmall
+                        font.bold: true
+                        text: _percentText
+                    }
+
+                    BusyIndicatorSmallPL {
+                        id: busyIndicator
+                        anchors.verticalCenter: parent.verticalCenter
+                        running: DaemonInterfaceInstance.operationRunning
+                    }
+                }
             }
         }
 
         //========== Device Row ==========
 
-        Row {
-            Layout.preferredHeight: styler.themeIconSizeMedium
+        Item {
+            Layout.preferredHeight: deviceColumn.height + 2 * styler.themePaddingLarge
             Layout.fillWidth: true
             Layout.columnSpan: 3
 
-            LabelPL {
-                id: pairedNameLabel
-                text: AmazfishConfig.pairedName
-                color: styler.themeSecondaryHighlightColor
-                font.pixelSize: styler.themeFontSizeLarge
-                truncMode: truncModes.fade
-                width: parent.width - (2 * styler.themeIconSizeMedium + 2 * styler.themePaddingSmall)
-            }
+            GlassPanel {
+                anchors.fill: parent
+                anchors.margins: styler.themePaddingSmall
 
-            IconPL {
-                iconName: styler.iconBluetooth
-                iconHeight: styler.themeIconSizeMedium
-                visible: _connected || _authenticated || _connecting
-                BusyIndicatorSmallPL {
-                    visible: _connecting
-                    running: visible
-                    anchors.centerIn: parent
+                Column {
+                    id: deviceColumn
+                    anchors.left: parent.left
+                    anchors.right: deviceIcons.left
+                    anchors.leftMargin: styler.themePaddingLarge
+                    anchors.rightMargin: styler.themePaddingMedium
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    LabelPL {
+                        id: pairedNameLabel
+                        width: parent.width
+                        text: AmazfishConfig.pairedName
+                        color: styler.themePrimaryColor
+                        font.pixelSize: styler.themeFontSizeLarge
+                        truncMode: truncModes.fade
+                    }
+                    LabelPL {
+                        width: parent.width
+                        text: _authenticated ? qsTr("Connected")
+                                             : (_connecting ? qsTr("Connecting...") : qsTr("Not connected"))
+                        color: styler.themeSecondaryColor
+                        font.pixelSize: styler.themeFontSizeSmall
+                        truncMode: truncModes.fade
+                    }
                 }
-            }
 
-            IconPL {
-                iconName: styler.iconWatch
-                iconHeight: styler.themeIconSizeMedium
-                visible: _authenticated || _connected
-                BusyIndicatorSmallPL {
-                    visible: _connected
-                    running: visible
-                    anchors.centerIn: parent
+                Row {
+                    id: deviceIcons
+                    anchors.right: parent.right
+                    anchors.rightMargin: styler.themePaddingMedium
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: styler.themePaddingSmall
+
+                    Rectangle {
+                        width: styler.themeIconSizeMedium
+                        height: width
+                        radius: width / 2
+                        color: styler.surfaceChipColor
+                        visible: _connected || _authenticated || _connecting
+
+                        IconPL {
+                            anchors.centerIn: parent
+                            iconName: styler.iconBluetooth
+                            iconHeight: styler.themeIconSizeSmall
+                        }
+                        BusyIndicatorSmallPL {
+                            visible: _connecting
+                            running: visible
+                            anchors.centerIn: parent
+                        }
+                    }
+
+                    Rectangle {
+                        width: styler.themeIconSizeMedium
+                        height: width
+                        radius: width / 2
+                        color: styler.surfaceChipColor
+                        visible: _authenticated || _connected
+
+                        IconPL {
+                            anchors.centerIn: parent
+                            iconName: styler.iconWatch
+                            iconHeight: styler.themeIconSizeSmall
+                        }
+                        BusyIndicatorSmallPL {
+                            visible: _connected && !_authenticated
+                            running: visible
+                            anchors.centerIn: parent
+                        }
+                    }
                 }
             }
         }
@@ -180,14 +237,7 @@ PagePL {
         Tile {
             text: qsTr("Sleep")
             visible: supportsDataRefresh(Amazfish.TYPE_SLEEP)
-
-
-            contentItem: Image {
-                id: imgHeartrate
-                source: "../page-icons/icon-page-sleep.png"
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
-            }
+            iconSource: "../page-icons/icon-page-sleep.png"
 
             onClicked: {
                 app.pages.push(Qt.resolvedUrl("SleepPage.qml"))
@@ -197,24 +247,12 @@ PagePL {
         Tile {
             text: qsTr("Heartrate")
             visible: supportsDataRefresh(Amazfish.TYPE_HEART_RATE)
-
-            contentItem: Image {
-                source: "../page-icons/icon-page-heartrate.png"
-                anchors.fill: parent
-                anchors.topMargin: styler.themeFontSizeLarge
-                fillMode: Image.PreserveAspectFit
-                Text {
-                    text: qsTr("%1 bpm").arg(_InfoHeartrate)
-                    anchors.top: parent.top
-                    anchors.topMargin: -styler.themeFontSizeLarge
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.pixelSize: styler.themeFontSizeLarge
-                    color: styler.blockBg
-                }
-            }
+            iconSource: "../page-icons/icon-page-heartrate.png"
+            value: qsTr("%1 bpm").arg(_InfoHeartrate)
+            iconColor: styler.chartHeartRateColor
             actionItem: IconButtonPL {
                 iconName: styler.iconRefresh
-                iconHeight: styler.themeIconSizeMedium
+                iconHeight: styler.themeIconSizeSmall
                 iconWidth: iconHeight
 
                 anchors.fill: parent
@@ -233,12 +271,7 @@ PagePL {
         Tile {
             text: qsTr("Sports")
             visible: supportsFeatureRefresh(Amazfish.FEATURE_ACTIVITY)
-
-            contentItem: Image {
-                source: "../page-icons/icon-page-sport.png"
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
-            }
+            iconSource: "../page-icons/icon-page-sport.png"
 
             onClicked: {
                 app.pages.push(Qt.resolvedUrl("SportsSummaryPage.qml"))
@@ -259,12 +292,7 @@ PagePL {
         Tile {
             text: qsTr("SpO₂")
             visible: supportsDataRefresh(Amazfish.TYPE_SPO2)
-
-            contentItem: Image {
-                source: "../page-icons/icon-page-spo2.png"
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
-            }
+            iconSource: "../page-icons/icon-page-spo2.png"
 
             onClicked: {
                 app.pages.push(Qt.resolvedUrl("Spo2DataPage.qml"))
@@ -274,12 +302,7 @@ PagePL {
         Tile {
             text: qsTr("Stress")
             visible: supportsDataRefresh(Amazfish.TYPE_STRESS)
-
-            contentItem: Image {
-                source: "../page-icons/icon-page-stress.png"
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
-            }
+            iconSource: "../page-icons/icon-page-stress.png"
 
             onClicked: {
                 app.pages.push(Qt.resolvedUrl("StressDataPage.qml"))
@@ -288,12 +311,7 @@ PagePL {
 
         Tile {
             text: qsTr("Data")
-
-            contentItem: Image {
-                source: "../page-icons/icon-page-data.png"
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
-            }
+            iconSource: "../page-icons/icon-page-data.png"
 
             onClicked: {
                 app.pages.push(Qt.resolvedUrl("AnalysisPage.qml"))
@@ -302,21 +320,8 @@ PagePL {
 
         Tile {
             text: qsTr("Battery")
-
-            contentItem: Image {
-                source: "../page-icons/icon-page-battery.png"
-                anchors.fill: parent
-                anchors.topMargin: styler.themeFontSizeLarge
-                fillMode: Image.PreserveAspectFit
-                Text {
-                    text: qsTr("%1%").arg(_InfoBatteryPercent)
-                    anchors.top: parent.top
-                    anchors.topMargin: -styler.themeFontSizeLarge
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.pixelSize: styler.themeFontSizeLarge
-                    color: styler.blockBg
-                }
-            }
+            iconSource: "../page-icons/icon-page-battery.png"
+            value: qsTr("%1%").arg(_InfoBatteryPercent)
 
             onClicked: {
                 app.pages.push(Qt.resolvedUrl("BatteryPage.qml"))
@@ -326,12 +331,7 @@ PagePL {
         Tile {
             text: qsTr("Install File")
             visible: _authenticated && supportsFeatureRefresh(Amazfish.FEATURE_FILE_INSTALL)
-
-            contentItem: Image {
-                source: "../page-icons/icon-page-install.png"
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
-            }
+            iconSource: "../page-icons/icon-page-install.png"
 
             onClicked: {
                 app.pages.push(Qt.resolvedUrl("BipFirmwarePage.qml"))

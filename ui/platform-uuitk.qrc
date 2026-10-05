@@ -52,11 +52,13 @@
         <file>./qml/components/ChartTools.js</file>
         <file>./qml/components/DateNavigation.qml</file>
         <file>./qml/components/DayChart.qml</file>
+        <file>./qml/components/DayRing.qml</file>
         <file>./qml/components/DetailRow.qml</file>
         <file>./qml/components/DeviceListModel.qml</file>
         <file>./qml/components/DownloadDataMenuItem.qml</file>
         <file>./qml/components/DraggableItem.qml</file>
         <file>./qml/components/DraggableItemDropArea.qml</file>
+        <file>./qml/components/GaugeArc.qml</file>
         <file>./qml/components/GlassPanel.qml</file>
         <file>./qml/components/Graph.qml</file>
         <file>./qml/components/GraphData.qml</file>
