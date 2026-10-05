@@ -3,7 +3,10 @@
 #include "huami/huamifetcher.h"
 #include "mibandservice.h"
 
-FetchPaiOperation::FetchPaiOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
+FetchPaiOperation::FetchPaiOperation(HuamiFetcher* fetcher, KDbConnection* conn, bool isZeppOs, int round)
+    : AbstractFetchOperation(fetcher, isZeppOs)
+    , m_conn(conn)
+    , m_round(round)
 {
     setLastSyncKey("device/lastPaiTimeMillis");
 }
@@ -54,6 +57,7 @@ bool FetchPaiOperation::processBufferedData()
 
         PaiRecord pai;
         pai.day = timestamp.date();
+        pai.time = timestamp;
         pai.low = TypeConversion::toFloat(m_buffer, offset);
         pai.moderate = TypeConversion::toFloat(m_buffer, offset);
         pai.high = TypeConversion::toFloat(m_buffer, offset);
@@ -73,7 +77,14 @@ bool FetchPaiOperation::processBufferedData()
         }
     }
 
-    return saveRecords(recs);
+    bool saved = saveRecords(recs);
+
+    // Classic Huami watches (Amazfit GTS) send one day per fetch, so fetch again until today is reached
+    if (saved && !isZeppOs() && !recs.isEmpty() && m_round < 60
+        && recs.last().time.addSecs(60) < QDateTime::currentDateTime()) {
+        m_fetcher->jumpQueue(new FetchPaiOperation(m_fetcher, m_conn, false, m_round + 1));
+    }
+    return saved;
 }
 
 bool FetchPaiOperation::saveRecords(QVector<PaiRecord> recs)
@@ -90,6 +101,13 @@ bool FetchPaiOperation::saveRecords(QVector<PaiRecord> recs)
         int count;
 
         qDebug() << "Processing record:" << r.day << r.total_today << r.total;
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+        QDateTime dayStart(r.day);
+#else
+        QDateTime dayStart = r.day.startOfDay();
+#endif
+        // Zepp OS fetches the last day again to update it; classic watches continue after the record
+        lastTime = isZeppOs() ? dayStart : r.time.addSecs(60);
         if (m_conn && m_conn->isDatabaseUsed()) {
             KDbEscapedString sql = KDbEscapedString("SELECT id FROM pai WHERE pai_date='%1'").arg(r.day.toString(Qt::ISODate));
             tristate success = m_conn->querySingleNumber(sql, &count);
@@ -120,11 +138,6 @@ bool FetchPaiOperation::saveRecords(QVector<PaiRecord> recs)
                 paiValues << r.total_today;
                 paiValues << r.total;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-                lastTime = QDateTime(r.day);
-#else
-                lastTime = r.day.startOfDay();
-#endif
                 result = m_conn->insertRecord(&paiFields, paiValues);
                 if (result->lastResult().isError()) {
                     qDebug() << Q_FUNC_INFO << "Error inserting meta record";
@@ -160,7 +173,9 @@ bool FetchPaiOperation::saveRecords(QVector<PaiRecord> recs)
         }
     }
     tg.commit();
-    saveLastActivitySync(lastTime.toMSecsSinceEpoch());
+    if (lastTime.isValid()) {
+        saveLastActivitySync(lastTime.toMSecsSinceEpoch());
+    }
     return success;
 }
 

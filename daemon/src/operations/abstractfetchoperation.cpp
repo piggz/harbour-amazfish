@@ -190,6 +190,11 @@ void AbstractFetchOperation::setAbort(bool abort)
     m_abort = abort;
 }
 
+bool AbstractFetchOperation::isZeppOs() const
+{
+    return m_isZeppOs;
+}
+
 bool AbstractFetchOperation::success() const
 {
     return !m_error;
