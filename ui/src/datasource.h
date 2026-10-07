@@ -34,17 +34,24 @@ public:
 
     Q_INVOKABLE QVariant data(const DataSource::Type type, const QDate  &day);
 
-private:
-    KDbConnection *m_conn = nullptr;
-    
     struct SleepSession {
         QDateTime sleepStart;
         QDateTime sleepEnd;
         long lightSleepDuration;
         long deepSleepDuration;
+        long remSleepDuration;
+        long awakeDuration;
     };
-    QList<SleepSession> calculateSleep(const QDate &day);
-    bool isSleep(int kind);
+
+protected:
+     virtual QList<SleepSession> calculateSleep(const QDate &day);
+    KDbConnection *m_conn = nullptr;
+
+private:
+    
+
+
+
 };
 
 #endif // DATASOURCE_H
