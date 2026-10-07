@@ -2,6 +2,7 @@ import "../components/"
 import "../components/platform"
 import "../tools/JSTools.js" as JSTools
 import "../components/Translation.js" as T
+import "../components/ChartTools.js" as ChartTools
 import MapboxMap 1.0
 import QtPositioning 5.3
 import QtQuick 2.0
@@ -9,8 +10,6 @@ import QtQuick.Layouts 1.1
 import uk.co.piggz.amazfish 1.0
 
 PagePL {
-    // array that holds the points
-
     id: page
 
     property int activityId
@@ -18,6 +17,7 @@ PagePL {
     property string duration: ""
     property var location: ""
     property string starttime: ""
+    property string times: ""
     property string kindstring: ""
     property string activitytitle: ""
     property string tcx: ""
@@ -25,15 +25,35 @@ PagePL {
     property bool bMapMaximized: false
     property alias loader: trackLoader
 
+    // One of: loading, ok, nogps (no positions), nobase (no start position), nofile, invalid.
+    property string trackStatus: "loading"
+    property int gpsPointCount: 0
+
+    // values taken from the track once it has been parsed
+    property real trackDistance: 0
+    property string trackPace: ""
+    property real trackHeartrate: 0
+    property bool paceRelevant: true
+    property var hrPoints: []
+    property var pacePoints: []
+    property var rawPacePoints: []
+
+    // Distance measured by the watch, and the latitude estimated from it for tracks without start position.
+    property real watchDistance: 0
+    property real estimatedLatitude: -1
+    property var elevationPoints: []
+
+    title: activitytitle
+
     function addActivityToMap() {
+        var map = mapLoader.item;
+        if (!map) {
+            return;
+        }
         var trackPointsTemporary = [];
-        //Go through array with track data points
         for (var i = 0; i < JSTools.trackPointsAt.length; i++) {
-            //add this track point to temporary array. This will be used for drawing the track line
             trackPointsTemporary.push(JSTools.trackPointsAt[i]);
         }
-        //This is the actialy activity route
-        //vTrackLinePoints = decode(activity.map.polyline);
         map.addSourceLine("linesrc", trackPointsTemporary, "line");
         map.addLayer("line", {
             "type": "line",
@@ -41,9 +61,37 @@ PagePL {
         });
         map.setLayoutProperty("line", "line-join", "round");
         map.setLayoutProperty("line", "line-cap", "round");
-        map.setPaintProperty("line", "line-color", "red");
-        map.setPaintProperty("line", "line-width", 2);
-        map.fitView(trackPointsTemporary);
+        map.setPaintProperty("line", "line-color", "" + styler.chartRouteColor);
+        map.setPaintProperty("line", "line-width", 4);
+
+        // start and finish markers
+        map.addSourcePoint("startsrc", trackPointsTemporary[0], "start");
+        map.addLayer("start", { "type": "circle", "source": "startsrc" });
+        map.setPaintProperty("start", "circle-radius", 6);
+        map.setPaintProperty("start", "circle-color", "" + styler.chartRouteStartColor);
+        map.setPaintProperty("start", "circle-stroke-width", 2);
+        map.setPaintProperty("start", "circle-stroke-color", "" + styler.themePrimaryColor);
+
+        map.addSourcePoint("endsrc", trackPointsTemporary[trackPointsTemporary.length - 1], "end");
+        map.addLayer("end", { "type": "circle", "source": "endsrc" });
+        map.setPaintProperty("end", "circle-radius", 6);
+        map.setPaintProperty("end", "circle-color", "" + styler.chartRouteFinishColor);
+        map.setPaintProperty("end", "circle-stroke-width", 2);
+        map.setPaintProperty("end", "circle-stroke-color", "" + styler.themePrimaryColor);
+
+        fitMap();
+    }
+
+    function fitMap() {
+        var map = mapLoader.item;
+        if (!map || map.width <= 0 || map.height <= 0 || JSTools.trackPointsAt.length === 0) {
+            return;
+        }
+        var pts = [];
+        for (var i = 0; i < JSTools.trackPointsAt.length; i++) {
+            pts.push(JSTools.trackPointsAt[i]);
+        }
+        map.fitView(pts);
     }
 
     function decode(encoded) {
@@ -94,134 +142,450 @@ PagePL {
         return positionstring;
     }
 
-
-
-    function update() {
-        loader.loadString(tcx);
+    function hasBaseLocation() {
+        return location && (Math.abs(location[0]) > 1e-9 || Math.abs(location[1]) > 1e-9);
     }
 
-    title: activitytitle
+    // GPS points are deltas to the start position of the summary.
+    // Some watches (Amazfit GTS) send 0/0 there, so the route lies around 0N 0E.
+    function trackIsRelativeOnly() {
+        if (hasBaseLocation() || JSTools.trackPointsAt.length === 0) {
+            return false;
+        }
+        for (var i = 0; i < JSTools.trackPointsAt.length; i++) {
+            var c = JSTools.trackPointsAt[i];
+            if (Math.abs(c.latitude) > 1 || Math.abs(c.longitude) > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    Item {
-        id: pageItem
+    // length of the track in metres when it is placed at latitude latDeg
+    function pathLength(latDeg) {
+        var pts = JSTools.trackPointsAt;
+        var k = Math.cos(latDeg * Math.PI / 180);
+        var sum = 0;
+        for (var i = 1; i < pts.length; i++) {
+            var dy = (pts[i].latitude - pts[i - 1].latitude) * 111320;
+            var dx = (pts[i].longitude - pts[i - 1].longitude) * 111320 * k;
+            sum += Math.sqrt(dx * dx + dy * dy);
+        }
+        return sum;
+    }
 
-        width: parent.width
-        anchors.top: parent.top
-        anchors.margins: styler.themePaddingMedium
-        height: app.height
+    // East-west steps shrink with the cosine of the latitude, so the distance of the watch gives the latitude.
+    function estimateLatitude() {
+        if (watchDistance <= 0 || JSTools.trackPointsAt.length < 2) {
+            return -1;
+        }
+        var lo = 0, hi = 85;
+        if (pathLength(lo) <= watchDistance || pathLength(hi) >= watchDistance) {
+            return -1;   // no east-west movement to measure, or distance does not fit
+        }
+        for (var n = 0; n < 40; n++) {
+            var mid = (lo + hi) / 2;
+            if (pathLength(mid) > watchDistance) lo = mid; else hi = mid;
+        }
+        return (lo + hi) / 2;
+    }
 
-        GridLayout {
-            id: grid
+    // Recompute distance, pace and shape with the latitude estimated from the watch distance.
+    function correctRelativeTrack() {
+        if (trackStatus !== "nobase" || watchDistance <= 0) {
+            return;
+        }
+        var lat = estimateLatitude();
+        if (lat < 0) {
+            return;
+        }
+        estimatedLatitude = lat;
+        routeShape.referenceLatitude = lat;
 
-            columns: 2
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: styler.themePaddingLarge
-            Layout.preferredHeight: page.height * 0.66
+        var factor = pathLength(0) / pathLength(lat);   // > 1: how much too long it was
+        trackDistance = pathLength(lat);
+        var fixed = [];
+        for (var i = 0; i < rawPacePoints.length; i++) {
+            var p = rawPacePoints[i];
+            fixed.push({ x: p.x, y: paceRelevant ? p.y * factor : p.y / factor });
+        }
+        pacePoints = fixed;
+        if (trackLoader.duration > 0 && trackDistance > 0) {
+            trackPace = formatPace((trackLoader.duration / 60) / (trackDistance / 1000));
+        }
+        console.log("SportPage: estimated latitude", lat.toFixed(2), "distance", Math.round(trackDistance), "m");
+    }
 
-            IconPL {
-                id: workoutImage
+    // Summary values arrive raw (seconds, s/m, m/s, long floats); format them for reading.
+    function formatNumber(v) {
+        var a = Math.abs(v);
+        var decimals = a >= 100 ? 0 : (a >= 10 ? 1 : 2);
+        var text = Number(v).toLocaleString(Qt.locale(), "f", decimals);
+        if (decimals > 0) {
+            // drop trailing zeros after the decimal separator ("5,50" -> "5,5", "7,00" -> "7")
+            var sep = Qt.locale().decimalPoint;
+            text = text.replace(new RegExp("\\" + sep + "?0+$"), "");
+        }
+        return text;
+    }
 
-                Layout.rowSpan: 3
-                Layout.preferredWidth: styler.themeItemSizeLarge
-                Layout.preferredHeight: styler.themeItemSizeLarge
-                Layout.alignment: Qt.AlignLeft
-                iconSource: styler.activityIconPrefix + "icon-m-" + getKindString(kindstring) + styler.customIconSuffix
-                MouseArea {
-                    anchors.fill: parent;
-                    onClicked: {
-                        var activityPage = app.pages.push(Qt.resolvedUrl("SportsActivityKindPage.qml"), {
-                            "kindstring": kindstring
-                        })
-                        activityPage.onAccepted.connect(function() {
-                            console.log("Accepted " + activityPage.kindstring + " " + activityId)
-                            kindstring = activityPage.kindstring;
-                            SportsModel.setKind(activityId, activityPage.kindstring );
-                            SportsModel.update();
-                        })
+    function formatSeconds(sec) {
+        sec = Math.round(sec);
+        var h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+        var mm = (h > 0 && m < 10 ? "0" : "") + m;
+        return (h > 0 ? h + ":" + mm : mm) + ":" + (s < 10 ? "0" : "") + s;
+    }
+
+    // units like "min/km" must not break after the slash (U+2060 WORD JOINER)
+    function keepUnit(text) {
+        return text.replace(/\//g, "/\u2060");
+    }
+
+    function metaValue(value, unit) {
+        return keepUnit(rawMetaValue(value, unit));
+    }
+
+    function rawMetaValue(value, unit) {
+        var v = parseFloat(value);
+        if (isNaN(v) || !/^-?[0-9.eE+-]+$/.test(String(value).trim())) {
+            return value + (unit ? " " + T.translateSportUnit(unit) : "");   // text, e.g. swim style
+        }
+        if (unit === "seconds") {
+            return formatSeconds(v);
+        }
+        if (unit === "seconds_km" && v > 0) {
+            return formatSeconds(v) + " " + qsTr("min/km");
+        }
+        if (unit === "seconds_m" && v > 0) {
+            return formatSeconds(v * 1000) + " " + qsTr("min/km");
+        }
+        if (unit === "meters_second") {
+            return formatNumber(v * 3.6) + " " + qsTr("km/h");
+        }
+        return formatNumber(v) + (unit ? " " + T.translateSportUnit(unit) : "");
+    }
+
+    function formatPace(minPerKm) {
+        var total = Math.round(minPerKm * 60);
+        var m = Math.floor(total / 60);
+        var s = total % 60;
+        return m + ":" + (s < 10 ? "0" : "") + s;
+    }
+
+    function update() {
+        // SportsModel.gpx() returns the stored file name itself when the file cannot be opened
+        var content = tcx ? tcx.replace(/^\s+/, "") : "";
+        if (content.charAt(0) !== "<") {
+            console.log("SportPage: track file could not be read:", tcx);
+            trackStatus = "nofile";
+            return;
+        }
+        trackStatus = "loading";
+        loader.loadString(tcx);
+        if (trackStatus === "loading") {
+            // TrackLoader returns without emitting trackChanged when the XML is not understood
+            console.log("SportPage: track file is neither GPX 1.1 nor TCX v2");
+            trackStatus = "invalid";
+        }
+    }
+
+    // reduce a series to at most maxPoints by averaging neighbouring samples
+    function downsample(list, maxPoints) {
+        if (list.length <= maxPoints) {
+            return list;
+        }
+        var out = [];
+        var step = list.length / maxPoints;
+        for (var b = 0; b < maxPoints; b++) {
+            var from = Math.floor(b * step), to = Math.floor((b + 1) * step);
+            var sx = 0, sy = 0, n = 0;
+            for (var i = from; i < to; i++) {
+                sx += list[i].x; sy += list[i].y; n++;
+            }
+            if (n) {
+                out.push({ x: sx / n, y: sy / n });
+            }
+        }
+        return out;
+    }
+
+    Column {
+        id: column
+        x: styler.themeHorizontalPageMargin
+        width: parent.width - 2 * x
+        spacing: styler.themePaddingLarge
+
+        // ---------- header ----------
+        ChartCard {
+            onClicked: {
+                var activityPage = app.pages.push(Qt.resolvedUrl("SportsActivityKindPage.qml"), {
+                    "kindstring": kindstring
+                })
+                activityPage.onAccepted.connect(function() {
+                    console.log("Accepted " + activityPage.kindstring + " " + activityId)
+                    kindstring = activityPage.kindstring;
+                    SportsModel.setKind(activityId, activityPage.kindstring );
+                    SportsModel.update();
+                })
+            }
+
+            Row {
+                width: parent.width
+                spacing: styler.themePaddingLarge
+
+                Rectangle {
+                    id: kindCircle
+                    width: styler.themeItemSizeLarge * 0.6
+                    height: width
+                    radius: width / 2
+                    color: styler.surfaceChipColor
+
+                    IconPL {
+                        anchors.centerIn: parent
+                        width: parent.width * 0.62
+                        height: width
+                        iconSource: styler.activityIconPrefix + "icon-m-" + getKindString(kindstring)
+                                    + styler.customIconSuffix
+                    }
+                }
+
+                Column {
+                    anchors.verticalCenter: kindCircle.verticalCenter
+                    width: parent.width - kindCircle.width - parent.spacing
+
+                    LabelPL {
+                        width: parent.width
+                        text: T.translateSportKind(kindstring)
+                        color: styler.themeHighlightColor
+                        font.pixelSize: styler.themeFontSizeLarge
+                        wrapMode: Text.WordWrap
+                        maximumLineCount: 2
+                        elide: Text.ElideRight
+                    }
+                    LabelPL {
+                        width: parent.width
+                        text: times !== "" ? date + " - " + times : date + " - " + starttime
+                        color: styler.themeSecondaryHighlightColor
+                        font.pixelSize: styler.themeFontSizeSmall
+                        wrapMode: Text.WordWrap
+                        maximumLineCount: 2
+                        elide: Text.ElideRight
+                    }
+                }
+            }
+
+            // key figures
+            Grid {
+                id: statGrid
+                width: parent.width
+                columns: 2
+                columnSpacing: styler.themePaddingLarge
+                rowSpacing: styler.themePaddingMedium
+                readonly property real cellWidth: (width - columnSpacing) / 2
+                // all four values shrink to the size the widest one needs
+                readonly property real sharedScale: Math.min(statDuration.fitScale, statDistance.fitScale,
+                                                             statPace.visible ? statPace.fitScale : 1,
+                                                             statHeartrate.fitScale)
+
+                StatTile {
+                    id: statDuration
+                    sharedScale: statGrid.sharedScale
+                    width: statGrid.cellWidth
+                    value: duration
+                    label: qsTr("Duration")
+                }
+                StatTile {
+                    id: statDistance
+                    sharedScale: statGrid.sharedScale
+                    width: statGrid.cellWidth
+                    value: trackDistance > 0 ? (trackDistance / 1000).toLocaleString(Qt.locale(), "f", 2) : "-"
+                    unit: trackDistance > 0 ? "km" : ""
+                    label: qsTr("Distance")
+                }
+                StatTile {
+                    id: statPace
+                    sharedScale: statGrid.sharedScale
+                    width: statGrid.cellWidth
+                    visible: paceRelevant
+                    value: trackPace !== "" ? trackPace : "-"
+                    unit: trackPace !== "" ? "/km" : ""
+                    label: qsTr("Average Pace")
+                }
+                StatTile {
+                    id: statHeartrate
+                    sharedScale: statGrid.sharedScale
+                    width: statGrid.cellWidth
+                    value: trackHeartrate > 0 ? Math.round(trackHeartrate) : "-"
+                    unit: trackHeartrate > 0 ? qsTr("BPM") : ""
+                    label: qsTr("Average Heart Rate")
+                }
+            }
+        }
+
+        // ---------- map ----------
+        ChartCard {
+            id: mapCard
+            title: qsTr("Route")
+
+            Item {
+                width: parent.width
+                height: bMapMaximized ? page.height * 0.8 : width * 0.75
+                visible: trackStatus === "ok"
+                clip: true
+
+                Behavior on height { NumberAnimation { duration: 150 } }
+
+                Loader {
+                    id: mapLoader
+                    anchors.fill: parent
+                    active: trackStatus === "ok"
+                    sourceComponent: mapComponent
+                    onLoaded: addActivityToMap()
+                }
+
+                Item {
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    anchors.margins: styler.themePaddingMedium
+                    width: styler.themeIconSizeMedium
+                    height: width
+                    z: 200
+
+                    IconPL {
+                        anchors.fill: parent
+                        source: "../pics/map_btn_center.png"
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: fitMap()
+                    }
+                }
+
+                Item {
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.margins: styler.themePaddingMedium
+                    width: styler.themeIconSizeMedium
+                    height: width
+                    z: 200
+
+                    IconPL {
+                        anchors.fill: parent
+                        source: bMapMaximized ? "../pics/map_btn_min.png" : "../pics/map_btn_max.png"
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: bMapMaximized = !bMapMaximized
                     }
                 }
 
             }
 
-            LabelPL {
-                id: dateLabel
-
-                text: qsTr("Start: %1 %2").arg(date).arg(starttime)
+            // shape of the route without a map when its location is unknown
+            RouteShape {
+                id: routeShape
+                visible: trackStatus === "nobase"
             }
 
+            // explains why there is no map instead of leaving an empty space
             LabelPL {
-                id: durationLabel
-
-                text: qsTr("Duration: %1").arg(duration)
+                width: parent.width
+                visible: trackStatus !== "ok"
+                wrapMode: Text.WordWrap
+                color: styler.themeSecondaryColor
+                font.pixelSize: styler.themeFontSizeSmall
+                text: {
+                    if (trackStatus === "loading") return qsTr("Loading track...");
+                    if (trackStatus === "nobase") {
+                        var msg = qsTr("The watch sent no start position.") + " "
+                                  + qsTr("Only the shape of the route is known, not its place on the map.");
+                        if (estimatedLatitude >= 0)
+                            msg += " " + qsTr("Distance and pace were corrected with the watch distance.");
+                        return msg;
+                    }
+                    if (trackStatus === "nogps")
+                        return qsTr("This activity has no GPS positions.") + " "
+                               + qsTr("The watch recorded it without GPS, so there is no route.");
+                    if (trackStatus === "nofile")
+                        return qsTr("The track file could not be read: %1").arg(tcx);
+                    return qsTr("The track file of this activity has an unsupported format.");
+                }
             }
-
-            LabelPL {
-                id: locationLabel
-
-                text: qsTr("Location: %1").arg(positionString(location[0], location[1], location[2]))
-            }
-
-            LabelPL {
-                id: dataLabel
-
-                Layout.rowSpan: 2
-                text: qsTr("Data:")
-            }
-
         }
 
-        ListViewPL {
-            id: listView
+        // ---------- charts ----------
+        ChartCard {
+            title: qsTr("Heart Rate")
+            info: trackHeartrate > 0 ? qsTr("Avg. %1 BPM").arg(Math.round(trackHeartrate)) : ""
+            visible: hrPoints.length > 1
 
-            width: parent.width
-            height: app.height / 3
-            clip: true
-            anchors.top: grid.bottom
-            anchors.margins: styler.themePaddingLarge
-            model: SportsMeta
+            TrackChart {
+                points: hrPoints
+                color: styler.chartHeartRateColor
+                referenceValue: trackHeartrate
+            }
+        }
 
-            delegate: ListItemPL {
-                id: listItem
+        ChartCard {
+            title: paceRelevant ? qsTr("Pace") : qsTr("Speed")
+            info: paceRelevant ? qsTr("min/km") : qsTr("km/h")
+            visible: pacePoints.length > 1
 
-                height: keyLabel.height + styler.themePaddingMedium
+            TrackChart {
+                points: pacePoints
+                color: styler.chartPaceColor
+                fillColor: styler.chartPaceFillColor
+                invertY: paceRelevant
+                valueLabel: function(v) { return paceRelevant ? formatPace(v) : v.toFixed(0); }
+            }
+        }
 
-                LabelPL {
-                    id: keyLabel
+        ChartCard {
+            title: qsTr("Elevation")
+            info: "m"
+            visible: elevationPoints.length > 1
 
-                    width: (page.width - (2 * styler.themePaddingLarge)) / 2
-                    anchors.topMargin: styler.themePaddingMedium
-                    anchors.left: parent.left
-                    anchors.leftMargin: styler.themePaddingMedium
-                    text: T.translateSportKey(key)
-                    truncMode: truncModes.elide
+            TrackChart {
+                points: elevationPoints
+                color: styler.chartElevationColor
+                fillColor: styler.chartElevationFillColor
+            }
+        }
+
+        // ---------- all values reported by the watch ----------
+        ChartCard {
+            title: qsTr("Details")
+            visible: metaRepeater.count > 0
+
+            Repeater {
+                id: metaRepeater
+                model: SportsMeta
+                delegate: DetailRow {
+                    label: T.translateSportKey(model.key)
+                    value: page.metaValue(model.value, model.unit)
+                    Component.onCompleted: {
+                        if (model.key === "distanceMeters") {
+                            page.watchDistance = parseFloat(model.value) || 0;
+                            page.correctRelativeTrack();
+                        }
+                    }
                 }
-
-                LabelPL {
-                    id: valueLabel
-
-                    width: (page.width - (2 * styler.themePaddingLarge)) / 2
-                    anchors.top: parent.top
-                    anchors.left: keyLabel.right
-                    anchors.leftMargin: styler.themePaddingMedium
-                    text: value + " " + T.translateSportUnit(unit)
-                }
-
             }
 
+            DetailRow {
+                label: qsTr("Location")
+                value: positionString(location[0], location[1], location[2])
+                visible: hasBaseLocation()
+            }
         }
+    }
+
+    Component {
+        id: mapComponent
 
         MapboxMap {
-            //height: bMapMaximized ? page.height : (page.height - (listView.y + listView.height))
-
             id: map
 
-            width: pageItem.width
-            anchors.top: bMapMaximized ? pageItem.top : listView.bottom
-            anchors.left: pageItem.left
-            anchors.right: pageItem.right
-            anchors.bottom: pageItem.bottom
             center: QtPositioning.coordinate(51.9854, 9.2743)
             zoomLevel: 8
             minimumZoomLevel: 0
@@ -230,66 +594,17 @@ PagePL {
             accessToken: "pk.eyJ1IjoiamRyZXNjaGVyIiwiYSI6ImNqYmVta256YTJsdjUzMm1yOXU0cmxibGoifQ.JiMiONJkWdr0mVIjajIFZQ"
             cacheDatabaseDefaultPath: true
             styleUrl: "mapbox://styles/mapbox/outdoors-v11"
-            visible: (Math.abs(location[0]) > 1e-9 || Math.abs(location[1]) > 1e-9)
+            // keep the route and its start/finish markers away from the edges and the map buttons
+            margins: Qt.rect(0.12, 0.08, 0.76, 0.76)
 
-            Item {
-                id: centerButton
+            // the first fitView can run before the map has its final size
+            onWidthChanged: fitTimer.restart()
+            onHeightChanged: fitTimer.restart()
 
-                anchors.left: parent.left
-                anchors.leftMargin: styler.themePaddingSmall
-                anchors.top: parent.top
-                anchors.topMargin: styler.themePaddingSmall
-                width: parent.width / 10
-                height: parent.width / 10
-                visible: true
-                z: 200
-
-                MouseArea {
-                    anchors.fill: parent
-                    onReleased: {
-                        console.log("centerButton pressed");
-                        var trackPointsTemporary = [];
-                        //Go through array with track data points
-                        for (var i = 0; i < JSTools.trackPointsAt.length; i++) {
-                            //add this track point to temporary array. This will be used for drawing the track line
-                            trackPointsTemporary.push(JSTools.trackPointsAt[i]);
-                        }
-                        map.fitView(trackPointsTemporary);
-                    }
-                }
-
-                IconPL {
-                    anchors.fill: parent
-                    source: "../pics/map_btn_center.png"
-                }
-
-            }
-
-            Item {
-                id: minmaxButton
-
-                anchors.right: parent.right
-                anchors.rightMargin: styler.themePaddingSmall
-                anchors.top: parent.top
-                anchors.topMargin: styler.themePaddingSmall
-                width: parent.width / 10
-                height: parent.width / 10
-                visible: true
-                z: 200
-
-                MouseArea {
-                    anchors.fill: parent
-                    onReleased: {
-                        console.log("minmaxButton pressed");
-                        bMapMaximized = !bMapMaximized;
-                    }
-                }
-
-                IconPL {
-                    anchors.fill: parent
-                    source: (map.height === page.height) ? "../pics/map_btn_min.png" : "../pics/map_btn_max.png"
-                }
-
+            Timer {
+                id: fitTimer
+                interval: 200
+                onTriggered: page.fitMap()
             }
 
             MapboxMapGestureArea {
@@ -300,59 +615,89 @@ PagePL {
                 activeDoubleClickedGeo: true
                 activePressAndHoldGeo: false
                 onDoubleClicked: {
-                    //console.log("onDoubleClicked: " + mouse)
                     map.setZoomLevel(map.zoomLevel + 1, Qt.point(mouse.x, mouse.y));
                 }
                 onDoubleClickedGeo: {
-                    //console.log("onDoubleClickedGeo: " + geocoordinate);
                     map.center = geocoordinate;
                 }
             }
+        }
+    }
 
-            Behavior on height {
-                NumberAnimation {
-                    duration: 150
+    TrackLoader {
+        id: trackLoader
+
+        onTrackChanged: {
+            var trackLength = trackLoader.trackPointCount();
+            var pauseLength = trackLoader.pausePositionsCount();
+            var iLastProperHeartRate = 0;
+            var hr = [], pace = [], ele = [];
+            var t0 = trackLength > 0 ? trackLoader.unixTimeAt(0) : 0;
+            paceRelevant = trackLoader.paceRelevantForWorkoutType();
+
+            JSTools.arrayDataPoints = [];
+            JSTools.trackPointsAt = [];
+            JSTools.trackPausePointsTemporary = [];
+            for (var i = 0; i < trackLength; i++) {
+                var iHeartrate = trackLoader.heartRateAt(i);
+                //Problem is there are often HR points with value 0. This will be solved.
+                if (iHeartrate > 0)
+                    iLastProperHeartRate = iHeartrate;
+                else
+                    iHeartrate = iLastProperHeartRate;
+                //heartrate,elevation,distance,time,unixtime,speed,pace,pacevalue,paceimp,duration
+                JSTools.fncAddDataPoint(iHeartrate, trackLoader.elevationAt(i), trackLoader.distanceAt(i),
+                                        trackLoader.timeAt(i), trackLoader.unixTimeAt(i), trackLoader.speedAt(i),
+                                        trackLoader.paceStrAt(i), trackLoader.paceAt(i),
+                                        trackLoader.paceImperialStrAt(i), trackLoader.durationAt(i));
+                JSTools.trackPointsAt.push(trackLoader.trackPointAt(i));
+
+                var x = trackLoader.unixTimeAt(i) - t0;
+                if (iHeartrate > 0) {
+                    hr.push({ x: x, y: iHeartrate });
                 }
-
+                var p = trackLoader.paceAt(i);   // min/km
+                if (p > 0 && p < 30) {
+                    pace.push({ x: x, y: paceRelevant ? p : 60 / p });
+                }
+                ele.push({ x: x, y: trackLoader.elevationAt(i) });
+            }
+            //Go through array with pause data points
+            for (var j = 0; j < pauseLength; j++) {
+                JSTools.trackPausePointsTemporary.push(trackLoader.pausePositionAt(j));
             }
 
-        }
+            hrPoints = downsample(hr, 300);
+            rawPacePoints = downsample(pace, 300);
+            pacePoints = rawPacePoints;
+            elevationPoints = downsample(ele, 300);
 
-        TrackLoader {
-            id: trackLoader
+            trackDistance = trackLoader.distance;
+            trackPace = trackLoader.paceStr;
+            trackHeartrate = trackLoader.hasHeartRateData() ? trackLoader.heartRate : 0;
 
-            onTrackChanged: {
-                //console.log("JSTools.arrayDataPoints.length: " + JSTools.arrayDataPoints.length.toString());
-
-                var trackLength = trackLoader.trackPointCount();
-                var pauseLength = trackLoader.pausePositionsCount();
-                var iLastProperHeartRate = 0;
-                JSTools.arrayDataPoints = [];
-                JSTools.trackPointsAt = [];
-                JSTools.trackPausePointsTemporary = [];
-                for (var i = 0; i < trackLength; i++) {
-                    var iHeartrate = trackLoader.heartRateAt(i);
-                    //Problem is there are often HR points with value 0. This will be solved.
-                    if (iHeartrate > 0)
-                        iLastProperHeartRate = iHeartrate;
-                    else
-                        iHeartrate = iLastProperHeartRate;
-                    //heartrate,elevation,distance,time,unixtime,speed,pace,pacevalue,paceimp,duration
-                    JSTools.fncAddDataPoint(iHeartrate, trackLoader.elevationAt(i), trackLoader.distanceAt(i), trackLoader.timeAt(i), trackLoader.unixTimeAt(i), trackLoader.speedAt(i), trackLoader.paceStrAt(i), trackLoader.paceAt(i), trackLoader.paceImperialStrAt(i), trackLoader.durationAt(i));
-                    JSTools.trackPointsAt.push(trackLoader.trackPointAt(i));
+            gpsPointCount = trackLength;
+            console.log("SportPage: track loaded with", trackLength, "GPS points");
+            if (trackLength === 0) {
+                trackStatus = "nogps";
+            } else if (trackIsRelativeOnly()) {
+                console.log("SportPage: no start position from the watch, route location unknown");
+                trackStatus = "nobase";
+            } else {
+                trackStatus = "ok";
+            }
+            if (trackStatus === "nobase") {
+                correctRelativeTrack();
+                var shapePts = [];
+                for (var k = 0; k < JSTools.trackPointsAt.length; k++) {
+                    shapePts.push(JSTools.trackPointsAt[k]);
                 }
-                //Go through array with pause data points
-                for (; i < pauseLength; i++) {
-                    //add this track point to temporary array in JS.
-                    JSTools.trackPausePointsTemporary.push(trackLoader.pausePositionAt(i));
-                }
-                //bHeartrateSupported = trackLoader.hasHeartRateData();
-                //bPaceRelevantForWorkoutType = trackLoader.paceRelevantForWorkoutType();
-                //iPausePositionsCount = trackLoader.pausePositionsCount();
+                routeShape.coordinates = shapePts;
+            }
+            if (mapLoader.item) {
                 addActivityToMap();
             }
         }
-
     }
 
     pageMenu: PageMenuPL {
