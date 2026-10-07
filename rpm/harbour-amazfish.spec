@@ -48,7 +48,7 @@ BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(libmkcal-qt5)
 BuildRequires:  (kf5-calendarcore-devel if kf5-calendarcore)
 BuildRequires:  pkgconfig(zlib)
-BuildRequires:  pkgconfig(mpris-qt5)
+BuildRequires:  pkgconfig(ambermpris)
 BuildRequires:  kdb-devel >= 3.1.0
 BuildRequires:  kcoreaddons-devel >= 5.31.0
 BuildRequires:  qt5-qttools-linguist
