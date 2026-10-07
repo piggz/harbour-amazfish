@@ -8,6 +8,7 @@ Item {
 
     property var points: []
     property color color: styler.chartHeartRateColor
+    property color fillColor: styler.chartHeartRateFillColor
     property bool fill: true
     property bool invertY: false         // pace: faster (smaller) values at the top
     property var zoneLimits: []          // optional ascending limits, coloured like styler.chartZoneColors
@@ -119,7 +120,7 @@ Item {
                 var upper = Math.min(priv.maxY, zoneLimits[z]);
                 if (z === zoneLimits.length - 1) upper = priv.maxY;
                 if (upper > lower) {
-                    ctx.fillStyle = ChartTools.withAlpha(styler.chartZoneColors[z], styler.chartBandOpacity);
+                    ctx.fillStyle = styler.chartZoneBandColors[z];
                     var ya = yOf(upper), yb = yOf(lower);
                     ctx.fillRect(axisW, Math.min(ya, yb), plotW, Math.abs(yb - ya));
                 }
@@ -154,7 +155,7 @@ Item {
                 }
                 ctx.lineTo(xOf(list[list.length - 1].x), base);
                 ctx.closePath();
-                ctx.fillStyle = ChartTools.withAlpha(chart.color, styler.chartFillOpacity);
+                ctx.fillStyle = chart.fillColor;
                 ctx.fill();
             }
 

@@ -534,6 +534,7 @@ PagePL {
             TrackChart {
                 points: pacePoints
                 color: styler.chartPaceColor
+                fillColor: styler.chartPaceFillColor
                 invertY: paceRelevant
                 valueLabel: function(v) { return paceRelevant ? formatPace(v) : v.toFixed(0); }
             }
@@ -547,6 +548,7 @@ PagePL {
             TrackChart {
                 points: elevationPoints
                 color: styler.chartElevationColor
+                fillColor: styler.chartElevationFillColor
             }
         }
 
