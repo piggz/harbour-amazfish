@@ -155,10 +155,15 @@ QtObject {
     property color chartRouteStartColor: "#5ad24a"
     property color chartRouteFinishColor: "#ff6b6b"
 
-    // opacities applied to the colours above
-    property real chartFillOpacity: 0.15
-    property real chartBandOpacity: 0.12
-    property real chartGuideOpacity: 0.7
+    // translucent variants of the colours above
+    property color chartGoalBandColor: Theme.rgba(chartGoalColor, 0.12)
+    property color chartGoalGuideColor: Theme.rgba(chartGoalColor, 0.7)
+    property color chartHeartRateFillColor: Theme.rgba(chartHeartRateColor, 0.15)
+    property color chartPaceFillColor: Theme.rgba(chartPaceColor, 0.15)
+    property color chartElevationFillColor: Theme.rgba(chartElevationColor, 0.15)
+    property color chartBatteryHighGuideColor: Theme.rgba(chartBatteryHighColor, 0.7)
+    property color chartBatteryMediumGuideColor: Theme.rgba(chartBatteryMediumColor, 0.7)
+    property var chartZoneBandColors: chartZoneColors.map(function(c) { return Theme.rgba(c, 0.12); })
 
     // chart lines
     property real chartGridLineWidth: 1

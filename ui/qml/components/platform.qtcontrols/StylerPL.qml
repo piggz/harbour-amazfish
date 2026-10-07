@@ -111,9 +111,10 @@ QtObject {
         }
     ]
 
-    // returns the colour c with the opacity a
+    // returns the colour c (also a colour name) with the opacity a
     function alpha(c, a) {
-        return Qt.rgba(c.r, c.g, c.b, a);
+        var q = Qt.lighter(c, 1.0);
+        return Qt.rgba(q.r, q.g, q.b, a);
     }
 
     // surfaces of tiles, cards and grouped lists
@@ -157,10 +158,15 @@ QtObject {
     property color chartRouteStartColor: "#5ad24a"
     property color chartRouteFinishColor: "#ff6b6b"
 
-    // opacities applied to the colours above
-    property real chartFillOpacity: 0.15
-    property real chartBandOpacity: 0.12
-    property real chartGuideOpacity: 0.7
+    // translucent variants of the colours above
+    property color chartGoalBandColor: alpha(chartGoalColor, 0.12)
+    property color chartGoalGuideColor: alpha(chartGoalColor, 0.7)
+    property color chartHeartRateFillColor: alpha(chartHeartRateColor, 0.15)
+    property color chartPaceFillColor: alpha(chartPaceColor, 0.15)
+    property color chartElevationFillColor: alpha(chartElevationColor, 0.15)
+    property color chartBatteryHighGuideColor: alpha(chartBatteryHighColor, 0.7)
+    property color chartBatteryMediumGuideColor: alpha(chartBatteryMediumColor, 0.7)
+    property var chartZoneBandColors: chartZoneColors.map(function(c) { return alpha(c, 0.12); })
 
     // chart lines
     property real chartGridLineWidth: 1

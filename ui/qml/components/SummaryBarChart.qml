@@ -11,7 +11,8 @@ Item {
     property real goal: 0
     property real bandLow: 0                 // recommended range, e.g. 7-9 h of sleep
     property real bandHigh: 0
-    property color bandColor: styler.chartGoalColor
+    property color bandFillColor: styler.chartGoalBandColor
+    property color bandLineColor: styler.chartGoalGuideColor
     readonly property bool hasBand: bandHigh > bandLow && bandLow > 0
     property color colorY: styler.chartActiveColor
     property color colorBelowGoal: styler.chartActiveDimColor
@@ -125,9 +126,9 @@ Item {
             if (hasBand) {
                 var bandTop = Math.round(yOf(bandHigh)) + 0.5;
                 var bandBottom = Math.round(yOf(bandLow)) + 0.5;
-                ctx.fillStyle = ChartTools.withAlpha(bandColor, styler.chartBandOpacity);
+                ctx.fillStyle = bandFillColor;
                 ctx.fillRect(axisW, bandTop, width - axisW, bandBottom - bandTop);
-                ctx.strokeStyle = ChartTools.withAlpha(bandColor, styler.chartGuideOpacity);
+                ctx.strokeStyle = bandLineColor;
                 ctx.lineWidth = styler.chartGuideLineWidth;
                 ChartTools.dashedLine(ctx, axisW, width, bandTop, styler.chartDashLength, styler.chartDashLength);
                 ChartTools.dashedLine(ctx, axisW, width, bandBottom, styler.chartDashLength, styler.chartDashLength);

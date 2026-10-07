@@ -6,10 +6,6 @@ var PHASE_AWAKE = 0;
 var PHASE_LIGHT = 1;
 var PHASE_DEEP = 2;
 
-function withAlpha(c, a) {
-    return Qt.rgba(c.r, c.g, c.b, a);
-}
-
 // Context2D on Qt 5.6 has no setLineDash()
 function dashedLine(ctx, x0, x1, y, dash, gap) {
     ctx.beginPath();
