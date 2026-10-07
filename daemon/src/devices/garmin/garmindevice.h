@@ -46,7 +46,6 @@ signals:
 private:
     int mSteps = 0;
 
-
     void initialise();
     virtual void pair() override;
     virtual void refreshInformation() override;
