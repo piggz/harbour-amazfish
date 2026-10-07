@@ -50,7 +50,7 @@ Item {
             for (var z = 0; z < zoneLimits.length && z < styler.chartZoneColors.length; z++) {
                 var upper = z === zoneLimits.length - 1 ? maxY : zoneLimits[z];
                 if (upper > lower) {
-                    ctx.fillStyle = ChartTools.withAlpha(styler.chartZoneColors[z], styler.chartBandOpacity);
+                    ctx.fillStyle = styler.chartZoneBandColors[z];
                     ctx.fillRect(axisW, yOf(upper), plotW, yOf(lower) - yOf(upper));
                 }
                 lower = upper;
@@ -96,7 +96,7 @@ Item {
                 for (i = 0; i < sg.length; i++) ctx.lineTo(xOf(sg[i].x), yOf(sg[i].y));
                 ctx.lineTo(xOf(sg[sg.length - 1].x), base);
                 ctx.closePath();
-                ctx.fillStyle = ChartTools.withAlpha(styler.chartHeartRateColor, styler.chartFillOpacity);
+                ctx.fillStyle = styler.chartHeartRateFillColor;
                 ctx.fill();
 
                 ctx.beginPath();
