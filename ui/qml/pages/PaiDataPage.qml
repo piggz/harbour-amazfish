@@ -1,12 +1,16 @@
 import QtQuick 2.0
 import uk.co.piggz.amazfish 1.0
-import QtQuick.Layouts 1.1
 import "../components/"
 import "../components/platform"
 
 PagePL {
     id: page
     title: qsTr("PAI")
+
+    // PAI aims at 100 over the last 7 days
+    readonly property int paiGoal: 100
+    property var points: []
+    property var latest: null
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
@@ -16,140 +20,97 @@ PagePL {
         }
     }
 
-    Component {
-        id: paiColumnDelegate
-        Column {
-            id: item
-            property int value
-            property int time
-            property color fillColor
-            Rectangle {
-                width: styler.themeItemSizeLarge
-                height: width
-                radius: width / 2
-                color: fillColor
-                Text {
-                    id: txtLow
-                    anchors.centerIn: parent
-                    anchors.fill: parent
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    font.pixelSize: parent.height / 2
-                    text: value
-                }
-            }
-            LabelPL {
-                id: txtTimeLow
-                font.pixelSize: styler.themeFontSizeLarge
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("%1 min").arg(time)
-            }
+    // Same levels as the PAI tile on the first page
+    function levelColor(pai) {
+        if (pai < 50) {
+            return styler.chartPaiLowColor;
         }
+        return pai < paiGoal ? styler.chartPaiMediumColor : styler.chartPaiHighColor;
+    }
+
+    function intensity(pai, minutes) {
+        return qsTr("%1 PAI - %2 min").arg(Number(pai).toFixed(1)).arg(minutes);
     }
 
     Column {
         id: column
-        width: parent.width
-        anchors.top: parent.top
-        anchors.margins: styler.themePaddingMedium
+        x: styler.themeHorizontalPageMargin
+        width: parent.width - 2 * x
         spacing: styler.themePaddingLarge
 
         LabelPL {
-            id: lblHeading
-            font.pixelSize: styler.themeFontSizeExtraLarge * 2
-            anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: qsTr("Last 7 Days")
             horizontalAlignment: Text.AlignHCenter
+            text: latest ? Math.round(latest.pai_total) : "-"
+            color: latest ? levelColor(latest.pai_total) : styler.themeSecondaryColor
+            font.pixelSize: styler.themeFontSizeExtraLarge * 2
         }
 
-        //PAI 7 day chart
-        GraphData {
-            id: graphPAI
-            anchors.margins: styler.themePaddingLarge
-            graphTitle: ""
-            graphHeight: 300
-            axisX.mask: ""
+        LabelPL {
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            color: styler.themeSecondaryColor
+            font.pixelSize: styler.themeFontSizeSmall
+            wrapMode: Text.WordWrap
+            text: latest ? qsTr("PAI of the last 7 days, as of %1").arg(Qt.formatDate(latest.pai_day, "ddd d.M."))
+                         : qsTr("No data")
+        }
 
-            axisY.units: ""
-            graphType: bar
+        ChartCard {
+            title: qsTr("PAI")
+            info: qsTr("Last 7 Days")
+            onClicked: updateData()
 
-            minY: 0
-            maxY: 200
-            valueConverter: function(value) {
-                return value.toFixed(0);
+            SummaryBarChart {
+                id: paiChart
+                points: page.points
+                goal: paiGoal
+                colorY: styler.chartPaiHighColor
+                colorBelowGoal: styler.chartPaiMediumColor
+                showAverage: false
             }
-            onClicked: {
+
+            ChartLegend {
+                items: [
+                    { color: styler.chartPaiHighColor, label: qsTr("Goal reached") },
+                    { color: styler.chartPaiMediumColor, label: qsTr("Below goal") },
+                    { color: styler.chartGoalColor, label: qsTr("Goal %1").arg(paiGoal), line: true }
+                ]
+            }
+        }
+
+        ChartCard {
+            title: qsTr("Latest day")
+            info: latest ? Qt.formatDate(latest.pai_day, "ddd d.M.") : ""
+            visible: latest !== null
+
+            DetailRow {
+                label: qsTr("Earned")
+                value: latest ? qsTr("%1 PAI").arg(Number(latest.pai_total_today).toFixed(1)) : "-"
+            }
+            DetailRow {
+                label: qsTr("Low intensity")
+                value: latest ? intensity(latest.pai_low, latest.pai_time_low) : "-"
+            }
+            DetailRow {
+                label: qsTr("Moderate intensity")
+                value: latest ? intensity(latest.pai_moderate, latest.pai_time_moderate) : "-"
+            }
+            DetailRow {
+                label: qsTr("High intensity")
+                value: latest ? intensity(latest.pai_high, latest.pai_time_high) : "-"
+            }
+        }
+    }
+
+    // Show new data once a download from the watch has finished
+    Connections {
+        target: DaemonInterfaceInstance
+        onOperationRunningChanged: {
+            if (!DaemonInterfaceInstance.operationRunning) {
                 updateData();
             }
         }
-
-        LabelPL {
-            id: lblNowHeading
-            font.pixelSize: styler.themeFontSizeExtraLarge
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            text: qsTr("Now")
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        LabelPL {
-            id: lblNow
-            font.pixelSize: styler.themeFontSizeExtraLarge * 2
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            text: PaiModel.get(PaiModel.rowCount() - 1).pai_total_today
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        LabelPL {
-            id: lblTodayHeading
-            font.pixelSize: styler.themeFontSizeExtraLarge
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            text: qsTr("Earned Today")
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        LabelPL {
-            id: lblToday
-            font.pixelSize: styler.themeFontSizeExtraLarge * 2
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        Row {
-            width: childrenRect.width
-            height: childrenRect.height
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            spacing: styler.themePaddingLarge * 2
-
-            Loader {
-                sourceComponent: paiColumnDelegate
-                id: low
-                Component.onCompleted: {
-                    low.item.fillColor = "#f1c984"
-                }
-            }
-            Loader {
-                sourceComponent: paiColumnDelegate
-                id: moderate
-
-                Component.onCompleted: {
-                    moderate.item.fillColor = "#5fc5dc"
-                }
-            }
-            Loader {
-                sourceComponent: paiColumnDelegate
-                id: high
-                Component.onCompleted: {
-                    high.item.fillColor = "#32a32d"
-                }
-            }
-        }
-
     }
 
     Component.onCompleted: {
@@ -159,45 +120,12 @@ PagePL {
     function updateData() {
         PaiModel.update();
         var data = [];
-
-        for(var i = 0; i < PaiModel.rowCount(); i++) {
-            var rec = {
-                x: PaiModel.get(i).pai_day.getTime() / 1000,
-                y: PaiModel.get(i).pai_total
-            }
-            data.push(rec);
+        var count = PaiModel.rowCount();
+        for (var i = 0; i < count; i++) {
+            var r = PaiModel.get(i);
+            data.push({ x: r.pai_day.getTime() / 1000, y: r.pai_total });
         }
-        graphPAI.setPoints(data);
-
-        var maybeToday = PaiModel.get(PaiModel.rowCount() - 1);
-        if (typeof maybeToday.pai_total == "undefined") {
-            return;
-        }
-
-        lblNow.text = maybeToday.pai_total.toFixed(1)
-
-        var now = new Date();
-        now.setHours(0,0,0,0);
-        var latest = maybeToday.pai_day;
-        latest.setHours(0,0,0,0);
-
-        if (maybeToday.pai_day.getTime() === now.getTime()) {
-            lblToday.text = PaiModel.get(PaiModel.rowCount() - 1).pai_total_today.toFixed(1)
-            low.item.value = maybeToday.pai_low.toFixed(0);
-            moderate.item.value = maybeToday.pai_moderate.toFixed(0);
-            high.item.value = maybeToday.pai_high.toFixed(0);
-            low.item.time = maybeToday.pai_time_low;
-            moderate.item.time = maybeToday.pai_time_moderate;
-            high.item.time = maybeToday.pai_time_high;
-        } else {
-            console.log("latest PAI record is not today");
-            lblToday.text = 0.0
-            low.item.value = "0"
-            moderate.item.value = "0"
-            high.item.value = "0"
-            low.item.time = "0"
-            moderate.item.time = "0"
-            high.item.time = "0"
-        }
+        points = data;
+        latest = count > 0 ? PaiModel.get(count - 1) : null;
     }
 }
