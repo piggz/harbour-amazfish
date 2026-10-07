@@ -113,4 +113,64 @@ QtObject {
     property real themePaddingSmall: Theme.paddingSmall
 
     property real themePixelRatio: Theme.pixelRatio
+
+    // surfaces of tiles, cards and grouped lists
+    property color surfaceColor: Theme.rgba(Theme.highlightDimmerColor, 0.5)
+    property color surfaceBorderColor: Theme.rgba(themePrimaryColor, 0.1)
+    property color surfaceEdgeColor: Theme.rgba(themePrimaryColor, 0.08)
+    property color surfacePressedColor: Theme.rgba(themePrimaryColor, 0.08)
+    property color surfaceChipColor: Theme.rgba(themePrimaryColor, 0.08)
+    property color surfaceDividerColor: Theme.rgba(themePrimaryColor, 0.08)
+    property color surfaceTrackColor: Theme.rgba(themePrimaryColor, 0.12)
+    property real surfaceRadius: Math.round(themePaddingLarge * 1.25)
+
+    // structure of the charts
+    property color chartGridColor: Theme.rgba(themeSecondaryColor, 0.25)
+    property color chartGridFaintColor: Theme.rgba(themeSecondaryColor, 0.12)
+    property color chartEmptyColor: Theme.rgba(themeSecondaryColor, 0.1)
+    property color chartInactiveColor: Theme.rgba(themeSecondaryColor, 0.35)
+    property color chartAverageColor: Theme.rgba(themePrimaryColor, 0.9)
+    property color chartLabelBackgroundColor: Theme.rgba(Theme.highlightDimmerColor, 0.75)
+
+    // colours with a fixed meaning in the charts, close to Gadgetbridge
+    property color chartDeepSleepColor: "#1a5fb4"
+    property color chartLightSleepColor: "#46acea"
+    property color chartAwakeColor: "#f5a623"
+    property color chartActiveColor: "#5ad24a"
+    property color chartActiveDimColor: "#3f7f38"
+    property color chartGoalColor: "#f5a623"
+    property color chartBelowGoalColor: "#f2d541"
+    property color chartHeartRateColor: "#ff6b6b"
+    property color chartRestingHeartRateColor: "#46acea"
+    property color chartPaceColor: "#46acea"
+    property color chartElevationColor: "#5ad24a"
+    property var chartZoneColors: ["#8a96a8", "#46acea", "#5ad24a", "#e8d44d", "#f5a623", "#ff6b6b"]
+    property color chartBatteryHighColor: "#5ad24a"
+    property color chartBatteryMediumColor: "#f2d541"
+    property color chartBatteryLowColor: "#ff6b6b"
+    property color chartPaiLowColor: "#f5a623"
+    property color chartPaiMediumColor: "#46acea"
+    property color chartPaiHighColor: "#5ad24a"
+    property color chartRouteColor: "#f5a623"
+    property color chartRouteStartColor: "#5ad24a"
+    property color chartRouteFinishColor: "#ff6b6b"
+
+    // translucent variants of the colours above
+    property color chartGoalBandColor: Theme.rgba(chartGoalColor, 0.12)
+    property color chartGoalGuideColor: Theme.rgba(chartGoalColor, 0.7)
+    property color chartHeartRateFillColor: Theme.rgba(chartHeartRateColor, 0.15)
+    property color chartPaceFillColor: Theme.rgba(chartPaceColor, 0.15)
+    property color chartElevationFillColor: Theme.rgba(chartElevationColor, 0.15)
+    property color chartBatteryHighGuideColor: Theme.rgba(chartBatteryHighColor, 0.7)
+    property color chartBatteryMediumGuideColor: Theme.rgba(chartBatteryMediumColor, 0.7)
+    property var chartZoneBandColors: chartZoneColors.map(function(c) { return Theme.rgba(c, 0.12); })
+
+    // chart lines
+    property real chartGridLineWidth: 1
+    property real chartLineWidth: Math.max(1.5, themeFontSizeExtraSmall / 12)
+    property real chartGuideLineWidth: Math.max(1, themeFontSizeExtraSmall / 16)
+    property real chartRouteLineWidth: Math.max(3, themePaddingSmall)
+    property real chartDashLength: themeFontSizeExtraSmall * 0.3
+    property real chartRingWidthRatio: 0.08
+    property real chartGaugeWidthRatio: 0.09
 }
