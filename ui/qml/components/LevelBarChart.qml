@@ -15,7 +15,11 @@ Item {
         return percent >= 50 ? styler.chartBatteryHighColor
                              : percent >= 20 ? styler.chartBatteryMediumColor : styler.chartBatteryLowColor;
     }
-    property var thresholds: [20, 50]    // faint guide lines where the colour changes
+    // faint guide lines where the colour changes
+    property var guides: [
+        { value: 20, color: styler.chartBatteryMediumGuideColor },
+        { value: 50, color: styler.chartBatteryHighGuideColor }
+    ]
 
     readonly property bool noData: priv.filled === 0
     readonly property real lowest: priv.lowest
@@ -144,9 +148,9 @@ Item {
 
             // thresholds where the colour changes
             ctx.lineWidth = styler.chartGuideLineWidth;
-            for (var t = 0; t < thresholds.length; t++) {
-                ctx.strokeStyle = ChartTools.withAlpha(colorFor(thresholds[t]), styler.chartGuideOpacity);
-                var ty = Math.round(yOf(thresholds[t])) + 0.5;
+            for (var t = 0; t < guides.length; t++) {
+                ctx.strokeStyle = guides[t].color;
+                var ty = Math.round(yOf(guides[t].value)) + 0.5;
                 ChartTools.dashedLine(ctx, axisW, width, ty, styler.chartDashLength, styler.chartDashLength);
             }
         }
