@@ -141,7 +141,7 @@ PagePL {
                     { color: styler.chartDeepSleepColor, label: qsTr("Deep sleep") },
                     { color: styler.chartLightSleepColor, label: qsTr("Light sleep") },
                     {
-                        color: ChartTools.withAlpha(styler.chartGoalColor, styler.chartGuideOpacity),
+                        color: styler.chartGoalGuideColor,
                         label: qsTr("Recommended range")
                     },
                     { color: styler.chartAverageColor, label: qsTr("Average"), line: true }
