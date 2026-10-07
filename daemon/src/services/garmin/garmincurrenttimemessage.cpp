@@ -18,7 +18,7 @@ QByteArray GarminCurrentTimeMessage::generateOutgoing(const QByteArray& data) {
     // Unix seconds -> Garmin epoch (Dec 31 1989) offset 631065600
 
     quint32 unixNow = quint32(QDateTime::currentMSecsSinceEpoch()/1000);
-    quint32 garminTime = unixNow - 631065600u;
+    quint32 garminTime = unixNow - GARMIN_TIME_OFFSET;
     quint32 refid=u32le(data,0);
 
     //TODO: Fix this.

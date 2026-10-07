@@ -1,7 +1,6 @@
-//#ifndef _GARMINNOTIFICATIONHANDLER_H
-//#define _GARMINNOTIFICATIONHANDLER_H
+#ifndef _GARMINNOTIFICATIONHANDLER_H
+#define _GARMINNOTIFICATIONHANDLER_H
 
-#pragma once
 
 #include <QtCore/QString>
 #include <optional>
@@ -254,4 +253,4 @@ signals:
     void rejectIncomingCall();
 };
 
-//#endif //_GARMINNOTIFICATIONHANDLER_H
+#endif //_GARMINNOTIFICATIONHANDLER_H
