@@ -29,16 +29,8 @@ Amazfish::Features GarminDevice::supportedFeatures() const
 
     return  Amazfish::Feature::FEATURE_NONE
         | Amazfish::Feature::FEATURE_HRM
-        // | Amazfish::Feature::FEATURE_ACTIVITY
         | Amazfish::Feature::FEATURE_STEPS
-        // | Amazfish::Feature::FEATURE_ALARMS
         | Amazfish::Feature::FEATURE_ALERT
-        // | Amazfish::Feature::FEATURE_EVENT_REMINDER
-        // | Amazfish::Feature::FEATURE_MUSIC_CONTROL
-        // | Amazfish::Feature::FEATURE_BUTTON_ACTION
-        // | Amazfish::Feature::FEATURE_SCREENSHOT
-        // | Amazfish::Feature::FEATURE_FILE_INSTALL
-        // Amazfish::Feature::FEATURE_SPO2
         ;
 }
 
@@ -118,15 +110,11 @@ void GarminDevice::incomingCallEnded()
 void GarminDevice::pair()
 {
     qDebug() << Q_FUNC_INFO << "Pairing with Garmin " << devicePath();
-
     m_needsAuth = true;
     m_pairing = true;
-
-
     setConnectionState("pairing");
     QBLEDevice::pair();
  }
-
 
 void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
@@ -166,16 +154,6 @@ void GarminDevice::onRejectCallEvent(){
 }
 
 QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString &path)
-{
-    parseServices();
-    if (mCommunicator.data())
-        return mCommunicator.data();
-    return nullptr;
-}
-
-
-
-void GarminDevice::parseServices()
 {
     // Garmin is using a single service for all functions (Mlr), so we probably don't need full parsing.
     qDebug() << Q_FUNC_INFO << "Parsing Services for Garmin";
@@ -229,7 +207,7 @@ void GarminDevice::parseServices()
                     connect(mNotificationHandler.data(),&GarminNotificationHandler::rejectIncomingCall,this,&GarminDevice::onRejectCallEvent);
                     setConnectionState("authenticated");
                     mCommunicator = com;
-                    return;
+                    return com.data();
                 }
             }
         }
@@ -237,7 +215,7 @@ void GarminDevice::parseServices()
     // if we are here, no Garmin device was detected
     emit message("No Garmin device detected");
     qDebug() << Q_FUNC_INFO << "Garmin: No supported device detected";
-
+    return nullptr;
 }
 
 

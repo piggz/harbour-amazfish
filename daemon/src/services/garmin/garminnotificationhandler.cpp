@@ -47,12 +47,10 @@ bool GarminNotificationHandler::removeNotification(qint32 id)
     NotificationType type = NotificationType::Generic;
     int count = 0;
 
-    {
-        if (m_storedNotifications.contains(id)) {
-            type = m_storedNotifications[id].notificationType;
-            count = getNotificationCount(type);
-            m_storedNotifications.remove(id);
-        }
+    if (m_storedNotifications.contains(id)) {
+        type = m_storedNotifications[id].notificationType;
+        count = getNotificationCount(type);
+        m_storedNotifications.remove(id);
     }
 
     CommunicatorV2 *com = m_communicator.data();
@@ -129,11 +127,6 @@ void GarminNotificationHandler::onNotificationPerformAction(const NotificationCo
     if (m_storedNotifications.contains(msg.notificationId)) {
         quint8 action = msg.data[0];
         qDebug() << Q_FUNC_INFO << "Garmin: Notification exists, checking for action: " << action;
-        //If a reply is included it's in the next bytes.
-        /*
-        if (msg.data.size()>3)
-            QString reply = Read Null Terminated String
-        */
         switch (action) {
             case (quint16)NotificationAction::DISMISS_NOTIFICATION:
                 removeNotification(msg.notificationId);
