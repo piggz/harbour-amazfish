@@ -4,45 +4,27 @@ import "./platform"
 Tile {
     text: qsTr("PAI")
 
-    contentItem: PercentCircle {
+    contentItem: GaugeArc {
         id: paiCircle
-        anchors.horizontalCenter: parent.horizontalCenter
-        size: parent.width - styler.themeHorizontalPageMargin * 4
-        widthRatio: 0.08
+        anchors.centerIn: parent
+        width: Math.min(parent.width, parent.height)
+        height: width
+        trackColor: styler.surfaceTrackColor
 
-        Item {
+        Column {
             anchors.centerIn: parent
-            height: lblPAITotal.height + lblPAIToday.height + styler.paddingSmall
-            width: Math.max(lblPAITotal.width, lblPAIToday.width)
 
             LabelPL {
                 id: lblPAITotal
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: paiCenterItem.top
-                }
-                color: styler.themeHighlightColor
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: styler.themePrimaryColor
                 font.pixelSize: styler.themeFontSizeHuge
-                verticalAlignment: Text.AlignVCenter
             }
-
-            Item {
-                id: paiCenterItem
-                width: 1
-                height: 1
-                anchors.centerIn: parent
-            }
-
             LabelPL {
                 id: lblPAIToday
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    top: paiCenterItem.bottom
-                    topMargin: styler.themePaddingSmall
-                }
-                color: styler.blockBg
-                font.pixelSize: styler.themeFontSizeExtraLarge
-                verticalAlignment: Text.AlignVCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: styler.themeSecondaryColor
+                font.pixelSize: styler.themeFontSizeSmall
             }
         }
     }
@@ -58,23 +40,23 @@ Tile {
 
         var pai_total = maybeToday.pai_total.toFixed(1);
         lblPAITotal.text = pai_total
-        paiCircle.percent = pai_total / 200 //200 Is a pretty high target, usually > 100 is good
+        paiCircle.value = pai_total / 200 //200 Is a pretty high target, usually > 100 is good
 
         if (pai_total < 50 ) {
-            paiCircle.gradientColor = "orange"
+            paiCircle.color = styler.chartPaiLowColor
         } else if (pai_total < 100 ) {
-            paiCircle.gradientColor = "lightblue"
+            paiCircle.color = styler.chartPaiMediumColor
         } else {
-            paiCircle.gradientColor = "lightgreen"
+            paiCircle.color = styler.chartPaiHighColor
         }
 
         var now = new Date();
         now.setHours(0,0,0,0);
 
         if (maybeToday.pai_day.getTime() === now.getTime()) {
-            lblPAIToday.text = PaiModel.get(PaiModel.rowCount() - 1).pai_total_today.toFixed(1)
+            lblPAIToday.text = qsTr("today %1").arg(PaiModel.get(PaiModel.rowCount() - 1).pai_total_today.toFixed(1))
         } else {
-            lblPAIToday.text = 0.0
+            lblPAIToday.text = qsTr("today %1").arg("0.0")
         }
     }
 }
