@@ -57,13 +57,10 @@ struct DeviceInformationMessage {
 
 
 
-
-
 // =============================================================================
-// Internal state (Rust: struct CommunicatorState)
+// Internal state
 // =============================================================================
 
-//Rust characteristicHandle = QBLECharacteristic
 
 struct CommunicatorState {
     QSharedPointer<QBLECharacteristic> characteristicSend;
@@ -76,8 +73,7 @@ struct CommunicatorState {
     QMap<Service, quint8> handleByService;
 
     QMap<Service, QSharedPointer<ServiceCallback>> serviceCallbacks;
-    QMap<quint8, QSharedPointer<MlrCommunicator>> mlrCommunicators; // key: mlr_handle
-
+    QMap<quint8, QSharedPointer<MlrCommunicator>> mlrCommunicators;
     int maxWriteSize {20};
     CobsCoDec *cobsCodec=nullptr;
     static QSharedPointer<CommunicatorState> create() {
@@ -89,7 +85,7 @@ struct CommunicatorState {
 
 
 // =============================================================================
-// CommunicatorV2 (Rust: struct CommunicatorV2)
+// CommunicatorV2 - Garmin Service
 // =============================================================================
 
 class CommunicatorV2 : public QBLEService {
@@ -110,10 +106,8 @@ public:
 
     static QString baseUuid(quint16 shortId); // helper for BASE_UUID_FORMAT
 
-    void setStatus(const QString &status);
     // set_message_callback
     void setMessageCallback(QSharedPointer<GfdiMessageCallback> cb);
-
 
     // register_service_callback / unregister_service_callback
     void registerServiceCallback(Service service, QSharedPointer<ServiceCallback> cb);
@@ -129,14 +123,10 @@ public:
     //  initialize_device
     bool initializeDevice();
 
-    //  send_message
+    //  send_messages
     void sendRawBytes(const QString &label, const QByteArray &bytes);
     void processSendQueue();
-
     bool sendMessage(const QString& taskName, const QByteArray& message);
-
-    //  handle_decoded_message_async
-    Result<std::optional<QByteArray>> handleDecodedMessageAsync(const QByteArray& decodedWithHandle);
 
     //  register_service / close_service
     void registerService(Service service, bool reliable);
@@ -149,11 +139,9 @@ public:
     // Complete pairing
     bool completePairing();
 
-
     void onConnectionStateChange(bool connected);
 
-
-    //hadle incoming GFDI  messages
+    //handle incoming GFDI  messages
     void onDeviceInformationReceived(DeviceInformationMessage &message);
     void onConfigurationReceived();
     void onNotificationDataRequested(const NotificationControlMessage& msg);
@@ -163,8 +151,6 @@ public:
     void onWeatherRequestReceived(const WeatherRequestMessage& msg);
     void onProtobufMessageReceived(const QByteArray& data);
     void onProtobufStatusMessageReceived(const QByteArray& data);
-
-
 
     // return data
     quint32 steps() {return mSteps;};
@@ -178,7 +164,6 @@ public:
     bool handshakeComplete() {return !isFirstConnect;};
 
 signals:
-    void statusChanged();
     void logDebug(const QString& msg);
     void logInfo(const QString& msg);
     void logWarn(const QString& msg);
@@ -195,7 +180,6 @@ signals:
 
 public slots:
     void characteristicRead(const QString &c, const QByteArray &value);
-
     void onCharacteristicChanged(const QString &characteristic, const QByteArray& data);
 
     void setSteps(quint32 val);
@@ -208,7 +192,6 @@ public slots:
     // Register services
     void registerServices();
     void getBatteryLevel();
-
 
 private:
     //  process_handle_management
@@ -233,8 +216,6 @@ private:
     // cleanup
     void cleanup();
 
-    quint64 nextCookie();
-
     void saveHRVRecord();
     void saveSpo2Record();
 
@@ -248,15 +229,12 @@ private:
 
     struct deviceInfo mDeviceInfo;
 
-    mutable QMutex m_mutex;
     QSharedPointer<CommunicatorState> mState;
 
     QSharedPointer<GfdiMessageCallback> mMessageCallback;
-    //QPointer<AsyncGfdiMessageCallback> mAsyncMessageCallback;
     QSharedPointer<ProtobufHandler> mProtobufHandler;
 
 
-    quint64 m_cookieCounter {1};
     QString m_Path;
     QObject *m_device = nullptr;
     bool isFirstConnect=true;
@@ -264,14 +242,9 @@ private:
     bool mServicesResolved = false;
     bool mIsMlProtocol = false;
     bool mIsReliable = false;
-    QString mStatus;
     QTimer* mBatteryTimer;
     QQueue<QPair<QByteArray, QString>> mSendQueue;
     bool  mSendInProgress = false;
 };
-
-
-
-
 
 #endif //_COMMUNICATOR__H

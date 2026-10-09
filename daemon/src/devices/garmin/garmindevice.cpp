@@ -13,7 +13,9 @@ const char* UUID_CHARACTERISTIC_GARMIN_GFDI_V0_RECEIVE = "4acbcd28-7425-868e-f44
 
 const char* UUID_SERVICE_GARMIN_GFDI_V1 = "6a4e2401-667b-11e3-949a-0800200c9a66";
 const char* UUID_CHARACTERISTIC_GARMIN_GFDI_V1_SEND = "6a4e4c80-667b-11e3-949a-0800200c9a66";
-const char* UUID_CHARACTERISTIC_GARMIN_GFDI_V1_RECEIVE = "6a4ecd28-667B-11e3-949a-0800200c9a66";
+const char* UUID_CHARACTERISTIC_GARMIN_GFDI_V1_RECEIVE = "6a4ecd28-667b-11e3-949a-0800200c9a66";
+
+const char* UUID_SERVICE_GARMIN_ML_GFDI = "6a4e2800-667b-11e3-949a-0800200c9a66";
 
 GarminDevice::GarminDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {
@@ -126,7 +128,7 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
             }
         if (map.contains("Connected")) {
             bool value = map["Connected"].toBool();
-            CommunicatorV2 *svc = qobject_cast<CommunicatorV2 *>(service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI));
+            CommunicatorV2 *svc = mCommunicator.data();
             if (!value) {
                 setConnectionState("disconnected");
                 if (svc)
@@ -155,66 +157,39 @@ void GarminDevice::onRejectCallEvent(){
 
 QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString &path)
 {
-    // Garmin is using a single service for all functions (Mlr), so we probably don't need full parsing.
-    qDebug() << Q_FUNC_INFO << "Parsing Services for Garmin";
-    CommunicatorV2* comv2 = qobject_cast<CommunicatorV2*> (service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI));
-    CommunicatorV2* comv1 = qobject_cast<CommunicatorV2*> (service(UUID_SERVICE_GARMIN_GFDI_V1));
-    CommunicatorV2* comv0 = qobject_cast<CommunicatorV2*> (service(UUID_SERVICE_GARMIN_GFDI_V0));
-    if (comv0 || comv1 || comv2)
+    qDebug() << Q_FUNC_INFO;
+    // Check if Service already exists
+    if (mCommunicator.data()) return nullptr;
+    qDebug() << Q_FUNC_INFO << "Creating Communicator service for Garmin";
+    if (service(UUID_SERVICE_GARMIN_ML_GFDI)
+        || service(UUID_SERVICE_GARMIN_GFDI_V0)
+        || service(UUID_SERVICE_GARMIN_GFDI_V1))
     {
-        qDebug() << Q_FUNC_INFO << "Garmin: Communicator already exists, no parsing required.";
-        //re-initialise device
-        if (comv0) comv0->initializeDevice();
-        if (comv1) comv1->initializeDevice();
-        if (comv1) comv2->initializeDevice();
+        // Service exists, re-initialize
+        if (mCommunicator) mCommunicator.data()->initializeDevice();
     }
-    QDBusInterface adapterIntro("org.bluez", devicePath(), "org.freedesktop.DBus.Introspectable", QDBusConnection::systemBus(), 0);
-    QDBusReply<QString> xml = adapterIntro.call("Introspect");
-
-
-    QDomDocument doc;
-    doc.setContent(xml.value());
-
-    QDomNodeList nodes = doc.elementsByTagName("node");
-
-    qDebug() << nodes.count() << "nodes";
-
-    for (int x = 0; x < nodes.count(); x++)
+    if (((uuid == UUID_SERVICE_GARMIN_ML_GFDI) &&  ! service(UUID_SERVICE_GARMIN_ML_GFDI))
+        || ((uuid == UUID_SERVICE_GARMIN_GFDI_V0)  &&  ! service(UUID_SERVICE_GARMIN_GFDI_V0))
+        || ((uuid == UUID_SERVICE_GARMIN_GFDI_V1)  &&  ! service(UUID_SERVICE_GARMIN_GFDI_V1)))
     {
-        QDomElement node = nodes.at(x).toElement();
-        QString nodeName = node.attribute("name");
-
-        if (nodeName.startsWith("service")) {
-            QString path = devicePath() + "/" + nodeName;
-
-            QDBusInterface devInterface("org.bluez", path, "org.bluez.GattService1", QDBusConnection::systemBus(), 0);
-            QString uuid = devInterface.property("UUID").toString();
-
-            qDebug() << "Creating service for: " << uuid;
-            if ((uuid == CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI) || (uuid == UUID_SERVICE_GARMIN_GFDI_V0) ||(uuid == UUID_SERVICE_GARMIN_GFDI_V1))
-            {
-                QSharedPointer<CommunicatorV2> com = QSharedPointer<CommunicatorV2>::create(path, this);
-                if (com)
-                {
-                    connect(com.data(), &CommunicatorV2::informationChanged, this, &GarminDevice::informationChanged, Qt::UniqueConnection);
-                    addService(uuid, com.data());
-                    // add notification handler
-                    qDebug() << Q_FUNC_INFO << "Garmin: Adding notification handler";
-                    mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(com);
-                    connect(com.data(), &CommunicatorV2::NotificationDataRequested,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationDataRequested);
-                    connect(com.data(), &CommunicatorV2::NotificationPerformAction,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationPerformAction);
-                    connect(mNotificationHandler.data(),&GarminNotificationHandler::acceptIncomingCall,this,&GarminDevice::onAnswerCallEvent);
-                    connect(mNotificationHandler.data(),&GarminNotificationHandler::rejectIncomingCall,this,&GarminDevice::onRejectCallEvent);
-                    setConnectionState("authenticated");
-                    mCommunicator = com;
-                    return com.data();
-                }
-            }
+        QSharedPointer<CommunicatorV2> com = QSharedPointer<CommunicatorV2>::create(path, this);
+        if (com)
+        {
+            mCommunicator=com;
+            connect(com.data(), &CommunicatorV2::informationChanged, this, &GarminDevice::informationChanged, Qt::UniqueConnection);
+            // add notification handler
+            qDebug() << Q_FUNC_INFO << "Garmin: Adding notification handler";
+            if (!mNotificationHandler) mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(mCommunicator);
+            connect(com.data(), &CommunicatorV2::NotificationDataRequested,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationDataRequested);
+            connect(com.data(), &CommunicatorV2::NotificationPerformAction,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationPerformAction);
+            connect(mNotificationHandler.data(),&GarminNotificationHandler::acceptIncomingCall,this,&GarminDevice::onAnswerCallEvent);
+            connect(mNotificationHandler.data(),&GarminNotificationHandler::rejectIncomingCall,this,&GarminDevice::onRejectCallEvent);
+            //com->initializeDevice();
+            setConnectionState("authenticated");
+            return com.data();
         }
     }
-    // if we are here, no Garmin device was detected
-    emit message("No Garmin device detected");
-    qDebug() << Q_FUNC_INFO << "Garmin: No supported device detected";
+    // if we are here, no Garmin device was detected or serice already created
     return nullptr;
 }
 
@@ -236,14 +211,12 @@ void GarminDevice::refreshInformation()
 QString GarminDevice::information(Amazfish::Info i) const
 {
 
-    CommunicatorV2 *com = qobject_cast<CommunicatorV2*>(service(CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI));
-    if (!com) {
+    if (!mCommunicator.data()) {
         qDebug() << Q_FUNC_INFO << "No communicator found!";
         return QString();
     }
 
-
-    struct deviceInfo info=com->deviceInfo();
+    struct deviceInfo info=mCommunicator.data()->deviceInfo();
     switch(i) {
     case Amazfish::Info::INFO_SWVER:
         return info.softwareRevision;
@@ -252,21 +225,20 @@ QString GarminDevice::information(Amazfish::Info i) const
         return info.serialNumber;
         break;
     case Amazfish::Info::INFO_BATTERY:
-        return QString::number(com->batteryLevel());
+        return QString::number(mCommunicator.data()->batteryLevel());
         break;
     case Amazfish::Info::INFO_MODEL:
         return info.deviceModel;
         break;
     case Amazfish::Info::INFO_MANUFACTURER:
         return info.deviceManufacturer;
-
     case Amazfish::Info::INFO_STEPS:
-        qDebug() << Q_FUNC_INFO << "Steps: " << com->steps();
-        return QString::number(com->steps());
+        qDebug() << Q_FUNC_INFO << "Steps: " << mCommunicator.data()->steps();
+        return QString::number(mCommunicator.data()->steps());
         break;
     case Amazfish::Info::INFO_HEARTRATE:
-        qDebug() << Q_FUNC_INFO << "Heart rate: " << com->heartRate();
-        return QString::number(com->heartRate());
+        qDebug() << Q_FUNC_INFO << "Heart rate: " << mCommunicator.data()->heartRate();
+        return QString::number(mCommunicator.data()->heartRate());
         break;
     default:
         return QString("");
