@@ -135,7 +135,7 @@ PageListPL {
                     iconSource: styler.activityIconPrefix + "icon-m-" + kindstring.toLowerCase() + styler.customIconSuffix
                     width: workoutImage.width
                     height: width
-                    opacity: listItem.showPressed ? 0.6 : 1.0
+                    opacity: listItem.showPressed ? styler.surfacePressedOpacity : 1.0
                 }
             }
 
