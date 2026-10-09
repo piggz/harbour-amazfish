@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import uk.co.piggz.amazfish 1.0
 import "./platform"
 import "ChartTools.js" as ChartTools
 
@@ -44,8 +45,8 @@ Item {
             var list = chart.samples || [];
             for (var n = 0; n < list.length; n++) {
                 var p = list[n];
-                if (p.k === ChartTools.PHASE_DEEP) d++;
-                else if (p.k === ChartTools.PHASE_LIGHT) l++;
+                if (p.k === DataSource.PhaseDeepSleep) d++;
+                else if (p.k === DataSource.PhaseLightSleep) l++;
                 else if (isActive(p)) a++;
                 if (p.h > 0) { hrSum += p.h; hrCount++; }
             }
@@ -111,8 +112,8 @@ Item {
                 var p = samples[n];
                 var bi = Math.floor((p.x - startTime) / bucketSec);
                 if (bi < 0 || bi >= buckets) continue;
-                var r = p.k === ChartTools.PHASE_DEEP ? 3
-                      : p.k === ChartTools.PHASE_LIGHT ? 2
+                var r = p.k === DataSource.PhaseDeepSleep ? 3
+                      : p.k === DataSource.PhaseLightSleep ? 2
                       : priv.isActive(p) ? 1 : 0;
                 if (r > rank[bi]) rank[bi] = r;
                 if (p.i > inten[bi]) inten[bi] = p.i;

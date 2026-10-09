@@ -74,50 +74,32 @@ PagePL {
         }
 
         ChartCard {
+            title: qsTr("HRV")
+            info: hrvChart.noData ? "" : qsTr("Avg. %1").arg(Math.round(hrvChart.average))
             visible: supportsDataRefresh(Amazfish.TYPE_HRV)
-            Graph {
-                id: graphHRV
-                graphTitle: qsTr("HRV")
-                graphHeight: 300
+            onClicked: updateGraphs()
 
-                axisY.units: ""
-                type: DataSource.HRV
-
-                visible: supportsDataRefresh(Amazfish.TYPE_HRV)
-
-                minY: 0
-                maxY: 100
-
-                onClicked: {
-                    updateGraph(day);
-                }
+            DayChart {
+                id: hrvChart
+                color: styler.chartHrvColor
+                fillColor: styler.chartHrvFillColor
             }
         }
 
         ChartCard {
+            title: qsTr("Body Temperature")
+            info: temperatureChart.noData ? ""
+                                          : qsTr("Avg. %1").arg(temperatureChart.valueLabel(temperatureChart.average))
             visible: supportsDataRefresh(Amazfish.TYPE_TEMPERATURE)
-            Graph {
-                id: graphBodyTemperature
-                graphTitle: qsTr("Body Temperature")
-                graphHeight: 300
+            onClicked: updateGraphs()
 
-                axisY.units: "\u00b0C"
-                axisX.mask: "hh:mm"
-
-                visible: supportsDataRefresh(Amazfish.TYPE_TEMPERATURE)
-
-                type: DataSource.BodyTemperature
-                graphType: line
-
-                minY: -20
-                maxY: 50
-
-                onClicked: {
-                    updateGraph(day);
-                }
+            DayChart {
+                id: temperatureChart
+                color: styler.chartTemperatureColor
+                fillColor: styler.chartTemperatureFillColor
+                valueLabel: function(v) { return v.toLocaleString(Qt.locale(), "f", 1) + " \u00b0C"; }
             }
         }
-
     }
 
     function updateGraphs() {
@@ -131,8 +113,10 @@ PagePL {
         totalSteps = steps;
         activityChart.startTime = start.getTime() / 1000;
         activityChart.samples = samples;
-        graphHRV.updateGraph(day);
-        graphBodyTemperature.updateGraph(day);
+        hrvChart.startTime = start.getTime() / 1000;
+        hrvChart.points = dataSource.data(DataSource.HRV, day);
+        temperatureChart.startTime = start.getTime() / 1000;
+        temperatureChart.points = dataSource.data(DataSource.BodyTemperature, day);
     }
 
     Component.onCompleted: {
