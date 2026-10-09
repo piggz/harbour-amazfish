@@ -51,6 +51,7 @@
         <file>./qml/components/ChartLegend.qml</file>
         <file>./qml/components/ChartTools.js</file>
         <file>./qml/components/DateNavigation.qml</file>
+        <file>./qml/components/DayChart.qml</file>
         <file>./qml/components/DetailRow.qml</file>
         <file>./qml/components/DeviceListModel.qml</file>
         <file>./qml/components/DownloadDataMenuItem.qml</file>

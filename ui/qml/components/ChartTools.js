@@ -1,10 +1,5 @@
 .pragma library
-// Helpers for the charts. Colours, opacities and line widths come from StylerPL.
-
-// Must match DataSource::Phase
-var PHASE_AWAKE = 0;
-var PHASE_LIGHT = 1;
-var PHASE_DEEP = 2;
+// Helpers for the charts. Colours and line widths come from StylerPL.
 
 // Context2D on Qt 5.6 has no setLineDash()
 function dashedLine(ctx, x0, x1, y, dash, gap) {

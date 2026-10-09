@@ -142,6 +142,13 @@ QtObject {
     property color surfaceDividerColor: alpha(themePrimaryColor, 0.08)
     property color surfaceTrackColor: alpha(themePrimaryColor, 0.12)
     property real surfaceRadius: Math.round(themePaddingLarge * 1.25)
+    property real surfaceBorderWidth: 1
+    property real surfacePressedOpacity: 0.6
+
+    // reordering items by drag and drop
+    property color dragIndicatorColor: themeHighlightColor
+    property real dragIndicatorOpacity: 0.8
+    property real draggedItemOpacity: 0.9
 
     // structure of the charts
     property color chartGridColor: alpha(themeSecondaryColor, 0.25)
@@ -173,6 +180,14 @@ QtObject {
     property color chartRouteColor: "#f5a623"
     property color chartRouteStartColor: "#5ad24a"
     property color chartRouteFinishColor: "#ff6b6b"
+    property color chartStressRelaxedColor: "#46acea"
+    property color chartStressMildColor: "#5ad24a"
+    property color chartStressModerateColor: "#f5a623"
+    property color chartStressHighColor: "#ff6b6b"
+    property color chartSpo2Color: "#46acea"
+    property color chartSpo2SleepColor: "#1a5fb4"
+    property color chartHrvColor: "#b27fe0"
+    property color chartTemperatureColor: "#f5a623"
 
     // translucent variants of the colours above
     property color chartGoalBandColor: alpha(chartGoalColor, 0.12)
@@ -182,6 +197,11 @@ QtObject {
     property color chartElevationFillColor: alpha(chartElevationColor, 0.15)
     property color chartBatteryHighGuideColor: alpha(chartBatteryHighColor, 0.7)
     property color chartBatteryMediumGuideColor: alpha(chartBatteryMediumColor, 0.7)
+    property color chartStressMildGuideColor: alpha(chartStressMildColor, 0.7)
+    property color chartStressModerateGuideColor: alpha(chartStressModerateColor, 0.7)
+    property color chartStressHighGuideColor: alpha(chartStressHighColor, 0.7)
+    property color chartHrvFillColor: alpha(chartHrvColor, 0.15)
+    property color chartTemperatureFillColor: alpha(chartTemperatureColor, 0.15)
     property var chartZoneBandColors: chartZoneColors.map(function(c) { return alpha(c, 0.12); })
 
     // chart lines

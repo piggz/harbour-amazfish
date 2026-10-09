@@ -9,7 +9,7 @@ Rectangle {
 
     radius: round ? Math.min(width, height) / 2 : styler.surfaceRadius
     color: styler.surfaceColor
-    border.width: 1
+    border.width: styler.surfaceBorderWidth
     border.color: styler.surfaceBorderColor
 
     Rectangle {

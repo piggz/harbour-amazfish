@@ -123,6 +123,13 @@ QtObject {
     property color surfaceDividerColor: Theme.rgba(themePrimaryColor, 0.08)
     property color surfaceTrackColor: Theme.rgba(themePrimaryColor, 0.12)
     property real surfaceRadius: Math.round(themePaddingLarge * 1.25)
+    property real surfaceBorderWidth: 1
+    property real surfacePressedOpacity: 0.6
+
+    // reordering items by drag and drop
+    property color dragIndicatorColor: themeHighlightColor
+    property real dragIndicatorOpacity: 0.8
+    property real draggedItemOpacity: 0.9
 
     // structure of the charts
     property color chartGridColor: Theme.rgba(themeSecondaryColor, 0.25)
@@ -154,6 +161,14 @@ QtObject {
     property color chartRouteColor: "#f5a623"
     property color chartRouteStartColor: "#5ad24a"
     property color chartRouteFinishColor: "#ff6b6b"
+    property color chartStressRelaxedColor: "#46acea"
+    property color chartStressMildColor: "#5ad24a"
+    property color chartStressModerateColor: "#f5a623"
+    property color chartStressHighColor: "#ff6b6b"
+    property color chartSpo2Color: "#46acea"
+    property color chartSpo2SleepColor: "#1a5fb4"
+    property color chartHrvColor: "#b27fe0"
+    property color chartTemperatureColor: "#f5a623"
 
     // translucent variants of the colours above
     property color chartGoalBandColor: Theme.rgba(chartGoalColor, 0.12)
@@ -163,6 +178,11 @@ QtObject {
     property color chartElevationFillColor: Theme.rgba(chartElevationColor, 0.15)
     property color chartBatteryHighGuideColor: Theme.rgba(chartBatteryHighColor, 0.7)
     property color chartBatteryMediumGuideColor: Theme.rgba(chartBatteryMediumColor, 0.7)
+    property color chartStressMildGuideColor: Theme.rgba(chartStressMildColor, 0.7)
+    property color chartStressModerateGuideColor: Theme.rgba(chartStressModerateColor, 0.7)
+    property color chartStressHighGuideColor: Theme.rgba(chartStressHighColor, 0.7)
+    property color chartHrvFillColor: Theme.rgba(chartHrvColor, 0.15)
+    property color chartTemperatureFillColor: Theme.rgba(chartTemperatureColor, 0.15)
     property var chartZoneBandColors: chartZoneColors.map(function(c) { return Theme.rgba(c, 0.12); })
 
     // chart lines

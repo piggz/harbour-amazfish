@@ -17,6 +17,9 @@ Item {
     property color colorY: styler.chartActiveColor
     property color colorBelowGoal: styler.chartActiveDimColor
     property color colorZ: styler.chartDeepSleepColor
+    property var colorFor: null              // optional function(value) giving each bar its own colour
+    property real minY: 0                    // bars start here, e.g. 80 for blood oxygen
+    property real maxY: 0                    // 0: fitted to the values
     property bool showAverage: true
     property string labelMask: "ddd"
     property var valueLabel: function(v) { return Math.round(v).toString(); }
@@ -42,6 +45,8 @@ Item {
     onGoalChanged: { priv.summarise(); canvas.requestPaint(); }
     onBandLowChanged: { priv.summarise(); canvas.requestPaint(); }
     onBandHighChanged: { priv.summarise(); canvas.requestPaint(); }
+    onMinYChanged: { priv.summarise(); canvas.requestPaint(); }
+    onMaxYChanged: { priv.summarise(); canvas.requestPaint(); }
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
 
@@ -55,7 +60,7 @@ Item {
         property int bandDays: 0
         property int count: 0
         property real last: 0
-        property real maxY: 1
+        property real topY: 1
 
         function pointValue(p) {
             return p.y + (typeof p.z !== "undefined" ? p.z : 0);
@@ -88,7 +93,9 @@ Item {
             }
             total = t; best = b; bestTime = bt; goalDays = gd; bandDays = bd; count = c; last = l;
             average = c ? t / c : 0;
-            maxY = niceMax(Math.max(m, chart.goal * 1.15, chart.hasBand ? chart.bandHigh * 1.1 : 0) * 1.05);
+            var fit = Math.max(m, chart.goal * 1.15, chart.hasBand ? chart.bandHigh * 1.1 : 0) * 1.05;
+            topY = chart.maxY > chart.minY ? chart.maxY : niceMax(fit);
+            if (topY <= chart.minY) topY = chart.minY + 4;
         }
     }
 
@@ -107,16 +114,17 @@ Item {
             var top = fontPx * 0.6;
             var plotW = width - axisW;
             var plotH = height - bottom - top;
-            var maxY = priv.maxY;
+            var lowY = minY;
+            var span = priv.topY - lowY;
 
-            function yOf(v) { return top + plotH - v / maxY * plotH; }
+            function yOf(v) { return top + plotH - (Math.max(lowY, Math.min(priv.topY, v)) - lowY) / span * plotH; }
 
             ctx.lineWidth = styler.chartGridLineWidth;
             ctx.strokeStyle = styler.chartGridColor;
             ctx.fillStyle = styler.themeSecondaryColor;
             ctx.textAlign = "right";
             for (var g = 0; g <= 4; g++) {
-                var val = maxY * g / 4;
+                var val = lowY + span * g / 4;
                 var gy = Math.round(yOf(val)) + 0.5;
                 ctx.beginPath(); ctx.moveTo(axisW, gy); ctx.lineTo(width, gy); ctx.stroke();
                 ctx.fillText(valueLabel(val), axisW - fontPx * 0.4, gy + fontPx * 0.35);
@@ -151,8 +159,8 @@ Item {
                 var base = top + plotH;
 
                 if (stacked) {
-                    var hz = p.z / maxY * plotH;
-                    var hy = p.y / maxY * plotH;
+                    var hz = p.z / span * plotH;
+                    var hy = p.y / span * plotH;
                     if (hz > 0) { ctx.fillStyle = colorZ; ctx.fillRect(x, base - hz, bw, hz); }
                     if (hy > 0) {
                         ctx.fillStyle = colorY;
@@ -162,9 +170,10 @@ Item {
                         if (hy > radius) ctx.fillRect(x, base - hz - radius, bw, radius);
                     }
                 } else {
-                    var h = p.y / maxY * plotH;
-                    if (h > 0) {
-                        ctx.fillStyle = (goal > 0 && p.y < goal) ? colorBelowGoal : colorY;
+                    var h = base - yOf(p.y);
+                    if (p.y > 0 && h > 0) {
+                        ctx.fillStyle = colorFor ? colorFor(p.y)
+                                                 : (goal > 0 && p.y < goal) ? colorBelowGoal : colorY;
                         ctx.beginPath();
                         ctx.roundedRect(x, base - h, bw, h, radius, radius);
                         ctx.fill();
