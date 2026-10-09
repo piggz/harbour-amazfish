@@ -2,11 +2,13 @@ import QtQuick 2.0
 import uk.co.piggz.amazfish 1.0
 import "../components"
 import "../components/platform"
+import "../components/ChartTools.js" as ChartTools
 
 PagePL {
     id: page
     title: qsTr("Analysis")
     property alias day: nav.day
+    property int totalSteps: 0
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
@@ -20,9 +22,9 @@ PagePL {
     // of the page, followed by our content.
     Column {
         id: column
-        width: parent.width
+        x: styler.themeHorizontalPageMargin
+        width: parent.width - 2 * x
         anchors.top: parent.top
-        anchors.margins: styler.themePaddingMedium
         spacing: styler.themePaddingLarge
 
         DateNavigation {
@@ -43,105 +45,78 @@ PagePL {
         }
 
 
-        Graph {
-            id: graphHeartrate
-            graphTitle: qsTr("Heartrate")
-            graphHeight: 300
+        ChartCard {
+            title: qsTr("Activity")
+            info: activityChart.noData ? "" : qsTr("Avg. %1 BPM").arg(activityChart.averageHeartrate)
+            onClicked: updateGraphs()
 
-            axisY.units: qsTr("BPM")
-            type: DataSource.Heartrate
-            visible: supportsFeatureRefresh(Amazfish.TYPE_HEART_RATE)
-
-            minY: 0
-            maxY: 200
-            valueConverter: function(value) {
-                return value.toFixed(0);
+            ActivityChart {
+                id: activityChart
+                showHeartrate: supportsDataRefresh(Amazfish.TYPE_HEART_RATE)
             }
-            onClicked: {
-                updateGraph(day);
-            }
-        }
-        Graph {
-            id: graphSteps
-            graphTitle: qsTr("Steps")
-            graphHeight: 300
 
-            axisY.units: qsTr("Steps")
-            type: DataSource.Steps
-
-            minY: 0
-            maxY: 200
-            valueConverter: function(value) {
-                return value.toFixed(0);
+            ChartLegend {
+                items: [
+                    { color: styler.chartDeepSleepColor, label: qsTr("Deep sleep") },
+                    { color: styler.chartLightSleepColor, label: qsTr("Light sleep") },
+                    { color: styler.chartActiveColor, label: qsTr("Active") },
+                    { color: styler.chartInactiveColor, label: qsTr("Inactive") }
+                ].concat(activityChart.showHeartrate
+                          ? [{ color: styler.chartHeartRateColor, label: qsTr("Heartrate"), line: true }] : [])
             }
-            onClicked: {
-                updateGraph(day);
+
+            DetailRow { label: qsTr("Steps"); value: Number(totalSteps).toLocaleString(Qt.locale(), "f", 0) }
+            DetailRow { label: qsTr("Active"); value: ChartTools.formatDuration(activityChart.activeMinutes) }
+            DetailRow {
+                label: qsTr("Sleep")
+                value: ChartTools.formatDuration(activityChart.lightMinutes + activityChart.deepMinutes)
             }
         }
-        Graph {
-            id: graphIntensity
-            graphTitle: qsTr("Intensity")
-            graphHeight: 300
 
-            axisY.units: "%"
-            type: DataSource.Intensity
-
-            minY: 0
-            maxY: 100
-            valueConverter: function(value) {
-                return value.toFixed(0);
-            }
-            onClicked: {
-                updateGraph(day);
-            }
-        }
-        Graph {
-            id: graphHRV
-            graphTitle: qsTr("HRV")
-            graphHeight: 300
-
-            axisY.units: ""
-            type: DataSource.HRV
-
+        ChartCard {
+            title: qsTr("HRV")
+            info: hrvChart.noData ? "" : qsTr("Avg. %1").arg(Math.round(hrvChart.average))
             visible: supportsDataRefresh(Amazfish.TYPE_HRV)
+            onClicked: updateGraphs()
 
-            minY: 0
-            maxY: 100
-
-            onClicked: {
-                updateGraph(day);
+            DayChart {
+                id: hrvChart
+                color: styler.chartHrvColor
+                fillColor: styler.chartHrvFillColor
             }
         }
 
-        Graph {
-            id: graphBodyTemperature
-            graphTitle: qsTr("Body Temperature")
-            graphHeight: 300
-
-            axisY.units: "°C"
-            axisX.mask: "hh:mm"
-
+        ChartCard {
+            title: qsTr("Body Temperature")
+            info: temperatureChart.noData ? ""
+                                          : qsTr("Avg. %1").arg(temperatureChart.valueLabel(temperatureChart.average))
             visible: supportsDataRefresh(Amazfish.TYPE_TEMPERATURE)
+            onClicked: updateGraphs()
 
-            type: DataSource.BodyTemperature
-            graphType: line
-
-            minY: -20
-            maxY: 50
-
-            onClicked: {
-                updateGraph(day);
+            DayChart {
+                id: temperatureChart
+                color: styler.chartTemperatureColor
+                fillColor: styler.chartTemperatureFillColor
+                valueLabel: function(v) { return v.toLocaleString(Qt.locale(), "f", 1) + " \u00b0C"; }
             }
         }
-
     }
 
     function updateGraphs() {
-        graphHeartrate.updateGraph(day);
-        graphSteps.updateGraph(day);
-        graphIntensity.updateGraph(day);
-        graphHRV.updateGraph(day);
-        graphBodyTemperature.updateGraph(day);
+        var start = new Date(day);
+        start.setHours(0, 0, 0, 0);
+        var samples = dataSource.data(DataSource.Activity, day);
+        var steps = 0;
+        for (var i = 0; i < samples.length; i++) {
+            steps += samples[i].s;
+        }
+        totalSteps = steps;
+        activityChart.startTime = start.getTime() / 1000;
+        activityChart.samples = samples;
+        hrvChart.startTime = start.getTime() / 1000;
+        hrvChart.points = dataSource.data(DataSource.HRV, day);
+        temperatureChart.startTime = start.getTime() / 1000;
+        temperatureChart.points = dataSource.data(DataSource.BodyTemperature, day);
     }
 
     Component.onCompleted: {
