@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import uk.co.piggz.amazfish 1.0
 import "./platform"
 import "ChartTools.js" as ChartTools
 
@@ -7,8 +8,8 @@ Item {
     id: chart
 
     function phaseColor(k) {
-        if (k === ChartTools.PHASE_DEEP) return styler.chartDeepSleepColor;
-        if (k === ChartTools.PHASE_LIGHT) return styler.chartLightSleepColor;
+        if (k === DataSource.PhaseDeepSleep) return styler.chartDeepSleepColor;
+        if (k === DataSource.PhaseLightSleep) return styler.chartLightSleepColor;
         return styler.chartAwakeColor;
     }
 
@@ -44,7 +45,7 @@ Item {
             var list = chart.samples || [];
             var f = -1, l = -1;
             for (var i = 0; i < list.length; i++) {
-                if (list[i].k !== ChartTools.PHASE_AWAKE) {
+                if (list[i].k !== DataSource.PhaseAwake) {
                     if (f < 0) f = i;
                     l = i;
                 }
@@ -53,8 +54,8 @@ Item {
             for (i = Math.max(0, f); f >= 0 && i < l; i++) {
                 var dur = (list[i + 1].x - list[i].x) / 60;
                 if (dur > 10) dur = 1;     // gap in the data, count a single minute
-                if (list[i].k === ChartTools.PHASE_DEEP) de += dur;
-                else if (list[i].k === ChartTools.PHASE_LIGHT) li += dur;
+                if (list[i].k === DataSource.PhaseDeepSleep) de += dur;
+                else if (list[i].k === DataSource.PhaseLightSleep) li += dur;
                 else aw += dur;
             }
             first = f; last = l;
@@ -80,9 +81,9 @@ Item {
             var plotH = height - bottom;
 
             var lanes = [
-                { label: qsTr("Awake"), k: ChartTools.PHASE_AWAKE },
-                { label: qsTr("Light"), k: ChartTools.PHASE_LIGHT },
-                { label: qsTr("Deep"),  k: ChartTools.PHASE_DEEP }
+                { label: qsTr("Awake"), k: DataSource.PhaseAwake },
+                { label: qsTr("Light"), k: DataSource.PhaseLightSleep },
+                { label: qsTr("Deep"),  k: DataSource.PhaseDeepSleep }
             ];
             var laneH = plotH / lanes.length;
             var laneOf = {};
