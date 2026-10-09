@@ -157,16 +157,12 @@ void GarminDevice::onRejectCallEvent(){
 
 QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString &path)
 {
-    qDebug() << Q_FUNC_INFO;
-    // Check if Service already exists
-    if (mCommunicator.data()) return nullptr;
     qDebug() << Q_FUNC_INFO << "Creating Communicator service for Garmin";
     if (service(UUID_SERVICE_GARMIN_ML_GFDI)
         || service(UUID_SERVICE_GARMIN_GFDI_V0)
         || service(UUID_SERVICE_GARMIN_GFDI_V1))
     {
-        // Service exists, re-initialize
-        if (mCommunicator) mCommunicator.data()->initializeDevice();
+        return nullptr;
     }
     if (((uuid == UUID_SERVICE_GARMIN_ML_GFDI) &&  ! service(UUID_SERVICE_GARMIN_ML_GFDI))
         || ((uuid == UUID_SERVICE_GARMIN_GFDI_V0)  &&  ! service(UUID_SERVICE_GARMIN_GFDI_V0))
@@ -184,7 +180,6 @@ QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString 
             connect(com.data(), &CommunicatorV2::NotificationPerformAction,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationPerformAction);
             connect(mNotificationHandler.data(),&GarminNotificationHandler::acceptIncomingCall,this,&GarminDevice::onAnswerCallEvent);
             connect(mNotificationHandler.data(),&GarminNotificationHandler::rejectIncomingCall,this,&GarminDevice::onRejectCallEvent);
-            //com->initializeDevice();
             setConnectionState("authenticated");
             return com.data();
         }
@@ -192,8 +187,6 @@ QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString 
     // if we are here, no Garmin device was detected or serice already created
     return nullptr;
 }
-
-
 
 void GarminDevice::initialise()
 {
@@ -206,7 +199,6 @@ void GarminDevice::refreshInformation()
 {
 
 }
-
 
 QString GarminDevice::information(Amazfish::Info i) const
 {
@@ -245,8 +237,6 @@ QString GarminDevice::information(Amazfish::Info i) const
     }
     return QString();
 }
-
-
 
 void GarminDevice::authenticated(bool ready)
 {
