@@ -31,21 +31,10 @@ const char* CommunicatorV2::UUID_SERVICE_GARMIN_V1_SEND = "6a4e4c80-667b-11e3-94
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_V1_RECV = "6a4ecd28-667b-11e3-949a-0800200c9a66";
 
 
-
-
-
-static inline QString fmtUuid(quint16 shortId) {
-    return QStringLiteral("6A4E%1-667B-11E3-949A-0800200C9A66")
-        .arg(shortId, 4, 16, QLatin1Char('0'))
-        .toUpper();
-}
-
-
 // =============================================================================
 // CommunicatorV2
 // =============================================================================
 
-QString CommunicatorV2::baseUuid(quint16 shortId) { return fmtUuid(shortId); }
 
 CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
     : QBLEService(UUID_SERVICE_GARMIN_ML_GFDI, path, parent), mState(CommunicatorState::create()),
@@ -63,18 +52,9 @@ CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
 
 }
 
-void CommunicatorV2::setStatus(const QString &status)
-{
-    if (status != mStatus) {
-        mStatus = status;
-        emit statusChanged();
-    }
-}
-
 void CommunicatorV2::setMessageCallback(QSharedPointer<GfdiMessageCallback> cb) {
     mMessageCallback = std::move(cb);
 }
-
 
 void CommunicatorV2::registerServiceCallback(Service service, QSharedPointer<ServiceCallback> cb) {
     mState->serviceCallbacks.insert(service, std::move(cb));
@@ -112,11 +92,6 @@ void CommunicatorV2::onDeviceMaxPacketSize(quint16 deviceMaxPacketSize) {
     }
 }
 
-
-quint64 CommunicatorV2::nextCookie() {
-    return m_cookieCounter++;
-}
-
 bool CommunicatorV2::initializeDevice() {
     qDebug() <<Q_FUNC_INFO << "Garmin: initalizing device";
 
@@ -144,6 +119,7 @@ bool CommunicatorV2::initializeDevice() {
     }
 
     qDebug() << Q_FUNC_INFO << "Garmin: characteristics: " << characteristicMap.keys();
+    mIsMlProtocol = false;
 
     for (int i = 2810; i <= 2814; i++) {
         QString serviceRec = QString(CommunicatorV2::BASE_UUID).arg(i);
@@ -156,13 +132,13 @@ bool CommunicatorV2::initializeDevice() {
             mState->characteristicSend = characteristicMap.value(serviceSnd);
             mState->UUIDSend=serviceSnd;
             mIsMlProtocol = true;
-
+            qDebug() << Q_FUNC_INFO << "Garmin: ML Characteristic found. Send " << serviceSnd << ", Receive " << serviceRec;
+            break;
         }
-
     }
     // No V2 protocol found, checking for other protocols
 
-    if (characteristicMap.contains(UUID_SERVICE_GARMIN_V0_RECV) && characteristicMap.contains(UUID_SERVICE_GARMIN_V0_SEND))
+    if (characteristicMap.contains(UUID_SERVICE_GARMIN_V0_RECV) && characteristicMap.contains(UUID_SERVICE_GARMIN_V0_SEND) && !mIsMlProtocol)
     {
 
         mState->characteristicReceive = characteristicMap.value(UUID_SERVICE_GARMIN_V0_RECV);
@@ -173,11 +149,11 @@ bool CommunicatorV2::initializeDevice() {
 
 
         if ((mState->characteristicSend != NULL) && (mState->characteristicReceive  != NULL)) {
-            qDebug() << Q_FUNC_INFO << "Garmin: ML Characteristic found. Send " << UUID_SERVICE_GARMIN_V0_SEND << ", Receive " << UUID_SERVICE_GARMIN_V0_RECV;
+            qDebug() << Q_FUNC_INFO << "Garmin: V0 Characteristic found. Send " << UUID_SERVICE_GARMIN_V0_SEND << ", Receive " << UUID_SERVICE_GARMIN_V0_RECV;
             mIsMlProtocol = false;
         }
     }
-    else if (characteristicMap.contains(UUID_SERVICE_GARMIN_V1_RECV) && characteristicMap.contains(UUID_SERVICE_GARMIN_V1_SEND))
+    else if (characteristicMap.contains(UUID_SERVICE_GARMIN_V1_RECV) && characteristicMap.contains(UUID_SERVICE_GARMIN_V1_SEND) && !mIsMlProtocol)
     {
 
         mState->characteristicReceive = characteristicMap.value(UUID_SERVICE_GARMIN_V1_RECV);
@@ -188,39 +164,27 @@ bool CommunicatorV2::initializeDevice() {
 
 
         if ((mState->characteristicSend != NULL) && (mState->characteristicReceive  != NULL)) {
-            qDebug() << Q_FUNC_INFO << "Garmin: ML Characteristic found. Send " << UUID_SERVICE_GARMIN_V1_SEND << ", Receive " << UUID_SERVICE_GARMIN_V1_RECV;
+            qDebug() << Q_FUNC_INFO << "Garmin: V1 Characteristic found. Send " << UUID_SERVICE_GARMIN_V1_SEND << ", Receive " << UUID_SERVICE_GARMIN_V1_RECV;
             mIsMlProtocol = false;
         }
     }
 
-
     if ((mState->characteristicSend != NULL) && (mState->characteristicReceive  != NULL)) {
-        qDebug() << Q_FUNC_INFO << "Garmin: ML Characteristic found. Send " << mState->UUIDSend << ", Receive " << mState->UUIDReceive;
+        qDebug() << Q_FUNC_INFO << "Garmin: Characteristic found. Send " << mState->UUIDSend << ", Receive " << mState->UUIDReceive;
         enableNotification(mState->UUIDReceive);
         connect(this,&QBLEService::characteristicChanged,this,&CommunicatorV2::onCharacteristicChanged);
         connect(mState->characteristicReceive.data(),&QBLECharacteristic::characteristicRead,this,&CommunicatorV2::onCharacteristicChanged);
-
-        setStatus(QStringLiteral("GFDI ready for communication"));
-        qDebug() << Q_FUNC_INFO << (QStringLiteral("Garmin: GFDI: Ready for communication"));
-
         if (mIsMlProtocol) {
             const QByteArray closeAll = createCloseAllServicesMessage();
             QString errorMsg;
-            mState->characteristicSend->writeValue(closeAll,&errorMsg);
-            if (!errorMsg.isEmpty())
-            {
-                qDebug() << Q_FUNC_INFO << "Garmin: closeall failed " << errorMsg;
-                return false;
-            }
+            // write async to avoid timing issues on reconnect
+            mState->characteristicSend->writeAsync(closeAll);
         }
-
         return true;
     }
-
-    qDebug() << Q_FUNC_INFO << "Garmin: Failed to find any known Garmin ML characteristics";
+    qDebug() << Q_FUNC_INFO << "Garmin: Failed to find any known Garmin characteristics";
     return false;
 }
-
 
 void CommunicatorV2::sendRawBytes(const QString &label,const QByteArray &bytes)
 {
@@ -671,7 +635,6 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         connect(receiver.data(),&MlrMessageReceiver::gfdiDecoded,this,&CommunicatorV2::handleDecodedMessage);
 
         createdMlr = mlr;
-
         mIsReliable = true;
      }
 
@@ -687,10 +650,7 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
     {
         switch (service) {
         case Service::GFDI:
-            qDebug() << Q_FUNC_INFO <<  "Garmin: Inserting GFDI callback handle";
             registerServiceCallback(Service::GFDI,QSharedPointer<ServiceCallback>(new GarminGfdiMessage(this)));
-            // now we can continue with initialising as we have a GFDI handle to send messages
-            //completePairing();
             break;
         case Service::RealtimeSpo2:
             registerServiceCallback(Service::RealtimeSpo2,QSharedPointer<ServiceCallback>(new GarminSpo2Message(this)));
@@ -705,8 +665,6 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
             registerServiceCallback(Service::RealtimeSteps,QSharedPointer<ServiceCallback>(new GarminStepsMessage(this)));
             break;
         default:
-            // Create Default Callback
-            //mState->serviceCallbacks.insert(service, QSharedPointer<ServiceCallback>(new DefaultCallback()));
             break;
         }
     }
@@ -887,12 +845,8 @@ void CommunicatorV2::dispose() {
         disconnect(mState->characteristicReceive.data(),nullptr,this,nullptr);
     }
 
-
-    if (m_device)
-        disconnect((qobject_cast<GarminDevice *>(m_device)), nullptr, this, nullptr);
-
-    mState->characteristicSend.reset();
-    mState->characteristicReceive.reset();
+    mState->characteristicSend->deleteLater();
+    mState->characteristicReceive->deleteLater();
     //m_gfdiService.reset();
     mState->cobsCodec->reset();
     mIsMlProtocol = false;
@@ -903,15 +857,11 @@ void CommunicatorV2::dispose() {
     mState->mlrCommunicators.clear();
     mState->serviceByHandle.clear();
     mState->serviceCallbacks.clear();
-
-    mConnected = false;
     mServicesResolved = false;
-
     if (!isFirstConnect) {
-        isFirstConnect = true;
-    }
+        isFirstConnect = true;    mConnected = false;
 
-    setStatus(QStringLiteral("Idle"));
+    }
 }
 
 void CommunicatorV2::onConnectionStateChange(bool connected) {
@@ -919,7 +869,6 @@ void CommunicatorV2::onConnectionStateChange(bool connected) {
     if (connected==mConnected) return;
     if (connected)
     {
-        isFirstConnect=true;
         initializeDevice();
     }
     else {
