@@ -62,7 +62,6 @@
         <file>./qml/components/Graph.qml</file>
         <file>./qml/components/GraphData.qml</file>
         <file>./qml/components/PAITile.qml</file>
-        <file>./qml/components/PercentCircle.qml</file>
         <file>./qml/components/StepsTile.qml</file>
         <file>./qml/components/SummaryBarChart.qml</file>
         <file>./qml/components/Tile.qml</file>

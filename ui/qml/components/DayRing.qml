@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import uk.co.piggz.amazfish 1.0
 import "ChartTools.js" as ChartTools
 
 // 24 h ring coloured by sleep phase and activity, midnight at the top.
@@ -46,8 +47,8 @@ Item {
                 var p = list[i];
                 var s = Math.floor((p.x - ring.startTime) / segSec);
                 if (s < 0 || s >= n) continue;
-                var r = p.k === ChartTools.PHASE_DEEP ? 3
-                      : p.k === ChartTools.PHASE_LIGHT ? 2
+                var r = p.k === DataSource.PhaseDeepSleep ? 3
+                      : p.k === DataSource.PhaseLightSleep ? 2
                       : (p.s > 0 || p.i >= ring.activeIntensity) ? 1 : 0;
                 if (r > rank[s]) rank[s] = r;
             }
