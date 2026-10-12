@@ -51,6 +51,8 @@ public:
     Q_INVOKABLE QString gpx(uint id);
     Q_INVOKABLE QString rawGpx(uint id);
     Q_INVOKABLE void deleteRecord(uint id);
+    // "yyyy-MM" of the activity in the row, empty for an invalid row.
+    Q_INVOKABLE QString monthKeyAt(int row) const;
 
 private:
     KDbConnection *m_connection = nullptr;
