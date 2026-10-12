@@ -59,6 +59,7 @@
         <file>./qml/components/GlassPanel.qml</file>
         <file>./qml/components/Graph.qml</file>
         <file>./qml/components/GraphData.qml</file>
+        <file>./qml/components/HeartRateChart.qml</file>
         <file>./qml/components/PAITile.qml</file>
         <file>./qml/components/PercentCircle.qml</file>
         <file>./qml/components/StepsTile.qml</file>
