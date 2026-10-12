@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import uk.co.piggz.amazfish 1.0
-import QtQuick.Layouts 1.1
 import "../components/"
 import "../components/platform"
 
@@ -18,20 +17,30 @@ PagePL {
         }
     }
 
+    function percent(v) {
+        return qsTr("%1 %").arg(Math.round(v));
+    }
+
     Column {
         id: column
-        width: parent.width
-        anchors.top: parent.top
-        anchors.margins: styler.themePaddingMedium
+        x: styler.themeHorizontalPageMargin
+        width: parent.width - 2 * x
         spacing: styler.themePaddingLarge
 
         LabelPL {
-            id: lblSPO2Today
-            font.pixelSize: styler.themeFontSizeExtraLarge * 3
-            anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: graphSpo2Normal.lastValue + "%"
             horizontalAlignment: Text.AlignHCenter
+            text: normalChart.noData ? "-" : percent(normalChart.lastValue)
+            color: normalChart.noData ? styler.themeSecondaryColor : styler.chartSpo2Color
+            font.pixelSize: styler.themeFontSizeExtraLarge * 2
+        }
+
+        LabelPL {
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            color: styler.themeSecondaryColor
+            font.pixelSize: styler.themeFontSizeSmall
+            text: normalChart.noData ? qsTr("No data") : qsTr("Latest reading")
         }
 
         DateNavigation {
@@ -51,52 +60,42 @@ PagePL {
             }
         }
 
-        Graph {
-            id: graphSpo2Normal
-            graphTitle: qsTr("Normal SPO2")
-            graphHeight: 300
+        ChartCard {
+            clickable: true
+            title: qsTr("Normal SPO2")
+            info: qsTr("Last %n day(s)", "", 11)
+            onClicked: updateGraphs()
 
-            axisX.mask: "MM/dd"
-            axisY.units: qsTr("%")
-            type: DataSource.Spo2Normal
-            graphType: bar
-
-            minY: 80
-            maxY: 100
-
-            valueConverter: function(value) {
-                return value.toFixed(0);
-            }
-            onClicked: {
-                updateGraph(day);
+            SummaryBarChart {
+                id: normalChart
+                minY: 80
+                maxY: 100
+                colorY: styler.chartSpo2Color
+                labelMask: "d.M."
+                averageLabel: percent
             }
         }
 
-        Graph {
-            id: graphSpo2Sleep
-            graphTitle: qsTr("Sleep SPO2")
-            graphHeight: 300
+        ChartCard {
+            clickable: true
+            title: qsTr("Sleep SPO2")
+            info: qsTr("Last %n day(s)", "", 11)
+            onClicked: updateGraphs()
 
-            axisX.mask: "MM/dd"
-            axisY.units: qsTr("%")
-            type: DataSource.Spo2Sleep
-            graphType: bar
-
-            minY: 80
-            maxY: 100
-
-            valueConverter: function(value) {
-                return value.toFixed(0);
-            }
-            onClicked: {
-                updateGraph(day);
+            SummaryBarChart {
+                id: sleepChart
+                minY: 80
+                maxY: 100
+                colorY: styler.chartSpo2SleepColor
+                labelMask: "d.M."
+                averageLabel: percent
             }
         }
     }
 
     function updateGraphs() {
-        graphSpo2Normal.updateGraph(day);
-        graphSpo2Sleep.updateGraph(day);
+        normalChart.points = dataSource.data(DataSource.Spo2Normal, day);
+        sleepChart.points = dataSource.data(DataSource.Spo2Sleep, day);
     }
 
     Component.onCompleted: {
