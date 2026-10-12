@@ -10,14 +10,20 @@ RowLayout {
     signal backward
     signal forward
 
-    IconButtonPL {
-        id: btnPrev
-        iconName: styler.iconBackward
-        iconHeight: styler.themeIconSizeSmall
-        iconWidth: styler.themeIconSizeSmall
+    GlassPanel {
+        round: true
+        Layout.preferredWidth: styler.themeItemSizeSmall
+        Layout.preferredHeight: styler.themeItemSizeSmall
 
-        onClicked: {
-            backward();
+        IconButtonPL {
+            id: btnPrev
+            anchors.centerIn: parent
+            iconName: styler.iconBackward
+            iconHeight: styler.themeIconSizeSmall
+            iconWidth: styler.themeIconSizeSmall
+            onClicked: {
+                backward();
+            }
         }
     }
 
@@ -26,7 +32,7 @@ RowLayout {
         Layout.fillWidth: true
 
         // width: parent.width - lblDay.width - styler.themePaddingLarge
-        height: btnPrev.height
+        height: styler.themeItemSizeSmall
 
         text: day.toLocaleDateString();
 
@@ -47,13 +53,20 @@ RowLayout {
         }
     }
 
-    IconButtonPL {
-        id: btnNext
-        iconName: styler.iconForward
-        iconHeight: styler.themeIconSizeSmall
-        iconWidth: styler.themeIconSizeSmall
-        onClicked: {
-            forward();
+    GlassPanel {
+        round: true
+        Layout.preferredWidth: styler.themeItemSizeSmall
+        Layout.preferredHeight: styler.themeItemSizeSmall
+
+        IconButtonPL {
+            id: btnNext
+            anchors.centerIn: parent
+            iconName: styler.iconForward
+            iconHeight: styler.themeIconSizeSmall
+            iconWidth: styler.themeIconSizeSmall
+            onClicked: {
+                forward();
+            }
         }
     }
 }
