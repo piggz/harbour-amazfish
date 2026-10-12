@@ -14,7 +14,7 @@ Item {
     property int slotSec: 1800               // bars: each bar shows the average of its slot
     property int gapSec: 2 * 3600            // line: longer gaps break the line
     property color color: styler.chartActiveColor
-    property color fillColor             // line: area below it, none if not set
+    property var fillColor: null         // line: colour of the area below it, none if null
     property var colorFor: null              // bars: optional function(value) giving each bar its own colour
     property var guides: []                  // dashed lines: [{ value: 40, color: ... }]
     property real minY: 0
@@ -34,6 +34,14 @@ Item {
     onMinYChanged: { priv.prepare(); canvas.requestPaint(); }
     onMaxYChanged: { priv.prepare(); canvas.requestPaint(); }
     onStartTimeChanged: { priv.prepare(); canvas.requestPaint(); }
+    onDurationSecChanged: { priv.prepare(); canvas.requestPaint(); }
+    onSlotSecChanged: { priv.prepare(); canvas.requestPaint(); }
+    onBarsChanged: canvas.requestPaint()
+    onGapSecChanged: canvas.requestPaint()
+    onGuidesChanged: canvas.requestPaint()
+    onColorChanged: canvas.requestPaint()
+    onFillColorChanged: canvas.requestPaint()
+    onColorForChanged: canvas.requestPaint()
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
 
@@ -178,7 +186,7 @@ Item {
                         ctx.fill();
                         continue;
                     }
-                    if (fillColor.a > 0) {
+                    if (fillColor) {
                         ctx.beginPath();
                         ctx.moveTo(xOf(sg[0].x), base);
                         for (i = 0; i < sg.length; i++) ctx.lineTo(xOf(sg[i].x), yOf(sg[i].y));

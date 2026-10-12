@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import "./platform"
-import "ChartTools.js" as ChartTools
 
 // Rounded card that holds one chart, in the style of Gadgetbridge's chart cards.
 Item {
@@ -9,6 +8,7 @@ Item {
     property string title: ""
     property string info: ""        // short text shown on the right of the title
     property real padding: styler.themePaddingLarge
+    property bool clickable: false  // set when something handles clicked()
     default property alias content: body.data
 
     signal clicked
@@ -18,12 +18,13 @@ Item {
 
     GlassPanel {
         anchors.fill: parent
-        pressed: cardMouse.pressed && cardMouse.containsMouse
+        pressed: card.clickable && cardMouse.pressed && cardMouse.containsMouse
     }
 
     MouseArea {
         id: cardMouse
         anchors.fill: parent
+        enabled: card.clickable
         onClicked: card.clicked()
     }
 

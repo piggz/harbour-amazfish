@@ -45,7 +45,9 @@ QVariant DataSource::data(const Type type, const QDate &day)
         return activitySamples(sd, sd.addDays(1));
     }
     if (type == DataSource::SleepPhases) {
-        // Same window as calculateSleep(): the night ending on the morning of 'day'
+        // The night ending on the morning of 'day': the same window as calculateSleep(day - 1),
+        // which gives the last point of SleepSummary. Half-open (< 12:00), so that the windows
+        // of consecutive days do not share a sample.
         QDateTime start(day.addDays(-1), QTime(12, 00));
         return activitySamples(start, start.addDays(1));
     }

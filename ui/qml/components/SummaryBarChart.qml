@@ -17,7 +17,7 @@ Item {
     property color colorY: styler.chartActiveColor
     property color colorBelowGoal: styler.chartActiveDimColor
     property color colorZ: styler.chartDeepSleepColor
-    property var colorFor: null              // optional function(value) giving each bar its own colour
+    property var colorFor: null              // optional function(value) giving each bar its own colour (not stacked)
     property real minY: 0                    // bars start here, e.g. 80 for blood oxygen
     property real maxY: 0                    // 0: fitted to the values
     property bool showAverage: true
@@ -109,13 +109,15 @@ Item {
 
             var fontPx = styler.themeFontSizeExtraSmall;
             ctx.font = ChartTools.canvasFont(fontPx, styler.themeFontFamily, false);
-            var axisW = fontPx * 3;
+            var lowY = minY;
+            var span = priv.topY - lowY;
+            // wide enough for the longest axis label (e.g. "12000"), whatever the font
+            var axisW = Math.max(ctx.measureText(valueLabel(priv.topY)).width,
+                                 ctx.measureText(valueLabel(lowY)).width) + fontPx * 0.8;
             var bottom = fontPx * 1.8;
             var top = fontPx * 0.6;
             var plotW = width - axisW;
             var plotH = height - bottom - top;
-            var lowY = minY;
-            var span = priv.topY - lowY;
 
             function yOf(v) { return top + plotH - (Math.max(lowY, Math.min(priv.topY, v)) - lowY) / span * plotH; }
 
@@ -159,15 +161,18 @@ Item {
                 var base = top + plotH;
 
                 if (stacked) {
-                    var hz = p.z / span * plotH;
-                    var hy = p.y / span * plotH;
-                    if (hz > 0) { ctx.fillStyle = colorZ; ctx.fillRect(x, base - hz, bw, hz); }
+                    // z at the bottom, y on top of it; yOf() keeps both inside the plot
+                    var zTop = yOf(lowY + p.z);
+                    var yTop = yOf(lowY + p.z + p.y);
+                    var hz = base - zTop;
+                    var hy = zTop - yTop;
+                    if (hz > 0) { ctx.fillStyle = colorZ; ctx.fillRect(x, zTop, bw, hz); }
                     if (hy > 0) {
                         ctx.fillStyle = colorY;
                         ctx.beginPath();
-                        ctx.roundedRect(x, base - hz - hy, bw, hy, radius, radius);
+                        ctx.roundedRect(x, yTop, bw, hy, radius, radius);
                         ctx.fill();
-                        if (hy > radius) ctx.fillRect(x, base - hz - radius, bw, radius);
+                        if (hy > radius) ctx.fillRect(x, zTop - radius, bw, radius);
                     }
                 } else {
                     var h = base - yOf(p.y);
