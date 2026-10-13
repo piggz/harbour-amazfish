@@ -21,7 +21,7 @@ DropArea {
             bottom: dropIndex === 0 ? undefined : parent.verticalCenter
         }
         height: 2
-        opacity: root.containsDrag ? 0.8 : 0.0
-        color: "red"
+        opacity: root.containsDrag ? styler.dragIndicatorOpacity : 0.0
+        color: styler.dragIndicatorColor
     }
 }
