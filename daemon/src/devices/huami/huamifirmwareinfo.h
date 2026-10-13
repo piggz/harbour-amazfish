@@ -53,8 +53,11 @@ public:
             0x8c, 0x36, 0x2e, 0x8c, 0x9c, 0x08, 0x54, 0xa6
     };
 
-    static constexpr uint8_t GPS_ALMANAC_HEADER[5] = { // probably wrong
-            0xa0, 0x80, 0x08, 0x00, 0x8b
+    // GPS almanac (gps_alm.bin). Only the first four bytes are fixed: the fifth
+    // (0x8b in an old sample, whose next byte 0x07 made up 0x078b = GPS week 1931,
+    // i.e. January 2017) varies between files, so current almanacs never matched.
+    static constexpr uint8_t GPS_ALMANAC_HEADER[4] = {
+        0xa0, 0x80, 0x08, 0x00
     };
 
     static constexpr uint8_t GPS_CEP_HEADER[4]{ // probably wrong

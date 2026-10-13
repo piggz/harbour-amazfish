@@ -37,6 +37,10 @@ void AbstractOperationService::notifyOperation(const QString &characteristic, co
     if (m_currentOperation) {
         m_operationTimeout->start(10000);
         bool finished = m_currentOperation->characteristicChanged(characteristic, value);
+        if (!finished) {
+            // the reply may have started a step the watch needs longer for
+            m_operationTimeout->start(m_currentOperation->timeoutMs());
+        }
 
         if (finished) {
             qDebug() << "Operation complete, notifying.....";
