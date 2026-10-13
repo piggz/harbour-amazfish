@@ -37,6 +37,7 @@ protected:
     void saveLastActivitySync(qint64 millis);
 
     void setAbort(bool abort);
+    bool isZeppOs() const;
     virtual bool processBufferedData() = 0;
 
 
