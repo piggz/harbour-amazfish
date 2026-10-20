@@ -22,6 +22,8 @@ import org.kde.kirigami 2.4 as Kirigami
 
 Kirigami.Action {
     property bool isAction: true
+    property string iconSource // StylerPL gives theme icon names, not URLs
+    icon.name: iconSource
     signal clicked
     onTriggered: clicked()
 }
