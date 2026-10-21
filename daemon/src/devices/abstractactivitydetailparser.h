@@ -16,7 +16,7 @@ public:
     void setSummary(const ActivitySummary &summary);
     QString toText();
     QString toTCX();
-    double convertHuamiValueToDecimalDegrees(long huamiValue);
+    static double convertHuamiValueToDecimalDegrees(long huamiValue);
 
 
 protected:

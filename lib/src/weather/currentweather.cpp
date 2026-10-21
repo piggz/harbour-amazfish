@@ -54,11 +54,9 @@ City * CurrentWeather::city() const
     return m_city;
 }
 
-void CurrentWeather::setCity(City *city)
+void CurrentWeather::setCity(City *c)
 {
-    if (m_city != city) {
-        m_city = city;
-    }
+    m_city = c;
 }
 
 qreal CurrentWeather::temperature() const
@@ -116,8 +114,8 @@ void CurrentWeather::handleCurrent(const QByteArray &reply)
     m_windSpeed = wind.value("speed").toVariant().toDouble();
 //    qDebug() << "wind =  " << wind << " m_windDeg = " << m_windDeg << " m_windSpeed = " << m_windSpeed;
 
-    QJsonObject clouds = object.value("clouds").toObject();
-    m_clouds = clouds.value("all").toVariant().toInt();
+    QJsonObject _clouds = object.value("clouds").toObject();
+    m_clouds = _clouds.value("all").toVariant().toInt();
 
 //    qDebug() << "clouds " << clouds << m_clouds;
 
@@ -170,7 +168,7 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
 
         QJsonObject weather = obj.value("weather").toArray().first().toObject();
 
-        QString weatherIcon = weather.value("icon").toVariant().toString();
+        QString _weatherIcon = weather.value("icon").toVariant().toString();
 
         int code = weather.value("id").toVariant().toInt();
         double precipProbability = obj.value("pop").toVariant().toDouble();
@@ -219,13 +217,13 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
                 << "dt = " << dt
                 << "desc = "  << desc
                 << "code = "  << code
-                << "icon = "  << weatherIcon
+                << "icon = "  << _weatherIcon
                 << "pressure = "  << main.value("pressure").toDouble()
                 << "precipProbability = " << precipProbability;
             f.setDateTime(dt);
             f.setDescription(desc);
             f.setWeatherCode(code);
-            f.setWeatherIcon(weatherIcon);
+            f.setWeatherIcon(_weatherIcon);
             f.setPressure(main.value("pressure").toDouble());
             f.setHumidity(main.value("humidity").toDouble());
             f.setPrecipProbability(precipProbability);
@@ -246,7 +244,7 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
 
     m_forecasts << f;
 
-    foreach(Forecast fc, m_forecasts) {
+    foreach(const Forecast &fc, m_forecasts) {
         qDebug() << fc;
     }
 
@@ -294,11 +292,9 @@ QString CurrentWeather::language() const
     return m_language;
 }
 
-void CurrentWeather::setLanguage(const QString &language)
+void CurrentWeather::setLanguage(const QString &l)
 {
-    if (m_language != language) {
-        m_language = language;
-    }
+    m_language = l;
 }
 
 void CurrentWeather::slotFinishedCurrent()
@@ -398,9 +394,9 @@ qreal CurrentWeather::Forecast::precipProbability() const
     return m_precipProbability;
 }
 
-void CurrentWeather::Forecast::setPrecipProbability(qreal precipProbability)
+void CurrentWeather::Forecast::setPrecipProbability(qreal pp)
 {
-    m_precipProbability = precipProbability;
+    m_precipProbability = pp;
 }
 
 qreal CurrentWeather::Forecast::minTemperature() const
@@ -408,9 +404,9 @@ qreal CurrentWeather::Forecast::minTemperature() const
     return m_minTemperature;
 }
 
-void CurrentWeather::Forecast::setMinTemperature(qreal minTemperature)
+void CurrentWeather::Forecast::setMinTemperature(qreal minT)
 {
-    m_minTemperature = minTemperature;
+    m_minTemperature = minT;
 }
 
 qreal CurrentWeather::Forecast::maxTemperature() const
@@ -418,9 +414,9 @@ qreal CurrentWeather::Forecast::maxTemperature() const
     return m_maxTemperature;
 }
 
-void CurrentWeather::Forecast::setWeatherIcon(QString _weatherIcon)
+void CurrentWeather::Forecast::setWeatherIcon(const QString &wi)
 {
-    m_weatherIcon = _weatherIcon;
+    m_weatherIcon = wi;
 }
 
 QString CurrentWeather::Forecast::weatherIcon() const
@@ -429,9 +425,9 @@ QString CurrentWeather::Forecast::weatherIcon() const
 }
 
 
-void CurrentWeather::Forecast::setMaxTemperature(qreal maxTemperature)
+void CurrentWeather::Forecast::setMaxTemperature(qreal maxT)
 {
-    m_maxTemperature = maxTemperature;
+    m_maxTemperature = maxT;
 }
 
 int CurrentWeather::Forecast::weatherCode() const
@@ -439,19 +435,19 @@ int CurrentWeather::Forecast::weatherCode() const
     return m_weatherCode;
 }
 
-void CurrentWeather::Forecast::setWeatherCode(int weatherCode)
+void CurrentWeather::Forecast::setWeatherCode(int wc)
 {
-    m_weatherCode = weatherCode;
+    m_weatherCode = wc;
 }
 
-void CurrentWeather::Forecast::setDescription(const QString &description)
+void CurrentWeather::Forecast::setDescription(const QString &d)
 {
-    m_description = description;
+    m_description = d;
 }
 
-void CurrentWeather::Forecast::setDateTime(qlonglong dateTime)
+void CurrentWeather::Forecast::setDateTime(qlonglong dt)
 {
-    m_dateTime = dateTime;
+    m_dateTime = dt;
 }
 
 uint8_t CurrentWeather::Forecast::rainMMDay() const

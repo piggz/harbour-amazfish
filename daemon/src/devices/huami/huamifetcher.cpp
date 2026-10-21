@@ -87,7 +87,7 @@ void HuamiFetcher::setNotifications(bool control, bool data)
     m_device->setActivityNotifications(control, data);
 }
 
-void HuamiFetcher::writeControl(const QByteArray value)
+void HuamiFetcher::writeControl(const QByteArray &value)
 {
     qDebug() << Q_FUNC_INFO;
     m_device->writeActivityControl(value);

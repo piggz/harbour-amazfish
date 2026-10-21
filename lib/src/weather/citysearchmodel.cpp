@@ -50,8 +50,8 @@ struct CityItem
     QString state;
     QString country;
     QString countryCode;
-    float lon;
-    float lat;
+    float lon = 0;
+    float lat = 0;
 };
 
 CitySearchModel::CitySearchModel(QObject *parent) :

@@ -59,7 +59,7 @@ AbstractFirmwareInfo* PebbleDevice::firmwareInfo(const QByteArray &bytes, const 
 //    virtual void requestScreenshot() override;
 
 
-void PebbleDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
+void PebbleDevice::onPropertiesChanged(const QString &interface, QVariantMap map, const QStringList &list)
 {
     qDebug() << Q_FUNC_INFO << interface << map << list;
 

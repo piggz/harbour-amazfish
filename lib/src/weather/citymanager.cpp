@@ -133,11 +133,11 @@ void CityManager::loadCities()
                                   jsonCity.value(LONGITUDE).toDouble(),
                                   jsonCity.value(LATITUDE).toDouble(), this);
         QJsonObject cityProperties = jsonCity.value(PROPERTIES).toObject();
-        QVariantMap properties;
+        QVariantMap props;
         foreach (const QString &key, cityProperties.keys()) {
-            properties.insert(key, cityProperties.value(key).toVariant());
+            props.insert(key, cityProperties.value(key).toVariant());
         }
-        city->setProperties(properties);
+        city->setProperties(props);
 
         m_cities.append(city);
         m_citiesMap.insert(city->identifier(), city);
@@ -183,7 +183,7 @@ QString CityManager::configFilePath()
 void CityManager::save()
 {
     QJsonArray jsonArray;
-    foreach (City *cityEntry, m_cities) {
+    foreach (const City *cityEntry, m_cities) {
         QJsonObject jsonCity;
         jsonCity.insert(IDENTIFIER, cityEntry->identifier());
         jsonCity.insert(NAME, cityEntry->name());
@@ -196,9 +196,9 @@ void CityManager::save()
 
         if (!cityEntry->properties().isEmpty()) {
             QJsonObject jsonCityProperties;
-            auto properties = cityEntry->properties();
+            auto props = cityEntry->properties();
 
-            for (auto it = properties.cbegin(); it != properties.cend(); ++it)
+            for (auto it = props.cbegin(); it != props.cend(); ++it)
             {
                 jsonCityProperties.insert(it.key(), QJsonValue::fromVariant(it.value()));
             }

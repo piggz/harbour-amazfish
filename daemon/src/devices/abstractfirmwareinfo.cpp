@@ -59,12 +59,12 @@ void AbstractFirmwareInfo::calculateCRC32()
 {
     uint32_t crc = crc32(0L, Z_NULL, 0);
 
-    char *bytes = m_bytes.data();
+    char *by = m_bytes.data();
     int len = m_bytes.length();
 
     for (int i = 0; i < len; ++i)
     {
-        crc = crc32(crc, (unsigned char*)bytes + i, 1);
+        crc = crc32(crc, (unsigned char*)by + i, 1);
     }
     m_crc32 = crc;
 }

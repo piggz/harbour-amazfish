@@ -58,8 +58,6 @@ bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
 {
     QSharedPointer<KDbSqlResult> result;
 
-    bool success = true;
-
     KDbTransaction transaction = m_conn->beginTransaction();
     KDbTransactionGuard tg(transaction);
 
@@ -70,7 +68,7 @@ bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
 
         lastTime = r.timestamp;
 
-        if (m_conn && m_conn->isDatabaseUsed()) {
+        if (m_conn->isDatabaseUsed()) {
             KDbEscapedString sql = KDbEscapedString("SELECT hrv_id FROM hrv WHERE hrv_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
             tristate success = m_conn->querySingleNumber(sql, &count);
             qDebug() << sql << success << count;

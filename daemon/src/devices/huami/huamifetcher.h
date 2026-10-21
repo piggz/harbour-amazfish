@@ -19,7 +19,7 @@ public:
     void fetchData(const QByteArray &value);
 
     void setNotifications(bool control, bool data);
-    void writeControl(const QByteArray value);
+    void writeControl(const QByteArray &value);
     void message(const QString &string);
     void jumpQueue(AbstractFetchOperation* operation);
     void reset();

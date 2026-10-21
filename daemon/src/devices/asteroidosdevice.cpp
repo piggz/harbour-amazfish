@@ -79,7 +79,7 @@ void AsteroidOSDevice::pair()
 }
 
 
-void AsteroidOSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
+void AsteroidOSDevice::onPropertiesChanged(const QString &interface, QVariantMap map, const QStringList &list)
 {
     qDebug() << Q_FUNC_INFO << interface << map << list;
 
@@ -125,7 +125,7 @@ void AsteroidOSDevice::initialise()
     setConnectionState("connected");
     parseServices();
 
-    AsteroidNotificationService *notification = qobject_cast<AsteroidNotificationService*>(service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION));
+    const AsteroidNotificationService *notification = qobject_cast<AsteroidNotificationService*>(service(AsteroidNotificationService::UUID_SERVICE_NOTIFICATION));
     if (notification) {
 //        notification->enableNotification(AsteroidNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_EVENT);
 //        connect(alert, &AlertNotificationService::serviceEvent, this, &PinetimeJFDevice::serviceEvent, Qt::UniqueConnection);

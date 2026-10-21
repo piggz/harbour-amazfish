@@ -60,7 +60,7 @@ public:
         void setWeatherCode(int weatherCode);
 
         QString weatherIcon() const;
-        void setWeatherIcon(QString weatherIcon);
+        void setWeatherIcon(const QString &weatherIcon);
 
         void setDescription(const QString &description);
         QString description() const;
