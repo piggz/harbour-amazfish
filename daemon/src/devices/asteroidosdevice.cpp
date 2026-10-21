@@ -1,5 +1,4 @@
 #include "asteroidosdevice.h"
-
 #include "batteryservice.h"
 #include "asteroidtimeservice.h"
 #include "asteroidweatherservice.h"
@@ -7,8 +6,8 @@
 #include "asteroidmediaservice.h"
 #include "asteroidscreenshotservice.h"
 
-#include <QtXml/QtXml>
-
+#include <QDir>
+#include <QStandardPaths>
 
 AsteroidOSDevice::AsteroidOSDevice(const QString &pairedName, QObject *parent) : AbstractDevice(pairedName, parent)
 {

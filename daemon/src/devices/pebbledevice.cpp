@@ -1,5 +1,3 @@
-#include <QtXml/QtXml>
-
 #include "deviceinfoservice.h"
 #include "pebbleservice.h"
 #include "pebbledevice.h"

@@ -399,7 +399,7 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
     QVector<CalendarEventProto> protoEvents;
     protoEvents.reserve(events.size());
 
-    for ( watchfish::CalendarEvent event : events) {
+    for ( const watchfish::CalendarEvent &event : std::as_const(events)) {
         CalendarEventProto proto;
 
         // title

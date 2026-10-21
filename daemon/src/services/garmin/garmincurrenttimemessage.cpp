@@ -1,8 +1,8 @@
 #include "garmincurrenttimemessage.h"
-
 #include "garmintypes.h"
 
-#include "QDateTime"
+#include <QDateTime>
+#include <QTimeZone>
 
 void GarminCurrentTimeMessage::parse(const QByteArray& data) {
     // no parsing needed as no incoming information

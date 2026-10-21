@@ -4,6 +4,8 @@
 #include "amazfishconfig.h"
 #include "huami/huamifetcher.h"
 
+#include <QTimeZone>
+
 AbstractFetchOperation::AbstractFetchOperation(HuamiFetcher *fetcher, bool isZeppOs) : m_fetcher(fetcher), m_isZeppOs(isZeppOs)
 {
 

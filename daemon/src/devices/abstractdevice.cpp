@@ -4,6 +4,7 @@
 
 #include <QString>
 #include <QDomDocument>
+#include <QDBusReply>
 
 AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBLEDevice(parent)
 {

@@ -1,5 +1,5 @@
 #include "abstractoperationservice.h"
-
+#include <QDebug>
 
 AbstractOperationService::AbstractOperationService(const QString &uuid, const QString &path, QObject *parent)
     : QBLEService(uuid, path, parent)
@@ -32,8 +32,6 @@ AbstractOperation *AbstractOperationService::currentOperation()
 
 void AbstractOperationService::notifyOperation(const QString &characteristic, const QByteArray &value)
 {
-    QVector <AbstractOperation *> finishedList;
-
     if (m_currentOperation) {
         m_operationTimeout->start(10000);
         bool finished = m_currentOperation->characteristicChanged(characteristic, value);

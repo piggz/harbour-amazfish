@@ -9,7 +9,6 @@
 #include <algorithm>
 #include <KDb.h>
 #include <QtNetwork>
-#include <QtXml/QtXml>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
 #define endl Qt::endl
@@ -628,7 +627,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             return;
         }
         QList<QString> trksListQStr;
-        for (const QJsonValue &v : trksList) {
+        for (const QJsonValue &v : std::as_const(trksList)) {
             trksListQStr << v.toString();
         }
 
@@ -1375,7 +1374,7 @@ void BangleJSDevice::actTrksList(const QList<QString> &available)
     qDebug() << "filesToDelete" << filesToDelete;
     if (!filesToDelete.isEmpty()) {
         QStringList quoted;
-        for (const QString &f : filesToDelete) {
+        for (const QString &f : std::as_const(filesToDelete)) {
             quoted << QStringLiteral("\"") + f + QStringLiteral("\"");
         }
 

@@ -41,8 +41,8 @@ public:
     //Weather
     void sendWeather(CurrentWeather *weather) override;
 
-    virtual void applyDeviceSetting(Amazfish::Settings s);
-    virtual void immediateAlert(int level) override;
+    void applyDeviceSetting(Amazfish::Settings s) override;
+    void immediateAlert(int level) override;
 
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);

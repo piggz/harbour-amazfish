@@ -1,5 +1,3 @@
-#include <QtXml/QtXml>
-
 #include "dk08device.h"
 #include "dk08nusservice.h"
 #include "dk08wechatservice.h"

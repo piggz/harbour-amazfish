@@ -1,9 +1,9 @@
 #ifndef HUAMIFETCHER_H
 #define HUAMIFETCHER_H
 
-
 #include "abstractfetchoperation.h"
 #include "amazfish.h"
+#include <QTimer>
 
 class HuamiDevice;
 

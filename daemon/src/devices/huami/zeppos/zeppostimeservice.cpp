@@ -21,17 +21,17 @@ void ZeppOsTimeService::handlePayload(const QByteArray &payload)
     switch (payload[0]) {
     case CMD_CAPABILITIES_RESPONSE:
         version = payload[1] & 0xff;
-        qDebug() << "Got time service version:", version;
+        qDebug() << "Got time service version:"<< version;
         return;
     case CMD_SET_TIME_ACK:
-        qDebug() << "Got set time ack, status:", payload[1]; // 1
+        qDebug() << "Got set time ack, status:" << payload[1]; // 1
         return;
     case CMD_SET_DST_ACK:
-        qDebug() << "Got set DST ack, status:", payload[1]; // 1
+        qDebug() << "Got set DST ack, status:" << payload[1]; // 1
         return;
     }
 
-    qDebug() << "Unexpected time payload byte:", payload.toHex();
+    qDebug() << "Unexpected time payload byte:" << payload.toHex();
 }
 
 void ZeppOsTimeService::setTime()

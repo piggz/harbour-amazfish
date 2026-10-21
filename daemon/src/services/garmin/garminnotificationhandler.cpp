@@ -4,8 +4,7 @@
 #include "garminnotificationdatamessage.h"
 
 #include <optional>
-
-
+#include <QThread>
 
 void GarminNotificationHandler::cleanupOldNotifications()
 {

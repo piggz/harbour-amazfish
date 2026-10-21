@@ -262,9 +262,9 @@ int ZeppOsActivityDetailParser::consumeStrengthSet(const QByteArray &bytes, int 
 
 ZeppOsActivityDetailParser::Type ZeppOsActivityDetailParser::typeFromCode(char code)
 {
-    for (auto key : m_types.keys()) {
-        if (key == (Type)code) {
-            return key;
+    for (auto it = m_types.begin(); it != m_types.end(); ++it) {
+        if (it.key() == (Type)code) {
+            return it.key();
         }
     }
 

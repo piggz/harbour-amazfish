@@ -2,9 +2,8 @@
 #define ABSTRACTOPERATIONSERVICE_H
 
 #include "abstractoperation.h"
-
 #include <qbleservice.h>
-
+#include <QTimer>
 
 class AbstractOperationService : public QBLEService
 {

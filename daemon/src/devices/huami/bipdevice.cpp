@@ -1,8 +1,6 @@
 #include "bipdevice.h"
 #include "bipfirmwareinfo.h"
 
-#include <QtXml/QtXml>
-
 BipDevice::BipDevice(const QString &pairedName, QObject *parent) : HuamiDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO;

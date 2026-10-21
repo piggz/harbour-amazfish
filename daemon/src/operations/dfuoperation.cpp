@@ -1,10 +1,14 @@
 #include "dfuoperation.h"
 #include "dfuservice.h"
 #include "typeconversion.h"
+
 #include <QApplication>
 #include <KArchive>
 #include <kzip.h>
 #include <KCompressionDevice>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QDataStream>
 
 namespace {
 QString getFirmwareFileName(QByteArray& manifestData) {

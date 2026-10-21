@@ -18,7 +18,9 @@
 #include "amazfishconfig.h"
 #include "realtimeactivitysample.h"
 #include "qble/qblelocalapplication.h"
-#include <QtXml/QtXml>
+
+#include <QDomDocument>
+#include <QDBusReply>
 
 namespace {
 size_t GetMtuForCharacteristic(QString path, const char* characteristicUUID)

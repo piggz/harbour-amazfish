@@ -1,7 +1,7 @@
 #include "infinitimeweatherservice.h"
-#include "typeconversion.h"
 #include "codec.h"
 
+#include <QPoint>
 #include <QDateTime>
 #include <QDebug>
 #include <math.h>

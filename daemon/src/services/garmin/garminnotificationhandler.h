@@ -7,6 +7,7 @@
 #include <QDateTime>
 #include <QElapsedTimer>
 #include <QObject>
+#include <QQueue>
 
 #include "communicator_v2.h"
 #include"garminnotificationupdatemessage.h"
@@ -171,8 +172,6 @@ struct NotificationTypeUtil
 
 //
 
-
-
 //
 // -------------------------
 // CallCommand
@@ -199,8 +198,6 @@ struct CallSpec
     std::optional<QString> sourceAppId;
     CallCommand command;
 };
-
-
 
 class GarminNotificationHandler : public QObject
 {

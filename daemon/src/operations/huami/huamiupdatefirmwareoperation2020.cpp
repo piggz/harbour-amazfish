@@ -4,6 +4,8 @@
 #include "mibandservice.h"
 #include "huami/huamifirmwareinfo.h"
 
+#include <QThread>
+
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_REQUEST_PARAMETERS;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_START_FILE;
 constexpr uint8_t HuamiUpdateFirmwareOperation2020::COMMAND_SEND_FIRMWARE_INFO;

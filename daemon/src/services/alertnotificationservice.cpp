@@ -1,4 +1,5 @@
 #include "alertnotificationservice.h"
+#include <QDebug>
 
 const char* AlertNotificationService::UUID_SERVICE_ALERT_NOTIFICATION  = "00001811-0000-1000-8000-00805f9b34fb";
 const char* AlertNotificationService::UUID_CHARACTERISTIC_ALERT_NOTIFICATION_NEW_ALERT = "00002a46-0000-1000-8000-00805f9b34fb";

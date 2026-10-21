@@ -1,5 +1,9 @@
 #include "uartservice.h"
 
+#include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 const char* UARTService::UUID_SERVICE_UART = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
 const char* UARTService::UUID_CHARACTERISTIC_UART_TX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
 const char* UARTService::UUID_CHARACTERISTIC_UART_RX = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";

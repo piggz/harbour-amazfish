@@ -52,7 +52,10 @@ bool Huami2021ChunkedDecoder::decode(QByteArray data)
     m_lastCount = data[i++];
 
     if (firstChunk) { // beginning
-        int full_length = (data[i++] & 0xff) | ((data[i++] & 0xff) << 8) | ((data[i++] & 0xff) << 16) | ((data[i++] & 0xff) << 24);
+        int full_length = (data[i++] & 0xff);
+        full_length |= ((data[i++] & 0xff) << 8);
+        full_length |= ((data[i++] & 0xff) << 16);
+        full_length |= ((data[i++] & 0xff) << 24);
         m_currentLength = full_length;
         if (encrypted) {
             int encrypted_length = full_length + 8;

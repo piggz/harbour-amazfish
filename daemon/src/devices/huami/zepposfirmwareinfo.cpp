@@ -3,6 +3,9 @@
 #include <KArchive>
 #include <kzip.h>
 #include <KCompressionDevice>
+#include <QDebug>
+#include <QDataStream>
+#include <QUrl>
 
 ZeppOSFirmwareInfo::ZeppOSFirmwareInfo(const QByteArray &bytes, const QString &path) : HuamiFirmwareInfo()
 {

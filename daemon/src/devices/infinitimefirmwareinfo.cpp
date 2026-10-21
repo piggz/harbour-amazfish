@@ -1,8 +1,10 @@
 #include "infinitimefirmwareinfo.h"
-
 #include <KArchive>
 #include <kzip.h>
 #include <KCompressionDevice>
+#include <QDebug>
+#include <QDataStream>
+#include <QRegularExpression>
 
 InfinitimeFirmwareInfo::InfinitimeFirmwareInfo(const QByteArray &bytes)
 {
@@ -63,7 +65,7 @@ void InfinitimeFirmwareInfo::determineFirmwareVersion()
                 if(zip.open(QIODevice::ReadOnly)) {
                     auto* root = zip.directory();
                     foreach (const QString &entryName, root->entries()) {
-                        QRegularExpressionMatch match = binNameVersionPattern.match(entryName);
+                        static QRegularExpressionMatch match = binNameVersionPattern.match(entryName);
                         if (match.hasMatch()) {
                             m_version = QString("FW (%1)").arg(match.captured(1));
                             break;

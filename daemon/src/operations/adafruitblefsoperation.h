@@ -4,7 +4,9 @@
 #include "abstractoperation.h"
 #include "abstractdevice.h"
 #include "abstractfirmwareinfo.h"
+
 #include <future>
+#include <QThread>
 
 class AdafruitBleFsService;
 class BleFsWorker;

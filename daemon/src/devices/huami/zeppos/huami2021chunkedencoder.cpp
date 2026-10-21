@@ -2,6 +2,7 @@
 #include "qbleservice.h"
 #include <zlib.h>
 #include <qaesencryption.h>
+#include <QDebug>
 
 Huami2021ChunkedEncoder::Huami2021ChunkedEncoder(QBLECharacteristic *characteristic, bool force2021Protocol, int mtu) : m_characteristic(characteristic), m_force202Protocl(force2021Protocol), m_mtu(mtu)
 {

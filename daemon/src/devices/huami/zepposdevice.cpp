@@ -231,7 +231,7 @@ void ZeppOSDevice::ready()
 
     m_stepsService->enableRealtimeSteps(true);
 
-    for (AbstractZeppOsService *service : m_zosServiceMap.values()) {
+    for (AbstractZeppOsService *service : m_zosServiceMap) {
         if (m_supportedServices.contains(service->endpoint())) {
             // Only initialize supported services
             service->initialize();

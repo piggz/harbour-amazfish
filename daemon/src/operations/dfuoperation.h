@@ -5,6 +5,8 @@
 #include "abstractoperation.h"
 #include "dfuworker.h"
 
+#include <QThread>
+
 class DfuService;
 class AbstractFirmwareInfo;
 class DfuOperation : public QObject, public AbstractOperation

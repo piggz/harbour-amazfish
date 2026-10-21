@@ -6,11 +6,9 @@
 #include "garmingfdimessage.h"
 #include "garminspo2message.h"
 #include "garminhrmmessage.h"
-#include "garminhrvmessage.h"
 #include "garminstepsmessage.h"
 #include "amazfishconfig.h"
 #include "garmindevicestatusmessage.h"
-#include "garminnotificationsubscriptionmessage.h"
 
 #include <QtCore/QStringList>
 #include <QtCore/QMetaObject>
@@ -20,8 +18,7 @@
 #include <QDataStream>
 #include <QObject>
 #include <QMutex>
-
-
+#include <QDBusReply>
 
 const char* CommunicatorV2::BASE_UUID                   = "6a4e%1-667b-11e3-949a-0800200c9a66";
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI = "6a4e2800-667b-11e3-949a-0800200c9a66";

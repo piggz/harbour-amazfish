@@ -76,7 +76,7 @@ void DeviceFactory::printAvailableFeatures()
 #else // Qt 6+
         QStringList parts = type.split(QRegularExpression("[\\s\\.\\-\\/]+"), Qt::SkipEmptyParts);
 #endif
-        for (const QString &part : parts) {
+        for (const QString &part : std::as_const(parts)) {
             fileName += part.at(0).toUpper() + part.mid(1);
         }
         fileName += ".md";

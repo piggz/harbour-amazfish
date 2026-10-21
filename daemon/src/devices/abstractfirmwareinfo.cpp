@@ -1,4 +1,5 @@
 #include "abstractfirmwareinfo.h"
+#include <qurl.h>
 #include <zlib.h>
 
 AbstractFirmwareInfo::AbstractFirmwareInfo(): m_crc16(0), m_crc32(0)

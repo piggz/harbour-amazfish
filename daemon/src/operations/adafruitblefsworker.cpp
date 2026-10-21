@@ -1,9 +1,13 @@
 #include "adafruitblefsworker.h"
-#include "adafruitblefsservice.h"
 #include "adafruitblefsoperation.h"
+
 #include <KArchive>
 #include <kzip.h>
 #include <KCompressionDevice>
+#include <QDataStream>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 namespace
 {

@@ -1,4 +1,5 @@
 #include "gts2firmwareinfo.h"
+#include <QDebug>
 
 Gts2FirmwareInfo::Gts2FirmwareInfo(const QByteArray &bytes) : HuamiFirmwareInfo()
 {

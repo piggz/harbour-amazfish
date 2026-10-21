@@ -1,12 +1,14 @@
 #include "mibandservice.h"
-#include <QDateTime>
-#include <QTimeZone>
-
 #include "typeconversion.h"
 #include "huami/huamidevice.h"
 #include "huamiweathercondition.h"
 #include "amazfishconfig.h"
 #include "alertnotificationservice.h"
+
+#include <QDateTime>
+#include <QTimeZone>
+#include <QBuffer>
+#include <QtEndian>
 
 const char* MiBandService::UUID_SERVICE_MIBAND = "0000fee0-0000-1000-8000-00805f9b34fb";
 const char* MiBandService::UUID_CHARACTERISTIC_MIBAND_NOTIFICATION = "00000002-0000-3512-2118-0009af100700";
