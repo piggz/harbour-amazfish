@@ -56,7 +56,7 @@ void InfinitimeFirmwareInfo::determineFirmwareVersion()
         {
             m_version = "FW ()";
 
-            QRegularExpression binNameVersionPattern(".*-((\\d+\\.){2}\\d+)\\.bin$");
+            static QRegularExpression binNameVersionPattern(".*-((\\d+\\.){2}\\d+)\\.bin$");
             if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(ZIP_HEADER))) {
                 QDataStream in(&m_bytes, QIODevice::ReadOnly);
                 KCompressionDevice dev(in.device(), false, KCompressionDevice::CompressionType::None);

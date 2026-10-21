@@ -24,7 +24,7 @@ void GarminDeviceStatusMessage::parse(const QByteArray& data) {
 }
 
 QByteArray GarminDeviceStatusMessage::generateOutgoing(const QByteArray& data) {
-
+    return QByteArray();
 }
 
 
@@ -54,7 +54,6 @@ QByteArray GarminDeviceStatusMessage::generateBatteryStatusRequest() {
     // DeviceStatusService.remote_device_battery_status_request (field 2, type length-delimited)
 
     // Inner message: RemoteDeviceBatteryStatusRequest (empty)
-    QByteArray inner; // empty
 
     // DeviceStatusService with field 2 (remote_device_battery_status_request)
     QByteArray deviceStatusService;

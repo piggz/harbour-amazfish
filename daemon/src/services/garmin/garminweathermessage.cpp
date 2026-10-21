@@ -17,9 +17,9 @@ void GarminWeatherMessage::parse(const QByteArray& data) {
 }
 
 QByteArray GarminWeatherMessage::generateOutgoing(const QByteArray& data) {
-
+    return QByteArray();
 }
 
 QByteArray GarminWeatherMessage::encodeWeather(const CurrentWeather *weather) {
-
+    return QByteArray();
 }

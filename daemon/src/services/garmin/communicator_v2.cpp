@@ -173,7 +173,6 @@ bool CommunicatorV2::initializeDevice() {
         connect(mState->characteristicReceive.data(),&QBLECharacteristic::characteristicRead,this,&CommunicatorV2::onCharacteristicChanged);
         if (mIsMlProtocol) {
             const QByteArray closeAll = createCloseAllServicesMessage();
-            QString errorMsg;
             // write async to avoid timing issues on reconnect
             mState->characteristicSend->writeAsync(closeAll);
         }
@@ -804,9 +803,6 @@ void CommunicatorV2::registerServices() {
     {
         qDebug() << "Garmin: No device configured";
     }
-
-    QString errorMsg;
-
 
     registerService(Service::GFDI, false); // reliable implemantation is broken, use unreliable for now
 

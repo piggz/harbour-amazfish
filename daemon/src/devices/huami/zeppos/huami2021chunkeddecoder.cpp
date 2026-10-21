@@ -66,7 +66,8 @@ bool Huami2021ChunkedDecoder::decode(QByteArray data)
             full_length = encrypted_length;
         }
         m_reassemblyBuffer.resize(full_length);
-        m_currentType = (data[i++] & 0xff) | ((data[i++] & 0xff) << 8);
+        m_currentType = (data[i++] & 0xff);
+        m_currentType |= ((data[i++] & 0xff) << 8);
         m_currentHandle = handle;
     }
 
