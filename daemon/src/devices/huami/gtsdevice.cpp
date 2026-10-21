@@ -36,7 +36,11 @@ Amazfish::Features GtsDevice::supportedFeatures() const
 
 Amazfish::DataTypes GtsDevice::supportedDataTypes() const
 {
-    return Amazfish::DataType::TYPE_ACTIVITY | Amazfish::DataType::TYPE_GPS_TRACK | Amazfish::DataType::TYPE_HEART_RATE;
+    // Sleep phases arrive in the normal activity data, as on the Bip
+    return Amazfish::DataType::TYPE_ACTIVITY
+        | Amazfish::DataType::TYPE_GPS_TRACK
+        | Amazfish::DataType::TYPE_HEART_RATE
+        | Amazfish::DataType::TYPE_SLEEP;
 }
 
 void GtsDevice::serviceEvent(uint8_t event)
