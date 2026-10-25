@@ -93,9 +93,12 @@ public:
 
     void sendWeather(CurrentWeather *weather) override;
 
+    void pair() override;
+
 protected:
     void initialise() override;
     QBLEService* drv_createService(const QString &uuid, const QString &path) override;
+    bool m_needsAuth = false;
 
 };
 

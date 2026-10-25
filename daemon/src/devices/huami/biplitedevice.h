@@ -13,6 +13,9 @@ public:
 
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
+protected:
+    QBLEService *drv_createService(const QString &uuid, const QString &path) override;
+
 private:
     void initialise() override;
     QString pairedName;

@@ -58,20 +58,6 @@ PinetimeJFDevice::PinetimeJFDevice(const QString &pairedName, QObject *parent) :
     connect(this, &QBLEDevice::propertiesChanged, this, &PinetimeJFDevice::onPropertiesChanged, Qt::UniqueConnection);
 }
 
-void PinetimeJFDevice::pair()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    m_needsAuth = true;
-    m_pairing = true;
-    disconnectFromDevice();
-    setConnectionState("pairing");
-    emit connectionStateChanged();
-
-    QBLEDevice::pair();
-
-}
-
 Amazfish::Features PinetimeJFDevice::supportedFeatures() const
 {
     return Amazfish::Feature::FEATURE_HRM |

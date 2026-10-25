@@ -21,14 +21,12 @@ public:
 
     QString information(Amazfish::Info i) const override;
 
-
 protected:
     void onPropertiesChanged(const QString &interface, QVariantMap map, const QStringList &list);
     QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
     void initialise();
-    virtual void pair() override;
 
 
 //    Q_SLOT void authenticated(bool ready);
