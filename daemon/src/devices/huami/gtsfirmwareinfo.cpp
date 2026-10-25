@@ -28,6 +28,11 @@ void GtsFirmwareInfo::determineFirmwareType() {
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_ALMANAC_HEADER))) {
         m_type = GPS_ALMANAC;
     }
+    // A-GPS data from cep_alm_pak.zip: cep_pak.bin (gps_alm.bin is GPS_ALMANAC above).
+    // Detected for the Bip already, and by Gadgetbridge for GTS and GTR.
+    if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(GPS_CEP_HEADER))) {
+        m_type = GPS_CEP;
+    }
     if (m_bytes.startsWith(UCHARARR_TO_BYTEARRAY(AGPS_UIHH_HEADER))) {
         m_type = GPS_UIHH;
     }
