@@ -9,13 +9,14 @@
 class FetchPaiOperation : public AbstractFetchOperation
 {
 public:
-    FetchPaiOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
+    FetchPaiOperation(HuamiFetcher* fetcher, KDbConnection* conn, bool isZeppOs = false, int round = 0);
 
     void start() override;
 
 private:
     struct PaiRecord {
         QDate day;
+        QDateTime time;
         float low;
         float moderate;
         float high;
@@ -27,6 +28,7 @@ private:
     };
 
     KDbConnection *m_conn;
+    int m_round = 0;
 
     bool processBufferedData() override;
     bool saveRecords(QVector<PaiRecord> recs);
