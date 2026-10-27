@@ -50,6 +50,7 @@ private:
     virtual void pair() override;
     virtual void refreshInformation() override;
 
+    QString mPreferredService;
     QSharedPointer<GarminNotificationHandler> mNotificationHandler;
     QSharedPointer<ProtobufHandler> mProtobufHandler;
     QSharedPointer<CommunicatorV2> mCommunicator;
