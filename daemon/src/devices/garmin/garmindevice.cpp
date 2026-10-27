@@ -31,11 +31,11 @@ Amazfish::Features GarminDevice::supportedFeatures() const
 
     //HRM and steps should be supported on all devices
 
-    return  Amazfish::Feature::FEATURE_NONE
+    return Amazfish::Feature::FEATURE_NONE
         | Amazfish::Feature::FEATURE_HRM
         | Amazfish::Feature::FEATURE_STEPS
         | Amazfish::Feature::FEATURE_ALERT
-        ;
+        | Amazfish::Feature::FEATURE_WEATHER;
 }
 
 
