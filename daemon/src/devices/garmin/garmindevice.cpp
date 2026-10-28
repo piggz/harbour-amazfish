@@ -4,6 +4,7 @@
 #include "hrmservice.h"
 #include "services/garmin/communicator_v2.h"
 #include "services/garmin/garmintypes.h"
+#include "services/garmin/garminweathermessage.h"
 
 #include <QDomDocument>
 #include <QStringList>
@@ -182,6 +183,8 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
         if (map.contains("Connected")) {
             bool value = map["Connected"].toBool();
             if (!value) {
+                // A weather request from this connection must not be answered on the next one.
+                mWeatherRequested = false;
                 setConnectionState("disconnected");
                 if (svc)
                 {
@@ -255,6 +258,7 @@ QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString 
         connect(com.data(), &CommunicatorV2::NotificationPerformAction, mNotificationHandler.data(), &GarminNotificationHandler::onNotificationPerformAction);
         connect(mNotificationHandler.data(), &GarminNotificationHandler::acceptIncomingCall, this, &GarminDevice::onAnswerCallEvent);
         connect(mNotificationHandler.data(), &GarminNotificationHandler::rejectIncomingCall, this, &GarminDevice::onRejectCallEvent);
+        connect(com.data(), &CommunicatorV2::weatherRequestReceived, this, &GarminDevice::onWeatherRequestReceived, Qt::UniqueConnection);
         connect(com.data(), &CommunicatorV2::findPhoneRequested, this, &GarminDevice::onFindPhoneRequested, Qt::UniqueConnection);
         connect(com.data(), &CommunicatorV2::findPhoneCancelled, this, &GarminDevice::onFindPhoneCancelled, Qt::UniqueConnection);
         connect(com.data(), &CommunicatorV2::musicControlCommand, this, &GarminDevice::onMusicControlCommand, Qt::UniqueConnection);
@@ -282,6 +286,34 @@ void GarminDevice::initialise()
     parseServices();
 }
 
+void GarminDevice::sendWeather(CurrentWeather* weather)
+{
+    mWeather = weather;
+    if (mWeatherRequested) {
+        // The watch asked before the first weather reply had arrived.
+        mWeatherRequested = false;
+        sendWeatherToWatch();
+    }
+}
+
+void GarminDevice::onWeatherRequestReceived()
+{
+    if (!mWeather) {
+        mWeatherRequested = true;
+        qDebug() << Q_FUNC_INFO << "Garmin: No weather data yet, answering when the next update arrives";
+        return;
+    }
+    sendWeatherToWatch();
+}
+
+void GarminDevice::sendWeatherToWatch()
+{
+    if (!mCommunicator || !mWeather) {
+        return;
+    }
+    const FitWeatherFrames frames = GarminWeatherMessage::encodeWeather(mWeather);
+    mCommunicator->sendWeatherFrames(frames.fitDefinition, frames.fitData);
+}
 
 void GarminDevice::refreshInformation()
 {

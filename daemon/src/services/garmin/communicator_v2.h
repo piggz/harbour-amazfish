@@ -125,6 +125,12 @@ public:
     void processSendQueue();
     bool sendMessage(const QString& taskName, const QByteArray& message);
 
+    // Starts a weather exchange: the definitions first, then the records once
+    // the watch has applied them. Both payloads come from the device layer.
+    bool sendWeatherFrames(const QByteArray& definitionPayload, const QByteArray& dataPayload);
+    // Reports the watch's answer to a FIT message we sent.
+    void onFitStatusReceived(MessageId messageId, quint8 status, quint8 subStatus);
+
     //  register_service / close_service
     void registerService(Service service, bool reliable);
     void closeService(Service service);
@@ -175,6 +181,10 @@ signals:
     void informationChanged(Amazfish::Info infoKey, const QString& infoValue);
     void NotificationDataRequested(const NotificationControlMessage& msg);
     void NotificationPerformAction(const NotificationControlMessage& msg);
+    // The watch asked for weather. Amazfish answers with the city the user
+    // picked in the UI, not with the coordinates in the request, so the
+    // request itself is not passed on.
+    void weatherRequestReceived();
     // The watch asked the paired phone to make a sound, or to stop.
     void findPhoneRequested();
     void findPhoneCancelled();
@@ -223,6 +233,9 @@ private:
     void saveHRVRecord();
     void saveSpo2Record();
 
+    void resetWeatherTransfer();
+    void onWeatherTransferTimeout();
+
     quint32 mSteps=0;
     quint32 mStepsGoal=10000;
     quint8 mHeartRate=0;
@@ -243,6 +256,17 @@ private:
     bool mIsReliable = false;
     QTimer* mBatteryTimer = nullptr;
     bool mBatteryRequestPending = false;
+
+    // A weather exchange is driven by the watch: records follow the
+    // definitions only after the watch has applied them.
+    enum class WeatherTransferState {
+        Idle,
+        WaitingDefinitionAck,
+        WaitingDataAck
+    };
+    WeatherTransferState mWeatherState = WeatherTransferState::Idle;
+    QByteArray mWeatherDataPayload;
+    QTimer* mWeatherTimeout = nullptr;
     QQueue<QPair<QByteArray, QString>> mSendQueue;
     bool  mSendInProgress = false;
     int mSendRetries = 0;

@@ -80,10 +80,10 @@ void GarminGfdiStatusMessage::parse(const QByteArray& data)
         break;
         */
     case MessageId::FitData:
-        qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
-        break;
     case MessageId::FitDefinition:
-        qDebug() << Q_FUNC_INFO << "Garmin: Detected " << messageIdToString(originalMessageType).value();
+        // No ACK: the reply to this status is the next part of the transfer.
+        handleFitStatus(originalMessageType, data);
+        handled = true;
         break;
         /*
     case MessageId::MusicControl:
@@ -177,6 +177,18 @@ void GarminGfdiStatusMessage::parse(const QByteArray& data)
         mCommunicator->sendMessage("STATUS ACK",resp);
     }
 
+}
+
+void GarminGfdiStatusMessage::handleFitStatus(const quint16 originalMessageType, const QByteArray& data)
+{
+    // A FIT answer is one byte richer than a plain ack: [origMsgId][status]
+    // [subStatus]. The sub status tells whether the records were applied.
+    const quint8 status = u8le(data, 2);
+    const quint8 subStatus = data.size() > 3 ? u8le(data, 3) : 0;
+
+    if (mCommunicator) {
+        mCommunicator->onFitStatusReceived(static_cast<MessageId>(originalMessageType), status, subStatus);
+    }
 }
 
 void GarminGfdiStatusMessage::handleSupportedFileTypesRequest(const QByteArray &data) {
