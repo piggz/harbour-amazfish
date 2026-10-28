@@ -18,12 +18,15 @@ const quint16 FIT_MESSAGE_WEATHER_CONDITIONS = 128;
 
 // FIT WeatherReport ordinals.
 const quint8 REPORT_CURRENT = 0;
+const quint8 REPORT_HOURLY_FORECAST = 1;
 const quint8 REPORT_DAILY_FORECAST = 2;
 
 // Local message types. FIT only registers a local type once a record is added
-// under it, so leaving out the hourly_forecast report leaves daily at type 1.
+// under it, so every report keeps its own type and an empty report is simply
+// never defined. Same order Gadgetbridge allocates them in.
 const quint8 LOCAL_TYPE_CURRENT = 0;
-const quint8 LOCAL_TYPE_DAILY = 1;
+const quint8 LOCAL_TYPE_HOURLY = 1;
+const quint8 LOCAL_TYPE_DAILY = 2;
 
 struct WeatherField {
     quint8 number;
@@ -45,6 +48,7 @@ const WeatherField CURRENT_FIELDS[] = {
     { 1, 1, FIT_BASE_SINT8 }, // temperature
     { 2, 1, FIT_BASE_ENUM }, // condition
     { 3, 2, FIT_BASE_UINT16 }, // wind_direction
+    { 5, 1, FIT_BASE_UINT8 }, // precipitation_probability
     { 4, 2, FIT_BASE_UINT16 }, // wind_speed
     { 7, 1, FIT_BASE_UINT8 }, // relative_humidity
     { 9, 4, FIT_BASE_UINT32 }, // observed_at_time
@@ -52,6 +56,17 @@ const WeatherField CURRENT_FIELDS[] = {
     { 11, 4, FIT_BASE_SINT32 }, // observed_location_long
     { 13, 1, FIT_BASE_SINT8 }, // high_temperature
     { 14, 1, FIT_BASE_SINT8 }, // low_temperature
+    { 253, 4, FIT_BASE_UINT32 }, // timestamp
+};
+
+const WeatherField HOURLY_FIELDS[] = {
+    { 0, 1, FIT_BASE_ENUM }, // weather_report
+    { 1, 1, FIT_BASE_SINT8 }, // temperature
+    { 2, 1, FIT_BASE_ENUM }, // condition
+    { 3, 2, FIT_BASE_UINT16 }, // wind_direction
+    { 5, 1, FIT_BASE_UINT8 }, // precipitation_probability
+    { 4, 2, FIT_BASE_UINT16 }, // wind_speed
+    { 7, 1, FIT_BASE_UINT8 }, // relative_humidity
     { 253, 4, FIT_BASE_UINT32 }, // timestamp
 };
 
@@ -113,6 +128,7 @@ static inline void appendCurrentRecord(QByteArray& payload, const GarminWeatherS
     writeTemperatureC(payload, snapshot.temperatureC);
     payload.append(char(snapshot.conditionCode));
     writeU16le(payload, quint16(normalizeDegrees(snapshot.windDirectionDeg)));
+    writePercent(payload, snapshot.precipitationProbabilityPercent);
     writeU16le(payload, windSpeedMillimetresPerSecond(snapshot.windSpeedMs));
     writePercent(payload, snapshot.humidityPercent);
     writeU32le(payload, timestamp); // observed_at_time
@@ -121,6 +137,22 @@ static inline void appendCurrentRecord(QByteArray& payload, const GarminWeatherS
     writeTemperatureC(payload, snapshot.maxTempC);
     writeTemperatureC(payload, snapshot.minTempC);
     writeU32le(payload, timestamp); // timestamp
+}
+
+// The hourly report is the same global message as the other two, selected by
+// field 0. GarminWeatherMessage builds one record per hour by interpolating the
+// three-hourly entries the API returns, see hourlyRecord().
+static inline void appendHourlyRecord(QByteArray& payload, const GarminWeatherHour& hour)
+{
+    payload.append(char(LOCAL_TYPE_HOURLY));
+    payload.append(char(REPORT_HOURLY_FORECAST));
+    writeTemperatureC(payload, hour.temperatureC);
+    payload.append(char(hour.conditionCode));
+    writeU16le(payload, quint16(normalizeDegrees(hour.windDirectionDeg)));
+    writePercent(payload, hour.precipitationProbabilityPercent);
+    writeU16le(payload, windSpeedMillimetresPerSecond(hour.windSpeedMs));
+    writePercent(payload, hour.humidityPercent);
+    writeU32le(payload, toGarminEpoch(hour.timestampUnix));
 }
 
 // Every daily record carries the time the data was taken, not the time of that
@@ -145,6 +177,9 @@ QByteArray FitWeatherEncoder::buildDefinitionPayload(const GarminWeatherSnapshot
 {
     QByteArray payload;
     appendRecordDefinition(payload, LOCAL_TYPE_CURRENT, CURRENT_FIELDS, int(sizeof(CURRENT_FIELDS) / sizeof(CURRENT_FIELDS[0])));
+    if (!snapshot.hours.isEmpty()) {
+        appendRecordDefinition(payload, LOCAL_TYPE_HOURLY, HOURLY_FIELDS, int(sizeof(HOURLY_FIELDS) / sizeof(HOURLY_FIELDS[0])));
+    }
     // Only define the daily report when there is a day to send, so that no
     // local type is ever defined without a record under it.
     if (!snapshot.days.isEmpty()) {
@@ -157,6 +192,9 @@ QByteArray FitWeatherEncoder::buildDataPayload(const GarminWeatherSnapshot& snap
 {
     QByteArray payload;
     appendCurrentRecord(payload, snapshot);
+    for (int i = 0; i < snapshot.hours.size(); ++i) {
+        appendHourlyRecord(payload, snapshot.hours.at(i));
+    }
     for (int i = 0; i < snapshot.days.size(); ++i) {
         appendDailyRecord(payload, snapshot.days.at(i), snapshot.timestampUnix);
     }

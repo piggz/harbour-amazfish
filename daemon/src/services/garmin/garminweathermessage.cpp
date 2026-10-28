@@ -133,6 +133,48 @@ quint8 fitConditionCode(int owmCode)
     }
 }
 
+double interpolateLinear(double from, double to, double weight)
+{
+    return from + (to - from) * weight;
+}
+
+// One hour of the hourly report. The API answers the forecast every 3 hours,
+// while the watch wants one record per hour and rejects a gap: on a vivoactive
+// 3 a step of 3 hours shows a red exclamation mark. So most of these records
+// are made up here from the two real entries around them.
+// The condition and the wind direction come from the nearer entry.
+// Interpolating degrees would take 350 to 10 through 180.
+GarminWeatherHour hourlyRecord(const CurrentWeather* weather, qlonglong at)
+{
+    const int count = weather->hourCount();
+    int next = 0;
+    while (next < count && weather->hour(next).dateTime() < at) {
+        ++next;
+    }
+    // Hours before the first entry or after the last one take that entry.
+    const int lower = qBound(0, next - 1, count - 1);
+    const int upper = qBound(0, next, count - 1);
+    const CurrentWeather::Hour& lo = weather->hour(lower);
+    const CurrentWeather::Hour& hi = weather->hour(upper);
+
+    const qlonglong span = hi.dateTime() - lo.dateTime();
+    double weight = 0.0;
+    if (span > 0) {
+        weight = qBound(0.0, double(at - lo.dateTime()) / double(span), 1.0);
+    }
+    const bool nearerLo = weight < 0.5;
+    const double probability = interpolateLinear(lo.precipProbability(), hi.precipProbability(), weight);
+
+    GarminWeatherHour hour;
+    hour.timestampUnix = at;
+    hour.temperatureC = qRound(interpolateLinear(lo.temperature(), hi.temperature(), weight) - 273.15);
+    hour.humidityPercent = qRound(interpolateLinear(lo.humidity(), hi.humidity(), weight));
+    hour.windSpeedMs = interpolateLinear(lo.windSpeed(), hi.windSpeed(), weight);
+    hour.windDirectionDeg = qRound(nearerLo ? lo.windDirection() : hi.windDirection());
+    hour.precipitationProbabilityPercent = qRound(probability * 100.0);
+    hour.conditionCode = fitConditionCode(nearerLo ? lo.weatherCode() : hi.weatherCode());
+    return hour;
+}
 }
 
 FitWeatherFrames GarminWeatherMessage::encodeWeather(const CurrentWeather* weather)
@@ -158,6 +200,22 @@ FitWeatherFrames GarminWeatherMessage::encodeWeather(const CurrentWeather* weath
     snapshot.windSpeedMs = weather->windSpeed();
     snapshot.windDirectionDeg = qRound(weather->windDeg());
     snapshot.conditionCode = fitConditionCode(weather->weatherCode());
+
+    // The watch asked for 12 hours, but that count stays in CommunicatorV2:
+    // sendWeather() has no room for it without changing the interface of every
+    // device. The vivoactive 3 rejects records that are not one hour apart, so
+    // keep the 1 hour step and 12 records (see hourlyRecord).
+    if (weather->hourCount() > 0) {
+        for (int i = 0; i < 12; ++i) {
+            snapshot.hours << hourlyRecord(weather, snapshot.timestampUnix + i * 3600);
+        }
+    }
+
+    // OpenWeather reports no precipitation probability for current conditions.
+    // The first hourly record has one, so reuse it instead of guessing.
+    if (!snapshot.hours.isEmpty()) {
+        snapshot.precipitationProbabilityPercent = snapshot.hours.first().precipitationProbabilityPercent;
+    }
 
     // Today also gets a daily record: the forecast list starts tomorrow, so
     // nothing else describes today. Today's precipitation probability stays
