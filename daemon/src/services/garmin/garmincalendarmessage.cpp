@@ -350,10 +350,8 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
     );
 
     if (events.isEmpty()) {
-         qDebug() << Q_FUNC_INFO << "Failed to fetch calendar events";
-         return Result<QVector<CalendarEventProto>>::err(
-             GarminError::invalidMessage(
-                 QStringLiteral("Failed to fetch calendar events:")));
+        qDebug() << Q_FUNC_INFO << "No calendar events in range";
+        return Result<QVector<CalendarEventProto>>::isOk({ });
     }
 
     qInfo() << "Fetched" << events.size() << "calendar events";
