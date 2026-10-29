@@ -372,14 +372,14 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
         lastDay=QDate::currentDate();
         lastDay=lastDay.addDays(14);
     } else {
-        lastDay=QDateTime::fromMSecsSinceEpoch(request.endDate).date();
+        lastDay = QDateTime::fromMSecsSinceEpoch(request.endDate * 1000).date();
     }
     if (request.startDate == 0)
     {
         //Send from today
         startDay=QDate::currentDate();
     } else {
-        startDay=QDateTime::fromMSecsSinceEpoch(request.startDate).date();;
+        startDay = QDateTime::fromMSecsSinceEpoch(request.startDate * 1000).date();
     }
 
     QList<watchfish::CalendarEvent> events = calendarManager->fetchEvents(
