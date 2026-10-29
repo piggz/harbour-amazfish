@@ -37,6 +37,13 @@ void BipDevice::sendWeather(CurrentWeather *weather)
     sendWeatherHuami(weather, (softwareRevision() > "V0.0.8.74"));
 }
 
+void BipDevice::pair()
+{
+    qDebug() << Q_FUNC_INFO;
+    m_needsAuth = true;
+    AbstractDevice::pair();
+}
+
 AbstractFirmwareInfo *BipDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new BipFirmwareInfo(bytes);
@@ -64,12 +71,13 @@ void BipDevice::initialise()
 
     MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
     if (mi2) {
-        qDebug() << "Got MiBand2 service" << m_pairing << m_needsAuth;
+        qDebug() << "Got MiBand2 service" << m_pairing;
         connect(mi2, &MiBand2Service::authenticated, this, &HuamiDevice::authenticated, Qt::UniqueConnection);
         //connect(mi2, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
 
         mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
         mi2->initialise(m_needsAuth);
+        m_needsAuth = false;
     }
 
     BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));

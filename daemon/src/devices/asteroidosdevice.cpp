@@ -64,21 +64,6 @@ void AsteroidOSDevice::incomingCallEnded()
 
 }
 
-
-void AsteroidOSDevice::pair()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    m_needsAuth = true;
-    m_pairing = true;
-    //disconnectFromDevice();
-    setConnectionState("pairing");
-    emit connectionStateChanged();
-
-    QBLEDevice::pair();
-}
-
-
 void AsteroidOSDevice::onPropertiesChanged(const QString &interface, QVariantMap map, const QStringList &list)
 {
     qDebug() << Q_FUNC_INFO << interface << map << list;

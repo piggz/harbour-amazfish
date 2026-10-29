@@ -24,19 +24,6 @@ QString DK08Device::deviceType() const
     return "dk08";
 }
 
-void DK08Device::pair()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    m_needsAuth = true;
-    m_pairing = true;
-    //disconnectFromDevice();
-    setConnectionState("pairing");
-    emit connectionStateChanged();
-
-    QBLEDevice::pair();
-}
-
 void DK08Device::sendAlert(const Amazfish::WatchNotification &notification) {
     qDebug() << Q_FUNC_INFO;
     DK08NUSService *nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));

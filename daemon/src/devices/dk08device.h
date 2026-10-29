@@ -32,7 +32,6 @@ protected:
 
 private:
     void initialise();
-    void pair() override;
     void downloadActivityData();
 
 

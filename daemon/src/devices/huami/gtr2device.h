@@ -10,7 +10,6 @@ public:
     explicit Gtr2Device(const QString &pairedName, QObject *parent = nullptr);
     QString deviceType() const override;
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
-
 };
 
 #endif // GTR2DEVICE_H

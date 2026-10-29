@@ -23,20 +23,6 @@ QString PebbleDevice::deviceType() const
     return "pebble";
 }
 
-void PebbleDevice::pair()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    m_needsAuth = true;
-    m_pairing = true;
-    //disconnectFromDevice();
-    setConnectionState("pairing");
-    emit connectionStateChanged();
-
-    QBLEDevice::pair();
-}
-
-
 void PebbleDevice::sendAlert(const Amazfish::WatchNotification &notification) {
     qDebug() << Q_FUNC_INFO;
 }

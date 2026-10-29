@@ -59,7 +59,6 @@ public:
 
     explicit BangleJSDevice(const QString &pairedName, QObject *parent = 0);
 
-    void pair() override;
     Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
     QString deviceType() const override;

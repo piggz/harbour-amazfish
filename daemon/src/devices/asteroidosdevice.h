@@ -27,8 +27,6 @@ protected:
 private:
     void initialise();
 
-    virtual void pair() override;
-
     Q_SLOT void authenticated(bool ready);
 
     virtual void refreshInformation() override;

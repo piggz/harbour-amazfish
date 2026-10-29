@@ -24,55 +24,6 @@ Amazfish::Features BipSDevice::supportedFeatures() const
             Amazfish::Feature::FEATURE_FILE_INSTALL;
 }
 
-void BipSDevice::initialise()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    setConnectionState("connected");
-    parseServices();
-
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi) {
-        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION);
-        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_BATTERY_INFO);
-        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_DEVICE_EVENT);
-        mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_REALTIME_STEPS);
-
-        connect(mi, &MiBandService::message, this, &HuamiDevice::message, Qt::UniqueConnection);
-        connect(mi, &MiBandService::informationChanged, this, &BipSDevice::informationChanged, Qt::UniqueConnection);
-        connect(mi, &MiBandService::serviceEvent, this, &BipSDevice::serviceEvent, Qt::UniqueConnection);
-        connect(mi, &QBLEService::characteristicChanged, this, &BipSDevice::characteristicChanged, Qt::UniqueConnection);
-    }
-
-    MiBand2Service *mi2 = qobject_cast<MiBand2Service*>(service(MiBand2Service::UUID_SERVICE_MIBAND2));
-    if (mi2) {
-        qDebug() << "Got MiBand2 service" << m_pairing << m_needsAuth;
-        connect(mi2, &MiBand2Service::authenticated, this, &HuamiDevice::authenticated, Qt::UniqueConnection);
-        //connect(mi2, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
-
-        mi2->enableNotification(MiBand2Service::UUID_CHARACTERISITIC_MIBAND2_AUTH);
-        mi2->initialise(m_needsAuth);
-    }
-
-    BipFirmwareService *fw = qobject_cast<BipFirmwareService*>(service(BipFirmwareService::UUID_SERVICE_FIRMWARE));
-    if (fw) {
-        connect(fw, &BipFirmwareService::message, this, &BipSDevice::message, Qt::UniqueConnection);
-        connect(fw, &AbstractOperationService::operationRunningChanged, this, &AbstractDevice::operationRunningChanged, Qt::UniqueConnection);
-    }
-
-    DeviceInfoService *info = qobject_cast<DeviceInfoService*>(service(DeviceInfoService::UUID_SERVICE_DEVICEINFO));
-    if (info) {
-        connect(info, &DeviceInfoService::informationChanged, this, &BipSDevice::informationChanged, Qt::UniqueConnection);
-    }
-
-    HRMService *hrm = qobject_cast<HRMService*>(service(HRMService::UUID_SERVICE_HRM));
-    if (hrm) {
-        connect(hrm, &HRMService::informationChanged, this, &BipSDevice::informationChanged, Qt::UniqueConnection);
-    }
-}
-
-
-
 void BipSDevice::applyDeviceSetting(Amazfish::Settings s)
 {
     MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
@@ -156,4 +107,11 @@ QStringList BipSDevice::supportedDisplayItems() const
     items << "compass";
 
     return items;
+}
+
+QBLEService *BipSDevice::drv_createService(const QString &uuid, const QString &path)
+{
+    qDebug() << Q_FUNC_INFO << uuid;
+
+    return HuamiDevice::drv_createService(uuid, path);
 }

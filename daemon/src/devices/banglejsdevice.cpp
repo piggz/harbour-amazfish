@@ -22,19 +22,6 @@ BangleJSDevice::BangleJSDevice(const QString &pairedName, QObject *parent) : Abs
     m_manager = new QNetworkAccessManager(this);
 }
 
-void BangleJSDevice::pair()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    m_needsAuth = false;
-    m_pairing = true;
-    //disconnectFromDevice();
-    setConnectionState("pairing");
-    emit connectionStateChanged();
-
-    QBLEDevice::pair();
-}
-
 Amazfish::Features BangleJSDevice::supportedFeatures() const
 {
 

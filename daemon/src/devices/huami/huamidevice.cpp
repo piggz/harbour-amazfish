@@ -240,8 +240,6 @@ void HuamiDevice::authenticated(bool ready)
     qDebug() << Q_FUNC_INFO << ready;
 
     if (ready) {
-        m_needsAuth = false;
-
         MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
         if (mi){
             mi->enableNotification(MiBandService::UUID_CHARACTERISTIC_MIBAND_CONFIGURATION);
@@ -515,7 +513,7 @@ QBLEService *HuamiDevice::drv_createService(const QString &uuid, const QString &
     } else if (uuid == MiBandService::UUID_SERVICE_MIBAND) {
         return new MiBandService(path, this);
     } else if (uuid == MiBand2Service::UUID_SERVICE_MIBAND2) {
-        return new MiBand2Service(path, 0x00, 0x80, true, this);
+        return new MiBand2Service(path, 0x00, 0x80, true, this); //Default auth and crypt for newer devices that need auth key
     } else if (uuid == BipFirmwareService::UUID_SERVICE_FIRMWARE) {
         return new BipFirmwareService(path, this);
     }

@@ -20,7 +20,7 @@ public:
     void setMusicStatus(bool playing, const QString &artist, const QString &album, const QString &track, int duration = 0, int position = 0) override;
 
 protected:
-    void initialise() override;
+    QBLEService *drv_createService(const QString &uuid, const QString &path) override;
 
 private:
     Q_SLOT void serviceEvent(uint8_t event);

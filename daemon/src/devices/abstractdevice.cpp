@@ -19,13 +19,8 @@ AbstractDevice::AbstractDevice(const QString &pairedName, QObject *parent) : QBL
 void AbstractDevice::pair()
 {
     qDebug() << Q_FUNC_INFO;
-
-    m_needsAuth = true;
     m_pairing = true;
-
-    //disconnectFromDevice();
     setConnectionState("pairing");
-
     QBLEDevice::pair();
 }
 

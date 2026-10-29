@@ -100,7 +100,6 @@ public:
     Q_SIGNAL void deviceEvent(Event event);
 
 protected:
-    bool m_needsAuth = false;
     bool m_pairing = false;
     bool m_ready = false;
     bool m_hasInitialised = false;

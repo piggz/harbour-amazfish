@@ -108,16 +108,6 @@ void GarminDevice::incomingCallEnded()
     else qDebug() << Q_FUNC_INFO << "Garmin: No notification handler!";
 }
 
-
-void GarminDevice::pair()
-{
-    qDebug() << Q_FUNC_INFO << "Pairing with Garmin " << devicePath();
-    m_needsAuth = true;
-    m_pairing = true;
-    setConnectionState("pairing");
-    QBLEDevice::pair();
- }
-
 void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
     qDebug() << Q_FUNC_INFO << interface << map << list;

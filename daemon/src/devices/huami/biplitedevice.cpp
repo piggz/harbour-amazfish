@@ -59,6 +59,13 @@ void BipLiteDevice::initialise()
     }
 }
 
+QBLEService *BipLiteDevice::drv_createService(const QString &uuid, const QString &path)
+{
+    qDebug() << Q_FUNC_INFO << uuid;
+
+    return HuamiDevice::drv_createService(uuid, path);
+}
+
 AbstractFirmwareInfo *BipLiteDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
     return new BipLiteFirmwareInfo(bytes);
