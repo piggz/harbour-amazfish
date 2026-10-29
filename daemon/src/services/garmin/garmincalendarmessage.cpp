@@ -344,6 +344,17 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
         startDay = QDateTime::fromMSecsSinceEpoch(request.startDate * 1000).date();
     }
 
+    // A malformed uint64 still gives a valid QDate, so bound the window around today.
+    const QDate today = QDate::currentDate();
+    if (startDay < today.addYears(-5) || lastDay > today.addYears(5) || startDay > lastDay) {
+        qWarning() << Q_FUNC_INFO << "Calendar dates out of range" << startDay << lastDay;
+        return Result<QVector<CalendarEventProto>>::err(
+            GarminError::invalidMessage(QStringLiteral("Calendar dates out of range")));
+    }
+
+    const QDateTime windowStart(startDay, QTime(0, 0));
+    const QDateTime windowEnd(lastDay, QTime(23, 59, 59, 999));
+
     QList<watchfish::CalendarEvent> events = calendarManager->fetchEvents(
         startDay,
         lastDay
@@ -360,6 +371,14 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
     protoEvents.reserve(events.size());
 
     for ( const watchfish::CalendarEvent &event : std::as_const(events)) {
+        // Calendar backends do not all honour the requested range.
+        const QDateTime start = event.start();
+        const QDateTime end = event.end();
+        if (end < windowStart || start > windowEnd) {
+            qDebug() << Q_FUNC_INFO << "Skipping event outside the requested window" << start << end;
+            continue;
+        }
+
         CalendarEventProto proto;
 
         // title
@@ -386,11 +405,11 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
         {
             // Needs special treatment - watch expects start and endtime to be 0:00 in local time
             // So need to convert from UTC
-            proto.startDate=event.start().toLocalTime();
-            proto.endDate=event.end().toLocalTime();
+            proto.startDate = start.toLocalTime();
+            proto.endDate = end.toLocalTime();
         } else {
-            proto.startDate = event.start();
-            proto.endDate = event.end();
+            proto.startDate = start;
+            proto.endDate = end;
         }
         proto.allDay = event.allDay();
 
