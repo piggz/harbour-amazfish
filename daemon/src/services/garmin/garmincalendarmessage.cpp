@@ -169,10 +169,10 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
 
 
     int cursor = 0;
-    QByteArray calendarServiceData;
+    QByteArray requestBytes;
     int loopCount = 0;
 
-    // Find Smart.field1 = CalendarService
+    // We receive the CalendarService body from the ProtobufHandler
     while (cursor < data.size()) {
         ++loopCount;
         if (loopCount > 100) {
@@ -186,54 +186,11 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
         int nextCursor = 0;
 
         if (parseField(data, cursor, fieldNum, wireType, fieldData, nextCursor)) {
-            qDebug() << Q_FUNC_INFO << "Garmin: Smart message field" << fieldNum << ", wire type" << wireType;
+            qDebug() << Q_FUNC_INFO << "Garmin: CalendarService message field" << fieldNum << ", wire type" << wireType;
 
-            // field 1 is CalendarService
-            if (fieldNum == 1) {
-                qDebug() << Q_FUNC_INFO << "Garmin: Found CalendarService field 1";
-                calendarServiceData = fieldData;
-                break;
-            }
-
-            cursor = nextCursor;
-            if (cursor == oldCursor) {
-                qDebug() << Q_FUNC_INFO << "Garmin: Parse Calendar Request: cursor not advancing in Smart wrapper";
-                break;
-            }
-        } else {
-            qDebug() << Q_FUNC_INFO << "Garmin: parseCalendarRequest: failed parsing Smart wrapper field";
-            break;
-        }
-    }
-
-    if (calendarServiceData.isEmpty()) {
-        qDebug() << Q_FUNC_INFO << "Garmin: No CalendarServiceField found";
-        return;
-    }
-
-    request.useCoreServiceEnvelope = false;
-
-    qDebug()<< Q_FUNC_INFO << "Found CalendarService payload:" << calendarServiceData.size() << "bytes";
-
-    // Parse CalendarService.field1 = GarminCalendarMessage
-    cursor = 0;
-    QByteArray requestBytes;
-    loopCount = 0;
-
-    while (cursor < calendarServiceData.size()) {
-        ++loopCount;
-        if (loopCount > 100) {
-            break;
-        }
-
-        const int oldCursor = cursor;
-        quint32 fieldNum = 0;
-        quint8 wireType = 0;
-        QByteArray fieldData;
-        int nextCursor = 0;
-
-        if (parseField(calendarServiceData, cursor, fieldNum, wireType, fieldData, nextCursor)) {
-            if (fieldNum == 1) {
+            // field 1 is the CalendarServiceRequest. The request has its own field
+            // 1 (begin) as a varint, so only take a length-delimited one.
+            if (fieldNum == 1 && wireType == 2) {
                 requestBytes = fieldData;
                 break;
             }
@@ -244,14 +201,19 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
                 break;
             }
         } else {
+            qDebug() << Q_FUNC_INFO << "Garmin: parseCalendarRequest: failed parsing CalendarService field";
             break;
         }
     }
 
     if (requestBytes.isEmpty()) {
-        qDebug() << Q_FUNC_INFO << "Garmin: No CalendarMessage field found";
+        qDebug() << Q_FUNC_INFO << "Garmin: No CalendarServiceRequest field found";
         return;
     }
+
+    request.useCoreServiceEnvelope = false;
+
+    qDebug() << Q_FUNC_INFO << "Found CalendarServiceRequest payload:" << requestBytes.size() << "bytes";
 
     // Parse request fields
     cursor = 0;
