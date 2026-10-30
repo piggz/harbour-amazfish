@@ -319,13 +319,8 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
 Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest(
     const CalendarServiceRequest& request)
 {
-    watchfish::CalendarSource* calendarManager = new watchfish::CalendarSource();
+    watchfish::CalendarSource calendarManager;
     qInfo() << Q_FUNC_INFO << "Handling calendar request:" << request.startDate << "to" << request.endDate;
-
-    if (calendarManager == nullptr) {
-        qWarning() << "No calendar manager available";
-        return Result<QVector<CalendarEventProto>>::isOk({});
-    }
 
     QDate lastDay,startDay;
     if (request.endDate == 0)
@@ -355,10 +350,7 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
     const QDateTime windowStart(startDay, QTime(0, 0));
     const QDateTime windowEnd(lastDay, QTime(23, 59, 59, 999));
 
-    QList<watchfish::CalendarEvent> events = calendarManager->fetchEvents(
-        startDay,
-        lastDay
-    );
+    QList<watchfish::CalendarEvent> events = calendarManager.fetchEvents(startDay, lastDay);
 
     if (events.isEmpty()) {
         qDebug() << Q_FUNC_INFO << "No calendar events in range";
