@@ -6,6 +6,7 @@
 
 
 #include <QDomDocument>
+#include <QStringList>
 
 const char* UUID_SERVICE_GARMIN_GFDI_V0 = "9b012401-bc30-ce9a-e111-0f67e491abde";
 const char* UUID_CHARACTERISTIC_GARMIN_GFDI_V0_SEND = "df334c80-e6a7-d082-274a-78fc66f85e16";
@@ -148,31 +149,25 @@ void GarminDevice::onRejectCallEvent(){
 QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString &path)
 {
     qDebug() << Q_FUNC_INFO << "Creating Communicator service for Garmin";
-    if (service(UUID_SERVICE_GARMIN_ML_GFDI)
-        || service(UUID_SERVICE_GARMIN_GFDI_V0)
-        || service(UUID_SERVICE_GARMIN_GFDI_V1))
-    {
+    // Only the preferred GFDI generation gets a CommunicatorV2.
+    if (uuid != mPreferredService) {
         return nullptr;
     }
-    if (((uuid == UUID_SERVICE_GARMIN_ML_GFDI) &&  ! service(UUID_SERVICE_GARMIN_ML_GFDI))
-        || ((uuid == UUID_SERVICE_GARMIN_GFDI_V0)  &&  ! service(UUID_SERVICE_GARMIN_GFDI_V0))
-        || ((uuid == UUID_SERVICE_GARMIN_GFDI_V1)  &&  ! service(UUID_SERVICE_GARMIN_GFDI_V1)))
-    {
-        QSharedPointer<CommunicatorV2> com = QSharedPointer<CommunicatorV2>::create(path, this);
-        if (com)
-        {
-            mCommunicator=com;
-            connect(com.data(), &CommunicatorV2::informationChanged, this, &GarminDevice::informationChanged, Qt::UniqueConnection);
-            // add notification handler
-            qDebug() << Q_FUNC_INFO << "Garmin: Adding notification handler";
-            if (!mNotificationHandler) mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(mCommunicator);
-            connect(com.data(), &CommunicatorV2::NotificationDataRequested,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationDataRequested);
-            connect(com.data(), &CommunicatorV2::NotificationPerformAction,mNotificationHandler.data(),&GarminNotificationHandler::onNotificationPerformAction);
-            connect(mNotificationHandler.data(),&GarminNotificationHandler::acceptIncomingCall,this,&GarminDevice::onAnswerCallEvent);
-            connect(mNotificationHandler.data(),&GarminNotificationHandler::rejectIncomingCall,this,&GarminDevice::onRejectCallEvent);
-            setConnectionState("authenticated");
-            return com.data();
-        }
+
+    QSharedPointer<CommunicatorV2> com = QSharedPointer<CommunicatorV2>::create(path, this);
+    if (com) {
+        mCommunicator = com;
+        connect(com.data(), &CommunicatorV2::informationChanged, this, &GarminDevice::informationChanged, Qt::UniqueConnection);
+        // add notification handler
+        qDebug() << Q_FUNC_INFO << "Garmin: Adding notification handler";
+        if (!mNotificationHandler)
+            mNotificationHandler = QSharedPointer<GarminNotificationHandler>::create(mCommunicator);
+        connect(com.data(), &CommunicatorV2::NotificationDataRequested, mNotificationHandler.data(), &GarminNotificationHandler::onNotificationDataRequested);
+        connect(com.data(), &CommunicatorV2::NotificationPerformAction, mNotificationHandler.data(), &GarminNotificationHandler::onNotificationPerformAction);
+        connect(mNotificationHandler.data(), &GarminNotificationHandler::acceptIncomingCall, this, &GarminDevice::onAnswerCallEvent);
+        connect(mNotificationHandler.data(), &GarminNotificationHandler::rejectIncomingCall, this, &GarminDevice::onRejectCallEvent);
+        setConnectionState("authenticated");
+        return com.data();
     }
     // if we are here, no Garmin device was detected or serice already created
     return nullptr;
@@ -181,6 +176,17 @@ QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString 
 void GarminDevice::initialise()
 {
     qDebug() << Q_FUNC_INFO;
+    // A watch can advertise more than one GFDI generation. Use the newest one available.
+    // The last case is unconditional: if BlueZ reports no UUIDs, the V0 link is still the
+    // safest guess.
+    const QStringList advertised = deviceProperty("UUIDs").toStringList();
+    if (advertised.contains(UUID_SERVICE_GARMIN_ML_GFDI)) {
+        mPreferredService = UUID_SERVICE_GARMIN_ML_GFDI;
+    } else if (advertised.contains(UUID_SERVICE_GARMIN_GFDI_V1)) {
+        mPreferredService = UUID_SERVICE_GARMIN_GFDI_V1;
+    } else {
+        mPreferredService = UUID_SERVICE_GARMIN_GFDI_V0;
+    }
     parseServices();
 }
 

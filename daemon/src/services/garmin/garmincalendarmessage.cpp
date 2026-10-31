@@ -169,10 +169,10 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
 
 
     int cursor = 0;
-    QByteArray calendarServiceData;
+    QByteArray requestBytes;
     int loopCount = 0;
 
-    // Find Smart.field1 = CalendarService
+    // We receive the CalendarService body from the ProtobufHandler
     while (cursor < data.size()) {
         ++loopCount;
         if (loopCount > 100) {
@@ -186,54 +186,11 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
         int nextCursor = 0;
 
         if (parseField(data, cursor, fieldNum, wireType, fieldData, nextCursor)) {
-            qDebug() << Q_FUNC_INFO << "Garmin: Smart message field" << fieldNum << ", wire type" << wireType;
+            qDebug() << Q_FUNC_INFO << "Garmin: CalendarService message field" << fieldNum << ", wire type" << wireType;
 
-            // field 1 is CalendarService
-            if (fieldNum == 1) {
-                qDebug() << Q_FUNC_INFO << "Garmin: Found CalendarService field 1";
-                calendarServiceData = fieldData;
-                break;
-            }
-
-            cursor = nextCursor;
-            if (cursor == oldCursor) {
-                qDebug() << Q_FUNC_INFO << "Garmin: Parse Calendar Request: cursor not advancing in Smart wrapper";
-                break;
-            }
-        } else {
-            qDebug() << Q_FUNC_INFO << "Garmin: parseCalendarRequest: failed parsing Smart wrapper field";
-            break;
-        }
-    }
-
-    if (calendarServiceData.isEmpty()) {
-        qDebug() << Q_FUNC_INFO << "Garmin: No CalendarServiceField found";
-        return;
-    }
-
-    request.useCoreServiceEnvelope = false;
-
-    qDebug()<< Q_FUNC_INFO << "Found CalendarService payload:" << calendarServiceData.size() << "bytes";
-
-    // Parse CalendarService.field1 = GarminCalendarMessage
-    cursor = 0;
-    QByteArray requestBytes;
-    loopCount = 0;
-
-    while (cursor < calendarServiceData.size()) {
-        ++loopCount;
-        if (loopCount > 100) {
-            break;
-        }
-
-        const int oldCursor = cursor;
-        quint32 fieldNum = 0;
-        quint8 wireType = 0;
-        QByteArray fieldData;
-        int nextCursor = 0;
-
-        if (parseField(calendarServiceData, cursor, fieldNum, wireType, fieldData, nextCursor)) {
-            if (fieldNum == 1) {
+            // field 1 is the CalendarServiceRequest. The request has its own field
+            // 1 (begin) as a varint, so only take a length-delimited one.
+            if (fieldNum == 1 && wireType == 2) {
                 requestBytes = fieldData;
                 break;
             }
@@ -244,14 +201,19 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
                 break;
             }
         } else {
+            qDebug() << Q_FUNC_INFO << "Garmin: parseCalendarRequest: failed parsing CalendarService field";
             break;
         }
     }
 
     if (requestBytes.isEmpty()) {
-        qDebug() << Q_FUNC_INFO << "Garmin: No CalendarMessage field found";
+        qDebug() << Q_FUNC_INFO << "Garmin: No CalendarServiceRequest field found";
         return;
     }
+
+    request.useCoreServiceEnvelope = false;
+
+    qDebug() << Q_FUNC_INFO << "Found CalendarServiceRequest payload:" << requestBytes.size() << "bytes";
 
     // Parse request fields
     cursor = 0;
@@ -357,13 +319,8 @@ void GarminCalendarMessage::parse(const QByteArray& data, quint16 requestId, qui
 Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest(
     const CalendarServiceRequest& request)
 {
-    watchfish::CalendarSource* calendarManager = new watchfish::CalendarSource();
+    watchfish::CalendarSource calendarManager;
     qInfo() << Q_FUNC_INFO << "Handling calendar request:" << request.startDate << "to" << request.endDate;
-
-    if (calendarManager == nullptr) {
-        qWarning() << "No calendar manager available";
-        return Result<QVector<CalendarEventProto>>::isOk({});
-    }
 
     QDate lastDay,startDay;
     if (request.endDate == 0)
@@ -372,26 +329,32 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
         lastDay=QDate::currentDate();
         lastDay=lastDay.addDays(14);
     } else {
-        lastDay=QDateTime::fromMSecsSinceEpoch(request.endDate).date();
+        lastDay = QDateTime::fromMSecsSinceEpoch(request.endDate * 1000).date();
     }
     if (request.startDate == 0)
     {
         //Send from today
         startDay=QDate::currentDate();
     } else {
-        startDay=QDateTime::fromMSecsSinceEpoch(request.startDate).date();;
+        startDay = QDateTime::fromMSecsSinceEpoch(request.startDate * 1000).date();
     }
 
-    QList<watchfish::CalendarEvent> events = calendarManager->fetchEvents(
-        startDay,
-        lastDay
-    );
+    // A malformed uint64 still gives a valid QDate, so bound the window around today.
+    const QDate today = QDate::currentDate();
+    if (startDay < today.addYears(-5) || lastDay > today.addYears(5) || startDay > lastDay) {
+        qWarning() << Q_FUNC_INFO << "Calendar dates out of range" << startDay << lastDay;
+        return Result<QVector<CalendarEventProto>>::err(
+            GarminError::invalidMessage(QStringLiteral("Calendar dates out of range")));
+    }
+
+    const QDateTime windowStart(startDay, QTime(0, 0));
+    const QDateTime windowEnd(lastDay, QTime(23, 59, 59, 999));
+
+    QList<watchfish::CalendarEvent> events = calendarManager.fetchEvents(startDay, lastDay);
 
     if (events.isEmpty()) {
-         qDebug() << Q_FUNC_INFO << "Failed to fetch calendar events";
-         return Result<QVector<CalendarEventProto>>::err(
-             GarminError::invalidMessage(
-                 QStringLiteral("Failed to fetch calendar events:")));
+        qDebug() << Q_FUNC_INFO << "No calendar events in range";
+        return Result<QVector<CalendarEventProto>>::isOk({ });
     }
 
     qInfo() << "Fetched" << events.size() << "calendar events";
@@ -400,6 +363,14 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
     protoEvents.reserve(events.size());
 
     for ( const watchfish::CalendarEvent &event : std::as_const(events)) {
+        // Calendar backends do not all honour the requested range.
+        const QDateTime start = event.start();
+        const QDateTime end = event.end();
+        if (end < windowStart || start > windowEnd) {
+            qDebug() << Q_FUNC_INFO << "Skipping event outside the requested window" << start << end;
+            continue;
+        }
+
         CalendarEventProto proto;
 
         // title
@@ -426,11 +397,12 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
         {
             // Needs special treatment - watch expects start and endtime to be 0:00 in local time
             // So need to convert from UTC
-            proto.startDate=event.start().toLocalTime();
-            proto.endDate=event.end().toLocalTime();
+            proto.startDate = start.toLocalTime();
+            // The phone stores the last day as the end, not the day after it.
+            proto.endDate = end.toLocalTime().addDays(1);
         } else {
-            proto.startDate = event.start();
-            proto.endDate = event.end();
+            proto.startDate = start;
+            proto.endDate = end;
         }
         proto.allDay = event.allDay();
 
