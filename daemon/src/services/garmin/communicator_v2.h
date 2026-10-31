@@ -245,6 +245,7 @@ private:
     QTimer* mBatteryTimer = nullptr;
     QQueue<QPair<QByteArray, QString>> mSendQueue;
     bool  mSendInProgress = false;
+    int mSendRetries = 0;
 };
 
 #endif //_COMMUNICATOR__H
