@@ -398,7 +398,8 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
             // Needs special treatment - watch expects start and endtime to be 0:00 in local time
             // So need to convert from UTC
             proto.startDate = start.toLocalTime();
-            proto.endDate = end.toLocalTime();
+            // The phone stores the last day as the end, not the day after it.
+            proto.endDate = end.toLocalTime().addDays(1);
         } else {
             proto.startDate = start;
             proto.endDate = end;
