@@ -799,8 +799,7 @@ void CommunicatorV2::registerServices() {
     {
         qDebug() << "Garmin: Can't register services due to missing send characteristic";
     }
-    if (!m_device)
-    {
+    if (!m_device) {
         qDebug() << "Garmin: No device configured";
     }
 
@@ -816,11 +815,14 @@ void CommunicatorV2::registerServices() {
     //HRV is not shown in the GUI so no realtime info needed
     //registerService(Service::RealtimeHrv, true);
 
-    // Send Battery Status request
-    mBatteryTimer = new QTimer(this);
-    mBatteryTimer->setInterval(120000);
+    // Send Battery Status request. registerServices() runs again after a reconnect, so create
+    // the timer once and reuse it, otherwise each cycle adds another running timer.
+    if (!mBatteryTimer) {
+        mBatteryTimer = new QTimer(this);
+        mBatteryTimer->setInterval(120000);
+        connect(mBatteryTimer, &QTimer::timeout, this, &CommunicatorV2::getBatteryLevel);
+    }
     mBatteryTimer->start();
-    connect(mBatteryTimer,&QTimer::timeout, this, &CommunicatorV2::getBatteryLevel);
     getBatteryLevel();
     mServicesResolved=true;
 }
@@ -832,6 +834,9 @@ void CommunicatorV2::getBatteryLevel() {
 }
 
 void CommunicatorV2::dispose() {
+    if (mBatteryTimer) {
+        mBatteryTimer->stop();
+    }
     mState->mlrCommunicators.clear();
     if (mState->characteristicReceive) {
         mState->characteristicReceive->stopNotify();
