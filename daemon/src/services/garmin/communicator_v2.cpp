@@ -658,6 +658,12 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
             Qt::UniqueConnection);
         mIsReliable = false;
     }
+
+    if (mBatteryRequestPending && service == Service::GFDI) {
+        mBatteryRequestPending = false;
+        getBatteryLevel();
+    }
+
     // Register callback services
     if (!mState->serviceCallbacks.contains(service))
     {
@@ -832,15 +838,16 @@ void CommunicatorV2::registerServices() {
     //HRV is not shown in the GUI so no realtime info needed
     //registerService(Service::RealtimeHrv, true);
 
-    // Send Battery Status request. registerServices() runs again after a reconnect, so create
-    // the timer once and reuse it, otherwise each cycle adds another running timer.
+    // Battery status is polled every two minutes. registerServices() runs again after a reconnect,
+    // so create the timer once and reuse it, otherwise each cycle adds another running timer.
     if (!mBatteryTimer) {
         mBatteryTimer = new QTimer(this);
         mBatteryTimer->setInterval(120000);
         connect(mBatteryTimer, &QTimer::timeout, this, &CommunicatorV2::getBatteryLevel);
     }
     mBatteryTimer->start();
-    getBatteryLevel();
+    // No service handle exists yet, so sendMessage() would drop the request here.
+    mBatteryRequestPending = true;
     mServicesResolved=true;
 }
 

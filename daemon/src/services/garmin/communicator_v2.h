@@ -243,6 +243,7 @@ private:
     bool mIsMlProtocol = false;
     bool mIsReliable = false;
     QTimer* mBatteryTimer = nullptr;
+    bool mBatteryRequestPending = false;
     QQueue<QPair<QByteArray, QString>> mSendQueue;
     bool  mSendInProgress = false;
     int mSendRetries = 0;
