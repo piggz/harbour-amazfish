@@ -124,12 +124,20 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
     qDebug() << Q_FUNC_INFO << interface << map << list;
 
     if (interface == "org.bluez.Device1") {
+        // Captured before initialise(): on a first connect that call creates the communicator and
+        // its constructor talks to the watch. Only a reconnect has nothing created and needs a re-run.
+        CommunicatorV2* svc = mCommunicator.data();
         if (deviceProperty("ServicesResolved").toBool() ) {
             initialise();
+            if (svc) {
+                qDebug() << Q_FUNC_INFO << "Garmin: Communicator already exists, re-initialising";
+                svc->onConnectionStateChange(true);
+                // drv_createService() set this state on the first connect and is not reached again.
+                setConnectionState("authenticated");
             }
+        }
         if (map.contains("Connected")) {
             bool value = map["Connected"].toBool();
-            CommunicatorV2 *svc = mCommunicator.data();
             if (!value) {
                 setConnectionState("disconnected");
                 if (svc)
@@ -139,11 +147,6 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
                 }
             } else {
                 setConnectionState("connected");
-                if (svc)
-                {
-                    qDebug() << Q_FUNC_INFO << "Garmin: Communicator already exists, sending connect";
-                    svc->onConnectionStateChange(true);
-                }
             }
         }
     }
