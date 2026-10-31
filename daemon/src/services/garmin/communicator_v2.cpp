@@ -838,8 +838,8 @@ void CommunicatorV2::dispose() {
         disconnect(mState->characteristicReceive.data(),nullptr,this,nullptr);
     }
 
-    mState->characteristicSend->deleteLater();
-    mState->characteristicReceive->deleteLater();
+    mState->characteristicSend.reset();
+    mState->characteristicReceive.reset();
     //m_gfdiService.reset();
     mState->cobsCodec->reset();
     mIsMlProtocol = false;
