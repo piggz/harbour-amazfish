@@ -242,7 +242,7 @@ private:
     bool mServicesResolved = false;
     bool mIsMlProtocol = false;
     bool mIsReliable = false;
-    QTimer* mBatteryTimer;
+    QTimer* mBatteryTimer = nullptr;
     QQueue<QPair<QByteArray, QString>> mSendQueue;
     bool  mSendInProgress = false;
 };
