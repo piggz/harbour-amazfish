@@ -47,8 +47,7 @@ CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
 
     mState->cobsCodec=new CobsCoDec(this);
 
-    initializeDevice();
-
+    onConnectionStateChange(true);
 }
 
 void CommunicatorV2::setMessageCallback(QSharedPointer<GfdiMessageCallback> cb) {
