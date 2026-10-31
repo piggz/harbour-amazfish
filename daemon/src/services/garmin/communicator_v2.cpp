@@ -169,7 +169,8 @@ bool CommunicatorV2::initializeDevice() {
     if ((mState->characteristicSend != NULL) && (mState->characteristicReceive  != NULL)) {
         qDebug() << Q_FUNC_INFO << "Garmin: Characteristic found. Send " << mState->UUIDSend << ", Receive " << mState->UUIDReceive;
         enableNotification(mState->UUIDReceive);
-        connect(this,&QBLEService::characteristicChanged,this,&CommunicatorV2::onCharacteristicChanged);
+        connect(this, &QBLEService::characteristicChanged, this, &CommunicatorV2::onCharacteristicChanged,
+            Qt::UniqueConnection);
         connect(mState->characteristicReceive.data(),&QBLECharacteristic::characteristicRead,this,&CommunicatorV2::onCharacteristicChanged);
         if (mIsMlProtocol) {
             const QByteArray closeAll = createCloseAllServicesMessage();
@@ -638,7 +639,8 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
     {
         qDebug() << Q_FUNC_INFO << "Garmin: Non reliable ML communicator requested.";
 
-        connect(mState->cobsCodec,&CobsCoDec::messageDecoded,this,&CommunicatorV2::handleIncomingGfdiMessage);
+        connect(mState->cobsCodec, &CobsCoDec::messageDecoded, this, &CommunicatorV2::handleIncomingGfdiMessage,
+            Qt::UniqueConnection);
         mIsReliable = false;
     }
     // Register callback services
