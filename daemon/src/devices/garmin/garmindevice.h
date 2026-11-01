@@ -64,6 +64,9 @@ private:
     CurrentWeather* mWeather = nullptr;
     // The watch asked before the phone had weather. sendWeather() answers then.
     bool mWeatherRequested = false;
+    // Set once a connection asks the daemon for a weather refresh, so the watch
+    // asking again every few seconds does not fetch again and again.
+    bool mWeatherRefreshRequested = false;
     QSharedPointer<GarminNotificationHandler> mNotificationHandler;
     QSharedPointer<ProtobufHandler> mProtobufHandler;
     QSharedPointer<CommunicatorV2> mCommunicator;

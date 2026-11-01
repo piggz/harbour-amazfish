@@ -44,6 +44,7 @@ DeviceInterface::DeviceInterface()
         connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::handleButtonPressed, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::weatherRequested, this, &DeviceInterface::onWeatherRequested, Qt::UniqueConnection);
     }
 
     //Create the DBUS HRM Interface
@@ -186,6 +187,7 @@ QString DeviceInterface::pair(const QString &name, const QString &deviceType, co
         connect(m_device, &AbstractDevice::buttonPressed, this, &DeviceInterface::handleButtonPressed, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::weatherRequested, this, &DeviceInterface::onWeatherRequested, Qt::UniqueConnection);
         m_device->pair();
         m_autoreconnect = true;
         return "pairing";
@@ -1177,6 +1179,13 @@ void DeviceInterface::onCitiesChanged()
 void DeviceInterface::onWeatherReady()
 {
     sendWeather(&m_currentWeather);
+}
+
+void DeviceInterface::onWeatherRequested()
+{
+    // refresh() keeps the values it already holds, so an asking watch always
+    // gets a fresh fetch.
+    m_currentWeather.refresh();
 }
 
 void DeviceInterface::navigationRunningChanged(bool running)

@@ -185,6 +185,7 @@ void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStri
             if (!value) {
                 // A weather request from this connection must not be answered on the next one.
                 mWeatherRequested = false;
+                mWeatherRefreshRequested = false;
                 setConnectionState("disconnected");
                 if (svc)
                 {
@@ -300,6 +301,12 @@ void GarminDevice::onWeatherRequestReceived()
 {
     if (!mWeather) {
         mWeatherRequested = true;
+        if (!mWeatherRefreshRequested) {
+            // The next scheduled fetch can be an hour away, so ask for one now. Once per
+            // connection: the watch asks again every few seconds while it has nothing.
+            mWeatherRefreshRequested = true;
+            emit weatherRequested();
+        }
         qDebug() << Q_FUNC_INFO << "Garmin: No weather data yet, answering when the next update arrives";
         return;
     }
