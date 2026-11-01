@@ -35,7 +35,7 @@ jobs:
         jq 'walk(if type == "object" and .url == "https://github.com/piggz/harbour-amazfish.git" then .type = "dir" | .path = "../harbour-amazfish" | del(.url, .branch, .commit, .tag) else . end)' ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish.json > ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish-ci.json
 
     - name: Validate AppStream metadata
-      run: appstreamcli validate --explain "${{ github.workspace }}/harbour-amazfish/ui/harbour-amazfish-ui.appdata.xml"
+      run: appstreamcli validate --no-net --explain "${{ github.workspace }}/harbour-amazfish/ui/harbour-amazfish-ui.appdata.xml"
 
     - name: Build development snapshot and package as Flatpak
       run: |
