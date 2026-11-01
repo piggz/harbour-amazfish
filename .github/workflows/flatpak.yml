@@ -28,11 +28,21 @@ jobs:
       run: sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
     - name: Install KDE SDK
-      run: sudo flatpak install -y flathub org.kde.Platform//5.15-24.08 org.kde.Sdk//5.15-24.08
+      run: sudo flatpak install -y flathub org.kde.Platform//5.15-25.08 org.kde.Sdk//5.15-25.08
 
     - name: Use dir instead of git tag in flatpak json
       run: |
         jq 'walk(if type == "object" and .url == "https://github.com/piggz/harbour-amazfish.git" then .type = "dir" | .path = "../harbour-amazfish" | del(.url, .branch, .commit, .tag) else . end)' ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish.json > ${{ github.workspace }}/uk.co.piggz.amazfish/uk.co.piggz.amazfish-ci.json
+
+
+    # remove these steps after release of new version and update of flatpak
+
+    - name: Use amber-mpris instead of qtmpris in flatpak json
+      run: |
+        cd ${{ github.workspace }}/uk.co.piggz.amazfish
+        cp ${{ github.workspace }}/harbour-amazfish/.github/flatpak/*.patch .
+        jq 'walk(if type == "object" and .name == "qtmpris" then .name = "amber-mpris" | .sources = [{"type": "archive", "url": "https://github.com/sailfishos/amber-mpris/archive/refs/tags/1.2.10.tar.gz", "sha256": "a01e38f85c1e88e7db9342672e4588164676fbbccf4d084071eda17fb0ec9014"}, {"type": "patch", "path": "amber-mpris-qmake.patch"}] else . end)' uk.co.piggz.amazfish-ci.json > uk.co.piggz.amazfish-ci.json.tmp
+        mv uk.co.piggz.amazfish-ci.json.tmp uk.co.piggz.amazfish-ci.json
 
     - name: Validate AppStream metadata
       run: appstreamcli validate --no-net --explain "${{ github.workspace }}/harbour-amazfish/ui/harbour-amazfish-ui.appdata.xml"
