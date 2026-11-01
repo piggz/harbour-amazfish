@@ -113,7 +113,7 @@
         <location filename="../src/deviceinterface.cpp" line="113"/>
         <location filename="../src/deviceinterface.cpp" line="171"/>
         <source>Device is not yet available</source>
-        <translation type="unfinished"></translation>
+        <translation>Enheten er ikke tilgjengelig ennå</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="734"/>
@@ -313,7 +313,7 @@
     <message>
         <location filename="../src/services/garmin/garminnotificationdatamessage.cpp" line="115"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvis</translation>
     </message>
 </context>
 <context>
