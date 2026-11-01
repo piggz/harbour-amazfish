@@ -1,0 +1,43 @@
+diff --git a/declarative/declarative.pro b/declarative/declarative.pro
+index 515f47d..346e61d 100644
+--- a/declarative/declarative.pro
++++ b/declarative/declarative.pro
+@@ -24,7 +24,8 @@ HEADERS += \
+     declarativemprisplayer_p.h \
+     mprisplugin.h
+ 
+-target.path = $$[QT_INSTALL_QML]/$$PLUGIN_IMPORT_PATH
++isEmpty(PREFIX): target.path = $$[QT_INSTALL_QML]/$$PLUGIN_IMPORT_PATH
++else: target.path = $${PREFIX}/lib/qml/$$PLUGIN_IMPORT_PATH
+ 
+ qml.files = \
+     qmldir \
+diff --git a/src/src.pro b/src/src.pro
+index 7116720..06b9186 100644
+--- a/src/src.pro
++++ b/src/src.pro
+@@ -71,15 +71,21 @@ OTHER_FILES += \
+     org.mpris.MediaPlayer2.xml \
+     org.mpris.MediaPlayer2.Player.xml
+ 
+-target.path = $$[QT_INSTALL_LIBS]
++isEmpty(PREFIX) {
++    target.path = $$[QT_INSTALL_LIBS]
++    headers.path = /usr/include/AmberMpris
++    prf.path = $$[QMAKE_MKSPECS]/features
++} else {
++    target.path = $${PREFIX}/lib
++    headers.path = $${PREFIX}/include/AmberMpris
++    prf.path = $${PREFIX}/share/qt5/mkspecs/features
++}
+ headers.files = $$INSTALL_HEADERS
+-headers.path = /usr/include/AmberMpris
+ 
+ INSTALLS += target headers
+ 
+ equals(QT_MAJOR_VERSION, 5) {
+ prf.files = $${TARGET}.prf
+-prf.path = $$[QMAKE_MKSPECS]/features
+ INSTALLS += prf
+ QMAKE_PKGCONFIG_REQUIRES = Qt5Core Qt5DBus
+ }
