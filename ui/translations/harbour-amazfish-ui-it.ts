@@ -411,22 +411,23 @@
         <translation>SpO₂</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <location filename="../qml/pages/FirstPage.qml" line="284"/>
         <source>Stress</source>
         <translation>Stress</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="290"/>
+        <location filename="../qml/pages/FirstPage.qml" line="299"/>
         <source>Data</source>
         <translation>Dati</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="304"/>
+        <location filename="../qml/pages/FirstPage.qml" line="313"/>
         <source>Battery</source>
         <translation>Batteria</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="312"/>
+        <location filename="../qml/pages/FirstPage.qml" line="269"/>
+        <location filename="../qml/pages/FirstPage.qml" line="321"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
@@ -441,7 +442,7 @@
         <translation>%1 bpm</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="327"/>
+        <location filename="../qml/pages/FirstPage.qml" line="336"/>
         <source>Install File</source>
         <translation>Installa File</translation>
     </message>
@@ -916,17 +917,17 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="102"/>
+        <location filename="../qml/pages/Settings-app.qml" line="38"/>
         <source>Notify on connect</source>
         <translation>Notifica sulla connessione</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="238"/>
+        <location filename="../qml/pages/Settings-app.qml" line="174"/>
         <source>Save Settings</source>
         <translation>Salva Impostazioni</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="144"/>
+        <location filename="../qml/pages/Settings-app.qml" line="80"/>
         <source>Sync activity data each hour</source>
         <translation>Sincronizzare i dati di attività ogni ora</translation>
     </message>
@@ -936,82 +937,81 @@
         <translation>Impostazioni Applicazione</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="28"/>
         <source>BT Adapter</source>
-        <translation>Adattatore BT</translation>
+        <translation type="vanished">Adattatore BT</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="86"/>
+        <location filename="../qml/pages/Settings-app.qml" line="22"/>
         <source>Notifications</source>
         <translation>Notifiche</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="110"/>
+        <location filename="../qml/pages/Settings-app.qml" line="46"/>
         <source>Low battery notification</source>
         <translation>Notifica batteria bassa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="118"/>
+        <location filename="../qml/pages/Settings-app.qml" line="54"/>
         <source>Navigation notifications</source>
         <translation>Notifiche navigazione</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="134"/>
+        <location filename="../qml/pages/Settings-app.qml" line="70"/>
         <source>Simulate event reminder support</source>
         <translation>Simula il supporto dei promemoria degli eventi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="138"/>
+        <location filename="../qml/pages/Settings-app.qml" line="74"/>
         <source>Refresh rates</source>
         <translation>Frequenza di aggiornamento</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="155"/>
+        <location filename="../qml/pages/Settings-app.qml" line="91"/>
         <source>Refresh weather every (%1) minutes</source>
         <translation>Ricarica il meteo ogni (%1) minuti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="164"/>
+        <location filename="../qml/pages/Settings-app.qml" line="100"/>
         <source>Refresh calendar every (%1) minutes</source>
         <translation>Ricarica il calendario ogni (%1) minuti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="169"/>
+        <location filename="../qml/pages/Settings-app.qml" line="105"/>
         <source>Amazfish Service</source>
         <translation>Servizio Amazfish</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="176"/>
+        <location filename="../qml/pages/Settings-app.qml" line="112"/>
         <source>Start service on boot</source>
         <translation>Avvia il servizio all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="190"/>
+        <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>Avvia/Ferma il Servizio in Background di Amazfish</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="207"/>
+        <location filename="../qml/pages/Settings-app.qml" line="143"/>
         <source>Start</source>
         <translation>Avvia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="216"/>
+        <location filename="../qml/pages/Settings-app.qml" line="152"/>
         <source>Stop</source>
         <translation>Ferma</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="226"/>
+        <location filename="../qml/pages/Settings-app.qml" line="162"/>
         <source>Button Actions</source>
         <translation>Azioni pulsante</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="126"/>
+        <location filename="../qml/pages/Settings-app.qml" line="62"/>
         <source>Transliterate notifications</source>
         <translation>Notifiche traslitterate</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="94"/>
+        <location filename="../qml/pages/Settings-app.qml" line="30"/>
         <source>Set silent profile on connect</source>
         <translation>Impostare profilo silenzioso alla connessione</translation>
     </message>
@@ -1676,18 +1676,23 @@
         <translation>Scarica SPO2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="56"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="33"/>
+        <source>%1%</source>
+        <translation type="unfinished">%1%</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="55"/>
         <source>Normal SPO2</source>
         <translation>SPO2 normale</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="60"/>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="81"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="59"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="80"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="77"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="76"/>
         <source>Sleep SPO2</source>
         <translation>Riposo SPO2</translation>
     </message>

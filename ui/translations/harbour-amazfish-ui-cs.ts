@@ -430,17 +430,17 @@
         <translation>SpO₂</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <location filename="../qml/pages/FirstPage.qml" line="284"/>
         <source>Stress</source>
         <translation>Stres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="290"/>
+        <location filename="../qml/pages/FirstPage.qml" line="299"/>
         <source>Data</source>
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="304"/>
+        <location filename="../qml/pages/FirstPage.qml" line="313"/>
         <source>Battery</source>
         <translation>Akumulátor</translation>
     </message>
@@ -462,7 +462,8 @@
         <translation type="vanished">Okysličení krve</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="312"/>
+        <location filename="../qml/pages/FirstPage.qml" line="269"/>
+        <location filename="../qml/pages/FirstPage.qml" line="321"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
@@ -489,7 +490,7 @@
         <translation type="vanished">Povolit při startu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="327"/>
+        <location filename="../qml/pages/FirstPage.qml" line="336"/>
         <source>Install File</source>
         <translation>Nainstalovat soubor</translation>
     </message>
@@ -964,12 +965,12 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="102"/>
+        <location filename="../qml/pages/Settings-app.qml" line="38"/>
         <source>Notify on connect</source>
         <translation>Notifikace připojení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="238"/>
+        <location filename="../qml/pages/Settings-app.qml" line="174"/>
         <source>Save Settings</source>
         <translation>Uložit nastavení</translation>
     </message>
@@ -979,87 +980,86 @@
         <translation>Nastavení aplikace</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="28"/>
         <source>BT Adapter</source>
-        <translation>BT zařízení</translation>
+        <translation type="vanished">BT zařízení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="86"/>
+        <location filename="../qml/pages/Settings-app.qml" line="22"/>
         <source>Notifications</source>
         <translation>Upozornění</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="110"/>
+        <location filename="../qml/pages/Settings-app.qml" line="46"/>
         <source>Low battery notification</source>
         <translation>Upozornění na téměř vybitý akumulátor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="118"/>
+        <location filename="../qml/pages/Settings-app.qml" line="54"/>
         <source>Navigation notifications</source>
         <translation>Navigační upozornění</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="134"/>
+        <location filename="../qml/pages/Settings-app.qml" line="70"/>
         <source>Simulate event reminder support</source>
         <translation>Simulace podpory připomínek událostí</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="138"/>
+        <location filename="../qml/pages/Settings-app.qml" line="74"/>
         <source>Refresh rates</source>
         <translation>Intervaly obnovení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="144"/>
+        <location filename="../qml/pages/Settings-app.qml" line="80"/>
         <source>Sync activity data each hour</source>
         <translation>Synchronizovat data aktivit každou hodinu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="169"/>
+        <location filename="../qml/pages/Settings-app.qml" line="105"/>
         <source>Amazfish Service</source>
         <translation>Služba Amazfish</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="176"/>
+        <location filename="../qml/pages/Settings-app.qml" line="112"/>
         <source>Start service on boot</source>
         <translation>Spustit službu při startu zařízení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="190"/>
+        <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>Spustit/Zastavit běh Amazfish na pozadí</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="207"/>
+        <location filename="../qml/pages/Settings-app.qml" line="143"/>
         <source>Start</source>
         <translation>Spustit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="216"/>
+        <location filename="../qml/pages/Settings-app.qml" line="152"/>
         <source>Stop</source>
         <translation>Zastavit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="226"/>
+        <location filename="../qml/pages/Settings-app.qml" line="162"/>
         <source>Button Actions</source>
         <translation>Akce tlačítek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="155"/>
+        <location filename="../qml/pages/Settings-app.qml" line="91"/>
         <source>Refresh weather every (%1) minutes</source>
         <translation>Obnovit počasí každých %1 minut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="164"/>
+        <location filename="../qml/pages/Settings-app.qml" line="100"/>
         <source>Refresh calendar every (%1) minutes</source>
         <translation>Obnovit kalendář každých (%1) minut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="126"/>
+        <location filename="../qml/pages/Settings-app.qml" line="62"/>
         <source>Transliterate notifications</source>
         <translation>Přepsat diakritiku oznámení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="94"/>
+        <location filename="../qml/pages/Settings-app.qml" line="30"/>
         <source>Set silent profile on connect</source>
         <translation>Po připojení nastavit tichý profil</translation>
     </message>
@@ -1728,18 +1728,23 @@
         <translation>Stáhnout SPO2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="56"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="33"/>
+        <source>%1%</source>
+        <translation type="unfinished">%1%</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="55"/>
         <source>Normal SPO2</source>
         <translation>Normální SPO2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="60"/>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="81"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="59"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="80"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="77"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="76"/>
         <source>Sleep SPO2</source>
         <translation>SPO2 ve spánku</translation>
     </message>

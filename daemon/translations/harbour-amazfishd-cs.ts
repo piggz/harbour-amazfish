@@ -4,7 +4,7 @@
 <context>
     <name>AbstractDevice</name>
     <message>
-        <location filename="../src/devices/abstractdevice.cpp" line="200"/>
+        <location filename="../src/devices/abstractdevice.cpp" line="169"/>
         <source>Device does not support settings</source>
         <translation>Zařízení nepodporuje nastavení</translation>
     </message>
@@ -85,7 +85,7 @@
 <context>
     <name>AsteroidOSDevice</name>
     <message>
-        <location filename="../src/devices/asteroidosdevice.cpp" line="271"/>
+        <location filename="../src/devices/asteroidosdevice.cpp" line="253"/>
         <source>Stored %1...</source>
         <translation>Uloženo %1…</translation>
     </message>
@@ -93,12 +93,12 @@
 <context>
     <name>BangleJSDevice</name>
     <message>
-        <location filename="../src/devices/banglejsdevice.cpp" line="349"/>
+        <location filename="../src/devices/banglejsdevice.cpp" line="338"/>
         <source>Downloading activity data</source>
         <translation>Stahující se data o aktivitě</translation>
     </message>
     <message>
-        <location filename="../src/devices/banglejsdevice.cpp" line="370"/>
+        <location filename="../src/devices/banglejsdevice.cpp" line="357"/>
         <source>Downloading sports data</source>
         <translation>Stahující se data o sportech</translation>
     </message>
@@ -106,38 +106,43 @@
 <context>
     <name>DeviceInterface</name>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="110"/>
         <source>Device is not valid, it may not be supported</source>
-        <translation>Zařízení není platné – je možné, že není podporováno</translation>
+        <translation type="vanished">Zařízení není platné – je možné, že není podporováno</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="672"/>
-        <location filename="../src/deviceinterface.cpp" line="748"/>
+        <location filename="../src/deviceinterface.cpp" line="113"/>
+        <location filename="../src/deviceinterface.cpp" line="171"/>
+        <source>Device is not yet available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/deviceinterface.cpp" line="734"/>
+        <location filename="../src/deviceinterface.cpp" line="851"/>
         <source>Amazfish</source>
         <translation>Amazfish</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="673"/>
+        <location filename="../src/deviceinterface.cpp" line="735"/>
         <source>Connected</source>
         <translation>Připojeno</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="674"/>
+        <location filename="../src/deviceinterface.cpp" line="736"/>
         <source>Phone and watch are connected</source>
         <translation>Telefon a hodinky jsou propojeny</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="749"/>
+        <location filename="../src/deviceinterface.cpp" line="852"/>
         <source>Low Battery</source>
         <translation>Slabá baterie</translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="750"/>
+        <location filename="../src/deviceinterface.cpp" line="853"/>
         <source>Battery level now </source>
         <translation>Stupeň nabití </translation>
     </message>
     <message>
-        <location filename="../src/deviceinterface.cpp" line="885"/>
+        <location filename="../src/deviceinterface.cpp" line="988"/>
         <source>Calendar</source>
         <translation>Kalendář</translation>
     </message>
@@ -168,17 +173,17 @@
         <translation>Průbeh</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="347"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="345"/>
         <source>Sending %1...</source>
         <translation>Odesílání %1…</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="350"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="348"/>
         <source>No file selected</source>
         <translation>Nebyl vybrán žádný soubor</translation>
     </message>
     <message>
-        <location filename="../src/devices/huami/huamidevice.cpp" line="370"/>
+        <location filename="../src/devices/huami/huamidevice.cpp" line="368"/>
         <source>An operation is currently running, please try later</source>
         <translation>Operace právě běží. Prosím zkuste to pozdějí</translation>
     </message>
@@ -199,8 +204,8 @@
 <context>
     <name>MiBandService</name>
     <message>
-        <location filename="../src/services/mibandservice.cpp" line="422"/>
-        <location filename="../src/services/mibandservice.cpp" line="482"/>
+        <location filename="../src/services/mibandservice.cpp" line="442"/>
+        <location filename="../src/services/mibandservice.cpp" line="489"/>
         <source>Firmware is too old to set display items, V0.1.1.14 is required</source>
         <translation>Firmware je příliš starý pro nastavení položek na obrazovku, požadovaný je V0.1.1.14</translation>
     </message>
@@ -208,20 +213,20 @@
 <context>
     <name>PinetimeJFDevice</name>
     <message>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="330"/>
         <location filename="../src/devices/pinetimejfdevice.cpp" line="344"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="358"/>
         <source>An operation is currently running, please try later</source>
         <translation>Operace právě běží, prosím zkuste to později</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="381"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="394"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="367"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="380"/>
         <source>Sending file...</source>
         <translation>Odesílání souboru…</translation>
     </message>
     <message>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="384"/>
-        <location filename="../src/devices/pinetimejfdevice.cpp" line="397"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="370"/>
+        <location filename="../src/devices/pinetimejfdevice.cpp" line="383"/>
         <source>No file selected</source>
         <translation>Nevybrán žádný soubor</translation>
     </message>
@@ -262,54 +267,59 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="140"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="142"/>
         <source>About to transfer data from </source>
         <translation>Připravuje se na přenos dat z </translation>
     </message>
     <message>
-        <location filename="../src/operations/abstractfetchoperation.cpp" line="156"/>
+        <location filename="../src/operations/abstractfetchoperation.cpp" line="158"/>
         <source>No data to transfer</source>
         <translation>Žádné data k přenosu</translation>
     </message>
     <message>
-        <location filename="../src/operations/dfuoperation.cpp" line="186"/>
-        <location filename="../src/operations/dfuoperation.cpp" line="205"/>
-        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="84"/>
+        <location filename="../src/operations/dfuoperation.cpp" line="189"/>
+        <location filename="../src/operations/dfuoperation.cpp" line="208"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="86"/>
         <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="87"/>
         <source>Update operation failed</source>
         <translation>Operace aktualizace se nezdařila</translation>
     </message>
     <message>
-        <location filename="../src/operations/dfuoperation.cpp" line="224"/>
-        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="96"/>
+        <location filename="../src/operations/dfuoperation.cpp" line="227"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="98"/>
         <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="95"/>
         <source>Update operation failed, unexpected metadata</source>
         <translation>Operace aktualizace se nezdařila – neočekávané metadata</translation>
     </message>
     <message>
-        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="71"/>
-        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="78"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="73"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="80"/>
         <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="74"/>
         <source>Update operation complete</source>
         <translation>Operace aktualizace dokončena</translation>
     </message>
     <message>
-        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="94"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="96"/>
         <source>Update operation failed, filetype not supported</source>
         <translation>Operace aktualizace se nezdařila – nepodporovaný typ souboru</translation>
     </message>
     <message>
-        <location filename="../src/operations/dfuoperation.cpp" line="144"/>
-        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="108"/>
+        <location filename="../src/operations/dfuoperation.cpp" line="147"/>
+        <location filename="../src/operations/huami/huamiupdatefirmwareoperation2020.cpp" line="110"/>
         <location filename="../src/operations/huami/updatefirmwareoperation.cpp" line="29"/>
         <source>File does not seem to be supported</source>
         <translation>Zdá se. že typ souboru není podporovaný</translation>
+    </message>
+    <message>
+        <location filename="../src/services/garmin/garminnotificationdatamessage.cpp" line="115"/>
+        <source>Dismiss</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UARTService</name>
     <message>
-        <location filename="../src/services/uartservice.cpp" line="58"/>
+        <location filename="../src/services/uartservice.cpp" line="62"/>
         <source>Android Integration plugin not installed on Bangle.js</source>
         <translation>Na bangle.js není nainstalovaná aplikace pro integraci s androidem</translation>
     </message>
@@ -317,7 +327,7 @@
 <context>
     <name>ZeppOSDevice</name>
     <message>
-        <location filename="../src/devices/huami/zepposdevice.cpp" line="364"/>
+        <location filename="../src/devices/huami/zepposdevice.cpp" line="382"/>
         <source>An operation is currently running, please try later</source>
         <translation>Momentálně probíhá operace – zkuste to později</translation>
     </message>

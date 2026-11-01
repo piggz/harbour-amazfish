@@ -427,17 +427,17 @@
         <translation>இரத்தம் உயிர்வாயு செறிவூட்டல் அளவு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <location filename="../qml/pages/FirstPage.qml" line="284"/>
         <source>Stress</source>
         <translation>அழுத்தம்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="290"/>
+        <location filename="../qml/pages/FirstPage.qml" line="299"/>
         <source>Data</source>
         <translation>தரவு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="304"/>
+        <location filename="../qml/pages/FirstPage.qml" line="313"/>
         <source>Battery</source>
         <translation>மின்கலம்</translation>
     </message>
@@ -450,7 +450,8 @@
         <translation type="obsolete">பை</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="312"/>
+        <location filename="../qml/pages/FirstPage.qml" line="269"/>
+        <location filename="../qml/pages/FirstPage.qml" line="321"/>
         <source>%1%</source>
         <translation>% 1%</translation>
     </message>
@@ -477,7 +478,7 @@
         <translation type="vanished">துவக்கத்தில் இயக்கு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="327"/>
+        <location filename="../qml/pages/FirstPage.qml" line="336"/>
         <source>Install File</source>
         <translation>கோப்பை நிறுவவும்</translation>
     </message>
@@ -952,17 +953,17 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="102"/>
+        <location filename="../qml/pages/Settings-app.qml" line="38"/>
         <source>Notify on connect</source>
         <translation>இணைத்தவுடன் அறிவிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="238"/>
+        <location filename="../qml/pages/Settings-app.qml" line="174"/>
         <source>Save Settings</source>
         <translation>அமைப்புகளை சேமிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="144"/>
+        <location filename="../qml/pages/Settings-app.qml" line="80"/>
         <source>Sync activity data each hour</source>
         <translation>ஒவ்வொரு மணி நேரமும் செயல்பாட்டு தரவை ஒத்திசைக்கவும்</translation>
     </message>
@@ -972,82 +973,81 @@
         <translation>செயலி அமைப்புகள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="28"/>
         <source>BT Adapter</source>
-        <translation>நீலப்பல் இணைப்பான்</translation>
+        <translation type="vanished">நீலப்பல் இணைப்பான்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="86"/>
+        <location filename="../qml/pages/Settings-app.qml" line="22"/>
         <source>Notifications</source>
         <translation>அறிவிப்புகள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="110"/>
+        <location filename="../qml/pages/Settings-app.qml" line="46"/>
         <source>Low battery notification</source>
         <translation>மின்கலம் குறைவு அறிவிப்பு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="118"/>
+        <location filename="../qml/pages/Settings-app.qml" line="54"/>
         <source>Navigation notifications</source>
         <translation>வழிசெலுத்தல் அறிவிப்புகள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="134"/>
+        <location filename="../qml/pages/Settings-app.qml" line="70"/>
         <source>Simulate event reminder support</source>
         <translation>நிகழ்வு நினைவூட்டல் ஆதரவை பாவணையாகச் செய்யுங்கள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="138"/>
+        <location filename="../qml/pages/Settings-app.qml" line="74"/>
         <source>Refresh rates</source>
         <translation>விகிதங்களை புதுப்பிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="155"/>
+        <location filename="../qml/pages/Settings-app.qml" line="91"/>
         <source>Refresh weather every (%1) minutes</source>
         <translation>ஒவ்வொரு (%1) நிமிடங்களுக்கும் வானிலை புதுப்பிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="164"/>
+        <location filename="../qml/pages/Settings-app.qml" line="100"/>
         <source>Refresh calendar every (%1) minutes</source>
         <translation>ஒவ்வொரு (%1) நிமிடங்களுக்கும் நாள்காட்டியைப் புதுப்பிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="169"/>
+        <location filename="../qml/pages/Settings-app.qml" line="105"/>
         <source>Amazfish Service</source>
         <translation>அமாசுபிசு சேவை</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="176"/>
+        <location filename="../qml/pages/Settings-app.qml" line="112"/>
         <source>Start service on boot</source>
         <translation>துவக்கும்போது சேவையைத் தொடங்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="190"/>
+        <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>அமாசுபிசு பின்னணி சேவையைத் தொடங்கவும்/நிறுத்தவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="207"/>
+        <location filename="../qml/pages/Settings-app.qml" line="143"/>
         <source>Start</source>
         <translation>தொடங்கு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="216"/>
+        <location filename="../qml/pages/Settings-app.qml" line="152"/>
         <source>Stop</source>
         <translation>நிறுத்து</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="226"/>
+        <location filename="../qml/pages/Settings-app.qml" line="162"/>
         <source>Button Actions</source>
         <translation>பொத்தான் செயல்கள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="126"/>
+        <location filename="../qml/pages/Settings-app.qml" line="62"/>
         <source>Transliterate notifications</source>
         <translation>மொழிபெயர்ப்பு அறிவிப்புகள்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="94"/>
+        <location filename="../qml/pages/Settings-app.qml" line="30"/>
         <source>Set silent profile on connect</source>
         <translation>இணைக்கும்போது அமைதியான சுயவிவரத்தை அமைக்கவும்</translation>
     </message>
@@ -1716,18 +1716,23 @@
         <translation>இரத்த ஆக்சிசன் செறிவூட்டலை(SPO2) ஐப் பதிவிறக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="56"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="33"/>
+        <source>%1%</source>
+        <translation type="unfinished">% 1%</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="55"/>
         <source>Normal SPO2</source>
         <translation>இயல்பான இரத்த ஆக்சிசன் செறிவூட்டல்(SPO2)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="60"/>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="81"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="59"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="80"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="77"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="76"/>
         <source>Sleep SPO2</source>
         <translation>உறக்க இரத்த ஆக்சிசன் செறிவூட்டல் (SPO2)</translation>
     </message>

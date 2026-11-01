@@ -427,17 +427,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="275"/>
+        <location filename="../qml/pages/FirstPage.qml" line="284"/>
         <source>Stress</source>
         <translation type="unfinished">استرس</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="290"/>
+        <location filename="../qml/pages/FirstPage.qml" line="299"/>
         <source>Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="304"/>
+        <location filename="../qml/pages/FirstPage.qml" line="313"/>
         <source>Battery</source>
         <translation type="unfinished">باتری</translation>
     </message>
@@ -446,7 +446,8 @@
         <translation type="vanished">نمودارهای داده</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="312"/>
+        <location filename="../qml/pages/FirstPage.qml" line="269"/>
+        <location filename="../qml/pages/FirstPage.qml" line="321"/>
         <source>%1%</source>
         <translation>%1٪</translation>
     </message>
@@ -473,7 +474,7 @@
         <translation type="vanished">به کار افتاده هنگام راه‌اندازی</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="327"/>
+        <location filename="../qml/pages/FirstPage.qml" line="336"/>
         <source>Install File</source>
         <translation>نصب پرونده</translation>
     </message>
@@ -948,17 +949,17 @@
 <context>
     <name>Settings-app</name>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="102"/>
+        <location filename="../qml/pages/Settings-app.qml" line="38"/>
         <source>Notify on connect</source>
         <translation>آگاهی هنگام وصل شدن</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="238"/>
+        <location filename="../qml/pages/Settings-app.qml" line="174"/>
         <source>Save Settings</source>
         <translation>ذخیرهٔ تنظیمات</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="144"/>
+        <location filename="../qml/pages/Settings-app.qml" line="80"/>
         <source>Sync activity data each hour</source>
         <translation>هم‌گام&#xa0;سازی ساعتی داده‌های فعّالیت</translation>
     </message>
@@ -968,82 +969,81 @@
         <translation>تنظیمات برنامه</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="28"/>
         <source>BT Adapter</source>
-        <translation>سازوارگر بلوتوث</translation>
+        <translation type="vanished">سازوارگر بلوتوث</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="86"/>
+        <location filename="../qml/pages/Settings-app.qml" line="22"/>
         <source>Notifications</source>
         <translation>آگاهی‌ها</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="110"/>
+        <location filename="../qml/pages/Settings-app.qml" line="46"/>
         <source>Low battery notification</source>
         <translation>آگاهی کم بودن باتری</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="118"/>
+        <location filename="../qml/pages/Settings-app.qml" line="54"/>
         <source>Navigation notifications</source>
         <translation>آگاهی‌های ناوبری</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="134"/>
+        <location filename="../qml/pages/Settings-app.qml" line="70"/>
         <source>Simulate event reminder support</source>
         <translation>شبیه‌سازی پشتیبانی یادآور رویداد</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="138"/>
+        <location filename="../qml/pages/Settings-app.qml" line="74"/>
         <source>Refresh rates</source>
         <translation>آهنگ‌های نوسازی</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="155"/>
+        <location filename="../qml/pages/Settings-app.qml" line="91"/>
         <source>Refresh weather every (%1) minutes</source>
         <translation>نوسازی آب وهوا هر (%1) دقیقه</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="164"/>
+        <location filename="../qml/pages/Settings-app.qml" line="100"/>
         <source>Refresh calendar every (%1) minutes</source>
         <translation>نوسازی تقویم هر (%1) دقیقه</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="169"/>
+        <location filename="../qml/pages/Settings-app.qml" line="105"/>
         <source>Amazfish Service</source>
         <translation>خدمت امیزفیش</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="176"/>
+        <location filename="../qml/pages/Settings-app.qml" line="112"/>
         <source>Start service on boot</source>
         <translation>آغاز خدمت هنگام راه‌اندازی</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="190"/>
+        <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>آغاز یا پایان خدمت پس‌زمینهٔ امیزفیش</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="207"/>
+        <location filename="../qml/pages/Settings-app.qml" line="143"/>
         <source>Start</source>
         <translation>آغاز</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="216"/>
+        <location filename="../qml/pages/Settings-app.qml" line="152"/>
         <source>Stop</source>
         <translation>پایان</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="226"/>
+        <location filename="../qml/pages/Settings-app.qml" line="162"/>
         <source>Button Actions</source>
         <translation>کنش دکمه‌ها</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="126"/>
+        <location filename="../qml/pages/Settings-app.qml" line="62"/>
         <source>Transliterate notifications</source>
         <translation>آگاهی‌های آوانگاری</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="94"/>
+        <location filename="../qml/pages/Settings-app.qml" line="30"/>
         <source>Set silent profile on connect</source>
         <translation>تنظیم نماگر بی‌صدا هنگام وصل شدن</translation>
     </message>
@@ -1712,18 +1712,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="56"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="33"/>
+        <source>%1%</source>
+        <translation type="unfinished">%1٪</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="55"/>
         <source>Normal SPO2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="60"/>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="81"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="59"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="80"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Spo2DataPage.qml" line="77"/>
+        <location filename="../qml/pages/Spo2DataPage.qml" line="76"/>
         <source>Sleep SPO2</source>
         <translation type="unfinished"></translation>
     </message>
