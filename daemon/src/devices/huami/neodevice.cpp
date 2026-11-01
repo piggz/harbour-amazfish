@@ -31,7 +31,9 @@ Amazfish::Features NeoDevice::supportedFeatures() const
 
 Amazfish::DataTypes NeoDevice::supportedDataTypes() const
 {
-    return Amazfish::DataType::TYPE_ACTIVITY | Amazfish::DataType::TYPE_HEART_RATE;
+    return Amazfish::DataType::TYPE_ACTIVITY
+        | Amazfish::DataType::TYPE_HEART_RATE
+        | Amazfish::DataType::TYPE_SLEEP;
 }
 
 void NeoDevice::serviceEvent(uint8_t event)
