@@ -82,6 +82,13 @@ void CommunicatorV2::onDeviceMaxPacketSize(quint16 deviceMaxPacketSize) {
     // and the device-reported maximum, ensuring we respect the device's limitations.
 
     const int dev = int(deviceMaxPacketSize);
+    // The smallest ATT MTU is 23, which leaves 20 bytes per write. A watch reporting less
+    // than that cannot carry any payload, so keep the MTU based size instead of its value.
+    const int minUsableSize = 20;
+    if (dev < minUsableSize) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Ignoring implausible device max packet size" << dev;
+        return;
+    }
     if (dev < mState->maxWriteSize) {
         mState->maxWriteSize = dev;
         for (auto it = mState->mlrCommunicators.begin(); it != mState->mlrCommunicators.end(); ++it) {
@@ -251,6 +258,10 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
 
     const int handlePrefixSize = mIsMlProtocol ? 1 : 0;
     const int maxChunk = mState->maxWriteSize - handlePrefixSize;
+    if (maxChunk <= 0) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Max write size too small to fragment" << mState->maxWriteSize;
+        return false;
+    }
 
     quint8 gfdiHandle;
 
