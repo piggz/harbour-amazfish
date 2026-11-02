@@ -127,7 +127,11 @@ void MlrCommunicator::sendMessage(const QString& taskName, const QByteArray& mes
 
     qDebug() << Q_FUNC_INFO << "Garmin: Queuing MLR message for " << taskName <<  "(" << message.size() <<" bytes)";
 
-    const int maxDataSize = qMax(0, m_state.maxPacketSize - 2);
+    const int maxDataSize = m_state.maxPacketSize - 2;
+    if (maxDataSize <= 0) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Packet size leaves no room for MLR data" << m_state.maxPacketSize;
+        return;
+    }
     int remaining = message.size();
     int i = 0;
     if (remaining > maxDataSize) {
