@@ -27,7 +27,7 @@ public:
     bool isComplete();
 private:
     QByteArray mFragmentBytes;
-    int mTotalLength;
+    int mTotalLength = 0;
 };
 
 class ProtobufHandler
@@ -36,6 +36,7 @@ public:
     ProtobufHandler(CommunicatorV2* com):mCommunicator(com){
     };
     int getNextProtobufRequestId();
+    void reset();
     QSharedPointer<GarminProtobufMessage> processIncoming(QSharedPointer<GarminProtobufMessage> message);
     QSharedPointer<GarminProtobufMessage> processIncoming(QSharedPointer<GarminProtobufStatusMessage> message);
     QSharedPointer<ProtobufFragment> processChunkedMessage(QSharedPointer<GarminProtobufMessage> message);
@@ -47,7 +48,7 @@ private:
     GarminDevice* mDevice;
     QMap<int, QSharedPointer<ProtobufFragment>> mChunkedFragmentsMap;
     int mMaxChunkSize = 375; //tested on Vívomove Style
-    int mLastProtobufRequestId;
+    int mLastProtobufRequestId = 0;
     CommunicatorV2* mCommunicator;
     void sendAck(QString taskName, QSharedPointer<GarminGfdiMessage> msg);
     //AppConfigHandler appConfigHandler;
