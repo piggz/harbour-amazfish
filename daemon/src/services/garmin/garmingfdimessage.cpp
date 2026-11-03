@@ -59,6 +59,12 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
 
     qDebug() << Q_FUNC_INFO << "Garmin: parsing GFDI Message " << data.toHex();
 
+    // Everything below needs at least the two bytes of the message id.
+    if (data.size() < 2) {
+        qDebug() << Q_FUNC_INFO << "Garmin: GFDI message too short" << data.size();
+        return;
+    }
+
     int offset = 0;
 
     // Read message ID (2 bytes, little-endian)
