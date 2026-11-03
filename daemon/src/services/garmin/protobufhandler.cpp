@@ -5,6 +5,9 @@
 
 const int MAX_CHUNK_SIZE = 375;
 
+// Largest reassembled protobuf message we accept. Observed on the wire: 34 bytes.
+const int MAX_TOTAL_PROTOBUF_LENGTH = 256 * 1024;
+
 ProtobufFragment::ProtobufFragment(QByteArray fragmentBytes)
 {
     mFragmentBytes=fragmentBytes;
@@ -62,6 +65,18 @@ int ProtobufHandler::getNextProtobufRequestId() {
 
 QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPointer<GarminProtobufMessage> message) {
     qDebug() << Q_FUNC_INFO;
+    // The length fields are unsigned on the wire, so a huge value arrives as a negative int.
+    int totalLength = message->getTotalProtobufLength();
+    QSharedPointer<ProtobufFragment> existing = mChunkedFragmentsMap.value(message->getRequestId());
+    int stored = existing.isNull() ? 0 : existing->getFragmentBytes().size();
+    if (totalLength <= 0 || totalLength > MAX_TOTAL_PROTOBUF_LENGTH
+        || stored + message->getMessageBytes().size() > MAX_TOTAL_PROTOBUF_LENGTH) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Refusing protobuf message, declared total length"
+                 << totalLength << "stored bytes" << stored;
+        if (!existing.isNull())
+            mChunkedFragmentsMap.remove(message->getRequestId());
+        return QSharedPointer<GarminProtobufMessage>();
+    }
     QSharedPointer<ProtobufFragment> fragment = processChunkedMessage(message);
     if (fragment.isNull()) {
         qDebug() << Q_FUNC_INFO << "Garmin: processChunkedMessage returned Null";
@@ -72,6 +87,12 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
         mChunkedFragmentsMap.remove(message->getRequestId());
         // Message is complet now, start parsing
         QByteArray protobufPayload = fragment->getFragmentBytes();
+
+        // Every branch below reads the tag byte and the length byte after it.
+        if (protobufPayload.size() < 2) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Refusing protobuf payload, too short" << protobufPayload.size();
+            return QSharedPointer<GarminProtobufMessage>();
+        }
 
         const quint8 firstTag = (quint8)protobufPayload[0];
         const quint8 fieldNumber = firstTag >> 3;
