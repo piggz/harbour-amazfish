@@ -156,15 +156,15 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
 void GarminGfdiMessage::parseCurrentTimeRequest(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO;
-    GarminCurrentTimeMessage* mesg = new GarminCurrentTimeMessage(mCommunicator);
-    mesg->parse(data);
+    GarminCurrentTimeMessage mesg(mCommunicator);
+    mesg.parse(data);
 }
 
 void GarminGfdiMessage::parseDeviceInformation(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO;
-    GarminDeviceInformationMessage* mesg = new GarminDeviceInformationMessage(mCommunicator);
-    mesg->parse(data);
+    GarminDeviceInformationMessage mesg(mCommunicator);
+    mesg.parse(data);
 }
 
 void GarminGfdiMessage::parseConfiguration(const QByteArray& data, quint16 msgId)
@@ -173,46 +173,46 @@ void GarminGfdiMessage::parseConfiguration(const QByteArray& data, quint16 msgId
     //This type needs Ack first as response is new message (special case)
     QByteArray ackData = GfdiMessageGenerator::ackResponse(msgId);
     mCommunicator->sendMessage("ACK",ackData);
-    GarminConfigurationMessage* mesg = new GarminConfigurationMessage(mCommunicator);
-    mesg->parse(data);
+    GarminConfigurationMessage mesg(mCommunicator);
+    mesg.parse(data);
 }
 
 void GarminGfdiMessage::parseNotificationControl(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO <<"Garmin: handling NOTIFICATION CONTROL";
-    GarminNotificationControlMessage* mesg = new GarminNotificationControlMessage(mCommunicator);
-    mesg->parse(data);
+    GarminNotificationControlMessage mesg(mCommunicator);
+    mesg.parse(data);
 }
 
 void GarminGfdiMessage::parseNotificationSubscription(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO;
-    GarminNotificationSubscriptionMessage* msg = new GarminNotificationSubscriptionMessage(mCommunicator);
-    msg->parse(data);
+    GarminNotificationSubscriptionMessage msg(mCommunicator);
+    msg.parse(data);
 }
 
 void GarminGfdiMessage::parseSynchronization(const QByteArray& data)
 {
-    GarminSynchronizationMessage* msg = new GarminSynchronizationMessage(mCommunicator);
-    msg->parse(data);
+    GarminSynchronizationMessage msg(mCommunicator);
+    msg.parse(data);
 }
 
 void GarminGfdiMessage::parseWeatherRequest(const QByteArray& data)
 {
-    GarminWeatherMessage* msg = new GarminWeatherMessage(mCommunicator);
-    msg->parse(data);
+    GarminWeatherMessage msg(mCommunicator);
+    msg.parse(data);
 }
 
 void GarminGfdiMessage::parseFilterStatus(const QByteArray& data)
 {
-    GarminFilterStatusMessage* msg = new GarminFilterStatusMessage(mCommunicator);
-    msg->parse(data);
+    GarminFilterStatusMessage msg(mCommunicator);
+    msg.parse(data);
 }
 
 void GarminGfdiMessage::parseResponse(const QByteArray& data)
 {
-    GarminGfdiStatusMessage* msg = new GarminGfdiStatusMessage(mCommunicator);
-    msg->parse(data);
+    GarminGfdiStatusMessage msg(mCommunicator);
+    msg.parse(data);
 }
 
 
@@ -242,8 +242,8 @@ void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArra
 
 void GarminGfdiMessage::parseAuthNegotiation(const QByteArray &data) {
     qDebug() << Q_FUNC_INFO << "Garmin: Received Authentication request" << data.toHex();
-    GarminAuthNegotiationMessage* msg = new GarminAuthNegotiationMessage(mCommunicator);
-    msg->parse(data);
+    GarminAuthNegotiationMessage msg(mCommunicator);
+    msg.parse(data);
 }
 
 QByteArray GarminGfdiMessage::getOutgoingMessage(){

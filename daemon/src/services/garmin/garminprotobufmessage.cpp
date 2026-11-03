@@ -61,8 +61,8 @@ void GarminProtobufMessage::handleAuthenticationRequest(quint16 requestId) {
 
 void GarminProtobufMessage::handleCalendarRequest(const QByteArray& data, quint16 requestID, quint32 dataOffset)
 {
-    GarminCalendarMessage* calendarMsg = new GarminCalendarMessage(mCommunicator);
-    calendarMsg->parse(data, requestID, dataOffset);
+    GarminCalendarMessage calendarMsg(mCommunicator);
+    calendarMsg.parse(data, requestID, dataOffset);
 }
 
 void GarminProtobufMessage::sendGenericAck(const QByteArray& data) {
