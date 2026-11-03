@@ -8,6 +8,9 @@ const int MAX_CHUNK_SIZE = 375;
 // Largest reassembled protobuf message we accept. Observed on the wire: 34 bytes.
 const int MAX_TOTAL_PROTOBUF_LENGTH = 256 * 1024;
 
+// Number of transfers that may wait in mChunkedFragmentsMap at the same time.
+const int MAX_OPEN_TRANSFERS = 8;
+
 ProtobufFragment::ProtobufFragment(QByteArray fragmentBytes)
 {
     mFragmentBytes=fragmentBytes;
@@ -169,6 +172,11 @@ QSharedPointer<ProtobufFragment> ProtobufHandler::processChunkedMessage(QSharedP
         return QSharedPointer<ProtobufFragment>(new ProtobufFragment(message->getMessageBytes()));
 
     if (message->getDataOffset() == 0) { //store new messages beginning at 0, overwrite old messages
+        if (mChunkedFragmentsMap.size() >= MAX_OPEN_TRANSFERS) {
+            // Nothing else evicts stale entries, so drop all of them instead of growing without end.
+            qDebug() << Q_FUNC_INFO << "Garmin: Too many open protobuf transfers, dropping them all";
+            mChunkedFragmentsMap.clear();
+        }
         mChunkedFragmentsMap.insert(message->getRequestId(),QSharedPointer<ProtobufFragment>(new ProtobufFragment(message)  ));
         qDebug() << Q_FUNC_INFO << "Garmin: Protobuf request put in queue";
     } else {
