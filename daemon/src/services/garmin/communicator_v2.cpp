@@ -414,6 +414,8 @@ void CommunicatorV2::onProtobufStatusMessageReceived(const QByteArray& data)
     //QByteArray statusData=data.mid(2); // Remove Response field
     QSharedPointer<GarminProtobufStatusMessage> message=QSharedPointer<GarminProtobufStatusMessage>(new GarminProtobufStatusMessage(data, this));
     QSharedPointer<GarminProtobufStatusMessage> parsed  =  message->parse();
+    if (parsed.isNull())
+        return;
     qDebug() << Q_FUNC_INFO << "Garmin: Parsed Protobuf Status is " << parsed->getMessageBytes().toHex();
     followup = mProtobufHandler->processIncoming(parsed);
     qDebug() << Q_FUNC_INFO << "Garmin: protobuf ack byte stream is " << parsed->getAckByteStream().toHex();
