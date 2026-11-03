@@ -153,6 +153,14 @@ QSharedPointer<ProtobufFragment> ProtobufHandler::processChunkedMessage(QSharedP
     } else {
         if (mChunkedFragmentsMap.contains(message->getRequestId())) {
             QSharedPointer<ProtobufFragment> oldFragment = mChunkedFragmentsMap.value(message->getRequestId());
+            const int expected = oldFragment->getFragmentBytes().size();
+            if (message->getDataOffset() != expected) {
+                // Replacing the entry here would drop every byte we already have and leave an
+                // empty fragment that passes isComplete().
+                qDebug() << Q_FUNC_INFO << "Garmin: Unexpected offset" << message->getDataOffset()
+                         << "expected" << expected << ", keeping the fragment we have";
+                return oldFragment;
+            }
             mChunkedFragmentsMap.insert(message->getRequestId(),
                     QSharedPointer<ProtobufFragment>(new ProtobufFragment(oldFragment, message)));
         }
