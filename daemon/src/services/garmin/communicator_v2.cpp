@@ -873,6 +873,7 @@ void CommunicatorV2::dispose() {
         mBatteryTimer->stop();
     }
     mState->mlrCommunicators.clear();
+    mProtobufHandler->reset();
     if (mState->characteristicReceive) {
         mState->characteristicReceive->stopNotify();
         disconnect(mState->characteristicReceive.data(),nullptr,this,nullptr);

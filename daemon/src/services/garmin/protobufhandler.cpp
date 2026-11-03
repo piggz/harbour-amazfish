@@ -198,3 +198,10 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::prepareProtobufMessage(QB
     }
     return QSharedPointer<GarminProtobufMessage>(new GarminProtobufMessage(mCommunicator, requestId, 0, bytes.size(), bytes.size(), bytes));
 }
+
+void ProtobufHandler::reset()
+{
+    // Request ids restart at 1 on a new connection, so old fragments must not survive one.
+    mChunkedFragmentsMap.clear();
+    mLastProtobufRequestId = 0;
+}
