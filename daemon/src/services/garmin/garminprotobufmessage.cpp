@@ -137,14 +137,20 @@ GarminProtobufStatusMessage::GarminProtobufStatusMessage(Status status, int requ
 QSharedPointer<GarminProtobufStatusMessage> GarminProtobufStatusMessage::parse() {
     qDebug() << Q_FUNC_INFO << "Garmin: Status message data " << mMessageBytes.toHex();
 
-    Status status = (Status) mMessageBytes.data()[0];
+    // The payload repeats the id of the message this answers, then status, request id,
+    // data offset, chunk status and error code.
+    if (mMessageBytes.size() < 11) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Status message too short" << mMessageBytes.size();
+        return QSharedPointer<GarminProtobufStatusMessage>();
+    }
 
+    Status status = (Status)mMessageBytes.data()[2];
 
-    const quint16 requestId = u16le(mMessageBytes, 1);
-    const quint32 dataOffset = u32le(mMessageBytes, 3);
-    char s = mMessageBytes[7];
+    const quint16 requestId = u16le(mMessageBytes, 3);
+    const quint32 dataOffset = u32le(mMessageBytes, 5);
+    char s = mMessageBytes[9];
     ProtobufChunkStatus protobufStatus = (ProtobufChunkStatus)s;
-    s=mMessageBytes[8];
+    s = mMessageBytes[10];
     ProtobufStatusCode error = (ProtobufStatusCode)s;
     qDebug() << Q_FUNC_INFO << "Garmin: Processing protobuf status message " << (char)status  << "#" <<  requestId<< "status " << (char)error;
 
