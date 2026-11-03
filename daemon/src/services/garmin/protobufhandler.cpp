@@ -109,8 +109,8 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
              // Device Status Message
              processed = true;
              quint8  innerLength=protobufPayload[1];
-             GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(mCommunicator);
-             msg->parse(protobufPayload.mid(2,innerLength));
+             GarminDeviceStatusMessage msg(mCommunicator);
+             msg.parse(protobufPayload.mid(2, innerLength));
          }
          if (fieldNumber==49 && wireType ==2) {
              // Notification Service
@@ -121,8 +121,8 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
              processed = true;
              quint8  innerLength=protobufPayload[1];
              qDebug() << Q_FUNC_INFO << "Garmin: Got calendar service message";
-             GarminCalendarMessage* msg = new GarminCalendarMessage(mCommunicator);
-             msg->parse(protobufPayload.mid(2,innerLength),message->getRequestId(),0);
+             GarminCalendarMessage msg(mCommunicator);
+             msg.parse(protobufPayload.mid(2, innerLength), message->getRequestId(), 0);
          }
          if (processed) {
              qDebug() << Q_FUNC_INFO << "Garmin: Add ACK with No error";

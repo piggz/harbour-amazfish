@@ -865,8 +865,8 @@ void CommunicatorV2::registerServices() {
 }
 
 void CommunicatorV2::getBatteryLevel() {
-    GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
-    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg->generateBatteryStatusRequest());
+    GarminDeviceStatusMessage msg(this);
+    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg.generateBatteryStatusRequest());
     sendMessage("BATTERY STATUS REQUEST",batteryRequest->getOutgoingMessage());
 }
 
