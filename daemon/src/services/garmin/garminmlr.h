@@ -52,8 +52,7 @@ class MlrMessageSender : public QObject {
     Q_OBJECT
 public:
     using QObject::QObject;
-    MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar,
-                 QObject* parent=nullptr);
+    MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar);
     virtual ~MlrMessageSender() = default;
 
 public slots:
@@ -85,9 +84,7 @@ class MlrMessageReceiver : public QObject {
     Q_OBJECT
 public:
     using QObject::QObject;
-    MlrMessageReceiver(QSharedPointer<GfdiMessageCallback> syncCb,
-                    QObject* parent=nullptr);
-
+    MlrMessageReceiver(QSharedPointer<GfdiMessageCallback> syncCb);
 
     virtual ~MlrMessageReceiver() = default;
 

@@ -651,8 +651,8 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         }
 
         qDebug() << Q_FUNC_INFO << "Garmin: Inserting reliable MLR communicator for " << serviceToString(service) << ", Handle " << mlrHandle;
-        auto sender = QSharedPointer<MlrMessageSender>::create(sendChar, this);
-        auto receiver = QSharedPointer<MlrMessageReceiver>::create(mMessageCallback, this);
+        auto sender = QSharedPointer<MlrMessageSender>::create(sendChar);
+        auto receiver = QSharedPointer<MlrMessageReceiver>::create(mMessageCallback);
         auto mlr = QSharedPointer<MlrCommunicator>::create(mlrHandle, 20, sender, receiver);
         //mlr->start();
         qDebug() << Q_FUNC_INFO << "Garmin: Reliable MLR communicator created";
