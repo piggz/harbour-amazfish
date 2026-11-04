@@ -2,6 +2,10 @@
 #include "garmintypes.h"
 
 void GarminDeviceStatusMessage::parse(const QByteArray& data) {
+    if (data.size() < 2) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Device status message too short" << data.size();
+        return;
+    }
     // This is a device status response
     const quint8 firstTag = static_cast<quint8>(data[0]);
     const quint8 fieldNumber = firstTag >> 3;
@@ -9,7 +13,12 @@ void GarminDeviceStatusMessage::parse(const QByteArray& data) {
     qDebug() << Q_FUNC_INFO << "Garmin: protobuf field:" << fieldNumber
             << "(wire type:" << wireType << ") Payload: " << data.toHex();
     quint8 protobufSize = data[1];
+    // The battery level sits at byte 5, so we need two header bytes plus four payload bytes.
     if (fieldNumber==3 && wireType ==2) {
+        if (protobufSize < 4 || data.size() < 2 + protobufSize) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Battery status payload too short" << data.size() << "declared" << protobufSize;
+            return;
+        }
         //battery reponse
         char status = data[3];
         if (status ==1) {
