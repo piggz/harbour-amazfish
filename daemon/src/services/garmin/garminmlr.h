@@ -164,10 +164,6 @@ private:
             //sentFragments.resize(int(MAX_SEQ_NUM) + 1);
         }
     };
-    QTimer* m_retransmissionTimer;
-    QTimer* m_ackTimer;
-
-
 
     QByteArray createPacket(int reqNum, int seqNum, const QByteArray& data);
 
@@ -189,7 +185,8 @@ private:
 
     QSharedPointer<MlrMessageSender> m_sender;
     QSharedPointer<MlrMessageReceiver> m_receiver;
-
+    QTimer* m_ackTimer;
+    QTimer* m_retransmissionTimer;
 
     bool m_running {false};
 };
