@@ -68,6 +68,7 @@
         <file>qml/custom-icons/icon-m-levels.png</file>
         <file>qml/custom-icons/icon-m-location.png</file>
         <file>qml/custom-icons/icon-m-notifications.png</file>
+        <file>qml/custom-icons/icon-m-spo2.png</file>
         <file>qml/custom-icons/icon-m-steps.png</file>
         <file>qml/custom-icons/icon-m-steps2.png</file>
         <file>qml/custom-icons/icon-m-up-down.png</file>
@@ -96,6 +97,8 @@
         <file>qml/pics/devices/amazfit-neo.png</file>
         <file>qml/pics/devices/asteroidos.png</file>
         <file>qml/pics/devices/banglejs.png</file>
+        <file>qml/pics/devices/garminepixpro.png</file>
+        <file>qml/pics/devices/garminvivosmart5.png</file>
         <file>qml/pics/devices/kospet_dk08.png</file>
         <file>qml/pics/devices/miband2.png</file>
         <file>qml/pics/devices/miband3.png</file>
