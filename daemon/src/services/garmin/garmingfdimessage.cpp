@@ -83,8 +83,7 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
         msgId = (msgId & 0xFF) + 5000;
     }
 
-    qDebug() << Q_FUNC_INFO << "Garmin: recieved GFDI message " << messageIdToString(msgId)->data();
-
+    qDebug() << Q_FUNC_INFO << "Garmin: recieved GFDI message " << messageIdToString(msgId).value();
 
     const auto mid = messageIdFromU16(msgId);
     if (!mid.has_value()) {
