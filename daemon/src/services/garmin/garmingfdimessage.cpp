@@ -238,7 +238,7 @@ void GarminGfdiMessage::parseProtobufRequest(const QByteArray &data)
 
 void GarminGfdiMessage::parseUnknownMessage(const quint16 msgId, const QByteArray& data)
 {
-    qDebug() << Q_FUNC_INFO << "Garmin: parsing unknown message ";;
+    qDebug() << Q_FUNC_INFO << "Garmin: parsing unknown message" << msgId << data.toHex();
     // Build packet and send back to watch
     QByteArray payload;
     writeU16le(payload, msgId);

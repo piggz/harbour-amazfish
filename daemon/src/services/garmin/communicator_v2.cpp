@@ -298,6 +298,7 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
 }
 
 void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, const QByteArray& data) {
+    Q_UNUSED(characteristic);
 
     //handles incoming messages for a characteristic
     qDebug() <<Q_FUNC_INFO << "Garmin: Received Message " << data.toHex();
@@ -371,10 +372,12 @@ void CommunicatorV2::onNotificationPerformAction(const NotificationControlMessag
 
 
 void CommunicatorV2::onSynchronizationReceived(const SynchronizationMessage& msg) {
+    Q_UNUSED(msg);
     qDebug() << Q_FUNC_INFO;
 }
 
 void CommunicatorV2::onFilterStatusReceived(const FilterStatusMessage& msg) {
+    Q_UNUSED(msg);
     qDebug() << Q_FUNC_INFO;
 
 }
