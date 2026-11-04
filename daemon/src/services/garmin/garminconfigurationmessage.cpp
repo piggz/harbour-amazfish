@@ -3,6 +3,7 @@
 
 
 void GarminConfigurationMessage::parse(const QByteArray& data) {
+    Q_UNUSED(data);
     //QByteArray capabilities(15, char(0xFF));
     QByteArray capabilities=generateCapabilities();
     QByteArray payload;
@@ -17,7 +18,7 @@ void GarminConfigurationMessage::parse(const QByteArray& data) {
     }
 }
 
-QByteArray GarminConfigurationMessage::generateOutgoing(const QByteArray& data) {
+QByteArray GarminConfigurationMessage::generateOutgoing(const QByteArray&) {
     QByteArray r;
 
     // Generate our capabilities
