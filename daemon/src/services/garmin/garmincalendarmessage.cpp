@@ -261,7 +261,7 @@ Result<QVector<CalendarEventProto>> GarminCalendarMessage::handleCalendarRequest
 
         protoEvents.append(proto);
 
-        if (protoEvents.size() >= int(request.maxEvents)) {
+        if (quint64(protoEvents.size()) >= quint64(request.maxEvents)) {
             qDebug() << Q_FUNC_INFO << "Reached maxEvents limit:" << request.maxEvents;
             break;
         }

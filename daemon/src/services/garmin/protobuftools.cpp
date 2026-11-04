@@ -7,7 +7,9 @@
 // -----------------------------------------------------------------------------
 QString truncateByChars(const QString& s, quint32 maxLen)
 {
-    if (maxLen == 0 || s.size() <= int(maxLen)) {
+    // maxLen comes from the wire. Compare it before narrowing, a value above
+    // INT_MAX turns negative and no truncation happens at all.
+    if (maxLen == 0 || quint64(maxLen) >= quint64(s.size())) {
         return s;
     }
     return s.left(int(maxLen));
@@ -153,19 +155,21 @@ bool parseField(const QByteArray& data,
 
         cursor += lenLen;
 
-        const int endPos = cursor + int(length);
-        if (endPos > data.size()) {
+        // length comes from the wire. A value above INT_MAX turns negative once
+        // narrowed, and then it passes any check made on the narrowed value.
+        const int remaining = data.size() - cursor;
+        if (remaining <= 0 || length > quint64(remaining)) {
             qDebug().noquote() << Q_FUNC_INFO
-                << QStringLiteral("Length-delimited field claims %1 bytes but only %2 available (field %3, cursor %4)")
-                       .arg(length)
-                       .arg(data.size() - cursor)
-                       .arg(fieldNum)
-                       .arg(cursor);
+                               << QStringLiteral("Length-delimited field claims %1 bytes but only %2 available (field %3, cursor %4)")
+                                      .arg(length)
+                                      .arg(remaining)
+                                      .arg(fieldNum)
+                                      .arg(cursor);
             return false;
         }
 
         fieldData = data.mid(cursor, int(length));
-        nextCursor = endPos;
+        nextCursor = cursor + int(length);
         return true;
     }
 
