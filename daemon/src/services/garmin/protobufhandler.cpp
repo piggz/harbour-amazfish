@@ -5,6 +5,12 @@
 
 const int MAX_CHUNK_SIZE = 375;
 
+// Largest reassembled protobuf message we accept. Observed on the wire: 34 bytes.
+const int MAX_TOTAL_PROTOBUF_LENGTH = 256 * 1024;
+
+// Number of transfers that may wait in mChunkedFragmentsMap at the same time.
+const int MAX_OPEN_TRANSFERS = 8;
+
 ProtobufFragment::ProtobufFragment(QByteArray fragmentBytes)
 {
     mFragmentBytes=fragmentBytes;
@@ -62,6 +68,18 @@ int ProtobufHandler::getNextProtobufRequestId() {
 
 QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPointer<GarminProtobufMessage> message) {
     qDebug() << Q_FUNC_INFO;
+    // The length fields are unsigned on the wire, so a huge value arrives as a negative int.
+    int totalLength = message->getTotalProtobufLength();
+    QSharedPointer<ProtobufFragment> existing = mChunkedFragmentsMap.value(message->getRequestId());
+    int stored = existing.isNull() ? 0 : existing->getFragmentBytes().size();
+    if (totalLength <= 0 || totalLength > MAX_TOTAL_PROTOBUF_LENGTH
+        || stored + message->getMessageBytes().size() > MAX_TOTAL_PROTOBUF_LENGTH) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Refusing protobuf message, declared total length"
+                 << totalLength << "stored bytes" << stored;
+        if (!existing.isNull())
+            mChunkedFragmentsMap.remove(message->getRequestId());
+        return QSharedPointer<GarminProtobufMessage>();
+    }
     QSharedPointer<ProtobufFragment> fragment = processChunkedMessage(message);
     if (fragment.isNull()) {
         qDebug() << Q_FUNC_INFO << "Garmin: processChunkedMessage returned Null";
@@ -72,6 +90,12 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
         mChunkedFragmentsMap.remove(message->getRequestId());
         // Message is complet now, start parsing
         QByteArray protobufPayload = fragment->getFragmentBytes();
+
+        // Every branch below reads the tag byte and the length byte after it.
+        if (protobufPayload.size() < 2) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Refusing protobuf payload, too short" << protobufPayload.size();
+            return QSharedPointer<GarminProtobufMessage>();
+        }
 
         const quint8 firstTag = (quint8)protobufPayload[0];
         const quint8 fieldNumber = firstTag >> 3;
@@ -85,8 +109,8 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
              // Device Status Message
              processed = true;
              quint8  innerLength=protobufPayload[1];
-             GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(mCommunicator);
-             msg->parse(protobufPayload.mid(2,innerLength));
+             GarminDeviceStatusMessage msg(mCommunicator);
+             msg.parse(protobufPayload.mid(2, innerLength));
          }
          if (fieldNumber==49 && wireType ==2) {
              // Notification Service
@@ -97,8 +121,8 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::processIncoming(QSharedPo
              processed = true;
              quint8  innerLength=protobufPayload[1];
              qDebug() << Q_FUNC_INFO << "Garmin: Got calendar service message";
-             GarminCalendarMessage* msg = new GarminCalendarMessage(mCommunicator);
-             msg->parse(protobufPayload.mid(2,innerLength),message->getRequestId(),0);
+             GarminCalendarMessage msg(mCommunicator);
+             msg.parse(protobufPayload.mid(2, innerLength), message->getRequestId(), 0);
          }
          if (processed) {
              qDebug() << Q_FUNC_INFO << "Garmin: Add ACK with No error";
@@ -148,11 +172,24 @@ QSharedPointer<ProtobufFragment> ProtobufHandler::processChunkedMessage(QSharedP
         return QSharedPointer<ProtobufFragment>(new ProtobufFragment(message->getMessageBytes()));
 
     if (message->getDataOffset() == 0) { //store new messages beginning at 0, overwrite old messages
+        if (mChunkedFragmentsMap.size() >= MAX_OPEN_TRANSFERS) {
+            // Nothing else evicts stale entries, so drop all of them instead of growing without end.
+            qDebug() << Q_FUNC_INFO << "Garmin: Too many open protobuf transfers, dropping them all";
+            mChunkedFragmentsMap.clear();
+        }
         mChunkedFragmentsMap.insert(message->getRequestId(),QSharedPointer<ProtobufFragment>(new ProtobufFragment(message)  ));
         qDebug() << Q_FUNC_INFO << "Garmin: Protobuf request put in queue";
     } else {
         if (mChunkedFragmentsMap.contains(message->getRequestId())) {
             QSharedPointer<ProtobufFragment> oldFragment = mChunkedFragmentsMap.value(message->getRequestId());
+            const int expected = oldFragment->getFragmentBytes().size();
+            if (message->getDataOffset() != expected) {
+                // Replacing the entry here would drop every byte we already have and leave an
+                // empty fragment that passes isComplete().
+                qDebug() << Q_FUNC_INFO << "Garmin: Unexpected offset" << message->getDataOffset()
+                         << "expected" << expected << ", keeping the fragment we have";
+                return oldFragment;
+            }
             mChunkedFragmentsMap.insert(message->getRequestId(),
                     QSharedPointer<ProtobufFragment>(new ProtobufFragment(oldFragment, message)));
         }
@@ -197,4 +234,11 @@ QSharedPointer<GarminProtobufMessage> ProtobufHandler::prepareProtobufMessage(QB
                 bytes.mid(0, mMaxChunkSize)));
     }
     return QSharedPointer<GarminProtobufMessage>(new GarminProtobufMessage(mCommunicator, requestId, 0, bytes.size(), bytes.size(), bytes));
+}
+
+void ProtobufHandler::reset()
+{
+    // Request ids restart at 1 on a new connection, so old fragments must not survive one.
+    mChunkedFragmentsMap.clear();
+    mLastProtobufRequestId = 0;
 }

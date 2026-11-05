@@ -57,12 +57,12 @@ public:
 
 
 private:
-    int mRequestId;
-    int mDataOffset;
+    int mRequestId = 0;
+    int mDataOffset = 0;
     //bool mSendOutgoing;
-    ProtobufChunkStatus mProtobufChunkStatus;
-    ProtobufStatusCode mProtobufStatusCode;
-    Status mStatus;
+    ProtobufChunkStatus mProtobufChunkStatus = ProtobufChunkStatus::DISCARDED;
+    ProtobufStatusCode mProtobufStatusCode = ProtobufStatusCode::UNKNOWN;
+    Status mStatus = Status::Nack;
 };
 
 class GarminProtobufMessage : public GarminGfdiMessage
@@ -102,10 +102,10 @@ private:
     void handleCalendarRequest(const QByteArray& data, quint16 requestID, quint32 dataOffset);
     void sendGenericAck(const QByteArray& data);
 
-    int mRequestId;
-    int mDataOffset;
-    int mTotalProtobufLength;
-    int mProtobufDataLength;
+    int mRequestId = 0;
+    int mDataOffset = 0;
+    int mTotalProtobufLength = 0;
+    int mProtobufDataLength = 0;
     QSharedPointer<GarminProtobufStatusMessage> mStatusMessage;
     QSharedPointer<GarminGfdiMessage> mGarminMessage;
 };

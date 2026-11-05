@@ -20,6 +20,8 @@
 #include <QMutex>
 #include <QDBusReply>
 
+#include <QtCore/QTimer>
+
 const char* CommunicatorV2::BASE_UUID                   = "6a4e%1-667b-11e3-949a-0800200c9a66";
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI = "6a4e2800-667b-11e3-949a-0800200c9a66";
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_V0_SEND = "df334c80-e6a7-d082-274d-78fc66f85e16";
@@ -45,8 +47,7 @@ CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
 
     mState->cobsCodec=new CobsCoDec(this);
 
-    initializeDevice();
-
+    onConnectionStateChange(true);
 }
 
 void CommunicatorV2::setMessageCallback(QSharedPointer<GfdiMessageCallback> cb) {
@@ -81,6 +82,13 @@ void CommunicatorV2::onDeviceMaxPacketSize(quint16 deviceMaxPacketSize) {
     // and the device-reported maximum, ensuring we respect the device's limitations.
 
     const int dev = int(deviceMaxPacketSize);
+    // The smallest ATT MTU is 23, which leaves 20 bytes per write. A watch reporting less
+    // than that cannot carry any payload, so keep the MTU based size instead of its value.
+    const int minUsableSize = 20;
+    if (dev < minUsableSize) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Ignoring implausible device max packet size" << dev;
+        return;
+    }
     if (dev < mState->maxWriteSize) {
         mState->maxWriteSize = dev;
         for (auto it = mState->mlrCommunicators.begin(); it != mState->mlrCommunicators.end(); ++it) {
@@ -169,7 +177,8 @@ bool CommunicatorV2::initializeDevice() {
     if ((mState->characteristicSend != NULL) && (mState->characteristicReceive  != NULL)) {
         qDebug() << Q_FUNC_INFO << "Garmin: Characteristic found. Send " << mState->UUIDSend << ", Receive " << mState->UUIDReceive;
         enableNotification(mState->UUIDReceive);
-        connect(this,&QBLEService::characteristicChanged,this,&CommunicatorV2::onCharacteristicChanged);
+        connect(this, &QBLEService::characteristicChanged, this, &CommunicatorV2::onCharacteristicChanged,
+            Qt::UniqueConnection);
         connect(mState->characteristicReceive.data(),&QBLECharacteristic::characteristicRead,this,&CommunicatorV2::onCharacteristicChanged);
         if (mIsMlProtocol) {
             const QByteArray closeAll = createCloseAllServicesMessage();
@@ -213,13 +222,27 @@ void CommunicatorV2::processSendQueue()
     mState->characteristicSend->writeValue(item.first,&errorMsg);
 
     qDebug() <<Q_FUNC_INFO << "Garmin: writing result:" << errorMsg;
-    if (!errorMsg.isEmpty())
-    {
-        qWarning() << Q_FUNC_INFO <<"Garmin: Could not send message: " << errorMsg;
+    if (errorMsg.isEmpty()) {
+        mSendRetries = 0;
+    } else {
+        qWarning() << Q_FUNC_INFO << "Garmin: Could not send message: " << errorMsg;
+        mSendRetries++;
+        if (mSendRetries <= 4) {
+            mSendQueue.prepend(item);
+            QTimer::singleShot(200 * mSendRetries, this, &CommunicatorV2::processSendQueue);
+        } else {
+            qWarning() << Q_FUNC_INFO << "Garmin: giving up on" << item.second;
+            mSendRetries = 0;
+            if (!mSendQueue.isEmpty()) {
+                QTimer::singleShot(200, this, &CommunicatorV2::processSendQueue);
+            }
+        }
     }
-    mSendInProgress = false;
-    if (!mSendQueue.isEmpty()) processSendQueue();
 
+    mSendInProgress = false;
+    if (errorMsg.isEmpty() && !mSendQueue.isEmpty()) {
+        processSendQueue();
+    }
 }
 
 bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& message) {
@@ -235,6 +258,10 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
 
     const int handlePrefixSize = mIsMlProtocol ? 1 : 0;
     const int maxChunk = mState->maxWriteSize - handlePrefixSize;
+    if (maxChunk <= 0) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Max write size too small to fragment" << mState->maxWriteSize;
+        return false;
+    }
 
     quint8 gfdiHandle;
 
@@ -271,6 +298,7 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
 }
 
 void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, const QByteArray& data) {
+    Q_UNUSED(characteristic);
 
     //handles incoming messages for a characteristic
     qDebug() <<Q_FUNC_INFO << "Garmin: Received Message " << data.toHex();
@@ -344,10 +372,12 @@ void CommunicatorV2::onNotificationPerformAction(const NotificationControlMessag
 
 
 void CommunicatorV2::onSynchronizationReceived(const SynchronizationMessage& msg) {
+    Q_UNUSED(msg);
     qDebug() << Q_FUNC_INFO;
 }
 
 void CommunicatorV2::onFilterStatusReceived(const FilterStatusMessage& msg) {
+    Q_UNUSED(msg);
     qDebug() << Q_FUNC_INFO;
 
 }
@@ -387,6 +417,8 @@ void CommunicatorV2::onProtobufStatusMessageReceived(const QByteArray& data)
     //QByteArray statusData=data.mid(2); // Remove Response field
     QSharedPointer<GarminProtobufStatusMessage> message=QSharedPointer<GarminProtobufStatusMessage>(new GarminProtobufStatusMessage(data, this));
     QSharedPointer<GarminProtobufStatusMessage> parsed  =  message->parse();
+    if (parsed.isNull())
+        return;
     qDebug() << Q_FUNC_INFO << "Garmin: Parsed Protobuf Status is " << parsed->getMessageBytes().toHex();
     followup = mProtobufHandler->processIncoming(parsed);
     qDebug() << Q_FUNC_INFO << "Garmin: protobuf ack byte stream is " << parsed->getAckByteStream().toHex();
@@ -619,8 +651,8 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         }
 
         qDebug() << Q_FUNC_INFO << "Garmin: Inserting reliable MLR communicator for " << serviceToString(service) << ", Handle " << mlrHandle;
-        auto sender = QSharedPointer<MlrMessageSender>::create(sendChar, this);
-        auto receiver = QSharedPointer<MlrMessageReceiver>::create(mMessageCallback, this);
+        auto sender = QSharedPointer<MlrMessageSender>::create(sendChar);
+        auto receiver = QSharedPointer<MlrMessageReceiver>::create(mMessageCallback);
         auto mlr = QSharedPointer<MlrCommunicator>::create(mlrHandle, 20, sender, receiver);
         //mlr->start();
         qDebug() << Q_FUNC_INFO << "Garmin: Reliable MLR communicator created";
@@ -638,9 +670,16 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
     {
         qDebug() << Q_FUNC_INFO << "Garmin: Non reliable ML communicator requested.";
 
-        connect(mState->cobsCodec,&CobsCoDec::messageDecoded,this,&CommunicatorV2::handleIncomingGfdiMessage);
+        connect(mState->cobsCodec, &CobsCoDec::messageDecoded, this, &CommunicatorV2::handleIncomingGfdiMessage,
+            Qt::UniqueConnection);
         mIsReliable = false;
     }
+
+    if (mBatteryRequestPending && service == Service::GFDI) {
+        mBatteryRequestPending = false;
+        getBatteryLevel();
+    }
+
     // Register callback services
     if (!mState->serviceCallbacks.contains(service))
     {
@@ -799,8 +838,7 @@ void CommunicatorV2::registerServices() {
     {
         qDebug() << "Garmin: Can't register services due to missing send characteristic";
     }
-    if (!m_device)
-    {
+    if (!m_device) {
         qDebug() << "Garmin: No device configured";
     }
 
@@ -816,30 +854,38 @@ void CommunicatorV2::registerServices() {
     //HRV is not shown in the GUI so no realtime info needed
     //registerService(Service::RealtimeHrv, true);
 
-    // Send Battery Status request
-    mBatteryTimer = new QTimer(this);
-    mBatteryTimer->setInterval(120000);
+    // Battery status is polled every two minutes. registerServices() runs again after a reconnect,
+    // so create the timer once and reuse it, otherwise each cycle adds another running timer.
+    if (!mBatteryTimer) {
+        mBatteryTimer = new QTimer(this);
+        mBatteryTimer->setInterval(120000);
+        connect(mBatteryTimer, &QTimer::timeout, this, &CommunicatorV2::getBatteryLevel);
+    }
     mBatteryTimer->start();
-    connect(mBatteryTimer,&QTimer::timeout, this, &CommunicatorV2::getBatteryLevel);
-    getBatteryLevel();
+    // No service handle exists yet, so sendMessage() would drop the request here.
+    mBatteryRequestPending = true;
     mServicesResolved=true;
 }
 
 void CommunicatorV2::getBatteryLevel() {
-    GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
-    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg->generateBatteryStatusRequest());
+    GarminDeviceStatusMessage msg(this);
+    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg.generateBatteryStatusRequest());
     sendMessage("BATTERY STATUS REQUEST",batteryRequest->getOutgoingMessage());
 }
 
 void CommunicatorV2::dispose() {
+    if (mBatteryTimer) {
+        mBatteryTimer->stop();
+    }
     mState->mlrCommunicators.clear();
+    mProtobufHandler->reset();
     if (mState->characteristicReceive) {
         mState->characteristicReceive->stopNotify();
         disconnect(mState->characteristicReceive.data(),nullptr,this,nullptr);
     }
 
-    mState->characteristicSend->deleteLater();
-    mState->characteristicReceive->deleteLater();
+    mState->characteristicSend.reset();
+    mState->characteristicReceive.reset();
     //m_gfdiService.reset();
     mState->cobsCodec->reset();
     mIsMlProtocol = false;
@@ -847,6 +893,7 @@ void CommunicatorV2::dispose() {
 
     mSendQueue.clear();
     mSendInProgress = false;
+    mSendRetries = 0;
     mState->mlrCommunicators.clear();
     mState->serviceByHandle.clear();
     mState->serviceCallbacks.clear();

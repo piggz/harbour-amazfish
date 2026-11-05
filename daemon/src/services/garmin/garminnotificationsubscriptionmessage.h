@@ -25,24 +25,4 @@ private:
     bool mWatchProposal;
 };
 
-class GarminNotificationSubscriptionStatusMessage : public GarminGfdiMessage
-{
-    Q_OBJECT
-public:
-    explicit GarminNotificationSubscriptionStatusMessage(CommunicatorV2* parent=nullptr, bool enable = true, int unk=0)  {
-        mCommunicator = parent;
-        mStatus=Status::Ack;
-        mNotificationStatus = true; // TODO: check in Amazfish config if enabled
-        mEnableRaw=enable;
-    }
-
-    QByteArray getOutgoingMessage();
-    MessageId getMessageType() {return MessageId::NotificationSubscription; };
-private:
-    Status mStatus;
-    bool mNotificationStatus;
-    bool  mEnableRaw;
-    int mUnk;
- };
-
 #endif // GARMINNOTIFICATIONSUBSCRIPTIONMESSAGE_H
