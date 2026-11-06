@@ -24,7 +24,7 @@ public:
 
 private:
     void writeChunk(Request *request);
-    void handleFileReceiveData(const QByteArray &payload);;
+    void handleFileReceiveData(const QByteArray &payload);
     void sendNextQueuedData();
     void onUploadFinish(bool success);
     void resetSend();
