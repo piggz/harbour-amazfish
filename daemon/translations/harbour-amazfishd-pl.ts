@@ -14,12 +14,12 @@
     <message>
         <location filename="../src/achievements.cpp" line="12"/>
         <source>The journey begins, adventurer. Only &lt;b&gt;%1&lt;/b&gt; steps — the Shire is still in sight.</source>
-        <translation type="unfinished"></translation>
+        <translation>Podróż się rozpoczyna, poszukiwaczu przygód. Pozostało tylko &lt;b&gt;%1&lt;/b&gt; kroków — hrabstwo jest dalej w zasięgu wzroku.</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="13"/>
         <source>You’ve crossed the Brandywine. &lt;b&gt;%1&lt;/b&gt; steps down — trolls ahead!</source>
-        <translation type="unfinished"></translation>
+        <translation>Przeszedłeś przez Brandywine. Pokonano &lt;b&gt;%1&lt;/b&gt; kroków — uwaga na trolle!</translation>
     </message>
     <message>
         <location filename="../src/achievements.cpp" line="14"/>
