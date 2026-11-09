@@ -1,5 +1,8 @@
 #include "datasource.h"
 #include "amazfish.h"
+
+#include <amazfishconfig.h>
+
 #include <QVariant>
 #include <QTimeZone>
 
@@ -238,7 +241,8 @@ QVariant DataSource::data(const Type type, const QDate &day)
 QList<DataSource::SleepSession> DataSource::calculateSleep(const QDate &day)
 {
     // qDebug() << "Calculating sleep for " << day;
-    QDateTime startDate = QDateTime(day, QTime(12, 00)); //In localtime
+    const QTime dayBoundary(AmazfishConfig::instance()->appSleepDayBoundary(), 0);
+    QDateTime startDate = QDateTime(day, dayBoundary); // In localtime
     QDateTime endDate = startDate.addDays(1);
     QList<DataSource::SleepSession> sessions;
 
