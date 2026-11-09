@@ -151,6 +151,16 @@ void GarminDevice::onRejectCallEvent(){
     emit deviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
 }
 
+void GarminDevice::onFindPhoneRequested()
+{
+    emit deviceEvent(AbstractDevice::EVENT_FIND_PHONE);
+}
+
+void GarminDevice::onFindPhoneCancelled()
+{
+    emit deviceEvent(AbstractDevice::EVENT_CANCEL_FIND_PHONE);
+}
+
 QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString &path)
 {
     qDebug() << Q_FUNC_INFO << "Creating Communicator service for Garmin";
@@ -171,6 +181,8 @@ QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString 
         connect(com.data(), &CommunicatorV2::NotificationPerformAction, mNotificationHandler.data(), &GarminNotificationHandler::onNotificationPerformAction);
         connect(mNotificationHandler.data(), &GarminNotificationHandler::acceptIncomingCall, this, &GarminDevice::onAnswerCallEvent);
         connect(mNotificationHandler.data(), &GarminNotificationHandler::rejectIncomingCall, this, &GarminDevice::onRejectCallEvent);
+        connect(com.data(), &CommunicatorV2::findPhoneRequested, this, &GarminDevice::onFindPhoneRequested, Qt::UniqueConnection);
+        connect(com.data(), &CommunicatorV2::findPhoneCancelled, this, &GarminDevice::onFindPhoneCancelled, Qt::UniqueConnection);
         setConnectionState("authenticated");
         return com.data();
     }
