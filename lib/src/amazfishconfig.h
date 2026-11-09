@@ -145,6 +145,7 @@ public:
 
     INT_OPTION(QStringLiteral("app/refreshweather"),    appRefreshWeather,   setAppRefreshWeather,   80)
     INT_OPTION(QStringLiteral("app/refreshcalendar"),   appRefreshCalendar,  setAppRefreshCalendar,  60)
+    INT_OPTION(QStringLiteral("app/sleepdayboundary"), appSleepDayBoundary, setAppSleepDayBoundary, 12)
 
     BOOL_OPTION(QStringLiteral("device/realtimehrmmeasurement"), deviceRealtimeHRMMeasurement, setdeviceRealtimeHRMMeasurement, false)
     BOOL_OPTION(QStringLiteral("device/disconnectnotification"), deviceDisconnectNotification, setDeviceDisconnectNotification, false)

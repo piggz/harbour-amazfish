@@ -102,6 +102,27 @@ PagePL {
         }
 
         SectionHeaderPL {
+            text: qsTr("Charts")
+        }
+
+        SliderPL {
+            id: sldSleepDayBoundary
+            width: parent.width
+            minimumValue: 0
+            maximumValue: 23
+            stepSize: 1
+            label: qsTr("Sleep day boundary (%1)").arg(Qt.formatTime(new Date(2000, 0, 1, value), "HH:mm"))
+        }
+
+        LabelPL {
+            text: qsTr("Determines which day a sleep session is assigned to")
+            anchors.left: parent.left
+            anchors.right: parent.right;
+            anchors.leftMargin: styler.themePaddingMedium
+            anchors.rightMargin: styler.themePaddingMedium
+        }
+
+        SectionHeaderPL {
             text: qsTr("Amazfish Service")
             visible: (ENABLE_SYSTEMD === "YES")
         }
@@ -184,6 +205,7 @@ PagePL {
         chkNotifyConnect.checked = AmazfishConfig.appNotifyConnect;
         sldWeatherRefresh.value = AmazfishConfig.appRefreshWeather;
         sldCalendarRefresh.value = AmazfishConfig.appRefreshCalendar;
+        sldSleepDayBoundary.value = AmazfishConfig.appSleepDayBoundary;
         chkAutoSyncData.checked = AmazfishConfig.appAutoSyncData;
         chkNotifyLowBattery.checked = AmazfishConfig.appNotifyLowBattery;
         chkNavigationNotification.checked = AmazfishConfig.appNavigationNotification;
@@ -199,6 +221,7 @@ PagePL {
         AmazfishConfig.appNotifyConnect = chkNotifyConnect.checked;
         AmazfishConfig.appRefreshWeather = sldWeatherRefresh.value;
         AmazfishConfig.appRefreshCalendar = sldCalendarRefresh.value;
+        AmazfishConfig.appSleepDayBoundary = sldSleepDayBoundary.value;
         AmazfishConfig.appAutoSyncData = chkAutoSyncData.checked;
         AmazfishConfig.appNotifyLowBattery = chkNotifyLowBattery.checked;
         AmazfishConfig.appNavigationNotification = chkNavigationNotification.checked;
