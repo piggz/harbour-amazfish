@@ -39,6 +39,8 @@ public slots:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     void onAnswerCallEvent();
     void onRejectCallEvent();
+    void onFindPhoneRequested();
+    void onFindPhoneCancelled();
 
 signals:
     void sendAlertToDevice(NotificationSpec &note);
