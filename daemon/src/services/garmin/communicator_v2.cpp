@@ -400,6 +400,13 @@ void CommunicatorV2::onFilterStatusReceived(const FilterStatusMessage& msg) {
 
 void CommunicatorV2::onWeatherRequestReceived(const WeatherRequestMessage& msg) {
     qDebug() << Q_FUNC_INFO << "Garmin: Watch asks for weather, format" << msg.format << "hours" << msg.hoursOfForecast;
+    // Gadgetbridge answers every incoming GFDI message with a status, and its
+    // weather works on the same watches. Without this the watch may close its
+    // weather exchange before the records arrive.
+    QByteArray r;
+    writeU16le(r, quint16(MessageId::WeatherRequest));
+    r.append(char(Status::Ack));
+    sendMessage("WEATHER REQUEST ACK", wrapInGfdiEnvelope(MessageId::Response, r));
     emit weatherRequestReceived();
 }
 
@@ -407,6 +414,11 @@ bool CommunicatorV2::sendWeatherFrames(const QByteArray& definitionPayload, cons
 {
     if (definitionPayload.isEmpty() || dataPayload.isEmpty()) {
         qDebug() << Q_FUNC_INFO << "Garmin: No weather data to send";
+        return false;
+    }
+    // The periodic weather update also comes while disconnected.
+    if (!mConnected) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Not connected, weather update dropped";
         return false;
     }
     if (mWeatherState != WeatherTransferState::Idle) {

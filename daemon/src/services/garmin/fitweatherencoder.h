@@ -2,6 +2,7 @@
 #define FITWEATHERENCODER_H
 
 #include <QByteArray>
+#include <QString>
 #include <QVector>
 
 // One day of the daily_forecast report of a Garmin FIT weather record.
@@ -13,6 +14,7 @@ struct GarminWeatherDay {
     int maxTempC = 0;
     int humidityPercent = 0;
     double windSpeedMs = 0.0;
+    int windDirectionDeg = 0;
     // -1 means unknown and is written as FIT's own invalid value, so the watch
     // shows "no data" instead of "will not rain".
     int precipitationProbabilityPercent = -1;
@@ -41,6 +43,9 @@ struct GarminWeatherSnapshot {
     qint64 timestampUnix = 0;
     double latitude = 0.0;
     double longitude = 0.0;
+    // Place name for the current record's FIT location string, city() in
+    // CurrentWeather. May be empty.
+    QString locationName;
 
     int temperatureC = 0;
     int minTempC = 0;
