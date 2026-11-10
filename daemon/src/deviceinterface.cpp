@@ -1372,6 +1372,23 @@ void DeviceInterface::updateCalendar()
 
     QList<watchfish::CalendarEvent> eventlist = m_calendarSource.fetchEvents(QDate::currentDate(), QDate::currentDate().addDays(14), true);
 
+#if 0 // TEST ONLY: change to #if 1, then AMAZFISH_FAKE_EVENTS=N adds N generated events
+    int fakeCount = qEnvironmentVariableIntValue("AMAZFISH_FAKE_EVENTS");
+    for (int i = 0; i < fakeCount; ++i) {
+        watchfish::CalendarEvent event;
+        QDateTime start = QDateTime::currentDateTime().addSecs(3600 * (fakeCount - i));
+        event.setUid(QString("fake-event-%1").arg(i));
+        event.setStart(start);
+        event.setEnd(start.addSecs(1800));
+        event.setTitle(QString("Fake event %1 - porada o rozpo\u010Dtu a pl\u00E1nov\u00E1n\u00ED t\u00FDmu").arg(i));
+        event.setLocation(QString("Zasedac\u00ED m\u00EDstnost %1, Brno, \u010Cesk\u00E1 republika").arg(i));
+        event.setDescription(QString("Popis ud\u00E1losti %1. ").arg(i).repeated(20));
+        event.setAllDay(false);
+        eventlist.append(event);
+    }
+    qDebug() << Q_FUNC_INFO << "events:" << eventlist.count() << "fake:" << fakeCount;
+#endif
+
     if (AmazfishConfig::instance()->appTransliterate()) {
         for (watchfish::CalendarEvent &event : eventlist) {
             event.setTitle(Transliterator::convert(event.title()));
