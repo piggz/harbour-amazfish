@@ -1010,36 +1010,51 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="105"/>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="114"/>
+        <source>Sleep day boundary (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="118"/>
+        <source>Determines which day a sleep session is assigned to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Amazfish Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="112"/>
+        <location filename="../qml/pages/Settings-app.qml" line="133"/>
         <source>Start service on boot</source>
         <translation>启动时开启服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="126"/>
+        <location filename="../qml/pages/Settings-app.qml" line="147"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>开启/停止 Amazfish 后台服务</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="143"/>
+        <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Start</source>
         <translation>开启</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="152"/>
+        <location filename="../qml/pages/Settings-app.qml" line="173"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="162"/>
+        <location filename="../qml/pages/Settings-app.qml" line="183"/>
         <source>Button Actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="174"/>
+        <location filename="../qml/pages/Settings-app.qml" line="195"/>
         <source>Save Settings</source>
         <translation>保存设置</translation>
     </message>

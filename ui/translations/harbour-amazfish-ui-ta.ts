@@ -958,7 +958,7 @@
         <translation>இணைத்தவுடன் அறிவிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="174"/>
+        <location filename="../qml/pages/Settings-app.qml" line="195"/>
         <source>Save Settings</source>
         <translation>அமைப்புகளை சேமிக்கவும்</translation>
     </message>
@@ -1013,31 +1013,46 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="105"/>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="114"/>
+        <source>Sleep day boundary (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="118"/>
+        <source>Determines which day a sleep session is assigned to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Amazfish Service</source>
         <translation>அமாசுபிசு சேவை</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="112"/>
+        <location filename="../qml/pages/Settings-app.qml" line="133"/>
         <source>Start service on boot</source>
         <translation>துவக்கும்போது சேவையைத் தொடங்கவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="126"/>
+        <location filename="../qml/pages/Settings-app.qml" line="147"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>அமாசுபிசு பின்னணி சேவையைத் தொடங்கவும்/நிறுத்தவும்</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="143"/>
+        <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Start</source>
         <translation>தொடங்கு</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="152"/>
+        <location filename="../qml/pages/Settings-app.qml" line="173"/>
         <source>Stop</source>
         <translation>நிறுத்து</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="162"/>
+        <location filename="../qml/pages/Settings-app.qml" line="183"/>
         <source>Button Actions</source>
         <translation>பொத்தான் செயல்கள்</translation>
     </message>

@@ -922,7 +922,7 @@
         <translation>Notifica sulla connessione</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="174"/>
+        <location filename="../qml/pages/Settings-app.qml" line="195"/>
         <source>Save Settings</source>
         <translation>Salva Impostazioni</translation>
     </message>
@@ -977,31 +977,46 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="105"/>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="114"/>
+        <source>Sleep day boundary (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="118"/>
+        <source>Determines which day a sleep session is assigned to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Amazfish Service</source>
         <translation>Servizio Amazfish</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="112"/>
+        <location filename="../qml/pages/Settings-app.qml" line="133"/>
         <source>Start service on boot</source>
         <translation>Avvia il servizio all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="126"/>
+        <location filename="../qml/pages/Settings-app.qml" line="147"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>Avvia/Ferma il Servizio in Background di Amazfish</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="143"/>
+        <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Start</source>
         <translation>Avvia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="152"/>
+        <location filename="../qml/pages/Settings-app.qml" line="173"/>
         <source>Stop</source>
         <translation>Ferma</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="162"/>
+        <location filename="../qml/pages/Settings-app.qml" line="183"/>
         <source>Button Actions</source>
         <translation>Azioni pulsante</translation>
     </message>

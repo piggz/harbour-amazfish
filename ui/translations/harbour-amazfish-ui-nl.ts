@@ -946,7 +946,7 @@
         <translation>Melden bij verbinden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="174"/>
+        <location filename="../qml/pages/Settings-app.qml" line="195"/>
         <source>Save Settings</source>
         <translation>Instellingen opslaan</translation>
     </message>
@@ -986,31 +986,46 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="105"/>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="114"/>
+        <source>Sleep day boundary (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="118"/>
+        <source>Determines which day a sleep session is assigned to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Amazfish Service</source>
         <translation>Amazfish-dienst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="112"/>
+        <location filename="../qml/pages/Settings-app.qml" line="133"/>
         <source>Start service on boot</source>
         <translation>Dienst inschakelen bij opstarten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="126"/>
+        <location filename="../qml/pages/Settings-app.qml" line="147"/>
         <source>Start/Stop the Amazfish Background Service</source>
         <translation>Start/stop de Amazfish achtergronddienst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="143"/>
+        <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Start</source>
         <translation>Start</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="152"/>
+        <location filename="../qml/pages/Settings-app.qml" line="173"/>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings-app.qml" line="162"/>
+        <location filename="../qml/pages/Settings-app.qml" line="183"/>
         <source>Button Actions</source>
         <translation>Knopacties</translation>
     </message>
