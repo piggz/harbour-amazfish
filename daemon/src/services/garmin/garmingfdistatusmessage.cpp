@@ -194,8 +194,8 @@ void GarminGfdiStatusMessage::handleSupportedFileTypesRequest(const QByteArray &
 }
 
 void GarminGfdiStatusMessage::handleAuthNegotiation(const QByteArray &data) {
-    GarminAuthNegotiationMessage* msg = new GarminAuthNegotiationMessage(mCommunicator);
-    msg->parse(data);
+    GarminAuthNegotiationMessage msg(mCommunicator);
+    msg.parse(data);
 }
 
 

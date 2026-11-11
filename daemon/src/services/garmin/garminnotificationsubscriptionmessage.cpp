@@ -31,13 +31,3 @@ QByteArray GarminNotificationSubscriptionMessage::generateStatusMessage() {
     return wrapInGfdiEnvelope(MessageId::Response,r);
 
 }
-
-QByteArray GarminNotificationSubscriptionStatusMessage::getOutgoingMessage() {
-    QByteArray response;
-    writeU16le(response,(quint16)getMessageType());
-    response.append((char)mStatus);
-    response.append(mNotificationStatus ? 0:1);
-    response.append(mEnableRaw ? 1:0);
-    response.append(mUnk);
-    return wrapInGfdiEnvelope(MessageId::Response,response);
-}

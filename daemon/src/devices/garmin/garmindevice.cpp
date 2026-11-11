@@ -54,6 +54,8 @@ QString GarminDevice::deviceType() const
 
 AbstractFirmwareInfo *GarminDevice::firmwareInfo(const QByteArray &bytes, const QString &path)
 {
+    Q_UNUSED(bytes);
+    Q_UNUSED(path);
     qDebug() << Q_FUNC_INFO;
     return nullptr;
 }

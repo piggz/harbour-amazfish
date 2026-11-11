@@ -7,7 +7,8 @@
 void GarminDeviceInformationMessage::parse(const QByteArray& data)
 {
     qDebug() << Q_FUNC_INFO << "Garmin: parsing device information" << data;
-    if (data.size() < 10) {
+    // The five fixed fields below need 12 bytes.
+    if (data.size() < 12) {
         qDebug() << Q_FUNC_INFO <<  "Garmin: DeviceInformation too short";
         return;
         //return Result<GfdiMessage>::err(

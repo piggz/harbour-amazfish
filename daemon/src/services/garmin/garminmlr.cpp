@@ -6,9 +6,7 @@
 #include <QtCore/QMetaObject>
 #include "QEventLoop"
 
-
-MlrMessageSender::MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar,
-                           QObject* parent)
+MlrMessageSender::MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar)
     : m_sendChar(sendChar)
 {
 }
@@ -40,8 +38,7 @@ Result<void> MlrMessageSender::sendPacket(const QString& taskName, const QByteAr
 // Note: The handle byte (0x0B for GFDI) is NOT in the GFDI message itself.
 // It's only used in BLE/MLR transport layers.
 
-MlrMessageReceiver::MlrMessageReceiver(QSharedPointer<GfdiMessageCallback> syncCb,
-                                 QObject* parent)
+MlrMessageReceiver::MlrMessageReceiver(QSharedPointer<GfdiMessageCallback> syncCb)
     : m_syncCb(std::move(syncCb))
 {
     connect(&m_codec,&CobsCoDec::messageDecoded, this, &MlrMessageReceiver::onDataDecoded);
@@ -127,7 +124,11 @@ void MlrCommunicator::sendMessage(const QString& taskName, const QByteArray& mes
 
     qDebug() << Q_FUNC_INFO << "Garmin: Queuing MLR message for " << taskName <<  "(" << message.size() <<" bytes)";
 
-    const int maxDataSize = qMax(0, m_state.maxPacketSize - 2);
+    const int maxDataSize = m_state.maxPacketSize - 2;
+    if (maxDataSize <= 0) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Packet size leaves no room for MLR data" << m_state.maxPacketSize;
+        return;
+    }
     int remaining = message.size();
     int i = 0;
     if (remaining > maxDataSize) {

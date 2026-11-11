@@ -11,6 +11,10 @@ GarminSpo2Message::GarminSpo2Message(CommunicatorV2* parent) : mCommunicator(par
 void GarminSpo2Message::onConnect() {}
 void GarminSpo2Message::onClose() {}
 void GarminSpo2Message::onMessage(const QByteArray& data) {
+    if (data.size() < 5) {
+        qDebug() << Q_FUNC_INFO << "Garmin: realtime Spo2 message too short" << data.size();
+        return;
+    }
     quint8 spo2 = data[0];
     quint32 ts = le32(data.constData()+1);
 

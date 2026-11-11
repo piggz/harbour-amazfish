@@ -82,6 +82,13 @@ void CommunicatorV2::onDeviceMaxPacketSize(quint16 deviceMaxPacketSize) {
     // and the device-reported maximum, ensuring we respect the device's limitations.
 
     const int dev = int(deviceMaxPacketSize);
+    // The smallest ATT MTU is 23, which leaves 20 bytes per write. A watch reporting less
+    // than that cannot carry any payload, so keep the MTU based size instead of its value.
+    const int minUsableSize = 20;
+    if (dev < minUsableSize) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Ignoring implausible device max packet size" << dev;
+        return;
+    }
     if (dev < mState->maxWriteSize) {
         mState->maxWriteSize = dev;
         for (auto it = mState->mlrCommunicators.begin(); it != mState->mlrCommunicators.end(); ++it) {
@@ -251,6 +258,10 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
 
     const int handlePrefixSize = mIsMlProtocol ? 1 : 0;
     const int maxChunk = mState->maxWriteSize - handlePrefixSize;
+    if (maxChunk <= 0) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Max write size too small to fragment" << mState->maxWriteSize;
+        return false;
+    }
 
     quint8 gfdiHandle;
 
@@ -287,6 +298,7 @@ bool CommunicatorV2::sendMessage(const QString& taskName, const QByteArray& mess
 }
 
 void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, const QByteArray& data) {
+    Q_UNUSED(characteristic);
 
     //handles incoming messages for a characteristic
     qDebug() <<Q_FUNC_INFO << "Garmin: Received Message " << data.toHex();
@@ -360,10 +372,12 @@ void CommunicatorV2::onNotificationPerformAction(const NotificationControlMessag
 
 
 void CommunicatorV2::onSynchronizationReceived(const SynchronizationMessage& msg) {
+    Q_UNUSED(msg);
     qDebug() << Q_FUNC_INFO;
 }
 
 void CommunicatorV2::onFilterStatusReceived(const FilterStatusMessage& msg) {
+    Q_UNUSED(msg);
     qDebug() << Q_FUNC_INFO;
 
 }
@@ -403,6 +417,8 @@ void CommunicatorV2::onProtobufStatusMessageReceived(const QByteArray& data)
     //QByteArray statusData=data.mid(2); // Remove Response field
     QSharedPointer<GarminProtobufStatusMessage> message=QSharedPointer<GarminProtobufStatusMessage>(new GarminProtobufStatusMessage(data, this));
     QSharedPointer<GarminProtobufStatusMessage> parsed  =  message->parse();
+    if (parsed.isNull())
+        return;
     qDebug() << Q_FUNC_INFO << "Garmin: Parsed Protobuf Status is " << parsed->getMessageBytes().toHex();
     followup = mProtobufHandler->processIncoming(parsed);
     qDebug() << Q_FUNC_INFO << "Garmin: protobuf ack byte stream is " << parsed->getAckByteStream().toHex();
@@ -635,8 +651,8 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         }
 
         qDebug() << Q_FUNC_INFO << "Garmin: Inserting reliable MLR communicator for " << serviceToString(service) << ", Handle " << mlrHandle;
-        auto sender = QSharedPointer<MlrMessageSender>::create(sendChar, this);
-        auto receiver = QSharedPointer<MlrMessageReceiver>::create(mMessageCallback, this);
+        auto sender = QSharedPointer<MlrMessageSender>::create(sendChar);
+        auto receiver = QSharedPointer<MlrMessageReceiver>::create(mMessageCallback);
         auto mlr = QSharedPointer<MlrCommunicator>::create(mlrHandle, 20, sender, receiver);
         //mlr->start();
         qDebug() << Q_FUNC_INFO << "Garmin: Reliable MLR communicator created";
@@ -852,8 +868,8 @@ void CommunicatorV2::registerServices() {
 }
 
 void CommunicatorV2::getBatteryLevel() {
-    GarminDeviceStatusMessage* msg = new GarminDeviceStatusMessage(this);
-    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg->generateBatteryStatusRequest());
+    GarminDeviceStatusMessage msg(this);
+    QSharedPointer<GarminProtobufMessage> batteryRequest = mProtobufHandler->prepareProtobufRequest(msg.generateBatteryStatusRequest());
     sendMessage("BATTERY STATUS REQUEST",batteryRequest->getOutgoingMessage());
 }
 
@@ -862,6 +878,7 @@ void CommunicatorV2::dispose() {
         mBatteryTimer->stop();
     }
     mState->mlrCommunicators.clear();
+    mProtobufHandler->reset();
     if (mState->characteristicReceive) {
         mState->characteristicReceive->stopNotify();
         disconnect(mState->characteristicReceive.data(),nullptr,this,nullptr);

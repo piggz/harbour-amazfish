@@ -52,8 +52,7 @@ class MlrMessageSender : public QObject {
     Q_OBJECT
 public:
     using QObject::QObject;
-    MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar,
-                 QObject* parent=nullptr);
+    MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar);
     virtual ~MlrMessageSender() = default;
 
 public slots:
@@ -85,9 +84,7 @@ class MlrMessageReceiver : public QObject {
     Q_OBJECT
 public:
     using QObject::QObject;
-    MlrMessageReceiver(QSharedPointer<GfdiMessageCallback> syncCb,
-                    QObject* parent=nullptr);
-
+    MlrMessageReceiver(QSharedPointer<GfdiMessageCallback> syncCb);
 
     virtual ~MlrMessageReceiver() = default;
 
@@ -164,10 +161,6 @@ private:
             //sentFragments.resize(int(MAX_SEQ_NUM) + 1);
         }
     };
-    QTimer* m_retransmissionTimer;
-    QTimer* m_ackTimer;
-
-
 
     QByteArray createPacket(int reqNum, int seqNum, const QByteArray& data);
 
@@ -189,7 +182,8 @@ private:
 
     QSharedPointer<MlrMessageSender> m_sender;
     QSharedPointer<MlrMessageReceiver> m_receiver;
-
+    QTimer* m_ackTimer;
+    QTimer* m_retransmissionTimer;
 
     bool m_running {false};
 };

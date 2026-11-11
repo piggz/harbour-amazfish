@@ -20,7 +20,6 @@ public:
         mMessageType = MessageId::Configuration;
     }
     void parse(const QByteArray& data);
-    QByteArray generateOutgoing(const QByteArray& data);
 
 private:
     QSet<quint16> parseCapabilities(const QByteArray& bytes);

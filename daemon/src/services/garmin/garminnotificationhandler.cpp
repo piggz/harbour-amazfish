@@ -53,12 +53,12 @@ bool GarminNotificationHandler::removeNotification(qint32 id)
     }
 
     CommunicatorV2 *com = m_communicator.data();
-    GarminNotificationUpdateMessage* msg = new GarminNotificationUpdateMessage(com);
-    msg->notificationType=type;
-    msg->updateType=NotificationUpdateType::Remove;
-    msg->count=count;
-    msg->notificationId=id;
-    msg->parse();
+    GarminNotificationUpdateMessage msg(com);
+    msg.notificationType = type;
+    msg.updateType = NotificationUpdateType::Remove;
+    msg.count = count;
+    msg.notificationId = id;
+    msg.parse();
     return true;
 }
 
@@ -67,12 +67,12 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
     qDebug() << Q_FUNC_INFO << "Garmin: sending notification";
     CommunicatorV2 *com = m_communicator.data();
     if (!com->handshakeComplete()) return;
-    GarminNotificationUpdateMessage* updateMessage = new GarminNotificationUpdateMessage(com);
+    GarminNotificationUpdateMessage updateMessage(com);
     bool isUpdate = addNotificationToQueue(notification);
 
     qDebug() << Q_FUNC_INFO << "Garmin: notification isupdate=" <<isUpdate;
     isUpdate = false;
-    updateMessage->updateType = isUpdate ? NotificationUpdateType::Modify : NotificationUpdateType::Add;
+    updateMessage.updateType = isUpdate ? NotificationUpdateType::Modify : NotificationUpdateType::Add;
     if (m_storedNotifications.size() > 30)
         m_storedNotifications.erase(m_storedNotifications.end()); //remove the oldest notification TODO: should send a delete notification message to watch!
 
@@ -87,20 +87,19 @@ void GarminNotificationHandler::onNotification(NotificationSpec notification)
         }
 
     }
-    updateMessage->hasActions=hasActions;
-    updateMessage->notificationId=notification.id;
-    updateMessage->notificationType=notification.notificationType;
+    updateMessage.hasActions = hasActions;
+    updateMessage.notificationId = notification.id;
+    updateMessage.notificationType = notification.notificationType;
 
     // Set Picture to false for now
 
-    updateMessage->hasPicture=false;
+    updateMessage.hasPicture = false;
 
     //bool hasPicture = notification.hasPicture;
-    updateMessage->count = getNotificationCount(notification.notificationType);
-    qDebug() << Q_FUNC_INFO << "Garmin: Found " << updateMessage->count << " notifications of this type";
+    updateMessage.count = getNotificationCount(notification.notificationType);
+    qDebug() << Q_FUNC_INFO << "Garmin: Found " << updateMessage.count << " notifications of this type";
 
-    updateMessage->parse();
-
+    updateMessage.parse();
 }
 
 
@@ -111,8 +110,8 @@ void GarminNotificationHandler::onNotificationDataRequested(const NotificationCo
     NotificationSpec spec;
     if (m_storedNotifications.contains(msg.notificationId)) {
         spec = m_storedNotifications[msg.notificationId];
-        GarminNotificationDataMessage *data = new GarminNotificationDataMessage(m_communicator.data());
-        QByteArray reply = data->getNotificationDataMessage(msg,spec);
+        GarminNotificationDataMessage data(m_communicator.data());
+        QByteArray reply = data.getNotificationDataMessage(msg, spec);
         CommunicatorV2 *com = m_communicator.data();
         if (com)  com->sendMessage("NOTIFICATIO_DATA",reply);
     }
