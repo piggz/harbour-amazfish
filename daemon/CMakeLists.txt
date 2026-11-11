@@ -62,6 +62,7 @@ set(SOURCES
 ./src/devices/pinetimejfdevice.cpp
 ./src/devices/infinitimefirmwareinfo.cpp
 ./src/devices/dk08device.cpp
+./src/devices/mijialywsddevice.cpp
 ./src/devices/huami/uihhcontainer.cpp
 ./src/harbour-amazfish-daemon.cpp
 ./src/huamiweathercondition.cpp
@@ -113,6 +114,7 @@ set(SOURCES
 ./src/services/infinitimeweatherservice.cpp
 ./src/services/miband2service.cpp
 ./src/services/mibandservice.cpp
+./src/services/mijialywsdservice.cpp
 ./src/services/pebbleservice.cpp
 ./src/services/garmin/communicator_v2.cpp
 ./src/services/garmin/garminnotificationhandler.cpp
@@ -216,6 +218,7 @@ set(HEADERS
 ./src/devices/pinetimejfdevice.h
 ./src/devices/infinitimefirmwareinfo.h
 ./src/devices/dk08device.h
+./src/devices/mijialywsddevice.h
 ./src/huamiweathercondition.h
 ./src/navigationinterface.h
 ./src/operations/abstractfetchoperation.h
@@ -267,6 +270,7 @@ set(HEADERS
 ./src/services/infinitimeweatherservice.h
 ./src/services/miband2service.h
 ./src/services/mibandservice.h
+./src/services/mijialywsdservice.h
 ./src/services/pebbleservice.h
 ./src/services/garmin/communicator_v2.h
 ./src/services/garmin/garminnotificationhandler.h
