@@ -1026,17 +1026,17 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="105"/>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagrammer</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="114"/>
         <source>Sleep day boundary (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Døgngrense for søvn (%1)</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="118"/>
         <source>Determines which day a sleep session is assigned to</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestemmer hvilket døgn en søvnøkt tilhører</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="126"/>
