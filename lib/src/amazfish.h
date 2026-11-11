@@ -42,7 +42,10 @@ public:
         INFO_FW_REVISION,
         INFO_MANUFACTURER,
         INFO_IMMEDIATE_ALERT,
-        INFO_SPO2
+        INFO_SPO2,
+        INFO_TEMPERATURE,
+        INFO_HUMIDITY,
+        INFO_VOLTAGE
     };
     Q_ENUM(Info)
 

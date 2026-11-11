@@ -153,4 +153,10 @@ ListModel {
         auth: false
         pattern: "v.vosmart 5"
     }
+    ListElement {
+        deviceType: "Xiaomi Thermometer"
+        icon: "../pics/devices/xiaomi-thermometer.png"
+        auth: false
+        pattern: "^LYWSD03MMC$"
+    }
 }
