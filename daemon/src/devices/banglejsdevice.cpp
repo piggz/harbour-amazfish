@@ -543,6 +543,8 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 	qDebug() << "Calendar IDs from device:" << deviceIds;
 	syncCalendarWithDeviceIds(deviceIds);
 
+    } else if (t == "weather") { // the weather app asks for an update
+        emit deviceEvent(AbstractDevice::EVENT_WEATHER_REQUEST);
     } else if (t == "music") {
         QString music_action = json.value("n").toString();
 
