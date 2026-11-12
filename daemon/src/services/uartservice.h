@@ -23,6 +23,7 @@ public:
 
     void tx(const QByteArray& str);
     void txJson(const QJsonObject &json);
+    void reset();
 
     Q_SIGNAL void serviceEvent(char event);
     Q_SIGNAL void jsonRx(const QJsonObject &json);

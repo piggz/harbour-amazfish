@@ -59,6 +59,16 @@ void UARTService::sendNextPacket()
     }
 }
 
+// The service object survives reconnects. A new connection starts without the XOFF pause, the packets and the
+// partial line of the old one.
+void UARTService::reset()
+{
+    m_txTimer.stop();
+    m_txQueue.clear();
+    m_txPaused = false;
+    m_incomingJson.clear();
+}
+
 void UARTService::txJson(const QJsonObject &json)
 {
     qDebug() << Q_FUNC_INFO << json;
