@@ -113,7 +113,7 @@
         <location filename="../src/deviceinterface.cpp" line="113"/>
         <location filename="../src/deviceinterface.cpp" line="171"/>
         <source>Device is not yet available</source>
-        <translation type="unfinished"></translation>
+        <translation>Enheten är ännu inte tillgänglig</translation>
     </message>
     <message>
         <location filename="../src/deviceinterface.cpp" line="734"/>
