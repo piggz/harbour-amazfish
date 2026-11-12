@@ -28,6 +28,7 @@ public:
     void sendAlert(const Amazfish::WatchNotification &notification) override;
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
+    void setMusicStatus(bool playing, const QString& title, const QString& artist, const QString& album, int duration = 0, int position = 0) override;
 
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
     Q_SLOT void authenticated(bool ready);
@@ -41,6 +42,7 @@ public slots:
     void onRejectCallEvent();
     void onFindPhoneRequested();
     void onFindPhoneCancelled();
+    void onMusicControlCommand(quint8 command);
 
 signals:
     void sendAlertToDevice(NotificationSpec &note);

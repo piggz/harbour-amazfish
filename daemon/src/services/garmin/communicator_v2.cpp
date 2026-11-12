@@ -376,6 +376,11 @@ void CommunicatorV2::onFindPhoneRequest()
     emit findPhoneRequested();
 }
 
+void CommunicatorV2::onMusicControl(quint8 command)
+{
+    emit musicControlCommand(command);
+}
+
 void CommunicatorV2::onFindPhoneCancel()
 {
     qDebug() << Q_FUNC_INFO << "Garmin: Watch asks the phone to stop ringing";

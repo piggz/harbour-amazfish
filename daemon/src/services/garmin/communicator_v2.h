@@ -153,6 +153,7 @@ public:
     void onProtobufStatusMessageReceived(const QByteArray& data);
     void onFindPhoneRequest();
     void onFindPhoneCancel();
+    void onMusicControl(quint8 command);
 
     // return data
     quint32 steps() {return mSteps;};
@@ -180,6 +181,7 @@ signals:
     // The watch asked the paired phone to make a sound, or to stop.
     void findPhoneRequested();
     void findPhoneCancelled();
+    void musicControlCommand(quint8 command);
 
     void gfdiMessageReceived(const QByteArray& gfdiMessage);
 

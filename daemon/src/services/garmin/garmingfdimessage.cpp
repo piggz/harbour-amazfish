@@ -139,6 +139,32 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
         return;
         */
 
+    case MessageId::MusicControlCapabilities: {
+        // The payload byte is a bitmask of what the watch can display.
+        // Reply with the command list, otherwise the watch never sends MusicControl.
+        QByteArray payload;
+        writeU16le(payload, msgId);
+        payload.append(char(quint8(Status::Ack)));
+        payload.append(char(5)); // command count: play/pause, next, previous, vol up, vol down
+        for (quint8 cmd = 0; cmd < 5; cmd++) {
+            payload.append(char(cmd));
+        }
+        mCommunicator->sendMessage("MUSIC CAPABILITIES", wrapInGfdiEnvelope(MessageId::Response, payload));
+        return;
+    }
+    case MessageId::MusicControl: {
+        const QByteArray body = data.mid(offset);
+        if (body.isEmpty()) {
+            mCommunicator->sendMessage("MUSIC CONTROL ACK", GfdiMessageGenerator::ackResponse(msgId));
+            return;
+        }
+        const quint8 command = static_cast<quint8>(body[0]);
+        qDebug() << Q_FUNC_INFO << "Garmin: MusicControl command" << command;
+        mCommunicator->sendMessage("MUSIC CONTROL ACK", GfdiMessageGenerator::ackResponse(msgId));
+        mCommunicator->onMusicControl(command);
+        return;
+    }
+
     case  MessageId::ProtobufRequest:
         parseProtobufRequest(data.mid(offset));
         return;
