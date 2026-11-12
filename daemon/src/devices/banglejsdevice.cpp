@@ -1275,7 +1275,7 @@ void BangleJSDevice::sendCalendarEvent(int id, const watchfish::CalendarEvent &e
     o.insert("description", description.left(200));
     o.insert("location", event.location().left(40));
     o.insert("calName", "amazfish");
-    o.insert("color", (int)0xff8446);
+    o.insert("color", (int)0xffff8446); // Android ARGB, opaque
     o.insert("allDay", event.allDay());
     uart->txJson(o);
 
