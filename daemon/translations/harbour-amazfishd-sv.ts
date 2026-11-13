@@ -313,7 +313,7 @@
     <message>
         <location filename="../src/services/garmin/garminnotificationdatamessage.cpp" line="115"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Avböj</translation>
     </message>
 </context>
 <context>
