@@ -700,27 +700,26 @@ void BangleJSDevice::networkReply()
         return;
     }
 
-    if (reply->error() != QNetworkReply::NoError) {
-        qDebug() << "Error:" << reply->errorString();
+    QByteArray data = reply->readAll();
+    int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    qDebug() << "HTTP status:" << status << "response size:" << data.size() << reply->errorString()
+             << "redirect:" << reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
 
-        QJsonObject p;
-        p.insert("t", "http");
-        p.insert("err", reply->errorString());
-
-        uart->txJson(p);
-
-    } else {
-
-        QByteArray data = reply->readAll();
-        qDebug() << "Response size:" << data.size();
-
-        QJsonObject p;
-        p.insert("t", "http");
+    QJsonObject p;
+    p.insert("t", "http");
+    if (!id.isEmpty()) { // watch matches reply by id, do not invent one
         p.insert("id", id);
-        p.insert("resp", QString::fromUtf8(data));
-
-        uart->txJson(p);
     }
+
+    if (reply->error() != QNetworkReply::NoError) {
+        p.insert("err", reply->errorString());
+    } else if (data.isEmpty()) {
+        p.insert("err", QString("Empty response, HTTP status %1").arg(status));
+    } else {
+        p.insert("resp", QString::fromUtf8(data));
+    }
+
+    uart->txJson(p);
 
     reply->deleteLater();
 }
