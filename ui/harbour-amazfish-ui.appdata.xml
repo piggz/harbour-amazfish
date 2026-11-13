@@ -70,6 +70,50 @@
   </keywords>
   <content_rating type="oars-1.1"/>
   <releases>
+  <release version="3.0.0" timestamp="1794591840">
+  <description>
+    <p>From the tag 2.9.0 (2026-03-17) to 3.0.0 : 383 commits, 66 merged pull requests, 89 of them translation updates.</p>
+
+    <p>New devices and services:</p>
+    <ul>
+      <li>Garmin (new): Vivosmart 5, Epix Pro, and a generic Garmin device. Pairing, notifications (send and dismiss), accept and reject calls on the watch, battery, steps, heart rate, SpO2 and HRV in real time, and calendar sync.</li>
+      <li>FitPub: first support for uploading activities.</li>
+    </ul>
+
+    <p>New user interface:</p>
+    <ul>
+      <li>Start page made of tiles: heart rate, battery, steps, PAI, sleep, stress, and SpO2. Tiles are hidden when the watch doesn't support the data.</li>
+      <li>Data pages open also when the watch isn't connected (except file install).</li>
+      <li>Stress: manual and automatic readings, summary chart, and stress zones.</li>
+      <li>PAI tile with total and today values.</li>
+      <li>Sleep: new option for the sleep day boundary.</li>
+      <li>Charts show time series with missing data correctly.</li>
+      <li>Page icons; Kirigami and Silica layouts aligned; Ubuntu Touch fixes.</li>
+      <li>Per-app notification settings.</li>
+      <li>User settings: heart rate measurement and step goal.</li>
+      <li>Strava pages: API note and donation link.</li>
+      <li>The map is hidden for activities without coordinates.</li>
+    </ul>
+
+    <p>Bangle.js:</p>
+    <ul>
+      <li>Answer or decline a call from the watch.</li>
+      <li>Calendar sync: at most 10 events, event colour, and transliteration.</li>
+      <li>Activity sync: shows progress, deletes synced records and records older than 30 days from the watch, skips empty records, and updates the step count afterwards.</li>
+      <li>A-GPS: download errors and empty replies are sent to the watch as errors, with logging.</li>
+      <li>Notifications: length limit, icon, and Telegram app ID.</li>
+      <li>Music play/pause, battery refresh, step goal and step goal alert settings, and an updated feature list.</li>
+      <li>File install is disabled (not supported by the watch).</li>
+      <li>Fix: no double initialisation, no parallel operations.</li>
+    </ul>
+
+    <p>Huami and Zepp OS:</p>
+    <ul>
+      <li>Bip: authentication fix, quick weather access, sleep data, and a fix for activity base coordinates.</li>
+      <li>Amazfit Neo: Conection fixes.</li>
+    </ul>
+  </description>
+  </release>
     <release version="2.9.0" timestamp="1773681177">
       <description>
         <p>Devices</p>
