@@ -1168,7 +1168,14 @@ void BangleJSDevice::syncCalendar(QList<watchfish::CalendarEvent> &eventlist)
         return;
     }
     setOperationRunning(true);
-    m_eventlist = eventlist;
+
+    // The watch rewrites its whole calendar file for every event, so send only the next few
+    const int maxEvents = 10;
+    QList<watchfish::CalendarEvent> events = eventlist;
+    std::sort(events.begin(), events.end(), [](const watchfish::CalendarEvent& a, const watchfish::CalendarEvent& b) {
+        return a.start() < b.start();
+    });
+    m_eventlist = events.mid(0, maxEvents);
     forceCalendarSync();
 }
 
