@@ -176,6 +176,7 @@ void BangleJSDevice::initialise()
         connect(uart, &UARTService::jsonRx, this, &BangleJSDevice::handleRxJson, Qt::UniqueConnection);
 
         uart->enableNotification(UARTService::UUID_CHARACTERISTIC_UART_RX);
+        uart->reset();
         uart->tx(QByteArray(1, 0x03)); //Clear line)
     }
 

@@ -2,6 +2,8 @@
 #define UARTSERVICE_H
 
 #include <QObject>
+#include <QQueue>
+#include <QTimer>
 #include "qble/qbleservice.h"
 #include "abstractdevice.h"
 
@@ -21,6 +23,7 @@ public:
 
     void tx(const QByteArray& str);
     void txJson(const QJsonObject &json);
+    void reset();
 
     Q_SIGNAL void serviceEvent(char event);
     Q_SIGNAL void jsonRx(const QJsonObject &json);
@@ -29,8 +32,12 @@ private:
     void characteristicChanged(const QString &c, const QByteArray &value);
     void handleRx(const QString &json);
     QJsonObject ObjectFromString(const QString& in);
+    void sendNextPacket();
 
     QByteArray m_incomingJson;
+    QQueue<QByteArray> m_txQueue;
+    QTimer m_txTimer;
+    bool m_txPaused = false; // device sent XOFF
 };
 
 #endif // UARTSERVICE_H
