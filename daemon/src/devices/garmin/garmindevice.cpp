@@ -1,9 +1,9 @@
 #include "garmindevice.h"
-#include "services/garmin/communicator_v2.h"
-#include "hrmservice.h"
-#include "deviceinfoservice.h"
 #include "amazfishconfig.h"
-
+#include "deviceinfoservice.h"
+#include "hrmservice.h"
+#include "services/garmin/communicator_v2.h"
+#include "services/garmin/garmintypes.h"
 
 #include <QDomDocument>
 #include <QStringList>
@@ -111,6 +111,57 @@ void GarminDevice::incomingCallEnded()
     else qDebug() << Q_FUNC_INFO << "Garmin: No notification handler!";
 }
 
+namespace {
+// One MusicControlEntityUpdate (5049) record: [len][entityId][ordinal][0][utf8 value].
+// len counts its own byte plus the three header bytes; a value is at most 252 bytes.
+constexpr quint8 MUSIC_ENTITY_PLAYER = 0;
+constexpr quint8 MUSIC_ENTITY_TRACK = 2;
+constexpr quint8 PLAYER_PLAYBACK_INFO = 1;
+constexpr quint8 TRACK_ARTIST = 0;
+constexpr quint8 TRACK_ALBUM = 1;
+constexpr quint8 TRACK_TITLE = 2;
+constexpr quint8 TRACK_DURATION = 3;
+
+// MusicControl command ordinals, same list as sent in the capabilities reply.
+constexpr quint8 MUSIC_CMD_PLAYPAUSE = 0;
+constexpr quint8 MUSIC_CMD_NEXT = 1;
+constexpr quint8 MUSIC_CMD_PREV = 2;
+constexpr quint8 MUSIC_CMD_VOLUP = 3;
+constexpr quint8 MUSIC_CMD_VOLDOWN = 4;
+
+void appendMusicEntityRecord(QByteArray& payload, quint8 entityId, quint8 ordinal, const QString& value)
+{
+    QString text = value;
+    QByteArray bytes = text.toUtf8();
+    while (bytes.size() > 252) {
+        text.chop(1);
+        bytes = text.toUtf8();
+    }
+    payload.append(char(bytes.size() + 3));
+    payload.append(char(entityId));
+    payload.append(char(ordinal));
+    payload.append(char(0)); // 4th byte, purpose unknown, Gadgetbridge sends 0
+    payload.append(bytes);
+}
+}
+
+void GarminDevice::setMusicStatus(bool playing, const QString& title, const QString& artist, const QString& album, int duration, int position)
+{
+    qDebug() << Q_FUNC_INFO << playing << artist << album << title;
+    if (!mCommunicator) {
+        return;
+    }
+    QByteArray payload;
+    appendMusicEntityRecord(payload, MUSIC_ENTITY_TRACK, TRACK_ARTIST, artist);
+    appendMusicEntityRecord(payload, MUSIC_ENTITY_TRACK, TRACK_ALBUM, album);
+    appendMusicEntityRecord(payload, MUSIC_ENTITY_TRACK, TRACK_TITLE, title);
+    appendMusicEntityRecord(payload, MUSIC_ENTITY_TRACK, TRACK_DURATION, QString::number(duration));
+    // PLAYER.PLAYBACK_INFO is "playing,rate,position"; the rate stays 1.0 while playing.
+    appendMusicEntityRecord(payload, MUSIC_ENTITY_PLAYER, PLAYER_PLAYBACK_INFO,
+        QString(playing ? "1,1.0," : "0,0.0,") + QString::number(position));
+    mCommunicator->sendMessage("MUSIC UPDATE", wrapInGfdiEnvelope(MessageId::MusicControlEntityUpdate, payload));
+}
+
 void GarminDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
     qDebug() << Q_FUNC_INFO << interface << map << list;
@@ -151,6 +202,39 @@ void GarminDevice::onRejectCallEvent(){
     emit deviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
 }
 
+void GarminDevice::onFindPhoneRequested()
+{
+    emit deviceEvent(AbstractDevice::EVENT_FIND_PHONE);
+}
+
+void GarminDevice::onFindPhoneCancelled()
+{
+    emit deviceEvent(AbstractDevice::EVENT_CANCEL_FIND_PHONE);
+}
+
+void GarminDevice::onMusicControlCommand(quint8 command)
+{
+    switch (command) {
+    case MUSIC_CMD_PLAYPAUSE:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PLAYPAUSE);
+        break;
+    case MUSIC_CMD_NEXT:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_NEXT);
+        break;
+    case MUSIC_CMD_PREV:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_PREV);
+        break;
+    case MUSIC_CMD_VOLUP:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLUP);
+        break;
+    case MUSIC_CMD_VOLDOWN:
+        emit deviceEvent(AbstractDevice::EVENT_MUSIC_VOLDOWN);
+        break;
+    default:
+        qDebug() << Q_FUNC_INFO << "Garmin: Unknown music command" << command;
+    }
+}
+
 QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString &path)
 {
     qDebug() << Q_FUNC_INFO << "Creating Communicator service for Garmin";
@@ -171,6 +255,9 @@ QBLEService *GarminDevice::drv_createService(const QString &uuid, const QString 
         connect(com.data(), &CommunicatorV2::NotificationPerformAction, mNotificationHandler.data(), &GarminNotificationHandler::onNotificationPerformAction);
         connect(mNotificationHandler.data(), &GarminNotificationHandler::acceptIncomingCall, this, &GarminDevice::onAnswerCallEvent);
         connect(mNotificationHandler.data(), &GarminNotificationHandler::rejectIncomingCall, this, &GarminDevice::onRejectCallEvent);
+        connect(com.data(), &CommunicatorV2::findPhoneRequested, this, &GarminDevice::onFindPhoneRequested, Qt::UniqueConnection);
+        connect(com.data(), &CommunicatorV2::findPhoneCancelled, this, &GarminDevice::onFindPhoneCancelled, Qt::UniqueConnection);
+        connect(com.data(), &CommunicatorV2::musicControlCommand, this, &GarminDevice::onMusicControlCommand, Qt::UniqueConnection);
         setConnectionState("authenticated");
         return com.data();
     }
