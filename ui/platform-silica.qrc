@@ -6,6 +6,7 @@
         <file alias="./qml/components/platform/ButtonPL.qml">./qml/components/platform.silica/ButtonPL.qml</file>
         <file alias="./qml/components/platform/ClipboardPL.qml">./qml/components/platform.silica/ClipboardPL.qml</file>
         <file alias="./qml/components/platform/ComboBoxPL.qml">./qml/components/platform.silica/ComboBoxPL.qml</file>
+        <file alias="./qml/components/platform/ConicalGradientPL.qml">./qml/components/platform.silica/ConicalGradientPL.qml</file>
         <file alias="./qml/components/platform/ContextMenuItemPL.qml">./qml/components/platform.silica/ContextMenuItemPL.qml</file>
         <file alias="./qml/components/platform/ContextMenuPL.qml">./qml/components/platform.silica/ContextMenuPL.qml</file>
         <file alias="./qml/components/platform/Cover.qml">./qml/components/platform.silica/Cover.qml</file>
