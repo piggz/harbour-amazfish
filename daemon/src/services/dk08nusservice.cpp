@@ -177,7 +177,7 @@ void DK08NUSService::setTime() {
     msg[8] = twoDigitsToBCD(now.date().dayOfWeek() % 7); // the watch wants 0 for Sunday, Qt gives 7
     msg[19] = getCrc(msg.left(19));
 
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
 
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
@@ -680,7 +680,7 @@ void DK08NUSService::setAlarms() {
 
     msg[19] = getCrc(msg.left(19));
 
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
 
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
@@ -698,7 +698,7 @@ void DK08NUSService::setUserInfo() {
     msg[3] = height;
     msg[19] = getCrc(msg.left(19));
 
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
 
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
@@ -713,7 +713,7 @@ void DK08NUSService::setSportTarget() {
     msg[3] = goalBytes[1];
     msg[4] = goalBytes[2];
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
 
@@ -724,7 +724,7 @@ void DK08NUSService::setUnit() {
     msg[1] = NUSCallType::Unit;
     msg[2] = unit;
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
 
@@ -736,7 +736,7 @@ void DK08NUSService::setTimeFormat() {
     msg[1] = NUSCallType::HourSelect;
     msg[2] = timeformat; // 0 == 24, 1 == 12
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
 
@@ -760,7 +760,7 @@ void DK08NUSService::setPalming() {
     msg[1] = NUSCallType::Palming;
     msg[2] = enabled;
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
 
@@ -849,7 +849,7 @@ void DK08NUSService::sendWeather(CurrentWeather *weather) {
     msg[17] = static_cast<uint8_t>( (maxT3 < 0) ? 128 - maxT3 : maxT3 );
     msg[18] = 0xFF;
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 
 }
