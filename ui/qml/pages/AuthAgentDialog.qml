@@ -5,7 +5,7 @@ import "../components/platform"
 
 DialogPL {
 //    onAccepted: AmazfishConfig.deviceAuthKey = authKeyField.text
-    canAccept: (authKeyField.text || authType == "confirmation")
+    canAccept: (authKeyField.text || authType == "confirmation" || authType == "display")
 
     property string authType
     property string deviceName
@@ -21,6 +21,8 @@ DialogPL {
 	    return qsTr("Confirm authentication key")
 	case "pincode":
 	    return qsTr("Enter authentication pin code")
+	case "display":
+	    return qsTr("Type this passkey on the watch")
 	default:
 	    return qsTr("Authentication agent")
 	}
@@ -46,7 +48,7 @@ DialogPL {
 
 	LabelPL {
 	    text: qsTr("Passkey: %1").arg(passkey)
-	    visible: authType == "confirmation"
+	    visible: authType == "confirmation" || authType == "display"
 	}
 
 	TextFieldPL {

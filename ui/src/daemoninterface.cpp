@@ -62,6 +62,8 @@ void DaemonInterface::connectDaemon()
     connect(iface, SIGNAL(requestConfirmationFromUI(const QString&, const QString&, uint)),
 	    this, SIGNAL(requestConfirmation(const QString&, const QString&, uint)), Qt::UniqueConnection);
 
+    connect(iface, SIGNAL(displayPasskeyInUI(const QString&, const QString&, uint)), this,
+        SIGNAL(displayPasskey(const QString&, const QString&, uint)), Qt::UniqueConnection);
 
     //Property proxying
     connect(iface, SIGNAL(connectionStateChanged()), this, SLOT(changeConnectionState()), Qt::UniqueConnection);

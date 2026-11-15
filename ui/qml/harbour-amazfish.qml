@@ -87,6 +87,18 @@ ApplicationWindowPL
 
     Connections {
 	target: DaemonInterfaceInstance
+	onDisplayPasskey: {
+	    app.pages.push(Qt.resolvedUrl("./pages/AuthAgentDialog.qml"), {
+				authType: "display",
+				deviceName: deviceName,
+				devicePath: devicePath,
+				passkey: passkey
+			    })
+	}
+    }
+
+    Connections {
+	target: DaemonInterfaceInstance
 	onRequestPinCode: {
 	    var authdialog = app.pages.push(Qt.resolvedUrl("./pages/AuthAgentDialog.qml"), {
 						authType: "pincode",

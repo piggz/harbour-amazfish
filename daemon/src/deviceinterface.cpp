@@ -112,6 +112,7 @@ void DeviceInterface::initAgent() {
     connect(m_agent, &QBLEAgent::UIRequestPasskey, this, &DeviceInterface::requestPasskeyFromUI, Qt::UniqueConnection);
     connect(m_agent, &QBLEAgent::UIRequestPinCode, this, &DeviceInterface::requestPinCodeFromUI, Qt::UniqueConnection);
     connect(m_agent, &QBLEAgent::UIRequestConfirmation, this, &DeviceInterface::requestConfirmationFromUI, Qt::UniqueConnection);
+    connect(m_agent, &QBLEAgent::UIDisplayPasskey, this, &DeviceInterface::displayPasskeyInUI, Qt::UniqueConnection);
 
     connect(m_agent, &QBLEAgent::pairingAccepted,
 	    this, [this](const QString &devicePath) {
