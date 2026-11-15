@@ -80,7 +80,7 @@ signals:
     void requestPasskey(const QString& deviceName, const QString& devicePath);
     void requestPinCode(const QString& deviceName, const QString& devicePath);
     void requestConfirmation(const QString& deviceName, const QString& devicePath, uint passkey);
-
+    void displayPasskey(const QString& deviceName, const QString& devicePath, uint passkey);
 
 private slots:
     void changeConnectionState();

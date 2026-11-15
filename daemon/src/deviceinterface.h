@@ -73,6 +73,7 @@ public:
     Q_SIGNAL void requestPasskeyFromUI(const QString& deviceName, const QString& devicePath);
     Q_SIGNAL void requestPinCodeFromUI(const QString& deviceName, const QString& devicePath);
     Q_SIGNAL void requestConfirmationFromUI(const QString& deviceName, const QString& devicePath, uint passkey);
+    Q_SIGNAL void displayPasskeyInUI(const QString& deviceName, const QString& devicePath, uint passkey);
 
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
