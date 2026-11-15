@@ -38,12 +38,25 @@ void DK08NUSService::downloadHistory()
     nextFetchStep();
 }
 
+// Keep what already arrived: the watch has deleted it.
+void DK08NUSService::cancelHistory()
+{
+    if (m_fetchSteps.isEmpty()) {
+        return;
+    }
+    qWarning() << Q_FUNC_INFO << "History download cancelled at" << m_fetchSteps.first() << "samples:" << m_samples.count();
+    m_fetchTimer.stop();
+    m_fetchSteps.clear();
+    emit historyDownloaded(m_samples, false);
+    m_samples.clear();
+}
+
 void DK08NUSService::nextFetchStep()
 {
     if (m_fetchSteps.isEmpty()) {
         m_fetchTimer.stop();
         qDebug() << Q_FUNC_INFO << "History download done, samples:" << m_samples.count();
-        emit historyDownloaded(m_samples);
+        emit historyDownloaded(m_samples, true);
         m_samples.clear();
         return;
     }

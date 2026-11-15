@@ -27,6 +27,10 @@ QString DK08Device::deviceType() const
 
 void DK08Device::sendAlert(const Amazfish::WatchNotification &notification) {
     qDebug() << Q_FUNC_INFO;
+    if (m_operationRunning) {
+        qDebug() << "Operation is running, alert not sent";
+        return;
+    }
     DK08NUSService *nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));
     m_alert_id = (m_alert_id + 1) % 32;
     if (nus) {
@@ -75,6 +79,14 @@ void DK08Device::incomingCallEnded() {
 
 void DK08Device::fetchData(Amazfish::DataTypes dataTypes)
 {
+    if (m_operationRunning) {
+        emit message(tr("An operation is currently running, please try later"));
+        return;
+    }
+    if (connectionState() != "authenticated") {
+        qWarning() << Q_FUNC_INFO << "Not connected:" << connectionState();
+        return;
+    }
     if (dataTypes & Amazfish::DataType::TYPE_ACTIVITY) {
         downloadActivityData();
     }
@@ -97,6 +109,11 @@ void DK08Device::onPropertiesChanged(QString interface, QVariantMap map, QString
             bool value = map["Connected"].toBool();
 
             if (!value) {
+                DK08NUSService* nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));
+                if (nus) {
+                    nus->cancelHistory();
+                }
+                setOperationRunning(false);
                 setConnectionState("disconnected");
             } else {
                 setConnectionState("connected");
@@ -144,6 +161,9 @@ void DK08Device::initialise()
 void DK08Device::refreshInformation()
 {
     qDebug() << Q_FUNC_INFO;
+    if (m_operationRunning) {
+        return;
+    }
     DK08WechatService *wechat = qobject_cast<DK08WechatService*>(service(DK08WechatService::UUID_SERVICE_WECHAT));
     if (wechat) {
         wechat->refreshInformation();
@@ -194,6 +214,8 @@ QString DK08Device::information(Amazfish::Info i) const
 void DK08Device::downloadActivityData() {
     DK08NUSService *nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));
     if (nus) {
+        emit message(tr("Downloading activity data"));
+        setOperationRunning(true);
         nus->getSportInfo(DK08NUSService::InfoType::Current);
         nus->getSleepStats();
         nus->downloadHistory();
@@ -205,6 +227,10 @@ void DK08Device::applyDeviceSetting(Amazfish::Settings settings) {
     DK08NUSService *nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));
     if (!nus) {
         qWarning() << "NUSService not available";
+        return;
+    }
+    if (m_operationRunning) {
+        qDebug() << Q_FUNC_INFO << "Operation is running, setting not applied" << settings;
         return;
     }
     switch(settings) {
@@ -241,11 +267,15 @@ void DK08Device::sendWeather(CurrentWeather *weather)
         qWarning() << "NUSService not available";
         return;
     }
+    if (m_operationRunning) {
+        return;
+    }
     nus->sendWeather(weather);
 }
 
-void DK08Device::saveActivitySamples(const QList<ActivitySample>& samples)
+void DK08Device::saveActivitySamples(const QList<ActivitySample>& samples, bool complete)
 {
+    setOperationRunning(false);
     if (!m_conn || !m_conn->isDatabaseUsed()) {
         qWarning() << Q_FUNC_INFO << "Database not connected, lost samples:" << samples.count();
         return;
@@ -287,4 +317,23 @@ void DK08Device::saveActivitySamples(const QList<ActivitySample>& samples)
     }
     tg.commit();
     qDebug() << Q_FUNC_INFO << "Saved samples:" << samples.count();
+    if (complete) {
+        emit message(tr("Activity data downloaded"));
+    } else {
+        emit message(tr("Activity data download was interrupted"));
+    }
+}
+
+bool DK08Device::operationRunning()
+{
+    return m_operationRunning;
+}
+
+void DK08Device::setOperationRunning(bool running)
+{
+    if (m_operationRunning == running) {
+        return;
+    }
+    m_operationRunning = running;
+    emit operationRunningChanged();
 }

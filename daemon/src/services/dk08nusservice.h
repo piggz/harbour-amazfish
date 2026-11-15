@@ -130,7 +130,8 @@ public:
     void test();
 
     void downloadHistory();
-    Q_SIGNAL void historyDownloaded(const QList<ActivitySample>& samples);
+    void cancelHistory();
+    Q_SIGNAL void historyDownloaded(const QList<ActivitySample>& samples, bool complete);
 
 private:
     // The watch has one upload queue for all history types, so ask one type at a time.
