@@ -370,6 +370,17 @@ void CommunicatorV2::onNotificationPerformAction(const NotificationControlMessag
     emit NotificationPerformAction(msg);
 }
 
+void CommunicatorV2::onFindPhoneRequest()
+{
+    qDebug() << Q_FUNC_INFO << "Garmin: Watch asks the phone to ring";
+    emit findPhoneRequested();
+}
+
+void CommunicatorV2::onFindPhoneCancel()
+{
+    qDebug() << Q_FUNC_INFO << "Garmin: Watch asks the phone to stop ringing";
+    emit findPhoneCancelled();
+}
 
 void CommunicatorV2::onSynchronizationReceived(const SynchronizationMessage& msg) {
     Q_UNUSED(msg);
@@ -493,7 +504,9 @@ void CommunicatorV2::handleNonMlrMessage(const QByteArray& data) {
 
 void CommunicatorV2::handleIncomingGfdiMessage(const QByteArray& data)
 {
-    if (data.size()<8) {
+    // Smallest valid packet: length (2) + message id (2) + CRC (2).
+    // Small bare requests such as FindMyPhone carry no further fields.
+    if (data.size() < 6) {
         qDebug() << Q_FUNC_INFO << "Garmin: Incoming Gfdi Message is too small";
         return;
     }

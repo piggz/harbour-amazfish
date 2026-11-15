@@ -149,6 +149,16 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
         parseAuthNegotiation(data.mid(offset));
         return;
 
+    case MessageId::FindMyPhoneRequest:
+        // The duration byte in the payload is ignored, like in Gadgetbridge.
+        mCommunicator->sendMessage("FIND PHONE ACK", GfdiMessageGenerator::ackResponse(msgId));
+        mCommunicator->onFindPhoneRequest();
+        return;
+    case MessageId::FindMyPhoneCancel:
+        mCommunicator->sendMessage("FIND PHONE CANCEL ACK", GfdiMessageGenerator::ackResponse(msgId));
+        mCommunicator->onFindPhoneCancel();
+        return;
+
     default:
         // Send simple Ack
         QByteArray data = GfdiMessageGenerator::ackResponse(msgId);

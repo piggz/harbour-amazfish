@@ -928,10 +928,16 @@ void DeviceInterface::deviceEvent(AbstractDevice::Event event)
         break;
 #endif
     case AbstractDevice::EVENT_FIND_PHONE:
-        m_findDeviceTimer->start(5000);
+        // Chirp at once, then repeat every 5 s. Duplicate requests while the
+        // alert runs must not add a chirp or push the next one back.
+        if (!m_findDeviceTimer->isActive()) {
+            m_findDeviceTimer->start(5000);
+            findDevice();
+        }
         break;
     case AbstractDevice::EVENT_CANCEL_FIND_PHONE:
         m_findDeviceTimer->stop();
+        m_playedSounds = 0;
         break;
     }
 }

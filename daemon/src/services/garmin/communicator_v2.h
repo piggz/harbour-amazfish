@@ -151,6 +151,8 @@ public:
     void onWeatherRequestReceived(const WeatherRequestMessage& msg);
     void onProtobufMessageReceived(const QByteArray& data);
     void onProtobufStatusMessageReceived(const QByteArray& data);
+    void onFindPhoneRequest();
+    void onFindPhoneCancel();
 
     // return data
     quint32 steps() {return mSteps;};
@@ -175,6 +177,9 @@ signals:
     void informationChanged(Amazfish::Info infoKey, const QString& infoValue);
     void NotificationDataRequested(const NotificationControlMessage& msg);
     void NotificationPerformAction(const NotificationControlMessage& msg);
+    // The watch asked the paired phone to make a sound, or to stop.
+    void findPhoneRequested();
+    void findPhoneCancelled();
 
     void gfdiMessageReceived(const QByteArray& gfdiMessage);
 
