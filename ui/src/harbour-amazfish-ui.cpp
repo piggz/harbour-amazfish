@@ -144,6 +144,9 @@ int main(int argc, char *argv[])
     view->load(QUrl("qrc:/qml/harbour-amazfish.qml"));
 #else
     view->load(QUrl("qrc:/qml/harbour-amazfish.qml"));
+    if (view->rootObjects().isEmpty()) {
+        return -1;
+    }
 
     if (QQuickWindow* window = qobject_cast<QQuickWindow*>(view->rootObjects().at(0))) {
         window->setIcon(QIcon(":/icons/172x172/harbour-amazfish-ui.png"));
