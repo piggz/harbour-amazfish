@@ -44,22 +44,28 @@ Kirigami.ScrollablePage {
     signal pageStatusActive
     signal pageStatusInactive
 
-    actions {
-        main: Kirigami.Action {
-            id: mainAction
-            enabled: page.canNavigateForward === true
-            icon.name: page.acceptIconName
-            visible: !page.hideAcceptButton && (page.isDialog || app.pages.hasAttached(page))
-            text: "" + (page.isDialog || app.pages.nextPage() == undefined
-                        ? app.tr("Accept")
-                        : app.pages.nextPage().title)
-            onTriggered: {
-                if (acceptCallback) acceptCallback();
-                else app.pages.navigateForward();
-            }
+    actions: {
+        // Kirigami 6 logs ToolBarLayout errors when all actions of a page are hidden
+        var list = mainAction.visible ? [mainAction] : [];
+        if (page.pageMenu) {
+            for (var i = 0; i < page.pageMenu.items.length; i++)
+                list.push(page.pageMenu.items[i]);
         }
+        return list;
+    }
 
-        contextualActions: page.pageMenu ? page.pageMenu.items : []
+    property Kirigami.Action _mainAction: Kirigami.Action {
+        id: mainAction
+        enabled: page.canNavigateForward === true
+        icon.name: page.acceptIconName
+        visible: !page.hideAcceptButton && (page.isDialog || app.pages.hasAttached(page))
+        text: "" + (page.isDialog || app.pages.nextPage() == undefined
+                    ? app.tr("Accept")
+                    : app.pages.nextPage().title)
+        onTriggered: {
+            if (acceptCallback) acceptCallback();
+            else app.pages.navigateForward();
+        }
     }
 
     ListView {

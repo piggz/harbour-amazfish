@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(libamazfish STATIC)
 
-find_package(Qt5 REQUIRED COMPONENTS Core DBus Xml)
+find_package(Qt${QT_MAJOR} REQUIRED COMPONENTS Core DBus Xml)
 
 if(FLAVOR STREQUAL "silica")
 
@@ -15,7 +15,7 @@ endif()
 
 
 target_include_directories(libamazfish PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src ${MLITE5_INCLUDE_DIRS})
-target_link_libraries(libamazfish PUBLIC Qt5::Core Qt5::DBus Qt5::Xml ${MLITE5_LIBRARIES})
+target_link_libraries(libamazfish PUBLIC Qt${QT_MAJOR}::Core Qt${QT_MAJOR}::DBus Qt${QT_MAJOR}::Xml ${MLITE5_LIBRARIES})
 
 set(SOURCES
     ./src/amazfishconfig.cpp
