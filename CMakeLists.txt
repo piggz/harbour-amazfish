@@ -18,7 +18,14 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(GNUInstallDirs)
 include(FeatureSummary)
 
-find_package(Qt5 COMPONENTS Core Gui Quick Sql DBus LinguistTools REQUIRED)
+# Kirigami uses Qt 6, the other flavors stay on Qt 5
+if(FLAVOR STREQUAL "kirigami")
+    set(QT_MAJOR 6)
+else()
+    set(QT_MAJOR 5)
+endif()
+
+find_package(Qt${QT_MAJOR} COMPONENTS Core Gui Quick Sql DBus LinguistTools REQUIRED)
 
 if(NOT DEFINED FLAVOR)
     message(FATAL_ERROR "Please specify the platform using -DFLAVOR=platform as a CMake option. Supported platforms: kirigami, silica, qtcontrols, uuitk.")
