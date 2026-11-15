@@ -20,6 +20,75 @@ DK08NUSService::DK08NUSService(const QString &path, QObject *parent) : QBLEServi
 
     connect(this, &QBLEService::characteristicChanged, this, &DK08NUSService::characteristicRead);
     enableNotification(UUID_CHARACTERISTIC_NUS_NOTIFY);
+
+    m_fetchTimer.setSingleShot(true);
+    m_fetchTimer.setInterval(10000);
+    connect(&m_fetchTimer, &QTimer::timeout, this, &DK08NUSService::fetchTimeout);
+}
+
+void DK08NUSService::downloadHistory()
+{
+    if (!m_fetchSteps.isEmpty()) {
+        qWarning() << Q_FUNC_INFO << "History download already running";
+        return;
+    }
+    m_fetchSteps = { CountSteps, CountSleep, CountHeartRate, FetchSteps, FetchSleep, FetchHeartRate };
+    nextFetchStep();
+}
+
+void DK08NUSService::nextFetchStep()
+{
+    if (m_fetchSteps.isEmpty()) {
+        m_fetchTimer.stop();
+        qDebug() << Q_FUNC_INFO << "History download done";
+        emit historyDownloaded();
+        return;
+    }
+
+    FetchStep step = m_fetchSteps.first();
+    qDebug() << Q_FUNC_INFO << step;
+    if (step == CountSteps) {
+        getStepSection(InfoType::HistoryNum);
+    } else if (step == CountSleep) {
+        getSleep(InfoType::HistoryNum);
+    } else if (step == CountHeartRate) {
+        getHrInfo(InfoType::HistoryNum);
+    } else if (step == FetchSteps) {
+        getStepSection(InfoType::History);
+    } else if (step == FetchSleep) {
+        getSleep(InfoType::History);
+    } else if (step == FetchHeartRate) {
+        getHrInfo(InfoType::History);
+    }
+    m_fetchTimer.start();
+}
+
+void DK08NUSService::fetchStepDone(FetchStep step)
+{
+    if (m_fetchSteps.isEmpty() || m_fetchSteps.first() != step) {
+        return;
+    }
+    m_fetchSteps.removeFirst();
+    nextFetchStep();
+}
+
+void DK08NUSService::fetchCount(FetchStep countStep, FetchStep fetchStep, int count)
+{
+    qDebug() << Q_FUNC_INFO << fetchStep << "records:" << count;
+    if (count == 0) {
+        m_fetchSteps.removeAll(fetchStep);
+    }
+    fetchStepDone(countStep);
+}
+
+void DK08NUSService::fetchTimeout()
+{
+    if (m_fetchSteps.isEmpty()) {
+        return;
+    }
+    qWarning() << Q_FUNC_INFO << "No answer for" << m_fetchSteps.first();
+    m_fetchSteps.removeFirst();
+    nextFetchStep();
 }
 
 void DK08NUSService::refreshInformation() {
@@ -178,6 +247,13 @@ void DK08NUSService::parseHr(QByteArray value) {
         qDebug() << "hr notify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
     } else if (type == InfoType::History) {
         qDebug() << "hr history <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+        if (hrNum + 1 >= hrLength) {
+            fetchStepDone(FetchHeartRate);
+        } else {
+            m_fetchTimer.start();
+        }
+    } else if (type == InfoType::HistoryNum) {
+        fetchCount(CountHeartRate, FetchHeartRate, hrLength);
     }
 }
 
@@ -326,14 +402,11 @@ void DK08NUSService::getStepSection(InfoType type) {
 
 void DK08NUSService::parseStepSection(QByteArray value) {
 
-    //       [0] [1] [2] [3]
-    // bytes  12  34  56  78
-    // en     12             -> 12
-    // ah          4  5      -> 45
-    // ch              6  78 -> 678
+    // value[1..3] is one 24-bit number: total << 12 | index
     quint8 en = static_cast<quint8>(value[0]);
-    int ah = (value[1] << 4) | (value[2] >> 4);
-    int ch = ((value[2] & 0x0f) << 8) | (value[3] & 0xff);
+    uint header = TypeConversion::toUint32(value[3], value[2], value[1], 0);
+    int ah = header >> 12;
+    int ch = header & 0xfff;
 
     qDebug() << "en" << en << "(en & 0x05)" << (en & 0x05) << QString::number(en, 2).rightJustified(8, '0');
     qint64 date = 0;
@@ -361,9 +434,17 @@ void DK08NUSService::parseStepSection(QByteArray value) {
         qDebug() << "  Date:" << qDate;
         qDebug() << "  Step Time:" << time;
         qDebug() << "  Step Type:" << 1;
+        if (en == 0x04) {
+            if (ch + 1 >= ah) {
+                fetchStepDone(FetchSteps);
+            } else {
+                m_fetchTimer.start();
+            }
+        }
     } else if ((en & 0x02) > 0) {  // Segment history count
         qDebug() << "Segmented History Count:";
         qDebug() << "  History Length:" << ah;
+        fetchCount(CountSteps, FetchSteps, ah);
     }
 
     if (en == 1) {
@@ -394,6 +475,10 @@ QDateTime DK08NUSService::bcdToDateTime(QByteArray bytes) {
 
 void DK08NUSService::parseSleep(QByteArray value) {
     int type = static_cast<quint8>(value[0]);
+    if (type == InfoType::HistoryNum) {
+        fetchCount(CountSleep, FetchSleep, static_cast<quint8>(value[1]));
+        return;
+    }
     int sleepLength = static_cast<quint8>(value[1]); // Sleep history total count
     int sleepNum = static_cast<quint8>(value[2]);    // Sleep packet number
     QDateTime startTime = bcdToDateTime(value.mid(3, 5));
@@ -425,7 +510,11 @@ void DK08NUSService::parseSleep(QByteArray value) {
 
     if (type == InfoType::History) {
         qDebug() << "history >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-        // readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
+        if (sleepNum + 1 >= sleepLength) {
+            fetchStepDone(FetchSleep);
+        } else {
+            m_fetchTimer.start();
+        }
     } else if (type == InfoType::Notify) {
         qDebug() << "notify >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
     }

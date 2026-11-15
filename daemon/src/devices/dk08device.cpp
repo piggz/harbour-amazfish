@@ -194,13 +194,7 @@ void DK08Device::downloadActivityData() {
     if (nus) {
         nus->getSportInfo(DK08NUSService::InfoType::Current);
         nus->getSleepStats();
-        nus->getStepSection(DK08NUSService::InfoType::History);
-        nus->getSportInfo(DK08NUSService::InfoType::History);
-        nus->getSportInfo(DK08NUSService::InfoType::HistoryNum);
-        nus->getSleep(DK08NUSService::InfoType::Current);
-        nus->getSleep(DK08NUSService::InfoType::History);
-        nus->getHrInfo(DK08NUSService::InfoType::History);
-
+        nus->downloadHistory();
     }
 
 }
