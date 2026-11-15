@@ -6,6 +6,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QtGlobal>
 
+#include <QtCore/QObject>
+
 #include <optional>
 #include <utility>
 #include <variant>
