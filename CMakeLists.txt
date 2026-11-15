@@ -71,9 +71,23 @@ endif()
 message(STATUS "Git version: ${PROJECT_GIT_VERSION}")
 add_compile_definitions(PROJECT_GIT_VERSION="${PROJECT_GIT_VERSION}")
 
+option(ENABLE_COVERAGE "Build with gcov coverage, for the tests" OFF)
+if(ENABLE_COVERAGE)
+    add_compile_options(--coverage)
+    add_link_options(--coverage)
+endif()
+
 add_subdirectory(qble)
 add_subdirectory(lib)
 add_subdirectory(daemon)
 add_subdirectory(ui)
+
+# Tests need the Qt 6 QML runtime, so they are only built with the kirigami flavor.
+if(FLAVOR STREQUAL "kirigami")
+    include(CTest)
+    if(BUILD_TESTING)
+        add_subdirectory(tests)
+    endif()
+endif()
 
 feature_summary(WHAT ALL)
