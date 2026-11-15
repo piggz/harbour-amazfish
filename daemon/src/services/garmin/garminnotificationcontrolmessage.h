@@ -14,6 +14,7 @@ public:
     }
     void parse(const QByteArray& data);
     QByteArray generateOutgoing(const QByteArray& data);
+    void sendAppAttributes(const QByteArray& data);
     MessageId getMessageType() {return MessageId::NotificationControl; };
 
 };
