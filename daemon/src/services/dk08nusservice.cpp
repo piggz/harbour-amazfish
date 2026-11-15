@@ -102,8 +102,16 @@ void DK08NUSService::fetchTimeout()
     if (m_fetchSteps.isEmpty()) {
         return;
     }
-    qWarning() << Q_FUNC_INFO << "No answer for" << m_fetchSteps.first();
-    m_fetchSteps.removeFirst();
+    FetchStep step = m_fetchSteps.takeFirst();
+    qWarning() << Q_FUNC_INFO << "No answer for" << step;
+    // Without a count do not fetch: for an empty store the watch sends one record full of zeros.
+    if (step == CountSteps) {
+        m_fetchSteps.removeAll(FetchSteps);
+    } else if (step == CountSleep) {
+        m_fetchSteps.removeAll(FetchSleep);
+    } else if (step == CountHeartRate) {
+        m_fetchSteps.removeAll(FetchHeartRate);
+    }
     nextFetchStep();
 }
 
@@ -263,6 +271,10 @@ void DK08NUSService::parseHr(QByteArray value) {
         qDebug() << "hr notify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
     } else if (type == InfoType::History) {
         qDebug() << "hr history <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+        if (hrLength == 0) {
+            fetchStepDone(FetchHeartRate);
+            return;
+        }
         // Kind 0 keeps the previous kind, so heart rate samples do not break sleep.
         m_samples << ActivitySample(hrDate, 0, 0, 0, hr);
         if (hrNum + 1 >= hrLength) {
@@ -454,7 +466,9 @@ void DK08NUSService::parseStepSection(QByteArray value) {
         qDebug() << "  Date:" << qDate;
         qDebug() << "  Step Time:" << time;
         qDebug() << "  Step Type:" << 1;
-        if (en == 0x04) {
+        if (en == 0x04 && ah == 0) {
+            fetchStepDone(FetchSteps);
+        } else if (en == 0x04) {
             // The segment starts at qDate. Heart rate 255 means no measurement.
             int kind = (step > 0) ? ActivityKind::toHuamiRawType(ActivityKind::Activity) : 0;
             m_samples << ActivitySample(qDate, kind, 0, step, 255);
@@ -533,6 +547,10 @@ void DK08NUSService::parseSleep(QByteArray value) {
 
     if (type == InfoType::History) {
         qDebug() << "history >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+        if (sleepLength == 0) {
+            fetchStepDone(FetchSleep);
+            return;
+        }
         // The sleep page counts the time since the previous sample, and samples with kind 0 keep the previous kind.
         // A sample at the start gives the samples inside the record this kind, the one at the end closes it.
         ActivityKind::Type kind = ActivityKind::Unknown;
