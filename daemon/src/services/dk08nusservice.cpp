@@ -18,7 +18,7 @@ DK08NUSService::DK08NUSService(const QString &path, QObject *parent) : QBLEServi
 {
     qDebug() << Q_FUNC_INFO;
 
-    connect(this, &QBLEService::characteristicRead, this, &DK08NUSService::characteristicRead);
+    connect(this, &QBLEService::characteristicChanged, this, &DK08NUSService::characteristicRead);
     enableNotification(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
@@ -104,7 +104,6 @@ void DK08NUSService::getFirmware() {
     msg[2] = 0x05;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::parseFirmware(QByteArray value) {
@@ -146,7 +145,6 @@ void DK08NUSService::getBattery() {
     msg[2] = 0x06;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::getHrInfo(InfoType type) {
@@ -157,7 +155,6 @@ void DK08NUSService::getHrInfo(InfoType type) {
     msg[2] = type;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::parseHr(QByteArray value) {
@@ -192,7 +189,6 @@ void DK08NUSService::getSportInfo(InfoType type) {
     msg[2] = (type >= 0 && type < 3) ? mapping[type] : 0x00;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::parseStep(QByteArray value) {
@@ -286,7 +282,6 @@ void DK08NUSService::getSleepStats() {
     msg[2] = 0x01;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 
 }
 
@@ -327,7 +322,6 @@ void DK08NUSService::getStepSection(InfoType type) {
     msg[2] = (type >= 0 && type < 3) ? mapping[type] : 0x00;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::parseStepSection(QByteArray value) {
@@ -375,16 +369,6 @@ void DK08NUSService::parseStepSection(QByteArray value) {
     if (en == 1) {
         // notify
         qDebug() << "Notify >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-
-    } else if ((en & 0x02) > 0) {
-        // history
-        qDebug() << "history >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-        if (qDate.isValid()) {
-            qDebug() << "next! ===========================";
-            readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
-        } else {
-            qWarning() << "Invalid not reading";
-        }
     }
 
 }
@@ -396,7 +380,6 @@ void DK08NUSService::getSleep(InfoType type) {
     msg[2] = type;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 QDateTime DK08NUSService::bcdToDateTime(QByteArray bytes) {
@@ -466,7 +449,6 @@ void DK08NUSService::confirmSportHistoryData(int num) {
     msg[4] = num & 0xff;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::setInfoAlert(AlertType t) {
@@ -477,7 +459,6 @@ void DK08NUSService::setInfoAlert(AlertType t) {
     msg[2] = t;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 
@@ -506,7 +487,6 @@ void DK08NUSService::setPhoneAlert(const QString &caller) {
     msg.replace(5, callerBytes.length(), callerBytes);
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::setSMSAlertName(int id, AlertType alertType, const QString &name) {
