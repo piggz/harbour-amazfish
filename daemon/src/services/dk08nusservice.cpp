@@ -20,7 +20,6 @@ DK08NUSService::DK08NUSService(const QString &path, QObject *parent) : QBLEServi
     qDebug() << Q_FUNC_INFO;
 
     connect(this, &QBLEService::characteristicChanged, this, &DK08NUSService::characteristicRead);
-    enableNotification(UUID_CHARACTERISTIC_NUS_NOTIFY);
 
     m_fetchTimer.setSingleShot(true);
     m_fetchTimer.setInterval(10000);

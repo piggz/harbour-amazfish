@@ -148,6 +148,8 @@ void DK08Device::initialise()
 
     DK08NUSService *nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));
     if (nus) {
+        // The notify socket closes on disconnect, so acquire it on every connect.
+        nus->acquireNotification(DK08NUSService::UUID_CHARACTERISTIC_NUS_NOTIFY);
         connect(nus, &DK08NUSService::informationChanged, this, &DK08Device::informationChanged, Qt::UniqueConnection);
         connect(nus, &DK08NUSService::historyDownloaded, this, &DK08Device::saveActivitySamples, Qt::UniqueConnection);
         nus->setTime();
