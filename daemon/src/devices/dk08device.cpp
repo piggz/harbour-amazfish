@@ -1,4 +1,5 @@
 #include "dk08device.h"
+#include "amazfishconfig.h"
 #include "dk08nusservice.h"
 #include "dk08wechatservice.h"
 
@@ -16,7 +17,7 @@ Amazfish::Features DK08Device::supportedFeatures() const
 
 Amazfish::DataTypes DK08Device::supportedDataTypes() const
 {
-    return Amazfish::DataType::TYPE_HEART_RATE;
+    return Amazfish::DataType::TYPE_HEART_RATE | Amazfish::DataType::TYPE_ACTIVITY | Amazfish::DataType::TYPE_SLEEP;
 }
 
 QString DK08Device::deviceType() const 
@@ -131,6 +132,7 @@ void DK08Device::initialise()
     DK08NUSService *nus = qobject_cast<DK08NUSService*>(service(DK08NUSService::UUID_SERVICE_NUS));
     if (nus) {
         connect(nus, &DK08NUSService::informationChanged, this, &DK08Device::informationChanged, Qt::UniqueConnection);
+        connect(nus, &DK08NUSService::historyDownloaded, this, &DK08Device::saveActivitySamples, Qt::UniqueConnection);
         nus->setTime();
         nus->getBattery();
         // nus->test();
@@ -240,4 +242,49 @@ void DK08Device::sendWeather(CurrentWeather *weather)
         return;
     }
     nus->sendWeather(weather);
+}
+
+void DK08Device::saveActivitySamples(const QList<ActivitySample>& samples)
+{
+    if (!m_conn || !m_conn->isDatabaseUsed()) {
+        qWarning() << Q_FUNC_INFO << "Database not connected, lost samples:" << samples.count();
+        return;
+    }
+
+    uint userId = qHash(AmazfishConfig::instance()->profileName());
+    uint deviceId = qHash(AmazfishConfig::instance()->pairedAddress());
+
+    KDbTransaction transaction = m_conn->beginTransaction();
+    KDbTransactionGuard tg(transaction);
+
+    KDbFieldList fields;
+    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
+
+    fields.addField(mibandActivity->field("timestamp"));
+    fields.addField(mibandActivity->field("timestamp_dt"));
+    fields.addField(mibandActivity->field("device_id"));
+    fields.addField(mibandActivity->field("user_id"));
+    fields.addField(mibandActivity->field("raw_intensity"));
+    fields.addField(mibandActivity->field("steps"));
+    fields.addField(mibandActivity->field("raw_kind"));
+    fields.addField(mibandActivity->field("heartrate"));
+
+    for (const ActivitySample& sample : samples) {
+        QList<QVariant> values;
+        values << sample.datetime().toMSecsSinceEpoch() / 1000;
+        values << sample.datetime();
+        values << deviceId;
+        values << userId;
+        values << sample.intensity();
+        values << sample.steps();
+        values << sample.kind();
+        values << sample.heartrate();
+
+        if (!m_conn->insertRecord(&fields, values)) {
+            qWarning() << Q_FUNC_INFO << "Error inserting record" << sample;
+            return;
+        }
+    }
+    tg.commit();
+    qDebug() << Q_FUNC_INFO << "Saved samples:" << samples.count();
 }

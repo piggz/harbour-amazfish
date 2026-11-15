@@ -1,6 +1,7 @@
 #include "dk08nusservice.h"
-#include "typeconversion.h"
+#include "activitykind.h"
 #include "amazfishconfig.h"
+#include "typeconversion.h"
 
 /*
  * The Nordic UART Service is a simple GATT-based service with TX and RX characteristics.
@@ -32,6 +33,7 @@ void DK08NUSService::downloadHistory()
         qWarning() << Q_FUNC_INFO << "History download already running";
         return;
     }
+    m_samples.clear();
     m_fetchSteps = { CountSteps, CountSleep, CountHeartRate, FetchSteps, FetchSleep, FetchHeartRate };
     nextFetchStep();
 }
@@ -40,8 +42,9 @@ void DK08NUSService::nextFetchStep()
 {
     if (m_fetchSteps.isEmpty()) {
         m_fetchTimer.stop();
-        qDebug() << Q_FUNC_INFO << "History download done";
-        emit historyDownloaded();
+        qDebug() << Q_FUNC_INFO << "History download done, samples:" << m_samples.count();
+        emit historyDownloaded(m_samples);
+        m_samples.clear();
         return;
     }
 
@@ -247,6 +250,8 @@ void DK08NUSService::parseHr(QByteArray value) {
         qDebug() << "hr notify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
     } else if (type == InfoType::History) {
         qDebug() << "hr history <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+        // Kind 0 keeps the previous kind, so heart rate samples do not break sleep.
+        m_samples << ActivitySample(hrDate, 0, 0, 0, hr);
         if (hrNum + 1 >= hrLength) {
             fetchStepDone(FetchHeartRate);
         } else {
@@ -417,11 +422,13 @@ void DK08NUSService::parseStepSection(QByteArray value) {
         uint calorie = TypeConversion::toUint32(value[9], value[8], value[7], 0);
         uint mileage = TypeConversion::toUint32(value[12], value[11], value[10], 0);
         date = TypeConversion::toUint32(value[16], value[15], value[14], value[13]);
+        // The watch keeps local time and counts it in seconds as if it were UTC.
 #if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
-        qDate = QDateTime::fromSecsSinceEpoch(date);
+        QDateTime utc = QDateTime::fromSecsSinceEpoch(date, Qt::UTC);
 #else
-        qDate = QDateTime::fromTime_t(date);
+        QDateTime utc = QDateTime::fromTime_t(date).toUTC();
 #endif
+        qDate = QDateTime(utc.date(), utc.time());
         int time = static_cast<quint8>(value[17]);
 
         // Directly log the parsed values
@@ -435,6 +442,9 @@ void DK08NUSService::parseStepSection(QByteArray value) {
         qDebug() << "  Step Time:" << time;
         qDebug() << "  Step Type:" << 1;
         if (en == 0x04) {
+            // The segment starts at qDate. Heart rate 255 means no measurement.
+            int kind = (step > 0) ? ActivityKind::toHuamiRawType(ActivityKind::Activity) : 0;
+            m_samples << ActivitySample(qDate, kind, 0, step, 255);
             if (ch + 1 >= ah) {
                 fetchStepDone(FetchSteps);
             } else {
@@ -510,6 +520,18 @@ void DK08NUSService::parseSleep(QByteArray value) {
 
     if (type == InfoType::History) {
         qDebug() << "history >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+        // The sleep page counts the time since the previous sample, and samples with kind 0 keep the previous kind.
+        // A sample at the start gives the samples inside the record this kind, the one at the end closes it.
+        ActivityKind::Type kind = ActivityKind::Unknown;
+        if (sleepType == SleepType::Deep) {
+            kind = ActivityKind::DeepSleep;
+        } else if (sleepType == SleepType::Light) {
+            kind = ActivityKind::LightSleep;
+        } else if (sleepType == SleepType::Awake) {
+            kind = ActivityKind::AwakeSleep;
+        }
+        m_samples << ActivitySample(startTime, ActivityKind::toHuamiRawType(kind), 0, 0, 255);
+        m_samples << ActivitySample(endTime, ActivityKind::toHuamiRawType(kind), 0, 0, 255);
         if (sleepNum + 1 >= sleepLength) {
             fetchStepDone(FetchSleep);
         } else {

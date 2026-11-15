@@ -1,8 +1,9 @@
 #ifndef DK08NUSSERVICE_H
 #define DK08NUSSERVICE_H
 
-#include "qble/qbleservice.h"
+#include "activitysample.h"
 #include "devices/abstractdevice.h"
+#include "qble/qbleservice.h"
 
 #include <QList>
 #include <QTimer>
@@ -129,7 +130,7 @@ public:
     void test();
 
     void downloadHistory();
-    Q_SIGNAL void historyDownloaded();
+    Q_SIGNAL void historyDownloaded(const QList<ActivitySample>& samples);
 
 private:
     // The watch has one upload queue for all history types, so ask one type at a time.
@@ -143,6 +144,7 @@ private:
     };
 
     QList<FetchStep> m_fetchSteps;
+    QList<ActivitySample> m_samples;
     QTimer m_fetchTimer;
 
     void nextFetchStep();
