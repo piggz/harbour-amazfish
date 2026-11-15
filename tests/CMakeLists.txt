@@ -12,3 +12,14 @@ target_compile_definitions(tst_qml PRIVATE QUICK_TEST_SOURCE_DIR="${CMAKE_CURREN
 target_link_libraries(tst_qml PRIVATE Qt${QT_MAJOR}::Qml Qt${QT_MAJOR}::QuickTest)
 add_test(NAME tst_qml COMMAND tst_qml)
 set_tests_properties(tst_qml PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+
+# UI screenshots: the app starts offscreen, opens every page and saves it to screenshots/NAME.png.
+# A QML error on any page fails the test.
+find_program(DBUS_RUN_SESSION dbus-run-session)
+if(DBUS_RUN_SESSION)
+    add_test(NAME ui_screenshots COMMAND ${DBUS_RUN_SESSION} -- $<TARGET_FILE:harbour-amazfish-ui>)
+    set_tests_properties(ui_screenshots PROPERTIES
+        TIMEOUT 180
+        ENVIRONMENT "QT_QPA_PLATFORM=offscreen;LC_ALL=en_US.UTF-8;HOME=${CMAKE_CURRENT_BINARY_DIR}/home;AMAZFISH_SCREENSHOT_STEPS=${CMAKE_CURRENT_SOURCE_DIR}/screenshots.steps;AMAZFISH_SCREENSHOT_DIR=${CMAKE_CURRENT_BINARY_DIR}/screenshots"
+        FAIL_REGULAR_EXPRESSION "is not installed;is not a type;unavailable;ReferenceError;TypeError;Screenshot steps:")
+endif()

@@ -32,6 +32,7 @@ set(SOURCES
     ./src/harbour-amazfish-ui.cpp
     ./src/trackloader.cpp
     ./src/daemoninterface.cpp
+    ./src/screenshotsteps.cpp
 )
 
 set(HEADERS
