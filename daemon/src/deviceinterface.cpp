@@ -667,7 +667,11 @@ void DeviceInterface::setupDatabase()
     }
 
     //get driver
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) // KDb for Qt 6 names the driver after its file
+    m_dbDriver = manager.driver("kdb_sqlitedriver");
+#else
     m_dbDriver = manager.driver("org.kde.kdb.sqlite");
+#endif
     if (!m_dbDriver || manager.result().isError()) {
         qDebug() << Q_FUNC_INFO << manager.result();
         return;
