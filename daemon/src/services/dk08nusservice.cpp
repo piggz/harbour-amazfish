@@ -174,7 +174,7 @@ void DK08NUSService::setTime() {
     msg[5]  = twoDigitsToBCD(now.time().hour());
     msg[6]  = twoDigitsToBCD(now.time().minute());
     msg[7]  = twoDigitsToBCD(now.time().second());
-    msg[8]  = twoDigitsToBCD(now.date().dayOfWeek());
+    msg[8] = twoDigitsToBCD(now.date().dayOfWeek() % 7); // the watch wants 0 for Sunday, Qt gives 7
     msg[19] = getCrc(msg.left(19));
 
     writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
