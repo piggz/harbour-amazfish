@@ -48,7 +48,7 @@ bool  ProtobufFragment::isComplete() {
 
 QSharedPointer<GarminProtobufMessage> ProtobufFragment::getNextChunk(QSharedPointer<GarminProtobufStatusMessage> protobufStatusMessage) {
     int start = protobufStatusMessage->getDataOffset() + MAX_CHUNK_SIZE;
-    int length = std::min(MAX_CHUNK_SIZE, mFragmentBytes.size() - start);
+    int length = std::min(MAX_CHUNK_SIZE, int(mFragmentBytes.size()) - start);
 
     return QSharedPointer<GarminProtobufMessage>(new GarminProtobufMessage(protobufStatusMessage->getCommunicator(),
             protobufStatusMessage->getRequestId(),
