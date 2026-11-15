@@ -25,7 +25,9 @@ DaemonInterface::DaemonInterface(QObject *parent)
 
 DaemonInterface::~DaemonInterface()
 {
-    iface->deleteLater();
+    if (iface) {
+        iface->deleteLater();
+    }
 }
 
 
