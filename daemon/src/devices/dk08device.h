@@ -2,8 +2,9 @@
 #ifndef DK08_DEVICE__H
 #define DK08_DEVICE__H
 
-#include <QObject>
 #include "abstractdevice.h"
+#include "activitysample.h"
+#include <QObject>
 
 class DK08Device : public AbstractDevice
 {
@@ -33,9 +34,9 @@ protected:
 private:
     void initialise();
     void downloadActivityData();
+    void saveActivitySamples(const QList<ActivitySample>& samples);
 
-
-//    Q_SLOT void authenticated(bool ready);
+    //    Q_SLOT void authenticated(bool ready);
 
     void refreshInformation() override;
 
