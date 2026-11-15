@@ -263,7 +263,7 @@ Item {
                     ctx.globalCompositeOperation = "source-over";
                     ctx.clearRect(0,0,width,height);
 
-                    range = width / duration;
+                    range = (duration > 0) ? width / duration : 0;
 
                     var end = points.length;
 
@@ -277,7 +277,7 @@ Item {
 
                     //PGZ
                     if (graphType == bar) {
-                        lineWidth = range * barDuration;
+                        lineWidth = (duration > 0) ? range * barDuration : width / 10;
                     } else {
                         stepX = width / end;
                     }
