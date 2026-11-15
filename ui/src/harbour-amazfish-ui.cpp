@@ -159,5 +159,8 @@ int main(int argc, char *argv[])
 
 #endif
 
-    return app->exec();
+    int result = app->exec();
+    // Delete the QML before daemonInterface goes away, so that its bindings do not see a null object.
+    delete view;
+    return result;
 }
