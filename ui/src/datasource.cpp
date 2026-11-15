@@ -48,7 +48,11 @@ QVariant DataSource::data(const Type type, const QDate &day)
         for (int i = 0; i < 10; i++) {
             QList<DataSource::SleepSession> sessions = calculateSleep(day.addDays(-10 + i));
             QVariantMap pt;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+            pt["x"] = day.addDays(-10 + i).startOfDay().toMSecsSinceEpoch() / 1000;
+#else
             pt["x"] = QDateTime(day.addDays(-10 + i)).toMSecsSinceEpoch() / 1000;
+#endif
 
             float light = 0;
             float deep = 0;
