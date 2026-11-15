@@ -322,17 +322,17 @@ void DeviceInterface::createTables()
         f->setCaption("Timestamp");
         t_activity->addField(f = new KDbField("timestamp_dt", KDbField::DateTime, KDbField::Indexed));
         f->setCaption("Timestamp in Date/Time format");
-        t_activity->addField(f = new KDbField("device_id", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_activity->addField(f = new KDbField("device_id", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Device ID");
-        t_activity->addField(f = new KDbField("user_id", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_activity->addField(f = new KDbField("user_id", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("User ID");
-        t_activity->addField(f = new KDbField("raw_intensity", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_activity->addField(f = new KDbField("raw_intensity", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Raw Intensity");
-        t_activity->addField(f = new KDbField("steps", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_activity->addField(f = new KDbField("steps", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Step Count");
-        t_activity->addField(f = new KDbField("raw_kind", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_activity->addField(f = new KDbField("raw_kind", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Activity Kind");
-        t_activity->addField(f = new KDbField("heartrate", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_activity->addField(f = new KDbField("heartrate", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Heartrate");
 
         if (!m_conn->createTable(t_activity)) {
@@ -361,13 +361,13 @@ void DeviceInterface::createTables()
         t_info->setCaption("Info log");
         t_info->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
         f->setCaption("ID");
-        t_info->addField(f = new KDbField("timestamp", KDbField::Integer, nullptr));
+        t_info->addField(f = new KDbField("timestamp", KDbField::Integer, KDbField::NoConstraints));
         f->setCaption("Timestamp");
         t_info->addField(f = new KDbField("timestamp_dt", KDbField::DateTime));
         f->setCaption("Timestamp in Date/Time format");
-        t_info->addField(f = new KDbField("key", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_info->addField(f = new KDbField("key", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Key based on AbstractDevice::Info");
-        t_info->addField(f = new KDbField("value", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_info->addField(f = new KDbField("value", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Value");
 
         if (!m_conn->createTable(t_info)) {
@@ -398,15 +398,15 @@ void DeviceInterface::createTables()
         t_summary->addField(f = new KDbField("name", KDbField::Text));
         f->setCaption("Name");
 
-        t_summary->addField(f = new KDbField("version", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_summary->addField(f = new KDbField("version", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Version");
 
-        t_summary->addField(f = new KDbField("start_timestamp", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_summary->addField(f = new KDbField("start_timestamp", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("Start Timestamp");
         t_summary->addField(f = new KDbField("start_timestamp_dt", KDbField::DateTime));
         f->setCaption("Start Timestamp in Date/Time format");
 
-        t_summary->addField(f = new KDbField("end_timestamp", KDbField::Integer, nullptr, KDbField::Unsigned));
+        t_summary->addField(f = new KDbField("end_timestamp", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
         f->setCaption("End Timestamp");
         t_summary->addField(f = new KDbField("end_timestamp_dt", KDbField::DateTime));
         f->setCaption("End Timestamp in Date/Time format");
