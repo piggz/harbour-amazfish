@@ -71,7 +71,7 @@ Column {
 
             Connections {
                 target: section
-                onCloseAll: del.expanded = false
+                function onCloseAll() { del.expanded = false; }
             }
         }
 
