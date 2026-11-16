@@ -10,8 +10,8 @@
 #include <QFile>
 #include <QProcess>
 
-#include <KDb3/KDbDriverManager>
-#include <KDb3/KDbTransactionGuard>
+#include <KDbDriverManager>
+#include <KDbTransactionGuard>
 
 #if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
 #include <pulse/simple.h>

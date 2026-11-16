@@ -7,9 +7,9 @@
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
 
-#include <KDb3/KDbDriver>
-#include <KDb3/KDbConnection>
-#include <KDb3/KDbConnectionData>
+#include <KDbConnection>
+#include <KDbConnectionData>
+#include <KDbDriver>
 
 #include "datasource.h"
 #include "amazfish.h"

@@ -4,7 +4,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDateTime>
-#include <KDb3/KDbConnection>
+#include <KDbConnection>
 
 #include "abstractactivitydetailparser.h"
 #include "abstractfetchoperation.h"

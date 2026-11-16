@@ -1,5 +1,5 @@
 #include "activitysummary.h"
-#include <KDb3/KDbTransactionGuard>
+#include <KDbTransactionGuard>
 
 ActivitySummary::ActivitySummary()
 {

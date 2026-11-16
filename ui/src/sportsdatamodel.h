@@ -5,7 +5,7 @@
 #include <QVariant>
 #include <QGeoCoordinate>
 
-#include <KDb3/KDbConnection>
+#include <KDbConnection>
 
 typedef struct {
     int id;

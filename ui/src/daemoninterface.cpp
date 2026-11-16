@@ -3,7 +3,7 @@
 #include <QDBusReply>
 #include <QStandardPaths>
 
-#include <KDb3/KDbDriverManager>
+#include <KDbDriverManager>
 #include <amazfishconfig.h>
 
 DaemonInterface::DaemonInterface(QObject *parent)
