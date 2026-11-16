@@ -5,10 +5,14 @@
 #include <QObject>
 #include "abstractdevice.h"
 
+class QBLELocalApplication;
+class PebblePPoGATTService;
+
 class PebbleDevice : public AbstractDevice
 {
 public:
     explicit PebbleDevice(const QString &pairedName, QObject *parent = 0);
+    ~PebbleDevice() override;
 
     Amazfish::Features supportedFeatures() const override;
     Amazfish::DataTypes supportedDataTypes() const override;
@@ -20,13 +24,23 @@ public:
     AbstractFirmwareInfo *firmwareInfo(const QByteArray &bytes, const QString &path) override;
 
     QString information(Amazfish::Info i) const override;
+    void applyDeviceSetting(Amazfish::Settings s) override;
 
 protected:
     void onPropertiesChanged(const QString &interface, QVariantMap map, const QStringList &list);
     QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
+    enum Endpoint { EndpointTime = 11, EndpointPhoneVersion = 17 };
+
     void initialise();
+    void onSessionOpened();
+    void onMessageReceived(quint16 endpoint, const QByteArray &payload);
+    void sendPhoneVersion();
+    void setTime();
+
+    QBLELocalApplication *m_gattApp = nullptr;
+    PebblePPoGATTService *m_ppogatt = nullptr;
 
 
 //    Q_SLOT void authenticated(bool ready);

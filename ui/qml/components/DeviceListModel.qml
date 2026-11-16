@@ -112,7 +112,7 @@ ListModel {
         deviceType: "Pebble"
         icon: "../pics/devices/pebble.png"
         auth: false
-        pattern: "^Pebble Time"
+        pattern: "^Pebble"
     }
 
     ListElement {

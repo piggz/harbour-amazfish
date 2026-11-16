@@ -114,6 +114,7 @@ set(SOURCES
 ./src/services/miband2service.cpp
 ./src/services/mibandservice.cpp
 ./src/services/pebbleservice.cpp
+./src/services/pebbleppogattservice.cpp
 ./src/services/garmin/communicator_v2.cpp
 ./src/services/garmin/garminnotificationhandler.cpp
 ./src/services/garmin/cobscodec.cpp
@@ -269,6 +270,7 @@ set(HEADERS
 ./src/services/miband2service.h
 ./src/services/mibandservice.h
 ./src/services/pebbleservice.h
+./src/services/pebbleppogattservice.h
 ./src/services/garmin/communicator_v2.h
 ./src/services/garmin/garminnotificationhandler.h
 ./src/services/garmin/cobscodec.h
