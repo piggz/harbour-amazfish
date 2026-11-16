@@ -124,12 +124,12 @@ void DK08NUSService::parseFirmware(QByteArray value) {
 
     } else if (static_cast<quint8>(value[0]) == 0x06) {
 
-        int battery = static_cast<unsigned char>(value[6]);
-        int batteryState = static_cast<unsigned char>(value[7]);
+        int battery = static_cast<unsigned char>(value[7]);
+        int batteryState = static_cast<unsigned char>(value[8]);
 
-        qDebug() << "Battery:" << battery;
+        qDebug() << "Battery:" << battery << "state:" << batteryState;
 
-        emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(batteryState));
+        emit informationChanged(Amazfish::Info::INFO_BATTERY, QString::number(battery));
 
     } else {
         qDebug() << "NUSCallType::FirmwareVersion" << NUSCallType::FirmwareVersion << value[0];
@@ -207,7 +207,7 @@ void DK08NUSService::parseStep(QByteArray value) {
         int hisCount = static_cast<quint8>(value[2]);
 
         QDate day = QDate(bcdToTwoDigits(value[3]) + 2000, bcdToTwoDigits(value[4]), bcdToTwoDigits(value[5]));
-        int num = TypeConversion::toUint32(value[8], value[9], value[10], 0);
+        int num = TypeConversion::toUint32(value[10], value[9], value[8], 0);
 
         qDebug() << "Step history data:";
         qDebug() << "  History length:" << hisLength;
@@ -215,9 +215,9 @@ void DK08NUSService::parseStep(QByteArray value) {
         qDebug() << "  Date:" << day;
         qDebug() << "  Step count:" << num;
     } else {
-        int count = TypeConversion::toUint32(value[3], value[4], value[5], 0);
-        int mileage = TypeConversion::toUint32(value[6], value[7], value[8], 0);
-        int calorie = TypeConversion::toUint32(value[9], value[10], value[11], 0);
+        int count = TypeConversion::toUint32(value[3], value[2], value[1], 0);
+        int mileage = TypeConversion::toUint32(value[6], value[5], value[4], 0);
+        int calorie = TypeConversion::toUint32(value[9], value[8], value[7], 0);
 
         qDebug() << "Step data:";
         qDebug() << "  Step count:" << count;
