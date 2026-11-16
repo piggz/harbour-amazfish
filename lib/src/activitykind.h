@@ -2,6 +2,7 @@
 #define ACTIVITYKINDH
 
 #include <QMap>
+#include <QMultiMap>
 #include <QString>
 #include <qobject.h>
 
@@ -308,8 +309,7 @@ private:
     static const QMap<ActivityKind::Type, QString> m_typeNames;
     static const QMap<uint8_t, ActivityKind::Type> m_zepposTypes;
     static const QMap<int, ActivityKind::Type> m_huamiTypes;
-    static const QMap<int, ActivityKind::Type> m_huamiRawType;
-
+    static const QMultiMap<int, ActivityKind::Type> m_huamiRawType;
 };
 
 Q_DECLARE_METATYPE(ActivityKind::Type)

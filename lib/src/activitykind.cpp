@@ -425,23 +425,22 @@ const QMap<int, ActivityKind::Type> ActivityKind::m_huamiTypes = {
     {105, Skiing}
 };
 
-const QMap<int, ActivityKind::Type> ActivityKind::m_huamiRawType = {
+const QMultiMap<int, ActivityKind::Type> ActivityKind::m_huamiRawType = {
     // https://codeberg.org/Freeyourgadget/Gadgetbridge/src/branch/master/app/src/main/java/nodomain/freeyourgadget/gadgetbridge/devices/huami/HuamiConst.java#L36
-    {-1, Unknown},    // TYPE_UNSET
-    {0, Unknown},     // TYPE_NO_CHANGE
-    {1, Activity},    // TYPE_ACTIVITY
-    {1, Walking},
-    {1, Exercise},
-    {2, Running},     // TYPE_RUNNING
-    {3, NotWorn},     // TYPE_NONWEAR
-    {4, Cycling},     // TYPE_RIDE_BIKE
-    {6, NotWorn},     // TYPE_CHARGING
-    {9, LightSleep},  // TYPE_LIGHT_SLEEP
-    {10, Unknown},    // TYPE_IGNORE
-    {11, DeepSleep},  // TYPE_DEEP_SLEEP
-    {12, AwakeSleep}, // TYPE_WAKE_UP
+    { -1, Unknown }, // TYPE_UNSET
+    { 0, Unknown }, // TYPE_NO_CHANGE
+    { 1, Walking },
+    { 1, Exercise },
+    { 1, Activity }, // TYPE_ACTIVITY, last because value(1) returns the last one inserted
+    { 2, Running }, // TYPE_RUNNING
+    { 3, NotWorn }, // TYPE_NONWEAR
+    { 4, Cycling }, // TYPE_RIDE_BIKE
+    { 6, NotWorn }, // TYPE_CHARGING
+    { 9, LightSleep }, // TYPE_LIGHT_SLEEP
+    { 10, Unknown }, // TYPE_IGNORE
+    { 11, DeepSleep }, // TYPE_DEEP_SLEEP
+    { 12, AwakeSleep }, // TYPE_WAKE_UP
 };
-
 
 ActivityKind::Type ActivityKind::fromBipType(int type)
 {
