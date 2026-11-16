@@ -1,9 +1,16 @@
 # Screenshot steps for the UI, see ui/src/screenshotsteps.h.
-# Not shown: SportPage needs a sport record and the map plugin; SportsActivityKindPage needs options.
+# Not shown: SportsActivityKindPage needs options.
+js app.width = 360
+js app.height = 720
+
 # First start: the app asks for user data first.
 wait 2000
 shot 00-first-run-user-settings
 js AmazfishConfig.profileName = "Test"
+js AmazfishConfig.pairedName = "Demo watch"
+js AmazfishConfig.pairedType = "demo"
+js AmazfishConfig.pairedAddress = "00:00:00:00:00:00"
+js AmazfishConfig.notificationSettings = { "Signal": true, "Telegram": true, "Email": true, "Calendar": false }
 js app.pages.pop()
 wait 1000
 shot 01-first-page
@@ -143,6 +150,13 @@ wait 500
 js app.pages.push("qrc:/qml/pages/SportsSummaryPage.qml")
 wait 1500
 shot 24-SportsSummaryPage
+
+# The first sports record, if there is one (demo device). The map gets a local style, so it loads nothing from the network.
+js (function () { function find(it, name) { if (String(it).indexOf(name) === 0) return it; for (var i = 0; i < it.children.length; i++) { var f = find(it.children[i], name); if (f) return f; } return null; } var item = find(app.pages.currentItem, "ListItemPL"); if (!item) return; item.clicked(); var map = find(app.pages.currentItem, "QQuickItemMapboxGL"); if (map) map.styleJson = '{"version": 8, "sources": {}, "layers": [{"id": "background", "type": "background", "paint": {"background-color": "#e8e4d8"}}]}'; })()
+wait 4000
+shot 24a-SportPage
+js if (String(app.pages.currentItem).indexOf("SportPage") === 0) app.pages.pop()
+wait 500
 js app.pages.pop()
 wait 500
 
