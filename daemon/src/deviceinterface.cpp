@@ -6,6 +6,10 @@
 #include "amazfishconfig.h"
 #include "transliterator.h"
 
+#ifdef DEMO_DEVICE
+#include "demodevice.h"
+#endif
+
 #include <QDir>
 #include <QFile>
 #include <QProcess>
@@ -37,7 +41,12 @@ DeviceInterface::DeviceInterface()
     auto config = AmazfishConfig::instance();
 
     //Create a device object
+#ifdef DEMO_DEVICE
+    Q_UNUSED(config);
+    m_device = new DemoDevice("Demo watch");
+#else
     m_device = DeviceFactory::createDevice(config->pairedName(), config->pairedType());
+#endif
     if (m_device) {
         connect(m_device, &AbstractDevice::connectionStateChanged, this, &DeviceInterface::onConnectionStateChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::message, this, &DeviceInterface::message, Qt::UniqueConnection);
@@ -121,6 +130,13 @@ void DeviceInterface::connectToDevice(bool userInitiated)
 {
     qDebug() << Q_FUNC_INFO;
 
+#ifdef DEMO_DEVICE
+    // The demo watch has no Bluetooth address to look up.
+    Q_UNUSED(userInitiated);
+    m_autoreconnect = true;
+    m_device->connectToDevice();
+#else
+
     auto config = AmazfishConfig::instance();
     QString pairedAddress = config->pairedAddress();
 
@@ -143,6 +159,7 @@ void DeviceInterface::connectToDevice(bool userInitiated)
         m_autoreconnect = true;
         connectToDevice(pairedAddress);
     }
+#endif
 }
 
 void DeviceInterface::reconnectionTimer()
