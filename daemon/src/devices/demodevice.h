@@ -3,8 +3,8 @@
 
 #include "abstractdevice.h"
 
-// A watch without Bluetooth, for screenshots and UI tests. It supports every feature and connects at once.
-// Used when the daemon runs with AMAZFISH_DEMO_DEVICE=1.
+// A watch without Bluetooth, for screenshots and UI tests. It supports every feature, connects at once
+// and fills an empty database with one week of sample data. Built with the CMake option DEMO_DEVICE.
 class DemoDevice : public AbstractDevice {
 public:
     explicit DemoDevice(const QString& pairedName, QObject* parent = nullptr);
@@ -26,6 +26,10 @@ public:
 
 protected:
     QBLEService* drv_createService(const QString& uuid, const QString& path) override;
+
+private:
+    void addSampleData();
+    bool insert(const QString& table, const QStringList& fieldNames, const QList<QVariant>& values);
 };
 
 #endif // DEMODEVICE_H
