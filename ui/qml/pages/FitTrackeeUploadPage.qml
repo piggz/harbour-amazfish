@@ -46,6 +46,8 @@ PagePL {
         }
 
         LabelPL {
+            anchors.left: parent.left
+            anchors.leftMargin: styler.themeHorizontalPageMargin
             text: qsTr("Description")
         }
 
