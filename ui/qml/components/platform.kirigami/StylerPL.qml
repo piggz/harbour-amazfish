@@ -42,9 +42,9 @@ QtObject {
     // navigation items, primary
     property color themePrimaryColor: Kirigami.Theme.textColor
     // navigation items, secondary
-    property color themeSecondaryColor: Kirigami.Theme.textColor
+    property color themeSecondaryColor: Qt.darker(Kirigami.Theme.highlightColor, 2.5)
     // descriptive items, secondary
-    property color themeSecondaryHighlightColor: Kirigami.Theme.disabledTextColor
+    property color themeSecondaryHighlightColor: Qt.darker(Kirigami.Theme.highlightColor, 1.5)
 
     // button sizes
     property real themeButtonWidthLarge: 256
