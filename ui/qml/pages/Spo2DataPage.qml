@@ -30,7 +30,7 @@ PagePL {
             font.pixelSize: styler.themeFontSizeExtraLarge * 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: supportsData(Amazfish.TYPE_SPO2) ? qsTr("%1%").arg(_InfoSpo2) : graphSpo2Normal.lastValue + "%"
+            text: DaemonInterfaceInstance.supportsDataType(Amazfish.TYPE_SPO2) ? qsTr("%1%").arg(_InfoSpo2) : graphSpo2Normal.lastValue + "%"
             horizontalAlignment: Text.AlignHCenter
         }
         DateNavigation {
