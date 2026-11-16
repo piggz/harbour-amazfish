@@ -75,7 +75,7 @@ Item {
             }
             PropertyChanges {
                 target: contentItemWrapper
-                opacity: 0.9
+                opacity: styler.draggedItemOpacity
                 anchors.fill: undefined
                 width: contentItem.width
                 height: contentItem.height

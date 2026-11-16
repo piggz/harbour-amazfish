@@ -25,8 +25,18 @@ public:
         BodyTemperature = 11,
         StressAuto = 12,
         StressManual = 13,
-        StressSummary = 14
+        StressSummary = 14,
+        Activity = 15, // per-sample day data: x, i (intensity %), k (sleep phase), h (heartrate), s (steps)
+        SleepPhases = 16 // per-sample data of the night ending on 'day' (12:00 -> 12:00)
     };
+
+    // Sleep phase classification returned in the 'k' field of Activity / SleepPhases samples
+    enum Phase {
+        PhaseAwake = 0,
+        PhaseLightSleep = 1,
+        PhaseDeepSleep = 2
+    };
+    Q_ENUM(Phase)
     Q_ENUM(Type)
 
     DataSource();
@@ -44,6 +54,7 @@ private:
         long deepSleepDuration;
     };
     QList<SleepSession> calculateSleep(const QDate &day);
+    QList<QVariant> activitySamples(const QDateTime& start, const QDateTime& end);
     bool isSleep(int kind);
 };
 
