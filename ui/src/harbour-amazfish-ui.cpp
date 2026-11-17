@@ -13,8 +13,9 @@
 #include <QQuickWindow>
 #endif
 
-#include <QTranslator>
 #include <QLoggingCategory>
+#include <QStandardPaths>
+#include <QTranslator>
 #ifdef UUITK_EDITION
 #include <QFileInfo>
 #endif
@@ -80,6 +81,15 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("piggz.co.uk");
     QCoreApplication::setApplicationName("harbour-amazfish");
     QGuiApplication::setApplicationDisplayName("Amazfish");
+
+#ifdef PROJECT_GIT_VERSION
+    // Flatpak sets all file times to a constant, so Qt cannot see that QML in qrc changed. One cache per version.
+    if (qEnvironmentVariableIsEmpty("QML_DISK_CACHE_PATH")) {
+        QString cachePath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+        cachePath += QStringLiteral("/qmlcache-") + PROJECT_GIT_VERSION;
+        qputenv("QML_DISK_CACHE_PATH", cachePath.toUtf8());
+    }
+#endif
 
     // disable new QML connection syntax debug messages for as long as
     // older Qt versions (5.12 and older) are supported
