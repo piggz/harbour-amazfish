@@ -90,6 +90,7 @@ public:
         QString appName;
         QString summary;
         QString body;
+        QStringList actions; // labels of the actions the watch can invoke
 
         QVariantMap toQVariantMap() const {
             QVariantMap map;
@@ -98,6 +99,7 @@ public:
             map["appName"] = appName;
             map["summary"] = summary;
             map["body"] = body;
+            map["actions"] = actions;
             return map;
         }
 
@@ -108,6 +110,7 @@ public:
             n.appName = map.value("appName").toString();
             n.summary = map.value("summary").toString();
             n.body = map.value("body").toString();
+            n.actions = map.value("actions").toStringList();
             return n;
         }
     };

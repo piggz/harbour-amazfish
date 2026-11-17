@@ -129,6 +129,8 @@ private:
     Q_SLOT void musicChanged();
     Q_SLOT void deviceEvent(AbstractDevice::Event event);
     Q_SLOT void dismissNotification(quint32 id);
+    Q_SLOT void openNotification(quint32 id);
+    Q_SLOT void invokeNotificationAction(quint32 id, int action);
     Q_SLOT void handleButtonPressed(int presses);
     Q_SLOT void onEventTimer();
     Q_SLOT void backgroundActivityStateChanged();
