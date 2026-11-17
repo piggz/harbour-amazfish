@@ -100,6 +100,8 @@ public:
     Q_SIGNAL void informationChanged(Amazfish::Info key, const QString& val);
     Q_SIGNAL void deviceEvent(Event event);
     Q_SIGNAL void dismissNotification(quint32 id);
+    Q_SIGNAL void openNotification(quint32 id);
+    Q_SIGNAL void invokeNotificationAction(quint32 id, int action);
 
 protected:
     bool m_pairing = false;

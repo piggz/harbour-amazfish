@@ -114,6 +114,13 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
     o.insert("body", notification.body.left(400));
     o.insert("sender", notification.appName.left(40));
     o.insert("tel", "");
+    if (!notification.actions.isEmpty()) { // the watch answers {"t":"notify","n":"INVOKE_ACTION","id":56,"action":0}
+        QJsonArray actions;
+        for (const QString& label : notification.actions) {
+            actions.append(QJsonObject { { "title", label.left(40) } });
+        }
+        o.insert("actions", actions);
+    }
     uart->txJson(o);
 }
 
@@ -589,6 +596,10 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
     } else if (t == "notify") { // dismiss from the watch: {"t":"notify","id":56,"n":"DISMISS"}
         if (json.value("n").toString() == "DISMISS") {
             emit dismissNotification(json.value("id").toInt());
+        } else if (json.value("n").toString() == "OPEN") {
+            emit openNotification(json.value("id").toInt());
+        } else if (json.value("n").toString() == "INVOKE_ACTION") {
+            emit invokeNotificationAction(json.value("id").toInt(), json.value("action").toInt());
         }
     } else if (t == "actfetch") {
         int sample_count = json.value("count").toInt();

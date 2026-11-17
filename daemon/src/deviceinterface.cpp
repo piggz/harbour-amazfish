@@ -45,6 +45,10 @@ DeviceInterface::DeviceInterface()
         connect(m_device, &AbstractDevice::informationChanged, this, &DeviceInterface::slot_informationChanged, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::deviceEvent, this, &DeviceInterface::deviceEvent, Qt::UniqueConnection);
         connect(m_device, &AbstractDevice::dismissNotification, this, &DeviceInterface::dismissNotification, Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::openNotification, this, &DeviceInterface::openNotification,
+            Qt::UniqueConnection);
+        connect(m_device, &AbstractDevice::invokeNotificationAction, this, &DeviceInterface::invokeNotificationAction,
+            Qt::UniqueConnection);
     }
 
     //Create the DBUS HRM Interface
@@ -240,6 +244,15 @@ HRMService *DeviceInterface::hrmService() const
     return qobject_cast<HRMService*>(m_device->service(HRMService::UUID_SERVICE_HRM));
 }
 
+// actions shown on the watch: "default" and "app" are the tap on the notification, the watch has "Open" for it
+static QStringList watchActions(watchfish::Notification* notification)
+{
+    QStringList names = notification->actions();
+    names.removeAll("default");
+    names.removeAll("app");
+    return names;
+}
+
 void DeviceInterface::onNotification(watchfish::Notification *notification)
 {
     Amazfish::WatchNotification n;
@@ -248,6 +261,9 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
     n.appName = notification->appName();
     n.summary = notification->summary();
     n.body = notification->body();
+    for (const QString& name : watchActions(notification)) {
+        n.actions.append(notification->actionLabel(name));
+    }
 
     QVariantMap notificationSettings = AmazfishConfig::instance()->notificationSettings();
 
@@ -912,6 +928,28 @@ void DeviceInterface::dismissNotification(quint32 id) {
     watchfish::Notification *n  = m_notificationMonitor.getNotification(id);
     if (n) {
         n->close();
+    }
+}
+
+void DeviceInterface::openNotification(quint32 id)
+{
+    qDebug() << Q_FUNC_INFO << id;
+    watchfish::Notification* n = m_notificationMonitor.getNotification(id);
+    if (n) {
+        n->invokeAction("default");
+        n->close();
+    }
+}
+
+void DeviceInterface::invokeNotificationAction(quint32 id, int action)
+{
+    qDebug() << Q_FUNC_INFO << id << action;
+    watchfish::Notification* n = m_notificationMonitor.getNotification(id);
+    if (n) {
+        QStringList names = watchActions(n);
+        if (action >= 0 && action < names.size()) {
+            n->invokeAction(names.at(action));
+        }
     }
 }
 
