@@ -179,8 +179,6 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
         qreal min_temp = main.value("temp_min").toDouble();
         qreal max_temp = main.value("temp_max").toDouble();
         int wind_speed = 0;
-        f.setWindMaxSpeed(0);
-        f.setWindMinSpeed(255);
         if (obj.contains("rain")) {
             QJsonObject rain = obj.value("rain").toObject();
             total_rain += rain.value("3h").toDouble();
