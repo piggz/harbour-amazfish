@@ -45,67 +45,6 @@ struct Fragment {
 };
 
 // =============================================================================
-// MessageSender / MessageReceiver
-// =============================================================================
-
-class MlrMessageSender : public QObject {
-    Q_OBJECT
-public:
-    using QObject::QObject;
-    MlrMessageSender(QSharedPointer<QBLECharacteristic> sendChar);
-    virtual ~MlrMessageSender() = default;
-
-public slots:
-    Result<void> sendPacket(const QString& taskName, const QByteArray& packet);
-
-signals:
-    void sendSucceeded(const QString& taskName);
-    void sendFailed(const QString& taskName, const QString& error);
-
-private:
-
-    QSharedPointer<QBLECharacteristic> m_sendChar;
-};
-
-// =============================================================================
-// Callbacks
-// =============================================================================
-
-class GfdiMessageCallback : public QObject{
-public:
-    GfdiMessageCallback() {};
-     ~GfdiMessageCallback() = default;
-     void onMessage(const QByteArray& message);
-};
-
-
-// Receiver is async-like via queued slot.
-class MlrMessageReceiver : public QObject {
-    Q_OBJECT
-public:
-    using QObject::QObject;
-    MlrMessageReceiver(QSharedPointer<GfdiMessageCallback> syncCb);
-
-    virtual ~MlrMessageReceiver() = default;
-
-public slots:
-    void onDataReceived(const QByteArray& data);
-    void onDataDecoded(const QByteArray &decoded);
-
-
-
-signals:
-    void gfdiDecoded(const QByteArray& gfdiMessage);
-    void receiverError(const QString& error);
-
-private:
-
-    QSharedPointer<GfdiMessageCallback> m_syncCb;
-
-    CobsCoDec m_codec;
-};
-
-// =============================================================================
 // MlrCommunicator
 // =============================================================================
 class MlrCommunicator : public QObject {
@@ -113,79 +52,50 @@ class MlrCommunicator : public QObject {
 public:
     explicit MlrCommunicator(quint8 handle,
                              int maxPacketSize,
-                             QSharedPointer<MlrMessageSender> sender,
-                             QSharedPointer<MlrMessageReceiver> receiver,
+                             QSharedPointer<QBLECharacteristic> sendChar,
                              QObject* parent=nullptr);
 
     void setMaxPacketSize(int maxPacketSize);
-
-    Result<void> start();
-
     void sendMessage(const QString& taskName, const QByteArray& message);
-
     void onPacketReceived(const QByteArray& packet);
-
-
-    void close();
-
     ~MlrCommunicator() override;
 
 signals:
-
     void errorOccurred(const QString& msg);
+    void gfdiDecoded(const QByteArray& gfdiMessage);
 
 private slots:
     void onRetransmissionTimeout();
+    void onAckTimeout();
+    void onMessageDecoded(const QByteArray &decoded);
 
 private:
-    struct State {
-        int handle {0};
-        int maxPacketSize {20};
-
-        int lastSendAck {0};
-        int nextSendSeq {0};
-        int nextRcvSeq {0};
-        int lastRcvAck {0};
-
-        int maxNumUnackedSend {INITIAL_MAX_UNACKED_SEND};
-        int retransmissionTimeoutMs {INITIAL_RETRANSMISSION_TIMEOUT_MS};
-
-        QQueue<Fragment> fragmentQueue;
-        //QList<Fragment> sentFragments;
-
-        QVector<std::optional<Fragment>> sentFragments;
-
-        bool paused {false};
-
-        State() {
-            //sentFragments.resize(int(MAX_SEQ_NUM) + 1);
-        }
-    };
-
-    QByteArray createPacket(int reqNum, int seqNum, const QByteArray& data);
-
-
+    QByteArray processPacket(int reqNum, int seqNum, const QByteArray&  data) ;
     void processAck(int reqNum);
-
     void scheduleAck();
-
     void sendAckPacket();
-
     void runProtocolOnce();
-
     void startRetransmissionTimer();
 
 
+    QTimer* mRetransmissionTimer;
+    QTimer* mAckTimer;
+    QByteArray createPacket(int reqNum, int seqNum, const QByteArray& packet);
+    QSharedPointer<QBLECharacteristic> mSendChar;
+    CobsCoDec mCobsCodec;
 
-    mutable QMutex m_mutex;
-    State m_state;
-
-    QSharedPointer<MlrMessageSender> m_sender;
-    QSharedPointer<MlrMessageReceiver> m_receiver;
-    QTimer* m_ackTimer;
-    QTimer* m_retransmissionTimer;
-
-    bool m_running {false};
+    int mHandle {0};
+    int mMaxPacketSize {20};
+    int mLastSendAck {0};
+    int mNextSendSeq {0};
+    int mNextRcvSeq {0};
+    int mLastRcvAck {0};
+    int mMaxNumUnackedSend {INITIAL_MAX_UNACKED_SEND};
+    int mRetransmissionTimeoutMs {INITIAL_RETRANSMISSION_TIMEOUT_MS};
+    QQueue<Fragment> mFragmentQueue;
+    QVector<std::optional<Fragment>> mSentFragments;
+    bool mPaused {false};
+    QMutex mLocker;
 };
 
 
