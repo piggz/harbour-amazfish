@@ -37,6 +37,7 @@
 class QNetworkReply;
 class QNetworkAccessManager;
 
+// Units as OpenWeatherMap 2.5 sends them without "units": openweathermap.org/current, openweathermap.org/forecast5
 class CurrentWeather : public QObject
 {
     Q_OBJECT
@@ -80,8 +81,8 @@ public:
         uint8_t humidity() const;
         void setHumidity(uint8_t newHumidity);
 
-        uint8_t pressure() const;
-        void setPressure(uint8_t newPressure);
+        int pressure() const;
+        void setPressure(int newPressure);
 
         uint8_t windMinSpeed() const;
         void setWindMinSpeed(uint8_t newWindMinSpeed);
@@ -93,21 +94,21 @@ public:
         void setWindDirection(uint8_t newWindDirection);
 
     private:
-        qreal m_precipProbability = 0;
+        qreal m_precipProbability = 0; // 0..1 (pop)
         qreal m_temperature = 0;
-        qreal m_minTemperature = 0;
-        qreal m_maxTemperature = 0;
-        int m_weatherCode = 0;
+        qreal m_minTemperature = 0; // K
+        qreal m_maxTemperature = 0; // K
+        int m_weatherCode = 0; // OpenWeatherMap condition code
         QString m_description;
-        qlonglong m_dateTime = 0;
-        uint8_t m_clouds = 0;
-        uint8_t m_windMinSpeed = 0;
-        uint8_t m_windMaxSpeed = 0;
-        uint8_t m_windDirection = 0;
-        uint8_t m_rainMMDay = 0;
-        uint8_t m_snowMMDay = 0;
-        uint8_t m_humidity = 0;
-        uint8_t m_pressure = 0;
+        qlonglong m_dateTime = 0; // Unix time, UTC
+        uint8_t m_clouds = 0; // %
+        uint8_t m_windMinSpeed = 0; // m/s
+        uint8_t m_windMaxSpeed = 0; // m/s
+        uint8_t m_windDirection = 0; // degrees
+        uint8_t m_rainMMDay = 0; // mm
+        uint8_t m_snowMMDay = 0; // mm
+        uint8_t m_humidity = 0; // %
+        int m_pressure = 0; // hPa
         QString m_weatherIcon;
        
     };
@@ -207,21 +208,21 @@ private:
     City *m_city = nullptr;
     QString m_language;
 
-    qreal m_temperature = 0;
-    qreal m_minTemperature = 0;
-    qreal m_maxTemperature = 0;
-    int m_weatherCode = 0;
+    qreal m_temperature = 0; // K
+    qreal m_minTemperature = 0; // K
+    qreal m_maxTemperature = 0; // K
+    int m_weatherCode = 0; // OpenWeatherMap condition code
     QString m_weatherIcon;
 
-    qreal m_windDeg = 0;
-    qreal m_windSpeed = 0;
-    int m_humidity = 0;
-    int m_clouds = 0;
+    qreal m_windDeg = 0; // degrees
+    qreal m_windSpeed = 0; // m/s
+    int m_humidity = 0; // %
+    int m_clouds = 0; // %
 
     QString m_description;
-    qlonglong m_dateTime = 0;
-    qlonglong m_sunrise = 0;
-    qlonglong m_sunset = 0;
+    qlonglong m_dateTime = 0; // Unix time, UTC
+    qlonglong m_sunrise = 0; // Unix time, UTC
+    qlonglong m_sunset = 0; // Unix time, UTC
 
     QList<Forecast> m_forecasts;
     QList<Hour> m_hours;

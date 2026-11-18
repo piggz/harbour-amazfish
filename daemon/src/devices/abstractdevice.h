@@ -20,7 +20,6 @@ class AbstractDevice : public QBLEDevice
     Q_OBJECT
 
 public:
-
     enum Event {
         EVENT_MUSIC_STOP,
         EVENT_MUSIC_PLAY,
@@ -35,7 +34,8 @@ public:
         EVENT_ANSWER_CALL,
         EVENT_IGNORE_CALL,
         EVENT_FIND_PHONE,
-        EVENT_CANCEL_FIND_PHONE
+        EVENT_CANCEL_FIND_PHONE,
+        EVENT_WEATHER_REQUEST
     };
     Q_ENUM(Event)
 

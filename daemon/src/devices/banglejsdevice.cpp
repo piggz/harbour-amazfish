@@ -384,7 +384,7 @@ void BangleJSDevice::sendWeather(CurrentWeather *weather)
         // weather report (current temp, days highest temp, days lowest temp, current humidity, rain/precip probability, UV Index, current condition code, current condition text, wind speed, wind direction)
 
         o.insert("t", "weather");
-        o.insert("v","1");
+        o.insert("v", 1);
         o.insert("temp", weather->temperature());
         o.insert("hi", weather->maxTemperature());
         o.insert("lo", weather->minTemperature());
@@ -395,7 +395,7 @@ void BangleJSDevice::sendWeather(CurrentWeather *weather)
         // uv // Math.round(weatherSpec.getUvIndex() *10)/10);
         o.insert("code", weather->weatherCode());
         o.insert("txt", weather->description());
-        o.insert("wind", weather->windSpeed());
+        o.insert("wind", weather->windSpeed() * 3.6); // m/s to km/h
         o.insert("wdir", weather->windDeg());
         o.insert("loc", weather->city()->name());
 
@@ -543,6 +543,8 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 	qDebug() << "Calendar IDs from device:" << deviceIds;
 	syncCalendarWithDeviceIds(deviceIds);
 
+    } else if (t == "weather") { // the weather app asks for an update
+        emit deviceEvent(AbstractDevice::EVENT_WEATHER_REQUEST);
     } else if (t == "music") {
         QString music_action = json.value("n").toString();
 

@@ -941,6 +941,9 @@ void DeviceInterface::deviceEvent(AbstractDevice::Event event)
         m_findDeviceTimer->stop();
         m_playedSounds = 0;
         break;
+    case AbstractDevice::EVENT_WEATHER_REQUEST:
+        m_currentWeather.refresh();
+        break;
     }
 }
 

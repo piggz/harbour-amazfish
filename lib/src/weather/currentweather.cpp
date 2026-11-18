@@ -180,8 +180,6 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
         qreal min_temp = main.value("temp_min").toDouble();
         qreal max_temp = main.value("temp_max").toDouble();
         int wind_speed = 0;
-        f.setWindMaxSpeed(0);
-        f.setWindMinSpeed(255);
         if (obj.contains("rain")) {
             QJsonObject rain = obj.value("rain").toObject();
             total_rain += rain.value("3h").toDouble();
@@ -275,7 +273,7 @@ void CurrentWeather::request(const QString &connection, const QVariantMap &argum
     //        return;
     //    }
 
-    QUrl url (QString(QLatin1String("http://api.openweathermap.org/data/2.5/%1")).arg(connection));
+    QUrl url(QString(QLatin1String("https://api.openweathermap.org/data/2.5/%1")).arg(connection));
     QUrlQuery query;
     auto end = arguments.cend();
     for (auto it = arguments.cbegin(); it != end; ++it)
@@ -501,12 +499,12 @@ void CurrentWeather::Forecast::setHumidity(uint8_t newHumidity)
     m_humidity = newHumidity;
 }
 
-uint8_t CurrentWeather::Forecast::pressure() const
+int CurrentWeather::Forecast::pressure() const
 {
     return m_pressure;
 }
 
-void CurrentWeather::Forecast::setPressure(uint8_t newPressure)
+void CurrentWeather::Forecast::setPressure(int newPressure)
 {
     m_pressure = newPressure;
 }
