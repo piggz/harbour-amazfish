@@ -6,6 +6,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QtGlobal>
 
+#include <QtCore/QObject>
+
 #include <optional>
 #include <utility>
 #include <variant>
@@ -420,6 +422,10 @@ void overwriteU16le(QByteArray& out, int off, quint16 v);
 void overwriteU32le(QByteArray& out, int off, quint32 v);
 void overwriteU64le(QByteArray& out, int off, quint64 v);
 
+// FIT value writers. They encode a value for one FIT field, so they also apply
+// the FIT invalid value when the input is out of range or unknown.
+void writeTemperatureC(QByteArray& out, int celsius);
+void writePercent(QByteArray& out, int percent);
 
 // Callback for service lifecycle events
 class ServiceCallback : public QObject{

@@ -112,6 +112,43 @@ public:
        
     };
 
+    // One entry of the API's forecast list. The API has no hourly resolution:
+    // consecutive entries are 3 hours apart. The daily fold in handleForecast()
+    // keeps only day extremes and the midday description, so this holds what
+    // the fold throws away.
+    class Hour {
+
+    public:
+        qlonglong dateTime() const;
+        void setDateTime(qlonglong dateTime);
+
+        qreal temperature() const;
+        void setTemperature(qreal temperature);
+
+        int humidity() const;
+        void setHumidity(int humidity);
+
+        qreal windSpeed() const;
+        void setWindSpeed(qreal windSpeed);
+
+        qreal windDirection() const;
+        void setWindDirection(qreal windDirection);
+
+        qreal precipProbability() const;
+        void setPrecipProbability(qreal precipProbability);
+
+        int weatherCode() const;
+        void setWeatherCode(int weatherCode);
+
+    private:
+        qlonglong m_dateTime = 0;
+        qreal m_temperature = 0;
+        int m_humidity = 0;
+        qreal m_windSpeed = 0;
+        qreal m_windDirection = 0;
+        qreal m_precipProbability = 0;
+        int m_weatherCode = 0;
+    };
 
     City * city() const;
     Q_INVOKABLE void setCity(City *city);
@@ -149,6 +186,9 @@ public:
     int forecastCount() const;
     const Forecast& forecast(int f) const;
 
+    int hourCount() const;
+    const Hour& hour(int h) const;
+
 signals:
     void ready();
 
@@ -184,6 +224,7 @@ private:
     qlonglong m_sunset = 0;
 
     QList<Forecast> m_forecasts;
+    QList<Hour> m_hours;
 };
 
 QDebug operator<<(QDebug debug, const CurrentWeather::Forecast &forecast);

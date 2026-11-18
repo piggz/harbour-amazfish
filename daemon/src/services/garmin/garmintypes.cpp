@@ -292,3 +292,24 @@ void overwriteU64le(QByteArray& out, int off, quint64 v) {
     out[off+6] = char((v >> 48) & 0xFF);
     out[off+6] = char((v >> 56) & 0xFF);
 }
+
+void writeTemperatureC(QByteArray& out, int celsius)
+{
+    // 0x7F is the FIT invalid value for SINT8. A value outside a credible
+    // outdoor range is a missing reading, not weather, so report it as unknown
+    // instead of sending the watch a temperature of -100 or +100 Celsius.
+    if (celsius < -80 || celsius > 80) {
+        out.append(char(0x7F));
+        return;
+    }
+    out.append(char(qint8(celsius)));
+}
+
+void writePercent(QByteArray& out, int percent)
+{
+    if (percent < 0) {
+        out.append(char(0xFF)); // FIT invalid value for UINT8
+        return;
+    }
+    out.append(char(quint8(qBound(0, percent, 100))));
+}

@@ -142,6 +142,7 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
     }
 
     m_forecasts.clear();
+    m_hours.clear();
 
     QJsonObject object = document.object();
     QJsonArray list = object.value("list").toArray();
@@ -196,6 +197,16 @@ void CurrentWeather::handleForecast(const QByteArray &reply)
         }
 
 //        qDebug() << "Forecast on " << dt << d << t << min_temp << max_temp << desc << code << "Hour:" << t.hour();
+
+        Hour h;
+        h.setDateTime(dt);
+        h.setTemperature(main.value("temp").toDouble());
+        h.setHumidity(main.value("humidity").toInt());
+        h.setWindSpeed(obj.value("wind").toObject().value("speed").toDouble());
+        h.setWindDirection(obj.value("wind").toObject().value("deg").toDouble());
+        h.setPrecipProbability(precipProbability);
+        h.setWeatherCode(code);
+        m_hours << h;
 
         if (d > last_day) {
             if (last_day != QDate::currentDate()) {
@@ -538,6 +549,86 @@ QString CurrentWeather::Forecast::description() const
 qlonglong CurrentWeather::Forecast::dateTime() const
 {
     return m_dateTime;
+}
+
+qlonglong CurrentWeather::Hour::dateTime() const
+{
+    return m_dateTime;
+}
+
+void CurrentWeather::Hour::setDateTime(qlonglong dateTime)
+{
+    m_dateTime = dateTime;
+}
+
+qreal CurrentWeather::Hour::temperature() const
+{
+    return m_temperature;
+}
+
+void CurrentWeather::Hour::setTemperature(qreal temperature)
+{
+    m_temperature = temperature;
+}
+
+int CurrentWeather::Hour::humidity() const
+{
+    return m_humidity;
+}
+
+void CurrentWeather::Hour::setHumidity(int humidity)
+{
+    m_humidity = humidity;
+}
+
+qreal CurrentWeather::Hour::windSpeed() const
+{
+    return m_windSpeed;
+}
+
+void CurrentWeather::Hour::setWindSpeed(qreal windSpeed)
+{
+    m_windSpeed = windSpeed;
+}
+
+qreal CurrentWeather::Hour::windDirection() const
+{
+    return m_windDirection;
+}
+
+void CurrentWeather::Hour::setWindDirection(qreal windDirection)
+{
+    m_windDirection = windDirection;
+}
+
+qreal CurrentWeather::Hour::precipProbability() const
+{
+    return m_precipProbability;
+}
+
+void CurrentWeather::Hour::setPrecipProbability(qreal precipProbability)
+{
+    m_precipProbability = precipProbability;
+}
+
+int CurrentWeather::Hour::weatherCode() const
+{
+    return m_weatherCode;
+}
+
+void CurrentWeather::Hour::setWeatherCode(int weatherCode)
+{
+    m_weatherCode = weatherCode;
+}
+
+int CurrentWeather::hourCount() const
+{
+    return m_hours.size();
+}
+
+const CurrentWeather::Hour& CurrentWeather::hour(int h) const
+{
+    return m_hours.at(h);
 }
 
 int CurrentWeather::forecastCount() const

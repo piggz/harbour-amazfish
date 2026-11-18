@@ -29,6 +29,8 @@ const char* CommunicatorV2::UUID_SERVICE_GARMIN_V0_RECV = "4acbcd28-7425-868e-f4
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_V1_SEND = "6a4e4c80-667b-11e3-949a-0800200c9a66";
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_V1_RECV = "6a4ecd28-667b-11e3-949a-0800200c9a66";
 
+// How long to wait for the watch to answer one step of a weather exchange.
+static const int WEATHER_ACK_TIMEOUT_MS = 5000;
 
 // =============================================================================
 // CommunicatorV2
@@ -397,10 +399,98 @@ void CommunicatorV2::onFilterStatusReceived(const FilterStatusMessage& msg) {
 }
 
 void CommunicatorV2::onWeatherRequestReceived(const WeatherRequestMessage& msg) {
-    qDebug() << Q_FUNC_INFO;
-
+    qDebug() << Q_FUNC_INFO << "Garmin: Watch asks for weather, format" << msg.format << "hours" << msg.hoursOfForecast;
+    // Gadgetbridge answers every incoming GFDI message with a status, and its
+    // weather works on the same watches. Without this the watch may close its
+    // weather exchange before the records arrive.
+    QByteArray r;
+    writeU16le(r, quint16(MessageId::WeatherRequest));
+    r.append(char(Status::Ack));
+    sendMessage("WEATHER REQUEST ACK", wrapInGfdiEnvelope(MessageId::Response, r));
+    emit weatherRequestReceived();
 }
 
+bool CommunicatorV2::sendWeatherFrames(const QByteArray& definitionPayload, const QByteArray& dataPayload)
+{
+    if (definitionPayload.isEmpty() || dataPayload.isEmpty()) {
+        qDebug() << Q_FUNC_INFO << "Garmin: No weather data to send";
+        return false;
+    }
+    // The periodic weather update also comes while disconnected.
+    if (!mConnected) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Not connected, weather update dropped";
+        return false;
+    }
+    if (mWeatherState != WeatherTransferState::Idle) {
+        qDebug() << Q_FUNC_INFO << "Garmin: Weather exchange still running, ignoring request";
+        return false;
+    }
+    if (!mWeatherTimeout) {
+        mWeatherTimeout = new QTimer(this);
+        mWeatherTimeout->setSingleShot(true);
+        connect(mWeatherTimeout, &QTimer::timeout, this, &CommunicatorV2::onWeatherTransferTimeout);
+    }
+
+    mWeatherDataPayload = dataPayload;
+    mWeatherState = WeatherTransferState::WaitingDefinitionAck;
+
+    const QByteArray definitionMessage = wrapInGfdiEnvelope(MessageId::FitDefinition, definitionPayload);
+    if (!sendMessage("FIT DEFINITION", definitionMessage)) {
+        resetWeatherTransfer();
+        return false;
+    }
+    mWeatherTimeout->start(WEATHER_ACK_TIMEOUT_MS);
+    return true;
+}
+
+void CommunicatorV2::onFitStatusReceived(MessageId messageId, quint8 status, quint8 subStatus)
+{
+    if (mWeatherState == WeatherTransferState::Idle) {
+        return;
+    }
+    qDebug() << Q_FUNC_INFO << "Garmin: FIT status for" << messageIdToString(static_cast<quint16>(messageId)).value() << "status" << status << "substatus" << subStatus;
+
+    if (messageId == MessageId::FitDefinition) {
+        if (mWeatherState != WeatherTransferState::WaitingDefinitionAck) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Late definition status, dropping the queued records";
+            resetWeatherTransfer();
+            return;
+        }
+        // The sub status is logged, not acted on: the records follow either
+        // way.
+        mWeatherState = WeatherTransferState::WaitingDataAck;
+        const QByteArray dataMessage = wrapInGfdiEnvelope(MessageId::FitData, mWeatherDataPayload);
+        if (!sendMessage("FIT DATA", dataMessage)) {
+            resetWeatherTransfer();
+            return;
+        }
+        mWeatherTimeout->start(WEATHER_ACK_TIMEOUT_MS);
+        return;
+    }
+
+    if (messageId == MessageId::FitData) {
+        if (mWeatherState != WeatherTransferState::WaitingDataAck) {
+            return;
+        }
+        qDebug() << Q_FUNC_INFO << "Garmin: Watch accepted the weather records";
+        resetWeatherTransfer();
+    }
+}
+
+void CommunicatorV2::resetWeatherTransfer()
+{
+    if (mWeatherTimeout) {
+        mWeatherTimeout->stop();
+    }
+    mWeatherDataPayload.clear();
+    mWeatherState = WeatherTransferState::Idle;
+}
+
+void CommunicatorV2::onWeatherTransferTimeout()
+{
+    qDebug() << Q_FUNC_INFO << "Garmin: Watch did not answer the weather transfer, giving up";
+    resetWeatherTransfer();
+}
 
 void CommunicatorV2::onProtobufMessageReceived( const QByteArray& data)
 {
@@ -912,6 +1002,7 @@ void CommunicatorV2::dispose() {
     mSendQueue.clear();
     mSendInProgress = false;
     mSendRetries = 0;
+    resetWeatherTransfer();
     mState->mlrCommunicators.clear();
     mState->serviceByHandle.clear();
     mState->serviceCallbacks.clear();

@@ -169,6 +169,7 @@ private:
     void sendWeather(CurrentWeather *weather);
     Q_SLOT void onCitiesChanged();
     Q_SLOT void onWeatherReady();
+    Q_SLOT void onWeatherRequested();
 
     //Navigation
     NavigationInterface m_navigationInterface;

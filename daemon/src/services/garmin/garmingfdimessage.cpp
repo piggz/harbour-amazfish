@@ -134,10 +134,11 @@ void GarminGfdiMessage::parse(const QByteArray& data) {
     case MessageId::Synchronization:
         parseSynchronization(data.mid(offset));
         return;
+        */
     case MessageId::WeatherRequest:
+        // No status reply here: the FIT definition that follows is the answer.
         parseWeatherRequest(data.mid(offset));
         return;
-        */
 
     case MessageId::MusicControlCapabilities: {
         // The payload byte is a bitmask of what the watch can display.
