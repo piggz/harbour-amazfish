@@ -490,12 +490,12 @@ void CurrentWeather::Forecast::setHumidity(uint8_t newHumidity)
     m_humidity = newHumidity;
 }
 
-uint8_t CurrentWeather::Forecast::pressure() const
+int CurrentWeather::Forecast::pressure() const
 {
     return m_pressure;
 }
 
-void CurrentWeather::Forecast::setPressure(uint8_t newPressure)
+void CurrentWeather::Forecast::setPressure(int newPressure)
 {
     m_pressure = newPressure;
 }

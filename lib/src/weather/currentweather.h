@@ -81,8 +81,8 @@ public:
         uint8_t humidity() const;
         void setHumidity(uint8_t newHumidity);
 
-        uint8_t pressure() const;
-        void setPressure(uint8_t newPressure);
+        int pressure() const;
+        void setPressure(int newPressure);
 
         uint8_t windMinSpeed() const;
         void setWindMinSpeed(uint8_t newWindMinSpeed);
@@ -108,7 +108,7 @@ public:
         uint8_t m_rainMMDay = 0; // mm
         uint8_t m_snowMMDay = 0; // mm
         uint8_t m_humidity = 0; // %
-        uint8_t m_pressure = 0; // hPa
+        int m_pressure = 0; // hPa
         QString m_weatherIcon;
        
     };
