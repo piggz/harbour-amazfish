@@ -309,7 +309,10 @@ void CommunicatorV2::onCharacteristicChanged(const QString &characteristic, cons
         return;
     }
 
-    if (mIsReliable) {
+    Service service;
+    service = mState->serviceByHandle.value(handle, Service::GFDI);
+
+    if (mIsReliable && (service==Service::GFDI)) {
         QSharedPointer<MlrCommunicator> mlr;
 
         if (data.size() >= 2 && (quint8(data[0]) & 0x80) != 0) {
