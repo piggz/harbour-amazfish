@@ -395,7 +395,7 @@ void BangleJSDevice::sendWeather(CurrentWeather *weather)
         // uv // Math.round(weatherSpec.getUvIndex() *10)/10);
         o.insert("code", weather->weatherCode());
         o.insert("txt", weather->description());
-        o.insert("wind", weather->windSpeed());
+        o.insert("wind", weather->windSpeed() * 3.6); // m/s to km/h
         o.insert("wdir", weather->windDeg());
         o.insert("loc", weather->city()->name());
 
