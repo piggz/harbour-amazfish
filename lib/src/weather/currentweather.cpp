@@ -264,7 +264,7 @@ void CurrentWeather::request(const QString &connection, const QVariantMap &argum
     //        return;
     //    }
 
-    QUrl url (QString(QLatin1String("http://api.openweathermap.org/data/2.5/%1")).arg(connection));
+    QUrl url(QString(QLatin1String("https://api.openweathermap.org/data/2.5/%1")).arg(connection));
     QUrlQuery query;
     auto end = arguments.cend();
     for (auto it = arguments.cbegin(); it != end; ++it)
