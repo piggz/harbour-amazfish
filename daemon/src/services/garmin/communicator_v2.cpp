@@ -41,17 +41,12 @@ CommunicatorV2::CommunicatorV2(const QString &path, QObject* parent)
 {
     qDebug() << "Garmin: Service created for " << path;
     connect(this, &QBLEService::characteristicRead, this, &CommunicatorV2::characteristicRead);
-    mMessageCallback =QSharedPointer<GfdiMessageCallback>::create();
     // add protobuf Handler
     mProtobufHandler = QSharedPointer<ProtobufHandler>(new ProtobufHandler(this));
 
     mState->cobsCodec=new CobsCoDec(this);
 
     onConnectionStateChange(true);
-}
-
-void CommunicatorV2::setMessageCallback(QSharedPointer<GfdiMessageCallback> cb) {
-    mMessageCallback = std::move(cb);
 }
 
 void CommunicatorV2::registerServiceCallback(Service service, QSharedPointer<ServiceCallback> cb) {
@@ -661,7 +656,13 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
     mState->handleByService.insert(service, handle);
 
     // Create MLR communicator if reliable is enabled
-    if ((reliable != 0) && !mState->mlrCommunicators.contains(mlrHandle)) {
+    if (reliable != 0)  {
+        if (mState->mlrCommunicators.contains(mlrHandle))
+        {
+            QSharedPointer<MlrCommunicator> existingMlr = mState->mlrCommunicators[mlrHandle];
+            // TODO call close
+            mState->mlrCommunicators.remove(mlrHandle);
+        }
         QSharedPointer<QBLECharacteristic> sendChar = mState->characteristicSend;
         if (!sendChar) {
             qDebug() << Q_FUNC_INFO << "Garmin: No send characteristic found!";
@@ -669,18 +670,14 @@ void CommunicatorV2::processRegisterMlResp(const QByteArray& payload) {
         }
 
         qDebug() << Q_FUNC_INFO << "Garmin: Inserting reliable MLR communicator for " << serviceToString(service) << ", Handle " << mlrHandle;
-        auto sender = QSharedPointer<MlrMessageSender>::create(sendChar);
-        auto receiver = QSharedPointer<MlrMessageReceiver>::create(mMessageCallback);
-        auto mlr = QSharedPointer<MlrCommunicator>::create(mlrHandle, 20, sender, receiver);
-        //mlr->start();
+
+        auto mlr = QSharedPointer<MlrCommunicator>::create(mlrHandle, 20, sendChar, this);
         qDebug() << Q_FUNC_INFO << "Garmin: Reliable MLR communicator created";
 
         mState->mlrCommunicators.insert(mlrHandle, mlr);
 
         // Connect mlr gfdiDecoded to Message handling
-        connect(receiver.data(),&MlrMessageReceiver::gfdiDecoded,this,&CommunicatorV2::handleDecodedMessage);
-
-        createdMlr = mlr;
+        connect(mlr.data(),&MlrCommunicator::gfdiDecoded,this,&CommunicatorV2::handleIncomingGfdiMessage);
         mIsReliable = true;
      }
 

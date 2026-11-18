@@ -106,9 +106,6 @@ public:
 
     static QString baseUuid(quint16 shortId); // helper for BASE_UUID_FORMAT
 
-    // set_message_callback
-    void setMessageCallback(QSharedPointer<GfdiMessageCallback> cb);
-
     // register_service_callback / unregister_service_callback
     void registerServiceCallback(Service service, QSharedPointer<ServiceCallback> cb);
     QSharedPointer<ServiceCallback> unregisterServiceCallback(Service service);
@@ -233,15 +230,10 @@ private:
     quint8 mSpo2=0;
     quint8 mBatteryLevel;
 
-
     struct deviceInfo mDeviceInfo;
 
     QSharedPointer<CommunicatorState> mState;
-
-    QSharedPointer<GfdiMessageCallback> mMessageCallback;
     QSharedPointer<ProtobufHandler> mProtobufHandler;
-
-
     QString m_Path;
     QObject *m_device = nullptr;
     bool isFirstConnect=true;
