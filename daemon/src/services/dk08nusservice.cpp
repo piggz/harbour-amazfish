@@ -36,9 +36,21 @@ void DK08NUSService::downloadHistory()
         return;
     }
     m_samples.clear();
+    m_sleepEnd = QDateTime();
     m_fetchSteps = { CountSteps, CountSleep, CountHeartRate, CountWorkouts, FetchSteps, FetchSleep, FetchHeartRate,
         FetchWorkouts };
     nextFetchStep();
+}
+
+// An awake sample just after the last sleep record, so the samples with kind 0 after it do not count as sleep.
+void DK08NUSService::endSleep()
+{
+    if (!m_sleepEnd.isValid()) {
+        return;
+    }
+    int awake = ActivityKind::toHuamiRawType(ActivityKind::AwakeSleep);
+    m_samples << ActivitySample(m_sleepEnd.addSecs(1), awake, 0, 0, 255);
+    m_sleepEnd = QDateTime();
 }
 
 // Keep what already arrived: the watch has deleted it.
@@ -50,6 +62,7 @@ void DK08NUSService::cancelHistory()
     qWarning() << Q_FUNC_INFO << "History download cancelled at" << m_fetchSteps.first() << "samples:" << m_samples.count();
     m_fetchTimer.stop();
     m_fetchSteps.clear();
+    endSleep();
     emit historyDownloaded(m_samples, false);
     m_samples.clear();
 }
@@ -111,6 +124,7 @@ void DK08NUSService::fetchTimeout()
     }
     FetchStep step = m_fetchSteps.takeFirst();
     qWarning() << Q_FUNC_INFO << "No answer for" << step;
+    endSleep();
     // Without a count do not fetch: for an empty store the watch sends one record full of zeros.
     if (step == CountSteps) {
         m_fetchSteps.removeAll(FetchSteps);
@@ -511,8 +525,8 @@ void DK08NUSService::parseStepSection(QByteArray value) {
             fetchStepDone(FetchSteps);
         } else if (en == 0x04) {
             // The segment starts at qDate. Heart rate 255 means no measurement.
-            int kind = (step > 0) ? ActivityKind::toHuamiRawType(ActivityKind::Activity) : 0;
-            m_samples << ActivitySample(qDate, kind, 0, step, 255);
+            // Kind 0 keeps the kind of the sample before, so the steps do not cut a sleep record.
+            m_samples << ActivitySample(qDate, 0, 0, step, 255);
             if (ch + 1 >= ah) {
                 fetchStepDone(FetchSteps);
             } else {
@@ -593,7 +607,8 @@ void DK08NUSService::parseSleep(QByteArray value) {
             return;
         }
         // The sleep page counts the time since the previous sample, and samples with kind 0 keep the previous kind.
-        // A sample at the start gives the samples inside the record this kind, the one at the end closes it.
+        // A sample just after the start gives the samples inside the record this kind, the one at the end closes it.
+        // Before a record that does not follow the previous one, the gap is marked awake.
         ActivityKind::Type kind = ActivityKind::Unknown;
         if (sleepType == SleepType::Deep) {
             kind = ActivityKind::DeepSleep;
@@ -602,9 +617,17 @@ void DK08NUSService::parseSleep(QByteArray value) {
         } else if (sleepType == SleepType::Awake) {
             kind = ActivityKind::AwakeSleep;
         }
-        m_samples << ActivitySample(startTime, ActivityKind::toHuamiRawType(kind), 0, 0, 255);
-        m_samples << ActivitySample(endTime, ActivityKind::toHuamiRawType(kind), 0, 0, 255);
+        // The end time is the start of the last minute.
+        QDateTime end = endTime.addSecs(60);
+        if (startTime != m_sleepEnd) {
+            endSleep();
+            m_samples << ActivitySample(startTime, ActivityKind::toHuamiRawType(ActivityKind::AwakeSleep), 0, 0, 255);
+        }
+        m_samples << ActivitySample(startTime.addSecs(1), ActivityKind::toHuamiRawType(kind), 0, 0, 255);
+        m_samples << ActivitySample(end, ActivityKind::toHuamiRawType(kind), 0, 0, 255);
+        m_sleepEnd = end;
         if (sleepNum + 1 >= sleepLength) {
+            endSleep();
             fetchStepDone(FetchSleep);
         } else {
             m_fetchTimer.start();
