@@ -11,8 +11,12 @@ DK08Device::DK08Device(const QString &pairedName, QObject *parent ) : AbstractDe
 
 Amazfish::Features DK08Device::supportedFeatures() const
 {
-    return Amazfish::Feature::FEATURE_STEPS | Amazfish::Feature::FEATURE_HRM  | Amazfish::Feature::FEATURE_ALERT |
-            Amazfish::Feature::FEATURE_ALARMS | Amazfish::Feature::FEATURE_WEATHER;
+    return Amazfish::Feature::FEATURE_STEPS
+        | Amazfish::Feature::FEATURE_HRM
+        | Amazfish::Feature::FEATURE_ALERT
+        | Amazfish::Feature::FEATURE_ALARMS
+        | Amazfish::Feature::FEATURE_WEATHER
+        | Amazfish::Feature::FEATURE_ACTIVITY;
 }
 
 Amazfish::DataTypes DK08Device::supportedDataTypes() const
@@ -150,6 +154,7 @@ void DK08Device::initialise()
     if (nus) {
         connect(nus, &DK08NUSService::informationChanged, this, &DK08Device::informationChanged, Qt::UniqueConnection);
         connect(nus, &DK08NUSService::historyDownloaded, this, &DK08Device::saveActivitySamples, Qt::UniqueConnection);
+        connect(nus, &DK08NUSService::workoutDownloaded, this, &DK08Device::saveWorkout, Qt::UniqueConnection);
         nus->setTime();
         nus->getBattery();
         // nus->test();
@@ -336,4 +341,17 @@ void DK08Device::setOperationRunning(bool running)
     }
     m_operationRunning = running;
     emit operationRunningChanged();
+}
+
+void DK08Device::saveWorkout(ActivitySummary summary)
+{
+    if (!m_conn || !m_conn->isDatabaseUsed()) {
+        qWarning() << Q_FUNC_INFO << "Database not connected, lost workout:" << summary.name();
+        return;
+    }
+    summary.setProfileId(qHash(AmazfishConfig::instance()->profileName()));
+    summary.setDeviceId(qHash(AmazfishConfig::instance()->pairedAddress()));
+    if (!summary.saveToDatabase(m_conn)) {
+        qWarning() << Q_FUNC_INFO << "Error saving workout" << summary.name();
+    }
 }
