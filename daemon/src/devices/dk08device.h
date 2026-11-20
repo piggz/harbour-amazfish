@@ -2,8 +2,9 @@
 #ifndef DK08_DEVICE__H
 #define DK08_DEVICE__H
 
-#include <QObject>
 #include "abstractdevice.h"
+#include "activitysample.h"
+#include <QObject>
 
 class DK08Device : public AbstractDevice
 {
@@ -26,6 +27,8 @@ public:
 
     QString information(Amazfish::Info i) const override;
 
+    bool operationRunning() override;
+
 protected:
     void onPropertiesChanged(QString interface, QVariantMap map, QStringList list);
     QBLEService* drv_createService(const QString &uuid, const QString &path) override;
@@ -33,14 +36,15 @@ protected:
 private:
     void initialise();
     void downloadActivityData();
+    void saveActivitySamples(const QList<ActivitySample>& samples, bool complete);
+    void setOperationRunning(bool running);
 
-
-//    Q_SLOT void authenticated(bool ready);
+    //    Q_SLOT void authenticated(bool ready);
 
     void refreshInformation() override;
 
     int m_alert_id = 0;
-
+    bool m_operationRunning = false;
 };
 
 #endif // DK08_DEVICE__H

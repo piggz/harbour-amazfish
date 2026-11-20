@@ -1,6 +1,7 @@
 #include "dk08nusservice.h"
-#include "typeconversion.h"
+#include "activitykind.h"
 #include "amazfishconfig.h"
+#include "typeconversion.h"
 
 /*
  * The Nordic UART Service is a simple GATT-based service with TX and RX characteristics.
@@ -18,8 +19,100 @@ DK08NUSService::DK08NUSService(const QString &path, QObject *parent) : QBLEServi
 {
     qDebug() << Q_FUNC_INFO;
 
-    connect(this, &QBLEService::characteristicRead, this, &DK08NUSService::characteristicRead);
+    connect(this, &QBLEService::characteristicChanged, this, &DK08NUSService::characteristicRead);
     enableNotification(UUID_CHARACTERISTIC_NUS_NOTIFY);
+
+    m_fetchTimer.setSingleShot(true);
+    m_fetchTimer.setInterval(10000);
+    connect(&m_fetchTimer, &QTimer::timeout, this, &DK08NUSService::fetchTimeout);
+}
+
+void DK08NUSService::downloadHistory()
+{
+    if (!m_fetchSteps.isEmpty()) {
+        qWarning() << Q_FUNC_INFO << "History download already running";
+        return;
+    }
+    m_samples.clear();
+    m_fetchSteps = { CountSteps, CountSleep, CountHeartRate, FetchSteps, FetchSleep, FetchHeartRate };
+    nextFetchStep();
+}
+
+// Keep what already arrived: the watch has deleted it.
+void DK08NUSService::cancelHistory()
+{
+    if (m_fetchSteps.isEmpty()) {
+        return;
+    }
+    qWarning() << Q_FUNC_INFO << "History download cancelled at" << m_fetchSteps.first() << "samples:" << m_samples.count();
+    m_fetchTimer.stop();
+    m_fetchSteps.clear();
+    emit historyDownloaded(m_samples, false);
+    m_samples.clear();
+}
+
+void DK08NUSService::nextFetchStep()
+{
+    if (m_fetchSteps.isEmpty()) {
+        m_fetchTimer.stop();
+        qDebug() << Q_FUNC_INFO << "History download done, samples:" << m_samples.count();
+        emit historyDownloaded(m_samples, true);
+        m_samples.clear();
+        return;
+    }
+
+    FetchStep step = m_fetchSteps.first();
+    qDebug() << Q_FUNC_INFO << step;
+    if (step == CountSteps) {
+        getStepSection(InfoType::HistoryNum);
+    } else if (step == CountSleep) {
+        getSleep(InfoType::HistoryNum);
+    } else if (step == CountHeartRate) {
+        getHrInfo(InfoType::HistoryNum);
+    } else if (step == FetchSteps) {
+        getStepSection(InfoType::History);
+    } else if (step == FetchSleep) {
+        getSleep(InfoType::History);
+    } else if (step == FetchHeartRate) {
+        getHrInfo(InfoType::History);
+    }
+    m_fetchTimer.start();
+}
+
+void DK08NUSService::fetchStepDone(FetchStep step)
+{
+    if (m_fetchSteps.isEmpty() || m_fetchSteps.first() != step) {
+        return;
+    }
+    m_fetchSteps.removeFirst();
+    nextFetchStep();
+}
+
+void DK08NUSService::fetchCount(FetchStep countStep, FetchStep fetchStep, int count)
+{
+    qDebug() << Q_FUNC_INFO << fetchStep << "records:" << count;
+    if (count == 0) {
+        m_fetchSteps.removeAll(fetchStep);
+    }
+    fetchStepDone(countStep);
+}
+
+void DK08NUSService::fetchTimeout()
+{
+    if (m_fetchSteps.isEmpty()) {
+        return;
+    }
+    FetchStep step = m_fetchSteps.takeFirst();
+    qWarning() << Q_FUNC_INFO << "No answer for" << step;
+    // Without a count do not fetch: for an empty store the watch sends one record full of zeros.
+    if (step == CountSteps) {
+        m_fetchSteps.removeAll(FetchSteps);
+    } else if (step == CountSleep) {
+        m_fetchSteps.removeAll(FetchSleep);
+    } else if (step == CountHeartRate) {
+        m_fetchSteps.removeAll(FetchHeartRate);
+    }
+    nextFetchStep();
 }
 
 void DK08NUSService::refreshInformation() {
@@ -89,10 +182,10 @@ void DK08NUSService::setTime() {
     msg[5]  = twoDigitsToBCD(now.time().hour());
     msg[6]  = twoDigitsToBCD(now.time().minute());
     msg[7]  = twoDigitsToBCD(now.time().second());
-    msg[8]  = twoDigitsToBCD(now.date().dayOfWeek());
+    msg[8] = twoDigitsToBCD(now.date().dayOfWeek() % 7); // the watch wants 0 for Sunday, Qt gives 7
     msg[19] = getCrc(msg.left(19));
 
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
 
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
@@ -104,7 +197,6 @@ void DK08NUSService::getFirmware() {
     msg[2] = 0x05;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::parseFirmware(QByteArray value) {
@@ -146,7 +238,6 @@ void DK08NUSService::getBattery() {
     msg[2] = 0x06;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::getHrInfo(InfoType type) {
@@ -157,7 +248,6 @@ void DK08NUSService::getHrInfo(InfoType type) {
     msg[2] = type;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::parseHr(QByteArray value) {
@@ -181,6 +271,19 @@ void DK08NUSService::parseHr(QByteArray value) {
         qDebug() << "hr notify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
     } else if (type == InfoType::History) {
         qDebug() << "hr history <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+        if (hrLength == 0) {
+            fetchStepDone(FetchHeartRate);
+            return;
+        }
+        // Kind 0 keeps the previous kind, so heart rate samples do not break sleep.
+        m_samples << ActivitySample(hrDate, 0, 0, 0, hr);
+        if (hrNum + 1 >= hrLength) {
+            fetchStepDone(FetchHeartRate);
+        } else {
+            m_fetchTimer.start();
+        }
+    } else if (type == InfoType::HistoryNum) {
+        fetchCount(CountHeartRate, FetchHeartRate, hrLength);
     }
 }
 
@@ -192,7 +295,6 @@ void DK08NUSService::getSportInfo(InfoType type) {
     msg[2] = (type >= 0 && type < 3) ? mapping[type] : 0x00;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::parseStep(QByteArray value) {
@@ -286,7 +388,6 @@ void DK08NUSService::getSleepStats() {
     msg[2] = 0x01;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 
 }
 
@@ -327,19 +428,15 @@ void DK08NUSService::getStepSection(InfoType type) {
     msg[2] = (type >= 0 && type < 3) ? mapping[type] : 0x00;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::parseStepSection(QByteArray value) {
 
-    //       [0] [1] [2] [3]
-    // bytes  12  34  56  78
-    // en     12             -> 12
-    // ah          4  5      -> 45
-    // ch              6  78 -> 678
+    // value[1..3] is one 24-bit number: total << 12 | index
     quint8 en = static_cast<quint8>(value[0]);
-    int ah = (value[1] << 4) | (value[2] >> 4);
-    int ch = ((value[2] & 0x0f) << 8) | (value[3] & 0xff);
+    uint header = TypeConversion::toUint32(value[3], value[2], value[1], 0);
+    int ah = header >> 12;
+    int ch = header & 0xfff;
 
     qDebug() << "en" << en << "(en & 0x05)" << (en & 0x05) << QString::number(en, 2).rightJustified(8, '0');
     qint64 date = 0;
@@ -350,11 +447,13 @@ void DK08NUSService::parseStepSection(QByteArray value) {
         uint calorie = TypeConversion::toUint32(value[9], value[8], value[7], 0);
         uint mileage = TypeConversion::toUint32(value[12], value[11], value[10], 0);
         date = TypeConversion::toUint32(value[16], value[15], value[14], value[13]);
+        // The watch keeps local time and counts it in seconds as if it were UTC.
 #if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
-        qDate = QDateTime::fromSecsSinceEpoch(date);
+        QDateTime utc = QDateTime::fromSecsSinceEpoch(date, Qt::UTC);
 #else
-        qDate = QDateTime::fromTime_t(date);
+        QDateTime utc = QDateTime::fromTime_t(date).toUTC();
 #endif
+        qDate = QDateTime(utc.date(), utc.time());
         int time = static_cast<quint8>(value[17]);
 
         // Directly log the parsed values
@@ -367,24 +466,27 @@ void DK08NUSService::parseStepSection(QByteArray value) {
         qDebug() << "  Date:" << qDate;
         qDebug() << "  Step Time:" << time;
         qDebug() << "  Step Type:" << 1;
+        if (en == 0x04 && ah == 0) {
+            fetchStepDone(FetchSteps);
+        } else if (en == 0x04) {
+            // The segment starts at qDate. Heart rate 255 means no measurement.
+            int kind = (step > 0) ? ActivityKind::toHuamiRawType(ActivityKind::Activity) : 0;
+            m_samples << ActivitySample(qDate, kind, 0, step, 255);
+            if (ch + 1 >= ah) {
+                fetchStepDone(FetchSteps);
+            } else {
+                m_fetchTimer.start();
+            }
+        }
     } else if ((en & 0x02) > 0) {  // Segment history count
         qDebug() << "Segmented History Count:";
         qDebug() << "  History Length:" << ah;
+        fetchCount(CountSteps, FetchSteps, ah);
     }
 
     if (en == 1) {
         // notify
         qDebug() << "Notify >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-
-    } else if ((en & 0x02) > 0) {
-        // history
-        qDebug() << "history >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-        if (qDate.isValid()) {
-            qDebug() << "next! ===========================";
-            readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
-        } else {
-            qWarning() << "Invalid not reading";
-        }
     }
 
 }
@@ -396,7 +498,6 @@ void DK08NUSService::getSleep(InfoType type) {
     msg[2] = type;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 QDateTime DK08NUSService::bcdToDateTime(QByteArray bytes) {
@@ -411,6 +512,10 @@ QDateTime DK08NUSService::bcdToDateTime(QByteArray bytes) {
 
 void DK08NUSService::parseSleep(QByteArray value) {
     int type = static_cast<quint8>(value[0]);
+    if (type == InfoType::HistoryNum) {
+        fetchCount(CountSleep, FetchSleep, static_cast<quint8>(value[1]));
+        return;
+    }
     int sleepLength = static_cast<quint8>(value[1]); // Sleep history total count
     int sleepNum = static_cast<quint8>(value[2]);    // Sleep packet number
     QDateTime startTime = bcdToDateTime(value.mid(3, 5));
@@ -442,7 +547,27 @@ void DK08NUSService::parseSleep(QByteArray value) {
 
     if (type == InfoType::History) {
         qDebug() << "history >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-        // readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
+        if (sleepLength == 0) {
+            fetchStepDone(FetchSleep);
+            return;
+        }
+        // The sleep page counts the time since the previous sample, and samples with kind 0 keep the previous kind.
+        // A sample at the start gives the samples inside the record this kind, the one at the end closes it.
+        ActivityKind::Type kind = ActivityKind::Unknown;
+        if (sleepType == SleepType::Deep) {
+            kind = ActivityKind::DeepSleep;
+        } else if (sleepType == SleepType::Light) {
+            kind = ActivityKind::LightSleep;
+        } else if (sleepType == SleepType::Awake) {
+            kind = ActivityKind::AwakeSleep;
+        }
+        m_samples << ActivitySample(startTime, ActivityKind::toHuamiRawType(kind), 0, 0, 255);
+        m_samples << ActivitySample(endTime, ActivityKind::toHuamiRawType(kind), 0, 0, 255);
+        if (sleepNum + 1 >= sleepLength) {
+            fetchStepDone(FetchSleep);
+        } else {
+            m_fetchTimer.start();
+        }
     } else if (type == InfoType::Notify) {
         qDebug() << "notify >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
     }
@@ -466,7 +591,6 @@ void DK08NUSService::confirmSportHistoryData(int num) {
     msg[4] = num & 0xff;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::setInfoAlert(AlertType t) {
@@ -477,7 +601,6 @@ void DK08NUSService::setInfoAlert(AlertType t) {
     msg[2] = t;
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 
@@ -506,7 +629,6 @@ void DK08NUSService::setPhoneAlert(const QString &caller) {
     msg.replace(5, callerBytes.length(), callerBytes);
     msg[19] = getCrc(msg.left(19));
     writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
-    readAsync(UUID_CHARACTERISTIC_NUS_NOTIFY);
 }
 
 void DK08NUSService::setSMSAlertName(int id, AlertType alertType, const QString &name) {
@@ -576,7 +698,7 @@ void DK08NUSService::setAlarms() {
 
     msg[19] = getCrc(msg.left(19));
 
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
 
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
@@ -594,7 +716,7 @@ void DK08NUSService::setUserInfo() {
     msg[3] = height;
     msg[19] = getCrc(msg.left(19));
 
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
 
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
@@ -609,7 +731,7 @@ void DK08NUSService::setSportTarget() {
     msg[3] = goalBytes[1];
     msg[4] = goalBytes[2];
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
 
@@ -620,7 +742,7 @@ void DK08NUSService::setUnit() {
     msg[1] = NUSCallType::Unit;
     msg[2] = unit;
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
 
@@ -632,7 +754,7 @@ void DK08NUSService::setTimeFormat() {
     msg[1] = NUSCallType::HourSelect;
     msg[2] = timeformat; // 0 == 24, 1 == 12
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
 
@@ -656,7 +778,7 @@ void DK08NUSService::setPalming() {
     msg[1] = NUSCallType::Palming;
     msg[2] = enabled;
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 }
 
@@ -745,7 +867,7 @@ void DK08NUSService::sendWeather(CurrentWeather *weather) {
     msg[17] = static_cast<uint8_t>( (maxT3 < 0) ? 128 - maxT3 : maxT3 );
     msg[18] = 0xFF;
     msg[19] = getCrc(msg.left(19));
-    writeAsync(UUID_CHARACTERISTIC_NUS_WRITE, msg);
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
     qDebug() << Q_FUNC_INFO << msg.toHex();
 
 }

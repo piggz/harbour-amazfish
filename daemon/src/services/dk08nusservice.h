@@ -1,8 +1,12 @@
 #ifndef DK08NUSSERVICE_H
 #define DK08NUSSERVICE_H
 
-#include "qble/qbleservice.h"
+#include "activitysample.h"
 #include "devices/abstractdevice.h"
+#include "qble/qbleservice.h"
+
+#include <QList>
+#include <QTimer>
 
 class DK08NUSService : public QBLEService
 {
@@ -125,7 +129,30 @@ public:
 
     void test();
 
+    void downloadHistory();
+    void cancelHistory();
+    Q_SIGNAL void historyDownloaded(const QList<ActivitySample>& samples, bool complete);
+
 private:
+    // The watch has one upload queue for all history types, so ask one type at a time.
+    enum FetchStep {
+        CountSteps,
+        CountSleep,
+        CountHeartRate,
+        FetchSteps,
+        FetchSleep,
+        FetchHeartRate,
+    };
+
+    QList<FetchStep> m_fetchSteps;
+    QList<ActivitySample> m_samples;
+    QTimer m_fetchTimer;
+
+    void nextFetchStep();
+    void fetchStepDone(FetchStep step);
+    void fetchCount(FetchStep countStep, FetchStep fetchStep, int count);
+    Q_SLOT void fetchTimeout();
+
     Q_SLOT void characteristicRead(const QString &c, const QByteArray &value);
 
     WeatherType weatherCodeToWeatherType(int code);
