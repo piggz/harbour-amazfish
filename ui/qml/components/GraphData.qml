@@ -164,7 +164,7 @@ Item {
             width: parent.width - styler.themeItemSizeLarge
             x: styler.themeItemSizeLarge
             height: graphHeight
-            border.color: styler.themeSecondaryHighlightColor
+            border.width: 0
             color: "transparent"
 
             MouseArea {
@@ -240,14 +240,15 @@ Item {
                 function drawGrid(ctx) {
                     ctx.save();
 
-                    ctx.lineWidth = 1;
-                    ctx.strokeStyle = axisColor;
-                    ctx.globalAlpha = 0.4;
-                    //i=0 and i=axisY.grid skipped, top/bottom line
-                    for (var i=1;i<axisY.grid;i++) {
+                    // Gadgetbridge-like: thin, low-contrast horizontal grid incl. top and baseline
+                    ctx.lineWidth = styler.chartGridLineWidth;
+                    ctx.strokeStyle = styler.themeSecondaryColor;
+                    ctx.globalAlpha = 0.25;
+                    for (var i=0;i<=axisY.grid;i++) {
+                        var gy = Math.min(height - 0.5, Math.round(height/axisY.grid * i) + 0.5);
                         ctx.beginPath();
-                        ctx.moveTo(0, height/axisY.grid * i);
-                        ctx.lineTo(width, height/axisY.grid * i);
+                        ctx.moveTo(0, gy);
+                        ctx.lineTo(width, gy);
                         ctx.stroke();
                     }
 
@@ -283,6 +284,7 @@ Item {
                     }
 
                     ctx.lineWidth = lineWidth;
+                    ctx.lineJoin = "round";
                     ctx.beginPath();
                     var x = stepX / 2;
                     if (!timeSeries && graphType == line) {
