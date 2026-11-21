@@ -166,12 +166,6 @@ PagePL {
             stepCount: _InfoSteps
             stepGoal: AmazfishConfig.profileFitnessGoal
 
-            Component.onCompleted: {
-                if (_connected) {
-                    _InfoSteps = parseInt(DaemonInterfaceInstance.information(Amazfish.INFO_STEPS), 10) || 0;
-                }
-            }
-
             onClicked: {
                 app.pages.push(Qt.resolvedUrl("StepsPage.qml"))
             }

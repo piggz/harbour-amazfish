@@ -238,6 +238,20 @@ ApplicationWindowPL
             return
         }
         DaemonInterfaceInstance.refreshInformation();
+
+        // The values the daemon already has: not every watch sends them again on refresh, some only once a minute.
+        var battery = DaemonInterfaceInstance.information(Amazfish.INFO_BATTERY);
+        if (battery !== "") {
+            _InfoBatteryPercent = parseInt(battery, 10) || 0;
+        }
+        var heartrate = DaemonInterfaceInstance.information(Amazfish.INFO_HEARTRATE);
+        if (heartrate !== "") {
+            _InfoHeartrate = parseInt(heartrate, 10) || 0;
+        }
+        var steps = DaemonInterfaceInstance.information(Amazfish.INFO_STEPS);
+        if (steps !== "") {
+            _InfoSteps = parseInt(steps, 10) || 0;
+        }
     }
 
     function tr(message) {
