@@ -1,6 +1,7 @@
 #ifndef FETCHTEMPERATUREOPERATION_H
 #define FETCHTEMPERATUREOPERATION_H
 
+#include "database.h"
 #include <abstractfetchoperation.h>
 
 class FetchTemperatureOperation : public AbstractFetchOperation
@@ -11,14 +12,9 @@ public:
     void start() override;
 
 private:
-    struct TemperatureRecord {
-        QDateTime timestamp;
-        float value;
-        QString type;
-        QString location;
-    };
 
     bool processBufferedData() override;
-    bool saveRecords(QVector<TemperatureRecord> recs);};
+    bool saveRecords(QVector<Database::TemperatureRecord> recs);
+};
 
 #endif // FETCHTEMPERATUREOPERATION_H

@@ -5,10 +5,6 @@
 
 #include "database.h"
 
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-
 FetchSpo2NormalOperation::FetchSpo2NormalOperation(HuamiFetcher* fetcher, bool isZeppOs)
     : AbstractFetchOperation(fetcher, isZeppOs)
 {
@@ -40,7 +36,7 @@ bool FetchSpo2NormalOperation::processBufferedData()
     }
 
     QDateTime timestamp;
-    QVector<Spo2Record> recs;
+    QVector<Database::Spo2Record> recs;
 
     int version = m_buffer[0];
     if (version != 2) {
@@ -58,7 +54,7 @@ bool FetchSpo2NormalOperation::processBufferedData()
 
         offset += 60; // unknown 60 bytes
 
-        Spo2Record spo;
+        Database::Spo2Record spo;
         spo.timestamp = timestamp;
         spo.automatic = automatic;
         spo.value = spo2;
@@ -69,45 +65,15 @@ bool FetchSpo2NormalOperation::processBufferedData()
     return saveRecords(recs);
 }
 
-bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
+bool FetchSpo2NormalOperation::saveRecords(QVector<Database::Spo2Record> recs)
 {
-    bool success = true;
-
-    QSqlDatabase db = QSqlDatabase::database();
-    db.transaction();
+    if (!Database::storeSpo2Records(recs)) {
+        return false;
+    }
 
     QDateTime lastTime;
-    foreach(const auto &r, recs) {
-        qDebug() << "Processing record:" << r.timestamp << r.value;
-
-        if (db.isOpen()) {
-            QString sql = QString("SELECT spo2_id FROM spo2 WHERE spo2_timestamp=%1")
-                              .arg(r.timestamp.toMSecsSinceEpoch() / 1000);
-            QSqlQuery query;
-            bool exists = query.exec(sql) && query.next();
-            qDebug() << sql << exists;
-
-            lastTime = r.timestamp;
-
-            if (!exists) {
-                qDebug() << "SPO2 record does not exist, inserting";
-                query.prepare("INSERT INTO spo2 (spo2_timestamp, spo2_timestamp_dt, spo2_automatic, spo2_value) "
-                              "VALUES (?, ?, ?, ?)");
-                query.addBindValue(r.timestamp.toMSecsSinceEpoch() / 1000);
-                query.addBindValue(Database::dateTimeToText(r.timestamp));
-                query.addBindValue(r.automatic);
-                query.addBindValue(r.value);
-                if (!query.exec()) {
-                    qWarning() << Q_FUNC_INFO << "Error inserting spo2 record" << query.lastError().text();
-                }
-            } else {
-                qDebug() << "SPO2 record exists, skipping";
-            }
-        }
-    }
-    if (!db.commit()) {
-        qWarning() << Q_FUNC_INFO << "Cannot save records:" << db.lastError().text();
-        return false;
+    if (!recs.isEmpty()) {
+        lastTime = recs.last().timestamp;
     }
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;

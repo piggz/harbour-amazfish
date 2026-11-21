@@ -5,10 +5,6 @@
 
 #include "database.h"
 
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-
 FetchSpo2SleepOperation::FetchSpo2SleepOperation(HuamiFetcher* fetcher, bool isZeppOs)
     : AbstractFetchOperation(fetcher, isZeppOs)
 {
@@ -40,7 +36,7 @@ bool FetchSpo2SleepOperation::processBufferedData()
     }
 
     QDateTime timestamp;
-    QVector<Spo2SleepRecord> recs;
+    QVector<Database::Spo2SleepRecord> recs;
 
     int version = m_buffer[0];
     if (version != 2) {
@@ -53,7 +49,7 @@ bool FetchSpo2SleepOperation::processBufferedData()
         int32_t timestampSeconds = TypeConversion::toUint32(m_buffer, offset);
         timestamp.setMSecsSinceEpoch((qint64)timestampSeconds * 1000);
 
-        Spo2SleepRecord spo;
+        Database::Spo2SleepRecord spo;
         spo.timestamp = timestamp;
         spo.value =  (uint8_t)m_buffer[offset++];
         spo.duration =  (uint8_t)m_buffer[offset++];
@@ -70,49 +66,15 @@ bool FetchSpo2SleepOperation::processBufferedData()
     return saveRecords(recs);
 }
 
-bool FetchSpo2SleepOperation::saveRecords(QVector<Spo2SleepRecord> recs)
+bool FetchSpo2SleepOperation::saveRecords(QVector<Database::Spo2SleepRecord> recs)
 {
-    bool success = true;
-
-    QSqlDatabase db = QSqlDatabase::database();
-    db.transaction();
+    if (!Database::storeSpo2SleepRecords(recs)) {
+        return false;
+    }
 
     QDateTime lastTime;
-    foreach(const auto &r, recs) {
-        qDebug() << "Processing record:" << r.timestamp << r.value;
-
-        if (db.isOpen()) {
-            QString sql = QString("SELECT spo2sleep_id FROM spo2sleep WHERE spo2_timestamp=%1")
-                              .arg(r.timestamp.toMSecsSinceEpoch() / 1000);
-            QSqlQuery query;
-            bool exists = query.exec(sql) && query.next();
-            qDebug() << sql << exists;
-
-            lastTime = r.timestamp;
-
-            if (!exists) {
-                qDebug() << "SPO2 record does not exist, inserting";
-                query.prepare("INSERT INTO spo2sleep (spo2sleep_timestamp, spo2sleep_timestamp_dt, spo2sleep_value, "
-                              "spo2sleep_duration, spo2sleep_high, spo2sleep_low, spo2sleep_quality) "
-                              "VALUES (?, ?, ?, ?, ?, ?, ?)");
-                query.addBindValue(r.timestamp.toMSecsSinceEpoch() / 1000);
-                query.addBindValue(Database::dateTimeToText(r.timestamp));
-                query.addBindValue(r.value);
-                query.addBindValue(r.duration);
-                query.addBindValue(r.spo2High);
-                query.addBindValue(r.spo2Low);
-                query.addBindValue(r.spo2Quality);
-                if (!query.exec()) {
-                    qWarning() << Q_FUNC_INFO << "Error inserting spo2 record" << query.lastError().text();
-                }
-            } else {
-                qDebug() << "SPO2 Sleep record exists, skipping";
-            }
-        }
-    }
-    if (!db.commit()) {
-        qWarning() << Q_FUNC_INFO << "Cannot save records:" << db.lastError().text();
-        return false;
+    if (!recs.isEmpty()) {
+        lastTime = recs.last().timestamp;
     }
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;

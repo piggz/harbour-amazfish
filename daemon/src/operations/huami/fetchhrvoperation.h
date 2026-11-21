@@ -2,6 +2,7 @@
 #define FETCHHRVOPERATION_H
 
 #include "abstractfetchoperation.h"
+#include "database.h"
 
 class FetchHrvOperation:  public AbstractFetchOperation
 {
@@ -11,12 +12,8 @@ public:
     void start() override;
 
 private:
-    struct HrvRecord {
-        QDateTime timestamp;
-        int value;
-    };
 
     bool processBufferedData() override;
-    bool saveRecords(QVector<HrvRecord> recs);
+    bool saveRecords(QVector<Database::HrvRecord> recs);
 };
 #endif // FETCHHRVOPERATION_H

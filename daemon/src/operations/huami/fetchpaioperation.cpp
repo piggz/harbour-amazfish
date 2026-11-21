@@ -1,11 +1,8 @@
 #include "fetchpaioperation.h"
-#include "typeconversion.h"
+#include "database.h"
 #include "huami/huamifetcher.h"
 #include "mibandservice.h"
-
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
+#include "typeconversion.h"
 
 FetchPaiOperation::FetchPaiOperation(HuamiFetcher* fetcher, bool isZeppOs)
     : AbstractFetchOperation(fetcher, isZeppOs)
@@ -38,7 +35,7 @@ bool FetchPaiOperation::processBufferedData()
     }
 
     QDateTime timestamp;
-    QVector<PaiRecord> recs;
+    QVector<Database::PaiRecord> recs;
 
     for (int i = 0; i < m_buffer.length(); i+=102) {
 
@@ -57,7 +54,7 @@ bool FetchPaiOperation::processBufferedData()
 
         offset += 31; // unknown 31 bytes
 
-        PaiRecord pai;
+        Database::PaiRecord pai;
         pai.day = timestamp.date();
         pai.low = TypeConversion::toFloat(m_buffer, offset);
         pai.moderate = TypeConversion::toFloat(m_buffer, offset);
@@ -81,78 +78,22 @@ bool FetchPaiOperation::processBufferedData()
     return saveRecords(recs);
 }
 
-bool FetchPaiOperation::saveRecords(QVector<PaiRecord> recs)
+bool FetchPaiOperation::saveRecords(QVector<Database::PaiRecord> recs)
 {
-    bool success = true;
-
-    QSqlDatabase db = QSqlDatabase::database();
-    db.transaction();
-
-    QDateTime lastTime;
-    foreach(const auto &r, recs) {
-        qDebug() << "Processing record:" << r.day << r.total_today << r.total;
-        if (db.isOpen()) {
-            QString sql = QString("SELECT id FROM pai WHERE pai_date='%1'").arg(r.day.toString(Qt::ISODate));
-            QSqlQuery query;
-            bool exists = query.exec(sql) && query.next();
-            qDebug() << sql << exists;
-
-            if (!exists) {
-                qDebug() << "PAI record does not exist, inserting";
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-                lastTime = QDateTime(r.day);
-#else
-                lastTime = r.day.startOfDay();
-#endif
-                query.prepare("INSERT INTO pai (pai_date, pai_low, pai_moderate, pai_high, pai_low_time, "
-                              "pai_moderate_time, pai_high_time, pai_today, pai_total) "
-                              "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                query.addBindValue(r.day.toString(Qt::ISODate));
-                query.addBindValue(r.low);
-                query.addBindValue(r.moderate);
-                query.addBindValue(r.high);
-                query.addBindValue(r.time_low);
-                query.addBindValue(r.time_moderate);
-                query.addBindValue(r.time_high);
-                query.addBindValue(r.total_today);
-                query.addBindValue(r.total);
-                if (!query.exec()) {
-                    qWarning() << Q_FUNC_INFO << "Error inserting meta record" << query.lastError().text();
-                }
-            } else {
-                qDebug() << "PAI record exists, updating";
-                if (!query.exec(QString("UPDATE pai SET "
-                                        "pai_low=%1, "
-                                        "pai_moderate=%2, "
-                                        "pai_high=%3, "
-                                        "pai_low_time=%4, "
-                                        "pai_moderate_time=%5, "
-                                        "pai_high_time=%6, "
-                                        "pai_today=%7, "
-                                        "pai_total=%8 "
-                                        "WHERE pai_date='%9'")
-                                    .arg(r.low)
-                                    .arg(r.moderate)
-                                    .arg(r.high)
-                                    .arg(r.time_low)
-                                    .arg(r.time_moderate)
-                                    .arg(r.time_high)
-                                    .arg(r.total_today)
-                                    .arg(r.total)
-                                    .arg(r.day.toString(Qt::ISODate))))
-
-                {
-                    qWarning() << Q_FUNC_INFO << "Error updating pai record" << query.lastError().text();
-                    success = false;
-                }
-            }
-        }
-    }
-    if (!db.commit()) {
-        qWarning() << Q_FUNC_INFO << "Cannot save records:" << db.lastError().text();
+    QDate lastNewDay;
+    if (!Database::storePaiRecords(recs, lastNewDay)) {
         return false;
     }
+
+    QDateTime lastTime;
+    if (lastNewDay.isValid()) {
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+        lastTime = QDateTime(lastNewDay);
+#else
+        lastTime = lastNewDay.startOfDay();
+#endif
+    }
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
-    return success;
+    return true;
 }
 

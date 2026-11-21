@@ -11,10 +11,6 @@
 
 #include "database.h"
 
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
 #define endl Qt::endl
 #endif
@@ -200,42 +196,10 @@ void BangleJSDevice::initialise()
     setTime();
     setAlarms();
 
-    m_steps = getStepsFromDb();
+    m_steps = Database::stepsOnDay(QDate::currentDate());
     emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
 }
 
-int BangleJSDevice::getStepsFromDb()
-{
-    if (!QSqlDatabase::database().isOpen()) {
-        qDebug() << Q_FUNC_INFO << "database is not open";
-        return -1;
-    }
-
-    uint user_id = qHash(AmazfishConfig::instance()->profileName());
-    uint device_id = qHash(AmazfishConfig::instance()->pairedAddress());
-
-    QString today = QDate::currentDate().toString("yyyy-MM-dd");
-
-    QString qry = QString("SELECT SUM(steps) FROM mi_band_activity "
-                          "WHERE device_id = '%1' AND user_id = '%2' "
-                          "AND DATE(timestamp_dt) = '%3'")
-                    .arg(device_id)
-                    .arg(user_id)
-                    .arg(today);
-    qDebug() << qry;
-
-    int steps = 0;
-    QSqlQuery query;
-    if (!query.exec(qry)) {
-        qWarning() << Q_FUNC_INFO << "Error executing query" << query.lastError().text();
-        return 0;
-    }
-    if (query.next()) {
-        steps = query.value(0).toString().toInt();
-    }
-
-    return steps;
-}
 void BangleJSDevice::setTime() {
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (!uart){
@@ -584,7 +548,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
                 QDateTime lastItemDateTime = m_samples.last().datetime(); // grab timestamp before m_samples.clear()
                 if (saveActivitySamples()) {
                     AmazfishConfig::instance()->setValue("device/lastactivitysyncmillis", lastItemDateTime.toMSecsSinceEpoch());
-                    m_steps = getStepsFromDb();
+                    m_steps = Database::stepsOnDay(QDate::currentDate());
                     emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
                 }
             }
@@ -879,7 +843,7 @@ bool BangleJSDevice::saveSportData() {
     }
     m_summary.setValid(count > 0);
 
-    int saved = m_summary.saveToDatabase();
+    int saved = Database::storeActivitySummary(m_summary);
     if (saved) {
         AmazfishConfig::instance()->setValue("device/lastsportsyncid", m_synced_activity_id);
     }

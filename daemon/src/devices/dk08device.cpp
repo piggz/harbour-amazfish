@@ -4,8 +4,6 @@
 #include "dk08nusservice.h"
 #include "dk08wechatservice.h"
 
-#include <QSqlDatabase>
-
 DK08Device::DK08Device(const QString &pairedName, QObject *parent ) : AbstractDevice(pairedName, parent)
 {
     qDebug() << Q_FUNC_INFO << pairedName;
@@ -311,13 +309,9 @@ void DK08Device::setOperationRunning(bool running)
 
 void DK08Device::saveWorkout(ActivitySummary summary)
 {
-    if (!QSqlDatabase::database().isOpen()) {
-        qWarning() << Q_FUNC_INFO << "Database not connected, lost workout:" << summary.name();
-        return;
-    }
     summary.setProfileId(qHash(AmazfishConfig::instance()->profileName()));
     summary.setDeviceId(qHash(AmazfishConfig::instance()->pairedAddress()));
-    if (!summary.saveToDatabase()) {
+    if (!Database::storeActivitySummary(summary)) {
         qWarning() << Q_FUNC_INFO << "Error saving workout" << summary.name();
     }
 }

@@ -1,11 +1,4 @@
 #include "activitysummary.h"
-#include "database.h"
-
-#include <QDebug>
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QVariant>
 
 ActivitySummary::ActivitySummary()
 {
@@ -75,6 +68,7 @@ QDateTime ActivitySummary::endTime() const
 void ActivitySummary::setBaseLatitude(float lat)
 {
     m_baseLatitude = lat;
+    m_hasBaseLocation = true;
 }
 
 float ActivitySummary::baseLatitude() const
@@ -85,6 +79,7 @@ float ActivitySummary::baseLatitude() const
 void ActivitySummary::setBaseLongitude(float lon)
 {
     m_baseLongitude = lon;
+    m_hasBaseLocation = true;
 }
 
 float ActivitySummary::baseLongitude() const
@@ -95,6 +90,7 @@ float ActivitySummary::baseLongitude() const
 void ActivitySummary::setBaseAltitude(int alt)
 {
     m_baseAltitude = alt;
+    m_hasBaseLocation = true;
 }
 
 int ActivitySummary::baseAltitude() const
@@ -102,9 +98,19 @@ int ActivitySummary::baseAltitude() const
     return m_baseAltitude;
 }
 
+bool ActivitySummary::hasBaseLocation() const
+{
+    return m_hasBaseLocation;
+}
+
 void ActivitySummary::setProfileId(uint profileId)
 {
     m_userId = profileId;
+}
+
+uint ActivitySummary::profileId() const
+{
+    return m_userId;
 }
 
 void ActivitySummary::setDeviceId(uint deviceId)
@@ -112,9 +118,19 @@ void ActivitySummary::setDeviceId(uint deviceId)
     m_deviceId = deviceId;
 }
 
+uint ActivitySummary::deviceId() const
+{
+    return m_deviceId;
+}
+
 void ActivitySummary::setGPX(const QString &gpx)
 {
     m_gpxTrack = gpx;
+}
+
+QString ActivitySummary::gpx() const
+{
+    return m_gpxTrack;
 }
 
 void ActivitySummary::addMetaData(const QString &key, const QString &value, const QString &unit)
@@ -124,6 +140,11 @@ void ActivitySummary::addMetaData(const QString &key, const QString &value, cons
     m.value = value;
     m.unit = unit;
     m_metaData << m;
+}
+
+QList<ActivitySummary::meta> ActivitySummary::metaDataList() const
+{
+    return m_metaData;
 }
 
 ActivitySummary::meta ActivitySummary::metaData(const QString &key)
@@ -147,62 +168,4 @@ bool ActivitySummary::isValid() const
 void ActivitySummary::setValid(bool valid)
 {
     m_valid = valid;
-}
-
-bool ActivitySummary::saveToDatabase()
-{
-    QSqlDatabase db = QSqlDatabase::database();
-    db.transaction();
-
-    QSqlQuery query;
-    query.prepare("INSERT INTO sports_data (name, version, start_timestamp, start_timestamp_dt, end_timestamp, "
-                  "end_timestamp_dt, device_id, user_id, kind, base_longitude, base_latitude, base_altitude, gpx) "
-                  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    query.addBindValue(name());
-    query.addBindValue(version());
-    query.addBindValue(startTime().toMSecsSinceEpoch() / 1000);
-    query.addBindValue(Database::dateTimeToText(startTime()));
-    query.addBindValue(endTime().toMSecsSinceEpoch() / 1000);
-    query.addBindValue(Database::dateTimeToText(endTime()));
-    query.addBindValue(m_deviceId);
-    query.addBindValue(m_userId);
-    query.addBindValue(activityKind());
-    query.addBindValue(baseLongitude());
-    query.addBindValue(baseLatitude());
-    query.addBindValue(baseAltitude());
-    query.addBindValue(m_gpxTrack);
-
-    // qDebug() << Q_FUNC_INFO << "Saving Sport:" << name()  << startTime() << startTime().toString(Qt::ISODate);
-
-    if (!query.exec()) {
-        qWarning() << Q_FUNC_INFO << "Error inserting record" << query.lastError().text();
-        db.rollback();
-        return false;
-    }
-
-    long lastId = query.lastInsertId().toLongLong();
-    setId(lastId);
-    // qDebug() << Q_FUNC_INFO << "Record Id is" << id();
-
-    //Save meta data
-    query.prepare("INSERT INTO sports_meta (sport_id, key, value, unit) VALUES (?, ?, ?, ?)");
-    foreach(const auto &m, m_metaData) {
-        query.addBindValue(QVariant::fromValue(lastId));
-        query.addBindValue(m.key);
-        query.addBindValue(m.value);
-        query.addBindValue(m.unit);
-
-        if (!query.exec()) {
-            qWarning() << Q_FUNC_INFO << "Error inserting meta record" << query.lastError().text();
-            db.rollback();
-            return false;
-        }
-    }
-    //Done
-
-    if (!db.commit()) {
-        qWarning() << Q_FUNC_INFO << "Cannot save the activity:" << db.lastError().text();
-        return false;
-    }
-    return true;
 }

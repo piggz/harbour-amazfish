@@ -5,10 +5,6 @@
 
 #include "database.h"
 
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-
 FetchTemperatureOperation::FetchTemperatureOperation(HuamiFetcher* fetcher, bool isZeppOs)
     : AbstractFetchOperation(fetcher, isZeppOs)
 {
@@ -40,7 +36,7 @@ bool FetchTemperatureOperation::processBufferedData()
     }
 
     QDateTime timestamp = startDateLocal();
-    QVector<TemperatureRecord> recs;
+    QVector<Database::TemperatureRecord> recs;
 
     for (int i = 0; i < m_buffer.length(); i+=8) {
         int offset = i;
@@ -50,7 +46,7 @@ bool FetchTemperatureOperation::processBufferedData()
         int16_t unk2 = TypeConversion::toInt16(m_buffer, offset);
         int16_t unk3 = TypeConversion::toInt16(m_buffer, offset);
 
-        TemperatureRecord temp;
+        Database::TemperatureRecord temp;
         temp.timestamp = timestamp;
         temp.value = t / 100.0f;
         temp.location = "wrist";
@@ -63,43 +59,15 @@ bool FetchTemperatureOperation::processBufferedData()
     return saveRecords(recs);
 }
 
-bool FetchTemperatureOperation::saveRecords(QVector<TemperatureRecord> recs)
+bool FetchTemperatureOperation::saveRecords(QVector<Database::TemperatureRecord> recs)
 {
-    bool success = true;
-
-    QSqlDatabase db = QSqlDatabase::database();
-    db.transaction();
+    if (!Database::storeTemperatureRecords(recs)) {
+        return false;
+    }
 
     QDateTime lastTime;
-    foreach(const auto &r, recs) {
-
-        if (db.isOpen()) {
-            QString sql = QString("SELECT temperature_id FROM temperature WHERE temperature_timestamp=%1")
-                              .arg(r.timestamp.toMSecsSinceEpoch() / 1000);
-            QSqlQuery query;
-            bool exists = query.exec(sql) && query.next();
-
-            lastTime = r.timestamp;
-
-            if (!exists) {
-                query.prepare("INSERT INTO temperature (temperature_timestamp, temperature_timestamp_dt, "
-                              "temperature_value, temperature_location, temperature_type) VALUES (?, ?, ?, ?, ?)");
-                query.addBindValue(r.timestamp.toMSecsSinceEpoch() / 1000);
-                query.addBindValue(Database::dateTimeToText(r.timestamp));
-                query.addBindValue(r.value);
-                query.addBindValue(r.location);
-                query.addBindValue(r.type);
-                if (!query.exec()) {
-                    qWarning() << Q_FUNC_INFO << "Error inserting temperature record" << query.lastError().text();
-                }
-            } else {
-                qDebug() << "Temp record exists, skipping";
-            }
-        }
-    }
-    if (!db.commit()) {
-        qWarning() << Q_FUNC_INFO << "Cannot save records:" << db.lastError().text();
-        return false;
+    if (!recs.isEmpty()) {
+        lastTime = recs.last().timestamp;
     }
     lastTime = lastTime.addSecs(60);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());

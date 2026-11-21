@@ -1,6 +1,7 @@
 #ifndef FETCHSTRESSAUTOOPERATION_H
 #define FETCHSTRESSAUTOOPERATION_H
 
+#include "database.h"
 #include <abstractfetchoperation.h>
 
 class FetchStressAutoOperation : public AbstractFetchOperation
@@ -11,14 +12,8 @@ public:
     void start() override;
 
 private:
-    struct StressRecord {
-        QDateTime timestamp;
-        uint8_t value;
-        uint8_t type;
-    };
     bool processBufferedData() override;
-    bool saveRecords(QVector<StressRecord> recs, QDateTime lastTimeDefault);
-
+    bool saveRecords(QVector<Database::StressRecord> recs, QDateTime lastTimeDefault);
 };
 
 #endif // FETCHSTRESSAUTOOPERATION_H

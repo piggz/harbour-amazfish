@@ -5,10 +5,6 @@
 
 #include "database.h"
 
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-
 FetchHrvOperation::FetchHrvOperation(HuamiFetcher* fetcher, bool isZeppOs)
     : AbstractFetchOperation(fetcher, isZeppOs)
 {
@@ -40,7 +36,7 @@ bool FetchHrvOperation::processBufferedData()
     }
 
     QDateTime timestamp;
-    QVector<HrvRecord> recs;
+    QVector<Database::HrvRecord> recs;
 
     for (int i = 0; i < m_buffer.length(); i+=6) {
         int offset = i;
@@ -50,7 +46,7 @@ bool FetchHrvOperation::processBufferedData()
         uint8_t utcOffsetInQuarterHours = m_buffer[offset++];
         uint8_t val = m_buffer[offset] & 0xff;
 
-        HrvRecord hrv;
+        Database::HrvRecord hrv;
         hrv.timestamp = timestamp;
         hrv.value = val;
 
@@ -60,41 +56,15 @@ bool FetchHrvOperation::processBufferedData()
     return saveRecords(recs);
 }
 
-bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
+bool FetchHrvOperation::saveRecords(QVector<Database::HrvRecord> recs)
 {
-    QSqlDatabase db = QSqlDatabase::database();
-    db.transaction();
+    if (!Database::storeHrvRecords(recs)) {
+        return false;
+    }
 
     QDateTime lastTime;
-    foreach(const auto &r, recs) {
-        qDebug() << "Processing record:" << r.timestamp << r.value;
-
-        lastTime = r.timestamp;
-
-        if (db.isOpen()) {
-            QString sql = QString("SELECT hrv_id FROM hrv WHERE hrv_timestamp=%1")
-                              .arg(r.timestamp.toMSecsSinceEpoch() / 1000);
-            QSqlQuery query;
-            bool exists = query.exec(sql) && query.next();
-            qDebug() << sql << exists;
-
-            if (!exists) {
-                qDebug() << "HRV record does not exist, inserting";
-                query.prepare("INSERT INTO hrv (hrv_timestamp, hrv_timestamp_dt, hrv_value) VALUES (?, ?, ?)");
-                query.addBindValue(r.timestamp.toMSecsSinceEpoch() / 1000);
-                query.addBindValue(Database::dateTimeToText(r.timestamp));
-                query.addBindValue(r.value);
-                if (!query.exec()) {
-                    qWarning() << Q_FUNC_INFO << "Error inserting hrv record" << query.lastError().text();
-                }
-            } else {
-                qDebug() << "HRV record exists, skipping";
-            }
-        }
-    }
-    if (!db.commit()) {
-        qWarning() << Q_FUNC_INFO << "Cannot save records:" << db.lastError().text();
-        return false;
+    if (!recs.isEmpty()) {
+        lastTime = recs.last().timestamp;
     }
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;

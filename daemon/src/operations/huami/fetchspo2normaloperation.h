@@ -2,6 +2,7 @@
 #define FETCHSPO2NORMALOPERATION_H
 
 #include "abstractfetchoperation.h"
+#include "database.h"
 
 class FetchSpo2NormalOperation : public AbstractFetchOperation
 {
@@ -11,14 +12,9 @@ public:
     void start() override;
 
 private:
-    struct Spo2Record {
-        QDateTime timestamp;
-        bool automatic;
-        uint8_t  value;
-    };
 
     bool processBufferedData() override;
-    bool saveRecords(QVector<Spo2Record> recs);
+    bool saveRecords(QVector<Database::Spo2Record> recs);
 };
 
 #endif // FETCHSPO2NORMALOPERATION_H

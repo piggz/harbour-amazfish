@@ -12,10 +12,6 @@
 
 #include "database.h"
 
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-
 #if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
 #include <pulse/simple.h>
 #include <pulse/error.h>
@@ -135,7 +131,7 @@ void DeviceInterface::connectToDevice(bool userInitiated)
 
         QString newAddress = pairedAddress.right(17).replace("_", ":");
         // Migrate data to the new address format
-        if (migrateDataDeviceAddress(pairedAddress, newAddress)) {
+        if (Database::changeDeviceId(pairedAddress, newAddress)) {
             config->setPairedAddress(newAddress);
         }
         //If migration fails, dont save the new address but connect anyway
@@ -306,98 +302,19 @@ void DeviceInterface::onRingingChanged()
 #endif
 }
 
-void DeviceInterface::createTables()
-{
-    // The same tables as KDb created them, so databases made by older versions and new ones look the same.
-    const QStringList statements = {
-        "CREATE TABLE IF NOT EXISTS [mi_band_activity] ([id] INTEGER PRIMARY KEY, [timestamp] Integer UNSIGNED, "
-        "[timestamp_dt] DateTime, [device_id] Integer UNSIGNED, [user_id] Integer UNSIGNED, "
-        "[raw_intensity] Integer UNSIGNED, [steps] Integer UNSIGNED, [raw_kind] Integer UNSIGNED, "
-        "[heartrate] Integer UNSIGNED)",
-        "CREATE INDEX IF NOT EXISTS idx_mi_band_activity_timestamp ON mi_band_activity (timestamp)",
-        "CREATE INDEX IF NOT EXISTS idx_mi_band_activity_timestamp_dt ON mi_band_activity (timestamp_dt)",
-        "CREATE TABLE IF NOT EXISTS [info_log] ([id] INTEGER PRIMARY KEY, [timestamp] Integer, "
-        "[timestamp_dt] DateTime, [key] Integer UNSIGNED, [value] Integer UNSIGNED)",
-        "CREATE TABLE IF NOT EXISTS [sports_data] ([id] INTEGER PRIMARY KEY, [name] Text, [version] Integer UNSIGNED, "
-        "[start_timestamp] Integer UNSIGNED, [start_timestamp_dt] DateTime, [end_timestamp] Integer UNSIGNED, "
-        "[end_timestamp_dt] DateTime, [kind] Integer UNSIGNED, [base_longitude] Double, [base_latitude] Double, "
-        "[base_altitude] Double, [device_id] Integer UNSIGNED, [user_id] Integer UNSIGNED, [gpx] CLOB)",
-        "CREATE TABLE IF NOT EXISTS [sports_meta] ([id] INTEGER PRIMARY KEY, [sport_id] Integer UNSIGNED, [key] Text, "
-        "[value] Text, [unit] Text)",
-        "CREATE TABLE IF NOT EXISTS [pai] ([id] INTEGER PRIMARY KEY, [pai_date] Date, [pai_low] Float, "
-        "[pai_moderate] Float, [pai_high] Float, [pai_low_time] ShortInteger, [pai_moderate_time] ShortInteger, "
-        "[pai_high_time] ShortInteger, [pai_today] Float, [pai_total] Float)",
-        "CREATE TABLE IF NOT EXISTS [hrv] ([hrv_id] INTEGER PRIMARY KEY, [hrv_timestamp] Integer, "
-        "[hrv_timestamp_dt] DateTime, [hrv_value] Integer)",
-        "CREATE TABLE IF NOT EXISTS [spo2] ([spo2_id] INTEGER PRIMARY KEY, [spo2_timestamp] Integer, "
-        "[spo2_timestamp_dt] DateTime, [spo2_automatic] Boolean, [spo2_value] Integer)",
-        "CREATE TABLE IF NOT EXISTS [spo2sleep] ([spo2sleep_id] INTEGER PRIMARY KEY, [spo2sleep_timestamp] Integer, "
-        "[spo2sleep_timestamp_dt] DateTime, [spo2sleep_value] Integer, [spo2sleep_duration] Integer, "
-        "[spo2sleep_high] Text, [spo2sleep_low] Text, [spo2sleep_quality] Text)",
-        "CREATE TABLE IF NOT EXISTS [temperature] ([temperature_id] INTEGER PRIMARY KEY, "
-        "[temperature_timestamp] Integer, [temperature_timestamp_dt] DateTime, [temperature_value] Double, "
-        "[temperature_location] Text, [temperature_type] Text)",
-        "CREATE TABLE IF NOT EXISTS [stress] ([stress_id] INTEGER PRIMARY KEY, [stress_timestamp] Integer, "
-        "[stress_timestamp_dt] DateTime, [stress_value] Integer, [stress_type] ShortInteger)",
-        // The UI reads time ranges by *_timestamp_dt; the daemon looks up *_timestamp before it inserts a record.
-        "CREATE INDEX IF NOT EXISTS idx_info_log_key_timestamp_dt ON info_log (key, timestamp_dt)",
-        "CREATE INDEX IF NOT EXISTS idx_sports_meta_sport_id ON sports_meta (sport_id)",
-        "CREATE INDEX IF NOT EXISTS idx_pai_pai_date ON pai (pai_date)",
-        "CREATE INDEX IF NOT EXISTS idx_hrv_hrv_timestamp ON hrv (hrv_timestamp)",
-        "CREATE INDEX IF NOT EXISTS idx_hrv_hrv_timestamp_dt ON hrv (hrv_timestamp_dt)",
-        "CREATE INDEX IF NOT EXISTS idx_spo2_spo2_timestamp ON spo2 (spo2_timestamp)",
-        "CREATE INDEX IF NOT EXISTS idx_spo2_spo2_timestamp_dt ON spo2 (spo2_timestamp_dt)",
-        "CREATE INDEX IF NOT EXISTS idx_spo2sleep_spo2sleep_timestamp ON spo2sleep (spo2sleep_timestamp)",
-        "CREATE INDEX IF NOT EXISTS idx_spo2sleep_spo2sleep_timestamp_dt ON spo2sleep (spo2sleep_timestamp_dt)",
-        "CREATE INDEX IF NOT EXISTS idx_temperature_temperature_timestamp ON temperature (temperature_timestamp)",
-        "CREATE INDEX IF NOT EXISTS idx_temperature_temperature_timestamp_dt ON temperature (temperature_timestamp_dt)",
-        "CREATE INDEX IF NOT EXISTS idx_stress_stress_timestamp ON stress (stress_timestamp)",
-        "CREATE INDEX IF NOT EXISTS idx_stress_stress_timestamp_dt ON stress (stress_timestamp_dt)",
-    };
-
-    QSqlDatabase db = QSqlDatabase::database();
-    db.transaction();
-    QSqlQuery query;
-    for (const QString& statement : statements) {
-        if (!query.exec(statement)) {
-            qWarning() << Q_FUNC_INFO << "Cannot create the database schema:" << query.lastError().text() << statement;
-            db.rollback();
-            return;
-        }
-    }
-    if (!db.commit()) {
-        qWarning() << Q_FUNC_INFO << "Cannot create tables:" << db.lastError().text();
-        return;
-    }
-
-    QString batterySql = QString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC LIMIT 1")
-                             .arg((int)Amazfish::Info::INFO_BATTERY);
-    if (query.exec(batterySql) && query.next()) {
-        m_lastBatteryLevel = query.value(0).toInt();
-    } else {
-        qWarning() << "Cannot get battery level";
-    }
-
-    qDebug() << db.tables();
-}
-
 void DeviceInterface::setupDatabase()
 {
     QString directory = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    QString databaseName = directory + "/amazfish.kexi";
-    qDebug() << Q_FUNC_INFO << ": Database is: " << databaseName;
-
-    QDir().mkpath(directory);
-
-    // The devices and operations use this default connection.
-    QSqlDatabase db = QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"));
-    db.setDatabaseName(databaseName);
-    if (!db.open()) {
-        qWarning() << Q_FUNC_INFO << ": Could not open database:" << db.lastError().text();
+    if (!Database::open(directory + "/amazfish.kexi")) {
         return;
     }
 
-    createTables();
+    QVariant batteryLevel = Database::lastInfoValue((int)Amazfish::Info::INFO_BATTERY);
+    if (batteryLevel.isValid()) {
+        m_lastBatteryLevel = batteryLevel.toInt();
+    } else {
+        qWarning() << "Cannot get battery level";
+    }
 }
 
 void DeviceInterface::onConnectionStateChanged()
@@ -441,30 +358,6 @@ void DeviceInterface::onConnectionStateChanged()
         }
     }
     emit connectionStateChanged();
-}
-
-void DeviceInterface::log_battery_level(int level) {
-
-    QSqlDatabase db = QSqlDatabase::database();
-    if (!db.isOpen()) {
-        qDebug() << Q_FUNC_INFO  << "Database not connected";
-        return;
-    }
-
-    QDateTime m_sampleTime = QDateTime::currentDateTime();
-    // qDebug() << Q_FUNC_INFO << "Start time" << m_sampleTime;
-
-    QSqlQuery query;
-    query.prepare("INSERT INTO info_log (timestamp, timestamp_dt, key, value) VALUES (?, ?, ?, ?)");
-    query.addBindValue(m_sampleTime.toMSecsSinceEpoch() / 1000);
-    query.addBindValue(Database::dateTimeToText(m_sampleTime));
-    query.addBindValue((int)Amazfish::Info::INFO_BATTERY);
-    query.addBindValue(level);
-
-    if (!query.exec()) {
-        qWarning() << Q_FUNC_INFO << "error inserting record" << query.lastError().text();
-        return;
-    }
 }
 
 QString DeviceInterface::devicePath(const QString& address)
@@ -515,7 +408,7 @@ void DeviceInterface::slot_informationChanged(Amazfish::Info key, const QString 
     if (key == Amazfish::Info::INFO_BATTERY) {
         int battery_level = val.toInt();
         if (battery_level != m_lastBatteryLevel) {
-            log_battery_level(battery_level);
+            Database::storeInfo((int)Amazfish::Info::INFO_BATTERY, battery_level);
             if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
                 Amazfish::WatchNotification n;
                 n.id = 0;
@@ -883,30 +776,6 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
         }
 
     }
-}
-
-bool DeviceInterface::migrateDataDeviceAddress(const QString& oldAddress, const QString& newAddress)
-{
-    qDebug() << Q_FUNC_INFO << oldAddress << newAddress;
-
-    QSqlDatabase db = QSqlDatabase::database();
-    if (!db.isOpen()) {
-        qWarning() << Q_FUNC_INFO << "no database, deferring address migration";
-        return false;
-    }
-
-    db.transaction();
-    QSqlQuery query;
-    bool ok = query.exec(QString("UPDATE mi_band_activity SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress)));
-    ok = query.exec(QString("UPDATE sports_data      SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress))) && ok;
-    if (ok) {
-        ok = db.commit();
-    } else {
-        db.rollback();
-    }
-
-    qDebug() << Q_FUNC_INFO << ok;
-    return ok;
 }
 
 void DeviceInterface::refreshInformation()

@@ -9,7 +9,7 @@
 #include <QDir>
 #include <QStandardPaths>
 
-#include <QSqlDatabase>
+#include "database.h"
 
 SportsDetailOperation::SportsDetailOperation(HuamiFetcher* fetcher, const ActivitySummary& summary, AbstractActivityDetailParser* parser, bool isZeppOs)
     : AbstractFetchOperation(fetcher, isZeppOs)
@@ -108,11 +108,6 @@ bool SportsDetailOperation::processBufferedData()
 
 bool SportsDetailOperation::saveSport(const QString &filename)
 {
-    if (!QSqlDatabase::database().isOpen()) {
-        qDebug() << "Database not connected";
-        return false;
-    }
-
     auto config = AmazfishConfig::instance();
     uint id = qHash(config->profileName());
     uint devid = qHash(config->pairedAddress());
@@ -121,5 +116,5 @@ bool SportsDetailOperation::saveSport(const QString &filename)
     m_summary.setDeviceId(devid);
     m_summary.setGPX(filename);
 
-    return m_summary.saveToDatabase();
+    return Database::storeActivitySummary(m_summary);
 }

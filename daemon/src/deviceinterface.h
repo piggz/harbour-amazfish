@@ -116,8 +116,6 @@ private:
     void createSettings();
     void updateServiceController();
 
-    void log_battery_level(int level);
-
     QString devicePath(const QString &address);
     bool determineAdapterPath(const QString &address);
 
@@ -152,7 +150,6 @@ private:
 
     //Database
     void setupDatabase();
-    void createTables();
 
     //Weather
     CityManager m_cityManager;
@@ -176,8 +173,6 @@ private:
 #ifdef MER_EDITION_SAILFISH
     BackgroundActivity *m_backgroundActivity = nullptr;
 #endif
-
-    bool migrateDataDeviceAddress(const QString& oldAddress, const QString& newAddress);
 };
 
 #endif // BIPINTERFACE_H
