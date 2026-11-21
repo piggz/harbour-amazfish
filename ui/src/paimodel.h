@@ -4,7 +4,7 @@
 #include <QAbstractListModel>
 #include <QObject>
 
-#include <KDb3/KDbConnection>
+#include <KDbConnection>
 
 class PaiModel : public QAbstractListModel
 {

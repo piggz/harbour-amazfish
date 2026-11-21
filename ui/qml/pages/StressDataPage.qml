@@ -223,6 +223,10 @@ PagePL {
 
     function updateManual() {
         var dataPoints = dataSource.data(DataSource.StressManual, day);
+        if (dataPoints.length === 0) {
+            lblManualStressValue.text = "";
+            return;
+        }
         lblManualStressValue.text = new Date(dataPoints[0].x) + " : " + dataPoints[0].y
     }
 

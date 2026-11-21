@@ -2,7 +2,7 @@
 #define FETCHPAIOPERATION_H
 
 #include <QDateTime>
-#include <KDb3/KDbConnection>
+#include <KDbConnection>
 
 #include "abstractfetchoperation.h"
 

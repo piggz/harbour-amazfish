@@ -23,7 +23,8 @@ import org.kde.kirigami 2.4 as Kirigami
 Kirigami.Action {
     property bool isAction: true
     property string iconSource // StylerPL gives theme icon names, not URLs
-    icon.name: iconSource
+    property string iconName // ContextMenuItemPL on the other platforms; Kirigami 6 Action has no iconName
+    icon.name: iconSource ? iconSource : iconName
     signal clicked
     onTriggered: clicked()
 }

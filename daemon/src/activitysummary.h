@@ -4,7 +4,8 @@
 #include <QObject>
 #include <QDateTime>
 #include <QList>
-#include <KDb3/KDbConnection>
+
+#include <KDbConnection>
 
 #include "activitykind.h"
 

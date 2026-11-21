@@ -10,10 +10,10 @@
 #include "libwatchfish/calendarsource.h"
 
 
-#include <KDb3/KDbDriver>
-#include <KDb3/KDbConnection>
-#include <KDb3/KDbConnectionData>
-#include <KDb3/KDbTransactionGuard>
+#include <KDbConnection>
+#include <KDbConnectionData>
+#include <KDbDriver>
+#include <KDbTransactionGuard>
 
 class AbstractDevice : public QBLEDevice
 {

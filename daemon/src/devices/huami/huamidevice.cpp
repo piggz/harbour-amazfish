@@ -471,7 +471,7 @@ void HuamiDevice::onPropertiesChanged(QString interface, QVariantMap map, QStrin
 
             if (!value) {
                 setConnectionState("disconnected");
-                init_dt = QDateTime::fromTime_t(0);
+                init_dt = QDateTime::fromMSecsSinceEpoch(0);
             } else {
                 setConnectionState("connected");
             }

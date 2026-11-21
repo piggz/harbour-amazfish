@@ -1,5 +1,5 @@
 import QtQuick 2.3
-import QtGraphicalEffects 1.0
+import "./platform"
 
 Rectangle {
 
@@ -34,7 +34,7 @@ Rectangle {
         border.color: styler.themeSecondaryColor
         border.width: width * (widthRatio * 0.6)
 
-        ConicalGradient
+        ConicalGradientPL
         {
             source: innerRing
             anchors.fill: parent

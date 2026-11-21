@@ -3,7 +3,7 @@
 #include <QDBusReply>
 #include <QStandardPaths>
 
-#include <KDb3/KDbDriverManager>
+#include <KDbDriverManager>
 #include <amazfishconfig.h>
 
 DaemonInterface::DaemonInterface(QObject *parent)
@@ -21,7 +21,9 @@ DaemonInterface::DaemonInterface(QObject *parent)
 
 DaemonInterface::~DaemonInterface()
 {
-    iface->deleteLater();
+    if (iface) {
+        iface->deleteLater();
+    }
 }
 
 
@@ -295,7 +297,11 @@ void DaemonInterface::connectDatabase()
     }
 
     //get driver
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) // KDb for Qt 6 names the driver after its file
+    m_dbDriver = manager.driver(QStringLiteral("kdb_sqlitedriver"));
+#else
     m_dbDriver = manager.driver(QStringLiteral("org.kde.kdb.sqlite"));
+#endif
     if (!m_dbDriver || manager.result().isError()) {
         qDebug() << manager.result();
         return;

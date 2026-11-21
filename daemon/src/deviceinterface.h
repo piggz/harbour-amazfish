@@ -7,9 +7,9 @@
 #include <QQueue>
 #include <QTimer>
 
-#include <KDb3/KDbDriver>
-#include <KDb3/KDbConnection>
-#include <KDb3/KDbConnectionData>
+#include <KDbConnection>
+#include <KDbConnectionData>
+#include <KDbDriver>
 
 #ifdef MER_EDITION_SAILFISH
 #include <keepalive/backgroundactivity.h>

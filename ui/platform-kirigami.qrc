@@ -6,6 +6,7 @@
         <file alias="./qml/components/platform/ButtonPL.qml">./qml/components/platform.kirigami/ButtonPL.qml</file>
         <file alias="./qml/components/platform/ClipboardPL.qml">./qml/components/platform.kirigami/ClipboardPL.qml</file>
         <file alias="./qml/components/platform/ComboBoxPL.qml">./qml/components/platform.kirigami/ComboBoxPL.qml</file>
+        <file alias="./qml/components/platform/ConicalGradientPL.qml">./qml/components/platform.kirigami/ConicalGradientPL.qml</file>
         <file alias="./qml/components/platform/ContextMenuItemPL.qml">./qml/components/platform.kirigami/ContextMenuItemPL.qml</file>
         <file alias="./qml/components/platform/ContextMenuPL.qml">./qml/components/platform.kirigami/ContextMenuPL.qml</file>
         <file alias="./qml/components/platform/DatePickerDialogPL.qml">./qml/components/platform.kirigami/DatePickerDialogPL.qml</file>

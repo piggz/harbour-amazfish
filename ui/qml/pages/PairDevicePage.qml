@@ -251,7 +251,7 @@ PageListPL {
 
     }
 
-    background: BusyIndicatorPL {
+    BusyIndicatorPL {
         id: busyIndicator
         anchors.centerIn: parent
         running: busy

@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QVariant>
 
-#include <KDb3/KDbConnection>
+#include <KDbConnection>
 
 class DataSource: public QObject
 {
