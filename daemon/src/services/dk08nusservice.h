@@ -6,6 +6,7 @@
 #include "devices/abstractdevice.h"
 #include "qble/qbleservice.h"
 
+#include <QDateTime>
 #include <QList>
 #include <QTimer>
 
@@ -152,8 +153,10 @@ private:
     QList<FetchStep> m_fetchSteps;
     QList<ActivitySample> m_samples;
     QTimer m_fetchTimer;
+    QDateTime m_sleepEnd;
 
     void nextFetchStep();
+    void endSleep();
     void fetchStepDone(FetchStep step);
     void fetchCount(FetchStep countStep, FetchStep fetchStep, int count);
     Q_SLOT void fetchTimeout();
