@@ -1,9 +1,12 @@
 #include "daemoninterface.h"
 
 #include <QDBusReply>
+#include <QDebug>
+#include <QFile>
 #include <QStandardPaths>
 
-#include <KDb3/KDbDriverManager>
+#include <QSqlDatabase>
+#include <QSqlError>
 #include <amazfishconfig.h>
 
 DaemonInterface::DaemonInterface(QObject *parent)
@@ -13,6 +16,7 @@ DaemonInterface::DaemonInterface(QObject *parent)
                            QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration))
 {
     QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered,   this, &DaemonInterface::connectDaemon);
+    QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered, this, &DaemonInterface::connectDatabase);
     QObject::connect(m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, &DaemonInterface::disconnectDaemon);
 
     connectDaemon();
@@ -169,14 +173,6 @@ int DaemonInterface::supportedDataTypes()
     return reply;
 }
 
-KDbConnection *DaemonInterface::dbConnection()
-{
-    if (m_conn && m_conn->isDatabaseUsed()) {
-        return m_conn;
-    }
-    return nullptr;
-}
-
 QString DaemonInterface::prepareFirmwareDownload(const QString &path)
 {
     if (!iface || !iface->isValid()) {
@@ -280,56 +276,24 @@ bool DaemonInterface::operationRunning()
 
 void DaemonInterface::connectDatabase()
 {
-    KDbDriverManager manager;
-
-    const QStringList driverIds = manager.driverIds();
-    if (driverIds.isEmpty()) {
-        qWarning() << "No drivers found";
-        return;
-    }
-    qDebug() << "DRIVERS: " << driverIds;
-
-    if (manager.result().isError()) {
-        qDebug() << manager.result();
+    if (QSqlDatabase::database().isOpen()) {
         return;
     }
 
-    //get driver
-    m_dbDriver = manager.driver(QStringLiteral("org.kde.kdb.sqlite"));
-    if (!m_dbDriver || manager.result().isError()) {
-        qDebug() << manager.result();
+    QString databaseName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).append("/amazfish.kexi");
+    qDebug() << "Database is: " << databaseName;
+
+    // Only the daemon creates the database. The daemon cannot use an empty file made by the UI.
+    if (!QFile::exists(databaseName)) {
+        qWarning() << "Database does not exist yet";
         return;
     }
 
-    m_connData.setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).append("/amazfish.kexi"));
-
-    qDebug() << "Database is: " << m_connData.databaseName();
-
-    m_conn = m_dbDriver->createConnection(m_connData);
-
-    if (!m_conn || m_dbDriver->result().isError()) {
-        qDebug() << m_dbDriver->result();
-        return;
-    }    
-    qDebug() << "KDbConnection object created.";
-
-    if (!m_conn->connect()) {
-        qDebug() << m_conn->result();
-        return;
-    }
-    qDebug() << "KDbConnection::connect() OK.";
-
-    if (!m_conn->databaseExists(m_connData.databaseName())) {
-        if (!m_conn->createDatabase(m_connData.databaseName())) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "DB" << m_connData.databaseName() << "created";
-    }
-
-    if (!m_conn->useDatabase()) {
-        qDebug() << m_conn->result();
-        return;
+    // The models use this default connection.
+    QSqlDatabase db = QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"));
+    db.setDatabaseName(databaseName);
+    if (!db.open()) {
+        qWarning() << "Could not open database:" << db.lastError().text();
     }
 }
 

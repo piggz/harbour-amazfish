@@ -605,11 +605,6 @@ int MiBandService::steps() const
     return m_steps;
 }
 
-void MiBandService::setDatabase(KDbConnection *conn)
-{
-    m_conn = conn;
-}
-
 void MiBandService::setAlarms()
 {
     auto config = AmazfishConfig::instance();

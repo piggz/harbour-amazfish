@@ -2,7 +2,6 @@
 
 #include <QDebug>
 #include <QDataStream>
-#include <KDb3/KDbTransactionGuard>
 
 #include "mibandservice.h"
 #include "typeconversion.h"

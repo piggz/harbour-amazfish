@@ -1,6 +1,8 @@
 #include "zepposactivitydetailparser.h"
 #include "typeconversion.h"
 
+#include <QDebug>
+#include <QSet>
 
 ZeppOsActivityDetailParser::ZeppOsActivityDetailParser()
 {

@@ -1,5 +1,11 @@
 #include "activitysummary.h"
-#include <KDb3/KDbTransactionGuard>
+#include "database.h"
+
+#include <QDebug>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QVariant>
 
 ActivitySummary::ActivitySummary()
 {
@@ -143,83 +149,60 @@ void ActivitySummary::setValid(bool valid)
     m_valid = valid;
 }
 
-bool ActivitySummary::saveToDatabase(KDbConnection *conn)
+bool ActivitySummary::saveToDatabase()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
 
-    KDbTransaction transaction = conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
-
-    KDbFieldList fields;
-    auto sportsData = conn->tableSchema("sports_data");
-
-    fields.addField(sportsData->field("name"));
-    fields.addField(sportsData->field("version"));
-    fields.addField(sportsData->field("start_timestamp"));
-    fields.addField(sportsData->field("start_timestamp_dt"));
-    fields.addField(sportsData->field("end_timestamp"));
-    fields.addField(sportsData->field("end_timestamp_dt"));
-    fields.addField(sportsData->field("device_id"));
-    fields.addField(sportsData->field("user_id"));
-    fields.addField(sportsData->field("kind"));
-    fields.addField(sportsData->field("base_longitude"));
-    fields.addField(sportsData->field("base_latitude"));
-    fields.addField(sportsData->field("base_altitude"));
-    fields.addField(sportsData->field("gpx"));
-
-
-    QList<QVariant> values;
-    values << name();
-    values << version();
-    values << startTime().toMSecsSinceEpoch() / 1000;
-    values << startTime();
-    values << endTime().toMSecsSinceEpoch() / 1000;
-    values << endTime();
-    values << m_deviceId;
-    values << m_userId;
-    values << activityKind();
-    values << baseLongitude();
-    values << baseLatitude();
-    values << baseAltitude();
-    values << m_gpxTrack;
+    QSqlQuery query;
+    query.prepare("INSERT INTO sports_data (name, version, start_timestamp, start_timestamp_dt, end_timestamp, "
+                  "end_timestamp_dt, device_id, user_id, kind, base_longitude, base_latitude, base_altitude, gpx) "
+                  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    query.addBindValue(name());
+    query.addBindValue(version());
+    query.addBindValue(startTime().toMSecsSinceEpoch() / 1000);
+    query.addBindValue(Database::dateTimeToText(startTime()));
+    query.addBindValue(endTime().toMSecsSinceEpoch() / 1000);
+    query.addBindValue(Database::dateTimeToText(endTime()));
+    query.addBindValue(m_deviceId);
+    query.addBindValue(m_userId);
+    query.addBindValue(activityKind());
+    query.addBindValue(baseLongitude());
+    query.addBindValue(baseLatitude());
+    query.addBindValue(baseAltitude());
+    query.addBindValue(m_gpxTrack);
 
     // qDebug() << Q_FUNC_INFO << "Saving Sport:" << name()  << startTime() << startTime().toString(Qt::ISODate);
 
-    QSharedPointer<KDbSqlResult> result = conn->insertRecord(&fields, values);
-
-    if (result->lastResult().isError()) {
-        qDebug() << Q_FUNC_INFO << "Error inserting record";
+    if (!query.exec()) {
+        qWarning() << Q_FUNC_INFO << "Error inserting record" << query.lastError().text();
+        db.rollback();
         return false;
     }
 
-    long lastId = result->lastInsertRecordId();
+    long lastId = query.lastInsertId().toLongLong();
     setId(lastId);
     // qDebug() << Q_FUNC_INFO << "Record Id is" << id();
 
     //Save meta data
+    query.prepare("INSERT INTO sports_meta (sport_id, key, value, unit) VALUES (?, ?, ?, ?)");
     foreach(const auto &m, m_metaData) {
-        KDbFieldList metaFields;
-        auto metaData = conn->tableSchema("sports_meta");
+        query.addBindValue(QVariant::fromValue(lastId));
+        query.addBindValue(m.key);
+        query.addBindValue(m.value);
+        query.addBindValue(m.unit);
 
-        metaFields.addField(metaData->field("sport_id"));
-        metaFields.addField(metaData->field("key"));
-        metaFields.addField(metaData->field("value"));
-        metaFields.addField(metaData->field("unit"));
-
-        QList<QVariant> metaValues;
-        metaValues << QVariant::fromValue(lastId);
-        metaValues << m.key;
-        metaValues << m.value;
-        metaValues << m.unit;
-
-        result = conn->insertRecord(&metaFields, metaValues);
-
-        if (result->lastResult().isError()) {
-            qDebug() << Q_FUNC_INFO << "Error inserting meta record";
+        if (!query.exec()) {
+            qWarning() << Q_FUNC_INFO << "Error inserting meta record" << query.lastError().text();
+            db.rollback();
             return false;
         }
     }
     //Done
 
-    tg.commit();
+    if (!db.commit()) {
+        qWarning() << Q_FUNC_INFO << "Cannot save the activity:" << db.lastError().text();
+        return false;
+    }
     return true;
 }

@@ -4,8 +4,6 @@
 #include <QAbstractListModel>
 #include <QVariant>
 
-#include <KDb3/KDbConnection>
-
 typedef struct {
     int meta_id;
     int sport_id;
@@ -33,12 +31,9 @@ public:
     virtual QHash<int, QByteArray> 	roleNames() const override;
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    void setConnection(KDbConnection *conn);
-
     Q_INVOKABLE void update(uint sportid);
 
 private:
-    KDbConnection *m_connection = nullptr;
     QList<SportsMeta> m_data;
 };
 

@@ -1,14 +1,17 @@
 #include "activityfetchoperation.h"
 
 #include <QDebug>
-#include <KDb3/KDbTransactionGuard>
 
 #include "mibandservice.h"
 #include "typeconversion.h"
 #include "amazfishconfig.h"
 #include "huami/huamifetcher.h"
 
-ActivityFetchOperation::ActivityFetchOperation(HuamiFetcher *fetcher, KDbConnection *conn, int sampleSize, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn), m_sampleSize(sampleSize)
+#include "database.h"
+
+ActivityFetchOperation::ActivityFetchOperation(HuamiFetcher* fetcher, int sampleSize, bool isZeppOs)
+    : AbstractFetchOperation(fetcher, isZeppOs)
+    , m_sampleSize(sampleSize)
 {
     setLastSyncKey("device/lastactivitysyncmillis");
 }
@@ -53,54 +56,18 @@ bool ActivityFetchOperation::saveSamples()
         return true;
     }
 
-    if (!m_conn || !(m_conn->isDatabaseUsed())) {
-        qDebug() << Q_FUNC_INFO << "Database not connected";
-        return false;
-    }
-
     m_sampleTime = startDateLocal();
     qDebug() << Q_FUNC_INFO << "Start sample time" << m_sampleTime;
 
-    auto config = AmazfishConfig::instance();
-    uint id = qHash(config->profileName());
-    uint devid = qHash(config->pairedAddress());
-
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
-
-    KDbFieldList fields;
-    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
-
-    fields.addField(mibandActivity->field("timestamp"));
-    fields.addField(mibandActivity->field("timestamp_dt"));
-    fields.addField(mibandActivity->field("device_id"));
-    fields.addField(mibandActivity->field("user_id"));
-    fields.addField(mibandActivity->field("raw_intensity"));
-    fields.addField(mibandActivity->field("steps"));
-    fields.addField(mibandActivity->field("raw_kind"));
-    fields.addField(mibandActivity->field("heartrate"));
-
+    // The watch sends one sample per minute without a time.
+    QList<ActivitySample> samples;
     for (int i = 0; i < m_samples.count(); ++i) {
-        QList<QVariant> values;
-
-        values << m_sampleTime.toMSecsSinceEpoch() / 1000;
-        values << m_sampleTime;
-        values << devid;
-        values << id;
-        values << m_samples[i].intensity();
-        values << m_samples[i].steps();
-        values << m_samples[i].kind();
-        values << m_samples[i].heartrate();
-
-        if (!m_conn->insertRecord(&fields, values)) {
-            qDebug() << Q_FUNC_INFO << "error inserting record";
-            return false;
-        }
+        samples << ActivitySample(m_sampleTime, m_samples[i].kind(), m_samples[i].intensity(), m_samples[i].steps(),
+            m_samples[i].heartrate());
         m_sampleTime = m_sampleTime.addSecs(60);
     }
-    tg.commit();
 
-    return true;
+    return Database::storeActivitySamples(samples);
 }
 
 bool ActivityFetchOperation::processBufferedData()

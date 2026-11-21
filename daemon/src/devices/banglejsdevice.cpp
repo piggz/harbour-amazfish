@@ -7,8 +7,13 @@
 #include "bangleacttrkrecord.h"
 #include "activitysummary.h"
 #include <algorithm>
-#include <KDb.h>
 #include <QtNetwork>
+
+#include "database.h"
+
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
 #define endl Qt::endl
@@ -201,9 +206,8 @@ void BangleJSDevice::initialise()
 
 int BangleJSDevice::getStepsFromDb()
 {
-    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
-    if (!mibandActivity) {
-        qDebug() << Q_FUNC_INFO << "could not get table schema";
+    if (!QSqlDatabase::database().isOpen()) {
+        qDebug() << Q_FUNC_INFO << "database is not open";
         return -1;
     }
 
@@ -221,16 +225,14 @@ int BangleJSDevice::getStepsFromDb()
     qDebug() << qry;
 
     int steps = 0;
-    KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
-    if (!curs) {
-        qDebug() << Q_FUNC_INFO << "Error executing query";
+    QSqlQuery query;
+    if (!query.exec(qry)) {
+        qWarning() << Q_FUNC_INFO << "Error executing query" << query.lastError().text();
         return 0;
     }
-    if (curs->open() && curs->moveFirst() && !curs->eof()) {
-        steps = curs->value(0).toString().toInt();
+    if (query.next()) {
+        steps = query.value(0).toString().toInt();
     }
-
-    m_conn->deleteCursor(curs);
 
     return steps;
 }
@@ -747,42 +749,9 @@ ActivityKind::Type BangleJSDevice::convertToActivityKind(const QString &bangle_k
 }
 
 bool BangleJSDevice::saveActivitySamples() {
-    uint user_id = qHash(AmazfishConfig::instance()->profileName());
-    uint device_id = qHash(AmazfishConfig::instance()->pairedAddress());
-
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
-
-    KDbFieldList fields;
-    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
-
-    fields.addField(mibandActivity->field("timestamp"));
-    fields.addField(mibandActivity->field("timestamp_dt"));
-    fields.addField(mibandActivity->field("device_id"));
-    fields.addField(mibandActivity->field("user_id"));
-    fields.addField(mibandActivity->field("raw_intensity"));
-    fields.addField(mibandActivity->field("steps"));
-    fields.addField(mibandActivity->field("raw_kind"));
-    fields.addField(mibandActivity->field("heartrate"));
-
-    for (int i = 0; i < m_samples.count(); ++i) {
-        QList<QVariant> values;
-
-        values << m_samples[i].datetime().toMSecsSinceEpoch() / 1000;
-        values << m_samples[i].datetime();
-        values << device_id;
-        values << user_id;
-        values << m_samples[i].intensity();
-        values << m_samples[i].steps();
-        values << m_samples[i].kind();
-        values << m_samples[i].heartrate();
-
-        if (!m_conn->insertRecord(&fields, values)) {
-            qDebug() << Q_FUNC_INFO << "error inserting record";
-            return false;
-        }
+    if (!Database::storeActivitySamples(m_samples)) {
+        return false;
     }
-    tg.commit();
     m_samples.clear();
     return true;
 }
@@ -910,7 +879,7 @@ bool BangleJSDevice::saveSportData() {
     }
     m_summary.setValid(count > 0);
 
-    int saved = m_summary.saveToDatabase(m_conn);
+    int saved = m_summary.saveToDatabase();
     if (saved) {
         AmazfishConfig::instance()->setValue("device/lastsportsyncid", m_synced_activity_id);
     }

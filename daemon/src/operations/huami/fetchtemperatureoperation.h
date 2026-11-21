@@ -2,12 +2,11 @@
 #define FETCHTEMPERATUREOPERATION_H
 
 #include <abstractfetchoperation.h>
-#include <KDbConnection.h>
 
 class FetchTemperatureOperation : public AbstractFetchOperation
 {
 public:
-    FetchTemperatureOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
+    FetchTemperatureOperation(HuamiFetcher* fetcher, bool isZeppOs = false);
 
     void start() override;
 
@@ -18,8 +17,6 @@ private:
         QString type;
         QString location;
     };
-
-    KDbConnection *m_conn;
 
     bool processBufferedData() override;
     bool saveRecords(QVector<TemperatureRecord> recs);};

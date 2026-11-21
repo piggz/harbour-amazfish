@@ -2,14 +2,13 @@
 #define FETCHPAIOPERATION_H
 
 #include <QDateTime>
-#include <KDb3/KDbConnection>
 
 #include "abstractfetchoperation.h"
 
 class FetchPaiOperation : public AbstractFetchOperation
 {
 public:
-    FetchPaiOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
+    FetchPaiOperation(HuamiFetcher* fetcher, bool isZeppOs = false);
 
     void start() override;
 
@@ -25,8 +24,6 @@ private:
         float total_today;
         float total;
     };
-
-    KDbConnection *m_conn;
 
     bool processBufferedData() override;
     bool saveRecords(QVector<PaiRecord> recs);

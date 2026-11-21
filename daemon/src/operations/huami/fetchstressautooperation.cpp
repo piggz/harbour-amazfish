@@ -3,8 +3,14 @@
 #include "typeconversion.h"
 #include "mibandservice.h"
 
+#include "database.h"
 
-FetchStressAutoOperation::FetchStressAutoOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+
+FetchStressAutoOperation::FetchStressAutoOperation(HuamiFetcher* fetcher, bool isZeppOs)
+    : AbstractFetchOperation(fetcher, isZeppOs)
 {
     setLastSyncKey("device/lastStressAutoTimeMillis");
 }
@@ -59,50 +65,43 @@ bool FetchStressAutoOperation::processBufferedData()
 
 bool FetchStressAutoOperation::saveRecords(QVector<StressRecord> recs, QDateTime lastTimeDefault)
 {
-    QSharedPointer<KDbSqlResult> result;
-
     bool success = true;
 
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
 
     QDateTime lastTime = lastTimeDefault;
     foreach(const auto &r, recs) {
         qDebug() << "Processing record:" << r.timestamp << r.value;
-        int count;
 
-        if (m_conn && m_conn->isDatabaseUsed()) {
-            KDbEscapedString sql = KDbEscapedString("SELECT stress_id FROM stress WHERE stress_timestamp=%1 AND stress_type=1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
-            tristate success = m_conn->querySingleNumber(sql, &count);
-            qDebug() << sql << success << count;
+        if (db.isOpen()) {
+            QString sql = QString("SELECT stress_id FROM stress WHERE stress_timestamp=%1 AND stress_type=1")
+                              .arg(r.timestamp.toMSecsSinceEpoch() / 1000);
+            QSqlQuery query;
+            bool exists = query.exec(sql) && query.next();
+            qDebug() << sql << exists;
 
             lastTime = r.timestamp;
 
-            if (success == cancelled || success == false) {
-                auto spoData = m_conn->tableSchema("stress");
-                KDbFieldList stressFields;
-                stressFields.addField(spoData->field("stress_timestamp"));
-                stressFields.addField(spoData->field("stress_timestamp_dt"));
-                stressFields.addField(spoData->field("stress_value"));
-                stressFields.addField(spoData->field("stress_type"));
-
-                QList<QVariant> stressValues;
-                stressValues << r.timestamp.toMSecsSinceEpoch() / 1000;
-                stressValues << r.timestamp;
-                stressValues << r.value;
-                stressValues << r.type;
-
-                result = m_conn->insertRecord(&stressFields, stressValues);
-                if (result->lastResult().isError()) {
-                    qDebug() << Q_FUNC_INFO << "Error inserting stress record";
-                    success = false;
+            if (!exists) {
+                query.prepare("INSERT INTO stress (stress_timestamp, stress_timestamp_dt, stress_value, stress_type) "
+                              "VALUES (?, ?, ?, ?)");
+                query.addBindValue(r.timestamp.toMSecsSinceEpoch() / 1000);
+                query.addBindValue(Database::dateTimeToText(r.timestamp));
+                query.addBindValue(r.value);
+                query.addBindValue(r.type);
+                if (!query.exec()) {
+                    qWarning() << Q_FUNC_INFO << "Error inserting stress record" << query.lastError().text();
                 }
             } else {
                 qDebug() << "Stress record exists, skipping";
             }
         }
     }
-    tg.commit();
+    if (!db.commit()) {
+        qWarning() << Q_FUNC_INFO << "Cannot save records:" << db.lastError().text();
+        return false;
+    }
     lastTime = lastTime.addSecs(60);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;

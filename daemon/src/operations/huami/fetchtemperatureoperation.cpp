@@ -3,7 +3,14 @@
 #include "huami/huamifetcher.h"
 #include "mibandservice.h"
 
-FetchTemperatureOperation::FetchTemperatureOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
+#include "database.h"
+
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+
+FetchTemperatureOperation::FetchTemperatureOperation(HuamiFetcher* fetcher, bool isZeppOs)
+    : AbstractFetchOperation(fetcher, isZeppOs)
 {
     setLastSyncKey("device/lastTemperatureTimeMillis");
 }
@@ -58,50 +65,42 @@ bool FetchTemperatureOperation::processBufferedData()
 
 bool FetchTemperatureOperation::saveRecords(QVector<TemperatureRecord> recs)
 {
-    QSharedPointer<KDbSqlResult> result;
-
     bool success = true;
 
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
 
     QDateTime lastTime;
     foreach(const auto &r, recs) {
-        int count;
 
-        if (m_conn && m_conn->isDatabaseUsed()) {
-            KDbEscapedString sql = KDbEscapedString("SELECT temperature_id FROM temperature WHERE temperature_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
-            tristate success = m_conn->querySingleNumber(sql, &count);
+        if (db.isOpen()) {
+            QString sql = QString("SELECT temperature_id FROM temperature WHERE temperature_timestamp=%1")
+                              .arg(r.timestamp.toMSecsSinceEpoch() / 1000);
+            QSqlQuery query;
+            bool exists = query.exec(sql) && query.next();
 
             lastTime = r.timestamp;
 
-            if (success == cancelled || success == false) {
-                auto tempData = m_conn->tableSchema("temperature");
-                KDbFieldList tempFields;
-                tempFields.addField(tempData->field("temperature_timestamp"));
-                tempFields.addField(tempData->field("temperature_timestamp_dt"));
-                tempFields.addField(tempData->field("temperature_value"));
-                tempFields.addField(tempData->field("temperature_location"));
-                tempFields.addField(tempData->field("temperature_type"));
-
-                QList<QVariant> tempValues;
-                tempValues << r.timestamp.toMSecsSinceEpoch() / 1000;
-                tempValues << r.timestamp;
-                tempValues << r.value;
-                tempValues << r.location;
-                tempValues << r.type;
-
-                result = m_conn->insertRecord(&tempFields, tempValues);
-                if (result->lastResult().isError()) {
-                    qDebug() << Q_FUNC_INFO << "Error inserting temperature record";
-                    success = false;
+            if (!exists) {
+                query.prepare("INSERT INTO temperature (temperature_timestamp, temperature_timestamp_dt, "
+                              "temperature_value, temperature_location, temperature_type) VALUES (?, ?, ?, ?, ?)");
+                query.addBindValue(r.timestamp.toMSecsSinceEpoch() / 1000);
+                query.addBindValue(Database::dateTimeToText(r.timestamp));
+                query.addBindValue(r.value);
+                query.addBindValue(r.location);
+                query.addBindValue(r.type);
+                if (!query.exec()) {
+                    qWarning() << Q_FUNC_INFO << "Error inserting temperature record" << query.lastError().text();
                 }
             } else {
                 qDebug() << "Temp record exists, skipping";
             }
         }
     }
-    tg.commit();
+    if (!db.commit()) {
+        qWarning() << Q_FUNC_INFO << "Cannot save records:" << db.lastError().text();
+        return false;
+    }
     lastTime = lastTime.addSecs(60);
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;

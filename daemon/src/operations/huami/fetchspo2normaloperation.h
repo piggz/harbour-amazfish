@@ -2,12 +2,11 @@
 #define FETCHSPO2NORMALOPERATION_H
 
 #include "abstractfetchoperation.h"
-#include <KDbConnection.h>
 
 class FetchSpo2NormalOperation : public AbstractFetchOperation
 {
 public:
-    FetchSpo2NormalOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
+    FetchSpo2NormalOperation(HuamiFetcher* fetcher, bool isZeppOs = false);
 
     void start() override;
 
@@ -17,8 +16,6 @@ private:
         bool automatic;
         uint8_t  value;
     };
-
-    KDbConnection *m_conn;
 
     bool processBufferedData() override;
     bool saveRecords(QVector<Spo2Record> recs);

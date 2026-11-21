@@ -2,12 +2,11 @@
 #define FETCHSTRESSAUTOOPERATION_H
 
 #include <abstractfetchoperation.h>
-#include <KDbConnection.h>
 
 class FetchStressAutoOperation : public AbstractFetchOperation
 {
 public:
-    FetchStressAutoOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
+    FetchStressAutoOperation(HuamiFetcher* fetcher, bool isZeppOs = false);
 
     void start() override;
 
@@ -17,8 +16,6 @@ private:
         uint8_t value;
         uint8_t type;
     };
-    KDbConnection *m_conn;
-
     bool processBufferedData() override;
     bool saveRecords(QVector<StressRecord> recs, QDateTime lastTimeDefault);
 

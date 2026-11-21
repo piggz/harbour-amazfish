@@ -9,7 +9,12 @@
 #include <QDir>
 #include <QStandardPaths>
 
-SportsDetailOperation::SportsDetailOperation(HuamiFetcher *fetcher, KDbConnection *conn, const ActivitySummary &summary, AbstractActivityDetailParser *parser, bool isZeppOs) :  AbstractFetchOperation(fetcher, isZeppOs), m_summary(summary), m_parser(parser), m_conn(conn)
+#include <QSqlDatabase>
+
+SportsDetailOperation::SportsDetailOperation(HuamiFetcher* fetcher, const ActivitySummary& summary, AbstractActivityDetailParser* parser, bool isZeppOs)
+    : AbstractFetchOperation(fetcher, isZeppOs)
+    , m_summary(summary)
+    , m_parser(parser)
 {
     qDebug() << Q_FUNC_INFO;
     setLastSyncKey("device/lastsportsyncmillis");
@@ -103,7 +108,7 @@ bool SportsDetailOperation::processBufferedData()
 
 bool SportsDetailOperation::saveSport(const QString &filename)
 {
-    if (!m_conn || !m_conn->isDatabaseUsed()) {
+    if (!QSqlDatabase::database().isOpen()) {
         qDebug() << "Database not connected";
         return false;
     }
@@ -116,5 +121,5 @@ bool SportsDetailOperation::saveSport(const QString &filename)
     m_summary.setDeviceId(devid);
     m_summary.setGPX(filename);
 
-    return m_summary.saveToDatabase(m_conn);
+    return m_summary.saveToDatabase();
 }

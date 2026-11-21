@@ -3,7 +3,14 @@
 #include "huami/huamifetcher.h"
 #include "mibandservice.h"
 
-FetchSpo2NormalOperation::FetchSpo2NormalOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
+#include "database.h"
+
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+
+FetchSpo2NormalOperation::FetchSpo2NormalOperation(HuamiFetcher* fetcher, bool isZeppOs)
+    : AbstractFetchOperation(fetcher, isZeppOs)
 {
     setLastSyncKey("device/lastSpo2NormalTimeMillis");
 }
@@ -64,51 +71,44 @@ bool FetchSpo2NormalOperation::processBufferedData()
 
 bool FetchSpo2NormalOperation::saveRecords(QVector<Spo2Record> recs)
 {
-    QSharedPointer<KDbSqlResult> result;
-
     bool success = true;
 
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
 
     QDateTime lastTime;
     foreach(const auto &r, recs) {
         qDebug() << "Processing record:" << r.timestamp << r.value;
-        int count;
 
-        if (m_conn && m_conn->isDatabaseUsed()) {
-            KDbEscapedString sql = KDbEscapedString("SELECT spo2_id FROM spo2 WHERE spo2_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
-            tristate success = m_conn->querySingleNumber(sql, &count);
-            qDebug() << sql << success << count;
+        if (db.isOpen()) {
+            QString sql = QString("SELECT spo2_id FROM spo2 WHERE spo2_timestamp=%1")
+                              .arg(r.timestamp.toMSecsSinceEpoch() / 1000);
+            QSqlQuery query;
+            bool exists = query.exec(sql) && query.next();
+            qDebug() << sql << exists;
 
             lastTime = r.timestamp;
 
-            if (success == cancelled || success == false) {
+            if (!exists) {
                 qDebug() << "SPO2 record does not exist, inserting";
-                auto spoData = m_conn->tableSchema("spo2");
-                KDbFieldList spoFields;
-                spoFields.addField(spoData->field("spo2_timestamp"));
-                spoFields.addField(spoData->field("spo2_timestamp_dt"));
-                spoFields.addField(spoData->field("spo2_automatic"));
-                spoFields.addField(spoData->field("spo2_value"));
-
-                QList<QVariant> spoValues;
-                spoValues << r.timestamp.toMSecsSinceEpoch() / 1000;
-                spoValues << r.timestamp;
-                spoValues << r.automatic;
-                spoValues << r.value;
-
-                result = m_conn->insertRecord(&spoFields, spoValues);
-                if (result->lastResult().isError()) {
-                    qDebug() << Q_FUNC_INFO << "Error inserting spo2 record";
-                    success = false;
+                query.prepare("INSERT INTO spo2 (spo2_timestamp, spo2_timestamp_dt, spo2_automatic, spo2_value) "
+                              "VALUES (?, ?, ?, ?)");
+                query.addBindValue(r.timestamp.toMSecsSinceEpoch() / 1000);
+                query.addBindValue(Database::dateTimeToText(r.timestamp));
+                query.addBindValue(r.automatic);
+                query.addBindValue(r.value);
+                if (!query.exec()) {
+                    qWarning() << Q_FUNC_INFO << "Error inserting spo2 record" << query.lastError().text();
                 }
             } else {
                 qDebug() << "SPO2 record exists, skipping";
             }
         }
     }
-    tg.commit();
+    if (!db.commit()) {
+        qWarning() << Q_FUNC_INFO << "Cannot save records:" << db.lastError().text();
+        return false;
+    }
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }

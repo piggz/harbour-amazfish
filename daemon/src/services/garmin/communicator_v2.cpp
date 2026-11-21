@@ -22,6 +22,12 @@
 
 #include <QtCore/QTimer>
 
+#include "database.h"
+
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+
 const char* CommunicatorV2::BASE_UUID                   = "6a4e%1-667b-11e3-949a-0800200c9a66";
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI = "6a4e2800-667b-11e3-949a-0800200c9a66";
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_V0_SEND = "df334c80-e6a7-d082-274d-78fc66f85e16";
@@ -1125,39 +1131,25 @@ void CommunicatorV2::setBatteryLevel(quint8 val)
 void CommunicatorV2::saveHRVRecord()
 {
     // This will probably be never used as the proper way is downloading activities
-    KDbConnection *con = qobject_cast<GarminDevice *> (m_device)->database();
-    if (!con)
-    {
+    QSqlDatabase db = QSqlDatabase::database();
+    if (!db.isOpen()) {
         qDebug() << Q_FUNC_INFO << "Garmin: database connection not available to save HRV.";
     }
     qDebug() << Q_FUNC_INFO << "Garmin: saving HRV to database: " << mHRV;
 
-    QSharedPointer<KDbSqlResult> result;
-
-    KDbTransaction transaction = con->beginTransaction();
-    KDbTransactionGuard tg(transaction);
-
     QDateTime timestamp(QDateTime::currentDateTime());
 
-    if (con && con->isDatabaseUsed()) {
-        auto hrvData = con->tableSchema("hrv");
-        KDbFieldList hrvFields;
-        hrvFields.addField(hrvData->field("hrv_timestamp"));
-        hrvFields.addField(hrvData->field("hrv_timestamp_dt"));
-        hrvFields.addField(hrvData->field("hrv_value"));
-
-        QList<QVariant> hrvValues;
-        hrvValues << timestamp.toMSecsSinceEpoch() / 1000;
-        hrvValues << timestamp;
-        hrvValues << mHRV;
-
-        result = con->insertRecord(&hrvFields, hrvValues);
-        if (result->lastResult().isError()) {
-            qDebug() << Q_FUNC_INFO << "Error inserting hrv record";
+    if (db.isOpen()) {
+        QSqlQuery query;
+        query.prepare("INSERT INTO hrv (hrv_timestamp, hrv_timestamp_dt, hrv_value) VALUES (?, ?, ?)");
+        query.addBindValue(timestamp.toMSecsSinceEpoch() / 1000);
+        query.addBindValue(Database::dateTimeToText(timestamp));
+        query.addBindValue(mHRV);
+        if (!query.exec()) {
+            qWarning() << Q_FUNC_INFO << "Error inserting hrv record" << query.lastError().text();
         }
     }
 
-    tg.commit();
     return;
 }
 
@@ -1165,42 +1157,27 @@ void CommunicatorV2::saveHRVRecord()
     {
         // This will probably be never used as the proper way is downloading activities
 
-        KDbConnection *con = qobject_cast<GarminDevice *> (m_device)->database();
-        if (!con)
-        {
+        QSqlDatabase db = QSqlDatabase::database();
+        if (!db.isOpen()) {
             qDebug() << Q_FUNC_INFO << "Garmin: database connection not available to save Spo2.";
         }
         qDebug() << Q_FUNC_INFO << "Garmin: saving Spo2 to database: " << mSpo2;
-        QSharedPointer<KDbSqlResult> result;
-
-
-        KDbTransaction transaction = con->beginTransaction();
-        KDbTransactionGuard tg(transaction);
-
         QDateTime timestamp(QDateTime::currentDateTime());
 
         //sometime Spo2 value is 255, avoid adding data > 100
-        if (con && con->isDatabaseUsed() && (mSpo2 <=100 )) {
-            auto spoData = con->tableSchema("spo2");
-            KDbFieldList spoFields;
-            spoFields.addField(spoData->field("spo2_timestamp"));
-            spoFields.addField(spoData->field("spo2_timestamp_dt"));
-            spoFields.addField(spoData->field("spo2_automatic"));
-            spoFields.addField(spoData->field("spo2_value"));
-
-            QList<QVariant> spoValues;
-            spoValues << timestamp.toMSecsSinceEpoch() / 1000;
-            spoValues << timestamp;
-            spoValues << true;
-            spoValues << mSpo2;
-
-            result = con->insertRecord(&spoFields, spoValues);
-            if (result->lastResult().isError()) {
-                qDebug() << Q_FUNC_INFO << "Error inserting Spo2 record";
+        if (db.isOpen() && (mSpo2 <= 100)) {
+            QSqlQuery query;
+            query.prepare("INSERT INTO spo2 (spo2_timestamp, spo2_timestamp_dt, spo2_automatic, spo2_value) "
+                          "VALUES (?, ?, ?, ?)");
+            query.addBindValue(timestamp.toMSecsSinceEpoch() / 1000);
+            query.addBindValue(Database::dateTimeToText(timestamp));
+            query.addBindValue(true);
+            query.addBindValue(mSpo2);
+            if (!query.exec()) {
+                qWarning() << Q_FUNC_INFO << "Error inserting Spo2 record" << query.lastError().text();
             }
         }
 
-    tg.commit();
     return;
 }
 

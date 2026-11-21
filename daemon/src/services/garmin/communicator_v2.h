@@ -22,7 +22,6 @@
 
 #include <qbledevice.h>
 #include <qbleservice.h>
-#include <KDbConnection.h>
 
 #include <optional>
 

@@ -7,10 +7,6 @@
 #include <QQueue>
 #include <QTimer>
 
-#include <KDb3/KDbDriver>
-#include <KDb3/KDbConnection>
-#include <KDb3/KDbConnectionData>
-
 #ifdef MER_EDITION_SAILFISH
 #include <keepalive/backgroundactivity.h>
 #endif
@@ -57,8 +53,6 @@ public:
     Q_INVOKABLE bool supportsDataType(int t);
     Q_INVOKABLE int supportedFeatures();
     Q_INVOKABLE int supportedDataTypes();
-
-    KDbConnection *dbConnection();
 
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
@@ -157,9 +151,6 @@ private:
     QQueue<Amazfish::WatchNotification> m_notificationBuffer;
 
     //Database
-    KDbDriver *m_dbDriver = nullptr;
-    KDbConnectionData m_connData;
-    KDbConnection *m_conn = nullptr;
     void setupDatabase();
     void createTables();
 

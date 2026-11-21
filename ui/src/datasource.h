@@ -1,10 +1,9 @@
 #ifndef DATASOURCE_H
 #define DATASOURCE_H
 
+#include <QDateTime>
 #include <QObject>
 #include <QVariant>
-
-#include <KDb3/KDbConnection>
 
 class DataSource: public QObject
 {
@@ -30,12 +29,10 @@ public:
     Q_ENUM(Type)
 
     DataSource();
-    void setConnection(KDbConnection *conn);
 
     Q_INVOKABLE QVariant data(const DataSource::Type type, const QDate  &day);
 
 private:
-    KDbConnection *m_conn = nullptr;
     
     struct SleepSession {
         QDateTime sleepStart;

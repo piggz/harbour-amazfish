@@ -40,8 +40,6 @@ public:
     void navigationRunning(bool running) override;
     void navigationNarrative(const QString &flag, const QString &narrative, const QString &manDist, int progress) override;
 
-    void setDatabase(KDbConnection *conn) override;
-
     Q_SLOT void fetchOperationComplete(AbstractFetchOperation *operation);
 
     AbstractActivitySummaryParser *activitySummaryParser() const override;

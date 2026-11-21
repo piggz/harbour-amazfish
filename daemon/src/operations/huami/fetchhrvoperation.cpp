@@ -3,8 +3,14 @@
 #include "huami/huamifetcher.h"
 #include "mibandservice.h"
 
+#include "database.h"
 
-FetchHrvOperation::FetchHrvOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+
+FetchHrvOperation::FetchHrvOperation(HuamiFetcher* fetcher, bool isZeppOs)
+    : AbstractFetchOperation(fetcher, isZeppOs)
 {
     setLastSyncKey("device/lastHrvTimeMillis");
 }
@@ -56,47 +62,40 @@ bool FetchHrvOperation::processBufferedData()
 
 bool FetchHrvOperation::saveRecords(QVector<HrvRecord> recs)
 {
-    QSharedPointer<KDbSqlResult> result;
-
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
 
     QDateTime lastTime;
     foreach(const auto &r, recs) {
         qDebug() << "Processing record:" << r.timestamp << r.value;
-        int count;
 
         lastTime = r.timestamp;
 
-        if (m_conn->isDatabaseUsed()) {
-            KDbEscapedString sql = KDbEscapedString("SELECT hrv_id FROM hrv WHERE hrv_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
-            tristate success = m_conn->querySingleNumber(sql, &count);
-            qDebug() << sql << success << count;
+        if (db.isOpen()) {
+            QString sql = QString("SELECT hrv_id FROM hrv WHERE hrv_timestamp=%1")
+                              .arg(r.timestamp.toMSecsSinceEpoch() / 1000);
+            QSqlQuery query;
+            bool exists = query.exec(sql) && query.next();
+            qDebug() << sql << exists;
 
-            if (success == cancelled || success == false) {
+            if (!exists) {
                 qDebug() << "HRV record does not exist, inserting";
-                auto hrvData = m_conn->tableSchema("hrv");
-                KDbFieldList hrvFields;
-                hrvFields.addField(hrvData->field("hrv_timestamp"));
-                hrvFields.addField(hrvData->field("hrv_timestamp_dt"));
-                hrvFields.addField(hrvData->field("hrv_value"));
-
-                QList<QVariant> hrvValues;
-                hrvValues << r.timestamp.toMSecsSinceEpoch() / 1000;
-                hrvValues << r.timestamp;
-                hrvValues << r.value;
-
-                result = m_conn->insertRecord(&hrvFields, hrvValues);
-                if (result->lastResult().isError()) {
-                    qDebug() << Q_FUNC_INFO << "Error inserting hrv record";
-                    success = false;
+                query.prepare("INSERT INTO hrv (hrv_timestamp, hrv_timestamp_dt, hrv_value) VALUES (?, ?, ?)");
+                query.addBindValue(r.timestamp.toMSecsSinceEpoch() / 1000);
+                query.addBindValue(Database::dateTimeToText(r.timestamp));
+                query.addBindValue(r.value);
+                if (!query.exec()) {
+                    qWarning() << Q_FUNC_INFO << "Error inserting hrv record" << query.lastError().text();
                 }
             } else {
                 qDebug() << "HRV record exists, skipping";
             }
         }
     }
-    tg.commit();
+    if (!db.commit()) {
+        qWarning() << Q_FUNC_INFO << "Cannot save records:" << db.lastError().text();
+        return false;
+    }
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }

@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QDateTime>
 #include <QList>
-#include <KDb3/KDbConnection>
 
 #include "activitykind.h"
 
@@ -57,7 +56,8 @@ public:
     bool isValid() const;
     void setValid(bool valid);
 
-    bool saveToDatabase(KDbConnection *conn);
+    bool saveToDatabase();
+
 private:
     short m_version;
     uint m_id;
