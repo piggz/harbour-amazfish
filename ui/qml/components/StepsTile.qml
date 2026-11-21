@@ -16,6 +16,7 @@ Tile {
         size: parent.width - styler.themeHorizontalPageMargin * 4
         percent: stepCount ? stepCount / stepGoal : 0.06
         widthRatio: 0.08
+        gradientColor: styler.blockBg
 
         Item {
             anchors.centerIn: parent

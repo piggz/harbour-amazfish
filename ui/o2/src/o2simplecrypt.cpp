@@ -32,13 +32,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QCryptographicHash>
 #include <QDataStream>
 
+#include <QIODevice>
+#include <cstdlib>
+
 O0SimpleCrypt::O0SimpleCrypt():
     m_key(0),
     m_compressionMode(CompressionAuto),
     m_protectionMode(ProtectionChecksum),
     m_lastError(ErrorNoError)
 {
-    qsrand(uint(QDateTime::currentMSecsSinceEpoch() & 0xFFFF));
+    std::srand(uint(QDateTime::currentMSecsSinceEpoch() & 0xFFFF));
 }
 
 O0SimpleCrypt::O0SimpleCrypt(quint64 key):
@@ -47,7 +50,7 @@ O0SimpleCrypt::O0SimpleCrypt(quint64 key):
     m_protectionMode(ProtectionChecksum),
     m_lastError(ErrorNoError)
 {
-    qsrand(uint(QDateTime::currentMSecsSinceEpoch() & 0xFFFF));
+    std::srand(uint(QDateTime::currentMSecsSinceEpoch() & 0xFFFF));
     splitKey();
 }
 
@@ -113,7 +116,7 @@ QByteArray O0SimpleCrypt::encryptToByteArray(const QByteArray &plaintext)
     }
 
     //prepend a random char to the string
-    char randomChar = char(qrand() & 0xFF);
+    char randomChar = char(std::rand() & 0xFF);
     ba = randomChar + integrityProtection + ba;
 
     int pos(0);

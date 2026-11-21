@@ -1,0 +1,210 @@
+# Screenshot steps for the UI, see ui/src/screenshotsteps.h.
+# Not shown: SportsActivityKindPage needs options.
+js app.width = 360
+js app.height = 720
+
+# First start: the app asks for user data first.
+wait 2000
+shot 00-first-run-user-settings
+js AmazfishConfig.profileName = "Test"
+js AmazfishConfig.pairedName = "Demo watch"
+js AmazfishConfig.pairedType = "demo"
+js AmazfishConfig.pairedAddress = "00:00:00:00:00:00"
+js AmazfishConfig.notificationSettings = { "Signal": true, "Telegram": true, "Email": true, "Calendar": false }
+js app.pages.pop()
+wait 1000
+shot 01-first-page
+
+js app.pages.push("qrc:/qml/pages/AnalysisPage.qml")
+wait 1500
+shot 02-AnalysisPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/BatteryPage.qml")
+wait 1500
+shot 03-BatteryPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/BipFirmwarePage.qml")
+wait 1500
+shot 04-BipFirmwarePage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/DebugInfo.qml")
+wait 1500
+shot 05-DebugInfo
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/FitPubSettingsPage.qml")
+wait 1500
+shot 06-FitPubSettingsPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/FitPubUploadPage.qml")
+wait 1500
+shot 07-FitPubUploadPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/FitTrackeeSettingsPage.qml")
+wait 1500
+shot 08-FitTrackeeSettingsPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/FitTrackeeUploadPage.qml")
+wait 1500
+shot 09-FitTrackeeUploadPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/HeartratePage.qml")
+wait 1500
+shot 10-HeartratePage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/PaiDataPage.qml")
+wait 1500
+shot 11-PaiDataPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/PairDevicePage.qml")
+wait 1500
+shot 12-PairDevicePage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/PairDeviceTypeDialog.qml")
+wait 1500
+shot 13-PairDeviceTypeDialog
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/Settings-alarms.qml")
+wait 1500
+shot 14-Settings-alarms
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/Settings-app.qml")
+wait 1500
+shot 15-Settings-app
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/Settings-button-action.qml")
+wait 1500
+shot 16-Settings-button-action
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/Settings-device.qml")
+wait 1500
+shot 17-Settings-device
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/Settings-huami-shortcuts.qml")
+wait 1500
+shot 18-Settings-huami-shortcuts
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/Settings-menu.qml")
+wait 1500
+shot 19-Settings-menu
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/Settings-notifications.qml")
+wait 1500
+shot 20-Settings-notifications
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/Settings-user.qml")
+wait 1500
+shot 21-Settings-user
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/SleepPage.qml")
+wait 1500
+shot 22-SleepPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/Spo2DataPage.qml")
+wait 1500
+shot 23-Spo2DataPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/SportsSummaryPage.qml")
+wait 1500
+shot 24-SportsSummaryPage
+
+# The first sports record, if there is one (demo device). The map gets a local style, so it loads nothing from the network.
+js (function () { function find(it, name) { if (String(it).indexOf(name) === 0) return it; for (var i = 0; i < it.children.length; i++) { var f = find(it.children[i], name); if (f) return f; } return null; } var item = find(app.pages.currentItem, "ListItemPL"); if (!item) return; item.clicked(); var map = find(app.pages.currentItem, "QQuickItemMapboxGL"); if (map) map.styleJson = '{"version": 8, "sources": {}, "layers": [{"id": "background", "type": "background", "paint": {"background-color": "#e8e4d8"}}]}'; })()
+wait 4000
+shot 24a-SportPage
+js if (String(app.pages.currentItem).indexOf("SportPage") === 0) app.pages.pop()
+wait 500
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/StepsPage.qml")
+wait 1500
+shot 25-StepsPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/StravaSettingsPage.qml")
+wait 1500
+shot 26-StravaSettingsPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/StravaUploadPage.qml")
+wait 1500
+shot 27-StravaUploadPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/StressDataPage.qml")
+wait 1500
+shot 28-StressDataPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/TestIconsPage.qml")
+wait 1500
+shot 29-TestIconsPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/AuthKeyDialog.qml")
+wait 1500
+shot 30-AuthKeyDialog
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/AddCityPage.qml")
+wait 1500
+shot 31-AddCityPage
+js app.pages.pop()
+wait 500
+
+js app.pages.push("qrc:/qml/pages/UnpairDeviceDialog.qml")
+wait 1500
+shot 32-UnpairDeviceDialog
+js app.pages.pop()
+wait 500
+

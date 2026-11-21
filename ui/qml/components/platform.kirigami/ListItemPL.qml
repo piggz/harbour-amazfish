@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import QtQml
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
@@ -43,9 +44,8 @@ Item {
 
     signal clicked
 
-    Kirigami.SwipeListItem {
+    ItemDelegate {
         id: item
-        actions: menu && menu.enabled ? menu.items : []
         bottomPadding: 0
         contentItem: RowLayout {
             Item {
@@ -55,10 +55,28 @@ Item {
                 Layout.fillWidth: true
             }
         }
+        highlighted: down
         implicitHeight: contentHeight
         topPadding: 0
-        separatorVisible: false
         width: root.width
         onClicked: root.clicked()
+        onPressAndHold: {
+            if (menu && menu.enabled && menu.items.length > 0)
+                contextMenu.popup();
+        }
+    }
+
+    // Kirigami 6 has no SwipeListItem, so the menu actions open on press and hold
+    Menu {
+        id: contextMenu
+
+        Instantiator {
+            model: menu ? menu.items : []
+            delegate: MenuItem {
+                action: modelData
+            }
+            onObjectAdded: function (index, object) { contextMenu.insertItem(index, object); }
+            onObjectRemoved: function (index, object) { contextMenu.removeItem(object); }
+        }
     }
 }

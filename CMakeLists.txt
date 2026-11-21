@@ -18,7 +18,14 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(GNUInstallDirs)
 include(FeatureSummary)
 
-find_package(Qt5 COMPONENTS Core Gui Quick Sql DBus LinguistTools REQUIRED)
+# Kirigami uses Qt 6, the other flavors stay on Qt 5
+if(FLAVOR STREQUAL "kirigami")
+    set(QT_MAJOR 6)
+else()
+    set(QT_MAJOR 5)
+endif()
+
+find_package(Qt${QT_MAJOR} COMPONENTS Core Gui Quick Sql DBus LinguistTools REQUIRED)
 
 if(NOT DEFINED FLAVOR)
     message(FATAL_ERROR "Please specify the platform using -DFLAVOR=platform as a CMake option. Supported platforms: kirigami, silica, qtcontrols, uuitk.")
@@ -64,9 +71,23 @@ endif()
 message(STATUS "Git version: ${PROJECT_GIT_VERSION}")
 add_compile_definitions(PROJECT_GIT_VERSION="${PROJECT_GIT_VERSION}")
 
+option(ENABLE_COVERAGE "Build with gcov coverage, for the tests" OFF)
+if(ENABLE_COVERAGE)
+    add_compile_options(--coverage)
+    add_link_options(--coverage)
+endif()
+
 add_subdirectory(qble)
 add_subdirectory(lib)
 add_subdirectory(daemon)
 add_subdirectory(ui)
+
+# Tests need the Qt 6 QML runtime, so they are only built with the kirigami flavor.
+if(FLAVOR STREQUAL "kirigami")
+    include(CTest)
+    if(BUILD_TESTING)
+        add_subdirectory(tests)
+    endif()
+endif()
 
 feature_summary(WHAT ALL)

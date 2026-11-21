@@ -31,7 +31,7 @@ Item {
     Kirigami.FormData.buddyFor: val
     Kirigami.FormData.label: label
     Layout.fillWidth: true
-    Layout.preferredWidth: parent.width
+    Layout.preferredWidth: inForm ? Math.min(parent.width, Kirigami.Units.gridUnit * 32) : parent.width
 
     property alias    currentIndex: val.currentIndex
     property alias  description: desc.text

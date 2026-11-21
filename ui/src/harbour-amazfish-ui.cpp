@@ -20,6 +20,8 @@
 #include <QFileInfo>
 #endif
 
+#include "screenshotsteps.h"
+
 #include "datasource.h"
 #include "sportsdatamodel.h"
 #include "paimodel.h"
@@ -154,12 +156,24 @@ int main(int argc, char *argv[])
     view->load(QUrl("qrc:/qml/harbour-amazfish.qml"));
 #else
     view->load(QUrl("qrc:/qml/harbour-amazfish.qml"));
+    if (view->rootObjects().isEmpty()) {
+        return -1;
+    }
 
     if (QQuickWindow* window = qobject_cast<QQuickWindow*>(view->rootObjects().at(0))) {
         window->setIcon(QIcon(":/icons/172x172/harbour-amazfish-ui.png"));
+
+        // For tests: run the screenshot steps from tests/screenshots.steps, then quit.
+        const QString stepsFile = QString::fromLocal8Bit(qgetenv("AMAZFISH_SCREENSHOT_STEPS"));
+        if (!stepsFile.isEmpty()) {
+            runScreenshotSteps(window, stepsFile, QString::fromLocal8Bit(qgetenv("AMAZFISH_SCREENSHOT_DIR")));
+        }
     }
 
 #endif
 
-    return app->exec();
+    int result = app->exec();
+    // Delete the QML before daemonInterface goes away, so that its bindings do not see a null object.
+    delete view;
+    return result;
 }

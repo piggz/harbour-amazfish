@@ -4,7 +4,7 @@
 #include <QAbstractListModel>
 #include <QVariant>
 
-#include <KDb3/KDbConnection>
+#include <KDbConnection>
 
 typedef struct {
     int meta_id;

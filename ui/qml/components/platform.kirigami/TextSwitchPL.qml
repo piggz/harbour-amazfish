@@ -26,7 +26,7 @@ Item {
     implicitHeight: sw.height + desc.height + desc.anchors.topMargin
     width: parent.width
     Layout.fillWidth: true
-    Layout.preferredWidth: parent.width
+    Layout.preferredWidth: inForm ? Math.min(parent.width, Kirigami.Units.gridUnit * 32) : parent.width
 
     property alias  checked: sw.checked
     property alias  description: desc.text

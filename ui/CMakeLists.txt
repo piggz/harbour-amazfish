@@ -32,6 +32,7 @@ set(SOURCES
     ./src/harbour-amazfish-ui.cpp
     ./src/trackloader.cpp
     ./src/daemoninterface.cpp
+    ./src/screenshotsteps.cpp
 )
 
 set(HEADERS
@@ -51,17 +52,26 @@ add_executable(harbour-amazfish-ui
   ${TS_FILES}
 )
 
-find_package(Qt5 COMPONENTS Gui Widgets Quick Positioning REQUIRED)
+find_package(Qt${QT_MAJOR} COMPONENTS Gui Widgets Quick Positioning REQUIRED)
 find_package(KDb REQUIRED)
 
 target_compile_options(harbour-amazfish-ui PRIVATE -Wall -Wextra -Wpedantic)
 
-QT5_ADD_TRANSLATION(QM_FILES ${TS_FILES})
+if(QT_MAJOR EQUAL 6)
+    qt6_add_translation(QM_FILES ${TS_FILES})
+else()
+    QT5_ADD_TRANSLATION(QM_FILES ${TS_FILES})
+endif()
 add_custom_target(ui_translations DEPENDS ${QM_FILES})
 add_dependencies(harbour-amazfish-ui ui_translations)
 
-QT5_CREATE_TRANSLATION(QT_FILES "${CMAKE_SOURCE_DIR}"
-    OPTIONS "-no-obsolete")
+if(QT_MAJOR EQUAL 6)
+    qt6_create_translation(QT_FILES "${CMAKE_SOURCE_DIR}"
+        OPTIONS "-no-obsolete")
+else()
+    QT5_CREATE_TRANSLATION(QT_FILES "${CMAKE_SOURCE_DIR}"
+        OPTIONS "-no-obsolete")
+endif()
 
 install(FILES ${QM_FILES}
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfish-ui/translations")
@@ -79,7 +89,7 @@ target_compile_definitions(harbour-amazfish-ui
 target_link_libraries(harbour-amazfish-ui
   PRIVATE 
   libamazfish libwatchfish qble 
-  Qt5::Core Qt5::Widgets Qt5::Quick Qt5::Positioning
+  Qt${QT_MAJOR}::Core Qt${QT_MAJOR}::Widgets Qt${QT_MAJOR}::Quick Qt${QT_MAJOR}::Positioning
   KDb
   o2
   ${SAILFISH_LDFLAGS}

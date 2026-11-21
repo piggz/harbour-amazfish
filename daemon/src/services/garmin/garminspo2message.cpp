@@ -20,7 +20,7 @@ void GarminSpo2Message::onMessage(const QByteArray& data) {
 
     ts=ts + GARMIN_TIME_OFFSET; // Unix timestamp in seconds
 
-    qDebug() << Q_FUNC_INFO << "Garmin: realtime Spo2 Callback: " << spo2 << ", Timestamp " << QDateTime::fromTime_t(ts).toString();
+    qDebug() << Q_FUNC_INFO << "Garmin: realtime Spo2 Callback: " << spo2 << ", Timestamp " << QDateTime::fromMSecsSinceEpoch(qint64(ts) * 1000).toString();
     mCommunicator->setSpo2(spo2);
 
 }

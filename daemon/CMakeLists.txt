@@ -311,8 +311,8 @@ add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
 )
 
 find_package(PkgConfig REQUIRED)
-find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)
-find_package(KF5Archive REQUIRED)
+find_package(Qt${QT_MAJOR} COMPONENTS Gui Widgets Positioning Network REQUIRED)
+find_package(KF${QT_MAJOR}Archive REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(ICU REQUIRED COMPONENTS uc i18n data)
 find_package(KDb REQUIRED)
@@ -367,8 +367,8 @@ target_compile_definitions(harbour-amazfishd
 target_link_libraries(harbour-amazfishd
   PRIVATE
   libwatchfish libamazfish qble
-  Qt5::Gui Qt5::Widgets Qt5::Core Qt5::Positioning Qt5::Network
-  KF5::Archive
+  Qt${QT_MAJOR}::Gui Qt${QT_MAJOR}::Widgets Qt${QT_MAJOR}::Core Qt${QT_MAJOR}::Positioning Qt${QT_MAJOR}::Network
+  KF${QT_MAJOR}::Archive
   ZLIB::ZLIB
   ICU::uc ICU::i18n ICU::data
   KDb
@@ -386,12 +386,21 @@ else()
 endif()
 
 
-QT5_ADD_TRANSLATION(QM_FILES ${TS_FILES})
+if(QT_MAJOR EQUAL 6)
+    qt6_add_translation(QM_FILES ${TS_FILES})
+else()
+    QT5_ADD_TRANSLATION(QM_FILES ${TS_FILES})
+endif()
 add_custom_target(daemon_translations DEPENDS ${QM_FILES})
 add_dependencies(harbour-amazfishd daemon_translations)
 
-QT5_CREATE_TRANSLATION(QT_FILES "${CMAKE_SOURCE_DIR}"
-    OPTIONS "-no-obsolete")
+if(QT_MAJOR EQUAL 6)
+    qt6_create_translation(QT_FILES "${CMAKE_SOURCE_DIR}"
+        OPTIONS "-no-obsolete")
+else()
+    QT5_CREATE_TRANSLATION(QT_FILES "${CMAKE_SOURCE_DIR}"
+        OPTIONS "-no-obsolete")
+endif()
 
 install(FILES ${QM_FILES}
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/harbour-amazfishd/translations")
