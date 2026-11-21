@@ -3,8 +3,6 @@ import Sailfish.Silica 1.0
 import uk.co.piggz.amazfish 1.0
 
 CoverBackground {
-    property int stepCount: 0
-
     Column {
         anchors.fill: parent
         spacing: Theme.paddingMedium
@@ -54,6 +52,7 @@ CoverBackground {
             }
             Label {
                 id: lblBattery
+                text: _InfoBatteryPercent
                 color: Theme.secondaryHighlightColor
                 height: Theme.iconSizeMedium
                 verticalAlignment: Text.AlignVCenter
@@ -81,7 +80,7 @@ CoverBackground {
                 height: Theme.iconSizeMedium
                 verticalAlignment: Text.AlignVCenter
                 width: height
-                text: stepCount
+                text: _InfoSteps
             }
         }
 
@@ -100,6 +99,7 @@ CoverBackground {
             }
             Label {
                 id: lblHeartrate
+                text: _InfoHeartrate
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 height: Theme.iconSizeMedium
@@ -122,6 +122,7 @@ CoverBackground {
             }
             Label {
                 id: lblSpo2
+                text: _InfoSpo2
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 height: Theme.iconSizeMedium
@@ -149,37 +150,6 @@ CoverBackground {
             onTriggered: {
                 DaemonInterfaceInstance.miBandService().fetchActivityData();
             }
-        }
-    }
-
-    Connections {
-        target: DaemonInterfaceInstance
-        onConnectionStateChanged: {
-            if (DaemonInterfaceInstance.connectionState === "authenticated") {
-                DaemonInterfaceInstance.refreshInformation();
-            }
-        }
-        onInformationChanged: {
-            switch (infoKey) {
-            case Amazfish.INFO_BATTERY:
-                lblBattery.text = infoValue
-                break;
-            case Amazfish.INFO_HEARTRATE:
-                lblHeartrate.text = infoValue
-                break;
-            case Amazfish.INFO_STEPS:
-                stepCount = parseInt(infoValue, 10) || 0;
-                break
-            case Amazfish.INFO_SPO2:
-                lblSpo2.text = parseInt(infoValue, 10) || 0;
-                break
-            }
-        }
-    }
-
-    Component.onCompleted: {
-        if (DaemonInterfaceInstance.connectionState === "authenticated") {
-            DaemonInterfaceInstance.refreshInformation();
         }
     }
 }
