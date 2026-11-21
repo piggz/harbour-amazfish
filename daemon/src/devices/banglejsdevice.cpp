@@ -196,6 +196,7 @@ void BangleJSDevice::initialise()
     setAlarms();
 
     m_steps = getStepsFromDb();
+    m_stepsDay = QDate::currentDate();
     emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
 }
 
@@ -583,6 +584,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
                 if (saveActivitySamples()) {
                     AmazfishConfig::instance()->setValue("device/lastactivitysyncmillis", lastItemDateTime.toMSecsSinceEpoch());
                     m_steps = getStepsFromDb();
+                    m_stepsDay = QDate::currentDate();
                     emit informationChanged(Amazfish::Info::INFO_STEPS, QString::number(m_steps));
                 }
             }
@@ -612,6 +614,11 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
             ActivitySample sample = ActivitySample(actDate, ActivityKind::toHuamiRawType(kind), 100*mov/2048, steps, m_heartrate);
             m_samples << sample;
         } else {
+            // On a new day start again from the database, so yesterday's steps are not counted after midnight.
+            if (m_stepsDay != QDate::currentDate()) {
+                m_steps = getStepsFromDb();
+                m_stepsDay = QDate::currentDate();
+            }
             m_steps += steps;
             qDebug() << "Activity " << actDate << kind << mov << m_steps << m_heartrate  ;
             emit informationChanged(Amazfish::Info::INFO_HEARTRATE, QString::number(m_heartrate));
