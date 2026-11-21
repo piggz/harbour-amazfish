@@ -4,6 +4,7 @@
 
 #include "abstractdevice.h"
 #include "activitysample.h"
+#include "activitysummary.h"
 #include <QObject>
 
 class DK08Device : public AbstractDevice
@@ -37,6 +38,7 @@ private:
     void initialise();
     void downloadActivityData();
     void saveActivitySamples(const QList<ActivitySample>& samples, bool complete);
+    void saveWorkout(ActivitySummary summary);
     void setOperationRunning(bool running);
 
     //    Q_SLOT void authenticated(bool ready);

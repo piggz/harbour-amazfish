@@ -2,6 +2,7 @@
 #define DK08NUSSERVICE_H
 
 #include "activitysample.h"
+#include "activitysummary.h"
 #include "devices/abstractdevice.h"
 #include "qble/qbleservice.h"
 
@@ -112,6 +113,7 @@ public:
     void getHrInfo(InfoType type);
     void getSportInfo(InfoType type);
     void getSleep(InfoType type);
+    void getWorkout(InfoType type);
     void getSleepStats();
     void getStepSection(InfoType);
     void confirmSportHistoryData(int num);
@@ -132,6 +134,7 @@ public:
     void downloadHistory();
     void cancelHistory();
     Q_SIGNAL void historyDownloaded(const QList<ActivitySample>& samples, bool complete);
+    Q_SIGNAL void workoutDownloaded(const ActivitySummary& summary);
 
 private:
     // The watch has one upload queue for all history types, so ask one type at a time.
@@ -139,9 +142,11 @@ private:
         CountSteps,
         CountSleep,
         CountHeartRate,
+        CountWorkouts,
         FetchSteps,
         FetchSleep,
         FetchHeartRate,
+        FetchWorkouts,
     };
 
     QList<FetchStep> m_fetchSteps;

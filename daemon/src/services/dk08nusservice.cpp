@@ -3,6 +3,8 @@
 #include "amazfishconfig.h"
 #include "typeconversion.h"
 
+#include <QMap>
+
 /*
  * The Nordic UART Service is a simple GATT-based service with TX and RX characteristics.
  * Data received from the peer is passed to the application, and the data received
@@ -34,7 +36,8 @@ void DK08NUSService::downloadHistory()
         return;
     }
     m_samples.clear();
-    m_fetchSteps = { CountSteps, CountSleep, CountHeartRate, FetchSteps, FetchSleep, FetchHeartRate };
+    m_fetchSteps = { CountSteps, CountSleep, CountHeartRate, CountWorkouts, FetchSteps, FetchSleep, FetchHeartRate,
+        FetchWorkouts };
     nextFetchStep();
 }
 
@@ -69,12 +72,16 @@ void DK08NUSService::nextFetchStep()
         getSleep(InfoType::HistoryNum);
     } else if (step == CountHeartRate) {
         getHrInfo(InfoType::HistoryNum);
+    } else if (step == CountWorkouts) {
+        getWorkout(InfoType::HistoryNum);
     } else if (step == FetchSteps) {
         getStepSection(InfoType::History);
     } else if (step == FetchSleep) {
         getSleep(InfoType::History);
     } else if (step == FetchHeartRate) {
         getHrInfo(InfoType::History);
+    } else if (step == FetchWorkouts) {
+        getWorkout(InfoType::History);
     }
     m_fetchTimer.start();
 }
@@ -111,6 +118,8 @@ void DK08NUSService::fetchTimeout()
         m_fetchSteps.removeAll(FetchSleep);
     } else if (step == CountHeartRate) {
         m_fetchSteps.removeAll(FetchHeartRate);
+    } else if (step == CountWorkouts) {
+        m_fetchSteps.removeAll(FetchWorkouts);
     }
     nextFetchStep();
 }
@@ -332,54 +341,86 @@ void DK08NUSService::parseStep(QByteArray value) {
     }
 }
 
-
-void DK08NUSService::parseSport(QByteArray value) {
-    qDebug() << Q_FUNC_INFO << value.toHex();
-
-    int mode = (value[0] >> 4) & 0x0F; // Get sport mode (upper 4 bits of value[0])
-    int en = value[0] & 0x0F;          // Get data model (lower 4 bits of value[0])
-    int ss = value[1] & 0x03;          // Get walking status (bits 0-1 of value[1])
-
-    // Extract package number info (3 bytes)
-    int packageLength = ((value[2] & 0x0F) << 8) | (value[3] & 0xFF);
-    int packageNum = ((value[4] & 0xFF) << 8) | (value[5] & 0xFF);
-
-    // Extract sports data (7 bytes)
-    int step = ((value[6] & 0x1F) << 12) | ((value[7] & 0xFF) << 4) | ((value[8] >> 4) & 0x0F);
-    int ka = ((value[8] & 0x0F) << 13) | ((value[9] & 0xFF) << 5) | ((value[10] >> 3) & 0x1F);
-    int mi = ((value[10] & 0x07) << 14) | ((value[11] & 0xFF) << 6) | ((value[12] >> 2) & 0x3F);
-
-    // Extract timestamp (4 bytes)
-    qint64 date = (static_cast<quint32>(value[13]) << 24) |
-                  (static_cast<quint32>(value[14]) << 16) |
-                  (static_cast<quint32>(value[15]) << 8) |
-                  (static_cast<quint32>(value[16]));
-    date *= 1000; // Convert to milliseconds
-    // date -= QTimeZone::systemTimeZone().standardTimeOffset(); // Adjust for timezone
-
-    // Extract time (2 bytes)
-    int time = (static_cast<quint16>(value[17]) << 8) | static_cast<quint16>(value[18]);
-
-    qDebug() << "Mode:" << mode << "En:" << en << "SS:" << ss;
-    qDebug() << "Package Length:" << packageLength << "Package Num:" << packageNum;
-    qDebug() << "Steps:" << step << "Calories:" << ka << "Distance:" << mi;
-    qDebug() << "Date:" << date << "Time:" << time;
-
-    if (en == InfoType::Notify || en == InfoType::History) { // Segmented historical data/reporting
-        qDebug() << "Step Type:" << (ss + 2) << "Sport Mode:" << mode;
-    } else if (en == InfoType::HistoryNum) { // Historical sport data count
-        qDebug() << "Historical Data Count:" << packageLength;
-    }
-
-
-    if (en == InfoType::Notify) {
-        qDebug() << "sport notify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-    } else if (en == InfoType::History) {
-        qDebug() << "sport history <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-    }
-
+void DK08NUSService::getWorkout(InfoType type)
+{
+    QByteArray msg(20, 0);
+    msg[0] = NUSCallType::Command;
+    msg[1] = NUSCallType::ParseSport;
+    msg[2] = type;
+    msg[19] = getCrc(msg.left(19));
+    writeValue(UUID_CHARACTERISTIC_NUS_WRITE, msg);
 }
 
+void DK08NUSService::parseSport(QByteArray value)
+{
+    quint8 v[19];
+    for (int i = 0; i < 19; i++) {
+        v[i] = static_cast<quint8>(value[i]);
+    }
+    int mode = v[0] >> 4;
+    int en = v[0] & 0x0f;
+    int total = (v[2] << 4) | (v[3] >> 4);
+    int index = ((v[3] & 0x0f) << 8) | v[4];
+
+    if (en == InfoType::HistoryNum) {
+        fetchCount(CountWorkouts, FetchWorkouts, total);
+        return;
+    }
+
+    // Bytes 5..11: 5 unused bits, then steps, calories and distance with 17 bits each.
+    int steps = ((v[5] & 0x07) << 14) | (v[6] << 6) | (v[7] >> 2);
+    int calories = ((v[7] & 0x03) << 15) | (v[8] << 7) | (v[9] >> 1);
+    int distance = ((v[9] & 0x01) << 16) | (v[10] << 8) | v[11];
+    // The watch keeps local time and counts it in seconds as if it were UTC.
+    uint seconds = TypeConversion::toUint32(v[15], v[14], v[13], v[12]);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
+    QDateTime utc = QDateTime::fromSecsSinceEpoch(seconds, Qt::UTC);
+#else
+    QDateTime utc = QDateTime::fromTime_t(seconds).toUTC();
+#endif
+    QDateTime start = QDateTime(utc.date(), utc.time());
+    int minutes = (v[16] << 8) | v[17];
+
+    qDebug() << Q_FUNC_INFO << "mode" << mode << "en" << en << "record" << index << "of" << total << "start" << start
+             << "minutes" << minutes << "steps" << steps << "kcal" << calories << "distance" << distance;
+
+    if (en != InfoType::History) {
+        return;
+    }
+    if (total == 0) {
+        fetchStepDone(FetchWorkouts);
+        return;
+    }
+
+    // Modes as named by the iband app. Mode 6 (badminton) has no kind in Amazfish.
+    static const QMap<int, ActivityKind::Type> kinds = {
+        { 0, ActivityKind::Running },
+        { 1, ActivityKind::Cycling },
+        { 2, ActivityKind::Swimming },
+        { 3, ActivityKind::JumpRope },
+        { 4, ActivityKind::PushUps },
+        { 5, ActivityKind::Climbing },
+    };
+    ActivityKind::Type kind = kinds.value(mode, ActivityKind::Activity);
+
+    ActivitySummary summary;
+    summary.setName(ActivityKind::toString(kind) + "-" + start.toString("yyyyMMdd-HHmm"));
+    summary.setActivityKind(kind);
+    summary.setStartTime(start);
+    summary.setEndTime(start.addSecs(minutes * 60));
+    summary.addMetaData("activeSeconds", QString::number(minutes * 60), "seconds");
+    summary.addMetaData("steps", QString::number(steps), "steps");
+    summary.addMetaData("caloriesBurnt", QString::number(calories), "calories");
+    summary.addMetaData("distanceMeters", QString::number(distance), "meters");
+    summary.setValid(true);
+    emit workoutDownloaded(summary);
+
+    if (index + 1 >= total) {
+        fetchStepDone(FetchWorkouts);
+    } else {
+        m_fetchTimer.start();
+    }
+}
 
 void DK08NUSService::getSleepStats() {
     QByteArray msg(20, 0);
