@@ -7,10 +7,6 @@
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
 
-#include <KDb3/KDbDriver>
-#include <KDb3/KDbConnection>
-#include <KDb3/KDbConnectionData>
-
 #include "datasource.h"
 #include "amazfish.h"
 
@@ -36,8 +32,6 @@ public:
     Q_INVOKABLE bool supportsDataType(Amazfish::DataType t);
     Q_INVOKABLE int supportedFeatures();
     Q_INVOKABLE int supportedDataTypes();
-
-    KDbConnection *dbConnection();
 
     //Functions provided by services
     Q_INVOKABLE QString prepareFirmwareDownload(const QString &path);
@@ -80,11 +74,6 @@ private:
     QDBusInterface *iface = nullptr;
     QDBusServiceWatcher *m_serviceWatcher = nullptr;
     bool m_pairing = false;
-
-    //Database
-    KDbDriver *m_dbDriver = nullptr;
-    KDbConnectionData m_connData;
-    KDbConnection *m_conn = nullptr;
 
     void connectDaemon();
     void disconnectDaemon()

@@ -2,9 +2,8 @@
 #define PAIMODEL_H
 
 #include <QAbstractListModel>
+#include <QDate>
 #include <QObject>
-
-#include <KDb3/KDbConnection>
 
 class PaiModel : public QAbstractListModel
 {
@@ -40,13 +39,10 @@ public:
     QHash<int, QByteArray> 	roleNames() const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    void setConnection(KDbConnection *conn);
-
     Q_INVOKABLE QVariantMap get(int row) const;
     Q_INVOKABLE void update();
 
 private:
-    KDbConnection *m_connection = nullptr;
     QList<PaiRecord> m_data;
 
 };

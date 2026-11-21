@@ -134,7 +134,6 @@ private:
     void setUserGoal(uint steps);
     void setUserGoalAlert(bool enabled);
     void setAlarms();
-    int getStepsFromDb();
 
     QString alertIcon(const QString &appname) const;
 

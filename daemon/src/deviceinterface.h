@@ -7,10 +7,6 @@
 #include <QQueue>
 #include <QTimer>
 
-#include <KDb3/KDbDriver>
-#include <KDb3/KDbConnection>
-#include <KDb3/KDbConnectionData>
-
 #ifdef MER_EDITION_SAILFISH
 #include <keepalive/backgroundactivity.h>
 #endif
@@ -57,8 +53,6 @@ public:
     Q_INVOKABLE bool supportsDataType(int t);
     Q_INVOKABLE int supportedFeatures();
     Q_INVOKABLE int supportedDataTypes();
-
-    KDbConnection *dbConnection();
 
     Q_SIGNAL void message(const QString &text);
     Q_SIGNAL void downloadProgress(int percent);
@@ -122,8 +116,6 @@ private:
     void createSettings();
     void updateServiceController();
 
-    void log_battery_level(int level);
-
     QString devicePath(const QString &address);
     bool determineAdapterPath(const QString &address);
 
@@ -157,11 +149,7 @@ private:
     QQueue<Amazfish::WatchNotification> m_notificationBuffer;
 
     //Database
-    KDbDriver *m_dbDriver = nullptr;
-    KDbConnectionData m_connData;
-    KDbConnection *m_conn = nullptr;
     void setupDatabase();
-    void createTables();
 
     //Weather
     CityManager m_cityManager;
@@ -185,8 +173,6 @@ private:
 #ifdef MER_EDITION_SAILFISH
     BackgroundActivity *m_backgroundActivity = nullptr;
 #endif
-
-    bool migrateDataDeviceAddress(const QString& oldAddress, const QString& newAddress);
 };
 
 #endif // BIPINTERFACE_H

@@ -1,5 +1,7 @@
 #include "huamiactivitysummaryparser.h"
 
+#include <QDebug>
+
 #pragma pack(push, 1)
 struct summary_t {
     qint16 version;

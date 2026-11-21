@@ -3,7 +3,10 @@
 #include "huami/huamifetcher.h"
 #include "mibandservice.h"
 
-FetchSpo2SleepOperation::FetchSpo2SleepOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs) : AbstractFetchOperation(fetcher, isZeppOs), m_conn(conn)
+#include "database.h"
+
+FetchSpo2SleepOperation::FetchSpo2SleepOperation(HuamiFetcher* fetcher, bool isZeppOs)
+    : AbstractFetchOperation(fetcher, isZeppOs)
 {
     setLastSyncKey("device/lastSpo2SleepTimeMillis");
 }
@@ -33,7 +36,7 @@ bool FetchSpo2SleepOperation::processBufferedData()
     }
 
     QDateTime timestamp;
-    QVector<Spo2SleepRecord> recs;
+    QVector<Database::Spo2SleepRecord> recs;
 
     int version = m_buffer[0];
     if (version != 2) {
@@ -46,7 +49,7 @@ bool FetchSpo2SleepOperation::processBufferedData()
         int32_t timestampSeconds = TypeConversion::toUint32(m_buffer, offset);
         timestamp.setMSecsSinceEpoch((qint64)timestampSeconds * 1000);
 
-        Spo2SleepRecord spo;
+        Database::Spo2SleepRecord spo;
         spo.timestamp = timestamp;
         spo.value =  (uint8_t)m_buffer[offset++];
         spo.duration =  (uint8_t)m_buffer[offset++];
@@ -63,59 +66,16 @@ bool FetchSpo2SleepOperation::processBufferedData()
     return saveRecords(recs);
 }
 
-bool FetchSpo2SleepOperation::saveRecords(QVector<Spo2SleepRecord> recs)
+bool FetchSpo2SleepOperation::saveRecords(QVector<Database::Spo2SleepRecord> recs)
 {
-    QSharedPointer<KDbSqlResult> result;
-
-    bool success = true;
-
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
+    if (!Database::storeSpo2SleepRecords(recs)) {
+        return false;
+    }
 
     QDateTime lastTime;
-    foreach(const auto &r, recs) {
-        qDebug() << "Processing record:" << r.timestamp << r.value;
-        int count;
-
-        if (m_conn && m_conn->isDatabaseUsed()) {
-            KDbEscapedString sql = KDbEscapedString("SELECT spo2sleep_id FROM spo2sleep WHERE spo2_timestamp=%1").arg(r.timestamp.toMSecsSinceEpoch() / 1000);
-            tristate success = m_conn->querySingleNumber(sql, &count);
-            qDebug() << sql << success << count;
-
-            lastTime = r.timestamp;
-
-            if (success == cancelled || success == false) {
-                qDebug() << "SPO2 record does not exist, inserting";
-                auto spoData = m_conn->tableSchema("spo2sleep");
-                KDbFieldList spoFields;
-                spoFields.addField(spoData->field("spo2sleep_timestamp"));
-                spoFields.addField(spoData->field("spo2sleep_timestamp_dt"));
-                spoFields.addField(spoData->field("spo2sleep_value"));
-                spoFields.addField(spoData->field("spo2sleep_duration"));
-                spoFields.addField(spoData->field("spo2sleep_high"));
-                spoFields.addField(spoData->field("spo2sleep_low"));
-                spoFields.addField(spoData->field("spo2sleep_quality"));
-
-                QList<QVariant> spoValues;
-                spoValues << r.timestamp.toMSecsSinceEpoch() / 1000;
-                spoValues << r.timestamp;
-                spoValues << r.value;
-                spoValues << r.duration;
-                spoValues << r.spo2High;
-                spoValues << r.spo2Low;
-                spoValues << r.spo2Quality;
-
-                result = m_conn->insertRecord(&spoFields, spoValues);
-                if (result->lastResult().isError()) {
-                    qDebug() << Q_FUNC_INFO << "Error inserting spo2 record";
-                    success = false;
-                }
-            } else {
-                qDebug() << "SPO2 Sleep record exists, skipping";
-            }
-        }
+    if (!recs.isEmpty()) {
+        lastTime = recs.last().timestamp;
     }
-    tg.commit();
     saveLastActivitySync(lastTime.toMSecsSinceEpoch());
     return true;
 }

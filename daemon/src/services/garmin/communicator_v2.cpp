@@ -22,6 +22,8 @@
 
 #include <QtCore/QTimer>
 
+#include "database.h"
+
 const char* CommunicatorV2::BASE_UUID                   = "6a4e%1-667b-11e3-949a-0800200c9a66";
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_ML_GFDI = "6a4e2800-667b-11e3-949a-0800200c9a66";
 const char* CommunicatorV2::UUID_SERVICE_GARMIN_V0_SEND = "df334c80-e6a7-d082-274d-78fc66f85e16";
@@ -1125,87 +1127,26 @@ void CommunicatorV2::setBatteryLevel(quint8 val)
 void CommunicatorV2::saveHRVRecord()
 {
     // This will probably be never used as the proper way is downloading activities
-    KDbConnection *con = qobject_cast<GarminDevice *> (m_device)->database();
-    if (!con)
-    {
-        qDebug() << Q_FUNC_INFO << "Garmin: database connection not available to save HRV.";
-    }
     qDebug() << Q_FUNC_INFO << "Garmin: saving HRV to database: " << mHRV;
 
-    QSharedPointer<KDbSqlResult> result;
+    Database::HrvRecord record;
+    record.timestamp = QDateTime::currentDateTime();
+    record.value = mHRV;
+    Database::storeHrvRecords({ record });
+}
 
-    KDbTransaction transaction = con->beginTransaction();
-    KDbTransactionGuard tg(transaction);
+void CommunicatorV2::saveSpo2Record()
+{
+    // This will probably be never used as the proper way is downloading activities
+    qDebug() << Q_FUNC_INFO << "Garmin: saving Spo2 to database: " << mSpo2;
 
-    QDateTime timestamp(QDateTime::currentDateTime());
-
-    if (con && con->isDatabaseUsed()) {
-        auto hrvData = con->tableSchema("hrv");
-        KDbFieldList hrvFields;
-        hrvFields.addField(hrvData->field("hrv_timestamp"));
-        hrvFields.addField(hrvData->field("hrv_timestamp_dt"));
-        hrvFields.addField(hrvData->field("hrv_value"));
-
-        QList<QVariant> hrvValues;
-        hrvValues << timestamp.toMSecsSinceEpoch() / 1000;
-        hrvValues << timestamp;
-        hrvValues << mHRV;
-
-        result = con->insertRecord(&hrvFields, hrvValues);
-        if (result->lastResult().isError()) {
-            qDebug() << Q_FUNC_INFO << "Error inserting hrv record";
-        }
+    // sometime Spo2 value is 255, avoid adding data > 100
+    if (mSpo2 > 100) {
+        return;
     }
-
-    tg.commit();
-    return;
+    Database::Spo2Record record;
+    record.timestamp = QDateTime::currentDateTime();
+    record.automatic = true;
+    record.value = mSpo2;
+    Database::storeSpo2Records({ record });
 }
-
- void CommunicatorV2::saveSpo2Record()
-    {
-        // This will probably be never used as the proper way is downloading activities
-
-        KDbConnection *con = qobject_cast<GarminDevice *> (m_device)->database();
-        if (!con)
-        {
-            qDebug() << Q_FUNC_INFO << "Garmin: database connection not available to save Spo2.";
-        }
-        qDebug() << Q_FUNC_INFO << "Garmin: saving Spo2 to database: " << mSpo2;
-        QSharedPointer<KDbSqlResult> result;
-
-
-        KDbTransaction transaction = con->beginTransaction();
-        KDbTransactionGuard tg(transaction);
-
-        QDateTime timestamp(QDateTime::currentDateTime());
-
-        //sometime Spo2 value is 255, avoid adding data > 100
-        if (con && con->isDatabaseUsed() && (mSpo2 <=100 )) {
-            auto spoData = con->tableSchema("spo2");
-            KDbFieldList spoFields;
-            spoFields.addField(spoData->field("spo2_timestamp"));
-            spoFields.addField(spoData->field("spo2_timestamp_dt"));
-            spoFields.addField(spoData->field("spo2_automatic"));
-            spoFields.addField(spoData->field("spo2_value"));
-
-            QList<QVariant> spoValues;
-            spoValues << timestamp.toMSecsSinceEpoch() / 1000;
-            spoValues << timestamp;
-            spoValues << true;
-            spoValues << mSpo2;
-
-            result = con->insertRecord(&spoFields, spoValues);
-            if (result->lastResult().isError()) {
-                qDebug() << Q_FUNC_INFO << "Error inserting Spo2 record";
-            }
-        }
-
-    tg.commit();
-    return;
-}
-
-
-
-
-
-

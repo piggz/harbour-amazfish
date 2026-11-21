@@ -108,11 +108,6 @@ int main(int argc, char *argv[])
     DaemonInterface daemonInterface;
     DataSource dataSource;
 
-    sportsDataModel.setConnection(daemonInterface.dbConnection());
-    sportsMetaModel.setConnection(daemonInterface.dbConnection());
-    paiModel.setConnection(daemonInterface.dbConnection());
-    dataSource.setConnection(daemonInterface.dbConnection());
-
     qmlRegisterType<CitySearchModel>("org.SfietKonstantin.weatherfish", 1, 0, "CitySearchModel");
     qmlRegisterType<CityManager>("org.SfietKonstantin.weatherfish", 1, 0, "CityManager");
     qmlRegisterType<City>("org.SfietKonstantin.weatherfish", 1, 0, "City");

@@ -1,27 +1,19 @@
 #ifndef FETCHSTRESSMANUALOPERATION_H
 #define FETCHSTRESSMANUALOPERATION_H
 
+#include "database.h"
 #include <abstractfetchoperation.h>
-#include <KDbConnection.h>
 
 class FetchStressManualOperation : public AbstractFetchOperation
 {
 public:
-    FetchStressManualOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
+    FetchStressManualOperation(HuamiFetcher* fetcher, bool isZeppOs = false);
 
     void start() override;
 
 private:
-    struct StressRecord {
-        QDateTime timestamp;
-        uint8_t value;
-        uint8_t type;
-    };
-    KDbConnection *m_conn;
-
     bool processBufferedData() override;
-    bool saveRecords(QVector<StressRecord> recs, QDateTime lastTimeDefault);
-
+    bool saveRecords(QVector<Database::StressRecord> recs, QDateTime lastTimeDefault);
 };
 
 #endif // FETCHSTRESSAUTOOPERATION_H

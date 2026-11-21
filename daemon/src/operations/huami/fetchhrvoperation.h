@@ -2,24 +2,18 @@
 #define FETCHHRVOPERATION_H
 
 #include "abstractfetchoperation.h"
-#include <KDbConnection.h>
+#include "database.h"
 
 class FetchHrvOperation:  public AbstractFetchOperation
 {
 public:
-    FetchHrvOperation(HuamiFetcher *fetcher, KDbConnection *conn, bool isZeppOs = false);
+    FetchHrvOperation(HuamiFetcher* fetcher, bool isZeppOs = false);
 
     void start() override;
 
 private:
-    struct HrvRecord {
-        QDateTime timestamp;
-        int value;
-    };
-
-    KDbConnection *m_conn;
 
     bool processBufferedData() override;
-    bool saveRecords(QVector<HrvRecord> recs);
+    bool saveRecords(QVector<Database::HrvRecord> recs);
 };
 #endif // FETCHHRVOPERATION_H

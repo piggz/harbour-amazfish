@@ -172,8 +172,6 @@ public:
     Q_SIGNAL void buttonPressed();
     Q_SIGNAL void serviceEvent(uint8_t event);
 
-    void setDatabase(KDbConnection *conn);
-
     void writeChunked(const QString &characteristic, int type, const QByteArray &value);
 
     void sendAlert(const QString &sender, const QString &subject, const QString &message);
@@ -196,7 +194,6 @@ private:
 
     BipBatteryInfo m_batteryInfo;
 
-    KDbConnection *m_conn = nullptr;
     QMap<QString, uint8_t> displayItemsIdMap;
 
     Huami2021ChunkedDecoder *m_decoder = nullptr;

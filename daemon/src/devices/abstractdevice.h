@@ -10,11 +10,6 @@
 #include "libwatchfish/calendarsource.h"
 
 
-#include <KDb3/KDbDriver>
-#include <KDb3/KDbConnection>
-#include <KDb3/KDbConnectionData>
-#include <KDb3/KDbTransactionGuard>
-
 class AbstractDevice : public QBLEDevice
 {
     Q_OBJECT
@@ -52,9 +47,6 @@ public:
 
     virtual Amazfish::DataTypes supportedDataTypes() const = 0;
     bool supportsDataType(Amazfish::DataType t) const;
-
-    virtual void setDatabase(KDbConnection *conn);
-    virtual KDbConnection* database();
 
     virtual QString deviceType() const = 0;
     QString deviceName() const;
@@ -107,7 +99,6 @@ protected:
     QString m_connectionState;
 
     void setConnectionState(const QString &state);
-    KDbConnection *m_conn = nullptr;
 
     Q_SLOT void deviceError(const QString &message);
 

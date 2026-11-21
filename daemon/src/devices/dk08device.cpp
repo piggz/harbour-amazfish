@@ -1,5 +1,6 @@
 #include "dk08device.h"
 #include "amazfishconfig.h"
+#include "database.h"
 #include "dk08nusservice.h"
 #include "dk08wechatservice.h"
 
@@ -281,46 +282,9 @@ void DK08Device::sendWeather(CurrentWeather *weather)
 void DK08Device::saveActivitySamples(const QList<ActivitySample>& samples, bool complete)
 {
     setOperationRunning(false);
-    if (!m_conn || !m_conn->isDatabaseUsed()) {
-        qWarning() << Q_FUNC_INFO << "Database not connected, lost samples:" << samples.count();
+    if (!Database::storeActivitySamples(samples)) {
         return;
     }
-
-    uint userId = qHash(AmazfishConfig::instance()->profileName());
-    uint deviceId = qHash(AmazfishConfig::instance()->pairedAddress());
-
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
-
-    KDbFieldList fields;
-    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
-
-    fields.addField(mibandActivity->field("timestamp"));
-    fields.addField(mibandActivity->field("timestamp_dt"));
-    fields.addField(mibandActivity->field("device_id"));
-    fields.addField(mibandActivity->field("user_id"));
-    fields.addField(mibandActivity->field("raw_intensity"));
-    fields.addField(mibandActivity->field("steps"));
-    fields.addField(mibandActivity->field("raw_kind"));
-    fields.addField(mibandActivity->field("heartrate"));
-
-    for (const ActivitySample& sample : samples) {
-        QList<QVariant> values;
-        values << sample.datetime().toMSecsSinceEpoch() / 1000;
-        values << sample.datetime();
-        values << deviceId;
-        values << userId;
-        values << sample.intensity();
-        values << sample.steps();
-        values << sample.kind();
-        values << sample.heartrate();
-
-        if (!m_conn->insertRecord(&fields, values)) {
-            qWarning() << Q_FUNC_INFO << "Error inserting record" << sample;
-            return;
-        }
-    }
-    tg.commit();
     qDebug() << Q_FUNC_INFO << "Saved samples:" << samples.count();
     if (complete) {
         emit message(tr("Activity data downloaded"));
@@ -345,13 +309,9 @@ void DK08Device::setOperationRunning(bool running)
 
 void DK08Device::saveWorkout(ActivitySummary summary)
 {
-    if (!m_conn || !m_conn->isDatabaseUsed()) {
-        qWarning() << Q_FUNC_INFO << "Database not connected, lost workout:" << summary.name();
-        return;
-    }
     summary.setProfileId(qHash(AmazfishConfig::instance()->profileName()));
     summary.setDeviceId(qHash(AmazfishConfig::instance()->pairedAddress()));
-    if (!summary.saveToDatabase(m_conn)) {
+    if (!Database::storeActivitySummary(summary)) {
         qWarning() << Q_FUNC_INFO << "Error saving workout" << summary.name();
     }
 }

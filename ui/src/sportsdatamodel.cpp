@@ -1,15 +1,14 @@
 #include "sportsdatamodel.h"
 #include "activitykind.h"
+#include <QDebug>
 #include <QFile>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QTextStream>
 
 SportsDataModel::SportsDataModel()
 {
 
-}
-
-void SportsDataModel::setConnection(KDbConnection *conn)
-{
-    m_connection = conn;
 }
 
 
@@ -76,15 +75,10 @@ void SportsDataModel::setKind(uint id, const QString &kind) {
     ActivityKind::Type kindType = ActivityKind::fromString(kind);
     qDebug() << "UPDATE sports_data SET kind = " << kindType << " WHERE id = " << id;
 
-    if (!m_connection->executeSql(
-            KDbEscapedString("UPDATE sports_data SET kind = %1 WHERE id = %2")
-                                .arg(kindType)
-                                .arg(id)
-            ))
-        {
-        qDebug() << Q_FUNC_INFO << "Error updating activity type";
+    QSqlQuery query;
+    if (!query.exec(QString("UPDATE sports_data SET kind = %1 WHERE id = %2").arg(kindType).arg(id))) {
+        qWarning() << Q_FUNC_INFO << "Error updating activity type" << query.lastError().text();
     }
-
 }
 
 void SportsDataModel::update()
@@ -93,31 +87,23 @@ void SportsDataModel::update()
     QString qry = "SELECT id, name, version, start_timestamp_dt, end_timestamp_dt, kind, base_longitude, base_latitude, base_altitude, gpx FROM sports_data ORDER BY start_timestamp_dt DESC";
     m_data.clear();
 
-    if (m_connection && m_connection->isDatabaseUsed()) {
-        KDbCursor *curs = m_connection->executeQuery(KDbEscapedString(qry));
-        if (curs) {
-            if (curs->open() && curs->moveFirst()) {
-                while (!curs->eof()) {
-
-                    SportsData data;
-                    data.id = curs->value(0).toInt();
-                    data.name = curs->value(1).toString();
-                    data.version = curs->value(2).toInt();
-                    data.startDate = curs->value(3).toDateTime();
-                    data.endDate = curs->value(4).toDateTime();
-                    data.kind = curs->value(5).toInt();
-                    data.baseLongitude = curs->value(6).toDouble();
-                    data.baseLatitude = curs->value(7).toDouble();
-                    data.baseAltitude = curs->value(8).toDouble();
-                    //qDebug() << data.name << curs->value(8) << curs->value(8).toString() << curs->value(8).toString().toInt();
-                    m_data << data;
-                    curs->moveNext();
-                }
-            }
-            m_connection->deleteCursor(curs);
-        } else {
-            qDebug() << "Error executing query";
+    QSqlQuery query;
+    if (query.exec(qry)) {
+        while (query.next()) {
+            SportsData data;
+            data.id = query.value(0).toInt();
+            data.name = query.value(1).toString();
+            data.version = query.value(2).toInt();
+            data.startDate = query.value(3).toDateTime();
+            data.endDate = query.value(4).toDateTime();
+            data.kind = query.value(5).toInt();
+            data.baseLongitude = query.value(6).toDouble();
+            data.baseLatitude = query.value(7).toDouble();
+            data.baseAltitude = query.value(8).toDouble();
+            m_data << data;
         }
+    } else {
+        qWarning() << "Error executing query" << query.lastError().text();
     }
 
     endResetModel();
@@ -128,16 +114,13 @@ QString SportsDataModel::gpx(uint id)
     QString qry = QString("SELECT gpx FROM sports_data WHERE id = %1").arg(id);
     QString gpx;
 
-    if (m_connection && m_connection->isDatabaseUsed()) {
-        KDbCursor *curs = m_connection->executeQuery(KDbEscapedString(qry));
-        if (curs) {
-            if (curs->open() && curs->moveFirst()) {
-                gpx = curs->value(0).toString();
-            }
-            m_connection->deleteCursor(curs);
-        } else {
-            qDebug() << "Error executing query";
+    QSqlQuery query;
+    if (query.exec(qry)) {
+        if (query.next()) {
+            gpx = query.value(0).toString();
         }
+    } else {
+        qWarning() << "Error executing query" << query.lastError().text();
     }
 
     QFile file(gpx);
@@ -157,18 +140,15 @@ QString SportsDataModel::rawGpx(uint id)
     QString qry = QString("SELECT gpx FROM sports_data WHERE id = %1").arg(id);
     QString gpx;
 
-    if (m_connection && m_connection->isDatabaseUsed()) {
-        KDbCursor *curs = m_connection->executeQuery(KDbEscapedString(qry));
-        if (curs) {
-            if (curs->open() && curs->moveFirst()) {
-                gpx = curs->value(0).toString();
-            }
-            m_connection->deleteCursor(curs);
-        } else {
-            qDebug() << "Error executing query";
+    QSqlQuery query;
+    if (query.exec(qry)) {
+        if (query.next()) {
+            gpx = query.value(0).toString();
         }
+    } else {
+        qWarning() << "Error executing query" << query.lastError().text();
     }
-    
+
     if (gpx.endsWith(".tcx")) {
         gpx.replace(gpx.length() - 4, 4, ".gpx");
     }
@@ -189,14 +169,13 @@ void SportsDataModel::deleteRecord(uint id)
 {
     QString qry = QString("DELETE FROM sports_meta WHERE sport_id = %1").arg(id);
 
-    if (m_connection && m_connection->isDatabaseUsed()) {
-        if (!m_connection->executeSql(KDbEscapedString(qry))) {
-            qDebug() << "Error deleting from sports_meta";
-        } else {
-            qry = QString("DELETE FROM sports_data WHERE id = %1").arg(id);
-            if (!m_connection->executeSql(KDbEscapedString(qry))) {
-                qDebug() << "Error deleting from sports_data";
-            }
+    QSqlQuery query;
+    if (!query.exec(qry)) {
+        qWarning() << "Error deleting from sports_meta" << query.lastError().text();
+    } else {
+        qry = QString("DELETE FROM sports_data WHERE id = %1").arg(id);
+        if (!query.exec(qry)) {
+            qWarning() << "Error deleting from sports_data" << query.lastError().text();
         }
     }
     update();

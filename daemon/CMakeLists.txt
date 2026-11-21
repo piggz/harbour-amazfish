@@ -5,6 +5,7 @@ set(SOURCES
 ./src/activitysummary.cpp
 ./src/bangleacttrkrecord.cpp
 ./src/bipbatteryinfo.cpp
+./src/database.cpp
 ./src/dbushrm.cpp
 ./src/devicefactory.cpp
 ./src/deviceinterface.cpp
@@ -159,6 +160,7 @@ set(HEADERS
 ./src/bipbatteryinfo.h
 ./src/bangleacttrkrecord.h
 ./src/codec.h
+./src/database.h
 ./src/dbushrm.h
 ./src/devicefactory.h
 ./src/deviceinterface.h
@@ -311,11 +313,10 @@ add_executable(harbour-amazfishd ${SOURCES} ${HEADERS}
 )
 
 find_package(PkgConfig REQUIRED)
-find_package(Qt5 COMPONENTS Gui Widgets Positioning Network REQUIRED)
+find_package(Qt5 COMPONENTS Gui Widgets Positioning Network Sql REQUIRED)
 find_package(KF5Archive REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(ICU REQUIRED COMPONENTS uc i18n data)
-find_package(KDb REQUIRED)
 
 target_compile_options(harbour-amazfishd PRIVATE -Wall -Wextra -Wpedantic)
 
@@ -367,11 +368,10 @@ target_compile_definitions(harbour-amazfishd
 target_link_libraries(harbour-amazfishd
   PRIVATE
   libwatchfish libamazfish qble
-  Qt5::Gui Qt5::Widgets Qt5::Core Qt5::Positioning Qt5::Network
+  Qt5::Gui Qt5::Widgets Qt5::Core Qt5::Positioning Qt5::Network Qt5::Sql
   KF5::Archive
   ZLIB::ZLIB
   ICU::uc ICU::i18n ICU::data
-  KDb
 )
 
 
