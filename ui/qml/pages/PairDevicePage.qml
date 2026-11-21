@@ -63,7 +63,8 @@ PageListPL {
         target: DaemonInterfaceInstance
 
         onConnectionStateChanged: {
-            if (DaemonInterfaceInstance.connectionState == "paired" || DaemonInterfaceInstance.connectionState == "connected") {
+            if (DaemonInterfaceInstance.connectionState == "paired" || DaemonInterfaceInstance.connectionState == "connected"
+                    || DaemonInterfaceInstance.connectionState == "authenticated") {
                 AmazfishConfig.pairedAddress = _deviceAddress
                 AmazfishConfig.pairedName = _deviceName
                 AmazfishConfig.pairedType = _deviceType
