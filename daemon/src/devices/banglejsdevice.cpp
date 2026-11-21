@@ -258,6 +258,13 @@ void BangleJSDevice::setTime() {
     uart->tx(QByteArray(1, 0x10) + cmd.toUtf8() + "\n");
 }
 
+void BangleJSDevice::pair()
+{
+    // Bangle.js works without bonding and did not answer a pairing request in tests, so connect without Pair
+    qDebug() << Q_FUNC_INFO;
+    AbstractDevice::connectToDevice();
+}
+
 void BangleJSDevice::onPropertiesChanged(QString interface, QVariantMap map, QStringList list)
 {
     qDebug() << Q_FUNC_INFO << interface << map << list;
