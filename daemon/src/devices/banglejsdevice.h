@@ -132,6 +132,7 @@ private:
 
     void setTime();
     void setUserGoal(uint steps);
+    void setUserProfile();
     void setUserGoalAlert(bool enabled);
     void setAlarms();
     int getStepsFromDb();

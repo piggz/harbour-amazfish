@@ -1077,6 +1077,9 @@ void BangleJSDevice::applyDeviceSetting(Amazfish::Settings s) {
     case Amazfish::Settings::SETTING_DEVICE_TIME:
         setTime();
         break;
+    case Amazfish::Settings::SETTING_USER_PROFILE:
+        setUserProfile();
+        break;
     case Amazfish::Settings::SETTING_USER_GOAL:
         setUserGoal(AmazfishConfig::instance()->profileFitnessGoal());
         break;
@@ -1101,6 +1104,29 @@ void BangleJSDevice::setUserGoal(uint steps) {
                       ).arg(steps);
     uart->tx(QByteArray(1, 0x10) + cmd.toUtf8());
 
+}
+
+// Writes the fields Amazfish has into myprofile.json of the "My Profile" app (used by "Calorie Tracker"), keeps the rest
+void BangleJSDevice::setUserProfile()
+{
+    UARTService* uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart) {
+        return;
+    }
+
+    auto config = AmazfishConfig::instance();
+    QString cmd = "var p = require(\"Storage\").readJSON(\"myprofile.json\", true) || {};";
+    if (config->profileDOB().isValid()) {
+        cmd += QString(" p.birthday = \"%1\";").arg(config->profileDOB().toString("yyyy-MM-dd"));
+    }
+    // My Profile: 0 male, 1 female, 2 not set; height in meters
+    cmd += QString(" p.gender = %1; p.height = %2; p.weight = %3;")
+               .arg(config->profileGender() == AmazfishConfig::ProfileGenderMale ? 0 : 1)
+               .arg(config->profileHeight() / 100.0)
+               .arg(config->profileWeight());
+    cmd += " require(\"Storage\").writeJSON(\"myprofile.json\", p);\n";
+    qDebug() << Q_FUNC_INFO << cmd;
+    uart->tx(QByteArray(1, 0x10) + cmd.toUtf8());
 }
 
 void BangleJSDevice::setUserGoalAlert(bool enabled) {
