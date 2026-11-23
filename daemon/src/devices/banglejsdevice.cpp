@@ -56,7 +56,7 @@ Amazfish::DataTypes BangleJSDevice::supportedDataTypes() const
         // | Amazfish::DataType::TYPE_TEMPERATURE
         | Amazfish::DataType::TYPE_SLEEP
         // | Amazfish::DataType::TYPE_HUAMI_STATISTICS
-        // | Amazfish::DataType::TYPE_HRV
+        | Amazfish::DataType::TYPE_HRV
         ;
 }
 
@@ -556,6 +556,14 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
                 }
             }
             setOperationRunning(false);
+        }
+    } else if (t == "hrv") {
+        // {"t":"hrv","ts":1763868000000,"hrv":42} one RMSSD reading in ms from the hrvtracking app
+        Database::HrvRecord record;
+        record.timestamp = QDateTime::fromMSecsSinceEpoch(json.value("ts").toVariant().toLongLong());
+        record.value = json.value("hrv").toInt();
+        if (record.value > 0) {
+            Database::storeHrvRecords({ record });
         }
     } else if (t == "act") {
 
