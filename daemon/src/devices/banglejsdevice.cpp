@@ -68,6 +68,7 @@ QString BangleJSDevice::deviceType() const
 void BangleJSDevice::abortOperations()
 {
     qDebug() << Q_FUNC_INFO;
+    m_eventlist.reset();
     setOperationRunning(false);
 }
 
@@ -1151,8 +1152,8 @@ void BangleJSDevice::syncCalendar(QList<watchfish::CalendarEvent> &eventlist)
 
 void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
     if (!m_eventlist.has_value()) {
-        qDebug() << Q_FUNC_INFO << "DeviceInterface must call syncCalendar() first";
-        setOperationRunning(false);
+        // The watch may answer one request twice
+        qDebug() << Q_FUNC_INFO << "No calendar sync running, reply ignored";
         return;
     }
 
@@ -1164,6 +1165,7 @@ void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
             removeEventReminder(deviceId);
         }
         m_event_id_map.clear();
+        m_eventlist.reset();
         setOperationRunning(false);
         return;
     }
@@ -1217,6 +1219,7 @@ void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
         } // else update
     }
 
+    m_eventlist.reset();
     setOperationRunning(false);
 }
 
