@@ -25,7 +25,10 @@ DBusInterface {
             { "type": "as", "value": [] },                    // actions
             { "type": "a{sv}", "value": {}},                  // hints
             { "type": "i", "value": 5000 }                    // expire_timeout
-        ]);
+        ], function(id) {
+            // the next message replaces this one instead of adding a new notification
+            _lastNotificationId = id;
+        });
 
     }
 }
