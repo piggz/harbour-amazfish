@@ -75,7 +75,7 @@ public:
     Q_INVOKABLE void refreshInformation();
     Q_INVOKABLE QString information(int i);
     Q_INVOKABLE void sendAlert(const QVariantMap &notification, bool allowDuplicate = false);
-    Q_INVOKABLE void sendAlert(const Amazfish::WatchNotification &notification, bool allowDuplicate = false);
+    void sendAlert(const Amazfish::WatchNotification& notification, bool allowDuplicate = false);
     Q_INVOKABLE void incomingCall(const QString &caller);
     Q_INVOKABLE void incomingCallEnded();
     Q_INVOKABLE void applyDeviceSetting(int s);
