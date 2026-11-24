@@ -69,6 +69,7 @@ void BangleJSDevice::abortOperations()
 {
     qDebug() << Q_FUNC_INFO;
     m_eventlist.reset();
+    m_pendingDataTypes = {};
     setOperationRunning(false);
 }
 
@@ -81,6 +82,12 @@ void BangleJSDevice::setOperationRunning(bool running)
 {
     m_operationRunning = running;
     emit operationRunningChanged();
+
+    if (!running && m_pendingDataTypes) {
+        Amazfish::DataTypes pending = m_pendingDataTypes;
+        m_pendingDataTypes = {};
+        fetchData(pending);
+    }
 }
 
 QString BangleJSDevice::alertIcon(const QString &appname) const {
@@ -281,11 +288,21 @@ void BangleJSDevice::navigationNarrative(const QString &flag, const QString &nar
 void BangleJSDevice::fetchData(Amazfish::DataTypes dataTypes)
 {
     if (dataTypes & Amazfish::DataType::TYPE_ACTIVITY) {
-        downloadActivityData();
+        if (m_operationRunning) {
+            qDebug() << "Operation is running, activity download queued";
+            m_pendingDataTypes |= Amazfish::DataType::TYPE_ACTIVITY;
+        } else {
+            downloadActivityData();
+        }
     }
 
     if (dataTypes & Amazfish::DataType::TYPE_GPS_TRACK) {
-        downloadSportsData();
+        if (m_operationRunning) {
+            qDebug() << "Operation is running, sports download queued";
+            m_pendingDataTypes |= Amazfish::DataType::TYPE_GPS_TRACK;
+        } else {
+            downloadSportsData();
+        }
     }
 }
 
