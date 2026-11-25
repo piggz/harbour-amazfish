@@ -2,10 +2,9 @@
 #define SPORTSDATAMODEL_H
 
 #include <QAbstractListModel>
-#include <QVariant>
+#include <QDateTime>
 #include <QGeoCoordinate>
-
-#include <KDb3/KDbConnection>
+#include <QVariant>
 
 typedef struct {
     int id;
@@ -44,8 +43,6 @@ public:
     virtual QHash<int, QByteArray> 	roleNames() const override;
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    void setConnection(KDbConnection *conn);
-
     Q_INVOKABLE void setKind(uint id, const QString &kind);
     Q_INVOKABLE void update();
     Q_INVOKABLE QString gpx(uint id);
@@ -53,7 +50,6 @@ public:
     Q_INVOKABLE void deleteRecord(uint id);
 
 private:
-    KDbConnection *m_connection = nullptr;
     QList<SportsData> m_data;
     QList<QGeoCoordinate> m_points;
 };

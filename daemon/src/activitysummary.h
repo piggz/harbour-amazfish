@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QDateTime>
 #include <QList>
-#include <KDb3/KDbConnection>
 
 #include "activitykind.h"
 
@@ -47,30 +46,39 @@ public:
     void setBaseAltitude(int alt);
     int baseAltitude() const;
 
+    // False when the watch gave no location (no GPS); the database then stores NULL.
+    bool hasBaseLocation() const;
+
     void setProfileId(uint profileId);
+    uint profileId() const;
+
     void setDeviceId(uint deviceId);
+    uint deviceId() const;
+
     void setGPX(const QString &gpx);
+    QString gpx() const;
 
     void addMetaData(const QString &key, const QString &value, const QString &unit);
     ActivitySummary::meta metaData(const QString &key);
+    QList<ActivitySummary::meta> metaDataList() const;
 
     bool isValid() const;
     void setValid(bool valid);
 
-    bool saveToDatabase(KDbConnection *conn);
 private:
-    short m_version;
-    uint m_id;
+    short m_version = 0;
+    uint m_id = 0;
     QString m_name;
     QDateTime m_startTime;     /** Not-null value. */
     QDateTime m_endTime;     /** Not-null value. */
-    ActivityKind::Type m_activityKind;
-    float m_baseLongitude;
-    float m_baseLatitude;
-    int m_baseAltitude;
+    ActivityKind::Type m_activityKind = ActivityKind::Unknown;
+    float m_baseLongitude = 0;
+    float m_baseLatitude = 0;
+    int m_baseAltitude = 0;
+    bool m_hasBaseLocation = false;
     QString m_gpxTrack;
-    uint m_deviceId;
-    uint m_userId;
+    uint m_deviceId = 0;
+    uint m_userId = 0;
 
     bool m_valid = false;
 

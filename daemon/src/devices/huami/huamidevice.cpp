@@ -208,15 +208,6 @@ void HuamiDevice::navigationNarrative(const QString &flag, const QString &narrat
     sendAlert(n);
 }
 
-void HuamiDevice::setDatabase(KDbConnection *conn)
-{
-    MiBandService *mi = qobject_cast<MiBandService*>(service(MiBandService::UUID_SERVICE_MIBAND));
-    if (mi){
-        mi->setDatabase(conn);
-    }
-    AbstractDevice::setDatabase(conn);
-}
-
 void HuamiDevice::handleButtonPressed()
 {
     qDebug() << Q_FUNC_INFO;
@@ -413,7 +404,7 @@ void HuamiDevice::fetchOperationComplete(AbstractFetchOperation *operation)
         }
 
         if (createDetail) {
-            SportsDetailOperation *sportsDetailOperation = new SportsDetailOperation(m_fetcher, database(), summary, activityDetailParser(), isZeppOs());
+            SportsDetailOperation* sportsDetailOperation = new SportsDetailOperation(m_fetcher, summary, activityDetailParser(), isZeppOs());
             m_fetcher->jumpQueue(sportsDetailOperation);
         }
     }

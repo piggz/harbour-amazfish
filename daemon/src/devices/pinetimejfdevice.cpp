@@ -22,6 +22,8 @@
 #include <QDomDocument>
 #include <QDBusReply>
 
+#include "database.h"
+
 namespace {
 size_t GetMtuForCharacteristic(QString path, const char* characteristicUUID)
 {
@@ -176,49 +178,7 @@ void PinetimeJFDevice::initialise()
 void PinetimeJFDevice::sampledActivity(QDateTime dt, int kind, int intensity, int steps, int heartrate) {
     qDebug() << Q_FUNC_INFO << dt << kind << intensity << steps << heartrate;
 
-
-    if (!m_conn || !(m_conn->isDatabaseUsed())) {
-        qDebug() << Q_FUNC_INFO << "Database not connected";
-        return;
-    }
-
-    auto config = AmazfishConfig::instance();
-    uint id = qHash(config->profileName());
-    uint devid = qHash(config->pairedAddress());
-
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
-
-    KDbFieldList fields;
-    auto mibandActivity = m_conn->tableSchema("mi_band_activity");
-
-    fields.addField(mibandActivity->field("timestamp"));
-    fields.addField(mibandActivity->field("timestamp_dt"));
-    fields.addField(mibandActivity->field("device_id"));
-    fields.addField(mibandActivity->field("user_id"));
-    fields.addField(mibandActivity->field("raw_intensity"));
-    fields.addField(mibandActivity->field("steps"));
-    fields.addField(mibandActivity->field("raw_kind"));
-    fields.addField(mibandActivity->field("heartrate"));
-
-    QList<QVariant> values;
-
-    values << dt.toMSecsSinceEpoch() / 1000;
-    values << dt;
-    values << devid;
-    values << id;
-    values << intensity;
-    values << steps;
-    values << kind;
-    values << heartrate;
-
-    if (!m_conn->insertRecord(&fields, values)) {
-        qWarning() << "error inserting record";
-        tg.rollback();
-        return;
-    }
-    tg.commit();
-
+    Database::storeActivitySamples({ ActivitySample(dt, kind, intensity, steps, heartrate) });
 }
 
 

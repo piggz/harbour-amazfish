@@ -29,13 +29,12 @@ License:    GPLv3
 URL:        https://piggz.co.uk
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
-Requires:   kdb-sqlite3-driver >= 3.1.0
-Requires:   libKDb3-3 >= 3.1.0
 Requires:   kcoreaddons >= 5.31.0
 Requires:   libicu
 Requires:   kf5bluezqt
 Requires:   libkf5archive
 Requires:   mapboxgl-qml
+Requires:   qt5-plugin-sqldriver-sqlite
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -44,12 +43,12 @@ BuildRequires:  pkgconfig(Qt5Contacts)
 BuildRequires:  pkgconfig(Qt5Widgets)
 BuildRequires:  pkgconfig(Qt5Xml)
 BuildRequires:  pkgconfig(Qt5Positioning)
+BuildRequires:  pkgconfig(Qt5Sql)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(libmkcal-qt5)
 BuildRequires:  (kf5-calendarcore-devel if kf5-calendarcore)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(ambermpris)
-BuildRequires:  kdb-devel >= 3.1.0
 BuildRequires:  kcoreaddons-devel >= 5.31.0
 BuildRequires:  qt5-qttools-linguist
 BuildRequires:  desktop-file-utils

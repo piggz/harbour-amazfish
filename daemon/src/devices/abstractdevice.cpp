@@ -118,16 +118,6 @@ bool AbstractDevice::supportsDataType(Amazfish::DataType t) const
     return (supportedDataTypes() & t);
 }
 
-void AbstractDevice::setDatabase(KDbConnection *conn)
-{
-    m_conn = conn;
-}
-
-KDbConnection *AbstractDevice::database()
-{
-    return m_conn;
-}
-
 QString AbstractDevice::deviceName() const
 {
     return m_pairedName;

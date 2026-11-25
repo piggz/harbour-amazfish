@@ -16,9 +16,7 @@ dependencies_host:
   - qtorganizer5-eds
 
 dependencies_target:
-- libkdb3-driver-sqlite
 - qml-module-org-kde-bluezqt
-- libkdb3-dev
 - libkf5contacts-dev
 - libkf5archive-dev
 - libkf5coreaddons-dev
@@ -72,10 +70,7 @@ install_lib:
 - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libnemodbus.so*
 - ${AMBER_MPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/libambermpris.so*
 - ${MAPLIBRE_NATIVE_LIB_INSTALL_DIR}/lib/libQMapLibre.so*
-- /usr/lib/${ARCH_TRIPLET}/libKDb3.so*
 - /usr/lib/${ARCH_TRIPLET}/libKF5BluezQt.so*
-install_data:
-  /usr/lib/${ARCH_TRIPLET}/qt5/plugins/kdb3: bin
 install_qml:
 - ${NEMO_QML_PLUGIN_DBUS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Nemo/DBus
 - ${AMBER_MPRIS_LIB_INSTALL_DIR}/usr/lib/${ARCH_TRIPLET}/qt5/qml/Amber/Mpris

@@ -6,6 +6,10 @@
 #include <QVariant>
 #include <QTimeZone>
 
+#include <QDebug>
+#include <QSqlError>
+#include <QSqlQuery>
+
 static const long MIN_SESSION_LENGTH = 5 * 60;
 static const long MAX_WAKE_PHASE_LENGTH = 2 * 60 * 60;
 static const int TYPE_LIGHT_SLEEP = 9;
@@ -26,11 +30,6 @@ int kind(int k)
 
 DataSource::DataSource()
 {
-}
-
-void DataSource::setConnection(KDbConnection *conn)
-{
-    m_conn = conn;
 }
 
 QVariant DataSource::data(const Type type, const QDate &day)
@@ -210,29 +209,19 @@ QVariant DataSource::data(const Type type, const QDate &day)
         }
 
         qDebug() << qry;
-        if (m_conn && m_conn->isDatabaseUsed()) {
-            KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
+        QSqlQuery query;
+        if (query.exec(qry)) {
+            while (query.next()) {
+                QVariant d = query.value(0);
+                QVariant h = query.value(1);
 
-            if (curs) {
-                if (curs->open() && curs->moveFirst()) {
-                    while (!curs->eof()) {
-
-                        QVariant d = curs->value(0);
-                        QVariant h = curs->value(1);
-
-                        QVariantMap pt;
-                        pt["x"] = d.toDateTime().toMSecsSinceEpoch() / 1000;
-                        pt["y"] = h.toDouble();
-                        result.append(pt);
-
-                        curs->moveNext();
-                    }
-                    //qDebug() << result;
-                }
-                m_conn->deleteCursor(curs);
-            } else {
-                qDebug() << "Error executing query";
+                QVariantMap pt;
+                pt["x"] = d.toDateTime().toMSecsSinceEpoch() / 1000;
+                pt["y"] = h.toDouble();
+                result.append(pt);
             }
+        } else {
+            qWarning() << "Error executing query" << query.lastError().text();
         }
     }
     return result;
@@ -259,68 +248,59 @@ QList<DataSource::SleepSession> DataSource::calculateSleep(const QDate &day)
 
     // qDebug() << qry;
 
-    if (m_conn && m_conn->isDatabaseUsed()) {
-        KDbCursor *curs = m_conn->executeQuery(KDbEscapedString(qry));
+    QSqlQuery query;
+    if (query.exec(qry)) {
+        while (query.next()) {
+            qint64 d = query.value(0).toLongLong();
+            int k = kind(query.value(1).toInt());
 
-        if (curs) {
-            if (curs->open() && curs->moveFirst()) {
-                while (!curs->eof()) {
-
-                    qint64 d = curs->value(0).toLongLong();
-                    int k = kind(curs->value(1).toInt());
-
-                    if (isSleep(k)) {
-                        if (!sleepStart.isValid()) {
-                            sleepStart.setMSecsSinceEpoch(d * 1000);
-                            qDebug() << "Setting sleep start to " << d << sleepStart;
-                        }
-                        sleepEnd.setMSecsSinceEpoch(d * 1000);
-                        durationSinceLastSleep = 0;
-                    }
-                    if (previousSample != 0) {
-                        long durationSinceLastSample = d - previousSample;
-                        if (k == TYPE_LIGHT_SLEEP) {
-                            lightSleepDuration += durationSinceLastSample;
-                        } else if (k == TYPE_DEEP_SLEEP) {
-                            deepSleepDuration += durationSinceLastSample;
-                        } else {
-                            durationSinceLastSleep += durationSinceLastSample;
-                            if (sleepStart.isValid() && durationSinceLastSleep > MAX_WAKE_PHASE_LENGTH) {
-                                if (lightSleepDuration + deepSleepDuration > MIN_SESSION_LENGTH) {
-                                    SleepSession ss;
-                                    ss.sleepStart = sleepStart;
-                                    ss.sleepEnd = sleepEnd;
-                                    ss.lightSleepDuration = lightSleepDuration;
-                                    ss.deepSleepDuration = deepSleepDuration;
-                                    sessions << ss;
-                                    // qDebug() << "Sleep Session" << ss.sleepStart << ss.sleepEnd << ss.lightSleepDuration << ss.deepSleepDuration;
-
-                                }
-                                sleepStart = QDateTime();
-                                sleepEnd = QDateTime();
-                                lightSleepDuration = 0;
-                                deepSleepDuration = 0;
-                            }
-                        }
-                    }
-                    previousSample = d;
-                    curs->moveNext();
+            if (isSleep(k)) {
+                if (!sleepStart.isValid()) {
+                    sleepStart.setMSecsSinceEpoch(d * 1000);
+                    qDebug() << "Setting sleep start to " << d << sleepStart;
                 }
-                if (lightSleepDuration + deepSleepDuration > MIN_SESSION_LENGTH) {
-                    SleepSession ss;
-                    ss.sleepStart = sleepStart;
-                    ss.sleepEnd = sleepEnd;
-                    ss.lightSleepDuration = lightSleepDuration;
-                    ss.deepSleepDuration = deepSleepDuration;
-                    sessions << ss;
+                sleepEnd.setMSecsSinceEpoch(d * 1000);
+                durationSinceLastSleep = 0;
+            }
+            if (previousSample != 0) {
+                long durationSinceLastSample = d - previousSample;
+                if (k == TYPE_LIGHT_SLEEP) {
+                    lightSleepDuration += durationSinceLastSample;
+                } else if (k == TYPE_DEEP_SLEEP) {
+                    deepSleepDuration += durationSinceLastSample;
+                } else {
+                    durationSinceLastSleep += durationSinceLastSample;
+                    if (sleepStart.isValid() && durationSinceLastSleep > MAX_WAKE_PHASE_LENGTH) {
+                        if (lightSleepDuration + deepSleepDuration > MIN_SESSION_LENGTH) {
+                            SleepSession ss;
+                            ss.sleepStart = sleepStart;
+                            ss.sleepEnd = sleepEnd;
+                            ss.lightSleepDuration = lightSleepDuration;
+                            ss.deepSleepDuration = deepSleepDuration;
+                            sessions << ss;
+                            // qDebug() << "Sleep Session" << ss.sleepStart << ss.sleepEnd << ss.lightSleepDuration << ss.deepSleepDuration;
+                        }
+                        sleepStart = QDateTime();
+                        sleepEnd = QDateTime();
+                        lightSleepDuration = 0;
+                        deepSleepDuration = 0;
+                    }
                 }
             }
-            m_conn->deleteCursor(curs);
-        } else {
-            qDebug() << "Error executing query";
+            previousSample = d;
         }
+        if (lightSleepDuration + deepSleepDuration > MIN_SESSION_LENGTH) {
+            SleepSession ss;
+            ss.sleepStart = sleepStart;
+            ss.sleepEnd = sleepEnd;
+            ss.lightSleepDuration = lightSleepDuration;
+            ss.deepSleepDuration = deepSleepDuration;
+            sessions << ss;
+        }
+    } else {
+        qWarning() << "Error executing query" << query.lastError().text();
     }
-    
+
     return sessions;
     
 }

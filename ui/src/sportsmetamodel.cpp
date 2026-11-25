@@ -1,13 +1,11 @@
 #include "sportsmetamodel.h"
+#include <QDebug>
+#include <QSqlError>
+#include <QSqlQuery>
 
 SportsMetaModel::SportsMetaModel()
 {
 
-}
-
-void SportsMetaModel::setConnection(KDbConnection *conn)
-{
-    m_connection = conn;
 }
 
 
@@ -53,28 +51,19 @@ void SportsMetaModel::update(uint sportid)
     QString qry = QString("SELECT id, sport_id, key, value, unit FROM sports_meta WHERE sport_id = %1 ORDER BY key ASC").arg(sportid);
 
     m_data.clear();
-    if (m_connection && m_connection->isDatabaseUsed()) {
-        KDbCursor *curs = m_connection->executeQuery(KDbEscapedString(qry));
-        if (curs) {
-            if (curs->open() && curs->moveFirst()) {
-                while (!curs->eof()) {
-
-                    SportsMeta data;
-                    data.meta_id = curs->value(0).toInt();
-                    data.sport_id = curs->value(1).toInt();
-                    data.key = curs->value(2).toString();
-                    data.value = curs->value(3).toString();
-                    data.unit = curs->value(4).toString();
-
-                    //qDebug() << data.name << curs->value(8) << curs->value(8).toString() << curs->value(8).toString().toInt();
-                    m_data << data;
-                    curs->moveNext();
-                }
-            }
-            m_connection->deleteCursor(curs);
-        } else {
-            qDebug() << "Error executing query";
+    QSqlQuery query;
+    if (query.exec(qry)) {
+        while (query.next()) {
+            SportsMeta data;
+            data.meta_id = query.value(0).toInt();
+            data.sport_id = query.value(1).toInt();
+            data.key = query.value(2).toString();
+            data.value = query.value(3).toString();
+            data.unit = query.value(4).toString();
+            m_data << data;
         }
+    } else {
+        qWarning() << "Error executing query" << query.lastError().text();
     }
     endResetModel();
 }

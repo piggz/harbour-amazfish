@@ -4,6 +4,7 @@
 
 #include <QDateTime>
 #include <QDebug>
+#include <QMetaEnum>
 #include <math.h>
 
 const char* PineTimeSimpleWeatherService::UUID_SERVICE_SIMPLE_WEATHER = "00050000-78fc-48fe-8e23-433b3a1942d0";

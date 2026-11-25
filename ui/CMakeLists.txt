@@ -51,8 +51,7 @@ add_executable(harbour-amazfish-ui
   ${TS_FILES}
 )
 
-find_package(Qt5 COMPONENTS Gui Widgets Quick Positioning REQUIRED)
-find_package(KDb REQUIRED)
+find_package(Qt5 COMPONENTS Gui Widgets Quick Positioning Sql REQUIRED)
 
 target_compile_options(harbour-amazfish-ui PRIVATE -Wall -Wextra -Wpedantic)
 
@@ -79,8 +78,7 @@ target_compile_definitions(harbour-amazfish-ui
 target_link_libraries(harbour-amazfish-ui
   PRIVATE 
   libamazfish libwatchfish qble 
-  Qt5::Core Qt5::Widgets Qt5::Quick Qt5::Positioning
-  KDb
+  Qt5::Core Qt5::Widgets Qt5::Quick Qt5::Positioning Qt5::Sql
   o2
   ${SAILFISH_LDFLAGS}
 )

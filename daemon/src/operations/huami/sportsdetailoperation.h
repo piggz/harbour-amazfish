@@ -4,7 +4,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDateTime>
-#include <KDb3/KDbConnection>
 
 #include "abstractactivitydetailparser.h"
 #include "abstractfetchoperation.h"
@@ -13,7 +12,7 @@
 class SportsDetailOperation : public AbstractFetchOperation
 {
 public:
-    SportsDetailOperation(HuamiFetcher *fetcher, KDbConnection *db, const ActivitySummary &summary, AbstractActivityDetailParser *parser = nullptr, bool isZeppOs = false);
+    SportsDetailOperation(HuamiFetcher* fetcher, const ActivitySummary& summary, AbstractActivityDetailParser* parser = nullptr, bool isZeppOs = false);
     ~SportsDetailOperation();
 
     void start() override;
@@ -22,7 +21,6 @@ private:
     ActivitySummary m_summary;
     AbstractActivityDetailParser *m_parser = 0;
     QString m_gpx;
-    KDbConnection *m_conn;
 
     bool saveSport(const QString &filename);
     bool save();

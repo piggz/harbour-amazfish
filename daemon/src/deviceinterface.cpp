@@ -10,8 +10,7 @@
 #include <QFile>
 #include <QProcess>
 
-#include <KDb3/KDbDriverManager>
-#include <KDb3/KDbTransactionGuard>
+#include "database.h"
 
 #if defined(MER_EDITION_SAILFISH) || defined(UUITK_EDITION)
 #include <pulse/simple.h>
@@ -29,6 +28,9 @@ static const char *PATH = "/application";
 
 DeviceInterface::DeviceInterface()
 {
+    // Create the database before registering on D-Bus: the UI opens the database when the daemon appears.
+    setupDatabase();
+
     //Start by registering on DBUS
     registerDBus();
 
@@ -49,8 +51,6 @@ DeviceInterface::DeviceInterface()
 
     //Create the DBUS HRM Interface
     m_dbusHRM = new DBusHRM(this);
-
-    setupDatabase();
 
     //Notifications
     connect(&m_notificationMonitor, &watchfish::NotificationMonitor::notification, this, &DeviceInterface::onNotification);
@@ -131,7 +131,7 @@ void DeviceInterface::connectToDevice(bool userInitiated)
 
         QString newAddress = pairedAddress.right(17).replace("_", ":");
         // Migrate data to the new address format
-        if (migrateDataDeviceAddress(pairedAddress, newAddress)) {
+        if (Database::changeDeviceId(pairedAddress, newAddress)) {
             config->setPairedAddress(newAddress);
         }
         //If migration fails, dont save the new address but connect anyway
@@ -302,419 +302,19 @@ void DeviceInterface::onRingingChanged()
 #endif
 }
 
-void DeviceInterface::createTables()
+void DeviceInterface::setupDatabase()
 {
-    m_conn->setAutoCommit(false);
-
-    KDbTransaction t = m_conn->beginTransaction();
-    if (m_conn->result().isError()) {
-        qDebug() << m_conn->result();
+    QString directory = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    if (!Database::open(directory + "/amazfish.kexi")) {
         return;
     }
 
-    //now: lets create tables:
-    KDbField *f;
-
-    if (!m_conn->containsTable("mi_band_activity")) {
-        KDbTableSchema *t_activity = new KDbTableSchema("mi_band_activity");
-        t_activity->setCaption("Activity data samples");
-        t_activity->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-        t_activity->addField(f = new KDbField("timestamp", KDbField::Integer, KDbField::Indexed, KDbField::Unsigned));
-        f->setCaption("Timestamp");
-        t_activity->addField(f = new KDbField("timestamp_dt", KDbField::DateTime, KDbField::Indexed));
-        f->setCaption("Timestamp in Date/Time format");
-        t_activity->addField(f = new KDbField("device_id", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Device ID");
-        t_activity->addField(f = new KDbField("user_id", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("User ID");
-        t_activity->addField(f = new KDbField("raw_intensity", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Raw Intensity");
-        t_activity->addField(f = new KDbField("steps", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Step Count");
-        t_activity->addField(f = new KDbField("raw_kind", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Activity Kind");
-        t_activity->addField(f = new KDbField("heartrate", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Heartrate");
-
-        if (!m_conn->createTable(t_activity)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- mi_band_activity created --";
-        qDebug() << *t_activity;
-    } else {
-        //Upgrade schema with index
-        qDebug() << "Upgrading mi_band_activity with INDEX";
-        KDbTableSchema *t_activity = m_conn->tableSchema("mi_band_activity");
-        if (!t_activity->field("timestamp")->isIndexed()) {
-            if (!m_conn->executeSql(KDbEscapedString("CREATE INDEX IF NOT EXISTS idx_mi_band_activity_timestamp ON mi_band_activity (timestamp);"))) {
-                qWarning() << "Cannot create index on mi_band_activity(timestamp)";
-            }
-            if (!m_conn->executeSql(KDbEscapedString("CREATE INDEX IF NOT EXISTS idx_mi_band_activity_timestamp_dt ON mi_band_activity (timestamp_dt);"))) {
-                qWarning() << "Cannot create index on mi_band_activity(timestamp_dt)";
-            }
-        }
-    }
-
-
-    if (!m_conn->containsTable("info_log")) {
-        KDbTableSchema *t_info = new KDbTableSchema("info_log");
-        t_info->setCaption("Info log");
-        t_info->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-        t_info->addField(f = new KDbField("timestamp", KDbField::Integer, nullptr));
-        f->setCaption("Timestamp");
-        t_info->addField(f = new KDbField("timestamp_dt", KDbField::DateTime));
-        f->setCaption("Timestamp in Date/Time format");
-        t_info->addField(f = new KDbField("key", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Key based on AbstractDevice::Info");
-        t_info->addField(f = new KDbField("value", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Value");
-
-        if (!m_conn->createTable(t_info)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- info_log created --";
-        qDebug() << *t_info;
-    }
-
-    int batteryLevel = 0;
-
-    if (m_conn->querySingleNumber(
-                KDbEscapedString("SELECT value FROM info_log WHERE key = %1 ORDER BY id DESC").arg((int)Amazfish::Info::INFO_BATTERY), // automatically adds LIMIT 1 into query
-                &batteryLevel) == true) { // comparision of tristate type (true, false, canceled)
-        m_lastBatteryLevel = batteryLevel;
-        // qDebug() << Q_FUNC_INFO << "Last Battery Level: " << m_lastBatteryLevel;
+    QVariant batteryLevel = Database::lastInfoValue((int)Amazfish::Info::INFO_BATTERY);
+    if (batteryLevel.isValid()) {
+        m_lastBatteryLevel = batteryLevel.toInt();
     } else {
         qWarning() << "Cannot get battery level";
     }
-
-    if (!m_conn->containsTable("sports_data")) {
-        KDbTableSchema *t_summary = new KDbTableSchema("sports_data");
-        t_summary->setCaption("Sports Data");
-        t_summary->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-
-        t_summary->addField(f = new KDbField("name", KDbField::Text));
-        f->setCaption("Name");
-
-        t_summary->addField(f = new KDbField("version", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Version");
-
-        t_summary->addField(f = new KDbField("start_timestamp", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("Start Timestamp");
-        t_summary->addField(f = new KDbField("start_timestamp_dt", KDbField::DateTime));
-        f->setCaption("Start Timestamp in Date/Time format");
-
-        t_summary->addField(f = new KDbField("end_timestamp", KDbField::Integer, nullptr, KDbField::Unsigned));
-        f->setCaption("End Timestamp");
-        t_summary->addField(f = new KDbField("end_timestamp_dt", KDbField::DateTime));
-        f->setCaption("End Timestamp in Date/Time format");
-
-        t_summary->addField(f = new KDbField("kind", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
-        f->setCaption("Activity Kind");
-
-        t_summary->addField(f = new KDbField("base_longitude", KDbField::Double));
-        f->setCaption("Base Longitude");
-        t_summary->addField(f = new KDbField("base_latitude", KDbField::Double));
-        f->setCaption("Base Latitude");
-        t_summary->addField(f = new KDbField("base_altitude", KDbField::Double));
-        f->setCaption("Base Altitude");
-
-        t_summary->addField(f = new KDbField("device_id", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
-        f->setCaption("Device ID");
-        t_summary->addField(f = new KDbField("user_id", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
-        f->setCaption("User ID");
-
-        t_summary->addField(f = new KDbField("gpx", KDbField::LongText));
-        f->setCaption("GPX Data");
-
-        if (!m_conn->createTable(t_summary)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- sports_data created --";
-        qDebug() << *t_summary;
-    }
-
-    if (!m_conn->containsTable("sports_meta")) {
-        KDbTableSchema *t_meta = new KDbTableSchema("sports_meta");
-        t_meta->setCaption("Sports Meta-Data");
-        t_meta->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-
-        t_meta->addField(f = new KDbField("sport_id", KDbField::Integer, KDbField::NoConstraints, KDbField::Unsigned));
-        f->setCaption("Sport ID");
-
-        t_meta->addField(f = new KDbField("key", KDbField::Text));
-        f->setCaption("Key");
-
-        t_meta->addField(f = new KDbField("value", KDbField::Text));
-        f->setCaption("Value");
-
-        t_meta->addField(f = new KDbField("unit", KDbField::Text));
-        f->setCaption("Unit");
-
-        if (!m_conn->createTable(t_meta)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- sports_meta created --";
-        qDebug() << *t_meta;
-    }
-
-    if (!m_conn->containsTable("pai")) {
-        KDbTableSchema *t_pai = new KDbTableSchema("pai");
-        t_pai->setCaption("Personal Activity Intelligence");
-        t_pai->addField(f = new KDbField("id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-
-        t_pai->addField(f = new KDbField("pai_date", KDbField::Date, KDbField::Indexed));
-        f->setCaption("PAI Date");
-
-        t_pai->addField(f = new KDbField("pai_low", KDbField::Float));
-        f->setCaption("Low");
-
-        t_pai->addField(f = new KDbField("pai_moderate", KDbField::Float));
-        f->setCaption("Moderate");
-
-        t_pai->addField(f = new KDbField("pai_high", KDbField::Float));
-        f->setCaption("High");
-
-        t_pai->addField(f = new KDbField("pai_low_time", KDbField::ShortInteger));
-        f->setCaption("Low Time (secs)");
-
-        t_pai->addField(f = new KDbField("pai_moderate_time", KDbField::ShortInteger));
-        f->setCaption("Moderate Time (secs)");
-
-        t_pai->addField(f = new KDbField("pai_high_time", KDbField::ShortInteger));
-        f->setCaption("High Time (secs)");
-
-        t_pai->addField(f = new KDbField("pai_today", KDbField::Float));
-        f->setCaption("Daily Total");
-
-        t_pai->addField(f = new KDbField("pai_total", KDbField::Float));
-        f->setCaption("Total");
-
-        if (!m_conn->createTable(t_pai)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- pai created --";
-        qDebug() << *t_pai;
-    }
-
-    if (!m_conn->containsTable("hrv")) {
-        KDbTableSchema *t_hrv = new KDbTableSchema("hrv");
-        t_hrv->setCaption("Heartrate Variation");
-        t_hrv->addField(f = new KDbField("hrv_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-
-        t_hrv->addField(f = new KDbField("hrv_timestamp", KDbField::Integer, KDbField::Indexed));
-        f->setCaption("Timestamp");
-
-        t_hrv->addField(f = new KDbField("hrv_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
-        f->setCaption("Timestamp in Date/Time format");
-
-        t_hrv->addField(f = new KDbField("hrv_value", KDbField::Integer));
-        f->setCaption("Value");
-
-        if (!m_conn->createTable(t_hrv)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- hrv created --";
-        qDebug() << *t_hrv;
-    }
-
-    if (!m_conn->containsTable("spo2")) {
-        KDbTableSchema *t_hrv = new KDbTableSchema("spo2");
-        t_hrv->setCaption("SPO2 Blood Oxygen");
-        t_hrv->addField(f = new KDbField("spo2_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-
-        t_hrv->addField(f = new KDbField("spo2_timestamp", KDbField::Integer, KDbField::Indexed));
-        f->setCaption("Timestamp");
-
-        t_hrv->addField(f = new KDbField("spo2_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
-        f->setCaption("Timestamp in Date/Time format");
-
-        t_hrv->addField(f = new KDbField("spo2_automatic", KDbField::Boolean));
-        f->setCaption("Value");
-
-        t_hrv->addField(f = new KDbField("spo2_value", KDbField::Integer));
-        f->setCaption("Value");
-
-        if (!m_conn->createTable(t_hrv)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- spo2 created --";
-        qDebug() << *t_hrv;
-    }
-
-    if (!m_conn->containsTable("spo2sleep")) {
-        KDbTableSchema *t_sposleep = new KDbTableSchema("spo2sleep");
-        t_sposleep->setCaption("SPO2 Blood Oxygen (Sleep)");
-        t_sposleep->addField(f = new KDbField("spo2sleep_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-
-        t_sposleep->addField(f = new KDbField("spo2sleep_timestamp", KDbField::Integer, KDbField::Indexed));
-        f->setCaption("Timestamp");
-
-        t_sposleep->addField(f = new KDbField("spo2sleep_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
-        f->setCaption("Timestamp in Date/Time format");
-
-        t_sposleep->addField(f = new KDbField("spo2sleep_value", KDbField::Integer));
-        f->setCaption("Value");
-
-        t_sposleep->addField(f = new KDbField("spo2sleep_duration", KDbField::Integer));
-        f->setCaption("Duration");
-
-        t_sposleep->addField(f = new KDbField("spo2sleep_high", KDbField::Text));
-        f->setCaption("High");
-
-        t_sposleep->addField(f = new KDbField("spo2sleep_low", KDbField::Text));
-        f->setCaption("Low");
-
-        t_sposleep->addField(f = new KDbField("spo2sleep_quality", KDbField::Text));
-        f->setCaption("Quality");
-
-        if (!m_conn->createTable(t_sposleep)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- spo2sleep created --";
-        qDebug() << *t_sposleep;
-    }
-
-    if (!m_conn->containsTable("temperature")) {
-        KDbTableSchema *t_temp = new KDbTableSchema("temperature");
-        t_temp->setCaption("Temperature");
-        t_temp->addField(f = new KDbField("temperature_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-
-        t_temp->addField(f = new KDbField("temperature_timestamp", KDbField::Integer, KDbField::Indexed));
-        f->setCaption("Timestamp");
-
-        t_temp->addField(f = new KDbField("temperature_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
-        f->setCaption("Timestamp in Date/Time format");
-
-        t_temp->addField(f = new KDbField("temperature_value", KDbField::Double));
-        f->setCaption("Value");
-
-        t_temp->addField(f = new KDbField("temperature_location", KDbField::Text));
-        f->setCaption("Location");
-
-        t_temp->addField(f = new KDbField("temperature_type", KDbField::Text));
-        f->setCaption("Type");
-
-        if (!m_conn->createTable(t_temp)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- temperature created --";
-        qDebug() << *t_temp;
-    }
-
-    if (!m_conn->containsTable("stress")) {
-        KDbTableSchema *t_stress = new KDbTableSchema("stress");
-        t_stress->setCaption("Stress");
-        t_stress->addField(f = new KDbField("stress_id", KDbField::Integer, KDbField::PrimaryKey | KDbField::AutoInc, KDbField::Unsigned));
-        f->setCaption("ID");
-
-        t_stress->addField(f = new KDbField("stress_timestamp", KDbField::Integer, KDbField::Indexed));
-        f->setCaption("Timestamp");
-
-        t_stress->addField(f = new KDbField("stress_timestamp_dt", KDbField::DateTime, KDbField::Indexed));
-        f->setCaption("Timestamp in Date/Time format");
-
-        t_stress->addField(f = new KDbField("stress_value", KDbField::Integer));
-        f->setCaption("Value");
-
-        t_stress->addField(f = new KDbField("stress_type", KDbField::ShortInteger));
-        f->setCaption("Type");
-
-        if (!m_conn->createTable(t_stress)) {
-            qDebug() << m_conn->result();
-            return;
-        }
-        qDebug() << "-- stress created --";
-        qDebug() << *t_stress;
-    }
-
-
-    if (!m_conn->commitTransaction(t)) {
-        qDebug() << m_conn->result();
-        return;
-    }
-
-    qDebug() << m_conn->tableNames();
-}
-
-void DeviceInterface::setupDatabase()
-{
-    KDbDriverManager manager;
-    const QStringList driverIds = manager.driverIds();
-    qDebug() << Q_FUNC_INFO << "DRIVERS: " << driverIds;
-    if (driverIds.isEmpty()) {
-        qWarning() << Q_FUNC_INFO << ": No drivers found";
-        return;
-    }
-    if (manager.result().isError()) {
-        qDebug() << Q_FUNC_INFO << manager.result();
-        return;
-    }
-
-    //get driver
-    m_dbDriver = manager.driver("org.kde.kdb.sqlite");
-    if (!m_dbDriver || manager.result().isError()) {
-        qDebug() << Q_FUNC_INFO << manager.result();
-        return;
-    }
-
-    m_connData.setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+ "/amazfish.kexi");
-
-    qDebug() << Q_FUNC_INFO << ": Database is: " << m_connData.databaseName();
-
-    m_conn = m_dbDriver->createConnection(m_connData);
-
-    if (!m_conn || m_dbDriver->result().isError()) {
-        qDebug() << Q_FUNC_INFO << ": Could not create connection:" << m_dbDriver->result();
-        return;
-    }
-    qDebug() << Q_FUNC_INFO << ": KDbConnection object created.";
-    if (!m_conn->connect()) {
-        qDebug() << Q_FUNC_INFO << ": Could not connect: " << m_conn->result();
-        return;
-    }
-    qDebug() << Q_FUNC_INFO << ": KDbConnection::connect() OK.";
-
-    if (!m_conn->databaseExists(m_connData.databaseName())) {
-        if (!m_conn->createDatabase(m_connData.databaseName())) {
-            qDebug() << Q_FUNC_INFO << ": Could not create Database: " << m_conn->result();
-            return;
-        }
-        qDebug() << Q_FUNC_INFO << ": Database" << m_connData.databaseName() << "created";
-    }
-
-    if (!m_conn->useDatabase()) {
-        qDebug() << Q_FUNC_INFO << ": Could not use Database: " << m_conn->result();
-        return;
-    }
-
-    createTables();
-
-}
-
-KDbConnection *DeviceInterface::dbConnection()
-{
-    if (m_conn && m_conn->isDatabaseUsed()) {
-        return m_conn;
-    }
-    return nullptr;
 }
 
 void DeviceInterface::onConnectionStateChanged()
@@ -723,7 +323,6 @@ void DeviceInterface::onConnectionStateChanged()
 
     if (m_device) {
         if (connectionState() == "authenticated") {
-            m_device->setDatabase(dbConnection());
             m_dbusHRM->setDevice(m_device);
 
             if (hrmService()) {
@@ -759,42 +358,6 @@ void DeviceInterface::onConnectionStateChanged()
         }
     }
     emit connectionStateChanged();
-}
-
-void DeviceInterface::log_battery_level(int level) {
-
-    if (!m_conn || !(m_conn->isDatabaseUsed())) {
-        qDebug() << Q_FUNC_INFO  << "Database not connected";
-        return;
-    }
-
-    QDateTime m_sampleTime = QDateTime::currentDateTime();
-    // qDebug() << Q_FUNC_INFO << "Start time" << m_sampleTime;
-
-    KDbTransaction transaction = m_conn->beginTransaction();
-    KDbTransactionGuard tg(transaction);
-
-    KDbFieldList fields;
-    auto s_battery = m_conn->tableSchema("info_log");
-
-    fields.addField(s_battery->field("timestamp"));
-    fields.addField(s_battery->field("timestamp_dt"));
-    fields.addField(s_battery->field("key"));
-    fields.addField(s_battery->field("value"));
-
-    QList<QVariant> values;
-
-    values << m_sampleTime.toMSecsSinceEpoch() / 1000;
-    values << m_sampleTime;
-    values << (int)Amazfish::Info::INFO_BATTERY;
-    values << level;
-
-    if (!m_conn->insertRecord(&fields, values)) {
-        qDebug() << Q_FUNC_INFO << "error inserting record";
-        return;
-    }
-    tg.commit();
-
 }
 
 QString DeviceInterface::devicePath(const QString& address)
@@ -845,7 +408,7 @@ void DeviceInterface::slot_informationChanged(Amazfish::Info key, const QString 
     if (key == Amazfish::Info::INFO_BATTERY) {
         int battery_level = val.toInt();
         if (battery_level != m_lastBatteryLevel) {
-            log_battery_level(battery_level);
+            Database::storeInfo((int)Amazfish::Info::INFO_BATTERY, battery_level);
             if (battery_level <= 10 && battery_level < m_lastBatteryLevel && AmazfishConfig::instance()->appNotifyLowBattery()) {
                 Amazfish::WatchNotification n;
                 n.id = 0;
@@ -1213,27 +776,6 @@ void DeviceInterface::navigationChanged(const QString &icon, const QString &narr
         }
 
     }
-}
-
-bool DeviceInterface::migrateDataDeviceAddress(const QString& oldAddress, const QString& newAddress)
-{
-    qDebug() << Q_FUNC_INFO << oldAddress << newAddress;
-
-    if (!m_conn || !m_conn->isDatabaseUsed()) {
-        qWarning() << Q_FUNC_INFO << "no database, deferring address migration";
-        return false;
-    }
-
-    KDbTransaction t = m_conn->beginTransaction();
-    KDbTransactionGuard tg(t);
-    bool ok = m_conn->executeSql(KDbEscapedString("UPDATE mi_band_activity SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress)));
-    ok = m_conn->executeSql(KDbEscapedString("UPDATE sports_data      SET device_id=%1 WHERE device_id=%2").arg(qHash(newAddress)).arg(qHash(oldAddress))) && ok;
-    if (ok) {
-        tg.commit();
-    }
-
-    qDebug() << Q_FUNC_INFO << ok;
-    return ok;
 }
 
 void DeviceInterface::refreshInformation()
