@@ -18,6 +18,11 @@ public:
     static const char* UUID_CHARACTERISTIC_CONNECTION_PARAMETERS;
     static const char* UUID_DESCRIPTOR_CONFIGURATION;
 
+    void triggerPairing();
+
+private:
+    void onCharacteristicChanged(const QString &characteristic, const QByteArray &value);
+
 };
 
 #endif // PEBBLE_SERVICE__H
