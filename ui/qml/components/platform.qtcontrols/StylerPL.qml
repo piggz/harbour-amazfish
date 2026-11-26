@@ -110,4 +110,90 @@ QtObject {
             colorGroup: SystemPalette.Inactive
         }
     ]
+
+    // returns the colour c (also a colour name) with the opacity a
+    function alpha(c, a) {
+        var q = Qt.lighter(c, 1.0);
+        return Qt.rgba(q.r, q.g, q.b, a);
+    }
+
+    // surfaces of tiles, cards and grouped lists
+    property color surfaceColor: alpha(themePrimaryColor, 0.06)
+    property color surfaceBorderColor: alpha(themePrimaryColor, 0.1)
+    property color surfaceEdgeColor: alpha(themePrimaryColor, 0.08)
+    property color surfacePressedColor: alpha(themePrimaryColor, 0.08)
+    property color surfaceChipColor: alpha(themePrimaryColor, 0.08)
+    property color surfaceDividerColor: alpha(themePrimaryColor, 0.08)
+    property color surfaceTrackColor: alpha(themePrimaryColor, 0.12)
+    property real surfaceRadius: Math.round(themePaddingLarge * 1.25)
+    property real surfaceBorderWidth: 1
+    property real surfacePressedOpacity: 0.6
+
+    // reordering items by drag and drop
+    property color dragIndicatorColor: themeHighlightColor
+    property real dragIndicatorOpacity: 0.8
+    property real draggedItemOpacity: 0.9
+
+    // structure of the charts
+    property color chartGridColor: alpha(themeSecondaryColor, 0.25)
+    property color chartGridFaintColor: alpha(themeSecondaryColor, 0.12)
+    property color chartEmptyColor: alpha(themeSecondaryColor, 0.1)
+    property color chartInactiveColor: alpha(themeSecondaryColor, 0.35)
+    property color chartAverageColor: alpha(themePrimaryColor, 0.9)
+    property color chartLabelBackgroundColor: alpha(blockBg, 0.75)
+
+    // colours with a fixed meaning in the charts, close to Gadgetbridge
+    property color chartDeepSleepColor: "#1a5fb4"
+    property color chartLightSleepColor: "#46acea"
+    property color chartAwakeColor: "#f5a623"
+    property color chartActiveColor: "#5ad24a"
+    property color chartActiveDimColor: "#3f7f38"
+    property color chartGoalColor: "#f5a623"
+    property color chartBelowGoalColor: "#f2d541"
+    property color chartHeartRateColor: "#ff6b6b"
+    property color chartRestingHeartRateColor: "#46acea"
+    property color chartPaceColor: "#46acea"
+    property color chartElevationColor: "#5ad24a"
+    property var chartZoneColors: ["#8a96a8", "#46acea", "#5ad24a", "#e8d44d", "#f5a623", "#ff6b6b"]
+    property color chartBatteryHighColor: "#5ad24a"
+    property color chartBatteryMediumColor: "#f2d541"
+    property color chartBatteryLowColor: "#ff6b6b"
+    property color chartPaiLowColor: "#f5a623"
+    property color chartPaiMediumColor: "#46acea"
+    property color chartPaiHighColor: "#5ad24a"
+    property color chartRouteColor: "#f5a623"
+    property color chartRouteStartColor: "#5ad24a"
+    property color chartRouteFinishColor: "#ff6b6b"
+    property color chartStressRelaxedColor: "#46acea"
+    property color chartStressMildColor: "#5ad24a"
+    property color chartStressModerateColor: "#f5a623"
+    property color chartStressHighColor: "#ff6b6b"
+    property color chartSpo2Color: "#46acea"
+    property color chartSpo2SleepColor: "#1a5fb4"
+    property color chartHrvColor: "#b27fe0"
+    property color chartTemperatureColor: "#f5a623"
+
+    // translucent variants of the colours above
+    property color chartGoalBandColor: alpha(chartGoalColor, 0.12)
+    property color chartGoalGuideColor: alpha(chartGoalColor, 0.7)
+    property color chartHeartRateFillColor: alpha(chartHeartRateColor, 0.15)
+    property color chartPaceFillColor: alpha(chartPaceColor, 0.15)
+    property color chartElevationFillColor: alpha(chartElevationColor, 0.15)
+    property color chartBatteryHighGuideColor: alpha(chartBatteryHighColor, 0.7)
+    property color chartBatteryMediumGuideColor: alpha(chartBatteryMediumColor, 0.7)
+    property color chartStressMildGuideColor: alpha(chartStressMildColor, 0.7)
+    property color chartStressModerateGuideColor: alpha(chartStressModerateColor, 0.7)
+    property color chartStressHighGuideColor: alpha(chartStressHighColor, 0.7)
+    property color chartHrvFillColor: alpha(chartHrvColor, 0.15)
+    property color chartTemperatureFillColor: alpha(chartTemperatureColor, 0.15)
+    property var chartZoneBandColors: chartZoneColors.map(function(c) { return alpha(c, 0.12); })
+
+    // chart lines
+    property real chartGridLineWidth: 1
+    property real chartLineWidth: Math.max(1.5, themeFontSizeExtraSmall / 12)
+    property real chartGuideLineWidth: Math.max(1, themeFontSizeExtraSmall / 16)
+    property real chartRouteLineWidth: Math.max(3, themePaddingSmall)
+    property real chartDashLength: themeFontSizeExtraSmall * 0.3
+    property real chartRingWidthRatio: 0.08
+    property real chartGaugeWidthRatio: 0.09
 }

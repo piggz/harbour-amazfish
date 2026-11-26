@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import uk.co.piggz.amazfish 1.0
-import QtQuick.Layouts 1.1
 import "../components/"
 import "../components/platform"
 
@@ -9,15 +8,13 @@ PagePL {
     title: qsTr("Stress")
 
     property alias day: nav.day
-    property real relaxed: 0
-    property real mild: 0
-    property real moderate: 0
-    property real high: 0
-    property real minstress: 0
-    property real maxstress: 0
-    property real totaltime: relaxed + mild + moderate + high
-    property real totalstress: 0
-    property real avgstress: (totalstress / totaltime) || 0
+    // number of automatic readings per level, see levelOf()
+    property var levelCounts: [0, 0, 0, 0]
+    readonly property int readingCount: levelCounts[0] + levelCounts[1] + levelCounts[2] + levelCounts[3]
+    readonly property var levelColors: [styler.chartStressRelaxedColor, styler.chartStressMildColor,
+                                        styler.chartStressModerateColor, styler.chartStressHighColor]
+    readonly property var levelNames: [qsTr("Relaxed"), qsTr("Mild"), qsTr("Moderate"), qsTr("High")]
+    property var manualReading: null
 
     pageMenu: PageMenuPL {
         PageMenuItemPL {
@@ -27,31 +24,44 @@ PagePL {
         }
     }
 
+    // 0 relaxed (below 40), 1 mild (40-59), 2 moderate (60-79), 3 high (80 and more)
+    function levelOf(value) {
+        return value >= 80 ? 3 : value >= 60 ? 2 : value >= 40 ? 1 : 0;
+    }
+
+    function levelColor(value) {
+        return levelColors[levelOf(value)];
+    }
+
+    function percentOf(level) {
+        return readingCount ? Math.round(levelCounts[level] / readingCount * 100) : 0;
+    }
+
+    function formatTime(seconds) {
+        var d = new Date(seconds * 1000);
+        return Qt.formatDate(d, "ddd d.M.") + " - " + d.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
+    }
+
     Column {
         id: column
-        width: parent.width
-        anchors.top: parent.top
-        anchors.margins: styler.themePaddingMedium
+        x: styler.themeHorizontalPageMargin
+        width: parent.width - 2 * x
         spacing: styler.themePaddingLarge
 
         LabelPL {
-            id: lblStressAvk
-            font.pixelSize: styler.themeFontSizeExtraLarge * 3
-            anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: qsTr("Avg: %1%").arg(Math.round(avgstress))
             horizontalAlignment: Text.AlignHCenter
+            text: dayChart.noData ? "-" : Math.round(dayChart.average)
+            color: dayChart.noData ? styler.themeSecondaryColor : levelColor(dayChart.average)
+            font.pixelSize: styler.themeFontSizeExtraLarge * 2
         }
 
-        Row { //Min and Max Stress
-            //height: childrenRect.height
-            anchors.horizontalCenter: parent.horizontalCenter
-            IconPL { iconName: styler.iconDown; iconHeight: styler.themeIconSizeSmall; iconWidth: styler.themeIconSizeSmall }
-            LabelPL { text: minstress; anchors.verticalCenter: parent.verticalCenter
-            }
-            IconPL { iconName: styler.iconUp; iconHeight: styler.themeIconSizeSmall; iconWidth: styler.themeIconSizeSmall }
-            LabelPL { text: maxstress; anchors.verticalCenter: parent.verticalCenter
-            }
+        LabelPL {
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            color: styler.themeSecondaryColor
+            font.pixelSize: styler.themeFontSizeSmall
+            text: dayChart.noData ? qsTr("No data") : qsTr("Average stress of the day")
         }
 
         DateNavigation {
@@ -71,170 +81,117 @@ PagePL {
             }
         }
 
-        Graph {
-            id: graphStressAuto
-            graphTitle: qsTr("Stress")
-            graphHeight: 300
+        ChartCard {
+            clickable: true
+            title: qsTr("Stress")
+            info: dayChart.noData ? "" : qsTr("Min %1 - Max %2").arg(Math.round(dayChart.minimum))
+                                                                         .arg(Math.round(dayChart.maximum))
+            onClicked: updateGraphs()
 
-            axisX.mask: "hh:mm"
-            axisY.units: qsTr("%")
-            type: DataSource.StressAuto
-            graphType: bar
-
-            minY: 1
-            maxY: 100
-
-            colorMap: [
-                {"limit": 39, "color": "lightblue"},
-                {"limit": 59, "color": "green"},
-                {"limit": 79, "color": "orange"},
-            ]
-            defaultColor: "red"
-
-            valueConverter: function(value) {
-                return value.toFixed(0);
-            }
-            onClicked: {
-                updateGraph(day);
-            }
-        }
-
-        //Type summary
-        Grid {
-            columns: 2
-            spacing: styler.themePaddingMedium
-            width: parent.width - (styler.themePaddingMedium * 2)
-            LabelPL {text: qsTr("Relaxed")}
-            Item {
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "lightblue"; width: parent.width * (relaxed  / totaltime) ; height: parent.height }
-                LabelPL { text: Math.round((relaxed / totaltime) * 100) || 0 + "%"; anchors.centerIn: parent}
+            DayChart {
+                id: dayChart
+                bars: true
+                minY: 0
+                maxY: 100
+                colorFor: levelColor
+                guides: [
+                    { value: 40, color: styler.chartStressMildGuideColor },
+                    { value: 60, color: styler.chartStressModerateGuideColor },
+                    { value: 80, color: styler.chartStressHighGuideColor }
+                ]
             }
 
-            LabelPL {text: qsTr("Mild")}
-            Item {
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "green"; width: parent.width * (mild  / totaltime) ; height: parent.height }
-                LabelPL { text: Math.round((mild / totaltime) * 100) || 0 + "%"; anchors.centerIn: parent}
-            }
-
-            LabelPL {text: qsTr("Moderate")}
-            Item {
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "orange"; width: parent.width * (moderate  / totaltime) ; height: parent.height }
-                LabelPL { text: Math.round((moderate / totaltime) * 100) || 0 + "%"; anchors.centerIn: parent}
-            }
-
-            LabelPL {text: qsTr("High")}
-            Item {
-                width: parent.width * 0.5
-                height: 50
-                Rectangle { color: "red"; width: parent.width * (high  / totaltime) ; height: parent.height }
-                LabelPL { text: Math.round((high / totaltime) * 100) || 0 + "%"; anchors.centerIn: parent}
-            }
-
-        }
-
-        Graph {
-            id: graphStressSummary
-            graphTitle: qsTr("Stress Summary")
-            graphHeight: 300
-
-            axisX.mask: "dd-MM"
-            axisY.units: qsTr("%")
-            type: DataSource.StressSummary
-            graphType: bar
-
-            minY: 1
-            maxY: 100
-
-            colorMap: [
-                {"limit": 39, "color": "lightblue"},
-                {"limit": 59, "color": "green"},
-                {"limit": 79, "color": "orange"},
-            ]
-            defaultColor: "red"
-
-            valueConverter: function(value) {
-                return value.toFixed(0);
-            }
-            onClicked: {
-                updateGraph(day);
+            ChartLegend {
+                items: [
+                    { color: levelColors[0], label: levelNames[0] },
+                    { color: levelColors[1], label: levelNames[1] },
+                    { color: levelColors[2], label: levelNames[2] },
+                    { color: levelColors[3], label: levelNames[3] }
+                ]
             }
         }
 
-        LabelPL {
-            id: lblManualHeader
-            font.pixelSize: styler.themeFontSizeLarge
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            text: qsTr("Last Manual Reading")
-            horizontalAlignment: Text.AlignHCenter
-        }
+        ChartCard {
+            title: qsTr("Stress levels")
+            visible: readingCount > 0
 
-        LabelPL {
-            id: lblManualStressValue
-            width: parent.width
-            horizontalAlignment: Text.AlignLeft
-        }
+            // share of the readings per level as one segmented bar
+            Row {
+                width: parent.width
+                height: styler.themeFontSizeExtraSmall
+                spacing: 0
 
-
-    }
-
-    function calculateZones() {
-        var points = graphStressAuto.points;
-        var end = points.length;
-
-        relaxed = 0;
-        mild = 0;
-        moderate = 0;
-        high = 0;
-        minstress = 0;
-        maxstress = 0;
-        totalstress = 0;
-
-        for (var i = 0; i < end; i++) {
-            var point = points[i];
-            totalstress += point.y;
-            if (point.y >= 80) {
-                high++;
-            } else if (point.y >= 60) {
-                moderate++;
-            } else if (point.y >= 40) {
-                mild++
-            } else {
-                relaxed++;
+                Repeater {
+                    model: 4
+                    delegate: Rectangle {
+                        width: readingCount ? parent.width * levelCounts[index] / readingCount : 0
+                        height: parent.height
+                        color: levelColors[index]
+                    }
+                }
             }
 
-            if (point.y > maxstress) {
-                maxstress = point.y;
-            }
-            if (minstress == 0) {
-                minstress = point.y;
-            }
-            if (point.y > 0 && point.y < minstress)  {
-                minstress = point.y;
+            Repeater {
+                model: 4
+                delegate: DetailRow {
+                    label: levelNames[index]
+                    value: qsTr("%1 %").arg(percentOf(index))
+                }
             }
         }
-    }
 
-    function updateManual() {
-        var dataPoints = dataSource.data(DataSource.StressManual, day);
-        lblManualStressValue.text = new Date(dataPoints[0].x) + " : " + dataPoints[0].y
+        ChartCard {
+            clickable: true
+            title: qsTr("Stress Summary")
+            info: qsTr("Last %n day(s)", "", 11)
+            onClicked: updateGraphs()
+
+            SummaryBarChart {
+                id: summaryChart
+                minY: 0
+                maxY: 100
+                colorFor: levelColor
+                labelMask: "d.M."
+            }
+        }
+
+        ChartCard {
+            title: qsTr("Last Manual Reading")
+
+            DetailRow {
+                label: qsTr("Stress")
+                value: manualReading ? Math.round(manualReading.y) + " - " + levelNames[levelOf(manualReading.y)] : "-"
+            }
+            DetailRow {
+                label: qsTr("Time")
+                value: manualReading ? formatTime(manualReading.x) : "-"
+            }
+        }
     }
 
     function updateGraphs() {
-        graphStressAuto.updateGraph(day);
-        graphStressSummary.updateGraph(day);
-        calculateZones();
+        var start = new Date(day);
+        start.setHours(0, 0, 0, 0);
+        // 0 means the watch could not measure
+        var all = dataSource.data(DataSource.StressAuto, day);
+        var points = [];
+        var counts = [0, 0, 0, 0];
+        for (var i = 0; i < all.length; i++) {
+            if (all[i].y <= 0) continue;
+            points.push(all[i]);
+            counts[levelOf(all[i].y)]++;
+        }
+        levelCounts = counts;
+        dayChart.startTime = start.getTime() / 1000;
+        dayChart.points = points;
+        summaryChart.points = dataSource.data(DataSource.StressSummary, day);
+
+        var manual = dataSource.data(DataSource.StressManual, day);
+        manualReading = manual.length > 0 ? manual[0] : null;
     }
 
     Component.onCompleted: {
         day = new Date();
         updateGraphs();
-        updateManual()
     }
 }
