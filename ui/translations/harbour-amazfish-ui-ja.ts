@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/AddCityPage.qml" line="8"/>
         <source>Set Location</source>
-        <translation type="unfinished"></translation>
+        <translation>位置情報を設定</translation>
     </message>
 </context>
 <context>
@@ -15,55 +15,55 @@
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <location filename="../qml/components/Alarm.qml" line="34"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>有効化</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <location filename="../qml/components/Alarm.qml" line="39"/>
         <source>Time: %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>時間: %1:%2</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <location filename="../qml/components/Alarm.qml" line="92"/>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>月</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <location filename="../qml/components/Alarm.qml" line="98"/>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>火</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <location filename="../qml/components/Alarm.qml" line="104"/>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>水</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <location filename="../qml/components/Alarm.qml" line="110"/>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>木</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <location filename="../qml/components/Alarm.qml" line="116"/>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>金</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <location filename="../qml/components/Alarm.qml" line="122"/>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>土</translation>
     </message>
     <message>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <location filename="../qml/components/Alarm.qml" line="128"/>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>日</translation>
     </message>
 </context>
 <context>
@@ -71,43 +71,43 @@
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="8"/>
         <source>Analysis</source>
-        <translation type="unfinished"></translation>
+        <translation>分析</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="14"/>
         <source>Download All Data</source>
-        <translation type="unfinished"></translation>
+        <translation>全てのデータをダウンロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="48"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>心拍数</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="66"/>
         <location filename="../qml/pages/AnalysisPage.qml" line="69"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>歩数</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="83"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation>強度</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="100"/>
         <source>HRV</source>
-        <translation type="unfinished"></translation>
+        <translation>HRV</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="118"/>
         <source>Body Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>体温</translation>
     </message>
     <message>
         <location filename="../qml/pages/AnalysisPage.qml" line="51"/>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
@@ -115,7 +115,7 @@
     <message>
         <location filename="../qml/pages/AuthKeyDialog.qml" line="18"/>
         <source>Enter auth key</source>
-        <translation type="unfinished"></translation>
+        <translation>Auth キーを入力</translation>
     </message>
 </context>
 <context>
@@ -124,12 +124,12 @@
         <location filename="../qml/pages/BatteryPage.qml" line="9"/>
         <location filename="../qml/pages/BatteryPage.qml" line="48"/>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>バッテリー</translation>
     </message>
     <message>
         <location filename="../qml/pages/BatteryPage.qml" line="24"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -137,38 +137,38 @@
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="49"/>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルを送信</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="9"/>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="27"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>なし</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="26"/>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルを選択</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="44"/>
         <source>File type/version: </source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルの種類/バージョン: </translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="53"/>
         <source>File not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>このデバイスでファイルがサポートされていません</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="7"/>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルをインストール</translation>
     </message>
     <message>
         <location filename="../qml/pages/BipFirmwarePage.qml" line="22"/>
         <source>Select a file to install.</source>
-        <translation type="unfinished"></translation>
+        <translation>インストールするファイルを選択してください。</translation>
     </message>
 </context>
 <context>
@@ -176,7 +176,7 @@
     <message>
         <location filename="../src/daemoninterface.cpp" line="64"/>
         <source>Unexpected error</source>
-        <translation type="unfinished"></translation>
+        <translation>予期せぬエラー</translation>
     </message>
 </context>
 <context>
@@ -184,175 +184,175 @@
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="18"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="38"/>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>アドレス: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="43"/>
         <location filename="../qml/pages/DebugInfo.qml" line="374"/>
         <source>Serial No: </source>
-        <translation type="unfinished"></translation>
+        <translation>シリアル番号: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="48"/>
         <location filename="../qml/pages/DebugInfo.qml" line="377"/>
         <source>Hardware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>ハードウェアのバージョン: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="53"/>
         <location filename="../qml/pages/DebugInfo.qml" line="380"/>
         <source>Software Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>ソフトウェアのバージョン: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="72"/>
         <source>Connection State: </source>
-        <translation type="unfinished"></translation>
+        <translation>接続状態: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="77"/>
         <location filename="../qml/pages/DebugInfo.qml" line="383"/>
         <source>GPS Ver: </source>
-        <translation type="unfinished"></translation>
+        <translation>GPSのバージョン: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="270"/>
         <source>Test Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>通知をテスト</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="210"/>
         <source>Hello from Amazfish app. This is a long message sent over BLE!</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfish アプリからこんにちは。これはBLEで送信された長いメッセージです！</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="283"/>
         <source>Test Call</source>
-        <translation type="unfinished"></translation>
+        <translation>通話をテスト</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="312"/>
         <source>Fetch Data</source>
-        <translation type="unfinished"></translation>
+        <translation>データを読み込む</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="330"/>
         <source>Test Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>ポップアップをテスト</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="8"/>
         <source>Debugging</source>
-        <translation type="unfinished"></translation>
+        <translation>デバッグ</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="34"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>情報</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="58"/>
         <location filename="../qml/pages/DebugInfo.qml" line="386"/>
         <source>Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>モデル: </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="63"/>
         <location filename="../qml/pages/DebugInfo.qml" line="392"/>
         <source>Firmware Rev: </source>
-        <translation type="unfinished"></translation>
+        <translation>ファームウェアのバージョン </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="68"/>
         <location filename="../qml/pages/DebugInfo.qml" line="389"/>
         <source>Manufacturer: </source>
-        <translation type="unfinished"></translation>
+        <translation>製造元 </translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="193"/>
         <source>Function Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>機能のテスト</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="206"/>
         <source>Alert</source>
-        <translation type="unfinished"></translation>
+        <translation>アラート</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="216"/>
         <source>SMS Message (Ubuntu Touch)</source>
-        <translation type="unfinished"></translation>
+        <translation>SMSメッセージ (Ubuntu Touch)</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="226"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Eメール</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="231"/>
         <source>The quick brown fox jumps over the lazy dog</source>
-        <translation type="unfinished"></translation>
+        <translation>いろはにほへと ちりぬるを わかよたれそ つねならむ うゐのおくやま けふこえて あさきゆめみし ゑひもせす</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="237"/>
         <source>Telegram message</source>
-        <translation type="unfinished"></translation>
+        <translation>Telegramのメッセージ</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="244"/>
         <source>Matrix message</source>
-        <translation type="unfinished"></translation>
+        <translation>Matrixのメッセージ</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="251"/>
         <source>Slack message</source>
-        <translation type="unfinished"></translation>
+        <translation>Slackのメッセージ</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="338"/>
         <source>Send Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>天気を送信</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="348"/>
         <source>Update Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>カレンダーを更新</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="361"/>
         <source>Music Control</source>
-        <translation type="unfinished"></translation>
+        <translation>音楽コントロール</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="321"/>
         <source>Request Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>スクリーンショットを要求</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="208"/>
         <location filename="../qml/pages/DebugInfo.qml" line="287"/>
         <source>Somebody</source>
-        <translation type="unfinished"></translation>
+        <translation>誰か</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="209"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>題名</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="292"/>
         <source>Test Immediate Alert Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Immediate Alert Serviceをテスト</translation>
     </message>
     <message>
         <location filename="../qml/pages/DebugInfo.qml" line="334"/>
         <source>This is a test notification</source>
-        <translation type="unfinished"></translation>
+        <translation>これはテスト通知です</translation>
     </message>
 </context>
 <context>
@@ -361,7 +361,7 @@
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
         <location filename="../qml/components/DownloadDataMenuItem.qml" line="7"/>
         <source>Download Data</source>
-        <translation type="unfinished"></translation>
+        <translation>データをダウンロード</translation>
     </message>
 </context>
 <context>
@@ -369,78 +369,78 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="26"/>
         <source>Pair with watch</source>
-        <translation type="unfinished"></translation>
+        <translation>時計とペアリング</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="39"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Disconnect from watch</source>
-        <translation type="unfinished"></translation>
+        <translation>時計と接続解除</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="46"/>
         <source>Connect to watch</source>
-        <translation type="unfinished"></translation>
+        <translation>時計と接続</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="58"/>
         <source>Enable service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>起動時にサービスを有効化</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="181"/>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>スリープ</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="234"/>
         <source>Sports</source>
-        <translation type="unfinished"></translation>
+        <translation>運動</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="260"/>
         <source>SpO₂</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO₂</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="284"/>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation>ストレス</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="299"/>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>データ</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="313"/>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>バッテリー</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="269"/>
         <location filename="../qml/pages/FirstPage.qml" line="321"/>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="198"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>心拍数</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="207"/>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="336"/>
         <source>Install File</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルのインストール</translation>
     </message>
 </context>
 <context>
@@ -448,32 +448,32 @@
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="8"/>
         <source>FitPub settings</source>
-        <translation type="unfinished"></translation>
+        <translation>FitPub設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="15"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="30"/>
         <source>Instance URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>インスタンスURL:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="37"/>
         <source>Username or Email:</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー名またはEメール:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="44"/>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワード:</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubSettingsPage.qml" line="51"/>
         <source>Account linked</source>
-        <translation type="unfinished"></translation>
+        <translation>アカウントがリンクされました</translation>
     </message>
 </context>
 <context>
@@ -481,82 +481,82 @@
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="9"/>
         <source>FitPub Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>FitPubのアップロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="26"/>
         <source>Activity name for FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>FitPubのアクティビティの名前</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="27"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名前</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="31"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="38"/>
         <source>Activity description for FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>FitPubのアクティビティの名前</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="46"/>
         <source>Type (FitPub)</source>
-        <translation type="unfinished"></translation>
+        <translation>種類 (FitPub)</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="51"/>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>プライベート</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="56"/>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>アップロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="89"/>
         <source>Not linked to FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>FitPubとリンクされていません</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="94"/>
         <source>Authenticating...</source>
-        <translation type="unfinished"></translation>
+        <translation>認証中...</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="105"/>
         <source>Authentication failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>認証失敗: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="122"/>
         <source>Uploading data...</source>
-        <translation type="unfinished"></translation>
+        <translation>データをアップロード中...</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="137"/>
         <source>Upload failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>アップロード失敗: </translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="153"/>
         <source>Updating activity metadata...</source>
-        <translation type="unfinished"></translation>
+        <translation>アクティビティのメタデータを更新中...</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="163"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished"></translation>
+        <translation>アクティビティのアップロード完了</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitPubUploadPage.qml" line="166"/>
         <source>Update failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>更新失敗: </translation>
     </message>
 </context>
 <context>
@@ -564,17 +564,17 @@
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="26"/>
         <source>FitTrackee settings</source>
-        <translation type="unfinished"></translation>
+        <translation>FitTrackee設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>ログアウト</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="33"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>ログイン</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="70"/>
@@ -594,7 +594,7 @@
     <message>
         <location filename="../qml/pages/FitTrackeeSettingsPage.qml" line="94"/>
         <source>Account linked</source>
-        <translation type="unfinished"></translation>
+        <translation>アカウントがリンクされました</translation>
     </message>
 </context>
 <context>
@@ -602,57 +602,57 @@
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="27"/>
         <source>FitTrackee Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>FitTrackeeのアップロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="44"/>
         <source>Activity name for FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>FitTrackeeのアクティビティ名</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="45"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名前</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="49"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="56"/>
         <source>Activity description for FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>FitTrackeeのアクティビティの説明</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="64"/>
         <source>Type (FitTrackee)</source>
-        <translation type="unfinished"></translation>
+        <translation>種類 (FitTrackee)</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="69"/>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>プライベート</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="73"/>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>アップロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="110"/>
         <source>Uploading data...</source>
-        <translation type="unfinished"></translation>
+        <translation>データをアップロード中...</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="125"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished"></translation>
+        <translation>アクティビティのアップロード完了</translation>
     </message>
     <message>
         <location filename="../qml/pages/FitTrackeeUploadPage.qml" line="224"/>
         <source>An unknown error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>不明なエラーが発生しました</translation>
     </message>
 </context>
 <context>
@@ -661,7 +661,7 @@
         <location filename="../qml/components/GraphData.qml" line="356"/>
         <location filename="../qml/components/GraphData.qml" line="356"/>
         <source>No data</source>
-        <translation type="unfinished"></translation>
+        <translation>データなし</translation>
     </message>
 </context>
 <context>
@@ -669,23 +669,23 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="9"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>心拍数</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="40"/>
         <source>%1 bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bpm</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="75"/>
         <location filename="../qml/pages/HeartratePage.qml" line="78"/>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="97"/>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>安静時</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="106"/>
@@ -700,17 +700,17 @@
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="124"/>
         <source>Aerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>有酸素運動</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="133"/>
         <source>Anerobic</source>
-        <translation type="unfinished"></translation>
+        <translation>無酸素運動</translation>
     </message>
     <message>
         <location filename="../qml/pages/HeartratePage.qml" line="142"/>
         <source>VO2 Max</source>
-        <translation type="unfinished"></translation>
+        <translation>VO2 Max</translation>
     </message>
 </context>
 <context>
@@ -719,7 +719,7 @@
         <location filename="../qml/tools/JSTools.js" line="87"/>
         <location filename="../qml/tools/JSTools.js" line="301"/>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>空</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="88"/>
@@ -727,7 +727,7 @@
         <location filename="../qml/tools/JSTools.js" line="302"/>
         <location filename="../qml/tools/JSTools.js" line="303"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>心拍数</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="90"/>
@@ -735,7 +735,7 @@
         <location filename="../qml/tools/JSTools.js" line="304"/>
         <location filename="../qml/tools/JSTools.js" line="305"/>
         <source>Pace</source>
-        <translation type="unfinished"></translation>
+        <translation>ペース</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="92"/>
@@ -743,7 +743,7 @@
         <location filename="../qml/tools/JSTools.js" line="306"/>
         <location filename="../qml/tools/JSTools.js" line="307"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="94"/>
@@ -755,18 +755,18 @@
         <location filename="../qml/tools/JSTools.js" line="95"/>
         <location filename="../qml/tools/JSTools.js" line="309"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>距離</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="96"/>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>一時停止</translation>
     </message>
     <message>
         <location filename="../qml/tools/JSTools.js" line="97"/>
         <location filename="../qml/tools/JSTools.js" line="310"/>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>所要時間</translation>
     </message>
 </context>
 <context>
@@ -775,7 +775,7 @@
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <location filename="../qml/components/PAITile.qml" line="5"/>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAI</translation>
     </message>
 </context>
 <context>
@@ -783,32 +783,32 @@
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="9"/>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="14"/>
         <source>Download PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAIをダウンロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="45"/>
         <source>%1 min</source>
-        <translation type="unfinished"></translation>
+        <translation>%1分</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="62"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>過去7日間</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="92"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>今</translation>
     </message>
     <message>
         <location filename="../qml/pages/PaiDataPage.qml" line="110"/>
         <source>Earned Today</source>
-        <translation type="unfinished"></translation>
+        <translation>今日の獲得数</translation>
     </message>
 </context>
 <context>
@@ -816,42 +816,42 @@
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="11"/>
         <source>Pair Device</source>
-        <translation type="unfinished"></translation>
+        <translation>端末をペアリング</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="13"/>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>端末が見つかりません</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="29"/>
         <source>Bluetooth adapter is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetoothアダプターが利用できません</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="210"/>
         <source>Select device type</source>
-        <translation type="unfinished"></translation>
+        <translation>端末の種類を選択</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="231"/>
         <source>Stop scanning</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャンを停止</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="232"/>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>端末をスキャン</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="246"/>
         <source>Scanning for devices…</source>
-        <translation type="unfinished"></translation>
+        <translation>端末をスキャン中…</translation>
     </message>
     <message>
         <location filename="../qml/pages/PairDevicePage.qml" line="248"/>
         <source>Pairing…</source>
-        <translation type="unfinished"></translation>
+        <translation>ペアリング中…</translation>
     </message>
 </context>
 <context>
@@ -859,17 +859,17 @@
     <message>
         <location filename="../src/timeformatter.cpp" line="33"/>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1秒</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="35"/>
         <source>%1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1分 %2秒</translation>
     </message>
     <message>
         <location filename="../src/timeformatter.cpp" line="39"/>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1時間 %2分 %3秒</translation>
     </message>
 </context>
 <context>
@@ -877,37 +877,37 @@
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="8"/>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>アラーム</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="57"/>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定を保存</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="19"/>
         <source>Alarm 1</source>
-        <translation type="unfinished"></translation>
+        <translation>アラーム1</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="25"/>
         <source>Alarm 2</source>
-        <translation type="unfinished"></translation>
+        <translation>アラーム2</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="33"/>
         <source>Alarm 3</source>
-        <translation type="unfinished"></translation>
+        <translation>アラーム3</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="40"/>
         <source>Alarm 4</source>
-        <translation type="unfinished"></translation>
+        <translation>アラーム4</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-alarms.qml" line="47"/>
         <source>Alarm 5</source>
-        <translation type="unfinished"></translation>
+        <translation>アラーム5</translation>
     </message>
 </context>
 <context>
@@ -915,62 +915,62 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="38"/>
         <source>Notify on connect</source>
-        <translation type="unfinished"></translation>
+        <translation>接続中に通知</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="195"/>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定を保存</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="80"/>
         <source>Sync activity data each hour</source>
-        <translation type="unfinished"></translation>
+        <translation>アクティビティデータを1時間ごとに同期</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="8"/>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>アプリケーション設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="22"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>通知</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="46"/>
         <source>Low battery notification</source>
-        <translation type="unfinished"></translation>
+        <translation>バッテリー残量低下通知</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="54"/>
         <source>Navigation notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>ナビゲーション通知</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="70"/>
         <source>Simulate event reminder support</source>
-        <translation type="unfinished"></translation>
+        <translation>イベントリマインダーサポートのシミュレーション</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="74"/>
         <source>Refresh rates</source>
-        <translation type="unfinished"></translation>
+        <translation>更新の頻度</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="91"/>
         <source>Refresh weather every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>(%1) 分ごとに天気を更新</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="100"/>
         <source>Refresh calendar every (%1) minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>(%1) 分ごとにカレンダーを更新</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="105"/>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>グラフ</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="114"/>
@@ -985,37 +985,37 @@
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="126"/>
         <source>Amazfish Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfishの機能</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="133"/>
         <source>Start service on boot</source>
-        <translation type="unfinished"></translation>
+        <translation>起動時にAmazfishも起動</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="147"/>
         <source>Start/Stop the Amazfish Background Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazfishバックグラウンドサービスを開始/停止</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="164"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>開始</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="173"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>停止</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="183"/>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>ボタンでのアクション</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="62"/>
         <source>Transliterate notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>通知を読み上げる</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-app.qml" line="30"/>
@@ -1028,57 +1028,57 @@
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="10"/>
         <source>Button Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>ボタンでのアクション</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="27"/>
         <source>Double Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>二度押しでのアクション</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="37"/>
         <source>Triple Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>三度押しでのアクション</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="47"/>
         <source>Quad Press Action</source>
-        <translation type="unfinished"></translation>
+        <translation>四度押しでのアクション</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="56"/>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定を保存</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="79"/>
         <source>No Action</source>
-        <translation type="unfinished"></translation>
+        <translation>アクションなし</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="80"/>
         <source>Next Track</source>
-        <translation type="unfinished"></translation>
+        <translation>次のトラックへ</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="81"/>
         <source>Previous Track</source>
-        <translation type="unfinished"></translation>
+        <translation>一つ前のトラックへ</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="82"/>
         <source>Volume Up</source>
-        <translation type="unfinished"></translation>
+        <translation>音量を上げる</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="83"/>
         <source>Volume Down</source>
-        <translation type="unfinished"></translation>
+        <translation>音量を下げる</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-button-action.qml" line="84"/>
         <source>Custom Script</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタムスクリプト</translation>
     </message>
 </context>
 <context>
@@ -1086,117 +1086,117 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="8"/>
         <source>Device Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>端末設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="24"/>
         <source>en_US</source>
-        <translation type="unfinished"></translation>
+        <translation>en_US</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="25"/>
         <source>es_ES</source>
-        <translation type="unfinished"></translation>
+        <translation>es_ES</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="26"/>
         <source>zh_CN</source>
-        <translation type="unfinished"></translation>
+        <translation>zh_CN</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="27"/>
         <source>zh_TW</source>
-        <translation type="unfinished"></translation>
+        <translation>zh_TW</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="43"/>
         <source>Date Display</source>
-        <translation type="unfinished"></translation>
+        <translation>日付表示</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="46"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>時間</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="47"/>
         <source>Date/Time</source>
-        <translation type="unfinished"></translation>
+        <translation>日付/時間</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="57"/>
         <source>Time Format</source>
-        <translation type="unfinished"></translation>
+        <translation>時刻表示の形式</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="61"/>
         <source>12hr</source>
-        <translation type="unfinished"></translation>
+        <translation>12時間表記</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="60"/>
         <source>24hr</source>
-        <translation type="unfinished"></translation>
+        <translation>24時間表記</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="115"/>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定を保存</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="71"/>
         <source>Distance Unit</source>
-        <translation type="unfinished"></translation>
+        <translation>距離の単位</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="74"/>
         <source>Metric</source>
-        <translation type="unfinished"></translation>
+        <translation>メートル法</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="75"/>
         <source>Imperial</source>
-        <translation type="unfinished"></translation>
+        <translation>帝国単位</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="28"/>
         <source>ru_RU</source>
-        <translation type="unfinished"></translation>
+        <translation>ru_RU</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="20"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>言語</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="29"/>
         <source>de_DE</source>
-        <translation type="unfinished"></translation>
+        <translation>de_DE</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="30"/>
         <source>it_IT</source>
-        <translation type="unfinished"></translation>
+        <translation>it_IT</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="31"/>
         <source>fr_FR</source>
-        <translation type="unfinished"></translation>
+        <translation>fr_FR</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="32"/>
         <source>tr_TR</source>
-        <translation type="unfinished"></translation>
+        <translation>tr_TR</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="33"/>
         <source>nl_NL</source>
-        <translation type="unfinished"></translation>
+        <translation>nl_NL</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="86"/>
         <source>Disconnect Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>接続解除の通知</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="104"/>
@@ -1206,7 +1206,7 @@
     <message>
         <location filename="../qml/pages/Settings-device.qml" line="96"/>
         <source>Realtime HRM measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>リアルタイム心拍数計測</translation>
     </message>
 </context>
 <context>
@@ -1219,32 +1219,32 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="16"/>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定を保存</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="69"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>状態</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="70"/>
         <source>Heartrate</source>
-        <translation type="unfinished"></translation>
+        <translation>心拍数</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="71"/>
         <source>Workout</source>
-        <translation type="unfinished"></translation>
+        <translation>ワークアウト</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="72"/>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>天気</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="73"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>通知</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="74"/>
@@ -1259,107 +1259,107 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="76"/>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>アラーム</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="78"/>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>音楽</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="82"/>
         <source>Mute Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>電話をミュート</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="86"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="87"/>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>アクティビティ</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="88"/>
         <source>Event Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>イベントリマインダー</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="90"/>
         <source>PAI</source>
-        <translation type="unfinished"></translation>
+        <translation>PAI</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="91"/>
         <source>World Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>世界時計</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="93"/>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation>ストレス</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="94"/>
         <source>Period</source>
-        <translation type="unfinished"></translation>
+        <translation>期間</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="105"/>
         <source>Alexa</source>
-        <translation type="unfinished"></translation>
+        <translation>Alexa</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="89"/>
         <source>Compass</source>
-        <translation type="unfinished"></translation>
+        <translation>コンパス</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="84"/>
         <source>AliPay</source>
-        <translation type="unfinished"></translation>
+        <translation>AliPay</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="80"/>
         <source>Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>タイマー</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="77"/>
         <source>Take Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>写真を撮る</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="79"/>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>ストップウォッチ</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="81"/>
         <source>Find Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>電話を見つける</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="83"/>
         <source>NFC</source>
-        <translation type="unfinished"></translation>
+        <translation>NFC</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="85"/>
         <source>Watch Face</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォッチフェイス</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="92"/>
         <source>Timer/Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>タイマー/ストップウォッチ</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="95"/>
         <source>Goal</source>
-        <translation type="unfinished"></translation>
+        <translation>ゴール</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="96"/>
@@ -1369,62 +1369,62 @@
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="97"/>
         <source>SpO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO2</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="98"/>
         <source>Events</source>
-        <translation type="unfinished"></translation>
+        <translation>イベント</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="99"/>
         <source>Widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>ウィジェット</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="100"/>
         <source>Breathing</source>
-        <translation type="unfinished"></translation>
+        <translation>呼吸</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="101"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>歩数</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="102"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>距離</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="103"/>
         <source>Calories</source>
-        <translation type="unfinished"></translation>
+        <translation>カロリー</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="104"/>
         <source>Pomodoro</source>
-        <translation type="unfinished"></translation>
+        <translation>ポモドーロ</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="106"/>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>バッテリー</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="107"/>
         <source>Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>温度</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="108"/>
         <source>Barometer</source>
-        <translation type="unfinished"></translation>
+        <translation>気圧計</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-huami-shortcuts.qml" line="109"/>
         <source>Flashlight</source>
-        <translation type="unfinished"></translation>
+        <translation>ライト</translation>
     </message>
 </context>
 <context>
@@ -1432,66 +1432,66 @@
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="8"/>
         <source>Settings Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>設定メニュー</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="64"/>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="65"/>
         <source>Device Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>端末設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="66"/>
         <source>Application Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>アプリケーション設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="46"/>
         <location filename="../qml/pages/Settings-menu.qml" line="67"/>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>アラーム</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="37"/>
         <location filename="../qml/pages/Settings-menu.qml" line="74"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>寄付</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="33"/>
         <location filename="../qml/pages/Settings-menu.qml" line="49"/>
         <location filename="../qml/pages/Settings-menu.qml" line="69"/>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>天気</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="68"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>通知</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="70"/>
         <source>Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="71"/>
         <source>FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>FitTrackee</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="72"/>
         <source>FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>FitPub</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-menu.qml" line="73"/>
         <source>Debug Info</source>
-        <translation type="unfinished"></translation>
+        <translation>デバッグ情報</translation>
     </message>
 </context>
 <context>
@@ -1499,17 +1499,17 @@
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="8"/>
         <source>Notifications settings</source>
-        <translation type="unfinished"></translation>
+        <translation>通知設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="9"/>
         <source>Save Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定を保存</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-notifications.qml" line="36"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
 </context>
 <context>
@@ -1518,117 +1518,117 @@
         <location filename="../qml/pages/Settings-user.qml" line="27"/>
         <location filename="../qml/pages/Settings-user.qml" line="28"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>名前:</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="35"/>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>誕生日</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="63"/>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>性別</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="66"/>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>男</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="67"/>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>女</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="76"/>
         <source>Height (cm): </source>
-        <translation type="unfinished"></translation>
+        <translation>身長 (cm): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="84"/>
         <source>Weight (kg): </source>
-        <translation type="unfinished"></translation>
+        <translation>体重 (kg): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="94"/>
         <source>Wear Location</source>
-        <translation type="unfinished"></translation>
+        <translation>着ける位置</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="97"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左手</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="98"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>右手</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="113"/>
         <source>Display on lift wrist</source>
-        <translation type="unfinished"></translation>
+        <translation>手首を持ち上げて表示</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="177"/>
         <source>Goal (steps): </source>
-        <translation type="unfinished"></translation>
+        <translation>ゴール (歩数): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="184"/>
         <source>Alert on fitness goal</source>
-        <translation type="unfinished"></translation>
+        <translation>ゴールに到達すると通知</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="194"/>
         <source>Use HRM for Sleep Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>睡眠の検知に心拍計を使用</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="204"/>
         <source>All day HRM interval (minutes): </source>
-        <translation type="unfinished"></translation>
+        <translation>心拍計測定間隔 (分): </translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="209"/>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>プロフィールを保存</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="22"/>
         <source>Personal data</source>
-        <translation type="unfinished"></translation>
+        <translation>個人情報</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="8"/>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="88"/>
         <source>Personal preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>環境設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="188"/>
         <source>Heartrate usage</source>
-        <translation type="unfinished"></translation>
+        <translation>心拍数の使用</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="116"/>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>オフ</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="117"/>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>オン</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings-user.qml" line="118"/>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>スケジュール</translation>
     </message>
 </context>
 <context>
@@ -1636,38 +1636,38 @@
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="70"/>
         <source>Sleep Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>睡眠の要約</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="9"/>
         <source>Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>睡眠</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="74"/>
         <source>MM/dd</source>
         <extracomment>Format for day on the sleep summary graph</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>MM/dd</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="75"/>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>時間</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="29"/>
         <source>Total %1</source>
-        <translation type="unfinished"></translation>
+        <translation>合計</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="38"/>
         <source>Light %1</source>
-        <translation type="unfinished"></translation>
+        <translation>浅い睡眠 %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SleepPage.qml" line="47"/>
         <source>Deep %1</source>
-        <translation type="unfinished"></translation>
+        <translation>深い睡眠 %1</translation>
     </message>
 </context>
 <context>
@@ -1675,33 +1675,33 @@
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="9"/>
         <source>Blood Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation>血中酸素</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="16"/>
         <source>Download SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SPO2 をダウンロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="33"/>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="55"/>
         <source>Normal SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>標準 SPO2</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="59"/>
         <location filename="../qml/pages/Spo2DataPage.qml" line="80"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../qml/pages/Spo2DataPage.qml" line="76"/>
         <source>Sleep SPO2</source>
-        <translation type="unfinished"></translation>
+        <translation>睡眠時 SPO2</translation>
     </message>
 </context>
 <context>
@@ -1709,47 +1709,47 @@
     <message>
         <location filename="../qml/pages/SportPage.qml" line="361"/>
         <source>Send to Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Stravaに送信</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="170"/>
         <source>Data:</source>
-        <translation type="unfinished"></translation>
+        <translation>データ:</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="88"/>
         <source>%1°; %2°</source>
-        <translation type="unfinished"></translation>
+        <translation>%1°; %2°</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="90"/>
         <source>%1°; %2°; %3m</source>
-        <translation type="unfinished"></translation>
+        <translation>%1°; %2°; %3m</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="151"/>
         <source>Start: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>開始: %1 %2</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="157"/>
         <source>Duration: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>間隔: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="163"/>
         <source>Location: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>位置: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="374"/>
         <source>Send to FitTrackee</source>
-        <translation type="unfinished"></translation>
+        <translation>FitTrackeeに送信</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportPage.qml" line="387"/>
         <source>Send to FitPub</source>
-        <translation type="unfinished"></translation>
+        <translation>FitPubに送信</translation>
     </message>
 </context>
 <context>
@@ -1757,7 +1757,7 @@
     <message>
         <location filename="../qml/pages/SportsActivityKindPage.qml" line="12"/>
         <source>Select activity type</source>
-        <translation type="unfinished"></translation>
+        <translation>アクティビティの種類を選択</translation>
     </message>
 </context>
 <context>
@@ -1765,17 +1765,17 @@
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="19"/>
         <source>Sports Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>スポーツアクティビティ</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="42"/>
         <source>Download Next Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>次のアクティビティをダウンロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/SportsSummaryPage.qml" line="165"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
 </context>
 <context>
@@ -1785,7 +1785,7 @@
         <location filename="../qml/pages/StepsPage.qml" line="51"/>
         <location filename="../qml/pages/StepsPage.qml" line="55"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>歩数</translation>
     </message>
 </context>
 <context>
@@ -1794,7 +1794,7 @@
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <location filename="../qml/components/StepsTile.qml" line="11"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>歩数</translation>
     </message>
 </context>
 <context>
@@ -1802,27 +1802,27 @@
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="25"/>
         <source>Strava settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Strava設定</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="36"/>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>ログアウト</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="36"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>ログイン</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="89"/>
         <source>User Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー名: </translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="95"/>
         <source>Country: </source>
-        <translation type="unfinished"></translation>
+        <translation>国 </translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="107"/>
@@ -1830,18 +1830,21 @@
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>注: 
+
+Strava APIアクセスの変更により、連携機能の提供には費用が掛かるようになりました。
+この機能を使用したい場合は、ぜひご寄付を検討ください。</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="112"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>寄付</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="56"/>
         <location filename="../qml/pages/StravaSettingsPage.qml" line="70"/>
         <source>not logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>ログインしていません</translation>
     </message>
 </context>
 <context>
@@ -1849,47 +1852,47 @@ Please consider making a donation if you use this functionality.</source>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="26"/>
         <source>Strava Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Stravaにアップロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="43"/>
         <source>Activity name for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Stravaのアクティビティ名</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="44"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名前</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="48"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="55"/>
         <source>Activity description for Strava</source>
-        <translation type="unfinished"></translation>
+        <translation>Stravaのアクティビティの説明</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="63"/>
         <source>Type (Strava)</source>
-        <translation type="unfinished"></translation>
+        <translation>種類 (Strava)</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="68"/>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>プライベート</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="72"/>
         <source>Commute</source>
-        <translation type="unfinished"></translation>
+        <translation>通勤</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="76"/>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>アップロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="105"/>
@@ -1897,37 +1900,40 @@ Please consider making a donation if you use this functionality.</source>
 
 Changes to the Strava API access mean that it costs to provide this integration.
 Please consider making a donation if you use this functionality.</source>
-        <translation type="unfinished"></translation>
+        <translation>注: 
+
+Strava APIアクセスの変更により、連携機能の提供には費用が掛かるようになりました。
+この機能を使用したい場合は、ぜひご寄付を検討ください。</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="110"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>寄付</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="153"/>
         <source>Uploading data...</source>
-        <translation type="unfinished"></translation>
+        <translation>データをアップロード中...</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="170"/>
         <source>Checking upload...</source>
-        <translation type="unfinished"></translation>
+        <translation>アップロードをチェック中...</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="233"/>
         <source>TCX uploaded...</source>
-        <translation type="unfinished"></translation>
+        <translation>TCX アップロード...</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="268"/>
         <source>Activity upload complete</source>
-        <translation type="unfinished"></translation>
+        <translation>アクティビティのアップロード完了</translation>
     </message>
     <message>
         <location filename="../qml/pages/StravaUploadPage.qml" line="314"/>
         <source>An unknown error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>不明なエラーが発生しました</translation>
     </message>
 </context>
 <context>
@@ -1936,43 +1942,43 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/pages/StressDataPage.qml" line="9"/>
         <location filename="../qml/pages/StressDataPage.qml" line="76"/>
         <source>Stress</source>
-        <translation type="unfinished"></translation>
+        <translation>ストレス</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="25"/>
         <source>Download Stress Data</source>
-        <translation type="unfinished"></translation>
+        <translation>ストレスデータをダウンロード</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="42"/>
         <source>Avg: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>平均: %1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="80"/>
         <location filename="../qml/pages/StressDataPage.qml" line="147"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="107"/>
         <source>Relaxed</source>
-        <translation type="unfinished"></translation>
+        <translation>安静時</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="115"/>
         <source>Mild</source>
-        <translation type="unfinished"></translation>
+        <translation>低</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="123"/>
         <source>Moderate</source>
-        <translation type="unfinished"></translation>
+        <translation>中</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="131"/>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>高</translation>
     </message>
     <message>
         <location filename="../qml/pages/StressDataPage.qml" line="143"/>
@@ -1991,163 +1997,163 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="4"/>
         <location filename="../qml/components/Translation.js" line="4"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>不明</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="5"/>
         <location filename="../qml/components/Translation.js" line="5"/>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>アクティビティ</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="6"/>
         <location filename="../qml/components/Translation.js" line="6"/>
         <source>Light Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>浅い睡眠</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="7"/>
         <location filename="../qml/components/Translation.js" line="7"/>
         <source>Deep Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>深い睡眠</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="8"/>
         <location filename="../qml/components/Translation.js" line="8"/>
         <source>Not Worn</source>
-        <translation type="unfinished"></translation>
+        <translation>運動なし</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="9"/>
         <location filename="../qml/components/Translation.js" line="9"/>
         <source>Running</source>
-        <translation type="unfinished"></translation>
+        <translation>ランニング</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="10"/>
         <location filename="../qml/components/Translation.js" line="10"/>
         <source>Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォーキング</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="11"/>
         <location filename="../qml/components/Translation.js" line="11"/>
         <source>Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>水泳</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="12"/>
         <location filename="../qml/components/Translation.js" line="12"/>
         <source>Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>サイクリング</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="13"/>
         <location filename="../qml/components/Translation.js" line="13"/>
         <source>Treadmill</source>
-        <translation type="unfinished"></translation>
+        <translation>トレッドミル</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="14"/>
         <location filename="../qml/components/Translation.js" line="14"/>
         <source>Exercise</source>
-        <translation type="unfinished"></translation>
+        <translation>エクササイズ</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="15"/>
         <location filename="../qml/components/Translation.js" line="15"/>
         <source>Open Swimming</source>
-        <translation type="unfinished"></translation>
+        <translation>オープンウォータースイミング</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="16"/>
         <location filename="../qml/components/Translation.js" line="16"/>
         <source>Indoor Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>室内自転車競技</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="17"/>
         <location filename="../qml/components/Translation.js" line="17"/>
         <source>Elliptical Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation>エリプティカルトレーナー</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="18"/>
         <location filename="../qml/components/Translation.js" line="18"/>
         <source>Jump Rope</source>
-        <translation type="unfinished"></translation>
+        <translation>縄跳び</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="19"/>
         <location filename="../qml/components/Translation.js" line="19"/>
         <source>Yoga</source>
-        <translation type="unfinished"></translation>
+        <translation>ヨガ</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="20"/>
         <location filename="../qml/components/Translation.js" line="20"/>
         <source>Soccer</source>
-        <translation type="unfinished"></translation>
+        <translation>サッカー</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="21"/>
         <location filename="../qml/components/Translation.js" line="21"/>
         <source>Rowing Machine</source>
-        <translation type="unfinished"></translation>
+        <translation>ローイングマシン</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="22"/>
         <location filename="../qml/components/Translation.js" line="22"/>
         <source>Cricket</source>
-        <translation type="unfinished"></translation>
+        <translation>クリケット</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="23"/>
         <location filename="../qml/components/Translation.js" line="23"/>
         <source>Basketball</source>
-        <translation type="unfinished"></translation>
+        <translation>バスケットボール</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="24"/>
         <location filename="../qml/components/Translation.js" line="24"/>
         <source>Ping Pong</source>
-        <translation type="unfinished"></translation>
+        <translation>卓球</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="25"/>
         <location filename="../qml/components/Translation.js" line="25"/>
         <source>Badmington</source>
-        <translation type="unfinished"></translation>
+        <translation>バドミントン</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="26"/>
         <location filename="../qml/components/Translation.js" line="26"/>
         <source>Strength Training</source>
-        <translation type="unfinished"></translation>
+        <translation>筋力トレーニング</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="27"/>
         <location filename="../qml/components/Translation.js" line="27"/>
         <source>Hiking</source>
-        <translation type="unfinished"></translation>
+        <translation>ハイキング</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="28"/>
         <location filename="../qml/components/Translation.js" line="28"/>
         <source>Climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>クライミング</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="29"/>
         <location filename="../qml/components/Translation.js" line="29"/>
         <source>REM Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>レム睡眠</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="30"/>
         <location filename="../qml/components/Translation.js" line="30"/>
         <source>Sleep Any</source>
-        <translation type="unfinished"></translation>
+        <translation>睡眠</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="31"/>
@@ -2159,37 +2165,37 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="32"/>
         <location filename="../qml/components/Translation.js" line="32"/>
         <source>Navigate</source>
-        <translation type="unfinished"></translation>
+        <translation>ナビゲーション</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="33"/>
         <location filename="../qml/components/Translation.js" line="33"/>
         <source>Indoor Track</source>
-        <translation type="unfinished"></translation>
+        <translation>室内トラック</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="34"/>
         <location filename="../qml/components/Translation.js" line="34"/>
         <source>Handcycling</source>
-        <translation type="unfinished"></translation>
+        <translation>ハンドサイクル</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="35"/>
         <location filename="../qml/components/Translation.js" line="35"/>
         <source>E Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>電動自転車</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="36"/>
         <location filename="../qml/components/Translation.js" line="36"/>
         <source>Bike Commute</source>
-        <translation type="unfinished"></translation>
+        <translation>自転車通勤</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="37"/>
         <location filename="../qml/components/Translation.js" line="37"/>
         <source>Handcycling Indoor</source>
-        <translation type="unfinished"></translation>
+        <translation>ハンドサイクル (室内)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="38"/>
@@ -2201,19 +2207,19 @@ Please consider making a donation if you use this functionality.</source>
         <location filename="../qml/components/Translation.js" line="39"/>
         <location filename="../qml/components/Translation.js" line="39"/>
         <source>Fitness Equipment</source>
-        <translation type="unfinished"></translation>
+        <translation>フィットネス機器</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="40"/>
         <location filename="../qml/components/Translation.js" line="40"/>
         <source>Stair Stepper</source>
-        <translation type="unfinished"></translation>
+        <translation>ステッパー</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="41"/>
         <location filename="../qml/components/Translation.js" line="41"/>
         <source>Pilates</source>
-        <translation type="unfinished"></translation>
+        <translation>ピラティス</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="42"/>
