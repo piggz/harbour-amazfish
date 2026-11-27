@@ -300,6 +300,9 @@ void BangleJSDevice::downloadActivityData() {
     }
 
     qlonglong ls = AmazfishConfig::instance()->value("device/lastactivitysyncmillis").toLongLong();
+    if (ls > 0) {
+        ls += 1; // the watch sends records with ts >= ls, the record at ls is already stored
+    }
 
     m_samples.clear();
     emit message(tr("Downloading activity data"));
