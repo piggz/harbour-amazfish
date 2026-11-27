@@ -329,6 +329,12 @@ Item {
                         if (!timeSeries) {
                             x+=stepX; //point[i].x can be used for grid title
                         }
+                        if (graphType != line) {
+                            ctx.stroke();
+                        }
+                    }
+                    // One stroke for the whole line: a stroke for each point draws the path again from the start
+                    if (graphType == line) {
                         ctx.stroke();
                     }
 
