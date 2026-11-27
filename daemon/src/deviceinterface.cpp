@@ -249,6 +249,11 @@ void DeviceInterface::onNotification(watchfish::Notification *notification)
     n.summary = notification->summary();
     n.body = notification->body();
 
+    // Our own popups, like "Downloading activity data", are not useful on the watch.
+    if (n.appName == "harbour-amazfish") {
+        return;
+    }
+
     QVariantMap notificationSettings = AmazfishConfig::instance()->notificationSettings();
 
     bool enabled = true;
