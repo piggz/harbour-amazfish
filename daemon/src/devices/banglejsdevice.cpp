@@ -300,6 +300,9 @@ void BangleJSDevice::downloadActivityData() {
     }
 
     qlonglong ls = AmazfishConfig::instance()->value("device/lastactivitysyncmillis").toLongLong();
+    if (ls > 0) {
+        ls += 1; // the watch sends records with ts >= ls, the record at ls is already stored
+    }
 
     m_samples.clear();
     emit message(tr("Downloading activity data"));
@@ -556,7 +559,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         }
     } else if (t == "act") {
 
-        long ts = json.value("ts").toVariant().toLongLong();      // timestamp
+        qint64 ts = json.value("ts").toVariant().toLongLong(); // timestamp in ms
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
         QDateTime actDate= QDateTime::fromMSecsSinceEpoch(ts);
