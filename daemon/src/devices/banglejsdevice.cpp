@@ -110,8 +110,7 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
     o.insert("id", notification.id); // id is necessary for some apps like
                                      // messageui, and should be unique
     o.insert("src", alertIcon(notification.appId));
-    o.insert("title", ""); // .left(80)
-    o.insert("subject", notification.summary.left(80));
+    o.insert("title", notification.summary.left(80)); // the Messages app shows title and body, not subject
     o.insert("body", notification.body.left(400));
     o.insert("sender", notification.appName.left(40));
     o.insert("tel", "");
