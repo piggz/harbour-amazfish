@@ -559,7 +559,7 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         }
     } else if (t == "act") {
 
-        long ts = json.value("ts").toVariant().toLongLong();      // timestamp
+        qint64 ts = json.value("ts").toVariant().toLongLong(); // timestamp in ms
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
         QDateTime actDate= QDateTime::fromMSecsSinceEpoch(ts);
