@@ -101,7 +101,6 @@ void MlrCommunicator::onPacketReceived(const QByteArray& packet) {
         qDebug() << Q_FUNC_INFO << "Garmin:Received non-MLR packet";
         return;
     }
-    qDebug() << Q_FUNC_INFO << "Garmin: checking handle";
 
     const quint16 packetHandle = (byte0 & HANDLE_MASK) >> HANDLE_SHIFT;
     const quint16 reqNum = ((byte0 & REQ_NUM_MASK) << 2) | ((byte1 >> 6) & 0x03);
@@ -198,14 +197,29 @@ QByteArray MlrCommunicator::createPacket(int reqNum, int seqNum, const QByteArra
 void MlrCommunicator::processAck(int reqNum) {
     qDebug() << Q_FUNC_INFO << "Garmin: MLRCommunicator processing Ack";
 
-    int numAcked = (reqNum - mLastRcvAck + MAX_SEQ_NUM + 1) % (MAX_SEQ_NUM + 1);
-    int numUnacked = (mNextSendSeq - mLastRcvAck + MAX_SEQ_NUM + 1) % (MAX_SEQ_NUM + 1);
+    int numAcked = (reqNum - mLastRcvAck + MAX_SEQ_NUM + 1) %(MAX_SEQ_NUM +1);
+    int numUnacked = (mNextSendSeq - mLastRcvAck + MAX_SEQ_NUM +1) % (MAX_SEQ_NUM +1);
+
     mRetransmissionTimer->stop();
 
+    int ackBytes = 0;
     for (int i = mLastRcvAck; i != reqNum; i = (i + 1) % (MAX_SEQ_NUM + 1)) {
+        if (!mSentFragments[i]) {
+            mSentFragments[i].reset();
+            qDebug() << Q_FUNC_INFO << "Garmin: Attermptin to expire null fragment";
+        }
+        else {
+            ackBytes += mSentFragments[i]->data.size();
+        }
         mSentFragments[i].reset();
     }
     mLastRcvAck = reqNum;
+
+    //Recover from retransmission backoff
+    mRetransmissionTimeoutMs = INITIAL_RETRANSMISSION_TIMEOUT_MS;
+    mMaxNumUnackedSend = qMin(mMaxNumUnackedSend + numAcked, INITIAL_MAX_UNACKED_SEND);
+
+    //Gadgetbridge now runs Acklistener, needs to be implemented
 
     if (mLastRcvAck != mNextSendSeq) {
         startRetransmissionTimer();
@@ -253,27 +267,32 @@ void MlrCommunicator::runProtocolOnce() {
         return;
     }
 
-    frag = mFragmentQueue.takeFirst();
-    Fragment fragmentWithReqNum;
-    fragmentWithReqNum.taskName=frag.taskName;
-    fragmentWithReqNum.num=frag.num;
-    fragmentWithReqNum.data=frag.data;
-    fragmentWithReqNum.reqNum= mNextRcvSeq;
-    const QByteArray pkt = createPacket(mNextRcvSeq,mNextSendSeq,frag.data);
-    QString errorMsg;
-    if (mSendChar) {
-        qDebug() << Q_FUNC_INFO << "Garmin: Sending MlrFragment";
-        mSendChar->writeValue(pkt,&errorMsg);
-        if (!errorMsg.isEmpty()) qDebug() << Q_FUNC_INFO << "Garmin: MlrMessagesender send packet failed with error " <<errorMsg;
+    while (!mFragmentQueue.isEmpty()) {
+        int numSentUnacked = (mNextSendSeq - mLastRcvAck + MAX_SEQ_NUM +1) % (MAX_SEQ_NUM +1);
+        if (numSentUnacked >= mMaxNumUnackedSend) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Cannot send more packets.";
+            return;
+        }
+        frag = mFragmentQueue.takeFirst();
+        Fragment fragmentWithReqNum;
+        fragmentWithReqNum.taskName=frag.taskName;
+        fragmentWithReqNum.num=frag.num;
+        fragmentWithReqNum.data=frag.data;
+        fragmentWithReqNum.reqNum= mNextRcvSeq;
+        const QByteArray pkt = createPacket(mNextRcvSeq,mNextSendSeq,frag.data);
+        QString errorMsg;
+        if (mSendChar) {
+            qDebug() << Q_FUNC_INFO << "Garmin: Sending MlrFragment";
+            mSendChar->writeValue(pkt,&errorMsg);
+            if (!errorMsg.isEmpty()) qDebug() << Q_FUNC_INFO << "Garmin: MlrMessagesender send packet failed with error " <<errorMsg;
+        }
+        mSentFragments[mNextSendSeq] = fragmentWithReqNum;
+        mNextSendSeq = (mNextSendSeq + 1) % (MAX_SEQ_NUM + 1);
+        if (numSentUnacked == 0) {
+            startRetransmissionTimer();
+        }
+        qDebug() << Q_FUNC_INFO << "Garmin: Sent MLR packet: seqNum=" << frag.num << ", dataLen=" << pkt.size() - 2;
     }
-    qDebug() << Q_FUNC_INFO << "Garmin: nextsendseq = " << mNextSendSeq;
-    mSentFragments[mNextSendSeq] = fragmentWithReqNum;
-    mNextSendSeq = (mNextSendSeq + 1) % (MAX_SEQ_NUM + 1);
-
-    if (numSentUnacked == 0) {
-        startRetransmissionTimer();
-    }
-    qDebug() << Q_FUNC_INFO << "Garmin: Sent MLR packet: seqNum=" << frag.num << ", dataLen=" << pkt.size() - 2;
 }
 
 

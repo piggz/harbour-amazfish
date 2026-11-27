@@ -31,7 +31,7 @@ static constexpr quint8  MAX_SEQ_NUM     = 0x3F;
 static constexpr int     INITIAL_MAX_UNACKED_SEND            = 0x20;
 static constexpr int     MAX_RETRANSMISSION_TIMEOUT_MS       = 20000;
 static constexpr int     INITIAL_RETRANSMISSION_TIMEOUT_MS   = 1000;
-static constexpr int     ACK_TIMEOUT_MS                      = 250;
+static constexpr int     ACK_TIMEOUT_MS                      = 20;
 static constexpr int     ACK_TRIGGER_THRESHOLD               = 5;
 
 // =============================================================================
