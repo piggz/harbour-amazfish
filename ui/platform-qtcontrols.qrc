@@ -6,6 +6,7 @@
         <file alias="./qml/components/platform/ButtonPL.qml">./qml/components/platform.qtcontrols/ButtonPL.qml</file>
         <file alias="./qml/components/platform/ClipboardPL.qml">./qml/components/platform.qtcontrols/ClipboardPL.qml</file>
         <file alias="./qml/components/platform/ComboBoxPL.qml">./qml/components/platform.qtcontrols/ComboBoxPL.qml</file>
+        <file alias="./qml/components/platform/ConicalGradientPL.qml">./qml/components/platform.qtcontrols/ConicalGradientPL.qml</file>
         <file alias="./qml/components/platform/ContextMenuItemPL.qml">./qml/components/platform.qtcontrols/ContextMenuItemPL.qml</file>
         <file alias="./qml/components/platform/ContextMenuPL.qml">./qml/components/platform.qtcontrols/ContextMenuPL.qml</file>
         <file alias="./qml/components/platform/DatePickerDialogPL.qml">./qml/components/platform.qtcontrols/DatePickerDialogPL.qml</file>

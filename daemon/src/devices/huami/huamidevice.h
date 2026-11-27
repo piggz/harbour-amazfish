@@ -70,7 +70,7 @@ private:
     int m_buttonPresses = 0;
     QTimer *m_keyPressTimer = nullptr;
 
-    QDateTime init_dt = QDateTime::fromTime_t(0);
+    QDateTime init_dt = QDateTime::fromMSecsSinceEpoch(0);
 };
 
 #endif // BIPDEVICE_H

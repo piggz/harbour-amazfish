@@ -1,6 +1,8 @@
 #include "zepposagpsupdateoperation.h"
 #include "huami/zepposdevice.h"
 
+#include <QIODevice>
+
 ZeppOsAgpsUpdateOperation::ZeppOsAgpsUpdateOperation(ZeppOSDevice *device, const QByteArray &data, ZeppOsAgpsService *agpsService, ZeppOsFileTransferService *fileTransferService) :
     m_device(device), m_agpsService(agpsService), m_fileTransferService(fileTransferService)
 {

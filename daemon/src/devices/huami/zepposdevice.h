@@ -65,7 +65,7 @@ protected:
     QBLEService* drv_createService(const QString &uuid, const QString &path) override;
 
 private:
-    QDateTime init_dt = QDateTime::fromTime_t(0);
+    QDateTime init_dt = QDateTime::fromMSecsSinceEpoch(0);
 
     Huami2021ChunkedEncoder *m_encoder = nullptr;
     Huami2021ChunkedDecoder *m_decoder = nullptr;

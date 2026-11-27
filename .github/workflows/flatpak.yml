@@ -28,7 +28,11 @@ jobs:
       run: sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
     - name: Install KDE SDK
-      run: sudo flatpak install -y flathub org.kde.Platform//5.15-25.08 org.kde.Sdk//5.15-25.08
+      run: sudo flatpak install -y flathub org.kde.Platform//6.11 org.kde.Sdk//6.11
+
+    # Remove this step when the Flathub manifest uses Qt 6, and remove .github/flatpak with it.
+    - name: Use the Qt 6 manifest from .github/flatpak
+      run: cp ${{ github.workspace }}/harbour-amazfish/.github/flatpak/* ${{ github.workspace }}/uk.co.piggz.amazfish/
 
     - name: Use dir instead of git tag in flatpak json
       run: |

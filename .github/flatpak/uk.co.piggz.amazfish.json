@@ -1,0 +1,128 @@
+{
+  "app-id": "uk.co.piggz.amazfish",
+  "runtime": "org.kde.Platform",
+  "runtime-version": "6.11",
+  "sdk": "org.kde.Sdk",
+  "command": "run-amazfish.sh",
+  "rename-icon": "harbour-amazfish-ui",
+  "rename-desktop-file": "harbour-amazfish-ui.desktop",
+  "rename-appdata-file": "harbour-amazfish-ui.appdata.xml",
+  "finish-args": [
+    "--share=ipc",
+    "--share=network",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--socket=pulseaudio",
+    "--device=dri",
+    "--system-talk-name=org.bluez",
+    "--talk-name=org.mpris.MediaPlayer2.*",
+    "--talk-name=io.github.rinigus.PureMaps",
+    "--talk-name=org.freedesktop.Notifications"
+  ],
+  "cleanup": [
+    "/include",
+    "/lib/cmake",
+    "/lib/pkgconfig",
+    "/mkspecs",
+    "/share/qt5/mkspecs",
+    "*.a"
+  ],
+  "modules": [
+    {
+      "name": "nemo-qml-plugin-dbus",
+      "buildsystem": "qmake",
+      "builddir": true,
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/sailfishos/nemo-qml-plugin-dbus/archive/refs/tags/2.1.38.tar.gz",
+          "sha256": "201bdbe1c1eac81e572483af4f5f3558e2e932fc217dc53daa8a425d99d64263"
+        },
+        {
+          "type": "patch",
+          "path": "nemodbus-qmake.patch"
+        }
+      ]
+    },
+    {
+      "name": "amber-mpris",
+      "buildsystem": "qmake",
+      "builddir": true,
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/sailfishos/amber-mpris/archive/refs/tags/1.2.10.tar.gz",
+          "sha256": "a01e38f85c1e88e7db9342672e4588164676fbbccf4d084071eda17fb0ec9014"
+        },
+        {
+          "type": "patch",
+          "path": "amber-mpris-qmake.patch"
+        }
+      ]
+    },
+    {
+      "name": "maplibre-gl-native-qt",
+      "buildsystem": "cmake-ninja",
+      "build-options": {
+        "cxxflags": "-include cstdint"
+      },
+      "config-opts": [
+        "-DMLN_QT_WITH_LOCATION=OFF",
+        "-DMLN_QT_WITH_INTERNAL_ICU=ON",
+        "-DCMAKE_INSTALL_LIBDIR=lib",
+        "-DMLN_WITH_WERROR=OFF"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/maplibre/maplibre-native-qt.git",
+          "tag": "v3.0.0",
+          "commit": "d929c783737120787b43417d9ef05da88da75dfd",
+          "disable-shallow-clone": true
+        }
+      ]
+    },
+    {
+      "name": "mapbox-gl-qml",
+      "buildsystem": "cmake-ninja",
+      "config-opts": [
+        "-DQT_VERSION_MAJOR=6",
+        "-DQT_INSTALL_QML=/app/lib/qml"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/rinigus/mapbox-gl-qml.git",
+          "tag": "3.2.2",
+          "commit": "79e0cccea5720b6937c39ce33dc7159df63225fa"
+        }
+      ]
+    },
+    {
+      "name": "harbour-amazfish",
+      "buildsystem": "cmake-ninja",
+      "config-opts": [
+        "-DFLAVOR=kirigami",
+        "-DDISABLE_SYSTEMD=yes"
+      ],
+      "post-install": [
+        "install -Dm755 run-amazfish.sh /app/bin/run-amazfish.sh",
+        "install -Dm644 ui/icons/128x128/harbour-amazfish-ui.png /app/share/icons/hicolor/128x128/apps/harbour-amazfish-ui.png",
+        "install -Dm644 ui/harbour-amazfish-ui.appdata.xml /app/share/appdata/harbour-amazfish-ui.appdata.xml",
+        "desktop-file-edit --set-key=Exec --set-value='run-amazfish.sh' /app/share/applications/harbour-amazfish-ui.desktop"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/piggz/harbour-amazfish.git",
+          "tag": "3.0.1",
+          "commit": "1ed1b6beb1a87e06ec7c4f5a0aeaaea37672d883"
+        },
+        {
+          "type": "file",
+          "path": "run-amazfish.sh"
+        }
+      ]
+    }
+  ]
+}

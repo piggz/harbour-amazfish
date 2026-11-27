@@ -23,6 +23,8 @@
 #include <QDebug>
 #include <qmath.h>
 
+#include <QLocale>
+
 #include "timeformatter.h"
 #include "trackloader.h"
 
@@ -1139,7 +1141,7 @@ QString TrackLoader::timeStr() {
     if(!m_time.isValid()) {
         return QString();
     }
-    return m_time.toString(Qt::SystemLocaleShortDate);
+    return QLocale::system().toString(m_time, QLocale::ShortFormat);
 }
 
 uint TrackLoader::duration()

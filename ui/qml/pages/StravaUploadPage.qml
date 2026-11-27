@@ -45,6 +45,8 @@ PagePL {
         }
 
         LabelPL {
+            anchors.left: parent.left
+            anchors.leftMargin: styler.themeHorizontalPageMargin
             text: qsTr("Description")
         }
 
@@ -102,6 +104,7 @@ PagePL {
             id: lblStravaAPI
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
+            wrapMode: Text.WordWrap
             text: qsTr("Please Note:\n\nChanges to the Strava API access mean that it costs to provide this integration.\nPlease consider making a donation if you use this functionality.")
         }
         ButtonPL {

@@ -21,7 +21,7 @@ Tile {
                     horizontalCenter: parent.horizontalCenter
                     bottom: paiCenterItem.top
                 }
-                color: styler.themeHighlightColor
+                color: styler.blockBg
                 font.pixelSize: styler.themeFontSizeHuge
                 verticalAlignment: Text.AlignVCenter
             }
