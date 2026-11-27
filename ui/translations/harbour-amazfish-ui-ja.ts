@@ -2225,85 +2225,85 @@ Strava APIアクセスの変更により、連携機能の提供には費用が�
         <location filename="../qml/components/Translation.js" line="42"/>
         <location filename="../qml/components/Translation.js" line="42"/>
         <source>Pool Swim</source>
-        <translation type="unfinished"></translation>
+        <translation>水泳 (プール)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="43"/>
         <location filename="../qml/components/Translation.js" line="43"/>
         <source>Tennis</source>
-        <translation type="unfinished"></translation>
+        <translation>テニス</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="44"/>
         <location filename="../qml/components/Translation.js" line="44"/>
         <source>Platform Tennis</source>
-        <translation type="unfinished"></translation>
+        <translation>プラットフォームテニス</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="45"/>
         <location filename="../qml/components/Translation.js" line="45"/>
         <source>Table Tennis</source>
-        <translation type="unfinished"></translation>
+        <translation>卓球</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="46"/>
         <location filename="../qml/components/Translation.js" line="46"/>
         <source>American Football</source>
-        <translation type="unfinished"></translation>
+        <translation>アメリカンフットボール</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="47"/>
         <location filename="../qml/components/Translation.js" line="47"/>
         <source>Training</source>
-        <translation type="unfinished"></translation>
+        <translation>トレーニング</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="48"/>
         <location filename="../qml/components/Translation.js" line="48"/>
         <source>Cardio</source>
-        <translation type="unfinished"></translation>
+        <translation>有酸素運動</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="49"/>
         <location filename="../qml/components/Translation.js" line="49"/>
         <source>Breathwork</source>
-        <translation type="unfinished"></translation>
+        <translation>ブレスワーク</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="50"/>
         <location filename="../qml/components/Translation.js" line="50"/>
         <source>Indoor Walking</source>
-        <translation type="unfinished"></translation>
+        <translation>インドアウォーキング</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="51"/>
         <location filename="../qml/components/Translation.js" line="51"/>
         <source>XC Classic Ski</source>
-        <translation type="unfinished"></translation>
+        <translation>クロスカントリースキー (クラシカル走法)</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="52"/>
         <location filename="../qml/components/Translation.js" line="52"/>
         <source>Skiing</source>
-        <translation type="unfinished"></translation>
+        <translation>スキー</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="53"/>
         <location filename="../qml/components/Translation.js" line="53"/>
         <source>Snowboarding</source>
-        <translation type="unfinished"></translation>
+        <translation>スノーボード</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="54"/>
         <location filename="../qml/components/Translation.js" line="54"/>
         <source>Rowing</source>
-        <translation type="unfinished"></translation>
+        <translation>ローイング競技</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="55"/>
         <location filename="../qml/components/Translation.js" line="55"/>
         <source>Mountaineering</source>
-        <translation type="unfinished"></translation>
+        <translation>登山</translation>
     </message>
     <message>
         <location filename="../qml/components/Translation.js" line="56"/>
