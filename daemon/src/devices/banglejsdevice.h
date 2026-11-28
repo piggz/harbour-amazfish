@@ -65,6 +65,8 @@ public:
     void abortOperations() override;
 
     void sendAlert(const Amazfish::WatchNotification &notification) override;
+    void sendAlertClosed(quint32 nid, quint32 reason) override;
+
     void incomingCall(const QString &caller) override;
     void incomingCallEnded() override;
 

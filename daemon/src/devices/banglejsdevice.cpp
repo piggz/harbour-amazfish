@@ -115,8 +115,30 @@ void BangleJSDevice::sendAlert(const Amazfish::WatchNotification &notification)
     o.insert("body", notification.body.left(400));
     o.insert("sender", notification.appName.left(40));
     o.insert("tel", "");
+    if (!notification.actions.isEmpty()) { // the watch answers {"t":"notify","n":"INVOKE_ACTION","id":56,"action":0}
+        QJsonArray actions;
+        for (const QString& label : notification.actions) {
+            actions.append(QJsonObject { { "title", label.left(40) } });
+        }
+        o.insert("actions", actions);
+    }
     uart->txJson(o);
 }
+
+
+void BangleJSDevice::sendAlertClosed(quint32 nid, quint32 reason) {
+    Q_UNUSED(reason)
+
+    UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
+    if (!uart){
+        return;
+    }
+    QJsonObject o;
+    o.insert("t", "notify-");
+    o.insert("id", static_cast<qint64>(nid));
+    uart->txJson(o);
+}
+
 
 void BangleJSDevice::incomingCall(const QString &caller)
 {
@@ -504,13 +526,13 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
 
     } else if (t == "force_calendar_sync") {
 
-	QList<int> deviceIds;
-	const QJsonArray ids = json.value("ids").toArray();
-	for (const QJsonValue &v : ids) {
-	    deviceIds.append(v.toInt());
-	}
-	qDebug() << "Calendar IDs from device:" << deviceIds;
-	syncCalendarWithDeviceIds(deviceIds);
+    QList<int> deviceIds;
+    const QJsonArray ids = json.value("ids").toArray();
+    for (const QJsonValue &v : ids) {
+        deviceIds.append(v.toInt());
+    }
+    qDebug() << "Calendar IDs from device:" << deviceIds;
+    syncCalendarWithDeviceIds(deviceIds);
 
     } else if (t == "weather") { // the weather app asks for an update
         emit deviceEvent(AbstractDevice::EVENT_WEATHER_REQUEST);
@@ -542,7 +564,14 @@ void BangleJSDevice::handleRxJson(const QJsonObject &json)
         } else if (answer == "REJECT") {
             emit deviceEvent(AbstractDevice::EVENT_DECLINE_CALL);
         }
-//    } else if (t == "notify") {
+    } else if (t == "notify") { // dismiss from the watch: {"t":"notify","id":56,"n":"DISMISS"}
+        if (json.value("n").toString() == "DISMISS") {
+            emit dismissNotification(json.value("id").toInt());
+        } else if (json.value("n").toString() == "OPEN") {
+            emit openNotification(json.value("id").toInt());
+        } else if (json.value("n").toString() == "INVOKE_ACTION") {
+            emit invokeNotificationAction(json.value("id").toInt(), json.value("action").toInt());
+        }
     } else if (t == "actfetch") {
         int sample_count = json.value("count").toInt();
         QString fetch_state = json.value("state").toString();
@@ -1122,7 +1151,7 @@ void BangleJSDevice::forceCalendarSync()
     qDebug() << Q_FUNC_INFO;
     UARTService *uart = qobject_cast<UARTService*>(service(UARTService::UUID_SERVICE_UART));
     if (!uart) {
-	return;
+    return;
     }
 
     QJsonObject o;
@@ -1166,6 +1195,7 @@ void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
         m_event_id_map.clear();
         setOperationRunning(false);
         return;
+
     }
 
     // Step 1: Device has IDs we have no record of (e.g. after app restart) — remove them
@@ -1234,8 +1264,8 @@ void BangleJSDevice::sendCalendarEvent(int id, const watchfish::CalendarEvent &e
 
     QJsonObject o;
     // {t:"calendar", id:int, type:int, timestamp:seconds, durationInSeconds, title:string, description:string, location:string, calName:string, color:int, allDay:bool
-	// type:int, what is it?
-	// color:int e.g. 0xff0000
+    // type:int, what is it?
+    // color:int e.g. 0xff0000
 
     QString description = event.description();
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0) // Qt 5
