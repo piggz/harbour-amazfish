@@ -111,6 +111,7 @@ private:
     void setOperationRunning(bool running);
     int m_infoBatteryLevel = 0;
     int m_steps = 0;
+    QDate m_stepsDay; // the day m_steps counts
     double m_heartrate = 0;
     QString m_firmwareVersion;
     QString m_hardwareVersion;
