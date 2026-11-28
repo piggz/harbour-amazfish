@@ -1,6 +1,9 @@
 #include "deviceinterface.h"
 #include "bluezadapter.h"
 #include "adaptermodel.h"
+#include "qbleagent.h"
+#include "deviceinfoservice.h"
+#include "alertnotificationservice.h"
 #include "hrmservice.h"
 #include "devicefactory.h"
 #include "amazfishconfig.h"
@@ -33,6 +36,7 @@ DeviceInterface::DeviceInterface()
 
     //Start by registering on DBUS
     registerDBus();
+    initAgent();
 
     auto config = AmazfishConfig::instance();
 
@@ -97,6 +101,26 @@ DeviceInterface::DeviceInterface()
 DeviceInterface::~DeviceInterface()
 {
     disconnect();
+}
+
+void DeviceInterface::initAgent() {
+
+    if (m_agent != nullptr) {
+	return;
+    }
+    m_agent = new QBLEAgent(this);
+    connect(m_agent, &QBLEAgent::UIRequestPasskey, this, &DeviceInterface::requestPasskeyFromUI, Qt::UniqueConnection);
+    connect(m_agent, &QBLEAgent::UIRequestPinCode, this, &DeviceInterface::requestPinCodeFromUI, Qt::UniqueConnection);
+    connect(m_agent, &QBLEAgent::UIRequestConfirmation, this, &DeviceInterface::requestConfirmationFromUI, Qt::UniqueConnection);
+    connect(m_agent, &QBLEAgent::UIDisplayPasskey, this, &DeviceInterface::displayPasskeyInUI, Qt::UniqueConnection);
+
+    connect(m_agent, &QBLEAgent::pairingAccepted,
+	    this, [this](const QString &devicePath) {
+		qDebug() << Q_FUNC_INFO  << "Pairing accepted" << devicePath;
+		m_device->trust(true);
+	    });
+
+    m_agent->registerAgent();
 }
 
 void DeviceInterface::connectToDevice(const QString &address)
@@ -1061,5 +1085,27 @@ void DeviceInterface::immediateAlert(int level)
 {
     if (m_device) {
         m_device->immediateAlert(level);
+    }
+}
+
+void DeviceInterface::agentPasskeyResponse(const uint response)
+{
+    if (m_agent) {
+	m_agent->requestPasskeyResponse(response);
+    }
+}
+
+void DeviceInterface::agentPinCodeResponse(const QString& response)
+{
+    if (m_agent) {
+	m_agent->requestPinCodeResponse(response);
+    }
+}
+
+
+void DeviceInterface::agentConfirmationResponse(const bool response)
+{
+    if (m_agent) {
+	m_agent->requestConfirmationResponse(response);
     }
 }
