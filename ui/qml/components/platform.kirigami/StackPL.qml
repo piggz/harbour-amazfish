@@ -98,6 +98,8 @@ Item {
     }
 
     function processCurrentIndex() {
+        // pop() and push() change the stack themselves; a nested pop here would remove the remaining pages
+        if (_locked) return;
         if (ps.currentIndex === 0 && ps.depth > 1) {
             if (app.infoActive) return;
             ps.pop(ps.get(0));
