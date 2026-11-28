@@ -320,6 +320,12 @@ find_package(ICU REQUIRED COMPONENTS uc i18n data)
 
 target_compile_options(harbour-amazfishd PRIVATE -Wall -Wextra -Wpedantic)
 
+option(DEMO_DEVICE "Use a demo watch without Bluetooth, for screenshots and UI tests" OFF)
+if(DEMO_DEVICE)
+    target_sources(harbour-amazfishd PRIVATE ./src/devices/demodevice.cpp ./src/devices/demodevice.h)
+    target_compile_definitions(harbour-amazfishd PRIVATE DEMO_DEVICE)
+endif()
+
 if(FLAVOR STREQUAL "silica")
     set(WATCHFISH_FEATURES "notificationmonitor;music;calendar;voicecall;soundprofile")
 
