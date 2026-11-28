@@ -54,9 +54,11 @@ uint16_t getFirmwareCrc(QByteArray& manifestData, bool& valid) {
 }
 }
 
-DfuOperation::DfuOperation(const AbstractFirmwareInfo *info, QBLEService *service, AbstractDevice *device) : m_info(info), m_device(device)
+DfuOperation::DfuOperation(const AbstractFirmwareInfo* info, QBLEService* service, AbstractDevice* device)
+    : m_info(info)
+    , m_service(service)
+    , m_device(device)
 {
-
 }
 
 DfuOperation::~DfuOperation()
