@@ -68,6 +68,8 @@ QString BangleJSDevice::deviceType() const
 void BangleJSDevice::abortOperations()
 {
     qDebug() << Q_FUNC_INFO;
+    m_eventlist.reset();
+    m_pendingDataTypes = {};
     setOperationRunning(false);
 }
 
@@ -80,6 +82,12 @@ void BangleJSDevice::setOperationRunning(bool running)
 {
     m_operationRunning = running;
     emit operationRunningChanged();
+
+    if (!running && m_pendingDataTypes) {
+        Amazfish::DataTypes pending = m_pendingDataTypes;
+        m_pendingDataTypes = {};
+        fetchData(pending);
+    }
 }
 
 QString BangleJSDevice::alertIcon(const QString &appname) const {
@@ -280,11 +288,21 @@ void BangleJSDevice::navigationNarrative(const QString &flag, const QString &nar
 void BangleJSDevice::fetchData(Amazfish::DataTypes dataTypes)
 {
     if (dataTypes & Amazfish::DataType::TYPE_ACTIVITY) {
-        downloadActivityData();
+        if (m_operationRunning) {
+            qDebug() << "Operation is running, activity download queued";
+            m_pendingDataTypes |= Amazfish::DataType::TYPE_ACTIVITY;
+        } else {
+            downloadActivityData();
+        }
     }
 
     if (dataTypes & Amazfish::DataType::TYPE_GPS_TRACK) {
-        downloadSportsData();
+        if (m_operationRunning) {
+            qDebug() << "Operation is running, sports download queued";
+            m_pendingDataTypes |= Amazfish::DataType::TYPE_GPS_TRACK;
+        } else {
+            downloadSportsData();
+        }
     }
 }
 
@@ -1151,8 +1169,8 @@ void BangleJSDevice::syncCalendar(QList<watchfish::CalendarEvent> &eventlist)
 
 void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
     if (!m_eventlist.has_value()) {
-        qDebug() << Q_FUNC_INFO << "DeviceInterface must call syncCalendar() first";
-        setOperationRunning(false);
+        // The watch may answer one request twice
+        qDebug() << Q_FUNC_INFO << "No calendar sync running, reply ignored";
         return;
     }
 
@@ -1164,6 +1182,7 @@ void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
             removeEventReminder(deviceId);
         }
         m_event_id_map.clear();
+        m_eventlist.reset();
         setOperationRunning(false);
         return;
     }
@@ -1217,6 +1236,7 @@ void BangleJSDevice::syncCalendarWithDeviceIds(QList<int> &deviceIds) {
         } // else update
     }
 
+    m_eventlist.reset();
     setOperationRunning(false);
 }
 
